@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Intégration : techniques — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-math">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Maths · M02 — Intégration : techniques (2)</span>
+  <h1 class="title">Techniques d'intégration</h1>
+  <p class="lead">Changement de variable, linéarisation des puissances de \(\sin/\cos\), intégration par parties (IPP) ;
+  intégration des fractions rationnelles (éléments simples, complétion du carré) ; intégrale de Wallis-Bêta \(I(p,q)\).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD (2ᵉ partie)</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Changement de variable</h3>
+    <div class="thm">
+      <span class="lab">Formule</span>
+      \(\displaystyle\int_a^b f(\varphi(t))\varphi'(t)\,dt=\int_{\varphi(a)}^{\varphi(b)}f(u)\,du\) (poser \(u=\varphi(t)\), \(du=\varphi'(t)dt\), <b>changer les bornes</b>).
+    </div>
+    <div class="note">
+      <span class="lab">Changements utiles</span>
+      \(u=\sin x,\ \cos x,\ \ln x,\ e^x,\ \sqrt t\) ; pour \(\tfrac1{\sin x}\) : \(t=\tan\tfrac x2\).
+      Puissances de \(\sin/\cos\) : linéariser (Euler) ou \(\sin^{2k+1}=\sin(1-\cos^2)^k\).
+    </div>
+
+    <h3>1.2 Intégration par parties</h3>
+    <div class="thm">
+      <span class="lab">IPP</span>
+      \(\displaystyle\int_a^b u\,v'=\big[uv\big]_a^b-\int_a^b u'\,v\). Choisir \(u\) qui se <b>simplifie</b> en dérivant :
+      priorité \(\ln\), \(\arctan\), polynôme (contre \(e^x,\cos,\sin\)). Parfois deux IPP (retour sur soi) ou récurrence.
+    </div>
+
+    <h3>1.3 Fractions rationnelles</h3>
+    <div class="method">
+      <span class="lab">Méthode</span>
+      Partie entière (si \(\deg\geqslant\)), puis éléments simples. \(\int\tfrac{u'}u=\ln|u|\).
+      Pour \(\tfrac1{x^2+bx+c}\) (\(\Delta<0\)) : compléter le carré \((x+\tfrac b2)^2+k^2\), primitive \(\tfrac1k\arctan\tfrac{x+b/2}{k}\).
+      Pour \(\tfrac{\alpha x+\beta}{x^2+bx+c}\) : écrire \(\alpha x+\beta=\tfrac\alpha2(2x+b)+(\ldots)\) → \(\ln\) + \(\arctan\).
+    </div>
+  </section>
+
+  <!-- ==================== EXOS CRÉÉS ============================== -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés)</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — IPP</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(\displaystyle\int_0^1 xe^x\,dx\).</div>
+        <p>\(u=x,\ v'=e^x\) : \([xe^x]_0^1-\int_0^1e^x=e-[e^x]_0^1=e-(e-1)\).</p>
+        <div class="res">\(1\)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Complétion du carré</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(\displaystyle\int\frac{dx}{x^2+2x+5}\).</div>
+        <p>\(x^2+2x+5=(x+1)^2+4\).</p>
+        <div class="res">\(\tfrac12\arctan\dfrac{x+1}2+C\)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Changement de variable</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(\displaystyle\int_0^1\frac{2x}{1+x^2}\,dx\) (poser \(u=1+x^2\)).</div>
+        <p>\(u:1\to2\) : \(\int_1^2\tfrac{du}u=\ln2\).</p>
+        <div class="res">\(\ln2\)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CORRECTION TD ========================== -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD — Techniques d'intégration (2ᵉ partie)</h2>
+    <p class="lead" style="font-size:.95rem">13 exercices. Ex5–13 recoupés avec le <b>corrigé officiel</b> ; Ex1–4 résolus par nos soins.</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — Pour s'échauffer</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">\(I_1=\int_0^1e^{3t}dt\)</p><p class="res">\(\tfrac{e^3-1}3\)</p>
+        <p class="q">\(I_2=\int_1^{\sqrt3}\tfrac1{t^2+1}dt\)</p><p>\(\arctan\sqrt3-\arctan1\).</p><p class="res">\(\tfrac\pi{12}\)</p>
+        <p class="q">\(I_3=\int_0^{\pi/3}\cos(2u+\tfrac\pi3)du\)</p><p>\(\tfrac12[\sin\pi-\sin\tfrac\pi3]\).</p><p class="res">\(-\tfrac{\sqrt3}4\)</p>
+        <p class="q">\(I_4=\int_0^1 2xe^{x^2}dx\)</p><p class="res">\(e-1\)</p>
+        <p class="q">\(I_5=\int_0^1 xe^{x^2}dx\)</p><p class="res">\(\tfrac{e-1}2\)</p>
+        <p class="q">\(I_6=\int_0^1 x^3e^{x^2}dx\)</p><p>\(u=x^2\) : \(\tfrac12\int_0^1 ue^u=\tfrac12[(u-1)e^u]_0^1\).</p><p class="res">\(\tfrac12\)</p>
+        <p class="q">\(I_7=\int_1^2\tfrac{-2}{-2x+3}dx\)</p><p>\([\ln|-2x+3|]_1^2=\ln1-\ln1\).</p><p class="res">\(0\)</p>
+        <p class="q">\(I_8=\int_1^2\tfrac1{2-3x}dx\)</p><p>\(-\tfrac13[\ln|2-3x|]_1^2=-\tfrac13\ln4\).</p><p class="res">\(-\tfrac23\ln2\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — Puissances de \(\sin,\cos\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">\(f_1=\sin^5x\)</p><p>\(=\sin x(1-\cos^2x)^2\).</p><p class="res">\(-\cos x+\tfrac23\cos^3x-\tfrac15\cos^5x\)</p>
+        <p class="q">\(f_2=\cos^4t\)</p><p>\(=\tfrac{3+4\cos2t+\cos4t}8\).</p><p class="res">\(\tfrac38t+\tfrac14\sin2t+\tfrac1{32}\sin4t\)</p>
+        <p class="q">\(f_3=\cos^4x\sin^2x\)</p><p>Linéarisation.</p><p class="res">\(\tfrac x{16}+\tfrac1{64}\sin2x-\tfrac1{64}\sin4x-\tfrac1{192}\sin6x\)</p>
+        <p class="q">\(f_4=\cos(3x)\cos^3x\)</p><p>\(\cos^3x=\tfrac{3\cos x+\cos3x}4\).</p><p class="res">\(\tfrac x8+\tfrac3{16}\sin2x+\tfrac3{32}\sin4x+\tfrac1{48}\sin6x\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — Changements de variable (définies)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">\(A=\int_{\pi/3}^{\pi/2}\cos x\sin^2x\,dx\) (\(u=\sin x\))</p><p>\([\tfrac{\sin^3x}3]\).</p><p class="res">\(\tfrac13-\tfrac{\sqrt3}8\)</p>
+        <p class="q">\(B=\int_1^4\tfrac{t^2}{\sqrt{t+1}}dt\) (\(u=\sqrt{t+1}\))</p><p>\(2\int_{\sqrt2}^{\sqrt5}(u^2-1)^2du\).</p><p class="res">\(\tfrac{16\sqrt5}3-\tfrac{14\sqrt2}{15}\)</p>
+        <p class="q">\(C=\int_1^4\tfrac{1-\sqrt t}{\sqrt t}dt\) (\(x=\sqrt t\))</p><p>\(2\int_1^2(1-x)dx\).</p><p class="res">\(-1\)</p>
+        <p class="q">\(D=\int_0^\pi\tfrac{\sin t}{1+\cos^2t}dt\) (\(x=\cos t\))</p><p>\(\int_{-1}^1\tfrac{dx}{1+x^2}\).</p><p class="res">\(\tfrac\pi2\)</p>
+        <p class="q">\(E=\int\tfrac{dt}{2t\ln t+t}\) (\(x=\ln t\))</p><p>\(\int\tfrac{dx}{2x+1}\) (bornes de l'énoncé ambiguës).</p><p class="res">\(\tfrac12\ln|2\ln t+1|\)</p>
+        <p class="q">\(F=\int_0^1\tfrac{dt}{1+e^t}\) (\(x=e^t\))</p><p>\(\int_1^e(\tfrac1x-\tfrac1{1+x})dx\).</p><p class="res">\(1+\ln\tfrac2{1+e}\)</p>
+        <p class="q">\(G=\int_1^3\tfrac{\sqrt t}{t+1}dt\) (\(x=\sqrt t\))</p><p>\(2\int_1^{\sqrt3}(1-\tfrac1{x^2+1})dx\).</p><p class="res">\(2\sqrt3-2-\tfrac\pi6\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — Primitives par changement de variable</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(1) \(\int(\cos x)^{1234}\sin x\,dx\)</p><p class="res">\(-\tfrac{(\cos x)^{1235}}{1235}\)</p>
+        <p class="q">(2) \(\int\tfrac{dx}{\sin x}\)</p><p class="res">\(\ln\big|\tan\tfrac x2\big|\)</p>
+        <p class="q">(3) \(\int\tfrac1{x\ln x}dx\)</p><p class="res">\(\ln|\ln x|\)</p>
+        <p class="q">(4) \(\int\tfrac1{3+e^{-x}}dx\)</p><p>\(\times\tfrac{e^x}{e^x}\) : \(\tfrac{e^x}{3e^x+1}\).</p><p class="res">\(\tfrac13\ln(3e^x+1)\)</p>
+        <p class="q">(5) \(\int\tfrac1{\sqrt{4x-x^2}}dx\)</p><p>\(4x-x^2=4-(x-2)^2\).</p><p class="res">\(\arcsin\tfrac{x-2}2\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — Primitives par changement de variable</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">\(f_1=\tfrac{2t}{1+t^4}\) (\(u=t^2\))</p><p class="res">\(\arctan(t^2)\)</p>
+        <p class="q">\(f_2=\tfrac{e^{2t}}{1+e^t}\) (\(u=e^t\))</p><p>\(\int\tfrac u{1+u}du=u-\ln(1+u)\).</p><p class="res">\(e^t-\ln(1+e^t)\)</p>
+        <p class="q">\(f_3=\tfrac1{\operatorname{ch}t}\)</p><p class="res">\(2\arctan(e^t)\)</p>
+        <p class="q">\(f_4=\tfrac{\sin t\cos t}{\sin^2t+1}\) (\(u=\sin^2t+1\))</p><p class="res">\(\tfrac12\ln(\sin^2t+1)\)</p>
+        <p class="q">\(f_5=\cos(2\ln x)\)</p><p class="res">\(\tfrac x5\big(2\sin(2\ln x)+\cos(2\ln x)\big)\)</p>
+        <p class="q">\(f_6=\cos(\sqrt x)\)</p><p class="res">\(2\big(\sqrt x\sin\sqrt x+\cos\sqrt x\big)\)</p>
+        <p class="q">\(f_7=\tfrac{e^x}{(3+e^x)\sqrt{e^x-1}}\)</p><p class="res">\(\arctan\big(\tfrac12\sqrt{e^x-1}\big)\)</p>
+        <p class="q">\(f_8=\tfrac{e^x-1}{e^x+1}\)</p><p class="res">\(2\ln(e^x+1)-x\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — Intégration par parties</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">\(A=\int_1^2\ln x\,dx\)</p><p class="res">\(2\ln2-1\)</p>
+        <p class="q">\(B=\int_1^2(\ln x)^2dx\)</p><p class="res">\(2\ln^2 2-4\ln2+2\)</p>
+        <p class="q">\(C=\int_0^1 xe^x\,dx\)</p><p class="res">\(1\)</p>
+        <p class="q">\(D=\int_1^e x^2\ln x\,dx\)</p><p class="res">\(\tfrac{2e^3+1}9\)</p>
+        <p class="q">\(E=\int_{\pi/6}^{\pi/3}e^t\sin(2t)dt\)</p><p class="res">\(\tfrac15(e^{\pi/3}+e^{\pi/6})+\tfrac{\sqrt3}{10}(e^{\pi/3}-e^{\pi/6})\)</p>
+        <p class="q">\(F=\int_0^{\pi/2}\cos t\,e^{-t}dt\)</p><p class="res">\(\tfrac12(e^{-\pi/2}+1)\)</p>
+        <p class="q">\(G=\int_{\pi/4}^{2\pi/3}t\sin t\,dt\)</p><p class="res">\(\tfrac\pi3+\tfrac{\sqrt3}2+\tfrac1{\sqrt2}(\tfrac\pi4-1)\)</p>
+        <p class="q">\(H=\int_0^1 t^2e^{-t}dt\)</p><p class="res">\(-\tfrac5e+2\)</p>
+        <p class="q">\(I=\int_1^2(x+1)e^{2x}dx\)</p><p class="res">\(\tfrac14(5e^4-3e^2)\)</p>
+        <p class="q">\(J=\int_0^1(2x^3+3x^2-x+1)e^x\,dx\)</p><p class="res">\(4\)</p>
+        <p class="q">\(K=\int_0^1 t\arctan t\,dt\)</p><p class="res">\(\tfrac{\pi-2}4\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 7 — Primitives par IPP</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\arctan x\)</p><p class="res">\(x\arctan x-\tfrac12\ln(x^2+1)\) (sur \(\mathbb R\))</p>
+        <p class="q">(b) \(t\sin t\cos2t\)</p><p class="res">\(\tfrac12 t\big(-\tfrac13\cos3t+\cos t\big)-\tfrac12\big(-\tfrac19\sin3t+\sin t\big)\)</p>
+        <p class="q">(c) \(\sin(\ln x)\)</p><p class="res">\(\tfrac12 x\sin(\ln x)-\tfrac12 x\cos(\ln x)\) (sur \(]0,+\infty[\))</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 8 — Primitives (fractions)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">\(f_1=\tfrac1{2x+1}\)</p><p class="res">\(\tfrac12\ln|2x+1|\)</p>
+        <p class="q">\(f_2=\tfrac{2x}{2x+1}=1-\tfrac1{2x+1}\)</p><p class="res">\(x-\tfrac12\ln|2x+1|\)</p>
+        <p class="q">\(f_3=\tfrac{3x+1}{2x+1}=\tfrac32-\tfrac{1/2}{2x+1}\)</p><p class="res">\(\tfrac32x-\tfrac14\ln|2x+1|\)</p>
+        <p class="q">\(f_4=\tfrac1{x^2+4}\)</p><p class="res">\(\tfrac12\arctan\tfrac x2\)</p>
+        <p class="q">\(f_5=\tfrac1{2x^2-3x-2}=\tfrac1{(2x+1)(x-2)}\)</p><p class="res">\(-\tfrac15\ln|2x+1|+\tfrac15\ln|x-2|\)</p>
+        <p class="q">\(f_6=\tfrac1{4x^2+4x+1}=\tfrac1{(2x+1)^2}\)</p><p class="res">\(-\tfrac1{2(2x+1)}\)</p>
+        <p class="q">\(f_7=\tfrac1{x^2-4x+5}=\tfrac1{(x-2)^2+1}\)</p><p class="res">\(\arctan(x-2)\)</p>
+        <p class="q">\(f_8=\tfrac1{x^2+4x+5}=\tfrac1{(x+2)^2+1}\)</p><p class="res">\(\arctan(x+2)\)</p>
+        <p class="q">\(f_9=\tfrac{3x+2}{x^2+x+1}\)</p><p class="res">\(\tfrac32\ln(x^2+x+1)-\tfrac2{\sqrt3}\arctan\tfrac{2x+1}{\sqrt3}\)</p>
+        <p class="q">\(f_{10}=\tfrac{2x}{x^2-x+1}\)</p><p>\(2x=(2x-1)+1\).</p><p class="res">\(\ln(x^2-x+1)+\tfrac2{\sqrt3}\arctan\tfrac{2x-1}{\sqrt3}\)</p>
+        <p class="q">\(f_{11}=\tfrac{2x+1}{x^2+x-3}\)</p><p class="res">\(\ln|x^2+x-3|\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 9 — Intégrales de fractions</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\int_2^3\tfrac{dx}{x(x+1)}\)</p><p>\(\tfrac1{x(x+1)}=\tfrac1x-\tfrac1{x+1}\).</p><p class="res">\(\ln\tfrac98\)</p>
+        <p class="q">(b) \(\int_0^{1/2}\tfrac{x+1}{(x^2+1)(x+2)}dx\)</p><p>\(=\tfrac{\frac15x+\frac35}{x^2+1}-\tfrac{1/5}{x+2}\).</p><p class="res">\(-\tfrac1{10}\ln5+\tfrac35\arctan\tfrac12+\tfrac3{10}\ln2\)</p>
+        <p class="q">(c) \(\int_4^5\tfrac{dx}{x^2-4x+3}\)</p><p>\(=(x-1)(x-3)\).</p><p class="res">\(\tfrac12\ln\tfrac32\)</p>
+        <p class="q">(d) \(\int_0^1\tfrac{dx}{1+x+x^2}\)</p><p>\((x+\tfrac12)^2+\tfrac34\).</p><p class="res">\(\tfrac\pi{3\sqrt3}\)</p>
+        <p class="q">(e) \(\int_3^4\tfrac{x^2-3x+1}{(x-1)^2(x-2)}dx\)</p><p>\(=-\tfrac1{x-2}+\tfrac2{x-1}+\tfrac1{(x-1)^2}\).</p><p class="res">\(\ln\tfrac98+\tfrac16\)</p>
+        <p class="q">(f) \(\int_0^1\tfrac{x^4-x^3+9x^2-13x+3}{x^3-2x^2+3x-6}dx\)</p><p class="res">\(\tfrac32+2\ln2-\tfrac52\ln3\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 10 — Primitive s'annulant en 2</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(f(x)=\dfrac{5x^2+21x+22}{(x-1)(x+3)^2}\) sur \(]1,+\infty[\).</div>
+        <p>Éléments simples : \(f=\dfrac3{x-1}+\dfrac2{x+3}-\dfrac1{(x+3)^2}\). Primitive générale \(F=3\ln(x-1)+2\ln(x+3)+\tfrac1{x+3}+C\), condition \(F(2)=0\Rightarrow C=-2\ln5-\tfrac15\).</p>
+        <div class="res">\(F(x)=3\ln(x-1)+2\ln(x+3)+\dfrac1{x+3}-2\ln5-\dfrac15\)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 12 — IPP astucieuses</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">\(I=\int_1^2\tfrac{\ln(1+t)}{t^2}dt\)</p><p>IPP \(u=\ln(1+t),dv=\tfrac{dt}{t^2}\) puis \(\tfrac1{t(1+t)}=\tfrac1t-\tfrac1{1+t}\).</p><p class="res">\(3\ln2-\tfrac32\ln3\)</p>
+        <p class="q">\(J=\int_0^1 x(\arctan x)^2dx\)</p><p class="res">\(\tfrac{\pi^2}{16}-\tfrac\pi4+\tfrac12\ln2\)</p>
+        <p class="q">\(K=\int_a^1\tfrac{x\ln x}{(x^2+1)^2}dx\) (\(a>0\))</p><p>\(u=\ln x,\ dv=\tfrac x{(x^2+1)^2}dx,\ v=-\tfrac1{2(x^2+1)}\).</p><p class="res">\(-\tfrac14\ln2+\tfrac14\ln(a^2+1)+\tfrac{\ln a}{2(a^2+1)}-\tfrac12\ln a\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 13 — Fonction Bêta \(I(p,q)=\int_0^1t^p(1-t)^q\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">1) Valeurs</p><p class="res">\(I(0,0)=1,\ I(1,0)=\tfrac12,\ I(1,1)=\tfrac16\)</p>
+        <p class="q">2) Symétrie</p><p>Changement \(t\mapsto1-t\).</p><p class="res">\(I(p,q)=I(q,p)\)</p>
+        <p class="q">3) \(I(p,0)\)</p><p class="res">\(\dfrac1{p+1}\)</p>
+        <p class="q">4) Récurrence (IPP)</p><p class="res">\(I(p,q+1)=\dfrac{q+1}{p+1}\,I(p+1,q)\)</p>
+        <p class="q">5) \(I(p,1)\) et \(I(p,2)\)</p>
+        <p>\(I(p,1)=\tfrac1{p+1}I(p+1,0)=\tfrac1{(p+1)(p+2)}\) ; \(I(p,2)=\tfrac2{p+1}I(p+1,1)\).</p>
+        <div class="res">\(I(p,1)=\dfrac1{(p+1)(p+2)}\), \(I(p,2)=\dfrac2{(p+1)(p+2)(p+3)}\)</div>
+      </div>
+    </div>
+
+  </section>
+
+  <p style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.9rem;opacity:.75">
+    Module M02 (S2). Sources : <em>Primitives-intégrales-V2026 (Partie 2)</em>, <em>TD2-Primitives-intégrales</em> et son
+    <em>corrigé officiel</em> (Ex5–13, recoupés). Ex1–4 rédigés par nos soins.
+    <br>⚠️ Corrigé officiel \(f_{10}\) : la primitive correcte fait intervenir \(\arctan\tfrac{2x-1}{\sqrt3}\) (dérivée de \(x^2-x+1\)), non \(2x+1\).
+  </p>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours / ressource</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/integration-techniques/Exercice%206-Sommes%20de%20Riemann.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Exercice 6-Sommes de Riemann</span><span class="badge">Cours / ressource</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/maths/integration-techniques/Int%C3%A9gration-V2026-Etudiant-VF.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Intégration-V2026-Etudiant-VF</span><span class="badge">Cours / ressource</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/integration-techniques/TD-2026_Integration-Etudiants.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD-2026_Integration-Etudiants</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Géométrie plane — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-math">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Maths · M02 — Géométrie plane</span>
+  <h1 class="title">Géométrie plane</h1>
+  <p class="lead">Repérage cartésien et polaire, vecteurs et colinéarité ; produit scalaire (expression analytique, projection,
+  Al-Kashi) ; déterminant / produit mixte (aire, alignement) ; transformations (translation, homothétie, rotation) ;
+  droites (représentation paramétrique, équation cartésienne, vecteur normal, position relative, distance point–droite) ;
+  cercles (équation, tangentes, intersections).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD (14 exercices + 3 applications)</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+    <p>On travaille dans le plan euclidien \(E\) muni d'un repère orthonormé direct \(R(O,\vec\imath,\vec\jmath)\).
+    Les coordonnées d'un point \(M\) sont l'unique couple \((x,y)\) tel que \(\vec{OM}=x\vec\imath+y\vec\jmath\).</p>
+
+    <h3>1.1 Vecteurs, colinéarité, alignement</h3>
+    <div class="def">
+      <span class="lab">Colinéarité</span>
+      \(\vec u\) et \(\vec v\) sont <b>colinéaires</b> s'il existe \(\lambda\in\mathbb R\) tel que \(\vec u=\lambda\vec v\) (ou \(\vec v=\vec 0\)).
+      La <b>droite vectorielle</b> \(\operatorname{Vect}\vec u=\{\lambda\vec u\mid\lambda\in\mathbb R\}\) rassemble tous les vecteurs de même direction.
+    </div>
+    <div class="note">
+      <span class="lab">Droite du plan</span>
+      La droite passant par \(A\) et dirigée par \(\vec u\neq\vec 0\), notée \(A+\operatorname{Vect}\vec u\), est l'ensemble des points \(M\)
+      tels que \(\vec{AM}\in\operatorname{Vect}\vec u\). Deux droites sont <b>parallèles</b> si elles ont la même direction ;
+      des points sont <b>alignés</b> s'ils sont sur une même droite.
+    </div>
+
+    <h3>1.2 Repérage : cartésien et polaire</h3>
+    <div class="def">
+      <span class="lab">Coordonnées polaires</span>
+      \((r,\theta)\) est un couple de coordonnées polaires de \(M(x,y)\) si
+      \[ \begin{cases}x=r\cos\theta\\ y=r\sin\theta\end{cases}\quad(r\geqslant0),\qquad \vec{OM}=r(\cos\theta\,\vec\imath+\sin\theta\,\vec\jmath). \]
+    </div>
+    <div class="method">
+      <span class="lab">Passage cartésien → polaire</span>
+      \(r=\sqrt{x^2+y^2}\), \(\cos\theta=\tfrac xr\), \(\sin\theta=\tfrac yr\) (mesure principale \(\theta\in\,]{-\pi},\pi]\)).
+      Avec \(x\neq0\) : si \(x>0\), \(\theta=\arctan\tfrac yx\) ; si \(x<0\), \(\theta=\arctan\tfrac yx+\pi\) (recaler dans \(]{-\pi},\pi]\)).
+      <b>Attention</b> : \(\tan\theta=\tfrac yx\) seul ne détermine \(\theta\) qu'à \(\pi\) près — toujours regarder les signes de \(x\) et \(y\).
+    </div>
+
+    <h3>1.3 Produit scalaire</h3>
+    <div class="thm">
+      <span class="lab">Définitions équivalentes</span>
+      \(\vec u\cdot\vec v=\|\vec u\|\,\|\vec v\|\cos(\vec u,\vec v)\). En base orthonormée, si \(\vec u=(x,y)\) et \(\vec v=(x',y')\) :
+      \[ \boxed{\;\vec u\cdot\vec v=xx'+yy'\;}\qquad \|\vec u\|=\sqrt{x^2+y^2}. \]
+      Orthogonalité : \(\vec u\perp\vec v\iff\vec u\cdot\vec v=0\). Distance \(AB=\|\vec{AB}\|=\sqrt{(x_B-x_A)^2+(y_B-y_A)^2}\).
+    </div>
+    <div class="note">
+      <span class="lab">Propriétés</span>
+      Symétrique, bilinéaire ; Cauchy–Schwarz \(|\vec u\cdot\vec v|\leqslant\|\vec u\|\,\|\vec v\|\) (égalité ⟺ colinéaires) ;
+      projection \(\vec u\cdot\vec v=\overline{OA}\times\overline{OH}\) (\(H\) projeté de \(B\) sur \((OA)\)).
+    </div>
+    <div class="thm">
+      <span class="lab">Al-Kashi</span>
+      Dans un triangle \(ABC\), avec \(a,b,c\) les côtés opposés à \(A,B,C\) :
+      \[ a^2=b^2+c^2-2bc\cos\hat A. \]
+      Généralise Pythagore. Permet de retrouver un angle : \(\cos\hat A=\dfrac{b^2+c^2-a^2}{2bc}\).
+    </div>
+
+    <h3>1.4 Déterminant (produit mixte) dans le plan orienté</h3>
+    <div class="thm">
+      <span class="lab">Définition & analytique</span>
+      \([\vec u,\vec v]=\|\vec u\|\,\|\vec v\|\sin(\vec u,\vec v)\). En base orthonormée directe, \(\vec u=(x,y)\), \(\vec v=(x',y')\) :
+      \[ \det(\vec u,\vec v)=[\vec u,\vec v]=\begin{vmatrix}x&x'\\ y&y'\end{vmatrix}=xy'-yx'. \]
+      Antisymétrique : \([\vec u,\vec v]=-[\vec v,\vec u]\) ; bilinéaire.
+    </div>
+    <div class="note">
+      <span class="lab">Interprétations</span>
+      \([\vec u,\vec v]=0\iff\vec u,\vec v\) colinéaires. Trois points alignés ⟺ \([\vec{AB},\vec{AC}]=0\).
+      <b>Aire du triangle</b> \(ABC=\tfrac12\,\big|[\vec{AB},\vec{AC}]\big|\) ; aire du parallélogramme \(=\big|[\vec{AB},\vec{AC}]\big|\).
+    </div>
+
+    <h3>1.5 Transformations du plan</h3>
+    <div class="def">
+      <span class="lab">Formules</span>
+      <b>Translation</b> de vecteur \((a,b)\) : \((x,y)\mapsto(x+a,\,y+b)\).
+      <b>Homothétie</b> de centre \(\Omega(a,b)\) et rapport \(\lambda\) : \((x,y)\mapsto\big(a+\lambda(x-a),\,b+\lambda(y-b)\big)\).
+      <b>Rotation</b> de centre \(\Omega\) et angle \(\theta\) : conserve \(\Omega M\) et tourne de \(\theta\).
+    </div>
+
+    <h3>1.6 Droites</h3>
+    <div class="thm">
+      <span class="lab">Deux représentations</span>
+      Droite par \(A(x_A,y_A)\), directeur \(\vec u=(\alpha',\beta')\) :
+      <b>paramétrique</b> \(\begin{cases}x=x_A+\alpha' t\\ y=y_A+\beta' t\end{cases}(t\in\mathbb R)\).
+      <b>Cartésienne</b> \(\alpha x+\beta y+c=0\) avec \((\alpha,\beta)\neq(0,0)\) : le vecteur \(\vec n(\alpha,\beta)\) est <b>normal</b>,
+      un directeur est \(\vec u(\beta,-\alpha)\).
+    </div>
+    <div class="method">
+      <span class="lab">Recettes</span>
+      • <b>Point + normal \(\vec n(\alpha,\beta)\)</b> : \(\alpha(x-x_A)+\beta(y-y_A)=0\).<br>
+      • <b>Point + directeur \(\vec u\)</b> : \(M\in D\iff\det(\vec{AM},\vec u)=0\).<br>
+      • <b>Deux points \(A,B\)</b> : directeur \(\vec{AB}\), puis une des méthodes ci-dessus.<br>
+      • <b>Param → cartésienne</b> : éliminer \(t\), <i>ou</i> \(\det(\vec{AM},\vec u)=0\).
+    </div>
+    <div class="note">
+      <span class="lab">Position relative</span>
+      \(D_1:a_1x+b_1y+c_1=0\), \(D_2:a_2x+b_2y+c_2=0\).
+      <b>Parallèles</b> ⟺ \(a_1b_2-a_2b_1=0\) ; <b>perpendiculaires</b> ⟺ \(a_1a_2+b_1b_2=0\)
+      (les normales sont orthogonales). Sinon un unique point d'intersection.
+    </div>
+    <div class="thm">
+      <span class="lab">Distance point–droite</span>
+      Pour \(D:ax+by+c=0\) et \(M(x_M,y_M)\) :
+      \[ d(M,D)=\frac{|ax_M+by_M+c|}{\sqrt{a^2+b^2}}=\frac{|\det(\vec{AM},\vec u)|}{\|\vec u\|}=\frac{|\vec{AM}\cdot\vec n|}{\|\vec n\|}. \]
+    </div>
+
+    <h3>1.7 Cercles</h3>
+    <div class="thm">
+      <span class="lab">Équation</span>
+      Cercle de centre \(\Omega(\alpha,\beta)\), rayon \(R\) : \((x-\alpha)^2+(y-\beta)^2=R^2\), soit
+      \(x^2+y^2-2\alpha x-2\beta y+(\alpha^2+\beta^2-R^2)=0\). On retrouve \(\Omega\) et \(R\) en <b>complétant les carrés</b>.
+    </div>
+    <div class="note">
+      <span class="lab">Cercle par un diamètre</span>
+      \(\vec{MA}\cdot\vec{MB}=0\iff M\) sur le cercle de diamètre \([AB]\) :
+      \((x-x_A)(x-x_B)+(y-y_A)(y-y_B)=0\) (le triangle \(AMB\) est rectangle en \(M\)).
+    </div>
+    <div class="method">
+      <span class="lab">Intersections</span>
+      <b>Cercle–droite</b> : comparer \(d(\Omega,D)\) à \(R\) — \(>R\) : \(\varnothing\) ; \(=R\) : tangente (1 point) ; \(<R\) : 2 points.
+      <b>Puissance d'un point</b> : si \(A\) est extérieur, la longueur de tangente vérifie \(AM^2=A\Omega^2-R^2=\) (valeur de l'équation du cercle évaluée en \(A\)).
+      <b>Deux cercles</b> : soustraire les équations élimine \(x^2+y^2\) et donne l'<b>axe radical</b> (une droite), puis on intersecte avec un cercle.
+    </div>
+  </section>
+
+  <!-- ======================= EXOS CRÉÉS =============================== -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Angle d'un triangle par le produit scalaire</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(A(1,0)\), \(B(4,4)\), \(C(0,3)\). Calculer l'angle \(\widehat{BAC}\) et l'aire du triangle.</div>
+        <p class="q">1) Vecteurs</p><p>\(\vec{AB}=(3,4)\), \(\vec{AC}=(-1,3)\). \(\|\vec{AB}\|=5\), \(\|\vec{AC}\|=\sqrt{10}\).</p>
+        <p class="q">2) Produit scalaire → angle</p>
+        <p>\(\vec{AB}\cdot\vec{AC}=3(-1)+4\cdot3=9\). \(\cos\widehat{BAC}=\dfrac{9}{5\sqrt{10}}=\dfrac{9}{5\sqrt{10}}\approx0{,}569\).</p>
+        <p class="res">\(\widehat{BAC}=\arccos\dfrac{9}{5\sqrt{10}}\approx55{,}3^\circ\)</p>
+        <p class="q">3) Aire par le déterminant</p>
+        <p>\([\vec{AB},\vec{AC}]=3\cdot3-4\cdot(-1)=9+4=13\). \(\mathcal A=\tfrac12|13|\).</p>
+        <p class="res">\(\mathcal A=\dfrac{13}{2}=6{,}5\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Droite, projeté et distance</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(D:2x-y+1=0\), point \(P(3,1)\). Distance de \(P\) à \(D\), projeté orthogonal \(H\), vérification.</div>
+        <p class="q">1) Distance</p><p>\(d(P,D)=\dfrac{|2\cdot3-1+1|}{\sqrt{4+1}}=\dfrac{6}{\sqrt5}=\dfrac{6\sqrt5}{5}\approx2{,}68\).</p>
+        <p class="q">2) Projeté \(H\)</p>
+        <p>Normale \(\vec n=(2,-1)\), droite \(P+t\vec n\) : \(x=3+2t,\ y=1-t\). Sur \(D\) : \(2(3+2t)-(1-t)+1=0\Rightarrow6+4t-1+t+1=0\Rightarrow5t+6=0\Rightarrow t=-\tfrac65\).</p>
+        <p class="res">\(H=\big(3-\tfrac{12}5,\,1+\tfrac65\big)=\big(\tfrac35,\tfrac{11}5\big)\)</p>
+        <p class="q">3) Vérification</p><p>\(PH=|t|\,\|\vec n\|=\tfrac65\sqrt5=\dfrac{6\sqrt5}{5}\) : cohérent avec (1). \(H\) sur \(D\) : \(2\cdot\tfrac35-\tfrac{11}5+1=\tfrac65-\tfrac{11}5+\tfrac55=0\) ✓.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Tangentes à un cercle parallèles à une droite</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Cercle \(C:(x-1)^2+(y+2)^2=5\), droite \(D:x-2y=0\). Tangentes à \(C\) parallèles à \(D\).</div>
+        <p class="q">1) Cadre</p><p>Centre \(\Omega(1,-2)\), rayon \(R=\sqrt5\). Une parallèle à \(D\) s'écrit \(x-2y+c=0\).</p>
+        <p class="q">2) Condition de tangence</p>
+        <p>\(d(\Omega,\text{droite})=R\) : \(\dfrac{|1-2(-2)+c|}{\sqrt{1+4}}=\sqrt5\Rightarrow\dfrac{|5+c|}{\sqrt5}=\sqrt5\Rightarrow|5+c|=5\).</p>
+        <p>\(c=0\) ou \(c=-10\).</p>
+        <p class="res">Tangentes : \(x-2y=0\) et \(x-2y-10=0\)</p>
+        <p class="q">3) Remarque</p><p>La première tangente est \(D\) elle-même : \(D\) était donc déjà tangente au cercle (\(d(\Omega,D)=\tfrac{|1+4|}{\sqrt5}=\sqrt5=R\)).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CORRECTION TD =============================== -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD</h2>
+    <p class="lead" style="font-size:.95rem">Source : <i>TD-V2026 — Géométrie Plane</i> (14 exercices) + <i>Applications concrètes</i> (3 exercices).
+    Repère orthonormé direct \((O;\vec\imath,\vec\jmath)\). <b>Pas de corrigé officiel</b> → tout résolu et vérifié maison.</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — Identités du parallélogramme</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\|\vec u+\vec v\|^2\)</p>
+        <p>\(\|\vec u+\vec v\|^2=(\vec u+\vec v)\cdot(\vec u+\vec v)=\vec u\cdot\vec u+2\vec u\cdot\vec v+\vec v\cdot\vec v\).</p>
+        <p class="res">\(\|\vec u+\vec v\|^2=\|\vec u\|^2+2\,\vec u\cdot\vec v+\|\vec v\|^2\)</p>
+        <p class="q">(b) \(\|\vec u-\vec v\|^2\)</p><p>Idem avec \(-\vec v\).</p>
+        <p class="res">\(\|\vec u-\vec v\|^2=\|\vec u\|^2-2\,\vec u\cdot\vec v+\|\vec v\|^2\)</p>
+        <p class="q">(c) Somme (a)+(b)</p><p>Les termes \(\pm2\vec u\cdot\vec v\) s'annulent.</p>
+        <p class="res">\(\|\vec u+\vec v\|^2+\|\vec u-\vec v\|^2=2(\|\vec u\|^2+\|\vec v\|^2)\) (loi du parallélogramme)</p>
+        <p class="q">(d) Différence (a)−(b)</p><p>Les carrés de normes s'annulent.</p>
+        <p class="res">\(\|\vec u+\vec v\|^2-\|\vec u-\vec v\|^2=4\,\vec u\cdot\vec v\) (identité de polarisation)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — Angle orienté & coordonnées polaires</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">1) Angle \((\vec u,\vec v)\), \(\vec u(1,1)\), \(\vec v(-5,-1)\)</p>
+        <p>\(\vec u\cdot\vec v=1(-5)+1(-1)=-6\), \([\vec u,\vec v]=1(-1)-1(-5)=4\). \(\|\vec u\|=\sqrt2\), \(\|\vec v\|=\sqrt{26}\), \(\|\vec u\|\|\vec v\|=\sqrt{52}=2\sqrt{13}\).</p>
+        <p>\(\cos\theta=\dfrac{-6}{2\sqrt{13}}=\dfrac{-3}{\sqrt{13}}<0\), \(\sin\theta=\dfrac{4}{2\sqrt{13}}=\dfrac{2}{\sqrt{13}}>0\) : deuxième quadrant.</p>
+        <p class="res">\((\vec u,\vec v)=\pi-\arctan\tfrac23\approx146{,}3^\circ\)</p>
+        <p class="q">2) Polaire de \(M(\sqrt3-2,\ 3-2\sqrt3)\)</p>
+        <p>Remarque : \(3-2\sqrt3=\sqrt3(\sqrt3-2)\), donc \(y=\sqrt3\,x\) avec \(x=\sqrt3-2<0\) et \(y<0\) (troisième quadrant).</p>
+        <p>\(r^2=x^2+y^2=4x^2=4(\sqrt3-2)^2=4(7-4\sqrt3)\) ; or \(7-4\sqrt3=(2-\sqrt3)^2\), donc \(r=2(2-\sqrt3)=4-2\sqrt3\).</p>
+        <p>\(\tan\theta=\sqrt3\) avec \(x<0,y<0\) ⟹ \(\theta=\tfrac\pi3-\pi=-\tfrac{2\pi}3\).</p>
+        <p class="res">\((r,\theta)=\big(4-2\sqrt3,\ -\tfrac{2\pi}3\big)\approx(0{,}54,\ -120^\circ)\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — Angles d'un triangle 2, 3, 4 (Al-Kashi)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Côtés \(a=2\) (opposé à \(A\)), \(b=3\), \(c=4\).</div>
+        <p class="q">Angle \(A\) (opposé au côté 2)</p><p>\(\cos\hat A=\dfrac{b^2+c^2-a^2}{2bc}=\dfrac{9+16-4}{24}=\dfrac{21}{24}=\dfrac78\).</p>
+        <p class="res">\(\hat A=\arccos\tfrac78\approx28{,}96^\circ\)</p>
+        <p class="q">Angle \(B\) (opposé au côté 3)</p><p>\(\cos\hat B=\dfrac{a^2+c^2-b^2}{2ac}=\dfrac{4+16-9}{16}=\dfrac{11}{16}\).</p>
+        <p class="res">\(\hat B=\arccos\tfrac{11}{16}\approx46{,}57^\circ\)</p>
+        <p class="q">Angle \(C\) (opposé au côté 4)</p><p>\(\cos\hat C=\dfrac{a^2+b^2-c^2}{2ab}=\dfrac{4+9-16}{12}=-\dfrac14\) (obtus).</p>
+        <p class="res">\(\hat C=\arccos(-\tfrac14)\approx104{,}48^\circ\)</p>
+        <p>Contrôle : \(28{,}96+46{,}57+104{,}48\approx180^\circ\) ✓.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — Paramétrique ⇄ cartésienne</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">1) \(\{x=1-t,\ y=2-3t\}\) → cartésienne (2 méthodes)</p>
+        <p><b>Méthode 1</b> (élimination) : \(t=1-x\), donc \(y=2-3(1-x)=3x-1\).</p>
+        <p><b>Méthode 2</b> (déterminant) : \(A(1,2)\), directeur \(\vec u(-1,-3)\). \(M\in D\iff\det(\vec{AM},\vec u)=0\) :
+        \((x-1)(-3)-(y-2)(-1)=-3x+3+y-2=0\).</p>
+        <p class="res">\(3x-y-1=0\)</p>
+        <p class="q">2) \(2x-3y=4\) → paramétrique</p>
+        <p>Directeur \(\vec u(b,-a)=(3,2)\) (car normale \((2,-3)\)). Point : \(x=2\Rightarrow y=0\), soit \(A(2,0)\).</p>
+        <p class="res">\(\{x=2+3t,\ y=2t\}\) ; contrôle \(2(2+3t)-3(2t)=4\) ✓</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — Équations d'une droite (5 cas)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">1) \(A(2,1)\), normal \(\vec n(1,-1)\)</p>
+        <p>Cartésienne : \(1(x-2)-1(y-1)=0\Rightarrow x-y-1=0\). Directeur \(\vec u(1,1)\).</p>
+        <p class="res">\(x-y-1=0\) ; \(\{x=2+t,\ y=1+t\}\)</p>
+        <p class="q">2) \(A(-1,0)\), directeur \(\vec u(1,-2)\)</p>
+        <p>Normale \(\vec n(2,1)\). Cartésienne : \(2(x+1)+1\cdot y=0\Rightarrow 2x+y+2=0\).</p>
+        <p class="res">\(2x+y+2=0\) ; \(\{x=-1+t,\ y=-2t\}\)</p>
+        <p class="q">3) \(A(1,2)\), \(B(-2,3)\)</p>
+        <p>Directeur \(\vec{AB}(-3,1)\), normale \((1,3)\). \(1(x-1)+3(y-2)=0\Rightarrow x+3y-7=0\) (contrôle \(B\) : \(-2+9-7=0\) ✓).</p>
+        <p class="res">\(x+3y-7=0\) ; \(\{x=1-3t,\ y=2+t\}\)</p>
+        <p class="q">4) Par \(O\), parallèle à \(D':x+y-1=0\)</p>
+        <p>Même direction/normale \((1,1)\), passe par \(O\).</p>
+        <p class="res">\(x+y=0\) ; \(\{x=t,\ y=-t\}\)</p>
+        <p class="q">5) \(A(1,1)\), perpendiculaire à \(D':\{x=1+2t,\ y=-1+t\}\)</p>
+        <p>\(D'\) est dirigée par \((2,1)\) ; notre droite lui est perpendiculaire ⟹ directeur \((1,-2)\), normale \((2,1)\).
+        \(2(x-1)+1(y-1)=0\Rightarrow2x+y-3=0\).</p>
+        <p class="res">\(2x+y-3=0\) ; \(\{x=1+t,\ y=1-2t\}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — Intersection de deux droites</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(D_1:\{x=2t-1,\ y=-t+2\}\) ; \(D_2:\{x=s+2,\ y=3s+1\}\).</div>
+        <p>Égalité des coordonnées : \(2t-1=s+2\) et \(-t+2=3s+1\). De la première, \(s=2t-3\) ; report :</p>
+        <p>\(-t+2=3(2t-3)+1=6t-8\Rightarrow10=7t\Rightarrow t=\tfrac{10}7\), \(s=-\tfrac17\).</p>
+        <p>Point : \(x=2\cdot\tfrac{10}7-1=\tfrac{13}7\), \(y=-\tfrac{10}7+2=\tfrac47\).</p>
+        <p class="res">\(D_1\cap D_2=\big\{\big(\tfrac{13}7,\tfrac47\big)\big\}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 7 — Aire, hauteurs \(A(-1,-1),\,B(2,3),\,C(3,-3)\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">1) Aire</p><p>\(\vec{AB}(3,4)\), \(\vec{AC}(4,-2)\). \([\vec{AB},\vec{AC}]=3(-2)-4\cdot4=-22\).</p>
+        <p class="res">\(\mathcal A=\tfrac12|-22|=11\)</p>
+        <p class="q">2) Distance de \(A\) à \((BC)\)</p>
+        <p>\(\vec{BC}(1,-6)\), \(BC=\sqrt{37}\). \(\mathcal A=\tfrac12\,BC\cdot d(A,BC)\Rightarrow d=\dfrac{2\cdot11}{\sqrt{37}}=\dfrac{22}{\sqrt{37}}=\dfrac{22\sqrt{37}}{37}\approx3{,}62\).</p>
+        <p class="res">\(d(A,(BC))=\dfrac{22\sqrt{37}}{37}\)</p>
+        <p class="q">3) Équation de \((AB)\)</p><p>Directeur \((3,4)\), normale \((4,-3)\) : \(4(x+1)-3(y+1)=0\Rightarrow4x-3y+1=0\) (contrôle \(B\) : \(8-9+1=0\) ✓).</p>
+        <p class="res">\((AB):4x-3y+1=0\)</p>
+        <p class="q">4) Hauteur issue de \(C\) et aire</p>
+        <p>\(d(C,(AB))=\dfrac{|4\cdot3-3(-3)+1|}{5}=\dfrac{22}{5}=4{,}4\). \(\mathcal A=\tfrac12\,AB\cdot d=\tfrac12\cdot5\cdot4{,}4=11\) ✓ (\(AB=5\)).</p>
+        <p class="res">\(h_C=\tfrac{22}5\), aire \(=11\) confirmée</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 8 — Distance & projeté \(A(1,-2),\,B(-2,3),\,C(1,1)\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">1) Équation de \((AB)\)</p><p>\(\vec{AB}(-3,5)\), normale \((5,3)\) : \(5(x-1)+3(y+2)=0\Rightarrow5x+3y+1=0\) (contrôle \(B\) : \(-10+9+1=0\) ✓).</p>
+        <p class="res">\((AB):5x+3y+1=0\)</p>
+        <p class="q">2) Distance de \(C(1,1)\) à \((AB)\)</p><p>\(d=\dfrac{|5+3+1|}{\sqrt{25+9}}=\dfrac{9}{\sqrt{34}}=\dfrac{9\sqrt{34}}{34}\approx1{,}54\).</p>
+        <p class="res">\(d(C,(AB))=\dfrac{9}{\sqrt{34}}\)</p>
+        <p class="q">3) Projeté \(H\) de \(C\) sur \((AB)\)</p>
+        <p>Normale \((5,3)\) : \(x=1+5k,\ y=1+3k\). Sur \((AB)\) : \(5(1+5k)+3(1+3k)+1=0\Rightarrow9+34k=0\Rightarrow k=-\tfrac9{34}\).</p>
+        <p class="res">\(H=\big(1-\tfrac{45}{34},\,1-\tfrac{27}{34}\big)=\big(-\tfrac{11}{34},\,\tfrac{7}{34}\big)\)</p>
+        <p class="q">4) Vérification</p><p>\(CH=|k|\,\|(5,3)\|=\tfrac9{34}\sqrt{34}=\dfrac9{\sqrt{34}}\) : identique à (2) ✓.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 9 — Distance point–droite (3 cas)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">1) \(A(0,0)\), \(D\) par \(B(5,3)\) dirigée par \(\vec u(1,2)\)</p>
+        <p>\(\vec{BA}=(-5,-3)\), \(\det(\vec{BA},\vec u)=(-5)(2)-(-3)(1)=-7\), \(\|\vec u\|=\sqrt5\).</p>
+        <p class="res">\(d=\dfrac{7}{\sqrt5}=\dfrac{7\sqrt5}{5}\approx3{,}13\)</p>
+        <p class="q">2) \(A(1,-1)\), \(D\) par \(B(-1,1)\) perpendiculaire à \(\vec n(2,3)\)</p>
+        <p>« Perpendiculaire à \(\vec n\) » ⟹ \(\vec n(2,3)\) est <b>normal</b> à \(D\). \(D:2(x+1)+3(y-1)=0\Rightarrow2x+3y-1=0\).
+        \(d(A,D)=\dfrac{|2-3-1|}{\sqrt{13}}=\dfrac2{\sqrt{13}}\).</p>
+        <p class="res">\(d=\dfrac2{\sqrt{13}}=\dfrac{2\sqrt{13}}{13}\approx0{,}55\)</p>
+        <p class="q">3) \(A(4,1)\), \(D:x+2y+3=0\)</p><p>\(d=\dfrac{|4+2+3|}{\sqrt5}=\dfrac9{\sqrt5}=\dfrac{9\sqrt5}{5}\approx4{,}02\).</p>
+        <p class="res">\(d=\dfrac{9}{\sqrt5}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 10 — Centre et rayon de cercles</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(x^2+y^2-4x+4y-1=0\)</p>
+        <p>\((x-2)^2-4+(y+2)^2-4-1=0\Rightarrow(x-2)^2+(y+2)^2=9\).</p>
+        <p class="res">Centre \(\Omega(2,-2)\), rayon \(R=3\)</p>
+        <p class="q">(b) \(x^2+y^2-6x+8y+24=0\)</p>
+        <p>\((x-3)^2-9+(y+4)^2-16+24=0\Rightarrow(x-3)^2+(y+4)^2=1\).</p>
+        <p class="res">Centre \(\Omega(3,-4)\), rayon \(R=1\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 11 — Tangentes parallèles à une droite</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(C\) : centre \(\Omega(2,-1)\), rayon \(\tfrac{\sqrt5}{2}\) ; \(D:2x+y=0\).</div>
+        <p>Une parallèle à \(D\) : \(2x+y+c=0\). Tangence : \(d(\Omega,\cdot)=R\) :</p>
+        <p>\(\dfrac{|2\cdot2+(-1)+c|}{\sqrt{4+1}}=\dfrac{\sqrt5}{2}\Rightarrow\dfrac{|3+c|}{\sqrt5}=\dfrac{\sqrt5}{2}\Rightarrow|3+c|=\dfrac52\).</p>
+        <p>\(c=-\tfrac12\) ou \(c=-\tfrac{11}2\).</p>
+        <p class="res">\(2x+y-\tfrac12=0\ (4x+2y-1=0)\) et \(2x+y-\tfrac{11}2=0\ (4x+2y-11=0)\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 12 — Longueur de tangente (puissance d'un point)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(C:x^2+y^2+x-3y-3=0\), \(A(1,-2)\), tangente touchant \(C\) en \(M\). Calculer \(AM\).</div>
+        <p>La puissance de \(A\) = valeur du premier membre évaluée en \(A\) :
+        \(\mathrm{pow}(A)=1+4+1-3(-2)-3=1+4+1+6-3=9\).</p>
+        <p>Or pour une tangente \(AM^2=\mathrm{pow}(A)\). Contrôle : centre \(\Omega(-\tfrac12,\tfrac32)\), \(R^2=\tfrac14+\tfrac94+3=\tfrac{11}2\),
+        \(A\Omega^2=\tfrac94+\tfrac{49}4=\tfrac{58}4=\tfrac{29}2\), \(AM^2=A\Omega^2-R^2=\tfrac{29}2-\tfrac{11}2=9\).</p>
+        <p class="res">\(AM=3\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 13 — Tangentes parallèles à \(D\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(C:x^2+y^2+10x-2y+6=0\), \(D:2x+y-7=0\).</div>
+        <p>Centre \(\Omega(-5,1)\), \(R^2=25+1-6=20\), \(R=2\sqrt5\). Parallèle : \(2x+y+c=0\), tangence :</p>
+        <p>\(\dfrac{|2(-5)+1+c|}{\sqrt5}=2\sqrt5\Rightarrow|c-9|=2\sqrt5\cdot\sqrt5=10\Rightarrow c=19\ \text{ou}\ c=-1\).</p>
+        <p class="res">\(2x+y+19=0\) et \(2x+y-1=0\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 14 — Synthèse (8 questions)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">1) \(D:y=mx+p\) ⟹ directeur \((1,m)\)</p>
+        <p>Points \((0,p)\) et \((1,m+p)\) : différence \((1,m)\). <b>Vrai</b>.</p>
+        <p class="q">2) \(D:3x+4y+1=0\) : directeur, tracé par \(A(1,-1)\)</p>
+        <p>Directeur \((b,-a)=(4,-3)\). \(A(1,-1)\) : \(3-4+1=0\) ⟹ \(A\in D\). On trace la droite passant par \(A\) de direction \((4,-3)\).</p>
+        <p class="res">Directeur \(\vec u(4,-3)\), \(A\) appartient à \(D\)</p>
+        <p class="q">3) Hachurer \(3x+4y+1>0\)</p>
+        <p>Test \(O(0,0)\) : \(3\cdot0+4\cdot0+1=1>0\). Le demi-plan solution est <b>celui contenant l'origine</b> (au-dessus/à droite de \(D\)).</p>
+        <p class="q">4) \(\{x=1+3t,\ y=-2-2t\}\) → cartésienne</p>
+        <p>Directeur \((3,-2)\), normale \((2,3)\) : \(2(x-1)+3(y+2)=0\Rightarrow2x+3y+4=0\).</p>
+        <p class="res">\(2x+3y+4=0\)</p>
+        <p class="q">5) \(-x+2y+3=0\) → paramétrique</p>
+        <p>\((a,b)=(-1,2)\), directeur \((b,-a)=(2,1)\). Point \(x=3,y=0\) (\(-3+0+3=0\)).</p>
+        <p class="res">\(\{x=3+2t,\ y=t\}\)</p>
+        <p class="q">6) \(D:x+2y-3=0\), \(A(1,-2)\), projeté \(H\)</p>
+        <p>Normale \((1,2)\) : \(x=1+k,\ y=-2+2k\). Sur \(D\) : \((1+k)+2(-2+2k)-3=0\Rightarrow5k-6=0\Rightarrow k=\tfrac65\).</p>
+        <p class="res">\(H=\big(\tfrac{11}5,\tfrac25\big)\)</p>
+        <p class="q">7) \(A(1,1)\) : translation \((2,-1)\) puis homothétie \((O,-2)\)</p>
+        <p>Translation : \(A\mapsto(3,0)\). Homothétie de centre \(O\), rapport \(-2\) : \((3,0)\mapsto(-6,0)\).</p>
+        <p class="res">Image \(=(-6,0)\)</p>
+        <p class="q">8) \(A(1,2),B(5,2)\) : ensemble des \(M\) tq \(\vec{MA}\cdot\vec{MB}=0\)</p>
+        <p>C'est le cercle de diamètre \([AB]\) : \((x-1)(x-5)+(y-2)^2=0\Rightarrow(x-3)^2+(y-2)^2=4\).</p>
+        <p class="res">Cercle de centre \((3,2)\), rayon \(2\) (milieu de \([AB]\), rayon \(\tfrac{AB}2=2\))</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:1.6rem">Applications concrètes</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Application 15 — Navigation GPS</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Randonneur en \(A(1,2)\), direction \(\vec u(2,1)\) (km) ; refuge \(R(5,1)\).</div>
+        <p class="q">1) Trajectoire</p><p class="res">\(\{x=1+2t,\ y=2+t\}\), \(t\geqslant0\)</p>
+        <p class="q">2) Passe par \(R\) ?</p><p>\(1+2t=5\Rightarrow t=2\), alors \(y=2+2=4\neq1\).</p>
+        <p class="res">Non, la trajectoire ne passe pas par le refuge</p>
+        <p class="q">3) Distance minimale</p>
+        <p>\(\vec{AR}=(4,-1)\), \(\det(\vec{AR},\vec u)=4\cdot1-(-1)\cdot2=6\), \(\|\vec u\|=\sqrt5\). \(d=\dfrac6{\sqrt5}=\dfrac{6\sqrt5}5\approx2{,}68\) km.</p>
+        <p class="res">\(d_{\min}=\dfrac6{\sqrt5}\approx2{,}68\) km</p>
+        <p class="q">4) Point le plus proche</p>
+        <p>\(H=A+\dfrac{\vec{AR}\cdot\vec u}{\|\vec u\|^2}\vec u\) ; \(\vec{AR}\cdot\vec u=8-1=7\), \(t^*=\tfrac75\). \(H=\big(1+\tfrac{14}5,2+\tfrac75\big)=\big(\tfrac{19}5,\tfrac{17}5\big)\).</p>
+        <p class="res">\(H=(3{,}8\,;\,3{,}4)\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Application 16 — Antenne relais & couverture</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Antenne \(A(2,-1)\), rayon 5 km ; village \(V(-1,3)\) ; route \(D:2x-y+4=0\).</div>
+        <p class="q">1) Village couvert ?</p>
+        <p>\(\vec{AV}=(-3,4)\), \(AV=\sqrt{9+16}=5=R\) : le village est <b>exactement sur le bord</b> de la zone (juste couvert, à la limite).</p>
+        <p class="res">\(AV=5=R\) : village en limite de couverture</p>
+        <p class="q">2) La route traverse-t-elle la zone ?</p>
+        <p>\(d(A,D)=\dfrac{|2\cdot2-(-1)+4|}{\sqrt5}=\dfrac9{\sqrt5}\approx4{,}02<5\) ⟹ la route est <b>sécante</b> (2 points).</p>
+        <p class="res">Oui : \(d(A,D)\approx4{,}02<5\)</p>
+        <p class="q">3) Points d'entrée / sortie</p>
+        <p>Cercle \((x-2)^2+(y+1)^2=25\), \(D:y=2x+4\). Report : \((x-2)^2+(2x+5)^2=25\Rightarrow5x^2+16x+4=0\).</p>
+        <p>\(\Delta=256-80=176=16\cdot11\), \(x=\dfrac{-8\pm2\sqrt{11}}5\), \(y=2x+4=\dfrac{4\pm4\sqrt{11}}5\).</p>
+        <p class="res">\(\Big(\tfrac{-8+2\sqrt{11}}5,\tfrac{4+4\sqrt{11}}5\Big)\approx(-0{,}27\,;\,3{,}45)\) et \(\Big(\tfrac{-8-2\sqrt{11}}5,\tfrac{4-4\sqrt{11}}5\Big)\approx(-2{,}93\,;\,-1{,}85)\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Application 17 — Sécurité sur un chantier</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Câble \(D:3x+4y-12=0\) (m) ; ouvrier \(P(1,1)\) ; distance de sécurité 2 m.</div>
+        <p class="q">1) Distance minimale</p><p>\(d(P,D)=\dfrac{|3+4-12|}{\sqrt{9+16}}=\dfrac{5}{5}=1\) m.</p>
+        <p class="res">\(d_{\min}=1\) m</p>
+        <p class="q">2) Point le plus proche</p>
+        <p>Normale \((3,4)\) : \(x=1+3k,\ y=1+4k\). Sur \(D\) : \(3(1+3k)+4(1+4k)-12=0\Rightarrow25k-5=0\Rightarrow k=\tfrac15\). \(H=\big(\tfrac85,\tfrac95\big)\).</p>
+        <p class="res">\(H=(1{,}6\,;\,1{,}8)\)</p>
+        <p class="q">3) Sécurité ?</p><p>\(d_{\min}=1\text{ m}<2\text{ m}\).</p>
+        <p class="res warnbox">L'ouvrier n'est <b>pas</b> en sécurité (1 m &lt; 2 m réglementaires)</p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.4rem">
+      <span class="lab">Bilan Géométrie plane</span>
+      14 exercices de TD + 3 applications concrètes traités intégralement. Outils récurrents : produit scalaire (angles, Al-Kashi),
+      déterminant (aire, alignement), équations de droites (paramétrique / cartésienne / normale), formule de distance point–droite,
+      complétion de carré et puissance d'un point pour les cercles.
+    </div>
+  </section>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours / ressource</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/geometrie-plane/G%C3%A9om%C3%A9trie-Plane%20-%20V2026.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Géométrie-Plane - V2026</span><span class="badge">Cours / ressource</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/geometrie-plane/TD-V2026%20-%20G%C3%A9om%C3%A9trie%20Plane-Impression.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD-V2026 - Géométrie Plane-Impression</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Document</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/geometrie-plane/Applications%20concretes%20-G%C3%A9om%C3%A9trie%20dans%20le%20plan-.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Applications concretes -Géométrie dans le plan-</span><span class="badge">Document</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

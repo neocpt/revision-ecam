@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sommes et produits — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-math">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Maths · M01 — Chapitre 5</span>
+  <h1 class="title">Sommes et produits</h1>
+  <p class="lead">Le symbole \(\sum\) et \(\prod\) : linéarité, changements d'indices, télescopage, sommes
+  arithmétiques et géométriques, sommes doubles, factorielle, coefficients binomiaux et binôme de Newton.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD n°5</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 La somme \(\sum\)</h3>
+    <div class="def">
+      <span class="lab">Notation</span>
+      \(\displaystyle\sum_{i=m}^{n}u_i=u_m+u_{m+1}+\cdots+u_n\) (\(n-m+1\) termes). Conventions : somme
+      <b>vide</b> nulle si \(m>n\) ; l'indice est <b>muet</b> (\(\sum_i u_i=\sum_j u_j\)) et n'a de sens
+      qu'à l'intérieur de la somme.
+    </div>
+    <div class="thm">
+      <span class="lab">Sommes d'Euler</span>
+      \[ \sum_{k=0}^{n}k=\frac{n(n+1)}{2},\quad \sum_{k=0}^{n}k^2=\frac{n(n+1)(2n+1)}{6},\quad \sum_{k=0}^{n}k^3=\frac{n^2(n+1)^2}{4}. \]
+    </div>
+    <div class="thm">
+      <span class="lab">Linéarité, Chasles, télescopage</span>
+      <ul style="margin:.3rem 0 0">
+        <li>Linéarité : \(\sum(u_i+\lambda v_i)=\sum u_i+\lambda\sum v_i\).</li>
+        <li>Chasles : \(\sum_{i=m}^n=\sum_{i=m}^k+\sum_{i=k+1}^n\).</li>
+        <li><b>Télescopage</b> : \(\displaystyle\sum_{k=m}^n(u_{k+1}-u_k)=u_{n+1}-u_m\).</li>
+        <li>Changement d'indice par translation \(j=i+k\) ou retournement \(j=k-i\) (jamais « sauter » des indices).</li>
+      </ul>
+    </div>
+    <div class="thm">
+      <span class="lab">Sommes usuelles</span>
+      <ul style="margin:.3rem 0 0">
+        <li>Arithmétique (raison \(r\)) : \(\displaystyle\sum_{k=m}^n u_k=\frac{u_m+u_n}{2}\,(n-m+1)\).</li>
+        <li>Géométrique (raison \(q\neq1\)) : \(\displaystyle\sum_{k=m}^n u_k=u_m\,\frac{1-q^{\,n-m+1}}{1-q}\) ;
+        et \(\displaystyle\sum_{k=0}^n q^k=\frac{1-q^{n+1}}{1-q}\).</li>
+        <li>Bernoulli : \(a^n-b^n=(a-b)\displaystyle\sum_{k=0}^{n-1}a^{n-1-k}b^k\).</li>
+      </ul>
+    </div>
+    <div class="note">
+      <span class="lab">Sommes doubles</span>
+      Sur un <b>rectangle</b> (indices indépendants) on intervertit librement :
+      \(\displaystyle\sum_{i=m}^n\sum_{j=p}^q u_{ij}=\sum_{j=p}^q\sum_{i=m}^n u_{ij}\), et
+      \(\big(\sum_i u_i\big)\big(\sum_j v_j\big)=\sum_{i,j}u_iv_j\). Sur un <b>triangle</b>
+      \(\{i\leqslant j\}\) : \(\displaystyle\sum_{m\leqslant i\leqslant j\leqslant n}=\sum_{j=m}^n\sum_{i=m}^j=\sum_{i=m}^n\sum_{j=i}^n\).
+      Aussi \(\big(\sum_i u_i\big)^2=\sum_i u_i^2+2\sum_{i<j}u_iu_j\).
+    </div>
+
+    <h3>1.2 Le produit \(\prod\) et la factorielle</h3>
+    <div class="def">
+      <span class="lab">Produit</span>
+      \(\displaystyle\prod_{i=m}^n u_i=u_m\cdots u_n\), produit vide \(=1\). Règles :
+      \(\prod(\lambda u_i)=\lambda^p\prod u_i\) (\(p\) = nb de termes), \(\prod(u_iv_i)=\prod u_i\prod v_i\),
+      \(\prod u_i^\alpha=\big(\prod u_i\big)^\alpha\). <b>Non linéaire !</b>
+    </div>
+    <div class="thm">
+      <span class="lab">Produit télescopique &amp; factorielle</span>
+      \(\displaystyle\prod_{k=m}^n\frac{u_{k+1}}{u_k}=\frac{u_{n+1}}{u_m}\). Factorielle
+      \(n!=\prod_{k=1}^n k\), avec \(0!=1\) et \((n-1)!=\dfrac{n!}{n}\). On ne simplifie jamais \((2n)!\) « en bloc ».
+    </div>
+
+    <h3>1.3 Coefficients binomiaux</h3>
+    <div class="def">
+      <span class="lab">Définition</span>
+      \(\displaystyle\binom np=\frac{n!}{p!(n-p)!}\) si \(p\in[\![0,n]\!]\), sinon \(0\). Interprétation : nombre de
+      façons de choisir \(p\) éléments parmi \(n\). Cas usuels : \(\binom n0=1\), \(\binom n1=n\), \(\binom n2=\tfrac{n(n-1)}2\).
+    </div>
+    <div class="thm">
+      <span class="lab">Formules</span>
+      <ul style="margin:.3rem 0 0">
+        <li>Symétrie : \(\binom np=\binom{n}{n-p}\).</li>
+        <li>« Capitaine » : \(n\binom{n-1}{p-1}=p\binom np\).</li>
+        <li>Pascal : \(\binom np=\binom{n-1}{p}+\binom{n-1}{p-1}\) (triangle de Pascal).</li>
+      </ul>
+    </div>
+    <div class="thm">
+      <span class="lab">Binôme de Newton</span>
+      \[ (a+b)^n=\sum_{k=0}^n\binom nk a^k b^{\,n-k}=\sum_{k=0}^n\binom nk a^{n-k}b^k. \]
+    </div>
+  </section>
+
+  <!-- ==================== EXOS CRÉÉS ============================= -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Télescopage par décomposition</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Calculer \(\displaystyle S_n=\sum_{k=1}^{n}\frac{1}{k(k+1)}\).</div>
+        <p>On décompose en éléments simples : \(\dfrac{1}{k(k+1)}=\dfrac1k-\dfrac1{k+1}\). D'où par télescopage :</p>
+        \[ S_n=\sum_{k=1}^n\left(\frac1k-\frac1{k+1}\right)=1-\frac1{n+1}. \]
+        <div class="res">\(S_n=\dfrac{n}{n+1}\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Somme binomiale pondérée</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Calculer \(\displaystyle T_n=\sum_{k=0}^{n}k\binom nk\).</div>
+        <p>Le terme \(k=0\) est nul. Pour \(k\geqslant1\), on utilise la formule du capitaine
+        \(k\binom nk=n\binom{n-1}{k-1}\) :</p>
+        \[ T_n=\sum_{k=1}^n n\binom{n-1}{k-1}=n\sum_{k=1}^n\binom{n-1}{k-1}=n\sum_{j=0}^{n-1}\binom{n-1}{j}. \]
+        <p>La dernière somme vaut \(2^{n-1}\) (binôme de Newton avec \(a=b=1\)).</p>
+        <div class="res">\(T_n=n\,2^{\,n-1}\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Somme double avec \(\min(i,j)\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Calculer \(\displaystyle M_n=\sum_{1\leqslant i,j\leqslant n}\min(i,j)\).</div>
+        <p>On compte selon la valeur \(m=\min(i,j)\). Le nombre de couples \((i,j)\) avec \(\min=m\) est
+        \((n-m+1)^2-(n-m)^2=2(n-m)+1\) (les deux \(\geqslant m\), moins les deux \(\geqslant m+1\)). Donc :</p>
+        \[ M_n=\sum_{m=1}^n m\big(2(n-m)+1\big)=(2n+1)\sum_{m=1}^n m-2\sum_{m=1}^n m^2. \]
+        \[ =(2n+1)\frac{n(n+1)}2-2\frac{n(n+1)(2n+1)}6=n(n+1)(2n+1)\left(\frac12-\frac13\right). \]
+        <div class="res">\(M_n=\dfrac{n(n+1)(2n+1)}{6}\).</div>
+        <p style="font-size:.9rem;opacity:.85">Cohérent avec \(\sum\max+\sum\min=\sum(i+j)=n^2(n+1)\).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CORRECTION TD ========================== -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD n°5 — Sommes &amp; Produits</h2>
+    <p class="lead" style="font-size:.95rem">Feuille sans corrigé officiel : les 12 exercices sont résolus
+    intégralement, chaque sous-question traitée.</p>
+
+    <h3>Partie 1 — Se familiariser avec \(\sum\)</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — Écrire avec \(\sum\)</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(1-a+a^2-a^3+\cdots+a^{2n}-a^{2n+1}\)</p>
+        <p>Terme général \((-1)^k a^k\), \(k\) de \(0\) à \(2n+1\).</p>
+        <p class="res">\(\displaystyle\sum_{k=0}^{2n+1}(-1)^k a^k\)</p>
+        <p class="q">(b) \(\dfrac11-\dfrac22+\dfrac43-\dfrac84+\cdots+\dfrac{2^{2026}}{2027}\)</p>
+        <p>Terme général \((-1)^k\dfrac{2^k}{k+1}\), \(k\) de \(0\) à \(2026\).</p>
+        <p class="res">\(\displaystyle\sum_{k=0}^{2026}(-1)^k\frac{2^k}{k+1}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — Écrire sans \(\sum\)</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\sum_{k=0}^3(2+k)\)</p><p class="res">\(2+3+4+5=14\)</p>
+        <p class="q">(b) \(\sum_{k=2}^2 n^k\)</p><p>Un seul terme (\(k=2\)).</p><p class="res">\(n^2\)</p>
+        <p class="q">(c) \(\sum_{k=1}^5 k^2\)</p><p class="res">\(1+4+9+16+25=55\)</p>
+        <p class="q">(d) \(\sum_{j=7}^5 \dfrac{j^2}{j+1}\)</p><p>Borne basse \(>\) borne haute : somme vide.</p><p class="res">\(0\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — Vrai / faux</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\sum_{k=1}^n(\alpha+a_k)=\alpha+\sum a_j\)</p>
+        <p><b>Faux</b> : le membre de gauche vaut \(n\alpha+\sum a_k\) (le terme constant est sommé \(n\) fois).</p>
+        <p class="q">(b) \(\sum(a_k+b_k)=\sum a_j+\sum b_k\)</p><p><b>Vrai</b> (linéarité).</p>
+        <p class="q">(c) \(\sum a_k^\alpha=\big(\sum a_k\big)^\alpha\)</p><p><b>Faux</b> : une somme de puissances n'est pas la puissance de la somme.</p>
+        <p class="q">(d) \(\sum a_kb_k=\big(\sum a_k\big)\big(\sum b_k\big)\)</p><p><b>Faux</b> : le produit de sommes contient tous les termes croisés \(a_ib_j\).</p>
+      </div>
+    </div>
+
+    <h3>Partie 2 — Sommes simples et doubles</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — Sommes simples</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\sum_{k=2}^{n+1}3\)</p><p>\(3\times(\text{nb de termes})=3n\).</p><p class="res">\(3n\)</p>
+        <p class="q">(b) \(\sum_{k=1}^n 2k=2\cdot\frac{n(n+1)}2\)</p><p class="res">\(n(n+1)\)</p>
+        <p class="q">(c) \(\sum_{k=0}^n(k+2)=\frac{n(n+1)}2+2(n+1)\)</p><p class="res">\(\dfrac{(n+1)(n+4)}2\)</p>
+        <p class="q">(d) \(\sum_{k=0}^n(k-1)^2\)</p><p>Changement \(j=k-1\) : \(\sum_{j=-1}^{n-1}j^2=1+\sum_{j=0}^{n-1}j^2\).</p><p class="res">\(1+\dfrac{(n-1)n(2n-1)}6\)</p>
+        <p class="q">(e) \(\sum_{k=2}^{n-1}3^{k-2}\)</p><p>\(j=k-2\) : \(\sum_{j=0}^{n-3}3^j=\frac{3^{n-2}-1}{3-1}\).</p><p class="res">\(\dfrac{3^{n-2}-1}{2}\)</p>
+        <p class="q">(f) \(\sum_{k=n}^{2n}\dfrac{2^{k-1}}{3^{k+2}}\)</p>
+        <p>\(\dfrac{2^{k-1}}{3^{k+2}}=\dfrac1{18}\left(\dfrac23\right)^k\). Somme géométrique (\(n+1\) termes, \(q=\tfrac23\)) :</p>
+        \[ \frac1{18}\sum_{k=n}^{2n}\Big(\tfrac23\Big)^k=\frac1{18}\cdot\Big(\tfrac23\Big)^n\cdot\frac{1-(2/3)^{n+1}}{1-2/3}. \]
+        <p class="res">\(\dfrac16\left(\dfrac23\right)^n\left(1-\left(\dfrac23\right)^{n+1}\right)\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — Télescopage (avec \(\ln\))</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\sum_{k=1}^n\ln\!\big(1+\tfrac1k\big)\)</p>
+        <p>\(=\sum\ln\frac{k+1}k=\sum(\ln(k+1)-\ln k)=\ln(n+1)-\ln1\).</p><p class="res">\(\ln(n+1)\)</p>
+        <p class="q">(b) \(\sum_{k=1}^n\ln\!\big(1+\tfrac2k\big)\)</p>
+        <p>\(=\sum\ln\frac{k+2}k=\sum\ln(k+2)-\sum\ln k=\big[\ln(n+1)+\ln(n+2)\big]-\big[\ln1+\ln2\big]\).</p>
+        <p class="res">\(\ln\dfrac{(n+1)(n+2)}{2}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — Regroupement pair/impair</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\sum_{k=0}^{2n}\cos(k\pi)\)</p>
+        <p>\(\cos(k\pi)=(-1)^k\). \(\sum_{k=0}^{2n}(-1)^k=(n+1)-n=1\) (pairs \(-\) impairs).</p><p class="res">\(1\)</p>
+        <p class="q">(b) \(\sum_{k=0}^{2n}(-1)^k k^2\)</p>
+        <p>On utilise \(\sum_{k=1}^m(-1)^k k^2=(-1)^m\frac{m(m+1)}2\) (récurrence). Ici \(m=2n\) (pair) :</p>
+        <p class="res">\(\dfrac{2n(2n+1)}2=n(2n+1)\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 7 — Sommes doubles</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\sum_{1\leqslant i\leqslant n,\,1\leqslant j\leqslant q}i=\sum_{i=1}^n q\,i=q\cdot\frac{n(n+1)}2\)</p><p class="res">\(\dfrac{q\,n(n+1)}2\)</p>
+        <p class="q">(b) \(\sum_{1\leqslant i,j\leqslant n}(i-j)\)</p><p>Antisymétrique en \((i,j)\) : chaque \((i,j)\) s'annule avec \((j,i)\).</p><p class="res">\(0\)</p>
+        <p class="q">(c) \(\sum_{1\leqslant i,j\leqslant n}ij=\big(\sum i\big)\big(\sum j\big)=\left(\frac{n(n+1)}2\right)^2\)</p><p class="res">\(\dfrac{n^2(n+1)^2}4\)</p>
+        <p class="q">(d) \(\sum_{1\leqslant i,j\leqslant n}(i+j)^2\)</p>
+        <p>\((i+j)^2=i^2+2ij+j^2\) : \(2n\sum i^2+2\big(\sum i\big)^2=\frac{n^2(n+1)(2n+1)}3+\frac{n^2(n+1)^2}2\).</p>
+        <p class="res">\(\dfrac{n^2(n+1)(7n+5)}6\)</p>
+        <p class="q">(e) \(\sum_{1\leqslant i,j\leqslant n}\max(i,j)\)</p>
+        <p>Nb de couples de \(\max=m\) : \(2m-1\). \(\sum_{m=1}^n m(2m-1)=2\frac{n(n+1)(2n+1)}6-\frac{n(n+1)}2\).</p>
+        <p class="res">\(\dfrac{n(n+1)(4n-1)}6\)</p>
+        <p class="q">(f) \(\sum_{1\leqslant i\leqslant j\leqslant n}(i+j)\)</p>
+        <p>\(=\sum_{j=1}^n\Big(\frac{j(j+1)}2+j^2\Big)=\sum_{j=1}^n\frac{3j^2+j}2=\frac12\Big(3\frac{n(n+1)(2n+1)}6+\frac{n(n+1)}2\Big)\).</p>
+        <p class="res">\(\dfrac{n(n+1)^2}2\)</p>
+        <p class="q">(g) \(\sum_{1\leqslant i\leqslant j\leqslant n}\dfrac ij\)</p>
+        <p>\(=\sum_{j=1}^n\frac1j\sum_{i=1}^j i=\sum_{j=1}^n\frac1j\cdot\frac{j(j+1)}2=\sum_{j=1}^n\frac{j+1}2\).</p>
+        <p class="res">\(\dfrac{n(n+3)}4\)</p>
+        <p class="q">(h) \(\sum_{1\leqslant i<j\leqslant n}ij\)</p>
+        <p>\(=\dfrac{\big(\sum i\big)^2-\sum i^2}2=\dfrac12\left(\frac{n^2(n+1)^2}4-\frac{n(n+1)(2n+1)}6\right)\).</p>
+        <p class="res">\(\dfrac{(n-1)n(n+1)(3n+2)}{24}\)</p>
+      </div>
+    </div>
+
+    <h3>Partie 3 — Produits</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 8 — Écrire sans \(\prod\)</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\prod_{k=1}^5 k^2=(1\cdot2\cdot3\cdot4\cdot5)^2=120^2\)</p><p class="res">\(14400\)</p>
+        <p class="q">(b) \(\prod_{s=0}^4\dfrac{s^2}{s^2+1}\)</p><p>Le facteur \(s=0\) vaut \(\frac{0}{1}=0\).</p><p class="res">\(0\)</p>
+        <p class="q">(c) \(\prod_{n=1}^4\dfrac{x^{2n+4}}{n}\)</p><p>\(=\dfrac{x^{\sum(2n+4)}}{4!}=\dfrac{x^{36}}{24}\) (car \(\sum_{n=1}^4(2n+4)=36\)).</p><p class="res">\(\dfrac{x^{36}}{24}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 9 — Vrai / faux (produits)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\prod(\alpha a_k)=\alpha\prod a_k\)</p><p><b>Faux</b> : \(\prod(\alpha a_k)=\alpha^n\prod a_k\).</p>
+        <p class="q">(b) \(\prod(a_kb_k)=\big(\prod a_j\big)\big(\prod b_k\big)\)</p><p><b>Vrai</b>.</p>
+        <p class="q">(c) \(\prod(a_k+b_k)=\prod a_k+\prod b_k\)</p><p><b>Faux</b> : le produit n'est pas linéaire.</p>
+        <p class="q">(d) \(\prod a_k^\beta=\big(\prod a_k\big)^\beta\)</p><p><b>Vrai</b>.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 10 — Calculer des produits</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\prod_{k=3}^n k^2=\big(\prod_{k=3}^n k\big)^2=\left(\frac{n!}{2}\right)^2\)</p><p class="res">\(\dfrac{(n!)^2}{4}\)</p>
+        <p class="q">(b) \(\prod_{k=1}^n\dfrac{2k+1}{2k-1}\)</p><p>Télescopique : \(\frac31\cdot\frac53\cdot\frac75\cdots\frac{2n+1}{2n-1}\).</p><p class="res">\(2n+1\)</p>
+        <p class="q">(c) \(\prod_{k=2}^n\big(1-\tfrac1k\big)=\prod\frac{k-1}k=\frac12\cdot\frac23\cdots\frac{n-1}n\)</p><p class="res">\(\dfrac1n\)</p>
+        <p class="q">(d) \(\prod_{k=2}^n\big(1-\tfrac1{k^2}\big)=\prod\frac{(k-1)(k+1)}{k^2}=\underbrace{\prod\tfrac{k-1}k}_{1/n}\cdot\underbrace{\prod\tfrac{k+1}k}_{(n+1)/2}\)</p><p class="res">\(\dfrac{n+1}{2n}\)</p>
+      </div>
+    </div>
+
+    <h3>Partie 4 — Somme et produit : le binôme</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 11 — Sommes binomiales</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\sum_{k=0}^n\binom nk=(1+1)^n\)</p><p class="res">\(2^n\)</p>
+        <p class="q">(b) \(\sum_{k=0}^n\binom nk 2^k=(2+1)^n\)</p><p class="res">\(3^n\)</p>
+        <p class="q">(c) \(\sum_{k=0}^n(-1)^k\binom nk=(1-1)^n\)</p><p class="res">\(0\) (pour \(n\geqslant1\))</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 12 — Identité de Vandermonde-like</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\((n,p,q)\in\mathbb N^3\), \(p\leqslant q\leqslant n\).</div>
+        <p class="q">(a) \(\binom{n-p}{q-p}\binom np=\binom nq\binom qp\)</p>
+        <p>On développe les deux membres avec les factorielles :</p>
+        \[ \binom np\binom{n-p}{q-p}=\frac{n!}{p!(n-p)!}\cdot\frac{(n-p)!}{(q-p)!(n-q)!}=\frac{n!}{p!\,(q-p)!\,(n-q)!}, \]
+        \[ \binom nq\binom qp=\frac{n!}{q!(n-q)!}\cdot\frac{q!}{p!(q-p)!}=\frac{n!}{p!\,(q-p)!\,(n-q)!}. \]
+        <p class="res">Les deux membres sont égaux. ∎</p>
+        <p class="q">(b) En déduire \(\sum_{p=0}^q\binom{n-p}{q-p}\binom np\)</p>
+        <p>Par (a), chaque terme vaut \(\binom nq\binom qp\), et \(\binom nq\) ne dépend pas de \(p\) :</p>
+        \[ \sum_{p=0}^q\binom{n-p}{q-p}\binom np=\binom nq\sum_{p=0}^q\binom qp=\binom nq\cdot 2^q. \]
+        <p class="res">\(\displaystyle\sum_{p=0}^q\binom{n-p}{q-p}\binom np=2^q\binom nq\)</p>
+      </div>
+    </div>
+
+  </section>
+
+  <p style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.9rem;opacity:.75">
+    Chapitre 5 du cours M01 (S1). Sources : <em>Chap_5.pdf</em> (cours magistral) et
+    <em>TD05 — Sommes et Produits</em>. Corrigé rédigé intégralement (pas de corrigé officiel fourni).
+  </p>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours (CM)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/sommes-produits/Chap_5.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Chap_5</span><span class="badge">Cours (CM)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/sommes-produits/TD05___Sommes_et_Produits.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD05___Sommes_et_Produits</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

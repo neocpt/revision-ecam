@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C07 — Schéma-bloc & performances d'un asservissement — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-sii">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SII · C07 — Performances d'un système asservi (modèle de connaissance)</span>
+  <h1 class="title">C07 — Évaluer les performances d'un système asservi à partir d'un modèle de connaissance</h1>
+  <p class="lead">Schéma-bloc (bloc, sommateur, prélèvement) ; algèbre des blocs (série, parallèle, <b>boucle fermée</b> \(\tfrac{D}{1+DR}\)) ;
+  relation IHM–capteur \(K_{IHM}=\tfrac{K_{capt}}{H}\) ; <b>théorème de superposition</b> (poursuite / régulation) ; <b>précision</b> :
+  erreur de poursuite (échelon, rampe) et erreur de régulation (perturbation).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction du TD (réduction de schéma-bloc, MCC à 2 entrées, RAMSES…)</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Schéma-bloc & algèbre des blocs</h3>
+    <div class="def">
+      <span class="lab">Trois éléments</span>
+      <b>Bloc</b> (une FT \(H(p)\)), <b>sommateur/soustracteur</b> (plusieurs entrées, une sortie : \(S=E_1+E_2-E_3\)),
+      <b>point de prélèvement</b> (prélève sans modifier).
+    </div>
+    <div class="thm">
+      <span class="lab">Associations</span>
+      <b>Série</b> : \(H=H_1H_2H_3\). <b>Parallèle</b> : \(H=H_1+H_2\) (avec les signes). <b>Boucle fermée</b> :
+      \[ \boxed{\ H(p)=\frac{D(p)}{1+D(p)R(p)}\ } \]
+      \(D\) = chaîne directe, \(R\) = chaîne de retour. Retour unitaire : \(R=1\) → \(\tfrac{D}{1+D}\).
+      Démarche : traiter les <b>boucles internes d'abord</b>, simplifier sans développer, multiplier haut et bas par le dénominateur du dénominateur, puis forme canonique à la fin.
+    </div>
+    <div class="note">
+      <span class="lab">Relation IHM ↔ capteur (mesure indirecte)</span>
+      Pour que l'image de l'erreur \(\varepsilon\) soit nulle quand l'erreur l'est : \(K_{IHM}=\dfrac{K_{capt}}{H(p)}\)
+      (image de la consigne et de la réponse proportionnelles avec le <b>même coefficient</b>). Composants usuels = gains purs
+      (capteurs, hacheur, réducteur \(K=i\), vis-écrou \(K=\tfrac{p}{2\pi}\)).
+    </div>
+
+    <h3>1.2 Précision en poursuite (perturbation nulle)</h3>
+    <div class="thm">
+      <span class="lab">Consigne en échelon \(E_0\)</span>
+      Modèle stable (classe 0) <b>sans dérivateur</b>. \(e_{pour}=E_0(1-K)\), erreur relative \(e_{pour}\%=1-K\).
+      <b>Parfaitement précis ⟺ gain statique \(K=1\)</b> (sans dimension).
+    </div>
+    <div class="thm">
+      <span class="lab">Consigne en rampe de pente \(V_0\)</span>
+      Erreur \(=\displaystyle\lim_{p\to0}p\,E_c(p)\,(1-H(p))\) avec \(E_c=\tfrac{V_0}{p^2}\). Pour \(H=\dfrac{1}{1+ap+bp^2}\) (\(K=1\)) :
+      \(e_{pour}(+\infty)=a\,V_0\). Si \(K\neq1\), l'erreur → \(+\infty\) (pas de régime permanent).
+    </div>
+
+    <h3>1.3 Régulation & superposition</h3>
+    <div class="thm">
+      <span class="lab">Théorème de superposition (2 entrées)</span>
+      \(S(p)=H_1(p)E(p)+H_2(p)P(p)\), avec \(H_1=\tfrac SE|_{P=0}\) (poursuite) et \(H_2=\tfrac SP|_{E=0}\) (régulation).
+      La réponse totale = somme des réponses à chaque entrée.
+    </div>
+    <div class="note">
+      <span class="lab">Erreur de régulation (perturbation en échelon \(P_0\))</span>
+      \(e_{reg}=-\Delta s(+\infty)\). Si \(\Delta s(+\infty)=0\) : <b>insensible</b> à la perturbation ; sinon
+      sensibilité \(e_{reg}\%=-\dfrac{\Delta s(+\infty)}{P_0}\). Un correcteur à action <b>intégrale</b> rend insensible ;
+      un correcteur proportionnel laisse une erreur.
+    </div>
+    <div class="method">
+      <span class="lab">Manipuler les sommateurs</span>
+      Multiplier une branche entrante par \(-1\) change son signe ; multiplier la sortie par \(-1\) change tous les signes.
+      Un sommateur à 2 entrées dont une est nulle = gain unitaire du signe de l'entrée restante.
+    </div>
+  </section>
+
+  <!-- ======================= EXOS CRÉÉS =============================== -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Réduction de boucle fermée</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Chaîne directe \(D(p)=\dfrac{K}{p(1+\tau p)}\), retour unitaire \(R=1\). FT en boucle fermée ?</div>
+        <p>\(H=\dfrac{D}{1+D}=\dfrac{\frac{K}{p(1+\tau p)}}{1+\frac{K}{p(1+\tau p)}}=\dfrac{K}{p(1+\tau p)+K}=\dfrac{K}{K+p+\tau p^2}\).</p>
+        <p>Canonique : \(H=\dfrac{1}{1+\frac1K p+\frac{\tau}{K}p^2}\).</p>
+        <p class="res">\(K_{stat}=1\) (précis en poursuite échelon), classe 0, ordre 2. Identifiable à un 2ᵉ ordre : \(\omega_0=\sqrt{K/\tau}\), \(z=\tfrac{1}{2\sqrt{K\tau}}\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Erreurs de poursuite</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(H(p)=\dfrac{0{,}8}{1+2p}\) (asservi, stable, sans dérivateur).</div>
+        <p class="q">Échelon \(E_0=10\)</p><p>\(e_{pour}=E_0(1-K)=10(1-0{,}8)=2\), soit \(e\%=20\%\).</p><p class="res">\(e_{pour}=2\) (20 %) — imprécis car \(K\neq1\)</p>
+        <p class="q">Rampe</p><p>\(K\neq1\) ⟹ l'erreur en rampe diverge (\(+\infty\)) : pas de régime permanent.</p>
+        <p class="res">Erreur de traînage infinie (à corriger par un intégrateur)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CORRECTION TD =============================== -->
+  <section class="block" id="td">
+    <h2>3. Correction du TD</h2>
+    <p class="lead" style="font-size:.95rem">Source : <i>S2I-C07-TD</i> (schéma-bloc, poursuite, régulation, superposition). <b>Pas de corrigé officiel</b> → résolu et vérifié maison.</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Réduction de schéma-bloc (exemple du cours)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Réduire pas à pas : boucle interne \(\tfrac1p\) / retour 4, série \(\tfrac{2}{2+p}\), parallèle \(\tfrac1p\), série \(\tfrac{2}{p+2}\).</div>
+        <p class="q">1) Boucle interne</p><p>\(H_1=\dfrac{1/p}{1+4/p}=\dfrac{1}{p+4}\).</p>
+        <p class="q">2) Série</p><p>\(H_2=\dfrac{1}{p+4}\cdot\dfrac{2}{2+p}=\dfrac{2}{(p+4)(p+2)}\).</p>
+        <p class="q">3) Parallèle</p><p>\(H_3=\dfrac{2}{(p+4)(p+2)}+\dfrac1p=\dfrac{p^2+8p+8}{p(p+4)(p+2)}\).</p>
+        <p class="q">4) Série + forme canonique</p><p>\(H=H_3\cdot\dfrac{2}{p+2}=\dfrac{2(p^2+8p+8)}{p(p+4)(p+2)^2}\).</p>
+        <p class="res">\(H=\dfrac1p\cdot\dfrac{1+p+\frac{p^2}{8}}{1+\frac54 p+\frac12 p^2+\frac1{16}p^3}\) : <b>classe 1</b>, gain statique unitaire, ordre 4</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2.4 — Moteur à courant continu (2 entrées)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(U_m=E+(R+Lp)I\), \(E=K_e\Omega\), \(C_m=K_cI\), \(C_m-C_r-f\Omega=Jp\Omega\). Valeurs : \(R=2{,}5\,\Omega\), \(L=7{,}5\,\)mH, \(K_e=K_c=0{,}11\), \(J=5\cdot10^{-5}\), \(f=0{,}01\).</div>
+        <p class="q">Q3–Q4 — Fonctions de transfert</p>
+        <p>En éliminant \(I\) et \(E\), on pose \(D(p)=(f+Jp)(R+Lp)+K_cK_e\). Alors :</p>
+        <p class="res">\(\dfrac{\Omega}{U_m}\Big|_{C_r=0}=\dfrac{K_c}{D(p)}\) ; \(\dfrac{\Omega}{C_r}\Big|_{U_m=0}=\dfrac{-(R+Lp)}{D(p)}\)</p>
+        <p class="q">Q5 — Superposition</p>
+        <p>\(\Omega(p)=\dfrac{K_c}{D(p)}U_m(p)-\dfrac{R+Lp}{D(p)}C_r(p)\).</p>
+        <p class="q">Q6 — Valeur finale (échelons \(U_{m0}\), \(C_{r0}\))</p>
+        <p>\(\omega(+\infty)=\displaystyle\lim_{p\to0}p\,\Omega(p)=\dfrac{K_cU_{m0}-R\,C_{r0}}{fR+K_cK_e}\).</p>
+        <p class="q">Q8 — Applications numériques</p>
+        <p>\(fR+K_cK_e=0{,}01\cdot2{,}5+0{,}11^2=0{,}025+0{,}0121=0{,}0371\).</p>
+        <table>
+          <tr><th>\(U_{m0}\) (V)</th><th>\(C_{r0}\) (N·m)</th><th>\(\omega(+\infty)\) (rad/s)</th></tr>
+          <tr><td>10</td><td>0</td><td>\(\frac{1{,}1}{0{,}0371}\approx29{,}6\)</td></tr>
+          <tr><td>10</td><td>0,3</td><td>\(\frac{1{,}1-0{,}75}{0{,}0371}\approx9{,}4\)</td></tr>
+          <tr><td>0</td><td>0,3</td><td>\(\frac{-0{,}75}{0{,}0371}\approx-20{,}2\)</td></tr>
+        </table>
+        <p class="q">Q10 — Conclusion</p>
+        <p class="res">Système <b>stable</b> (2ᵉ ordre, coeffs positifs), mais <b>très sensible</b> au couple résistant (29,6 → 9,4 rad/s sous 0,3 N·m) : non asservi, il ne régule pas la vitesse — d'où l'intérêt de l'asservissement (C02, C06).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2.1 — RAMSES (poursuite & régulation)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Correcteur <b>dérivateur</b> \(u_r=A\dot\varepsilon\) ; réservoir \(q_e-q_s=S\dot h\) (\(q_s\) = perturbation).</div>
+        <p class="q">Q3 — \(F_1=\tfrac{H}{H_c}|_{Q_s=0}\), précision en poursuite</p>
+        <p>La chaîne directe contient un <b>dérivateur</b> (\(Ap\)) puis une <b>intégration</b> réservoir (\(\tfrac1{Sp}\)) : le \(p\) se simplifie, donnant une classe 0.
+        Le gain statique dépend des gains ; s'il vaut 1 le système est précis en poursuite échelon.</p>
+        <p class="res">La FT en poursuite est de classe 0 (dérivateur × intégrateur) : précis en échelon si \(K=1\).</p>
+        <p class="q">Q4 — \(F_2=\tfrac{H}{Q_s}|_{H_c=0}\), sensibilité</p>
+        <p>Pour la perturbation \(q_s\), la chaîne de retour comporte le dérivateur : la FT en régulation possède un <b>dérivateur</b> (classe « négative »).</p>
+        <p class="res">\(F_2\) avec dérivateur ⟹ \(\Delta h(+\infty)=0\) pour un \(q_s\) en échelon : système <b>insensible</b> à la perturbation de débit sortant (grâce au correcteur dérivateur/intégral).</p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.4rem">
+      <span class="lab">Bilan C07</span>
+      On assemble les modèles de connaissance en <b>schéma-bloc</b>, on le <b>réduit</b> (boucles internes d'abord, formule \(\tfrac{D}{1+DR}\)),
+      on obtient les FT en <b>poursuite</b> et en <b>régulation</b> (superposition), puis on évalue la <b>précision</b> :
+      erreur d'échelon \(E_0(1-K)\) (nulle ⟺ \(K=1\)), erreur de rampe \(aV_0\), erreur de régulation \(-\Delta s(+\infty)\) (nulle si action intégrale).
+      Autres exercices du TD (axe machine-outil, enceinte chauffante, Cablecam, suspension camion, servocommande A380) : même démarche de synthèse + précision.
+    </div>
+  </section>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c07-performances/S2I-C07-TD-%C3%89valuer%20les%20performances%20d%E2%80%99un%20syst%C3%A8me%20asservi%20%C3%A0%20partir%20d%E2%80%99un%20mod%C3%A8le%20de%20connaissance.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C07-TD-Évaluer les performances d’un système asservi à partir d’un modèle de connaissance</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/sii/c07-performances/S2I-C07-TD4-%C3%89valuer%20les%20performances%20d%E2%80%99un%20syst%C3%A8me%20asservi%20%C3%A0%20partir%20d%E2%80%99un%20mod%C3%A8le%20de%20connaissance.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C07-TD4-Évaluer les performances d’un système asservi à partir d’un modèle de connaissance</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Évaluation</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c07-performances/S2I-C07-%C3%89valuer%20les%20performances%20d%E2%80%99un%20syst%C3%A8me%20asservi%20%C3%A0%20partir%20d%E2%80%99un%20mod%C3%A8le%20de%20connaissance.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C07-Évaluer les performances d’un système asservi à partir d’un modèle de connaissance</span><span class="badge">Évaluation</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

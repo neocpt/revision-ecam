@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C03 — Lois de pilotage en mouvement (cinématique) — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-sii">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SII · C03 — Déterminer les lois de pilotage en mouvement</span>
+  <h1 class="title">C03 — Cinématique du solide : déterminer les lois de pilotage en mouvement</h1>
+  <p class="lead">Modèle cinématique (schéma, graphe des liaisons, repères liés, figures de changement de base) ;
+  mouvements de rotation (pivot) et translation (glissière, translation circulaire) ; produit scalaire &amp; vectoriel entre bases ;
+  vecteur vitesse angulaire, <b>formule de Bour</b> ; vitesse/accélération d'un point ; <b>torseur cinématique</b>, relation de <b>Varignon</b> ;
+  composition des mouvements ; <b>roulement sans glissement</b>.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction du TD (échelle EPAS, ERICC, robots, centrifugeuse, découpe savon, roue-sol)</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+    <p>On veut relier les <b>paramètres de mouvement</b> (angles des pivots, distances des glissières) aux grandeurs
+    cinématiques de l'effecteur (position, vitesse, accélération), pour en déduire les <b>lois de pilotage</b> — qui sont
+    aussi les consignes d'un système asservi en position/vitesse.</p>
+
+    <h3>1.1 Modèle cinématique & repérage</h3>
+    <div class="def">
+      <span class="lab">Solide indéformable</span>
+      \(\forall A,B\in(S),\ \|\vec{AB}\|=\text{cste}\). À chaque solide on associe un <b>repère lié</b> : ses points y ont des coordonnées constantes.
+      Un solide a au plus <b>6 degrés de liberté</b> / un autre : 3 translations (position de l'origine) + 3 rotations (orientation de la base).
+    </div>
+    <div class="thm">
+      <span class="lab">Figure de changement de base (rotation plane d'angle \(\alpha\) autour de \(\vec u\))</span>
+      Le vecteur commun sort perpendiculairement. Décomposition : un terme en <b>cos</b> (le plus grand) et un en <b>sin</b> (le plus petit). Ex. rotation autour de \(\vec z\) :
+      \[ \vec x_2=\cos\alpha\,\vec x_1+\sin\alpha\,\vec y_1,\qquad \vec y_2=-\sin\alpha\,\vec x_1+\cos\alpha\,\vec y_1. \]
+    </div>
+    <div class="note">
+      <span class="lab">Liaisons & mouvements</span>
+      <b>Pivot</b> d'axe \((A,\vec u)\) → rotation, paramètre angle \(\alpha(t)\), vitesse angulaire \(\dot\alpha\) (rad·s⁻¹).
+      <b>Glissière</b> de direction \(\vec u\) → translation rectiligne, paramètre distance \(\lambda(t)\), vitesse \(\dot\lambda\) (m·s⁻¹).
+      <b>Translation circulaire</b> (parallélogramme déformable) : bases identiques mais trajectoire un cercle, vitesse \(R\dot\alpha\).
+    </div>
+
+    <h3>1.2 Produit scalaire entre vecteurs de bases en rotation</h3>
+    <div class="thm">
+      <span class="lab">Règle</span>
+      Entre deux vecteurs d'une figure de changement de base d'angle \(\alpha\) : <b>0</b> (même base), <b>\(\cos\alpha\)</b> (adjacents),
+      <b>\(\pm\sin\alpha\)</b> (non adjacents). Projection : \(\vec A\cdot\vec x_0=\) coordonnée de \(\vec A\) sur \(\vec x_0\).
+      Norme : \(\|\vec u\|=\sqrt{\vec u\cdot\vec u}\) — pour deux termes \(a\vec z_2+b\vec z_3\) :
+      \(\|\cdot\|=\sqrt{a^2+b^2+2ab\cos\beta}\).
+    </div>
+
+    <h3>1.3 Produit vectoriel & produit mixte</h3>
+    <div class="thm">
+      <span class="lab">Base orthonormée directe</span>
+      \(\vec x\wedge\vec y=\vec z\), \(\vec y\wedge\vec z=\vec x\), \(\vec z\wedge\vec x=\vec y\) (antisymétrique). Entre bases en rotation plane :
+      intensité \(\sin\theta\) (angle signé du 1ᵉʳ vers le 2ᵉ vecteur), direction = vecteur commun. Produit mixte nul si 2 vecteurs colinéaires ;
+      il change de signe par échange de deux vecteurs.
+    </div>
+
+    <h3>1.4 Vitesse angulaire, formule de Bour, vitesse d'un point</h3>
+    <div class="thm">
+      <span class="lab">Vecteur vitesse angulaire</span>
+      \(\vec\Omega_{2/1}=\dot\alpha\,\vec z\) (rotation d'angle \(\alpha\) autour de \(\vec z\)). Propriétés : \(\vec\Omega_{i/i}=\vec0\),
+      \(\vec\Omega_{i/j}=-\vec\Omega_{j/i}\), <b>composition</b> \(\vec\Omega_{3/1}=\vec\Omega_{3/2}+\vec\Omega_{2/1}\).
+    </div>
+    <div class="thm">
+      <span class="lab">Formule de Bour (changement de base de dérivation)</span>
+      \[ \Big[\frac{d\vec U}{dt}\Big]_{j}=\Big[\frac{d\vec U}{dt}\Big]_{i}+\vec\Omega_{i/j}\wedge\vec U. \]
+      Pour un vecteur unitaire d'une base : \(\Big[\dfrac{d\vec x_i}{dt}\Big]_{j}=\vec\Omega_{i/j}\wedge\vec x_i\) (car \(\vec x_i\) est fixe dans \(B_i\)).
+    </div>
+    <div class="method">
+      <span class="lab">Démarche vitesse / accélération d'un point</span>
+      1) figures de changement de base + \(\vec\Omega\) ; 2) vecteur position ; 3) poser \(\vec V=\big[\tfrac{d\,\vec{QM}}{dt}\big]_0\), distribuer ;
+      4) dériver chaque \(\vec x_i\) par Bour ; 5) regrouper par vecteur unitaire ; 6) vérifier l'homogénéité ; 7) dériver à nouveau pour \(\vec\gamma\).
+    </div>
+
+    <h3>1.5 Torseur cinématique & Varignon</h3>
+    <div class="thm">
+      <span class="lab">Relation de Varignon (« BABAR »)</span>
+      \[ \vec V_{B\in2/1}=\vec V_{A\in2/1}+\vec{BA}\wedge\vec\Omega_{2/1}. \]
+      Le champ des vitesses est un <b>torseur cinématique</b> \(\{\mathcal V_{2/1}\}=\big\{\vec\Omega_{2/1};\ \vec V_{A\in2/1}\big\}_A\)
+      (résultante = vitesse angulaire, moment = vitesse en un point).
+    </div>
+    <div class="note">
+      <span class="lab">Cas types</span>
+      <b>Rotation</b> d'axe \((A,\vec u)\) : \(\{\mathcal V_{2/1}\}=\{\omega\vec u;\ \vec0\}_{M\in\text{axe}}\), \(\|\vec V_M\|=r|\omega|\) (\(r\) = distance à l'axe).
+      <b>Translation</b> : \(\{\mathcal V_{2/1}\}=\{\vec0;\ v\,\vec u\}\), champ uniforme.
+      <b>Composition</b> : \(\{\mathcal V_{n/0}\}=\{\mathcal V_{n/n-1}\}+\dots+\{\mathcal V_{1/0}\}\).
+    </div>
+
+    <h3>1.6 Composition des vitesses & contact ponctuel (RSG)</h3>
+    <div class="thm">
+      <span class="lab">Composition en un point</span>
+      \(\vec V_{P\in2/0}=\vec V_{P\in2/1}+\vec V_{P\in1/0}\) ; passage solide↔point : \(\vec V_{P\in1/0}=\vec V_{P/0}-\vec V_{P/1}\).
+    </div>
+    <div class="thm">
+      <span class="lab">Roulement sans glissement (RSG)</span>
+      Au contact \(J\) entre (2) et (1), le <b>vecteur glissement</b> est \(\vec V_{J\in2/1}\). Non-pénétration : \(\vec V_{J\in2/1}\cdot\vec n=0\).
+      <b>RSG</b> : \(\vec V_{J\in2/1}=\vec0\). Exemple roue-sol : \(\boxed{V=R\omega}\).
+    </div>
+  </section>
+
+  <!-- ======================= EXOS CRÉÉS =============================== -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Dérivée d'un vecteur unitaire (Bour)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Base \(B_1\) en rotation d'angle \(\theta(t)\) autour de \(\vec z_0\) par rapport à \(B_0\). Calculer \(\big[\tfrac{d\vec x_1}{dt}\big]_0\) et \(\big[\tfrac{d\vec y_1}{dt}\big]_0\).</div>
+        <p>\(\vec\Omega_{1/0}=\dot\theta\,\vec z_0\). Par Bour : \(\big[\tfrac{d\vec x_1}{dt}\big]_0=\vec\Omega_{1/0}\wedge\vec x_1=\dot\theta\,\vec z_0\wedge\vec x_1=\dot\theta\,\vec y_1\).</p>
+        <p>\(\big[\tfrac{d\vec y_1}{dt}\big]_0=\dot\theta\,\vec z_0\wedge\vec y_1=-\dot\theta\,\vec x_1\).</p>
+        <p class="res">\(\dfrac{d\vec x_1}{dt}\Big|_0=\dot\theta\,\vec y_1\), \(\dfrac{d\vec y_1}{dt}\Big|_0=-\dot\theta\,\vec x_1\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Bras à 1 pivot + 1 glissière (vitesse & accélération)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(\vec{O_0B}=a\,\vec z_0+\lambda(t)\,\vec x_1\), (1) en rotation d'angle \(\theta\) autour de \(\vec z_0\). Déterminer \(\vec V_{B/0}\) et \(\vec\gamma_{B/0}\).</div>
+        <p class="q">Vitesse</p>
+        <p>\(\vec V_{B/0}=\dot\lambda\,\vec x_1+\lambda\,\big[\tfrac{d\vec x_1}{dt}\big]_0=\dot\lambda\,\vec x_1+\lambda\dot\theta\,\vec y_1\) (le terme \(a\vec z_0\) est constant).</p>
+        <p class="res">\(\vec V_{B/0}=\dot\lambda\,\vec x_1+\lambda\dot\theta\,\vec y_1\)</p>
+        <p class="q">Accélération</p>
+        <p>En dérivant (\(\tfrac{d\vec x_1}{dt}=\dot\theta\vec y_1\), \(\tfrac{d\vec y_1}{dt}=-\dot\theta\vec x_1\)) :</p>
+        <p class="res">\(\vec\gamma_{B/0}=(\ddot\lambda-\lambda\dot\theta^2)\,\vec x_1+(2\dot\lambda\dot\theta+\lambda\ddot\theta)\,\vec y_1\)</p>
+        <p>On reconnaît les termes centripète \(-\lambda\dot\theta^2\) et de Coriolis \(2\dot\lambda\dot\theta\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Roulement sans glissement roue-sol</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Cadre (2) en translation \(V\vec x_0\) ; roue (1) de rayon \(R\), vitesse angulaire \(-\omega\vec z_0\) / cadre ; RSG au contact \(J\) avec le sol (0).</div>
+        <p>\(\vec\Omega_{1/0}=\vec\Omega_{1/2}+\vec\Omega_{2/0}=-\omega\vec z_0\). RSG : \(\vec V_{J\in1/0}=\vec0\).</p>
+        <p>Varignon en \(A\) (centre roue, \(\vec{AJ}=-R\vec y_0\)) : \(\vec V_{A\in1/0}=\vec V_{J\in1/0}+\vec{AJ}\wedge\vec\Omega_{1/0}=-R\vec y_0\wedge(-\omega\vec z_0)=R\omega\,\vec x_0\).</p>
+        <p>Or \(A\) est sur l'axe pivot (1)-(2) : \(\vec V_{A\in1/0}=\vec V_{A\in2/0}=V\vec x_0\).</p>
+        <p class="res">\(V=R\omega\)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CORRECTION TD =============================== -->
+  <section class="block" id="td">
+    <h2>3. Correction du TD</h2>
+    <p class="lead" style="font-size:.95rem">Source : <i>S2I-C03-TD</i> (6 TD) + <b>corrigés officiels</b> LECONTE (TD1&amp;2, TD3). Les schémas cinématiques sont des figures ;
+    on restitue les <b>résultats analytiques</b> et la méthode. Sélection représentative des exercices clés.</p>
+
+    <h3>TD 1–2 — Interpréter un schéma & contraindre une trajectoire</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1.2 — Robot ERICC 3 (coordonnées opérationnelles)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Bras (1) pivot \(\alpha\) autour \(\vec z_0\), avant-bras (2) pivot \(\beta\) ; \(\vec{OA}=a\vec x_1\), \(\vec{AB}=b\vec x_2\), \(\vec z_0\) commun.</div>
+        <p class="q">Vecteur position et coordonnées de \(B\) dans \(R_0\)</p>
+        <p>\(\vec{OB}=a\vec x_1+b\vec x_2\), avec \(\vec x_1=\cos\alpha\,\vec x_0+\sin\alpha\,\vec y_0\) et \(\vec x_2=\cos(\alpha+\beta)\vec x_0+\sin(\alpha+\beta)\vec y_0\).</p>
+        <p class="res">\(X=a\cos\alpha+b\cos(\alpha+\beta)\), \(Y=a\sin\alpha+b\sin(\alpha+\beta)\), \(Z=0\) (homogène : des mètres)</p>
+        <p class="q">Contrainte de sécurité \(\|\vec{OB}\|\leqslant R\)</p>
+        <p>\(\|\vec{OB}\|=\sqrt{a^2+b^2+2ab\cos\beta}\leqslant R\) soit \(\cos\beta\leqslant\dfrac{R^2-a^2-b^2}{2ab}\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2.1 — Échelle EPAS (modèle direct & inverse)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(\vec{OD}=-R\vec x_1+b\vec y_0+x(t)\vec x_2\) ; \(\alpha=(\vec x_0,\vec x_1)\) (pivot \(\vec y_0\)), \(\theta=(\vec x_1,\vec x_2)\) (pivot \(\vec z_1\)), \(x(t)\) glissière.</div>
+        <p class="q">Q1 — Coordonnées \(X,Y,Z\) de \(D\) dans \(R_0\) (par projection)</p>
+        <p>\(X=\vec{OD}\cdot\vec x_0\), etc. En passant \(\vec x_2=\cos\theta\,\vec x_1+\sin\theta\,\vec y_1\) puis \(\vec x_1\) dans \(B_0\) :</p>
+        <p class="res">\(X=(x\cos\theta-R)\cos\alpha\), \(\quad Y=b+x\sin\theta\), \(\quad Z=(R-x\cos\theta)\sin\alpha\)</p>
+        <p class="q">Q2–Q3 — Modèle inverse (retrouver \(\alpha,\theta,x\))</p>
+        <p>Rapport \(\dfrac ZX=-\tan\alpha\) ; puis \(\theta\) via \(Y\) et \(X\) :</p>
+        <p class="res">\(\alpha=-\arctan\dfrac ZX\), \(\quad\theta=\arctan\dfrac{Y-b}{\frac{X}{\cos\alpha}+R}\), \(\quad x(t)=\dfrac{Y-b}{\sin\theta}\)</p>
+        <p class="q">Q4 — Trajectoire rectiligne verticale (X, Y constants, Z variable)</p>
+        <p>Condition \(Z_0=(R-x\cos\theta)\sin\alpha=0\) : si \(\alpha=\alpha_0=0\), alors \(\theta=\pm\arccos\dfrac{L+R}{x(t)}\) (avec \(X_0=L\) constante).</p>
+        <p class="res">\(\alpha=0\) et \(\theta=\pm\arccos\dfrac{L+R}{x(t)}\) pilotent une montée verticale de la nacelle</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2.3 — Robot de manutention (translation circulaire, parallélogramme)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Parallélogramme \(ABCE\) : \(\alpha=(\vec x_0,\vec x_1)\) (moteur \(M_1\)), \(\beta=(\vec x_0,\vec x_2)\) (moteur \(M_2\)) ; \(\vec{AB}=L\vec x_1\), \(\vec{BJ}=H\vec x_3\), avec \(\vec x_3=\vec x_2\).</div>
+        <p class="q">Bases & mouvement</p>
+        <p>Parallélogramme ⟹ \(\vec x_2=\vec x_3\) et \(\vec x_1=\vec x_4\) : seulement 3 bases \(B_0,B_1,B_2\). Repère lié à (3) : \(R_3(B,\vec x_2,\vec y_2,\vec z)\).</p>
+        <p class="q">\(M_1\) bloqué (\(\alpha\) constant), \(\beta\) varie</p><p class="res">(3)/(0) = <b>rotation</b> d'axe \((B,\vec z)\) ; \(T_{J/0}\), \(T_{C/0}\) cercles de centre \(B\).</p>
+        <p class="q">\(M_2\) bloqué (\(\beta\) constant), \(\alpha\) varie</p><p class="res">(3)/(0) = <b>translation à trajectoire circulaire</b> de rayon \(AB\) ; \(T_{C/0}\) cercle de centre \(E\).</p>
+        <p class="q">Trajectoire verticale de \(J\) à distance \(d\) de \(A\)</p>
+        <p>\(\vec{AJ}=L\vec x_1+H\vec x_2\), condition \(\vec{AJ}\cdot\vec x_0=d=\)cste :</p>
+        <p class="res">\(d=L\cos\alpha+H\cos\beta=\text{cste}\) (loi liant les deux moteurs)</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:1.4rem">TD 3 — Contraindre une vitesse ou une accélération</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3.1 — Centrifugeuse (vitesse, accélération, tr/min pour 9 g)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Bras (1) pivot \(\alpha\) autour \(\vec z_0\), cabine (2) pivot \(\beta\) autour \(\vec y_1\) ; \(\vec{OA}=a\vec x_1\) (\(a=3\) m), \(\vec{AG}=b\vec x_2\) (\(b=1\) m).</div>
+        <p class="q">Q3 — Vitesse \(\vec V_{G\in2/0}\)</p>
+        <p>\(\vec{OG}=a\vec x_1+b\vec x_2\). \(\tfrac{d\vec x_1}{dt}|_0=\dot\alpha\vec y_1\) ; \(\vec\Omega_{2/0}=\dot\alpha\vec z_1+\dot\beta\vec y_2\), d'où \(\tfrac{d\vec x_2}{dt}|_0=\dot\alpha\cos\beta\,\vec y_1-\dot\beta\,\vec z_2\).</p>
+        <p class="res">\(\vec V_{G\in2/0}=\dot\alpha\,(a+b\cos\beta)\,\vec y_1-b\dot\beta\,\vec z_2\)</p>
+        <p class="q">Q4 — Accélération (\(\beta\) constant, \(\dot\beta=0\))</p>
+        <p>\(\vec V_{G\in2/0}=\dot\alpha(a+b\cos\beta)\vec y_1\) ; par Bour :</p>
+        <p class="res">\(\vec\gamma_{G/0}=-\dot\alpha^2(a+b\cos\beta)\,\vec x_1+\ddot\alpha(a+b\cos\beta)\,\vec y_1\)</p>
+        <p class="q">Q5 — \(\omega\) du bras pour 9 g (cabine verticale \(\beta=90^\circ\), \(\dot\alpha\) constant)</p>
+        <p>\(\cos90^\circ=0\), \(\ddot\alpha=0\) : \(\|\vec\gamma_G\|=a\dot\alpha^2=9g\), donc \(\dot\alpha=\sqrt{\dfrac{9g}{a}}=\sqrt{\dfrac{9\times9{,}81}{3}}\approx5{,}4\) rad·s⁻¹.</p>
+        <p class="res">\(\dot\alpha=\dfrac{5{,}4\times60}{2\pi}\approx51{,}8\) tr·min⁻¹</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3.2 — Unité de découpe de savons (coupe droite)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Parallélogramme \(ABCD\), \(\vec{AB}=L\vec y_1\), \(\vec{BM}=b\vec y_0\), \(\vec{MP}=\mu(t)\vec z_0\), \(\alpha=(\vec y_0,\vec y_1)\), \(\vec x_0\) commun. (4)/(3) translation \(\mu(t)\).</div>
+        <p class="q">Q1 — Mouvement de (3)/(0)</p><p class="res">Translation à trajectoire circulaire de rayon \(AB\), paramétrée par \(\alpha(t)\).</p>
+        <p class="q">Q3 — Vitesse \(\vec V_{P\in4/0}\)</p>
+        <p>\(\vec{AP}=L\vec y_1+b\vec y_0+\mu\vec z_0\). Dérivation (\(\tfrac{d\vec y_1}{dt}|_0=\dot\alpha\vec z_1\... \), via \(\vec\Omega_{1/0}=\dot\alpha\vec x_0\)) :</p>
+        <p>\(\vec V_{P\in4/0}=\dot\alpha L\,\vec z_1+\dot\mu\,\vec z_0\), soit avec \(\vec z_1=\cos\alpha\,\vec z_0-\sin\alpha\,\vec y_0\) :</p>
+        <p class="res">\(\vec V_{P\in4/0}=-\dot\alpha L\sin\alpha\,\vec y_0+(\dot\alpha L\cos\alpha+\dot\mu)\,\vec z_0\)</p>
+        <p class="q">Q4 — Condition de coupe droite</p>
+        <p>La lame doit avancer selon \(\vec y_0\) à la vitesse \(V_s\) du savon : \(\vec V_{P\in4/0}\cdot\vec y_0=V_s\).</p>
+        <p class="res">\(V_s=-\dot\alpha L\sin\alpha\)</p>
+        <p class="q">Q5 — \(\alpha(t)\) avec \(\alpha(0)=90^\circ\)</p>
+        <p>En intégrant \(V_s=-\dot\alpha L\sin\alpha=\dfrac{d}{dt}(L\cos\alpha)\) : \(V_s\,t=L\cos\alpha(t)\) (cste \(=0\)).</p>
+        <p class="res">\(\alpha(t)=\arccos\dfrac{V_s\,t}{L}\) (pour \(\alpha\in[0,\tfrac\pi2]\))</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3.3 — Robot de peinture (loi de pilotage)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Pistolet en \(P\). On impose que \(P\) balaie horizontalement à vitesse \(V\) suivant \(\vec x_0\) : \(\vec V_{P/0}=V\vec x_0\).</div>
+        <p class="q">Démarche</p>
+        <p>On exprime \(\vec V_{P/0}\) en fonction de \(\dot\lambda,\dot\alpha,\dot\beta\) puis on projette la contrainte \(\vec V_{P/0}=V\vec x_0\) sur \(\vec x_0,\vec y_0,\vec z_0\).
+        La projection sur \(\vec z_0\) donne \(\beta\) ; les deux autres donnent \(\dot\lambda\) et \(\dot\alpha\).</p>
+        <p class="res">\(\dot\lambda=\dfrac{V}{\tan\alpha}\), \(\qquad\dot\alpha=-\dfrac{V}{b\sin\alpha}\)</p>
+        <p>Ces deux EDO s'intègrent numériquement pour fournir les lois de pilotage \(\lambda(t)\) et \(\alpha(t)\) des axes.</p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.4rem">
+      <span class="lab">Bilan C03</span>
+      Chapitre <b>central</b> et calculatoire. Méthode invariante : figures de changement de base + \(\vec\Omega\), vecteur position, dérivation par
+      <b>Bour</b>, puis <b>torseur cinématique</b> / <b>Varignon</b> pour propager les vitesses, et <b>composition</b> pour enchaîner les solides.
+      Deux familles d'usage : <b>modèle direct/inverse</b> (position de l'effecteur ↔ paramètres, ex. EPAS, ERICC) et <b>lois de pilotage</b>
+      (imposer une trajectoire/vitesse ⟹ relations sur \(\dot\alpha,\dot\lambda\), ex. peinture, savon), plus la <b>condition RSG</b> \(V=R\omega\).
+      Non détaillés ici mais de même méthode : TD4 (torseurs — maquette soufflerie, robot soudeur 4 axes), TD5 (contact ponctuel — came/poussoir, banc pneus), TD6 (centre d'usinage 5 axes).
+    </div>
+  </section>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours / ressource</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c03-cinematique/Rep%C3%A8re%20et%20Base.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Repère et Base</span><span class="badge">Cours / ressource</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Fiche / mémo</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c03-cinematique/Cin%C3%A9matique%20-%20R%C3%A9sum%C3%A9.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Cinématique - Résumé</span><span class="badge">Fiche / mémo</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c03-cinematique/S2I-C03-TD-D%C3%A9terminer%20les%20lois%20de%20pilotage%20en%20mouvement.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C03-TD-Déterminer les lois de pilotage en mouvement</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Corrigé</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c03-cinematique/C03-TD%201%20et%20TD2%20-D%C3%A9terminer%20les%20lois%20de%20pilotage%20en%20mouvement%20CORRIGE.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">C03-TD 1 et TD2 -Déterminer les lois de pilotage en mouvement CORRIGE</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/sii/c03-cinematique/Correction%20CO3%20-%20TD%204.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Correction CO3 - TD 4</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/sii/c03-cinematique/Corrig%C3%A9-%20C03-TD3%20-EX1%2C2.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Corrigé- C03-TD3 -EX1,2</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/sii/c03-cinematique/Correction%20Excercice%20Produit%20scalaire%20et%20vectoriel.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Correction Excercice Produit scalaire et vectoriel</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/sii/c03-cinematique/EX%201%20-%20Correction.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">EX 1 - Correction</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/sii/c03-cinematique/EX%202%20Correction.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">EX 2 Correction</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/sii/c03-cinematique/EX%203%20Correction.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">EX 3 Correction</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/sii/c03-cinematique/Ex%20produit%20scalaire%20et%20vectoriel%20-%20avec%20correction.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Ex produit scalaire et vectoriel - avec correction</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Évaluation</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c03-cinematique/DSc1-CO3.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">DSc1-CO3</span><span class="badge">Évaluation</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Document</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c03-cinematique/S2I-C03-D%C3%A9terminer%20les%20lois%20de%20pilotage%20en%20mouvement.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C03-Déterminer les lois de pilotage en mouvement</span><span class="badge">Document</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/sii/c03-cinematique/EX%203.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">EX 3</span><span class="badge">Document</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/sii/c03-cinematique/Ex%202.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Ex 2</span><span class="badge">Document</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/sii/c03-cinematique/Ex1.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Ex1</span><span class="badge">Document</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/sii/c03-cinematique/Excercice%20Produit%20scalaire%20et%20vectoriel.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Excercice Produit scalaire et vectoriel</span><span class="badge">Document</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

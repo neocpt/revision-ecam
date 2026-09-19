@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les nombres réels — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-math">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Maths · M01 — Chapitre 4</span>
+  <h1 class="title">Les nombres réels</h1>
+  <p class="lead">Ordre et encadrements, topologie de \(\mathbb R\) (intervalles, majorants, bornes sup/inf),
+  valeur absolue et inégalité triangulaire, partie entière, et résolution de systèmes linéaires simples.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD n°4</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Relation d'ordre et inégalités</h3>
+    <div class="def">
+      <span class="lab">Ordre sur \(\mathbb R\)</span>
+      \(\leqslant\) est <b>réflexive</b>, <b>antisymétrique</b> (\(x\leqslant y\) et \(y\leqslant x\Rightarrow x=y\))
+      et <b>transitive</b>. \(\mathbb R\) est <b>totalement</b> ordonné : \(\forall x,y,\ x\leqslant y\) ou \(y\leqslant x\)
+      (contrairement à \(\mathbb C\)).
+    </div>
+    <div class="thm">
+      <span class="lab">Opérations sur les inégalités</span>
+      <ul style="margin:.3rem 0 0">
+        <li>On <b>additionne</b> deux inégalités de même sens : \(a\leqslant b,\ c\leqslant d\Rightarrow a+c\leqslant b+d\).</li>
+        <li>On multiplie par \(c\geqslant 0\) (sens conservé) ou \(c\leqslant 0\) (sens <b>inversé</b>).</li>
+        <li>\(0\leqslant a\leqslant b,\ 0\leqslant c\leqslant d\Rightarrow 0\leqslant ac\leqslant bd\).</li>
+        <li>\(0<a\leqslant b\Rightarrow 0<\tfrac1b\leqslant\tfrac1a\) (l'inverse <b>renverse</b> l'ordre).</li>
+      </ul>
+    </div>
+    <div class="warnbox">
+      On ne <b>soustrait</b> ni ne <b>divise</b> jamais deux inégalités. Pour « soustraire » : multiplier la
+      2ᵉ par \(-1\) puis additionner. Pour « diviser » : passer la 2ᵉ à l'inverse puis multiplier.
+    </div>
+
+    <h3>1.2 Topologie réelle : intervalles, bornes</h3>
+    <div class="def">
+      <span class="lab">Intervalle</span>
+      \(I\subseteq\mathbb R\) est un <b>intervalle</b> ssi \(\forall a,b\in I,\ a\leqslant b\Rightarrow[a,b]\subseteq I\)
+      (« pas de trou »). Ex. \(\mathbb R^*\), \(\mathbb N\), \([0,1]\cup[2,4]\) ne sont pas des intervalles.
+    </div>
+    <div class="def">
+      <span class="lab">Majorant, minorant, borné</span>
+      \(M\) majore \(A\) si \(\forall x\in A,\ x\leqslant M\) ; \(m\) minore si \(\forall x\in A,\ m\leqslant x\).
+      \(A\) est <b>borné</b> s'il est majoré et minoré. Les majorants/minorants, s'ils existent, sont en
+      nombre infini.
+    </div>
+    <div class="def">
+      <span class="lab">Max/min vs sup/inf</span>
+      \(\max A\) (resp. \(\min A\)) doit <b>appartenir</b> à \(A\). La <b>borne supérieure</b>
+      \(\sup A\) est le <b>plus petit des majorants</b> ; \(\inf A\) le <b>plus grand des minorants</b>.
+      Si \(\max A\) existe alors \(\max A=\sup A\) (idem min/inf), mais \(\sup A\) peut exister sans \(\max A\).
+    </div>
+    <div class="thm">
+      <span class="lab">Théorème de la borne supérieure</span>
+      Toute partie de \(\mathbb R\) <b>non vide et majorée</b> admet une unique borne supérieure. (Idem :
+      non vide et minorée \(\Rightarrow\) unique borne inférieure.)
+    </div>
+
+    <h3>1.3 Valeur absolue</h3>
+    <div class="def">
+      <span class="lab">Définition</span>
+      \(|x|=\max(x,-x)=\sqrt{x^2}=\begin{cases}x&x\geqslant0\\-x&x<0\end{cases}\). Pour \(b\geqslant0\) :
+      \(\;|x-a|\leqslant b\iff a-b\leqslant x\leqslant a+b\) (distance de \(x\) à \(a\) au plus \(b\)).
+    </div>
+    <div class="thm">
+      <span class="lab">Inégalité triangulaire</span>
+      \[ \big|\,|x|-|y|\,\big|\ \leqslant\ |x+y|\ \leqslant\ |x|+|y|. \]
+      Se démontre en comparant les carrés (\(|x+y|^2-(|x|+|y|)^2=2(xy-|xy|)\leqslant0\)).
+    </div>
+
+    <h3>1.4 Partie entière</h3>
+    <div class="def">
+      <span class="lab">Partie entière</span>
+      \(\lfloor x\rfloor\) est l'unique entier \(p\in\mathbb Z\) tel que \(p\leqslant x<p+1\) (le plus grand
+      entier \(\leqslant x\)). Ex. \(\lfloor 2{,}5\rfloor=2\), \(\lfloor -2{,}5\rfloor=-3\).
+    </div>
+    <div class="thm">
+      <span class="lab">Propriété</span>
+      Pour \(p\in\mathbb Z\) : \(\lfloor p+x\rfloor=p+\lfloor x\rfloor\). En revanche \(\lfloor 2x\rfloor\neq 2\lfloor x\rfloor\)
+      en général (ex. \(x=\tfrac12\)).
+    </div>
+
+    <h3>1.5 Systèmes linéaires</h3>
+    <div class="method">
+      <span class="lab">Opérations élémentaires (pivot de Gauss)</span>
+      Trois opérations conservent l'ensemble des solutions : \(L_i\leftrightarrow L_j\) ;
+      \(L_i\leftarrow\alpha L_i\) (\(\alpha\neq0\)) ; \(L_i\leftarrow L_i+\beta L_j\) (\(i\neq j\)).
+      On élimine une inconnue de toutes les lignes sauf une, puis on recommence.
+    </div>
+    <div class="warnbox">
+      Conserver le <b>même nombre d'équations</b> à chaque étape : ne jamais « fusionner » deux lignes en
+      une seule.</div>
+  </section>
+
+  <!-- ==================== EXOS CRÉÉS ============================= -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Encadrement d'un quotient</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Soit \(x\in[2,3]\). Encadrer le plus précisément possible \(\dfrac{2x-1}{x+1}\).</div>
+        <p>La fonction \(g(x)=\dfrac{2x-1}{x+1}\) vérifie \(g'(x)=\dfrac{2(x+1)-(2x-1)}{(x+1)^2}=\dfrac{3}{(x+1)^2}>0\),
+        elle est donc <b>strictement croissante</b>. Sur \([2,3]\), les bornes sont atteintes aux extrémités :</p>
+        \[ g(2)=\frac{3}{3}=1,\qquad g(3)=\frac{5}{4}. \]
+        <div class="res">\(1\leqslant\dfrac{2x-1}{x+1}\leqslant\dfrac54\), encadrement optimal (bornes atteintes).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Équation avec deux valeurs absolues</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Résoudre dans \(\mathbb R\) : \(|x-1|+|x-3|=4\).</div>
+        <p>Points de changement : \(x=1\) et \(x=3\). On procède par disjonction de cas.</p>
+        <p class="q">Cas \(x<1\) : \(|x-1|=1-x\), \(|x-3|=3-x\).</p>
+        <p>\((1-x)+(3-x)=4-2x=4\Rightarrow x=0\). Comme \(0<1\), <b>valide</b>.</p>
+        <p class="q">Cas \(1\leqslant x\leqslant 3\) : \(|x-1|=x-1\), \(|x-3|=3-x\).</p>
+        <p>\((x-1)+(3-x)=2=4\) : <b>faux</b>, aucune solution (la somme vaut constamment \(2\) sur \([1,3]\)).</p>
+        <p class="q">Cas \(x>3\) : \(|x-1|=x-1\), \(|x-3|=x-3\).</p>
+        <p>\((x-1)+(x-3)=2x-4=4\Rightarrow x=4\). Comme \(4>3\), <b>valide</b>.</p>
+        <div class="res">\(S=\{0,\ 4\}\) (les deux points à distance-somme \(4\) des bornes \(1\) et \(3\)).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Max, min, sup, inf d'une suite d'ensemble</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Soit \(A=\left\{\dfrac{n}{n+1}\ \middle|\ n\in\mathbb N\right\}\). Déterminer \(\min,\max,\inf,\sup\).</div>
+        <p>Posons \(u_n=\dfrac{n}{n+1}=1-\dfrac{1}{n+1}\). Pour \(n\in\mathbb N\), \(u_n\) est <b>croissante</b>
+        (\(\tfrac1{n+1}\) décroît) et \(u_n<1\).</p>
+        <p><b>Minimum</b> : \(u_0=0\), atteint, et c'est le plus petit terme. Donc \(\min A=\inf A=0\).</p>
+        <p><b>Supremum</b> : \(u_n<1\) donc \(1\) majore \(A\). Est-ce le plus petit majorant ? Pour tout \(\varepsilon>0\),
+        \(u_n>1-\varepsilon\iff \tfrac1{n+1}<\varepsilon\), vrai pour \(n\) assez grand : aucun majorant \(<1\).
+        Donc \(\sup A=1\), <b>non atteint</b> (pas de maximum).</p>
+        <div class="res">\(\min A=\inf A=0\) ; \(\sup A=1\) ; \(\max A\) n'existe pas.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CORRECTION TD ========================== -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD n°4 — Les nombres réels</h2>
+    <p class="lead" style="font-size:.95rem">Feuille sans corrigé officiel : les 15 exercices sont résolus
+    intégralement, chaque sous-question traitée.</p>
+
+    <h3>Partie 1 — Encadrer des expressions</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — \(x\in[-1,3]\), \(y\in[-5,-4]\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(x+y\)</p><p>\([-1,3]+[-5,-4]\) : min \(-1-5=-6\), max \(3-4=-1\).</p><p class="res">\(-6\leqslant x+y\leqslant -1\)</p>
+        <p class="q">(b) \(x-y\)</p><p>\(-y\in[4,5]\) : min \(-1+4=3\), max \(3+5=8\).</p><p class="res">\(3\leqslant x-y\leqslant 8\)</p>
+        <p class="q">(c) \(xy\)</p><p>\(y<0\) : on teste les 4 coins \((\mp1)(\mp5),\dots\) : \((-1)(-5)=5\), \((3)(-5)=-15\).</p><p class="res">\(-15\leqslant xy\leqslant 5\)</p>
+        <p class="q">(d) \(\dfrac xy\)</p><p>\(\tfrac1y\in\left[-\tfrac14,-\tfrac15\right]\). Coins : \((3)\!\cdot\!(-\tfrac14)=-\tfrac34\), \((-1)\!\cdot\!(-\tfrac14)=\tfrac14\).</p><p class="res">\(-\tfrac34\leqslant\dfrac xy\leqslant \tfrac14\)</p>
+        <p class="q">(e) \(\left(\dfrac xy\right)^2\)</p><p>\(\tfrac xy\in\left[-\tfrac34,\tfrac14\right]\) contient \(0\) : le carré va de \(0\) à \(\left(\tfrac34\right)^2\).</p><p class="res">\(0\leqslant\left(\dfrac xy\right)^2\leqslant \dfrac9{16}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — \(x\in[1,4]\), \(y\in[2,5]\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(2x-3y\)</p><p>\(2x\in[2,8]\), \(-3y\in[-15,-6]\).</p><p class="res">\(-13\leqslant 2x-3y\leqslant 2\)</p>
+        <p class="q">(b) \(\dfrac1y+3\)</p><p>\(\tfrac1y\in\left[\tfrac15,\tfrac12\right]\).</p><p class="res">\(\dfrac{16}{5}\leqslant\dfrac1y+3\leqslant \dfrac72\)</p>
+        <p class="q">(c) \((x-5)(2-y)\)</p><p>\(x-5\in[-4,-1]\), \(2-y\in[-3,0]\) (deux facteurs \(\leqslant0\) → produit \(\geqslant0\)) ; max \((-4)(-3)=12\).</p><p class="res">\(0\leqslant (x-5)(2-y)\leqslant 12\)</p>
+        <p class="q">(d) \(\dfrac{x+2}{y-1}\)</p><p>\(x+2\in[3,6]\), \(\tfrac1{y-1}\in\left[\tfrac14,1\right]\).</p><p class="res">\(\dfrac34\leqslant\dfrac{x+2}{y-1}\leqslant 6\)</p>
+        <p class="q">(e) \(x^2-4x+4=(x-2)^2\)</p><p>\(x-2\in[-1,2]\), le carré va de \(0\) (en \(x=2\)) à \(4\) (en \(x=4\)).</p><p class="res">\(0\leqslant x^2-4x+4\leqslant 4\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — Encadrer \(\dfrac ab\) (quand c'est possible)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(1<a\leqslant7,\ 2\leqslant b\leqslant5\)</p>
+        <p>\(a,b>0\), \(\tfrac1b\in\left[\tfrac15,\tfrac12\right]\). Comme \(a>1\) (strict), \(\tfrac ab>\tfrac15\) (non atteint) ; max \(\tfrac72\) (en \(a=7,b=2\)).</p>
+        <p class="res">\(\dfrac15<\dfrac ab\leqslant \dfrac72\)</p>
+        <p class="q">(b) \(-1\leqslant a\leqslant7,\ -2\leqslant b\leqslant5,\ b\neq0\)</p>
+        <p>\(b\) <b>change de signe</b> et peut être arbitrairement proche de \(0\) : \(\tfrac ab\) n'est ni majoré ni minoré.</p>
+        <p class="res">Encadrement <b>impossible</b> (\(\dfrac ab\) non borné).</p>
+        <p class="q">(c) \(1<a\leqslant7,\ 0<b\leqslant5\)</p>
+        <p>\(b\to0^+\) rend \(\tfrac ab\to+\infty\) : pas de majorant. Minorant : \(\tfrac ab>\tfrac15\) (comme en (a)).</p>
+        <p class="res">Minoré seulement : \(\dfrac ab>\dfrac15\) (non majoré).</p>
+      </div>
+    </div>
+
+    <h3>Partie 2 — (In)équations avec racines</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — Équations</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\sqrt{x-2}=10\)</p><p>Domaine \(x\geqslant2\). Carré : \(x-2=100\).</p><p class="res">\(x=102\)</p>
+        <p class="q">(b) \(\sqrt{x-3}+2=9\)</p><p>\(\sqrt{x-3}=7\), \(x-3=49\).</p><p class="res">\(x=52\)</p>
+        <p class="q">(c) \(2\sqrt{x+1}+3=1\)</p><p>\(\sqrt{x+1}=-1\) : impossible (une racine est \(\geqslant0\)).</p><p class="res">\(S=\varnothing\)</p>
+        <p class="q">(d) \(\sqrt{4x-1}=\sqrt{3-x}\)</p><p>Domaine \(\tfrac14\leqslant x\leqslant3\). Carré : \(4x-1=3-x\Rightarrow 5x=4\).</p><p class="res">\(x=\tfrac45\)</p>
+        <p class="q">(e) \(\sqrt{x+12}=\sqrt{x^2+2x-8}\)</p>
+        <p>Carré : \(x+12=x^2+2x-8\Rightarrow x^2+x-20=0\Rightarrow(x+5)(x-4)=0\). Domaine : \(x^2+2x-8\geqslant0\Rightarrow x\leqslant-4\) ou \(x\geqslant2\), et \(x\geqslant-12\). Les deux candidats \(-5\) et \(4\) conviennent (\(x+12\) et le radicande valent \(7\) et \(16\)).</p>
+        <p class="res">\(S=\{-5,\ 4\}\)</p>
+        <p class="q">(f) \(\sqrt{x+4}+\sqrt{x+2}=1\)</p>
+        <p>Domaine \(x\geqslant-2\). On isole : \(\sqrt{x+4}=1-\sqrt{x+2}\), qui exige \(\sqrt{x+2}\leqslant1\) (\(x\leqslant-1\)). Carré : \(x+4=x+3-2\sqrt{x+2}\Rightarrow\sqrt{x+2}=-\tfrac12\) : impossible.</p>
+        <p class="res">\(S=\varnothing\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — Inéquations</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\sqrt{x-3}>2\)</p><p>Domaine \(x\geqslant3\), carré : \(x-3>4\).</p><p class="res">\(S=\,]7,+\infty[\)</p>
+        <p class="q">(b) \(\sqrt{2x-5}\leqslant5\)</p><p>Domaine \(x\geqslant\tfrac52\), carré : \(2x-5\leqslant25\Rightarrow x\leqslant15\).</p><p class="res">\(S=\left[\tfrac52,\ 15\right]\)</p>
+        <p class="q">(c) \(\sqrt{2+x}\leqslant-1\)</p><p>Une racine est \(\geqslant0\), jamais \(\leqslant-1\).</p><p class="res">\(S=\varnothing\)</p>
+        <p class="q">(d) \(\sqrt{x^2-4}\leqslant x-4\)</p><p>Il faut \(x-4\geqslant0\) (\(x\geqslant4\)) et \(|x|\geqslant2\). Carré : \(x^2-4\leqslant x^2-8x+16\Rightarrow 8x\leqslant20\Rightarrow x\leqslant\tfrac52\), incompatible avec \(x\geqslant4\).</p><p class="res">\(S=\varnothing\)</p>
+        <p class="q">(e) \(\sqrt{x^2-3x+2}\leqslant x+1\)</p>
+        <p>Domaine \((x-1)(x-2)\geqslant0\Rightarrow x\leqslant1\) ou \(x\geqslant2\), et \(x+1\geqslant0\ (x\geqslant-1)\). Carré : \(x^2-3x+2\leqslant x^2+2x+1\Rightarrow 5x\geqslant1\Rightarrow x\geqslant\tfrac15\). Intersection :</p>
+        <p class="res">\(S=\left[\tfrac15,\ 1\right]\cup[2,+\infty[\)</p>
+        <p class="q">(f) \(\sqrt{2x^2-2}-x\geqslant0\), i.e. \(\sqrt{2x^2-2}\geqslant x\)</p>
+        <p>Domaine \(x^2\geqslant1\) (\(x\leqslant-1\) ou \(x\geqslant1\)). Si \(x\leqslant-1<0\), l'inégalité est vraie (membre gauche \(\geqslant0>x\)). Si \(x\geqslant1\), carré : \(2x^2-2\geqslant x^2\Rightarrow x^2\geqslant2\Rightarrow x\geqslant\sqrt2\).</p>
+        <p class="res">\(S=\,]-\infty,-1]\cup[\sqrt2,+\infty[\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — Triangle rectangle, périmètre 50</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(ABC\) rectangle en \(B\), hypoténuse \(AC=x\), \(AB=2\,BC\). Périmètre \(=50\).</div>
+        <p>Posons \(BC=a\), donc \(AB=2a\). Pythagore : \(AC^2=AB^2+BC^2=4a^2+a^2=5a^2\), donc \(x=a\sqrt5\), soit \(a=\dfrac{x}{\sqrt5}\).</p>
+        <p>Périmètre : \(AB+BC+AC=2a+a+x=3a+x=\dfrac{3x}{\sqrt5}+x=x\left(1+\dfrac{3}{\sqrt5}\right)=x\cdot\dfrac{5+3\sqrt5}{5}\).</p>
+        <p>On résout \(x\cdot\dfrac{5+3\sqrt5}{5}=50\Rightarrow x=\dfrac{250}{5+3\sqrt5}=\dfrac{25(3\sqrt5-5)}{2}\) (après rationalisation).</p>
+        <div class="res">\(x=\dfrac{75\sqrt5-125}{2}\approx 21{,}35\text{ cm}\).</div>
+      </div>
+    </div>
+
+    <h3>Partie 3 — Valeur absolue et partie entière</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 7 — Équations et inéquations avec \(|\cdot|\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(|8x-4|=|-2x+3|\)</p><p>\(8x-4=\pm(2x-3)\) : \(6x=1\) ou \(10x=7\).</p><p class="res">\(S=\left\{\tfrac16,\ \tfrac{7}{10}\right\}\)</p>
+        <p class="q">(b) \(|x-2|=2|x+1|\)</p><p>\(x-2=\pm(2x+2)\) : \(-x=4\) (\(x=-4\)) ou \(3x=0\) (\(x=0\)).</p><p class="res">\(S=\{-4,\ 0\}\)</p>
+        <p class="q">(c) \(|x^2-x+5|=|x-1|\)</p><p>\(x^2-x+5>0\) (\(\Delta<0\)) donc \(=|x-1|\) donne \(x^2-x+5=\pm(x-1)\), soit \(x^2-2x+6=0\) ou \(x^2+4=0\) : aucun réel.</p><p class="res">\(S=\varnothing\)</p>
+        <p class="q">(d) \(|x+1|+|1-2x|=9\)</p>
+        <p>Points \(x=-1\) et \(x=\tfrac12\). Cas \(x<-1\) : \(-3x=9\Rightarrow x=-3\) ✓. Cas \([-1,\tfrac12]\) : \(-x+2=9\Rightarrow x=-7\) ✗. Cas \(x>\tfrac12\) : \(3x=9\Rightarrow x=3\) ✓.</p>
+        <p class="res">\(S=\{-3,\ 3\}\)</p>
+        <p class="q">(e) \(|3x-5|\geqslant-2\)</p><p>Une valeur absolue est toujours \(\geqslant0\geqslant-2\).</p><p class="res">\(S=\mathbb R\)</p>
+        <p class="q">(f) \(|2x-7|<1\)</p><p>\(-1<2x-7<1\Rightarrow 6<2x<8\).</p><p class="res">\(S=\,]3,4[\)</p>
+        <p class="q">(g) \(|x-1|\leqslant|-3x+4|\)</p><p>Carré : \((3x-4)^2-(x-1)^2\geqslant0\Rightarrow(2x-3)(4x-5)\geqslant0\).</p><p class="res">\(S=\left]-\infty,\tfrac54\right]\cup\left[\tfrac32,+\infty\right[\)</p>
+        <p class="q">(h) \(|2x-7|>|4x+2|\)</p><p>Carré : \((2x-7)^2-(4x+2)^2>0\Rightarrow(2x+9)(6x-5)<0\).</p><p class="res">\(S=\left]-\tfrac92,\ \tfrac56\right[\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 8 — Inégalité triangulaire renversée</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) Inégalité triangulaire pour \(x+y\) et \(-y\)</p>
+        <p>\(\big|(x+y)+(-y)\big|\leqslant|x+y|+|-y|\), soit \(|x|\leqslant|x+y|+|y|\), d'où \(|x|-|y|\leqslant|x+y|\).</p>
+        <p class="q">(b) Pour \(x+y\) et \(-x\)</p>
+        <p>\(\big|(x+y)+(-x)\big|\leqslant|x+y|+|-x|\), soit \(|y|\leqslant|x+y|+|x|\), d'où \(|y|-|x|\leqslant|x+y|\).</p>
+        <p class="q">(c) Conclusion</p>
+        <p>(a) et (b) donnent \(\pm(|x|-|y|)\leqslant|x+y|\), donc \(\big|\,|x|-|y|\,\big|\leqslant|x+y|\). Avec l'inégalité triangulaire usuelle :</p>
+        <p class="res">\(\big|\,|x|-|y|\,\big|\leqslant|x+y|\leqslant|x|+|y|\). ∎</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 9 — \(\left|\dfrac{x+y}{1+xy}\right|<1\) sur \(]-1,1[^2\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p>Pour \(x,y\in\,]-1,1[\), on a \(xy>-1\), donc \(1+xy>0\). L'inégalité \(\left|\dfrac{x+y}{1+xy}\right|<1\)
+        équivaut (dénominateur positif) à \(|x+y|<1+xy\), soit \((x+y)^2<(1+xy)^2\). Or :</p>
+        \[ (1+xy)^2-(x+y)^2=1+x^2y^2-x^2-y^2=(1-x^2)(1-y^2). \]
+        <p>Comme \(x^2<1\) et \(y^2<1\), les deux facteurs sont \(>0\), donc le produit est \(>0\).</p>
+        <div class="res">\((1+xy)^2>(x+y)^2\), d'où \(\left|\dfrac{x+y}{1+xy}\right|<1\). ∎</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 10 — Équations avec partie entière</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\lfloor x\rfloor=3\)</p><p>\(\iff 3\leqslant x<4\).</p><p class="res">\(S=[3,4[\)</p>
+        <p class="q">(b) \(2\lfloor x-1\rfloor-3=4\)</p><p>\(\lfloor x-1\rfloor=\tfrac72\) : impossible (une partie entière est un entier).</p><p class="res">\(S=\varnothing\)</p>
+        <p class="q">(c) \(-5\left\lfloor-\tfrac17(x-3)\right\rfloor+1=6\)</p>
+        <p>\(\left\lfloor-\tfrac{x-3}{7}\right\rfloor=-1\iff -1\leqslant-\tfrac{x-3}{7}<0\). En multipliant par \(-7\) (sens inversé) : \(0<x-3\leqslant7\).</p>
+        <p class="res">\(S=\,]3,\ 10]\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 11 — Propriétés de \(\lfloor\cdot\rfloor\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(x\leqslant y\Rightarrow\lfloor x\rfloor\leqslant\lfloor y\rfloor\)</p>
+        <p>\(\lfloor x\rfloor\leqslant x\leqslant y\), et \(\lfloor x\rfloor\in\mathbb Z\). Comme \(\lfloor y\rfloor\) est le
+        <b>plus grand</b> entier \(\leqslant y\), on a \(\lfloor x\rfloor\leqslant\lfloor y\rfloor\).</p>
+        <p class="q">(b) \(\lfloor x\rfloor+\lfloor y\rfloor\leqslant\lfloor x+y\rfloor\leqslant\lfloor x\rfloor+\lfloor y\rfloor+1\)</p>
+        <p>Écrivons \(x=\lfloor x\rfloor+\{x\}\), \(y=\lfloor y\rfloor+\{y\}\) avec \(0\leqslant\{x\},\{y\}<1\). Alors
+        \(x+y=\big(\lfloor x\rfloor+\lfloor y\rfloor\big)+(\{x\}+\{y\})\) avec \(0\leqslant\{x\}+\{y\}<2\). Comme
+        \(\lfloor x\rfloor+\lfloor y\rfloor\in\mathbb Z\) :</p>
+        \[ \lfloor x+y\rfloor=\lfloor x\rfloor+\lfloor y\rfloor+\underbrace{\lfloor\{x\}+\{y\}\rfloor}_{\in\{0,1\}}. \]
+        <p class="res">D'où l'encadrement. ∎</p>
+      </div>
+    </div>
+
+    <h3>Partie 4 — Topologie réelle</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 12 — Intérieur et fermeture dans \(\overline{\mathbb R}\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">L'intérieur ôte les extrémités, la fermeture les ajoute (\(\pm\infty\) inclus).</div>
+        <div class="overflow"><table>
+          <thead><tr><th>\(I\)</th><th>Intérieur \(\mathring I\)</th><th>Fermeture \(\overline I\)</th></tr></thead>
+          <tbody>
+            <tr><td>\(\mathbb R\)</td><td>\(\mathbb R\)</td><td>\([-\infty,+\infty]\)</td></tr>
+            <tr><td>\(\mathbb R_+=[0,+\infty[\)</td><td>\(]0,+\infty[\)</td><td>\([0,+\infty]\)</td></tr>
+            <tr><td>\(\mathbb R_-^*=\,]-\infty,0[\)</td><td>\(]-\infty,0[\)</td><td>\([-\infty,0]\)</td></tr>
+            <tr><td>\([1,2[\)</td><td>\(]1,2[\)</td><td>\([1,2]\)</td></tr>
+            <tr><td>\([1,2]\)</td><td>\(]1,2[\)</td><td>\([1,2]\)</td></tr>
+            <tr><td>\(]1,2[\)</td><td>\(]1,2[\)</td><td>\([1,2]\)</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 13 — Tableau max / sup / min / inf</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">« — » = n'existe pas. Bornes considérées dans \(\overline{\mathbb R}\).</div>
+        <div class="overflow"><table>
+          <thead><tr><th>Ensemble \(A\)</th><th>\(\max A\)</th><th>\(\sup A\)</th><th>\(\min A\)</th><th>\(\inf A\)</th></tr></thead>
+          <tbody>
+            <tr><td>\(\mathbb R_-^*=\,]-\infty,0[\)</td><td>—</td><td>\(0\)</td><td>—</td><td>\(-\infty\)</td></tr>
+            <tr><td>\([0,1[\)</td><td>—</td><td>\(1\)</td><td>\(0\)</td><td>\(0\)</td></tr>
+            <tr><td>\([0,1]\cup[2,3]\)</td><td>\(3\)</td><td>\(3\)</td><td>\(0\)</td><td>\(0\)</td></tr>
+            <tr><td>\(]-\infty,3]\)</td><td>\(3\)</td><td>\(3\)</td><td>—</td><td>\(-\infty\)</td></tr>
+            <tr><td>\(]6,+\infty[\)</td><td>—</td><td>\(+\infty\)</td><td>—</td><td>\(6\)</td></tr>
+            <tr><td>\([1,5[\cup\{0\}\)</td><td>—</td><td>\(5\)</td><td>\(0\)</td><td>\(0\)</td></tr>
+            <tr><td>\(\left\{\tfrac{n+5}{n+1}\mid n\in\mathbb N\right\}\)</td><td>\(5\)</td><td>\(5\)</td><td>—</td><td>\(1\)</td></tr>
+            <tr><td>\(\left\{1-\tfrac1n\mid n\in\mathbb N^*\right\}\)</td><td>—</td><td>\(1\)</td><td>\(0\)</td><td>\(0\)</td></tr>
+            <tr><td>\(\{q\in\mathbb Q\mid q>0\}\)</td><td>—</td><td>\(+\infty\)</td><td>—</td><td>\(0\)</td></tr>
+            <tr><td>\(\{x\mid x^2-2x-3<0\}=\,]-1,3[\)</td><td>—</td><td>\(3\)</td><td>—</td><td>\(-1\)</td></tr>
+            <tr><td>\(\left\{(-1)^n+\tfrac1n\mid n\in\mathbb N^*\right\}\)</td><td>\(\tfrac32\)</td><td>\(\tfrac32\)</td><td>—</td><td>\(-1\)</td></tr>
+            <tr><td>\(\left\{\tfrac{(-1)^n}{n}\mid n\in\mathbb N^*\right\}\)</td><td>\(\tfrac12\)</td><td>\(\tfrac12\)</td><td>\(-1\)</td><td>\(-1\)</td></tr>
+            <tr><td>\(\{\sqrt n-\lfloor\sqrt n\rfloor\mid n\in\mathbb N\}\)</td><td>—</td><td>\(1\)</td><td>\(0\)</td><td>\(0\)</td></tr>
+          </tbody>
+        </table></div>
+        <p style="font-size:.9rem;opacity:.85">Justifications-clés : \(\tfrac{n+5}{n+1}=1+\tfrac4{n+1}\) décroît de
+        \(5\) (n=0) vers \(1\) (non atteint) ; \((-1)^n+\tfrac1n\) : sous-suite paire décroît vers \(1\) (max \(\tfrac32\) en \(n=2\)),
+        sous-suite impaire croît vers \(-1\) (inf \(-1\) non atteint) ; \(\{\sqrt n\}\) prend \(0\) aux carrés parfaits et
+        s'approche de \(1\) (sup non atteint).</p>
+      </div>
+    </div>
+
+    <h3>Partie 5 — Systèmes linéaires</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 14 — Systèmes \(3\times3\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(2x+3y-2z=3\ ;\ x+2y+z=4\ ;\ x-6y+4z=-1\)</p>
+        <p>De \(L_2\) : \(x=4-2y-z\). Report dans \(L_1\) : \(y+4z=5\) ; dans \(L_3\) : \(8y-3z=5\).
+        On tire \(z=1\), \(y=1\), \(x=1\).</p>
+        <p class="res">\(S=\{(1,1,1)\}\)</p>
+        <p class="q">(b) \(x+y-2z=1\ ;\ x+2y+z=4\ ;\ -3x-3y+6z=-1\)</p>
+        <p>\(L_3=-3(x+y-2z)\), donc \(L_3\) impose \(-3\cdot1=-1\), soit \(-3=-1\) : contradiction.</p>
+        <p class="res">\(S=\varnothing\) (système incompatible)</p>
+        <p class="q">(c) \(x-y+z=1\ ;\ 2x-2y+3z=3\ ;\ x-3y+2z=2\)</p>
+        <p>\(L_2-2L_1\) : \(z=1\). \(L_3-L_1\) : \(-2y+z=1\Rightarrow y=0\). \(L_1\) : \(x=0\).</p>
+        <p class="res">\(S=\{(0,0,1)\}\)</p>
+        <p class="q">(d) \(-x+y+z=0\ ;\ 3x+y+3z=-1\ ;\ x+y+2z=-\tfrac12\)</p>
+        <p>De \(L_1\) : \(y=x-z\). Report : \(L_2\Rightarrow 4x+2z=-1\), \(L_3\Rightarrow 2x+z=-\tfrac12\).
+        La seconde est la moitié de la première (\(-1=-1\)) : système <b>indéterminé</b>. En posant \(x=t\) :
+        \(z=-\tfrac12-2t\), \(y=x-z=3t+\tfrac12\).</p>
+        <p class="res">\(S=\left\{\left(t,\ 3t+\tfrac12,\ -2t-\tfrac12\right)\ \middle|\ t\in\mathbb R\right\}\) (infinité de solutions)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 15 — Âges de Donald, Léo, Brigitte</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">(1) \(D-B=7\) (Donald aîné) ; (2) \(D+L+B=192\) ; (3) \(\tfrac{B+L}{2}=56\).</div>
+        <p>De (3) : \(B+L=112\). Report dans (2) : \(D+112=192\Rightarrow D=80\). Puis (1) : \(B=D-7=73\), et
+        \(L=112-B=39\).</p>
+        <div class="res">Donald \(=80\) ans, Brigitte \(=73\) ans, Léo \(=39\) ans.</div>
+        <p style="font-size:.9rem;opacity:.85">Vérif : \(80+39+73=192\) ✓ et \(\tfrac{73+39}{2}=56\) ✓.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <p style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.9rem;opacity:.75">
+    Chapitre 4 du cours M01 (S1). Sources : <em>Chap_4.pdf</em> (cours magistral) et
+    <em>TD04 — Les nombres réels</em>. Corrigé rédigé intégralement (pas de corrigé officiel fourni).
+  </p>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours (CM)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/nombres-reels/Chap_4.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Chap_4</span><span class="badge">Cours (CM)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/nombres-reels/TD04___Nombres_r%C3%A9els.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD04___Nombres_réels</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

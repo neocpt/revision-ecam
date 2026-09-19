@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Géométrie de l'espace — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-math">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Maths · M02 — Géométrie de l'espace</span>
+  <h1 class="title">Géométrie de l'espace</h1>
+  <p class="lead">Coordonnées cartésiennes et cylindriques ; produit scalaire (angles) ; <b>produit vectoriel</b> \(\vec u\wedge\vec v\)
+  (normale, aire) ; <b>produit mixte</b> \([\vec u,\vec v,\vec w]\) (déterminant 3×3, volume, coplanarité) ; plans (paramétrique,
+  cartésienne, vecteur normal) ; droites (paramétrique, intersection de plans) ; distances (point–plan, point–droite, droite–droite) ; sphères.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD (16 exercices)</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+    <p>Espace euclidien muni d'un repère orthonormé direct \(\mathfrak R(O,\vec\imath,\vec\jmath,\vec k)\).
+    Point \(M(x,y,z)\) tel que \(\vec{OM}=x\vec\imath+y\vec\jmath+z\vec k\).</p>
+
+    <h3>1.1 Coordonnées : cartésiennes ↔ cylindriques</h3>
+    <div class="def">
+      <span class="lab">Cylindriques \((r,\theta,z)\)</span>
+      \(\begin{cases}x=r\cos\theta\\ y=r\sin\theta\\ z=z\end{cases}\) avec \(r=\sqrt{x^2+y^2}\geqslant0\) (distance à l'axe \(Oz\)),
+      \(\theta\) angle dans le plan horizontal (attention au quadrant), \(z\) la hauteur.
+    </div>
+    <p>Distance : \(AB=\sqrt{(x_B-x_A)^2+(y_B-y_A)^2+(z_B-z_A)^2}\) ; norme \(\|\vec u\|=\sqrt{x^2+y^2+z^2}\).</p>
+
+    <h3>1.2 Produit scalaire</h3>
+    <div class="thm">
+      <span class="lab">Expression & angle</span>
+      \(\vec u\cdot\vec v=xx'+yy'+zz'=\|\vec u\|\,\|\vec v\|\cos\theta\), avec \(\theta=(\vec u,\vec v)\in[0,\pi]\)
+      (dans l'espace l'angle <b>n'est pas orienté</b>). Orthogonalité : \(\vec u\perp\vec v\iff\vec u\cdot\vec v=0\).
+    </div>
+
+    <h3>1.3 Produit vectoriel</h3>
+    <div class="thm">
+      <span class="lab">Définition</span>
+      Pour \(\vec u=(x,y,z)\), \(\vec v=(x',y',z')\) en base orthonormée directe :
+      \[ \vec u\wedge\vec v=\big(yz'-zy',\ zx'-xz',\ xy'-yx'\big). \]
+      Il est <b>orthogonal</b> à \(\vec u\) et \(\vec v\), <b>antisymétrique</b> (\(\vec v\wedge\vec u=-\vec u\wedge\vec v\)), bilinéaire.
+    </div>
+    <div class="note">
+      <span class="lab">À quoi ça sert</span>
+      • \(\vec u\wedge\vec v=\vec 0\iff\vec u,\vec v\) colinéaires (points \(A,B,C\) alignés ⟺ \(\vec{AB}\wedge\vec{AC}=\vec 0\)).<br>
+      • Identité de Lagrange : \(\|\vec u\wedge\vec v\|=\|\vec u\|\,\|\vec v\|\sin(\vec u,\vec v)\).<br>
+      • <b>Aire</b> du triangle \(=\tfrac12\|\vec{AB}\wedge\vec{AC}\|\) ; du parallélogramme \(=\|\vec u\wedge\vec v\|\).<br>
+      • <b>Vecteur normal</b> à un plan : \(\vec n=\vec u\wedge\vec v\).
+    </div>
+
+    <h3>1.4 Produit mixte (déterminant 3×3)</h3>
+    <div class="thm">
+      <span class="lab">Définition</span>
+      \([\vec u,\vec v,\vec w]=(\vec u\wedge\vec v)\cdot\vec w=\det(\vec u,\vec v,\vec w)=
+      \begin{vmatrix}x&x'&x''\\ y&y'&y''\\ z&z'&z''\end{vmatrix}\) (règle de Sarrus).
+      Antisymétrique (change de signe par échange de deux vecteurs), <b>invariant par permutation circulaire</b>, alterné (nul si deux vecteurs égaux).
+    </div>
+    <div class="note">
+      <span class="lab">Interprétations</span>
+      <b>Volume</b> du parallélépipède \(=\big|[\vec u,\vec v,\vec w]\big|\) ; du <b>tétraèdre</b> \(=\tfrac16\big|[\vec{AB},\vec{AC},\vec{AD}]\big|\).
+      <b>Coplanarité</b> : \(\vec u,\vec v,\vec w\) coplanaires ⟺ \([\vec u,\vec v,\vec w]=0\).
+    </div>
+
+    <h3>1.5 Plans</h3>
+    <div class="thm">
+      <span class="lab">Deux représentations</span>
+      <b>Paramétrique</b> (point \(A\), deux directeurs non colinéaires \(\vec u,\vec v\)) :
+      \((x,y,z)=A+\alpha\vec u+\beta\vec v\).<br>
+      <b>Cartésienne</b> : \(ax+by+cz+d=0\) avec vecteur normal \(\vec n=(a,b,c)\).
+      Passage : \(\vec n=\vec u\wedge\vec v\), puis \(a(x-x_A)+b(y-y_A)+c(z-z_A)=0\).
+    </div>
+    <div class="note">
+      <span class="lab">Positions</span>
+      Deux plans sont <b>parallèles</b> ⟺ leurs normales sont proportionnelles ; <b>confondus</b> ⟺ \((a,b,c,d)\) proportionnels.
+      Un plan « perpendiculaire à une droite » a pour normale le vecteur directeur de la droite.
+    </div>
+
+    <h3>1.6 Droites</h3>
+    <div class="thm">
+      <span class="lab">Paramétrique & intersection de plans</span>
+      \(D=A+\operatorname{Vect}(\vec u)\) : \((x,y,z)=A+t\vec u\). Toute droite s'écrit comme intersection de deux plans
+      \(\{P_1,P_2\}\) ; un <b>directeur</b> est alors \(\vec u=\vec n_1\wedge\vec n_2\). Deux droites sont sécantes si le système de leurs
+      paramétrages admet une solution ; parallèles si \(\vec u_1\parallel\vec u_2\).
+    </div>
+
+    <h3>1.7 Distances</h3>
+    <div class="thm">
+      <span class="lab">Trois formules clés</span>
+      <b>Point–plan</b> \(P:ax+by+cz+d=0\) : \(\displaystyle d(M,P)=\frac{|ax_M+by_M+cz_M+d|}{\sqrt{a^2+b^2+c^2}}\).<br>
+      <b>Point–droite</b> \(D=A+\operatorname{Vect}(\vec u)\) : \(\displaystyle d(M,D)=\frac{\|\vec{AM}\wedge\vec u\|}{\|\vec u\|}\).<br>
+      <b>Droite–droite</b> (non parallèles) : \(\displaystyle d(D,D')=\frac{\big|[\vec u,\vec u',\vec{MM'}]\big|}{\|\vec u\wedge\vec u'\|}\)
+      (volume ÷ aire de base = hauteur).
+    </div>
+    <div class="method">
+      <span class="lab">Projeté orthogonal de \(M\) sur \(D=A+\operatorname{Vect}(\vec u)\)</span>
+      \(H=A+\dfrac{\vec{AM}\cdot\vec u}{\|\vec u\|^2}\,\vec u\) (unique point de \(D\) tel que \(\vec{HM}\cdot\vec u=0\)).
+    </div>
+
+    <h3>1.8 Sphères</h3>
+    <div class="thm">
+      <span class="lab">Équation</span>
+      \((x-a)^2+(y-b)^2+(z-c)^2=R^2\), soit \(x^2+y^2+z^2-2ax-2by-2cz+(a^2+b^2+c^2-R^2)=0\) (compléter les carrés).
+    </div>
+    <div class="note">
+      <span class="lab">Intersections avec un plan \(P\) / une droite \(D\)</span>
+      On compare \(d(\Omega,\cdot)\) à \(R\). <b>Plan</b> : \(>R\) : \(\varnothing\) ; \(=R\) : tangent (1 point) ;
+      \(<R\) : <b>cercle</b> de centre \(H\) (projeté de \(\Omega\)) et rayon \(\sqrt{R^2-d^2}\). <b>Droite</b> : 0, 1 (tangente) ou 2 points.
+    </div>
+  </section>
+
+  <!-- ======================= EXOS CRÉÉS =============================== -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Aire et normale par le produit vectoriel</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(A(1,0,0)\), \(B(0,2,0)\), \(C(0,0,3)\). Normale au plan \((ABC)\), aire du triangle, équation cartésienne.</div>
+        <p class="q">1) Produit vectoriel</p>
+        <p>\(\vec{AB}=(-1,2,0)\), \(\vec{AC}=(-1,0,3)\). \(\vec{AB}\wedge\vec{AC}=(2\cdot3-0\cdot0,\ 0\cdot(-1)-(-1)\cdot3,\ (-1)\cdot0-2\cdot(-1))=(6,3,2)\).</p>
+        <p class="res">Normale \(\vec n=(6,3,2)\), \(\|\vec n\|=7\)</p>
+        <p class="q">2) Aire</p><p>\(\mathcal A=\tfrac12\|\vec n\|=\tfrac72\).</p><p class="res">\(\mathcal A=3{,}5\)</p>
+        <p class="q">3) Équation cartésienne</p><p>\(6(x-1)+3y+2z=0\Rightarrow6x+3y+2z-6=0\) (contrôle \(B\) : \(6+0-6=0\)... \(3\cdot2=6\), \(6\cdot0+6+0-6=0\) ✓).</p>
+        <p class="res">\(6x+3y+2z=6\) (soit \(\tfrac x1+\tfrac y2+\tfrac z3=1\), équation par les intercepts)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Volume d'un tétraèdre</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(A(0,0,0)\), \(B(1,0,0)\), \(C(0,1,0)\), \(D(0,0,1)\). Volume du tétraèdre.</div>
+        <p>\(\vec{AB}=(1,0,0)\), \(\vec{AC}=(0,1,0)\), \(\vec{AD}=(0,0,1)\). \([\vec{AB},\vec{AC},\vec{AD}]=\det I_3=1\).</p>
+        <p>\(V=\tfrac16|1|\).</p>
+        <p class="res">\(V=\dfrac16\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Distance point–droite (deux méthodes)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(D=A+\operatorname{Vect}(\vec u)\), \(A(1,0,0)\), \(\vec u=(0,1,1)\) ; point \(M(2,0,3)\).</div>
+        <p class="q">Méthode 1 (formule vectorielle)</p>
+        <p>\(\vec{AM}=(1,0,3)\), \(\vec{AM}\wedge\vec u=(0\cdot1-3\cdot1,\ 3\cdot0-1\cdot1,\ 1\cdot1-0\cdot0)=(-3,-1,1)\), \(\|\cdot\|=\sqrt{11}\), \(\|\vec u\|=\sqrt2\).</p>
+        <p class="res">\(d=\dfrac{\sqrt{11}}{\sqrt2}=\dfrac{\sqrt{22}}2\approx2{,}345\)</p>
+        <p class="q">Méthode 2 (projeté)</p>
+        <p>\(H=A+\dfrac{\vec{AM}\cdot\vec u}{\|\vec u\|^2}\vec u\) ; \(\vec{AM}\cdot\vec u=0+0+3=3\), \(t^*=\tfrac32\). \(H=(1,\tfrac32,\tfrac32)\).
+        \(\vec{HM}=(1,-\tfrac32,\tfrac32)\), \(\|\vec{HM}\|=\sqrt{1+\tfrac94+\tfrac94}=\sqrt{\tfrac{22}4}=\tfrac{\sqrt{22}}2\).</p>
+        <p class="res">Même distance \(\dfrac{\sqrt{22}}2\) ✓</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CORRECTION TD =============================== -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD</h2>
+    <p class="lead" style="font-size:.95rem">Source : <i>TD-V2026 « Géométrie de l'espace »</i> (16 exercices). Repère orthonormé direct \((O,\vec\imath,\vec\jmath,\vec k)\).
+    <b>Pas de corrigé officiel</b> → tout résolu et vérifié maison.</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — Conversions cartésien ↔ cylindrique</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) cyl. \(r=3,\ \theta=-\tfrac\pi6,\ z=2\) → cart.</p>
+        <p>\(x=3\cos(-\tfrac\pi6)=\tfrac{3\sqrt3}2\), \(y=3\sin(-\tfrac\pi6)=-\tfrac32\), \(z=2\).</p>
+        <p class="res">\(\big(\tfrac{3\sqrt3}2,-\tfrac32,2\big)\)</p>
+        <p class="q">(b) cyl. \(r=3,\ \theta=\tfrac\pi6,\ z=4\) → cart.</p>
+        <p class="res">\(\big(\tfrac{3\sqrt3}2,\tfrac32,4\big)\)</p>
+        <p class="q">(c) cart. \((-\sqrt2,\sqrt2,1)\) → cyl.</p>
+        <p>\(r=\sqrt{2+2}=2\), \(\cos\theta=-\tfrac{\sqrt2}2,\ \sin\theta=\tfrac{\sqrt2}2\Rightarrow\theta=\tfrac{3\pi}4\).</p>
+        <p class="res">\(\big(2,\tfrac{3\pi}4,1\big)\)</p>
+        <p class="q">(d) cart. \((\sqrt3,1,2)\) → cyl.</p>
+        <p>\(r=\sqrt{3+1}=2\), \(\cos\theta=\tfrac{\sqrt3}2,\ \sin\theta=\tfrac12\Rightarrow\theta=\tfrac\pi6\).</p>
+        <p class="res">\(\big(2,\tfrac\pi6,2\big)\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — Angles d'un triangle (produit scalaire)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(A(1,0,1)\), \(B(2,1,0)\), \(C(3,-2,4)\), angles à \(0{,}1^\circ\) près.</div>
+        <p class="q">Angle \(\hat A\)</p>
+        <p>\(\vec{AB}=(1,1,-1)\), \(\vec{AC}=(2,-2,3)\). \(\vec{AB}\cdot\vec{AC}=2-2-3=-3\), \(\|\vec{AB}\|=\sqrt3\), \(\|\vec{AC}\|=\sqrt{17}\).
+        \(\cos\hat A=\dfrac{-3}{\sqrt{51}}\approx-0{,}4201\).</p>
+        <p class="res">\(\hat A\approx114{,}8^\circ\)</p>
+        <p class="q">Angle \(\hat B\)</p>
+        <p>\(\vec{BA}=(-1,-1,1)\), \(\vec{BC}=(1,-3,4)\). \(\vec{BA}\cdot\vec{BC}=-1+3+4=6\), \(\|\vec{BC}\|=\sqrt{26}\).
+        \(\cos\hat B=\dfrac{6}{\sqrt{3}\sqrt{26}}=\dfrac6{\sqrt{78}}\approx0{,}6794\).</p>
+        <p class="res">\(\hat B\approx47{,}2^\circ\)</p>
+        <p class="q">Angle \(\hat C\)</p>
+        <p>\(\hat C=180^\circ-\hat A-\hat B\) (contrôle direct : \(\vec{CA}\cdot\vec{CB}=20\), \(\cos\hat C=\tfrac{20}{\sqrt{442}}\approx0{,}951\)).</p>
+        <p class="res">\(\hat C\approx18{,}0^\circ\) (somme \(=180^\circ\) ✓)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — Produit vectoriel</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(\vec u(1,2,-1)\), \(\vec v(2,-3,1)\). Calculer \(\vec u\wedge\vec v\).</div>
+        <p>\(\vec u\wedge\vec v=\big(2\cdot1-(-1)(-3),\ (-1)\cdot2-1\cdot1,\ 1\cdot(-3)-2\cdot2\big)=(2-3,\ -2-1,\ -3-4)\).</p>
+        <p class="res">\(\vec u\wedge\vec v=(-1,-3,-7)\)</p>
+        <p>Contrôle : \(\vec u\cdot(\vec u\wedge\vec v)=-1-6+7=0\) et \(\vec v\cdot(\vec u\wedge\vec v)=-2+9-7=0\) ✓.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — Aire d'un triangle par le produit vectoriel</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(A(1,2,1)\), \(B(1,0,2)\), \(C(0,1,3)\).</div>
+        <p>\(\vec{AB}=(0,-2,1)\), \(\vec{AC}=(-1,-1,2)\).
+        \(\vec{AB}\wedge\vec{AC}=\big((-2)2-1(-1),\ 1(-1)-0\cdot2,\ 0(-1)-(-2)(-1)\big)=(-3,-1,-2)\).</p>
+        <p>\(\|\vec{AB}\wedge\vec{AC}\|=\sqrt{9+1+4}=\sqrt{14}\), \(\mathcal A=\tfrac12\sqrt{14}\).</p>
+        <p class="res">\(\mathcal A=\dfrac{\sqrt{14}}2\approx1{,}871\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — Produit mixte (Sarrus)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(\vec u(1,2,0)\), \(\vec v(-1,3,1)\), \(\vec w(1,0,-1)\). Calculer \([\vec w,\vec u,\vec v]\).</div>
+        <p>Déterminant des colonnes \((\vec w,\vec u,\vec v)\) :
+        \(\begin{vmatrix}1&1&-1\\ 0&2&3\\ -1&0&1\end{vmatrix}\).</p>
+        <p>Sarrus : \((1\cdot2\cdot1)+(1\cdot3\cdot(-1))+((-1)\cdot0\cdot0)-((-1)\cdot2\cdot(-1))-(1\cdot0\cdot1)-(1\cdot3\cdot0)
+        =2-3+0-2-0-0\).</p>
+        <p class="res">\([\vec w,\vec u,\vec v]=-3\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — Volume d'un tétraèdre</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(A(2,-1,1)\), \(B(5,5,4)\), \(C(3,2,-1)\), \(D(4,1,3)\). \(V=\tfrac16|[\vec{AB},\vec{AC},\vec{AD}]|\).</div>
+        <p>\(\vec{AB}=(3,6,3)\), \(\vec{AC}=(1,3,-2)\), \(\vec{AD}=(2,2,2)\).</p>
+        <p>\(\begin{vmatrix}3&1&2\\ 6&3&2\\ 3&-2&2\end{vmatrix}
+        =3(3\cdot2-2(-2))-1(6\cdot2-2\cdot3)+2(6(-2)-3\cdot3)=3(10)-1(6)+2(-21)=30-6-42=-18\).</p>
+        <p>\(V=\tfrac16|-18|\).</p>
+        <p class="res">\(V=3\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 7 — Équations de plans (5 cas)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">1) \(A(1,0,1)\), normal \(\vec n(1,-1,2)\)</p>
+        <p>Cartésienne : \(1(x-1)-1\cdot y+2(z-1)=0\Rightarrow x-y+2z-3=0\).
+        Directeurs \(\perp\vec n\) : \(\vec u(1,1,0),\vec v(2,0,-1)\).</p>
+        <p class="res">\(x-y+2z-3=0\) ; \(\{x=1+\alpha+2\beta,\ y=\alpha,\ z=1-\beta\}\)</p>
+        <p class="q">2) \(A(0,1,1)\), engendré par \(\vec u(1,-1,0),\ \vec v(0,0,2)\)</p>
+        <p>Normale \(\vec u\wedge\vec v=(-2,-2,0)\propto(1,1,0)\). Cartésienne : \(x+(y-1)=0\Rightarrow x+y-1=0\).</p>
+        <p class="res">\(x+y-1=0\) ; \(\{x=\alpha,\ y=1-\alpha,\ z=1+2\beta\}\)</p>
+        <p class="q">3) \(A(1,-1,0)\), parallèle à \(\mathfrak D:x-2z+1=0\)</p>
+        <p>Même normale \((1,0,-2)\) : \((x-1)-2z=0\Rightarrow x-2z-1=0\).</p>
+        <p class="res">\(x-2z-1=0\) ; \(\{x=1+2\beta,\ y=-1+\alpha,\ z=\beta\}\)</p>
+        <p class="q">4) \(A(1,-1,1)\), perpendiculaire à \(D:\{2x-y+1=0,\ x-y+z-2=0\}\)</p>
+        <p>Le plan a pour normale le directeur de \(D\) : \(\vec n_1\wedge\vec n_2\) avec \(\vec n_1(2,-1,0),\vec n_2(1,-1,1)\) :
+        \((-1,-2,-1)\propto(1,2,1)\). Cartésienne : \((x-1)+2(y+1)+(z-1)=0\Rightarrow x+2y+z=0\).</p>
+        <p class="res">\(x+2y+z=0\) ; \(\{x=1+2\alpha+\beta,\ y=-1-\alpha,\ z=1-\beta\}\)</p>
+        <p class="q">5) \(A(1,0,1)\), \(B(0,1,-1)\), \(C(2,1,0)\)</p>
+        <p>\(\vec{AB}=(-1,1,-2)\), \(\vec{AC}=(1,1,-1)\), \(\vec{AB}\wedge\vec{AC}=(1,-3,-2)\).
+        Cartésienne : \((x-1)-3y-2(z-1)=0\Rightarrow x-3y-2z+1=0\) (contrôle \(B,C\) ✓).</p>
+        <p class="res">\(x-3y-2z+1=0\) ; \(\{x=1-\alpha+\beta,\ y=\alpha+\beta,\ z=1-2\alpha-\beta\}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 8 — Droite \((AB)\) ∩ plan</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(A(0,1,2)\), \(B(1,3,4)\), plan \(P:x+y+z=3\).</div>
+        <p class="q">1) Paramétrique de \((AB)\)</p>
+        <p>\(\vec{AB}=(1,2,2)\).</p>
+        <p class="res">\(\{x=t,\ y=1+2t,\ z=2+2t\}\)</p>
+        <p class="q">2) Intersection avec \(P\)</p>
+        <p>\(t+(1+2t)+(2+2t)=3\Rightarrow5t+3=3\Rightarrow t=0\), qui donne le point \(A(0,1,2)\).</p>
+        <p class="res">\((AB)\cap P=\{A(0,1,2)\}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 9 — Pivot de Gauss & droite d'intersection</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(\{x+2y-z=1,\ 2x-y+z=0\}\).</div>
+        <p><b>Gauss</b> : \(L_2\leftarrow L_2-2L_1\) : \(-5y+3z=-2\Rightarrow y=\dfrac{2+3z}5\). Puis \(x=1-2y+z=\dfrac{1-z}5\).</p>
+        <p>En posant \(z=\lambda\) : \(x=\dfrac{1-\lambda}5,\ y=\dfrac{2+3\lambda}5,\ z=\lambda\).</p>
+        <p>Vérif : directeur \(\vec n_1\wedge\vec n_2\) avec \(\vec n_1(1,2,-1),\vec n_2(2,-1,1)\) donne \((1,-3,-5)\), proportionnel à \((-1,3,5)\) ✓.</p>
+        <p class="res">Point \(\big(\tfrac15,\tfrac25,0\big)\), directeur \((-1,3,5)\) : \(\{x=\tfrac15-t,\ y=\tfrac25+3t,\ z=5t\}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 10 — Trois plans : \(AX=B\), \(\det A\), \(A^{-1}\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(\{x+y+z=3,\ 2x-y+z=1,\ x+2y-3z=0\}\).</div>
+        <p class="q">1) Forme matricielle & déterminant</p>
+        <p>\(A=\begin{pmatrix}1&1&1\\ 2&-1&1\\ 1&2&-3\end{pmatrix}\), \(B=\begin{pmatrix}3\\1\\0\end{pmatrix}\).
+        \(\det A=1(3-2)-1(-6-1)+1(4+1)=1+7+5=13\neq0\) : \(A\) inversible.</p>
+        <p class="q">2) Inverse (Gauss-Jordan / cofacteurs) & point</p>
+        <p>\(A^{-1}=\dfrac1{13}\begin{pmatrix}1&5&2\\ 7&-4&1\\ 5&-1&-3\end{pmatrix}\).
+        Alors \(X=A^{-1}B=\dfrac1{13}(3+5,\ 21-4,\ 15-1)=\dfrac1{13}(8,17,14)\).</p>
+        <p class="res">Intersection unique : \(\big(\tfrac8{13},\tfrac{17}{13},\tfrac{14}{13}\big)\)</p>
+        <p>Contrôle : \(2\cdot\tfrac8{13}-\tfrac{17}{13}+\tfrac{14}{13}=\tfrac{13}{13}=1\) ✓.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 11 — Deux droites : parallèles ? sécantes ?</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(D_1:\{x=3+t,\ y=-4-3t,\ z=-3-3t\}\) ; \(D_2:\{x=2s,\ y=-4+3s,\ z=-1+s\}\).</div>
+        <p class="q">1) Parallèles ?</p>
+        <p>Directeurs \(\vec u_1=(1,-3,-3)\), \(\vec u_2=(2,3,1)\) : non proportionnels.</p>
+        <p class="res">Non parallèles</p>
+        <p class="q">2) Sécantes ?</p>
+        <p>De \(y\) : \(-4-3t=-4+3s\Rightarrow t=-s\). De \(x\) : \(3+t=2s\Rightarrow3-s=2s\Rightarrow s=1,\ t=-1\).
+        Contrôle \(z\) : \(-3-3(-1)=0=-1+1\) ✓.</p>
+        <p>Point \(D_1(t=-1)=(2,-1,0)\).</p>
+        <p class="res">Sécantes en \((2,-1,0)\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 12 — Projeté & distance point–droite</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(D=A+\operatorname{Vect}(\vec u)\), \(A(1,-2,0)\), \(\vec u(1,1,-1)\) ; \(B(0,1,-2)\).</div>
+        <p class="q">1) Projeté \(H\) de \(B\) sur \(D\)</p>
+        <p>\(\vec{AB}=(-1,3,-2)\), \(\vec{AB}\cdot\vec u=-1+3+2=4\), \(\|\vec u\|^2=3\), \(t^*=\tfrac43\).
+        \(H=A+\tfrac43\vec u=\big(\tfrac73,-\tfrac23,-\tfrac43\big)\).</p>
+        <p class="res">\(H=\big(\tfrac73,-\tfrac23,-\tfrac43\big)\)</p>
+        <p class="q">2) Distance (deux méthodes)</p>
+        <p><b>Via \(H\)</b> : \(\vec{HB}=\big(-\tfrac73,\tfrac53,-\tfrac23\big)\), \(\|\vec{HB}\|=\tfrac13\sqrt{49+25+4}=\tfrac{\sqrt{78}}3\).</p>
+        <p><b>Via formule</b> : \(\vec{AB}\wedge\vec u=(-1,-3,-4)\), \(\|\cdot\|=\sqrt{26}\), \(d=\dfrac{\sqrt{26}}{\sqrt3}=\dfrac{\sqrt{78}}3\).</p>
+        <p class="res">\(d(B,D)=\dfrac{\sqrt{78}}3\approx2{,}944\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 13 — Distances variées</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">1) \(A(1,2,1)\) au plan \(P:x-2y+3z=1\)</p>
+        <p>\(d=\dfrac{|1-4+3-1|}{\sqrt{1+4+9}}=\dfrac1{\sqrt{14}}\).</p>
+        <p class="res">\(d=\dfrac1{\sqrt{14}}=\dfrac{\sqrt{14}}{14}\approx0{,}267\)</p>
+        <p class="q">2) \(B(1,2,-1)\) à \(D:\{x=1+3t,\ y=2-t,\ z=2t\}\)</p>
+        <p>\(A_0(1,2,0)\), \(\vec u(3,-1,2)\), \(\vec{A_0B}=(0,0,-1)\), \(\vec{A_0B}\wedge\vec u=(-1,-3,0)\), \(\|\cdot\|=\sqrt{10}\), \(\|\vec u\|=\sqrt{14}\).</p>
+        <p class="res">\(d=\dfrac{\sqrt{10}}{\sqrt{14}}=\sqrt{\tfrac57}=\dfrac{\sqrt{35}}7\approx0{,}845\)</p>
+        <p class="q">3) \(C(1,0,2)\) à \(\Delta:\{2x-y+z=1,\ x-y+z=-1\}\)</p>
+        <p>Directeur \(\vec u=\vec n_1\wedge\vec n_2=(0,-1,-1)\). Point : \(L_1-L_2\Rightarrow x=2\), puis \(z=y-3\), point \(A_0(2,0,-3)\).
+        \(\vec{A_0C}=(-1,0,5)\), \(\vec{A_0C}\wedge\vec u=(5,-1,1)\), \(\|\cdot\|=\sqrt{27}=3\sqrt3\), \(\|\vec u\|=\sqrt2\).</p>
+        <p class="res">\(d=\dfrac{3\sqrt3}{\sqrt2}=\dfrac{3\sqrt6}2\approx3{,}674\)</p>
+        <p class="q">4) Distance entre \(D:\{-x+y-z=1,\ x-y+2z=1\}\) et \(D':\{2x-y-z=0,\ -x-2y+3z=0\}\)</p>
+        <p>Directeurs : \(\vec u=\vec n_1\wedge\vec n_2=(1,1,0)\), \(\vec u'=(-5,-5,-5)\propto(1,1,1)\).
+        Points : \(M(0,3,2)\in D\) (en additionnant les deux équations : \(z=2\)), \(M'(0,0,0)\in D'\) (système homogène).</p>
+        <p>\(\vec u\wedge\vec u'=(1,-1,0)\), \(\|\cdot\|=\sqrt2\). \(\vec{MM'}=(0,-3,-2)\),
+        \([\vec u,\vec u',\vec{MM'}]=(\vec u\wedge\vec u')\cdot\vec{MM'}=0+3+0=3\).</p>
+        <p class="res">\(d(D,D')=\dfrac3{\sqrt2}=\dfrac{3\sqrt2}2\approx2{,}121\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 14 — Sphères ∩ plan \(P:x+y+z-3=0\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">\(S_1:x^2+y^2+z^2-2x-2y-2z-1=0\)</p>
+        <p>Centre \(\Omega_1(1,1,1)\), \(R^2=1+1+1+1=4\), \(R=2\). \(d(\Omega_1,P)=\dfrac{|1+1+1-3|}{\sqrt3}=0\) : le plan passe par le centre.</p>
+        <p class="res">\(S_1\cap P=\) grand cercle de centre \((1,1,1)\), rayon \(2\)</p>
+        <p class="q">\(S_2:x^2+y^2+z^2-4y+6z+12=0\)</p>
+        <p>Centre \(\Omega_2(0,2,-3)\), \(R^2=0+4+9-12=1\), \(R=1\). \(d(\Omega_2,P)=\dfrac{|0+2-3-3|}{\sqrt3}=\dfrac4{\sqrt3}\approx2{,}31>1\).</p>
+        <p class="res">\(S_2\cap P=\varnothing\)</p>
+        <p class="q">\(S_3:x^2+y^2+z^2-x+3y-2z+\tfrac{13}4=0\)</p>
+        <p>Centre \(\Omega_3(\tfrac12,-\tfrac32,1)\), \(R^2=\tfrac14+\tfrac94+1-\tfrac{13}4=\tfrac14\), \(R=\tfrac12\).
+        \(d(\Omega_3,P)=\dfrac{|\tfrac12-\tfrac32+1-3|}{\sqrt3}=\dfrac3{\sqrt3}=\sqrt3\approx1{,}73>\tfrac12\).</p>
+        <p class="res">\(S_3\cap P=\varnothing\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 15 — Intersection plan ∩ sphère</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">1) \(x+y+z=3\) et \(x^2+y^2+z^2=5\)</p>
+        <p>Sphère centre \(O\), \(R=\sqrt5\). \(d(O,\text{plan})=\dfrac3{\sqrt3}=\sqrt3<\sqrt5\) : cercle.
+        Rayon \(\sqrt{R^2-d^2}=\sqrt{5-3}=\sqrt2\), centre \(H=(1,1,1)\) (projeté de \(O\)).</p>
+        <p class="res">Cercle de centre \((1,1,1)\), rayon \(\sqrt2\), dans le plan \(x+y+z=3\)</p>
+        <p class="q">2) \(x+y+z=2\) et \(x^2+y^2+z^2-4x-2z-20=0\)</p>
+        <p>Sphère centre \(\Omega(2,0,1)\), \(R^2=4+0+1+20=25\), \(R=5\). \(d(\Omega,\text{plan})=\dfrac{|2+0+1-2|}{\sqrt3}=\dfrac1{\sqrt3}<5\) : cercle.
+        \(H=\Omega+\dfrac{2-3}3(1,1,1)=\big(\tfrac53,-\tfrac13,\tfrac23\big)\), rayon \(\sqrt{25-\tfrac13}=\sqrt{\tfrac{74}3}\).</p>
+        <p class="res">Cercle de centre \(\big(\tfrac53,-\tfrac13,\tfrac23\big)\), rayon \(\sqrt{\tfrac{74}3}\approx4{,}97\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 16 — Distance droite–sphère</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(D:\{x-y+z=0,\ x+z=1\}\) ; \(S:x^2+y^2+z^2-6x+2y-4z=-5\).</div>
+        <p>Sphère : centre \(\Omega(3,-1,2)\), \(R^2=9+1+4-5=9\), \(R=3\).</p>
+        <p>Directeur de \(D\) : \(\vec u=\vec n_1\wedge\vec n_2=(-1,0,1)\) (\(\vec n_1(1,-1,1),\vec n_2(1,0,1)\)). Point \(A_0(0,1,1)\in D\).</p>
+        <p>\(\vec{A_0\Omega}=(3,-2,1)\), \(\vec{A_0\Omega}\wedge\vec u=(-2,-4,-2)\), \(\|\cdot\|=\sqrt{24}=2\sqrt6\), \(\|\vec u\|=\sqrt2\).
+        \(d(\Omega,D)=\dfrac{2\sqrt6}{\sqrt2}=2\sqrt3\approx3{,}46\).</p>
+        <p>Comme \(d(\Omega,D)=2\sqrt3>R=3\), la droite est <b>extérieure</b> à la sphère : distance \(=d(\Omega,D)-R\).</p>
+        <p class="res">\(d(D,S)=2\sqrt3-3\approx0{,}46\)</p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.4rem">
+      <span class="lab">Bilan Géométrie de l'espace</span>
+      16 exercices traités intégralement. Boîte à outils : produit vectoriel (normale, aire, directeur d'une droite \(=\vec n_1\wedge\vec n_2\)),
+      produit mixte (volume, coplanarité), les trois formules de distance (point–plan cartésienne, point–droite en \(\tfrac{\|\vec{AM}\wedge\vec u\|}{\|\vec u\|}\),
+      droite–droite en \(\tfrac{|[\vec u,\vec u',\vec{MM'}]|}{\|\vec u\wedge\vec u'\|}\)), et l'analyse d'intersection sphère/plan/droite par comparaison \(d\) vs \(R\).
+    </div>
+  </section>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours / ressource</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/geometrie-espace/G%C3%A9om%C3%A9trie-Espace%20-%20V2026.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Géométrie-Espace - V2026</span><span class="badge">Cours / ressource</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/geometrie-espace/TD-V2026%20Etudiants.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD-V2026 Etudiants</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

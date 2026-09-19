@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C08 — Statique & PFS (efforts aux effecteurs) — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-sii">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SII · C08 — Efforts aux effecteurs (statique, chaîne ouverte)</span>
+  <h1 class="title">C08 — Déterminer les efforts aux effecteurs de structures ouvertes à l'équilibre</h1>
+  <p class="lead">Action mécanique = <b>torseur</b> (résultante + moment) ; moment d'une force \(\vec M_A=\vec{AM}\wedge\vec F\) (bras de levier) ;
+  torseur glisseur, couple, actions réciproques ; <b>Principe Fondamental de la Statique (PFS)</b> (6 équations scalaires) ;
+  liaisons parfaites (pivot / glissière) ; démarche d'<b>isolement</b> pour trouver l'effort d'un effecteur en chaîne ouverte.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction du TD (châssis SPRAT, lève-malade, console bateau…)</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Action mécanique & torseur</h3>
+    <div class="def">
+      <span class="lab">Moment d'une force</span>
+      \(\vec M_A(\vec F)=\vec{AM}\wedge\vec F=F\,d\,\vec z\), avec \(d\) le <b>bras de levier</b> (distance de \(A\) à la droite d'action) et
+      \(\vec z\perp(\vec{AM},\vec F)\). Nul sur la droite d'action. Champ : \(\vec M_B=\vec M_A+\vec{BA}\wedge\vec F\) (relation « BABAR », \(\vec F\) joue le rôle de \(\vec\Omega\)).
+    </div>
+    <div class="thm">
+      <span class="lab">Torseurs types</span>
+      <b>Glisseur</b> (force) : \(\{T\}=\big\{\vec F;\ \vec 0\big\}_M\) (moment nul sur la droite d'action).
+      <b>Couple</b> (2 forces opposées) : \(\{T\}=\big\{\vec 0;\ \vec C\big\}\), champ de moment <b>uniforme</b>.
+      Réciprocité : \(\{T_{1\to2}\}=-\{T_{2\to1}\}\) (3ᵉ loi de Newton).
+    </div>
+    <div class="note">
+      <span class="lab">Actions usuelles</span>
+      <b>Poids</b> : \(\big\{m\vec g;\ \vec 0\big\}_G\). <b>Vérin / moteur linéaire</b> : force \(F_p\vec u\) sur la droite des points d'attache (\(\vec u=\vec{AB}/\|\vec{AB}\|\)).
+      <b>Moteur électrique</b> : couple \(C_m\vec u\) (axe du moteur).
+    </div>
+
+    <h3>1.2 Principe Fondamental de la Statique</h3>
+    <div class="thm">
+      <span class="lab">PFS</span>
+      Système \(\Sigma\) à l'équilibre (réf. galiléen) ⟺ pour \(\Sigma\) et tout sous-système :
+      \(\displaystyle\sum\{T_{\bar\Sigma\to i}\}=\{0\}\). Deux théorèmes vectoriels :
+      \[ \sum\vec R_{\bar\Sigma\to i}=\vec 0\qquad\text{(résultante)},\qquad \sum\vec M_{A,\bar\Sigma\to i}=\vec 0\qquad\text{(moment en }A). \]
+      Soit <b>6 équations scalaires</b> (3 + 3). Valable aussi en régime permanent ou quasi-statique (\(m\vec a\) négligeable).
+    </div>
+    <div class="note">
+      <span class="lab">Liaisons parfaites</span>
+      L'action transmise ne s'oppose pas au mouvement autorisé :<br>
+      • <b>Glissière</b> parfaite de direction \(\vec x\) : \(\vec R_{1\to2}\cdot\vec x=0\) (pas d'effort dans la direction du glissement).<br>
+      • <b>Pivot</b> parfait d'axe \((A,\vec x)\) : \(\vec M_{A,1\to2}\cdot\vec x=0\) (pas de moment autour de l'axe). Les 5 autres composantes bloquent les mouvements interdits.
+    </div>
+
+    <h3>1.3 Efforts aux effecteurs (chaîne ouverte)</h3>
+    <div class="method">
+      <span class="lab">Démarche d'isolement</span>
+      Un effecteur (actionneur) est en parallèle de chaque liaison. Pour trouver son effort :<br>
+      1. <b>Isoler l'extrémité</b> de la chaîne (garder l'effecteur en action extérieure) ;<br>
+      2. Recenser les actions extérieures (graphe de structure : chaque trait coupé = une action) ;<br>
+      3. Choisir <b>une seule</b> équation :<br>
+      &nbsp;&nbsp;• liaison <b>glissière</b> // effecteur → <b>théorème de la résultante</b> projeté sur la direction de la glissière ;<br>
+      &nbsp;&nbsp;• liaison <b>pivot</b> // effecteur → <b>théorème du moment</b> en un point de l'axe, projeté sur l'axe.<br>
+      Astuce : ces projections <b>éliminent l'action de liaison inconnue</b> (parfaite) → une équation à une inconnue.
+    </div>
+    <div class="note">
+      <span class="lab">Actions équivalentes</span>
+      2 forces // de même intensité → force double sur la médiane ; 2 forces opposées distantes de \(d\) → couple \(F\cdot d\) ;
+      2 forces \(F_1,F_2\) // → force par \(I\) tel que \(F_1\,d(I,\Delta_1)=F_2\,d(I,\Delta_2)\).
+    </div>
+  </section>
+
+  <!-- ======================= EXOS CRÉÉS =============================== -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Barre en équilibre sur un pivot (couple moteur)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Bras (1) en pivot d'axe \((O,\vec z)\) / bâti, \(\vec{OG}=a\vec x_1\), poids \(-mg\vec y_0\) (\(\vec y_0\) vertical), couple moteur \(C\vec z\). Angle \(\alpha=(\vec x_0,\vec x_1)\).</div>
+        <p>Moment en \(O\) du poids sur \(\vec z\) : \(\vec{OG}\wedge(-mg\vec y_0)\cdot\vec z=a\,mg(\vec x_1\wedge\vec y_0)\cdot\vec z=amg\cos\alpha\).</p>
+        <p>Théorème du moment /\(\vec z\) (pivot parfait élimine la liaison) : \(C+amg\cos\alpha=0\).</p>
+        <p class="res">\(C=-amg\cos\alpha\) : couple maximal (en valeur absolue) à l'horizontale (\(\alpha=0\)), nul à la verticale</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Chariot sur glissière (effort du vérin)</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Chariot (2) en glissière \(\vec x\) / bâti, poussé par un vérin \(F_v\vec x\), soumis à une résistance \(-R\vec x\) et à son poids \(-Mg\vec y\).</div>
+        <p>Glissière parfaite : le théorème de la résultante projeté sur \(\vec x\) élimine l'action de liaison (\(\vec R_{liaison}\cdot\vec x=0\)) et le poids (⊥\(\vec x\)) :</p>
+        <p>\(F_v-R=0\).</p>
+        <p class="res">\(F_v=R\) : le vérin ne fournit que l'effort résistant selon l'axe (à l'équilibre quasi-statique)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CORRECTION TD =============================== -->
+  <section class="block" id="td">
+    <h2>3. Correction du TD</h2>
+    <p class="lead" style="font-size:.95rem">Source : <i>S2I-C08-TD</i> (appliquer le PFS ; efforts aux effecteurs). <b>Pas de corrigé officiel exploitable</b> → résolu et vérifié maison.</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1.1 — Châssis basculeur SPRAT</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">(1) pivot \((O,\vec z)\) / (0), \(m=26{,}3\) t, \(\vec{OG}=-a\vec x_1\) (\(a=9\) m). Vérin : \(-F\vec y_1\) en \(B\), \(\vec{OB}=b\vec x_1+c\vec y_1\) (\(b=2\) m). Poids \(-mg\vec y_0\). \(\alpha=(\vec x_0,\vec x_1)\).</div>
+        <p class="q">Q3 — Effort du vérin (moment en \(O\) /\(\vec z\))</p>
+        <p>Poids : \(\vec{OG}\wedge(-mg\vec y_0)\cdot\vec z=(-a\vec x_1)\wedge(-mg\vec y_0)\cdot\vec z=amg\cos\alpha\).</p>
+        <p>Vérin : \(\vec{OB}\wedge(-F\vec y_1)\cdot\vec z=-bF\) (le terme \(c\vec y_1\wedge\vec y_1=0\)).</p>
+        <p>Pivot parfait : \(\vec M_{O,0\to1}\cdot\vec z=0\). Bilan : \(amg\cos\alpha-bF=0\).</p>
+        <p class="res">\(F=\dfrac{a}{b}\,mg\cos\alpha=4{,}5\,mg\cos\alpha\) ; à \(\alpha=0\) : \(F\approx4{,}5\times26300\times9{,}81\approx1{,}16\cdot10^6\) N (≈ 1160 kN)</p>
+        <p class="q">Q4 — Action de liaison (résultante, \(\alpha=0\))</p>
+        <p>\(\vec R_{0\to1}=mg\vec y_0+F\vec y_1\). À \(\alpha=0\) (\(\vec y_1=\vec y_0\)) : \(\vec R_{0\to1}=(mg+F)\vec y_0=mg\big(1+\tfrac ab\big)\vec y_0=5{,}5\,mg\,\vec y_0\).</p>
+        <p class="res">\(\|\vec R_{0\to1}\|=5{,}5\times258000\approx1{,}42\cdot10^6\) N (≈ 1420 kN, vertical)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1.2 — Lève-malade Maxi Move</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">(1) glissière verticale \(\vec y_0\) / (0). Vérin \(F_v\vec y_0\) ; ressort \(-k(y-y_0)\vec y_0\) ; poids \(-mg\vec y_0\).</div>
+        <p class="q">Q4 — Effort de poussée du vérin</p>
+        <p>Glissière // vérin → théorème de la résultante /\(\vec y_0\) (élimine l'action de liaison, \(\vec R_{liaison}\cdot\vec y_0=0\)) :</p>
+        <p>\(F_v-k(y-y_0)-mg=0\).</p>
+        <p class="res">\(F_v=mg+k(y-y_0)\) : le ressort compense une partie du poids et soulage le vérin</p>
+        <p class="q">Q5 — Action de liaison (résultante)</p>
+        <p>Les composantes ⊥\(\vec y_0\) : \(\vec R_{0\to1}\cdot\vec x_0=0\) (rien d'horizontal ici, les forces sont verticales) ; le moment reprend le décalage \(a\) du poids.</p>
+        <p class="res">\(\vec R_{0\to1}=\vec 0\) en projection utile (efforts verticaux repris par le vérin/ressort) ; le moment en \(O\) équilibre \(a\,mg\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1.3 — Console portante de bateau</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">(1) pivot vertical \((O,\vec z_0)\) motorisé / (0), \(m=4000\) kg, \(\vec{OG}=a\vec x_1+b\vec z_0\) (\(a=6\), \(b=4\) m). Vent \(-F_{vent}\vec y_1\) en \(G\) (\(F_{vent}=1500\) daN). Couple \(C_{01}\vec z_0\).</div>
+        <p class="q">Q4 — Couple du motoréducteur (moment en \(O\) /\(\vec z_0\))</p>
+        <p>Poids \(-mg\vec z_0\) (vertical) : moment /\(\vec z_0\) <b>nul</b> (force parallèle à l'axe → \(\vec{OG}\wedge(-mg\vec z_0)\cdot\vec z_0=0\)).</p>
+        <p>Vent : \(\vec{OG}\wedge(-F_{vent}\vec y_1)\cdot\vec z_0=-a\,F_{vent}\) (seul le bras \(a\vec x_1\) compte : \(\vec x_1\wedge\vec y_1=\vec z_0\)).</p>
+        <p>Pivot parfait : \(\vec M_{O}\cdot\vec z_0=0\). Bilan : \(C_{01}-a\,F_{vent}=0\).</p>
+        <p class="res">\(C_{01}=a\,F_{vent}=6\times15000=9{,}0\cdot10^4\) N·m (= 90 kN·m). Le poids ne charge pas le moteur (axe vertical) : seul le vent doit être compensé.</p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.4rem">
+      <span class="lab">Bilan C08</span>
+      Méthode statique invariante : modéliser chaque action par un <b>torseur</b> (résultante + moment), <b>isoler</b> intelligemment,
+      puis choisir <b>la bonne projection</b> du PFS (résultante /direction de glissière, ou moment /axe de pivot) pour éliminer les
+      liaisons parfaites et n'avoir <b>qu'une inconnue</b>. Les efforts obtenus servent à <b>dimensionner</b> vérins, moteurs et liaisons,
+      et à définir les <b>lois de pilotage en effort</b>. Autres exercices du TD (SPRAT complet 2 DDL, maquette soufflerie ONERA 3 DDL,
+      échelle EPAS 4 actionneurs) : même démarche d'isolement en chaîne ouverte.
+    </div>
+  </section>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c08-statique/S2I-C08-TD-D%C3%A9terminer%20les%20efforts%20aux%20effecteurs%20de%20structures%20ouverts%20%C3%A0%20l%C3%A9quilibre.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C08-TD-Déterminer les efforts aux effecteurs de structures ouverts à léquilibre</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Corrigé</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c08-statique/DSc10-Corr-Statique%20et%20liaisons%20.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">DSc10-Corr-Statique et liaisons </span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Évaluation</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c08-statique/DSc10-Statique%20et%20liaisons.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">DSc10-Statique et liaisons</span><span class="badge">Évaluation</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Document</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c08-statique/S2I-C08-D%C3%A9terminer%20les%20efforts%20aux%20effecteurs%20de%20structures%20ouverts%20%C3%A0%20l%C3%A9quilibre.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C08-Déterminer les efforts aux effecteurs de structures ouverts à léquilibre</span><span class="badge">Document</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

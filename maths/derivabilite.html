@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dérivabilité de fonctions réelles — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-math">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Maths · M01 — Chapitre 10</span>
+  <h1 class="title">Dérivabilité de fonctions réelles</h1>
+  <p class="lead">Nombre dérivé, tangente, opérations (produit, quotient, composée, réciproque), théorèmes de
+  Rolle et des accroissements finis, règle de L'Hôpital, inégalité des accroissements finis, dérivées
+  successives (Leibniz) et convexité.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD n°10</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Nombre dérivé, tangente</h3>
+    <div class="def">
+      <span class="lab">Dérivabilité</span>
+      \(f\) dérivable en \(a\) si \(\displaystyle f'(a)=\lim_{x\to a}\frac{f(x)-f(a)}{x-a}=\lim_{h\to0}\frac{f(a+h)-f(a)}{h}\in\mathbb R\).
+      <b>Dérivable \(\Rightarrow\) continue</b> (réciproque fausse : \(|x|\) en \(0\)).
+    </div>
+    <div class="def">
+      <span class="lab">DL d'ordre 1 &amp; tangente</span>
+      \(f(x)=f(a)+f'(a)(x-a)+(x-a)\varepsilon(x-a)\), \(\varepsilon\to0\). Tangente :
+      \(y=f(a)+f'(a)(x-a)\).
+    </div>
+
+    <h3>1.2 Opérations</h3>
+    <div class="thm">
+      \((\lambda f+g)'=\lambda f'+g'\) ; \((fg)'=f'g+fg'\) ; \(\Big(\dfrac fg\Big)'=\dfrac{f'g-fg'}{g^2}\) ;
+      \((g\circ f)'=f'\cdot(g'\circ f)\) ; \(\big(f^{-1}\big)'(y)=\dfrac1{f'(f^{-1}(y))}\) (si \(f'\neq0\)).
+    </div>
+
+    <h3>1.3 Théorèmes fondamentaux</h3>
+    <div class="thm">
+      <span class="lab">Extremum &amp; point critique</span>
+      Si \(f\) a un extremum local en \(a\in\mathring I\) (dérivable), alors \(f'(a)=0\). (Réciproque fausse : \(x^3\) en \(0\).)
+    </div>
+    <div class="thm">
+      <span class="lab">Rolle</span>
+      \(f\) continue sur \([\alpha,\beta]\), dérivable sur \(]\alpha,\beta[\), \(f(\alpha)=f(\beta)\)
+      \(\Rightarrow\exists\gamma\in\,]\alpha,\beta[,\ f'(\gamma)=0\).
+    </div>
+    <div class="thm">
+      <span class="lab">Accroissements finis (TAF)</span>
+      \(f\) continue sur \([\alpha,\beta]\), dérivable sur \(]\alpha,\beta[\)
+      \(\Rightarrow\exists\gamma,\ f'(\gamma)=\dfrac{f(\beta)-f(\alpha)}{\beta-\alpha}\).
+    </div>
+    <div class="thm">
+      <span class="lab">L'Hôpital</span>
+      Pour une forme \(\tfrac00\) ou \(\tfrac\infty\infty\), si \(\dfrac{f'}{g'}\to\ell\) (avec \(g'\neq0\)), alors
+      \(\dfrac fg\to\ell\). <b>Vérifier les hypothèses !</b> (ne s'applique pas à une différence.)
+    </div>
+    <div class="thm">
+      <span class="lab">Inégalité des accroissements finis (IAF)</span>
+      Si \(|f'|\leqslant k\) sur \(]\alpha,\beta[\), alors \(f\) est <b>\(k\)-lipschitzienne</b> :
+      \(|f(x)-f(y)|\leqslant k|x-y|\). Si de plus \(k\in[0,1[\) et \(u_{n+1}=f(u_n)\) avec point fixe \(\ell\) :
+      \(|u_n-\ell|\leqslant k^{\,n-n_0}|u_{n_0}-\ell|\to0\).
+    </div>
+
+    <h3>1.4 Monotonie, dérivées successives, convexité</h3>
+    <div class="thm">
+      <span class="lab">Monotonie</span>
+      \(f'\geqslant0\iff f\) croissante ; \(f'\leqslant0\iff f\) décroissante ; \(f'=0\iff f\) constante.
+      Si \(f'>0\) sauf en un nombre fini de points : \(f\) <b>strictement</b> croissante.
+    </div>
+    <div class="thm">
+      <span class="lab">Classe \(C^p\) &amp; Leibniz</span>
+      \(f\in C^p\) si \(f^{(p)}\) existe et est continue. Formule de <b>Leibniz</b> :
+      \(\displaystyle(fg)^{(n)}=\sum_{k=0}^n\binom nk f^{(k)}g^{(n-k)}\).
+    </div>
+    <div class="thm">
+      <span class="lab">Convexité</span>
+      \(f\) convexe \(\iff f'\) croissante \(\iff\) (si \(C^2\)) \(f''\geqslant0\) : la courbe est <b>au-dessus de ses
+      tangentes</b>. Concave \(\iff f''\leqslant0\) (\(-f\) convexe).
+    </div>
+  </section>
+
+  <!-- ==================== EXOS CRÉÉS ============================= -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Dérivée, variations, tangente</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Soit \(f(x)=x\,e^{-x}\) sur \(\mathbb R\). Étudier ses variations et donner la tangente en \(0\).</div>
+        <p>\(f'(x)=e^{-x}+x(-e^{-x})=(1-x)e^{-x}\). Comme \(e^{-x}>0\), le signe de \(f'\) est celui de \(1-x\) :</p>
+        <p>\(f'>0\) sur \(]-\infty,1[\) (croissante), \(f'<0\) sur \(]1,+\infty[\) (décroissante) : <b>maximum</b> en \(x=1\),
+        \(f(1)=e^{-1}\).</p>
+        <p>En \(0\) : \(f(0)=0\), \(f'(0)=(1-0)e^0=1\).</p>
+        <div class="res">Tangente en \(0\) : \(y=x\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Inégalité \(e^x\geqslant1+x\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Montrer que \(\forall x\in\mathbb R,\ e^x\geqslant1+x\).</div>
+        <p>Posons \(g(x)=e^x-1-x\), dérivable, \(g'(x)=e^x-1\). Ainsi \(g'(x)<0\) pour \(x<0\), \(g'(x)>0\) pour
+        \(x>0\) : \(g\) admet un <b>minimum global</b> en \(0\), de valeur \(g(0)=e^0-1-0=0\).</p>
+        <div class="res">Donc \(g(x)\geqslant0\) partout, i.e. \(e^x\geqslant1+x\). ∎ (Traduit la convexité de \(\exp\) : au-dessus de sa tangente en \(0\).)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Convexité &amp; inégalité arithmético-géométrique</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Montrer, via la concavité de \(\ln\), que \(\forall a,b>0,\ \sqrt{ab}\leqslant\dfrac{a+b}2\).</div>
+        <p>La fonction \(\ln\) est deux fois dérivable sur \(]0,+\infty[\) avec \((\ln)''(x)=-\dfrac1{x^2}<0\) : \(\ln\)
+        est <b>concave</b>. Par définition de la concavité (avec \(t=\tfrac12\)) :</p>
+        \[ \ln\!\Big(\frac{a+b}2\Big)\geqslant\frac12\ln a+\frac12\ln b=\ln\sqrt{ab}. \]
+        <p>La fonction \(\ln\) étant strictement croissante, on peut « ôter le \(\ln\) » :</p>
+        <div class="res">\(\dfrac{a+b}2\geqslant\sqrt{ab}\). ∎ (Égalité ssi \(a=b\).)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CORRECTION TD ========================== -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD n°10 — Dérivabilité de fonctions réelles</h2>
+    <p class="lead" style="font-size:.95rem">Feuille sans corrigé officiel : les 10 exercices sont résolus
+    intégralement, chaque sous-question traitée.</p>
+
+    <h3>Partie 1 — Limites via les dérivées</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — Reconnaître un nombre dérivé</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Chaque limite est \(\displaystyle\lim_{x\to a}\frac{f(x)-f(a)}{x-a}=f'(a)\).</div>
+        <p class="q">(a) \(\dfrac{e^{3x+2}-e^2}{x}\), \(f(x)=e^{3x+2}\), \(f(0)=e^2\)</p><p>\(f'(x)=3e^{3x+2}\).</p><p class="res">\(f'(0)=3e^2\)</p>
+        <p class="q">(b) \(\dfrac{\cos x-1}{x}\), \(f=\cos\), \(f(0)=1\)</p><p>\(f'(0)=-\sin0\).</p><p class="res">\(0\)</p>
+        <p class="q">(c) \(\dfrac{\ln(2-x)}{x-1}\), \(f(x)=\ln(2-x)\), \(f(1)=0\)</p><p>\(f'(x)=\dfrac{-1}{2-x}\), \(f'(1)=-1\).</p><p class="res">\(-1\)</p>
+        <p class="q">(d) \(\dfrac{e^{\cos x}-1}{x-\pi/2}\), \(f(x)=e^{\cos x}\), \(f(\pi/2)=1\)</p><p>\(f'(x)=-\sin x\,e^{\cos x}\), \(f'(\pi/2)=-1\).</p><p class="res">\(-1\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — Taux d'accroissement symétriques</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\dfrac{f(a+x)-f(a-x)}{2x}\)</p>
+        <p>\(=\dfrac12\Big[\dfrac{f(a+x)-f(a)}{x}+\dfrac{f(a)-f(a-x)}{x}\Big]\to\dfrac12(f'(a)+f'(a))\).</p><p class="res">\(f'(a)\)</p>
+        <p class="q">(b) \(\dfrac{f(x)g(a)-f(a)g(x)}{x-a}\)</p>
+        <p>On insère \(\pm f(a)g(a)\) : \(=g(a)\dfrac{f(x)-f(a)}{x-a}-f(a)\dfrac{g(x)-g(a)}{x-a}\).</p><p class="res">\(g(a)f'(a)-f(a)g'(a)\)</p>
+        <p class="q">(c) \(\dfrac{f(a+h^2)-f(a+h)}{h}\)</p>
+        <p>\(=\dfrac{f(a+h^2)-f(a)}{h^2}\cdot h-\dfrac{f(a+h)-f(a)}{h}\to f'(a)\cdot0-f'(a)\).</p><p class="res">\(-f'(a)\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — Règle de L'Hôpital</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\dfrac{\cos x-1}{x}\to\dfrac{-\sin x}1\)</p><p class="res">\(0\)</p>
+        <p class="q">(b) \(\dfrac{e^x-1}{2x}\to\dfrac{e^x}2\)</p><p class="res">\(\tfrac12\)</p>
+        <p class="q">(c) \(\dfrac{\ln(1+x)\ln(1-x)}{e^x-1}\)</p><p>Numérateur \(\sim(x)(-x)=-x^2\), dénom \(\sim x\).</p><p class="res">\(0\)</p>
+        <p class="q">(d) \(\dfrac{x\sin(2x)}{1-\cos x}\)</p><p>Numérateur \(\sim2x^2\), dénom \(\sim\tfrac{x^2}2\).</p><p class="res">\(4\)</p>
+        <p class="q">(e) \(x^{1/x}\) en \(0^+\)</p><p>\(=e^{(\ln x)/x}\), et \(\dfrac{\ln x}{x}\to-\infty\).</p><p class="res">\(0\)</p>
+        <p class="q">(f) \(\big(1+\tfrac1{2x}\big)^{3x}\) en \(+\infty\)</p><p>\(=e^{3x\ln(1+1/(2x))}\), \(3x\cdot\tfrac1{2x}\to\tfrac32\).</p><p class="res">\(e^{3/2}\)</p>
+      </div>
+    </div>
+
+    <h3>Partie 2 — Dérivabilité par morceaux</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — \(e^x\) (\(x<0\)) / \(ax^2+bx+c\) (\(x\geqslant0\))</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(C^0\)</p><p>Continuité en \(0\) : \(\lim_{0^-}e^x=1=f(0)=c\).</p><p class="res">\(c=1\) (\(a,b\) libres).</p>
+        <p class="q">(b) \(C^1\)</p><p>Il faut \(c=1\) et raccord des dérivées : \(f'_g(0)=1\), \(f'_d(0)=b\), d'où \(b=1\).</p><p class="res">\(c=1,\ b=1\) (\(a\) libre).</p>
+        <p class="q">(c) \(C^2\)</p><p>Raccord de \(f''\) : \(f''_g(0)=1\) (limite de \(e^x\)), \(f''_d(0)=2a\), d'où \(a=\tfrac12\).</p><p class="res">\(c=1,\ b=1,\ a=\tfrac12\).</p>
+        <p class="q">(d) \(C^3\)</p><p>Raccord de \(f'''\) : à gauche \(e^x\to1\), à droite \((2a)'=0\). Il faudrait \(1=0\).</p><p class="res"><b>Impossible</b> (aucun \(a,b,c\) : \(e^x\) n'est jamais polynomiale).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — \(\alpha x\) / \(\beta\) / \(\gamma x+\delta\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(C^\infty(\mathbb R^*)\)</p><p>Affine par morceaux : sur \(x<0\), \(f'=\alpha\), \(f^{(k)}=0\) (\(k\geqslant2\)) ; sur \(x>0\), \(f'=\gamma\), \(f^{(k)}=0\) (\(k\geqslant2\)).</p>
+        <p class="q">(b) Limites de \(f'\)</p><p class="res">\(\lim_{0^-}f'=\alpha\) ; \(\lim_{0^+}f'=\gamma\)</p>
+        <p class="q">(c) Conditions</p>
+        <ul>
+          <li>(i) \(C^0(\mathbb R)\) : \(0=\beta=\delta\), donc \(\boxed{\beta=0,\ \delta=0}\).</li>
+          <li>(ii) \(f'_g(0)\) : \(\dfrac{\alpha x-\beta}x=\alpha-\tfrac\beta x\) fini \(\iff\beta=0\), et alors \(f'_g(0)=\alpha\).</li>
+          <li>(iii) \(f'_d(0)\) : \(\dfrac{\gamma x+\delta-\beta}x\) fini \(\iff\delta=\beta\), et alors \(f'_d(0)=\gamma\).</li>
+          <li>(iv) \(f\) dérivable sur \(\mathbb R\) \(\iff\beta=\delta=0\) <b>et</b> \(\alpha=\gamma\) (raccord des dérivées) — c.-à-d. \(f(x)=\alpha x\).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — \(x\) (\(x<0\)) / \(e^x-1\) (\(x\geqslant0\))</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) Continue ?</p><p>En \(0\) : gauche \(\to0\), \(f(0)=e^0-1=0\), droite \(\to0\).</p><p class="res"><b>Continue sur \(\mathbb R\)</b>.</p>
+        <p class="q">(b) Dérivable ?</p><p>\(f'_g(0)=1\), \(f'_d(0)=\lim\tfrac{e^x-1}x=1\) : dérivable, \(f'(0)=1\). \(f'(x)=1\) (\(x<0\)), \(e^x\) (\(x\geqslant0\)), continue en \(0\).</p><p class="res"><b>Dérivable, de classe \(C^1\)</b>.</p>
+        <p class="q">(c) Deux fois dérivable ?</p><p>\(f''_g(0)=0\) (\(f'=1\) constante à gauche), \(f''_d(0)=\lim\tfrac{e^x-1}x=1\). \(0\neq1\).</p><p class="res"><b>Non</b> deux fois dérivable en \(0\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 7 — \(x^2\sin(1/x)\) / \(0\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) Continue ?</p><p>\(|x^2\sin(1/x)|\leqslant x^2\to0=f(0)\).</p><p class="res"><b>Continue sur \(\mathbb R\)</b>.</p>
+        <p class="q">(b) Dérivable ?</p>
+        <p>\(f'(0)=\lim x\sin(1/x)=0\). Pour \(x\neq0\) : \(f'(x)=2x\sin(1/x)-\cos(1/x)\). Or \(\lim_{x\to0}f'(x)\) n'existe pas (\(\cos(1/x)\) oscille).</p>
+        <p class="res"><b>Dérivable sur \(\mathbb R\)</b>, mais \(f'\) <b>discontinue</b> en \(0\) (pas \(C^1\)).</p>
+        <p class="q">(c) Deux fois dérivable ?</p><p>\(f''(0)=\lim\tfrac{f'(x)-0}x\) fait intervenir \(\tfrac{\cos(1/x)}x\), sans limite.</p><p class="res"><b>Non</b> deux fois dérivable.</p>
+      </div>
+    </div>
+
+    <h3>Partie 3 — Accroissements finis</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 8 — Inégalités par l'IAF</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(|\cos x-\cos y|\leqslant|x-y|\)</p>
+        <p>\(f=\cos\), \(f'=-\sin\), \(|f'|=|\sin|\leqslant1\). Par l'IAF, \(\cos\) est \(1\)-lipschitzienne.</p>
+        <p class="q">(b) \(\big|\ln\tfrac{x+2}{y+2}\big|\leqslant|x-y|\) sur \([-1,1]\)</p>
+        <p>Posons \(g(t)=\ln(t+2)\) sur \([-1,1]\) : \(g'(t)=\dfrac1{t+2}\), et \(t+2\in[1,3]\) donne \(|g'(t)|\leqslant1\).
+        Par l'IAF, \(|g(x)-g(y)|=\big|\ln\tfrac{x+2}{y+2}\big|\leqslant|x-y|\). ∎</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 9 — Suite récurrente vers \(e\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(f(x)=\dfrac{2x}{\ln x+1}\) sur \([1,e]\), \(u_0=1\), \(u_{n+1}=f(u_n)\).</div>
+        <p class="q">(a) \([1,e]\) stable</p>
+        <p>\(f'(x)=\dfrac{2\ln x}{(\ln x+1)^2}\geqslant0\) sur \([1,e]\) : \(f\) croissante, donc \(f([1,e])=[f(1),f(e)]=[2,e]\subseteq[1,e]\).</p>
+        <p class="q">(b) Point fixe unique</p>
+        <p>\(f(x)=x\iff2x=x(\ln x+1)\iff\ln x=1\iff x=e\).</p><p class="res">Unique point fixe : \(e\).</p>
+        <p class="q">(c) \(k\)-lipschitzienne</p>
+        <p>Avec \(t=\ln x\in[0,1]\), \(f'=\dfrac{2t}{(t+1)^2}\) croît de \(0\) à \(\tfrac12\). Donc \(|f'|\leqslant\tfrac12\).</p><p class="res">\(k=\tfrac12\)</p>
+        <p class="q">(d) Majoration</p>
+        <p>\(|u_n-e|\leqslant k^n|u_0-e|=\Big(\tfrac12\Big)^n(e-1)\).</p><p class="res">\(|u_n-e|\leqslant\dfrac{e-1}{2^n}\)</p>
+        <p class="q">(e) Rang pour \(10^{-3}\)</p>
+        <p>\(\dfrac{e-1}{2^n}\leqslant10^{-3}\iff2^n\geqslant10^3(e-1)\approx1718\). Or \(2^{10}=1024<1718<2048=2^{11}\).</p>
+        <p class="res">\(n=11\)</p>
+      </div>
+    </div>
+
+    <h3>Partie 4 — Dérivées successives (Leibniz)</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 10 — Dérivée \(n\)-ième</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Leibniz : \((uv)^{(n)}=\sum_{k=0}^n\binom nk u^{(k)}v^{(n-k)}\) (le facteur polynomial coupe la somme).</div>
+        <p class="q">(a) \(f_1=(x^2+1)e^{3x}\)</p>
+        <p>\(u=x^2+1\) (\(u,u',u''\) puis \(0\)), \(v^{(m)}=3^m e^{3x}\). Seuls \(k=0,1,2\) :</p>
+        \[ f_1^{(n)}=e^{3x}\Big[3^n(x^2+1)+n\cdot2x\cdot3^{n-1}+\tfrac{n(n-1)}2\cdot2\cdot3^{n-2}\Big]. \]
+        <p class="res">\(f_1^{(n)}=3^{n-2}e^{3x}\big[9x^2+6nx+n^2-n+9\big]\)</p>
+        <p class="q">(b) \(f_2=(x^3+x^2+1)e^{-x}\)</p>
+        <p>\(u=x^3+x^2+1\) (jusqu'à \(u'''=6\)), \(v^{(m)}=(-1)^m e^{-x}\). Seuls \(k=0,1,2,3\) :</p>
+        <p class="res">\(f_2^{(n)}=(-1)^n e^{-x}\big[x^3+(1-3n)x^2+(3n^2-5n)x+1+n(n-1)(3-n)\big]\)</p>
+        <p class="q">(c) \(f_3=x^2(1+x)^n\) (dérivée \(n\)-ième, même \(n\))</p>
+        <p>\(u=x^2\) (\(u,u',u''\) puis \(0\)), \(v=(1+x)^n\) avec \(v^{(n-k)}=\dfrac{n!}{(n-k)!}(1+x)^{k}\cdots\). Seuls \(k=0,1,2\) :</p>
+        \[ f_3^{(n)}=\binom n0 x^2\,n!+\binom n1 2x\,\tfrac{n!}{1!}(1+x)+\binom n2 2\,\tfrac{n!}{2!}(1+x)^2. \]
+        <p class="res">\(f_3^{(n)}=n!\Big[x^2+2n\,x(1+x)+\tfrac{n(n-1)}2(1+x)^2\Big]\)</p>
+      </div>
+    </div>
+
+  </section>
+
+  <p style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.9rem;opacity:.75">
+    Chapitre 10 du cours M01 (S1). Sources : <em>Chap_10.pdf</em> (cours magistral) et
+    <em>TD10 — Dérivabilité de fonctions réelles</em>. Corrigé rédigé intégralement (pas de corrigé officiel fourni).
+  </p>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours (CM)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/derivabilite/Chap_10.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Chap_10</span><span class="badge">Cours (CM)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/derivabilite/TD10___D%C3%A9rivabilit%C3%A9_de_fonctions_r%C3%A9elles.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD10___Dérivabilité_de_fonctions_réelles</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

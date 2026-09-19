@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polynômes & fractions rationnelles — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-math">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Maths · M02 — Polynômes &amp; fractions rationnelles</span>
+  <h1 class="title">Polynômes &amp; fractions rationnelles</h1>
+  <p class="lead">Ensemble \(\mathbb K[X]\), degré, opérations ; divisibilité et division euclidienne ; racines, multiplicité,
+  dérivation, d'Alembert–Gauss ; factorisation dans \(\mathbb R[X]\) et \(\mathbb C[X]\), polynômes irréductibles ; formule de Taylor,
+  somme/produit des racines ; fractions rationnelles, pôles, partie entière et décomposition en éléments simples.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Ensemble, degré, opérations</h3>
+    <div class="def">
+      <span class="lab">Polynôme</span>
+      \(P(x)=\sum_{k=0}^n a_kx^k\), \(a_k\in\mathbb K\). \(\deg P\) = plus grand \(k\) avec \(a_k\neq0\) ; \(\deg(0)=-\infty\).
+      Coefficient et terme dominant \(a_nx^n\) ; <b>unitaire</b> si \(a_n=1\).
+    </div>
+    <div class="thm">
+      <span class="lab">Degré</span>
+      \(\deg(P+Q)\leqslant\max(\deg P,\deg Q)\) ; \(\deg(PQ)=\deg P+\deg Q\) ; \(\deg(P^n)=n\deg P\).
+    </div>
+
+    <h3>1.2 Divisibilité, division euclidienne</h3>
+    <div class="def">
+      <span class="lab">Division euclidienne</span>
+      Pour \(A,B\in\mathbb K[X]\), \(B\neq0\), il existe un unique couple \((Q,R)\) avec \(A=BQ+R\) et \(\deg R<\deg B\).
+      \(B\mid A\iff R=0\).
+    </div>
+
+    <h3>1.3 Racines, multiplicité, dérivation</h3>
+    <div class="def">
+      <span class="lab">Racine &amp; multiplicité</span>
+      \(a\) racine \(\iff P(a)=0\iff(x-a)\mid P\). \(a\) racine de multiplicité \(k\) \(\iff(x-a)^k\mid P\) et \((x-a)^{k+1}\nmid P\)
+      \(\iff P(a)=P'(a)=\cdots=P^{(k-1)}(a)=0\) et \(P^{(k)}(a)\neq0\).
+    </div>
+    <div class="note">
+      <span class="lab">Propriétés</span>
+      Si \(a\) est racine de mult. \(r\) de \(P\), c'est une racine de mult. \(r-1\) de \(P'\). Leibniz : \((PQ)^{(n)}=\sum\binom nk P^{(k)}Q^{(n-k)}\).
+      Si \(P\in\mathbb R[X]\) et \(a\in\mathbb C\setminus\mathbb R\) est racine, alors \(\bar a\) l'est aussi.
+    </div>
+
+    <h3>1.4 Factorisation</h3>
+    <div class="thm">
+      <span class="lab">d'Alembert–Gauss</span>
+      Tout \(P\in\mathbb C[X]\) de degré \(n\geqslant1\) a exactement \(n\) racines (comptées avec multiplicité).
+    </div>
+    <div class="thm">
+      <span class="lab">Irréductibles</span>
+      Dans \(\mathbb C[X]\) : les polynômes de degré 1. Dans \(\mathbb R[X]\) : degré 1, et degré 2 de discriminant \(<0\).
+      \[ P=\lambda(x-a_1)^{k_1}\cdots(x-a_r)^{k_r}\quad(\mathbb C),\qquad P=\lambda\textstyle\prod(x-a_i)^{k_i}\prod(x^2+\beta_jx+\gamma_j)^{\ell_j}\quad(\mathbb R). \]
+    </div>
+    <div class="note">
+      <span class="lab">Somme/produit, Taylor</span>
+      Pour \(P\) scindé de degré \(n\) : somme des racines \(=-\tfrac{a_{n-1}}{a_n}\), produit \(=(-1)^n\tfrac{a_0}{a_n}\).
+      Formule de Taylor : \(P(x)=\sum_{k=0}^n\dfrac{P^{(k)}(a)}{k!}(x-a)^k\).
+    </div>
+
+    <h3>1.5 Fractions rationnelles</h3>
+    <div class="def">
+      <span class="lab">Pôles, partie entière</span>
+      \(F=\tfrac PQ\) : racines de \(Q\) = <b>pôles</b>. Si \(\deg P\geqslant\deg Q\) : \(F=E(x)+\tfrac{R}{Q}\) (\(E\) = partie entière, \(\deg R<\deg Q\)).
+    </div>
+    <div class="thm">
+      <span class="lab">Éléments simples</span>
+      Sur \(\mathbb C\) : \(\tfrac{A}{(x-a)^n}\) (1ʳᵉ espèce). Sur \(\mathbb R\) : de plus \(\tfrac{Ax+B}{(x^2+bx+c)^n}\) (2ⁿᵈ espèce, \(\Delta<0\)).
+      Décomposition unique. Coefficient d'un pôle simple \(a\) : \(A=\big[(x-a)F(x)\big]_{x=a}\).
+    </div>
+  </section>
+
+  <!-- ==================== EXOS CRÉÉS ============================== -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés)</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Racine évidente &amp; factorisation</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Factoriser \(P(x)=x^3-6x^2+11x-6\) dans \(\mathbb R[X]\).</div>
+        <p>\(P(1)=1-6+11-6=0\) : racine \(1\). Division par \((x-1)\) : \(P=(x-1)(x^2-5x+6)=(x-1)(x-2)(x-3)\).</p>
+        <div class="res">\(P=(x-1)(x-2)(x-3)\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Élément simple</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Décomposer \(F(x)=\dfrac{1}{x^2-1}\) en éléments simples sur \(\mathbb R\).</div>
+        <p>\(x^2-1=(x-1)(x+1)\). \(A=\tfrac1{x+1}\big|_{x=1}=\tfrac12\), \(B=\tfrac1{x-1}\big|_{x=-1}=-\tfrac12\).</p>
+        <div class="res">\(F=\dfrac{1/2}{x-1}-\dfrac{1/2}{x+1}\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Taylor d'un polynôme</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Développer \(P(x)=x^3\) suivant les puissances de \((x-1)\).</div>
+        <p>\(P(1)=1,\ P'(1)=3,\ P''(1)=6,\ P'''(1)=6\).</p>
+        <div class="res">\(x^3=1+3(x-1)+3(x-1)^2+(x-1)^3\).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CORRECTION TD ========================== -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD — Polynômes &amp; fractions</h2>
+    <p class="lead" style="font-size:.95rem">16 exercices + 3 applications, résolus intégralement.
+    (Corrigés officiels fournis seulement pour Ex15–16 ; tout est ré-expliqué.)</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — Est-ce un polynôme ?</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">(1) \(4x^5-x^3+1\)</p><p class="res">Polynôme, degré 5</p>
+        <p class="q">(2) \((2x+4)^5\)</p><p class="res">Polynôme, degré 5</p>
+        <p class="q">(3) \(x\sqrt2-\tfrac13x^3+1\)</p><p>\(\sqrt2\) est un coefficient constant.</p><p class="res">Polynôme, degré 3</p>
+        <p class="q">(4) \(x\sqrt x+2x+1=x^{3/2}+2x+1\)</p><p>Exposant \(\tfrac32\) non entier.</p><p class="res"><b>Pas un polynôme</b></p>
+        <p class="q">(5) \(\dfrac2{x^2+x+1}\)</p><p class="res"><b>Pas un polynôme</b> (fraction)</p>
+        <p class="q">(6) \(4\)</p><p class="res">Polynôme, degré 0</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — Opérations</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(P=2x^3+5x-1\), \(Q=-x^2+3x\).</div>
+        <p class="q">\(P+Q\)</p><p class="res">\(2x^3-x^2+8x-1\)</p>
+        <p class="q">\(PQ\)</p><p class="res">\(-2x^5+6x^4-5x^3+16x^2-3x\)</p>
+        <p class="q">\(P^2\)</p><p class="res">\(4x^6+20x^4-4x^3+25x^2-10x+1\)</p>
+        <p class="q">\(P(x^2)\)</p><p class="res">\(2x^6+5x^2-1\)</p>
+        <p class="q">\(P\circ Q\)</p><p class="res">\(-2x^6+18x^5-54x^4+54x^3-5x^2+15x-1\)</p>
+        <p class="q">\(Q\circ P\)</p><p class="res">\(-4x^6-20x^4+10x^3-25x^2+25x-4\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — Binôme</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\((x+1)^5-(x-1)^5\).</div>
+        <p>\((x+1)^5=x^5+5x^4+10x^3+10x^2+5x+1\), \((x-1)^5=x^5-5x^4+10x^3-10x^2+5x-1\) : seuls les termes de degré pair survivent (doublés).</p>
+        <div class="res">\(10x^4+20x^2+2\)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — Polynôme par valeurs</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(\deg P\leqslant3\), \(P(0)=1,P(1)=0,P(-1)=-2,P(2)=4\).</div>
+        <p>\(P=ax^3+bx^2+cx+d\) : \(d=1\), puis \(a+b+c=-1\), \(-a+b-c=-3\), \(8a+4b+2c=3\Rightarrow b=-2,\ a=\tfrac32,\ c=-\tfrac12\).</p>
+        <div class="res">\(P(x)=\tfrac32x^3-2x^2-\tfrac12x+1\)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — Factorisation, signes, inéquations</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(P(x)=x^3-2x^2-5x+6\).</div>
+        <p class="q">1-2) Racine évidente &amp; factorisation</p><p>\(P(1)=0\), \(P=(x-1)(x^2-x-6)=(x-1)(x-3)(x+2)\).</p>
+        <p class="q">3) Tableau de signes</p><p class="res">\(P>0\) sur \(]-2,1[\cup]3,+\infty[\), \(P<0\) sur \(]-\infty,-2[\cup]1,3[\)</p>
+        <p class="q">4a) \((\ln x)^3-2(\ln x)^2-5\ln x+6>0\)</p><p>Poser \(u=\ln x\) : \(u\in]-2,1[\cup]3,\infty[\).</p><p class="res">\(x\in\,]e^{-2},e[\,\cup\,]e^3,+\infty[\)</p>
+        <p class="q">4b) \(e^{2x}-2e^x\leqslant5-6e^{-x}\)</p><p>\(\times e^x\) : \(t^3-2t^2-5t+6\leqslant0\) avec \(t=e^x>0\), soit \(t\in[1,3]\).</p><p class="res">\(x\in[0,\ln3]\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — Racines &amp; factorisation dans \(\mathbb R\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">\(P=4x^3-20x^2+27x-9\)</p><p>Racine \(3\) ; \(4x^2-8x+3=(2x-3)(2x-1)\).</p><p class="res">\(P=(x-3)(2x-3)(2x-1)\)</p>
+        <p class="q">\(Q=x^4-4x^3+9x^2-10x+4\)</p><p>Racine double \(1\) : \(Q=(x-1)^2(x^2-2x+4)\), \(\Delta<0\).</p><p class="res">\(Q=(x-1)^2(x^2-2x+4)\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 7 — Bicarré</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(P=x^4-4x^2+3\).</div>
+        <p>\(u=x^2\) : \(u^2-4u+3=(u-1)(u-3)\), donc \(P=(x-1)(x+1)(x-\sqrt3)(x+\sqrt3)\).</p>
+        <div class="res">\(P(x)\geqslant0\iff x\in\,]-\infty,-\sqrt3]\cup[-1,1]\cup[\sqrt3,+\infty[\)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 8 — Divisions euclidiennes</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">a) \(P=3x^5+4x^2+1\), \(Q=x^2+2x+3\)</p><p class="res">\(Q_{quot}=3x^3-6x^2+3x+16\), \(R=-41x-47\)</p>
+        <p class="q">b) \(P=4x^5-2x^4+5x^2-x+5\), \(Q=x^2+x+1\)</p><p class="res">\(Q_{quot}=4x^3-6x^2+2x+9\), \(R=-12x-4\)</p>
+        <p class="q">c) \(P=x^3-3ix-5(1+i)\), \(Q=x-1+i\)</p><p>Horner en \(a=1-i\).</p><p class="res">\(Q_{quot}=x^2+(1-i)x-5i\), \(R=-10-10i\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 9 — Divisibilité par \(x^2+x+1\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(x^4+ax^2+bx+c\) divisible par \(x^2+x+1\) ?</div>
+        <p>Racine \(j=e^{2i\pi/3}\) avec \(j^2=-1-j\), \(j^4=j\). \(P(j)=(-a+c)+(1-a+b)j=0\), d'où (base \(1,j\)) : \(-a+c=0\) et \(1-a+b=0\).</p>
+        <div class="res">Condition : \(c=a\) et \(b=a-1\) (\(a\in\mathbb R\) libre).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 10 — Divisibilité par \(x^2-3x+2\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(x^2-3x+2=(x-1)(x-2)\) divise \(x^4+ax^3+bx^2+x+2\) ?</div>
+        <p>\(P(1)=0\Rightarrow a+b=-4\) ; \(P(2)=0\Rightarrow2a+b=-5\).</p>
+        <div class="res">\(a=-1,\ b=-3\)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 11 — Multiplicité &amp; dérivée</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(P(x)=(x-2)^3(x+1)\).</div>
+        <p class="q">1) \(x=2\) racine triple</p><p>\((x-2)^3\mid P\) et \((x+1)|_{x=2}=3\neq0\).</p><p class="res">Multiplicité \(3\)</p>
+        <p class="q">2) \(P'\)</p><p>\(P'=(x-2)^2[3(x+1)+(x-2)]=(x-2)^2(4x+1)\).</p><p class="res">\(x=2\) est racine de \(P'\) de multiplicité \(2\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 12 — Taylor en 1</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(P(x)=x^4+x^3-4x^2+x+1\) en \(a=1\).</div>
+        <p>\(P(1)=0,\ P'(1)=0,\ P''(1)=10,\ P'''(1)=30,\ P^{(4)}(1)=24\).</p>
+        <div class="res">\(P(x)=5(x-1)^2+5(x-1)^3+(x-1)^4\)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 13 — Factoriser dans \(\mathbb R[X]\) et \(\mathbb C[X]\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(x^4-1\)</p><p class="res">\(\mathbb R:(x-1)(x+1)(x^2+1)\) ; \(\mathbb C:(x-1)(x+1)(x-i)(x+i)\)</p>
+        <p class="q">(b) \(4x^3+4x^2+3x+3\)</p><p>\(=(x+1)(4x^2+3)\).</p><p class="res">\(\mathbb R:(x+1)(4x^2+3)\) ; \(\mathbb C:(x+1)(2x-i\sqrt3)(2x+i\sqrt3)\)</p>
+        <p class="q">(c) \(x^4+1\)</p><p>\(=(x^2+1)^2-2x^2\).</p><p class="res">\(\mathbb R:(x^2-\sqrt2x+1)(x^2+\sqrt2x+1)\) ; \(\mathbb C:\prod_{k}(x-e^{i(2k+1)\pi/4})\)</p>
+        <p class="q">(d) \(x^4-5x^3+4x^2+3x+9\)</p><p>Racine double \(3\) : \(=(x-3)^2(x^2+x+1)\).</p><p class="res">\(\mathbb R:(x-3)^2(x^2+x+1)\) ; \(\mathbb C:(x-3)^2(x-j)(x-j^2)\)</p>
+        <p class="q">(e) \(x^8+x^4+1\)</p><p>\(=(x^4+x^2+1)(x^4-x^2+1)=(x^2+x+1)(x^2-x+1)(x^2-\sqrt3x+1)(x^2+\sqrt3x+1)\).</p><p class="res">\(\mathbb R\) : les 4 trinômes ci-dessus ; \(\mathbb C\) : racines \(e^{\pm i\pi/6},e^{\pm i\pi/3},e^{\pm2i\pi/3},e^{\pm5i\pi/6}\)</p>
+        <p class="q">(f) \(x^5-1\)</p><p class="res">\(\mathbb R:(x-1)(x^2-2\cos\tfrac{2\pi}5x+1)(x^2-2\cos\tfrac{4\pi}5x+1)\) ; \(\mathbb C:(x-1)\prod_{k=1}^4(x-e^{2ik\pi/5})\)</p>
+        <p class="q">(g) \(x^6+1\)</p><p>\(=(x^2+1)(x^4-x^2+1)\).</p><p class="res">\(\mathbb R:(x^2+1)(x^2-\sqrt3x+1)(x^2+\sqrt3x+1)\) ; \(\mathbb C:\prod(x-e^{i(2k+1)\pi/6})\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 14 — Factorisation dans \(\mathbb C[X]\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(x^2+(3i-1)x-2-i\)</p><p>\(\Delta=-2i\), \(\delta=1-i\) ; racines \(1-2i\) et \(-i\).</p><p class="res">\((x-1+2i)(x+i)\)</p>
+        <p class="q">(b) \(x^3+(4+i)x^2+(5-2i)x+2-3i\)</p><p>Racine \(-1\) ; quotient \(x^2+(3+i)x+2-3i\), \(\Delta=18i\), \(\delta=3+3i\) ; racines \(i\) et \(-3-2i\).</p><p class="res">\((x+1)(x-i)(x+3+2i)\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 15 — Éléments simples sur \(\mathbb R\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">\(A=\dfrac{x}{x^2-4}\)</p><p class="res">\(\dfrac{1/2}{x-2}+\dfrac{1/2}{x+2}\)</p>
+        <p class="q">\(B=\dfrac{2x+5}{(x-1)(x+2)(x-3)}\)</p><p class="res">\(\dfrac{-7/6}{x-1}+\dfrac{1/15}{x+2}+\dfrac{11/10}{x-3}\)</p>
+        <p class="q">\(C=\dfrac{x^3-3x^2+x-4}{x-1}\)</p><p>Division : partie entière \(x^2-2x-1\).</p><p class="res">\(x^2-2x-1-\dfrac5{x-1}\)</p>
+        <p class="q">\(D=\dfrac{2x^3+x^2-x+1}{(x-1)^2}\)</p><p>Partie entière \(2x+5\), reste \(7x-4\).</p><p class="res">\(2x+5+\dfrac7{x-1}+\dfrac3{(x-1)^2}\)</p>
+        <p class="q">\(E=\dfrac{x^5+x^4+1}{x^3-x}\)</p><p>Partie entière \(x^2+x+1\).</p><p class="res">\(x^2+x+1-\dfrac1x+\dfrac{3/2}{x-1}+\dfrac{1/2}{x+1}\)</p>
+        <p class="q">\(F=\dfrac{x^3+x+1}{(x-1)^3(x+1)}\)</p><p class="res">\(\dfrac{7/8}{x-1}+\dfrac{5/4}{(x-1)^2}+\dfrac{3/2}{(x-1)^3}+\dfrac{1/8}{x+1}\)</p>
+        <p class="q">\(G=\dfrac{x+1}{x^4+1}\)</p><p>\(x^4+1=(x^2-\sqrt2x+1)(x^2+\sqrt2x+1)\).</p><p class="res">\(\dfrac{-\frac{\sqrt2}4x+\frac{2+\sqrt2}4}{x^2-\sqrt2x+1}+\dfrac{\frac{\sqrt2}4x+\frac{2-\sqrt2}4}{x^2+\sqrt2x+1}\)</p>
+        <p class="q">\(H=\dfrac{x}{(x^2+1)(x^2+4)}\)</p><p>\(\dfrac1{(x^2+1)(x^2+4)}=\tfrac13\big(\tfrac1{x^2+1}-\tfrac1{x^2+4}\big)\).</p><p class="res">\(\dfrac13\dfrac{x}{x^2+1}-\dfrac13\dfrac{x}{x^2+4}\)</p>
+        <p class="q">\(I=\dfrac{2x^4+x^3+3x^2-6x+1}{2x^3-x^2}\)</p><p>Partie entière \(x+1\), reste sur \(x^2(2x-1)\).</p><p class="res">\(x+1+\dfrac4x-\dfrac1{x^2}-\dfrac4{2x-1}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 16 — Éléments simples sur \(\mathbb C\) (puis \(\mathbb R\))</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">\(I=\dfrac{(3-2i)x-5+3i}{x^2+ix+2}\)</p><p>\(x^2+ix+2=(x-i)(x+2i)\).</p><p class="res">\(\dfrac{2+i}{x-i}+\dfrac{1-3i}{x+2i}\)</p>
+        <p class="q">\(J=\dfrac{x+i}{x^2+i}\)</p><p>Racines \(\pm\alpha\), \(\alpha=\tfrac{1-i}{\sqrt2}\).</p><p class="res">\(\dfrac{(2-\sqrt2+i\sqrt2)/4}{x-\alpha}+\dfrac{(2+\sqrt2-i\sqrt2)/4}{x+\alpha}\)</p>
+        <p class="q">\(K=\dfrac{2x}{(x+i)^2}\)</p><p>\(2x=2(x+i)-2i\).</p><p class="res">\(\dfrac2{x+i}-\dfrac{2i}{(x+i)^2}\)</p>
+        <p class="q">\(L=\dfrac{x^2-3}{(x^2+1)(x^2+4)}\)</p>
+        <p>Sur \(\mathbb R\) (poser \(u=x^2\)) : \(\dfrac{-4/3}{x^2+1}+\dfrac{7/3}{x^2+4}\).</p>
+        <p class="res">\(\mathbb C:\dfrac{2i/3}{x-i}-\dfrac{2i/3}{x+i}-\dfrac{7i/12}{x-2i}+\dfrac{7i/12}{x+2i}\)</p>
+        <p class="q">\(M=\dfrac{x^5+x+1}{x^4-1}\)</p>
+        <p>Partie entière \(x\), reste \(\dfrac{2x+1}{(x-1)(x+1)(x^2+1)}\).</p>
+        <p class="res">\(\mathbb R:x+\dfrac{3/4}{x-1}+\dfrac{1/4}{x+1}+\dfrac{-x-1/2}{x^2+1}\)</p>
+      </div>
+    </div>
+
+    <h3>Applications</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Application 1 — Interpolation de Lagrange</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Points \((0,1),(1,0),(2,3)\).</div>
+        <p>\(L_0=\tfrac{(x-1)(x-2)}2\), \(L_1=-x(x-2)\), \(L_2=\tfrac{x(x-1)}2\). \(P=1\cdot L_0+0\cdot L_1+3\cdot L_2=(x-1)(2x-1)=2x^2-3x+1\).</p>
+        <p>Vérif : \(P(0)=1,\ P(1)=0,\ P(2)=3\) ✓.</p>
+        <div class="res">\(P(x)=2x^2-3x+1\), \(P(3)=10\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Application 2 — Discriminant &amp; suite récurrente</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">A. \(P(x)=x^2+(a-2)x+a\)</p>
+        <p>\(\Delta=(a-2)^2-4a=a^2-8a+4\), racines \(a=4\pm2\sqrt3\).</p>
+        <p class="res">2 racines réelles distinctes si \(a<4-2\sqrt3\) ou \(a>4+2\sqrt3\) ; racine double si \(a=4\pm2\sqrt3\) ; aucune racine réelle si \(4-2\sqrt3<a<4+2\sqrt3\).</p>
+        <p class="q">B. \(u_{n+2}-3u_{n+1}+2u_n=0\), \(u_0=1,u_1=2\)</p>
+        <p>Éq. caractéristique \(x^2-3x+2=(x-1)(x-2)\), racines \(1,2\). \(u_n=A+B\cdot2^n\) ; \(A+B=1,\ A+2B=2\Rightarrow A=0,B=1\).</p>
+        <div class="res">\(u_n=2^n\)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Application 3 — Intégration par éléments simples</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(R(x)=\dfrac1{(x-1)(x+2)}\).</div>
+        <p>Décomposition : \(R=\dfrac{1/3}{x-1}-\dfrac{1/3}{x+2}\).</p>
+        <p class="q">1) \(\displaystyle\int R\,dx\)</p><p class="res">\(\tfrac13\ln\Big|\dfrac{x-1}{x+2}\Big|+C\)</p>
+        <p class="q">2) \(\displaystyle\int\dfrac{x}{(x-1)(x+2)}\,dx\)</p><p>\(\dfrac{x}{(x-1)(x+2)}=\dfrac{1/3}{x-1}+\dfrac{2/3}{x+2}\).</p><p class="res">\(\tfrac13\ln|x-1|+\tfrac23\ln|x+2|+C\)</p>
+      </div>
+    </div>
+
+  </section>
+
+  <p style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.9rem;opacity:.75">
+    Module M02 (S2). Sources : <em>Polynômes et fractions rationnelles-2026.pdf</em> et <em>TD-2026 Polynômes</em>.
+    Corrigés officiels partiels (Ex15–16) vérifiés ; l'ensemble est rédigé intégralement.
+  </p>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours / ressource</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/polynomes/Exercice%203%20du%20cours.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Exercice 3 du cours</span><span class="badge">Cours / ressource</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/maths/polynomes/Proposition%20de%20r%C3%A9daction%20exercice%2013%20(c).pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Proposition de rédaction exercice 13 (c)</span><span class="badge">Cours / ressource</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/polynomes/TD-2026_Polynomes%20-%20VF.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD-2026_Polynomes - VF</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Corrigé</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/polynomes/Corrig%C3%A9%20AM1%20TD13%20Ex15-16.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Corrigé AM1 TD13 Ex15-16</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Document</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/polynomes/Polyn%C3%B4mes%20et%20fractions%20rationnelles-2026.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Polynômes et fractions rationnelles-2026</span><span class="badge">Document</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

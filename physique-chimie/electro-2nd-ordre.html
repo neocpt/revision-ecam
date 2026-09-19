@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Électrocinétique — Régime transitoire du 2ⁿᵈ ordre — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' }, svg: { fontCache: 'global' } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-phys">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Physique · Électrocinétique</span>
+  <h1 class="title">Régime transitoire du second ordre (RLC, LC)</h1>
+  <p class="lead">Circuits comportant à la fois une bobine et un condensateur : ils sont régis par une équation
+  différentielle linéaire du <b>second ordre</b>. On y retrouve la pulsation propre \(\omega_0\), le facteur de
+  qualité \(Q\), et les trois régimes libres (pseudo-périodique, critique, apériodique). Ce chapitre approfondit
+  la <b>mise en équation</b> (série et parallèle), les <b>conditions initiales doubles</b> \(x(0^+)\) et
+  \(\dot x(0^+)\), la résolution complète, l'étude énergétique et le cas idéal de l'<b>oscillateur LC</b>.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé (2ⁿᵈ ordre)</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD (EC 1–6 + Exercices 1–10)</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ============================ COURS ============================ -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Rappels indispensables sur les trois dipôles</h3>
+    <div class="note"><span class="lab">Les 3 caractéristiques et les 2 continuités</span>
+    <ul style="margin:.2rem 0">
+      <li><b>Résistance</b> : \(u_R=R\,i_R\) (instantané, aucune mémoire).</li>
+      <li><b>Condensateur</b> : \(i_C=C\dfrac{du_C}{dt}\), \(q=Cu_C\), énergie \(\mathcal E_C=\frac12 C u_C^2\).
+      La tension \(u_C\) est <b>continue</b> : \(u_C(0^+)=u_C(0^-)\). En régime permanent (RP) : <b>interrupteur ouvert</b>.</li>
+      <li><b>Bobine</b> : \(u_L=L\dfrac{di_L}{dt}\), énergie \(\mathcal E_L=\frac12 L i_L^2\).
+      Le courant \(i_L\) est <b>continu</b> : \(i_L(0^+)=i_L(0^-)\). En RP : <b>fil</b> (court-circuit).</li>
+    </ul></div>
+    <div class="warnbox"><span class="lab">Nouveauté du 2ⁿᵈ ordre : il faut DEUX conditions initiales</span>
+    Une équation différentielle d'ordre 2 possède deux constantes d'intégration. Il faut donc, pour la grandeur
+    étudiée \(x\), à la fois \(x(0^+)\) <b>et</b> \(\big(\frac{dx}{dt}\big)_{0^+}\). La valeur \(x(0^+)\) vient d'une
+    continuité (\(u_C\) ou \(i_L\)) ; la dérivée \(\dot x(0^+)\) vient d'une <b>loi caractéristique</b>
+    (\(i_C=C\dot u_C\), \(u_L=L\dot i_L\)) ou, à défaut, de la <b>dérivée d'une loi des mailles/nœuds</b>.</div>
+
+    <h3>1.2 Forme canonique du second ordre</h3>
+    <p>Toute grandeur \(x(t)\) (tension ou courant) d'un circuit du 2ⁿᵈ ordre vérifie une équation de la forme :</p>
+    \[\boxed{\;\ddot x+\frac{\omega_0}{Q}\,\dot x+\omega_0^{\,2}\,x=\omega_0^{\,2}\,x_\infty\;}\]
+    <ul>
+      <li>\(\omega_0\) : <b>pulsation propre</b> (en rad/s). En général \(\omega_0=\dfrac{1}{\sqrt{LC}}\).</li>
+      <li>\(Q\) : <b>facteur de qualité</b> (sans unité). Son expression <b>dépend du montage</b> (voir 1.3–1.4).</li>
+      <li>\(x_\infty\) : valeur en régime permanent (solution particulière constante) ; nulle si l'équation est
+      homogène.</li>
+    </ul>
+    <div class="note"><span class="lab">Point clé : toutes les grandeurs d'un même circuit ont le même \(\omega_0\) et le même \(Q\)</span>
+    Le membre de gauche (opérateur différentiel) est <b>identique</b> pour \(u_C,\,q,\,i,\,u_R,\,u_L\) : seul le
+    <b>second membre</b> (forçage) change. On résout donc pour la grandeur la plus commode, les autres s'en
+    déduisent par dérivation/multiplication.</div>
+
+    <h3>1.3 Circuit RLC série (mise en équation)</h3>
+    <p>Générateur \(E\), résistance \(R\), bobine \(L\), condensateur \(C\) <b>en série</b>. Loi des mailles (LDM) :</p>
+    \[E=u_R+u_L+u_C=R\,i+L\frac{di}{dt}+u_C,\qquad i=C\frac{du_C}{dt}.\]
+    <p>On remplace \(i\) et \(\frac{di}{dt}=C\frac{d^2u_C}{dt^2}\) :</p>
+    \[E=RC\dot u_C+LC\ddot u_C+u_C\;\Longrightarrow\;\boxed{\;\ddot u_C+\frac{R}{L}\dot u_C+\frac{1}{LC}u_C=\frac{E}{LC}\;}\]
+    <div class="thm"><span class="lab">Identification (série)</span>
+    \[\omega_0=\frac{1}{\sqrt{LC}}\qquad\frac{\omega_0}{Q}=\frac{R}{L}\;\Longrightarrow\;
+    \boxed{\,Q=\frac{L\omega_0}{R}=\frac{1}{R}\sqrt{\frac{L}{C}}\,}\]
+    Plus \(R\) est <b>petit</b>, plus \(Q\) est <b>grand</b> (oscillations peu amorties). \(x_\infty=u_C(\infty)=E\).</div>
+
+    <h3>1.4 Circuit RLC parallèle (mise en équation)</h3>
+    <p>\(R\), \(L\), \(C\) <b>en parallèle</b>, alimentés par une source de courant \(\eta\) (ou une source de tension
+    réelle). Tension commune \(u\). Loi des nœuds (LDN) : \(\eta=i_R+i_C+i_L=\dfrac{u}{R}+C\dot u+i_L\), avec
+    \(u=L\dot i_L\). On dérive la LDN pour éliminer \(i_L\) (car \(\dot i_L=u/L\)) :</p>
+    \[0=\frac1R\dot u+C\ddot u+\frac{u}{L}\;\Longrightarrow\;\boxed{\;\ddot u+\frac{1}{RC}\dot u+\frac{1}{LC}u=0\;}\]
+    <div class="thm"><span class="lab">Identification (parallèle)</span>
+    \[\omega_0=\frac{1}{\sqrt{LC}}\qquad\frac{\omega_0}{Q}=\frac{1}{RC}\;\Longrightarrow\;
+    \boxed{\,Q=RC\omega_0=R\sqrt{\frac{C}{L}}\,}\]
+    <b>Dualité</b> avec la série : ici plus \(R\) est <b>grand</b>, plus \(Q\) est grand (une grande résistance en
+    parallèle dérive peu de courant, donc dissipe peu).</div>
+
+    <h3>1.5 Les trois régimes libres</h3>
+    <p>Sans second membre, l'équation caractéristique \(r^2+\frac{\omega_0}{Q}r+\omega_0^2=0\) a un discriminant dont
+    le signe est fixé par la comparaison de \(Q\) à \(\frac12\) :</p>
+    <div class="method"><span class="lab">Tableau des régimes (\(x\) = grandeur quelconque)</span>
+    <div class="overflow">
+    <table>
+      <tr><th>Régime</th><th>Condition</th><th>Solution homogène</th><th>Paramètres</th></tr>
+      <tr><td><b>Pseudo-périodique</b></td><td>\(Q>\tfrac12\)</td>
+        <td>\(e^{-t/\tau}\big(A\cos\Omega t+B\sin\Omega t\big)\)</td>
+        <td>\(\tau=\dfrac{2Q}{\omega_0}\), \(\Omega=\omega_0\sqrt{1-\dfrac{1}{4Q^2}}\)</td></tr>
+      <tr><td>Critique</td><td>\(Q=\tfrac12\)</td><td>\(e^{-\omega_0 t}(At+B)\)</td><td>retour le plus rapide sans oscillation</td></tr>
+      <tr><td>Apériodique</td><td>\(Q<\tfrac12\)</td>
+        <td>\(e^{-t/\tau}\big(Ae^{\beta t}+Be^{-\beta t}\big)\)</td>
+        <td>\(\tau=\dfrac{2Q}{\omega_0}\), \(\beta=\omega_0\sqrt{\dfrac{1}{4Q^2}-1}\)</td></tr>
+      <tr><td><b>Non amorti (LC)</b></td><td>\(Q\to\infty\ (R=0)\)</td><td>\(A\cos\omega_0 t+B\sin\omega_0 t\)</td><td>oscillations entretenues</td></tr>
+    </table>
+    </div>
+    La solution complète = solution homogène \(+\) \(x_\infty\) (régime permanent). Les constantes \(A,B\) se fixent
+    <b>en dernier</b>, avec les deux CI, sur la solution complète.</div>
+    <div class="warnbox"><span class="lab">Piège : le \(\tau\) du 2ⁿᵈ ordre</span>
+    Ici \(\tau=\dfrac{2Q}{\omega_0}\) (temps de décroissance de l'enveloppe \(e^{-t/\tau}\)) : ce n'est
+    <b>pas</b> le \(RC\) ni le \(L/R\) du premier ordre. En série, \(\tau=\dfrac{2Q}{\omega_0}=\dfrac{2L}{R}\) ;
+    en parallèle, \(\tau=\dfrac{2Q}{\omega_0}=2RC\).</div>
+
+    <h3>1.6 Lecture d'un régime pseudo-périodique</h3>
+    <ul>
+      <li><b>Pseudo-période</b> : \(T=\dfrac{2\pi}{\Omega}\). Si \(Q\gg\frac12\), alors \(\Omega\approx\omega_0\) et
+      \(T\approx\dfrac{2\pi}{\omega_0}\) (la pseudo-période se confond avec la période propre).</li>
+      <li><b>Enveloppe</b> : l'amplitude des oscillations décroît comme \(e^{-t/\tau}\).</li>
+      <li><b>Temps de demi-amplitude</b> : \(e^{-t_{1/2}/\tau}=\frac12\Rightarrow t_{1/2}=\tau\ln 2\).</li>
+      <li><b>Nombre d'oscillations avant 95 %</b> : l'enveloppe atteint 5 % de sa valeur initiale à
+      \(t_{95\%}=-\tau\ln(0{,}05)\approx 3\tau\) ; on compte \(N=\dfrac{t_{95\%}}{T}\) oscillations.</li>
+    </ul>
+
+    <h3>1.7 L'oscillateur LC idéal (\(R=0\))</h3>
+    <div class="thm"><span class="lab">Circuit LC pur</span>
+    Sans résistance, l'équation devient celle d'un <b>oscillateur harmonique</b> :
+    \[\ddot u_C+\omega_0^2\,u_C=\omega_0^2\,x_\infty,\qquad \omega_0=\frac{1}{\sqrt{LC}}.\]
+    La solution oscille <b>indéfiniment</b> à \(\omega_0\) sans jamais s'amortir. L'énergie passe
+    périodiquement du condensateur (\(\frac12Cu_C^2\)) vers la bobine (\(\frac12Li_L^2\)) et inversement, sans
+    perte. C'est un modèle <b>idéalisé</b> : tout composant réel possède une résistance qui finit par amortir.</div>
+    <div class="note"><span class="lab">Composants réels</span>
+    Un condensateur réel se modélise par \(C\) idéal avec une résistance de fuite \(R_C\) en <b>parallèle</b> ;
+    une bobine réelle par \(L\) idéale avec sa résistance de bobinage \(R_L\) en <b>série</b>. Ces résistances
+    introduisent l'amortissement (\(Q\) fini) et rendent l'oscillateur physiquement réaliste.</div>
+
+    <h3>1.8 Méthode générale (à appliquer partout)</h3>
+    <div class="method"><span class="lab">Les 5 étapes</span>
+    <ol style="margin:.2rem 0">
+      <li><b>Conditions initiales</b> : régime permanent en \(0^-\) (C ouvert, L fil) → continuités
+      \(u_C(0^+)=u_C(0^-)\), \(i_L(0^+)=i_L(0^-)\) → toutes les grandeurs et leurs <b>dérivées</b> en \(0^+\)
+      (via \(i_C=C\dot u_C\), \(u_L=L\dot i_L\), ou dérivée de la LDM/LDN). Éventuellement valeurs à \(t\to\infty\).</li>
+      <li><b>Équation différentielle</b> : LDM/LDN + caractéristiques ; mise sous forme canonique ; identification de
+      \(\omega_0\) et \(Q\).</li>
+      <li><b>Résolution</b> : régime selon \(Q\lessgtr\frac12\) ; solution homogène + particulière ; constantes
+      \(A,B\) par les 2 CI.</li>
+      <li><b>Tracé</b> : si oscillations, préciser \(T\) et le nombre d'oscillations avant 95 % de la valeur finale.</li>
+      <li><b>Bilan énergétique</b> : \(\Delta\mathcal E_C=\frac12C[u_C^2(\infty)-u_C^2(0)]\),
+      \(\Delta\mathcal E_L=\frac12L[i_L^2(\infty)-i_L^2(0)]\).</li>
+    </ol></div>
+  </section>
+
+  <!-- ======================= EXERCICES CRÉÉS ======================= -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+    <p class="lead">Trois exercices originaux couvrant les points-clés : identification série, mise en équation
+    parallèle, et un régime critique (le seul cas où \(Q=\frac12\) exactement).</p>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice A — RLC série, décharge pseudo-périodique complète <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Un condensateur \(C=100\ \text{nF}\) chargé sous \(E=10\)&nbsp;V se décharge à \(t=0\) dans une
+        bobine \(L=40\ \text{mH}\) et une résistance \(R=200\ \Omega\) en série (boucle fermée sans générateur).
+        Déterminer \(\omega_0,Q\), le régime, puis \(u_C(t)\).</p>
+        <p class="q">1) \(\omega_0\), \(Q\) et régime</p>
+        <p>Série : \(\omega_0=\dfrac{1}{\sqrt{LC}}=\dfrac{1}{\sqrt{40\cdot10^{-3}\times100\cdot10^{-9}}}
+        =\dfrac{1}{\sqrt{4\cdot10^{-9}}}=\dfrac{1}{6{,}32\cdot10^{-5}}=1{,}58\cdot10^{4}\ \text{rad/s}\).</p>
+        <p>\(Q=\dfrac{1}{R}\sqrt{\dfrac{L}{C}}=\dfrac{1}{200}\sqrt{\dfrac{40\cdot10^{-3}}{100\cdot10^{-9}}}
+        =\dfrac{1}{200}\sqrt{4\cdot10^{5}}=\dfrac{632}{200}=3{,}16\).
+        Comme \(Q>\frac12\) : <b>régime pseudo-périodique</b>.</p>
+        <p class="q">2) Équation différentielle et CI</p>
+        <p>Décharge, pas de source : LDM \(0=u_R+u_L+u_C\Rightarrow \ddot u_C+\frac{R}{L}\dot u_C+\frac{1}{LC}u_C=0\).
+        CI : \(u_C(0^+)=E\) (continuité) et \(\dot u_C(0^+)=\frac{1}{C}i(0^+)=0\) car \(i(0^+)=i(0^-)=0\)
+        (bobine, continuité du courant).</p>
+        <p class="q">3) Résolution</p>
+        <p>\(\tau=\dfrac{2Q}{\omega_0}=\dfrac{2\times3{,}16}{1{,}58\cdot10^{4}}=4{,}0\cdot10^{-4}\)&nbsp;s \(=0{,}4\)&nbsp;ms.
+        \(\Omega=\omega_0\sqrt{1-\frac{1}{4Q^2}}=1{,}58\cdot10^{4}\sqrt{1-\frac{1}{40}}=1{,}56\cdot10^{4}\ \text{rad/s}\).
+        Solution \(u_C=e^{-t/\tau}(A\cos\Omega t+B\sin\Omega t)\).</p>
+        <p>\(u_C(0)=E=A\Rightarrow A=E\). Dérivée en 0 :
+        \(\dot u_C(0)=B\Omega-\frac{A}{\tau}=0\Rightarrow B=\frac{A}{\Omega\tau}=\frac{E}{\Omega\tau}\).</p>
+        <div class="res">\(u_C(t)=E\,e^{-t/\tau}\Big(\cos\Omega t+\dfrac{1}{\Omega\tau}\sin\Omega t\Big)\), avec
+        \(E=10\)&nbsp;V, \(\tau=0{,}4\)&nbsp;ms, \(\Omega=1{,}56\cdot10^{4}\)&nbsp;rad/s. La tension part de 10&nbsp;V,
+        oscille en s'amortissant et tend vers 0.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice B — RLC parallèle attaqué par une source de courant <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Source de courant \(\eta=2\)&nbsp;mA en parallèle avec \(R=2\ \text{k}\Omega\), \(C=10\ \text{nF}\),
+        \(L=1\ \text{mH}\). L'interrupteur est fermé à \(t=0\) ; tout est initialement au repos. Établir l'équation en
+        \(u(t)\), \(\omega_0\), \(Q\), la valeur \(u_\infty\).</p>
+        <p class="q">1) Équation différentielle</p>
+        <p>LDN : \(\eta=\frac{u}{R}+C\dot u+i_L\), avec \(u=L\dot i_L\). On dérive :
+        \(0=\frac1R\dot u+C\ddot u+\frac{u}{L}\), soit</p>
+        \[\ddot u+\frac{1}{RC}\dot u+\frac{1}{LC}u=0.\]
+        <p class="q">2) \(\omega_0\), \(Q\)</p>
+        <p>\(\omega_0=\dfrac{1}{\sqrt{LC}}=\dfrac{1}{\sqrt{10^{-3}\times10^{-8}}}=\dfrac{1}{\sqrt{10^{-11}}}
+        =3{,}16\cdot10^{5}\ \text{rad/s}\).<br>
+        \(Q=R\sqrt{\dfrac{C}{L}}=2000\sqrt{\dfrac{10^{-8}}{10^{-3}}}=2000\sqrt{10^{-5}}=2000\times3{,}16\cdot10^{-3}=6{,}3\).
+        Régime pseudo-périodique.</p>
+        <p class="q">3) Valeur finale</p>
+        <p>En RP : \(C\) ouvert (\(i_C=0\)), \(L\) = fil donc \(u_\infty=L\dot i_L=0\). Tout le courant \(\eta\) passe
+        par la bobine : \(i_L(\infty)=\eta\).</p>
+        <div class="res">\(\ddot u+\frac{1}{RC}\dot u+\frac{1}{LC}u=0\) ; \(\omega_0=3{,}2\cdot10^{5}\)&nbsp;rad/s,
+        \(Q=6{,}3\), \(u_\infty=0\). La tension aux bornes n'a pas de composante permanente : elle oscille puis
+        s'éteint, la bobine « avalant » finalement tout le courant.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice C — Régime critique (\(Q=\tfrac12\)) : quelle résistance ? <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Circuit RLC série avec \(L=10\)&nbsp;mH et \(C=1\ \mu\text{F}\). Pour quelle valeur de \(R\)
+        le régime est-il exactement critique ? Écrire alors la forme de \(u_C(t)\) lors de la charge sous \(E\).</p>
+        <p class="q">1) Condition critique</p>
+        <p>Régime critique \(\Leftrightarrow Q=\frac12\). Or (série) \(Q=\frac1R\sqrt{\frac{L}{C}}\), donc
+        \(\frac1R\sqrt{\frac{L}{C}}=\frac12\Rightarrow R_c=2\sqrt{\frac{L}{C}}\).</p>
+        <p>AN : \(\sqrt{\frac{L}{C}}=\sqrt{\frac{10^{-2}}{10^{-6}}}=\sqrt{10^{4}}=100\ \Omega\), donc
+        \(R_c=200\ \Omega\). (C'est la résistance dite « critique ».)</p>
+        <p class="q">2) Forme de la solution</p>
+        <p>\(\omega_0=\frac{1}{\sqrt{LC}}=\frac{1}{\sqrt{10^{-8}}}=10^{4}\ \text{rad/s}\). Au régime critique la
+        solution homogène est \((At+B)e^{-\omega_0 t}\). Avec charge sous \(E\) (\(u_\infty=E\)) et CI
+        \(u_C(0^+)=0\), \(\dot u_C(0^+)=0\) :</p>
+        <p>\(u_C=(At+B)e^{-\omega_0 t}+E\). \(u_C(0)=0=B+E\Rightarrow B=-E\).
+        \(\dot u_C=Ae^{-\omega_0 t}-\omega_0(At+B)e^{-\omega_0 t}\), en 0 : \(A-\omega_0 B=0\Rightarrow A=\omega_0 B=-\omega_0 E\).</p>
+        <div class="res">\(R_c=2\sqrt{L/C}=200\ \Omega\) ; \(u_C(t)=E\big[1-(1+\omega_0 t)e^{-\omega_0 t}\big]\) avec
+        \(\omega_0=10^{4}\)&nbsp;rad/s. C'est le retour à \(E\) le plus rapide <b>sans</b> aucun dépassement.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CORRECTION TD ======================= -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD</h2>
+    <p class="lead">TD élec 1 — Régime transitoire du second ordre (VG, 2025/2026). Les 6 exercices de base
+    (EC 1–6, sans corrigé officiel : résolus ici avec la méthode du cours) puis les 10 exercices corrigés
+    (Circuits LC, RLC entraînement, Problèmes), chaque question traitée.
+    Données récurrentes : \(E=5\)&nbsp;V, \(L=10\)&nbsp;mH, \(C=50\)&nbsp;nF, d'où
+    \(\omega_0=\frac{1}{\sqrt{LC}}=4{,}5\cdot10^{4}\)&nbsp;rad/s.</p>
+
+    <h3>Partie A — Exercices pour s'entraîner aux bases (EC 1–6)</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 1 — Identification à la forme canonique <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Pour chaque équation, donner \(\omega_0\) et \(Q\) en identifiant à
+        \(\ddot x+\frac{\omega_0}{Q}\dot x+\omega_0^2 x=\dots\) (attention : \(Q\) = facteur de qualité, \(q\) = charge).</p>
+        <p class="q">Équation 1 : \(\ddot q+\dfrac{R}{L}\dot q+\dfrac{1}{LC}q=\dfrac{E}{L}\)</p>
+        <p>\(\omega_0^2=\frac{1}{LC}\Rightarrow\omega_0=\frac{1}{\sqrt{LC}}\). Et
+        \(\frac{\omega_0}{Q}=\frac{R}{L}\Rightarrow Q=\frac{L\omega_0}{R}=\frac1R\sqrt{\frac{L}{C}}\). (RLC série.)</p>
+        <p class="q">Équation 2 : \(\ddot u+\dfrac{1}{RC}\dot u+\dfrac{1}{LC}u=0\)</p>
+        <p>\(\omega_0=\frac{1}{\sqrt{LC}}\) ; \(\frac{\omega_0}{Q}=\frac{1}{RC}\Rightarrow Q=RC\omega_0=R\sqrt{\frac{C}{L}}\).
+        (RLC parallèle.)</p>
+        <p class="q">Équation 3 : \(\ddot q+\Big(\dfrac{R}{L}+\dfrac{1}{R_2C}\Big)\dot q+\Big(\dfrac{1}{LC}+\dfrac{R}{R_2LC}\Big)q=\dfrac{E}{L}\)</p>
+        <p>\(\omega_0^2=\frac{1}{LC}+\frac{R}{R_2LC}=\frac{1}{LC}\Big(1+\frac{R}{R_2}\Big)\Rightarrow
+        \omega_0=\frac{1}{\sqrt{LC}}\sqrt{1+\frac{R}{R_2}}\).<br>
+        \(\frac{\omega_0}{Q}=\frac{R}{L}+\frac{1}{R_2C}\Rightarrow
+        Q=\dfrac{\omega_0}{\frac{R}{L}+\frac{1}{R_2C}}=\dfrac{\frac{1}{\sqrt{LC}}\sqrt{1+R/R_2}}{\frac{R}{L}+\frac{1}{R_2C}}\).</p>
+        <div class="res">Éq.1 : \(\omega_0=\frac{1}{\sqrt{LC}},\ Q=\frac1R\sqrt{\frac{L}{C}}\). — Éq.2 :
+        \(\omega_0=\frac{1}{\sqrt{LC}},\ Q=R\sqrt{\frac{C}{L}}\). — Éq.3 :
+        \(\omega_0=\frac{1}{\sqrt{LC}}\sqrt{1+\frac{R}{R_2}},\ Q=\omega_0\big/\big(\frac{R}{L}+\frac{1}{R_2C}\big)\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 2 — Mise en équation d'un circuit d'ordre 2 série <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Circuit série \(E\)–\(R\)–\(L\)–\(C\), interrupteur juste fermé. Trouver l'équation d'une
+        grandeur, puis en déduire celle de chacune des autres.</p>
+        <p class="q">1) Équation en \(u_C\)</p>
+        <p>LDM : \(E=u_R+u_L+u_C=Ri+L\dot i+u_C\), avec \(i=C\dot u_C\) et \(\dot i=C\ddot u_C\) :</p>
+        \[E=RC\dot u_C+LC\ddot u_C+u_C\;\Longrightarrow\;\ddot u_C+\frac{R}{L}\dot u_C+\frac{1}{LC}u_C=\frac{E}{LC}.\]
+        <p class="q">2) Les autres grandeurs</p>
+        <p>• <b>Charge</b> \(q=Cu_C\) : on multiplie par \(C\) →
+        \(\ddot q+\frac{R}{L}\dot q+\frac{1}{LC}q=\frac{E}{L}\).<br>
+        • <b>Courant</b> \(i=\dot q\) : on <b>dérive</b> l'équation en \(q\) ; comme \(E/L\) est constant sa dérivée
+        est nulle → \(\ddot i+\frac{R}{L}\dot i+\frac{1}{LC}i=0\).<br>
+        • <b>Tension résistance</b> \(u_R=Ri\) : mêmes coefficients (multiplication par \(R\)) →
+        \(\ddot u_R+\frac{R}{L}\dot u_R+\frac{1}{LC}u_R=0\).<br>
+        • <b>Tension bobine</b> \(u_L=L\dot i\) : on dérive l'équation en \(i\) et on multiplie par \(L\) →
+        \(\ddot u_L+\frac{R}{L}\dot u_L+\frac{1}{LC}u_L=0\).</p>
+        <div class="res">Toutes les grandeurs partagent le <b>même membre de gauche</b>
+        (\(\omega_0=\frac{1}{\sqrt{LC}}\), \(Q=\frac1R\sqrt{\frac{L}{C}}\)). Seul le second membre diffère : non nul
+        (\(=\frac{E}{LC}\) ou \(\frac{E}{L}\)) pour \(u_C\) et \(q\) qui ont une valeur finale non nulle, nul pour
+        \(i,u_R,u_L\) qui tendent vers 0.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 3 — Mise en équation d'un circuit d'ordre 2 en parallèle <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Générateur réel \((E,r)\) alimentant \(R\), \(C\), \(L\) en parallèle (tension commune
+        \(u\)). Trouver l'équation régissant \(u\).</p>
+        <p class="q">Mise en équation</p>
+        <p>Le courant débité par la source : \(i=\dfrac{E-u}{r}\). Loi des nœuds : \(i=i_R+i_C+i_L\), soit</p>
+        \[\frac{E-u}{r}=\frac{u}{R}+C\dot u+i_L,\qquad u=L\dot i_L\;(\Rightarrow \dot i_L=\tfrac{u}{L}).\]
+        <p>On dérive pour éliminer \(i_L\) : \(-\dfrac{\dot u}{r}=\dfrac{\dot u}{R}+C\ddot u+\dfrac{u}{L}\), d'où</p>
+        \[C\ddot u+\Big(\frac1R+\frac1r\Big)\dot u+\frac{u}{L}=0\;\Longrightarrow\;
+        \ddot u+\frac{1}{C}\Big(\frac1R+\frac1r\Big)\dot u+\frac{1}{LC}u=0.\]
+        <div class="res">\(\omega_0=\dfrac{1}{\sqrt{LC}}\) ; \(\dfrac{\omega_0}{Q}=\dfrac1C\big(\frac1R+\frac1r\big)\Rightarrow
+        Q=\dfrac{\sqrt{C/L}}{\frac1R+\frac1r}\). Équation homogène : \(u_\infty=0\) (en RP la bobine, en fil,
+        impose \(u=0\)). Les résistances \(R\) et \(r\) <b>en parallèle</b> gouvernent l'amortissement.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 4 — Conditions initiales en série <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">RLC série, \(C\) déchargé, interrupteur ouvert depuis longtemps, fermé à \(t=0\).
+        Déterminer chaque grandeur et sa dérivée à \(0^+\) (et les valeurs finales).</p>
+        <p class="q">1) Valeurs à \(t=0^-\)</p>
+        <p>Interrupteur ouvert → \(i(0^-)=0\), donc \(u_R(0^-)=0\) ; \(C\) déchargé → \(u_C(0^-)=0\) ; bobine
+        parcourue par un courant constant nul → \(u_L(0^-)=0\).</p>
+        <p class="q">2) Valeurs à \(t=0^+\)</p>
+        <p>Continuités : \(i(0^+)=i(0^-)=0\) (bobine) et \(u_C(0^+)=u_C(0^-)=0\) (condensateur). Donc
+        \(u_R(0^+)=Ri(0^+)=0\). LDM \(E=u_C+u_R+u_L\) en \(0^+\) : \(u_L(0^+)=E\).</p>
+        <p class="q">3) Dérivées à \(t=0^+\)</p>
+        <p>\(\dot u_C(0^+)=\frac1C i(0^+)=0\). \(\dot i(0^+)=\frac1L u_L(0^+)=\frac{E}{L}\).
+        \(\dot u_R(0^+)=R\dot i(0^+)=\frac{RE}{L}\). En dérivant la LDM :
+        \(0=\dot u_C+\dot u_R+\dot u_L\Rightarrow \dot u_L(0^+)=-\frac{RE}{L}\).</p>
+        <p class="q">4) Régime permanent (\(t\to\infty\))</p>
+        <p>\(C\) ouvert → \(i(\infty)=0\Rightarrow u_R(\infty)=0\) ; \(L\) fil → \(u_L(\infty)=0\) ; LDM →
+        \(u_C(\infty)=E\).</p>
+        <div class="res">\(0^+\) : \(i=0,\ u_C=0,\ u_R=0,\ u_L=E\) ; dérivées : \(\dot u_C=0,\ \dot i=\frac{E}{L},\
+        \dot u_L=-\frac{RE}{L}\). \(\infty\) : \(i=0,\ u_C=E,\ u_R=u_L=0\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 5 — Conditions initiales en parallèle <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">RLC parallèle alimenté par \((E,r)\) ; \(C\) déchargé, interrupteur ouvert depuis longtemps,
+        fermé à \(t=0\). Grandeurs et dérivées à \(0^+\) (et valeurs finales). Tension commune \(u\).</p>
+        <p class="q">1) À \(t=0^-\)</p>
+        <p>Interrupteur ouvert → aucun courant ne parvient au nœud : \(i_L(0^-)=0\), \(u(0^-)=0\) (\(C\) déchargé).</p>
+        <p class="q">2) À \(t=0^+\)</p>
+        <p>Continuités : \(i_L(0^+)=0\) et \(u(0^+)=u_C(0^+)=0\). Donc \(i_R(0^+)=\frac{u(0^+)}{R}=0\). Courant de
+        source \(i(0^+)=\frac{E-u(0^+)}{r}=\frac{E}{r}\). LDN \(i=i_R+i_C+i_L\) →
+        \(i_C(0^+)=i(0^+)=\frac{E}{r}\).</p>
+        <p class="q">3) Dérivées à \(t=0^+\)</p>
+        <p>\(\dot u(0^+)=\frac1C i_C(0^+)=\frac{E}{rC}\). \(\dot i_L(0^+)=\frac1L u(0^+)=0\).
+        \(\dot i_R(0^+)=\frac1R\dot u(0^+)=\frac{E}{rRC}\).</p>
+        <p class="q">4) Régime permanent</p>
+        <p>\(C\) ouvert → \(i_C(\infty)=0\) ; \(L\) fil → \(u(\infty)=0\) donc \(i_R(\infty)=0\). Tout le courant
+        passe par la bobine : \(i_L(\infty)=\frac{E-0}{r}=\frac{E}{r}\).</p>
+        <div class="res">\(0^+\) : \(u=0,\ i_L=0,\ i_R=0,\ i_C=\frac{E}{r}\) ; dérivées : \(\dot u=\frac{E}{rC},\
+        \dot i_L=0,\ \dot i_R=\frac{E}{rRC}\). \(\infty\) : \(u=0,\ i_C=i_R=0,\ i_L=\frac{E}{r}\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 6 — Quelques circuits RLC (circuit impossible, équivalences, décharge) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">1) RLC parallèle alimenté par une source de tension <b>idéale</b> \(E\) : pourquoi impossible ?</p>
+        <p>La source idéale impose \(u=E\) constant aux bornes du groupe parallèle, donc directement aux bornes de la
+        bobine. Or \(u=L\dfrac{di_L}{dt}=E\Rightarrow i_L(t)=\dfrac{E}{L}\,t\) : le courant dans la bobine
+        <b>croît indéfiniment</b> (vers \(\infty\)). Une source de tension idéale devrait fournir un courant infini :
+        c'est physiquement impossible. (Dit autrement : en RP la bobine est un fil, elle court-circuite la source
+        idéale.)</p>
+        <p class="q">2) Pourquoi les deux circuits résolvent-ils le problème ? Quelle résistance mettre à la place de « ? » ?</p>
+        <p>Le premier circuit ajoute une résistance \(r\) <b>en série</b> avec la source : celle-ci n'est plus idéale
+        (générateur réel \((E,r)\)). Le courant ne peut plus diverger car \(r\) le limite ; on retrouve un vrai
+        circuit du 2ⁿᵈ ordre amorti (cf. EC 3). Le second circuit remplace la source par une source de <b>courant</b>
+        \(\eta\) avec une résistance « ? » en parallèle. Pour que les deux soient <b>équivalents</b>
+        (Thévenin ↔ Norton), il faut :</p>
+        <div class="res">« ? » \(=r\) (même résistance) et \(\eta=\dfrac{E}{r}\). Un générateur de tension réel
+        \((E,r)\) série équivaut à un générateur de courant \(\big(\eta=\frac{E}{r}\big)\) avec \(r\) en parallèle.</div>
+        <p class="q">3) RLC série chargé (\(u_C=E\), RP atteint) : on ouvre l'interrupteur, le condensateur se décharge-t-il ?</p>
+        <p>L'interrupteur \(k\) est <b>en série</b> dans l'unique maille. En l'ouvrant, on <b>coupe</b> le circuit :
+        plus aucun chemin conducteur ne relie le condensateur à la bobine et à la résistance. Le condensateur reste
+        isolé, sa charge est piégée :</p>
+        <div class="res">Non, le condensateur <b>ne se décharge pas</b> : il conserve \(u_C=E\). Pour qu'il se
+        décharge, il faudrait un interrupteur à <b>deux positions</b> qui, en position 2, referme une boucle
+        \(R\)–\(L\)–\(C\) <b>sans</b> la source (c'est exactement le montage des exercices 5 et 6).</div>
+      </div>
+    </div>
+
+    <h3>Partie B — Circuits LC (oscillateurs non amortis)</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 1 — Oscillation infinie lors de la charge <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Circuit LC série : source \(E\), bobine \(L\), condensateur \(C\) (aucune résistance),
+        \(C\) initialement déchargé, interrupteur fermé à \(t=0\).</p>
+        <p class="q">1) Courant à \(t=0^+\)</p>
+        <p>Avant fermeture \(i=0\) (\(k\) ouvert). Par continuité du courant dans la bobine : \(i(0^+)=0\). Sans la
+        bobine, rien n'imposerait \(i(0^+)=0\) (un simple RC aurait un saut de courant).</p>
+        <p class="q">2) Tension et sa dérivée à \(t=0^+\)</p>
+        <p>\(u_C\) continue : \(u_C(0^+)=u_C(0^-)=0\). Comme \(i=C\dot u_C\) :
+        \(\dot u_C(0^+)=\frac1C i(0^+)=0\).</p>
+        <p class="q">3) Équation différentielle (forme canonique)</p>
+        <p>LDM : \(E=u_C+u_L\), \(u_L=L\dot i=LC\ddot u_C\). D'où
+        \(E=u_C+LC\ddot u_C\Rightarrow \ddot u_C+\frac{1}{LC}u_C=\frac{E}{LC}\), avec
+        \(\omega_0=\frac{1}{\sqrt{LC}}\). C'est un <b>oscillateur harmonique</b> (pas d'amortissement).</p>
+        <p class="q">4) Résolution</p>
+        <p>\(u_C(t)=A\cos\omega_0 t+B\sin\omega_0 t+E\) (ne pas oublier la solution particulière \(E\)).
+        \(\dot u_C=-A\omega_0\sin+B\omega_0\cos\). CI : \(\dot u_C(0)=0=B\omega_0\Rightarrow B=0\) ;
+        \(u_C(0)=0=A+E\Rightarrow A=-E\).</p>
+        <div class="res">\(u_C(t)=E\big(1-\cos\omega_0 t\big)\).</div>
+        <p class="q">5) Courant \(i(t)\)</p>
+        <p>\(i=C\dot u_C=CE\omega_0\sin\omega_0 t\), soit \(i(t)=E\sqrt{\frac{C}{L}}\sin\omega_0 t\)
+        (car \(C\omega_0=\sqrt{C/L}\)).</p>
+        <p class="q">6) Tracé</p>
+        <p>\(u_C\) oscille entre 0 et \(2E\) (moyenne \(E\)) ; \(i\) oscille entre \(\pm CE\omega_0\), en quadrature.
+        Les deux grandeurs n'ont pas la même unité : on les trace sur deux axes distincts.</p>
+        <p class="q">7) Énergie du condensateur</p>
+        <p>\(\mathcal E_C=\frac12 Cu_C^2=\frac12 CE^2\big(1-\cos\omega_0 t\big)^2\). Elle <b>ne tend vers rien</b> :
+        elle oscille indéfiniment entre 0 et \(2CE^2\).</p>
+        <p class="q">8) Pourquoi irréaliste ? Comment le rendre réaliste ?</p>
+        <div class="res">Ce circuit néglige toute résistance : en réalité rien n'oscille éternellement.
+        On le rend réaliste en ajoutant la résistance de fuite \(R_C\) <b>en parallèle</b> du condensateur et la
+        résistance de bobinage \(R_L\) <b>en série</b> avec la bobine → oscillations amorties (\(Q\) fini).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 2 — Oscillation infinie lors de la décharge <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Circuit LC (bobine + condensateur en série, pas de source), \(C\) initialement chargé
+        \(u_C=E\) ; on ferme \(k\) à \(t=0\).</p>
+        <p class="q">1) \(u_C(0^+)\) et \(\dot u_C(0^+)\)</p>
+        <p>Continuité : \(u_C(0^+)=E\). Continuité du courant dans la bobine : \(i(0^+)=0\), donc
+        \(\dot u_C(0^+)=\frac1C i(0^+)=0\).</p>
+        <p class="q">2) Équation différentielle</p>
+        <p>LDM : \(u_C=-u_L\) (boucle L–C), \(u_L=LC\ddot u_C\) → \(\ddot u_C+\frac{1}{LC}u_C=0\) (homogène,
+        \(u_\infty=0\)).</p>
+        <p class="q">3) Résolution — le condensateur se décharge-t-il ?</p>
+        <p>\(u_C=A\cos\omega_0 t+B\sin\omega_0 t\), \(\dot u_C=-A\omega_0\sin+B\omega_0\cos\). CI :
+        \(u_C(0)=E=A\), \(\dot u_C(0)=0=B\omega_0\Rightarrow B=0\).</p>
+        <div class="res">\(u_C(t)=E\cos\omega_0 t\). Le condensateur ne se décharge <b>jamais</b> durablement : il
+        oscille en permanence entre \(+E\) et \(-E\).</div>
+        <p class="q">4) Énergies</p>
+        <p>\(\mathcal E_C=\frac12CE^2\cos^2\omega_0 t\) et, comme \(i=C\dot u_C=-CE\omega_0\sin\omega_0 t\),
+        \(\mathcal E_L=\frac12Li^2=\frac12 L C^2E^2\omega_0^2\sin^2\omega_0 t=\frac12CE^2\sin^2\omega_0 t\).
+        Leur somme \(\mathcal E_C+\mathcal E_L=\frac12CE^2\) est <b>constante</b> : l'énergie est transférée
+        alternativement du condensateur vers la bobine et inversement, sans perte.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 3 — Un circuit impossible <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Source \(E\) avec bobine \(L\) et condensateur \(C\) <b>en parallèle</b> directement aux bornes
+        de la source ; \(C\) initialement déchargé.</p>
+        <p class="q">1) Équation régissant \(q_C(t)\)</p>
+        <p>Comme \(q=Cu_C\), étudier \(q\) ou \(u_C\) revient au même. La source impose sa tension aux bornes du
+        condensateur : LDM \(E=u_C=\frac{q_C}{C}\Rightarrow q_C(t)=CE\) (constante imposée).</p>
+        <p class="q">2) Pourquoi le circuit ne peut pas fonctionner ?</p>
+        <p>Par les conditions initiales : \(u_C(0^-)=0\) (déchargé), la continuité impose \(u_C(0^+)=0\), en
+        <b>contradiction</b> avec \(u_C=E\) trouvé ci-dessus. Par les conditions aux limites : en régime permanent la
+        bobine est un fil, elle <b>court-circuite</b> la source de tension idéale (courant infini).</p>
+        <div class="res">Le circuit est impossible : incompatibilité entre la continuité de \(u_C\) (qui vaut 0 en
+        \(0^+\)) et la tension \(E\) imposée par la source, et court-circuit de la source par la bobine en RP.</div>
+      </div>
+    </div>
+
+    <h3>Partie C — Étude de circuits RLC (entraînement)</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 4 — RLC série : charge du condensateur <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">RLC série (\(E,R,L,C\)), \(C\) déchargé, \(k\) fermé à \(t=0\). On étudie \(u_C(t)\) et
+        \(q(t)\), pour \(R=100\ \Omega\) puis \(R=1\)&nbsp;k\(\Omega\). Données \(E=5\)&nbsp;V, \(L=10\)&nbsp;mH,
+        \(C=50\)&nbsp;nF.</p>
+        <p class="q">1) Conditions initiales</p>
+        <p>Comme \(q=Cu_C\), on travaille avec \(u_C\) (multiplier par \(C\) pour \(q\)). À \(0^-\) : \(i=0\),
+        \(u_C=0\), \(u_L=0\). À \(0^+\) (continuités) : \(i(0^+)=0\), \(u_C(0^+)=0\), donc \(u_R(0^+)=0\) et
+        LDM \(E=u_C+u_R+u_L\Rightarrow u_L(0^+)=E\). Dérivée : \(\dot u_C(0^+)=\frac1C i(0^+)=0\). À \(\infty\) :
+        \(i=0,\ u_R=0,\ u_L=0,\ u_C(\infty)=E\).</p>
+        <p class="q">2) Équation différentielle</p>
+        <p>\(E=Ri+L\dot i+u_C\), \(i=C\dot u_C\) → \(\ddot u_C+\frac{R}{L}\dot u_C+\frac{1}{LC}u_C=\frac{E}{LC}\).
+        Identification : \(\omega_0=\frac{1}{\sqrt{LC}}=4{,}5\cdot10^{4}\)&nbsp;rad/s, \(Q=\frac1R\sqrt{\frac{L}{C}}\).</p>
+        <p class="q">3) Résolution selon \(R\)</p>
+        <p><b>• \(R=100\ \Omega\)</b> : \(Q=\frac{1}{100}\sqrt{\frac{10^{-2}}{50\cdot10^{-9}}}=4{,}5>\frac12\) →
+        <b>pseudo-périodique</b>. \(\Omega=\omega_0\sqrt{1-\frac{1}{4Q^2}}=4{,}5\cdot10^{4}\)&nbsp;rad/s
+        (\(\approx\omega_0\) car \(Q\) grand), \(\tau=\frac{2Q}{\omega_0}=0{,}2\)&nbsp;ms.
+        \(u_C=e^{-t/\tau}(A\cos\Omega t+B\sin\Omega t)+E\). CI : \(u_C(0)=0=A+E\Rightarrow A=-E\) ;
+        \(\dot u_C(0)=0=B\Omega-\frac{A}{\tau}\Rightarrow B=\frac{A}{\Omega\tau}=-\frac{E}{\Omega\tau}\).</p>
+        <div class="res">\(u_C(t)=E-E\,e^{-t/\tau}\Big(\cos\Omega t+\frac{1}{\Omega\tau}\sin\Omega t\Big)\) ;
+        \(q(t)=Cu_C(t)\).</div>
+        <p><b>• \(R=1000\ \Omega\)</b> : \(Q=0{,}45<\frac12\) → <b>apériodique</b>.
+        \(\beta=\omega_0\sqrt{\frac{1}{4Q^2}-1}\), \(\tau=\frac{2Q}{\omega_0}=0{,}02\)&nbsp;ms.
+        \(u_C=e^{-t/\tau}(Ae^{\beta t}+Be^{-\beta t})+E\). CI \(u_C(0)=0\Rightarrow A+B=-E\) ;
+        \(\dot u_C(0)=0\Rightarrow \beta(A-B)-\frac1\tau(A+B)=0\Rightarrow A-B=\frac{A+B}{\beta\tau}=\frac{-E}{\beta\tau}\).</p>
+        <div class="res">\(A=-\frac{E}{2}-\frac{E}{2\beta\tau},\quad B=-\frac{E}{2}+\frac{E}{2\beta\tau}\), d'où
+        \(u_C(t)=E+e^{-t/\tau}\big[A e^{\beta t}+B e^{-\beta t}\big]\) et \(q=Cu_C\).</div>
+        <p class="q">4) Tracés</p>
+        <p>Régime oscillant (\(R=100\)) : l'enveloppe est \(E\,e^{-t/\tau}\), valeur finale 0 ; on cherche les 5 % de
+        \(E\) : \(t_{95\%}=-\tau\ln(0{,}05)=0{,}6\)&nbsp;ms. Pseudo-période \(T=\frac{2\pi}{\Omega}=0{,}14\)&nbsp;ms,
+        d'où \(N=\frac{t_{95\%}}{T}=4{,}2\) oscillations avant d'atteindre 95 % de la valeur finale. Le cas
+        apériodique (\(R=1000\)) monte vers \(E\) <b>sans osciller</b> et plus vite en enveloppe
+        (\(\tau\) divisé par 10).</p>
+        <p class="q">5) Bilan énergétique</p>
+        <div class="res">Dans les deux cas les états initial et final sont identiques : le condensateur a accumulé
+        \(\Delta\mathcal E_C=\frac12Cu_C^2(\infty)-\frac12Cu_C^2(0)=\frac12CE^2\), <b>exactement comme un RC du 1er
+        ordre</b> : la bobine ne change pas l'énergie finale stockée.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 5 — RLC série : décharge du condensateur <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">RLC série, interrupteur à deux positions : position 1 (charge) depuis longtemps, basculé en
+        position 2 à \(t=0\) (boucle R–L–C sans source). On étudie \(u_C(t)\), \(q(t)\). Mêmes données ;
+        \(R=100\ \Omega\) puis \(1\)&nbsp;k\(\Omega\).</p>
+        <p class="q">1) Conditions initiales</p>
+        <p>À \(0^-\) (RP en position 1) : \(i=0\) (\(C\) = interrupteur ouvert), \(u_R=0\), \(u_L=0\), donc
+        \(u_C(0^-)=E\). À \(0^+\) : \(i(0^+)=0\), \(u_C(0^+)=E\), \(u_R(0^+)=0\) ; nouvelle maille sans source
+        \(u_C+u_R+u_L=0\Rightarrow u_L(0^+)=-E\). \(\dot u_C(0^+)=\frac1C i(0^+)=0\). À \(\infty\) : \(u_C(\infty)=0\).</p>
+        <p class="q">2) Équation différentielle</p>
+        <p>Maille sans source : \(0=Ri+L\dot i+u_C\), \(i=C\dot u_C\) →
+        \(\ddot u_C+\frac{R}{L}\dot u_C+\frac{1}{LC}u_C=0\) (homogène). Mêmes \(\omega_0,Q\) qu'à l'ex. 4.</p>
+        <p class="q">3) Résolution</p>
+        <p><b>• \(R=100\ \Omega\)</b> (pseudo-périodique) : \(u_C=e^{-t/\tau}(A\cos\Omega t+B\sin\Omega t)\). CI :
+        \(u_C(0)=E=A\) ; \(\dot u_C(0)=0=B\Omega-\frac{A}{\tau}\Rightarrow B=\frac{E}{\Omega\tau}\).</p>
+        <div class="res">\(u_C(t)=E\,e^{-t/\tau}\Big(\cos\Omega t+\frac{1}{\Omega\tau}\sin\Omega t\Big)\),
+        \(q(t)=Cu_C(t)\).</div>
+        <p><b>• \(R=1000\ \Omega\)</b> (apériodique) : \(u_C=e^{-t/\tau}(Ae^{\beta t}+Be^{-\beta t})\). CI
+        \(A+B=E\) et \(\beta(A-B)=\frac1\tau(A+B)\Rightarrow A-B=\frac{E}{\beta\tau}\), d'où
+        \(A=\frac{E}{2}+\frac{E}{2\beta\tau},\ B=\frac{E}{2}-\frac{E}{2\beta\tau}\).</p>
+        <div class="res">\(u_C(t)=e^{-t/\tau}\big[A e^{\beta t}+B e^{-\beta t}\big]\) avec ces \(A,B\) ; \(q=Cu_C\).</div>
+        <p class="q">4) Tracés</p>
+        <p>Identiques à la charge <b>mais inversés</b> : la tension part de \(E\) et tend vers 0. Mêmes
+        \(t_{95\%}=0{,}6\)&nbsp;ms, \(T=0{,}14\)&nbsp;ms, \(N=4{,}2\) oscillations (cas \(R=100\)).</p>
+        <p class="q">5) Bilan énergétique</p>
+        <div class="res">\(\Delta\mathcal E_C=\frac12Cu_C^2(\infty)-\frac12Cu_C^2(0)=-\frac12CE^2\) : énergie
+        <b>négative</b> car le condensateur a joué le rôle de générateur (il a <b>fourni</b> son énergie au circuit,
+        dissipée dans \(R\)).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 6 — RLC série décharge : courant et tension bobine <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Même circuit qu'à l'ex. 5 (décharge), mais on étudie \(i(t)\) et \(u_L(t)\).
+        \(R=100\ \Omega\), autres données identiques.</p>
+        <p class="q">1) Conditions initiales</p>
+        <p>Comme \(u_L=L\dot i\), on peut étudier \(i\) et en déduire \(u_L\) par dérivation. À \(0^-\) : \(i=0\),
+        \(u_C(0^-)=E\). À \(0^+\) : \(i(0^+)=0\), \(u_C(0^+)=E\), \(u_R(0^+)=0\), maille sans source →
+        \(u_L(0^+)=-E\). Dérivées : \(\dot i(0^+)=\frac1L u_L(0^+)=-\frac{E}{L}\). Pour \(u_L\), aucune loi ne donne
+        directement sa dérivée : on utilise \(\dot u_C(0^+)=\frac1C i(0^+)=0\) et \(\dot u_R(0^+)=R\dot i(0^+)=-\frac{RE}{L}\),
+        puis la dérivée de la LDM \(0=\dot u_L+\dot u_C+\dot u_R\Rightarrow \dot u_L(0^+)=\frac{RE}{L}\).</p>
+        <p class="q">2) Équation différentielle</p>
+        <p>\(0=L\dot i+u_C+Ri\) ; on <b>dérive</b> pour éliminer \(u_C\) (car \(\dot u_C=i/C\)) :
+        \(0=L\ddot i+\frac1C i+R\dot i\), soit \(\ddot i+\frac{R}{L}\dot i+\frac{1}{LC}i=0\). Même opérateur pour
+        \(u_L\) : \(\ddot u_L+\frac{R}{L}\dot u_L+\frac{1}{LC}u_L=0\). \(\omega_0=4{,}5\cdot10^{4}\)&nbsp;rad/s,
+        \(Q=4{,}5\), pseudo-périodique (\(\tau=0{,}2\)&nbsp;ms).</p>
+        <p class="q">3) Résolution</p>
+        <p><b>• Courant</b> : \(i=e^{-t/\tau}(A\cos\Omega t+B\sin\Omega t)\). CI \(i(0)=0=A\Rightarrow A=0\) ;
+        \(\dot i(0)=-\frac{E}{L}=B\Omega\Rightarrow B=-\frac{E}{\Omega L}\).</p>
+        <div class="res">\(i(t)=-\dfrac{E}{\Omega L}\,e^{-t/\tau}\sin\Omega t\).</div>
+        <p><b>• Tension bobine</b> : \(u_L=e^{-t/\tau}(A\cos\Omega t+B\sin\Omega t)\). CI \(u_L(0)=-E=A\Rightarrow A=-E\) ;
+        \(\dot u_L(0)=\frac{RE}{L}=B\Omega-\frac{A}{\tau}\Rightarrow B=\frac{RE}{\Omega L}+\frac{A}{\Omega\tau}\).
+        Or \(\tau=\frac{2L}{R}\) donne \(\frac{A}{\Omega\tau}=-\frac{RE}{2\Omega L}\), d'où
+        \(B=\frac{RE}{\Omega L}-\frac{RE}{2\Omega L}=\frac{E}{\tau\Omega}\).</p>
+        <div class="res">\(u_L(t)=E\,e^{-t/\tau}\Big(-\cos\Omega t+\frac{1}{\Omega\tau}\sin\Omega t\Big)\).
+        On aurait aussi pu écrire directement \(u_L=L\frac{di}{dt}\).</div>
+        <p class="q">4) Tracés — 5) Bilan bobine</p>
+        <p>Mêmes \(t_{95\%}=0{,}6\)&nbsp;ms, \(T=0{,}14\)&nbsp;ms, \(N=4{,}2\).
+        \(\Delta\mathcal E_L=\frac12Li^2(\infty)-\frac12Li^2(0)=0\) : la bobine part et revient à courant nul, elle
+        n'a stocké aucune énergie <b>nette</b> (elle en a échangé périodiquement pendant la décharge).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 7 — RLC parallèle : étude de la tension <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">RLC parallèle attaqué par une source de courant \(\eta\) ; \(k\) fermé à \(t=0\).
+        \(\eta=5\)&nbsp;mA, \(L=10\)&nbsp;mH, \(C=50\)&nbsp;nF, \(R=1\)&nbsp;k\(\Omega\). On étudie \(u(t)\).</p>
+        <p class="q">1) Conditions initiales</p>
+        <p>À \(0^-\) : interrupteur ouvert, \(\eta\) n'atteint pas le nœud → \(i_L(0^-)=0\), \(u(0^-)=0\). À \(0^+\) :
+        \(i_L(0^+)=0\), \(u(0^+)=0\) donc \(i_R(0^+)=0\) ; LDN \(\eta=i_R+i_C+i_L\Rightarrow i_C(0^+)=\eta\).
+        Dérivées : \(\dot u(0^+)=\frac1C i_C(0^+)=\frac{\eta}{C}\) ; \(\dot i_L(0^+)=\frac1L u(0^+)=0\) ;
+        \(\dot i_R(0^+)=\frac1R\dot u(0^+)=\frac{\eta}{RC}\). À \(\infty\) : \(i_C=0\), \(u=0\), \(i_R=0\),
+        \(i_L(\infty)=\eta\) (la source de courant impose un courant fini, pas de divergence).</p>
+        <p class="q">2) Équation différentielle</p>
+        <p>LDN \(\eta=C\dot u+\frac{u}{R}+i_L\), dérivée (\(\dot i_L=u/L\)) →
+        \(\ddot u+\frac{1}{RC}\dot u+\frac{1}{LC}u=0\). Identification :
+        \(\omega_0=4{,}5\cdot10^{4}\)&nbsp;rad/s ; \(Q=R\sqrt{\frac{C}{L}}=1000\sqrt{\frac{50\cdot10^{-9}}{10^{-2}}}=2{,}2\).</p>
+        <p class="q">3) Résolution</p>
+        <p>\(Q>\frac12\) : pseudo-périodique. \(\Omega=\omega_0\sqrt{1-\frac{1}{4Q^2}}=4{,}4\cdot10^{4}\)&nbsp;rad/s,
+        \(\tau=\frac{2Q}{\omega_0}=2RC=0{,}1\)&nbsp;ms. \(u=e^{-t/\tau}(A\cos\Omega t+B\sin\Omega t)\). CI :
+        \(u(0)=0=A\Rightarrow A=0\) ; \(\dot u(0)=\frac{\eta}{C}=B\Omega\Rightarrow B=\frac{\eta}{C\Omega}\).</p>
+        <div class="res">\(u(t)=\dfrac{\eta}{C\Omega}\,e^{-t/\tau}\sin\Omega t\).</div>
+        <p class="q">4) Tracé</p>
+        <p>Enveloppe \(\frac{\eta}{C\Omega}e^{-t/\tau}\), valeur finale 0 : \(t_{95\%}=-\tau\ln(0{,}05)=0{,}3\)&nbsp;ms.
+        \(T=\frac{2\pi}{\Omega}=0{,}14\)&nbsp;ms → \(N=2{,}1\) oscillations avant 95 %.</p>
+        <p class="q">5) Bilan énergétique</p>
+        <div class="res">\(\Delta\mathcal E_L=\frac12Li_L^2(\infty)-\frac12Li_L^2(0)=\frac12L\eta^2\) (la bobine
+        « avale » finalement tout le courant) ; \(\Delta\mathcal E_C=\frac12Cu^2(\infty)-\frac12Cu^2(0)=0\) (le
+        condensateur se charge transitoirement puis se décharge entièrement dans \(R\) et \(L\)).</div>
+      </div>
+    </div>
+
+    <h3>Partie D — Problèmes</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 8 — Exploitation d'un graphique expérimental <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">RLC série observé à l'oscilloscope (CH1 aux bornes de la source, CH2 aux bornes du
+        condensateur, masse commune). \(u_C(0^-)=0\). Oscillogramme : oscillations amorties montant vers 5&nbsp;V,
+        env. 9 oscillations sur 400&nbsp;µs, amplitude ≈ demi au bout de ~4 périodes.</p>
+        <p class="q">1) Pourquoi une seule masse ?</p>
+        <p>Les masses des deux voies de l'oscilloscope sont reliées à la terre : elles sont donc <b>communes</b>
+        (électriquement au même potentiel). On ne peut pas les placer indépendamment sans créer un court-circuit.</p>
+        <p class="q">2) Que voit-on sur CH1 à \(t=0\) ?</p>
+        <p>Un <b>échelon</b> de tension. Avant fermeture, \(i=0\Rightarrow u_R=0\), bobine = fil \(\Rightarrow u_L=0\),
+        \(C\) déchargé \(\Rightarrow u_C=0\) : la tension mesurée est nulle (les \(E\) volts sont aux bornes de
+        l'interrupteur ouvert). À la fermeture, l'interrupteur devient un fil et CH1 mesure \(E\).</p>
+        <p class="q">3) Équation en \(u_C\)</p>
+        <p>\(E=u_C+u_L+u_R=u_C+LC\ddot u_C+RC\dot u_C\Rightarrow
+        \ddot u_C+\frac{R}{L}\dot u_C+\frac{1}{LC}u_C=\frac{E}{LC}\).</p>
+        <p class="q">4) \(\omega_0,\Omega,\tau,Q\)</p>
+        <p>\(\omega_0=\frac{1}{\sqrt{LC}}\) ; \(\frac{\omega_0}{Q}=\frac{R}{L}\Rightarrow Q=\frac1R\sqrt{\frac{L}{C}}\) ;
+        \(\tau=\frac{2Q}{\omega_0}=\frac{2L}{R}\) ; \(\Omega=\omega_0\sqrt{1-\frac{1}{4Q^2}}=\sqrt{\frac{1}{LC}-\frac{R^2}{4L^2}}
+        =\sqrt{\frac{4L-R^2C}{4L^2}}\).</p>
+        <p class="q">5) Valeur de \(E\)</p>
+        <p>La tension se stabilise autour de la solution particulière : \(u_C(\infty)=E\). Le graphe tend vers
+        <b>5&nbsp;V</b>, donc \(E=5\)&nbsp;V.</p>
+        <p class="q">6) Justifier \(\Omega\approx\omega_0\) et calculer \(\omega_0\)</p>
+        <p>Beaucoup d'oscillations visibles \(\Rightarrow Q\gg\frac12\Rightarrow\sqrt{1-\frac{1}{4Q^2}}\approx1\), donc
+        \(\Omega\approx\omega_0\). On lit \(9T=400\)&nbsp;µs \(\Rightarrow T=44{,}4\)&nbsp;µs, d'où
+        \(\omega_0\approx\frac{2\pi}{T}=\frac{2\pi}{44{,}4\cdot10^{-6}}=1{,}4\cdot10^{5}\)&nbsp;rad/s.</p>
+        <p class="q">7) Temps de demi-amplitude et \(\tau\)</p>
+        <p>Enveloppe \(Ee^{-t/\tau}\) : \(Ee^{-t_{1/2}/\tau}=\frac{E}{2}\Rightarrow t_{1/2}=\tau\ln2\). Le graphe montre
+        l'amplitude divisée par 2 en ≈ 4 périodes : \(t_{1/2}=4T=178\)&nbsp;µs, donc
+        \(\tau=\frac{178\ \mu\text{s}}{\ln2}=257\)&nbsp;µs.</p>
+        <p class="q">8) En déduire \(L\) et \(C\) (\(R=100\ \Omega\))</p>
+        <p>\(\tau=\frac{2L}{R}\Rightarrow L=\frac{R\tau}{2}=\frac{100\times257\cdot10^{-6}}{2}=1{,}3\cdot10^{-2}\approx
+        0{,}01\)&nbsp;H. \(\omega_0=\frac{1}{\sqrt{LC}}\Rightarrow C=\frac{1}{L\omega_0^2}=
+        \frac{1}{0{,}01\times(1{,}4\cdot10^{5})^2}=5\)&nbsp;nF.</p>
+        <div class="res">\(E=5\)&nbsp;V, \(\omega_0\approx1{,}4\cdot10^{5}\)&nbsp;rad/s, \(\tau\approx257\)&nbsp;µs,
+        \(L\approx10\)&nbsp;mH, \(C\approx5\)&nbsp;nF.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 9 — Bobines et condensateurs réels <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Circuit LC série (source + interrupteur), puis on rend bobine et condensateur réels
+        (\(R_L\) en série avec \(L\), \(R_C\) en parallèle avec \(C\)). \(L=10\)&nbsp;mH, \(C=50\)&nbsp;nF,
+        \(R_C=1\)&nbsp;M\(\Omega\), \(R_L=100\ \Omega\).</p>
+        <p class="q">1–2) Cas idéal</p>
+        <p>LDM : \(E=u_L+u_C=L\dot i+u_C=LC\ddot u_C+u_C\Rightarrow \ddot u_C+\frac{1}{LC}u_C=\frac{E}{LC}\).
+        \(\omega_0^{\text{idéal}}=\frac{1}{\sqrt{LC}}=4{,}5\cdot10^{4}\)&nbsp;rad/s,
+        \(T^{\text{idéal}}=\frac{2\pi}{\omega_0}=2\pi\sqrt{LC}=0{,}25\)&nbsp;ms.</p>
+        <p class="q">3–4) Nouvelle équation avec composants réels</p>
+        <p>Lois : \(i_C=C\dot u_C\), \(u_C=R_C i_R\) (branche fuite), LDN \(i=i_C+i_R=C\dot u_C+\frac{u_C}{R_C}\).
+        LDM : \(E=R_L i+L\dot i+u_C\). On injecte \(i\) :</p>
+        \[E=R_L\Big(C\dot u_C+\frac{u_C}{R_C}\Big)+L\Big(C\ddot u_C+\frac{1}{R_C}\dot u_C\Big)+u_C.\]
+        <p>On regroupe par ordre de dérivation :
+        \(E=LC\,\ddot u_C+\Big(R_LC+\frac{L}{R_C}\Big)\dot u_C+\Big(1+\frac{R_L}{R_C}\Big)u_C\), puis on divise par
+        \(LC\) :</p>
+        \[\ddot u_C+\Big(\frac{R_L}{L}+\frac{1}{R_C C}\Big)\dot u_C+\Big(\frac{1}{LC}+\frac{R_L}{R_C LC}\Big)u_C=\frac{E}{LC}.\]
+        <p class="q">5) Facteur de qualité, période, AN</p>
+        <p>\(\omega_0=\sqrt{\frac{1}{LC}\big(1+\frac{R_L}{R_C}\big)}=\omega_0^{\text{idéal}}\sqrt{1+\frac{R_L}{R_C}}\) ;
+        \(Q=\dfrac{\omega_0}{\frac{R_L}{L}+\frac{1}{R_C C}}\).</p>
+        <p>AN : \(\frac{R_L}{R_C}=\frac{100}{10^{6}}=10^{-4}\) donc
+        \(\omega_0\approx\omega_0^{\text{idéal}}=4{,}5\cdot10^{4}\)&nbsp;rad/s.
+        \(\frac{R_L}{L}=\frac{100}{10^{-2}}=10^{4}\) ;
+        \(\frac{1}{R_C C}=\frac{1}{10^{6}\times50\cdot10^{-9}}=20\) (négligeable devant \(10^4\)) ; donc
+        \(Q\approx\frac{4{,}5\cdot10^{4}}{10^{4}}=4{,}5\).</p>
+        <div class="res">\(Q\approx4{,}5\gg\frac12\Rightarrow\Omega\approx\omega_0\Rightarrow
+        T\approx T^{\text{idéal}}=0{,}25\)&nbsp;ms. La période est <b>peu modifiée</b> par les résistances réelles,
+        ce qui est le cas dès que \(R_C\gg R_L\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 10 — Condensateur non idéal <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Source \(E\), bobine \(L\) en série, puis condensateur \(C\) en parallèle avec une résistance
+        \(R\) (modèle du condensateur non idéal). \(C\) déchargé. \(R=1{,}0\)&nbsp;k\(\Omega\), \(L=1{,}0\)&nbsp;mH,
+        \(E=10\)&nbsp;V, facteur de qualité \(Q=2\). On étudie \(i(t)\) (courant dans la bobine).</p>
+        <p class="q">1) Équation différentielle en \(i\)</p>
+        <p>Lois : LDM \(E=u_L+u_C=L\dot i+u_C\) ; comportements \(u_C=Ri_R\), \(i_C=C\dot u_C\) ; LDN \(i=i_C+i_R\).
+        On veut une équation en \(i\) seul. On dérive la LDM pour ne pas réintroduire \(u_C\) :
+        \(0=L\ddot i+\dot u_C\). Or \(\dot u_C=\frac{i_C}{C}\), et \(i_C=i-i_R\)… l'astuce est de repartir de
+        \(0=L\ddot i+\frac{i_C}{C}\), ce qui donne \(i_C=-LC\ddot i\). On remplace alors dans la LDM initiale via
+        \(i_R=i-i_C=i+LC\ddot i\) et \(u_C=Ri_R\) :</p>
+        \[E=L\dot i+R\,(i+LC\ddot i)=RLC\,\ddot i+L\dot i+Ri\;\Longrightarrow\;
+        \ddot i+\frac{1}{RC}\dot i+\frac{1}{LC}i=\frac{E}{RLC}.\]
+        <p>Identification : \(\omega_0=\frac{1}{\sqrt{LC}}\), \(\frac{\omega_0}{Q}=\frac{1}{RC}\Rightarrow
+        Q=RC\omega_0=R\sqrt{\frac{C}{L}}\).</p>
+        <p class="q">2) Valeur de \(C\)</p>
+        <p>\(Q=2=R\sqrt{\frac{C}{L}}\Rightarrow C=\frac{Q^2 L}{R^2}=\frac{4\times10^{-3}}{10^{6}}=4\)&nbsp;nF.</p>
+        <p class="q">3) Résolution</p>
+        <p>CI : \(i(0^-)=0\) (interrupteur ouvert), continuité \(i(0^+)=0\). Dérivée :
+        \(\dot i(0^+)=\frac1L u_L(0^+)\) et par continuité \(u_C(0^+)=0\Rightarrow u_L(0^+)=E\), donc
+        \(\dot i(0^+)=\frac{E}{L}\). Régime : \(Q=2>\frac12\) → pseudo-périodique. Solution particulière : en RP,
+        \(C\) ouvert donc \(i=i_R=\frac{E}{R}\) (le courant final passe par \(R\)). Donc
+        \(i=e^{-t/\tau}(A\cos\Omega t+B\sin\Omega t)+\frac{E}{R}\).</p>
+        <p>CI : \(i(0)=0=A+\frac{E}{R}\Rightarrow A=-\frac{E}{R}\) ;
+        \(\dot i(0)=\frac{E}{L}=-\frac{A}{\tau}+\Omega B\Rightarrow B=\frac{1}{\Omega}\big(\frac{E}{L}+\frac{A}{\tau}\big)
+        =\frac{E}{\Omega L}-\frac{E}{R\tau\Omega}\).</p>
+        <div class="res">\(i(t)=e^{-t/\tau}\Big[-\dfrac{E}{R}\cos\Omega t+\dfrac{E}{\Omega}\Big(\dfrac1L-\dfrac{1}{R\tau}\Big)\sin\Omega t\Big]+\dfrac{E}{R}\),
+        avec \(\omega_0=\frac{1}{\sqrt{LC}}=5\cdot10^{5}\)&nbsp;rad/s, \(\tau=\frac{2Q}{\omega_0}=8\ \mu\text{s}\),
+        \(\Omega=\omega_0\sqrt{1-\frac{1}{16}}=4{,}8\cdot10^{5}\)&nbsp;rad/s. \(i\) part de 0, oscille et tend vers
+        \(\frac{E}{R}=10\)&nbsp;mA.</div>
+        <p class="q">4) Tracé</p>
+        <p>Oscillations amorties de \(i(t)\) montant depuis 0, dépassant, puis se stabilisant à
+        \(\frac{E}{R}=10\)&nbsp;mA (à obtenir au tableur en traçant l'expression ci-dessus).</p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.5rem;border-left-color:var(--ok)">
+      <span class="lab" style="color:#065f46">✅ TD du 2ⁿᵈ ordre — correction complète (16 items)</span>
+      Les <b>6 exercices de base</b> (EC 1–6 : identification canonique, mise en équation série/parallèle,
+      conditions initiales doubles, circuits impossibles et équivalence Thévenin↔Norton — résolus ici faute de
+      corrigé officiel) et les <b>10 exercices corrigés</b> (oscillateurs LC purs, RLC série charge/décharge,
+      RLC parallèle, exploitation d'oscillogramme, composants réels, condensateur non idéal). Résultats-clés :
+      \(\omega_0=\frac{1}{\sqrt{LC}}\), \(Q=\frac1R\sqrt{\frac{L}{C}}\) (série) ou \(R\sqrt{\frac{C}{L}}\) (parallèle),
+      trois régimes selon \(Q\lessgtr\frac12\), \(\tau=\frac{2Q}{\omega_0}\), \(\Omega=\omega_0\sqrt{1-\frac{1}{4Q^2}}\).
+    </div>
+    <!-- TD_ELEC_2ND_ANCHOR -->
+  </section>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/electro-2nd-ordre/TD%20Elec%201%20-%20Regime%20transitoire%20-%20circuits%20ordre%202%20-%20VG%20-%20etu.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD Elec 1 - Regime transitoire - circuits ordre 2 - VG - etu</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Corrigé</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/electro-2nd-ordre/TD%20Elec%201%20-%20Regime%20transitoire%20-%20circuits%20ordre%202%20-%20VG%20-%20correction.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD Elec 1 - Regime transitoire - circuits ordre 2 - VG - correction</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/electro-2nd-ordre/TD%20Elec%201%20-%20Regime%20transitoire%20-%20circuits%20ordre%202%20-%20VG%20-%20prof.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD Elec 1 - Regime transitoire - circuits ordre 2 - VG - prof</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chimie — Atomistique — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' }, svg: { fontCache: 'global' } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-phys">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Chimie · Atomistique</span>
+  <h1 class="title">Atomistique</h1>
+  <p class="lead">De l'atome à la molécule : quantification de l'énergie (Planck-Einstein, Bohr), <b>nombres
+  quantiques</b> et orbitales, <b>configuration électronique</b> et classification périodique, <b>charge nucléaire
+  effective</b> (Slater) et propriétés périodiques ; puis <b>liaison chimique</b> (Lewis, VSEPR, mésomérie,
+  polarité, orbitales moléculaires) et enfin <b>forces intermoléculaires</b> (London, Keesom, liaison hydrogène) et
+  proticité des solvants.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td-atomes">3a. Correction TD — Atomes (24 exos)</a></li>
+      <li><a href="#td-molecules">3b. Correction TD — Molécules (24 exos)</a></li>
+      <li><a href="#td-solvant">3c. Correction TD — Solvants (15 exos)</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ============================ COURS ============================ -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+    <div class="note"><span class="lab">Constantes</span>
+    \(c=3{,}00\cdot10^{8}\)&nbsp;m/s ; \(h=6{,}62\cdot10^{-34}\)&nbsp;J·s ; \(e=1{,}6\cdot10^{-19}\)&nbsp;C ;
+    \(1\ \text{Ry}=2{,}18\cdot10^{-18}\)&nbsp;J \(=13{,}6\)&nbsp;eV ; \(N_A=6{,}022\cdot10^{23}\)&nbsp;mol⁻¹ ;
+    \(F=N_Ae=96500\)&nbsp;C/mol ; \(1\ \text{eV}=1{,}6\cdot10^{-19}\)&nbsp;J.</div>
+
+    <h3>1.1 Énergie de la lumière</h3>
+    <div class="thm"><span class="lab">Planck-Einstein</span>
+    \[E=h\nu=\frac{hc}{\lambda}=hc\,\sigma\qquad(\sigma=1/\lambda\text{ : nombre d'onde})\]
+    L'énergie d'un photon est <b>inversement</b> proportionnelle à \(\lambda\) : un photon UV est plus énergétique
+    qu'un IR. Pour une mole : \(E_m=N_A E\).</div>
+
+    <h3>1.2 Dualité et incertitude</h3>
+    <div class="note"><span class="lab">De Broglie &amp; Heisenberg</span>
+    Onde associée à une particule : \(\lambda=\dfrac{h}{mv}\). Principe d'incertitude :
+    \(\Delta x\cdot\Delta(mv)>\dfrac{h}{4\pi}\). Ces effets sont énormes à l'échelle atomique, négligeables à
+    l'échelle macroscopique (la mécanique newtonienne suffit).</div>
+
+    <h3>1.3 Niveaux d'énergie de l'atome d'hydrogène</h3>
+    <div class="thm"><span class="lab">Rydberg / Balmer</span>
+    \[E(n)=-\frac{R_y}{n^2}\ (\text{eV, }R_y=13{,}6),\qquad
+    \frac{1}{\lambda}=R_H\Big(\frac{1}{n_1^2}-\frac{1}{n_2^2}\Big).\]
+    \(n=1\) : fondamental (−13,6 eV) ; \(n\to\infty\) : \(E=0\) (ionisation). Les niveaux se <b>resserrent</b> quand
+    \(n\) augmente. Transition \(n_{dép}\to n_{arr}\) : \(\Delta E=R_y\big(\frac{1}{n_{dép}^2}-\frac{1}{n_{arr}^2}\big)\)
+    (\(\Delta E<0\) = émission).</div>
+
+    <h3>1.4 Nombres quantiques et orbitales</h3>
+    <div class="method"><span class="lab">Quatre nombres</span>
+    \(n=1,2,\dots\) (principal) ; \(l=0,\dots,n-1\) (secondaire) ; \(m=-l,\dots,+l\) (magnétique) ;
+    \(s=\pm\frac12\) (spin). Notation OA : \(l=0\to s\), \(1\to p\), \(2\to d\), \(3\to f\), précédé de \(n\)
+    (ex. 3p : \(n=3,l=1\)). Pour un \(n\) donné, il y a \(n^2\) triplets \((n,l,m)\).</div>
+
+    <h3>1.5 Configuration électronique</h3>
+    <div class="method"><span class="lab">Trois règles</span>
+    <ul style="margin:.2rem 0">
+      <li><b>Klechkowski</b> : remplissage par \((n+l)\) croissant, puis \(n\) croissant (1s, 2s, 2p, 3s, 3p, 4s, 3d,
+      4p…).</li>
+      <li><b>Pauli</b> : 2 électrons max par OA (spins opposés).</li>
+      <li><b>Hund</b> : à énergie égale, on maximise le nombre d'électrons célibataires (spins parallèles).</li>
+    </ul>
+    Exceptions de stabilité : sous-couche <b>demi-pleine</b> (d⁵) ou <b>pleine</b> (d¹⁰), d'où Cr [Ar]4s¹3d⁵.
+    Pour les <b>ions</b>, on retire les électrons des \(n\) les plus grands (4s avant 3d).
+    Spin de l'atome \(S=\sum s\), multiplicité \(2S+1\).</div>
+
+    <h3>1.6 Charge nucléaire effective (Slater)</h3>
+    <div class="thm"><span class="lab">\(Z^*=Z-\sigma\)</span>
+    Constante d'écran \(\sigma\) par groupes [1s][2s2p][3s3p][3d]… :
+    <ul style="margin:.2rem 0">
+      <li>même groupe : \(0{,}35\) par électron (\(0{,}30\) dans 1s) ;</li>
+      <li>groupe \(n-1\) (pour s,p) : \(0{,}85\) ; groupes \(\leq n-2\) : \(1{,}00\) ;</li>
+      <li>un électron ne s'écrante pas lui-même.</li>
+    </ul>
+    \(Z^*\) <b>augmente</b> vers la droite d'une ligne et vers le bas d'une colonne : c'est ce qui gouverne le
+    rayon, le potentiel d'ionisation et l'électronégativité.</div>
+
+    <h3>1.7 Propriétés périodiques</h3>
+    <div class="overflow">
+    <table>
+      <tr><th>Grandeur</th><th>Ligne (→ droite)</th><th>Colonne (↓ bas)</th></tr>
+      <tr><td>Rayon atomique</td><td>diminue (\(Z^*\uparrow\))</td><td>augmente (nouvelle couche)</td></tr>
+      <tr><td>Potentiel d'ionisation</td><td>augmente</td><td>diminue</td></tr>
+      <tr><td>Électronégativité \(\chi\)</td><td>augmente</td><td>diminue</td></tr>
+    </table>
+    </div>
+    <p>Anomalies du PI (Be→B, N→O) : dues au surcroît de stabilité des sous-couches pleines/demi-pleines. Cations
+    plus petits que l'atome (\(Z^*\uparrow\)), anions plus gros.</p>
+
+    <h3>1.8 Liaison chimique — Lewis &amp; VSEPR</h3>
+    <div class="method"><span class="lab">Lewis</span>
+    Règle du <b>duet</b> (H : 2 e⁻) et de l'<b>octet</b> (8 e⁻ autour des autres). Charge formelle = (électrons de
+    valence de l'atome libre) − (électrons « en propre » = doublets liants comptés 1 + doublets non liants comptés
+    2). Hypervalence (S, P, Cl… : &gt; 8 e⁻) et hypovalence (B : 6 e⁻) possibles.</div>
+    <div class="method"><span class="lab">VSEPR (Gillespie) \(\text{AX}_n\text{E}_m\)</span>
+    Les \(n+m\) doublets autour de l'atome central se repoussent :
+    <div class="overflow">
+    <table>
+      <tr><th>\(n+m\)</th><th>Géométrie électronique</th><th>Exemples de forme</th></tr>
+      <tr><td>2</td><td>linéaire</td><td>AX₂ linéaire (CO₂)</td></tr>
+      <tr><td>3</td><td>trigonale plane</td><td>AX₃ plan, AX₂E coudée</td></tr>
+      <tr><td>4</td><td>tétraédrique</td><td>AX₄ Td, AX₃E pyramide, AX₂E₂ coudée</td></tr>
+      <tr><td>5</td><td>bipyramide trigonale</td><td>AX₂E₃ linéaire (I₃⁻)</td></tr>
+      <tr><td>6</td><td>octaédrique</td><td>AX₆, AX₅E…</td></tr>
+    </table>
+    </div></div>
+
+    <h3>1.9 Mésomérie et polarité</h3>
+    <div class="note"><span class="lab">Mésomérie</span>
+    Plusieurs représentations d'une même molécule (électrons délocalisés des liaisons multiples et doublets non
+    liants) ; les atomes ne bougent pas. La charge (−) va sur l'atome le plus électronégatif. Explique les longueurs
+    de liaison intermédiaires (benzène : 140 pm entre simple 154 et double 134).</div>
+    <div class="thm"><span class="lab">Moment dipolaire</span>
+    \(\vec\mu=q\,\vec r\) (de \(-\) vers \(+\)), \(1\ \text D=3{,}33\cdot10^{-30}\)&nbsp;C·m. Une liaison est polaire
+    si \(\Delta\chi>0\) ; une molécule est polaire si les moments de liaison <b>ne se compensent pas</b> (CO₂, BF₃,
+    CCl₄ : liaisons polaires mais molécule apolaire par symétrie ; H₂O : polaire).</div>
+
+    <h3>1.10 Orbitales moléculaires</h3>
+    <div class="thm"><span class="lab">OM liantes / antiliantes</span>
+    Le recouvrement de deux OA donne une OM <b>liante</b> (plus basse) et une OM <b>antiliante</b> (\(\sigma^*,\pi^*\),
+    plus haute). <b>Indice de liaison</b> :
+    \[i=\tfrac12\big(n_{\text{liantes}}-n_{\text{antiliantes}}\big)\]
+    (électrons occupants). Il retrouve le nombre de liaisons de Lewis (N₂ : 3, O₂ : 2, F₂ : 1). Seules les OM de
+    valence contribuent à la liaison ; les OM de cœur restent à l'énergie des OA.</div>
+
+    <h3>1.11 Forces intermoléculaires</h3>
+    <div class="method"><span class="lab">Hiérarchie</span>
+    <ul style="margin:.2rem 0">
+      <li><b>London</b> (dispersion) : entre dipôles instantanés, d'autant plus fortes que l'atome/molécule est gros
+      (polarisable) ou nombreux en atomes.</li>
+      <li><b>Keesom</b> : entre dipôles permanents (molécules polaires).</li>
+      <li><b>Liaison hydrogène</b> (\(\approx60\)&nbsp;kJ/mol) : H lié à N, O ou F, attiré par un doublet d'un autre
+      N/O/F. Bien plus faible que la liaison covalente (\(\approx1500\)&nbsp;kJ/mol).</li>
+      <li><b>Ion-dipôle / ionique</b> : les plus fortes.</li>
+    </ul>
+    Ces forces gouvernent \(T_{fus}\), \(T_{eb}\) et la solubilité (« qui se ressemble se dissout »).</div>
+
+    <h3>1.12 Proticité des solvants</h3>
+    <div class="note"><span class="lab">Solvant protique</span>
+    Peut <b>céder et capter</b> un proton (autoprotolyse), condition : au moins un H porté par un atome <b>≠ C</b>
+    (N, O…). Ex. protiques : H₂O, CH₃OH, NH₃, CH₃COOH. Aprotiques polaires : CHCl₃, acétone (H tous sur C). Tout
+    solvant protique cité est polaire, mais l'inverse est faux.</div>
+  </section>
+
+  <!-- ======================= EXERCICES CRÉÉS ======================= -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+    <p class="lead">Trois exercices originaux : transition de l'hydrogène, configuration &amp; \(Z^*\), et polarité
+    d'une molécule.</p>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice A — Raie H de la série de Balmer <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Calculer la longueur d'onde émise lors de la transition \(n=3\to n=2\) de l'atome
+        d'hydrogène (\(R_y=13{,}6\)&nbsp;eV).</p>
+        <p>\(\Delta E=R_y\big(\frac{1}{9}-\frac{1}{4}\big)=13{,}6\times(-0{,}139)=-1{,}89\)&nbsp;eV (émission).</p>
+        <p>\(|\Delta E|=1{,}89\times1{,}6\cdot10^{-19}=3{,}02\cdot10^{-19}\)&nbsp;J,
+        \(\lambda=\frac{hc}{|\Delta E|}=\frac{6{,}62\cdot10^{-34}\times3\cdot10^{8}}{3{,}02\cdot10^{-19}}=6{,}6\cdot10^{-7}\)&nbsp;m.</p>
+        <div class="res">\(\lambda\approx656\)&nbsp;nm : la raie rouge \(\text H_\alpha\) de la série de Balmer
+        (visible).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice B — Configuration et \(Z^*\) du soufre <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Soufre (\(Z=16\)). Donner sa configuration et le \(Z^*\) d'un électron de valence (3p).</p>
+        <p>Config (Klechkowski) : \(1s^2\,2s^2\,2p^6\,3s^2\,3p^4\). Groupes de Slater : [1s²][2s²2p⁶][3s²3p⁴].</p>
+        <p>Écran sur un 3p : \(5\times0{,}35\) (autres électrons du groupe 3) \(+8\times0{,}85\) (couche 2)
+        \(+2\times1{,}00\) (couche 1) \(=1{,}75+6{,}8+2=10{,}55\).</p>
+        <div class="res">\(Z^*=16-10{,}55=5{,}45\) : c'est cette charge « ressentie » qui rend les électrons de
+        valence du soufre bien liés (électronégativité élevée).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice C — Géométrie et polarité de NH₃ <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Déterminer la géométrie VSEPR de l'ammoniac et dire si la molécule est polaire.</p>
+        <p>N (5 e⁻ de valence) forme 3 liaisons N–H + 1 doublet non liant : type \(\text{AX}_3\text E\).</p>
+        <p>Géométrie : <b>pyramide à base triangulaire</b> (les 4 doublets pointent vers un tétraèdre, un sommet
+        occupé par le doublet libre).</p>
+        <div class="res">Molécule <b>polaire</b> : les trois liaisons N–H polarisées (\(\text N^-\text H^+\)) ne se
+        compensent pas (le doublet libre brise la symétrie) → moment dipolaire non nul (\(\mu\approx1{,}47\)&nbsp;D).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CORRECTION TD ATOMES ======================= -->
+  <section class="block" id="td-atomes">
+    <h2>3a. Correction TD — Atomes (24 exercices)</h2>
+    <p class="lead">TD atomistique « atomes » (VG, exos JFLM). Chaque question traitée.</p>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 1–3 — Planck-Einstein, eV, grandeurs molaires <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 1 — Relation \(E=h\nu\)</p>
+        <p>\([h]=M L^2 T^{-1}\) (J·s). À 400 nm : \(E=\frac{hc}{\lambda}=5{,}0\cdot10^{-19}\)&nbsp;J. À 800 nm
+        (\(\lambda\) ×2) : \(E\) ÷2 \(=2{,}5\cdot10^{-19}\)&nbsp;J. \(E\propto\nu\propto1/\lambda\). En nombre d'onde
+        \(E=hc\sigma\).</p>
+        <p class="q">Ex 2 — Électronvolt</p>
+        <p>\(E=QU\Rightarrow1\)&nbsp;eV \(=1{,}6\cdot10^{-19}\)&nbsp;J. Photon 400 nm : \(5{,}0\cdot10^{-19}/1{,}6\cdot10^{-19}=3{,}1\)&nbsp;eV.
+        Fondamental de H : \(-13{,}6\)&nbsp;eV. \(1\)&nbsp;Ry en nombre d'onde : \(\sigma=\frac{E}{hc}\approx1{,}1\cdot10^{7}\)&nbsp;m⁻¹
+        \(=1{,}1\cdot10^{5}\)&nbsp;cm⁻¹.</p>
+        <p class="q">Ex 3 — Grandeurs molaires</p>
+        <p>1 mol de photons 400 nm : \(E_m=N_AE\approx300\)&nbsp;kJ/mol, comparable à la combustion de CH₄
+        (−891 kJ/mol) : quelques photons UV ≈ une liaison. \(Q_m=N_Ae=96500\)&nbsp;C/mol = le Faraday. Charger 47 nF
+        avec 1 mol d'e⁻ demanderait \(U=Q/C\approx2\cdot10^{12}\)&nbsp;V : irréaliste (d'où la quasi-neutralité de la
+        matière).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 4 — Mécanique quantique (de Broglie, Heisenberg) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p>Électron à \(c/10\) : \(\lambda=\frac{h}{mv}=\frac{6{,}62\cdot10^{-34}}{9{,}1\cdot10^{-31}\times3\cdot10^{7}}
+        =2{,}4\cdot10^{-11}\)&nbsp;m (rayons X). Voiture 1 t à 36 km/h (10 m/s) : \(\lambda=6{,}6\cdot10^{-38}\)&nbsp;m
+        (indétectable).</p>
+        <p>Incertitude sur \(v\) de l'électron (\(\Delta x=10^{-10}\)) :
+        \(\Delta v>\frac{h}{4\pi m\Delta x}=5{,}8\cdot10^{5}\)&nbsp;m/s (énorme). Incertitude sur \(x\) de la voiture
+        (\(\Delta v=0{,}5\)) : \(\Delta x>10^{-37}\)&nbsp;m (négligeable). D'où : la mécanique newtonienne suffit à
+        l'échelle macroscopique.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 5–6 — Classification périodique, atome <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 5 — CP</p>
+        <p>Métaux : Na, Ti, Cr ; non-métal : P. Sous C = Si. À droite de K = Ca. Colonne 2 = alcalino-terreux,
+        colonne 1 = alcalins, 17 = halogènes, 18 = gaz nobles. Na est dans le <b>bloc s</b> (blocs s, p, d, f).</p>
+        <p class="q">Ex 6 — Atome (échelle, QCM)</p>
+        <p>Noyau (10⁻¹⁵ m) = ballon 20 cm ⇒ atome (10⁻¹⁰ m) ≈ 20 km : le noyau est minuscule. QCM : (1) faux (le
+        noyau ne contient pas d'électrons) ; (2) vrai (seul H n'a pas de neutron) ; (3) faux (tous ont ≥ 1 proton) ;
+        (4) faux (H n'a pas de neutron).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 7–8 — Nombres quantiques, orbitales <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 7 — Valeurs possibles</p>
+        <p>\(n=3\Rightarrow l=0,1,2\). \(l=2\Rightarrow m=-2,-1,0,1,2\). \(n=1\) : 1 triplet ; \(n=2\) : 4 ;
+        \(n=3\) : 9 (\(=n^2\)).</p>
+        <p class="q">Ex 8 — Orbitales</p>
+        <p>2s : \(n=2,l=0\) ; 3p : \(n=3,l=1\) ; 1s : \(n=1,l=0\). Réciproquement \(n=4,l=2\to\) 4d.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 9–12 — Niveaux d'énergie et transitions (H) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 9 — Énergie des niveaux</p>
+        <p>\(E=-13{,}6/n^2\) : \(n=3\to-1{,}51\), \(n=2\to-3{,}4\), \(n=1\to-13{,}6\), \(n=\infty\to0\)&nbsp;eV. 3p =
+        niveau \(n=3\) (−1,51), 2s = \(n=2\) (−3,4). « 1d » n'existe pas (pour \(n=1\), \(l=0\) obligatoirement).</p>
+        <p class="q">Ex 10 — Transition \(n=2\to n=1\)</p>
+        <p>\(\Delta E=13{,}6(\frac14-1)=-10{,}2\)&nbsp;eV (émission) \(=-1{,}63\cdot10^{-18}\)&nbsp;J,
+        \(\lambda=\frac{hc}{|\Delta E|}=122\)&nbsp;nm (UV, Lyman).</p>
+        <p class="q">Ex 11 — Formule de Balmer</p>
+        <p>Niveaux de plus en plus serrés (\(\Delta E(n)\propto\frac{2n+1}{n^2(n+1)^2}\) décroît). Visible 400–800 nm
+        = 25 000–12 500 cm⁻¹. Transition \(n=5\to1\) : \(\Delta E=13{,}6\times\frac{24}{25}\approx13{,}05\)&nbsp;eV
+        (émission) ; \(1\to5\) : même énergie mais <b>absorbée</b>.</p>
+        <p class="q">Ex 12 — Tableur</p>
+        <p>Formule \(\frac{1}{\lambda}=R_H\big(\frac{1}{n_1^2}-\frac{1}{n_2^2}\big)\) ; valeurs négatives = émission
+        (désexcitation).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 13–15 — Configuration électronique, Hund <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 13 — Nombres quantiques et CP</p>
+        <p>\(l=2\) possible à partir de \(n=3\), soit à partir de Na (mais bloc d à partir de la 4ᵉ ligne). 2ᵉ ligne :
+        \(n=2\), \(l=0,1\).</p>
+        <p class="q">Ex 14 — Configurations</p>
+        <p>C : \(1s^2\,2s^2\,2p^2\) ; O : \(2p^4\) ; halogènes : \(ns^2\,np^5\) ; bloc s : \(ns^1\) ou \(ns^2\).
+        Ti : [Ar]4s²3d² ; Cr : [Ar]4s¹3d⁵ (d⁵ stable). F⁻ = [Ne], Cl⁻ = [Ar], Br⁻ = [Kr]. Fe²⁺ : [Ar]3d⁶ ;
+        Fe³⁺ : [Ar]3d⁵ (on retire les 4s en premier pour les ions).</p>
+        <p class="q">Ex 15 — Cases quantiques (N, règle de Hund)</p>
+        <p>Config la plus stable = 3 électrons 2p célibataires à spins parallèles (Hund) : \(S=3/2\),
+        multiplicité 4. Les configurations appariées ont \(S=1/2\), multiplicité 2 (moins stables : répulsion
+        électronique).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 16 — Rayons atomiques <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p>Ordre de grandeur ≈ 100 pm. \(R_{Cl}=L_{Cl-Cl}/2=199/2\approx100\)&nbsp;pm.
+        \(R_C=L_{C-Cl}-R_{Cl}=176-100=76\)&nbsp;pm.</p>
+        <p>Fer (\(\rho=7{,}87\)&nbsp;g/cm³, M=55,8) : \(8{,}49\cdot10^{22}\) atomes/cm³, volume par atome
+        \(1{,}18\cdot10^{7}\)&nbsp;pm³, rayon ≈ demi-racine cubique ≈ 114 pm (exp. 125 pm ; la liaison métallique
+        diffère de la covalente).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 17–21 — Charge nucléaire effective \(Z^*\) (Slater) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 17 — Aluminium (\(Z=13\), [1s²][2s²2p⁶][3s²3p¹])</p>
+        <p>1s : \(Z^*=13-0{,}3=12{,}7\). 2s/2p : \(13-2\times0{,}85-7\times0{,}35=8{,}85\). 3s/3p :
+        \(13-2-8\times0{,}85-2\times0{,}35=3{,}5\).</p>
+        <p class="q">Ex 18–19 — Évolution de \(Z^*\)</p>
+        <p>Dans une ligne (2ᵉ période) : \(Z^*=Z-2\times0{,}85-(Z-3)\times0{,}35\) croît de Li (1,3) à Ne (5,83) →
+        l'OA 2p est de plus en plus stable (basse énergie). Dans une colonne (halogènes) : \(Z^*\) croît de F (5,2)
+        à Cl (6,1) puis Br (7,6)…</p>
+        <p class="q">Ex 20 — Divers</p>
+        <p>O : électron 2p, \(Z^*=8-3{,}45=4{,}55\). Cl (6,1) vs Cl⁻ (5,75) : \(Z^*\) plus faible pour Cl⁻ ⇒ Cl⁻ plus
+        <b>gros</b>. Mg (4,85) vs Mg²⁺ (7,85) : \(Z^*\) plus grand pour Mg²⁺ ⇒ Mg²⁺ plus <b>petit</b>. Li (1,3) vs F
+        (5,2) ⇒ F plus petit que Li.</p>
+        <p class="q">Ex 21 — Densité électronique</p>
+        <p>Densité \(=\frac{\text{charge}}{\frac43\pi R^3}\). Li (R=134 pm, 3 e⁻) vs F (R=68 pm, 9 e⁻) : F est
+        beaucoup plus dense (plus d'électrons dans un volume ≈ 8× plus petit).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 22–24 — Potentiel d'ionisation, électronégativité, périodicité <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 22 — Potentiel d'ionisation</p>
+        <p>PI(H) \(=R_y=13{,}6\)&nbsp;eV (\(E(\infty)-E(1)\)). Dans une ligne, PI croît (\(Z^*\uparrow\)). Anomalies :
+        Mg→Al et N→O (une sous-couche pleine/demi-pleine stabilise l'atome ou son cation). Les gaz nobles ont le PI
+        le plus grand (cations rares), les alcalins le plus petit (cations faciles).</p>
+        <p class="q">Ex 23 — Électronégativité</p>
+        <p>\(\chi\) croît vers la droite et vers le haut. H placé au-dessus de C (selon \(\chi\), pas sa structure).
+        \(\chi(B)>\chi(Al)\), \(\chi(Si)>\chi(Al)\), \(\chi(Br)>\chi(K)\), \(\chi(F)>\chi(Br)\). C–Br se rompt en
+        C⁺/Br⁻ (\(\chi_{Br}>\chi_C\)) ; C–Mg en C⁻/Mg⁺ (réactif de Grignard). Liaison C=O polarisée \(\text C^+\text O^-\).
+        Pour H–X : H⁺–X⁻ pour C, N, O, F ; H⁻–X⁺ pour Li, Be, B.</p>
+        <p class="q">Ex 24 — Périodicité (ions, oxydes, hydrures)</p>
+        <p>Ions (config du gaz noble le plus proche) : F⁻, Sc³⁺, Ba²⁺, S²⁻. Oxydes : BaO, Sc₂O₃, P₂O₅. Hydrures :
+        BeH₂, BH₃, AlH₃ (H à l'état −I, soit H⁻).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CORRECTION TD MOLECULES ======================= -->
+  <section class="block" id="td-molecules">
+    <h2>3b. Correction TD — Molécules (24 exercices)</h2>
+    <p class="lead">Théorie de Lewis, VSEPR, mésomérie, polarité, orbitales moléculaires.</p>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 1–2 — Décompte des électrons, charge formelle <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 1 — Électrons liants / non liants</p>
+        <p>Total = somme des électrons de valence. Ex. CH₄ : 8 liants, 0 non liant ; H₂O₂ : 6 liants, 8 non liants
+        (14) ; NO₃⁻ : 8 liants, 16 non liants (24) ; HCO₃⁻ : 10 liants, 14 non liants (24).</p>
+        <p class="q">Ex 2 — Électrons « en propre » et charge formelle</p>
+        <p>En propre = (doublets liants ×1) + (doublets non liants ×2). Charge formelle = (e⁻ de valence de l'atome
+        libre) − (en propre). Ex : C dans CH₄ : 0 ; Cl⁻ : \(8-7=+1\)… en excès ⇒ charge \(-1\) ; O dans H₃O⁺ :
+        \(5-6=-1\)… manque ⇒ charge \(+1\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 3–5 — Règle de l'octet <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 3 — Soufre</p>
+        <p>Nombre d'e⁻ autour de S : 8 (H₂S), 10 (SO₂), 12 (SO₃ et H₂SO₄). Seul H₂S respecte l'octet ; les autres
+        sont <b>hypervalents</b> (une double liaison = 4 e⁻).</p>
+        <p class="q">Ex 4 — Hydrures</p>
+        <p>H⁻ : \(1s^2\) (duet). Parmi LiH, BH₃, CH₄, NH₃, H₂O, HF : Li n'a que 2 e⁻, B en a 6 (hypovalent) ; C, N,
+        O, F respectent l'octet.</p>
+        <p class="q">Ex 5 — Phosphore</p>
+        <p>PH₃ (analogue de NH₃) : P avec un doublet non liant, octet respecté. H₃PO₄, H₂PO₄⁻, PO₄³⁻ : P entouré de
+        10 e⁻ ⇒ <b>hypervalent</b>.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 6–8 — Géométrie VSEPR <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 6 — Molécules en C₁</p>
+        <p>Td (tétraédrique) : CH₃Cl, CHFClBr, SiH₃Cl, GeHFClBr, SiOCl₂. TP (trigonal plan) : CH₂S, COCl₂, SnH₂S.
+        Lin (linéaire) : HCN, CS₂.</p>
+        <p class="q">Ex 7 — Molécules en C₂ (chaque C localement central)</p>
+        <p>C₂H₆ (Td), C₂H₄ (TP), C₂H₂ (Lin). Isomères de C₂H₆O : éthanol CH₃CH₂OH et éther CH₃–O–CH₃. C₂H₄O₂ :
+        acide éthanoïque CH₃COOH, etc.</p>
+        <p class="q">Ex 8 — Halogènes/N/peroxo/soufre centraux</p>
+        <p>Ex : ClO₄⁻ tétraédrique, ClF₃ (AX₃E₂) en T, BrF₅ (AX₅E) pyramide carrée, SF₆ octaédrique, SF₄ (AX₄E)
+        bascule, O₃ coudée, H₂O₂ liaison peroxyde O–O. NO / NO₂ : électron célibataire (nombre d'e⁻ impair).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 9–10 — Mésomérie, longueurs de liaison <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 9 — Formes mésomères</p>
+        <p>On ramène les 2 électrons d'une double liaison vers l'atome le plus électronégatif (O, N) : la double
+        liaison devient simple, O prend une charge \(-\), C une charge \(+\). Ex. CO₂, COCl₂, CH₃COOH, H₂CO₃,
+        acétone, H₂SO₄, H₃PO₄. Aucun atome ne bouge, seuls les électrons sont délocalisés.</p>
+        <p class="q">Ex 10 — Longueurs</p>
+        <p>Cl–Cl \(=2R_{Cl}=200\)&nbsp;pm (pas le rayon de l'ion). Liaison plus courte si multiple : O–O (148 pm)
+        &gt; O=O (121 pm). Benzène : formes de résonance ⇒ liaisons intermédiaires (140 pm entre 154 et 134).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 11–14 — Polarité et moment dipolaire <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 11 — HCl (\(\mu=1{,}05\)&nbsp;D)</p>
+        <p>Cl plus électronégatif. \(q=\frac{\mu}{d}=\frac{1{,}05\times3{,}33\cdot10^{-30}}{127{,}4\cdot10^{-12}}=2{,}74\cdot10^{-20}\)&nbsp;C,
+        \(\delta=q/e=0{,}17\) : \(\text H^{+0{,}17}\text{–Cl}^{-0{,}17}\).</p>
+        <p class="q">Ex 12 — BF₃ (\(\delta_B=+2{,}58\))</p>
+        <p>Trigonal plan, B hypovalent (6 e⁻). \(\delta_F=-2{,}58/3=-0{,}86\). \(\mu_{B-F}=qd=(0{,}86e)\times131{,}3\)&nbsp;pm
+        \(=5{,}43\)&nbsp;D. Molécule <b>apolaire</b> (symétrie).</p>
+        <p class="q">Ex 13 — Formule empirique (CO₂)</p>
+        <p>\(\delta_A=n_{V_A}-\big(n_{NL_A}+n_{L_A}\frac{\chi_A}{\chi_A+\chi_B}\big)\). O :
+        \(\delta_O=6-(4+4\times\frac{3{,}44}{5{,}99})=-0{,}30\), donc C : \(+0{,}60\). \(\mu_{C=O}=0{,}30e\times143\)&nbsp;pm
+        \(=2{,}06\)&nbsp;D. CO₂ apolaire (linéaire).</p>
+        <p class="q">Ex 14 — Polarité (bilan)</p>
+        <p>H₂O polaire ; CO₂, BF₃, CCl₄ apolaires (moments compensés) ; CHCl₃ polaire. H₂O (\(\mu=1{,}85\)&nbsp;D,
+        angle 104,45°) : loi des cosinus \(\mu_{OH}^2=\frac{\mu^2}{2-2\cos75{,}6°}\Rightarrow\mu_{OH}=1{,}51\)&nbsp;D,
+        d'où \(\delta_H=0{,}33\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 15–16 — Lewis : couples acide/base <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 15 — Bases conjuguées (retirer H⁺)</p>
+        <p>HNO₃ → NO₃⁻ ; HClO → ClO⁻ ; H₂S → HS⁻ puis S²⁻ ; HClO₄ → ClO₄⁻ ; HCl → Cl⁻. Le H part en laissant son
+        électron ⇒ apparition d'une charge \(-\).</p>
+        <p class="q">Ex 16 — Acides conjugués (ajouter H⁺ sur un doublet non liant)</p>
+        <p>NH₃ → NH₄⁺ ; H₂O → H₃O⁺ (O garde un doublet non liant malgré la charge +) ; F⁻ → HF.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 17–20 — Orbitales moléculaires (B₂, O₂, F₂, N₂) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 17 — Dibore B₂ (10 e⁻)</p>
+        <p>Diagramme incomplet : il manque l'OM antiliante \(\sigma_{2s}^*\). B₂ a 2 électrons célibataires (les 2 plus
+        hauts) ⇒ \(S=1\), multiplicité 3. Somme des énergies : atome B = −16,69 Eh, molécule B₂ = −33,67 Eh, à
+        comparer à 2 atomes (−33,38 Eh) : B₂ plus stable de \(\Delta E=-0{,}29\)&nbsp;Eh. Le recouvrement des OA 1s
+        n'apporte que \(-0{,}033\)&nbsp;Eh : la liaison vient surtout des OA de <b>valence</b>.</p>
+        <p class="q">Ex 18 — Dioxygène O₂ (config 1s²2s²2p⁴)</p>
+        <p>2 électrons célibataires dans les \(\pi^*\) ⇒ \(S=1\), multiplicité 3 (paramagnétique !). Stabilisation
+        \(\Delta E=-0{,}82\)&nbsp;Eh ≈ 2× celle de B₂ (double liaison O=O).</p>
+        <p class="q">Ex 19 — Difluor F₂ (config 2p⁵)</p>
+        <p>3 OM liantes et 2 antiliantes occupées ⇒ indice de liaison \(i=1\) (une liaison, conforme à Lewis).
+        \(\Delta E=-0{,}35\)&nbsp;Eh, proche de B₂ (simple liaison).</p>
+        <p class="q">Ex 20 — Diazote N₂</p>
+        <p>10 e⁻ de valence. Indice de liaison \(i=\frac12(8-2)=3\) (triple liaison). \(\Delta E=-1{,}05\)&nbsp;Eh ≈ 3×
+        celle de F₂.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 21–24 — HF, électrons de valence, diagrammes réels <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 21 — HF</p>
+        <p>H (1s¹) + F (1s²2s²2p⁵). Indice de liaison \(i=\frac12(2-0)=1\) (une liaison H–F, 3 doublets non liants
+        sur F correspondant aux OM à l'énergie des OA). \(S=0\).</p>
+        <p class="q">Ex 22–23 — Électrons de valence</p>
+        <p>Colonne H₂ « incomplète » car H n'a qu'un électron (niveau \(n=1\)). Électrons de valence : lignes 2s/2p
+        (OA) et OM correspondantes ; grand saut d'énergie avec le cœur (1s).</p>
+        <p class="q">Ex 24 — Diagrammes du web (N₂, O₂)</p>
+        <p>Limités aux OM de valence. Le diagramme « standard » de N₂ inverse \(3\sigma_g\) et \(1\pi_u\) par rapport
+        au calcul simplifié du tableau (les deux conventions existent). N₂ stable : énergie des e⁻ de la molécule
+        (−8,23 Eh) &lt; celle des 2 atomes (−7,19 Eh).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CORRECTION TD SOLVANT ======================= -->
+  <section class="block" id="td-solvant">
+    <h2>3c. Correction TD — Solvants (15 exercices)</h2>
+    <p class="lead">Forces intermoléculaires et proticité des solvants.</p>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 1–6 — Forces intermoléculaires (\(T_{eb}\), \(T_{fus}\)) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 1 — Chauffage de l'eau</p>
+        <p>On rompt les liaisons <b>intermoléculaires</b> (liaisons H, ≈ 60 kJ/mol), pas les liaisons covalentes O–H
+        (≈ 1500 kJ/mol) : l'eau reste H₂O à l'état vapeur.</p>
+        <p class="q">Ex 2 — Éthane vs méthanol</p>
+        <p>Masses comparables mais \(T_{eb}\) très différentes : l'éthane n'a que des forces de London/Keesom, le
+        méthanol a des <b>liaisons hydrogène</b> (O–H), plus fortes ⇒ \(T_{eb}\) plus élevée (+65 °C vs −89 °C).</p>
+        <p class="q">Ex 3 — Dichloroéthylène (Z/E)</p>
+        <p>Isomère Z (cis) : moments C–Cl ne se compensent pas ⇒ polaire (Keesom) ; E (trans) : compensés ⇒
+        apolaire (London seul). Donc Z bout plus haut (60 °C) que E (48 °C).</p>
+        <p class="q">Ex 4–6 — Fusion / ébullition / gaz nobles</p>
+        <p>Ionique &gt; liaison H &gt; London. Plus une molécule a d'atomes, plus les forces de London sont fortes
+        (\(T_{eb}\uparrow\)). Gaz nobles : plus d'électrons ⇒ plus polarisable ⇒ London plus fortes ⇒ changement
+        d'état à plus haute température.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 7–8 — Liaison H et isomérie <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 7 — Acide but-2-ène-dioïque (Z/E)</p>
+        <p>Seul Z (cis) fait des liaisons H <b>intramoléculaires</b> ; donc E fait plus de liaisons H
+        <b>intermoléculaires</b> ⇒ \(T_{fus}(E)=287\)&nbsp;°C ≫ \(T_{fus}(Z)=131\)&nbsp;°C.</p>
+        <p class="q">Ex 8 — Nitrophénols</p>
+        <p>L'isomère 1,2 (ortho) fait des liaisons H intramoléculaires ⇒ moins de liaisons H avec l'eau ⇒ solubilité
+        plus faible que 1,3 et 1,4.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 9–11 — Solubilité, IR, polarisabilité <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 9 — Diiode / triiodure</p>
+        <p>I₃⁻ (AX₂E₃) : <b>linéaire</b> (doublets en équatorial). I₂ apolaire (peu soluble dans l'eau) ; I₃⁻ ionique
+        (liaisons ion-dipôle avec l'eau) ⇒ soluble. Pour dissoudre I₂ seul : solvant apolaire (organique).</p>
+        <p class="q">Ex 10 — Liaison H en IR</p>
+        <p>Bande O–H plus <b>grande</b> à forte concentration (Beer-Lambert). En dilué : pas de liaison H, vibration
+        O–H « libre » ; en concentré : liaisons H R–O–H⋯O affaiblissent la liaison covalente ⇒ énergie (nombre
+        d'onde) plus basse et bande plus <b>large</b> (distribution de forces de liaison H).</p>
+        <p class="q">Ex 11 — Polarisabilité</p>
+        <p>Sous champ, le nuage électronique se déplace ⇒ \(\vec\mu=\alpha\vec E\), unité de \(\alpha\) : C·m²·V⁻¹.
+        Plus l'atome est <b>gros</b>, plus il est polarisable. La polarisabilité <b>augmente</b> en descendant une
+        colonne et <b>diminue</b> vers la droite d'une ligne.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 12–15 — Proticité des solvants <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 12 — Autoprotolyse</p>
+        <p>CH₂Cl₂ : seul H porté par C ⇒ <b>aprotique</b>. Méthanol : un H sur O ⇒ <b>protique</b>,
+        \(2\,\text{CH}_3\text{OH}=\text{CH}_3\text{OH}_2^++\text{CH}_3\text O^-\). Avec un acide :
+        \(\text{AH}+\text{CH}_3\text{OH}=\text A^-+\text{CH}_3\text{OH}_2^+\).</p>
+        <p class="q">Ex 13 — Acide éthanoïque solvant</p>
+        <p>Polaire et protique. Le caractère fort/faible dépend du solvant : dans l'eau HCl est fort (couple
+        H₃O⁺/H₂O), NH₃ base faible ⇒ \(\text H_3\text O^++\text{NH}_3\to\text H_2\text O+\text{NH}_4^+\). Dans
+        l'acide éthanoïque, HCl devient faible (couple HCl/Cl⁻) et NH₃ base forte :
+        \(\text{HCl}+\text{CH}_3\text{COO}^-\to\text{Cl}^-+\text{CH}_3\text{COOH}\). HClO₄ (fort dans ce solvant) +
+        acétate : \(\text{CH}_3\text{COOH}_2^++\text{CH}_3\text{COO}^-\to2\,\text{CH}_3\text{COOH}\).</p>
+        <p class="q">Ex 14 — Ammoniac solvant</p>
+        <p>Protique (H sur N, doublet non liant capteur). \(2\,\text{NH}_3=\text{NH}_4^++\text{NH}_2^-\) :
+        prolongement d'une liaison hydrogène (le H pointillé devient covalent en s'arrachant à l'autre molécule).</p>
+        <p class="q">Ex 15 — Proticité et polarité</p>
+        <div class="res">Tout solvant protique (NH₃, CH₃OH, H₂O…) est polaire (liaison H–N/O). Mais l'inverse est
+        faux : CHCl₃ et l'acétone sont polaires <b>sans</b> être protiques (tous leurs H sont sur des C).</div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.5rem;border-left-color:var(--ok)">
+      <span class="lab" style="color:#065f46">✅ TD atomistique — correction complète (63 exercices, 3 parties)</span>
+      <b>Atomes</b> : Planck-Einstein, de Broglie/Heisenberg, niveaux de H (Balmer), nombres quantiques &amp; OA,
+      configuration électronique (Klechkowski/Hund/Pauli), charge effective \(Z^*\) de Slater, propriétés périodiques.
+      <b>Molécules</b> : Lewis &amp; charge formelle, octet/hypervalence, géométrie VSEPR, mésomérie, moment dipolaire
+      &amp; polarité, orbitales moléculaires et indice de liaison (B₂, O₂, F₂, N₂, HF). <b>Solvants</b> : forces de
+      London/Keesom/liaison H, solubilité, polarisabilité, proticité des solvants.
+    </div>
+    <!-- TD_ATOMISTIQUE_ANCHOR -->
+  </section>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours / ressource</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/atomistique/Atomistique%20-%20interaction%20solvant%20-%20cours%20VG.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Atomistique - interaction solvant - cours VG</span><span class="badge">Cours / ressource</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/atomistique/Atomistique%20-%20mol%C3%A9cules%20-%20cours%20VG.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Atomistique - molécules - cours VG</span><span class="badge">Cours / ressource</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Fiche / mémo</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/atomistique/Fiche%20m%C3%A9moire%20atomes%20-%20VG.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Fiche mémoire atomes - VG</span><span class="badge">Fiche / mémo</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/atomistique/TD%20atomistiques%20-%20atomes%20-%20VG%20-%20etu.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD atomistiques - atomes - VG - etu</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/atomistique/TD%20atomistiques%20-%20mol%C3%A9cules%20-%20VG%20-%20etu.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD atomistiques - molécules - VG - etu</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/atomistique/TD%20atomistiques%20-%20solvant%20-%20VG%20-%20etu.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD atomistiques - solvant - VG - etu</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Corrigé</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/atomistique/TD%20atomistiques%20-%20atomes%20-%20VG%20-%20prof.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD atomistiques - atomes - VG - prof</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/atomistique/TD%20atomistiques%20-%20mol%C3%A9cules%20-%20VG%20-%20prof.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD atomistiques - molécules - VG - prof</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/atomistique/TD%20atomistiques%20-%20solvant%20-%20VG%20-%20prof.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD atomistiques - solvant - VG - prof</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C02 — Structure & performances d'un système asservi — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-sii">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SII · C02 — Structure fonctionnelle & performances d'un système asservi</span>
+  <h1 class="title">C02 — Définir la structure fonctionnelle et identifier les performances d'un système asservi</h1>
+  <p class="lead">Chaîne fonctionnelle (chaîne d'<b>énergie</b> : alimenter → moduler → convertir → transmettre → agir ;
+  chaîne d'<b>information</b> : acquérir → traiter → communiquer) ; puissance \(P=e\cdot f\) (effort × flux) ;
+  structure d'un <b>asservissement</b> (IHM, comparateur, correcteur, capteur) ; <b>performances</b> : stabilité (dépassements),
+  rapidité (\(t_{r5\%}\)), précision (erreur en régime permanent).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD (chaînes fonctionnelles + performances)</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Chaîne fonctionnelle</h3>
+    <div class="def">
+      <span class="lab">Définition</span>
+      Une <b>chaîne fonctionnelle</b> est associée à une <b>unique activité</b> modifiant une grandeur physique appelée
+      <b>matière d'œuvre</b>. Elle comprend deux chaînes couplées :<br>
+      • la <b>chaîne d'information</b> : traite l'information (utilisateur + capteurs) pour définir les <b>ordres</b> des pré-actionneurs ;<br>
+      • la <b>chaîne d'énergie</b> : gère la <b>puissance</b> nécessaire pour modifier la matière d'œuvre via l'effecteur.
+    </div>
+    <div class="thm">
+      <span class="lab">Structure générique (le « squelette » à connaître)</span>
+      <b>Chaîne d'énergie</b> : <span class="mono">ALIMENTER → MODULER → CONVERTIR → TRANSMETTRE → AGIR</span><br>
+      (alimentation → pré-actionneur → actionneur → transmetteur → effecteur).<br>
+      <b>Chaîne d'information</b> : <span class="mono">ACQUÉRIR → TRAITER → COMMUNIQUER</span><br>
+      (capteurs / IHM → unité de commande → périphérique / interface).
+    </div>
+    <table>
+      <tr><th>Famille (fonction)</th><th>Rôle</th></tr>
+      <tr><td>Alimentation (ALIMENTER)</td><td>Conditionner / adapter la puissance entrante (+ sécurité : disjoncteur…)</td></tr>
+      <tr><td>Pré-actionneur (MODULER / DISTRIBUER)</td><td>Moduler la puissance utile selon l'ordre de l'unité de commande (variateur, hacheur, pont en H…)</td></tr>
+      <tr><td>Actionneur (CONVERTIR)</td><td>Convertir la puissance en un autre type (souvent méca) : moteur, vérin…</td></tr>
+      <tr><td>Transmetteur (TRANSMETTRE)</td><td>Transmettre / adapter la puissance : réducteur, poulie-courroie, vis-écrou, bielle-manivelle…</td></tr>
+      <tr><td>Effecteur (AGIR)</td><td>Agir directement sur la matière d'œuvre : pince, outil, tapis…</td></tr>
+      <tr><td>Capteur (ACQUÉRIR)</td><td>Prélever une grandeur physique → image exploitable par l'unité de commande</td></tr>
+      <tr><td>Unité de commande (TRAITER)</td><td>Traiter (programme) capteurs + IHM → ordres des pré-actionneurs</td></tr>
+    </table>
+
+    <h3>1.2 Puissance : effort × flux</h3>
+    <div class="thm">
+      <span class="lab">Loi générale</span>
+      L'énergie se mesure en <b>joule</b> (J) ; la <b>puissance</b> en <b>watt</b> (\(1\,\text{W}=1\,\text{J·s}^{-1}\)), grandeur instantanée.
+      Elle est toujours le produit d'un <b>effort</b> \(e(t)\) et d'un <b>flux</b> \(f(t)\) :
+      \[ \boxed{\,P(t)=e(t)\times f(t)\,} \]
+    </div>
+    <table>
+      <tr><th>Puissance</th><th>Effort \(e(t)\)</th><th>Flux \(f(t)\)</th></tr>
+      <tr><td>Électrique</td><td>Tension \(u\) (V)</td><td>Intensité \(i\) (A)</td></tr>
+      <tr><td>Méca. translation</td><td>Force \(F\) (N)</td><td>Vitesse \(V\) (m·s⁻¹)</td></tr>
+      <tr><td>Méca. rotation</td><td>Couple \(C\) (N·m)</td><td>Vitesse angulaire \(\omega\) (rad·s⁻¹)</td></tr>
+      <tr><td>Hydraulique / Pneu.</td><td>Pression \(p\) (Pa)</td><td>Débit \(q_v\) (m³·s⁻¹)</td></tr>
+      <tr><td>Thermique</td><td>Température \(T\) (K)</td><td>Flux d'entropie \(\dot S\) (J·K⁻¹·s⁻¹)</td></tr>
+    </table>
+    <div class="note">
+      <span class="lab">Types de signaux (chaîne d'information)</span>
+      <b>Analogique</b> (infinité de valeurs, ex. tension d'un capteur), <b>numérique</b> (valeurs discrètes / bits, après CAN),
+      <b>logique</b> (0 ou 1, ex. bouton poussoir, détecteur).
+    </div>
+
+    <h3>1.3 Structure fonctionnelle d'un système asservi</h3>
+    <div class="def">
+      <span class="lab">Système asservi & continu</span>
+      Un système <b>asservi</b> assure le <b>suivi d'une consigne</b> par la matière d'œuvre, <b>indépendamment des perturbations</b>.
+      Il est <b>continu</b> si toutes les grandeurs sont des fonctions continues du temps.
+      <b>Régulateur</b> : consigne fixe (ex. étuve, régulateur de vitesse) ; <b>suiveur</b> : consigne variable (ex. vérin de simulateur).
+    </div>
+    <div class="thm">
+      <span class="lab">Composants clés & erreur</span>
+      • <b>IHM</b> : traduit la consigne en signal utilisable ;<br>
+      • <b>Capteur</b> : image de la réponse (+ <b>ADAPTER</b> si la grandeur mesurée ≠ réponse) ;<br>
+      • <b>Comparateur</b> : \(\varepsilon(t)=e'(t)-s'(t)\), image de l'erreur ;<br>
+      • <b>Correcteur</b> : corrige l'ordre pour améliorer stabilité / rapidité / précision.<br>
+      Erreur : \(er(t)=e(t)-s(t)\) (consigne − réponse).
+    </div>
+
+    <h3>1.4 Performances : stabilité, rapidité, précision</h3>
+    <div class="thm">
+      <span class="lab">Stabilité</span>
+      Système <b>stable</b> ⟺ pour un échelon, la <b>valeur finale existe</b> (la réponse converge). Un <b>dépassement</b> apparaît
+      quand la courbe « coupe » la valeur finale. \(k\)-ième dépassement :
+      \[ D_k=|s(t_k)-s(+\infty)|,\qquad D_k\%=\left|\frac{D_k}{\Delta s(+\infty)}\right| \]
+      Caractérisée par \(D_1\) (le plus critique) et le nombre de dépassements.
+    </div>
+    <div class="thm">
+      <span class="lab">Rapidité — temps de réponse à 5 %</span>
+      \(t_{r5\%}\) = durée pour que la réponse <b>entre et reste</b> dans le « tube à 5 % » :
+      \[ \big[\,s(+\infty)-0{,}05\,\Delta s(+\infty)\ ;\ s(+\infty)+0{,}05\,\Delta s(+\infty)\,\big]. \]
+    </div>
+    <div class="thm">
+      <span class="lab">Précision — erreur en régime permanent</span>
+      Définie seulement pour un système <b>asservi et stable</b> (consigne et réponse de même nature). Pour un échelon :
+      \[ e_r=\Delta e(+\infty)-\Delta s(+\infty),\qquad e_r\%=\frac{\Delta e(+\infty)-\Delta s(+\infty)}{\Delta e(+\infty)}. \]
+      Erreur de <b>position</b> (consigne échelon) ou de <b>poursuite</b> (consigne rampe).
+    </div>
+    <div class="warnbox">
+      <span class="lab">Pièges fréquents</span>
+      • On raisonne toujours en <b>variations</b> \(\Delta\) par rapport à l'état initial, jamais en valeurs absolues brutes.<br>
+      • La précision n'a de sens que si <b>entrée et sortie sont de même nature</b> (ex. four : entrée en V, sortie en °C → précision non évaluable).<br>
+      • \(t_{r5\%}\) se compte à partir de l'instant d'application de l'échelon \(t_{init}\), pas de \(t=0\).
+    </div>
+  </section>
+
+  <!-- ======================= EXOS CRÉÉS =============================== -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Effort, flux et puissance</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Un moteur tourne à \(\omega=150\) rad·s⁻¹ sous un couple \(C=8\) N·m ; il est alimenté sous \(u=48\) V, \(i=30\) A.</div>
+        <p class="q">1) Puissance mécanique</p><p>\(P_{méca}=C\cdot\omega=8\times150=1200\) W.</p><p class="res">\(P_{méca}=1200\) W</p>
+        <p class="q">2) Puissance électrique</p><p>\(P_{élec}=u\cdot i=48\times30=1440\) W.</p><p class="res">\(P_{élec}=1440\) W</p>
+        <p class="q">3) Rendement</p><p>\(\eta=\dfrac{P_{méca}}{P_{élec}}=\dfrac{1200}{1440}\approx0{,}83\).</p><p class="res">\(\eta\approx83\%\) (les 240 W perdus = pertes Joule + méca)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Lire les performances sur une réponse indicielle</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Réponse à un échelon : \(s_0=2\), valeur finale \(s(+\infty)=6\), premier extrémum \(s(t_1)=7{,}2\). Consigne : échelon de \(+5\) (donc \(\Delta e=5\)).</div>
+        <p class="q">1) Variation finale</p><p>\(\Delta s(+\infty)=6-2=4\).</p><p class="res">\(\Delta s(+\infty)=4\)</p>
+        <p class="q">2) Premier dépassement</p><p>\(D_1=|7{,}2-6|=1{,}2\) ; \(D_1\%=\dfrac{1{,}2}{4}=30\%\).</p><p class="res">\(D_1=1{,}2\), \(D_1\%=30\%\)</p>
+        <p class="q">3) Erreur statique</p><p>\(e_r=\Delta e-\Delta s=5-4=1\) ; \(e_r\%=\dfrac{1}{5}=20\%\).</p><p class="res">\(e_r=1\) (20 %)</p>
+        <p class="q">4) Tube à 5 %</p><p>\([6-0{,}05\cdot4\,;\,6+0{,}05\cdot4]=[5{,}8\,;\,6{,}2]\).</p><p class="res">La réponse doit rester dans \([5{,}8\,;\,6{,}2]\) pour définir \(t_{r5\%}\)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CORRECTION TD =============================== -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD</h2>
+    <p class="lead" style="font-size:.95rem">Source : <i>S2I-C02-TD</i> + <b>corrigé officiel</b> LECONTE. TD 1 (décrire par chaînes fonctionnelles) puis
+    TD 2 (structure et performances d'un système asservi). Les schémas de chaînes sont des figures ; on restitue les réponses attendues.</p>
+
+    <h3>TD 1 — Décrire un système par les chaînes fonctionnelles</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1.1 — Prothèse active transtibiale (MIT)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Q1 — Composants de chaque chaîne</p>
+        <p><b>Chaîne d'information</b> : codeur incrémental, capteurs capacitifs avant (×4), capteurs capacitifs arrière (×2),
+        potentiomètre linéaire, calculateur.</p>
+        <p><b>Chaîne d'énergie</b> : batterie (16 V), hacheur, moteur à courant continu (MCC), réducteur poulie-courroie, vis-écrou.</p>
+        <p class="q">Q2 — Matière d'œuvre & effecteur</p>
+        <p class="res">Matière d'œuvre : <b>la position de la semelle</b> (de l'horizontale à inclinée). Effecteur : le système <b>vis-écrou</b>.</p>
+        <p class="q">Q3 — Ordre chaîne info → chaîne énergie</p>
+        <p class="res">Le <b>calculateur</b> transmet l'ordre (fonction TRAITER) ; le <b>hacheur</b> le reçoit (fonction MODULER).</p>
+        <p class="q">Q4 — Diagramme des deux chaînes</p>
+        <p>Chaîne d'énergie : Batterie <span class="mono">(NRJ élec. continue)</span> → Hacheur <b>MODULER</b> <span class="mono">(élec. modulée)</span>
+        → MCC <b>CONVERTIR</b> <span class="mono">(méca. rotation)</span> → Poulie-courroie <b>TRANSMETTRE</b> → Vis-écrou <b>TRANSMETTRE</b>
+        <span class="mono">(méca. translation)</span> → AGIR sur la semelle.<br>
+        Chaîne d'information : Codeur + Potentiomètre <b>ACQUÉRIR</b> → Calculateur <b>TRAITER</b> → ordre au hacheur.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1.2 — Sécateur électrique Pellenc</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Q1 — Chaînes de l'activité « sectionner une branche » + grandeurs effort/flux</p>
+        <p><b>Chaîne d'énergie</b>, avec effort (rouge) / flux (bleu) à chaque étage :</p>
+        <p>Batterie <span class="mono">\(U_{batt}\) (V) / \(I_{batt}\) (A)</span> → Pont en H <b>DISTRIBUER</b> <span class="mono">\(U_{mot}\) / \(I_{mot}\)</span>
+        → MCC <b>CONVERTIR</b> <span class="mono">\(C_{mot}\) (N·m) / \(\omega_{mot}\) (rad·s⁻¹)</span>
+        → Réducteur <b>TRANSMETTRE</b> <span class="mono">\(C_{red}\) / \(\omega_{red}\)</span>
+        → Vis-écrou <b>TRANSMETTRE</b> <span class="mono">\(F\) (N) / \(V\) (m·s⁻¹)</span> → AGIR (lame).</p>
+        <p><b>Chaîne d'information</b> : capteurs à effet Hall <b>ACQUÉRIR</b> → UTC (unité de traitement) <b>TRAITER</b>.</p>
+        <p class="res">Chaque puissance transmise se lit comme un couple <b>effort × flux</b> cohérent avec le domaine physique.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1.3 — Système Clipflow (couper l'arrivée d'eau)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Q1 — Diagramme chaîne info / énergie de l'activité « couper l'arrivée d'eau »</p>
+        <p><b>Chaîne d'information</b> : Capteur à effet Hall <b>ACQUÉRIR</b> (image du débit d'eau) + acquisition du réarmement du levier ;
+        <b>COMMUNIQUER</b> via réseau local (100 Mbps).</p>
+        <p><b>Chaîne d'énergie</b> : ventouse magnétique + ressort de torsion <b>CONVERTIR</b> → levier ¼ tour en ≈ 1/10 s → vanne ¼ tour <b>AGIR</b> (coupe l'eau).</p>
+        <p class="res">Actionnement rapide (¼ tour ≈ 0,1 s) déclenché par un ordre logique ; réarmement manuel.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:1.4rem">TD 2 — Structure et performances d'un système asservi</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2.1 — Axe asservi de machine-outil</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Q1 — Système asservi ? Grandeur asservie ? Perturbations ?</p>
+        <p><b>Oui</b> : à chaque instant la position \(x(t)\) du chariot est comparée à une consigne via des grandeurs électriques (continu dans le temps).
+        Grandeur asservie : <b>position \(x(t)\) du chariot</b>. Perturbations : effort trop grand sur la vis-écrou, jeux aux paliers,
+        courroie distendue/élastique…</p>
+        <p class="q">Q2–Q3 — Chaîne fonctionnelle & structure de l'asservissement</p>
+        <p>Chaîne d'énergie : Transfo <b>ALIMENTER</b> → Variateur <b>MODULER</b> → Moteur <b>CONVERTIR</b> → Poulie-courroie + Vis-écrou <b>TRANSMETTRE</b> → chariot.
+        Unité de commande (à entourer) = <b>comparateur + correcteur (+ adapter)</b>, avec \(\varepsilon(t)=u_c(t)-u_{mes}(t)\).</p>
+        <p class="q">Q4 — Composant non pris en compte dans l'asservissement</p>
+        <p class="res">La fonction <b>ALIMENTER</b> (transformateur) : on suppose l'alimentation <b>idéale</b> (correctement dimensionnée).</p>
+        <p class="q">Q5 — Performances du test 1 (échelon +20 mm depuis 10 mm)</p>
+        <p>Stable (converge vers <b>29 mm</b>). Dépassement : \(D_1\%=\left|\dfrac{s(t_1)-s(\infty)}{s(\infty)-s(t_0)}\right|=\left|\dfrac{32-29}{29-10}\right|\approx15{,}8\%\) (2 dépassements).
+        Rapidité : \(t_{r5\%}=1{,}4\) s. Précision : \(e_r=\Delta e-\Delta s=(30-10)-(29-10)=\mathbf{1\ mm}\).</p>
+        <p class="res">Test 1 : stable, \(D_1\%\approx15{,}8\%\), \(t_{r5\%}=1{,}4\) s, \(e_r=1\) mm</p>
+        <p class="q">Q6 — Performances du test 2 (échelon −10 mm depuis 29 mm)</p>
+        <p>Stable (converge vers <b>19 mm</b>). <b>Aucun dépassement</b> (\(D_1\%=0\)). \(t_{r5\%}=1{,}1\) s.
+        \(e_r=(30-20)-(29-19)=\mathbf{0\ mm}\).</p>
+        <p class="res">Test 2 : stable, \(D_1\%=0\), \(t_{r5\%}=1{,}1\) s, \(e_r=0\) mm</p>
+        <p class="q">Q7 — Conclusion vs exigences</p>
+        <p>Exigences : \(0{,}6\,\text{s}<t_{r5\%}<1\,\text{s}\) et \(e_r<0{,}2\) mm. Le test 2 valide <b>l'erreur</b> (\(e_r=0\)) mais
+        <b>aucun des deux tests</b> ne respecte le temps de réponse (1,1 s et 1,4 s > 1 s).</p>
+        <p class="res">Précision OK (test 2), rapidité non conforme dans les deux cas</p>
+        <p class="q">Q8 — Erreur de poursuite (test 3)</p>
+        <p class="res">La consigne est une rampe → oui, on peut évaluer l'erreur de poursuite : \(e_p=\mathbf{4\ mm}\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2.2 — Système Ramses (régulation niveau d'un bassin)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Q1 — Grandeur asservie & consigne</p>
+        <p class="res">Grandeur asservie : le <b>niveau (hauteur) d'eau</b> \(h(t)\). Grandeur de consigne : la tension image \(u_c(t)\).</p>
+        <p class="q">Q2 — Chaîne fonctionnelle</p>
+        <p>Acquérir : potentiomètre (consigne) + limnimètre (niveau) → Corriger (correcteur) → Moduler (régulateur) → Moteur <b>CONVERTIR</b>
+        → Réducteur + Vanne <b>TRANSMETTRE/AGIR</b> sur le débit \(Q_e(t)\). Unité de commande = comparateur + correcteur.</p>
+        <p class="q">Q3 — Performances des deux essais (initial 10 m, consigne 14 m)</p>
+        <table>
+          <tr><th>Performance</th><th>1ᵉʳ essai</th><th>2ᵉ essai</th></tr>
+          <tr><td>Stabilité</td><td>stable, valeur finale ≈ 15 m, \(D_1\%=0\)</td><td>stable, ≈ 15 m, \(D_1\%=0\)</td></tr>
+          <tr><td>Rapidité \(t_{r5\%}\)</td><td>500 min</td><td>100 min</td></tr>
+          <tr><td>Précision \(e_r\%\)</td><td>25 %</td><td>25 %</td></tr>
+        </table>
+        <p>Erreur statique relative : \(e_r\%=\dfrac{|\Delta e-\Delta s|}{\Delta e}=\dfrac{|(140-100)-(150-100)|}{140-100}=\dfrac{10}{40}=25\%\)
+        (valeurs lues sur le graphe, en dm : 10 m → 14 m visé, 15 m atteint).</p>
+        <p class="res">Après réglage : <b>même précision</b> (25 %) mais <b>80 % plus rapide</b> (\(\tfrac{500-100}{500}=80\%\)).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2.3 — Four électrique</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">À 50 V, température stabilisée à 100 °C. À \(t=100\) s, la tension passe à 75 V (cible 150 °C).</div>
+        <p class="q">Q1 — Stabilité</p>
+        <p>Stable : la température tend vers une valeur finie <b>150 °C</b> (en ≈ 700 s). \(\Delta s(+\infty)=150-100=50\) °C.
+        Dépassement : \(D_1=|159-150|=9\) °C, \(D_1\%=\dfrac{9}{50}=18\%\) (1 dépassement).</p>
+        <p class="res">Stable, \(D_1\%=18\%\), 1 dépassement</p>
+        <p class="q">Q2 — Rapidité</p><p class="res">\(t_{r5\%}=400\) s (tube \([147{,}5\,;\,152{,}5]\) °C)</p>
+        <p class="q">Q3 — Précision</p>
+        <p class="res warnbox">Non évaluable : l'<b>entrée (tension, V)</b> et la <b>sortie (température, °C)</b> ne sont pas de même nature → l'erreur n'a pas de sens ici.</p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.4rem">
+      <span class="lab">Bilan C02</span>
+      Deux savoir-faire majeurs : <b>(1)</b> construire les chaînes d'énergie et d'information d'un système (fonctions + composants + effort/flux),
+      <b>(2)</b> lire sur une réponse indicielle les trois performances — <b>stabilité</b> (\(D_1\%\), nombre de dépassements),
+      <b>rapidité</b> (\(t_{r5\%}\) via le tube à 5 %) et <b>précision</b> (\(e_r=\Delta e-\Delta s\), seulement si entrée/sortie comparables).
+      Socle de toute l'automatique des chapitres suivants (C06, C07, C12).
+    </div>
+  </section>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours / ressource</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c02-systeme-asservi/Introduction%20asservissement.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Introduction asservissement</span><span class="badge">Cours / ressource</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c02-systeme-asservi/S2I-C02-TD-D%C3%A9finir%20la%20structure%20fonctionnelle%20et%20identifier%20les%20performances%20dun%20syst%C3%A8me%20asservi.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C02-TD-Définir la structure fonctionnelle et identifier les performances dun système asservi</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Corrigé</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c02-systeme-asservi/S2I-C02-TD-D%E1%85%A2%E1%84%85finir%20la%20structure%20fonctionnelle%20et%20performances%20syst%E1%85%A2%E1%84%84me%20asservi%20CORRIGE.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C02-TD-Dᅢᄅfinir la structure fonctionnelle et performances systᅢᄄme asservi CORRIGE</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Document</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c02-systeme-asservi/S2I-C02-D%C3%A9finir%20la%20structure%20fonctionnelle%20et%20identifier%20les%20performances%20dun%20syst%C3%A8me%20asservi.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C02-Définir la structure fonctionnelle et identifier les performances dun système asservi</span><span class="badge">Document</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

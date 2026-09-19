@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C04 — Transmetteurs & trains d'engrenages — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-sii">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SII · C04 — Comportement cinématique des transmetteurs linéaires</span>
+  <h1 class="title">C04 — Modéliser le comportement cinématique des transmetteurs linéaires</h1>
+  <p class="lead">Loi entrée-sortie cinématique (proportionnalité) ; transmissions <b>sans</b> transformation (roues à friction, engrenages
+  extérieur / intérieur / conique / roue-vis, lien flexible) ; <b>avec</b> transformation (poulie-courroie, pignon-crémaillère, vis-écrou) ;
+  <b>trains d'engrenages</b> simples et <b>épicycloïdaux</b> (raison de base \(\lambda\), relation de <b>Willis</b>).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction du TD (réducteur coaxial, restituteur, Prius CVT, différentiel…)</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+    <p>La <b>loi entrée-sortie cinématique</b> relie la grandeur flux d'entrée à celle de sortie d'un transmetteur.
+    Pour un transmetteur <b>linéaire</b>, c'est une simple <b>proportionnalité</b>. But : remonter des lois de pilotage
+    des effecteurs (C03) à celles des actionneurs.</p>
+
+    <h3>1.1 Sans transformation : réducteurs & multiplicateurs</h3>
+    <div class="def">
+      <span class="lab">Rapport de transmission</span>
+      \(i=\dfrac{\omega_s}{\omega_e}\). <b>Réducteur</b> : \(\omega_s<\omega_e\) ; <b>multiplicateur</b> : \(\omega_s>\omega_e\).
+      Conservation de puissance (parfaite) : \(\omega_s=i\,\omega_e\Rightarrow C_s=\tfrac1i\,C_e\).
+    </div>
+    <div class="thm">
+      <span class="lab">Roues à friction (adhérence, RSG en I)</span>
+      \(\dfrac{\omega_{2/0}}{\omega_{1/0}}=-\dfrac{R_1}{R_2}\) (inversion du sens, croisement des rayons).
+    </div>
+    <div class="thm">
+      <span class="lab">Engrenages (obstacle)</span>
+      Diamètre primitif \(D_i=m\,Z_i\) (module \(m\) commun aux deux roues, pas \(=\pi m\)). RSG au point d'engrènement \(I\) :
+      \[ \frac{\omega_{2/0}}{\omega_{1/0}}=\pm\frac{Z_1}{Z_2}=\pm\frac{D_1}{D_2}. \]
+      <b>−</b> contact extérieur (axes parallèles, sens inversé), <b>+</b> contact intérieur (même sens). Entraxe extérieur
+      \(O_1O_2=\tfrac{D_1+D_2}{2}=m\tfrac{Z_1+Z_2}{2}\) ; intérieur \(=m\tfrac{Z_2-Z_1}{2}\).
+    </div>
+    <div class="note">
+      <span class="lab">Roue et vis sans fin & lien flexible</span>
+      Roue-vis : \(\dfrac{\omega_{roue}}{\omega_{vis}}=\pm\dfrac{Z_{vis}}{Z_{roue}}\) (\(Z_{vis}=\) nb de filets) — grand rapport,
+      souvent <b>irréversible</b> (sécurité). Poulie-courroie / pignon-chaîne (sans glissement, <b>même sens</b>) :
+      \(\dfrac{\omega_{1/0}}{\omega_{2/0}}=\dfrac{R_2}{R_1}\).
+    </div>
+
+    <h3>1.2 Avec transformation de mouvement</h3>
+    <div class="thm">
+      <span class="lab">Trois systèmes</span>
+      <b>Poulie-courroie</b> (prise sur la courroie) : \(\dfrac{V_{2/0}}{\omega_{1/0}}=\pm R\).<br>
+      <b>Pignon-crémaillère</b> (≡ roue-sol, RSG) : \(\dfrac{V_{2/0}}{\omega_{1/0}}=R=\dfrac{mZ}{2}\).<br>
+      <b>Vis-écrou</b> (pas \(p\) en mm/tour) : \(\dfrac{V_{2/0}}{\omega_{1/0}}=\mp\dfrac{p}{2\pi}\) (− pas à droite). À billes : réversible ; contact direct : irréversible.
+    </div>
+
+    <h3>1.3 Trains d'engrenages simples</h3>
+    <div class="thm">
+      <span class="lab">Formule (toutes roues en pivot / bâti)</span>
+      \[ \frac{\omega_s}{\omega_e}=(-1)^n\,\frac{\displaystyle\prod Z_{\text{menantes}}}{\displaystyle\prod Z_{\text{menées}}} \]
+      \(n\) = nombre de contacts <b>extérieurs</b> (donne le signe). Une roue à la fois menante et menée (« roue folle ») n'intervient
+      pas dans le rapport (mais compte pour le signe).
+    </div>
+
+    <h3>1.4 Trains épicycloïdaux</h3>
+    <div class="def">
+      <span class="lab">Structure</span>
+      Deux planétaires (A et B), un <b>satellite</b> (engrène avec les deux), un <b>porte-satellite</b>. Souvent : un planétaire fixe,
+      l'autre en entrée, le porte-satellite en sortie (axes coaxiaux, fort rapport, faible encombrement).
+    </div>
+    <div class="thm">
+      <span class="lab">Raison de base & relation de Willis</span>
+      Raison de base (porte-satellite bloqué) : \(\lambda=\dfrac{\omega_{A/0}}{\omega_{B/0}}\Big|_{\omega_{PoSa/0}=0}\), calculée comme un train simple.
+      <b>Willis</b> :
+      \[ \boxed{\ \omega_{A/0}-\lambda\,\omega_{B/0}+(\lambda-1)\,\omega_{PoSa/0}=0\ } \]
+      Équivalent : \(\dfrac{\omega_{A/0}-\omega_{PoSa/0}}{\omega_{B/0}-\omega_{PoSa/0}}=\lambda\).
+    </div>
+    <div class="note">
+      <span class="lab">Condition géométrique (modules égaux)</span>
+      Type I (planétaire ext. + satellite + planétaire int.) : \(Z_3=Z_1+2Z_2\). Il faut imposer 2 des 3 vitesses ; la 3ᵉ découle de Willis.
+    </div>
+  </section>
+
+  <!-- ======================= EXOS CRÉÉS =============================== -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Réducteur roue-vis + train simple</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Vis sans fin 2 filets → roue \(Z=40\), puis engrenage extérieur \(Z_a=20\to Z_b=60\). Moteur 1500 tr/min.</div>
+        <p class="q">Rapport global</p>
+        <p>Roue-vis : \(i_1=\dfrac{Z_{vis}}{Z_{roue}}=\dfrac{2}{40}=\dfrac1{20}\). Engrenage ext. : \(i_2=-\dfrac{Z_a}{Z_b}=-\dfrac{20}{60}=-\dfrac13\).</p>
+        <p>\(i=i_1\,i_2=-\dfrac{1}{60}\).</p>
+        <p class="res">\(N_s=|i|\cdot1500=\dfrac{1500}{60}=25\) tr/min (sens inversé)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Vis-écrou : loi entrée-sortie</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Vis à droite, pas \(p=5\) mm/tour, entraînée à \(N=600\) tr/min. Vitesse de l'écrou ?</div>
+        <p>\(\omega=\dfrac{2\pi N}{60}=\dfrac{2\pi\cdot600}{60}=62{,}8\) rad·s⁻¹. \(V=\dfrac{p}{2\pi}\omega=\dfrac{p\,N}{60}=\dfrac{5\cdot600}{60}\) mm/s.</p>
+        <p class="res">\(V=50\) mm·s⁻¹ (\(=p\times\) tours/s : cohérent, 10 tr/s × 5 mm)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CORRECTION TD =============================== -->
+  <section class="block" id="td">
+    <h2>3. Correction du TD</h2>
+    <p class="lead" style="font-size:.95rem">Source : <i>S2I-C04-TD</i> (TD1 trains simples, TD2 trains épicycloïdaux). Les corrigés officiels sont des scans (images) :
+    exercices <b>résolus et vérifiés maison</b>. Sélection représentative.</p>
+
+    <h3>TD 1 — Transmetteurs & trains simples</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1.1 — Réducteur à arbres coaxiaux (train simple)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(Z_1=31\), \(Z_{2a}=52\), \(Z_{2b}=24\), \(Z_3=79\) ; module engrenage 1-2a : \(m_1=1{,}5\) mm.</div>
+        <p class="q">Q2 — Rapports & réduction globale</p>
+        <p>Engr. 1-2a (ext.) : \(\dfrac{\omega_{2}}{\omega_1}=-\dfrac{Z_1}{Z_{2a}}=-\dfrac{31}{52}\). Engr. 2b-3 (ext.) : \(\dfrac{\omega_3}{\omega_2}=-\dfrac{Z_{2b}}{Z_3}=-\dfrac{24}{79}\).</p>
+        <p>\(i=\dfrac{\omega_3}{\omega_1}=\Big(-\dfrac{31}{52}\Big)\Big(-\dfrac{24}{79}\Big)=\dfrac{31\cdot24}{52\cdot79}=\dfrac{744}{4108}\).</p>
+        <p class="res">\(i\approx0{,}181\) (réduction ≈ 1/5,5, même sens de rotation)</p>
+        <p class="q">Q3 — Entraxe \(a_{12}\)</p>
+        <p>\(a_{12}=m_1\dfrac{Z_1+Z_{2a}}{2}=1{,}5\cdot\dfrac{31+52}{2}=1{,}5\cdot41{,}5\).</p>
+        <p class="res">\(a_{12}=62{,}25\) mm</p>
+        <p class="q">Q4 — Module \(m_2\) pour arbres coaxiaux</p>
+        <p>Coaxialité ⟹ \(a_{23}=a_{12}\) : \(m_2\dfrac{Z_{2b}+Z_3}{2}=62{,}25\Rightarrow m_2=\dfrac{2\cdot62{,}25}{24+79}=\dfrac{124{,}5}{103}\).</p>
+        <p class="res">\(m_2\approx1{,}21\) mm (obtenu par correction de denture)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1.4 — Restituteur actif d'effort d'embrayage</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Moteur (1) → poulie-courroie (poulie 2 de diamètre <b>double</b> de la poulie 1) → vis-écrou, pas \(p_v=10\) mm. Sortie : piston (3).</div>
+        <p class="q">Q2 — Loi entrée-sortie \(V_3/\omega_1\)</p>
+        <p>Poulie-courroie : \(\omega_{vis}=\omega_2=\dfrac{R_1}{R_2}\omega_1=\dfrac12\,\omega_1\).</p>
+        <p>Vis-écrou : \(V_3=\dfrac{p_v}{2\pi}\,\omega_{vis}=\dfrac{p_v}{2\pi}\cdot\dfrac{\omega_1}{2}\).</p>
+        <p class="res">\(\dfrac{V_3}{\omega_1}=\dfrac{p_v}{4\pi}=\dfrac{10}{4\pi}\approx0{,}80\) mm par rad·s⁻¹</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:1.4rem">TD 2 — Trains épicycloïdaux</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Méthode — Appliquer Willis (Ex 2.1)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p>Pour chaque configuration (entrée / sortie / pièce fixe) on part de \(\omega_A-\lambda\omega_B+(\lambda-1)\omega_{PoSa}=0\) et on annule
+        la vitesse de la pièce fixe :</p>
+        <p>• <b>Planétaire B fixe</b> (\(\omega_B=0\)) : \(i=\dfrac{\omega_{PoSa}}{\omega_A}=\dfrac{1}{1-\lambda}\).<br>
+        • <b>Porte-satellite fixe</b> : \(i=\dfrac{\omega_B}{\omega_A}=\dfrac1\lambda\) (train simple).<br>
+        • <b>Planétaire A fixe</b> : \(i=\dfrac{\omega_{PoSa}}{\omega_B}=\dfrac{-\lambda}{1-\lambda}=\dfrac{\lambda}{\lambda-1}\).<br>
+        • <b>Deux planétaires liés</b> (\(\omega_A=\omega_B\)) : tout tourne en bloc, \(i=1\).</p>
+        <p class="res">Le même \(\lambda\) donne tous les rapports selon la pièce bloquée.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2.6 — Variateur continu (CVT) de la Toyota Prius</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Porte-satellite (1) = moteur thermique \(\omega_m\) ; planétaire intérieur (3) = génératrice \(\omega_g\) (\(Z_3=30\)) ;
+        planétaire extérieur (4) = sortie \(\omega_s\) (\(Z_4=78\)) ; satellite \(Z_2=23\).</div>
+        <p class="q">Q1 — Raison & Willis</p>
+        <p>Sun (3) → satellite (2) (ext.) puis satellite → couronne (4) (int.) : \(\lambda=\dfrac{\omega_{3/1}}{\omega_{4/1}}=-\dfrac{Z_4}{Z_3}=-\dfrac{78}{30}=-2{,}6\).</p>
+        <p class="res">\(\dfrac{\omega_g-\omega_m}{\omega_s-\omega_m}=\lambda=-2{,}6\)</p>
+        <p class="q">Q2 — \(\omega_s/\omega_m\)</p>
+        <p>De \(\omega_g-\omega_m=\lambda(\omega_s-\omega_m)\) : \(\dfrac{\omega_s}{\omega_m}=\dfrac1\lambda\dfrac{\omega_g}{\omega_m}+\Big(1-\dfrac1\lambda\Big)\).</p>
+        <p class="q">Q3 — Pourquoi un CVT ?</p>
+        <p class="res">En faisant varier continûment \(\omega_g\) (génératrice asservie en vitesse), on règle continûment \(\omega_s/\omega_m\) : le rapport est <b>variable en continu</b>. L'<b>élément de contrôle</b> est la génératrice électrique.</p>
+        <p class="q">Q4 — Véhicule à l'arrêt (\(\omega_s=0\))</p>
+        <p>\(\dfrac{\omega_g-\omega_m}{-\omega_m}=\lambda\Rightarrow\omega_g=\omega_m(1-\lambda)=\omega_m\,(1+2{,}6)\).</p>
+        <p class="res">\(\dfrac{\omega_g}{\omega_m}=1-\lambda=3{,}6\)</p>
+        <p class="q">Q5 — \(\omega_s=3250\) tr/min, \(\omega_m=2700\) tr/min</p>
+        <p>\(\omega_g=\omega_m+\lambda(\omega_s-\omega_m)=2700+(-2{,}6)(3250-2700)=2700-1430\).</p>
+        <p class="res">\(\omega_g=1270\) tr/min</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2.4 — Différentiel & véhicule en virage</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Différentiel = train épicycloïdal <b>sphérique</b> (satellites coniques) : boîtier = porte-satellite, roues gauche/droite = planétaires.</div>
+        <p class="q">Q1 — Raison & Willis</p>
+        <p>Les deux planétaires sont symétriques (mêmes \(Z\), satellites coniques) : \(\lambda=-1\). Willis :
+        \(\omega_G-(-1)\omega_D+(-1-1)\omega_{boîtier}=0\), soit \(\omega_G+\omega_D=2\,\omega_{boîtier}\).</p>
+        <p class="res">\(\omega_{G/0}+\omega_{D/0}=2\,\omega_{boîtier/0}\) (moyenne des vitesses des roues = vitesse du boîtier)</p>
+        <p class="q">Q3 — En ligne droite</p>
+        <p>\(\omega_G=\omega_D=\omega_{boîtier}\) : les satellites ne tournent pas par rapport au boîtier.</p>
+        <p class="res">\(\omega_{3/2}=0\) (satellite immobile / boîtier) — en virage, il tourne pour répartir les vitesses</p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.4rem">
+      <span class="lab">Bilan C04</span>
+      Deux réflexes : <b>(1)</b> reconnaître chaque transmetteur d'une chaîne d'énergie et écrire sa loi entrée-sortie
+      (\(\pm Z_1/Z_2\), \(\pm R\), \(\pm p/2\pi\)) ; <b>(2)</b> pour un train, enchaîner les rapports (simple : \((-1)^n\prod Z_{men}/\prod Z_{men\acute e}\))
+      ou appliquer <b>Willis</b> (épicycloïdal). Application : réducteurs coaxiaux, monte-charge, treuils, CVT hybride, différentiel.
+      Autres exercices du TD (monte-charge, treuil pont roulant, Redex, chariot Hyster, réducteur 2 vitesses) : même méthode.
+    </div>
+  </section>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours / ressource</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c04-transmetteurs/Ressources-%20engrenages.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Ressources- engrenages</span><span class="badge">Cours / ressource</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c04-transmetteurs/S2I-C04-TD-Exercice%20train%20engrenage%20simple.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C04-TD-Exercice train engrenage simple</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/sii/c04-transmetteurs/S2I-C04-TD-Mod%C3%A9liser%20le%20comportement%20cin%C3%A9matique%20des%20transmetteurs%20lin%C3%A9aires.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C04-TD-Modéliser le comportement cinématique des transmetteurs linéaires</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Corrigé</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c04-transmetteurs/C04%20TD%20Corrig%C3%A9%20EXERCICES%20SUPPL%C3%89MENTAIRES.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">C04 TD Corrigé EXERCICES SUPPLÉMENTAIRES</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/sii/c04-transmetteurs/CO4%20-%20correction%20TD%20-Transmetteur%20lin%C3%A9aire%20-Train%20simple.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">CO4 - correction TD -Transmetteur linéaire -Train simple</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Évaluation</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c04-transmetteurs/DSC05%20R%C3%A9ducteur.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">DSC05 Réducteur</span><span class="badge">Évaluation</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Document</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c04-transmetteurs/S2I-C04-Mod%C3%A9liser%20le%20comportement%20cin%C3%A9matique%20des%20transmetteurs%20lin%C3%A9aires.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C04-Modéliser le comportement cinématique des transmetteurs linéaires</span><span class="badge">Document</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/sii/c04-transmetteurs/S2I-C04-Mod%C3%A9liser%20le%20comportement%20cin%C3%A9matique%20des%20transmetteurs%20lin%C3%A9aires_01.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C04-Modéliser le comportement cinématique des transmetteurs linéaires_01</span><span class="badge">Document</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

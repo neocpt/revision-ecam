@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les nombres complexes — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-math">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Maths · M01 — Chapitre 12</span>
+  <h1 class="title">Les nombres complexes</h1>
+  <p class="lead">Forme algébrique, conjugué et module ; le nombre \(e^{i\theta}\), formules d'Euler et de Moivre,
+  linéarisation ; formes exponentielle et trigonométrique, argument, signal sinusoïdal ; racines carrées (méthode IRM),
+  équations du second degré et racines \(n\)-ièmes ; interprétation géométrique et transformations du plan.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD n°12</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Ensemble \(\mathbb C\), forme algébrique</h3>
+    <div class="def">
+      <span class="lab">Nombre complexe</span>
+      \(i\) est l'unique nombre non réel tel que \(i^2=-1\). Un nombre complexe s'écrit \(z=a+ib\) avec \((a,b)\in\mathbb R^2\) :
+      \(a=\operatorname{Re}(z)\) (partie réelle) et \(b=\operatorname{Im}(z)\) (partie imaginaire, qui est un <b>réel</b>).
+      Cette écriture algébrique est <b>unique</b>. On note \(\mathbb R\subset\mathbb C\) et \(i\mathbb R\) l'ensemble des imaginaires purs (\(\operatorname{Re}=0\)).
+    </div>
+    <div class="def">
+      <span class="lab">Opérations</span>
+      \((a+ib)+(a'+ib')=(a+a')+i(b+b')\) ; \((a+ib)(a'+ib')=(aa'-bb')+i(ab'+a'b)\).
+      Hormis \(i^2=-1\), on calcule comme dans \(\mathbb R\).
+    </div>
+    <div class="warnbox">
+      \(\mathbb C\) <b>n'est pas ordonné</b> : on ne dit jamais qu'un complexe (non réel) est « plus grand » qu'un autre.
+      Deux complexes sont égaux \(\iff\) même partie réelle <b>et</b> même partie imaginaire.
+    </div>
+    <div class="note">
+      <span class="lab">Plan complexe</span>
+      \((a,b)\mapsto a+ib\) est une bijection \(\mathbb R^2\to\mathbb C\). Le point \(M(a,b)\) a pour <b>affixe</b> \(z=a+ib\).
+      Affixe de \(\vec{AB}\) : \(z_B-z_A\). Affixe du milieu de \([AB]\) : \(\tfrac{z_A+z_B}2\).
+    </div>
+
+    <h3>1.2 Conjugué</h3>
+    <div class="def">
+      <span class="lab">Conjugué</span>
+      \(\overline{z}=a-ib\). Géométriquement : \(\overline z\) est le symétrique de \(z\) par rapport à \((Ox)\),
+      \(-z\) par rapport à \(O\), \(-\overline z\) par rapport à \((Oy)\).
+      \[ \operatorname{Re}(z)=\frac{z+\overline z}2,\qquad \operatorname{Im}(z)=\frac{z-\overline z}{2i}. \]
+    </div>
+    <div class="thm">
+      <span class="lab">Caractérisations &amp; règles</span>
+      \(z\in\mathbb R\iff \overline z=z\) ; \(z\in i\mathbb R\iff\overline z=-z\).
+      \(\overline{\overline z}=z\), \(\overline{z_1+z_2}=\overline{z_1}+\overline{z_2}\), \(\overline{z_1z_2}=\overline{z_1}\,\overline{z_2}\),
+      \(\overline{\alpha z}=\alpha\overline z\) (\(\alpha\in\mathbb R\)), \(\overline{(z_1/z_2)}=\overline{z_1}/\overline{z_2}\).
+    </div>
+    <div class="method">
+      <span class="lab">Méthode du conjugué</span>
+      Pour mettre \(1/z\) sous forme algébrique, on multiplie haut et bas par \(\overline z\) :
+      \[ \frac1{a+ib}=\frac{a-ib}{(a+ib)(a-ib)}=\frac{a-ib}{a^2+b^2}=\frac{a}{a^2+b^2}-i\frac{b}{a^2+b^2}. \]
+    </div>
+
+    <h3>1.3 Module et distances</h3>
+    <div class="def">
+      <span class="lab">Module</span>
+      \(|z|=\sqrt{a^2+b^2}\geqslant0\). Propriétés : \(z\overline z=|z|^2\), \(|z|=|\overline z|\), \(|z|=0\iff z=0\),
+      \(|\operatorname{Re}(z)|\leqslant|z|\), \(|\operatorname{Im}(z)|\leqslant|z|\).
+    </div>
+    <div class="thm">
+      <span class="lab">Produit, quotient, inégalité triangulaire</span>
+      \(|z_1z_2|=|z_1||z_2|\), \(\big|\tfrac{z_1}{z_2}\big|=\tfrac{|z_1|}{|z_2|}\).
+      \(|z_1+z_2|\leqslant|z_1|+|z_2|\), avec égalité \(\iff \overline{z_1}z_2\in\mathbb R_+\) (vecteurs colinéaires de même sens).
+    </div>
+    <div class="note">
+      <span class="lab">Lecture géométrique</span>
+      \(|z|=OM\) ; \(|z_A-z_B|=d(A,B)\). Lieux : \(|z-z_A|=r\) cercle \(\mathcal C(A,r)\) ; \(|z-z_A|\leqslant r\) disque ;
+      \(|z-z_A|=|z-z_B|\) médiatrice de \([AB]\) ; \(|z-z_A|+|z-z_B|=r\) ellipse de foyers \(A,B\).
+    </div>
+
+    <h3>1.4 Le nombre \(e^{i\theta}\) et les complexes de module 1</h3>
+    <div class="def">
+      <span class="lab">\(e^{i\theta}\)</span>
+      \(e^{i\theta}=\cos\theta+i\sin\theta\) (simple notation — on n'applique pas \(\ln\)).
+      Identité d'Euler : \(e^{i\pi}+1=0\).
+    </div>
+    <div class="thm">
+      <span class="lab">Règles de calcul</span>
+      \(e^{i(\theta+\varphi)}=e^{i\theta}e^{i\varphi}\) ; \(\overline{e^{i\theta}}=e^{-i\theta}=\tfrac1{e^{i\theta}}\) ;
+      \(\tfrac{e^{i\theta}}{e^{i\varphi}}=e^{i(\theta-\varphi)}\) ; \(e^{i\theta}=e^{i\varphi}\iff\theta\equiv\varphi\;[2\pi]\).
+      \(|e^{i\theta}|=1\) : \(\mathbb U=\{z\,:\,|z|=1\}=\{e^{i\theta}\,:\,\theta\in\mathbb R\}\) (cercle trigonométrique).
+    </div>
+
+    <h3>1.5 Formules d'Euler, de Moivre — trigonométrie</h3>
+    <div class="thm">
+      <span class="lab">Euler &amp; Moivre</span>
+      \[ \cos\theta=\frac{e^{i\theta}+e^{-i\theta}}2,\qquad \sin\theta=\frac{e^{i\theta}-e^{-i\theta}}{2i},
+      \qquad \big(e^{i\theta}\big)^n=e^{in\theta}\ (n\in\mathbb Z). \]
+    </div>
+    <div class="method">
+      <span class="lab">Linéariser \(\cos^\alpha\sin^\beta\)</span>
+      1) remplacer par Euler ; 2) développer par le binôme de Newton ; 3) regrouper les termes conjugués ;
+      4) reconnaître des cosinus/sinus. Exemple : \(\cos^3\theta=\tfrac{\cos3\theta+3\cos\theta}4\).
+    </div>
+    <div class="method">
+      <span class="lab">Exprimer \(\cos(n\theta),\sin(n\theta)\) en puissances</span>
+      \(\cos(n\theta)=\operatorname{Re}\big((\cos\theta+i\sin\theta)^n\big)\), \(\sin(n\theta)=\operatorname{Im}(\cdots)\) (Moivre + binôme).
+    </div>
+    <div class="thm">
+      <span class="lab">Technique de l'angle moitié</span>
+      \(e^{i\theta}+e^{i\varphi}=2\cos\!\big(\tfrac{\theta-\varphi}2\big)e^{i\frac{\theta+\varphi}2}\),
+      \(e^{i\theta}-e^{i\varphi}=2i\sin\!\big(\tfrac{\theta-\varphi}2\big)e^{i\frac{\theta+\varphi}2}\).
+      En particulier \(1+e^{i\theta}=2\cos\tfrac\theta2\,e^{i\theta/2}\).
+    </div>
+
+    <h3>1.6 Formes exponentielle et trigonométrique — argument</h3>
+    <div class="def">
+      <span class="lab">Argument, formes</span>
+      Pour \(z\neq0\) : \(z=|z|e^{i\theta}=|z|(\cos\theta+i\sin\theta)\). Tout réel \(\theta\) vérifiant cela est un
+      <b>argument</b> ; ils diffèrent de \(2k\pi\). L'<b>argument principal</b> \(\operatorname{Arg}(z)\) est l'unique argument dans \(]-\pi,\pi]\).
+      \[ \cos\theta=\frac{x}{\sqrt{x^2+y^2}},\quad \sin\theta=\frac{y}{\sqrt{x^2+y^2}},\quad r=\sqrt{x^2+y^2}. \]
+    </div>
+    <div class="thm">
+      <span class="lab">Propriétés de l'argument</span>
+      \(\arg(\overline z)\equiv-\arg z\), \(\arg(zz')\equiv\arg z+\arg z'\), \(\arg(z/z')\equiv\arg z-\arg z'\),
+      \(\arg(z^n)\equiv n\arg z\), \(\arg(-z)\equiv\pi+\arg z\) (\([2\pi]\)).
+      \(z\in\mathbb R\iff\arg z\equiv0\,[\pi]\) ; \(z\in i\mathbb R\iff\arg z\equiv\tfrac\pi2\,[\pi]\).
+    </div>
+    <div class="note">
+      <span class="lab">Signal sinusoïdal (physique)</span>
+      \(a\cos t+b\sin t=A\cos(t-\omega)\) avec <b>amplitude</b> \(A=\sqrt{a^2+b^2}=|a+ib|\) et
+      <b>phase</b> \(\omega=\operatorname{Arg}(a+ib)\) : \(\cos\omega=\tfrac aA,\ \sin\omega=\tfrac bA\).
+    </div>
+
+    <h3>1.7 Équations dans \(\mathbb C\)</h3>
+    <div class="method">
+      <span class="lab">Racine carrée — méthode « IRM »</span>
+      \(\omega=a+ib\) racine de \(z=x+iy\) (\(\omega^2=z\)) : on résout
+      \[ \underbrace{2ab=y}_{\text{Imaginaires}},\quad \underbrace{a^2-b^2=x}_{\text{Réels}},\quad \underbrace{a^2+b^2=\sqrt{x^2+y^2}}_{\text{Modules}}. \]
+      Le signe de \(y\) (donc de \(ab\)) donne le signe relatif de \(a,b\). Tout \(z\neq0\) a exactement <b>deux</b> racines opposées.
+      (On n'écrit jamais « \(\sqrt z\) » pour un complexe.)
+    </div>
+    <div class="thm">
+      <span class="lab">Second degré</span>
+      \(az^2+bz+c=0\) (\(a\neq0\)) : \(z=\dfrac{-b\pm\delta}{2a}\), où \(\delta\) est une racine de \(\Delta=b^2-4ac\).
+      Somme \(z_1+z_2=-\tfrac ba\), produit \(z_1z_2=\tfrac ca\).
+    </div>
+    <div class="thm">
+      <span class="lab">Racines \(n\)-ièmes</span>
+      Unité : \(\mathbb U_n=\big\{e^{2ik\pi/n}\,:\,k\in[\![0,n-1]\!]\big\}\) (\(n\) sommets d'un polygone régulier),
+      de somme \(0\) si \(n\geqslant2\). Cas général : \(\omega^n=z=|z|e^{i\theta}\) donne
+      \(\omega=\sqrt[n]{|z|}\,e^{i(\theta+2k\pi)/n}\), \(k\in[\![0,n-1]\!]\).
+    </div>
+
+    <h3>1.8 Interprétation géométrique &amp; transformations</h3>
+    <div class="thm">
+      <span class="lab">Angles et distances</span>
+      \(\big|\tfrac{z_C-z_A}{z_B-z_A}\big|=\tfrac{AC}{AB}\) et \(\operatorname{Arg}\!\big(\tfrac{z_C-z_A}{z_B-z_A}\big)=(\vec{AB},\vec{AC})\).
+      \((AB)\parallel(AC)\iff\tfrac{z_C-z_A}{z_B-z_A}\in\mathbb R\) ;
+      \((AB)\perp(AC)\iff\tfrac{z_C-z_A}{z_B-z_A}\in i\mathbb R\).
+    </div>
+    <div class="def">
+      <span class="lab">Transformations \(z\mapsto az+b\)</span>
+      <b>Translation</b> \(z\mapsto z+b\) (vecteur d'affixe \(b\)).
+      <b>Homothétie</b> centre \(\Omega\), rapport \(\lambda\in\mathbb R^*\!\setminus\!\{1\}\) : \(z\mapsto\lambda z+b\), \(\omega=\tfrac b{1-\lambda}\).
+      <b>Rotation</b> centre \(\Omega\), angle \(\theta\) : \(z\mapsto e^{i\theta}z+b\).
+      <b>Similitude directe</b> \(z\mapsto az+b\) (\(|a|\neq1\), \(a\notin\mathbb R\)) : rapport \(\lambda=|a|\), angle \(\theta=\operatorname{Arg}(a)\),
+      centre \(\omega=\tfrac b{1-a}\).
+    </div>
+
+    <h3>1.9 Exponentielle complexe</h3>
+    <div class="def">
+      <span class="lab">\(\exp\) sur \(\mathbb C\)</span>
+      \(e^{z}=e^{\operatorname{Re}(z)}e^{i\operatorname{Im}(z)}\). Module \(|e^z|=e^{\operatorname{Re}(z)}\), argument \(\arg(e^z)\equiv\operatorname{Im}(z)\,[2\pi]\).
+      \(e^{z_1+z_2}=e^{z_1}e^{z_2}\) ; \(e^{z_1}=e^{z_2}\iff z_1-z_2\in2i\pi\mathbb Z\).
+    </div>
+  </section>
+
+  <!-- ==================== EXOS CRÉÉS ============================== -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés)</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Linéariser \(\cos^4\theta\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Exprimer \(\cos^4\theta\) comme combinaison de \(\cos(k\theta)\).</div>
+        <p>Formule d'Euler : \(\cos\theta=\dfrac{e^{i\theta}+e^{-i\theta}}2\), donc
+        \(\cos^4\theta=\dfrac1{16}\big(e^{i\theta}+e^{-i\theta}\big)^4\). Binôme de Newton :</p>
+        \[ (e^{i\theta}+e^{-i\theta})^4=e^{4i\theta}+4e^{2i\theta}+6+4e^{-2i\theta}+e^{-4i\theta}. \]
+        <p>On regroupe les conjugués : \(e^{4i\theta}+e^{-4i\theta}=2\cos4\theta\), \(4(e^{2i\theta}+e^{-2i\theta})=8\cos2\theta\).</p>
+        <div class="res">\(\cos^4\theta=\dfrac1{16}\big(2\cos4\theta+8\cos2\theta+6\big)=\dfrac{\cos4\theta+4\cos2\theta+3}8\).</div>
+        <p style="font-size:.9rem;opacity:.85">Vérification en \(\theta=0\) : \(1=\tfrac{1+4+3}8=1\) ✓.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Racines cubiques de \(8i\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Résoudre \(\omega^3=8i\) dans \(\mathbb C\) (forme exponentielle puis algébrique).</div>
+        <p>\(8i=8\,e^{i\pi/2}\), donc \(|\omega|=\sqrt[3]{8}=2\) et \(3\varphi\equiv\tfrac\pi2\,[2\pi]\), soit
+        \(\varphi=\tfrac\pi6+\tfrac{2k\pi}3\), \(k\in\{0,1,2\}\).</p>
+        \[ \omega_0=2e^{i\pi/6},\quad \omega_1=2e^{i5\pi/6},\quad \omega_2=2e^{i3\pi/2}. \]
+        <p>Formes algébriques : \(2e^{i\pi/6}=2(\tfrac{\sqrt3}2+\tfrac i2)=\sqrt3+i\) ;
+        \(2e^{i5\pi/6}=-\sqrt3+i\) ; \(2e^{i3\pi/2}=-2i\).</p>
+        <div class="res">\(\omega\in\{\sqrt3+i,\ -\sqrt3+i,\ -2i\}\).</div>
+        <p style="font-size:.9rem;opacity:.85">Somme des trois racines \(=0\) (coefficient de \(\omega^2\) nul) ✓.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Cercle d'Apollonius \(|z-1|=2|z+1|\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Décrire l'ensemble des points \(M\) d'affixe \(z\) tels que \(|z-1|=2|z+1|\).</div>
+        <p>On élève au carré avec \(z=x+iy\) : \(|z-1|^2=4|z+1|^2\), soit</p>
+        \[ (x-1)^2+y^2=4\big[(x+1)^2+y^2\big]. \]
+        <p>Développons : \(x^2-2x+1+y^2=4x^2+8x+4+4y^2\), d'où \(3x^2+3y^2+10x+3=0\), puis</p>
+        \[ x^2+y^2+\tfrac{10}3x+1=0\ \Longrightarrow\ \Big(x+\tfrac53\Big)^2+y^2=\tfrac{25}9-1=\tfrac{16}9. \]
+        <div class="res">Cercle de centre \(\Omega\big(-\tfrac53,0\big)\) et de rayon \(\tfrac43\) (cercle d'Apollonius du bipoint).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CORRECTION TD ========================== -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD n°12 — Les nombres complexes</h2>
+    <p class="lead" style="font-size:.95rem">Feuille sans corrigé officiel : les 21 exercices sont résolus
+    intégralement, chaque sous-question traitée.</p>
+
+    <h3>Partie 1 — Forme algébrique, conjugué, module</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — Forme algébrique</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(z_1=i(1+i)\)</p><p>\(=i+i^2\).</p><p class="res">\(-1+i\)</p>
+        <p class="q">(b) \(z_2=i^3\)</p><p>\(=i^2\cdot i=-i\).</p><p class="res">\(-i\)</p>
+        <p class="q">(c) \(z_3=(3+i)^2\)</p><p>\(=9+6i+i^2\).</p><p class="res">\(8+6i\)</p>
+        <p class="q">(d) \(z_4=(4-3i)^3\)</p><p>\((4-3i)^2=7-24i\), puis \((7-24i)(4-3i)=28-21i-96i+72i^2\).</p><p class="res">\(-44-117i\)</p>
+        <p class="q">(e) \(z_5=\tfrac2i\)</p><p>\(\tfrac1i=-i\).</p><p class="res">\(-2i\)</p>
+        <p class="q">(f) \(z_6=\tfrac{4i}{5+3i}\)</p><p>\(\times\tfrac{5-3i}{5-3i}\) : \(\tfrac{20i-12i^2}{34}=\tfrac{12+20i}{34}\).</p><p class="res">\(\tfrac6{17}+\tfrac{10}{17}i\)</p>
+        <p class="q">(g) \(z_7=\tfrac{6+8i}{4-3i}\)</p><p>\(\times\tfrac{4+3i}{4+3i}\) : \(\tfrac{24+50i-24}{25}=\tfrac{50i}{25}\).</p><p class="res">\(2i\)</p>
+        <p class="q">(h) \(z_8=\tfrac{3(2+i)}{1-i}\)</p><p>\(\tfrac{(6+3i)(1+i)}2=\tfrac{6+9i-3}2\).</p><p class="res">\(\tfrac32+\tfrac92 i\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — Conjugué (forme algébrique)</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(z_1=-1\)</p><p class="res">\(\overline{z_1}=-1\)</p>
+        <p class="q">(b) \(z_2=3i\)</p><p class="res">\(\overline{z_2}=-3i\)</p>
+        <p class="q">(c) \(z_3=-i+2=2-i\)</p><p class="res">\(\overline{z_3}=2+i\)</p>
+        <p class="q">(d) \(z_4=\tfrac{4-5i}{3+i}\)</p><p>\(\overline{z_4}=\tfrac{4+5i}{3-i}=\tfrac{(4+5i)(3+i)}{10}=\tfrac{12+19i-5}{10}\).</p><p class="res">\(\overline{z_4}=\tfrac{7+19i}{10}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — Conjugué en fonction de \(z,\overline z\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(w_1=z-\overline z\)</p><p>\(\overline{w_1}=\overline z-z\).</p><p class="res">\(\overline{w_1}=-(z-\overline z)=-w_1\) (\(w_1\in i\mathbb R\))</p>
+        <p class="q">(b) \(w_2=z\overline z\)</p><p>\(\overline{w_2}=\overline z\,z=z\overline z\).</p><p class="res">\(\overline{w_2}=w_2\) (\(w_2=|z|^2\in\mathbb R\))</p>
+        <p class="q">(c) \(w_3=iz\)</p><p>\(\overline{iz}=\overline i\,\overline z=-i\overline z\).</p><p class="res">\(\overline{w_3}=-i\overline z\)</p>
+        <p class="q">(d) \(w_4=\tfrac{2z\overline z-i}{5z+1}\)</p><p>\(\overline{2z\overline z-i}=2\overline z z+i\), \(\overline{5z+1}=5\overline z+1\).</p><p class="res">\(\overline{w_4}=\dfrac{2z\overline z+i}{5\overline z+1}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — Module</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(z_1=5i\)</p><p class="res">\(5\)</p>
+        <p class="q">(b) \(z_2=3-2i\)</p><p class="res">\(\sqrt{9+4}=\sqrt{13}\)</p>
+        <p class="q">(c) \(z_3=128-64i\)</p><p>\(=64(2-i)\), \(|2-i|=\sqrt5\).</p><p class="res">\(64\sqrt5\)</p>
+        <p class="q">(d) \(z_4=(2+i)(-3+4i)\)</p><p>\(|z_4|=|2+i|\,|-3+4i|=\sqrt5\cdot5\).</p><p class="res">\(5\sqrt5\)</p>
+        <p class="q">(e) \(z_5=(-3-4i)^4\)</p><p>\(|z_5|=|-3-4i|^4=5^4\).</p><p class="res">\(625\)</p>
+        <p class="q">(f) \(z_6=\tfrac{(1+i)^2}{(1-i)^2}\)</p><p>\(\tfrac{|1+i|^2}{|1-i|^2}=\tfrac22\).</p><p class="res">\(1\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — Équation avec contrainte \(|z|=\sqrt3\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(|z|=\sqrt3\). Résoudre \(\dfrac{2\overline z+3}{iz}=\sqrt{15}\).</div>
+        <p>L'équation équivaut à \(2\overline z+3=\sqrt{15}\,iz\). Prenons le module des deux membres :</p>
+        \[ |2\overline z+3|=\sqrt{15}\,|iz|=\sqrt{15}\,|z|=\sqrt{15}\cdot\sqrt3=\sqrt{45}=3\sqrt5. \]
+        <p>Avec \(z=a+ib\), \(2\overline z+3=(2a+3)-2ib\), donc \(|2\overline z+3|^2=(2a+3)^2+4b^2\). Or</p>
+        \[ (2a+3)^2+4b^2=4a^2+12a+9+4b^2=4|z|^2+12a+9=4\cdot3+12a+9=21+12a. \]
+        <p>La condition \(21+12a=45\) impose \(a=2\). Mais \(|z|=\sqrt3\) force \(a^2\leqslant3\), donc \(|a|\leqslant\sqrt3\approx1{,}73\) : \(a=2\) est impossible.</p>
+        <div class="res">\(S=\varnothing\) : l'équation n'a <b>aucune solution</b> sous la contrainte \(|z|=\sqrt3\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — Un quotient réel</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(|z_1|=|z_2|=1\), \(z_1z_2\neq-1\). Montrer \(\dfrac{z_1+z_2}{1+z_1z_2}\in\mathbb R\).</div>
+        <p>Posons \(w=\dfrac{z_1+z_2}{1+z_1z_2}\). Un complexe est réel \(\iff w=\overline w\). Comme \(|z_k|=1\), on a \(\overline{z_k}=\tfrac1{z_k}\), donc :</p>
+        \[ \overline w=\frac{\overline{z_1}+\overline{z_2}}{1+\overline{z_1}\,\overline{z_2}}
+        =\frac{\tfrac1{z_1}+\tfrac1{z_2}}{1+\tfrac1{z_1z_2}}
+        =\frac{\tfrac{z_1+z_2}{z_1z_2}}{\tfrac{z_1z_2+1}{z_1z_2}}=\frac{z_1+z_2}{1+z_1z_2}=w. \]
+        <div class="res">\(w=\overline w\), donc \(\dfrac{z_1+z_2}{1+z_1z_2}\in\mathbb R\). ∎</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 7 — Équivalence \(z+\tfrac1z\in\mathbb R\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(z\in\mathbb C^*\). Montrer \(z+\tfrac1z\in\mathbb R\iff |z|=1\) ou \(z\in\mathbb R\).</div>
+        <p>Posons \(w=z+\tfrac1z\). Alors \(w\in\mathbb R\iff w-\overline w=0\). Or \(\overline w=\overline z+\tfrac1{\overline z}\), donc</p>
+        \[ w-\overline w=(z-\overline z)+\Big(\tfrac1z-\tfrac1{\overline z}\Big)
+        =(z-\overline z)+\frac{\overline z-z}{z\overline z}=(z-\overline z)\Big(1-\frac1{|z|^2}\Big). \]
+        <p>Ce produit est nul \(\iff z-\overline z=0\) (i.e. \(z\in\mathbb R\)) ou \(1-\tfrac1{|z|^2}=0\) (i.e. \(|z|=1\)).</p>
+        <div class="res">\(z+\tfrac1z\in\mathbb R\iff z\in\mathbb R\ \text{ou}\ |z|=1\). ∎</div>
+      </div>
+    </div>
+
+    <h3>Partie 2 — Le nombre \(e^{i\theta}\)</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 8 — Forme algébrique d'exponentielles</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(e^{i\pi}\)</p><p class="res">\(-1\)</p>
+        <p class="q">(b) \(e^{-i\pi/2}\)</p><p class="res">\(-i\)</p>
+        <p class="q">(c) \(2e^{i2\pi/3}\)</p><p>\(2\big(-\tfrac12+i\tfrac{\sqrt3}2\big)\).</p><p class="res">\(-1+i\sqrt3\)</p>
+        <p class="q">(d) \(\sqrt2\,e^{i\pi/12}\)</p><p>\(\cos\tfrac\pi{12}=\tfrac{\sqrt6+\sqrt2}4\), \(\sin\tfrac\pi{12}=\tfrac{\sqrt6-\sqrt2}4\) ; \(\sqrt2\cos\tfrac\pi{12}=\tfrac{\sqrt3+1}2\), \(\sqrt2\sin\tfrac\pi{12}=\tfrac{\sqrt3-1}2\).</p><p class="res">\(\tfrac{\sqrt3+1}2+i\,\tfrac{\sqrt3-1}2\)</p>
+        <p class="q">(e) \(z_5=(2e^{i\pi/4})(\sqrt2\,e^{i\pi/3})\)</p><p>\(=2\sqrt2\,e^{i7\pi/12}\), avec \(\cos\tfrac{7\pi}{12}=-\sin\tfrac\pi{12}\), \(\sin\tfrac{7\pi}{12}=\cos\tfrac\pi{12}\).</p><p class="res">\((1-\sqrt3)+i(\sqrt3+1)\)</p>
+        <p class="q">(f) \(z_6=\dfrac{2e^{-i\pi/6}}{e^{i2\pi/3}}\)</p><p>\(=2e^{-i5\pi/6}=2\big(-\tfrac{\sqrt3}2-\tfrac i2\big)\).</p><p class="res">\(-\sqrt3-i\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 9 — Linéariser</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\sin^2(2\theta)\)</p><p>\(\sin^2 u=\tfrac{1-\cos2u}2\) avec \(u=2\theta\).</p><p class="res">\(\dfrac{1-\cos4\theta}2\)</p>
+        <p class="q">(b) \(\cos(2\theta)\cos\theta\)</p><p>\(\cos A\cos B=\tfrac12[\cos(A-B)+\cos(A+B)]\).</p><p class="res">\(\tfrac12\big(\cos\theta+\cos3\theta\big)\)</p>
+        <p class="q">(c) \(\sin(2\theta)\cos\theta\)</p><p>\(\sin A\cos B=\tfrac12[\sin(A+B)+\sin(A-B)]\).</p><p class="res">\(\tfrac12\big(\sin3\theta+\sin\theta\big)\)</p>
+        <p class="q">(d) \(\sin^3\theta\)</p><p>Euler : \((2i)^3=-8i\), \((e^{i\theta}-e^{-i\theta})^3=2i\sin3\theta-6i\sin\theta\).</p><p class="res">\(\dfrac{3\sin\theta-\sin3\theta}4\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 10 — En puissances de \(\cos,\sin\) (Moivre)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\cos2\theta\)</p><p class="res">\(\cos^2\theta-\sin^2\theta\)</p>
+        <p class="q">(b) \(\sin2\theta\)</p><p class="res">\(2\sin\theta\cos\theta\)</p>
+        <p class="q">(c) \(\cos4\theta\)</p><p>\(\operatorname{Re}\big((\cos\theta+i\sin\theta)^4\big)\), partie réelle de \(c^4+4ic^3s-6c^2s^2-4ics^3+s^4\).</p><p class="res">\(\cos^4\theta-6\cos^2\theta\sin^2\theta+\sin^4\theta\)</p>
+        <p class="q">(d) \(\sin4\theta\)</p><p>Partie imaginaire du même développement.</p><p class="res">\(4\cos^3\theta\sin\theta-4\cos\theta\sin^3\theta\)</p>
+      </div>
+    </div>
+
+    <h3>Partie 3 — Forme exponentielle</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 11 — Mise sous forme exponentielle</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(z_1=i\)</p><p class="res">\(e^{i\pi/2}\)</p>
+        <p class="q">(b) \(z_2=-5\)</p><p class="res">\(5e^{i\pi}\)</p>
+        <p class="q">(c) \(z_3=-5e^{i3\pi/4}\)</p><p>\(-1=e^{i\pi}\) : \(5e^{i(\pi+3\pi/4)}=5e^{i7\pi/4}\).</p><p class="res">\(5e^{-i\pi/4}\)</p>
+        <p class="q">(d) \(z_4=-\sqrt3+i\)</p><p>\(|z_4|=2\), \(\cos\theta=-\tfrac{\sqrt3}2,\ \sin\theta=\tfrac12\).</p><p class="res">\(2e^{i5\pi/6}\)</p>
+        <p class="q">(e) \(z_5=\sqrt2-i\sqrt2\)</p><p>\(|z_5|=2\), \(\cos\theta=\tfrac{\sqrt2}2,\ \sin\theta=-\tfrac{\sqrt2}2\).</p><p class="res">\(2e^{-i\pi/4}\)</p>
+        <p class="q">(f) \(z_6=3+i\sqrt{27}=3+3i\sqrt3\)</p><p>\(|z_6|=6\), \(\cos\theta=\tfrac12,\ \sin\theta=\tfrac{\sqrt3}2\).</p><p class="res">\(6e^{i\pi/3}\)</p>
+        <p class="q">(g) \(z_7=\dfrac{\sqrt6+i\sqrt2}{2(1+i)}\)</p><p>Numérateur \(=2\sqrt2\,e^{i\pi/6}\), dénominateur \(=2\sqrt2\,e^{i\pi/4}\).</p><p class="res">\(e^{-i\pi/12}\)</p>
+        <p class="q">(h) \(z_8=1+i\tan\tfrac{4\pi}3\)</p><p>\(\tan\tfrac{4\pi}3=\tan\tfrac\pi3=\sqrt3\), donc \(z_8=1+i\sqrt3\), \(|z_8|=2\), \(\arg=\tfrac\pi3\).</p><p class="res">\(2e^{i\pi/3}\)</p>
+        <p class="q">(i) \(z_9=1+e^{i\pi/6}\)</p><p>Angle moitié : \(1+e^{i\theta}=2\cos\tfrac\theta2\,e^{i\theta/2}\), \(\theta=\tfrac\pi6\).</p><p class="res">\(2\cos\tfrac\pi{12}\,e^{i\pi/12}=\tfrac{\sqrt6+\sqrt2}2\,e^{i\pi/12}\)</p>
+        <p class="q">(j) \(z_{10}=e^{i3\pi/5}+e^{i9\pi/5}\)</p><p>\(e^{i\alpha}+e^{i\beta}=2\cos\tfrac{\alpha-\beta}2e^{i\frac{\alpha+\beta}2}=2\cos\tfrac{3\pi}5\,e^{i6\pi/5}\). Comme \(\cos\tfrac{3\pi}5=-\cos\tfrac{2\pi}5<0\), on rend le module positif : \(=2\cos\tfrac{2\pi}5\,e^{i(6\pi/5+\pi)}\).</p><p class="res">\(2\cos\tfrac{2\pi}5\,e^{i\pi/5}\)</p>
+        <p class="q">(k) \(z_{11}=(1+i\sqrt3)^{2026}(1-i)^{2027}\)</p><p>\(=\big(2e^{i\pi/3}\big)^{2026}\big(\sqrt2\,e^{-i\pi/4}\big)^{2027}\). Module \(2^{2026}\cdot2^{2027/2}=2^{6079/2}\). Argument \(\tfrac{2026\pi}3-\tfrac{2027\pi}4=\tfrac{2023\pi}{12}\equiv\tfrac{7\pi}{12}\,[2\pi]\).</p><p class="res">\(2^{6079/2}\,e^{i7\pi/12}\)</p>
+        <p class="q">(l) \(z_{12}=\dfrac{(1+i)^{2026}}{(2-2i)^{2027}}\)</p><p>\(=\dfrac{(\sqrt2\,e^{i\pi/4})^{2026}}{(2\sqrt2\,e^{-i\pi/4})^{2027}}\). Module \(2^{1013-6081/2}=2^{-2029/2}\). Argument \(\tfrac{2026\pi}4+\tfrac{2027\pi}4=\tfrac{4053\pi}4\equiv\tfrac{5\pi}4\,[2\pi]\).</p><p class="res">\(2^{-2029/2}\,e^{i5\pi/4}=2^{-2029/2}\,e^{-i3\pi/4}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 12 — Amplitude &amp; phase</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(a\cos t+b\sin t=A\cos(t-\omega)\), \(A=\sqrt{a^2+b^2}\), \(\cos\omega=\tfrac aA\), \(\sin\omega=\tfrac bA\).</div>
+        <p class="q">(a) \(t\mapsto2\sqrt3\sin t+2\cos t\)</p><p>Ici \(a=2\) (coef. \(\cos\)), \(b=2\sqrt3\) (coef. \(\sin\)). \(A=\sqrt{4+12}=4\), \(\cos\omega=\tfrac12,\ \sin\omega=\tfrac{\sqrt3}2\).</p><p class="res">\(A=4,\ \omega=\tfrac\pi3\) : \(4\cos\!\big(t-\tfrac\pi3\big)\)</p>
+        <p class="q">(b) \(t\mapsto3\sin t+\sqrt{27}\cos t\)</p><p>\(a=3\sqrt3\), \(b=3\). \(A=\sqrt{27+9}=6\), \(\cos\omega=\tfrac{\sqrt3}2,\ \sin\omega=\tfrac12\).</p><p class="res">\(A=6,\ \omega=\tfrac\pi6\) : \(6\cos\!\big(t-\tfrac\pi6\big)\)</p>
+      </div>
+    </div>
+
+    <h3>Partie 4 — Équations dans \(\mathbb C\)</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 13 — Racines carrées (forme algébrique)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(z_1=0\)</p><p class="res">\(\omega=0\) (racine double)</p>
+        <p class="q">(b) \(z_2=49\)</p><p class="res">\(\omega=\pm7\)</p>
+        <p class="q">(c) \(z_3=-25\)</p><p class="res">\(\omega=\pm5i\)</p>
+        <p class="q">(d) \(z_4=50i\)</p><p>IRM : \(a^2-b^2=0,\ 2ab=50,\ a^2+b^2=50\Rightarrow a^2=b^2=25\), \(ab>0\).</p><p class="res">\(\omega=\pm5(1+i)\)</p>
+        <p class="q">(e) \(z_5=\tfrac12+i\tfrac{\sqrt3}2=e^{i\pi/3}\)</p><p>Racines \(e^{i\pi/6}\) et son opposé.</p><p class="res">\(\omega=\pm\big(\tfrac{\sqrt3}2+\tfrac i2\big)\)</p>
+        <p class="q">(f) \(z_6=\tfrac1{\sqrt2}+i\tfrac1{\sqrt2}=e^{i\pi/4}\)</p><p>Racines \(\pm e^{i\pi/8}\), \(\cos\tfrac\pi8=\tfrac{\sqrt{2+\sqrt2}}2\), \(\sin\tfrac\pi8=\tfrac{\sqrt{2-\sqrt2}}2\).</p><p class="res">\(\omega=\pm\big(\tfrac{\sqrt{2+\sqrt2}}2+i\tfrac{\sqrt{2-\sqrt2}}2\big)\)</p>
+        <p class="q">(g) \(z_7=3+4i\)</p><p>IRM : \(a^2-b^2=3,\ 2ab=4,\ a^2+b^2=5\Rightarrow a^2=4,b^2=1\), \(ab>0\).</p><p class="res">\(\omega=\pm(2+i)\)</p>
+        <p class="q">(h) \(z_8=8-6i\)</p><p>IRM : \(a^2-b^2=8,\ 2ab=-6,\ a^2+b^2=10\Rightarrow a^2=9,b^2=1\), \(ab<0\).</p><p class="res">\(\omega=\pm(3-i)\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 14 — Équations (forme algébrique)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(z^2+z+1=0\)</p><p>\(\Delta=-3\), \(\delta=i\sqrt3\).</p><p class="res">\(z=\tfrac{-1\pm i\sqrt3}2\)</p>
+        <p class="q">(b) \(z^2+2z+10=0\)</p><p>\(\Delta=-36\), \(\delta=6i\).</p><p class="res">\(z=-1\pm3i\)</p>
+        <p class="q">(c) \(z^2-(3+4i)z-1+5i=0\)</p><p>\(\Delta=(3+4i)^2-4(-1+5i)=-3+4i\) ; IRM \(\Rightarrow\delta=1+2i\). \(z=\tfrac{(3+4i)\pm(1+2i)}2\).</p><p class="res">\(z\in\{2+3i,\ 1+i\}\)</p>
+        <p class="q">(d) \(z^2-(6+i)z+11+13i=0\)</p><p>\(\Delta=(6+i)^2-4(11+13i)=-9-40i\) ; IRM \(\Rightarrow\delta=4-5i\). \(z=\tfrac{(6+i)\pm(4-5i)}2\).</p><p class="res">\(z\in\{5-2i,\ 1+3i\}\)</p>
+        <p class="q">(e) \(z^4+10z^2+169=0\)</p><p>\(Z=z^2\) : \(Z^2+10Z+169=0\), \(\Delta=-576\), \(Z=-5\pm12i\). Puis \(z^2=-5+12i\Rightarrow z=\pm(2+3i)\), \(z^2=-5-12i\Rightarrow z=\pm(2-3i)\).</p><p class="res">\(z\in\{\pm(2+3i),\ \pm(2-3i)\}\)</p>
+        <p class="q">(f) \(z^4-(5-14i)z^2-2(5i+12)=0\)</p><p>\(Z=z^2\) : \(\Delta=(5-14i)^2+4(24+10i)=-75-100i=25(-3-4i)\), \(\delta=5(1-2i)\). \(Z_1=5-12i\Rightarrow z=\pm(3-2i)\) ; \(Z_2=-2i\Rightarrow z=\pm(1-i)\).</p><p class="res">\(z\in\{\pm(3-2i),\ \pm(1-i)\}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 15 — Équations (forme exponentielle)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(z^4=-1=e^{i\pi}\)</p><p>\(z=e^{i(\pi+2k\pi)/4}\), \(k=0,\dots,3\).</p><p class="res">\(z\in\{e^{i\pi/4},e^{i3\pi/4},e^{i5\pi/4},e^{i7\pi/4}\}\)</p>
+        <p class="q">(b) \(z^5=i=e^{i\pi/2}\)</p><p>\(z=e^{i(\pi/10+2k\pi/5)}\), \(k=0,\dots,4\).</p><p class="res">\(z\in\{e^{i\pi/10},e^{i\pi/2},e^{i9\pi/10},e^{i13\pi/10},e^{i17\pi/10}\}\)</p>
+        <p class="q">(c) \(z^3=1+i\sqrt3=2e^{i\pi/3}\)</p><p>\(z=2^{1/3}e^{i(\pi/9+2k\pi/3)}\), \(k=0,1,2\).</p><p class="res">\(z\in\{2^{1/3}e^{i\pi/9},\,2^{1/3}e^{i7\pi/9},\,2^{1/3}e^{i13\pi/9}\}\)</p>
+        <p class="q">(d) \(z^5=\dfrac{-4}{1+i\sqrt3}\)</p><p>\(\dfrac{4e^{i\pi}}{2e^{i\pi/3}}=2e^{i2\pi/3}\), \(z=2^{1/5}e^{i(2\pi/15+2k\pi/5)}\), \(k=0,\dots,4\).</p><p class="res">\(z=2^{1/5}e^{i(2\pi/15+2k\pi/5)}\)</p>
+        <p class="q">(e) \((z-1)^3=1\)</p><p>\(z-1\in\mathbb U_3\) : \(z=2\), \(z=1+e^{i2\pi/3}=e^{i\pi/3}\), \(z=1+e^{i4\pi/3}=e^{-i\pi/3}\).</p><p class="res">\(z\in\{2,\ e^{i\pi/3},\ e^{-i\pi/3}\}\)</p>
+        <p class="q">(f) \((z+1)^4=-(z-1)^4\)</p><p>Avec \(w=\tfrac{z+1}{z-1}\) : \(w^4=-1\), \(w=e^{i(2k+1)\pi/4}\). Alors \(z=\tfrac{w+1}{w-1}=-i\cot\tfrac\alpha2\) (\(\alpha=(2k+1)\tfrac\pi4\)) — solutions imaginaires pures.</p><p class="res">\(z\in\{\pm i(\sqrt2+1),\ \pm i(\sqrt2-1)\}\)</p>
+      </div>
+    </div>
+
+    <h3>Partie 5 — Interprétation géométrique</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 16 — \(Z=\tfrac{5z-2}{z-1}\) imaginaire pur</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(M\) d'affixe \(z\in\mathbb C\setminus\{1\}\), \(Z=\tfrac{5z-2}{z-1}\).</div>
+        <p class="q">(a) \(Z+\overline Z\)</p>
+        <p>\(Z+\overline Z=\dfrac{(5z-2)(\overline z-1)+(5\overline z-2)(z-1)}{(z-1)(\overline z-1)}\). Le numérateur vaut \(10z\overline z-7(z+\overline z)+4\), le dénominateur \(|z|^2-(z+\overline z)+1\).</p>
+        <p class="res">\(Z+\overline Z=\dfrac{10|z|^2-7(z+\overline z)+4}{|z|^2-(z+\overline z)+1}\)</p>
+        <p class="q">(b) \(Z\in i\mathbb R\iff\) ?</p>
+        <p>\(Z\in i\mathbb R\iff Z+\overline Z=0\iff 10|z|^2-7(z+\overline z)+4=0\). Avec \(z=x+iy\) : \(10(x^2+y^2)-14x+4=0\), soit \(\big(x-\tfrac7{10}\big)^2+y^2=\tfrac9{100}\). Le point \(z=1\) est sur ce cercle et doit être exclu.</p>
+        <div class="res">\(M\) décrit le cercle de centre \(\big(\tfrac7{10},0\big)\), rayon \(\tfrac3{10}\), <b>privé du point</b> d'affixe \(1\). ∎</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 17 — Nature d'un triangle</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(z_a=3-2i\), \(z_b=-1+i\), \(z_c=6+2i\), \(Z=\tfrac{z_c-z_a}{z_b-z_a}\).</div>
+        <p class="q">(a) Module et argument de \(Z\)</p>
+        <p>\(z_c-z_a=3+4i\), \(z_b-z_a=-4+3i\). \(Z=\dfrac{3+4i}{-4+3i}=\dfrac{(3+4i)(-4-3i)}{25}=\dfrac{-25i}{25}=-i\).</p>
+        <p class="res">\(|Z|=1\), \(\operatorname{Arg}(Z)=-\tfrac\pi2\)</p>
+        <p class="q">(b) Nature de \(ABC\)</p>
+        <p>\(|Z|=\tfrac{AC}{AB}=1\Rightarrow AB=AC\) ; \((\vec{AB},\vec{AC})=-\tfrac\pi2\Rightarrow\) angle droit en \(A\).</p>
+        <div class="res">Triangle <b>rectangle isocèle en \(A\)</b>.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 18 — Triangle \(ADC\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(z_a=-i\sqrt3\), \(z_b=3-2i\sqrt3\), \(z_c=\overline{z_b}=3+2i\sqrt3\), \(D\) symétrique de \(B\) par rapport à \(0\) (\(z_d=-z_b\)).</div>
+        <p class="q">(a) \(Z=\tfrac{z_c-z_a}{z_d-z_a}\)</p>
+        <p>\(z_c-z_a=3+3i\sqrt3=3(1+i\sqrt3)\) ; \(z_d=-3+2i\sqrt3\), \(z_d-z_a=-3+3i\sqrt3=3(-1+i\sqrt3)\).</p>
+        \[ Z=\frac{1+i\sqrt3}{-1+i\sqrt3}=\frac{(1+i\sqrt3)(-1-i\sqrt3)}{4}=\frac{2-2i\sqrt3}4=\frac{1-i\sqrt3}2. \]
+        <p class="res">\(|Z|=1\), \(\operatorname{Arg}(Z)=-\tfrac\pi3\)</p>
+        <p class="q">(b) Nature de \(ADC\)</p>
+        <p>\(|Z|=\tfrac{AC}{AD}=1\Rightarrow AC=AD\) (isocèle en \(A\)), et l'angle en \(A\) vaut \(\tfrac\pi3\) : un triangle isocèle d'angle au sommet \(60^\circ\) est équilatéral.</p>
+        <div class="res">Triangle <b>équilatéral</b>.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 19 — Lieux géométriques</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(|z|=3\)</p><p class="res">Cercle de centre \(O\), rayon \(3\)</p>
+        <p class="q">(b) \(|z-i|=1\)</p><p class="res">Cercle de centre \((0,1)\), rayon \(1\)</p>
+        <p class="q">(c) \(|z-3+2i|\leqslant4\)</p><p>\(=|z-(3-2i)|\leqslant4\).</p><p class="res">Disque fermé de centre \((3,-2)\), rayon \(4\)</p>
+        <p class="q">(d) \(|z-i|=|z+i|\)</p><p>Équidistant de \(i\) et \(-i\).</p><p class="res">Médiatrice de \([i,-i]\) = l'<b>axe réel</b> \((Ox)\)</p>
+        <p class="q">(e) \(|z-1+i|=|z-i|\)</p><p>\(|z-(1-i)|=|z-i|\), équidistant de \((1,-1)\) et \((0,1)\). En carré : \(x-2y=\tfrac12\).</p><p class="res">Droite \(x-2y=\tfrac12\) (médiatrice)</p>
+        <p class="q">(f) \(|z-2i|+|z+1+i|=1\)</p><p>Somme des distances aux points \((0,2)\) et \((-1,-1)\), or leur distance vaut \(\sqrt{10}>1\).</p><p class="res">\(\varnothing\) (aucun point)</p>
+        <p class="q">(g) \(\arg(z+i)\equiv0\,[2\pi]\)</p><p>\(z+i\in\mathbb R_+^*\), donc \(z=t-i\), \(t>0\).</p><p class="res">Demi-droite horizontale \(y=-1\), \(x>0\) (origine \(-i\) exclue)</p>
+        <p class="q">(h) \(\arg(z-2)\equiv\tfrac\pi2\,[\pi]\)</p><p>\(z-2\in i\mathbb R^*\), donc \(z=2+it\), \(t\neq0\).</p><p class="res">Droite verticale \(x=2\) privée du point \((2,0)\)</p>
+        <p class="q">(i) \(\arg\!\big(\tfrac{z-2i}{z-1+i}\big)\equiv\tfrac\pi2\,[\pi]\)</p><p>Les vecteurs issus de \(A(0,2)\) et \(B(1,-1)\) vers \(M\) sont perpendiculaires.</p><p class="res">Cercle de diamètre \([AB]\) (centre \((\tfrac12,\tfrac12)\), rayon \(\tfrac{\sqrt{10}}2\)) privé de \(A,B\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 20 — Images par transformations (\(z=1+2i\))</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) Homothétie centre \(\Omega(-1,1)\), rapport \(\lambda=-2\)</p>
+        <p>\(f(z)=\omega+\lambda(z-\omega)=(-1+i)-2\big((1+2i)-(-1+i)\big)=(-1+i)-2(2+i)\).</p><p class="res">\(-5-i\) (point \((-5,-1)\))</p>
+        <p class="q">(b) Rotation centre \(\Omega(1,-\tfrac12)\), angle \(\tfrac{3\pi}4\)</p>
+        <p>\(z-\omega=(1+2i)-(1-\tfrac i2)=\tfrac{5i}2\), \(e^{i3\pi/4}=-\tfrac{\sqrt2}2+i\tfrac{\sqrt2}2\), \(e^{i3\pi/4}\cdot\tfrac{5i}2=-\tfrac{5\sqrt2}4-\tfrac{5\sqrt2}4i\).</p><p class="res">\(\big(1-\tfrac{5\sqrt2}4\big)+i\big(-\tfrac12-\tfrac{5\sqrt2}4\big)\approx-0{,}77-2{,}27i\)</p>
+        <p class="q">(c) Translation \(\vec u(1,-1)\)</p>
+        <p>\(f(z)=z+1-i=(1+2i)+1-i\).</p><p class="res">\(2+i\) (point \((2,1)\))</p>
+        <p class="q">(d) Similitude directe \(\lambda=2\), \(\theta=\tfrac\pi3\), centre \(\Omega(1,1)\)</p>
+        <p>\(z-\omega=i\), \(\lambda e^{i\theta}=2e^{i\pi/3}=1+i\sqrt3\), \((1+i\sqrt3)i=-\sqrt3+i\), \(f(z)=(1+i)+(-\sqrt3+i)\).</p><p class="res">\((1-\sqrt3)+2i\approx-0{,}73+2i\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 21 — Nature &amp; éléments caractéristiques</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(f_1:z\mapsto z-2i\)</p><p>\(a=1\).</p><p class="res"><b>Translation</b> de vecteur d'affixe \(-2i\), soit \(\vec u(0,-2)\)</p>
+        <p class="q">(b) \(f_2:z\mapsto\tfrac1i z=-iz\)</p><p>\(a=-i=e^{-i\pi/2}\), \(|a|=1\), \(b=0\).</p><p class="res"><b>Rotation</b> de centre \(O\), angle \(-\tfrac\pi2\)</p>
+        <p class="q">(c) \(f_3:z\mapsto-e^{i\pi/3}z\)</p><p>\(a=-e^{i\pi/3}=e^{-i2\pi/3}\), \(|a|=1\), \(b=0\).</p><p class="res"><b>Rotation</b> de centre \(O\), angle \(-\tfrac{2\pi}3\)</p>
+        <p class="q">(d) \(f_4:z\mapsto(1-i)(1+i)z=2z\)</p><p>\(a=2\in\mathbb R\), \(b=0\).</p><p class="res"><b>Homothétie</b> de centre \(O\), rapport \(2\) (agrandissement)</p>
+        <p class="q">(e) \(f_5:z\mapsto(-1+i)z+2-2i\)</p><p>\(a=-1+i\), \(|a|=\sqrt2\), \(\operatorname{Arg}(a)=\tfrac{3\pi}4\), \(\omega=\tfrac{2-2i}{1-a}=\tfrac{2-2i}{2-i}=\tfrac{6-2i}5\).</p><p class="res"><b>Similitude directe</b> rapport \(\sqrt2\), angle \(\tfrac{3\pi}4\), centre \(\Omega\big(\tfrac65,-\tfrac25\big)\)</p>
+        <p class="q">(f) \(f_6:z\mapsto(1+i\sqrt3)z+\sqrt3(1-i)\)</p><p>\(a=1+i\sqrt3\), \(|a|=2\), \(\operatorname{Arg}(a)=\tfrac\pi3\), \(\omega=\tfrac{\sqrt3(1-i)}{-i\sqrt3}=1+i\).</p><p class="res"><b>Similitude directe</b> rapport \(2\), angle \(\tfrac\pi3\), centre \(\Omega(1,1)\)</p>
+      </div>
+    </div>
+
+  </section>
+
+  <p style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.9rem;opacity:.75">
+    Chapitre 12 du cours M01 (S1). Sources : <em>Chap_12.pdf</em> (cours magistral) et
+    <em>TD12 — Les nombres complexes</em>. Corrigé rédigé intégralement (pas de corrigé officiel fourni).
+    Ce chapitre <b>clôt le cours M01</b> (12/12 chapitres).
+  </p>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours (CM)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/nombres-complexes/Chap_12.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Chap_12</span><span class="badge">Cours (CM)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/nombres-complexes/TD12___Les_nombres_complexes.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD12___Les_nombres_complexes</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

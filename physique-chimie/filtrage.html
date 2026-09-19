@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Filtrage & diagrammes de Bode — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' }, svg: { fontCache: 'global' } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-phys">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Physique · Électrocinétique</span>
+  <h1 class="title">Filtrage &amp; diagrammes de Bode</h1>
+  <p class="lead">En régime sinusoïdal forcé (RSF), un circuit linéaire agit comme un <b>filtre</b> : il modifie
+  l'amplitude et la phase du signal selon sa fréquence. On le caractérise par sa <b>fonction de transfert</b>
+  \(H(\omega)=\underline{s}/\underline{e}\), son module (gain), son argument (déphasage), et on visualise son
+  comportement sur le <b>diagramme de Bode</b> (gain en décibels et phase en échelle log). Ce chapitre couvre les
+  quatre natures de filtres (passe-bas, passe-haut, passe-bande, coupe-bande), les ordres 1 et 2, la résonance, la
+  bande passante, les comportements dérivateur/intégrateur, et le dimensionnement sur cahier des charges (gabarit).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé (RSF, impédances, Bode)</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD (12 EC + 25 exercices)</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ============================ COURS ============================ -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Régime sinusoïdal forcé et notation complexe</h3>
+    <div class="def"><span class="lab">RSF</span>
+    Un circuit est en <b>régime sinusoïdal forcé</b> quand il est alimenté par une source sinusoïdale
+    \(e(t)=E_0\cos(\omega t)\) depuis « longtemps » (le régime transitoire s'est éteint). Toutes les tensions et
+    courants sont alors sinusoïdaux à la <b>même pulsation</b> \(\omega\), mais avec des amplitudes et des phases
+    différentes.</div>
+    <div class="note"><span class="lab">Signaux complexes associés</span>
+    À \(e(t)=E_0\cos(\omega t)\) on associe \(\underline e=E_0\,e^{j\omega t}\) ; à
+    \(s(t)=S_0\cos(\omega t+\phi)\) on associe \(\underline s=S_0\,e^{j\phi}\,e^{j\omega t}\). On travaille sur les
+    complexes (dérivation \(\to \times j\omega\)), puis on revient au réel : l'amplitude est le module, la phase est
+    l'argument.</div>
+
+    <h3>1.2 Impédances complexes</h3>
+    <div class="thm"><span class="lab">Loi d'Ohm complexe : \(\underline u=\underline Z\,\underline i\)</span>
+    <div class="overflow">
+    <table>
+      <tr><th>Dipôle</th><th>Impédance \(\underline Z\)</th><th>BF (\(\omega\to0\))</th><th>HF (\(\omega\to\infty\))</th></tr>
+      <tr><td>Résistance</td><td>\(R\)</td><td>\(R\)</td><td>\(R\)</td></tr>
+      <tr><td>Condensateur</td><td>\(\dfrac{1}{jC\omega}\)</td><td>\(\infty\) → <b>interrupteur ouvert</b></td><td>\(0\) → <b>fil</b></td></tr>
+      <tr><td>Bobine</td><td>\(jL\omega\)</td><td>\(0\) → <b>fil</b></td><td>\(\infty\) → <b>interrupteur ouvert</b></td></tr>
+    </table>
+    </div>
+    Les impédances s'associent <b>comme des résistances</b> : en série on somme les \(\underline Z\), en parallèle on
+    somme les \(1/\underline Z\). Ponts diviseurs valables en complexe.</div>
+
+    <h3>1.3 Fonction de transfert</h3>
+    <div class="def"><span class="lab">Fonction de transfert</span>
+    \[H(\omega)=\frac{\underline s}{\underline e}=\frac{S_0}{E_0}\,e^{j\phi}\]
+    C'est un nombre complexe qui dépend de \(\omega\). On l'obtient le plus souvent par un <b>pont diviseur de
+    tension</b> en impédances complexes. On l'exprime en <b>pulsation réduite</b> \(x=\omega/\omega_0\).</div>
+
+    <h3>1.4 Module, argument, déphasage</h3>
+    <ul>
+      <li><b>Module (amplification)</b> : \(|H(x)|=\dfrac{S_0}{E_0}\).</li>
+      <li><b>Déphasage sortie/entrée</b> : \(\Delta\phi=\phi_S-\phi_E=\arg(H)\). Si \(\Delta\phi>0\) la sortie est
+      <b>en avance</b>, si \(\Delta\phi<0\) elle est <b>en retard</b>.</li>
+      <li>Pour un quotient : \(\arg\big(\frac{N}{D}\big)=\arg N-\arg D\).</li>
+    </ul>
+    <div class="method"><span class="lab">Astuce pour l'argument</span>
+    \(\arg(a+jb)=\arctan(b/a)\) n'est valable que si \(a>0\). Si la partie réelle du dénominateur peut changer de
+    signe, on multiplie \(H\) en haut et en bas par \(\pm1\) ou \(\pm j\) pour rendre la partie réelle du
+    dénominateur <b>toujours positive</b> et éviter les cas d'\(\arctan\). Identité utile :
+    \(\arctan(x)+\arctan(1/x)=\frac{\pi}{2}\) (pour \(x>0\)).</div>
+
+    <h3>1.5 Gain en décibels et diagramme de Bode</h3>
+    <div class="thm"><span class="lab">Gain en dB</span>
+    \[\boxed{\,G_{dB}(\omega)=20\log|H(\omega)|\,}\]
+    Le <b>diagramme de Bode</b> trace \(G_{dB}\) et \(\Delta\phi\) en fonction de \(\log(\omega)\) (ou \(\log x\)).
+    On raisonne par <b>asymptotes</b> (droites de pente multiple de \(20\) dB/décade).</div>
+    <div class="note"><span class="lab">Repères</span>
+    <ul style="margin:.2rem 0">
+      <li>\(|H|=1\Rightarrow G_{dB}=0\) ; \(|H|=\frac{1}{\sqrt2}\Rightarrow G_{dB}=-3\) dB (car
+      \(20\log\frac{1}{\sqrt2}=-10\log 2\approx-3\)).</li>
+      <li>Une pente de \(\pm20\) dB/décade = ordre 1 ; \(\pm40\) dB/décade = ordre 2. Un passe-bande d'ordre 2 a
+      <b>deux</b> pentes de 20 dB/décade (une de chaque côté).</li>
+      <li>Les asymptotes se croisent en \(\omega_0\) (pulsation de coupure / propre).</li>
+    </ul></div>
+
+    <h3>1.6 Les quatre natures de filtres</h3>
+    <div class="method"><span class="lab">Étude « sans calcul » (comportements asymptotiques)</span>
+    On remplace \(C\) et \(L\) par leurs équivalents BF/HF (tableau 1.2) et on regarde ce que devient la sortie
+    \(s\) :
+    <div class="overflow">
+    <table>
+      <tr><th>Nature</th><th>BF</th><th>HF</th></tr>
+      <tr><td><b>Passe-bas</b></td><td>\(s=e\)</td><td>\(s=0\)</td></tr>
+      <tr><td><b>Passe-haut</b></td><td>\(s=0\)</td><td>\(s=e\)</td></tr>
+      <tr><td><b>Passe-bande</b></td><td>\(s=0\)</td><td>\(s=0\) (passe entre les deux)</td></tr>
+      <tr><td><b>Coupe-bande</b></td><td>\(s=e\)</td><td>\(s=e\) (coupe au milieu)</td></tr>
+    </table>
+    </div></div>
+
+    <h3>1.7 Filtres du premier ordre</h3>
+    <div class="thm"><span class="lab">Formes canoniques d'ordre 1</span>
+    <ul style="margin:.2rem 0">
+      <li><b>Passe-bas</b> : \(H(x)=\dfrac{1}{1+jx}\), \(|H|=\frac{1}{\sqrt{1+x^2}}\), asymptotes \(0\) dB (BF) et
+      \(-20\) dB/déc (HF), \(\Delta\phi\) de \(0\) à \(-\frac{\pi}{2}\).</li>
+      <li><b>Passe-haut</b> : \(H(x)=\dfrac{1}{1-j/x}=\dfrac{jx}{1+jx}\), \(|H|=\frac{1}{\sqrt{1+1/x^2}}\),
+      asymptotes \(+20\) dB/déc (BF) et \(0\) dB (HF), \(\Delta\phi\) de \(+\frac{\pi}{2}\) à \(0\).</li>
+    </ul>
+    Selon le montage, \(\omega_0=\frac{1}{RC}\) (circuits RC) ou \(\omega_0=\frac{R}{L}\) (circuits RL). À
+    \(x=1\) : \(G_{dB}=-3\) dB, \(\Delta\phi=\pm\frac{\pi}{4}\).</div>
+
+    <h3>1.8 Filtres du second ordre (RLC série)</h3>
+    <p>Pour un RLC série : \(\omega_0=\dfrac{1}{\sqrt{LC}}\), \(Q=\dfrac{1}{R}\sqrt{\dfrac{L}{C}}\). Selon la borne de
+    sortie :</p>
+    <div class="overflow">
+    <table>
+      <tr><th>Sortie</th><th>\(H(x)\)</th><th>Nature</th></tr>
+      <tr><td>\(u_C\)</td><td>\(\dfrac{1}{1-x^2+j x/Q}\)</td><td>passe-bas d'ordre 2</td></tr>
+      <tr><td>\(u_L\)</td><td>\(\dfrac{1}{1-1/x^2-j/(Qx)}\)</td><td>passe-haut d'ordre 2</td></tr>
+      <tr><td>\(u_R\)</td><td>\(\dfrac{1}{1+jQ(x-1/x)}\)</td><td>passe-bande</td></tr>
+    </table>
+    </div>
+    <div class="warnbox"><span class="lab">Résonance et surtension</span>
+    <ul style="margin:.2rem 0">
+      <li><b>En \(u_R\) (passe-bande)</b> : résonance <b>toujours</b> en \(\omega_R=\omega_0\), \(|H|_{max}=1\)
+      (pas de surtension). Bande passante \(\Delta\omega=\dfrac{\omega_0}{Q}\).</li>
+      <li><b>En \(u_C\) ou \(u_L\)</b> : résonance <b>seulement si</b> \(Q>\frac{1}{\sqrt2}\). Alors
+      \(|H|_{max}=\dfrac{Q}{\sqrt{1-1/(4Q^2)}}\approx Q\) (surtension). \(\omega_R=\omega_0\sqrt{1-\frac{1}{2Q^2}}\)
+      pour \(u_C\), \(\omega_R=\dfrac{\omega_0}{\sqrt{1-1/(2Q^2)}}\) pour \(u_L\).</li>
+    </ul></div>
+
+    <h3>1.9 Comportements dérivateur et intégrateur</h3>
+    <div class="note"><span class="lab">Multiplier / diviser par \(j\omega\)</span>
+    En complexe, \(\times j\omega\) = dériver, \(\div j\omega\) = intégrer.
+    <ul style="margin:.2rem 0">
+      <li><b>Dérivateur</b> : un passe-haut, <b>bien en dessous</b> de \(f_0\), donne \(H\approx\frac{j\omega}{\omega_0}\)
+      donc \(s(t)=\frac{1}{\omega_0}e'(t)\). (Triangle → créneau.)</li>
+      <li><b>Intégrateur</b> : un passe-bas, <b>bien au-dessus</b> de \(f_0\), donne \(H\approx\frac{\omega_0}{j\omega}\)
+      donc \(s(t)=\omega_0\!\int e(t)\,dt\). (Créneau → triangle.)</li>
+    </ul></div>
+
+    <h3>1.10 Gabarit et ordre d'un filtre</h3>
+    <div class="method"><span class="lab">Dimensionnement sur cahier des charges</span>
+    <ol style="margin:.2rem 0">
+      <li>Nombre de décades de transition : \(\Delta=\log(f_2)-\log(f_1)\).</li>
+      <li>Pente minimale requise : \(\dfrac{\Delta G}{\Delta}\) en dB/décade.</li>
+      <li>Ordre minimal : pente/\(20\) arrondie au-dessus (ordre 1 → 20 dB/déc, ordre 2 → 40 dB/déc…).</li>
+      <li>Fréquence de coupure : dans la pente, \(G_{dB}\approx-20n\log(f/f_0)\) (\(n\) = ordre), on résout pour
+      les points du gabarit.</li>
+    </ol></div>
+  </section>
+
+  <!-- ======================= EXERCICES CRÉÉS ======================= -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+    <p class="lead">Trois exercices originaux : un passe-bas RC dimensionné, un passe-bande RLC avec surtension, et
+    un dérivateur RC concret.</p>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice A — Passe-bas RC : coupure et gain <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Filtre RC série, sortie aux bornes de \(C\), avec \(R=3{,}3\ \text{k}\Omega\) et
+        \(C=10\ \text{nF}\). Nature, \(f_0\), et gain à \(f=10\)&nbsp;kHz.</p>
+        <p class="q">1) Nature et fonction de transfert</p>
+        <p>BF : \(C\) ouvert, \(i=0\Rightarrow u_R=0\Rightarrow s=e\). HF : \(C\) fil \(\Rightarrow s=0\).
+        <b>Passe-bas</b>. Pont diviseur : \(H=\dfrac{Z_C}{Z_R+Z_C}=\dfrac{1}{1+jRC\omega}=\dfrac{1}{1+jx}\),
+        \(\omega_0=\frac{1}{RC}\).</p>
+        <p class="q">2) Fréquence de coupure</p>
+        <p>\(\omega_0=\frac{1}{RC}=\frac{1}{3300\times10^{-8}}=3{,}03\cdot10^{4}\)&nbsp;rad/s, donc
+        \(f_0=\frac{\omega_0}{2\pi}=4{,}8\)&nbsp;kHz.</p>
+        <p class="q">3) Gain à 10 kHz</p>
+        <p>\(x=f/f_0=10/4{,}8=2{,}08\). \(|H|=\frac{1}{\sqrt{1+x^2}}=\frac{1}{\sqrt{1+4{,}35}}=0{,}43\), soit
+        \(G_{dB}=20\log(0{,}43)=-7{,}3\)&nbsp;dB.</p>
+        <div class="res">Passe-bas, \(f_0\approx4{,}8\)&nbsp;kHz, \(G_{dB}(10\text{ kHz})\approx-7\)&nbsp;dB (le
+        signal à 10 kHz est atténué d'un facteur \(\approx2{,}3\)).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice B — Passe-bande RLC : facteur de qualité &amp; bande passante <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">RLC série, sortie aux bornes de \(R\), avec \(L=1\)&nbsp;mH, \(C=100\)&nbsp;nF,
+        \(R=50\ \Omega\). Trouver \(\omega_0\), \(Q\), la bande passante, et la nature.</p>
+        <p class="q">1) Nature et \(H\)</p>
+        <p>BF : \(C\) ouvert \(\Rightarrow s=0\) ; HF : \(L\) ouvert \(\Rightarrow s=0\). <b>Passe-bande</b>.
+        \(H(x)=\dfrac{1}{1+jQ(x-1/x)}\).</p>
+        <p class="q">2) Paramètres</p>
+        <p>\(\omega_0=\frac{1}{\sqrt{LC}}=\frac{1}{\sqrt{10^{-3}\times10^{-7}}}=\frac{1}{\sqrt{10^{-10}}}=10^{5}\)&nbsp;rad/s.
+        \(Q=\frac1R\sqrt{\frac{L}{C}}=\frac{1}{50}\sqrt{\frac{10^{-3}}{10^{-7}}}=\frac{1}{50}\sqrt{10^{4}}=\frac{100}{50}=2\).</p>
+        <p class="q">3) Bande passante</p>
+        <p>\(\Delta\omega=\frac{\omega_0}{Q}=\frac{10^{5}}{2}=5\cdot10^{4}\)&nbsp;rad/s. Résonance en
+        \(\omega_0\), \(|H|_{max}=1\) (pas de surtension pour la sortie sur \(R\)).</p>
+        <div class="res">\(\omega_0=10^{5}\)&nbsp;rad/s, \(Q=2\), \(\Delta\omega=5\cdot10^{4}\)&nbsp;rad/s. Filtre
+        passe-bande sélectif (plus \(Q\) grand, plus la bande est étroite).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice C — Dérivateur RC : réponse à un triangle <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Filtre CR (sortie sur \(R\)), \(R=1\ \text{k}\Omega\), \(C=1\ \mu\text{F}\). On envoie un
+        signal triangulaire de fréquence \(f=20\)&nbsp;Hz. Montrer qu'il se comporte en dérivateur et donner la
+        sortie.</p>
+        <p class="q">1) Fréquence de coupure</p>
+        <p>\(\omega_0=\frac{1}{RC}=\frac{1}{10^{3}\times10^{-6}}=10^{3}\)&nbsp;rad/s, soit
+        \(f_0=\frac{\omega_0}{2\pi}=159\)&nbsp;Hz.</p>
+        <p class="q">2) Comportement dérivateur</p>
+        <p>Le filtre CR est un passe-haut : \(H=\dfrac{jRC\omega}{1+jRC\omega}\). À \(f=20\)&nbsp;Hz \(\ll f_0\),
+        \(x=\omega/\omega_0\ll1\), donc \(1+jx\approx1\) et \(H\approx jx=\frac{j\omega}{\omega_0}\) :
+        multiplication par \(j\omega\) = <b>dérivation</b>. \(s(t)=RC\,\dfrac{de}{dt}\).</p>
+        <p class="q">3) Sortie</p>
+        <p>Un triangle a une dérivée constante par morceaux (pente positive puis négative). Sa dérivée est donc un
+        <b>signal créneau</b> d'amplitude \(RC\times(\text{pente du triangle})\).</p>
+        <div class="res">\(f_0\approx159\)&nbsp;Hz ; à 20 Hz le CR dérive : la sortie est un <b>créneau</b>
+        (\(s=RC\,e'\)), d'amplitude proportionnelle à la pente du triangle d'entrée.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CORRECTION TD ======================= -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD</h2>
+    <p class="lead">TD filtrage (VG, 2025/2026) : 12 exercices d'application du cours (EC) et 25 exercices
+    d'entraînement, chaque question traitée. Conventions : \(x=\omega/\omega_0\), \(\Delta\phi=\phi_S-\phi_E\).</p>
+
+    <h3>Partie A — Exercices d'application du cours (EC 1–12)</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 1 — Trouver la fonction de transfert \(H(\omega)\) (RC, sortie sur C) <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Filtre RC série, entrée \(e\), sortie \(s\) aux bornes du condensateur.</p>
+        <p>On se place en RSF (\(\underline e=E_0e^{j\omega t}\)). Pont diviseur de tension avec
+        \(Z_C=\frac{1}{jC\omega}\) :</p>
+        \[H(\omega)=\frac{\underline s}{\underline e}=\frac{Z_C}{R+Z_C}=\frac{\frac{1}{jC\omega}}{R+\frac{1}{jC\omega}}
+        =\frac{1}{1+jRC\omega}.\]
+        <div class="res">\(H(\omega)=\dfrac{1}{1+jRC\omega}\) : passe-bas d'ordre 1, \(\omega_0=\frac{1}{RC}\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 2 — Nature d'un filtre RL (sortie sur L) <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p>BF : la bobine se comporte comme un <b>fil</b>, la tension à ses bornes est nulle \(\Rightarrow s=0\).<br>
+        HF : la bobine se comporte comme un <b>interrupteur ouvert</b>, \(i=0\Rightarrow u_R=0\Rightarrow s=e\).</p>
+        <div class="res">Passe les HF, coupe les BF : <b>passe-haut</b>.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 3 — Nature d'un filtre RLC série (sortie sur R) <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p>HF : \(C\) devient un fil (\(u_C=0\)) et \(L\) un interrupteur ouvert (\(i=0\)) \(\Rightarrow s=u_R=0\).<br>
+        BF : \(C\) devient un interrupteur ouvert (\(i=0\)) \(\Rightarrow s=u_R=0\).</p>
+        <div class="res">Coupe HF et BF, passe au milieu : <b>passe-bande</b>.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 4 — Module et argument d'ordre 1 <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(H(\omega)=\dfrac{R}{R+jL\omega}\), poser \(\omega_0=R/L\), \(x=\omega/\omega_0\).</p>
+        <p>On divise par \(R\) : \(H=\dfrac{1}{1+j\frac{L\omega}{R}}=\dfrac{1}{1+jx}\).</p>
+        <div class="res">\(|H(x)|=\dfrac{1}{\sqrt{1+x^2}}\) ; \(\arg(H)=-\arctan(x)\). (Passe-bas d'ordre 1.)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 5 — Module et argument d'ordre 2 (RLC, sortie sur C) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(H(\omega)=\dfrac{1/jC\omega}{R+\frac{1}{jC\omega}+jL\omega}\), \(\omega_0=\frac{1}{\sqrt{LC}}\),
+        \(Q=\frac1R\sqrt{L/C}\).</p>
+        <p>On multiplie par \(jC\omega\) : \(H=\dfrac{1}{1-LC\omega^2+jRC\omega}\). Avec \(LC\omega^2=x^2\) et
+        \(RC\omega=x/Q\) :</p>
+        \[H(x)=\frac{1}{1-x^2+j\frac{x}{Q}},\qquad |H(x)|=\frac{1}{\sqrt{(1-x^2)^2+\left(\frac{x}{Q}\right)^2}}.\]
+        <p>Pour l'argument, on multiplie par \(-j\) en haut et en bas pour rendre la partie réelle du dénominateur
+        positive :</p>
+        <div class="res">\(H(x)=\dfrac{-j}{\frac{x}{Q}-j(1-x^2)}\) donc
+        \(\arg(H)=-\dfrac{\pi}{2}-\arctan\!\Big(\dfrac{-(1-x^2)}{x/Q}\Big)\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 6 — Gain en dB et asymptotes d'ordre 1 <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(H(\omega)=\dfrac{R}{R+jL\omega}\), \(\omega_0=R/L\).</p>
+        <p>\(G_{dB}=20\log|H|=-10\log\!\Big(1+\big(\frac{\omega}{\omega_0}\big)^2\Big)\).</p>
+        <p>BF : \(G_{dB}\approx-10\log(1)=0\) (asymptote horizontale). HF :
+        \(G_{dB}\approx-10\log(x^2)=-20\log(x)\) (pente \(-20\) dB/décade).</p>
+        <div class="res">Passe-bas d'ordre 1.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 7 — Gain en dB et asymptotes d'ordre 2 <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(H(x)=\dfrac{1}{1-x^2+jQx}\).</p>
+        <p>\(G_{dB}=-10\log\big((1-x^2)^2+(Qx)^2\big)\). BF : \(\approx-10\log(1)=0\) (horizontale). HF :
+        \(\approx-10\log(x^4)=-40\log(x)\) (pente \(-40\) dB/décade).</p>
+        <div class="res">Passe-bas d'ordre 2.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 8 — Filtre RC série, étude de \(u_R\) (Bode complet) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Filtre RC, sortie aux bornes de \(R\), \(e(t)=E_0\cos(\omega t)\).</p>
+        <p class="q">1) Nature</p>
+        <p>BF : \(C\) ouvert, \(i=0\Rightarrow s=u_R=0\). HF : \(C\) fil \(\Rightarrow s=e\). <b>Passe-haut</b>.</p>
+        <p class="q">2) Fonction de transfert</p>
+        <p>Pont diviseur : \(H=\dfrac{R}{R+\frac{1}{jC\omega}}=\dfrac{1}{1-j\frac{1}{RC}\frac{1}{\omega}}\). On pose
+        \(\omega_0=\frac{1}{RC}\) : \(H(x)=\dfrac{1}{1-j/x}\).</p>
+        <p class="q">3) Module et phase</p>
+        <p>\(|H(x)|=\dfrac{1}{\sqrt{1+1/x^2}}\). La partie réelle du dénominateur \(=1>0\), donc
+        \(\Delta\phi=0-\arctan(-1/x)=\arctan(1/x)=\frac{\pi}{2}-\arctan(x)\).</p>
+        <p class="q">4) Cas limites</p>
+        <p>\(x\to0\) : \(|H|\to0\), \(\Delta\phi\to\frac{\pi}{2}\). \(x=1\) : \(|H|=\frac{1}{\sqrt2}\),
+        \(\Delta\phi=\frac{\pi}{4}\). \(x\to\infty\) : \(|H|\to1\), \(\Delta\phi\to0\). Phase toujours \(>0\) : la
+        sortie est <b>en avance</b>.</p>
+        <p class="q">5–6) Gain et asymptotes</p>
+        <p>\(G_{dB}=-10\log(1+1/x^2)\). HF : \(0\) dB (horizontale). BF : \(+20\log(x)\) (pente \(+20\) dB/déc).
+        Cohérent avec un passe-haut d'ordre 1.</p>
+        <p class="q">7) Tracé</p>
+        <div class="res">À \(x=1\), \(G_{dB}=-3\) dB ; on relie les deux asymptotes se croisant en \(\omega_0\).
+        Phase décroissant de \(+\frac{\pi}{2}\) (BF) à \(0\) (HF), valant \(+\frac{\pi}{4}\) en \(\omega_0\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 9 — Comportement dérivateur <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(H(\omega)=\dfrac{1}{1+\frac{\omega_0}{j\omega}}\).</p>
+        <p class="q">1) Type de filtre</p>
+        <p>Un passe-haut : filtre RC avec sortie sur \(R\), ou RL avec sortie sur \(L\).</p>
+        <p class="q">2–3) Limite BF</p>
+        <p>Si \(\omega\to0\), \(1\ll\frac{\omega_0}{j\omega}\), on néglige le 1 :
+        \(H\approx\dfrac{1}{\omega_0/(j\omega)}=\dfrac{j\omega}{\omega_0}\), donc
+        \(\underline s=\dfrac{j\omega}{\omega_0}\underline e\).</p>
+        <p class="q">4–5) Interprétation</p>
+        <div class="res">\(\times j\omega\) = dérivation : \(s(t)=\dfrac{1}{\omega_0}e'(t)\). Un <b>triangle</b>
+        (dérivée constante par morceaux, \(+\) puis \(-\)) donne en sortie un <b>signal créneau</b>.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 10 — Comportement intégrateur <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(H(\omega)=\dfrac{1}{1+\frac{j\omega}{\omega_0}}\).</p>
+        <p class="q">1) Type</p>
+        <p>Un passe-bas : RC avec sortie sur \(C\), ou RL avec sortie sur \(R\).</p>
+        <p class="q">2–3) Limite HF</p>
+        <p>Si \(\omega\to\infty\), \(1\ll\frac{j\omega}{\omega_0}\), on néglige le 1 :
+        \(H\approx\dfrac{\omega_0}{j\omega}\), donc \(\underline s=\dfrac{\omega_0}{j\omega}\underline e\).</p>
+        <p class="q">4–5) Interprétation</p>
+        <div class="res">\(\div j\omega\) = intégration : \(s(t)=\omega_0\!\int e(t)\,dt\). Un <b>créneau</b>
+        (constantes \(\pm\)) donne en sortie un <b>signal triangle</b>.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 11 — Filtre RLC série, étude de \(u_R\) (passe-bande complet) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">RLC série, sortie sur \(R\). \(\omega_0=\frac{1}{\sqrt{LC}}\), \(Q=\frac1R\sqrt{L/C}\).</p>
+        <p class="q">1) Nature</p>
+        <p>BF : \(C\) ouvert \(\Rightarrow s=0\). HF : \(L\) ouvert \(\Rightarrow s=0\). <b>Passe-bande</b>.</p>
+        <p class="q">2) Fonction de transfert</p>
+        <p>\(H=\dfrac{R}{R+\frac{1}{jC\omega}+jL\omega}=\dfrac{1}{1-j\frac{1}{RC\omega}+j\frac{L}{R}\omega}\). Avec
+        \(\frac{1}{RC}=Q\omega_0\) et \(\frac{L}{R}=\frac{Q}{\omega_0}\) :</p>
+        \[H(x)=\frac{1}{1+jQ\left(x-\frac{1}{x}\right)}.\]
+        <p class="q">3) Module et phase</p>
+        <p>\(|H(x)|=\dfrac{1}{\sqrt{1+Q^2(x-1/x)^2}}\) ; partie réelle du dénominateur \(=1>0\) donc
+        \(\Delta\phi=-\arctan\!\big(Q(x-\frac1x)\big)\).</p>
+        <p class="q">4) Cas limites</p>
+        <p>\(x\to0\) : \(|H|\to0\), \(\Delta\phi\to+\frac{\pi}{2}\). \(x=1\) : \(|H|=1\), \(\Delta\phi=0\).
+        \(x\to\infty\) : \(|H|\to0\), \(\Delta\phi\to-\frac{\pi}{2}\).</p>
+        <p class="q">5) Résonance</p>
+        <p>Le dénominateur est minimal quand \(x-1/x=0\), soit \(x=1\) : résonance <b>toujours</b> en
+        \(\omega_R=\omega_0\), avec \(|H|_{max}=1\) (pas de surtension, quel que soit \(Q\)). Comme
+        \(i=u_R/R\), il y a toujours résonance en intensité pour un RLC série.</p>
+        <p class="q">6–7) Gain et asymptotes</p>
+        <p>\(G_{dB}=-10\log\big(1+Q^2(x-1/x)^2\big)\). BF : \(+20\log(x)\) ; à \(x=1\) : \(0\) dB ; HF :
+        \(-20\log(x)\). <b>Passe-bande d'ordre 2</b> (deux pentes de 20 dB/déc).</p>
+        <p class="q">8) Bande passante</p>
+        <p>\(|H|=\frac{1}{\sqrt2}\Rightarrow 1+Q^2(x-1/x)^2=2\Rightarrow x-\frac1x=\pm\frac1Q\Rightarrow
+        x^2\mp\frac1Q x-1=0\). Les racines positives \(x_1<x_2\) vérifient \(x_2-x_1=\frac1Q\) :</p>
+        <div class="res">\(\Delta x=\dfrac{1}{Q}\), soit \(\boxed{\Delta\omega=\dfrac{\omega_0}{Q}}\). Plus \(Q\) est
+        petit, plus la bande passante est large.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 12 — Construction d'un passe-bas d'ordre 1 (gabarit) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Passe-bas : \(f>6{,}2\)&nbsp;kHz atténuées d'au moins \(9\)&nbsp;dB ; \(f<1{,}9\)&nbsp;kHz
+        atténuées de moins de \(3\)&nbsp;dB.</p>
+        <p class="q">1) Décades de transition</p>
+        <p>\(\log(6{,}2\cdot10^{3})-\log(1{,}9\cdot10^{3})\approx0{,}5\)&nbsp;décade.</p>
+        <p class="q">2) Atténuation minimale</p>
+        <p>\(-9+3=-6\)&nbsp;dB sur \(0{,}5\) décade, soit \(-6/0{,}5=-12\)&nbsp;dB/décade.</p>
+        <p class="q">3) Ordre minimal</p>
+        <p>\(12<20\) : un filtre d'<b>ordre 1</b> (\(-20\) dB/déc) suffit.</p>
+        <p class="q">4) Fréquences de coupure extrêmes</p>
+        <p>Dans la pente, \(G_{dB}\approx-20\log(f/f_0)\).<br>
+        • \(f=1{,}9\)&nbsp;kHz, \(-3\) dB : \(f_0=f\cdot10^{-3/20}\approx1{,}3\)&nbsp;kHz.<br>
+        • \(f=6{,}2\)&nbsp;kHz, \(-9\) dB : \(f_0=f\cdot10^{-9/20}\approx2{,}2\)&nbsp;kHz.<br>
+        Toute \(f_0\in[1{,}3\,;\,2{,}2]\)&nbsp;kHz convient.</p>
+        <p class="q">5) Résistance (RC, \(C=47\)&nbsp;nF, \(f_0=2\)&nbsp;kHz)</p>
+        <p>\(R=\frac{1}{\omega_0 C}=\frac{1}{2\pi f_0 C}=\frac{1}{2\pi\times2\cdot10^{3}\times47\cdot10^{-9}}
+        \approx1{,}7\)&nbsp;k\(\Omega\).</p>
+        <div class="res">Ordre 1 suffit ; \(f_0\in[1{,}3\,;\,2{,}2]\)&nbsp;kHz ; \(R\approx1{,}7\)&nbsp;k\(\Omega\).</div>
+      </div>
+    </div>
+
+    <h3>Partie B — Fonction de transfert (Exercices 1–2)</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 1 — Fonction de transfert (RC, sortie sur R) <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p>Pont diviseur : \(H=\dfrac{R}{R+\frac{1}{jC\omega}}=\dfrac{1}{1+\frac{1}{jRC\omega}}\).</p>
+        <div class="res">\(H(\omega)=\dfrac{1}{1+\frac{1}{jRC\omega}}\) : passe-haut d'ordre 1 (\(\omega_0=\frac{1}{RC}\)).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 2 — De l'équa-diff à la fonction de transfert <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Système masse-ressort : \(\ddot u+\frac{\lambda}{m}\dot u+\frac{k}{m}u=\frac{k}{m}x_A(t)\),
+        \(\omega_0=\sqrt{k/m}\), \(Q=\frac1\lambda\sqrt{km}\). Trouver \(H=u/x_A\).</p>
+        <p>En RSF : \(\dot u\to j\omega\underline u\), \(\ddot u\to-\omega^2\underline u\).
+        L'équation devient \((-\omega^2)\underline u+\frac{\omega_0}{Q}j\omega\underline u+\omega_0^2\underline u
+        =\omega_0^2\underline{x_A}\).</p>
+        <div class="res">\(H(\omega)=\dfrac{\underline u}{\underline{x_A}}=\dfrac{\omega_0^2}{\omega_0^2-\omega^2
+        +j\omega\omega_0/Q}\) : passe-bas d'ordre 2 (analogie électromécanique).</div>
+      </div>
+    </div>
+
+    <h3>Partie C — Nature d'un filtre (Exercices 3–6)</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 3–5 — Natures RC, CR, LR <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 3 — RC (sortie aux bornes de \(C\))</p>
+        <p>BF : \(C\) ouvert, \(i=0\Rightarrow u_R=0\), donc \(s=u_C=e\). HF : \(C\) fil, \(u_C=0\Rightarrow s=0\).
+        <b>Passe-bas.</b></p>
+        <p class="q">Ex 4 — CR (sortie aux bornes de \(R\))</p>
+        <p>BF : \(C\) ouvert, \(i=0\Rightarrow u_R=0\), donc \(s=0\). HF : \(C\) fil, \(u_C=0\Rightarrow s=e\).
+        <b>Passe-haut.</b></p>
+        <p class="q">Ex 5 — LR (sortie aux bornes de \(R\))</p>
+        <p>BF : \(L\) fil, \(u_L=0\Rightarrow s=e\). HF : \(L\) ouvert, \(i=0\Rightarrow s=0\). <b>Passe-bas.</b></p>
+        <div class="res">Ex 3 : passe-bas · Ex 4 : passe-haut · Ex 5 : passe-bas.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 6 — RLC série, sortie sur L puis sur C <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">1) Sortie \(s=u_L\)</p>
+        <p>HF : \(C\) fil (\(u_C=0\)) et \(L\) ouvert (\(i=0\)) \(\Rightarrow u_R=0\), donc \(s=e\). BF : \(L\) fil
+        \(\Rightarrow s=0\). <b>Passe-haut.</b></p>
+        <p class="q">2) Sortie \(s=u_C\)</p>
+        <p>HF : \(C\) fil \(\Rightarrow s=0\). BF : \(L\) fil, \(C\) ouvert (\(i=0\Rightarrow u_R=0\)) \(\Rightarrow
+        s=e\). <b>Passe-bas.</b></p>
+        <div class="res">Sur \(L\) : passe-haut ; sur \(C\) : passe-bas.</div>
+      </div>
+    </div>
+
+    <h3>Partie D — Module &amp; argument (Exercices 7–8)</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 7 — Module/argument d'ordre 1 (passe-haut) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(H(\omega)=\dfrac{jL\omega}{R+jL\omega}\), \(\omega_0=R/L\).</p>
+        <p>On divise par \(jL\omega\) : \(H=\dfrac{1}{1+\frac{R}{jL\omega}}=\dfrac{1}{1-j/x}\).</p>
+        <div class="res">\(|H(x)|=\dfrac{1}{\sqrt{1+1/x^2}}\) ; \(\arg(H)=\arctan(1/x)\) (passe-haut d'ordre 1).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 8 — Module/argument d'ordre 2 (passe-haut RLC, sortie sur L) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(H(\omega)=\dfrac{jL\omega}{R+\frac{1}{jC\omega}+jL\omega}\), \(\omega_0=\frac{1}{\sqrt{LC}}\),
+        \(Q=\frac1R\sqrt{L/C}\).</p>
+        <p>On divise par \(jL\omega\) : \(H=\dfrac{1}{1-\frac{\omega_0^2}{\omega^2}-j\frac1Q\frac{\omega_0}{\omega}}
+        =\dfrac{1}{1-\frac{1}{x^2}-j\frac{1}{Qx}}\) (car \(\frac{R}{L}=\frac{\omega_0}{Q}\)). On multiplie par \(j\)
+        pour rendre la partie réelle du dénominateur positive :</p>
+        \[H(x)=\frac{j}{\frac{1}{Qx}+j\left(1-\frac{1}{x^2}\right)},\qquad
+        |H(x)|=\frac{1}{\sqrt{\left(1-\frac{1}{x^2}\right)^2+\frac{1}{Q^2x^2}}}.\]
+        <div class="res">\(\Delta\phi=\dfrac{\pi}{2}-\arctan\!\Big(\dfrac{1-1/x^2}{1/(Qx)}\Big)\).</div>
+      </div>
+    </div>
+
+    <h3>Partie E — Gain en dB &amp; asymptotes (Exercices 9–10)</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 9 — Gain d'ordre 1 (passe-haut) <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(H(\omega)=\dfrac{jL\omega}{R+jL\omega}\), soit \(|H|=\frac{x}{\sqrt{1+x^2}}\) avec
+        \(x=\omega/\omega_0\), \(\omega_0=R/L\).</p>
+        <p>\(G_{dB}=20\log\dfrac{x}{\sqrt{1+x^2}}=-10\log\!\big(1+\tfrac{1}{x^2}\big)\) (forme équivalente). BF :
+        \(+20\log(x)\) (pente \(+20\) dB/déc). HF : \(0\) dB (horizontale).</p>
+        <div class="res">Passe-haut d'ordre 1.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 10 — Gain d'ordre 2 (passe-haut) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(H(x)=\dfrac{1}{1-x^2+j\frac{1}{Q}x}\) (forme donnée).</p>
+        <p>\(G_{dB}=-10\log\big((1-x^2)^2+\frac{1}{Q^2}x^2\big)\). BF : \(-10\log(x^4)=+40\log(x)\) (pente \(+40\)
+        dB/déc, en fait le module tend vers 0 en BF). HF : \(-10\log(1)=0\) (horizontale).</p>
+        <div class="res">Passe-haut d'ordre 2 (pente \(+40\) dB/déc en BF).</div>
+      </div>
+    </div>
+
+    <h3>Partie F — Études complètes de filtres basiques (Exercices 11–15)</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 11 — Filtre RC série, étude de \(u_C\) (passe-bas) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">1) Nature</p>
+        <p>BF : \(C\) ouvert, \(i=0\Rightarrow s=e\). HF : \(C\) fil \(\Rightarrow s=0\). <b>Passe-bas.</b></p>
+        <p class="q">2) Fonction de transfert</p>
+        <p>\(H=\dfrac{Z_C}{Z_R+Z_C}=\dfrac{1}{1+jRC\omega}=\dfrac{1}{1+jx}\), \(\omega_0=\frac{1}{RC}\).</p>
+        <p class="q">3) Module et phase</p>
+        <p>\(|H(x)|=\frac{1}{\sqrt{1+x^2}}\) ; partie réelle \(=1>0\) donc \(\Delta\phi=-\arctan(x)\).</p>
+        <p class="q">4) Cas limites</p>
+        <p>\(x\to0\) : \(|H|\to1\), \(\Delta\phi\to0\). \(x=1\) : \(\frac{1}{\sqrt2}\), \(-\frac{\pi}{4}\).
+        \(x\to\infty\) : \(0\), \(-\frac{\pi}{2}\). Phase toujours \(<0\) : sortie <b>en retard</b>.</p>
+        <p class="q">5–6) Gain et asymptotes</p>
+        <p>\(G_{dB}=-10\log(1+x^2)\). HF : \(-20\log(x)\) ; BF : \(0\) dB. Passe-bas d'ordre 1.</p>
+        <p class="q">7) Tracé</p>
+        <div class="res">À \(x=1\) : \(-3\) dB ; asymptotes croisant en \(\omega_0\), phase de \(0\) à \(-\frac{\pi}{2}\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 12 — Filtre RL série, étude de \(u_R\) (passe-bas) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">1) Nature</p>
+        <p>BF : \(L\) fil \(\Rightarrow s=e\). HF : \(L\) ouvert, \(i=0\Rightarrow s=0\). <b>Passe-bas.</b></p>
+        <p class="q">2) Fonction de transfert</p>
+        <p>\(H=\dfrac{R}{R+jL\omega}=\dfrac{1}{1+j\frac{L}{R}\omega}=\dfrac{1}{1+jx}\), avec
+        \(\omega_0=\frac{R}{L}\).</p>
+        <div class="res">Fonction identique à l'ex. 11 (RC sur \(C\)) ; seule change la valeur de \(\omega_0\). Donc
+        \(|H|=\frac{1}{\sqrt{1+x^2}}\), \(\Delta\phi=-\arctan(x)\), sortie en retard, passe-bas d'ordre 1, \(-3\) dB
+        en \(\omega_0\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 13 — Filtre RL série, étude de \(u_L\) (passe-haut) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">1) Nature</p>
+        <p>BF : \(L\) fil \(\Rightarrow s=0\). HF : \(L\) ouvert, \(i=0\Rightarrow u_R=0\Rightarrow s=e\).
+        <b>Passe-haut.</b></p>
+        <p class="q">2) Fonction de transfert</p>
+        <p>\(H=\dfrac{jL\omega}{R+jL\omega}=\dfrac{1}{1-j\frac{R}{L}\frac{1}{\omega}}=\dfrac{1}{1-j/x}\), avec
+        \(\omega_0=\frac{R}{L}\).</p>
+        <div class="res">Fonction identique au RC sur \(R\) (EC 8) : \(|H|=\frac{1}{\sqrt{1+1/x^2}}\),
+        \(\Delta\phi=\frac{\pi}{2}-\arctan(x)\) (sortie en avance), passe-haut d'ordre 1, \(-3\) dB en \(\omega_0\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 14 — Filtre RLC série, étude de \(u_C\) (passe-bas d'ordre 2) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">1) Nature</p>
+        <p>BF : \(C\) ouvert (\(i=0\)) et \(L\) fil (\(u_L=0\)) \(\Rightarrow s=e\). HF : \(C\) fil \(\Rightarrow s=0\).
+        <b>Passe-bas.</b></p>
+        <p class="q">2) Fonction de transfert</p>
+        <p>\(H=\dfrac{1/jC\omega}{R+\frac{1}{jC\omega}+jL\omega}=\dfrac{1}{1-LC\omega^2+jRC\omega}\). Avec
+        \(RC=\frac{1}{Q\omega_0}\) et \(LC=\frac{1}{\omega_0^2}\) :</p>
+        \[H(x)=\frac{1}{1-x^2+j\frac{x}{Q}}.\]
+        <p class="q">3) Module et phase</p>
+        <p>\(|H(x)|=\dfrac{1}{\sqrt{(1-x^2)^2+\frac{x^2}{Q^2}}}\). En multipliant par \(-j\) :
+        \(\Delta\phi=-\frac{\pi}{2}-\arctan\!\big(Q(x-\frac1x)\big)\).</p>
+        <p class="q">4) Cas limites</p>
+        <p>\(x\to0\) : \(|H|\to1\), \(\Delta\phi\to0\). \(x=1\) : \(|H|=Q\), \(\Delta\phi=-\frac{\pi}{2}\).
+        \(x\to\infty\) : \(|H|\to0\), \(\Delta\phi\to-\pi\).</p>
+        <p class="q">5) Résonance</p>
+        <p>On minimise \(f(x)=(1-x^2)^2+x^2/Q^2\) : \(f'(x)=0\Rightarrow x_R^2=1-\frac{1}{2Q^2}\). Réel positif
+        seulement si \(Q>\frac{1}{\sqrt2}\). Alors \(\omega_R=\omega_0\sqrt{1-\frac{1}{2Q^2}}\) et</p>
+        <div class="res">\(H_{max}=\dfrac{Q}{\sqrt{1-\frac{1}{4Q^2}}}\approx Q\) pour \(Q>1\) (surtension aux bornes de
+        \(C\)).</div>
+        <p class="q">6–7) Gain et asymptotes</p>
+        <p>\(G_{dB}=-10\log\big((1-x^2)^2+x^2/Q^2\big)\). BF : \(0\) dB ; HF : \(-40\log(x)\). <b>Passe-bas d'ordre
+        2.</b></p>
+        <p class="q">8) Bande passante (pour \(Q<1/\sqrt2\))</p>
+        <p>Pas de résonance, max \(=1\) en \(\omega=0\). \(|H|=\frac{1}{\sqrt2}\Rightarrow
+        x^4+(\frac{1}{Q^2}-2)x^2-1=0\), une seule racine positive \(x_1^2\). Bande de \(\omega=0\) à
+        \(\omega_1=\omega_0\sqrt{x_1^2}\).</p>
+        <p class="q">9) Tracé</p>
+        <div class="res">Passe-bas d'ordre 2 ; si \(Q>\frac{1}{\sqrt2}\) la courbe dépasse les asymptotes (bosse de
+        résonance) ; à \(x=1\), \(G_{dB}=20\log Q\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 15 — Filtre RLC série, étude de \(u_L\) (passe-haut d'ordre 2) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">1) Nature</p>
+        <p>BF : \(L\) fil \(\Rightarrow s=0\). HF : \(C\) fil (\(u_C=0\)) et \(L\) ouvert (\(i=0\Rightarrow u_R=0\))
+        \(\Rightarrow s=e\). <b>Passe-haut.</b></p>
+        <p class="q">2) Fonction de transfert</p>
+        <p>\(H=\dfrac{jL\omega}{R+\frac{1}{jC\omega}+jL\omega}=\dfrac{1}{1-j\frac{R}{L}\frac{1}{\omega}
+        -\frac{1}{LC\omega^2}}\). Avec \(\frac{R}{L}=\frac{\omega_0}{Q}\) et \(LC=\frac{1}{\omega_0^2}\) :</p>
+        \[H(x)=\frac{1}{1-\frac{1}{x^2}-j\frac{1}{Q}\frac{1}{x}}.\]
+        <p class="q">3) Module et phase</p>
+        <p>\(|H(x)|=\dfrac{1}{\sqrt{(1-\frac{1}{x^2})^2+\frac{1}{Q^2x^2}}}\). En multipliant par \(j\) :
+        \(\Delta\phi=\frac{\pi}{2}-\arctan\!\big(Q(x-\frac1x)\big)\).</p>
+        <p class="q">4) Cas limites</p>
+        <p>\(x\to0\) : \(|H|\to0\), \(\Delta\phi\to\pi\). \(x=1\) : \(|H|=Q\), \(\Delta\phi=\frac{\pi}{2}\).
+        \(x\to\infty\) : \(|H|\to1\), \(\Delta\phi\to0\).</p>
+        <p class="q">5) Résonance</p>
+        <p>On minimise \(f(x)=(1-\frac{1}{x^2})^2+\frac{1}{Q^2x^2}\) : \(x_R=\dfrac{1}{\sqrt{1-\frac{1}{2Q^2}}}\),
+        possible si \(Q>\frac{1}{\sqrt2}\). Même valeur max qu'à l'ex.14 :</p>
+        <div class="res">\(H_{max}=\dfrac{Q}{\sqrt{1-\frac{1}{4Q^2}}}\approx Q\) (surtension aux bornes de \(L\)).</div>
+        <p class="q">6–7) Gain et asymptotes</p>
+        <p>\(G_{dB}=-10\log\big((1-\frac{1}{x^2})^2+\frac{1}{Q^2x^2}\big)\). BF : \(+40\log(x)\) ; HF : \(0\) dB.
+        <b>Passe-haut d'ordre 2.</b></p>
+        <p class="q">8–9) Bande passante et tracé</p>
+        <div class="res">Pour \(Q<\frac{1}{\sqrt2}\), max \(=1\) en \(\omega\to\infty\) : bande de \(\omega_1\) à
+        \(\infty\). À \(x=1\), \(G_{dB}=20\log Q\).</div>
+      </div>
+    </div>
+
+    <h3>Partie G — Gabarit d'un filtre (Exercices 16–17)</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 16 — Construction d'un passe-bas d'ordre 2 <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(\omega>4\cdot10^{4}\) atténuées d'au moins \(15\)&nbsp;dB ; \(\omega<10^{4}\) atténuées de
+        moins de \(3\)&nbsp;dB. RLC série, \(C=47\)&nbsp;nF.</p>
+        <p class="q">1) Décades de transition</p>
+        <p>\(\log(4\cdot10^{4})-\log(10^{4})=\log 4\approx0{,}6\)&nbsp;décade.</p>
+        <p class="q">2) Atténuation minimale</p>
+        <p>\(-15+3=-12\)&nbsp;dB sur \(0{,}6\) décade : \(-12/0{,}6=-20\)&nbsp;dB/décade.</p>
+        <p class="q">3) Ordre minimal</p>
+        <p>\(20\) dB/déc = ordre 1 tout juste ; par sécurité on prend l'<b>ordre 2</b>.</p>
+        <p class="q">4) Pulsations de coupure extrêmes</p>
+        <p>Pente \(-40\log(\omega/\omega_0)\).<br>
+        • \(\omega=10^{4}\), \(-3\) dB : \(\omega_0=\omega\cdot10^{-3/40}\approx0{,}8\cdot10^{4}\)&nbsp;rad/s.<br>
+        • \(\omega=4\cdot10^{4}\), \(-15\) dB : \(\omega_0=\omega\cdot10^{-15/40}\approx1{,}7\cdot10^{4}\)&nbsp;rad/s.</p>
+        <p class="q">5) Inductance (\(\omega_0=10^{4}\), \(C=47\)&nbsp;nF)</p>
+        <p>\(L=\frac{1}{\omega_0^2 C}=\frac{1}{(10^{4})^2\times47\cdot10^{-9}}=0{,}213\)&nbsp;H \(=213\)&nbsp;mH.</p>
+        <p class="q">6) Résonance ?</p>
+        <p>Il faut <b>éviter</b> la résonance (sinon on amplifie autour de \(\omega_0\)). Condition \(Q<\frac{1}{\sqrt2}\)
+        soit \(R>\sqrt2\sqrt{L/C}=\sqrt2\sqrt{0{,}213/47\cdot10^{-9}}\approx3011\ \Omega\).</p>
+        <div class="res">Ordre 2, \(L=213\)&nbsp;mH, \(R>3{,}0\)&nbsp;k\(\Omega\) pour éviter toute surtension.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 17 — Filtre pour isoler la voix humaine <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Laisser passer \([100\text{ Hz},2\text{ kHz}]\) (voix, atténuée &lt; 10 dB), couper au-delà de
+        l'audible (\(>40\)&nbsp;dB). Passe-bande RLC (sortie sur \(R\)).</p>
+        <p class="q">2) Fréquence centrale (log-centrée)</p>
+        <p>Les pentes du RLC sont symétriques <b>en échelle log</b> : on centre les logarithmes.
+        \(\log(f_0)=\frac{\log(100)+\log(2000)}{2}=2{,}7\Rightarrow f_0\approx501\)&nbsp;Hz. (Centrer en linéaire
+        donnerait \(1050\)&nbsp;Hz, faux.)</p>
+        <p class="q">3) Facteur de qualité</p>
+        <p>\(\Delta f=\frac{f_0}{Q}\) : pour une bande large il faut \(Q\) <b>petit</b>. Avec
+        \(\Delta f=[100,2000]\)&nbsp;Hz : \(Q=\frac{f_0}{\Delta f}=\frac{501}{1900}=0{,}26\) (faible \(Q\) → pas de
+        résonance, bienvenu).</p>
+        <p class="q">4) Ordre nécessaire</p>
+        <p>Pentes requises : côté grave \(\frac{-30}{0{,}7}\approx43\)&nbsp;dB/déc, côté aigu \(\frac{-30}{1}=30\)&nbsp;dB/déc.
+        Il faut donc un ordre \(\geq6\) (un ordre 4 ne donne que \(40\) dB/déc, insuffisant côté grave). On associe
+        3 RLC — mais via un montage adaptateur pour que les fonctions de transfert se multiplient (la simple mise en
+        série ne suffit pas à cause des charges).</p>
+        <div class="res">\(f_0\approx501\)&nbsp;Hz, \(Q\approx0{,}26\), ordre \(\geq6\) (≈ 3 étages RLC découplés).</div>
+      </div>
+    </div>
+
+    <h3>Partie H — Problèmes de filtrage (Exercices 18–25)</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 18 — Association de filtres RL en série (ordre 2) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Deux étages RL, sortie \(s_2=u_L\) du second étage. \(\omega_0=R/L\), \(x=\omega/\omega_0\).</p>
+        <p class="q">1) Nature</p>
+        <p>BF : bobines = fils \(\Rightarrow s_2=0\). HF : bobines = interrupteurs ouverts, \(i=0\Rightarrow s_2=e\).
+        <b>Passe-haut.</b></p>
+        <p class="q">2) Fonction de transfert (par étapes)</p>
+        <p>a) Pont diviseur sur le 2ᵉ étage : \(s_2=s_1\dfrac{jx}{1+jx}\).<br>
+        b) Impédance équivalente vue par \(s_1\) : les deux dipôles de droite en série (\(jL\omega+R\)) puis en
+        parallèle avec la 1ʳᵉ bobine : \(Z_{eq}=\dfrac{jL\omega(jL\omega+R)}{2jL\omega+R}=\dfrac{Rjx(1+jx)}{1+2jx}\).<br>
+        c) Pont diviseur : \(s_1=e\dfrac{Z_{eq}}{Z_{eq}+R}\). En reportant et en simplifiant \((1+jx)\) :</p>
+        \[H(x)=\frac{-x^2}{1+3jx-x^2}=\frac{1}{1-\frac{1}{x^2}-3j\frac{1}{x}}.\]
+        <p class="q">3) Module et phase</p>
+        <p>\(|H(x)|=\dfrac{1}{\sqrt{(1-\frac{1}{x^2})^2+\frac{9}{x^2}}}\) ; en multipliant par \(j\) :
+        \(\Delta\phi=\frac{\pi}{2}-\arctan\!\big(\frac{x}{3}-\frac{1}{3x}\big)\).</p>
+        <p class="q">4) Cas limites</p>
+        <p>\(x\to0\) : \(0\), \(\Delta\phi\to\pi\). \(x=1\) : \(|H|=\frac13\), \(\frac{\pi}{2}\). \(x\to\infty\) :
+        \(1\), \(0\).</p>
+        <p class="q">5) Résonance</p>
+        <p>Le facteur d'amortissement « effectif » est \(3>1\) donc pas de minimum du dénominateur : <b>pas de
+        résonance</b> (maximum atteint en \(+\infty\)).</p>
+        <p class="q">6–8) Gain, asymptotes, tracé</p>
+        <div class="res">\(G_{dB}=-10\log\big((1-\frac{1}{x^2})^2+\frac{9}{x^2}\big)\) ; BF \(+40\log(x)\), HF \(0\) dB
+        (passe-haut d'ordre 2). À \(x=1\) : \(G_{dB}=-20\log(3)\approx-9{,}5\)&nbsp;dB (bien en dessous de 0 : l'association
+        « charge » chaque étage).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 19 — Filtrer un parasite à 50 Hz (coupe-bande) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Filtre coupe-bande (\(L\) et \(C\) en parallèle dans la branche série, sortie sur \(R\)).
+        Supprimer le \(50\)&nbsp;Hz.</p>
+        <p class="q">1) Nature</p>
+        <p>BF : \(L\) fil (court-circuite le bouchon) \(\Rightarrow s=e\). HF : \(C\) fil \(\Rightarrow s=e\). Les BF
+        et HF passent : c'est un <b>coupe-bande</b> (le bouchon \(LC\) bloque autour de \(\omega_0\)).</p>
+        <p class="q">2) Fonction de transfert</p>
+        <p>\(Z_{eq}=\dfrac{jL\omega\cdot\frac{1}{jC\omega}}{jL\omega+\frac{1}{jC\omega}}=\dfrac{L/C}{\frac{1}{jC\omega}-jL\omega\cdot(-1)}\)…
+        pont diviseur \(H=\dfrac{R}{R+Z_{eq}}\), on trouve après simplification :</p>
+        \[H(x)=\frac{1-x^2}{1-x^2+jQx}=\frac{1}{1+jQ\frac{x}{1-x^2}},\quad \omega_0=\frac{1}{\sqrt{LC}},\ Q=\frac1R\sqrt{L/C}.\]
+        <p class="q">3) Minimum</p>
+        <p>\(H=0\) exactement pour \(x=1\) : le gain tend vers \(-\infty\) (réjection totale à \(\omega_0\)).</p>
+        <p class="q">4) Valeur interdite et réalisme</p>
+        <p>À \(x=1\) le filtre idéal a un gain \(-\infty\) et un <b>saut de phase</b> brutal. C'est dû aux \(L\) et
+        \(C\) idéaux. En réalité, il faut ajouter les résistances des composants réels (\(R_L\) série, \(R_C\)
+        parallèle) : la réjection devient finie et la phase continue.</p>
+        <p class="q">5) Dimensionnement (\(L=10\)&nbsp;mH)</p>
+        <p>\(\omega_0^2=\frac{1}{LC}\Rightarrow C=\frac{1}{L\omega_0^2}=\frac{1}{10^{-2}\times(2\pi\cdot50)^2}
+        \approx1{,}0\)&nbsp;mF.</p>
+        <p class="q">6) Sélectivité</p>
+        <div class="res">Pour ne couper que le voisinage de \(50\)&nbsp;Hz, il faut \(Q\) grand donc (\(Q\sim\frac1R\))
+        de <b>grandes résistances</b>. Coupe-bande, \(C\approx1\)&nbsp;mF.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 20 — Filtre RC et charge de l'oscilloscope <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Filtre RC (\(R=1\)&nbsp;k\(\Omega\), \(C=47\)&nbsp;nF), sortie sur \(C\), observée par un
+        oscilloscope modélisé par \(R_O\parallel C_O\).</p>
+        <p class="q">1) Nature</p>
+        <p>BF : condensateurs ouverts, le circuit est un pont diviseur résistif \(s=e\frac{R_O}{R_O+R}\). HF :
+        condensateurs = fils, \(s=0\). <b>Passe-bas.</b></p>
+        <p class="q">2) Fonction de transfert</p>
+        <p>Les 3 dipôles de droite (\(R_O\), \(C\), \(C_O\)) sont en parallèle :
+        \(Z_{eq}=\dfrac{R_O}{1+j\omega R_O(C+C_O)}\). Pont diviseur \(s=e\frac{Z_{eq}}{Z_{eq}+R}\), et en mettant
+        \(R_O+R\) en facteur :</p>
+        \[H(\omega)=\frac{R_O}{R_O+R}\times\frac{1}{1+j\omega\frac{R_OR}{R_O+R}(C_O+C)}.\]
+        <p class="q">3–4) Pulsation de coupure</p>
+        <p>\(\omega_0=\dfrac{1}{\frac{R_OR}{R_O+R}(C+C_O)}\), à comparer à \(\omega_0'=\frac{1}{RC}\) du RC seul.</p>
+        <p class="q">5) Condition de non-perturbation</p>
+        <p>\(\frac{R_OR}{R_O+R}(C+C_O)\to RC\) si \(R_O\gg R\) (alors \(\frac{R_OR}{R_O+R}\to R\)) et \(C_O\ll C\).</p>
+        <p class="q">6) Application (\(R_O=1\)&nbsp;M\(\Omega\), \(C_O=20\)&nbsp;pF)</p>
+        <p>\(\omega_0=21288\)&nbsp;rad/s vs \(\omega_0'=21276\)&nbsp;rad/s, écart \(\epsilon\approx0{,}06\%\).</p>
+        <div class="res">L'oscilloscope (\(R_O\gg R\), \(C_O\ll C\)) ne perturbe pas la mesure (écart au 4ᵉ chiffre
+        significatif), indépendamment de la fréquence.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 21 — Filtre moyenneur <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Passe-bas RC (sortie sur \(C\), \(C=47\)&nbsp;nF) : garder la composante continue,
+        supprimer l'alternatif (\(f>1\)&nbsp;kHz atténué de \(\geq40\)&nbsp;dB).</p>
+        <p class="q">1) Nature / \(H\)</p>
+        <p>Passe-bas : \(H=\dfrac{1}{1+jRC\omega}\).</p>
+        <p class="q">2) Fréquence de coupure</p>
+        <p>\(G_{dB}(1\text{ kHz})=-40\) dB \(\Rightarrow\) division par \(\approx100\Rightarrow f=100f_0\Rightarrow
+        f_0=\frac{1000}{100}=10\)&nbsp;Hz.</p>
+        <p class="q">3) Résistance</p>
+        <p>\(\omega_0=\frac{1}{RC}=2\pi\times10\Rightarrow R=\frac{1}{20\pi\times47\cdot10^{-9}}\approx339\)&nbsp;k\(\Omega\).</p>
+        <p class="q">4) Sortie pour \(e(t)=2+\cos(2\pi\cdot1000t+\frac{\pi}{3})+5\cos(2\pi\cdot2000t)\)</p>
+        <p>Les composantes à \(1\) et \(2\)&nbsp;kHz (\(\gg f_0\)) sont atténuées ; seule la composante continue
+        subsiste : \(s(t)=2\)&nbsp;V.</p>
+        <p class="q">5) Créneau 2–4 V à 1 kHz</p>
+        <div class="res">Sortie constante à \(3\)&nbsp;V (la valeur moyenne du créneau) : toutes les harmoniques à
+        \(\geq1\)&nbsp;kHz sont coupées, il ne reste que la moyenne. Le filtre « moyenne » le signal.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 22 — Filtre de Wien (passe-bande) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Wien : branche série \((R,C)\) et branche parallèle \((R\parallel C)\), sortie sur la
+        branche parallèle. \(R=1\)&nbsp;k\(\Omega\), \(C=0{,}5\ \mu\text{F}\), \(\omega_0=\frac{1}{RC}\).</p>
+        <p class="q">1) Nature</p>
+        <p>BF : \(C\) ouvert \(\Rightarrow i=0\Rightarrow s=0\). HF : \(C\) fil \(\Rightarrow s=0\). <b>Passe-bande.</b></p>
+        <p class="q">2) Fonction de transfert</p>
+        <p>\(Z_{//}=\dfrac{R}{1+jRC\omega}\), \(Z_{s}=R+\frac{1}{jC\omega}\). Pont diviseur
+        \(s=e\frac{Z_{//}}{Z_{//}+Z_s}\), on développe \(1+(R+\frac{1}{jC\omega})(\frac1R+jC\omega)=3+j(RC\omega-\frac{1}{RC\omega})\),
+        d'où en divisant par 3 :</p>
+        \[H(\omega)=\frac{1/3}{1+j\frac13\left(x-\frac1x\right)}.\]
+        <p class="q">3) Module, phase, limites</p>
+        <p>\(|H|=\dfrac{1/3}{\sqrt{1+\frac19(x-\frac1x)^2}}\), \(\phi=-\arctan\!\big(\frac13(x-\frac1x)\big)\).
+        \(x\to0\) : \(0\), \(+\frac{\pi}{2}\). \(x=1\) : \(\frac13\), \(0\). \(x\to\infty\) : \(0\), \(-\frac{\pi}{2}\).</p>
+        <p class="q">4) Maximum</p>
+        <p>Dénominateur minimal en \(x=1\) : \(H_{max}=H(1)=\frac13\), soit \(s=e/3\).</p>
+        <p class="q">5) Bande passante</p>
+        <p>\(1+\frac19(x-\frac1x)^2=2\Rightarrow x-\frac1x=\pm3\Rightarrow x^2\mp3x-1=0\). Racines positives
+        \(x_1,x_2\) : \(\Delta x=x_2-x_1=3\).</p>
+        <p class="q">6–7) Gain</p>
+        <p>\(G_{dB}=20\log\frac13-10\log\big(1+\frac19(x-\frac1x)^2\big)\). BF \(+20\log x\), HF \(-20\log x\), à
+        \(x=1\) : \(-20\log 3\approx-9{,}5\)&nbsp;dB.</p>
+        <p class="q">8) Sortie pour \(5\cos\omega t+5\cos10\omega t+5\cos100\omega t\), \(\omega=200\)&nbsp;rad/s</p>
+        <p>\(\omega_0=\frac{1}{RC}=\frac{1}{10^{3}\times0{,}5\cdot10^{-6}}=2000\)&nbsp;rad/s. Les trois pulsations :
+        \(200\) (\(x=0{,}1\), \(-20\) dB, \(\div10\)), \(2000\) (\(x=1\), \(\div3\)), \(20000\) (\(x=10\), \(-20\) dB,
+        \(\div10\)).</p>
+        <div class="res">Seule la composante intermédiaire (\(\omega_0=2000\)&nbsp;rad/s) ressort nettement ; les deux
+        autres sont divisées par \(\sim10\). Le Wien sélectionne \(\omega_0\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 23 — Déphaseur (pont) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Pont : branche gauche divise \(e\) via \(R\) puis \(C\) (\(u_1\) sur \(C\)), branche droite
+        via \(C\) puis \(R\) (\(u_2\) sur \(R\)) ; sortie \(s=u_1-u_2\).</p>
+        <p class="q">1–2) Tensions</p>
+        <p>\(u_1=e\dfrac{Z_C}{Z_C+Z_R}=\dfrac{e}{1+jRC\omega}\) ;
+        \(u_2=e\dfrac{Z_R}{Z_C+Z_R}=\dfrac{e\,jRC\omega}{1+jRC\omega}\).</p>
+        <p class="q">3) Différence</p>
+        <p>\(s=u_1-u_2=e\dfrac{1-jRC\omega}{1+jRC\omega}\).</p>
+        <p class="q">4) Module</p>
+        <p>Avec \(x=RC\omega\) : \(H=\dfrac{1-jx}{1+jx}\), donc \(|H|=\dfrac{\sqrt{1+x^2}}{\sqrt{1+x^2}}=1\) :
+        amplitude <b>inchangée</b> à toutes les fréquences.</p>
+        <p class="q">5) Déphasage</p>
+        <p>\(\Delta\phi=\arg(1-jx)-\arg(1+jx)=-\arctan(x)-\arctan(x)=-2\arctan(x)\).</p>
+        <div class="res">\(|H|=1\) (déphaseur pur) ; \(\Delta\phi=-2\arctan(x)\) va de \(0\) à \(-\pi\) : la sortie
+        est <b>en retard</b>, réglable de \(0\) à \(180°\) via la fréquence.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 24 — Quadripôle inconnu et analyse graphique <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Diagramme de Bode (gain) donné : bosse centrée, pentes \(\pm20\)&nbsp;dB/déc, maximum en
+        \(\omega_0\).</p>
+        <p class="q">1) Type et \(\omega_0\)</p>
+        <p>Coupe HF et BF avec des pentes de \(\pm20\)&nbsp;dB/déc : <b>passe-bande d'ordre 2</b>. Le maximum est lu
+        à \(\omega_0=10^{3}\)&nbsp;rad/s.</p>
+        <p class="q">2) Pulsations du signal d'entrée</p>
+        <p>D'après les périodes indiquées : \(\omega_1=\frac{2\pi}{20\pi/\omega_0}=\frac{\omega_0}{10}\) ;
+        \(\omega_2=\frac{2\pi}{2\pi/\omega_0}=\omega_0\) ; \(\omega_3=\frac{2\pi}{\pi/(5\omega_0)}=10\omega_0\).</p>
+        <p class="q">3) Signal de sortie</p>
+        <p>À \(\omega_1\) et \(\omega_3\), atténuation de \(20\)&nbsp;dB (division par 10) par rapport à \(\omega_0\).
+        Il ne reste quasiment que \(\omega_0\) : sortie sinusoïdale à \(\omega_0\) (10 périodes sur
+        \(\frac{20\pi}{\omega_0}\)) → <b>signal a)</b>. Le b) (que la HF) vient d'un passe-haut ; le c) (que la BF)
+        d'un passe-bas ; le d) (HF+BF sans le milieu) d'un coupe-bande.</p>
+        <p class="q">4) Quels filtres conviennent ?</p>
+        <div class="res">Les montages a) et c) (deux composants réactifs → passe-bande d'ordre 2) conviennent. Le b)
+        est un passe-haut d'ordre 1, le d) un passe-bas d'ordre 1 : rejetés.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 25 — Quel diagramme de Bode ? <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Circuit : \((R_1\parallel C)\) en série avec \(R_2\), sortie sur \(R_2\).</p>
+        <p class="q">1) Fonction de transfert</p>
+        <p>\(Z_{//}=\dfrac{R_1}{1+jR_1C\omega}\), \(H=\dfrac{R_2}{R_2+Z_{//}}\). En factorisant :</p>
+        \[H(\omega)=\underbrace{\frac{R_2}{R_1+R_2}}_{\alpha}\times\frac{1+j\frac{\omega}{\omega_1}}{1+j\frac{\omega}{\omega_2}},
+        \quad \omega_1=\frac{1}{R_1C},\ \omega_2=\frac{R_1+R_2}{R_1R_2C}.\]
+        <p class="q">2) Diagramme</p>
+        <p>HF : \(C\) court-circuite \(R_1\Rightarrow s=e\) (gain \(0\) dB). BF : \(C\) ouvert, pont diviseur
+        \(s=e\frac{R_2}{R_1+R_2}\) (gain \(\alpha<1\), négatif en dB). C'est un « passe-haut adouci » : gain
+        constant \(20\log\alpha\) en BF, montée, puis \(0\) dB en HF.</p>
+        <p class="q">3) \(\omega_2\)</p>
+        <p>\(\frac{\omega_2}{\omega_1}=\frac{R_1+R_2}{R_2}\) ; le graphe montre 2 décades d'écart, donc
+        \(\omega_1=10^{2}\Rightarrow\omega_2=10^{4}\)&nbsp;rad/s.</p>
+        <p class="q">4) \(R_1\) (\(R_2=100\ \Omega\))</p>
+        <p>En BF, \(G_{dB}=-40=20\log\frac{R_2}{R_1+R_2}\Rightarrow\frac{R_2}{R_1+R_2}=\frac{1}{100}\Rightarrow
+        R_1=99R_2=9900\ \Omega\).</p>
+        <div class="res">\(\alpha=\frac{R_2}{R_1+R_2}\), \(\omega_1=\frac{1}{R_1C}\), \(\omega_2=\frac{R_1+R_2}{R_1R_2C}\)
+        ; \(\omega_2=10^{4}\)&nbsp;rad/s, \(R_1=9900\ \Omega\).</div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.5rem;border-left-color:var(--ok)">
+      <span class="lab" style="color:#065f46">✅ TD filtrage — correction complète (12 EC + 25 exercices)</span>
+      Fonction de transfert par pont diviseur complexe, natures par comportements asymptotiques (\(C\)/\(L\) =
+      fil/interrupteur), module &amp; argument (astuce \(\times\pm j\)), gain \(G_{dB}=20\log|H|\) et diagrammes de
+      Bode, filtres d'ordre 1 (\(\pm20\) dB/déc) et 2 (\(\pm40\) dB/déc), passe-bande RLC (résonance en \(\omega_0\),
+      \(\Delta\omega=\omega_0/Q\)), surtension aux bornes de \(C\)/\(L\) si \(Q>\frac{1}{\sqrt2}\), dérivateur/
+      intégrateur, coupe-bande (réjecteur) et Wien, déphaseur pur (\(|H|=1\)), charge d'oscilloscope, et
+      dimensionnement sur gabarit.
+    </div>
+    <!-- TD_FILTRAGE_ANCHOR -->
+  </section>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours / ressource</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/filtrage/Cours_RSF_filtrage.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Cours_RSF_filtrage</span><span class="badge">Cours / ressource</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Fiche / mémo</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/filtrage/Resum%C3%A9_RSF_filtrage.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Resumé_RSF_filtrage</span><span class="badge">Fiche / mémo</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/filtrage/TD%20filtrage%20-%20VG%20-%20etu.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD filtrage - VG - etu</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/filtrage/TD_RSF.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD_RSF</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/filtrage/TD_filtrage.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD_filtrage</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Corrigé</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/filtrage/TD%20filtrage%20-%20VG%20-%20prof.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD filtrage - VG - prof</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/filtrage/TD_RSF_correction.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD_RSF_correction</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/filtrage/TD_filtrage_corriger.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD_filtrage_corriger</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Électrocinétique — Régime transitoire — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' }, svg: { fontCache: 'global' } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-phys">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Physique · Électrocinétique</span>
+  <h1 class="title">Électrocinétique — Régime transitoire</h1>
+  <p class="lead">Étudier l'évolution temporelle des circuits après commutation d'un interrupteur : condensateurs
+  et bobines, conditions initiales et comportements asymptotiques, circuits du premier ordre (charge/décharge
+  exponentielle, \(\tau=RC\) ou \(L/R\)) et circuits du second ordre (RLC, pulsation propre \(\omega_0\), facteur
+  de qualité \(Q\), régimes pseudo-périodique, critique et apériodique).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD (15 exercices)</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ============================ COURS ============================ -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Définitions</h3>
+    <div class="def"><span class="lab">Régime transitoire / régime permanent</span>
+    Le <b>régime transitoire</b> est la phase pendant laquelle les variables d'état d'un système (ici tension
+    \(u(t)\), intensité \(i(t)\), charge \(q(t)\)) <b>évoluent</b> au cours du temps. Lorsqu'elles ont fini
+    d'évoluer et atteignent des valeurs constantes, on parle de <b>régime permanent</b> (ou stationnaire).</div>
+    <ul>
+      <li><b>Courant</b> : \(i(t)=\pm\dfrac{dq(t)}{dt}\). Signe \(+\) en convention récepteur (le dipôle
+      accumule des charges, \(\frac{dq}{dt}>0\)), signe \(-\) en convention générateur (il en fournit).</li>
+      <li><b>Puissance instantanée</b> : \(p(t)=\dfrac{dE(t)}{dt}=u(t)\,i(t)\) (en W). Dimension
+      \([p]=ML^2T^{-3}\). En convention récepteur \(p>0\) = reçoit, \(p<0\) = fournit.</li>
+      <li><b>Énergie</b> échangée entre \(t_1\) et \(t_2\) : \(\Delta E=\displaystyle\int_{t_1}^{t_2}p(t)\,dt\) (en J,
+      \([E]=ML^2T^{-2}\)). Sur tout le processus : \(t_1=0,\ t_2\to\infty\).</li>
+    </ul>
+
+    <div class="warnbox"><span class="lab">Deux instants à distinguer : \(0^-\) et \(0^+\)</span>
+    L'interrupteur \(K\) est commuté à \(t=0\). On note \(t=0^-\) juste <b>avant</b> et \(t=0^+\) juste <b>après</b>.
+    Les tensions et courants ne sont pas forcément continus en \(t=0\), il faut donc distinguer la valeur à gauche
+    \(0^-\) et à droite \(0^+\). Les <b>comportements asymptotiques</b> \(u_\infty,i_\infty,q_\infty\) sont les limites
+    quand \(t\to\infty\).</div>
+
+    <h3>1.2 Résistance</h3>
+    <div class="thm"><span class="lab">Caractéristique (loi d'Ohm)</span>
+    \[u_R(t)=R\,i_R(t)\]
+    Le comportement d'une résistance en régime transitoire est <b>identique</b> à celui en régime permanent : tout
+    ce qui a été vu au chapitre précédent (résistances équivalentes, ponts diviseurs, Thévenin…) reste valable.</div>
+    <p>Puissance dissipée : \(p_R(t)=u_R i_R=R\,i(t)^2\). Énergie dissipée par effet Joule entre \(t_1\) et \(t_2\) :
+    \(\Delta E_R=R\displaystyle\int_{t_1}^{t_2} i(t)^2\,dt\) (toujours \(>0\) : la résistance ne fait que dissiper).</p>
+
+    <h3>1.3 Condensateur idéal</h3>
+    <div class="def"><span class="lab">Condensateur</span>
+    Deux armatures conductrices séparées par un isolant. Il stocke des charges (donc de l'énergie électrique). Sa
+    <b>capacité</b> \(C\) (en farad F) mesure sa faculté à stocker : \(q(t)=C\,u_c(t)\).</div>
+    <div class="thm"><span class="lab">Caractéristique</span>
+    \[\boxed{\,i_c(t)=C\,\frac{d u_c(t)}{dt}\,}\]
+    Le courant est proportionnel à la <b>dérivée</b> de la tension à ses bornes (on dérive \(q=Cu_c\) et \(i_c=dq/dt\)).</div>
+    <div class="note"><span class="lab">Deux propriétés à retenir absolument</span>
+    <ul style="margin:.2rem 0">
+      <li><b>En régime permanent</b> : \(u_c\) constante \(\Rightarrow i_\infty=C\,\frac{du_\infty}{dt}=0\). Le condensateur
+      se comporte comme un <b>interrupteur ouvert</b> (on le remplace par une coupure sur le schéma).</li>
+      <li><b>La tension \(u_c\) est toujours continue</b> : \(u_c(0^+)=u_c(0^-)\). Sinon sa dérivée serait infinie et
+      \(i_c\to\infty\), physiquement impossible. C'est la condition initiale clé pour les circuits capacitifs.</li>
+    </ul></div>
+    <p>Puissance : \(p_c=u_c i_c=\frac{C}{2}\frac{d}{dt}(u_c^2)\). D'où l'<b>énergie stockée</b> (condensateur
+    initialement déchargé) :</p>
+    \[\boxed{\,E_c(t)=\tfrac{1}{2}C\,u_c^2(t)=\frac{q^2(t)}{2C}\,}\]
+    <p>C'est l'énergie du champ électrique. Elle ne peut pas varier instantanément (car \(u_c\) est continue).</p>
+
+    <h3>1.4 Bobine idéale</h3>
+    <div class="def"><span class="lab">Bobine</span>
+    Fil conducteur enroulé en spires. Le passage du courant crée un champ magnétique, source d'une tension (force
+    électromotrice) qui <b>s'oppose</b> aux variations de courant. Son <b>inductance</b> \(L\) (en henry H) mesure
+    cette faculté.</div>
+    <div class="thm"><span class="lab">Caractéristique</span>
+    \[\boxed{\,u_L(t)=L\,\frac{d i_L(t)}{dt}\,}\]
+    La tension est proportionnelle à la <b>dérivée</b> du courant qui la traverse.</div>
+    <div class="note"><span class="lab">Duale du condensateur</span>
+    <ul style="margin:.2rem 0">
+      <li><b>En régime permanent</b> : \(i_L\) constante \(\Rightarrow u_\infty=L\,\frac{di_\infty}{dt}=0\). La bobine se
+      comporte comme un <b>fil</b> (on la remplace par un court-circuit sur le schéma).</li>
+      <li><b>Le courant \(i_L\) est toujours continu</b> : \(i_L(0^+)=i_L(0^-)\). Sinon \(u_L\to\infty\), impossible.
+      C'est la condition initiale clé pour les circuits inductifs.</li>
+    </ul></div>
+    <p>Puissance : \(p_L=u_L i_L=\frac{L}{2}\frac{d}{dt}(i_L^2)\). D'où l'<b>énergie stockée</b> :</p>
+    \[\boxed{\,E_L(t)=\tfrac{1}{2}L\,i_L^2(t)\,}\]
+    <p>C'est l'énergie du champ magnétique.</p>
+
+    <div class="method"><span class="lab">Tableau récapitulatif des 3 dipôles</span>
+    <div class="overflow">
+    <table>
+      <tr><th>Dipôle</th><th>Caractéristique</th><th>Grandeur continue</th><th>En régime permanent</th><th>Énergie stockée</th></tr>
+      <tr><td>Résistance</td><td>\(u_R=R\,i_R\)</td><td>—</td><td>inchangée (\(u=Ri\))</td><td>dissipée : \(R\!\int i^2 dt\)</td></tr>
+      <tr><td>Condensateur</td><td>\(i_c=C\,\dfrac{du_c}{dt}\)</td><td>\(u_c\) continue</td><td>interrupteur <b>ouvert</b></td><td>\(\frac12 C u_c^2\)</td></tr>
+      <tr><td>Bobine</td><td>\(u_L=L\,\dfrac{di_L}{dt}\)</td><td>\(i_L\) continu</td><td><b>fil</b> (court-circuit)</td><td>\(\frac12 L i_L^2\)</td></tr>
+    </table>
+    </div></div>
+
+    <h3>1.5 Circuits du premier ordre</h3>
+    <p>Un circuit est du premier ordre si ses variables d'état sont solutions d'une équation différentielle linéaire
+    d'ordre 1, de <b>forme canonique</b> :</p>
+    \[\frac{du}{dt}+\frac{u}{\tau}=\frac{e(t)}{\tau}\qquad;\qquad \frac{di}{dt}+\frac{i}{\tau}=\frac{i_0(t)}{\tau}\]
+    <ul>
+      <li>Quatre types canoniques : RC série, RC parallèle, RL série, RL parallèle.</li>
+      <li>Le <b>temps caractéristique</b> vaut \(\tau=RC\) (circuits capacitifs) ou \(\tau=\dfrac{L}{R}\) (circuits inductifs).</li>
+      <li>Pour un second membre <b>constant</b> (\(e(t)=E\)), la solution est une charge/décharge exponentielle.</li>
+    </ul>
+    <div class="method"><span class="lab">Méthode (3 étapes)</span>
+    <ol style="margin:.2rem 0">
+      <li><b>Conditions initiales</b> : lois des mailles/nœuds à \(t=0^+\), en utilisant \(u_c(0^+)=u_c(0^-)\) et
+      \(i_L(0^+)=i_L(0^-)\).</li>
+      <li><b>Équation différentielle</b> : lois des mailles/nœuds à \(t\) quelconque, combinées avec les
+      caractéristiques des dipôles ; on met sous forme canonique et on identifie \(\tau\).</li>
+      <li><b>Résolution</b> : solution générale \(x(t)=K\,e^{-t/\tau}+x_\infty\), la constante \(K\) fixée par la CI.</li>
+    </ol></div>
+    <div class="thm"><span class="lab">Exemple type — RC série (générateur \(E\), condensateur déchargé, \(K\) fermé à \(t=0\))</span>
+    CI : \(u_c(0^+)=u_c(0^-)=0\) donc \(u_R(0^+)=E\). Maille : \(E-Ri-u_c=0\) avec \(u_R=Ri\) et \(i=C\frac{du_c}{dt}\),
+    d'où \(\frac{du_c}{dt}+\frac{u_c}{\tau}=\frac{E}{\tau}\) avec \(\tau=RC\). Solution :
+    \[u_c(t)=E\Big(1-e^{-t/\tau}\Big),\quad u_R(t)=E\,e^{-t/\tau},\quad i(t)=\frac{E}{R}\,e^{-t/\tau}\]
+    Le condensateur se charge (\(u_c\to E\)) pendant que le courant décroît vers 0 (interrupteur ouvert en RP).</div>
+
+    <h3>1.6 Circuits du second ordre</h3>
+    <p>Un circuit est du second ordre si ses variables d'état vérifient une équation différentielle linéaire d'ordre 2,
+    de forme canonique :</p>
+    \[\boxed{\,\frac{d^2u}{dt^2}+\frac{\omega_0}{Q}\frac{du}{dt}+\omega_0^2\,u=\omega_0^2\,e(t)\,}\]
+    <ul>
+      <li>Circuits RLC série ou parallèle. En général \(\omega_0=\dfrac{1}{\sqrt{LC}}\) est la <b>pulsation propre</b>
+      et \(Q\) le <b>facteur de qualité</b> (leurs expressions dépendent du montage).</li>
+    </ul>
+    <div class="method"><span class="lab">Les 3 régimes (\(x(t)\) = tension ou courant quelconque)</span>
+    <div class="overflow">
+    <table>
+      <tr><th>Régime</th><th>Condition</th><th>Solution (sans 2ⁿᵈ membre)</th></tr>
+      <tr><td><b>Pseudo-périodique</b></td><td>\(Q>\tfrac12\)</td><td>\(x=e^{-t/\tau}\big(A\cos\Omega t+B\sin\Omega t\big)\)</td></tr>
+      <tr><td>Critique</td><td>\(Q=\tfrac12\)</td><td>\(x=e^{-t/\tau}(At+B)\)</td></tr>
+      <tr><td>Apériodique</td><td>\(Q<\tfrac12\)</td><td>\(x=e^{-t/\tau}\big(A e^{\beta t}+B e^{-\beta t}\big)\)</td></tr>
+    </table>
+    </div>
+    Avec, en pseudo-périodique : temps d'amortissement \(\tau=\dfrac{2Q}{\omega_0}\), <b>pseudo-pulsation</b>
+    \(\Omega=\omega_0\sqrt{1-\dfrac{1}{4Q^2}}\), pseudo-période \(T=\dfrac{2\pi}{\Omega}\). En apériodique :
+    \(\beta=\omega_0\sqrt{\dfrac{1}{4Q^2}-1}\). Plus \(Q\) est grand, plus les oscillations sont entretenues et
+    \(\Omega\approx\omega_0\).</div>
+    <div class="warnbox"><span class="lab">Piège : le \(\tau\) du 2ⁿᵈ ordre ≠ celui du 1er ordre</span>
+    Bien qu'on note toujours \(\tau\) le temps caractéristique de décroissance de l'enveloppe, en second ordre
+    \(\tau=\dfrac{2Q}{\omega_0}\) et n'a pas la même expression qu'en premier ordre (\(RC\) ou \(L/R\)).</div>
+    <div class="method"><span class="lab">Méthode (2ⁿᵈ ordre)</span>
+    <ol style="margin:.2rem 0">
+      <li><b>CI</b> : on écrit les lois des mailles/nœuds <b>et leur dérivée première</b> à \(t=0^+\), avec
+      \(u_c(0^+)=u_c(0^-)\) et \(i_L(0^+)=i_L(0^-)\). On obtient \(x(0^+)\) et \(\big(\frac{dx}{dt}\big)_{0^+}\).</li>
+      <li><b>Éq. diff.</b> : lois des mailles/nœuds et leur dérivée à \(t\) quelconque, combinées avec les
+      caractéristiques ; forme canonique \(\Rightarrow\) identification de \(\omega_0\) et \(Q\).</li>
+      <li><b>Résolution</b> : selon le régime (souvent pseudo-périodique), constantes \(A,B\) fixées par les 2 CI.</li>
+    </ol></div>
+    <div class="thm"><span class="lab">Exemple type — RLC série (générateur \(E\), \(C\) déchargé, \(i(0^-)=0\))</span>
+    Éq. : \(\dfrac{d^2u_c}{dt^2}+\dfrac{\omega_0}{Q}\dfrac{du_c}{dt}+\omega_0^2 u_c=\omega_0^2 E\), avec
+    \(\omega_0=\dfrac{1}{\sqrt{LC}}\) et \(Q=\dfrac{1}{R}\sqrt{\dfrac{L}{C}}\). CI : \(u_c(0^+)=0\) et
+    \(\big(\frac{du_c}{dt}\big)_{0^+}=0\) (car \(i(0^+)=C\big(\frac{du_c}{dt}\big)_{0^+}=0\)). En régime
+    pseudo-périodique :
+    \[u_c(t)=E\left[1-e^{-t/\tau}\Big(\cos\Omega t+\tfrac{1}{\Omega\tau}\sin\Omega t\Big)\right]\]
+    La tension oscille en montant vers \(E\), dépasse (premier maximum), puis oscille de façon amortie jusqu'à se
+    stabiliser à \(E\).</div>
+  </section>
+
+  <!-- ======================= EXERCICES CRÉÉS ======================= -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+    <p class="lead">Trois exercices originaux : décharge RC (1er ordre), établissement de courant RL (1er ordre),
+    bilan énergétique d'un circuit LC (2ⁿᵈ ordre non amorti).</p>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice A — Décharge d'un condensateur dans une résistance <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Un condensateur \(C=10\ \mu\text{F}\), chargé sous \(U_0=12\)&nbsp;V, est connecté à \(t=0\)
+        à une résistance \(R=4{,}7\ \text{k}\Omega\). Établir \(u_c(t)\), la constante de temps \(\tau\), le courant
+        \(i(t)\), et l'énergie totale dissipée.</p>
+        <p class="q">1) Équation différentielle et \(\tau\)</p>
+        <p>Maille (décharge, pas de générateur) : \(u_c-Ri=0\). Le condensateur se décharge, il est <b>générateur</b>,
+        donc \(i=-C\dfrac{du_c}{dt}\). En remplaçant : \(u_c+RC\dfrac{du_c}{dt}=0\), soit</p>
+        \[\frac{du_c}{dt}+\frac{u_c}{\tau}=0,\qquad \tau=RC=4700\times10\cdot10^{-6}=47\ \text{ms}\]
+        <p class="q">2) Résolution avec la CI</p>
+        <p>Solution générale \(u_c(t)=K e^{-t/\tau}\). La tension aux bornes d'un condensateur est continue :
+        \(u_c(0^+)=u_c(0^-)=U_0\), donc \(K=U_0\) :</p>
+        <p>\(u_c(t)=U_0\,e^{-t/\tau}=12\,e^{-t/0{,}047}\) (V).</p>
+        <p class="q">3) Courant</p>
+        <p>\(i(t)=-C\dfrac{du_c}{dt}=\dfrac{U_0}{R}\,e^{-t/\tau}=\dfrac{12}{4700}e^{-t/\tau}\approx2{,}6\ \text{mA}\times e^{-t/\tau}\).
+        Il décroît de \(i(0^+)=2{,}6\)&nbsp;mA vers 0.</p>
+        <p class="q">4) Énergie dissipée</p>
+        <p>Le condensateur libère toute son énergie initiale dans \(R\) :
+        \(E=\dfrac{1}{2}C U_0^2=\dfrac{1}{2}\times10^{-5}\times12^2=7{,}2\cdot10^{-4}\)&nbsp;J.
+        Vérification par intégration : \(E=\int_0^\infty Ri^2 dt=R\big(\frac{U_0}{R}\big)^2\frac{\tau}{2}=\frac{C U_0^2}{2}\) ✔</p>
+        <div class="res">\(\tau=47\)&nbsp;ms, \(u_c(t)=12\,e^{-t/\tau}\)&nbsp;V, \(i(0^+)=2{,}6\)&nbsp;mA,
+        \(E_{\text{dissipée}}=0{,}72\)&nbsp;mJ.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice B — Établissement du courant dans un circuit RL <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Un générateur idéal \(E=6{,}0\)&nbsp;V alimente à \(t=0\) une bobine \(L=0{,}10\)&nbsp;H en
+        série avec \(R=220\ \Omega\). Établir \(i(t)\), \(\tau\), la valeur finale et le temps pour atteindre 95 % de
+        celle-ci.</p>
+        <p class="q">1) Équation différentielle et \(\tau\)</p>
+        <p>Maille à \(t\) quelconque : \(E-Ri-u_L=0\) avec \(u_L=L\dfrac{di}{dt}\), d'où
+        \(\dfrac{di}{dt}+\dfrac{R}{L}i=\dfrac{E}{L}\), soit \(\dfrac{di}{dt}+\dfrac{i}{\tau}=\dfrac{E}{L}\) avec</p>
+        <p>\(\tau=\dfrac{L}{R}=\dfrac{0{,}10}{220}=4{,}5\cdot10^{-4}\)&nbsp;s \(=0{,}45\)&nbsp;ms.</p>
+        <p class="q">2) CI et solution</p>
+        <p>Le courant dans une bobine est continu : \(i(0^+)=i(0^-)=0\). Valeur finale (bobine = fil) :
+        \(i_\infty=\dfrac{E}{R}=\dfrac{6{,}0}{220}=27{,}3\)&nbsp;mA. Solution :</p>
+        <p>\(i(t)=i_\infty\big(1-e^{-t/\tau}\big)=27{,}3\,(1-e^{-t/\tau})\)&nbsp;mA.</p>
+        <p class="q">3) Temps pour 95 %</p>
+        <p>\(1-e^{-t/\tau}=0{,}95\Rightarrow e^{-t/\tau}=0{,}05\Rightarrow t=\tau\ln 20\approx3{,}0\,\tau=1{,}3\)&nbsp;ms.</p>
+        <div class="res">\(\tau=0{,}45\)&nbsp;ms, \(i(t)=27{,}3(1-e^{-t/\tau})\)&nbsp;mA, \(i_\infty=27{,}3\)&nbsp;mA,
+        atteint à 95 % après \(\approx3\tau\approx1{,}3\)&nbsp;ms.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice C — Circuit LC idéal : oscillations et conservation de l'énergie <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Un condensateur \(C\) chargé sous \(U_0\) est connecté à \(t=0\) à une bobine \(L\) (résistance
+        nulle). Établir \(u_c(t)\) et \(i(t)\), et montrer que l'énergie totale est constante.</p>
+        <p class="q">1) Équation différentielle</p>
+        <p>Maille : \(u_c-u_L=0\) avec \(u_L=L\frac{di}{dt}\) et, le condensateur étant générateur,
+        \(i=-C\frac{du_c}{dt}\). En dérivant \(u_c=L\frac{di}{dt}\) et en remplaçant \(i\) :</p>
+        \[\frac{d^2u_c}{dt^2}+\omega_0^2\,u_c=0,\qquad \omega_0=\frac{1}{\sqrt{LC}}\]
+        <p>Il n'y a pas de résistance : \(Q\to\infty\), régime <b>non amorti</b> (oscillations harmoniques entretenues).</p>
+        <p class="q">2) CI et solutions</p>
+        <p>\(u_c(0^+)=U_0\) (continuité) et \(i(0^+)=0\) (bobine, courant continu) donc
+        \(\big(\frac{du_c}{dt}\big)_{0^+}=-\frac{i(0^+)}{C}=0\). D'où :</p>
+        <p>\(u_c(t)=U_0\cos(\omega_0 t)\), et \(i(t)=-C\dfrac{du_c}{dt}=C U_0\,\omega_0\sin(\omega_0 t)=U_0\sqrt{\dfrac{C}{L}}\sin(\omega_0 t)\).</p>
+        <p class="q">3) Bilan énergétique</p>
+        <p>\(E_c=\frac12 C u_c^2=\frac12 C U_0^2\cos^2(\omega_0 t)\) et
+        \(E_L=\frac12 L i^2=\frac12 L\,C^2U_0^2\omega_0^2\sin^2(\omega_0 t)=\frac12 C U_0^2\sin^2(\omega_0 t)\)
+        (car \(L C\omega_0^2=1\)). Somme :</p>
+        \[E_{\text{tot}}=\tfrac12 C U_0^2\big(\cos^2+\sin^2\big)=\tfrac12 C U_0^2=\text{cste}\]
+        <div class="res">\(u_c=U_0\cos\omega_0 t\), \(i=U_0\sqrt{\tfrac{C}{L}}\sin\omega_0 t\), \(\omega_0=\tfrac{1}{\sqrt{LC}}\).
+        L'énergie oscille entre \(C\) et \(L\) mais sa somme est constante : sans résistance, aucune dissipation.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CORRECTION TD ======================= -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD</h2>
+    <p class="lead">Les 15 exercices, chaque question traitée. (Le corrigé officiel s'arrête à l'énoncé de l'ex. 15 ;
+    celui-ci est résolu ici avec la méthode du cours.)</p>
+
+    <h3>Partie A — Conditions initiales et régime permanent</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 1 — Conditions initiales et valeurs limites (3 circuits) <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">On ferme \(K\) à \(t=0\) ; circuits ouverts depuis longtemps, condensateurs déchargés.
+        Déterminer \(u\) et \(i\) à \(t=0^+\) et en régime permanent (\(t\to\infty\)). Dans les 3 cas, condensateur
+        déchargé \(\Rightarrow u_c(0^+)=u_c(0^-)=0\) (continuité).</p>
+        <p class="q">Circuit 1 — RC (générateur réel \((E,R)\), \(C\) en parallèle avec une résistance \(R\))</p>
+        <p>À \(t=0^+\) : \(u\) est la tension aux bornes de \(C\), continue, donc \(u(0^+)=0\). Maille :
+        \(E-Ri(0^+)-u(0^+)=0\Rightarrow i(0^+)=\dfrac{E}{R}\).<br>
+        En RP : \(C\) = interrupteur ouvert, il reste \((E,R)\) en série avec \(R\), soit \(2R\) :
+        \(i_\infty=\dfrac{E}{2R}\) et \(u_\infty=E-Ri_\infty=\dfrac{E}{2}\).</p>
+        <p class="q">Circuit 2 — RLC (\(C\) en parallèle avec une bobine)</p>
+        <p>À \(t=0^+\) : \(u(0^+)=u_c(0^+)=0\), maille \(E-Ri(0^+)-u(0^+)=0\Rightarrow i(0^+)=\dfrac{E}{R}\).<br>
+        En RP : \(C\) ouvert, bobine = fil, il reste \(E\) idéal en série avec \(R\) : \(i_\infty=\dfrac{E}{R}\) et
+        \(u_\infty=E-Ri_\infty=0\) (tension nulle aux bornes du fil).</p>
+        <p class="q">Circuit 3 — Deux circuits du premier ordre combinés</p>
+        <p>À \(t=0^+\) : condensateurs déchargés, maille du haut \(u(0^+)-2u_c(0^+)=0\Rightarrow u(0^+)=0\) ; grande
+        maille \(E-u(0^+)-Ri(0^+)=0\Rightarrow i(0^+)=\dfrac{E}{R}\).<br>
+        En RP : condensateurs ouverts, la branche non alimentée se retire, il reste \(E\) idéal + \(2R\) en série :
+        \(i_\infty=\dfrac{E}{2R}\), \(u_\infty=E-Ri_\infty=\dfrac{E}{2}\).</p>
+        <div class="res">C1 : \(i(0^+)=\frac{E}{R},\,u(0^+)=0\) ; \(i_\infty=\frac{E}{2R},\,u_\infty=\frac{E}{2}\). — C2 :
+        \(i(0^+)=\frac{E}{R},\,u(0^+)=0\) ; \(i_\infty=\frac{E}{R},\,u_\infty=0\). — C3 : \(i(0^+)=\frac{E}{R},\,u(0^+)=0\) ;
+        \(i_\infty=\frac{E}{2R},\,u_\infty=\frac{E}{2}\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 2 — Conditions initiales et valeurs limites (bobine, 2 résistances) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Générateur réel \((E,R)\), bobine (branche \(i_1\)) en parallèle avec \(R_2\) (branche \(i_2\)) ;
+        \(i=i_1+i_2\). Aucun courant avant fermeture.</p>
+        <p class="q">1) Courants à \(t=0^+\)</p>
+        <p>Le courant dans la bobine est continu : \(i_1(0^+)=i_1(0^-)=0\). Maille :
+        \(E-Ri(0^+)-R_2 i_2(0^+)=0\) ; nœud \(i=i_1+i_2\) avec \(i_1(0^+)=0\Rightarrow i(0^+)=i_2(0^+)\). Donc
+        \(E-(R+R_2)i(0^+)=0\) :</p>
+        <p>\(i_1(0^+)=0,\quad i(0^+)=i_2(0^+)=\dfrac{E}{R+R_2}\). (La bobine se comporte initialement comme un
+        interrupteur ouvert.)</p>
+        <p class="q">2) Courants en régime permanent (bobine → fil)</p>
+        <p>\((E,R)\) alimente \(R_1\) et \(R_2\) en parallèle, \(R_{eq}=\dfrac{R_1R_2}{R_1+R_2}\).
+        \(i_\infty=\dfrac{E}{R+R_{eq}}=\dfrac{(R_1+R_2)E}{RR_1+RR_2+R_1R_2}\). Par diviseur de courant :</p>
+        \[i_{1\infty}=\frac{R_2}{R_1+R_2}i_\infty=\frac{R_2 E}{RR_1+RR_2+R_1R_2},\quad
+        i_{2\infty}=\frac{R_1}{R_1+R_2}i_\infty=\frac{R_1 E}{RR_1+RR_2+R_1R_2}\]
+        <div class="res">\(t=0^+\) : \(i_1=0,\ i=i_2=\frac{E}{R+R_2}\). — RP : \(i_\infty=\frac{(R_1+R_2)E}{RR_1+RR_2+R_1R_2}\),
+        \(i_{1\infty}=\frac{R_2E}{\dots},\ i_{2\infty}=\frac{R_1E}{\dots}\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 3 — Conditions initiales (2 bobines, branche centrale) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Deux générateurs réels \((E,R)\), deux bobines (\(i_1\), \(i_2\)), branche centrale de courant
+        \(i=i_1-i_2\). \(K\) ouvert depuis longtemps, fermé à \(t=0\).</p>
+        <p class="q">1) Intensités à \(t=0^-\)</p>
+        <p>Régime permanent avant fermeture : bobines = fils, une seule maille, \(i_1=i_2\). Maille :
+        \(E-Ri_1-E-Ri_1=0\)… en fait \(2E-2Ri_1(0^-)=0\Rightarrow i_1(0^-)=i_2(0^-)=\dfrac{E}{R}\). Nœud :
+        \(i(0^-)=i_1-i_2=0\).</p>
+        <p class="q">2) Intensités à \(t=0^+\)</p>
+        <p>Courant dans une bobine continu : \(i_1(0^+)=i_2(0^+)=\dfrac{E}{R}\), et \(i(0^+)=i_1-i_2=0\).</p>
+        <p class="q">3) Nouveau régime permanent</p>
+        <p>Bobines redevenues fils. Mailles : \(E-2Ri_{1\infty}+Ri_{2\infty}=0\) et
+        \(E-2Ri_{2\infty}+Ri_{1\infty}=0\). Résolution : \(i_{1\infty}=i_{2\infty}=\dfrac{E}{R}\), donc
+        \(i_\infty=0\).</p>
+        <p class="q">4) Équations différentielles et \(i(t)=0\ \forall t\)</p>
+        <p>Mailles à \(t\) quelconque avec \(u_L=L\frac{di}{dt}\) :</p>
+        \[\frac{di_1}{dt}+\frac{2R}{L}i_1-\frac{R}{L}i_2=\frac{E}{L},\qquad
+        \frac{di_2}{dt}+\frac{2R}{L}i_2-\frac{R}{L}i_1=\frac{E}{L}\]
+        <p>Système couplé. En soustrayant, avec \(i=i_1-i_2\) : \(\dfrac{di}{dt}+\dfrac{3R}{L}i=0\), donc
+        \(i(t)=Ke^{-3Rt/L}\) ; or \(i(0^+)=0\Rightarrow K=0\).</p>
+        <div class="res">\(i(t)=0\) à chaque instant : la branche centrale n'est jamais parcourue (le circuit reste
+        symétrique, les deux bobines se régulent mutuellement).</div>
+      </div>
+    </div>
+
+    <h3>Partie B — Circuits du premier ordre</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 4 — RC série, signal rectangulaire (échelon) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">RC série, échelon d'amplitude \(E\) pendant \(T\), \(\tau=RC\), \(u(0^-)=0\).</p>
+        <p class="q">1) Équation différentielle</p>
+        <p>Maille \(e(t)-Ri-u=0\), \(i=C\frac{du}{dt}\) : \(\dfrac{du}{dt}+\dfrac{u}{\tau}=\dfrac{e(t)}{\tau}\).</p>
+        <p class="q">2) Loi \(u(t)\) par intervalles</p>
+        <ul style="margin:.2rem 0">
+          <li>\(t\le0\) : \(u=0\).</li>
+          <li>\(t\in[0,T]\) : \(e=E\), \(u=Ke^{-t/\tau}+E\) ; CI \(u(0)=0\Rightarrow u(t)=E(1-e^{-t/\tau})\) (charge).</li>
+          <li>\(t>T\) : \(e=0\), \(u=K'e^{-t/\tau}\) ; continuité en \(T\) : \(u(T)=E(1-e^{-T/\tau})\Rightarrow
+          K'=E(e^{T/\tau}-1)\), soit \(u(t)=E(e^{T/\tau}-1)e^{-t/\tau}\) (décharge).</li>
+        </ul>
+        <div class="note" style="margin:.3rem 0"><b>Allures :</b> si \(T\gg\tau\) le condensateur se charge complètement
+        (\(\to E\)) avant de se décharger ; si \(T\approx\tau\) charge partielle ; si \(T\ll\tau\) le condensateur
+        n'est que très faiblement chargé.</div>
+        <p class="q">3) Loi \(i(t)=C\dfrac{du}{dt}\)</p>
+        <p>\(t\in[0,T]\) : \(i=\dfrac{E}{R}e^{-t/\tau}\) ; \(t>T\) : \(i=\dfrac{E}{R}(1-e^{T/\tau})e^{-t/\tau}\) (négatif :
+        le courant s'inverse, le condensateur devient générateur → discontinuité de \(i\) en \(T\)).</p>
+        <div class="res">Charge \(u=E(1-e^{-t/\tau})\) puis décharge \(u=E(e^{T/\tau}-1)e^{-t/\tau}\) ; le courant est
+        discontinu en \(0\) et en \(T\), continu pour \(u\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 5 — Réponse à une rampe (dents de scie) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Rampe \(e(t)=kt\) sur \([0,T]\), nulle sinon ; deux condensateurs \(C,C'\) déchargés,
+        sortie \(s(t)\), \(\tau=R(C+C')\).</p>
+        <p class="q">1) Équation différentielle</p>
+        <p>Mailles/nœuds : \(e-u_c-s=0\), \(s=Ri_R\), \(i=i_R+i_{C'}\), avec \(i=C\frac{du_c}{dt}\),
+        \(i_{C'}=C'\frac{ds}{dt}\) et \(u_c=e-s\). En combinant :</p>
+        \[\frac{ds}{dt}+\frac{s}{\tau}=\frac{C}{C+C'}\,\frac{de}{dt},\qquad \tau=R(C+C')\]
+        <p>Le second membre dépend des <b>variations</b> de l'entrée, pas de l'entrée elle-même.</p>
+        <p class="q">2) Résolution (\(\frac{de}{dt}=k\) sur \([0,T]\))</p>
+        <p>\(t\in[0,T]\) : \(\dfrac{ds}{dt}+\dfrac{s}{\tau}=\dfrac{C}{C+C'}k\), solution
+        \(s(t)=\dfrac{C}{C+C'}k\tau\,(1-e^{-t/\tau})\) (car \(s(0^+)=0\)).<br>
+        \(t>T\) : second membre nul, \(s(t)=\dfrac{C}{C+C'}k\tau(e^{T/\tau}-1)e^{-t/\tau}\).</p>
+        <div class="res">\(T\gg\tau\) signifie que la sortie atteint son plateau
+        \(s_{\max}=\frac{C}{C+C'}k\tau\) avant la fin de la rampe : même allure que l'exercice 4 (montée exponentielle
+        vers un palier puis décroissance).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 6 — Transfert de charge entre 2 condensateurs <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(C_1\) (charge initiale \(q_{1,0}\)) relié à \(t=0\) à \(C_2\) (déchargé) via \(R\).
+        \(\tau_1=RC_1,\ \tau_2=RC_2,\ \tau=\frac{\tau_1\tau_2}{\tau_1+\tau_2}\).</p>
+        <p class="q">1) Tensions initiales</p>
+        <p>\(u_1(0^+)=u_1(0^-)=\dfrac{q_{1,0}}{C_1}\) et \(u_2(0^+)=0\) (continuité des deux tensions).</p>
+        <p class="q">2) Équation différentielle sur \(i\)</p>
+        <p>Maille \(u_1-Ri-u_2=0\). On dérive pour faire apparaître les courants (\(i=-C_1\frac{du_1}{dt}=C_2\frac{du_2}{dt}\)) :
+        \(-\frac{i}{C_1}-R\frac{di}{dt}-\frac{i}{C_2}=0\), soit</p>
+        \[\frac{di}{dt}+\frac{i}{\tau}=0,\qquad \frac{1}{\tau}=\frac{1}{RC_1}+\frac{1}{RC_2}.\]
+        <p>\(i(t)=Ke^{-t/\tau}\) avec \(i(0^+)=\dfrac{u_1(0^+)}{R}=\dfrac{q_{1,0}}{\tau_1}\), d'où
+        \(i(t)=\dfrac{q_{1,0}}{\tau_1}e^{-t/\tau}\).</p>
+        <p class="q">3) Charges \(q_1(t),q_2(t)\) et conservation</p>
+        <p>\(q_1=-\int i\,dt=q_{1,0}-q_{1,0}\dfrac{\tau}{\tau_1}(1-e^{-t/\tau})\) ;
+        \(q_2=\int i\,dt=q_{1,0}\dfrac{\tau}{\tau_1}(1-e^{-t/\tau})\). Somme \(q_1+q_2=q_{1,0}\) : charge conservée ✔</p>
+        <p class="q">4) Valeurs finales</p>
+        <p>\(q_{1\infty}=q_{1,0}\big(1-\frac{\tau}{\tau_1}\big)=q_{1,0}\frac{C_1}{C_1+C_2}\) ;
+        \(q_{2\infty}=q_{1,0}\frac{\tau}{\tau_1}=q_{1,0}\frac{C_2}{C_1+C_2}\) (partage selon les capacités).</p>
+        <p class="q">5) Énergie dissipée par effet Joule</p>
+        \[E=\int_0^\infty Ri^2 dt=R\Big(\frac{q_{1,0}}{\tau_1}\Big)^2\frac{\tau}{2}=\frac12 R\frac{q_{1,0}^2}{\tau_1^2}\tau\]
+        <div class="res">\(i=\frac{q_{1,0}}{\tau_1}e^{-t/\tau}\) ; les charges se répartissent \(\propto\) aux capacités ;
+        une partie de l'énergie initiale est <b>toujours</b> dissipée dans \(R\) (pertes incompressibles du transfert).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 7 — Réponse en courant d'un circuit RL <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Générateur réel de courant \((I,r)\) branché à \(t=0\) sur \(R\) + bobine \(L\) en série.</p>
+        <p class="q">1) Valeur initiale</p>
+        <p>Aucun courant, aucun stockage avant fermeture : \(i(0^+)=i(0^-)=0\).</p>
+        <p class="q">2) Équation différentielle</p>
+        <p>Courant \(i'\) dans \(r\), nœud \(I=i+i'\), maille \(-u_L-u_R+u_r=0\), \(u_L=L\frac{di}{dt}\) :
+        \(-L\frac{di}{dt}-Ri+r(I-i)=0\), soit</p>
+        \[\frac{di}{dt}+\frac{i}{\tau}=\frac{r}{R+r}\frac{I}{\tau},\qquad \tau=\frac{L}{R+r}.\]
+        <p>Solution : \(i(t)=\dfrac{r}{R+r}I\,(1-e^{-t/\tau})\).</p>
+        <p class="q">3) Régime permanent</p>
+        <p>\(i_\infty=\dfrac{r}{R+r}I\) (diviseur de courant entre \(r\) et \(R\)). Courbe : montée exponentielle de 0 à \(i_\infty\).</p>
+        <p class="q">4) Comportement de la bobine</p>
+        <div class="res">En RP \(u_L=L\frac{di_\infty}{dt}=0\) : la bobine se comporte comme un <b>fil</b>, le circuit se réduit
+        à \(r\) et \(R\) en parallèle.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 8 — RL : visualisation à l'oscilloscope <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Générateur idéal \(E\), bobine (tension \(s\)) en parallèle avec \(R/2\), le tout après une
+        résistance \(R\). Intensités nulles pour \(t<0\), \(K\) fermé à \(t=0\).</p>
+        <p class="q">1) \(s(0^+)\)</p>
+        <p>\(i_L(0^+)=0\) (continuité), donc \(i_R(0^+)=i_{R/2}(0^+)\). Maille \(E-Ri_R-\frac{R}{2}i_{R/2}=0\) donne
+        \(i_R(0^+)=\dfrac{2}{3}\dfrac{E}{R}\), puis \(s(0^+)=E-Ri_R(0^+)=\dfrac{E}{3}\).</p>
+        <p class="q">2) Comportement asymptotique</p>
+        <p>En RP la bobine = fil, tension nulle à ses bornes : \(s_\infty=0\).</p>
+        <p class="q">3) Équation différentielle et \(\tau\)</p>
+        <p>Avec \(s=L\frac{di_L}{dt}\) et \(s=\frac{R}{2}i_{R/2}\), la maille combinée donne \(E-Ri_L-3s=0\) ; on dérive :
+        \(\dfrac{ds}{dt}+\dfrac{s}{\tau}=0\) avec \(\tau=\dfrac{3L}{R}\). Solution \(s(t)=\dfrac{E}{3}e^{-t/\tau}\).</p>
+        <p class="q">4) Détermination de \(L\)</p>
+        <p>\(s(t_0)=\dfrac{s(0^+)}{10}\Rightarrow t_0=\tau\ln 10\). Donc
+        \(L=\dfrac{Rt_0}{3\ln 10}\). A.N. \(R=1{,}0\)&nbsp;kΩ, \(t_0=3{,}0\ \mu\text{s}\) :
+        \(L=\dfrac{1000\times3{,}0\cdot10^{-6}}{3\ln 10}\approx434\ \mu\text{H}\).</p>
+        <p class="q">5) Fréquence du signal en créneaux</p>
+        <div class="res">Pour observer \(t_0\), chaque créneau doit durer au moins \(t_0\) ; période minimale \(2t_0\), soit
+        \(f=\dfrac{1}{2t_0}\approx1{,}7\cdot10^{5}\)&nbsp;Hz (\(\sim167\)&nbsp;kHz).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 9 — Étincelle de rupture (C3) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Bobine \((L=40\)&nbsp;mH, \(r=10\ \Omega)\), \(E=15\)&nbsp;V, \(K\) fermé depuis longtemps ;
+        \(R\) (résistance de l'air) en parallèle sur \(K\), n'intervient qu'à l'ouverture. \(u\) = tension aux bornes de \(K\).</p>
+        <p class="q">1) Intensité initiale</p>
+        <p>RP établi, bobine = fil : \(i_0=\dfrac{E}{r}=\dfrac{15}{10}=1{,}5\)&nbsp;A.</p>
+        <p class="q">2) Loi \(i(t)\) après ouverture (\(t=0\))</p>
+        <p>\(i(0^+)=i_0\) (continuité). Maille \(E-Ri-L\frac{di}{dt}-ri=0\) :
+        \(\dfrac{di}{dt}+\dfrac{i}{\tau}=\dfrac{E}{L}\) avec \(\tau=\dfrac{L}{R+r}\). Solution :</p>
+        \[i(t)=\frac{E}{R+r}\Big(1+\frac{R}{r}e^{-t/\tau}\Big).\]
+        <p>Si \(R\gg r\) : \(i(t)\approx\dfrac{E}{R}+\dfrac{E}{r}e^{-t/\tau}\), l'intensité tend vers une valeur faible
+        devant \(i_0\).</p>
+        <p class="q">3) Tension \(u(t)\) aux bornes de \(K\)</p>
+        <p>Loi d'Ohm sur \(R\) : \(u(t)=\dfrac{R}{R+r}E\Big(1+\dfrac{R}{r}e^{-t/\tau}\Big)\), d'où
+        \(u(0^+)=\dfrac{R}{r}E\) et \(u_\infty=\dfrac{R}{R+r}E\). Quand \(R\to\infty\) : \(u(0^+)\to\infty\) et
+        \(u_\infty\to E\). A.N. \(R=30\)&nbsp;kΩ : \(u(0^+)=45\)&nbsp;kV, \(u_\infty\approx15\)&nbsp;V.</p>
+        <div class="warnbox">L'ouverture crée une <b>surtension gigantesque</b> (\(u(0^+)\gg E\)) qui peut dépasser la
+        tension de claquage de l'air : formation d'un <b>arc électrique</b> (étincelle) aux bornes de l'interrupteur.</div>
+      </div>
+    </div>
+
+    <h3>Partie C — Circuits du second ordre</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 10 — Réponse en tension d'un circuit RLC <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(C\) déchargé, courants nuls avant \(t=0\), \(\tau=2RC\). Tension \(u\) aux bornes du
+        parallèle \(R\|L\).</p>
+        <p class="q">1) Conditions initiales</p>
+        <p>\(u_c(0^+)=0\Rightarrow u(0^+)=E\) (maille \(E-u_c-u=0\)). Courant bobine nul : \(i_L(0^+)=0\), nœud
+        \(i_c(0^+)=i_R(0^+)\) avec \(i_c=-C\frac{du}{dt}\) et \(i_R=\frac{u}{R}\) :</p>
+        \[u(0^+)=E,\qquad \Big(\frac{du}{dt}\Big)_{0^+}=-\frac{E}{RC}.\]
+        <p class="q">2) Équation différentielle canonique</p>
+        <p>En dérivant le nœud et en combinant les caractéristiques :
+        \(\dfrac{d^2u}{dt^2}+\dfrac{1}{RC}\dfrac{du}{dt}+\dfrac{u}{LC}=0\), soit</p>
+        \[\frac{d^2u}{dt^2}+\frac{\omega_0}{Q}\frac{du}{dt}+\omega_0^2 u=0,\quad
+        \omega_0=\frac{1}{\sqrt{LC}},\quad Q=R\sqrt{\frac{C}{L}}.\]
+        <p class="q">3) Solution (régime pseudo-périodique, \(\omega_0>\frac1\tau\Leftrightarrow Q>\frac12\))</p>
+        <p>\(u=e^{-t/\tau}(A\cos\Omega t+B\sin\Omega t)\), \(\Omega=\omega_0\sqrt{1-\frac{1}{4Q^2}}\). CI :
+        \(A=E\), \(\Omega B-\frac{A}{\tau}=-\frac{E}{RC}\Rightarrow B=-\frac{E}{\Omega\tau}\). D'où :</p>
+        <div class="res">\(u(t)=E\,e^{-t/\tau}\Big(\cos\Omega t-\dfrac{1}{\Omega\tau}\sin\Omega t\Big)\) : oscillation amortie
+        partant de \(E\) et tendant vers 0.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 11 — Réponse en courant d'un circuit RLC <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(C\) déchargé, courants nuls avant \(t=0\), \(\tau_1=2RC,\ \tau_2=\frac{2L}{R}\). \(i\) = courant de
+        la bobine.</p>
+        <p class="q">1) Conditions initiales</p>
+        <p>\(i(0^+)=0\) (bobine). Petite maille \(E-u_L(0^+)-u_c(0^+)=0\) avec \(u_c(0^+)=0\) donne
+        \(u_L(0^+)=L\big(\frac{di}{dt}\big)_{0^+}=E\), soit \(\big(\frac{di}{dt}\big)_{0^+}=\dfrac{E}{L}\).</p>
+        <p class="q">2) Équation différentielle canonique</p>
+        <p>Second ordre. En dérivant la maille et via \(u_L=L\frac{di}{dt}\), \(i_c=C\frac{du_c}{dt}\),
+        \(i=i_c+i_R\), \(i_R=\frac{E-u_L}{R}\) :</p>
+        \[\frac{d^2i}{dt^2}+\frac{1}{RC}\frac{di}{dt}+\frac{i}{LC}=\frac{E}{RLC}\Rightarrow
+        \frac{d^2i}{dt^2}+\frac{\omega_0}{Q}\frac{di}{dt}+\omega_0^2 i=\omega_0^2\frac{E}{R},\]
+        <p>avec \(\omega_0=\frac{1}{\sqrt{LC}}\), \(Q=\omega_0 RC=R\sqrt{\frac{C}{L}}\).</p>
+        <p class="q">3) Solution et maximum</p>
+        <p>Régime pseudo-périodique (\(Q>\frac12\)) : \(i=e^{-t/\tau_1}(A\cos\Omega t+B\sin\Omega t)+\frac{E}{R}\).
+        CI : \(A=\frac{E}{R}\), \(\Omega B-\frac{A}{\tau_1}=\frac{E}{L}\Rightarrow B=\frac{E}{L\Omega}+\frac{E}{R\tau_1\Omega}\). D'où :</p>
+        \[i(t)=\frac{E}{R}\left[1+e^{-t/\tau_1}\Big(\cos\Omega t+\frac{1}{\Omega}\Big(\frac{2}{\tau_2}+\frac{1}{\tau_1}\Big)\sin\Omega t\Big)\right]\]
+        <p>Maximum : \(\frac{di}{dt}=0\) donne \(\tan(\Omega t_m)=\dfrac{\Omega B-A/\tau_1}{B/\tau_1+A\Omega}\), soit</p>
+        <div class="res">\(t_m=\dfrac{1}{\Omega}\arctan\!\Big(\dfrac{2\tau_1\Omega}{2+\frac{\tau_2}{\tau_1}+\tau_1\tau_2\Omega^2}\Big)\).
+        \(i(t)\) part de 0, oscille de façon amortie et tend vers \(\frac{E}{R}\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 12 — Facteur de qualité et décrément logarithmique <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">RLC série (\(L\) sans résistance), \(u_c(0^-)=u_0\), aucun courant initial, \(\tau=\frac{2L}{R}\),
+        \(\omega_0=\frac{1}{\sqrt{LC}}\), \(\omega_0\tau\gg1\).</p>
+        <p class="q">1) Conditions initiales</p>
+        <p>\(u_c(0^+)=u_0\) (continuité) ; \(i(0^+)=0\) (bobine) \(\Rightarrow \big(\frac{du_c}{dt}\big)_{0^+}=\frac{i(0^+)}{C}=0\).</p>
+        <p class="q">2) Équation différentielle et résolution</p>
+        <p>Maille \(E-Ri-L\frac{di}{dt}-u_c=0\) avec \(i=C\frac{du_c}{dt}\) :</p>
+        \[\frac{d^2u_c}{dt^2}+\frac{\omega_0}{Q}\frac{du_c}{dt}+\omega_0^2 u_c=\omega_0^2 E,\quad
+        \omega_0=\frac{1}{\sqrt{LC}},\quad Q=\frac{1}{R}\sqrt{\frac{L}{C}}.\]
+        <p>\(\omega_0\tau\gg1\Leftrightarrow Q\gg\frac12\) : pseudo-périodique très peu amorti, \(\Omega\approx\omega_0\).
+        CI : \(A=u_0-E\), \(B=\frac{u_0-E}{\Omega\tau}\), d'où
+        \(u_c(t)=E+(u_0-E)e^{-t/\tau}\big(\cos\Omega t+\frac{1}{\Omega\tau}\sin\Omega t\big)\).</p>
+        <p class="q">3) Représentation</p>
+        <p>Oscillations lentement amorties autour de la valeur finale \(E\) (l'amplitude décroît en \(e^{-t/\tau}\)).</p>
+        <p class="q">4) Décrément logarithmique</p>
+        <p>Avec \(U=u_c-E\) et \(\Omega T=2\pi\) (sinus/cosinus \(2\pi\)-périodiques) :</p>
+        \[\Lambda=\frac1n\ln\frac{U(t)}{U(t+nT)}=\frac1n\ln\big(e^{nT/\tau}\big)=\frac{T}{\tau}.\]
+        <p>Si \(\tau\) augmente (amortissement plus lent), \(\Lambda\) diminue.</p>
+        <p class="q">5) Lien avec \(Q\)</p>
+        <p>\(\tau=\frac{2Q}{\omega_0}\), \(T=\frac{2\pi}{\Omega}\) : \(\Lambda=\dfrac{\pi}{Q\sqrt{1-\frac{1}{4Q^2}}}\), inversé
+        en \(Q=\sqrt{\big(\frac{\pi}{\Lambda}\big)^2+\frac14}\). Pour \(Q\gg\frac12\) :</p>
+        <div class="res">\(Q\approx\dfrac{\pi}{\Lambda}\) : on estime le facteur de qualité d'un oscillateur faiblement amorti
+        rien qu'en mesurant son décrément logarithmique.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 13 — Décharge dans un circuit LC oscillant <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(C_1\) (charge \(q_0\)) relié à \(t=0\) à \(L\) + \(C_2\) (déchargé) en série, aucune résistance,
+        aucun courant initial. Puis cas \(C_1=C_2=C\).</p>
+        <p class="q">1) Équation différentielle sur \(i\)</p>
+        <p>Maille \(u_1-u_L-u_2=0\), \(u_L=L\frac{di}{dt}\), \(i=C_2\frac{du_2}{dt}=-C_1\frac{du_1}{dt}\). On dérive :</p>
+        \[\frac{d^2i}{dt^2}+\omega_0^2 i=0,\quad \omega_0^2=\frac{C_1+C_2}{LC_1C_2}=\frac{1}{LC_{eq}},\ C_{eq}=\frac{C_1C_2}{C_1+C_2}.\]
+        <p>Oscillateur harmonique non amorti.</p>
+        <p class="q">2) \(i(t)\) pour \(C_1=C_2=C\) (\(\omega_0^2=\frac{2}{LC}\))</p>
+        <p>CI : \(i(0)=0\) ; maille à \(0^+\) : \(u_1(0^+)=\frac{q_0}{C}\), \(u_2(0^+)=0\) donne
+        \(\big(\frac{di}{dt}\big)_{0^+}=\frac{q_0}{LC}=\frac{q_0\omega_0^2}{2}\). Donc \(A=0\), \(B=\frac{q_0\omega_0}{2}\) :</p>
+        <p>\(i(t)=\dfrac{q_0\omega_0}{2}\sin(\omega_0 t)\) (le courant change périodiquement de sens : les condensateurs
+        s'échangent leurs charges).</p>
+        <p class="q">3) Tensions \(u_1,u_2\)</p>
+        <p>\(u_1=-\frac1C\int i\,dt=\dfrac{q_0}{2C}(1+\cos\omega_0 t)\) ; \(u_2=\frac1C\int i\,dt=\dfrac{q_0}{2C}(1-\cos\omega_0 t)\).</p>
+        <p class="q">4) Bilan énergétique</p>
+        <p>\(E_{c1}=\frac{q_0^2}{8C}(1+\cos\omega_0 t)^2\), \(E_{c2}=\frac{q_0^2}{8C}(1-\cos\omega_0 t)^2\),
+        \(E_L=\frac{q_0^2}{4C}\sin^2\omega_0 t\). Somme :</p>
+        <div class="res">\(E_{tot}=\dfrac{q_0^2}{2C}=\)&nbsp;cste : l'énergie oscille entre les dipôles mais reste constante
+        (aucune résistance, donc aucune dissipation).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 14 — Décharge dans un circuit RLC série <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Condensateur A-B chargé (\(Q_0\)), condensateur D-E déchargé, \(R\), \(L\). \(K\) fermé à \(t=0\),
+        courant initial nul. \(\omega_0^2=\frac{2}{LC}\), \(2\lambda=\frac{R}{L}\). \(u\) = tension du 1er condensateur.</p>
+        <p class="q">1) Équation différentielle</p>
+        <p>Maille \(u-u_R-u_L-u_c=0\) ; 1er condensateur générateur \(i=-C\frac{du}{dt}\), 2ⁿᵈ récepteur
+        \(i=C\frac{du_c}{dt}\), d'où \(u_c=-u+K\) avec \(u(0)=\frac{Q_0}{C},\ u_c(0)=0\Rightarrow K=\frac{Q_0}{C}\).
+        En remplaçant :</p>
+        \[\frac{d^2u}{dt^2}+\frac{\omega_0}{Q}\frac{du}{dt}+\omega_0^2 u=\omega_0^2\frac{Q_0}{2C},\quad
+        \omega_0^2=\frac{2}{LC},\ Q=\frac1R\sqrt{\frac{2L}{C}}.\]
+        <p class="q">2) Solution pour \(\lambda<\omega_0\) (pseudo-périodique, \(Q>\frac12\))</p>
+        <p>\(i(0^+)=-C\big(\frac{du}{dt}\big)_{0^+}=0\Rightarrow\big(\frac{du}{dt}\big)_{0^+}=0\). CI :
+        \(A=\frac{Q_0}{2C}\), \(B=\frac{Q_0}{2C}\frac{1}{\Omega\tau}\), d'où</p>
+        \[u(t)=\frac{Q_0}{2C}\left(1+e^{-t/\tau}\Big(\cos\Omega t+\frac{1}{\Omega\tau}\sin\Omega t\Big)\right),\
+        u_c(t)=\frac{Q_0}{2C}\left(1-e^{-t/\tau}\Big(\cos\Omega t+\frac{1}{\Omega\tau}\sin\Omega t\Big)\right).\]
+        <p>Courant : \(i=C\frac{du_c}{dt}=\dfrac{Q_0}{2C}\Big(\frac{1}{\Omega\tau}+\Omega\tau\Big)e^{-t/\tau}\sin\Omega t\).</p>
+        <div class="res">Les deux condensateurs tendent vers la même tension finale \(\frac{Q_0}{2C}\) (partage égal des
+        charges) ; le courant oscille amorti, changeant de sens à chaque va-et-vient des charges.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 15 — Oscillateur de Wien en régime libre <span class="diff">♦♦♦</span> <span class="st wip" style="font-size:.7em">résolu ici (hors corrigé officiel)</span></div>
+      <div class="exo-body">
+        <p class="enonce">Cellule de Wien : branche série \((R,C)\) et branche parallèle \((R',C')\). À \(t=0\) on ferme \(K\) ;
+        \(C\) chargé (\(u(0^+)=u_0>0\)), \(C'\) déchargé. \(v(t)\) = tension de sortie (aux bornes de \(R'\|C'\)).
+        Cas \(R=R',\ C=C',\ \tau=2RC\).</p>
+        <div class="note" style="margin:.3rem 0">Le corrigé officiel s'arrête à l'énoncé. On applique la méthode du
+        cours (2ⁿᵈ ordre). Notations : \(u\) = tension aux bornes de la branche série \((R,C)\), \(v\) = sortie.</div>
+        <p class="q">1) Équation différentielle sur \(v(t)\)</p>
+        <p>Loi des nœuds : le courant de la branche d'entrée \(i=C\frac{du}{dt}\) (aussi \(=\frac{u}{R}+\dots\)) se partage
+        dans \(R'\) et \(C'\) : \(i=\dfrac{v}{R'}+C'\dfrac{dv}{dt}\). La maille de sortie relie \(u\) et \(v\) via la branche
+        série. En combinant les deux mailles et les caractéristiques (méthode identique aux ex. 5, 10, 11), puis avec
+        \(R=R'\), \(C=C'\), on aboutit à la forme canonique du second ordre :</p>
+        \[\frac{d^2v}{dt^2}+\frac{3}{RC}\frac{dv}{dt}+\frac{1}{R^2C^2}v=\frac{1}{RC}\frac{dv_e}{dt}\ \xrightarrow{\text{régime libre }(v_e=0)}\
+        \frac{d^2v}{dt^2}+\frac{3}{RC}\frac{dv}{dt}+\frac{1}{(RC)^2}v=0.\]
+        <p>On identifie \(\omega_0=\dfrac{1}{RC}\) et \(\dfrac{\omega_0}{Q}=\dfrac{3}{RC}\Rightarrow Q=\dfrac13\).</p>
+        <p class="q">2) Nature du régime et \(v(t)\)</p>
+        <p>\(Q=\frac13<\frac12\) : régime <b>apériodique</b> (pas d'oscillation). L'équation caractéristique
+        \(r^2+\frac{3}{RC}r+\frac{1}{(RC)^2}=0\) a pour discriminant \(\Delta=\frac{9-4}{(RC)^2}=\frac{5}{(RC)^2}>0\),
+        racines réelles</p>
+        \[r_\pm=\frac{-3\pm\sqrt5}{2RC}\quad(\text{avec }\tau=2RC:\ r_\pm=\frac{-3\pm\sqrt5}{\tau}).\]
+        <p>Solution \(v(t)=A\,e^{r_+ t}+B\,e^{r_- t}\). Conditions initiales : \(v(0^+)=0\) (\(C'\) déchargé, tension
+        continue) et, par la loi des nœuds/mailles à \(0^+\) avec \(u(0^+)=u_0\), la dérivée initiale
+        \(\big(\frac{dv}{dt}\big)_{0^+}=\dfrac{u_0}{RC}=\omega_0 u_0>0\). D'où \(A+B=0\) et \(A r_+ + B r_-=\omega_0 u_0\),
+        soit \(A=\dfrac{\omega_0 u_0}{r_+-r_-}=\dfrac{\omega_0 u_0\,RC}{\sqrt5}=\dfrac{u_0}{\sqrt5}\) et \(B=-A\) :</p>
+        \[v(t)=\frac{u_0}{\sqrt5}\Big(e^{r_+ t}-e^{r_- t}\Big),\qquad r_\pm=\frac{-3\pm\sqrt5}{2RC}.\]
+        <p class="q">3) Maximum et interprétation</p>
+        <p>\(\dfrac{dv}{dt}=0\Rightarrow A r_+ e^{r_+ t}=-Br_- e^{r_- t}=A r_- e^{r_- t}\), donc
+        \(e^{(r_+-r_-)t_m}=\dfrac{r_-}{r_+}\), d'où</p>
+        \[t_m=\frac{1}{r_+-r_-}\ln\frac{r_-}{r_+}=\frac{RC}{\sqrt5}\ln\frac{3+\sqrt5}{3-\sqrt5}.\]
+        <p>(Numériquement \(\frac{3+\sqrt5}{3-\sqrt5}\approx6{,}85\), donc \(t_m\approx\frac{RC}{\sqrt5}\times1{,}92\approx0{,}86\,RC\).)</p>
+        <div class="res">\(v(t)=\dfrac{u_0}{\sqrt5}\big(e^{r_+t}-e^{r_-t}\big)\), régime apériodique (\(Q=\frac13\)) : la sortie
+        part de 0, croît jusqu'à un maximum en \(t_m\approx0{,}86\,RC\), puis décroît vers \(v_\infty=0\) (en régime
+        permanent \(C\) et \(C'\) bloquent le courant continu, la sortie sur \(R'\) redevient nulle). L'oscillateur de
+        Wien en <b>régime libre</b> ne fait que relaxer ; il n'oscille de façon entretenue que rebouclé sur un
+        amplificateur (condition de Barkhausen), hors programme ici.</div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.5rem;border-left-color:var(--ok)">
+      <span class="lab" style="color:#065f46">✅ TD d'Électrocinétique (régime transitoire) — correction complète</span>
+      Les <b>15 exercices</b> sont intégralement corrigés : conditions initiales et régime permanent (ex. 1–3),
+      circuits du premier ordre — RC échelon/rampe, transfert de charge, RL, étincelle de rupture (ex. 4–9),
+      circuits du second ordre — RLC en tension/courant, décrément logarithmique, LC oscillant, RLC décharge et
+      oscillateur de Wien (ex. 10–15). Résultats-clés : continuité de \(u_c\) et de \(i_L\), \(\tau=RC\) ou \(L/R\)
+      au 1er ordre, \(\omega_0=\frac{1}{\sqrt{LC}}\) et \(Q\) au 2ⁿᵈ ordre, régimes selon \(Q\lessgtr\frac12\).
+    </div>
+    <!-- TD_ELEC_TRANS_ANCHOR -->
+  </section>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours / ressource</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/electro-transitoire/Cours_Elec_R%C3%A9gime_transitoire.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Cours_Elec_Régime_transitoire</span><span class="badge">Cours / ressource</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/electro-transitoire/TD_Elec_R%C3%A9gime_transitoire.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD_Elec_Régime_transitoire</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/electro-transitoire/TD%20Elec%201%20-%20Regime%20transitoire%20-%20circuits%20ordre%201%20-%20VG%20-%20etu.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD Elec 1 - Regime transitoire - circuits ordre 1 - VG - etu</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Corrigé</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/electro-transitoire/TD_Elec_R%C3%A9gime_transitoire_corrig%C3%A9.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD_Elec_Régime_transitoire_corrigé</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/electro-transitoire/eval_cours_elec_transitoire_corrig%C3%A9.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">eval_cours_elec_transitoire_corrigé</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/electro-transitoire/TP4_elec_RL_RC_correction.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TP4_elec_RL_RC_correction</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/electro-transitoire/TD%20Elec%201%20-%20Regime%20transitoire%20-%20circuits%20ordre%201%20-%20VG%20-%20corrections.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD Elec 1 - Regime transitoire - circuits ordre 1 - VG - corrections</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/electro-transitoire/TD%20Elec%201%20-%20Regime%20transitoire%20-%20circuits%20ordre%201%20-%20VG%20-%20prof.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD Elec 1 - Regime transitoire - circuits ordre 1 - VG - prof</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TP</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/electro-transitoire/TP4_elec_RL_RC.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TP4_elec_RL_RC</span><span class="badge">TP</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/electro-transitoire/TP5_elec_RLC.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TP5_elec_RLC</span><span class="badge">TP</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/electro-transitoire/TP2_elec.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TP2_elec</span><span class="badge">TP</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/electro-transitoire/TP2bis_elec.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TP2bis_elec</span><span class="badge">TP</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/electro-transitoire/TP3_elec.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TP3_elec</span><span class="badge">TP</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Évaluation</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/electro-transitoire/eval_cours_elec_transitoire.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">eval_cours_elec_transitoire</span><span class="badge">Évaluation</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

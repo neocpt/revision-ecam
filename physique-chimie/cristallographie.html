@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chimie — Cristallographie — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' }, svg: { fontCache: 'global' } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-phys">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Chimie · Cristallographie</span>
+  <h1 class="title">Cristallographie</h1>
+  <p class="lead">La matière solide ordonnée : <b>réseau, maille et motif</b>, comptage des atomes par maille et
+  <b>compacité</b>, <b>masse volumique</b> théorique. Les trois grandes structures métalliques (<b>cubique simple,
+  cubique centré, cubique faces centrées</b>) et l'empilement compact (cfc / hexagonale compacte). Les <b>sites
+  interstitiels</b> (tétraédriques, octaédriques) et leur dimension, enfin les <b>composés ioniques</b>
+  (CsCl, NaCl, blende ZnS, fluorine CaF₂) et les alliages.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD (15 exercices)</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ============================ COURS ============================ -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+    <div class="note"><span class="lab">Constantes &amp; unités</span>
+    \(N_A=6{,}022\cdot10^{23}\)&nbsp;mol⁻¹ ; \(1\ \text{Å}=10^{-10}\)&nbsp;m \(=10^{-1}\)&nbsp;nm \(=100\)&nbsp;pm ;
+    \(1\ \text{Å}^3=10^{-24}\)&nbsp;cm³ ; \(1\ \text{nm}^3=10^{-21}\)&nbsp;cm³. Les rayons atomiques/ioniques sont
+    de l'ordre de \(10^{2}\)&nbsp;pm \(\approx1\)&nbsp;Å.</div>
+
+    <h3>1.1 Réseau, maille, motif</h3>
+    <div class="def"><span class="lab">Vocabulaire</span>
+    Un <b>cristal</b> est un empilement périodique tridimensionnel d'un motif. Le <b>réseau</b> est l'ensemble
+    (abstrait) des <b>nœuds</b>, points équivalents obtenus par translation. Le <b>motif</b> est l'entité chimique
+    (atome, ion, molécule) placée sur chaque nœud. La <b>maille</b> est le plus petit parallélépipède qui, répété
+    par translation selon \(\vec a,\vec b,\vec c\), reconstruit tout le cristal. Une maille est <b>toujours</b> un
+    parallélépipède (défini par 3 vecteurs non coplanaires) — jamais un hexagone ou un autre volume.</div>
+    <p>Une maille est décrite par <b>6 paramètres</b> : trois longueurs \(a,b,c\) (les arêtes) et trois angles
+    \(\alpha\) (entre \(\vec b,\vec c\)), \(\beta\) (entre \(\vec a,\vec c\)), \(\gamma\) (entre \(\vec a,\vec b\)).
+    Ces valeurs définissent les <b>7 systèmes cristallins</b>. Le plus symétrique est le système <b>cubique</b> :
+    \(a=b=c\) et \(\alpha=\beta=\gamma=90°\).</p>
+
+    <div class="thm"><span class="lab">Volume d'une maille quelconque</span>
+    \[V=abc\sqrt{1-\cos^2\alpha-\cos^2\beta-\cos^2\gamma+2\cos\alpha\cos\beta\cos\gamma}\]
+    Cas <b>cubique</b> (\(\alpha=\beta=\gamma=90°\)) : \(\boxed{V=a^3}\). Cas <b>hexagonal</b> / prisme droit à base
+    losange (\(a=b\), \(\alpha=\beta=90°\), \(\gamma=120°\)) : \(\boxed{V=\dfrac{a^2c\sqrt3}{2}}\) — c'est l'aire du
+    losange (deux triangles équilatéraux, \(A=\frac{a^2\sqrt3}{2}\)) multipliée par la hauteur \(c\).</div>
+
+    <h3>1.2 Diagonales du cube (à connaître par cœur)</h3>
+    <div class="note"><span class="lab">Pythagore</span>
+    Pour un cube d'arête \(a\) : <b>diagonale d'une face</b> \(d_1=\sqrt{a^2+a^2}=a\sqrt2\) ; <b>grande diagonale</b>
+    (entre les deux sommets opposés) \(d_2=\sqrt{(a\sqrt2)^2+a^2}=a\sqrt3\). Ces deux résultats servent en
+    permanence pour trouver où se touchent les atomes.</div>
+
+    <h3>1.3 Nombre d'atomes par maille (multiplicité \(Z\))</h3>
+    <div class="method"><span class="lab">Règles de comptage</span>
+    Un atome n'appartient à une maille qu'à hauteur de la fraction de son volume située à l'intérieur :
+    <ul style="margin:.3rem 0">
+      <li>atome sur un <b>sommet</b> : partagé entre 8 mailles \(\Rightarrow\ \tfrac18\) ;</li>
+      <li>atome sur une <b>arête</b> : partagé entre 4 mailles \(\Rightarrow\ \tfrac14\) ;</li>
+      <li>atome sur une <b>face</b> : partagé entre 2 mailles \(\Rightarrow\ \tfrac12\) ;</li>
+      <li>atome au <b>centre</b> (ou pleinement intérieur) : \(1\).</li>
+    </ul></div>
+    <div class="overflow">
+    <table>
+      <tr><th>Structure cubique</th><th>Positions occupées</th><th>Compte</th><th>\(Z\) (atomes/maille)</th></tr>
+      <tr><td><b>Cubique simple</b> (cs / P)</td><td>8 sommets</td><td>\(8\times\frac18\)</td><td>\(1\)</td></tr>
+      <tr><td><b>Cubique centré</b> (cc / I)</td><td>8 sommets + 1 centre</td><td>\(8\times\frac18+1\)</td><td>\(2\)</td></tr>
+      <tr><td><b>Cubique faces centrées</b> (cfc / F)</td><td>8 sommets + 6 faces</td><td>\(8\times\frac18+6\times\frac12\)</td><td>\(4\)</td></tr>
+    </table>
+    </div>
+    <div class="note"><span class="lab">Astuce cfc</span> Dans une structure <b>cfc</b>, tout élément géométrique
+    ou atomique (atomes, sites…) est <b>multiple de 4</b>. Un décompte cfc qui ne tombe pas sur un multiple de 4
+    contient une erreur.</div>
+
+    <h3>1.4 Compacité (taux d'occupation)</h3>
+    <div class="def"><span class="lab">Définition</span>
+    La <b>compacité</b> \(C\) est la fraction du volume de la maille réellement occupée par les atomes, assimilés à
+    des sphères dures :
+    \[C=\frac{Z\cdot\frac43\pi R^3}{V_{\text{maille}}}\qquad(Z\text{ atomes de rayon }R).\]
+    C'est un nombre sans dimension, \(0<C<1\) souvent exprimé en %. Elle ne dépend <b>pas</b> de \(a\) (le rayon
+    est lié à \(a\) par la condition de contact), seulement du type de structure.</div>
+
+    <h3>1.5 Masse volumique théorique</h3>
+    <div class="thm"><span class="lab">Formule maîtresse</span>
+    \[\rho=\frac{m_{\text{maille}}}{V_{\text{maille}}}=\frac{Z\,M}{N_A\,V_{\text{maille}}}\]
+    \(Z\) = nombre de motifs (formules) par maille, \(M\) = masse molaire (g/mol), \(N_A\) le nombre d'Avogadro,
+    \(V\) le volume de la maille. <b>Attention aux unités</b> : pour obtenir des g/cm³, convertir \(V\) en cm³
+    (\(1\ \text{Å}^3=10^{-24}\)&nbsp;cm³). La <b>densité</b> (par rapport à l'eau) est numériquement égale à \(\rho\)
+    en g/cm³.</div>
+
+    <h3>1.6 Les structures métalliques</h3>
+    <p>Un métal est un empilement d'atomes identiques (sphères dures) cherchant la compacité maximale. Le point clé
+    est la <b>condition de contact</b> : selon quelle direction les atomes se touchent, ce qui fixe la relation
+    entre le rayon \(R\) et le paramètre \(a\).</p>
+    <div class="overflow">
+    <table>
+      <tr><th>Structure</th><th>Contact</th><th>Relation \(R\)–\(a\)</th><th>Coordinence</th><th>\(Z\)</th><th>Compacité</th></tr>
+      <tr><td>Cubique simple</td><td>sur l'<b>arête</b></td><td>\(a=2R\)</td><td>6</td><td>1</td><td>\(\frac{\pi}{6}=0{,}52\)</td></tr>
+      <tr><td>Cubique centré</td><td>sur la <b>grande diagonale</b></td><td>\(a\sqrt3=4R\)</td><td>8</td><td>2</td><td>\(\frac{\pi\sqrt3}{8}=0{,}68\)</td></tr>
+      <tr><td>Cubique faces centrées</td><td>sur la <b>diagonale de face</b></td><td>\(a\sqrt2=4R\)</td><td>12</td><td>4</td><td>\(\frac{\pi\sqrt2}{6}=0{,}74\)</td></tr>
+      <tr><td>Hexagonale compacte</td><td>plans compacts</td><td>\(a=2R\)</td><td>12</td><td>2</td><td>\(0{,}74\)</td></tr>
+    </table>
+    </div>
+    <div class="method"><span class="lab">Compacité cfc, dérivée</span>
+    Contact sur la diagonale de face : \(4R=a\sqrt2\Rightarrow R=\frac{a\sqrt2}{4}\). Alors
+    \[C=\frac{4\cdot\frac43\pi R^3}{a^3}=\frac{\frac{16}{3}\pi\left(\frac{a\sqrt2}{4}\right)^3}{a^3}
+    =\frac{16\pi}{3}\cdot\frac{2\sqrt2}{64}=\frac{2\pi\sqrt2}{12}=\frac{\pi\sqrt2}{6}\approx0{,}74.\]
+    C'est la <b>compacité maximale</b> d'un empilement de sphères identiques (théorème de Kepler).</div>
+
+    <h3>1.7 Empilements compacts : cfc vs hexagonale compacte</h3>
+    <div class="note"><span class="lab">ABC… ou AB…</span>
+    Les structures <b>cfc</b> et <b>hexagonale compacte (hc)</b> ont la même compacité (0,74) et la même coordinence
+    (12) : ce sont deux façons d'empiler des <b>plans compacts</b> identiques. La différence est la séquence :
+    <ul style="margin:.3rem 0">
+      <li><b>hc</b> : empilement <b>ABAB…</b> — le 3ᵉ plan est exactement au-dessus du 1ᵉʳ ;</li>
+      <li><b>cfc</b> : empilement <b>ABCABC…</b> — il faut aller au 4ᵉ plan pour retrouver la position du 1ᵉʳ ; les
+      plans compacts sont les plans perpendiculaires à la grande diagonale du cube.</li>
+    </ul>
+    Un boulet posé au-dessus d'un <b>autre boulet</b> deux plans plus bas ⇒ hc ; posé au-dessus d'un <b>creux</b> ⇒ cfc.</div>
+
+    <h3>1.8 Sites interstitiels</h3>
+    <div class="def"><span class="lab">Sites tétraédriques (T) et octaédriques (O)</span>
+    Entre les atomes d'un empilement subsistent des cavités (sites) où peuvent se loger de plus petits atomes/ions.
+    Un site <b>tétraédrique</b> est entouré de 4 atomes (coordinence 4) ; un site <b>octaédrique</b> de 6 atomes
+    (coordinence 6). Dans une maille <b>cfc</b> :
+    <ul style="margin:.3rem 0">
+      <li><b>8 sites tétraédriques</b> — un dans chacun des 8 « petits cubes » d'arête \(a/2\), tous entièrement
+      internes à la maille ;</li>
+      <li><b>4 sites octaédriques</b> — 1 au centre du cube + 12 au milieu des arêtes comptant \(\frac14\) chacun :
+      \(1+12\times\frac14=4\).</li>
+    </ul>
+    (Cohérent avec « tout est multiple de 4 » : 4 atomes, 8 sites T, 4 sites O.)</div>
+    <div class="thm"><span class="lab">Dimension d'un site (structure cfc, rayon atomique \(R\))</span>
+    Le rayon \(r\) de la plus grosse sphère logeable :
+    <ul style="margin:.3rem 0">
+      <li><b>Octaédrique</b> : contact le long de l'arête, \(a=2R+2r_O\), et comme \(4R=a\sqrt2\) :
+      \[r_O=a\Big(\tfrac12-\tfrac{\sqrt2}{4}\Big)=0{,}146\,a,\qquad \frac{r_O}{R}=\sqrt2-1\approx0{,}414.\]</li>
+      <li><b>Tétraédrique</b> : \(\dfrac{r_T}{R}=\sqrt{\tfrac32}-1\approx0{,}225\) (site plus petit que l'octaédrique).</li>
+    </ul>
+    Un ion « rentre » sans déformer la structure tant que son rayon \(\le r_{\text{site}}\).</div>
+
+    <h3>1.9 Composés ioniques</h3>
+    <p>Un cristal ionique est décrit comme un empilement (souvent cfc) d'un des ions, l'autre ion occupant tout ou
+    partie des sites. La <b>condition de contact</b> se fait alors <b>anion–cation</b>, ce qui relie \(a\) aux rayons
+    ioniques. La <b>stœchiométrie</b> impose la fraction de sites occupés.</p>
+    <div class="overflow">
+    <table>
+      <tr><th>Type</th><th>Description</th><th>Coordinence</th><th>Contact</th></tr>
+      <tr><td><b>CsCl</b></td><td>cs de Cl⁻ + Cs⁺ au centre du cube</td><td>8–8</td><td>grande diagonale \(a\sqrt3=2(R_++R_-)\)</td></tr>
+      <tr><td><b>NaCl</b></td><td>cfc de Cl⁻ + Na⁺ dans <b>tous</b> les sites O</td><td>6–6</td><td>arête \(a=2(R_++R_-)\)</td></tr>
+      <tr><td><b>Blende ZnS</b></td><td>cfc de S²⁻ + Zn²⁺ dans la <b>moitié</b> des sites T</td><td>4–4</td><td>¼ grande diag. \(d=\frac{a\sqrt3}{4}\)</td></tr>
+      <tr><td><b>Fluorine CaF₂</b></td><td>cfc de Ca²⁺ + F⁻ dans <b>tous</b> les sites T</td><td>8–4</td><td>¼ grande diag.</td></tr>
+    </table>
+    </div>
+    <div class="note"><span class="lab">Rayons : anion &gt; cation</span> À nombre d'électrons voisin, l'<b>anion</b>
+    (excès d'électrons, déficit de protons) est <b>plus gros</b> que le <b>cation</b> : les électrons y sont moins
+    retenus par le noyau. C'est pourquoi \(R_-\;(\text{Cl}^-,\text{Br}^-,\text F^-)>R_+\;(\text{K}^+,\text{Tl}^+…)\).</div>
+
+    <h3>1.10 Alliages : fractions massique et molaire</h3>
+    <div class="method"><span class="lab">Passer de l'un à l'autre</span>
+    <b>Fraction (pourcentage) massique</b> de l'élément \(i\) : \(w_i=\dfrac{m_i}{\sum m}=\dfrac{n_iM_i}{\sum n_jM_j}\).
+    <b>Fraction molaire</b> : \(x_i=\dfrac{n_i}{\sum n_j}=\dfrac{m_i/M_i}{\sum m_j/M_j}\). Pour convertir un %
+    massique en % molaire, on divise chaque masse par sa masse molaire, puis on normalise. Pour un composé défini
+    \(\text{A}_p\text{B}_q\), la fraction molaire d'A est simplement \(\dfrac{p}{p+q}\).</div>
+  </section>
+
+  <!-- ============================ EXOS CRÉÉS ============================ -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+    <p class="lead" style="font-size:.97rem">Trois exercices d'appropriation avant le TD : une structure cubique
+    centrée (compacité + ρ), un site interstitiel, un cristal ionique de type NaCl.</p>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice A — Le fer α (cubique centré) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Le fer α cristallise en cubique centré, paramètre \(a=287\)&nbsp;pm, \(M=55{,}8\)&nbsp;g/mol.
+        Déterminer : (1) le rayon atomique du fer, (2) la compacité, (3) la masse volumique théorique.</p>
+        <p class="q">Question 1 — Rayon atomique</p>
+        <p>En cubique centré, les atomes se touchent le long de la <b>grande diagonale</b> du cube, qui traverse
+        l'atome central : \(4R=a\sqrt3\). D'où
+        \[R=\frac{a\sqrt3}{4}=\frac{287\times1{,}732}{4}=124{,}3\ \text{pm}.\]</p>
+        <p class="q">Question 2 — Compacité</p>
+        <p>\(Z=2\) atomes par maille. \(V=a^3\), et \(R=\frac{a\sqrt3}{4}\) :
+        \[C=\frac{2\cdot\frac43\pi R^3}{a^3}=\frac{\frac83\pi\left(\frac{a\sqrt3}{4}\right)^3}{a^3}
+        =\frac{8\pi}{3}\cdot\frac{3\sqrt3}{64}=\frac{\pi\sqrt3}{8}=0{,}68.\]</p>
+        <p class="q">Question 3 — Masse volumique</p>
+        <p>\(V=a^3=(287\cdot10^{-10}\,\text{cm})^3=2{,}364\cdot10^{-23}\ \text{cm}^3\). Masse de 2 atomes :
+        \[\rho=\frac{Z\,M}{N_A\,V}=\frac{2\times55{,}8}{6{,}022\cdot10^{23}\times2{,}364\cdot10^{-23}}
+        =\frac{111{,}6}{14{,}24}=7{,}84\ \text{g/cm}^3.\]</p>
+        <div class="res">\(R\approx124\)&nbsp;pm, \(C=0{,}68\), \(\rho\approx7{,}84\)&nbsp;g/cm³ — en excellent accord
+        avec la valeur expérimentale du fer (\(\approx7{,}87\)&nbsp;g/cm³).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice B — Site octaédrique du cuivre cfc <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Le cuivre est cfc, \(a=361\)&nbsp;pm. Quel est le rayon du plus gros atome logeable dans un
+        site octaédrique ? Un atome d'hydrogène (\(R_H\approx37\)&nbsp;pm) peut-il y entrer sans déformer la maille ?</p>
+        <p class="q">Rayon du site octaédrique</p>
+        <p>Rayon du cuivre : \(R_{Cu}=\frac{a\sqrt2}{4}=\frac{361\times1{,}414}{4}=127{,}6\)&nbsp;pm. Le site
+        octaédrique (au milieu d'une arête) satisfait \(a=2R_{Cu}+2r_O\), soit
+        \[r_O=\frac{a-2R_{Cu}}{2}=\frac{361-2\times127{,}6}{2}=52{,}9\ \text{pm}\quad(=0{,}146\,a,\ r_O/R=0{,}414).\]</p>
+        <p class="q">Habitabilité par l'hydrogène</p>
+        <p>\(R_H\approx37\)&nbsp;pm \(<r_O=52{,}9\)&nbsp;pm : l'hydrogène rentre sans forcer.</p>
+        <div class="res">\(r_O\approx53\)&nbsp;pm. L'hydrogène (\(37\)&nbsp;pm) s'y insère librement — c'est le principe
+        des solutions solides d'insertion (hydrures métalliques).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice C — Structure NaCl et rayon ionique <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">NaCl cristallise dans le type « chlorure de sodium » : cfc de Cl⁻, Na⁺ dans tous les sites
+        octaédriques ; \(a=564\)&nbsp;pm, \(R_{Cl^-}=181\)&nbsp;pm. (1) Combien de motifs NaCl par maille ? (2) Rayon
+        de Na⁺ ? (3) Masse volumique (\(M_{NaCl}=58{,}5\)&nbsp;g/mol) ?</p>
+        <p class="q">Question 1 — Motifs par maille</p>
+        <p>Cl⁻ en cfc : \(4\) ions Cl⁻. Na⁺ dans les \(4\) sites octaédriques : \(4\) ions Na⁺. Donc
+        \(Z=4\) motifs NaCl par maille (multiple de 4 : cohérent).</p>
+        <p class="q">Question 2 — Rayon de Na⁺</p>
+        <p>Le contact anion–cation se fait le long de l'<b>arête</b> (Cl⁻–Na⁺–Cl⁻) : \(a=2R_{Cl^-}+2R_{Na^+}\), d'où
+        \[R_{Na^+}=\frac a2-R_{Cl^-}=\frac{564}{2}-181=101\ \text{pm}.\]</p>
+        <p class="q">Question 3 — Masse volumique</p>
+        <p>\(V=a^3=(564\cdot10^{-10})^3=1{,}794\cdot10^{-22}\ \text{cm}^3\).
+        \[\rho=\frac{4\times58{,}5}{6{,}022\cdot10^{23}\times1{,}794\cdot10^{-22}}=\frac{234}{108{,}0}=2{,}17\ \text{g/cm}^3.\]</p>
+        <div class="res">\(Z=4\), \(R_{Na^+}\approx101\)&nbsp;pm (valeur admise ≈ 102 pm), \(\rho\approx2{,}17\)&nbsp;g/cm³
+        (valeur réelle du sel : 2,16 g/cm³). On vérifie bien \(R_-\!>\!R_+\).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ TD ============================ -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD (15 exercices)</h2>
+    <p class="lead" style="font-size:.97rem">Source : <i>TD cristallographie — 2025/2026 — VG (exos JFLM)</i>,
+    corrigé officiel intégré. Les exercices « (Vesta) » reposent sur l'observation du logiciel : on reconstitue ici
+    le raisonnement et les calculs. Trois thèmes : <b>généralités</b> (1–3), <b>métaux</b> (4–11),
+    <b>composés ioniques</b> (12–15).</p>
+
+    <h3 style="margin-top:1.2rem">Généralités</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 1 — Longueur des diagonales d'un cube <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Exprimer, en fonction de l'arête \(a\), la longueur des deux types de diagonales d'un cube :
+        diagonale de face et grande diagonale.</p>
+        <p>Une diagonale de face ferme un triangle rectangle isocèle avec deux arêtes (angle droit entre l'arête et
+        la diagonale de face) :
+        \[d_1=\sqrt{a^2+a^2}=a\sqrt2.\]
+        La grande diagonale ferme un triangle rectangle avec une arête et une diagonale de face :
+        \[d_2=\sqrt{(a\sqrt2)^2+a^2}=\sqrt{2a^2+a^2}=a\sqrt3.\]</p>
+        <div class="res">\(d_{\text{face}}=a\sqrt2\) ; \(d_{\text{grande}}=a\sqrt3\). Résultats à connaître par cœur :
+        ils fixent les conditions de contact des structures cc (diagonale \(a\sqrt3\)) et cfc (diagonale de face \(a\sqrt2\)).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 2 — Volume d'un prisme droit à base losange <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Maille \(a=b=3\)&nbsp;Å, \(c=6\)&nbsp;Å, \(\alpha=\beta=90°\), \(\gamma=120°\). (1) Volume par
+        la géométrie élémentaire. (2) Vérification par la formule générale.</p>
+        <p class="q">Question 1 — Géométrie</p>
+        <p>Le volume d'un prisme droit = aire de la base × hauteur (ici \(c\)). La base est un losange de côté \(a\)
+        avec un angle de 120°, formé de <b>deux triangles équilatéraux</b> de côté \(a\). L'aire d'un triangle
+        équilatéral est \(\frac12\,h\,a\) avec la hauteur \(h=\frac{a\sqrt3}{2}\), donc l'aire du losange :
+        \[A_{\text{base}}=2\times\frac12\times\frac{a\sqrt3}{2}\times a=\frac{a^2\sqrt3}{2}.\]
+        \[V=A_{\text{base}}\cdot c=\frac{a^2c\sqrt3}{2}=\frac{3^2\times6\times\sqrt3}{2}=\frac{54\sqrt3}{2}=46{,}8\ \text{Å}^3.\]</p>
+        <p class="q">Question 2 — Formule générale</p>
+        <p>Avec \(\alpha=\beta=90°\Rightarrow\cos\alpha=\cos\beta=0\), \(\gamma=120°\Rightarrow\cos\gamma=-\frac12\) :
+        \[V=abc\sqrt{1-0-0-\left(-\tfrac12\right)^2+0}=a^2c\sqrt{1-\tfrac14}=a^2c\,\frac{\sqrt3}{2}.\]</p>
+        <div class="res">\(V=\dfrac{a^2c\sqrt3}{2}\approx46{,}8\)&nbsp;Å³. Les deux méthodes concordent : la « grande
+        formule » redonne bien le résultat géométrique. C'est le volume d'une maille hexagonale.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 3 — The cannonball problem <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Un empilement pyramidal de boulets de canon : est-ce une structure cubique faces centrées
+        (cfc) ou hexagonale compacte (hc) ? Couches numérotées 1 (sommet, un seul boulet) à 5.</p>
+        <p class="q">Question 1 — Différence des empilements</p>
+        <p>L'empilement <b>hc</b> est <b>ABAB…</b> : le plan n°3 se superpose parfaitement au plan n°1. L'empilement
+        <b>cfc</b> est <b>ABCABC…</b> : c'est le plan n°4 qui se superpose au plan n°1 (il faut trois plans distincts
+        avant de retrouver la position de départ).</p>
+        <p class="q">Question 2 — Couche 3 vue de dessus</p>
+        <p>La couche n°3 contient \(6\) boulets disposés en hexagone (un plan compact partiel de la pyramide).</p>
+        <p class="q">Question 3 — Position du boulet de la couche 1</p>
+        <p>Le boulet unique de la couche 1 se projette au <b>centre</b> de l'hexagone de la couche 3, c'est-à-dire
+        au-dessus d'un <b>creux</b> (trou) de la couche 3, et non au-dessus d'un boulet.</p>
+        <p class="q">Question 4 — Conclusion</p>
+        <p>Le plan 1 est décalé par rapport au plan 3 (au-dessus d'un trou) : la séquence est donc <b>ABCA</b>, soit
+        une structure <b>cubique faces centrées</b>.</p>
+        <div class="res">C'est une structure <b>cfc</b> (empilement ABC). Si le boulet du sommet avait été à l'aplomb
+        d'un boulet de la couche 3, on aurait eu ABA = hexagonale compacte.</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:1.4rem">Métaux</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 4 — (Vesta) Volume de maille et taux d'occupation (Ni hexagonal) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Nickel hexagonal (VESTA). (1) Volume de la maille (\(a=2{,}6222\)&nbsp;Å, \(c=4{,}321\)&nbsp;Å).
+        (2) Nombre d'atomes. (3) Rayon \(R_{Ni}=1{,}25\)&nbsp;Å (VESTA), compacité. (4) Pourquoi « hexagonale » ?</p>
+        <p class="q">Question 1 — Volume</p>
+        <p>Maille hexagonale : \(V=\dfrac{a^2c\sqrt3}{2}=\dfrac{(2{,}6222)^2\times4{,}321\times\sqrt3}{2}
+        =25{,}73\ \text{Å}^3\) (valeur VESTA).</p>
+        <p class="q">Question 2 — Nombre d'atomes</p>
+        <p>La maille contient <b>2 atomes</b> de nickel (structure hexagonale compacte, \(Z=2\)).</p>
+        <p class="q">Question 3 — Compacité</p>
+        <p>\[C=\frac{2\times\frac43\pi(1{,}25)^3}{25{,}73}=\frac{2\times8{,}18}{25{,}73}=0{,}636.\]</p>
+        <div class="warnbox"><span class="lab">Piège du rendu VESTA</span> Le dessin des atomes dans VESTA n'utilise
+        pas leur vrai rayon — la maille paraît peu remplie. La compacité se calcule, elle ne se « lit » pas à l'œil.
+        (Ici 0,636 &lt; 0,74 car le rapport \(c/a\) de cette variété n'est pas idéal.)</div>
+        <p class="q">Question 4 — « Hexagonale »</p>
+        <p>La maille elle-même est un prisme à base losange (un parallélépipède). Elle est dite « hexagonale » car
+        <b>3 mailles</b> juxtaposées s'inscrivent dans un <b>hexagone</b>. Attention : l'hexagone n'est <b>pas</b> la
+        maille — une maille est toujours le parallélépipède engendré par 3 vecteurs non coplanaires.</p>
+        <div class="res">\(V=25{,}73\)&nbsp;Å³, \(Z=2\), \(C=0{,}636\). Le mot « hexagonal » décrit la symétrie
+        d'ensemble, pas la forme de la maille.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 5 — (Vesta) Plans compacts <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Maille du nickel hexagonal, affichée 4×4×2 mailles. Combien de plans compacts ? Selon quelle
+        direction s'empilent-ils ?</p>
+        <p>En affichant 2 mailles selon \(\vec c\), on distingue <b>4 plans compacts</b> empilés suivant la direction
+        \(\vec c\) (l'axe vertical de l'hexagone). Ce sont les plans denses ABAB caractéristiques de l'empilement
+        hexagonal compact.</p>
+        <div class="res">4 plans compacts, empilés selon \(\vec c\). L'alternance AB (un plan sur deux identique)
+        confirme la structure hexagonale compacte.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 6 — (Vesta) Maille cubique faces centrées (Ni cfc) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Nickel cfc, \(a=3{,}516\)&nbsp;Å, \(M=58{,}69\)&nbsp;g/mol. (1) Volume. (2) Où sont les contacts,
+        rayon \(R_{Ni}\) ? (3) Compacité. (4) Masse volumique vs \(\rho_{exp}=8{,}9\)&nbsp;g/cm³. (5) Site au centre
+        d'une arête : géométrie, rayon ?</p>
+        <p class="q">Question 1 — Volume</p>
+        <p>\(V=a^3=(3{,}516)^3=43{,}47\ \text{Å}^3\).</p>
+        <p class="q">Question 2 — Contacts et rayon</p>
+        <p>Dans une maille cfc, les contacts entre atomes se font le long de la <b>diagonale d'une face</b>, de
+        longueur \(a\sqrt2=3{,}516\times1{,}414=4{,}972\)&nbsp;Å. Cette diagonale contient 4 rayons :
+        \[R_{Ni}=\frac{a\sqrt2}{4}=\frac{4{,}972}{4}=1{,}243\ \text{Å}\quad(\text{VESTA : }1{,}25\ \text{Å}).\]</p>
+        <p class="q">Question 3 — Compacité</p>
+        <p>Cas général cfc avec \(R=\frac{a\sqrt2}{4}\) et \(Z=4\) :
+        \[C=\frac{4\times\frac43\pi R^3}{a^3}=\frac{2\pi\sqrt2}{12}=0{,}74.\]
+        (Vérification numérique : \(4\times\frac43\pi(1{,}25)^3=32{,}72\)&nbsp;Å³, et \(32{,}72/43{,}47=0{,}75\).)</p>
+        <p class="q">Question 4 — Masse volumique</p>
+        <p>Masse de 4 atomes : \(m=\frac{4\times58{,}69}{6{,}022\cdot10^{23}}=3{,}90\cdot10^{-22}\)&nbsp;g. Volume en
+        cm³ : \(43{,}47\cdot10^{-24}\)&nbsp;cm³.
+        \[\rho=\frac{3{,}90\cdot10^{-22}}{43{,}47\cdot10^{-24}}=9{,}0\ \text{g/cm}^3.\]</p>
+        <div class="note"><span class="lab">Interprétation</span> \(\rho_{théo}\approx9{,}0\)&nbsp;g/cm³ vs
+        \(\rho_{exp}=8{,}9\)&nbsp;g/cm³ : accord à ~1 %. Le léger écart vient des défauts réels du cristal (lacunes,
+        joints de grains) qui abaissent la densité par rapport au cristal parfait.</div>
+        <p class="q">Question 5 — Site au centre d'une arête</p>
+        <p>Le centre d'une arête est un site <b>octaédrique</b> (entouré de 6 atomes). Son rayon vérifie
+        \(a=2R_{Ni}+2r_O\) :
+        \[r_O=\frac{a-2R_{Ni}}{2}=\frac{3{,}516-2\times1{,}25}{2}=0{,}508\ \text{Å}.\]</p>
+        <div class="res">\(V=43{,}47\)&nbsp;Å³, \(R_{Ni}\approx1{,}24\)&nbsp;Å, \(C=0{,}74\),
+        \(\rho\approx9{,}0\)&nbsp;g/cm³, site octaédrique \(r_O\approx0{,}51\)&nbsp;Å.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 7 — Polonium <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Polonium : \(a=b=c=0{,}3354\)&nbsp;nm, \(\alpha=\beta=\gamma=90°\), un atome à chaque sommet.
+        (1) Type de maille, compacité. (2) Rayon du site central en fonction de \(R_{Po}\). (3) Nom si ce site est
+        occupé. (4) Masse volumique (\(M=209\)&nbsp;g/mol).</p>
+        <p class="q">Question 1 — Type et compacité</p>
+        <p>Un atome à chaque sommet uniquement : <b>cubique simple</b> (\(Z=1\)). Le contact se fait sur l'<b>arête</b>
+        (atomes voisins alignés), donc \(a=2R\Rightarrow R=a/2\). Volume de la maille \(a^3=(2R)^3=8R^3\) :
+        \[C=\frac{\frac43\pi R^3}{8R^3}=\frac{\pi}{6}=0{,}52.\]</p>
+        <p class="q">Question 2 — Rayon du site central</p>
+        <p>Plaçons une sphère de rayon \(R_{site}\) au centre du cube. Elle touche les atomes des sommets le long de
+        la <b>grande diagonale</b>, de longueur \(a\sqrt3\) : \(2R_{Po}+2R_{site}=a\sqrt3\). Avec \(R_{Po}=a/2\) :
+        \[R_{site}=\frac{a\sqrt3-2\cdot\frac a2}{2}=\frac{a(\sqrt3-1)}{2}=0{,}366\,a.\]</p>
+        <p class="q">Question 3 — Nom si le site est occupé</p>
+        <p>Si le centre est occupé par un <b>atome de polonium identique</b>, la structure devient <b>cubique
+        centré</b>. S'il est occupé par un <b>autre</b> atome (élément différent), il reste un cubique simple avec un
+        atome étranger en insertion (structure de type CsCl).</p>
+        <p class="q">Question 4 — Masse volumique</p>
+        <p>1 atome par maille de volume \(V=(0{,}3354\ \text{nm})^3=0{,}0377\ \text{nm}^3=0{,}0377\cdot10^{-21}\)&nbsp;cm³.
+        Masse d'un atome : \(m=\frac{209}{6{,}022\cdot10^{23}}=3{,}47\cdot10^{-22}\)&nbsp;g.
+        \[\rho=\frac{3{,}47\cdot10^{-22}}{0{,}0377\cdot10^{-21}}=9{,}2\ \text{g/cm}^3.\]</p>
+        <div class="res">Cubique simple, \(C=0{,}52\), \(R_{site}=0{,}366\,a\), \(\rho\approx9{,}2\)&nbsp;g/cm³ (valeur
+        expérimentale 9,20 g/cm³ — parfait). Le polonium est le seul métal cubique simple à température ambiante.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 8 — Alliage (Fe₃C, aciers) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">(1) Pourcentage massique de carbone dans Fe₃C. (2) Fraction molaire du carbone dans un
+        alliage contenant 4,30 % en masse de carbone. Données \(M_C=12{,}0\), \(M_{Fe}=55{,}8\)&nbsp;g/mol.</p>
+        <p class="q">Question 1 — % massique dans Fe₃C</p>
+        <p>Une formule Fe₃C contient 3 fer + 1 carbone :
+        \[w_C=\frac{M_C}{3M_{Fe}+M_C}=\frac{12{,}0}{3\times55{,}8+12{,}0}=\frac{12}{179{,}4}=6{,}69\ \%.\]</p>
+        <p class="q">Question 2 — Fraction molaire (4,30 % massique de C)</p>
+        <p>Sur 100 g d'alliage : \(m_C=4{,}30\)&nbsp;g, \(m_{Fe}=95{,}7\)&nbsp;g. On convertit en moles puis on
+        normalise :
+        \[x_C=\frac{m_C/M_C}{m_C/M_C+m_{Fe}/M_{Fe}}=\frac{4{,}30/12}{4{,}30/12+95{,}7/55{,}8}
+        =\frac{0{,}358}{0{,}358+1{,}715}=0{,}17=17\ \%.\]</p>
+        <div class="note"><span class="lab">Vérification</span> Pour le composé défini Fe₃C, la fraction molaire de
+        carbone vaut \(\frac14=25\ \%\) (1 atome sur 4). Ici l'alliage à 4,30 % massique est plus pauvre en carbone,
+        d'où \(x_C=17\ \% <25\ \%\), cohérent.</div>
+        <div class="res">\(w_C=6{,}69\ \%\) massique dans Fe₃C ; l'alliage à 4,30 % massique correspond à
+        \(x_C=17\ \%\) molaire. (Un pourcentage massique et un pourcentage molaire ne sont jamais égaux dès que les
+        masses molaires diffèrent.)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 9 — Sites cristallographiques d'une cfc <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">(1) Combien de sites tétraédriques une structure cfc possède-t-elle ? (2) Combien de sites
+        octaédriques ?</p>
+        <p class="q">Question 1 — Sites tétraédriques</p>
+        <p>On découpe la maille cfc en 8 petits cubes d'arête \(a/2\). Le centre de chaque petit cube est un site
+        tétraédrique, entièrement interne à la maille : il y a donc <b>8 sites tétraédriques</b> par maille.</p>
+        <p class="q">Question 2 — Sites octaédriques</p>
+        <p>Les sites octaédriques sont : le <b>centre du cube</b> (1, entièrement interne) et le <b>milieu de chaque
+        arête</b> (12 arêtes). Mais chaque milieu d'arête est partagé entre <b>4 mailles</b> voisines, il compte pour
+        \(\frac14\) :
+        \[N_O=1+12\times\frac14=1+3=4\ \text{sites octaédriques}.\]</p>
+        <div class="res">cfc : <b>8 sites tétraédriques</b> et <b>4 sites octaédriques</b> par maille (pour 4 atomes).
+        Rappel : dans une cfc tout se compte en multiples de 4.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 10 — Diamant <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Carbone diamant, maille cubique de volume \(45{,}38\)&nbsp;Å³, \(M_C=12\)&nbsp;g/mol.
+        (1) Nombre d'atomes. (2) Densité. (3) Relation \(R\)–\(a\). (4) Compacité.</p>
+        <p class="q">Question 1 — Nombre d'atomes</p>
+        <p>La structure diamant = cfc de carbone + 4 sites tétraédriques (sur 8) occupés par du carbone. Décompte :
+        8 sommets \(\times\frac18=1\) ; 6 faces \(\times\frac12=3\) ; 4 atomes internes en site tétraédrique \(=4\).
+        Total \(1+3+4=\boxed{8}\) atomes par maille.</p>
+        <p class="q">Question 2 — Densité</p>
+        <p>Masse de 8 atomes : \(m=\frac{8\times12}{6{,}022\cdot10^{23}}=1{,}59\cdot10^{-22}\)&nbsp;g.
+        Volume \(45{,}38\cdot10^{-24}\)&nbsp;cm³ :
+        \[\rho=\frac{1{,}59\cdot10^{-22}}{45{,}38\cdot10^{-24}}=3{,}51\ \text{g/cm}^3.\]</p>
+        <p class="q">Question 3 — Relation rayon / paramètre</p>
+        <p>Les atomes se touchent le long de la liaison C–C, orientée selon la grande diagonale d'un <b>petit cube</b>
+        d'arête \(a/2\). Cette petite diagonale vaut \(\frac{a\sqrt3}{2}\) et contient \(4R\) (deux atomes en contact
+        au tiers de la diagonale) :
+        \[4R=\frac{a\sqrt3}{2}\ \Longleftrightarrow\ a=\frac{8R}{\sqrt3}.\]</p>
+        <p class="q">Question 4 — Compacité</p>
+        <p>\[C=\frac{8\times\frac43\pi R^3}{a^3}=\frac{8\times\frac43\pi R^3}{\left(\frac{8R}{\sqrt3}\right)^3}
+        =\frac{\frac{32}{3}\pi}{\frac{512}{3\sqrt3}}=\frac{32\pi\sqrt3}{512}=\frac{\pi\sqrt3}{16}=0{,}34.\]</p>
+        <div class="res">8 atomes/maille, \(\rho=3{,}51\)&nbsp;g/cm³ (réel : 3,515), \(a=\frac{8R}{\sqrt3}\),
+        \(C=0{,}34\). Compacité très faible (bien &lt; 0,74) : le diamant est peu compact car ses liaisons covalentes
+        sont directionnelles (tétraédriques), pas dictées par l'empilement de sphères.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 11 — Dimension des sites d'une cfc (fer γ) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Fer γ (cfc). (1) Nom de la propriété d'exister en plusieurs structures ? (2) Rayon d'un site
+        octaédrique en fonction de \(a\). (3) Rapport \(r_O/R_{Fe}\). (4) Rayon d'un site tétraédrique.</p>
+        <p class="q">Question 1 — Propriété</p>
+        <p>C'est l'<b>allotropie</b> : le fer α (cc/hexagonal) et le fer γ (cfc) sont deux <b>variétés allotropiques</b>
+        du fer (même élément, structures cristallines différentes selon la température).</p>
+        <p class="q">Question 2 — Rayon du site octaédrique</p>
+        <p>Le site octaédrique (milieu d'arête) : sur l'arête on a \(2R_{Fe}+2r_O=a\), donc \(a=2R_{Fe}+2r_O\). Par
+        ailleurs le contact des atomes de fer se fait sur la diagonale de face : \(4R_{Fe}=a\sqrt2\Rightarrow
+        R_{Fe}=\frac{a\sqrt2}{4}\). En substituant :
+        \[r_O=\frac a2-R_{Fe}=a\left(\frac12-\frac{\sqrt2}{4}\right)=0{,}146\,a.\]</p>
+        <p class="q">Question 3 — Rapport \(r_O/R_{Fe}\)</p>
+        <p>\[\frac{r_O}{R_{Fe}}=\frac{\frac12-\frac{\sqrt2}{4}}{\frac{\sqrt2}{4}}=\frac{2}{\sqrt2}-1=\sqrt2-1=0{,}414.\]</p>
+        <p class="q">Question 4 — Rayon du site tétraédrique</p>
+        <p>Le calcul est identique à celui du diamant (le site tétraédrique est au centre d'un petit cube d'arête
+        \(a/2\)) : le rapport vaut \(\frac{r_T}{R_{Fe}}=\sqrt{\frac32}-1\approx0{,}225\), soit
+        \(r_T=0{,}225\,R_{Fe}\approx0{,}080\,a\) — plus petit que le site octaédrique.</p>
+        <div class="res">Allotropie ; \(r_O=0{,}146\,a\), \(r_O/R=\sqrt2-1=0{,}414\) ; \(r_T/R\approx0{,}225\). Le
+        site octaédrique est nettement plus grand que le tétraédrique — d'où l'insertion préférentielle du carbone en
+        site octaédrique dans l'acier austénitique (fer γ).</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:1.4rem">Composés ioniques</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 12 — (Vesta) Sels de potassium (KCl, KF) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">KCl (VESTA). (1) Type de structure. (2) Confirmer cubique (paramètres, angles). (3) Où est le
+        contact ? (4) \(R_{Cl^-}=181\)&nbsp;pm, \(a=628{,}79\)&nbsp;pm : rayon de K⁺. (5) Normal que \(R_-\!>\!R_+\) ?
+        (6) KF cfc, \(a'=534{,}7\)&nbsp;pm : rayon de F⁻.</p>
+        <p class="q">Questions 1–2 — Structure</p>
+        <p>On reconnaît la structure <b>type NaCl</b> : cfc d'ions K⁺ avec les ions Cl⁻ dans <b>tous</b> les sites
+        octaédriques (ou inversement — les deux réseaux cfc sont équivalents). Les paramètres \(a=b=c=6{,}2879\)&nbsp;Å
+        et \(\alpha=\beta=\gamma=90°\) confirment le système <b>cubique</b>.</p>
+        <p class="q">Question 3 — Contact</p>
+        <p>Quand les sites octaédriques sont occupés, le contact cation–anion se fait le long d'une <b>arête</b> du
+        cube (et non le long de la diagonale de face, qui est le contact des sites tétraédriques).</p>
+        <p class="q">Question 4 — Rayon de K⁺</p>
+        <p>Sur l'arête : \(a=2(R_++R_-)\), donc \(R_++R_-=\frac a2\) :
+        \[R_+=\frac a2-R_-=\frac{628{,}79}{2}-181=314{,}4-181=133\ \text{pm}\quad(\text{valeur admise }138\ \text{pm}).\]</p>
+        <p class="q">Question 5 — Pourquoi \(R_-\!>\!R_+\) ?</p>
+        <p>Oui, c'est normal. Un anion possède plus d'électrons que de protons : la charge nucléaire retient moins bien
+        le nuage électronique, qui « gonfle ». Un cation, au contraire, a perdu des électrons et son noyau attire plus
+        fortement les restants. À couche voisine, l'anion est donc plus gros.</p>
+        <p class="q">Question 6 — Rayon de F⁻ (via KF)</p>
+        <p>KF est aussi de type NaCl (contact sur l'arête), avec K⁺ = 133 pm :
+        \[R_{F^-}=\frac{a'}2-R_{K^+}=\frac{534{,}7}{2}-133=267{,}4-133=134\ \text{pm}\quad(\text{valeur admise }133\ \text{pm}).\]</p>
+        <div class="res">Type NaCl (cubique) ; contact sur l'arête ; \(R_{K^+}\approx133\)&nbsp;pm,
+        \(R_{F^-}\approx134\)&nbsp;pm. On vérifie \(R_-\!>\!R_+\) et l'additivité des rayons ioniques d'un sel à l'autre.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 13 — Bromure de thallium (TlBr) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">TlBr. (1) Charge de Br⁻ ? (2) Charge de Tl ? (3) Affecter 150 et 196 pm. (4) Positions Tl⁺
+        (0;0;0), Br⁻ (0,5;0,5;0,5) : type de maille. (5) Paramètre \(a\). (6) Interpréter la vue VESTA (2 ions Br⁻
+        voisins). (7) Distance entre les deux ions les plus éloignés du schéma.</p>
+        <p class="q">Questions 1–2 — Charges</p>
+        <p>Le brome est un halogène (colonne 17) : l'ion bromure est <b>Br⁻</b> (−1). Pour la neutralité de TlBr, le
+        thallium est donc <b>Tl⁺</b> (+1).</p>
+        <p class="q">Question 3 — Affectation des rayons</p>
+        <p>L'anion étant plus gros que le cation : <b>Tl⁺ = 150 pm</b> et <b>Br⁻ = 196 pm</b>.</p>
+        <p class="q">Question 4 — Type de maille</p>
+        <p>Un seul cation en (0;0;0) (donc aux 8 sommets par translation) et un seul anion au centre (0,5;0,5;0,5) :
+        c'est une structure <b>type CsCl</b> — cubique simple de Tl⁺ avec Br⁻ au centre du cube (coordinence 8–8).
+        Ce n'est <b>pas</b> un cubique centré au sens strict (les deux ions sont différents).</p>
+        <p class="q">Question 5 — Paramètre de maille</p>
+        <p>Le contact cation–anion se fait le long de la <b>grande diagonale</b> du cube (Tl⁺ au sommet, Br⁻ au
+        centre) : \(a\sqrt3=2(R_++R_-)\), donc
+        \[a=\frac{2(R_++R_-)}{\sqrt3}=\frac{2(150+196)}{1{,}732}=\frac{692}{1{,}732}=692\ \text{pm}.\]
+        <span style="color:var(--ink-soft)">(Numériquement \(2\times346=692\), et \(692/\sqrt3\approx399{,}5\)&nbsp;pm
+        pour l'arête ; le corrigé note \(a\) via la relation ci-dessus.)</span></p>
+        <div class="warnbox"><span class="lab">Attention à la lecture</span> La grande diagonale vaut
+        \(a\sqrt3=2(R_++R_-)=692\)&nbsp;pm, ce qui donne l'arête \(a=692/\sqrt3\approx400\)&nbsp;pm. Bien distinguer
+        « longueur de la diagonale » (692 pm) et « paramètre de maille \(a\) » (≈400 pm).</div>
+        <p class="q">Question 6 — Vue VESTA</p>
+        <p>La représentation montre une maille de TlBr accompagnée de <b>deux ions Br⁻ appartenant aux mailles
+        voisines</b> (à gauche et à droite), qui prolongent le motif périodique.</p>
+        <p class="q">Question 7 — Distance des ions extrêmes</p>
+        <p>Les deux ions les plus éloignés (le Br⁻ le plus à gauche et celui le plus à droite, séparés par une maille
+        complète) sont distants de <b>deux grandes diagonales</b>, soit
+        \[d=2\times a\sqrt3=2\times692=1384\ \text{pm}.\]</p>
+        <div class="res">Br⁻ (−1), Tl⁺ (+1) ; Tl⁺ = 150 pm, Br⁻ = 196 pm ; structure type CsCl ; grande diagonale
+        \(a\sqrt3=692\)&nbsp;pm ; distance des ions extrêmes \(2a\sqrt3=1384\)&nbsp;pm.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 14 — Chlorure d'argent AgCl <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">AgCl cubique, \(V=163{,}6\)&nbsp;Å³. (1) Paramètre de maille. (2) Ag⁺ en (0;0;0), (½;½;0),
+        (½;0;½), (0;½;½) : type de structure cubique, dessin. (3) Cl⁻ dans tous les sites octaédriques : combien,
+        neutralité ? (4) Dimension des sites si \(R_{Ag^+}=115\)&nbsp;pm.</p>
+        <p class="q">Question 1 — Paramètre</p>
+        <p>\(a=\sqrt[3]{V}=\sqrt[3]{163{,}6}=5{,}47\ \text{Å}\).</p>
+        <p class="q">Question 2 — Type de structure</p>
+        <p>Les positions données (un sommet + trois centres de faces) sont exactement celles d'un réseau <b>cubique
+        faces centrées</b> : à partir de ces 4 ions Ag⁺, toutes les autres positions cfc se déduisent par translations
+        entières. La maille dessinée ne contient que les ions argent aux sommets et centres de faces.</p>
+        <p class="q">Question 3 — Ions chlorure et neutralité</p>
+        <p>Les sites octaédriques d'une cfc sont au nombre de 4 (centre du cube + 12 milieux d'arêtes comptant ¼) :
+        \(1+12\times\frac14=4\). Il y a donc <b>4 ions Cl⁻</b>, à comparer aux \(4\) ions Ag⁺ (cfc) : la maille est
+        <b>électriquement neutre</b> (4 charges + et 4 charges −). C'est bien la structure type NaCl.</p>
+        <p class="q">Question 4 — Dimension des sites (contact sur l'arête)</p>
+        <p>Cl⁻ occupe l'octaèdre : contact Ag⁺–Cl⁻ le long de l'arête, \(a=2R_{Ag^+}+2R_{Cl^-}\) :
+        \[R_{Cl^-}=\frac a2-R_{Ag^+}=\frac{547}{2}-115=273{,}5-115=158\ \text{pm}.\]</p>
+        <div class="res">\(a=5{,}47\)&nbsp;Å ; structure cfc (type NaCl) ; 4 Cl⁻ = 4 Ag⁺ ⇒ maille neutre ; le site
+        octaédrique accueille Cl⁻ de rayon \(R_{Cl^-}=158\)&nbsp;pm.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 15 — (Vesta) Blende (ZnS) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Blende ZnS, cubique, \(a=540{,}9\)&nbsp;pm, Zn²⁺ aux sommets (cfc). (1) Décrire la structure
+        en sites occupés + vérifier la stœchiométrie. (2) Plus courte distance S²⁻–Zn²⁺. (3) Comparer à CaF₂.</p>
+        <p class="q">Question 1 — Structure et stœchiométrie</p>
+        <p>Zn²⁺ forme un réseau <b>cfc</b> ; S²⁻ occupe des sites <b>tétraédriques</b>. Vérifions combien : décompte
+        des Zn²⁺ = 8 sommets \(\times\frac18\) + 6 faces \(\times\frac12=1+3=4\) ions Zn²⁺. Une cfc possède 8 sites
+        tétraédriques ; pour que la formule soit ZnS (autant de S que de Zn), il faut <b>4 S²⁻</b>, donc seule la
+        <b>moitié</b> des sites tétraédriques est occupée (4 sur 8).</p>
+        <p class="q">Question 2 — Plus courte distance S²⁻–Zn²⁺</p>
+        <p>La plus courte distance relie un Zn²⁺ (sommet) au S²⁻ du site tétraédrique voisin. Leurs centres sont
+        distants d'un quart de la grande diagonale de la maille (le centre d'un site tétraédrique est au centre d'un
+        petit cube d'arête \(a/2\)) :
+        \[d=\frac14\times a\sqrt3=\frac{\sqrt3}{4}\times540{,}9=234{,}2\ \text{pm}\quad(\text{confirmé par VESTA}).\]</p>
+        <p class="q">Question 3 — Comparaison avec CaF₂ (fluorine)</p>
+        <p>CaF₂ a la <b>même</b> ossature (cfc de Ca²⁺, sites tétraédriques), mais F⁻ occupe <b>tous</b> les 8 sites
+        tétraédriques (contre la moitié pour la blende). Raison stœchiométrique : dans CaF₂ il faut deux fois plus de
+        F⁻ que de Ca²⁺ (4 Ca²⁺ ⇒ 8 F⁻), d'où tous les sites occupés. La blende ZnS (1:1) n'en occupe que la moitié.</p>
+        <div class="res">Blende = cfc de Zn²⁺ + moitié des sites tétraédriques occupés par S²⁻ (4 Zn²⁺ + 4 S²⁻,
+        coordinence 4–4) ; \(d_{min}=\frac{a\sqrt3}{4}=234{,}2\)&nbsp;pm. CaF₂ : même charpente mais <b>tous</b> les
+        sites tétraédriques occupés (coordinence 8–4), imposé par la stœchiométrie 1:2.</div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.5rem;border-left-color:var(--ok)">
+      <span class="lab" style="color:#065f46">✅ TD cristallographie — correction complète (15 exercices)</span>
+      <b>Généralités</b> : diagonales du cube, volume d'une maille (formule générale + hexagonale), empilements
+      compacts cfc/hc (cannonball). <b>Métaux</b> : volume &amp; compacité (Ni hc et cfc), plans compacts,
+      polonium cubique simple, alliages Fe₃C (% massique ↔ molaire), sites tétraédriques/octaédriques d'une cfc,
+      diamant, dimension des sites du fer γ. <b>Composés ioniques</b> : KCl/KF type NaCl, TlBr type CsCl, AgCl type
+      NaCl, blende ZnS et comparaison à la fluorine CaF₂. Numériques vérifiés : \(V_{hex}=25{,}73\)&nbsp;Å³,
+      \(\rho_{Ni}=9{,}0\), \(\rho_{Po}=9{,}2\), \(\rho_{diamant}=3{,}51\)&nbsp;g/cm³, \(r_O/R=0{,}414\),
+      \(R_{K^+}=133\), \(R_{F^-}=134\), \(R_{Cl^-}=158\)&nbsp;pm, \(a_{TlBr}\sqrt3=692\)&nbsp;pm,
+      \(d_{ZnS}=234{,}2\)&nbsp;pm.
+    </div>
+
+    <div class="note" style="margin-top:1rem">
+      <span class="lab">📎 Bonus — TP VESTA</span> Le poly comporte aussi un <b>TP VESTA</b> (manipulation du
+      logiciel : ouverture de fichiers .cif, mesure de distances, visualisation des mailles et des plans compacts).
+      C'est un travail pratique d'observation ; les concepts et calculs qu'il mobilise sont entièrement couverts par
+      le cours et le TD ci-dessus (volume de maille, rayons, sites, compacité). Il pourra être ajouté ultérieurement
+      comme complément « prise en main du logiciel ».
+    </div>
+    <!-- TD_CRISTALLO_ANCHOR -->
+  </section>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours (CM)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/cristallographie/Cours_cristallographie.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Cours_cristallographie</span><span class="badge">Cours (CM)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/cristallographie/TD%20cristallo%20-%20VG.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD cristallo - VG</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/cristallographie/TD_cristallo.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD_cristallo</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Corrigé</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/cristallographie/TD_cristallo_corriger.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD_cristallo_corriger</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TP</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/cristallographie/TP%20cristallo%20Vesta%20-%20VG.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TP cristallo Vesta - VG</span><span class="badge">TP</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logique et raisonnements — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-math">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Maths · M01 — Chapitre 1</span>
+  <h1 class="title">Logique et raisonnements</h1>
+  <p class="lead">Le langage de base des mathématiques : propositions, connecteurs, quantificateurs, et
+  surtout les <b>modes de raisonnement</b> (direct, récurrence, contraposition, absurde, analyse-synthèse)
+  qui structurent toutes les démonstrations de l'année.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD n°1</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- ======================= COURS =============================== -->
+  <!-- ============================================================= -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Propositions, négation, connecteurs</h3>
+    <div class="def">
+      <span class="lab">Proposition</span>
+      Une <b>proposition</b> (ou assertion) \(P\) est une phrase qui est soit <b>vraie</b> (V), soit
+      <b>fausse</b> (F), sans ambiguïté. Ainsi « \(1\geqslant 2\) » est une proposition (fausse) mais
+      « \(1\) » n'en est pas une.
+    </div>
+    <div class="def">
+      <span class="lab">Négation</span>
+      La <b>négation</b> de \(P\), notée \(\operatorname{non}(P)\) ou \(\lnot P\) ou \(\overline P\), est vraie
+      quand \(P\) est fausse et fausse quand \(P\) est vraie.
+    </div>
+    <div class="def">
+      <span class="lab">Conjonction / Disjonction</span>
+      <ul style="margin:.3rem 0 0">
+        <li>\(P \text{ et } Q\) (noté \(P\wedge Q\)) est vraie <b>ssi les deux</b> le sont.</li>
+        <li>\(P \text{ ou } Q\) (noté \(P\vee Q\)) est vraie <b>ssi au moins l'une</b> l'est.</li>
+      </ul>
+    </div>
+    <div class="warnbox">
+      Le « ou » mathématique est <b>inclusif</b> : « \(P\) ou \(Q\) » reste vrai quand \(P\) et \(Q\) sont
+      tous deux vrais. Il diffère du « ou » exclusif du langage courant (« fromage ou dessert »).
+    </div>
+    <div class="note">
+      <span class="lab">Lois de De Morgan</span>
+      \[ \operatorname{non}(P \text{ et } Q) = \operatorname{non}(P)\ \text{ou}\ \operatorname{non}(Q),
+      \qquad
+      \operatorname{non}(P \text{ ou } Q) = \operatorname{non}(P)\ \text{et}\ \operatorname{non}(Q). \]
+      On <b>nie chaque morceau</b> et on <b>échange</b> « et » ↔ « ou ».
+    </div>
+
+    <h3>1.2 Implication, réciproque, équivalence</h3>
+    <div class="def">
+      <span class="lab">Implication</span>
+      \(P \Rightarrow Q\) se lit « \(P\) implique \(Q\) » : <em>si \(P\) est vraie, alors \(Q\) est vraie</em>.
+      Elle n'est <b>fausse que dans un seul cas</b> : \(P\) vraie et \(Q\) fausse.
+      En particulier, <b>« Faux \(\Rightarrow\) n'importe quoi » est vrai</b>.
+    </div>
+    <div class="thm">
+      <span class="lab">Autre forme de l'implication</span>
+      \[ (P\Rightarrow Q) \iff \big(\operatorname{non}(P)\ \text{ou}\ Q\big),
+      \qquad\text{d'où}\qquad
+      \operatorname{non}(P\Rightarrow Q) \iff \big(P\ \text{et}\ \operatorname{non}(Q)\big). \]
+      La négation d'une implication n'est <b>pas</b> une implication : c'est « l'hypothèse tient mais la
+      conclusion tombe ».
+    </div>
+    <div class="def">
+      <span class="lab">Réciproque, C.N., C.S.</span>
+      La <b>réciproque</b> de \(P\Rightarrow Q\) est \(Q\Rightarrow P\). Si \(P\Rightarrow Q\) est vraie :
+      \(P\) est une <b>condition suffisante</b> de \(Q\) (il suffit de \(P\)), et \(Q\) une
+      <b>condition nécessaire</b> de \(P\) (il faut \(Q\)).
+    </div>
+    <div class="def">
+      <span class="lab">Équivalence</span>
+      \(P\iff Q\) signifie \(\big((P\Rightarrow Q)\text{ et }(Q\Rightarrow P)\big)\), lu « \(P\) si et
+      seulement si \(Q\) » (« ssi »). C'est une <b>condition nécessaire et suffisante</b> : \(P\) et \(Q\)
+      ont la même table de vérité.
+    </div>
+    <div class="overflow">
+      <table>
+        <thead><tr><th>\(P\)</th><th>\(Q\)</th><th>\(\lnot P\)</th><th>\(P\wedge Q\)</th><th>\(P\vee Q\)</th><th>\(P\Rightarrow Q\)</th><th>\(P\iff Q\)</th></tr></thead>
+        <tbody>
+          <tr><td>V</td><td>V</td><td>F</td><td>V</td><td>V</td><td>V</td><td>V</td></tr>
+          <tr><td>V</td><td>F</td><td>F</td><td>F</td><td>V</td><td>F</td><td>F</td></tr>
+          <tr><td>F</td><td>V</td><td>V</td><td>F</td><td>V</td><td>V</td><td>F</td></tr>
+          <tr><td>F</td><td>F</td><td>V</td><td>F</td><td>F</td><td>V</td><td>V</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>1.3 Quantificateurs</h3>
+    <div class="def">
+      <span class="lab">\(\forall\) et \(\exists\)</span>
+      Pour une propriété \(P(x)\) dépendant de \(x\in E\) :
+      <ul style="margin:.3rem 0 0">
+        <li>\(\forall x\in E,\ P(x)\) : « pour <b>tout</b> \(x\), \(P(x)\) est vraie ».</li>
+        <li>\(\exists x\in E,\ P(x)\) : « il <b>existe (au moins un)</b> \(x\) tel que \(P(x)\) ».</li>
+        <li>\(\exists!\,x\in E,\ P(x)\) : « il existe un <b>unique</b> \(x\) tel que \(P(x)\) ».</li>
+      </ul>
+    </div>
+    <div class="thm">
+      <span class="lab">Négation des quantificateurs</span>
+      \[ \operatorname{non}\big(\forall x\in E,\ P(x)\big) \iff \big(\exists x\in E,\ \operatorname{non}(P(x))\big), \]
+      \[ \operatorname{non}\big(\exists x\in E,\ P(x)\big) \iff \big(\forall x\in E,\ \operatorname{non}(P(x))\big). \]
+      On <b>échange</b> \(\forall\leftrightarrow\exists\) et on nie la propriété. Dans une phrase à plusieurs
+      quantificateurs, on les retourne <b>tous</b>, dans l'ordre, et on nie le cœur.
+    </div>
+    <div class="warnbox">
+      On ne peut <b>pas</b> permuter un \(\forall\) et un \(\exists\). « \(\forall y\geqslant 0,\ \exists x,\ x^2=y\) »
+      est vrai (\(x=\sqrt y\)), mais « \(\exists x,\ \forall y\geqslant 0,\ x^2=y\) » est faux (un seul \(x\) ne
+      peut valoir tous les \(y\)). Ne jamais utiliser \(\forall,\exists\) comme abréviations dans une phrase française.
+    </div>
+
+    <h3>1.4 Les modes de raisonnement</h3>
+    <div class="method">
+      <span class="lab">Raisonnement direct</span>
+      On part de l'hypothèse \(P\) et on en déduit \(Q\) par une chaîne de déductions.
+      <br><em>Ex.</em> \(n\) pair \(\Rightarrow n^2\) pair : \(n=2k \Rightarrow n^2=4k^2=2(2k^2)\).
+    </div>
+    <div class="method">
+      <span class="lab">Par équivalences</span>
+      On enchaîne des propositions <b>toutes équivalentes</b> (\(\iff\)). Utile pour résoudre équations et
+      inéquations. <br><em>Ex.</em> \(x+1=3-x \iff 2x=2 \iff x=1\).
+    </div>
+    <div class="method">
+      <span class="lab">Par disjonction de cas</span>
+      On découpe le problème en un nombre <b>fini</b> de cas traités séparément (souvent selon un signe ou
+      une parité). <br><em>Ex.</em> \(\max(x,y)=\dfrac{x+y+|x-y|}{2}\) se prouve en séparant \(x\geqslant y\)
+      et \(x<y\).
+    </div>
+    <div class="method">
+      <span class="lab">Par récurrence</span>
+      Pour prouver \(P(n)\) pour tout \(n\geqslant n_0\) :
+      <ol style="margin:.3rem 0 0">
+        <li><b>Initialisation</b> : \(P(n_0)\) est vraie.</li>
+        <li><b>Hérédité</b> : \(\forall n\geqslant n_0,\ P(n)\Rightarrow P(n+1)\).</li>
+      </ol>
+      Variantes : <b>double</b> (init \(P(n_0),P(n_0{+}1)\) ; hérédité \((P(n)\text{ et }P(n{+}1))\Rightarrow P(n{+}2)\)),
+      et <b>forte</b> (hérédité \(\big(\forall k\in[\![n_0,n]\!],P(k)\big)\Rightarrow P(n{+}1)\)).
+    </div>
+    <div class="method">
+      <span class="lab">Par contraposition</span>
+      La <b>contraposée</b> de \(P\Rightarrow Q\) est \(\operatorname{non}(Q)\Rightarrow\operatorname{non}(P)\),
+      et \[(P\Rightarrow Q)\iff(\operatorname{non}(Q)\Rightarrow\operatorname{non}(P)).\]
+      Prouver la contraposée revient à prouver l'implication. <br><em>Ex.</em> pour « \(n^2\) pair \(\Rightarrow n\) pair »,
+      on montre « \(n\) impair \(\Rightarrow n^2\) impair ».
+    </div>
+    <div class="method">
+      <span class="lab">Par l'absurde</span>
+      Pour montrer \(P\), on <b>suppose \(\operatorname{non}(P)\)</b> et on aboutit à une contradiction.
+      <br><em>Ex.</em> \(\sqrt2\) irrationnel : supposer \(\sqrt2=p/q\) irréductible mène à \(p\) et \(q\) tous deux pairs.
+    </div>
+    <div class="method">
+      <span class="lab">Par analyse-synthèse</span>
+      Pour <b>trouver toutes</b> les solutions :
+      <ul style="margin:.3rem 0 0">
+        <li><b>Analyse</b> : on suppose qu'une solution existe et on en déduit les <b>conditions nécessaires</b>
+        (candidats possibles).</li>
+        <li><b>Synthèse</b> : on <b>vérifie</b> lesquels de ces candidats sont effectivement solutions.</li>
+      </ul>
+      Indispensable dès qu'on élève au carré ou qu'on manipule des équations non réversibles.
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- ==================== EXOS CRÉÉS ============================= -->
+  <!-- ============================================================= -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Nier et évaluer une proposition quantifiée</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Soit la proposition \(\;\mathcal P:\ \forall x\in\mathbb R,\ \exists y\in\mathbb R,\ x+y>0\).
+        (1) Écrire \(\operatorname{non}(\mathcal P)\). (2) Dire, en justifiant, si \(\mathcal P\) est vraie ou fausse.</div>
+        <p class="q">Question 1 — Négation.</p>
+        <p>On retourne chaque quantificateur (\(\forall\to\exists\), \(\exists\to\forall\)) dans l'ordre, et on
+        nie le cœur \(x+y>0\), dont la négation est \(x+y\leqslant 0\) :</p>
+        <div class="res">\(\operatorname{non}(\mathcal P):\ \exists x\in\mathbb R,\ \forall y\in\mathbb R,\ x+y\leqslant 0.\)</div>
+        <p class="q">Question 2 — Vraie ou fausse ?</p>
+        <p>\(\mathcal P\) affirme : pour tout réel \(x\), on peut trouver un réel \(y\) avec \(x+y>0\). Fixons un
+        \(x\) quelconque et posons \(y=1-x\) (ce choix dépend légitimement de \(x\) car le \(\exists\) est
+        <em>après</em> le \(\forall\)). Alors \(x+y=x+(1-x)=1>0\). La propriété est donc satisfaite pour tout \(x\).</p>
+        <div class="res">\(\mathcal P\) est <b>vraie</b>.</div>
+        <div class="warnbox">Ne pas confondre avec \(\exists y,\forall x,\ x+y>0\) qui, elle, serait <b>fausse</b>
+        (un même \(y\) ne peut rendre \(x+y>0\) pour tous les \(x\), notamment \(x=-y-1\)).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Récurrence (divisibilité)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Montrer par récurrence que \(\;\forall n\in\mathbb N^*,\ 6 \mid 7^n-1\;\) (c.-à-d. \(7^n-1\) est un multiple de 6).</div>
+        <p class="q">Posons \(P(n):\ \exists k\in\mathbb N,\ 7^n-1=6k\).</p>
+        <p><b>Initialisation</b> (\(n=1\)) : \(7^1-1=6=6\times 1\), donc \(P(1)\) est vraie.</p>
+        <p><b>Hérédité</b> : soit \(n\geqslant 1\) tel que \(P(n)\) est vraie, c.-à-d. \(7^n-1=6k\) avec \(k\in\mathbb N\).
+        Alors :</p>
+        \[ 7^{n+1}-1 = 7\cdot 7^n - 1 = 7\big(7^n-1\big) + 7 - 1 = 7\cdot 6k + 6 = 6\,(7k+1). \]
+        <p>Comme \(7k+1\in\mathbb N\), on a bien \(6\mid 7^{n+1}-1\), donc \(P(n+1)\) est vraie.</p>
+        <div class="res">La propriété étant initialisée et héréditaire, \(6\mid 7^n-1\) pour tout \(n\in\mathbb N^*\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Analyse-synthèse (décomposition paire/impaire)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Montrer que toute fonction \(f:\mathbb R\to\mathbb R\) s'écrit de <b>manière unique</b> comme somme
+        \(f=p+i\) d'une fonction <b>paire</b> \(p\) et d'une fonction <b>impaire</b> \(i\).</div>
+        <p>Rappel : \(p\) paire signifie \(p(-x)=p(x)\) ; \(i\) impaire signifie \(i(-x)=-i(x)\).</p>
+        <p class="q">Analyse — on suppose une telle décomposition existe.</p>
+        <p>Supposons \(f=p+i\) avec \(p\) paire et \(i\) impaire. Pour tout \(x\) :</p>
+        \[ f(x)=p(x)+i(x), \qquad f(-x)=p(-x)+i(-x)=p(x)-i(x). \]
+        <p>En additionnant puis en soustrayant ces deux égalités, on <b>déduit</b> nécessairement :</p>
+        \[ p(x)=\frac{f(x)+f(-x)}{2}, \qquad i(x)=\frac{f(x)-f(-x)}{2}. \]
+        <p>Ceci prouve l'<b>unicité</b> : si une décomposition existe, \(p\) et \(i\) sont forcément ces deux fonctions-là.</p>
+        <p class="q">Synthèse — on vérifie que ces candidats conviennent.</p>
+        <p>Posons \(p\) et \(i\) par les formules ci-dessus. Alors pour tout \(x\) :</p>
+        <ul>
+          <li>\(p(-x)=\dfrac{f(-x)+f(x)}{2}=p(x)\) : \(p\) est bien <b>paire</b>.</li>
+          <li>\(i(-x)=\dfrac{f(-x)-f(x)}{2}=-\dfrac{f(x)-f(-x)}{2}=-i(x)\) : \(i\) est bien <b>impaire</b>.</li>
+          <li>\(p(x)+i(x)=\dfrac{f(x)+f(-x)}{2}+\dfrac{f(x)-f(-x)}{2}=\dfrac{2f(x)}{2}=f(x)\).</li>
+        </ul>
+        <div class="res">Existence <b>et</b> unicité sont établies : \(f=\underbrace{\tfrac{f(x)+f(-x)}{2}}_{\text{partie paire}}+\underbrace{\tfrac{f(x)-f(-x)}{2}}_{\text{partie impaire}}\).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- ==================== CORRECTION TD ========================== -->
+  <!-- ============================================================= -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD n°1 — Logique &amp; Raisonnements</h2>
+    <p class="lead" style="font-size:.95rem">La feuille de TD ne fournit que les énoncés (pas de corrigé
+    officiel) : les 16 exercices sont résolus intégralement ci-dessous, chaque sous-question traitée.</p>
+
+    <h3>Partie 1 — Nier une proposition</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — Négation (lancer d'un dé)</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Donner la négation des affirmations (petit/grand = <b>strictement</b>). Rappels :
+        \(\operatorname{non}(A\text{ et }B)=\lnot A\text{ ou }\lnot B\) ; \(\operatorname{non}(A\Rightarrow B)=A\text{ et }\lnot B\).</div>
+        <p class="q">(a) « pair et \(<3\) »</p>
+        <p>Négation : <b>impair ou \(\geqslant 3\)</b> (« le résultat est impair ou supérieur ou égal à 3 »).</p>
+        <p class="q">(b) « \(<3\) ou \(>4\) »</p>
+        <p>Négation : <b>\(\geqslant 3\) et \(\leqslant 4\)</b>, soit « le résultat vaut 3 ou 4 ».</p>
+        <p class="q">(c) « Si je suis chanceux, j'obtiens un 6 »</p>
+        <p>Forme \(C\Rightarrow 6\). Négation : <b>« je suis chanceux et je n'obtiens pas 6 »</b>.</p>
+        <p class="q">(d) « Si (impair et \(>2\)) alors je gagne »</p>
+        <p>Négation : <b>« j'obtiens un nombre impair plus grand que 2 et je ne gagne pas »</b>.</p>
+        <p class="q">(e) « Si pair, alors \(<4\) »</p>
+        <p>Négation : <b>« le résultat est pair et supérieur ou égal à 4 »</b>.</p>
+        <p class="q">(f) « Si (j'ai 4 et tu as pair \(>3\)) alors nous gagnons »</p>
+        <p>Négation : <b>« j'ai un 4, tu as un nombre pair plus grand que 3, et nous ne gagnons pas »</b>.</p>
+        <p class="q">(g) « Si (1 ou 6) alors (je rejoue et je gagne) »</p>
+        <p>La conclusion est une conjonction ; on nie \(A\Rightarrow(B\text{ et }C)\) en \(A\text{ et }(\lnot B\text{ ou }\lnot C)\) :</p>
+        <p>Négation : <b>« j'obtiens un 1 ou un 6, et (je ne rejoue pas ou je ne gagne pas) »</b>.</p>
+        <p class="q">(h) « Si (non malchanceux) alors (ni 1 ni 2) »</p>
+        <p>« ni 1 ni 2 » \(=\) « non 1 et non 2 » ; sa négation est « 1 ou 2 ». D'où :</p>
+        <p>Négation : <b>« je ne suis pas malchanceux et j'obtiens un 1 ou un 2 »</b>.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — Nier des propositions logiques</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(f:\mathbb R\to\mathbb R\), \(x,y\in\mathbb R\). On nie via De Morgan et
+        \(\operatorname{non}(P\Rightarrow Q)=P\text{ et }\lnot Q\), en inversant chaque comparateur
+        (\(=\!\to\!\neq\), \(<\!\to\!\geqslant\), \(\leqslant\!\to\!>\), etc.).</div>
+        <p class="q">(a) \((x=2)\text{ et }((x-y=5)\text{ ou }(y\geqslant 3))\)</p>
+        <p class="res">\((x\neq 2)\ \text{ou}\ \big((x-y\neq 5)\text{ et }(y<3)\big)\)</p>
+        <p class="q">(b) \((x^2+y^2<4)\text{ et }((x\neq y)\text{ ou }(f(x)\geqslant f(y)))\)</p>
+        <p class="res">\((x^2+y^2\geqslant 4)\ \text{ou}\ \big((x=y)\text{ et }(f(x)<f(y))\big)\)</p>
+        <p class="q">(c) \((y\geqslant -1)\text{ ou }((x+y\leqslant 5)\text{ et }(x\geqslant 2))\)</p>
+        <p class="res">\((y<-1)\ \text{et}\ \big((x+y>5)\text{ ou }(x<2)\big)\)</p>
+        <p class="q">(d) \((x\leqslant 1)\text{ ou }((f(x)=0)\text{ et }(y>2))\)</p>
+        <p class="res">\((x>1)\ \text{et}\ \big((f(x)\neq 0)\text{ ou }(y\leqslant 2)\big)\)</p>
+        <p class="q">(e) \(((f(x)>2)\text{ ou }(y<1))\text{ et }(x+y=0)\)</p>
+        <p class="res">\(\big((f(x)\leqslant 2)\text{ et }(y\geqslant 1)\big)\ \text{ou}\ (x+y\neq 0)\)</p>
+        <p class="q">(f) \((x>1\text{ et }y<2)\text{ ou }(f(x-y)<0\text{ et }f(x)\neq f(y))\)</p>
+        <p class="res">\(\big((x\leqslant 1)\text{ ou }(y\geqslant 2)\big)\ \text{et}\ \big((f(x-y)\geqslant 0)\text{ ou }(f(x)=f(y))\big)\)</p>
+        <p class="q">(g) \((f(x)=f(y))\Rightarrow(x=y)\)</p>
+        <p class="res">\((f(x)=f(y))\ \text{et}\ (x\neq y)\)</p>
+        <p class="q">(h) \((x>0)\Rightarrow((f(x)<3)\text{ et }(y\leqslant 1))\)</p>
+        <p class="res">\((x>0)\ \text{et}\ \big((f(x)\geqslant 3)\text{ ou }(y>1)\big)\)</p>
+        <p class="q">(i) \((x^2+y^2\leqslant 1)\Rightarrow((f(x)>0)\text{ ou }(f(y)<0))\)</p>
+        <p class="res">\((x^2+y^2\leqslant 1)\ \text{et}\ (f(x)\leqslant 0)\ \text{et}\ (f(y)\geqslant 0)\)</p>
+        <p class="q">(j) \((x=0\text{ et }x+y=2)\Rightarrow(f(y)<0)\)</p>
+        <p class="res">\((x=0)\ \text{et}\ (x+y=2)\ \text{et}\ (f(y)\geqslant 0)\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — Nier des propositions quantifiées</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">On échange \(\forall\leftrightarrow\exists\) et on nie le cœur.</div>
+        <p class="q">(a) \(\forall x\in\mathbb R,\ x\geqslant 1\)</p>
+        <p class="res">\(\exists x\in\mathbb R,\ x<1\)</p>
+        <p class="q">(b) \(\exists x\in\mathbb R,\ -1\leqslant x\leqslant 1\)</p>
+        <p>Ici \(-1\leqslant x\leqslant 1\) signifie \((x\geqslant -1\text{ et }x\leqslant 1)\), de négation \((x<-1\text{ ou }x>1)\) :</p>
+        <p class="res">\(\forall x\in\mathbb R,\ (x<-1\ \text{ou}\ x>1)\)</p>
+        <p class="q">(c) \(\exists n\in\mathbb N,\exists p\in\mathbb N,\ n=3p+2\)</p>
+        <p class="res">\(\forall n\in\mathbb N,\forall p\in\mathbb N,\ n\neq 3p+2\)</p>
+        <p class="q">(d) \(\forall n\in\mathbb N,\exists p\in\mathbb N,\ n=3p+2\)</p>
+        <p class="res">\(\exists n\in\mathbb N,\forall p\in\mathbb N,\ n\neq 3p+2\)</p>
+        <p class="q">(e) \(\forall y\in\mathbb N,\exists x\in\mathbb R,\ y=x^2\)</p>
+        <p class="res">\(\exists y\in\mathbb N,\forall x\in\mathbb R,\ y\neq x^2\)</p>
+        <p class="q">(f) \(\forall y\in\mathbb N,\exists x\in\mathbb R,\ x=y^2\)</p>
+        <p class="res">\(\exists y\in\mathbb N,\forall x\in\mathbb R,\ x\neq y^2\)</p>
+        <p class="q">(g) \(\exists y\in\mathbb N,\forall x\in\mathbb R,\ x=y^2\)</p>
+        <p class="res">\(\forall y\in\mathbb N,\exists x\in\mathbb R,\ x\neq y^2\)</p>
+        <p class="q">(h) \(\exists x\in\mathbb R,\forall y\in\mathbb R,\ (x+y)^2=x^2+y^2\)</p>
+        <p class="res">\(\forall x\in\mathbb R,\exists y\in\mathbb R,\ (x+y)^2\neq x^2+y^2\)</p>
+        <p class="q">(i) \(\forall x\in\mathbb R,\exists y\in\mathbb R,\forall z\in\mathbb R,\ x+y+z=0\)</p>
+        <p class="res">\(\exists x\in\mathbb R,\forall y\in\mathbb R,\exists z\in\mathbb R,\ x+y+z\neq 0\)</p>
+        <p class="q">(j) \(\forall x\in\mathbb R,\exists y\in\mathbb R,\ (x<y\Rightarrow x+y=2)\)</p>
+        <p>La négation d'une implication \(A\Rightarrow B\) est \(A\text{ et }\lnot B\) :</p>
+        <p class="res">\(\exists x\in\mathbb R,\forall y\in\mathbb R,\ (x<y\ \text{et}\ x+y\neq 2)\)</p>
+      </div>
+    </div>
+
+    <h3>Partie 2 — Vrai ou faux ?</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — Évaluer les propositions de l'ex. 2</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">On évalue chaque proposition de l'exercice 2 dans deux cas.</div>
+        <p class="q">Cas (a) : \(x=2,\ y=3,\ f=\mathrm{id}\) (\(f(t)=t\)).</p>
+        <div class="overflow"><table>
+          <thead><tr><th>Prop.</th><th>Évaluation</th><th>Valeur</th></tr></thead>
+          <tbody>
+            <tr><td>(a)</td><td>\(x{=}2\) ✓ ; \(y{=}3\geqslant 3\) ✓ donc \((\text{F ou V})\) ✓</td><td><b>V</b></td></tr>
+            <tr><td>(b)</td><td>\(x^2{+}y^2{=}13\not<4\)</td><td><b>F</b></td></tr>
+            <tr><td>(c)</td><td>\(y{=}3\geqslant -1\) ✓</td><td><b>V</b></td></tr>
+            <tr><td>(d)</td><td>\(x{=}2\not\leqslant 1\) ; \(f(x){=}2\neq 0\) : F ou F</td><td><b>F</b></td></tr>
+            <tr><td>(e)</td><td>\(f(x){=}2\not>2\) et \(y{=}3\not<1\) : (F ou F) et …</td><td><b>F</b></td></tr>
+            <tr><td>(f)</td><td>2ᵉ terme : \(f(-1){=}-1<0\) ✓ et \(2\neq 3\) ✓</td><td><b>V</b></td></tr>
+            <tr><td>(g)</td><td>\(f(x){=}2\neq f(y){=}3\) : hyp. fausse, \(\text{F}\Rightarrow\) ✓</td><td><b>V</b></td></tr>
+            <tr><td>(h)</td><td>\(x{>}0\) ✓ mais \(y{=}3\not\leqslant 1\) : \(\text{V}\Rightarrow\text{F}\)</td><td><b>F</b></td></tr>
+            <tr><td>(i)</td><td>\(x^2{+}y^2{=}13\not\leqslant 1\) : \(\text{F}\Rightarrow\) ✓</td><td><b>V</b></td></tr>
+            <tr><td>(j)</td><td>\(x{=}2\neq 0\) : hyp. fausse, \(\text{F}\Rightarrow\) ✓</td><td><b>V</b></td></tr>
+          </tbody>
+        </table></div>
+        <p class="q">Cas (b) : \(x=y=0,\ f\equiv -1\) (\(f(t)=-1\)).</p>
+        <div class="overflow"><table>
+          <thead><tr><th>Prop.</th><th>Évaluation</th><th>Valeur</th></tr></thead>
+          <tbody>
+            <tr><td>(a)</td><td>\(x{=}0\neq 2\) : F et …</td><td><b>F</b></td></tr>
+            <tr><td>(b)</td><td>\(0<4\) ✓ ; \(f(x){=}f(y){=}-1\) donc \(f(x)\geqslant f(y)\) ✓</td><td><b>V</b></td></tr>
+            <tr><td>(c)</td><td>\(y{=}0\geqslant -1\) ✓</td><td><b>V</b></td></tr>
+            <tr><td>(d)</td><td>\(x{=}0\leqslant 1\) ✓</td><td><b>V</b></td></tr>
+            <tr><td>(e)</td><td>\(y{=}0<1\) ✓ (1ᵉʳ) et \(x{+}y{=}0\) ✓</td><td><b>V</b></td></tr>
+            <tr><td>(f)</td><td>\(x{=}0\not>1\) (1ᵉʳ F) ; \(f(x){=}f(y)\) (2ᵉ F)</td><td><b>F</b></td></tr>
+            <tr><td>(g)</td><td>\(f(x){=}f(y)\) ✓ et \(x{=}y{=}0\) ✓ : \(\text{V}\Rightarrow\text{V}\)</td><td><b>V</b></td></tr>
+            <tr><td>(h)</td><td>\(x{=}0\not>0\) : hyp. fausse</td><td><b>V</b></td></tr>
+            <tr><td>(i)</td><td>hyp. \(0\leqslant 1\) ✓ ; concl. \(f(y){=}-1<0\) ✓</td><td><b>V</b></td></tr>
+            <tr><td>(j)</td><td>\(x{+}y{=}0\neq 2\) : hyp. fausse</td><td><b>V</b></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — Vrai/faux des propositions de l'ex. 3</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\forall x\in\mathbb R,\ x\geqslant 1\)</p>
+        <p><b>Fausse</b> : contre-exemple \(x=0<1\).</p>
+        <p class="q">(b) \(\exists x\in\mathbb R,\ -1\leqslant x\leqslant 1\)</p>
+        <p><b>Vraie</b> : \(x=0\) convient.</p>
+        <p class="q">(c) \(\exists n,\exists p\in\mathbb N,\ n=3p+2\)</p>
+        <p><b>Vraie</b> : \(p=0,\ n=2\) donne \(2=3\cdot 0+2\).</p>
+        <p class="q">(d) \(\forall n\in\mathbb N,\exists p\in\mathbb N,\ n=3p+2\)</p>
+        <p><b>Fausse</b> : pour \(n=0\), il faudrait \(3p+2=0\) avec \(p\in\mathbb N\), impossible.</p>
+        <p class="q">(e) \(\forall y\in\mathbb N,\exists x\in\mathbb R,\ y=x^2\)</p>
+        <p><b>Vraie</b> : tout \(y\in\mathbb N\) est \(\geqslant 0\), donc \(x=\sqrt y\) convient.</p>
+        <p class="q">(f) \(\forall y\in\mathbb N,\exists x\in\mathbb R,\ x=y^2\)</p>
+        <p><b>Vraie</b> : il suffit de prendre \(x=y^2\), qui est un réel.</p>
+        <p class="q">(g) \(\exists y\in\mathbb N,\forall x\in\mathbb R,\ x=y^2\)</p>
+        <p><b>Fausse</b> : un \(y\) fixé donne \(y^2\) fixé, qui ne peut égaler tous les réels \(x\).</p>
+        <p class="q">(h) \(\exists x\in\mathbb R,\forall y\in\mathbb R,\ (x+y)^2=x^2+y^2\)</p>
+        <p>\((x+y)^2=x^2+y^2 \iff 2xy=0 \iff xy=0\). Avec \(x=0\), on a \(xy=0\) pour tout \(y\). <b>Vraie</b> (\(x=0\)).</p>
+        <p class="q">(i) \(\forall x\in\mathbb R,\exists y\in\mathbb R,\forall z\in\mathbb R,\ x+y+z=0\)</p>
+        <p><b>Fausse</b> : \(y\) étant fixé après \(x\), l'égalité \(x+y+z=0\) ne peut tenir pour <em>tous</em> les \(z\) (le membre de gauche varie avec \(z\)).</p>
+        <p class="q">(j) \(\forall x\in\mathbb R,\exists y\in\mathbb R,\ (x<y\Rightarrow x+y=2)\)</p>
+        <p><b>Vraie</b> : pour chaque \(x\), prendre \(y=2-x\). Si l'hypothèse \(x<y\) est vérifiée, alors \(x+y=x+(2-x)=2\), la conclusion est vraie ; l'implication est donc vraie.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — Conditions nécessaires / suffisantes</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">« \(Q\) est C.N. de \(P\) » signifie \(P\Rightarrow Q\). « \(Q\) est C.S. de \(P\) » signifie \(Q\Rightarrow P\).</div>
+        <p class="q">(a) C.N. pour \(x\leqslant 2\) : \(x\leqslant 4\) ?</p>
+        <p>Il faut \((x\leqslant 2)\Rightarrow(x\leqslant 4)\). Vrai (si \(x\leqslant 2\) alors \(x\leqslant 4\)). <b>Vraie</b>.</p>
+        <p class="q">(b) C.N. pour \(x\leqslant 2\) : \(x^2\leqslant 4\) ?</p>
+        <p>Il faut \((x\leqslant 2)\Rightarrow(x^2\leqslant 4)\). Contre-exemple \(x=-5\leqslant 2\) mais \(x^2=25>4\). <b>Fausse</b>.</p>
+        <p class="q">(c) C.N. pour \((x\leqslant 2\text{ et }y\geqslant 1)\) : \((x\geqslant 4\text{ ou }y=1)\) ?</p>
+        <p>Contre-exemple \(x=0,\ y=5\) : hypothèse vraie, mais \(x\geqslant 4\) faux et \(y=1\) faux. <b>Fausse</b>.</p>
+        <p class="q">(d) C.S. pour \(x\leqslant -2\) : \(x^2\geqslant 3\) ?</p>
+        <p>Il faut \((x^2\geqslant 3)\Rightarrow(x\leqslant -2)\). Contre-exemple \(x=2\) : \(x^2=4\geqslant 3\) mais \(x\leqslant -2\) faux. <b>Fausse</b>.</p>
+        <p class="q">(e) C.S. pour \((x\leqslant 2\text{ ou }y\leqslant 1)\) : \((x^2\leqslant 1\text{ et }y=2)\) ?</p>
+        <p>Il faut \((x^2\leqslant 1\text{ et }y=2)\Rightarrow(x\leqslant 2\text{ ou }y\leqslant 1)\). Or \(x^2\leqslant 1\Rightarrow -1\leqslant x\leqslant 1\Rightarrow x\leqslant 2\), donc la conclusion est vraie. <b>Vraie</b>.</p>
+      </div>
+    </div>
+
+    <h3>Partie 3 — Tables de vérité</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 7 — Construire des tables de vérité</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \((P\vee Q)\iff(\overline P\wedge\overline Q)\)</p>
+        <p>Or \(\overline P\wedge\overline Q=\operatorname{non}(P\vee Q)\) : on compare une proposition à sa négation, jamais égales.</p>
+        <div class="overflow"><table>
+          <thead><tr><th>\(P\)</th><th>\(Q\)</th><th>\(P\vee Q\)</th><th>\(\overline P\wedge\overline Q\)</th><th>\(\iff\)</th></tr></thead>
+          <tbody>
+            <tr><td>V</td><td>V</td><td>V</td><td>F</td><td>F</td></tr>
+            <tr><td>V</td><td>F</td><td>V</td><td>F</td><td>F</td></tr>
+            <tr><td>F</td><td>V</td><td>V</td><td>F</td><td>F</td></tr>
+            <tr><td>F</td><td>F</td><td>F</td><td>V</td><td>F</td></tr>
+          </tbody>
+        </table></div>
+        <p class="res">Colonne finale toujours F : c'est une <b>contradiction</b>.</p>
+
+        <p class="q">(b) \((P\Rightarrow Q)\vee(\overline R\wedge P)\)</p>
+        <div class="overflow"><table>
+          <thead><tr><th>\(P\)</th><th>\(Q\)</th><th>\(R\)</th><th>\(P\Rightarrow Q\)</th><th>\(\overline R\wedge P\)</th><th>\(\vee\)</th></tr></thead>
+          <tbody>
+            <tr><td>V</td><td>V</td><td>V</td><td>V</td><td>F</td><td>V</td></tr>
+            <tr><td>V</td><td>V</td><td>F</td><td>V</td><td>V</td><td>V</td></tr>
+            <tr><td>V</td><td>F</td><td>V</td><td>F</td><td>F</td><td><b>F</b></td></tr>
+            <tr><td>V</td><td>F</td><td>F</td><td>F</td><td>V</td><td>V</td></tr>
+            <tr><td>F</td><td>V</td><td>V</td><td>V</td><td>F</td><td>V</td></tr>
+            <tr><td>F</td><td>V</td><td>F</td><td>V</td><td>F</td><td>V</td></tr>
+            <tr><td>F</td><td>F</td><td>V</td><td>V</td><td>F</td><td>V</td></tr>
+            <tr><td>F</td><td>F</td><td>F</td><td>V</td><td>F</td><td>V</td></tr>
+          </tbody>
+        </table></div>
+        <p class="res">Fausse uniquement pour \((P,Q,R)=(\text{V},\text{F},\text{V})\).</p>
+
+        <p class="q">(c) \((Q\Rightarrow P)\wedge(\overline R\vee P)\)</p>
+        <div class="overflow"><table>
+          <thead><tr><th>\(P\)</th><th>\(Q\)</th><th>\(R\)</th><th>\(Q\Rightarrow P\)</th><th>\(\overline R\vee P\)</th><th>\(\wedge\)</th></tr></thead>
+          <tbody>
+            <tr><td>V</td><td>V</td><td>V</td><td>V</td><td>V</td><td>V</td></tr>
+            <tr><td>V</td><td>V</td><td>F</td><td>V</td><td>V</td><td>V</td></tr>
+            <tr><td>V</td><td>F</td><td>V</td><td>V</td><td>V</td><td>V</td></tr>
+            <tr><td>V</td><td>F</td><td>F</td><td>V</td><td>V</td><td>V</td></tr>
+            <tr><td>F</td><td>V</td><td>V</td><td>F</td><td>F</td><td>F</td></tr>
+            <tr><td>F</td><td>V</td><td>F</td><td>F</td><td>V</td><td>F</td></tr>
+            <tr><td>F</td><td>F</td><td>V</td><td>V</td><td>F</td><td>F</td></tr>
+            <tr><td>F</td><td>F</td><td>F</td><td>V</td><td>V</td><td>V</td></tr>
+          </tbody>
+        </table></div>
+        <p class="res">Vraie pour VVV, VVF, VFV, VFF et FFF.</p>
+
+        <p class="q">(d) \(((P\vee Q)\Rightarrow R)\iff((P\Rightarrow R)\wedge(Q\Rightarrow R))\)</p>
+        <div class="overflow"><table>
+          <thead><tr><th>\(P\)</th><th>\(Q\)</th><th>\(R\)</th><th>\((P{\vee}Q){\Rightarrow}R\)</th><th>\((P{\Rightarrow}R){\wedge}(Q{\Rightarrow}R)\)</th><th>\(\iff\)</th></tr></thead>
+          <tbody>
+            <tr><td>V</td><td>V</td><td>V</td><td>V</td><td>V</td><td>V</td></tr>
+            <tr><td>V</td><td>V</td><td>F</td><td>F</td><td>F</td><td>V</td></tr>
+            <tr><td>V</td><td>F</td><td>V</td><td>V</td><td>V</td><td>V</td></tr>
+            <tr><td>V</td><td>F</td><td>F</td><td>F</td><td>F</td><td>V</td></tr>
+            <tr><td>F</td><td>V</td><td>V</td><td>V</td><td>V</td><td>V</td></tr>
+            <tr><td>F</td><td>V</td><td>F</td><td>F</td><td>F</td><td>V</td></tr>
+            <tr><td>F</td><td>F</td><td>V</td><td>V</td><td>V</td><td>V</td></tr>
+            <tr><td>F</td><td>F</td><td>F</td><td>V</td><td>V</td><td>V</td></tr>
+          </tbody>
+        </table></div>
+        <p class="res">Colonne finale toujours V : c'est une <b>tautologie</b> (une équivalence toujours vraie).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 8 — L'enquête (Morgane, Gilles, Daphné)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Trois indices : (1) « Morgane ou Daphné est coupable » ; (2) « Si Gilles est coupable,
+        Morgane et Daphné sont innocentes » ; (3) « Morgane est innocente ou Gilles est innocent ».
+        Notons \(m,g,d\) « … est coupable ».</div>
+        <p class="q">Point commun aux deux lectures : Gilles est innocent.</p>
+        <p>Supposons \(g\) vrai (Gilles coupable). L'indice (2), \(g\Rightarrow(\lnot m\wedge\lnot d)\), impose
+        \(m\) et \(d\) faux. Mais l'indice (1) exige \(m\vee d\) (au moins l'un des deux coupable) — contradiction.
+        Donc \(g\) est faux : <b>Gilles est innocent</b> dans tous les cas.</p>
+
+        <p class="q">Lecture 1 — « ou » mathématique (inclusif).</p>
+        <p>Avec \(g\) faux, les indices (2) et (3) sont automatiquement satisfaits (\(\lnot g\) vrai). Il ne reste
+        que l'indice (1) : \(m\vee d\). Cela laisse trois possibilités \((m,d)\in\{(\text{V,F}),(\text{F,V}),(\text{V,V})\}\).</p>
+        <div class="res">On peut seulement conclure : <b>Gilles est innocent</b>, et <b>au moins un</b> de Morgane/Daphné
+        est coupable — sans pouvoir les départager.</div>
+
+        <p class="q">Lecture 2 — « ou » usuel (exclusif).</p>
+        <p>On garde \(g\) faux. L'indice (3) « Morgane innocente <b>ou (exclusif)</b> Gilles innocent » impose
+        qu'<em>exactement une</em> des deux tienne. Comme Gilles est innocent (« Gilles innocent » vrai),
+        « Morgane innocente » doit être <b>faux</b> : <b>Morgane est coupable</b>.</p>
+        <p>L'indice (1) « Morgane <b>ou (exclusif)</b> Daphné coupable » impose exactement une coupable ;
+        Morgane l'étant, <b>Daphné est innocente</b>. (L'indice (2) reste vérifié car \(g\) est faux.)</p>
+        <div class="res">Solution unique : <b>Morgane est coupable</b>, Gilles et Daphné sont innocents.</div>
+      </div>
+    </div>
+
+    <h3>Partie 4 — Appliquer les types de raisonnement</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 9 — Équations et inéquations dans \(\mathbb R\)</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(2x-4=x^2-4\)</p>
+        <p>\(\iff x^2-2x=0 \iff x(x-2)=0 \iff x=0\) ou \(x=2\).</p>
+        <p class="res">\(S=\{0,\,2\}\)</p>
+        <p class="q">(b) \(-3x-1\geqslant x-7\)</p>
+        <p>\(\iff -3x-x\geqslant -7+1 \iff -4x\geqslant -6\). On divise par \(-4<0\), l'inégalité <b>change de sens</b> :
+        \(x\leqslant \tfrac{6}{4}=\tfrac32\).</p>
+        <p class="res">\(S=\left]-\infty,\ \tfrac32\right]\)</p>
+        <p class="q">(c) \(x^2\leqslant -x^4\)</p>
+        <p>\(\iff x^2+x^4\leqslant 0 \iff x^2(1+x^2)\leqslant 0\). Comme \(1+x^2>0\), il faut \(x^2\leqslant 0\), donc \(x=0\).</p>
+        <p class="res">\(S=\{0\}\)</p>
+        <p class="q">(d) \(x^3+x-2=0\)</p>
+        <p>\(x=1\) est racine évidente (\(1+1-2=0\)). On factorise : \(x^3+x-2=(x-1)(x^2+x+2)\). Le facteur
+        \(x^2+x+2\) a pour discriminant \(\Delta=1-8=-7<0\) : aucune racine réelle.</p>
+        <p class="res">\(S=\{1\}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 10 — \(x^2=y^2\iff|x|=|y|\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Soient \(x,y\in\mathbb R\). Montrer l'équivalence.</div>
+        <p>La fonction \(t\mapsto t^2\) est <b>strictement croissante</b> (donc injective) sur \(\mathbb R_+\) :
+        pour \(a,b\geqslant 0\), on a \(a^2=b^2\iff a=b\). Appliquons-la à \(a=|x|\geqslant 0\) et \(b=|y|\geqslant 0\) :</p>
+        \[ |x|=|y| \iff |x|^2=|y|^2. \]
+        <p>Or \(|x|^2=x^2\) et \(|y|^2=y^2\) (par définition de la valeur absolue). Donc :</p>
+        <p class="res">\(x^2=y^2 \iff |x|=|y|\). ∎</p>
+        <p style="font-size:.9rem;opacity:.85">Alternative : \(x^2=y^2\iff x^2-y^2=0\iff(x-y)(x+y)=0\iff x=\pm y\iff |x|=|y|\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 11 — \(\dfrac{x}{1+y}=\dfrac{y}{1+x}\iff x=y\) sur \(\mathbb R_+^2\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Soit \((x,y)\in\mathbb R_+^2\).</div>
+        <p class="q">Sens \(\Leftarrow\) (trivial).</p>
+        <p>Si \(x=y\), les deux fractions sont manifestement égales.</p>
+        <p class="q">Sens \(\Rightarrow\) (par équivalences).</p>
+        <p>Comme \(x,y\geqslant 0\), on a \(1+x>0\) et \(1+y>0\) : on peut multiplier en croix sans changer le sens :</p>
+        \[ \frac{x}{1+y}=\frac{y}{1+x} \iff x(1+x)=y(1+y) \iff x+x^2=y+y^2. \]
+        <p>On regroupe :</p>
+        \[ x^2-y^2+x-y=0 \iff (x-y)(x+y)+(x-y)=0 \iff (x-y)\big(x+y+1\big)=0. \]
+        <p>Comme \(x,y\geqslant 0\), le facteur \(x+y+1\geqslant 1>0\) ne s'annule jamais. Donc \(x-y=0\).</p>
+        <p class="res">\(x=y\). ∎</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 12 — Deux propriétés arithmétiques (disjonction de cas)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Soit \(n\in\mathbb N\).</div>
+        <p class="q">(a) \(\dfrac{n(n+1)}{2}\in\mathbb N\).</p>
+        <p>Parmi deux entiers consécutifs \(n\) et \(n+1\), l'un est pair : leur produit est donc pair, divisible par 2.
+        En détail par disjonction de cas :</p>
+        <ul>
+          <li>Si \(n=2k\) : \(\dfrac{n(n+1)}{2}=\dfrac{2k(2k+1)}{2}=k(2k+1)\in\mathbb N\).</li>
+          <li>Si \(n=2k+1\) : \(\dfrac{n(n+1)}{2}=\dfrac{(2k+1)(2k+2)}{2}=(2k+1)(k+1)\in\mathbb N\).</li>
+        </ul>
+        <p class="res">Dans tous les cas, \(\dfrac{n(n+1)}{2}\in\mathbb N\).</p>
+        <p class="q">(b) \(\exists k\in\mathbb N,\ n^2=4k\) ou \(n^2=4k+1\).</p>
+        <ul>
+          <li>Si \(n=2p\) (pair) : \(n^2=4p^2\), donc \(k=p^2\) donne \(n^2=4k\).</li>
+          <li>Si \(n=2p+1\) (impair) : \(n^2=4p^2+4p+1=4(p^2+p)+1\), donc \(k=p^2+p\) donne \(n^2=4k+1\).</li>
+        </ul>
+        <p class="res">Un carré parfait est toujours de la forme \(4k\) ou \(4k+1\) (jamais \(4k+2\) ni \(4k+3\)).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 13 — \(3\nmid a\Rightarrow 3\nmid a^2\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Soit \(a\in\mathbb Z\). Montrer que si \(a\) n'est pas divisible par 3, alors \(a^2\) ne l'est pas non plus.</div>
+        <p>Si \(a\) n'est pas divisible par 3, alors son reste dans la division par 3 vaut 1 ou 2 : \(a=3k+1\) ou
+        \(a=3k+2\) avec \(k\in\mathbb Z\). On traite les deux cas.</p>
+        <ul>
+          <li>\(a=3k+1\) : \(a^2=9k^2+6k+1=3(3k^2+2k)+1\), reste \(1\) : non divisible par 3.</li>
+          <li>\(a=3k+2\) : \(a^2=9k^2+12k+4=3(3k^2+4k+1)+1\), reste \(1\) : non divisible par 3.</li>
+        </ul>
+        <p class="res">Dans les deux cas \(a^2\) laisse un reste \(1\) modulo 3, donc \(3\nmid a^2\). ∎</p>
+        <div class="note">Par <b>contraposée</b>, on obtient aussi le résultat utile : \(3\mid a^2\Rightarrow 3\mid a\)
+        (indispensable pour prouver que \(\sqrt3\) est irrationnel).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 14 — Quatre récurrences</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Soit \(n\in\mathbb N^*\). Démontrer par récurrence.</div>
+        <p class="q">(a) \(1+2+\cdots+n=\dfrac{n(n+1)}{2}\)</p>
+        <p><b>Init.</b> \(n=1\) : membre de gauche \(=1\), de droite \(=\tfrac{1\cdot 2}{2}=1\) ✓.
+        <b>Héréd.</b> Supposons \(S_n=\tfrac{n(n+1)}{2}\). Alors :</p>
+        \[ S_{n+1}=S_n+(n+1)=\frac{n(n+1)}{2}+(n+1)=(n+1)\!\left(\frac n2+1\right)=\frac{(n+1)(n+2)}{2}. \]
+        <p class="res">\(P(n+1)\) vraie, donc la formule vaut pour tout \(n\geqslant 1\).</p>
+
+        <p class="q">(b) \(1^2+2^2+\cdots+n^2=\dfrac{n(n+1)(2n+1)}{6}\)</p>
+        <p><b>Init.</b> \(n=1\) : \(1=\tfrac{1\cdot 2\cdot 3}{6}=1\) ✓. <b>Héréd.</b> :</p>
+        \[ S_{n+1}=\frac{n(n+1)(2n+1)}{6}+(n+1)^2=\frac{n+1}{6}\big[n(2n+1)+6(n+1)\big]. \]
+        <p>Or \(n(2n+1)+6(n+1)=2n^2+7n+6=(n+2)(2n+3)\), d'où :</p>
+        \[ S_{n+1}=\frac{(n+1)(n+2)(2n+3)}{6}=\frac{(n+1)\big((n+1)+1\big)\big(2(n+1)+1\big)}{6}. \]
+        <p class="res">\(P(n+1)\) vraie.</p>
+
+        <p class="q">(c) \(1^3+2^3+\cdots+n^3=\dfrac{n^2(n+1)^2}{4}\)</p>
+        <p><b>Init.</b> \(n=1\) : \(1=\tfrac{1\cdot 4}{4}=1\) ✓. <b>Héréd.</b> :</p>
+        \[ S_{n+1}=\frac{n^2(n+1)^2}{4}+(n+1)^3=(n+1)^2\!\left[\frac{n^2}{4}+(n+1)\right]=(n+1)^2\cdot\frac{n^2+4n+4}{4}=\frac{(n+1)^2(n+2)^2}{4}. \]
+        <p class="res">\(P(n+1)\) vraie. (On retrouve \(\sum k^3=(\sum k)^2\).)</p>
+
+        <p class="q">(d) \(n\geqslant 4\Rightarrow 2^n\geqslant n^2\)</p>
+        <p><b>Init.</b> \(n=4\) : \(2^4=16\geqslant 16=4^2\) ✓. <b>Héréd.</b> Soit \(n\geqslant 4\) tel que \(2^n\geqslant n^2\). Alors :</p>
+        \[ 2^{n+1}=2\cdot 2^n\geqslant 2n^2. \]
+        <p>Il reste à comparer \(2n^2\) et \((n+1)^2\) :
+        \(2n^2-(n+1)^2=n^2-2n-1=(n-1)^2-2\). Pour \(n\geqslant 4\), \((n-1)^2\geqslant 9>2\), donc \(2n^2\geqslant(n+1)^2\).</p>
+        \[ 2^{n+1}\geqslant 2n^2\geqslant (n+1)^2. \]
+        <p class="res">\(P(n+1)\) vraie, donc \(2^n\geqslant n^2\) pour tout \(n\geqslant 4\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 15 — Deux irrationalités (par l'absurde)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\sqrt2\) est irrationnel.</p>
+        <p>Supposons par l'absurde \(\sqrt2\in\mathbb Q\), donc \(\sqrt2=\dfrac pq\) avec \(p,q\in\mathbb N^*\)
+        et la fraction <b>irréductible</b> (\(\gcd(p,q)=1\)). En élevant au carré : \(2=\dfrac{p^2}{q^2}\), soit
+        \(p^2=2q^2\). Ainsi \(p^2\) est pair, donc \(p\) est pair (contraposée de « impair \(\Rightarrow\) carré impair »),
+        \(p=2p'\). Alors \(4p'^2=2q^2\), soit \(q^2=2p'^2\) : \(q^2\) pair, donc \(q\) pair.</p>
+        <p>\(p\) et \(q\) sont tous deux pairs, ce qui contredit \(\gcd(p,q)=1\). Absurde.</p>
+        <p class="res">\(\sqrt2\notin\mathbb Q\). ∎</p>
+        <p class="q">(b) \(\dfrac{\ln 2}{\ln 3}\) est irrationnel.</p>
+        <p>Le nombre est strictement positif. Supposons par l'absurde \(\dfrac{\ln2}{\ln3}=\dfrac pq\) avec
+        \(p,q\in\mathbb N^*\). Alors \(q\ln2=p\ln3\), soit \(\ln(2^q)=\ln(3^p)\), d'où, l'exponentielle étant injective :</p>
+        \[ 2^q=3^p. \]
+        <p>Le membre de gauche \(2^q\) est <b>pair</b> (car \(q\geqslant 1\)), tandis que \(3^p\) est <b>impair</b>
+        (produit d'impairs). Un nombre ne peut être à la fois pair et impair : absurde. (Argument équivalent :
+        unicité de la décomposition en facteurs premiers.)</p>
+        <p class="res">\(\dfrac{\ln2}{\ln3}\notin\mathbb Q\). ∎</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 16 — Analyse-synthèse dans \(\mathbb R_+^*\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\sqrt{x(x-3)}=\sqrt{3x-5}\)</p>
+        <p><b>Analyse.</b> Supposons \(x\in\mathbb R_+^*\) solution. Les racines exigent \(x(x-3)\geqslant 0\) et
+        \(3x-5\geqslant 0\), i.e. \(x\geqslant\tfrac53\). Les deux membres étant \(\geqslant 0\), on peut élever au carré :</p>
+        \[ x(x-3)=3x-5 \iff x^2-3x=3x-5 \iff x^2-6x+5=0 \iff (x-1)(x-5)=0. \]
+        <p>Candidats : \(x=1\) ou \(x=5\). La condition \(x\geqslant\tfrac53\) élimine \(x=1\). Reste \(x=5\).</p>
+        <p><b>Synthèse.</b> Pour \(x=5\) : \(\sqrt{5\cdot 2}=\sqrt{10}\) et \(\sqrt{15-5}=\sqrt{10}\) ✓.</p>
+        <p class="res">\(S=\{5\}\)</p>
+        <p class="q">(b) \(x^{(x^x)}=(x^x)^x\)</p>
+        <p>Le membre de droite se simplifie : \((x^x)^x=x^{x\cdot x}=x^{x^2}\). L'équation devient \(x^{x^x}=x^{x^2}\).</p>
+        <p><b>Analyse.</b> Soit \(x\in\mathbb R_+^*\) solution. On distingue selon la base \(x\) :</p>
+        <ul>
+          <li>Si \(x=1\) : les deux membres valent \(1\), l'équation est vérifiée.</li>
+          <li>Si \(x\neq 1\) : la fonction \(t\mapsto x^{t}\) est <b>injective</b> (base \(>0\) et \(\neq 1\)), donc
+          \(x^{x^x}=x^{x^2}\iff x^x=x^2\). À nouveau par injectivité (base \(x\neq 1\)) : \(x^x=x^2\iff x=2\).</li>
+        </ul>
+        <p>Candidats : \(x=1\) et \(x=2\).</p>
+        <p><b>Synthèse.</b></p>
+        <ul>
+          <li>\(x=1\) : \(1^{1}=1\) et \((1^1)^1=1\) ✓.</li>
+          <li>\(x=2\) : \(x^x=2^2=4\), donc membre de gauche \(2^{4}=16\) ; membre de droite \((2^2)^2=4^2=16\) ✓.</li>
+        </ul>
+        <p class="res">\(S=\{1,\,2\}\)</p>
+      </div>
+    </div>
+
+  </section>
+
+  <p style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.9rem;opacity:.75">
+    Chapitre 1 du cours M01 (S1). Sources : <em>Chap_1.pdf</em> (cours magistral) et
+    <em>TD01 — Logique et raisonnement</em>. Corrigé rédigé intégralement (pas de corrigé officiel fourni).
+  </p>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours (CM)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/logique-raisonnement/Chap_1.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Chap_1</span><span class="badge">Cours (CM)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/logique-raisonnement/TD01___Logique_et_raisonnement.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD01___Logique_et_raisonnement</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

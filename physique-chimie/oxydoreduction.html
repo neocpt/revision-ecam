@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chimie — Oxydoréduction — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' }, svg: { fontCache: 'global' } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-phys">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Chimie · Oxydoréduction</span>
+  <h1 class="title">Oxydoréduction</h1>
+  <p class="lead">Une réaction <b>redox</b> est un transfert d'électrons : l'<b>oxydant</b> les capte (il est
+  réduit), le <b>réducteur</b> les cède (il est oxydé). On repère les échanges par le <b>nombre d'oxydation</b>, on
+  calcule les potentiels d'électrode par la <b>relation de Nernst</b>, et on exploite tout cela dans les
+  <b>piles</b>, les <b>titrages redox</b> et les <b>courbes intensité-potentiel</b> (corrosion, surtension).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD (32 exercices)</a></li>
+      <li><a href="#e0">4. Table des potentiels standards</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ============================ COURS ============================ -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Nombre d'oxydation (n.o.)</h3>
+    <div class="def"><span class="lab">Règles</span>
+    Charge fictive d'un atome si toutes les liaisons étaient ioniques. \(\text{n.o.}\) d'un corps simple = 0 ; d'un
+    ion monoatomique = sa charge ; O = \(-\text{II}\) (sauf peroxydes \(-\text I\)) ; H = \(+\text I\) ; alcalins
+    \(+\text I\), alcalino-terreux \(+\text{II}\). La <b>somme</b> des n.o. (×indices) = charge de l'édifice.</div>
+    <div class="note"><span class="lab">Oxydation / réduction</span>
+    <b>Oxydation</b> = perte d'électrons = n.o. <b>augmente</b> ; <b>réduction</b> = gain d'électrons = n.o.
+    <b>diminue</b>. Le nombre d'électrons d'une demi-équation = \(|\Delta\text{n.o.}|\) (×coefficient stœchiométrique).</div>
+
+    <h3>1.2 Demi-équations et équilibrage</h3>
+    <div class="method"><span class="lab">Équilibrer une demi-équation (milieu acide)</span>
+    \(\text{Ox}+n\,e^-=\text{Red}\). On équilibre : (1) l'élément redox, (2) l'oxygène avec \(\text H_2\text O\),
+    (3) l'hydrogène avec \(\text H^+\), (4) la charge avec les \(e^-\). Pour l'équation-bilan : combiner deux
+    demi-équations en éliminant les \(e^-\) (multiplier pour égaler le nombre d'électrons).</div>
+
+    <h3>1.3 Relation de Nernst</h3>
+    <div class="thm"><span class="lab">Potentiel d'électrode</span>
+    \[E=E^0+\frac{RT}{nF}\ln\frac{[\text{Ox}]}{[\text{Red}]}=\boxed{\,E^0+\frac{0{,}06}{n}\log\frac{[\text{Ox}]}{[\text{Red}]}\,}\ (25\,°\text C)\]
+    Le facteur \(0{,}06\) vient de \(\frac{RT\ln 10}{F}=\frac{8{,}314\times298\times2{,}30}{96485}\approx0{,}059\)&nbsp;V.
+    Solides et solvant comptent pour 1 ; les gaz interviennent par leur pression ; \([\text H^+]\) figure dans le log
+    des couples en milieu acide (dépendance en pH : \(E=E^0-0{,}06\,\text{pH}\times\frac{\text{coeff }H^+}{n}+\dots\)).</div>
+
+    <h3>1.4 Piles</h3>
+    <div class="def"><span class="lab">Anode, cathode, f.é.m.</span>
+    Deux demi-piles reliées par un pont salin. L'électrode de <b>plus haut potentiel</b> est la <b>cathode</b>
+    (réduction, pôle +) ; l'autre est l'<b>anode</b> (oxydation, pôle −). Tension à vide :
+    \[U=E_+-E_-=E_{cathode}-E_{anode}>0.\]
+    Le courant conventionnel sort par le +, les électrons circulent de l'anode vers la cathode dans le circuit.</div>
+    <div class="thm"><span class="lab">Charge débitée et durée</span>
+    \[Q=I\,\Delta t=n\,\xi\,F\quad(F=96485\ \text{C/mol})\]
+    où \(n\) = électrons échangés et \(\xi\) = avancement (mol) au réactif limitant. D'où
+    \(\Delta t=\frac{n\xi F}{I}\).</div>
+
+    <h3>1.5 Travail électrique</h3>
+    <div class="thm"><span class="lab">Énergie fournie</span>
+    \[\mathcal E=-U\,I\,\Delta t=-U\,Q=-U\,n\,\xi\,F\]
+    Négative car la pile <b>fournit</b> de l'énergie à l'extérieur. L'<b>ampère-heure</b> est une unité de charge :
+    \(1\ \text{A·h}=3600\)&nbsp;C ; l'énergie stockée vaut \(\mathcal E=U\times Q\).</div>
+
+    <h3>1.6 Électrodes de référence</h3>
+    <div class="note"><span class="lab">Référence des potentiels</span>
+    L'<b>électrode standard/normale à hydrogène (ESH/ENH)</b> : couple \(\text H^+/\text H_2\), \(E^0=0{,}000\)&nbsp;V
+    par définition (\([\text H^+]=1\)&nbsp;mol/L, \(P_{\text H_2}=1\)&nbsp;bar). Électrodes secondaires : <b>calomel
+    saturé (ECS)</b> \(0{,}24\)&nbsp;V/ENH (couple \(\text{Hg}_2\text{Cl}_2/\text{Hg}\)), <b>chlorure d'argent</b>
+    \(0{,}197\)&nbsp;V/ENH. Changer de référence = ajouter/retrancher l'écart de potentiel.</div>
+
+    <h3>1.7 Sens spontané d'une réaction</h3>
+    <div class="method"><span class="lab">Règle du « gamma »</span>
+    On calcule les deux potentiels de Nernst. L'<b>oxydant du couple de plus haut potentiel</b> réagit avec le
+    <b>réducteur du couple de plus bas potentiel</b>. Équivalent : la réaction est spontanée si \(E_{ox}>E_{red}\).
+    Constante d'équilibre : à l'égalité des potentiels,
+    \[\log K=\frac{n(E_1^0-E_2^0)}{0{,}06}.\]
+    Une réaction de titrage doit avoir \(K\gg1\) (souvent \(>10^4\)) pour être quasi-totale.</div>
+
+    <h3>1.8 Titrages redox</h3>
+    <div class="method"><span class="lab">Équivalence</span>
+    On applique l'égalité des quantités de matière <b>corrigée de la stœchiométrie</b> :
+    \(\frac{C_{ox}V_{ox}}{\nu_{ox}}=\frac{C_{red}V_{red}}{\nu_{red}}\). Repérage : indicateur redox, ou coloration
+    propre (ex. \(\text{MnO}_4^-\) violet en excès, amidon+diiode bleu). À la demi-équivalence d'un couple, le
+    potentiel vaut le \(E^0\) de ce couple.</div>
+
+    <h3>1.9 Courbes intensité-potentiel</h3>
+    <div class="note"><span class="lab">Cinétique électrochimique</span>
+    La courbe \(i=f(E)\) donne le courant échangé selon le potentiel imposé. Une <b>oxydation</b> donne un courant
+    anodique \(i_a>0\), une <b>réduction</b> un courant cathodique \(i_c<0\). En corrosion (une seule pièce, pas de
+    séparation en demi-piles) : \(i_a=-i_c\) (les électrons cédés sont captés ailleurs), le système se cale au
+    <b>potentiel de corrosion</b> (intersection). Une <b>surtension</b> (décalage cinétique d'un couple, ex.
+    \(\text H^+/\text H_2\) sur zinc) peut empêcher une réaction pourtant thermodynamiquement possible.</div>
+  </section>
+
+  <!-- ======================= EXERCICES CRÉÉS ======================= -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+    <p class="lead">Trois exercices originaux : potentiel de Nernst, f.é.m. d'une pile, et constante d'équilibre
+    d'une réaction redox.</p>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice A — Potentiel d'une électrode d'argent <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Lame d'argent dans \([\text{Ag}^+]=5{,}0\cdot10^{-3}\)&nbsp;mol/L.
+        \(E^0(\text{Ag}^+/\text{Ag})=0{,}80\)&nbsp;V. Calculer \(E\).</p>
+        <p>\(\text{Ag}^++e^-=\text{Ag}\) (\(n=1\), argent solide absent du log) :
+        \(E=0{,}80+\frac{0{,}06}{1}\log(5\cdot10^{-3})=0{,}80+0{,}06\times(-2{,}30)=0{,}80-0{,}14\).</p>
+        <div class="res">\(E=0{,}66\)&nbsp;V. (Diluer abaisse le potentiel de l'oxydant, logiquement.)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice B — f.é.m. d'une pile Zn / Ag <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Demi-pile \(\text{Zn}^{2+}/\text{Zn}\) (\([\text{Zn}^{2+}]=0{,}10\), \(E^0=-0{,}76\)) et
+        \(\text{Ag}^+/\text{Ag}\) (\([\text{Ag}^+]=0{,}10\), \(E^0=0{,}80\)).</p>
+        <p>\(E_{Zn}=-0{,}76+\frac{0{,}06}{2}\log(0{,}10)=-0{,}76-0{,}03=-0{,}79\)&nbsp;V.
+        \(E_{Ag}=0{,}80+0{,}06\log(0{,}10)=0{,}80-0{,}06=0{,}74\)&nbsp;V.</p>
+        <p>Argent = potentiel le plus haut → cathode (+). \(U=E_+-E_-=0{,}74-(-0{,}79)=1{,}53\)&nbsp;V.</p>
+        <div class="res">\(U\approx1{,}5\)&nbsp;V ; réaction spontanée \(2\text{Ag}^++\text{Zn}\to\text{Zn}^{2+}+2\text{Ag}\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice C — Constante d'équilibre d'une réaction redox <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Réaction \(2\text{Fe}^{3+}+2\text I^-=2\text{Fe}^{2+}+\text I_2\). Couples
+        \(\text{Fe}^{3+}/\text{Fe}^{2+}\) (\(E^0=0{,}77\)) et \(\text I_2/\text I^-\) (\(E^0=0{,}62\)). Calculer \(K\).</p>
+        <p>Électrons échangés \(n=2\). À l'équilibre les potentiels s'égalisent :
+        \(\log K=\frac{n(E_1^0-E_2^0)}{0{,}06}=\frac{2\,(0{,}77-0{,}62)}{0{,}06}=\frac{0{,}30}{0{,}06}=5\).</p>
+        <div class="res">\(K=10^{5}\gg10^{4}\) : réaction <b>quasi-totale</b> dans le sens direct (le Fe³⁺ oxyde bien
+        les iodures).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CORRECTION TD ======================= -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD</h2>
+    <p class="lead">TD chimie 1 — Oxydoréduction (VG, 2025/2026) : 32 exercices, chaque question traitée.
+    Constantes : \(F=96485\)&nbsp;C/mol, facteur de Nernst \(0{,}06\)&nbsp;V. Potentiels standards : voir la
+    <a href="#e0">table</a>.</p>
+
+    <h3>Partie A — Pour commencer</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 1 — Nombre d'oxydation <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p>1) \(\text{Li}^+\) : +I ; \(\text{Fe}\) : 0 ; \(\text{Fe}^{3+}\) : +III ; \(\text S^{2-}\) : −II.</p>
+        <p>2) \(\text{MnO}_2\) : +IV ; \(\text{Fe}_2\text O_3\) : +III ; \(\text H_2\text O_2\) : −I ;
+        \(\text{HNO}_3\) : +V ; \(\text{HNO}_2\) : +III ; \(\text H_2\text{CO}_3\) : +IV ; \(\text{HClO}_4\) : +VII ;
+        \(\text{Fe(OH)}_2\) : +II.</p>
+        <p>3) \(\text{MnO}_4^-\) : +VII ; \(\text{MnO}_4^{2-}\) : +VI ; \(\text{SO}_4^{2-}\) : +VI ;
+        \(\text{Fe(OH)}_2^+\) : +III.</p>
+        <p>4) \(\text{Na}_3\text{PO}_4\) (P) : +V ; \(\text{CaCl}_2\) (Cl) : −I.</p>
+        <p>5) \(\text{NH}_4\text{NO}_3\) : deux n.o. différents ! N de \(\text{NH}_4^+\) : −III, N de \(\text{NO}_3^-\) :
+        +V. \((\text{NH}_4)_3\text{PO}_4\) (P) : +V.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 2 — Demi-équations et bilans <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">1) Demi-équations (milieu acide, vérifier \(n=|\Delta\text{n.o.}|\))</p>
+        <p>\(\text{Fe(OH)}_2+2\text H^++2e^-=\text{Fe}+2\text H_2\text O\) ;
+        \(\text{MnO}_4^-+8\text H^++5e^-=\text{Mn}^{2+}+4\text H_2\text O\) ;
+        \(2\text{ClO}^-+4\text H^++2e^-=\text{Cl}_2+2\text H_2\text O\) ; \(\text{Cl}_2+2e^-=2\text{Cl}^-\) ;
+        \(\text H_2\text O_2+2\text H^++2e^-=2\text H_2\text O\) ; \(\text H_2\text O_2=\text O_2+2\text H^++2e^-\).</p>
+        <p class="q">2) Équations-bilans</p>
+        <p>a) \(5\text{Fe}+2\text{MnO}_4^-+2\text H_2\text O+6\text H^+\to5\text{Fe(OH)}_2+2\text{Mn}^{2+}\)
+        (×5 et ×2, élimination des \(e^-\)).<br>
+        b) \(2\text{MnO}_4^-+5\text H_2\text O_2+6\text H^+\to2\text{Mn}^{2+}+5\text O_2+8\text H_2\text O\).<br>
+        c) \(\text{Cl}^-+\text{ClO}^-+2\text H^+\to\text{Cl}_2+\text H_2\text O\) (dismutation inverse).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 3 — Le facteur 0,06 V <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p>\(E=E^0+\frac{RT}{nF}\ln\frac{[\text{Ox}]}{[\text{Red}]}\) avec \(\ln=2{,}30\log\) :</p>
+        <p>\(\frac{RT\ln 10}{F}=\frac{8{,}314\times298\times2{,}30}{96485}=0{,}059\approx0{,}06\)&nbsp;V, d'où
+        \(E=E^0+\frac{0{,}06}{n}\log\frac{[\text{Ox}]}{[\text{Red}]}\). Le \(0{,}06\) est en volts.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 4 — Potentiel et pH <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">1–3) Couple \(\text H^+/\text H_2\)</p>
+        <p>\(2\text H^++2e^-=\text H_2\), \(E=0+\frac{0{,}06}{2}\log\frac{[\text H^+]^2}{P_{\text H_2}}\). Avec
+        \(P_{\text H_2}=1\) : \(E=0{,}06\log[\text H^+]=-0{,}06\,\text{pH}\). Droite de pente \(-0{,}06\) passant par
+        l'origine.</p>
+        <p class="q">4) Couple \(\text O_2/\text H_2\text O\) (\(E^0=1{,}36\))</p>
+        <p>\(2\text H_2\text O=\text O_2+4\text H^++4e^-\), \(E=1{,}36+\frac{0{,}06}{4}\log[\text H^+]^4=1{,}36-0{,}06\,\text{pH}\)
+        (droite de pente \(-0{,}06\), ordonnée à l'origine \(1{,}36\)).</p>
+        <p class="q">5) Couple \(\text I_2/\text I^-\) (\(E^0=0{,}62\))</p>
+        <p>\(\text I_2+2e^-=2\text I^-\), \(E=0{,}62+0{,}03\log\frac{[\text I_2]}{[\text I^-]^2}\) : <b>indépendant du
+        pH</b> (pas de \(\text H^+\)).</p>
+      </div>
+    </div>
+
+    <h3>Partie B — Piles</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 5 — Nernst et incertitude <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Cuivre dans \([\text{Cu}^{2+}]=0{,}010\), \(E^0=0{,}34\).</p>
+        <p>\(E=0{,}34+\frac{0{,}06}{2}\log(0{,}01)=0{,}34-0{,}06=0{,}28\)&nbsp;V.</p>
+        <p>Incertitude 5 % sur \(C\) : \(E_\pm=0{,}34+0{,}03\log(0{,}01\times1{,}05\text{ ou }0{,}95)=0{,}281/0{,}279\)&nbsp;V,
+        soit \(\varepsilon\approx0{,}36\%\) seulement (l'erreur est « amortie » par le log).</p>
+        <div class="res">\(E=0{,}28\)&nbsp;V ; \(E=f(\log[\text{Cu}^{2+}])\) est une droite de pente \(0{,}03\)&nbsp;V/décade.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 6 — Pile argent / fer <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p>\(E_{Fe}=-0{,}44+\frac{0{,}06}{2}\log(0{,}2)=-0{,}46\)&nbsp;V ;
+        \(E_{Ag}=0{,}80+0{,}06\log(0{,}05)=0{,}72\)&nbsp;V. Ag = cathode.
+        \(U=0{,}72-(-0{,}46)=1{,}18\)&nbsp;V.</p>
+        <p>3) Dilution ×2 de \(\text{Ag}^+\) : \(E_{Ag}=0{,}80+0{,}06\log(0{,}025)=0{,}70\Rightarrow U=1{,}16\)&nbsp;V
+        (peu de changement, effet log). 4) Précipitation AgI (\([\text{Ag}^+]=10^{-14}\)) :
+        \(E_{Ag}=0{,}80+0{,}06\log(10^{-14})=-0{,}04\Rightarrow U=0{,}40\)&nbsp;V (grand changement).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 7 — Pile Daniell <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p>\(E_{Cu}=0{,}34+0{,}03\log c\), \(E_{Zn}=-0{,}76+0{,}03\log c\). Cu = cathode.
+        \(U=E_+-E_-=0{,}34-(-0{,}76)=1{,}1\)&nbsp;V, <b>indépendant de \(c\)</b> (concentrations égales).</p>
+        <p>2) Pour \(U=0\) avec \([\text{Zn}^{2+}]=1\) : \(-0{,}76-0{,}34=0{,}03\log c\Rightarrow\log c=-\frac{110}{3}\),
+        \(c\approx2{,}2\cdot10^{-37}\)&nbsp;mol/L — <b>impossible</b> (moins d'un atome par litre !). La tension ne
+        peut donc pas s'annuler.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 8 &amp; 9 — Pile de concentration ; cuivre/plomb <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 8 — Pile de concentration (cuivre)</p>
+        <p>Même couple des deux côtés. Demi-pile 1 : \(c=1\Rightarrow E=0{,}34\)&nbsp;V. Demi-pile 2 :
+        \(c=\frac{(1/20)\cdot10^{-3}\times1}{0{,}1}=5\cdot10^{-4}\Rightarrow E=0{,}24\)&nbsp;V. \(U=0{,}10\)&nbsp;V
+        (la pile fonctionne par différence de concentration).</p>
+        <p class="q">Ex 9 — Cuivre / plomb</p>
+        <p>\(E_{Cu}=0{,}34\), \(E_{Pb}=-0{,}13\)&nbsp;V. Cathode = cuivre (réduction \(\text{Cu}^{2+}+2e^-\to\text{Cu}\)),
+        anode = plomb. Bilan \(\text{Cu}^{2+}+\text{Pb}\to\text{Pb}^{2+}+\text{Cu}\).
+        \(E^0_{pile}=0{,}34-(-0{,}13)=0{,}47\)&nbsp;V. Trop faible pour remplacer une pile sèche (1,0–1,5 V). Ajout
+        de \(\text H_2\text{SO}_4\) (PbSO₄ précipite, \([\text{Pb}^{2+}]\downarrow\)) : \(E_{Pb}\downarrow\) donc
+        \(U\uparrow\).</p>
+      </div>
+    </div>
+
+    <h3>Partie C — Bilan chimique</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 10 — Pile Leclanché <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p>Couples \(\text{MnO}_2/\text{MnO(OH)}\) et \(\text{Zn}^{2+}/\text{Zn}\). Demi-équations
+        \(\text{MnO}_2+\text H^++e^-=\text{MnO(OH)}\), \(\text{Zn}^{2+}+2e^-=\text{Zn}\). n.o. : Mn +IV→+III,
+        Zn +II→0. Réactifs neufs : Zn + \(\text{MnO}_2\). Bilan
+        \(\text{Zn}+2\text{MnO}_2+2\text H^+\to2\text{MnO(OH)}+\text{Zn}^{2+}\).</p>
+        <p>Épuisement simultané : \(n_{\text{MnO}_2}=2n_{\text{Zn}}\), d'où
+        \(m_{\text{MnO}_2}=2\frac{M_{\text{MnO}_2}}{M_{\text{Zn}}}m_{\text{Zn}}=2\times\frac{86{,}94}{65{,}4}\times19{,}6=52{,}1\)&nbsp;g.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 11 — Accumulateur au plomb <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p>n.o. du plomb : Pb 0, PbSO₄ +II, PbO₂ +IV. Couples \((\text{Pb}/\text{PbSO}_4)\) et
+        \((\text{PbSO}_4/\text{PbO}_2)\). Demi-équations :
+        \(\text{Pb}+\text{SO}_4^{2-}=\text{PbSO}_4+2e^-\) et
+        \(\text{PbO}_2+\text{SO}_4^{2-}+4\text H^++2e^-=\text{PbSO}_4+2\text H_2\text O\). Bilan (décharge) :
+        \(\text{Pb}+\text{PbO}_2+2\text H_2\text{SO}_4\to2\text{PbSO}_4+2\text H_2\text O\).</p>
+        <div class="res">Les véhicules électriques utilisent le lithium car le plomb (M = 207 g/mol) rendrait les
+        batteries beaucoup trop lourdes.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 12 — Durée d'une pile Daniell <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p>Réaction \(\text{Cu}^{2+}+\text{Zn}\to\text{Zn}^{2+}+\text{Cu}\) (Cu = cathode).
+        \(\xi=0{,}10\)&nbsp;mol (limitant), \(n=2\), \(I=0{,}450\)&nbsp;A :
+        \(\Delta t=\frac{n\xi F}{I}=\frac{2\times0{,}1\times96485}{0{,}45}=42\,882\)&nbsp;s (≈ 12 h).</p>
+        <p>(4) Moitié de \(\text{ZnSO}_4\) : rien ne change (c'est un produit). (5) Moitié de \(\text{CuSO}_4\) :
+        durée divisée par 2 (\(\text{Cu}^{2+}\) devient limitant).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 13 — Courant de corrosion <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p>Rouille = fer(III), \(\text{Fe}\to\text{Fe}^{3+}+3e^-\) (\(n=3\)), \(\xi=1\)&nbsp;mol en 1000 jours :</p>
+        <p>\(I=\frac{n\xi F}{\Delta t}=\frac{3\times1\times96485}{1000\times24\times3600}=3{,}4\)&nbsp;mA.</p>
+      </div>
+    </div>
+
+    <h3>Partie D — Travail électrique</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 14 — Travail d'une pile Daniell <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p>\(n_{Cu}=\frac{1}{63{,}55}=1{,}6\cdot10^{-2}\), \(n_{Zn}=\frac{1}{65{,}38}=1{,}5\cdot10^{-2}\)&nbsp;mol →
+        Zn limitant, \(\xi=1{,}5\cdot10^{-2}\). \(U\approx1{,}1\)&nbsp;V.
+        \(\mathcal E=-U\,n\,\xi\,F=-1{,}1\times2\times1{,}5\cdot10^{-2}\times96485=-3184\)&nbsp;J (fourni).</p>
+        <p>(2) Sans cuivre : inchangé (produit). (3) Sans zinc : rien ne se passe (pas de réducteur).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 15 &amp; 16 — Ampère-heure ; tension des piles <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 15 — Batterie vélo 48 V, 30 A·h, 1000 W</p>
+        <p>A·h = charge (1 A·h = 3600 C). \(\mathcal E=U\,Q=48\times30\times3600=5{,}2\cdot10^{6}\)&nbsp;J. Dénivelé
+        (100 kg) : \(h=\frac{\mathcal E}{mg}=5{,}2\cdot10^{3}\)&nbsp;m (frottements négligés !). À 1000 W :
+        \(\Delta t=\frac{\mathcal E}{P}=5{,}2\cdot10^{3}\)&nbsp;s ≈ 1,4 h. Câblage : ≈ 3 rangées de 13 piles en
+        parallèle (parallèle = capacité, série = tension).</p>
+        <p class="q">Ex 16 — Piles du commerce</p>
+        <p>Même couple redox (même \(U\)), quantités de matière différentes (durée de vie). Pile 9 V = 6 piles de
+        1,5 V en série ; pile plate 4,5 V = 3 piles en série.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 17 — Lithium vs nucléaire <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p>\(\mathcal E=U\,n\,\xi\,F=2{,}9\cdot10^{9}\)&nbsp;J avec \(U=3{,}5\), \(n=1\) :
+        \(\xi=\frac{2{,}9\cdot10^{9}}{3{,}5\times96485}=8588\)&nbsp;mol, \(m=\xi M=7\times8588\approx60\)&nbsp;kg.</p>
+        <div class="res">Il faut ≈ 60 kg de lithium pour égaler l'énergie de 1 g d'uranium enrichi.</div>
+      </div>
+    </div>
+
+    <h3>Partie E — Électrodes de référence</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 18, 19, 20 — Références et électrodes <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 18 — Changement de référence (ECS = 0,24 V/ENH)</p>
+        <p>Référence = ESH, \(E^0=0{,}000\)&nbsp;V. \(0{,}83\)&nbsp;V/ECS → \(0{,}83+0{,}24=1{,}07\)&nbsp;V/ESH.
+        \(-0{,}34\)&nbsp;V/ECS → \(-0{,}34+0{,}24=-0{,}10\)&nbsp;V/ESH. ECS mesurée par l'électrode AgCl
+        (\(0{,}197\)&nbsp;V/ENH) : \(0{,}24-0{,}197=0{,}043\)&nbsp;V/(AgCl).</p>
+        <p class="q">Ex 19 — Électrode à hydrogène</p>
+        <p>\(2\text H^++2e^-=\text H_2\), \(E=0{,}03\log\frac{[\text H^+]^2}{P_{\text H_2}}\). Pour \(E=0\) :
+        \([\text H^+]=1\)&nbsp;mol/L et \(P_{\text H_2}=1\)&nbsp;bar (conditions standard).</p>
+        <p class="q">Ex 20 — Calomel saturé (ECS)</p>
+        <p>Couple \(\text{Hg}_2\text{Cl}_2/\text{Hg}\) (Hg : +I dans Hg₂Cl₂, 0 dans Hg).
+        \(2\text{Hg}+2\text{Cl}^-=\text{Hg}_2\text{Cl}_2+2e^-\), \(E=E^0-0{,}06\log[\text{Cl}^-]\) (solide et liquide
+        purs = 1) : potentiel fixé par \([\text{Cl}^-]\) (saturé → constant).</p>
+      </div>
+    </div>
+
+    <h3>Partie F — Sens de réaction</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 21 — Sens spontané <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p>Règle : oxydant du plus haut potentiel + réducteur du plus bas. À 0,01 mol/L de chaque forme :</p>
+        <p>1) \(E(\text I_2/\text I^-)=0{,}62+0{,}03\log\frac{0{,}01}{0{,}01^2}=0{,}68\) &gt;
+        \(E(\text S_4\text O_6^{2-}/\text S_2\text O_3^{2-})=0{,}14\) : réaction
+        \(\text I_2+2\text S_2\text O_3^{2-}\to2\text I^-+\text S_4\text O_6^{2-}\), sens correct.</p>
+        <p>2) \(E(\text{Ag}^+/\text{Ag})=0{,}68\) &gt; \(E(\text{Cu}^{2+}/\text{Cu})=0{,}28\) :
+        \(2\text{Ag}^++\text{Cu}\to2\text{Ag}+\text{Cu}^{2+}\), sens correct.</p>
+        <p>3) À pH 3 : \(E(\text{Cr}_2\text O_7^{2-}/\text{Cr}^{3+})\approx0{,}93\) &gt;
+        \(E(\text{CH}_3\text{CHO}/\text{éthanol})\approx0{,}01\) :
+        \(\text{Cr}_2\text O_7^{2-}+3\,\text{éthanol}+8\text H^+\to3\,\text{CH}_3\text{CHO}+2\text{Cr}^{3+}+7\text H_2\text O\),
+        sens correct.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 22 — Pile fer / argent (fonctionnement) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p>\(E_{Fe}=-0{,}44+0{,}03\log(0{,}1)=-0{,}47\), \(E_{Ag}=0{,}80+0{,}06\log(1)=0{,}80\)&nbsp;V.
+        \(U=0{,}80-(-0{,}47)=1{,}27\)&nbsp;V. Sens spontané
+        \(2\text{Ag}^++\text{Fe}\to\text{Fe}^{2+}+2\text{Ag}\). Argent = cathode (+), fer = anode (−) ; les électrons
+        vont du fer vers l'argent.</p>
+        <p>Durée (0,20 mol Fe et 0,20 mol Ag⁺ ; Ag⁺ limitant, \(n=1\)) :
+        \(\Delta t=\frac{1\times0{,}2\times96485}{1{,}5}=12865\)&nbsp;s ≈ 3 h 34 min. On ne précise pas Fe³⁺/Ag car
+        ce sont les produits. À l'équilibre : 0 mol Ag⁺, 0,1 mol Fe restant, 0,1 mol Fe²⁺ et 0,2 mol Ag formés.</p>
+      </div>
+    </div>
+
+    <h3>Partie G — Titrages directs</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 23 — Titrage du diiode par le thiosulfate <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p>\(\text I_2+2\text S_2\text O_3^{2-}\to2\text I^-+\text S_4\text O_6^{2-}\). Égalité des potentiels au
+        cours du titrage (réaction totale) →
+        \(\log K=\frac{E^0_{\text I}-E^0_{\text{SO}}}{0{,}06}=\frac{0{,}62-0{,}08}{0{,}06}\times n\Rightarrow K\approx10^{18}\).
+        \(K\gg10^4\) : excellente réaction de titrage.</p>
+        <p>Stœchiométrie 1:2 : \(C_{\text I_2}V_i=\frac12 C_{\text{thio}}V_{eq}\Rightarrow
+        C=\frac{0{,}05\times14{,}8}{2\times5}=7{,}4\cdot10^{-2}\)&nbsp;mol/L.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 24 — Titrage de l'ammoniac par le bromate <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p>Demi-équations \(\text{BrO}_3^-+6\text H^++6e^-=\text{Br}^-+3\text H_2\text O\) et
+        \(2\text{NH}_3=\text N_2+6\text H^++6e^-\), bilan
+        \(\text{BrO}_3^-+2\text{NH}_3\to\text{Br}^-+3\text H_2\text O+\text N_2\). Sens standard correct
+        (\(E^0_{\text{BrO}_3}=0{,}58>E^0_{\text{NH}_3}=-0{,}09\)).</p>
+        <p>Stœchiométrie 1:2 : \(C=\frac{2C_{br}V_{eq}}{V_i}=\frac{2\times0{,}1\times17{,}3}{20}=0{,}173\)&nbsp;mol/L.</p>
+        <p>Indicateur : à la demi-équivalence \(E=E^0_{\text{NH}_3}=-0{,}09\)&nbsp;V ; à la double équivalence
+        \(E=E^0_{\text{BrO}_3}=0{,}68\)&nbsp;V. Aucun indicateur ne vire entre les deux. Alternative : titrer
+        \(\text{NH}_3\) (base) par un acide fort.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 25 &amp; 26 — Arsenic ; étalonnage du permanganate <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 25 — Acide arsénieux par le diiode</p>
+        <p>\(\text I_2+\text H_3\text{AsO}_3+\text H_2\text O\to\text H_3\text{AsO}_4+2\text H^++2\text I^-\)
+        (stœchiométrie 1:1) : \(C=\frac{0{,}05\times9{,}35}{10}=4{,}68\cdot10^{-2}\)&nbsp;mol/L. L'amidon vire au
+        violet dès qu'il y a du \(\text I_2\) en excès (après équivalence).</p>
+        <p class="q">Ex 26 — Étalonnage MnO₄⁻ par l'acide oxalique</p>
+        <p>\(5\text H_2\text C_2\text O_4+2\text{MnO}_4^-+6\text H^+\to10\text{CO}_2+2\text{Mn}^{2+}+8\text H_2\text O\).
+        Étalon : \(C_{ox}=\frac{1{,}28/126{,}065}{0{,}5}=0{,}0203\)&nbsp;mol/L. Stœchiométrie 5:2 :
+        \(C_{per}=\frac{2C_{ox}V_i}{5V_{eq}}=\frac{2\times0{,}0203\times20}{5\times14{,}7}=0{,}011\)&nbsp;mol/L. La
+        solution rosit quand \(\text{MnO}_4^-\) est en excès. \(\log K=\frac{10(1{,}51-(-0{,}49))}{0{,}06}\Rightarrow
+        K\approx10^{333}\) (immense).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 27 — Iodométrie (potentiel au cours du dosage) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p>\(\text I_2+2\text S_2\text O_3^{2-}\to2\text I^-+\text S_4\text O_6^{2-}\). Équivalence (1:2) :
+        \(C_2=\frac{C_1V_{eq}}{2V_2}=\frac{0{,}10\times12}{2\times10}=0{,}06\)&nbsp;mol/L.</p>
+        <p>Avant l'équivalence, le potentiel est fixé par le couple \(\text I_2/\text I^-\). Pour \(V_1=6\)&nbsp;mL,
+        tableau d'avancement (\(\xi=\frac{C_1V_1}{2}=3\cdot10^{-4}\)) : \([\text I_2]=1{,}88\cdot10^{-2}\),
+        \([\text I^-]=3{,}76\cdot10^{-2}\)&nbsp;mol/L (\(V_f=16\)&nbsp;mL), d'où
+        \(E=0{,}54+0{,}03\log\frac{[\text I_2]}{[\text I^-]^2}=0{,}57\)&nbsp;V. Pour \(V_1=9\)&nbsp;mL :
+        \(E\approx0{,}56\)&nbsp;V.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 28 — Analyse d'un effluent gazeux (SO₂) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p>\(2\text{MnO}_4^-+5\text{SO}_2+2\text H_2\text O\to2\text{Mn}^{2+}+5\text{SO}_4^{2-}+4\text H^+\).
+        Stœchiométrie 2:5 : \(C_{\text{SO}_2}=\frac{5C_{Mn}V_{eq}}{2V_S}=\frac{5\times10^{-3}\times18{,}8\cdot10^{-3}}{2\times0{,}25}
+        =1{,}88\cdot10^{-4}\)&nbsp;mol/L.</p>
+        <p>Masse dans 10 m³ : \(n=1{,}88\cdot10^{-4}\times0{,}250=4{,}7\cdot10^{-5}\)&nbsp;mol, soit
+        \(4{,}7\cdot10^{-6}\)&nbsp;mol/m³ → \(m=3\)&nbsp;mg/m³. \(3\)&nbsp;mg \(\ll50\)&nbsp;g/m³ (norme OMS) : pas
+        d'épuration nécessaire.</p>
+        <p>Pour \(V=30\)&nbsp;mL (après équivalence, pH = 1) : le potentiel est celui de \(\text{MnO}_4^-/\text{Mn}^{2+}\).
+        Tableau d'avancement puis \(E=1{,}51+\frac{0{,}06}{5}\log\frac{[\text{MnO}_4^-][\text H^+]^8}{[\text{Mn}^{2+}]}
+        =1{,}41\)&nbsp;V.</p>
+      </div>
+    </div>
+
+    <h3>Partie H — Courbes intensité-potentiel</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 29 — Courbe i-E d'une pile <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p>Couples \(\text{MnO}_2/\text{MnO(OH)}\) et \(\text{Zn}^{2+}/\text{Zn}\). À concentrations 1 mol/L,
+        \(E=E^0\). Réaction : \(2\text{MnO}_2+2\text H^++\text{Zn}\to\text{Zn}^{2+}+2\text{MnO(OH)}\), délivrant
+        1,5 V.</p>
+        <p>Lecture graphique : (a) les potentiels tracés = les \(E^0\) (car \(E=E^0\)). (b) à \(I=0{,}2\)&nbsp;A,
+        \(U\approx0{,}4-(-0{,}4)=0{,}8\)&nbsp;V. (c) pour \(U=1{,}3\)&nbsp;V (symétrique) : \(I\approx0{,}05\)&nbsp;A.
+        (d) \(R=\frac{U}{I}=\frac{1{,}3}{0{,}05}=26\ \Omega\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 30 — Corrosion des métaux <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p>À pH 2, \([\text{Fe}^{2+}]=10^{-3}\) : \(E_{Fe}=-0{,}44+0{,}03\log(10^{-3})=-0{,}35\),
+        \(E_{\text H^+/\text H_2}=0+0{,}03\log(10^{-4})=-0{,}12\)&nbsp;V. Comme \(E_{\text H^+}>E_{Fe}\) : réaction
+        \(2\text H^++\text{Fe}\to\text{Fe}^{2+}+\text H_2\), le fer se corrode. Les courbes i-E se croisent (courant
+        de corrosion, \(i_a=-i_c\)).</p>
+        <p>Cuivre : \(E_{Cu}=0{,}34+0{,}03\log(10^{-3})=0{,}25\)&nbsp;V \(>E_{\text H^+}\) : pas de corrosion par
+        \(\text H^+\). Mais avec l'acide nitrique (\([\text{NO}_3^-]=5\), \([\text{NO}]=0{,}1\)) :
+        \(E_{\text{NO}_3^-/\text{NO}}=0{,}96+\frac{0{,}06}{3}\log\frac{[\text H^+]^4[\text{NO}_3^-]}{[\text{NO}]}=0{,}83>0{,}25\)
+        → \(3\text{Cu}+2\text{NO}_3^-+8\text H^+\to3\text{Cu}^{2+}+2\text{NO}+4\text H_2\text O\) : le cuivre est
+        corrodé par l'acide nitrique.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 31 &amp; 32 — Attaque acide ; surtension sur Zn <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 31 — Magnésium en milieu acide (pH 0)</p>
+        <p>\(\text{Mg}+2\text H^+\to\text{Mg}^{2+}+\text H_2\). n.o. : Mg 0→+II, H +I→0. Ce n'est pas une pile car
+        les réactifs sont en contact (pas de séparation en demi-piles). \(E_{eq2}=-2{,}36+0{,}03\log(0{,}1)=-2{,}39\)&nbsp;V.
+        \(i_a\) = courant anodique (oxydation du Mg), \(i_c\) = cathodique (réduction de \(\text H^+\)) ; \(i_a=-i_c\)
+        (les électrons cédés sont captés). \(E_m\) = potentiel de corrosion (celui mesuré dans le bécher).</p>
+        <p class="q">Ex 32 — Zinc et HCl (surtension)</p>
+        <p>\([\text{Zn}^{2+}]<1\Rightarrow E_{Zn}<-0{,}76\) ; \(P_{\text H_2}<1\), \([\text H^+]>10^{-3}\Rightarrow
+        E_{\text H^+}>-0{,}18\)&nbsp;V. Donc \(\text H^+\) est l'oxydant fort :
+        \(\text{Zn}+2\text H^+\to\text{Zn}^{2+}+\text H_2\) (thermodynamiquement possible). En pratique le zinc n'est
+        quasi pas attaqué : c'est dû à la <b>grande surtension</b> du couple \(\text H^+/\text H_2\) sur le zinc, qui
+        bloque cinétiquement la réaction (les courbes i-E ne se recouvrent quasiment plus).</p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.5rem;border-left-color:var(--ok)">
+      <span class="lab" style="color:#065f46">✅ TD oxydoréduction — correction complète (32 exercices)</span>
+      Nombre d'oxydation, demi-équations et bilans, relation de Nernst \(E=E^0+\frac{0{,}06}{n}\log\frac{[\text{Ox}]}{[\text{Red}]}\),
+      piles (anode/cathode, \(U=E_+-E_-\), \(Q=n\xi F\), \(\mathcal E=-U n\xi F\)), électrodes de référence
+      (ESH/ECS/AgCl), sens spontané et constante \(\log K=\frac{n\Delta E^0}{0{,}06}\), titrages redox (stœchiométrie,
+      potentiel au cours du dosage) et courbes intensité-potentiel (corrosion, potentiel de corrosion, surtension).
+    </div>
+    <!-- TD_REDOX_ANCHOR -->
+  </section>
+
+  <!-- ======================= TABLE E0 ======================= -->
+  <section class="block" id="e0">
+    <h2>4. Table des potentiels standards (\(E^0\) / ESH, 25 °C)</h2>
+    <p class="lead">Valeurs utilisées dans le TD (oxydant en haut = le plus fort). Classées par \(E^0\) décroissant.</p>
+    <div class="overflow">
+    <table>
+      <tr><th>Couple Ox / Red</th><th>Demi-équation</th><th>\(E^0\) (V)</th></tr>
+      <tr><td>MnO₄⁻ / Mn²⁺</td><td>\(\text{MnO}_4^-+8\text H^++5e^-=\text{Mn}^{2+}+4\text H_2\text O\)</td><td>1,51</td></tr>
+      <tr><td>O₂ / H₂O</td><td>\(\text O_2+4\text H^++4e^-=2\text H_2\text O\)</td><td>1,36</td></tr>
+      <tr><td>Cr₂O₇²⁻ / Cr³⁺</td><td>\(\text{Cr}_2\text O_7^{2-}+14\text H^++6e^-=2\text{Cr}^{3+}+7\text H_2\text O\)</td><td>1,33</td></tr>
+      <tr><td>NO₃⁻ / NO</td><td>\(\text{NO}_3^-+4\text H^++3e^-=\text{NO}+2\text H_2\text O\)</td><td>0,96</td></tr>
+      <tr><td>Ag⁺ / Ag</td><td>\(\text{Ag}^++e^-=\text{Ag}\)</td><td>0,80</td></tr>
+      <tr><td>Fe³⁺ / Fe²⁺</td><td>\(\text{Fe}^{3+}+e^-=\text{Fe}^{2+}\)</td><td>0,77</td></tr>
+      <tr><td>I₂ / I⁻</td><td>\(\text I_2+2e^-=2\text I^-\)</td><td>0,54–0,62</td></tr>
+      <tr><td>BrO₃⁻ / Br⁻</td><td>\(\text{BrO}_3^-+6\text H^++6e^-=\text{Br}^-+3\text H_2\text O\)</td><td>0,58</td></tr>
+      <tr><td>Cu²⁺ / Cu</td><td>\(\text{Cu}^{2+}+2e^-=\text{Cu}\)</td><td>0,34</td></tr>
+      <tr><td>CH₃CHO / éthanol</td><td>\(\text{CH}_3\text{CHO}+2\text H^++2e^-=\text{CH}_3\text{CH}_2\text{OH}\)</td><td>0,19</td></tr>
+      <tr><td>SO₄²⁻ / SO₂</td><td>\(\text{SO}_4^{2-}+4\text H^++2e^-=\text{SO}_2+2\text H_2\text O\)</td><td>0,16</td></tr>
+      <tr><td>S₄O₆²⁻ / S₂O₃²⁻</td><td>\(\text S_4\text O_6^{2-}+2e^-=2\text S_2\text O_3^{2-}\)</td><td>0,08</td></tr>
+      <tr><td>H⁺ / H₂ (référence)</td><td>\(2\text H^++2e^-=\text H_2\)</td><td>0,00</td></tr>
+      <tr><td>NH₃ / N₂ (couple oxydant N₂)</td><td>\(\text N_2+6\text H^++6e^-=2\text{NH}_3\)</td><td>−0,09</td></tr>
+      <tr><td>Pb²⁺ / Pb</td><td>\(\text{Pb}^{2+}+2e^-=\text{Pb}\)</td><td>−0,13</td></tr>
+      <tr><td>Fe²⁺ / Fe</td><td>\(\text{Fe}^{2+}+2e^-=\text{Fe}\)</td><td>−0,44</td></tr>
+      <tr><td>CO₂ / H₂C₂O₄</td><td>\(2\text{CO}_2+2\text H^++2e^-=\text H_2\text C_2\text O_4\)</td><td>−0,49</td></tr>
+      <tr><td>Zn²⁺ / Zn</td><td>\(\text{Zn}^{2+}+2e^-=\text{Zn}\)</td><td>−0,76</td></tr>
+      <tr><td>Mg²⁺ / Mg</td><td>\(\text{Mg}^{2+}+2e^-=\text{Mg}\)</td><td>−2,36</td></tr>
+    </table>
+    </div>
+    <p style="margin-top:.6rem;color:var(--ink-soft)">Références secondaires : ECS (\(\text{Hg}_2\text{Cl}_2/\text{Hg}\))
+    \(0{,}24\)&nbsp;V/ESH ; chlorure d'argent \(0{,}197\)&nbsp;V/ESH.</p>
+  </section>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours / ressource</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/oxydoreduction/Cours_RedOx.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Cours_RedOx</span><span class="badge">Cours / ressource</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Fiche / mémo</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/oxydoreduction/fiche_synth%C3%A8se_redox.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">fiche_synthèse_redox</span><span class="badge">Fiche / mémo</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/oxydoreduction/TD%20RedOx-%20VG%20-%20etu.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD RedOx- VG - etu</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/oxydoreduction/TD_Redox.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD_Redox</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Corrigé</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/oxydoreduction/TD%20RedOx-%20VG%20-%20corrections.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD RedOx- VG - corrections</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/oxydoreduction/TD_Redox_correction.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD_Redox_correction</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TP</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/oxydoreduction/Corr_TP03%20CHIMIE_Sel%20de%20Mohr%20Etu%202025%202026.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Corr_TP03 CHIMIE_Sel de Mohr Etu 2025 2026</span><span class="badge">TP</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/oxydoreduction/TP%20Sel%20de%20Mohr.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TP Sel de Mohr</span><span class="badge">TP</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

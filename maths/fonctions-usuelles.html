@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fonctions réelles usuelles — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-math">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Maths · M01 — Chapitre 11</span>
+  <h1 class="title">Étude des fonctions réelles usuelles</h1>
+  <p class="lead">Exponentielle, logarithme, puissances et croissances comparées ; fonctions circulaires
+  réciproques (arcsin, arccos, arctan) ; fonctions hyperboliques (ch, sh) et leurs propriétés.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD n°11</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Exponentielle, logarithme, puissance</h3>
+    <div class="def">
+      <span class="lab">exp &amp; ln</span>
+      \(\exp'=\exp\), \(\exp(0)=1\), \(\exp>0\), strictement croissante. \(\ln=\exp^{-1}:\mathbb R_+^*\to\mathbb R\),
+      \(\ln'(x)=\tfrac1x\), strictement croissante. Relations : \(e^{x+y}=e^xe^y\), \(\ln(xy)=\ln x+\ln y\).
+    </div>
+    <div class="thm">
+      <span class="lab">Équivalents &amp; inégalités en 0</span>
+      \(\dfrac{e^x-1}{x}\to1\) (\(e^x\underset0\sim1+x\)) et \(\dfrac{\ln(1+x)}x\to1\) (\(\ln(1+x)\underset0\sim x\)).
+      Inégalités : \(e^x\geqslant1+x\) (\(\forall x\)) et \(\ln(1+x)\leqslant x\) (\(x>-1\)).
+    </div>
+    <div class="def">
+      <span class="lab">Puissance</span>
+      \(x^\alpha=e^{\alpha\ln x}\) sur \(\mathbb R_+^*\), \((x^\alpha)'=\alpha x^{\alpha-1}\), croissante si \(\alpha>0\).
+    </div>
+    <div class="thm">
+      <span class="lab">Croissances comparées</span>
+      \[ \lim_{x\to+\infty}\frac{x^\alpha}{e^{\beta x}}=0,\quad \lim_{x\to+\infty}\frac{(\ln x)^\beta}{x^\alpha}=0,\quad \lim_{x\to0^+}x^\alpha(\ln x)^\beta=0\quad(\alpha,\beta>0). \]
+      « L'exponentielle l'emporte sur la puissance, qui l'emporte sur le logarithme. »
+    </div>
+
+    <h3>1.2 Fonctions circulaires réciproques</h3>
+    <div class="def">
+      <span class="lab">arcsin, arccos, arctan</span>
+      Réciproques des restrictions : \(\sin_{|[-\frac\pi2,\frac\pi2]}\), \(\cos_{|[0,\pi]}\), \(\tan_{|]-\frac\pi2,\frac\pi2[}\).
+      \(\arcsin:[-1,1]\to[-\tfrac\pi2,\tfrac\pi2]\), \(\arccos:[-1,1]\to[0,\pi]\), \(\arctan:\mathbb R\to\,]-\tfrac\pi2,\tfrac\pi2[\).
+    </div>
+    <div class="thm">
+      <span class="lab">Dérivées</span>
+      \[ \arcsin'(x)=\frac1{\sqrt{1-x^2}},\quad \arccos'(x)=\frac{-1}{\sqrt{1-x^2}}\ (|x|<1),\quad \arctan'(x)=\frac1{1+x^2}. \]
+    </div>
+    <div class="warnbox">
+      \(\arccos(\cos\theta)=\theta\) seulement si \(\theta\in[0,\pi]\) ; sinon, se ramener à cet intervalle via la
+      périodicité/parité. De même \(\sin(\arccos x)=\sqrt{1-x^2}\) (positif), pas \(\pm\).
+    </div>
+
+    <h3>1.3 Fonctions hyperboliques</h3>
+    <div class="def">
+      <span class="lab">ch &amp; sh</span>
+      \(\operatorname{ch}x=\dfrac{e^x+e^{-x}}2\), \(\operatorname{sh}x=\dfrac{e^x-e^{-x}}2\). \(\operatorname{ch}'=\operatorname{sh}\),
+      \(\operatorname{sh}'=\operatorname{ch}\). Relation fondamentale : \(\operatorname{ch}^2x-\operatorname{sh}^2x=1\).
+      \(\operatorname{ch}\geqslant1\) (paire), \(\operatorname{sh}\) impaire strictement croissante.
+    </div>
+  </section>
+
+  <!-- ==================== EXOS CRÉÉS ============================= -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Simplifier \(\cos(2\arcsin x)\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Domaine et simplification de \(\cos(2\arcsin x)\).</div>
+        <p>Domaine : \(x\in[-1,1]\). Posons \(\theta=\arcsin x\), donc \(\sin\theta=x\). Par duplication :</p>
+        \[ \cos(2\theta)=1-2\sin^2\theta=1-2x^2. \]
+        <div class="res">\(\cos(2\arcsin x)=1-2x^2\) sur \([-1,1]\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — \(\arctan x+\arctan\tfrac1x=\tfrac\pi2\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Montrer que \(\forall x>0,\ \arctan x+\arctan\dfrac1x=\dfrac\pi2\).</div>
+        <p>Posons \(g(x)=\arctan x+\arctan\tfrac1x\) sur \(]0,+\infty[\). Alors :</p>
+        \[ g'(x)=\frac1{1+x^2}+\Big(-\frac1{x^2}\Big)\cdot\frac1{1+1/x^2}=\frac1{1+x^2}-\frac1{x^2+1}=0. \]
+        <p>Donc \(g\) est constante ; \(g(1)=\arctan1+\arctan1=\tfrac\pi4+\tfrac\pi4=\tfrac\pi2\).</p>
+        <div class="res">\(\arctan x+\arctan\tfrac1x=\tfrac\pi2\) pour \(x>0\) (et \(-\tfrac\pi2\) pour \(x<0\)). ∎</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Réciproque du sinus hyperbolique</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Montrer que \(\operatorname{sh}:\mathbb R\to\mathbb R\) est bijective et exprimer sa réciproque.</div>
+        <p>\(\operatorname{sh}'=\operatorname{ch}>0\) : \(\operatorname{sh}\) est strictement croissante, continue,
+        avec \(\lim_{\pm\infty}=\pm\infty\). Par le théorème de la bijection, elle réalise une bijection de \(\mathbb R\)
+        dans \(\mathbb R\).</p>
+        <p>Résolvons \(y=\operatorname{sh}x=\dfrac{e^x-e^{-x}}2\). En posant \(t=e^x>0\) : \(2y=t-\tfrac1t\), soit
+        \(t^2-2yt-1=0\), d'où \(t=y+\sqrt{y^2+1}\) (racine positive).</p>
+        <div class="res">\(x=\ln\big(y+\sqrt{y^2+1}\big)\), i.e. \(\operatorname{argsh}(y)=\ln\big(y+\sqrt{y^2+1}\big)\).</div>
+        <p style="font-size:.9rem;opacity:.85">On vérifie \(\operatorname{argsh}'(y)=\dfrac1{\sqrt{y^2+1}}=\dfrac1{\operatorname{ch}(\operatorname{argsh}y)}\).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CORRECTION TD ========================== -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD n°11 — Fonctions réelles usuelles</h2>
+    <p class="lead" style="font-size:.95rem">Feuille sans corrigé officiel : les 6 exercices sont résolus
+    intégralement, chaque sous-question traitée.</p>
+
+    <h3>Partie 1 — Fonctions circulaires réciproques</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — Ces expressions ont-elles un sens ?</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(\arcsin,\arccos\) exigent \([-1,1]\) ; \(\arctan\) est défini sur \(\mathbb R\).</div>
+        <p class="q">(a) \(\arccos(1)\)</p><p class="res">\(0\)</p>
+        <p class="q">(b) \(\arccos(-\tfrac12)\)</p><p class="res">\(\tfrac{2\pi}3\)</p>
+        <p class="q">(c) \(\arccos(\tfrac\pi3)\)</p><p>\(\tfrac\pi3\approx1{,}05>1\).</p><p class="res"><b>Aucun sens</b>.</p>
+        <p class="q">(d) \(\arcsin(0)\)</p><p class="res">\(0\)</p>
+        <p class="q">(e) \(\arcsin(\tfrac12)\)</p><p class="res">\(\tfrac\pi6\)</p>
+        <p class="q">(f) \(\arcsin(\pi)\)</p><p>\(\pi>1\).</p><p class="res"><b>Aucun sens</b>.</p>
+        <p class="q">(g) \(\arctan(0)\)</p><p class="res">\(0\)</p>
+        <p class="q">(h) \(\arctan(1)\)</p><p class="res">\(\tfrac\pi4\)</p>
+        <p class="q">(i) \(\arctan(-\sqrt3)\)</p><p class="res">\(-\tfrac\pi3\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — Domaine + simplification</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\arccos(\cos\tfrac{2\pi}3)\)</p><p>\(\tfrac{2\pi}3\in[0,\pi]\).</p><p class="res">\(\tfrac{2\pi}3\)</p>
+        <p class="q">(b) \(\arccos(\cos4\pi)\)</p><p>\(\cos4\pi=1\).</p><p class="res">\(0\)</p>
+        <p class="q">(c) \(\arccos(\cos(-\tfrac{7\pi}3))\)</p><p>\(\cos(-\tfrac{7\pi}3)=\cos\tfrac\pi3=\tfrac12\).</p><p class="res">\(\tfrac\pi3\)</p>
+        <p class="q">(d) \(\cos(\arcsin 2x)\)</p><p>Domaine \(x\in[-\tfrac12,\tfrac12]\).</p><p class="res">\(\sqrt{1-4x^2}\)</p>
+        <p class="q">(e) \(\sin(\arccos(x+1))\)</p><p>Domaine \(x\in[-2,0]\).</p><p class="res">\(\sqrt{1-(x+1)^2}=\sqrt{-x^2-2x}\)</p>
+        <p class="q">(f) \(\sin(\arctan x)\)</p><p>Domaine \(\mathbb R\).</p><p class="res">\(\dfrac{x}{\sqrt{1+x^2}}\)</p>
+        <p class="q">(g) \(\arctan(\tan\tfrac{5\pi}4)\)</p><p>\(\tan\tfrac{5\pi}4=\tan\tfrac\pi4=1\).</p><p class="res">\(\tfrac\pi4\)</p>
+        <p class="q">(h) \(\tan(\arcsin x)\)</p><p>Domaine \(x\in\,]-1,1[\).</p><p class="res">\(\dfrac{x}{\sqrt{1-x^2}}\)</p>
+        <p class="q">(i) \(\tan(-\arccos x)\)</p><p>Domaine \(x\in[-1,1]\setminus\{0\}\).</p><p class="res">\(-\dfrac{\sqrt{1-x^2}}{x}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — Équations</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\tan(\arctan x)=\pi\)</p><p>\(\tan(\arctan x)=x\).</p><p class="res">\(x=\pi\)</p>
+        <p class="q">(b) \(\arccos(\cos x)=\tfrac\pi3\)</p><p>\(\iff\cos x=\tfrac12\iff x\equiv\pm\tfrac\pi3\,[2\pi]\).</p><p class="res">\(x=\pm\tfrac\pi3+2k\pi\)</p>
+        <p class="q">(c) \(\arcsin(\sin 2x)=\tfrac\pi9\)</p><p>\(\iff2x\equiv\tfrac\pi9\,[2\pi]\) ou \(2x\equiv\tfrac{8\pi}9\,[2\pi]\).</p><p class="res">\(x=\tfrac\pi{18}+k\pi\) ou \(x=\tfrac{4\pi}9+k\pi\)</p>
+        <p class="q">(d) \(\arccos x=\arcsin x\)</p><p>Avec \(\arcsin x+\arccos x=\tfrac\pi2\) : \(\arcsin x=\tfrac\pi4\).</p><p class="res">\(x=\tfrac{\sqrt2}2\)</p>
+        <p class="q">(e) \(\arccos x=\arcsin 2x\)</p><p>Domaine \(x\in[-\tfrac12,\tfrac12]\). \(\sin\) des deux membres : \(\sqrt{1-x^2}=2x\) (donc \(x\geqslant0\)), \(1-x^2=4x^2\).</p><p class="res">\(x=\dfrac{\sqrt5}5\)</p>
+        <p class="q">(f) \(\arccos x=\arcsin(1-x)\)</p><p>Domaine \(x\in[0,1]\). \(\sqrt{1-x^2}=1-x\), \((1-x)^2=1-x^2\Rightarrow2x(x-1)=0\).</p><p class="res">\(x=0\) ou \(x=1\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — Formules (par la dérivée)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\arcsin x+\arccos x=\tfrac\pi2\) sur \([-1,1]\)</p>
+        <p>\(f'(x)=\dfrac1{\sqrt{1-x^2}}-\dfrac1{\sqrt{1-x^2}}=0\) sur \(]-1,1[\) : \(f\) constante. \(f(0)=0+\tfrac\pi2\).</p><p class="res">\(=\tfrac\pi2\)</p>
+        <p class="q">(b) \(2\arctan(\sqrt{1+x^2}-x)+\arctan x=\tfrac\pi2\) sur \(\mathbb R\)</p>
+        <p>La dérivée de \(2\arctan(\sqrt{1+x^2}-x)\) vaut \(-\dfrac1{1+x^2}\), qui compense \(\arctan'x=\dfrac1{1+x^2}\) : somme constante. En \(0\) : \(2\arctan1=\tfrac\pi2\).</p><p class="res">\(=\tfrac\pi2\)</p>
+        <p class="q">(c) \(\arcsin x=\arctan\dfrac x{\sqrt{1-x^2}}\) sur \(]-1,1[\)</p>
+        <p>Posons \(\theta=\arcsin x\in\,]-\tfrac\pi2,\tfrac\pi2[\) : \(\sin\theta=x\), \(\cos\theta=\sqrt{1-x^2}>0\), donc \(\tan\theta=\dfrac x{\sqrt{1-x^2}}\), et \(\theta=\arctan(\tan\theta)\).</p><p class="res">Égalité vraie.</p>
+        <p class="q">(d) \(2\arctan\sqrt{\tfrac{1-x}{1+x}}+\arcsin x=\tfrac\pi2\) sur \(]-1,1]\)</p>
+        <p>Domaine \(x\in\,]-1,1]\). La dérivée de \(2\arctan\sqrt{\tfrac{1-x}{1+x}}\) vaut \(-\dfrac1{\sqrt{1-x^2}}\), qui compense \(\arcsin'x\) : somme constante. En \(0\) : \(2\arctan1=\tfrac\pi2\).</p><p class="res">\(=\tfrac\pi2\)</p>
+      </div>
+    </div>
+
+    <h3>Partie 2 — Fonctions hyperboliques</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — Équations hyperboliques</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(5\operatorname{ch}x-3\operatorname{sh}x=4\)</p>
+        <p>\(=\dfrac{(5-3)e^x+(5+3)e^{-x}}2=e^x+4e^{-x}\). En posant \(t=e^x\) : \(t+\tfrac4t=4\Rightarrow t^2-4t+4=0\Rightarrow t=2\).</p>
+        <p class="res">\(x=\ln2\)</p>
+        <p class="q">(b) \(3\operatorname{sh}x-\operatorname{ch}x=1\)</p>
+        <p>\(=\dfrac{(3-1)e^x+(-3-1)e^{-x}}2=e^x-2e^{-x}\). \(t=e^x\) : \(t-\tfrac2t=1\Rightarrow t^2-t-2=0\Rightarrow t=2\) (\(t=-1\) exclu).</p>
+        <p class="res">\(x=\ln2\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — Inégalités hyperboliques</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\operatorname{sh}x\geqslant x\) pour \(x\geqslant0\)</p>
+        <p>\(g(x)=\operatorname{sh}x-x\), \(g(0)=0\), \(g'(x)=\operatorname{ch}x-1\geqslant0\) : \(g\) croissante sur \(\mathbb R_+\), donc \(g(x)\geqslant0\).</p>
+        <p class="q">(b) \(\operatorname{ch}x\geqslant1+\dfrac{x^2}2\) pour \(x\in\mathbb R\)</p>
+        <p>\(h(x)=\operatorname{ch}x-1-\tfrac{x^2}2\), \(h(0)=0\), \(h'(x)=\operatorname{sh}x-x\), \(h''(x)=\operatorname{ch}x-1\geqslant0\).
+        Donc \(h'\) est croissante avec \(h'(0)=0\) : \(h'\geqslant0\) sur \(\mathbb R_+\), \(h'\leqslant0\) sur \(\mathbb R_-\), d'où \(h\) minimale en \(0\).</p>
+        <div class="res">\(h(x)\geqslant h(0)=0\), i.e. \(\operatorname{ch}x\geqslant1+\tfrac{x^2}2\). ∎</div>
+      </div>
+    </div>
+
+  </section>
+
+  <p style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.9rem;opacity:.75">
+    Chapitre 11 du cours M01 (S1). Sources : <em>Chap_11.pdf</em> (cours magistral) et
+    <em>TD11 — Étude des fonctions réelles usuelles</em>. Corrigé rédigé intégralement (pas de corrigé officiel fourni).
+  </p>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours (CM)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/fonctions-usuelles/Chap_11.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Chap_11</span><span class="badge">Cours (CM)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/fonctions-usuelles/TD11___%C3%89tude_des_fonctions_r%C3%A9elles_usuelles.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD11___Étude_des_fonctions_réelles_usuelles</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les suites réelles — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-math">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Maths · M01 — Chapitre 7</span>
+  <h1 class="title">Les suites réelles</h1>
+  <p class="lead">Monotonie, limites et opérations, théorème d'encadrement, suites monotones et adjacentes,
+  suites extraites, et suites récurrentes (arithmético-géométriques, linéaires d'ordre 2, \(u_{n+1}=f(u_n)\)).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD n°7</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Généralités &amp; monotonie</h3>
+    <div class="def">
+      <span class="lab">Suite &amp; modes de définition</span>
+      Une suite \((u_n)\) est une fonction \(\mathbb N\to\mathbb R\). Elle peut être <b>explicite</b> (\(u_n=f(n)\)),
+      <b>récurrente</b> (\(u_{n+1}=f(u_n)\)) ou <b>implicite</b> (\(u_n\) = solution d'une équation dépendant de \(n\)).
+    </div>
+    <div class="method">
+      <span class="lab">Étudier la monotonie</span>
+      Signe de \(u_{n+1}-u_n\), ou (si \(u_n>0\)) comparer \(\dfrac{u_{n+1}}{u_n}\) à \(1\).
+    </div>
+
+    <h3>1.2 Limite d'une suite</h3>
+    <div class="def">
+      <span class="lab">Convergence</span>
+      \(u_n\to\ell\) si \(\;\forall\varepsilon>0,\ \exists n_0,\ \forall n\geqslant n_0,\ |u_n-\ell|\leqslant\varepsilon\).
+      La limite, si elle existe, est <b>unique</b>. Diverge vers \(+\infty\) si \(\forall A,\ \exists n_0,\ \forall n\geqslant n_0,\ u_n\geqslant A\).
+    </div>
+    <div class="thm">
+      <span class="lab">Propriétés</span>
+      <ul style="margin:.3rem 0 0">
+        <li>Toute suite convergente est <b>bornée</b> (réciproque fausse : \((-1)^n\)).</li>
+        <li>Opérations : \(\lim(\lambda u_n+\mu v_n)=\lambda\ell+\mu\ell'\), \(\lim(u_nv_n)=\ell\ell'\), \(\lim\tfrac1{u_n}=\tfrac1\ell\) (\(\ell\neq0\)).</li>
+        <li>Formes indéterminées : \(\infty-\infty\), \(0\times\infty\), \(\tfrac00\), \(\tfrac\infty\infty\).</li>
+      </ul>
+    </div>
+    <div class="thm">
+      <span class="lab">Passage à la limite &amp; encadrement</span>
+      Si \(u_n\leqslant v_n\) (à partir d'un rang) et les deux convergent : \(\ell\leqslant\ell'\) (mais pas
+      d'inégalité stricte à la limite). <b>Théorème des gendarmes</b> : \(u_n\leqslant v_n\leqslant w_n\) avec
+      \(u_n,w_n\to\ell\Rightarrow v_n\to\ell\). <b>Suite bornée \(\times\) suite de limite nulle \(\to0\)</b>.
+    </div>
+
+    <h3>1.3 Suites monotones &amp; adjacentes</h3>
+    <div class="thm">
+      <span class="lab">Théorème de la limite monotone</span>
+      Toute suite <b>croissante majorée</b> converge (vers \(\sup\{u_n\}\)) ; croissante non majorée \(\to+\infty\).
+      Idem décroissante minorée \(\to\inf\).
+    </div>
+    <div class="def">
+      <span class="lab">Suites adjacentes</span>
+      \(u\) croissante, \(v\) décroissante, \(u_n-v_n\to0\). Alors elles <b>convergent vers la même limite</b>
+      \(\ell\), avec \(u_n\leqslant\ell\leqslant v_n\).
+    </div>
+
+    <h3>1.4 Suites extraites</h3>
+    <div class="thm">
+      <span class="lab">Sous-suites</span>
+      Une extraite \((u_{\varphi(n)})\) (\(\varphi\) strictement croissante \(\mathbb N\to\mathbb N\)) d'une suite
+      convergente converge vers la <b>même</b> limite. Réciproque utile : si
+      \(u_{2n}\to\ell\) <b>et</b> \(u_{2n+1}\to\ell\), alors \(u_n\to\ell\). (Deux extraites de limites différentes
+      \(\Rightarrow\) divergence.)
+    </div>
+
+    <h3>1.5 Suites récurrentes</h3>
+    <div class="thm">
+      <span class="lab">Arithmético-géométrique</span>
+      \(u_{n+1}=au_n+b\) (\(a\neq1\)) : le point fixe est \(c=\dfrac b{1-a}\), et
+      \[ u_n=a^n(u_0-c)+c. \]
+    </div>
+    <div class="thm">
+      <span class="lab">Linéaire d'ordre 2</span>
+      \(u_{n+2}=au_{n+1}+bu_n\), équation caractéristique \(r^2=ar+b\). Deux racines \(r_1\neq r_2\) :
+      \(u_n=\alpha r_1^n+\beta r_2^n\) ; racine double \(r_0\) : \(u_n=(\alpha n+\beta)r_0^n\).
+    </div>
+    <div class="thm">
+      <span class="lab">\(u_{n+1}=f(u_n)\)</span>
+      Si \(I\) est <b>stable</b> par \(f\) (\(f(I)\subseteq I\)) et \(u_0\in I\), la suite est bien définie dans \(I\).
+      Si \(f(x)-x\geqslant0\) sur \(I\) : \(u\) croissante ; si \(f\) croissante, \(u\) monotone selon \(u_0\) vs \(u_1\) ;
+      si \(f\) décroissante, \((u_{2n})\) et \((u_{2n+1})\) sont monotones de sens contraires.
+      Si \(u\) converge (et \(f\) continue), la limite est un <b>point fixe</b> : \(f(\ell)=\ell\).
+    </div>
+  </section>
+
+  <!-- ==================== EXOS CRÉÉS ============================= -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Suite de Héron (calcul de \(\sqrt2\))</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(u_0=2\) et \(u_{n+1}=\dfrac12\Big(u_n+\dfrac2{u_n}\Big)\). Montrer que \((u_n)\) converge et
+        déterminer sa limite.</div>
+        <p class="q">Minoration par \(\sqrt2\).</p>
+        <p>Pour \(u_n>0\) : \(u_{n+1}-\sqrt2=\dfrac{u_n^2-2\sqrt2\,u_n+2}{2u_n}=\dfrac{(u_n-\sqrt2)^2}{2u_n}\geqslant0\).
+        Donc \(u_n\geqslant\sqrt2\) pour tout \(n\geqslant1\) (et \(u_0=2\geqslant\sqrt2\)).</p>
+        <p class="q">Décroissance.</p>
+        <p>\(u_{n+1}-u_n=\dfrac12\Big(\dfrac2{u_n}-u_n\Big)=\dfrac{2-u_n^2}{2u_n}\leqslant0\) car \(u_n^2\geqslant2\).</p>
+        <p class="q">Conclusion.</p>
+        <p>\((u_n)\) est décroissante et minorée par \(\sqrt2\) : elle converge vers \(\ell\geqslant\sqrt2\).
+        Par passage à la limite dans la relation, \(\ell=\tfrac12(\ell+2/\ell)\Rightarrow\ell^2=2\).</p>
+        <div class="res">\(\displaystyle\lim u_n=\sqrt2\) (convergence quadratique très rapide).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Suite de Fibonacci (formule de Binet)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(F_0=0,\ F_1=1,\ F_{n+2}=F_{n+1}+F_n\). Donner le terme général.</div>
+        <p>Équation caractéristique \(r^2=r+1\), soit \(r^2-r-1=0\), de racines
+        \(\varphi=\dfrac{1+\sqrt5}2\) (nombre d'or) et \(\psi=\dfrac{1-\sqrt5}2\).</p>
+        <p>Donc \(F_n=\alpha\varphi^n+\beta\psi^n\). Les conditions initiales donnent \(\alpha+\beta=0\) et
+        \(\alpha\varphi+\beta\psi=1\), d'où \(\alpha(\varphi-\psi)=1\) avec \(\varphi-\psi=\sqrt5\).</p>
+        <div class="res">\(\displaystyle F_n=\frac1{\sqrt5}\left(\Big(\tfrac{1+\sqrt5}2\Big)^n-\Big(\tfrac{1-\sqrt5}2\Big)^n\right)\) (formule de Binet).</div>
+        <p style="font-size:.9rem;opacity:.85">Comme \(|\psi|<1\), \(F_n\sim\dfrac{\varphi^n}{\sqrt5}\) et \(\dfrac{F_{n+1}}{F_n}\to\varphi\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Limite par encadrement (gendarmes)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Déterminer \(\displaystyle\lim_{n\to+\infty}\sum_{k=1}^n\frac1{\sqrt{n^2+k}}\).</div>
+        <p>Chaque terme (\(1\leqslant k\leqslant n\)) est encadré : \(\dfrac1{\sqrt{n^2+n}}\leqslant\dfrac1{\sqrt{n^2+k}}\leqslant\dfrac1{\sqrt{n^2+1}}\).
+        Il y a \(n\) termes, donc :</p>
+        \[ \frac{n}{\sqrt{n^2+n}}\leqslant u_n\leqslant\frac{n}{\sqrt{n^2+1}}. \]
+        <p>Les deux membres tendent vers \(1\) (\(\tfrac{n}{\sqrt{n^2+n}}=\tfrac1{\sqrt{1+1/n}}\to1\)).</p>
+        <div class="res">Par le théorème des gendarmes, \(\displaystyle\lim u_n=1\).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CORRECTION TD ========================== -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD n°7 — Les suites réelles</h2>
+    <p class="lead" style="font-size:.95rem">Feuille sans corrigé officiel : les 12 exercices sont résolus
+    intégralement, chaque sous-question traitée.</p>
+
+    <h3>Partie 1 — Variations d'une suite</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — Monotonie</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(u_n=\tfrac1n+\tfrac1{n+1}\)</p><p>\(u_{n+1}-u_n=\tfrac1{n+2}-\tfrac1n<0\).</p><p class="res"><b>Décroissante</b>.</p>
+        <p class="q">(b) \(u_n=n-2^n\)</p><p>\(u_{n+1}-u_n=1-2^n\leqslant0\) (pour \(n\geqslant1\)).</p><p class="res"><b>Décroissante</b>.</p>
+        <p class="q">(c) \(u_n=\tfrac{e^n}{n!}\)</p><p>\(\tfrac{u_{n+1}}{u_n}=\tfrac{e}{n+1}\) : \(>1\) pour \(n\leqslant1\), \(<1\) pour \(n\geqslant2\).</p><p class="res"><b>Non monotone</b> (croît jusqu'à \(n=2\), puis décroît).</p>
+        <p class="q">(d) \(u_n=\tfrac{n-1}{n+3}\)</p><p>\(u_{n+1}-u_n=\tfrac{4}{(n+4)(n+3)}>0\).</p><p class="res"><b>Croissante</b>.</p>
+        <p class="q">(e) \(u_n=\prod_{i=0}^n(n-i)\)</p><p>Le facteur \(i=n\) vaut \(n-n=0\).</p><p class="res"><b>Constante</b> (nulle) : \(u_n=0\).</p>
+        <p class="q">(f) \(u_n=\prod_{i=0}^n(n+i)=n(n+1)\cdots(2n)\)</p><p>\(\tfrac{u_{n+1}}{u_n}=\tfrac{(2n+1)(2n+2)}{n}>1\).</p><p class="res"><b>Croissante</b>.</p>
+      </div>
+    </div>
+
+    <h3>Partie 2 — Limites</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — Limites + justification formelle</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(u_n=n^2\to+\infty\)</p><p>\(\forall A>0\), prendre \(n_0=\lceil\sqrt A\rceil\) : \(n\geqslant n_0\Rightarrow n^2\geqslant A\).</p>
+        <p class="q">(b) \(u_n=\sqrt{n+3}\to+\infty\)</p><p>\(\forall A>0\), \(n_0=\lceil A^2\rceil\) : \(n\geqslant n_0\Rightarrow\sqrt{n+3}\geqslant A\).</p>
+        <p class="q">(c) \(u_n=\tfrac1{2n+3}\to0\)</p><p>\(\tfrac1{2n+3}\leqslant\varepsilon\iff n\geqslant\tfrac{1/\varepsilon-3}2\).</p>
+        <p class="q">(d) \(u_n=\tfrac{2n-1}{n+1}\to2\)</p><p>\(|u_n-2|=\tfrac{3}{n+1}\leqslant\varepsilon\iff n\geqslant\tfrac3\varepsilon-1\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — Limites diverses</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\tfrac{-2n^3+3n-4}{n^2+9}\sim-2n\)</p><p class="res">\(-\infty\)</p>
+        <p class="q">(b) \(\tfrac{3n^2-2n+1}{n\sqrt n+n-1}\sim\tfrac{3n^2}{n^{3/2}}=3\sqrt n\)</p><p class="res">\(+\infty\)</p>
+        <p class="q">(c) \(\tfrac1n\sin n\)</p><p>\(|u_n|\leqslant\tfrac1n\) (bornée \(\times\) limite nulle).</p><p class="res">\(0\)</p>
+        <p class="q">(d) \(\sqrt{n+1}-\sqrt n=\tfrac1{\sqrt{n+1}+\sqrt n}\)</p><p class="res">\(0\)</p>
+        <p class="q">(e) \(\sqrt{n^2+1}-\sqrt{2n^2-1}\sim n(1-\sqrt2)\)</p><p class="res">\(-\infty\)</p>
+        <p class="q">(f) \(n-\sqrt{(n+1)(n+3)}=\dfrac{-4n-3}{n+\sqrt{n^2+4n+3}}\sim\tfrac{-4n}{2n}\)</p><p class="res">\(-2\)</p>
+        <p class="q">(g) \(\sum_{k=1}^{3n}\tfrac1{\sqrt{4n+k}}\geqslant\tfrac{3n}{\sqrt{7n}}=\tfrac{3\sqrt n}{\sqrt7}\)</p><p class="res">\(+\infty\)</p>
+        <p class="q">(h) \(\sum_{k=1}^{2n+1}\tfrac1{\sqrt{n^2+k}}\), encadré entre \(\tfrac{2n+1}{\sqrt{n^2+2n+1}}\) et \(\tfrac{2n+1}{\sqrt{n^2+1}}\)</p><p class="res">\(2\) (gendarmes)</p>
+        <p class="q">(i) \(\sum_{k=1}^{n^2}\tfrac1{\sqrt{n^2+k}}\geqslant\tfrac{n^2}{\sqrt{2n^2}}=\tfrac{n}{\sqrt2}\)</p><p class="res">\(+\infty\)</p>
+      </div>
+    </div>
+
+    <h3>Partie 3 — Suites adjacentes</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — Montrer l'adjacence</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(u_n=\sum_{k=1}^n\tfrac1{k^2}\), \(v_n=u_n+\tfrac1n\)</p>
+        <p>\(u\) croissante (\(u_{n+1}-u_n=\tfrac1{(n+1)^2}>0\)). \(v_{n+1}-v_n=\tfrac1{(n+1)^2}-\tfrac1{n(n+1)}=\tfrac{-1}{n(n+1)^2}<0\) (\(v\) décroissante). \(v_n-u_n=\tfrac1n\to0\).</p>
+        <p class="res"><b>Adjacentes</b> (elles encadrent \(\sum_{k\geqslant1}\tfrac1{k^2}=\tfrac{\pi^2}6\)).</p>
+        <p class="q">(b) \(u_n=\sum_{k=1}^n\tfrac1{k^3}\), \(v_n=u_n+\tfrac1{n^2}\)</p>
+        <p>\(u\) croissante. \(v_{n+1}-v_n=\tfrac1{(n+1)^3}+\big(\tfrac1{(n+1)^2}-\tfrac1{n^2}\big)=\tfrac1{(n+1)^3}-\tfrac{2n+1}{n^2(n+1)^2}<0\) (le second terme domine). \(v_n-u_n=\tfrac1{n^2}\to0\).</p>
+        <p class="res"><b>Adjacentes</b>.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — Moyenne arithmético-géométrique</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(0<a<b\), \(u_0=a\), \(v_0=b\), \(u_{n+1}=\sqrt{u_nv_n}\), \(v_{n+1}=\tfrac{u_n+v_n}2\).</div>
+        <p class="q">(a) \(0<u_n<v_n\)</p>
+        <p>Init \(0<a<b\). Hérédité : \(u_{n+1}=\sqrt{u_nv_n}>0\), \(v_{n+1}>0\), et par l'inégalité arithmético-géométrique \(\sqrt{u_nv_n}<\tfrac{u_n+v_n}2\) (stricte car \(u_n\neq v_n\)).</p>
+        <p class="q">(b) \(v_n-u_n\leqslant\tfrac1{2^n}(v_0-u_0)\)</p>
+        <p>\(v_{n+1}-u_{n+1}=\tfrac{u_n+v_n}2-\sqrt{u_nv_n}\leqslant\tfrac{u_n+v_n}2-u_n=\tfrac{v_n-u_n}2\) (car \(\sqrt{u_nv_n}\geqslant u_n\)). D'où par récurrence l'encadrement.</p>
+        <p class="q">(c) Adjacence</p>
+        <p>\(u\) croissante (\(u_{n+1}=\sqrt{u_nv_n}\geqslant u_n\)), \(v\) décroissante (\(v_{n+1}=\tfrac{u_n+v_n}2\leqslant v_n\)), et \(v_n-u_n\to0\) par (b).</p>
+        <div class="res">\(u\) et \(v\) sont <b>adjacentes</b> : elles convergent vers la <b>moyenne arithmético-géométrique</b> de \(a\) et \(b\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — Moyenne harmonico-arithmétique</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(u_0=1\), \(v_0>1\), \(u_{n+1}=\tfrac{2u_nv_n}{u_n+v_n}\), \(v_{n+1}=\tfrac12(u_n+v_n)\).</div>
+        <p class="q">(a) \(0<u_n<v_n\)</p><p>Init OK. Hérédité : moyenne harmonique \(<\) moyenne arithmétique (strict si \(u_n\neq v_n\)), les deux \(>0\).</p>
+        <p class="q">(b) Adjacence</p>
+        <p>\(u_{n+1}-u_n=\tfrac{u_n(v_n-u_n)}{u_n+v_n}>0\) (croissante) ; \(v_{n+1}-v_n=\tfrac{u_n-v_n}2<0\) (décroissante) ; et \(v_{n+1}-u_{n+1}=\tfrac{(v_n-u_n)^2}{2(u_n+v_n)}\leqslant\tfrac12(v_n-u_n)\to0\).</p>
+        <p class="q">(c) \(uv\) constante</p><p>\(u_{n+1}v_{n+1}=\tfrac{2u_nv_n}{u_n+v_n}\cdot\tfrac{u_n+v_n}2=u_nv_n\).</p><p class="res">\(u_nv_n=u_0v_0=v_0\) pour tout \(n\).</p>
+        <p class="q">(d) Limite</p><p>\(u,v\to\ell\) (adjacentes) et \(u_nv_n\to\ell^2=v_0\).</p><p class="res">\(\ell=\sqrt{v_0}\) (moyenne géométrique de \(u_0=1\) et \(v_0\)).</p>
+      </div>
+    </div>
+
+    <h3>Partie 4 — Convergence</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 7 — Suite entière : converge \(\iff\) stationnaire</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(u\in\mathbb Z^{\mathbb N}\).</div>
+        <p class="q">\(\Leftarrow\)</p><p>Stationnaire \(\Rightarrow\) constante à partir d'un rang \(\Rightarrow\) converge.</p>
+        <p class="q">\(\Rightarrow\)</p>
+        <p>Si \(u\to\ell\), avec \(\varepsilon=\tfrac12\) : \(\exists n_0,\ \forall m,n\geqslant n_0,\ |u_n-u_m|\leqslant|u_n-\ell|+|\ell-u_m|<1\). Or \(u_n-u_m\in\mathbb Z\) et \(|u_n-u_m|<1\Rightarrow u_n=u_m\).</p>
+        <div class="res">\(u\) est <b>stationnaire</b>. ∎</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 8 — Théorème de Cesàro</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(v_n=\tfrac1n\sum_{k=1}^n u_k\).</div>
+        <p class="q">(a) Différence</p>
+        <p>Avec \(S_n=\sum_{k=1}^n u_k\) : \(v_{n+1}-v_n=\tfrac{S_{n+1}}{n+1}-\tfrac{S_n}n=\tfrac{nu_{n+1}-S_n}{n(n+1)}=\tfrac1{n(n+1)}\big(nu_{n+1}-\sum_{k=1}^n u_k\big)\).</p>
+        <p class="q">(b) \(u\) croissante \(\Rightarrow v\) croissante</p>
+        <p>\(nu_{n+1}-\sum_{k=1}^n u_k=\sum_{k=1}^n(u_{n+1}-u_k)\geqslant0\) car \(u_{n+1}\geqslant u_k\).</p>
+        <p class="q">(c) Majoration</p>
+        <p>\(v_n-\ell=\tfrac1n\sum_{k=1}^n(u_k-\ell)\), d'où par inégalité triangulaire \(|v_n-\ell|\leqslant\tfrac1n\sum_{k=1}^{n_0}|u_k-\ell|+\tfrac1n\sum_{k=n_0+1}^n|u_k-\ell|\).</p>
+        <p class="q">(d) \(u\to\ell\Rightarrow v\to\ell\)</p>
+        <p>Soit \(\varepsilon>0\). Choisir \(n_0\) tel que \(|u_k-\ell|<\tfrac\varepsilon2\) pour \(k>n_0\) : la 2ᵉ somme est \(\leqslant\tfrac\varepsilon2\). La 1ʳᵉ somme \(=\tfrac{C}n\to0\) : \(<\tfrac\varepsilon2\) pour \(n\) grand.</p>
+        <div class="res">\(v_n\to\ell\) (théorème de Cesàro). La réciproque est fausse (\(u_n=(-1)^n\)). ∎</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 9 — Croissante + \((u_{2n})\) converge</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p>\(u\) croissante \(\Rightarrow(u_{2n})\) croissante ; sa convergence vers \(\ell\) donne \(u_{2n}\leqslant\ell\) pour tout \(n\).
+        Pour tout \(m\), il existe \(n\) avec \(2n\geqslant m\), donc \(u_m\leqslant u_{2n}\leqslant\ell\) : \(u\) est majorée par \(\ell\).</p>
+        <p>\(u\) croissante et majorée \(\Rightarrow\) converge (limite monotone), et sa limite coïncide avec celle de l'extraite.</p>
+        <div class="res">\(u\) converge (vers \(\ell\)). ∎</div>
+      </div>
+    </div>
+
+    <h3>Partie 5 — Suites récurrentes</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 10 — Terme général</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(u_0=0,\ u_{n+1}=\tfrac13u_n+2\)</p><p>Point fixe \(c=\tfrac2{1-1/3}=3\), \(u_n=(\tfrac13)^n(0-3)+3\).</p><p class="res">\(u_n=3\big(1-3^{-n}\big)\)</p>
+        <p class="q">(b) \(u_0=1,\ u_{n+1}=-u_n+4\)</p><p>\(c=\tfrac4{1-(-1)}=2\), \(u_n=(-1)^n(1-2)+2\).</p><p class="res">\(u_n=2-(-1)^n\) (alterne \(1,3,1,3,\dots\))</p>
+        <p class="q">(c) \(u_0=u_1=1,\ 2u_{n+2}=u_{n+1}+u_n\)</p><p>\(2r^2-r-1=0\Rightarrow r=1\) ou \(r=-\tfrac12\). \(u_n=\alpha+\beta(-\tfrac12)^n\), CI \(\Rightarrow\beta=0,\alpha=1\).</p><p class="res">\(u_n=1\) (constante)</p>
+        <p class="q">(d) \(u_0=0,\ u_1=1,\ u_{n+2}=u_{n+1}+\tfrac12u_n\)</p><p>\(2r^2-2r-1=0\Rightarrow r=\tfrac{1\pm\sqrt3}2\). CI : \(\alpha=-\beta=\tfrac1{\sqrt3}\).</p>
+        <p class="res">\(u_n=\dfrac1{\sqrt3}\left(\Big(\tfrac{1+\sqrt3}2\Big)^n-\Big(\tfrac{1-\sqrt3}2\Big)^n\right)\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 11 — \(u_{n+1}=\sqrt{2-u_n}\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(f(x)=\sqrt{2-x}\) sur \(]-\infty,2]\), \(u_0=1\).</div>
+        <p class="q">(a) \([0,2]\) stable</p><p>\(x\in[0,2]\Rightarrow 2-x\in[0,2]\Rightarrow\sqrt{2-x}\in[0,\sqrt2]\subseteq[0,2]\).</p>
+        <p class="q">(b) Bien définie</p><p>\(u_0=1\in[0,2]\) et \([0,2]\) stable \(\Rightarrow\) par récurrence \(u_n\in[0,2]\) pour tout \(n\).</p>
+        <p class="q">(c) Point fixe</p><p>\(\sqrt{2-\ell}=\ell\ (\ell\geqslant0)\Rightarrow \ell^2+\ell-2=0\Rightarrow(\ell-1)(\ell+2)=0\).</p><p class="res">\(\ell=1\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 12 — \(f(x)=\dfrac{\sqrt x}{\sqrt x+\sqrt{1-x}}\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Sur \([0,1]\), \(f\) croissante (admis), \(u_0\in[0,1]\), \(u_{n+1}=f(u_n)\).</div>
+        <p class="q">(a) \([0,1]\) stable</p><p>\(f(0)=0\), \(f(1)=1\), \(f\) croissante \(\Rightarrow f([0,1])=[0,1]\).</p>
+        <p class="q">(b) Bien définie</p><p>\(u_0\in[0,1]\), stable \(\Rightarrow u_n\in[0,1]\) pour tout \(n\).</p>
+        <p class="q">(c) Points fixes</p>
+        <p>\(f(x)=x\) : \(x=0\) et \(x=1\) conviennent. Pour \(x\in\,]0,1[\), \(\tfrac{\sqrt x}{\sqrt x+\sqrt{1-x}}=x\Rightarrow\sqrt x\sqrt{1-x}=x\Rightarrow\sqrt{x(1-x)}=x\Rightarrow 1-x=x\).</p>
+        <p class="res">3 points fixes : \(0,\ \tfrac12,\ 1\).</p>
+        <p class="q">(d) Monotonie selon \(u_0\)</p>
+        <p>\(f\) croissante. Sur \(]0,\tfrac12[\), \(f(x)>x\) (ex. \(f(\tfrac14)\approx0{,}37\)) ; sur \(]\tfrac12,1[\), \(f(x)<x\).</p>
+        <p class="res">\(u_0\in\,]0,\tfrac12[\) : <b>croissante</b> ; \(u_0\in\,]\tfrac12,1[\) : <b>décroissante</b> ; \(u_0\in\{0,\tfrac12,1\}\) : constante.</p>
+        <p class="q">(e) Convergence</p><p>\(u\) est monotone (\(f\) croissante) et bornée dans \([0,1]\) : elle converge (limite monotone).</p>
+        <p class="q">(f) Limite selon \(u_0\)</p>
+        <div class="res">\(u_0=0\to0\) ; \(u_0=1\to1\) ; \(u_0\in\,]0,1[\to\tfrac12\) (le seul point fixe atteignable par monotonie).</div>
+      </div>
+    </div>
+
+  </section>
+
+  <p style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.9rem;opacity:.75">
+    Chapitre 7 du cours M01 (S1). Sources : <em>Chap_7.pdf</em> (cours magistral) et
+    <em>TD07 — Les suites réelles</em>. Corrigé rédigé intégralement (pas de corrigé officiel fourni).
+  </p>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours (CM)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/suites-reelles/Chap_7.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Chap_7</span><span class="badge">Cours (CM)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/suites-reelles/TD07___Les_suites_r%C3%A9elles%20(1).pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD07___Les_suites_réelles (1)</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

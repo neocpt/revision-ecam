@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Applications — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-math">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Maths · M01 — Chapitre 3</span>
+  <h1 class="title">Applications</h1>
+  <p class="lead">Fonctions entre ensembles : image, antécédent, composition, puis les trois notions
+  centrales — <b>injection</b>, <b>surjection</b>, <b>bijection</b> — avec la bijection réciproque et le calcul
+  des images directes et réciproques.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD n°3</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Application, image, antécédent</h3>
+    <div class="def">
+      <span class="lab">Application</span>
+      \(f:E\to F\) associe à <b>tout</b> \(x\in E\) un <b>unique</b> \(y=f(x)\in F\) :
+      \(\;\forall x\in E,\ \exists!\,y\in F,\ y=f(x)\). \(E\) est l'ensemble de <b>départ</b>, \(F\) l'ensemble
+      d'<b>arrivée</b>. \(y=f(x)\) est l'<b>image</b> de \(x\) ; \(x\) est <b>un</b> antécédent de \(y\).
+    </div>
+    <div class="warnbox">
+      « \(f\) » ou « \(x\mapsto f(x)\) » désigne la <b>fonction</b> ; « \(f(x)\) » désigne un <b>élément</b> de \(F\)
+      (une valeur), pas la fonction. Deux applications sont égales ssi elles ont même départ, même arrivée,
+      et \(f(x)=g(x)\) pour tout \(x\).
+    </div>
+    <div class="def">
+      <span class="lab">Applications particulières</span>
+      Identité \(\operatorname{Id}_E(x)=x\). Indicatrice \(\mathbf 1_A(x)=1\) si \(x\in A\), \(0\) sinon.
+      Graphe \(\Gamma=\{(x,f(x))\mid x\in E\}\subseteq E\times F\).
+    </div>
+
+    <h3>1.2 Restriction, prolongement, composition</h3>
+    <div class="def">
+      <span class="lab">Restriction / prolongement</span>
+      Pour \(A\subseteq E\), la <b>restriction</b> \(f_{|A}:A\to F\) coïncide avec \(f\) sur \(A\) (elle est
+      <b>unique</b>). Un <b>prolongement</b> de \(f\) à un sur-ensemble \(A\supseteq E\) est toute application
+      \(A\to F\) coïncidant avec \(f\) sur \(E\) (il n'est <b>pas unique</b>).
+    </div>
+    <div class="def">
+      <span class="lab">Composée</span>
+      Pour \(f:E\to F\) et \(g:F\to G\), \(g\circ f:E\to G\), \((g\circ f)(x)=g(f(x))\).
+      Associative, \(f\circ\operatorname{Id}_E=f=\operatorname{Id}_F\circ f\). En général \(g\circ f\neq f\circ g\)
+      (et l'une peut ne pas être définie).
+    </div>
+
+    <h3>1.3 Injection, surjection, bijection</h3>
+    <div class="def">
+      <span class="lab">Injection</span>
+      Chaque \(y\in F\) a <b>au plus un</b> antécédent :
+      \(\;\forall(x,x')\in E^2,\ f(x)=f(x')\Rightarrow x=x'\). Pour montrer la <b>non</b>-injectivité : exhiber
+      \(x\neq x'\) avec \(f(x)=f(x')\).
+    </div>
+    <div class="def">
+      <span class="lab">Surjection</span>
+      Chaque \(y\in F\) a <b>au moins un</b> antécédent : \(\;\forall y\in F,\ \exists x\in E,\ f(x)=y\),
+      i.e. \(f(E)=F\). Non-surjectivité : exhiber \(y\) sans antécédent.
+    </div>
+    <div class="def">
+      <span class="lab">Bijection &amp; réciproque</span>
+      Chaque \(y\in F\) a un <b>unique</b> antécédent : \(f\) bijective \(\iff\) injective <b>et</b> surjective.
+      La <b>réciproque</b> \(f^{-1}:F\to E\) vérifie \(x=f^{-1}(y)\iff y=f(x)\), soit
+      \(f^{-1}\circ f=\operatorname{Id}_E\) et \(f\circ f^{-1}=\operatorname{Id}_F\).
+    </div>
+    <div class="thm">
+      <span class="lab">Propriétés utiles</span>
+      <ul style="margin:.3rem 0 0">
+        <li>Stricte monotonie sur \(I\subseteq\mathbb R\) \(\Rightarrow\) injective.</li>
+        <li>Composées : \(f,g\) inj. \(\Rightarrow g\circ f\) inj. ; \(f,g\) surj. \(\Rightarrow g\circ f\) surj.
+        Si \(g\circ f\) inj. alors \(f\) inj. ; si \(g\circ f\) surj. alors \(g\) surj.</li>
+        <li>\(f,g\) bij. \(\Rightarrow g\circ f\) bij. et \((g\circ f)^{-1}=f^{-1}\circ g^{-1}\) (on « inverse dans l'ordre »).</li>
+        <li>\((f^{-1})^{-1}=f\).</li>
+      </ul>
+    </div>
+    <div class="warnbox">
+      La réciproque \(f^{-1}\) n'a rien à voir avec l'inverse \(\tfrac1f\).</div>
+
+    <h3>1.4 Image directe, image réciproque</h3>
+    <div class="def">
+      <span class="lab">Image directe / réciproque</span>
+      Pour \(I\subseteq E\) et \(J\subseteq F\) :
+      \[ f(I)=\{f(x)\mid x\in I\}\subseteq F,\qquad f^{-1}(J)=\{x\in E\mid f(x)\in J\}\subseteq E. \]
+      \(f\) surjective \(\iff f(E)=F\).
+    </div>
+    <div class="warnbox">
+      \(f^{-1}(J)\) est un <b>ensemble</b> et a <b>toujours</b> un sens, même si \(f\) n'est pas bijective : ne
+      pas confondre avec la bijection réciproque. Si \(f\) est bijective, \(f^{-1}(J)\) désigne indifféremment
+      l'image réciproque par \(f\) ou l'image directe par la réciproque \(f^{-1}\) (elles coïncident).
+    </div>
+  </section>
+
+  <!-- ==================== EXOS CRÉÉS ============================= -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Bijection homographique &amp; réciproque</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Soit \(f:\mathbb R\setminus\{-2\}\to\mathbb R\), \(f(x)=\dfrac{3x+1}{x+2}\). Montrer que \(f\)
+        réalise une bijection sur son image \(J\), déterminer \(J\), puis \(f^{-1}\).</div>
+        <p class="q">Injectivité + surjectivité par résolution de \(y=f(x)\).</p>
+        <p>Soit \(y\in\mathbb R\). Cherchons les \(x\neq -2\) tels que \(\dfrac{3x+1}{x+2}=y\) :</p>
+        \[ 3x+1=y(x+2)\iff 3x-yx=2y-1\iff x(3-y)=2y-1\iff x=\frac{2y-1}{3-y}\ \ (y\neq 3). \]
+        <p>Pour \(y\neq 3\), ce \(x\) existe et est <b>unique</b> (donc \(f\) injective et surjective sur son image) ;
+        pour \(y=3\), l'équation \(3x+1=3x+6\) n'a pas de solution. L'image est donc \(J=\mathbb R\setminus\{3\}\)
+        (asymptote horizontale \(y=3\)).</p>
+        <div class="res">\(f:\mathbb R\setminus\{-2\}\to\mathbb R\setminus\{3\}\) est bijective, de réciproque
+        \(f^{-1}(y)=\dfrac{2y-1}{3-y}\).</div>
+        <p style="font-size:.9rem;opacity:.85">Vérification : \(f^{-1}(3)\) n'existe pas (\(3\notin J\)) et
+        \(f(-2)\) n'existe pas — cohérent.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Image directe : \(\cup\), \(\cap\) et un contre-exemple</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Soit \(f:E\to F\) et \(A,B\subseteq E\). Montrer \(f(A\cup B)=f(A)\cup f(B)\) et
+        \(f(A\cap B)\subseteq f(A)\cap f(B)\), puis donner un contre-exemple à l'égalité pour \(\cap\).</div>
+        <p class="q">Union — égalité.</p>
+        <p>\(y\in f(A\cup B)\iff \exists x\in A\cup B,\ y=f(x)\iff (\exists x\in A,\ y=f(x))\text{ ou }(\exists x\in B,\ y=f(x))\)
+        \(\iff y\in f(A)\text{ ou }y\in f(B)\iff y\in f(A)\cup f(B)\).</p>
+        <div class="res">\(f(A\cup B)=f(A)\cup f(B)\).</div>
+        <p class="q">Intersection — inclusion seulement.</p>
+        <p>Soit \(y\in f(A\cap B)\) : \(\exists x\in A\cap B,\ y=f(x)\). Comme \(x\in A\), \(y\in f(A)\) ; comme
+        \(x\in B\), \(y\in f(B)\). Donc \(y\in f(A)\cap f(B)\).</p>
+        <div class="res">\(f(A\cap B)\subseteq f(A)\cap f(B)\).</div>
+        <p class="q">Contre-exemple à l'égalité.</p>
+        <p>Prenons \(f:\mathbb R\to\mathbb R\), \(f(x)=x^2\), \(A=\mathbb R_-\), \(B=\mathbb R_+\). Alors
+        \(A\cap B=\{0\}\) donc \(f(A\cap B)=\{0\}\), tandis que \(f(A)=f(B)=\mathbb R_+\), d'où
+        \(f(A)\cap f(B)=\mathbb R_+\neq\{0\}\).</p>
+        <div class="note">L'égalité pour \(\cap\) est rétablie exactement lorsque \(f\) est injective.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Itération d'une fonction</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Soit \(f:\mathbb R\to\mathbb R\), \(f(x)=\dfrac{x}{\sqrt{1+x^2}}\). Déterminer
+        \(f^{\circ n}=f\circ\cdots\circ f\) (\(n\) fois).</div>
+        <p class="q">Conjecture puis récurrence : \(f^{\circ n}(x)=\dfrac{x}{\sqrt{1+n x^2}}\).</p>
+        <p><b>Init.</b> \(n=1\) : \(f^{\circ 1}(x)=\dfrac{x}{\sqrt{1+x^2}}\) ✓.</p>
+        <p><b>Héréd.</b> Supposons \(f^{\circ n}(x)=\dfrac{x}{\sqrt{1+nx^2}}\). Posons \(u=f^{\circ n}(x)\). Alors :</p>
+        \[ 1+u^2=1+\frac{x^2}{1+nx^2}=\frac{1+nx^2+x^2}{1+nx^2}=\frac{1+(n+1)x^2}{1+nx^2}, \]
+        \[ f^{\circ(n+1)}(x)=f(u)=\frac{u}{\sqrt{1+u^2}}=\frac{\dfrac{x}{\sqrt{1+nx^2}}}{\sqrt{\dfrac{1+(n+1)x^2}{1+nx^2}}}
+        =\frac{x}{\sqrt{1+(n+1)x^2}}. \]
+        <div class="res">\(\displaystyle f^{\circ n}(x)=\frac{x}{\sqrt{1+n\,x^2}}\) pour tout \(n\geqslant 1\).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CORRECTION TD ========================== -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD n°3 — Applications</h2>
+    <p class="lead" style="font-size:.95rem">Feuille sans corrigé officiel : les 14 exercices sont résolus
+    intégralement, chaque sous-question traitée.</p>
+
+    <h3>Partie 1 — Éléments fondamentaux</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — Images et antécédents</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(f:\mathbb R^2\to\mathbb R^3,\ (x,y)\mapsto(x+y,\ x-y,\ x)\) ;
+        \(g:\mathbb R^3\to\mathbb R^2,\ (x,y,z)\mapsto(x+y+z,\ x+y)\).</div>
+        <p class="q">(a) Image de \(A=(1,2)\) par \(f\)</p>
+        <p class="res">\(f(1,2)=(1+2,\ 1-2,\ 1)=(3,-1,1)\)</p>
+        <p class="q">(b) Image de \(B=(-3,1,2)\) par \(g\)</p>
+        <p class="res">\(g(-3,1,2)=(-3+1+2,\ -3+1)=(0,-2)\)</p>
+        <p class="q">(c) Antécédents de \(B=(-3,1,2)\) par \(f\)</p>
+        <p>On résout \((x+y,\ x-y,\ x)=(-3,1,2)\). La 3ᵉ composante donne \(x=2\) ; la 1ʳᵉ donne \(y=-3-x=-5\) ;
+        la 2ᵉ imposerait \(x-y=2-(-5)=7=1\), <b>faux</b>.</p>
+        <p class="res">Aucun antécédent : \(f^{-1}(\{B\})=\varnothing\).</p>
+        <p class="q">(d) Antécédents de \(A=(1,2)\) par \(g\)</p>
+        <p>On résout \((x+y+z,\ x+y)=(1,2)\). Par différence \(z=1-2=-1\), et \(x+y=2\) laisse \(x\) libre.</p>
+        <p class="res">\(\{(x,\ 2-x,\ -1)\mid x\in\mathbb R\}\) (une infinité d'antécédents).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — \(f(x,y)=(x+y,\,xy)\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) Images de \(A=(1,2)\) et \(B=(2,1)\)</p>
+        <p>\(f(1,2)=(3,2)\) et \(f(2,1)=(3,2)\). Deux antécédents distincts, même image :</p>
+        <div class="res">\(f\) n'est <b>pas injective</b> (elle est symétrique en \(x,y\)).</div>
+        <p class="q">(b) Antécédents de \(C=(1,1)\)</p>
+        <p>\(x+y=1\) et \(xy=1\) : \(x,y\) sont racines de \(t^2-t+1=0\), de discriminant \(\Delta=1-4=-3<0\).
+        Aucune solution réelle.</p>
+        <div class="res">\((1,1)\) n'a pas d'antécédent : \(f\) n'est <b>pas surjective</b>.</div>
+      </div>
+    </div>
+
+    <h3>Partie 2 — Restriction, prolongement, composée</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — Restriction / prolongement de \(f:\mathbb R^*\to\mathbb R,\ f(x)=x^2\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Restriction : domaine \(\subseteq\mathbb R^*\) et même valeur. Prolongement : domaine
+        \(\supseteq\mathbb R^*\) et coïncide sur \(\mathbb R^*\).</div>
+        <p class="q">\(g_1:\mathbb R\to\mathbb R,\ x\mapsto x^2\)</p><p><b>Prolongement</b> : domaine \(\mathbb R\supseteq\mathbb R^*\), coïncide (\(x^2\)).</p>
+        <p class="q">\(g_2:\mathbb R\to\mathbb R,\ x\mapsto |x|^2\)</p><p><b>Prolongement</b> : \(|x|^2=x^2\), même situation que \(g_1\).</p>
+        <p class="q">\(g_3:\mathbb R_+\to\mathbb R,\ x\mapsto x^2\)</p><p><b>Ni l'un ni l'autre</b> : \(\mathbb R_+=[0,\infty)\) contient \(0\notin\mathbb R^*\) (pas une restriction) et ne contient pas les négatifs (pas un prolongement).</p>
+        <p class="q">\(g_4:\mathbb R^*_+\to\mathbb R,\ x\mapsto x^2\)</p><p><b>Restriction</b> : \(\mathbb R^*_+\subseteq\mathbb R^*\), même valeur.</p>
+        <p class="q">\(g_5:\mathbb R\to\mathbb R,\ x\mapsto x^2\) si \(x\neq0\), \(0\) si \(x=0\)</p><p><b>Prolongement</b> : sur \(\mathbb R^*\) vaut \(x^2\) (identique à \(g_1\)).</p>
+        <p class="q">\(g_6:\mathbb R^*\to\mathbb R,\ x\mapsto x^2\) si \(x>0\), \(-x^2\) si \(x<0\)</p><p><b>Ni l'un ni l'autre</b> : même domaine \(\mathbb R^*\), mais \(g_6(x)=-x^2\neq x^2\) pour \(x<0\) : ce n'est pas \(f\).</p>
+        <p class="q">\(g_7:\mathbb R\to\mathbb R,\ x\mapsto x^2\) si \(x\geqslant0\), \(-|x|^2\) si \(x<0\)</p><p><b>Ni l'un ni l'autre</b> : pour \(x<0\), \(-|x|^2=-x^2\neq x^2\), donc ne coïncide pas avec \(f\) sur \(\mathbb R^*\) (pas un prolongement).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — Composées (\(f,g\) de l'ex. 1)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">\(g\circ f:\mathbb R^2\to\mathbb R^2\)</p>
+        <p>\(g\circ f(x,y)=g(x+y,\ x-y,\ x)=\big((x+y)+(x-y)+x,\ (x+y)+(x-y)\big)\).</p>
+        <p class="res">\(g\circ f(x,y)=(3x,\ 2x)\)</p>
+        <p class="q">\(f\circ g:\mathbb R^3\to\mathbb R^3\)</p>
+        <p>Avec \(a=x+y+z,\ b=x+y\) : \(f\circ g(x,y,z)=f(a,b)=(a+b,\ a-b,\ a)\).</p>
+        <p class="res">\(f\circ g(x,y,z)=(2x+2y+z,\ z,\ x+y+z)\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — Composées sur \(\mathbb N\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(f(n)=2n\) ; \(g(n)=\tfrac n2\) si \(n\) pair, \(0\) si \(n\) impair.</div>
+        <p class="q">\(f\circ g\)</p>
+        <p>\(f\circ g(n)=2\,g(n)\) : si \(n\) pair, \(2\cdot\tfrac n2=n\) ; si \(n\) impair, \(2\cdot 0=0\).</p>
+        <p class="res">\(f\circ g(n)=\begin{cases}n&n\text{ pair}\\0&n\text{ impair}\end{cases}\)</p>
+        <p class="q">\(g\circ f\)</p>
+        <p>\(g\circ f(n)=g(2n)\) ; or \(2n\) est toujours pair, donc \(g(2n)=\tfrac{2n}{2}=n\).</p>
+        <p class="res">\(g\circ f=\operatorname{Id}_{\mathbb N}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — Itérées de \(f(x)=\dfrac{x}{x+1}\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(f\circ f(x)\)</p>
+        <p>\(f(x)+1=\dfrac{x}{x+1}+1=\dfrac{2x+1}{x+1}\), donc
+        \(f\circ f(x)=\dfrac{f(x)}{f(x)+1}=\dfrac{x/(x+1)}{(2x+1)/(x+1)}\).</p>
+        <p class="res">\(f\circ f(x)=\dfrac{x}{2x+1}\)</p>
+        <p class="q">(b) \(f\circ f\circ f(x)\)</p>
+        <p>Avec \(u=\dfrac{x}{2x+1}\) : \(u+1=\dfrac{3x+1}{2x+1}\), d'où \(f(u)=\dfrac{x/(2x+1)}{(3x+1)/(2x+1)}\).</p>
+        <p class="res">\(f\circ f\circ f(x)=\dfrac{x}{3x+1}\)</p>
+        <p class="q">(c) \(f^{\circ n}(x)\)</p>
+        <p><b>Conjecture</b> \(f^{\circ n}(x)=\dfrac{x}{nx+1}\), démontrée par récurrence : vraie au rang 1 ; si vraie
+        au rang \(n\), avec \(v=\dfrac{x}{nx+1}\), \(v+1=\dfrac{(n+1)x+1}{nx+1}\), donc
+        \(f(v)=\dfrac{x}{(n+1)x+1}\).</p>
+        <p class="res">\(f^{\circ n}(x)=\dfrac{x}{nx+1}\)</p>
+      </div>
+    </div>
+
+    <h3>Partie 3 — Injectivité, surjectivité, bijectivité</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 7 — Nature des applications \(f_1\) à \(f_{10}\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">\(f_1:\mathbb Z\to\mathbb Z,\ n\mapsto 2n\)</p>
+        <p><b>Injective</b> (\(2n=2m\Rightarrow n=m\)), <b>non surjective</b> (\(1\) n'a pas d'antécédent). Non bijective.</p>
+        <p class="q">\(f_2:\mathbb N\to\mathbb N,\ n\mapsto n+1\)</p>
+        <p><b>Injective</b>, <b>non surjective</b> (\(0\) n'a pas d'antécédent, \(n+1=0\) impossible dans \(\mathbb N\)).</p>
+        <p class="q">\(f_3:\mathbb N\to\mathbb N,\ n\mapsto \tfrac n2\) si pair, \(n\) si impair</p>
+        <p><b>Non injective</b> : \(f_3(1)=1=f_3(2)\). <b>Surjective</b> : tout \(k\) est image de \(2k\) (pair). Non bijective.</p>
+        <p class="q">\(f_4:\mathbb R\to\mathbb R,\ x\mapsto 3x+7\)</p>
+        <p><b>Bijective</b> (affine, pente \(\neq0\)). \(y=3x+7\Rightarrow x=\tfrac{y-7}{3}\).</p>
+        <p class="res">\(f_4^{-1}(y)=\dfrac{y-7}{3}\)</p>
+        <p class="q">\(f_5:\mathbb R\setminus\{-1\}\to\mathbb R\setminus\{1\},\ x\mapsto \dfrac{x}{1+x}\)</p>
+        <p>\(y=\dfrac{x}{1+x}\Rightarrow y+yx=x\Rightarrow x=\dfrac{y}{1-y}\) (défini \(y\neq1\)) : unique. <b>Bijective</b>.</p>
+        <p class="res">\(f_5^{-1}(y)=\dfrac{y}{1-y}\)</p>
+        <p class="q">\(f_6:\mathbb R\setminus\{3\}\to\mathbb R\setminus\{3\},\ x\mapsto \dfrac{3x+1}{x-3}\)</p>
+        <p>\(y=\dfrac{3x+1}{x-3}\Rightarrow x=\dfrac{3y+1}{y-3}\) (défini \(y\neq3\)). <b>Bijective</b>, et
+        \(f_6^{-1}=f_6\) : c'est une <b>involution</b>.</p>
+        <p class="q">\(f_7:[1,+\infty[\to\mathbb R_+,\ x\mapsto \dfrac{x-1}{x}=1-\tfrac1x\)</p>
+        <p>Strictement croissante (\(f_7'=\tfrac1{x^2}>0\)) donc <b>injective</b>. Image \([0,1[\neq\mathbb R_+\) :
+        <b>non surjective</b>.</p>
+        <p class="q">\(f_8:\,]-\infty,-1]\cup[2,+\infty[\to\mathbb R_+,\ x\mapsto\sqrt{x^2-x-2}\)</p>
+        <p>\(x^2-x-2=(x-2)(x+1)\geqslant0\) sur le domaine. \(y^2=x^2-x-2\Rightarrow x=\dfrac{1\pm\sqrt{9+4y^2}}{2}\) :
+        <b>deux</b> antécédents (un \(\geqslant2\), un \(\leqslant-1\)) pour chaque \(y\geqslant0\).
+        <b>Non injective</b> mais <b>surjective</b> (la branche \(\geqslant2\) atteint tout \(\mathbb R_+\)).</p>
+        <p class="q">\(f_9:\mathbb R^2\to\mathbb R^2,\ (x_1,x_2)\mapsto(x_1+x_2,\ x_1-x_2)\)</p>
+        <p>Linéaire, déterminant \(\begin{vmatrix}1&1\\1&-1\end{vmatrix}=-2\neq0\) : <b>bijective</b>.
+        \(y_1=x_1+x_2,\ y_2=x_1-x_2\Rightarrow x_1=\tfrac{y_1+y_2}{2},\ x_2=\tfrac{y_1-y_2}{2}\).</p>
+        <p class="res">\(f_9^{-1}(y_1,y_2)=\left(\dfrac{y_1+y_2}{2},\ \dfrac{y_1-y_2}{2}\right)\)</p>
+        <p class="q">\(f_{10}:\mathbb R^3\to\mathbb R^2,\ (x_1,x_2,x_3)\mapsto(x_1x_2x_3,\ x_3)\)</p>
+        <p><b>Non injective</b> : \(f_{10}(1,1,0)=(0,0)=f_{10}(2,3,0)\). <b>Non surjective</b> : \((a,0)\) avec \(a\neq0\)
+        exigerait \(x_1x_2x_3=a\neq0\) avec \(x_3=0\), impossible.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 8 — Trouver \(J\) rendant \(f\) bijective + réciproque</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">\(f_1:\mathbb R\to J,\ x\mapsto 1+e^x\)</p>
+        <p>\(e^x\in\,]0,+\infty[\) donc \(1+e^x\in\,]1,+\infty[\). \(y=1+e^x\Rightarrow x=\ln(y-1)\).</p>
+        <p class="res">\(J=\,]1,+\infty[\), \(f_1^{-1}(y)=\ln(y-1)\)</p>
+        <p class="q">\(f_2:\mathbb R_+\to J,\ x\mapsto -\dfrac x2-1\)</p>
+        <p>Sur \([0,\infty)\), décroissante de \(-1\) vers \(-\infty\) : image \(]-\infty,-1]\).
+        \(y=-\tfrac x2-1\Rightarrow x=-2(y+1)\).</p>
+        <p class="res">\(J=\,]-\infty,-1]\), \(f_2^{-1}(y)=-2(y+1)\)</p>
+        <p class="q">\(f_3:\mathbb R_+\to J,\ x\mapsto \dfrac{1}{1+x^2}\)</p>
+        <p>Sur \([0,\infty)\) décroissante de \(1\) (en \(0\)) vers \(0\) (exclu) : image \(]0,1]\).
+        \(y=\tfrac1{1+x^2}\Rightarrow x^2=\tfrac{1-y}{y}\Rightarrow x=\sqrt{\tfrac{1-y}{y}}\) (racine \(\geqslant0\)).</p>
+        <p class="res">\(J=\,]0,1]\), \(f_3^{-1}(y)=\sqrt{\dfrac{1-y}{y}}\)</p>
+        <p class="q">\(f_4:\mathbb R_+\to J,\ x\mapsto x+x^2\)</p>
+        <p>Sur \([0,\infty)\) croissante de \(0\) vers \(+\infty\) : image \([0,+\infty[\).
+        \(y=x^2+x\Rightarrow x=\dfrac{-1+\sqrt{1+4y}}{2}\) (racine positive).</p>
+        <p class="res">\(J=[0,+\infty[\), \(f_4^{-1}(y)=\dfrac{-1+\sqrt{1+4y}}{2}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 9 — \(h(x)=(f(x),g(x))\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(f:E\to F,\ g:E\to G,\ h:E\to F\times G,\ h(x)=(f(x),g(x))\).</div>
+        <p class="q">(a) Si \(f\) ou \(g\) injective, alors \(h\) injective.</p>
+        <p>Supposons \(f\) injective. Soit \((x,x')\) avec \(h(x)=h(x')\), i.e. \((f(x),g(x))=(f(x'),g(x'))\).
+        En particulier \(f(x)=f(x')\), donc \(x=x'\) par injectivité de \(f\). (Idem si \(g\) injective.)</p>
+        <div class="res">\(h\) est injective.</div>
+        <p class="q">(b) \(f,g\) surjectives \(\Rightarrow h\) surjective ?</p>
+        <p><b>Non</b> en général. Contre-exemple : \(E=\mathbb R,\ f=g=\operatorname{Id}_{\mathbb R}\) (surjectives).
+        Alors \(h(x)=(x,x)\), d'image la diagonale \(\{(t,t)\mid t\in\mathbb R\}\subsetneq\mathbb R^2\). Par exemple
+        \((0,1)\) n'a pas d'antécédent.</p>
+        <div class="res">\(h\) n'est pas nécessairement surjective.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 10 — Équations fonctionnelles</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(f:E\to E\).</div>
+        <p class="q">(a) \(f\circ f=f\) : montrer que \(f\) injective ou surjective \(\Rightarrow f=\operatorname{Id}_E\).</p>
+        <p><b>Si \(f\) injective</b> : de \(f(f(x))=f(x)\), l'injectivité donne \(f(x)=x\) pour tout \(x\).</p>
+        <p><b>Si \(f\) surjective</b> : soit \(y\in E\) ; \(\exists x,\ f(x)=y\). Alors \(f(y)=f(f(x))=f(x)=y\).
+        Tout \(y\) étant atteint, \(f(y)=y\) partout.</p>
+        <div class="res">Dans les deux cas \(f=\operatorname{Id}_E\).</div>
+        <p class="q">(b) \(f\circ f\circ f=f\) : montrer \(f\) inj. \(\iff f\circ f=\operatorname{Id}_E\iff f\) surj.</p>
+        <p><b>\(f\) inj. \(\Rightarrow f\circ f=\operatorname{Id}\)</b> : de \(f(f(f(x)))=f(x)\), l'injectivité donne \(f(f(x))=x\).</p>
+        <p><b>\(f\circ f=\operatorname{Id}\Rightarrow f\) surj.</b> : tout \(y=f(f(y))\) a pour antécédent \(f(y)\).</p>
+        <p><b>\(f\) surj. \(\Rightarrow f\circ f=\operatorname{Id}\)</b> : soit \(x\) ; \(\exists a,\ x=f(a)\). Alors
+        \(f(f(x))=f(f(f(a)))=f(a)=x\) (car \(f^{\circ3}=f\)).</p>
+        <p><b>\(f\circ f=\operatorname{Id}\Rightarrow f\) inj.</b> : \(f(x)=f(x')\Rightarrow f(f(x))=f(f(x'))\Rightarrow x=x'\).</p>
+        <div class="res">La chaîne d'implications boucle : les trois propriétés sont équivalentes (\(f\) est une <b>involution</b>).</div>
+      </div>
+    </div>
+
+    <h3>Partie 4 — Images directes et réciproques</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 11 — \(f(x)=e^x\), \(g(x)=\sqrt{|x|}\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) Image directe par \(f\) de \(\{0\}\)</p><p class="res">\(f(\{0\})=\{e^0\}=\{1\}\)</p>
+        <p class="q">(b) Image directe par \(g\) de \(\mathbb R_-\)</p>
+        <p>Pour \(x\leqslant0\), \(|x|=-x\) parcourt \([0,\infty)\), donc \(\sqrt{|x|}\) parcourt \([0,\infty)\).</p>
+        <p class="res">\(g(\mathbb R_-)=\mathbb R_+\)</p>
+        <p class="q">(c) Image réciproque de \([1,2[\) par \(f\)</p>
+        <p>\(e^x\in[1,2[\iff 0\leqslant x<\ln2\).</p>
+        <p class="res">\(f^{-1}([1,2[)=[0,\ln2[\)</p>
+        <p class="q">(d) Image réciproque de \([0,1[\) par \(g\)</p>
+        <p>\(\sqrt{|x|}\in[0,1[\iff |x|<1\).</p>
+        <p class="res">\(g^{-1}([0,1[)=\,]-1,1[\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 12 — \(f(x)=\cos x\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(f(\mathbb R)\)</p><p class="res">\([-1,1]\)</p>
+        <p class="q">(b) \(f([0,\pi])\)</p><p>\(\cos\) décroît de \(1\) à \(-1\).</p><p class="res">\([-1,1]\)</p>
+        <p class="q">(c) \(f\!\left([-\tfrac\pi2,\tfrac\pi2]\right)\)</p><p>\(\cos\geqslant0\), maximum \(1\) en \(0\), minimum \(0\) en \(\pm\tfrac\pi2\).</p><p class="res">\([0,1]\)</p>
+        <p class="q">(d) \(f\!\left([\tfrac{5\pi}4,\tfrac{7\pi}4]\right)\)</p>
+        <p>Sur \([\pi,2\pi]\), \(\cos\) est croissant : de \(\cos\tfrac{5\pi}4=-\tfrac{\sqrt2}2\) à \(\cos\tfrac{7\pi}4=\tfrac{\sqrt2}2\).</p>
+        <p class="res">\(\left[-\dfrac{\sqrt2}2,\ \dfrac{\sqrt2}2\right]\)</p>
+        <p class="q">(e) \(f^{-1}\!\left(\left\{\tfrac{\sqrt3}2\right\}\right)\)</p>
+        <p>\(\cos x=\tfrac{\sqrt3}2\iff x=\pm\tfrac\pi6+2k\pi\).</p>
+        <p class="res">\(\left\{\pm\dfrac\pi6+2k\pi\ \middle|\ k\in\mathbb Z\right\}\)</p>
+        <p class="q">(f) \(f^{-1}([0,1])\)</p>
+        <p>\(\cos x\geqslant0\) sur les intervalles centrés sur les multiples de \(2\pi\) :</p>
+        <p class="res">\(\displaystyle\bigcup_{k\in\mathbb Z}\left[-\tfrac\pi2+2k\pi,\ \tfrac\pi2+2k\pi\right]\)</p>
+        <p class="q">(g) \(f^{-1}\!\left(f\!\left([0,\tfrac\pi2]\right)\right)\)</p>
+        <p>\(f([0,\tfrac\pi2])=[0,1]\), donc c'est \(f^{-1}([0,1])\), identique à (f).</p>
+        <p class="res">\(\displaystyle\bigcup_{k\in\mathbb Z}\left[-\tfrac\pi2+2k\pi,\ \tfrac\pi2+2k\pi\right]\)</p>
+        <p class="q">(h) \(f\!\left(f^{-1}([0,1])\right)\)</p>
+        <p>\(f(f^{-1}(J))=J\cap f(\mathbb R)=[0,1]\cap[-1,1]\).</p>
+        <p class="res">\([0,1]\)</p>
+        <div class="note">Illustration des inclusions générales : \(f(f^{-1}(J))\subseteq J\) (égalité ici car \(J\subseteq f(\mathbb R)\))
+        et \(I\subseteq f^{-1}(f(I))\) (inclusion stricte en g, car \(\cos\) n'est pas injective).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 13 — \(f(x)=\dfrac{3x+1}{x+1}\) sur \(\mathbb R\setminus\{-1\}\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) Ensemble d'arrivée pour bijectivité + \(f^{-1}\)</p>
+        <p>\(y=\dfrac{3x+1}{x+1}\Rightarrow y(x+1)=3x+1\Rightarrow x(y-3)=1-y\Rightarrow x=\dfrac{1-y}{y-3}\) (défini \(y\neq3\)).</p>
+        <p class="res">\(f:\mathbb R\setminus\{-1\}\to\mathbb R\setminus\{3\}\) bijective, \(f^{-1}(y)=\dfrac{1-y}{y-3}\).</p>
+        <p class="q">(b) \(f(]0,1[)\) et \(f([2,3])\)</p>
+        <p>\(f'(x)=\dfrac{3(x+1)-(3x+1)}{(x+1)^2}=\dfrac{2}{(x+1)^2}>0\) : \(f\) strictement croissante.
+        \(f(0)=1,\ f(1)=2\) ; \(f(2)=\tfrac73,\ f(3)=\tfrac52\).</p>
+        <p class="res">\(f(]0,1[)=\,]1,2[\) ; \(f([2,3])=\left[\tfrac73,\ \tfrac52\right]\)</p>
+        <p class="q">(c) \(f^{-1}(]0,1[)\) et \(f^{-1}(]1,2[)\)</p>
+        <p>\(f\) croissante : \(f(x)=0\Rightarrow x=-\tfrac13\), \(f(x)=1\Rightarrow x=0\), \(f(x)=2\Rightarrow x=1\).</p>
+        <p class="res">\(f^{-1}(]0,1[)=\left]-\tfrac13,\ 0\right[\) ; \(f^{-1}(]1,2[)=\,]0,1[\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 14 — \(f(x,y)=(x-4y,\ 2x+3y)\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(f\) est bijective</p>
+        <p>\(f\) est linéaire de matrice \(\begin{pmatrix}1&-4\\2&3\end{pmatrix}\), de déterminant
+        \(1\cdot3-(-4)\cdot2=3+8=11\neq0\). Donc \(f\) est bijective.</p>
+        <div class="res">\(f\) bijective sur \(\mathbb R^2\).</div>
+        <p class="q">(b) \(f(\Delta)\) avec \(\Delta=\{(x,y)\mid x+2y=1\}\)</p>
+        <p>On paramètre \(\Delta\) par \(x=1-2y\), \(y\in\mathbb R\). Alors :</p>
+        \[ f(1-2y,\ y)=\big((1-2y)-4y,\ 2(1-2y)+3y\big)=(1-6y,\ 2-y). \]
+        <p>Posons \(X=1-6y,\ Y=2-y\). De \(Y\) : \(y=2-Y\), d'où \(X=1-6(2-Y)=6Y-11\), soit \(X-6Y=-11\).</p>
+        <div class="res">\(f(\Delta)=\{(X,Y)\in\mathbb R^2\mid X-6Y+11=0\}\) (une droite).</div>
+      </div>
+    </div>
+
+  </section>
+
+  <p style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.9rem;opacity:.75">
+    Chapitre 3 du cours M01 (S1). Sources : <em>Chap_3.pdf</em> (cours magistral) et
+    <em>TD03 — Applications</em>. Corrigé rédigé intégralement (pas de corrigé officiel fourni).
+  </p>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours (CM)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/applications/Chap_3.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Chap_3</span><span class="badge">Cours (CM)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/applications/TD03___Applications-1.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD03___Applications-1</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calcul matriciel — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-math">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Maths · M02 — Calcul matriciel</span>
+  <h1 class="title">Calcul matriciel</h1>
+  <p class="lead">Ensemble \(M_{n,p}(\mathbb K)\), matrices particulières ; addition, produit par un scalaire, produit matriciel et
+  ses pièges ; matrice identité, puissances, binôme de Newton ; inverse (définition, formule \(2\times2\), propriétés) ;
+  matrices triangulaires et diagonales, transposée, trace, matrices symétriques.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+    <p style="font-size:.95rem;opacity:.85">\(\mathbb K\) désigne \(\mathbb R\) ou \(\mathbb C\) ; \(n,p,q\in\mathbb N^*\).</p>
+
+    <h3>1.1 Ensemble des matrices</h3>
+    <div class="def">
+      <span class="lab">Matrice</span>
+      Une matrice \(A=(a_{ij})\) est un tableau de coefficients de \(\mathbb K\), de taille \(n\times p\) (\(n\) lignes, \(p\) colonnes) ;
+      \(a_{ij}\) est à la ligne \(i\), colonne \(j\). Ensemble noté \(M_{n,p}(\mathbb K)\). Si \(n=p\) : matrice <b>carrée</b>, \(M_n(\mathbb K)\).
+    </div>
+    <div class="note">
+      <span class="lab">Matrices particulières</span>
+      <b>Diagonale</b> : coefficients nuls hors diagonale. <b>Vecteur ligne</b> (\(n=1\)), <b>vecteur colonne</b> (\(p=1\)).
+      <b>Matrice nulle</b> \(0_{n,p}\) : neutre de l'addition.
+    </div>
+
+    <h3>1.2 Addition et produit par un scalaire</h3>
+    <div class="def">
+      <span class="lab">Opérations</span>
+      \(A+B=(a_{ij}+b_{ij})\) (coefficient par coefficient, <b>même taille</b> exigée) ; \(\lambda A=(\lambda a_{ij})\).
+      L'écriture \(A\lambda\) n'est pas définie. La somme est commutative, associative, de neutre \(0\).
+    </div>
+
+    <h3>1.3 Produit matriciel</h3>
+    <div class="def">
+      <span class="lab">Produit</span>
+      Pour \(A\in M_{n,p}\), \(B\in M_{p,q}\) : \(AB=(c_{ij})\in M_{n,q}\) avec
+      \[ c_{ij}=\sum_{k=1}^{p}a_{ik}b_{kj}=a_{i1}b_{1j}+\cdots+a_{ip}b_{pj}. \]
+      Défini <b>ssi</b> nombre de colonnes de \(A\) = nombre de lignes de \(B\). Règle : \((n,p)\times(p,q)\to(n,q)\).
+      « Ligne \(L_i\) par colonne \(C_j\) ».
+    </div>
+    <div class="warnbox">
+      <span class="lab">Trois pièges</span>
+      1) Non commutatif : \(AB\neq BA\) en général.
+      2) \(AB=0\) n'implique <b>pas</b> \(A=0\) ou \(B=0\).
+      3) \(AB=AC\) n'implique <b>pas</b> \(B=C\) (sauf si \(A\) inversible).
+    </div>
+    <div class="thm">
+      <span class="lab">Propriétés</span>
+      \((A+B)C=AC+BC\), \(A(B+C)=AB+AC\), \((\lambda A)B=A(\lambda B)=\lambda(AB)\), associativité \((AB)C=A(BC)\).
+    </div>
+
+    <h3>1.4 Identité, puissances, binôme</h3>
+    <div class="def">
+      <span class="lab">Identité &amp; puissances</span>
+      \(I_n=(\delta_{ij})\) (symbole de Kronecker) est neutre : \(AI_p=A\), \(I_nA=A\).
+      \(A^0=I_n\), \(A^k=\underbrace{A\times\cdots\times A}_{k}\). \(A\) est <b>nilpotente</b> si \(\exists k\geqslant1,\ A^k=0\).
+    </div>
+    <div class="warnbox">
+      <span class="lab">Binôme de Newton matriciel</span>
+      Valable <b>seulement si \(AB=BA\)</b> : \((A+B)^p=\displaystyle\sum_{k=0}^{p}\binom pk A^{p-k}B^k\).
+      Sinon, déjà \((A+B)^2=A^2+AB+BA+B^2\).
+    </div>
+
+    <h3>1.5 Inverse d'une matrice</h3>
+    <div class="def">
+      <span class="lab">Inverse</span>
+      \(A\in M_n(\mathbb K)\) est inversible s'il existe \(B\in M_n(\mathbb K)\) avec \(AB=BA=I_n\) ; \(B=A^{-1}\) est unique.
+      Alors \(AX=B\) admet l'unique solution \(X=A^{-1}B\).
+    </div>
+    <div class="thm">
+      <span class="lab">Formule \(2\times2\)</span>
+      \(A=\begin{pmatrix}a&b\\c&d\end{pmatrix}\) inversible \(\iff ad-bc\neq0\), et alors
+      \(A^{-1}=\dfrac1{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}\).
+    </div>
+    <div class="thm">
+      <span class="lab">Propriétés</span>
+      \((A^{-1})^{-1}=A\) ; \((\lambda A)^{-1}=\tfrac1\lambda A^{-1}\) ; \((AB)^{-1}=B^{-1}A^{-1}\) ; \((A^p)^{-1}=(A^{-1})^p\).
+      Aucune formule pour \((A+B)^{-1}\).
+    </div>
+
+    <h3>1.6 Triangulaires, diagonales</h3>
+    <div class="def">
+      <span class="lab">Triangulaire / diagonale</span>
+      Triangulaire supérieure : \(i>j\Rightarrow a_{ij}=0\). Diagonale : \(i\neq j\Rightarrow a_{ij}=0\).
+      Puissances faciles : \(\operatorname{diag}(d_1,\dots,d_n)^p=\operatorname{diag}(d_1^p,\dots,d_n^p)\).
+    </div>
+    <div class="thm">
+      <span class="lab">Inversibilité</span>
+      Une matrice triangulaire (donc diagonale) est inversible \(\iff\) tous ses coefficients diagonaux sont non nuls.
+    </div>
+
+    <h3>1.7 Transposée, trace, symétrie</h3>
+    <div class="def">
+      <span class="lab">Transposée</span>
+      \(A^T=(a_{ji})\in M_{p,n}\). \((A^T)^T=A\), \((\lambda A+\mu B)^T=\lambda A^T+\mu B^T\),
+      \((AB)^T=B^TA^T\), \((A^T)^{-1}=(A^{-1})^T\).
+    </div>
+    <div class="def">
+      <span class="lab">Trace</span>
+      \(\operatorname{tr}(A)=a_{11}+\cdots+a_{nn}\). \(\operatorname{tr}(A+B)=\operatorname{tr}A+\operatorname{tr}B\),
+      \(\operatorname{tr}(\lambda A)=\lambda\operatorname{tr}A\), \(\operatorname{tr}(A^T)=\operatorname{tr}A\), \(\operatorname{tr}(AB)=\operatorname{tr}(BA)\).
+    </div>
+    <div class="note">
+      <span class="lab">Symétrie</span>
+      \(A\) symétrique si \(A=A^T\), antisymétrique si \(A^T=-A\) (diagonale nulle).
+      Décomposition unique : \(A=\underbrace{\tfrac{A+A^T}2}_{\text{sym.}}+\underbrace{\tfrac{A-A^T}2}_{\text{antisym.}}\).
+    </div>
+  </section>
+
+  <!-- ==================== EXOS CRÉÉS ============================== -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés)</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Puissance par diagonalisation</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(A=\begin{pmatrix}2&1\\0&3\end{pmatrix}\). Calculer \(A^n\) via \(A=I+N\) puis vérifier.</div>
+        <p>Ici \(A\) est triangulaire. Écrivons \(A=D+N\) avec \(D=\operatorname{diag}(2,3)\) et \(N=\begin{pmatrix}0&1\\0&0\end{pmatrix}\) — mais \(DN\neq ND\), le binôme ne s'applique pas. On procède par récurrence : \(A^n=\begin{pmatrix}2^n&c_n\\0&3^n\end{pmatrix}\). De \(A^{n+1}=A^n A\) : \(c_{n+1}=2^n\cdot1+c_n\cdot3=2^n+3c_n\), \(c_1=1\).</p>
+        <p>Résolvons \(c_{n+1}=3c_n+2^n\) : solution \(c_n=3^n-2^n\) (on vérifie \(c_1=3-2=1\), et \(3(3^n-2^n)+2^n=3^{n+1}-2^{n+1}\) ✓).</p>
+        <div class="res">\(A^n=\begin{pmatrix}2^n&3^n-2^n\\0&3^n\end{pmatrix}\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Matrice nilpotente</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(N=\begin{pmatrix}0&1&2\\0&0&3\\0&0&0\end{pmatrix}\). Montrer que \(N\) est nilpotente et calculer \((I+N)^n\).</div>
+        <p>\(N^2=\begin{pmatrix}0&0&3\\0&0&0\\0&0&0\end{pmatrix}\), \(N^3=0\) : \(N\) est nilpotente d'indice \(3\).</p>
+        <p>Comme \(I\) et \(N\) commutent, binôme : \((I+N)^n=I+nN+\binom n2N^2\) (les termes \(N^k=0\) pour \(k\geqslant3\)).</p>
+        <div class="res">\((I+N)^n=\begin{pmatrix}1&n&2n+\tfrac{3n(n-1)}2\\0&1&3n\\0&0&1\end{pmatrix}\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Polynôme annulateur &amp; inverse</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(A=\begin{pmatrix}3&1\\2&2\end{pmatrix}\). Trouver un polynôme annulateur de degré 2 et en déduire \(A^{-1}\).</div>
+        <p>\(\operatorname{tr}A=5\), \(\det A=6-2=4\). Toute matrice \(2\times2\) vérifie \(A^2-(\operatorname{tr}A)A+(\det A)I=0\) (Cayley-Hamilton) :</p>
+        \[ A^2-5A+4I=0. \]
+        <p>D'où \(A(A-5I)=-4I\), soit \(A^{-1}=\dfrac{5I-A}4=\dfrac14\begin{pmatrix}2&-1\\-2&3\end{pmatrix}\).</p>
+        <div class="res">\(A^{-1}=\dfrac14\begin{pmatrix}2&-1\\-2&3\end{pmatrix}\) (cohérent avec la formule \(\tfrac1{\det}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}\)).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CORRECTION TD ========================== -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD — Matrices</h2>
+    <p class="lead" style="font-size:.95rem">Feuille sans corrigé officiel : les 17 exercices sont résolus intégralement.</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — Dimensions des produits</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">1) \(A=(a\ b\ c)\in M_{1,3}\), \(B=\begin{pmatrix}d\\e\\f\end{pmatrix}\in M_{3,1}\)</p>
+        <p class="res">\(AB\) : \(1\times1\) ; \(BA\) : \(3\times3\)</p>
+        <p class="q">2) \(A\in M_{n,p}\), \(B\in M_{p,q}\), \(C\in M_{q,n}\)</p>
+        <p class="res">\(AB\) : \(n\times q\) ; \(BC\) : \(p\times n\) ; \(CA\) : \(q\times p\) ; \(ABC\) : \(n\times n\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — Opérations \(2\times2\)</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(A=\begin{pmatrix}2&1\\3&5\end{pmatrix}\), \(B=\begin{pmatrix}-1&0\\2&-3\end{pmatrix}\).</div>
+        <p class="q">\(A+B\)</p><p class="res">\(\begin{pmatrix}1&1\\5&2\end{pmatrix}\)</p>
+        <p class="q">\(3A-B\)</p><p class="res">\(\begin{pmatrix}7&3\\7&18\end{pmatrix}\)</p>
+        <p class="q">\(A^2\)</p><p class="res">\(\begin{pmatrix}7&7\\21&28\end{pmatrix}\)</p>
+        <p class="q">\(B^2\)</p><p class="res">\(\begin{pmatrix}1&0\\-8&9\end{pmatrix}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — Produits</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">a) \(\begin{pmatrix}2&3\\1&-4\end{pmatrix}\begin{pmatrix}-5&7\\-3&4\end{pmatrix}\)</p><p class="res">\(\begin{pmatrix}-19&26\\7&-9\end{pmatrix}\)</p>
+        <p class="q">b) \(\begin{pmatrix}3&4&0\\-2&6&-3\\7&-4&1\end{pmatrix}\begin{pmatrix}2\\5\\-1\end{pmatrix}\)</p><p class="res">\(\begin{pmatrix}26\\29\\-7\end{pmatrix}\)</p>
+        <p class="q">c) \(\begin{pmatrix}3&4&0\\-2&6&-3\\7&-4&1\end{pmatrix}\begin{pmatrix}2&-5\\5&-6\\-1&-7\end{pmatrix}\)</p><p class="res">\(\begin{pmatrix}26&-39\\29&-5\\-7&-18\end{pmatrix}\)</p>
+        <p class="q">d) \((2\ \ 2\ \ -1)\begin{pmatrix}2&-5\\5&-6\\-1&-7\end{pmatrix}\)</p><p class="res">\((15\ \ -15)\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — \(AB\), \(BA\), \(AA^T\), \(BB^T\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(A=\begin{pmatrix}2&1&0\\4&-1&3\end{pmatrix}\), \(B=\begin{pmatrix}1&1\\-1&0\\3&1\end{pmatrix}\).</div>
+        <p class="q">\(AB\) (\(2\times2\))</p><p class="res">\(\begin{pmatrix}1&2\\14&7\end{pmatrix}\)</p>
+        <p class="q">\(BA\) (\(3\times3\))</p><p class="res">\(\begin{pmatrix}6&0&3\\-2&-1&0\\10&2&3\end{pmatrix}\)</p>
+        <p class="q">\(AA^T\) (\(2\times2\))</p><p class="res">\(\begin{pmatrix}5&7\\7&26\end{pmatrix}\)</p>
+        <p class="q">\(BB^T\) (\(3\times3\))</p><p class="res">\(\begin{pmatrix}2&-1&4\\-1&1&-3\\4&-3&10\end{pmatrix}\)</p>
+        <p>Comparaison : \(AB\neq BA\) (tailles différentes) ; \(AA^T\) et \(BB^T\) ont des tailles différentes. \(AA^T\) et \(BB^T\) sont <b>symétriques</b>.</p>
+        <div class="res">\(A^2\) et \(B^2\) <b>n'existent pas</b> : \(A\) et \(B\) ne sont pas carrées.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — \(M^k\) par récurrence</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(M=\begin{pmatrix}m&1\\0&1\end{pmatrix}\).</div>
+        <p class="q">1) \(M^2\), \(M^3\)</p>
+        <p class="res">\(M^2=\begin{pmatrix}m^2&m+1\\0&1\end{pmatrix}\), \(M^3=\begin{pmatrix}m^3&m^2+m+1\\0&1\end{pmatrix}\)</p>
+        <p class="q">2) Conjecture et preuve</p>
+        <p>On conjecture \(M^k=\begin{pmatrix}m^k&1+m+\cdots+m^{k-1}\\0&1\end{pmatrix}\). Récurrence : \(M^{k+1}=M^kM\) donne le coin haut-droit \(m^k\cdot1+(1+\cdots+m^{k-1})\cdot1=1+m+\cdots+m^k\).</p>
+        <div class="res">\(M^k=\begin{pmatrix}m^k&\frac{m^k-1}{m-1}\\0&1\end{pmatrix}\) (\(m\neq1\)), et \(\begin{pmatrix}1&k\\0&1\end{pmatrix}\) si \(m=1\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — \(A^n\) via \(B=A-I\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(A=\begin{pmatrix}1&1&0\\0&1&1\\0&0&1\end{pmatrix}\), \(B=A-I=\begin{pmatrix}0&1&0\\0&0&1\\0&0&0\end{pmatrix}\).</div>
+        <p>\(B^2=\begin{pmatrix}0&0&1\\0&0&0\\0&0&0\end{pmatrix}\), \(B^3=0\) (nilpotente). Donc \(B^n=0\) pour \(n\geqslant3\).</p>
+        <p>\(A=I+B\), et \(I,B\) commutent : \(A^n=\sum_{k=0}^n\binom nk B^k=I+nB+\binom n2B^2\).</p>
+        <div class="res">\(A^n=\begin{pmatrix}1&n&\frac{n(n-1)}2\\0&1&n\\0&0&1\end{pmatrix}\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 7 — \(A^n\) et \(B^n\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(A=\begin{pmatrix}1&-1\\-1&1\end{pmatrix}\), \(B=\begin{pmatrix}1&1\\0&2\end{pmatrix}\).</div>
+        <p>\(A^2=\begin{pmatrix}2&-2\\-2&2\end{pmatrix}=2A\), donc \(A^3=2A^2=4A\), et par récurrence \(A^n=2^{n-1}A\).</p>
+        <div class="res">\(A^n=2^{n-1}\begin{pmatrix}1&-1\\-1&1\end{pmatrix}\) (\(n\geqslant1\)).</div>
+        <p>\(B^2=\begin{pmatrix}1&3\\0&4\end{pmatrix}\), \(B^3=\begin{pmatrix}1&7\\0&8\end{pmatrix}\). Conjecture \(B^n=\begin{pmatrix}1&2^n-1\\0&2^n\end{pmatrix}\), coin haut-droit \(1\cdot1+(2^n-1)\cdot2=2^{n+1}-1\) ✓.</p>
+        <div class="res">\(B^n=\begin{pmatrix}1&2^n-1\\0&2^n\end{pmatrix}\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 8 — \(A^2=6A\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(A=\begin{pmatrix}1&2&3\\1&2&3\\1&2&3\end{pmatrix}\).</div>
+        <p>Chaque ligne de \(A\) vaut \((1,2,3)\), et \((1,2,3)\cdot A=(1+2+3)(1,2,3)=6(1,2,3)\). Donc \(A^2=6A\).</p>
+        <div class="res">\(A^n=6^{n-1}A\) pour \(n\geqslant1\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 9 — Polynôme annulateur → inverse</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(A=\begin{pmatrix}4&-1\\2&1\end{pmatrix}\).</div>
+        <p class="q">1) \(A^2-5A+6I_2=0\)</p>
+        <p>\(A^2=\begin{pmatrix}14&-5\\10&-1\end{pmatrix}\), \(5A=\begin{pmatrix}20&-5\\10&5\end{pmatrix}\), \(6I=\begin{pmatrix}6&0\\0&6\end{pmatrix}\) : la somme donne \(0\) ✓.</p>
+        <p class="q">2) Inverse</p>
+        <p>\(A(A-5I)=-6I\Rightarrow A^{-1}=\dfrac{5I-A}6=\dfrac16\begin{pmatrix}1&1\\-2&4\end{pmatrix}\).</p>
+        <div class="res">\(A^{-1}=\dfrac16\begin{pmatrix}1&1\\-2&4\end{pmatrix}\)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 10 — Idem</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(A=\begin{pmatrix}2&-1\\-2&3\end{pmatrix}\).</div>
+        <p class="q">1) Polynôme du 2ⁿᵈ degré annulateur</p>
+        <p>\(\operatorname{tr}A=5\), \(\det A=4\) : \(A^2-5A+4I=0\) (vérifié : \(A^2=\begin{pmatrix}6&-5\\-10&11\end{pmatrix}\)). Polynôme \(X^2-5X+4\).</p>
+        <p class="q">2) Inverse</p>
+        <p>\(A(A-5I)=-4I\Rightarrow A^{-1}=\dfrac{5I-A}4=\dfrac14\begin{pmatrix}3&1\\2&2\end{pmatrix}\).</p>
+        <div class="res">\(A^{-1}=\dfrac14\begin{pmatrix}3&1\\2&2\end{pmatrix}\)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 11 — Inverses \(2\times2\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Formule \(A^{-1}=\tfrac1{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}\).</div>
+        <p class="q">\(A=\begin{pmatrix}1&1\\1&-1\end{pmatrix}\), \(\det=-2\)</p><p class="res">\(A^{-1}=\begin{pmatrix}\frac12&\frac12\\\frac12&-\frac12\end{pmatrix}\)</p>
+        <p class="q">\(B=\begin{pmatrix}1&2\\2&2\end{pmatrix}\), \(\det=-2\)</p><p class="res">\(B^{-1}=\begin{pmatrix}-1&1\\1&-\frac12\end{pmatrix}\)</p>
+        <p class="q">\(C=\begin{pmatrix}2&1\\-1&4\end{pmatrix}\), \(\det=9\)</p><p class="res">\(C^{-1}=\frac19\begin{pmatrix}4&-1\\1&2\end{pmatrix}\)</p>
+        <p class="q">\(D=\begin{pmatrix}1&-2\\-2&4\end{pmatrix}\), \(\det=0\)</p><p class="res"><b>Non inversible</b></p>
+        <p class="q">\(E=\begin{pmatrix}4&1\\5&9\end{pmatrix}\), \(\det=31\)</p><p class="res">\(E^{-1}=\frac1{31}\begin{pmatrix}9&-1\\-5&4\end{pmatrix}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 12 — Inverses \(3\times3\) par polynôme</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">1) \(A=\begin{pmatrix}-1&1&1\\1&-1&1\\1&1&-1\end{pmatrix}\)</p>
+        <p>\(A^2=\begin{pmatrix}3&-1&-1\\-1&3&-1\\-1&-1&3\end{pmatrix}=2I_3-A\). Donc \(A^2+A=2I\Rightarrow A(A+I)=2I\).</p>
+        <p class="res">\(A^{-1}=\dfrac{A+I}2=\dfrac12\begin{pmatrix}0&1&1\\1&0&1\\1&1&0\end{pmatrix}\)</p>
+        <p class="q">2) \(A=\begin{pmatrix}1&0&2\\0&-1&1\\1&-2&0\end{pmatrix}\)</p>
+        <p>\(A^2=\begin{pmatrix}3&-4&2\\1&-1&-1\\1&2&0\end{pmatrix}\), \(A^3=\begin{pmatrix}5&0&2\\0&3&1\\1&-2&4\end{pmatrix}\), d'où \(A^3-A=4I\Rightarrow A(A^2-I)=4I\).</p>
+        <p class="res">\(A^{-1}=\dfrac{A^2-I}4=\dfrac14\begin{pmatrix}2&-4&2\\1&-2&-1\\1&2&-1\end{pmatrix}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 13 — Inverse paramétrée</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(A=\begin{pmatrix}m&2\\2&m\end{pmatrix}\), \(m\in\mathbb R\).</div>
+        <p class="q">1) Condition d'inversibilité</p><p>\(\det A=m^2-4\).</p><p class="res">Inversible \(\iff m\neq\pm2\)</p>
+        <p class="q">2) Inverse</p><p class="res">\(A^{-1}=\dfrac1{m^2-4}\begin{pmatrix}m&-2\\-2&m\end{pmatrix}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 14 — Équation matricielle</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Trouver \(x,y\in\mathbb R\) : \(\begin{pmatrix}1&-2\\-2&4\end{pmatrix}\begin{pmatrix}x&y\\3&4\end{pmatrix}=\begin{pmatrix}-5&-6\\10&12\end{pmatrix}\).</div>
+        <p>Le produit vaut \(\begin{pmatrix}x-6&y-8\\-2x+12&-2y+16\end{pmatrix}\). L'identification donne \(x-6=-5\), \(y-8=-6\), \(-2x+12=10\), \(-2y+16=12\), soit \(x=1\), \(y=2\) (les deux équations restantes sont automatiquement vérifiées).</p>
+        <div class="res">\(x=1,\ y=2\) (solution unique)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 15 — Noyau \(AX=0\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(A=\begin{pmatrix}1&-2\\-4&8\end{pmatrix}\), \(X=\begin{pmatrix}x\\y\end{pmatrix}\).</div>
+        <p>\(AX=\begin{pmatrix}x-2y\\-4x+8y\end{pmatrix}=0\). La seconde ligne \(=-4(x-2y)\) : une seule équation \(x=2y\). \(\det A=8-8=0\) : infinité de solutions.</p>
+        <div class="res">\(\{(2y,y)\,:\,y\in\mathbb R\}=\operatorname{Vect}\begin{pmatrix}2\\1\end{pmatrix}\)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 16 — Diagonalisation \(M=PDP^{-1}\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(M=\begin{pmatrix}0&-1\\3&4\end{pmatrix}\), \(P=\begin{pmatrix}-1&1\\1&-3\end{pmatrix}\), \(D=\begin{pmatrix}1&0\\0&3\end{pmatrix}\).</div>
+        <p class="q">1) \(P^{-1}\)</p><p>\(\det P=3-1=2\).</p><p class="res">\(P^{-1}=\dfrac12\begin{pmatrix}-3&-1\\-1&-1\end{pmatrix}\)</p>
+        <p class="q">2) \(M=PDP^{-1}\)</p><p>\(PD=\begin{pmatrix}-1&3\\1&-9\end{pmatrix}\), puis \((PD)P^{-1}=\dfrac12\begin{pmatrix}0&-2\\6&8\end{pmatrix}=\begin{pmatrix}0&-1\\3&4\end{pmatrix}=M\) ✓.</p>
+        <p class="q">3) \(M^n=PD^nP^{-1}\)</p><p>Récurrence : \(M^n=(PDP^{-1})^n=PD^nP^{-1}\) (les \(P^{-1}P=I\) se télescopent).</p>
+        <p class="q">4) \(M^n\)</p><p>\(D^n=\begin{pmatrix}1&0\\0&3^n\end{pmatrix}\), \(PD^n=\begin{pmatrix}-1&3^n\\1&-3^{n+1}\end{pmatrix}\).</p>
+        <div class="res">\(M^n=\dfrac12\begin{pmatrix}3-3^n&1-3^n\\3^{n+1}-3&3^{n+1}-1\end{pmatrix}\) (vérifié en \(n=1\) : \(=M\)).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 17 — \((AB)^{-1}=B^{-1}A^{-1}\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(A,B\in M_n(\mathbb R)\) inversibles.</div>
+        <p>On calcule \((AB)(B^{-1}A^{-1})=A(BB^{-1})A^{-1}=A I A^{-1}=AA^{-1}=I\), et de même \((B^{-1}A^{-1})(AB)=B^{-1}(A^{-1}A)B=B^{-1}B=I\).</p>
+        <p>Donc \(B^{-1}A^{-1}\) est l'inverse de \(AB\) ; par unicité de l'inverse :</p>
+        <div class="res">\((AB)^{-1}=B^{-1}A^{-1}\). ∎ (Attention à l'inversion de l'ordre.)</div>
+      </div>
+    </div>
+
+  </section>
+
+  <p style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.9rem;opacity:.75">
+    Module M02 (S2). Sources : <em>Cours-Matrices-V2026.pdf</em> et <em>TD1-2026 Matrices</em>.
+    Corrigé rédigé intégralement (pas de corrigé officiel fourni).
+  </p>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours / ressource</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/calcul-matriciel/Cours-Matrices-V2026.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Cours-Matrices-V2026</span><span class="badge">Cours / ressource</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/calcul-matriciel/TD1-2026_Matrices-Etudiants.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD1-2026_Matrices-Etudiants</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

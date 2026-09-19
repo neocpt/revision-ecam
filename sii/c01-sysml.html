@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C01 — Modélisation SysML — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-sii">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SII · C01 — Modélisation graphique SysML</span>
+  <h1 class="title">C01 — Modélisation graphique des systèmes avec le langage SysML</h1>
+  <p class="lead">Frontière d'étude ; analyse <b>fonctionnelle</b> (besoin, diagramme des cas d'utilisation <span class="mono">uc</span>,
+  diagramme des exigences <span class="mono">req</span> avec critère / niveau / flexibilité, cahier des charges) ;
+  analyse <b>structurelle</b> (diagramme de définition de blocs <span class="mono">bdd</span>, diagramme de blocs internes
+  <span class="mono">ibd</span> et flux matière / énergie / information).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD (Segway + freins d'appontage)</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+    <p>Objectif de l'année : à partir des descriptions fonctionnelle et structurelle d'un système (souvent un
+    <b>asservissement</b>), décrire <i>comment</i> il est réalisé, puis évaluer ses <b>performances</b> (réelles ou simulées)
+    et vérifier si les <b>exigences du cahier des charges</b> sont validées.</p>
+
+    <h3>1.1 Frontière d'étude</h3>
+    <div class="def">
+      <span class="lab">Définition</span>
+      La <b>frontière d'étude</b> délimite le système étudié en le distinguant de son <b>environnement extérieur</b>.
+      Sa définition est un <b>préalable</b> à l'identification des composants et sous-systèmes internes.
+    </div>
+    <div class="note">
+      <span class="lab">Point de vue</span>
+      Un même objet change de frontière selon le point de vue. Ex. Airbus ZeroE : pour l'avionneur, le système est
+      <i>l'avion</i> (air, sol, tours de contrôle = extérieur) ; pour le <i>motoriste</i>, le système est <i>le moteur H₂</i>
+      et le reste de l'avion (nacelle, fuselage) devient l'environnement extérieur.
+    </div>
+
+    <h3>1.2 Analyse fonctionnelle : besoin, cas d'utilisation, exigences</h3>
+    <div class="def">
+      <span class="lab">Besoin</span>
+      L'analyse fonctionnelle décrit <b>à quoi sert</b> le système et <b>quelles contraintes</b> il respecte.
+      Une entreprise cherche l'adéquation entre le <b>besoin du client</b> et les <b>fonctions</b> offertes (identifié par
+      enquêtes, sondages, études de marché).
+    </div>
+    <div class="thm">
+      <span class="lab">Diagramme des cas d'utilisation <span class="mono">(uc)</span></span>
+      Exprime la <b>fonction globale</b> (la « raison d'être » du système du point de vue de l'utilisateur) et définit les
+      <b>acteurs</b> (utilisateurs humains ou non, principaux ou secondaires) et les services attendus par chacun.
+    </div>
+    <div class="thm">
+      <span class="lab">Diagramme des exigences <span class="mono">(req)</span></span>
+      Une <b>exigence</b> exprime une capacité ou une contrainte à satisfaire. Le diagramme regroupe les exigences liées
+      au besoin utilisateur ou aux contraintes du milieu extérieur. Relations : <b>inclusion</b> (une exigence dans une autre),
+      <b>vérification</b> (conditions de test), <b>raffinement</b> (précision / information complémentaire).
+    </div>
+    <div class="method">
+      <span class="lab">Caractériser une exigence (à savoir faire ★)</span>
+      Trois attributs :<br>
+      • <b>Critère</b> : la grandeur physique <i>mesurable</i> (ex. « masse maximale embarquée »).<br>
+      • <b>Niveau</b> : la valeur nominale attendue (ex. « 30000 kg »).<br>
+      • <b>Flexibilité</b> : l'écart acceptable autour du niveau (ex. « −10 % »).
+    </div>
+    <div class="note">
+      <span class="lab">Cahier des charges</span>
+      Un diagramme des exigences est établi <b>par phase d'utilisation</b>. L'ensemble des exigences + leurs caractéristiques
+      constitue le <b>cahier des charges</b> — document clé des échanges en entreprise. Il fournit les valeurs attendues
+      auxquelles on comparera les performances <b>réelles</b> et <b>simulées</b>.
+    </div>
+
+    <h3>1.3 Analyse structurelle : bdd et ibd</h3>
+    <div class="thm">
+      <span class="lab">Diagramme de définition de blocs <span class="mono">(bdd)</span></span>
+      <b>Inventaire hiérarchique</b> des composants : décomposition en systèmes / sous-systèmes (analyse <b>descendante</b>).
+      Relié à une nomenclature ou à la maquette numérique CAO. La multiplicité « <span class="mono">0..*</span> » indique
+      « 0 exemplaire ou plus » du composant.
+    </div>
+    <div class="thm">
+      <span class="lab">Diagramme de blocs internes <span class="mono">(ibd)</span></span>
+      Identifie les <b>flux</b> échangés entre composants de même niveau, avec différents raffinements :<br>
+      • <b>Ports de flux</b> : échanges de <b>matière / énergie / information</b> ;<br>
+      • <b>Ports standards</b> : services invoqués par un autre constituant.<br>
+      Un composant qui transforme un flux réalise une <b>conversion de puissance</b> (ex. moteur : élec → méca ; turbine : méca → pneumatique).
+    </div>
+    <div class="note">
+      <span class="lab">Les trois flux fondamentaux (SII)</span>
+      <b>Matière</b>, <b>Énergie</b>, <b>Information</b> (MEI). Toute la chaîne fonctionnelle d'un système s'analyse via ces flux
+      circulant de la chaîne d'énergie vers la chaîne d'information (que l'on détaillera au C02).
+    </div>
+  </section>
+
+  <!-- ======================= EXOS CRÉÉS =============================== -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Identifier critère / niveau / flexibilité</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Exigence : « Le vélo électrique doit avoir une autonomie d'au moins 80 km, avec une tolérance de −15 %. »</div>
+        <p class="q">Décomposer l'exigence</p>
+        <table style="width:100%;border-collapse:collapse;margin:.3rem 0">
+          <tr><td style="padding:.3rem;border:1px solid var(--line)"><b>Critère</b></td><td style="padding:.3rem;border:1px solid var(--line)">Autonomie (distance parcourue sur une charge)</td></tr>
+          <tr><td style="padding:.3rem;border:1px solid var(--line)"><b>Niveau</b></td><td style="padding:.3rem;border:1px solid var(--line)">80 km</td></tr>
+          <tr><td style="padding:.3rem;border:1px solid var(--line)"><b>Flexibilité</b></td><td style="padding:.3rem;border:1px solid var(--line)">−15 % (soit ≥ 68 km acceptable)</td></tr>
+        </table>
+        <p class="res">Le critère est <b>mesurable</b>, le niveau est la <b>valeur cible</b>, la flexibilité est <b>l'écart toléré</b>.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Choisir le bon diagramme</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Pour chaque question sur un robot tondeuse, indiquer le diagramme SysML à consulter.</div>
+        <p class="q">1) « Quels sont les acteurs et la fonction globale ? »</p><p class="res">Diagramme des cas d'utilisation <span class="mono">uc</span></p>
+        <p class="q">2) « Quelle surface minimale doit-il tondre en 1 h ? »</p><p class="res">Diagramme des exigences <span class="mono">req</span> (critère + niveau)</p>
+        <p class="q">3) « De quels sous-systèmes est-il constitué ? »</p><p class="res">Diagramme de définition de blocs <span class="mono">bdd</span></p>
+        <p class="q">4) « Comment l'énergie de la batterie parvient-elle aux roues ? »</p><p class="res">Diagramme de blocs internes <span class="mono">ibd</span> (flux d'énergie)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CORRECTION TD =============================== -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD</h2>
+    <p class="lead" style="font-size:.95rem">Source : <i>S2I-C01-TD</i> + <b>corrigé officiel</b> LECONTE (TD 1 — décrire les fonctions et la structure
+    en SysML). Les diagrammes sont des figures (images) dans le PDF ; on restitue ici les réponses attendues du corrigé et le raisonnement.</p>
+
+    <h3>Exercice 1.1 — Le Segway</h3>
+    <p style="font-size:.92rem">Véhicule individuel de type <b>pendule inversé</b> (naturellement instable) : direction à la poignée,
+    avance selon l'inclinaison du corps ; l'équilibre est assuré par la <b>commande</b> du système.</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Q1 — Critères (rouge) / niveaux (vert) des exigences 1.2, 1.7.1–1.7.3</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p>Sur le diagramme des exigences, on distingue pour chaque exigence la <b>grandeur mesurable</b> (critère) de sa
+        <b>valeur cible</b> (niveau). Méthode : le critère répond à « <i>quoi mesure-t-on ?</i> » et le niveau à « <i>quelle valeur ?</i> ».</p>
+        <p class="res">On surligne le <b>critère</b> (ex. « vitesse maximale », « temps de charge ») en rouge et le <b>niveau</b> associé (ex. « 20 km/h », « 5 h ») en vert (voir figure 1 du corrigé).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Q2 — Proposer un critère + niveau pour l'exigence 1.5</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p>L'exigence 1.5 concerne la <b>détection d'obstacle / signalisation</b>. Une formulation acceptable (corrigé) :</p>
+        <p class="res">« <b>Émettre un signal sonore discontinu de 0,5 dB</b> lorsqu'un obstacle est détecté <b>à une distance de 2 m</b>. »
+        (critère = niveau sonore + distance de détection ; niveaux = 0,5 dB et 2 m)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Q3 — Flexibilité sur le temps de charge de la batterie</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p>La flexibilité est l'<b>écart toléré</b> sur le niveau. Le diagramme indique deux tolérances selon le mode de charge :</p>
+        <p>• Recharge <b>à domicile</b> : 6 h admises au lieu de 5 h → <b>+1 h, soit +20 %</b>.<br>
+        • Recharge sur <b>borne spécialisée</b> : 1 h 30 admise au lieu de 1 h → <b>+½ h, soit +50 %</b>.</p>
+        <p class="res">Flexibilité : +20 % (domicile, 6 h ≤ pour 5 h) et +50 % (borne, 1 h 30 pour 1 h).</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:1.4rem">Exercice 1.2 — Système d'appontage du porte-avions <i>Charles de Gaulle</i></h3>
+    <p style="font-size:.92rem">Piste d'appontage ≈ 100 m ; Rafale Marine / Hawkeye de 8 à 20 t, vitesse d'appontage 200–250 km/h.
+    Une <b>crosse</b> accroche un <b>brin</b> (câble) relié à un système hydromécanique qui récupère l'énergie cinétique ;
+    une <b>vanne de laminage</b> dissipe une partie en chaleur, un système oléopneumatique reconfigure l'installation.</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Q1 — La crosse de l'avion est-elle un composant interne ?</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p>La frontière d'étude est le <b>frein d'appontage du porte-avions</b>. La crosse appartient à l'avion.</p>
+        <p class="res">Non : la crosse fait partie des <b>limites de l'avion</b> — c'est un élément de l'environnement extérieur, pas un composant interne du système étudié.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Q2 — Le chef de pont appartient à l'environnement extérieur</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p>On cherche la phrase du principe de fonctionnement montrant une interaction extérieure du chef de pont avec le système.</p>
+        <p class="res">« <b>Le système doit être capable de se configurer à la demande du chef de pont.</b> » (le chef de pont commande sans être interne).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Q3 — Compléter le texte à partir du diagramme des exigences</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="res">« L'accélération (décélération) maximale ne doit pas dépasser l'accélération moyenne de plus de <b>30 %</b>.
+        Pour la protection du pilote et de l'avion, les accélérations doivent rester inférieures à <b>5 G</b>.
+        Le temps de reconfiguration ne doit pas <b>excéder 2 min</b> afin de maintenir une cadence d'appontage optimale. »</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Q4 — Quel système du bdd n'est pas évoqué par la description ?</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p>La description parle de dissiper l'énergie et amortir les vibrations, mais pas du réglage.</p>
+        <p class="res">Le <b>système (Σ) de réglage du freinage</b> n'est pas évoqué.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Q5 — Sous-systèmes de même niveau du frein d'appontage</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="res">Trois sous-systèmes : <b>l'ensemble sous-mécanique</b>, <b>la vanne de dissipation</b>, <b>le système de réglage du freinage</b>.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Q6 — Type du diagramme (flux)</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p>Le diagramme montre des <b>flux</b> entre composants via des ports.</p>
+        <p class="res">C'est un <b>diagramme de blocs internes (ibd)</b>.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Q7 — Chaîne de dissipation de l'énergie cinétique et types de puissance</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p>On suit le flux de puissance de l'avion jusqu'à l'environnement, en notant la <b>nature</b> de la puissance à chaque étage :</p>
+        <p>• Énergie cinétique de l'avion → <b>puissance mécanique</b> sur le brin ;<br>
+        • Brin → mouffles : <b>puissance mécanique</b> ;<br>
+        • → presse hydraulique : <b>puissance hydraulique</b> ;<br>
+        • Pointeau : <b>puissance hydraulique → thermique</b> (laminage) ;<br>
+        • Échangeur : <b>puissance thermique</b> évacuée.</p>
+        <p class="res">La puissance mécanique venue de la crosse est finalement <b>dissipée sous forme d'eau chaude</b> (puissance thermique) vers l'extérieur.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Q8 — Sur quels composants le chef de pont agit-il pour régler le pointeau ?</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p>D'après l'ibd, le réglage remonte une chaîne d'actionnement.</p>
+        <p class="res">Le réglage du chef de pont commande les <b>vérins électriques</b>, qui actionnent les <b>leviers</b>, lesquels commandent à leur tour le <b>pointeau</b> (donc le freinage).</p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.4rem">
+      <span class="lab">Bilan C01</span>
+      Chapitre <b>conceptuel</b> (pas de calcul) : maîtriser la <b>frontière d'étude</b>, distinguer analyse <b>fonctionnelle</b>
+      (uc, req + critère/niveau/flexibilité, cahier des charges) et <b>structurelle</b> (bdd hiérarchie, ibd flux MEI),
+      et savoir <b>lire</b> chaque diagramme. Base indispensable avant l'étude des systèmes asservis (C02→C12).
+    </div>
+  </section>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c01-sysml/S2I-C01-TD-Mod%C3%A9lisation%20graphique%20des%20syst%C3%A8mes%20avec%20le%20langage%20SysML.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C01-TD-Modélisation graphique des systèmes avec le langage SysML</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Corrigé</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c01-sysml/S2I-C01-TD-Mod%C3%A9lisation%20graphique%20des%20syst%C3%A8mes%20avec%20le%20langage%20SysML-Corrig%C3%A9.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C01-TD-Modélisation graphique des systèmes avec le langage SysML-Corrigé</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Document</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c01-sysml/S2I-C01-Mod%C3%A9lisation%20graphique%20des%20syst%C3%A8mes%20avec%20le%20langage%20SysML.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C01-Modélisation graphique des systèmes avec le langage SysML</span><span class="badge">Document</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

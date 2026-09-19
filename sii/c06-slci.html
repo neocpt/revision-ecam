@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C06 — SLCI, Laplace & fonctions de transfert — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-sii">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SII · C06 — Modéliser en SLCI &amp; identifier un modèle</span>
+  <h1 class="title">C06 — Modéliser en SLCI et identifier un modèle de comportement</h1>
+  <p class="lead">SLCI (Système Linéaire Continu Invariant) ; <b>transformée de Laplace</b> et <b>fonction de transfert</b>
+  \(H(p)=\tfrac{S(p)}{E(p)}\) ; forme canonique (gain statique \(K\), classe \(\alpha\), ordre \(n\)) ; stabilité par les pôles ;
+  théorème de la <b>valeur finale</b> ; identification d'un modèle du <b>1ᵉʳ ordre</b> \(\tfrac{K}{1+\tau p}\) et du <b>2ᵉ ordre</b>.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction du TD (formes canoniques, four, RAMSES, hémodialyse, caméra PTZ)</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 SLCI & transformée de Laplace</h3>
+    <div class="def">
+      <span class="lab">SLCI</span>
+      Système <b>Linéaire</b> (superposition), <b>Continu</b> (grandeurs continues du temps), <b>Invariant</b> (paramètres constants).
+      Régi par une équation différentielle linéaire à coefficients constants
+      \(a_n s^{(n)}+\dots+a_0 s=b_m e^{(m)}+\dots+b_0 e\) (\(m\leqslant n\), causal).
+    </div>
+    <div class="thm">
+      <span class="lab">Laplace (conditions de Heaviside : CI nulles)</span>
+      \(\mathcal L[f](p)=\displaystyle\int_0^{+\infty}f(t)e^{-pt}dt\). Propriétés : linéarité,
+      \(\mathcal L[f^{(n)}]=p^n F(p)\), \(\mathcal L[\int f]=\tfrac{F(p)}{p}\). Échelon d'amplitude \(E_0\) : \(\mathcal L=\tfrac{E_0}{p}\).
+    </div>
+
+    <h3>1.2 Fonction de transfert & forme canonique</h3>
+    <div class="thm">
+      <span class="lab">Définition</span>
+      \(H(p)=\dfrac{S(p)}{E(p)}=\dfrac{N(p)}{D(p)}\) (fraction de deux polynômes en \(p\)), indépendante de l'entrée.
+      Composants <b>en série</b> : \(H_{eq}=H_1\times H_2\).
+    </div>
+    <div class="method">
+      <span class="lab">Forme canonique</span>
+      \(H(p)=\dfrac{K}{p^{\alpha}}\cdot\dfrac{1+\dots p+\dots}{1+\dots p+\dots}\) : <b>\(K\)</b> = gain statique,
+      <b>\(\alpha\)</b> = classe (nb d'intégrateurs), <b>\(n\)</b> = ordre (degré du dénominateur). On factorise chaque polynôme par son terme de plus bas degré.
+    </div>
+
+    <h3>1.3 Stabilité</h3>
+    <div class="thm">
+      <span class="lab">Critère</span>
+      Stable ⟺ les pôles (racines de \(D(p)\)) sont à <b>partie réelle strictement négative</b> ⟺ (nécessaire) <b>classe 0</b> et coefficients
+      de \(D(p)\) <b>tous de même signe</b> (aucun nul). Suffisant pour ordre 1 et 2. Ordre 3 (\(D=a_0+a_1p+a_2p^2+a_3p^3\)) :
+      en plus \(a_1a_2>a_0a_3\).
+    </div>
+
+    <h3>1.4 Valeur finale, perturbation, précision</h3>
+    <div class="thm">
+      <span class="lab">Théorème de la valeur finale</span>
+      Si la limite existe : \(s(+\infty)=\displaystyle\lim_{p\to0^+}p\,S(p)\). Pour un système <b>stable de classe 0</b> soumis à un échelon \(E_0\) :
+      \(s(+\infty)=K\,E_0\).
+    </div>
+    <div class="note">
+      <span class="lab">Superposition & précision</span>
+      Deux entrées (consigne \(E\), perturbation \(P\)) : \(S=H_1E+H_2P\). <b>Poursuite</b> \(=\tfrac SE|_{P=0}\), <b>régulation</b> \(=\tfrac SP|_{E=0}\).
+      Précis en poursuite (échelon) si \(H_1\) est classe 0 <b>et \(K=1\)</b> ; insensible à la perturbation si \(H_2\) est de classe « négative » (dérivateur).
+    </div>
+
+    <h3>1.5 Modèle du 1ᵉʳ ordre \(\;H(p)=\dfrac{K}{1+\tau p}\)</h3>
+    <div class="thm">
+      <span class="lab">Réponse indicielle</span>
+      \(s(t)=K E_0\big(1-e^{-t/\tau}\big)\). <b>\(\tau\)</b> (constante de temps) : 63 % de la variation atteinte à \(t=\tau\) ;
+      \(t_{r5\%}\approx3\tau\) ; tangente à l'origine coupe l'asymptote à \(t=\tau\). Variation finale \(=KE_0\).
+      Identification : pas de dépassement, pente à l'origine non nulle, pas de point d'inflexion.
+    </div>
+
+    <h3>1.6 Modèle du 2ᵉ ordre \(\;H(p)=\dfrac{K}{1+\frac{2z}{\omega_0}p+\frac{p^2}{\omega_0^2}}\)</h3>
+    <div class="thm">
+      <span class="lab">Régimes (facteur d'amortissement \(z\))</span>
+      \(z\geqslant1\) : <b>non oscillatoire</b> (pas de dépassement) ; \(0<z<1\) : <b>oscillatoire amorti</b>
+      (pseudo-pulsation \(\omega_a=\omega_0\sqrt{1-z^2}\), pseudo-période \(T_a=\tfrac{2\pi}{\omega_a}\)). Variation finale \(KE_0\), pente à l'origine nulle, un point d'inflexion.
+    </div>
+    <div class="method">
+      <span class="lab">Identification (oscillatoire amorti)</span>
+      • \(K\) : \(\Delta s(+\infty)=KE_0\).<br>
+      • \(z\) : par le 1ᵉʳ dépassement \(D_1\%=\exp\!\Big(-\dfrac{z\pi}{\sqrt{1-z^2}}\Big)\) ⟹ \(z=\sqrt{\dfrac{(\ln D_1\%)^2}{\pi^2+(\ln D_1\%)^2}}\).<br>
+      • \(\omega_0\) : \(T_a\) entre deux extrémums, \(\omega_a=\tfrac{2\pi}{T_a}\), puis \(\omega_0=\tfrac{\omega_a}{\sqrt{1-z^2}}\).<br>
+      Rapidité : \(t_{r5\%}\) minimal pour \(z=0{,}69\) (\(t_{r5\%}\omega_0\approx3\), \(D_1\%=5\%\)) ; abaque du temps de réponse réduit \(t_{r5\%}\omega_0\) sinon.
+    </div>
+    <div class="note">
+      <span class="lab">Non oscillatoire (\(z\geqslant1\)) — pôle dominant</span>
+      Si \(\tau_1/\tau_2<0{,}25\) : \(H=\dfrac{K}{(1+\tau_1p)(1+\tau_2p)}\), avec \(\tfrac1{\omega_0^2}=\tau_1\tau_2\) et \(\tfrac{2z}{\omega_0}=\tau_1+\tau_2\).
+    </div>
+    <div class="note">
+      <span class="lab">Modèles usuels</span>
+      Gain pur \(K\) ; intégrateur \(\tfrac Kp\) (classe 1) ; dérivateur \(Kp\).
+    </div>
+  </section>
+
+  <!-- ======================= EXOS CRÉÉS =============================== -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Forme canonique, classe, stabilité, valeur finale</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(3\ddot s+2\dot s+6s=4\dot e+8e\). Entrée : échelon \(E_0\).</div>
+        <p>Laplace : \((3p^2+2p+6)S=(4p+8)E\), \(H=\dfrac{8+4p}{6+2p+3p^2}=\dfrac{8}{6}\cdot\dfrac{1+\frac12 p}{1+\frac13 p+\frac12 p^2}\).</p>
+        <p class="res">\(K=\tfrac43\), classe 0, ordre 2 ; stable (coeffs \(6,2,3>0\)) ; \(s(+\infty)=\tfrac43 E_0\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Identification 1ᵉʳ ordre</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Réponse à un échelon \(E_0=4\) V : valeur finale \(8\) rad/s, atteinte à 63 % après 20 ms.</div>
+        <p>Pas de dépassement → 1ᵉʳ ordre. \(K=\dfrac{\Delta s}{E_0}=\dfrac84=2\) (rad/s)/V ; \(\tau=20\) ms ; \(t_{r5\%}=3\tau=60\) ms.</p>
+        <p class="res">\(H(p)=\dfrac{2}{1+0{,}02\,p}\)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CORRECTION TD =============================== -->
+  <section class="block" id="td">
+    <h2>3. Correction du TD</h2>
+    <p class="lead" style="font-size:.95rem">Source : <i>S2I-C06-TD</i> (TD1 fonctions de transfert/stabilité/valeur finale, TD2 1ᵉʳ ordre, TD3 2ᵉ ordre).
+    <b>Pas de corrigé officiel</b> → résolu et vérifié maison.</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1.1 — Formes canoniques & stabilité</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">A) \(7\dot s+3s=5e\)</p>
+        <p>\(H=\dfrac{5}{3+7p}=\dfrac{5/3}{1+\frac73 p}\). \(K=\tfrac53\), classe 0, ordre 1, <b>stable</b>. VF \(=\tfrac53 E_0\).</p>
+        <p class="q">B) \(s=8e\)</p>
+        <p>\(H=8\). Gain pur, classe 0, ordre 0, <b>stable</b>. VF \(=8E_0\).</p>
+        <p class="q">C) \(5\ddot s+4\dot s+7s=3\dot e+2e\)</p>
+        <p>\(H=\dfrac{2+3p}{7+4p+5p^2}=\dfrac{2/7\,(1+\frac32 p)}{1+\frac47 p+\frac57 p^2}\). \(K=\tfrac27\), classe 0, ordre 2, <b>stable</b>. VF \(=\tfrac27 E_0\).</p>
+        <p class="q">D) \(M\ddot s=-f\dot s+i\,e\)</p>
+        <p>\(H=\dfrac{i}{Mp^2+fp}=\dfrac{i/f}{p\,(1+\frac Mf p)}\). Gain \(\tfrac if\), <b>classe 1</b> (intégrateur), ordre 2, <b>instable</b> (classe ≠ 0). Pas de VF finie.</p>
+        <p class="q">E) \(\dddot s+7\ddot s+12\dot s+90 s=2\ddot e+5\dot e\)</p>
+        <p>\(H=\dfrac{p(5+2p)}{90+12p+7p^2+p^3}\) : numérateur en \(p\) (<b>dérivateur</b>), ordre 3. Stabilité ordre 3 : \(a_1a_2=12\cdot7=84\) vs \(a_0a_3=90\cdot1=90\), \(84<90\) ⟹ <b>instable</b>.</p>
+        <p class="res">Stables : A, B, C. Instables : D (intégrateur), E (\(a_1a_2<a_0a_3\)).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1.2 — Four électrique</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(2\ddot\theta+6\alpha\dot\theta+4\alpha^2\theta=K u\), \(K>0\).</div>
+        <p class="q">Q1 — Fonction de transfert & stabilité</p>
+        <p>\(H=\dfrac{K}{4\alpha^2+6\alpha p+2p^2}=\dfrac{K/4\alpha^2}{1+\frac{3}{2\alpha}p+\frac{1}{2\alpha^2}p^2}\). Classe 0, ordre 2, \(K_{stat}=\dfrac{K}{4\alpha^2}\).</p>
+        <p class="res">Stable ⟺ tous les coeffs de même signe ⟺ \(\alpha>0\)</p>
+        <p class="q">Q2–Q3 — Réponse à l'échelon \(U_0\)</p>
+        <p>\(U(p)=\dfrac{U_0}{p}\), \(\Theta(p)=\dfrac{K U_0}{p(4\alpha^2+6\alpha p+2p^2)}\).</p>
+        <p class="q">Q4 — Variation finale</p>
+        <p>\(\theta(+\infty)=\displaystyle\lim_{p\to0}p\,\Theta(p)=\dfrac{K U_0}{4\alpha^2}\).</p>
+        <p class="q">Q5 — Condition sur les mesures (\(\Delta U_0=25\) V ⟹ \(\Delta\theta=50\) °C)</p>
+        <p class="res">\(\dfrac{K\,U_0}{4\alpha^2}=\Delta\theta\) : avec 25 V → 50 °C, \(\dfrac{K}{4\alpha^2}=2\) °C/V (soit \(K=8\alpha^2\))</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1.3 — Système RAMSES (chaîne d'énergie)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Régulateur \(u_m=K_r u_r\) ; moteur \(\tau\dot\omega_m+\omega_m=K_m u_m\) ; réducteur \(r\) ; vanne \(q_e=K_v\theta_v\), \(\omega_v=\dot\theta_v\) ; réservoir \(q_e=S\dot h\).</div>
+        <p class="q">Q1 — Blocs</p>
+        <p>Régulateur \(K_r\) ; moteur \(\dfrac{K_m}{1+\tau p}\) ; réducteur \(\dfrac1r\) ; \(\theta_v=\dfrac{\omega_v}{p}\) → \(\dfrac1p\) ; vanne \(K_v\) ; réservoir \(\dfrac1{Sp}\).</p>
+        <p class="q">Q2 — FT globale \(H(p)/U_r(p)\)</p>
+        <p>\(\dfrac{H(p)}{U_r(p)}=K_r\cdot\dfrac{K_m}{1+\tau p}\cdot\dfrac1r\cdot\dfrac1p\cdot K_v\cdot\dfrac1{Sp}=\dfrac{K_rK_mK_v}{rS}\cdot\dfrac{1}{p^2(1+\tau p)}\).</p>
+        <p class="res">Gain \(\dfrac{K_rK_mK_v}{rS}\), <b>classe 2</b> (double intégration), ordre 3 → <b>instable</b> en boucle ouverte (d'où la nécessité de l'asservissement)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2.1 — Moteur d'hémodialyse (1ᵉʳ ordre)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(\dfrac{\Omega_m(p)}{U_m(p)}=\dfrac{1200}{100+p}\).</div>
+        <p class="q">Q1 — Stabilité & rapidité</p>
+        <p>Forme canonique : \(\dfrac{12}{1+0{,}01p}\), \(K=12\) (rad/s)/V, \(\tau=\dfrac{1}{100}=0{,}01\) s. Pôle \(-100<0\) → <b>stable</b>. \(t_{r5\%}=3\tau=0{,}03\) s.</p>
+        <p class="res">Stable, \(\tau=10\) ms, \(t_{r5\%}=30\) ms</p>
+        <p class="q">Q2 — Réponse à \(U_0=7\) V</p>
+        <p class="res">Variation finale \(=K U_0=12\times7=84\) rad/s ; 63 % (≈53 rad/s) à \(t=10\) ms ; 95 % à 30 ms</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3.1 — Caméra PTZ (2ᵉ ordre)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(\dfrac{\Theta(p)}{\Theta_c(p)}=\dfrac{9800}{10^4+600p+35p^2}\).</div>
+        <p class="q">Q1 — Paramètres</p>
+        <p>Canonique : \(\dfrac{0{,}98}{1+0{,}06p+0{,}0035p^2}\). \(\dfrac{1}{\omega_0^2}=0{,}0035\Rightarrow\omega_0=16{,}9\) rad/s ; \(\dfrac{2z}{\omega_0}=0{,}06\Rightarrow z=0{,}51\) ; \(K=0{,}98\).</p>
+        <p class="res">\(K=0{,}98\), \(\omega_0\approx16{,}9\) rad/s, \(z\approx0{,}51\)</p>
+        <p class="q">Q2 — Régime & pseudo-période</p>
+        <p>\(z<1\) → <b>oscillatoire amorti</b>. \(\omega_a=\omega_0\sqrt{1-z^2}=16{,}9\cdot0{,}86=14{,}6\) rad/s, \(T_a=\dfrac{2\pi}{\omega_a}\approx0{,}43\) s.</p>
+        <p class="q">Q3 — Temps de réponse à 5 %</p>
+        <p>Abaque \(z\approx0{,}5\) → \(t_{r5\%}\omega_0\approx5{,}3\), donc \(t_{r5\%}\approx\dfrac{5{,}3}{16{,}9}\approx0{,}31\) s.</p>
+        <p class="q">Q4 — Dépassements pour \(\theta_c=20°\)</p>
+        <p>\(D_1\%=\exp\!\Big(-\dfrac{z\pi}{\sqrt{1-z^2}}\Big)=e^{-1{,}85}\approx15{,}8\%\) ; \(D_2\%=(D_1\%)^2\approx2{,}5\%\) ; \(D_3\%\approx0{,}4\%<1\%\).</p>
+        <p>Variation finale \(\Delta\theta=K\theta_c=0{,}98\cdot20=19{,}6°\). Absolus : \(D_1=0{,}158\cdot19{,}6\approx3{,}1°\), \(D_2\approx0{,}49°\).</p>
+        <p class="res">2 dépassements > 1 % : \(D_1\%=15{,}8\%\) (\(3{,}1°\)), \(D_2\%=2{,}5\%\) (\(0{,}5°\))</p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.4rem">
+      <span class="lab">Bilan C06</span>
+      Cœur de l'automatique linéaire : passer d'une <b>équation différentielle</b> à une <b>fonction de transfert</b> (Laplace, CI nulles),
+      la mettre en <b>forme canonique</b> (\(K,\alpha,n\)), en déduire <b>stabilité</b> (pôles / signes) et <b>valeur finale</b> (\(KE_0\)),
+      puis <b>identifier</b> un modèle du 1ᵉʳ ordre (\(K,\tau\)) ou du 2ᵉ ordre (\(K,z,\omega_0\)) à partir d'une réponse indicielle.
+      Autres exercices du TD (positionnement robot, capteur plateforme 6 axes, asservissements angulaires, identification non oscillatoire) : même démarche d'identification.
+    </div>
+  </section>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c06-slci/S2I-C06-TD-Mod%C3%A9liser%20en%20SLCI%20et%20identifier%20un%20mod%C3%A8le%20de%20comportement.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C06-TD-Modéliser en SLCI et identifier un modèle de comportement</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Document</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c06-slci/S2I-C06-Mod%C3%A9liser%20en%20SCLI%20et%20identifier%20un%20mod%C3%A8le%20de%20comportement.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C06-Modéliser en SCLI et identifier un modèle de comportement</span><span class="badge">Document</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

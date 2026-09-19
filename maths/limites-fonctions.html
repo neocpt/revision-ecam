@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Limites de fonctions réelles — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-math">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Maths · M01 — Chapitre 8</span>
+  <h1 class="title">Limites de fonctions réelles</h1>
+  <p class="lead">Voisinages, définition ε-δ des limites (finies/infinies, à gauche/à droite), caractérisation
+  séquentielle, opérations et formes indéterminées, théorèmes d'encadrement et de la limite monotone.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD n°8</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Voisinages &amp; définition de la limite</h3>
+    <div class="def">
+      <span class="lab">Voisinage</span>
+      \(V_\delta(a)=\,]a-\delta,a+\delta[\,=\{x\mid|x-a|<\delta\}\). Voisinage de \(+\infty\) : \(]A,+\infty[\).
+      Une propriété est « vraie au voisinage de \(a\) » si vraie sur \(I\cap V_\delta(a)\).
+    </div>
+    <div class="def">
+      <span class="lab">Limite finie</span>
+      \(\displaystyle\lim_{x\to a}f(x)=\ell\iff \forall\varepsilon>0,\ \exists\delta>0,\ \forall x\in I\cap V_\delta(a),\ |f(x)-\ell|\leqslant\varepsilon\).
+      Limite \(+\infty\) : \(\forall M,\ \exists\delta,\ \forall x\in I\cap V_\delta(a),\ f(x)\geqslant M\). La limite, si
+      elle existe, est <b>unique</b>.
+    </div>
+    <div class="thm">
+      <span class="lab">Limites à gauche / à droite</span>
+      \(\lim_{x\to a}f=\ell\Rightarrow\lim_{x\to a^-}f=\lim_{x\to a^+}f=\ell\). <b>Réciproque partielle</b> : si les
+      deux limites latérales existent et sont égales à \(f(a)\), alors \(f\) a une limite. (Si elles diffèrent, pas de limite.)
+    </div>
+
+    <h3>1.2 Caractérisation séquentielle</h3>
+    <div class="thm">
+      <span class="lab">Théorème</span>
+      \[ \lim_{x\to a}f(x)=\ell\iff \forall(u_n)\to a\ (u_n\in I),\ f(u_n)\to\ell. \]
+      <b>Outil pour la non-existence</b> : si deux suites \(u_n,v_n\to a\) donnent \(f(u_n)\to\ell_1\neq\ell_2\leftarrow f(v_n)\),
+      alors \(f\) n'a pas de limite en \(a\). (Ex. \(\cos\) n'a pas de limite en \(+\infty\).)
+    </div>
+
+    <h3>1.3 Opérations &amp; formes indéterminées</h3>
+    <div class="thm">
+      <span class="lab">Opérations</span>
+      Linéarité, produit, quotient (comme pour les suites, via la caractérisation séquentielle). Composée :
+      \(f(x)\to\ell_1\) et \(g(y)\to\ell_2\) en \(\ell_1\) \(\Rightarrow g\circ f\to\ell_2\).
+    </div>
+    <div class="warnbox">
+      Formes indéterminées : \(\infty-\infty\), \(0\times\infty\), \(\tfrac00\), \(\tfrac\infty\infty\). On lève par
+      factorisation, quantité conjuguée (racines), ou terme dominant.
+    </div>
+
+    <h3>1.4 Limites &amp; ordre</h3>
+    <div class="thm">
+      <span class="lab">Encadrement</span>
+      Passage à la limite : \(f\leqslant g\) au voisinage \(\Rightarrow\ell_1\leqslant\ell_2\) (les strictes
+      deviennent larges). <b>Gendarmes</b> : \(f\leqslant g\leqslant h\), \(f,h\to\ell\Rightarrow g\to\ell\).
+      Mini-encadrement : \(|f|\leqslant g\), \(g\to0\Rightarrow f\to0\). Divergence par comparaison :
+      \(f\leqslant g\), \(f\to+\infty\Rightarrow g\to+\infty\).
+    </div>
+    <div class="thm">
+      <span class="lab">Limite monotone</span>
+      Une fonction monotone sur \(]\alpha,\beta[\) admet des limites (finies ou infinies) aux bornes et, en tout
+      point intérieur \(a\), des limites latérales finies avec (si croissante)
+      \(\lim_{x\to a^-}f\leqslant f(a)\leqslant\lim_{x\to a^+}f\).
+    </div>
+  </section>
+
+  <!-- ==================== EXOS CRÉÉS ============================= -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Quantité conjuguée à l'infini</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Calculer \(\displaystyle\lim_{x\to+\infty}\big(\sqrt{4x^2+x}-2x\big)\).</div>
+        <p>Forme \(\infty-\infty\). On multiplie par la quantité conjuguée :</p>
+        \[ \sqrt{4x^2+x}-2x=\frac{(4x^2+x)-4x^2}{\sqrt{4x^2+x}+2x}=\frac{x}{\sqrt{4x^2+x}+2x}. \]
+        <p>Pour \(x>0\), \(\sqrt{4x^2+x}=2x\sqrt{1+\tfrac1{4x}}\), donc le dénominateur \(\sim 4x\) :</p>
+        \[ \frac{x}{2x\sqrt{1+\tfrac1{4x}}+2x}=\frac{1}{2\sqrt{1+\tfrac1{4x}}+2}\xrightarrow[x\to+\infty]{}\frac1{2+2}. \]
+        <div class="res">\(\displaystyle\lim_{x\to+\infty}\big(\sqrt{4x^2+x}-2x\big)=\frac14\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Produit borné × limite nulle</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Montrer que \(\displaystyle\lim_{x\to0}x\sin\!\Big(\frac1x\Big)=0\).</div>
+        <p>Pour \(x\neq0\), \(\big|\sin(1/x)\big|\leqslant1\), donc \(\big|x\sin(1/x)\big|\leqslant|x|\).</p>
+        <p>Or \(\lim_{x\to0}|x|=0\), d'où par le mini-théorème d'encadrement :</p>
+        <div class="res">\(\displaystyle\lim_{x\to0}x\sin\!\Big(\frac1x\Big)=0\).</div>
+        <p style="font-size:.9rem;opacity:.85">Bien que \(\sin(1/x)\) n'ait aucune limite en \(0\), le facteur \(x\) « écrase » les oscillations.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Non-existence par les suites</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Montrer que \(x\mapsto\sin(1/x)\) n'a pas de limite en \(0\).</div>
+        <p>On utilise la caractérisation séquentielle. Posons deux suites tendant vers \(0\) :</p>
+        \[ u_n=\frac1{2n\pi}\to0\quad\text{et}\quad v_n=\frac1{\tfrac\pi2+2n\pi}\to0. \]
+        <p>Alors \(\sin(1/u_n)=\sin(2n\pi)=0\to0\), tandis que \(\sin(1/v_n)=\sin\!\big(\tfrac\pi2+2n\pi\big)=1\to1\).</p>
+        <div class="res">Deux suites de même limite \(0\) donnent des images de limites <b>différentes</b> (\(0\neq1\)) :
+        \(\sin(1/x)\) n'a <b>pas de limite</b> en \(0\). ∎</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CORRECTION TD ========================== -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD n°8 — Limites de fonctions réelles</h2>
+    <p class="lead" style="font-size:.95rem">Feuille sans corrigé officiel : les 7 exercices sont résolus
+    intégralement, chaque sous-question traitée. (Le TD précise d'ignorer les domaines et de supposer les
+    opérations valides.)</p>
+
+    <h3>Partie 1 — Limites à gauche / à droite</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — Fonction par morceaux</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(f(x)=-2x\) si \(x\leqslant-1\) ; \(x^2+1\) si \(-1<x\leqslant0\) ; \(\sin(x/4)\) si \(x>0\).</div>
+        <p class="q">(a) \(\lim_{x\to-1^-}f=-2(-1)\)</p><p class="res">\(2\)</p>
+        <p class="q">(b) \(\lim_{x\to-1^+}f=(-1)^2+1\)</p><p class="res">\(2\)</p>
+        <p class="q">(c) \(\lim_{x\to0^-}f=0^2+1\)</p><p class="res">\(1\)</p>
+        <p class="q">(d) \(\lim_{x\to0^+}f=\sin0\)</p><p class="res">\(0\)</p>
+        <p class="q">(e) \(\lim_{x\to\pi^-}f=\sin(\pi/4)\)</p><p class="res">\(\tfrac{\sqrt2}2\)</p>
+        <p class="q">(f) \(\lim_{x\to\pi^+}f=\sin(\pi/4)\)</p><p class="res">\(\tfrac{\sqrt2}2\) (continue en \(\pi\))</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — Limites latérales</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\dfrac{x^2-(a+1)x+a}{x^3-a^3}\) en \(a\)</p>
+        <p>Numérateur \(=(x-1)(x-a)\), dénominateur \(=(x-a)(x^2+ax+a^2)\). Après simplification : \(\dfrac{x-1}{x^2+ax+a^2}\).</p>
+        <p class="res">Si \(a\neq0\) : limite (des deux côtés) \(=\dfrac{a-1}{3a^2}\). Si \(a=0\) : \(\dfrac{x-1}{x^2}\to-\infty\).</p>
+        <p class="q">(b) \(\dfrac{\sqrt{x^3-2x^2+x}}{x-1}\) en \(1\)</p>
+        <p>\(x^3-2x^2+x=x(x-1)^2\), donc \(\sqrt{\cdots}=|x-1|\sqrt x\). Ratio \(=\dfrac{|x-1|\sqrt x}{x-1}\).</p>
+        <p class="res">À droite : \(+1\) ; à gauche : \(-1\). Pas de limite en \(1\).</p>
+        <p class="q">(c) \(\dfrac{\sqrt{1+x}-\sqrt{1-x}}{|x|}\) en \(0\)</p>
+        <p>Numérateur \(=\dfrac{2x}{\sqrt{1+x}+\sqrt{1-x}}\), donc ratio \(=\dfrac{2x}{|x|(\sqrt{1+x}+\sqrt{1-x})}\).</p>
+        <p class="res">À droite : \(+1\) ; à gauche : \(-1\). Pas de limite en \(0\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — Déduire \(\lim f\) de limites de quotients</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">On donne 4 limites de \(\tfrac{f(x)-5}{x+2}\) et \(\tfrac{f(x)}{x^2}\).</div>
+        <p class="q">(a) \(\lim_{x\to-2^-}f\), sachant \(\tfrac{f(x)-5}{x+2}\to+\infty\)</p>
+        <p>\(f(x)-5=(x+2)\cdot\underbrace{\tfrac{f(x)-5}{x+2}}_{\to+\infty}\) : forme \(0\times\infty\). On sait seulement
+        que \(f(x)<5\) au voisinage, mais la limite <b>n'est pas déterminée</b> (ex. \(f\equiv4\) donne \(+\infty\), \(f=5-\sqrt{|x+2|}\) aussi avec \(f\to5\)).</p>
+        <p class="res">Indéterminée.</p>
+        <p class="q">(b) \(\lim_{x\to-2^+}f\), sachant \(\tfrac{f(x)-5}{x+2}\to5\)</p>
+        <p>\(f(x)-5=(x+2)\cdot(\to5)\to0\).</p><p class="res">\(\lim f=5\)</p>
+        <p class="q">(c) \(\lim_{x\to0^-}f\), sachant \(\tfrac{f(x)}{x^2}\to-2\)</p>
+        <p>\(f(x)=x^2\cdot(\to-2)\to0\).</p><p class="res">\(\lim f=0\)</p>
+        <p class="q">(d) \(\lim_{x\to0^+}f\), sachant \(\tfrac{f(x)}{x^2}\to0\)</p>
+        <p>\(f(x)=x^2\cdot(\to0)\to0\).</p><p class="res">\(\lim f=0\)</p>
+        <p class="q">Exemple de fonction convenable</p>
+        <p class="res">\(f(x)=\begin{cases}5-\sqrt{-x-2}&x<-2\\5+5(x+2)&-2<x<-1\\-2x^2&-1\leqslant x<0\\0&x\geqslant0\end{cases}\) vérifie les 4 conditions.</p>
+      </div>
+    </div>
+
+    <h3>Partie 2 — Limites en un point et à l'infini</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — Limites (point fini)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\dfrac{x^2-4}{x-2}=x+2\to\)</p><p class="res">\(4\)</p>
+        <p class="q">(b) \(\dfrac{x^3-1}{x^2-1}=\dfrac{x^2+x+1}{x+1}\to\)</p><p class="res">\(\tfrac32\)</p>
+        <p class="q">(c) \(\dfrac{2x+5}{x-4}\) en \(4\)</p><p>Numérateur \(\to13\neq0\), dénom \(\to0\).</p><p class="res">Pas de limite (à gauche \(-\infty\), à droite \(+\infty\)).</p>
+        <p class="q">(d) \(|x-1|\) en \(1\)</p><p class="res">\(0\)</p>
+        <p class="q">(e) \(\dfrac1{|x-1|}\) en \(1\)</p><p>\(|x-1|\to0^+\).</p><p class="res">\(+\infty\)</p>
+        <p class="q">(f) \(\dfrac{2x^2+|x|}{2x^2-|x|}=\dfrac{2|x|+1}{2|x|-1}\to\)</p><p class="res">\(-1\)</p>
+        <p class="q">(g) \(\dfrac1{\sqrt{x+1}-1}=\dfrac{\sqrt{x+1}+1}{x}\) en \(0\)</p><p>Numérateur \(\to2\), dénom \(\to0\).</p><p class="res">Pas de limite (à droite \(+\infty\), à gauche \(-\infty\)).</p>
+        <p class="q">(h) \(\dfrac{\sqrt{x+4}-2}{1-\sqrt{2x+1}}\) en \(0\)</p><p>\(=\dfrac{1+\sqrt{2x+1}}{-2(\sqrt{x+4}+2)}\to\dfrac{2}{-8}\).</p><p class="res">\(-\tfrac14\)</p>
+        <p class="q">(i) \(\dfrac{\sqrt{x^2+1}-x-1}{x}=\dfrac{-2}{\sqrt{x^2+1}+x+1}\to\)</p><p class="res">\(-1\)</p>
+        <p class="q">(j) \(\dfrac1{1-x}-\dfrac1{1-x^2}=\dfrac{x}{(1-x)(1+x)}\) en \(1\)</p><p class="res">Pas de limite (à gauche \(+\infty\), à droite \(-\infty\)).</p>
+        <p class="q">(k) \(\dfrac3{\lfloor x+1\rfloor}\) en \(0\)</p><p>À droite \(\lfloor x+1\rfloor=1\) ; à gauche \(\lfloor x+1\rfloor=0\).</p><p class="res">À droite \(3\), à gauche \(+\infty\) : pas de limite.</p>
+        <p class="q">(l) \(x\lfloor\tfrac1x\rfloor\) en \(0\)</p><p>\(\tfrac1x-1<\lfloor\tfrac1x\rfloor\leqslant\tfrac1x\), d'où \(1-|x|<x\lfloor\tfrac1x\rfloor\leqslant1\) : gendarmes.</p><p class="res">\(1\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — Limites à l'infini</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\dfrac{3x^8-17}{x^7}\sim3x\) en \(-\infty\)</p><p class="res">\(-\infty\)</p>
+        <p class="q">(b) \(\dfrac{3x^3-5x^2+7}{8+2x-5x^3}\sim\dfrac{3}{-5}\)</p><p class="res">\(-\tfrac35\)</p>
+        <p class="q">(c) \(\dfrac{x^2+\sin x}{x^2+\cos x}\to\)</p><p>(\(\sin,\cos\) bornés, terme dominant \(x^2\)).</p><p class="res">\(1\)</p>
+        <p class="q">(d) \(\sqrt{x+5}-\sqrt{x-3}=\dfrac8{\sqrt{x+5}+\sqrt{x-3}}\to\)</p><p class="res">\(0\)</p>
+        <p class="q">(e) \(\sqrt{x^2+x+1}-(x+1)=\dfrac{-x}{\sqrt{x^2+x+1}+x+1}\sim\dfrac{-x}{2x}\)</p><p class="res">\(-\tfrac12\)</p>
+        <p class="q">(f) \(\sqrt{x+\sqrt x}-\sqrt x=\dfrac{\sqrt x}{\sqrt{x+\sqrt x}+\sqrt x}\to\)</p><p class="res">\(\tfrac12\)</p>
+        <p class="q">(g) \(\sqrt{x^2+2x+5}-x\) en \(-\infty\)</p><p>\(x\to-\infty\) : \(\sqrt{\cdots}\to+\infty\) et \(-x\to+\infty\).</p><p class="res">\(+\infty\)</p>
+        <p class="q">(h) \(\dfrac{\sqrt{x^2+4}-x}{1-\sqrt{1+2x}}\) en \(+\infty\)</p><p>Numérateur \(\to0\), dénominateur \(\to-\infty\).</p><p class="res">\(0\)</p>
+        <p class="q">(i) \(\dfrac{1+2\sin x}{1+\sqrt x}\)</p><p>Numérateur borné, dénom \(\to+\infty\).</p><p class="res">\(0\)</p>
+        <p class="q">(j) \(e^{x-\sin x}\) en \(+\infty\)</p><p>\(x-\sin x\geqslant x-1\to+\infty\).</p><p class="res">\(+\infty\)</p>
+        <p class="q">(k) \(e^{x-\sin x}\) en \(-\infty\)</p><p>\(x-\sin x\leqslant x+1\to-\infty\).</p><p class="res">\(0\)</p>
+        <p class="q">(l) \(x\lfloor\tfrac1x\rfloor\) en \(+\infty\)</p><p>\(\tfrac1x\to0^+\Rightarrow\lfloor\tfrac1x\rfloor=0\).</p><p class="res">\(0\)</p>
+      </div>
+    </div>
+
+    <h3>Partie 3 — Propriétés des limites</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — Fonction paire</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(f\) paire, \(\lim_{x\to-\infty}f=\ell\). Montrer \(\lim_{x\to+\infty}f=\ell\).</div>
+        <p>Comme \(f\) est paire, \(f(x)=f(-x)\). Soit \(\varepsilon>0\). Par hypothèse,
+        \(\exists A,\ \forall y\leqslant A,\ |f(y)-\ell|\leqslant\varepsilon\). Pour \(x\geqslant-A\), on a \(-x\leqslant A\), donc :</p>
+        \[ |f(x)-\ell|=|f(-x)-\ell|\leqslant\varepsilon. \]
+        <div class="res">\(\lim_{x\to+\infty}f(x)=\ell\). ∎ (Le graphe étant symétrique / \(Oy\), les deux « bouts » ont même limite.)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 7 — Fonction périodique avec limite en \(+\infty\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(f\) périodique de période \(T>0\), \(\lim_{x\to+\infty}f=\ell\in\mathbb R\).</div>
+        <p>Soit \(x_0\in\mathbb R\). La suite \(x_0+nT\to+\infty\), donc \(f(x_0+nT)\to\ell\). Or par périodicité
+        \(f(x_0+nT)=f(x_0)\) pour tout \(n\). La suite constante \(f(x_0)\) converge vers \(\ell\), donc \(f(x_0)=\ell\).</p>
+        <div class="res">\(x_0\) étant quelconque, \(f\) est <b>constante</b> égale à \(\ell\). (Une fonction périodique non constante
+        n'a pas de limite en \(+\infty\).)</div>
+      </div>
+    </div>
+
+  </section>
+
+  <p style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.9rem;opacity:.75">
+    Chapitre 8 du cours M01 (S1). Sources : <em>Chap_8.pdf</em> (cours magistral) et
+    <em>TD08 — Limites de fonctions réelles</em>. Corrigé rédigé intégralement (pas de corrigé officiel fourni).
+  </p>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours (CM)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/limites-fonctions/Chap_8.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Chap_8</span><span class="badge">Cours (CM)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/limites-fonctions/TD08___Limites_de_fonctions_r%C3%A9elles.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD08___Limites_de_fonctions_réelles</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

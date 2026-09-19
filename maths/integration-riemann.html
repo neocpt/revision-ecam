@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Intégration & sommes de Riemann — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-math">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Maths · M02 — Intégration &amp; sommes de Riemann</span>
+  <h1 class="title">Intégration &amp; sommes de Riemann</h1>
+  <p class="lead">Fonctions en escalier, propriétés de l'intégrale (linéarité, positivité, Chasles, inégalité de la moyenne) ;
+  sommes de Riemann et passage à l'intégrale ; suites définies par une intégrale (majoration, convergence) ;
+  comparaison série-intégrale et constante d'Euler.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Propriétés de l'intégrale</h3>
+    <div class="thm">
+      <span class="lab">Règles</span>
+      <b>Linéarité</b> : \(\int(\lambda f+\mu g)=\lambda\int f+\mu\int g\). <b>Chasles</b> : \(\int_a^b=\int_a^c+\int_c^b\).
+      <b>Positivité</b> : \(f\geqslant0\Rightarrow\int_a^b f\geqslant0\) ; \(f\leqslant g\Rightarrow\int f\leqslant\int g\) (\(a\leqslant b\)).
+    </div>
+    <div class="thm">
+      <span class="lab">Inégalités</span>
+      \(\Big|\displaystyle\int_a^b f\Big|\leqslant\int_a^b|f|\). Inégalité de la moyenne : \(\big|\int_a^b f\big|\leqslant(b-a)\sup_{[a,b]}|f|\).
+    </div>
+    <div class="note">
+      <span class="lab">Fonctions en escalier</span>
+      \(\int_a^b\varphi=\sum_i c_i\,(x_{i+1}-x_i)\) où \(\varphi=c_i\) sur \(]x_i,x_{i+1}[\) (les valeurs aux points de la subdivision ne comptent pas).
+    </div>
+
+    <h3>1.2 Sommes de Riemann</h3>
+    <div class="thm">
+      <span class="lab">Convergence</span>
+      Pour \(f\) continue sur \([a,b]\) :
+      \[ \frac{b-a}{n}\sum_{k=1}^{n}f\Big(a+k\tfrac{b-a}{n}\Big)\ \xrightarrow[n\to\infty]{}\ \int_a^b f. \]
+      Cas usuel \([0,1]\) : \(\dfrac1n\sum_{k=1}^{n}f\big(\tfrac kn\big)\to\int_0^1 f\). Reconnaître une somme de Riemann permet de calculer une limite.
+    </div>
+
+    <h3>1.3 Suites définies par une intégrale</h3>
+    <div class="method">
+      <span class="lab">Majoration</span>
+      Pour montrer \(u_n=\int_0^1 x^n g(x)\,dx\to0\) : majorer \(|g|\leqslant M\) sur \([0,1]\), alors
+      \(|u_n|\leqslant M\int_0^1 x^n=\tfrac M{n+1}\to0\). Relations de récurrence : IPP ou manipulation algébrique du numérateur.
+    </div>
+    <div class="note">
+      <span class="lab">Comparaison série-intégrale</span>
+      \(1/x\) décroissante \(\Rightarrow\tfrac1{k+1}\leqslant\int_k^{k+1}\tfrac{dx}x\leqslant\tfrac1k\).
+      En sommant : \(u_n=\sum_{k=1}^n\tfrac1k=\ln n+\gamma+o(1)\) (constante d'Euler \(\gamma\)).
+    </div>
+  </section>
+
+  <!-- ==================== EXOS CRÉÉS ============================== -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés)</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Somme de Riemann</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Calculer \(\displaystyle\lim_{n\to\infty}\frac1n\sum_{k=1}^n\frac{k}{n}\).</div>
+        <p>Somme de Riemann de \(f(x)=x\) sur \([0,1]\).</p>
+        <div class="res">\(\int_0^1 x\,dx=\tfrac12\)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Suite-intégrale</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(u_n=\int_0^1\frac{x^n}{1+x^2}dx\). Montrer \(u_n\to0\).</div>
+        <p>\(0\leqslant\tfrac{x^n}{1+x^2}\leqslant x^n\), donc \(0\leqslant u_n\leqslant\tfrac1{n+1}\).</p>
+        <div class="res">\(u_n\to0\) (gendarmes)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Inégalité de la moyenne</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Majorer \(\big|\int_0^1\frac{\cos x}{1+x}dx\big|\).</div>
+        <p>\(\big|\tfrac{\cos x}{1+x}\big|\leqslant1\) sur \([0,1]\).</p>
+        <div class="res">\(\big|\int_0^1\tfrac{\cos x}{1+x}dx\big|\leqslant1\)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CORRECTION TD ========================== -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD — Intégration</h2>
+    <p class="lead" style="font-size:.95rem">Les 9 exercices résolus intégralement (pas de corrigé officiel fourni).</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — Fonction en escalier avec parties entières</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(\varphi(x)=3\lfloor\tfrac x2\rfloor-2\lfloor\tfrac x3\rfloor\) sur \([0,6]\).</div>
+        <p class="q">1) Valeurs</p><p>\(\lfloor\tfrac x2\rfloor\in\{0,1,2\}\) ; \(\lfloor\tfrac x3\rfloor\in\{0,1\}\).</p>
+        <p class="q">2-3) Subdivisions</p><p>\(\lfloor\tfrac x2\rfloor\) : \(\{0,2,4,6\}\) ; \(\lfloor\tfrac x3\rfloor\) : \(\{0,3,6\}\) ; réunion : \(\{0,2,3,4,6\}\).</p>
+        <p class="q">4) \(\varphi\) constante par morceaux</p>
+        <p class="res">\([0,2[:\,0\) ; \([2,3[:\,3\) ; \([3,4[:\,1\) ; \([4,6[:\,4\)</p>
+        <p class="q">5) Intégrale</p><p>\(I=0\cdot2+3\cdot1+1\cdot1+4\cdot2\).</p><p class="res">\(I=12\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — Inégalités intégrales</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">1) \(\big|\int_0^1(f(x)+xf(1-x))dx\big|\leqslant\tfrac32M\)</p>
+        <p>\(\leqslant\int_0^1(|f(x)|+x|f(1-x)|)dx\leqslant M\int_0^1(1+x)dx=M(1+\tfrac12)\).</p><p class="res">\(\leqslant\tfrac32M\) ∎</p>
+        <p class="q">2) \(\big|\int_{-1}^1(f(x^2)+xf(x))dx\big|\leqslant3M\)</p>
+        <p>\(\leqslant M\int_{-1}^1(1+|x|)dx=M(2+1)\).</p><p class="res">\(\leqslant3M\) ∎</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — \(I_n=\int_0^1\tfrac{x^n}{1+x}dx\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">1) \(I_n\to0\)</p><p>\(0\leqslant\tfrac{x^n}{1+x}\leqslant x^n\), \(I_n\leqslant\tfrac1{n+1}\).</p><p class="res">\(I_n\to0\)</p>
+        <p class="q">2) \(I_n+I_{n+1}\)</p><p>\(=\int_0^1\tfrac{x^n(1+x)}{1+x}dx=\int_0^1 x^n\).</p><p class="res">\(\tfrac1{n+1}\)</p>
+        <p class="q">3) \(\lim\sum_{k=0}^n\tfrac{(-1)^k}{k+1}\)</p>
+        <p>Avec \(\tfrac1{k+1}=I_k+I_{k+1}\), la somme \(\sum(-1)^k(I_k+I_{k+1})=I_0+(-1)^nI_{n+1}\) (télescopage), et \(I_0=\ln2\).</p>
+        <div class="res">\(\displaystyle\lim_{n\to\infty}\sum_{k=0}^n\frac{(-1)^k}{k+1}=\ln2\)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — \(u_n=\int_0^1 x^n\ln(1+x)dx\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p>\(0\leqslant\ln(1+x)\leqslant\ln2\) sur \([0,1]\), donc \(0\leqslant u_n\leqslant\tfrac{\ln2}{n+1}\).</p>
+        <div class="res">\(\lim u_n=0\)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — \(I_n=\int_0^1\tfrac{x^n}{x^2+1}\), \(J_n=\int_0^1 x^n\ln(x^2+1)\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">1) \(I_n\to0\)</p><p>\(\tfrac{x^n}{x^2+1}\leqslant x^n\).</p><p class="res">\(I_n\to0\)</p>
+        <p class="q">2) \(I_{n+2}\) en fonction de \(J_n\)</p>
+        <p>IPP sur \(J_n\) (\(u=\ln(x^2+1),\ dv=x^n dx\)) : \((n+1)J_n=\ln2-2I_{n+2}\).</p><p class="res">\(I_{n+2}=\tfrac{\ln2}2-\tfrac{n+1}2J_n\)</p>
+        <p class="q">3) \(\lim(n+1)J_n\)</p><p>\((n+1)J_n=\ln2-2I_{n+2}\), \(I_{n+2}\to0\).</p><p class="res">\(\lim(n+1)J_n=\ln2\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — Intégrales par sommes de Riemann</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">\(I=\int_0^1 x^2dx\)</p><p>\(\tfrac1n\sum_{k=1}^n(\tfrac kn)^2=\tfrac{n(n+1)(2n+1)}{6n^3}\to\tfrac13\).</p><p class="res">\(\tfrac13\)</p>
+        <p class="q">\(J=\int_0^2(2x+1)dx\)</p><p>\(\tfrac2n\sum_{k=1}^n(\tfrac{4k}n+1)=6+\tfrac4n\to6\).</p><p class="res">\(6\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 7 — Limites de sommes de Riemann</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">\(S_{1,n}=\sum_{k=0}^{n-1}\tfrac1{n+k}\)</p><p>\(=\tfrac1n\sum_{k=0}^{n-1}\tfrac1{1+k/n}\to\int_0^1\tfrac{dx}{1+x}\).</p><p class="res">\(\ln2\)</p>
+        <p class="q">\(S_{2,n}=\tfrac1n\sum_{k=1}^n\tfrac{n^2}{(n+k)^2}\)</p><p>\(=\tfrac1n\sum\tfrac1{(1+k/n)^2}\to\int_0^1\tfrac{dx}{(1+x)^2}=[-\tfrac1{1+x}]_0^1\).</p><p class="res">\(\tfrac12\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 8 — \(I_n=\int_1^e(\ln x)^n dx\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">1) Convergence</p><p>Sur \([1,e]\), \(0\leqslant\ln x\leqslant1\) donc \((\ln x)^{n+1}\leqslant(\ln x)^n\) : \((I_n)\) décroissante, minorée par \(0\).</p><p class="res">\((I_n)\) converge</p>
+        <p class="q">2) Récurrence (IPP)</p><p>\(u=(\ln x)^n,\ dv=dx\) : \([x(\ln x)^n]_1^e-n\int_1^e(\ln x)^{n-1}\).</p><p class="res">\(I_n=e-n\,I_{n-1}\)</p>
+        <p class="q">3) Équivalent</p><p>\((n+1)I_n=e-I_{n+1}\to e\).</p><p class="res">\(I_n\sim\dfrac en\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 9 — Série harmonique &amp; constante d'Euler</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(u_n=\sum_{k=1}^n\tfrac1k\), \(v_n=u_n-\ln n\).</div>
+        <p class="q">1) Encadrement</p><p>\(1/x\) décroissante sur \([k,k+1]\) : \(\tfrac1{k+1}\leqslant\int_k^{k+1}\tfrac{dx}x\leqslant\tfrac1k\).</p>
+        <p class="q">2) Sommation</p><p>En sommant \(k=1\) à \(n-1\) (télescopage \(\to\ln n\)) : \(u_n-1\leqslant\ln n\leqslant u_n-\tfrac1n\), d'où \(\tfrac1n\leqslant v_n\leqslant1\).</p><p class="res">\(0\leqslant v_n\leqslant1\)</p>
+        <p class="q">3) Monotonie</p><p class="res">\(v_{n+1}-v_n=\tfrac1{n+1}-\int_n^{n+1}\tfrac{dx}x\)</p>
+        <p class="q">4) Convergence</p><p>Par (1) avec \(k=n\) : \(v_{n+1}-v_n\leqslant0\), donc \((v_n)\) décroissante et minorée : elle converge vers \(\gamma\) (constante d'Euler).</p>
+        <div class="res">\((v_n)\to\gamma\), donc \(u_n=\ln n+\gamma+o(1)\to+\infty\) (la série harmonique diverge).</div>
+      </div>
+    </div>
+
+  </section>
+
+  <p style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.9rem;opacity:.75">
+    Module M02 (S2). Sources : <em>Intégration-V2026-Etudiant</em> et <em>TD-2026 Intégration</em>.
+    Corrigé rédigé intégralement (pas de corrigé officiel fourni).
+  </p>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours (CM)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/integration-riemann/Int%C3%A9gration-V2026-Etudiant-VF.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Intégration-V2026-Etudiant-VF</span><span class="badge">Cours (CM)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Document</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/integration-riemann/Exercice%206-Sommes%20de%20Riemann.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Exercice 6-Sommes de Riemann</span><span class="badge">Document</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C12 — Comportement fréquentiel & diagrammes de Bode — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-sii">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SII · C12 — Comportement fréquentiel des SLCI (Bode)</span>
+  <h1 class="title">C12 — Prévoir le comportement fréquentiel des SLCI</h1>
+  <p class="lead">Réponse harmonique : gain \(G(\omega)=|H(j\omega)|\) et déphasage \(\varphi(\omega)=\arg H(j\omega)\) ;
+  <b>diagrammes de Bode</b> (gain en dB, semi-log) ; systèmes usuels (gain, intégrateur, dérivateur, 1ᵉʳ et 2ᵉ ordre) ;
+  <b>résonance</b> (\(z<\tfrac{1}{\sqrt2}\)), facteur de surtension \(Q\) ; filtres, bande passante, pulsation de coupure ;
+  lien <b>bande passante ↔ rapidité</b>.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction du TD (tracés asymptotiques, identification, A320)</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Réponse harmonique</h3>
+    <div class="thm">
+      <span class="lab">Principe</span>
+      Un SLCI soumis à \(e(t)=E_0\sin(\omega t)\) répond en régime permanent par \(s(t)=S_0\sin(\omega t+\varphi)\), de <b>même pulsation</b>.
+      On remplace \(p\) par \(j\omega\) dans \(H\) :
+      \[ G(\omega)=|H(j\omega)|=\frac{S_0}{E_0},\qquad \varphi(\omega)=\arg H(j\omega). \]
+      \(G>1\) : sortie amplifiée ; \(\varphi>0\) : avance de phase, \(\varphi<0\) : retard.
+    </div>
+    <div class="note">
+      <span class="lab">Diagrammes de Bode</span>
+      Deux courbes en fonction de \(\omega\) (échelle <b>semi-log</b>) : le <b>gain</b> \(G_{dB}=20\log|H(j\omega)|\) et la <b>phase</b> \(\varphi\) (en °).
+      Repères : 0 dB = gain 1 ; +20 dB = ×10 ; −3 dB ≈ −30 % (×0,707) ; −6 dB = −50 %. Une décade = de \(\omega\) à \(10\omega\).
+      <b>Produit</b> de FT ⟹ les dB et les phases <b>s'ajoutent</b> ; <b>inverse</b> ⟹ symétrie / axe des abscisses.
+      Une fonction \(K\omega^p\) est une droite de <b>pente \(20p\) dB/décade</b> (et \(\varphi=p\times90°\)).
+    </div>
+
+    <h3>1.2 Systèmes élémentaires</h3>
+    <div class="overflow">
+    <table>
+      <tr><th>\(H(p)\)</th><th>Gain \(G_{dB}\)</th><th>Phase</th></tr>
+      <tr><td>\(K\) (gain pur)</td><td>horizontale à \(20\log K\)</td><td>\(0°\)</td></tr>
+      <tr><td>\(\dfrac Kp\) (intégrateur)</td><td>\(-20\) dB/déc, 0 dB en \(\omega=K\)</td><td>\(-90°\)</td></tr>
+      <tr><td>\(\dfrac K{p^2}\)</td><td>\(-40\) dB/déc, 0 dB en \(\sqrt K\)</td><td>\(-180°\)</td></tr>
+      <tr><td>\(Kp\) (dérivateur)</td><td>\(+20\) dB/déc, 0 dB en \(1/K\)</td><td>\(+90°\)</td></tr>
+      <tr><td>\(Kp^2\)</td><td>\(+40\) dB/déc</td><td>\(+180°\)</td></tr>
+    </table>
+    </div>
+
+    <h3>1.3 Premier ordre \(\;H=\dfrac{K}{1+\tau p}\)</h3>
+    <div class="thm">
+      <span class="lab">Asymptotes & coupure</span>
+      \(G_{dB}=20\log K-20\log\sqrt{1+\tau^2\omega^2}\), \(\varphi=-\arctan(\tau\omega)\).
+      BF : gain pur \(K\) (\(0\) dB/déc) ; HF : intégrateur (\(-20\) dB/déc). Intersection en <b>\(\omega_c=\dfrac1\tau\)</b>, qui est aussi \(\omega_{c-3dB}\) :
+      \(G_{dB}(\omega_c)=G_0-3\) dB, \(\varphi(\omega_c)=-45°\).
+    </div>
+
+    <h3>1.4 Deuxième ordre \(\;H=\dfrac{K}{1+\frac{2z}{\omega_0}p+\frac{p^2}{\omega_0^2}}\)</h3>
+    <div class="thm">
+      <span class="lab">Asymptotes</span>
+      BF : gain \(K\) ; HF : \(-40\) dB/déc (double intégrateur). Coupure \(\omega_c=\omega_0\) ; à \(\omega_0\) : \(G_{dB}=20\log K-20\log(2z)\), \(\varphi=-90°\).
+    </div>
+    <div class="warnbox">
+      <span class="lab">Résonance (⚠ seulement si \(z<\tfrac{1}{\sqrt2}\approx0{,}707\))</span>
+      Pulsation de résonance \(\omega_r=\omega_0\sqrt{1-2z^2}\) (\(<\omega_0\)). Facteur de <b>surtension</b> :
+      \[ Q=\frac{G(\omega_r)}{G(0)}=\frac{1}{2z\sqrt{1-z^2}},\qquad Q_{dB}=-20\log(2z\sqrt{1-z^2}). \]
+      \(Q\) varie de 1 (\(z=0{,}707\)) à \(+\infty\) (\(z\to0\)). <b>Ne pas confondre</b> \(\omega_r\) (fréquentiel) avec \(\omega_a=\omega_0\sqrt{1-z^2}\) (temporel).
+      Pour \(0{,}707<z<1\) : dépassements temporels mais <b>pas</b> de résonance fréquentielle. Réglage usuel : \(Q=1{,}3\) (\(=2{,}3\) dB).
+    </div>
+    <div class="note">
+      <span class="lab">Cas \(z>1\)</span>
+      \(H=K\cdot\dfrac{1}{1+\tau_1p}\cdot\dfrac{1}{1+\tau_2p}\) avec \(\omega_0=\tfrac{1}{\sqrt{\tau_1\tau_2}}\) : produit de deux 1ᵉʳ ordres (diagrammes s'additionnent, 2 cassures distinctes).
+    </div>
+
+    <h3>1.5 Retard pur, \(K<0\), filtres</h3>
+    <div class="note">
+      <span class="lab">Compléments</span>
+      <b>Retard pur</b> \(e^{-\tau p}\) : \(G_{dB}=0\) (module 1), \(\varphi=-\tau\omega\) (seule la phase change ; risque d'instabilité en BF).
+      <b>\(K<0\)</b> : module inchangé, phase \(+180°\). <b>Filtres</b> : passe-bas \(]0,\omega_{c2}]\), passe-haut \([\omega_{c1},+\infty[\), passe-bande \([\omega_{c1},\omega_{c2}]\).
+      La plupart des systèmes mécaniques sont des <b>passe-bas</b>.
+    </div>
+    <div class="thm">
+      <span class="lab">Bande passante ↔ rapidité</span>
+      Système <b>rapide</b> ⟺ \(t_{r5\%}\) petit ⟺ \(\omega_c\) grand ⟺ <b>large bande passante</b> (apte à suivre des entrées rapides).
+      Lien pente/phase : pente \(k\times20\) dB/déc ⟹ \(\varphi=k\times90°\).
+    </div>
+    <div class="method">
+      <span class="lab">Construire un Bode (méthode)</span>
+      1) forme canonique = produit d'éléments simples (gain, intégrateurs \(\tfrac{K}{p^\alpha}\), 1ᵉʳ/2ᵉ ordres et leurs inverses) ;
+      2) classer les <b>pulsations de cassure</b> (\(1/\tau_i\), \(\omega_0\)) croissantes ; 3) partir de \(\tfrac{K}{(j\omega)^\alpha}\) et ajouter chaque cassure ;
+      4) affiner autour des cassures. Multiplier par \(K\) = translation verticale de \(20\log K\).
+    </div>
+  </section>
+
+  <!-- ======================= EXOS CRÉÉS =============================== -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Lire gain & phase d'un 1ᵉʳ ordre</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(H(p)=\dfrac{5}{1+0{,}1p}\). Réponse à \(\omega=10\) rad/s ?</div>
+        <p>\(\omega_c=1/\tau=10\) rad/s → on est <b>à la coupure</b>. \(G_{dB}=20\log5-3=14-3=11\) dB, soit \(G=10^{11/20}\approx3{,}5\). \(\varphi=-45°\).</p>
+        <p class="res">Pour \(e=E_0\sin(10t)\) : \(s\approx3{,}5\,E_0\sin(10t-45°)\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Résonance d'un 2ᵉ ordre</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(\omega_0=100\) rad/s, \(z=0{,}3\), \(K=1\). Résonance ?</div>
+        <p>\(z<0{,}707\) → résonance. \(\omega_r=\omega_0\sqrt{1-2z^2}=100\sqrt{1-0{,}18}=100\times0{,}906=90{,}6\) rad/s.</p>
+        <p>\(Q=\dfrac1{2z\sqrt{1-z^2}}=\dfrac1{2\cdot0{,}3\cdot0{,}954}=1{,}75\), \(Q_{dB}=20\log1{,}75\approx4{,}9\) dB.</p>
+        <p class="res">Pic de \(+4{,}9\) dB à \(\omega_r\approx91\) rad/s</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CORRECTION TD =============================== -->
+  <section class="block" id="td">
+    <h2>3. Correction du TD</h2>
+    <p class="lead" style="font-size:.95rem">Source : <i>S2I-C12-TD</i> (tracés asymptotiques de Bode, identification, A320). Corrigé officiel = tracés (figures) :
+    on restitue les <b>mises en forme canoniques</b>, pulsations de cassure et résultats analytiques.</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1.2 — Mise sous forme de produit</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">\(F=\dfrac{10}{p}\)</p><p>Intégrateur gain 10 : \(-20\) dB/déc, 0 dB en \(\omega=10\), \(\varphi=-90°\).</p>
+        <p class="q">\(G=\dfrac{2}{1+p/5}\)</p><p>1ᵉʳ ordre \(K=2\) (\(+6\) dB), cassure \(\omega_c=5\).</p>
+        <p class="q">\(F_2=\dfrac{2000}{p(100+p)}=\dfrac{20}{p\,(1+p/100)}\)</p><p>Intégrateur gain 20 (0 dB en 20) + pôle en 100 : \(-20\) puis \(-40\) dB/déc.</p>
+        <p class="q">\(F=\dfrac{1000(2+p)}{p(100+p)}=\dfrac{20\,(1+p/2)}{p\,(1+p/100)}\)</p>
+        <p>Intégrateur (gain 20) × zéro en 2 × pôle en 100. Pentes : \(-20\) (ω&lt;2), <b>0</b> (2→100, plateau à ≈20 dB), \(-20\) (ω&gt;100). Croisement 0 dB à \(\omega=1000\).</p>
+        <p class="res">Phase à la coupure 0 dB (\(\omega=1000\)) : \(-90°+90°-90°\approx\mathbf{-90°}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1.3 — Formes canoniques (1ᵉʳ ordre)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">\(F_1=\dfrac{20}{10+p}=\dfrac{2}{1+p/10}\)</p><p class="res">\(K=2\) (6 dB), cassure \(\omega_c=10\), pente \(-20\) dB/déc après</p>
+        <p class="q">\(F_2=\dfrac{0{,}05p+2}{1+0{,}1p}=\dfrac{2(1+0{,}025p)}{1+0{,}1p}\)</p><p class="res">\(K=2\), zéro en 40, pôle en 10</p>
+        <p class="q">\(F_3=\dfrac{4}{p(1+0{,}2p)}\)</p><p class="res">Intégrateur gain 4, pôle en \(\omega=5\)</p>
+        <p class="q">\(F_4=\dfrac{2+3p}{0{,}08(p+5)^2}=\dfrac{1+1{,}5p}{(1+p/5)^2}\)</p><p class="res">\(K=1\), zéro en \(2/3\), pôle double en 5</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2.1 — Second ordre & bande passante</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">\(F_1=\dfrac{3}{2+0{,}1p+0{,}02p^2}=\dfrac{1{,}5}{1+0{,}05p+0{,}01p^2}\)</p>
+        <p>\(\dfrac1{\omega_0^2}=0{,}01\Rightarrow\omega_0=10\) rad/s ; \(\dfrac{2z}{\omega_0}=0{,}05\Rightarrow z=0{,}25\). \(z<0{,}707\) → <b>résonance</b>.</p>
+        <p class="res">\(K=1{,}5\), \(\omega_0=10\), \(z=0{,}25\), \(\omega_r=10\sqrt{1-0{,}125}=9{,}35\) rad/s, \(Q\approx2{,}1\) (6,3 dB)</p>
+        <p class="q">\(F_3=\dfrac{5(2+0{,}5p)}{(0{,}5+2p+10p^2)p}\)</p>
+        <p class="res">Intégrateur × 1ᵉʳ ordre (zéro en 4) × inverse d'un 2ᵉ ordre (\(\omega_0=\sqrt{0{,}5/10}=0{,}22\), \(z=\tfrac{2}{2\cdot10\cdot0{,}22}\approx0{,}45\))</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3.1 — Asservissement de freinage A320</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(H_b=K_i\tfrac{1+\tau_ip}{\tau_ip}\) (PI), \(H_s=\tfrac{K_s}{(1+\tau_sp)^2}\), \(H_f=K_f\) ; \(K_s=100\), \(\tau_s=8{,}7\cdot10^{-2}\) s, \(\tau_i=1\) s.</div>
+        <p class="q">Q1 — Bande passante de l'accéléromètre</p>
+        <p>Lue sur son Bode (pulsation à \(-3\) dB). Cahier des charges : bande passante &gt; 10 Hz (≈ 63 rad/s). On vérifie que l'accéléromètre est <b>plus rapide</b> que l'exigence (sa BP ≫ celle attendue) → il ne limite pas l'asservissement. Forme : 2ᵉ ordre passe-bas.</p>
+        <p class="q">Q2 — FTBO</p>
+        <p>\(FTBO=H_bH_sH_fH_a\) : le PI apporte un <b>intégrateur</b> (\(\tfrac1{\tau_ip}\)) → classe 1 → <b>précision parfaite</b> en poursuite échelon (décélération atteinte exactement, exigence validée).</p>
+        <p class="q">Q3–Q4 — FTBF : asymptote BF & surtension</p>
+        <p>Asymptote BF horizontale à 0 dB ⟹ gain statique BF = 1 (précis). La <b>surtension</b> lue sur la FTBF (\(Q_{dB}\)) doit rester &lt; 5 dB (cahier des charges). Une surtension fréquentielle ⟹ <b>dépassements</b> sur la réponse indicielle (\(z<0{,}707\)).</p>
+        <p class="res">PI ⟹ précision assurée ; réglage de \(K_i\) pour surtension &lt; 5 dB et bande passante &gt; 10 Hz</p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.4rem">
+      <span class="lab">Bilan C12</span>
+      Point d'orgue de l'automatique : caractériser un SLCI par sa <b>réponse harmonique</b> (\(p\to j\omega\)) et la tracer dans <b>Bode</b>
+      (produit ⟹ addition des dB et des phases). Connaître par cœur les diagrammes des <b>éléments simples</b> et des <b>1ᵉʳ/2ᵉ ordres</b>
+      (pente HF, coupure \(\omega_c\), résonance si \(z<0{,}707\), surtension \(Q\)). Retenir : <b>large bande passante = système rapide</b>.
+      Application : identification de FT, dimensionnement de correcteurs, validation d'un cahier des charges fréquentiel (ex. freinage A320).
+    </div>
+  </section>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c12-bode/S2I-C12-TD-Diagramme%20de%20Bode%20-%201%C2%B0%20ordre.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C12-TD-Diagramme de Bode - 1° ordre</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/sii/c12-bode/S2I-C12-TD-Pr%C3%A9voir%20le%20comportement%20fr%C3%A9quentiel%20des%20SLCI.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C12-TD-Prévoir le comportement fréquentiel des SLCI</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/sii/c12-bode/S2I-C12-TD-diagramme%20de%20Bode.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C12-TD-diagramme de Bode</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/sii/c12-bode/S2I-C12-TDcorr-Pr%C3%A9voir%20le%20comportement%20fr%C3%A9quentiel%20des%20SLCI.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C12-TDcorr-Prévoir le comportement fréquentiel des SLCI</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Document</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c12-bode/S2I-C12-Pr%C3%A9voir%20le%20comportement%20fr%C3%A9quentiel%20des%20SLCI.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C12-Prévoir le comportement fréquentiel des SLCI</span><span class="badge">Document</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,137 @@
+/* ===== Révision ECAM — feuille de style commune ===== */
+:root{
+  --bg:#0f172a; --bg2:#1e293b; --card:#ffffff; --ink:#1e293b; --ink-soft:#475569;
+  --brand:#2563eb; --brand-d:#1d4ed8; --accent:#0891b2; --ok:#059669; --warn:#d97706;
+  --line:#e2e8f0; --shadow:0 1px 3px rgba(0,0,0,.08),0 8px 24px rgba(0,0,0,.06);
+  --maxw:900px; --radius:14px;
+  /* ===== Code couleur des matières (imposé) =====
+     Physique = BLEU · Maths = ROUGE · SII = JAUNE.
+     Deux tons par matière : couleur vive (bordures/pastilles) + ton foncé (titres, texte). */
+  --phys:#2563eb; --phys-ink:#1d4ed8;
+  --math:#dc2626; --math-ink:#b91c1c;
+  --sii:#eab308;  --sii-ink:#a16207;
+  /* Variables de matière courante — surchargées par body.theme-xxx (défaut : physique/bleu) */
+  --subject:var(--phys); --subject-ink:var(--phys-ink); --chip-ink:#ffffff;
+}
+/* ---- Thème de matière appliqué sur <body> ---- */
+body.theme-phys{--subject:var(--phys); --subject-ink:var(--phys-ink); --chip-ink:#fff}
+body.theme-math{--subject:var(--math); --subject-ink:var(--math-ink); --chip-ink:#fff}
+body.theme-sii {--subject:var(--sii);  --subject-ink:var(--sii-ink);  --chip-ink:#3b2f00}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:80px}
+body{margin:0; font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  color:var(--ink); background:#f1f5f9; line-height:1.65; font-size:17px}
+
+/* ---- Barre de navigation ---- */
+.topbar{position:sticky; top:0; z-index:50; background:rgba(15,23,42,.96);
+  backdrop-filter:blur(8px); color:#fff; padding:.7rem 1.2rem; display:flex;
+  align-items:center; gap:1rem; box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.topbar a{color:#cbd5e1; text-decoration:none; font-weight:600; font-size:.95rem}
+.topbar a:hover{color:#fff}
+.topbar .brand{color:#fff; font-weight:800; letter-spacing:.3px}
+.topbar .spacer{flex:1}
+
+/* ---- Hero page d'accueil ---- */
+.hero{background:linear-gradient(135deg,#1e293b,#0f172a); color:#fff;
+  padding:3.2rem 1.5rem 2.6rem; text-align:center}
+.hero h1{margin:0 0 .4rem; font-size:2.4rem; font-weight:800}
+.hero p{margin:.3rem auto; max-width:640px; color:#cbd5e1; font-size:1.05rem}
+
+/* ---- Conteneur ---- */
+.wrap{max-width:var(--maxw); margin:0 auto; padding:2rem 1.2rem 5rem}
+.wrap.wide{max-width:1100px}
+
+/* ---- Cartes matières (accueil) ---- */
+.subjects{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:1.2rem; margin-top:1.6rem}
+.subject{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
+  overflow:hidden; border-top:5px solid var(--brand); transition:transform .15s, box-shadow .15s}
+.subject:hover{transform:translateY(-3px); box-shadow:0 12px 32px rgba(0,0,0,.12)}
+.subject.phys{border-top-color:var(--phys)}
+.subject.math{border-top-color:var(--math)}
+.subject.sii{border-top-color:var(--sii)}
+.subject h2{margin:0; padding:1rem 1.2rem .3rem; font-size:1.2rem}
+.subject .meta{padding:0 1.2rem .8rem; color:var(--ink-soft); font-size:.9rem}
+.subject ul{list-style:none; margin:0; padding:.4rem 0 1rem}
+.subject li a{display:flex; justify-content:space-between; align-items:center;
+  gap:.5rem; padding:.5rem 1.2rem; text-decoration:none; color:var(--ink); font-size:.95rem;
+  border-left:3px solid transparent}
+.subject li a:hover{background:#f8fafc; border-left-color:var(--brand)}
+.subject li a .st{font-size:.72rem; padding:.12rem .5rem; border-radius:20px; font-weight:700}
+.st.done{background:#d1fae5; color:#065f46}
+.st.wip{background:#fef3c7; color:#92400e}
+.st.todo{background:#e2e8f0; color:#475569}
+
+/* ---- Contenu de chapitre ---- */
+.chip{display:inline-block; font-size:.75rem; font-weight:700; text-transform:uppercase;
+  letter-spacing:.5px; padding:.2rem .7rem; border-radius:20px; color:var(--chip-ink); background:var(--subject)}
+h1.title{font-size:2rem; margin:.6rem 0 .3rem}
+.lead{color:var(--ink-soft); font-size:1.05rem; margin-bottom:1.5rem}
+
+section.block{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
+  padding:1.6rem 1.8rem; margin:1.4rem 0}
+section.block > h2:first-child{margin-top:0}
+h2{font-size:1.5rem; color:var(--subject-ink); border-bottom:2px solid var(--line);
+  padding-bottom:.4rem; margin:2rem 0 1rem}
+h3{font-size:1.2rem; color:var(--subject-ink); opacity:.92; margin:1.6rem 0 .6rem}
+h4{font-size:1.05rem; color:var(--ink); margin:1.2rem 0 .4rem}
+
+/* ---- Encarts ---- */
+.def,.thm,.note,.method,.exo,.warnbox{border-radius:10px; padding:.9rem 1.1rem; margin:1rem 0;
+  border-left:4px solid}
+.def{background:#eff6ff; border-color:var(--brand)}
+.thm{background:#f5f3ff; border-color:#7c3aed}
+.note{background:#f0fdfa; border-color:var(--accent)}
+.method{background:#fffbeb; border-color:var(--warn)}
+.warnbox{background:#fef2f2; border-color:#dc2626}
+.exo{background:#f8fafc; border-color:#64748b}
+.def .lab,.thm .lab,.note .lab,.method .lab,.warnbox .lab{display:block; font-weight:800;
+  text-transform:uppercase; font-size:.72rem; letter-spacing:.5px; margin-bottom:.3rem; color:var(--ink-soft)}
+
+/* ---- Correction TD ---- */
+.exo-card{border:1px solid var(--line); border-radius:12px; margin:1.4rem 0; overflow:hidden}
+.exo-head{background:#f1f5f9; padding:.7rem 1.1rem; font-weight:700; font-size:1.05rem;
+  display:flex; align-items:center; gap:.6rem; border-bottom:1px solid var(--line)}
+.exo-head .diff{font-size:.8rem; color:var(--warn)}
+.exo-body{padding:.4rem 1.2rem 1rem}
+.q{font-weight:700; color:var(--subject-ink); margin-top:1rem}
+.enonce{font-style:italic; color:var(--ink-soft); background:#f8fafc; padding:.5rem .8rem;
+  border-radius:8px; margin:.3rem 0 .6rem}
+.res{background:#ecfdf5; border-left:3px solid var(--ok); padding:.4rem .8rem; margin:.6rem 0;
+  border-radius:6px}
+.res b{color:#065f46}
+
+/* ---- Divers ---- */
+.mono{font-family:'Consolas','SF Mono',ui-monospace,monospace; font-size:.9em; background:#f1f5f9;
+  padding:.05rem .35rem; border-radius:5px; color:var(--subject-ink)}
+table{border-collapse:collapse; width:100%; margin:1rem 0; font-size:.95rem}
+th,td{border:1px solid var(--line); padding:.5rem .7rem; text-align:center}
+th{background:#f1f5f9}
+figure{margin:1rem 0; text-align:center}
+figure img{max-width:100%; border:1px solid var(--line); border-radius:8px}
+figcaption{font-size:.85rem; color:var(--ink-soft); margin-top:.3rem}
+.toc-mini{background:#f8fafc; border:1px solid var(--line); border-radius:10px; padding:1rem 1.2rem; margin:1rem 0}
+.toc-mini a{color:var(--subject-ink); text-decoration:none}
+.toc-mini a:hover{text-decoration:underline}
+.overflow{overflow-x:auto}
+footer{text-align:center; color:var(--ink-soft); font-size:.85rem; padding:2rem 1rem}
+mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%}
+@media(max-width:600px){body{font-size:16px} .hero h1{font-size:1.8rem} section.block{padding:1.1rem}}
+
+/* ---- Section « Documents donnés » (liens vers les PDF sources) ---- */
+.docs-intro{color:var(--ink-soft); margin:.2rem 0 1.1rem}
+.docs-group{margin:1.1rem 0}
+.docs-group h3{margin:.6rem 0 .5rem}
+.doc-list{list-style:none; margin:0; padding:0; display:grid; gap:.5rem}
+.doc-list li{margin:0}
+.doc-item{display:flex; align-items:center; gap:.7rem; text-decoration:none; color:var(--ink);
+  background:#f8fafc; border:1px solid var(--line); border-left:4px solid var(--subject);
+  border-radius:9px; padding:.6rem .85rem; font-size:.95rem; transition:background .12s, box-shadow .12s}
+.doc-item:hover{background:#eef2ff; box-shadow:var(--shadow)}
+.doc-item .ic{flex:none; width:1.6rem; height:1.6rem; display:grid; place-items:center;
+  background:var(--subject); color:var(--chip-ink); border-radius:6px; font-size:.62rem; font-weight:800}
+.doc-item .nm{flex:1; font-weight:600}
+.doc-item .badge{flex:none; font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.4px;
+  padding:.15rem .55rem; border-radius:20px; background:var(--subject); color:var(--chip-ink); opacity:.92}
+.doc-item .arrow{flex:none; color:var(--subject-ink); font-weight:800}
+.docs-note{font-size:.85rem; color:var(--ink-soft); margin-top:1rem; padding-top:.7rem; border-top:1px dashed var(--line)}

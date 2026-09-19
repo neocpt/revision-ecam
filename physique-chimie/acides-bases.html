@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chimie — Acides et bases — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' }, svg: { fontCache: 'global' } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-phys">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Chimie · Réactions acido-basiques</span>
+  <h1 class="title">Acides et bases</h1>
+  <p class="lead">Un <b>acide</b> cède un proton \(\text{H}^+\), une <b>base</b> en capte un (Brønsted). En solution
+  aqueuse, on quantifie l'acidité par le \(\text{pH}=-\log[\text{H}_3\text{O}^+]\). Ce chapitre couvre : constante
+  d'acidité \(K_A\) et \(\text{p}K_A\), autoprotolyse de l'eau (\(K_e=10^{-14}\)), calcul du pH des acides/bases
+  forts et faibles, amphotères, diagrammes de prédominance, relation de Henderson, solutions tampons et leur
+  capacité, et les courbes de titrage (fort/fort, fort/faible, polyacides).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD (34 EC + 28 exercices)</a></li>
+      <li><a href="#pka">4. Table de \(\text{p}K_A\)</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ============================ COURS ============================ -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Avancement, quotient de réaction et constante d'équilibre</h3>
+    <div class="def"><span class="lab">Avancement \(\xi\)</span>
+    Pour \(a\text A+b\text B\to c\text C\), à un instant donné \(n_X=n_X^{ini}\pm\nu_X\,\xi\) (\(+\) pour un produit,
+    \(-\) pour un réactif). \(\xi\) part de 0 et croît (réaction totale) jusqu'au réactif limitant. On peut aussi
+    utiliser l'avancement <b>volumique</b> \(x=\xi/V\) (en mol/L).</div>
+    <div class="thm"><span class="lab">Constante d'équilibre \(K\) et quotient \(Q\)</span>
+    \[K=\frac{[\text{produits}]_{eq}}{[\text{réactifs}]_{eq}}\quad(\text{à l'équilibre}),\qquad
+    Q=\frac{[\text{produits}]}{[\text{réactifs}]}\quad(\text{à tout instant}).\]
+    Règles : concentrations en mol/L, coefficients stœchiométriques en <b>puissances</b>, le <b>solvant et les
+    solides comptent pour 1</b>. Sens d'évolution : \(Q<K\) → sens direct ; \(Q>K\) → sens indirect ; \(Q=K\) →
+    équilibre.</div>
+
+    <h3>1.2 Autoprotolyse de l'eau — produit ionique \(K_e\)</h3>
+    <div class="thm"><span class="lab">Équilibre de l'eau</span>
+    \[2\,\text H_2\text O=\text H_3\text O^++\text{HO}^-,\qquad
+    \boxed{K_e=[\text H_3\text O^+][\text{HO}^-]=10^{-14}}\ (25\,°\text C).\]
+    D'où \(\text{pH}+\text{pOH}=14\). Tout solvant contenant un proton peut s'autoprotolyser (méthanol, ammoniac
+    liquide…), avec son propre produit ionique.</div>
+
+    <h3>1.3 Couples acide/base et constante d'acidité</h3>
+    <div class="def"><span class="lab">Couple \(\text{AH}/\text A^-\)</span>
+    <b>Équilibre de Brønsted</b> (acide faible sur l'eau) : \(\text{AH}+\text H_2\text O=\text A^-+\text H_3\text O^+\),
+    d'où \[K_A=\frac{[\text A^-][\text H_3\text O^+]}{[\text{AH}]},\qquad \text pK_A=-\log K_A.\]
+    Couples de l'eau : \(\text H_3\text O^+/\text H_2\text O\) (\(\text pK_A=0\)) et \(\text H_2\text O/\text{HO}^-\)
+    (\(\text pK_A=14\)). Un <b>acide fort</b> se dissocie totalement : \([\text{AH}]=0\), il n'a <b>pas</b> de
+    \(\text pK_A\) (division par 0).</div>
+
+    <h3>1.4 pH des acides et bases forts</h3>
+    <div class="method"><span class="lab">Dissociation totale</span>
+    <ul style="margin:.2rem 0">
+      <li><b>Acide fort</b> de concentration \(C\) : \([\text H_3\text O^+]=C\) (×2 pour un diacide fort comme
+      \(\text H_2\text{SO}_4\)), \(\text{pH}=-\log C\).</li>
+      <li><b>Base forte</b> : \([\text{HO}^-]=C\) (×2 pour \(\text{Ba(OH)}_2\)), puis
+      \([\text H_3\text O^+]=\frac{K_e}{[\text{HO}^-]}\), \(\text{pH}=14+\log[\text{HO}^-]\).</li>
+      <li>Mélange acide fort + base forte : \(\text H_3\text O^++\text{HO}^-\to 2\,\text H_2\text O\) (totale), on
+      fait le bilan des quantités de matière.</li>
+    </ul></div>
+
+    <h3>1.5 pH des acides et bases faibles</h3>
+    <div class="thm"><span class="lab">Formules (dissociation faible, \(K_e\) négligé)</span>
+    <div class="overflow">
+    <table>
+      <tr><th>Solution</th><th>pH</th></tr>
+      <tr><td>Acide faible \(\text{AH}\), conc. \(C\)</td><td>\(\text{pH}=\frac12(\text pK_A-\log C)\)</td></tr>
+      <tr><td>Base faible \(\text A^-\), conc. \(C\)</td><td>\(\text{pH}=7+\frac12(\text pK_A+\log C)\)</td></tr>
+      <tr><td>Amphotère (ampholyte)</td><td>\(\text{pH}=\frac12(\text pK_{A1}+\text pK_{A2})\) (indép. de \(C\))</td></tr>
+    </table>
+    </div>
+    Domaine de validité : dissociation faible et concentration « pas trop diluée » (sinon l'autoprotolyse domine et
+    ces formules échouent).</div>
+
+    <h3>1.6 Diagramme de prédominance et règle du \(\Delta\text pK_A\)</h3>
+    <div class="note"><span class="lab">Prédominance</span>
+    Sur un axe des pH : forme <b>acide</b> prédomine si \(\text{pH}<\text pK_A\), forme <b>basique</b> si
+    \(\text{pH}>\text pK_A\), égalité à \(\text{pH}=\text pK_A\). Une réaction acide/base a lieu si l'acide d'un
+    couple rencontre la base d'un couple de \(\text pK_A\) plus grand (formes de prédominance disjointes). Elle est
+    <b>quasi-totale si \(\Delta\text pK_A>4\)</b>, limitée sinon.</div>
+    <div class="note"><span class="lab">Diagramme quantitatif (% des formes)</span>
+    \[\%(\text{AH})=\frac{1}{1+10^{\text{pH}-\text pK_A}},\qquad \%(\text A^-)=\frac{1}{1+10^{\text pK_A-\text{pH}}}.\]
+    Pour un diacide : \(\%(\text{AH}_2)=\dfrac{1}{1+10^{\text{pH}-\text pK_{A1}}+10^{2\text{pH}-\text pK_{A1}-\text pK_{A2}}}\), etc.</div>
+
+    <h3>1.7 Relation de Henderson-Hasselbalch</h3>
+    <div class="thm"><span class="lab">Henderson</span>
+    \[\boxed{\text{pH}=\text pK_A+\log\frac{[\text A^-]}{[\text{AH}]}}\]
+    Se démontre en prenant \(-\log\) de \([\text H_3\text O^+]=K_A\frac{[\text{AH}]}{[\text A^-]}\). Base de tout
+    calcul sur les mélanges tampon.</div>
+
+    <h3>1.8 Solutions tampons</h3>
+    <div class="def"><span class="lab">Tampon</span>
+    Mélange d'un acide faible et de sa base conjuguée en <b>quantités notables</b> (≥ 10 % de chacun) : il
+    <b>résiste</b> aux ajouts d'acide/base et à la dilution. Zone d'efficacité : \(\text pK_A-1<\text{pH}<\text pK_A+1\).
+    Le pH est <b>insensible à la dilution</b> (Henderson : le rapport \([\text A^-]/[\text{AH}]\) est conservé).</div>
+    <div class="method"><span class="lab">Capacité (pouvoir) tampon \(\beta\)</span>
+    Quantité de matière de \(\text H_3\text O^+\) (côté acide) ou \(\text{HO}^-\) (côté basique) qu'il faut ajouter à
+    <b>1 L</b> de tampon pour faire varier le pH d'<b>une unité</b>. Se calcule par un tableau d'avancement entre les
+    deux états. \(\beta\) est <b>maximale et symétrique à \(\text{pH}=\text pK_A\)</b>.</div>
+
+    <h3>1.9 Titrages</h3>
+    <div class="thm"><span class="lab">Équivalence</span>
+    À l'équivalence, les réactifs sont introduits dans les <b>proportions stœchiométriques</b> : \(C_AV_A=C_BV_{eq}\)
+    (pour une réaction 1:1). La réaction support est <b>totale</b>.</div>
+    <div class="method"><span class="lab">Points caractéristiques d'une courbe \(\text{pH}=f(V)\)</span>
+    <div class="overflow">
+    <table>
+      <tr><th>Titrage</th><th>Support</th><th>Initial</th><th>Demi-équiv.</th><th>Équivalence</th></tr>
+      <tr><td>AF par BF</td><td>\(\text H_3\text O^++\text{HO}^-\to2\text H_2\text O\)</td><td>\(-\log C_A\)</td>
+        <td>—</td><td>\(\text{pH}=7\)</td></tr>
+      <tr><td>AFaible par BF</td><td>\(\text{AH}+\text{HO}^-\to\text A^-+\text H_2\text O\)</td>
+        <td>\(\frac12(\text pK_A-\log C)\)</td><td>\(\text{pH}=\text pK_A\)</td>
+        <td>base faible : \(7+\frac12(\text pK_A+\log c)\)</td></tr>
+      <tr><td>BFaible par AF</td><td>\(\text B+\text H_3\text O^+\to\text{BH}^++\text H_2\text O\)</td>
+        <td>\(7+\frac12(\text pK_A+\log C)\)</td><td>\(\text{pH}=\text pK_A\)</td>
+        <td>acide faible : \(\frac12(\text pK_A-\log c)\)</td></tr>
+    </table>
+    </div>
+    <b>Méthode de l'électroneutralité</b> (courbe complète en une équation) : \(\sum\)charges\(^+=\sum\)charges\(^-\),
+    on injecte \(K_e\) et on résout l'équation du 2ⁿᵈ degré en \(h=[\text H_3\text O^+]\) :
+    \(h^2+\alpha h-K_e=0\) avec \(\alpha=\frac{C_BV_B-C_AV_A}{V_A+V_B}\), racine positive
+    \(h=\frac{-\alpha+\sqrt{\alpha^2+4K_e}}{2}\).</div>
+    <div class="note"><span class="lab">Polyacides</span>
+    Un diacide (2 acidités titrables) donne <b>deux sauts</b> au même écart de volume ; un mélange acide fort + acide
+    faible donne aussi deux sauts mais de volumes différents. Un diacide dont la 1ʳᵉ acidité est forte
+    (\(\text H_2\text{SO}_4\) : les deux fortes → un seul saut).</div>
+  </section>
+
+  <!-- ======================= EXERCICES CRÉÉS ======================= -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+    <p class="lead">Trois exercices originaux : pH d'un acide faible et vérification, préparation d'un tampon,
+    et point d'équivalence d'un titrage acide faible / base forte.</p>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice A — pH de l'acide benzoïque <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">L'acide benzoïque (\(\text pK_A=4{,}19\)) est en solution à \(C=0{,}020\)&nbsp;mol/L.
+        Calculer le pH et vérifier que la dissociation est bien faible.</p>
+        <p class="q">1) pH</p>
+        <p>Acide faible : \(\text{pH}=\frac12(\text pK_A-\log C)=\frac12(4{,}19-\log 0{,}02)=\frac12(4{,}19+1{,}70)=2{,}9\).</p>
+        <p class="q">2) Vérification</p>
+        <p>\([\text H_3\text O^+]=10^{-2,9}=1{,}3\cdot10^{-3}\)&nbsp;mol/L, à comparer à \(C=2\cdot10^{-2}\) :
+        taux de dissociation \(\alpha=\frac{1{,}3\cdot10^{-3}}{2\cdot10^{-2}}=6{,}5\%<10\%\).</p>
+        <div class="res">\(\text{pH}\approx2{,}9\) ; dissociation \(\approx6{,}5\%\), l'hypothèse « acide faible peu
+        dissocié » est valide.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice B — Préparer un tampon à pH = 5,0 <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Préparer 500&nbsp;mL de tampon \(\text{pH}=5{,}0\), concentration totale
+        \(C=0{,}20\)&nbsp;mol/L, avec le couple acide éthanoïque/éthanoate (\(\text pK_A=4{,}75\)).</p>
+        <p class="q">1) Rapport des formes (Henderson)</p>
+        <p>\(\log\frac{[\text A^-]}{[\text{AH}]}=\text{pH}-\text pK_A=0{,}25\Rightarrow\frac{[\text A^-]}{[\text{AH}]}=10^{0,25}=1{,}78\).</p>
+        <p class="q">2) Concentrations</p>
+        <p>\([\text{AH}]+[\text A^-]=0{,}20\) et \([\text A^-]=1{,}78[\text{AH}]\Rightarrow[\text{AH}](1+1{,}78)=0{,}20\Rightarrow
+        [\text{AH}]=0{,}072\)&nbsp;mol/L, \([\text A^-]=0{,}128\)&nbsp;mol/L.</p>
+        <p class="q">3) Quantités dans 500 mL</p>
+        <div class="res">\(n_{\text{AH}}=0{,}072\times0{,}5=0{,}036\)&nbsp;mol d'acide éthanoïque et
+        \(n_{\text A^-}=0{,}128\times0{,}5=0{,}064\)&nbsp;mol d'éthanoate de sodium à dissoudre.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice C — Équivalence d'un titrage acide faible / soude <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">On titre \(V_A=20\)&nbsp;mL d'acide propanoïque (\(\text pK_A=4{,}87\)),
+        \(C_A=0{,}10\)&nbsp;mol/L, par la soude \(C_B=0{,}10\)&nbsp;mol/L. Volume et pH à l'équivalence ?</p>
+        <p class="q">1) Volume équivalent</p>
+        <p>\(C_AV_A=C_BV_{eq}\Rightarrow V_{eq}=\frac{0{,}10\times20}{0{,}10}=20\)&nbsp;mL.</p>
+        <p class="q">2) pH à l'équivalence</p>
+        <p>À l'équivalence il ne reste que la base conjuguée (propanoate). Concentration :
+        \(c=\frac{C_AV_A}{V_A+V_{eq}}=\frac{0{,}10\times20}{40}=0{,}050\)&nbsp;mol/L. Base faible :
+        \(\text{pH}=7+\frac12(\text pK_A+\log c)=7+\frac12(4{,}87-1{,}30)=8{,}8\).</p>
+        <div class="res">\(V_{eq}=20\)&nbsp;mL ; \(\text{pH}_{eq}\approx8{,}8\) (basique, caractéristique d'un titrage
+        acide faible/base forte).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CORRECTION TD ======================= -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD</h2>
+    <p class="lead">TD chimie 1 — Acides et bases (VG, 2025/2026) : 34 exercices d'application (EC) et 28 exercices
+    d'entraînement, chaque question traitée. Données de \(\text pK_A\) : voir la <a href="#pka">table</a>.</p>
+
+    <h3>Partie A — Révisions</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 1 — Définition de l'avancement <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">1–3) Généralités</p>
+        <p>À l'état initial \(\xi=0\)&nbsp;mol. Il n'y a pas de règle générale pour \(\xi_{fin}\) car il dépend des
+        quantités de réactifs (limitant). Pour une réaction totale, \(\xi\) <b>croît</b> avec le temps, de 0 à
+        \(\xi_{fin}\).</p>
+        <p class="q">4) \(\text A+2\text B\to3\text C\), 2 mol de C formées</p>
+        <p>\(\xi=\frac{n_C-n_C^{ini}}{\nu_C}=\frac{2-0}{3}=0{,}67\)&nbsp;mol.</p>
+        <p class="q">5) 2 mol A, 1 mol B ; moitié de A puis moitié de B disparue</p>
+        <p>Moitié de A : \(\xi=\frac{\frac12\times2}{1}=1\)&nbsp;mol. Moitié de B :
+        \(\xi=\frac{\frac12\times1}{2}=0{,}25\)&nbsp;mol.</p>
+        <p class="q">6) Avancement volumique (\(V=50\)&nbsp;mL)</p>
+        <div class="res">\(x=\frac{\xi}{V}=\frac{0{,}25}{50\cdot10^{-3}}=5\)&nbsp;mol/L.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 2 — Charge des ions <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p>Le composé est électriquement neutre.</p>
+        <div class="res">FeCl₃ → \(\text{Fe}^{3+}\) (fer III) · FeCl₂ → \(\text{Fe}^{2+}\) (fer II) · Na₂SO₄ →
+        \(\text{SO}_4^{2-}\) (sulfate) · KNO₃ → \(\text{NO}_3^-\) (nitrate).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 3 — Écriture des constantes d'équilibre <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p>Produits/réactifs à l'équilibre, coefficients en puissances, solvant et solides = 1.</p>
+        <p>\(K_1=\dfrac{[\text C_2\text O_4^{2-}][\text H_3\text O^+]^2}{[\text H_2\text C_2\text O_4]}\) ;
+        \(K_2=\dfrac{[\text{ClO}_3^-]^2[\text{Cl}^-]}{[\text{ClO}_2^-]^3}\) ; \(K_3=\dfrac{1}{K_2}\) ;
+        \(K_4=\dfrac{1}{[\text H_3\text O^+][\text{HO}^-]}\) ; \(K_5=\dfrac{[\text{Zn}^{2+}]}{[\text{Cu}^{2+}]}\)
+        (métaux solides = 1) ; \(K_6=1\) (solvant/solide).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 4 — Fe(OH)₂ se forme-t-il ? <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(\text{Fe}^{2+}+2\text{HO}^-=\text{Fe(OH)}_2(s)\), \(K=10^{17}\), \(\text{pH}=7\)
+        (\([\text{HO}^-]=10^{-7}\)).</p>
+        <p>\(K=\dfrac{1}{[\text{Fe}^{2+}][\text{HO}^-]^2}\), \(Q\) même forme (état initial). Sens direct si \(Q<K\) :</p>
+        \[[\text{Fe}^{2+}]>\frac{1}{K[\text{HO}^-]^2}=\frac{1}{10^{17}(10^{-7})^2}=10^{-3}\ \text{mol/L}.\]
+        <div class="res">La précipitation a lieu dès que \([\text{Fe}^{2+}]>10^{-3}\)&nbsp;mol/L.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 1 &amp; EC 2 — Réaction (presque) totale de l'eau <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Mélange \(V_A=100\)&nbsp;mL (\(n_A=0{,}01\)&nbsp;mol \(\text H_3\text O^+\)) et
+        \(V_B=100\)&nbsp;mL (\(C_B=0{,}001\)&nbsp;mol/L \(\text{HO}^-\)) ; \(2\text H_2\text O=\text H_3\text O^++\text{HO}^-\),
+        \(K=10^{-14}\).</p>
+        <p class="q">EC1 — Sans réaction / sens</p>
+        <p>Dilution : \([\text H_3\text O^+]_i=\frac{0{,}01}{0{,}2}=5\cdot10^{-2}\),
+        \([\text{HO}^-]_i=\frac{0{,}001\times0{,}1}{0{,}2}=5\cdot10^{-4}\)&nbsp;mol/L.
+        \(Q=\frac{1}{[\text H_3\text O^+][\text{HO}^-]}=4\cdot10^{4}\gg K\) : hors équilibre, la réaction évolue en
+        sens <b>indirect</b> (les ions se recombinent en eau).</p>
+        <p class="q">EC1 — Avancement</p>
+        <p>Tableau d'avancement (sens de recombinaison), \([\text H_3\text O^+][\text{HO}^-]=K_e=10^{-14}\) :
+        \((5\cdot10^{-2}-x)(5\cdot10^{-4}-x)=10^{-14}\). En négligeant \(10^{-14}\) :
+        \(x=5\cdot10^{-4}\)&nbsp;mol/L (réactif limitant \(\text{HO}^-\)). La réaction est <b>quasi-totale</b>.</p>
+        <p class="q">EC2 — Méthode « totale puis équilibre »</p>
+        <p>Réaction totale : \(\xi=n_{\text{HO}^-}^{ini}=10^{-4}\)&nbsp;mol.
+        \(n_{\text H_3\text O^+}=10^{-2}-10^{-4}=9{,}9\cdot10^{-3}\)&nbsp;mol donc
+        \([\text H_3\text O^+]=\frac{9{,}9\cdot10^{-3}}{0{,}2}\). Puis
+        \([\text{HO}^-]=\frac{K_e}{[\text H_3\text O^+]}=2{,}0\cdot10^{-13}\)&nbsp;mol/L (≈ 0).</p>
+        <div class="res">La réaction acide fort / base forte est bien <b>quasi-totale</b> ; il subsiste une trace
+        d'ions par autoprotolyse.</div>
+      </div>
+    </div>
+
+    <h3>Partie B — Autoprotolyse</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 5 &amp; EC 3 — Autoprotolyse d'autres solvants <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 5 — Équations et produits ioniques</p>
+        <p>\(2\text{CH}_3\text{OH}=\text{CH}_3\text O^-+\text{CH}_3\text{OH}_2^+\) ;
+        \(2\text C_2\text H_5\text{OH}=\text C_2\text H_5\text O^-+\text C_2\text H_5\text{OH}_2^+\) ;
+        \(2\text{CH}_3\text{COOH}=\text{CH}_3\text{COO}^-+\text{CH}_3\text{COOH}_2^+\) ;
+        \(2\text{NH}_3=\text{NH}_2^-+\text{NH}_4^+\) ;
+        \(2\text H_2\text{SO}_4=\text{HSO}_4^-+\text H_3\text{SO}_4^+\). Produit ionique = produit des deux
+        concentrations d'ions.</p>
+        <p class="q">EC 3 — Ammoniac liquide (\(K_{amm}=10^{-32}\) à −33 °C)</p>
+        <p>Dans l'ammoniac pur \([\text{NH}_4^+]=[\text{NH}_2^-]\) (autoprotolyse à l'équilibre), donc
+        \([\text{NH}_4^+]=\sqrt{K_{amm}}=10^{-16}\)&nbsp;mol/L. Avec \(\text{pH}=-\log[\text{NH}_4^+]\) :
+        \(\text{pH}_{pur}=16\). À \(\text{pH}=13<16\) la solution est <b>acide</b>. Définition identique à l'eau :
+        \(\text{pH}=-\log[\text H^+_{solvaté}]\).</p>
+      </div>
+    </div>
+
+    <h3>Partie C — Réactions acide/base et couples</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 6 + EC 4 + EC 5 — Couples, Brønsted, \(\text pK_A\) de l'eau <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 6 — Couples de l'eau</p>
+        <p>Acide conjugué de \(\text H_2\text O\) : \(\text H_3\text O^+\) ; base conjuguée : \(\text{HO}^-\).
+        \(2\text H_2\text O=\text H_3\text O^++\text{HO}^-\), \(K_e=[\text H_3\text O^+][\text{HO}^-]=10^{-14}\).</p>
+        <p class="q">EC 4 — Équilibres de Brønsted</p>
+        <p>Forme générale \(\text{AH}+\text H_2\text O=\text A^-+\text H_3\text O^+\), \(K_A=\frac{[\text A^-][\text H_3\text O^+]}{[\text{AH}]}\).
+        Ex : \(\text{HCOOH}\to\text{HCOO}^-\) ; \(\text{HCN}\to\text{CN}^-\) ;
+        \(\text{NH}_4^+\to\text{NH}_3\) ; \(\text{HF}\to\text F^-\). Pour une base \(\text B\), on écrit l'équilibre
+        de son acide conjugué \(\text{BH}^+\).</p>
+        <p class="q">EC 5 — \(\text pK_A\) des couples de l'eau</p>
+        <p>\(\text H_3\text O^+/\text H_2\text O\) : \(K_A=1\Rightarrow\text pK_A=0\).
+        \(\text H_2\text O/\text{HO}^-\) : \(K_A=[\text{HO}^-][\text H_3\text O^+]=K_e=10^{-14}\Rightarrow\text pK_A=14\).
+        Toute espèce aqueuse a donc un \(\text pK_A\) entre 0 et 14.</p>
+      </div>
+    </div>
+
+    <h3>Partie D — Acides et bases forts</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 6 + EC 7 + Exercice 7 — pH de solutions fortes <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">EC 6 — Acide sulfurique (\(n=0{,}015\)&nbsp;mol dans 600 mL)</p>
+        <p>\(C=\frac{0{,}015}{0{,}6}=0{,}025\)&nbsp;mol/L. \(\text H_2\text{SO}_4+2\text H_2\text O\to2\text H_3\text O^++\text{SO}_4^{2-}\)
+        (diacide fort) : \([\text H_3\text O^+]=2C=0{,}050\)&nbsp;mol/L, \(\text{pH}=-\log0{,}05=1{,}30\).</p>
+        <p class="q">EC 7 — Soude (8 g dans 100 mL, \(M=40\))</p>
+        <p>\([\text{HO}^-]=\frac{8/40}{0{,}1}=2\)&nbsp;mol/L,
+        \([\text H_3\text O^+]=\frac{K_e}{2}=5\cdot10^{-15}\), \(\text{pH}=14{,}3\). Déboucheur à 200 g/L :
+        \(\text{pH}=14{,}7\).</p>
+        <p class="q">Ex 7 — pH de bases fortes</p>
+        <p>NaOH 2,0 g / 500 mL : \([\text{HO}^-]=\frac{2/40}{0{,}5}=0{,}10\Rightarrow\text{pH}=13\).
+        Ba(OH)₂ 2,0 g / 200 mL (\(M=171\), dibasique) : \([\text{HO}^-]=2\times\frac{2/171}{0{,}2}=0{,}117\Rightarrow
+        \text{pH}=13{,}1\). Eau de chaux (CaO, sat. 1,65 g/L, \(M=56{,}1\)) : \([\text{HO}^-]=2\times0{,}0294\Rightarrow
+        \text{pH}=12{,}8\), donc \(\text{pH}\in[7\,;\,12{,}8]\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 8 + Exercice 8 + EC 9 — Diacide fort, absence de \(\text pK_A\), HCl+soude <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">EC 8 — Diacide fort neutralisé</p>
+        <p>\(0{,}05\)&nbsp;mol \(\text H_2\text{SO}_4\) (→ \(0{,}10\)&nbsp;mol \(\text H_3\text O^+\)) + \(0{,}025\)&nbsp;mol
+        NaOH (→ \(0{,}025\)&nbsp;mol \(\text{HO}^-\)) dans \(V=250\)&nbsp;mL.
+        \(\text H_3\text O^++\text{HO}^-\to2\text H_2\text O\), reste \(0{,}075\)&nbsp;mol \(\text H_3\text O^+\) :
+        \(\text{pH}=-\log\frac{0{,}075}{0{,}250}=0{,}52\). Ion sulfate spectateur : \(0{,}05\)&nbsp;mol inchangé.</p>
+        <p class="q">Ex 8 — Pourquoi un acide fort n'a pas de \(\text pK_A\)</p>
+        <p>Fort ⇒ dissociation totale ⇒ \([\text{AH}]=0\) ⇒ \(K_A=\frac{[\text A^-][\text H_3\text O^+]}{0}\) non
+        défini.</p>
+        <p class="q">EC 9 — HCl + soude</p>
+        <p>\(n_A=0{,}4\times0{,}05=0{,}020\), \(n_B=0{,}1\times0{,}15=0{,}015\)&nbsp;mol.
+        Reste \(0{,}005\)&nbsp;mol \(\text H_3\text O^+\) : \(\text{pH}=-\log\frac{5\cdot10^{-3}}{0{,}5}=2{,}0\).
+        Spectateurs : \([\text{Cl}^-]=0{,}040\), \([\text{Na}^+]=0{,}030\)&nbsp;mol/L.
+        \([\text{HO}^-]=\frac{K_e}{[\text H_3\text O^+]}=10^{-12}\)&nbsp;mol/L (≈ 0).</p>
+      </div>
+    </div>
+
+    <h3>Partie E — Acides et bases faibles</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 10 + EC 11 — Diagramme de prédominance (qualitatif &amp; quantitatif) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Couple \(\text{CH}_3\text{COOH}/\text{CH}_3\text{COO}^-\), \(\text pK_A=4{,}8\).</p>
+        <p class="q">EC 10 — La réaction a-t-elle lieu ? (règle : acide d'un couple + base d'un couple de \(\text pK_A\) plus grand)</p>
+        <p>\(+\text{NH}_3\) (\(\text pK_A=9{,}3\)) : <b>oui</b>, \(\text{CH}_3\text{COOH}+\text{NH}_3\to\text{CH}_3\text{COO}^-+\text{NH}_4^+\).
+        \(+\text{HF}\) : non (deux acides). \(+\text{CH}_3\text{COO}^-\) : non (même couple).
+        \(+\text H_3\text O^+\) : non (deux acides). \(+\text{HO}^-\) : oui. \(+\text H_2\text O\) : non (l'eau
+        amphotère ne réagit ni comme acide ni comme base ici). \(\text{CH}_3\text{COO}^-+\text{NH}_3\) : non (deux
+        bases). \(+\text H_3\text{BO}_3\) : non. \(+\text H_3\text O^+\) : oui. \(+\text{HO}^-\) : non (deux bases).</p>
+        <p class="q">EC 11 — Totale ou limitée ? (\(\Delta\text pK_A>4\) ⇒ totale)</p>
+        <p>\(+\text{NH}_3\) : \(\Delta=4{,}5\) → quasi-totale. \(+\text{HO}^-\) : \(\Delta=9{,}2\) → totale.
+        \(+\text{CO}_3^{2-}\) (\(\text pK_A=10{,}2\)) : \(\Delta=5{,}4\) → totale.
+        \(+\text{HCO}_3^-\) (couple \(\text H_2\text{CO}_3/\text{HCO}_3^-\), \(\text pK_A=6{,}1\)) : \(\Delta=1{,}4\)
+        → <b>limitée</b> (équilibre). \(\text{CH}_3\text{COO}^-+\text H_3\text O^+\) : \(\Delta=4{,}8\) → quasi-totale.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 12 + EC 13 — Polyacides : espèces et équilibres <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">EC 12 — Acide phosphorique \(\text H_3\text{PO}_4\) (triacide)</p>
+        <p>Espèces : \(\text H_3\text{PO}_4\) ; \(\text H_2\text{PO}_4^-\) ; \(\text{HPO}_4^{2-}\) ; \(\text{PO}_4^{3-}\).
+        Amphotères (dans 2 couples) : \(\text H_2\text{PO}_4^-\) et \(\text{HPO}_4^{2-}\). Trois équilibres de
+        Brønsted successifs, chacun libérant un \(\text H_3\text O^+\).</p>
+        <p class="q">EC 13 — Acide oxalique \(\text H_2\text C_2\text O_4\) (diacide)</p>
+        <p>Espèces : \(\text H_2\text C_2\text O_4\) ; \(\text{HC}_2\text O_4^-\) ; \(\text C_2\text O_4^{2-}\).
+        Amphotère : \(\text{HC}_2\text O_4^-\). Deux couples ⇒ deux \(\text pK_A\), diagramme de prédominance à
+        deux frontières.</p>
+      </div>
+    </div>
+
+    <h3>Partie F — pH d'acides et bases faibles</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 14–18 + Exercice 9 — Applications directes des formules <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">EC 14 — Ammoniac (base faible, \(\text pK_A=9{,}24\), \(C=0{,}50\))</p>
+        <p>\(\text{pH}=7+\frac12(\text pK_A+\log C)=7+\frac12(9{,}24-0{,}30)=11{,}47\).</p>
+        <p class="q">EC 15 — Vinaigre (\(\text{CH}_3\text{COOH}\), \(\text pK_A=4{,}8\), \(C=0{,}50\))</p>
+        <p>\(\text{pH}=\frac12(\text pK_A-\log C)=2{,}55\). Dilué ×5 : \(\text{pH}=2{,}9\). Une goutte (0,05 mL) dans
+        1 L : \(C=2{,}5\cdot10^{-5}\Rightarrow\text{pH}=4{,}7\) — <b>invraisemblable</b> : la formule atteint ses
+        limites de validité (autoprotolyse négligée à tort).</p>
+        <p class="q">EC 16 — Éthanoate de sodium (base faible, \(C=0{,}10\))</p>
+        <p>\(\text{CH}_3\text{COONa}\to\text{CH}_3\text{COO}^-+\text{Na}^+\) (Na⁺ spectateur, éthanoate = base).
+        \(\text{pH}=7+\frac12(4{,}8-1)=8{,}9\).</p>
+        <p class="q">EC 17 — Phénol (\(\text pK_A=9{,}98\), \(C=10^{-4}\))</p>
+        <p>\(\text{pH}=\frac12(9{,}98+4)=6{,}99\) (à peine acide, très faible acide très dilué).</p>
+        <p class="q">EC 18 &amp; Ex 9 — Amphotères</p>
+        <p>Acide carbonique (\(\text pK_{A1}=6{,}35\), \(\text pK_{A2}=10{,}33\)) : amphotère \(\text{HCO}_3^-\),
+        \(\text{pH}=\frac12(\text pK_{A1}+\text pK_{A2})=8{,}34\) (indép. de \(C\)). Sulfure d'hydrogène
+        (\(7{,}02\) ; \(13{,}9\)) : amphotère \(\text{HS}^-\), \(\text{pH}=\frac12(7{,}02+13{,}9)=10{,}46\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 19 — Comparaison de pH d'acides différents <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p>À concentration égale, l'<b>acide fort</b> (dissociation totale) a un pH plus bas que l'acide faible ; un
+        <b>diacide fort</b> (H₂SO₄) libère 2× plus de \(\text H_3\text O^+\).</p>
+        <p>Cas nécessitant un calcul (3) : HCl 0,01 → \(\text{pH}=2\) ; \(\text{CH}_3\text{COOH}\) 0,1 →
+        \(\text{pH}=\frac12(4{,}8+1)=2{,}9\). Donc HCl reste plus acide malgré une concentration 10× plus faible.</p>
+        <p>Cas (6) : HCl 0,2 vs H₂SO₄ 0,1 → même pH (le diacide 2× moins concentré libère 2× plus d'ions). Cas (7) :
+        deux acides forts de même concentration → même pH.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 10, 11, 12 — Démonstrations des formules de pH <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 10 — Acide faible : \(\text{pH}=\frac12(\text pK_A-\log C)\)</p>
+        <p>\(K_A=\frac{[\text H_3\text O^+][\text A^-]}{[\text{AH}]}\). En négligeant \([\text H_3\text O^+]_{ini}\) :
+        \([\text A^-]=[\text H_3\text O^+]\), donc \([\text H_3\text O^+]=\sqrt{[\text{AH}]K_A}\). Dissociation faible :
+        \(C\approx[\text{AH}]\), d'où \([\text H_3\text O^+]=\sqrt{CK_A}\) et en prenant \(-\log\) :
+        \(\text{pH}=\frac12(\text pK_A-\log C)\).</p>
+        <p class="q">Ex 11 — Base faible : \(\text{pH}=7+\frac12(\text pK_A+\log C)\)</p>
+        <p>\(\text B+\text H_2\text O=\text{BH}^++\text{HO}^-\), \([\text{BH}^+]=[\text{HO}^-]=\frac{K_e}{[\text H_3\text O^+]}\).
+        En injectant dans \(K_A=\frac{[\text H_3\text O^+][\text B]}{[\text{BH}^+]}\) avec \([\text B]\approx C\) :
+        \([\text H_3\text O^+]=\sqrt{\frac{K_eK_A}{C}}\), d'où \(\text{pH}=7+\frac12(\text pK_A+\log C)\).</p>
+        <p class="q">Ex 12 — Amphotère : \(\text{pH}=\frac12(\text pK_{A1}+\text pK_{A2})\)</p>
+        <p>Conservation \(C=[\text{AH}_2]+[\text{AH}^-]+[\text A^{2-}]\) et électroneutralité. En négligeant
+        \([\text{HO}^-]\) et \([\text H_3\text O^+]\), on obtient \([\text A^{2-}]=[\text{AH}_2]\). Les deux \(K_A\)
+        donnent \([\text H_3\text O^+]^2=K_{A1}K_{A2}\), d'où le résultat (indépendant de \(C\)).</p>
+      </div>
+    </div>
+
+    <h3>Partie G — Henderson</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 13 + EC 20 + EC 21 — Henderson et applications <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 13 — Démonstration</p>
+        <p>De \(K_A=\frac{[\text H_3\text O^+][\text A^-]}{[\text{AH}]}\) on tire
+        \([\text H_3\text O^+]=K_A\frac{[\text{AH}]}{[\text A^-]}\), puis \(-\log\) :
+        \(\text{pH}=\text pK_A+\log\frac{[\text A^-]}{[\text{AH}]}\).</p>
+        <p class="q">EC 20 — Acide nitreux (\(\text pK_A=3{,}15\), \([\text{HNO}_2]=[\text{NO}_2^-]/10\))</p>
+        <p>\(\text{pH}=3{,}15+\log(10)=4{,}15\).</p>
+        <p class="q">EC 21 — Ion pyridinium (\(\text pK_A=5{,}22\))</p>
+        <p>Avec \([\text C_5\text H_5\text N]=3{,}0\cdot10^{-4}\), \([\text C_5\text H_5\text{NH}^+]=2{,}0\cdot10^{-6}\) :
+        \(\text{pH}=5{,}22+\log\frac{3\cdot10^{-4}}{2\cdot10^{-6}}=7{,}4\). Pour \(C=0{,}020\) à \(\text{pH}=7\) :
+        \([\text C_5\text H_5\text{NH}^+]=\frac{C}{10^{\text{pH}-\text pK_A}+1}=3{,}3\cdot10^{-4}\)&nbsp;mol/L,
+        \([\text C_5\text H_5\text N]=1{,}97\cdot10^{-2}\)&nbsp;mol/L.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 22 + Exercice 14 — Mélanges : à l'équilibre ? <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">EC 22 — Acide borique (\(\text pK_A=9{,}24\))</p>
+        <p>0,030 mol \(\text H_3\text{BO}_3\) + 0,010 mol \(\text{NaH}_2\text{BO}_3\) + 0,0025 mol HCl dans 1 L. Le
+        H₃O⁺ de HCl consomme la base : \(n_B=10^{-2}-2{,}5\cdot10^{-3}=7{,}5\cdot10^{-3}\),
+        \(n_A=3\cdot10^{-2}+2{,}5\cdot10^{-3}=3{,}25\cdot10^{-2}\).
+        \(\text{pH}=9{,}24+\log\frac{7{,}5\cdot10^{-3}}{3{,}25\cdot10^{-2}}=8{,}6\Rightarrow[\text H_3\text O^+]=2{,}5\cdot10^{-9}\).
+        \(Q=K_A=5{,}8\cdot10^{-10}\) : le mélange est <b>à l'équilibre</b>.</p>
+        <p class="q">Ex 14 — Éthylammonium (\(\text pK_A=10{,}64\))</p>
+        <p>\(\text C_2\text H_5\text{NH}_3\text{Cl}\to\text C_2\text H_5\text{NH}_3^++\text{Cl}^-\), base conjuguée
+        \(\text C_2\text H_5\text{NH}_2\). Constante de \(\text{BH}^++\text{HO}^-=\text B+\text H_2\text O\) :
+        \(K=\frac{K_A}{K_e}=\frac{10^{-10,64}}{10^{-14}}=2{,}3\cdot10^{3}\).
+        \(Q_i=\frac{0{,}02}{0{,}01\times0{,}002}=10^{3}\) : facteur 2 de \(K\), <b>presque à l'équilibre</b>.</p>
+      </div>
+    </div>
+
+    <h3>Partie H — Diagrammes de prédominance</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 15 + EC 23 + EC 24 + Exercice 16 — Prédominance qualitative et quantitative <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 15 — Henderson et diagramme</p>
+        <p>\([\text A^-]=10^{\text{pH}-\text pK_A}[\text{AH}]\) : à \(\text{pH}=\text pK_A\), \([\text A^-]=[\text{AH}]\) ;
+        à \(\text{pH}>\text pK_A\), \([\text A^-]>[\text{AH}]\) (base prédomine à droite).</p>
+        <p class="q">EC 23 — Applications</p>
+        <p>Pour tout couple : égalité à \(\text{pH}=\text pK_A\), forme acide si \(\text{pH}<\text pK_A\). « Solution
+        acide » signifie \(\text{pH}<7\), donc comparer 7 au \(\text pK_A\) du couple.</p>
+        <p class="q">EC 24 — Diagramme quantitatif</p>
+        <p>\(\%(\text{AH})=\frac{1}{1+10^{\text{pH}-\text pK_A}}\). À \(\text pK_A\pm1\) :
+        \(\frac{1}{1+10^{-1}}=91\%\) et \(\frac{1}{1+10^{+1}}=9\%\). La forme acide ne s'annule jamais exactement
+        (tend vers 0).</p>
+        <p class="q">Ex 16 — Diacide</p>
+        <p>\(\%(\text{AH}_2)=\frac{1}{1+10^{\text{pH}-\text pK_{A1}}+10^{2\text{pH}-\text pK_{A1}-\text pK_{A2}}}\),
+        et de même pour \(\text{AH}^-\) (terme central) et \(\text A^{2-}\). Trois cloches successives sur l'axe des
+        pH (avec \(\text pK_{A1}=3\), \(\text pK_{A2}=10\)).</p>
+      </div>
+    </div>
+
+    <h3>Partie I — Solutions tampons</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 17 + Exercice 18 — Zone tampon et résistance à la dilution <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 17 — Quantité notable</p>
+        <p>10 % de chaque forme ⇔ \(\text pK_A-1<\text{pH}<\text pK_A+1\). Vérification Henderson :
+        \(\text{pH}=\text pK_A+\log\frac{0{,}1}{0{,}9}=\text pK_A-0{,}95\) (et symétrique \(+0{,}95\)).</p>
+        <p class="q">Ex 18 — Résistance à la dilution</p>
+        <p>En diluant, \([\text A^-]\) et \([\text{AH}]\) sont multipliés par le même facteur \(V_i/V_f\) :
+        \(\text{pH}=\text pK_A+\log\frac{[\text A^-]_i(V_i/V_f)}{[\text{AH}]_i(V_i/V_f)}=\text pK_A+\log\frac{[\text A^-]_i}{[\text{AH}]_i}\)
+        <b>inchangé</b>.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 25 + EC 26 — Préparation d'un tampon (qualitatif &amp; quantitatif) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">EC 25 — Choix qualitatif</p>
+        <p>Tampon \(\text{pH}=4{,}3\) : couple tel que \(3{,}3<\text pK_A<5{,}3\), l'éthanoïque (\(4{,}75\)) convient.
+        Éthanoïque + HCl : non (pas de base conjuguée). Éthanoïque + soude : oui (la soude crée la base conjuguée
+        dans les bonnes proportions). Tampon \(\text{pH}=3{,}75\) à partir de 1 mol HCOOH : il faut
+        \([\text{HCOO}^-]=[\text{HCOOH}]\) (car \(\text{pH}=\text pK_A\)), donc <b>0,5 mol de soude</b>. Si on part de
+        0,12 mol méthanoate : ajouter <b>0,06 mol d'acide fort</b>.</p>
+        <p class="q">EC 26 — Quantitatif (250 mL, \(\text{pH}=4{,}0\), \(C=0{,}10\), \(\text pK_A=4{,}75\))</p>
+        <p>\([\text{CH}_3\text{COOH}]=\frac{C}{1+10^{\text{pH}-\text pK_A}}=\frac{0{,}10}{1+10^{-0,75}}=0{,}085\)&nbsp;mol/L,
+        \([\text{CH}_3\text{COO}^-]=0{,}015\)&nbsp;mol/L. Masses (M = 60 et 82 g/mol) :
+        \(m_{acide}=0{,}085\times0{,}25\times60=1{,}3\)&nbsp;g, \(m_{base}=0{,}015\times0{,}25\times82\approx0{,}31\)&nbsp;g.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 27 + Exercice 19 — Capacité tampon <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">EC 27 — Méthode (ammoniac \(\text pK_A=9{,}3\), \(C=0{,}10\), \(\text{pH}=9{,}0\))</p>
+        <p>\([\text{NH}_4^+]=\frac{C}{1+10^{\text{pH}-\text pK_A}}\) : à pH 9,0 → \(0{,}067\) ; pH 8,0 → \(0{,}095\) ;
+        pH 10,0 → \(0{,}017\)&nbsp;mol/L (et \([\text{NH}_3]=C-[\text{NH}_4^+]\)). Par tableau d'avancement
+        (\(\text{NH}_3+\text H_3\text O^+\to\text{NH}_4^+\)) pour passer de pH 9 à 8 :
+        \(\beta_{acide}=0{,}028\)&nbsp;mol. Côté basique (pH 9→10) : \(\beta_{basique}=0{,}050\)&nbsp;mol. La capacité
+        est <b>asymétrique</b> hors de \(\text pK_A\).</p>
+        <p class="q">Ex 19 — Capacité (\(\text{CH}_3\text{COOH}/\text{COO}^-\), \(\text pK_A=4{,}8\))</p>
+        <p>(1) 0,25 mol acide + 0,10 mol base (\(\text{pH}=4{,}4\), \(C=0{,}35\)) : par tableaux d'avancement
+        \(\beta_{acide}=0{,}090\)&nbsp;mol, \(\beta_{basique}=0{,}18\)&nbsp;mol (asymétrique). (2) 0,175 mol de chaque
+        (donc \(\text{pH}=\text pK_A\)) : \(\beta_{acide}=\beta_{basique}=0{,}143\)&nbsp;mol — <b>symétrique et
+        maximale</b> à \(\text{pH}=\text pK_A\).</p>
+      </div>
+    </div>
+
+    <h3>Partie J — Titrages acide fort / base forte</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 20 + Exercice 21 — Équation support et dosage <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 20 — Équation support</p>
+        <p>Fort/fort : toujours \(\text H_3\text O^++\text{HO}^-\to2\text H_2\text O\) (les 3 titrages proposés ont la
+        même).</p>
+        <p class="q">Ex 21 — Détermination de concentrations (\(C_1V_1=C_2V_2\) à l'équivalence)</p>
+        <p>(1) \(C_A=\frac{0{,}057\times12{,}7}{10}=0{,}072\)&nbsp;mol/L. (2)
+        \(C_{soude}=\frac{0{,}1\times18{,}9}{20}=0{,}0945\), \(m=C\cdot V_f\cdot M=0{,}0945\times0{,}25\times40=0{,}945\)&nbsp;g.
+        (3) surtitrage rattrapé : \(C_A=\frac{C_BV_B}{V_{A1}+V_{A2}}=\frac{0{,}2\times15{,}7}{13{,}1}=0{,}24\)&nbsp;mol/L.
+        (4) \(C_B\in[0{,}067\,;\,0{,}10]\)&nbsp;mol/L pour \(V_{eq}\in[10\,;\,15]\)&nbsp;mL.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 28 + EC 29 + Exercice 22 — Courbes AF/BF et électroneutralité <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">EC 28 — pH par morceaux (\(V_A=10\), \(C_A=C_B=0{,}10\))</p>
+        <p>\(V_{eq}=10\)&nbsp;mL. Initial : \(\text{pH}=-\log0{,}1=1\). Avant équiv. :
+        \(\text{pH}=-\log\frac{C_AV_A-C_BV_B}{V_A+V_B}\). À l'équivalence \(\text{pH}=7\). Après :
+        \(\text{pH}=14+\log\frac{C_B(V_B-V_{eq})}{V_A+V_B}\).</p>
+        <p class="q">EC 29 &amp; Ex 22 — Méthode de l'électroneutralité (courbe complète)</p>
+        <p>Ions : \(\text H_3\text O^+,\text{HO}^-,\text{Na}^+,\text{Cl}^-\). Électroneutralité
+        \([\text{Na}^+]+[\text H_3\text O^+]=[\text{Cl}^-]+[\text{HO}^-]\), avec \([\text{HO}^-]=K_e/h\) :</p>
+        \[h^2+\alpha h-K_e=0,\quad \alpha=\frac{C_BV_B-C_AV_A}{V_A+V_B},\quad
+        h=\frac{-\alpha+\sqrt{\alpha^2+4K_e}}{2}.\]
+        <p>Seule la racine \(+\) est physique (\(h>0\)). Ex 22 (titrage soude par HCl) : \(C_B=\frac{C_AV_{eq}}{V_B}=\frac{0{,}1\times13{,}7}{20}=68{,}5\cdot10^{-3}\)&nbsp;mol/L,
+        même équation d'électroneutralité (rôles de A et B échangés).</p>
+      </div>
+    </div>
+
+    <h3>Partie K — Titrages fort/faible</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 30 + Exercice 23 + EC 31 — Titrages avec un composé faible <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">EC 30 — \(\text{CH}_3\text{COOH}\) par la soude (\(\text pK_A=4{,}8\), \(V_{eq}=12{,}4\)&nbsp;mL, \(C_B=0{,}050\))</p>
+        <p>\(\text{CH}_3\text{COOH}+\text{HO}^-\to\text{CH}_3\text{COO}^-+\text H_2\text O\).
+        \(C_A=\frac{C_BV_{eq}}{V_A}=0{,}062\)&nbsp;mol/L. Initial (acide faible) :
+        \(\text{pH}=\frac12(4{,}8-\log0{,}062)=3{,}0\). Demi-équiv. : \(\text{pH}=\text pK_A=4{,}8\). Équivalence
+        (base faible \(c=\frac{C_AV_A}{V_A+V_{eq}}=0{,}028\)) : \(\text{pH}=7+\frac12(4{,}8-1{,}55)=8{,}6\).</p>
+        <p class="q">Ex 23 — Base faible (NH₃) par HCl (\(\text pK_A=9{,}2\), \(V_B=50\), \(C_B=0{,}010\), \(C_A=0{,}04\))</p>
+        <p>\(\text{NH}_3+\text H_3\text O^+\to\text{NH}_4^+\). \(V_{eq}=\frac{C_BV_B}{C_A}=12{,}5\)&nbsp;mL. Initial
+        (base faible) : \(\text{pH}=7+\frac12(9{,}2-2)=10{,}6\). Demi-équiv. : \(\text{pH}=\text pK_A=9{,}2\).
+        Équivalence (acide faible \(c=\frac{C_BV_B}{V_B+V_{eq}}=8{,}0\cdot10^{-3}\)) :
+        \(\text{pH}=\frac12(9{,}2-2{,}1)=5{,}6\).</p>
+        <p class="q">EC 31 — \(\text pK_A\) d'un monoacide (lecture graphique)</p>
+        <p>\(\text pK_A=\text{pH}\) à la demi-équivalence (\(V_{eq}/2\)). Ici \(V_{eq}=8\)&nbsp;mL, \(\text pK_A=4{,}9\).
+        Concentration initiale : \(c=10^{-2\text{pH}_0+\text pK_A}\). Si \(\text{pH}\to13\) au fort excès de base :
+        \(C_B=10^{\text{pH}-14}=0{,}1\)&nbsp;mol/L.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercices 24, 25, 26 — Comparaisons (force, dilution, \(\text pK_A\)) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Ex 24 — Acide fort vs faible</p>
+        <p>Même \(V_{eq}\) (mêmes concentrations). Fort : \(\text{pH}_0=1\), équiv. \(\text{pH}=7\). Faible
+        (\(\text pK_A=5\)) : \(\text{pH}_0=3\), équiv. \(\text{pH}\approx9\). Le saut est plus <b>tardif et plus
+        petit</b> pour l'acide faible ; sa courbe débute plus haut et passe par \(\text{pH}=\text pK_A\) à la
+        demi-équivalence.</p>
+        <p class="q">Ex 25 — Effet de la dilution</p>
+        <p>Acide faible : \(\text{pH}_0=\frac12(\text pK_A-\log C_A)\) augmente à la dilution, demi-équiv. reste
+        \(\text pK_A\), équiv. \(=7+\frac12(\text pK_A+\log\frac{C_A}{2})\) baisse. Acide fort : \(\text{pH}_0=-\log C_A\),
+        équiv. toujours 7. Aux très faibles concentrations les formules simples cessent d'être valables (autoprotolyse).</p>
+        <p class="q">Ex 26 — Influence du \(\text pK_A\)</p>
+        <div class="res">Plus \(\text pK_A\) augmente (acide plus faible), plus \(\text{pH}_0\) et le pH d'équivalence
+        montent, et plus le <b>saut de pH se réduit</b> : un acide trop faible est difficile à titrer (saut peu
+        marqué). Ex. \(\text pK_A=3/5/7\) → équiv. \(7{,}8/8{,}8/9{,}8\).</div>
+      </div>
+    </div>
+
+    <h3>Partie L — Polyacides</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 27 — Titrage d'un ampholyte (\(\text{HCO}_3^-\)) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(\text{HCO}_3^-\), \(\text pK_{A1}=6\) (\(\text H_2\text{CO}_3/\text{HCO}_3^-\)),
+        \(\text pK_{A2}=10\) (\(\text{HCO}_3^-/\text{CO}_3^{2-}\)).</p>
+        <p class="q">Titrage par HCl</p>
+        <p>\(\text{HCO}_3^-+\text H_3\text O^+\to\text H_2\text{CO}_3+\text H_2\text O\).
+        \(C=\frac{C_AV_{eq}}{V_i}=\frac{0{,}1\times8{,}6}{20}=0{,}043\)&nbsp;mol/L. Initial (ampholyte) :
+        \(\text{pH}=\frac12(6+10)=8\). Demi-équiv. : \(\text{pH}=\text pK_{A1}=6\). Équivalence (acide faible
+        \(\text H_2\text{CO}_3\)) : \(\text{pH}=\frac12(\text pK_{A1}-\log\frac{CV_i}{V_i+V_{eq}})=3{,}8\).</p>
+        <p class="q">Titrage par la soude</p>
+        <p>\(\text{HCO}_3^-+\text{HO}^-\to\text{CO}_3^{2-}+\text H_2\text O\), même \(V_{eq}=8{,}6\)&nbsp;mL. Initial
+        \(\text{pH}=8\). Demi-équiv. : \(\text{pH}=\text pK_{A2}=10\). Équivalence (base faible \(\text{CO}_3^{2-}\)) :
+        \(\text{pH}=7+\frac12(10+\log\frac{C_AV_i}{V_i+V_{eq}})=11{,}2\).</p>
+        <div class="res">Titrer \(\text{CO}_3^{2-}\) par HCl = parcourir ces deux titrages « à l'envers » → <b>deux
+        sauts de pH</b>.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">EC 32 + EC 33 + EC 34 + Exercice 28 — Titrages de diacides &amp; mélanges <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">EC 32 — Acide oxalique (1ʳᵉ acidité forte, 2ᵉ \(\text pK_A=4{,}27\), \(C=0{,}010\))</p>
+        <p>Supports : \(\text H_3\text O^++\text{HO}^-\to2\text H_2\text O\) puis
+        \(\text{HC}_2\text O_4^-+\text{HO}^-\to\text C_2\text O_4^{2-}+\text H_2\text O\). Points : \(\text{pH}_0=-\log C=2\) ;
+        1ʳᵉ équiv. (acide faible, \(C/2\)) \(\text{pH}=\frac12(4{,}27+2{,}3)=3{,}3\) ; 2ᵉ demi-équiv.
+        \(\text{pH}=\text pK_A=4{,}27\) ; 2ᵉ équiv. (base faible, \(C/3\)) \(\text{pH}=7+\frac12(4{,}27-2{,}5)=7{,}9\).
+        <b>Deux sauts.</b></p>
+        <p class="q">EC 33 — Acide sulfurique (diacide fort)</p>
+        <p>Les deux acidités fortes ⇒ une seule forme dans l'eau (\(\text H_3\text O^+\)), un <b>seul saut</b>, mais
+        pH initial plus bas (2× plus de H₃O⁺).</p>
+        <p class="q">EC 34 — Diacide faible (lecture de courbe)</p>
+        <p>Deux sauts au <b>même écart de volume</b> ⇒ diacide (et non mélange). Réactions successives
+        \(\text{AH}_2+\text{HO}^-\to\text{AH}^-\) puis \(\text{AH}^-+\text{HO}^-\to\text A^{2-}\). \(\text pK_A\) lus
+        aux demi-équivalences (ex. 2,2 et 6). À pH 4 = 1ʳᵉ équivalence (ampholyte \(\text{AH}^-\),
+        \(\text{pH}=\frac12(\text pK_{A1}+\text pK_{A2})\)). pH initial et 2ᵉ équivalence cohérents avec les formules
+        acide/base faibles.</p>
+        <p class="q">Ex 28 — Mélange acide fort + acide faible (deux sauts inégaux)</p>
+        <p>Volumes de sauts <b>différents</b> ⇒ pas un diacide. Supports : \(\text H_3\text O^++\text{HO}^-\) puis
+        \(\text{AH}+\text{HO}^-\). \(C_{AF}=\frac{C_BV_{e1}}{V_A}=0{,}050\), \(C_{Afaible}=\frac{C_BV_{e2}}{V_A}=0{,}086\)&nbsp;mol/L.
+        \(\text pK_A=\text{pH}\) à la demi-équivalence de la 2ᵉ partie \(=4{,}8\). Milieu du 1ᵉʳ saut (acide fort
+        neutralisé, reste l'acide faible) : \(\text{pH}=\frac12(4{,}8-\log0{,}086)=2{,}9\). Milieu du 2ᵉ saut (reste
+        la base conjuguée) : \(\text{pH}=7+\frac12(4{,}8+\log0{,}086)=8{,}9\). Cohérents avec l'expérience.</p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.5rem;border-left-color:var(--ok)">
+      <span class="lab" style="color:#065f46">✅ TD acides-bases — correction complète (34 EC + 28 exercices)</span>
+      Avancement &amp; \(Q/K\), autoprotolyse et \(K_e\), couples de Brønsted, \(K_A/\text pK_A\), pH des forts
+      (\(-\log C\), \(14+\log[\text{HO}^-]\)) et des faibles (\(\frac12(\text pK_A-\log C)\),
+      \(7+\frac12(\text pK_A+\log C)\), amphotère \(\frac12(\text pK_{A1}+\text pK_{A2})\)), prédominance et règle du
+      \(\Delta\text pK_A>4\), Henderson et % des formes, tampons (zone \(\text pK_A\pm1\), résistance à la dilution,
+      capacité par tableau d'avancement), et titrages (fort/fort, fort/faible, polyacides, méthode de
+      l'électroneutralité \(h^2+\alpha h-K_e=0\)).
+    </div>
+    <!-- TD_ACIDE_BASE_ANCHOR -->
+  </section>
+
+  <!-- ======================= TABLE pKA ======================= -->
+  <section class="block" id="pka">
+    <h2>4. Table de \(\text{p}K_A\) (25 °C)</h2>
+    <div class="overflow">
+    <table>
+      <tr><th>Couple</th><th>Formule</th><th>\(\text pK_A\)</th></tr>
+      <tr><td>chloroéthanoïque / chloroéthanoate</td><td>CH₂ClCOOH / CH₂ClCOO⁻</td><td>2,86</td></tr>
+      <tr><td>lactique / lactate</td><td>CH₃CHOHCOOH / …COO⁻</td><td>3,08</td></tr>
+      <tr><td>nitreux / nitrite</td><td>HNO₂ / NO₂⁻</td><td>3,14</td></tr>
+      <tr><td>fluorhydrique / fluorure</td><td>HF / F⁻</td><td>3,17</td></tr>
+      <tr><td>acétylsalicylique / …ate</td><td>C₈H₇O₂COOH / …COO⁻</td><td>3,48</td></tr>
+      <tr><td>méthanoïque / méthanoate</td><td>HCOOH / HCOO⁻</td><td>3,75</td></tr>
+      <tr><td>ascorbique / ascorbate</td><td>C₆H₈COOH / …COO⁻</td><td>4,17</td></tr>
+      <tr><td>benzoïque / benzoate</td><td>C₆H₅COOH / C₆H₅COO⁻</td><td>4,19</td></tr>
+      <tr><td>anilinium / aniline</td><td>C₆H₅NH₃⁺ / C₆H₅NH₂</td><td>4,62</td></tr>
+      <tr><td>éthanoïque / éthanoate</td><td>CH₃COOH / CH₃COO⁻</td><td>4,75</td></tr>
+      <tr><td>propanoïque / propanoate</td><td>CH₃CH₂COOH / …COO⁻</td><td>4,87</td></tr>
+      <tr><td>pyridinium / pyridine</td><td>C₅H₅NH⁺ / C₅H₅N</td><td>5,25</td></tr>
+      <tr><td>hydroxylammonium / hydroxylamine</td><td>NH₃OH⁺ / NH₂OH</td><td>6,00</td></tr>
+      <tr><td>dioxyde de carbone / hydrogénocarbonate</td><td>CO₂+H₂O / HCO₃⁻</td><td>6,12</td></tr>
+      <tr><td>sulfhydrique / hydrogénosulfure</td><td>H₂S / HS⁻</td><td>7,04</td></tr>
+      <tr><td>hypochloreux / hypochlorite</td><td>HClO / ClO⁻</td><td>7,55</td></tr>
+      <tr><td>ammonium / ammoniac</td><td>NH₄⁺ / NH₃</td><td>9,20</td></tr>
+      <tr><td>borique / borate</td><td>H₃BO₃ / H₂BO₃⁻</td><td>9,23</td></tr>
+      <tr><td>hypobromeux / hypobromite</td><td>HBrO / BrO⁻</td><td>9,24</td></tr>
+      <tr><td>cyanhydrique / cyanure</td><td>HCN / CN⁻</td><td>9,31</td></tr>
+      <tr><td>triméthylammonium / triméthylamine</td><td>(CH₃)₃NH⁺ / (CH₃)₃N</td><td>9,87</td></tr>
+      <tr><td>phénol / phénolate</td><td>C₆H₅OH / C₆H₅O⁻</td><td>9,89</td></tr>
+      <tr><td>hydrogénocarbonate / carbonate</td><td>HCO₃⁻ / CO₃²⁻</td><td>10,25</td></tr>
+      <tr><td>méthylammonium / méthylamine</td><td>CH₃NH₃⁺ / CH₃NH₂</td><td>10,70</td></tr>
+      <tr><td>éthylammonium / éthylamine</td><td>C₂H₅NH₃⁺ / C₂H₅NH₂</td><td>10,75</td></tr>
+      <tr><td>triéthylammonium / triéthylamine</td><td>(C₂H₅)₃NH⁺ / (C₂H₅)₃N</td><td>10,81</td></tr>
+      <tr><td>diméthylammonium / diméthylamine</td><td>(CH₃)₂NH₂⁺ / (CH₃)₂NH</td><td>10,87</td></tr>
+    </table>
+    </div>
+    <p style="margin-top:.6rem;color:var(--ink-soft)">Rappel : couples de l'eau \(\text H_3\text O^+/\text H_2\text O\)
+    (\(\text pK_A=0\)) et \(\text H_2\text O/\text{HO}^-\) (\(\text pK_A=14\)).</p>
+  </section>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours / ressource</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/acides-bases/Acide_base_partie_1.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Acide_base_partie_1</span><span class="badge">Cours / ressource</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/acides-bases/Acide_base_partie_2.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Acide_base_partie_2</span><span class="badge">Cours / ressource</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Fiche / mémo</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/acides-bases/fiche_synth%C3%A8se_AcideBase.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">fiche_synthèse_AcideBase</span><span class="badge">Fiche / mémo</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/acides-bases/TD%20Acide%20base%20-%20VG%20-%20etu.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD Acide base - VG - etu</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/acides-bases/TD_acide_base_etu.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD_acide_base_etu</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Corrigé</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/acides-bases/TD%20Acide%20base%20-%20VG%20-%20corrections.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD Acide base - VG - corrections</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/acides-bases/TD%20Acide%20base%20-%20VG%20-%20prof.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD Acide base - VG - prof</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/acides-bases/TD_acide_base_correction.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD_acide_base_correction</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/acides-bases/eval_titrage_corrig%C3%A9.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">eval_titrage_corrigé</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/acides-bases/TP_AcideOxalique_corrig%C3%A9.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TP_AcideOxalique_corrigé</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/acides-bases/TP_Tampon_corrig%C3%A9.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TP_Tampon_corrigé</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TP</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/acides-bases/TP_AcideOxalique.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TP_AcideOxalique</span><span class="badge">TP</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/acides-bases/TP_Tampon.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TP_Tampon</span><span class="badge">TP</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Évaluation</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/acides-bases/eval_titrage.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">eval_titrage</span><span class="badge">Évaluation</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

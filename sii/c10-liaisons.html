@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C10 — Liaisons usuelles & schéma cinématique — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-sii">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SII · C10 — Représenter & modéliser le comportement cinématique</span>
+  <h1 class="title">C10 — Représenter et modéliser le comportement cinématique</h1>
+  <p class="lead">Degrés de liberté (DDL) et <b>torseur cinématique</b> d'une liaison ; <b>tableau des liaisons usuelles</b> ;
+  hypothèse de liaison parfaite ; construction d'un <b>schéma cinématique</b> ; modélisation des guidages (contact direct / modèle fonctionnel) ;
+  <b>liaisons équivalentes</b> (parallèle : addition des blocages ; série : addition des DDL).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction du TD (EPAS, roulements, biellette, pompe axiale)</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 DDL & torseur cinématique</h3>
+    <div class="def">
+      <span class="lab">Degrés de liberté</span>
+      Les <b>DDL</b> sont les mouvements élémentaires indépendants autorisés : 3 rotations \(R_x,R_y,R_z\) + 3 translations \(T_x,T_y,T_z\).
+      Un paramètre cinématique <b>non nul</b> = un DDL ; <b>nul</b> = un blocage. Toujours : <b>DDL + blocages = 6</b>.
+    </div>
+    <div class="note">
+      <span class="lab">Liaison cinématiquement parfaite</span>
+      Sans jeu, rigidité infinie, sans limite d'amplitude/vitesse, bilatérale. Les caractéristiques géométriques sont indépendantes des efforts.
+    </div>
+
+    <h3>1.2 Tableau des liaisons usuelles (à connaître)</h3>
+    <div class="overflow">
+    <table>
+      <tr><th>Liaison</th><th>DDL</th><th>Blocages</th><th>Torseur cinématique \(\{\mathcal V_{2/1}\}\)</th></tr>
+      <tr><td><b>Encastrement</b> (complète)</td><td>0</td><td>6</td><td>\(\{\vec 0;\ \vec 0\}\)</td></tr>
+      <tr><td><b>Pivot</b> axe \((O,\vec x)\)</td><td>1 : \(R_x\)</td><td>5</td><td>\(\{\omega_x\vec x;\ \vec 0\}_O\)</td></tr>
+      <tr><td><b>Glissière</b> direction \(\vec x\)</td><td>1 : \(T_x\)</td><td>5</td><td>\(\{\vec 0;\ v_x\vec x\}\)</td></tr>
+      <tr><td><b>Hélicoïdale</b> axe \((O,\vec x)\), pas \(p\)</td><td>1 : \(R_x\!=\!T_x\) liés</td><td>5</td><td>\(\{\omega_x\vec x;\ \pm\tfrac{p}{2\pi}\omega_x\vec x\}_O\)</td></tr>
+      <tr><td><b>Pivot glissant</b> axe \((O,\vec x)\)</td><td>2 : \(R_x,T_x\)</td><td>4</td><td>\(\{\omega_x\vec x;\ v_x\vec x\}_O\)</td></tr>
+      <tr><td><b>Sphère à doigt</b> centre \(C\)</td><td>2 : \(R_y,R_z\)</td><td>4</td><td>\(\{\vec\Omega\!\cdot\!\vec x=0;\ \vec 0\}_C\)</td></tr>
+      <tr><td><b>Appui-plan</b> normale \(\vec z\)</td><td>3 : \(R_z,T_x,T_y\)</td><td>3</td><td>\(\{\omega_z\vec z;\ \vec V\!\cdot\!\vec z=0\}\)</td></tr>
+      <tr><td><b>Sphérique (rotule)</b> centre \(O\)</td><td>3 : \(R_x,R_y,R_z\)</td><td>3</td><td>\(\{\vec\Omega_{2/1};\ \vec 0\}_O\)</td></tr>
+      <tr><td><b>Cylindre-plan</b> \((O,\vec x)\), normale \(\vec z\)</td><td>4 : \(R_x,R_z,T_x,T_y\)</td><td>2</td><td>\(\{\vec\Omega\!\cdot\!\vec y=0;\ \vec V_A\!\cdot\!\vec z=0\}_A\)</td></tr>
+      <tr><td><b>Sphère-cylindre</b> (linéaire annulaire) centre \(O\), dir. \(\vec x\)</td><td>4 : \(R_x,R_y,R_z,T_x\)</td><td>2</td><td>\(\{\vec\Omega_{2/1};\ v_x\vec x\}_O\)</td></tr>
+      <tr><td><b>Sphère-plan</b> (ponctuelle) normale \(\vec z\)</td><td>5 : \(R_x,R_y,R_z,T_x,T_y\)</td><td>1 : \(F_z\)</td><td>\(\{\vec\Omega;\ \vec V_A\!\cdot\!\vec z=0\}_A\)</td></tr>
+      <tr><td><b>Libre</b></td><td>6</td><td>0</td><td>\(\{\vec\Omega;\ \vec V_A\}_A\)</td></tr>
+    </table>
+    </div>
+    <div class="note">
+      <span class="lab">Torseur d'action transmissible = complémentaire</span>
+      Là où le mouvement est <b>libre</b> (DDL), l'effort transmis est <b>nul</b> (liaison parfaite) ; là où il est <b>bloqué</b>, l'effort peut être non nul.
+      Ex. pivot \((O,\vec x)\) : \(\vec M_{A}\cdot\vec x=0\) (pas de moment autour de l'axe) ; glissière \(\vec x\) : \(\vec R\cdot\vec x=0\).
+    </div>
+
+    <h3>1.3 Schéma cinématique & guidages</h3>
+    <div class="method">
+      <span class="lab">Construire un schéma cinématique</span>
+      1) placer les <b>éléments géométriques</b> (points, axes, normales) en respectant parallélisme/perpendicularité ;
+      2) poser les <b>symboles</b> normalisés des liaisons (code couleur, orientation) ; 3) relier par des traits les symboles de même couleur.
+      Un <b>graphe des liaisons</b> contient la même information (cercles = solides, arêtes = liaisons).
+    </div>
+    <div class="note">
+      <span class="lab">Modéliser un guidage</span>
+      <b>Contact direct</b> : identifier la géométrie des surfaces → zone de contact → liaison usuelle (plan/plan = appui-plan ; cylindre/cylindre même Ø = pivot glissant ; sphère/plan = ponctuelle…).
+      <b>Éléments roulants</b> (roulements) : <b>modèle fonctionnel</b> (moins de blocages) — roulement 2 rangées = pivot ; 1 rangée avec rotulage = sphérique ou sphère-cylindre ; vis à billes = hélicoïdale.
+    </div>
+
+    <h3>1.4 Liaisons équivalentes</h3>
+    <div class="thm">
+      <span class="lab">Règles</span>
+      <b>Parallèle</b> (\(n\) liaisons entre les <b>mêmes</b> 2 solides) : <b>addition des blocages</b> (il reste les DDL communs).<br>
+      <b>Série</b> (liaisons en chaîne via des solides intermédiaires) : <b>addition des DDL</b>, par composition des torseurs :
+      \(\{\mathcal V_{n/1}^{eq}\}=\{\mathcal V_{n/n-1}\}+\dots+\{\mathcal V_{2/1}\}\) (exprimés au point commun aux domaines de validité).
+    </div>
+    <div class="note">
+      <span class="lab">Exemple (série)</span>
+      Sphérique (centre \(A\), 3 rotations) <b>+</b> glissière (\(\vec y\)) en série \(\to\) torseur \(\{\vec\Omega_{1/2};\ v\vec y\}_A\) : 4 paramètres (3 rotations + 1 translation)
+      = <b>sphère-cylindre</b> de centre \(A\), direction \(\vec y\).
+    </div>
+  </section>
+
+  <!-- ======================= EXOS CRÉÉS =============================== -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Identifier une liaison par son torseur</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(\{\mathcal V_{2/1}\}=\{\omega_x\vec x;\ v_x\vec x\}_A\). Quelle liaison ?</div>
+        <p>2 paramètres non nuls : rotation \(R_x\) + translation \(T_x\) (même axe) → 2 DDL, 4 blocages.</p>
+        <p class="res"><b>Pivot glissant</b> d'axe \((A,\vec x)\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Liaison équivalente (2 pivots coaxiaux en parallèle)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Deux pivots de même axe \((O,\vec x)\) montés en parallèle entre (1) et (0).</div>
+        <p>Parallèle → addition des blocages. Chaque pivot bloque tout sauf \(R_x\) ; l'union bloque encore tout sauf \(R_x\).</p>
+        <p class="res">Équivalent : <b>pivot</b> d'axe \((O,\vec x)\) (les deux pivots coaxiaux se comportent comme un seul)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CORRECTION TD =============================== -->
+  <section class="block" id="td">
+    <h2>3. Correction du TD</h2>
+    <p class="lead" style="font-size:.95rem">Source : <i>S2I-C10-TD</i> (représenter/interpréter un schéma cinématique ; liaisons équivalentes).
+    <b>Pas de corrigé officiel</b> → résolu maison. Beaucoup de questions sont graphiques (schémas) ; on restitue les résultats de modélisation.</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1.4 — Liaisons équivalentes en série</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Sphérique (\(A\)) + glissière (\(\vec y\)) en série</p>
+        <p>Composition : \(\{\vec\Omega;\ \vec 0\}_A+\{\vec 0;\ v\vec y\}_A=\{\vec\Omega;\ v\vec y\}_A\) → 4 DDL (3 rot. + \(T_y\)).</p>
+        <p class="res"><b>Sphère-cylindre</b> de centre \(A\), direction \(\vec y\)</p>
+        <p class="q">Sphérique (\(A\)) + sphérique (\(B\)) en série (biellette)</p>
+        <p>Deux rotules reliées par une barre rigide \(AB\) : translation possible le long de \(AB\) + rotations.</p>
+        <p class="res"><b>Sphère-cylindre</b> de direction \(\vec{AB}\) (modèle d'une biellette)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2.2 — Guidage en rotation par 2 roulements à billes</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Axe (1) guidé / bâti (0) par 2 roulements ; l'angle de rotulage n'est pas négligeable.</div>
+        <p class="q">Q1–Q2 — Modèle de chaque roulement</p>
+        <p>Roulement <b>A</b> (arrête aussi la translation axiale) : rotulage → 3 rotations mais pas de translation → <b>sphérique</b> (rotule) de centre \(A\) : \(\{\mathcal V\}=\{\vec\Omega_{1/0};\ \vec 0\}_A\).</p>
+        <p>Roulement <b>B</b> (libre axialement) : rotulage + glissement axial → <b>sphère-cylindre</b> de centre \(B\), direction \(\vec x\) : \(\{\mathcal V\}=\{\vec\Omega_{1/0};\ v_x\vec x\}_B\).</p>
+        <p class="q">Q3–Q5 — Liaison équivalente (parallèle)</p>
+        <p>Les deux roulements relient (1) à (0) → <b>parallèle</b> → addition des blocages. Sphérique bloque \(T_x,T_y,T_z\) ; sphère-cylindre bloque \(T_y,T_z\). De plus, les 2 centres \(A,B\) alignés sur \(\vec x\) bloquent \(R_y,R_z\). Il ne reste que \(R_x\).</p>
+        <p class="res">Équivalent : <b>pivot</b> d'axe \((AB)=(O,\vec x)\), torseur \(\{\omega_x\vec x;\ \vec 0\}_O\) (montage classique : une rotule fixe axialement + un palier libre pour éviter l'hyperstatisme)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2.3 — Pompe à pistons axiaux (patins)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Arbre à plateau incliné → mouvement alternatif des pistons via patins bronze.</div>
+        <p class="q">Q3 — Liaison équivalente piston / plateau</p>
+        <p>Le piston (via patin) appuie sur le plateau incliné : contact → liaison qui autorise le glissement du patin sur le plateau + rotations. Transformation rotation continue → translation alternative.</p>
+        <p class="res">Modèle : <b>appui-plan</b> (patin/plateau) en série avec les liaisons du piston → mouvement alternatif</p>
+        <p class="q">Q5 — Rôle des patins</p>
+        <p class="res">Les patins bronze <b>réduisent le frottement</b> (meilleur rendement, moins d'usure) entre piston et plateau incliné, en transformant un contact ponctuel/linéique glissant en un <b>appui-plan</b> lubrifié.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2.4 — Liaison équivalente par une biellette</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Biellette (6) sphérique aux 2 extrémités (\(C\) côté plateau 4, \(B\) côté pale 7), \(\vec{CB}=L\vec x_6\).</div>
+        <p class="q">Q1–Q3 — Équivalent \(L_{4/7}\)</p>
+        <p>\(L_{4/6}\) sphérique en \(C\) + \(L_{6/7}\) sphérique en \(B\), en série : \(\{\vec\Omega_{4/6};\vec 0\}_C+\{\vec\Omega_{6/7};\vec 0\}_B\).
+        En exprimant en \(C\), la translation le long de \(\vec{CB}\) apparaît.</p>
+        <p class="res">Équivalent : <b>sphère-cylindre</b> de centre \(C\), direction \(\vec x_6\) (la biellette transmet un effort uniquement selon son axe)</p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.4rem">
+      <span class="lab">Bilan C10</span>
+      Chapitre <b>référence</b> : connaître le <b>tableau des liaisons usuelles</b> (nom, caractéristiques géométriques, symboles, DDL, torseur) et savoir
+      <b>modéliser un guidage</b> (contact direct → analyse des contacts ; roulements → modèle fonctionnel). Les <b>liaisons équivalentes</b> se déduisent :
+      <b>parallèle</b> = somme des blocages, <b>série</b> = somme des DDL (composition de torseurs). Socle indispensable pour toute l'analyse
+      cinématique (C03) et statique (C08) des mécanismes. Beaucoup d'exercices sont des tracés de schémas cinématiques (EPAS, plateau cyclique, capteur fin de course).
+    </div>
+  </section>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c10-liaisons/S2I-C10-TD-Repr%C3%A9senter%20et%20mod%C3%A9liser%20le%20comportement%20cin%C3%A9matique.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C10-TD-Représenter et modéliser le comportement cinématique</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Document</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c10-liaisons/S2I-C10-Repr%C3%A9senter%20et%20mod%C3%A9liser%20le%20comportement%20cin%C3%A9matique.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C10-Représenter et modéliser le comportement cinématique</span><span class="badge">Document</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

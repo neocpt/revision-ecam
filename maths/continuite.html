@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Continuité de fonctions réelles — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-math">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Maths · M01 — Chapitre 9</span>
+  <h1 class="title">Continuité de fonctions réelles</h1>
+  <p class="lead">Continuité en un point et sur un intervalle, prolongement par continuité, classification des
+  discontinuités, et les grands théorèmes : valeurs intermédiaires, bornes atteintes, bijection.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD n°9</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Continuité en un point</h3>
+    <div class="def">
+      <span class="lab">Définition</span>
+      \(f\) est <b>continue en \(a\)</b> si \(\lim_{x\to a}f(x)=f(a)\). En un point intérieur, cela équivaut à la
+      continuité à gauche <b>et</b> à droite. Caractérisation séquentielle : \(f\) continue en \(a\iff\)
+      \(\big(u_n\to a\Rightarrow f(u_n)\to f(a)\big)\).
+    </div>
+    <div class="thm">
+      <span class="lab">Opérations</span>
+      \(\lambda f+g\), \(fg\), \(|f|\), \(\tfrac fg\) (si \(g(a)\neq0\)) et \(g\circ f\) (si \(f\) continue en \(a\), \(g\)
+      en \(f(a)\)) sont continues en \(a\).
+    </div>
+    <div class="def">
+      <span class="lab">Prolongement par continuité</span>
+      Si \(f\) (définie sur \(I\setminus\{a\}\)) admet une <b>limite finie</b> \(\ell\) en \(a\), on la prolonge en
+      posant \(\tilde f(a)=\ell\). Ex. \(\tfrac{\sin x}{x}\) se prolonge par \(1\) en \(0\).
+    </div>
+
+    <h3>1.2 Les trois discontinuités</h3>
+    <div class="note">
+      <ul style="margin:.3rem 0 0">
+        <li><b>Apparente</b> : \(\lim_{x\to a}f=\ell\) existe mais \(\ell\neq f(a)\).</li>
+        <li><b>De saut</b> : les limites latérales existent, finies, mais \(\lim_{a^-}\neq\lim_{a^+}\).</li>
+        <li><b>Essentielle</b> : \(\lim_{x\to a}f\) n'existe pas (ex. \(\sin(1/x)\) en \(0\)).</li>
+      </ul>
+    </div>
+
+    <h3>1.3 Fonctions continues sur un intervalle</h3>
+    <div class="thm">
+      <span class="lab">Théorème des valeurs intermédiaires (TVI)</span>
+      \(f\) continue sur \([a,b]\) : toute valeur \(y\) entre \(f(a)\) et \(f(b)\) est atteinte —
+      \(\exists c\in[a,b],\ f(c)=y\). Conséquence : <b>l'image d'un intervalle par une fonction continue est un
+      intervalle</b>.
+    </div>
+    <div class="warnbox">
+      Corollaire pratique : si \(f\) continue et \(f(a)f(b)<0\), alors \(f\) s'annule sur \(]a,b[\).</div>
+    <div class="thm">
+      <span class="lab">Bornes atteintes</span>
+      \(f\) continue sur un <b>segment</b> \([a,b]\) est bornée et atteint ses bornes :
+      \(\exists c,d,\ \forall x,\ f(c)\leqslant f(x)\leqslant f(d)\). Donc \(f([a,b])=[\min,\max]\).
+    </div>
+    <div class="thm">
+      <span class="lab">Théorème de la bijection</span>
+      \(f\) continue et <b>strictement monotone</b> sur \(I\) : alors \(f:I\to f(I)\) est bijective, \(f^{-1}\)
+      est continue et strictement monotone de même sens. (D'où \(\forall y\in f(I),\ \exists!\,x,\ f(x)=y\).)
+    </div>
+  </section>
+
+  <!-- ==================== EXOS CRÉÉS ============================= -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Prolongement par continuité</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">La fonction \(f(x)=\dfrac{\sqrt{1+x}-1}{x}\) (définie sur \([-1,+\infty[\setminus\{0\}\))
+        est-elle prolongeable par continuité en \(0\) ?</div>
+        <p>On lève la forme \(\tfrac00\) par quantité conjuguée :</p>
+        \[ \frac{\sqrt{1+x}-1}{x}=\frac{(1+x)-1}{x\big(\sqrt{1+x}+1\big)}=\frac{1}{\sqrt{1+x}+1}\xrightarrow[x\to0]{}\frac12. \]
+        <div class="res">Limite finie \(\tfrac12\) : \(f\) est prolongeable, par \(\tilde f(0)=\dfrac12\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Existence d'une racine (TVI)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Montrer que l'équation \(x^5-3x+1=0\) admet au moins une solution dans \(]0,1[\).</div>
+        <p>Posons \(P(x)=x^5-3x+1\), polynôme donc continu sur \([0,1]\). On calcule :</p>
+        \[ P(0)=1>0,\qquad P(1)=1-3+1=-1<0. \]
+        <p>Comme \(P(0)\) et \(P(1)\) sont de signes opposés et \(P\) continue, le TVI donne un \(c\in\,]0,1[\) tel
+        que \(P(c)=0\).</p>
+        <div class="res">L'équation admet (au moins) une racine dans \(]0,1[\). ∎</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Point fixe (Brouwer en dimension 1)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Soit \(f:[0,1]\to[0,1]\) continue. Montrer que \(f\) admet un point fixe.</div>
+        <p>Posons \(g(x)=f(x)-x\), continue sur \([0,1]\). Comme \(f\) est à valeurs dans \([0,1]\) :</p>
+        \[ g(0)=f(0)-0=f(0)\geqslant0,\qquad g(1)=f(1)-1\leqslant0. \]
+        <p>Si \(g(0)=0\) ou \(g(1)=0\), on a un point fixe. Sinon \(g(0)>0>g(1)\) : le TVI fournit \(c\in\,]0,1[\)
+        avec \(g(c)=0\).</p>
+        <div class="res">Il existe \(c\in[0,1]\) tel que \(f(c)=c\). ∎ (Tout endomorphisme continu du segment a un point fixe.)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CORRECTION TD ========================== -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD n°9 — Continuité de fonctions réelles</h2>
+    <p class="lead" style="font-size:.95rem">Feuille sans corrigé officiel : les 9 exercices sont résolus
+    intégralement, chaque sous-question traitée.</p>
+
+    <h3>Partie 1 — Notion de continuité</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — Déterminer \(a,b\) pour la continuité</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">\(f_1\) : \(x^2\) (\(x\leqslant2\)), \(a-x^2\) (\(x>2\))</p>
+        <p>Continuité en \(2\) : \(4=a-4\).</p><p class="res">\(a=8\)</p>
+        <p class="q">\(f_2\) : \(\sqrt{x^2+a^2}\) (\(x<0\)), \(1+b\) (\(x=0\)), \(bx+2a\) (\(x>0\))</p>
+        <p>En \(0\) : \(|a|=1+b=2a\). \(|a|=2a\Rightarrow a\geqslant0\) et \(a=2a\Rightarrow a=0\), puis \(1+b=0\).</p>
+        <p class="res">\(a=0,\ b=-1\)</p>
+        <p class="q">\(f_3\) : \((x-2)^2\) (\(x<5\)), \(a\) (\(x=5\)), \((2x-b)^2\) (\(x>5\))</p>
+        <p>En \(5\) : \(9=a=(10-b)^2\Rightarrow 10-b=\pm3\).</p><p class="res">\(a=9,\ b=7\) ou \(b=13\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — Prolongement par continuité ?</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\dfrac{x^3+8}{x+2}\) en \(-2\)</p><p>\(x^3+8=(x+2)(x^2-2x+4)\), donc \(=x^2-2x+4\to12\).</p><p class="res">Prolongeable, \(\tilde f(-2)=12\).</p>
+        <p class="q">(b) \(\dfrac1{x-3}-\dfrac1{x^2-2x-3}\) en \(-1\)</p><p>\(=\dfrac{x}{(x-3)(x+1)}\) : dénom \(\to0\), num \(\to-1\), limites latérales \(\mp\infty\).</p><p class="res"><b>Non</b> prolongeable (pas de limite finie).</p>
+        <p class="q">(c) \(\dfrac{x}{1+e^{1/x}}\) en \(0\)</p><p>\(x\to0^+\) : \(e^{1/x}\to+\infty\), quotient \(\to0\). \(x\to0^-\) : \(e^{1/x}\to0\), quotient \(\to0\).</p><p class="res">Prolongeable, \(\tilde f(0)=0\).</p>
+        <p class="q">(d) \(x\cos(1/x)\) en \(0\)</p><p>\(|x\cos(1/x)|\leqslant|x|\to0\).</p><p class="res">Prolongeable, \(\tilde f(0)=0\).</p>
+      </div>
+    </div>
+
+    <h3>Partie 2 — Continuité sur un intervalle</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — Continuité latérale en \(0\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">\(f_1\) : \(x^2\) (\(x\leqslant0\)), \(2x-1\) (\(x>0\))</p>
+        <p>\(f_1(0)=0\). Gauche : \(x^2\to0=f_1(0)\) ✓. Droite : \(2x-1\to-1\neq0\).</p>
+        <p class="res">Continue à gauche, <b>discontinue à droite</b> (saut).</p>
+        <p class="q">\(f_2\) : \(\dfrac{x+\sqrt{x^2}}{x}\) (\(x\neq0\)), \(1\) (\(x=0\))</p>
+        <p>\(\sqrt{x^2}=|x|\) : pour \(x>0\), \(\tfrac{x+x}x=2\) ; pour \(x<0\), \(\tfrac{x-x}x=0\). \(f_2(0)=1\).</p>
+        <p class="res">Droite \(\to2\neq1\), gauche \(\to0\neq1\) : <b>discontinue des deux côtés</b>.</p>
+        <p class="q">\(f_3\) : \(x\lfloor1/x\rfloor\) (\(x\neq0\)), \(1\) (\(x=0\))</p>
+        <p>\(\lim_{x\to0}x\lfloor1/x\rfloor=1\) (gendarmes) \(=f_3(0)\).</p>
+        <p class="res"><b>Continue</b> à gauche et à droite en \(0\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — Continuité sur \(\mathbb R\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">\(f_1\) : \(\dfrac{x+1}{x^2+1}\) (\(x\leqslant0\)), \(1+\ln(x+1)\) (\(x>0\))</p>
+        <p>Continue sur chaque morceau. En \(0\) : gauche \(=1\), \(f_1(0)=1\), droite \(=1+\ln1=1\).</p>
+        <p class="res"><b>Continue sur \(\mathbb R\)</b>.</p>
+        <p class="q">\(f_2\) : \(\dfrac{x^2+3x}{x^2+1}\) (\(x>-1\)), \(e^{x+1}\) (\(x\leqslant-1\))</p>
+        <p>En \(-1\) : \(f_2(-1)=e^0=1\) (gauche \(\to1\)), mais droite \(\to\dfrac{1-3}{2}=-1\neq1\).</p>
+        <p class="res">Continue sur \(\mathbb R\setminus\{-1\}\) ; <b>saut en \(-1\)</b>.</p>
+        <p class="q">\(f_3\) : \(x^2\sin(\pi/x)\) (\(x\neq0\)), \(0\) (\(x=0\))</p>
+        <p>\(|x^2\sin(\pi/x)|\leqslant x^2\to0=f_3(0)\).</p><p class="res"><b>Continue sur \(\mathbb R\)</b>.</p>
+        <p class="q">\(f_4\) : \(x^2\) si \(\lfloor x\rfloor\) impair, \(x\) si \(\lfloor x\rfloor\) pair</p>
+        <p>Discontinuités possibles aux entiers \(n\). À droite \(\lfloor x\rfloor=n\), à gauche \(\lfloor x\rfloor=n-1\).
+        Continuité \(\iff\) \(n^2=n\) au raccord, i.e. \(n\in\{0,1\}\).</p>
+        <p class="res">Continue sur \(\mathbb R\) sauf aux entiers \(n\in\mathbb Z\setminus\{0,1\}\) (sauts).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — Fonction de Dirichlet modifiée</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(f(x)=x-1\) si \(x\in\mathbb Q\), \(x+1\) si \(x\in\mathbb R\setminus\mathbb Q\).</div>
+        <p class="q">(a) Réciproque</p>
+        <p>Si \(x\in\mathbb Q\), \(y=x-1\in\mathbb Q\) et \(x=y+1\) ; si \(x\notin\mathbb Q\), \(y=x+1\notin\mathbb Q\) et \(x=y-1\).</p>
+        <p class="res">\(f^{-1}(y)=\begin{cases}y+1&y\in\mathbb Q\\ y-1&y\in\mathbb R\setminus\mathbb Q\end{cases}\) (donc \(f^{-1}=f\), involution).</p>
+        <p class="q">(b) Discontinue partout</p>
+        <p>Soit \(a\in\mathbb R\). Prenons \((x_n)\subset\mathbb Q\) et \((y_n)\subset\mathbb R\setminus\mathbb Q\) tendant vers \(a\).
+        Alors \(f(x_n)=x_n-1\to a-1\) et \(f(y_n)=y_n+1\to a+1\). Deux limites différentes \(\Rightarrow\) pas de limite.</p>
+        <div class="res">\(f\) est <b>discontinue en tout point</b> de \(\mathbb R\). ∎</div>
+      </div>
+    </div>
+
+    <h3>Partie 3 — Théorèmes principaux</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — Vrai / faux (image d'intervalle)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(f\) continue sur \([a,b]\) \(\Rightarrow f([a,b])\) fermé borné</p>
+        <p><b>Vrai</b> : par le TVI l'image est un intervalle, et par le théorème des bornes atteintes elle vaut \([\min f,\max f]\).</p>
+        <p class="q">(b) \(f\) continue sur \(]a,b[\) \(\Rightarrow f(]a,b[)\) ouvert borné</p>
+        <p><b>Faux</b> : ex. \(x\mapsto x^2\) sur \(]-1,1[\) donne \([0,1[\) (ni ouvert), ou \(x\mapsto\tfrac1x\) sur \(]0,1[\) donne \(]1,+\infty[\) (non borné).</p>
+        <p class="q">(c) \(f\) continue sur \(]a,b[\) \(\Rightarrow f(]a,b[)\) ouvert (pas forcément borné)</p>
+        <p><b>Faux</b> : même contre-exemple \(x^2\) sur \(]-1,1[\) donne \([0,1[\), qui n'est pas ouvert.</p>
+        <div class="note">Seule certitude : l'image d'un intervalle par une fonction continue est un <b>intervalle</b> (nature non préservée, sauf le segment).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 7 — Martine (20 km en 5 h)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) Fonction \(f\)</p>
+        <p>\(f:[0,5]\to\mathbb R\), \(f(t)\) = distance parcourue à l'instant \(t\), avec \(f(0)=0\), \(f(5)=20\).
+        Hypothèse : \(f\) est <b>continue</b> (la distance varie sans saut).</p>
+        <p class="q">(b) Fonction \(g\)</p>
+        <p>\(g(t)=f(t+1)-f(t)\) sur \([0,4]\) : distance parcourue sur l'heure débutant en \(t\). \(g\) est continue.</p>
+        <p class="q">(c) Proposition &amp; preuve</p>
+        <p>Objectif : \(\exists t\in[0,4],\ g(t)=4\). Or \(g(0)+g(1)+g(2)+g(3)+g(4)=f(5)-f(0)=20\), de moyenne \(4\).
+        Donc au moins un \(g(k)\leqslant4\) et un \(g(j)\geqslant4\) (sinon la somme serait \(<20\) ou \(>20\)). Par le TVI
+        appliqué à \(g\) continue, il existe \(t\) entre eux tel que \(g(t)=4\).</p>
+        <div class="res">Il existe un intervalle d'une heure sur lequel Martine parcourt exactement \(4\) km. ∎</div>
+        <p class="q">(d) « Tout intervalle de 2 h = 8 km » ?</p>
+        <p><b>Faux</b> : « n'importe quel » exigerait \(f(t+2)-f(t)=8\) pour tout \(t\), c.-à-d. une allure constante.
+        Contre-exemple : parcourir \(20\) km en \(2\) h puis s'arrêter — l'intervalle \([0,2]\) donne \(20\neq8\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 8 — Fonction continue à valeurs finies</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(f\) continue sur un intervalle \(I\), ne prenant qu'un nombre fini de valeurs.</div>
+        <p><b>Conjecture</b> : \(f\) est constante.</p>
+        <p>\(f(I)\) est un intervalle (image d'un intervalle par une fonction continue). Or \(f(I)\) est un ensemble
+        <b>fini</b>. Le seul intervalle fini (comme ensemble) est un <b>singleton</b> : un intervalle contenant deux
+        points distincts en contient une infinité.</p>
+        <div class="res">Donc \(f(I)\) est un singleton : \(f\) est <b>constante</b>. ∎</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 9 — Point fixe si \(f([0,1])=[0,1]\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(f\) continue sur \([0,1]\), \(f([0,1])=[0,1]\). Montrer \(\exists c,\ f(c)=c\).</div>
+        <p>Puisque \(0\in f([0,1])\), il existe \(a\) avec \(f(a)=0\) ; puisque \(1\in f([0,1])\), il existe \(b\) avec
+        \(f(b)=1\). Posons \(g(x)=f(x)-x\), continue. Alors :</p>
+        \[ g(a)=0-a\leqslant0,\qquad g(b)=1-b\geqslant0. \]
+        <p>Par le TVI (\(g\) continue prenant une valeur \(\leqslant0\) et une \(\geqslant0\)), il existe \(c\) tel que \(g(c)=0\).</p>
+        <div class="res">\(\exists c\in[0,1],\ f(c)=c\). ∎</div>
+      </div>
+    </div>
+
+  </section>
+
+  <p style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.9rem;opacity:.75">
+    Chapitre 9 du cours M01 (S1). Sources : <em>Chap_9.pdf</em> (cours magistral) et
+    <em>TD09 — Continuité de fonctions réelles</em>. Corrigé rédigé intégralement (pas de corrigé officiel fourni).
+  </p>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours (CM)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/continuite/Chap_9.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Chap_9</span><span class="badge">Cours (CM)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/continuite/TD09___Continuit%C3%A9_de_fonctions_r%C3%A9elles.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD09___Continuité_de_fonctions_réelles</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

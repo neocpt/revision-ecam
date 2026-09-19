@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Théorie des ensembles — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-math">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Maths · M01 — Chapitre 2</span>
+  <h1 class="title">Introduction à la théorie des ensembles</h1>
+  <p class="lead">Le vocabulaire universel des mathématiques : appartenance, inclusion, ensemble des parties,
+  et les opérations \(\cup,\cap,\setminus,\Delta,{}^c,\times\) avec leurs lois (algèbre de Boole, De Morgan),
+  jusqu'aux produits cartésiens et aux partitions.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale du TD n°2</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Ensembles, appartenance, égalité</h3>
+    <div class="def">
+      <span class="lab">Ensemble &amp; appartenance</span>
+      Un <b>ensemble</b> \(E\) est une collection d'objets <b>distincts</b>, <b>non ordonnés</b>. Si \(x\) est
+      un de ces objets, on écrit \(x\in E\) (« \(x\) appartient à \(E\) »), sinon \(x\notin E\).
+      On décrit un ensemble : par une lettre (\(\mathbb R,\mathbb Q,\mathbb Z,\mathbb N\)), par
+      <b>extension</b> \(\{1,2,3\}\), ou par <b>compréhension</b> \(\{x\in E\mid P(x)\}\).
+    </div>
+    <div class="note">
+      L'ordre et les répétitions n'ont aucune importance : \(\{1,2,3\}=\{2,3,1\}=\{1,1,2,3\}\).
+      Il n'y a donc pas de « premier » ni de « dernier » élément.
+    </div>
+    <div class="def">
+      <span class="lab">Égalité</span>
+      \(A=B\) ssi ils ont exactement les mêmes éléments : \(\;(\forall x,\ x\in A\iff x\in B)\).
+    </div>
+    <div class="def">
+      <span class="lab">Ensemble vide, singleton, paire</span>
+      \(\varnothing\) est l'<b>unique</b> ensemble sans élément (\(\forall x,\ x\notin\varnothing\)). Attention :
+      \(\varnothing\neq 0\) (l'un est un ensemble, l'autre un nombre). \(\{x\}\) est un <b>singleton</b>,
+      \(\{x,y\}\) une <b>paire</b>. Comme un ensemble est un objet, \(\{\varnothing\}\) est un singleton non vide !
+    </div>
+
+    <h3>1.2 Inclusion, ensemble des parties</h3>
+    <div class="def">
+      <span class="lab">Inclusion</span>
+      \(A\subseteq B\) (\(A\) est une <b>partie</b> / sous-ensemble de \(B\)) ssi
+      \(\;\forall x,\ x\in A\Rightarrow x\in B\). Inclusion <b>stricte</b> : \(A\subsetneq B\) ssi
+      \(A\subseteq B\) et \(A\neq B\). Négation : \(A\not\subset B\iff \exists x\in A,\ x\notin B\).
+    </div>
+    <div class="warnbox">
+      Ne pas confondre \(\in\) (appartenance) et \(\subseteq\) (inclusion) : \(2\in\{1,2,3\}\) mais
+      \(2\not\subset\{1,2,3\}\). Les ensembles sont <b>partiellement</b> ordonnés par \(\subseteq\) : deux
+      ensembles distincts ne sont pas forcément comparables (pairs vs impairs de \(\mathbb N\)).
+    </div>
+    <div class="thm">
+      <span class="lab">Propriétés</span>
+      Transitivité : \((A\subseteq B\text{ et }B\subseteq C)\Rightarrow A\subseteq C\). Double inclusion (méthode
+      reine pour prouver une égalité) : \(\;(A\subseteq B\text{ et }B\subseteq A)\iff A=B\).
+    </div>
+    <div class="def">
+      <span class="lab">Ensemble des parties</span>
+      \(\mathcal P(E)\) est l'ensemble de <b>tous</b> les sous-ensembles de \(E\) :
+      \(A\in\mathcal P(E)\iff A\subseteq E\). Toujours \(\varnothing\in\mathcal P(E)\) et \(E\in\mathcal P(E)\).
+      Si \(\operatorname{card}(E)=n\), alors \(\operatorname{card}(\mathcal P(E))=2^n\).
+      <br>Ex. \(E=\{1,2,3\}\) : \(\mathcal P(E)=\{\varnothing,\{1\},\{2\},\{3\},\{1,2\},\{1,3\},\{2,3\},E\}\) (\(2^3=8\)).
+    </div>
+
+    <h3>1.3 Opérations : \(\cup,\ \cap,\ \setminus,\ \Delta,\ {}^c\)</h3>
+    <div class="def">
+      <span class="lab">Union / Intersection</span>
+      \[ x\in A\cup B\iff(x\in A\ \text{ou}\ x\in B),\qquad x\in A\cap B\iff(x\in A\ \text{et}\ x\in B). \]
+      \(A\) et \(B\) sont <b>disjoints</b> ssi \(A\cap B=\varnothing\) (à ne pas confondre avec <b>distincts</b> :
+      \(A\neq B\)).
+    </div>
+    <div class="def">
+      <span class="lab">Différence, différence symétrique, complémentaire</span>
+      \[ x\in A\setminus B\iff(x\in A\ \text{et}\ x\notin B),\qquad A\setminus B=A\cap B^{c}. \]
+      \[ A\,\Delta\,B=(A\cup B)\setminus(A\cap B)=(A\setminus B)\cup(B\setminus A)\quad(\text{« ou » exclusif}). \]
+      Pour \(A\subseteq E\) : \(x\in A^{c}\iff(x\in E\text{ et }x\notin A)\), avec \((A^c)^c=A\),
+      \(E^c=\varnothing\), \(\varnothing^c=E\).
+    </div>
+    <div class="thm">
+      <span class="lab">Algèbre de Boole (sur les parties de \(X\))</span>
+      <ul style="margin:.3rem 0 0">
+        <li>Neutres/absorbants : \(A\cup\varnothing=A\), \(A\cap\varnothing=\varnothing\), \(A\cup X=X\), \(A\cap X=A\).</li>
+        <li>Idempotence : \(A\cup A=A=A\cap A\). Commutativité, associativité.</li>
+        <li>Distributivité : \(A\cup(B\cap C)=(A\cup B)\cap(A\cup C)\) et \(A\cap(B\cup C)=(A\cap B)\cup(A\cap C)\).</li>
+        <li>Complément : \(A\cup A^c=X\), \(A\cap A^c=\varnothing\).</li>
+        <li><b>De Morgan</b> : \((A\cup B)^c=A^c\cap B^c\) et \((A\cap B)^c=A^c\cup B^c\).</li>
+      </ul>
+    </div>
+
+    <h3>1.4 Produit cartésien, \(n\)-uplets, partitions</h3>
+    <div class="def">
+      <span class="lab">Couple &amp; produit cartésien</span>
+      Un <b>couple</b> \((x,y)\) est <b>ordonné</b> : \((x,y)=(x',y')\iff(x=x'\text{ et }y=y')\), donc en général
+      \((1,2)\neq(2,1)\). Le produit cartésien est
+      \[ E\times F=\{(x,y)\mid x\in E,\ y\in F\}. \]
+      \(\operatorname{card}(E\times F)=\operatorname{card}(E)\cdot\operatorname{card}(F)\), et en général
+      \(E\times F\neq F\times E\). Se généralise aux \(n\)-uplets \((x_1,\dots,x_n)\) et à \(A^n\).
+    </div>
+    <div class="def">
+      <span class="lab">Partition</span>
+      \(\{A_1,\dots,A_n\}\) est une <b>partition</b> de \(E\) si : (1) chaque \(A_i\neq\varnothing\) ; (2) les \(A_i\)
+      sont <b>deux à deux disjoints</b> (\(i\neq j\Rightarrow A_i\cap A_j=\varnothing\)) ; (3) leur réunion vaut
+      \(E\). Un raisonnement par disjonction de cas revient à partitionner un ensemble.
+    </div>
+  </section>
+
+  <!-- ==================== EXOS CRÉÉS ============================= -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Double inclusion : \((A\cap B)^c=A^c\cup B^c\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Démontrer la loi de De Morgan par <b>double inclusion</b> (méthode « soit \(x\)… »),
+        \(A,B\subseteq E\).</div>
+        <p>On montre l'égalité en prouvant les deux inclusions, mais ici tout est en fait une chaîne
+        d'équivalences (encore mieux). Pour \(x\in E\) :</p>
+        \[ x\in(A\cap B)^c \iff x\notin A\cap B \iff \operatorname{non}(x\in A\text{ et }x\in B). \]
+        <p>Par la loi de De Morgan <em>logique</em> :</p>
+        \[ \iff (x\notin A\ \text{ou}\ x\notin B) \iff (x\in A^c\ \text{ou}\ x\in B^c) \iff x\in A^c\cup B^c. \]
+        <div class="res">Tout \(x\) vérifie \(x\in(A\cap B)^c\iff x\in A^c\cup B^c\), donc \((A\cap B)^c=A^c\cup B^c\). ∎</div>
+        <div class="note">La loi ensembliste de De Morgan n'est que la traduction, élément par élément, de la loi
+        <em>logique</em> de De Morgan du chapitre 1.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Cardinal de \(\mathcal P(E)\) par récurrence</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Montrer que si \(\operatorname{card}(E)=n\), alors \(\operatorname{card}(\mathcal P(E))=2^n\).</div>
+        <p>Récurrence sur \(n=\operatorname{card}(E)\). Posons \(P(n)\) : « tout ensemble à \(n\) éléments a
+        \(2^n\) parties ».</p>
+        <p><b>Init.</b> \(n=0\) : le seul ensemble est \(\varnothing\), dont \(\mathcal P(\varnothing)=\{\varnothing\}\)
+        a \(1=2^0\) élément. ✓</p>
+        <p><b>Héréd.</b> Soit \(E\) à \(n+1\) éléments. Fixons \(a\in E\) et posons \(E'=E\setminus\{a\}\)
+        (\(n\) éléments). Les parties de \(E\) se scindent en deux familles <b>disjointes</b> :</p>
+        <ul>
+          <li>celles qui <b>ne contiennent pas</b> \(a\) : ce sont exactement les parties de \(E'\), au nombre de \(2^n\) (hyp.) ;</li>
+          <li>celles qui <b>contiennent</b> \(a\) : chacune s'écrit \(F\cup\{a\}\) avec \(F\subseteq E'\), à nouveau \(2^n\).</li>
+        </ul>
+        <p>D'où \(\operatorname{card}(\mathcal P(E))=2^n+2^n=2^{n+1}\).</p>
+        <div class="res">\(P(n+1)\) est vraie, donc \(\operatorname{card}(\mathcal P(E))=2^{n}\) pour tout \(n\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Une équivalence ensembliste</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Soient \(A,B\subseteq E\). Montrer que \(\;A\subseteq B\iff A\cup B=B\iff A\cap B=A\).</div>
+        <p class="q">\(A\subseteq B\Rightarrow A\cup B=B\).</p>
+        <p>Toujours \(B\subseteq A\cup B\). Réciproquement, soit \(x\in A\cup B\) : si \(x\in B\) c'est fini ;
+        si \(x\in A\subseteq B\) alors \(x\in B\). Donc \(A\cup B\subseteq B\), d'où \(A\cup B=B\).</p>
+        <p class="q">\(A\cup B=B\Rightarrow A\cap B=A\).</p>
+        <p>Toujours \(A\cap B\subseteq A\). Réciproquement soit \(x\in A\) : alors \(x\in A\cup B=B\), donc
+        \(x\in A\cap B\). Ainsi \(A\subseteq A\cap B\), d'où \(A\cap B=A\).</p>
+        <p class="q">\(A\cap B=A\Rightarrow A\subseteq B\).</p>
+        <p>Si \(A\cap B=A\), soit \(x\in A=A\cap B\), alors \(x\in B\). Donc \(A\subseteq B\).</p>
+        <div class="res">La boucle d'implications \(\;A\subseteq B\Rightarrow A\cup B=B\Rightarrow A\cap B=A\Rightarrow A\subseteq B\;\)
+        prouve l'équivalence des trois propositions. ∎</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CORRECTION TD ========================== -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale du TD n°2 — Théorie des ensembles</h2>
+    <p class="lead" style="font-size:.95rem">Feuille sans corrigé officiel : les 16 exercices sont résolus
+    intégralement, chaque sous-question traitée. (Notation du TD : \(A/B\) désigne la différence \(A\setminus B\).)</p>
+
+    <h3>Partie 1 — Extension &amp; compréhension</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — Compréhension → extension</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(A=\{x\in\mathbb N\mid x=2\}\)</p><p class="res">\(A=\{2\}\)</p>
+        <p class="q">(b) \(B=\{x\in\mathbb N\mid x\leqslant 6\text{ et }x\text{ pair}\}\)</p><p class="res">\(B=\{0,2,4,6\}\) (\(0\) est pair et \(\in\mathbb N\))</p>
+        <p class="q">(c) \(C=\{x\in\mathbb Z\mid -3\leqslant x\leqslant 3\}\)</p><p class="res">\(C=\{-3,-2,-1,0,1,2,3\}\)</p>
+        <p class="q">(d) \(D=\{x\in\mathbb N\mid x=n^2,\ n\in\{1,2,3,4\}\}\)</p><p class="res">\(D=\{1,4,9,16\}\)</p>
+        <p class="q">(e) \(E=\{x\in\mathbb N\mid x\text{ multiple de }3,\ x<20\}\)</p><p class="res">\(E=\{0,3,6,9,12,15,18\}\)</p>
+        <p class="q">(f) \(F=\{x\in\mathbb R\mid x^2+x+1\geqslant 0\}\)</p>
+        <p>Le trinôme a pour discriminant \(\Delta=1-4=-3<0\) et un coefficient dominant \(>0\) : il est
+        strictement positif partout.</p>
+        <p class="res">\(F=\mathbb R\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — Extension → compréhension</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Plusieurs écritures sont possibles ; on en donne une.</div>
+        <p class="q">(a) \(A=\varnothing\)</p><p class="res">\(A=\{x\in\mathbb R\mid x^2<0\}\) (ou \(\{x\in\mathbb N\mid x\neq x\}\))</p>
+        <p class="q">(b) \(B=\{\pi\}\)</p><p class="res">\(B=\{x\in\mathbb R\mid x=\pi\}\)</p>
+        <p class="q">(c) \(C=\{1,3,5,7,9\}\)</p><p class="res">\(C=\{2k+1\mid k\in\{0,1,2,3,4\}\}=\{x\in\mathbb N\mid x\text{ impair et }x\leqslant 9\}\)</p>
+        <p class="q">(d) \(D=\{2,4,8,16,32\}\)</p><p class="res">\(D=\{2^n\mid n\in\{1,2,3,4,5\}\}\)</p>
+        <p class="q">(e) \(E=\{\{1\}\}\)</p><p class="res">\(E=\{x\mid x=\{1\}\}\) (singleton dont l'unique élément est l'ensemble \(\{1\}\))</p>
+        <p class="q">(f) \(F=\{\varnothing\}\)</p><p class="res">\(F=\{x\mid x=\varnothing\}=\mathcal P(\varnothing)\)</p>
+      </div>
+    </div>
+
+    <h3>Partie 2 — Relations élément / ensemble</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — \(\in\) ou \(\subseteq\) ? (justifier)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(x\) est un objet quelconque. On rappelle : \(\in\) relie un objet à un ensemble,
+        \(\subseteq\) relie deux ensembles.</div>
+        <p class="q">(a) \(x\in\{x\}\)</p><p><b>Vrai</b> : \(x\) est l'élément du singleton \(\{x\}\).</p>
+        <p class="q">(b) \(\{x\}\in\{x\}\)</p><p><b>Faux</b> (en général) : le seul élément de \(\{x\}\) est \(x\), et \(\{x\}\neq x\).</p>
+        <p class="q">(c) \(x\in\{\{x\}\}\)</p><p><b>Faux</b> : le seul élément de \(\{\{x\}\}\) est \(\{x\}\), pas \(x\).</p>
+        <p class="q">(d) \(\{x\}\in\{\{x\}\}\)</p><p><b>Vrai</b> : \(\{x\}\) est bien l'élément de \(\{\{x\}\}\).</p>
+        <p class="q">(e) \(x\subseteq\{x\}\)</p><p><b>Faux</b> (en général) : \(\subseteq\) exige que \(x\) soit un ensemble et que ses éléments soient dans \(\{x\}\) ; rien ne le garantit (ex. \(x=1\)).</p>
+        <p class="q">(f) \(\{x\}\subseteq\{x\}\)</p><p><b>Vrai</b> : réflexivité de l'inclusion (tout élément de \(\{x\}\) est dans \(\{x\}\)).</p>
+        <p class="q">(g) \(x\subseteq\{\{x\}\}\)</p><p><b>Faux</b> (en général), même raison qu'en (e).</p>
+        <p class="q">(h) \(\{x\}\subseteq\{\{x\}\}\)</p><p><b>Faux</b> : il faudrait \(x\in\{\{x\}\}\), c.-à-d. \(x=\{x\}\), ce qui est impossible.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — \(A\subseteq B\) : que déduire ?</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(A\in B\)</p><p><b>Faux</b> en général : être une partie n'est pas être un élément (ex. \(A=\{1\}\subseteq B=\{1,2\}\) mais \(\{1\}\notin B\)).</p>
+        <p class="q">(b) \(A\subseteq\mathcal P(B)\)</p><p><b>Faux</b> : les éléments de \(A\) sont des éléments de \(B\), pas des parties de \(B\) (ex. \(1\in A\) mais \(1\notin\mathcal P(B)\)).</p>
+        <p class="q">(c) \(A\subseteq B\)</p><p><b>Vrai</b> : c'est l'hypothèse.</p>
+        <p class="q">(d) \(A\in\mathcal P(B)\)</p><p><b>Vrai</b> : par définition \(A\in\mathcal P(B)\iff A\subseteq B\), ce qui est donné.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — Ensembles des parties</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(A=\{0,1,2\}\) \((2^3=8)\)</p>
+        <p class="res">\(\mathcal P(A)=\{\varnothing,\{0\},\{1\},\{2\},\{0,1\},\{0,2\},\{1,2\},\{0,1,2\}\}\)</p>
+        <p class="q">(b) \(B=\{\{0,1,2\}\}\) \((2^1=2)\)</p>
+        <p>\(B\) n'a qu'<b>un</b> élément (l'ensemble \(\{0,1,2\}\)).</p>
+        <p class="res">\(\mathcal P(B)=\big\{\varnothing,\ \{\{0,1,2\}\}\big\}\)</p>
+        <p class="q">(c) \(C=\{a,b,c,d\}\) \((2^4=16)\)</p>
+        <p class="res">\(\mathcal P(C)=\big\{\varnothing,\{a\},\{b\},\{c\},\{d\},\{a,b\},\{a,c\},\{a,d\},\{b,c\},\{b,d\},\{c,d\},\{a,b,c\},\{a,b,d\},\{a,c,d\},\{b,c,d\},\{a,b,c,d\}\big\}\)</p>
+        <p class="q">(d) \(D=\varnothing\)</p><p class="res">\(\mathcal P(\varnothing)=\{\varnothing\}\)</p>
+        <p class="q">(e) \(E=\mathcal P(\varnothing)=\{\varnothing\}\)</p><p class="res">\(\mathcal P(E)=\big\{\varnothing,\{\varnothing\}\big\}\)</p>
+        <p class="q">(f) \(F=\mathcal P(\mathcal P(\varnothing))=\{\varnothing,\{\varnothing\}\}\)</p>
+        <p class="res">\(\mathcal P(F)=\big\{\varnothing,\ \{\varnothing\},\ \{\{\varnothing\}\},\ \{\varnothing,\{\varnothing\}\}\big\}\) \((2^2=4)\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — \(\mathcal P\) et \(\cup,\cap\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(\mathcal P(A\cup B)\) vs \(\mathcal P(A)\cup\mathcal P(B)\)</p>
+        <p><b>Conjecture</b> avec \(A=\{1,2\},\ B=\{1,3\}\), \(A\cup B=\{1,2,3\}\) : \(\mathcal P(A\cup B)\) a \(8\) éléments,
+        tandis que \(\mathcal P(A)\cup\mathcal P(B)=\{\varnothing,\{1\},\{2\},\{1,2\},\{3\},\{1,3\}\}\) n'en a que \(6\)
+        (il manque \(\{2,3\}\) et \(\{1,2,3\}\)).</p>
+        <p>On a toujours l'inclusion \(\mathcal P(A)\cup\mathcal P(B)\subseteq\mathcal P(A\cup B)\) : si \(X\subseteq A\)
+        ou \(X\subseteq B\), alors \(X\subseteq A\cup B\). Mais l'égalité est <b>fausse</b> en général (un
+        sous-ensemble de \(A\cup B\) peut piocher à la fois dans \(A\) et \(B\)).</p>
+        <div class="res">\(\mathcal P(A)\cup\mathcal P(B)\subseteq\mathcal P(A\cup B)\), inclusion en général <b>stricte</b>.</div>
+        <p class="q">(b) \(\mathcal P(A\cap B)\) vs \(\mathcal P(A)\cap\mathcal P(B)\)</p>
+        <p>Chaîne d'équivalences, pour tout ensemble \(X\) :</p>
+        \[ X\in\mathcal P(A\cap B)\iff X\subseteq A\cap B\iff(X\subseteq A\text{ et }X\subseteq B)\iff X\in\mathcal P(A)\cap\mathcal P(B). \]
+        <div class="res">Égalité toujours vraie : \(\mathcal P(A\cap B)=\mathcal P(A)\cap\mathcal P(B)\).</div>
+      </div>
+    </div>
+
+    <h3>Partie 3 — Union &amp; intersection</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 7 — Simplifier (\(X=[4,7]\), \(Y=[-5,5]\), \(Z=\mathbb N\))</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(Y=\{x\in\mathbb R\mid|x|\leqslant 5\}=[-5,5]\). Complémentaires pris dans \(\mathbb R\).</div>
+        <p class="q">(a) \(A=X\cup Y\)</p><p class="res">\([-5,7]\)</p>
+        <p class="q">(b) \(B=X\cap Z\)</p><p>Entiers naturels de \([4,7]\).</p><p class="res">\(\{4,5,6,7\}\)</p>
+        <p class="q">(c) \(C=X\cap Z^c\)</p><p>On retire de \([4,7]\) les entiers \(4,5,6,7\) :</p>
+        <p class="res">\(C=\left]4,5\right[\cup\left]5,6\right[\cup\left]6,7\right[\)</p>
+        <p class="q">(d) \(D=(X\cup Y)\cap Z\)</p><p>\([-5,7]\cap\mathbb N\) :</p><p class="res">\(\{0,1,2,3,4,5,6,7\}\)</p>
+        <p class="q">(e) \(E=X\cup(Y\cap Z)\)</p><p>\(Y\cap Z=[-5,5]\cap\mathbb N=\{0,1,2,3,4,5\}\), puis on réunit avec \([4,7]\) (qui absorbe \(4,5\)) :</p>
+        <p class="res">\(E=\{0,1,2,3\}\cup[4,7]\)</p>
+        <p class="q">(f) \(F=X^c\cap(Y^c\cup Z)\)</p>
+        <p>\(X^c=\left]-\infty,4\right[\cup\left]7,+\infty\right[\), \(Y^c=\left]-\infty,-5\right[\cup\left]5,+\infty\right[\).
+        Donc \(Y^c\cup Z=\left]-\infty,-5\right[\cup\{0,1,2,3,4,5\}\cup\left]5,+\infty\right[\). En intersectant avec \(X^c\)
+        (qui exclut \([4,7]\)) : on garde \(\left]-\infty,-5\right[\), on ne garde de \(\{0,..,5\}\) que \(0,1,2,3\)
+        (car \(4,5\in[4,7]\)), et \(\left]5,+\infty\right[\cap X^c=\left]7,+\infty\right[\).</p>
+        <p class="res">\(F=\left]-\infty,-5\right[\cup\{0,1,2,3\}\cup\left]7,+\infty\right[\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 8 — Démonstrations</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(A\setminus(B\setminus C)=(A\setminus B)\cup(A\cap C)\)</p>
+        <p>Pour tout \(x\) :</p>
+        \[ x\in A\setminus(B\setminus C)\iff x\in A\ \text{et}\ x\notin(B\setminus C)\iff x\in A\ \text{et}\ \operatorname{non}(x\in B\text{ et }x\notin C). \]
+        \[ \iff x\in A\ \text{et}\ (x\notin B\ \text{ou}\ x\in C)\iff (x\in A\text{ et }x\notin B)\ \text{ou}\ (x\in A\text{ et }x\in C). \]
+        <p class="res">\(=(A\setminus B)\cup(A\cap C)\). ∎</p>
+        <p class="q">(b) \(A\setminus(B\cap C)=(A\setminus B)\cup(A\setminus C)\)</p>
+        \[ x\in A\setminus(B\cap C)\iff x\in A\ \text{et}\ (x\notin B\text{ ou }x\notin C)\iff(x\in A\setminus B)\text{ ou }(x\in A\setminus C). \]
+        <p class="res">\(=(A\setminus B)\cup(A\setminus C)\). ∎ (De Morgan appliqué à \(x\notin B\cap C\).)</p>
+        <p class="q">(c) \(A\cup B=B\cap C\iff A\subseteq B\subseteq C\)</p>
+        <p><b>\(\Leftarrow\)</b> : si \(A\subseteq B\subseteq C\), alors \(A\cup B=B\) (car \(A\subseteq B\)) et
+        \(B\cap C=B\) (car \(B\subseteq C\)), donc \(A\cup B=B=B\cap C\).</p>
+        <p><b>\(\Rightarrow\)</b> : supposons \(A\cup B=B\cap C\). Or \(B\cap C\subseteq B\subseteq A\cup B\).
+        L'hypothèse écrase toute la chaîne : \(A\cup B=B\cap C\subseteq B\subseteq A\cup B\), donc tout est égal :
+        \(A\cup B=B=B\cap C\). De \(A\cup B=B\) on tire \(A\subseteq B\) ; de \(B=B\cap C\) on tire \(B\subseteq C\).</p>
+        <p class="res">\(A\subseteq B\subseteq C\). ∎</p>
+        <p class="q">(d) \((A\cap B^c)\cup(A^c\cap B)=B\iff A=\varnothing\)</p>
+        <p>Le membre de gauche est exactement \(A\,\Delta\,B\). L'équation est donc \(A\,\Delta\,B=B\).</p>
+        <p><b>\(\Leftarrow\)</b> : si \(A=\varnothing\), \(\varnothing\,\Delta\,B=B\) ✓.</p>
+        <p><b>\(\Rightarrow\)</b> : en composant par \(\Delta B\) (avec \(B\,\Delta\,B=\varnothing\) et l'associativité) :
+        \(A\,\Delta\,B=B\Rightarrow A\,\Delta\,B\,\Delta\,B=B\,\Delta\,B\Rightarrow A\,\Delta\,\varnothing=\varnothing\Rightarrow A=\varnothing\).</p>
+        <p class="res">\(A=\varnothing\). ∎</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 9 — Simplifier (distributivité)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Astuce : \(Y\cap Y^c=\varnothing\), \(Y\cup Y^c=\Omega\), et les quatre « cases »
+        \(X\cap Y,\ X\cap Y^c,\ X^c\cap Y,\ X^c\cap Y^c\) forment une partition de \(\Omega\).</div>
+        <p class="q">(a) \(A=(X\cap Y)\cap(X\cap Y^c)=X\cap(Y\cap Y^c)=X\cap\varnothing\)</p><p class="res">\(A=\varnothing\)</p>
+        <p class="q">(b) \(B=(X\cap Y)\cup(X\cap Y^c)=X\cap(Y\cup Y^c)=X\cap\Omega\)</p><p class="res">\(B=X\)</p>
+        <p class="q">(c) \(C=(X\cup Y)\cap(X\cup Y^c)=X\cup(Y\cap Y^c)=X\cup\varnothing\)</p><p class="res">\(C=X\)</p>
+        <p class="q">(d) \(D=(X\cap Y)\cup(X\cap Y^c)\cup(X^c\cap Y)\)</p>
+        <p>Les deux premiers termes donnent \(X\) (cf. b), d'où \(D=X\cup(X^c\cap Y)=(X\cup X^c)\cap(X\cup Y)=\Omega\cap(X\cup Y)\).</p>
+        <p class="res">\(D=X\cup Y\)</p>
+        <p class="q">(e) \(E=\) les quatre cases réunies</p><p>C'est la réunion de la partition entière de \(\Omega\).</p><p class="res">\(E=\Omega\)</p>
+        <p class="q">(f) \(F=(X\cup Y)\cap(X\cup Y^c)\cap(X^c\cup Y)\cap(X^c\cup Y^c)\)</p>
+        <p>Les deux premiers facteurs valent \(X\) (cf. c) ; les deux derniers : \((X^c\cup Y)\cap(X^c\cup Y^c)=X^c\cup(Y\cap Y^c)=X^c\).
+        Donc \(F=X\cap X^c\).</p>
+        <p class="res">\(F=\varnothing\)</p>
+      </div>
+    </div>
+
+    <h3>Partie 4 — Approfondissement</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 10 — L'opération \(A\odot B=(A\cup B)^c\) (« NON-OU »)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) Exprimer \(A^c\)</p>
+        <p>\(A\odot A=(A\cup A)^c=A^c\).</p><p class="res">\(A^c=A\odot A\)</p>
+        <p class="q">(b) Calculer \((A\odot A)\odot(B\odot B)\)</p>
+        <p>\((A\odot A)\odot(B\odot B)=A^c\odot B^c=(A^c\cup B^c)^c=(A\cap B)\) par De Morgan.</p>
+        <p class="res">\((A\odot A)\odot(B\odot B)=A\cap B\)</p>
+        <p class="q">(c) Exprimer \(A\cup B\) et \(A\setminus B\)</p>
+        <p>\(A\cup B=\big((A\cup B)^c\big)^c=(A\odot B)^c=(A\odot B)\odot(A\odot B)\).</p>
+        <p class="res">\(A\cup B=(A\odot B)\odot(A\odot B)\)</p>
+        <p>\(A\setminus B=A\cap B^c\). Or \(B^c=B\odot B\), et \((A\odot A)\odot B=A^c\odot B=(A^c\cup B)^c=A\cap B^c\).</p>
+        <p class="res">\(A\setminus B=(A\odot A)\odot B\)</p>
+        <div class="note">Toutes les opérations booléennes s'expriment avec le seul \(\odot\) (NOR) : c'est une porte
+        logique « universelle », comme en électronique.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 11 — Différence symétrique</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">On utilise \(A\,\Delta\,B=(A\setminus B)\cup(B\setminus A)\).</div>
+        <p class="q">(a) \(A\,\Delta\,A=(A\setminus A)\cup(A\setminus A)=\varnothing\cup\varnothing\)</p><p class="res">\(=\varnothing\)</p>
+        <p class="q">(b) \(A\,\Delta\,\varnothing=(A\setminus\varnothing)\cup(\varnothing\setminus A)=A\cup\varnothing\)</p><p class="res">\(=A\)</p>
+        <p class="q">(c) \(A\,\Delta\,B=B\,\Delta\,A\)</p><p>\((A\setminus B)\cup(B\setminus A)=(B\setminus A)\cup(A\setminus B)\) : commutativité de \(\cup\). ✓</p>
+        <p class="q">(d) \(A\,\Delta\,B=A^c\,\Delta\,B^c\)</p>
+        <p>\(A^c\,\Delta\,B^c=(A^c\setminus B^c)\cup(B^c\setminus A^c)=(A^c\cap B)\cup(B^c\cap A)=(B\setminus A)\cup(A\setminus B)=A\,\Delta\,B\). ✓
+        (car \(A^c\setminus B^c=A^c\cap(B^c)^c=A^c\cap B\)).</p>
+        <p class="q">(e) \(A\,\Delta\,B=(A\setminus B)\cup(B\setminus A)\)</p><p>C'est la définition équivalente ; on vérifie \((A\cup B)\setminus(A\cap B)=(A\setminus B)\cup(B\setminus A)\) : « dans exactement l'un des deux ». ✓</p>
+        <p class="q">(f) \((A\,\Delta\,B)\,\Delta\,C=A\,\Delta\,(B\,\Delta\,C)\)  (associativité)</p>
+        <p>On utilise la <b>fonction indicatrice</b> \(\mathbf 1_E\). On vérifie que \(\mathbf 1_{A\Delta B}=\mathbf 1_A+\mathbf 1_B\ (\mathrm{mod}\ 2)\)
+        (le « ou exclusif »). Alors :</p>
+        \[ \mathbf 1_{(A\Delta B)\Delta C}=\mathbf 1_A+\mathbf 1_B+\mathbf 1_C=\mathbf 1_{A\Delta(B\Delta C)}\quad(\mathrm{mod}\ 2). \]
+        <p>Autrement dit, \(x\) appartient à \(A\,\Delta\,B\,\Delta\,C\) ssi il appartient à un <b>nombre impair</b>
+        des ensembles \(A,B,C\) — description symétrique, indépendante du parenthésage.</p>
+        <p class="res">\((A\,\Delta\,B)\,\Delta\,C=A\,\Delta\,(B\,\Delta\,C)\). ∎</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 12 — Équations dans \(\mathcal P(\Omega)\) (\(A\subsetneq B\))</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(X\setminus A=B\)</p>
+        <p>Or \(X\setminus A\subseteq A^c\), donc toute solution vérifie \(B\cap A=\varnothing\). Mais \(A\subsetneq B\)
+        donne \(A\subseteq B\), soit \(A\cap B=A\). Il faudrait \(A=\varnothing\), ce qui contredit... non :
+        \(A=\varnothing\) est compatible avec \(A\subsetneq B\) (si \(B\neq\varnothing\)). Bilan :</p>
+        <ul>
+          <li>Si \(A\neq\varnothing\) : <b>aucune solution</b> (un élément de \(A\subseteq B\) devrait être hors de \(A\)).</li>
+          <li>Si \(A=\varnothing\) : \(X\setminus\varnothing=X=B\), solution unique \(X=B\).</li>
+        </ul>
+        <p class="res">\(A\neq\varnothing\Rightarrow S=\varnothing\) ; \(A=\varnothing\Rightarrow S=\{B\}\).</p>
+        <p class="q">(b) \(X\cup A=B\)</p>
+        <p>Nécessairement \(X\subseteq B\) et \(X\) doit contenir \(B\setminus A\) (les éléments de \(B\) hors de \(A\)),
+        les éléments de \(A\) restant libres. On vérifie que tout \(X\) avec \(B\setminus A\subseteq X\subseteq B\)
+        donne \(X\cup A=B\).</p>
+        <p class="res">\(S=\{X\in\mathcal P(\Omega)\mid B\setminus A\subseteq X\subseteq B\}\)</p>
+        <p class="q">(c) \(X\cap A=B\)</p>
+        <p>\(X\cap A\subseteq A\), donc toute solution impose \(B\subseteq A\). Or \(A\subsetneq B\) donne \(A\subseteq B\)
+        et \(A\neq B\) ; combiné à \(B\subseteq A\), on aurait \(A=B\) : contradiction.</p>
+        <p class="res">\(S=\varnothing\) (aucune solution).</p>
+        <p class="q">(d) \(X\,\Delta\,A=B\)</p>
+        <p>\(\Delta\) est « inversible » (chaque ensemble est son propre inverse) : en composant par \(\Delta A\),
+        \(X=X\,\Delta\,A\,\Delta\,A=B\,\Delta\,A\).</p>
+        <p class="res">Solution unique \(X=A\,\Delta\,B\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 13 — Produits cartésiens</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">(a) \(A=\{1,2\}\times\{1,3\}\)</p><p class="res">\(\{(1,1),(1,3),(2,1),(2,3)\}\)</p>
+        <p class="q">(b) \(B=\{2,1\}\times\{1,3\}\)</p><p>L'ordre d'écriture des éléments d'un ensemble ne compte pas : \(\{2,1\}=\{1,2\}\).</p>
+        <p class="res">\(B=\{(1,1),(1,3),(2,1),(2,3)\}=A\)</p>
+        <p class="q">(c) \(C=\{1\}\times\{1,2\}\times\{1,2,3\}\) \((1\cdot 2\cdot 3=6)\)</p>
+        <p class="res">\(\{(1,1,1),(1,1,2),(1,1,3),(1,2,1),(1,2,2),(1,2,3)\}\)</p>
+        <p class="q">(d) \(D=\{1,2,3\}\times\{1\}\times\{1,2\}\) \((3\cdot 1\cdot 2=6)\)</p>
+        <p class="res">\(\{(1,1,1),(1,1,2),(2,1,1),(2,1,2),(3,1,1),(3,1,2)\}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 14 — Représentation dans le plan</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Descriptions (les figures sont à tracer dans le repère \((Ox,Oy)\)).</div>
+        <p class="q">(a) \(A=[0,1]\times[0,1]\)</p><p><b>Carré unité plein</b> : tous les points \((x,y)\) avec \(0\leqslant x\leqslant 1\) et \(0\leqslant y\leqslant 1\) (bords inclus).</p>
+        <p class="q">(b) \(B=([0,1]\cup[2,3])\times[0,3]\)</p><p><b>Deux bandes verticales</b> : \(x\in[0,1]\) et \(x\in[2,3]\), chacune de hauteur \(y\in[0,3]\) — deux rectangles \(1\times 3\) séparés par la bande \(1<x<2\).</p>
+        <p class="q">(c) \(C=\mathbb R\times\mathbb R\)</p><p><b>Le plan tout entier</b> \(\mathbb R^2\).</p>
+        <p class="q">(d) \(D=\mathbb Z\times\mathbb Z\)</p><p><b>Le réseau des points à coordonnées entières</b> (grille de points isolés, un à chaque nœud).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 15 — Partitions de \(\Omega=\{1,2,3,4\}\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Rappel : blocs non vides, deux à deux disjoints, de réunion \(\Omega\).</div>
+        <p class="q">(a) \(\mathcal A=\{\Omega\}\)</p><p><b>Oui</b> : un seul bloc, non vide, de réunion \(\Omega\) (partition triviale).</p>
+        <p class="q">(b) \(\mathcal B=\{\{1,2\},\{3,4\}\}\)</p><p><b>Oui</b> : blocs non vides, disjoints, réunion \(\{1,2,3,4\}=\Omega\).</p>
+        <p class="q">(c) \(\mathcal C=\{\{1,2\},\{2,3\},\{4\}\}\)</p><p><b>Non</b> : \(\{1,2\}\cap\{2,3\}=\{2\}\neq\varnothing\) (pas disjoints ; l'élément \(2\) est compté deux fois).</p>
+        <p class="q">(d) \(\mathcal D=\{\{1\},\{2\},\{3\},\{4\}\}\)</p><p><b>Oui</b> : les singletons, disjoints, de réunion \(\Omega\) (partition « discrète »).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 16 — Répartir 6 étudiants en 3 groupes de 2</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Chaque étudiant dans un seul groupe ; les groupes ne sont pas numérotés (non ordonnés).</div>
+        <p><b>Méthode 1 — choix successifs puis correction de l'ordre.</b> On forme d'abord des groupes
+        <em>ordonnés</em> :</p>
+        \[ \binom{6}{2}\times\binom{4}{2}\times\binom{2}{2}=15\times 6\times 1=90. \]
+        <p>Mais les \(3\) groupes n'étant pas distinguables, chaque répartition a été comptée \(3!=6\) fois
+        (une pour chaque ordre des trois groupes). On divise :</p>
+        \[ \frac{90}{3!}=\frac{90}{6}=15. \]
+        <p><b>Méthode 2 — formule des partitions.</b> Nombre de partitions de \(6\) objets en \(3\) paires :</p>
+        \[ \frac{6!}{(2!)^3\,\cdot\,3!}=\frac{720}{8\times 6}=15. \]
+        <div class="res">Il y a <b>15</b> répartitions possibles.</div>
+      </div>
+    </div>
+
+  </section>
+
+  <p style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.9rem;opacity:.75">
+    Chapitre 2 du cours M01 (S1). Sources : <em>Chap_2.pdf</em> (cours magistral) et
+    <em>TD02 — Théorie des ensembles</em>. Corrigé rédigé intégralement (pas de corrigé officiel fourni).
+  </p>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours (CM)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/theorie-ensembles/Chap_2.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Chap_2</span><span class="badge">Cours (CM)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/theorie-ensembles/TD02___Th%C3%A9orie_des_ensembles.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD02___Théorie_des_ensembles</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

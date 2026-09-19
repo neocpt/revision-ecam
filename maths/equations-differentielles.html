@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Équations différentielles — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-math">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Maths · M02 — Équations différentielles</span>
+  <h1 class="title">Équations différentielles</h1>
+  <p class="lead">1er ordre : équation homogène, solution particulière (identification, superposition), variation de la constante,
+  problèmes de Cauchy, équations à variables séparables. 2ème ordre à coefficients constants : équation caractéristique,
+  second membre, résonance, changements de variable (Euler-Cauchy).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction intégrale des TD (1er &amp; 2ème ordre)</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Équations du 1er ordre \(y'+a(x)y=b(x)\)</h3>
+    <div class="thm">
+      <span class="lab">Solution homogène</span>
+      \(y'+a(x)y=0\Rightarrow y=Ce^{-A(x)}\) où \(A\) est une primitive de \(a\).
+    </div>
+    <div class="method">
+      <span class="lab">Solution générale</span>
+      \(y=y_h+y_p\). Trouver \(y_p\) par <b>identification</b> (forme du second membre) ou <b>variation de la constante</b> :
+      poser \(y=C(x)e^{-A(x)}\), alors \(C'(x)e^{-A(x)}=b(x)\). <b>Superposition</b> : si \(b=b_1+b_2\), sommer les particulières.
+    </div>
+    <div class="note">
+      <span class="lab">Variables séparables</span>
+      \(y'=f(x)g(y)\Rightarrow\int\tfrac{dy}{g(y)}=\int f(x)\,dx\). Problème de Cauchy : la condition initiale fixe la constante.
+    </div>
+
+    <h3>1.2 Équations du 2ème ordre \(ay''+by'+cy=d(x)\) (coeff. constants)</h3>
+    <div class="thm">
+      <span class="lab">Équation caractéristique \(ar^2+br+c=0\)</span>
+      \(\Delta>0\) (racines \(r_1,r_2\)) : \(y_h=Ae^{r_1x}+Be^{r_2x}\).
+      \(\Delta=0\) (racine double \(r\)) : \(y_h=(A+Bx)e^{rx}\).
+      \(\Delta<0\) (\(r=\alpha\pm i\beta\)) : \(y_h=e^{\alpha x}(A\cos\beta x+B\sin\beta x)\).
+    </div>
+    <div class="method">
+      <span class="lab">Second membre &amp; résonance</span>
+      Pour \(P(x)e^{\lambda x}\) : chercher \(y_p=Q(x)e^{\lambda x}\), \(\deg Q=\deg P\), sauf si \(\lambda\) est racine de
+      l'équation caractéristique — multiplier alors par \(x\) (racine simple) ou \(x^2\) (racine double).
+      \(\cos/\sin(\omega x)\) : essayer \(a\cos\omega x+b\sin\omega x\) (ou passer par les complexes \(e^{i\omega x}\)).
+    </div>
+    <div class="note">
+      <span class="lab">Euler-Cauchy</span>
+      \(x^2y''+\alpha xy'+\beta y=0\) : poser \(t=\ln x\) (\(z(t)=y(e^t)\)), \(xy'=\dot z\), \(x^2y''=\ddot z-\dot z\) →
+      équation à coefficients constants en \(z\).
+    </div>
+  </section>
+
+  <!-- ==================== EXOS CRÉÉS ============================== -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés)</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — 1er ordre avec Cauchy</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(y'+y=e^x\), \(y(0)=0\).</div>
+        <p>\(y_h=Ce^{-x}\) ; \(y_p=\tfrac12e^x\) (identification). \(y=Ce^{-x}+\tfrac12e^x\), \(y(0)=C+\tfrac12=0\).</p>
+        <div class="res">\(y=\tfrac12(e^x-e^{-x})=\operatorname{sh}x\)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — 2ème ordre avec résonance</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(y''-2y'+y=e^x\).</div>
+        <p>Char \((r-1)^2\), racine double \(1\). \(e^x\) résonne doublement : \(y_p=ax^2e^x\), \((D-1)^2(ax^2e^x)=2ae^x=e^x\Rightarrow a=\tfrac12\).</p>
+        <div class="res">\(y=(A+Bx)e^x+\tfrac12x^2e^x\)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Oscillateur amorti</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(y''+2y'+5y=0\).</div>
+        <p>Char \(r^2+2r+5=0\), \(\Delta=-16\), \(r=-1\pm2i\).</p>
+        <div class="res">\(y=e^{-x}(A\cos2x+B\sin2x)\)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CORRECTION TD ========================== -->
+  <section class="block" id="td">
+    <h2>3. Correction intégrale des TD</h2>
+    <p class="lead" style="font-size:.95rem">TD1 (1er ordre, 9 exercices) et TD2 (2ème ordre, 9 exercices), résolus intégralement. Constante \(+C\) sous-entendue.</p>
+
+    <h3>TD1 — Équations du 1er ordre</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — Équations homogènes</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(1) \(y'+3y=0\)</p><p class="res">\(y=Ce^{-3t}\)</p>
+        <p class="q">(2) \(y'+\sin(3t)y=0\)</p><p class="res">\(y=Ce^{\cos(3t)/3}\)</p>
+        <p class="q">(3) \(y'+\tfrac{e^t}{e^t+1}y=0\)</p><p class="res">\(y=\tfrac{C}{e^t+1}\)</p>
+        <p class="q">(4) \(y'+\tfrac1{1+x^2}y=0\)</p><p class="res">\(y=Ce^{-\arctan x}\)</p>
+        <p class="q">(5) \(y'+\cos(x)y=0\)</p><p class="res">\(y=Ce^{-\sin x}\)</p>
+        <p class="q">(6) \(y'+\tfrac{x}{1+x^2}y=0\)</p><p class="res">\(y=\tfrac{C}{\sqrt{1+x^2}}\)</p>
+        <p class="q">(7) \(y'-\tfrac2xy=0\) sur \(\mathbb R_+^*\)</p><p class="res">\(y=Cx^2\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — Solution particulière de \(y'-2y=g\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(1) \(g=3\)</p><p class="res">\(y_p=-\tfrac32\)</p>
+        <p class="q">(2) \(g=t^2\)</p><p class="res">\(y_p=-\tfrac12t^2-\tfrac12t-\tfrac14\)</p>
+        <p class="q">(3) \(g=e^{4t}\)</p><p class="res">\(y_p=\tfrac12e^{4t}\)</p>
+        <p class="q">(4) \(g=3e^{2t}\) (résonance)</p><p class="res">\(y_p=3te^{2t}\)</p>
+        <p class="q">(5) \(g=\sin2t\)</p><p class="res">\(y_p=-\tfrac14\cos2t-\tfrac14\sin2t\)</p>
+        <p class="q">(6) \(g=4\sin2t-2t^2\)</p><p class="res">\(y_p=-\cos2t-\sin2t+t^2+t+\tfrac12\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — Identification &amp; superposition</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(1) \(y'+y=\sin x+\sin2x\)</p><p class="res">\(y=Ce^{-x}-\tfrac12\cos x+\tfrac12\sin x-\tfrac25\cos2x+\tfrac15\sin2x\)</p>
+        <p class="q">(2) \(y'+y=(x^2-2x+2)e^{2x}\)</p><p class="res">\(y=Ce^{-x}+\big(\tfrac{x^2}3-\tfrac{8x}9+\tfrac{26}{27}\big)e^{2x}\)</p>
+        <p class="q">(3) \(y'-3y=x^2e^x+xe^{3x}\) (résonance sur \(e^{3x}\))</p><p class="res">\(y=Ce^{3x}+\big(-\tfrac12x^2-\tfrac12x-\tfrac14\big)e^x+\tfrac12x^2e^{3x}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — Variation de la constante</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(1) \(y'-2xy=e^{x+x^2}\)</p><p>\(y_h=Ce^{x^2}\), \(C'=e^x\).</p><p class="res">\(y=e^{x+x^2}+Ce^{x^2}\)</p>
+        <p class="q">(2) \(y'+\tfrac1xy=e^x\) sur \(\mathbb R_+^*\)</p><p>\(y_h=\tfrac Cx\), \(C'=xe^x\).</p><p class="res">\(y=\tfrac{(x-1)e^x+C}x\)</p>
+        <p class="q">(3) \(y'+\tfrac1xy=\tfrac x{x-1}\) sur \(]1,\infty[\)</p><p>\(C'=\tfrac{x^2}{x-1}=x+1+\tfrac1{x-1}\).</p><p class="res">\(y=\tfrac1x\big(\tfrac{x^2}2+x+\ln(x-1)+C\big)\)</p>
+        <p class="q">(4) \(y'-(2x-\tfrac1x)y=1\) sur \(]0,\infty[\)</p><p>\(y_h=\tfrac{e^{x^2}}x\), \(C'=xe^{-x^2}\).</p><p class="res">\(y=\tfrac{Ce^{x^2}}x-\tfrac1{2x}\)</p>
+        <p class="q">(5) \(y'-y=x^ke^x\)</p><p>\(C'=x^k\).</p><p class="res">\(y=\big(\tfrac{x^{k+1}}{k+1}+C\big)e^x\)</p>
+        <p class="q">(6) \(y'+y\tan x=\cos^2x\)</p><p>\(y_h=C\cos x\), \(C'=\cos x\).</p><p class="res">\(y=\tfrac12\sin2x+C\cos x\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — Problèmes de Cauchy</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(1) \(y'+2y=-4,\ y(1)=-3\)</p><p class="res">\(y=-e^{2-2t}-2\)</p>
+        <p class="q">(2) \(2y'-3y=9,\ y(-1)=1\)</p><p class="res">\(y=4e^{3(t+1)/2}-3\)</p>
+        <p class="q">(3) \(y'=-\tfrac12y+e^t,\ y(0)=1\)</p><p class="res">\(y=\tfrac13e^{-t/2}+\tfrac23e^t\)</p>
+        <p class="q">(4) \(y'-\tfrac14y=1-t,\ y(0)=0\)</p><p class="res">\(y=-12e^{t/4}+4t+12\)</p>
+        <p class="q">(5) \(y'+2y=e^{-2t},\ y(0)=-1\) (résonance)</p><p class="res">\(y=(t-1)e^{-2t}\)</p>
+        <p class="q">(6) \(\tfrac13y'+y=t^2+2-e^{3t},\ y(0)=0\)</p><p class="res">\(y=-\tfrac{31}{18}e^{-3t}+t^2-\tfrac23t+\tfrac{20}9-\tfrac12e^{3t}\)</p>
+        <p class="q">(7) \(x^2y'+xy=1,\ y(1)=2\) (\(x>0\))</p><p class="res">\(y=\tfrac{\ln x+2}x\)</p>
+        <p class="q">(8) \(y'-2xy=(1-2x)e^x,\ y(1)=0\)</p><p class="res">\(y=e^x-e^{x^2}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — Équation d'une famille</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Solutions \(x\mapsto\dfrac{C+x}{1+x^2}\).</div>
+        <p>\((1+x^2)y=C+x\), on dérive : \((1+x^2)y'+2xy=1\).</p>
+        <div class="res">\((1+x^2)y'+2xy=1\)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 7 — Variables séparables</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(1) \(y'=\tfrac{t}{1+t^2}y\)</p><p>\(\tfrac{y'}y=\tfrac t{1+t^2}\), \(\ln|y|=\tfrac12\ln(1+t^2)+K\).</p><p class="res">\(y=C\sqrt{1+t^2}\)</p>
+        <p class="q">(2) \(y'=\tfrac{2t}{1+y^2},\ y(0)=0\)</p><p>\((1+y^2)y'=2t\), \(y+\tfrac{y^3}3=t^2\).</p><p class="res">\(y^3+3y=3t^2\) (implicite)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 8 — Raccordement en 0 (\(|t|y'+y=\tfrac1{1+t}\))</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">1) Sur \(I_1=]0,\infty[\)</p><p>\(ty'+y=(ty)'=\tfrac1{1+t}\).</p><p class="res">\(y=\tfrac{\ln(1+t)+C_1}{t}\)</p>
+        <p class="q">2) Sur \(I_2=]-1,0[\)</p><p>(a) \(y'-\tfrac1ty=-\tfrac1{t(1+t)}\) ; (b) \(y_h=Ct\) ; (c) \(\tfrac1{t^2(1+t)}=-\tfrac1t+\tfrac1{t^2}+\tfrac1{1+t}\) ; (d-e) variation de la constante :</p>
+        <p class="res">\(y=C_2t+t\ln\big|\tfrac t{1+t}\big|+1\)</p>
+        <p class="q">3) Sur \(I=]-1,\infty[\)</p>
+        <p>(a) \(f(0)=1\). (c) La continuité impose \(C_1=0\) (sinon \(y\to\pm\infty\) en \(0^+\)) ; \(C_2\) reste libre. (d) \(\lim_{t\to0^-}\tfrac{f(t)-f(0)}t=C_2+\ln\big|\tfrac t{1+t}\big|\to-\infty\).</p>
+        <div class="res">Dérivée à droite \(=-\tfrac12\), à gauche \(=-\infty\) : \(f\) est continue en \(0\) mais <b>non dérivable</b>. (E) n'a donc pas de solution dérivable sur tout \(I\) — seulement des solutions sur \(I_1\) et \(I_2\) séparément.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 9 — Loi de refroidissement de Newton</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(\theta'=\lambda(\theta_a-\theta)\).</div>
+        <p class="q">1) Solutions</p><p class="res">\(\theta(t)=\theta_a+Ce^{-\lambda t}\)</p>
+        <p class="q">2) \(\theta_a=31\), \(\theta(0)=10\), \(\theta(10)=17\), temps pour \(25°\)</p>
+        <p>\(\theta=31-21e^{-\lambda t}\), \(e^{-10\lambda}=\tfrac23\Rightarrow\lambda=\tfrac1{10}\ln\tfrac32\). Pour \(25°\) : \(e^{-\lambda t}=\tfrac27\).</p>
+        <div class="res">\(t=\dfrac{10\ln(7/2)}{\ln(3/2)}\approx30{,}9\) min</div>
+      </div>
+    </div>
+
+    <h3>TD2 — Équations du 2ème ordre</h3>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — Équations homogènes</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">(1) \(y''+4y'-5y=0\)</p><p>\((r+5)(r-1)\).</p><p class="res">\(y=Ae^{-5x}+Be^x\)</p>
+        <p class="q">(2) \(y''-2y'+y=0\)</p><p>\((r-1)^2\).</p><p class="res">\(y=(A+Bx)e^x\)</p>
+        <p class="q">(3) \(y''+2y'+2y=0\)</p><p>\(r=-1\pm i\).</p><p class="res">\(y=e^{-x}(A\cos x+B\sin x)\)</p>
+        <p class="q">(4) \(y'=2y''\)</p><p>\(2r^2-r=0\).</p><p class="res">\(y=A+Be^{x/2}\)</p>
+        <p class="q">(5) \(y+2y''=0\)</p><p>\(r=\pm\tfrac i{\sqrt2}\).</p><p class="res">\(y=A\cos\tfrac x{\sqrt2}+B\sin\tfrac x{\sqrt2}\)</p>
+        <p class="q">(6) \(y-2y''=0\)</p><p>\(r=\pm\tfrac1{\sqrt2}\).</p><p class="res">\(y=Ae^{x/\sqrt2}+Be^{-x/\sqrt2}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — Équation d'une famille</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(y=C_1e^{2x}+C_2e^{-x}\).</div>
+        <p>Racines \(2,-1\), \((r-2)(r+1)=r^2-r-2\).</p>
+        <div class="res">\(y''-y'-2y=0\)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — Second membre</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(1) \(y''+4y'+4y=e^{-x}\)</p><p class="res">\(y=(A+Bx)e^{-2x}+e^{-x}\)</p>
+        <p class="q">(2) \(y''-4y'+4y=\sin x\)</p><p class="res">\(y=(A+Bx)e^{2x}+\tfrac4{25}\cos x+\tfrac3{25}\sin x\)</p>
+        <p class="q">(3) \(y''-2y'+y=2e^x\) (résonance double)</p><p class="res">\(y=(A+Bx)e^x+x^2e^x\)</p>
+        <p class="q">(4) \(y''+3y'+2y=e^x\)</p><p class="res">\(y=Ae^{-x}+Be^{-2x}+\tfrac16e^x\)</p>
+        <p class="q">(5) \(y''+3y'+2y=e^{-x}\) (résonance)</p><p class="res">\(y=Ae^{-x}+Be^{-2x}+xe^{-x}\)</p>
+        <p class="q">(6) \(y''+2y'+y=2e^{-x}\) (résonance double)</p><p class="res">\(y=(A+Bx)e^{-x}+x^2e^{-x}\)</p>
+        <p class="q">(7) \(y''+y'-2y=8\sin2x\)</p><p class="res">\(y=Ae^{-2x}+Be^x-\tfrac25\cos2x-\tfrac65\sin2x\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — Second membre polynomial</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(1) \(y''-2y'+5y=2\)</p><p class="res">\(y=e^x(A\cos2x+B\sin2x)+\tfrac25\)</p>
+        <p class="q">(2) \(y''-5y'+6y=x^2+1\)</p><p class="res">\(y=Ae^{2x}+Be^{3x}+\tfrac{x^2}6+\tfrac{5x}{18}+\tfrac{37}{108}\)</p>
+        <p class="q">(3) \(y''+y'-6y=1-8x-30x^2\)</p><p class="res">\(y=Ae^{-3x}+Be^{2x}+5x^2+3x+2\)</p>
+        <p class="q">(4) \(y''+y'=3+2x\) (0 racine)</p><p class="res">\(y=A+Be^{-x}+x^2+x\)</p>
+        <p class="q">(5) \(y''+4y=4+2x-8x^2-4x^3\)</p><p class="res">\(y=A\cos2x+B\sin2x-x^3-2x^2+2x+2\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — Cauchy (2ème ordre)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(1) \(y''-2y'+y=x,\ y(0)=y'(0)=0\)</p><p class="res">\(y=(x-2)e^x+x+2\)</p>
+        <p class="q">(2) \(y''-3y'+2y=2,\ y(0)=3,y'(0)=2\)</p><p class="res">\(y=2e^x+1\)</p>
+        <p class="q">(3) \(y''-3y'+2y=xe^x,\ y(1)=y'(1)=0\)</p><p class="res">\(y=2e^{2x-1}-\tfrac12(x+1)^2e^x\)</p>
+        <p class="q">(4) \(y''-2y'+2y=e^x\sin x,\ y(\tfrac\pi2)=y'(\tfrac\pi2)=0\) (résonance)</p><p class="res">\(y=\tfrac{\pi-2x}4e^x\cos x\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — Divers seconds membres</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(1) \(y''-y=e^{2x}-e^x\) (résonance sur \(e^x\))</p><p class="res">\(y=Ae^x+Be^{-x}+\tfrac13e^{2x}-\tfrac12xe^x\)</p>
+        <p class="q">(2) \(y''+y'+y=\cos x\)</p><p class="res">\(y=e^{-x/2}(A\cos\tfrac{\sqrt3x}2+B\sin\tfrac{\sqrt3x}2)+\sin x\)</p>
+        <p class="q">(3) \(y''-2y'+y=\sin^2x\)</p><p class="res">\(y=(A+Bx)e^x+\tfrac12+\tfrac3{50}\cos2x+\tfrac2{25}\sin2x\)</p>
+        <p class="q">(4) \(y''+y'+y=e^x\cos x\)</p><p class="res">\(y=e^{-x/2}(A\cos\tfrac{\sqrt3x}2+B\sin\tfrac{\sqrt3x}2)+\tfrac{e^x}{13}(2\cos x+3\sin x)\)</p>
+        <p class="q">(5) \(y''-4y'+3y=(2x+1)e^{-x}\)</p><p class="res">\(y=Ae^x+Be^{3x}+\big(\tfrac x4+\tfrac5{16}\big)e^{-x}\)</p>
+        <p class="q">(6) \(y''-4y'+3y=(2x+1)e^x\) (résonance)</p><p class="res">\(y=Ae^x+Be^{3x}-\big(\tfrac12x^2+x\big)e^x\)</p>
+        <p class="q">(7) \(y''-2y'+y=(x^2+1)e^x+e^{3x}\) (résonance double)</p><p class="res">\(y=(A+Bx)e^x+\big(\tfrac{x^4}{12}+\tfrac{x^2}2\big)e^x+\tfrac14e^{3x}\)</p>
+        <p class="q">(8) \(y''-4y'+4y=\tfrac12\cosh2x\)</p><p class="res">\(y=(A+Bx)e^{2x}+\tfrac{x^2}8e^{2x}+\tfrac1{64}e^{-2x}\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 7 — Équation d'Euler-Cauchy</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(x^2y''-3xy'+4y=0\) sur \(\mathbb R_+^*\).</div>
+        <p class="q">1-3) Nature &amp; changement \(z(t)=y(e^t)\)</p><p>Linéaire d'ordre 2 à coefficients <b>non constants</b> (Euler). \(\dot z=xy'\), \(\ddot z=x^2y''+xy'\), d'où \(x^2y''=\ddot z-\dot z\). L'équation devient \(\ddot z-4\dot z+4z=0\).</p>
+        <p class="q">4-5) Résolution</p><p>Char \((r-2)^2\), \(z=(A+Bt)e^{2t}\), donc \(y=z(\ln x)\).</p>
+        <div class="res">\(y=(A+B\ln x)\,x^2\)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 8 — Changements de variable</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">(1) \(y''-y'-e^{2x}y=e^{3x}\), \(t=e^x\)</p><p>Devient \(\ddot y-y=t\).</p><p class="res">\(y=Ae^{e^x}+Be^{-e^x}-e^x\)</p>
+        <p class="q">(2) \(x^2y''+3xy'+y=\tfrac1{x^2}\), \(t=\ln x\)</p><p>Devient \(\ddot y+2\dot y+y=e^{-2t}\).</p><p class="res">\(y=\tfrac{A+B\ln x}x+\tfrac1{x^2}\)</p>
+        <p class="q">(3) \(y''+\tan x\,y'-y\cos^2x=0\), \(t=\sin x\)</p><p>Devient \(\ddot y-y=0\).</p><p class="res">\(y=Ae^{\sin x}+Be^{-\sin x}\)</p>
+        <p class="q">(4) \(4xy''+2y'-y=0\), \(t=\sqrt x\)</p><p>Devient \(\ddot y-y=0\).</p><p class="res">\(y=Ae^{\sqrt x}+Be^{-\sqrt x}\)</p>
+        <p class="q">(5) \(y''-4y'+4y=\tfrac{e^{2x}}{x^2}\), \(y=e^{2x}z\), \(y(1)=1,y'(1)=0\)</p><p>Devient \(z''=\tfrac1{x^2}\), \(z=-\ln x+C_1x+C_2\).</p><p class="res">\(y=e^{2x}\big(-\ln x+(1-2e^{-2})x+3e^{-2}-1\big)\)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 9 — Masse-ressort amorti</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(2x''+2x'+5x=0\), \(x(0)=2\), \(x'(0)=3\sqrt3-1\).</div>
+        <p class="q">1) Solutions</p><p>Char \(2r^2+2r+5=0\), \(r=-\tfrac12\pm\tfrac32i\).</p><p class="res">\(x=e^{-t/2}(A\cos\tfrac{3t}2+B\sin\tfrac{3t}2)\)</p>
+        <p class="q">2) Conditions initiales</p><p>\(A=2\), \(-\tfrac12A+\tfrac32B=3\sqrt3-1\Rightarrow B=2\sqrt3\).</p><p class="res">\(x=e^{-t/2}\big(2\cos\tfrac{3t}2+2\sqrt3\sin\tfrac{3t}2\big)\)</p>
+        <p class="q">3) Limite</p><p class="res">\(x(t)\to0\) (amortissement)</p>
+        <p class="q">4) Premier \(t_0>0\) avec \(x(t_0)=0\)</p><p>\(\tan\tfrac{3t}2=-\tfrac1{\sqrt3}\Rightarrow\tfrac{3t}2=\tfrac{5\pi}6\).</p><p class="res">\(t_0=\dfrac{5\pi}9\)</p>
+      </div>
+    </div>
+
+  </section>
+
+  <p style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.9rem;opacity:.75">
+    Module M02 (S2). Sources : <em>Equations Differentielles-V2026</em>, <em>TD1 (1er ordre)</em> et <em>TD2 (2ème ordre)</em>.
+    Corrigé rédigé intégralement (pas de corrigé officiel fourni).
+  </p>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours / ressource</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/equations-differentielles/Equations%20Differentielles-V2026-Etudiant-VF.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Equations Differentielles-V2026-Etudiant-VF</span><span class="badge">Cours / ressource</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/maths/equations-differentielles/TD1-2026_Equats-Diff-1er-Ordre-Etudiants-VF.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD1-2026_Equats-Diff-1er-Ordre-Etudiants-VF</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/maths/equations-differentielles/TD2-2026_Equats-Diff-2%C3%A8me-Ordre-Etudiants%20VF.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD2-2026_Equats-Diff-2ème-Ordre-Etudiants VF</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>

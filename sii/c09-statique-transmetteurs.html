@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C09 — Comportement statique des transmetteurs — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-sii">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SII · C09 — Comportement statique des transmetteurs</span>
+  <h1 class="title">C09 — Modéliser le comportement statique des transmetteurs</h1>
+  <p class="lead">Loi entrée-sortie <b>en effort</b> d'un transmetteur, par le <b>théorème de l'énergie cinétique</b> (\(P_e=P_s\) sans pertes) ;
+  puissances de rotation \(P=C\omega\) et de translation \(P=Fv\) ; réducteur \(\tfrac{C_s}{C_e}=\tfrac1i\), vis-écrou \(F_s=\mp\tfrac{2\pi}{p}C_e\) ;
+  prise en compte du <b>rendement</b> \(\eta\) en régime permanent.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction du TD (échelle EPAS, grue de chantier)</a></li>
+          <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Théorème de l'énergie cinétique (sans pertes)</h3>
+    <div class="thm">
+      <span class="lab">Égalité des puissances</span>
+      En régime permanent / quasi-statique, sans pertes (liaisons parfaites), pour un transmetteur (bâti galiléen) :
+      \(\dfrac{dE_C}{dt}=0\), \(\sum P_{int}=0\), donc \(\boxed{P_e=P_s}\).
+      Puissances : rotation \(P=C\,\omega\), translation \(P=F\,v\).
+    </div>
+
+    <h3>1.2 Lois entrée-sortie en effort</h3>
+    <div class="thm">
+      <span class="lab">Résultats fondamentaux (sans pertes)</span>
+      <b>Réducteur / multiplicateur</b> (\(\omega_s=i\,\omega_e\)) : \(C_s\omega_s=C_e\omega_e\Rightarrow\dfrac{C_s}{C_e}=\dfrac1i\)
+      (réducteur \(i<1\) : \(C_s>C_e\), le couple augmente).<br>
+      <b>Vis-écrou</b> (\(v_s=\mp\tfrac{p}{2\pi}\omega_e\)) : \(F_s v_s=C_e\omega_e\Rightarrow F_s=\mp\dfrac{2\pi}{p}C_e\).<br>
+      <b>Pignon-crémaillère</b> (\(R=\tfrac{mZ}2\)) : \(F_s=\dfrac1R C_e\).
+    </div>
+    <div class="note">
+      <span class="lab">Avec rendement \(\eta\) (0 &lt; η ≤ 1)</span>
+      \(P_s=\eta\,P_e\) ; pertes \(p_d=(1-\eta)|P_e|\). Pour un réducteur : \(\dfrac{C_s}{C_e}=\dfrac{\eta}{i}\).
+      Règle générale : à partir de la loi cinématique \(\tfrac{\text{cin. sortie}}{\text{cin. entrée}}=k\), la loi en effort est
+      \(\dfrac{\text{effort sortie}}{\text{effort entrée}}=\dfrac{\eta}{k}\). Le rendement <b>réduit</b> l'effort de sortie.
+      Valable en équilibre <b>seulement si \(\eta=1\)</b> (les pertes de frottement changent à l'arrêt).
+    </div>
+  </section>
+
+  <!-- ======================= EXOS CRÉÉS =============================== -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Réducteur & multiplicateur (couples)</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">1) Réducteur \(i=0{,}25\), \(C_s=10\) N·m</p><p>\(\dfrac{C_s}{C_e}=\dfrac1i\Rightarrow C_e=i\,C_s=0{,}25\times10\).</p><p class="res">\(C_e=2{,}5\) N·m</p>
+        <p class="q">2) Multiplicateur \(i=5\), \(C_s=3\) N·m</p><p>\(C_e=i\,C_s=5\times3\).</p><p class="res">\(C_e=15\) N·m (le multiplicateur augmente la vitesse mais réduit le couple de sortie)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Vis-écrou du Maxpid</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Vis-écrou pas \(p=4\) mm/tr ; moteur \(k_c=52{,}5\) mN·m/A, \(I_m=2{,}15\) A.</div>
+        <p class="q">Effort de poussée maximal (sans pertes)</p>
+        <p>\(C_e=k_cI_m=0{,}0525\times2{,}15=0{,}1129\) N·m. \(F_{max}=\dfrac{2\pi}{p}C_e=\dfrac{2\pi}{0{,}004}\times0{,}1129\).</p>
+        <p class="res">\(F_{max}\approx177\) N</p>
+        <p class="q">Avec rendement \(\eta=0{,}9\), pour un effort de 100 N</p>
+        <p>\(C_e=\dfrac{F_s\,p}{2\pi\,\eta}=\dfrac{100\times0{,}004}{2\pi\times0{,}9}\).</p>
+        <p class="res">\(C_e\approx0{,}071\) N·m (71 mN·m)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CORRECTION TD =============================== -->
+  <section class="block" id="td">
+    <h2>3. Correction du TD</h2>
+    <p class="lead" style="font-size:.95rem">Source : <i>S2I-C09-TD — Déterminer les efforts aux actionneurs</i>. <b>Pas de corrigé officiel</b> → résolu et vérifié maison.
+    On combine les efforts à l'effecteur (C08) avec les lois E/S en effort des transmetteurs (C09).</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1.1 — Échelle EPAS (couples moteurs)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Q1 — Chaîne « orienter la plate-forme » : \(C_{m36}\)</p>
+        <p>Effort à l'effecteur : \(C_{36}=eMg=2650\) N·m (donné). Motoréducteur \(r=\tfrac1{1000}\), \(\eta_{réd}=0{,}6\) :
+        \(C_{36}=\dfrac{\eta}{r}C_{m36}\Rightarrow C_{m36}=\dfrac{C_{36}\,r}{\eta}=\dfrac{2650\times0{,}001}{0{,}6}\).</p>
+        <p class="res">\(C_{m36}\approx4{,}4\) N·m</p>
+        <p class="q">Q2 — Chaîne « déplacer le parc échelle » : \(C_{m23}\)</p>
+        <p>Effort : \(F_{23}=Mg\sin\theta=1870\) N (donné). Vis-écrou à billes \(p=10\) mm, \(\eta_{vis}=0{,}9\) :
+        \(|C_{m23}|=\dfrac{F_{23}\,p}{2\pi\,\eta_{vis}}=\dfrac{1870\times0{,}010}{2\pi\times0{,}9}\).</p>
+        <p class="res">\(|C_{m23}|\approx3{,}3\) N·m</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1.2 — Grue de chantier</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Flèche (1) pivot vertical \(z_0\), \(L=30\) m ; charge \(M_3=5\) t ; vent \(F_v=5000\) N en \(G_1\).</div>
+        <p class="q">Q1 — Couple d'orientation \(C_{01}\) (moment en \(O\) /\(z_0\))</p>
+        <p>Poids (verticaux) : moment /\(z_0\) nul. Vent \(F_v\vec y_1\) en \(G_1\) (\(\vec{OG_1}=L\vec x_1\)) : \(\vec{OG_1}\wedge F_v\vec y_1\cdot z_0=L F_v\).</p>
+        <p class="res">\(|C_{01}|=L\,F_v=30\times5000=1{,}5\cdot10^5\) N·m (150 kN·m)</p>
+        <p class="q">Q2 — Tension du câble de levage \(F_{23}\)</p>
+        <p>Le câble supporte le poids de la charge : \(F_{23}=M_3\,g=5000\times9{,}81\).</p>
+        <p class="res">\(F_{23}\approx4{,}9\cdot10^4\) N (49 kN)</p>
+        <p class="q">Q4–Q5 — Couple moteur « orienter » \(C_{m01}\)</p>
+        <p>Train épicycloïdal (couronne \(z_c=90\) fixe, planétaire \(z_p=18\)), 1 étage : \(i_{ét}=\dfrac1{1-\lambda}\) avec \(\lambda=-\dfrac{z_c}{z_p}=-5\), soit \(i_{ét}=\dfrac16\). Trois étages : \(i_{épi}=\big(\tfrac16\big)^3=\tfrac1{216}\).</p>
+        <p>Réducteur à axes fixes : \(|i_2|=\dfrac{z_A}{z_B}=\dfrac{18}{153}=0{,}118\). Total \(|i|=\dfrac1{216}\times0{,}118=5{,}45\cdot10^{-4}\).</p>
+        <p>\(C_{m01}=\dfrac{|C_{01}|\,|i|}{\eta_1\eta_2}=\dfrac{1{,}5\cdot10^5\times5{,}45\cdot10^{-4}}{0{,}8\times0{,}98}\).</p>
+        <p class="res">\(C_{m01}\approx104\) N·m</p>
+        <p class="q">Q7–Q8 — Chaîne « lever » : \(v_{3/2}\) et \(C_{m23}\)</p>
+        <p>Réducteur \(Z_{12}=Z_{13b}=50\), \(Z_{13a}=Z_{14}=100\) : \(i=\big(\tfrac{50}{100}\big)^2=0{,}25\). Tambour \(R=0{,}2\) m :
+        \(v_{3/2}=R\,i\,\omega_{m}=0{,}05\,\omega_m\).</p>
+        <p>Sans pertes : \(C_{m23}=F_{23}\,R\,i=M_3g\times0{,}05\approx2452\) N·m. Avec \(\eta_{eng}^2\,\eta_{tamb}=0{,}9^2\times0{,}85=0{,}689\) :
+        \(C_{m23}=\dfrac{2452}{0{,}689}\).</p>
+        <p class="res">\(v_{3/2}=0{,}05\,\omega_m\) (m/s) ; \(C_{m23}\approx3560\) N·m avec rendements</p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.4rem">
+      <span class="lab">Bilan C09</span>
+      Le pont entre statique (C08) et chaîne d'énergie (C04) : l'effort à l'effecteur, obtenu par le PFS, est <b>ramené à l'actionneur</b>
+      par les lois E/S en effort des transmetteurs (\(\tfrac1i\), \(\tfrac{2\pi}{p}\)), avec le <b>rendement \(\eta\)</b> qui augmente le couple
+      moteur nécessaire (division par \(\eta\)). C'est ce qui permet de <b>dimensionner le moteur</b> (couple / intensité). Combine directement
+      avec le calcul des rapports de transmission (trains simples et épicycloïdaux, C04).
+    </div>
+  </section>
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>TD (énoncé)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c09-statique-transmetteurs/S2I-C09-TD-D%C3%A9terminer%20les%20efforts%20aux%20actionneurs-Rover.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C09-TD-Déterminer les efforts aux actionneurs-Rover</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/sii/c09-statique-transmetteurs/S2I-C09-TD-D%C3%A9terminer%20les%20efforts%20aux%20actionneurs.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C09-TD-Déterminer les efforts aux actionneurs</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Document</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c09-statique-transmetteurs/S2I-C09-Mod%C3%A9liser%20le%20comportement%20statique%20des%20transmetteurs_versionEtu.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C09-Modéliser le comportement statique des transmetteurs_versionEtu</span><span class="badge">Document</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+</body>
+</html>
