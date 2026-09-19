@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Filtres analogiques passifs — AM2 Électronique — Révision ECAM</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
+  svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+<div class="topbar">
+  <a href="../index.html#am2">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#questions">Questions</a>
+  <a href="#bode">Bode</a>
+  <a href="#tp">TP1</a>
+  <a href="#docs">Documents</a>
+  <a href="td1-corrige.html">TD1 corrigé →</a>
+  <a href="ch2-filtrage-fourier.html">Ch2 →</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Électronique AM2 (2ᵉ année) · Chapitre 1</span>
+  <h1 class="title">Ch1 — Rappels sur les filtres analogiques passifs</h1>
+  <p class="lead">Système Linéaire Continu Invariant (SLCI), description temporelle par équation
+  différentielle et description fréquentielle par fonction de transfert harmonique (FTH). Cours
+  complet, 5 questions résolues pas à pas, diagramme de Bode interactif (passe-bande RLC) et TP1
+  corrigé. AM2 · P2030 · Semestre 3 — cours de D. Courtois.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul>
+      <li><a href="#cours">1. Résumé de cours — le SLCI</a></li>
+      <li><a href="#questions">2. Questions du cours résolues (Q1 → Q5)</a></li>
+      <li><a href="#bode">3. Diagramme de Bode interactif</a></li>
+      <li><a href="#tp">4. TP1 — étude expérimentale corrigée</a></li>
+      <li><a href="#docs">📂 Documents sources</a></li>
+    </ul>
+  </div>
+
+  <!-- ============================ COURS ============================ -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours — le SLCI</h2>
+
+    <h3>1.1 Le filtre analogique passif, un exemple de SLCI</h3>
+    <p>Un <b>filtre</b> est un système qui transforme un signal d'<b>entrée</b> (ou forçage)
+    \(e(t)\) en un signal de <b>sortie</b> (ou réponse) \(s(t)\), cette transformation dépendant
+    en général de la <b>fréquence</b>. En électronique, \(e\) et \(s\) sont le plus souvent des
+    tensions \(u\) (en V), plus rarement des intensités \(i\) (en A).</p>
+    <p>Les filtres <b>analogiques passifs</b> sont des <b>quadripôles</b> constitués de dipôles
+    linéaires passifs \(R,\,L,\,C\). Leurs lois de comportement \(u=f(i)\) sont régies par des
+    <b>équations différentielles linéaires à coefficients constants</b>. « Passif » ⇒ la puissance
+    moyenne en sortie est toujours \(\le\) la puissance moyenne en entrée (pas d'apport d'énergie).</p>
+    <div class="note"><span class="lab">À situer</span> Plus tard : filtres <b>actifs</b> (avec ALI /
+    ampli-op, composants alimentés) et filtres <b>numériques</b> (opérations mathématiques sur des
+    signaux discrets, après conversion analogique→numérique).</div>
+
+    <div class="def"><span class="lab">Définition — les 3 propriétés d'un SLCI</span>
+      <ul>
+        <li><b>Linéaire</b> — vérifie le <b>théorème de superposition</b> : si \(e_1\!\to\!s_1\) et
+        \(e_2\!\to\!s_2\), alors \(e=K_1e_1+K_2e_2 \;\to\; s=K_1s_1+K_2s_2\).</li>
+        <li><b>Continu</b> — les grandeurs sont des fonctions continues du temps (= analogique).</li>
+        <li><b>Invariant</b> — comportement inchangé dans le temps (\(\forall t\), même \(s(t)\) pour
+        un même \(e(t)\)).</li>
+      </ul>
+    </div>
+
+    <h3>1.2 Description temporelle : une ED linéaire à coefficients constants</h3>
+    <p>Un montage \(R,L,C\) est un SLCI décrit par l'équation différentielle générale :</p>
+    \[ D_0\,s + D_1\frac{ds}{dt} + \cdots + D_n\frac{d^{\,n}s}{dt^{\,n}}
+       \;=\; N_0\,e + N_1\frac{de}{dt} + \cdots + N_m\frac{d^{\,m}e}{dt^{\,m}} \]
+    <p>\(n\) est l'<b>ordre</b> du filtre (ordre maximal des dérivées présentes).</p>
+    <div class="method"><span class="lab">Méthode — établir l'ED d'un montage</span>
+    Utiliser <b>en alternance</b> les lois de Kirchhoff (nœuds, mailles) et les lois de comportement
+    des dipôles. À chaque étape, on remplace les grandeurs <b>inconnues / sans intérêt</b> par les
+    grandeurs <b>connues / intéressantes</b> ; on dérive si besoin pour supprimer les intégrales.</div>
+
+    <h3>1.3 Description fréquentielle : la fonction de transfert harmonique (FTH)</h3>
+    <p>À un signal sinusoïdal \(u(t)=U_m\cos(\omega t+\varphi)\) on associe la notation complexe
+    \(\underline{u}=U_m e^{\,j(\omega t+\varphi)}\), avec \(u(t)=\mathcal{R}e(\underline{u})\) et
+    l'amplitude complexe \(\underline{U}=U_m e^{\,j\varphi}\).</p>
+    <div class="thm"><span class="lab">Propriété — isomorphisme des systèmes linéaires</span>
+    Si l'entrée \(e(t)\) d'un SLCI est <b>sinusoïdale</b>, la sortie \(s(t)\) en régime permanent
+    l'est aussi, de <b>même pulsation</b> \(\omega\), mais d'amplitude et de phase a priori différentes.</div>
+    <p>La réponse est entièrement décrite par la <b>fonction de transfert harmonique</b> :</p>
+    \[ \underline H=\frac{\underline s}{\underline e}=\frac{\underline S}{\underline E}
+       \qquad\Longrightarrow\qquad
+       |\underline H|=\frac{S_m}{E_m}\ \text{(gain)}\ ,\qquad
+       \arg(\underline H)=\Delta\varphi=\varphi_s-\varphi_e\ \text{(déphasage)} \]
+    <div class="method"><span class="lab">Méthode — établir la FTH</span>
+    Exprimer les <b>impédances</b> (ou admittances) équivalentes des portions série / parallèle,
+    puis appliquer un <b>pont diviseur de tension</b>.
+    <p>Rappels : \(\ \underline Z_R=R\ ,\quad \underline Z_L=jL\omega\ ,\quad
+    \underline Z_C=\dfrac{1}{jC\omega}\).</p></div>
+
+    <h4>Formes canoniques à reconnaître</h4>
+    <p>Avec la <b>pulsation réduite</b> \(x=\dfrac{\omega}{\omega_0}\), gain statique \(H_0\) et
+    facteur de qualité \(Q\) :</p>
+    <div class="overflow">
+    <table>
+      <tr><th>Type de filtre</th><th>FTH canonique</th></tr>
+      <tr><td><b>Passe-bas 1ᵉʳ ordre</b></td><td>\(\displaystyle H_0\,\frac{1}{1+jx}\)</td></tr>
+      <tr><td><b>Passe-haut 1ᵉʳ ordre</b></td><td>\(\displaystyle H_0\,\frac{jx}{1+jx}\)</td></tr>
+      <tr><td><b>Passe-bas 2ᵈ ordre</b></td><td>\(\displaystyle H_0\,\frac{1}{1+j\frac{x}{Q}-x^2}\)</td></tr>
+      <tr><td><b>Passe-bande 2ᵈ ordre</b></td>
+        <td>\(\displaystyle H_0\,\frac{j\frac{x}{Q}}{1+j\frac{x}{Q}-x^2}
+            \;=\;H_0\,\frac{1}{1+jQ\!\left(x-\frac1x\right)}\)</td></tr>
+      <tr><td><b>Passe-haut 2ᵈ ordre</b></td>
+        <td>\(\displaystyle H_0\,\frac{-x^2}{1+j\frac{x}{Q}-x^2}
+            \;=\;H_0\,\frac{jQx}{1+jQ\!\left(x-\frac1x\right)}\)</td></tr>
+    </table>
+    </div>
+
+    <h4>Diagrammes de Bode</h4>
+    <ul>
+      <li><b>Gain (dB)</b> : \(\;G_{dB}=20\log|\underline H|\;\) (donc \(|\underline H|=10^{\,G_{dB}/20}\)),
+      en fonction de \(\omega\) ou de \(x\), <b>abscisse logarithmique</b>.</li>
+      <li><b>Phase</b> : \(\;\arg(\underline H)=\Delta\varphi=\varphi_s-\varphi_e\;\) en fonction de
+      \(\omega\) ou de \(x\).</li>
+    </ul>
+
+    <h3>1.4 Passage temporel ↔ fréquentiel</h3>
+    <p>En régime sinusoïdal, <b>dériver revient à multiplier par</b> \(j\omega\) :
+    \(\ \dfrac{d}{dt}\leftrightarrow \times\, j\omega\). En posant \(p=j\omega\) on obtient la fonction
+    de transfert <b>opérationnelle</b>. L'ED devient une équation polynomiale :</p>
+    \[ D_0\,\underline s+(j\omega)D_1\underline s+\cdots+(j\omega)^nD_n\underline s
+       =N_0\,\underline e+(j\omega)N_1\underline e+\cdots+(j\omega)^mN_m\underline e \]
+    \[ \underline H=\frac{\underline s}{\underline e}
+       =\frac{N_0+(j\omega)N_1+\cdots+(j\omega)^mN_m}{D_0+(j\omega)D_1+\cdots+(j\omega)^nD_n} \]
+    <div class="note"><span class="lab">À retenir</span> Un système dont la FTH est un <b>quotient
+    de deux polynômes en \(j\omega\)</b> est un SLCI. Le numérateur ↔ termes en \(e\), le
+    dénominateur ↔ termes en \(s\).</div>
+  </section>
+
+  <!-- ============================ QUESTIONS ============================ -->
+  <section class="block" id="questions">
+    <h2>2. Questions du cours — résolues pas à pas</h2>
+
+    <p>Toutes les questions portent sur le <b>même montage</b> : une résistance \(R\) en série,
+    puis un condensateur \(C\) et une bobine \(L\) <b>en parallèle</b> (« bouchon » \(LC\)) reliés à
+    la masse ; la sortie \(s\) est prise aux bornes de ce dipôle parallèle.</p>
+
+    <figure>
+      <svg viewBox="0 0 420 220" width="420" xmlns="http://www.w3.org/2000/svg" role="img"
+           aria-label="Montage : R en série, C parallèle L, sortie s aux bornes du parallèle">
+        <defs>
+          <marker id="ar" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto">
+            <path d="M1,1 L8,4.5 L1,8 Z" fill="#dc2626"/></marker>
+        </defs>
+        <g fill="none" stroke="#475569" stroke-width="2.2" stroke-linecap="round">
+          <!-- rails -->
+          <line x1="55" y1="45" x2="140" y2="45"/>
+          <line x1="200" y1="45" x2="340" y2="45"/>
+          <line x1="55" y1="175" x2="340" y2="175"/>
+          <!-- branche entrée (gauche) -->
+          <line x1="55" y1="45" x2="55" y2="175"/>
+          <!-- descente vers C -->
+          <line x1="240" y1="45" x2="240" y2="90"/>
+          <line x1="240" y1="130" x2="240" y2="175"/>
+          <!-- descente vers L -->
+          <line x1="340" y1="45" x2="340" y2="80"/>
+          <line x1="340" y1="140" x2="340" y2="175"/>
+        </g>
+        <!-- R -->
+        <rect x="140" y="35" width="60" height="20" rx="3" fill="#f8fafc" stroke="#0d9488" stroke-width="2.2"/>
+        <text x="170" y="26" fill="#0d9488" font-family="monospace" font-size="16" text-anchor="middle">R</text>
+        <!-- C -->
+        <g stroke="#0891b2" stroke-width="2.6" stroke-linecap="round">
+          <line x1="222" y1="90" x2="258" y2="90"/>
+          <line x1="222" y1="103" x2="258" y2="103"/>
+        </g>
+        <text x="212" y="102" fill="#0891b2" font-family="monospace" font-size="16" text-anchor="end">C</text>
+        <!-- L (bobine) -->
+        <path d="M340,80 q10,7 0,14 q10,7 0,14 q10,7 0,14 q10,7 0,14 q10,7 0,4"
+              fill="none" stroke="#7c3aed" stroke-width="2.6"/>
+        <text x="322" y="115" fill="#7c3aed" font-family="monospace" font-size="16" text-anchor="end">L</text>
+        <!-- flèches e et s -->
+        <line x1="72" y1="170" x2="72" y2="55" stroke="#0891b2" stroke-width="2" marker-end="url(#ar)"/>
+        <polygon points="72,52 68,62 76,62" fill="#0891b2"/>
+        <text x="42" y="118" fill="#0891b2" font-family="monospace" font-size="16">e</text>
+        <line x1="368" y1="170" x2="368" y2="55" stroke="#dc2626" stroke-width="2"/>
+        <polygon points="368,52 364,62 372,62" fill="#dc2626"/>
+        <text x="378" y="118" fill="#dc2626" font-family="monospace" font-size="16">s</text>
+        <!-- masse -->
+        <g stroke="#94a3b8" stroke-width="2">
+          <line x1="197" y1="175" x2="197" y2="188"/>
+          <line x1="188" y1="188" x2="206" y2="188"/>
+          <line x1="191" y1="192" x2="203" y2="192"/>
+          <line x1="194" y1="196" x2="200" y2="196"/>
+        </g>
+      </svg>
+      <figcaption>Montage étudié — \(R\) série + tank \(C\!\parallel\!L\), sortie \(s\) aux bornes du parallèle.</figcaption>
+    </figure>
+
+    <!-- Q1 -->
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q1 — Coefficients de l'ED \((D_0,D_1,D_2,N_0,N_1)\) <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Retrouver le jeu de coefficients de l'ED du montage ci-dessus.</p>
+
+        <p class="q">1) Cadre et notations</p>
+        <p>On note \(s\) la tension de sortie (aux bornes du parallèle \(C\parallel L\), donc aussi la
+        tension commune à \(C\) et \(L\)). Le courant qui sort de \(R\) se partage entre la branche
+        capacitive \(i_C\) et la branche inductive \(i_L\).</p>
+
+        <p class="q">2) Loi des nœuds</p>
+        <p>Le courant dans \(R\) vaut \(i_R=\dfrac{e-s}{R}\). Au nœud de sortie :</p>
+        \[ i_R=i_C+i_L \qquad\Longrightarrow\qquad \frac{e-s}{R}=i_C+i_L \]
+
+        <p class="q">3) Lois de comportement des dipôles</p>
+        <p>On remplace les <b>intensités</b> par des <b>tensions</b> (la grandeur intéressante) :</p>
+        \[ i_C=C\,\frac{ds}{dt}\ ,\qquad s=L\,\frac{di_L}{dt}\Rightarrow i_L=\frac1L\!\int s\,dt \]
+        \[ \frac{e-s}{R}=C\frac{ds}{dt}+\frac1L\!\int s\,dt \]
+
+        <p class="q">4) Multiplication par \(R\) puis dérivation (pour supprimer l'intégrale)</p>
+        \[ e-s=RC\frac{ds}{dt}+\frac{R}{L}\!\int s\,dt \]
+        \[ \frac{de}{dt}-\frac{ds}{dt}=RC\frac{d^2s}{dt^2}+\frac{R}{L}\,s \]
+
+        <p class="q">5) Regroupement sous la forme \(D_0s+D_1\dot s+D_2\ddot s=N_0e+N_1\dot e\)</p>
+        \[ \boxed{\,RC\,\frac{d^2s}{dt^2}+\frac{ds}{dt}+\frac{R}{L}\,s=\frac{de}{dt}\,} \]
+        <div class="res">Par identification :
+        \[ D_0=\frac{R}{L}\ ,\quad D_1=1\ ,\quad D_2=RC\ ,\quad N_0=0\ ,\quad N_1=1. \]
+        <b>Filtre d'ordre 2</b> (\(D_2\neq0\)), avec un numérateur en \(\dot e\) seul ⇒ comportement
+        de type <b>passe-bande</b> (confirmé en Q2).</div>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q2 — Fonction de transfert harmonique \(\underline H\) <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Retrouver la FTH et l'écrire sous la forme
+        \(\displaystyle \underline H=\frac{1}{1+jQ\!\left(\frac{\omega}{\omega_0}-\frac{\omega_0}{\omega}\right)}\).</p>
+
+        <p class="q">1) Impédance du parallèle \(C\parallel L\)</p>
+        \[ \underline Z_{p}=\frac{\underline Z_C\,\underline Z_L}{\underline Z_C+\underline Z_L}
+           =\frac{\frac{1}{jC\omega}\cdot jL\omega}{\frac{1}{jC\omega}+jL\omega}
+           =\frac{\frac{L}{C}}{\frac{1-LC\omega^2}{jC\omega}}
+           =\frac{jL\omega}{1-LC\omega^2} \]
+
+        <p class="q">2) Pont diviseur de tension</p>
+        \[ \underline H=\frac{\underline Z_p}{R+\underline Z_p}
+           =\frac{jL\omega}{R\left(1-LC\omega^2\right)+jL\omega} \]
+
+        <p class="q">3) Mise sous forme canonique — on divise haut et bas par \(jL\omega\)</p>
+        \[ \underline H=\frac{1}{1+\dfrac{R(1-LC\omega^2)}{jL\omega}}
+           =\frac{1}{1+jR\!\left(C\omega-\dfrac{1}{L\omega}\right)} \]
+        <p><em>(on a utilisé \(\tfrac1j=-j\), d'où
+        \(\tfrac{R}{jL\omega}=-j\tfrac{R}{L\omega}\) et \(-\tfrac{RC\omega}{j}=+jRC\omega\)).</em></p>
+
+        <p class="q">4) Identification de \(\omega_0\) et \(Q\)</p>
+        <p>On veut faire apparaître \(\dfrac{\omega}{\omega_0}-\dfrac{\omega_0}{\omega}\). Avec
+        \(\omega_0=\dfrac{1}{\sqrt{LC}}\) on a \(RC\omega_0=\dfrac{R}{L\omega_0}=R\sqrt{\tfrac{C}{L}}\),
+        donc :</p>
+        \[ R\!\left(C\omega-\frac{1}{L\omega}\right)=R\sqrt{\tfrac{C}{L}}\left(\frac{\omega}{\omega_0}-\frac{\omega_0}{\omega}\right) \]
+        <div class="res"><b>Résultat.</b>
+        \[ \boxed{\ \underline H=\dfrac{1}{1+jQ\!\left(\dfrac{\omega}{\omega_0}-\dfrac{\omega_0}{\omega}\right)}
+          \quad\text{avec}\quad \omega_0=\dfrac{1}{\sqrt{LC}}\ ,\quad Q=R\sqrt{\dfrac{C}{L}}=RC\omega_0=\dfrac{R}{L\omega_0}\ }\]
+        C'est bien un <b>passe-bande 2ᵈ ordre</b>, de gain statique \(H_0=1\) (soit \(0\) dB au maximum).</div>
+        <div class="warnbox"><span class="lab">Piège à ne pas confondre</span>
+        Pour ce <b>tank parallèle</b>, \(Q=R\sqrt{C/L}\) : un <b>grand \(R\)</b> ⇒ \(Q\) grand ⇒ filtre
+        sélectif. Pour le <b>RLC série</b> du TP, c'est l'inverse : \(Q=\dfrac1R\sqrt{L/C}\) (un grand
+        \(R\) amortit). Toujours vérifier la topologie avant d'écrire \(Q\).</div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q3 — Identification + diagrammes de Bode (\(Q=5\) et \(Q=0{,}5\)) <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Identifier le filtre de Q2 et tracer ses diagrammes de Bode en gain et en
+        phase pour \(Q=5\) et \(Q=0{,}5\).</p>
+
+        <p><b>Filtre :</b> passe-bande 2ᵈ ordre, \(|\underline H|_{\max}=1\) en \(x=1\) (\(\omega=\omega_0\)).
+        Avec \(x=\omega/\omega_0\) :</p>
+        \[ G_{dB}(x)=20\log|\underline H|=-10\log\!\Big[1+Q^2\big(x-\tfrac1x\big)^2\Big]\ ,\qquad
+           \varphi(x)=-\arctan\!\Big[Q\big(x-\tfrac1x\big)\Big] \]
+        <h4>Points remarquables</h4>
+        <div class="overflow">
+        <table>
+          <tr><th>Régime</th><th>\(x\to 0\) (BF)</th><th>\(x=1\) (résonance)</th><th>\(x\to\infty\) (HF)</th></tr>
+          <tr><td><b>Gain</b></td><td>\(\approx x/Q\) → pente \(+20\) dB/déc</td><td>\(0\) dB (max)</td><td>\(\approx 1/(Qx)\) → pente \(-20\) dB/déc</td></tr>
+          <tr><td><b>Phase</b></td><td>\(+90^\circ\)</td><td>\(0^\circ\)</td><td>\(-90^\circ\)</td></tr>
+        </table>
+        </div>
+        <ul>
+          <li><b>\(Q=5\)</b> : résonance <b>marquée et étroite</b> (filtre sélectif), bande passante
+          réduite \(\Delta x=1/Q=0{,}2\).</li>
+          <li><b>\(Q=0{,}5\)</b> : résonance <b>plate et large</b> (peu sélectif), bande passante
+          \(\Delta x=1/Q=2\).</li>
+        </ul>
+        <div class="note"><span class="lab">Vois-le en direct</span> Le widget interactif juste en dessous
+        (<a href="#bode">§ Bode interactif</a>) trace exactement ces deux courbes — bouge le curseur
+        \(Q\) ou clique les préréglages <b>Q = 5</b> / <b>Q = 0,5</b>.</div>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q4 — Logarithmes utiles &amp; le « –3 dB » à la coupure <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Rappeler \(\log(1),\log(2),\log(5),\log(10)\), illustrer la correspondance
+        axes \(x\) ↔ \(\log(x)\), puis montrer qu'à la coupure le gain vaut le gain max \(-3\) dB.</p>
+
+        <p class="q">1) Valeurs de référence (log décimal)</p>
+        <div class="overflow"><table>
+          <tr><th>\(x\)</th><th>1</th><th>2</th><th>5</th><th>10</th></tr>
+          <tr><td><b>\(\log x\)</b></td><td>0</td><td>≈ 0,301</td><td>≈ 0,699</td><td>1</td></tr>
+        </table></div>
+        <p>Astuce : \(\log5=\log\frac{10}{2}=1-\log2\), et \(\log2+\log5=1\). Une décade
+        (\(\times10\)) correspond à \(+1\) sur l'axe \(\log\) ; le milieu géométrique visuel d'une
+        décade tombe vers \(x\approx3{,}16\) (\(\log\approx0{,}5\)).</p>
+
+        <p class="q">2) Le gain « –3 dB » à la pulsation de coupure</p>
+        <p>Par définition, aux pulsations de coupure le gain (linéaire) vaut \(\dfrac{1}{\sqrt2}\) du
+        gain maximal. En décibels :</p>
+        \[ 20\log\!\left(\frac{|\underline H|_{\max}}{\sqrt2}\right)
+           =20\log|\underline H|_{\max}-20\log\sqrt2
+           =G_{\max}-20\times\frac{\log 2}{2} \]
+        \[ 20\times\frac{0{,}301}{2}\approx 3{,}01\ \text{dB} \]
+        <div class="res"><b>Conclusion.</b> \(\ G_{dB}(\text{coupure})=G_{\max}-3\ \text{dB}\).
+        Le « \(-3\) dB » n'est rien d'autre que le facteur \(1/\sqrt2\) en puissance :
+        \(\left(\tfrac{1}{\sqrt2}\right)^2=\tfrac12\) ⇒ moitié de la puissance.</div>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q5 — Retrouver l'ED (Q1) à partir de la FTH (Q2) <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Retrouver l'équation différentielle de Q1 à partir de la FTH de Q2.</p>
+        <p class="q">1) Repartir de la forme « impédances » de Q2</p>
+        \[ \underline H=\frac{\underline s}{\underline e}
+           =\frac{jL\omega}{R(1-LC\omega^2)+jL\omega} \]
+        <p>On « croise » (produit en croix) :</p>
+        \[ \underline s\Big[R+jL\omega-RLC\omega^2\Big]=jL\omega\,\underline e \]
+        <p class="q">2) Traduction \(j\omega\to \dfrac{d}{dt}\), \((j\omega)^2\to\dfrac{d^2}{dt^2}\)</p>
+        \[ R\,s+L\frac{ds}{dt}+RLC\frac{d^2s}{dt^2}=L\frac{de}{dt} \]
+        <p class="q">3) Division par \(L\)</p>
+        \[ \boxed{\,RC\frac{d^2s}{dt^2}+\frac{ds}{dt}+\frac{R}{L}s=\frac{de}{dt}\,} \]
+        <div class="res">On retrouve <b>exactement</b> l'ED de Q1 : la description temporelle (ED) et
+        la description fréquentielle (FTH) sont deux visages du <b>même</b> SLCI, reliés par
+        \(\dfrac{d}{dt}\leftrightarrow j\omega\).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ BODE INTERACTIF ============================ -->
+  <section class="block" id="bode">
+    <h2>3. Diagramme de Bode interactif</h2>
+    <p>Tracé « live » du passe-bande \(\;\underline H=\dfrac{1}{1+jQ\left(x-\frac1x\right)}\;\) avec
+    \(x=\omega/\omega_0\). Bouge \(Q\) pour voir la résonance s'affiner (grand \(Q\), sélectif) ou
+    s'aplatir (petit \(Q\)). Les préréglages reproduisent la <b>Q3</b>.</p>
+
+    <div class="lab-tool">
+      <h4>Banc de tracé — passe-bande 2ᵈ ordre</h4>
+      <div class="ctrls">
+        <div class="row">
+          <label for="q">Facteur de qualité&nbsp;Q =</label>
+          <span class="qval" id="qval">1.0</span>
+          <input id="q" type="range" min="0.1" max="10" step="0.1" value="1">
+        </div>
+        <div class="row">
+          <button class="preset" data-q="5">Q = 5 (sélectif)</button>
+          <button class="preset" data-q="0.5">Q = 0,5 (large)</button>
+          <button class="preset" data-q="1">Q = 1</button>
+        </div>
+      </div>
+      <div class="bode-wrap">
+        <svg id="bode" viewBox="0 0 780 500" width="780" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+      <div class="readout" id="readout"></div>
+    </div>
+  </section>
+
+  <!-- ============================ TP1 ============================ -->
+  <section class="block" id="tp">
+    <h2>4. TP1 — étude expérimentale de filtres, corrigé</h2>
+    <div class="def"><span class="lab">Matériel &amp; objectif</span>
+    GBF (tension alternative), oscilloscope numérique, bobine variable \(L=0{,}15\text{–}1{,}4\)&nbsp;H,
+    résistance variable \(R=1\ \Omega\text{–}100\ \text{k}\Omega\), condensateur variable
+    \(C=100\ \text{pF–}10\ \mu\text{F}\), 7 fils. <b>But :</b> concevoir et caractériser un
+    passe-bande, puis un passe-bas.</div>
+
+    <div class="warnbox"><span class="lab">Attention — ce n'est PAS le même montage que le cours</span>
+    Le TP utilise un <b>RLC en série</b> avec sortie aux bornes de \(R\) (résonance « en intensité »).
+    Ici \(\ \omega_0=\dfrac{1}{\sqrt{LC}}\ \) (comme le cours) mais
+    \(\ \boxed{Q=\dfrac{1}{R}\sqrt{\dfrac{L}{C}}=\dfrac{L\omega_0}{R}=\dfrac{1}{RC\omega_0}}\ \) —
+    inverse du montage parallèle du cours.</div>
+
+    <h3>Partie 1 — filtre passe-bande RLC série</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">P1.1 — Schéma, \(\omega_0\) et \(Q\)</div>
+      <div class="exo-body">
+        <p><b>Montage :</b> GBF → \(R\), \(L\), \(C\) en série ; l'oscilloscope mesure \(e\) sur CH1
+        (aux bornes du GBF) et \(s\) sur CH2 <b>aux bornes de \(R\)</b> (masses communes).</p>
+        <p>La sortie aux bornes de \(R\) donne \(\underline H=\dfrac{R}{R+j(L\omega-\frac{1}{C\omega})}\),
+        maximale quand la partie imaginaire s'annule ⇒ <b>résonance d'intensité</b> :</p>
+        \[ L\omega_0=\frac{1}{C\omega_0}\ \Longrightarrow\
+           \boxed{\omega_0=\frac{1}{\sqrt{LC}}}\ ,\qquad
+           \boxed{Q=\frac{1}{R}\sqrt{\frac{L}{C}}} \]
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">P1.2 — Calcul de \(C\) puis \(R\) (\(L=0{,}25\) H, \(f_0=2{,}0\) kHz, \(Q=0{,}5\))</div>
+      <div class="exo-body">
+        <p class="q">1) Pulsation cible</p>
+        \[ \omega_0=2\pi f_0=2\pi(2000)=1{,}257\times10^{4}\ \text{rad·s}^{-1} \]
+        <p class="q">2) Condensateur (depuis \(\omega_0=1/\sqrt{LC}\))</p>
+        \[ C=\frac{1}{L\,\omega_0^{2}}=\frac{1}{0{,}25\times(1{,}257\times10^4)^2}
+           \approx \boxed{2{,}53\times10^{-8}\ \text{F}=25{,}3\ \text{nF}} \]
+        <p class="q">3) Résistance (depuis \(Q=\frac1R\sqrt{L/C}\))</p>
+        \[ \sqrt{\tfrac{L}{C}}=\sqrt{\tfrac{0{,}25}{2{,}53\times10^{-8}}}\approx 3{,}14\times10^3\ \Omega
+           \quad(\,=L\omega_0\,) \]
+        \[ R=\frac{1}{Q}\sqrt{\tfrac{L}{C}}=\frac{3{,}14\times10^3}{0{,}5}
+           \approx \boxed{6{,}28\ \text{k}\Omega} \]
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">P1.3 — Gain et déphasage attendus à \(f=f_0\)</div>
+      <div class="exo-body">
+        <p>À la résonance, \(L\omega_0=1/C\omega_0\) : l'impédance série se réduit à \(R\), la tension
+        de sortie \(=\) tension d'entrée.</p>
+        <div class="res"><b>Attendu :</b> \(\;G=\dfrac{S_m}{E_m}=1\;\) et \(\;\Delta\varphi=\varphi_s-\varphi_e=0^\circ\).
+        Avec \(E_m=3{,}0\) V ⇒ \(S_m\approx3{,}0\) V. On vérifie que les valeurs mesurées sont proches.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">P1.4 — Affichage « XY » (Lissajous) &amp; intensité à \(f_0\)</div>
+      <div class="exo-body">
+        <p>En mode <b>XY</b> l'oscilloscope trace \(s\) en fonction de \(e\). Le déphasage produit une
+        <b>ellipse</b> ; à la résonance \(\Delta\varphi=0\) ⇒ l'ellipse dégénère en une
+        <b>droite</b>. Repérer l'instant où la figure devient une droite parfaite localise \(f_0\)
+        <b>bien plus précisément</b> que la lecture d'un maximum (plat près du sommet).</p>
+        <p><b>Intensité dans le circuit à \(f_0\)</b></p>
+        <p>À la résonance \(Z=R\), donc \(I_m=\dfrac{E_m}{R}\) :</p>
+        \[ I_m=\frac{3{,}0}{6{,}28\times10^3}\approx \boxed{4{,}8\times10^{-4}\ \text{A}=0{,}48\ \text{mA}} \]
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">P1.5 — Fréquences de coupure &amp; bande passante à \(-3\) dB</div>
+      <div class="exo-body">
+        <p>Aux coupures : \(G=\dfrac{1}{\sqrt2}\approx0{,}707\) et \(\Delta\varphi=\pm45^\circ\)
+        (\(+45^\circ\) en \(f_{cB}\), \(-45^\circ\) en \(f_{cH}\)).</p>
+        <p><b>Bande passante</b></p>
+        <p>Propriété du 2ᵈ ordre passe-bande : \(\ \Delta f=\dfrac{f_0}{Q}\).</p>
+        \[ \Delta f=\frac{2000}{0{,}5}=\boxed{4000\ \text{Hz}} \]
+        <p>Avec \(f_{cB}\,f_{cH}=f_0^2\) et \(f_{cH}-f_{cB}=\Delta f\), on résout
+        \(f_c=f_0\!\left(\mp\frac{1}{2Q}+\sqrt{1+\frac{1}{4Q^2}}\right)\) :</p>
+        \[ f_{cB}\approx 0{,}83\ \text{kHz}\ ,\qquad f_{cH}\approx 4{,}83\ \text{kHz} \]
+        <div class="res">Vérification : \(f_{cH}-f_{cB}\approx4{,}0\) kHz \(=\Delta f\), et
+        \(Q=\dfrac{f_0}{\Delta f}=\dfrac{2000}{4000}=0{,}5\) ✔. Protocole : balayer \(f\), lire
+        \(G\) jusqu'à \(G_{\max}/\sqrt2\), confirmer par \(\Delta\varphi=\pm45^\circ\) (mode XY).
+        <br><b>À savoir retrouver :</b> les expressions de \(f_{cB}\) et \(f_{cH}\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">P1.6 — Mesures pour tracer \(G(x)\) et \(\varphi(x)\)</div>
+      <div class="exo-body">
+        <p>Relever plusieurs points pertinents autour de \(f_0\) (typiquement \(f_{cB}\), \(f_0/2\),
+        \(f_0\), \(2f_0\), \(f_{cH}\)…), avec \(x=f/f_0\), et reporter dans un tableur
+        (fichier <a href="TP1.xlsx">TP1.xlsx</a> fourni). <b>Astuce oscillo :</b> menu
+        <span class="mono">Measure / CH2 / maximum</span> et <span class="mono">phase</span> pour lire
+        directement \(S_m\) et \(\Delta\varphi\) — beaucoup plus rapide qu'à la main.</p>
+      </div>
+    </div>
+
+    <h3>Partie 2 — autres filtres</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">P2.1 — Refaire avec \(Q=5\) — sélectivité</div>
+      <div class="exo-body">
+        <p>On ne change que \(Q\) : \(R=\dfrac1Q\sqrt{L/C}=\dfrac{3{,}14\times10^3}{5}\approx
+        \boxed{6{,}3\times10^2\ \Omega\ (\approx628\ \Omega)}\). Bande passante
+        \(\Delta f=\dfrac{f_0}{Q}=\dfrac{2000}{5}=\boxed{400\ \text{Hz}}\) ⇒ coupures
+        \(f_{cB}\approx1{,}81\) kHz, \(f_{cH}\approx2{,}21\) kHz.</p>
+        <div class="res"><b>Comparaison.</b> \(Q=5\) donne une bande 10× plus étroite que \(Q=0{,}5\)
+        (\(400\) Hz contre \(4000\) Hz) : le filtre à <b>\(Q=5\) est nettement plus sélectif</b>
+        (résonance pointue). Un \(Q\) élevé ⇒ meilleure sélectivité en fréquence.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">P2.2 — Transformer en passe-bas 1ᵉʳ ordre</div>
+      <div class="exo-body">
+        <p><b>Modification :</b> retirer la bobine \(L\) (on garde \(R\) et \(C\) en série) et prendre
+        la sortie <b>aux bornes de \(C\)</b>. On obtient un passe-bas du 1ᵉʳ ordre
+        \(\underline H=\dfrac{1}{1+jRC\omega}\), de pulsation de coupure :</p>
+        \[ \omega_c=\frac{1}{RC}\ \Longrightarrow\ f_c=\frac{1}{2\pi RC} \]
+        <p><b>Grandeur à modifier pour \(f_c=2\) kHz (à \(C=25{,}3\) nF fixé)</b></p>
+        \[ R=\frac{1}{2\pi f_c\,C}=\frac{1}{2\pi(2000)(2{,}53\times10^{-8})}
+           \approx \boxed{3{,}1\ \text{k}\Omega} \]
+        <p>Mesures Bode : gain plat (\(0\) dB) en BF puis pente \(-20\) dB/déc ; phase \(0^\circ\to-90^\circ\)
+        (passant par \(-45^\circ\) en \(f_c\)). Pour les déphasages en très basses / très hautes
+        fréquences, exploiter la <b>méthode de Lissajous</b> (mode XY) si la lecture directe est
+        difficile.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ DOCS ============================ -->
+  <section class="block" id="docs">
+    <h2>📂 Documents sources</h2>
+    <p class="docs-intro">Fichiers originaux du cours, déjà présents dans ce dossier. Cliquez pour ouvrir.</p>
+    <div class="docs-group">
+      <h3>Cours</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="Cours1.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Cours1</span><span class="badge">Cours</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TP1</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="TP1.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TP1</span><span class="badge">TP (énoncé)</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="TP1.xlsx" target="_blank" rel="noopener"><span class="ic">XLS</span><span class="nm">TP1</span><span class="badge">Feuille de mesures</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Cursus AM2 · P2030 · Semestre 3 · Partie Électronique. Voir aussi
+    <a href="td1-corrige.html">TD1 corrigé</a> et <a href="ch2-filtrage-fourier.html">Ch2 — Filtrage &amp; Fourier</a>.</p>
+  </section>
+
+</main>
+
+<script>
+/* ================= Bode interactif (passe-bande 1/(1+jQ(x-1/x))) ================= */
+(function(){
+  const svg = document.getElementById('bode');
+  const NS = 'http://www.w3.org/2000/svg';
+  // géométrie
+  const W=780, PX0=64, PX1=752;
+  const GY0=40, GY1=225;          // plot gain
+  const PY0=285, PY1=470;         // plot phase
+  const XMIN=-1, XMAX=1;          // log10(x) de 0.1 à 10
+  const GMAX=6, GMIN=-42;         // dB
+  const PHMAX=90, PHMIN=-90;      // deg
+  const sx = u => PX0 + (u-XMIN)/(XMAX-XMIN)*(PX1-PX0);
+  const gy = g => GY0 + (GMAX-g)/(GMAX-GMIN)*(GY1-GY0);
+  const py = p => PY0 + (PHMAX-p)/(PHMAX-PHMIN)*(PY1-PY0);
+  function el(n,a){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;}
+
+  // --- décor statique (grille, axes, labels) : tracé une seule fois ---
+  const deco = el('g',{});
+  svg.appendChild(deco);
+  const decades=[0.1,0.2,0.5,1,2,5,10];
+  decades.forEach(x=>{
+    const u=Math.log10(x), X=sx(u);
+    const major=(x===0.1||x===1||x===10);
+    [ [GY0,GY1],[PY0,PY1] ].forEach(([a,b])=>{
+      deco.appendChild(el('line',{x1:X,y1:a,x2:X,y2:b,
+        stroke: major?'#cbd5e1':'#e2e8f0','stroke-width':major?1.2:0.7}));
+    });
+    deco.appendChild(txt(X,PY1+18,''+x,{anchor:'middle',fill:'#94a3b8',mono:1}));
+  });
+  // graduations gain
+  [0,-3,-10,-20,-30,-40].forEach(g=>{
+    const Y=gy(g);
+    deco.appendChild(el('line',{x1:PX0,y1:Y,x2:PX1,y2:Y,
+      stroke:g===-3?'#dc2626':'#e2e8f0','stroke-width':g===-3?1:0.7,
+      'stroke-dasharray':g===-3?'5 4':''}));
+    deco.appendChild(txt(PX0-8,Y+4,(g)+'',{anchor:'end',fill:g===-3?'#dc2626':'#94a3b8'}));
+  });
+  // graduations phase
+  [90,45,0,-45,-90].forEach(p=>{
+    const Y=py(p);
+    deco.appendChild(el('line',{x1:PX0,y1:Y,x2:PX1,y2:Y,
+      stroke:(p===45||p===-45)?'#cbd5e1':'#e2e8f0','stroke-width':0.7,
+      'stroke-dasharray':(p===45||p===-45)?'4 4':''}));
+    deco.appendChild(txt(PX0-8,Y+4,p+'°',{anchor:'end',fill:'#94a3b8'}));
+  });
+  // cadres + titres + axe x
+  [[GY0,GY1],[PY0,PY1]].forEach(([a,b])=>deco.appendChild(el('rect',
+    {x:PX0,y:a,width:PX1-PX0,height:b-a,fill:'none',stroke:'#cbd5e1','stroke-width':1.2})));
+  deco.appendChild(txt(PX0,GY0-14,'GAIN  G_dB = 20·log|H|',{fill:'#0d9488',mono:1,size:13,weight:1}));
+  deco.appendChild(txt(PX0,PY0-14,'PHASE  arg(H)',{fill:'#0891b2',mono:1,size:13,weight:1}));
+  deco.appendChild(txt((PX0+PX1)/2,PY1+34,'x = ω / ω₀   (échelle log)',
+    {fill:'#475569',mono:1,size:12,anchor:'middle'}));
+
+  function txt(x,y,s,o){o=o||{};const t=el('text',{x,y,fill:o.fill||'#475569',
+    'font-family':o.mono?'monospace':'inherit','font-size':o.size||11,
+    'text-anchor':o.anchor||'start'}); if(o.weight)t.setAttribute('font-weight','700');
+    t.appendChild(document.createTextNode(s));return t;}
+
+  // --- couches dynamiques ---
+  const gGain = el('path',{fill:'none',stroke:'#0d9488','stroke-width':2.6,'stroke-linejoin':'round'});
+  const gPhase= el('path',{fill:'none',stroke:'#0891b2','stroke-width':2.6,'stroke-linejoin':'round'});
+  const mark  = el('circle',{r:4.5,fill:'#d97706',stroke:'#1e293b','stroke-width':1.5});
+  const markP = el('circle',{r:4.5,fill:'#d97706',stroke:'#1e293b','stroke-width':1.5});
+  svg.appendChild(gGain); svg.appendChild(gPhase); svg.appendChild(mark); svg.appendChild(markP);
+
+  const N=400;
+  function draw(Q){
+    let dg='', dp='';
+    for(let i=0;i<=N;i++){
+      const u=XMIN+(XMAX-XMIN)*i/N;      // = log10(x)
+      const x=Math.pow(10,u);
+      const t=Q*(x-1/x);
+      const g=-10*Math.log10(1+t*t);      // dB
+      const ph=-Math.atan(t)*180/Math.PI; // deg
+      dg += (i?'L':'M')+sx(u).toFixed(1)+' '+gy(Math.max(GMIN,Math.min(GMAX,g))).toFixed(1)+' ';
+      dp += (i?'L':'M')+sx(u).toFixed(1)+' '+py(ph).toFixed(1)+' ';
+    }
+    gGain.setAttribute('d',dg);
+    gPhase.setAttribute('d',dp);
+    // marqueur à la résonance x=1
+    mark.setAttribute('cx',sx(0)); mark.setAttribute('cy',gy(0));
+    markP.setAttribute('cx',sx(0)); markP.setAttribute('cy',py(0));
+    // readout
+    const df=(1/Q);
+    document.getElementById('readout').innerHTML =
+      'Q = <b>'+Q.toFixed(1)+'</b> · bande passante réduite Δx = 1/Q = <b>'+df.toFixed(2)+
+      '</b> · gain max <b>0 dB</b> en x=1 · pentes ±20 dB/décade · phase +90°→−90°.';
+    document.getElementById('qval').textContent=Q.toFixed(1);
+  }
+
+  const slider=document.getElementById('q');
+  slider.addEventListener('input',()=>draw(parseFloat(slider.value)));
+  document.querySelectorAll('.preset').forEach(b=>b.addEventListener('click',()=>{
+    slider.value=b.dataset.q; draw(parseFloat(b.dataset.q));
+  }));
+  draw(1);
+})();
+</script>
+</body>
+</html>

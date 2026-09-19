@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Applications linéaires — AM2 Mathématiques</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+<div class="topbar">
+  <a href="../index.html#am2">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#td">Correction TD</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Maths AM2 (2ᵉ année) · Chapitre 2</span>
+  <h1 class="title">Applications linéaires</h1>
+  <p class="lead">Pré-requis du cours « Matrices et applications linéaires » : rappels sur les espaces
+  vectoriels (base, dimension, supplémentaires), puis applications linéaires, noyau et image.
+  Cours de L. Graissot — ECAM AM2, 2026-2027. <b>Chapitre en cours</b> : le cours donné s'arrête pour
+  l'instant à la notion de noyau/image (pas encore de TD associé).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction TD — à venir</a></li>
+    </ul>
+  </div>
+
+  <!-- ============================================================= -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Espace vectoriel — rappels</h3>
+    <div class="def">
+      <span class="lab">\(\mathbb K\)-espace vectoriel</span>
+      Un ensemble non vide \(E\) muni d'une addition \(E\times E\to E\) et d'une multiplication externe
+      \(\mathbb K\times E\to E\) (\(\mathbb K=\mathbb R\) ou \(\mathbb C\)) vérifiant les 8 axiomes usuels
+      (commutativité/associativité de \(+\), neutre \(0_E\), symétrique \(-u\), \(1\cdot u=u\), \((\lambda\mu)u=\lambda(\mu u)\),
+      distributivités \(\lambda(u+v)=\lambda u+\lambda v\) et \((\lambda+\mu)u=\lambda u+\mu u\)).
+    </div>
+    <div class="method">
+      Il est souvent plus rapide de prouver qu'une partie \(F\) est un <b>sous-espace vectoriel</b> d'un
+      espace déjà connu, plutôt que de revérifier les 8 axiomes.
+    </div>
+    <div class="def">
+      <span class="lab">Sous-espace vectoriel</span>
+      \(F\subset E\) est un sous-espace vectoriel de \(E\) si : \(0_E\in F\) (ou \(F\neq\varnothing\)) ;
+      \(u+v\in F\) pour tous \(u,v\in F\) (stabilité par somme) ; \(\lambda\cdot u\in F\) pour tout \(\lambda\in\mathbb K,\,u\in F\)
+      (stabilité par produit externe).
+    </div>
+
+    <h3>1.2 Famille libre, génératrice, base, dimension</h3>
+    <div class="def">
+      <span class="lab">Famille libre</span>
+      \(\{v_1,\dots,v_p\}\) est <b>libre</b> (linéairement indépendante) si
+      \(\lambda_1v_1+\cdots+\lambda_pv_p=0\ \Rightarrow\ \lambda_1=\cdots=\lambda_p=0\). Sinon elle est
+      <b>liée</b>, et toute combinaison nulle non triviale est une relation de dépendance linéaire.
+    </div>
+    <div class="def">
+      <span class="lab">Famille génératrice</span>
+      \(\{v_1,\dots,v_p\}\) est <b>génératrice</b> de \(E\) si tout \(v\in E\) s'écrit
+      \(v=\lambda_1v_1+\cdots+\lambda_pv_p\) (on dit aussi qu'elle <b>engendre</b> \(E\), et
+      \(E=\operatorname{Vect}(v_1,\dots,v_p)\)).
+    </div>
+    <div class="def">
+      <span class="lab">Base, dimension</span>
+      Une <b>base</b> est une famille à la fois libre et génératrice. Si \(\mathcal B=(v_1,\dots,v_n)\) est une
+      base de \(E\), tout vecteur s'écrit de façon <b>unique</b> comme combinaison linéaire des \(v_i\). Toutes
+      les bases d'un espace de dimension finie ont le <b>même nombre d'éléments</b> : ce nombre est la
+      <b>dimension</b> \(\dim E\) (convention : \(\dim\{0\}=0\)).
+    </div>
+    <div class="method">
+      <span class="lab">Méthodologie</span>
+      Pour déterminer \(\dim E\) : trouver une base (une famille libre <em>et</em> génératrice) — son cardinal
+      donne la dimension, quel que soit le choix de la base.
+    </div>
+    <div class="note">
+      <span class="lab">Exemples</span>
+      \(\dim\mathbb R^n=n\) (base canonique \((e_1,\dots,e_n)\)) ; \(\dim\mathbb R_n[X]=n+1\) (base
+      \((1,X,\dots,X^n)\)). En revanche \(\mathbb R[X]\), \(\mathcal F(\mathbb R,\mathbb R)\) et l'espace des
+      suites réelles \(\mathcal F(\mathbb N,\mathbb R)\) ne sont <b>pas</b> de dimension finie. L'ensemble des
+      solutions d'un système linéaire <b>homogène</b> est un espace vectoriel, dont une base s'obtient en
+      exprimant la solution générale comme combinaison des paramètres libres.
+    </div>
+
+    <h3>2. Compléments sur les espaces vectoriels</h3>
+    <div class="thm">
+      <span class="lab">Sous-espace engendré</span>
+      Pour \(\{v_1,\dots,v_n\}\subset E\), l'ensemble des combinaisons linéaires des \(v_i\) est un
+      sous-espace vectoriel de \(E\) — le <b>plus petit</b> contenant tous les \(v_i\) — noté
+      \(\operatorname{Vect}(v_1,\dots,v_n)\) : \(u\in\operatorname{Vect}(v_1,\dots,v_n)\iff\exists\lambda_1,\dots,\lambda_n\in\mathbb K,\ u=\lambda_1v_1+\cdots+\lambda_nv_n\).
+    </div>
+    <div class="def">
+      <span class="lab">Sous-espaces supplémentaires</span>
+      \(F,G\) sont en <b>somme directe</b> dans \(E\) (noté \(F\oplus G=E\)) si \(F\cap G=\{0_E\}\) et
+      \(F+G=E\). On dit alors que \(F\) et \(G\) sont <b>supplémentaires</b> dans \(E\).
+    </div>
+    <div class="thm">
+      \(F,G\) supplémentaires \(\iff\) tout \(w\in E\) s'écrit de manière <b>unique</b> \(w=u+v\) avec
+      \(u\in F,\,v\in G\).
+    </div>
+
+    <h3>3. Application linéaire</h3>
+    <div class="def">
+      <span class="lab">Définition</span>
+      \(f:E\to F\) (espaces vectoriels sur \(\mathbb K\)) est <b>linéaire</b> si
+      \(f(u+v)=f(u)+f(v)\) pour tous \(u,v\in E\), et \(f(\lambda\cdot u)=\lambda\cdot f(u)\) pour tout
+      \(\lambda\in\mathbb K,\,u\in E\) : \(f\) « respecte » les deux lois de l'espace vectoriel. On note
+      \(\mathcal L(E,F)\) l'ensemble des applications linéaires de \(E\) dans \(F\).
+    </div>
+    <div class="thm">
+      <span class="lab">Caractérisation concentrée</span>
+      \(f\) est linéaire \(\iff\) \(f(\lambda u+\mu v)=\lambda f(u)+\mu f(v)\) pour tous \(u,v\in E\),
+      \(\lambda,\mu\in\mathbb K\). Plus généralement, \(f\Big(\sum_{i=1}^n\lambda_iv_i\Big)=\sum_{i=1}^n\lambda_if(v_i)\) :
+      une application linéaire préserve les combinaisons linéaires.
+    </div>
+    <div class="note">
+      Conséquences immédiates (avec \(\lambda=0\) puis \(\lambda=-1\)) : \(f(0_E)=0_F\) et \(f(-u)=-f(u)\).
+      <b>Vocabulaire</b> : une application linéaire de \(E\) dans \(F\) est aussi un <b>morphisme</b>
+      (homomorphisme) d'espaces vectoriels ; de \(E\) dans \(E\), c'est un <b>endomorphisme</b>, et
+      \(\mathcal L(E,E)\) se note \(\mathcal L(E)\).
+    </div>
+    <div class="warnbox">
+      Toutes les applications ne sont pas linéaires : \(f(x)=x^2\) sur \(\mathbb R\) donne \(f(2)=4\neq2f(1)=2\)
+      — la linéarité échoue dès qu'il y a un terme non homogène de degré \(1\) (carré, constante non nulle,
+      valeur absolue…).
+    </div>
+    <div class="note">
+      <span class="lab">Exemples géométriques</span>
+      <b>Symétrie centrale</b> \(f:u\mapsto-u\) (homothétie de rapport \(-1\)). <b>Homothétie</b>
+      \(f_\lambda:u\mapsto\lambda u\) (\(\lambda=1\) : identité ; \(\lambda=0\) : application nulle).
+      <b>Projection</b> sur \(F\) parallèlement à \(G\) (avec \(E=F\oplus G\)) : \(p(u)=v\) où \(u=v+w\),
+      \(v\in F,\,w\in G\) ; \(p\) est linéaire et vérifie \(p\circ p=p\) (\(p^2=p\)).
+    </div>
+
+    <h3>4. Noyau et image d'une application linéaire</h3>
+    <div class="def">
+      <span class="lab">Image</span>
+      \(\operatorname{Im}f=f(E)=\{f(x)\mid x\in E\}\). Plus généralement, si \(E'\) est un sous-espace de \(E\),
+      \(f(E')\) est un sous-espace de \(F\). En particulier \(\operatorname{Im}f\) est un sous-espace de \(F\), et
+      \(f\) est <b>surjective</b> \(\iff\operatorname{Im}f=F\).
+    </div>
+    <div class="def">
+      <span class="lab">Noyau</span>
+      \(\operatorname{Ker}f=\{x\in E\mid f(x)=0_F\}=f^{-1}(\{0_F\})\). C'est un sous-espace vectoriel de \(E\)
+      (il contient \(0_E\) et est stable par combinaison linéaire).
+    </div>
+    <div class="thm">
+      <span class="lab">Caractérisation de l'injectivité</span>
+      \[ f\text{ injective}\iff\operatorname{Ker}f=\{0_E\}. \]
+      En pratique, pour montrer que \(f\) est injective, il suffit de vérifier : « si \(f(x)=0_F\) alors \(x=0_E\) ».
+    </div>
+    <div class="method">
+      <span class="lab">Démonstration (à retenir)</span>
+      (\(\Rightarrow\)) Si \(x\in\operatorname{Ker}f\), \(f(x)=0_F=f(0_E)\), et l'injectivité donne \(x=0_E\).
+      (\(\Leftarrow\)) Si \(f(x)=f(y)\), la linéarité donne \(f(x-y)=0_F\) donc \(x-y\in\operatorname{Ker}f=\{0_E\}\),
+      d'où \(x=y\).
+    </div>
+  </section>
+
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés)</h2>
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Noyau et image</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Soit \(f:\mathbb R^3\to\mathbb R^2\), \(f(x,y,z)=(-2x,\,y+3z)\) (application du cours,
+        Exemple 5/7). Déterminer \(\operatorname{Ker}f\) et \(\operatorname{Im}f\), et dire si \(f\) est
+        injective / surjective.</div>
+        <p class="q">Noyau</p>
+        <p>\(f(x,y,z)=(0,0)\iff-2x=0\text{ et }y+3z=0\iff x=0\text{ et }y=-3z\). Donc
+        \(\operatorname{Ker}f=\{(0,-3z,z)\mid z\in\mathbb R\}=\operatorname{Vect}\big((0,-3,1)\big)\), une droite
+        vectorielle : \(\dim\operatorname{Ker}f=1\neq0\).</p>
+        <div class="res">\(f\) n'est <b>pas injective</b> (le noyau contient d'autres vecteurs que \(0\)).</div>
+        <p class="q">Image</p>
+        <p>Pour \((a,b)\in\mathbb R^2\) quelconque, on cherche \((x,y,z)\) tel que \(-2x=a\) et \(y+3z=b\) : il
+        suffit de prendre \(x=-a/2\), \(z=0\), \(y=b\). Donc tout \((a,b)\) est atteint.</p>
+        <div class="res">\(\operatorname{Im}f=\mathbb R^2\) : \(f\) est <b>surjective</b>.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Somme directe et projection</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Dans \(\mathbb R^2\), on pose \(F=\operatorname{Vect}\big((1,1)\big)\) et
+        \(G=\operatorname{Vect}\big((1,-1)\big)\). Montrer que \(F\oplus G=\mathbb R^2\) et donner l'expression
+        de la projection \(p\) sur \(F\) parallèlement à \(G\).</div>
+        <p class="q">Somme directe</p>
+        <p>\(F\cap G\) : si \(\lambda(1,1)=\mu(1,-1)\), alors \(\lambda=\mu\) et \(\lambda=-\mu\), donc
+        \(\lambda=\mu=0\) : \(F\cap G=\{0\}\). De plus \((1,1)\) et \((1,-1)\) forment une famille libre de
+        2 vecteurs dans \(\mathbb R^2\) (dimension 2) donc génératrice : \(F+G=\mathbb R^2\).</p>
+        <div class="res">\(F\oplus G=\mathbb R^2\).</div>
+        <p class="q">Projection</p>
+        <p>Pour \((x,y)\in\mathbb R^2\), on cherche \(a,b\) tels que \((x,y)=a(1,1)+b(1,-1)\) : \(a+b=x\),
+        \(a-b=y\), donc \(a=\dfrac{x+y}2\), \(b=\dfrac{x-y}2\). Le projeté sur \(F\) est \(a(1,1)\).</p>
+        <div class="res">\(p(x,y)=\dfrac{x+y}2\,(1,1)=\Big(\dfrac{x+y}2,\,\dfrac{x+y}2\Big)\).</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="td">
+    <h2>3. Correction TD</h2>
+    <div class="note">
+      Aucune feuille de TD n'a encore été distribuée pour ce chapitre (le cours s'arrête pour l'instant à
+      l'exemple 7 — déterminer noyau et image de \(f(x,y,z)=(-2x,y+3z)\), traité ci-dessus en exercice créé —
+      et à la section « Noyau et image »). Cette section sera complétée dès qu'un TD officiel sera disponible.
+    </div>
+  </section>
+
+</main>
+</body>
+</html>

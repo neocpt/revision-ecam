@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TD2 corrigé — Filtrage / Fourier / Stabilité — AM2 Électronique — Révision ECAM</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div class="topbar">
+  <a href="../index.html#am2">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="ch2-filtrage-fourier.html">← Ch2 cours</a>
+  <a href="td1-corrige.html">TD1</a>
+  <a href="#ex1">Ex1</a><a href="#ex2">Ex2</a>
+  <a href="#ex3">Ex3</a><a href="#ex4">Ex4</a>
+  <a href="#ex5">Ex5</a>
+  <a href="#src">Sources</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Électronique AM2 (2ᵉ année) · TD2</span>
+  <h1 class="title">TD2 — filtrage d'un signal périodique, corrigé complet</h1>
+  <p class="lead">Les 5 exercices du TD2 corrigés un par un. Pour chacun, l'énoncé
+  (photo) est placé juste au-dessus de sa correction détaillée pas à pas :
+  lecture de spectres, filtre linéaire vs non&nbsp;linéaire, dérivateur/intégrateur,
+  passe-bande résonant (Q, H₀, ω₀) et réponse d'un circuit RC à un signal triangulaire.
+  AM2 · P2030 · Semestre 3 — D. Courtois.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du TD</b>
+    <ul>
+      <li><a href="#ex1">Ex 1 — Spectres de réponses (linéaire ou non ?)</a></li>
+      <li><a href="#ex2">Ex 2 — Filtre du 1ᵉʳ ordre, deux e(t)</a></li>
+      <li><a href="#ex3">Ex 3 — 5 filtres, un même e(t)</a></li>
+      <li><a href="#ex4">Ex 4 — Filtrage d'un signal sonore (passe-bande)</a></li>
+      <li><a href="#ex5">Ex 5 — Réponses en f d'un circuit RC</a></li>
+      <li><a href="#src">📂 Documents sources</a></li>
+    </ul>
+  </div>
+
+  <div class="note"><span class="lab">Outil clé de tout le TD</span>
+  Un <b>filtre linéaire</b> (passif ou actif linéaire) ne fait qu'<b>atténuer ou garder</b>
+  les harmoniques <b>déjà présents</b> dans l'entrée : son spectre de sortie est un
+  <b>sous-ensemble</b> du spectre d'entrée. Il peut <b>perdre</b> des raies mais
+  <b>jamais en créer</b> de nouvelles. Créer de nouvelles fréquences ⟹ système
+  <b>non linéaire</b>. (Cf. cours §2, « le spectre de s(t) ne peut pas gagner d'harmonique
+  sauf si le système est non linéaire ».)</div>
+
+  <!-- ================= EX 1 ================= -->
+  <section class="block" id="ex1">
+  <div class="exo-card">
+    <div class="exo-head">Ex 1 — Spectres de réponses de systèmes variés <span class="diff">V : 19.1 · H : E1.4</span></div>
+    <div class="exo-body">
+  <figure>
+    <img src="td2-img/ex1.jpg" alt="Énoncé Exercice 1 — spectre d'entrée e(t) à x=1,2,3,4 et trois spectres de sortie" loading="lazy">
+    <figcaption>Énoncé (TD2, D. Courtois) — entrée e(t) : raies à x = 1,2,3,4 ; sorties (1), (2), (3)</figcaption>
+  </figure>
+
+  <div class="note"><span class="lab">Données</span> On pose \(x=f/f_1\) avec \(f_1=1\text{ kHz}\).
+  L'entrée \(e(t)\) possède <b>4 raies</b> aux fréquences \(x=1,2,3,4\) (soit 1, 2, 3, 4 kHz),
+  d'amplitudes décroissantes. Chaque filtre reçoit ce <b>même</b> \(e(t)\) et sort \(s(t)\).</div>
+
+  <p class="q">1) Quel est le filtre non linéaire ?</p>
+  <p>On applique la règle encadrée en tête de TD : un filtre <b>linéaire</b> ne peut sortir
+  que des fréquences <b>présentes en entrée</b>, c.-à-d. uniquement des raies situées aux
+  positions \(x=1,2,3,4\).</p>
+  <ul>
+    <li><b>Sortie (2)</b> et <b>sortie (3)</b> : leurs raies tombent exactement sur \(x=1,2,3,4\)
+    (seules les <b>hauteurs</b> changent). ⟹ compatibles avec un filtre <b>linéaire</b>.</li>
+    <li><b>Sortie (1)</b> : les raies ne sont <b>plus alignées</b> sur les entiers \(1,2,3,4\)
+    — de <b>nouvelles fréquences</b> apparaissent (raies décalées / intermédiaires).
+    Or un filtre linéaire ne peut <b>pas créer</b> de fréquence absente de l'entrée.</li>
+  </ul>
+  <div class="res"><b>Le filtre non linéaire est celui qui donne le spectre de sortie (1)</b> :
+  il fait apparaître des raies à des fréquences absentes de \(e(t)\), ce qui est impossible
+  pour un système linéaire.</div>
+
+  <p class="q">2) Caractériser les filtres linéaires et estimer leur fréquence de coupure</p>
+  <p>Il reste les deux filtres linéaires, sorties (2) et (3). On compare, raie par raie,
+  la sortie à l'entrée \(e(t)\) (qui décroît de \(x=1\) à \(x=4\)).</p>
+
+  <p><b>Sortie (2) — le fondamental est écrasé, les harmoniques hauts ressortent</b></p>
+  <p>La raie \(x=1\) (basse fréquence) est fortement <b>atténuée</b> tandis que les raies
+  \(x=2,3,4\) restent grandes : les <b>hautes fréquences passent</b>, les basses sont coupées.</p>
+  <div class="res"><b>Sortie (2) = filtre passe-haut.</b> La transition se situe entre \(x=1\) et \(x=2\),
+  donc \(\;f_c \sim 1{,}5\text{–}2\text{ kHz}\) (ordre de grandeur : quelques kHz).</div>
+
+  <p><b>Sortie (3) — les raies décroissent vite, les hauts disparaissent</b></p>
+  <p>La raie \(x=1\) reste la plus haute et les raies \(x=3,4\) sont fortement <b>atténuées</b> :
+  les <b>basses fréquences passent</b>, les hautes sont coupées.</p>
+  <div class="res"><b>Sortie (3) = filtre passe-bas.</b> La transition se situe entre \(x=2\) et \(x=3\),
+  donc \(\;f_c \sim 2\text{–}2{,}5\text{ kHz}\) (ordre de grandeur : quelques kHz).</div>
+
+  <div class="warnbox"><span class="lab">Piège</span> « Ordre de grandeur » ≠ valeur exacte :
+  on ne peut pas lire un \(f_c\) précis sur un spectre de raies, seulement l'<b>encadrer</b>
+  entre la dernière raie transmise et la première coupée.</div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ================= EX 2 ================= -->
+  <section class="block" id="ex2">
+  <div class="exo-card">
+    <div class="exo-head">Ex 2 — Détermination d'un filtre avec des e(t) différents <span class="diff">d'après H : E1.6</span></div>
+    <div class="exo-body">
+  <figure>
+    <img src="td2-img/ex2.jpg" alt="Énoncé Exercice 2 — entrée triangulaire, sorties à 50 Hz (créneau) et 10 kHz (triangle)" loading="lazy">
+    <figcaption>Énoncé (TD2) — même filtre du 1ᵉʳ ordre, entrée triangulaire 1 V à 50 Hz puis 10 kHz</figcaption>
+  </figure>
+
+  <div class="note"><span class="lab">Lecture des oscillogrammes</span>
+  Entrée : <b>triangle</b> d'amplitude 1 V (crête), fréquence variable.
+  <ul>
+    <li>À <b>50 Hz</b> : la sortie est un <b>créneau</b> d'amplitude ≈ <b>0,06 V</b> (très faible).</li>
+    <li>À <b>10 kHz</b> : la sortie est un <b>triangle</b> d'amplitude ≈ <b>1 V</b> (≈ l'entrée).</li>
+  </ul></div>
+
+  <p class="q">1) Type de filtre</p>
+  <p>À <b>basse</b> fréquence (50 Hz) la sortie est très <b>atténuée</b> ; à <b>haute</b>
+  fréquence (10 kHz) elle passe <b>sans atténuation</b> (\(s\approx e\)). Le gain croît avec la
+  fréquence : c'est un <b>passe-haut</b> du 1ᵉʳ ordre.</p>
+  <p>Confirmation par la <b>forme</b> : à basse fréquence la sortie est la <b>dérivée</b> de
+  l'entrée. Or la dérivée d'un triangle (pentes constantes ±) est un <b>créneau</b> — c'est
+  exactement ce qu'on observe à 50 Hz. Un passe-haut du 1ᵉʳ ordre se comporte en
+  <b>dérivateur</b> bien en dessous de sa coupure : \(s = \tau\,\dfrac{de}{dt}\) avec \(\tau=RC\).</p>
+
+  <figure><svg viewBox="0 0 660 190" width="660" xmlns="http://www.w3.org/2000/svg">
+    <text x="20" y="20" fill="#9fb0c9" font-family="monospace" font-size="12">entrée : triangle</text>
+    <text x="360" y="20" fill="#9fb0c9" font-family="monospace" font-size="12">sortie BF (dérivée) : créneau</text>
+    <line x1="20" y1="110" x2="320" y2="110" stroke="#2a3a5c" stroke-width="1"/>
+    <polyline points="20,150 80,60 140,150 200,60 260,150 320,60" fill="none" stroke="#38bdf8" stroke-width="2.4"/>
+    <line x1="360" y1="110" x2="640" y2="110" stroke="#2a3a5c" stroke-width="1"/>
+    <polyline points="360,75 420,75 420,145 480,145 480,75 540,75 540,145 600,145 600,75 640,75" fill="none" stroke="#10d9a3" stroke-width="2.4"/>
+    <text x="300" y="115" fill="#6b7c98" font-family="monospace" font-size="20">→</text>
+  </svg></figure>
+  <div class="res"><b>Filtre passe-haut (CR, dérivateur) du 1ᵉʳ ordre.</b></div>
+
+  <p class="q">2) Estimation de la fréquence caractéristique \(f_c=\dfrac{1}{2\pi RC}\)</p>
+  <p>En régime dérivateur (50 Hz), l'amplitude du créneau de sortie vaut \(RC\times\) la pente
+  du triangle. Le triangle d'amplitude crête \(V_m=1\text{ V}\) balaie \(2V_m=2\text{ V}\) en une
+  demi-période \(T/2\), d'où une pente</p>
+  \[ \left|\frac{de}{dt}\right| = \frac{2V_m}{T/2}=4V_m f = 4\times 1\times 50 = 200\ \text{V/s}. \]
+  <p>L'amplitude du créneau observé étant \(S\approx 0{,}06\text{ V}\) :</p>
+  \[ S = RC\left|\frac{de}{dt}\right| \;\Rightarrow\; RC=\frac{0{,}06}{200}=3\times10^{-4}\ \text{s}
+     \;\Rightarrow\; f_c=\frac{1}{2\pi RC}=\frac{1}{2\pi\cdot 3\times10^{-4}}\approx 5\times10^{2}\ \text{Hz}. \]
+  <div class="res"><b>\(f_c \approx 0{,}5\text{ kHz}\)</b> (quelques centaines de Hz). Cohérent :
+  50 Hz \(\ll f_c\) (dérivateur, sortie minuscule) et 10 kHz \(\gg f_c\) (\(|H|\approx1\),
+  la sortie recopie l'entrée).</div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ================= EX 3 ================= -->
+  <section class="block" id="ex3">
+  <div class="exo-card">
+    <div class="exo-head">Ex 3 — Détermination de filtres avec un même e(t) <span class="diff">H : E1.5</span></div>
+    <div class="exo-body">
+  <figure>
+    <img src="td2-img/ex3.jpg" alt="Énoncé Exercice 3 — entrée rectangulaire et 5 signaux de sortie" loading="lazy">
+    <figcaption>Énoncé (TD2) — entrée rectangulaire (v_e) et 5 signaux de sortie (v_s1 … v_s5)</figcaption>
+  </figure>
+
+  <div class="note"><span class="lab">Décomposition de l'entrée</span>
+  \(e(t)\) est un signal <b>rectangulaire</b> : il contient une <b>composante continue</b> (BF),
+  un <b>fondamental</b> à \(f_0\), et des <b>harmoniques élevés</b> responsables des <b>fronts
+  raides / discontinuités</b> (HF). Chaque filtre agit sélectivement sur ces trois « zones ».</div>
+
+  <p class="q">1) Tableau des effets généraux de chaque type de filtre</p>
+  <div class="overflow">
+  <table>
+    <tr><th>Type de filtre</th><th>BF — composante continue</th><th>autour de f₀ — fondamental</th><th>HF — discontinuités (fronts)</th></tr>
+    <tr><td><b>Passe-bas</b></td><td>transmise ✔</td><td>transmis ✔</td><td>coupées ✘ (fronts arrondis)</td></tr>
+    <tr><td><b>Passe-haut</b></td><td>coupée ✘</td><td>transmis ✔</td><td>transmises ✔ (fronts raides)</td></tr>
+    <tr><td><b>Passe-bande bande large</b></td><td>coupée ✘</td><td>transmis ✔</td><td>transmises ✔ (large bande)</td></tr>
+    <tr><td><b>Passe-bande sélectif</b></td><td>coupée ✘</td><td>transmis ✔ (seul)</td><td>coupées ✘</td></tr>
+    <tr><td><b>Coupe-bande (réjecteur)</b></td><td>transmise ✔</td><td>coupé ✘</td><td>transmises ✔</td></tr>
+  </table>
+  </div>
+  <p>Lecture : <b>passe-bas</b> = garde le bas (DC + f₀),
+  lisse ; <b>passe-haut</b> = enlève le DC, garde les fronts ; <b>bande large</b> = enlève DC et le
+  tout-haut, garde une large plage ; <b>sélectif</b> = ne garde que f₀ (⟹ sinusoïde) ;
+  <b>coupe-bande</b> = enlève <b>seulement</b> f₀, garde DC et fronts.</p>
+
+  <p class="q">2) Signal 1 = passe-bande à bande large, et affectation des signaux 2 à 5</p>
+  <p><b>Signal 1 — passe-bande à bande large (à montrer)</b></p>
+  <p>Le <b>signal 1</b> oscille autour de <b>0</b> (⟹ <b>pas de composante continue</b> : le DC est
+  coupé) tout en gardant des <b>fronts raides</b> (⟹ HF transmises) et une allure globale de
+  créneau (⟹ fondamental transmis). Le léger <b>affaissement</b> (droop) des plateaux traduit la
+  perte des toutes basses fréquences. DC coupé + fondamental + large bande d'harmoniques
+  ⟹ c'est bien la signature d'un <b>passe-bande à bande large</b>. ✔</p>
+
+  <p><b>Signaux 2 à 5 — par élimination via le tableau</b></p>
+  <div class="overflow">
+  <table>
+    <tr><th>Signal</th><th>Ce qu'on observe</th><th>DC</th><th>f₀</th><th>HF</th><th>⟹ Filtre</th></tr>
+    <tr><td><b>Signal 2</b></td><td>bosses arrondies, positives (0,2→1,8), aucun front</td><td>✔</td><td>✔</td><td>✘</td><td><b>Passe-bas</b></td></tr>
+    <tr><td><b>Signal 3</b></td><td>sinusoïde propre centrée sur 0 (±0,8)</td><td>✘</td><td>✔ seul</td><td>✘</td><td><b>Passe-bande sélectif</b></td></tr>
+    <tr><td><b>Signal 4</b></td><td>créneau centré sur 0, plateaux qui s'affaissent vers 0</td><td>✘</td><td>✔</td><td>✔</td><td><b>Passe-haut</b></td></tr>
+    <tr><td><b>Signal 5</b></td><td>ligne de base ≈ 1 (DC gardé) + <b>pics</b> étroits aux fronts</td><td>✔</td><td>✘</td><td>✔</td><td><b>Coupe-bande</b></td></tr>
+  </table>
+  </div>
+  <div class="res">
+    <b>Signal 1 → passe-bande à bande large</b> · <b>Signal 2 → passe-bas</b> ·
+    <b>Signal 3 → passe-bande sélectif</b> · <b>Signal 4 → passe-haut</b> ·
+    <b>Signal 5 → coupe-bande</b>.
+  </div>
+  <div class="warnbox"><span class="lab">Clés de lecture</span>
+  <b>Une bosse arrondie sans front</b> = passe-bas ; <b>une sinusoïde pure</b> = passe-bande sélectif ;
+  <b>des pics fins</b> = dérivation = présence de HF ; <b>une ligne de base ≠ 0</b> = le continu (DC)
+  a été transmis (⟹ passe-bas ou coupe-bande, pas un passe-haut ni un passe-bande).</div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ================= EX 4 ================= -->
+  <section class="block" id="ex4">
+  <div class="exo-card">
+    <div class="exo-head">Ex 4 — Filtrage d'un signal sonore — passe-bande résonant <span class="diff">V : 19.5 · H : E1.7</span></div>
+    <div class="exo-body">
+  <figure>
+    <img src="td2-img/ex4.jpg" alt="Énoncé Exercice 4 — passe-bande H0/(1+jQ(x-1/x)), deux oscillogrammes" loading="lazy">
+    <figcaption>Énoncé (TD2) — filtre passe-bande \(\underline H = H_0/(1+jQ(x-1/x))\), \(x=\omega/\omega_0\), deux expériences</figcaption>
+  </figure>
+
+  <div class="note"><span class="lab">Le filtre</span>
+  \[ \underline H = \frac{H_0}{1+jQ\left(x-\dfrac1x\right)}\ ,\qquad x=\frac{\omega}{\omega_0}. \]
+  C'est un <b>passe-bande du 2ᵈ ordre</b> : gain maximal \(H_0\) à la <b>résonance</b> \(x=1\)
+  (\(\omega=\omega_0\)), de facteur de qualité \(Q\) (sélectivité).
+  Entrée : signal <b>rectangulaire</b> \(v_e(t)=V_0\!\left(\tfrac12+\tfrac{2}{\pi}\sum_k \tfrac{1}{2k+1}\sin((2k+1)\omega_1 t)\right)\),
+  de continu \(V_0/2\), fondamental \(\omega_1\) d'amplitude \(2V_0/\pi\), puis harmoniques impairs.</div>
+
+  <p class="q">1) Pourquoi la sortie n'a pas de composante continue (contrairement à l'entrée) ?</p>
+  <p>Le continu correspond à \(\omega=0\), soit \(x=0\). Alors \(x-\dfrac1x\to -\infty\), donc</p>
+  \[ |\underline H(0)| = \frac{H_0}{\sqrt{1+Q^2\left(x-\frac1x\right)^2}}\xrightarrow[x\to0]{}0. \]
+  <div class="res">Le passe-bande a un <b>gain nul en continu</b> : la composante \(V_0/2\) de l'entrée
+  est <b>totalement bloquée</b>. La sortie est donc <b>centrée sur 0</b> (pas de DC).</div>
+
+  <p class="q">2) 1ʳᵉ expérience : sortie quasi sinusoïdale à partir d'un créneau ? Que prédit-on sur Q ?</p>
+  <p>L'énoncé indique qu'en augmentant <b>ou</b> en diminuant la fréquence de \(v_e\), l'amplitude de
+  \(v_s\) <b>diminue</b> : on est donc au <b>sommet de résonance</b>, soit \(\omega_1=\omega_0\)
+  (le <b>fondamental</b> de l'entrée est calé sur \(\omega_0\)).</p>
+  <p>Le filtre laisse alors passer le fondamental (gain \(H_0\)) mais <b>atténue fortement</b> le
+  continu (gain 0) et les harmoniques \(3\omega_1,5\omega_1\) (situés à \(x=3,5\), loin de la
+  résonance). Il ne reste, en pratique, que le fondamental ⟹ sortie <b>quasi sinusoïdale</b>.</p>
+  <div class="res">Pour que le 3ᵉ harmonique (\(x=3\)) soit déjà bien atténué, le filtre doit être
+  <b>sélectif</b> : on prédit un <b>facteur de qualité \(Q\) élevé</b> (\(Q\gg1\)).</div>
+
+  <figure><svg viewBox="0 0 680 260" width="680" xmlns="http://www.w3.org/2000/svg">
+    <line x1="60" y1="210" x2="660" y2="210" stroke="#6b7c98" stroke-width="1.3"/>
+    <line x1="60" y1="220" x2="60" y2="30" stroke="#6b7c98" stroke-width="1.3"/>
+    <text x="30" y="40" fill="#9fb0c9" font-family="monospace" font-size="12">|H|</text>
+    <text x="650" y="230" fill="#9fb0c9" font-family="monospace" font-size="12">x=ω/ω₀ (log)</text>
+    <path d="M60 205 C 150 200, 210 60, 250 45 C 270 40, 290 40, 310 45 C 360 60, 430 150, 520 185 C 570 198, 620 203, 660 206" fill="none" stroke="#10d9a3" stroke-width="2.6"/>
+    <line x1="280" y1="45" x2="280" y2="210" stroke="#fbbf24" stroke-width="1" stroke-dasharray="4 4"/>
+    <text x="258" y="28" fill="#fbbf24" font-family="monospace" font-size="11">x=1 (exp.1 : résonance, H₀)</text>
+    <circle cx="280" cy="45" r="3.5" fill="#fbbf24"/>
+    <line x1="560" y1="190" x2="560" y2="210" stroke="#fb7185" stroke-width="1" stroke-dasharray="4 4"/>
+    <text x="470" y="185" fill="#fb7185" font-family="monospace" font-size="11">x≈10 (exp.2 : pente −1 ⟹ intégrateur)</text>
+    <circle cx="560" cy="190" r="3.5" fill="#fb7185"/>
+  </svg>
+  <figcaption>Réponse en fréquence du passe-bande : pic à x=1, décroissance en 1/x au-delà.</figcaption>
+  </figure>
+
+  <p class="q">3) Déduire \(\omega_0\) et \(H_0\) de la 1ʳᵉ expérience</p>
+  <p><b>Pulsation \(\omega_0\) (via la période)</b></p>
+  <p>Base de temps : <b>50 µs/carreau</b>. Sur l'oscillogramme, une période de \(v_s\) occupe
+  <b>≈ 4 carreaux</b> :</p>
+  \[ T = 4\times 50\ \mu\text{s}=200\ \mu\text{s}\ \Rightarrow\ f_0=\frac1T=5\ \text{kHz}
+     \ \Rightarrow\ \boxed{\ \omega_0=2\pi f_0\approx 3{,}1\times10^{4}\ \text{rad/s}\ } \]
+  <p><b>Gain de résonance \(H_0\) (via les amplitudes)</b></p>
+  <p>À la résonance, \(v_s\) est le fondamental de \(v_e\) multiplié par \(H_0\) :</p>
+  \[ H_0=\frac{\text{ampl.}(v_s)}{\text{ampl. du fondamental de }v_e}=\frac{S_1}{\,2V_0/\pi\,}. \]
+  <p>Lectures (voie 2 : 2 V/car. ; voie 1 : 0,5 V/car.) : \(S_1\approx 4\text{ V}\) et
+  \(V_0\approx 1\text{ V}\) (fondamental \(2V_0/\pi\approx0{,}64\text{ V}\)), d'où</p>
+  \[ \boxed{\ H_0\approx \frac{4}{0{,}64}\approx 6\ } \]
+  <div class="warnbox"><span class="lab">Honnêteté</span> \(\omega_0\) se lit sûrement (période nette).
+  \(H_0\) dépend de la lecture des amplitudes sur un oscillogramme <b>schématique</b> :
+  la <b>méthode</b> \(H_0=S_1/(2V_0/\pi)\) prime ; un \(H_0>1\) indique un passe-bande <b>actif</b>.</div>
+
+  <p class="q">4) 2ᵉ expérience : dérivateur ou intégrateur ?</p>
+  <p>Base de temps <b>5 µs/car.</b> (×10 plus rapide) : la fréquence est ×10, donc
+  \(\omega_1\approx10\,\omega_0\) (\(x\approx10\gg1\)). On est <b>très au-dessus</b> de la résonance,
+  sur la pente descendante. La sortie observée est un <b>triangle</b>. Or l'intégrale d'un
+  <b>créneau</b> (l'entrée) est un <b>triangle</b>.</p>
+  <div class="res">Dans la 2ᵉ expérience le filtre se comporte en <b>intégrateur</b>.</div>
+
+  <p class="q">5) Expression approchée de \(\underline H\) pour \(x\gg1\)</p>
+  <p>Pour \(x\gg1\), \(x-\dfrac1x\approx x\) et \(Qx\gg1\) :</p>
+  \[ \underline H \approx \frac{H_0}{jQx}=\frac{H_0}{jQ\,\omega/\omega_0}
+     =\frac{H_0\,\omega_0}{Q}\cdot\frac{1}{j\omega}. \]
+  <div class="res">\(\underline H\propto \dfrac{1}{j\omega}\) : c'est exactement la FTH d'un
+  <b>intégrateur</b> (gain en \(1/\omega\), phase \(-90°\)). ⟹ confirme la réponse ④
+  (créneau ⟶ triangle).</div>
+
+  <p class="q">6) Rapport \(\dfrac{\omega_0 H_0}{Q}\) puis valeur de \(Q\)</p>
+  <p>Dans la 2ᵉ expérience, à la pulsation du fondamental \(\omega_1\approx10\,\omega_0\) :</p>
+  \[ |\underline H(\omega_1)|=\frac{H_0\omega_0}{Q\,\omega_1}
+     =\frac{\text{ampl.}(v_s)}{\text{ampl. fond. }v_e}
+     \ \Rightarrow\ \frac{\omega_0 H_0}{Q}=|\underline H(\omega_1)|\times\omega_1. \]
+  <p>Période de \(v_s\) ≈ 4 car. ⟹ \(T_2=4\times5\,\mu\text{s}=20\,\mu\text{s}\),
+  \(f_1=50\text{ kHz}\), \(\omega_1\approx3{,}1\times10^{5}\text{ rad/s}\). Lectures
+  (voie 2 : 0,2 V/car., voie 1 : 2 V/car.) : \(v_s\approx0{,}2\text{ V}\),
+  fondamental de \(v_e = 2V_0/\pi\approx1{,}3\text{ V}\), soit \(|\underline H(\omega_1)|\approx0{,}16\).</p>
+  \[ \frac{\omega_0 H_0}{Q}\approx 0{,}16\times 3{,}1\times10^{5}\approx 5\times10^{4}\ \text{rad/s}. \]
+  <p>Avec \(\omega_0\approx3{,}1\times10^4\) et \(H_0\approx6\) :</p>
+  \[ Q=\frac{\omega_0 H_0}{5\times10^{4}}\approx\frac{3{,}1\times10^4\times6}{5\times10^{4}}\approx 4. \]
+  <div class="res"><b>\(Q\approx 3\text{–}4\)</b> : le filtre est bien <b>sélectif</b>, ce qui
+  <b>confirme</b> la prédiction de la question 2 (sortie quasi sinusoïdale à la résonance).</div>
+  <div class="warnbox"><span class="lab">Rappel méthode</span> Les valeurs chiffrées (\(H_0\), \(Q\))
+  dépendent des lectures d'amplitude sur des oscillogrammes schématiques ; retiens surtout
+  <b>l'enchaînement</b> : résonance ⟹ \(\omega_0=\omega_1\) ; \(x\gg1\) ⟹ intégrateur \(H_0\omega_0/(jQ\omega)\) ;
+  puis \(\omega_0H_0/Q\) mesuré ⟹ \(Q\).</div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ================= EX 5 ================= -->
+  <section class="block" id="ex5">
+  <div class="exo-card">
+    <div class="exo-head">Ex 5 — Réponses en f d'un circuit RC <span class="diff">H : E1.8</span></div>
+    <div class="exo-body">
+  <figure>
+    <img src="td2-img/ex5.jpg" alt="Énoncé Exercice 5 — entrée triangulaire, circuit RC (C série, R vers masse), sortie s" loading="lazy">
+    <figcaption>Énoncé (TD2) — entrée triangulaire \(e(t)\), circuit RC (C en série, R vers la masse), sortie \(s\)</figcaption>
+  </figure>
+
+  <div class="note"><span class="lab">Le circuit</span>
+  \(e\) → condensateur \(C\) en série → nœud de sortie → résistance \(R\) vers la masse,
+  \(s\) pris <b>aux bornes de \(R\)</b> : c'est un <b>passe-haut CR</b> du 1ᵉʳ ordre.
+  \[ \underline H=\frac{jRC\omega}{1+jRC\omega}\ ,\qquad \omega_c=\frac{1}{RC}. \]
+  L'entrée triangulaire vaut \(e(t)=e_{moy}+E\!\left[\cos\omega t+\dfrac{\cos3\omega t}{3^2}
+  +\dfrac{\cos5\omega t}{5^2}+\cdots\right]\) : continu \(e_{moy}\), fondamental \(E\),
+  harmoniques impairs en \(E/n^2\).</div>
+
+  <p class="q">1) Spectre d'amplitude de \(e(t)\) ; spectre de phase ?</p>
+  <p>Raies aux <b>harmoniques impairs</b> \(f_0,3f_0,5f_0,\dots\) de hauteurs \(E/n^2\)
+  (\(E,\;E/9,\;E/25,\;E/49\dots\)), plus le continu \(e_{moy}\) à \(f=0\). Décroissance <b>rapide</b>
+  en \(1/n^2\) (typique du triangle).</p>
+
+  <figure><svg viewBox="0 0 640 280" width="640" xmlns="http://www.w3.org/2000/svg">
+    <line x1="60" y1="240" x2="620" y2="240" stroke="#6b7c98" stroke-width="1.3"/>
+    <line x1="60" y1="250" x2="60" y2="30" stroke="#6b7c98" stroke-width="1.3"/>
+    <text x="26" y="42" fill="#9fb0c9" font-family="monospace" font-size="12">Cₙ</text>
+    <text x="600" y="262" fill="#9fb0c9" font-family="monospace" font-size="12">f</text>
+    <!-- DC -->
+    <rect x="86" y="150" width="10" height="90" fill="#fbbf24"/>
+    <text x="70" y="258" fill="#fbbf24" font-family="monospace" font-size="11">e_moy</text>
+    <!-- f0 -->
+    <rect x="176" y="50" width="10" height="190" fill="#10d9a3"/>
+    <text x="168" y="258" fill="#9fb0c9" font-family="monospace" font-size="11">f₀</text>
+    <text x="150" y="44" fill="#10d9a3" font-family="monospace" font-size="10">E</text>
+    <!-- 3f0 : E/9 -> 21px -->
+    <rect x="296" y="219" width="10" height="21" fill="#38bdf8"/>
+    <text x="288" y="258" fill="#9fb0c9" font-family="monospace" font-size="11">3f₀</text>
+    <text x="276" y="213" fill="#38bdf8" font-family="monospace" font-size="10">E/9</text>
+    <!-- 5f0 : E/25 -> 7.6px -->
+    <rect x="416" y="232" width="10" height="8" fill="#38bdf8"/>
+    <text x="408" y="258" fill="#9fb0c9" font-family="monospace" font-size="11">5f₀</text>
+    <text x="396" y="226" fill="#38bdf8" font-family="monospace" font-size="10">E/25</text>
+    <!-- 7f0 : E/49 -> 3.9px -->
+    <rect x="536" y="236" width="10" height="4" fill="#38bdf8"/>
+    <text x="528" y="258" fill="#9fb0c9" font-family="monospace" font-size="11">7f₀</text>
+    <text x="452" y="70" fill="#6b7c98" font-family="monospace" font-size="10">décroissance en 1/n²</text>
+  </svg><div class="mono" style="border:0;background:none;color:#6b7c98;font-size:.75rem">Spectre d'amplitude de l'entrée triangulaire (échelle : E = 190 px).</div></div>
+
+  <div class="res"><b>Spectre de phase :</b> \(e(t)\) est <b>pair</b> (que des \(\cos\), tous en \(+\)),
+  donc <b>toutes les phases sont nulles</b> : le spectre de phase est <b>plat (φₙ = 0)</b>.</div>
+
+  <h3><span class="qn">2</span>Allure de la sortie selon \(\omega\)</h3>
+  <div class="step">a) \(\omega \ll 1/RC\) (tous les harmoniques bien sous la coupure)</div>
+  <p>Le passe-haut se comporte en <b>dérivateur</b> : \(s\approx RC\,\dfrac{de}{dt}\). La dérivée d'un
+  <b>triangle</b> est un <b>créneau</b> ; de plus le continu \(e_{moy}\) est bloqué.</p>
+  <div class="res">Sortie ≈ <b>créneau</b> (rectangulaire) centré sur 0, de <b>faible</b> amplitude (\(\propto RC\omega\)).</div>
+
+  <div class="step">b) \(\omega \gg 1/RC\) (tous les harmoniques bien au-dessus)</div>
+  <p>\(|\underline H|\to1\) et la phase → 0 : le filtre <b>recopie</b> l'entrée, sauf le continu qui reste coupé.</p>
+  <div class="res">Sortie ≈ le <b>triangle</b> d'entrée, débarrassé de sa composante continue (centré sur 0), à pleine amplitude.</div>
+
+  <div class="step">c) \(\omega = 1/2RC\) : amplitudes des harmoniques jusqu'au rang 5, spectre de \(s(t)\)</div>
+  <p>Ici \(RC\omega=\tfrac12\) pour le fondamental. Pour l'harmonique de rang \(n\),
+  \(RC(n\omega)=n/2\), et le gain passe-haut vaut \(|\underline H_n|=\dfrac{n/2}{\sqrt{1+(n/2)^2}}\).
+  L'amplitude de sortie est \(S_n=|\underline H_n|\times \dfrac{E}{n^2}\).</p>
+  <div class="overflow">
+  <table>
+    <tr><th>rang n</th><th>RCnω = n/2</th><th>gain |Hₙ|</th><th>ampl. entrée</th><th>ampl. sortie Sₙ</th></tr>
+    <tr><td>0 (DC)</td><td>0</td><td>0</td><td>e_moy</td><td class="name">0 (bloqué)</td></tr>
+    <tr><td>1</td><td>0,5</td><td>0,447</td><td>E</td><td class="name">0,447 E</td></tr>
+    <tr><td>3</td><td>1,5</td><td>0,832</td><td>E/9</td><td class="name">0,0924 E</td></tr>
+    <tr><td>5</td><td>2,5</td><td>0,928</td><td>E/25</td><td class="name">0,0371 E</td></tr>
+  </table>
+  </div>
+  <p>Détail du fondamental : \(|\underline H_1|=\dfrac{0{,}5}{\sqrt{1+0{,}25}}=0{,}447\), donc
+  \(S_1=0{,}447\,E\). De même \(S_3=0{,}832\cdot E/9=0{,}0924\,E\) et \(S_5=0{,}928\cdot E/25=0{,}0371\,E\).</p>
+
+  <div class="svgcard"><svg viewBox="0 0 640 280" width="640" xmlns="http://www.w3.org/2000/svg">
+    <line x1="60" y1="240" x2="620" y2="240" stroke="#6b7c98" stroke-width="1.3"/>
+    <line x1="60" y1="250" x2="60" y2="30" stroke="#6b7c98" stroke-width="1.3"/>
+    <text x="26" y="42" fill="#9fb0c9" font-family="monospace" font-size="12">Sₙ</text>
+    <text x="600" y="262" fill="#9fb0c9" font-family="monospace" font-size="12">f</text>
+    <!-- DC blocked -->
+    <text x="76" y="236" fill="#fb7185" font-family="monospace" font-size="16">✘</text>
+    <text x="66" y="258" fill="#fb7185" font-family="monospace" font-size="11">DC=0</text>
+    <!-- f0 : 0.447E -> 85px -->
+    <rect x="176" y="155" width="10" height="85" fill="#10d9a3"/>
+    <text x="168" y="258" fill="#9fb0c9" font-family="monospace" font-size="11">f₀</text>
+    <text x="140" y="149" fill="#10d9a3" font-family="monospace" font-size="10">0,447E</text>
+    <!-- 3f0 : 0.0924E -> 17.6px -->
+    <rect x="296" y="222" width="10" height="18" fill="#38bdf8"/>
+    <text x="288" y="258" fill="#9fb0c9" font-family="monospace" font-size="11">3f₀</text>
+    <text x="266" y="216" fill="#38bdf8" font-family="monospace" font-size="10">0,092E</text>
+    <!-- 5f0 : 0.0371E -> 7px -->
+    <rect x="416" y="233" width="10" height="7" fill="#38bdf8"/>
+    <text x="408" y="258" fill="#9fb0c9" font-family="monospace" font-size="11">5f₀</text>
+    <text x="392" y="227" fill="#38bdf8" font-family="monospace" font-size="10">0,037E</text>
+    <text x="150" y="90" fill="#6b7c98" font-family="monospace" font-size="10">le fondamental domine encore, mais les</text>
+    <text x="150" y="105" fill="#6b7c98" font-family="monospace" font-size="10">harmoniques sont relativement rehaussés</text>
+  </svg><div class="mono" style="border:0;background:none;color:#6b7c98;font-size:.75rem">Spectre de sortie à ω = 1/2RC (même échelle E = 190 px que l'entrée).</div></div>
+
+  <div class="res"><b>Observation :</b> le continu est supprimé (\(S_0=0\)) et le <b>fondamental domine</b>
+  toujours (\(0{,}447E\)) : la sortie ressemble à une <b>sinusoïde légèrement déformée</b>, centrée
+  sur 0. Par rapport à l'entrée triangulaire (rapports \(1:0{,}111:0{,}04\)), le passe-haut
+  <b>rehausse relativement</b> les harmoniques (rapports de sortie \(1:0{,}207:0{,}083\)) — effet
+  attendu d'un passe-haut.</div>
+  </section>
+
+  <!-- ================= SOURCES ================= -->
+  <section id="src">
+    <h2><span class="hash">&#9113;</span> Documents sources</h2>
+    <p style="color:var(--ink-soft)">Énoncé original photographié (TD2, AEM2/P2030/S3, D. Courtois, 14/09/2026) :</p>
+    <ul>
+      <li><a href="TD2_p1.jpg"><b>TD2 — page 1</b></a> : Exercices 1 à 3.</li>
+      <li><a href="TD2_p2.jpg"><b>TD2 — page 2</b></a> (redressée) : Exercices 4, 5 et « Exercices en plus ».</li>
+      <li>Découpes par exercice : dossier <code>td2-img/</code>.</li>
+    </ul>
+    <div class="note"><span class="lab">Exercices en plus</span> L'énoncé renvoie à
+    <code>T : 1.2, 3, 7, 8</code> (exercices d'un autre recueil, non fournis ici — pas d'énoncé à
+    reproduire).</div>
+    <div class="note"><span class="lab">Repère</span> Ce corrigé prolonge le cours
+    <a href="ch2-filtrage-fourier.html">Ch2 — Filtrage d'un signal périodique / Stabilité des SLCI</a>
+    et fait suite au <a href="td1-corrige.html">TD1 corrigé</a>. Même identité visuelle « labo » 2ᵉ année.</div>
+  </section>
+</main>
+
+<footer>
+  AEM2 · Électronique — TD2 corrigé (Ex 1 à 5) · support de révision personnel ·
+  énoncé d'après le TD de l'ECAM (D. Courtois, 14/09/2026).
+</footer>
+
+</body>
+</html>

@@ -10,6 +10,7 @@
   --phys:#2563eb; --phys-ink:#1d4ed8;
   --math:#dc2626; --math-ink:#b91c1c;
   --sii:#eab308;  --sii-ink:#a16207;
+  --am2:#0d9488;  --am2-ink:#0f766e;
   /* Variables de matière courante — surchargées par body.theme-xxx (défaut : physique/bleu) */
   --subject:var(--phys); --subject-ink:var(--phys-ink); --chip-ink:#ffffff;
 }
@@ -17,6 +18,7 @@
 body.theme-phys{--subject:var(--phys); --subject-ink:var(--phys-ink); --chip-ink:#fff}
 body.theme-math{--subject:var(--math); --subject-ink:var(--math-ink); --chip-ink:#fff}
 body.theme-sii {--subject:var(--sii);  --subject-ink:var(--sii-ink);  --chip-ink:#3b2f00}
+body.theme-am2 {--subject:var(--am2);  --subject-ink:var(--am2-ink);  --chip-ink:#fff}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth; scroll-padding-top:80px}
 body{margin:0; font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
@@ -41,6 +43,13 @@ body{margin:0; font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
 .wrap{max-width:var(--maxw); margin:0 auto; padding:2rem 1.2rem 5rem}
 .wrap.wide{max-width:1100px}
 
+/* ---- Séparateur d'année (accueil) ---- */
+.year-divider{display:flex; align-items:center; gap:.9rem; margin:2.6rem 0 0; color:var(--ink-soft)}
+.year-divider .line{flex:1; height:1px; background:var(--line)}
+.year-divider .lab{font-size:.78rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+  padding:.3rem .9rem; border-radius:20px; background:#fff; border:1px solid var(--line); white-space:nowrap}
+.year-divider.am2 .lab{color:var(--am2-ink); border-color:var(--am2)}
+
 /* ---- Cartes matières (accueil) ---- */
 .subjects{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:1.2rem; margin-top:1.6rem}
@@ -50,6 +59,7 @@ body{margin:0; font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
 .subject.phys{border-top-color:var(--phys)}
 .subject.math{border-top-color:var(--math)}
 .subject.sii{border-top-color:var(--sii)}
+.subject.am2{border-top-color:var(--am2)}
 .subject h2{margin:0; padding:1rem 1.2rem .3rem; font-size:1.2rem}
 .subject .meta{padding:0 1.2rem .8rem; color:var(--ink-soft); font-size:.9rem}
 .subject ul{list-style:none; margin:0; padding:.4rem 0 1rem}
@@ -113,6 +123,21 @@ figcaption{font-size:.85rem; color:var(--ink-soft); margin-top:.3rem}
 .toc-mini{background:#f8fafc; border:1px solid var(--line); border-radius:10px; padding:1rem 1.2rem; margin:1rem 0}
 .toc-mini a{color:var(--subject-ink); text-decoration:none}
 .toc-mini a:hover{text-decoration:underline}
+
+/* ---- Widget interactif (ex. Bode) — mêmes classes pour toute matière ---- */
+.lab-tool{background:#f8fafc; border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.3rem; margin:1.2rem 0}
+.lab-tool h4{margin:.1rem 0 .8rem; color:var(--subject-ink); font-size:1rem}
+.ctrls{display:flex; flex-wrap:wrap; align-items:center; gap:1rem; margin-bottom:.6rem}
+.ctrls .row{display:flex; align-items:center; gap:.6rem}
+.ctrls label{font-size:.88rem; color:var(--ink-soft)}
+.ctrls input[type=range]{width:200px; accent-color:var(--subject)}
+.qval{font-weight:800; color:var(--subject-ink); min-width:3.2ch; display:inline-block}
+.preset{font-size:.82rem; cursor:pointer; background:#fff; color:var(--ink);
+  border:1px solid var(--line); border-radius:8px; padding:.32rem .75rem}
+.preset:hover{border-color:var(--subject); color:var(--subject-ink)}
+.readout{font-size:.85rem; color:var(--ink-soft); margin-top:.5rem}
+.readout b{color:var(--subject-ink)}
+.bode-wrap{overflow-x:auto}
 .overflow{overflow-x:auto}
 footer{text-align:center; color:var(--ink-soft); font-size:.85rem; padding:2rem 1rem}
 mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%}
