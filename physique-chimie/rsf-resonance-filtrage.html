@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RSF, résonance & filtrage — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' }, svg: { fontCache: 'global' } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-phys">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#apps">Applications corrigées</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Physique · Électrocinétique</span>
+  <h1 class="title">Régime sinusoïdal forcé, résonance &amp; filtrage</h1>
+  <p class="lead">Cours complet reconstruit à partir du polycopié Moodle <i>Cours_RSF_filtrage</i> (E. Thibierge) et des
+  fiches-résumés. On y traite tout l'enchaînement : le <b>régime sinusoïdal forcé</b> (RSF) et la notation complexe,
+  la <b>résonance</b> en tension et en courant, l'<b>analyse de Fourier</b> d'un signal périodique (valeur moyenne,
+  valeur efficace, théorème de Parseval), puis le <b>filtrage</b> : fonction de transfert, diagramme de Bode, les
+  quatre filtres de référence, l'action d'un filtre sur un signal (moyenneur / dérivateur / intégrateur) et
+  l'<b>association de filtres</b> (charge, impédances d'entrée/sortie, mise en cascade). Chaque résultat-clé est
+  démontré, chaque application du cours est corrigée intégralement.</p>
+
+  <div class="note" style="border-left-color:var(--phys)">
+    <span class="lab">📌 À lire d'abord</span>
+    Ce chapitre est <b>complémentaire</b> de la fiche « Filtrage &amp; diagrammes de Bode » (chapitre 6) : celui-ci
+    part du RSF et de la résonance, ajoute l'analyse de Fourier et l'association de filtres. Les deux se recoupent sur
+    les fonctions de transfert et Bode — c'est voulu, la répétition fait mémoriser.
+  </div>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Cours détaillé</a>
+        <ul>
+          <li><a href="#c1">1.1 RSF &amp; déphasage entre signaux synchrones</a></li>
+          <li><a href="#c2">1.2 Représentation complexe d'un signal sinusoïdal</a></li>
+          <li><a href="#c3">1.3 Impédances complexes, associations, ponts diviseurs</a></li>
+          <li><a href="#c4">1.4 Résonance en tension (RLC sur \(u_C\))</a></li>
+          <li><a href="#c5">1.5 Résonance en courant (RLC sur \(i\))</a></li>
+          <li><a href="#c6">1.6 Analyse de Fourier d'un signal périodique</a></li>
+          <li><a href="#c7">1.7 Valeur moyenne, valeur efficace, Parseval</a></li>
+          <li><a href="#c8">1.8 Filtre linéaire &amp; fonction de transfert</a></li>
+          <li><a href="#c9">1.9 Diagramme de Bode &amp; bande passante</a></li>
+          <li><a href="#c10">1.10 Les quatre filtres de référence</a></li>
+          <li><a href="#c11">1.11 Action d'un filtre sur un signal</a></li>
+          <li><a href="#c12">1.12 Association de filtres &amp; impédances</a></li>
+        </ul>
+      </li>
+      <li><a href="#apps">2. Applications du cours corrigées</a></li>
+      <li><a href="#docs">📂 Documents donnés (cours, TD, corrigés…)</a></li>
+    </ul>
+  </div>
+
+  <!-- ============================ COURS ============================ -->
+  <section class="block" id="cours">
+    <h2>1. Cours détaillé</h2>
+
+    <!-- ---- 1.1 ---- -->
+    <h3 id="c1">1.1 Régime sinusoïdal forcé &amp; déphasage entre signaux synchrones</h3>
+    <div class="def"><span class="lab">Régime sinusoïdal forcé (RSF)</span>
+    Un circuit linéaire alimenté par une source sinusoïdale \(e(t)=E_m\cos(\omega t)\) atteint, après extinction du
+    régime transitoire (durée \(\sim\tau\)), un <b>régime établi</b> où toutes les tensions et tous les courants sont
+    sinusoïdaux à la <b>même pulsation</b> \(\omega\) que la source — mais avec une amplitude et un déphasage qui
+    <b>dépendent de \(\omega\)</b>.</div>
+
+    <div class="thm"><span class="lab">Déphasage de deux signaux synchrones</span>
+    Pour \(u(t)=U_m\cos(\omega t+\varphi)\) et \(u'(t)=U'_m\cos(\omega t+\varphi')\) de <b>même pulsation</b>, on
+    appelle déphasage de \(u'\) par rapport à \(u\) :
+    \[\boxed{\ \Delta\varphi=\varphi'-\varphi\ }\qquad \Delta\varphi\in\,]-\pi,\,+\pi]\]
+    <ul style="margin:.3rem 0">
+      <li>\(\Delta\varphi=0\) : signaux <b>en phase</b> ;</li>
+      <li>\(\Delta\varphi=\pi\) : <b>en opposition de phase</b> ;</li>
+      <li>\(\Delta\varphi=\pm\frac{\pi}{2}\) : <b>en quadrature</b> ;</li>
+      <li>\(\Delta\varphi>0\) : \(u'\) est <b>en avance</b> sur \(u\) (il atteint son maximum en premier) ;
+      \(\Delta\varphi<0\) : \(u'\) est <b>en retard</b>.</li>
+    </ul></div>
+
+    <div class="note"><span class="lab">Déphasage ↔ décalage temporel</span>
+    \[|\Delta\varphi|=\omega\,\Delta t=\frac{2\pi}{T}\,\Delta t\]
+    En pratique : on lit le décalage \(\Delta t\) entre deux maxima proches sur l'oscilloscope pour obtenir
+    \(|\Delta\varphi|\), puis on ajoute le signe « à la main » selon lequel des deux signaux est en avance.</div>
+
+    <div class="method"><span class="lab">Démonstration de la relation \(|\Delta\varphi|=\omega\Delta t\)</span>
+    Soient \(t_{\max}\) et \(t'_{\max}\) deux instants proches où \(u\) et \(u'\) sont maximaux. Un cosinus est
+    maximal quand son argument vaut \(2k\pi\) :
+    \[\omega t_{\max}+\varphi=2k\pi \quad\text{et}\quad \omega t'_{\max}+\varphi'=2k\pi\]
+    En soustrayant : \(\varphi'-\varphi=-\omega(t'_{\max}-t_{\max})\), d'où \(|\Delta\varphi|=\omega|\Delta t|\). \(\blacksquare\)</div>
+
+    <!-- ---- 1.2 ---- -->
+    <h3 id="c2">1.2 Représentation complexe d'un signal sinusoïdal</h3>
+    <div class="def"><span class="lab">Représentation &amp; amplitude complexes</span>
+    À \(u(t)=U_m\cos(\omega t+\varphi)\) on associe
+    \[\underline u(t)=U_m\,e^{j(\omega t+\varphi)}=\underline U\,e^{j\omega t}\qquad\text{avec}\qquad
+    \underline U=U_m\,e^{j\varphi}\]
+    \(\underline U\) est l'<b>amplitude complexe</b> ; \(j\) est le complexe de module \(1\) et d'argument \(\pi/2\)
+    (\(j^2=-1\)). On récupère le signal réel par
+    \[u(t)=\mathrm{Re}\big(\underline u(t)\big)\qquad\Longleftrightarrow\qquad
+    U_m=|\underline U|,\quad \varphi=\arg\underline U\]</div>
+    <div class="warnbox"><span class="lab">⚠ Notation</span>
+    La <b>barre en dessous</b> \(\underline U\) désigne une grandeur complexe (physique). Elle n'a rien à voir avec le
+    conjugué (barre au-dessus en maths) : en physique le conjugué se note d'une étoile, \(\underline U^{\star}\).</div>
+
+    <div class="thm"><span class="lab">Les deux propriétés qui font toute la puissance de la méthode</span>
+    <ul style="margin:.3rem 0">
+      <li>Le passage au complexe est <b>linéaire</b> : l'amplitude complexe d'une combinaison linéaire de signaux
+      synchrones est la combinaison linéaire des amplitudes complexes.</li>
+      <li>Il <b>commute avec la dérivation et l'intégration</b> :
+      \[\boxed{\ \frac{\mathrm d}{\mathrm dt}\ \longleftrightarrow\ \times\, j\omega\ ,\qquad
+      \int\!\mathrm dt\ \longleftrightarrow\ \div\, j\omega\ }\]</li>
+    </ul>
+    <b>Conséquence capitale :</b> une équation différentielle linéaire devient, en complexe, une simple
+    <b>équation algébrique</b>. On n'a plus jamais à résoudre d'équation différentielle en RSF.</div>
+
+    <div class="method"><span class="lab">Démonstration de \(\frac{\mathrm d}{\mathrm dt}\to \times j\omega\)</span>
+    Pour \(u(t)=U_m\cos(\omega t+\varphi)\),
+    \(\dfrac{\mathrm du}{\mathrm dt}=-\omega U_m\sin(\omega t+\varphi)=\omega U_m\cos\!\big(\omega t+\varphi+\tfrac{\pi}{2}\big)\).
+    En complexe :
+    \[\underline{\frac{\mathrm du}{\mathrm dt}}=\omega U_m\,e^{j(\omega t+\varphi+\pi/2)}
+    =\underbrace{e^{j\pi/2}}_{=\,j}\,\omega U_m\,e^{j(\omega t+\varphi)}=j\omega\,\underline u\qquad\blacksquare\]</div>
+
+    <div class="note"><span class="lab">Calcul d'un argument — le piège de l'arctan</span>
+    \(\arg(x+jy)=\arctan\!\frac{y}{x}\) <b>uniquement si \(x>0\)</b>. Si \(x<0\), on factorise par \(-1\) :
+    \[\arg(x+jy)=\arg\!\big(-(-x-jy)\big)=\pi+\arctan\frac{y}{x}\]
+    Rappel : les arguments suivent les règles des logarithmes — l'argument d'un produit est la somme des arguments,
+    celui d'un quotient la différence : \(\arg\frac{N}{D}=\arg N-\arg D\).</div>
+
+    <!-- ---- 1.3 ---- -->
+    <h3 id="c3">1.3 Impédances complexes, associations, ponts diviseurs</h3>
+    <div class="thm"><span class="lab">Loi d'Ohm complexe : \(\underline U=\underline Z\,\underline I\)</span>
+    <div class="overflow">
+    <table>
+      <tr><th>Dipôle (conv. récepteur)</th><th>Loi</th><th>Impédance \(\underline Z=\underline U/\underline I\)</th><th>BF \((\omega\to0)\)</th><th>HF \((\omega\to\infty)\)</th></tr>
+      <tr><td>Résistance \(R\)</td><td>\(u=Ri\)</td><td>\(R\)</td><td>\(R\)</td><td>\(R\)</td></tr>
+      <tr><td>Condensateur \(C\)</td><td>\(i=C\frac{\mathrm du}{\mathrm dt}\)</td><td>\(\dfrac{1}{jC\omega}\)</td><td>\(\infty\) → <b>interrupteur ouvert</b></td><td>\(0\) → <b>fil</b></td></tr>
+      <tr><td>Bobine \(L\)</td><td>\(u=L\frac{\mathrm di}{\mathrm dt}\)</td><td>\(jL\omega\)</td><td>\(0\) → <b>fil</b></td><td>\(\infty\) → <b>interrupteur ouvert</b></td></tr>
+    </table>
+    </div>
+    L'admittance est \(\underline Y=1/\underline Z\). En complexe, <b>tous les circuits deviennent résistifs</b> :
+    toutes les lois de comportement s'écrivent comme la loi d'Ohm.</div>
+
+    <div class="note"><span class="lab">Associations &amp; ponts diviseurs (valables en complexe)</span>
+    <ul style="margin:.3rem 0">
+      <li><b>Série</b> : \(\underline Z_{\text{éq}}=\underline Z_1+\underline Z_2\).</li>
+      <li><b>Parallèle</b> : \(\dfrac{1}{\underline Z_{\text{éq}}}=\dfrac{1}{\underline Z_1}+\dfrac{1}{\underline Z_2}\), soit \(\underline Y_{\text{éq}}=\underline Y_1+\underline Y_2\).</li>
+      <li><b>Diviseur de tension</b> : \(\underline U_2=\dfrac{\underline Z_2}{\underline Z_1+\underline Z_2}\,\underline U\).</li>
+      <li><b>Diviseur de courant</b> : \(\underline I_2=\dfrac{\underline Y_2}{\underline Y_1+\underline Y_2}\,\underline I\).</li>
+    </ul>
+    <b>Astuce analyse dimensionnelle :</b> \([\underline Z]=\Omega\), donc \([L]=\Omega\cdot\text{s}\) et
+    \([1/C\omega]=\Omega \Rightarrow [C]=\text{s}/\Omega=\text{F}\).</div>
+
+    <!-- ---- 1.4 ---- -->
+    <h3 id="c4">1.4 Résonance en tension (RLC série, sortie sur \(u_C\))</h3>
+    <div class="def"><span class="lab">Phénomène de résonance</span>
+    Il y a <b>résonance</b> lorsque la réponse d'un oscillateur forcé prend une <b>très grande amplitude</b> pour une
+    pulsation de forçage particulière, voisine de la pulsation propre \(\omega_0\). Le forçage apporte alors de
+    l'énergie « au bon moment » à chaque période. (Analogie mécanique exacte : élongation d'un système
+    masse-ressort amorti forcé.)</div>
+
+    <div class="thm"><span class="lab">Amplitude complexe de \(u_C\)</span>
+    Avec \(\omega_0=\dfrac{1}{\sqrt{LC}}\) (pulsation propre) et \(Q=\dfrac{1}{R}\sqrt{\dfrac{L}{C}}\) (facteur de
+    qualité) :
+    \[\underline{U_C}=\frac{1}{\ 1-\dfrac{\omega^2}{\omega_0^2}+j\,\dfrac{\omega}{Q\omega_0}\ }\,\underline E\]
+    Comme \(\underline E=E_m\in\mathbb R\), l'argument de \(\underline{U_C}\) est directement le déphasage de
+    \(u_C\) par rapport à \(e\).</div>
+
+    <div class="method"><span class="lab">Étude qualitative (3 limites)</span>
+    <div class="overflow">
+    <table>
+      <tr><th>Régime</th><th>\(\underline{U_C}\) équivalent</th><th>\(|U_C|\)</th><th>\(\varphi=\arg\underline{U_C}\)</th><th>Interprétation</th></tr>
+      <tr><td>BF \((\omega\ll\omega_0)\)</td><td>\(\approx \underline E\)</td><td>\(E\)</td><td>\(0\)</td><td>\(C\) = interrupteur ouvert : toute la tension est sur \(C\)</td></tr>
+      <tr><td>\(\omega=\omega_0\)</td><td>\(-jQ\,\underline E\)</td><td>\(QE\)</td><td>\(-\frac{\pi}{2}\)</td><td>amplitude multipliée par \(Q\) : <b>surtension</b></td></tr>
+      <tr><td>HF \((\omega\gg\omega_0)\)</td><td>\(-\frac{\omega_0^2}{\omega^2}\underline E\)</td><td>\(\to0\)</td><td>\(-\pi\)</td><td>\(C\) = fil : tension nulle</td></tr>
+    </table>
+    </div></div>
+
+    <div class="thm"><span class="lab">Condition d'existence de la résonance en tension</span>
+    En posant \(x=\omega/\omega_0\), \(|U_C|=\dfrac{E_m}{\sqrt{f(x)}}\) avec \(f(x)=(1-x^2)^2+\dfrac{x^2}{Q^2}\).
+    L'étude de \(f'(x)=x\Big(x^2-1+\dfrac{1}{2Q^2}\Big)\) donne :
+    \[\boxed{\ \text{résonance en tension}\ \Longleftrightarrow\ Q>\frac{1}{\sqrt2}\ }\qquad
+    \omega_{\text{rés}}=\omega_0\sqrt{1-\frac{1}{2Q^2}}\]
+    Dans la limite \(Q\gg1\) : \(\omega_{\text{rés}}\to\omega_0\) et \(|U_C|_{\max}\simeq Q\,E\).</div>
+
+    <div class="warnbox"><span class="lab">⚠ Ne pas confondre les deux seuils de \(Q\)</span>
+    \(Q=\tfrac{1}{\sqrt2}\approx0{,}707\) est le seuil d'existence d'une <b>résonance</b> (RSF). Il est différent de
+    \(Q=\tfrac12\), qui est le seuil de nature du <b>régime transitoire</b> (apériodique / pseudo-périodique).</div>
+
+    <div class="note"><span class="lab">Acuité — bande passante</span>
+    La largeur de résonance \(\Delta\omega\) est l'intervalle où \(|U(\omega)|>\dfrac{U_{\max}}{\sqrt2}\). Dans la
+    limite \(Q\gg1\) :
+    \[\boxed{\ \Delta\omega=\frac{\omega_0}{Q}\ }\]
+    Plus \(Q\) est grand, plus la résonance est <b>aiguë</b> (étroite) : mesurer \(\Delta\omega\) est une méthode
+    expérimentale pour estimer \(Q\).</div>
+
+    <!-- ---- 1.5 ---- -->
+    <h3 id="c5">1.5 Résonance en courant (RLC série, sortie sur \(i\) ou \(u_R\))</h3>
+    <div class="thm"><span class="lab">Amplitude complexe du courant</span>
+    En raisonnant sur \(u_R=Ri\) :
+    \[\underline I=\frac{1}{\ 1+jQ\Big(\dfrac{\omega}{\omega_0}-\dfrac{\omega_0}{\omega}\Big)\ }\,\frac{\underline E}{R}
+    \qquad\Longrightarrow\qquad |I|=\frac{1}{\sqrt{\,1+Q^2\big(x-\frac1x\big)^2\,}}\,\frac{E}{R}\]</div>
+
+    <div class="res"><span class="lab">Résultat — toujours une résonance, à \(\omega_0\)</span>
+    Le dénominateur est une <b>somme de carrés</b> minimale quand le terme entre parenthèses s'annule, donc
+    \(|I|\) passe <b>toujours</b> par un maximum, quel que soit \(Q\), à
+    \[\boxed{\ \omega_{\text{rés}}=\omega_0\ }\qquad |I|_{\max}=\frac{E}{R},\quad \varphi=0\ (\text{courant en phase avec }e)\]
+    La largeur de résonance vaut \(\Delta\omega=\dfrac{\omega_0}{Q}\) — ici <b>résultat exact</b>, valable pour tout
+    \(Q\) (contrairement à la résonance en tension où c'est une approximation \(Q\gg1\)).</div>
+
+    <div class="note"><span class="lab">Deux phénoménologies à distinguer</span>
+    <ul style="margin:.3rem 0">
+      <li><b>Résonance en tension</b> (sur \(u_C\), \(u_L\), ou en élongation mécanique) : conditionnelle
+      (\(Q>\frac{1}{\sqrt2}\)), \(\omega_{\text{rés}}<\omega_0\).</li>
+      <li><b>Résonance en courant/intensité</b> (sur \(u_R\), ou en vitesse mécanique) : systématique,
+      \(\omega_{\text{rés}}=\omega_0\).</li>
+    </ul></div>
+
+    <!-- ---- 1.6 ---- -->
+    <h3 id="c6">1.6 Analyse de Fourier d'un signal périodique</h3>
+    <div class="def"><span class="lab">Décomposition en série de Fourier</span>
+    Tout signal \(y\) périodique de pulsation \(\omega\) se décompose en une somme de sinusoïdes de pulsations
+    <b>multiples</b> de \(\omega\) :
+    \[y(t)=Y_0+\sum_{n=1}^{+\infty}Y_n\cos(n\omega t+\varphi_n)\qquad(Y_n\ge0)\]
+    <ul style="margin:.3rem 0">
+      <li>\(Y_0\) = <b>composante continue</b> (harmonique de rang 0, pulsation nulle) ;</li>
+      <li>\(n=1\) = <b>fondamental</b> (même fréquence que le signal) ;</li>
+      <li>\(n\ge2\) = <b>harmoniques</b> de rang \(n\), pulsation \(n\omega\) ;</li>
+      <li>le <b>spectre d'amplitude</b> représente les \(Y_n\) en fonction de la fréquence \(f_n=n\omega/2\pi\).</li>
+    </ul></div>
+
+    <div class="note"><span class="lab">Coefficients de Fourier</span>
+    Avec \(T=2\pi/\omega\) : \(Y_0=\dfrac1T\displaystyle\int_0^T y\,\mathrm dt\), et pour \(n>0\)
+    \[A_n=\frac2T\int_0^T y\cos(n\omega t)\,\mathrm dt,\quad B_n=\frac2T\int_0^T y\sin(n\omega t)\,\mathrm dt,\quad
+    Y_n=\sqrt{A_n^2+B_n^2},\quad \tan\varphi_n=-\frac{B_n}{A_n}\]
+    Exemple (créneau \(0\)/\(E\)) : \(\displaystyle y(t)=\frac E2+\frac{2E}{\pi}\sum_{p=0}^{\infty}\frac{1}{2p+1}\sin\big((2p+1)\omega t\big)\) (harmoniques impaires seulement).</div>
+
+    <div class="res"><span class="lab">Contenu physique des harmoniques</span>
+    Les <b>premières harmoniques</b> codent l'allure générale du signal ; les <b>harmoniques de rang élevé</b> codent
+    ses variations rapides : discontinuités, fronts, bruit. → Un passe-bas « lisse » un signal, un passe-haut en
+    extrait les fronts.</div>
+
+    <!-- ---- 1.7 ---- -->
+    <h3 id="c7">1.7 Valeur moyenne, valeur efficace, théorème de Parseval</h3>
+    <div class="def"><span class="lab">Valeur moyenne</span>
+    \[\langle y\rangle=\frac1T\int_{t_0}^{t_0+T}y(t)\,\mathrm dt\qquad(\text{indépendante de }t_0)\]
+    Opération <b>linéaire</b>. Un signal sinusoïdal est de <b>moyenne nulle</b> : \(\langle\cos(\omega t+\varphi)\rangle=0\).
+    Donc la moyenne d'un signal quelconque est égale à sa <b>composante continue</b> : \(\langle y\rangle=Y_0\).</div>
+
+    <div class="def"><span class="lab">Valeur efficace (RMS)</span>
+    \[Y_{\text{eff}}=\sqrt{\langle y^2\rangle}=\sqrt{\frac1T\int_{t_0}^{t_0+T}y(t)^2\,\mathrm dt}\]
+    <b>Non linéaire.</b> Pour un sinusoïdal : \(\boxed{\,Y_{\text{eff}}=\dfrac{Y_m}{\sqrt2}\,}\). (Le secteur EDF :
+    \(230\)&nbsp;V efficaces, \(50\)&nbsp;Hz, soit une amplitude \(\approx325\)&nbsp;V.)</div>
+
+    <div class="method"><span class="lab">Démonstration de \(Y_{\text{eff}}=Y_m/\sqrt2\)</span>
+    Avec \(y=Y_m\cos(\omega t+\varphi)\), on linéarise \(y^2=\dfrac{Y_m^2}{2}\big(1+\cos(2\omega t+2\varphi)\big)\).
+    La moyenne du cosinus (pulsation \(2\omega\ne0\)) est nulle, donc
+    \(Y_{\text{eff}}^2=\langle y^2\rangle=\dfrac{Y_m^2}{2}\). \(\blacksquare\)</div>
+
+    <div class="thm"><span class="lab">Théorème de Parseval-Plancherel</span>
+    Le carré de la valeur efficace est la somme des carrés des valeurs efficaces des harmoniques :
+    \[\langle y^2\rangle=\sum_{n=0}^{+\infty}\langle y_n^2\rangle
+    =Y_0^2+\frac12\sum_{n=1}^{+\infty}Y_n^2\]
+    <b>Interprétation énergétique :</b> l'énergie (\(\propto\) carré du signal) se répartit sur les harmoniques et
+    s'ajoute sans terme croisé, car les produits d'harmoniques distinctes sont de moyenne nulle.</div>
+
+    <!-- ---- 1.8 ---- -->
+    <h3 id="c8">1.8 Filtre linéaire &amp; fonction de transfert</h3>
+    <div class="def"><span class="lab">Filtre</span>
+    Système (quadripôle : 2 bornes d'entrée, 2 de sortie) qui transmet vers la sortie \(s(t)\) l'information du signal
+    d'entrée \(e(t)\) <b>sélectionnée selon un critère fréquentiel</b>. On se limite aux filtres <b>passifs</b> (aucune
+    alimentation interne) et <b>analogiques</b>. Un filtre est <b>linéaire</b> s'il vérifie le principe de
+    superposition ; critère pratique : \(e\) et \(s\) sont reliés par une équation différentielle linéaire à
+    coefficients constants.</div>
+
+    <div class="thm"><span class="lab">Fonction de transfert harmonique</span>
+    Pour une entrée sinusoïdale, on définit
+    \[\boxed{\ H(\omega)=\frac{\underline S}{\underline E}\ }\qquad
+    |H|=\frac{S_m}{E_m}\ (\text{rapport des amplitudes}),\qquad
+    \arg H=\varphi_s-\varphi_e=\Delta\varphi_{s/e}\ (\text{déphasage sortie/entrée})\]</div>
+
+    <div class="note"><span class="lab">Lien équation différentielle ↔ fonction de transfert</span>
+    Comme \(\dfrac{\mathrm d}{\mathrm dt}\leftrightarrow \times j\omega\), l'équa. diff. et \(H\) se déduisent l'une
+    de l'autre. On écrit \(H\) comme un quotient de <b>polynômes en \(j\omega\)</b> (sans division résiduelle) puis on
+    identifie. L'<b>ordre du filtre</b> = puissance la plus élevée de \(j\omega\) = ordre de la dérivée la plus élevée.
+    (En Laplace : \(\times j\omega\leftrightarrow \times p\).)</div>
+
+    <!-- ---- 1.9 ---- -->
+    <h3 id="c9">1.9 Diagramme de Bode &amp; bande passante</h3>
+    <div class="thm"><span class="lab">Gain en décibels</span>
+    \[\boxed{\ G_{dB}(\omega)=20\log|H(\omega)|\ }\qquad |H|=10^{\,G_{dB}/20}\]
+    \(G_{dB}<0\Leftrightarrow|H|<1\) : signal <b>atténué</b>. \(G_{dB}>0\Leftrightarrow|H|>1\) : signal
+    <b>amplifié</b>. Le diagramme de Bode trace \(G_{dB}\) et \(\Delta\varphi\) en fonction de \(\omega\), l'axe des
+    pulsations en <b>échelle logarithmique</b> (une <b>décade</b> = un facteur 10).</div>
+
+    <div class="note"><span class="lab">Repères à connaître par cœur</span>
+    <div class="overflow">
+    <table>
+      <tr><th>\(G_{dB}\)</th><th>\(-1\)</th><th>\(-3\)</th><th>\(0\)</th><th>\(+20\)</th><th>\(-20\)</th><th>\(-40\)</th></tr>
+      <tr><td>\(|H|\)</td><td>\(0{,}9\)</td><td>\(\frac{1}{\sqrt2}\approx0{,}7\)</td><td>\(1\)</td><td>\(10\)</td><td>\(0{,}1\)</td><td>\(0{,}01\)</td></tr>
+    </table>
+    </div>
+    Une pente de \(\pm20\) dB/décade ⇒ ordre 1 ; \(\pm40\) dB/décade ⇒ ordre 2. De faibles variations en dB cachent
+    de fortes variations d'amplitude.</div>
+
+    <div class="thm"><span class="lab">Bande passante à \(-3\) dB</span>
+    \[\omega\in\text{BP}\ \Longleftrightarrow\ |H(\omega)|>\frac{H_{\text{réf}}}{\sqrt2}
+    \ \Longleftrightarrow\ G_{dB}(\omega)>G_{\text{réf}}-3\ \text{dB}\]
+    \(H_{\text{réf}}\) est le gain maximal du filtre. Les bornes de la BP sont les <b>pulsations de coupure</b>.</div>
+
+    <!-- ---- 1.10 ---- -->
+    <h3 id="c10">1.10 Les quatre filtres de référence</h3>
+    <div class="method"><span class="lab">Méthode — nature d'un filtre « sans calcul »</span>
+    On remplace \(C\) et \(L\) par leurs équivalents BF/HF, on regarde \(s\) : si \(s=e\) le signal passe, si \(s=0\)
+    il est coupé.
+    <div class="overflow">
+    <table>
+      <tr><th>Nature</th><th>BF</th><th>HF</th></tr>
+      <tr><td><b>Passe-bas</b></td><td>\(s=e\)</td><td>\(s=0\)</td></tr>
+      <tr><td><b>Passe-haut</b></td><td>\(s=0\)</td><td>\(s=e\)</td></tr>
+      <tr><td><b>Passe-bande</b></td><td>\(s=0\)</td><td>\(s=0\)</td></tr>
+    </table>
+    </div></div>
+
+    <div class="thm"><span class="lab">Formes canoniques &amp; diagrammes asymptotiques</span>
+    <div class="overflow">
+    <table>
+      <tr><th>Filtre</th><th>Forme canonique</th><th>Asymptotes en gain</th><th>Phase</th></tr>
+      <tr><td><b>Passe-bas 1ᵉʳ ordre</b></td><td>\(\dfrac{H_0}{1+j\frac{\omega}{\omega_c}}\)</td><td>\(0\) dB (BF), \(-20\) dB/déc (HF)</td><td>\(0\to-\frac{\pi}{2}\)</td></tr>
+      <tr><td><b>Passe-haut 1ᵉʳ ordre</b></td><td>\(\dfrac{jH_0\frac{\omega}{\omega_c}}{1+j\frac{\omega}{\omega_c}}=\dfrac{H_0}{1-j\frac{\omega_c}{\omega}}\)</td><td>\(+20\) dB/déc (BF), \(0\) dB (HF)</td><td>\(+\frac{\pi}{2}\to0\)</td></tr>
+      <tr><td><b>Passe-bande 2ᵉ ordre</b></td><td>\(\dfrac{H_0}{1+jQ\left(x-\frac1x\right)}\), \(x=\frac{\omega}{\omega_0}\)</td><td>\(\pm20\) dB/déc de part et d'autre</td><td>\(+\frac{\pi}{2}\to-\frac{\pi}{2}\)</td></tr>
+      <tr><td><b>Passe-bas 2ᵉ ordre</b></td><td>\(\dfrac{H_0}{1-x^2+j\frac{x}{Q}}\), \(x=\frac{\omega}{\omega_0}\)</td><td>\(0\) dB (BF), \(-40\) dB/déc (HF)</td><td>\(0\to-\pi\)</td></tr>
+    </table>
+    </div></div>
+
+    <div class="note"><span class="lab">À retenir sur les ordres 2</span>
+    <ul style="margin:.3rem 0">
+      <li><b>Passe-bande</b> : \(\omega_0\) = pulsation centrale ; largeur \(\Delta\omega=\dfrac{\omega_0}{Q}\). Plus
+      \(Q\) grand, plus le filtre est <b>sélectif</b>.</li>
+      <li><b>Passe-bas 2ᵉ ordre</b> : pente HF de \(-40\) dB/déc, soit une atténuation <b>10× plus forte</b> qu'un
+      ordre 1. La résonance dégrade le comportement passe-bas ⇒ facteur de qualité <b>optimal</b> \(Q=\frac{1}{\sqrt2}\)
+      (seul cas où \(\omega_c=\omega_0\)).</li>
+    </ul></div>
+
+    <!-- ---- 1.11 ---- -->
+    <h3 id="c11">1.11 Action d'un filtre sur un signal</h3>
+    <div class="thm"><span class="lab">Point de vue fréquentiel</span>
+    Pour une entrée sinusoïdale \(e(t)=E_m\cos(\omega_e t+\varphi_e)\), la sortie est sinusoïdale de même pulsation :
+    \[s(t)=|H(\omega_e)|\,E_m\cos\!\big(\omega_e t+\varphi_e+\arg H(\omega_e)\big)\]
+    Pour une <b>entrée quelconque</b> (superposition sur son développement de Fourier) :
+    \[s(t)=|H(0)|\,E_0+\sum_{n=1}^{+\infty}|H(n\omega)|\,E_n\cos\!\big(n\omega t+\varphi_n+\arg H(n\omega)\big)\]</div>
+    <div class="warnbox"><span class="lab">⚠ Une harmonique = une pulsation</span>
+    \(|H|\) et \(\arg H\) doivent être recalculés <b>pour chaque harmonique</b>, à sa propre pulsation \(n\omega\). On
+    ne prend pas une seule valeur. Remarque : entrée et sortie contiennent exactement les <b>mêmes harmoniques</b>
+    (preuve de linéarité d'un système inconnu).</div>
+
+    <div class="thm"><span class="lab">Point de vue temporel — 3 comportements</span>
+    <div class="overflow">
+    <table>
+      <tr><th>Comportement</th><th>Sortie</th><th>\(H\) idéal</th><th>Signature Bode</th><th>Réalisation</th></tr>
+      <tr><td><b>Moyenneur</b></td><td>\(s=H_0\langle e\rangle\)</td><td>—</td><td>coupe toutes les harmoniques sauf \(Y_0\)</td><td>passe-bas, \(f_c\ll f\)</td></tr>
+      <tr><td><b>Dérivateur</b></td><td>\(s=\tau\dfrac{\mathrm de}{\mathrm dt}\)</td><td>\(j\omega\tau\)</td><td>\(+20\) dB/déc &amp; \(\Delta\varphi=+\frac{\pi}{2}\)</td><td>passe-haut 1ᵉʳ ordre, \(f\ll f_c\)</td></tr>
+      <tr><td><b>Intégrateur</b></td><td>\(s=\dfrac1\tau\displaystyle\int e\,\mathrm dt\)</td><td>\(\dfrac{1}{j\omega\tau}\)</td><td>\(-20\) dB/déc &amp; \(\Delta\varphi=-\frac{\pi}{2}\)</td><td>passe-bas 1ᵉʳ ordre, \(f\gg f_c\)</td></tr>
+    </table>
+    </div></div>
+    <div class="warnbox"><span class="lab">⚠ Pièges</span>
+    Un dérivateur/intégrateur <b>parfait à toute fréquence n'existe pas</b> (gain infini). En plus d'être
+    dérivé/intégré, le signal est <b>fortement atténué</b>. Et un <b>ordre 2</b> n'agit <b>jamais</b> en
+    dérivateur/intégrateur, même en limite.</div>
+
+    <!-- ---- 1.12 ---- -->
+    <h3 id="c12">1.12 Association de filtres &amp; impédances d'entrée/sortie</h3>
+    <div class="thm"><span class="lab">Influence de la charge</span>
+    Une fonction de transfert est presque toujours établie en <b>sortie ouverte</b> (\(I_s=0\)). Dès qu'on branche une
+    charge \(Z_c\), le pont diviseur change : \(H\) n'est <b>plus valable</b>. Pour que la charge ne perturbe pas le
+    filtre, il faut \(|Z_c|\) le plus <b>grand</b> possible.</div>
+
+    <div class="def"><span class="lab">Modèle du quadripôle linéaire</span>
+    Tout quadripôle se modélise par une impédance d'entrée \(Z_e\), une impédance de sortie \(Z_s\) et une tension de
+    sortie ouverte \(\underline{S_0}=H\underline E\). Quand \(I_s\ne0\) : \(\underline S=\underline{S_0}-Z_s\underline{I_s}\ne H\underline E\).</div>
+
+    <div class="res"><span class="lab">Mise en cascade — on ne multiplie PAS les \(H\)</span>
+    Pour deux filtres en cascade,
+    \[H_{\text{tot}}=\frac{1}{\,1+\dfrac{Z_{s1}}{Z_{e2}}\,}\,H_1 H_2\]
+    \[\boxed{\ H_{\text{tot}}=H_1\times H_2\ \text{seulement si}\ |Z_{s1}|\ll|Z_{e2}|\ }\]
+    D'où la règle de conception : <b>forte impédance d'entrée, faible impédance de sortie</b> pour pouvoir chaîner les
+    blocs. Sinon le second filtre « charge » le premier et fausse le résultat (cf. Application 9 : deux RC en cascade
+    donnent \(Q=\tfrac13\) au lieu de \(\tfrac12\)).</div>
+  </section>
+
+  <!-- ====================== APPLICATIONS ====================== -->
+  <section class="block" id="apps">
+    <h2>2. Applications du cours corrigées</h2>
+    <p class="lead">Les applications du polycopié, reprises intégralement avec leur correction officielle. Elles
+    balaient tout le cours : notation complexe, résonance, Bode, action sur un signal, cascade.</p>
+
+    <h3>Partie A — RSF &amp; résonance</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">App. 2 — Circuit RC en régime établi par les complexes <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Résoudre \(\dfrac{\mathrm du_C}{\mathrm dt}+\dfrac1\tau u_C=\dfrac{e(t)}{\tau}\) avec
+        \(e=E_m\cos(\omega t)\), \(\tau=RC\), en RSF (solution particulière).</p>
+        <p class="q">1) Passage en complexe</p>
+        <p>\(\dfrac{\mathrm d}{\mathrm dt}\to j\omega\), donc l'équation devient algébrique :
+        \(j\omega\,\underline{U_C}+\dfrac1\tau\underline{U_C}=\dfrac1\tau\underline E\), soit
+        \(\underline{U_C}\big(j\omega+\tfrac1\tau\big)=\tfrac1\tau\underline E\).</p>
+        <p class="q">2) Fonction de transfert</p>
+        <p>\[\underline{U_C}=\frac{1}{1+j\omega\tau}\,\underline E\]</p>
+        <p class="q">3) Amplitude &amp; phase</p>
+        <p>\(U_{C,m}=|\underline{U_C}|=\dfrac{E_m}{\sqrt{1+(\omega\tau)^2}}\) et
+        \(\varphi=\arg\underline{U_C}=-\arg(1+j\omega\tau)=-\arctan(\omega\tau)\) (partie réelle \(>0\), arctan direct).</p>
+        <div class="res">\(\underline{U_C}=\dfrac{\underline E}{1+j\omega\tau}\) : passe-bas 1ᵉʳ ordre,
+        \(U_{C,m}=\dfrac{E_m}{\sqrt{1+(\omega\tau)^2}}\), \(\varphi=-\arctan(\omega\tau)\in[-\frac{\pi}{2},0]\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">App. 3 — Circuit RL série : tension \(u_L\) <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">RL série alimenté par \(e=E_m\cos(\omega t)\). Exprimer \(u_L(t)\) sans équation
+        différentielle, en faisant apparaître \(\tau\).</p>
+        <p class="q">1) Pont diviseur de tension</p>
+        <p>\[\underline{U_L}=\frac{jL\omega}{R+jL\omega}\,\underline E=\frac{j\omega\tau}{1+j\omega\tau}\,\underline E
+        \qquad\text{avec}\quad \tau=\frac LR\]</p>
+        <p class="q">2) Amplitude &amp; phase</p>
+        <p>\(U_{L,m}=\dfrac{\omega\tau}{\sqrt{1+(\omega\tau)^2}}E_m\) et
+        \(\varphi=\arg(j\omega\tau)-\arg(1+j\omega\tau)=\dfrac{\pi}{2}-\arctan(\omega\tau)\).</p>
+        <div class="res">\(\underline{U_L}=\dfrac{j\omega\tau}{1+j\omega\tau}\underline E\), \(\tau=L/R\) :
+        <b>passe-haut</b> 1ᵉʳ ordre (la bobine « garde » la tension en HF).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">App. 5 — Tension aux bornes de \(C\) d'un RLC série <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Exprimer \(\underline{U_C}\) et retrouver la forme canonique avec \(\omega_0\) et \(Q\).</p>
+        <p class="q">Pont diviseur puis mise en forme</p>
+        <p>\(\underline{U_C}=\dfrac{Z_C}{R+jL\omega+Z_C}\underline E\) avec \(Z_C=\frac{1}{jC\omega}\). En multipliant
+        haut et bas par \(jC\omega\) :
+        \[\underline{U_C}=\frac{1}{1-LC\omega^2+jRC\omega}\,\underline E
+        =\frac{1}{1-\dfrac{\omega^2}{\omega_0^2}+j\dfrac{\omega}{Q\omega_0}}\,\underline E\]
+        avec \(\omega_0=\dfrac{1}{\sqrt{LC}}\) et \(Q=\dfrac1R\sqrt{\dfrac LC}\) (car \(LC=1/\omega_0^2\) et
+        \(RC=\frac{1}{Q\omega_0}\)).</p>
+        <div class="res">Forme canonique du passe-bas 2ᵉ ordre :
+        \(\underline{U_C}=\dfrac{\underline E}{1-\frac{\omega^2}{\omega_0^2}+j\frac{\omega}{Q\omega_0}}\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">App. 7 — Étude de la résonance en tension <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Montrer qu'il n'y a résonance sur \(u_C\) que si \(Q\) dépasse un seuil, et donner
+        \(\omega_{\text{rés}}\).</p>
+        <p class="q">1) Module</p>
+        <p>\(|U_C|=\dfrac{E_m}{\sqrt{f(x)}}\) avec \(x=\frac{\omega}{\omega_0}\) et
+        \(f(x)=(1-x^2)^2+\dfrac{x^2}{Q^2}\).</p>
+        <p class="q">2) Dérivée et signe</p>
+        <p>\(f'(x)=2(1-x^2)(-2x)+\dfrac{2x}{Q^2}=x\Big(4x^2-4+\dfrac{2}{Q^2}\Big)=4x\Big(x^2-1+\dfrac{1}{2Q^2}\Big)\).
+        Sur \(\mathbb R^+\), le signe est celui de \(x^2-\big(1-\frac{1}{2Q^2}\big)\).</p>
+        <p class="q">3) Discussion</p>
+        <p>• Si \(Q<\frac{1}{\sqrt2}\) : \(1-\frac{1}{2Q^2}<0\), donc \(f'>0\) partout, \(f\) croissante, \(|U_C|\)
+        décroissante : <b>pas de résonance</b>.<br>
+        • Si \(Q>\frac{1}{\sqrt2}\) : \(f'\) s'annule en \(x_{\text{rés}}=\sqrt{1-\frac{1}{2Q^2}}\), \(f\) passe par un
+        minimum donc \(|U_C|\) par un <b>maximum</b> : résonance.</p>
+        <div class="res">Résonance \(\Leftrightarrow Q>\frac{1}{\sqrt2}\approx0{,}707\), à
+        \(\omega_{\text{rés}}=\omega_0\sqrt{1-\frac{1}{2Q^2}}\) ; si \(Q\gg1\), \(|U_C|_{\max}\simeq QE\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">App. 8 — Intensité dans un RLC série <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">En raisonnant sur \(u_R\), exprimer \(\underline I\) sous forme canonique.</p>
+        <p class="q">Fonction de transfert du courant</p>
+        <p>\(\underline I=\dfrac{\underline E}{R+jL\omega+\frac{1}{jC\omega}}\). En factorisant \(R\) au dénominateur
+        et avec \(L\omega=\frac{Q}{\omega_0}R\cdot\omega\)… on aboutit à
+        \[\underline I=\frac{1}{1+jQ\Big(\dfrac{\omega}{\omega_0}-\dfrac{\omega_0}{\omega}\Big)}\,\frac{\underline E}{R}\]</p>
+        <p class="q">Résonance</p>
+        <p>\(|I|=\dfrac{1}{\sqrt{1+Q^2(x-\frac1x)^2}}\dfrac ER\) est maximal quand \(x-\frac1x=0\), soit
+        \(\omega=\omega_0\), <b>toujours</b> (somme de carrés).</p>
+        <div class="res">\(\underline I=\dfrac{1}{1+jQ(x-1/x)}\dfrac{\underline E}{R}\) : résonance systématique en
+        \(\omega_0\), \(|I|_{\max}=E/R\), courant en phase avec \(e\).</div>
+      </div>
+    </div>
+
+    <h3>Partie B — Filtrage</h3>
+
+    <div class="exo-card">
+      <div class="exo-head">App. 1 (filtrage) — RC : équa. diff. ↔ fonction de transfert <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">RC série, sortie \(s=u_C\), entrée \(e\). Établir l'équa. diff., puis \(H\), et retrouver
+        l'équa. diff. depuis \(H\).</p>
+        <p class="q">1) Équation différentielle</p>
+        <p>Loi des mailles \(e=Ri+u_C\) avec \(i=C\frac{\mathrm ds}{\mathrm dt}\) :
+        \(\boxed{RC\dfrac{\mathrm ds}{\mathrm dt}+s=e}\).</p>
+        <p class="q">2) Fonction de transfert</p>
+        <p>Pont diviseur : \(H=\dfrac{Z_C}{R+Z_C}=\dfrac{1}{1+jRC\omega}\).</p>
+        <p class="q">3) Retour à l'équa. diff.</p>
+        <p>\(H=\frac{\underline S}{\underline E}\Rightarrow (1+jRC\omega)\underline S=\underline E\). En remplaçant
+        \(j\omega\to\frac{\mathrm d}{\mathrm dt}\) : \(s+RC\frac{\mathrm ds}{\mathrm dt}=e\). Identique. ✔</p>
+        <div class="res">\(RC\dot s+s=e\ \Longleftrightarrow\ H=\dfrac{1}{1+jRC\omega}\) : correspondance
+        \(\times j\omega\leftrightarrow \frac{\mathrm d}{\mathrm dt}\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">App. 2 (filtrage) — Passe-bas RC : nature, canonique, Bode, BP <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Le RC (sortie sur \(C\)). Montrer « passe-bas », mettre sous forme canonique, tracer le Bode
+        en gain, donner la BP.</p>
+        <p class="q">1) Nature par équivalence</p>
+        <p>BF : \(C\) ouvert, \(i=0\), pas de chute dans \(R\) ⇒ \(s=e\) (transmis). HF : \(C\) fil ⇒ \(s=0\) (coupé).
+        <b>Passe-bas.</b></p>
+        <p class="q">2) Forme canonique</p>
+        <p>\(H=\dfrac{1}{1+j\frac{\omega}{\omega_c}}\) avec \(H_0=1\) et \(\omega_c=\dfrac{1}{RC}\).</p>
+        <p class="q">3) Bode en gain (asymptotes)</p>
+        <p>\(G_{dB}=-20\log\sqrt{1+x^2}\), \(x=\omega/\omega_c\). BF (\(x\ll1\)) : \(G_{dB}\approx0\) dB. HF
+        (\(x\gg1\)) : \(G_{dB}\approx-20\log x\) ⇒ pente \(-20\) dB/déc. À \(x=1\) : \(G_{dB}=-3\) dB.</p>
+        <p class="q">4) Bande passante</p>
+        <p>\(|H|>\frac{1}{\sqrt2}\Leftrightarrow x<1\Leftrightarrow \omega<\omega_c\). BP \(=[0,\omega_c]\) → les
+        basses fréquences passent : « passe-bas ». ✔</p>
+        <div class="res">Passe-bas, \(H_0=1\), \(\omega_c=\frac{1}{RC}\), pente HF \(-20\) dB/déc, BP \([0,\omega_c]\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">App. 3 (filtrage) — Passe-haut RC (sortie sur \(R\)) <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Montage CR (\(C\) puis \(R\), sortie sur \(R\)). Montrer « passe-haut », forme canonique,
+        Bode, BP.</p>
+        <p class="q">1) Nature</p>
+        <p>BF : \(C\) ouvert ⇒ \(i=0\) ⇒ \(u_R=s=0\) (coupé). HF : \(C\) fil ⇒ \(s=e\) (transmis).
+        <b>Passe-haut.</b></p>
+        <p class="q">2) Forme canonique</p>
+        <p>\(H=\dfrac{R}{R+\frac{1}{jC\omega}}=\dfrac{jRC\omega}{1+jRC\omega}
+        =\dfrac{j\frac{\omega}{\omega_c}}{1+j\frac{\omega}{\omega_c}}\), \(\omega_c=\frac{1}{RC}\), \(H_0=1\).</p>
+        <p class="q">3) Bode &amp; BP</p>
+        <p>BF : \(H\approx jx\) ⇒ pente \(+20\) dB/déc, \(\Delta\varphi=+\frac{\pi}{2}\). HF : \(H\approx1\) ⇒ \(0\) dB.
+        BP \(=[\omega_c,+\infty[\). ✔</p>
+        <div class="res">Passe-haut, \(\omega_c=\frac{1}{RC}\) ; asymptote BF \(+20\) dB/déc (⇒ dérivateur en BF),
+        \(0\) dB en HF.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">App. 6 (filtrage) — Construire la sortie (3 harmoniques) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Filtre passe-bas dont le Bode donne : \(x=0{,}01\Rightarrow G_{dB}\approx0\),
+        \(\Delta\varphi\approx0\) ; \(x=1\Rightarrow G_{dB}=-3\), \(\Delta\varphi=-\frac{\pi}{4}\) ;
+        \(x=50\Rightarrow G_{dB}\approx-34\), \(\Delta\varphi\approx-\frac{\pi}{2}\). Entrée
+        \(e=E_0\cos\!\big(\frac{\omega_0}{100}t-\frac{\pi}{6}\big)+E_0\cos(\omega_0 t+\frac{\pi}{4})+E_0\cos(50\omega_0 t)\).</p>
+        <p class="q">Méthode : chaque harmonique séparément</p>
+        <p>On applique \(|H|\) et \(\arg H\) <b>à chaque pulsation</b> :
+        <ul style="margin:.2rem 0">
+          <li>\(x=0{,}01\) : \(|H|=10^{0/20}=1\), déphasage \(0\) ⇒ terme \(\approx E_0\cos(\frac{\omega_0}{100}t-\frac{\pi}{6})\) (transmis intact).</li>
+          <li>\(x=1\) : \(|H|=10^{-3/20}\approx0{,}71\), déphasage \(-\frac{\pi}{4}\) ⇒ \(0{,}71E_0\cos(\omega_0 t+\frac{\pi}{4}-\frac{\pi}{4})=0{,}71E_0\cos(\omega_0 t)\).</li>
+          <li>\(x=50\) : \(|H|=10^{-34/20}\approx0{,}02\), déphasage \(-\frac{\pi}{2}\) ⇒ \(0{,}02E_0\cos(50\omega_0 t-\frac{\pi}{2})\) (quasi éliminé).</li>
+        </ul></p>
+        <div class="res">\(s(t)\approx E_0\cos\!\big(\frac{\omega_0}{100}t-\frac{\pi}{6}\big)+0{,}71\,E_0\cos(\omega_0 t)
+        +0{,}02\,E_0\cos\!\big(50\omega_0 t-\frac{\pi}{2}\big)\). La haute fréquence est écrasée : le filtre « lisse »
+        le signal.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">App. 8 (filtrage) — Passe-bas RC sur charge résistive <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">RC passe-bas fermé sur une charge \(R_c\) en parallèle sur \(C\). Pourquoi
+        \(H=\frac{1}{1+jRC\omega}\) n'est plus valable ? Établir \(H'\).</p>
+        <p class="q">1) Pourquoi \(H\) change</p>
+        <p>\(R_c\) en parallèle sur \(C\) : \(R\) et \(C\) ne forment plus un pont diviseur seul (le courant se
+        partage). Il faut inclure \(R_c\).</p>
+        <p class="q">2) Nouvelle fonction de transfert</p>
+        <p>Impédance de sortie \(=R_c\parallel Z_C\), d'admittance \(Y=\frac{1}{R_c}+jC\omega\). Pont diviseur :
+        \[H'=\frac{1}{1+R\,Y}=\frac{1}{1+\frac{R}{R_c}+jRC\omega}
+        =\frac{\frac{R_c}{R+R_c}}{1+j\frac{R_c R}{R+R_c}C\omega}\]</p>
+        <p class="q">3) Effet de la charge</p>
+        <p>Toujours un <b>passe-bas 1ᵉʳ ordre</b>, mais le <b>gain statique</b> \(\frac{R_c}{R+R_c}<1\) et la
+        <b>pulsation de coupure</b> \(\omega_c'=\frac{R+R_c}{R_cR C}\) sont modifiés. Pour ne pas perturber :
+        \(R_c\gg R\) (\(R/R_c\ll1\)).</p>
+        <div class="res">\(H'=\dfrac{R_c/(R+R_c)}{1+j\frac{R_cR}{R+R_c}C\omega}\) : nature conservée, gain statique et
+        \(\omega_c\) modifiés ; charge « transparente » si \(R_c\gg R\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">App. 9 (filtrage) — Passe-bas + passe-haut = passe-bande ? <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Cascade d'un RC passe-bas puis d'un RC passe-haut (mêmes \(R,C\)). La \(H\) totale
+        vaut-elle le produit des \(H\) en sortie ouverte ?</p>
+        <p class="q">Calcul direct de l'ensemble</p>
+        <p>En traitant tout le circuit (le 2ᵉ étage charge le 1ᵉʳ), on obtient
+        \[H=\frac{jRC\omega}{1-(RC\omega)^2+3jRC\omega}\]</p>
+        <p class="q">Comparaison au produit</p>
+        <p>Le produit des \(H\) en sortie ouverte donnerait un dénominateur \(1-(RC\omega)^2+2jRC\omega\), soit
+        \(Q=\frac12\). Le calcul réel donne \(3jRC\omega\), soit \(Q=\frac13\) : le terme croisé \(\frac{Z_{s1}}{Z_{e2}}\)
+        n'est pas négligeable.</p>
+        <div class="res">Non : \(H\ne H_1^{\text{s.o.}}\times H_2^{\text{s.o.}}\). On trouve \(Q=\frac13\) (au lieu de
+        \(\frac12\)) car le passe-haut charge le passe-bas. On ne multiplie les \(H\) que si \(|Z_{s1}|\ll|Z_{e2}|\).</div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:1.5rem;border-left-color:var(--ok)">
+      <span class="lab" style="color:#065f46">✅ Récap du chapitre</span>
+      RSF → tout devient algébrique en complexe (\(\frac{\mathrm d}{\mathrm dt}\to j\omega\)) ; impédances \(R\),
+      \(\frac{1}{jC\omega}\), \(jL\omega\) + ponts diviseurs ; résonance en <b>tension</b> conditionnelle
+      (\(Q>\frac{1}{\sqrt2}\)) vs en <b>courant</b> systématique (\(\omega_0\)), largeur \(\Delta\omega=\omega_0/Q\) ;
+      Fourier (moyenne \(=Y_0\), efficace \(Y_m/\sqrt2\), Parseval) ; fonction de transfert \(H=\underline S/\underline E\),
+      gain \(G_{dB}=20\log|H|\), Bode par asymptotes, BP à \(-3\) dB ; 4 filtres de référence + moyenneur/dérivateur/
+      intégrateur ; cascade \(\ne\) produit sauf \(|Z_{s1}|\ll|Z_{e2}|\).
+    </div>
+  </section>
+
+  <!-- ========================= DOCUMENTS ========================= -->
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Sources utilisées pour ce chapitre (RSF + filtrage). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours / ressource</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/filtrage/Cours_RSF_filtrage.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Cours_RSF_filtrage</span><span class="badge">Cours / ressource</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Fiches / mémos</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/filtrage/Resumé_RSF_filtrage.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Resumé_RSF_filtrage</span><span class="badge">Fiche / mémo</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>TD (énoncés)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/filtrage/TD_RSF.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD_RSF</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/filtrage/TD_filtrage.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD_filtrage</span><span class="badge">TD (énoncé)</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Corrigés</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/physique-chimie/filtrage/TD_RSF_correction.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD_RSF_correction</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../documents/physique-chimie/filtrage/TD_filtrage_corriger.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD_filtrage_corriger</span><span class="badge">Corrigé</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+<script src="../assets/gate.js"></script>
+</body>
+</html>
