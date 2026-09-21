@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accouplement par goupille — SI AM2 — Révision ECAM</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div class="topbar">
+  <a href="../index.html#am2">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#v1">Version 1</a>
+  <a href="#v2">Version 2</a>
+  <a href="#conclusion">Conclusion</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SI AM2 (2ᵉ année) · Association de liaisons</span>
+  <h1 class="title">Accouplement par goupille — arbre / poulie</h1>
+  <p class="lead">Résumé de cours annoté (pour présentation) + correction complète et détaillée de l'application
+  « Accouplement par goupille » (2 versions). Objectif : déterminer, à partir d'un graphe des liaisons,
+  la <b>liaison équivalente</b> entre l'arbre et la poulie, et juger si le montage est <b>isostatique</b> —
+  en tenant compte du <b>rotulage volontaire</b> introduit pour éviter l'hyperstatisme.
+  Source : CM de SI (photo transmise le 2026-09-21).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire</b>
+    <ul>
+      <li><a href="#cours">1. Résumé de cours annoté — à retenir pour la présentation</a></li>
+      <li><a href="#v1">2. Application — Version 1 (poulie large, largeur 22)</a></li>
+      <li><a href="#v2">3. Application — Version 2 (poulie mince, largeur 10)</a></li>
+      <li><a href="#conclusion">4. Conclusion — quelle association privilégier ?</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= COURS ANNOTÉ =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours annoté</h2>
+    <p class="lead" style="margin-bottom:.6rem">Les points marqués <b>★ important</b> sont ceux à mettre en avant à l'oral :
+    ce sont eux qui font tourner tout l'exercice.</p>
+
+    <h3>1.1 Torseur cinématique / torseur des actions transmissibles</h3>
+    <div class="def">
+      <span class="lab">★ Important — définitions</span>
+      Une liaison entre deux solides autorise certains mouvements relatifs (les <b>DDL</b>, 3 rotations
+      \(R_x,R_y,R_z\) + 3 translations \(T_x,T_y,T_z\)) et bloque les autres. Le <b>torseur cinématique</b>
+      \(\{\mathcal V_{2/1}\}=\{\vec\Omega_{2/1};\ \vec V(A\in2/1)\}_A\) décrit les mouvements permis (paramètres
+      libres = DDL). Le <b>torseur des actions mécaniques transmissibles</b> \(\{\mathcal T_{1\to2}\}=\{\vec R;\ \vec M_A\}_A\)
+      est son <b>complémentaire</b> : ce qui est bloqué cinématiquement peut transmettre un effort ; ce qui est libre
+      transmet un effort nul (liaison parfaite). Toujours : <b>DDL + composantes d'effort transmissibles = 6</b>.
+    </div>
+
+    <h3>1.2 Liaisons usuelles utilisées dans cet exercice</h3>
+    <div class="overflow">
+    <table>
+      <tr><th>Liaison</th><th>DDL</th><th>Torseur cinématique en \(O\)</th><th>Torseur d'effort en \(O\)</th></tr>
+      <tr><td><b>Pivot glissant</b> d'axe \((O,\vec x)\)</td><td>2 : \(R_x,T_x\)</td>
+        <td>\(\{\omega_x\vec x;\ v_x\vec x\}_O\)</td>
+        <td>\(\{Y\vec y+Z\vec z;\ M\vec y+N\vec z\}_O\)</td></tr>
+      <tr><td><b>Sphère-cylindre</b> (linéaire annulaire) d'axe \((O,\vec x)\)</td><td>4 : \(R_x,R_y,R_z,T_x\)</td>
+        <td>\(\{\vec\Omega;\ v_x\vec x\}_O\)</td>
+        <td>\(\{Y\vec y+Z\vec z;\ \vec0\}_O\)</td></tr>
+      <tr><td><b>Sphérique</b> (rotule) de centre \(O\)</td><td>3 : \(R_x,R_y,R_z\)</td>
+        <td>\(\{\vec\Omega;\ \vec0\}_O\)</td>
+        <td>\(\{X\vec x+Y\vec y+Z\vec z;\ \vec0\}_O\)</td></tr>
+      <tr><td><b>Pivot</b> d'axe \((O,\vec x)\)</td><td>1 : \(R_x\)</td>
+        <td>\(\{\omega_x\vec x;\ \vec0\}_O\)</td>
+        <td>\(\{Y\vec y+Z\vec z;\ M\vec y+N\vec z\}_O\)</td></tr>
+      <tr><td><b>Encastrement</b></td><td>0</td>
+        <td>\(\{\vec0;\ \vec0\}_O\)</td>
+        <td>\(\{X\vec x+Y\vec y+Z\vec z;\ L\vec x+M\vec y+N\vec z\}_O\)</td></tr>
+    </table>
+    </div>
+
+    <h3>1.3 Modéliser un contact cylindrique réel (goupille)</h3>
+    <div class="method">
+      <span class="lab">★ Important — règle longueur / diamètre</span>
+      Pour un assemblage cylindrique réel (ex. la goupille dans son trou), on compare la
+      <b>longueur de contact \(L\)</b> à son <b>diamètre \(D\)</b> :
+      <ul style="margin:.4rem 0 0">
+        <li>\(L\gtrsim D\) (contact « long ») → le contact résiste aux moments transversaux →
+        <b>pivot glissant</b> (bloque les 2 rotations perpendiculaires à l'axe).</li>
+        <li>\(L\ll D\) (contact « court ») → le contact ne peut pas résister au basculement → on dégrade en
+        <b>sphère-cylindre</b> (les rotations perpendiculaires à l'axe redeviennent libres).</li>
+      </ul>
+      C'est ce paramètre — la largeur de la poulie traversée par la goupille — qui distingue les deux versions
+      de l'exercice pour la liaison goupille/poulie.
+    </div>
+
+    <h3>1.4 Éviter l'hyperstatisme : le rotulage volontaire</h3>
+    <div class="thm">
+      <span class="lab">★ Important — principe du rotulage</span>
+      Quand <b>deux liaisons différentes</b> guident/bloquent le <b>même mouvement relatif</b> entre deux solides
+      (ici : le contact direct arbre/poulie <i>et</i> la goupille, qui bloquent tous deux la rotation autour de
+      l'axe de l'arbre), les rendre <b>toutes les deux rigides</b> crée une <b>redondance</b> (hyperstatisme) :
+      il faudrait un alignement parfait, impossible à garantir à l'usinage. La solution classique — la même que
+      pour un <b>montage à deux roulements</b> (une rangée pivot, l'autre <b>rotulée</b>) — est de donner
+      <b>volontairement du jeu de rotulage</b> à l'une des deux liaisons, pour qu'elle absorbe les petits défauts
+      d'alignement sans se substituer à l'autre.
+    </div>
+    <div class="note">
+      <span class="lab">Application à la goupille</span>
+      Ici, c'est la <b>goupille</b> qui a la fonction de <b>verrouiller la rotation</b> (c'est le rôle d'un
+      accouplement) : ses deux engagements (dans l'arbre et dans la poulie) doivent donc rester des guidages
+      « fermes » (pivot glissant). C'est le <b>contact direct arbre/poulie</b> — simple portée cylindrique, sans
+      rôle de verrouillage — qui reçoit le <b>rotulage</b> : on le modélise par une <b>liaison sphérique (rotule)</b>
+      plutôt que par un pivot glissant serré.
+    </div>
+
+    <h3>1.5 Association de liaisons — série et parallèle</h3>
+    <div class="thm">
+      <span class="lab">★ Important — les 2 règles de composition</span>
+      <b>Série</b> (liaisons en chaîne \(1\!-\!3\!-\!2\), solide intermédiaire 3) : les torseurs cinématiques
+      <b>s'additionnent</b> (composition des mouvements), exprimés au <b>même point</b> :
+      \(\{\mathcal V_{2/1}\}=\{\mathcal V_{2/3}\}+\{\mathcal V_{3/1}\}\).<br><br>
+      <b>Parallèle</b> (\(n\) liaisons entre les <b>mêmes</b> 2 solides, ex. le contact direct 1/2 et la chaîne
+      via 3) : la liaison équivalente doit respecter <b>toutes</b> les liaisons à la fois → on prend
+      l'<b>intersection</b> des torseurs cinématiques (les mouvements communs seulement).
+    </div>
+    <div class="note">
+      <span class="lab">Méthode pratique</span>
+      Pour composer deux torseurs simples, on regarde <b>composante par composante</b> (\(R_x,R_y,R_z,T_x,T_y,T_z\)) :
+      en série on <b>garde libre</b> une composante dès qu'<b>au moins une</b> des deux liaisons la laisse libre ;
+      en parallèle on ne <b>garde libre</b> qu'une composante laissée libre par <b>les deux</b> liaisons à la fois.
+    </div>
+
+    <h3>1.6 Isostatisme d'une association</h3>
+    <div class="def">
+      <span class="lab">★ Important — degré d'hyperstatisme</span>
+      Pour \(p\) solides reliés en boucle fermée, le nombre d'équations statiques indépendantes est
+      \(N_e=6(p-1)\). Si \(N_s\) est la somme des composantes d'effort transmissibles de <b>toutes</b> les
+      liaisons réelles du graphe :
+      \[ \boxed{\,h=N_s-N_e\,} \]
+      \(h=0\) : montage <b>isostatique</b>. \(h>0\) : <b>hyperstatique</b> (sur-contraint, tolérances serrées,
+      risque de blocage au montage). \(h<0\) : il subsiste une <b>mobilité</b> \(m\) (le graphe ne suffit pas à
+      tout bloquer). Ici, avec le rotulage volontaire, on aura toujours \(h\le0\) : c'est un choix assumé
+      (préférer un peu de mobilité résiduelle inoffensive à un blocage à l'assemblage).
+    </div>
+  </section>
+
+  <!-- ======================= VERSION 1 =============================== -->
+  <section class="block" id="v1">
+    <h2>2. Application — Version 1 (poulie large, largeur 22)</h2>
+    <figure>
+      <img src="img/v1-goupille.png" alt="Énoncé Version 1 — arbre 1 (φ20) et poulie 2 (largeur 22) accouplés par une goupille élastique 3 (φ8) selon l'axe z">
+      <figcaption>Énoncé — Version 1 : arbre 1 (Ø20) / poulie 2 (largeur 22) / goupille élastique 3 (Ø8) selon \(\vec z\), point \(O\) = intersection des axes.</figcaption>
+    </figure>
+    <div class="enonce">Un arbre 1 (Ø20) est en liaison avec une poulie 2 (de largeur 22) par l'intermédiaire
+    d'une goupille élastique 3 (Ø8).</div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q1 — Graphe des liaisons</div>
+      <div class="exo-body">
+        <p>Trois solides, deux chemins entre 1 et 2 : le <b>contact direct</b> arbre/poulie (liaison 1/2), et la
+        <b>chaîne via la goupille</b> (liaisons 1/3 puis 3/2). Ces deux chemins sont en <b>parallèle</b> entre 1 et 2.</p>
+        <figure>
+<svg viewBox="0 0 320 220" width="320" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="60" cy="170" r="26" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+  <text x="60" y="176" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="18" font-weight="700" fill="#0f766e">1</text>
+  <circle cx="260" cy="170" r="26" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+  <text x="260" y="176" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="18" font-weight="700" fill="#0f766e">2</text>
+  <circle cx="160" cy="35" r="26" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="160" y="41" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="18" font-weight="700" fill="#92400e">3</text>
+  <line x1="86" y1="170" x2="234" y2="170" stroke="#1e293b" stroke-width="1.6"/>
+  <text x="160" y="163" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="12" fill="#1e293b">rotule (O) — volontaire</text>
+  <line x1="78" y1="150" x2="143" y2="55" stroke="#1e293b" stroke-width="1.6"/>
+  <text x="60" y="105" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="12" fill="#1e293b">pivot glissant (O,z)</text>
+  <line x1="242" y1="150" x2="177" y2="55" stroke="#1e293b" stroke-width="1.6"/>
+  <text x="262" y="105" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="12" fill="#1e293b">pivot glissant (O,z)</text>
+</svg>
+          <figcaption>Graphe des liaisons — Version 1. Contact direct 1/2 volontairement rotulé, en parallèle avec la chaîne 1/3/2 (goupille, guidage ferme).</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q2 — Liaison \(\mathscr L_{1/2}\) (contact direct arbre/poulie)</div>
+      <div class="exo-body">
+        <p class="q">Analyse du contact</p>
+        <p>Ce contact cylindrique n'a pas de fonction de verrouillage : c'est la goupille qui bloque la rotation.
+        Pour éviter l'hyperstatisme (§1.4 — principe du rotulage volontaire, comme pour un montage à deux
+        roulements), on le modélise avec du jeu de rotulage → <b>liaison sphérique (rotule) de centre \(O\)</b>.</p>
+        <div class="res">
+        \[ \{\mathcal V_{1/2}\}=\{\vec\Omega;\ \vec0\}_O \qquad,\qquad
+           \{\mathcal T_{2\to1}\}=\{X\vec x+Y\vec y+Z\vec z;\ \vec0\}_O \]
+        3 DDL (les 3 rotations) — 3 composantes d'effort transmissibles (les 3 forces, aucun moment).
+        </div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q3 — Liaison \(\mathscr L_{3/2}\) (goupille / poulie)</div>
+      <div class="exo-body">
+        <p class="q">Analyse du contact</p>
+        <p>La goupille traverse toute la largeur de la poulie : longueur de contact \(L=22\) pour un diamètre de
+        goupille \(D=8\) : \(L\gg D\) (contact très long) → <b>liaison pivot glissant d'axe \((O,\vec z)\)</b>
+        (l'axe de la goupille) : c'est un des deux guidages « fermes » qui verrouillent la rotation.</p>
+        <div class="res">
+        \[ \{\mathcal V_{3/2}\}=\{\omega_z\vec z;\ v_z\vec z\}_O \qquad,\qquad
+           \{\mathcal T_{2\to3}\}=\{X\vec x+Y\vec y;\ L\vec x+M\vec y\}_O \]
+        2 DDL (\(R_z,T_z\)) — 4 composantes d'effort transmissibles (\(F_x,F_y,M_x,M_y\), perpendiculaires à \(\vec z\)).
+        </div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q4 — Liaison \(\mathscr L_{1/3}\) (arbre / goupille)</div>
+      <div class="exo-body">
+        <p class="q">Analyse du contact</p>
+        <p>Le trou diamétral de la goupille traverse l'arbre sur toute son épaisseur : longueur de contact
+        \(L=20\) (le diamètre de l'arbre) pour un diamètre de goupille \(D=8\) : \(L\gg D\) → à nouveau une
+        <b>liaison pivot glissant d'axe \((O,\vec z)\)</b>, le second guidage ferme de la goupille.</p>
+        <div class="res">
+        \[ \{\mathcal V_{1/3}\}=\{\omega_z'\vec z;\ v_z'\vec z\}_O \qquad,\qquad
+           \{\mathcal T_{3\to1}\}=\{X'\vec x+Y'\vec y;\ L''\vec x+M''\vec y\}_O \]
+        2 DDL (\(R_z,T_z\)) — 4 composantes d'effort transmissibles, même forme que \(\mathscr L_{3/2}\).
+        </div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q5 — Liaison équivalente \(\mathscr L_{1/2}^{eq}\)</div>
+      <div class="exo-body">
+        <p class="q">Étape 1 — composer la chaîne \(1\!-\!3\!-\!2\) (série → somme)</p>
+        <p>\(\mathscr L_{1/3}\) et \(\mathscr L_{3/2}\) sont deux pivots glissants du <b>même axe</b> \((O,\vec z)\).
+        Leur somme ne fait qu'un : la chaîne équivaut, entre 1 et 2, à un <b>pivot glissant d'axe \((O,\vec z)\)</b>
+        (2 DDL libres : \(R_z,T_z\) ; tout le reste bloqué : \(R_x,R_y,T_x,T_y\)).</p>
+        <p class="q">Étape 2 — combiner avec le contact direct rotulé (parallèle → intersection)</p>
+        <p>Le contact direct \(\mathscr L_{1/2}\) (rotule) laisse libres \(R_x,R_y,R_z\) et bloque \(T_x,T_y,T_z\).
+        La chaîne laisse libres \(R_z,T_z\) et bloque \(R_x,R_y,T_x,T_y\). Composante par composante :</p>
+        <ul>
+          <li>\(R_x\) : libre côté rotule, bloqué côté chaîne → l'intersection <b>bloque</b>.</li>
+          <li>\(R_y\) : libre côté rotule, bloqué côté chaîne → l'intersection <b>bloque</b>.</li>
+          <li>\(R_z\) : libre des deux côtés → reste <b>libre</b>.</li>
+          <li>\(T_x,T_y\) : bloqués des deux côtés → restent <b>bloqués</b>.</li>
+          <li>\(T_z\) : bloqué côté rotule, libre côté chaîne → l'intersection <b>bloque</b>.</li>
+        </ul>
+        <div class="warnbox"><span class="lab">Le point clé</span> \(R_y\) — la rotation qui permettrait à la
+        poulie de glisser sur l'arbre — est bloquée par la <b>chaîne</b> (la goupille), alors que la rotule du
+        contact direct la laissait libre : c'est bien la goupille qui verrouille le couple, exactement son rôle.
+        Seule \(R_z\) (rotation autour de la goupille elle-même) subsiste : un jeu résiduel minime et sans
+        conséquence fonctionnelle.</div>
+        <div class="res"><b>Liaison équivalente : pivot</b> d'axe \((O,\vec z)\).
+        \[ \{\mathcal V_{1/2}^{eq}\}=\{\omega_z\vec z;\ \vec0\}_O \qquad,\qquad
+           \{\mathcal T_{2\to1}^{eq}\}=\{X\vec x+Y\vec y+Z\vec z;\ M\vec y+N\vec z\}_O \]
+        1 DDL résiduel (\(R_z\)), 5 composantes d'effort transmissibles — la rotation autour de l'arbre
+        (\(R_y\)) et les 3 translations sont bloquées : le couple est transmis.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q6 — Isostatisme</div>
+      <div class="exo-body">
+        <p>Somme des composantes d'effort transmissibles des <b>3 liaisons réelles</b> du graphe (pas de la
+        liaison équivalente) :</p>
+        \[ N_s = \underbrace{3}_{\mathscr L_{1/2}\ (\text{rotule})}+\underbrace{4}_{\mathscr L_{3/2}}+\underbrace{4}_{\mathscr L_{1/3}}=11 \]
+        <p>3 solides en boucle fermée : \(N_e=6(3-1)=12\).</p>
+        \[ h=N_s-N_e=11-12=-1 \]
+        <div class="res">\(h=-1<0\) : cohérent avec la mobilité résiduelle \(m=1\) trouvée en Q5 (\(m+h=0\), bon
+        indicateur de cohérence du calcul). <b>Le montage n'est pas parfaitement isostatique, mais très proche</b> :
+        un unique DDL résiduel, sans incidence sur la fonction — c'est le prix, volontaire et maîtrisé, du rotulage
+        qui évite l'hyperstatisme.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= VERSION 2 =============================== -->
+  <section class="block" id="v2">
+    <h2>3. Application — Version 2 (poulie mince, largeur 10)</h2>
+    <figure>
+      <img src="img/v2-goupille.png" alt="Énoncé Version 2 — arbre 1 (φ20) et poulie 2 (largeur 10, disque mince) accouplés par une goupille élastique 3 (φ8)">
+      <figcaption>Énoncé — Version 2 : arbre 1 (Ø20) / poulie 2 (largeur 10, disque mince) / goupille élastique 3 (Ø8).</figcaption>
+    </figure>
+    <div class="enonce">Un arbre 1 (Ø20) est en liaison avec une poulie 2 (de largeur 10) par l'intermédiaire
+    d'une goupille élastique 3 (Ø8).</div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q1 — Graphe des liaisons</div>
+      <div class="exo-body">
+        <p>Même topologie qu'en Version 1. Le rotulage volontaire du contact direct 1/2 (§1.4) ne dépend pas
+        de la largeur de la poulie : il reste identique. Seule la liaison \(\mathscr L_{3/2}\) change de nature,
+        parce que c'est elle dont la longueur de contact dépend directement de cette largeur.</p>
+        <figure>
+<svg viewBox="0 0 320 220" width="320" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="60" cy="170" r="26" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+  <text x="60" y="176" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="18" font-weight="700" fill="#0f766e">1</text>
+  <circle cx="260" cy="170" r="26" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+  <text x="260" y="176" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="18" font-weight="700" fill="#0f766e">2</text>
+  <circle cx="160" cy="35" r="26" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="160" y="41" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="18" font-weight="700" fill="#92400e">3</text>
+  <line x1="86" y1="170" x2="234" y2="170" stroke="#1e293b" stroke-width="1.6"/>
+  <text x="160" y="163" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="12" fill="#1e293b">rotule (O) — volontaire</text>
+  <line x1="78" y1="150" x2="143" y2="55" stroke="#1e293b" stroke-width="1.6"/>
+  <text x="62" y="105" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="11.5" fill="#1e293b">pivot glissant (O,z)</text>
+  <line x1="242" y1="150" x2="177" y2="55" stroke="#1e293b" stroke-width="1.6"/>
+  <text x="266" y="105" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="11.5" fill="#1e293b">sphère-cylindre (O,z)</text>
+</svg>
+          <figcaption>Graphe des liaisons — Version 2. Seule \(\mathscr L_{3/2}\) se dégrade (poulie trop mince
+          pour rester un guidage ferme) ; le rotulage de \(\mathscr L_{1/2}\) est inchangé.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q2 — Liaison \(\mathscr L_{1/2}\) (contact direct arbre/poulie)</div>
+      <div class="exo-body">
+        <p class="q">Analyse du contact</p>
+        <p>Le rotulage volontaire (§1.4) est un choix de conception indépendant de la largeur de la poulie : il
+        s'applique ici de la <b>même façon qu'en Version 1</b>. <b>Liaison sphérique (rotule) de centre \(O\)</b>.</p>
+        <div class="res">
+        \[ \{\mathcal V_{1/2}\}=\{\vec\Omega;\ \vec0\}_O \qquad,\qquad
+           \{\mathcal T_{2\to1}\}=\{X\vec x+Y\vec y+Z\vec z;\ \vec0\}_O \]
+        3 DDL (les 3 rotations) — 3 composantes d'effort transmissibles (identique à la Version 1).
+        </div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q3 — Liaison \(\mathscr L_{3/2}\) (goupille / poulie)</div>
+      <div class="exo-body">
+        <p class="q">Analyse du contact</p>
+        <p>La goupille (Ø8) ne traverse plus que l'épaisseur mince de la poulie, \(L=10\) : \(L\) n'est plus
+        nettement supérieur à \(D=8\) (engagement court, presque un simple « anneau » de contact) → le contact
+        ne peut plus résister au basculement → <b>liaison sphère-cylindre (linéaire annulaire) d'axe \((O,\vec z)\)</b>.</p>
+        <div class="res">
+        \[ \{\mathcal V_{3/2}\}=\{\vec\Omega;\ v_z\vec z\}_O \qquad,\qquad
+           \{\mathcal T_{2\to3}\}=\{X\vec x+Y\vec y;\ \vec0\}_O \]
+        4 DDL (\(R_x,R_y,R_z,T_z\)) — 2 composantes d'effort transmissibles (\(F_x,F_y\) seulement, aucun moment).
+        </div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q4 — Liaison \(\mathscr L_{1/3}\) (arbre / goupille)</div>
+      <div class="exo-body">
+        <p class="q">Analyse du contact</p>
+        <p>L'arbre n'a pas changé de dimension entre les deux versions : longueur de contact \(L=20\) pour
+        \(D=8\), toujours \(L\gg D\) → <b>liaison pivot glissant d'axe \((O,\vec z)\)</b>, identique à la
+        Version 1.</p>
+        <div class="res">
+        \[ \{\mathcal V_{1/3}\}=\{\omega_z'\vec z;\ v_z'\vec z\}_O \qquad,\qquad
+           \{\mathcal T_{3\to1}\}=\{X'\vec x+Y'\vec y;\ L''\vec x+M''\vec y\}_O \]
+        2 DDL (\(R_z,T_z\)) — 4 composantes d'effort transmissibles.
+        </div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q5 — Liaison équivalente \(\mathscr L_{1/2}^{eq}\)</div>
+      <div class="exo-body">
+        <p class="q">Étape 1 — composer la chaîne \(1\!-\!3\!-\!2\) (série → somme)</p>
+        <p>\(\mathscr L_{1/3}\) (pivot glissant \(z\) : libère \(R_z,T_z\)) et \(\mathscr L_{3/2}\)
+        (sphère-cylindre \(z\) : libère \(R_x,R_y,R_z,T_z\)) : en série, une composante reste libre dès qu'<b>une
+        des deux</b> la libère. Le pivot glissant ne libère rien que la sphère-cylindre ne libère déjà → la
+        somme est la <b>plus permissive des deux</b> : <b>sphère-cylindre d'axe \((O,\vec z)\)</b>
+        (4 DDL libres : \(R_x,R_y,R_z,T_z\)).</p>
+        <p class="q">Étape 2 — combiner avec le contact direct rotulé (parallèle → intersection)</p>
+        <p>Contact direct \(\mathscr L_{1/2}\) (rotule) libère \(R_x,R_y,R_z\). Chaîne libère
+        \(R_x,R_y,R_z,T_z\). Composante par composante :</p>
+        <ul>
+          <li>\(R_x\) : libre des deux côtés → reste <b>libre</b>.</li>
+          <li>\(R_y\) : libre des deux côtés → reste <b>libre</b>.</li>
+          <li>\(R_z\) : libre des deux côtés → reste <b>libre</b>.</li>
+          <li>\(T_x,T_y\) : bloqués des deux côtés → restent <b>bloqués</b>.</li>
+          <li>\(T_z\) : bloqué côté rotule, libre côté chaîne → l'intersection <b>bloque</b>.</li>
+        </ul>
+        <div class="res"><b>Liaison équivalente : sphérique (rotule)</b> de centre \(O\).
+        \[ \{\mathcal V_{1/2}^{eq}\}=\{\vec\Omega;\ \vec0\}_O \qquad,\qquad
+           \{\mathcal T_{2\to1}^{eq}\}=\{X\vec x+Y\vec y+Z\vec z;\ \vec0\}_O \]
+        3 DDL (les 3 rotations), 3 composantes d'effort transmissibles (les 3 forces, aucun moment).</div>
+        <div class="warnbox"><span class="lab">Ce que ça signifie</span> Cette fois, la goupille <b>ne
+        parvient plus à bloquer \(R_y\)</b> : la liaison \(\mathscr L_{3/2}\), devenue trop courte (poulie
+        mince), libère elle-même les 3 rotations — la chaîne entière n'oppose donc plus aucune résistance à la
+        rotation autour de l'arbre. La liaison équivalente reste une <b>rotule</b> : les translations sont
+        bloquées, mais <b>les 3 rotations sont libres</b>. La poulie peut tourner par rapport à l'arbre : ce
+        n'est <b>plus un accouplement fonctionnel</b>.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q6 — Isostatisme</div>
+      <div class="exo-body">
+        \[ N_s = \underbrace{3}_{\mathscr L_{1/2}\ (\text{rotule})}+\underbrace{2}_{\mathscr L_{3/2}\ (\text{sphère-cyl.})}+\underbrace{4}_{\mathscr L_{1/3}}=9
+           \qquad,\qquad N_e=6(3-1)=12 \]
+        \[ h=N_s-N_e=9-12=-3 \]
+        <div class="res">\(h=-3<0\), cohérent avec la mobilité \(m=3\) trouvée en Q5 (\(m+h=0\)). <b>Le montage
+        n'est pas isostatique</b> : il manque 3 liaisons pour être rigide. L'assemblage se comporte comme un
+        véritable <b>mécanisme</b> (la rotule), pas comme un accouplement.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CONCLUSION =============================== -->
+  <section class="block" id="conclusion">
+    <h2>4. Conclusion — quelle association privilégier en construction ?</h2>
+    <div class="overflow">
+    <table>
+      <tr><th></th><th>Version 1 (poulie large, 22)</th><th>Version 2 (poulie mince, 10)</th></tr>
+      <tr><td><b>Liaison \(\mathscr L_{3/2}\) (goupille/poulie)</b></td><td>Pivot glissant (contact long)</td><td>Sphère-cylindre (contact court)</td></tr>
+      <tr><td><b>Liaison équivalente 1/2</b></td><td>Pivot d'axe \((O,\vec z)\), 1 DDL résiduel</td><td>Sphérique/rotule, 3 DDL</td></tr>
+      <tr><td><b>Degré d'hyperstatisme</b></td><td>\(h=-1\) (quasi-isostatique)</td><td>\(h=-3\) (sous-contraint)</td></tr>
+      <tr><td><b>Transmet le couple (\(R_y\) bloquée) ?</b></td><td>Oui</td><td>Non : la poulie peut tourner sur l'arbre</td></tr>
+    </table>
+    </div>
+    <div class="res"><b>On privilégie la Version 1</b> (poulie large, engagement long pour la goupille dans la
+    poulie). Le rotulage volontaire du contact direct 1/2 (même principe dans les deux versions) évite déjà
+    l'hyperstatisme ; ce qui différencie vraiment les deux versions, c'est la <b>longueur d'engagement de la
+    goupille dans la poulie</b> : en Version 1 elle reste un guidage ferme (pivot glissant) qui, combiné à la
+    goupille dans l'arbre, verrouille la rotation autour de l'axe — l'accouplement transmet le couple, avec un
+    unique DDL résiduel inoffensif (\(h=-1\)). En Version 2, la poulie trop mince dégrade ce même contact en
+    sphère-cylindre : la goupille perd sa capacité de verrouillage, la liaison équivalente n'est plus qu'une
+    rotule (\(h=-3\)) — la poulie peut tourner librement, l'accouplement ne remplit plus sa fonction.
+    <b>Règle de construction à retenir :</b> le rotulage volontaire (ici sur le contact direct) sert à éviter
+    l'hyperstatisme, mais il faut que <b>l'élément qui verrouille</b> (ici la goupille) garde, lui, un
+    engagement suffisamment long dans chacune des deux pièces qu'il traverse — sinon c'est la fonction même de
+    l'accouplement qui disparaît.</div>
+  </section>
+
+</main>
+
+<footer>
+  Généré comme support de révision personnel · Contenu basé sur le CM de SI de l'ECAM.
+</footer>
+<script src="../assets/gate.js"></script>
+</body>
+</html>
