@@ -307,25 +307,31 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
   courant entrant dans l'ALI : le courant qui traverse \(R\) (de \(A\) vers la masse) doit être fourni par
   \(R/\alpha\) (de \(v'\) vers \(A\)) :</p>
   \[ \frac{v'-v_1}{R/\alpha}=\frac{v_1-0}{R}
-     \ \Longrightarrow\ v'-v_1=\alpha v_1
-     \ \Longrightarrow\ \boxed{\ v'=(1+\alpha)v_1\ } \]
-  <p>(on reconnaît le gain non inverseur usuel \(1+R_f/R_{in}=1+(R/\alpha)/R=1+\alpha\)).</p>
+     \ \Longrightarrow\ \frac{\alpha(v'-v_1)}{R}=\frac{v_1}{R}
+     \ \Longrightarrow\ \alpha(v'-v_1)=v_1
+     \ \Longrightarrow\ \boxed{\ v'=v_1\,\frac{1+\alpha}{\alpha}\ } \]
+  <p>(on reconnaît le gain non inverseur usuel \(1+R_f/R_{in}=1+\dfrac{R/\alpha}{R}=1+\dfrac1\alpha
+  =\dfrac{1+\alpha}{\alpha}\)).</p>
 
   <p><b>Étage 2</b> — \(v_{+2}=v_2\) (fil direct), donc \(v_B=v_2\) en régime linéaire. Au nœud \(B\)
   (LNTP, aucun courant absorbé par l'ALI) :</p>
   \[ \frac{v_B-v'}{R}+\frac{v_B-v_s}{\alpha R}=0
      \ \Longrightarrow\ \alpha(v_B-v')+(v_B-v_s)=0
      \ \Longrightarrow\ v_s=(1+\alpha)v_B-\alpha v' \]
-  <p>Avec \(v_B=v_2\) et \(v'=(1+\alpha)v_1\) :</p>
-  \[ v_s=(1+\alpha)v_2-\alpha(1+\alpha)v_1 \]
-  <div class="res">\[ \boxed{\ v_s=(1+\alpha)\big(v_2-\alpha\,v_1\big)\ } \]</div>
+  <p>Avec \(v_B=v_2\) et \(v'=v_1\dfrac{1+\alpha}{\alpha}\), le facteur \(\alpha\) se simplifie
+  <b>exactement</b> avec celui déjà présent devant \(v'\) :</p>
+  \[ v_s=(1+\alpha)v_2-\alpha\cdot v_1\frac{1+\alpha}{\alpha}=(1+\alpha)v_2-(1+\alpha)v_1 \]
+  <div class="res">\[ \boxed{\ v_s=(1+\alpha)\,(v_2-v_1)\ } \]</div>
   <div class="method"><span class="lab">Vérification \(\alpha=1\)</span> On doit retrouver un montage à
   résistances toutes égales : \(v'=2v_1\) puis \(\frac{v_2-v'}{R}+\frac{v_2-v_s}{R}=0\Rightarrow
-  v_s=2v_2-v'=2v_2-2v_1\). La formule générale donne \((1+1)(v_2-1\cdot v_1)=2v_2-2v_1\) : ✔ cohérent.</div>
-  <p>Ce montage réalise donc un <b>amplificateur de différence à gain réglable</b> : le coefficient
-  appliqué à \(v_2\) (\(+(1+\alpha)\)) et celui appliqué à \(v_1\) (\(-\alpha(1+\alpha)\)) sont
-  <b>différents</b> et tous deux pilotés par le seul paramètre \(\alpha\) — utile pour régler indépendamment
-  le gain global et le taux de réjection entre les deux entrées.</p>
+  v_s=2v_2-v'=2v_2-2v_1\). La formule générale donne \((1+1)(v_2-v_1)=2v_2-2v_1\) : ✔ cohérent.</div>
+  <div class="method"><span class="lab">Vérification \(\alpha=2\)</span> \(v'=v_1(1+2)/2=1{,}5v_1\) ;
+  \(\dfrac{v_2-v'}{R}+\dfrac{v_2-v_s}{2R}=0\Rightarrow2(v_2-v')+(v_2-v_s)=0\Rightarrow
+  v_s=3v_2-2v'=3v_2-3v_1\). La formule générale donne \((1+2)(v_2-v_1)=3v_2-3v_1\) : ✔ cohérent.</div>
+  <p>Ce montage réalise donc un <b>amplificateur de différence</b> de gain \((1+\alpha)\), <b>identique</b>
+  sur \(v_1\) et \(v_2\) : le paramètre \(\alpha\) règle le <b>gain global</b> de la différence
+  \(v_2-v_1\) sans jamais déséquilibrer les deux entrées — un résultat plus élégant qu'il n'y paraît,
+  puisque les deux étages ont pourtant des composants différents (\(R/\alpha\) puis \(\alpha R\)).</p>
     </div>
   </div>
   </section>
