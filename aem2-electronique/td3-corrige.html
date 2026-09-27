@@ -58,54 +58,62 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     <div class="exo-head">Ex 1 — Montage sommateur <span class="diff">♦ · d'après H : E.2.5, T : 5.4 et V : méth20.4</span></div>
     <div class="exo-body">
   <figure>
-    <img src="td3-img/ex1.jpg" alt="Énoncé Exercice 1 — montage sommateur inverseur, trois entrées v1,v2,v3 par R1,R2,R3, ALI, feedback R, R0 sur l'entrée +" loading="lazy">
-    <figcaption>Énoncé (TD3, D. Courtois) — sommateur inverseur à 3 entrées</figcaption>
+    <img src="td3-img/ex1.jpg" alt="Énoncé Exercice 1 — montage sommateur non inverseur, trois entrées v1,v2,v3 par R1,R2,R3 sur l'entrée +, R0 et feedback R sur l'entrée -" loading="lazy">
+    <figcaption>Énoncé (TD3, D. Courtois) — sommateur non inverseur à 3 entrées</figcaption>
   </figure>
 
-  <div class="note"><span class="lab">Le circuit</span> Les trois tensions \(v_1,v_2,v_3\) attaquent la
-  <b>même</b> entrée <b>−</b> de l'ALI par les résistances \(R_1,R_2,R_3\). La sortie \(v_s\) reboucle sur
-  cette même entrée <b>−</b> par la résistance \(R\) (contre-réaction). L'entrée <b>+</b> est reliée à la
-  masse par \(R_0\), sans aucune autre connexion.</div>
+  <div class="note"><span class="lab">Le circuit</span> Les trois tensions \(v_1,v_2,v_3\) attaquent
+  <b>l'entrée +</b> de l'ALI par les résistances \(R_1,R_2,R_3\), qui se rejoignent toutes sur ce même nœud
+  (aucune autre connexion sur \(+\)). L'entrée <b>−</b> est reliée à la masse par \(R_0\) et à la sortie
+  \(v_s\) par la résistance \(R\) (contre-réaction).</div>
 
   <p class="q">1) Quel est le régime de l'ALI : linéaire ou saturé ? Justifier.</p>
-  <p>L'entrée <b>+</b> n'est connectée qu'à la masse via \(R_0\) : comme l'ALI idéal n'absorbe aucun courant
-  sur ses entrées, il ne circule aucun courant dans \(R_0\), donc <b>aucune chute de tension</b> à ses
-  bornes :</p>
-  \[ v_+ = 0\ \text{V (masse virtuelle)}. \]
-  <p>La sortie \(v_s\) ne revient, elle, <b>que</b> sur l'entrée <b>−</b> (par \(R\)) : c'est une
-  contre-réaction pure, sans aucun chemin de retour vers <b>+</b>. Une telle rétroaction est
-  <b>nécessairement négative</b> : elle stabilise le point de fonctionnement autour de \(v_-=v_+\).</p>
-  <div class="res"><b>L'ALI fonctionne en régime linéaire</b> (\(v_-=v_+=0\)), et ceci est garanti par la
-  structure du montage — on n'a pas besoin de le « supposer » comme on le fera à l'exercice 3.</div>
+  <p>La sortie \(v_s\) ne revient <b>que</b> sur l'entrée <b>−</b> (via \(R\), avec \(R_0\) pour seule autre
+  connexion de ce nœud) : c'est une contre-réaction pure, sans <b>aucun</b> chemin de retour vers <b>+</b>
+  (qui ne voit que \(v_1,v_2,v_3\)). Une telle rétroaction est <b>nécessairement négative</b> : elle
+  stabilise le point de fonctionnement autour de \(v_-=v_+\).</p>
+  <div class="res"><b>L'ALI fonctionne en régime linéaire</b> (\(v_-=v_+\)), et ceci est garanti par la
+  structure du montage (feedback exclusivement vers <b>−</b>) — on n'a pas besoin de le « supposer » comme
+  on le fera à l'exercice 3.</div>
 
   <p class="q">2) S'agit-il d'un montage inverseur ou non inverseur ?</p>
-  <p>Les trois signaux d'entrée \(v_1,v_2,v_3\) sont tous appliqués sur l'entrée <b>−</b> (via
-  \(R_1,R_2,R_3\)), tandis que l'entrée <b>+</b> est simplement mise à la masse. C'est la signature du
-  montage <b>inverseur</b> : chaque entrée sera recopiée en sortie avec un <b>signe opposé</b>.</p>
-  <div class="res"><b>Montage inverseur</b> (généralisation à 3 entrées de l'amplificateur inverseur simple).</div>
+  <p>Les trois signaux d'entrée \(v_1,v_2,v_3\) sont tous appliqués sur l'entrée <b>+</b> (via
+  \(R_1,R_2,R_3\)), tandis que l'entrée <b>−</b> ne voit qu'un diviseur \(R_0\)/\(R\) issu de la sortie.
+  C'est la signature du montage <b>non inverseur</b> : chaque entrée sera recopiée en sortie avec un
+  <b>signe positif</b>.</p>
+  <div class="res"><b>Montage non inverseur</b> (généralisation à 3 entrées de l'amplificateur non
+  inverseur simple).</div>
 
   <p class="q">3) Exprimer \(v_s\) en fonction de \(v_1\), \(v_2\) et \(v_3\)</p>
-  <p>On applique la <b>loi des nœuds en termes de potentiel</b> (LNTP) au nœud \(v_-\), en posant que
-  la somme des courants qui en repartent (vers \(v_1\), \(v_2\), \(v_3\) et \(v_s\)) est nulle, puisque
-  aucun courant n'entre dans l'ALI :</p>
-  \[ \frac{v_--v_1}{R_1}+\frac{v_--v_2}{R_2}+\frac{v_--v_3}{R_3}+\frac{v_--v_s}{R}=0. \]
-  <p>Avec \(v_-=v_+=0\) (question 1), il reste :</p>
-  \[ -\frac{v_1}{R_1}-\frac{v_2}{R_2}-\frac{v_3}{R_3}-\frac{v_s}{R}=0 \]
-  <div class="res">\[ \boxed{\ v_s=-R\left(\frac{v_1}{R_1}+\frac{v_2}{R_2}+\frac{v_3}{R_3}\right)\ } \]</div>
+  <p><b>Nœud \(v_+\)</b> — LNTP au nœud \(v_+\) (aucun courant n'entre dans l'ALI, donc la somme des
+  courants qui en repartent vers \(v_1\), \(v_2\) et \(v_3\) est nulle) :</p>
+  \[ \frac{v_+-v_1}{R_1}+\frac{v_+-v_2}{R_2}+\frac{v_+-v_3}{R_3}=0
+     \ \Longrightarrow\
+     v_+=\dfrac{\dfrac{v_1}{R_1}+\dfrac{v_2}{R_2}+\dfrac{v_3}{R_3}}{\dfrac{1}{R_1}+\dfrac{1}{R_2}+\dfrac{1}{R_3}}. \]
+  <p>\(v_+\) est donc une <b>moyenne pondérée</b> de \(v_1,v_2,v_3\) (pondération par les conductances
+  \(1/R_i\)) — un simple réseau résistif « moyenneur », qui ne tire aucun courant sur l'ALI.</p>
+  <p><b>Nœud \(v_-\)</b> — même méthode, avec \(v_-\) relié à la masse par \(R_0\) et à \(v_s\) par \(R\) :</p>
+  \[ \frac{v_--0}{R_0}+\frac{v_--v_s}{R}=0
+     \ \Longrightarrow\ v_s=v_-\left(1+\frac{R}{R_0}\right). \]
+  <p>En régime linéaire \(v_-=v_+\) (question 1), d'où :</p>
+  <div class="res">\[ \boxed{\ v_s=\left(1+\frac{R}{R_0}\right)\cdot
+     \dfrac{\dfrac{v_1}{R_1}+\dfrac{v_2}{R_2}+\dfrac{v_3}{R_3}}{\dfrac{1}{R_1}+\dfrac{1}{R_2}+\dfrac{1}{R_3}}\ } \]</div>
+  <p>On reconnaît la structure classique <b>amplificateur non inverseur</b> (gain \(1+R/R_0\)) appliqué à
+  un <b>moyenneur résistif</b> placé sur l'entrée \(+\).</p>
 
-  <p class="q">4) Exprimer \(v_s\) pour \(R_1=R_2=R_3=R\) ; justifier le titre de l'exercice</p>
-  <p>On remplace \(R_1=R_2=R_3=R\) dans le résultat précédent :</p>
-  \[ v_s=-R\left(\frac{v_1}{R}+\frac{v_2}{R}+\frac{v_3}{R}\right)=-R\cdot\frac{v_1+v_2+v_3}{R} \]
-  <div class="res">\[ \boxed{\ v_s=-(v_1+v_2+v_3)\ } \]</div>
-  <p>La sortie est (au signe près) la <b>somme</b> des trois tensions d'entrée : le montage réalise bien
-  une <b>addition</b> (inversée) de signaux, d'où le nom de <b>montage sommateur</b>. On peut généraliser
-  à \(n\) entrées identiques : \(v_s=-(v_1+\cdots+v_n)\).</p>
-
-  <div class="warnbox"><span class="lab">Rôle de \(R_0\)</span> Pour un ALI <b>idéal</b>, la valeur de \(R_0\)
-  n'intervient dans <b>aucun</b> résultat ci-dessus (\(v_+=0\) quelle que soit \(R_0\)). En pratique (ALI
-  réel), on choisit \(R_0=R_1\parallel R_2\parallel R_3\parallel R\) : cela équilibre les <b>courants de
-  polarisation</b> vus par les deux entrées et réduit l'erreur de décalage en sortie — un raffinement qui
-  ne change rien à l'analyse idéale demandée ici.</div>
+  <p class="q">4) Exprimer \(v_s\) pour toutes les résistances égales à \(R\) ; justifier le titre de l'exercice</p>
+  <p>Dès que \(R_1=R_2=R_3\) (peu importe leur valeur commune), la moyenne pondérée devient une
+  <b>moyenne arithmétique</b> simple :</p>
+  \[ v_+=\frac{v_1+v_2+v_3}{3}. \]
+  <p>En posant en plus \(R_1=R_2=R_3=R_0=R\) (toutes les résistances valent \(R\), y compris \(R_0\) — la
+  résistance de contre-réaction s'appelle déjà \(R\) dans l'énoncé), le gain non inverseur vaut
+  \(1+R/R_0=1+R/R=2\), d'où :</p>
+  \[ v_s=2\cdot\frac{v_1+v_2+v_3}{3} \]
+  <div class="res">\[ \boxed{\ v_s=\frac{2}{3}(v_1+v_2+v_3)\ } \]</div>
+  <p>La sortie est <b>proportionnelle</b> à la <b>somme</b> des trois tensions d'entrée (avec un facteur
+  \(2/3\) ici, mais déjà proportionnelle à la somme dès que \(R_1=R_2=R_3\), quel que soit \(R_0\)) : le
+  montage réalise bien une <b>addition</b> de signaux, d'où le nom de <b>montage sommateur</b> — non
+  inverseur, cette fois, contrairement à la version « classique » que l'on rencontre souvent en cours.</p>
     </div>
   </div>
   </section>
