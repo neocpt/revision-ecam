@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ch3 — ALI en régime linéaire — AM2 Électronique — Révision ECAM</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div class="topbar">
+  <a href="../index.html#am2">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="ch2-filtrage-fourier.html">← Ch2</a>
+  <a href="#s1">1. Présentation</a>
+  <a href="#s2">2. ALI idéal</a>
+  <a href="#s3">3. Montages</a>
+  <a href="#s4">4. Écarts</a>
+  <a href="#docs">Documents donnés</a>
+  <a href="td3-corrige.html">TD3 corrigé →</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Électronique AM2 (2ᵉ année) · Chapitre 3</span>
+  <h1 class="title">Ch3 — L'amplificateur linéaire intégré (ALI) en régime linéaire</h1>
+  <p class="lead">Présentation générale de l'ALI (brochage, alimentation symétrique, régimes linéaire/saturé),
+  le modèle de l'ALI idéal « de gain infini », et les 5 montages fondamentaux (suiveur, non inverseur,
+  inverseur, intégrateur, dérivateur). Les 14 questions du cours sont résolues intégralement, avec les écarts
+  possibles à la réponse linéaire (saturations en tension et en courant). AM2 · P2030 · Semestre 3 —
+  D. Courtois, 17/09/2026.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul>
+      <li><a href="#s1">1. Présentation générale d'un ALI</a></li>
+      <li><a href="#s2">2. Un ALI idéal plus simple que l'ALI réel</a></li>
+      <li><a href="#s3">3. Principaux montages en régime linéaire</a></li>
+      <li><a href="#s4">4. Des écarts possibles à la réponse linéaire</a></li>
+      <li><a href="#docs">📂 Documents donnés</a></li>
+    </ul>
+  </div>
+
+  <section class="block" id="s1">
+    <h2>1. Présentation générale d'un Amplificateur Linéaire Intégré (ALI)</h2>
+
+    <h3>1.1 · Le brochage de l'ALI</h3>
+    <div class="def"><span class="lab">Définition</span> Un ALI est un circuit intégré (une « boîte noire »)
+    <b>actif</b>, constitué en interne de résistances, condensateurs et transistors.</div>
+    <p>Trois broches principales définissent son fonctionnement électrique :</p>
+    <ul>
+      <li>une entrée <b>non-inverseuse (+)</b>, portée au potentiel \(v_+\) ;</li>
+      <li>une entrée <b>inverseuse (−)</b>, portée au potentiel \(v_-\) ;</li>
+      <li>une <b>sortie</b>, portée au potentiel \(v_s\), qui est directement la réponse du montage
+      (\(s=v_s\)).</li>
+    </ul>
+    <p>Selon le montage, le signal d'entrée est appliqué directement sur l'entrée (+) (\(e=v_+\)) ou (−)
+    (\(e=v_-\)), ou indirectement. On note \(\varepsilon=v_+-v_-\) la <b>tension différentielle d'entrée</b>.</p>
+    <p>L'ALI étant actif, il a besoin d'un apport d'énergie pour fonctionner : il est alimenté, le plus
+    souvent par une source de tension idéale continue <b>symétrique</b> \(+15\text{ V}/-15\text{ V}\). Trois
+    broches supplémentaires apparaissent donc autour de l'ALI :</p>
+    <ul>
+      <li>une arrivée d'alimentation \(+V_{CC}=+15\) V ;</li>
+      <li>une arrivée d'alimentation \(-V_{CC}=-15\) V ;</li>
+      <li>une masse, référence \(V=0\) pour tous les potentiels.</li>
+    </ul>
+    <div class="warnbox"><span class="lab">Piège</span> Ne <b>jamais confondre</b> les entrées (+) et (−) avec
+    les arrivées \(+V_{CC}\) et \(-V_{CC}\) de l'alimentation — ces dernières ne sont généralement <b>pas</b>
+    représentées sur les schémas électroniques.</div>
+    <figure><img src="ch3-img/brochage-schema.png" alt="Schéma annoté de l'ALI : entrées i+/i-, epsilon, sortie is, alimentations +/-15V">
+      <figcaption>Notations du cours : \(i_+,i_-\) courants d'entrée, \(\varepsilon=v_+-v_-\), \(i_s\) courant
+      de sortie, alimentation symétrique \(\pm15\) V.</figcaption>
+    </figure>
+    <p>Schémas conventionnels : en rectangle ou en triangle, avec (+) et (−) pas toujours dans le même ordre
+    d'un schéma à l'autre — il faut toujours vérifier sur le dessin lui-même.</p>
+    <figure><img src="ch3-img/dip8-pinout.png" alt="Brochage officiel du boîtier DIP8 de l'ALI (type LM741)">
+      <figcaption>Brochage DIP8 d'un ALI type LM741 : 1/5 réglage offset, 2 entrée (−), 3 entrée (+),
+      4 alim \(-15\) V, 6 sortie, 7 alim \(+15\) V, 8 inutilisée. Au labo ECAM : ALI LM741 monté sur
+      platine.</figcaption>
+    </figure>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q1 — Attribuer à chaque borne de l'ALI les bonnes fiches de la platine
+      <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="q">Attribuer à chaque borne de l'ALI les bonnes fiches de la platine utilisée au labo de
+        l'ECAM.</p>
+        <figure><img src="ch3-img/platine-photo.png" alt="Photo de la platine ALI du labo ECAM, fiches +15V/0V/-15V et symbole du triangle ALI imprimé">
+          <figcaption>Platine « Amplificateur opérationnel » du labo ECAM : rails d'alimentation en haut
+          (\(+15\) V, \(0\) V, \(-15\) V), triangle ALI imprimé au centre (entrée « − » en haut, entrée « + »
+          en bas d'après le symbole), fiches banane à relier de part et d'autre.</figcaption>
+        </figure>
+        <p>En comparant le brochage DIP8 officiel (ci-dessus) au triangle ALI imprimé sur la platine, chaque
+        broche du boîtier doit être reliée par un fil à la fiche de <b>même rôle électrique</b> :</p>
+        <div class="overflow"><table>
+          <tr><th>Broche DIP8</th><th>Rôle</th><th>Fiche de la platine à relier</th></tr>
+          <tr><td>2</td><td>entrée (−)</td><td>fiche « − » (entrée du triangle imprimé, en haut)</td></tr>
+          <tr><td>3</td><td>entrée (+)</td><td>fiche « + » (entrée du triangle imprimé, en bas)</td></tr>
+          <tr><td>6</td><td>sortie \(v_s\)</td><td>fiche de sortie, à droite du triangle imprimé</td></tr>
+          <tr><td>7</td><td>alim \(+V_{CC}\)</td><td>rail « +15 V » en haut de la platine</td></tr>
+          <tr><td>4</td><td>alim \(-V_{CC}\)</td><td>rail « −15 V » en haut de la platine</td></tr>
+          <tr><td>masse du montage</td><td>référence \(0\) V</td><td>rail « 0 V » (bus noir en bas de la platine)</td></tr>
+          <tr><td>1, 5</td><td>réglage offset</td><td>non utilisées en usage standard au labo</td></tr>
+          <tr><td>8</td><td>inutilisée</td><td>—</td></tr>
+        </table></div>
+        <div class="res">Chaque broche <b>2/3/6</b> (entrées et sortie du signal) se relie aux fiches du
+        triangle imprimé sur la platine, et les broches d'alimentation <b>4/7</b> + la masse se relient aux
+        trois rails du haut (\(+15\) V, \(0\) V, \(-15\) V). Les broches 1, 5 et 8 restent libres.</div>
+      </div>
+    </div>
+
+    <h3>1.2 · ALImentation</h3>
+    <p>Au labo : l'alimentation symétrique est obtenue en branchant en <b>série</b> deux sources \(0\)–\(30\)
+    V (bouton de gauche du « slave » enfoncé, bouton de droite du « master » remonté), et en plaçant la masse
+    (fil noir) <b>entre les deux sources</b>. En ajustant la différence de potentiel du master à \(15\) V,
+    l'entrée du slave se retrouve à \(-V_{CC}=-15\) V (fil bleu) et la sortie du master à \(+V_{CC}=+15\) V
+    (fil rouge).</p>
+    <div class="warnbox"><span class="lab">Piège</span> La masse ainsi obtenue est <b>flottante</b> : ce n'est
+    <b>pas</b> la « terre » GND du secteur.</div>
+    <div class="note"><span class="lab">Règle de manipulation</span> Il faut <b>toujours alimenter l'ALI avant
+    d'injecter un signal d'entrée</b>, et <b>toujours couper le signal d'entrée avant de couper
+    l'alimentation</b>. Dans un montage à ALI, les masses de tous les composants doivent être reliées à la
+    masse de l'alimentation symétrique.</div>
+
+    <h3>1.3 · Deux régimes de fonctionnement de l'ALI : linéaire (stable) ou saturé (instable)</h3>
+    <p>Un montage à ALI peut être <b>instable</b>, car ce composant est actif. Un signal de sortie ne pouvant
+    jamais vraiment diverger, un système instable donne une réponse dans un <b>état saturé</b>
+    \(s=\pm V_{sat}\approx\pm V_{CC}\), sans relation linéaire avec l'entrée. Sinon, quand le système est
+    stable, la réponse de l'ALI est <b>linéaire</b>.</p>
+    <ul>
+      <li><b>Régime linéaire</b> : \(-V_{sat}<s<+V_{sat}\), et \(s=A_d\times\varepsilon\), où \(A_d\)
+      (noté aussi \(\mu_0\)) est le <b>gain différentiel</b> de l'ALI.</li>
+    </ul>
+    <div class="warnbox"><span class="lab">Piège</span> Ne pas confondre le gain différentiel <b>intrinsèque</b>
+    de l'ALI \(A_d=v_s/\varepsilon\) avec le gain <b>du montage</b> \(H=v_s/v_e\) — ce dernier dépend des
+    composants externes (résistances, etc.) ajoutés autour de l'ALI, pas seulement du composant lui-même.</div>
+    <p>Une <b>boucle de rétroaction sur la borne inverseuse (−)</b> stabilise le montage et permet le
+    fonctionnement de l'ALI en régime linéaire. Cette rétroaction négative se traduit par une connexion entre
+    la borne de sortie et la borne (−), par une branche (fil(s), résistance(s), condensateur(s)).</p>
+    <ul>
+      <li><b>Régime saturé</b> : \(s=\pm V_{sat}\), indépendamment de l'entrée — la relation entrée-sortie
+      n'est pas linéaire.</li>
+    </ul>
+    <p>L'<b>absence de rétroaction</b> sur la borne (−) déstabilise le montage et entraîne le fonctionnement
+    en régime saturé. Cela se traduit soit par l'absence de connexion entre la sortie et les entrées, soit par
+    une <b>rétroaction positive sur (+)</b> (sortie et borne (+) connectées par une branche).</p>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q2 — Réponse réelle \(v_s=f(\varepsilon)\) : gain \(A_d\) et zones de
+      saturation/linéarité <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="q">Visualiser sur le graphique le gain \(A_d\), ainsi que les domaines de saturation et de
+        linéarité.</p>
+        <p>Autour de \(\varepsilon=0\), la caractéristique \(v_s=f(\varepsilon)\) est une droite de pente
+        \(A_d\) (régime linéaire) ; dès que \(v_s\) atteint \(\pm V_{sat}\), la courbe devient horizontale
+        (régime saturé), car \(v_s\) ne peut physiquement pas dépasser les tensions d'alimentation.</p>
+        <figure>
+          <svg viewBox="0 0 640 340" width="640" xmlns="http://www.w3.org/2000/svg">
+<line x1="70" y1="170.0" x2="600" y2="170.0" stroke="#94a3b8" stroke-width="1.4"/>
+<line x1="335.0" y1="320" x2="335.0" y2="20" stroke="#94a3b8" stroke-width="1.4"/>
+<text x="608" y="174.0" fill="#1e293b" font-family="monospace" font-size="13">eps</text>
+<text x="327.0" y="14" fill="#1e293b" font-family="monospace" font-size="13" text-anchor="end">v_s</text>
+<rect x="70" y="40" width="239.0" height="260" fill="#dc2626" opacity="0.06"/>
+<rect x="361.0" y="40" width="239.0" height="260" fill="#dc2626" opacity="0.06"/>
+<rect x="309.0" y="40" width="52" height="260" fill="#0d9488" opacity="0.10"/>
+<line x1="70" y1="58" x2="600" y2="58" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="70" y1="282" x2="600" y2="282" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="64" y="62" fill="#1e293b" font-family="monospace" font-size="12" text-anchor="end">+Vsat</text>
+<text x="64" y="278" fill="#1e293b" font-family="monospace" font-size="12" text-anchor="end">-Vsat</text>
+<path d="M 70.0,282.0 L 309.0,282.0 L 361.0,58.0 L 600.0,58.0" fill="none" stroke="#0d9488" stroke-width="3.2" stroke-linejoin="round"/>
+<line x1="293.4" y1="349.2" x2="376.6" y2="-9.2" stroke="#d97706" stroke-width="1.6" stroke-dasharray="2,3" opacity="0.85"/>
+<text x="367.0" y="146.6" fill="#d97706" font-family="monospace" font-size="12" font-weight="700">pente = Ad</text>
+<text x="189.5" y="80" fill="#dc2626" font-family="monospace" font-size="11.5" text-anchor="middle">zone saturee</text>
+<text x="480.5" y="80" fill="#dc2626" font-family="monospace" font-size="11.5" text-anchor="middle">zone saturee</text>
+<text x="335.0" y="136.0" fill="#0d9488" font-family="monospace" font-size="11.5" text-anchor="middle" font-weight="700">zone lineaire</text>
+<text x="70" y="26" fill="#334155" font-family="monospace" font-size="13" font-weight="700">Q2 - Reponse reelle vs=f(eps) : gain Ad + zones</text>
+</svg>
+          <figcaption>Pente \(A_d\) au voisinage de \(\varepsilon=0\) (zone linéaire, en vert) ; paliers
+          \(\pm V_{sat}\) dès que \(|\varepsilon|\) devient trop grand (zones saturées, en rouge).</figcaption>
+        </figure>
+        <div class="res">La <b>zone linéaire</b> est la portion oblique de pente \(A_d\) autour de
+        \(\varepsilon=0\) ; les <b>zones saturées</b> sont les deux paliers horizontaux \(v_s=+V_{sat}\) et
+        \(v_s=-V_{sat}\) de part et d'autre.</div>
+      </div>
+    </div>
+
+    <div class="note"><span class="lab">Remarque</span> S'il y a rétroaction sur les <b>deux</b> entrées (−)
+    et (+) à la fois, on ne peut pas savoir « au premier coup d'œil » si le régime de fonctionnement est
+    linéaire ou saturé : la prédiction nécessite un examen plus approfondi (voir fin du Ch4).</div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q3 — Prédire le régime (linéaire ou saturé) de 4 montages
+      <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Prédire pour chaque montage ci-dessous si l'ALI fonctionne en régime linéaire ou
+        saturé.</p>
+        <figure><img src="ch3-img/q3-quatre-montages.png" alt="Quatre montages à ALI à analyser : sommateur, comparateur ouvert, suiveur, montage à diode/condensateur">
+          <figcaption>Quatre montages à examiner. Le seul critère qui compte : <b>où va la rétroaction ?</b>
+          (peu importe l'apparence globale, simple ou complexe, du reste du circuit.)</figcaption>
+        </figure>
+        <p class="q">Montage 1 (à gauche) — trois entrées \(v_1,v_2,v_3\) via des résistances \(R\), plus une
+        résistance de contre-réaction \(R\) entre la sortie et ce même nœud d'entrée.</p>
+        <div class="res">La résistance de contre-réaction relie <b>uniquement</b> la sortie à l'entrée
+        <b>(−)</b> (nœud commun aux trois résistances d'entrée). <b>Régime linéaire</b>, quel que soit le
+        détail des branches \(v_1,v_2,v_3\) : seule compte la destination de la rétroaction.</div>
+        <p class="q">Montage 2 (haut, au centre-gauche) — \(V_+\) et \(V_-\) imposés directement et
+        indépendamment sur les deux entrées, sortie \(v_s\) non reconnectée.</p>
+        <div class="res"><b>Aucune rétroaction</b> entre la sortie et les entrées (comparateur en boucle
+        ouverte). <b>Régime saturé.</b></div>
+        <p class="q">Montage 3 (haut, au centre-droit) — \(v_e\) directement sur une entrée, boucle reliant la
+        sortie directement à l'autre entrée.</p>
+        <div class="res">La boucle relie la sortie à l'entrée <b>(−)</b> (montage suiveur, non nommé comme
+        tel dans l'énoncé mais topologiquement identique à celui du §3.1). <b>Régime linéaire</b> — c'est le
+        cas « piège » du QCM : il a l'air différent du suiveur habituel mais c'est exactement le même
+        montage.</div>
+        <p class="q">Montage 4 (à droite) — réseau diode + condensateur sur une branche, résistance
+        \(R_2\) rebouclant la sortie vers cette même branche.</p>
+        <div class="res">La résistance \(R_2\) reboucle la sortie vers l'entrée <b>(+)</b> (à travers le
+        réseau diode/condensateur) : c'est une <b>rétroaction positive</b>. <b>Régime saturé</b> — ce montage
+        est en réalité un multivibrateur astable/oscillateur de relaxation, hors programme de ce chapitre
+        (étudié plus en détail en fin de Ch4).</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="s2">
+    <h2>2. Un ALI idéal plus simple que l'ALI réel</h2>
+
+    <h3>2.1 · Le modèle de l'ALI idéal</h3>
+    <div class="def"><span class="lab">Modèle de l'ALI idéal</span> \(i_+=i_-=0\) (résistance d'entrée
+    \(R_{entrée}\to\infty\)) et \(v_s\) n'est pas affectée par \(i_s\) (résistance de sortie
+    \(R_{sortie}\to0\)).</div>
+    <p>En réalité, \(i_e\approx10^{-8}\)–\(10^{-11}\) A, soit \(R_{entrée}\approx10^{9}\)–\(10^{12}\ \Omega\),
+    et \(R_{sortie}\approx10\ \Omega\) : le modèle idéal est donc une bonne approximation.</p>
+    <div class="note"><span class="lab">Remarque — outil clé</span> La relation \(i_+=i_-=0\) incite à
+    utiliser la loi des nœuds aux entrées (+) et (−), exprimée avec les potentiels \(v_+\) et \(v_-\)
+    respectivement : c'est le théorème de <b>Millman</b> (aussi appelé « LNTP », loi des nœuds en termes de
+    potentiels).</div>
+
+    <h3>2.2 · Le modèle de l'ALI idéal de gain infini (adopté par défaut)</h3>
+    <p>On ajoute une seconde hypothèse : \(A_d\to\infty\). On obtient alors :</p>
+    <ul>
+      <li>en <b>régime linéaire</b> : \(\varepsilon=0\ \Leftrightarrow\ v_+=v_-\) ;</li>
+      <li>en <b>régime saturé</b> : \(v_s=+V_{sat}\) si \(\varepsilon>0\ (v_+>v_-)\), et \(v_s=-V_{sat}\) si
+      \(\varepsilon<0\ (v_+<v_-)\).</li>
+    </ul>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q4 — Courbe \(v_s=f(\varepsilon)\) pour l'ALI idéal « de gain infini »
+      <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="q">Tracer la courbe \(v_s=f(\varepsilon)\) (similaire à celle de Q2) dans le cas d'un ALI
+        idéal « de gain infini ».</p>
+        <p>Quand \(A_d\to\infty\), la pente de la zone linéaire (Q2) devient infinie : la zone linéaire se
+        réduit à un unique segment <b>vertical</b> en \(\varepsilon=0\). On obtient une caractéristique en
+        créneau (fonction signe), typique d'un comparateur idéal.</p>
+        <figure>
+          <svg viewBox="0 0 640 300" width="640" xmlns="http://www.w3.org/2000/svg">
+<line x1="70" y1="150.0" x2="600" y2="150.0" stroke="#94a3b8" stroke-width="1.4"/>
+<line x1="335.0" y1="276" x2="335.0" y2="24" stroke="#94a3b8" stroke-width="1.4"/>
+<text x="608" y="154.0" fill="#1e293b" font-family="monospace" font-size="13">eps</text>
+<text x="327.0" y="18" fill="#1e293b" font-family="monospace" font-size="13" text-anchor="end">v_s</text>
+<line x1="70" y1="58" x2="600" y2="58" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="70" y1="242" x2="600" y2="242" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="64" y="62" fill="#1e293b" font-family="monospace" font-size="12" text-anchor="end">+Vsat</text>
+<text x="64" y="238" fill="#1e293b" font-family="monospace" font-size="12" text-anchor="end">-Vsat</text>
+<path d="M 70,242 L 335.0,242 L 335.0,58 L 600,58" fill="none" stroke="#0d9488" stroke-width="3.2" stroke-linejoin="round"/>
+<circle cx="335.0" cy="150.0" r="3.4" fill="#0d9488"/>
+<text x="70" y="24" fill="#334155" font-family="monospace" font-size="13" font-weight="700">Q4 - ALI ideal de gain infini : echelon en eps=0</text>
+</svg>
+          <figcaption>À la limite \(A_d\to\infty\), la droite de pente \(A_d\) devient un saut vertical en
+          \(\varepsilon=0\) : \(v_s=-V_{sat}\) pour \(\varepsilon<0\), \(v_s=+V_{sat}\) pour
+          \(\varepsilon>0\).</figcaption>
+        </figure>
+        <div class="res">\(\boxed{\ v_s=+V_{sat}\text{ si }\varepsilon>0\ ;\quad v_s=-V_{sat}\text{ si
+        }\varepsilon<0\ }\) — la zone linéaire n'existe plus qu'au point \(\varepsilon=0\) exactement.</div>
+      </div>
+    </div>
+
+    <p>En réalité \(A_d\approx2\times10^{5}\), soit \(\varepsilon\approx10^{-4}\) V en régime linéaire pour
+    des tensions de sortie usuelles : le modèle « de gain infini » est donc lui aussi une bonne
+    approximation.</p>
+    <div class="note"><span class="lab">Remarque — modèle de gain dynamique</span> Le modèle simple de gain
+    infini permet d'étudier l'essentiel des montages, mais un modèle de gain plus sophistiqué est nécessaire
+    pour comprendre certains phénomènes, notamment les comportements à hautes fréquences. On utilise alors un
+    modèle de « gain dynamique », de type filtre passe-bas du premier ordre :
+    \[ \underline{A_d}(j\omega)=\frac{\mu_0}{1+j\omega/\omega_0}\ ,\qquad \omega_0\approx10^{2}\text{ rad/s}. \]
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q5 — Schéma équivalent de l'ALI réel : différences avec l'ALI idéal de gain
+      infini <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Le schéma équivalent d'un ALI réel est donné ci-contre. Discuter des différences avec un
+        ALI idéal de gain infini.</p>
+        <figure><img src="ch3-img/ali-reel-schema.png" alt="Schéma électrique équivalent de l'ALI réel : Re, Voff, Ie+, Ie-, gain mu0.vd, impédance de sortie Zs">
+          <figcaption>Modèle équivalent de l'ALI réel : résistance d'entrée \(R_e\) finie, source de décalage
+          \(V_{off}\), courants de polarisation \(I_{e+}\), \(I_{e-}\), source dépendante \(\mu_0 v_d\) en
+          série avec une impédance de sortie \(Z_s\).</figcaption>
+        </figure>
+        <p>En comparant terme à terme avec les deux hypothèses du modèle idéal de gain infini
+        (§2.1–2.2) :</p>
+        <div class="overflow"><table>
+          <tr><th>Grandeur</th><th>Modèle idéal (gain infini)</th><th>ALI réel (schéma ci-dessus)</th></tr>
+          <tr><td>Résistance d'entrée \(R_e\)</td><td>\(\to\infty\)</td><td>finie (\(\approx10^9\)–\(10^{12}\ \Omega\))</td></tr>
+          <tr><td>Courants de polarisation \(I_{e+},I_{e-}\)</td><td>nuls</td><td>non nuls, résiduels (\(\approx10^{-8}\)–\(10^{-11}\) A)</td></tr>
+          <tr><td>Tension de décalage \(V_{off}\)</td><td>nulle</td><td>non nulle (dissymétrie interne du composant)</td></tr>
+          <tr><td>Gain différentiel \(\mu_0\)</td><td>\(\to\infty\)</td><td>fini (\(\approx2\times10^5\))</td></tr>
+          <tr><td>Impédance de sortie \(Z_s\)</td><td>\(\to0\)</td><td>non nulle (\(\approx\)qq dizaines de \(\Omega\))</td></tr>
+        </table></div>
+        <div class="res">Le modèle idéal de gain infini néglige cinq écarts réels de l'ALI : une résistance
+        d'entrée finie, des courants de polarisation résiduels, une tension de décalage \(V_{off}\)
+        (compensable via les broches de réglage offset, §1.1), un gain fini (donc \(\varepsilon\) jamais
+        rigoureusement nul), et une impédance de sortie non nulle (donc \(v_s\) légèrement sensible à la
+        charge \(i_s\)). Ces écarts sont numériquement négligeables dans l'immense majorité des cas
+        pratiques — d'où la pertinence du modèle idéal par défaut.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="s3">
+    <h2>3. Principaux montages en régime linéaire (\(\varepsilon=0\Leftrightarrow v_+=v_-\))</h2>
+
+    <h3>3.1 · Le montage suiveur</h3>
+    <figure><img src="ch3-img/suiveur-schema.png" alt="Montage suiveur : sortie reliée directement à l'entrée -, entree + relié à ve">
+      <figcaption>Montage suiveur : la sortie est reliée <b>directement</b> (fil, sans composant) à
+      l'entrée (−) ; \(v_e\) est appliquée sur l'entrée (+).</figcaption>
+    </figure>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q6 — Montrer que \(v_s=v_e\) pour le montage suiveur <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="q">En utilisant les relations du modèle de l'ALI idéal de gain infini, montrer que pour un
+        montage suiveur \(v_s=v_e\) (donc \(H=1\)).</p>
+        <p>La borne (+) reçoit directement \(v_e\) : \(v_+=v_e\). Le fil reliant la sortie à la borne (−)
+        impose \(v_-=v_s\). La rétroaction se fait exclusivement sur (−), donc l'ALI fonctionne en régime
+        linéaire (§1.3), ce qui donne \(v_+=v_-\) :</p>
+        \[ v_e=v_+=v_-=v_s \]
+        <div class="res">\[ \boxed{\ v_s=v_e\ ,\quad H=\frac{v_s}{v_e}=1\ } \]</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q7 — Intérêt du suiveur : tension \(u_0\) aux bornes d'une résistance de
+      charge \(R_0\) <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">En exprimant la tension \(u_0\) aux bornes d'une résistance de charge \(R_0\) pour deux
+        configurations différentes (sans ou avec un montage suiveur inséré), réfléchir à l'intérêt d'un tel
+        montage au labo, quand on utilise une source de tension réelle, ou quand on connecte des filtres
+        passifs analogiques en cascade.</p>
+        <figure><img src="ch3-img/generateurs-r0.png" alt="Comparaison sans/avec suiveur : générateur réel E,r branché directement sur R0, puis via un suiveur">
+          <figcaption>À gauche : générateur réel \((E,r)\) directement chargé par \(R_0\). À droite : le
+          même générateur, avec un suiveur inséré entre lui et \(R_0\).</figcaption>
+        </figure>
+        <p><b>Sans suiveur</b> (générateur réel \(E,r\) directement relié à \(R_0\)) : un courant
+        \(i=E/(R_0+r)\) circule dans la maille, et \(u_0\) est donnée par un pont diviseur de tension :</p>
+        \[ u_0=E\cdot\frac{R_0}{R_0+r} \]
+        <p>Cette tension \(u_0\) dépend de \(R_0\) : le générateur réel est <b>« chargé »</b> par \(R_0\), sa
+        tension de sortie chute d'autant plus que \(R_0\) est faible (comparable à \(r\)).</p>
+        <p><b>Avec suiveur</b> inséré entre le générateur et \(R_0\) : l'entrée (+) du suiveur, de résistance
+        d'entrée infinie (\(i_+=0\)), ne tire <b>aucun courant</b> du générateur \((E,r)\) — il n'y a donc
+        <b>aucune chute de tension</b> dans \(r\), et \(v_e=E\) exactement (pas de division de tension). D'après
+        Q6, \(v_s=v_e=E\). L'ALI ayant une résistance de sortie nulle (modèle idéal), cette tension \(v_s=E\)
+        est ensuite délivrée à \(R_0\) <b>sans chute supplémentaire</b>, quel que soit le courant demandé par
+        \(R_0\) :</p>
+        \[ u_0=v_s=E,\qquad\text{indépendamment de }R_0\text{ et de }r. \]
+        <div class="res"><b>Intérêt du suiveur : adaptation d'impédance (« tampon », buffer).</b> Il isole
+        électriquement une source (impédance de sortie \(r\) quelconque) d'une charge \(R_0\), sans jamais
+        les faire interagir : la charge ne « voit » jamais la résistance interne de la source. Au labo, ceci
+        évite qu'une source de tension réelle ne soit faussée par la résistance qu'on lui connecte ; c'est
+        aussi indispensable pour connecter des <b>filtres passifs analogiques en cascade</b> (Ch1) : sans
+        suiveur entre deux étages, le second filtre « charge » le premier et fausse sa fonction de transfert
+        \(\underline H\) (hypothèse de non-interaction violée).</div>
+      </div>
+    </div>
+
+    <h3>3.2 · Le montage amplificateur non inverseur</h3>
+    <figure><img src="ch3-img/non-inverseur-schema.png" alt="Montage amplificateur non inverseur : Ve sur +, pont diviseur R1/R2 entre sortie et masse, noeud sur -">
+      <figcaption>Montage amplificateur non inverseur : \(v_e\) directement sur (+) ; \(R_1\) (vers la masse)
+      et \(R_2\) (vers la sortie) forment un pont diviseur dont le point milieu attaque (−).</figcaption>
+    </figure>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q8 — Montrer que \(v_s=v_e(1+R_2/R_1)\) <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Montrer que, pour un montage amplificateur non inverseur,
+        \(v_s=v_e\times\left(1+\dfrac{R_2}{R_1}\right)\) (donc \(H=1+\dfrac{R_2}{R_1}>1\)). On pourra utiliser
+        un pont diviseur de tension ou une LNTP.</p>
+        <p><b>Méthode du pont diviseur</b> : la rétroaction se fait sur (−), qui est le point milieu du pont
+        diviseur \(R_1\)–\(R_2\) entre la masse (\(0\) V, via \(R_1\)) et la sortie \(v_s\) (via \(R_2\)),
+        sans courant prélevé sur ce nœud (\(i_-=0\)) :</p>
+        \[ v_-=v_s\cdot\frac{R_1}{R_1+R_2} \]
+        <p>La borne (+) reçoit directement \(v_e\) : \(v_+=v_e\). Rétroaction exclusive sur (−) ⟹ régime
+        linéaire ⟹ \(v_+=v_-\) :</p>
+        \[ v_e=v_s\cdot\frac{R_1}{R_1+R_2}\ \Longrightarrow\ v_s=v_e\cdot\frac{R_1+R_2}{R_1} \]
+        <div class="res">\[ \boxed{\ v_s=v_e\left(1+\frac{R_2}{R_1}\right)\ ,\quad
+        H=1+\frac{R_2}{R_1}>1\ } \]</div>
+      </div>
+    </div>
+
+    <div class="method"><span class="lab">Méthode — la LNTP (théorème de Millman)</span> On écrit la loi des
+    nœuds en un point central \(A\), en faisant entrer conventionnellement tous les courants des \(n\)
+    branches en \(A\), puis on exprime ces courants en termes de différences de potentiels grâce aux lois de
+    comportement des éléments. On extrait enfin \(V_A\) :
+    \[ V_A=\dfrac{\displaystyle\sum_{i=1}^{n}V_i/\underline Z_i}{\displaystyle\sum_{i=1}^{n}1/\underline Z_i} \]
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q9 — Exemple d'application de la LNTP : exprimer \(V_A\) <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="q">Exemple : exprimer \(V_A\) dans le cas ci-contre.</p>
+        <figure><img src="ch3-img/lntp-exemple-schema.png" alt="Exemple LNTP : noeud A entre Z1 (relié à v1), Z2 (relié à v2) et Z3 (relié à la masse)">
+          <figcaption>Nœud \(A\) relié à \(v_1\) via \(\underline Z_1\), à \(v_2\) via \(\underline Z_2\), et à
+          la masse (\(0\) V) via \(\underline Z_3\).</figcaption>
+        </figure>
+        <p>Trois branches arrivent en \(A\) : \(v_1\) via \(\underline Z_1\), \(v_2\) via
+        \(\underline Z_2\), et la masse (potentiel \(0\)) via \(\underline Z_3\). En appliquant directement la
+        formule de Millman avec \(n=3\) et \(V_3=0\) :</p>
+        <div class="res">\[ \boxed{\ V_A=\dfrac{\dfrac{v_1}{\underline Z_1}+\dfrac{v_2}{\underline Z_2}}
+        {\dfrac{1}{\underline Z_1}+\dfrac{1}{\underline Z_2}+\dfrac{1}{\underline Z_3}}\ } \]</div>
+      </div>
+    </div>
+
+    <h3>3.3 · Le montage amplificateur inverseur</h3>
+    <figure><img src="ch3-img/inverseur-schema.png" alt="Montage amplificateur inverseur : Ve via R1 sur -, R2 en contre-reaction, + relié à la masse">
+      <figcaption>Montage amplificateur inverseur : \(v_e\) via \(R_1\) sur (−), \(R_2\) en contre-réaction
+      entre la sortie et (−), (+) relié à la masse.</figcaption>
+    </figure>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q10 — Montrer que \(v_s=-v_e\times R_2/R_1\) <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Montrer que, pour un montage amplificateur inverseur,
+        \(v_s=v_e\times\left(-\dfrac{R_2}{R_1}\right)\) (donc \(H=-\dfrac{R_2}{R_1}\), déphasage \(\pi\)).</p>
+        <p>La borne (+) est reliée à la masse : \(v_+=0\). Rétroaction sur (−) exclusivement ⟹ régime
+        linéaire ⟹ \(v_-=v_+=0\) : c'est une <b>masse virtuelle</b>. Comme \(i_-=0\) (ALI idéal), le courant
+        qui traverse \(R_1\) (de \(v_e\) vers le nœud (−)) traverse intégralement \(R_2\) (du nœud (−) vers
+        \(v_s\)) :</p>
+        \[ i_1=\frac{v_e-v_-}{R_1}=\frac{v_e}{R_1}\ ,\qquad i_1=\frac{v_--v_s}{R_2}=\frac{-v_s}{R_2} \]
+        \[ \frac{v_e}{R_1}=\frac{-v_s}{R_2}\ \Longrightarrow\ v_s=-v_e\cdot\frac{R_2}{R_1} \]
+        <div class="res">\[ \boxed{\ v_s=-v_e\cdot\frac{R_2}{R_1}\ ,\quad H=-\frac{R_2}{R_1}\ } \]</div>
+        <p><b>Remarque 1.</b> Selon les valeurs relatives de \(R_1\) et \(R_2\), ce montage amplifie
+        (\(R_2>R_1\)) ou atténue (\(R_2<R_1\)) le signal, tout en l'inversant.</p>
+        <p><b>Remarque 2.</b> Contrairement aux deux montages précédents (suiveur, non inverseur), l'impédance
+        d'entrée de ce montage vue par \(v_e\) est \(R_1\) (finie, pas infinie) : un montage amplificateur
+        inverseur inséré dans un circuit plus complexe peut donc <b>affecter les sections en amont</b>
+        (contrairement au suiveur, cf. Q7).</p>
+      </div>
+    </div>
+
+    <h3>3.4 · Le montage intégrateur</h3>
+    <figure><img src="ch3-img/integrateur-schema.png" alt="Montage integrateur : Ve via R sur -, C en contre-reaction, + relié a la masse">
+      <figcaption>Montage intégrateur : \(v_e\) via \(R\) sur (−), condensateur \(C\) en contre-réaction entre
+      la sortie et (−), (+) relié à la masse.</figcaption>
+    </figure>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q11 — Montrer la relation intégrale \(v_s(t)\) du montage intégrateur
+      <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Montrer que, pour un montage intégrateur,
+        \(v_s(t)=v_s(0)-\dfrac{1}{RC}\displaystyle\int_0^t v_e(t')\,dt'\) (donc
+        \(\underline H=-\dfrac{1}{jRC\omega}\)). On exprimera la LNTP à la borne (−) en complexes avant de
+        passer en temporel.</p>
+        <p>Comme en Q10, \(v_+=0\) (masse) et la rétroaction est exclusivement sur (−) : \(v_-=v_+=0\)
+        (masse virtuelle). En complexes, le courant traversant \(R\) (de \(\underline{v_e}\) vers le nœud
+        (−)) est intégralement transmis à \(C\) (de (−) vers \(\underline{v_s}\), \(i_-=0\)) :</p>
+        \[ \underline{i_1}=\frac{\underline{v_e}-0}{R}=\frac{\underline{v_e}}{R}\ ,\qquad
+        \underline{i_C}=j C\omega\,(0-\underline{v_s})=-jC\omega\,\underline{v_s} \]
+        \[ \frac{\underline{v_e}}{R}=-jC\omega\,\underline{v_s}\ \Longrightarrow\
+        \underline H=\frac{\underline{v_s}}{\underline{v_e}}=-\frac{1}{jRC\omega} \]
+        <p>Repassage au temporel : la relation \(i_1=i_C\) s'écrit, en instantané,
+        \(\dfrac{v_e(t)}{R}=-C\dfrac{dv_s}{dt}\), soit \(\dfrac{dv_s}{dt}=-\dfrac{v_e(t)}{RC}\). En intégrant
+        entre \(0\) et \(t\) :</p>
+        <div class="res">\[ \boxed{\ v_s(t)=v_s(0)-\frac{1}{RC}\int_0^t v_e(t')\,dt'\ ,\qquad
+        \underline H=-\frac{1}{jRC\omega}\ } \]</div>
+        <div class="warnbox"><span class="lab">Piège — divergence du vrai intégrateur</span> À basse
+        fréquence, \(|\underline H|\to\infty\) : le montage intégrateur intègre la moindre petite composante
+        continue de \(v_e\), et l'ALI finit par saturer en quelques secondes. Pour éviter ce problème, on
+        ajoute une résistance de fuite \(R'\) en parallèle à \(C\) — on parle alors de montage
+        <b>pseudo-intégrateur</b>.</div>
+        <figure><img src="ch3-img/pseudo-integrateur-schema.png" alt="Montage pseudo-integrateur : R' en parallele a C, en contre-reaction">
+          <figcaption>Pseudo-intégrateur : \(R'\) en parallèle de \(C\), pour borner le gain en basse
+          fréquence et éviter la dérive/saturation.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <h3>3.5 · Le montage dérivateur</h3>
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q12 — Schématiser le montage dérivateur <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="q">Schématiser le montage dérivateur qui suit le comportement
+        \(v_s(t)=-RC\dfrac{dv_e(t)}{dt}\).</p>
+        <p>Le montage dérivateur s'obtient en <b>échangeant</b> les rôles de \(R\) et \(C\) par rapport au
+        montage intégrateur (§3.4) : le condensateur \(C\) passe en entrée (en série avec \(v_e\)), et la
+        résistance \(R\) passe en contre-réaction (entre la sortie et (−)). (+) reste relié à la masse.</p>
+        <figure>
+          <svg viewBox="0 0 480 260" width="480" xmlns="http://www.w3.org/2000/svg" font-family="monospace">
+            <line x1="170" y1="60" x2="170" y2="30" stroke="#1e293b" stroke-width="1.6"/>
+            <line x1="170" y1="30" x2="340" y2="30" stroke="#1e293b" stroke-width="1.6"/>
+            <rect x="228" y="20" width="54" height="20" fill="none" stroke="#1e293b" stroke-width="1.6"/>
+            <line x1="340" y1="30" x2="340" y2="130" stroke="#1e293b" stroke-width="1.6"/>
+            <line x1="40" y1="130" x2="40" y2="178" stroke="#1e293b" stroke-width="1.4"/>
+            <line x1="24" y1="178" x2="56" y2="178" stroke="#1e293b" stroke-width="1.4"/>
+            <line x1="30" y1="184" x2="50" y2="184" stroke="#1e293b" stroke-width="1.4"/>
+            <line x1="35" y1="190" x2="45" y2="190" stroke="#1e293b" stroke-width="1.4"/>
+            <text x="10" y="200" fill="#1e293b" font-size="14">ve</text>
+            <line x1="40" y1="130" x2="128" y2="130" stroke="#1e293b" stroke-width="1.6"/>
+            <line x1="138" y1="112" x2="138" y2="148" stroke="#1e293b" stroke-width="2.4"/>
+            <line x1="150" y1="112" x2="150" y2="148" stroke="#1e293b" stroke-width="2.4"/>
+            <line x1="128" y1="130" x2="138" y2="130" stroke="#1e293b" stroke-width="1.6"/>
+            <line x1="150" y1="130" x2="170" y2="130" stroke="#1e293b" stroke-width="1.6"/>
+            <text x="132" y="104" fill="#1e293b" font-size="15" font-weight="700">C</text>
+            <polygon points="170,98 170,162 250,130" fill="#e2e8f0" stroke="#1e293b" stroke-width="1.8"/>
+            <text x="178" y="118" fill="#1e293b" font-size="14">−</text>
+            <text x="178" y="152" fill="#1e293b" font-size="14">+</text>
+            <line x1="170" y1="150" x2="150" y2="150" stroke="#1e293b" stroke-width="1.4"/>
+            <line x1="150" y1="150" x2="150" y2="188" stroke="#1e293b" stroke-width="1.4"/>
+            <line x1="134" y1="188" x2="166" y2="188" stroke="#1e293b" stroke-width="1.4"/>
+            <line x1="140" y1="194" x2="160" y2="194" stroke="#1e293b" stroke-width="1.4"/>
+            <line x1="145" y1="200" x2="155" y2="200" stroke="#1e293b" stroke-width="1.4"/>
+            <line x1="250" y1="130" x2="340" y2="130" stroke="#1e293b" stroke-width="1.6"/>
+            <line x1="380" y1="130" x2="380" y2="178" stroke="#1e293b" stroke-width="1.4"/>
+            <line x1="364" y1="178" x2="396" y2="178" stroke="#1e293b" stroke-width="1.4"/>
+            <line x1="370" y1="184" x2="390" y2="184" stroke="#1e293b" stroke-width="1.4"/>
+            <line x1="375" y1="190" x2="385" y2="190" stroke="#1e293b" stroke-width="1.4"/>
+            <text x="368" y="200" fill="#1e293b" font-size="14">vs</text>
+            <line x1="340" y1="130" x2="380" y2="130" stroke="#1e293b" stroke-width="1.6"/>
+            <text x="248" y="18" fill="#1e293b" font-size="15" font-weight="700">R</text>
+          </svg>
+          <figcaption>Montage dérivateur (redessiné) : \(v_e\to C\to(-)\), résistance \(R\) en contre-réaction
+          entre la sortie et (−), (+) à la masse. Vérification rapide (non demandée par l'énoncé) : par la
+          même méthode qu'en Q11 (masse virtuelle, \(i_-=0\)), \(\underline{i_C}=jC\omega\,\underline{v_e}\)
+          traverse \(R\) vers la sortie, d'où \(\underline{v_s}=-R\cdot jC\omega\,\underline{v_e}\), soit en
+          temporel \(v_s(t)=-RC\,dv_e/dt\) — bien la relation demandée.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="s4">
+    <h2>4. Des écarts possibles à la réponse linéaire</h2>
+    <p>Même dans le cadre de l'ALI idéal, les réponses \(v_s\) réellement observées peuvent différer de celles
+    prédites au §3, pour plusieurs raisons.</p>
+
+    <h3>Saturation en tension</h3>
+    <p>Puisque \(v_{s,max}=V_{sat}\), une saturation en tension peut se produire si le gain du montage, ou si
+    l'amplitude \(E_m\) du signal d'entrée, sont trop élevés.</p>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q13 — Valeur limite de \(R_2\) pour éviter la saturation en tension
+      <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Proposer une valeur limite pour \(R_2\) dans le cas d'un montage amplificateur inverseur
+        avec un signal d'entrée tel que \(E_m=5{,}0\) V et une résistance \(R_1=100\ \Omega\). Sur un même
+        graphique, tracer l'allure de l'oscillogramme de \(v_s(t)\) dans deux cas distincts : pour
+        \(R_2=200\ \Omega\) et pour \(R_2=400\ \Omega\).</p>
+        <p>D'après Q10, le montage inverseur donne \(v_s=-v_e\times R_2/R_1\). Avec \(v_e\) sinusoïdal
+        d'amplitude \(E_m\), l'amplitude de sortie attendue (sans saturation) est
+        \(|v_s|_{max}=E_m\cdot R_2/R_1\). Pour rester en régime linéaire, il faut que cette amplitude reste
+        sous \(V_{sat}\approx V_{CC}=15\) V (alimentation \(\pm15\) V, §1.1) :</p>
+        \[ E_m\cdot\frac{R_2}{R_1}\le V_{sat}\ \Longrightarrow\ R_2\le\frac{V_{sat}\cdot R_1}{E_m}
+        =\frac{15\times100}{5{,}0} \]
+        <div class="res">\[ \boxed{\ R_2\le300\ \Omega\ } \]</div>
+        <p>Vérification sur les deux cas demandés :</p>
+        <ul>
+          <li>\(R_2=200\ \Omega<300\ \Omega\) : gain \(=2\), amplitude idéale \(=2\times5{,}0=10\) V
+          \(<15\) V — <b>pas de saturation</b>, sinusoïde propre \(\pm10\) V.</li>
+          <li>\(R_2=400\ \Omega>300\ \Omega\) : gain \(=4\), amplitude idéale \(=4\times5{,}0=20\) V
+          \(>15\) V — <b>écrêtage</b> à \(\pm15\) V au lieu des \(\pm20\) V attendus.</li>
+        </ul>
+        <figure>
+          <svg viewBox="0 0 680 380" width="680" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="200" x2="640" y2="200" stroke="#94a3b8" stroke-width="1.4"/>
+<line x1="60" y1="40" x2="60" y2="350" stroke="#94a3b8" stroke-width="1.4"/>
+<text x="642" y="216" fill="#1e293b" font-family="monospace" font-size="12">t</text>
+<line x1="60" y1="107.0" x2="640" y2="107.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54" y="111.0" fill="#94a3b8" font-family="monospace" font-size="10.5" text-anchor="end">+15V</text>
+<line x1="60" y1="138.0" x2="640" y2="138.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54" y="142.0" fill="#94a3b8" font-family="monospace" font-size="10.5" text-anchor="end">+10V</text>
+<line x1="60" y1="262.0" x2="640" y2="262.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54" y="266.0" fill="#94a3b8" font-family="monospace" font-size="10.5" text-anchor="end">-10V</text>
+<line x1="60" y1="293.0" x2="640" y2="293.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54" y="297.0" fill="#94a3b8" font-family="monospace" font-size="10.5" text-anchor="end">-15V</text>
+<line x1="60" y1="107.0" x2="640" y2="107.0" stroke="#dc2626" stroke-width="1" stroke-dasharray="5,3" opacity="0.7"/>
+<line x1="60" y1="293.0" x2="640" y2="293.0" stroke="#dc2626" stroke-width="1" stroke-dasharray="5,3" opacity="0.7"/>
+<path d="M 60.0,262.0 L 64.1,261.9 L 68.3,261.8 L 72.4,261.4 L 76.6,261.0 L 80.7,260.4 L 84.9,259.8 L 89.0,259.0 L 93.1,258.0 L 97.3,257.0 L 101.4,255.9 L 105.6,254.6 L 109.7,253.2 L 113.9,251.7 L 118.0,250.2 L 122.1,248.5 L 126.3,246.7 L 130.4,244.8 L 134.6,242.8 L 138.7,240.8 L 142.9,238.7 L 147.0,236.4 L 151.1,234.2 L 155.3,231.8 L 159.4,229.4 L 163.6,226.9 L 167.7,224.4 L 171.9,221.8 L 176.0,219.2 L 180.1,216.5 L 184.3,213.8 L 188.4,211.1 L 192.6,208.3 L 196.7,205.6 L 200.9,202.8 L 205.0,200.0 L 209.1,197.2 L 213.3,194.4 L 217.4,191.7 L 221.6,188.9 L 225.7,186.2 L 229.9,183.5 L 234.0,180.8 L 238.1,178.2 L 242.3,175.6 L 246.4,173.1 L 250.6,170.6 L 254.7,168.2 L 258.9,165.8 L 263.0,163.6 L 267.1,161.3 L 271.3,159.2 L 275.4,157.2 L 279.6,155.2 L 283.7,153.3 L 287.9,151.5 L 292.0,149.8 L 296.1,148.3 L 300.3,146.8 L 304.4,145.4 L 308.6,144.1 L 312.7,143.0 L 316.9,142.0 L 321.0,141.0 L 325.1,140.2 L 329.3,139.6 L 333.4,139.0 L 337.6,138.6 L 341.7,138.2 L 345.9,138.1 L 350.0,138.0 L 354.1,138.1 L 358.3,138.2 L 362.4,138.6 L 366.6,139.0 L 370.7,139.6 L 374.9,140.2 L 379.0,141.0 L 383.1,142.0 L 387.3,143.0 L 391.4,144.1 L 395.6,145.4 L 399.7,146.8 L 403.9,148.3 L 408.0,149.8 L 412.1,151.5 L 416.3,153.3 L 420.4,155.2 L 424.6,157.2 L 428.7,159.2 L 432.9,161.3 L 437.0,163.6 L 441.1,165.8 L 445.3,168.2 L 449.4,170.6 L 453.6,173.1 L 457.7,175.6 L 461.9,178.2 L 466.0,180.8 L 470.1,183.5 L 474.3,186.2 L 478.4,188.9 L 482.6,191.7 L 486.7,194.4 L 490.9,197.2 L 495.0,200.0 L 499.1,202.8 L 503.3,205.6 L 507.4,208.3 L 511.6,211.1 L 515.7,213.8 L 519.9,216.5 L 524.0,219.2 L 528.1,221.8 L 532.3,224.4 L 536.4,226.9 L 540.6,229.4 L 544.7,231.8 L 548.9,234.2 L 553.0,236.4 L 557.1,238.7 L 561.3,240.8 L 565.4,242.8 L 569.6,244.8 L 573.7,246.7 L 577.9,248.5 L 582.0,250.2 L 586.1,251.7 L 590.3,253.2 L 594.4,254.6 L 598.6,255.9 L 602.7,257.0 L 606.9,258.0 L 611.0,259.0 L 615.1,259.8 L 619.3,260.4 L 623.4,261.0 L 627.6,261.4 L 631.7,261.8 L 635.9,261.9 L 640.0,262.0" fill="none" stroke="#0d9488" stroke-width="2.6"/>
+<path d="M 60.0,293.0 L 64.1,293.0 L 68.3,293.0 L 72.4,293.0 L 76.6,293.0 L 80.7,293.0 L 84.9,293.0 L 89.0,293.0 L 93.1,293.0 L 97.3,293.0 L 101.4,293.0 L 105.6,293.0 L 109.7,293.0 L 113.9,293.0 L 118.0,293.0 L 122.1,293.0 L 126.3,293.0 L 130.4,289.6 L 134.6,285.7 L 138.7,281.6 L 142.9,277.3 L 147.0,272.9 L 151.1,268.3 L 155.3,263.6 L 159.4,258.8 L 163.6,253.8 L 167.7,248.7 L 171.9,243.6 L 176.0,238.3 L 180.1,233.0 L 184.3,227.6 L 188.4,222.1 L 192.6,216.6 L 196.7,211.1 L 200.9,205.6 L 205.0,200.0 L 209.1,194.4 L 213.3,188.9 L 217.4,183.4 L 221.6,177.9 L 225.7,172.4 L 229.9,167.0 L 234.0,161.7 L 238.1,156.4 L 242.3,151.3 L 246.4,146.2 L 250.6,141.2 L 254.7,136.4 L 258.9,131.7 L 263.0,127.1 L 267.1,122.7 L 271.3,118.4 L 275.4,114.3 L 279.6,110.4 L 283.7,107.0 L 287.9,107.0 L 292.0,107.0 L 296.1,107.0 L 300.3,107.0 L 304.4,107.0 L 308.6,107.0 L 312.7,107.0 L 316.9,107.0 L 321.0,107.0 L 325.1,107.0 L 329.3,107.0 L 333.4,107.0 L 337.6,107.0 L 341.7,107.0 L 345.9,107.0 L 350.0,107.0 L 354.1,107.0 L 358.3,107.0 L 362.4,107.0 L 366.6,107.0 L 370.7,107.0 L 374.9,107.0 L 379.0,107.0 L 383.1,107.0 L 387.3,107.0 L 391.4,107.0 L 395.6,107.0 L 399.7,107.0 L 403.9,107.0 L 408.0,107.0 L 412.1,107.0 L 416.3,107.0 L 420.4,110.4 L 424.6,114.3 L 428.7,118.4 L 432.9,122.7 L 437.0,127.1 L 441.1,131.7 L 445.3,136.4 L 449.4,141.2 L 453.6,146.2 L 457.7,151.3 L 461.9,156.4 L 466.0,161.7 L 470.1,167.0 L 474.3,172.4 L 478.4,177.9 L 482.6,183.4 L 486.7,188.9 L 490.9,194.4 L 495.0,200.0 L 499.1,205.6 L 503.3,211.1 L 507.4,216.6 L 511.6,222.1 L 515.7,227.6 L 519.9,233.0 L 524.0,238.3 L 528.1,243.6 L 532.3,248.7 L 536.4,253.8 L 540.6,258.8 L 544.7,263.6 L 548.9,268.3 L 553.0,272.9 L 557.1,277.3 L 561.3,281.6 L 565.4,285.7 L 569.6,289.6 L 573.7,293.0 L 577.9,293.0 L 582.0,293.0 L 586.1,293.0 L 590.3,293.0 L 594.4,293.0 L 598.6,293.0 L 602.7,293.0 L 606.9,293.0 L 611.0,293.0 L 615.1,293.0 L 619.3,293.0 L 623.4,293.0 L 627.6,293.0 L 631.7,293.0 L 635.9,293.0 L 640.0,293.0" fill="none" stroke="#d97706" stroke-width="2.6"/>
+<text x="70" y="60" fill="#0d9488" font-family="monospace" font-size="12" font-weight="700">R2=200 ohm (gain 2, propre, +-10V)</text>
+<text x="70" y="78" fill="#d97706" font-family="monospace" font-size="12" font-weight="700">R2=400 ohm (gain 4, ecrete a +-15V au lieu de +-20V)</text>
+<text x="60" y="24" fill="#334155" font-family="monospace" font-size="13" font-weight="700">Q13 - Saturation en tension, montage inverseur (Em=5V, R1=100 ohm)</text>
+</svg>
+          <figcaption>\(R_2=200\ \Omega\) (vert) : sinusoïde propre \(\pm10\) V. \(R_2=400\ \Omega\) (orange) :
+          écrêtage plat à \(\pm15\) V dès que la sinusoïde idéale dépasserait cette valeur.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <h3>Saturation en courant</h3>
+    <p>Un ALI ne peut délivrer un courant de sortie trop important. Si la résistance de charge est trop
+    faible, la saturation en courant (\(i_{s,max}\approx20\) mA pour un ALI type LM741) est atteinte, et la
+    tension de sortie en est affectée.</p>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q14 — Oscillogramme du suiveur en saturation de courant <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Sur un même graphique, tracer l'allure de l'oscillogramme de \(v_s(t)\) d'un montage
+        suiveur dont le signal d'entrée est sinusoïdal symétrique, d'amplitude \(6{,}0\) V, dans deux cas
+        distincts : lorsque l'ALI est en sortie ouverte, et lorsque la sortie de l'ALI est branchée à une
+        charge de résistance \(200\ \Omega\).</p>
+        <p><b>Sortie ouverte</b> : aucun courant n'est demandé à l'ALI (\(i_s=0\)), donc pas de saturation en
+        courant possible. D'après Q6, \(v_s=v_e\) : sinusoïde propre d'amplitude \(6{,}0\) V.</p>
+        <p><b>Sortie chargée par \(R_0=200\ \Omega\)</b> : le courant délivré par l'ALI est
+        \(i_s=v_s/R_0\). La saturation en courant est atteinte dès que \(|i_s|=i_{s,max}\), soit pour
+        \(|v_s|=i_{s,max}\times R_0\) :</p>
+        \[ |v_s|_{max,\,courant}=20\times10^{-3}\times200=4{,}0\text{ V} \]
+        <p>Comme \(4{,}0\) V \(<6{,}0\) V (amplitude idéale visée), la sortie <b>écrête à \(\pm4{,}0\) V</b>
+        dès que la sinusoïde idéale dépasserait cette valeur.</p>
+        <div class="res">Sortie ouverte : \(v_s=v_e\), sinusoïde propre \(\pm6{,}0\) V. Sortie chargée par
+        \(200\ \Omega\) : écrêtage à \(\pm4{,}0\) V (saturation en courant, \(i_{s,max}\approx20\) mA).</div>
+        <figure>
+          <svg viewBox="0 0 680 340" width="680" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="170" x2="640" y2="170" stroke="#94a3b8" stroke-width="1.4"/>
+<line x1="60" y1="30" x2="60" y2="320" stroke="#94a3b8" stroke-width="1.4"/>
+<text x="642" y="186" fill="#1e293b" font-family="monospace" font-size="12">t</text>
+<line x1="60" y1="95.0" x2="640" y2="95.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54" y="99.0" fill="#94a3b8" font-family="monospace" font-size="10.5" text-anchor="end">6V</text>
+<line x1="60" y1="120.0" x2="640" y2="120.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54" y="124.0" fill="#94a3b8" font-family="monospace" font-size="10.5" text-anchor="end">4V</text>
+<line x1="60" y1="220.0" x2="640" y2="220.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54" y="224.0" fill="#94a3b8" font-family="monospace" font-size="10.5" text-anchor="end">-4V</text>
+<line x1="60" y1="245.0" x2="640" y2="245.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54" y="249.0" fill="#94a3b8" font-family="monospace" font-size="10.5" text-anchor="end">-6V</text>
+<path d="M 60.0,95.0 L 64.1,95.1 L 68.3,95.3 L 72.4,95.7 L 76.6,96.2 L 80.7,96.9 L 84.9,97.7 L 89.0,98.7 L 93.1,99.8 L 97.3,101.0 L 101.4,102.4 L 105.6,104.0 L 109.7,105.6 L 113.9,107.4 L 118.0,109.3 L 122.1,111.4 L 126.3,113.5 L 130.4,115.8 L 134.6,118.2 L 138.7,120.7 L 142.9,123.2 L 147.0,125.9 L 151.1,128.7 L 155.3,131.5 L 159.4,134.5 L 163.6,137.5 L 167.7,140.5 L 171.9,143.6 L 176.0,146.8 L 180.1,150.0 L 184.3,153.3 L 188.4,156.6 L 192.6,159.9 L 196.7,163.3 L 200.9,166.6 L 205.0,170.0 L 209.1,173.4 L 213.3,176.7 L 217.4,180.1 L 221.6,183.4 L 225.7,186.7 L 229.9,190.0 L 234.0,193.2 L 238.1,196.4 L 242.3,199.5 L 246.4,202.5 L 250.6,205.5 L 254.7,208.5 L 258.9,211.3 L 263.0,214.1 L 267.1,216.8 L 271.3,219.3 L 275.4,221.8 L 279.6,224.2 L 283.7,226.5 L 287.9,228.6 L 292.0,230.7 L 296.1,232.6 L 300.3,234.4 L 304.4,236.0 L 308.6,237.6 L 312.7,239.0 L 316.9,240.2 L 321.0,241.3 L 325.1,242.3 L 329.3,243.1 L 333.4,243.8 L 337.6,244.3 L 341.7,244.7 L 345.9,244.9 L 350.0,245.0 L 354.1,244.9 L 358.3,244.7 L 362.4,244.3 L 366.6,243.8 L 370.7,243.1 L 374.9,242.3 L 379.0,241.3 L 383.1,240.2 L 387.3,239.0 L 391.4,237.6 L 395.6,236.0 L 399.7,234.4 L 403.9,232.6 L 408.0,230.7 L 412.1,228.6 L 416.3,226.5 L 420.4,224.2 L 424.6,221.8 L 428.7,219.3 L 432.9,216.8 L 437.0,214.1 L 441.1,211.3 L 445.3,208.5 L 449.4,205.5 L 453.6,202.5 L 457.7,199.5 L 461.9,196.4 L 466.0,193.2 L 470.1,190.0 L 474.3,186.7 L 478.4,183.4 L 482.6,180.1 L 486.7,176.7 L 490.9,173.4 L 495.0,170.0 L 499.1,166.6 L 503.3,163.3 L 507.4,159.9 L 511.6,156.6 L 515.7,153.3 L 519.9,150.0 L 524.0,146.8 L 528.1,143.6 L 532.3,140.5 L 536.4,137.5 L 540.6,134.5 L 544.7,131.5 L 548.9,128.7 L 553.0,125.9 L 557.1,123.2 L 561.3,120.7 L 565.4,118.2 L 569.6,115.8 L 573.7,113.5 L 577.9,111.4 L 582.0,109.3 L 586.1,107.4 L 590.3,105.6 L 594.4,104.0 L 598.6,102.4 L 602.7,101.0 L 606.9,99.8 L 611.0,98.7 L 615.1,97.7 L 619.3,96.9 L 623.4,96.2 L 627.6,95.7 L 631.7,95.3 L 635.9,95.1 L 640.0,95.0" fill="none" stroke="#0d9488" stroke-width="2.6"/>
+<path d="M 60.0,120.0 L 64.1,120.0 L 68.3,120.0 L 72.4,120.0 L 76.6,120.0 L 80.7,120.0 L 84.9,120.0 L 89.0,120.0 L 93.1,120.0 L 97.3,120.0 L 101.4,120.0 L 105.6,120.0 L 109.7,120.0 L 113.9,120.0 L 118.0,120.0 L 122.1,120.0 L 126.3,120.0 L 130.4,120.0 L 134.6,120.0 L 138.7,120.7 L 142.9,123.2 L 147.0,125.9 L 151.1,128.7 L 155.3,131.5 L 159.4,134.5 L 163.6,137.5 L 167.7,140.5 L 171.9,143.6 L 176.0,146.8 L 180.1,150.0 L 184.3,153.3 L 188.4,156.6 L 192.6,159.9 L 196.7,163.3 L 200.9,166.6 L 205.0,170.0 L 209.1,173.4 L 213.3,176.7 L 217.4,180.1 L 221.6,183.4 L 225.7,186.7 L 229.9,190.0 L 234.0,193.2 L 238.1,196.4 L 242.3,199.5 L 246.4,202.5 L 250.6,205.5 L 254.7,208.5 L 258.9,211.3 L 263.0,214.1 L 267.1,216.8 L 271.3,219.3 L 275.4,220.0 L 279.6,220.0 L 283.7,220.0 L 287.9,220.0 L 292.0,220.0 L 296.1,220.0 L 300.3,220.0 L 304.4,220.0 L 308.6,220.0 L 312.7,220.0 L 316.9,220.0 L 321.0,220.0 L 325.1,220.0 L 329.3,220.0 L 333.4,220.0 L 337.6,220.0 L 341.7,220.0 L 345.9,220.0 L 350.0,220.0 L 354.1,220.0 L 358.3,220.0 L 362.4,220.0 L 366.6,220.0 L 370.7,220.0 L 374.9,220.0 L 379.0,220.0 L 383.1,220.0 L 387.3,220.0 L 391.4,220.0 L 395.6,220.0 L 399.7,220.0 L 403.9,220.0 L 408.0,220.0 L 412.1,220.0 L 416.3,220.0 L 420.4,220.0 L 424.6,220.0 L 428.7,219.3 L 432.9,216.8 L 437.0,214.1 L 441.1,211.3 L 445.3,208.5 L 449.4,205.5 L 453.6,202.5 L 457.7,199.5 L 461.9,196.4 L 466.0,193.2 L 470.1,190.0 L 474.3,186.7 L 478.4,183.4 L 482.6,180.1 L 486.7,176.7 L 490.9,173.4 L 495.0,170.0 L 499.1,166.6 L 503.3,163.3 L 507.4,159.9 L 511.6,156.6 L 515.7,153.3 L 519.9,150.0 L 524.0,146.8 L 528.1,143.6 L 532.3,140.5 L 536.4,137.5 L 540.6,134.5 L 544.7,131.5 L 548.9,128.7 L 553.0,125.9 L 557.1,123.2 L 561.3,120.7 L 565.4,120.0 L 569.6,120.0 L 573.7,120.0 L 577.9,120.0 L 582.0,120.0 L 586.1,120.0 L 590.3,120.0 L 594.4,120.0 L 598.6,120.0 L 602.7,120.0 L 606.9,120.0 L 611.0,120.0 L 615.1,120.0 L 619.3,120.0 L 623.4,120.0 L 627.6,120.0 L 631.7,120.0 L 635.9,120.0 L 640.0,120.0" fill="none" stroke="#d97706" stroke-width="2.6"/>
+<text x="70" y="48" fill="#0d9488" font-family="monospace" font-size="12" font-weight="700">sortie ouverte : vs=ve, +-6V</text>
+<text x="70" y="66" fill="#d97706" font-family="monospace" font-size="12" font-weight="700">charge R0=200 ohm : ecrete a +-4V (|ismax|=20mA)</text>
+<text x="60" y="20" fill="#334155" font-family="monospace" font-size="13" font-weight="700">Q14 - Saturation en courant, montage suiveur (Em=6V)</text>
+</svg>
+          <figcaption>Sortie ouverte (vert) : sinusoïde propre \(\pm6\) V. Chargée par \(200\ \Omega\)
+          (orange) : écrêtage plat à \(\pm4\) V dès que \(|i_s|\) atteindrait \(i_{s,max}\).</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <h3>Limitations en fréquence</h3>
+    <ul>
+      <li>Si la fréquence \(f\) de \(v_e(t)\) est trop élevée, le gain différentiel \(A_d\) <b>diminue</b>
+      (d'après le modèle du « gain dynamique », §2.2).</li>
+      <li>Si \(f\) est trop élevée, le <b>délai de réponse</b> de l'ALI à une variation de tension affecte
+      aussi la sortie. Ce délai est caractérisé par la <b>vitesse de balayage</b> de l'ALI (slew rate),
+      \(SR\approx1\) V/µs pour un ALI type LM741.</li>
+    </ul>
+  </section>
+
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Fichier original du cours, déjà présent dans ce dossier. Cliquez pour ouvrir.</p>
+    <div class="docs-group">
+      <h3>Cours</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="Cours3.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Cours3 — ALI en régime linéaire</span><span class="badge">Cours</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Cursus AM2 · P2030 · Semestre 3 · Partie Électronique, D. Courtois, 17/09/2026. Ce
+    chapitre prolonge le <a href="ch2-filtrage-fourier.html">Ch2 — Filtrage/stabilité</a> et introduit les
+    montages à ALI résolus en détail dans le <a href="td3-corrige.html">TD3 corrigé</a>.</p>
+  </section>
+</main>
+<script src="../assets/gate.js"></script>
+</body>
+</html>
