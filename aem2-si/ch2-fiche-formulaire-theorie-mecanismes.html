@@ -15,6 +15,8 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
 <div class="topbar">
   <a href="../index.html#am2">← Accueil</a>
   <span class="spacer"></span>
+  <a href="ch2-td-corrige-theorie-mecanismes.html">✅ TD corrigé</a>
+  <a href="#torseurs">Torseurs</a>
   <a href="#vocab">Vocabulaire</a>
   <a href="#liaisons">Liaisons</a>
   <a href="#formules">Formules</a>
@@ -33,6 +35,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
   <div class="toc-mini">
     <b>Sommaire</b>
     <ul>
+      <li><a href="#torseurs">0. Rappels sur les torseurs — Varignon, changement de point/base, exemples</a></li>
       <li><a href="#vocab">1. Vocabulaire de base</a></li>
       <li><a href="#liaisons">2. Tableau des liaisons usuelles — la façon simple d'avoir \(I_c\) et \(I_s\)</a></li>
       <li><a href="#formules">3. Toutes les formules à connaître par cœur</a></li>
@@ -41,6 +44,114 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
       <li><a href="#interpretation">6. Interpréter le résultat</a></li>
     </ul>
   </div>
+
+  <!-- ======================= RAPPELS TORSEURS =============================== -->
+  <section class="block" id="torseurs">
+    <h2>0. Rappels sur les torseurs — Varignon, changement de point, changement de base</h2>
+
+    <h3>0.1 Définition</h3>
+    <div class="def">
+      <span class="lab">Définition</span>
+      Un <b>torseur</b> \(\{T\}\) est un champ de vecteurs équiprojectif, entièrement défini par sa
+      <b>résultante</b> \(\vec R\) (un seul vecteur, le même en tout point) et son <b>moment</b> \(\vec M_A\)
+      <b>en un point A</b> (qui change avec le point) :
+      \[\{T\} = \left\{ \vec R \, ; \ \vec M_A \right\}_A\]
+      Deux torseurs très utilisés dans ce chapitre partagent la même structure mathématique :
+      <ul style="margin:.3rem 0 0">
+        <li><b>Torseur cinématique</b> \(\{\mathcal V_{2/1}\} = \{\vec\Omega_{2/1}\, ;\ \vec V(A\in2/1)\}_A\)
+        (résultante = vecteur rotation, moment = vecteur vitesse).</li>
+        <li><b>Torseur des actions mécaniques transmissibles</b> \(\{\mathcal T_{1\to2}\} = \{\vec R\, ;\ \vec M_A\}_A\)
+        (résultante = force, moment = moment/couple).</li>
+      </ul>
+    </div>
+
+    <h3>0.2 Relation de Varignon — changement de point (de réduction)</h3>
+    <div class="thm">
+      <span class="lab">★★ À savoir par cœur</span>
+      Pour un même torseur, le moment en un point <b>B</b> se déduit du moment en <b>A</b> par :
+      \[\boxed{\ \vec M_B = \vec M_A + \vec{BA} \wedge \vec R\ }\]
+      C'est la <b>relation de Varignon</b> (ou « relation de transport des moments »). La résultante \(\vec R\)
+      ne change jamais quand on change de point de réduction — seul le moment change.
+    </div>
+    <div class="note">
+      <span class="lab">Cas particulier — torseur cinématique</span>
+      Pour un torseur cinématique, la même relation s'écrit avec les notations habituelles (c'est le champ des
+      vitesses d'un solide, la formule de <b>Varignon appliquée aux vitesses</b>) :
+      \[\vec V(B\in S) = \vec V(A\in S) + \vec\Omega_{S} \wedge \vec{AB} = \vec V(A\in S) + \vec{BA}\wedge\vec\Omega_S\]
+    </div>
+    <div class="method">
+      <span class="lab">★ Astuce pratique</span>
+      Si \(\vec R = \vec 0\) (glisseur d'axe nul, ou torseur couple), le moment est <b>le même en tout point</b> :
+      pas besoin de transporter. C'est le cas d'une liaison qui ne transmet qu'un couple pur (rare) ou d'un
+      torseur cinématique de rotation pure autour d'un axe fixe passant par les deux points.
+    </div>
+
+    <h3>0.3 Changement de base</h3>
+    <div class="method">
+      <span class="lab">★ Méthode</span>
+      \(\vec R\) et \(\vec M_A\) sont de <b>vrais vecteurs</b> : pour les exprimer dans une autre base
+      \((\vec x_2,\vec y_2,\vec z_2)\) obtenue par rotation d'angle \(\theta\) autour d'un axe commun (typiquement
+      \(\vec x_1=\vec x_2\)), on remplace <b>chaque</b> composante grâce aux formules de projection (à lire sur
+      la figure de changement de base) :
+      \[\vec y_2 = \cos\theta\,\vec y_1 + \sin\theta\,\vec z_1 \qquad\qquad \vec z_2 = -\sin\theta\,\vec y_1 + \cos\theta\,\vec z_1\]
+      On applique <b>la même rotation</b> à \(\vec R\) et à \(\vec M_A\) (ce sont deux vecteurs indépendants du
+      même torseur, mais tous deux tournent avec la base de la même façon). Piège classique : le <b>point de
+      réduction ne change pas</b> avec la base — changement de base et changement de point sont deux opérations
+      indépendantes, on peut faire l'une sans l'autre.
+    </div>
+
+    <h3>0.4 Exemples de torseurs usuels et leur écriture</h3>
+    <div class="method">
+      <span class="lab">★ Le vrai raccourci (cf. §2)</span>
+      On ne réinvente jamais ces torseurs : on les <b>lit</b> dans le tableau ci-dessous (liaison d'axe
+      \((O,\vec x)\), base \((\vec x,\vec y,\vec z)\)) puis on les transporte (Varignon) / change de base
+      seulement si le point ou la base imposé par l'énoncé diffère.
+    </div>
+    <div class="overflow">
+    <table>
+      <tr><th>Liaison</th><th>Torseur cinématique en \(O\)</th><th>Torseur d'action transmissible en \(O\)</th></tr>
+      <tr><td>Encastrement</td>
+        <td>\(\{\vec 0\, ;\ \vec 0\}_O\)</td>
+        <td>\(\{X\vec x+Y\vec y+Z\vec z\, ;\ L\vec x+M\vec y+N\vec z\}_O\)</td></tr>
+      <tr><td>Pivot d'axe \((O,\vec x)\)</td>
+        <td>\(\{\omega_x\vec x\, ;\ \vec 0\}_O\)</td>
+        <td>\(\{X\vec x+Y\vec y+Z\vec z\, ;\ M\vec y+N\vec z\}_O\)</td></tr>
+      <tr><td>Glissière d'axe \((O,\vec x)\)</td>
+        <td>\(\{\vec 0\, ;\ v_x\vec x\}_O\)</td>
+        <td>\(\{Y\vec y+Z\vec z\, ;\ L\vec x+M\vec y+N\vec z\}_O\)</td></tr>
+      <tr><td>Pivot glissant d'axe \((O,\vec x)\)</td>
+        <td>\(\{\omega_x\vec x\, ;\ v_x\vec x\}_O\)</td>
+        <td>\(\{Y\vec y+Z\vec z\, ;\ M\vec y+N\vec z\}_O\)</td></tr>
+      <tr><td>Hélicoïdale d'axe \((O,\vec x)\), pas \(p\)</td>
+        <td>\(\{\omega_x\vec x\, ;\ \tfrac{p}{2\pi}\omega_x\vec x\}_O\)</td>
+        <td>\(\{X\vec x+Y\vec y+Z\vec z\, ;\ \tfrac{p}{2\pi}X\vec x+M\vec y+N\vec z\}_O\)</td></tr>
+      <tr><td>Sphérique à doigt (doigt selon \(\vec x\)) de centre \(O\)</td>
+        <td>\(\{\omega_y\vec y+\omega_z\vec z\, ;\ \vec 0\}_O\)</td>
+        <td>\(\{X\vec x+Y\vec y+Z\vec z\, ;\ L\vec x\}_O\)</td></tr>
+      <tr><td>Appui plan de normale \((O,\vec x)\)</td>
+        <td>\(\{\omega_x\vec x\, ;\ v_y\vec y+v_z\vec z\}_O\)</td>
+        <td>\(\{X\vec x\, ;\ M\vec y+N\vec z\}_O\)</td></tr>
+      <tr><td>Sphérique (rotule) de centre \(O\)</td>
+        <td>\(\{\vec\Omega\, ;\ \vec 0\}_O\)</td>
+        <td>\(\{X\vec x+Y\vec y+Z\vec z\, ;\ \vec 0\}_O\)</td></tr>
+      <tr><td>Linéaire annulaire (sphère-cylindre) d'axe \((O,\vec x)\)</td>
+        <td>\(\{\vec\Omega\, ;\ v_x\vec x\}_O\)</td>
+        <td>\(\{Y\vec y+Z\vec z\, ;\ \vec 0\}_O\)</td></tr>
+      <tr><td>Linéaire rectiligne (ligne \((O,\vec x)\), normale \(\vec z\))</td>
+        <td>\(\{\omega_x\vec x+\omega_z\vec z\, ;\ v_x\vec x+v_y\vec y\}_O\)</td>
+        <td>\(\{Z\vec z\, ;\ M\vec y\}_O\)</td></tr>
+      <tr><td>Ponctuelle (normale \((O,\vec z)\))</td>
+        <td>\(\{\vec\Omega\, ;\ v_x\vec x+v_y\vec y\}_O\)</td>
+        <td>\(\{Z\vec z\, ;\ \vec 0\}_O\)</td></tr>
+    </table>
+    </div>
+    <div class="warnbox">
+      <span class="lab">Piège classique</span>
+      Le torseur d'action transmissible est le <b>complémentaire</b> du torseur cinématique composante par
+      composante (jamais les deux torseurs n'ont de composante non nulle sur le <i>même</i> ddl) —
+      c'est le moyen le plus rapide de vérifier qu'on n'a pas inversé les deux tableaux.
+    </div>
+  </section>
 
   <!-- ======================= VOCABULAIRE =============================== -->
   <section class="block" id="vocab">
