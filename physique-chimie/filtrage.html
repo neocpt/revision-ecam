@@ -33,12 +33,33 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
   <div class="toc-mini">
     <b>Sommaire du chapitre</b>
     <ul style="margin:.4rem 0 0">
+      <li><a href="#memo">📌 Fiche mémo</a></li>
       <li><a href="#cours">1. Résumé de cours détaillé (RSF, impédances, Bode)</a></li>
       <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
       <li><a href="#td">3. Correction intégrale du TD (12 EC + 25 exercices)</a></li>
           <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
     </ul>
   </div>
+
+  <section class="memo-sheet" id="memo">
+    <div class="memo-head">📌 Fiche mémo — Filtrage (RSF, Bode)</div>
+    <div class="memo-grid">
+      <div class="memo-item"><b>Impédances complexes</b>\(\underline Z_R=R\), \(\underline Z_C=\dfrac1{jC\omega}\), \(\underline Z_L=jL\omega\)</div>
+      <div class="memo-item"><b>Fonction de transfert</b>\(H(\omega)=\underline s/\underline e\) ; module = amplification, argument = déphasage \(\Delta\phi\)</div>
+      <div class="memo-item"><b>Gain en dB</b>\(G_{dB}=20\log|H|\) ; \(|H|=1/\sqrt2\Rightarrow G_{dB}=-3\)dB</div>
+      <div class="memo-item"><b>Pentes de Bode</b>\(\pm20\)dB/déc = ordre 1 ; \(\pm40\)dB/déc = ordre 2</div>
+      <div class="memo-item"><b>Quatre natures (BF/HF)</b>passe-bas \((e,0)\), passe-haut \((0,e)\), passe-bande \((0,0)\), coupe-bande \((e,e)\)</div>
+      <div class="memo-item"><b>Passe-bas ordre 1</b>\(H=\dfrac1{1+jx}\), \(|H|=\dfrac1{\sqrt{1+x^2}}\)</div>
+      <div class="memo-item"><b>Passe-haut ordre 1</b>\(H=\dfrac{jx}{1+jx}\), \(|H|=\dfrac1{\sqrt{1+1/x^2}}\)</div>
+      <div class="memo-item"><b>RLC série (ordre 2)</b>\(\omega_0=\dfrac1{\sqrt{LC}}\), \(Q=\dfrac1R\sqrt{\dfrac LC}\) ; \(u_C\) passe-bas 2, \(u_L\) passe-haut 2, \(u_R\) passe-bande</div>
+      <div class="memo-item"><b>Résonance en \(u_R\)</b>toujours à \(\omega_R=\omega_0\), \(|H|_{max}=1\), bande passante \(\Delta\omega=\omega_0/Q\)</div>
+      <div class="memo-item"><b>Résonance en \(u_C,u_L\)</b>existe seulement si \(Q>1/\sqrt2\) ; \(|H|_{max}\approx Q\) (surtension)</div>
+      <div class="memo-item"><b>Dérivateur / intégrateur</b>\(\times j\omega\) = dériver, \(\div j\omega\) = intégrer</div>
+      <div class="memo-item method"><b>Étude asymptotique sans calcul</b>remplacer \(C,L\) par leurs équivalents BF/HF (interrupteur ouvert / fil) et lire ce que devient \(s\)</div>
+      <div class="memo-item method"><b>Astuce pour l'argument</b>si la partie réelle du dénominateur change de signe, multiplier \(H\) par \(\pm1\) ou \(\pm j\) pour la rendre toujours positive avant \(\arctan\)</div>
+      <div class="memo-item method"><b>Dimensionner sur un gabarit</b>décades \(\Delta=\log f_2-\log f_1\) → pente requise \(\Delta G/\Delta\) → ordre \(=\) pente\(/20\) arrondi au-dessus → résoudre \(f_0\) dans la pente</div>
+    </div>
+  </section>
 
   <!-- ============================ COURS ============================ -->
   <section class="block" id="cours">

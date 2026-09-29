@@ -40,6 +40,7 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
   <div class="toc-mini">
     <b>Sommaire du chapitre</b>
     <ul style="margin:.4rem 0 0">
+      <li><a href="#memo">📌 Fiche mémo</a></li>
       <li><a href="#cours">1. Cours détaillé</a>
         <ul>
           <li><a href="#c1">1.1 RSF &amp; déphasage entre signaux synchrones</a></li>
@@ -60,6 +61,26 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
       <li><a href="#docs">📂 Documents donnés (cours, TD, corrigés…)</a></li>
     </ul>
   </div>
+
+  <section class="memo-sheet" id="memo">
+    <div class="memo-head">📌 Fiche mémo — RSF, résonance &amp; filtrage</div>
+    <div class="memo-grid">
+      <div class="memo-item"><b>Déphasage synchrone</b>\(\Delta\varphi=\varphi'-\varphi\) : \(0\) en phase, \(\pi\) opposition, \(\pm\pi/2\) quadrature</div>
+      <div class="memo-item"><b>Représentation complexe</b>\(\underline u=U_m e^{j(\omega t+\varphi)}\) ; \(\tfrac{d}{dt}\leftrightarrow\times j\omega\), \(\int dt\leftrightarrow\div j\omega\)</div>
+      <div class="memo-item"><b>Résonance en tension (\(u_C\))</b>existe si \(Q>1/\sqrt2\) ; \(\omega_{réz}=\omega_0\sqrt{1-\tfrac1{2Q^2}}\), \(|U_C|_{max}\approx QE\)</div>
+      <div class="memo-item"><b>Résonance en courant (\(u_R,i\))</b>toujours présente, \(\omega_{réz}=\omega_0\) quel que soit \(Q\), \(|I|_{max}=E/R\)</div>
+      <div class="memo-item"><b>Bande passante</b>\(\Delta\omega=\omega_0/Q\) (exacte en courant, approchée si \(Q\gg1\) en tension)</div>
+      <div class="memo-item"><b>Décomposition de Fourier</b>\(y(t)=Y_0+\sum_n Y_n\cos(n\omega t+\varphi_n)\) : \(Y_0\) continue, \(n=1\) fondamental, \(n\geq2\) harmoniques</div>
+      <div class="memo-item"><b>Valeur moyenne</b>\(\langle y\rangle=Y_0\) ; un sinus pur a une moyenne nulle</div>
+      <div class="memo-item"><b>Valeur efficace</b>\(Y_{eff}=Y_m/\sqrt2\) pour un signal sinusoïdal</div>
+      <div class="memo-item"><b>Parseval</b>\(\langle y^2\rangle=Y_0^2+\tfrac12\sum_n Y_n^2\)</div>
+      <div class="memo-item"><b>Repères Bode</b>\(-3\)dB \(\Leftrightarrow|H|=1/\sqrt2\) ; \(\pm20\)dB/déc = ordre 1, \(\pm40\)dB/déc = ordre 2</div>
+      <div class="memo-item"><b>Bande passante à \(-3\)dB</b>\(|H|>H_{réf}/\sqrt2\Leftrightarrow G_{dB}>G_{réf}-3\)dB</div>
+      <div class="memo-item"><b>Cascade de filtres</b>\(H_{tot}=H_1H_2\) seulement si \(|Z_{s1}|\ll|Z_{e2}|\) ; sinon \(H_{tot}=\dfrac{H_1H_2}{1+Z_{s1}/Z_{e2}}\)</div>
+      <div class="memo-item method"><b>Nature d'un filtre sans calcul</b>remplacer \(C,L\) par leurs équivalents BF/HF et regarder si \(s=e\) (passe) ou \(s=0\) (coupe)</div>
+      <div class="memo-item method"><b>Moyenneur / dérivateur / intégrateur</b>moyenneur = passe-bas \(f_c\ll f\) ; dérivateur = passe-haut 1er ordre \(f\ll f_c\) ; intégrateur = passe-bas 1er ordre \(f\gg f_c\)</div>
+    </div>
+  </section>
 
   <!-- ============================ COURS ============================ -->
   <section class="block" id="cours">

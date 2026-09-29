@@ -33,12 +33,31 @@ window.MathJax = {
   <div class="toc-mini">
     <b>Sommaire du chapitre</b>
     <ul style="margin:.4rem 0 0">
+      <li><a href="#memo">📌 Fiche mémo</a></li>
       <li><a href="#cours">1. Résumé de cours détaillé</a></li>
       <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
       <li><a href="#td">3. Correction du TD (formes canoniques, four, RAMSES, hémodialyse, caméra PTZ)</a></li>
           <li><a href="#docs">📂 Documents donnés (CM, TD, corrigés…)</a></li>
     </ul>
   </div>
+
+  <section class="memo-sheet" id="memo">
+    <div class="memo-head">📌 Fiche mémo — C06 Modéliser en SLCI</div>
+    <div class="memo-grid">
+      <div class="memo-item"><b>SLCI</b>Linéaire, Continu, Invariant : équation différentielle linéaire à coefficients constants</div>
+      <div class="memo-item"><b>Laplace</b>\(\mathcal L[f^{(n)}]=p^nF(p)\) ; échelon \(E_0\to E_0/p\) ; blocs en série : \(H_{eq}=H_1H_2\)</div>
+      <div class="memo-item"><b>Fonction de transfert</b>\(H(p)=S(p)/E(p)=N(p)/D(p)\), indépendante de l'entrée</div>
+      <div class="memo-item method"><b>Forme canonique</b>factoriser \(N(p)\) et \(D(p)\) par leur terme de plus bas degré → identifier \(K\) (gain), \(\alpha\) (classe), \(n\) (ordre)</div>
+      <div class="memo-item"><b>Stabilité</b>pôles à partie réelle \(<0\) ⟺ classe 0 et tous les coefficients de \(D(p)\) de même signe (suffisant ordre 1-2 ; ordre 3 : en plus \(a_1a_2>a_0a_3\))</div>
+      <div class="memo-item"><b>Valeur finale</b>\(s(+\infty)=\lim_{p\to0}pS(p)\) ; classe 0 + échelon \(E_0\) : \(s(+\infty)=KE_0\)</div>
+      <div class="memo-item"><b>Superposition</b>\(S=H_1E+H_2P\), poursuite \(=S/E|_{P=0}\), régulation \(=S/P|_{E=0}\)</div>
+      <div class="memo-item"><b>1ᵉʳ ordre</b>\(s(t)=KE_0(1-e^{-t/\tau})\), 63 % à \(t=\tau\), \(t_{r5\%}\approx3\tau\)</div>
+      <div class="memo-item"><b>2ᵉ ordre — régimes</b>\(z\geqslant1\) non oscillatoire ; \(0<z<1\) oscillatoire amorti (\(\omega_a=\omega_0\sqrt{1-z^2}\), \(T_a=2\pi/\omega_a\))</div>
+      <div class="memo-item"><b>2ᵉ ordre non oscillatoire</b>si \(\tau_1/\tau_2<0{,}25\) : \(1/\omega_0^2=\tau_1\tau_2\), \(2z/\omega_0=\tau_1+\tau_2\)</div>
+      <div class="memo-item"><b>Rapidité optimale</b>\(t_{r5\%}\) minimal pour \(z=0{,}69\) (\(t_{r5\%}\omega_0\approx3\))</div>
+      <div class="memo-item method"><b>Identifier un 2ᵉ ordre oscillatoire</b>\(K=\Delta s(\infty)/E_0\) ; \(z\) via \(D_1\%=e^{-z\pi/\sqrt{1-z^2}}\) ; \(\omega_0=\omega_a/\sqrt{1-z^2}\) via \(T_a\) mesurée</div>
+    </div>
+  </section>
 
   <!-- ======================= COURS =============================== -->
   <section class="block" id="cours">
