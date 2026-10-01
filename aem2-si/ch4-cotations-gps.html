@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cotations GPS — SI AM2 — Révision ECAM</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div class="topbar">
+  <a href="../index.html#am2">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SI AM2 (2ᵉ année) · Chapitre C01 — Cotations GPS</span>
+  <h1 class="title">Cotations GPS (dessin technique et tolérancement)</h1>
+  <p class="lead">Résumé de cours : spécification géométrique des produits (GPS), tolérancement dimensionnel
+  (ajustements ISO, système de l'alésage normal H), états de surface (rugosité \(R_a\)) et tolérancement
+  géométrique (forme, orientation, position, battement — norme NF ISO 1101). Pas de TD officiel dans la source :
+  la section « Exercices créés » propose 3 applications numériques originales. Source : <i>S2I CM C01 — Cotations
+  GPS</i> (13 p., scan image).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire</b>
+    <ul>
+      <li><a href="#memo">📌 Fiche mémo</a></li>
+      <li><a href="#principes">1. Principes et vocabulaire</a></li>
+      <li><a href="#dimensionnel">2. Tolérancement dimensionnel — ajustements ISO</a></li>
+      <li><a href="#surface">3. États de surface</a></li>
+      <li><a href="#geometrique">4. Tolérancement géométrique</a></li>
+      <li><a href="#exos">5. Exercices créés (lecture de cotation, interprétation)</a></li>
+      <li><a href="#docs">📂 Documents donnés</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= MEMO ==================================== -->
+  <section class="memo-sheet" id="memo">
+    <div class="memo-head">📌 Fiche mémo — Cotations GPS</div>
+    <div class="memo-grid">
+      <div class="memo-item"><b>Principe d'indépendance</b>Chaque exigence (dimensionnelle ou géométrique) doit être respectée seule, indépendamment des autres</div>
+      <div class="memo-item"><b>Intervalle de tolérance</b>\(IT=D_{max}-D_{min}=E_s-E_i\) ; \(E_i=D_{min}-D\), \(E_s=D_{max}-D\) (\(D\)=cote nominale)</div>
+      <div class="memo-item"><b>Écriture ajustement</b>\(\varnothing50\,\dfrac{H7}{g6}\) : alésage en MAJUSCULE, arbre en minuscule, cote nominale commune</div>
+      <div class="memo-item"><b>Système de l'alésage normal H</b>Alésage H toujours pris comme base, \(E_i=0\) systématiquement (dimension mini = cote nominale)</div>
+      <div class="memo-item"><b>Jeu / serrage (système H)</b>H/h et au-dessus (H/g, H/f...) → jeu ; H/p et en-dessous → serrage ; entre les deux → incertain</div>
+      <div class="memo-item method"><b>Mnémotechnique ajustements</b>H7<b>g</b>6 : <b>g</b>lissant (jeu) ; H7<b>m</b>6 : <b>m</b>aillet (serrage léger) ; H7<b>p</b>6 : <b>p</b>resse (serrage fort)</div>
+      <div class="memo-item"><b>Le seul à connaître</b>H7/g6 : idéal pour positionner 2 pièces en gardant un jeu réduit</div>
+      <div class="memo-item"><b>Qualité IT</b>Plus le chiffre est bas, plus l'IT est petit (précis) ; qualités usuelles : IT5 à IT13 ; coût croît exponentiellement avec la précision</div>
+      <div class="memo-item"><b>Rugosité \(R_a\)</b>écart moyen arithmétique (moyenne des \(|Z(x)|\)) ; \(R_a{=}25\) rugueux, \(R_a{=}3{,}2\) fin moyen, \(R_a{=}0{,}2\) haut niveau</div>
+      <div class="memo-item"><b>4 familles de tolérances géométriques</b>forme (seules, sans référence), orientation, position, battement (ces 3 dernières avec référence(s))</div>
+      <div class="memo-item"><b>Tolérances de forme</b>planéité ▱, rectitude —, circularité ○, cylindricité ⌭, profil de ligne/surface</div>
+      <div class="memo-item"><b>Tolérances d'orientation/position</b>parallélisme ∥, perpendicularité ⊥, inclinaison ∠, localisation ⊕, symétrie ≡, coaxialité/concentricité ◎</div>
+      <div class="memo-item method"><b>Lire une zone cylindrique \(\varnothing t\)</b>l'axe réel doit rester à l'intérieur d'un cylindre de diamètre \(t\) — écart max au centre = \(t/2\) (le rayon, pas le diamètre !)</div>
+      <div class="memo-item method"><b>Angle max sur une longueur \(L\)</b>pour une tolérance \(t\) de perpendicularité/parallélisme sur une hauteur \(L\) : \(\tan\theta_{max}=t/L\)</div>
+    </div>
+  </section>
+
+  <!-- ======================= PRINCIPES ==================================== -->
+  <section class="block" id="principes">
+    <h2>1. Principes et vocabulaire</h2>
+    <div class="def">
+      <span class="lab">Spécification géométrique des produits (GPS)</span>
+      Méthode normalisée (fin des années 1990) qui définit, à travers un dessin de définition : la forme, les
+      dimensions et les états de surface d'une pièce assurant son fonctionnement optimal (<b>dimensionnement +
+      états de surface</b>), et les dispersions autour de cet optimal pour lesquelles la fonction reste satisfaite
+      (<b>tolérancement</b>). Deux types de spécifications :
+      <ul style="margin:.3rem 0 0">
+        <li><b>Spécification dimensionnelle</b> : la distance entre 2 points (bi-point) doit être comprise dans
+        un intervalle de tolérance.</li>
+        <li><b>Spécification géométrique</b> : l'élément mesuré (surface, ligne, point) ou un élément dérivé
+        (axe, plan médian...) doit être compris dans une zone de tolérance donnée.</li>
+      </ul>
+    </div>
+    <div class="thm">
+      <span class="lab">★ Principe d'indépendance</span>
+      Chaque exigence dimensionnelle ou géométrique spécifiée sur un dessin doit être respectée <b>en
+      elle-même</b>, indépendamment des autres exigences (sauf indication particulière : exigence de l'enveloppe,
+      principe du maximum de matière).
+    </div>
+    <div class="warnbox">
+      <span class="lab">Piège classique</span>
+      Une spécification <b>dimensionnelle ne limite pas</b> les écarts de forme de la pièce ! Un diamètre coté
+      Ø40±0,05 sans tolérance géométrique associée peut, en toute rigueur, être ovalisé ou courbé — seule une
+      tolérance géométrique (circularité, rectitude...) l'interdit.
+    </div>
+    <div class="note">
+      <span class="lab">Vocabulaire — les 4 « niveaux » d'un élément</span>
+      <b>Modèle nominal</b> (dessin/CAO, parfait) → <b>Pièce</b> réelle (élément réel, avec défauts) →
+      <b>Représentation extraite</b> (points/lignes relevés par la métrologie sur la pièce réelle) →
+      <b>Représentation associée</b> (élément idéal — droite, cylindre... — ajusté au mieux sur les points
+      extraits, c'est lui qu'on compare à la tolérance).
+    </div>
+  </section>
+
+  <!-- ======================= DIMENSIONNEL ==================================== -->
+  <section class="block" id="dimensionnel">
+    <h2>2. Tolérancement dimensionnel — ajustements ISO</h2>
+    <div class="def">
+      <span class="lab">Intervalle de tolérance (IT)</span>
+      Une spécification dimensionnelle limite les dimensions locales (bi-points, mesurables au pied à coulisse)
+      dans un intervalle \((D_{min},D_{max})=(D+E_i,\,D+E_s)\) :
+      \[E_i=D_{min}-D\ (\text{écart inférieur})\qquad E_s=D_{max}-D\ (\text{écart supérieur})\qquad IT=D_{max}-D_{min}=E_s-E_i\]
+      <span class="note" style="display:block;margin-top:.5rem">Convention usuelle : cotes en millimètre [mm],
+      tolérances en micromètre [µm] — cela permet de ne manipuler que des entiers.</span>
+    </div>
+
+    <h3>2.1 Ajustement ISO</h3>
+    <div class="method">
+      <span class="lab">★ Écriture normalisée</span>
+      Une cote d'ajustement rassemble en une seule cote les dimensions tolérancées d'un arbre et d'un alésage
+      destinés à être assemblés : <b>cote nominale commune</b> + <b>classe de tolérance de l'alésage</b> (lettre
+      en MAJUSCULE, ex. H7) + <b>classe de tolérance de l'arbre</b> (lettre en minuscule, ex. g6) :
+      \[\varnothing50\,\text{H7/g6}\qquad\text{ou}\qquad\varnothing50\ \begin{array}{l}\text{H7}\\\text{g6}\end{array}\]
+      La lettre définit le <b>système d'ajustement</b> (position de l'IT par rapport au nominal), le chiffre
+      définit la <b>qualité</b> (précision d'usinage, cf. IT5→IT13 les plus courants).
+    </div>
+
+    <h3>2.2 Système de l'alésage normal H</h3>
+    <figure>
+      <img src="img/c01-systeme-h.png" alt="Système de l'alésage normal H (gauche) et de l'arbre normal h (droite) — étagement des lettres a→z autour de la ligne zéro" loading="lazy">
+      <figcaption>Système H (le plus utilisé) : l'alésage H est toujours pris comme base, \(E_i^{H}=0\)
+      systématiquement. Les lettres a→z de l'arbre s'étagent de « jeu » à « serrage ».</figcaption>
+    </figure>
+    <div class="def">
+      C'est le système le plus utilisé (le plus simple pour choisir un ajustement) : <b>l'alésage H est toujours
+      pris comme base</b>, sa dimension minimale est toujours égale à la cote nominale (donc \(E_i=0\) toujours
+      pour un alésage H).
+    </div>
+    <div class="note">
+      <span class="lab">Jeu, serrage ou incertain ?</span>
+      À partir de H/h et au-dessus (H/g, H/f, H/e...) : toujours du <b>jeu</b> (croissant de h vers a). À partir
+      de H/p et en-dessous (H/s, H/u...) : toujours du <b>serrage</b> (croissant de p vers z). Entre les deux
+      (H/js, H/k, H/n...) : <b>incertain</b> (jeu ou serrage selon la pièce réelle, à l'intérieur des IT).
+    </div>
+    <div class="method">
+      <span class="lab">★ Moyen mnémotechnique</span>
+      <ul style="margin:.3rem 0 0">
+        <li><b>H7g6</b> : <b>g</b>lissant (avec jeu) — assemblage possible à la main, guidage précis.</li>
+        <li><b>H7m6</b> : <b>m</b>aillet (serrage « léger ») — assemblage au maillet, jeu incertain.</li>
+        <li><b>H7p6</b> : <b>p</b>resse (serrage important) — assemblage à la presse.</li>
+      </ul>
+      <b>Le seul ajustement à connaître par cœur : H7/g6</b>, idéal pour positionner deux pièces en gardant un
+      jeu réduit (guidage précis, cas très fréquent en construction mécanique).
+    </div>
+    <div class="note">
+      <span class="lab">Correspondance H/h</span>
+      On peut transposer en prenant l'arbre comme référence (système de l'arbre normal h, \(e_s^h=0\)). H7/g6 et
+      G7/h6 donnent le même jeu ; de même H7/p6 et P7/h6.
+    </div>
+  </section>
+
+  <!-- ======================= SURFACE ==================================== -->
+  <section class="block" id="surface">
+    <h2>3. États de surface</h2>
+    <div class="def">
+      <span class="lab">Rugosité \(R_a\)</span>
+      En plus des dimensions, on définit la qualité de réalisation des surfaces (NF EN ISO 1302). \(R_a\)
+      (critère le plus utilisé) = écart moyen arithmétique : moyenne des valeurs absolues des écarts \(Z(x)\) du
+      profil réel sur la longueur de base, exprimée en µm. L'indication se place sous la barre horizontale
+      droite du symbole d'état de surface (procédé de fabrication au-dessus, \(R_a\) et paramètres
+      complémentaires en-dessous).
+    </div>
+    <div class="overflow">
+    <table>
+      <tr><th>\(R_a\) (µm)</th><th>Qualité</th></tr>
+      <tr><td>25</td><td>Surface très rugueuse (sciage, oxycoupage)</td></tr>
+      <tr><td>6,3</td><td>Surface grossière</td></tr>
+      <tr><td>3,2</td><td>Finition moyenne (usinage courant)</td></tr>
+      <tr><td>0,2</td><td>Finition de haut niveau (rectification, rodage)</td></tr>
+    </table>
+    </div>
+    <div class="warnbox">
+      <span class="lab">À retenir</span>
+      L'état de surface d'une pièce est une grandeur <b>dépendante du sens</b> dans lequel on la mesure
+      (rugosité différente selon qu'on mesure dans le sens des stries d'usinage ou perpendiculairement).
+    </div>
+  </section>
+
+  <!-- ======================= GEOMETRIQUE ==================================== -->
+  <section class="block" id="geometrique">
+    <h2>4. Tolérancement géométrique</h2>
+    <div class="def">
+      <span class="lab">Généralités</span>
+      Les tolérances dimensionnelles usuelles ne suffisent pas à définir avec exactitude la forme géométrique
+      d'un objet. Les tolérances géométriques corrigent cette insuffisance et précisent les variations permises —
+      elles sont <b>toujours plus restrictives</b> que les tolérances dimensionnelles (elles s'y ajoutent, ne les
+      remplacent pas).
+    </div>
+    <figure>
+      <img src="img/c01-tolerances-geo-types.png" alt="Tableau des tolérances géométriques NF ISO 1101 : forme, orientation, position, battement, avec symboles normalisés" loading="lazy">
+      <figcaption>Les 14 types de tolérances géométriques normalisées (NF ISO 1101), classées en 4 familles.</figcaption>
+    </figure>
+
+    <h3>4.1 Tolérances de forme — s'utilisent seules, sans référence</h3>
+    <div class="overflow">
+    <table>
+      <tr><th>Type</th><th>S'applique à</th><th>Signification</th></tr>
+      <tr><td><b>Planéité</b></td><td>surface</td><td>la surface réelle doit rester comprise entre 2 plans parallèles distants de \(t\)</td></tr>
+      <tr><td><b>Rectitude</b></td><td>axe, ligne</td><td>chaque génératrice (ou l'axe) doit rester entre 2 droites parallèles distantes de \(t\), ou dans un cylindre \(\varnothing t\) pour un axe</td></tr>
+      <tr><td><b>Circularité</b></td><td>cylindre, cône</td><td>le contour de chaque section perpendiculaire à l'axe doit rester entre 2 cercles concentriques distants de \(t\)</td></tr>
+      <tr><td><b>Cylindricité</b></td><td>cylindre</td><td>la périphérie doit être contenue entre 2 cylindres coaxiaux distants de \(t\) (englobe rectitude + circularité)</td></tr>
+      <tr><td><b>Profil de ligne / surface</b></td><td>ligne, surface</td><td>le profil réel doit rester dans une bande/enveloppe de largeur \(t\) autour du profil théorique</td></tr>
+    </table>
+    </div>
+
+    <h3>4.2 Tolérances d'orientation, de position, de battement — nécessitent une référence</h3>
+    <div class="overflow">
+    <table>
+      <tr><th>Type</th><th>Signification</th></tr>
+      <tr><td><b>Parallélisme</b> ∥</td><td>l'élément toléré doit rester entre 2 plans (ou 2 droites) distants de \(t\), parallèles à la référence</td></tr>
+      <tr><td><b>Perpendicularité</b> ⊥</td><td>l'axe (ou la surface) doit être compris dans une zone de largeur/diamètre \(t\) perpendiculaire à la référence</td></tr>
+      <tr><td><b>Inclinaison</b> ∠</td><td>idem, mais orienté d'un angle théorique donné par rapport à la référence (ni // ni ⊥)</td></tr>
+      <tr><td><b>Localisation</b> ⊕</td><td>l'élément (axe, plan médian, point) doit être situé dans une zone (cylindre, sphère...) centrée sur sa position théorique exacte, repérée par des cotes encadrées et une ou plusieurs références</td></tr>
+      <tr><td><b>Symétrie</b> ≡</td><td>le plan médian doit rester entre 2 plans distants de \(t\), disposés symétriquement par rapport au plan médian de référence</td></tr>
+      <tr><td><b>Coaxialité / concentricité</b> ◎</td><td>l'axe doit être contenu dans un cylindre \(\varnothing t\) coaxial à l'axe de référence</td></tr>
+      <tr><td><b>Battement simple / total</b></td><td>écart maximal mesuré (radial, axial ou oblique) pendant une rotation complète de la pièce autour de l'axe de référence</td></tr>
+    </table>
+    </div>
+    <div class="method">
+      <span class="lab">★ Repérage sur le dessin</span>
+      Une <b>référence</b> (lettre A, B, C…) se repère par un triangle plein sur l'élément concerné (ligne/surface
+      directement, ou sur le prolongement de la cote pour un axe/plan médian). L'élément <b>toléré</b> se repère
+      par une flèche partant du cadre de tolérance, de la même façon.
+    </div>
+
+    <h3>4.3 Exemple de remplissage d'un tableau de tolérance</h3>
+    <figure>
+      <img src="img/c01-exemple-remplissage.png" alt="Exemple d'analyse d'une spécification de localisation ⊕0,2 C : éléments réels, référence spécifiée, zone de tolérance" loading="lazy">
+      <figcaption>Analyse d'une spécification \(\oplus\,0{,}2\ C\) (localisation) : distinction entre <b>éléments
+      non idéaux</b> (la pièce réelle) et <b>éléments idéaux</b> (le modèle utilisé pour juger la conformité).</figcaption>
+    </figure>
+    <div class="method">
+      <span class="lab">★ Méthode de lecture d'une spécification</span>
+      <ol style="margin:.3rem 0 0">
+        <li>Identifier le <b>type</b> de spécification (symbole) et la valeur \(t\) de tolérance.</li>
+        <li>Identifier l'<b>élément toléré</b> (flèche) et la ou les <b>référence(s) spécifiée(s)</b> (triangle(s),
+        lettres dans le cadre).</li>
+        <li>Construire la <b>référence</b> : élément idéal (plan/droite parfait) tangent ou ajusté au mieux sur
+        l'élément réel de référence.</li>
+        <li>Construire la <b>zone de tolérance</b> : volume/surface idéal(e) de largeur \(t\), positionné(e)
+        exactement (cotes théoriques, sans tolérance propre) par rapport à la référence.</li>
+        <li>Condition de conformité : l'élément réel toléré doit être situé <b>tout entier</b> à l'intérieur de
+        cette zone.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ======================= EXOS ==================================== -->
+  <section class="block" id="exos">
+    <h2>5. Exercices créés</h2>
+    <p>Aucun TD officiel n'accompagne ce cours : les 3 exercices suivants ont été construits pour appliquer les
+    notions ci-dessus (ajustement ISO, lecture de tolérance géométrique, calcul d'angle maximal).</p>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice A — Calcul d'un ajustement ISO <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Un arbre est monté dans un alésage selon l'ajustement \(\varnothing40\,\text{H7/g6}\).
+        À l'aide des extraits de tables ISO du cours (plage de dimensions nominales 30 à 50 mm) : \(\text{H7}\) :
+        \(E_i=0\), \(E_s=+25\,\)µm ; \(\text{g6}\) : \(e_s=-9\,\)µm, \(e_i=-20\,\)µm. Calculer les cotes limites de
+        l'alésage et de l'arbre, puis le jeu minimal et le jeu maximal de cet assemblage. L'ajustement est-il
+        cohérent avec la règle du cours (H7/g6 → jeu) ?</p>
+        <p class="q">1) Cotes limites de l'alésage (H7)</p>
+        \[D_{min}=D+E_i=40{,}000+0=40{,}000\ \text{mm}\qquad D_{max}=D+E_s=40{,}000+0{,}025=40{,}025\ \text{mm}\]
+        <p class="q">2) Cotes limites de l'arbre (g6)</p>
+        \[d_{max}=D+e_s=40{,}000-0{,}009=39{,}991\ \text{mm}\qquad d_{min}=D+e_i=40{,}000-0{,}020=39{,}980\ \text{mm}\]
+        <p class="q">3) Jeu minimal et maximal</p>
+        \[J_{min}=D_{min}-d_{max}=40{,}000-39{,}991=0{,}009\ \text{mm}=9\ \text{µm}\]
+        \[J_{max}=D_{max}-d_{min}=40{,}025-39{,}980=0{,}045\ \text{mm}=45\ \text{µm}\]
+        <div class="res">\(J_{min}=9\,\)µm \(>0\) et \(J_{max}=45\,\)µm \(>0\) : l'assemblage a <b>toujours du
+        jeu</b> (jamais de serrage, même dans le pire des cas) — cohérent avec la règle du cours (à partir de
+        H/g, toujours du jeu). L'IT de l'alésage (\(25\,\)µm) est bien supérieur à celui de l'arbre (\(11\,\)µm),
+        conformément à la remarque du cours.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice B — Interprétation d'une tolérance de localisation <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Un trou de \(\varnothing12\) est spécifié \(\oplus\ \varnothing0{,}08\ A\), avec des
+        cotes théoriques encadrées de 25 mm et 45 mm par rapport à la référence \(A\) (surface plane). Décrire la
+        zone de tolérance, puis déterminer l'écart de position maximal admissible du centre du trou par rapport
+        à sa position théorique, dans n'importe quelle direction du plan.</p>
+        <p class="q">1) Description de la zone</p>
+        <p>Le symbole \(\oplus\) (localisation) avec une seule référence \(A\) et un diamètre de zone \(\varnothing0{,}08\)
+        définit une <b>zone cylindrique de diamètre 0,08 mm</b>, d'axe perpendiculaire à \(A\), positionnée
+        exactement par les cotes théoriques 25 et 45 mm (sans tolérance propre — c'est le rôle des cotes
+        <b>encadrées</b>). L'axe réel du trou de \(\varnothing12\) doit être contenu tout entier à l'intérieur de
+        ce petit cylindre.</p>
+        <p class="q">2) Écart maximal du centre</p>
+        <div class="warnbox"><span class="lab">Piège classique</span> On donne le <b>diamètre</b> de la zone
+        (0,08 mm), pas son rayon : l'écart maximal du centre par rapport à la position théorique, dans
+        n'importe quelle direction, est donc la <b>moitié</b> du diamètre.</div>
+        <div class="res">\[\text{écart maxi}=\dfrac{\varnothing0{,}08}{2}=0{,}04\ \text{mm}=40\ \text{µm}\]
+        Le centre réel du trou peut se trouver n'importe où à l'intérieur d'un disque de rayon 0,04 mm centré sur
+        la position théorique (25 ; 45), quelle que soit la direction de l'écart.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice C — Perpendicularité : angle de désalignement maximal <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Une surface plane, de hauteur utile \(L=50\,\)mm, est spécifiée
+        \(\perp\ 0{,}1\ A\) (perpendicularité par rapport à une référence \(A\)). Cette surface doit rester
+        comprise entre 2 plans parallèles distants de \(t=0{,}1\,\)mm, perpendiculaires à \(A\). Déterminer
+        l'angle maximal \(\theta_{max}\) dont la surface réelle peut s'écarter de la perpendicularité stricte.</p>
+        <p class="q">Mise en équation</p>
+        <p>Dans le pire des cas, la surface réelle est un plan incliné qui reste tangent aux deux plans limites
+        de la zone de tolérance sur toute la hauteur \(L\) : l'écart transversal maximal entre le haut et le bas
+        de la surface est alors égal à la largeur de la zone \(t\) (cas limite où le défaut d'inclinaison
+        « consomme » toute la tolérance sur la hauteur \(L\)). On a un petit triangle rectangle de côtés
+        opposé \(t\) et adjacent \(L\) :</p>
+        \[\tan\theta_{max}=\dfrac{t}{L}=\dfrac{0{,}1}{50}=0{,}002\]
+        <div class="res">\[\theta_{max}=\arctan(0{,}002)\approx0{,}115°\ (\approx6{,}9\ \text{minutes d'arc})\]</div>
+        <p>Interprétation physique : un écart angulaire supérieur à environ 0,115° ferait sortir la surface
+        réelle de la zone de tolérance de 0,1 mm avant même d'atteindre la hauteur \(L=50\,\)mm — c'est donc bien
+        la valeur limite admissible pour un défaut d'inclinaison pur (sans défaut de forme superposé).</p>
+        <div class="note"><span class="lab">À retenir</span> Plus la <b>hauteur de référence \(L\)</b> est
+        grande, plus l'angle maximal admissible \(\theta_{max}=\arctan(t/L)\) est <b>petit</b> à tolérance \(t\)
+        égale — d'où l'usage de mesurer les défauts d'orientation sur la plus grande longueur utile disponible
+        pour être plus exigeant (ou au contraire sur une longueur réduite si on veut assouplir la contrainte).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= DOCS ==================================== -->
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <div class="docs-group">
+      <h3>Cours</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="S2I_CM_C01_Cotations_GPS.pdf"><span class="ic">📄</span><span class="nm">S2I_CM_C01_Cotations_GPS.pdf</span><span class="badge">Cours</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Ressources complémentaires (manuels de référence, non utilisés comme source principale)</h3>
+      <p style="margin:.3rem 0; font-size:.9rem; opacity:.85">Deux ouvrages de référence générale sont présents
+      dans le dossier Moodle du chapitre (non copiés ici, trop volumineux — ~350 Mo et ~77 Mo) :
+      <i>Guide des Sciences et Technologies Industrielles</i> (Fanchon, 2007) et <i>Guide du Dessinateur
+      Industriel</i> (GDI, Chevalier, 2004). Ce sont des manuels généraux de mécanique/dessin technique, à
+      consulter en complément si besoin — le cours ci-dessus est basé exclusivement sur le CM du prof.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Généré comme support de révision personnel · Contenu basé sur le CM de S2I de l'ECAM · Exercices créés
+  originaux (pas de TD officiel).
+</footer>
+<script src="../assets/gate.js"></script>
+</body>
+</html>

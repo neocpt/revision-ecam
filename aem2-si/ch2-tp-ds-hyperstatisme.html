@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Théorie des mécanismes — TP et DS corrigés — SI AM2 — Révision ECAM</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div class="topbar">
+  <a href="../index.html#am2">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="ch2-fiche-formulaire-theorie-mecanismes.html">📋 Fiche</a>
+  <a href="ch2-td-corrige-theorie-mecanismes.html">TD corrigé</a>
+  <a href="#tp">TP Hyperstatisme</a>
+  <a href="#hydro">DS22 — Hydro-nettoyeur</a>
+  <a href="#docs">Documents</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SI AM2 (2ᵉ année) · Chapitre 2 — Théorie des mécanismes</span>
+  <h1 class="title">TP Hyperstatisme et DS — corrigés</h1>
+  <p class="lead">Deux compléments au <a href="ch2-td-corrige-theorie-mecanismes.html">TD du chapitre 2</a> trouvés sur Moodle :
+  le <b>compte-rendu du TP Hyperstatisme</b> (assemblages à 4, 5 et 6 plaquettes de bois) et l'exercice <b>« hydro-nettoyeur »</b> du
+  <i>DS01 2022-2023</i> (pompe à plateau oscillant : degré d'hyperstatisme puis dynamique du piston). <b>⚠️ Aucun corrigé officiel</b> :
+  tout est résolu avec la méthode de la <a href="ch2-fiche-formulaire-theorie-mecanismes.html">fiche formulaire</a>
+  (\(h=m-I_c+E_c\)). Rappel : \(E_c=6\gamma\) en modèle spatial et \(E_c=3\gamma\) en modèle plan, \(\gamma=L-S+1\).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire</b>
+    <ul>
+      <li><a href="#tp">1. TP Hyperstatisme — compte-rendu (4, 5, 6 plaquettes)</a></li>
+      <li><a href="#hydro">2. DS01 2022 — Ex2 : hydro-nettoyeur (hyperstatisme + dynamique)</a></li>
+      <li><a href="#docs">📂 Documents donnés</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= TP =============================== -->
+  <section class="block" id="tp">
+    <h2>1. TP Hyperstatisme — compte-rendu</h2>
+    <p class="enonce">Avec 6 plaquettes de bois, boulons et rondelles : (1) assemblage articulé de 4 plaquettes en parallélogramme ;
+    (2) ajout d'une plaquette en diagonale ; (3) ajout de la dernière par-dessus la précédente. But : « se représenter physiquement ce qu'est
+    l'hyperstatisme ». Le sujet précise que toute modélisation est juste <i>tant qu'elle est justifiée</i> : on donne donc le modèle <b>plan</b>
+    (le plus parlant) et le modèle <b>spatial</b>.</p>
+
+    <div class="exo-card">
+      <div class="exo-head">Q1 — Nature des assemblages (mobile, isostatique, hyperstatique) <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p><b>Rappel utile</b> : « mobile / rigide » (la mobilité \(m\)) et « isostatique / hyperstatique » (\(h\)) sont deux questions
+        <b>différentes</b>. Un assemblage peut être mobile <i>et</i> hyperstatique (c'est le cas du parallélogramme en 3D).</p>
+        <ul>
+          <li><b>4 plaquettes</b> : le parallélogramme se déforme à la main → <b>mobile</b> (\(m=1\)).</li>
+          <li><b>5 plaquettes</b> (diagonale) : l'assemblage devient <b>rigide</b> (deux triangles), les boulons se montent sans effort
+          → <b>isostatique</b> (\(m=0\), \(h=0\) en plan).</li>
+          <li><b>6 plaquettes</b> (2ᵉ diagonale sur la première) : l'assemblage reste rigide mais il faut que les deux diagonales aient exactement le même entraxe de trous ;
+          au serrage on sent de la contrainte → <b>hyperstatique</b>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q2 — Modélisation cinématique et degré d'hyperstatisme <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p><b>Modèle</b> : chaque plaquette = un solide, chaque boulon = une liaison pivot d'axe perpendiculaire aux plaquettes. Un boulon qui
+        traverse trois plaquettes (cas du coin d'où part la diagonale) ne compte que pour <b>une</b> liaison de plus par plaquette ajoutée
+        (la diagonale pivote autour du boulon porté par l'une des deux plaquettes du coin : les autres liaisons seraient redondantes avec le même axe).
+        On pose \(h=m-I_c+E_c\), avec \(I_c\) = nombre de paramètres cinématiques des liaisons, \(\gamma=L-S+1\) (L liaisons, S solides).</p>
+        <div class="overflow"><table>
+          <tr><th>Assemblage</th><th>S</th><th>L</th><th>\(\gamma\)</th><th>\(m\)</th><th>Plan : \(I_c\), \(E_c=3\gamma\), \(h\)</th><th>Spatial : \(I_c\), \(E_c=6\gamma\), \(h\)</th></tr>
+          <tr><td>4 plaquettes</td><td>4</td><td>4</td><td>1</td><td>1</td><td>\(4,\ 3,\ h=1-4+3=\mathbf 0\)</td><td>\(4,\ 6,\ h=1-4+6=\mathbf 3\)</td></tr>
+          <tr><td>5 plaquettes</td><td>5</td><td>6</td><td>2</td><td>0</td><td>\(6,\ 6,\ h=0-6+6=\mathbf 0\)</td><td>\(6,\ 12,\ h=0-6+12=\mathbf 6\)</td></tr>
+          <tr><td>6 plaquettes</td><td>6</td><td>8</td><td>3</td><td>0</td><td>\(8,\ 9,\ h=0-8+9=\mathbf 1\)</td><td>\(8,\ 18,\ h=0-8+18=\mathbf{10}\)</td></tr>
+        </table></div>
+        <p><b>Lecture du tableau</b> (modèle plan, le plus parlant) :</p>
+        <ul>
+          <li><b>4 plaquettes</b> : \(h=0\), mobilité 1 : un parallélogramme articulé plan est isostatique.</li>
+          <li><b>5 plaquettes</b> : \(h=0\), \(m=0\) : deux triangles accolés, structure rigide, aucune contrainte de montage.</li>
+          <li><b>6 plaquettes</b> : \(h=1\) : <b>une contrainte redondante</b>. La 2ᵉ diagonale impose <i>deux fois</i> la même longueur entre les mêmes deux coins : c'est le
+          « 1 » hyperstatique. Il se traduit par la condition géométrique « entraxe des deux diagonales identique ».</li>
+        </ul>
+        <div class="note"><span class="lab">Modèle spatial</span> Il donne des \(h\) plus grands (3, 6, 10) car il compte aussi <b>le parallélisme des axes des boulons</b>
+        et la planéité des assemblages (3 pivots d'un quadrilatère articulé doivent avoir leur axe parallèle au premier : \(h=3\)). Dans le modèle plan, on les suppose
+        <i>automatiquement</i> vérifiés.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Dans le tableau, \(h\) est un nombre de <b>contraintes surabondantes</b>, pas un nombre de plaquettes ni de boulons en trop.
+        Un \(h\) élevé en spatial ne veut pas dire « assemblage impossible » : les jeux (trous plus grands que les boulons) absorbent les erreurs.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q3 — Rigidifier l'assemblage à 4 plaquettes sans plaquette supplémentaire <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p>Il suffit de <b>supprimer la mobilité</b> en transformant une liaison pivot en <b>encastrement</b> : on <b>serre fortement un boulon</b> (ou on en met un second
+        dans la même liaison pour bloquer la rotation). Les deux plaquettes concernées n'en forment plus qu'une, avec un angle fixé.</p>
+        <p><b>Nouveau modèle</b> : 3 pivots + 1 encastrement. Modèle plan : \(I_c=3\), \(E_c=3\), \(m=0\) (un quadrilatère dont un angle est bloqué est rigide) :</p>
+        <div class="res">\[h=m-I_c+E_c=0-3+3=0\quad\Rightarrow\quad\text{assemblage rigide et isostatique}\]</div>
+        <div class="note"><span class="lab">Remarque</span> Ce rigidifiage est « imparfait » en pratique : l'encastrement n'existe que par <b>adhérence</b> (frottement entre plaquettes) ;
+        un couple trop fort fait glisser le joint.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q4 — Contraintes géométriques de l'assemblage à 6 plaquettes, hiérarchisées <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p>Proposition (justifiée par le modèle ci-dessus, du plus au moins contraignant) :</p>
+        <ol>
+          <li><b>Égalité des entraxes des deux plaquettes diagonales</b> (pièces 5 et 6) : c'est la condition qui correspond directement au \(h=1\) plan ; si elle n'est pas
+          respectée, les 6 plaquettes ne peuvent pas être assemblées sans jeu ou déformation.</li>
+          <li><b>Parallélisme des axes des boulons</b> (perpendicularité des perçages aux faces) : sans lui, l'assemblage se bloque ou se tord (hors plan). Correspond au surcroît
+          spatial \(h_{spatial}-h_{plan}=9\).</li>
+          <li><b>Planéité des plaquettes et épaisseurs compatibles</b> : plaquettes dans des plans parallèles (empilement), sans voilage.</li>
+          <li><b>Compatibilité entre les entraxes des plaquettes du cadre</b> (côtés opposés égaux pour que le « parallélogramme » en soit un) : nécessaire pour la mobilité à 4 plaquettes,
+          moins critique une fois les diagonales posées.</li>
+          <li><b>Jeu perçage/boulon</b> : n'est pas une contrainte d'assemblage mais le <b>mécanisme qui la rend tolérable</b> (le jeu absorbe les écarts des points 1 à 4).</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q5 — Limites des modélisations <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <ul>
+          <li><b>Liaisons parfaites supposées</b> : en réalité du jeu et du frottement ; le serrage des boulons crée de l'adhérence (quasi-encastrement).</li>
+          <li><b>Solides indéformables</b> : le bois fléchit et se comprime ; un assemblage « hyperstatique » en rigide peut être monté en le déformant légèrement.</li>
+          <li><b>Plan vs spatial</b> : le modèle plan masque les défauts hors plan (parallélisme, planéité) ; le modèle spatial les compte mais surévalue \(h\) car les jeux les absorbent.</li>
+          <li><b>Boulon traversant 3 plaquettes</b> : la modélisation (laquelle des 2 plaquettes du coin porte la diagonale ?) est un choix ; le résultat \(h\) n'en dépend pas, mais la lecture « qui est lié à quoi » oui.</li>
+          <li>\(h\) dit <b>combien</b> de contraintes sont redondantes, pas <b>lesquelles</b> (il faut l'analyse géométrique) ni <b>quelles forces</b> en résultent (il faudrait la déformation).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= HYDRO =============================== -->
+  <section class="block" id="hydro">
+    <h2>2. DS01 2022 — Exercice 2 : hydro-nettoyeur</h2>
+
+    <figure>
+      <img src="img/ds1-hydronettoyeur.png" alt="Pompe à plateau oscillant : arbre 1, plateau 2 incliné de l'angle α, piston 3 rappelé par un ressort, repères" loading="lazy">
+      <figcaption>Énoncé : arbre moteur 1 (rotation \(\theta\) autour de \(\vec x_0\)), plateau 2 incliné de \(\alpha=10^\circ\) (axe \(\vec x_1'\)), piston 3 sur l'axe de décalage \(R=18\) mm,
+      rappelé par un ressort de raideur \(k\) ; \(m_3=100\) g, \(N=3000\) tr/min, pression de refoulement 100 bar. 5 pistons ; on n'étudie qu'un seul piston.</figcaption>
+    </figure>
+
+    <div class="exo-card">
+      <div class="exo-head">Partie 1, Q1–Q2 — Degré d'hyperstatisme <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p><b>Modèle</b> (un seul piston) : solides 0 (bâti), 1 (arbre), 2 (plateau), 3 (piston). Liaisons : <b>0–1</b> pivot d'axe \((O,\vec x_0)\) ;
+        <b>1–2</b> pivot d'axe \((O,\vec x_1')\) (le plateau est monté sur un roulement : il oscille sans tourner avec l'arbre) ; <b>2–3</b> contact en \(A\) ;
+        <b>3–0</b> pivot glissant d'axe parallèle à \(\vec x_0\). Un seul cycle : \(L=4\), \(S=4\), \(\gamma=1\), donc \(E_c=6\).</p>
+        <p class="q">1) Contact sphère-plan (liaison ponctuelle, \(I_c=5\))</p>
+        <p>\(I_c=1+1+5+2=9\). Mobilités : <b>utile</b> \(m_u=1\) (l'arbre pilote la course du piston) ; <b>internes</b> \(m_i=2\) (rotation propre du plateau sur son axe,
+        et rotation propre du piston autour de son axe puisque le contact ponctuel ne la bloque pas). \(m=3\).</p>
+        <div class="res">\[h=m-I_c+E_c=3-9+6=0\quad\Rightarrow\quad\text{isostatique}\]</div>
+        <p class="q">2) Contact cylindre-plan (linéaire rectiligne, \(I_c=4\))</p>
+        <p>La mobilité est <b>modifiée</b> : le contact linéaire bloque la rotation propre du piston, donc \(m_i=1\) (il ne reste que la rotation propre du plateau), \(m=2\) ;
+        \(I_c=1+1+4+2=8\).</p>
+        <div class="res">\[h=m-I_c+E_c=2-8+6=0\quad\Rightarrow\quad\text{toujours isostatique}\]</div>
+        <div class="note"><span class="lab">Pourquoi un contact linéaire ?</span> Il répartit l'effort (jusqu'à 100 bar sur la face du piston) sur une <b>ligne</b> au lieu d'un point :
+        la pression de contact de Hertz est bien plus faible, donc moins d'usure et de matage, <b>sans changer le caractère isostatique</b> du mécanisme (\(h=0\)).
+        On gagne en durée de vie sans payer en précision de montage.</div>
+        <div class="warnbox"><span class="lab">Hypothèse</span> On suppose les rangs pleins (\(\mathrm{rg}\,E_c=6\)), configuration générique, et que les axes de 0–1 et 1–2 se coupent en \(O\).
+        Si le plateau était <b>encastré</b> sur l'arbre (sans roulement), on trouve \(I_c=8\) puis \(7\), \(m=2\) puis \(1\) : \(h=0\) dans les deux cas — le résultat est donc robuste à ce choix de modèle.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Partie 2, Q3–Q5 — Dynamique du piston, absence de rupture de contact <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p><b>Hypothèses</b> : phase d'aspiration, seul le ressort agit (pression ignorée), poids négligé, liaisons parfaites, contact ponctuel en \(A\) ; \(\overrightarrow{OA}=x_A\vec x_0-R\vec y_0\),
+        et \(A\) appartient au plan du plateau, c'est-à-dire \(\overrightarrow{OA}\perp\vec x_1'\) (l'énoncé écrit un produit « \(\overrightarrow{OA}\wedge\vec x_1'=0\) » mais seul le produit scalaire nul, \(\overrightarrow{OA}\cdot\vec x_1'=0\), redonne
+        la formule \(x_A=R\tan\alpha\cos\theta\) fournie, avec \(\vec x_1'=\cos\alpha\,\vec x_1+\sin\alpha\,\vec y_1\) et \(\vec y_1=\cos\theta\,\vec y_0+\sin\theta\,\vec z_0\) : \(x_A\cos\alpha-R\sin\alpha\cos\theta=0\)).</p>
+        <p class="q">3) Torseur du ressort</p>
+        <p>La position de \(A\) est \(x_A=R\tan\alpha\cos\theta\) : maximale en \(\theta=0\) (point mort droit, ressort comprimé de \(e\)), minimale en \(\theta=\pi\) (\(x_A=-R\tan\alpha\)). La course du piston est
+        \(2R\tan\alpha\). La compression du ressort à l'angle \(\theta\) est donc \(e\) moins le recul de \(A\) depuis \(\theta=0\) : \(x_A(0)-x_A(\theta)=R\tan\alpha\,(1-\cos\theta)\).</p>
+        <div class="res">\[\{\mathcal T_{ressort\to3}\}=\Big\{\begin{matrix}-k\big(e-R\tan\alpha\,(1-\cos\theta)\big)\,\vec x_0\\ \vec 0\end{matrix}\Big\}_A\]</div>
+        <p>(le ressort <b>pousse le piston vers le plateau</b>, donc vers \(-\vec x_0\), d'où le signe moins).</p>
+        <p class="q">4) TRD sur le piston 3, projeté sur \(\vec x_0\)</p>
+        <p>Le piston est en translation suivant \(\vec x_0\) : \(\vec a_3=\ddot x_A\,\vec x_0\) avec, pour \(\dot\theta=\Omega\) constante,
+        \(\ddot x_A=-R\tan\alpha\,(\ddot\theta\sin\theta+\dot\theta^2\cos\theta)=-R\tan\alpha\,\Omega^2\cos\theta\).
+        Forces sur 3 suivant \(\vec x_0\) : ressort ; action du plateau sur le piston en \(A\) : liaison parfaite, <b>normale au plateau</b>, donc \(X_{23}\,\vec x_1'\), de composante \(X_{23}\cos\alpha\) sur \(\vec x_0\) ;
+        pesanteur et liaison pivot glissant : pas de composante suivant \(\vec x_0\).</p>
+        \[m_3\ddot x_A=-k\big(e-R\tan\alpha\,(1-\cos\theta)\big)+X_{23}\cos\alpha\]
+        <div class="res">\[X_{23}\cos\alpha=k\big(e-R\tan\alpha\,(1-\cos\theta)\big)-m_3R\tan\alpha\,\Omega^2\cos\theta\]</div>
+        <p class="q">5) Condition de non-rupture du contact, raideur minimale</p>
+        <p>Le contact est maintenu tant que le plateau <b>pousse</b> le piston : \(X_{23}\ge0\) (une liaison unilatérale ne peut pas tirer). Le membre de droite est une fonction affine de \(\cos\theta\) :</p>
+        \[f(\theta)=ke-kR\tan\alpha+R\tan\alpha\,(k-m_3\Omega^2)\cos\theta\]
+        <p>Son minimum est donc atteint à l'une des bornes, \(\theta=0\) ou \(\theta=\pi\) :</p>
+        <ul>
+          <li>\(\theta=\pi\) : \(f(\pi)=k(e-2R\tan\alpha)+m_3R\tan\alpha\,\Omega^2>0\) car \(e>2R\tan\alpha\) (« \(e\) est supérieur à la course ») : <b>jamais critique</b>.</li>
+          <li>\(\theta=0\) : \(f(0)=ke-m_3R\tan\alpha\,\Omega^2\). Au point mort droit, le piston est accéléré <b>vers le plateau</b> (\(\ddot x_A<0\), accélération centripète maximale) et c'est le ressort,
+          seul, qui doit fournir cette force : condition \(f(0)\ge0\).</li>
+        </ul>
+        <div class="res">\[k\ge k_{min}=\dfrac{m_3R\tan\alpha\,\Omega^2}{e}\]</div>
+        <p><b>Application numérique</b> : \(\Omega=3000\times\dfrac{2\pi}{60}=314{,}16\) rad/s, \(\Omega^2=9{,}870\times10^4\) rad²/s², \(R\tan\alpha=0{,}018\times\tan10^\circ=3{,}174\) mm.
+        \[k_{min}=\dfrac{0{,}1\times3{,}174\times10^{-3}\times9{,}870\times10^4}{0{,}020}=\dfrac{31{,}33}{0{,}020}\approx1{,}57\times10^3\ \text{N/m}\quad(\approx1{,}6\ \text{N/mm})\]
+        <div class="warnbox"><span class="lab">⚠️ Écart avec l'énoncé</span> L'énoncé suggère de « prendre le cas extrême \(\theta=\pi\) ». Avec le torseur du ressort donné et \(x_A=R\tan\alpha\cos\theta\),
+        c'est \(\theta=0\) qui est critique (voir ci-dessus) ; \(\theta=\pi\) donne une condition automatiquement vérifiée puisque \(e\) dépasse la course. Une convention de signe différente pour \(\theta\)
+        (l'angle d'origine décalé de \(\pi\)) échangerait ces deux cas : la valeur numérique \(k_{min}\approx1{,}6\) N/mm reste celle du cas réellement limitant. <b>À confirmer avec l'enseignant</b> si le sujet est repris.</div>
+        <div class="note"><span class="lab">Interprétation</span> \(m_3R\tan\alpha\,\Omega^2\approx31\) N est l'effort d'inertie du piston à \(3000\) tr/min : il faut un ressort qui, comprimé de \(20\) mm, le dépasse.
+        Cohérence : \(k_{min}\approx1{,}6\) N/mm \(<m_3\Omega^2\approx9{,}9\) N/mm, donc le minimum est bien en \(\theta=0\) (le cas \(k>m_3\Omega^2\), où il serait en \(\pi\), n'est pas pertinent ici).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= DOCS =============================== -->
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <div class="docs-group">
+      <h3>TP et annales</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="S2I_TP_Hyperstatisme_P2030.pdf"><span class="ic">📄</span><span class="nm">S2I_TP_Hyperstatisme_P2030.pdf</span><span class="badge">TP</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="S2I_DS01_2022-2023.pdf"><span class="ic">📄</span><span class="nm">S2I_DS01_2022-2023.pdf</span><span class="badge">Sujet</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Généré comme support de révision personnel · TP et DS01 de S2I de l'ECAM (pas de corrigé officiel — correction construite à partir de la fiche formulaire, vérifiée par cohérence).
+</footer>
+<script src="../assets/gate.js"></script>
+</body>
+</html>

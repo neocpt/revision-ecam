@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dynamique du solide — SI AM2 — Révision ECAM</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div class="topbar">
+  <a href="../index.html#am2">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="ch3-td-corrige-dynamique-solide.html">✅ TD corrigé</a>
+  <a href="#pfd">PFD du solide</a>
+  <a href="#cinetique">Torseur cinétique</a>
+  <a href="#inertie">Opérateur d'inertie</a>
+  <a href="#methode">Méthodologie</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SI AM2 (2ᵉ année) · Chapitre 3 — Dynamique du solide</span>
+  <h1 class="title">Dynamique du solide (C03)</h1>
+  <p class="lead">Résumé de cours détaillé : Principe Fondamental de la Dynamique (PFD) appliqué au solide, torseur
+  dynamique, torseur cinétique, opérateur d'inertie (matrice d'inertie, théorème de Huygens), cas particuliers
+  classiques (translation, rotation autour d'un axe fixe) et méthodologie complète de résolution. Ce chapitre est
+  le prérequis direct des chapitres C08 (efforts aux effecteurs), C10 (comportement cinématique) et C13/C14 (SII
+  ECAM 1) — c'est la généralisation au solide indéformable du <b>PFD du point matériel</b> vu en physique.
+  Source : <i>S2I CM C03 — Dynamique du solide</i> (18 p.).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire</b>
+    <ul>
+      <li><a href="#memo">📌 Fiche mémo</a></li>
+      <li><a href="#intro">1. Introduction — référentiels, PFD du point matériel</a></li>
+      <li><a href="#pfd">2. PFD du solide — torseur dynamique</a></li>
+      <li><a href="#cinetique">3. Torseur cinétique</a></li>
+      <li><a href="#inertie">4. Opérateur d'inertie</a></li>
+      <li><a href="#cas-part">5. Cas particuliers classiques</a></li>
+      <li><a href="#methode">6. Méthodologie de résolution</a></li>
+      <li><a href="#conseils">7. Conseils pratiques de calcul</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= MEMO ==================================== -->
+  <section class="memo-sheet" id="memo">
+    <div class="memo-head">📌 Fiche mémo — Dynamique du solide</div>
+    <div class="memo-grid">
+      <div class="memo-item"><b>PFD point matériel</b>\(\exists R_g:\ \sum\vec F_{ext\to P}=m\vec\Gamma_{P/R_g}\), \(\sum\vec M_{P,ext\to P}=\vec0\)</div>
+      <div class="memo-item"><b>Théorème résultante dynamique</b>\(\sum\vec F_{ext\to S}=m\vec\Gamma_{G\in S/R_g}\)</div>
+      <div class="memo-item"><b>Théorème moment dynamique</b>\(\vec M_{A,ext\to S}=\vec\delta_{A\in S/R_g}=\displaystyle\int_S\overrightarrow{AM}\wedge\vec\Gamma_{M\in S/R_g}\,dm\)</div>
+      <div class="memo-item"><b>Torseur dynamique</b>\(\{\mathcal D_{S/R_g}\}_A=\{m\vec\Gamma_{G\in S/R_g}\,;\ \vec\delta_{A\in S/R_g}\}\) ; PFD galiléen : \(\{\mathcal T_{ext\to S}\}_A=\{\mathcal D_{S/R_g}\}_A\)</div>
+      <div class="memo-item"><b>Torseur cinétique</b>\(\{\mathcal C_{S/R_g}\}_A=\{m\vec V_{G\in S/R_g}\,;\ \vec\sigma_{A\in S/R_g}\}\), \(\vec\sigma_{A\in S/R_g}=\int\overrightarrow{AM}\wedge\vec V_{M\in S/R_g}\,dm\)</div>
+      <div class="memo-item"><b>Moment cinétique pratique</b>\(\vec\sigma_{A\in S/R_g}=\bar{\bar I}_{(A,S)}.\vec\Omega_{S/R_g}+m\,\overrightarrow{AG}\wedge\vec V_{A\in S/R_g}\)</div>
+      <div class="memo-item"><b>Moment dynamique / cinétique</b>\(\vec\delta_{A\in S/R_g}=\Big[\dfrac{d\vec\sigma_{A\in S/R_g}}{dt}\Big]_{R_g}+\vec V_{A/R_g}\wedge m\vec V_{G\in S/R_g}\)</div>
+      <div class="memo-item"><b>Opérateur d'inertie</b>\(\bar{\bar I}_{(A,S)}=\begin{pmatrix}A&-F&-E\\-F&B&-D\\-E&-D&C\end{pmatrix}\), \(A{=}\int(y^2{+}z^2)dm\), \(D{=}\int yz\,dm\) (idem \(B,C,E,F\) par permutation)</div>
+      <div class="memo-item"><b>Théorème de Huygens</b>\(\bar{\bar I}_{(O,S)}=\bar{\bar I}_{(G,S)}+m\begin{pmatrix}b^2{+}c^2&-ab&-ac\\-ab&a^2{+}c^2&-bc\\-ac&-bc&a^2{+}b^2\end{pmatrix}\), \(\overrightarrow{OG}=a\vec x{+}b\vec y{+}c\vec z\)</div>
+      <div class="memo-item"><b>Translation</b>\(\{\mathcal T_{ext\to S}\}_A=\{m\vec\Gamma_{G\in S/R_g}\,;\ m\,\overrightarrow{AG}\wedge\vec\Gamma_{G\in S/R_g}\}\), nul en \(G\)</div>
+      <div class="memo-item"><b>Rotation autour d'un axe fixe \((O,\vec z)\)</b>\(\{\mathcal T_{ext\to S}\}_O=\{m\vec\Gamma_{G\in S/R_g}\,;\ J\ddot\theta\,\vec z\}\) si \(G\) sur l'axe et axe principal</div>
+      <div class="memo-item method"><b>Dérivée d'une composante (astuce)</b>\(\Big[\dfrac{d\vec u}{dt}\Big]_R\!\cdot\vec z=\Big[\dfrac{d(\vec u\cdot\vec z)}{dt}\Big]_R-\vec u\cdot\Big[\dfrac{d\vec z}{dt}\Big]_R\) — nul si \(\vec z\) fixe dans \(R\)</div>
+      <div class="memo-item method"><b>Formule de Bour</b>\(\Big[\dfrac{d\vec u}{dt}\Big]_{R_1}=\Big[\dfrac{d\vec u}{dt}\Big]_{R_2}+\vec\Omega_{R_2/R_1}\wedge\vec u\)</div>
+      <div class="memo-item method"><b>Méthode (6 étapes)</b>graphe de structure → isolement → IAME → écriture du PFD → détermination du torseur dynamique → équations/résolution (mêmes point + base)</div>
+    </div>
+  </section>
+
+  <!-- ======================= INTRO ==================================== -->
+  <section class="block" id="intro">
+    <h2>1. Introduction — référentiels, PFD du point matériel</h2>
+    <p>La dynamique étudie les relations entre les <b>mouvements</b> d'un solide et leurs <b>causes</b> (les
+    actions mécaniques) : c'est le carrefour entre la cinématique et la statique. Deux problématiques types :
+    les efforts sont connus et on cherche le mouvement, ou le mouvement est imposé et on cherche les actions
+    mécaniques qu'il engendre (dimensionnement d'actionneur, tenue de pièce en accélération...).</p>
+
+    <div class="def">
+      <span class="lab">Référentiel galiléen</span>
+      Pour écrire les lois de Newton, il faut un référentiel « absolu » (repère + horloge). En mécanique
+      classique on admet le <b>référentiel de Copernic</b> (origine = centre d'inertie du système solaire, axes
+      pointant vers des étoiles fixes) comme absolu. Tout référentiel en <b>translation rectiligne uniforme</b>
+      par rapport à lui est dit <b>galiléen</b> — en particulier le référentiel terrestre (géocentrique), en
+      négligeant la rotation propre de la Terre.
+    </div>
+    <div class="note">
+      <span class="lab">Base / repère / référentiel</span>
+      <b>Base</b> : 3 vecteurs orthonormés directs. <b>Repère</b> : un point origine + une base (outil de calcul,
+      projections). <b>Référentiel</b> : un repère + une horloge (permet de définir vitesse/accélération). En
+      pratique on confond souvent repère et référentiel.
+    </div>
+
+    <div class="thm">
+      <span class="lab">★ PFD du point matériel (rappel de physique — 2<sup>e</sup> loi de Newton)</span>
+      Pour un point matériel \(P\) de masse \(m\) :
+      \[\exists R_g\ \text{tq}:\qquad \sum\overrightarrow{F_{ext\to P}}=m\,\overrightarrow{\Gamma_{P/R_g}}
+      \qquad\text{et}\qquad \sum\overrightarrow{M_{P,ext\to P}}=\vec0\]
+      La seconde équation est triviale pour un point (toutes les forces sont concourantes en \(P\)) — elle
+      devient l'enjeu principal du chapitre dès qu'on passe au solide étendu (§2).
+    </div>
+  </section>
+
+  <!-- ======================= PFD SOLIDE ==================================== -->
+  <section class="block" id="pfd">
+    <h2>2. PFD du solide — torseur dynamique</h2>
+    <p>Un solide \(S\) est modélisé comme un ensemble continu de points matériels \(M\) affectés d'une masse
+    élémentaire \(dm\). On applique le PFD à chaque \(dm\), puis on <b>intègre sur tout le solide</b>.</p>
+
+    <h3>2.1 Théorème de la résultante dynamique</h3>
+    <div class="method">
+      <span class="lab">Démonstration (idée)</span>
+      \(\displaystyle\int_S dm\,\overrightarrow{\Gamma_{M\in S/R_g}}=\int_S\Big[\dfrac{d^2\overrightarrow{OM}}{dt^2}\Big]_{R_g}dm
+      =\Big[\dfrac{d^2}{dt^2}\int_S\overrightarrow{OM}\,dm\Big]_{R_g}=\Big[\dfrac{d^2}{dt^2}\big(m\,\overrightarrow{OG}\big)\Big]_{R_g}
+      =m\,\overrightarrow{\Gamma_{G\in S/R_g}}\) (masse indépendante du temps, définition de \(G\)).
+    </div>
+    <div class="thm">
+      <span class="lab">★★ Théorème de la résultante dynamique (à savoir par cœur)</span>
+      \[\boxed{\ \sum\overrightarrow{F_{ext\to S}}=m\,\overrightarrow{\Gamma_{G\in S/R_g}}\ }\]
+    </div>
+
+    <h3>2.2 Théorème du moment dynamique</h3>
+    <div class="method">
+      <span class="lab">Démonstration (idée)</span>
+      En un point \(A\) lié à \(S\) : \(\displaystyle\int_S\sum\overrightarrow{M_{M,ext\to M}}=\vec0\) se réécrit
+      (changement de point puis PFD ponctuel) :
+      \[\overrightarrow{M_{A,ext\to S}}+\int_S\overrightarrow{MA}\wedge dm\,\overrightarrow{\Gamma_{M\in S/R_g}}=\vec0
+      \quad\Longrightarrow\quad \overrightarrow{M_{A,ext\to S}}=\int_S\overrightarrow{AM}\wedge\overrightarrow{\Gamma_{M\in S/R_g}}\,dm\]
+    </div>
+    <div class="thm">
+      <span class="lab">★★ Théorème du moment dynamique</span>
+      \[\boxed{\ \overrightarrow{M_{A,ext\to S}}=\overrightarrow{\delta_{A\in S/R_g}}=\int_S\overrightarrow{AM}\wedge\overrightarrow{\Gamma_{M\in S/R_g}}\,dm\ }\]
+    </div>
+
+    <h3>2.3 Torseur dynamique</h3>
+    <div class="def">
+      <span class="lab">Définition</span>
+      \(\overrightarrow{F_{ext\to S}}\) et \(\overrightarrow{M_{A,ext\to S}}\) forment le <b>torseur des actions
+      mécaniques extérieures</b> à \(S\) au point \(A\) (transport de Varignon habituel). De même,
+      \(m\overrightarrow{\Gamma_{G\in S/R_g}}\) et \(\overrightarrow{\delta_{A\in S/R_g}}\) forment un torseur, le
+      <b>torseur dynamique</b> de \(S/R_g\) au point \(A\) (lié à \(S\)) :
+      \[\{\mathcal D_{S/R_g}\}_A=\left\{\begin{array}{l} R\{\mathcal D_{S/R_g}\}=m\,\overrightarrow{\Gamma_{G\in S/R_g}}\\[.2em]
+      M_A\{\mathcal D_{S/R_g}\}=\overrightarrow{\delta_{A\in S/R_g}}\end{array}\right\}_A\]
+      \(m\overrightarrow{\Gamma_{G\in S/R_g}}\) est la <b>quantité d'accélération</b> (kg·m·s⁻²), \(\overrightarrow{\delta_{A\in S/R_g}}\)
+      le <b>moment dynamique</b> (kg·m²·s⁻² ou N·m). Comme tout torseur, il se transporte par Varignon :
+      \(\overrightarrow{\delta_{B\in S/R_g}}=\overrightarrow{\delta_{A\in S/R_g}}+\overrightarrow{BA}\wedge m\overrightarrow{\Gamma_{G\in S/R_g}}\).
+    </div>
+
+    <div class="thm" style="text-align:center">
+      <span class="lab">★★★ PFD torseuriel galiléen (résultat central du chapitre)</span>
+      \[\boxed{\ \{\mathcal T_{ext\to S}\}_A=\{\mathcal D_{S/R_g}\}_A\ }\]
+      Soit, en séparant résultante et moment (au <b>même point</b>, dans la <b>même base</b>) :
+      \[\overrightarrow{F_{ext\to S}}=m\,\overrightarrow{\Gamma_{G\in S/R_g}}\qquad,\qquad
+      \overrightarrow{M_{A,ext\to S}}=\overrightarrow{\delta_{A\in S/R_g}}\]
+    </div>
+    <div class="warnbox">
+      <span class="lab">Piège classique</span>
+      Les deux torseurs \(\{\mathcal T_{ext\to S}\}\) (bilan des actions mécaniques) et \(\{\mathcal D_{S/R_g}\}\)
+      (issu du mouvement) se déterminent <b>séparément et indépendamment</b> — puis on les <b>égalise</b> au même
+      point et dans la même base pour obtenir au maximum 6 équations scalaires.
+    </div>
+
+    <h3>2.4 Cas d'un ensemble de solides</h3>
+    <div class="note">
+      Pour \(\Sigma=S_1+S_2+\dots+S_n\), les torseurs dynamiques <b>s'additionnent au même point</b> :
+      \(\{\mathcal T_{ext\to\Sigma}\}_A=\{\mathcal D_{S_1/R_g}\}_A+\dots+\{\mathcal D_{S_n/R_g}\}_A\). Le PFS
+      (statique) est le cas particulier du PFD où l'accélération est nulle (solide immobile ou en translation
+      rectiligne uniforme).
+    </div>
+
+    <h3>2.5 PFD dans un référentiel non galiléen \(R_{ng}\)</h3>
+    <div class="method">
+      Si \(R_{ng}\) n'est pas galiléen, on doit ajouter des <b>forces d'inertie</b> (fictives, proportionnelles à
+      la masse) :
+      \[\{\mathcal D_{S/R_{ng}}\}_A=\{\mathcal T_{ext\to S}\}_A-\{\mathcal D_{E,R_{ng}/R_g}\}-\{\mathcal D_{Cor,S/R_g}\}\]
+      (torseurs des forces d'inertie d'entraînement et de Coriolis). Si \(R_{ng}\) est en <b>translation
+      rectiligne uniforme</b> par rapport à \(R_g\), ces deux torseurs sont nuls : \(R_{ng}\) est en fait
+      galiléen. Hors programme de ce chapitre (rappelé pour mémoire).
+    </div>
+  </section>
+
+  <!-- ======================= CINETIQUE ==================================== -->
+  <section class="block" id="cinetique">
+    <h2>3. Torseur cinétique</h2>
+    <div class="def">
+      <span class="lab">Définition</span>
+      \[\{\mathcal C_{S/R_g}\}_A=\left\{\begin{array}{l} R\{\mathcal C_{S/R_g}\}=\displaystyle\int_S\overrightarrow{V_{M\in S/R_g}}\,dm=m\,\overrightarrow{V_{G\in S/R_g}}\\[.3em]
+      M_A\{\mathcal C_{S/R_g}\}=\overrightarrow{\sigma_{A\in S/R_g}}=\displaystyle\int_S\overrightarrow{AM}\wedge\overrightarrow{V_{M\in S/R_g}}\,dm\end{array}\right\}_A\]
+      \(m\overrightarrow{V_{G\in S/R_g}}\) = <b>quantité de mouvement</b> (kg·m·s⁻¹), \(\overrightarrow{\sigma_{A\in S/R_g}}\)
+      = <b>moment cinétique</b> (kg·m²·rad·s⁻¹). Le torseur cinétique se transporte aussi par Varignon (théorème
+      de König) : \(\overrightarrow{\sigma_{B\in S/R_g}}=\overrightarrow{\sigma_{A\in S/R_g}}+\overrightarrow{BA}\wedge m\overrightarrow{V_{G\in S/R_g}}\).
+    </div>
+
+    <h3>3.1 Relation entre torseur cinétique et torseur dynamique</h3>
+    <div class="thm">
+      <span class="lab">Résultantes</span>
+      \(R\{\mathcal D_{S/R_g}\}=\Big[\dfrac{dR\{\mathcal C_{S/R_g}\}}{dt}\Big]_{R_g}\) (immédiat : dérivée seconde
+      de position = dérivée première de vitesse).
+    </div>
+    <div class="thm">
+      <span class="lab">Moments (point \(A\) géométrique quelconque)</span>
+      \[\boxed{\ \overrightarrow{\delta_{A\in S/R_g}}=\Big[\dfrac{d\overrightarrow{\sigma_{A\in S/R_g}}}{dt}\Big]_{R_g}+\overrightarrow{V_{A/R_g}}\wedge m\,\overrightarrow{V_{G\in S/R_g}}\ }\]
+    </div>
+    <div class="note">
+      <span class="lab">Cas particuliers (le terme correctif s'annule)</span>
+      Si <b>\(A\) est fixe</b> dans \(R_g\) (\(\overrightarrow{V_{A/R_g}}=\vec0\)), ou si <b>\(A=G\)</b>
+      (\(\overrightarrow{V_{A/R_g}}\wedge\overrightarrow{V_{G\in S/R_g}}=\vec0\)) :
+      \[\overrightarrow{\delta_{A\in S/R_g}}=\Big[\dfrac{d\overrightarrow{\sigma_{A\in S/R_g}}}{dt}\Big]_{R_g}\]
+      C'est la forme la plus utilisée en pratique (choisir \(A=O\) fixe ou \(A=G\) simplifie toujours le calcul).
+    </div>
+
+    <h3>3.2 Calcul pratique du moment cinétique — l'opérateur d'inertie</h3>
+    <div class="method">
+      <span class="lab">★ Méthode (évite les doubles produits vectoriels)</span>
+      En écrivant \(\overrightarrow{V_{M\in S/R_g}}=\overrightarrow{V_{A\in S/R_g}}+\overrightarrow{MA}\wedge\overrightarrow{\Omega_{S/R_g}}\)
+      puis en intégrant, on isole un opérateur linéaire \(\bar{\bar I}_{(A,S)}\) tel que
+      \(\bar{\bar I}_{(A,S)}.\vec u=\int_S\overrightarrow{AM}\wedge(\vec u\wedge\overrightarrow{AM})\,dm\) — c'est
+      l'<b>opérateur d'inertie</b>, étudié en détail au §4. Le moment cinétique se réécrit alors sans aucune
+      intégrale « pénible » à refaire à chaque exercice :
+      \[\boxed{\ \overrightarrow{\sigma_{A\in S/R_g}}=\bar{\bar I}_{(A,S)}.\overrightarrow{\Omega_{S/R_g}}+m\,\overrightarrow{AG}\wedge\overrightarrow{V_{A\in S/R_g}}\ }\]
+      Cas particuliers : si \(A=G\) ou si \(A\in S\) est <b>fixe dans \(R_g\)</b>, le second terme s'annule :
+      \(\overrightarrow{\sigma_{A\in S/R_g}}=\bar{\bar I}_{(A,S)}.\overrightarrow{\Omega_{S/R_g}}\).
+    </div>
+  </section>
+
+  <!-- ======================= INERTIE ==================================== -->
+  <section class="block" id="inertie">
+    <h2>4. L'opérateur d'inertie</h2>
+    <div class="def">
+      <span class="lab">Définition — matrice d'inertie</span>
+      \(\bar{\bar I}_{(A,S)}\) est une application linéaire de \(\mathbb R^3\) dans \(\mathbb R^3\), représentée
+      dans une base \(b(\vec x,\vec y,\vec z)\) par une matrice <b>symétrique</b> (en posant \(\overrightarrow{AM}=x\vec x+y\vec y+z\vec z\)) :
+      \[\bar{\bar I}_{(A,S)}=\begin{pmatrix}A&-F&-E\\-F&B&-D\\-E&-D&C\end{pmatrix}_{\!b}\]
+    </div>
+    <div class="overflow">
+    <table>
+      <tr><th>Moments d'inertie (kg·m²)</th><th>Produits d'inertie (kg·m²)</th></tr>
+      <tr><td>\(A=\displaystyle\int_S(y^2+z^2)\,dm\)</td><td>\(D=\displaystyle\int_S yz\,dm\)</td></tr>
+      <tr><td>\(B=\displaystyle\int_S(x^2+z^2)\,dm\)</td><td>\(E=\displaystyle\int_S xz\,dm\)</td></tr>
+      <tr><td>\(C=\displaystyle\int_S(x^2+y^2)\,dm\)</td><td>\(F=\displaystyle\int_S xy\,dm\)</td></tr>
+    </table>
+    </div>
+    <p>L'opérateur d'inertie décrit la <b>répartition des masses</b> du solide autour du point \(A\). Un moment
+    d'inertie est <b>toujours positif</b> (nul seulement pour un solide infiniment fin selon l'axe considéré) et
+    est <b>minimal</b> pour un axe passant par le centre d'inertie \(G\).</p>
+
+    <h3>4.1 Moment d'inertie par rapport à un axe</h3>
+    <div class="thm">
+      Pour un axe \(\Delta=(O,\vec u)\) : \(\displaystyle I_\Delta=\vec u\cdot\big(\bar{\bar I}_{(O,S)}.\vec u\big)\).
+      <span class="warnbox" style="display:block;margin-top:.5rem">Le produit matriciel \(\bar{\bar I}.\vec u\) n'a de
+      sens que si la matrice et \(\vec u\) sont exprimés <b>dans la même base</b>.</span>
+    </div>
+
+    <h3>4.2 Base propre d'inertie, simplifications par symétrie</h3>
+    <div class="note">
+      <span class="lab">Base propre</span>
+      Il existe toujours, en \(G\), une base \((\vec x',\vec y',\vec z')\) où \(\bar{\bar I}_{(G,S)}\) est
+      <b>diagonale</b> (produits d'inertie nuls). Une rotation autour d'un de ces axes se fait sans vibration
+      (solide <b>dynamiquement équilibré</b>). Dynamiquement équilibré ⟹ statiquement équilibré (\(G\) sur
+      l'axe) ; la réciproque est fausse.
+    </div>
+    <div class="method">
+      <span class="lab">★ Simplifications à connaître par cœur (gain de temps considérable)</span>
+      <ul style="margin:.3rem 0 0">
+        <li><b>Plan de symétrie \((O,\vec x_s,\vec y_s)\)</b> : les produits d'inertie impliquant \(z_s\) sont nuls
+        (\(D=E=0\)) → \(\bar{\bar I}_{(O,S)}=\begin{pmatrix}A&-F&0\\-F&B&0\\0&0&C\end{pmatrix}\).</li>
+        <li><b>Deux plans de symétrie perpendiculaires</b> : tous les produits nuls, matrice diagonale
+        \(\mathrm{diag}(A,B,C)\).</li>
+        <li><b>Axe de révolution \((O,\vec z_s)\)</b> : matrice diagonale avec en plus \(A=B\) (isotropie
+        transverse), et \(A=B=\dfrac{C}{2}+\displaystyle\int_S z^2\,dm\).</li>
+      </ul>
+    </div>
+
+    <h3>4.3 Théorème de Huygens</h3>
+    <div class="thm" style="text-align:center">
+      <span class="lab">★★★ À savoir par cœur — change de point (uniquement entre \(G\) et un autre point !)</span>
+      En posant \(\overrightarrow{OG}=a\vec x_s+b\vec y_s+c\vec z_s\) :
+      \[\boxed{\ \bar{\bar I}_{(O,S)}=\bar{\bar I}_{(G,S)}+m\begin{pmatrix}b^2{+}c^2&-ab&-ac\\-ab&a^2{+}c^2&-bc\\-ac&-bc&a^2{+}b^2\end{pmatrix}\ }\]
+    </div>
+    <div class="warnbox">
+      <span class="lab">Piège classique</span>
+      Cette relation n'est valable <b>qu'entre le centre de gravité \(G\)</b> et un autre point. Pour passer d'un
+      point \(A\) à un point \(B\) (ni l'un ni l'autre n'étant \(G\)), il faut obligatoirement passer par
+      <b>\(A\to G\to B\)</b> (deux applications du théorème).
+    </div>
+  </section>
+
+  <!-- ======================= CAS PARTICULIERS ==================================== -->
+  <section class="block" id="cas-part">
+    <h2>5. Cas particuliers classiques (formes toutes faites du PFD)</h2>
+
+    <div class="exo-card">
+      <div class="exo-head">Solide en translation</div>
+      <div class="exo-body">
+        <p>Au centre de gravité \(G\) : \(\overrightarrow{\delta_{G\in S/R_g}}=\vec0\) (démonstration : intégrale
+        de \(\overrightarrow{GM}\wedge\overrightarrow{\Gamma_{G\in S/R_g}}\,dm\), le vecteur accélération sort de
+        l'intégrale car identique en tout point, puis \(\int\overrightarrow{GM}dm=\vec0\) par définition de
+        \(G\)). En un point quelconque \(A\) lié à \(S\) :
+        <div class="res">
+        \[\{\mathcal T_{ext\to S}\}_A=\left\{\begin{array}{l}m\,\overrightarrow{\Gamma_{G\in S/R_g}}\\ m\,\overrightarrow{AG}\wedge\overrightarrow{\Gamma_{G\in S/R_g}}\end{array}\right\}_A\]
+        </div>
+        <b>En translation, l'inertie ne dépend que de la masse</b> (pas de sa répartition) — logique, le moment
+        dynamique en \(A\ne G\) reste non nul sauf si \(\overrightarrow{AG}\) est colinéaire à
+        \(\overrightarrow{\Gamma_{G\in S/R_g}}\) (point sur l'axe de translation passant par \(G\)).
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Solide en rotation autour d'un axe fixe \((O,\vec z)\), avec \(G\) sur l'axe</div>
+      <div class="exo-body">
+        <p>En notant \(\theta\) l'angle de rotation, \(J\) le moment d'inertie de \(S\) par rapport à \((O,\vec z)\)
+        (axe supposé principal d'inertie en \(O\)) :</p>
+        <div class="res">
+        \[\{\mathcal T_{ext\to S}\}_O=\left\{\begin{array}{l}\vec0\\ J\ddot\theta\,\vec z\end{array}\right\}_O\]
+        </div>
+        <p><b>En rotation, l'inertie dépend de la valeur ET de la répartition</b> de la masse (le moment
+        d'inertie \(J\)) — c'est la différence fondamentale avec la translation, et la raison d'être de
+        l'opérateur d'inertie.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= METHODOLOGIE ==================================== -->
+  <section class="block" id="methode">
+    <h2>6. Méthodologie de résolution</h2>
+    <div class="method">
+      <span class="lab">★ Démarche complète, dans l'ordre</span>
+      <ol style="margin:.3rem 0 0">
+        <li><b>Graphe de structure</b> : repérer les liaisons entre sous-ensembles et les actions mécaniques
+        extérieures.</li>
+        <li><b>Isolement</b> : choisir le solide (ou l'ensemble de solides) \(S\) étudié — définit ce qui est
+        extérieur/intérieur.</li>
+        <li><b>Inventaire des actions mécaniques extérieures (IAME)</b> : comme en statique (actions à distance,
+        actions de contact).</li>
+        <li><b>Écriture du PFD</b> : \(\{\mathcal T_{ext\to S}\}_A=\{\mathcal D_{S/R_g}\}_A\).</li>
+        <li><b>Détermination du torseur dynamique</b> — l'étape la plus calculatoire, surtout pour le moment.
+        Deux méthodes selon la donnée disponible :
+          <ul style="margin:.3rem 0 0">
+            <li>Matrice d'inertie connue en \(A\) : moment cinétique \(\vec\sigma_A=\bar{\bar I}_{(A,S)}.\vec\Omega+m\overrightarrow{AG}\wedge\vec V_A\),
+            puis \(\vec\delta_A=[\tfrac{d\vec\sigma_A}{dt}]_{R_g}+\vec V_{A/R_g}\wedge m\vec V_G\).</li>
+            <li>Matrice connue en \(G\) : soit on la transporte en \(A\) par Huygens (retombe sur le cas
+            précédent), soit on calcule \(\vec\sigma_G=\bar{\bar I}_{(G,S)}.\vec\Omega\), on transporte en \(A\)
+            (\(\vec\sigma_A=\vec\sigma_G+\overrightarrow{AG}\wedge m\vec V_G\)), puis on dérive.</li>
+          </ul>
+        </li>
+        <li><b>Écriture des équations / résolution</b> : au maximum 6 équations scalaires, <b>au même point et
+        dans la même base</b>. Si la résolution n'aboutit pas : hypothèses simplificatrices ou isolement d'un
+        autre sous-système.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ======================= CONSEILS ==================================== -->
+  <section class="block" id="conseils">
+    <h2>7. Conseils pratiques de calcul</h2>
+    <div class="method">
+      <span class="lab">★ Astuce n°1 — ne jamais tout exprimer dans la base globale</span>
+      Il est inutile (et source d'erreurs) de projeter tous les vecteurs dans la base fixe. Pour obtenir la
+      composante d'un vecteur dérivé selon un axe \(\vec z\), on préfère :
+      \[\Big[\dfrac{d\vec u}{dt}\Big]_R\cdot\vec z=\Big[\dfrac{d(\vec u\cdot\vec z)}{dt}\Big]_R-\vec u\cdot\Big[\dfrac{d\vec z}{dt}\Big]_R\]
+      qui vient simplement de la dérivée d'un produit scalaire. <b>Si \(\vec z\) est fixe dans \(R\)</b>
+      (\([\tfrac{d\vec z}{dt}]_R=\vec0\)), le second terme disparaît : \([\tfrac{d\vec u}{dt}]_R\cdot\vec z=\tfrac{d(\vec u\cdot\vec z)}{dt}\)
+      — très utilisé pour extraire une seule composante du moment dynamique sans dériver le vecteur entier.
+    </div>
+    <div class="method">
+      <span class="lab">★ Astuce n°2 — formule de Bour (changement de référentiel de dérivation)</span>
+      Pour dériver un vecteur \(\vec u\) exprimé dans une base \(R_2\) mobile par rapport à \(R_1\), on n'a jamais
+      besoin de tout projeter dans \(R_1\) : la formule de dérivation vectorielle (Bour) donne directement
+      \[\Big[\dfrac{d\vec u}{dt}\Big]_{R_1}=\Big[\dfrac{d\vec u}{dt}\Big]_{R_2}+\overrightarrow{\Omega_{R_2/R_1}}\wedge\vec u\]
+      Cas très fréquent : \(\vec u\) constant dans \(R_2\) (vecteur de base attaché au solide 2) →
+      \([\tfrac{d\vec u}{dt}]_{R_2}=\vec0\), donc \([\tfrac{d\vec u}{dt}]_{R_1}=\overrightarrow{\Omega_{2/1}}\wedge\vec u\).
+    </div>
+    <div class="warnbox">
+      <span class="lab">Erreur fréquente</span>
+      Oublier qu'un moment dynamique dépend <b>à la fois</b> du mouvement étudié <b>et</b> du point où on
+      l'écrit — deux points différents donnent, en général, deux valeurs différentes de \(\vec\delta\) (contrairement
+      à la résultante \(m\vec\Gamma_G\), qui elle est unique). Toujours vérifier qu'on compare des torseurs
+      exprimés au <b>même point</b>.
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Généré comme support de révision personnel · Contenu basé sur le CM de S2I (Sciences Industrielles de
+  l'Ingénieur) de l'ECAM — <a href="S2I_CM_C03_Dynamique_du_solide.pdf">PDF source</a>.
+</footer>
+<script src="../assets/gate.js"></script>
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dynamique du solide — DS01 corrigés — SI AM2 — Révision ECAM</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div class="topbar">
+  <a href="../index.html#am2">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="ch3-dynamique-solide.html">📋 Cours</a>
+  <a href="ch3-td-corrige-dynamique-solide.html">TD corrigé</a>
+  <a href="#banc">DS22 Ex1 — Banc</a>
+  <a href="#vitre">DS23 Ex1 — Vitre</a>
+  <a href="#treuil">DS23 Ex2 — Treuil</a>
+  <a href="#reducteur">DS23 Ex3 — Réducteur</a>
+  <a href="#docs">Documents</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SI AM2 (2ᵉ année) · Chapitre 3 — Dynamique du solide</span>
+  <h1 class="title">DS01 corrigés — Dynamique du solide</h1>
+  <p class="lead">Correction intégrale des exercices de <b>dynamique</b> des deux DS01 donnés sur Moodle
+  (<i>DS01 2022-2023</i> et <i>DS01 2023-2024</i>) : banc d'essai vibrant (PFD sur un ensemble puis sur le
+  pendule, linéarisation, antirésonance), cellule de découpe de vitre (PFD en rotation autour d'un axe fixe, effort
+  de vérin), motorisation d'un treuil (énergie cinétique, inertie équivalente) et réducteur à deux étages.
+  <b>⚠️ Aucun corrigé officiel</b> : tout est résolu avec la méthode du <a href="ch3-dynamique-solide.html">cours</a>,
+  avec vérifications croisées. L'exercice « hydro-nettoyeur » du DS 2022 (hyperstatisme + dynamique) est traité
+  dans la page du <a href="ch2-tp-ds-hyperstatisme.html">chapitre 2</a>.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire</b>
+    <ul>
+      <li><a href="#banc">1. DS01 2022 — Ex1 : banc d'essai vibrant (11 pts)</a></li>
+      <li><a href="#vitre">2. DS01 2023 — Ex1 : cellule de découpe de vitre (15 pts)</a></li>
+      <li><a href="#treuil">3. DS01 2023 — Ex2 : motorisation d'un treuil (5 pts)</a></li>
+      <li><a href="#reducteur">4. DS01 2023 — Ex3 : réducteur à deux étages + bonus (2 pts)</a></li>
+      <li><a href="#docs">📂 Documents donnés</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= BANC VIBRANT =============================== -->
+  <section class="block" id="banc">
+    <h2>1. DS01 2022 — Banc d'essai vibrant</h2>
+
+    <figure>
+      <img src="img/ds1-banc-vibrant.png" alt="Modèle cinématique du banc vibrant : support 0, bâti vibrant 1 rappelé par un ressort, moteur à balourd 2, pendule 3" loading="lazy">
+      <figcaption>Énoncé : bâti vibrant 1 (masse \(m_1\), glissière d'axe \(\vec x_0\) avec 0, rappelé par un ressort de raideur
+      \(k\)), balourd \(m_2\) en \(P\) (rayon \(r\), vitesse \(\Omega\) constante), pendule 3 de longueur \(L\) portant \(m_3\)
+      en \(D\) (pivot d'axe \((C,\vec z_0)\)).</figcaption>
+    </figure>
+
+    <div class="exo-card">
+      <div class="exo-head">Q1–Q2 — Graphe des structures et bilan des actions sur \(\Sigma=\{1+2+3\}\) <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="q">1) Graphe des structures</p>
+        <p>Quatre solides : 0 (bâti), 1, 2, 3. Liaisons : <b>0–1</b> glissière d'axe \(\vec x_0\) (en parallèle avec le ressort),
+        <b>1–2</b> pivot d'axe \((B,\vec z_0)\) (moteur), <b>1–3</b> pivot d'axe \((C,\vec z_0)\). C'est un
+        <b>arbre</b> (chaîne ouverte arborescente) : 0 — 1 — 2 et 1 — 3, aucun cycle.</p>
+        <p class="q">2) Bilan des actions mécaniques extérieures à \(\Sigma\)</p>
+        <p>Les liaisons 1–2 et 1–3 sont <b>intérieures</b> à \(\Sigma\) : elles ne figurent pas. Restent :</p>
+        <ul>
+          <li><b>Pesanteur</b> sur 1, 2, 3 : \(-m_1g\,\vec y_0\) en \(G_1\), \(-m_2g\,\vec y_0\) en \(P\), \(-m_3g\,\vec y_0\) en \(D\).</li>
+          <li><b>Ressort</b> 0→1 en \(A\) : longueur \(l_0+x\), longueur libre \(l_0\), donc allongement \(x\) et
+          \(\vec F_{ressort\to1}=-kx\,\vec x_0\).</li>
+          <li><b>Glissière parfaite</b> 0→1 (modèle plan) : pas d'effort suivant \(\vec x_0\) (mouvement libre), mais
+          \(Y_{01}\,\vec y_0\) et un moment \(N_{01}\,\vec z_0\).</li>
+        </ul>
+        <div class="note"><span class="lab">À retenir</span> Le couple moteur et la liaison pivot du balourd sont
+        <b>intérieurs</b> à \(\Sigma\) : choisir \(\Sigma\) = tout ce qui bouge « ensemble » évite d'introduire des inconnues inutiles.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q3 — Première équation du mouvement (TRD sur \(\Sigma\), projection sur \(\vec x_0\)) <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">3) Théorème de la résultante dynamique</p>
+        <p>Positions suivant \(\vec x_0\) (à une constante près, \(x\) = allongement du ressort) :</p>
+        \[x_1=x\ ,\qquad x_P=x+r\cos\Omega t\ ,\qquad x_D=x+L\sin\theta\]
+        <p>(le pendule pend suivant \(-\vec v\), avec \(\overrightarrow{CD}=L(\sin\theta\,\vec x_0-\cos\theta\,\vec y_0)\)).
+        En dérivant deux fois (\(\Omega\) constante) :</p>
+        \[a_{1x}=\ddot x\ ,\qquad a_{2x}=\ddot x-r\Omega^2\cos\Omega t\ ,\qquad a_{3x}=\ddot x+L(\ddot\theta\cos\theta-\dot\theta^2\sin\theta)\]
+        <p>Seules les masses \(m_1,m_2,m_3\) comptent (les autres sont négligées). Le TRD de \(\Sigma\) projeté sur \(\vec x_0\) :
+        \(\sum m_ia_{ix}=-kx\) (la pesanteur et la glissière n'ont pas de composante sur \(\vec x_0\)) :</p>
+        \[m_1\ddot x+m_2(\ddot x-r\Omega^2\cos\Omega t)+m_3\big(\ddot x+L\ddot\theta\cos\theta-L\dot\theta^2\sin\theta\big)=-kx\]
+        <div class="res">\[(m_1+m_2+m_3)\,\ddot x+kx+m_3L\ddot\theta\cos\theta-m_3L\dot\theta^2\sin\theta=m_2r\Omega^2\cos\Omega t\]</div>
+        <p>On retrouve exactement l'équation demandée. Le second membre est la <b>force centrifuge du balourd</b> projetée sur \(\vec x_0\) :
+        c'est elle qui excite le système à la pulsation \(\Omega\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q4–Q6 — Deuxième équation (pendule) et linéarisation <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">4) Isolement de 3 : bilan</p>
+        <p>Actions extérieures sur le pendule : pesanteur \(-m_3g\,\vec y_0\) en \(D\) ; action de 1 sur 3 par le pivot parfait
+        en \(C\) : force \((X_{13},Y_{13})\) et moment <b>nul suivant \(\vec z_0\)</b> (pivot parfait, modèle plan).</p>
+        <p class="q">5) Théorème du moment dynamique en \(C\), projeté sur \(\vec z_0\)</p>
+        <p>Cette projection <b>élimine</b> la réaction inconnue du pivot (elle passe par \(C\)). Solide 3 = masse ponctuelle en \(D\) :
+        \(\vec\delta_{C}(3/0)=\overrightarrow{CD}\wedge m_3\vec a_D\) (matrice d'inertie nulle en \(D\)). Avec
+        \(\overrightarrow{CD}=L(\sin\theta,-\cos\theta)\) et</p>
+        \[\vec a_D=\begin{pmatrix}\ddot x+L(\ddot\theta\cos\theta-\dot\theta^2\sin\theta)\\ L(\ddot\theta\sin\theta+\dot\theta^2\cos\theta)\end{pmatrix}\]
+        <p>la composante suivant \(\vec z_0\) du produit vectoriel est \(CD_xa_y-CD_ya_x\) :</p>
+        \[L\sin\theta\cdot L(\ddot\theta\sin\theta+\dot\theta^2\cos\theta)+L\cos\theta\big(\ddot x+L\ddot\theta\cos\theta-L\dot\theta^2\sin\theta\big)
+        =L^2\ddot\theta+L\ddot x\cos\theta\]
+        <p>(les termes en \(\dot\theta^2\) s'annulent : \(\sin\theta\cos\theta-\cos\theta\sin\theta=0\) ; \(\sin^2+\cos^2=1\)).
+        Moment du poids en \(C\) suivant \(\vec z_0\) : \(CD_x\cdot(-m_3g)-CD_y\cdot0=-m_3gL\sin\theta\). Donc
+        \(m_3(L^2\ddot\theta+L\ddot x\cos\theta)=-m_3gL\sin\theta\), soit en divisant par \(m_3L\) :</p>
+        <div class="res">\[\ddot x\cos\theta+L\ddot\theta+g\sin\theta=0\]</div>
+        <p class="q">6) Linéarisation à l'ordre 1 (\(\cos\theta\approx1,\ \sin\theta\approx\theta,\ \dot\theta^2\approx0\))</p>
+        <div class="res">\[(m_1+m_2+m_3)\ddot x+kx+m_3L\ddot\theta=m_2r\Omega^2\cos\Omega t\qquad(E_1)\]
+        \[\ddot x+L\ddot\theta+g\theta=0\qquad(E_2)\]</div>
+        <div class="warnbox"><span class="lab">Piège</span> L'énoncé le rappelle : \(\theta\neq0\) et \(\dot\theta\neq0\) en général ; on
+        linéarise seulement parce que \(\theta\) et \(\dot\theta\) sont <b>petits</b> (\(\sin\theta\approx\theta\), mais on garde le terme \(g\theta\)
+        qui est du premier ordre ; \(\dot\theta^2\) est du second ordre, donc négligé).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q7–Q8 — Régime forcé et condition d'antirésonance <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">7) Système d'équations pour \(A\) et \(B\)</p>
+        <p>En régime forcé, la réponse est à la pulsation d'excitation : \(\omega=\Omega\). On pose \(M=m_1+m_2+m_3\),
+        \(x=A\cos\omega t\), \(\theta=B\cos\omega t\), donc \(\ddot x=-\omega^2A\cos\omega t\) et \(\ddot\theta=-\omega^2B\cos\omega t\).
+        On simplifie par \(\cos\omega t\) :</p>
+        \[(E_1):\ (k-M\omega^2)A-m_3L\omega^2B=m_2r\omega^2\qquad(E_2):\ -\omega^2A+(g-L\omega^2)B=0\]
+        <p>De \((E_2)\) : \(B=\dfrac{\omega^2A}{g-L\omega^2}\). On reporte dans \((E_1)\) :</p>
+        \[A\Big[(k-M\omega^2)(g-L\omega^2)-m_3L\omega^4\Big]=m_2r\omega^2(g-L\omega^2)\]
+        <p>Développement du crochet : \(kg-kL\omega^2-Mg\omega^2+ML\omega^4-m_3L\omega^4\), avec \(M-m_3=m_1+m_2\) :</p>
+        <div class="res">\[A=\dfrac{m_2r\omega^2\,(g-L\omega^2)}{kg-(kL+Mg)\omega^2+(m_1+m_2)L\omega^4}\ ,\qquad
+        B=\dfrac{m_2r\,\omega^4}{kg-(kL+Mg)\omega^2+(m_1+m_2)L\omega^4}\]</div>
+        <p class="q">8) Condition pour \(x(t)=0\) en régime forcé</p>
+        <p>\(A=0\) \(\iff\) \(g-L\Omega^2=0\) (numérateur nul, dénominateur non nul).</p>
+        <div class="res">\[\boxed{L=\dfrac{g}{\Omega^2}}\]</div>
+        <div class="note"><span class="lab">Interprétation — absorbeur pendulaire</span> Avec \(L=g/\Omega^2\), le pendule est réglé sur
+        la pulsation d'excitation (\(\omega_0=\sqrt{g/L}=\Omega\)) : il oscille avec \(B=-\dfrac{m_2r}{m_3L}\) (opposition de phase) et sa
+        force sur le bâti compense exactement la force centrifuge du balourd, d'où \(m_3LB=-m_2r\) : le bâti ne bouge plus.
+        <b>Vérification</b> : avec \(L=g/\Omega^2\), le dénominateur vaut \(-m_3g\Omega^2\), donc \(B=m_2r\Omega^4/(-m_3g\Omega^2)=-m_2r\Omega^2/(m_3g)=-m_2r/(m_3L)\) ✓.
+        C'est le principe des amortisseurs à masse accordée (gratte-ciel, câbles, nacelles).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= VITRE =============================== -->
+  <section class="block" id="vitre">
+    <h2>2. DS01 2023 — Cellule de découpe de vitre</h2>
+
+    <figure>
+      <img src="img/ds1-vitre-schema.png" alt="Schéma cinématique : table 1 en pivot en O sur le bâti, vérin 2 (corps 2C, tige 2T) entre A et B" loading="lazy">
+      <figcaption>Énoncé (figure 2) : table 1 {table, ventouses, vitre} en pivot d'axe \((O,\vec z_0)\) ; vérin 2 = \(\{2_C,2_T\}\) articulé en
+      \(A\) sur la table et en \(B\) sur le bâti. \(OA=r\) (non donné numériquement), \(OG=l=1\) m, plaque de longueur \(2l=2\) m,
+      \(d=4\) m, \(h=0{,}6\) m, \(\alpha\in[0^\circ;110^\circ]\), \(m=500\) kg, \(J=670\) kg·m², course de \(110^\circ\) en \(55\) s.</figcaption>
+    </figure>
+
+    <div class="exo-card">
+      <div class="exo-head">Q1–Q3 — Graphe, inventaire, direction de l'effort du vérin <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="q">1) Graphe des liaisons</p>
+        <p>Solides : 0, 1, \(2_C\), \(2_T\). Liaisons : <b>0–1</b> pivot \((O,\vec z_0)\) ; <b>0–\(2_C\)</b> pivot \((B,\vec z_0)\) ;
+        <b>\(2_C\)–\(2_T\)</b> pivot glissant d'axe \((B,\vec x_2)\) ; <b>\(2_T\)–1</b> pivot \((A,\vec z_0)\). Un <b>cycle</b> unique :
+        0 – 1 – \(2_T\) – \(2_C\) – 0.</p>
+        <p class="q">2) Inventaire des efforts (modèle plan, liaisons parfaites)</p>
+        <ul>
+          <li><b>Sur 1</b> : poids \(-mg\,\vec y_0\) en \(G\) ; action de 0 en \(O\) (pivot : force \((X_{01},Y_{01})\), moment nul suivant \(\vec z_0\)) ;
+          action de \(2_T\) en \(A\) (pivot : force sans moment).</li>
+          <li><b>Sur 2</b> (vérin, masses négligées) : action de 0 en \(B\) (force) et action de 1 en \(A\) (force). Les pivots parfaits ne
+          transmettent <b>aucun moment</b> ; la glissière interne \(2_C/2_T\) est intérieure au vérin.</li>
+        </ul>
+        <p class="q">3) Forme de l'action du vérin sur la table</p>
+        <p>Isolons le vérin 2 : <b>deux seules forces</b> (en \(A\) et en \(B\)), pas de moment, poids négligé et masses/inerties
+        négligeables donc torseur dynamique nul. L'équilibre impose : les deux forces sont <b>opposées</b> et portées par la droite \((AB)\),
+        de direction \(\vec x_2\) (car \(\overrightarrow{AB}=\lambda\vec x_2\)).</p>
+        <div class="res">\[\vec F_{2\to1}=-F\,\vec x_2\quad(\text{en }A)\ ,\qquad F>0\ \text{si le vérin pousse}\]</div>
+        <div class="note"><span class="lab">Méthode</span> « Solide à deux forces, sans moment, sans poids ⇒ forces colinéaires à la droite des deux points d'application,
+        de sens opposés ». C'est le raccourci classique d'un vérin ou d'une bielle.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q4 — Moment d'inertie de la plaque en \(O\) suivant \(\vec z_0\) <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="warnbox"><span class="lab">Piège de notation</span> L'énoncé utilise \(h\) deux fois : \(h=0{,}6\) m (position de \(B\))
+        et « dimension \(h\) de la plaque suivant \(\vec z_0\) ». Ce sont deux grandeurs différentes ; on notera ici \(h_p\) la dimension
+        suivant \(\vec z_0\) de la plaque. Le résultat ne dépend pas de \(h_p\).</div>
+        <p>Plaque mince, plan \((\vec x_1,\vec z_0)\), \(x\in[0,2l]\) (mesuré depuis \(O\) suivant \(\vec x_1\)), \(z\in[-h_p/2,h_p/2]\), masse
+        surfacique \(\sigma=\dfrac{m}{2l\,h_p}\). La distance d'un point à l'axe \((O,\vec z_0)\) est \(|x|\) (la plaque est dans le plan \(y_1=0\)) :</p>
+        \[J=\int x^2dm=\sigma\,h_p\int_0^{2l}x^2dx=\dfrac{m}{2l}\cdot\dfrac{(2l)^3}{3}=\dfrac{m(2l)^2}{3}\]
+        <div class="res">\[J=\dfrac{4ml^2}{3}\]</div>
+        <div class="note"><span class="lab">Vérification</span> Huygens : \(J_G=\dfrac{m(2l)^2}{12}=\dfrac{ml^2}{3}\), puis
+        \(J=J_G+ml^2=\dfrac{ml^2}{3}+ml^2=\dfrac{4ml^2}{3}\) ✓. Numériquement \(J=\dfrac43\times500\times1^2\approx667\) kg·m², cohérent avec
+        \(J=670\) kg·m² de l'énoncé.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q5–Q7 — Moment dynamique, PFD et expression de \(F\) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">5) Moment dynamique de 1/0 en \(O\)</p>
+        <p>Rotation d'axe fixe \((O,\vec z_0)\), vitesse \(\dot\alpha\,\vec z_0\). La plaque est symétrique par rapport au plan \(z=0\), donc les produits
+        d'inertie \(D=\int yz\,dm\) et \(E=\int xz\,dm\) sont nuls : l'axe \(\vec z_0\) est axe principal. Le moment cinétique en \(O\)
+        (point fixe) est \(\vec\sigma_{O}(1/0)=J\dot\alpha\,\vec z_0\) ; on dérive dans \(R_0\) (\(\vec z_0\) constant) :</p>
+        <div class="res">\[\vec\delta_{O}(1/0)=J\,\ddot\alpha\,\vec z_0\]</div>
+        <p class="q">6) PFD de 1 : équation retenue</p>
+        <p>Le PFD donne 2 équations de résultante (inconnues \(X_{01},Y_{01}\)) et 1 équation de moment. On <b>retient le théorème du moment dynamique
+        en \(O\) projeté sur \(\vec z_0\)</b> : il élimine la réaction de la pivot \(O\) (bras de levier nul) et ne fait intervenir que l'inconnue \(F\) :</p>
+        \[\vec\delta_{O}(1/0)\cdot\vec z_0=\sum\vec M_O(\text{ext}\to1)\cdot\vec z_0\]
+        <p class="q">7) Calcul de \(F\)</p>
+        <p>Convention de la figure : \(\vec x_1=\cos\alpha\,\vec x_0+\sin\alpha\,\vec y_0\), \(\vec x_2=\cos\beta\,\vec x_0-\sin\beta\,\vec y_0\) (\(\beta\) est lu <b>sous</b>
+        \(\vec x_0\), donc \(\beta>0\) ; si on prend l'orientation trigonométrique stricte, \(\beta\) est négatif et il suffit d'inverser son signe).
+        Produit vectoriel plan : \(\vec x_1\wedge\vec x_2=-\sin(\alpha+\beta)\,\vec z_0\).</p>
+        <ul>
+          <li>Poids en \(G\) : \(\overrightarrow{OG}\wedge(-mg\,\vec y_0)=-mgl\cos\alpha\,\vec z_0\) (en \(\vec x_1\wedge\vec y_0=-\cos\alpha\,\vec z_0\)).</li>
+          <li>Vérin en \(A\) : \(\overrightarrow{OA}\wedge(-F\vec x_2)=-Fr\,(\vec x_1\wedge\vec x_2)=+Fr\sin(\alpha+\beta)\,\vec z_0\).</li>
+          <li>Pivot \(O\) : moment nul en \(O\).</li>
+        </ul>
+        \[J\ddot\alpha=-mgl\cos\alpha+Fr\sin(\alpha+\beta)\]
+        <div class="res">\[F=\dfrac{J\ddot\alpha+mgl\cos\alpha}{r\,\sin(\alpha+\beta)}\]</div>
+        <div class="note"><span class="lab">Sens physique</span> Au numérateur : le couple d'inertie (\(J\ddot\alpha\)) plus le couple de pesanteur
+        (\(mgl\cos\alpha\), nul à \(90^\circ\), table verticale). Au dénominateur : le <b>bras de levier</b> \(r\sin(\alpha+\beta)\) du vérin :
+        plus le vérin est « aligné » avec la table (\(\alpha+\beta\to0\)), plus l'effort explose.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q8–Q9 — Fermeture géométrique et effort maximal <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">8) Fermeture géométrique \(\overrightarrow{OA}+\overrightarrow{AB}+\overrightarrow{BO}=\vec0\)</p>
+        <p>Soit \(r\vec x_1+\lambda\vec x_2=d\,\vec x_0-h\,\vec y_0\). On projette sur \(\vec x_0\) et \(\vec y_0\) :</p>
+        \[r\cos\alpha+\lambda\cos\beta=d\ ,\qquad r\sin\alpha-\lambda\sin\beta=-h\]
+        <div class="res">\[\lambda\cos\beta=d-r\cos\alpha\ ,\quad\lambda\sin\beta=h+r\sin\alpha\ \Rightarrow\
+        \boxed{\tan\beta=\dfrac{h+r\sin\alpha}{d-r\cos\alpha}}\ ,\quad
+        \lambda^2=(d-r\cos\alpha)^2+(h+r\sin\alpha)^2\]</div>
+        <p>Le domaine de \(\beta\) pour \(\alpha\in[0^\circ;110^\circ]\) se lit sur cette relation : aux bornes,
+        \(\tan\beta(0)=\dfrac{h}{d-r}\) et \(\tan\beta(110^\circ)=\dfrac{h+0{,}940\,r}{d+0{,}342\,r}\), avec un maximum intermédiaire.
+        <b>⚠️ La valeur de \(r=OA\) n'est pas donnée dans l'énoncé écrit</b> (elle n'est pas cotée sur le schéma). À titre d'illustration seulement,
+        pour \(r=0{,}5\) m : \(\beta(0)\approx9{,}7^\circ\), \(\beta(110^\circ)\approx14{,}4^\circ\), maximum \(\approx15{,}7^\circ\) vers \(\alpha\approx75^\circ\),
+        donc \(\beta\in[9{,}7^\circ;\,15{,}7^\circ]\) : le vérin reste très proche de l'horizontale.</p>
+        <p class="q">9) \(F\) est maximal pour \(\alpha=0\)</p>
+        <p>Mouvement à accélération angulaire constante : \(|\ddot\alpha|=\dfrac{2\times110^\circ}{55^2}=\dfrac{2\times1{,}920}{3025}\approx1{,}27\times10^{-3}\) rad/s²,
+        donc \(J|\ddot\alpha|\approx0{,}85\) N·m, à comparer à \(mgl=500\times9{,}81\times1=4905\) N·m : le terme d'inertie est
+        <b>négligeable</b> (\(<0{,}02\,\%\)). Il reste \(F\simeq\dfrac{mgl\cos\alpha}{r\sin(\alpha+\beta)}\).</p>
+        <ul>
+          <li><b>Numérateur</b> \(mgl\cos\alpha\) : décroissant sur \([0;110^\circ]\), maximal en \(\alpha=0\) (il s'annule à \(90^\circ\), puis \(F\) devient négatif :
+          au-delà de la verticale, la pesanteur aide au mouvement).</li>
+          <li><b>Dénominateur</b> \(r\sin(\alpha+\beta)\) : \(\alpha+\beta\) croît de \(\beta(0)\) (petit) vers \(\approx90^\circ\) à \(\approx75^\circ\) : le sinus <b>croît</b>
+          de \(\sin\beta(0)\) à \(\approx1\) ; il est donc <b>minimal en \(\alpha=0\)</b>.</li>
+        </ul>
+        <p>Sur \(\alpha\in[0;\,90^\circ]\), \(F\) est un quotient d'un numérateur <b>décroissant</b> par un dénominateur <b>croissant</b> (tant que \(\alpha+\beta<90^\circ\)) :
+        il décroît. Au-delà, \(\cos\alpha\) est de plus en plus petit et s'annule en \(90^\circ\), donc \(|F|\) reste inférieur à \(F(0)\).</p>
+        <div class="res">\[F_{max}=F(\alpha=0)=\dfrac{J|\ddot\alpha|+mgl}{r\,\sin\beta(0)}\approx\dfrac{mgl}{r\sin\beta(0)}\]</div>
+        <div class="note"><span class="lab">Ordre de grandeur (r=0,5 m, hypothèse)</span> \(F_{max}\approx\dfrac{4905}{0{,}5\times0{,}169}\approx58\) kN : table horizontale, vérin presque
+        horizontal (angle \(\approx10^\circ\)), bras de levier minuscule. C'est bien le cas dimensionnant du vérin (pression \(p=F/S\)).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= TREUIL =============================== -->
+  <section class="block" id="treuil">
+    <h2>3. DS01 2023 — Motorisation d'un treuil</h2>
+
+    <figure>
+      <img src="img/ds1-treuil.png" alt="Schéma cinématique du treuil : moteur 2 (Z2), arbre intermédiaire 3 (Z32 et Z34), tambour 4 (Z4), charge 5" loading="lazy">
+      <figcaption>Énoncé : moteur 2 (pignon \(Z_2\)) engrène avec le pignon \(3_2\) (\(Z_{32}\)) de l'arbre 3 ; le pignon \(3_4\) (\(Z_{34}\)) engrène avec le pignon \(Z_4\) du tambour 4
+      (rayon \(R\)) ; câble inextensible, charge 5 de masse \(M\) en translation suivant \(\vec y_1\).</figcaption>
+    </figure>
+
+    <div class="exo-card">
+      <div class="exo-head">Q1–Q3 — Loi cinématique, énergie cinétique, inertie équivalente <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">1) Relation \(v_{51}=R\dfrac{Z_{34}Z_2}{Z_{32}Z_4}\omega_{21}\)</p>
+        <p>Deux engrenages <b>extérieurs</b> en série : le rapport de vitesses est \(-\dfrac{Z_{menant}}{Z_{mené}}\) (le signe − : sens de rotation inversé).</p>
+        \[\dfrac{\omega_{31}}{\omega_{21}}=-\dfrac{Z_2}{Z_{32}}\ ,\qquad\dfrac{\omega_{41}}{\omega_{31}}=-\dfrac{Z_{34}}{Z_4}\]
+        \[\omega_{41}=\omega_{31}\cdot\Big(-\dfrac{Z_{34}}{Z_4}\Big)=\dfrac{Z_2Z_{34}}{Z_{32}Z_4}\,\omega_{21}\qquad(\text{deux signes − : le signe disparaît})\]
+        <p>Câble inextensible et sans masse enroulé sur le tambour de rayon \(R\) : la vitesse de la charge est celle d'un point de la périphérie du
+        tambour, \(v_{51}=R\,\omega_{41}\) (le signe + correspond au sens d'enroulement choisi par l'énoncé).</p>
+        <div class="res">\[v_{51}=R\,\dfrac{Z_{34}Z_2}{Z_{32}Z_4}\,\omega_{21}\]</div>
+        <p class="q">2) Énergie cinétique de \(\Sigma=\{2,3,4,5\}\)</p>
+        <p>Les arbres 2, 3, 4 sont en rotation autour d'un axe fixe passant par leur centre de masse (\(E_c=\tfrac12J_i\omega_{i1}^2\)) ; la charge 5 est
+        en translation (\(E_c=\tfrac12Mv_{51}^2\)). On note \(k=\dfrac{Z_2Z_{34}}{Z_{32}Z_4}\) :</p>
+        \[E_{c(\Sigma/1)}=\tfrac12J_2\omega_{21}^2+\tfrac12J_3\omega_{31}^2+\tfrac12J_4\omega_{41}^2+\tfrac12Mv_{51}^2\]
+        \[=\tfrac12\Big[J_2+J_3\Big(\dfrac{Z_2}{Z_{32}}\Big)^2+J_4k^2+MR^2k^2\Big]\omega_{21}^2\]
+        <div class="res">\[E_{c(\Sigma/1)}=\tfrac12\Big[J_2+J_3\dfrac{Z_2^2}{Z_{32}^2}+(J_4+MR^2)\Big(\dfrac{Z_2Z_{34}}{Z_{32}Z_4}\Big)^2\Big]\omega_{21}^2\]</div>
+        <p class="q">3) Inertie équivalente ramenée à l'arbre moteur</p>
+        <p>Par définition \(E_c=\tfrac12J_{eq}\,\omega_{21}^2\) :</p>
+        <div class="res">\[J_{eq}=J_2+J_3\Big(\dfrac{Z_2}{Z_{32}}\Big)^2+\big(J_4+MR^2\big)\Big(\dfrac{Z_2Z_{34}}{Z_{32}Z_4}\Big)^2\]</div>
+        <div class="note"><span class="lab">Objectif de l'exercice : \(C_m=f(M)\)</span> Le théorème de l'énergie cinétique (liaisons parfaites, engrenages sans perte) :
+        \(C_m\omega_{21}-Mg\,v_{51}=\dfrac{dE_c}{dt}=J_{eq}\,\omega_{21}\dot\omega_{21}\) (la puissance du poids est \(-Mg\,\vec y_1\cdot v_{51}\vec y_1\)). En divisant par
+        \(\omega_{21}\) et en remplaçant \(v_{51}=Rk\,\omega_{21}\) :
+        \[\boxed{C_m=J_{eq}\,\dot\omega_{21}+MgR\,\dfrac{Z_2Z_{34}}{Z_{32}Z_4}}\]
+        Le second terme est le couple statique de maintien (il croît linéairement avec \(M\)) ; le premier est le couple d'accélération, avec \(J_{eq}\) qui dépend lui aussi de \(M\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> Le rapport de réduction est <b>élevé au carré</b> dans \(J_{eq}\) (l'énergie cinétique est quadratique en vitesse) mais
+        apparaît <b>à la puissance 1</b> dans le couple statique \(MgRk\) (la puissance est linéaire en vitesse).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= REDUCTEUR =============================== -->
+  <section class="block" id="reducteur">
+    <h2>4. DS01 2023 — Réducteur à deux étages (+ bonus)</h2>
+
+    <figure>
+      <img src="img/ds1-reducteur.png" alt="Réducteur à deux étages S1, S2, S3 avec deux engrenages en série" loading="lazy">
+      <figcaption>Énoncé : \(\dfrac{\omega_{20}}{\omega_{10}}=-k_1\), \(\dfrac{\omega_{30}}{\omega_{20}}=-k_2\) ; \(I_i\) = inertie de \(S_i\) autour de son axe.</figcaption>
+    </figure>
+
+    <div class="exo-card">
+      <div class="exo-head">Q1–Q2 — Inerties équivalentes ramenées à l'entrée et à la sortie <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p>Relations cinématiques : \(\omega_{20}=-k_1\omega_{10}\) ; \(\omega_{30}=-k_2\omega_{20}=k_1k_2\,\omega_{10}\).
+        Énergie cinétique de l'ensemble (chaque \(S_i\) tourne autour d'un axe fixe de son centre de masse) :
+        \[E_c=\tfrac12\big(I_1\omega_{10}^2+I_2\omega_{20}^2+I_3\omega_{30}^2\big)\]
+        <p class="q">1) Ramenée à l'arbre d'entrée (\(E_c=\tfrac12J_{eq,e}\,\omega_{10}^2\))</p>
+        \[E_c=\tfrac12\big(I_1+k_1^2I_2+k_1^2k_2^2I_3\big)\omega_{10}^2\]
+        <div class="res">\[J_{eq,e}=I_1+k_1^2\,I_2+k_1^2k_2^2\,I_3\]</div>
+        <p class="q">2) Ramenée à l'arbre de sortie (\(E_c=\tfrac12J_{eq,s}\,\omega_{30}^2\))</p>
+        <p>On exprime tout en fonction de \(\omega_{30}\) : \(\omega_{20}=-\omega_{30}/k_2\) et \(\omega_{10}=\omega_{30}/(k_1k_2)\), donc</p>
+        <div class="res">\[J_{eq,s}=I_3+\dfrac{I_2}{k_2^2}+\dfrac{I_1}{k_1^2k_2^2}\]</div>
+        <div class="note"><span class="lab">Vérification</span> \(J_{eq,e}=k_1^2k_2^2\,J_{eq,s}\) ✓ : un même \(E_c\) vu depuis deux arbres dont les vitesses
+        sont dans le rapport \(k_1k_2\). Pour un réducteur (\(k\) petit, vitesse de sortie plus faible) c'est l'inertie du <b>moteur</b>
+        (\(I_1\)) qui domine côté entrée, celle de la <b>charge</b> (\(I_3\)) côté sortie.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Bonus (3 points) <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="q">1) Nationalité de Christiaan Huygens</p>
+        <p>Néerlandais (La Haye, 1629–1695). Théorème de Huygens-Steiner : \(I_\Delta=I_G+md^2\).</p>
+        <p class="q">2) Points communs entre le théorème de l'énergie cinétique et le PFD</p>
+        <p>Tous deux découlent des mêmes lois de la dynamique ; ils s'appliquent à un solide ou un ensemble de solides isolé, dans un
+        référentiel <b>galiléen</b>, et font intervenir les efforts extérieurs (et les efforts intérieurs pour le TEC). Le TEC est
+        <b>une combinaison scalaire</b> du PFD (on le multiplie par les vitesses) : il redonne une seule équation de plus, sans réaction de liaison
+        parfaite (puissance nulle).</p>
+        <p class="q">3) Que représente \(h\) ?</p>
+        <p>Le <b>degré d'hyperstatisme</b> = nombre d'inconnues de liaison que la statique ne permet pas de déterminer (redondances) :
+        \(h=m-I_c+E_c=m-E_s+I_s\).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= DOCS =============================== -->
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <div class="docs-group">
+      <h3>DS01 — Sciences industrielles (annales Moodle)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="S2I_DS01_2022-2023.pdf"><span class="ic">📄</span><span class="nm">S2I_DS01_2022-2023.pdf</span><span class="badge">Sujet</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="S2I_DS01_2023-2024.pdf"><span class="ic">📄</span><span class="nm">S2I_DS01_2023-2024.pdf</span><span class="badge">Sujet</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Généré comme support de révision personnel · Annales DS01 de S2I de l'ECAM (pas de corrigé officiel — correction construite à partir des formules du cours,
+  vérifiée par cohérence physique et ordres de grandeur).
+</footer>
+<script src="../assets/gate.js"></script>
+</body>
+</html>
