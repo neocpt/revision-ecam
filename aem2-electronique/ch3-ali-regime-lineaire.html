@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ch3 — ALI en régime linéaire — AM2 Électronique — Révision ECAM</title>
+<title>Chapitre 3 — ALI en régime linéaire — Révision ECAM</title>
 <link rel="stylesheet" href="../assets/style.css">
 <script>
 window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
@@ -16,33 +16,47 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
   <a href="../index.html#am2">← Accueil</a>
   <span class="spacer"></span>
   <a href="ch2-filtrage-fourier.html">← Ch2</a>
-  <a href="#s1">1. Présentation</a>
-  <a href="#s2">2. ALI idéal</a>
-  <a href="#s3">3. Montages</a>
-  <a href="#s4">4. Écarts</a>
+  <a href="#s1">Cours</a>
+  <a href="#ex1">TD3 corrigé</a>
   <a href="#docs">Documents donnés</a>
-  <a href="td3-corrige.html">TD3 corrigé →</a>
+  <a href="ch4-ali-regime-sature.html">Ch4 →</a>
 </div>
 
 <main class="wrap">
   <span class="chip">Électronique AM2 (2ᵉ année) · Chapitre 3</span>
-  <h1 class="title">Ch3 — L'amplificateur linéaire intégré (ALI) en régime linéaire</h1>
+  <h1 class="title">Chapitre 3 — ALI en régime linéaire</h1>
   <p class="lead">Présentation générale de l'ALI (brochage, alimentation symétrique, régimes linéaire/saturé),
   le modèle de l'ALI idéal « de gain infini », et les 5 montages fondamentaux (suiveur, non inverseur,
   inverseur, intégrateur, dérivateur). Les 14 questions du cours sont résolues intégralement, avec les écarts
   possibles à la réponse linéaire (saturations en tension et en courant). AM2 · P2030 · Semestre 3 —
   D. Courtois, 17/09/2026.</p>
-
   <div class="toc-mini">
     <b>Sommaire du chapitre</b>
-    <ul>
-      <li><a href="#s1">1. Présentation générale d'un ALI</a></li>
-      <li><a href="#s2">2. Un ALI idéal plus simple que l'ALI réel</a></li>
-      <li><a href="#s3">3. Principaux montages en régime linéaire</a></li>
-      <li><a href="#s4">4. Des écarts possibles à la réponse linéaire</a></li>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#s1"><b>Cours</b></a>
+        <ul>
+          <li><a href="#s1">1. Présentation générale d'un ALI</a></li>
+          <li><a href="#s2">2. Un ALI idéal plus simple que l'ALI réel</a></li>
+          <li><a href="#s3">3. Principaux montages en régime linéaire</a></li>
+          <li><a href="#s4">4. Des écarts possibles à la réponse linéaire</a></li>
+        </ul>
+      </li>
+      <li><a href="#ex1"><b>TD3 corrigé</b></a>
+        <ul>
+          <li><a href="#ex1">Ex 1 — Montage sommateur</a></li>
+          <li><a href="#ex2">Ex 2 — Montage pseudo-intégrateur</a></li>
+          <li><a href="#ex3">Ex 3 — Montage à résistance négative</a></li>
+          <li><a href="#ex4">Ex 4 — Montage avec deux ALI</a></li>
+          <li><a href="#ex5">Ex 5 — Filtres en cascade</a></li>
+          <li><a href="#ex6">Ex 6 — Simulateur d'inductance</a></li>
+        </ul>
+      </li>
       <li><a href="#docs">📂 Documents donnés</a></li>
     </ul>
   </div>
+
+  <div style="margin:2.2rem 0 .4rem;padding:.7rem 1rem;border-left:5px solid var(--subject);background:#f8fafc;border-radius:8px"><b style="color:var(--subject-ink)">Cours</b> — Ch3 — L'amplificateur linéaire intégré (ALI) en régime linéaire</div>
+
 
   <section class="block" id="s1">
     <h2>1. Présentation générale d'un Amplificateur Linéaire Intégré (ALI)</h2>
@@ -657,20 +671,624 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     </ul>
   </section>
 
+
+  <div style="margin:2.2rem 0 .4rem;padding:.7rem 1rem;border-left:5px solid var(--subject);background:#f8fafc;border-radius:8px"><b style="color:var(--subject-ink)">TD3 corrigé</b> — TD3 — Montages à ALI : sommateur, pseudo-intégrateur, résistance négative, filtres en cascade, gyrateur</div>
+  <p class="lead">Les 6 exercices du TD3 corrigés un par un, avec le même niveau de détail que les TD précédents :
+  montage sommateur inverseur, pseudo-intégrateur (compromis intégrateur/amplificateur), convertisseur à
+  résistance négative, montage à deux ALI en cascade, filtres passe-bas/passe-haut mis en cascade (Bode,
+  facteur de qualité, équation différentielle) et simulateur d'inductance à deux ALI (gyrateur).
+  AM2 · P2030 · Semestre 3 — D. Courtois, 21/09/2026.</p>
+
+
+  <div class="note"><span class="lab">Outil clé de tout le TD</span>
+  Pour un ALI <b>idéal</b> (gain infini, aucun courant dans ses entrées), le régime de fonctionnement se lit
+  sur la <b>rétroaction</b> : si la sortie ne revient <b>que</b> sur l'entrée <b>−</b> (contre-réaction pure),
+  l'ALI est <b>forcément</b> en régime <b>linéaire</b> (\(v_+=v_-\)) — c'est le cas des Ex 1, 2, 4 et 5.
+  Si la sortie revient à la fois sur <b>+</b> et sur <b>−</b> (Ex 3 et 6), rien ne garantit a priori que la
+  rétroaction globale soit négative : il faut <b>calculer</b> pour trancher entre régime linéaire et saturé.</div>
+
+  <!-- ================= EX 1 ================= -->
+  <section class="block" id="ex1">
+  <div class="exo-card">
+    <div class="exo-head">Ex 1 — Montage sommateur <span class="diff">♦ · d'après H : E.2.5, T : 5.4 et V : méth20.4</span></div>
+    <div class="exo-body">
+  <figure>
+    <img src="td3-img/ex1.jpg" alt="Énoncé Exercice 1 — montage sommateur non inverseur, trois entrées v1,v2,v3 par R1,R2,R3 sur l'entrée +, R0 et feedback R sur l'entrée -" loading="lazy">
+    <figcaption>Énoncé (TD3, D. Courtois) — sommateur non inverseur à 3 entrées</figcaption>
+  </figure>
+
+  <div class="note"><span class="lab">Le circuit</span> Les trois tensions \(v_1,v_2,v_3\) attaquent
+  <b>l'entrée +</b> de l'ALI par les résistances \(R_1,R_2,R_3\), qui se rejoignent toutes sur ce même nœud
+  (aucune autre connexion sur \(+\)). L'entrée <b>−</b> est reliée à la masse par \(R_0\) et à la sortie
+  \(v_s\) par la résistance \(R\) (contre-réaction).</div>
+
+  <p class="q">1) Quel est le régime de l'ALI : linéaire ou saturé ? Justifier.</p>
+  <p>La sortie \(v_s\) ne revient <b>que</b> sur l'entrée <b>−</b> (via \(R\), avec \(R_0\) pour seule autre
+  connexion de ce nœud) : c'est une contre-réaction pure, sans <b>aucun</b> chemin de retour vers <b>+</b>
+  (qui ne voit que \(v_1,v_2,v_3\)). Une telle rétroaction est <b>nécessairement négative</b> : elle
+  stabilise le point de fonctionnement autour de \(v_-=v_+\).</p>
+  <div class="res"><b>L'ALI fonctionne en régime linéaire</b> (\(v_-=v_+\)), et ceci est garanti par la
+  structure du montage (feedback exclusivement vers <b>−</b>) — on n'a pas besoin de le « supposer » comme
+  on le fera à l'exercice 3.</div>
+
+  <p class="q">2) S'agit-il d'un montage inverseur ou non inverseur ?</p>
+  <p>Les trois signaux d'entrée \(v_1,v_2,v_3\) sont tous appliqués sur l'entrée <b>+</b> (via
+  \(R_1,R_2,R_3\)), tandis que l'entrée <b>−</b> ne voit qu'un diviseur \(R_0\)/\(R\) issu de la sortie.
+  C'est la signature du montage <b>non inverseur</b> : chaque entrée sera recopiée en sortie avec un
+  <b>signe positif</b>.</p>
+  <div class="res"><b>Montage non inverseur</b> (généralisation à 3 entrées de l'amplificateur non
+  inverseur simple).</div>
+
+  <p class="q">3) Exprimer \(v_s\) en fonction de \(v_1\), \(v_2\) et \(v_3\)</p>
+  <p><b>Nœud \(v_+\)</b> — LNTP au nœud \(v_+\) (aucun courant n'entre dans l'ALI, donc la somme des
+  courants qui en repartent vers \(v_1\), \(v_2\) et \(v_3\) est nulle) :</p>
+  \[ \frac{v_+-v_1}{R_1}+\frac{v_+-v_2}{R_2}+\frac{v_+-v_3}{R_3}=0
+     \ \Longrightarrow\
+     v_+=\dfrac{\dfrac{v_1}{R_1}+\dfrac{v_2}{R_2}+\dfrac{v_3}{R_3}}{\dfrac{1}{R_1}+\dfrac{1}{R_2}+\dfrac{1}{R_3}}. \]
+  <p>\(v_+\) est donc une <b>moyenne pondérée</b> de \(v_1,v_2,v_3\) (pondération par les conductances
+  \(1/R_i\)) — un simple réseau résistif « moyenneur », qui ne tire aucun courant sur l'ALI.</p>
+  <p><b>Nœud \(v_-\)</b> — même méthode, avec \(v_-\) relié à la masse par \(R_0\) et à \(v_s\) par \(R\) :</p>
+  \[ \frac{v_--0}{R_0}+\frac{v_--v_s}{R}=0
+     \ \Longrightarrow\ v_s=v_-\left(1+\frac{R}{R_0}\right). \]
+  <p>En régime linéaire \(v_-=v_+\) (question 1), d'où :</p>
+  <div class="res">\[ \boxed{\ v_s=\left(1+\frac{R}{R_0}\right)\cdot
+     \dfrac{\dfrac{v_1}{R_1}+\dfrac{v_2}{R_2}+\dfrac{v_3}{R_3}}{\dfrac{1}{R_1}+\dfrac{1}{R_2}+\dfrac{1}{R_3}}\ } \]</div>
+  <p>On reconnaît la structure classique <b>amplificateur non inverseur</b> (gain \(1+R/R_0\)) appliqué à
+  un <b>moyenneur résistif</b> placé sur l'entrée \(+\).</p>
+
+  <p class="q">4) Exprimer \(v_s\) pour toutes les résistances égales à \(R\) ; justifier le titre de l'exercice</p>
+  <p>Dès que \(R_1=R_2=R_3\) (peu importe leur valeur commune), la moyenne pondérée devient une
+  <b>moyenne arithmétique</b> simple :</p>
+  \[ v_+=\frac{v_1+v_2+v_3}{3}. \]
+  <p>En posant en plus \(R_1=R_2=R_3=R_0=R\) (toutes les résistances valent \(R\), y compris \(R_0\) — la
+  résistance de contre-réaction s'appelle déjà \(R\) dans l'énoncé), le gain non inverseur vaut
+  \(1+R/R_0=1+R/R=2\), d'où :</p>
+  \[ v_s=2\cdot\frac{v_1+v_2+v_3}{3} \]
+  <div class="res">\[ \boxed{\ v_s=\frac{2}{3}(v_1+v_2+v_3)\ } \]</div>
+  <p>La sortie est <b>proportionnelle</b> à la <b>somme</b> des trois tensions d'entrée (avec un facteur
+  \(2/3\) ici, mais déjà proportionnelle à la somme dès que \(R_1=R_2=R_3\), quel que soit \(R_0\)) : le
+  montage réalise bien une <b>addition</b> de signaux, d'où le nom de <b>montage sommateur</b> — non
+  inverseur, cette fois, contrairement à la version « classique » que l'on rencontre souvent en cours.</p>
+    </div>
+  </div>
+  </section>
+
+  <!-- ================= EX 2 ================= -->
+  <section class="block" id="ex2">
+  <div class="exo-card">
+    <div class="exo-head">Ex 2 — Montage pseudo-intégrateur <span class="diff">♦ · T : Ch5, appli 2</span></div>
+    <div class="exo-body">
+
+  <p class="q">1) Schématiser le montage, retrouver \(\underline H\) par la LNTP en complexes</p>
+  <p>On part du montage <b>intégrateur</b> classique (\(v_e\) par \(R\) sur l'entrée <b>−</b>, \(C\) en
+  contre-réaction, \(v_+\) à la masse) et on met, comme demandé, une résistance \(R'\) <b>en dérivation</b>
+  (en parallèle) du condensateur \(C\) :</p>
+
+  <figure><svg viewBox="0 0 460 230" width="460" xmlns="http://www.w3.org/2000/svg">
+    <text x="10" y="105" fill="#334155" font-family="Georgia,serif" font-size="15" font-style="italic">v_e</text>
+    <line x1="30" y1="112" x2="70" y2="112" stroke="#0d9488" stroke-width="2"/>
+    <rect x="70" y="100" width="55" height="24" fill="none" stroke="#0d9488" stroke-width="2"/>
+    <text x="87" y="96" fill="#0d9488" font-family="monospace" font-size="13">R</text>
+    <line x1="125" y1="112" x2="170" y2="112" stroke="#0d9488" stroke-width="2"/>
+    <circle cx="170" cy="112" r="3" fill="#0d9488"/>
+    <text x="176" y="128" fill="#475569" font-family="monospace" font-size="12">v₋</text>
+    <!-- op amp box -->
+    <rect x="170" y="80" width="100" height="65" fill="none" stroke="#334155" stroke-width="2"/>
+    <text x="180" y="100" fill="#334155" font-family="monospace" font-size="14">−</text>
+    <text x="180" y="138" fill="#334155" font-family="monospace" font-size="14">+</text>
+    <line x1="170" y1="130" x2="150" y2="130" stroke="#0d9488" stroke-width="2"/>
+    <line x1="150" y1="130" x2="150" y2="165" stroke="#0d9488" stroke-width="2"/>
+    <line x1="135" y1="165" x2="165" y2="165" stroke="#334155" stroke-width="2"/>
+    <line x1="140" y1="171" x2="160" y2="171" stroke="#334155" stroke-width="1.6"/>
+    <line x1="145" y1="177" x2="155" y2="177" stroke="#334155" stroke-width="1.2"/>
+    <line x1="270" y1="112" x2="300" y2="112" stroke="#0d9488" stroke-width="2"/>
+    <text x="306" y="105" fill="#334155" font-family="Georgia,serif" font-size="15" font-style="italic">v_s</text>
+    <line x1="300" y1="112" x2="300" y2="112" stroke="#0d9488" stroke-width="2"/>
+    <!-- feedback C top -->
+    <line x1="170" y1="112" x2="170" y2="40" stroke="#0d9488" stroke-width="2"/>
+    <line x1="170" y1="40" x2="290" y2="40" stroke="#0d9488" stroke-width="2"/>
+    <line x1="290" y1="40" x2="290" y2="112" stroke="#0d9488" stroke-width="2"/>
+    <line x1="285" y1="30" x2="285" y2="50" stroke="#334155" stroke-width="2.4"/>
+    <line x1="295" y1="30" x2="295" y2="50" stroke="#334155" stroke-width="2.4"/>
+    <text x="270" y="24" fill="#334155" font-family="monospace" font-size="13">C</text>
+    <!-- feedback R' bottom -->
+    <line x1="170" y1="112" x2="170" y2="190" stroke="#d97706" stroke-width="2"/>
+    <line x1="170" y1="190" x2="290" y2="190" stroke="#d97706" stroke-width="2"/>
+    <line x1="290" y1="190" x2="290" y2="112" stroke="#d97706" stroke-width="2"/>
+    <rect x="200" y="178" width="55" height="24" fill="none" stroke="#d97706" stroke-width="2"/>
+    <text x="215" y="220" fill="#d97706" font-family="monospace" font-size="13">R' (ajoutée)</text>
+  </svg>
+  <figcaption>Pseudo-intégrateur : \(R'\) (orange) ajoutée en dérivation de \(C\) (bleu), en contre-réaction de l'ALI.</figcaption>
+  </figure>
+
+  <p>Le nœud \(v_-\) est en <b>masse virtuelle</b> (\(v_-=v_+=0\), contre-réaction pure vers <b>−</b>
+  uniquement — même argument qu'à l'exercice 1). L'impédance de contre-réaction est le parallèle de
+  \(R'\) et \(C\) :</p>
+  \[ \underline{Z_f}=\frac{R'\times\frac{1}{jC\omega}}{R'+\frac{1}{jC\omega}}=\frac{R'}{1+jR'C\omega}. \]
+  <p>LNTP au nœud \(v_-=0\) (courant entrant de \(v_e\) par \(R\) = courant sortant vers \(v_s\) par
+  \(\underline{Z_f}\), puisque l'ALI n'absorbe aucun courant) :</p>
+  \[ \frac{0-\underline{v_e}}{R}+\frac{0-\underline{v_s}}{\underline{Z_f}}=0
+     \ \Longrightarrow\ \underline{v_s}=-\frac{\underline{Z_f}}{R}\,\underline{v_e}. \]
+  <div class="res">\[ \boxed{\ \underline H=\frac{\underline{v_s}}{\underline{v_e}}
+     =-\frac{R'/R}{1+jR'C\omega}\ } \]
+  On reconnaît la forme <b>connue</b> d'un <b>filtre passe-bas du 1ᵉʳ ordre inversé</b> (gain statique
+  \(-R'/R\), pulsation de coupure \(\omega_1=1/R'C\)) : c'est exactement la forme du <b>pseudo-intégrateur</b>
+  vu en cours §3.4.</div>
+
+  <p class="q">2) Montrer que ce montage se comporte comme l'intégrateur à HF mais ne diverge pas à BF</p>
+  <p><b>Haute fréquence</b> (\(\omega\gg\omega_1=1/R'C\), donc \(R'C\omega\gg1\)) : au dénominateur,
+  \(1+jR'C\omega\approx jR'C\omega\), donc :</p>
+  \[ \underline H\approx-\frac{R'/R}{jR'C\omega}=-\frac{1}{jRC\omega}. \]
+  <div class="res">À HF, \(\underline H\to-\dfrac{1}{jRC\omega}\) : c'est <b>exactement</b> la fonction de
+  transfert de l'intégrateur pur (sans \(R'\)). Le montage se comporte donc bien comme un intégrateur
+  quand \(\omega\) est assez grand.</div>
+  <p><b>Basse fréquence</b> (\(\omega\ll\omega_1\), donc \(R'C\omega\ll1\)) : au dénominateur,
+  \(1+jR'C\omega\approx1\), donc :</p>
+  \[ \underline H\approx-\frac{R'}{R}\quad\text{(réel, fini, indépendant de }\omega\text{).} \]
+  <div class="res">À BF, le gain <b>sature</b> à la valeur finie \(-R'/R\) au lieu de diverger comme
+  \(-1/(jRC\omega)\to\infty\) pour l'intégrateur pur en \(\omega\to0\). C'est exactement l'effet recherché
+  de \(R'\) : elle borne le gain continu.</p>
+
+  <figure><svg viewBox="0 0 700 260" width="700" xmlns="http://www.w3.org/2000/svg">
+    <line x1="60" y1="230" x2="620" y2="230" stroke="#94a3b8" stroke-width="1.3"/>
+    <line x1="60" y1="230" x2="60" y2="20" stroke="#94a3b8" stroke-width="1.3"/>
+    <text x="20" y="30" fill="#475569" font-family="monospace" font-size="12">|H| (dB)</text>
+    <text x="590" y="252" fill="#475569" font-family="monospace" font-size="12">ω (log)</text>
+    <line x1="60" y1="44.7" x2="340" y2="44.7" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="64" y="41" fill="#94a3b8" font-family="monospace" font-size="10">plateau −R'/R</text>
+    <path d="M60,44.7 74,44.7 88,44.7 102,44.7 116,44.7 130,44.7 144,44.7 158,44.8 172,44.8 186,44.8 200,44.9 214,45.0 228,45.1 242,45.4 256,45.8 270,46.4 284,47.3 298,48.7 312,50.7 326,53.5 340,57.1 354,61.7 368,67.2 382,73.4 396,80.3 410,87.6 424,95.2 438,103.1 452,111.0 466,119.1 480,127.2 494,135.4 508,143.6 522,151.8 536,160.0 550,168.3 564,176.5 578,184.7 592,192.9 606,201.2 620,209.4" fill="none" stroke="#0d9488" stroke-width="2.6"/>
+    <line x1="340" y1="230" x2="340" y2="20" stroke="#d97706" stroke-width="1" stroke-dasharray="4 4"/>
+    <text x="346" y="30" fill="#d97706" font-family="monospace" font-size="11">ω₁ = 1/R'C</text>
+    <text x="420" y="200" fill="#475569" font-family="monospace" font-size="11">pente −20 dB/décade (intégrateur)</text>
+  </svg>
+  <figcaption>Gain asymptotique du pseudo-intégrateur : plateau \(-R'/R\) puis roll-off en intégrateur au-delà de \(\omega_1=1/R'C\).</figcaption>
+  </figure>
+
+  <p class="q">3) Gamme de fréquence utilisable comme intégrateur ; choix de \(R'\)</p>
+  <p>D'après la question 2, le comportement « intégrateur » n'est valable que pour \(\omega\gg\omega_1\),
+  c'est-à-dire :</p>
+  \[ f\gg f_1=\frac{1}{2\pi R'C}. \]
+  <p>En pratique on exige un facteur ~10 (une décade) : \(f\geq10f_1\) pour que l'approximation
+  \(1+jR'C\omega\approx jR'C\omega\) soit bonne à mieux que quelques %.</p>
+  <div class="method"><span class="lab">Choix de \(R'\)</span> Deux contraintes opposées pèsent sur \(R'\) :
+  <ul>
+  <li><b>\(R'\) grande</b> : repousse \(f_1=1/(2\pi R'C)\) vers le <b>bas</b>, ce qui élargit la plage de
+  fréquences où le montage se comporte en intégrateur (il faut \(f_1\) bien en dessous des fréquences
+  utiles du signal à intégrer).</li>
+  <li><b>\(R'\) pas trop grande (donc finie)</b> : c'est justement elle qui <b>limite le gain continu</b> à
+  \(-R'/R\) au lieu de l'infini. Un intégrateur <b>pur</b> (sans \(R'\)) a un gain infini en continu :
+  la moindre tension de décalage (« offset ») ou le moindre courant de polarisation de l'ALI réel, intégrés
+  indéfiniment par \(C\), font <b>dériver la sortie jusqu'à saturation</b> — problème classique de
+  l'intégrateur réel.</li>
+  </ul>
+  <b>Compromis</b> : on choisit \(R'\) grande devant \(R\) (pour garder un gain \(-R'/R\) confortable dans
+  la bande utile) mais telle que \(f_1=1/(2\pi R'C)\) reste <b>nettement en dessous</b> de la plus basse
+  fréquence du signal à intégrer — typiquement une à deux décades en dessous.</div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ================= EX 3 ================= -->
+  <section class="block" id="ex3">
+  <div class="exo-card">
+    <div class="exo-head">Ex 3 — Montage à résistance négative <span class="diff">♦ · H : E2.8, T : 5.9</span></div>
+    <div class="exo-body">
+  <figure>
+    <img src="td3-img/ex3.jpg" alt="Énoncé Exercice 3 — convertisseur à résistance négative, entrée A=ie sur l'entrée -, R1 en feedback vers S, diviseur R2/R3 sur l'entrée +" loading="lazy">
+    <figcaption>Énoncé (TD3) — montage à résistance négative</figcaption>
+  </figure>
+
+  <div class="note"><span class="lab">Le circuit</span> Le point \(A\) est <b>directement</b> l'entrée
+  <b>−</b> de l'ALI (le courant \(i_e\) y entre) ; \(R_1\) reboucle la sortie \(S\) sur \(A\). L'entrée
+  <b>+</b> est reliée à un diviseur : \(R_2\) vers la sortie \(S\), et \(R_3\) (rhéostat) vers la masse \(M\).
+  On repère \(v_e\) le potentiel de l'entrée <b>+</b> par rapport à \(M\).</div>
+
+  <p class="q">1) Régime linéaire supposé : peut-on le prévoir au premier coup d'œil ?</p>
+  <p><b>Non.</b> Contrairement à l'exercice 1 (contre-réaction pure sur <b>−</b> uniquement), la sortie
+  \(S\) revient ici <b>simultanément</b> sur les <b>deux</b> entrées : sur <b>−</b> via \(R_1\), et sur
+  <b>+</b> via le diviseur \(R_2\)/\(R_3\). On a donc en même temps une réaction négative (vers <b>−</b>)
+  et une réaction positive (vers <b>+</b>).</p>
+  <div class="warnbox"><span class="lab">Piège</span> La simple présence d'un chemin de retour vers
+  <b>−</b> ne suffit <b>pas</b> à conclure au régime linéaire dès qu'il existe <b>aussi</b> un chemin de
+  retour vers <b>+</b>. Il faut comparer les deux « facteurs de réaction » (la part de \(S\) qui revient sur
+  chaque entrée) : si la réaction vers <b>−</b> l'emporte, le bouclage net est négatif (linéaire) ; si celle
+  vers <b>+</b> l'emporte, il est positif (saturation/bistable). Seul un <b>calcul</b> tranche — d'où
+  l'énoncé qui nous demande de <b>supposer</b> le régime linéaire plutôt que de l'affirmer.</div>
+
+  <p class="q">2) Relation \(v_e\)–\(s\) par pont diviseur ; relation \(v_e\)–\(i_e\) ; nom du montage</p>
+  <p><b>Pont diviseur sur l'entrée +</b> — l'entrée <b>+</b> n'absorbant aucun courant, \(R_2\) et \(R_3\)
+  sont simplement en série entre \(S\) et la masse, et \(v_e\) est le potentiel du point milieu :</p>
+  \[ v_e = s\cdot\frac{R_3}{R_2+R_3}. \]
+  <p><b>Report sur l'entrée −</b> — en régime linéaire (supposé), \(v_-=v_+\). Or \(v_-\) est justement le
+  potentiel du point \(A\) : \(v_-=v_A\). Donc :</p>
+  \[ v_A = v_e. \]
+  <p><b>Courant \(i_e\)</b> — au nœud \(A\), tout le courant \(i_e\) entrant de l'extérieur doit ressortir
+  par \(R_1\) vers \(S\) (l'ALI n'absorbe rien) :</p>
+  \[ i_e=\frac{v_A-s}{R_1}=\frac{v_e-s}{R_1}. \]
+  <p>On y injecte \(s=v_e\dfrac{R_2+R_3}{R_3}\) (obtenu en inversant la relation du pont) :</p>
+  \[ i_e=\frac{1}{R_1}\left[v_e-v_e\frac{R_2+R_3}{R_3}\right]
+       =\frac{v_e}{R_1}\left[\frac{R_3-R_2-R_3}{R_3}\right]=-\frac{v_e}{R_1}\cdot\frac{R_2}{R_3}. \]
+  <div class="res">\[ \boxed{\ \frac{v_e}{i_e}=-\frac{R_1R_3}{R_2}\ } \]
+  Le rapport \(v_e/i_e\) est une <b>résistance négative</b> \(-R_{eq}\) avec \(R_{eq}=R_1R_3/R_2\) : vu de
+  la source \(v_e\), le montage se comporte comme une résistance de valeur <b>négative</b>, réglable via le
+  rhéostat \(R_3\).</div>
+  <div class="note"><span class="lab">« Un indice est caché dans l'énoncé »</span> Il suffit de relire le
+  <b>titre même</b> de l'exercice : « Montage à <b>résistance négative</b> ». Le nom du montage est le
+  <b>convertisseur à résistance négative</b> (NIC, <i>Negative Impedance Converter</i>) — utilisé par exemple
+  pour compenser des pertes résistives dans un oscillateur, ou (voir Ex 6) comme brique de base d'un
+  simulateur d'inductance.</div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ================= EX 4 ================= -->
+  <section class="block" id="ex4">
+  <div class="exo-card">
+    <div class="exo-head">Ex 4 — Montage avec deux ALI <span class="diff">♦ · H : E2.6</span></div>
+    <div class="exo-body">
+  <figure>
+    <img src="td3-img/ex4.jpg" alt="Énoncé Exercice 4 — deux ALI en cascade, v1 et v2 sur les entrées +, feedback R/α puis αR, résistances R entre les deux étages" loading="lazy">
+    <figcaption>Énoncé (TD3) — montage à deux ALI, gain paramétré par α</figcaption>
+  </figure>
+
+  <div class="note"><span class="lab">Le circuit</span> ALI n°1 : \(v_1\) directement sur l'entrée <b>+</b> ;
+  l'entrée <b>−</b> (nœud \(A\)) est reliée à la masse par \(R\) et à la sortie \(v'\) par \(R/\alpha\).
+  ALI n°2 : \(v_2\) directement sur l'entrée <b>+</b> ; l'entrée <b>−</b> (nœud \(B\)) est reliée à \(v'\)
+  par \(R\) et à la sortie \(v_s\) par \(\alpha R\). Les deux ALI fonctionnent en régime linéaire (donné).</div>
+
+  <p class="q">Exprimer \(v_s\) en fonction de \(\alpha\), \(v_1\) et \(v_2\)</p>
+  <p><b>Étage 1 (amplificateur non inverseur classique)</b> — \(v_{+1}=v_1\) (fil direct), donc en régime
+  linéaire \(v_A=v_-=v_+=v_1\). Le nœud \(A\) voit \(R\) vers la masse et \(R/\alpha\) vers \(v'\), sans
+  courant entrant dans l'ALI : le courant qui traverse \(R\) (de \(A\) vers la masse) doit être fourni par
+  \(R/\alpha\) (de \(v'\) vers \(A\)) :</p>
+  \[ \frac{v'-v_1}{R/\alpha}=\frac{v_1-0}{R}
+     \ \Longrightarrow\ \frac{\alpha(v'-v_1)}{R}=\frac{v_1}{R}
+     \ \Longrightarrow\ \alpha(v'-v_1)=v_1
+     \ \Longrightarrow\ \boxed{\ v'=v_1\,\frac{1+\alpha}{\alpha}\ } \]
+  <p>(on reconnaît le gain non inverseur usuel \(1+R_f/R_{in}=1+\dfrac{R/\alpha}{R}=1+\dfrac1\alpha
+  =\dfrac{1+\alpha}{\alpha}\)).</p>
+
+  <p><b>Étage 2</b> — \(v_{+2}=v_2\) (fil direct), donc \(v_B=v_2\) en régime linéaire. Au nœud \(B\)
+  (LNTP, aucun courant absorbé par l'ALI) :</p>
+  \[ \frac{v_B-v'}{R}+\frac{v_B-v_s}{\alpha R}=0
+     \ \Longrightarrow\ \alpha(v_B-v')+(v_B-v_s)=0
+     \ \Longrightarrow\ v_s=(1+\alpha)v_B-\alpha v' \]
+  <p>Avec \(v_B=v_2\) et \(v'=v_1\dfrac{1+\alpha}{\alpha}\), le facteur \(\alpha\) se simplifie
+  <b>exactement</b> avec celui déjà présent devant \(v'\) :</p>
+  \[ v_s=(1+\alpha)v_2-\alpha\cdot v_1\frac{1+\alpha}{\alpha}=(1+\alpha)v_2-(1+\alpha)v_1 \]
+  <div class="res">\[ \boxed{\ v_s=(1+\alpha)\,(v_2-v_1)\ } \]</div>
+  <div class="method"><span class="lab">Vérification \(\alpha=1\)</span> On doit retrouver un montage à
+  résistances toutes égales : \(v'=2v_1\) puis \(\frac{v_2-v'}{R}+\frac{v_2-v_s}{R}=0\Rightarrow
+  v_s=2v_2-v'=2v_2-2v_1\). La formule générale donne \((1+1)(v_2-v_1)=2v_2-2v_1\) : ✔ cohérent.</div>
+  <div class="method"><span class="lab">Vérification \(\alpha=2\)</span> \(v'=v_1(1+2)/2=1{,}5v_1\) ;
+  \(\dfrac{v_2-v'}{R}+\dfrac{v_2-v_s}{2R}=0\Rightarrow2(v_2-v')+(v_2-v_s)=0\Rightarrow
+  v_s=3v_2-2v'=3v_2-3v_1\). La formule générale donne \((1+2)(v_2-v_1)=3v_2-3v_1\) : ✔ cohérent.</div>
+  <p>Ce montage réalise donc un <b>amplificateur de différence</b> de gain \((1+\alpha)\), <b>identique</b>
+  sur \(v_1\) et \(v_2\) : le paramètre \(\alpha\) règle le <b>gain global</b> de la différence
+  \(v_2-v_1\) sans jamais déséquilibrer les deux entrées — un résultat plus élégant qu'il n'y paraît,
+  puisque les deux étages ont pourtant des composants différents (\(R/\alpha\) puis \(\alpha R\)).</p>
+    </div>
+  </div>
+  </section>
+
+  <!-- ================= EX 5 ================= -->
+  <section class="block" id="ex5">
+  <div class="exo-card">
+    <div class="exo-head">Ex 5 — Filtres en cascade <span class="diff">♦♦ · H : E.2.4 et d'après V : 20.4</span></div>
+    <div class="exo-body">
+  <figure>
+    <img src="td3-img/ex5.jpg" alt="Énoncé Exercice 5 — filtre F1 (R1 série, C1 vers masse) et filtre F2 (C2 série, R2 vers masse) en sortie ouverte" loading="lazy">
+    <figcaption>Énoncé (TD3) — \(F_1\) : passe-bas RC ; \(F_2\) : passe-haut CR, caractérisés en sortie ouverte</figcaption>
+  </figure>
+
+  <div class="note"><span class="lab">Les deux filtres (en sortie ouverte)</span>
+  \[ \underline{H_1}=\frac{\underline{v_{s1}}}{\underline{v_{e1}}}=\frac{1}{1+jR_1C_1\omega}
+     \ \text{(passe-bas RC)},\qquad
+     \underline{H_2}=\frac{\underline{v_{s2}}}{\underline{v_{e2}}}=\frac{jR_2C_2\omega}{1+jR_2C_2\omega}
+     \ \text{(passe-haut CR)}. \]</div>
+
+  <p class="q">1) Montage à intercaler pour obtenir \(\underline H=\underline{H_1}\times\underline{H_2}\)</p>
+  <p>Si l'on branche \(F_2\) directement à la sortie de \(F_1\), \(F_2\) <b>charge</b> \(F_1\) : il consomme
+  un courant non nul dans \(C_1\)/\(R_1\), ce qui modifie \(H_1\) par rapport à sa valeur « sortie ouverte »
+  donnée. Pour que \(H=H_1\times H_2\) reste valable telle quelle, il faut que \(F_2\) ne tire <b>aucun
+  courant</b> sur \(F_1\), et que la source qui attaque \(F_2\) ait une <b>impédance de sortie nulle</b>
+  (pour ne pas être chargée par \(F_2\) plus tard).</p>
+  <div class="res"><b>On intercale un montage suiveur</b> (gain 1, impédance d'entrée infinie, impédance
+  de sortie nulle) entre \(F_1\) et \(F_2\) : \(v_{s1}\) attaque l'entrée <b>+</b> du suiveur, dont la
+  sortie (à impédance nulle) attaque \(F_2\) sans le charger, ni être chargée par lui. Le suiveur ayant un
+  gain 1, \(\underline H=\underline{H_1}\times1\times\underline{H_2}=\underline{H_1}\,\underline{H_2}\).</div>
+
+  <p class="q">2) Avec \(R_1=R_2=R\), \(C_1=C_2=C\), \(\omega_0=1/RC\) : comportement asymptotique et \(\underline H\)</p>
+  <p>On pose \(x=\omega/\omega_0=RC\omega\) (variable réduite). Alors \(\underline{H_1}=\dfrac{1}{1+jx}\) et
+  \(\underline{H_2}=\dfrac{jx}{1+jx}\), donc :</p>
+  \[ \underline H=\underline{H_1}\,\underline{H_2}=\frac{jx}{(1+jx)^2}. \]
+  <p><b>BF</b> (\(x\ll1\)) : \(1+jx\approx1\), donc \(\underline H\approx jx=jRC\omega\) — gain
+  <b>proportionnel à \(\omega\)</b> (pente \(+20\) dB/décade), phase \(\to+90°\).</p>
+  <p><b>HF</b> (\(x\gg1\)) : \((1+jx)^2\approx(jx)^2=-x^2\) (le terme dominant), donc
+  \(\underline H\approx \dfrac{jx}{-x^2}=-\dfrac{j}{x}=\dfrac{1}{jx}\) — gain
+  <b>proportionnel à \(1/\omega\)</b> (pente \(-20\) dB/décade), phase \(\to-90°\).</p>
+  <div class="res">Comportement en « cloche » : \(F\) <b>monte</b> à \(+20\) dB/décade en BF, puis
+  <b>redescend</b> à \(-20\) dB/décade en HF — c'est la signature d'un filtre <b>passe-bande</b> (ici du
+  2ᵈ ordre, sans pic de résonance puisque les deux pôles sont réels et confondus, cf. Q5).</div>
+  <p><b>Confirmation par le module exact</b> : \(|\underline{H_1}|\,|\underline{H_2}|
+  =\dfrac{1}{\sqrt{1+x^2}}\cdot\dfrac{x}{\sqrt{1+x^2}}\), soit :</p>
+  \[ \boxed{\ |\underline H(x)|=\frac{x}{1+x^2}\ } \]
+  <p>qui redonne bien \(|\underline H|\approx x\) pour \(x\ll1\) et \(|\underline H|\approx1/x\) pour
+  \(x\gg1\) : le comportement asymptotique est confirmé.</p>
+
+  <p class="q">3) Pour quelles fréquences \(F\) se comporte-t-il en dérivateur ? en intégrateur ?</p>
+  <div class="res">
+  <b>Dérivateur en BF</b> (\(\omega\ll\omega_0\)) : \(\underline H\approx jRC\omega\) correspond à
+  \(v_s=RC\,\dfrac{dv_e}{dt}\) (multiplication par \(j\omega\) ⟺ dérivation temporelle).<br>
+  <b>Intégrateur en HF</b> (\(\omega\gg\omega_0\)) : \(\underline H\approx\dfrac{1}{jRC\omega}\) correspond
+  à \(v_s=\dfrac{1}{RC}\displaystyle\int v_e\,dt\) (division par \(j\omega\) ⟺ intégration temporelle) —
+  exactement la fonction de transfert de l'intégrateur pur retrouvée à l'exercice 2.</div>
+
+  <p class="q">4) Diagrammes de Bode asymptotiques de \(F\)</p>
+  <p><b>Gain</b> : asymptote BF \(20\log|x|\) (pente \(+20\) dB/déc, passe par 0 dB en \(x=1\)) ; asymptote
+  HF \(-20\log|x|\) (pente \(-20\) dB/déc, passe aussi par 0 dB en \(x=1\)). Les deux droites se croisent
+  donc en \(x=1\) à 0 dB, mais la courbe réelle y vaut \(|\underline H(1)|=1/2\), soit <b>\(-6\) dB</b> —
+  <b>en dessous</b> de l'intersection des asymptotes (pas de dépassement, car pôle double réel, voir Q5).</p>
+  <p><b>Phase</b> : \(\varphi=90°-2\arctan(x)\). Plateau à \(+90°\) pour \(x\ll1\), décroissance linéaire
+  entre \(x\approx0{,}1\) et \(x\approx10\) passant par \(0°\) en \(x=1\), plateau à \(-90°\) pour
+  \(x\gg1\).</p>
+
+  <figure><svg viewBox="0 0 700 520" width="700" xmlns="http://www.w3.org/2000/svg">
+    <!-- GAIN plot -->
+    <line x1="60" y1="230" x2="620" y2="230" stroke="#94a3b8" stroke-width="1.3"/>
+    <line x1="60" y1="230" x2="60" y2="20" stroke="#94a3b8" stroke-width="1.3"/>
+    <text x="16" y="30" fill="#475569" font-family="monospace" font-size="12">|H| (dB)</text>
+    <line x1="60" y1="44.7" x2="620" y2="44.7" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="626" y="48" fill="#94a3b8" font-family="monospace" font-size="10">0 dB</text>
+    <line x1="60" y1="127.1" x2="620" y2="127.1" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="626" y="131" fill="#94a3b8" font-family="monospace" font-size="10">−20</text>
+    <!-- asymptotes -->
+    <line x1="60" y1="209.4" x2="340" y2="44.7" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3"/>
+    <line x1="340" y1="44.7" x2="620" y2="209.4" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3"/>
+    <!-- real curve -->
+    <path d="M60.0,209.4 74.0,201.2 88.0,193.0 102.0,184.7 116.0,176.5 130.0,168.3 144.0,160.1 158.0,151.9 172.0,143.7 186.0,135.5 200.0,127.4 214.0,119.4 228.0,111.5 242.0,103.7 256.0,96.3 270.0,89.3 284.0,82.9 298.0,77.4 312.0,73.2 326.0,70.4 340.0,69.5 354.0,70.4 368.0,73.2 382.0,77.4 396.0,82.9 410.0,89.3 424.0,96.3 438.0,103.7 452.0,111.5 466.0,119.4 480.0,127.4 494.0,135.5 508.0,143.7 522.0,151.9 536.0,160.1 550.0,168.3 564.0,176.5 578.0,184.7 592.0,193.0 606.0,201.2 620.0,209.4" fill="none" stroke="#0d9488" stroke-width="2.8"/>
+    <circle cx="340" cy="69.5" r="3.5" fill="#dc2626"/>
+    <text x="346" y="65" fill="#dc2626" font-family="monospace" font-size="11">max = −6 dB (x=1)</text>
+    <text x="60" y="245" fill="#475569" font-family="monospace" font-size="11">0,01</text>
+    <text x="330" y="245" fill="#475569" font-family="monospace" font-size="11">x=1</text>
+    <text x="600" y="245" fill="#475569" font-family="monospace" font-size="11">100</text>
+    <text x="290" y="20" fill="#334155" font-family="monospace" font-size="12">Gain (dB) vs x=ω/ω₀ (log)</text>
+
+    <!-- PHASE plot -->
+    <line x1="60" y1="490" x2="620" y2="490" stroke="#94a3b8" stroke-width="1.3"/>
+    <line x1="60" y1="490" x2="60" y2="280" stroke="#94a3b8" stroke-width="1.3"/>
+    <text x="16" y="290" fill="#475569" font-family="monospace" font-size="12">φ (°)</text>
+    <line x1="60" y1="290.5" x2="620" y2="290.5" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="626" y="294" fill="#94a3b8" font-family="monospace" font-size="10">+90°</text>
+    <line x1="60" y1="385.0" x2="620" y2="385.0" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="626" y="389" fill="#94a3b8" font-family="monospace" font-size="10">0°</text>
+    <line x1="60" y1="479.5" x2="620" y2="479.5" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="626" y="483" fill="#94a3b8" font-family="monospace" font-size="10">−90°</text>
+    <path d="M60.0,291.7 74.0,292.0 88.0,292.4 102.0,292.9 116.0,293.5 130.0,294.3 144.0,295.3 158.0,296.5 172.0,298.1 186.0,300.0 200.0,302.5 214.0,305.6 228.0,309.4 242.0,314.2 256.0,320.1 270.0,327.4 284.0,336.1 298.0,346.4 312.0,358.2 326.0,371.3 340.0,385.0 354.0,398.7 368.0,411.8 382.0,423.6 396.0,433.9 410.0,442.6 424.0,449.9 438.0,455.8 452.0,460.6 466.0,464.4 480.0,467.5 494.0,470.0 508.0,471.9 522.0,473.5 536.0,474.7 550.0,475.7 564.0,476.5 578.0,477.1 592.0,477.6 606.0,478.0 620.0,478.3" fill="none" stroke="#0891b2" stroke-width="2.8"/>
+    <text x="270" y="272" fill="#334155" font-family="monospace" font-size="12">Phase (°) vs x=ω/ω₀ (log)</text>
+  </svg>
+  <figcaption>Bode du filtre en cascade F = F₁·(suiveur)·F₂ : gain en cloche (max −6 dB en x=1) et phase +90°→−90°.</figcaption>
+  </figure>
+
+  <p class="q">5) Maximum de \(|\underline H|\), bande passante à −3 dB, facteur de qualité</p>
+  <p><b>Maximum</b> — on dérive \(|\underline H(x)|=\dfrac{x}{1+x^2}\) par rapport à \(x\) :</p>
+  \[ \frac{d}{dx}\left(\frac{x}{1+x^2}\right)=\frac{(1+x^2)-x(2x)}{(1+x^2)^2}=\frac{1-x^2}{(1+x^2)^2}=0
+     \ \Longrightarrow\ x=1\ (x>0). \]
+  \[ \boxed{\ |\underline H|_{max}=|\underline H(1)|=\frac12\ (=-6{,}02\text{ dB, en }\omega=\omega_0)\ } \]
+  <p><b>Bande à \(-3\) dB</b> — on cherche \(x\) tel que \(|\underline H(x)|=\dfrac{H_{max}}{\sqrt2}
+  =\dfrac{1}{2\sqrt2}\) :</p>
+  \[ \frac{x}{1+x^2}=\frac{1}{2\sqrt2}
+     \ \Longrightarrow\ 2\sqrt2\,x=1+x^2
+     \ \Longrightarrow\ x^2-2\sqrt2\,x+1=0
+     \ \Longrightarrow\ x=\sqrt2\pm1. \]
+  <p>D'où \(x_{bas}=\sqrt2-1\approx0{,}414\) et \(x_{haut}=\sqrt2+1\approx2{,}414\) (on vérifie
+  \(x_{bas}\,x_{haut}=2-1=1=x_0^2\) : \(x_0=1\) est bien la <b>moyenne géométrique</b> des deux coupures,
+  propriété typique d'un passe-bande). Largeur de bande :</p>
+  \[ \Delta x = x_{haut}-x_{bas}=(\sqrt2+1)-(\sqrt2-1)=2\qquad\Longrightarrow\qquad
+     \Delta\omega=2\,\omega_0. \]
+  <div class="res">\[ \boxed{\ Q=\frac{x_0}{\Delta x}=\frac{1}{2}\ } \]
+  \(Q=0{,}5\) : filtre <b>peu sélectif</b> (pas de résonance), cohérent avec un pôle double <b>réel</b>
+  (voir Q6) — la valeur \(Q=1/2\) est justement la valeur limite en dessous de laquelle un système du 2ᵉ
+  ordre n'oscille plus (régime critique/apériodique).</div>
+
+  <p class="q">6) Équation différentielle vérifiée par \(s(t)\) ; facteur de qualité retrouvé sur l'ED</p>
+  <p>On repart de \(\underline H=\dfrac{\underline S}{\underline E}=\dfrac{jRC\omega}{(1+jRC\omega)^2}\).
+  En notant \(p=j\omega\) et \(\tau=RC\), et en « repassant » \((1+\tau p)^2\underline S=\tau p\,\underline E\)
+  du domaine complexe au domaine temporel (\(p\leftrightarrow d/dt\)) :</p>
+  \[ (1+2\tau p+\tau^2p^2)\,s = \tau p\,e
+     \quad\Longrightarrow\quad
+     \boxed{\ \tau^2\,\ddot s(t)+2\tau\,\dot s(t)+s(t)=\tau\,\dot e(t)\ } \]
+  <p>On identifie avec la forme <b>canonique</b> du 2ᵈ ordre \(\dfrac{1}{\omega_0^2}\ddot s
+  +\dfrac{1}{Q\omega_0}\dot s+s=(\cdots)\) :</p>
+  \[ \frac{1}{\omega_0^2}=\tau^2\ \Rightarrow\ \omega_0=\frac1\tau=\frac1{RC}\ \text{(cohérent avec Q2)},
+  \qquad
+  \frac{1}{Q\omega_0}=2\tau\ \Rightarrow\ Q=\frac{1}{2\tau\omega_0}=\frac{1}{2}. \]
+  <div class="res">On retrouve directement \(\boxed{Q=1/2}\) sur les coefficients de l'équation
+  différentielle, sans repasser par le calcul du maximum : <b>même résultat</b> qu'en Q5, ce qui valide les
+  deux méthodes.</div>
+  <p>Pour un <b>échelon</b> \(e(t)=E\,\Gamma(t)\) en entrée, \(\dot e(t)=E\,\delta(t)\) (impulsion de Dirac
+  à \(t=0\)). Pour \(t>0\), l'équation devient homogène :</p>
+  \[ \tau^2\ddot s+2\tau\dot s+s=0, \]
+  <p>d'équation caractéristique \(\tau^2r^2+2\tau r+1=0\), de discriminant \(\Delta=4\tau^2-4\tau^2=0\) :
+  <b>racine double</b> \(r=-1/\tau\). Ce discriminant nul confirme, indépendamment du calcul de \(Q\),
+  que l'on est exactement à la <b>frontière apériodique/critique</b> (\(Q=1/2\)) : la réponse à l'échelon ne
+  présente <b>aucune oscillation</b>.</p>
+    </div>
+  </div>
+  </section>
+
+  <!-- ================= EX 6 ================= -->
+  <section class="block" id="ex6">
+  <div class="exo-card">
+    <div class="exo-head">Ex 6 — Simulateur d'inductance <span class="diff">♦♦ · d'après H : E2.9</span></div>
+    <div class="exo-body">
+  <figure>
+    <img src="td3-img/ex6.jpg" alt="Énoncé Exercice 6 — gyrateur à deux ALI, ALI1 avec R local et R0/R0, ALI2 intégrateur R-C, R extérieure de E à S'" loading="lazy">
+    <figcaption>Énoncé (TD3) — simulateur d'inductance à deux ALI (gyrateur)</figcaption>
+  </figure>
+
+  <div class="note"><span class="lab">Repérage des nœuds</span> Le point \(E\) (courant \(i_e\)) est commun à
+  trois branches : le fil direct vers l'entrée <b>+</b> de l'ALI n°1, la résistance <b>locale</b> \(R\)
+  vers la sortie \(S\) de l'ALI n°1, et la résistance <b>extérieure</b> \(R\) vers la sortie finale \(S'\).
+  L'entrée <b>−</b> de l'ALI n°1 (nœud \(N_1\)) voit deux résistances \(R_0\) égales : l'une vers la masse,
+  l'autre vers \(S\). L'ALI n°2 est un <b>intégrateur</b> classique : \(S\) attaque son entrée <b>−</b> par
+  \(R\), sa contre-réaction est \(C\), et son entrée <b>+</b> est à la masse.</div>
+
+  <p class="q">1) Quel composant le bloc autour de l'ALI de gauche permet-il de simuler ?</p>
+  <p>Isolons l'ALI n°1 et son réseau local. Son entrée <b>−</b> (\(N_1\)) est prise entre deux résistances
+  égales \(R_0\) (une vers la masse, une vers \(S\)) : par pont diviseur, \(v_{N_1}=S/2\). En régime
+  linéaire \(v_{N_1}=v_{+1}=E\), donc :</p>
+  \[ \frac{S}{2}=E \quad\Longrightarrow\quad \boxed{\ S=2E\ } \]
+  <p>indépendamment de tout ce qui est branché sur \(E\) par ailleurs : ALI n°1 se comporte comme un
+  <b>amplificateur non inverseur de gain fixe 2</b> (cas particulier \(R_0=R_0\) du montage non inverseur
+  déjà rencontré, ex. Ex 4 étage 1 avec \(\alpha=1\)). Reste alors la résistance <b>locale</b> \(R\), qui
+  relie \(E\) à ce même point \(S=2E\) : le courant qu'elle impose est</p>
+  \[ i_{(E\to S)}=\frac{E-S}{R}=\frac{E-2E}{R}=-\frac{E}{R}, \]
+  <div class="res">soit un rapport \(v/i=E/(-E/R)=-R\) : <b>exactement la structure de l'exercice 3</b>
+  (résistance négative), ici avec \(R_2=R_3=R_0\) dans la formule \(R_{eq}=R_1R_3/R_2\) de l'Ex 3, ce qui
+  donne \(R_{eq}=R\). <b>Le bloc de gauche simule une résistance négative \(-R\).</b></div>
+
+  <p class="q">2) Reschématiser le montage entier ; montrer que \(Z_{in}\) est une inductance, exprimer \(L\)</p>
+  <figure><svg viewBox="0 0 900 420" width="900" xmlns="http://www.w3.org/2000/svg">
+    <!-- E node and ground -->
+    <circle cx="50" cy="180" r="3.5" fill="#0d9488"/>
+    <text x="20" y="170" fill="#334155" font-family="Georgia,serif" font-size="15" font-style="italic">E</text>
+    <line x1="50" y1="180" x2="50" y2="240" stroke="#0d9488" stroke-width="2"/>
+    <line x1="35" y1="248" x2="65" y2="248" stroke="#334155" stroke-width="2"/>
+    <line x1="40" y1="255" x2="60" y2="255" stroke="#334155" stroke-width="1.6"/>
+    <line x1="45" y1="262" x2="55" y2="262" stroke="#334155" stroke-width="1.2"/>
+    <text x="8" y="235" fill="#94a3b8" font-family="monospace" font-size="11">Vₑ</text>
+    <!-- vertical bus up from E -->
+    <line x1="50" y1="180" x2="50" y2="60" stroke="#0d9488" stroke-width="2"/>
+    <circle cx="50" cy="110" r="3" fill="#0d9488"/>
+    <!-- outer R : E(50,60) -> S'(800,60) -> down to 800,180 -->
+    <line x1="50" y1="60" x2="330" y2="60" stroke="#d97706" stroke-width="2"/>
+    <rect x="330" y="48" width="60" height="24" fill="none" stroke="#d97706" stroke-width="2"/>
+    <text x="345" y="44" fill="#d97706" font-family="monospace" font-size="13">R (ext.)</text>
+    <line x1="390" y1="60" x2="800" y2="60" stroke="#d97706" stroke-width="2"/>
+    <line x1="800" y1="60" x2="800" y2="180" stroke="#d97706" stroke-width="2"/>
+    <!-- local R : E(50,110) -> S(260,180) -->
+    <line x1="50" y1="110" x2="140" y2="110" stroke="#0d9488" stroke-width="2"/>
+    <rect x="140" y="98" width="55" height="24" fill="none" stroke="#0d9488" stroke-width="2"/>
+    <text x="150" y="94" fill="#0d9488" font-family="monospace" font-size="13">R (loc.)</text>
+    <line x1="195" y1="110" x2="260" y2="110" stroke="#0d9488" stroke-width="2"/>
+    <line x1="260" y1="110" x2="260" y2="180" stroke="#0d9488" stroke-width="2"/>
+    <!-- direct wire E to + input -->
+    <line x1="50" y1="180" x2="170" y2="165" stroke="#0d9488" stroke-width="2"/>
+    <!-- Op-amp 1 box -->
+    <rect x="170" y="140" width="90" height="80" fill="none" stroke="#334155" stroke-width="2"/>
+    <text x="180" y="168" fill="#334155" font-family="monospace" font-size="15">+</text>
+    <text x="180" y="205" fill="#334155" font-family="monospace" font-size="15">−</text>
+    <text x="205" y="185" fill="#94a3b8" font-family="monospace" font-size="10">ALI1</text>
+    <text x="266" y="175" fill="#475569" font-family="monospace" font-size="12">S</text>
+    <!-- minus input to N1 -->
+    <line x1="170" y1="198" x2="110" y2="198" stroke="#0d9488" stroke-width="2"/>
+    <line x1="110" y1="198" x2="110" y2="300" stroke="#0d9488" stroke-width="2"/>
+    <circle cx="110" cy="300" r="3" fill="#0d9488"/>
+    <text x="80" y="292" fill="#475569" font-family="monospace" font-size="12">N₁</text>
+    <!-- R0 vertical to ground -->
+    <rect x="98" y="310" width="24" height="55" fill="none" stroke="#334155" stroke-width="2"/>
+    <text x="128" y="342" fill="#334155" font-family="monospace" font-size="13">R₀</text>
+    <line x1="110" y1="365" x2="110" y2="390" stroke="#334155" stroke-width="2"/>
+    <line x1="95" y1="390" x2="125" y2="390" stroke="#334155" stroke-width="2"/>
+    <line x1="100" y1="397" x2="120" y2="397" stroke="#334155" stroke-width="1.6"/>
+    <line x1="105" y1="404" x2="115" y2="404" stroke="#334155" stroke-width="1.2"/>
+    <!-- R0 horizontal N1 to S -->
+    <line x1="110" y1="300" x2="260" y2="300" stroke="#0d9488" stroke-width="2"/>
+    <rect x="165" y="288" width="55" height="24" fill="none" stroke="#0d9488" stroke-width="2"/>
+    <text x="175" y="332" fill="#0d9488" font-family="monospace" font-size="13">R₀</text>
+    <line x1="260" y1="300" x2="260" y2="220" stroke="#0d9488" stroke-width="2"/>
+    <!-- S to R mid to N2 -->
+    <line x1="260" y1="180" x2="300" y2="180" stroke="#0d9488" stroke-width="2"/>
+    <rect x="300" y="168" width="55" height="24" fill="none" stroke="#0d9488" stroke-width="2"/>
+    <text x="312" y="164" fill="#0d9488" font-family="monospace" font-size="13">R (mid)</text>
+    <line x1="355" y1="180" x2="420" y2="180" stroke="#0d9488" stroke-width="2"/>
+    <line x1="420" y1="180" x2="420" y2="165" stroke="#0d9488" stroke-width="2"/>
+    <!-- Op-amp 2 box -->
+    <rect x="420" y="140" width="90" height="80" fill="none" stroke="#334155" stroke-width="2"/>
+    <text x="430" y="168" fill="#334155" font-family="monospace" font-size="15">−</text>
+    <text x="430" y="205" fill="#334155" font-family="monospace" font-size="15">+</text>
+    <text x="455" y="185" fill="#94a3b8" font-family="monospace" font-size="10">ALI2</text>
+    <text x="80" y="175" fill="#475569" font-family="monospace" font-size="12"></text>
+    <text x="420" y="135" fill="#475569" font-family="monospace" font-size="12">N₂</text>
+    <!-- + input to ground -->
+    <line x1="420" y1="198" x2="420" y2="260" stroke="#0d9488" stroke-width="2"/>
+    <line x1="405" y1="260" x2="435" y2="260" stroke="#334155" stroke-width="2"/>
+    <line x1="410" y1="267" x2="430" y2="267" stroke="#334155" stroke-width="1.6"/>
+    <line x1="415" y1="274" x2="425" y2="274" stroke="#334155" stroke-width="1.2"/>
+    <!-- feedback C -->
+    <line x1="420" y1="165" x2="420" y2="95" stroke="#0d9488" stroke-width="2"/>
+    <line x1="420" y1="95" x2="700" y2="95" stroke="#0d9488" stroke-width="2"/>
+    <line x1="700" y1="95" x2="700" y2="180" stroke="#0d9488" stroke-width="2"/>
+    <line x1="640" y1="85" x2="640" y2="105" stroke="#334155" stroke-width="2.4"/>
+    <line x1="650" y1="85" x2="650" y2="105" stroke="#334155" stroke-width="2.4"/>
+    <text x="630" y="78" fill="#334155" font-family="monospace" font-size="13">C</text>
+    <!-- output S' -->
+    <line x1="510" y1="180" x2="800" y2="180" stroke="#0d9488" stroke-width="2"/>
+    <circle cx="800" cy="180" r="3.5" fill="#0d9488"/>
+    <text x="810" y="184" fill="#475569" font-family="monospace" font-size="13">S'</text>
+  </svg>
+  <figcaption>Reschématisation claire du gyrateur : \(E\) commun à \(R_{loc}\), \(R_{ext}\) et l'entrée +
+  de l'ALI1 ; \(N_1\) = diviseur \(R_0\)/\(R_0\) ; ALI2 = intégrateur \(R\)-\(C\).</figcaption>
+  </figure>
+
+  <p><b>Étape 1 — Étage intégrateur (ALI2).</b> \(v_{+2}=0\) (masse), donc \(v_{N_2}=0\) en régime linéaire
+  (contre-réaction pure sur <b>−</b> via \(C\) : régime linéaire garanti, comme à l'exercice 1). LNTP en
+  \(N_2\) :</p>
+  \[ \frac{S-0}{R}+\frac{S'-0}{1/(jC\omega)}=0
+     \ \Longrightarrow\ \frac{S}{R}+jC\omega\,S'=0
+     \ \Longrightarrow\ \boxed{\ S'=-\frac{S}{jRC\omega}\ } \]
+
+  <p><b>Étape 2 — Report du gain de l'étage 1.</b> D'après la question 1, \(S=2E\), donc :</p>
+  \[ S'=-\frac{2E}{jRC\omega}. \]
+
+  <p><b>Étape 3 — Courant d'entrée \(i_e\).</b> Au nœud \(E\), aucun courant n'entre dans l'entrée <b>+</b>
+  de l'ALI1 : tout le courant fourni par la source se répartit entre la branche locale (vers \(S\)) et la
+  branche extérieure (vers \(S'\)) :</p>
+  \[ i_e=\frac{E-S}{R}+\frac{E-S'}{R}. \]
+  <p>Avec \(S=2E\) :</p>
+  \[ \frac{E-S}{R}=\frac{E-2E}{R}=-\frac{E}{R}
+  \quad\Longrightarrow\quad
+  i_e=-\frac{E}{R}+\frac{E-S'}{R}=\frac{-E+E-S'}{R}=-\frac{S'}{R}. \]
+  <p>On y injecte \(S'=-2E/(jRC\omega)\) :</p>
+  \[ i_e=-\frac{1}{R}\left(-\frac{2E}{jRC\omega}\right)=\frac{2E}{jR^2C\omega}. \]
+
+  <div class="res">\[ \boxed{\ Z_{in}=\frac{E}{i_e}=\frac{jR^2C\omega}{2}=j\omega\cdot\frac{R^2C}{2}\ } \]
+  \(Z_{in}\) est <b>purement imaginaire et proportionnelle à \(\omega\)</b> : c'est exactement l'impédance
+  d'une <b>bobine idéale</b> \(Z_L=jL\omega\), avec :
+  \[ \boxed{\ L=\frac{R^2C}{2}\ } \]</div>
+
+  <div class="method"><span class="lab">Relecture physique</span> Le bloc de gauche (négatif, \(-R\)) et
+  l'intégrateur de droite (en \(1/(jRC\omega)\)) se combinent en boucle via l'unique résistance
+  <b>extérieure</b> \(R\) : c'est ce bouclage résistance-négative + intégrateur qui transforme un réseau
+  <b>purement résistif et capacitif</b> (aucune bobine physique !) en une impédance d'entrée
+  <b>proportionnelle à \(\omega\)</b>, la signature électrique d'une inductance. Le résultat est
+  <b>exact</b> (pas seulement une approximation BF ou HF), ce qui est la caractéristique remarquable du
+  gyrateur (convertisseur généralisé d'impédance).</div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ================= SOURCES ================= -->
+
   <section class="block" id="docs">
     <h2>📂 Documents donnés</h2>
-    <p class="docs-intro">Fichier original du cours, déjà présent dans ce dossier. Cliquez pour ouvrir.</p>
     <div class="docs-group">
       <h3>Cours</h3>
       <ul class="doc-list">
         <li><a class="doc-item" href="Cours3.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Cours3 — ALI en régime linéaire</span><span class="badge">Cours</span><span class="arrow">↗</span></a></li>
       </ul>
     </div>
-    <p class="docs-note">Cursus AM2 · P2030 · Semestre 3 · Partie Électronique, D. Courtois, 17/09/2026. Ce
-    chapitre prolonge le <a href="ch2-filtrage-fourier.html">Ch2 — Filtrage/stabilité</a> et introduit les
-    montages à ALI résolus en détail dans le <a href="td3-corrige.html">TD3 corrigé</a>.</p>
+    <div class="docs-group">
+      <h3>Énoncé complet</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="TD3_p1.jpg" target="_blank" rel="noopener"><span class="ic">IMG</span><span class="nm">TD3 — page 1</span><span class="badge">Exercices 1 à 4</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="TD3_p2.jpg" target="_blank" rel="noopener"><span class="ic">IMG</span><span class="nm">TD3 — page 2</span><span class="badge">Exercices 5, 6 + suppléments</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
   </section>
 </main>
+
 <script src="../assets/gate.js"></script>
 </body>
 </html>
