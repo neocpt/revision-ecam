@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DS test — 1er DS Physique-Électronique — Révision ECAM</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
+  svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div class="topbar">
+  <a href="../index.html#am2">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#ex1">Ex 1</a>
+  <a href="#ex2">Ex 2</a>
+  <a href="#ex3">Ex 3</a>
+  <a href="#ex4">Ex 4</a>
+  <a href="#docs">Documents</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">1er DS Physique-Électronique · AM2 · Chapitres 1 à 3</span>
+  <h1 class="title">DS test — Électronique (Ch1 · Ch2 · Ch3)</h1>
+  <p class="lead">DS blanc de <b>2 h</b> sur les trois premiers chapitres : filtres analogiques passifs et
+  fonction de transfert (Ch1), filtrage d'un signal périodique et stabilité des SLCI (Ch2), ALI en régime
+  linéaire (Ch3). 4 exercices de 20 points, <b>chaque question a sa correction repliable</b> : cherche
+  d'abord, ouvre ensuite. Sujet <b>créé pour s'entraîner</b> (ce n'est pas un sujet officiel), dans l'esprit
+  des TD1-TD3 et du DS0 de D. Courtois ; les ressources en ligne sont dans l'onglet
+  <a href="#docs">📂 Documents</a>.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#consignes">Consignes &amp; barème</a></li>
+      <li><a href="#ex1">Ex 1 — Double filtre RC : passe-bas du 2ᵈ ordre (Ch1) — 20 pts</a></li>
+      <li><a href="#ex2">Ex 2 — Créneau filtré par un RC (Ch2) — 20 pts</a></li>
+      <li><a href="#ex3">Ex 3 — Amplificateur non inverseur : ALI réel &amp; stabilité (Ch2-Ch3) — 20 pts</a></li>
+      <li><a href="#ex4">Ex 4 — Filtre actif passe-haut (Ch1-Ch3) — 20 pts</a></li>
+      <li><a href="#docs">📂 Documents (PDF en ligne)</a></li>
+    </ul>
+  </div>
+
+  <section class="block" id="consignes">
+    <h2>Consignes &amp; barème</h2>
+    <div class="note"><span class="lab">Consignes</span>
+      Durée : <b>120 min</b> · calculatrice autorisée · cours non autorisé · les ALI sont <b>idéaux</b> sauf
+      mention contraire (Ex 3) · tension de saturation \(\pm V_{sat}=\pm15\ \text{V}\) · on note
+      \(\underline H=\underline s/\underline e\) la fonction de transfert harmonique.
+      <br>Barème : 4 × 20 = <b>80 pts</b>, ramené sur 20 (÷4). Justifier, donner les unités et encadrer les résultats.
+    </div>
+    <div class="method"><span class="lab">Conseil de méthode</span>
+      Commencer par les questions qualitatives (comportement BF/HF, régime de l'ALI) : elles rapportent
+      des points rapides et servent de vérification pour les calculs.
+    </div>
+  </section>
+
+  <!-- ======================= EXERCICE 1 ======================= -->
+  <section class="block" id="ex1">
+    <h2>Exercice 1 — Double filtre RC (Ch1) · 20 pts</h2>
+    <div class="exo-card">
+      <div class="exo-head">✏️ Passe-bas du second ordre à deux cellules RC <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Deux cellules RC identiques sont connectées comme sur le schéma, la sortie \(s\)
+        étant <b>ouverte</b> (aucune charge). On note \(R=1{,}0\ \text{k}\Omega\), \(C=100\ \text{nF}\),
+        \(x=\omega/\omega_0\) avec \(\omega_0=1/(RC)\).</p>
+        <figure><img src="img/ex1-circuit.svg" alt="Deux cellules RC en cascade"><figcaption>Double filtre RC, sortie ouverte.</figcaption></figure>
+
+        <p class="q">1) (2 pts) Sans calcul, quel est le comportement du montage à très basse et à très haute fréquence ? En déduire sa nature.</p>
+        <details class="sol"><summary>✅ Correction Q1</summary><div class="sol-body">
+          <p><b>BF</b> (\(\omega\to0\)) : \(Z_C=\dfrac1{jC\omega}\to\infty\), chaque condensateur est équivalent à un <b>interrupteur ouvert</b>. Sortie ouverte ⇒ aucun courant dans les résistances, donc pas de chute de tension : \(s=e\), soit \(\underline H\to1\).</p>
+          <p><b>HF</b> (\(\omega\to\infty\)) : \(Z_C\to0\), le condensateur de sortie est équivalent à un <b>fil</b> qui relie \(s\) à la masse : \(s=0\), soit \(\underline H\to0\).</p>
+          <div class="res">Le montage laisse passer les basses fréquences et coupe les hautes : c'est un <b>filtre passe-bas</b>. Il comporte 2 condensateurs indépendants ⇒ <b>ordre 2</b>.</div>
+        </div></details>
+
+        <p class="q">2) (4 pts) Établir l'expression de \(\underline H(j\omega)\) en fonction de \(x\).</p>
+        <details class="sol"><summary>✅ Correction Q2</summary><div class="sol-body">
+          <p class="q">Cadre</p>
+          <p>Régime sinusoïdal forcé, notations complexes. On note \(\underline a\) le potentiel du nœud A (entre les deux résistances), la masse étant à 0 V. Posons \(x=RC\omega\) (on a bien \(x=\omega/\omega_0\)).</p>
+          <p class="q">Étape 1 — dernière cellule (sortie ouverte ⇒ pont diviseur)</p>
+          \[ \underline s=\frac{\dfrac1{jC\omega}}{R+\dfrac1{jC\omega}}\,\underline a=\frac{\underline a}{1+jRC\omega}=\frac{\underline a}{1+jx} \]
+          <p class="q">Étape 2 — loi des nœuds en A (courants sortants = courant entrant)</p>
+          \[ \frac{\underline e-\underline a}{R}=jC\omega\,\underline a+\frac{\underline a-\underline s}{R} \]
+          <p>On multiplie par \(R\) : \(\underline e-\underline a=jx\,\underline a+(\underline a-\underline s)\).</p>
+          <p>Avec \(\underline a-\underline s=\underline a-\dfrac{\underline a}{1+jx}=\underline a\,\dfrac{jx}{1+jx}\) :</p>
+          \[ \underline e=\underline a\left[1+jx+\frac{jx}{1+jx}\right]=\underline a\,\frac{(1+jx)^2+jx}{1+jx}=\underline a\,\frac{1-x^2+3jx}{1+jx} \]
+          <p class="q">Étape 3 — \(\underline s\) en fonction de \(\underline e\)</p>
+          \[ \underline H=\frac{\underline s}{\underline e}=\frac{\underline a}{1+jx}\cdot\frac{1+jx}{\underline a\,(1-x^2+3jx)}\ \Longrightarrow\ \boxed{\ \underline H=\frac{1}{1-x^2+3jx}\ } \]
+          <div class="warnbox"><span class="lab">Piège</span>On ne peut pas écrire \(\underline H=\dfrac1{(1+jx)^2}\) : la seconde cellule <b>charge</b> la première (elle prélève du courant), les deux cellules ne sont pas indépendantes. Le terme « 3 » (au lieu de 2) vient précisément de cet effet de charge.</div>
+        </div></details>
+
+        <p class="q">3) (2 pts) Mettre \(\underline H\) sous la forme canonique \(\dfrac{H_0}{1-x^2+j\,x/Q}\) et identifier \(H_0\), \(\omega_0\) et \(Q\). Quelle est la nature du régime libre ?</p>
+        <details class="sol"><summary>✅ Correction Q3</summary><div class="sol-body">
+          <p>Par identification avec \(\underline H=\dfrac{1}{1-x^2+3jx}\) :</p>
+          <div class="res">\(H_0=1\) , \(\omega_0=\dfrac1{RC}=10^4\ \text{rad·s}^{-1}\) (\(f_0=1{,}59\ \text{kHz}\)) , \(\dfrac1Q=3\Rightarrow \boxed{Q=\tfrac13}\)</div>
+          <p>\(Q=\tfrac13<\tfrac12\) : le discriminant du dénominateur est positif (\(\Delta=9-4=5>0\)) ⇒ <b>régime apériodique</b>, pas de résonance (voir Q5).</p>
+        </div></details>
+
+        <p class="q">4) (4 pts) Donner les équivalents de \(\underline H\) en BF et en HF, calculer \(\underline H(x=1)\), puis tracer les diagrammes de Bode asymptotiques et réels (gain et phase).</p>
+        <details class="sol"><summary>✅ Correction Q4</summary><div class="sol-body">
+          <div class="overflow"><table>
+            <tr><th></th><th>\(x\ll1\) (BF)</th><th>\(x=1\)</th><th>\(x\gg1\) (HF)</th></tr>
+            <tr><td>\(\underline H\)</td><td>\(\approx1\)</td><td>\(\dfrac1{3j}=-\dfrac j3\)</td><td>\(\approx-\dfrac1{x^2}\)</td></tr>
+            <tr><td>\(G_{dB}\)</td><td>\(0\)</td><td>\(-20\log3=-9{,}5\ \text{dB}\)</td><td>\(-40\log x\) (pente \(-40\) dB/déc)</td></tr>
+            <tr><td>\(\varphi\)</td><td>\(0\)</td><td>\(-90^\circ\)</td><td>\(-180^\circ\)</td></tr>
+          </table></div>
+          <p>Les asymptotes se coupent en \(x=1\) à 0 dB ; la courbe réelle passe <b>9,5 dB en dessous</b> (pas de bosse). La phase passe continûment de \(0\) à \(-180^\circ\), avec \(-90^\circ\) en \(x=1\).</p>
+          <figure><img src="img/ex1-bode.svg" alt="Bode de l'exercice 1"><figcaption>Bode du double RC : courbe réelle (vert) et asymptotes (rouge pointillé). Traits verticaux : \(x=1\) et \(x_c=0{,}374\).</figcaption></figure>
+        </div></details>
+
+        <p class="q">5) (3 pts) Déterminer l'équation différentielle liant \(s(t)\) et \(e(t)\). Calculer les racines de l'équation caractéristique et les constantes de temps. Le système est-il stable ?</p>
+        <details class="sol"><summary>✅ Correction Q5</summary><div class="sol-body">
+          <p>On part de \(\underline s\,(1-x^2+3jx)=\underline e\) avec \(jx=jRC\omega\leftrightarrow RC\,\dfrac{d}{dt}\) et \(-x^2=(jx)^2\leftrightarrow(RC)^2\dfrac{d^2}{dt^2}\) :</p>
+          \[ \boxed{(RC)^2\,\ddot s+3RC\,\dot s+s=e} \]
+          <p>Équation caractéristique : \((RC)^2r^2+3RC\,r+1=0\), \(\Delta=9(RC)^2-4(RC)^2=5(RC)^2>0\) :</p>
+          \[ r_{1,2}=\frac{-3\pm\sqrt5}{2RC}\ \Rightarrow\ r_1=-\frac{0{,}382}{RC}=-3{,}82\times10^{3}\ \text{s}^{-1},\quad r_2=-\frac{2{,}618}{RC}=-2{,}62\times10^{4}\ \text{s}^{-1} \]
+          <p>avec \(RC=1{,}0\times10^3\times100\times10^{-9}=100\ \mu\text{s}\). Constantes de temps : \(\tau_1=262\ \mu\text{s}\), \(\tau_2=38{,}2\ \mu\text{s}\).</p>
+          <div class="res"><b>Stable</b> : les deux racines sont réelles <b>négatives</b> (de façon équivalente : les trois coefficients de l'équation sont strictement positifs et de même signe). La réponse à un échelon est apériodique, sans dépassement, avec un temps de réponse dominé par \(\tau_1\).</div>
+        </div></details>
+
+        <p class="q">6) (3 pts) Calculer la fréquence de coupure à −3 dB \(f_c\) (valeur exacte puis numérique). La comparer à celle d'un unique filtre RC de même \(R\) et \(C\).</p>
+        <details class="sol"><summary>✅ Correction Q6</summary><div class="sol-body">
+          <p>Définition : \(|\underline H(x_c)|=\dfrac{H_{max}}{\sqrt2}=\dfrac1{\sqrt2}\) ⇒ \((1-x_c^2)^2+9x_c^2=2\).</p>
+          <p>On développe : \(1-2x_c^2+x_c^4+9x_c^2=2\), soit \(x_c^4+7x_c^2-1=0\). Avec \(X=x_c^2>0\) :</p>
+          \[ X=\frac{-7+\sqrt{49+4}}{2}=\frac{-7+\sqrt{53}}2=0{,}140\ \Rightarrow\ x_c=0{,}374 \]
+          <div class="res">\(f_c=x_c\,f_0=0{,}374\times1{,}59\ \text{kHz}\approx\boxed{596\ \text{Hz}}\)</div>
+          <p>Un RC simple aurait \(f_c=f_0=1{,}59\ \text{kHz}\) : la bande passante est ici <b>2,7 fois plus étroite</b>, bien plus que pour deux RC isolés (\(x_c=0{,}644\), soit 1,02 kHz) : c'est l'effet de charge de la question 2. En contrepartie la coupure est plus raide (−40 dB/déc).</p>
+        </div></details>
+
+        <p class="q">7) (2 pts) On branche une résistance \(R_u\) entre \(s\) et la masse. La fonction de transfert reste-t-elle la même ? Quel montage à ALI intercaler pour que le filtre ne dépende plus de la charge ? Justifier.</p>
+        <details class="sol"><summary>✅ Correction Q7</summary><div class="sol-body">
+          <p>Non : \(R_u\) se retrouve en <b>parallèle</b> avec le condensateur de sortie, ce qui modifie l'impédance vue par la dernière cellule et donc \(\underline H\) (la fonction établie en Q2 vaut « en sortie ouverte »).</p>
+          <div class="res">On intercale un <b>montage suiveur</b> (sortie du filtre sur \(v_+\), \(v_-\) relié à \(s\)) : \(i_+=0\) (impédance d'entrée infinie) donc le filtre voit toujours une sortie ouverte, et \(s=v_-=v_+\) avec une impédance de sortie nulle qui attaque \(R_u\) sans changer la tension.</div>
+          <p>Le suiveur fonctionne en <b>régime linéaire</b> car la rétroaction se fait sur la borne \(-\) (voir Ex 3).</p>
+        </div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= EXERCICE 2 ======================= -->
+  <section class="block" id="ex2">
+    <h2>Exercice 2 — Créneau filtré par un RC (Ch2) · 20 pts</h2>
+    <div class="exo-card">
+      <div class="exo-head">✏️ Spectre, filtrage et comportement intégrateur <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Un signal créneau symétrique \(e(t)\), alternant entre \(+E_0\) et \(-E_0\) avec
+        \(E_0=5{,}0\ \text{V}\) et de fréquence \(f=10\ \text{kHz}\), attaque le filtre RC du schéma
+        (\(R=1{,}0\ \text{k}\Omega\), \(C=159\ \text{nF}\)), sortie ouverte.</p>
+        <figure><img src="img/ex2-circuit.svg" alt="Filtre RC passe-bas"><figcaption>Filtre RC du 1er ordre.</figcaption></figure>
+
+        <p class="q">1) (3 pts) Déterminer \(\underline H(j\omega)\), sa fréquence de coupure \(f_c\), l'expression du gain \(G(f)\) et du déphasage \(\varphi(f)\).</p>
+        <details class="sol"><summary>✅ Correction Q1</summary><div class="sol-body">
+          <p>Pont diviseur de tension (sortie ouverte) :</p>
+          \[ \underline H=\frac{1/(jC\omega)}{R+1/(jC\omega)}=\frac1{1+jRC\omega}=\frac1{1+j\,f/f_c},\qquad f_c=\frac1{2\pi RC} \]
+          <p>\(RC=1{,}0\times10^3\times159\times10^{-9}=159\ \mu\text{s}\), donc \(f_c=\dfrac1{2\pi\times159\times10^{-6}}=1{,}00\ \text{kHz}\).</p>
+          <div class="res">\(G(f)=|\underline H|=\dfrac1{\sqrt{1+(f/f_c)^2}}\) , \(\varphi(f)=\arg\underline H=-\arctan\dfrac f{f_c}\)</div>
+        </div></details>
+
+        <p class="q">2) (4 pts) Quelle est la valeur moyenne de \(e\) ? Quelles fréquences le spectre de \(e\) contient-il ? On admet que l'amplitude de l'harmonique de rang \(k\) vaut \(E_k=\dfrac{4E_0}{k\pi}\) pour \(k\) impair. Calculer \(E_1,E_3,E_5,E_7\) et écrire \(e(t)\).</p>
+        <details class="sol"><summary>✅ Correction Q2</summary><div class="sol-body">
+          <p><b>Valeur moyenne</b> : le créneau passe autant de temps à \(+E_0\) qu'à \(-E_0\) ⇒ \(\langle e\rangle=0\).</p>
+          <p><b>Fréquences</b> : un signal périodique de période \(T=1/f=100\ \mu\text{s}\) contient le fondamental \(f_1=f=10\ \text{kHz}\) et ses harmoniques \(f_k=kf\). Ici le signal est <b>impair</b> (seulement des sinus) et \(e(t+T/2)=-e(t)\) ⇒ <b>seuls les rangs impairs</b> existent : \(10,\ 30,\ 50,\ 70\ \text{kHz}\dots\)</p>
+          <div class="overflow"><table>
+            <tr><th>\(k\)</th><th>1</th><th>3</th><th>5</th><th>7</th></tr>
+            <tr><td>\(f_k\)</td><td>10 kHz</td><td>30 kHz</td><td>50 kHz</td><td>70 kHz</td></tr>
+            <tr><td>\(E_k=\dfrac{20}{k\pi}\)</td><td>6,37 V</td><td>2,12 V</td><td>1,27 V</td><td>0,909 V</td></tr>
+          </table></div>
+          \[ e(t)=\frac{4E_0}{\pi}\sum_{k\ \text{impair}}\frac{\sin(k\omega t)}{k}=6{,}37\sin\omega t+2{,}12\sin3\omega t+1{,}27\sin5\omega t+\dots\quad(\omega=2\pi f) \]
+          <p>Les amplitudes décroissent en \(1/k\).</p>
+        </div></details>
+
+        <p class="q">3) (4 pts) Pour chaque harmonique \(k=1,3,5,7\), calculer le gain \(G_k\) et le déphasage \(\varphi_k\) du filtre, puis l'amplitude \(S_k\) du signal de sortie.</p>
+        <details class="sol"><summary>✅ Correction Q3</summary><div class="sol-body">
+          <p>Principe de <b>superposition</b> (système linéaire) : chaque harmonique est traité séparément avec \(f_k/f_c=10k\), puis \(S_k=G_kE_k\).</p>
+          <div class="overflow"><table>
+            <tr><th>\(k\)</th><th>\(f_k/f_c\)</th><th>\(G_k=1/\sqrt{1+(f_k/f_c)^2}\)</th><th>\(\varphi_k\)</th><th>\(S_k=G_kE_k\)</th></tr>
+            <tr><td>1</td><td>10</td><td>0,0995</td><td>−84,3°</td><td>0,634 V</td></tr>
+            <tr><td>3</td><td>30</td><td>0,0333</td><td>−88,1°</td><td>0,0707 V</td></tr>
+            <tr><td>5</td><td>50</td><td>0,0200</td><td>−88,9°</td><td>0,0255 V</td></tr>
+            <tr><td>7</td><td>70</td><td>0,0143</td><td>−89,2°</td><td>0,0130 V</td></tr>
+          </table></div>
+          <figure><img src="img/ex2-spectres.svg" alt="Spectres de e et s"><figcaption>Spectres d'amplitude de \(e\) et de \(s\).</figcaption></figure>
+        </div></details>
+
+        <p class="q">4) (4 pts) Écrire \(s(t)\) (3 premiers termes). Comparer \(S_3/S_1\) à \(E_3/E_1\). Quelle est la forme de \(s(t)\) ?</p>
+        <details class="sol"><summary>✅ Correction Q4</summary><div class="sol-body">
+          \[ s(t)\approx0{,}634\sin(\omega t-84{,}3^\circ)+0{,}0707\sin(3\omega t-88{,}1^\circ)+0{,}0255\sin(5\omega t-88{,}9^\circ)+\dots \]
+          <p>Rapports : \(E_3/E_1=\tfrac13=0{,}33\) alors que \(S_3/S_1=\dfrac{0{,}0707}{0{,}634}=0{,}112\approx\dfrac19\). Les harmoniques de sortie décroissent donc en \(\mathbf{1/k^2}\) (au lieu de \(1/k\) en entrée), et tous sont déphasés de \(\approx-90^\circ\) : c'est la signature d'un signal <b>triangulaire</b> (la série de Fourier d'un triangle décroît en \(1/k^2\)).</p>
+          <figure><img src="img/ex2-temps.svg" alt="e(t) et s(t)"><figcaption>\(e(t)\) (vert) et \(s(t)\) (rouge) tracés avec 200 harmoniques : \(s\) est quasi triangulaire.</figcaption></figure>
+        </div></details>
+
+        <p class="q">5) (3 pts) Montrer qu'à ces fréquences (\(f\gg f_c\)) le montage se comporte en intégrateur. En déduire l'amplitude crête du signal triangulaire obtenu et vérifier la cohérence avec \(S_1\).</p>
+        <details class="sol"><summary>✅ Correction Q5</summary><div class="sol-body">
+          <p>Si \(f\gg f_c\) : \(\underline H=\dfrac1{1+jRC\omega}\approx\dfrac1{jRC\omega}\), donc \(j\omega\,\underline s=\underline e/(RC)\), soit en temporel :</p>
+          \[ s(t)\approx\frac1{RC}\int e(t)\,dt\quad(\text{à une constante près, nulle car }\langle s\rangle=0). \]
+          <p>Sur une demi-période \(T/2=50\ \mu\text{s}\), \(e=\pm E_0\) est constant : \(s\) varie <b>linéairement</b> de \(\Delta s=\dfrac{E_0\,T/2}{RC}=\dfrac{5\times50\times10^{-6}}{159\times10^{-6}}=1{,}57\ \text{V}\) crête-à-crête.</p>
+          <div class="res">Amplitude crête du triangle : \(s_{max}=\dfrac{E_0T}{4RC}\approx\boxed{0{,}79\ \text{V}}\) (la simulation à 200 harmoniques donne 0,78 V).</div>
+          <p>Cohérence : un triangle d'amplitude crête \(s_{max}\) a un fondamental de \(\dfrac8{\pi^2}s_{max}=0{,}81\times0{,}79=0{,}64\ \text{V}\), proche de \(S_1=0{,}634\ \text{V}\). ✔</p>
+        </div></details>
+
+        <p class="q">6) (2 pts) Que faut-il pour que \(s(t)\) reproduise correctement le créneau \(e(t)\) ? Donner un ordre de grandeur de \(f\) pour ce même filtre.</p>
+        <details class="sol"><summary>✅ Correction Q6</summary><div class="sol-body">
+          <p>Il faut que le filtre <b>laisse passer</b> les harmoniques significatifs : \(f_c\gg k_{max}f\) avec \(k_{max}\approx10\) (les fronts raides contiennent beaucoup d'harmoniques élevés). Ici \(f_c=1\ \text{kHz}\) impose :</p>
+          <div class="res">\(f\lesssim\dfrac{f_c}{10}\approx100\ \text{Hz}\), ce qui revient à \(T/2=5\ \text{ms}\gg\tau=RC=159\ \mu\text{s}\) : le condensateur a le temps de se charger complètement à chaque demi-période.</div>
+          <p>À 10 kHz, au contraire, \(T/2=50\ \mu\text{s}\ll\tau\) : on observe un triangle, pas un créneau.</p>
+        </div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= EXERCICE 3 ======================= -->
+  <section class="block" id="ex3">
+    <h2>Exercice 3 — ALI réel &amp; stabilité (Ch2-Ch3) · 20 pts</h2>
+    <div class="exo-card">
+      <div class="exo-head">✏️ Amplificateur non inverseur, bande passante et stabilité <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">On considère le montage ci-dessous avec \(R_1=1{,}0\ \text{k}\Omega\), \(R_2=9{,}0\ \text{k}\Omega\).
+        On note \(\beta=\dfrac{R_1}{R_1+R_2}\). L'ALI est d'abord supposé idéal (Q1-Q2).</p>
+        <figure><img src="img/ex3-noninv.svg" alt="Amplificateur non inverseur"><figcaption>Montage non inverseur.</figcaption></figure>
+
+        <p class="q">1) (2 pts) Pourquoi peut-on supposer que l'ALI fonctionne en régime linéaire ? Que valent alors \(\varepsilon=v_+-v_-\) et les courants d'entrée ?</p>
+        <details class="sol"><summary>✅ Correction Q1</summary><div class="sol-body">
+          <p>La sortie est reliée à l'entrée <b>inverseuse \(v_-\)</b> par \(R_2\) : il y a une <b>rétroaction négative</b>. Si \(v_-\) augmente, \(s\) diminue (et inversement), ce qui stabilise le montage : le régime linéaire est possible (et stable, voir Q5).</p>
+          <div class="res">ALI idéal en régime linéaire : \(\varepsilon=v_+-v_-=0\) et \(i_+=i_-=0\) (impédance d'entrée infinie). Il faudra vérifier \(|s|&lt;V_{sat}\) a posteriori.</div>
+        </div></details>
+
+        <p class="q">2) (2 pts) Établir \(s\) en fonction de \(e\). Montage inverseur ou non inverseur ? Gain en dB ?</p>
+        <details class="sol"><summary>✅ Correction Q2</summary><div class="sol-body">
+          <p>\(v_+=e\) (pas de courant dans la liaison). \(R_1\) et \(R_2\) forment un diviseur de tension (\(i_-=0\)) : \(v_-=\dfrac{R_1}{R_1+R_2}s=\beta s\). Avec \(v_+=v_-\) :</p>
+          \[ e=\beta s\ \Rightarrow\ \boxed{s=\left(1+\frac{R_2}{R_1}\right)e=10\,e} \]
+          <p>Gain \(+10>0\) : <b>non inverseur</b> (\(s\) en phase avec \(e\)). \(G_{dB}=20\log10=20\ \text{dB}\). Impédance d'entrée infinie.</p>
+        </div></details>
+
+        <p class="q">3) (4 pts) L'ALI réel a un gain différentiel de type passe-bas du 1er ordre : \(\underline\mu=\dfrac{\mu_0}{1+j\omega/\omega_a}\), \(\mu_0=2\times10^5\), avec un produit gain-bande \(\mu_0f_a=1\ \text{MHz}\). Établir la fonction de transfert \(\underline H=\underline s/\underline e\) du montage et la mettre sous la forme \(\dfrac{H_0}{1+j\omega/\omega_c}\). Exprimer \(H_0\) et \(\omega_c\).</p>
+        <details class="sol"><summary>✅ Correction Q3</summary><div class="sol-body">
+          <p>Le modèle de l'ALI réel : \(\underline s=\underline\mu\,(\underline v_+-\underline v_-)=\underline\mu\,(\underline e-\beta\underline s)\). Donc :</p>
+          \[ \underline s\,(1+\beta\underline\mu)=\underline\mu\,\underline e\ \Rightarrow\ \underline H=\frac{\underline\mu}{1+\beta\underline\mu} \]
+          <p>On remplace \(\underline\mu\) et on multiplie numérateur et dénominateur par \(1+j\omega/\omega_a\) :</p>
+          \[ \underline H=\frac{\mu_0}{1+\dfrac{j\omega}{\omega_a}+\beta\mu_0}=\frac{\dfrac{\mu_0}{1+\beta\mu_0}}{1+\dfrac{j\omega}{\omega_a(1+\beta\mu_0)}} \]
+          <div class="res">\(H_0=\dfrac{\mu_0}{1+\beta\mu_0}\ \left(\xrightarrow[\mu_0\to\infty]{}\dfrac1\beta\right)\) , \(\omega_c=\omega_a\,(1+\beta\mu_0)\)</div>
+          <p>Le montage est un <b>passe-bas du premier ordre</b>, dont la bande passante est élargie d'un facteur \(1+\beta\mu_0\) par la contre-réaction.</p>
+        </div></details>
+
+        <p class="q">4) (3 pts) Application numérique : \(f_a\), \(H_0\), \(f_c\). Que vaut le produit \(H_0f_c\) ? Peut-on amplifier un signal de 500 kHz avec ce montage et un gain de 10 ?</p>
+        <details class="sol"><summary>✅ Correction Q4</summary><div class="sol-body">
+          <p>\(f_a=\dfrac{1\ \text{MHz}}{\mu_0}=\dfrac{10^6}{2\times10^5}=5\ \text{Hz}\) ; \(\beta=0{,}1\) donc \(\beta\mu_0=2\times10^4\) et \(1+\beta\mu_0=20\,001\).</p>
+          <div class="res">\(H_0=\dfrac{2\times10^5}{20\,001}=9{,}9995\approx10\) (écart avec l'idéal : \(5\times10^{-5}\)) ; \(f_c=5\times20\,001\approx\boxed{100\ \text{kHz}}\) ; \(H_0f_c\approx10\times100\ \text{kHz}=1\ \text{MHz}\)</div>
+          <p>Le produit \(H_0f_c\) est <b>égal au produit gain-bande</b> de l'ALI : on échange gain contre bande passante. À 500 kHz (\(\gg f_c\)), le gain réel est \(\approx10/\sqrt{1+25}\approx2\) : <b>non</b>, il faudrait un gain \(\le\) environ 2 (soit \(\beta\approx0{,}5\)) pour amplifier correctement à 500 kHz.</p>
+        </div></details>
+
+        <p class="q">5) (3 pts) Écrire l'équation différentielle de \(s(t)\) et conclure sur la stabilité du montage de la figure.</p>
+        <details class="sol"><summary>✅ Correction Q5</summary><div class="sol-body">
+          <p>De \(\underline H=\dfrac{H_0}{1+j\omega/\omega_c}\) on tire (\(j\omega\leftrightarrow d/dt\)) :</p>
+          \[ \boxed{\frac1{\omega_c}\frac{ds}{dt}+s=H_0\,e} \qquad\text{avec}\ \frac1{\omega_c}=1{,}59\ \mu\text{s} \]
+          <p>Équation caractéristique : \(\dfrac r{\omega_c}+1=0\Rightarrow r=-\omega_c=-6{,}28\times10^5\ \text{s}^{-1}<0\).</p>
+          <div class="res">Les deux coefficients (\(1/\omega_c\) et \(1\)) sont strictement positifs, de même signe, et la racine est réelle négative : le montage est <b>stable</b> (constante de temps \(\tau=1{,}6\ \mu\text{s}\)). Le régime linéaire est auto-entretenu.</div>
+        </div></details>
+
+        <p class="q">6) (4 pts) On permute les deux entrées de l'ALI (voir schéma) : \(e\) est maintenant sur \(v_-\) et la sortie ramenée sur \(v_+\) par le même diviseur. Établir \(\underline H\) puis l'équation différentielle de \(s(t)\) (avec \(\underline\mu\) réel) et étudier sa stabilité.</p>
+        <figure><img src="img/ex3-perm.svg" alt="Montage à entrées permutées"><figcaption>Montage à entrées permutées (rétroaction sur \(v_+\)).</figcaption></figure>
+        <details class="sol"><summary>✅ Correction Q6</summary><div class="sol-body">
+          <p>Maintenant \(v_+=\beta s\) et \(v_-=e\) : \(\underline s=\underline\mu\,(\beta\underline s-\underline e)\), d'où \(\underline s\,(1-\beta\underline\mu)=-\underline\mu\,\underline e\) :</p>
+          \[ \underline H=\frac{-\mu_0}{1-\beta\mu_0+\dfrac{j\omega}{\omega_a}} \]
+          <p>Équation différentielle :</p>
+          \[ \boxed{\frac1{\omega_a}\frac{ds}{dt}+(1-\beta\mu_0)\,s=-\mu_0\,e}\quad\text{avec}\ 1-\beta\mu_0=-19\,999<0 \]
+          <p>Racine : \(r=+\omega_a(\beta\mu_0-1)=2\pi\times5\times19\,999=+6{,}28\times10^5\ \text{s}^{-1}>0\).</p>
+          <div class="res">Les coefficients \(1/\omega_a>0\) et \(1-\beta\mu_0<0\) sont de <b>signes opposés</b> : le système est <b>instable</b>. La solution libre diverge en \(e^{rt}\) avec \(\tau=1/r\approx1{,}6\ \mu\text{s}\).</div>
+        </div></details>
+
+        <p class="q">7) (2 pts) Que devient la sortie du montage permuté ? L'hypothèse \(\varepsilon=0\) est-elle valable ? Quelle règle en déduire ?</p>
+        <details class="sol"><summary>✅ Correction Q7</summary><div class="sol-body">
+          <p>La divergence exponentielle fait croître \(|s|\) en quelques microsecondes jusqu'à la saturation \(s=\pm V_{sat}=\pm15\ \text{V}\) : l'ALI quitte le régime linéaire et le montage est en <b>régime saturé</b> (c'est un comparateur à hystérésis, voir Ch4). L'hypothèse \(v_+=v_-\) est alors fausse : \(\varepsilon\) est grand, pas nul.</p>
+          <div class="res"><b>Règle :</b> rétroaction sur \(v_-\) (négative) ⇒ stable, régime linéaire possible ; rétroaction sur \(v_+\) (positive) ⇒ instable, l'ALI sature. On vérifie toujours la stabilité <b>avant</b> d'écrire \(v_+=v_-\).</div>
+        </div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= EXERCICE 4 ======================= -->
+  <section class="block" id="ex4">
+    <h2>Exercice 4 — Filtre actif passe-haut (Ch1-Ch3) · 20 pts</h2>
+    <div class="exo-card">
+      <div class="exo-head">✏️ Filtre actif du 1er ordre à ALI <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">L'ALI du montage est idéal. \(R_1=1{,}0\ \text{k}\Omega\), \(R_2=10\ \text{k}\Omega\),
+        \(C=100\ \text{nF}\). On note \(Z_1\) l'impédance de la branche d'entrée (\(C\) en série avec \(R_1\)).</p>
+        <figure><img src="img/ex4-circuit.svg" alt="Filtre actif passe-haut inverseur"><figcaption>Filtre actif à ALI.</figcaption></figure>
+
+        <p class="q">1) (2 pts) Justifier le régime linéaire et écrire les hypothèses utilisées.</p>
+        <details class="sol"><summary>✅ Correction Q1</summary><div class="sol-body">
+          <p>\(R_2\) relie la sortie à l'entrée inverseuse : rétroaction <b>négative</b> ⇒ stable, régime linéaire possible. Hypothèses de l'ALI idéal en régime linéaire : \(i_+=i_-=0\) et \(\varepsilon=0\). Ici \(v_+=0\) (masse), donc \(v_-=0\) : l'entrée \(-\) est une <b>masse virtuelle</b>.</p>
+        </div></details>
+
+        <p class="q">2) (4 pts) Établir \(\underline H(j\omega)\).</p>
+        <details class="sol"><summary>✅ Correction Q2</summary><div class="sol-body">
+          <p>Loi des nœuds en \(v_-\) (potentiel nul, \(i_-=0\)) : le courant qui traverse \(Z_1\) est \(\dfrac{\underline e-0}{Z_1}\) et il traverse ensuite \(R_2\) :</p>
+          \[ \frac{\underline e-0}{Z_1}+\frac{\underline s-0}{R_2}=0\ \Rightarrow\ \underline H=-\frac{R_2}{Z_1} \]
+          <p>Avec \(Z_1=R_1+\dfrac1{jC\omega}=\dfrac{1+jR_1C\omega}{jC\omega}\) :</p>
+          \[ \boxed{\underline H=-\frac{jR_2C\omega}{1+jR_1C\omega}} \]
+        </div></details>
+
+        <p class="q">3) (3 pts) Mettre \(\underline H\) sous la forme \(H_\infty\dfrac{jx}{1+jx}\). Identifier \(H_\infty\), \(\omega_1\), \(f_1\) et la nature du filtre.</p>
+        <details class="sol"><summary>✅ Correction Q3</summary><div class="sol-body">
+          <p>On pose \(x=\omega/\omega_1\) avec \(\omega_1=1/(R_1C)\) : \(R_2C\omega=\dfrac{R_2}{R_1}\,x\), donc</p>
+          \[ \underline H=-\frac{R_2}{R_1}\,\frac{jx}{1+jx} \]
+          <div class="res">\(H_\infty=-\dfrac{R_2}{R_1}=-10\) (soit \(20\ \text{dB}\) avec inversion de signe) ; \(\omega_1=\dfrac1{R_1C}=10^4\ \text{rad·s}^{-1}\) ; \(f_1=\dfrac{\omega_1}{2\pi}=1{,}59\ \text{kHz}\). Filtre <b>passe-haut du 1er ordre</b> inverseur, avec \(f_c=f_1\).</div>
+          <p>Vérification qualitative : à très haute fréquence \(Z_C\to0\), \(Z_1\to R_1\) et on retrouve l'inverseur \(-R_2/R_1\) ; à très basse fréquence \(Z_C\to\infty\) donc \(\underline H\to0\) ✔.</p>
+        </div></details>
+
+        <p class="q">4) (4 pts) Tracer les diagrammes de Bode asymptotiques et réels, en calculant \(\underline H(x=1)\).</p>
+        <details class="sol"><summary>✅ Correction Q4</summary><div class="sol-body">
+          <div class="overflow"><table>
+            <tr><th></th><th>\(x\ll1\)</th><th>\(x=1\)</th><th>\(x\gg1\)</th></tr>
+            <tr><td>\(\underline H\)</td><td>\(\approx-10\,jx\)</td><td>\(-\dfrac{10j}{1+j}=-5(1+j)\)</td><td>\(\approx-10\)</td></tr>
+            <tr><td>\(G_{dB}\)</td><td>\(20+20\log x\) (pente +20 dB/déc)</td><td>\(20\log7{,}07=17\ \text{dB}\)</td><td>\(20\ \text{dB}\)</td></tr>
+            <tr><td>\(\varphi\)</td><td>\(-90^\circ\)</td><td>\(-135^\circ\)</td><td>\(-180^\circ\)</td></tr>
+          </table></div>
+          <p>Phase : \(-10\,jx=10x\,e^{-j\pi/2}\) en BF (le signe « − » vaut \(e^{\pm j\pi}\) et \(\arg(jx)=+90^\circ\), d'où \(-180^\circ+90^\circ=-90^\circ\)) ; en \(x=1\) : \(-5-5j\) est dans le 3ᵉ quadrant, \(\varphi=-135^\circ\) ; HF : \(-10\) donc \(-180^\circ\) (continuité avec la BF).</p>
+          <figure><img src="img/ex4-bode.svg" alt="Bode de l'exercice 4"><figcaption>Bode du filtre actif passe-haut : réel (vert) et asymptotes (rouge).</figcaption></figure>
+        </div></details>
+
+        <p class="q">5) (3 pts) Montrer qu'à basse fréquence (\(f\ll f_1\)) le montage est un <b>dérivateur</b>. Donner la relation temporelle et le domaine de validité numérique.</p>
+        <details class="sol"><summary>✅ Correction Q5</summary><div class="sol-body">
+          <p>Pour \(x\ll1\) : \(\underline H\approx-jR_2C\omega\Rightarrow\underline s=-R_2C\,(j\omega\,\underline e)\), soit :</p>
+          \[ s(t)\approx-R_2C\,\frac{de}{dt} \]
+          <p>\(R_2C=10^4\times10^{-7}=1{,}0\ \text{ms}\). Valable pour \(f\ll f_1\approx1{,}6\ \text{kHz}\) (en pratique \(f\lesssim160\ \text{Hz}\) pour 0,5 % d'erreur environ sur le gain). En HF le montage est un simple amplificateur inverseur de gain \(-10\) : il ne dérive plus.</p>
+        </div></details>
+
+        <p class="q">6) (4 pts) On applique \(e(t)=1\ \text{V}+0{,}2\cos(2\pi f_1t)\ \text{V}\) à la fréquence \(f_1=1{,}59\ \text{kHz}\). Donner \(s(t)\). Quelle amplitude maximale de sinusoïde HF peut-on appliquer sans saturer ?</p>
+        <details class="sol"><summary>✅ Correction Q6</summary><div class="sol-body">
+          <p>Le signal est la somme d'une <b>composante continue</b> (\(\omega=0\)) et d'une sinusoïde : par superposition, on traite chacune avec son propre \(\underline H\).</p>
+          <p><b>Continu :</b> \(\underline H(0)=0\) ⇒ la composante continue de 1 V est <b>bloquée</b> (comme le fait tout passe-haut : le condensateur est chargé et ne laisse plus passer le courant continu).</p>
+          <p><b>Sinusoïde en \(x=1\) :</b> \(|\underline H|=\dfrac{10}{\sqrt2}=7{,}07\), \(\varphi=-135^\circ=-\dfrac{3\pi}4\) (voir Q4), donc l'amplitude de sortie est \(7{,}07\times0{,}2=1{,}41\ \text{V}\) :</p>
+          <div class="res">\(s(t)=1{,}41\cos\!\left(2\pi f_1t-\dfrac{3\pi}{4}\right)\ \text{V}\)  (valeur moyenne nulle)</div>
+          <p><b>Saturation :</b> en HF le gain vaut \(|H_\infty|=10\), il faut \(10\,E_m\le V_{sat}=15\ \text{V}\) soit \(E_m\le\boxed{1{,}5\ \text{V}}\). Au-delà, la sortie est écrêtée et le régime n'est plus linéaire.</p>
+        </div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= DOCUMENTS ======================= -->
+  <section class="block" id="docs">
+    <h2>📂 Documents — ressources en ligne (PDF)</h2>
+    <p class="docs-intro">PDF d'enseignants de classes préparatoires, téléchargés depuis leurs sites (liens vers la
+    source ci-dessous). Niveau très proche du cours de D. Courtois, mais vocabulaire et notations peuvent différer.</p>
+    <div class="docs-group">
+      <h3>Étienne Thibierge (Lycée Blaise Pascal, PT) — cours &amp; TD corrigés</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="documents/Thibierge_01_SLCI_TD_enonce.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD1 — Systèmes linéaires (énoncé)</span><span class="badge">Ch1 · Ch2</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="documents/Thibierge_01_SLCI_TD_corrige.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD1 — Systèmes linéaires (corrigé)</span><span class="badge">Ch1 · Ch2</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="documents/Thibierge_05_ALI_cours.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Cours 5 — Amplificateur linéaire intégré</span><span class="badge">Ch3</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="documents/Thibierge_05_ALI_TD_enonce.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD5 — ALI (énoncé)</span><span class="badge">Ch3</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="documents/Thibierge_05_ALI_TD_corrige.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD5 — ALI (corrigé)</span><span class="badge">Ch3</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Autres exercices (prépas)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="documents/MPSI_LegrandLouis_exos_filtrage.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">MPSI2 Louis-le-Grand — Filtrage linéaire</span><span class="badge">Ch1 · Ch2</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="documents/PSI_Stanislas_exos_electronique.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">PSI* Stanislas — Exercices d'électronique (niveau difficile)</span><span class="badge">Ch1 → Ch4</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="documents/PCSI_Brizeux_preparation_DS04.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">PCSI Brizeux — Préparation DS 04</span><span class="badge">Filtrage / DS</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Sources : <a href="https://www.etienne-thibierge.fr/cours-pt_electronique.php" target="_blank" rel="noopener">etienne-thibierge.fr</a> ·
+    <a href="https://cpge-paradise.com/pdf/exo-filtres-complet.pdf" target="_blank" rel="noopener">cpge-paradise.com</a> ·
+    <a href="http://ribiere.regit.org/TD_electrocinetique.pdf" target="_blank" rel="noopener">ribiere.regit.org</a> ·
+    <a href="https://www.cpge-brizeux.fr/wordpress/wp-content/uploads/Preparation-DS-04.pdf" target="_blank" rel="noopener">cpge-brizeux.fr</a>.
+    Pas de DS ECAM publiés en ligne à ma connaissance : les vrais DS sont ceux de Moodle (DS0, tests de 20 min).</p>
+  </section>
+</main>
+<script src="../assets/gate.js"></script>
+</body>
+</html>
