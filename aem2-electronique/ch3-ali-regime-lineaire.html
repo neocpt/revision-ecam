@@ -17,6 +17,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
   <span class="spacer"></span>
   <a href="ch2-filtrage-fourier.html">← Ch2</a>
   <a href="#s1">Cours</a>
+  <a href="#quizz">Quizz</a>
   <a href="#ex1">TD3 corrigé</a>
   <a href="#docs">Documents donnés</a>
   <a href="ch4-ali-regime-sature.html">Ch4 →</a>
@@ -41,6 +42,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
           <li><a href="#s4">4. Des écarts possibles à la réponse linéaire</a></li>
         </ul>
       </li>
+      <li><a href="#quizz"><b>🧠 Schémas, propriétés et quizz</b></a></li>
       <li><a href="#ex1"><b>TD3 corrigé</b></a>
         <ul>
           <li><a href="#ex1">Ex 1 — Montage sommateur</a></li>
@@ -671,6 +673,146 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     </ul>
   </section>
 
+
+  <div style="margin:2.2rem 0 .4rem;padding:.7rem 1rem;border-left:5px solid var(--subject);background:#f8fafc;border-radius:8px"><b style="color:var(--subject-ink)">Schémas à retenir + Quizz</b> — les 6 montages à ALI avec rétroaction, leurs propriétés, et un quizz de 25 questions</div>
+
+  <section class="block" id="quizz">
+    <h2>Schémas à retenir, propriétés et quizz</h2>
+
+    <section class="memo-sheet" id="memo">
+      <div class="memo-head">📌 Fiche mémo — ALI avec rétroaction sur la borne −</div>
+      <div class="memo-grid">
+        <div class="memo-item"><b>Suiveur</b>\(V_s=V_e\) ; \(Z_e=\infty\), \(Z_s=0\)</div>
+        <div class="memo-item"><b>Inverseur</b>\(V_s=-\dfrac{R_2}{R_1}V_e\) ; \(Z_e=R_1\)</div>
+        <div class="memo-item"><b>Non inverseur</b>\(V_s=\left(1+\dfrac{R_2}{R_1}\right)V_e\) ; \(Z_e=\infty\)</div>
+        <div class="memo-item"><b>Intégrateur</b>\(V_s=-\dfrac1{RC}\displaystyle\int V_e\,dt\) ; \(\underline H=-\dfrac{1}{jRC\omega}\) ; phase \(+90^\circ\)</div>
+        <div class="memo-item"><b>Pseudo-intégrateur</b>\(\underline H=-\dfrac{R'/R}{1+jR'C\omega}\) ; \(f_c=\dfrac1{2\pi R'C}\)</div>
+        <div class="memo-item"><b>Dérivateur</b>\(V_s=-RC\dfrac{dV_e}{dt}\) ; \(\underline H=-jRC\omega\) ; phase \(-90^\circ\)</div>
+        <div class="memo-item"><b>ALI idéal</b>\(i_+=i_-=0\) ; en linéaire \(\varepsilon=v_+-v_-=0\)</div>
+        <div class="memo-item"><b>Saturation</b>\(|v_s|\le V_{sat}\) ; réaction sur \(+\) ⇒ \(v_s=\pm V_{sat}\)</div>
+        <div class="memo-item"><b>ALI réel</b>produit gain-bande \(G\times f_{-3dB}=GBW\) ; slew rate en V/µs</div>
+        <div class="memo-item method"><b>Méthode</b>Réaction sur − ⇒ linéaire ; \(v_+=v_-\), \(i_\pm=0\), loi des nœuds (ou Millman) en \(V_-\)</div>
+      </div>
+    </section>
+
+    <h3>Les 6 schémas</h3>
+    <p class="docs-intro">Clique sur une carte pour la révéler : cache la correction et essaie d'abord de retrouver le nom, la fonction de transfert et le défaut du montage.</p>
+    <div class="ali-tabs" id="ali-tabs"></div>
+    <label class="ali-test"><input type="checkbox" id="ali-hide"> Mode test : flouter les réponses (clique dessus pour révéler)</label>
+    <div class="ali-card" id="ali-card"></div>
+
+    <h3>Propriétés à connaître</h3>
+    <div id="ali-props"></div>
+
+    <h3>🧠 Quizz</h3>
+    <div class="ali-score" id="ali-score"></div>
+    <div class="ali-card" id="ali-quiz"></div>
+  </section>
+
+<script>
+(function(){
+const A='stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"';
+const L=(a,b,c,d)=>`<line x1="${a}" y1="${b}" x2="${c}" y2="${d}"/>`;
+const T=(x,y,t,anc='middle',sz=14)=>`<text x="${x}" y="${y}" text-anchor="${anc}" font-size="${sz}" fill="currentColor" stroke="none">${t}</text>`;
+const dot=(x,y)=>`<circle cx="${x}" cy="${y}" r="3.2" fill="currentColor"/>`;
+const gnd=(x,y)=>L(x,y,x,y+8)+L(x-12,y+8,x+12,y+8)+L(x-8,y+13,x+8,y+13)+L(x-4,y+18,x+4,y+18);
+function hres(x1,x2,y,lab){const c=(x1+x2)/2;return L(x1,y,c-22,y)+`<rect x="${c-22}" y="${y-9}" width="44" height="18"/>`+L(c+22,y,x2,y)+T(c,y-15,lab)}
+function vres(x,y1,y2,lab){const c=(y1+y2)/2;return L(x,y1,x,c-22)+`<rect x="${x-9}" y="${c-22}" width="18" height="44"/>`+L(x,c+22,x,y2)+T(x+16,c+5,lab,'start')}
+function cap(x1,x2,y,lab){const c=(x1+x2)/2;return L(x1,y,c-4,y)+L(c-4,y-13,c-4,y+13)+L(c+4,y-13,c+4,y+13)+L(c+4,y,x2,y)+T(c,y-19,lab)}
+function pbox(x1,x2,y,a,b){return L(x1,y-30,x1,y+30)+L(x2,y-30,x2,y+30)+hres(x1,x2,y-30,a)+cap(x1,x2,y+30,b)}
+function draw(k){
+ const flip=(k==='sui'||k==='noninv'),M=flip?205:135,P=flip?135:205;
+ let s=`<polygon points="260,110 260,230 360,170"/>`+T(271,M+5,'−','start',18)+T(271,P+5,'+','start',18)+L(360,170,440,170)+dot(400,170)+T(468,175,'Vs')+`<circle cx="60" cy="135" r="4"/>`+T(60,119,'Ve');
+ if(!flip){
+  s+=L(64,135,90,135)+(k==='deriv'?cap(90,170,135,'C'):hres(90,170,135,k==='inv'?'R1':'R'))+L(170,135,260,135)+dot(200,135);
+  s+=L(260,205,220,205)+L(220,205,220,222)+gnd(220,222);
+  s+=L(200,135,200,60)+L(200,60,250,60);
+  s+=({inv:()=>hres(250,330,60,'R2'),integ:()=>cap(250,330,60,'C'),deriv:()=>hres(250,330,60,'R'),pseudo:()=>pbox(250,330,60,"R'",'C')})[k]();
+  s+=L(330,60,400,60)+L(400,60,400,170);
+ }else{
+  s+=L(64,135,260,135)+L(260,205,200,205)+dot(200,205);
+  if(k==='sui'){s+=L(200,205,200,260)+L(200,260,400,260)+L(400,260,400,170)}
+  else{s+=L(200,205,200,260)+L(200,260,250,260)+hres(250,330,260,'R2')+L(330,260,400,260)+L(400,260,400,170);
+   s+=L(200,205,140,205)+L(140,205,140,223)+vres(140,223,273,'R1')+L(140,273,140,280)+gnd(140,280)}
+ }
+ return `<svg viewBox="0 0 520 305" ${A} role="img" aria-label="schéma ${k}">${s}</svg>`;
+}
+const C={
+sui:{t:"Suiveur",n:"Suiveur (adaptateur d'impédance)",e:["Vs = Ve","H = 1 (gain unité)","Ze = ∞ ; Zs = 0"],p:["Retour direct de la sortie sur la borne <b>−</b>, Ve sur la borne +.","ε = 0 ⇒ V− = V+ = Ve, et V− = Vs ⇒ Vs = Ve.","Utilité : isoler une source à forte impédance de sortie d'une charge (pas de courant tiré sur la source)."]},
+inv:{t:"Inverseur",n:"Amplificateur inverseur",e:["Vs = −(R2/R1)·Ve","Ze = R1","Déphasage de 180°"],p:["Ve → R1 → borne −, borne + à la masse, R2 de la sortie vers la borne −.","V− = V+ = 0 : « masse virtuelle ». Loi des nœuds en V− : Ve/R1 + Vs/R2 = 0.","Gain en module R2/R1 : peut être &lt; 1 ou &gt; 1. Impédance d'entrée finie = R1."]},
+noninv:{t:"Non inverseur",n:"Amplificateur non inverseur",e:["Vs = (1 + R2/R1)·Ve","Ze = ∞","Gain ≥ 1, pas d'inversion"],p:["Ve sur la borne +, pont diviseur R2/R1 entre sortie, borne − et masse.","V− = Vs·R1/(R1+R2) = V+ = Ve ⇒ Vs = (1 + R2/R1)Ve.","Si R2 = 0 (ou R1 = ∞) : on retrouve le suiveur."]},
+integ:{t:"Intégrateur",n:"Intégrateur (inverseur)",e:["Vs(t) = −(1/RC)·∫Ve dt + Vs(0)","H(jω) = −1/(jRCω)","|H| = 1/(RCω) : −20 dB/déc ; phase +90°"],p:["R à l'entrée, C dans la boucle de retour.","i = Ve/R = −C·dVs/dt (masse virtuelle en V−).","Défaut : gain infini en continu ⇒ la moindre tension de décalage (offset) fait dériver Vs jusqu'à la saturation.","Remède : pseudo-intégrateur (R' en parallèle sur C)."]},
+pseudo:{t:"Pseudo-intégrateur",n:"Pseudo-intégrateur",e:["H(jω) = −(R'/R) / (1 + jR'Cω)","Gain statique : −R'/R","fc = 1/(2πR'C)"],p:["Comme l'intégrateur, avec une résistance R' en parallèle sur C.","f ≪ fc : se comporte en inverseur de gain −R'/R (pas de dérive).","f ≫ fc : se comporte en intégrateur, H ≈ −1/(jRCω).","= filtre passe-bas du 1er ordre, inverseur."]},
+deriv:{t:"Dérivateur",n:"Dérivateur (inverseur)",e:["Vs(t) = −RC·dVe/dt","H(jω) = −jRCω","|H| = RCω : +20 dB/déc ; phase −90°"],p:["C à l'entrée, R dans la boucle de retour.","i = C·dVe/dt = −Vs/R.","Défaut : gain croissant avec la fréquence ⇒ amplifie le bruit HF, risque d'instabilité.","Remède : pseudo-dérivateur (petite R en série avec C, éventuellement C' en parallèle sur R)."]}
+};
+const props=[
+["Hypothèses de l'ALI idéal","Courants d'entrée nuls : i+ = i− = 0 ; impédance d'entrée infinie, impédance de sortie nulle ; gain différentiel A infini ; bande passante infinie."],
+["Régime linéaire","|Vs| &lt; Vsat et ε = V+ − V− = 0 (donc V+ = V−). Il n'est possible que s'il y a une <b>rétroaction sur la borne −</b> (réaction négative)."],
+["Régime saturé","Rétroaction sur la borne + (ou aucune) : ε ≠ 0 et Vs = +Vsat si ε &gt; 0, −Vsat si ε &lt; 0. C'est le comparateur / trigger de Schmitt."],
+["Saturation","La sortie est bornée par ±Vsat (un peu moins que l'alimentation, ≈ ±13 V pour ±15 V). Au-delà, le montage cesse d'être linéaire."],
+["Méthode d'étude","1) Vérifier la rétroaction sur − ⇒ linéaire. 2) Poser V+ = V−, i+ = i− = 0. 3) Loi des nœuds / Millman en V−. 4) Exprimer Vs/Ve."],
+["Avantages de la rétroaction négative","Gain déterminé uniquement par les composants externes, stable, précis ; impédances d'entrée/sortie améliorées ; bande passante élargie."],
+["ALI réel : produit gain-bande","Gain × bande passante = constante (GBW). Ex. GBW = 1 MHz, gain 100 ⇒ bande passante ≈ 10 kHz."],
+["ALI réel : slew rate","Vitesse maximale de variation de Vs (en V/µs) : au-delà, le signal de sortie est déformé (triangle)."],
+["Impédances d'entrée","Suiveur et non inverseur : Ze = ∞. Inverseur, intégrateur, dérivateur : Ze = R (ou 1/(jCω) pour le dérivateur)."],
+["Ordre de grandeur à retenir","Intégrateur : −20 dB/déc, φ = +90°. Dérivateur : +20 dB/déc, φ = −90°. Pseudo-intégrateur : plateau puis −20 dB/déc."]
+];
+const Q=[
+{c:'sui',q:"Quel est ce montage ?",o:["Suiveur","Inverseur","Non inverseur","Comparateur"],a:0,x:"Sortie reliée directement à la borne −, Ve sur +."},
+{c:'inv',q:"Quel est ce montage ?",o:["Non inverseur","Inverseur","Intégrateur","Dérivateur"],a:1,x:"Ve par R1 sur −, R2 en retour, + à la masse."},
+{c:'noninv',q:"Quel est ce montage ?",o:["Inverseur","Suiveur","Non inverseur","Pseudo-intégrateur"],a:2,x:"Ve sur +, pont R2/R1 sur −."},
+{c:'integ',q:"Quel est ce montage ?",o:["Dérivateur","Intégrateur","Pseudo-intégrateur","Inverseur"],a:1,x:"R en entrée, C en retour ⇒ intégrateur."},
+{c:'pseudo',q:"Quel est ce montage ?",o:["Intégrateur parfait","Dérivateur","Pseudo-intégrateur","Non inverseur"],a:2,x:"R' en parallèle sur C dans la boucle ⇒ pseudo-intégrateur."},
+{c:'deriv',q:"Quel est ce montage ?",o:["Intégrateur","Dérivateur","Pseudo-intégrateur","Suiveur"],a:1,x:"C en entrée, R en retour ⇒ dérivateur."},
+{q:"Quelle est l'expression du gain de l'inverseur ?",o:["Vs/Ve = R2/R1","Vs/Ve = −R2/R1","Vs/Ve = 1 + R2/R1","Vs/Ve = −R1/R2"],a:1,x:"Masse virtuelle : Ve/R1 = −Vs/R2."},
+{q:"Quelle est l'expression du gain du non inverseur ?",o:["1 + R2/R1","R2/R1","1 − R2/R1","−R2/R1"],a:0,x:"V− = Vs·R1/(R1+R2) = Ve."},
+{q:"Inverseur avec R1 = 2 kΩ et R2 = 10 kΩ. Gain ?",o:["+5","−5","−0,2","+6"],a:1,x:"−R2/R1 = −10/2 = −5."},
+{q:"Non inverseur avec R1 = 1 kΩ et R2 = 9 kΩ. Gain ?",o:["9","−9","10","0,9"],a:2,x:"1 + 9/1 = 10."},
+{q:"Condition pour que l'ALI soit en régime linéaire ?",o:["Rétroaction sur la borne +","Rétroaction sur la borne −","Pas de rétroaction","Ve = 0"],a:1,x:"La réaction négative (sur −) stabilise et impose ε = 0."},
+{q:"Rétroaction sur la borne + : régime ?",o:["Linéaire","Saturé (Vs = ±Vsat)","Vs = 0","Dérivateur"],a:1,x:"Réaction positive ⇒ instable ⇒ comparateur à hystérésis ou saturation."},
+{q:"Dans un ALI idéal en régime linéaire, que valent i+ et i− ?",o:["i+ = i− = 0","i+ = −i− ≠ 0","i+ = Vs/R","Infinis"],a:0,x:"Impédance d'entrée infinie."},
+{q:"Quelle est l'utilité du suiveur ?",o:["Amplifier la tension","Adapter les impédances (Ze = ∞, Zs = 0)","Intégrer le signal","Inverser le signal"],a:1,x:"Il recopie la tension sans tirer de courant sur la source."},
+{q:"Intégrateur : Ve = constante positive. Vs(t) est…",o:["Constante positive","Une rampe décroissante","Une rampe croissante","Sinusoïdale"],a:1,x:"Vs = −(Ve/RC)·t : rampe de pente négative (jusqu'à saturation)."},
+{q:"Phase de H(jω) pour l'intégrateur inverseur ?",o:["−90°","+90°","0°","180° seulement"],a:1,x:"H = −1/(jRCω) = j/(RCω) ⇒ +90°."},
+{q:"Phase de H(jω) pour le dérivateur inverseur ?",o:["+90°","−90°","0°","−180°"],a:1,x:"H = −jRCω ⇒ −90°."},
+{q:"Principal défaut de l'intégrateur parfait ?",o:["Gain nul en continu","Gain infini en continu : dérive de l'offset, saturation","Il n'intègre pas","Impédance d'entrée nulle"],a:1,x:"On ajoute R' en parallèle sur C (pseudo-intégrateur)."},
+{q:"Fréquence de coupure du pseudo-intégrateur ?",o:["1/(2πRC)","1/(2πR'C)","R'/R","1/(2π(R+R')C)"],a:1,x:"Pôle de 1 + jR'Cω ⇒ fc = 1/(2πR'C)."},
+{q:"Pseudo-intégrateur : gain statique (f ≪ fc) ?",o:["−R'/R","−R/R'","1 + R'/R","0"],a:0,x:"C = circuit ouvert ⇒ inverseur R'/R."},
+{q:"Pseudo-intégrateur : pour f ≫ fc, il se comporte comme…",o:["Un dérivateur","Un intégrateur","Un suiveur","Un inverseur pur"],a:1,x:"Le terme jR'Cω domine ⇒ H ≈ −1/(jRCω)."},
+{q:"Défaut du dérivateur parfait ?",o:["Il amplifie le bruit haute fréquence et peut être instable","Il atténue les HF","Il a un gain statique infini","Il ne déphase pas"],a:0,x:"|H| = RCω croît avec ω. Remède : pseudo-dérivateur."},
+{q:"Impédance d'entrée de l'inverseur ?",o:["∞","R1","R2","0"],a:1,x:"Le courant d'entrée est Ve/R1 (borne − à la masse virtuelle)."},
+{q:"Non inverseur de gain 100, GBW = 1 MHz. Bande passante ?",o:["1 MHz","100 kHz","10 kHz","1 kHz"],a:2,x:"BP = GBW/gain = 10⁶/100 = 10 kHz."},
+{q:"Non inverseur de gain 10, Ve = 2 V continu, Vsat = 12 V. Vs ?",o:["20 V","12 V","2 V","−12 V"],a:1,x:"20 V dépasse Vsat ⇒ saturation à +12 V."}
+];
+const $=id=>document.getElementById(id);
+let cur='sui',order=[],qi=0,sc=0;
+function cards(){
+ $('ali-tabs').innerHTML=Object.keys(C).map(k=>`<button class="ali-btn ${k===cur?'on':''}" data-k="${k}">${C[k].t}</button>`).join('');
+ $('ali-tabs').querySelectorAll('button').forEach(b=>b.onclick=()=>{cur=b.dataset.k;cards()});
+ const o=C[cur];
+ $('ali-card').className='ali-card'+($('ali-hide').checked?' hide':'');
+ $('ali-card').innerHTML=draw(cur)+`<h4 class="ans">${o.n}</h4><div class="ans">${o.e.map(e=>`<span class="ali-eq">${e}</span>`).join('')}<ul>${o.p.map(p=>`<li>${p}</li>`).join('')}</ul></div>`;
+ $('ali-card').querySelectorAll('.ans').forEach(a=>a.onclick=()=>a.style.filter='none');
+}
+function quiz(){
+ const v=$('ali-quiz');
+ if(qi>=order.length){$('ali-score').textContent='Terminé';v.innerHTML=`<h4>Résultat : ${sc} / ${order.length}</h4><p>${sc>=order.length*.85?"Excellent, tu maîtrises !":sc>=order.length*.6?"Bien, revois les points ratés.":"Relis les montages et les propriétés, puis refais le quizz."}</p><button class="ali-btn" id="ali-again">Recommencer</button>`;$('ali-again').onclick=start;return}
+ const q=Q[order[qi]],idx=[...q.o.keys()].sort(()=>Math.random()-.5);
+ $('ali-score').textContent=`Question ${qi+1} / ${order.length} · Score ${sc}`;
+ v.innerHTML=(q.c?draw(q.c):'')+`<p><b>${q.q}</b></p>${idx.map(i=>`<button class="ali-opt" data-i="${i}">${q.o[i]}</button>`).join('')}<div id="ali-fb"></div>`;
+ v.querySelectorAll('.ali-opt').forEach(b=>b.onclick=()=>{
+  const i=+b.dataset.i;v.querySelectorAll('.ali-opt').forEach(x=>{x.disabled=true;if(+x.dataset.i===q.a)x.classList.add('ok')});
+  if(i===q.a)sc++;else b.classList.add('ko');
+  $('ali-fb').innerHTML=`<p>${i===q.a?'✅ Bravo. ':'❌ Raté. '}${q.x}</p><button class="ali-btn" id="ali-nx">${qi+1<order.length?'Suivante':'Voir le score'}</button>`;
+  $('ali-nx').onclick=()=>{qi++;quiz()};
+ });
+}
+function start(){order=[...Q.keys()].sort(()=>Math.random()-.5);qi=0;sc=0;quiz()}
+$('ali-hide').onchange=cards;
+$('ali-props').innerHTML=props.map(p=>`<div class="note"><b>${p[0]}</b><br>${p[1]}</div>`).join('');
+cards();start();
+})();
+</script>
 
   <div style="margin:2.2rem 0 .4rem;padding:.7rem 1rem;border-left:5px solid var(--subject);background:#f8fafc;border-radius:8px"><b style="color:var(--subject-ink)">TD3 corrigé</b> — TD3 — Montages à ALI : sommateur, pseudo-intégrateur, résistance négative, filtres en cascade, gyrateur</div>
   <p class="lead">Les 6 exercices du TD3 corrigés un par un, avec le même niveau de détail que les TD précédents :
