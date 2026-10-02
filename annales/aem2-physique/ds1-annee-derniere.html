@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DS1 année dernière (Ch1-Ch2) — Révision ECAM</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
+  svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div class="topbar">
+  <a href="../index.html">← Annales</a>
+  <span class="spacer"></span>
+  <a href="#ex1">Ex 1</a>
+  <a href="#ex2">Ex 2</a>
+  <a href="#ex3">Ex 3</a>
+  <a href="#ex4">Ex 4</a>
+  <a href="#ex5">Ex 5</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Annales · AM2 Physique · DS1 (Ch1-Ch2) promo P2029</span>
+  <h1 class="title">DS1 de l'année dernière — corrigé complet</h1>
+  <p class="lead">Sujet officiel du DS1 (Ch1-Ch2) d'AEM2 promo P2029 : <b>2 h, barème sur 120 points</b>, aucun document ni calculatrice.
+  Cinq exercices : double filtre avec ALI (30 pts), filtrages d'un signal (24 pts), stabilité d'un montage (20 pts),
+  deux ALI (18 pts) et comparateurs de TP (28 pts). <b>L'énoncé de chaque exercice (photo) est juste au-dessus de sa correction.</b></p>
+
+  <div class="toc-mini">
+    <b>Sommaire</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#ex1">Ex 1 — Montage avec deux filtres (30 pts)</a></li>
+      <li><a href="#ex2">Ex 2 — Différents filtrages d'un même signal (24 pts)</a></li>
+      <li><a href="#ex3">Ex 3 — Étude de la stabilité d'un montage (20 pts)</a></li>
+      <li><a href="#ex4">Ex 4 — Montage avec deux ALI (18 pts)</a></li>
+      <li><a href="#ex5">Ex 5 — Comparateurs en séance de TP (28 pts)</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= EXERCICE 1 ======================= -->
+  <section class="block" id="ex1">
+    <h2>Exercice 1 — Montage avec deux filtres · 30 pts</h2>
+    <figure><img src="enonces/ex1.jpg" alt="Énoncé exercice 1"><figcaption>Énoncé de l'exercice 1.</figcaption></figure>
+    <div class="exo-card">
+      <div class="exo-head">✏️ Deux filtres RC, ALI intercalaire, filtre résultant <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+
+        <p class="q">Question 1 (7 pts) — Fonction de transfert, nature et ordre de F₁ et F₂</p>
+        <p><b>Cadre.</b> Régime sinusoïdal forcé, notation complexe, filtres « en circuit ouvert » (aucun courant de sortie). On note \(\underline H_k=\underline V_{sk}/\underline V_{ek}\).</p>
+        <p><b>F₁</b> (R₁ en série, C₁ vers la masse, sortie aux bornes de C₁). Pont diviseur de tension :</p>
+        \[ \underline H_1=\frac{\dfrac1{jC_1\omega}}{R_1+\dfrac1{jC_1\omega}}=\boxed{\frac{1}{1+jR_1C_1\omega}} \]
+        <p>Nature : <b>passe-bas</b> (BF : \(\underline H_1\to1\) ; HF : \(\underline H_1\to0\)). Ordre : <b>1</b> (un seul condensateur ⇒ dénominateur de degré 1 en \(j\omega\)). Pulsation de coupure \(\omega_{c1}=1/(R_1C_1)\).</p>
+        <p><b>F₂</b> (C₂ en série, R₂ vers la masse, sortie aux bornes de R₂). Pont diviseur :</p>
+        \[ \underline H_2=\frac{R_2}{R_2+\dfrac1{jC_2\omega}}=\boxed{\frac{jR_2C_2\omega}{1+jR_2C_2\omega}} \]
+        <p>Nature : <b>passe-haut</b> (BF : \(\underline H_2\to0\) ; HF : \(\underline H_2\to1\)). Ordre : <b>1</b>. Pulsation de coupure \(\omega_{c2}=1/(R_2C_2)\).</p>
+
+        <p class="q">Question 2 (5 pts) — Montage à intercaler entre F₁ et F₂</p>
+        <div class="res">Il faut intercaler un <b>suiveur</b> (aussi appelé montage tampon ou adaptateur d'impédance) : ALI idéal en régime linéaire dont la sortie est reliée à l'entrée inverseuse, l'entrée non inverseuse étant branchée sur \(V_{s1}\), la sortie fournissant \(V_{e2}\). Son gain est \(\underline V_{e2}/\underline V_{s1}=1\).</div>
+        <p><b>Justification du rôle.</b> Le suiveur a une impédance d'entrée infinie (aucun courant n'est prélevé sur F₁, qui reste « en circuit ouvert ») et une impédance de sortie nulle (il impose \(V_{e2}\) quelle que soit la charge F₂). Sans lui, F₂ <i>chargerait</i> F₁ (elle absorberait du courant) et la fonction de transfert de la cascade ne serait <b>pas</b> le produit \(\underline H_1\times\underline H_2\). Avec lui, les deux filtres sont découplés et \(\underline H=\underline H_1\underline H_2\) exactement.</p>
+        <figure><img src="img/ex1-schema.svg" alt="Schéma : F1, suiveur, F2"><figcaption>F₁ (RC passe-bas) → suiveur → F₂ (CR passe-haut).</figcaption></figure>
+
+        <p class="q">Question 3 (5 pts) — \(R_1=R_2=R\), \(C_1=C_2=C\) : forme de \(\underline H\), nature, ordre, \(\omega_0\), \(H_0\), \(Q\)</p>
+        <p>On pose \(x=\omega/\omega_0\) avec \(\omega_0=1/(RC)\), donc \(RC\omega=x\).</p>
+        \[ \underline H=\underline H_1\,\underline H_2=\frac1{1+jx}\cdot\frac{jx}{1+jx}=\frac{jx}{(1+jx)^2} \]
+        <p>On développe le dénominateur : \((1+jx)^2=1+2jx+j^2x^2=1-x^2+2jx\). Donc</p>
+        \[ \boxed{\ \underline H=\frac{jx}{1-x^2+2jx}\ } \]
+        <p><b>Nature et ordre.</b> Le degré du dénominateur en \(j x\) est 2 : filtre d'<b>ordre 2</b>. Il est passe-bas (F₁) × passe-haut (F₂) : <b>passe-bande</b> (nul en BF et en HF, voir Q4).</p>
+        <p><b>Forme canonique du passe-bande d'ordre 2</b> : \(\underline H=\dfrac{H_0}{1+jQ\left(x-\dfrac1x\right)}\), ou, en multipliant haut et bas par \(jx/Q\) :</p>
+        \[ \underline H=H_0\,\frac{j\,x/Q}{1-x^2+j\,x/Q} \]
+        <p>Identification avec \(\dfrac{jx}{1-x^2+2jx}\) :</p>
+        <ul>
+          <li>dénominateur : \(\dfrac1Q=2\) ⇒ \(Q=\dfrac12\) ;</li>
+          <li>numérateur : \(H_0\,\dfrac xQ=2H_0\,x=x\) ⇒ \(H_0=\dfrac12\).</li>
+        </ul>
+        <div class="res">\(\omega_0=\dfrac1{RC}\) , \(\;H_0=\dfrac12\) (gain maximal, atteint en \(x=1\)) , \(\;Q=\dfrac12\).</div>
+        <div class="warnbox"><span class="lab">Piège</span>\(H_0=1/2\) et non 1 : le produit d'un passe-bas et d'un passe-haut de même \(\omega_c\) ne laisse jamais passer à 100 % (à \(x=1\), chaque filtre vaut \(1/\sqrt2\) en module, et ils sont déphasés de ±45° : \(|\underline H|=\tfrac12\)). Avec \(Q=\tfrac12\) il n'y a <b>pas de résonance</b> (pôle double réel), le filtre est très peu sélectif.</div>
+
+        <p class="q">Question 4 (7 pts) — Tableau BF / HF / résonance</p>
+        <ul>
+          <li><b>BF (\(x\ll1\))</b> : \(\underline H\approx jx\) ; \(G_{dB}=20\log x\) (pente \(+20\) dB/déc) ; \(\Delta\varphi=+90^\circ\).</li>
+          <li><b>HF (\(x\gg1\))</b> : \(\underline H\approx\dfrac{jx}{(jx)^2}=\dfrac1{jx}=-\dfrac jx\) ; \(G_{dB}=-20\log x\) (pente \(-20\) dB/déc) ; \(\Delta\varphi=-90^\circ\).</li>
+          <li><b>Résonance (\(x=1\))</b> : \(\underline H(1)=\dfrac{j}{1-1+2j}=\dfrac12\) (exact) ; \(G_{dB}=20\log\dfrac12=-20\log2=-20\times0{,}30=-6\ \text{dB}\) ; \(\Delta\varphi=0\).</li>
+        </ul>
+        <div class="overflow"><table>
+          <tr><th></th><th>BF \(x\ll1\)</th><th>Résonance \(x=1\)</th><th>HF \(x\gg1\)</th></tr>
+          <tr><td>\(\underline H\)</td><td>\(jx\)</td><td>\(\dfrac12\)</td><td>\(-\dfrac jx\)</td></tr>
+          <tr><td>\(G_{dB}\)</td><td>\(20\log x\)</td><td>\(-6\ \text{dB}\)</td><td>\(-20\log x\)</td></tr>
+          <tr><td>\(\Delta\varphi\)</td><td>\(+90^\circ\)</td><td>\(0^\circ\)</td><td>\(-90^\circ\)</td></tr>
+        </table></div>
+
+        <p class="q">Question 5 (4 pts) — Diagramme de Bode en gain</p>
+        <p>Abscisse \(\log x\), ordonnée \(G_{dB}\). Les deux asymptotes (\(+20\) dB/déc puis \(-20\) dB/déc) se coupent en \(x=1\) à \(0\) dB. La courbe réelle est <b>6 dB en dessous</b> en \(x=1\) (\(G=20\log\dfrac{x}{1+x^2}\)).</p>
+        <figure><img src="img/ex1-bode.svg" alt="Bode du filtre F"><figcaption>Bode du filtre F : réel (vert), asymptotes (rouge). Bonus : la phase passe de +90° à −90°.</figcaption></figure>
+
+        <p class="q">Question 6 (2 pts) — Domaine où F se comporte en dérivateur</p>
+        <div class="res">En <b>basses fréquences</b> (\(x\ll1\), soit \(f\ll f_0=\dfrac1{2\pi RC}\)) : \(\underline H\approx jx=jRC\omega\), donc \(\underline s\approx RC\,j\omega\,\underline e\), soit \(s(t)\approx RC\,\dfrac{de}{dt}\).</div>
+        <p>Multiplier par \(j\omega\) revient à dériver en temporel : pente \(+20\) dB/déc et déphasage \(+90^\circ\), signature du dérivateur. Attention : ce n'est vrai que tant que \(x\ll1\), le gain restant alors très faible (\(|H|\approx x\)).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= EXERCICE 2 ======================= -->
+  <section class="block" id="ex2">
+    <h2>Exercice 2 — Différents filtrages d'un même signal · 24 pts</h2>
+    <figure><img src="enonces/ex2.jpg" alt="Énoncé exercice 2"><figcaption>Énoncé de l'exercice 2 (chronogramme de e(t) et réponses F1 à F4).</figcaption></figure>
+    <div class="exo-card">
+      <div class="exo-head">✏️ Spectre et filtrage de \(e(t)=A+3A\cos(2\pi ft)+\tfrac A{10}\cos(40\pi ft+\tfrac\pi2)\) <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+
+        <p class="q">Question 1 (1 pt) — Pourquoi \(e(t)\) est-il périodique ?</p>
+        <div class="res">C'est la somme d'une constante et de deux sinusoïdes dont les fréquences, \(f\) et \(20f\), sont des <b>multiples entiers</b> de \(f\) : la somme est périodique de fréquence \(f\) (la plus petite).</div>
+
+        <p class="q">Question 2 (2 pts) — Période \(T\) et fréquence \(f\)</p>
+        <p>Sur le chronogramme, deux oscillations complètes de grande amplitude apparaissent sur l'intervalle \([0\,;3]\) ms avec des maxima en \(t\approx1{,}0\) ms et \(t\approx2{,}0\) ms : la période est l'écart entre deux maxima (ou entre les deux traits pointillés verticaux, espacés d'environ 1 ms).</p>
+        <div class="res">\(T\approx1{,}0\ \text{ms}\) , \(\;f=\dfrac1T=\dfrac1{1{,}0\times10^{-3}\ \text{s}}=1{,}0\ \text{kHz}\).</div>
+
+        <p class="q">Question 3 (1 pt) — Valeur de \(A\)</p>
+        <p>\(A\) est la <b>valeur moyenne</b> de \(e(t)\) (les termes en cosinus sont de moyenne nulle). Le signal oscille entre \(\approx-2\) V et \(\approx+4\) V : la moyenne est \(\dfrac{4+(-2)}2=1\) V (c'est aussi la valeur lue sur la sortie F2, qui ne garde que la composante continue).</p>
+        <div class="res">\(A\approx1\ \text{V}\) (à la précision de lecture).</div>
+
+        <p class="q">Question 4 (1 pt) — Amplitude du fondamental</p>
+        <div class="res">Le fondamental est \(3A\cos(2\pi ft)\) : amplitude \(3A=3\ \text{V}\).</div>
+
+        <p class="q">Question 5 (1 pt) — Rang du seul harmonique</p>
+        <p>\(40\pi ft=2\pi\,(20f)\,t\) : fréquence \(20f=20\) kHz.</p>
+        <div class="res">Rang \(n=20\) (amplitude \(A/10=0{,}1\) V).</div>
+
+        <p class="q">Question 6 (1 pt) — Signification de \(\pi/2\)</p>
+        <div class="res">C'est la <b>phase à l'origine</b> de l'harmonique 20 (son déphasage par rapport à un cosinus à \(t=0\)) : \(\cos(\dots+\tfrac\pi2)=-\sin(\dots)\), l'harmonique est en <b>quadrature</b> avec le fondamental. Elle ne change pas le spectre <i>en amplitude</i>.</div>
+
+        <p class="q">Question 7 (5 pts) — Spectre en amplitude de \(e(t)\)</p>
+        <p>Trois raies : \(0\) Hz (composante continue, \(A=1\) V), \(f=1\) kHz (\(3A=3\) V), \(20f=20\) kHz (\(A/10=0{,}1\) V).</p>
+        <figure><img src="img/ex2-spectre.svg" alt="Spectre de e(t)"><figcaption>Spectre en amplitude de e(t).</figcaption></figure>
+
+        <p class="q">Question 8 (12 pts) — Nature et fréquence de coupure de F1, F2, F3, F4</p>
+        <p><b>Méthode.</b> On regarde quelles raies du spectre survivent dans chaque sortie : continu (1 V), fondamental (3 V, 1 kHz), harmonique 20 (0,1 V, 20 kHz). Deux passe-bas et deux passe-haut au total.</p>
+        <div class="overflow"><table>
+          <tr><th>Filtre</th><th>Ce qui reste dans la sortie</th><th>Nature</th><th>\(f_c\) possible</th></tr>
+          <tr><td><b>F1</b></td><td>Sinusoïde de 3 V à 1 kHz centrée sur <b>0</b> (continu supprimé), petit ressaut de l'harmonique visible</td><td><b>Passe-haut</b></td><td>\(0<f_c<1\) kHz : par ex. \(f_c\approx100\) Hz</td></tr>
+          <tr><td><b>F2</b></td><td>Seulement une <b>constante ≈ 1 V</b> : fondamental et harmonique éliminés</td><td><b>Passe-bas</b></td><td>\(f_c\ll1\) kHz : par ex. \(f_c\approx10\) Hz (ou moins)</td></tr>
+          <tr><td><b>F3</b></td><td>Seulement une petite oscillation de <b>0,1 V à 20 kHz</b> centrée sur 0 : continu et fondamental éliminés, harmonique conservé</td><td><b>Passe-haut</b></td><td>\(1\ \text{kHz}\ll f_c<20\) kHz : par ex. \(f_c\approx8\) kHz (filtre de pente suffisante)</td></tr>
+          <tr><td><b>F4</b></td><td>Continu (1 V) + fondamental (3 V) <b>lisses</b>, sans ondulation à 20 kHz</td><td><b>Passe-bas</b></td><td>\(1\ \text{kHz}<f_c\ll20\) kHz : par ex. \(f_c\approx5\) kHz</td></tr>
+        </table></div>
+        <p><b>Justifications.</b></p>
+        <ul>
+          <li><b>F1</b> : la valeur moyenne est devenue nulle (axe 0 au centre) alors que l'amplitude 3 V du fondamental est conservée : il faut \(|H(0)|=0\) et \(|H(1\,\text{kHz})|\approx1\), donc passe-haut avec \(f_c\) nettement inférieure à 1 kHz.</li>
+          <li><b>F2</b> : un passe-bas qui ne laisse que le continu doit avoir \(f_c\) très inférieure à 1 kHz (de l'ordre de \(f/30\) ou moins pour que les 3 V du fondamental soient réduits à une ondulation invisible).</li>
+          <li><b>F3</b> : on ne voit que l'ondulation rapide de 0,1 V : le fondamental de 3 V doit être atténué d'un facteur \(\gtrsim30\) alors que l'harmonique 20 passe. Cela impose \(f_c\) entre les deux (ordre de quelques kHz à 10 kHz) et un filtre d'ordre \(\ge2\) pour une atténuation suffisante.</li>
+          <li><b>F4</b> : le continu et le fondamental passent (\(f_c>1\) kHz) mais l'harmonique de 0,1 V est rabotée (\(f_c<20\) kHz) ; avec \(f_c=5\) kHz d'ordre 1, \(|H(20\,\text{kHz})|\approx0{,}24\) donc l'ondulation résiduelle vaut \(\approx0{,}02\) V, invisible sur le tracé.</li>
+        </ul>
+        <div class="warnbox"><span class="lab">Piège</span>Les valeurs de \(f_c\) ne sont pas uniques : seul l'<i>encadrement</i> (la position de \(f_c\) par rapport aux raies 0, 1 kHz, 20 kHz) est demandé et justifié. Ne pas confondre F1 (passe-haut, garde fondamental <i>et</i> harmonique) et F3 (passe-haut plus « raide », garde seulement l'harmonique).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= EXERCICE 3 ======================= -->
+  <section class="block" id="ex3">
+    <h2>Exercice 3 — Étude de la stabilité d'un montage · 20 pts</h2>
+    <figure><img src="enonces/ex3.jpg" alt="Énoncé exercice 3"><figcaption>Énoncé de l'exercice 3.</figcaption></figure>
+    <div class="exo-card">
+      <div class="exo-head">✏️ ALI idéal, C en réaction sur −, deux R en réaction sur + <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p><b>Lecture du schéma.</b> Source \(v_e\) → résistance \(R\) → borne \(-\) ; condensateur \(C\) entre la borne \(-\) et la sortie \(v_s\) ; borne \(+\) reliée à la masse par une résistance \(R\) et à la sortie par une résistance \(R\).</p>
+
+        <p class="q">Question 1 (4 pts) — Courants d'entrée de l'ALI idéal</p>
+        <div class="res">\(i^+=i^-=0\) : aucun courant ne circule dans les bornes d'entrée.</div>
+        <p>Cela vient de l'<b>impédance d'entrée infinie</b> \(Z_e\to\infty\) : le courant d'entrée vaut \((V^+-V^-)\) ou \(V\) divisé par \(Z_e\), donc nul pour des tensions finies. Au contraire, l'<b>impédance de sortie est nulle</b> (\(Z_s\to0\)) : la sortie se comporte comme une source de tension idéale et peut débiter un courant \(i_s\) non nul (fourni par l'alimentation), qui n'est pas contraint.</p>
+
+        <p class="q">Question 2 (6 pts) — Potentiels \(V^+\) et \(V^-\)</p>
+        <p><b>\(V^+\) — pont diviseur de tension.</b> Comme \(i^+=0\), les deux résistances \(R\) sont traversées par le même courant (de \(v_s\) vers la masse) :</p>
+        \[ V^+=\frac{R}{R+R}\,v_s=\boxed{\frac{v_s}{2}} \]
+        <p><b>\(V^-\) — théorème de Millman</b> (loi des nœuds en termes de potentiels). Au nœud relié à la borne \(-\) : branche \(R\) vers \(v_e\), branche \(C\) (admittance \(jC\omega\)) vers \(v_s\), branche vers la masse (aucune car \(i^-=0\)). Loi des nœuds : \(\dfrac{\underline v_e-\underline V^-}{R}+jC\omega\,(\underline v_s-\underline V^-)=0\), donc</p>
+        \[ \underline V^-=\frac{\dfrac{\underline v_e}{R}+jC\omega\,\underline v_s}{\dfrac1R+jC\omega}=\boxed{\frac{\underline v_e+jRC\omega\,\underline v_s}{1+jRC\omega}} \]
+
+        <p class="q">Question 3 (2 pts) — Relation entre \(V^+\) et \(V^-\) en régime linéaire</p>
+        <div class="res">\(V^+=V^-\) (\(\varepsilon=V^+-V^-=0\)).</div>
+        <p>Pour un ALI idéal de gain infini en régime linéaire, \(v_s=A_d\,\varepsilon\) est fini et \(A_d\to\infty\), donc nécessairement \(\varepsilon\to0\).</p>
+
+        <p class="q">Question 4 (5 pts) — Fonction de transfert et équation différentielle</p>
+        <p>On écrit \(V^+=V^-\) :</p>
+        \[ \frac{\underline v_s}{2}=\frac{\underline v_e+jRC\omega\,\underline v_s}{1+jRC\omega} \ \Longrightarrow\ \underline v_s(1+jRC\omega)=2\underline v_e+2jRC\omega\,\underline v_s \]
+        \[ \underline v_s\,(1+jRC\omega-2jRC\omega)=2\underline v_e \ \Longrightarrow\ \boxed{\ \underline H=\frac{\underline v_s}{\underline v_e}=\frac{2}{1-jRC\omega}\ } \]
+        <p><b>Équation différentielle.</b> On revient au produit en croix \(\underline v_s\,(1-jRC\omega)=2\underline v_e\) et on remplace \(j\omega\) par \(d/dt\) :</p>
+        \[ \boxed{\ v_s-RC\,\frac{dv_s}{dt}=2v_e\ } \quad\text{soit}\quad RC\,\frac{dv_s}{dt}-v_s=-2v_e \]
+
+        <p class="q">Question 5 (3 pts) — Condition de stabilité et conclusion</p>
+        <p><b>Condition.</b> Une équation différentielle linéaire du premier ordre \(a_1\,\dot s+a_0\,s=b\,e\) a une solution homogène \(s_h(t)=K\,e^{-(a_0/a_1)t}\). Elle tend vers 0 (réponse stable) si et seulement si \(a_0/a_1>0\) : <b>les coefficients \(a_1\) et \(a_0\) doivent être de même signe</b>.</p>
+        <p><b>Ici</b> : \(a_1=RC>0\) et \(a_0=-1<0\) : signes opposés. La solution homogène est \(s_h(t)=K\,e^{+t/(RC)}\), qui <b>diverge</b> exponentiellement : la réponse est <b>instable</b>.</p>
+        <div class="res">Si l'ALI était en régime linéaire, \(s(t)\) divergerait exponentiellement, ce qui est incompatible avec la limite \(|v_s|\le V_{sat}\) de l'ALI réel : l'hypothèse « régime linéaire » est contradictoire. <b>L'ALI fonctionne en régime saturé</b> (\(v_s=\pm V_{sat}\)). Physiquement, la rétroaction sur la borne \(+\) (positive, par les deux \(R\)) l'emporte sur celle sur la borne \(-\) (négative, par \(C\)).</div>
+        <div class="warnbox"><span class="lab">Piège</span>Dès qu'il y a une réaction sur les <i>deux</i> bornes, on ne peut pas conclure « linéaire » à vue : c'est l'étude de la stabilité de l'équation différentielle (hypothèse \(V^+=V^-\)) qui tranche. Instable ⇒ contradiction ⇒ saturé.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= EXERCICE 4 ======================= -->
+  <section class="block" id="ex4">
+    <h2>Exercice 4 — Montage avec deux ALI · 18 pts</h2>
+    <figure><img src="enonces/ex4.jpg" alt="Énoncé exercice 4"><figcaption>Énoncé de l'exercice 4.</figcaption></figure>
+    <div class="exo-card">
+      <div class="exo-head">✏️ Deux étages non inverseur, soustracteur <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p><b>Lecture du schéma.</b> Étage 1 : \(v_1\) sur la borne \(+\) ; la borne \(-\) (nœud A) est reliée à la masse par \(R\) et à la sortie \(v'\) par \(R/\alpha\). Étage 2 : \(v_2\) sur la borne \(+\) ; la borne \(-\) (nœud B) est reliée à \(v'\) par \(R\) et à la sortie \(v_s\) par \(\alpha R\).</p>
+
+        <p class="q">Question 1 (1 pt) — Régime linéaire</p>
+        <div class="res">Dans chaque étage, la sortie est rebouclée <b>uniquement sur la borne inverseuse</b> \(-\) (par une résistance), aucune réaction sur \(+\) : c'est une contre-réaction négative. Elle ne contient que des résistances (pas de terme dérivant le gain avec la fréquence), donc elle est stable : les deux ALI sont en régime linéaire.</div>
+
+        <p class="q">Question 2 (7 pts) — \(v'\) en fonction de \(v_s\), \(v_2\), puis de \(v_1\)</p>
+        <p><b>Nœud B (Millman, courant d'entrée nul).</b> Admittances : \(1/R\) vers \(v'\), \(1/(\alpha R)\) vers \(v_s\) :</p>
+        \[ V_B=\frac{\dfrac{v'}{R}+\dfrac{v_s}{\alpha R}}{\dfrac1R+\dfrac1{\alpha R}}=\frac{\alpha v'+v_s}{\alpha+1} \]
+        <p>Régime linéaire : \(V_B=V^+=v_2\), donc \((\alpha+1)v_2=\alpha v'+v_s\) :</p>
+        \[ \boxed{\ v'=\frac{(1+\alpha)\,v_2-v_s}{\alpha}\ } \]
+        <p><b>Nœud A (Millman).</b> Admittances : \(1/R\) vers la masse (potentiel 0), \(\alpha/R\) vers \(v'\) (car la résistance vaut \(R/\alpha\)) :</p>
+        \[ V_A=\frac{\dfrac{0}{R}+\dfrac{\alpha}{R}v'}{\dfrac1R+\dfrac{\alpha}{R}}=\frac{\alpha}{1+\alpha}\,v' \]
+        <p>Régime linéaire : \(V_A=v_1\), donc</p>
+        \[ \boxed{\ v'=\frac{1+\alpha}{\alpha}\,v_1\ } \]
+        <p>(C'est bien le gain \(1+\dfrac{R/\alpha}{R}=\dfrac{1+\alpha}{\alpha}\) d'un amplificateur non inverseur.)</p>
+
+        <p class="q">Question 3 (4 pts) — Expression de \(v_s\) et nom du montage</p>
+        <p>On égale les deux expressions de \(v'\) :</p>
+        \[ \frac{(1+\alpha)v_2-v_s}{\alpha}=\frac{1+\alpha}{\alpha}v_1 \ \Longrightarrow\ (1+\alpha)v_2-v_s=(1+\alpha)v_1 \]
+        \[ \boxed{\ v_s=(1+\alpha)\,(v_2-v_1)\ } \]
+        <div class="res">Le montage est un <b>amplificateur différentiel</b> (de différence, ou soustracteur) de gain \(1+\alpha\) : la sortie est proportionnelle à \(v_2-v_1\). Le paramètre \(\alpha\) se simplifie exactement entre les deux entrées, le gain est donc identique sur \(v_1\) et sur \(v_2\).</div>
+
+        <p class="q">Question 4 (2 pts) — Limitation en tension (saturation)</p>
+        <p>La sortie d'un ALI réel ne peut pas dépasser les tensions d'alimentation : \(|v_{sortie}|\le V_{sat}\approx V_{CC}\) (typiquement \(15\) V). Si la valeur « attendue » calculée en régime linéaire dépasse \(V_{sat}\), la sortie reste bloquée à \(\pm V_{sat}\) et l'ALI quitte le régime linéaire.</p>
+        <div class="res">Ici, deux cas : (i) \(|v_s|=(1+\alpha)\,|v_2-v_1|>V_{sat}\), c'est-à-dire pour une différence d'entrée trop grande ou un \(\alpha\) élevé ; (ii) \(|v'|=\dfrac{1+\alpha}{\alpha}|v_1|>V_{sat}\), pour \(v_1\) grand ou \(\alpha\) petit (le gain de l'étage 1 est alors grand), <b>même si</b> \(v_s\) attendue serait raisonnable.</div>
+
+        <p class="q">Question 5 (3 pts) — Autre limitation valable aux basses fréquences</p>
+        <div class="res">La <b>limitation en courant</b> : le courant de sortie de l'ALI est borné (\(|i_s|\le i_{s,max}\), de l'ordre de 20 mA).</div>
+        <p>Elle se produit si la charge (ou le circuit extérieur) demande un courant supérieur à \(i_{s,max}\), c'est-à-dire pour une charge de trop faible résistance : \(R_{charge}<V_s/i_{s,max}\) (par exemple \(15\) V sur \(100\ \Omega\) exigerait 150 mA). Ici, l'étage 1 débite aussi dans \(R/\alpha\) et \(R\) en série avec la masse, et l'étage 2 dans \(\alpha R\) et la charge : choisir des résistances trop petites provoque cette limitation. La sortie est alors écrêtée en courant même si la tension est dans la plage.</p>
+
+        <p class="q">Question 6 (1 pt) — Limitation des hautes fréquences</p>
+        <div class="res">La <b>vitesse de balayage (slew rate)</b> : la sortie ne peut pas varier plus vite que \(SR\) (en V/µs). Autre limitation haute fréquence : la <b>bande passante finie</b> (produit gain-bande constant, \(A_d(j\omega)=\mu_0/(1+j\omega/\omega_0)\)).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= EXERCICE 5 ======================= -->
+  <section class="block" id="ex5">
+    <h2>Exercice 5 — Comparateurs en séance de TP · 28 pts</h2>
+    <figure><img src="enonces/ex5.jpg" alt="Énoncé exercice 5"><figcaption>Énoncé de l'exercice 5.</figcaption></figure>
+    <div class="exo-card">
+      <div class="exo-head">✏️ Comparateur simple et trigger de Schmitt « raté » <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p><b>Données.</b> \(e(t)\) triangulaire, \(f=1{,}0\) kHz (\(T=1{,}0\) ms), amplitude \(E_m=10{,}0\) V, moyenne \(E_0=2{,}5\) V, donc \(e\in[-7{,}5\ ;\ +12{,}5]\) V. Sortie voulue : \(s=+15\) V si \(e<E_0\), \(s=-15\) V si \(e>E_0\). Conditions : \(e(0)=2{,}5\) V et \(e(0^+)\) croissant.</p>
+
+        <p class="q">Question 1 (10 pts) — Oscillogrammes sur une période et diagramme XY</p>
+        <p><b>Triangle.</b> Pente \(\pm\dfrac{10\ \text{V}}{T/4}=\pm40\ \text{V/ms}\). Dates clés : \(e(0)=2{,}5\) V, \(e(T/4)=12{,}5\) V (maximum), \(e(T/2)=2{,}5\) V, \(e(3T/4)=-7{,}5\) V (minimum), \(e(T)=2{,}5\) V.</p>
+        <p><b>Sortie.</b> Sur \(]0\,;T/2[\) : \(e>E_0\) ⇒ \(s=-15\) V. Sur \(]T/2\,;T[\) : \(e<E_0\) ⇒ \(s=+15\) V. La sortie commute à \(t=0\), \(T/2\), \(T\) (quand \(e\) traverse \(E_0\)).</p>
+        <figure><img src="img/ex5-oscillo.svg" alt="Oscillogrammes e(t) et s(t)"><figcaption>e(t) (bleu) et s(t) (rouge) sur une période.</figcaption></figure>
+        <p><b>Diagramme entrée-sortie</b> (mode XY, \(s\) en fonction de \(e\)) : deux paliers horizontaux \(s=+15\) V pour \(e<2{,}5\) V et \(s=-15\) V pour \(e>2{,}5\) V, reliés par un segment vertical en \(e=E_0=2{,}5\) V (un seul seuil, aucune hystérésis).</p>
+        <figure><img src="img/ex5-xy.svg" alt="Diagramme XY voulu"><figcaption>Caractéristique s(e) voulue : valeurs extrêmes e = −7,5 V et 12,5 V, s = ±15 V.</figcaption></figure>
+
+        <p class="q">Question 2 (6 pts) — Schéma du montage et nom</p>
+        <p>\(s=+V_{sat}\) quand \(V^+>V^-\). On veut \(s=+15\) V quand \(e<E_0\) : on place donc \(e\) sur la borne <b>\(-\)</b> et \(E_0\) sur la borne <b>\(+\)</b>. Pas de résistance de réaction : l'ALI est en boucle ouverte, alimenté en \(\pm15\) V.</p>
+        <figure><img src="img/ex5-comparateur.svg" alt="Schéma du comparateur simple inverseur"><figcaption>Voie 1 : e(t) ; voie 2 : s(t) ; masses communes. \(E_0=2{,}5\) V peut venir d'une source continue ou d'un diviseur sur l'alimentation.</figcaption></figure>
+        <div class="res">Nom : <b>comparateur simple (à un seul seuil) inverseur</b> à tension de référence \(E_0=2{,}5\) V, ALI en boucle ouverte.</div>
+
+        <p class="q">Question 3 (1 pt) — Régime de l'ALI</p>
+        <div class="res">En <b>régime saturé</b> : il n'y a aucune contre-réaction (boucle ouverte), le gain énorme force \(\varepsilon\) à la saturation et \(s=\pm V_{sat}\) dès que \(e\neq E_0\).</div>
+
+        <p class="q">Question 4 (11 pts) — Montage de l'étudiant</p>
+        <p><b>Lecture du schéma.</b> \(e\) sur la borne \(-\) ; la borne \(+\) est reliée au point commun de \(R_1\) (côté \(V_0=E_0\)) et de \(R_2\) (côté sortie \(s'\)). Il y a une réaction sur la borne \(+\) (positive) : le régime est saturé.</p>
+        <div class="res">Nom : <b>trigger de Schmitt inverseur (non symétrique, seuil décalé par \(V_0\))</b>, à hystérésis.</div>
+        <p><b>Potentiel de la borne \(+\)</b> (Millman, \(i^+=0\)) :</p>
+        \[ V^+=\frac{\dfrac{V_0}{R_1}+\dfrac{s'}{R_2}}{\dfrac1{R_1}+\dfrac1{R_2}}=\frac{R_2V_0+R_1s'}{R_1+R_2}\qquad V^-=e \]
+        <p>La sortie bascule quand \(V^+=V^-\), la valeur de \(V^+\) dépendant de l'état de \(s'\).</p>
+        <p><b>Bascule haut → bas.</b> Avant le basculement, \(s'=+V_{sat}=+15\) V (tant que \(e<V^+\)). Le basculement a lieu quand \(e\) augmente jusqu'à \(V^+\) :</p>
+        \[ e_{hb}=\frac{R_2V_0+R_1V_{sat}}{R_1+R_2}=\frac{400\times2{,}5+100\times15}{500}=\frac{1000+1500}{500}=\boxed{5{,}0\ \text{V}} \]
+        <p><b>Bascule bas → haut.</b> Avant, \(s'=-V_{sat}=-15\) V. Le basculement a lieu quand \(e\) diminue jusqu'à \(V^+\) :</p>
+        \[ e_{bh}=\frac{R_2V_0-R_1V_{sat}}{R_1+R_2}=\frac{1000-1500}{500}=\boxed{-1{,}0\ \text{V}} \]
+        <figure><img src="img/ex5-xy-etudiant.svg" alt="Cycle d'hystérésis du montage étudiant"><figcaption>s'(e) du montage de l'étudiant : cycle d'hystérésis parcouru dans le sens horaire (haut → droite, bas → gauche).</figcaption></figure>
+        <p><b>Pourquoi ça ne convient pas.</b></p>
+        <ul>
+          <li>Il y a <b>deux seuils différents</b> (5 V et −1 V) au lieu d'un seul seuil à \(E_0=2{,}5\) V : c'est un cycle d'hystérésis de largeur \(e_{hb}-e_{bh}=6\) V.</li>
+          <li>Le centre du cycle, \(\dfrac{R_2V_0}{R_1+R_2}=2\) V, n'est même pas \(E_0\) : la sortie n'est donc pas symétrique autour de \(E_0\).</li>
+        </ul>
+        <p>Sur le triangle : \(s'\) passe à \(-15\) V quand \(e\) atteint 5 V en montée (\(t\approx0{,}06\) ms) et repasse à \(+15\) V quand \(e\) atteint \(-1\) V en descente (\(t\approx0{,}59\) ms), au lieu de \(0\) et \(0{,}5\) ms : la sortie est décalée et déformée par rapport à \(s(t)\) voulue.</p>
+        <figure><img src="img/ex5-chrono-etudiant.svg" alt="Comparaison s voulu et s' obtenu"><figcaption>s(t) voulu (vert pointillé) et s'(t) obtenu (rouge).</figcaption></figure>
+        <div class="warnbox"><span class="lab">Piège</span>Les seuils dépendent de l'état de la sortie : pour \(e_{hb}\) on prend \(s'=+V_{sat}\), pour \(e_{bh}\) on prend \(s'=-V_{sat}\) (et non l'inverse). Un trigger de Schmitt sert à <i>éviter</i> les basculements parasites dus au bruit ; un comparateur simple est le bon choix pour détecter un seul seuil.</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+<script src="../../assets/gate.js"></script>
+</body>
+</html>
