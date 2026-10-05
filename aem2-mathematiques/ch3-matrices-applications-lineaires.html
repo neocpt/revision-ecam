@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matrices et applications linéaires — AM2 Mathématiques</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+<div class="topbar">
+  <a href="../index.html#am2">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Rappels</a>
+  <a href="#td">Correction TD3</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Maths AM2 (2ᵉ année) · Chapitre 3</span>
+  <h1 class="title">Matrices et applications linéaires</h1>
+  <p class="lead">Chapitre 3 de L. Graissot (ECAM AM2, 2026-2027) : rang, matrice d'une application linéaire,
+  changement de base, matrices semblables. Cette page contient pour l'instant le <b>TD3 corrigé
+  (exercices 1 → 9, pages 1 à 3 du sujet)</b> précédé des rappels de méthode indispensables ; le cours
+  détaillé complet et l'exercice 10 suivront.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#cours">1. Rappels de méthode utilisés dans le TD</a></li>
+      <li><a href="#td">2. Correction TD3 — exercices 1 à 9</a></li>
+      <li><a href="#docs">📂 Documents donnés</a></li>
+    </ul>
+  </div>
+
+  <!-- ============================================================= -->
+  <section class="block" id="cours">
+    <h2>1. Rappels de méthode utilisés dans le TD</h2>
+
+    <div class="def">
+      <span class="lab">Matrice d'une application linéaire</span>
+      Soit \(f:E\to F\) linéaire, \(\mathcal B=(b_1,\dots,b_p)\) une base de \(E\) et \(\mathcal C=(c_1,\dots,c_n)\)
+      une base de \(F\). La matrice \(\operatorname{Mat}_{\mathcal B,\mathcal C}(f)\in\mathcal M_{n,p}(\mathbb R)\)
+      a pour <b>\(j\)-ième colonne</b> les coordonnées de \(f(b_j)\) dans la base \(\mathcal C\).
+      (\(\mathcal B\) = base de <i>départ</i>, \(\mathcal C\) = base d'<i>arrivée</i>.) Pour un endomorphisme on note
+      \(\operatorname{Mat}_{\mathcal B}(f)=\operatorname{Mat}_{\mathcal B,\mathcal B}(f)\).
+    </div>
+    <div class="def">
+      <span class="lab">Matrice de passage</span>
+      \(P_{\mathcal B\to\mathcal B'}\) a pour colonnes les coordonnées des vecteurs de la <b>nouvelle</b> base \(\mathcal B'\)
+      exprimés dans l'<b>ancienne</b> base \(\mathcal B\). Elle est toujours inversible et
+      \(P_{\mathcal B'\to\mathcal B}=P_{\mathcal B\to\mathcal B'}^{-1}\).
+    </div>
+    <div class="thm">
+      <span class="lab">Formule de changement de base (endomorphisme)</span>
+      Si \(A=\operatorname{Mat}_{\mathcal B}(f)\), \(P=P_{\mathcal B\to\mathcal B'}\) et \(B=\operatorname{Mat}_{\mathcal B'}(f)\), alors
+      \[ \boxed{B=P^{-1}AP}\qquad\text{et}\qquad A^n=P\,B^n\,P^{-1}\ \ (n\in\mathbb N). \]
+      On dit que \(A\) et \(B\) sont <b>semblables</b>.
+    </div>
+    <div class="note">
+      <b>À retenir.</b> Théorème du rang : \(\dim E=\dim\operatorname{Ker}f+\operatorname{rg}f\).
+      Une famille de \(n\) vecteurs dans un espace de dimension \(n\) est une base ⇔ elle est libre ⇔ elle est génératrice
+      ⇔ la matrice de ses coordonnées est inversible (\(\det\neq0\)).
+    </div>
+    <div class="method">
+      <span class="lab">Méthode « base adaptée »</span> Pour simplifier un endomorphisme, on cherche une base
+      \((b_1,\dots,b_n)\) formée de vecteurs du noyau, de vecteurs propres, ou de chaînes
+      \(b\mapsto f(b)\mapsto 0\) : la matrice dans cette base devient diagonale ou triangulaire (exercices 6 et 8).
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <section class="block" id="td">
+    <h2>2. Correction TD3 — Matrices et applications linéaires (exercices 1 → 9)</h2>
+    <div class="note">
+      TD3 de L. Graissot (ECAM AM2, 2026-2027), <b>pas de corrigé officiel</b> → tout résolu maison, méthode
+      complète sans raccourci, avec vérification de chaque résultat (produit matriciel ou substitution).
+      Convention : les colonnes d'une matrice sont les images des vecteurs de la base de départ.
+    </div>
+
+    <!-- ======================= EX 1 ======================= -->
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — Matrices dans la base canonique</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <figure>
+          <img src="td3-img/ex1.jpg" alt="Énoncé TD3 Exercice 1 — matrice de quatre applications linéaires dans la base canonique" loading="lazy">
+          <figcaption>Énoncé (TD3, L. Graissot) — Exercice 1.</figcaption>
+        </figure>
+        <div class="method"><span class="lab">Méthode</span> On calcule l'image de chaque vecteur de la base canonique
+        et on range ses coordonnées <b>en colonne</b>.</div>
+
+        <p class="q">1) \(f(x,y,z)=(x+y-2z,\ 2x+y-z,\ -x-3y+2z)\), \(E=\mathbb R^3\)</p>
+        <p>Base canonique \((e_1,e_2,e_3)\) :</p>
+        \[ f(1,0,0)=(1,2,-1),\quad f(0,1,0)=(1,1,-3),\quad f(0,0,1)=(-2,-1,2). \]
+        <div class="res">\[ \operatorname{Mat}(f)=\begin{pmatrix}1&1&-2\\2&1&-1\\-1&-3&2\end{pmatrix}. \]</div>
+
+        <p class="q">2) \(f(P)=(2X+1)P-X^2P'\), \(E=\mathbb R_2[X]\)</p>
+        <p>Base canonique \((1,X,X^2)\). On calcule, avec \(1'=0\), \(X'=1\), \((X^2)'=2X\) :</p>
+        \[ \begin{aligned}
+        f(1)&=(2X+1)\cdot1-0=1+2X &&\to(1,2,0),\\
+        f(X)&=(2X+1)X-X^2\cdot1=X+X^2 &&\to(0,1,1),\\
+        f(X^2)&=(2X+1)X^2-X^2\cdot2X=X^2 &&\to(0,0,1).
+        \end{aligned} \]
+        <div class="res">\[ \operatorname{Mat}(f)=\begin{pmatrix}1&0&0\\2&1&0\\0&1&1\end{pmatrix}. \]</div>
+        <p>On vérifie que \(f\) est bien à valeurs dans \(\mathbb R_2[X]\) : le terme en \(X^3\) de \(f(X^2)\) s'annule
+        (\(2X^3-2X^3=0\)).</p>
+
+        <p class="q">3) \(f(P)=\displaystyle\int_X^{X+2}P(t)\,dt\), \(E=\mathbb R_2[X]\)</p>
+        <p>Pour \(P=X^k\) : \(\displaystyle\int_X^{X+2}t^k\,dt=\dfrac{(X+2)^{k+1}-X^{k+1}}{k+1}\).</p>
+        \[ \begin{aligned}
+        f(1)&=(X+2)-X=2 &&\to(2,0,0),\\
+        f(X)&=\frac{(X+2)^2-X^2}{2}=\frac{4X+4}{2}=2X+2 &&\to(2,2,0),\\
+        f(X^2)&=\frac{(X+2)^3-X^3}{3}=\frac{6X^2+12X+8}{3}=2X^2+4X+\frac83 &&\to\left(\tfrac83,4,2\right).
+        \end{aligned} \]
+        <div class="res">\[ \operatorname{Mat}(f)=\begin{pmatrix}2&2&\tfrac83\\0&2&4\\0&0&2\end{pmatrix}. \]</div>
+        <p>Matrice triangulaire supérieure : \(f\) conserve le degré (intégrer sur une longueur 2 ne change pas le degré).</p>
+
+        <p class="q">4) \(f(M)=AM+MB\), \(A=\begin{pmatrix}1&2\\0&-1\end{pmatrix}\), \(B=\begin{pmatrix}0&1\\-2&1\end{pmatrix}\), \(E=\mathcal M_2(\mathbb R)\)</p>
+        <p>Base canonique \((E_{11},E_{12},E_{21},E_{22})\) de \(\mathcal M_2(\mathbb R)\) ; on repère une matrice
+        \(\begin{pmatrix}a&b\\c&d\end{pmatrix}\) par ses coordonnées \((a,b,c,d)\).</p>
+        \[ \begin{aligned}
+        f(E_{11})&=AE_{11}+E_{11}B=\begin{pmatrix}1&0\\0&0\end{pmatrix}+\begin{pmatrix}0&1\\0&0\end{pmatrix}=\begin{pmatrix}1&1\\0&0\end{pmatrix}\to(1,1,0,0),\\
+        f(E_{12})&=\begin{pmatrix}0&1\\0&0\end{pmatrix}+\begin{pmatrix}-2&1\\0&0\end{pmatrix}=\begin{pmatrix}-2&2\\0&0\end{pmatrix}\to(-2,2,0,0).
+        \end{aligned} \]
+        <p>Détail de \(E_{21}\) : \(AE_{21}=\begin{pmatrix}1&2\\0&-1\end{pmatrix}\begin{pmatrix}0&0\\1&0\end{pmatrix}=\begin{pmatrix}2&0\\-1&0\end{pmatrix}\)
+        et \(E_{21}B=\begin{pmatrix}0&0\\1&0\end{pmatrix}\begin{pmatrix}0&1\\-2&1\end{pmatrix}=\begin{pmatrix}0&0\\0&1\end{pmatrix}\), donc</p>
+        \[ f(E_{21})=\begin{pmatrix}2&0\\-1&1\end{pmatrix}\to(2,0,-1,1). \]
+        <p>Détail de \(E_{22}\) : \(AE_{22}=\begin{pmatrix}0&2\\0&-1\end{pmatrix}\)
+        et \(E_{22}B=\begin{pmatrix}0&0\\-2&1\end{pmatrix}\), donc</p>
+        \[ f(E_{22})=\begin{pmatrix}0&2\\-2&0\end{pmatrix}\to(0,2,-2,0). \]
+        <div class="res">\[ \operatorname{Mat}(f)=\begin{pmatrix}1&-2&2&0\\1&2&0&2\\0&0&-1&-2\\0&0&1&0\end{pmatrix}. \]</div>
+        <div class="warnbox"><b>Piège.</b> Ici \(E=\mathcal M_2(\mathbb R)\) est de dimension <b>4</b> : la matrice de
+        \(f\) est \(4\times4\), pas \(2\times2\). Il ne faut pas confondre les matrices \(A,B\) (éléments de \(E\)
+        servant à définir \(f\)) avec la matrice de \(f\).</div>
+      </div>
+    </div>
+
+    <!-- ======================= EX 2 ======================= -->
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — Noyau, image et changements de base (3 bases)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <figure>
+          <img src="td3-img/ex2.jpg" alt="Énoncé TD3 Exercice 2 — endomorphisme de R3 de matrice A, noyau, image, nouvelles bases" loading="lazy">
+          <figcaption>Énoncé (TD3, L. Graissot) — Exercice 2.</figcaption>
+        </figure>
+        <p>\(A=\begin{pmatrix}1&-2&-1\\2&0&2\\0&1&1\end{pmatrix}\), matrice de \(f\) dans la base \(e=(e_1,e_2,e_3)\).</p>
+
+        <p class="q">1) Base de \(\operatorname{Ker}f\), base de \(\operatorname{Im}f\), supplémentaires ?</p>
+        <p><b>Noyau.</b> \((x,y,z)\in\operatorname{Ker}f\iff A\begin{pmatrix}x\\y\\z\end{pmatrix}=0\) :</p>
+        \[ \begin{cases}x-2y-z=0\\2x+2z=0\\y+z=0\end{cases}
+        \iff\begin{cases}z=-x\\ y=-z=x\\ x-2x+x=0\ \checkmark\end{cases} \]
+        <p>Donc \(\operatorname{Ker}f=\{(x,x,-x)\}=\operatorname{Vect}(u)\) avec \(u=(1,1,-1)=e_1+e_2-e_3\) (c'est le
+        vecteur \(u\) de la question 2).</p>
+        <p><b>Image.</b> \(\operatorname{Im}f=\operatorname{Vect}(f(e_1),f(e_2),f(e_3))\), colonnes de \(A\) :
+        \(f(e_1)=(1,2,0)\), \(f(e_2)=(-2,0,1)\), \(f(e_3)=(-1,2,1)\). On remarque
+        \(f(e_1)+f(e_2)=(-1,2,1)=f(e_3)\), donc \(f(e_3)\) est superflu. Les deux vecteurs \(f(e_1),f(e_2)\) ne sont
+        pas colinéaires (\(0\) en 3ᵉ coordonnée pour le premier, \(1\) pour le second ; \(2\neq0\) en 2ᵉ pour le premier,
+        \(0\) pour le second), donc ils forment une famille libre. Théorème du rang :
+        \(\operatorname{rg}f=3-\dim\operatorname{Ker}f=3-1=2\) ✓.</p>
+        <p><b>Supplémentaires ?</b> Il faut \(\operatorname{Ker}f\cap\operatorname{Im}f=\{0\}\) et
+        \(\dim\operatorname{Ker}f+\dim\operatorname{Im}f=3\) (la 2ᵉ condition est vraie : \(1+2=3\)). Vérifions
+        \(u\notin\operatorname{Im}f\) : si \(u=a f(e_1)+b f(e_2)\), alors
+        3ᵉ coordonnée : \(b=-1\) ; 2ᵉ : \(2a=1\), \(a=\tfrac12\) ; 1ʳᵉ : \(a-2b=\tfrac12+2=\tfrac52\neq1\) → contradiction.
+        Donc \(u\notin\operatorname{Im}f\) ; comme \(\operatorname{Ker}f\) est la droite \(\operatorname{Vect}(u)\), l'intersection est \(\{0\}\).</p>
+        <div class="res">\(\operatorname{Ker}f=\operatorname{Vect}(u)\), \(u=(1,1,-1)\) ; \(\operatorname{Im}f=\operatorname{Vect}\big((1,2,0),(-2,0,1)\big)\) ;
+        \(\operatorname{Ker}f\) et \(\operatorname{Im}f\) sont <b>supplémentaires</b> : \(\mathbb R^3=\operatorname{Ker}f\oplus\operatorname{Im}f\).</div>
+
+        <p class="q">2) \((u,f(e_1),f(e_2))\) est une base ; matrice de \(f\) dans cette base</p>
+        <p>Coordonnées dans \(e\) : \(u=(1,1,-1)\), \(f(e_1)=(1,2,0)\), \(f(e_2)=(-2,0,1)\). Matrice
+        \(P=\begin{pmatrix}1&1&-2\\1&2&0\\-1&0&1\end{pmatrix}\). Son déterminant (développement selon la 3ᵉ ligne) :</p>
+        \[ \det P=(-1)\begin{vmatrix}1&-2\\2&0\end{vmatrix}+1\cdot\begin{vmatrix}1&1\\1&2\end{vmatrix}
+        =(-1)(0+4)+(2-1)=-4+1=-3\neq0. \]
+        <p>(Cohérent avec la question 1 : \(u\) engendre le noyau, \(f(e_1),f(e_2)\) l'image, ces deux sous-espaces étant
+        supplémentaires.) Donc \(\mathcal B_2=(u,f(e_1),f(e_2))\) est une base de \(\mathbb R^3\).</p>
+        <p>Images des vecteurs de \(\mathcal B_2\) :</p>
+        <ul>
+          <li>\(f(u)=0\) (car \(u\in\operatorname{Ker}f\)) → colonne \((0,0,0)\).</li>
+          <li>\(f(f(e_1))=A\begin{pmatrix}1\\2\\0\end{pmatrix}=\begin{pmatrix}1-4\\2\\2\end{pmatrix}=\begin{pmatrix}-3\\2\\2\end{pmatrix}\).
+          Or \(f(e_1)+2f(e_2)=(1,2,0)+(-4,0,2)=(-3,2,2)\). Donc \(f(f(e_1))=1\cdot f(e_1)+2\cdot f(e_2)\) → colonne \((0,1,2)\).</li>
+          <li>\(f(f(e_2))=A\begin{pmatrix}-2\\0\\1\end{pmatrix}=\begin{pmatrix}-2-1\\-4+2\\1\end{pmatrix}=\begin{pmatrix}-3\\-2\\1\end{pmatrix}\).
+          Or \(-f(e_1)+f(e_2)=(-1,-2,0)+(-2,0,1)=(-3,-2,1)\). Donc \(f(f(e_2))=-f(e_1)+f(e_2)\) → colonne \((0,-1,1)\).</li>
+        </ul>
+        <div class="res">\[ \operatorname{Mat}_{\mathcal B_2}(f)=\begin{pmatrix}0&0&0\\0&1&-1\\0&2&1\end{pmatrix}. \]
+        Matrice <b>diagonale par blocs</b> (\(0\) pour la droite \(\operatorname{Ker}f\), bloc \(2\times2\) inversible pour le plan \(\operatorname{Im}f\)) :
+        c'est exactement ce que prévoit \(\mathbb R^3=\operatorname{Ker}f\oplus\operatorname{Im}f\).</div>
+
+        <p class="q">3) \((u,e_1,e_2)\) est une base ; matrice de \(f\) dans cette base</p>
+        <p>Matrice des coordonnées : \(\begin{pmatrix}1&1&0\\1&0&1\\-1&0&0\end{pmatrix}\) (colonnes \(u,e_1,e_2\)).
+        Développement selon la 3ᵉ ligne : \(\det=(-1)\begin{vmatrix}1&0\\0&1\end{vmatrix}=-1\neq0\) → base.
+        Directement : \(e_3=e_1+e_2-u\), donc \(e_3\in\operatorname{Vect}(u,e_1,e_2)\) et la famille engendre \(\mathbb R^3\).</p>
+        <ul>
+          <li>\(f(u)=0\) → \((0,0,0)\).</li>
+          <li>\(f(e_1)=(1,2,0)=e_1+2e_2\) → \((0,1,2)\).</li>
+          <li>\(f(e_2)=(-2,0,1)=-2e_1+e_3=-2e_1+(e_1+e_2-u)=-u-e_1+e_2\) → \((-1,-1,1)\).</li>
+        </ul>
+        <div class="res">\[ \operatorname{Mat}_{(u,e_1,e_2)}(f)=\begin{pmatrix}0&0&-1\\0&1&-1\\0&2&1\end{pmatrix}. \]</div>
+        <div class="warnbox"><b>Lecture.</b> La 1ʳᵉ colonne est nulle dans les deux bases (\(f(u)=0\)). Dans la base de la
+        question 2, la 1ʳᵉ ligne est aussi nulle (l'image est dans \(\operatorname{Vect}(f(e_1),f(e_2))\), sans composante sur \(u\)) ;
+        pas dans la question 3, où \(e_1,e_2\) ne sont pas dans \(\operatorname{Im}f\) — c'est la différence entre « base
+        adaptée » et « base quelconque ».</div>
+      </div>
+    </div>
+
+    <!-- ======================= EX 3 ======================= -->
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — Projection sur l'axe des abscisses parallèlement à \(\mathbb R(\vec\imath+\vec\jmath)\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <figure>
+          <img src="td3-img/ex3.jpg" alt="Énoncé TD3 Exercice 3 — projection dans R2, matrices dans différentes bases, trois méthodes" loading="lazy">
+          <figcaption>Énoncé (TD3, L. Graissot) — Exercice 3.</figcaption>
+        </figure>
+        <div class="note"><b>Convention retenue.</b> \(\operatorname{Mat}_{\mathcal B',\mathcal B}(f)\) : base de départ
+        \(\mathcal B'\), base d'arrivée \(\mathcal B\) ; \(\operatorname{Mat}_{\mathcal B'}(f)=\operatorname{Mat}_{\mathcal B',\mathcal B'}(f)\).</div>
+
+        <p class="q">1) \(\operatorname{Mat}_{\mathcal B,\mathcal B}(f)\)</p>
+        <p>\(f\) est la projection sur \(\mathbb R\vec\imath\) <b>parallèlement</b> à \(\mathbb R(\vec\imath+\vec\jmath)\) :
+        \(f(\vec\imath)=\vec\imath\) (vecteur de l'axe, fixé) et \(f(\vec\imath+\vec\jmath)=\vec0\) (vecteur de la direction). Donc</p>
+        \[ f(\vec\jmath)=f\big((\vec\imath+\vec\jmath)-\vec\imath\big)=\vec0-\vec\imath=-\vec\imath. \]
+        <div class="res">\[ \operatorname{Mat}_{\mathcal B,\mathcal B}(f)=\begin{pmatrix}1&-1\\0&0\end{pmatrix},\qquad f(x,y)=(x-y,\,0). \]</div>
+        <p>Vérification : \(f(1,1)=(0,0)\) ✓, \(f(x,0)=(x,0)\) ✓.</p>
+
+        <p class="q">2) \(\operatorname{Mat}_{\mathcal B',\mathcal B}(f)\), \(\mathcal B'=(\vec\imath-\vec\jmath,\,-2\vec\imath+3\vec\jmath)\)</p>
+        <p>On note \(b_1'=\vec\imath-\vec\jmath=(1,-1)\), \(b_2'=-2\vec\imath+3\vec\jmath=(-2,3)\).
+        (\(\mathcal B'\) est une base : \(\det\begin{pmatrix}1&-2\\-1&3\end{pmatrix}=3-2=1\neq0\).)</p>
+        \[ f(b_1')=f(1,-1)=(1-(-1),0)=(2,0)=2\vec\imath,\qquad f(b_2')=f(-2,3)=(-2-3,0)=(-5,0)=-5\vec\imath. \]
+        <p>On exprime dans la base d'<b>arrivée</b> \(\mathcal B\) (canonique) :</p>
+        <div class="res">\[ \operatorname{Mat}_{\mathcal B',\mathcal B}(f)=\begin{pmatrix}2&-5\\0&0\end{pmatrix}
+        =\operatorname{Mat}_{\mathcal B,\mathcal B}(f)\cdot P,\quad P=\begin{pmatrix}1&-2\\-1&3\end{pmatrix}. \]</div>
+        <p>Contrôle du produit : \(\begin{pmatrix}1&-1\\0&0\end{pmatrix}\begin{pmatrix}1&-2\\-1&3\end{pmatrix}=\begin{pmatrix}2&-5\\0&0\end{pmatrix}\) ✓.</p>
+
+        <p class="q">3) \(\operatorname{Mat}_{\mathcal B'}(f)=\operatorname{Mat}_{\mathcal B',\mathcal B'}(f)\)</p>
+        <p>Il faut maintenant exprimer \(f(b_1')=2\vec\imath\) et \(f(b_2')=-5\vec\imath\) dans la base \(\mathcal B'\).
+        On inverse : \(P^{-1}=\dfrac1{\det P}\begin{pmatrix}3&2\\1&1\end{pmatrix}=\begin{pmatrix}3&2\\1&1\end{pmatrix}\)
+        (formule \(\frac1{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}\)). Les colonnes de \(P^{-1}\) donnent
+        \(\vec\imath=3b_1'+b_2'\) et \(\vec\jmath=2b_1'+b_2'\). Vérification :
+        \(3(1,-1)+(-2,3)=(1,0)\) ✓ et \(2(1,-1)+(-2,3)=(0,1)\) ✓. Donc</p>
+        \[ f(b_1')=2\vec\imath=6b_1'+2b_2',\qquad f(b_2')=-5\vec\imath=-15b_1'-5b_2'. \]
+        <div class="res">\[ \operatorname{Mat}_{\mathcal B'}(f)=P^{-1}\operatorname{Mat}_{\mathcal B}(f)P=\begin{pmatrix}6&-15\\2&-5\end{pmatrix}. \]</div>
+        <p>Contrôle : \(P^{-1}\begin{pmatrix}2&-5\\0&0\end{pmatrix}=\begin{pmatrix}3\cdot2&3\cdot(-5)\\1\cdot2&1\cdot(-5)\end{pmatrix}=\begin{pmatrix}6&-15\\2&-5\end{pmatrix}\) ✓.
+        Autre contrôle : \(\operatorname{tr}=6-5=1=\operatorname{tr}\begin{pmatrix}1&-1\\0&0\end{pmatrix}\) et \(\det=-30+30=0\) (la trace et le déterminant ne changent pas par
+        changement de base) ✓.</p>
+
+        <p class="q">4) Image de \(\vec w=2\vec u-\vec v\) (avec \(\vec u=b_1'\), \(\vec v=b_2'\)) — trois méthodes</p>
+        <p>Coordonnées de \(\vec w\) dans \(\mathcal B'\) : \((2,-1)\). Dans la base canonique :
+        \(\vec w=2(1,-1)-(-2,3)=(4,-5)\).</p>
+        <p><b>Méthode 1 — par la matrice canonique.</b> \(f(\vec w)=\begin{pmatrix}1&-1\\0&0\end{pmatrix}\begin{pmatrix}4\\-5\end{pmatrix}=\begin{pmatrix}4+5\\0\end{pmatrix}=\begin{pmatrix}9\\0\end{pmatrix}\).</p>
+        <p><b>Méthode 2 — par \(\operatorname{Mat}_{\mathcal B',\mathcal B}(f)\)</b> (départ \(\mathcal B'\), arrivée canonique : on lui donne directement les coordonnées dans \(\mathcal B'\)
+        et on obtient le résultat dans la base canonique) :
+        \(\begin{pmatrix}2&-5\\0&0\end{pmatrix}\begin{pmatrix}2\\-1\end{pmatrix}=\begin{pmatrix}4+5\\0\end{pmatrix}=\begin{pmatrix}9\\0\end{pmatrix}\).</p>
+        <p><b>Méthode 3 — par \(\operatorname{Mat}_{\mathcal B'}(f)\)</b> (résultat dans \(\mathcal B'\), puis conversion) :
+        \(\begin{pmatrix}6&-15\\2&-5\end{pmatrix}\begin{pmatrix}2\\-1\end{pmatrix}=\begin{pmatrix}12+15\\4+5\end{pmatrix}=\begin{pmatrix}27\\9\end{pmatrix}_{\mathcal B'}\),
+        soit \(f(\vec w)=27b_1'+9b_2'=27(1,-1)+9(-2,3)=(27-18,\,-27+27)=(9,0)\).</p>
+        <p><b>Méthode 4 (contrôle) — par linéarité.</b> \(f(\vec w)=2f(\vec u)-f(\vec v)=2(2,0)-(-5,0)=(9,0)\).</p>
+        <div class="res">\(f(\vec w)=9\,\vec\imath=(9,0)\) dans la base canonique (les quatre méthodes concordent).</div>
+        <div class="warnbox"><b>Piège.</b> Avec \(\operatorname{Mat}_{\mathcal B'}(f)\) le résultat \((27,9)\) est exprimé dans \(\mathcal B'\),
+        <b>pas</b> dans la base canonique : oublier de reconvertir donne un résultat faux. Avec \(\operatorname{Mat}_{\mathcal B',\mathcal B}(f)\)
+        la base d'arrivée est déjà la canonique, il n'y a rien à reconvertir.</div>
+      </div>
+    </div>
+
+    <!-- ======================= EX 4 ======================= -->
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — Endomorphisme de \(\mathbb R_2[X]\) et équation différentielle</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <figure>
+          <img src="td3-img/ex4.jpg" alt="Énoncé TD3 Exercice 4 — φ(P)=(X²+X+1)P'−(2X−1)P sur R2[X], bijectivité, équation différentielle" loading="lazy">
+          <figcaption>Énoncé (TD3, L. Graissot) — Exercice 4.</figcaption>
+        </figure>
+
+        <p class="q">1) \(\varphi\) est un endomorphisme ; matrice dans la base canonique</p>
+        <p><b>Linéarité.</b> Pour \(P,Q\in\mathbb R_2[X]\) et \(\lambda\in\mathbb R\) : la dérivation est linéaire, donc
+        \(\varphi(\lambda P+Q)=(X^2+X+1)(\lambda P'+Q')-(2X-1)(\lambda P+Q)=\lambda\varphi(P)+\varphi(Q)\).</p>
+        <p><b>À valeurs dans \(\mathbb R_2[X]\).</b> Pour \(P=aX^2+bX+c\) : \(P'=2aX+b\) et</p>
+        \[ \varphi(P)=(X^2+X+1)(2aX+b)-(2X-1)(aX^2+bX+c). \]
+        <p>Le terme en \(X^3\) vaut \(2a-2a=0\) : \(\deg\varphi(P)\le2\). Donc \(\varphi\in\mathcal L(\mathbb R_2[X])\) :
+        <b>endomorphisme</b>. Matrice dans \((1,X,X^2)\) :</p>
+        \[ \begin{aligned}
+        \varphi(1)&=-(2X-1)=1-2X &&\to(1,-2,0),\\
+        \varphi(X)&=(X^2+X+1)-(2X-1)X=X^2+X+1-2X^2+X=-X^2+2X+1 &&\to(1,2,-1),\\
+        \varphi(X^2)&=(X^2+X+1)\,2X-(2X-1)X^2=2X^3+2X^2+2X-2X^3+X^2=3X^2+2X &&\to(0,2,3).
+        \end{aligned} \]
+        <div class="res">\[ M=\operatorname{Mat}(\varphi)=\begin{pmatrix}1&1&0\\-2&2&2\\0&-1&3\end{pmatrix}. \]</div>
+
+        <p class="q">2) \(\varphi\) bijective ? Antécédent de \(X^2-1\)</p>
+        <p>Développement du déterminant selon la 1ʳᵉ ligne :</p>
+        \[ \det M=1\begin{vmatrix}2&2\\-1&3\end{vmatrix}-1\begin{vmatrix}-2&2\\0&3\end{vmatrix}+0
+        =1\cdot(6+2)-1\cdot(-6-0)=8+6=14\neq0. \]
+        <p>\(M\) est inversible, donc \(\varphi\) est <b>bijective</b> (endomorphisme d'un espace de dimension finie de matrice inversible).</p>
+        <p>Antécédent de \(X^2-1\), de coordonnées \((-1,0,1)\) : on résout \(M\begin{pmatrix}c\\b\\a\end{pmatrix}=\begin{pmatrix}-1\\0\\1\end{pmatrix}\) pour \(P=aX^2+bX+c\) :</p>
+        \[ \begin{cases}c+b=-1\\-2c+2b+2a=0\\-b+3a=1\end{cases} \]
+        <p>(1) donne \(c=-1-b\). (2) : \(2+2b+2b+2a=0\), soit \(a=-1-2b\). (3) : \(-b+3(-1-2b)=1\), soit \(-7b=4\), \(b=-\tfrac47\).
+        Alors \(a=-1+\tfrac87=\tfrac17\) et \(c=-1+\tfrac47=-\tfrac37\).</p>
+        <div class="res">\(\varphi\) est bijective et \(P_0=\dfrac{X^2-4X-3}{7}\) est l'unique antécédent de \(X^2-1\).</div>
+        <p>Vérification : \(\varphi(P_0)=\frac17\big[(X^2+X+1)(2X-4)-(2X-1)(X^2-4X-3)\big]\).
+        Premier produit : \(2X^3-4X^2+2X^2-4X+2X-4=2X^3-2X^2-2X-4\). Second : \(2X^3-8X^2-6X-X^2+4X+3=2X^3-9X^2-2X+3\).
+        Différence : \(7X^2-7\). Donc \(\varphi(P_0)=X^2-1\) ✓.</p>
+
+        <p class="q">3) Résoudre \((x^2+x+1)y'-(2x-1)y=x^2-1\)</p>
+        <p>L'équation s'écrit \(\varphi(y)=x^2-1\) où \(\varphi\) agit maintenant sur des fonctions dérivables
+        (sur \(\mathbb R\), car \(x^2+x+1>0\) : discriminant \(1-4=-3<0\)). C'est une équation différentielle linéaire du 1ᵉʳ ordre :
+        solution générale = solution particulière + solution générale de l'équation homogène.</p>
+        <p><b>Solution particulière</b> : le polynôme \(P_0\) de la question 2 (c'est précisément le but de la question).</p>
+        <p><b>Équation homogène</b> \((x^2+x+1)y'=(2x-1)y\), soit \(\dfrac{y'}{y}=\dfrac{2x-1}{x^2+x+1}\). On décompose
+        \(2x-1=(2x+1)-2\) (car \((x^2+x+1)'=2x+1\)) :</p>
+        \[ \int\frac{2x-1}{x^2+x+1}\,dx=\ln(x^2+x+1)-2\int\frac{dx}{x^2+x+1}. \]
+        <p>Forme canonique \(x^2+x+1=\big(x+\tfrac12\big)^2+\tfrac34\), donc
+        \(\displaystyle\int\frac{dx}{x^2+x+1}=\frac{2}{\sqrt3}\arctan\!\Big(\frac{2x+1}{\sqrt3}\Big)\). D'où</p>
+        \[ y_h(x)=C\,(x^2+x+1)\exp\!\Big(-\frac{4}{\sqrt3}\arctan\frac{2x+1}{\sqrt3}\Big),\quad C\in\mathbb R. \]
+        <div class="res">\[ y(x)=\frac{x^2-4x-3}{7}+C\,(x^2+x+1)\,e^{-\frac{4}{\sqrt3}\arctan\frac{2x+1}{\sqrt3}},\qquad C\in\mathbb R,\ x\in\mathbb R. \]</div>
+        <div class="note"><b>Lien avec l'algèbre linéaire.</b> Parmi les <i>polynômes</i> de degré \(\le2\), l'unique solution est \(P_0\)
+        (car \(\varphi\) y est injective : \(\ker\varphi=\{0\}\)). Les solutions homogènes \(y_h\) ne sont pas polynomiales
+        dès que \(C\neq0\) (à cause de l'exponentielle) — cohérent avec \(\ker\varphi=\{0\}\) sur \(\mathbb R_2[X]\).</div>
+      </div>
+    </div>
+
+    <!-- ======================= EX 5 ======================= -->
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — Projecteur de \(\mathbb R^3\) : diagonalisation par changement de base</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <figure>
+          <img src="td3-img/ex5.jpg" alt="Énoncé TD3 Exercice 5 — Φ définie par Φ(e1)=e3, Φ(e2)=−e1+e2+e3, Φ(e3)=e3, nouvelle base f1,f2,f3" loading="lazy">
+          <figcaption>Énoncé (TD3, L. Graissot) — Exercice 5.</figcaption>
+        </figure>
+
+        <p class="q">1) Matrice \(A\) de \(\Phi\) dans \((e_1,e_2,e_3)\) et noyau</p>
+        <p>Colonnes = images : \(\Phi(e_1)=e_3=(0,0,1)\), \(\Phi(e_2)=-e_1+e_2+e_3=(-1,1,1)\), \(\Phi(e_3)=e_3=(0,0,1)\).</p>
+        <div class="res">\[ A=\begin{pmatrix}0&-1&0\\0&1&0\\1&1&1\end{pmatrix}. \]</div>
+        <p><b>Noyau :</b> \(A\begin{pmatrix}x\\y\\z\end{pmatrix}=\begin{pmatrix}-y\\y\\x+y+z\end{pmatrix}=0\iff y=0,\ z=-x\).
+        Donc \(\ker\Phi=\{(x,0,-x)\}=\operatorname{Vect}(e_1-e_3)\) (droite ; \(\operatorname{rg}\Phi=3-1=2\)).</p>
+        <div class="res">\(\ker\Phi=\operatorname{Vect}(e_1-e_3)\).</div>
+
+        <p class="q">2) \(f_1=e_1-e_3,\ f_2=e_1-e_2,\ f_3=-e_1+e_2+e_3\) : \(e_i\) en fonction des \(f_j\) ; base ?</p>
+        <p>On remarque \(f_2+f_3=(e_1-e_2)+(-e_1+e_2+e_3)=e_3\). Puis \(f_1+e_3=e_1\), donc \(e_1=f_1+f_2+f_3\).
+        Enfin \(e_2=e_1-f_2=f_1+f_2+f_3-f_2=f_1+f_3\).</p>
+        <div class="res">\(e_1=f_1+f_2+f_3,\quad e_2=f_1+f_3,\quad e_3=f_2+f_3.\)</div>
+        <p>Vérification : \(f_1+f_2+f_3=(1+1-1,\,0-1+1,\,-1+0+1)=(1,0,0)=e_1\) ✓. Les trois \(e_i\) sont combinaisons linéaires de
+        \(f_1,f_2,f_3\), donc \(\operatorname{Vect}(f_1,f_2,f_3)=\mathbb R^3\) : famille génératrice de 3 vecteurs dans un espace
+        de dimension 3, c'est une <b>base</b>.</p>
+
+        <p class="q">3) \(\Phi(f_j)\) ; matrice \(B\) dans \((f_1,f_2,f_3)\) ; nature de \(\Phi\)</p>
+        \[ \begin{aligned}
+        \Phi(f_1)&=\Phi(e_1)-\Phi(e_3)=e_3-e_3=0,\\
+        \Phi(f_2)&=\Phi(e_1)-\Phi(e_2)=e_3-(-e_1+e_2+e_3)=e_1-e_2=f_2,\\
+        \Phi(f_3)&=-\Phi(e_1)+\Phi(e_2)+\Phi(e_3)=-e_3+(-e_1+e_2+e_3)+e_3=-e_1+e_2+e_3=f_3.
+        \end{aligned} \]
+        <div class="res">\[ B=\operatorname{Mat}_{(f_1,f_2,f_3)}(\Phi)=\begin{pmatrix}0&0&0\\0&1&0\\0&0&1\end{pmatrix}. \]
+        \(\Phi\) est la <b>projection</b> sur \(\operatorname{Vect}(f_2,f_3)\) (=\(\operatorname{Im}\Phi\)) <b>parallèlement</b> à \(\operatorname{Vect}(f_1)=\ker\Phi\).</div>
+        <p>(On vérifie \(\Phi\circ\Phi=\Phi\) : \(B^2=B\), caractéristique d'un projecteur.)</p>
+
+        <p class="q">4) \(P\) inversible, \(P^{-1}\), relation entre \(A,B,P,P^{-1}\)</p>
+        <p>\(P=\begin{pmatrix}1&1&-1\\0&-1&1\\-1&0&1\end{pmatrix}\) a pour colonnes les coordonnées de \(f_1,f_2,f_3\) dans \((e_1,e_2,e_3)\) :
+        c'est la matrice de passage de \((e)\) vers \((f)\). Déterminant (développement selon la 1ʳᵉ colonne) :
+        \(\det P=1\begin{vmatrix}-1&1\\0&1\end{vmatrix}+(-1)\begin{vmatrix}1&-1\\-1&1\end{vmatrix}
+        =1\cdot(-1)-(1-1)=-1\neq0\). Donc \(P\) est inversible. D'après la question 2, les colonnes de \(P^{-1}\) donnent \(e_1,e_2,e_3\) dans la base \((f)\) :</p>
+        <div class="res">\[ P^{-1}=\begin{pmatrix}1&1&0\\1&0&1\\1&1&1\end{pmatrix},\qquad \boxed{B=P^{-1}AP}\ \ (\text{ou }A=PBP^{-1}). \]</div>
+        <p>Vérification de \(PP^{-1}=I_3\) : 1ʳᵉ ligne de \(P\), \((1,1,-1)\), contre les colonnes \((1,1,1)\), \((1,0,1)\), \((0,1,1)\) :
+        \(1+1-1=1\), \(1+0-1=0\), \(0+1-1=0\) ✓ ; 2ᵉ ligne \((0,-1,1)\) : \(-1+1=0\), \(0+1=1\), \(-1+1=0\) ✓ ;
+        3ᵉ ligne \((-1,0,1)\) : \(-1+1=0\), \(-1+1=0\), \(1\) ✓.</p>
+      </div>
+    </div>
+
+    <!-- ======================= EX 6 ======================= -->
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — Base de trigonalisation et puissances de \(A\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <figure>
+          <img src="td3-img/ex6.jpg" alt="Énoncé TD3 Exercice 6 — endomorphisme de R3 de matrice A, base où la matrice devient B, puissances" loading="lazy">
+          <figcaption>Énoncé (TD3, L. Graissot) — Exercice 6.</figcaption>
+        </figure>
+        <p>\(A=\begin{pmatrix}-1&0&1\\-1&-2&1\\-1&-1&1\end{pmatrix}\), \(B=\begin{pmatrix}0&0&0\\0&-1&1\\0&0&-1\end{pmatrix}\).</p>
+
+        <p class="q">1) Base \((b_1,b_2,b_3)\) dans laquelle la matrice de \(f\) est \(B\)</p>
+        <div class="method"><span class="lab">Méthode</span> Lire les colonnes de \(B\) : elles disent comment \(f\) agit sur la base cherchée.
+        \[ f(b_1)=0,\qquad f(b_2)=-b_2,\qquad f(b_3)=b_2-b_3. \]
+        Il faut donc : \(b_1\in\ker f\) ; \(b_2\) vecteur propre pour \(-1\) ; \(b_3\) tel que
+        \((f+\mathrm{id})(b_3)=b_2\).</div>
+        <p><b>\(b_1\) :</b> \(Av=0\iff\begin{cases}-x+z=0\\-x-2y+z=0\\-x-y+z=0\end{cases}\). (1) : \(z=x\) ; (2) : \(-2y=0\), \(y=0\) ;
+        (3) : \(-x-0+x=0\) ✓. On prend \(b_1=(1,0,1)\).</p>
+        <p><b>\(b_2\) :</b> \((A+I)v=0\) avec \(A+I=\begin{pmatrix}0&0&1\\-1&-1&1\\-1&-1&2\end{pmatrix}\) : (1) \(z=0\) ; (2) \(-x-y=0\) ;
+        (3) \(-x-y+2z=0\) ✓. On prend \(b_2=(1,-1,0)\).</p>
+        <p><b>\(b_3\) :</b> \((A+I)b_3=b_2\) :
+        \(\begin{cases}z=1\\-x-y+z=-1\\-x-y+2z=0\end{cases}\) : \(z=1\), puis \(x+y=2\) (équation 2) et l'équation 3 donne \(-x-y+2=0\) ✓ (cohérent).
+        On prend \(b_3=(2,0,1)\).</p>
+        <p><b>Vérifications.</b> \(Ab_1=(-1+1,\,-1+1,\,-1+1)=0\) ✓. \(Ab_2=(-1,\,-1+2,\,-1+1)=(-1,1,0)=-b_2\) ✓.
+        \(Ab_3=(-2+1,\,-2+1,\,-2+1)=(-1,-1,-1)\) et \(b_2-b_3=(1-2,\,-1-0,\,0-1)=(-1,-1,-1)\) ✓.</p>
+        <p><b>C'est une base :</b> \(P=\begin{pmatrix}1&1&2\\0&-1&0\\1&0&1\end{pmatrix}\) (colonnes \(b_1,b_2,b_3\)),
+        \(\det P=(-1)\cdot(-1)^{2+2}\begin{vmatrix}1&2\\1&1\end{vmatrix}=(-1)(1-2)=1\neq0\).</p>
+        <div class="res">Base \(\big(b_1,b_2,b_3\big)=\big((1,0,1),\,(1,-1,0),\,(2,0,1)\big)\) ; dans cette base \(\operatorname{Mat}(f)=B\), soit \(B=P^{-1}AP\).</div>
+        <div class="note"><b>Pourquoi pas une matrice diagonale ?</b> \(-1\) est valeur propre double
+        (polynôme caractéristique \(\lambda(\lambda+1)^2\)) mais \(\ker(f+\mathrm{id})\) n'est qu'une droite : \(f\) n'est pas diagonalisable.
+        La meilleure forme possible est celle-ci (bloc de Jordan \(\begin{pmatrix}-1&1\\0&-1\end{pmatrix}\)).</div>
+
+        <p class="q">2) Puissances de \(B\), puis de \(A\)</p>
+        <p><b>Puissances de \(B\).</b> \(B\) est diagonale par blocs : le bloc \(1\times1\) vaut \(0\) et le bloc
+        \(T=\begin{pmatrix}-1&1\\0&-1\end{pmatrix}=-I_2+N\) avec \(N=\begin{pmatrix}0&1\\0&0\end{pmatrix}\), \(N^2=0\). Comme \(-I_2\) et \(N\) commutent, le binôme de Newton s'applique et
+        tous les termes en \(N^k\), \(k\ge2\), disparaissent :</p>
+        \[ T^n=(-I_2+N)^n=(-1)^nI_2+n(-1)^{n-1}N=\begin{pmatrix}(-1)^n&n(-1)^{n-1}\\0&(-1)^n\end{pmatrix}. \]
+        <div class="res">Pour \(n\ge1\) : \(B^n=\begin{pmatrix}0&0&0\\0&(-1)^n&n(-1)^{n-1}\\0&0&(-1)^n\end{pmatrix}\).
+        (Pour \(n=0\), \(B^0=I_3\).)</div>
+        <p><b>Puissances de \(A\).</b> \(A^n=PB^nP^{-1}\) avec \(P^{-1}=\begin{pmatrix}-1&-1&2\\0&-1&0\\1&1&-1\end{pmatrix}\)
+        (on vérifie \(PP^{-1}\) : 1ʳᵉ ligne de \(P\), \((1,1,2)\), contre les colonnes de \(P^{-1}\) : \(-1+0+2=1\), \(-1-1+2=0\), \(2+0-2=0\) ✓ ; 2ᵉ ligne \((0,-1,0)\) : \(0\), \(1\), \(0\) ✓ ; 3ᵉ ligne \((1,0,1)\) : \(-1+1=0\), \(-1+1=0\), \(2-1=1\) ✓).
+        Posons \(s=(-1)^n\), donc \(n(-1)^{n-1}=-ns\) :</p>
+        \[ PB^n=\begin{pmatrix}1&1&2\\0&-1&0\\1&0&1\end{pmatrix}\begin{pmatrix}0&0&0\\0&s&-ns\\0&0&s\end{pmatrix}
+        =\begin{pmatrix}0&s&(2-n)s\\0&-s&ns\\0&0&s\end{pmatrix}, \]
+        \[ A^n=PB^nP^{-1}=\begin{pmatrix}0&s&(2-n)s\\0&-s&ns\\0&0&s\end{pmatrix}\begin{pmatrix}-1&-1&2\\0&-1&0\\1&1&-1\end{pmatrix}
+        =s\begin{pmatrix}2-n&1-n&n-2\\n&n+1&-n\\1&1&-1\end{pmatrix}. \]
+        <div class="res">Pour tout \(n\ge1\) : \[ A^n=(-1)^n\begin{pmatrix}2-n&1-n&n-2\\n&n+1&-n\\1&1&-1\end{pmatrix}. \]</div>
+        <p>Contrôle : \(n=1\) donne \(-\begin{pmatrix}1&0&-1\\1&2&-1\\1&1&-1\end{pmatrix}=A\) ✓ ; \(n=2\) donne \(\begin{pmatrix}0&-1&0\\2&3&-2\\1&1&-1\end{pmatrix}=A^2\)
+        (calcul direct de \(A\cdot A\), 1ʳᵉ ligne : \((-1,0,1)\cdot\)colonnes de \(A\) = \((1-1,\,0+0-1,\,-1+0+1)=(0,-1,0)\) ✓).</p>
+        <div class="warnbox"><b>Piège.</b> La formule fermée est valable à partir de \(n\ge1\) ; pour \(n=0\) elle donnerait
+        \(\begin{pmatrix}2&1&-2\\0&1&0\\1&1&-1\end{pmatrix}\neq I_3\) (le bloc \(1\times1\) nul de \(B\) vaut \(0^n=0\) pour \(n\ge1\) mais \(B^0=I_3\) a un \(1\) à cet endroit).</div>
+      </div>
+    </div>
+
+    <!-- ======================= EX 7 ======================= -->
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 7 — Base de \(\mathbb R_2[X]\), matrices de passage, coordonnées</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <figure>
+          <img src="td3-img/ex7.jpg" alt="Énoncé TD3 Exercice 7 — famille B=(X²+1, X+1, 2X²−X) de R2[X], passage, coordonnées, φ(P)=XP'" loading="lazy">
+          <figcaption>Énoncé (TD3, L. Graissot) — Exercice 7.</figcaption>
+        </figure>
+
+        <p class="q">1) \(\mathcal B=(X^2+1,\ X+1,\ 2X^2-X)\) est une base de \(\mathbb R_2[X]\)</p>
+        <p>Dans la base canonique \((1,X,X^2)\) (coordonnées dans l'ordre \(1,X,X^2\)) :
+        \(X^2+1\to(1,0,1)\), \(X+1\to(1,1,0)\), \(2X^2-X\to(0,-1,2)\). Matrice des coordonnées
+        \(P=\begin{pmatrix}1&1&0\\0&1&-1\\1&0&2\end{pmatrix}\) :</p>
+        \[ \det P=1\begin{vmatrix}1&-1\\0&2\end{vmatrix}-1\begin{vmatrix}0&-1\\1&2\end{vmatrix}+0=2-(0+1)=1\neq0. \]
+        <div class="res">\(\det P=1\neq0\) et \(\dim\mathbb R_2[X]=3\) : \(\mathcal B\) est une <b>base</b>.</div>
+
+        <p class="q">2) Matrices de passage canonique → \(\mathcal B\) et \(\mathcal B\) → canonique</p>
+        <p>Par définition (colonnes = coordonnées de la nouvelle base dans l'ancienne) :</p>
+        \[ P_{\text{can}\to\mathcal B}=P=\begin{pmatrix}1&1&0\\0&1&-1\\1&0&2\end{pmatrix}. \]
+        <p>La matrice de passage inverse est \(P^{-1}\). Calcul par la comatrice (\(\det P=1\)) : on obtient</p>
+        \[ P_{\mathcal B\to\text{can}}=P^{-1}=\begin{pmatrix}2&-2&-1\\-1&2&1\\-1&1&1\end{pmatrix}. \]
+        <p>Vérification de \(PP^{-1}=I_3\) : 1ʳᵉ ligne de \(P\), \((1,1,0)\), contre les colonnes \((2,-1,-1)\), \((-2,2,1)\), \((-1,1,1)\) :
+        \(2-1=1\), \(-2+2=0\), \(-1+1=0\) ✓ ; 2ᵉ ligne \((0,1,-1)\) : \(-1+1=0\), \(2-1=1\), \(1-1=0\) ✓ ;
+        3ᵉ ligne \((1,0,2)\) : \(2-2=0\), \(-2+2=0\), \(-1+2=1\) ✓.</p>
+        <p>Interprétation : les colonnes de \(P^{-1}\) expriment \(1,X,X^2\) dans \(\mathcal B\). Exemple :
+        \(1=2(X^2+1)-(X+1)-(2X^2-X)\) (développé : \(2X^2+2-X-1-2X^2+X=1\) ✓).</p>
+
+        <p class="q">3) Coordonnées de \(P=X^2-X+2\) dans \(\mathcal B\)</p>
+        <p>Coordonnées canoniques : \((2,-1,1)\). Dans \(\mathcal B\) : \(X_{\mathcal B}=P^{-1}X_{\text{can}}\) :</p>
+        \[ \begin{pmatrix}2&-2&-1\\-1&2&1\\-1&1&1\end{pmatrix}\begin{pmatrix}2\\-1\\1\end{pmatrix}
+        =\begin{pmatrix}4+2-1\\-2-2+1\\-2-1+1\end{pmatrix}=\begin{pmatrix}5\\-3\\-2\end{pmatrix}. \]
+        <div class="res">\(X^2-X+2=5(X^2+1)-3(X+1)-2(2X^2-X)\).</div>
+        <p>Vérification : \(5X^2+5-3X-3-4X^2+2X=X^2-X+2\) ✓.</p>
+
+        <p class="q">4) \(\varphi(P)=XP'\) : matrice dans la canonique puis dans \(\mathcal B\)</p>
+        <p>\(\varphi(1)=0\), \(\varphi(X)=X\cdot1=X\), \(\varphi(X^2)=X\cdot2X=2X^2\) (\(\varphi\) est bien un endomorphisme de \(\mathbb R_2[X]\)).</p>
+        <div class="res">\[ D=\operatorname{Mat}_{\text{can}}(\varphi)=\begin{pmatrix}0&0&0\\0&1&0\\0&0&2\end{pmatrix}. \]</div>
+        <p>Dans la base \(\mathcal B\) : \(\operatorname{Mat}_{\mathcal B}(\varphi)=P^{-1}DP\). D'abord
+        \(DP=\begin{pmatrix}0&0&0\\0&1&-1\\2&0&4\end{pmatrix}\) (chaque ligne de \(P\) multipliée par le coefficient diagonal correspondant), puis</p>
+        \[ P^{-1}(DP)=\begin{pmatrix}2&-2&-1\\-1&2&1\\-1&1&1\end{pmatrix}\begin{pmatrix}0&0&0\\0&1&-1\\2&0&4\end{pmatrix}
+        =\begin{pmatrix}-2&-2&-2\\2&2&2\\2&1&3\end{pmatrix}. \]
+        <div class="res">\[ \operatorname{Mat}_{\mathcal B}(\varphi)=\begin{pmatrix}-2&-2&-2\\2&2&2\\2&1&3\end{pmatrix}. \]</div>
+        <p>Vérification sur la 1ʳᵉ colonne : \(\varphi(X^2+1)=X\cdot2X=2X^2\), dont les coordonnées dans \(\mathcal B\) sont
+        \(P^{-1}(0,0,2)=(-2,2,2)\) ✓ (colonne 1). Trace conservée : \(-2+2+3=3=0+1+2\) ✓.</p>
+        <div class="warnbox"><b>Piège.</b> Dans une base « moins naturelle », la matrice d'un endomorphisme simple (ici diagonale
+        dans la canonique) devient pleine. On choisit une base adaptée pour simplifier, jamais l'inverse.</div>
+      </div>
+    </div>
+
+    <!-- ======================= EX 8 ======================= -->
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 8 — Endomorphisme nilpotent (\(f^2=0\))</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <figure>
+          <img src="td3-img/ex8.jpg" alt="Énoncé TD3 Exercice 8 — endomorphisme de R3 de matrice A, f², Im⊂Ker, A semblable à une matrice à un seul 1" loading="lazy">
+          <figcaption>Énoncé (TD3, L. Graissot) — Exercice 8.</figcaption>
+        </figure>
+        <p>\(A=\begin{pmatrix}3&-3&6\\1&-1&2\\-1&1&-2\end{pmatrix}\).</p>
+
+        <p class="q">1) Calcul de \(f^2\) ; \(\operatorname{Im}f\subset\operatorname{Ker}f\)</p>
+        <p>Produit \(A\times A\) (ligne × colonne). Colonnes de \(A\) : \(c_1=(3,1,-1)\), \(c_2=(-3,-1,1)\), \(c_3=(6,2,-2)\).</p>
+        \[ \begin{aligned}
+        &\text{Ligne }(3,-3,6):\ 9-3-6=0,\ \ -9+3+6=0,\ \ 18-6-12=0;\\
+        &\text{Ligne }(1,-1,2):\ 3-1-2=0,\ \ -3+1+2=0,\ \ 6-2-4=0;\\
+        &\text{Ligne }(-1,1,-2):\ -3+1+2=0,\ \ 3-1-2=0,\ \ -6+2+4=0.
+        \end{aligned} \]
+        <div class="res">\(A^2=0\), c'est-à-dire \(f\circ f=0\) : \(f\) est <b>nilpotent d'indice 2</b>.</div>
+        <p>Inclusion : soit \(y\in\operatorname{Im}f\), \(y=f(x)\). Alors \(f(y)=f(f(x))=f^2(x)=0\), donc \(y\in\operatorname{Ker}f\).</p>
+        <div class="res">\(\operatorname{Im}f\subset\operatorname{Ker}f\).</div>
+
+        <p class="q">2) \(\operatorname{rg}f\), \(\dim\operatorname{Ker}f\), bases du noyau et de l'image</p>
+        <p>On a \(c_2=-c_1\) et \(c_3=2c_1\) avec \(c_1\neq0\) : \(\operatorname{Im}f=\operatorname{Vect}(c_1)\), donc \(\operatorname{rg}f=1\).
+        Théorème du rang : \(\dim\operatorname{Ker}f=3-1=2\). (Cohérent avec la question 1 : \(\dim\operatorname{Im}f=1\le\dim\operatorname{Ker}f=2\).)</p>
+        <p><b>Noyau :</b> les trois lignes sont proportionnelles à \((1,-1,2)\) (\((3,-3,6)=3\cdot(1,-1,2)\), \((-1,1,-2)=-(1,-1,2)\)), donc
+        \(\operatorname{Ker}f\) est le plan d'équation \(x-y+2z=0\) : \((x,y,z)=y(1,1,0)+z(-2,0,1)\).
+        Base : \(\big((1,1,0),(-2,0,1)\big)\). On vérifie \(c_1=(3,1,-1)\in\operatorname{Ker}f\) : \(3-1-2=0\) ✓
+        (en effet \(c_1=(1,1,0)-(-2,0,1)=(3,1,-1)\), combinaison des deux vecteurs de base).</p>
+        <div class="res">\(\operatorname{rg}f=1\), \(\dim\operatorname{Ker}f=2\) ; base de \(\operatorname{Im}f\) : \(\big((3,1,-1)\big)\) ;
+        base de \(\operatorname{Ker}f\) : \(\big((1,1,0),(-2,0,1)\big)\).</div>
+
+        <p class="q">3) \(A\) est semblable à \(\begin{pmatrix}0&0&0\\1&0&0\\0&0&0\end{pmatrix}\)</p>
+        <div class="method"><span class="lab">Méthode</span> On cherche une base \((b_1,b_2,b_3)\) avec \(f(b_1)=b_2\), \(f(b_2)=0\), \(f(b_3)=0\) :
+        la matrice dans cette base est exactement celle demandée (colonne 1 = \((0,1,0)\), colonnes 2 et 3 nulles).</div>
+        <p>On prend \(b_1=e_1=(1,0,0)\) (\(f(e_1)\neq0\)), \(b_2=f(b_1)=(3,1,-1)\) (dans \(\operatorname{Ker}f\) car \(\operatorname{Im}f\subset\operatorname{Ker}f\), donc \(f(b_2)=0\)),
+        et \(b_3=(1,1,0)\in\operatorname{Ker}f\), non colinéaire à \(b_2\) (\(b_2\) et \(b_3\) sont donc deux vecteurs indépendants du plan \(\operatorname{Ker}f\)).</p>
+        <p>Base ? \(Q=\begin{pmatrix}1&3&1\\0&1&1\\0&-1&0\end{pmatrix}\) (colonnes \(b_1,b_2,b_3\)) :
+        \(\det Q=1\begin{vmatrix}1&1\\-1&0\end{vmatrix}=1\cdot(0+1)=1\neq0\) ✓.</p>
+        <div class="res">Dans la base \((b_1,b_2,b_3)\) : \(\operatorname{Mat}(f)=\begin{pmatrix}0&0&0\\1&0&0\\0&0&0\end{pmatrix}\), donc \(A\) lui est semblable :
+        \(Q^{-1}AQ=\begin{pmatrix}0&0&0\\1&0&0\\0&0&0\end{pmatrix}\).</div>
+        <div class="note">Tout nilpotent d'indice 2 de \(\mathbb R^3\) de rang 1 est ainsi : c'est la « forme normale » : une chaîne
+        \(b_1\mapsto b_2\mapsto0\) plus un vecteur du noyau \(b_3\) hors de cette chaîne.</div>
+      </div>
+    </div>
+
+    <!-- ======================= EX 9 ======================= -->
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 9 — Diagonalisation, \(A^n\) et suites récurrentes couplées</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <figure>
+          <img src="td3-img/ex9.jpg" alt="Énoncé TD3 Exercice 9 — endomorphisme de R2 de matrice A, base e1,e2, puissances, suites couplées" loading="lazy">
+          <figcaption>Énoncé (TD3, L. Graissot) — Exercice 9.</figcaption>
+        </figure>
+        <p>\(A=\begin{pmatrix}2&\tfrac23\\-\tfrac52&-\tfrac23\end{pmatrix}\), \(e_1=\begin{pmatrix}-2\\3\end{pmatrix}\), \(e_2=\begin{pmatrix}-2\\5\end{pmatrix}\).</p>
+
+        <p class="q">1) \(\mathcal B'=(e_1,e_2)\) est une base de \(\mathbb R^2\) ; \(\operatorname{Mat}_{\mathcal B'}(f)\)</p>
+        <p>\(P=\begin{pmatrix}-2&-2\\3&5\end{pmatrix}\), \(\det P=(-2)(5)-(-2)(3)=-10+6=-4\neq0\) : \(e_1,e_2\) indépendants, donc base de \(\mathbb R^2\) (dimension 2).</p>
+        <p>Images : \(f(e_1)=Ae_1=\begin{pmatrix}2(-2)+\frac23\cdot3\\-\frac52(-2)-\frac23\cdot3\end{pmatrix}=\begin{pmatrix}-4+2\\5-2\end{pmatrix}=\begin{pmatrix}-2\\3\end{pmatrix}=e_1\) ;
+        \(f(e_2)=Ae_2=\begin{pmatrix}-4+\frac{10}3\\5-\frac{10}3\end{pmatrix}=\begin{pmatrix}-\frac23\\\frac53\end{pmatrix}=\tfrac13\begin{pmatrix}-2\\5\end{pmatrix}=\tfrac13e_2\).</p>
+        <div class="res">\[ \operatorname{Mat}_{\mathcal B'}(f)=D=\begin{pmatrix}1&0\\0&\tfrac13\end{pmatrix},\qquad D=P^{-1}AP. \]
+        \(e_1\) et \(e_2\) sont des vecteurs propres pour les valeurs propres \(1\) et \(\tfrac13\).</div>
+
+        <p class="q">2) \(A^n\) pour tout \(n\in\mathbb N\)</p>
+        <p>\(A=PDP^{-1}\), donc \(A^n=PD^nP^{-1}\) avec \(D^n=\begin{pmatrix}1&0\\0&3^{-n}\end{pmatrix}\) (valable aussi pour \(n=0\)).
+        \(P^{-1}=\dfrac1{-4}\begin{pmatrix}5&2\\-3&-2\end{pmatrix}=\begin{pmatrix}-\frac54&-\frac12\\\frac34&\frac12\end{pmatrix}\)
+        (formule \(\frac1{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}\)). Posons \(r=3^{-n}\) :</p>
+        \[ PD^n=\begin{pmatrix}-2&-2r\\3&5r\end{pmatrix},\qquad
+        A^n=\begin{pmatrix}-2&-2r\\3&5r\end{pmatrix}\begin{pmatrix}-\frac54&-\frac12\\\frac34&\frac12\end{pmatrix}
+        =\begin{pmatrix}\frac52-\frac32r&1-r\\-\frac{15}4+\frac{15}4r&-\frac32+\frac52r\end{pmatrix}. \]
+        <div class="res">\[ A^n=\begin{pmatrix}\tfrac52-\tfrac32\,3^{-n}&1-3^{-n}\\[2pt]-\tfrac{15}4\big(1-3^{-n}\big)&-\tfrac32+\tfrac52\,3^{-n}\end{pmatrix},\quad n\in\mathbb N. \]</div>
+        <p>Contrôles : \(n=0\) (\(r=1\)) : \(A^0=I_2\) ✓. \(n=1\) (\(r=\frac13\)) : \(\begin{pmatrix}\frac52-\frac12&\frac23\\-\frac{15}4+\frac54&-\frac32+\frac56\end{pmatrix}=\begin{pmatrix}2&\frac23\\-\frac52&-\frac23\end{pmatrix}=A\) ✓.
+        Limite : \(A^n\to\begin{pmatrix}\frac52&1\\-\frac{15}4&-\frac32\end{pmatrix}\) (projecteur sur \(\operatorname{Vect}(e_1)\) parallèlement à \(\operatorname{Vect}(e_2)\)).</p>
+
+        <p class="q">3) Suites réelles telles que \(\begin{cases}x_{n+1}=2x_n+\frac23y_n\\y_{n+1}=-\frac52x_n-\frac23y_n\end{cases}\)</p>
+        <p>En posant \(X_n=\begin{pmatrix}x_n\\y_n\end{pmatrix}\) : \(X_{n+1}=AX_n\), donc \(X_n=A^nX_0\) (récurrence immédiate), avec \(X_0=(x_0,y_0)\in\mathbb R^2\) quelconque.
+        Les suites solutions sont donc en bijection avec les conditions initiales \((x_0,y_0)\in\mathbb R^2\).</p>
+        <p>Forme explicite en développant \(A^nX_0\) :</p>
+        \[ x_n=\Big(\tfrac52x_0+y_0\Big)-\Big(\tfrac32x_0+y_0\Big)3^{-n},\qquad
+        y_n=-\Big(\tfrac{15}4x_0+\tfrac32y_0\Big)+\Big(\tfrac{15}4x_0+\tfrac52y_0\Big)3^{-n}. \]
+        <p>Forme géométrique plus parlante : décomposer \(X_0=a\,e_1+b\,e_2\) (\((a,b)\) coordonnées de \(X_0\) dans \(\mathcal B'\)). Comme
+        \(f(e_1)=e_1\) et \(f(e_2)=\tfrac13e_2\), on a \(X_n=a\,e_1+b\,3^{-n}e_2\) :</p>
+        <div class="res">\[ \boxed{\ \begin{cases}x_n=-2a-2b\,3^{-n}\\ y_n=3a+5b\,3^{-n}\end{cases}\quad(a,b)\in\mathbb R^2\ } \]
+        L'ensemble des suites solutions est un plan vectoriel de dimension 2 (\(\mathbb R\)-ev engendré par la suite constante \((-2,3)\) et la suite géométrique \(3^{-n}(-2,5)\)) ; elles convergent toutes vers \((-2a,\,3a)\).</div>
+        <p>Vérification : \(X_{n+1}=AX_n=a\,Ae_1+b\,3^{-n}Ae_2=a\,e_1+b\,3^{-n}\cdot\tfrac13e_2=a\,e_1+b\,3^{-(n+1)}e_2\) ✓.</p>
+      </div>
+    </div>
+
+    <div class="note"><b>Exercice 10.</b> Son énoncé commence en bas de la page 3 du scan et se poursuit page 4 : il n'est pas traité
+    dans cette première passe (priorité : pages 1 à 3). Le cours du chapitre 3 (pages 5 à 20 du même PDF : rang, matrice d'une
+    application linéaire, opérations, changement de base, matrices semblables) viendra compléter cette page.</div>
+  </section>
+
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Fichier original lié à ce chapitre. Cliquez pour ouvrir.</p>
+    <div class="docs-group">
+      <h3>TD3 + cours du chapitre 3 (L. Graissot)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="2026-10-05_scan-TD3-et-cours-ch3.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Scan TD3 + cours Ch3 — 20 p.</span><span class="badge">p.1 → 4 = TD3 · p.5 → 20 = cours</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Cursus AM2 · Mathématiques · L. Graissot, 2026-2027. <b>TD3 : exercices 1 → 9 corrigés</b> (pas de corrigé officiel — résolu maison).
+    Voir aussi <a href="ch2-applications-lineaires.html">Ch2 — Applications linéaires</a>.</p>
+  </section>
+
+</main>
+<script src="../assets/gate.js"></script>
+</body>
+</html>
