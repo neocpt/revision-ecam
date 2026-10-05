@@ -16,6 +16,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
   <a href="../index.html#am2">← Accueil</a>
   <span class="spacer"></span>
   <a href="ch1-accouplement-goupille.html">← Ch1</a>
+  <a href="#memo">📌 Fiches mémo</a>
   <a href="#torseurs">Cours / fiche</a>
   <a href="#articulation">TD corrigé</a>
   <a href="#tp">TP + DS</a>
@@ -33,6 +34,12 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
   <div class="toc-mini">
     <b>Sommaire du chapitre</b>
     <ul style="margin:.4rem 0 0">
+      <li><a href="#memo"><b>📌 Fiches mémo (6)</b></a>
+        <ul>
+          <li><a href="#memo">1. Torseurs, Varignon</a> · <a href="#memo-liaisons">2. Les 11 liaisons</a> · <a href="#memo-formules">3. Formules</a></li>
+          <li><a href="#memo-methodes">4. Méthodes</a> · <a href="#memo-associations">5. Série / parallèle</a> · <a href="#memo-resultats">6. Interpréter &amp; résultats</a></li>
+        </ul>
+      </li>
       <li><a href="#torseurs"><b>Cours / fiche</b></a>
         <ul>
           <li><a href="#torseurs">0. Rappels sur les torseurs — Varignon, changement de point/base, exemples</a></li>
@@ -62,6 +69,119 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
       <li><a href="#docs">📂 Documents donnés</a></li>
     </ul>
   </div>
+
+  <!-- ======================= FICHES MÉMO =============================== -->
+  <section class="memo-sheet" id="memo">
+    <div class="memo-head">📌 Fiche mémo 1/6 — Torseurs : définition, Varignon, changement de base</div>
+    <div class="memo-grid">
+      <div class="memo-item"><b>Torseur</b>\(\{T\}=\{\vec R\,;\ \vec M_A\}_A\) : résultante \(\vec R\) (la même partout) + moment \(\vec M_A\) (dépend du point)</div>
+      <div class="memo-item"><b>Torseur cinématique</b>\(\{\mathcal V_{2/1}\}=\{\vec\Omega_{2/1}\,;\ \vec V(A\in2/1)\}_A\) : rotation + vitesse</div>
+      <div class="memo-item"><b>Torseur d'actions transmissibles</b>\(\{\mathcal T_{1\to2}\}=\{\vec R\,;\ \vec M_A\}_A\) : force + moment</div>
+      <div class="memo-item"><b>Varignon (changement de point)</b>\(\vec M_B=\vec M_A+\vec{BA}\wedge\vec R\) — \(\vec R\) ne change jamais</div>
+      <div class="memo-item"><b>Varignon en cinématique</b>\(\vec V(B\in S)=\vec V(A\in S)+\vec\Omega_S\wedge\vec{AB}\)</div>
+      <div class="memo-item"><b>Cas \(\vec R=\vec 0\)</b>le moment est identique en tout point (torseur couple) : rien à transporter</div>
+      <div class="memo-item"><b>Changement de base</b>on tourne \(\vec R\) <i>et</i> \(\vec M_A\) avec les mêmes formules de projection : \(\vec y_2=\cos\theta\,\vec y_1+\sin\theta\,\vec z_1\), \(\vec z_2=-\sin\theta\,\vec y_1+\cos\theta\,\vec z_1\)</div>
+      <div class="memo-item"><b>Point ≠ base</b>changer de point et changer de base sont <b>deux opérations indépendantes</b></div>
+      <div class="memo-item"><b>Complémentarité</b>cinématique et statique d'une liaison : jamais de composante non nulle sur le même ddl, donc \(\text{ddl}+\text{inconnues statiques}=6\)</div>
+      <div class="memo-item method"><b>Transporter un torseur</b>1) écrire \(\vec{BA}\) dans la base de travail ; 2) calculer \(\vec{BA}\wedge\vec R\) ; 3) l'ajouter à \(\vec M_A\) ; 4) recopier \(\vec R\) tel quel</div>
+      <div class="memo-item method"><b>Vérifier un torseur</b>toute composante nulle dans le torseur cinématique doit être libre (non nulle) dans le torseur d'actions, et inversement</div>
+    </div>
+  </section>
+
+  <section class="memo-sheet" id="memo-liaisons">
+    <div class="memo-head">📌 Fiche mémo 2/6 — Les 11 liaisons usuelles (ddl · inconnues · torseurs en \(O\), axe \(\vec x\))</div>
+    <div class="memo-grid">
+      <div class="memo-item"><b>Encastrement</b>ddl 0 · inc. 6<br>\(\mathcal V=\{\vec0;\vec0\}\)<br>\(\mathcal T=\{X\vec x+Y\vec y+Z\vec z;\ L\vec x+M\vec y+N\vec z\}\)</div>
+      <div class="memo-item"><b>Pivot</b>ddl 1 · inc. 5<br>\(\mathcal V=\{\omega_x\vec x;\vec0\}\)<br>\(\mathcal T=\{X\vec x+Y\vec y+Z\vec z;\ M\vec y+N\vec z\}\)</div>
+      <div class="memo-item"><b>Glissière</b>ddl 1 · inc. 5<br>\(\mathcal V=\{\vec0;v_x\vec x\}\)<br>\(\mathcal T=\{Y\vec y+Z\vec z;\ L\vec x+M\vec y+N\vec z\}\)</div>
+      <div class="memo-item"><b>Hélicoïdale (pas \(p\))</b>ddl 1 couplé · inc. 5<br>\(\mathcal V=\{\omega_x\vec x;\tfrac p{2\pi}\omega_x\vec x\}\)<br>\(\mathcal T=\{X\vec x+Y\vec y+Z\vec z;\ \tfrac p{2\pi}X\vec x+M\vec y+N\vec z\}\)</div>
+      <div class="memo-item"><b>Pivot glissant</b>ddl 2 · inc. 4<br>\(\mathcal V=\{\omega_x\vec x;v_x\vec x\}\)<br>\(\mathcal T=\{Y\vec y+Z\vec z;\ M\vec y+N\vec z\}\)</div>
+      <div class="memo-item"><b>Sphérique à doigt</b>ddl 2 · inc. 4<br>\(\mathcal V=\{\omega_y\vec y+\omega_z\vec z;\vec0\}\)<br>\(\mathcal T=\{X\vec x+Y\vec y+Z\vec z;\ L\vec x\}\)</div>
+      <div class="memo-item"><b>Appui plan (normale \(\vec x\))</b>ddl 3 · inc. 3<br>\(\mathcal V=\{\omega_x\vec x;v_y\vec y+v_z\vec z\}\)<br>\(\mathcal T=\{X\vec x;\ M\vec y+N\vec z\}\)</div>
+      <div class="memo-item"><b>Sphérique (rotule)</b>ddl 3 · inc. 3<br>\(\mathcal V=\{\vec\Omega;\vec0\}\)<br>\(\mathcal T=\{X\vec x+Y\vec y+Z\vec z;\ \vec 0\}\)</div>
+      <div class="memo-item"><b>Linéaire annulaire</b>ddl 4 · inc. 2<br>\(\mathcal V=\{\vec\Omega;v_x\vec x\}\)<br>\(\mathcal T=\{Y\vec y+Z\vec z;\ \vec0\}\)</div>
+      <div class="memo-item"><b>Linéaire rectiligne (ligne \(\vec x\), normale \(\vec z\))</b>ddl 4 · inc. 2<br>\(\mathcal V=\{\omega_x\vec x+\omega_z\vec z;v_x\vec x+v_y\vec y\}\)<br>\(\mathcal T=\{Z\vec z;\ M\vec y\}\)</div>
+      <div class="memo-item"><b>Ponctuelle (normale \(\vec z\))</b>ddl 5 · inc. 1<br>\(\mathcal V=\{\vec\Omega;v_x\vec x+v_y\vec y\}\)<br>\(\mathcal T=\{Z\vec z;\ \vec0\}\)</div>
+      <div class="memo-item method"><b>Moyen mnémotechnique</b>plus une liaison bloque, plus elle a d'inconnues statiques : 6 → 5 → 4 → 3 → 2 → 1 pour encastrement → pivot/glissière → pivot glissant → rotule/appui plan → linéaires → ponctuelle</div>
+      <div class="memo-item method"><b>Lire sans calculer</b>\(I_c\) = somme de la colonne « ddl » ; \(I_s\) = somme de la colonne « inconnues » ; inutile d'écrire les torseurs pour ça</div>
+      <div class="memo-item method"><b>Contact → liaison</b>contact long = pivot glissant ; contact court = linéaire annulaire ; ligne = linéaire rectiligne ; point = ponctuelle ; face plane = appui plan</div>
+    </div>
+  </section>
+
+  <section class="memo-sheet" id="memo-formules">
+    <div class="memo-head">📌 Fiche mémo 3/6 — Vocabulaire &amp; formules à connaître par cœur</div>
+    <div class="memo-grid">
+      <div class="memo-item"><b>\(N_P\)</b>nombre de pièces (<b>bâti inclus</b>)</div>
+      <div class="memo-item"><b>\(N_L\)</b>nombre de liaisons (arêtes du graphe)</div>
+      <div class="memo-item"><b>\(\gamma\) (cyclomatique)</b>\(\gamma=N_L-N_P+1\) = nombre de boucles indépendantes (à compter sur le graphe)</div>
+      <div class="memo-item"><b>\(I_c\)</b>inconnues cinématiques = \(\sum\) des ddl des liaisons</div>
+      <div class="memo-item"><b>\(I_s\)</b>inconnues statiques = \(\sum\) des inconnues des liaisons</div>
+      <div class="memo-item"><b>\(E_c\)</b>équations de fermeture cinématique : \(E_c=6\gamma\) (spatial) · \(3\gamma\) (plan)</div>
+      <div class="memo-item"><b>\(E_s\)</b>équations de la statique : \(E_s=6(N_P-1)\) (spatial) · \(3(N_P-1)\) (plan) — on n'isole jamais le bâti</div>
+      <div class="memo-item"><b>Mobilité (cinématique)</b>\(m=I_c-rg[E_c]\)</div>
+      <div class="memo-item"><b>Hyperstatisme (cinématique)</b>\(h=E_c-rg[E_c]\)</div>
+      <div class="memo-item"><b>Mobilité (statique)</b>\(m=E_s-rg[E_s]\)</div>
+      <div class="memo-item"><b>Hyperstatisme (statique)</b>\(h=I_s-rg[E_s]\)</div>
+      <div class="memo-item"><b>Utile + interne</b>\(m=m_u+m_i\) : \(m_u\) = lois entrée/sortie voulues ; \(m_i\) = mouvements parasites (rotation propre d'un galet, d'un piston…)</div>
+      <div class="memo-item"><b>🐭 Mickey</b>\(\boxed{h=m-I_c+E_c}\) (cinématique)</div>
+      <div class="memo-item"><b>⚽ Messi</b>\(\boxed{h=m-E_s+I_s}\) (statique)</div>
+      <div class="memo-item"><b>Cohérence</b>\(I_c-E_c=E_s-I_s\) : les deux approches donnent le même \(m\) et le même \(h\)</div>
+      <div class="memo-item"><b>Rang</b>\(rg[E]\) = nombre d'équations réellement indépendantes ; une équation \(0=0\) ou redondante n'est <b>pas</b> comptée</div>
+    </div>
+  </section>
+
+  <section class="memo-sheet" id="memo-methodes">
+    <div class="memo-head">📌 Fiche mémo 4/6 — Méthodes condensées (à dérouler dans l'ordre)</div>
+    <div class="memo-grid">
+      <div class="memo-item method"><b>Calculer \(h\) — méthode complète</b>graphe → \(\gamma\) à l'œil → \(E_c=6\gamma\) → \(I_c\) par le tableau → fermeture sur 6 composantes → rang → \(m=I_c-rg\) → Mickey → vérifier \(h\ge0\) entier</div>
+      <div class="memo-item method"><b>Calculer \(h\) — raccourci</b>si \(m\) se voit à l'œil (jeu du mécanisme réel) : \(h=m-I_c+E_c\) directement, sans aucun rang</div>
+      <div class="memo-item method"><b>Trouver \(m\) à l'œil</b>bloquer l'entrée, compter ce qui bouge encore (rotation propre, glissement parasite) → \(m_i\) ; ajouter les entrées pilotables → \(m_u\)</div>
+      <div class="memo-item method"><b>Équation « \(0=0\) »</b>ne compte pas dans le rang : c'est elle qui fabrique les degrés d'hyperstatisme</div>
+      <div class="memo-item method"><b>Équation « \(0=x\neq0\) »</b>impossible → erreur de modèle (liaison mal choisie, torseur mal transporté)</div>
+      <div class="memo-item method"><b>Double vérification</b>refaire avec Messi : \(E_s\), \(I_s\), \(h=m-E_s+I_s\) doit redonner le même entier</div>
+      <div class="memo-item method"><b>Méthode « intuitive »</b>fermer la boucle à la main : chaque petit défaut (\(d\theta\), \(dD\)) qu'aucune liaison n'absorbe = 1 degré de \(h\)</div>
+      <div class="memo-item method"><b>Inconnues hyperstatiques</b>en statique, ce sont les composantes qu'on ne peut pas calculer (ex. pompe : les moments \(L_O,L_E,L_D\) hors du plan de fonctionnement)</div>
+      <div class="memo-item method"><b>Plan ou spatial ?</b>plan : \(E_c=3\gamma\) et liaisons planes ; spatial : \(E_c=6\gamma\). Le spatial donne un \(h\) plus grand (il compte parallélisme et planéité)</div>
+    </div>
+  </section>
+
+  <section class="memo-sheet" id="memo-associations">
+    <div class="memo-head">📌 Fiche mémo 5/6 — Association de liaisons (série / parallèle)</div>
+    <div class="memo-grid">
+      <div class="memo-item"><b>Série (chaîne ouverte)</b>1 → 2 → 3 : un solide commun entre deux liaisons, extrémités différentes</div>
+      <div class="memo-item"><b>Série — cinématique</b>on <b>somme</b> les torseurs, au même point : \(\{\mathcal V_{3/1}\}=\{\mathcal V_{3/2}\}+\{\mathcal V_{2/1}\}\)</div>
+      <div class="memo-item"><b>Série — statique</b>on <b>égalise</b> : \(\{\mathcal T_{1\to3}\}=\{\mathcal T_{1\to2}\}=\{\mathcal T_{2\to3}\}\)</div>
+      <div class="memo-item"><b>Parallèle</b>même paire de solides reliée par plusieurs liaisons (ex. 2 colonnes ↔ 1 coulisseau)</div>
+      <div class="memo-item"><b>Parallèle — cinématique</b>on <b>égalise</b> les torseurs, réduits au même point (Varignon)</div>
+      <div class="memo-item"><b>Parallèle — statique</b>on <b>somme</b> les torseurs d'actions, au même point</div>
+      <div class="memo-item"><b>Chaîne ouverte = isostatique</b>solides d'extrémité différents ⇒ \(h=0\) <b>toujours</b>, sans calcul</div>
+      <div class="memo-item"><b>Chaîne fermée / parallèle</b>peut être hyperstatique : il faut calculer \(h\)</div>
+      <div class="memo-item"><b>Double guidage cylindrique</b>2 pivots glissants parallèles ⇒ glissière ; \(m=1\), \(I_c=4\), \(I_s=8\) ⇒ \(\boxed{h=3}\) (2 parallélismes + 1 entraxe)</div>
+      <div class="memo-item"><b>Pivot + encastrement (série)</b>tube / axe / tige ⇒ pivot équivalent, \(h=0\)</div>
+      <div class="memo-item method"><b>Même point, même base</b>avant d'identifier deux torseurs, les écrire au même point (Varignon) et dans la même base ; sinon l'identification est fausse</div>
+      <div class="memo-item method"><b>Double guidage : pourquoi une glissière</b>le terme \(\omega e=0\) avec \(e\neq0\) force \(\omega=0\) : la rotation est bloquée par l'entraxe des colonnes</div>
+    </div>
+  </section>
+
+  <section class="memo-sheet" id="memo-resultats">
+    <div class="memo-head">📌 Fiche mémo 6/6 — Interpréter \(h\), isostatiser, résultats des exemples à connaître</div>
+    <div class="memo-grid">
+      <div class="memo-item"><b>\(h=0\) — isostatique</b>pas de contrainte de montage · économique · mais souple</div>
+      <div class="memo-item"><b>\(h=n>0\) — hyperstatique</b>\(n\) conditions géométriques à respecter · rigide · coûteux (cotation fine)</div>
+      <div class="memo-item"><b>\(h<0\) — hypostatique</b>erreur de modèle ou mécanisme mal conçu</div>
+      <div class="memo-item"><b>\(m=0\)</b>mécanisme bloqué (structure) ; \(m\ge1\) : mécanisme mobile</div>
+      <div class="memo-item"><b>Mobile ≠ isostatique</b>\(m\) et \(h\) sont deux questions indépendantes (un parallélogramme est mobile <i>et</i> hyperstatique en 3D)</div>
+      <div class="memo-item"><b>Autocontraintes</b>un \(h>0\) engendre des efforts internes au montage <b>même sans charge</b> : problème structurel, pas d'efforts extérieurs</div>
+      <div class="memo-item"><b>Rendre isostatique</b>ajouter \(h\) ddl : jeu, solide intermédiaire, rotulage, joint d'Oldham/Cardan, roulement à rotule</div>
+      <div class="memo-item"><b>Effet d'un ddl ajouté</b>\(I_c\) augmente de \(k\) ⇒ \(h\) diminue de \(k\) (si \(m\) inchangé)</div>
+      <div class="memo-item"><b>Manchon rigide, 2 arbres</b>2 pivots + 2 encastrements : \(m=1\), \(I_c=2\) ⇒ \(\boxed{h=5}\) ; remède : accouplement flexible (Oldham : goupille + rainure)</div>
+      <div class="memo-item"><b>Pompe à piston radial</b>pivot + pivot glissant + linéaire rectiligne : \(I_c=7\), \(m=2\), \(rg=5\) ⇒ \(\boxed{h=1}\) ; \(C_m=eF_p\cos\alpha\) ; défaut gênant \(\theta_x\) ; remède : roulement à rotule → ponctuelle, \(I_c=8\) ⇒ \(h=0\)</div>
+      <div class="memo-item"><b>Plaquettes (TP)</b>plan : 4 plaq. \(h=0\) (\(m=1\)), 5 plaq. \(h=0\) (rigide), 6 plaq. \(h=1\) (entraxes des diagonales égaux) ; spatial : 3 · 6 · 10</div>
+      <div class="memo-item"><b>Hydro-nettoyeur (DS)</b>contact ponctuel : \(I_c=9\), \(m=3\) ⇒ \(h=0\) ; linéaire rectiligne : \(I_c=8\), \(m=2\) ⇒ \(h=0\) ; \(k_{min}=\dfrac{m_3R\tan\alpha\,\Omega^2}{e}\approx1{,}6\) N/mm</div>
+      <div class="memo-item"><b>Goupille (Ch1)</b>poulie large : pivot d'axe \(\vec z\) qui transmet le couple (version retenue) ; poulie mince : rotule, ne transmet pas le couple</div>
+      <div class="memo-item method"><b>Réflexe d'examen</b>1) graphe ; 2) \(\gamma\), \(E_c\) ; 3) \(I_c\) ; 4) \(m\) ; 5) Mickey ; 6) interpréter (quelles conditions géométriques ?) ; 7) proposer un remède</div>
+    </div>
+  </section>
 
   <div style="margin:2.2rem 0 .4rem;padding:.7rem 1rem;border-left:5px solid var(--subject);background:#f8fafc;border-radius:8px"><b style="color:var(--subject-ink)">Cours / fiche</b> — Fiche formulaire — Mobilité &amp; Degré d'hyperstatisme</div>
 
