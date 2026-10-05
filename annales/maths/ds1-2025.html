@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DS1 Maths 2025 — Révision ECAM</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-math">
+
+<div class="topbar">
+  <a href="../index.html">← Annales</a>
+  <span class="spacer"></span>
+  <a href="#ex1">1</a><a href="#ex2">2</a><a href="#ex3">3</a><a href="#ex4">4</a><a href="#ex5">5</a><a href="#ex6">6</a><a href="#ex7">7</a>
+  <a href="#ex8">8</a><a href="#ex9">9</a><a href="#ex10">10</a><a href="#ex11">11</a><a href="#ex12">12</a><a href="#ex13">13</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Annales · Maths AM1 · DS1 (09/10/2025) promo P2030</span>
+  <h1 class="title">DS1 de maths de l'année dernière — corrigé complet</h1>
+  <p class="lead">Sujet du DS1 d'A&amp;M1 (09.10.2025, <b>2 h, sans document ni calculatrice</b>) : logique, ensembles, applications, résolution d'équations et d'inéquations, partie entière, bornes.
+  13 exercices. <b>L'énoncé de chaque exercice (image) est juste au-dessus de sa correction.</b> Il n'y avait pas de corrigé officiel : tout est rédigé et vérifié ici.
+  📄 <a href="documents/DS1_2025_sujet.pdf">Sujet original (PDF)</a></p>
+
+  <div class="toc-mini"><b>Sommaire</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#ex1">1 — Négations</a> · <a href="#ex2">2 — Vrai/faux avec quantificateurs</a> · <a href="#ex3">3 — Table de vérité</a> · <a href="#ex4">4 — Contraposée</a></li>
+      <li><a href="#ex5">5 — Opérations sur des ensembles</a> · <a href="#ex6">6 — Opération ⊙</a> · <a href="#ex7">7 — Produit cartésien</a></li>
+      <li><a href="#ex8">8 — Injectivité/surjectivité</a> · <a href="#ex9">9 — Homographie</a> · <a href="#ex10">10 — Application de ℝ²</a></li>
+      <li><a href="#ex11">11 — Équations et inéquations</a> · <a href="#ex12">12 — Partie entière</a> · <a href="#ex13">13 — Max/sup/min/inf</a></li>
+    </ul>
+  </div>
+
+  <section class="block" id="ex1">
+    <h2>Exercice 1 — Négations</h2>
+    <figure><img src="enonces/ex1.png" alt="Énoncé exercice 1"></figure>
+    <div class="exo-card"><div class="exo-head">✏️ Nier des propositions <span class="diff">♦</span></div><div class="exo-body">
+      <div class="method"><b>Règles.</b> \(\overline{P\Rightarrow Q}\equiv P\wedge\overline Q\) ; \(\overline{P\Leftrightarrow Q}\equiv (P\wedge\overline Q)\vee(Q\wedge\overline P)\) ; \(\overline{P\wedge Q}\equiv\overline P\vee\overline Q\) ; \(\overline{\exists}=\forall\), \(\overline{\forall}=\exists\).</div>
+      <p class="q">(a) « Si je réponds juste, alors je n'aurai pas 0 »</p>
+      <p>Forme \(P\Rightarrow Q\) avec \(P\) = « je réponds juste », \(Q\) = « je n'aurai pas 0 ». La négation est \(P\wedge\overline Q\) :</p>
+      <div class="res">Je réponds juste <b>et</b> j'ai 0.</div>
+      <p class="q">(b) « 2 est pair si et seulement si 5 est impair »</p>
+      <p>\(P\) = « 2 est pair », \(Q\) = « 5 est impair ». Négation : \((P\wedge\overline Q)\vee(Q\wedge\overline P)\).</p>
+      <div class="res">(2 est pair <b>et</b> 5 est pair) <b>ou</b> (5 est impair <b>et</b> 2 est impair). Autrement dit : « 2 est pair ⇔ 5 est pair ».</div>
+      <div class="note">Ici \(P\) et \(Q\) sont vraies, l'équivalence initiale est donc vraie et sa négation est fausse : les deux morceaux de la négation sont bien faux (5 n'est pas pair, 2 n'est pas impair).</div>
+      <p class="q">(c) « Si \((x^2+y^2\ge1)\) alors \(((f(x)\ge0)\) et \((f(y)<0))\) »</p>
+      <p>Négation de \(P\Rightarrow(Q_1\wedge Q_2)\) : \(P\wedge\overline{Q_1\wedge Q_2}=P\wedge(\overline{Q_1}\vee\overline{Q_2})\).</p>
+      <div class="res">\(x^2+y^2\ge1\) <b>et</b> \((f(x)&lt;0\) <b>ou</b> \(f(y)\ge0)\).</div>
+      <p class="q">(d) \(\exists x\in\mathbb R,\ \forall y\in\mathbb R,\ (x\ge y\Rightarrow x-y=1)\)</p>
+      <p>On échange les quantificateurs, puis on nie \(P\Rightarrow Q\) en \(P\wedge\overline Q\) :</p>
+      <div class="res">\(\forall x\in\mathbb R,\ \exists y\in\mathbb R,\ (x\ge y\ \text{et}\ x-y\neq1)\).</div>
+    </div></div>
+  </section>
+
+  <section class="block" id="ex2">
+    <h2>Exercice 2 — Vrai ou faux ?</h2>
+    <figure><img src="enonces/ex2.png" alt="Énoncé exercice 2"></figure>
+    <div class="exo-card"><div class="exo-head">✏️ Quantificateurs et condition suffisante <span class="diff">♦♦</span></div><div class="exo-body">
+      <p class="q">(a) \(\exists y\in\mathbb R,\ \forall x\in\mathbb R,\ (x-y)^2=x^2+y^2\)</p>
+      <p>On développe : \((x-y)^2=x^2-2xy+y^2\). L'égalité équivaut donc à \(-2xy=0\), soit \(xy=0\).</p>
+      <p>Le quantificateur \(\exists y\) vient en premier : il faut un <b>seul</b> \(y\) qui marche pour <b>tous</b> les \(x\). Avec \(y=0\), \(xy=0\) pour tout \(x\) ; vérification : \((x-0)^2=x^2=x^2+0^2\) ✓.</p>
+      <div class="res">VRAIE (témoin : \(y=0\)).</div>
+      <div class="warnbox">Piège : un \(y\neq0\) ne marcherait pas (il faudrait \(x=0\) seulement). C'est bien le \(y=0\), indépendant de \(x\), qui rend la proposition vraie.</div>
+      <p class="q">(b) « Une condition suffisante pour \(x(y-2)\le0\) est \(x+y=2\) »</p>
+      <p>Il faut montrer l'implication \(x+y=2\Rightarrow x(y-2)\le0\). Si \(x+y=2\) alors \(y-2=-x\), donc
+      \[x(y-2)=x\cdot(-x)=-x^2\le0.\]</p>
+      <div class="res">VRAIE. (« Condition suffisante » = \(x+y=2\) ⇒ \(x(y-2)\le0\) ; la réciproque, elle, est fausse : \(x=0,\ y=5\).)</div>
+    </div></div>
+  </section>
+
+  <section class="block" id="ex3">
+    <h2>Exercice 3 — Table de vérité</h2>
+    <figure><img src="enonces/ex3.png" alt="Énoncé exercice 3"></figure>
+    <div class="exo-card"><div class="exo-head">✏️ \((P\Rightarrow R)\wedge(\overline Q\vee P)\) <span class="diff">♦</span></div><div class="exo-body">
+      <p>8 lignes (3 variables). On calcule les colonnes intermédiaires (V = vrai, F = faux). Rappel : \(P\Rightarrow R\) n'est fausse que si \(P\) vrai et \(R\) faux.</p>
+      <div class="overflow"><table>
+        <tr><th>P</th><th>Q</th><th>R</th><th>\(P\Rightarrow R\)</th><th>\(\overline Q\)</th><th>\(\overline Q\vee P\)</th><th>\((P\Rightarrow R)\wedge(\overline Q\vee P)\)</th></tr>
+        <tr><td>V</td><td>V</td><td>V</td><td>V</td><td>F</td><td>V</td><td><b>V</b></td></tr>
+        <tr><td>V</td><td>V</td><td>F</td><td>F</td><td>F</td><td>V</td><td><b>F</b></td></tr>
+        <tr><td>V</td><td>F</td><td>V</td><td>V</td><td>V</td><td>V</td><td><b>V</b></td></tr>
+        <tr><td>V</td><td>F</td><td>F</td><td>F</td><td>V</td><td>V</td><td><b>F</b></td></tr>
+        <tr><td>F</td><td>V</td><td>V</td><td>V</td><td>F</td><td>F</td><td><b>F</b></td></tr>
+        <tr><td>F</td><td>V</td><td>F</td><td>V</td><td>F</td><td>F</td><td><b>F</b></td></tr>
+        <tr><td>F</td><td>F</td><td>V</td><td>V</td><td>V</td><td>V</td><td><b>V</b></td></tr>
+        <tr><td>F</td><td>F</td><td>F</td><td>V</td><td>V</td><td>V</td><td><b>V</b></td></tr>
+      </table></div>
+      <div class="res">Colonne finale : V, F, V, F, F, F, V, V.</div>
+      <div class="note">Contrôle : l'expression est vraie ⇔ (\(P\) vrai et \(R\) vrai) ou (\(P\) faux et \(Q\) faux), soit \((P\wedge R)\vee(\overline P\wedge\overline Q)\) : lignes 1, 3, 7, 8 ✓.</div>
+    </div></div>
+  </section>
+
+  <section class="block" id="ex4">
+    <h2>Exercice 4 — Raisonnement par contraposée</h2>
+    <figure><img src="enonces/ex4.png" alt="Énoncé exercice 4"></figure>
+    <div class="exo-card"><div class="exo-head">✏️ \(a^2+3\) non divisible par 2 ⇒ \(a\) pair <span class="diff">♦♦</span></div><div class="exo-body">
+      <p><b>Contraposée.</b> \((P\Rightarrow Q)\equiv(\overline Q\Rightarrow\overline P)\). Ici \(P\) = « \(a^2+3\) non divisible par 2 », \(Q\) = « \(a\) pair ». On montre donc :</p>
+      \[a\ \text{impair}\ \Longrightarrow\ a^2+3\ \text{divisible par }2.\]
+      <p>Soit \(a\in\mathbb Z\) impair : il existe \(k\in\mathbb Z\) tel que \(a=2k+1\). Alors
+      \[a^2+3=(2k+1)^2+3=4k^2+4k+1+3=4k^2+4k+4=2\,(2k^2+2k+2).\]
+      Or \(2k^2+2k+2\in\mathbb Z\), donc \(a^2+3\) est un multiple de 2.</p>
+      <div class="res">Contraposée démontrée ⇒ l'implication de départ est vraie. ∎</div>
+    </div></div>
+  </section>
+
+  <section class="block" id="ex5">
+    <h2>Exercice 5 — Opérations sur des ensembles</h2>
+    <figure><img src="enonces/ex5.png" alt="Énoncé exercice 5"></figure>
+    <div class="exo-card"><div class="exo-head">✏️ \(X=[-3,3]\), \(Y=\{|x|&gt;2\}\), \(Z=\mathbb N\) <span class="diff">♦♦</span></div><div class="exo-body">
+      <p><b>Cadre.</b> \(|x|&gt;2\Leftrightarrow x&lt;-2\) ou \(x&gt;2\), donc \(Y=]-\infty,-2[\,\cup\,]2,+\infty[\) et \(Y^c=[-2,2]\). On travaille dans \(\mathbb R\).</p>
+      <p class="q">(a) \(A=X\cup Y\)</p>
+      <p>\(Y\) couvre \(]-\infty,-2[\) et \(]2,+\infty[\) ; \(X=[-3,3]\) couvre le reste, de \(-3\) à \(3\) (donc tout \([-2,2]\), qui manque à \(Y\)). Les morceaux se recollent : \(]-\infty,-3[\subset Y\), \([-3,3]=X\), \(]3,+\infty[\subset Y\).</p>
+      <div class="res">\(A=\mathbb R\).</div>
+      <p class="q">(b) \(B=X\cap(Y^c\cap Z)\)</p>
+      <p>\(Y^c\cap\mathbb N=[-2,2]\cap\mathbb N=\{0,1,2\}\) (les entiers naturels de ce segment). Tous sont dans \(X\).</p>
+      <div class="res">\(B=\{0,1,2\}\).</div>
+      <p class="q">(c) \(C=X^c\cup(Y\cup Z^c)\)</p>
+      <p>Lois de De Morgan : \(Y\cup Z^c=(Y^c\cap Z)^c=\{0,1,2\}^c=\mathbb R\setminus\{0,1,2\}\). Ensuite \(X^c=]-\infty,-3[\cup]3,+\infty[\subset Y\), donc déjà inclus dans \(\mathbb R\setminus\{0,1,2\}\) : il n'ajoute rien.</p>
+      <div class="res">\(C=\mathbb R\setminus\{0,1,2\}\).</div>
+    </div></div>
+  </section>
+
+  <section class="block" id="ex6">
+    <h2>Exercice 6 — L'opération \(A\odot B=(A\cap B)^c\)</h2>
+    <figure><img src="enonces/ex6.png" alt="Énoncé exercice 6"></figure>
+    <div class="exo-card"><div class="exo-head">✏️ Tout exprimer avec une seule opération <span class="diff">♦♦♦</span></div><div class="exo-body">
+      <p class="q">(a) \(A^c\) avec \(\odot\)</p>
+      <p>\(A\odot A=(A\cap A)^c=A^c\).</p>
+      <div class="res">\(A^c=A\odot A\).</div>
+      <p class="q">(b) \((A\odot A)\odot(B\odot B)\)</p>
+      <p>D'après (a), \(A\odot A=A^c\) et \(B\odot B=B^c\). Donc
+      \[(A\odot A)\odot(B\odot B)=A^c\odot B^c=(A^c\cap B^c)^c=(A\cup B)^{cc}=A\cup B\]
+      (De Morgan : \(A^c\cap B^c=(A\cup B)^c\)).</p>
+      <div class="res">\((A\odot A)\odot(B\odot B)=A\cup B\).</div>
+      <p class="q">(c) \(A\cup B^c\) avec \(A\), \(B\) et \(\odot\) uniquement</p>
+      <p>\(A\cup B^c=(A^c\cap B)^c\) (De Morgan). Or \((A^c\cap B)^c=A^c\odot B\), et \(A^c=A\odot A\) :</p>
+      <div class="res">\(A\cup B^c=(A\odot A)\odot B\).</div>
+      <div class="note">Vérification : \((A\odot A)\odot B=(A^c\cap B)^c=A\cup B^c\) ✓.</div>
+    </div></div>
+  </section>
+
+  <section class="block" id="ex7">
+    <h2>Exercice 7 — Produit cartésien</h2>
+    <figure><img src="enonces/ex7.png" alt="Énoncé exercice 7"></figure>
+    <div class="exo-card"><div class="exo-head">✏️ \(A=(\llbracket1,3\rrbracket\,\Delta\,\llbracket0,6\rrbracket)\times[1,2]\) <span class="diff">♦♦</span></div><div class="exo-body">
+      <p><b>Définitions.</b> \(\llbracket a,b\rrbracket\) = entiers de \(a\) à \(b\). \(E\,\Delta\,F=(E\setminus F)\cup(F\setminus E)\) (différence symétrique : éléments dans l'un des deux ensembles <b>seulement</b>).</p>
+      <p>\(\llbracket1,3\rrbracket=\{1,2,3\}\) et \(\llbracket0,6\rrbracket=\{0,1,2,3,4,5,6\}\). Comme \(\{1,2,3\}\subset\{0,\dots,6\}\), on a \(E\setminus F=\varnothing\) et \(F\setminus E=\{0,4,5,6\}\).</p>
+      \[\llbracket1,3\rrbracket\,\Delta\,\llbracket0,6\rrbracket=\{0,4,5,6\}.\]
+      <div class="res">\(A=\{0,4,5,6\}\times[1,2]=\{(x,y)\mid x\in\{0,4,5,6\},\ 1\le y\le2\}\).</div>
+      <p><b>Représentation :</b> 4 segments verticaux (fermés : extrémités incluses), d'abscisses 0, 4, 5, 6 et d'ordonnées de 1 à 2. Ce n'est <b>pas</b> un rectangle : seules les abscisses entières de l'ensemble sont présentes.</p>
+      <figure><svg viewBox="0 0 460 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Produit cartésien A">
+<line x1="50" y1="35" x2="50" y2="200" stroke="#cbd5e1"/>
+<text x="50" y="216" text-anchor="middle" font-size="12" fill="currentColor">0</text>
+<line x1="105" y1="35" x2="105" y2="200" stroke="#cbd5e1"/>
+<text x="105" y="216" text-anchor="middle" font-size="12" fill="currentColor">1</text>
+<line x1="160" y1="35" x2="160" y2="200" stroke="#cbd5e1"/>
+<text x="160" y="216" text-anchor="middle" font-size="12" fill="currentColor">2</text>
+<line x1="215" y1="35" x2="215" y2="200" stroke="#cbd5e1"/>
+<text x="215" y="216" text-anchor="middle" font-size="12" fill="currentColor">3</text>
+<line x1="270" y1="35" x2="270" y2="200" stroke="#cbd5e1"/>
+<text x="270" y="216" text-anchor="middle" font-size="12" fill="currentColor">4</text>
+<line x1="325" y1="35" x2="325" y2="200" stroke="#cbd5e1"/>
+<text x="325" y="216" text-anchor="middle" font-size="12" fill="currentColor">5</text>
+<line x1="380" y1="35" x2="380" y2="200" stroke="#cbd5e1"/>
+<text x="380" y="216" text-anchor="middle" font-size="12" fill="currentColor">6</text>
+<line x1="435" y1="35" x2="435" y2="200" stroke="#cbd5e1"/>
+<text x="435" y="216" text-anchor="middle" font-size="12" fill="currentColor">7</text>
+<line x1="50" y1="200" x2="435" y2="200" stroke="#cbd5e1"/>
+<text x="42" y="204" text-anchor="end" font-size="12" fill="currentColor">0</text>
+<line x1="50" y1="145" x2="435" y2="145" stroke="#cbd5e1"/>
+<text x="42" y="149" text-anchor="end" font-size="12" fill="currentColor">1</text>
+<line x1="50" y1="90" x2="435" y2="90" stroke="#cbd5e1"/>
+<text x="42" y="94" text-anchor="end" font-size="12" fill="currentColor">2</text>
+<line x1="50" y1="35" x2="435" y2="35" stroke="#cbd5e1"/>
+<text x="42" y="39" text-anchor="end" font-size="12" fill="currentColor">3</text>
+<line x1="50" y1="200" x2="445" y2="200" stroke="currentColor" stroke-width="1.5"/>
+<line x1="50" y1="200" x2="50" y2="25" stroke="currentColor" stroke-width="1.5"/>
+<line x1="50" y1="90" x2="50" y2="145" stroke="#dc2626" stroke-width="4"/>
+<circle cx="50" cy="145" r="4.5" fill="#dc2626"/>
+<circle cx="50" cy="90" r="4.5" fill="#dc2626"/>
+<line x1="270" y1="90" x2="270" y2="145" stroke="#dc2626" stroke-width="4"/>
+<circle cx="270" cy="145" r="4.5" fill="#dc2626"/>
+<circle cx="270" cy="90" r="4.5" fill="#dc2626"/>
+<line x1="325" y1="90" x2="325" y2="145" stroke="#dc2626" stroke-width="4"/>
+<circle cx="325" cy="145" r="4.5" fill="#dc2626"/>
+<circle cx="325" cy="90" r="4.5" fill="#dc2626"/>
+<line x1="380" y1="90" x2="380" y2="145" stroke="#dc2626" stroke-width="4"/>
+<circle cx="380" cy="145" r="4.5" fill="#dc2626"/>
+<circle cx="380" cy="90" r="4.5" fill="#dc2626"/>
+<text x="447" y="204" font-size="13" fill="currentColor">x</text>
+<text x="46" y="21" font-size="13" fill="currentColor">y</text>
+</svg><figcaption>Les 4 segments de \(A\) (points pleins = extrémités appartenant à \(A\)).</figcaption></figure>
+    </div></div>
+  </section>
+
+  <section class="block" id="ex8">
+    <h2>Exercice 8 — Injectivité, surjectivité, bijectivité</h2>
+    <figure><img src="enonces/ex8.png" alt="Énoncé exercice 8"></figure>
+    <div class="exo-card"><div class="exo-head">✏️ \(f:\,]-\infty,-3[\to\mathbb R_+,\ x\mapsto\sqrt{x^2+4x+3}\) <span class="diff">♦♦♦</span></div><div class="exo-body">
+      <p><b>Forme canonique.</b> \(x^2+4x+3=(x+2)^2-1=(x+1)(x+3)\). Pour \(x&lt;-3\), \(x+1&lt;0\) et \(x+3&lt;0\) : le produit est \(&gt;0\), la racine existe (et \(f(x)&gt;0\)).</p>
+      <p class="q">Injectivité</p>
+      <p>Soit \(a,b&lt;-3\) avec \(f(a)=f(b)\). Les deux racines étant égales, leurs carrés aussi : \((a+2)^2-1=(b+2)^2-1\), donc \((a+2)^2=(b+2)^2\), soit \(a+2=\pm(b+2)\). Or \(a+2&lt;-1&lt;0\) et \(b+2&lt;-1&lt;0\) : ils ont le même signe, donc \(a+2=b+2\), soit \(a=b\).</p>
+      <div class="res">\(f\) est injective.</div>
+      <p class="q">Surjectivité sur \(\mathbb R_+\)</p>
+      <p>Cherchons un antécédent de \(0\) : \(f(x)=0\Leftrightarrow(x+1)(x+3)=0\Leftrightarrow x=-1\) ou \(x=-3\). Aucun n'est dans \(]-\infty,-3[\) (\(-3\) est exclu, \(-1&gt;-3\)). Donc \(0\) n'a pas d'antécédent.</p>
+      <div class="res">\(f\) n'est pas surjective, donc <b>pas bijective</b>.</div>
+      <div class="note">Image réelle : \(x\mapsto(x+2)^2-1\) est strictement décroissante sur \(]-\infty,-2]\), de \(+\infty\) (en \(-\infty\)) à \(0\) (en \(-3\), non atteint). Donc \(f(]-\infty,-3[)=\,]0,+\infty[\), et \(f\) devient bijective de \(]-\infty,-3[\) vers \(\mathbb R_+^*\).</div>
+    </div></div>
+  </section>
+
+  <section class="block" id="ex9">
+    <h2>Exercice 9 — Une homographie</h2>
+    <figure><img src="enonces/ex9.png" alt="Énoncé exercice 9"></figure>
+    <div class="exo-card"><div class="exo-head">✏️ \(f(x)=\dfrac{x-3}{2x-5}\) sur \(\mathbb R\setminus\{5/2\}\) <span class="diff">♦♦</span></div><div class="exo-body">
+      <p class="q">(a) Ensemble d'arrivée et \(f^{-1}\)</p>
+      <p>Pour \(y\) fixé, on résout \(y=\dfrac{x-3}{2x-5}\) en \(x\ne\frac52\) :
+      \[y(2x-5)=x-3\iff 2xy-5y=x-3\iff x(2y-1)=5y-3.\]
+      Si \(y=\tfrac12\) : \(0=\tfrac52-3=-\tfrac12\), impossible : \(\tfrac12\) n'a pas d'antécédent. Si \(y\neq\tfrac12\) : \(x=\dfrac{5y-3}{2y-1}\), et ce \(x\) est bien \(\ne\tfrac52\) car \(\dfrac{5y-3}{2y-1}=\dfrac52\Leftrightarrow10y-6=10y-5\), faux. Donc chaque \(y\neq\tfrac12\) a exactement un antécédent.</p>
+      <div class="res">Ensemble d'arrivée : \(\mathbb R\setminus\{\tfrac12\}\) ; \(\displaystyle f^{-1}(y)=\frac{5y-3}{2y-1}\).</div>
+      <div class="note">Cohérent avec \(f(x)=\tfrac12-\dfrac{1}{2(2x-5)}\) : la valeur \(\tfrac12\) est l'asymptote horizontale, jamais atteinte.</div>
+      <p class="q">(b) \(f(]0,1[)\)</p>
+      <p>\(f'(x)=\dfrac{(2x-5)-2(x-3)}{(2x-5)^2}=\dfrac{1}{(2x-5)^2}&gt;0\) : \(f\) est strictement croissante et continue sur \(]-\infty,\frac52[\supset\,]0,1[\). L'image d'un intervalle ouvert est donc \(]f(0),f(1)[\) avec \(f(0)=\frac{-3}{-5}=\frac35\) et \(f(1)=\frac{-2}{-3}=\frac23\).</p>
+      <div class="res">\(f(]0,1[)=\left]\tfrac35,\tfrac23\right[\).</div>
+      <p class="q">(c) \(f^{-1}(]1,2[)\)</p>
+      <p>\(f^{-1}(y)=\dfrac52-\dfrac{1}{2(2y-1)}\) (vérification : \(\frac{5(2y-1)-1}{2(2y-1)}=\frac{10y-6}{2(2y-1)}=\frac{5y-3}{2y-1}\) ✓). Pour \(y\in]1,2[\) : \(2y-1\in]1,3[\), donc \(\frac1{2(2y-1)}\in]\frac16,\frac12[\) et
+      \[f^{-1}(y)\in\left]\tfrac52-\tfrac12,\ \tfrac52-\tfrac16\right[=\left]2,\tfrac73\right[.\]</p>
+      <div class="res">\(f^{-1}(]1,2[)=\left]2,\tfrac73\right[\).</div>
+      <div class="note">Contrôle : \(f(2)=\frac{-1}{-1}=1\) et \(f(\frac73)=\frac{-2/3}{-1/3}=2\) ✓.</div>
+    </div></div>
+  </section>
+
+  <section class="block" id="ex10">
+    <h2>Exercice 10 — Une application de \(\mathbb R^2\) dans \(\mathbb R^2\)</h2>
+    <figure><img src="enonces/ex10.png" alt="Énoncé exercice 10"></figure>
+    <div class="exo-card"><div class="exo-head">✏️ \(f(x,y)=(y-2x,\ x-4y)\) <span class="diff">♦♦</span></div><div class="exo-body">
+      <p class="q">(a) \(f\) est bijective</p>
+      <p>Soit \((a,b)\in\mathbb R^2\). On cherche \((x,y)\) tel que \(f(x,y)=(a,b)\), c'est-à-dire
+      \[\begin{cases}y-2x=a\\ x-4y=b\end{cases}.\]
+      De la 1ʳᵉ : \(y=a+2x\). Dans la 2ᵉ : \(x-4a-8x=b\), soit \(-7x=4a+b\), donc \(x=-\dfrac{4a+b}{7}\), puis \(y=a-\dfrac{2(4a+b)}{7}=-\dfrac{a+2b}{7}\).</p>
+      <p>Le système a donc <b>une unique solution</b> pour tout \((a,b)\) (existence ⇒ surjective, unicité ⇒ injective). Vérification : \(y-2x=\frac{-a-2b+8a+2b}{7}=a\) ✓ ; \(x-4y=\frac{-4a-b+4a+8b}{7}=b\) ✓.</p>
+      <div class="res">\(f\) est bijective, \(\displaystyle f^{-1}(a,b)=\left(-\frac{4a+b}{7},\,-\frac{a+2b}{7}\right)\).</div>
+      <p class="q">(b) \(f(\Delta)\) avec \(\Delta=\{(x,y)\mid y+2x=-1\}\)</p>
+      <p>Comme \(f\) est bijective : \((X,Y)\in f(\Delta)\iff f^{-1}(X,Y)\in\Delta\). Avec \(x'=-\frac{4X+Y}{7}\), \(y'=-\frac{X+2Y}{7}\) la condition \(y'+2x'=-1\) devient
+      \[-\frac{X+2Y}{7}-\frac{2(4X+Y)}{7}=-1\iff-\frac{9X+4Y}{7}=-1\iff9X+4Y=7.\]</p>
+      <div class="res">\(f(\Delta)=\{(X,Y)\in\mathbb R^2\mid 9X+4Y=7\}\) (une droite).</div>
+      <div class="note">Contrôle : \((0,-1)\in\Delta\) et \(f(0,-1)=(-1,4)\) ; \(9(-1)+4\cdot4=7\) ✓. Autre point : \((-\frac12,0)\mapsto(1,-\frac12)\) ; \(9-2=7\) ✓.</div>
+    </div></div>
+  </section>
+
+  <section class="block" id="ex11">
+    <h2>Exercice 11 — Équations et inéquations</h2>
+    <figure><img src="enonces/ex11.png" alt="Énoncé exercice 11"></figure>
+    <div class="exo-card"><div class="exo-head">✏️ Racines, valeurs absolues, partie entière <span class="diff">♦♦</span></div><div class="exo-body">
+      <p class="q">(a) \(\sqrt{\dfrac{4+x}{1-x}}=2\)</p>
+      <p><b>Domaine :</b> \(x\ne1\) et \(\frac{4+x}{1-x}\ge0\) ⇒ \(x\in[-4,1[\). Les deux membres étant positifs, on élève au carré (équivalence) : \(4+x=4(1-x)\iff5x=0\iff x=0\), qui est dans le domaine. Vérification : \(\sqrt{4/1}=2\) ✓.</p>
+      <div class="res">\(S=\{0\}\).</div>
+      <p class="q">(b) \(\sqrt{2x+3}\le5\) (une inéquation)</p>
+      <p><b>Domaine :</b> \(2x+3\ge0\iff x\ge-\frac32\). Sur ce domaine, \(\sqrt{\cdot}\) est croissante et les deux côtés sont positifs : \(\sqrt{2x+3}\le5\iff2x+3\le25\iff x\le11\).</p>
+      <div class="res">\(S=\left[-\tfrac32,\ 11\right]\).</div>
+      <p class="q">(c) \(|3x+5|&gt;|-2x+3|\)</p>
+      <p>Les deux membres sont positifs, donc on peut élever au carré : \((3x+5)^2&gt;(-2x+3)^2\). On factorise \(u^2-v^2=(u-v)(u+v)\) :
+      \[\big[(3x+5)-(-2x+3)\big]\big[(3x+5)+(-2x+3)\big]&gt;0\iff(5x+2)(x+8)&gt;0.\]
+      Racines \(-\frac25\) et \(-8\) ; produit de deux facteurs croissants positif à l'extérieur des racines.</p>
+      <div class="res">\(S=\left]-\infty,-8\right[\ \cup\ \left]-\tfrac25,+\infty\right[\).</div>
+      <div class="note">Contrôles : \(x=0\) : \(5&gt;3\) ✓ ; \(x=-1\) : \(2&gt;5\) faux ✓ ; \(x=-10\) : \(25&gt;23\) ✓.</div>
+      <p class="q">(d) \(-4\left\lfloor\dfrac{x+2}{3}\right\rfloor-7=5\)</p>
+      <p>On isole : \(-4\lfloor\cdot\rfloor=12\), donc \(\left\lfloor\frac{x+2}{3}\right\rfloor=-3\). Par définition de la partie entière :
+      \[-3\le\frac{x+2}{3}&lt;-2\iff-9\le x+2&lt;-6\iff-11\le x&lt;-8.\]</p>
+      <div class="res">\(S=[-11,\,-8[\).</div>
+      <div class="warnbox">Piège : la partie entière n'est pas « arrondir » : \(\lfloor x\rfloor=n\iff n\le x&lt;n+1\) (borne de droite exclue). Vérif. : \(x=-11\) ⇒ \(\lfloor-3\rfloor=-3\) ✓ ; \(x=-8\) ⇒ \(\lfloor-2\rfloor=-2\) ✗.</div>
+    </div></div>
+  </section>
+
+  <section class="block" id="ex12">
+    <h2>Exercice 12 — Partie entière et entier</h2>
+    <figure><img src="enonces/ex12.png" alt="Énoncé exercice 12"></figure>
+    <div class="exo-card"><div class="exo-head">✏️ \(\lfloor p+x\rfloor=p+\lfloor x\rfloor\) <span class="diff">♦♦</span></div><div class="exo-body">
+      <p><b>Rappel.</b> \(\lfloor y\rfloor\) est l'<b>unique</b> entier \(n\) tel que \(n\le y&lt;n+1\).</p>
+      <p>Par définition, \(\lfloor x\rfloor\le x&lt;\lfloor x\rfloor+1\). On ajoute l'entier \(p\) partout :
+      \[p+\lfloor x\rfloor\le p+x&lt;p+\lfloor x\rfloor+1.\]
+      Or \(p+\lfloor x\rfloor\in\mathbb Z\) (somme de deux entiers) : c'est un entier \(n\) qui encadre \(p+x\) comme l'exige la définition. Par unicité, \(\lfloor p+x\rfloor=p+\lfloor x\rfloor\). ∎</p>
+      <div class="warnbox">Ceci est faux si \(p\) n'est pas entier (ex. \(p=\frac12\), \(x=\frac12\) : \(\lfloor1\rfloor=1\neq\frac12+0\)).</div>
+    </div></div>
+  </section>
+
+  <section class="block" id="ex13">
+    <h2>Exercice 13 — Max, sup, min, inf</h2>
+    <figure><img src="enonces/ex13.png" alt="Énoncé exercice 13"></figure>
+    <div class="exo-card"><div class="exo-head">✏️ Compléter le tableau <span class="diff">♦♦♦</span></div><div class="exo-body">
+      <div class="overflow"><table>
+        <tr><th>Ensemble</th><th>max</th><th>sup</th><th>min</th><th>inf</th></tr>
+        <tr><td>\(\{2-\frac3n\mid n\in\mathbb N^*\}\)</td><td>n'existe pas</td><td>\(2\)</td><td>\(-1\)</td><td>\(-1\)</td></tr>
+        <tr><td>\(\{x\in\mathbb R\mid x^2+2x-3&lt;0\}\)</td><td>n'existe pas</td><td>\(1\)</td><td>n'existe pas</td><td>\(-3\)</td></tr>
+        <tr><td>\(\{(-2)^n+\frac3n\mid n\in\mathbb N^*\}\)</td><td>n'existe pas</td><td>\(+\infty\)</td><td>n'existe pas</td><td>\(-\infty\)</td></tr>
+        <tr><td>\(\{\frac{(-1)^n}{5n}\mid n\in\mathbb N^*\}\)</td><td>\(\frac1{10}\)</td><td>\(\frac1{10}\)</td><td>\(-\frac15\)</td><td>\(-\frac15\)</td></tr>
+      </table></div>
+      <p class="q">Ensemble 1 : \(2-\dfrac3n\)</p>
+      <p>\(n\mapsto-\frac3n\) est strictement croissante, donc la suite aussi : \(n=1\to-1\), \(n=2\to\frac12\), \(n=3\to1\), … Le plus petit terme est \(-1\) (atteint pour \(n=1\)) : min = inf = \(-1\). Elle tend vers \(2\) sans l'atteindre (\(2-\frac3n&lt;2\)) : sup = \(2\), mais \(2\notin A\), donc pas de max.</p>
+      <p class="q">Ensemble 2 : \(\{x\mid x^2+2x-3&lt;0\}\)</p>
+      <p>\(x^2+2x-3=(x+3)(x-1)&lt;0\iff x\in\,]-3,1[\). Intervalle ouvert : sup = \(1\), inf = \(-3\), jamais atteints ⇒ ni max ni min.</p>
+      <p class="q">Ensemble 3 : \((-2)^n+\dfrac3n\)</p>
+      <p>Pour \(n\) pair (\(n=2k\)) : \(4^k+\frac3{2k}\to+\infty\) ⇒ non majoré. Pour \(n\) impair : \(-2^n+\frac3n\to-\infty\) ⇒ non minoré. Donc sup \(=+\infty\), inf \(=-\infty\), et ni max ni min (aucun maximum/minimum réel).</p>
+      <p class="q">Ensemble 4 : \(\dfrac{(-1)^n}{5n}\)</p>
+      <p>\(n\) pair : valeurs positives \(\frac1{5n}\), la plus grande pour \(n=2\) : \(\frac1{10}\). \(n\) impair : valeurs négatives \(-\frac1{5n}\), la plus petite pour \(n=1\) : \(-\frac15\). Les extrema sont atteints : max = sup = \(\frac1{10}\), min = inf = \(-\frac15\). (La suite tend vers \(0\), qui n'est ni sup ni inf.)</p>
+      <div class="warnbox">Le sup/inf existe toujours dans \(\overline{\mathbb R}\) (avec \(\pm\infty\) si non borné) ; le max/min n'existe que si la borne <b>appartient</b> à l'ensemble. Lecture de l'ensemble 2 : on a pris « {x ∈ ℝ | x²+2x−3 &lt; 0} » (l'ensemble des solutions de l'inéquation).</div>
+    </div></div>
+  </section>
+
+</main>
+<script src="../../assets/gate.js"></script>
+</body>
+</html>
