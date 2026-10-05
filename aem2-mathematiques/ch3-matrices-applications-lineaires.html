@@ -17,7 +17,8 @@ window.MathJax = {
 <div class="topbar">
   <a href="../index.html#am2">← Accueil</a>
   <span class="spacer"></span>
-  <a href="#cours">Rappels</a>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
   <a href="#td">Correction TD3</a>
   <a href="#docs">Documents donnés</a>
 </div>
@@ -26,52 +27,539 @@ window.MathJax = {
   <span class="chip">Maths AM2 (2ᵉ année) · Chapitre 3</span>
   <h1 class="title">Matrices et applications linéaires</h1>
   <p class="lead">Chapitre 3 de L. Graissot (ECAM AM2, 2026-2027) : rang, matrice d'une application linéaire,
-  changement de base, matrices semblables. Cette page contient pour l'instant le <b>TD3 corrigé
-  (exercices 1 → 9, pages 1 à 3 du sujet)</b> précédé des rappels de méthode indispensables ; le cours
-  détaillé complet et l'exercice 10 suivront.</p>
+  changement de base, matrices semblables. La page contient le <b>cours complet</b> (14 exemples du polycopié
+  corrigés pas à pas), 3 exercices créés et le <b>TD3 corrigé (exercices 1 → 9)</b>. L'énoncé de l'exercice 10
+  est incomplet dans le scan fourni (voir la note en fin de TD).</p>
 
   <div class="toc-mini">
     <b>Sommaire du chapitre</b>
     <ul style="margin:.4rem 0 0">
-      <li><a href="#cours">1. Rappels de méthode utilisés dans le TD</a></li>
-      <li><a href="#td">2. Correction TD3 — exercices 1 à 9</a></li>
+      <li><a href="#cours">1. Résumé de cours détaillé (rang, applications linéaires, matrices, changement de base)</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#td">3. Correction TD3 — exercices 1 à 9</a></li>
       <li><a href="#docs">📂 Documents donnés</a></li>
     </ul>
   </div>
 
   <!-- ============================================================= -->
   <section class="block" id="cours">
-    <h2>1. Rappels de méthode utilisés dans le TD</h2>
+    <h2>1. Résumé de cours détaillé</h2>
+    <p>Cours de L. Graissot (ECAM AM2, 2026-2027), chapitre 3, pages 29 → 45 du polycopié. Dans tout le chapitre,
+    \(\mathbb K=\mathbb R\) ou \(\mathbb C\) ; les exemples numériques du cours sont <b>corrigés pas à pas</b> ci-dessous.</p>
 
+    <!-- ===================== 1 RANG ===================== -->
+    <h3>1.1 Rang d'une famille finie de vecteurs</h3>
     <div class="def">
-      <span class="lab">Matrice d'une application linéaire</span>
-      Soit \(f:E\to F\) linéaire, \(\mathcal B=(b_1,\dots,b_p)\) une base de \(E\) et \(\mathcal C=(c_1,\dots,c_n)\)
-      une base de \(F\). La matrice \(\operatorname{Mat}_{\mathcal B,\mathcal C}(f)\in\mathcal M_{n,p}(\mathbb R)\)
-      a pour <b>\(j\)-ième colonne</b> les coordonnées de \(f(b_j)\) dans la base \(\mathcal C\).
-      (\(\mathcal B\) = base de <i>départ</i>, \(\mathcal C\) = base d'<i>arrivée</i>.) Pour un endomorphisme on note
-      \(\operatorname{Mat}_{\mathcal B}(f)=\operatorname{Mat}_{\mathcal B,\mathcal B}(f)\).
-    </div>
-    <div class="def">
-      <span class="lab">Matrice de passage</span>
-      \(P_{\mathcal B\to\mathcal B'}\) a pour colonnes les coordonnées des vecteurs de la <b>nouvelle</b> base \(\mathcal B'\)
-      exprimés dans l'<b>ancienne</b> base \(\mathcal B\). Elle est toujours inversible et
-      \(P_{\mathcal B'\to\mathcal B}=P_{\mathcal B\to\mathcal B'}^{-1}\).
+      <span class="lab">Rang d'une famille</span>
+      Soit \(E\) un \(\mathbb K\)-espace vectoriel et \((v_1,\dots,v_p)\) une famille finie de vecteurs de \(E\). Le <b>rang</b> de la famille est la
+      dimension du sous-espace engendré :
+      \[ \operatorname{rg}(v_1,\dots,v_p)=\dim\operatorname{Vect}(v_1,\dots,v_p). \]
+      C'est la dimension du plus petit sous-espace vectoriel contenant tous les \(v_i\).
     </div>
     <div class="thm">
-      <span class="lab">Formule de changement de base (endomorphisme)</span>
-      Si \(A=\operatorname{Mat}_{\mathcal B}(f)\), \(P=P_{\mathcal B\to\mathcal B'}\) et \(B=\operatorname{Mat}_{\mathcal B'}(f)\), alors
-      \[ \boxed{B=P^{-1}AP}\qquad\text{et}\qquad A^n=P\,B^n\,P^{-1}\ \ (n\in\mathbb N). \]
-      On dit que \(A\) et \(B\) sont <b>semblables</b>.
+      <span class="lab">Proposition 1 — encadrement du rang</span>
+      Pour une famille de \(p\) vecteurs de \(E\) : (1) \(0\le\operatorname{rg}(v_1,\dots,v_p)\le p\) ; (2) si \(E\) est de dimension finie,
+      \(\operatorname{rg}(v_1,\dots,v_p)\le\dim E\).
     </div>
     <div class="note">
-      <b>À retenir.</b> Théorème du rang : \(\dim E=\dim\operatorname{Ker}f+\operatorname{rg}f\).
-      Une famille de \(n\) vecteurs dans un espace de dimension \(n\) est une base ⇔ elle est libre ⇔ elle est génératrice
-      ⇔ la matrice de ses coordonnées est inversible (\(\det\neq0\)).
+      <b>À retenir.</b> Le rang vaut \(0\) ⇔ tous les vecteurs sont nuls. Le rang vaut \(p\) ⇔ la famille est <b>libre</b>.
+      (Raison : \(\operatorname{Vect}(v_1,\dots,v_p)\) est engendré par \(p\) vecteurs ; sa dimension est \(p\) exactement quand ces \(p\) vecteurs forment une base de ce sous-espace, c'est-à-dire quand ils sont libres.)
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exemple 1 — Rang d'une famille de \(\mathbb R^4\)</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Déterminer le rang de \(\{v_1,v_2,v_3\}\) dans \(\mathbb R^4\), avec
+        \(v_1=\begin{pmatrix}1\\0\\1\\0\end{pmatrix}\), \(v_2=\begin{pmatrix}0\\1\\1\\1\end{pmatrix}\), \(v_3=\begin{pmatrix}-1\\1\\0\\1\end{pmatrix}\).</p>
+        <p class="q">Encadrement</p>
+        <ul>
+          <li>Vecteurs de \(\mathbb R^4\) : \(\operatorname{rg}\le4\). Mais il n'y a que 3 vecteurs : \(\operatorname{rg}\le3\).</li>
+          <li>\(v_1\neq0\) : \(\operatorname{rg}\ge1\).</li>
+          <li>\(v_1,v_2\) sont non colinéaires (la 1ʳᵉ coordonnée de \(v_2\) est \(0\) alors que celle de \(v_1\) vaut \(1\), et la 2ᵉ de \(v_1\) est \(0\) alors que celle de \(v_2\) vaut \(1\)) donc libres :
+          \(\operatorname{rg}(v_1,v_2,v_3)\ge\operatorname{rg}(v_1,v_2)=2\).</li>
+        </ul>
+        <p>Le rang vaut donc \(2\) ou \(3\). Il vaut \(3\) ⇔ la famille est libre. On cherche une relation \(\lambda_1v_1+\lambda_2v_2+\lambda_3v_3=0\) :</p>
+        \[ \begin{cases}\lambda_1-\lambda_3=0\\ \lambda_2+\lambda_3=0\\ \lambda_1+\lambda_2=0\\ \lambda_2+\lambda_3=0\end{cases}
+        \iff \lambda_1=\lambda_3,\ \lambda_2=-\lambda_3. \]
+        <p>(La 3ᵉ équation, \(\lambda_1+\lambda_2=\lambda_3-\lambda_3=0\), est alors automatiquement vérifiée.) Avec \(\lambda_3=1\) :
+        \(v_1-v_2+v_3=(1-0-1,\ 0-1+1,\ 1-1+0,\ 0-1+1)=0\). La famille est <b>liée</b>.</p>
+        <div class="res">\(v_3=v_2-v_1\) donc \(\operatorname{Vect}(v_1,v_2,v_3)=\operatorname{Vect}(v_1,v_2)\) et \(\operatorname{rg}(v_1,v_2,v_3)=2\).</div>
+      </div>
+    </div>
+
+    <h3>1.2 Rang d'une matrice</h3>
+    <div class="def">
+      <span class="lab">Rang d'une matrice</span>
+      Une matrice \(A\in\mathcal M_{n,p}(\mathbb K)\) est une juxtaposition de \(p\) vecteurs colonnes de \(\mathbb K^n\). Son <b>rang</b> est le rang de la famille de ses colonnes.
+      Réciproquement, si \(\mathcal B=(e_1,\dots,e_n)\) est une base de \(E\) (\(\dim E=n\)) et \((v_1,\dots,v_p)\) une famille de \(E\), la matrice de leurs coordonnées dans \(\mathcal B\)
+      est dans \(\mathcal M_{n,p}(\mathbb K)\) et a le même rang que la famille.
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exemple 2 — Rang d'une matrice \(2\times4\)</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Rang de \(A=\begin{pmatrix}2&6&-1&0\\1&3&-\tfrac12&0\end{pmatrix}\in\mathcal M_{2,4}(\mathbb K)\).</p>
+        <p>Colonnes : \(v_1=\binom21\), \(v_2=\binom63\), \(v_3=\binom{-1}{-1/2}\), \(v_4=\binom00\). On a \(v_2=3v_1\), \(v_3=-\tfrac12v_1\) et \(v_4=0\cdot v_1\) :
+        tous les vecteurs sont colinéaires à \(v_1\neq0\).</p>
+        <div class="res">\(\operatorname{Vect}(v_1,\dots,v_4)=\operatorname{Vect}(v_1)\) est une droite : \(\operatorname{rg}A=1\).</div>
+      </div>
+    </div>
+
+    <h3>1.3 Matrices échelonnées et opérations conservant le rang</h3>
+    <div class="def">
+      <span class="lab">Matrice échelonnée par rapport aux colonnes</span>
+      Le nombre de zéros commençant une colonne croît strictement de colonne en colonne, jusqu'à ce qu'il ne reste plus que des colonnes de zéros.
+      (La transposée d'une telle matrice est échelonnée par rapport aux <i>lignes</i>.) Exemple de forme (\(+\) = coefficient non nul, \(*\) = quelconque) :
+      \[ \begin{pmatrix}+&0&0&0&0&0\\ *&0&0&0&0&0\\ *&+&0&0&0&0\\ *&*&+&0&0&0\\ *&*&*&0&0&0\\ *&*&*&+&0&0\end{pmatrix}. \]
+    </div>
+    <div class="thm">
+      <span class="lab">Proposition 2</span>
+      Le rang d'une matrice échelonnée par colonnes est égal au <b>nombre de colonnes non nulles</b> (ces colonnes sont linéairement indépendantes à cause de la forme en escalier).
+      Dans l'exemple ci-dessus : 4 colonnes non nulles sur 6, donc rang \(4\).
+    </div>
+    <div class="thm">
+      <span class="lab">Proposition 3 — opérations élémentaires sur les colonnes</span>
+      Le rang n'est pas modifié par :
+      <ol style="margin:.3rem 0 0">
+        <li>\(C_i\leftarrow\lambda C_i\) avec \(\lambda\neq0\) (multiplier une colonne par un scalaire non nul) ;</li>
+        <li>\(C_i\leftarrow C_i+\lambda C_j\), \(j\neq i\) (ajouter à une colonne un multiple d'une autre) ;</li>
+        <li>\(C_i\leftrightarrow C_j\) (échanger deux colonnes).</li>
+      </ol>
+      Plus généralement \(C_i\leftarrow C_i+\sum_{j\neq i}\lambda_jC_j\) conserve le rang.
     </div>
     <div class="method">
-      <span class="lab">Méthode « base adaptée »</span> Pour simplifier un endomorphisme, on cherche une base
-      \((b_1,\dots,b_n)\) formée de vecteurs du noyau, de vecteurs propres, ou de chaînes
-      \(b\mapsto f(b)\mapsto 0\) : la matrice dans cette base devient diagonale ou triangulaire (exercices 6 et 8).
+      <span class="lab">Méthode — rang par Gauss sur les colonnes</span> On applique les opérations de la proposition 3 aux <b>colonnes</b> de \(A\) jusqu'à obtenir une matrice échelonnée par colonnes ;
+      le rang est alors le nombre de colonnes non nulles. La méthode de Gauss « classique » opère sur les <b>lignes</b> ; les opérations sur les colonnes de \(A\) correspondent aux opérations sur les lignes de \({}^tA\).
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exemple 3 — Rang de 5 vecteurs de \(\mathbb R^4\) (méthode de Gauss)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Rang de la famille \(v_1=\begin{pmatrix}1\\1\\1\\1\end{pmatrix}\), \(v_2=\begin{pmatrix}-1\\2\\0\\1\end{pmatrix}\), \(v_3=\begin{pmatrix}3\\2\\-1\\-3\end{pmatrix}\),
+        \(v_4=\begin{pmatrix}3\\5\\0\\-1\end{pmatrix}\), \(v_5=\begin{pmatrix}3\\8\\1\\1\end{pmatrix}\).</p>
+        <p>Matrice des colonnes \(A=\begin{pmatrix}1&-1&3&3&3\\1&2&2&5&8\\1&0&-1&0&1\\1&1&-3&-1&1\end{pmatrix}\). Rang \(\le\min(4,5)=4\).</p>
+        <p>On <b>élimine</b> à l'aide de \(C_1\) (pivot \(1\) en 1ʳᵉ ligne) : \(C_2\leftarrow C_2+C_1\), \(C_3\leftarrow C_3-3C_1\), \(C_4\leftarrow C_4-3C_1\), \(C_5\leftarrow C_5-3C_1\) :</p>
+        \[ \begin{pmatrix}1&0&0&0&0\\1&3&-1&2&5\\1&1&-4&-3&-2\\1&2&-6&-4&-2\end{pmatrix}. \]
+        <p>Pivot suivant : la colonne \(C_3\) a un coefficient \(-1\) en ligne 2 ; on travaille avec \(C_3\) (qu'on peut échanger avec \(C_2\) si l'on veut) : \(C_2\leftarrow C_2+3C_3\), \(C_4\leftarrow C_4+2C_3\), \(C_5\leftarrow C_5+5C_3\) :</p>
+        \[ \begin{pmatrix}1&0&0&0&0\\1&0&-1&0&0\\1&-11&-4&-11&-22\\1&-16&-6&-16&-32\end{pmatrix}. \]
+        <p>On voit \(C_4=C_2\) et \(C_5=2C_2\) : \(C_4\leftarrow C_4-C_2\) et \(C_5\leftarrow C_5-2C_2\) les annulent. Il reste trois colonnes non nulles : \(C_1=(1,1,1,1)\), \(C_3=(0,-1,-4,-6)\) et \(C_2=(0,0,-11,-16)\).
+        Rangées dans l'ordre \((C_1,C_3,C_2)\), elles commencent par \(0\), \(1\) puis \(2\) zéros : le nombre de zéros croît strictement, la matrice est échelonnée par colonnes (proposition 2).</p>
+        <div class="res">3 colonnes non nulles et échelonnées : \(\operatorname{rg}(v_1,\dots,v_5)=3\), avec \(v_4=v_1+v_2+v_3\) et \(v_5=2v_1+2v_2+v_3\).</div>
+        <p>Vérification directe : \(v_1+v_2+v_3=(1-1+3,\ 1+2+2,\ 1+0-1,\ 1+1-3)=(3,5,0,-1)=v_4\) ✓ ; \(2v_1+2v_2+v_3=(2-2+3,\ 2+4+2,\ 2+0-1,\ 2+2-3)=(3,8,1,1)=v_5\) ✓.</p>
+        <div class="warnbox"><b>Piège.</b> Le rang d'une famille de 5 vecteurs de \(\mathbb R^4\) vaut au plus 4 (jamais 5) : cette famille est <b>forcément liée</b>.</div>
+      </div>
+    </div>
+
+    <h3>1.4 Rang et matrice inversible</h3>
+    <div class="thm">
+      <span class="lab">Théorème 1</span>
+      Une matrice carrée d'ordre \(n\) est inversible ⇔ elle est de rang \(n\). Plus précisément, si \(f\) est l'endomorphisme de \(\mathbb R^n\) de matrice \(A\) dans la base canonique :
+      \[ A\ \text{de rang }n\iff f\ \text{de rang }n\iff f\ \text{surjective}\iff f\ \text{bijective}\iff A\ \text{inversible}. \]
+    </div>
+
+    <h3>1.5 Rang engendré par les vecteurs lignes</h3>
+    <div class="thm">
+      <span class="lab">Proposition 4</span>
+      Si on voit \(A\) comme superposition de vecteurs lignes \((w_1,\dots,w_n)\), alors \(\operatorname{rg}A=\dim\operatorname{Vect}(w_1,\dots,w_n)\). Autrement dit
+      \[ \boxed{\operatorname{rg}A=\operatorname{rg}\,{}^tA}. \]
+    </div>
+    <div class="warnbox"><b>Attention.</b> Les <i>dimensions</i> \(\dim\operatorname{Vect}(v_1,\dots,v_p)\) (colonnes) et \(\dim\operatorname{Vect}(w_1,\dots,w_n)\) (lignes) sont égales,
+    mais les <i>espaces</i> \(\operatorname{Vect}(\text{colonnes})\subset\mathbb K^n\) et \(\operatorname{Vect}(\text{lignes})\subset\mathbb K^p\) ne sont pas les mêmes (ils ne vivent même pas dans le même espace si \(n\neq p\)).</div>
+
+    <!-- ===================== 2 APPLICATIONS LINEAIRES ===================== -->
+    <h3>2.1 Construction d'une application linéaire ; rang d'une application linéaire</h3>
+    <div class="thm">
+      <span class="lab">Théorème 2 — Construction d'une application linéaire</span>
+      Soient \(E,F\) deux \(\mathbb K\)-espaces vectoriels, \(\dim E=n\), \((e_1,\dots,e_n)\) une base de \(E\). Pour tout choix \((v_1,\dots,v_n)\) de \(n\) vecteurs de \(F\), il existe
+      <b>une et une seule</b> application linéaire \(f:E\to F\) telle que \(f(e_i)=v_i\) pour tout \(i\). (Aucune hypothèse sur \(\dim F\).)
+    </div>
+    <p><b>Démonstration.</b></p>
+    <ul>
+      <li><i>Unicité.</i> Si \(f\) existe, pour \(x=\sum_ix_ie_i\) (coordonnées uniques) la linéarité donne
+      \(f(x)=\sum_ix_if(e_i)=\sum_ix_iv_i\quad(*)\). Donc \(f\) est entièrement déterminée.</li>
+      <li><i>Existence.</i> On <b>définit</b> \(f\) par \((*)\). Si \(x,y\) ont pour coordonnées \((x_i),(y_i)\) alors \(\lambda x+\mu y\) a pour coordonnées \((\lambda x_i+\mu y_i)\) et
+      \(f(\lambda x+\mu y)=\sum_i(\lambda x_i+\mu y_i)v_i=\lambda\sum_ix_iv_i+\mu\sum_iy_iv_i=\lambda f(x)+\mu f(y)\) : \(f\) est linéaire. Enfin \(e_i\) a pour coordonnées \((0,\dots,1,\dots,0)\), donc \(f(e_i)=1\cdot v_i=v_i\). \(\square\)</li>
+    </ul>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exemple 4 — Application \(\mathbb R^n\to\mathbb R[X]\) définie par l'image de la base</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Il existe une unique application linéaire \(f:\mathbb R^n\to\mathbb R[X]\) telle que \(f(e_i)=(X+1)^i\) pour \(i=1,\dots,n\) (\((e_i)\) base canonique).</p>
+        <p>Par le théorème 2 (ici \(F=\mathbb R[X]\) est de dimension infinie : sans importance). Pour \(x=(x_1,\dots,x_n)\) :</p>
+        <div class="res">\(f(x_1,\dots,x_n)=x_1f(e_1)+\dots+x_nf(e_n)=\displaystyle\sum_{i=1}^nx_i(X+1)^i.\)</div>
+      </div>
+    </div>
+
+    <div class="thm">
+      <span class="lab">Proposition 5 et définition du rang</span>
+      Si \(E\) est de dimension finie, \(\operatorname{Im}f=f(E)\) est de dimension finie et, si \((e_1,\dots,e_n)\) est une base de \(E\), \(\operatorname{Im}f=\operatorname{Vect}\big(f(e_1),\dots,f(e_n)\big)\).
+      La dimension de \(\operatorname{Im}f\) est le <b>rang de \(f\)</b> :
+      \[ \operatorname{rg}f=\dim\operatorname{Im}f=\dim\operatorname{Vect}\big(f(e_1),\dots,f(e_n)\big). \]
+    </div>
+    <p><i>Preuve.</i> Soit \(y\in\operatorname{Im}f\) : \(y=f(x)\) avec \(x=\sum x_ie_i\), donc \(y=\sum x_if(e_i)\) par linéarité : tout élément de \(\operatorname{Im}f\) est combinaison linéaire des \(f(e_i)\). \(\square\)</p>
+    <div class="thm">
+      <span class="lab">Proposition 6</span>
+      Si \(E,F\) sont de dimension finie : \(\operatorname{rg}f\le\min(\dim E,\dim F)\)
+      (car \(\operatorname{Im}f\) est engendré par \(\dim E\) vecteurs et contenu dans \(F\)).
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exemple 5 — Rang de \(f:\mathbb R^3\to\mathbb R^2\), \(f(x,y,z)=(3x-4y+2z,\ 2x-3y-z)\)</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p>Image de la base canonique : \(f(e_1)=(3,2)\), \(f(e_2)=(-4,-3)\), \(f(e_3)=(2,-1)\). Rang \(\le\min(3,2)=2\).</p>
+        <p>\(f(e_1)\) et \(f(e_2)\) sont libres : \(\det\begin{pmatrix}3&-4\\2&-3\end{pmatrix}=-9+8=-1\neq0\). Donc \(\operatorname{rg}f\ge2\).</p>
+        <div class="res">\(\operatorname{rg}f=2\) : \(f\) est surjective, et \(\dim\operatorname{Ker}f=3-2=1\) (théorème du rang).</div>
+        <p>Noyau, pour contrôle : \(3x-4y+2z=0\) et \(2x-3y-z=0\). On élimine \(z\) : \(2\times(2)+(1)\) donne \(7x-10y=0\), soit \(x=\tfrac{10}7y\) ; alors \(z=2x-3y=\tfrac{20}7y-3y=-\tfrac17y\).
+        Direction \(y=-7\) : \((x,y,z)=(-10,-7,1)\). Vérification : \(3(-10)-4(-7)+2=0\) ✓ ; \(2(-10)-3(-7)-1=0\) ✓. \(\operatorname{Ker}f=\operatorname{Vect}\big((-10,-7,1)\big)\).</p>
+      </div>
+    </div>
+
+    <h3>2.2 Théorème du rang</h3>
+    <div class="thm">
+      <span class="lab">Théorème 3 — Théorème du rang</span>
+      Soit \(f:E\to F\) linéaire, \(E\) de dimension finie. Alors
+      \[ \boxed{\dim E=\dim\operatorname{Ker}f+\dim\operatorname{Im}f=\dim\operatorname{Ker}f+\operatorname{rg}f}. \]
+    </div>
+    <div class="note"><b>Idée de preuve (non détaillée dans le polycopié).</b> On prend une base \((k_1,\dots,k_r)\) de \(\operatorname{Ker}f\), qu'on complète en une base \((k_1,\dots,k_r,c_1,\dots,c_s)\) de \(E\).
+    Alors \((f(c_1),\dots,f(c_s))\) est une base de \(\operatorname{Im}f\) (génératrice car les \(f(k_i)\) sont nuls ; libre car \(\sum\lambda_jf(c_j)=0\Rightarrow\sum\lambda_jc_j\in\operatorname{Ker}f\), donc nul, donc tous les \(\lambda_j=0\)).
+    D'où \(\dim E=r+s\).</div>
+    <p>En pratique la formule sert à trouver la dimension du noyau connaissant le rang, ou l'inverse.</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exemple 6 — \(f:\mathbb R^4\to\mathbb R^3\), rang et dimension du noyau</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(f(x_1,x_2,x_3,x_4)=(x_1-x_2+x_3,\ 2x_1+2x_2+6x_3+4x_4,\ -x_1-2x_3-x_4)\). Rang de \(f\) et \(\dim\operatorname{Ker}f\).</p>
+        <p>Matrice dans les bases canoniques (colonnes = images de \(e_1,\dots,e_4\)) :
+        \(A=\begin{pmatrix}1&-1&1&0\\2&2&6&4\\-1&0&-2&-1\end{pmatrix}\). Rang \(\le\min(4,3)=3\).</p>
+        <p>On utilise \(\operatorname{rg}A=\operatorname{rg}{}^tA\) et on échelonne les <b>lignes</b> : \(L_2\leftarrow L_2-2L_1\), \(L_3\leftarrow L_3+L_1\) :</p>
+        \[ \begin{pmatrix}1&-1&1&0\\0&4&4&4\\0&-1&-1&-1\end{pmatrix}
+        \xrightarrow{L_2\leftarrow\frac14L_2}\begin{pmatrix}1&-1&1&0\\0&1&1&1\\0&-1&-1&-1\end{pmatrix}
+        \xrightarrow{L_3\leftarrow L_3+L_2}\begin{pmatrix}1&-1&1&0\\0&1&1&1\\0&0&0&0\end{pmatrix}. \]
+        <div class="res">2 lignes non nulles : \(\operatorname{rg}f=2\) ; théorème du rang : \(\dim\operatorname{Ker}f=4-2=2\).</div>
+        <p>Base du noyau (contrôle) : le système réduit est \(x_2=-x_3-x_4\) et \(x_1=x_2-x_3=-2x_3-x_4\). Paramètres \((x_3,x_4)\) libres :
+        \((x_1,x_2,x_3,x_4)=x_3(-2,-1,1,0)+x_4(-1,-1,0,1)\). Vérification du 1ᵉʳ vecteur : \(-2+1+1=0\) ; \(2(-2)+2(-1)+6=0\) ; \(2-2=0\) ✓.</p>
+      </div>
+    </div>
+
+    <h3>2.3 Applications linéaires entre deux espaces de même dimension</h3>
+    <p>Un <b>isomorphisme</b> est une application linéaire bijective ; sa réciproque est aussi linéaire.</p>
+    <div class="thm">
+      <span class="lab">Proposition 7</span>
+      Si \(f:E\to F\) est un isomorphisme et si \(E\) (resp. \(F\)) est de dimension finie, alors \(F\) (resp. \(E\)) l'est aussi et \(\dim E=\dim F\).
+    </div>
+    <p><i>Preuve.</i> \(f\) surjective : \(F=\operatorname{Im}f\) est engendré par l'image d'une base de \(E\), donc \(\dim F\le\dim E\). Avec \(f^{-1}\) (isomorphisme aussi) : \(\dim E\le\dim F\). \(\square\)</p>
+    <div class="thm">
+      <span class="lab">Théorème 4 — même dimension : bijective ⇔ injective ⇔ surjective</span>
+      Soit \(f:E\to F\) linéaire, \(\dim E=\dim F<\infty\). Les assertions (i) \(f\) bijective, (ii) \(f\) injective, (iii) \(f\) surjective sont équivalentes.
+    </div>
+    <p><i>Preuve.</i> \(f\) injective ⇔ \(\operatorname{Ker}f=\{0\}\) ⇔ (théorème du rang) \(\dim\operatorname{Im}f=\dim E\) ⇔ (hypothèse \(\dim E=\dim F\)) \(\dim\operatorname{Im}f=\dim F\) ⇔ \(\operatorname{Im}f=F\) ⇔ \(f\) surjective. \(\square\)</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exemple 7 — \(f:\mathbb R^2\to\mathbb R^2\), \(f(x,y)=(x-y,\ x+y)\) est un isomorphisme</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p>Espaces de départ et d'arrivée de même dimension 2 : d'après le théorème 4, il suffit de montrer l'injectivité, c'est-à-dire \(\operatorname{Ker}f=\{0\}\) :</p>
+        \[ (x,y)\in\operatorname{Ker}f\iff(x-y,\ x+y)=(0,0)\iff\begin{cases}x-y=0\\x+y=0\end{cases}\iff x=y=0. \]
+        <div class="res">\(\operatorname{Ker}f=\{(0,0)\}\), \(f\) injective, donc bijective : c'est un <b>isomorphisme</b>.</div>
+        <p>Contrôle matriciel : \(\operatorname{Mat}(f)=\begin{pmatrix}1&-1\\1&1\end{pmatrix}\), \(\det=1+1=2\neq0\) ✓.</p>
+      </div>
+    </div>
+
+    <!-- ===================== 3 MATRICE ===================== -->
+    <h3>3.1 Matrice associée à une application linéaire</h3>
+    <div class="def">
+      <span class="lab">Définition 4 — Matrice de \(f\) relativement à \((\mathcal B,\mathcal B')\)</span>
+      Soit \(f:E\to F\) linéaire, \(\mathcal B=(e_1,\dots,e_p)\) base de \(E\), \(\mathcal B'=(f_1,\dots,f_n)\) base de \(F\). Pour chaque \(j\),
+      \(f(e_j)=a_{1j}f_1+\dots+a_{nj}f_n\) (coordonnées uniques). La matrice
+      \(\operatorname{Mat}_{\mathcal B,\mathcal B'}(f)=(a_{ij})\in\mathcal M_{n,p}(\mathbb K)\) a pour <b>\(j\)-ième colonne</b> les coordonnées de \(f(e_j)\) dans \(\mathcal B'\) :
+      \[ \operatorname{Mat}_{\mathcal B,\mathcal B'}(f)=\begin{pmatrix}f(e_1)&\cdots&f(e_p)\end{pmatrix}\ \text{(chaque }f(e_j)\text{ écrit en colonne dans }\mathcal B'). \]
+    </div>
+    <div class="note"><b>À retenir.</b> Taille : \(\dim F\times\dim E\) (lignes = dimension de l'arrivée, colonnes = dimension du départ). Les coefficients dépendent du choix des bases ; la taille, non.
+    Convention : <b>départ en premier, arrivée en second</b> dans \(\operatorname{Mat}_{\mathcal B,\mathcal B'}\).</div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exemple 8 — Matrice dans deux couples de bases</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(f:\mathbb R^3\to\mathbb R^2\), \(f(x_1,x_2,x_3)=(x_1+x_2-x_3,\ x_1-2x_2+3x_3)\) ; \(\mathcal B=(e_1,e_2,e_3)\) et \(\mathcal B'=(f_1,f_2)\) bases canoniques.
+        (1) Matrice de \(f\) dans \((\mathcal B,\mathcal B')\) ? (2) Avec \(\epsilon_1=\begin{pmatrix}1\\1\\0\end{pmatrix}\), \(\epsilon_2=\begin{pmatrix}1\\0\\1\end{pmatrix}\), \(\epsilon_3=\begin{pmatrix}0\\1\\1\end{pmatrix}\),
+        \(\phi_1=\begin{pmatrix}1\\0\end{pmatrix}\), \(\phi_2=\begin{pmatrix}1\\1\end{pmatrix}\) : montrer que \(\mathcal B_0=(\epsilon_i)\) est une base de \(\mathbb R^3\), \(\mathcal B_0'=(\phi_1,\phi_2)\) une base de \(\mathbb R^2\), puis donner la matrice de \(f\) dans \((\mathcal B_0,\mathcal B_0')\).</p>
+        <p class="q">1)</p>
+        <p>\(f(e_1)=(1,1)\), \(f(e_2)=(1,-2)\), \(f(e_3)=(-1,3)\) (coordonnées dans la canonique de \(\mathbb R^2\), qui sont les composantes mêmes).</p>
+        <div class="res">\(\operatorname{Mat}_{\mathcal B,\mathcal B'}(f)=A=\begin{pmatrix}1&1&-1\\1&-2&3\end{pmatrix}\in\mathcal M_{2,3}(\mathbb R)\).</div>
+        <p class="q">2)</p>
+        <p><b>Bases.</b> \(\det(\epsilon_1,\epsilon_2,\epsilon_3)=\begin{vmatrix}1&1&0\\1&0&1\\0&1&1\end{vmatrix}=1(0-1)-1(1-0)+0=-2\neq0\) : base de \(\mathbb R^3\).
+        \(\det(\phi_1,\phi_2)=\begin{vmatrix}1&1\\0&1\end{vmatrix}=1\neq0\) : base de \(\mathbb R^2\).</p>
+        <p><b>Images.</b> On calcule \(f(\epsilon_j)\) puis on décompose sur \((\phi_1,\phi_2)\) : \(\binom ab=\alpha\phi_1+\beta\phi_2=\binom{\alpha+\beta}\beta\), donc \(\beta=b\), \(\alpha=a-b\).</p>
+        \[ \begin{aligned}
+        f(\epsilon_1)&=f(1,1,0)=(2,-1)\ \Rightarrow\ \beta=-1,\ \alpha=2+1=3,\\
+        f(\epsilon_2)&=f(1,0,1)=(0,4)\ \Rightarrow\ \beta=4,\ \alpha=0-4=-4,\\
+        f(\epsilon_3)&=f(0,1,1)=(0,1)\ \Rightarrow\ \beta=1,\ \alpha=0-1=-1.
+        \end{aligned} \]
+        <div class="res">\(\operatorname{Mat}_{\mathcal B_0,\mathcal B_0'}(f)=\begin{pmatrix}3&-4&-1\\-1&4&1\end{pmatrix}\).</div>
+        <p>Contrôle par la formule de changement de base (§4.2) : \(Q^{-1}AP\) avec \(P=\begin{pmatrix}1&1&0\\1&0&1\\0&1&1\end{pmatrix}\), \(Q=\begin{pmatrix}1&1\\0&1\end{pmatrix}\), \(Q^{-1}=\begin{pmatrix}1&-1\\0&1\end{pmatrix}\) :
+        \(AP=\begin{pmatrix}2&0&0\\-1&4&1\end{pmatrix}\) puis \(Q^{-1}AP=\begin{pmatrix}2+1&0-4&0-1\\-1&4&1\end{pmatrix}=\begin{pmatrix}3&-4&-1\\-1&4&1\end{pmatrix}\) ✓.</p>
+      </div>
+    </div>
+
+    <h3>3.2 Opérations sur les applications linéaires et les matrices</h3>
+    <div class="thm">
+      <span class="lab">Proposition 8 — somme et produit par un scalaire</span>
+      Si \(f,g:E\to F\) sont linéaires, \(\mathcal B\) base de \(E\), \(\mathcal B'\) base de \(F\) :
+      \(\operatorname{Mat}_{\mathcal B,\mathcal B'}(f+g)=\operatorname{Mat}_{\mathcal B,\mathcal B'}(f)+\operatorname{Mat}_{\mathcal B,\mathcal B'}(g)\) et \(\operatorname{Mat}_{\mathcal B,\mathcal B'}(\lambda f)=\lambda\operatorname{Mat}_{\mathcal B,\mathcal B'}(f)\)
+      (mêmes bases au départ et à l'arrivée pour les deux applications).
+    </div>
+    <div class="thm">
+      <span class="lab">Proposition 9 — composition = produit de matrices</span>
+      Soient \(f:E\to F\), \(g:F\to G\) linéaires, \(\mathcal B,\mathcal B',\mathcal B''\) des bases de \(E,F,G\). Alors
+      \[ \boxed{\operatorname{Mat}_{\mathcal B,\mathcal B''}(g\circ f)=\operatorname{Mat}_{\mathcal B',\mathcal B''}(g)\times\operatorname{Mat}_{\mathcal B,\mathcal B'}(f)}\qquad(C=B\times A). \]
+      Le produit matriciel est défini pour correspondre à la composition ; l'ordre des facteurs est celui de la composition (le <b>dernier</b> appliqué est à <b>gauche</b>).
+    </div>
+    <p><b>Démonstration.</b> Notons \(A=(a_{ij})=\operatorname{Mat}_{\mathcal B,\mathcal B'}(f)\), \(B=(b_{ij})=\operatorname{Mat}_{\mathcal B',\mathcal B''}(g)\), \(C=\operatorname{Mat}_{\mathcal B,\mathcal B''}(g\circ f)\). Pour le 1ᵉʳ vecteur de base :</p>
+    \[ (g\circ f)(e_1)=g\Big(\sum_{k}a_{k1}f_k\Big)=\sum_ka_{k1}g(f_k)=\sum_ka_{k1}\sum_lb_{lk}g_l=\sum_l\Big(\sum_kb_{lk}a_{k1}\Big)g_l. \]
+    <p>La 1ʳᵉ colonne de \(C\) est donc \(\big(\sum_kb_{lk}a_{k1}\big)_l\), qui est exactement la 1ʳᵉ colonne de \(BA\) (ligne \(l\) de \(B\) fois colonne 1 de \(A\)).
+    Le même calcul pour \(e_2,\dots,e_p\) donne les autres colonnes : \(C=BA\). \(\square\)</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exemple 9 — Composition \(g\circ f\) de deux façons</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(f:E=\mathbb R^2\to F=\mathbb R^3\), \(g:F\to G=\mathbb R^2\) ; bases \(\mathcal B=(e_1,e_2)\), \(\mathcal B'=(f_1,f_2,f_3)\), \(\mathcal B''=(g_1,g_2)\) ;
+        \(A=\operatorname{Mat}_{\mathcal B,\mathcal B'}(f)=\begin{pmatrix}1&0\\1&1\\0&2\end{pmatrix}\in\mathcal M_{3,2}\), \(B=\operatorname{Mat}_{\mathcal B',\mathcal B''}(g)=\begin{pmatrix}2&-1&0\\3&1&2\end{pmatrix}\in\mathcal M_{2,3}\).
+        Calculer \(C=\operatorname{Mat}_{\mathcal B,\mathcal B''}(g\circ f)\) de deux façons.</p>
+        <p class="q">Façon 1 — par l'application \(g\circ f\) (images des vecteurs de base)</p>
+        <p>Lecture des colonnes : \(f(e_1)=f_1+f_2\), \(f(e_2)=f_2+2f_3\) ; \(g(f_1)=2g_1+3g_2\), \(g(f_2)=-g_1+g_2\), \(g(f_3)=2g_2\).</p>
+        \[ \begin{aligned}
+        (g\circ f)(e_1)&=g(f_1)+g(f_2)=(2-1)g_1+(3+1)g_2=g_1+4g_2,\\
+        (g\circ f)(e_2)&=g(f_2)+2g(f_3)=-g_1+g_2+4g_2=-g_1+5g_2.
+        \end{aligned} \]
+        <p class="q">Façon 2 — par le produit de matrices (proposition 9)</p>
+        \[ C=BA=\begin{pmatrix}2&-1&0\\3&1&2\end{pmatrix}\begin{pmatrix}1&0\\1&1\\0&2\end{pmatrix}
+        =\begin{pmatrix}2-1+0&0-1+0\\3+1+0&0+1+4\end{pmatrix}=\begin{pmatrix}1&-1\\4&5\end{pmatrix}. \]
+        <div class="res">\(\operatorname{Mat}_{\mathcal B,\mathcal B''}(g\circ f)=\begin{pmatrix}1&-1\\4&5\end{pmatrix}\) : les deux façons concordent (colonnes \((1,4)\) et \((-1,5)\)).</div>
+        <div class="warnbox"><b>Piège.</b> \(AB\) existerait aussi (\(3\times2\) fois \(2\times3\)) mais serait la matrice de \(f\circ g\), de taille \(3\times3\) : ce n'est pas la même application.</div>
+      </div>
+    </div>
+
+    <h3>3.3 Matrice d'un endomorphisme</h3>
+    <p>Pour \(f:E\to E\) avec \(\dim E=n\), les matrices sont carrées \(n\times n\). Si on prend la même base \(\mathcal B\) au départ et à l'arrivée on note \(\operatorname{Mat}_{\mathcal B}(f)\) ;
+    on peut aussi choisir deux bases distinctes de \(E\) et noter \(\operatorname{Mat}_{\mathcal B,\mathcal B'}(f)\).</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exemple 10 — Matrices d'endomorphismes classiques</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <ul>
+          <li><b>Identité</b> \(\mathrm{id}_E\) : \(\operatorname{Mat}_{\mathcal B}(\mathrm{id})=I_n\) pour toute base \(\mathcal B\) (car \(\mathrm{id}(e_j)=e_j\)).
+          <div class="warnbox" style="margin-top:.3rem"><b>Attention :</b> faux si les bases de départ et d'arrivée sont différentes (c'est alors une matrice de passage, §4).</div></li>
+          <li><b>Homothétie</b> \(h_\lambda(x)=\lambda x\) : \(\operatorname{Mat}_{\mathcal B}(h_\lambda)=\lambda I_n\).</li>
+          <li><b>Symétrie centrale</b> \(s(x)=-x\) : \(\operatorname{Mat}_{\mathcal B}(s)=-I_n\).</li>
+          <li><b>Rotation</b> \(r_\theta\) de \(\mathbb R^2\) (angle \(\theta\), centre \(O\)), base canonique : \(r_\theta(x,y)=(x\cos\theta-y\sin\theta,\ x\sin\theta+y\cos\theta)\). Colonnes : \(r_\theta(1,0)=(\cos\theta,\sin\theta)\), \(r_\theta(0,1)=(-\sin\theta,\cos\theta)\) :
+          \[ \operatorname{Mat}_{\mathcal B}(r_\theta)=\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}. \]</li>
+        </ul>
+      </div>
+    </div>
+    <div class="thm">
+      <span class="lab">Corollaire 1 — puissances</span>
+      Si \(f:E\to E\) et \(A=\operatorname{Mat}_{\mathcal B}(f)\), alors pour tout \(p\in\mathbb N\) : \(\operatorname{Mat}_{\mathcal B}(f^p)=A^p\) (récurrence sur \(p\) avec la proposition 9, \(f^p=f\circ f\circ\dots\circ f\)).
+    </div>
+
+    <h3>3.4 Matrice d'un isomorphisme</h3>
+    <div class="thm">
+      <span class="lab">Théorème 5 — Caractérisation</span>
+      Soient \(E,F\) de même dimension finie, \(f:E\to F\) linéaire, \(\mathcal B,\mathcal B'\) des bases de \(E,F\) et \(A=\operatorname{Mat}_{\mathcal B,\mathcal B'}(f)\).
+      <ol style="margin:.3rem 0 0">
+        <li>\(f\) bijective ⇔ \(A\) inversible.</li>
+        <li>Si \(f\) est bijective : \(\operatorname{Mat}_{\mathcal B',\mathcal B}(f^{-1})=A^{-1}\).</li>
+      </ol>
+    </div>
+    <div class="thm">
+      <span class="lab">Corollaire 2 — endomorphisme</span>
+      \(f\in\mathcal L(E)\) est bijective ⇔ \(A=\operatorname{Mat}_{\mathcal B}(f)\) est inversible, et alors \(\operatorname{Mat}_{\mathcal B}(f^{-1})=A^{-1}\).
+    </div>
+    <div class="note"><b>Idée de preuve.</b> Si \(f\) est bijective, \(f^{-1}\circ f=\mathrm{id}_E\) et \(f\circ f^{-1}=\mathrm{id}_F\) ; par la proposition 9, \(\operatorname{Mat}(f^{-1})A=I\) et \(A\operatorname{Mat}(f^{-1})=I\), d'où \(A\) inversible d'inverse \(\operatorname{Mat}(f^{-1})\).
+    Réciproquement, si \(A\) est inversible, l'application \(h\) de matrice \(A^{-1}\) (théorème 2) vérifie \(h\circ f=\mathrm{id}\) et \(f\circ h=\mathrm{id}\).</div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exemple 11 — Matrice de \((s\circ r)^{-1}\) (rotation \(\pi/6\) et réflexion d'axe \(y=x\))</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(r:\mathbb R^2\to\mathbb R^2\) rotation d'angle \(\frac\pi6\) (centrée à l'origine), \(s\) la réflexion par rapport à l'axe \((y=x)\). Matrice de \((s\circ r)^{-1}\) dans la base canonique ?</p>
+        <p><b>Matrice de \(r\)</b> (\(\cos\frac\pi6=\frac{\sqrt3}2\), \(\sin\frac\pi6=\frac12\)) : \(R=\begin{pmatrix}\frac{\sqrt3}2&-\frac12\\\frac12&\frac{\sqrt3}2\end{pmatrix}\).</p>
+        <p><b>Matrice de \(s\)</b> : la réflexion d'axe \(y=x\) échange les coordonnées : \(s(x,y)=(y,x)\), donc \(S=\begin{pmatrix}0&1\\1&0\end{pmatrix}\) (et \(S^2=I\) : \(s\) est une involution).</p>
+        <p><b>Composée.</b> \(\operatorname{Mat}(s\circ r)=SR\) (\(r\) appliquée d'abord, donc à droite) :
+        \(SR=\begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}\frac{\sqrt3}2&-\frac12\\\frac12&\frac{\sqrt3}2\end{pmatrix}=\begin{pmatrix}\frac12&\frac{\sqrt3}2\\\frac{\sqrt3}2&-\frac12\end{pmatrix}\) (multiplier à gauche par \(S\) échange les deux lignes de \(R\)).</p>
+        <p><b>Inverse.</b> Par le corollaire 2, \(\operatorname{Mat}\big((s\circ r)^{-1}\big)=(SR)^{-1}=R^{-1}S^{-1}=R^{-1}S\), avec \(R^{-1}=R^{T}=\begin{pmatrix}\frac{\sqrt3}2&\frac12\\-\frac12&\frac{\sqrt3}2\end{pmatrix}\) (rotation d'angle \(-\frac\pi6\)).
+        Multiplier à droite par \(S\) échange les deux colonnes de \(R^{-1}\) :</p>
+        <div class="res">\((SR)^{-1}=R^{-1}S=\begin{pmatrix}\frac12&\frac{\sqrt3}2\\\frac{\sqrt3}2&-\frac12\end{pmatrix}=SR.\)</div>
+        <p>Vérification : \((SR)^2=\begin{pmatrix}\frac14+\frac34&\frac{\sqrt3}4-\frac{\sqrt3}4\\\frac{\sqrt3}4-\frac{\sqrt3}4&\frac34+\frac14\end{pmatrix}=I_2\) : \(s\circ r\) est son propre inverse — c'est elle-même une réflexion (matrice symétrique orthogonale).</p>
+        <div class="warnbox"><b>Piège.</b> \((s\circ r)^{-1}=r^{-1}\circ s^{-1}\) : l'ordre s'<b>inverse</b>. Écrire \(s^{-1}\circ r^{-1}\) (soit \(S R^{-1}\)) serait faux en général.</div>
+      </div>
+    </div>
+
+    <!-- ===================== 4 CHANGEMENT DE BASE ===================== -->
+    <h3>4.1 Matrice de passage d'une base à une autre</h3>
+    <div class="def">
+      <span class="lab">Définition 5 — Matrice de passage</span>
+      Soit \(E\) de dimension \(n\), \(\mathcal B\) et \(\mathcal B'\) deux bases. La <b>matrice de passage</b> de \(\mathcal B\) vers \(\mathcal B'\), notée \(P_{\mathcal B,\mathcal B'}\), est la matrice carrée \(n\times n\) dont la \(j\)-ième colonne
+      est formée des coordonnées du \(j\)-ième vecteur de \(\mathcal B'\) par rapport à \(\mathcal B\) :
+      <b>colonnes = nouvelle base écrite dans l'ancienne</b>. On la note parfois \(\operatorname{Mat}_{\mathcal B}(\mathcal B')\).
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exemple 12 — Matrice de passage dans \(\mathbb R^2\)</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(e_1=\binom10\), \(e_2=\binom11\), \(\epsilon_1=\binom12\), \(\epsilon_2=\binom54\). \(\mathcal B=(e_1,e_2)\), \(\mathcal B'=(\epsilon_1,\epsilon_2)\). Matrice de passage de \(\mathcal B\) vers \(\mathcal B'\) ?</p>
+        <p>Il faut écrire \(\epsilon_1,\epsilon_2\) dans \((e_1,e_2)\) : \(\epsilon=\alpha e_1+\beta e_2=\binom{\alpha+\beta}\beta\), donc \(\beta\) = 2ᵉ composante et \(\alpha\) = 1ʳᵉ − 2ᵉ.</p>
+        \[ \epsilon_1=(1-2)e_1+2e_2=-e_1+2e_2=\binom{-1}{2}_{\mathcal B},\qquad \epsilon_2=(5-4)e_1+4e_2=e_1+4e_2=\binom14_{\mathcal B}. \]
+        <p>(Contrôle : \(-e_1+2e_2=(-1+2,\ 2)=(1,2)=\epsilon_1\) ✓ ; \(e_1+4e_2=(1+4,\ 4)=(5,4)=\epsilon_2\) ✓.)</p>
+        <div class="res">\(P_{\mathcal B,\mathcal B'}=\begin{pmatrix}-1&1\\2&4\end{pmatrix}\).</div>
+      </div>
+    </div>
+
+    <div class="thm">
+      <span class="lab">Proposition 10 — passage = identité</span>
+      \(P_{\mathcal B,\mathcal B'}=\operatorname{Mat}_{\mathcal B',\mathcal B}(\mathrm{id}_E)\), où \(E\) est muni de \(\mathcal B'\) au <b>départ</b> et de \(\mathcal B\) à l'<b>arrivée</b>. <i>Attention à l'inversion de l'ordre des bases !</i>
+      (Preuve : \(\mathrm{id}(e_j')=e_j'\), dont les coordonnées dans \(\mathcal B\) forment la \(j\)-ième colonne de \(P_{\mathcal B,\mathcal B'}\).)
+    </div>
+    <div class="thm">
+      <span class="lab">Proposition 11</span>
+      (1) \(P_{\mathcal B,\mathcal B'}\) est inversible et \(P_{\mathcal B',\mathcal B}=(P_{\mathcal B,\mathcal B'})^{-1}\). (2) Pour trois bases \(\mathcal B,\mathcal B',\mathcal B''\) : \(P_{\mathcal B,\mathcal B''}=P_{\mathcal B,\mathcal B'}\times P_{\mathcal B',\mathcal B''}\).
+    </div>
+    <p><i>Preuve.</i> (1) \(\mathrm{id}_E\) est bijective de réciproque \(\mathrm{id}_E\) ; par le théorème 5, \((P_{\mathcal B,\mathcal B'})^{-1}=\big(\operatorname{Mat}_{\mathcal B',\mathcal B}(\mathrm{id})\big)^{-1}=\operatorname{Mat}_{\mathcal B,\mathcal B'}(\mathrm{id})=P_{\mathcal B',\mathcal B}\).
+    (2) \(\mathrm{id}:(E,\mathcal B'')\to(E,\mathcal B')\to(E,\mathcal B)\) se factorise en \(\mathrm{id}\circ\mathrm{id}\) ; la proposition 9 donne \(\operatorname{Mat}_{\mathcal B'',\mathcal B}(\mathrm{id})=\operatorname{Mat}_{\mathcal B',\mathcal B}(\mathrm{id})\times\operatorname{Mat}_{\mathcal B'',\mathcal B'}(\mathrm{id})\), soit \(P_{\mathcal B,\mathcal B''}=P_{\mathcal B,\mathcal B'}P_{\mathcal B',\mathcal B''}\). \(\square\)</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exemple 13 — Passage entre deux bases de \(\mathbb R^3\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(E=\mathbb R^3\), base canonique \(\mathcal B\). \(\mathcal B_1=\Big(\begin{pmatrix}1\\1\\0\end{pmatrix},\begin{pmatrix}0\\-1\\0\end{pmatrix},\begin{pmatrix}3\\2\\-1\end{pmatrix}\Big)=(b_1,b_2,b_3)\),
+        \(\mathcal B_2=\Big(\begin{pmatrix}1\\-1\\0\end{pmatrix},\begin{pmatrix}0\\1\\0\end{pmatrix},\begin{pmatrix}0\\0\\-1\end{pmatrix}\Big)=(u_1,u_2,u_3)\). Matrice de passage de \(\mathcal B_1\) vers \(\mathcal B_2\) ?</p>
+        <p>On écrit chaque \(u_j\) dans \(\mathcal B_1\) :</p>
+        \[ \begin{aligned}
+        u_1&=(1,-1,0)=b_1+2b_2\quad(\text{car }b_1+2b_2=(1,1-2,0)=(1,-1,0)),\\
+        u_2&=(0,1,0)=-b_2,\\
+        u_3&=(0,0,-1)=b_3-3b_1-b_2\quad(\text{car }b_3-3b_1-b_2=(3-3,\ 2-3+1,\ -1)=(0,0,-1)).
+        \end{aligned} \]
+        <div class="res">\(P=P_{\mathcal B_1,\mathcal B_2}=\begin{pmatrix}1&0&-3\\2&-1&-1\\0&0&1\end{pmatrix}\).</div>
+        <p>Son inverse (utilisé à l'exemple suivant), \(P^{-1}=P_{\mathcal B_2,\mathcal B_1}=\begin{pmatrix}1&0&3\\2&-1&5\\0&0&1\end{pmatrix}\) : on vérifie \(PP^{-1}\) — 1ʳᵉ ligne \((1,0,-3)\) : \(1\), \(0\), \(3-3=0\) ; 2ᵉ ligne \((2,-1,-1)\) : \(2-2=0\), \(1\), \(6-5-1=0\) ; 3ᵉ ligne \((0,0,1)\) : \(0,0,1\) ✓.</p>
+      </div>
+    </div>
+
+    <div class="thm">
+      <span class="lab">Proposition 12 — coordonnées d'un vecteur</span>
+      Si \(X=\operatorname{Mat}_{\mathcal B}(x)\) et \(X'=\operatorname{Mat}_{\mathcal B'}(x)\) :
+      \[ \boxed{X=P_{\mathcal B,\mathcal B'}\,X'}\qquad(\text{les anciennes coordonnées s'obtiennent à partir des nouvelles}). \]
+      (Preuve : \(X=\operatorname{Mat}_{\mathcal B}(\mathrm{id}(x))=\operatorname{Mat}_{\mathcal B',\mathcal B}(\mathrm{id})\operatorname{Mat}_{\mathcal B'}(x)=P_{\mathcal B,\mathcal B'}X'\).)
+    </div>
+    <div class="warnbox"><b>Piège classique.</b> La matrice de passage \(P_{\mathcal B,\mathcal B'}\) transforme les nouvelles coordonnées en anciennes (\(X=PX'\)), pas l'inverse. Pour avoir \(X'\) : \(X'=P^{-1}X\).
+    (Les <i>vecteurs</i> de la nouvelle base s'écrivent avec \(P\) ; les <i>coordonnées</i> se transforment avec \(P^{-1}\).)</div>
+
+    <h3>4.2 Formule de changement de base</h3>
+    <div class="thm">
+      <span class="lab">Théorème 6 — Formule de changement de base</span>
+      Soit \(f:E\to F\) linéaire ; \(\mathcal B_E,\mathcal B_E'\) deux bases de \(E\), \(\mathcal B_F,\mathcal B_F'\) deux bases de \(F\) ; \(P=P_{\mathcal B_E,\mathcal B_E'}\), \(Q=P_{\mathcal B_F,\mathcal B_F'}\),
+      \(A=\operatorname{Mat}_{\mathcal B_E,\mathcal B_F}(f)\), \(B=\operatorname{Mat}_{\mathcal B_E',\mathcal B_F'}(f)\). Alors
+      \[ \boxed{B=Q^{-1}AP}. \]
+    </div>
+    <p><b>Démonstration.</b> On factorise \(f=\mathrm{id}_F\circ f\circ\mathrm{id}_E\) :
+    \((E,\mathcal B_E')\xrightarrow{\mathrm{id}}(E,\mathcal B_E)\xrightarrow{f}(F,\mathcal B_F)\xrightarrow{\mathrm{id}}(F,\mathcal B_F')\). La proposition 9 donne</p>
+    \[ B=\operatorname{Mat}_{\mathcal B_F,\mathcal B_F'}(\mathrm{id}_F)\times\operatorname{Mat}_{\mathcal B_E,\mathcal B_F}(f)\times\operatorname{Mat}_{\mathcal B_E',\mathcal B_E}(\mathrm{id}_E)=P_{\mathcal B_F',\mathcal B_F}\,A\,P_{\mathcal B_E,\mathcal B_E'}=Q^{-1}AP.\ \square \]
+    <div class="thm">
+      <span class="lab">Corollaire 3 — endomorphisme</span>
+      Pour \(f\in\mathcal L(E)\), \(\mathcal B,\mathcal B'\) deux bases, \(P=P_{\mathcal B,\mathcal B'}\), \(A=\operatorname{Mat}_{\mathcal B}(f)\), \(B=\operatorname{Mat}_{\mathcal B'}(f)\) :
+      \[ \boxed{B=P^{-1}AP}\qquad\text{et donc}\qquad A^n=PB^nP^{-1}. \]
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exemple 14 — Changement de base d'un endomorphisme de \(\mathbb R^3\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Avec \(\mathcal B_1,\mathcal B_2\) de l'exemple 13, \(f:\mathbb R^3\to\mathbb R^3\) de matrice \(A=\operatorname{Mat}_{\mathcal B_1}(f)=\begin{pmatrix}1&0&-6\\-2&2&-7\\0&0&3\end{pmatrix}\). Matrice \(B=\operatorname{Mat}_{\mathcal B_2}(f)\) ?</p>
+        <p>Corollaire 3 avec \(P=P_{\mathcal B_1,\mathcal B_2}\) (exemple 13) et \(P^{-1}\) : \(B=P^{-1}AP\). On calcule d'abord \(AP\) :</p>
+        \[ AP=\begin{pmatrix}1&0&-6\\-2&2&-7\\0&0&3\end{pmatrix}\begin{pmatrix}1&0&-3\\2&-1&-1\\0&0&1\end{pmatrix}
+        =\begin{pmatrix}1&0&-3-6\\-2+4&-2&6-2-7\\0&0&3\end{pmatrix}=\begin{pmatrix}1&0&-9\\2&-2&-3\\0&0&3\end{pmatrix}. \]
+        <p>puis \(P^{-1}(AP)\) avec \(P^{-1}=\begin{pmatrix}1&0&3\\2&-1&5\\0&0&1\end{pmatrix}\) :</p>
+        \[ P^{-1}AP=\begin{pmatrix}1+0+0&0&-9+9\\2-2&0+2&-18+3+15\\0&0&3\end{pmatrix}=\begin{pmatrix}1&0&0\\0&2&0\\0&0&3\end{pmatrix}. \]
+        <div class="res">\(B=\operatorname{Mat}_{\mathcal B_2}(f)=\begin{pmatrix}1&0&0\\0&2&0\\0&0&3\end{pmatrix}\) : \(f\) est <b>diagonale</b> dans \(\mathcal B_2\).</div>
+        <p>Intérêt : les puissances sont immédiates, \(B^k=\operatorname{diag}(1,2^k,3^k)\), donc \(A^k=PB^kP^{-1}\) (cf. TD3 exercices 6 et 9).</p>
+      </div>
+    </div>
+
+    <h3>4.3 Matrices semblables</h3>
+    <div class="def">
+      <span class="lab">Définition 6 — Matrices semblables</span>
+      \(A,B\in\mathcal M_n(\mathbb K)\) : \(B\) est <b>semblable</b> à \(A\) s'il existe \(P\in GL_n(\mathbb K)\) (inversible) telle que \(B=P^{-1}AP\).
+    </div>
+    <div class="thm">
+      <span class="lab">Proposition 13</span>
+      La relation « être semblable » est <b>réflexive</b> (\(A=I^{-1}AI\)), <b>symétrique</b> (\(B=P^{-1}AP\Rightarrow A=(P^{-1})^{-1}B\,P^{-1}\)) et <b>transitive</b>
+      (\(B=P^{-1}AP\), \(C=Q^{-1}BQ\Rightarrow C=(PQ)^{-1}A(PQ)\)). On dit donc indifféremment « \(A\) est semblable à \(B\) » ou « \(A\) et \(B\) sont semblables ».
+    </div>
+    <div class="note">
+      <b>Corollaire 4.</b> Deux matrices semblables représentent <b>le même endomorphisme</b>, exprimé dans des bases différentes.
+      Elles ont donc en commun tout ce qui est intrinsèque à l'endomorphisme : même rang, même trace, même déterminant, mêmes puissances (à conjugaison près).
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+    <div class="note">Trois exercices <b>créés</b> pour s'entraîner sur les trois idées du chapitre : rang et noyau, changement de base/puissances, composition. Tous les résultats sont vérifiés.</div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Rang et noyau d'une application \(\mathbb R^4\to\mathbb R^3\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(f:\mathbb R^4\to\mathbb R^3\), \(f(x,y,z,t)=(x+2y+t,\ y+z-t,\ x+3y+z)\). Déterminer \(\operatorname{rg}f\), une base de \(\operatorname{Ker}f\) et une base de \(\operatorname{Im}f\).</p>
+        <p class="q">Matrice et rang</p>
+        <p>Colonnes = images de la base canonique : \(A=\begin{pmatrix}1&2&0&1\\0&1&1&-1\\1&3&1&0\end{pmatrix}\). On remarque la ligne 3 = ligne 1 + ligne 2
+        (\(1+0=1\), \(2+1=3\), \(0+1=1\), \(1-1=0\)). Donc \(\operatorname{rg}A=\operatorname{rg}{}^tA=\operatorname{rg}(L_1,L_2)=2\) (\(L_1,L_2\) non colinéaires).</p>
+        <div class="res">\(\operatorname{rg}f=2\) et, par le théorème du rang, \(\dim\operatorname{Ker}f=4-2=2\).</div>
+        <p class="q">Noyau</p>
+        <p>\(f(x,y,z,t)=0\iff\begin{cases}x+2y+t=0\\y+z-t=0\end{cases}\) (la 3ᵉ équation est la somme des deux). Donc \(z=t-y\) et \(x=-2y-t\), avec \(y,t\) libres :</p>
+        \[ (x,y,z,t)=y(-2,1,-1,0)+t(-1,0,1,1). \]
+        <p>Contrôle de \((-2,1,-1,0)\) : \(-2+2=0\), \(1-1=0\), \(-2+3-1=0\) ✓. Contrôle de \((-1,0,1,1)\) : \(-1+1=0\), \(0+1-1=0\), \(-1+0+1=0\) ✓. Ils sont libres (non colinéaires).</p>
+        <div class="res">\(\operatorname{Ker}f=\operatorname{Vect}\big((-2,1,-1,0),\ (-1,0,1,1)\big)\).</div>
+        <p class="q">Image</p>
+        <p>\(\operatorname{Im}f=\operatorname{Vect}(f(e_1),f(e_2),f(e_3),f(e_4))\), colonnes de \(A\) : \(c_1=(1,0,1)\), \(c_2=(2,1,3)\), \(c_3=(0,1,1)\), \(c_4=(1,-1,0)\).
+        \(c_1,c_2\) sont libres (non colinéaires) et \(\dim\operatorname{Im}f=2\) : ils forment une base. Les deux autres colonnes en dépendent : \(c_3=c_2-2c_1\) car \((2-2,\ 1-0,\ 3-2)=(0,1,1)\) ✓ ; et \(c_4=3c_1-c_2\) car \((3-2,\ 0-1,\ 3-3)=(1,-1,0)\) ✓.</p>
+        <div class="res">\(\operatorname{Im}f=\operatorname{Vect}\big((1,0,1),\ (2,1,3)\big)\), plan d'équation \(z=x+y\) (d'après \(L_3=L_1+L_2\)).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Diagonalisation et puissances dans \(\mathbb R^2\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(f\in\mathcal L(\mathbb R^2)\) de matrice \(A=\begin{pmatrix}4&-2\\1&1\end{pmatrix}\) dans la base canonique. Soient \(u_1=(1,1)\), \(u_2=(2,1)\). (1) Montrer que \((u_1,u_2)\) est une base et donner la matrice \(D\) de \(f\) dedans. (2) Calculer \(A^n\). (3) Résoudre \(x_{n+1}=4x_n-2y_n\), \(y_{n+1}=x_n+y_n\).</p>
+        <p class="q">1)</p>
+        <p>\(P=\begin{pmatrix}1&2\\1&1\end{pmatrix}\), \(\det P=1-2=-1\neq0\) : base. \(f(u_1)=A\binom11=\binom{4-2}{1+1}=\binom22=2u_1\) ; \(f(u_2)=A\binom21=\binom{8-2}{2+1}=\binom63=3u_2\).</p>
+        <div class="res">\(D=\operatorname{Mat}_{(u_1,u_2)}(f)=\begin{pmatrix}2&0\\0&3\end{pmatrix}=P^{-1}AP\).</div>
+        <p class="q">2)</p>
+        <p>\(P^{-1}=\dfrac1{-1}\begin{pmatrix}1&-2\\-1&1\end{pmatrix}=\begin{pmatrix}-1&2\\1&-1\end{pmatrix}\). \(A^n=PD^nP^{-1}\) :</p>
+        \[ PD^n=\begin{pmatrix}2^n&2\cdot3^n\\2^n&3^n\end{pmatrix},\qquad
+        A^n=\begin{pmatrix}2^n&2\cdot3^n\\2^n&3^n\end{pmatrix}\begin{pmatrix}-1&2\\1&-1\end{pmatrix}
+        =\begin{pmatrix}-2^n+2\cdot3^n&2^{n+1}-2\cdot3^n\\-2^n+3^n&2^{n+1}-3^n\end{pmatrix}. \]
+        <div class="res">\(A^n=\begin{pmatrix}2\cdot3^n-2^n&2^{n+1}-2\cdot3^n\\3^n-2^n&2^{n+1}-3^n\end{pmatrix}\), \(n\in\mathbb N\).</div>
+        <p>Contrôles : \(n=0\) : \(\begin{pmatrix}2-1&2-2\\1-1&2-1\end{pmatrix}=I_2\) ✓ ; \(n=1\) : \(\begin{pmatrix}6-2&4-6\\3-2&4-3\end{pmatrix}=A\) ✓.</p>
+        <p class="q">3)</p>
+        <p>\(X_n=A^nX_0\). Avec \(X_0=\binom{x_0}{y_0}\) quelconque :</p>
+        <div class="res">\(x_n=(2\cdot3^n-2^n)x_0+(2^{n+1}-2\cdot3^n)y_0,\quad y_n=(3^n-2^n)x_0+(2^{n+1}-3^n)y_0.\)</div>
+        <p>Forme géométrique : en écrivant \(X_0=a\,u_1+b\,u_2\), \(X_n=a\,2^nu_1+b\,3^nu_2\), soit \(x_n=a\,2^n+2b\,3^n\), \(y_n=a\,2^n+b\,3^n\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Dérivation, primitive et composition (matrices rectangulaires)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(D:\mathbb R_3[X]\to\mathbb R_2[X]\), \(P\mapsto P'\) et \(G:\mathbb R_2[X]\to\mathbb R_3[X]\), \(P\mapsto\int_0^XP(t)\,dt\). Bases canoniques \((1,X,X^2,X^3)\) et \((1,X,X^2)\). Matrices de \(D\), \(G\), \(D\circ G\) et \(G\circ D\) ; \(D\) et \(G\) sont-elles bijectives ?</p>
+        <p class="q">Matrice de \(D\) (taille \(3\times4\))</p>
+        <p>\(D(1)=0\), \(D(X)=1\), \(D(X^2)=2X\), \(D(X^3)=3X^2\) :</p>
+        \[ M_D=\begin{pmatrix}0&1&0&0\\0&0&2&0\\0&0&0&3\end{pmatrix}. \]
+        <p class="q">Matrice de \(G\) (taille \(4\times3\))</p>
+        <p>\(G(1)=X\), \(G(X)=\tfrac{X^2}2\), \(G(X^2)=\tfrac{X^3}3\) :</p>
+        \[ M_G=\begin{pmatrix}0&0&0\\1&0&0\\0&\tfrac12&0\\0&0&\tfrac13\end{pmatrix}. \]
+        <p class="q">Composées</p>
+        \[ M_DM_G=\begin{pmatrix}0&1&0&0\\0&0&2&0\\0&0&0&3\end{pmatrix}\begin{pmatrix}0&0&0\\1&0&0\\0&\tfrac12&0\\0&0&\tfrac13\end{pmatrix}
+        =\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}=I_3, \]
+        <p>(car \((\int_0^XP)'=P\)), tandis que</p>
+        \[ M_GM_D=\begin{pmatrix}0&0&0&0\\0&1&0&0\\0&0&1&0\\0&0&0&1\end{pmatrix}=\operatorname{diag}(0,1,1,1)\neq I_4 \]
+        <p>(car \(\int_0^XP'=P-P(0)\) : on perd la constante).</p>
+        <div class="res">\(D\circ G=\mathrm{id}_{\mathbb R_2[X]}\) mais \(G\circ D\neq\mathrm{id}_{\mathbb R_3[X]}\). \(D\) est surjective (rang 3, \(\dim\operatorname{Ker}D=4-3=1\), \(\operatorname{Ker}D=\operatorname{Vect}(1)\)) mais pas injective ; \(G\) est injective (rang 3) mais pas surjective (\(\operatorname{Im}G=\{P\mid P(0)=0\}\), dimension 3 \(<4\)). Aucune n'est bijective : les espaces n'ont pas la même dimension (4 et 3).</div>
+        <div class="warnbox"><b>Piège.</b> Le produit \(M_GM_D\) existe et n'est pas \(I_4\) : le produit de matrices <b>n'est pas commutatif</b> et \(M_D\) n'a pas d'inverse (elle n'est pas carrée). Une matrice rectangulaire peut avoir un inverse à droite (\(M_DM_G=I_3\)) sans avoir d'inverse à gauche.</div>
+      </div>
     </div>
   </section>
 
@@ -554,21 +1042,21 @@ window.MathJax = {
       </div>
     </div>
 
-    <div class="note"><b>Exercice 10.</b> Son énoncé commence en bas de la page 3 du scan et se poursuit page 4 : il n'est pas traité
-    dans cette première passe (priorité : pages 1 à 3). Le cours du chapitre 3 (pages 5 à 20 du même PDF : rang, matrice d'une
-    application linéaire, opérations, changement de base, matrices semblables) viendra compléter cette page.</div>
+    <div class="warnbox"><b>Exercice 10 — non traité (scan incomplet).</b> Le scan s'arrête au début de l'exercice 10 : on lit seulement
+    « Soit \(f\in\mathcal L(\mathbb R^3)\), l'application linéaire dont la matrice dans la base canonique est : » puis la page se termine, sans la matrice ni les questions.
+    Les pages 4 à 20 du PDF sont directement le cours (la page du TD qui contenait la suite manque). Il suffit d'envoyer une photo de cette dernière page du TD pour que je corrige l'exercice.</div>
   </section>
 
   <section class="block" id="docs">
     <h2>📂 Documents donnés</h2>
     <p class="docs-intro">Fichier original lié à ce chapitre. Cliquez pour ouvrir.</p>
     <div class="docs-group">
-      <h3>TD3 + cours du chapitre 3 (L. Graissot)</h3>
+      <h3>TD3 (p.1-3) + cours du chapitre 3 (p.4-20) (L. Graissot)</h3>
       <ul class="doc-list">
-        <li><a class="doc-item" href="2026-10-05_scan-TD3-et-cours-ch3.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Scan TD3 + cours Ch3 — 20 p.</span><span class="badge">p.1 → 4 = TD3 · p.5 → 20 = cours</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="2026-10-05_scan-TD3-et-cours-ch3.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Scan TD3 + cours Ch3 — 20 p.</span><span class="badge">p.1 → 3 = TD3 · p.4 → 20 = cours</span><span class="arrow">↗</span></a></li>
       </ul>
     </div>
-    <p class="docs-note">Cursus AM2 · Mathématiques · L. Graissot, 2026-2027. <b>TD3 : exercices 1 → 9 corrigés</b> (pas de corrigé officiel — résolu maison).
+    <p class="docs-note">Cursus AM2 · Mathématiques · L. Graissot, 2026-2027. <b>Cours complet</b> ; <b>TD3 : exercices 1 → 9 corrigés</b> (pas de corrigé officiel — résolu maison).
     Voir aussi <a href="ch2-applications-lineaires.html">Ch2 — Applications linéaires</a>.</p>
   </section>
 
