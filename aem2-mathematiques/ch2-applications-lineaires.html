@@ -17,6 +17,7 @@ window.MathJax = {
 <div class="topbar">
   <a href="../index.html#am2">← Accueil</a>
   <span class="spacer"></span>
+  <a href="#methodes">Fiches méthodes</a>
   <a href="#cours">Cours</a>
   <a href="#exos">Exercices créés</a>
   <a href="#td">Correction TD</a>
@@ -34,12 +35,51 @@ window.MathJax = {
   <div class="toc-mini">
     <b>Sommaire du chapitre</b>
     <ul style="margin:.4rem 0 0">
+      <li><a href="#methodes">🛠️ Fiches méthodes</a></li>
       <li><a href="#cours">1. Résumé de cours détaillé</a></li>
       <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
       <li><a href="#td">3. Correction TD2 — 10/10 exercices</a></li>
       <li><a href="#docs">📂 Documents donnés</a></li>
     </ul>
   </div>
+
+  <section class="memo-sheet" id="methodes">
+    <div class="memo-head">🛠️ Fiche méthodes 1/2 — Espaces vectoriels : sous-espaces, familles, bases, dimension</div>
+    <div class="memo-grid">
+      <div class="memo-item method"><b>Montrer que \(F\) est un sous-espace</b>1) \(0_E\in F\) ; 2) \(\forall x,y\in F,\ \forall\lambda\in\mathbb K\) : \(\lambda x+y\in F\). Ou plus rapide : écrire \(F=\mathrm{Vect}(\dots)\) ou \(F=\ker\) d'une application linéaire</div>
+      <div class="memo-item method"><b>Décrire \(F\) donné par des équations</b>résoudre le système, <b>paramétrer</b> avec les variables libres, factoriser : \(F=\mathrm{Vect}(v_1,\dots,v_k)\) où \(v_i\) est le coefficient du paramètre \(i\)</div>
+      <div class="memo-item method"><b>Famille libre</b>poser \(\sum\lambda_iv_i=0\) et montrer que tous les \(\lambda_i\) sont nuls : système homogène (vecteurs de \(\mathbb R^n\)), identification des coefficients (polynômes), évaluation en des points ou dérivation (fonctions)</div>
+      <div class="memo-item method"><b>Famille génératrice</b>prendre un vecteur <b>quelconque</b> \(v\) du sous-espace (ex. \((a,b,c)\)), résoudre \(v=\sum\lambda_iv_i\) : le système doit avoir une solution pour tout second membre</div>
+      <div class="memo-item method"><b>Base</b>famille libre <b>et</b> génératrice. En dimension \(n\), il suffit de : \(n\) vecteurs libres, <i>ou</i> \(n\) vecteurs générateurs (compter d'abord la dimension !)</div>
+      <div class="memo-item method"><b>Coordonnées dans une base</b>résoudre \(v=\lambda_1e_1+\cdots+\lambda_ne_n\) : l'unique solution \((\lambda_1,\dots,\lambda_n)\) est le vecteur des coordonnées (unicité = base libre)</div>
+      <div class="memo-item method"><b>Dimensions à connaître</b>\(\dim\mathbb R^n=n\) ; \(\dim\mathbb R_n[X]=n+1\) (base \(1,X,\dots,X^n\)) ; \(\dim\mathcal M_{n,p}=np\) ; \(\mathbb C\) comme \(\mathbb R\)-espace : dim 2 (base \(1,i\))</div>
+      <div class="memo-item method"><b>Extraire / compléter une base</b>d'une famille génératrice : retirer les vecteurs qui sont combinaisons des précédents (pivots de Gauss) ; d'une famille libre : ajouter des vecteurs de la base canonique jusqu'à atteindre la dimension</div>
+      <div class="memo-item method"><b>Somme directe / supplémentaires</b>\(E=F\oplus G\) ssi \(F\cap G=\{0\}\) <b>et</b> \(F+G=E\) (ou \(F\cap G=\{0\}\) et \(\dim F+\dim G=\dim E\)) ; équivalent : tout \(x\) s'écrit de façon <b>unique</b> \(x=u+v\), \(u\in F\), \(v\in G\)</div>
+      <div class="memo-item method"><b>Décomposer \(x=u+v\)</b>analyse-synthèse : écrire \(u=\sum\alpha_if_i\), \(v=\sum\beta_jg_j\), résoudre \(x=u+v\) (système carré, déterminant \(\neq0\) ⇒ existence et unicité)</div>
+      <div class="memo-item method"><b>Formule de Grassmann</b>\(\dim(F+G)=\dim F+\dim G-\dim(F\cap G)\) ; pour \(F\cap G\) : résoudre le système formé des deux jeux d'équations</div>
+      <div class="memo-item method"><b>Égalité ou inclusion de sous-espaces</b>double inclusion ; ou une inclusion + égalité des dimensions (\(F\subset G\) et \(\dim F=\dim G\Rightarrow F=G\))</div>
+    </div>
+  </section>
+
+  <section class="memo-sheet" id="methodes-al">
+    <div class="memo-head">🛠️ Fiche méthodes 2/2 — Applications linéaires : linéarité, noyau, image, projecteurs</div>
+    <div class="memo-grid">
+      <div class="memo-item method"><b>Montrer que \(f\) est linéaire</b>vérifier \(f(\lambda x+\mu y)=\lambda f(x)+\mu f(y)\) pour des vecteurs et scalaires quelconques (une seule vérification suffit avec \(\lambda x+y\)) ; ou reconnaître une combinaison linéaire des coordonnées</div>
+      <div class="memo-item method"><b>Montrer que \(f\) n'est pas linéaire</b>contre-exemple : \(f(0)\neq0\), ou \(f(2x)\neq2f(x)\), ou \(f(x+y)\neq f(x)+f(y)\). Signaux d'alerte : constante, carré, produit de coordonnées, valeur absolue</div>
+      <div class="memo-item method"><b>Définir \(f\) par l'image d'une base</b>une application linéaire est entièrement déterminée par \(f(e_1),\dots,f(e_n)\) : \(f(\sum x_ie_i)=\sum x_if(e_i)\) ; pour exprimer \(f(v)\), décomposer d'abord \(v\) dans la base</div>
+      <div class="memo-item method"><b>Noyau</b>résoudre \(f(x)=0\), paramétrer les solutions : \(\ker f=\mathrm{Vect}(\dots)\) ; la famille obtenue est une base du noyau</div>
+      <div class="memo-item method"><b>Image</b>\(\mathrm{Im}\,f=\mathrm{Vect}\big(f(e_1),\dots,f(e_n)\big)\) ; en extraire une famille libre : base de l'image. Autre méthode : résoudre \(f(x)=y\) et chercher les conditions de compatibilité sur \(y\)</div>
+      <div class="memo-item method"><b>Injective</b>\(f\) injective \(\Leftrightarrow\ker f=\{0\}\) (pas besoin de comparer \(f(x)=f(y)\))</div>
+      <div class="memo-item method"><b>Surjective</b>\(f\) surjective \(\Leftrightarrow\mathrm{Im}\,f=F\) \(\Leftrightarrow\dim\mathrm{Im}\,f=\dim F\) (en dimension finie)</div>
+      <div class="memo-item method"><b>Bijective (isomorphisme)</b>si \(\dim E=\dim F\) fini : injective \(\Leftrightarrow\) surjective \(\Leftrightarrow\) bijective — il suffit de prouver \(\ker f=\{0\}\) ; si \(\dim E\neq\dim F\), jamais bijective</div>
+      <div class="memo-item method"><b>Projecteur</b>si \(p\circ p=p\) : \(E=\ker p\oplus\mathrm{Im}\,p\) et \(\mathrm{Im}\,p=\ker(p-\mathrm{id})\) ; décomposition \(x=\underbrace{p(x)}_{\in\mathrm{Im}\,p}+\underbrace{(x-p(x))}_{\in\ker p}\)</div>
+      <div class="memo-item method"><b>Projection sur \(F\) parallèlement à \(G\)</b>décomposer \(x=u+v\) (\(u\in F,v\in G\)), puis \(p(x)=u\) ; symétrie associée \(s=2p-\mathrm{id}\) (\(s(x)=u-v\), \(s\circ s=\mathrm{id}\)) ; vérifier \(p^2=p\)</div>
+      <div class="memo-item method"><b>Image / image réciproque d'un sous-espace</b>\(f(\mathrm{Vect}(v_i))=\mathrm{Vect}(f(v_i))\) ; pour \(f^{-1}(G)\) : résoudre \(f(x)\in G\), c'est un sous-espace contenant \(\ker f\)</div>
+      <div class="memo-item method"><b>Composée, inverse</b>\(g\circ f\) linéaire ; \(\ker f\subset\ker(g\circ f)\) et \(\mathrm{Im}(g\circ f)\subset\mathrm{Im}\,g\) ; l'inverse d'un isomorphisme est linéaire : \(f^{-1}(y)\) = résoudre \(f(x)=y\)</div>
+      <div class="memo-item"><b>Pièges</b>\(f(0)=0\) est nécessaire <b>pas suffisante</b> ; \(\ker f\) est dans l'espace de <b>départ</b>, \(\mathrm{Im}\,f\) dans l'espace d'<b>arrivée</b> ; \(f\) injective n'implique rien sur la surjectivité si \(\dim E\neq\dim F\) ; ne pas confondre somme et somme directe</div>
+    </div>
+  </section>
+
 
   <!-- ============================================================= -->
   <section class="block" id="cours">

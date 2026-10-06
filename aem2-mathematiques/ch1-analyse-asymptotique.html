@@ -17,6 +17,7 @@ window.MathJax = {
 <div class="topbar">
   <a href="../index.html#am2">← Accueil</a>
   <span class="spacer"></span>
+  <a href="#methodes">Fiches méthodes</a>
   <a href="#cours">Cours</a>
   <a href="#exos">Exercices créés</a>
   <a href="#td">Correction TD</a>
@@ -32,12 +33,52 @@ window.MathJax = {
   <div class="toc-mini">
     <b>Sommaire du chapitre</b>
     <ul style="margin:.4rem 0 0">
+      <li><a href="#methodes">🛠️ Fiches méthodes</a></li>
       <li><a href="#cours">1. Résumé de cours détaillé</a></li>
       <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
       <li><a href="#td">3. Correction du TD n°1 — Analyse asymptotique</a></li>
       <li><a href="#complements">4. Compléments (feuilles hors-programme officiel)</a></li>
     </ul>
   </div>
+
+  <section class="memo-sheet" id="methodes">
+    <div class="memo-head">🛠️ Fiche méthodes 1/2 — Comparaison de suites et de fonctions (\(o\), \(\sim\))</div>
+    <div class="memo-grid">
+      <div class="memo-item method"><b>Montrer \(u_n=o(v_n)\)</b>former \(u_n/v_n\) (ou \(u_n=v_n\varepsilon_n\)) et montrer que le quotient \(\to0\)</div>
+      <div class="memo-item method"><b>Montrer \(u_n\sim v_n\)</b>former \(u_n/v_n\) et montrer que le quotient \(\to1\) ; ou écrire \(u_n=v_n+o(v_n)\)</div>
+      <div class="memo-item method"><b>Classer des suites</b>chaîne de croissances comparées : \((\ln n)^a\ll n^b\ll q^n\ll n!\ll n^n\) (\(a,b>0\), \(q>1\)) ; en cas de doute, quotient + croissances comparées</div>
+      <div class="memo-item method"><b>Équivalent d'une somme</b>repérer le <b>terme dominant</b> (le plus grand à l'infini, le plus petit en 0) : \(n^3+n^2+\ln n\sim n^3\) ; on ne somme <b>jamais</b> des équivalents</div>
+      <div class="memo-item method"><b>Équivalent d'un produit / quotient / puissance</b>autorisé : \(u\sim v,\ u'\sim v'\Rightarrow uu'\sim vv'\), \(u/u'\sim v/v'\), \(u^\alpha\sim v^\alpha\) (α fixé) — on remplace facteur par facteur</div>
+      <div class="memo-item method"><b>Équivalent d'une fonction composée</b>ne <b>pas</b> composer par \(\exp\), \(\ln\)… : écrire \(\ln(f)=\ln(\text{équivalent})+\ln(1+o(1))\) ou passer par un DL</div>
+      <div class="memo-item method"><b>Équivalents usuels (\(x\to0\))</b>\(\sin x\sim x\), \(\tan x\sim x\), \(\arctan x\sim x\), \(e^x-1\sim x\), \(\ln(1+x)\sim x\), \(1-\cos x\sim x^2/2\), \((1+x)^\alpha-1\sim\alpha x\)</div>
+      <div class="memo-item method"><b>Équivalent d'une suite \(u_n=f(1/n)\)</b>poser \(x=1/n\to0\) et utiliser l'équivalent usuel de \(f\) en 0 (ex. \(n\sin(1/n)\to1\), \(1-\cos\frac1n\sim\frac1{2n^2}\))</div>
+      <div class="memo-item method"><b>Calculer une limite avec \(\sim\)</b>remplacer chaque facteur par son équivalent, puis lire la limite du résultat simplifié ; si le résultat est une somme, retomber sur le terme dominant</div>
+      <div class="memo-item method"><b>Règles de calcul avec \(o\)</b>\(o(u)+o(u)=o(u)\) ; \(o(u)\,o(v)=o(uv)\) ; \(u\,o(v)=o(uv)\) ; \(\lambda\,o(u)=o(u)\) ; en 0 : \(x^p\,o(x^q)=o(x^{p+q})\) et \(o(x^q)=o(x^p)\) si \(p\leqslant q\)</div>
+      <div class="memo-item method"><b>Signe et limite par équivalent</b>si \(u\sim v\) : même limite éventuelle, <b>même signe à partir d'un certain rang</b> (utile pour la nature d'une série à termes positifs)</div>
+      <div class="memo-item"><b>Fausses opérations à éviter</b>pas de somme d'équivalents, pas de composition par une fonction, pas d'équivalent à 0 (\(u\sim0\Leftrightarrow u=0\) à partir d'un rang), pas de \(\sim\) dans une soustraction \(u_n-v_n\)</div>
+    </div>
+  </section>
+
+  <section class="memo-sheet" id="methodes-dl">
+    <div class="memo-head">🛠️ Fiche méthodes 2/2 — Développements limités et applications</div>
+    <div class="memo-grid">
+      <div class="memo-item method"><b>Obtenir un DL par Taylor-Young</b>si \(f\) est \(\mathcal C^n\) en \(a\) : \(f(x)=\sum_{k\le n}\frac{f^{(k)}(a)}{k!}(x-a)^k+o((x-a)^n)\) — calculer \(f(a),f'(a),\dots\) seulement si les dérivées restent simples</div>
+      <div class="memo-item method"><b>DL en un point \(a\neq0\)</b>poser \(h=x-a\to0\), réécrire \(f(a+h)\) et utiliser les DL usuels en \(h\) ; ne pas oublier de revenir à \(x-a\) à la fin</div>
+      <div class="memo-item method"><b>DL d'une somme</b>additionner coefficient par coefficient, au même ordre</div>
+      <div class="memo-item method"><b>DL d'un produit</b>multiplier les parties régulières puis <b>tronquer</b> au degré \(n\) ; si l'un des facteurs commence en \(x^p\), l'autre n'est nécessaire qu'à l'ordre \(n-p\)</div>
+      <div class="memo-item method"><b>DL d'une composée \(f\circ g\)</b>vérifier \(g(x)\to0\), poser \(u=g(x)\), insérer le DL de \(g\) dans celui de \(f\) (ex. \(e^{\sin x}\), \(\ln(\cos x)\)), puis tronquer</div>
+      <div class="memo-item method"><b>DL d'un quotient \(f/g\)</b>factoriser le terme constant : \(g=d_0(1+u)\), \(\frac1{1+u}=1-u+u^2-\cdots\) ; si \(d_0=0\), factoriser d'abord \(x^k\) (le DL de \(g\) doit alors être calculé à l'ordre \(n+k\))</div>
+      <div class="memo-item method"><b>Quel ordre choisir ?</b>commencer par l'ordre minimal qui lève l'indétermination ; au numérateur comme au dénominateur, aller jusqu'au <b>premier terme non nul</b> ; si tout s'annule, augmenter l'ordre</div>
+      <div class="memo-item method"><b>Limite d'une forme indéterminée</b>DL de numérateur et dénominateur au même ordre, simplifier par la plus petite puissance de \(x\), lire la limite (le quotient des premiers termes non nuls)</div>
+      <div class="memo-item method"><b>DL de \(f'\) ou d'une primitive</b>dériver terme à terme un DL d'ordre \(n+1\) pour obtenir celui de \(f'\) à l'ordre \(n\) ; intégrer terme à terme (<b>avec la constante \(F(a)\)</b>) pour passer de l'ordre \(n\) à \(n+1\) (ex. \(\arctan\) depuis \(\frac1{1+x^2}\))</div>
+      <div class="memo-item method"><b>Position courbe / tangente en \(a\)</b>DL en \(a\) : tangente \(y=c_0+c_1(x-a)\) ; premier \(c_k\neq0\) avec \(k\geqslant2\) ; signe de \(c_k(x-a)^k\) : \(+\) au-dessus, \(-\) en dessous, changement de signe (\(k\) impair) : inflexion</div>
+      <div class="memo-item method"><b>Asymptote oblique en \(\pm\infty\)</b>poser \(x=1/h\) (ou DL de \(f(x)/x\)) pour obtenir \(f(x)=a_0x+a_1+\frac{a_k}{x^{k-1}}+o\big(\tfrac1{x^{k-1}}\big)\) : asymptote \(y=a_0x+a_1\), position selon le signe de \(a_k/x^{k-1}\)</div>
+      <div class="memo-item method"><b>Encadrer avec Taylor reste intégral</b>majorer \(|f^{(n+1)}|\) par \(M\) sur l'intervalle : \(|f(x)-T_n(x)|\leqslant M\frac{|x-a|^{n+1}}{(n+1)!}\) — donne une <b>erreur explicite</b> (contrairement à \(o(\cdot)\))</div>
+      <div class="memo-item method"><b>Parité</b>si \(f\) est paire (impaire), son DL en 0 ne contient que des puissances paires (impaires) : économise la moitié du calcul et donne un ordre de plus gratuitement</div>
+      <div class="memo-item"><b>Pièges des DL</b>ne jamais « oublier » le \(o(x^n)\) ; bien tronquer après chaque produit ; \(\sqrt{1+x}\) et \(\frac1{1+x}\) = cas particuliers de \((1+x)^\alpha\) ; un DL n'est valable qu'<b>au voisinage du point</b> choisi</div>
+    </div>
+  </section>
+
 
   <!-- ============================================================= -->
   <!-- ======================= COURS =============================== -->

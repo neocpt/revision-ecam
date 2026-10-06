@@ -17,6 +17,7 @@ window.MathJax = {
 <div class="topbar">
   <a href="../index.html#am2">← Accueil</a>
   <span class="spacer"></span>
+  <a href="#methodes">Fiches méthodes</a>
   <a href="#cours">Cours</a>
   <a href="#exos">Exercices créés</a>
   <a href="#td">Correction TD3</a>
@@ -34,12 +35,52 @@ window.MathJax = {
   <div class="toc-mini">
     <b>Sommaire du chapitre</b>
     <ul style="margin:.4rem 0 0">
+      <li><a href="#methodes">🛠️ Fiches méthodes</a></li>
       <li><a href="#cours">1. Résumé de cours détaillé (rang, applications linéaires, matrices, changement de base)</a></li>
       <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
       <li><a href="#td">3. Correction TD3 — exercices 1 à 9</a></li>
       <li><a href="#docs">📂 Documents donnés</a></li>
     </ul>
   </div>
+
+  <section class="memo-sheet" id="methodes">
+    <div class="memo-head">🛠️ Fiche méthodes 1/2 — Rang, théorème du rang, matrice d'une application linéaire</div>
+    <div class="memo-grid">
+      <div class="memo-item method"><b>Rang d'une famille de vecteurs</b>écrire les vecteurs en <b>colonnes</b>, échelonner par Gauss (échange, multiplication par \(\lambda\neq0\), ajout d'une combinaison d'autres colonnes) : rang = nombre de colonnes non nulles / de pivots</div>
+      <div class="memo-item method"><b>Rang d'une matrice</b>\(\mathrm{rg}\,A=\) nb de pivots après Gauss (lignes <i>ou</i> colonnes) \(=\mathrm{rg}\,{}^tA\) ; \(A\) carrée \(n\times n\) inversible \(\Leftrightarrow\mathrm{rg}\,A=n\)</div>
+      <div class="memo-item method"><b>Rang d'une application linéaire</b>\(\mathrm{rg}\,f=\dim\mathrm{Im}\,f=\mathrm{rg}\big(f(e_1),\dots,f(e_n)\big)=\mathrm{rg}\) de la matrice de \(f\) dans n'importe quelles bases</div>
+      <div class="memo-item method"><b>Théorème du rang</b>\(\dim E=\dim\ker f+\mathrm{rg}\,f\) : en connaissant le rang (par Gauss), on obtient \(\dim\ker f\) sans résoudre ; en connaissant le noyau, on a le rang</div>
+      <div class="memo-item method"><b>Injective / surjective / bijective</b>\(f:E\to F\) : injective \(\Leftrightarrow\mathrm{rg}\,f=\dim E\) ; surjective \(\Leftrightarrow\mathrm{rg}\,f=\dim F\) ; si \(\dim E=\dim F\) : injective \(\Leftrightarrow\) surjective \(\Leftrightarrow\) bijective \(\Leftrightarrow\mathrm{rg}=n\)</div>
+      <div class="memo-item method"><b>Construire la matrice de \(f\)</b>colonne \(j\) = <b>coordonnées de \(f(e_j)\) dans la base d'arrivée</b> ; taille = \(\dim F\times\dim E\) (lignes = arrivée, colonnes = départ). Si la base d'arrivée n'est pas canonique, résoudre un système pour chaque \(f(e_j)\)</div>
+      <div class="memo-item method"><b>Calculer \(f(x)\) avec la matrice</b>coordonnées \(X\) de \(x\) dans la base de départ, \(Y=AX\) donne les coordonnées de \(f(x)\) dans la base d'arrivée (ne pas oublier de reconvertir en vecteur)</div>
+      <div class="memo-item method"><b>Matrice d'une composée / d'un inverse</b>\(\mathrm{Mat}(g\circ f)=\mathrm{Mat}(g)\times\mathrm{Mat}(f)\) (<b>dans cet ordre</b>, bases compatibles) ; \(\mathrm{Mat}(f^{-1})=A^{-1}\) ; \(\mathrm{Mat}(f^n)=A^n\)</div>
+      <div class="memo-item method"><b>Matrices d'endomorphismes classiques</b>identité \(I_n\) ; homothétie \(\lambda I_n\) ; projection sur l'axe \(Ox\) : \(\mathrm{diag}(1,0)\) ; rotation d'angle \(\theta\) : \(\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}\) ; dérivation \(\mathbb R_n[X]\to\mathbb R_{n-1}[X]\) en base monomiale : coefficients \(1,2,\dots,n\) au-dessus de la diagonale</div>
+      <div class="memo-item method"><b>Matrice d'une dérivation / primitive</b>appliquer l'opérateur à \(1,X,X^2,\dots\) puis écrire les coordonnées en colonnes (matrice rectangulaire si les degrés diffèrent)</div>
+      <div class="memo-item method"><b>Retrouver noyau et image par la matrice</b>noyau : résoudre \(AX=0\) ; image : combinaisons des colonnes de \(A\), base = colonnes à pivot ; puis reconvertir en vecteurs de \(E\) ou \(F\)</div>
+      <div class="memo-item"><b>Vérifications rapides</b>taille de la matrice, \(\mathrm{rg}\,A+\dim\ker=\) nb de colonnes, et un test sur un vecteur simple (ex. \(f(e_1)\) = 1ʳᵉ colonne)</div>
+    </div>
+  </section>
+
+  <section class="memo-sheet" id="methodes-base">
+    <div class="memo-head">🛠️ Fiche méthodes 2/2 — Changement de base, matrices semblables, diagonalisation</div>
+    <div class="memo-grid">
+      <div class="memo-item method"><b>Matrice de passage \(P\)</b>colonnes de \(P\) = <b>coordonnées des vecteurs de la nouvelle base \(\mathcal B'\) dans l'ancienne base \(\mathcal B\)</b> ; toujours inversible ; si \(\mathcal B\) est canonique, il suffit d'écrire les vecteurs de \(\mathcal B'\) en colonnes</div>
+      <div class="memo-item method"><b>Changer les coordonnées d'un vecteur</b>\(X_{\mathcal B}=P\,X_{\mathcal B'}\) donc \(X_{\mathcal B'}=P^{-1}X_{\mathcal B}\) (l'ancien s'exprime avec \(P\), le nouveau avec \(P^{-1}\))</div>
+      <div class="memo-item method"><b>Calculer \(P^{-1}\)</b>Gauss-Jordan sur \((P\,|\,I)\), ou résoudre le système \(PX'=X\) ; en \(2\times2\) : \(\frac1{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}\) ; vérifier \(PP^{-1}=I\)</div>
+      <div class="memo-item method"><b>Changement de base d'un endomorphisme</b>\(B=P^{-1}AP\) (\(A\) = matrice dans l'ancienne base, \(B\) dans la nouvelle, \(P\) = passage ancien → nouveau) ; moyen mnémotechnique : en lisant de droite à gauche, \(P\) (nouveau → ancien), puis \(A\), puis \(P^{-1}\) (ancien → nouveau)</div>
+      <div class="memo-item method"><b>Cas général (bases différentes au départ et à l'arrivée)</b>\(A'=Q^{-1}AP\) où \(P\) = passage des bases de <b>départ</b>, \(Q\) = passage des bases d'<b>arrivée</b></div>
+      <div class="memo-item method"><b>Choisir une base adaptée</b>prendre une base de \(\ker f\) complétée par une base de l'image (projecteur, nilpotent) ou des vecteurs propres (\(f(v)=\lambda v\)) : la matrice devient diagonale ou presque</div>
+      <div class="memo-item method"><b>Projecteur</b>base adaptée \(\mathcal B=(\text{base de Im},\text{base de ker})\) : \(B=\mathrm{diag}(1,\dots,1,0,\dots,0)\) ; \(\mathrm{rg}=\mathrm{tr}=\) nb de 1</div>
+      <div class="memo-item method"><b>Endomorphisme nilpotent (\(f^2=0\))</b>\(\mathrm{Im}\,f\subset\ker f\) ; prendre \(v\notin\ker f\), la famille \((f(v),v,\dots)\) donne une matrice avec un seul \(1\) hors diagonale ; \(\mathrm{rg}\,f\leqslant\frac n2\)</div>
+      <div class="memo-item method"><b>Diagonaliser (cas simple)</b>1) \(\det(A-\lambda I)=0\) donne les valeurs propres ; 2) pour chaque \(\lambda\), résoudre \((A-\lambda I)X=0\) : vecteurs propres ; 3) si on trouve \(n\) vecteurs propres libres : \(P\) = colonnes, \(D=P^{-1}AP=\mathrm{diag}(\lambda_i)\)</div>
+      <div class="memo-item method"><b>Puissances \(A^n\)</b>si \(A=PDP^{-1}\) : \(A^n=PD^nP^{-1}\), \(D^n=\mathrm{diag}(\lambda_i^n)\) ; si \(A=PTP^{-1}\) avec \(T=\lambda I+N\), \(N^2=0\) (trigonalisation) : \(T^n=\lambda^nI+n\lambda^{n-1}N\) (binôme de Newton)</div>
+      <div class="memo-item method"><b>Suites récurrentes couplées</b>\(X_{n+1}=AX_n\Rightarrow X_n=A^nX_0\) ; ou découpler : \(Y_n=P^{-1}X_n\) vérifie \(Y_{n+1}=DY_n\), donc \(Y_n=D^nY_0\), puis \(X_n=PY_n\)</div>
+      <div class="memo-item method"><b>Matrices semblables</b>\(A\) et \(B\) sont semblables s'il existe \(P\) inversible avec \(B=P^{-1}AP\) (même endomorphisme, bases différentes). Invariants : <b>rang, trace, déterminant</b> — si l'un diffère, elles ne sont pas semblables</div>
+      <div class="memo-item"><b>Vérifier un changement de base</b>\(\mathrm{tr}\,A=\mathrm{tr}\,B\), \(\det A=\det B\), \(\mathrm{rg}\,A=\mathrm{rg}\,B\) ; tester \(AP=PB\) (évite de calculer \(P^{-1}\))</div>
+      <div class="memo-item"><b>Pièges</b>confondre \(P\) et \(P^{-1}\) ; mettre les vecteurs de la base en <b>lignes</b> au lieu de colonnes ; inverser l'ordre dans \(Q^{-1}AP\) ; oublier que \(\mathrm{Mat}(g\circ f)=\mathrm{Mat}(g)\,\mathrm{Mat}(f)\) (pas l'inverse)</div>
+    </div>
+  </section>
+
 
   <!-- ============================================================= -->
   <section class="block" id="cours">
