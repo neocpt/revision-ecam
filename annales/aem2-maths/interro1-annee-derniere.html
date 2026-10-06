@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interro 1 année dernière (DL, équivalents) — Révision ECAM</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
+  svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div class="topbar">
+  <a href="../index.html">← Annales</a>
+  <span class="spacer"></span>
+  <a href="#ex1">Ex 1 · DL</a>
+  <a href="#ex2">Ex 2 · Équivalents</a>
+  <a href="#bilan">Bilan</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Annales · AM2 Maths · Interrogation n°1 (25/09/2025)</span>
+  <h1 class="title">Interrogation n°1 de l'année dernière — corrigé complet</h1>
+  <p class="lead">Interrogation n°1 d'A&amp;M2 (jeudi 25 septembre 2025) : <b>40 min, sur 20 points</b>, aucun document ni appareil électronique.
+  Deux exercices : <b>développements limités</b> (4 questions, 12,5 pts) et <b>équivalents</b> (2 questions, 7,5 pts).
+  Aucun corrigé officiel : tout est résolu ici et <b>vérifié par calcul formel</b>. <b>L'énoncé de chaque question (image) est juste au-dessus de sa correction.</b></p>
+
+  <div class="toc-mini">
+    <b>Sommaire</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#ex1">Exercice 1 — Développements limités (Q1 à Q4)</a></li>
+      <li><a href="#ex2">Exercice 2 — Équivalents (Q5 et Q6)</a></li>
+      <li><a href="#bilan">Bilan : réponses finales et pièges de l'interro</a></li>
+    </ul>
+  </div>
+
+  <div class="note"><span class="lab">À retenir avant de commencer</span>
+    DL usuels en 0 : \(e^u=1+u+\frac{u^2}{2}+\frac{u^3}{6}+o(u^3)\) ; \(\ln(1+u)=u-\frac{u^2}{2}+\frac{u^3}{3}+o(u^3)\) ;
+    \(\cos u=1-\frac{u^2}{2}+\frac{u^4}{24}+o(u^4)\) ; \(\sin u=u-\frac{u^3}{6}+o(u^4)\) ;
+    \((1+u)^\alpha=1+\alpha u+\frac{\alpha(\alpha-1)}{2}u^2+\frac{\alpha(\alpha-1)(\alpha-2)}{6}u^3+o(u^3)\).
+    <b>Méthode de composition</b> : on pose \(u=\varphi(x)\) avec \(u\to0\) quand \(x\to0\), on utilise le DL de la fonction extérieure en \(u\), puis on remplace \(u\) par son propre DL en \(x\) en gardant <b>exactement</b> les termes jusqu'à l'ordre demandé.
+  </div>
+
+  <!-- ======================= EXERCICE 1 ======================= -->
+  <section class="block" id="ex1">
+    <h2>Exercice 1 — Développements limités · 12,5 pts</h2>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q1 — DL₃ de \(\ln(1-x^2)\) <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <figure><img src="enonces/i1.png" alt="Énoncé Q1"><figcaption>Énoncé de la question 1 (1,5 pt).</figcaption></figure>
+
+        <p><b>Cadre.</b> On pose \(u=-x^2\). Quand \(x\to0\), \(u\to0\) : on peut utiliser le DL de \(\ln(1+u)\) en 0.</p>
+        <p><b>Formule.</b> \(\ln(1+u)=u-\dfrac{u^2}{2}+\dfrac{u^3}{3}+o(u^3)\).</p>
+        <p><b>Calcul.</b> \(u=-x^2\), \(u^2=x^4\), \(u^3=-x^6\). Donc
+        \[ \ln(1-x^2)=-x^2-\frac{x^4}{2}-\frac{x^6}{3}+o(x^6). \]
+        On ne garde que les termes d'ordre \(\le3\) : \(x^4\) et \(x^6\) sont des \(o(x^3)\).</p>
+        <div class="res">\[ \boxed{\ln(1-x^2)=-x^2+o(x^3)} \]</div>
+        <div class="warnbox"><span class="lab">Piège</span>
+          Le signe du terme en \(u^2\) est <b>−</b> \(\dfrac{u^2}{2}\) dans \(\ln(1+u)\) (alterné). Ici ce terme vaut \(-\dfrac{x^4}{2}\) (il sort de toute façon de l'ordre 3). Si l'on avait demandé l'ordre 4, on aurait écrit \(-x^2-\dfrac{x^4}{2}+o(x^4)\), et non \(+\dfrac{x^4}{2}\).
+        </div>
+        <p><b>Contrôle.</b> \(\ln(1-x^2)=\ln(1-x)+\ln(1+x)=\big(-x-\tfrac{x^2}2-\tfrac{x^3}3\big)+\big(x-\tfrac{x^2}2+\tfrac{x^3}3\big)+o(x^3)=-x^2+o(x^3)\). ✔</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q2 — DL₄ de \(\cos(\sin x)\) <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <figure><img src="enonces/i2.png" alt="Énoncé Q2"><figcaption>Énoncé de la question 2 (4 pts).</figcaption></figure>
+
+        <p><b>Cadre.</b> On pose \(u=\sin x\). Quand \(x\to0\), \(u\to0\) et \(u\sim x\).</p>
+        <p><b>Étape 1 — DL de la fonction extérieure.</b> \(\cos u=1-\dfrac{u^2}{2}+\dfrac{u^4}{24}+o(u^4)\). Comme \(u\sim x\), \(o(u^4)=o(x^4)\).</p>
+        <p><b>Étape 2 — DL de \(u=\sin x\) avec la <i>bonne précision</i>.</b> Il faut \(u^2\) à l'ordre 4 : il faut donc connaître \(u\) à l'ordre 3 (car \(u^2=x\cdot x+2x\cdot(\text{terme en }x^3)+\dots\)).
+        \[ u=\sin x=x-\frac{x^3}{6}+o(x^4). \]</p>
+        <p><b>Étape 3 — Puissances de \(u\).</b>
+        \[ u^2=\Big(x-\frac{x^3}{6}\Big)^2+o(x^4)=x^2-\frac{x^4}{3}+o(x^4),\qquad u^4=x^4+o(x^4). \]</p>
+        <p><b>Étape 4 — Assemblage.</b>
+        \[ \cos(\sin x)=1-\frac12\Big(x^2-\frac{x^4}{3}\Big)+\frac{1}{24}x^4+o(x^4)=1-\frac{x^2}{2}+\Big(\frac16+\frac1{24}\Big)x^4+o(x^4). \]
+        Or \(\dfrac16+\dfrac1{24}=\dfrac{4}{24}+\dfrac1{24}=\dfrac5{24}\).</p>
+        <div class="res">\[ \boxed{\cos(\sin x)=1-\frac{x^2}{2}+\frac{5}{24}x^4+o(x^4)} \]</div>
+        <div class="warnbox"><span class="lab">Pièges</span>
+          <ul>
+            <li>Remplacer \(\sin x\) par « \(x+o(x)\) » est <b>trop grossier</b> : dans \(u^2\), le terme \(-\frac{x^4}{3}\) vient du \(-\frac{x^3}{6}\) de \(\sin x\) et il compte à l'ordre 4. Règle : pour \(u^k\) à l'ordre \(N\), il faut \(u\) à l'ordre \(N-k+1\).</li>
+            <li>\(4!=24\) (et non 96). \(\frac{u^4}{4!}\) donne \(\frac{x^4}{24}\).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q3 — DL₃ de \(1/e^{\cos x}\) <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <figure><img src="enonces/i3.png" alt="Énoncé Q3"><figcaption>Énoncé de la question 3 (5 pts).</figcaption></figure>
+
+        <p><b>Étape 1 — Simplifier.</b> \(\dfrac{1}{e^{\cos x}}=e^{-\cos x}\).</p>
+        <p><b>Étape 2 — DL de \(\cos x\) à l'ordre 3.</b> \(\cos x=1-\dfrac{x^2}{2}+o(x^3)\) (le terme suivant est en \(x^4\)). Donc
+        \[ -\cos x=-1+\frac{x^2}{2}+o(x^3). \]</p>
+        <p><b>Étape 3 — Sortir la constante.</b> \(e^{-\cos x}=e^{-1}\cdot e^{v}\) avec \(v=\dfrac{x^2}{2}+o(x^3)\to0\).</p>
+        <p><b>Étape 4 — DL de l'exponentielle.</b> \(e^v=1+v+\dfrac{v^2}{2}+o(v^2)\). Ici \(v=\dfrac{x^2}{2}+o(x^3)\) et \(v^2=\dfrac{x^4}{4}+o(x^5)=o(x^3)\). Donc
+        \[ e^v=1+\frac{x^2}{2}+o(x^3). \]</p>
+        <div class="res">\[ \boxed{\frac{1}{e^{\cos x}}=e^{-1}+\frac{e^{-1}}{2}\,x^2+o(x^3)} \]</div>
+        <div class="warnbox"><span class="lab">Piège</span>
+          Ne pas oublier de <b>développer</b> \(e^{-1}\times(1+\frac{x^2}{2})\) si l'on veut la forme « polynôme + reste » : \(e^{-1}+\frac{e^{-1}}{2}x^2\). Et ne pas confondre \(e^{-1}\) (constante \(=1/e\approx0{,}368\)) avec une fonction de \(x\).
+        </div>
+        <p><b>Interprétation.</b> Le DL commence par \(e^{-1}=f(0)\) ; le terme en \(x\) est nul car \(\cos\) est paire (\(f\) est paire).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q4 — DL₃ de \(\sqrt[3]{1-3x}\) <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <figure><img src="enonces/i4.png" alt="Énoncé Q4"><figcaption>Énoncé de la question 4 (2 pts).</figcaption></figure>
+
+        <p><b>Cadre.</b> \(\sqrt[3]{1-3x}=(1+u)^{1/3}\) avec \(u=-3x\to0\), donc \(\alpha=\dfrac13\).</p>
+        <p><b>Coefficients du binôme généralisé.</b></p>
+        \[ \binom{\alpha}{1}=\frac13,\qquad \frac{\alpha(\alpha-1)}{2}=\frac{\frac13\cdot\left(-\frac23\right)}{2}=-\frac19,\qquad \frac{\alpha(\alpha-1)(\alpha-2)}{6}=\frac{\frac13\cdot\left(-\frac23\right)\cdot\left(-\frac53\right)}{6}=\frac{10/27}{6}=\frac{5}{81}. \]
+        <p><b>Remplacement.</b> \(u=-3x\), \(u^2=9x^2\), \(u^3=-27x^3\) :
+        \[ (1-3x)^{1/3}=1+\frac13(-3x)-\frac19(9x^2)+\frac5{81}(-27x^3)+o(x^3)=1-x-x^2-\frac{5}{3}x^3+o(x^3). \]</p>
+        <div class="res">\[ \boxed{\sqrt[3]{1-3x}=1-x-x^2-\frac53\,x^3+o(x^3)} \]</div>
+        <p><b>Contrôle numérique.</b> \(x=0{,}01\) : \(\sqrt[3]{0{,}97}\approx0{,}98990\) ; le DL donne \(1-0{,}01-0{,}0001-0{,}00000167\approx0{,}98990\). ✔</p>
+        <div class="warnbox"><span class="lab">Piège</span>
+          Calcul de \(\frac{5}{81}\cdot27=\frac{5}{3}\), pas \(\frac63\) : toujours simplifier la fraction finale <b>à part</b>.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= EXERCICE 2 ======================= -->
+  <section class="block" id="ex2">
+    <h2>Exercice 2 — Équivalents · 7,5 pts</h2>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q5 — Convergence de \(U_n=\left(\dfrac{-1+3n}{2+3n}\right)^n\) <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <figure><img src="enonces/i5.png" alt="Énoncé Q5"><figcaption>Énoncé de la question 5 (3 pts).</figcaption></figure>
+
+        <p><b>Forme indéterminée.</b> La base tend vers 1 et l'exposant vers \(+\infty\) : forme \(1^\infty\). On passe à l'exponentielle :
+        \[ U_n=\exp\big(n\ln(\text{base})\big). \]</p>
+        <p><b>Écrire la base comme \(1+\)(quelque chose qui tend vers 0).</b>
+        \[ \frac{-1+3n}{2+3n}=\frac{(2+3n)-3}{2+3n}=1-\frac{3}{3n+2}. \]</p>
+        <p><b>Équivalent du logarithme.</b> \(\dfrac{3}{3n+2}\to0\), donc \(\ln\!\Big(1-\dfrac{3}{3n+2}\Big)\sim-\dfrac{3}{3n+2}\) (car \(\ln(1+v)\sim v\) quand \(v\to0\)).</p>
+        <p><b>Équivalent de l'exposant.</b>
+        \[ n\ln\!\Big(1-\frac{3}{3n+2}\Big)\sim-\frac{3n}{3n+2}\ \xrightarrow[n\to+\infty]{}\ -1. \]
+        Un équivalent d'une suite qui a une limite finie \(\ell\) a la même limite : l'exposant tend vers \(-1\).</p>
+        <p><b>Conclusion.</b> Par continuité de l'exponentielle :</p>
+        <div class="res">\(U_n\) converge et \[ \boxed{\lim_{n\to+\infty}U_n=e^{-1}=\frac1e}. \]</div>
+        <div class="warnbox"><span class="lab">Piège (le point où l'on perd tous les points)</span>
+          On ne peut <b>pas</b> écrire « \(\exp(a_n)\sim\exp(b_n)\) » dès que \(a_n\sim b_n\) : c'est faux en général (par exemple \(a_n=n+1\sim b_n=n\), mais \(e^{n+1}=e\cdot e^{n}\not\sim e^n\)).
+          On exploite l'équivalent <b>pour trouver la limite de l'exposant</b>, puis on applique \(\exp\) à cette limite. Ici, l'équivalent \(-\frac{3n}{3n+2}\) n'est pas la bonne fin de calcul : il faut aller jusqu'à \(-1\).
+        </div>
+        <p><b>Interprétation.</b> C'est la version « discrète » de \((1-\frac{1}{n})^n\to e^{-1}\) : ici \(\frac{3}{3n+2}\approx\frac1n\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q6 — \(\displaystyle\lim_{x\to\pi/2}\dfrac{\ln(\sin^2x)}{(\frac\pi2-x)^2}\) <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <figure><img src="enonces/i6.png" alt="Énoncé Q6"><figcaption>Énoncé de la question 6 (4,5 pts).</figcaption></figure>
+
+        <p><b>Changement de variable.</b> On pose \(u=\dfrac\pi2-x\). Alors \(x\to\dfrac\pi2\iff u\to0\), et \(\left(\frac\pi2-x\right)^2=u^2\).</p>
+        <p><b>Réécriture.</b> \(\sin x=\sin\!\big(\tfrac\pi2-u\big)=\cos u\), donc \(\sin^2x=\cos^2u=1-\sin^2u\). Ainsi
+        \[ \frac{\ln(\sin^2x)}{\left(\frac\pi2-x\right)^2}=\frac{\ln\!\big(1-\sin^2u\big)}{u^2}. \]</p>
+        <p><b>Équivalents.</b> \(\sin^2u\to0\), donc \(\ln(1-\sin^2u)\sim-\sin^2u\). De plus \(\sin u\sim u\) donc \(\sin^2u\sim u^2\) (un équivalent peut être élevé à une puissance). Donc
+        \[ \ln(1-\sin^2u)\sim-u^2. \]</p>
+        <p><b>Quotient.</b> Un quotient d'équivalents est un équivalent :
+        \[ \frac{\ln(1-\sin^2u)}{u^2}\sim\frac{-u^2}{u^2}=-1. \]</p>
+        <div class="res">\[ \boxed{\lim_{x\to\pi/2}\frac{\ln(\sin^2x)}{\left(\frac\pi2-x\right)^2}=-1} \]</div>
+        <p><b>Contrôle (autre méthode).</b> \(\ln(\sin^2x)=2\ln(\cos u)\) et \(\cos u=1-\frac{u^2}{2}+o(u^2)\), donc \(\ln\cos u=-\frac{u^2}{2}+o(u^2)\) et \(2\ln\cos u=-u^2+o(u^2)\) : on retrouve \(-1\). ✔</p>
+        <div class="warnbox"><span class="lab">Pièges</span>
+          <ul>
+            <li>Un équivalent <b>ne s'additionne pas</b> et ne se compose pas avec \(\ln\) en général : on applique « \(\ln(1+v)\sim v\) » seulement quand l'argument est \(1+v\) avec \(v\to0\). Il faut donc d'abord ramener \(\sin^2x\) à la forme \(1-(\text{petit})\), ce que fait \(\sin^2=1-\cos^2\) (ou \(\cos^2u=1-\sin^2u\)).</li>
+            <li>Changer de variable avant de chercher des équivalents : on ne peut parler d'équivalents « en 0 » que si la variable tend vers 0.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= BILAN ======================= -->
+  <section class="block" id="bilan">
+    <h2>Bilan — réponses finales</h2>
+    <div class="overflow">
+    <table>
+      <tr><th>Question</th><th>Barème</th><th>Réponse</th></tr>
+      <tr><td>Q1 DL₃ \(\ln(1-x^2)\)</td><td>1,5</td><td>\(-x^2+o(x^3)\)</td></tr>
+      <tr><td>Q2 DL₄ \(\cos(\sin x)\)</td><td>4</td><td>\(1-\frac{x^2}{2}+\frac{5}{24}x^4+o(x^4)\)</td></tr>
+      <tr><td>Q3 DL₃ \(1/e^{\cos x}\)</td><td>5</td><td>\(e^{-1}+\frac{e^{-1}}{2}x^2+o(x^3)\)</td></tr>
+      <tr><td>Q4 DL₃ \(\sqrt[3]{1-3x}\)</td><td>2</td><td>\(1-x-x^2-\frac53x^3+o(x^3)\)</td></tr>
+      <tr><td>Q5 \(\left(\frac{-1+3n}{2+3n}\right)^n\)</td><td>3</td><td>converge vers \(e^{-1}\)</td></tr>
+      <tr><td>Q6 limite en \(\pi/2\)</td><td>4,5</td><td>\(-1\)</td></tr>
+    </table>
+    </div>
+    <div class="method"><span class="lab">Réflexes à retenir</span>
+      <ul>
+        <li><b>DL composé</b> : poser \(u=\varphi(x)\to0\), DL extérieur en \(u\), puis DL de \(u\) avec la précision \(N-k+1\) pour \(u^k\).</li>
+        <li><b>Forme \(1^\infty\)</b> : passer par \(\exp(n\ln(\dots))\), écrire la base \(1+v\), utiliser \(\ln(1+v)\sim v\), calculer la <b>limite de l'exposant</b>.</li>
+        <li><b>Limite avec \(\ln\)</b> : se ramener à \(\ln(1+v)\) avec \(v\to0\) ; pas d'équivalent sur une somme.</li>
+        <li><b>Point en \(a\neq0\)</b> : poser \(u=x-a\) (ou \(a-x\)) pour revenir en 0.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+<script src="../../assets/gate.js"></script>
+</body>
+</html>
