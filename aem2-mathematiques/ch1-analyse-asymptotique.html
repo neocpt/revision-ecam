@@ -315,8 +315,8 @@ window.MathJax = {
   <!-- ============================================================= -->
   <section class="block" id="td">
     <h2>3. Correction du TD n°1 — Analyse asymptotique</h2>
-    <p>TD officiel (L. Graissot, ECAM AM2, 2026-2027). Les exercices 1 à 8 sont corrigés intégralement
-    ci-dessous ; les exercices 9 à 15 seront traités dans une prochaine session (voir encart en fin de section).</p>
+    <p>TD officiel (L. Graissot, ECAM AM2, 2026-2027). Les exercices 1 à 15 sont corrigés intégralement
+    ci-dessous (énoncé en image au-dessus de chaque exercice).</p>
 
     <!-- EX 1 -->
     <div class="exo-card">
@@ -665,12 +665,205 @@ window.MathJax = {
       </div>
     </div>
 
-    <div class="note">
-      <span class="lab">À venir — session suivante</span>
-      Les exercices <b>9 à 15</b> du TD n°1 (DL en un point quelconque et position par rapport à la tangente,
-      dix limites par DL, primitivation d'un DL, étude d'asymptotes, différences finies, DL de \(\tan\) à l'ordre 5
-      par deux méthodes, suite implicite \(x^3+nx-1=0\)) seront corrigés dans une prochaine session, avec la même
-      méthode (chaque question, aucun raccourci).
+    <!-- EX 9 -->
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 9 — Développements limités en un point \(a\) quelconque</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <figure><img src="td1-img/ex9.png" alt="Énoncé — Exercice 9, cinq DL en un point a" loading="lazy"></figure>
+        <p><b>Méthode générale.</b> On pose \(x=a+h\) avec \(h\to0\), on développe en \(h\) (DL usuels, ou formule de Taylor-Young \(f(a+h)=\sum\frac{f^{(k)}(a)}{k!}h^k+o(h^n)\)), puis on remplace \(h\) par \(x-a\).</p>
+
+        <p class="q">1) \(f(x)=\sin x\) en \(a=\frac\pi4\) [ordre 3]</p>
+        <p>\(\sin\big(\tfrac\pi4+h\big)=\sin\tfrac\pi4\cos h+\cos\tfrac\pi4\sin h=\tfrac{\sqrt2}2(\cos h+\sin h)\). Avec \(\cos h=1-\tfrac{h^2}2+o(h^3)\) et \(\sin h=h-\tfrac{h^3}6+o(h^3)\) :</p>
+        <div class="res">\(\sin x=\dfrac{\sqrt2}2\Big[1+h-\dfrac{h^2}2-\dfrac{h^3}6\Big]+o(h^3)\), \(h=x-\dfrac\pi4\).</div>
+
+        <p class="q">2) \(g(x)=\dfrac{\ln x}{x^2}\) en \(a=1\) [ordre 4]</p>
+        <p>\(x=1+h\) : \(\ln(1+h)=h-\tfrac{h^2}2+\tfrac{h^3}3-\tfrac{h^4}4+o(h^4)\) et \((1+h)^{-2}=1-2h+3h^2-4h^3+5h^4+o(h^4)\). Produit, coefficient par coefficient :</p>
+        <ul>
+          <li>\(h\) : \(1\) ;</li>
+          <li>\(h^2\) : \(1\cdot(-2)+(-\tfrac12)\cdot1=-\tfrac52\) ;</li>
+          <li>\(h^3\) : \(1\cdot3+(-\tfrac12)(-2)+\tfrac13=3+1+\tfrac13=\tfrac{13}3\) ;</li>
+          <li>\(h^4\) : \(1\cdot(-4)+(-\tfrac12)\cdot3+\tfrac13\cdot(-2)+(-\tfrac14)=-4-\tfrac32-\tfrac23-\tfrac14=-\tfrac{77}{12}\).</li>
+        </ul>
+        <div class="res">\(\dfrac{\ln x}{x^2}=h-\dfrac52h^2+\dfrac{13}3h^3-\dfrac{77}{12}h^4+o(h^4)\), \(h=x-1\).</div>
+
+        <p class="q">3) \(h(x)=\dfrac1x\) en \(a=2\) [ordre 3]</p>
+        <p>\(\dfrac1{2+t}=\dfrac12\cdot\dfrac1{1+t/2}=\dfrac12\Big(1-\dfrac t2+\dfrac{t^2}4-\dfrac{t^3}8\Big)+o(t^3)\) avec \(t=x-2\).</p>
+        <div class="res">\(\dfrac1x=\dfrac12-\dfrac t4+\dfrac{t^2}8-\dfrac{t^3}{16}+o(t^3)\), \(t=x-2\).</div>
+
+        <p class="q">4) \(i(x)=\sin x\cos3x\) en \(a=\frac\pi3\) [ordre 2]</p>
+        <p>\(x=\frac\pi3+h\). \(\sin\big(\tfrac\pi3+h\big)=\tfrac{\sqrt3}2\cos h+\tfrac12\sin h=\tfrac{\sqrt3}2+\tfrac h2-\tfrac{\sqrt3}4h^2+o(h^2)\).
+        \(\cos(3x)=\cos(\pi+3h)=-\cos3h=-1+\tfrac92h^2+o(h^2)\). Produit :
+        \[\Big(\tfrac{\sqrt3}2+\tfrac h2-\tfrac{\sqrt3}4h^2\Big)\Big(-1+\tfrac92h^2\Big)=-\tfrac{\sqrt3}2-\tfrac h2+\Big(\tfrac{\sqrt3}4+\tfrac{9\sqrt3}4\Big)h^2+o(h^2).\]</p>
+        <div class="res">\(i(x)=-\dfrac{\sqrt3}2-\dfrac h2+\dfrac{5\sqrt3}2h^2+o(h^2)\), \(h=x-\dfrac\pi3\).</div>
+
+        <p class="q">5) \(j(x)=\arctan x\) en \(a=1\) [ordre 3] — par Taylor-Young</p>
+        <p>\(f'=\dfrac1{1+x^2}\), \(f''=\dfrac{-2x}{(1+x^2)^2}\), \(f'''=\dfrac{-2(1+x^2)+8x^2}{(1+x^2)^3}=\dfrac{6x^2-2}{(1+x^2)^3}\). En \(x=1\) : \(f(1)=\tfrac\pi4\), \(f'(1)=\tfrac12\), \(f''(1)=-\tfrac12\), \(f'''(1)=\tfrac48=\tfrac12\). Taylor-Young : \(\tfrac\pi4+\tfrac12h-\tfrac{1/2}{2!}h^2+\tfrac{1/2}{3!}h^3\).</p>
+        <div class="res">\(\arctan x=\dfrac\pi4+\dfrac h2-\dfrac{h^2}4+\dfrac{h^3}{12}+o(h^3)\), \(h=x-1\).</div>
+        <div class="method"><span class="lab">⚡ Méthode</span>DL en \(a\neq0\) : poser \(x=a+h\), développer en \(h\) (formules d'addition si \(a\) est un angle remarquable, factorisation \(a(1+h/a)\) pour \(\frac1x\), ou Taylor-Young quand les dérivées sont simples).</div>
+      </div>
+    </div>
+
+    <!-- EX 10 -->
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 10 — Dix limites par développements limités</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <figure><img src="td1-img/ex10.png" alt="Énoncé — Exercice 10, dix limites" loading="lazy"></figure>
+
+        <p class="q">1) \(\displaystyle\lim_{x\to+\infty}\Big(x-x^2\ln\big(1+\tfrac1x\big)\Big)\)</p>
+        <p>\(u=\frac1x\to0\) : \(\ln(1+u)=u-\tfrac{u^2}2+\tfrac{u^3}3+o(u^3)\), donc \(x^2\ln(1+\tfrac1x)=\dfrac1{u^2}\big(u-\tfrac{u^2}2+\tfrac{u^3}3+o(u^3)\big)=x-\tfrac12+\tfrac1{3x}+o(\tfrac1x)\). L'expression vaut \(\tfrac12-\tfrac1{3x}+o(\tfrac1x)\).</p>
+        <div class="res">Limite \(=\dfrac12\).</div>
+
+        <p class="q">2) \(\displaystyle\lim_{x\to0}\dfrac{e^{x^2}-\cos x}{x^2}\)</p>
+        <p>\(e^{x^2}=1+x^2+o(x^2)\), \(\cos x=1-\tfrac{x^2}2+o(x^2)\) : numérateur \(=\tfrac32x^2+o(x^2)\).</p>
+        <div class="res">Limite \(=\dfrac32\).</div>
+
+        <p class="q">3) \(\displaystyle\lim_{x\to+\infty}\sqrt{x^2+x+1}-x\)</p>
+        <p>\(\sqrt{x^2+x+1}=x\sqrt{1+v}\) avec \(v=\tfrac1x+\tfrac1{x^2}\to0\). \(\sqrt{1+v}=1+\tfrac v2+O(v^2)\) et \(v^2=O(\tfrac1{x^2})\), donc \(x\sqrt{1+v}=x+\tfrac12+\tfrac1{2x}+O\big(\tfrac1x\big)=x+\tfrac12+o(1)\). La différence avec \(x\) tend vers \(\tfrac12\).</p>
+        <div class="res">Limite \(=\dfrac12\).</div>
+
+        <p class="q">4) \(\displaystyle\lim_{x\to0}x\,\dfrac{\ln(1+x)-\sin x}{\tan x-x}\)</p>
+        <p>\(\ln(1+x)-\sin x=\big(x-\tfrac{x^2}2+\tfrac{x^3}3\big)-\big(x-\tfrac{x^3}6\big)+o(x^3)=-\tfrac{x^2}2+\tfrac{x^3}2+o(x^3)\sim-\tfrac{x^2}2\). \(\tan x-x=\tfrac{x^3}3+o(x^3)\sim\tfrac{x^3}3\). Donc \(x\cdot\dfrac{-x^2/2}{x^3/3}=-\dfrac32\).</p>
+        <div class="res">Limite \(=-\dfrac32\).</div>
+
+        <p class="q">5) \(\displaystyle\lim_{x\to0}\dfrac{\cos x-\sqrt{1-x^2}}{x^4}\)</p>
+        <p>\(\cos x=1-\tfrac{x^2}2+\tfrac{x^4}{24}+o(x^4)\). \(\sqrt{1-x^2}=1+\tfrac{(-x^2)}2-\tfrac{(-x^2)^2}8+o(x^4)=1-\tfrac{x^2}2-\tfrac{x^4}8+o(x^4)\). Différence \(=\big(\tfrac1{24}+\tfrac18\big)x^4=\tfrac16x^4+o(x^4)\).</p>
+        <div class="res">Limite \(=\dfrac16\).</div>
+
+        <p class="q">6) \(\displaystyle\lim_{x\to0}\dfrac{(1+3x)^{1/3}-1-\sin x}{1-\cos x}\)</p>
+        <p>\((1+3x)^{1/3}=1+\tfrac13(3x)+\dfrac{\frac13\cdot(-\frac23)}{2}(3x)^2+o(x^2)=1+x-x^2+o(x^2)\). Avec \(\sin x=x+o(x^2)\) : numérateur \(=-x^2+o(x^2)\). Dénominateur : \(1-\cos x\sim\tfrac{x^2}2\).</p>
+        <div class="res">Limite \(=\dfrac{-1}{1/2}=-2\).</div>
+
+        <p class="q">7) \(\displaystyle\lim_{x\to0}\Big(\dfrac{\tan x}x\Big)^{1/x^2}\)</p>
+        <p>\(\dfrac{\tan x}x=1+\tfrac{x^2}3+o(x^2)\). \(\ln\Big(\dfrac{\tan x}x\Big)^{1/x^2}=\dfrac1{x^2}\ln\big(1+\tfrac{x^2}3+o(x^2)\big)=\dfrac1{x^2}\big(\tfrac{x^2}3+o(x^2)\big)\to\tfrac13\). Par continuité de l'exponentielle :</p>
+        <div class="res">Limite \(=e^{1/3}\).</div>
+
+        <p class="q">8) \(\displaystyle\lim_{x\to0}\dfrac{\sin(x-\sin x)}{\sqrt{1+x^3}-1}\)</p>
+        <p>\(x-\sin x=\tfrac{x^3}6+o(x^3)\to0\), donc \(\sin(x-\sin x)\sim x-\sin x\sim\tfrac{x^3}6\). \(\sqrt{1+x^3}-1\sim\tfrac{x^3}2\).</p>
+        <div class="res">Limite \(=\dfrac{1/6}{1/2}=\dfrac13\).</div>
+
+        <p class="q">9) \(\displaystyle\lim_{x\to0}\dfrac{(1+x)^{1/x}-e}{x}\)</p>
+        <p>\((1+x)^{1/x}=\exp\Big(\dfrac{\ln(1+x)}x\Big)=\exp\big(1-\tfrac x2+o(x)\big)=e\cdot e^{-x/2+o(x)}=e\big(1-\tfrac x2+o(x)\big)\). Numérateur \(=-\tfrac e2x+o(x)\).</p>
+        <div class="res">Limite \(=-\dfrac e2\).</div>
+
+        <p class="q">10) \(\displaystyle\lim_{x\to1}\dfrac{\ln(2x^2-1)}{\tan(x-1)}\)</p>
+        <p>\(h=x-1\to0\) : \(2x^2-1=2(1+h)^2-1=1+4h+2h^2\), donc \(\ln(2x^2-1)=4h+o(h)\). \(\tan(x-1)=\tan h\sim h\).</p>
+        <div class="res">Limite \(=4\).</div>
+        <div class="warnbox"><span class="lab">Piège</span>Q4, Q5, Q6, Q9 : les termes d'ordre inférieur s'annulent. On développe <b>jusqu'au premier terme non nul</b> ; on ne soustrait jamais deux équivalents. Q7 : une forme \(1^\infty\) se traite par \(\exp(\dots\ln\dots)\).</div>
+        <div class="method"><span class="lab">⚡ Méthode</span>Limite d'une forme indéterminée : (i) ramener en 0 (\(h=x-a\) ou \(u=1/x\)) ; (ii) DL du numérateur et du dénominateur jusqu'au 1<sup>er</sup> terme non nul ; (iii) équivalents puis division ; (iv) pour \(u^v\), passer par \(e^{v\ln u}\).</div>
+      </div>
+    </div>
+
+    <!-- EX 11 -->
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 11 — \(f(x)=\dfrac x{e^x-1}\) : DL, tangente, position</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <figure><img src="td1-img/ex11.png" alt="Énoncé — Exercice 11" loading="lazy"></figure>
+        <p class="q">1) DL en 0 à l'ordre 2</p>
+        <p>\(f\) n'est pas définie en 0. On met \(x\) en facteur : \(e^x-1=x\Big(1+\tfrac x2+\tfrac{x^2}6+o(x^2)\Big)\), donc \(f(x)=\dfrac1{1+u}\) avec \(u=\tfrac x2+\tfrac{x^2}6+o(x^2)\). \(\dfrac1{1+u}=1-u+u^2+o(u^2)\) et \(u^2=\tfrac{x^2}4+o(x^2)\) :</p>
+        <p>\(f(x)=1-\tfrac x2-\tfrac{x^2}6+\tfrac{x^2}4+o(x^2)\).</p>
+        <div class="res">\(f(x)=1-\dfrac x2+\dfrac{x^2}{12}+o(x^2)\). \(f\) se prolonge par continuité en 0 avec \(f(0)=1\).</div>
+        <p class="q">2) Tangente et position</p>
+        <p>Le prolongement est dérivable en 0 (DL d'ordre 1) avec \(f'(0)=-\tfrac12\) : tangente \(T:\ y=1-\dfrac x2\). Position : \(f(x)-\Big(1-\tfrac x2\Big)=\tfrac{x^2}{12}+o(x^2)\sim\tfrac{x^2}{12}\gt0\).</p>
+        <div class="res">La courbe est <b>au-dessus</b> de sa tangente au voisinage de 0.</div>
+      </div>
+    </div>
+
+    <!-- EX 12 -->
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 12 — \(f(x)=\ln(1+x+x^2)\) : tangentes en 0 et en 1</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <figure><img src="td1-img/ex12.png" alt="Énoncé — Exercice 12" loading="lazy"></figure>
+        <p>\(1+x+x^2\gt0\) pour tout réel (discriminant \(-3\lt0\)) : \(f\) est définie et \(C^\infty\) sur \(\mathbb R\).</p>
+        <p class="q">En \(x_0=0\)</p>
+        <p>\(u=x+x^2\to0\) : \(\ln(1+u)=u-\tfrac{u^2}2+\tfrac{u^3}3+o(u^3)\) avec \(u^2=x^2+2x^3+o(x^3)\), \(u^3=x^3+o(x^3)\) :
+        \(f(x)=x+x^2-\tfrac{x^2}2-x^3+\tfrac{x^3}3+o(x^3)\).</p>
+        <p>\(f(x)=x+\tfrac{x^2}2-\tfrac23x^3+o(x^3)\). Tangente \(y=x\) ; \(f(x)-x\sim\tfrac{x^2}2\gt0\).</p>
+        <div class="res">En 0 : tangente \(y=x\), courbe <b>au-dessus</b>.</div>
+        <p class="q">En \(x_0=1\) (Taylor-Young à l'ordre 2)</p>
+        <p>\(f'(x)=\dfrac{1+2x}{1+x+x^2}\), \(f''(x)=\dfrac{2(1+x+x^2)-(1+2x)^2}{(1+x+x^2)^2}\). En 1 : \(f(1)=\ln3\), \(f'(1)=\tfrac33=1\), \(f''(1)=\dfrac{6-9}9=-\tfrac13\). Donc
+        \(f(x)=\ln3+(x-1)-\tfrac16(x-1)^2+o\big((x-1)^2\big)\). Tangente \(y=\ln3+(x-1)\) ; différence \(\sim-\tfrac16(x-1)^2\lt0\).</p>
+        <div class="res">En 1 : tangente \(y=\ln3+x-1\), courbe <b>en dessous</b>.</div>
+        <div class="method"><span class="lab">⚡ Méthode</span>Position par rapport à la tangente en \(x_0\) : DL jusqu'à l'ordre où apparaît le <b>premier terme non nul après \(f(x_0)+f'(x_0)h\)</b> ; son signe donne la position (ordre 2 : \(f''(x_0)/2\) ; ordre 3 impair : la courbe traverse la tangente).</div>
+      </div>
+    </div>
+
+    <!-- EX 13 -->
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 13 — Tangente et position pour trois fonctions</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <figure><img src="td1-img/ex13.png" alt="Énoncé — Exercice 13" loading="lazy"></figure>
+
+        <p class="q">1) \(f(x)=\dfrac1x\big(e^{\sin x}-1\big)\) en \(x_0=0\)</p>
+        <p>On développe \(e^{\sin x}\) à l'ordre 4. \(s=\sin x=x-\tfrac{x^3}6+o(x^4)\) ; \(s^2=x^2-\tfrac{x^4}3+o(x^4)\), \(s^3=x^3+o(x^4)\), \(s^4=x^4+o(x^4)\) :
+        \[e^{s}=1+\Big(x-\tfrac{x^3}6\Big)+\tfrac12\Big(x^2-\tfrac{x^4}3\Big)+\tfrac{x^3}6+\tfrac{x^4}{24}=1+x+\tfrac{x^2}2+0\cdot x^3+\Big(-\tfrac16+\tfrac1{24}\Big)x^4=1+x+\tfrac{x^2}2-\tfrac{x^4}8+o(x^4).\]
+        Donc \(f(x)=1+\tfrac x2-\tfrac{x^3}8+o(x^3)\). Prolongement \(f(0)=1\), \(f'(0)=\tfrac12\), tangente \(y=1+\tfrac x2\). Le terme en \(x^2\) est nul : \(f(x)-\big(1+\tfrac x2\big)\sim-\tfrac{x^3}8\), qui change de signe.</p>
+        <div class="res">Tangente \(y=1+\frac x2\) ; courbe <b>au-dessus</b> pour \(x\lt0\), <b>en dessous</b> pour \(x\gt0\) : elle <b>traverse</b> sa tangente (point d'inflexion).</div>
+
+        <p class="q">2) \(f(x)=\dfrac{\arctan x}{\sin^3x}-\dfrac1{x^2}\) en \(x_0=0\)</p>
+        <p>Les termes sont singuliers (\(\sim x^{-2}\)) : on développe chaque morceau assez loin (ordre 5 pour arctan et sin, car on divise par \(x^3\)).</p>
+        <p>\(\arctan x=x\big(1-\tfrac{x^2}3+\tfrac{x^4}5\big)+o(x^5)\) ; \(\sin x=x(1+w)\), \(w=-\tfrac{x^2}6+\tfrac{x^4}{120}\). \((1+w)^3=1+3w+3w^2+o(x^4)=1-\tfrac{x^2}2+\tfrac{x^4}{40}+\tfrac{x^4}{12}=1-\tfrac{x^2}2+\tfrac{13}{120}x^4\). Inverse (\(v=-\tfrac{x^2}2+\tfrac{13}{120}x^4\)) : \(1-v+v^2=1+\tfrac{x^2}2-\tfrac{13}{120}x^4+\tfrac{x^4}4=1+\tfrac{x^2}2+\tfrac{17}{120}x^4\). Alors
+        \[\frac{\arctan x}{\sin^3x}=\frac1{x^2}\Big(1-\tfrac{x^2}3+\tfrac{x^4}5\Big)\Big(1+\tfrac{x^2}2+\tfrac{17}{120}x^4\Big)=\frac1{x^2}\Big(1+\tfrac{x^2}6+\tfrac7{40}x^4+o(x^4)\Big)\]
+        (coefficient de \(x^2\) : \(\tfrac12-\tfrac13=\tfrac16\) ; de \(x^4\) : \(\tfrac{17}{120}-\tfrac16+\tfrac15=\tfrac{17-20+24}{120}=\tfrac7{40}\)). On retranche \(\tfrac1{x^2}\) :</p>
+        <div class="res">\(f(x)=\dfrac16+\dfrac7{40}x^2+o(x^2)\). Prolongement \(f(0)=\tfrac16\), \(f'(0)=0\) : tangente <b>horizontale</b> \(y=\tfrac16\), courbe <b>au-dessus</b> (\(\tfrac7{40}x^2\gt0\)).</div>
+
+        <p class="q">3) \(f(x)=\sqrt{\tan x}\) en \(x_0=\frac\pi4\)</p>
+        <p>\(h=x-\tfrac\pi4\). \(\tan\big(\tfrac\pi4+h\big)=\dfrac{1+\tan h}{1-\tan h}\) avec \(\tan h=h+o(h^2)\) : \(\dfrac{1+h}{1-h}=(1+h)(1+h+h^2)+o(h^2)=1+2h+2h^2+o(h^2)\). Puis \(\sqrt{1+t}=1+\tfrac t2-\tfrac{t^2}8\) avec \(t=2h+2h^2\), \(t^2=4h^2+o(h^2)\) :
+        \(f=1+h+h^2-\tfrac{h^2}2+o(h^2)=1+h+\tfrac{h^2}2+o(h^2)\).</p>
+        <div class="res">Tangente \(y=1+\big(x-\tfrac\pi4\big)\) ; \(f-\text{tangente}\sim\tfrac{h^2}2\gt0\) : courbe <b>au-dessus</b>.</div>
+        <div class="warnbox"><span class="lab">Piège</span>Q1 : le coefficient de \(x^2\) est nul, il faut donc aller à l'ordre 3 pour avoir la position. Q2 : si on ne développe pas arctan et sin jusqu'à l'ordre 5, les termes singuliers \(x^{-2}\) ne se simplifient pas et le résultat est faux.</div>
+        <div class="method"><span class="lab">⚡ Méthode</span>Fonction définie par un quotient/une différence singulière : écrire chaque morceau sous la forme \(x^k(1+\dots)\), développer à l'ordre qui compense la puissance \(x^{k}\) retranchée, simplifier, lire tangente (ordre 1) et position (1<sup>er</sup> terme non nul ensuite).</div>
+      </div>
+    </div>
+
+    <!-- EX 14 -->
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 14 — Asymptotes en \(+\infty\) et position</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <figure><img src="td1-img/ex14.png" alt="Énoncé — Exercice 14" loading="lazy"></figure>
+        <p>Dans les trois cas on pose \(u=\frac1x\to0^+\) et on cherche \(f(x)=ax+b+\dfrac cx+o(\tfrac1x)\) : alors \(y=ax+b\) est asymptote et le signe de \(c\) donne la position.</p>
+
+        <p class="q">1) \(f(x)=(x^2-1)\ln\Big(\dfrac{x+1}{x-1}\Big)\) (\(x\gt1\))</p>
+        <p>\(\dfrac{x+1}{x-1}=\dfrac{1+u}{1-u}\), \(\ln\dfrac{1+u}{1-u}=\ln(1+u)-\ln(1-u)=2\Big(u+\tfrac{u^3}3+\tfrac{u^5}5\Big)+o(u^5)\). Et \(x^2-1=\dfrac{1-u^2}{u^2}\). Donc
+        \[f=\frac{2(1-u^2)}{u}\Big(1+\tfrac{u^2}3+\tfrac{u^4}5\Big)=\frac2u\Big(1-\tfrac23u^2-\tfrac2{15}u^4\Big)=2x-\tfrac4{3x}+o\Big(\tfrac1x\Big).\]</p>
+        <div class="res">Asymptote \(y=2x\) ; \(f(x)-2x\sim-\dfrac4{3x}\lt0\) : courbe <b>en dessous</b>.</div>
+
+        <p class="q">2) \(f(x)=\sqrt{x^2+1}+\sqrt{x^2-1}\)</p>
+        <p>\(f=x\big(\sqrt{1+u^2}+\sqrt{1-u^2}\big)\). Avec \(t=u^2\) : \(\sqrt{1+t}+\sqrt{1-t}=\big(1+\tfrac t2-\tfrac{t^2}8\big)+\big(1-\tfrac t2-\tfrac{t^2}8\big)+o(t^2)=2-\tfrac{t^2}4+o(t^2)\), soit \(2-\tfrac{u^4}4\). Donc \(f=2x-\dfrac1{4x^3}+o\big(\tfrac1{x^3}\big)\).</p>
+        <div class="res">Asymptote \(y=2x\) ; \(f(x)-2x\sim-\dfrac1{4x^3}\lt0\) : courbe <b>en dessous</b>.</div>
+
+        <p class="q">3) \(f(x)=x^2\arctan\Big(\dfrac1{1+x}\Big)\)</p>
+        <p>\(z=\dfrac1{1+x}=\dfrac u{1+u}=u-u^2+u^3+o(u^3)\to0\), \(z^3=u^3+o(u^3)\). \(\arctan z=z-\tfrac{z^3}3+o(z^3)=u-u^2+u^3-\tfrac{u^3}3=u-u^2+\tfrac23u^3+o(u^3)\). On multiplie par \(x^2=\tfrac1{u^2}\) :
+        \(f=\tfrac1u-1+\tfrac23u+o(u)=x-1+\dfrac2{3x}+o\big(\tfrac1x\big)\).</p>
+        <div class="res">Asymptote \(y=x-1\) ; \(f(x)-(x-1)\sim\dfrac2{3x}\gt0\) : courbe <b>au-dessus</b>.</div>
+        <div class="warnbox"><span class="lab">Piège</span>Il faut pousser le DL en \(u\) jusqu'à l'ordre qui, après multiplication par \(x=\frac1u\) (ou \(x^2\)), fait apparaître le terme en \(\frac1x\) : ici ordres 5, 4 et 3 selon les cas.</div>
+        <div class="method"><span class="lab">⚡ Méthode</span>Asymptote en \(\infty\) : poser \(u=1/x\), factoriser le terme dominant, DL en \(u\) assez loin, remultiplier ; asymptote \(y=ax+b\), position = signe du premier terme restant.</div>
+      </div>
+    </div>
+
+    <!-- EX 15 -->
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 15 — Suite définie par \(e^x+x=n\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <figure><img src="td1-img/ex15.png" alt="Énoncé — Exercice 15" loading="lazy"></figure>
+        <p class="q">1) \(x_n\) est bien définie</p>
+        <p>\(\varphi(x)=e^x+x\) est continue et strictement croissante sur \(\mathbb R\) (somme de deux fonctions strictement croissantes), avec \(\varphi(x)\to-\infty\) en \(-\infty\) et \(+\infty\) en \(+\infty\). Théorème de la bijection : \(\varphi\) est une bijection de \(\mathbb R\) sur \(\mathbb R\).</p>
+        <div class="res">Pour tout \(n\), l'équation \(\varphi(x)=n\) a une unique solution \(x_n=\varphi^{-1}(n)\).</div>
+
+        <p class="q">2) Monotonie et limite</p>
+        <p>\(\varphi(x_{n+1})=n+1\gt n=\varphi(x_n)\) et \(\varphi\) est strictement croissante, donc \(x_{n+1}\gt x_n\) : <b>(x_n) est strictement croissante</b>. Si elle était majorée par \(M\), on aurait \(n=\varphi(x_n)\le\varphi(M)\) pour tout \(n\) : absurde. Une suite croissante non majorée tend vers \(+\infty\).</p>
+        <div class="res">\((x_n)\) strictement croissante, \(x_n\to+\infty\).</div>
+
+        <p class="q">3) \(x_n\sim\ln n\)</p>
+        <p>De \(n=e^{x_n}+x_n=e^{x_n}\big(1+x_ne^{-x_n}\big)\) et \(x_ne^{-x_n}\to0\) (croissances comparées, \(x_n\to+\infty\)), on a \(\dfrac n{e^{x_n}}\to1\). On passe au logarithme du <b>rapport</b> (on ne passe pas le \(\ln\) dans un équivalent) : \(\ln n-x_n=\ln\dfrac n{e^{x_n}}\to0\). Donc \(x_n=\ln n+o(1)\), et comme \(\ln n\to+\infty\), \(\dfrac{x_n}{\ln n}=1+\dfrac{o(1)}{\ln n}\to1\).</p>
+        <div class="res">\(x_n\sim\ln n\) (et même \(x_n=\ln n+o(1)\)).</div>
+
+        <p class="q">4) Développement asymptotique à deux termes</p>
+        <p>On réécrit l'équation : \(e^{x_n}=n-x_n\), donc \(x_n=\ln(n-x_n)=\ln n+\ln\Big(1-\dfrac{x_n}n\Big)\). Comme \(x_n\sim\ln n\), \(\dfrac{x_n}n\sim\dfrac{\ln n}n\to0\) ; avec \(\ln(1+v)\sim v\) pour \(v=-\dfrac{x_n}n\to0\) : \(\ln\Big(1-\dfrac{x_n}n\Big)\sim-\dfrac{x_n}n\sim-\dfrac{\ln n}n\).</p>
+        <div class="res">\(\boxed{x_n=\ln n-\dfrac{\ln n}n+o\Big(\dfrac{\ln n}n\Big)}\)</div>
+        <div class="note"><span class="lab">Vérification numérique</span>Pour \(n=1000\) : \(x_n\approx6{,}900831\) ; formule : \(6{,}907755-0{,}006908=6{,}900848\), écart \(\approx1{,}7\times10^{-5}\ll\frac{\ln n}n\approx7\times10^{-3}\).</div>
+        <div class="warnbox"><span class="lab">Piège</span>Ne jamais écrire « \(\ln(n-x_n)\sim\ln n\) donc \(x_n=\ln n\) » : un équivalent ne donne pas le terme suivant. On isole \(x_n=\ln n+\ln(1-x_n/n)\) et on <b>ré-injecte</b> l'équivalent connu dans le seul terme correctif.</div>
+        <div class="method"><span class="lab">⚡ Méthode</span>Suite implicite \(\varphi(x_n)=n\) : bijection (continue, strictement monotone, limites) ; monotonie par \(\varphi(x_{n+1})\gt\varphi(x_n)\) ; limite par l'absurde sur un majorant ; équivalent en isolant le terme dominant (\(e^{x_n}\sim n\)) via le rapport ; terme suivant par ré-injection dans \(x_n=\ln n+\ln(1-x_n/n)\).</div>
+      </div>
     </div>
   </section>
 
