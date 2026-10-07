@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DS blanc Maths Ch1-Ch3 (AM2) — Révision ECAM</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
+  svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div class="topbar">
+  <a href="../index.html">← Annales</a>
+  <span class="spacer"></span>
+  <a href="#qcm">QCM</a>
+  <a href="#cours">Cours</a>
+  <a href="#ex1">Ex 1</a>
+  <a href="#ex2">Ex 2</a>
+  <a href="#ex3">Ex 3</a>
+  <a href="#ex4">Ex 4</a>
+  <a href="#ex5">Ex 5</a>
+  <a href="#fiche">Fiche méthodes</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Annales · AM2 Maths · DS blanc (créé)</span>
+  <h1 class="title">DS blanc de maths — Ch1, Ch2, Ch3 (§1 à §3) + méthode de chaque exercice</h1>
+  <p class="lead">DS blanc <b>créé sur mesure</b> pour ton DS : <b>2 h, sur 20 points</b>, même structure que le DS1 de l'année dernière
+  (QCM, restitution de cours, exercices). <b>Programme couvert</b> : Ch1 analyse asymptotique (équivalents, DL, asymptotes, suites implicites),
+  Ch2 applications linéaires (sous-espaces, supplémentaires, projecteurs, bases, dimensions, noyau/image) et
+  <b>Ch3 jusqu'au §3 inclus</b> (rang, théorème du rang, matrice d'une application linéaire) — <b>le §4 (changement de base, matrices semblables, \(P^{-1}AP\)) est volontairement exclu</b>.
+  Les types d'exercices reprennent ceux des TD (TD1, TD2, TD3 exercices 1 à 5).
+  Chaque correction est <b>repliable</b> (cherche d'abord, déplie ensuite) et <b>tous les résultats ont été vérifiés par calcul formel</b>.
+  À la fin de chaque exercice : un encart <b>⚡ Méthode déduite</b> ; tout est regroupé dans la <a href="#fiche">fiche méthodes finale</a>.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#consignes">Consignes &amp; barème</a></li>
+      <li><a href="#qcm">QCM — 4 questions (4 pts)</a></li>
+      <li><a href="#cours">Restitution de cours — projecteur et supplémentaires (2 pts)</a></li>
+      <li><a href="#ex1">Ex 1 — Étude locale en 0 et asymptote en +∞ (2,5 pts) · Ch1</a></li>
+      <li><a href="#ex2">Ex 2 — Suite définie par \(x+\ln x=n\) (2,5 pts) · Ch1</a></li>
+      <li><a href="#ex3">Ex 3 — Sous-espaces de \(\mathbb R^4\), Grassmann (2,5 pts) · Ch2</a></li>
+      <li><a href="#ex4">Ex 4 — Projection de \(\mathbb R^3\) (2,5 pts) · Ch2/Ch3</a></li>
+      <li><a href="#ex5">Ex 5 — Endomorphisme de \(\mathbb R_2[X]\) : rang, noyau, matrices (4 pts) · Ch3</a></li>
+      <li><a href="#fiche">⚡ Fiche méthodes finale (une méthode par exercice)</a></li>
+    </ul>
+  </div>
+
+  <section class="block" id="consignes">
+    <h2>Consignes &amp; barème</h2>
+    <div class="note"><span class="lab">Consignes</span>
+      Durée : <b>2 h</b> · ni document ni calculatrice · justifier toutes les réponses.
+      Barème : QCM 4 pts (une seule bonne réponse par question) + cours 2 pts + Ex 1 (2,5) + Ex 2 (2,5) + Ex 3 (2,5) + Ex 4 (2,5) + Ex 5 (4) = <b>20 pts</b>.
+    </div>
+    <div class="method"><span class="lab">Conseil de méthode (gestion du temps)</span>
+      QCM 15 min · cours 10 min · Ex 1 et Ex 3 (rapides) 20 min chacun · Ex 4 15 min · Ex 2 20 min · Ex 5 20 min. Lire <b>tout</b> le sujet d'abord : les exercices d'algèbre linéaire
+      rapportent des points « sûrs » si la méthode est connue.
+    </div>
+  </section>
+
+  <!-- ======================= QCM ======================= -->
+  <section class="block" id="qcm">
+    <h2>QCM · 4 pts (1 pt par question, une seule bonne réponse)</h2>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ QCM 1 — Équivalent d'une suite (différence de deux termes qui tendent vers 1) <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Un équivalent de \(U_n=e^{1/n}-\cos\!\Big(\dfrac1{\sqrt n}\Big)\) quand \(n\to+\infty\) est :<br>
+        A : \(\frac1n\) · B : \(\frac1{2n}\) · C : \(\frac3{2n}\) · D : \(\frac1{\sqrt n}\) · E : \(\frac1{2\sqrt n}\) · F : \(0\).</p>
+        <details class="sol"><summary>✅ Correction QCM 1</summary><div class="sol-body">
+          <p><b>Cadre.</b> Les deux termes tendent vers \(1\) : \(U_n\to0\), mais on <b>ne peut pas</b> soustraire les équivalents \(e^{1/n}\sim1\) et \(\cos\sim1\) (cela donnerait « \(U_n\sim0\) », absurde). On fait des <b>développements limités</b>.</p>
+          <p><b>Premier terme.</b> Avec \(u=\frac1n\to0\) : \(e^{u}=1+u+o(u)\), soit \(e^{1/n}=1+\dfrac1n+o\!\Big(\dfrac1n\Big)\).</p>
+          <p><b>Second terme.</b> Avec \(v=\frac1{\sqrt n}\to0\) : \(\cos v=1-\dfrac{v^2}{2}+o(v^2)\), soit \(\cos\dfrac1{\sqrt n}=1-\dfrac1{2n}+o\!\Big(\dfrac1n\Big)\).</p>
+          <p><b>Différence.</b> \(U_n=\dfrac1n+\dfrac1{2n}+o\!\Big(\dfrac1n\Big)=\dfrac3{2n}+o\!\Big(\dfrac1n\Big)\).</p>
+          <div class="res">Réponse : <b>C</b> — \(U_n\sim\dfrac{3}{2n}\).</div>
+          <div class="warnbox"><span class="lab">Piège</span>Ne pas répondre A (en oubliant le terme du cosinus, d'ordre \(\frac1n\) lui aussi parce que \(v^2=\frac1n\)). On identifie l'<b>ordre</b> de chaque morceau avant de conclure.</div>
+          <div class="method"><span class="lab">⚡ Méthode déduite</span>Différence \(f-g\) de deux termes de même limite ⇒ <b>DL de chaque terme au même ordre</b> (ici ordre 1 en \(\frac1n\)), on soustrait les DL, on lit le premier terme non nul. Jamais « équivalent − équivalent ».</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ QCM 2 — Limite en 0 d'un quotient (le premier ordre s'annule) <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">La limite en \(0\) de \(\dfrac{\ln(1+x)-\sin x}{x\tan x}\) est :<br>
+        A : \(0\) · B : \(-\frac12\) · C : \(\frac12\) · D : \(-1\) · E : \(1\) · F : n'existe pas.</p>
+        <details class="sol"><summary>✅ Correction QCM 2</summary><div class="sol-body">
+          <p><b>Numérateur.</b> \(\ln(1+x)=x-\dfrac{x^2}{2}+o(x^2)\) et \(\sin x=x+o(x^2)\) (le terme suivant est \(-\frac{x^3}{6}\)). Donc
+          \[\ln(1+x)-\sin x=-\frac{x^2}{2}+o(x^2)\sim-\frac{x^2}{2}.\]
+          Les termes d'ordre 1 se sont annulés : il a fallu aller à l'ordre 2.</p>
+          <p><b>Dénominateur.</b> \(\tan x\sim x\), donc \(x\tan x\sim x^2\).</p>
+          <p><b>Quotient</b> (les équivalents se divisent) : \(\dfrac{-x^2/2}{x^2}=-\dfrac12\).</p>
+          <div class="res">Réponse : <b>B</b> — la limite vaut \(-\dfrac12\).</div>
+          <div class="warnbox"><span class="lab">Piège</span>« \(\ln(1+x)\sim x\) et \(\sin x\sim x\) donc le numérateur est \(\sim0\) » est faux. Les équivalents ne se soustraient pas : il faut le DL jusqu'à l'ordre où il reste un terme non nul.</div>
+          <div class="method"><span class="lab">⚡ Méthode déduite</span>Quotient avec numérateur d'ordre \(p\) et dénominateur d'ordre \(q\) : DL du numérateur et du dénominateur <b>jusqu'au premier terme non nul</b>, puis équivalents et division (\(\to\) valeur de la limite ou \(x^{p-q}\) si \(p\neq q\)).</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ QCM 3 — Sous-espaces de \(\mathbb R^3\) <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Dans \(\mathbb R^3\), soit \(F=\{(x,y,z)\mid x+y-z=0\}\) et \(G=\mathrm{Vect}\big((1,2,3)\big)\). Alors :<br>
+        A : \(F\oplus G=\mathbb R^3\) · B : \(G\subset F\), donc \(F+G=F\neq\mathbb R^3\) · C : \(F\cap G=\{0\}\) mais \(F+G\neq\mathbb R^3\) · D : \(\dim(F+G)=3\) · E : \(F=G\).</p>
+        <details class="sol"><summary>✅ Correction QCM 3</summary><div class="sol-body">
+          <p><b>Test d'appartenance.</b> \(u=(1,2,3)\) vérifie \(1+2-3=0\) : \(u\in F\). Comme \(G=\mathrm{Vect}(u)\) et que \(F\) est un sous-espace vectoriel, \(G\subset F\).</p>
+          <p><b>Conséquences.</b> \(F+G=F\), \(\dim F=3-1=2\) (une équation non triviale en dimension 3) ; donc \(F+G\) est de dimension \(2\neq3\), et \(F\cap G=G\neq\{0\}\) (de dimension 1).</p>
+          <div class="res">Réponse : <b>B</b>. (A, C, D sont fausses car \(F\cap G=G\neq\{0\}\) et \(\dim(F+G)=2\) ; E est fausse car \(\dim F=2\neq1=\dim G\).)</div>
+          <div class="warnbox"><span class="lab">Piège</span>Pour que deux sous-espaces soient supplémentaires il faut <b>à la fois</b> \(F\cap G=\{0\}\) et \(F+G=E\). Avant de calculer, on teste toujours si le générateur de \(G\) vérifie l'équation de \(F\).</div>
+          <div class="method"><span class="lab">⚡ Méthode déduite</span>Droite \(G=\mathrm{Vect}(u)\) et plan \(F\) d'équation \(\varphi=0\) : supplémentaires \(\Leftrightarrow\varphi(u)\neq0\) (alors \(F\cap G=\{0\}\) et \(\dim F+\dim G=3\)).</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ QCM 4 — Rang d'une matrice à paramètre et bijectivité <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Pour \(a\in\mathbb R\), soit \(M(a)=\begin{pmatrix}1&1&1\\1&2&3\\1&3&a\end{pmatrix}\) et \(f_a\) l'endomorphisme de \(\mathbb R^3\) de matrice \(M(a)\) dans la base canonique. \(f_a\) n'est pas bijectif si et seulement si :<br>
+        A : \(a=0\) · B : \(a=3\) · C : \(a=5\) · D : \(a=-5\) · E : jamais · F : pour tout \(a\).</p>
+        <details class="sol"><summary>✅ Correction QCM 4</summary><div class="sol-body">
+          <p><b>Principe.</b> Endomorphisme en dimension finie : \(f_a\) bijectif \(\Leftrightarrow\mathrm{rg}\,M(a)=3\).</p>
+          <p><b>Pivot de Gauss</b> : \(L_2\leftarrow L_2-L_1\), \(L_3\leftarrow L_3-L_1\) :
+          \(\begin{pmatrix}1&1&1\\0&1&2\\0&2&a-1\end{pmatrix}\), puis \(L_3\leftarrow L_3-2L_2\) :
+          \(\begin{pmatrix}1&1&1\\0&1&2\\0&0&a-5\end{pmatrix}\).</p>
+          <p>Trois pivots \(\Leftrightarrow a-5\neq0\). Si \(a=5\), le rang est \(2\) et, par le théorème du rang, \(\dim\ker f_5=3-2=1\neq0\) : ni injectif, ni surjectif.</p>
+          <div class="res">Réponse : <b>C</b> — \(f_a\) n'est pas bijectif \(\Leftrightarrow a=5\) (on retrouve \(\det M(a)=a-5\)).</div>
+          <div class="warnbox"><span class="lab">Piège</span>On n'échange pas lignes et colonnes en cours de route ; on n'a le droit de multiplier une ligne que par un scalaire <b>non nul</b> (ici on n'a fait que des « ajouts de combinaison », donc rien à discuter sur le paramètre avant l'étape finale).</div>
+          <div class="method"><span class="lab">⚡ Méthode déduite</span>Endomorphisme de matrice \(M\) : bijectif \(\Leftrightarrow\mathrm{rg}\,M=\dim\). Rang par Gauss (opérations sans diviser par le paramètre) ; le paramètre apparaît dans le dernier pivot ⇒ valeurs exclues = racines de ce pivot.</div>
+        </div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= COURS ======================= -->
+  <section class="block" id="cours">
+    <h2>Restitution de cours · 2 pts</h2>
+    <div class="exo-card">
+      <div class="exo-head">✏️ Projecteur et sous-espaces supplémentaires <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Soit \(E\) un \(\mathbb R\)-espace vectoriel et \(p\in\mathcal L(E)\) tel que \(p\circ p=p\) (« projecteur »). Démontrer que \(E=\ker p\oplus\mathrm{Im}\,p\).</p>
+        <details class="sol"><summary>✅ Correction</summary><div class="sol-body">
+          <p><b>Étape 1 : \(E=\ker p+\mathrm{Im}\,p\) (analyse–synthèse).</b> Soit \(x\in E\). On écrit \(x=\big(x-p(x)\big)+p(x)\).
+          Le second terme est dans \(\mathrm{Im}\,p\). Pour le premier : \(p\big(x-p(x)\big)=p(x)-p(p(x))=p(x)-p(x)=0\) (car \(p\circ p=p\)), donc \(x-p(x)\in\ker p\).</p>
+          <p><b>Étape 2 : \(\ker p\cap\mathrm{Im}\,p=\{0\}\).</b> Soit \(y\in\ker p\cap\mathrm{Im}\,p\). Il existe \(z\in E\) tel que \(y=p(z)\). Alors \(p(y)=p(p(z))=p(z)=y\). Mais \(y\in\ker p\) donc \(p(y)=0\). D'où \(y=0\).</p>
+          <div class="res">Les deux conditions étant vérifiées : \(E=\ker p\oplus\mathrm{Im}\,p\). De plus \(p\) est la projection sur \(\mathrm{Im}\,p\) parallèlement à \(\ker p\), et \(\mathrm{Im}\,p=\ker(p-\mathrm{id})\).</div>
+          <div class="warnbox"><span class="lab">Piège</span>Ne pas oublier la <b>deuxième</b> condition (intersection réduite à \(\{0\}\)) : la décomposition \(x=(x-p(x))+p(x)\) seule ne prouve que \(E=\ker p+\mathrm{Im}\,p\).</div>
+          <div class="method"><span class="lab">⚡ Méthode déduite</span>Prouver \(E=F\oplus G\) = <b>deux inclusions</b> : (i) existence d'une décomposition de tout \(x\) (ici \(x=(x-p(x))+p(x)\)), (ii) \(F\cap G=\{0\}\) en partant de \(y\in F\cap G\) et en appliquant la propriété (\(p\circ p=p\)).</div>
+        </div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= EX 1 ======================= -->
+  <section class="block" id="ex1">
+    <h2>Exercice 1 — Étude locale en 0 et asymptote en +∞ · 2,5 pts (Ch1)</h2>
+    <div class="exo-card">
+      <div class="exo-head">✏️ DL, prolongement, tangente, position, asymptote <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">On considère \(f(x)=\dfrac{x}{\ln(1+x)}\) pour \(x\in\,]-1,+\infty[\setminus\{0\}\) et \(g(x)=\sqrt{x^2+2x}\) pour \(x\geqslant0\).</p>
+
+        <p class="q">1) (1,5 pt) Donner le développement limité de \(f\) en \(0\) à l'ordre 3. En déduire que \(f\) se prolonge par continuité en \(0\), que le prolongement est dérivable en \(0\), puis l'équation de la tangente en \(0\) et la position de la courbe par rapport à cette tangente.</p>
+        <details class="sol"><summary>✅ Correction Q1</summary><div class="sol-body">
+          <p><b>Cadre.</b> On met \(x\) en facteur pour se ramener à \(\dfrac1{1+u}\) avec \(u\to0\) :
+          \[f(x)=\frac{1}{\dfrac{\ln(1+x)}{x}}.\]</p>
+          <p><b>DL de \(\dfrac{\ln(1+x)}{x}\) à l'ordre 3.</b> \(\ln(1+x)=x-\dfrac{x^2}{2}+\dfrac{x^3}{3}-\dfrac{x^4}{4}+o(x^4)\), donc
+          \[\frac{\ln(1+x)}{x}=1+u,\qquad u=-\frac x2+\frac{x^2}{3}-\frac{x^3}{4}+o(x^3).\]</p>
+          <p><b>Inverse.</b> \(\dfrac1{1+u}=1-u+u^2-u^3+o(u^3)\) avec \(u\sim-\frac x2\) donc \(u^3=O(x^3)\), \(o(u^3)=o(x^3)\). Calcul des puissances à l'ordre 3 :
+          \[u^2=\frac{x^2}{4}-\frac{x^3}{3}+o(x^3),\qquad u^3=-\frac{x^3}{8}+o(x^3).\]
+          Donc
+          \[\begin{aligned}\frac1{1+u}&=1-\Big(-\frac x2+\frac{x^2}{3}-\frac{x^3}{4}\Big)+\Big(\frac{x^2}{4}-\frac{x^3}{3}\Big)-\Big(-\frac{x^3}{8}\Big)+o(x^3)\\
+          &=1+\frac x2+\Big(-\frac13+\frac14\Big)x^2+\Big(\frac14-\frac13+\frac18\Big)x^3+o(x^3).\end{aligned}\]
+          Avec \(-\frac13+\frac14=-\frac1{12}\) et \(\frac14-\frac13+\frac18=\frac{6-8+3}{24}=\frac1{24}\) :
+          \[\boxed{f(x)=1+\frac x2-\frac{x^2}{12}+\frac{x^3}{24}+o(x^3)}.\]</p>
+          <p><b>Prolongement et dérivabilité.</b> \(f(x)\to1\) quand \(x\to0\) : on pose \(f(0)=1\) (prolongement continu). Un DL à l'ordre 1 en \(0\) équivaut à la dérivabilité en \(0\) : \(f'(0)=\dfrac12\).</p>
+          <p><b>Tangente et position.</b> Tangente en \(0\) : \(y=1+\dfrac x2\). Position : \(f(x)-\Big(1+\dfrac x2\Big)=-\dfrac{x^2}{12}+o(x^2)\sim-\dfrac{x^2}{12}\lt0\) au voisinage de \(0\) (\(x\neq0\)).</p>
+          <div class="res">\(f(0)=1\), tangente \(y=1+\frac x2\), et la courbe est <b>localement en dessous</b> de sa tangente en \(0\).</div>
+          <div class="warnbox"><span class="lab">Piège</span>La position se lit sur le <b>premier terme non nul après la droite</b> (ici \(-\frac{x^2}{12}\)), pas sur le terme en \(x\). Il faut donc un DL d'ordre au moins 2.</div>
+        </div></details>
+
+        <p class="q">2) (1 pt) Montrer que la courbe de \(g\) admet une asymptote oblique en \(+\infty\) et préciser la position de la courbe par rapport à elle.</p>
+        <details class="sol"><summary>✅ Correction Q2</summary><div class="sol-body">
+          <p><b>Cadre.</b> On factorise le terme dominant : pour \(x\gt0\), \(g(x)=x\sqrt{1+\dfrac2x}\). On pose \(u=\dfrac2x\to0\).</p>
+          <p><b>DL.</b> \(\sqrt{1+u}=1+\dfrac u2-\dfrac{u^2}{8}+o(u^2)\) avec \(\dfrac u2=\dfrac1x\) et \(\dfrac{u^2}{8}=\dfrac4{8x^2}=\dfrac1{2x^2}\) :
+          \[\sqrt{1+\frac2x}=1+\frac1x-\frac1{2x^2}+o\!\Big(\frac1{x^2}\Big).\]
+          On multiplie par \(x\) :
+          \[g(x)=x+1-\frac1{2x}+o\!\Big(\frac1x\Big).\]</p>
+          <p>Donc \(g(x)-(x+1)=-\dfrac1{2x}+o\big(\frac1x\big)\to0\) : la droite \(y=x+1\) est asymptote oblique en \(+\infty\). Position : \(g(x)-(x+1)\sim-\dfrac1{2x}\lt0\) : la courbe est <b>en dessous</b> de l'asymptote.</p>
+          <div class="res">Asymptote en \(+\infty\) : \(y=x+1\), courbe en dessous.</div>
+          <div class="warnbox"><span class="lab">Piège</span>Il faut un DL à un ordre <b>suffisant</b> pour faire apparaître le terme en \(\frac1x\) (c'est lui qui donne la position) : développer \(\sqrt{1+u}\) à l'ordre 2 et pas seulement à l'ordre 1, car on multiplie ensuite par \(x\).</div>
+        </div></details>
+
+        <div class="method"><span class="lab">⚡ Méthode déduite (Ex 1)</span>
+          <ul>
+            <li><b>Étude locale d'une fonction en un point</b> : mettre en facteur la partie qui s'annule (ici \(x\)) pour obtenir \(\frac1{1+u}\), \(\sqrt{1+u}\), \(\ln(1+u)\)… avec \(u\to0\), appliquer le DL usuel et composer ; DL à l'ordre \(\geqslant 2\) pour avoir la position. DL d'ordre 1 ⇒ prolongement, dérivabilité, tangente ; premier terme non nul suivant ⇒ position.</li>
+            <li><b>Asymptote en l'infini</b> : factoriser le terme dominant (\(x\sqrt{1+2/x}\)), poser \(u=\frac1x\), DL de \(g(x)/x\) à l'ordre 2, remultiplier par \(x\) : \(g(x)=ax+b+\frac{c}{x}+o(\frac1x)\) ; asymptote \(y=ax+b\), position = signe de \(c\).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= EX 2 ======================= -->
+  <section class="block" id="ex2">
+    <h2>Exercice 2 — Suite définie par \(x+\ln x=n\) · 2,5 pts (Ch1)</h2>
+    <div class="exo-card">
+      <div class="exo-head">✏️ Existence, limite, développement asymptotique <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Pour \(n\in\mathbb N^*\), on considère l'équation \((E_n)\) : \(x+\ln x=n\) d'inconnue \(x\in\,]0,+\infty[\).</p>
+
+        <p class="q">1) (0,5 pt) Montrer que \((E_n)\) admet une unique solution, notée \(x_n\).</p>
+        <details class="sol"><summary>✅ Correction Q1</summary><div class="sol-body">
+          <p>Soit \(h(x)=x+\ln x\) sur \(]0,+\infty[\). \(h\) est continue, strictement croissante (somme de deux fonctions strictement croissantes), avec \(\lim\limits_{x\to0^+}h(x)=-\infty\) et \(\lim\limits_{x\to+\infty}h(x)=+\infty\).</p>
+          <div class="res">Par le théorème de la bijection, \(h\) réalise une bijection de \(]0,+\infty[\) sur \(\mathbb R\) : pour tout \(n\), l'équation \(h(x)=n\) a une <b>unique</b> solution \(x_n=h^{-1}(n)\).</div>
+        </div></details>
+
+        <p class="q">2) (0,75 pt) Montrer que \(x_n\to+\infty\), puis que \(x_n\sim n\).</p>
+        <details class="sol"><summary>✅ Correction Q2</summary><div class="sol-body">
+          <p><b>Limite.</b> \(h^{-1}\) est strictement croissante (réciproque d'une bijection strictement croissante) et définie sur \(\mathbb R\) tout entier avec \(\lim\limits_{+\infty}h^{-1}=+\infty\) (car \(h\) prend des valeurs arbitrairement grandes). Donc \(x_n=h^{-1}(n)\to+\infty\).</p>
+          <p><b>Équivalent.</b> De \(x_n+\ln x_n=n\) on tire \(n=x_n\Big(1+\dfrac{\ln x_n}{x_n}\Big)\). Comme \(x_n\to+\infty\), croissances comparées : \(\dfrac{\ln x_n}{x_n}\to0\). Donc \(n\sim x_n\).</p>
+          <div class="res">\(x_n\to+\infty\) et \(x_n\sim n\).</div>
+        </div></details>
+
+        <p class="q">3) (1,25 pt) Montrer que \(x_n=n-\ln n+o(1)\), puis que \(x_n=n-\ln n+\dfrac{\ln n}{n}+o\!\Big(\dfrac{\ln n}{n}\Big)\).</p>
+        <details class="sol"><summary>✅ Correction Q3</summary><div class="sol-body">
+          <p><b>Réécriture.</b> L'équation donne \(x_n=n-\ln x_n\). On réinjecte \(x_n\sim n\) dans le logarithme en écrivant \(x_n=n\cdot\dfrac{x_n}{n}\) :
+          \[\ln x_n=\ln n+\ln\frac{x_n}{n}.\]</p>
+          <p><b>Premier ordre.</b> Comme \(\dfrac{x_n}{n}\to1\), \(\ln\dfrac{x_n}{n}\to0\). Donc
+          \[x_n=n-\ln n-\ln\frac{x_n}{n}=n-\ln n+o(1).\]</p>
+          <p><b>Second ordre.</b> On réinjecte ce résultat : \(\dfrac{x_n}{n}=1-\dfrac{\ln x_n}{n}\) et \(\ln x_n=\ln n+o(1)\), donc
+          \[\frac{x_n}{n}=1-\frac{\ln n}{n}+o\!\Big(\frac1n\Big).\]
+          Posons \(v_n=-\dfrac{\ln n}{n}+o\big(\frac1n\big)\to0\), \(v_n\sim-\dfrac{\ln n}{n}\). Alors \(\ln\dfrac{x_n}{n}=\ln(1+v_n)=v_n+o(v_n)=-\dfrac{\ln n}{n}+o\!\Big(\dfrac{\ln n}{n}\Big)\) (car \(\frac1n=o(\frac{\ln n}{n})\)). Donc
+          \[x_n=n-\ln n-\ln\frac{x_n}{n}=n-\ln n+\frac{\ln n}{n}+o\!\Big(\frac{\ln n}{n}\Big).\]</p>
+          <div class="res">\(\boxed{x_n=n-\ln n+\dfrac{\ln n}{n}+o\!\Big(\dfrac{\ln n}{n}\Big)}\)</div>
+          <div class="note"><span class="lab">Vérification numérique</span>Pour \(n=1000\) : \(x_n\approx993{,}099169\) ; la formule donne \(1000-6{,}907755+0{,}006908=993{,}099152\). L'écart est \(\approx1{,}7\times10^{-5}\), bien plus petit que \(\frac{\ln n}{n}\approx7\times10^{-3}\).</div>
+          <div class="warnbox"><span class="lab">Piège</span>Jamais « \(x_n\sim n\) donc \(x_n-n\to0\) » : un équivalent ne se soustrait pas. La correction \(-\ln n\) est trouvée en écrivant exactement \(x_n=n-\ln x_n\) puis en <b>ré-injectant</b> successivement les approximations dans le seul terme correctif.</div>
+        </div></details>
+
+        <div class="method"><span class="lab">⚡ Méthode déduite (Ex 2)</span>
+          <ul>
+            <li><b>Existence et unicité</b> de la solution de \(h(x)=n\) : \(h\) continue, strictement monotone, limites aux bornes ⇒ bijection ⇒ \(x_n=h^{-1}(n)\) ; limite de \(x_n\) = limite de \(h^{-1}\) (même monotonie).</li>
+            <li><b>Développement asymptotique par ré-injection</b> : isoler \(x_n=n-\ln x_n\) ; écrire \(\ln x_n=\ln n+\ln\frac{x_n}{n}\) ; chaque tour améliore d'un cran (\(x_n\sim n\Rightarrow\) ordre 1 \(\Rightarrow\) ordre 2). Le terme à contrôler est <b>toujours</b> \(\frac{x_n}{n}=1+\) (petit), ce qui permet d'utiliser \(\ln(1+v)=v+o(v)\).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= EX 3 ======================= -->
+  <section class="block" id="ex3">
+    <h2>Exercice 3 — Sous-espaces de \(\mathbb R^4\) et formule de Grassmann · 2,5 pts (Ch2)</h2>
+    <div class="exo-card">
+      <div class="exo-head">✏️ Bases, intersection, somme, supplémentaire <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Dans \(\mathbb R^4\), on pose \(u_1=(1,1,0,0)\), \(u_2=(0,1,1,0)\), \(F=\mathrm{Vect}(u_1,u_2)\) et
+        \(G=\{(x,y,z,t)\in\mathbb R^4\mid x-2y+z=0\ \text{et}\ t=0\}\).</p>
+
+        <p class="q">1) (0,75 pt) Donner une base de \(F\) et une base de \(G\). Quelles sont leurs dimensions ?</p>
+        <details class="sol"><summary>✅ Correction Q1</summary><div class="sol-body">
+          <p><b>\(F\).</b> \(F\) est engendré par \((u_1,u_2)\). Cette famille est libre : si \(au_1+bu_2=0\), alors \((a,a+b,b,0)=0\), donc \(a=b=0\). C'est une base ; \(\dim F=2\).</p>
+          <p><b>\(G\).</b> On résout le système : \(t=0\) et \(x=2y-z\). Avec \(y=s\), \(z=r\) libres :
+          \((x,y,z,t)=(2s-r,\ s,\ r,\ 0)=s\,(2,1,0,0)+r\,(-1,0,1,0)\). La famille \(\big((2,1,0,0),(-1,0,1,0)\big)\) engendre \(G\) et est libre (les troisième et deuxième coordonnées isolent \(r\) et \(s\)) ; \(\dim G=2\) (4 inconnues − 2 équations indépendantes).</p>
+          <div class="res">Base de \(F\) : \(\big((1,1,0,0),(0,1,1,0)\big)\), \(\dim F=2\). Base de \(G\) : \(\big((2,1,0,0),(-1,0,1,0)\big)\), \(\dim G=2\).</div>
+        </div></details>
+
+        <p class="q">2) (0,75 pt) Déterminer \(F\cap G\) puis, avec la formule de Grassmann, \(\dim(F+G)\). Identifier \(F+G\).</p>
+        <details class="sol"><summary>✅ Correction Q2</summary><div class="sol-body">
+          <p><b>Intersection.</b> Un vecteur de \(F\) s'écrit \((a,\ a+b,\ b,\ 0)\). Il est dans \(G\) si et seulement si \(t=0\) (déjà vrai) et \(x-2y+z=0\) :
+          \(a-2(a+b)+b=-a-b=0\), soit \(b=-a\). Alors le vecteur vaut \((a,0,-a,0)=a\,(1,0,-1,0)\).
+          Donc \(F\cap G=\mathrm{Vect}\big((1,0,-1,0)\big)\), de dimension \(1\).</p>
+          <p><b>Grassmann.</b> \(\dim(F+G)=\dim F+\dim G-\dim(F\cap G)=2+2-1=3\).</p>
+          <p><b>Identification.</b> \(F\) et \(G\) sont tous deux inclus dans \(H=\{t=0\}\) (dimension 3), donc \(F+G\subset H\). Les dimensions étant égales (3), \(F+G=H=\{(x,y,z,t)\mid t=0\}\).</p>
+          <div class="res">\(F\cap G=\mathrm{Vect}\big((1,0,-1,0)\big)\), \(\dim(F+G)=3\), \(F+G=\{t=0\}\).</div>
+        </div></details>
+
+        <p class="q">3) (1 pt) \(F\) et \(G\) sont-ils supplémentaires dans \(\mathbb R^4\) ? Trouver un sous-espace \(K\) de dimension 2 supplémentaire de \(F\).</p>
+        <details class="sol"><summary>✅ Correction Q3</summary><div class="sol-body">
+          <p><b>\(F\) et \(G\).</b> Non : \(F\cap G\neq\{0\}\) (et \(F+G\neq\mathbb R^4\), de dimension 3). Bien que \(\dim F+\dim G=4\), la somme n'est pas directe.</p>
+          <p><b>Supplémentaire de \(F\).</b> On complète la base \((u_1,u_2)\) par deux vecteurs de la base canonique : essayons \(K=\mathrm{Vect}(e_1,e_4)\), avec \(e_1=(1,0,0,0)\), \(e_4=(0,0,0,1)\). Calculons \(F\cap K\) : \((a,a+b,b,0)=(c,0,0,d)\) impose \(b=0\), \(a+b=0\) donc \(a=0\), puis \(c=d=0\). Donc \(F\cap K=\{0\}\). Comme \(\dim F+\dim K=2+2=4=\dim\mathbb R^4\), \(F\oplus K=\mathbb R^4\).
+          (Équivalent : la matrice dont les colonnes sont \(u_1,u_2,e_1,e_4\) est de rang \(4\).)</p>
+          <div class="res">\(F\) et \(G\) ne sont pas supplémentaires. \(K=\mathrm{Vect}(e_1,e_4)\) est un supplémentaire de \(F\).</div>
+          <div class="warnbox"><span class="lab">Piège</span>Un supplémentaire n'est <b>pas unique</b> (n'importe quel \(K\) convenable est accepté) mais il faut le <b>justifier</b> : intersection nulle + somme des dimensions \(=\dim E\).</div>
+        </div></details>
+
+        <div class="method"><span class="lab">⚡ Méthode déduite (Ex 3)</span>
+          <ul>
+            <li><b>Sous-espace défini par équations</b> : résoudre le système, paramétrer, lire les vecteurs générateurs, vérifier la liberté ⇒ base ; \(\dim=\) inconnues − équations indépendantes.</li>
+            <li><b>Intersection</b> de \(\mathrm{Vect}(\dots)\) avec un sous-espace à équations : écrire le vecteur général \(\sum\lambda_iu_i\) dans la base de l'un, injecter dans les équations de l'autre.</li>
+            <li><b>Grassmann</b> : \(\dim(F+G)=\dim F+\dim G-\dim(F\cap G)\) ; si \(F+G\subset H\) et même dimension, alors \(F+G=H\) (égalité par inclusion + dimension finie).</li>
+            <li><b>Supplémentaire</b> : compléter une base de \(F\) par des vecteurs bien choisis (souvent de la base canonique) ; justifier par \(F\cap K=\{0\}\) et \(\dim F+\dim K=\dim E\), ou par le rang de la matrice des vecteurs (= \(\dim E\)).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= EX 4 ======================= -->
+  <section class="block" id="ex4">
+    <h2>Exercice 4 — Projection de \(\mathbb R^3\) · 2,5 pts (Ch2/Ch3)</h2>
+    <div class="exo-card">
+      <div class="exo-head">✏️ Projection sur un plan parallèlement à une droite, matrice <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Dans \(\mathbb R^3\), soit \(F=\{(x,y,z)\mid2x+y-z=0\}\), \(w=(1,0,1)\) et \(G=\mathrm{Vect}(w)\).</p>
+
+        <p class="q">1) (0,5 pt) Montrer que \(\mathbb R^3=F\oplus G\).</p>
+        <details class="sol"><summary>✅ Correction Q1</summary><div class="sol-body">
+          <p>\(w\notin F\) car \(2\cdot1+0-1=1\neq0\). Un élément de \(G\) est \(\lambda w\) ; il est dans \(F\) si et seulement si \(\lambda\cdot1=0\), soit \(\lambda=0\). Donc \(F\cap G=\{0\}\).
+          De plus \(\dim F=3-1=2\) (une équation non triviale), \(\dim G=1\), donc \(\dim F+\dim G=3=\dim\mathbb R^3\).</p>
+          <div class="res">\(F\cap G=\{0\}\) et \(\dim F+\dim G=3\) ⇒ \(\mathbb R^3=F\oplus G\).</div>
+        </div></details>
+
+        <p class="q">2) (1 pt) Déterminer l'expression de la projection \(p\) sur \(F\) parallèlement à \(G\).</p>
+        <details class="sol"><summary>✅ Correction Q2</summary><div class="sol-body">
+          <p><b>Principe.</b> Pour \(u=(x,y,z)\), la décomposition unique \(u=v+\lambda w\) avec \(v\in F\) donne \(p(u)=v\). On impose \(v=u-\lambda w\in F\).</p>
+          <p>\(v=(x-\lambda,\ y,\ z-\lambda)\). Condition \(v\in F\) : \(2(x-\lambda)+y-(z-\lambda)=0\), soit \(2x+y-z-2\lambda+\lambda=0\), donc \(\lambda=2x+y-z\).</p>
+          <p>Alors \(p(u)=u-\lambda w=\big(x-(2x+y-z),\ y,\ z-(2x+y-z)\big)\) :</p>
+          <div class="res">\(p(x,y,z)=(-x-y+z,\ y,\ -2x-y+2z)\).</div>
+          <p><b>Vérifications.</b> \(p(w)=p(1,0,1)=(0,0,0)\) ✓ (\(G=\ker p\)). Pour \(v=(1,0,2)\in F\) (\(2+0-2=0\)) : \(p(v)=(-1-0+2,\ 0,\ -2-0+4)=(1,0,2)\) ✓ (les vecteurs de \(F\) sont invariants).</p>
+        </div></details>
+
+        <p class="q">3) (1 pt) Écrire la matrice \(A\) de \(p\) dans la base canonique, vérifier \(A^2=A\) et calculer \(\mathrm{rg}\,A\) et \(\mathrm{tr}\,A\). Que remarque-t-on ?</p>
+        <details class="sol"><summary>✅ Correction Q3</summary><div class="sol-body">
+          <p><b>Matrice.</b> Les colonnes sont les images de \(e_1,e_2,e_3\) : \(p(e_1)=(-1,0,-2)\), \(p(e_2)=(-1,1,-1)\), \(p(e_3)=(1,0,2)\).
+          \[A=\begin{pmatrix}-1&-1&1\\0&1&0\\-2&-1&2\end{pmatrix}.\]</p>
+          <p><b>\(A^2=A\).</b> Produit ligne par colonne :
+          ligne 1 : \((-1)(-1)+(-1)(0)+1(-2)=-1\) ; \((-1)(-1)+(-1)(1)+1(-1)=-1\) ; \((-1)(1)+(-1)(0)+1(2)=1\) → \((-1,-1,1)\) ✓.
+          Ligne 2 : \((0,1,0)\) ✓.
+          Ligne 3 : \((-2)(-1)+(-1)(0)+2(-2)=-2\) ; \((-2)(-1)+(-1)(1)+2(-1)=-1\) ; \((-2)(1)+(-1)(0)+2(2)=2\) → \((-2,-1,2)\) ✓.</p>
+          <p><b>Rang et trace.</b> \(\mathrm{Im}\,p=F\) est de dimension 2 (donc \(\mathrm{rg}\,A=2\), cohérent avec \(\dim\ker p=1\) par le théorème du rang) et \(\mathrm{tr}\,A=-1+1+2=2\).</p>
+          <div class="res">\(A^2=A\), \(\mathrm{rg}\,A=\mathrm{tr}\,A=2=\dim F\). Pour un projecteur, <b>rang = trace</b> (nombre de 1 sur la diagonale d'une matrice adaptée).</div>
+        </div></details>
+
+        <div class="method"><span class="lab">⚡ Méthode déduite (Ex 4)</span>
+          <ul>
+            <li><b>Projection sur \(F\) parallèlement à \(G\)</b> : décomposer \(u=v+\lambda w\) (\(w\) générateur de \(G\)), exprimer \(v=u-\lambda w\), <b>imposer \(v\in F\)</b> (équation de \(F\)) ⇒ \(\lambda\) en fonction de \(x,y,z\) ⇒ \(p(u)=u-\lambda w\).</li>
+            <li><b>Matrice dans la base canonique</b> : colonne \(j\) = \(p(e_j)\) ; <b>contrôles</b> : \(p(w)=0\), \(p(v)=v\) pour \(v\in F\), \(A^2=A\), \(\mathrm{tr}\,A=\mathrm{rg}\,A=\dim F\).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= EX 5 ======================= -->
+  <section class="block" id="ex5">
+    <h2>Exercice 5 — Endomorphisme de \(\mathbb R_2[X]\) : rang, noyau, matrices · 4 pts (Ch3)</h2>
+    <div class="exo-card">
+      <div class="exo-head">✏️ \(f(P)=(X-1)P'\), théorème du rang, matrice dans deux bases, composition <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Soit \(E=\mathbb R_2[X]\), de base canonique \(\mathcal B_0=(1,X,X^2)\), et \(f:E\to\mathbb R[X]\), \(f(P)=(X-1)\,P'\).</p>
+
+        <p class="q">1) (0,5 pt) Montrer que \(f\) est un endomorphisme de \(E\).</p>
+        <details class="sol"><summary>✅ Correction Q1</summary><div class="sol-body">
+          <p><b>Linéarité.</b> Pour \(P,Q\in E\), \(\lambda\in\mathbb R\) : \(f(\lambda P+Q)=(X-1)(\lambda P+Q)'=(X-1)(\lambda P'+Q')=\lambda f(P)+f(Q)\) par linéarité de la dérivation.</p>
+          <p><b>Stabilité.</b> Si \(\deg P\leqslant2\), alors \(\deg P'\leqslant1\) et \(\deg\big((X-1)P'\big)\leqslant2\) : \(f(P)\in E\).</p>
+          <div class="res">\(f\in\mathcal L(E)\).</div>
+          <div class="warnbox"><span class="lab">Piège</span>« Endomorphisme » = linéaire <b>et</b> à valeurs dans le même espace : la stabilité (degré) n'est pas automatique, il faut l'écrire.</div>
+        </div></details>
+
+        <p class="q">2) (0,5 pt) Écrire la matrice \(A\) de \(f\) dans \(\mathcal B_0\).</p>
+        <details class="sol"><summary>✅ Correction Q2</summary><div class="sol-body">
+          <p>On calcule les images de la base :
+          \(f(1)=0\) ; \(f(X)=(X-1)\cdot1=X-1\) ; \(f(X^2)=(X-1)\cdot2X=2X^2-2X\).
+          Coordonnées dans \(\mathcal B_0=(1,X,X^2)\) (en colonnes) : \((0,0,0)\) ; \((-1,1,0)\) ; \((0,-2,2)\).</p>
+          <div class="res">\(A=\begin{pmatrix}0&-1&0\\0&1&-2\\0&0&2\end{pmatrix}\).</div>
+        </div></details>
+
+        <p class="q">3) (1 pt) Déterminer le rang de \(f\), puis \(\ker f\) et \(\mathrm{Im}\,f\). \(f\) est-il injectif, surjectif ?</p>
+        <details class="sol"><summary>✅ Correction Q3</summary><div class="sol-body">
+          <p><b>Rang.</b> La première colonne de \(A\) est nulle ; les deux autres \((-1,1,0)\) et \((0,-2,2)\) ne sont pas proportionnelles, donc libres. Donc \(\mathrm{rg}\,f=\mathrm{rg}\,A=2\).</p>
+          <p><b>Théorème du rang.</b> \(\dim\ker f=\dim E-\mathrm{rg}\,f=3-2=1\). Comme \(f(1)=0\) avec \(1\neq0\), \(\ker f=\mathrm{Vect}(1)=\mathbb R_0[X]\) (polynômes constants ; on le retrouve par \(P'=0\)).</p>
+          <p><b>Image.</b> \(\mathrm{Im}\,f=\mathrm{Vect}\big(f(1),f(X),f(X^2)\big)=\mathrm{Vect}(X-1,\ X^2-X)\), de dimension 2 (ces deux polynômes sont de degrés distincts donc libres). Caractérisation : les deux polynômes \(X-1\) et \(X^2-X\) s'annulent en \(1\), donc \(\mathrm{Im}\,f\subset\{Q\in E\mid Q(1)=0\}\), sous-espace de dimension \(3-1=2\) ; égalité des dimensions donc
+          \(\mathrm{Im}\,f=\{Q\in E\mid Q(1)=0\}\).</p>
+          <div class="res">\(\mathrm{rg}\,f=2\) ; \(\ker f=\mathbb R_0[X]\) ; \(\mathrm{Im}\,f=\{Q\in\mathbb R_2[X]\mid Q(1)=0\}\). \(f\) n'est <b>ni injectif</b> (\(\ker f\neq\{0\}\)) <b>ni surjectif</b> (\(\mathrm{rg}\,f=2\lt3\)), donc pas bijectif.</div>
+        </div></details>
+
+        <p class="q">4) (0,5 pt) Montrer que \(E=\ker f\oplus\mathrm{Im}\,f\).</p>
+        <details class="sol"><summary>✅ Correction Q4</summary><div class="sol-body">
+          <p>Soit \(Q\in\ker f\cap\mathrm{Im}\,f\) : \(Q\) est un polynôme constant \(c\) (c'est \(\ker f\)) et \(Q(1)=0\) (c'est \(\mathrm{Im}\,f\)) : \(c=Q(1)=0\). Donc \(\ker f\cap\mathrm{Im}\,f=\{0\}\). Et \(\dim\ker f+\dim\mathrm{Im}\,f=1+2=3=\dim E\).</p>
+          <div class="res">\(E=\ker f\oplus\mathrm{Im}\,f\).</div>
+          <div class="warnbox"><span class="lab">Piège</span>Ce n'est pas automatique : pour un endomorphisme quelconque, \(\ker f\) et \(\mathrm{Im}\,f\) peuvent se rencontrer (exemple : \(f\) nilpotent avec \(f^2=0\)). Ici l'intersection est nulle car le noyau (constantes) n'est pas contenu dans l'image (\(Q(1)=0\)).</div>
+        </div></details>
+
+        <p class="q">5) (0,75 pt) Montrer que \(\mathcal B_1=(1,\ X-1,\ (X-1)^2)\) est une base de \(E\) et écrire la matrice \(D\) de \(f\) dans \(\mathcal B_1\) (même base au départ et à l'arrivée).</p>
+        <details class="sol"><summary>✅ Correction Q5</summary><div class="sol-body">
+          <p><b>Base.</b> Les trois polynômes sont de degrés \(0,1,2\) (famille échelonnée en degrés) donc libres ; \(3=\dim E\) vecteurs libres forment une base.</p>
+          <p><b>Images.</b> \(f(1)=0\). \(f(X-1)=(X-1)\cdot1=X-1\). \(f\big((X-1)^2\big)=(X-1)\cdot2(X-1)=2(X-1)^2\).
+          Coordonnées dans \(\mathcal B_1\) (en colonnes) : \((0,0,0)\), \((0,1,0)\), \((0,0,2)\).</p>
+          <div class="res">\(D=\begin{pmatrix}0&0&0\\0&1&0\\0&0&2\end{pmatrix}\) (diagonale) : \(\mathcal B_1\) est une base « adaptée » à \(f\).</div>
+          <p><b>Contrôle.</b> \(\mathrm{rg}\,D=2=\mathrm{rg}\,A\) ✓ ; \(\mathrm{tr}\,D=3=\mathrm{tr}\,A\) (\(0+1+2\) contre \(0+1+2\)) ✓.</p>
+        </div></details>
+
+        <p class="q">6) (0,5 pt) Résoudre \(f(P)=X^2-1\) d'inconnue \(P\in E\).</p>
+        <details class="sol"><summary>✅ Correction Q6</summary><div class="sol-body">
+          <p>\(X^2-1\) s'annule en 1, donc \(X^2-1\in\mathrm{Im}\,f\) : il existe des solutions. Dans \(\mathcal B_1\) : \(X^2-1=(X-1)^2+2(X-1)\) (en effet \((X-1)^2+2(X-1)=X^2-2X+1+2X-2=X^2-1\)), de coordonnées \((0,2,1)\).</p>
+          <p>Pour \(P=a+b(X-1)+c(X-1)^2\) (coordonnées \((a,b,c)\)), \(f(P)=b(X-1)+2c(X-1)^2\) (coordonnées \((0,b,2c)\) : le \(D\) appliqué). On impose \((0,b,2c)=(0,2,1)\) : \(b=2\), \(c=\frac12\), \(a\) libre.</p>
+          <p>\(P=a+2(X-1)+\tfrac12(X-1)^2=\tfrac12X^2+X+\big(a-\tfrac32\big)\), \(a\in\mathbb R\).</p>
+          <div class="res">Solutions : \(P=\tfrac12X^2+X+k\), \(k\in\mathbb R\) (droite affine dirigée par \(\ker f=\) constantes).</div>
+          <p><b>Vérification.</b> \(P'=X+1\), \((X-1)(X+1)=X^2-1\) ✓.</p>
+        </div></details>
+
+        <p class="q">7) (0,75 pt) Soit \(g:E\to\mathbb R_3[X]\), \(g(P)=XP\). Donner la matrice de \(g\) (dans les bases canoniques) puis celle de \(h=g\circ f\) de deux façons.</p>
+        <details class="sol"><summary>✅ Correction Q7</summary><div class="sol-body">
+          <p><b>Matrice de \(g\)</b> (taille \(4\times3\) : arrivée \(\dim\mathbb R_3[X]=4\), départ \(\dim E=3\)) : \(g(1)=X\), \(g(X)=X^2\), \(g(X^2)=X^3\). En coordonnées dans \((1,X,X^2,X^3)\) :
+          \[\mathrm{Mat}(g)=\begin{pmatrix}0&0&0\\1&0&0\\0&1&0\\0&0&1\end{pmatrix}.\]</p>
+          <p><b>1ʳᵉ façon : produit matriciel</b> (dans cet ordre, \(\mathrm{Mat}(g\circ f)=\mathrm{Mat}(g)\,A\), de taille \(4\times3\) fois \(3\times3\)) :
+          \[\mathrm{Mat}(h)=\begin{pmatrix}0&0&0\\1&0&0\\0&1&0\\0&0&1\end{pmatrix}\begin{pmatrix}0&-1&0\\0&1&-2\\0&0&2\end{pmatrix}=\begin{pmatrix}0&0&0\\0&-1&0\\0&1&-2\\0&0&2\end{pmatrix}.\]</p>
+          <p><b>2ᵉ façon : directement.</b> \(h(1)=g(0)=0\) ; \(h(X)=g(X-1)=X^2-X\) → \((0,-1,1,0)\) ; \(h(X^2)=g(2X^2-2X)=2X^3-2X^2\) → \((0,0,-2,2)\). Mêmes colonnes ✓.</p>
+          <div class="res">\(\mathrm{Mat}(g\circ f)=\begin{pmatrix}0&0&0\\0&-1&0\\0&1&-2\\0&0&2\end{pmatrix}\) ; \(\mathrm{rg}(g\circ f)=2\).</div>
+          <div class="warnbox"><span class="lab">Piège</span>Ordre du produit : \(\mathrm{Mat}(g\circ f)=\mathrm{Mat}(g)\times\mathrm{Mat}(f)\), <b>pas</b> l'inverse (d'ailleurs \(A\times\mathrm{Mat}(g)\) n'a même pas de sens ici : tailles \(3\times3\) et \(4\times3\)). Le test des tailles protège de l'erreur.</div>
+        </div></details>
+
+        <div class="method"><span class="lab">⚡ Méthode déduite (Ex 5)</span>
+          <ul>
+            <li><b>Montrer qu'on a un endomorphisme</b> : linéarité (une ligne) + stabilité (degré).</li>
+            <li><b>Matrice dans une base</b> : images des vecteurs de base, coordonnées <b>en colonnes</b> ; <b>rang = rang de la matrice</b> (colonnes libres) ; <b>théorème du rang</b> ⇒ \(\dim\ker\) sans résoudre ; \(\ker\) = on devine un vecteur et on conclut par la dimension ; \(\mathrm{Im}\) = Vect des images, caractérisée si possible par une équation.</li>
+            <li><b>Base adaptée</b> : tester des vecteurs bien choisis (\(1,X-1,(X-1)^2\), adaptés à \((X-1)P'\)) : si \(f(b_i)=\lambda_ib_i\), la matrice est diagonale. Résoudre \(f(P)=Q\) devient alors lecture directe sur les coordonnées.</li>
+            <li><b>Composition</b> : \(\mathrm{Mat}(g\circ f)=\mathrm{Mat}(g)\,\mathrm{Mat}(f)\) ; taille (arrivée × départ) ; double vérification en calculant directement les images.</li>
+            <li>\(E=\ker f\oplus\mathrm{Im}\,f\) : intersection nulle + somme des dimensions (pas automatique).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= FICHE ======================= -->
+  <section class="memo-sheet" id="fiche">
+    <div class="memo-head">⚡ Fiche méthodes finale — une méthode déduite de chaque exercice du DS blanc</div>
+    <div class="memo-grid">
+      <div class="memo-item method"><b>QCM 1 · Différence de deux termes qui tendent vers la même limite</b>DL des deux termes au <b>même ordre</b>, soustraire les DL, lire le 1<sup>er</sup> terme non nul. Jamais « équivalent − équivalent ». \(e^{1/n}-\cos\frac1{\sqrt n}=\frac3{2n}+o(\frac1n)\).</div>
+      <div class="memo-item method"><b>QCM 2 · Quotient dont le premier ordre s'annule</b>DL du numérateur et du dénominateur jusqu'au 1<sup>er</sup> terme non nul, équivalents, division. \(\frac{\ln(1+x)-\sin x}{x\tan x}\to-\frac12\).</div>
+      <div class="memo-item method"><b>QCM 3 · Supplémentaires dans \(\mathbb R^3\)</b>Tester si le générateur de la droite vérifie l'équation du plan. Si oui : \(G\subset F\), pas supplémentaires. Sinon \(F\oplus G=\mathbb R^3\).</div>
+      <div class="memo-item method"><b>QCM 4 · Matrice à paramètre, bijectivité</b>Gauss sans diviser par le paramètre ; bijectif \(\Leftrightarrow\) rang \(=\dim\) \(\Leftrightarrow\) dernier pivot \(\neq0\) (ici \(a-5\)). Th. du rang pour \(\dim\ker\).</div>
+      <div class="memo-item method"><b>Cours · \(E=F\oplus G\)</b>Deux volets : (i) tout \(x\) se décompose (\(x=(x-p(x))+p(x)\)), (ii) \(F\cap G=\{0\}\) en partant de \(y\in F\cap G\). Projecteur : \(\mathrm{Im}\,p=\ker(p-\mathrm{id})\).</div>
+      <div class="memo-item method"><b>Ex 1 · Étude locale / asymptote</b>Factoriser (\(\frac{\ln(1+x)}x\), \(x\sqrt{1+2/x}\)) pour avoir \(1+u\), \(u\to0\), DL usuel, composer ; DL ordre 1 : prolongement, dérivabilité, tangente ; terme suivant : position. En l'infini : \(ax+b+\frac cx\), position = signe de \(c\).</div>
+      <div class="memo-item method"><b>Ex 2 · Suite définie par une équation</b>Bijection (continue, strictement monotone, limites) ⇒ \(x_n=h^{-1}(n)\) ; limite par monotonie de \(h^{-1}\) ; \(x_n\sim n\) par croissances comparées ; DA par <b>ré-injection</b> \(x_n=n-\ln x_n\), \(\ln x_n=\ln n+\ln\frac{x_n}n\).</div>
+      <div class="memo-item method"><b>Ex 3 · Sous-espaces de \(\mathbb R^n\)</b>Équations ⇒ paramétrer ⇒ base ; intersection en injectant le vecteur général dans les équations ; <b>Grassmann</b> \(\dim(F+G)=\dim F+\dim G-\dim F\cap G\) ; supplémentaire = compléter une base (intersection nulle + dimensions).</div>
+      <div class="memo-item method"><b>Ex 4 · Projection sur \(F\) // \(G\)</b>\(u=v+\lambda w\), impose \(v\in F\) pour trouver \(\lambda\), \(p(u)=u-\lambda w\) ; matrice : colonnes = \(p(e_j)\) ; contrôles \(p(w)=0\), \(p(v)=v\), \(A^2=A\), \(\mathrm{tr}=\mathrm{rg}\).</div>
+      <div class="memo-item method"><b>Ex 5 · Rang, noyau, image d'un endomorphisme</b>Matrice des images en colonnes ; rang = colonnes libres ; \(\dim\ker=\dim E-\mathrm{rg}\) (th. du rang) ; \(\mathrm{Im}=\mathrm{Vect}(\text{images})\), caractérisée si possible par une équation ; \(\ker\) : deviner + dimension.</div>
+      <div class="memo-item method"><b>Ex 5 · Base adaptée</b>Chercher des vecteurs avec \(f(b)=\lambda b\) (ici \(1,X-1,(X-1)^2\)) ⇒ matrice diagonale ; résoudre \(f(P)=Q\) par les coordonnées dans cette base.</div>
+      <div class="memo-item method"><b>Ex 5 · Composition</b>\(\mathrm{Mat}(g\circ f)=\mathrm{Mat}(g)\,\mathrm{Mat}(f)\) ; taille = (arrivée × départ) ; vérifier en recalculant directement.</div>
+      <div class="memo-item"><b>Pièges à ne pas faire</b>soustraire des équivalents · position lue sur le terme en \(x\) au lieu du premier terme non nul · oublier \(F\cap G=\{0\}\) <b>et</b> \(F+G=E\) · colonnes écrites en lignes · inverser \(g\circ f\) et \(f\circ g\) · confondre \(\ker\) (polynômes) et \(\ker A\) (coordonnées).</div>
+      <div class="memo-item"><b>Hors programme du DS (§4 du Ch3)</b>changement de base, \(P^{-1}AP\), matrices semblables, diagonalisation : non traité ici (ne tombe pas au DS d'après toi). À voir ensuite : Ch3 §4 et TD3 exercices 6 → 9.</div>
+    </div>
+  </section>
+</main>
+<script src="../../assets/gate.js"></script>
+</body>
+</html>
