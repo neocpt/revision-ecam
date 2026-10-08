@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fiches méthodes par exercice — AM2 Mathématiques</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+<div class="topbar">
+  <a href="../index.html#am2">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#sommaire">Sommaire</a>
+  <a href="#je-vois">Je vois… donc…</a>
+  <a href="#boite">Boîte à méthodes</a>
+  <a href="#td1">TD1</a>
+  <a href="#td2">TD2</a>
+  <a href="#td3">TD3</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Maths AM2 (2ᵉ année) · Fiches méthodes</span>
+  <h1 class="title">Fiches méthodes par exercice</h1>
+  <p class="lead">Les 34 exercices de TD de maths de l'année (TD1 analyse asymptotique, TD2 applications linéaires,
+  TD3 matrices). Pour chaque exercice : <b>analyse de la question</b> et <b>méthode générale</b>. Quand un exercice répète
+  la même opération (16 DL, 10 limites…), la méthode est détaillée <b>une seule fois</b> dans la
+  <a href="#boite">boîte à méthodes</a> et l'exercice y renvoie. Clique sur une sous-question du sommaire pour
+  sauter directement à sa fiche.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire de la page</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#sommaire">🗂️ Sommaire cliquable des exercices (Exo 1 : 1) 2) …)</a></li>
+      <li><a href="#je-vois">🎯 « Je vois… donc j'utilise… »</a></li>
+      <li><a href="#boite">🧰 Boîte à méthodes (A1…A10, L1…L9, M1…M10)</a></li>
+      <li><a href="#td1">📐 TD1 — fiche de chaque exercice</a> · <a href="#td2">🔀 TD2</a> · <a href="#td3">🧮 TD3</a></li>
+    </ul>
+  </div>
+
+  <section id="sommaire">
+    <h2>🗂️ Sommaire des exercices et méthodes utilisées</h2>
+    <p class="lead">Chaque ligne = une sous-question ; le lien en gras te mène à sa fiche, les codes (<b>A…</b>, <b>L…</b>, <b>M…</b>) aux méthodes détaillées.</p>
+    <details class="sol" open><summary>📐 TD1 — Analyse asymptotique (15 exercices)</summary><div class="sol-body">
+<ul>
+<li><a href="#td1-ex1"><b>Exo 1</b> — Classer des suites par négligeabilité</a>
+ <small>→ <a href="#m-compar">A1</a></small>
+</li>
+<li><a href="#td1-ex2"><b>Exo 2</b> — Équivalents simples de suites</a>
+<ul>
+<li><a href="#td1-ex2-q1">1)</a> \(\dfrac{n^2+e^{-2n}+\sqrt{n^5}}{\ln(2n)+2n-5}\) <small>→ <a href="#m-equiv">A2</a></small></li>
+<li><a href="#td1-ex2-q2">2)</a> \(\ln\dfrac{n^2+1}{n^2+2}\) <small>→ <a href="#m-equiv">A2</a></small></li>
+<li><a href="#td1-ex2-q3">3)</a> \(\dfrac{\ln(n^2+1)}{n^2+2}\) <small>→ <a href="#m-equiv">A2</a></small></li>
+<li><a href="#td1-ex2-q4">4)</a> \(\sqrt{n^2+n+1}-\sqrt{n^2-n+1}\) <small>→ <a href="#m-equiv">A2</a></small></li>
+<li><a href="#td1-ex2-q5">5)</a> \(\sum_{k=0}^nk!\) <small>→ <a href="#m-equiv">A2</a></small></li>
+<li><a href="#td1-ex2-q6">6)</a> \(\dfrac{n^{\sqrt{n+1}}}{(n+1)^{\sqrt n}}\) <small>→ <a href="#m-equiv">A2</a> <a href="#m-expln">A4</a></small></li>
+</ul>
+</li>
+<li><a href="#td1-ex3"><b>Exo 3</b> — Limites de suites</a>
+<ul>
+<li><a href="#td1-ex3-q1">1)</a> \(\sqrt{n^2-1}-n\) <small>→ <a href="#m-limeq">A3</a> <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex3-q2">2)</a> \(\dfrac{(n+2)!}{(n^2+1)n!}\) <small>→ <a href="#m-limeq">A3</a></small></li>
+<li><a href="#td1-ex3-q3">3)</a> \(n(\sqrt[n]3-\sqrt[n]5)\) <small>→ <a href="#m-expln">A4</a> <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex3-q4">4)</a> \(\dfrac{\cos(1/n)-1}{(e^{1/n}-1)\sin(1/n)}\) <small>→ <a href="#m-equiv">A2</a></small></li>
+</ul>
+</li>
+<li><a href="#td1-ex4"><b>Exo 4</b> — Convergence de suites (équivalents, DL, croissances comparées)</a>
+<ul>
+<li><a href="#td1-ex4-q1">1)</a> \(n\big(\sqrt{1+\sin\frac1n}-\cos\frac1n\big)\) <small>→ <a href="#m-limeq">A3</a> <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex4-q2">2)</a> \(\big(e^{1/n}\big)^{n\ln\cos(1/n)}\) <small>→ <a href="#m-expln">A4</a></small></li>
+<li><a href="#td1-ex4-q3">3)</a> \(\big(1+\sin\frac1n\big)^n\) <small>→ <a href="#m-expln">A4</a> <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex4-q4">4)</a> \((5n+1)^2\ln\big(1+\frac1{3n^2}\big)\) <small>→ <a href="#m-equiv">A2</a></small></li>
+<li><a href="#td1-ex4-q5">5)</a> \(n\ln\sqrt{\frac{n+1}{n-1}}\) <small>→ <a href="#m-equiv">A2</a></small></li>
+<li><a href="#td1-ex4-q6">6)</a> \(n^2\big(\sqrt{1-\frac1{n^2}}-1\big)\) <small>→ <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex4-q7">7)</a> \(\big(\frac{2n-1}{2n+1}\big)^n\) <small>→ <a href="#m-expln">A4</a> <a href="#m-equiv">A2</a></small></li>
+<li><a href="#td1-ex4-q8">8)</a> \(\big(\frac{n}{n-x}\big)^n\) <small>→ <a href="#m-expln">A4</a> <a href="#m-dl">A5</a></small></li>
+</ul>
+</li>
+<li><a href="#td1-ex5"><b>Exo 5</b> — Classer des fonctions en \(+\infty\)</a>
+ <small>→ <a href="#m-compar">A1</a></small>
+</li>
+<li><a href="#td1-ex6"><b>Exo 6</b> — Équivalents et limites de fonctions en un point</a>
+<ul>
+<li><a href="#td1-ex6-q1">1)</a> \(\sqrt{1-x^2}\) en 1 <small>→ <a href="#m-equiv">A2</a></small></li>
+<li><a href="#td1-ex6-q2">2)</a> \(\frac{\ln(1+x)+x^2}{x^2+x^3}\) en 0 <small>→ <a href="#m-equiv">A2</a> <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex6-q3">3)</a> \(\frac{\tan x-\sin3x}{\ln(1+x)}\) en 0 <small>→ <a href="#m-limeq">A3</a></small></li>
+<li><a href="#td1-ex6-q4">4)</a> \(\frac{\operatorname{ch}x-1}{\arcsin^2x}\) en 0 <small>→ <a href="#m-equiv">A2</a></small></li>
+<li><a href="#td1-ex6-q5">5)</a> \(\frac{\ln x}{\sqrt x-1}\) en 1 <small>→ <a href="#m-limeq">A3</a></small></li>
+<li><a href="#td1-ex6-q6">6)</a> \(x^3\arctan(e^{-x})\) en \(+\infty\) <small>→ <a href="#m-equiv">A2</a> <a href="#m-compar">A1</a></small></li>
+<li><a href="#td1-ex6-q7">7)</a> \(\frac{\sqrt{x+1}-\sqrt x}{\ln\frac{e^x-1}{e^x+1}}\) en \(+\infty\) <small>→ <a href="#m-equiv">A2</a></small></li>
+<li><a href="#td1-ex6-q8">8)</a> \(\frac{\sqrt{x^3-1}}{\sqrt[3]{x^2+2}}\) en \(+\infty\) <small>→ <a href="#m-equiv">A2</a></small></li>
+<li><a href="#td1-ex6-q9">9)</a> \(\frac1{\cos x}-\tan x\) en \(\frac\pi2\) <small>→ <a href="#m-limeq">A3</a></small></li>
+<li><a href="#td1-ex6-q10">10)</a> \(\big(1+\frac\lambda x\big)^x\) en \(+\infty\) <small>→ <a href="#m-expln">A4</a></small></li>
+<li><a href="#td1-ex6-q11">11)</a> \(\big(1+\sin\frac{\ln x}x\big)^{x/\ln x}\) <small>→ <a href="#m-expln">A4</a></small></li>
+</ul>
+</li>
+<li><a href="#td1-ex7"><b>Exo 7</b> — Taylor avec reste intégral : encadrements</a>
+<ul>
+<li><a href="#td1-ex7-q1">1)</a> \(\ln(1+x)\) <small>→ <a href="#m-taylor">A10</a></small></li>
+<li><a href="#td1-ex7-q2">2)</a> \(\sqrt[3]{1+x}\) <small>→ <a href="#m-taylor">A10</a></small></li>
+</ul>
+</li>
+<li><a href="#td1-ex8"><b>Exo 8</b> — Seize développements limités en 0</a>
+<ul>
+<li><a href="#td1-ex8-q1">1)</a> \(\cos x\,e^x\) (ordre 3) <small>→ <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex8-q2">2)</a> \(\ln(1+x^2)\) (ordre 6) <small>→ <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex8-q3">3)</a> \(\sin2x+\cos x^2\) (ordre 7) <small>→ <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex8-q4">4)</a> \(e^{3x}\sin2x\) (ordre 4) <small>→ <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex8-q5">5)</a> \(\frac{\ln(1+x)}{1+x}\) (ordre 3) <small>→ <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex8-q6">6)</a> \(\frac{\operatorname{sh}x-x}{x^3}\) (ordre 6) <small>→ <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex8-q7">7)</a> \(e^{\sin x}\) (ordre 4) <small>→ <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex8-q8">8)</a> \(\sin^6x\) (ordre 9) <small>→ <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex8-q9">9)</a> \(\ln\cos x\) (ordre 6) <small>→ <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex8-q10">10)</a> \(\frac1{\cos x}\) (ordre 4) <small>→ <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex8-q11">11)</a> \(\tan x\) (ordre 5) <small>→ <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex8-q12">12)</a> \(\frac{\sin x}{\operatorname{sh}x}\) (ordre 4) <small>→ <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex8-q13">13)</a> \((1+x)^{1/(1+x)}\) (ordre 3) <small>→ <a href="#m-dl">A5</a> <a href="#m-expln">A4</a></small></li>
+<li><a href="#td1-ex8-q14">14)</a> \(\sqrt{1+x}\) (ordre 4) <small>→ <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex8-q15">15)</a> \(\frac1{\sqrt{1-x}}\) (ordre 3) <small>→ <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex8-q16">16)</a> \((1+x)^{1/x}\) (ordre 3) <small>→ <a href="#m-dl">A5</a> <a href="#m-expln">A4</a></small></li>
+</ul>
+</li>
+<li><a href="#td1-ex9"><b>Exo 9</b> — DL en un point \(a\) quelconque</a>
+<ul>
+<li><a href="#td1-ex9-q1">1)</a> \(\sin x\) en \(\frac\pi4\) (ordre 3) <small>→ <a href="#m-dla">A6</a></small></li>
+<li><a href="#td1-ex9-q2">2)</a> \(\frac{\ln x}{x^2}\) en 1 (ordre 4) <small>→ <a href="#m-dla">A6</a> <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex9-q3">3)</a> \(\frac1x\) en 2 (ordre 3) <small>→ <a href="#m-dla">A6</a></small></li>
+<li><a href="#td1-ex9-q4">4)</a> \(\sin x\cos3x\) en \(\frac\pi3\) (ordre 2) <small>→ <a href="#m-dla">A6</a></small></li>
+<li><a href="#td1-ex9-q5">5)</a> \(\arctan x\) en 1 (ordre 3) <small>→ <a href="#m-dla">A6</a></small></li>
+</ul>
+</li>
+<li><a href="#td1-ex10"><b>Exo 10</b> — Dix limites par développements limités</a>
+<ul>
+<li><a href="#td1-ex10-q1">1)</a> \(x-x^2\ln(1+\frac1x)\) en \(+\infty\) <small>→ <a href="#m-limeq">A3</a></small></li>
+<li><a href="#td1-ex10-q2">2)</a> \(\frac{e^{x^2}-\cos x}{x^2}\) en 0 <small>→ <a href="#m-limeq">A3</a></small></li>
+<li><a href="#td1-ex10-q3">3)</a> \(\sqrt{x^2+x+1}-x\) en \(+\infty\) <small>→ <a href="#m-limeq">A3</a></small></li>
+<li><a href="#td1-ex10-q4">4)</a> \(x\,\frac{\ln(1+x)-\sin x}{\tan x-x}\) en 0 <small>→ <a href="#m-limeq">A3</a></small></li>
+<li><a href="#td1-ex10-q5">5)</a> \(\frac{\cos x-\sqrt{1-x^2}}{x^4}\) en 0 <small>→ <a href="#m-limeq">A3</a></small></li>
+<li><a href="#td1-ex10-q6">6)</a> \(\frac{(1+3x)^{1/3}-1-\sin x}{1-\cos x}\) en 0 <small>→ <a href="#m-limeq">A3</a></small></li>
+<li><a href="#td1-ex10-q7">7)</a> \(\big(\frac{\tan x}x\big)^{1/x^2}\) en 0 <small>→ <a href="#m-expln">A4</a></small></li>
+<li><a href="#td1-ex10-q8">8)</a> \(\frac{\sin(x-\sin x)}{\sqrt{1+x^3}-1}\) en 0 <small>→ <a href="#m-equiv">A2</a></small></li>
+<li><a href="#td1-ex10-q9">9)</a> \(\frac{(1+x)^{1/x}-e}{x}\) en 0 <small>→ <a href="#m-expln">A4</a> <a href="#m-limeq">A3</a></small></li>
+<li><a href="#td1-ex10-q10">10)</a> \(\frac{\ln(2x^2-1)}{\tan(x-1)}\) en 1 <small>→ <a href="#m-limeq">A3</a></small></li>
+</ul>
+</li>
+<li><a href="#td1-ex11"><b>Exo 11</b> — \(f(x)=\dfrac{x}{e^x-1}\) : DL, tangente, position</a>
+<ul>
+<li><a href="#td1-ex11-q1">1)</a> DL à l'ordre 2 <small>→ <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex11-q2">2)</a> tangente et position <small>→ <a href="#m-tang">A7</a></small></li>
+</ul>
+</li>
+<li><a href="#td1-ex12"><b>Exo 12</b> — \(f(x)=\ln(1+x+x^2)\) : tangentes en 0 et en 1</a>
+<ul>
+<li><a href="#td1-ex12-q1">0</a> \(x_0=0\) <small>→ <a href="#m-tang">A7</a> <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex12-q2">1</a> \(x_0=1\) <small>→ <a href="#m-tang">A7</a> <a href="#m-dla">A6</a></small></li>
+</ul>
+</li>
+<li><a href="#td1-ex13"><b>Exo 13</b> — Tangente et position pour trois fonctions</a>
+<ul>
+<li><a href="#td1-ex13-q1">1)</a> \(\frac{e^{\sin x}-1}{x}\) en 0 <small>→ <a href="#m-tang">A7</a> <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex13-q2">2)</a> \(\frac{\arctan x}{\sin^3x}-\frac1{x^2}\) en 0 <small>→ <a href="#m-tang">A7</a> <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex13-q3">3)</a> \(\sqrt{\tan x}\) en \(\frac\pi4\) <small>→ <a href="#m-tang">A7</a> <a href="#m-dla">A6</a></small></li>
+</ul>
+</li>
+<li><a href="#td1-ex14"><b>Exo 14</b> — Asymptotes en \(+\infty\) et position</a>
+<ul>
+<li><a href="#td1-ex14-q1">1)</a> \((x^2-1)\ln\frac{x+1}{x-1}\) <small>→ <a href="#m-asy">A8</a> <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex14-q2">2)</a> \(\sqrt{x^2+1}+\sqrt{x^2-1}\) <small>→ <a href="#m-asy">A8</a> <a href="#m-dl">A5</a></small></li>
+<li><a href="#td1-ex14-q3">3)</a> \(x^2\arctan\frac1{1+x}\) <small>→ <a href="#m-asy">A8</a> <a href="#m-dl">A5</a></small></li>
+</ul>
+</li>
+<li><a href="#td1-ex15"><b>Exo 15</b> — Suite définie par \(e^x+x=n\)</a>
+<ul>
+<li><a href="#td1-ex15-q1">1)</a> \(x_n\) bien définie <small>→ <a href="#m-impl">A9</a></small></li>
+<li><a href="#td1-ex15-q2">2)</a> croissance et limite <small>→ <a href="#m-impl">A9</a></small></li>
+<li><a href="#td1-ex15-q3">3)</a> \(x_n\sim\ln n\) <small>→ <a href="#m-impl">A9</a> <a href="#m-equiv">A2</a></small></li>
+<li><a href="#td1-ex15-q4">4)</a> développement à deux termes <small>→ <a href="#m-impl">A9</a></small></li>
+</ul>
+</li>
+</ul></div></details>
+<details class="sol" open><summary>🔀 TD2 — Applications linéaires (10 exercices)</summary><div class="sol-body">
+<ul>
+<li><a href="#td2-ex1"><b>Exo 1</b> — Sous-espaces vectoriels décrits en \(\operatorname{Vect}\)</a>
+<ul>
+<li><a href="#td2-ex1-q1">1)</a> \(\{P\in\mathbb R_3[X]\mid P(1)=0\}\) <small>→ <a href="#m-sev">L1</a></small></li>
+<li><a href="#td2-ex1-q2">2)</a> \(\{P'\mid P\in\mathbb R_n[X]\}\) <small>→ <a href="#m-sev">L1</a> <a href="#m-kerim">L4</a></small></li>
+<li><a href="#td2-ex1-q3">3)</a> \(\{a(x^3-1)+b(x^2-2)+c(x+4)\}\) <small>→ <a href="#m-sev">L1</a></small></li>
+<li><a href="#td2-ex1-q4">4)</a> \(\{P\in\mathbb R_4[X]\mid P(1)=P(2)=0\}\) <small>→ <a href="#m-sev">L1</a></small></li>
+<li><a href="#td2-ex1-q5">5)</a> \(\{P\in\mathbb R_2[X]\mid\int_0^1P=0\}\) <small>→ <a href="#m-sev">L1</a></small></li>
+<li><a href="#td2-ex1-q6">6)</a> \(\{P\in\mathbb R_2[X]\mid P'=0\}\) <small>→ <a href="#m-sev">L1</a></small></li>
+<li><a href="#td2-ex1-q7">7)</a> \(\{P\in\mathbb R_3[X]\mid P''=0\}\) <small>→ <a href="#m-sev">L1</a></small></li>
+</ul>
+</li>
+<li><a href="#td2-ex2"><b>Exo 2</b> — Bases de \(\mathbb R^3\), coordonnées, familles libres / génératrices</a>
+<ul>
+<li><a href="#td2-ex2-q1">1)</a> \(v_1=(0,1,1),v_2=(1,0,1),v_3=(1,1,0)\), \(w=(1,1,1)\) <small>→ <a href="#m-base">L2</a></small></li>
+<li><a href="#td2-ex2-q2">2)</a> \(v_1=(1,1,1),v_2=(-1,1,0),v_3=(1,0,-1)\) ; \(e_1,e_2,e_3,w\) <small>→ <a href="#m-base">L2</a></small></li>
+<li><a href="#td2-ex2-q3">3)</a> libre non génératrice <small>→ <a href="#m-base">L2</a></small></li>
+<li><a href="#td2-ex2-q4">4)</a> génératrice non libre <small>→ <a href="#m-base">L2</a></small></li>
+</ul>
+</li>
+<li><a href="#td2-ex3"><b>Exo 3</b> — Linéarité et noyau d'une application \(\mathbb R^3\to\mathbb R^2\)</a>
+<ul>
+<li><a href="#td2-ex3-q1">1)</a> \(u\) est linéaire <small>→ <a href="#m-lin">L3</a></small></li>
+<li><a href="#td2-ex3-q2">2)</a> \(\ker u\) <small>→ <a href="#m-kerim">L4</a></small></li>
+</ul>
+</li>
+<li><a href="#td2-ex4"><b>Exo 4</b> — Linéarité de quatre applications</a>
+<ul>
+<li><a href="#td2-ex4-q1">f₁</a> \(\mathbb R^2\to\mathbb R^2\) <small>→ <a href="#m-lin">L3</a></small></li>
+<li><a href="#td2-ex4-q2">f₂</a> \((xy,x,y)\) <small>→ <a href="#m-lin">L3</a></small></li>
+<li><a href="#td2-ex4-q3">f₃</a> \(\mathbb R^3\to\mathbb R^3\) <small>→ <a href="#m-lin">L3</a></small></li>
+<li><a href="#td2-ex4-q4">f₄</a> \(P\mapsto(P(-1),P(0),P(1))\) <small>→ <a href="#m-lin">L3</a></small></li>
+</ul>
+</li>
+<li><a href="#td2-ex5"><b>Exo 5</b> — Noyau, image, injectivité de \(f_1,f_3,f_4\)</a>
+<ul>
+<li><a href="#td2-ex5-q1">f₁</a> \(\mathbb R^2\to\mathbb R^2\) <small>→ <a href="#m-kerim">L4</a></small></li>
+<li><a href="#td2-ex5-q2">f₃</a> \(\mathbb R^3\to\mathbb R^3\) <small>→ <a href="#m-kerim">L4</a></small></li>
+<li><a href="#td2-ex5-q3">f₄</a> \(\mathbb R_3[X]\to\mathbb R^3\) <small>→ <a href="#m-kerim">L4</a></small></li>
+</ul>
+</li>
+<li><a href="#td2-ex6"><b>Exo 6</b> — Endomorphisme défini par l'image de la base canonique</a>
+<ul>
+<li><a href="#td2-ex6-q1">1)</a> expression de \(u\) <small>→ <a href="#m-expl">L5</a></small></li>
+<li><a href="#td2-ex6-q2">2)</a> antécédents de \((-1,1,8)\) et \((-2,1,3)\) <small>→ <a href="#m-antec">L6</a></small></li>
+<li><a href="#td2-ex6-q3">3)</a> injective / surjective / bijective <small>→ <a href="#m-kerim">L4</a></small></li>
+</ul>
+</li>
+<li><a href="#td2-ex7"><b>Exo 7</b> — Supplémentaires, projection et symétrie (1)</a>
+<ul>
+<li><a href="#td2-ex7-q1">1)</a> \(F\oplus G=\mathbb R^3\) <small>→ <a href="#m-supp">L7</a></small></li>
+<li><a href="#td2-ex7-q2">2)</a> projection \(p\) sur \(F\) // \(G\) <small>→ <a href="#m-proj">L8</a></small></li>
+<li><a href="#td2-ex7-q3">3)</a> symétrie \(s\) par rapport à \(G\) // \(F\) <small>→ <a href="#m-proj">L8</a></small></li>
+</ul>
+</li>
+<li><a href="#td2-ex8"><b>Exo 8</b> — Supplémentaires et projection (2)</a>
+<ul>
+<li><a href="#td2-ex8-q1">1)</a> base de \(F\) ; \(F\oplus G=\mathbb R^3\) <small>→ <a href="#m-supp">L7</a></small></li>
+<li><a href="#td2-ex8-q2">2)</a> projection sur \(F\) // \(G\) <small>→ <a href="#m-proj">L8</a></small></li>
+</ul>
+</li>
+<li><a href="#td2-ex9"><b>Exo 9</b> — \(\mathbb C\) comme \(\mathbb R\)-espace vectoriel : un projecteur</a>
+<ul>
+<li><a href="#td2-ex9-q1">1)</a> \(\varphi\in\operatorname{End}_{\mathbb R}(\mathbb C)\) <small>→ <a href="#m-lin">L3</a> <a href="#m-projecteur">L9</a></small></li>
+<li><a href="#td2-ex9-q2">2)</a> \(\varphi\circ\varphi=\varphi\) <small>→ <a href="#m-projecteur">L9</a></small></li>
+<li><a href="#td2-ex9-q3">3)</a> image, noyau, dimensions <small>→ <a href="#m-projecteur">L9</a> <a href="#m-kerim">L4</a></small></li>
+</ul>
+</li>
+<li><a href="#td2-ex10"><b>Exo 10</b> — L'application somme \(f:F\times G\to E,\ (x,y)\mapsto x+y\)</a>
+<ul>
+<li><a href="#td2-ex10-q1">1)</a> \(f\) est linéaire <small>→ <a href="#m-lin">L3</a></small></li>
+<li><a href="#td2-ex10-q2">2)</a> \(\ker f\) et \(\operatorname{Im}f\) <small>→ <a href="#m-kerim">L4</a></small></li>
+<li><a href="#td2-ex10-q3">3)</a> inj. / surj. / bij. <small>→ <a href="#m-supp">L7</a></small></li>
+</ul>
+</li>
+</ul></div></details>
+<details class="sol" open><summary>🧮 TD3 — Matrices et applications linéaires (9 exercices)</summary><div class="sol-body">
+<ul>
+<li><a href="#td3-ex1"><b>Exo 1</b> — Matrices dans la base canonique</a>
+<ul>
+<li><a href="#td3-ex1-q1">1)</a> \(\mathbb R^3\to\mathbb R^3\) <small>→ <a href="#m-mat">M1</a></small></li>
+<li><a href="#td3-ex1-q2">2)</a> \((2X+1)P-X^2P'\) sur \(\mathbb R_2[X]\) <small>→ <a href="#m-mat">M1</a></small></li>
+<li><a href="#td3-ex1-q3">3)</a> \(\int_X^{X+2}P(t)\,dt\) <small>→ <a href="#m-mat">M1</a></small></li>
+<li><a href="#td3-ex1-q4">4)</a> \(M\mapsto AM+MB\) sur \(\mathcal M_2(\mathbb R)\) <small>→ <a href="#m-mat">M1</a></small></li>
+</ul>
+</li>
+<li><a href="#td3-ex2"><b>Exo 2</b> — Noyau, image et changement de base (3 bases)</a>
+<ul>
+<li><a href="#td3-ex2-q1">1)</a> noyau, image, supplémentaires ? <small>→ <a href="#m-matkerim">M2</a> <a href="#m-supp">L7</a></small></li>
+<li><a href="#td3-ex2-q2">2)</a> matrice dans \((u,f(e_1),f(e_2))\) <small>→ <a href="#m-adaptee">M3</a> <a href="#m-passage">M4</a></small></li>
+<li><a href="#td3-ex2-q3">3)</a> matrice dans \((u,e_1,e_2)\) <small>→ <a href="#m-adaptee">M3</a></small></li>
+</ul>
+</li>
+<li><a href="#td3-ex3"><b>Exo 3</b> — Projection sur l'axe des abscisses : trois matrices et une image</a>
+<ul>
+<li><a href="#td3-ex3-q1">1)</a> \(\operatorname{Mat}_{\mathcal B,\mathcal B}\) <small>→ <a href="#m-mat">M1</a></small></li>
+<li><a href="#td3-ex3-q2">2)</a> \(\operatorname{Mat}_{\mathcal B',\mathcal B}\) <small>→ <a href="#m-chgt">M5</a></small></li>
+<li><a href="#td3-ex3-q3">3)</a> \(\operatorname{Mat}_{\mathcal B'}\) <small>→ <a href="#m-chgt">M5</a> <a href="#m-passage">M4</a></small></li>
+<li><a href="#td3-ex3-q4">4)</a> image de \(2\vec u-\vec v\) <small>→ <a href="#m-imagew">M6</a></small></li>
+</ul>
+</li>
+<li><a href="#td3-ex4"><b>Exo 4</b> — Endomorphisme de \(\mathbb R_2[X]\) et équation différentielle</a>
+<ul>
+<li><a href="#td3-ex4-q1">1)</a> endomorphisme et matrice <small>→ <a href="#m-ed">M8</a> <a href="#m-mat">M1</a></small></li>
+<li><a href="#td3-ex4-q2">2)</a> bijective ? antécédent de \(X^2-1\) <small>→ <a href="#m-ed">M8</a></small></li>
+<li><a href="#td3-ex4-q3">3)</a> résoudre \((x^2+x+1)y'-(2x-1)y=x^2-1\) <small>→ <a href="#m-ed">M8</a></small></li>
+</ul>
+</li>
+<li><a href="#td3-ex5"><b>Exo 5</b> — Projecteur de \(\mathbb R^3\) : diagonalisation par changement de base</a>
+<ul>
+<li><a href="#td3-ex5-q1">1)</a> matrice \(A\) et noyau <small>→ <a href="#m-mat">M1</a> <a href="#m-matkerim">M2</a></small></li>
+<li><a href="#td3-ex5-q2">2)</a> \(e_i\) en fonction des \(f_j\) ; base ? <small>→ <a href="#m-passage">M4</a></small></li>
+<li><a href="#td3-ex5-q3">3)</a> \(\Phi(f_j)\) ; matrice \(B\) ; nature <small>→ <a href="#m-adaptee">M3</a></small></li>
+<li><a href="#td3-ex5-q4">4)</a> \(P\), \(P^{-1}\), \(B=P^{-1}AP\) <small>→ <a href="#m-passage">M4</a> <a href="#m-chgt">M5</a></small></li>
+</ul>
+</li>
+<li><a href="#td3-ex6"><b>Exo 6</b> — Base de trigonalisation et puissances de \(A\)</a>
+<ul>
+<li><a href="#td3-ex6-q1">1)</a> base \((b_1,b_2,b_3)\) <small>→ <a href="#m-adaptee">M3</a></small></li>
+<li><a href="#td3-ex6-q2">2)</a> \(B^n\) puis \(A^n\) <small>→ <a href="#m-puiss">M7</a></small></li>
+</ul>
+</li>
+<li><a href="#td3-ex7"><b>Exo 7</b> — Base de \(\mathbb R_2[X]\), matrices de passage, coordonnées</a>
+<ul>
+<li><a href="#td3-ex7-q1">1)</a> \(\mathcal B\) est une base <small>→ <a href="#m-passage">M4</a></small></li>
+<li><a href="#td3-ex7-q2">2)</a> matrices de passage canonique ↔ \(\mathcal B\) <small>→ <a href="#m-passage">M4</a></small></li>
+<li><a href="#td3-ex7-q3">3)</a> coordonnées de \(X^2-X+2\) <small>→ <a href="#m-passage">M4</a></small></li>
+<li><a href="#td3-ex7-q4">4)</a> \(\varphi(P)=XP'\) dans \(\mathcal B\) <small>→ <a href="#m-mat">M1</a> <a href="#m-chgt">M5</a></small></li>
+</ul>
+</li>
+<li><a href="#td3-ex8"><b>Exo 8</b> — Endomorphisme nilpotent (\(f^2=0\))</a>
+<ul>
+<li><a href="#td3-ex8-q1">1)</a> \(A^2=0\) et \(\operatorname{Im}f\subset\ker f\) <small>→ <a href="#m-nilp">M9</a></small></li>
+<li><a href="#td3-ex8-q2">2)</a> rang, bases du noyau et de l'image <small>→ <a href="#m-matkerim">M2</a></small></li>
+<li><a href="#td3-ex8-q3">3)</a> semblable à la forme normale <small>→ <a href="#m-nilp">M9</a> <a href="#m-adaptee">M3</a></small></li>
+</ul>
+</li>
+<li><a href="#td3-ex9"><b>Exo 9</b> — Diagonalisation, \(A^n\) et suites récurrentes couplées</a>
+<ul>
+<li><a href="#td3-ex9-q1">1)</a> base et matrice dans cette base <small>→ <a href="#m-chgt">M5</a> <a href="#m-passage">M4</a></small></li>
+<li><a href="#td3-ex9-q2">2)</a> \(A^n\) <small>→ <a href="#m-puiss">M7</a></small></li>
+<li><a href="#td3-ex9-q3">3)</a> suites couplées <small>→ <a href="#m-suites">M10</a></small></li>
+</ul>
+</li>
+</ul></div></details>
+  </section>
+
+  <section class="memo-sheet" id="je-vois">
+    <div class="memo-head">🎯 « Je vois… donc j'utilise… » — repérer la méthode en 5 secondes</div>
+    <div class="memo-grid">
+<div class="memo-item method"><b>Classer / ranger des suites ou fonctions</b><a href="#m-compar">A1 — Classer / comparer (négligeabilité)</a></div>
+<div class="memo-item method"><b>« Équivalent simple de … »</b><a href="#m-equiv">A2 — Équivalent simple d'une suite / fonction</a></div>
+<div class="memo-item method"><b>Limite en forme indéterminée</b><a href="#m-limeq">A3 — Limite d'une forme indéterminée (équivalents ou DL)</a></div>
+<div class="memo-item method"><b>Puissance variable \(u^v\)</b><a href="#m-expln">A4 — Forme \(u^v\) (\(1^\infty\), \(0^0\), \(\infty^0\))</a></div>
+<div class="memo-item method"><b>« DL à l'ordre \(n\) en 0 »</b><a href="#m-dl">A5 — Faire un DL en 0 (somme, produit, composée, quotient)</a></div>
+<div class="memo-item method"><b>DL en un point \(a\ne0\)</b><a href="#m-dla">A6 — DL en un point \(a\neq0\)</a></div>
+<div class="memo-item method"><b>Tangente, position, prolongement</b><a href="#m-tang">A7 — Tangente, position et prolongement par continuité</a></div>
+<div class="memo-item method"><b>Asymptote en \(\infty\)</b><a href="#m-asy">A8 — Asymptote en \(\pm\infty\) et position</a></div>
+<div class="memo-item method"><b>Suite définie par \(\varphi(x_n)=n\)</b><a href="#m-impl">A9 — Suite définie implicitement (\(\varphi(x_n)=n\))</a></div>
+<div class="memo-item method"><b>Encadrement avec reste intégral</b><a href="#m-taylor">A10 — Encadrement par Taylor avec reste intégral</a></div>
+<div class="memo-item method"><b>« Montrer que \(F\) est un sev / donner Vect »</b><a href="#m-sev">L1 — Écrire un ensemble comme \(\operatorname{Vect}(\dots)\) (sev)</a></div>
+<div class="memo-item method"><b>Base ? coordonnées ?</b><a href="#m-base">L2 — Base de \(\mathbb R^n\) ? Coordonnées dans une base</a></div>
+<div class="memo-item method"><b>« Linéaire ? »</b><a href="#m-lin">L3 — Montrer qu'une application est (ou n'est pas) linéaire</a></div>
+<div class="memo-item method"><b>Noyau, image, inj./surj.</b><a href="#m-kerim">L4 — Noyau, image, théorème du rang, injective / surjective</a></div>
+<div class="memo-item method"><b>Antécédent d'un vecteur</b><a href="#m-antec">L6 — Antécédent d'un vecteur</a></div>
+<div class="memo-item method"><b>Supplémentaires</b><a href="#m-supp">L7 — Montrer que deux sev sont supplémentaires (\(F\oplus G=E\))</a></div>
+<div class="memo-item method"><b>Projection / symétrie</b><a href="#m-proj">L8 — Projection / symétrie sur \(F\) parallèlement à \(G\)</a></div>
+<div class="memo-item method"><b>Projecteur, \(\mathbb C\) en \(\mathbb R\)-ev</b><a href="#m-projecteur">L9 — Montrer qu'un endomorphisme est un projecteur, trouver Ker et Im</a></div>
+<div class="memo-item method"><b>Matrice de \(f\) dans des bases</b><a href="#m-mat">M1 — Matrice d'une application linéaire dans des bases données</a></div>
+<div class="memo-item method"><b>Base adaptée, matrice dedans</b><a href="#m-adaptee">M3 — Choisir une base adaptée et écrire la matrice dedans</a></div>
+<div class="memo-item method"><b>Passage, \(P^{-1}\), coordonnées</b><a href="#m-passage">M4 — Matrice de passage, inverse, coordonnées</a></div>
+<div class="memo-item method"><b>\(B=P^{-1}AP\)</b><a href="#m-chgt">M5 — Changement de base d'un endomorphisme : \(B=P^{-1}AP\)</a></div>
+<div class="memo-item method"><b>\(A^n\)</b><a href="#m-puiss">M7 — Puissances \(A^n\) (diagonalisable ou trigonalisable)</a></div>
+<div class="memo-item method"><b>Opérateur sur polynômes + ED</b><a href="#m-ed">M8 — Endomorphisme de \(\mathbb R_n[X]\) associé à une équation différentielle</a></div>
+<div class="memo-item method"><b>\(A^2=0\)</b><a href="#m-nilp">M9 — Endomorphisme nilpotent (\(f^2=0\)) et forme normale</a></div>
+<div class="memo-item method"><b>Suites couplées \(X_{n+1}=AX_n\)</b><a href="#m-suites">M10 — Suites récurrentes linéaires couplées</a></div>
+    </div>
+  </section>
+
+  <section id="boite">
+    <h2>🧰 Boîte à méthodes</h2>
+    <p class="lead">Chaque méthode est écrite une fois, avec ses étapes et son piège principal. Les exercices ci-dessous y renvoient.</p>
+<h3>📐 Analyse asymptotique (TD1)</h3>
+<div class="exo-card" id="m-compar"><div class="exo-head"><span>A1 — Classer / comparer (négligeabilité)</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Classer par ordre de négligeabilité », « montrer que \(u_n=o(v_n)\) ».</p>
+<ol>
+<li>Écrire chaque terme sous la forme \(n^\alpha(\ln n)^\beta a^n\) (en simplifiant les racines : \(\sqrt{ne^n}=\sqrt n\,e^{n/2}\)).</li>
+<li>Hiérarchie des croissances comparées : \((\ln n)^\beta\ll n^\alpha\ll a^n\ll n!\) (\(\alpha>0,\ a>1\)). À même famille, on compare les exposants.</li>
+<li>En cas de doute : quotient \(\dfrac{u}{v}\) et sa limite (\(\to0\Rightarrow u=o(v)\)).</li>
+<li>Écrire la chaîne finale du plus petit au plus grand avec \(\ll\).</li>
+</ol>
+<div class="warnbox"><span class="lab">Piège</span>Les suites qui tendent vers 0 (\(1/n^2\ll1/n\)) sont <b>plus petites</b> que la constante 1 ; \(e^{n/2}\) l'emporte toujours sur n'importe quel \(n^k\).</div><div class="note"><span class="lab">Où ça sert</span><a href="#td1-ex1">TD1 Ex1</a> · <a href="#td1-ex5">TD1 Ex5</a> · <a href="#td1-ex6">TD1 Ex6</a></div></div></div>
+<div class="exo-card" id="m-equiv"><div class="exo-head"><span>A2 — Équivalent simple d'une suite / fonction</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Déterminer un équivalent simple », ou comme outil pour une limite produit/quotient.</p>
+<ol>
+<li><b>Somme</b> : factoriser / garder le terme <b>dominant</b> (le plus gros pour \(n\to\infty\), le plus petit exposant en 0).</li>
+<li><b>Produit, quotient, puissance fixe</b> : on peut remplacer chaque facteur par son équivalent.</li>
+<li><b>Écrire sous la forme</b> \(\ln(1+u)\), \(e^u-1\), \(\sin u\), \(1-\cos u\), \((1+u)^\alpha-1\) avec \(u\to0\) puis : \(\ln(1+u)\sim u\), \(e^u-1\sim u\), \(\sin u\sim\tan u\sim u\), \(1-\cos u\sim\frac{u^2}2\), \((1+u)^\alpha-1\sim\alpha u\).</li>
+<li><b>Différence de racines</b> : multiplier par la quantité conjuguée.</li>
+<li><b>Somme \(\sum_{k\le n}\)</b> dont le dernier terme écrase les autres (\(\sum k!\sim n!\)).</li>
+</ol>
+<div class="warnbox"><span class="lab">Piège</span>On <b>n'additionne ni ne soustrait jamais</b> des équivalents, et on ne les compose pas dans \(\exp\) ou \(\ln\) (\(u_n\sim v_n\not\Rightarrow e^{u_n}\sim e^{v_n}\)). Pour passer au logarithme : \(\ln u_n-\ln v_n\to0\) via le rapport \(u_n/v_n\to1\).</div><div class="note"><span class="lab">Où ça sert</span><a href="#td1-ex2">TD1 Ex2</a> · <a href="#td1-ex3">TD1 Ex3</a> · <a href="#td1-ex4">TD1 Ex4</a> · <a href="#td1-ex6">TD1 Ex6</a> · <a href="#td1-ex10">TD1 Ex10</a> · <a href="#td1-ex15">TD1 Ex15</a></div></div></div>
+<div class="exo-card" id="m-limeq"><div class="exo-head"><span>A3 — Limite d'une forme indéterminée (équivalents ou DL)</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Calculer la limite de … » avec \(\frac00\), \(\infty-\infty\), \(0\times\infty\).</p>
+<ol>
+<li><b>Ramener en 0</b> : \(h=x-a\) (limite en \(a\)) ou \(u=1/x\) (limite en \(\infty\)).</li>
+<li>Si l'expression est un <b>produit/quotient pur</b> : équivalents usuels (méthode A2) suffisent.</li>
+<li>Si une <b>somme ou différence s'annule</b> au premier ordre : DL du numérateur et du dénominateur <b>jusqu'au premier terme non nul</b>.</li>
+<li><b>Choix de l'ordre</b> : si on divise par \(x^p\), il faut développer le numérateur à l'ordre \(p\) (au moins). On s'arrête dès qu'un terme non nul apparaît.</li>
+<li>Diviser les termes dominants → la limite (ou la divergence \(\sim x^{p-q}\)).</li>
+</ol>
+<div class="warnbox"><span class="lab">Piège</span>Si en développant à l'ordre 2 tout s'annule, on <b>augmente l'ordre</b> (ne jamais conclure « 0 »).</div><div class="note"><span class="lab">Où ça sert</span><a href="#td1-ex3">TD1 Ex3</a> · <a href="#td1-ex4">TD1 Ex4</a> · <a href="#td1-ex6">TD1 Ex6</a> · <a href="#td1-ex10">TD1 Ex10</a></div></div></div>
+<div class="exo-card" id="m-expln"><div class="exo-head"><span>A4 — Forme \(u^v\) (\(1^\infty\), \(0^0\), \(\infty^0\))</span></div><div class="exo-body">
+<p><b>Quand ?</b> Une expression de la forme \(u(x)^{v(x)}\) ou \(\big(1+\tfrac an\big)^n\).</p>
+<ol>
+<li>Réécrire \(u^v=\exp\big(v\ln u\big)\).</li>
+<li>Poser \(u=1+\varepsilon\) avec \(\varepsilon\to0\) et développer \(\ln(1+\varepsilon)=\varepsilon-\frac{\varepsilon^2}2+\dots\).</li>
+<li>Calculer la <b>limite de l'exposant</b> \(v\ln u\) (c'est lui qui contient l'indétermination) en le développant jusqu'au terme \(o(1)\).</li>
+<li>Conclure par continuité de \(\exp\) : \(u^v\to e^{L}\). Pour un DL de \(u^v\) : \(e\times e^{w}\) avec \(w\to0\).</li>
+</ol>
+<div class="warnbox"><span class="lab">Piège</span>On peut utiliser un équivalent dans <i>l'exposant</i> seulement quand ce qu'on cherche est <i>sa limite</i> (et non l'équivalent de l'exponentielle). Pour garder le terme suivant, rester en \(o(\cdot)\).</div><div class="note"><span class="lab">Où ça sert</span><a href="#td1-ex2">TD1 Ex2</a> · <a href="#td1-ex3">TD1 Ex3</a> · <a href="#td1-ex4">TD1 Ex4</a> · <a href="#td1-ex6">TD1 Ex6</a> · <a href="#td1-ex8">TD1 Ex8</a> · <a href="#td1-ex10">TD1 Ex10</a></div></div></div>
+<div class="exo-card" id="m-dl"><div class="exo-head"><span>A5 — Faire un DL en 0 (somme, produit, composée, quotient)</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Donner le DL à l'ordre \(n\) de \(f\) en 0 ».</p>
+<ol>
+<li><b>Table à connaître</b> : \(e^x=1+x+\frac{x^2}2+\frac{x^3}6\) · \(\sin x=x-\frac{x^3}6+\frac{x^5}{120}\) · \(\cos x=1-\frac{x^2}2+\frac{x^4}{24}-\frac{x^6}{720}\) · \(\ln(1+x)=x-\frac{x^2}2+\frac{x^3}3-\frac{x^4}4\) · \(\frac1{1+x}=1-x+x^2-x^3\) · \((1+x)^\alpha=1+\alpha x+\frac{\alpha(\alpha-1)}2x^2+\frac{\alpha(\alpha-1)(\alpha-2)}6x^3\) · \(\operatorname{sh}x=x+\frac{x^3}6+\frac{x^5}{120}\) · \(\operatorname{ch}x=1+\frac{x^2}2+\frac{x^4}{24}\) · \(\arctan x=x-\frac{x^3}3+\frac{x^5}5\) · \(\tan x=x+\frac{x^3}3+\frac{2x^5}{15}\).</li>
+<li><b>Somme</b> : on additionne terme à terme (même ordre).</li>
+<li><b>Produit</b> \(f\,g\) : DL de chaque facteur à l'ordre \(n-\)(valuation de l'autre), multiplication <b>degré par degré</b>, on tronque à \(n\).</li>
+<li><b>Composée</b> \(F(u(x))\) avec \(u\to0\) : DL de \(F\) en \(u\), remplacer \(u\) par son DL, calculer \(u^2,u^3,\dots\) jusqu'à ce que \(u^k=o(x^n)\) ; les termes de même degré se regroupent (certains s'annulent).</li>
+<li><b>Quotient</b> : écrire \(\frac1{v}=\frac1{1+w}=1-w+w^2-\dots\) avec \(w\to0\) (ou diviser par la puissance de \(x\) commune au préalable).</li>
+<li><b>Puissance variable</b> \(u^v=e^{v\ln u}\) (méthode A4).</li>
+<li><b>Fonction divisée par \(x^p\)</b> (\(\frac{\operatorname{sh}x-x}{x^3}\)) : développer le numérateur à l'ordre \(n+p\), puis diviser.</li>
+<li><b>Parité</b> : \(f\) paire ⇒ seulement des puissances paires ; impaire ⇒ impaires (vérification gratuite).</li>
+<li>Binôme généralisé pour \(\sqrt{\ }\), \(1/\sqrt{\ }\), \((1+x)^\alpha\).</li>
+</ol>
+<div class="warnbox"><span class="lab">Piège</span>Toujours écrire \(+o(x^n)\) ; dans un produit ne pas développer trop peu (on perd des termes) ni trop (travail inutile) ; \(\cos(x^2)=1-\frac{x^4}2+\dots\) (le \(x^2\) du cos devient \(x^4\)).</div><div class="note"><span class="lab">Où ça sert</span><a href="#td1-ex3">TD1 Ex3</a> · <a href="#td1-ex4">TD1 Ex4</a> · <a href="#td1-ex6">TD1 Ex6</a> · <a href="#td1-ex8">TD1 Ex8</a> · <a href="#td1-ex9">TD1 Ex9</a> · <a href="#td1-ex11">TD1 Ex11</a> · <a href="#td1-ex12">TD1 Ex12</a> · <a href="#td1-ex13">TD1 Ex13</a> · <a href="#td1-ex14">TD1 Ex14</a></div></div></div>
+<div class="exo-card" id="m-dla"><div class="exo-head"><span>A6 — DL en un point \(a\neq0\)</span></div><div class="exo-body">
+<p><b>Quand ?</b> « DL de \(f\) en \(a=\frac\pi4\), \(1\), \(2\), … ».</p>
+<ol>
+<li>Poser \(x=a+h\) avec \(h\to0\) et développer en \(h\).</li>
+<li>Angle remarquable : <b>formules d'addition</b> \(\sin(a+h)=\sin a\cos h+\cos a\sin h\), puis DL de \(\cos h,\sin h\).</li>
+<li>\(\frac1x\) en \(a\) : \(\frac1{a+h}=\frac1a\cdot\frac1{1+h/a}\) ; \(\ln x\) en \(a\) : \(\ln a+\ln(1+h/a)\).</li>
+<li>Fonction dont les dérivées sont simples (\(\arctan\)) : <b>Taylor-Young</b> \(f(a)+f'(a)h+\frac{f''(a)}2h^2+\dots\)</li>
+<li>Remplacer \(h\) par \(x-a\) à la fin.</li>
+</ol><div class="note"><span class="lab">Où ça sert</span><a href="#td1-ex9">TD1 Ex9</a> · <a href="#td1-ex12">TD1 Ex12</a> · <a href="#td1-ex13">TD1 Ex13</a></div></div></div>
+<div class="exo-card" id="m-tang"><div class="exo-head"><span>A7 — Tangente, position et prolongement par continuité</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Étudier \(f\) au voisinage de \(x_0\) : tangente, position de la courbe ».</p>
+<ol>
+<li>Si \(f\) n'est pas définie en \(x_0\) : mettre \(x\) en facteur, faire le DL, <b>prolonger</b> par continuité (\(f(x_0)=a_0\)).</li>
+<li>DL assez loin : \(f(x_0+h)=a_0+a_1h+a_kh^k+o(h^k)\) avec \(a_k\) le premier coefficient non nul après \(a_1\).</li>
+<li><b>Tangente</b> : \(y=a_0+a_1(x-x_0)\) (dérivable en \(x_0\) car DL à l'ordre \(\ge1\) ; \(f'(x_0)=a_1\)).</li>
+<li><b>Position</b> : signe de \(a_kh^k\). \(k\) pair : même côté des deux bords (\(a_k>0\) au-dessus, \(<0\) en dessous). \(k\) impair : la courbe <b>traverse</b> la tangente (point d'inflexion).</li>
+</ol>
+<div class="warnbox"><span class="lab">Piège</span>Si le coefficient en \(h^2\) est nul, il faut aller à l'ordre 3 (c'est justement le cas piégé).</div><div class="note"><span class="lab">Où ça sert</span><a href="#td1-ex11">TD1 Ex11</a> · <a href="#td1-ex12">TD1 Ex12</a> · <a href="#td1-ex13">TD1 Ex13</a></div></div></div>
+<div class="exo-card" id="m-asy"><div class="exo-head"><span>A8 — Asymptote en \(\pm\infty\) et position</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Montrer que la courbe admet une asymptote en \(+\infty\), étudier la position ».</p>
+<ol>
+<li>Poser \(u=\frac1x\to0^+\) ; <b>factoriser le terme dominant</b> (\(x\) ou \(x^2\)) pour faire apparaître \(1+\dots\)</li>
+<li>DL en \(u\) <b>assez loin</b> : après remultiplication par \(x=\frac1u\) (ou \(x^2\)) on doit atteindre le terme en \(u=\frac1x\).</li>
+<li>Obtenir \(f(x)=ax+b+\dfrac cx+o\big(\tfrac1x\big)\) ⇒ asymptote \(y=ax+b\).</li>
+<li>Position : <b>signe de \(c\)</b> (premier terme restant) : \(c>0\) au-dessus, \(c<0\) en dessous.</li>
+</ol><div class="note"><span class="lab">Où ça sert</span><a href="#td1-ex14">TD1 Ex14</a></div></div></div>
+<div class="exo-card" id="m-impl"><div class="exo-head"><span>A9 — Suite définie implicitement (\(\varphi(x_n)=n\))</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Soit \(x_n\) l'unique solution de … ; étudier \(x_n\) ».</p>
+<ol>
+<li><b>Bien définie</b> : \(\varphi\) continue et strictement monotone sur l'intervalle, limites aux bornes ⇒ bijection (TVI strict) ⇒ \(x_n=\varphi^{-1}(n)\).</li>
+<li><b>Monotonie</b> : \(\varphi(x_{n+1})=n+1>n=\varphi(x_n)\) et \(\varphi\) strictement croissante ⇒ \(x_{n+1}>x_n\).</li>
+<li><b>Limite</b> : suite croissante ; si elle était majorée par \(M\) on aurait \(n=\varphi(x_n)\le\varphi(M)\) pour tout \(n\) : absurde ⇒ \(x_n\to+\infty\).</li>
+<li><b>Équivalent</b> : isoler le terme dominant (\(e^{x_n}\sim n\)), montrer que le rapport \(\to1\), prendre le \(\ln\) du <b>rapport</b> ⇒ \(x_n=\ln n+o(1)\).</li>
+<li><b>Terme suivant (DA)</b> : réécrire l'équation en \(x_n=g(n,x_n)\) (ici \(x_n=\ln n+\ln(1-x_n/n)\)) et <b>réinjecter</b> l'équivalent connu dans le seul terme correctif.</li>
+</ol>
+<div class="warnbox"><span class="lab">Piège</span>« \(\ln(n-x_n)\sim\ln n\) donc \(x_n=\ln n\) » : un équivalent ne donne pas le terme suivant.</div><div class="note"><span class="lab">Où ça sert</span><a href="#td1-ex15">TD1 Ex15</a></div></div></div>
+<div class="exo-card" id="m-taylor"><div class="exo-head"><span>A10 — Encadrement par Taylor avec reste intégral</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Montrer que \(P(x)\le f(x)\le Q(x)\) pour \(x\ge0\) » en utilisant la formule de Taylor avec reste intégral.</p>
+<ol>
+<li>Écrire \(f(x)=\sum_{k\le p}\frac{f^{(k)}(0)}{k!}x^k+\displaystyle\int_0^x\frac{f^{(p+1)}(t)}{p!}(x-t)^p\,dt\) (calcul des dérivées successives).</li>
+<li>Pour \(t\in[0,x]\) : <b>encadrer</b> \(f^{(p+1)}(t)\) (c'est monotone, donc bornes aux extrémités \(t=0\) et \(t=x\)).</li>
+<li>Multiplier par \((x-t)^p\ge0\), <b>intégrer</b> (bornes dans le bon sens car \(x\ge0\)) : \(\int_0^x(x-t)^p\,dt=\frac{x^{p+1}}{p+1}\).</li>
+<li>Ajouter le polynôme de Taylor aux deux membres ⇒ \(P\) et \(Q\).</li>
+</ol><div class="note"><span class="lab">Où ça sert</span><a href="#td1-ex7">TD1 Ex7</a></div></div></div>
+<h3>🔀 Applications linéaires (TD2)</h3>
+<div class="exo-card" id="m-sev"><div class="exo-head"><span>L1 — Écrire un ensemble comme \(\operatorname{Vect}(\dots)\) (sev)</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Montrer que \(F\) est un sev et donner des générateurs ».</p>
+<ol>
+<li>Fixer une <b>base de l'espace ambiant</b> (\(1,X,X^2,\dots\) pour les polynômes) et écrire un élément général avec ses coordonnées.</li>
+<li>Traduire la condition (\(P(1)=0\), \(\int_0^1P=0\), …) en <b>équations linéaires sur les coordonnées</b>.</li>
+<li>Résoudre : exprimer certaines coordonnées en fonction des autres (paramètres libres).</li>
+<li><b>Factoriser par chaque paramètre</b> : on obtient les vecteurs générateurs ⇒ \(F=\operatorname{Vect}(\dots)\) ; le nombre de paramètres libres = \(\dim F\).</li>
+<li>Rappel : tout \(\operatorname{Vect}\) est un sev ; l'image d'une application linéaire aussi.</li>
+</ol>
+<div class="warnbox"><span class="lab">Piège</span>Pour \(P\in\mathbb R_n[X]\) : \(P'=0\Leftrightarrow P\) constant ; \(P''=0\Leftrightarrow\deg P\le1\). On vérifie toujours les générateurs dans la condition.</div><div class="note"><span class="lab">Où ça sert</span><a href="#td2-ex1">TD2 Ex1</a></div></div></div>
+<div class="exo-card" id="m-base"><div class="exo-head"><span>L2 — Base de \(\mathbb R^n\) ? Coordonnées dans une base</span></div><div class="exo-body">
+<p><b>Quand ?</b> « La famille \((v_1,v_2,v_3)\) est-elle une base ? Coordonnées de \(w\) ? »</p>
+<ol>
+<li><b>Autant de vecteurs que la dimension</b> : libre \(\Leftrightarrow\) génératrice \(\Leftrightarrow\) base \(\Leftrightarrow\det\ne0\). On calcule donc le déterminant (ou on échelonne).</li>
+<li><b>Coordonnées</b> de \(w\) : résoudre \(\alpha v_1+\beta v_2+\gamma v_3=w\) (système à 3 inconnues, résolu par combinaisons) — ou \(P^{-1}w\) si on a la matrice de passage.</li>
+<li>Pour plusieurs vecteurs cibles (\(e_1,e_2,e_3,w\)) : résoudre le système <b>une fois avec second membre général</b> \((x,y,z)\).</li>
+<li>Exemples demandés : <b>libre non génératrice</b> = moins de \(n\) vecteurs indépendants ; <b>génératrice non libre</b> = base + un vecteur de trop.</li>
+<li>Contrôle : la linéarité des coordonnées (coord\((w)\) = combinaison des coord\((e_i)\)).</li>
+</ol><div class="note"><span class="lab">Où ça sert</span><a href="#td2-ex2">TD2 Ex2</a></div></div></div>
+<div class="exo-card" id="m-lin"><div class="exo-head"><span>L3 — Montrer qu'une application est (ou n'est pas) linéaire</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Montrer que \(u\) est linéaire », « parmi ces applications, lesquelles sont linéaires ? »</p>
+<ol>
+<li><b>Linéaire</b> : soient \(x,y\) et \(\lambda,\mu\) quelconques ; calculer \(u(\lambda x+\mu y)\) et regrouper : \(=\lambda u(x)+\mu u(y)\). Raccourci : chaque composante est une combinaison linéaire des coordonnées (pas de constante, pas de produit, pas de carré, pas de valeur absolue).</li>
+<li><b>Opérations linéaires à connaître</b> : dérivation, évaluation \(P\mapsto P(a)\), intégrale, conjugaison (\(\mathbb R\)-linéaire), multiplication par un polynôme fixé, somme \(F\times G\to E\).</li>
+<li><b>Non linéaire</b> : donner <b>un contre-exemple chiffré</b> (\(u(2x)\ne2u(x)\), ou \(u(0)\ne0\)).</li>
+<li>Si l'espace de départ est un produit \(F\times G\) : opérations composante par composante.</li>
+</ol><div class="note"><span class="lab">Où ça sert</span><a href="#td2-ex3">TD2 Ex3</a> · <a href="#td2-ex4">TD2 Ex4</a> · <a href="#td2-ex9">TD2 Ex9</a> · <a href="#td2-ex10">TD2 Ex10</a></div></div></div>
+<div class="exo-card" id="m-kerim"><div class="exo-head"><span>L4 — Noyau, image, théorème du rang, injective / surjective</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Déterminer \(\ker u\), \(\operatorname{Im}u\), étudier injectivité / surjectivité / bijectivité ».</p>
+<ol>
+<li><b>Noyau</b> : résoudre \(u(x)=0\) (système) ; exprimer la solution avec ses paramètres libres ⇒ \(\ker u=\operatorname{Vect}(\dots)\).</li>
+<li><b>Image</b> : \(\operatorname{Im}u=\operatorname{Vect}\big(u(e_1),\dots,u(e_n)\big)\) ; on <b>retire les vecteurs redondants</b> (relation du type \(u(e_3)=2u(e_1)+3u(e_2)\)) pour avoir une base.</li>
+<li><b>Théorème du rang</b> : \(\dim E=\dim\ker u+\dim\operatorname{Im}u\). Dès qu'on a le noyau, on connaît la dimension de l'image <b>sans la calculer</b>.</li>
+<li><b>Injective</b> \(\Leftrightarrow\ker u=\{0\}\) ; <b>surjective</b> \(\Leftrightarrow\dim\operatorname{Im}u=\dim\) arrivée ; en <b>même dimension</b> les trois propriétés (inj., surj., bij.) sont équivalentes (donc \(\det\ne0\) suffit).</li>
+<li><b>Équation cartésienne</b> d'un plan \(\operatorname{Im}u\) : vecteur normal = produit vectoriel de deux générateurs, puis tester les générateurs.</li>
+<li>Noyau d'une application sur les polynômes : \(P\) avec racines imposées ⇒ divisible par \(\prod(X-r_i)\) ; degré borné ⇒ multiple d'un seul polynôme.</li>
+</ol><div class="note"><span class="lab">Où ça sert</span><a href="#td2-ex1">TD2 Ex1</a> · <a href="#td2-ex3">TD2 Ex3</a> · <a href="#td2-ex5">TD2 Ex5</a> · <a href="#td2-ex6">TD2 Ex6</a> · <a href="#td2-ex9">TD2 Ex9</a> · <a href="#td2-ex10">TD2 Ex10</a></div></div></div>
+<div class="exo-card" id="m-expl"><div class="exo-head"><span>L5 — Expression explicite d'une AL à partir des images de la base</span></div><div class="exo-body">
+<p><b>Quand ?</b> « \(u\) est l'endomorphisme tel que \(u(e_1)=\dots\) : exprimer \(u(x_1,x_2,x_3)\) ».</p>
+<ol>
+<li>Écrire \(x=x_1e_1+x_2e_2+x_3e_3\).</li>
+<li>Linéarité : \(u(x)=x_1u(e_1)+x_2u(e_2)+x_3u(e_3)\), puis regrouper par composante. (Les images sont les colonnes de la matrice.)</li>
+</ol><div class="note"><span class="lab">Où ça sert</span><a href="#td2-ex6">TD2 Ex6</a></div></div></div>
+<div class="exo-card" id="m-antec"><div class="exo-head"><span>L6 — Antécédent d'un vecteur</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Trouver (si possible) les antécédents de \(y\) par \(u\) ».</p>
+<ol>
+<li>Résoudre le système \(u(x)=y\) en gardant les inconnues.</li>
+<li><b>Système incompatible</b> (on tombe sur \(4=-1\)) ⇒ \(y\notin\operatorname{Im}u\) ⇒ <b>aucun antécédent</b>.</li>
+<li><b>Compatible</b> : un antécédent particulier ; l'ensemble des antécédents = particulier \(+\ker u\) (unique si \(\ker u=\{0\}\)).</li>
+<li>Recoupement : \(\det U=0\) annonce qu'il existe des vecteurs sans antécédent ; on peut tester \(y\) dans l'équation cartésienne de \(\operatorname{Im}u\).</li>
+</ol><div class="note"><span class="lab">Où ça sert</span><a href="#td2-ex6">TD2 Ex6</a></div></div></div>
+<div class="exo-card" id="m-supp"><div class="exo-head"><span>L7 — Montrer que deux sev sont supplémentaires (\(F\oplus G=E\))</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Montrer que \(F\) et \(G\) sont supplémentaires dans \(E\) ».</p>
+<ol>
+<li><b>Trouver une base de chaque sev</b> et leur dimension (sev défini par une équation dans \(\mathbb R^3\) = plan, dimension 2 ; \(\operatorname{Vect}(u)\) = droite).</li>
+<li><b>\(F\cap G=\{0\}\)</b> : prendre un élément général de l'un (paramètre \(\lambda\)), imposer qu'il vérifie l'équation de l'autre ⇒ \(\lambda=0\).</li>
+<li><b>Dimensions</b> : \(\dim F+\dim G=\dim E\), donc \(\dim(F+G)=\dim E\) et \(F+G=E\) (formule de Grassmann).</li>
+<li>Raccourci droite + plan : \(F=\operatorname{Vect}(u)\), \(G:\ \varphi=0\) sont supplémentaires \(\Leftrightarrow\varphi(u)\ne0\).</li>
+</ol><div class="note"><span class="lab">Où ça sert</span><a href="#td2-ex7">TD2 Ex7</a> · <a href="#td2-ex8">TD2 Ex8</a> · <a href="#td2-ex10">TD2 Ex10</a> · <a href="#td3-ex2">TD3 Ex2</a></div></div></div>
+<div class="exo-card" id="m-proj"><div class="exo-head"><span>L8 — Projection / symétrie sur \(F\) parallèlement à \(G\)</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Exprimer la projection \(p\) sur \(F\) parallèlement à \(G\) (et la symétrie \(s\)) ».</p>
+<ol>
+<li>Pour \(w=(x,y,z)\) : décomposition unique \(w=u+v\), \(u\in F\), \(v\in G\).</li>
+<li>Paramétrer un des deux (\(u=\lambda\cdot\text{dir}(F)\) <i>ou</i> \(v=\mu\cdot\text{dir}(G)\)) et écrire que l'<b>autre composante vérifie son équation</b> ⇒ une équation en \(\lambda\) (ou \(\mu\)).</li>
+<li>\(p(w)=u\). <b>Symétrie</b> par rapport à \(G\) parallèlement à \(F\) : \(s(w)=v-u=w-2p(w)\) (par rapport à \(F\) // \(G\) : \(s=2p-\mathrm{id}\)).</li>
+<li><b>Vérifications</b> : \(p\) = identité sur \(F\), nulle sur \(G\) ; \(s\) = identité sur l'espace « fixé », opposé sur l'autre.</li>
+</ol><div class="note"><span class="lab">Où ça sert</span><a href="#td2-ex7">TD2 Ex7</a> · <a href="#td2-ex8">TD2 Ex8</a></div></div></div>
+<div class="exo-card" id="m-projecteur"><div class="exo-head"><span>L9 — Montrer qu'un endomorphisme est un projecteur, trouver Ker et Im</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Montrer que \(\varphi\) est un projecteur », « déterminer Im, Ker ».</p>
+<ol>
+<li><b>Endomorphisme</b> : vérifier la linéarité (\(\varphi(\lambda z+\mu w)=\lambda\varphi(z)+\mu\varphi(w)\)), en dimension finie aussi que l'image reste dans l'espace.</li>
+<li><b>Projecteur</b> : calculer \(\varphi\circ\varphi\) et montrer \(\varphi\circ\varphi=\varphi\) (dans \(\mathbb C\) : calculer d'abord \(\overline{\varphi(z)}\)).</li>
+<li><b>Ker et Im</b> : écrire \(z=x+iy\) (ou les coordonnées) et obtenir \(\varphi(z)\) explicitement ; noyau = annulation, image = valeurs atteintes (ex. \(\frac{x+y}2(1+i)\)).</li>
+<li>Vérification : \(\dim\ker+\dim\operatorname{Im}=\dim E\) ; pour un projecteur, \(E=\ker\varphi\oplus\operatorname{Im}\varphi\) et \(\operatorname{Im}\varphi=\ker(\varphi-\mathrm{id})\).</li>
+</ol>
+<div class="warnbox"><span class="lab">Piège</span>\(\mathbb C\) vu comme \(\mathbb R\)-espace : les scalaires sont réels, la dimension est 2 (base \((1,i)\)), la conjugaison est \(\mathbb R\)-linéaire (mais pas \(\mathbb C\)-linéaire).</div><div class="note"><span class="lab">Où ça sert</span><a href="#td2-ex9">TD2 Ex9</a></div></div></div>
+<h3>🧮 Matrices et applications linéaires (TD3)</h3>
+<div class="exo-card" id="m-mat"><div class="exo-head"><span>M1 — Matrice d'une application linéaire dans des bases données</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Écrire la matrice de \(f\) dans la base canonique / dans \(\mathcal B\) ».</p>
+<ol>
+<li>Choisir les bases (départ \(\mathcal B\), arrivée \(\mathcal B'\)) ; taille = \(\dim\) arrivée \(\times\dim\) départ.</li>
+<li>Calculer l'image de <b>chaque vecteur de la base de départ</b> (polynômes : \(f(1),f(X),f(X^2)\) ; matrices : \(f(E_{11}),f(E_{12}),f(E_{21}),f(E_{22})\)).</li>
+<li>Écrire chaque image dans la base d'arrivée : <b>ses coordonnées forment une colonne</b>.</li>
+<li>Vérifier que l'image reste dans l'espace d'arrivée (ex. les termes en \(X^3\) s'annulent) et tester la matrice sur un vecteur.</li>
+</ol>
+<div class="warnbox"><span class="lab">Piège</span>Dans \(\mathcal M_2(\mathbb R)\) (dimension 4) la matrice de \(f\) est \(4\times4\) : ne pas la confondre avec les matrices \(A,B\) qui <i>définissent</i> \(f\). Convention : \(\operatorname{Mat}_{\mathcal B',\mathcal B}(f)\) = départ \(\mathcal B'\), arrivée \(\mathcal B\).</div><div class="note"><span class="lab">Où ça sert</span><a href="#td3-ex1">TD3 Ex1</a> · <a href="#td3-ex3">TD3 Ex3</a> · <a href="#td3-ex4">TD3 Ex4</a> · <a href="#td3-ex5">TD3 Ex5</a> · <a href="#td3-ex7">TD3 Ex7</a></div></div></div>
+<div class="exo-card" id="m-matkerim"><div class="exo-head"><span>M2 — Rang, noyau, image à partir de la matrice</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Donner une base de \(\ker f\) et de \(\operatorname{Im}f\) », « rang de \(f\) ».</p>
+<ol>
+<li><b>Noyau</b> : résoudre \(AX=0\) ; <b>image</b> = colonnes de \(A\) (retirer les colonnes combinaisons des autres, ex. \(c_3=c_1+c_2\)).</li>
+<li><b>Rang</b> = nombre de pivots (ou de colonnes indépendantes) ; théorème du rang : \(\operatorname{rg}f+\dim\ker f=\dim E\).</li>
+<li>Si les lignes sont proportionnelles (rang 1) : le noyau est le plan d'équation « une ligne \(=0\) ».</li>
+<li>Reconvertir les coordonnées en vecteurs de l'espace (polynômes…) si besoin.</li>
+</ol><div class="note"><span class="lab">Où ça sert</span><a href="#td3-ex2">TD3 Ex2</a> · <a href="#td3-ex5">TD3 Ex5</a> · <a href="#td3-ex8">TD3 Ex8</a></div></div></div>
+<div class="exo-card" id="m-adaptee"><div class="exo-head"><span>M3 — Choisir une base adaptée et écrire la matrice dedans</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Montrer que \((u,f(e_1),f(e_2))\) est une base et donner la matrice de \(f\) dedans », « trouver une base dans laquelle la matrice est … ».</p>
+<ol>
+<li><b>Lire la matrice cible colonne par colonne</b> : elle dicte l'action de \(f\) sur chaque vecteur (\(f(b_1)=0\), \(f(b_2)=-b_2\), \(f(b_3)=b_2-b_3\), …).</li>
+<li>En déduire la nature des vecteurs : \(b_1\in\ker f\) ; \(b_2\) propre ; \(b_3\) tel que \((f+\mathrm{id})b_3=b_2\) ; ou image/noyau (\(\mathbb R^3=\ker f\oplus\operatorname{Im}f\)).</li>
+<li>Trouver ces vecteurs en résolvant des systèmes (\(AX=0\), \((A+I)X=0\), \((A+I)X=b_2\)).</li>
+<li><b>Prouver que c'est une base</b> : \(\det P\ne0\) (colonnes = vecteurs), ou exprimer les \(e_i\) dans la nouvelle famille.</li>
+<li>Matrice : pour chaque \(b_j\), calculer \(f(b_j)\) et l'écrire dans la base \((b)\) → colonne \(j\). Résultat par blocs si \(E=\ker\oplus\operatorname{Im}\).</li>
+<li>Vérifier \(A\,b_j\) pour chaque \(j\).</li>
+</ol><div class="note"><span class="lab">Où ça sert</span><a href="#td3-ex2">TD3 Ex2</a> · <a href="#td3-ex5">TD3 Ex5</a> · <a href="#td3-ex6">TD3 Ex6</a> · <a href="#td3-ex8">TD3 Ex8</a></div></div></div>
+<div class="exo-card" id="m-passage"><div class="exo-head"><span>M4 — Matrice de passage, inverse, coordonnées</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Matrice de passage de la base canonique à \(\mathcal B\) », « coordonnées de \(P\) dans \(\mathcal B\) ».</p>
+<ol>
+<li><b>Matrice de passage</b> \(P\) (ancienne \(\to\) nouvelle) : <b>colonnes = coordonnées des nouveaux vecteurs dans l'ancienne base</b>. \(\det P\ne0\) ⇔ c'est une base.</li>
+<li><b>Inverse</b> \(P^{-1}\) : 2×2 par \(\frac1{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}\) ; 3×3 par comatrice, Gauss, ou en <b>exprimant chaque \(e_i\) dans la nouvelle base</b> (les colonnes de \(P^{-1}\)).</li>
+<li><b>Coordonnées</b> : \(X_{\text{ancienne}}=P\,X_{\text{nouvelle}}\) donc \(X_{\text{nouvelle}}=P^{-1}X_{\text{ancienne}}\).</li>
+<li>Vérifier \(PP^{-1}=I\) ligne par colonne, et la décomposition obtenue (ex. \(5(X^2+1)-3(X+1)-2(2X^2-X)=X^2-X+2\)).</li>
+</ol><div class="note"><span class="lab">Où ça sert</span><a href="#td3-ex2">TD3 Ex2</a> · <a href="#td3-ex3">TD3 Ex3</a> · <a href="#td3-ex5">TD3 Ex5</a> · <a href="#td3-ex7">TD3 Ex7</a> · <a href="#td3-ex9">TD3 Ex9</a></div></div></div>
+<div class="exo-card" id="m-chgt"><div class="exo-head"><span>M5 — Changement de base d'un endomorphisme : \(B=P^{-1}AP\)</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Matrice de \(f\) dans une autre base » ; « \(A\) et \(B\) sont semblables ».</p>
+<ol>
+<li>\(A=\operatorname{Mat}_{\text{can}}(f)\), \(P\) = passage canonique \(\to\) nouvelle base. Alors \(\boxed{B=\operatorname{Mat}_{\text{nouv}}(f)=P^{-1}AP}\) (et \(A=PBP^{-1}\)).</li>
+<li>Variante : calculer \(f(b_j')\) puis exprimer le résultat dans la base \(\mathcal B'\) (système, ou \(P^{-1}\)).</li>
+<li>Convention <b>départ \(\mathcal B'\) / arrivée canonique</b> : \(\operatorname{Mat}_{\mathcal B',\mathcal B}(f)=AP\) (une seule multiplication).</li>
+<li><b>Contrôles</b> : la trace, le déterminant et le rang ne changent pas.</li>
+</ol>
+<div class="warnbox"><span class="lab">Piège</span>Un endomorphisme simple (diagonal en base canonique) devient plein dans une base « moins naturelle » : on choisit toujours la base adaptée pour simplifier.</div><div class="note"><span class="lab">Où ça sert</span><a href="#td3-ex3">TD3 Ex3</a> · <a href="#td3-ex5">TD3 Ex5</a> · <a href="#td3-ex7">TD3 Ex7</a> · <a href="#td3-ex9">TD3 Ex9</a></div></div></div>
+<div class="exo-card" id="m-imagew"><div class="exo-head"><span>M6 — Image d'un vecteur : plusieurs voies et conversion de base</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Calculer \(f(\vec w)\) pour \(\vec w=2\vec u-\vec v\) ».</p>
+<ol>
+<li>Voie 1 : coordonnées canoniques de \(\vec w\) puis \(A\,X\).</li>
+<li>Voie 2 : coordonnées de \(\vec w\) dans \(\mathcal B'\) avec \(\operatorname{Mat}_{\mathcal B',\mathcal B}(f)\) (arrivée canonique, aucune reconversion).</li>
+<li>Voie 3 : avec \(\operatorname{Mat}_{\mathcal B'}(f)\) le résultat est <b>dans \(\mathcal B'\)</b> : le <b>reconvertir</b> avant de conclure.</li>
+<li>Voie 4 (contrôle) : linéarité \(f(2u-v)=2f(u)-f(v)\).</li>
+</ol><div class="note"><span class="lab">Où ça sert</span><a href="#td3-ex3">TD3 Ex3</a></div></div></div>
+<div class="exo-card" id="m-puiss"><div class="exo-head"><span>M7 — Puissances \(A^n\) (diagonalisable ou trigonalisable)</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Calculer \(A^n\) pour tout \(n\) ».</p>
+<ol>
+<li>Trouver une base où la matrice \(B\) est simple (méthode M3) : \(A=PBP^{-1}\) ⇒ \(\boxed{A^n=PB^nP^{-1}}\).</li>
+<li><b>\(B\) diagonale</b> : \(B^n=\operatorname{diag}(\lambda_i^n)\).</li>
+<li><b>\(B\) non diagonale</b> : écrire par blocs ; un bloc \(\lambda I+N\) avec \(N^2=0\) (\(N\) nilpotente, commute avec \(\lambda I\)) → <b>binôme</b> : \((\lambda I+N)^n=\lambda^nI+n\lambda^{n-1}N\).</li>
+<li>Calculer \(PB^n\) puis \(PB^nP^{-1}\) (poser \(s=(-1)^n\), \(r=3^{-n}\) pour alléger).</li>
+<li><b>Contrôles</b> : \(n=0\) (doit donner \(I\)), \(n=1\) (doit redonner \(A\)), éventuellement \(n=2\).</li>
+</ol>
+<div class="warnbox"><span class="lab">Piège</span>La formule peut n'être valable que pour \(n\ge1\) (un bloc nul vaut \(0^n=0\) mais \(0^0=1\)).</div><div class="note"><span class="lab">Où ça sert</span><a href="#td3-ex6">TD3 Ex6</a> · <a href="#td3-ex9">TD3 Ex9</a></div></div></div>
+<div class="exo-card" id="m-ed"><div class="exo-head"><span>M8 — Endomorphisme de \(\mathbb R_n[X]\) associé à une équation différentielle</span></div><div class="exo-body">
+<p><b>Quand ?</b> « \(\varphi(P)=(x^2+x+1)P'-(2x-1)P\) : matrice, bijectivité, puis résoudre l'équation différentielle ».</p>
+<ol>
+<li><b>Endomorphisme</b> : linéarité (dérivation) + degré de l'image \(\le n\) (le terme de plus haut degré s'annule).</li>
+<li><b>Matrice</b> dans \((1,X,X^2)\) : images de \(1,X,X^2\), coordonnées en colonnes (méthode M1).</li>
+<li><b>Bijectivité</b> : \(\det M\ne0\) ⇒ bijective ⇒ pour tout second membre polynomial de degré \(\le n\), <b>un seul</b> antécédent polynomial (résoudre \(MX=\) coordonnées).</li>
+<li><b>Équation différentielle</b> \(a(x)y'+b(x)y=g(x)\) : solution générale = solution particulière (le polynôme de la question précédente !) + solution de l'équation homogène.</li>
+<li><b>Homogène</b> : \(\frac{y'}y=\frac{2x-1}{x^2+x+1}\) ; décomposer \(2x-1=(2x+1)-2\) pour reconnaître \(\ln(x^2+x+1)\) + un \(\arctan\) (forme canonique \((x+\frac12)^2+\frac34\)).</li>
+<li>Vérifier en réinjectant le polynôme trouvé.</li>
+</ol><div class="note"><span class="lab">Où ça sert</span><a href="#td3-ex4">TD3 Ex4</a></div></div></div>
+<div class="exo-card" id="m-nilp"><div class="exo-head"><span>M9 — Endomorphisme nilpotent (\(f^2=0\)) et forme normale</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Calculer \(A^2\), montrer \(\operatorname{Im}f\subset\ker f\), \(A\) semblable à … ».</p>
+<ol>
+<li>Calculer \(A^2\) (ligne \(\times\) colonne) : \(=0\) ⇒ <b>\(\operatorname{Im}f\subset\ker f\)</b> (si \(y=f(x)\), \(f(y)=f^2(x)=0\)).</li>
+<li>Rang : colonnes proportionnelles ⇒ \(\operatorname{rg}=1\) ; théorème du rang ⇒ \(\dim\ker=2\) (plan d'équation « une ligne = 0 »).</li>
+<li><b>Forme normale</b> : chaîne \(b_1\mapsto b_2\mapsto0\) plus \(b_3\in\ker f\) : \(b_1\notin\ker f\) (par ex. \(e_1\)), \(b_2=f(b_1)\), \(b_3\in\ker f\) non colinéaire à \(b_2\). Dans \((b_1,b_2,b_3)\), la matrice est \(\begin{pmatrix}0&0&0\\1&0&0\\0&0&0\end{pmatrix}\).</li>
+<li>Base : \(\det(b_1\ b_2\ b_3)\ne0\) ; alors \(Q^{-1}AQ=\) forme normale.</li>
+</ol><div class="note"><span class="lab">Où ça sert</span><a href="#td3-ex8">TD3 Ex8</a></div></div></div>
+<div class="exo-card" id="m-suites"><div class="exo-head"><span>M10 — Suites récurrentes linéaires couplées</span></div><div class="exo-body">
+<p><b>Quand ?</b> « Déterminer les suites \((x_n),(y_n)\) telles que \(x_{n+1}=\dots,\ y_{n+1}=\dots\) ».</p>
+<ol>
+<li>Poser \(X_n=\binom{x_n}{y_n}\) : \(X_{n+1}=AX_n\) ⇒ \(X_n=A^nX_0\).</li>
+<li>Décomposer \(X_0=a\,e_1+b\,e_2\) <b>dans la base propre</b> : alors \(X_n=a\lambda_1^ne_1+b\lambda_2^ne_2\) → lecture directe de \(x_n,y_n\).</li>
+<li>Ensemble des solutions = plan vectoriel (\(\dim2\)) engendré par une suite constante et une suite géométrique ; limite si \(|\lambda_2|<1\).</li>
+<li>Vérification : \(AX_n=X_{n+1}\).</li>
+</ol><div class="note"><span class="lab">Où ça sert</span><a href="#td3-ex9">TD3 Ex9</a></div></div></div>
+  </section>
+
+  <section id="td1">
+    <h2>📐 TD1 — Analyse asymptotique : fiche de chaque exercice</h2>
+<div class="exo-card" id="td1-ex1"><div class="exo-head"><span>TD1 · Exercice 1 — Classer des suites par négligeabilité</span></div><div class="exo-body"><p class="enonce">Classer \(\frac1n,\frac1{n^2},\frac{\ln n}n,\frac{e^n}{n^3},n,1,\sqrt{ne^n}\) par ordre de négligeabilité.</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Il s'agit de ranger des suites de natures différentes (puissances, logarithmes, exponentielles) : on cherche la <b>hiérarchie des croissances</b>, pas de calcul de limite précis.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-compar"><b>A1</b></a> : écrire chaque suite sous forme \(n^\alpha(\ln n)^\beta e^{cn}\), appliquer la hiérarchie \(\ln\ll n^\alpha\ll e^{cn}\), vérifier les cas voisins par le quotient.</div><p id="td1-ex1-q1"><b>Idée clé :</b> réécrire \(\sqrt{ne^n}=\sqrt n\,e^{n/2}\) ; \(\dfrac{e^n}{n^3}\) l'emporte sur \(\sqrt{ne^n}\) car \(e^n\gg e^{n/2}\) <small>→ <a href="#m-compar">A1</a></small></p><div class="warnbox"><span class="lab">Piège</span>Les suites qui tendent vers 0 sont <i>plus petites</i> que 1 : \(\frac1{n^2}\ll\frac1n\ll\frac{\ln n}n\ll1\).</div><p><small><a href="ch1-analyse-asymptotique.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td1-ex2"><div class="exo-head"><span>TD1 · Exercice 2 — Équivalents simples de suites</span></div><div class="exo-body"><p class="enonce">Six suites dont on veut un équivalent simple (quotient de polynômes, \(\ln\), différence de racines, \(\sum k!\), puissance variable).</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Un équivalent simple = un monôme (\(c\,n^\alpha(\ln n)^\beta\)) qui a le même comportement. Tout dépend de la <b>forme</b> : somme, quotient, racine, log…</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-equiv"><b>A2</b></a> : somme → terme dominant ; quotient → équivalents ; racines → conjugué ; \(\ln(1+\varepsilon)\sim\varepsilon\) ; sinon passer par \(\ln\) puis revenir.</div><ul><li id="td1-ex2-q1"><b>1)</b> \(\dfrac{n^2+e^{-2n}+\sqrt{n^5}}{\ln(2n)+2n-5}\) <small>→ <a href="#m-equiv">A2</a></small><br>⚡ terme dominant en haut (\(n^{5/2}\)) et en bas (\(2n\)) : \(\sim\frac12n^{3/2}\)</li><li id="td1-ex2-q2"><b>2)</b> \(\ln\dfrac{n^2+1}{n^2+2}\) <small>→ <a href="#m-equiv">A2</a></small><br>⚡ mettre sous la forme \(\ln(1+\varepsilon)\) avec \(\varepsilon=-\frac1{n^2+2}\) puis \(\ln(1+\varepsilon)\sim\varepsilon\)</li><li id="td1-ex2-q3"><b>3)</b> \(\dfrac{\ln(n^2+1)}{n^2+2}\) <small>→ <a href="#m-equiv">A2</a></small><br>⚡ \(\ln(n^2+1)\sim\ln n^2=2\ln n\) (le \(+1\) est négligeable devant \(n^2\)), \(n^2+2\sim n^2\)</li><li id="td1-ex2-q4"><b>4)</b> \(\sqrt{n^2+n+1}-\sqrt{n^2-n+1}\) <small>→ <a href="#m-equiv">A2</a></small><br>⚡ quantité conjuguée : numérateur \(2n\), dénominateur \(\sim2n\)</li><li id="td1-ex2-q5"><b>5)</b> \(\sum_{k=0}^nk!\) <small>→ <a href="#m-equiv">A2</a></small><br>⚡ le dernier terme écrase les autres : \(\frac{(n-1)!}{n!}=\frac1n\to0\)</li><li id="td1-ex2-q6"><b>6)</b> \(\dfrac{n^{\sqrt{n+1}}}{(n+1)^{\sqrt n}}\) <small>→ <a href="#m-equiv">A2</a> <a href="#m-expln">A4</a></small><br>⚡ passer au log : \(\ln u_n=\sqrt{n+1}\ln n-\sqrt n\ln(n+1)\), DL à l'ordre \(\frac1n\) → \(\ln u_n\to0\), donc \(u_n\sim1\)</li></ul><div class="warnbox"><span class="lab">Piège</span>Jamais d'équivalent « \(\sim0\) » ; on ne soustrait pas deux équivalents (4) → conjugué obligatoire.</div><p><small><a href="ch1-analyse-asymptotique.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td1-ex3"><div class="exo-head"><span>TD1 · Exercice 3 — Limites de suites</span></div><div class="exo-body"><p class="enonce">Quatre limites : \(\sqrt{n^2-1}-n\), \(\frac{(n+2)!}{(n^2+1)n!}\), \(n(\sqrt[n]3-\sqrt[n]5)\), \(\frac{\cos(1/n)-1}{(e^{1/n}-1)\sin(1/n)}\).</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Quatre indéterminations de natures différentes : différence qui s'annule, factorielles, racine \(n\)-ième, quotient d'équivalents usuels.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-limeq"><b>A3</b></a> : poser \(h=1/n\to0\) ; différence qui s'annule → DL ; quotient pur → équivalents usuels ; factorielle → simplifier \((n+2)!=(n+1)(n+2)n!\).</div><ul><li id="td1-ex3-q1"><b>1)</b> \(\sqrt{n^2-1}-n\) <small>→ <a href="#m-limeq">A3</a> <a href="#m-dl">A5</a></small><br>⚡ factoriser \(n\sqrt{1-1/n^2}\), DL de la racine : \(-\frac1{2n}\to0\)</li><li id="td1-ex3-q2"><b>2)</b> \(\dfrac{(n+2)!}{(n^2+1)n!}\) <small>→ <a href="#m-limeq">A3</a></small><br>⚡ \((n+2)!=(n+1)(n+2)\,n!\) → quotient de polynômes de même degré</li><li id="td1-ex3-q3"><b>3)</b> \(n(\sqrt[n]3-\sqrt[n]5)\) <small>→ <a href="#m-expln">A4</a> <a href="#m-dl">A5</a></small><br>⚡ \(\sqrt[n]a=e^{\ln a/n}=1+\frac{\ln a}n+o(\frac1n)\), la différence vaut \(\frac{\ln3-\ln5}n\)</li><li id="td1-ex3-q4"><b>4)</b> \(\dfrac{\cos(1/n)-1}{(e^{1/n}-1)\sin(1/n)}\) <small>→ <a href="#m-equiv">A2</a></small><br>⚡ \(h=\frac1n\) : \(\cos h-1\sim-\frac{h^2}2\), \(e^h-1\sim h\), \(\sin h\sim h\)</li></ul><p><small><a href="ch1-analyse-asymptotique.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td1-ex4"><div class="exo-head"><span>TD1 · Exercice 4 — Convergence de suites (équivalents, DL, croissances comparées)</span></div><div class="exo-body"><p class="enonce">Huit suites dont on étudie la convergence (racines, \(1^\infty\), \(\ln\sqrt{\ }\), \(\big(\frac{n}{n-x}\big)^n\)).</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Pour chaque suite, <b>identifier la forme indéterminée</b>, choisir entre équivalent (produit/quotient pur) et DL (différence qui s'annule) ou exp-ln (puissance variable).</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-limeq"><b>A3</b></a> et <a href="#m-expln"><b>A4</b></a> ; tout poser avec \(h=1/n\). Règle : 1ᵉʳ terme non nul de la différence ⇒ DL ; \((1+\varepsilon)^n\) ⇒ \(\exp(n\ln(1+\varepsilon))\).</div><ul><li id="td1-ex4-q1"><b>1)</b> \(n\big(\sqrt{1+\sin\frac1n}-\cos\frac1n\big)\) <small>→ <a href="#m-limeq">A3</a> <a href="#m-dl">A5</a></small><br>⚡ DL à l'ordre 2 en \(h\) (car on divise par \(h\)) ; les termes constants se simplifient</li><li id="td1-ex4-q2"><b>2)</b> \(\big(e^{1/n}\big)^{n\ln\cos(1/n)}\) <small>→ <a href="#m-expln">A4</a></small><br>⚡ simplification algébrique : \(e^{\ln\cos(1/n)}=\cos\frac1n\to1\)</li><li id="td1-ex4-q3"><b>3)</b> \(\big(1+\sin\frac1n\big)^n\) <small>→ <a href="#m-expln">A4</a> <a href="#m-dl">A5</a></small><br>⚡ \(\ln u_n=n\ln(1+\sin h)\) : DL à l'ordre 2 → \(1-\frac h2\to1\)</li><li id="td1-ex4-q4"><b>4)</b> \((5n+1)^2\ln\big(1+\frac1{3n^2}\big)\) <small>→ <a href="#m-equiv">A2</a></small><br>⚡ produit d'équivalents : \(25n^2\times\frac1{3n^2}\)</li><li id="td1-ex4-q5"><b>5)</b> \(n\ln\sqrt{\frac{n+1}{n-1}}\) <small>→ <a href="#m-equiv">A2</a></small><br>⚡ \(\frac12\ln\big(1+\frac2{n-1}\big)\sim\frac1{n}\)</li><li id="td1-ex4-q6"><b>6)</b> \(n^2\big(\sqrt{1-\frac1{n^2}}-1\big)\) <small>→ <a href="#m-dl">A5</a></small><br>⚡ DL de la racine : \(-\frac1{2n^2}\) ⇒ limite \(-\frac12\)</li><li id="td1-ex4-q7"><b>7)</b> \(\big(\frac{2n-1}{2n+1}\big)^n\) <small>→ <a href="#m-expln">A4</a> <a href="#m-equiv">A2</a></small><br>⚡ exposant : \(n\ln\big(1-\frac2{2n+1}\big)\to-1\)</li><li id="td1-ex4-q8"><b>8)</b> \(\big(\frac{n}{n-x}\big)^n\) <small>→ <a href="#m-expln">A4</a> <a href="#m-dl">A5</a></small><br>⚡ \(-n\ln(1-\frac xn)\to x\) : limite \(e^x\)</li></ul><div class="warnbox"><span class="lab">Piège</span>Ne jamais mettre un équivalent dans une exponentielle : on calcule la <i>limite de l'exposant</i>.</div><p><small><a href="ch1-analyse-asymptotique.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td1-ex5"><div class="exo-head"><span>TD1 · Exercice 5 — Classer des fonctions en \(+\infty\)</span></div><div class="exo-body"><p class="enonce">Ordonner \(x,e^x,\frac1x,2,\ln x,\sqrt x\ln x,\frac{e^x}{\sqrt x}\) au voisinage de \(+\infty\).</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Même idée que l'exercice 1 mais avec des fonctions : on cherche la hiérarchie des croissances en \(+\infty\).</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-compar"><b>A1</b></a> : \(\frac1x\ll1\ll\ln x\ll x^\alpha\ll e^x\) ; comparer les quotients de voisins (\(k/j=\sqrt x\), \(l/f=e^x/x^{3/2}\)…).</div><p id="td1-ex5-q1"><b>Idée clé :</b> \(\sqrt x\ln x\ll x\) (car \(\frac{\sqrt x}{\ln x}\to\infty\)) ; \(\frac{e^x}{\sqrt x}\ll e^x\) <small>→ <a href="#m-compar">A1</a></small></p><p><small><a href="ch1-analyse-asymptotique.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td1-ex6"><div class="exo-head"><span>TD1 · Exercice 6 — Équivalents et limites de fonctions en un point</span></div><div class="exo-body"><p class="enonce">Onze fonctions : équivalent et limite en \(a\) (\(0\), \(1\), \(\pi/2\), \(+\infty\)).</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Pour chaque fonction : <b>où</b> (en \(a\) fini ou en \(\infty\)), <b>quelle forme</b> (produit/quotient, somme qui s'annule, puissance variable). Réponse attendue : un équivalent et la limite.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-equiv"><b>A2</b></a> et <a href="#m-limeq"><b>A3</b></a> : ramener en 0 (\(h=x-a\), \(u=1/x\)), utiliser les équivalents usuels pour les produits/quotients, DL si le numérateur est une différence (3, 2), exp-ln pour les puissances (10, 11).</div><ul><li id="td1-ex6-q1"><b>1)</b> \(\sqrt{1-x^2}\) en 1 <small>→ <a href="#m-equiv">A2</a></small><br>⚡ factoriser \((1-x)(1+x)\), \(1+x\to2\)</li><li id="td1-ex6-q2"><b>2)</b> \(\frac{\ln(1+x)+x^2}{x^2+x^3}\) en 0 <small>→ <a href="#m-equiv">A2</a> <a href="#m-dl">A5</a></small><br>⚡ numérateur \(\sim x\) (le terme \(x^2\) est négligeable), dénominateur \(\sim x^2\)</li><li id="td1-ex6-q3"><b>3)</b> \(\frac{\tan x-\sin3x}{\ln(1+x)}\) en 0 <small>→ <a href="#m-limeq">A3</a></small><br>⚡ DL d'ordre 1 du numérateur : \(x-3x=-2x\)</li><li id="td1-ex6-q4"><b>4)</b> \(\frac{\operatorname{ch}x-1}{\arcsin^2x}\) en 0 <small>→ <a href="#m-equiv">A2</a></small><br>⚡ \(\operatorname{ch}x-1\sim\frac{x^2}2\), \(\arcsin x\sim x\)</li><li id="td1-ex6-q5"><b>5)</b> \(\frac{\ln x}{\sqrt x-1}\) en 1 <small>→ <a href="#m-limeq">A3</a></small><br>⚡ \(x=1+h\) : \(\ln(1+h)\sim h\), \(\sqrt{1+h}-1\sim\frac h2\)</li><li id="td1-ex6-q6"><b>6)</b> \(x^3\arctan(e^{-x})\) en \(+\infty\) <small>→ <a href="#m-equiv">A2</a> <a href="#m-compar">A1</a></small><br>⚡ \(\arctan(e^{-x})\sim e^{-x}\), puis \(x^3e^{-x}\to0\)</li><li id="td1-ex6-q7"><b>7)</b> \(\frac{\sqrt{x+1}-\sqrt x}{\ln\frac{e^x-1}{e^x+1}}\) en \(+\infty\) <small>→ <a href="#m-equiv">A2</a></small><br>⚡ conjugué en haut, \(\ln(1-2e^{-x})\sim-2e^{-x}\) en bas</li><li id="td1-ex6-q8"><b>8)</b> \(\frac{\sqrt{x^3-1}}{\sqrt[3]{x^2+2}}\) en \(+\infty\) <small>→ <a href="#m-equiv">A2</a></small><br>⚡ terme dominant : \(x^{3/2-2/3}=x^{5/6}\)</li><li id="td1-ex6-q9"><b>9)</b> \(\frac1{\cos x}-\tan x\) en \(\frac\pi2\) <small>→ <a href="#m-limeq">A3</a></small><br>⚡ réduire au même dénominateur, \(x=\frac\pi2-h\) : \(\frac{1-\cos h}{\sin h}\sim\frac h2\)</li><li id="td1-ex6-q10"><b>10)</b> \(\big(1+\frac\lambda x\big)^x\) en \(+\infty\) <small>→ <a href="#m-expln">A4</a></small><br>⚡ exposant \(x\ln(1+\lambda/x)\to\lambda\)</li><li id="td1-ex6-q11"><b>11)</b> \(\big(1+\sin\frac{\ln x}x\big)^{x/\ln x}\) <small>→ <a href="#m-expln">A4</a></small><br>⚡ poser \(t=\frac{\ln x}x\to0\) : exposant \(=\frac{\sin t-t^2/2}{t}\to1\)</li></ul><div class="warnbox"><span class="lab">Piège</span>Dès que le numérateur est une <b>différence</b> de deux termes équivalents (3, 5), les équivalents seuls ne suffisent pas.</div><p><small><a href="ch1-analyse-asymptotique.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td1-ex7"><div class="exo-head"><span>TD1 · Exercice 7 — Taylor avec reste intégral : encadrements</span></div><div class="exo-body"><p class="enonce">Encadrer \(\ln(1+x)\) et \(\sqrt[3]{1+x}\) pour \(x\ge0\) par des polynômes.</p><div class="note"><span class="lab">🔎 Analyse de la question</span>L'énoncé impose <b>Taylor avec reste intégral</b> : on ne cherche pas un DL mais une <b>inégalité valable pour tout \(x\ge0\)</b>.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-taylor"><b>A10</b></a> : dérivées successives, reste intégral à l'ordre 2, encadrer la dérivée troisième sur \([0,x]\), intégrer.</div><ul><li id="td1-ex7-q1"><b>1)</b> \(\ln(1+x)\) <small>→ <a href="#m-taylor">A10</a></small><br>⚡ \(f'''(t)=\frac2{(1+t)^3}\in\big[\frac2{(1+x)^3},2\big]\) ; \(\int_0^x(x-t)^2dt=\frac{x^3}3\)</li><li id="td1-ex7-q2"><b>2)</b> \(\sqrt[3]{1+x}\) <small>→ <a href="#m-taylor">A10</a></small><br>⚡ \(g'''(t)=\frac{10}{27}(1+t)^{-8/3}\le\frac{10}{27}\) ; majoration du reste par \(\frac{5x^3}{81}\)</li></ul><div class="warnbox"><span class="lab">Piège</span>Les bornes de l'intégrale vont dans le bon sens parce que \(x\ge0\) : le dire.</div><p><small><a href="ch1-analyse-asymptotique.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td1-ex8"><div class="exo-head"><span>TD1 · Exercice 8 — Seize développements limités en 0</span></div><div class="exo-body"><p class="enonce">Seize DL à des ordres imposés (produits, composées, quotients, puissances, parité).</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Pas de nouvelle idée : une <b>seule technique</b> (méthode A5) à appliquer 16 fois. Pour chaque DL on identifie d'abord la <i>structure</i> (somme, produit, composée, quotient, puissance) puis on suit la recette correspondante.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-dl"><b>A5</b></a> — recette unique : table des DL usuels + (produit : tronquer degré par degré) / (composée : substituer \(u\to0\)) / (quotient : \(1/(1+w)\)) / (puissance : \(\exp(v\ln u)\)). La parité sert de contrôle.</div><ul><li id="td1-ex8-q1"><b>1)</b> \(\cos x\,e^x\) (ordre 3) <small>→ <a href="#m-dl">A5</a></small><br>⚡ produit</li><li id="td1-ex8-q2"><b>2)</b> \(\ln(1+x^2)\) (ordre 6) <small>→ <a href="#m-dl">A5</a></small><br>⚡ composée \(\ln(1+u)\), \(u=x^2\)</li><li id="td1-ex8-q3"><b>3)</b> \(\sin2x+\cos x^2\) (ordre 7) <small>→ <a href="#m-dl">A5</a></small><br>⚡ somme ; \(\cos(x^2)\) n'a que \(1-\frac{x^4}2\) jusqu'à l'ordre 7</li><li id="td1-ex8-q4"><b>4)</b> \(e^{3x}\sin2x\) (ordre 4) <small>→ <a href="#m-dl">A5</a></small><br>⚡ produit degré par degré</li><li id="td1-ex8-q5"><b>5)</b> \(\frac{\ln(1+x)}{1+x}\) (ordre 3) <small>→ <a href="#m-dl">A5</a></small><br>⚡ produit par \(\frac1{1+x}=1-x+x^2-x^3\)</li><li id="td1-ex8-q6"><b>6)</b> \(\frac{\operatorname{sh}x-x}{x^3}\) (ordre 6) <small>→ <a href="#m-dl">A5</a></small><br>⚡ numérateur à l'ordre \(6+3=9\), puis diviser par \(x^3\)</li><li id="td1-ex8-q7"><b>7)</b> \(e^{\sin x}\) (ordre 4) <small>→ <a href="#m-dl">A5</a></small><br>⚡ composée \(e^u\), \(u=\sin x\) ; le terme en \(x^3\) s'annule</li><li id="td1-ex8-q8"><b>8)</b> \(\sin^6x\) (ordre 9) <small>→ <a href="#m-dl">A5</a></small><br>⚡ factoriser \(x^6(1-\frac{x^2}6)^6\) ; parité ⇒ pas de terme impair</li><li id="td1-ex8-q9"><b>9)</b> \(\ln\cos x\) (ordre 6) <small>→ <a href="#m-dl">A5</a></small><br>⚡ composée \(\ln(1+u)\), \(u=\cos x-1\)</li><li id="td1-ex8-q10"><b>10)</b> \(\frac1{\cos x}\) (ordre 4) <small>→ <a href="#m-dl">A5</a></small><br>⚡ \(\frac1{1-v}\), \(v=1-\cos x\)</li><li id="td1-ex8-q11"><b>11)</b> \(\tan x\) (ordre 5) <small>→ <a href="#m-dl">A5</a></small><br>⚡ \(\sin x\times\frac1{\cos x}\) (résultat à connaître par cœur)</li><li id="td1-ex8-q12"><b>12)</b> \(\frac{\sin x}{\operatorname{sh}x}\) (ordre 4) <small>→ <a href="#m-dl">A5</a></small><br>⚡ factoriser \(x\) en haut et en bas, quotient \(\frac{1-x^2/6}{1+x^2/6}\)</li><li id="td1-ex8-q13"><b>13)</b> \((1+x)^{1/(1+x)}\) (ordre 3) <small>→ <a href="#m-dl">A5</a> <a href="#m-expln">A4</a></small><br>⚡ \(e^{w}\), \(w=\frac{\ln(1+x)}{1+x}\) (question 5)</li><li id="td1-ex8-q14"><b>14)</b> \(\sqrt{1+x}\) (ordre 4) <small>→ <a href="#m-dl">A5</a></small><br>⚡ binôme généralisé \(\alpha=\frac12\)</li><li id="td1-ex8-q15"><b>15)</b> \(\frac1{\sqrt{1-x}}\) (ordre 3) <small>→ <a href="#m-dl">A5</a></small><br>⚡ binôme \(\alpha=-\frac12\) avec \(u=-x\)</li><li id="td1-ex8-q16"><b>16)</b> \((1+x)^{1/x}\) (ordre 3) <small>→ <a href="#m-dl">A5</a> <a href="#m-expln">A4</a></small><br>⚡ \(e\cdot e^{w}\), \(w=\frac{\ln(1+x)}x-1\to0\)</li></ul><div class="warnbox"><span class="lab">Piège</span>Le coefficient d'ordre le plus élevé exige de développer <b>chaque facteur assez loin</b> avant de multiplier ; vérifier par la parité.</div><p><small><a href="ch1-analyse-asymptotique.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td1-ex9"><div class="exo-head"><span>TD1 · Exercice 9 — DL en un point \(a\) quelconque</span></div><div class="exo-body"><p class="enonce">Cinq DL en \(\frac\pi4\), \(1\), \(2\), \(\frac\pi3\), \(1\).</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Le point \(a\) n'est pas 0 : on ne peut pas utiliser directement la table. Il faut <b>se ramener en 0</b>.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-dla"><b>A6</b></a> : poser \(x=a+h\), adapter selon la fonction (addition d'angles, factorisation de \(a\), Taylor-Young).</div><ul><li id="td1-ex9-q1"><b>1)</b> \(\sin x\) en \(\frac\pi4\) (ordre 3) <small>→ <a href="#m-dla">A6</a></small><br>⚡ formule d'addition \(\frac{\sqrt2}2(\cos h+\sin h)\)</li><li id="td1-ex9-q2"><b>2)</b> \(\frac{\ln x}{x^2}\) en 1 (ordre 4) <small>→ <a href="#m-dla">A6</a> <a href="#m-dl">A5</a></small><br>⚡ \(x=1+h\) : produit \(\ln(1+h)\times(1+h)^{-2}\)</li><li id="td1-ex9-q3"><b>3)</b> \(\frac1x\) en 2 (ordre 3) <small>→ <a href="#m-dla">A6</a></small><br>⚡ \(\frac12\cdot\frac1{1+t/2}\)</li><li id="td1-ex9-q4"><b>4)</b> \(\sin x\cos3x\) en \(\frac\pi3\) (ordre 2) <small>→ <a href="#m-dla">A6</a></small><br>⚡ \(\cos(\pi+3h)=-\cos3h\) ; produit de deux DL</li><li id="td1-ex9-q5"><b>5)</b> \(\arctan x\) en 1 (ordre 3) <small>→ <a href="#m-dla">A6</a></small><br>⚡ Taylor-Young : dérivées de \(\arctan\) simples</li></ul><p><small><a href="ch1-analyse-asymptotique.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td1-ex10"><div class="exo-head"><span>TD1 · Exercice 10 — Dix limites par développements limités</span></div><div class="exo-body"><p class="enonce">Dix limites d'indéterminations variées en 0, 1, \(+\infty\).</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Chaque limite est une forme indéterminée où les <b>équivalents seuls échouent</b> (différence qui s'annule). Il faut choisir la bonne méthode et surtout le bon <b>ordre</b> du DL.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-limeq"><b>A3</b></a> : ramener en 0, DL du numérateur et du dénominateur jusqu'au 1ᵉʳ terme non nul, diviser. Puissance variable → <a href="#m-expln"><b>A4</b></a>.</div><ul><li id="td1-ex10-q1"><b>1)</b> \(x-x^2\ln(1+\frac1x)\) en \(+\infty\) <small>→ <a href="#m-limeq">A3</a></small><br>⚡ \(u=\frac1x\), DL de \(\ln(1+u)\) à l'ordre 3</li><li id="td1-ex10-q2"><b>2)</b> \(\frac{e^{x^2}-\cos x}{x^2}\) en 0 <small>→ <a href="#m-limeq">A3</a></small><br>⚡ DL à l'ordre 2</li><li id="td1-ex10-q3"><b>3)</b> \(\sqrt{x^2+x+1}-x\) en \(+\infty\) <small>→ <a href="#m-limeq">A3</a></small><br>⚡ factoriser \(x\sqrt{1+\frac1x+\frac1{x^2}}\), DL de la racine</li><li id="td1-ex10-q4"><b>4)</b> \(x\,\frac{\ln(1+x)-\sin x}{\tan x-x}\) en 0 <small>→ <a href="#m-limeq">A3</a></small><br>⚡ ordre 3 : \(-\frac{x^2}2\) en haut, \(\frac{x^3}3\) en bas</li><li id="td1-ex10-q5"><b>5)</b> \(\frac{\cos x-\sqrt{1-x^2}}{x^4}\) en 0 <small>→ <a href="#m-limeq">A3</a></small><br>⚡ ordre 4 obligatoire (on divise par \(x^4\)) : les termes en \(x^2\) s'annulent</li><li id="td1-ex10-q6"><b>6)</b> \(\frac{(1+3x)^{1/3}-1-\sin x}{1-\cos x}\) en 0 <small>→ <a href="#m-limeq">A3</a></small><br>⚡ binôme \(\alpha=\frac13\), numérateur d'ordre 2</li><li id="td1-ex10-q7"><b>7)</b> \(\big(\frac{\tan x}x\big)^{1/x^2}\) en 0 <small>→ <a href="#m-expln">A4</a></small><br>⚡ exposant \(\frac1{x^2}\ln(1+\frac{x^2}3)\to\frac13\)</li><li id="td1-ex10-q8"><b>8)</b> \(\frac{\sin(x-\sin x)}{\sqrt{1+x^3}-1}\) en 0 <small>→ <a href="#m-equiv">A2</a></small><br>⚡ \(x-\sin x\sim\frac{x^3}6\to0\) donc \(\sin(x-\sin x)\sim\frac{x^3}6\)</li><li id="td1-ex10-q9"><b>9)</b> \(\frac{(1+x)^{1/x}-e}{x}\) en 0 <small>→ <a href="#m-expln">A4</a> <a href="#m-limeq">A3</a></small><br>⚡ \((1+x)^{1/x}=e\,e^{-x/2+o(x)}\)</li><li id="td1-ex10-q10"><b>10)</b> \(\frac{\ln(2x^2-1)}{\tan(x-1)}\) en 1 <small>→ <a href="#m-limeq">A3</a></small><br>⚡ \(h=x-1\), \(2x^2-1=1+4h+2h^2\)</li></ul><div class="warnbox"><span class="lab">Piège</span>Si le DL à l'ordre choisi donne 0, on augmente l'ordre — on ne conclut jamais « 0 » trop vite.</div><p><small><a href="ch1-analyse-asymptotique.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td1-ex11"><div class="exo-head"><span>TD1 · Exercice 11 — \(f(x)=\dfrac{x}{e^x-1}\) : DL, tangente, position</span></div><div class="exo-body"><p class="enonce">DL à l'ordre 2 en 0 de \(\frac x{e^x-1}\), puis tangente et position de la courbe.</p><div class="note"><span class="lab">🔎 Analyse de la question</span>\(f\) n'est pas définie en 0 : il faut <b>la prolonger</b>. Deux temps : (1) DL, (2) lecture géométrique.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-dl"><b>A5</b></a> puis <a href="#m-tang"><b>A7</b></a> : factoriser \(x\) au dénominateur, \(\frac1{1+u}\), lire \(a_0,a_1\) (tangente) et le signe du terme en \(x^2\).</div><ul><li id="td1-ex11-q1"><b>1)</b> DL à l'ordre 2 <small>→ <a href="#m-dl">A5</a></small><br>⚡ \(e^x-1=x(1+\frac x2+\frac{x^2}6)\), puis \(\frac1{1+u}\)</li><li id="td1-ex11-q2"><b>2)</b> tangente et position <small>→ <a href="#m-tang">A7</a></small><br>⚡ tangente \(y=1-\frac x2\) ; terme en \(x^2\) positif ⇒ au-dessus</li></ul><p><small><a href="ch1-analyse-asymptotique.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td1-ex12"><div class="exo-head"><span>TD1 · Exercice 12 — \(f(x)=\ln(1+x+x^2)\) : tangentes en 0 et en 1</span></div><div class="exo-body"><p class="enonce">Tangente et position en \(x_0=0\) et en \(x_0=1\).</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Deux points : en 0 le DL est facile (composée) ; en 1 il est plus simple d'utiliser <b>Taylor-Young</b> (dérivées).</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-tang"><b>A7</b></a> : en 0 DL d'ordre 2 par composition ; en 1 \(f(1),f'(1),f''(1)\) puis le signe de \(f''(1)/2\).</div><ul><li id="td1-ex12-q1"><b>0</b> \(x_0=0\) <small>→ <a href="#m-tang">A7</a> <a href="#m-dl">A5</a></small><br>⚡ composée \(\ln(1+u)\), \(u=x+x^2\) ; \(a_2=\frac12>0\) ⇒ au-dessus</li><li id="td1-ex12-q2"><b>1</b> \(x_0=1\) <small>→ <a href="#m-tang">A7</a> <a href="#m-dla">A6</a></small><br>⚡ Taylor-Young ordre 2 : \(f''(1)=-\frac13<0\) ⇒ en dessous</li></ul><p><small><a href="ch1-analyse-asymptotique.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td1-ex13"><div class="exo-head"><span>TD1 · Exercice 13 — Tangente et position pour trois fonctions</span></div><div class="exo-body"><p class="enonce">\(\frac1x(e^{\sin x}-1)\) en 0 ; \(\frac{\arctan x}{\sin^3x}-\frac1{x^2}\) en 0 ; \(\sqrt{\tan x}\) en \(\frac\pi4\).</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Trois cas piégés : (1) le terme en \(x^2\) est nul, (2) les deux termes sont <b>singuliers</b> (\(\sim x^{-2}\)), (3) point autre que 0.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-tang"><b>A7</b></a> avec <a href="#m-dl"><b>A5</b></a> : ordre assez grand pour que la singularité se simplifie ; si \(a_2=0\) aller à l'ordre 3 ; point \(a\ne0\) → <a href="#m-dla"><b>A6</b></a>.</div><ul><li id="td1-ex13-q1"><b>1)</b> \(\frac{e^{\sin x}-1}{x}\) en 0 <small>→ <a href="#m-tang">A7</a> <a href="#m-dl">A5</a></small><br>⚡ DL de \(e^{\sin x}\) à l'ordre 4 ; \(a_2=0\), \(a_3=-\frac18\) ⇒ traverse la tangente (inflexion)</li><li id="td1-ex13-q2"><b>2)</b> \(\frac{\arctan x}{\sin^3x}-\frac1{x^2}\) en 0 <small>→ <a href="#m-tang">A7</a> <a href="#m-dl">A5</a></small><br>⚡ développer \(\arctan x\) et \(\sin^3x\) à l'ordre 5 pour que \(\frac1{x^2}\) se simplifie</li><li id="td1-ex13-q3"><b>3)</b> \(\sqrt{\tan x}\) en \(\frac\pi4\) <small>→ <a href="#m-tang">A7</a> <a href="#m-dla">A6</a></small><br>⚡ \(\tan(\frac\pi4+h)=\frac{1+\tan h}{1-\tan h}\) puis \(\sqrt{1+t}\)</li></ul><div class="warnbox"><span class="lab">Piège</span>Dans (2), si on ne développe pas assez loin, les termes singuliers ne se simplifient pas et le résultat est faux.</div><p><small><a href="ch1-analyse-asymptotique.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td1-ex14"><div class="exo-head"><span>TD1 · Exercice 14 — Asymptotes en \(+\infty\) et position</span></div><div class="exo-body"><p class="enonce">Trois fonctions : \((x^2-1)\ln\frac{x+1}{x-1}\), \(\sqrt{x^2+1}+\sqrt{x^2-1}\), \(x^2\arctan\frac1{1+x}\).</p><div class="note"><span class="lab">🔎 Analyse de la question</span>On cherche une <b>asymptote oblique</b> \(y=ax+b\) et la position : il faut le développement asymptotique \(ax+b+\frac cx\).</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-asy"><b>A8</b></a> : \(u=1/x\), factoriser le terme dominant, DL en \(u\) à l'ordre suffisant, lire \(a,b,c\).</div><ul><li id="td1-ex14-q1"><b>1)</b> \((x^2-1)\ln\frac{x+1}{x-1}\) <small>→ <a href="#m-asy">A8</a> <a href="#m-dl">A5</a></small><br>⚡ \(\ln\frac{1+u}{1-u}=2(u+\frac{u^3}3+\frac{u^5}5)\) ⇒ \(2x-\frac4{3x}\) : en dessous</li><li id="td1-ex14-q2"><b>2)</b> \(\sqrt{x^2+1}+\sqrt{x^2-1}\) <small>→ <a href="#m-asy">A8</a> <a href="#m-dl">A5</a></small><br>⚡ \(x(\sqrt{1+u^2}+\sqrt{1-u^2})\) ⇒ \(2x-\frac1{4x^3}\) : en dessous</li><li id="td1-ex14-q3"><b>3)</b> \(x^2\arctan\frac1{1+x}\) <small>→ <a href="#m-asy">A8</a> <a href="#m-dl">A5</a></small><br>⚡ \(z=\frac u{1+u}\), \(\arctan z=z-\frac{z^3}3\) ⇒ \(x-1+\frac2{3x}\) : au-dessus</li></ul><div class="warnbox"><span class="lab">Piège</span>Pousser le DL en \(u\) jusqu'à ce que, multiplié par \(x\) ou \(x^2\), il fasse apparaître le terme en \(\frac1x\).</div><p><small><a href="ch1-analyse-asymptotique.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td1-ex15"><div class="exo-head"><span>TD1 · Exercice 15 — Suite définie par \(e^x+x=n\)</span></div><div class="exo-body"><p class="enonce">Étudier la suite \((x_n)\) telle que \(e^{x_n}+x_n=n\) : existence, monotonie, limite, équivalent, développement.</p><div class="note"><span class="lab">🔎 Analyse de la question</span>C'est un exercice <b>type</b> : tous les points de la méthode des suites implicites sont demandés dans l'ordre, chaque question utilisant la précédente.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-impl"><b>A9</b></a> : bijection, monotonie, limite par l'absurde, équivalent via le rapport, réinjection pour le terme suivant.</div><ul><li id="td1-ex15-q1"><b>1)</b> \(x_n\) bien définie <small>→ <a href="#m-impl">A9</a></small><br>⚡ \(\varphi(x)=e^x+x\) continue, strictement croissante, limites \(\mp\infty\)</li><li id="td1-ex15-q2"><b>2)</b> croissance et limite <small>→ <a href="#m-impl">A9</a></small><br>⚡ \(\varphi(x_{n+1})>\varphi(x_n)\) ; si majorée, contradiction</li><li id="td1-ex15-q3"><b>3)</b> \(x_n\sim\ln n\) <small>→ <a href="#m-impl">A9</a> <a href="#m-equiv">A2</a></small><br>⚡ \(\frac n{e^{x_n}}\to1\), puis \(\ln\) du rapport</li><li id="td1-ex15-q4"><b>4)</b> développement à deux termes <small>→ <a href="#m-impl">A9</a></small><br>⚡ \(x_n=\ln n+\ln(1-\frac{x_n}n)\) puis \(\ln(1-\varepsilon)\sim-\varepsilon\)</li></ul><div class="warnbox"><span class="lab">Piège</span>Ne pas passer le \(\ln\) dans un équivalent : on prend le \(\ln\) du <i>rapport</i>.</div><p><small><a href="ch1-analyse-asymptotique.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+  </section>
+
+  <section id="td2">
+    <h2>🔀 TD2 — Applications linéaires : fiche de chaque exercice</h2>
+<div class="exo-card" id="td2-ex1"><div class="exo-head"><span>TD2 · Exercice 1 — Sous-espaces vectoriels décrits en \(\operatorname{Vect}\)</span></div><div class="exo-body"><p class="enonce">Sept ensembles de polynômes (\(P(1)=0\), dérivées, \(P(1)=P(2)=0\), \(\int_0^1P=0\), …) à écrire comme \(\operatorname{Vect}\).</p><div class="note"><span class="lab">🔎 Analyse de la question</span>On demande de <b>prouver que c'est un sev</b> et d'en <b>donner des générateurs</b> : un seul geste (paramétrer) fait les deux.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-sev"><b>L1</b></a> : coordonnées dans \((1,X,X^2,\dots)\), traduire la condition en équation linéaire, isoler les paramètres libres, factoriser.</div><ul><li id="td2-ex1-q1"><b>1)</b> \(\{P\in\mathbb R_3[X]\mid P(1)=0\}\) <small>→ <a href="#m-sev">L1</a></small><br>⚡ \(a_0=-a_1-a_2-a_3\) ⇒ \(\operatorname{Vect}(X-1,X^2-1,X^3-1)\)</li><li id="td2-ex1-q2"><b>2)</b> \(\{P'\mid P\in\mathbb R_n[X]\}\) <small>→ <a href="#m-sev">L1</a> <a href="#m-kerim">L4</a></small><br>⚡ image d'une application linéaire ⇒ sev ; \(=\mathbb R_{n-1}[X]\)</li><li id="td2-ex1-q3"><b>3)</b> \(\{a(x^3-1)+b(x^2-2)+c(x+4)\}\) <small>→ <a href="#m-sev">L1</a></small><br>⚡ déjà donné sous forme de Vect</li><li id="td2-ex1-q4"><b>4)</b> \(\{P\in\mathbb R_4[X]\mid P(1)=P(2)=0\}\) <small>→ <a href="#m-sev">L1</a></small><br>⚡ 2 équations, 3 paramètres libres ; \(P=(X-1)(X-2)\times\) polynôme de degré \(\le2\)</li><li id="td2-ex1-q5"><b>5)</b> \(\{P\in\mathbb R_2[X]\mid\int_0^1P=0\}\) <small>→ <a href="#m-sev">L1</a></small><br>⚡ \(a+\frac b2+\frac c3=0\) ⇒ \(\operatorname{Vect}(2X-1,3X^2-1)\) (multiplier pour effacer les fractions)</li><li id="td2-ex1-q6"><b>6)</b> \(\{P\in\mathbb R_2[X]\mid P'=0\}\) <small>→ <a href="#m-sev">L1</a></small><br>⚡ \(P\) constant ⇒ \(\operatorname{Vect}(1)\)</li><li id="td2-ex1-q7"><b>7)</b> \(\{P\in\mathbb R_3[X]\mid P''=0\}\) <small>→ <a href="#m-sev">L1</a></small><br>⚡ \(\deg P\le1\) ⇒ \(\operatorname{Vect}(1,X)\)</li></ul><p><small><a href="ch2-applications-lineaires.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td2-ex2"><div class="exo-head"><span>TD2 · Exercice 2 — Bases de \(\mathbb R^3\), coordonnées, familles libres / génératrices</span></div><div class="exo-body"><p class="enonce">Deux familles de trois vecteurs (base ? coordonnées de \(w\), de \(e_1,e_2,e_3\)) puis deux exemples de familles particulières.</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Questions 1-2 : <b>tester une base</b> puis <b>exprimer des vecteurs dedans</b>. Questions 3-4 : construire des <b>exemples</b> qui distinguent « libre » et « génératrice ».</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-base"><b>L2</b></a> : 3 vecteurs de \(\mathbb R^3\) ⇒ \(\det\ne0\) suffit ; coordonnées par système avec second membre général.</div><ul><li id="td2-ex2-q1"><b>1)</b> \(v_1=(0,1,1),v_2=(1,0,1),v_3=(1,1,0)\), \(w=(1,1,1)\) <small>→ <a href="#m-base">L2</a></small><br>⚡ \(\det=2\ne0\) ; système symétrique : additionner les 3 équations</li><li id="td2-ex2-q2"><b>2)</b> \(v_1=(1,1,1),v_2=(-1,1,0),v_3=(1,0,-1)\) ; \(e_1,e_2,e_3,w\) <small>→ <a href="#m-base">L2</a></small><br>⚡ \(\det=-3\) ; résoudre une fois pour \((x,y,z)\) général : \(\alpha=\frac{x+y+z}3\)</li><li id="td2-ex2-q3"><b>3)</b> libre non génératrice <small>→ <a href="#m-base">L2</a></small><br>⚡ \(\{(1,0,0),(0,1,0)\}\) : 2 vecteurs indépendants ne peuvent pas engendrer \(\mathbb R^3\)</li><li id="td2-ex2-q4"><b>4)</b> génératrice non libre <small>→ <a href="#m-base">L2</a></small><br>⚡ base canonique + \((1,1,1)\) : 4 vecteurs en dimension 3</li></ul><p><small><a href="ch2-applications-lineaires.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td2-ex3"><div class="exo-head"><span>TD2 · Exercice 3 — Linéarité et noyau d'une application \(\mathbb R^3\to\mathbb R^2\)</span></div><div class="exo-body"><p class="enonce">\(u(x_1,x_2,x_3)=(x_1+x_2+x_3,\ 2x_1+x_2-x_3)\) : linéaire ? noyau ?</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Exercice de base : <b>définition de la linéarité</b> puis <b>résolution d'un système homogène</b>.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-lin"><b>L3</b></a> puis <a href="#m-kerim"><b>L4</b></a> : développer \(u(\lambda x+\mu y)\) ; noyau = résoudre \(u(x)=0\).</div><ul><li id="td2-ex3-q1"><b>1)</b> \(u\) est linéaire <small>→ <a href="#m-lin">L3</a></small><br>⚡ regrouper les termes en \(\lambda\) et en \(\mu\)</li><li id="td2-ex3-q2"><b>2)</b> \(\ker u\) <small>→ <a href="#m-kerim">L4</a></small><br>⚡ système 2×3 ⇒ 1 paramètre libre : \(\operatorname{Vect}((2,-3,1))\) ; \(\dim\ker=1\) ⇒ pas injective</li></ul><p><small><a href="ch2-applications-lineaires.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td2-ex4"><div class="exo-head"><span>TD2 · Exercice 4 — Linéarité de quatre applications</span></div><div class="exo-body"><p class="enonce">\(f_1(x,y)=(2x+y,x-y)\) ; \(f_2(x,y,z)=(xy,x,y)\) ; \(f_3\) ; \(f_4(P)=(P(-1),P(0),P(1))\).</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Pour chaque application : <b>linéaire ou non ?</b> Lecture rapide des formules, puis preuve ou contre-exemple.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-lin"><b>L3</b></a> : composantes combinaisons linéaires ⇒ linéaire (preuve par regroupement) ; terme \(xy\) ⇒ non linéaire (contre-exemple chiffré) ; évaluation de polynôme ⇒ linéaire.</div><ul><li id="td2-ex4-q1"><b>f₁</b> \(\mathbb R^2\to\mathbb R^2\) <small>→ <a href="#m-lin">L3</a></small><br>⚡ composantes linéaires ⇒ linéaire</li><li id="td2-ex4-q2"><b>f₂</b> \((xy,x,y)\) <small>→ <a href="#m-lin">L3</a></small><br>⚡ contre-exemple : \(f_2(2,2,2)=(4,2,2)\ne2f_2(1,1,1)\)</li><li id="td2-ex4-q3"><b>f₃</b> \(\mathbb R^3\to\mathbb R^3\) <small>→ <a href="#m-lin">L3</a></small><br>⚡ composantes linéaires ⇒ linéaire</li><li id="td2-ex4-q4"><b>f₄</b> \(P\mapsto(P(-1),P(0),P(1))\) <small>→ <a href="#m-lin">L3</a></small><br>⚡ \((\lambda P+\mu Q)(a)=\lambda P(a)+\mu Q(a)\)</li></ul><div class="warnbox"><span class="lab">Piège</span>Énoncé : la 4ᵉ application est étiquetée « f₅ » par erreur (c'est f₄).</div><p><small><a href="ch2-applications-lineaires.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td2-ex5"><div class="exo-head"><span>TD2 · Exercice 5 — Noyau, image, injectivité de \(f_1,f_3,f_4\)</span></div><div class="exo-body"><p class="enonce">Pour chaque application linéaire de l'exercice 4 : noyau, image, injective ? surjective ?</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Tout se joue sur <b>le noyau</b> (calcul direct) et <b>le théorème du rang</b> pour l'image.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-kerim"><b>L4</b></a> : noyau par système ; \(\dim\operatorname{Im}=\dim E-\dim\ker\) ; comparer à la dimension d'arrivée.</div><ul><li id="td2-ex5-q1"><b>f₁</b> \(\mathbb R^2\to\mathbb R^2\) <small>→ <a href="#m-kerim">L4</a></small><br>⚡ \(\ker=\{0\}\) ⇒ injective ⇒ (même dimension) bijective</li><li id="td2-ex5-q2"><b>f₃</b> \(\mathbb R^3\to\mathbb R^3\) <small>→ <a href="#m-kerim">L4</a></small><br>⚡ \(\ker=\operatorname{Vect}((1,-1,-1))\) ; \(\operatorname{Im}\) = plan \(x+y-2z=0\) (produit vectoriel) ⇒ ni inj. ni surj.</li><li id="td2-ex5-q3"><b>f₄</b> \(\mathbb R_3[X]\to\mathbb R^3\) <small>→ <a href="#m-kerim">L4</a></small><br>⚡ 3 racines \(-1,0,1\) ⇒ \(P=k(X^3-X)\) ; rang \(4-1=3\) ⇒ surjective, pas injective</li></ul><div class="warnbox"><span class="lab">Piège</span>Énoncé : renvoie à « l'exercice 6 » par erreur, il s'agit de l'exercice 4.</div><p><small><a href="ch2-applications-lineaires.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td2-ex6"><div class="exo-head"><span>TD2 · Exercice 6 — Endomorphisme défini par l'image de la base canonique</span></div><div class="exo-body"><p class="enonce">\(u(e_1)=(1,-1,2)\), \(u(e_2)=(-3,2,-1)\), \(u(e_3)=(-7,4,1)\) : formule, antécédents, injectivité.</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Trois étapes enchaînées : <b>reconstruire</b> la formule, <b>résoudre</b> deux équations \(u(x)=y\), puis <b>conclure</b> sur le noyau.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-expl"><b>L5</b></a> puis <a href="#m-antec"><b>L6</b></a> puis <a href="#m-kerim"><b>L4</b></a>. Un \(\det=0\) annonce qu'il y aura des vecteurs sans antécédent.</div><ul><li id="td2-ex6-q1"><b>1)</b> expression de \(u\) <small>→ <a href="#m-expl">L5</a></small><br>⚡ \(u(x)=x_1u(e_1)+x_2u(e_2)+x_3u(e_3)\)</li><li id="td2-ex6-q2"><b>2)</b> antécédents de \((-1,1,8)\) et \((-2,1,3)\) <small>→ <a href="#m-antec">L6</a></small><br>⚡ les deux systèmes sont incompatibles (\(4=-1\), \(-1=-2\)) ⇒ aucun antécédent ; \(u(e_3)=2u(e_1)+3u(e_2)\)</li><li id="td2-ex6-q3"><b>3)</b> injective / surjective / bijective <small>→ <a href="#m-kerim">L4</a></small><br>⚡ \(\ker u=\operatorname{Vect}((-2,-3,1))\) ⇒ rang 2 ⇒ ni inj. ni surj.</li></ul><p><small><a href="ch2-applications-lineaires.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td2-ex7"><div class="exo-head"><span>TD2 · Exercice 7 — Supplémentaires, projection et symétrie (1)</span></div><div class="exo-body"><p class="enonce">\(F=\operatorname{Vect}((1,1,1))\), \(G:\ 2x+y-z=0\) : supplémentaires, projection sur \(F\) // \(G\), symétrie.</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Droite + plan en dimension 3 : le schéma classique. La projection et la symétrie s'obtiennent en <b>décomposant</b> un vecteur.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-supp"><b>L7</b></a> pour la question 1, <a href="#m-proj"><b>L8</b></a> pour 2 et 3 : \(w=\lambda(1,1,1)+v\), \(v\in G\Rightarrow\lambda\) ; \(s=\mathrm{id}-2p\).</div><ul><li id="td2-ex7-q1"><b>1)</b> \(F\oplus G=\mathbb R^3\) <small>→ <a href="#m-supp">L7</a></small><br>⚡ \(F\cap G=\{0\}\) (\(2\lambda=0\)), \(1+2=3\)</li><li id="td2-ex7-q2"><b>2)</b> projection \(p\) sur \(F\) // \(G\) <small>→ <a href="#m-proj">L8</a></small><br>⚡ \(\lambda=\frac{2x+y-z}2\), \(p(w)=\lambda(1,1,1)\)</li><li id="td2-ex7-q3"><b>3)</b> symétrie \(s\) par rapport à \(G\) // \(F\) <small>→ <a href="#m-proj">L8</a></small><br>⚡ \(s=\mathrm{id}-2p\) ; vérifier \(s=\mathrm{id}\) sur \(G\), \(s=-\mathrm{id}\) sur \(F\)</li></ul><p><small><a href="ch2-applications-lineaires.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td2-ex8"><div class="exo-head"><span>TD2 · Exercice 8 — Supplémentaires et projection (2)</span></div><div class="exo-body"><p class="enonce">\(F:\ 2x-y+z=0\), \(G=\operatorname{Vect}((1,2,-1))\) : base de \(F\), supplémentaires, projection.</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Même schéma que l'exercice 7 mais avec le plan comme cible : on paramétrise ici la composante dans <b>G</b>.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-supp"><b>L7</b></a> puis <a href="#m-proj"><b>L8</b></a> : \(w=u+\mu(1,2,-1)\) avec \(u\in F\) ⇒ équation en \(\mu\).</div><ul><li id="td2-ex8-q1"><b>1)</b> base de \(F\) ; \(F\oplus G=\mathbb R^3\) <small>→ <a href="#m-supp">L7</a></small><br>⚡ \(y=2x+z\) ⇒ base \((1,2,0),(0,1,1)\) ; \(F\cap G=\{0\}\), \(2+1=3\)</li><li id="td2-ex8-q2"><b>2)</b> projection sur \(F\) // \(G\) <small>→ <a href="#m-proj">L8</a></small><br>⚡ \(\mu=-2x+y-z\) ; \(p(w)=w-\mu(1,2,-1)\)</li></ul><p><small><a href="ch2-applications-lineaires.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td2-ex9"><div class="exo-head"><span>TD2 · Exercice 9 — \(\mathbb C\) comme \(\mathbb R\)-espace vectoriel : un projecteur</span></div><div class="exo-body"><p class="enonce">\(\varphi(z)=\frac12z+\frac i2\bar z\) : endomorphisme, projecteur, image et noyau.</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Le « vecteur » est un nombre complexe, les scalaires sont <b>réels</b>. On utilise \(\bar z\) et on calcule avec \(i^2=-1\).</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-projecteur"><b>L9</b></a> (+ <a href="#m-lin"><b>L3</b></a>) : lemme « la conjugaison est \(\mathbb R\)-linéaire », calcul de \(\varphi\circ\varphi\), forme \(x+iy\) pour Ker/Im.</div><ul><li id="td2-ex9-q1"><b>1)</b> \(\varphi\in\operatorname{End}_{\mathbb R}(\mathbb C)\) <small>→ <a href="#m-lin">L3</a> <a href="#m-projecteur">L9</a></small><br>⚡ \(\overline{\lambda z+\mu w}=\lambda\bar z+\mu\bar w\) pour \(\lambda,\mu\in\mathbb R\)</li><li id="td2-ex9-q2"><b>2)</b> \(\varphi\circ\varphi=\varphi\) <small>→ <a href="#m-projecteur">L9</a></small><br>⚡ calculer d'abord \(\overline{\varphi(z)}=\frac12\bar z-\frac i2z\)</li><li id="td2-ex9-q3"><b>3)</b> image, noyau, dimensions <small>→ <a href="#m-projecteur">L9</a> <a href="#m-kerim">L4</a></small><br>⚡ \(\varphi(x+iy)=\frac{x+y}2(1+i)\) ⇒ \(\ker=\operatorname{Vect}_{\mathbb R}(1-i)\), \(\operatorname{Im}=\operatorname{Vect}_{\mathbb R}(1+i)\)</li></ul><p><small><a href="ch2-applications-lineaires.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td2-ex10"><div class="exo-head"><span>TD2 · Exercice 10 — L'application somme \(f:F\times G\to E,\ (x,y)\mapsto x+y\)</span></div><div class="exo-body"><p class="enonce">\(E\) un \(\mathbb K\)-ev, \(F,G\) sev : linéarité de \(f\), noyau, image, conditions d'injectivité / surjectivité.</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Exercice <b>théorique</b> (pas de chiffres) : il relie injectivité ↔ \(F\cap G=\{0\}\) et surjectivité ↔ \(F+G=E\). C'est la justification de la définition des supplémentaires.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-lin"><b>L3</b></a> puis <a href="#m-kerim"><b>L4</b></a> puis <a href="#m-supp"><b>L7</b></a> : on décrit \(\ker f\) et \(\operatorname{Im}f\) sans coordonnées.</div><ul><li id="td2-ex10-q1"><b>1)</b> \(f\) est linéaire <small>→ <a href="#m-lin">L3</a></small><br>⚡ produit \(F\times G\) : opérations composante par composante</li><li id="td2-ex10-q2"><b>2)</b> \(\ker f\) et \(\operatorname{Im}f\) <small>→ <a href="#m-kerim">L4</a></small><br>⚡ \(x+y=0\Rightarrow y=-x\in G\) ⇒ \(\ker f\cong F\cap G\) ; \(\operatorname{Im}f=F+G\)</li><li id="td2-ex10-q3"><b>3)</b> inj. / surj. / bij. <small>→ <a href="#m-supp">L7</a></small><br>⚡ injective ⇔ \(F\cap G=\{0\}\) ; surjective ⇔ \(F+G=E\) ; bijective ⇔ \(F\oplus G=E\)</li></ul><p><small><a href="ch2-applications-lineaires.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+  </section>
+
+  <section id="td3">
+    <h2>🧮 TD3 — Matrices et applications linéaires : fiche de chaque exercice</h2>
+    <p class="lead">L'exercice 10 du TD3 n'est pas traité (la page du scan qui contient son énoncé manque).</p>
+<div class="exo-card" id="td3-ex1"><div class="exo-head"><span>TD3 · Exercice 1 — Matrices dans la base canonique</span></div><div class="exo-body"><p class="enonce">Quatre applications : \(\mathbb R^3\to\mathbb R^3\), \((2X+1)P-X^2P'\), \(\int_X^{X+2}P\), \(M\mapsto AM+MB\) sur \(\mathcal M_2\).</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Quatre fois la <b>même demande</b> : « écrire la matrice ». La difficulté est dans le calcul des images (dérivée, intégrale, produit matriciel).</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-mat"><b>M1</b></a> — recette unique : images de chaque vecteur de base, coordonnées en colonnes.</div><ul><li id="td3-ex1-q1"><b>1)</b> \(\mathbb R^3\to\mathbb R^3\) <small>→ <a href="#m-mat">M1</a></small><br>⚡ colonnes \(f(1,0,0),f(0,1,0),f(0,0,1)\)</li><li id="td3-ex1-q2"><b>2)</b> \((2X+1)P-X^2P'\) sur \(\mathbb R_2[X]\) <small>→ <a href="#m-mat">M1</a></small><br>⚡ images de \(1,X,X^2\) ; le terme en \(X^3\) s'annule pour \(X^2\)</li><li id="td3-ex1-q3"><b>3)</b> \(\int_X^{X+2}P(t)\,dt\) <small>→ <a href="#m-mat">M1</a></small><br>⚡ \(\int_X^{X+2}t^k=\frac{(X+2)^{k+1}-X^{k+1}}{k+1}\) ⇒ triangulaire sup.</li><li id="td3-ex1-q4"><b>4)</b> \(M\mapsto AM+MB\) sur \(\mathcal M_2(\mathbb R)\) <small>→ <a href="#m-mat">M1</a></small><br>⚡ base \((E_{11},E_{12},E_{21},E_{22})\) ⇒ matrice \(4\times4\)</li></ul><div class="warnbox"><span class="lab">Piège</span>Dans (4) la matrice est 4×4 : ne pas confondre avec \(A,B\).</div><p><small><a href="ch3-matrices-applications-lineaires.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td3-ex2"><div class="exo-head"><span>TD3 · Exercice 2 — Noyau, image et changement de base (3 bases)</span></div><div class="exo-body"><p class="enonce">\(A=\begin{pmatrix}1&-2&-1\\2&0&2\\0&1&1\end{pmatrix}\) : base de \(\ker\), de \(\operatorname{Im}\), supplémentaires ; matrice dans \((u,f(e_1),f(e_2))\) puis \((u,e_1,e_2)\).</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Trois temps : (1) noyau et image par la matrice, (2)-(3) <b>choisir une base adaptée</b> et y écrire la matrice (le vecteur \(u\) est celui du noyau).</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-matkerim"><b>M2</b></a> puis <a href="#m-adaptee"><b>M3</b></a> : noyau \(AX=0\), image = colonnes, puis \(f(b_j)\) exprimé dans la base.</div><ul><li id="td3-ex2-q1"><b>1)</b> noyau, image, supplémentaires ? <small>→ <a href="#m-matkerim">M2</a> <a href="#m-supp">L7</a></small><br>⚡ \(\ker=\operatorname{Vect}(u)\), \(u=(1,1,-1)\) ; \(f(e_3)=f(e_1)+f(e_2)\) ; \(u\notin\operatorname{Im}\)</li><li id="td3-ex2-q2"><b>2)</b> matrice dans \((u,f(e_1),f(e_2))\) <small>→ <a href="#m-adaptee">M3</a> <a href="#m-passage">M4</a></small><br>⚡ base car \(\det P=-3\) ; \(f(u)=0\) ; bloc \(\begin{pmatrix}1&-1\\2&1\end{pmatrix}\)</li><li id="td3-ex2-q3"><b>3)</b> matrice dans \((u,e_1,e_2)\) <small>→ <a href="#m-adaptee">M3</a></small><br>⚡ exprimer \(e_3=e_1+e_2-u\), puis \(f(e_2)=-u-e_1+e_2\)</li></ul><p><small><a href="ch3-matrices-applications-lineaires.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td3-ex3"><div class="exo-head"><span>TD3 · Exercice 3 — Projection sur l'axe des abscisses : trois matrices et une image</span></div><div class="exo-body"><p class="enonce">Projection sur \(\mathbb R\vec\imath\) // \(\mathbb R(\vec\imath+\vec\jmath)\) : \(\operatorname{Mat}_{\mathcal B}\), \(\operatorname{Mat}_{\mathcal B',\mathcal B}\), \(\operatorname{Mat}_{\mathcal B'}\), image de \(\vec w\).</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Exercice sur la <b>convention départ/arrivée</b> : une même application a trois matrices selon les bases choisies.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-mat"><b>M1</b></a> ; <a href="#m-chgt"><b>M5</b></a> (\(AP\) puis \(P^{-1}AP\)) ; <a href="#m-imagew"><b>M6</b></a> pour la dernière question.</div><ul><li id="td3-ex3-q1"><b>1)</b> \(\operatorname{Mat}_{\mathcal B,\mathcal B}\) <small>→ <a href="#m-mat">M1</a></small><br>⚡ \(f(\vec\imath)=\vec\imath\), \(f(\vec\imath+\vec\jmath)=0\) ⇒ \(f(\vec\jmath)=-\vec\imath\)</li><li id="td3-ex3-q2"><b>2)</b> \(\operatorname{Mat}_{\mathcal B',\mathcal B}\) <small>→ <a href="#m-chgt">M5</a></small><br>⚡ \(AP\) (départ \(\mathcal B'\), arrivée canonique)</li><li id="td3-ex3-q3"><b>3)</b> \(\operatorname{Mat}_{\mathcal B'}\) <small>→ <a href="#m-chgt">M5</a> <a href="#m-passage">M4</a></small><br>⚡ \(P^{-1}AP\) ; contrôle trace \(=1\), det \(=0\)</li><li id="td3-ex3-q4"><b>4)</b> image de \(2\vec u-\vec v\) <small>→ <a href="#m-imagew">M6</a></small><br>⚡ 4 méthodes qui doivent donner \((9,0)\)</li></ul><div class="warnbox"><span class="lab">Piège</span>Avec \(\operatorname{Mat}_{\mathcal B'}(f)\), le résultat est exprimé dans \(\mathcal B'\) : reconvertir avant de conclure.</div><p><small><a href="ch3-matrices-applications-lineaires.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td3-ex4"><div class="exo-head"><span>TD3 · Exercice 4 — Endomorphisme de \(\mathbb R_2[X]\) et équation différentielle</span></div><div class="exo-body"><p class="enonce">\(\varphi(P)=(X^2+X+1)P'-(2X-1)P\) : endomorphisme, matrice, bijectivité, antécédent de \(X^2-1\), équation différentielle associée.</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Exercice <b>qui relie</b> l'algèbre linéaire et les équations différentielles : la solution particulière de l'ED est l'antécédent polynomial trouvé en (2).</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-ed"><b>M8</b></a> (avec <a href="#m-mat"><b>M1</b></a>, <a href="#m-kerim"><b>L4</b></a>) : matrice, \(\det\ne0\), système pour l'antécédent, solution générale = particulière + homogène.</div><ul><li id="td3-ex4-q1"><b>1)</b> endomorphisme et matrice <small>→ <a href="#m-ed">M8</a> <a href="#m-mat">M1</a></small><br>⚡ le terme en \(X^3\) s'annule ; images de \(1,X,X^2\)</li><li id="td3-ex4-q2"><b>2)</b> bijective ? antécédent de \(X^2-1\) <small>→ <a href="#m-ed">M8</a></small><br>⚡ \(\det M=14\ne0\) ; résoudre \(MX=(-1,0,1)\) ⇒ \(\frac{X^2-4X-3}7\)</li><li id="td3-ex4-q3"><b>3)</b> résoudre \((x^2+x+1)y'-(2x-1)y=x^2-1\) <small>→ <a href="#m-ed">M8</a></small><br>⚡ particulière = \(P_0\) ; homogène : \(C(x^2+x+1)e^{-\frac4{\sqrt3}\arctan\frac{2x+1}{\sqrt3}}\)</li></ul><p><small><a href="ch3-matrices-applications-lineaires.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td3-ex5"><div class="exo-head"><span>TD3 · Exercice 5 — Projecteur de \(\mathbb R^3\) : diagonalisation par changement de base</span></div><div class="exo-body"><p class="enonce">Matrice de \(\Phi\), noyau ; nouvelle base \((f_1,f_2,f_3)\) ; matrice \(B\) ; matrice de passage \(P\) et \(P^{-1}\) avec \(B=P^{-1}AP\).</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Exercice <b>guidé</b> de bout en bout : tout est préparé (la base \((f)\) est donnée), il faut surtout enchaîner proprement.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-mat"><b>M1</b></a> (colonnes = images) ; <a href="#m-matkerim"><b>M2</b></a> ; <a href="#m-passage"><b>M4</b></a> (\(e_i\) en fonction des \(f_j\) ⇒ \(P^{-1}\)) ; <a href="#m-chgt"><b>M5</b></a> : \(B=P^{-1}AP\).</div><ul><li id="td3-ex5-q1"><b>1)</b> matrice \(A\) et noyau <small>→ <a href="#m-mat">M1</a> <a href="#m-matkerim">M2</a></small><br>⚡ \(\ker\Phi=\operatorname{Vect}(e_1-e_3)\)</li><li id="td3-ex5-q2"><b>2)</b> \(e_i\) en fonction des \(f_j\) ; base ? <small>→ <a href="#m-passage">M4</a></small><br>⚡ \(f_2+f_3=e_3\), \(e_1=f_1+f_2+f_3\), \(e_2=f_1+f_3\) ⇒ génératrice ⇒ base</li><li id="td3-ex5-q3"><b>3)</b> \(\Phi(f_j)\) ; matrice \(B\) ; nature <small>→ <a href="#m-adaptee">M3</a></small><br>⚡ \(B=\operatorname{diag}(0,1,1)\) ⇒ projecteur (\(B^2=B\))</li><li id="td3-ex5-q4"><b>4)</b> \(P\), \(P^{-1}\), \(B=P^{-1}AP\) <small>→ <a href="#m-passage">M4</a> <a href="#m-chgt">M5</a></small><br>⚡ colonnes de \(P\) = \(f_j\) en base canonique ; colonnes de \(P^{-1}\) = \(e_i\) en base \((f)\)</li></ul><p><small><a href="ch3-matrices-applications-lineaires.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td3-ex6"><div class="exo-head"><span>TD3 · Exercice 6 — Base de trigonalisation et puissances de \(A\)</span></div><div class="exo-body"><p class="enonce">Trouver \((b_1,b_2,b_3)\) dans laquelle \(f\) a pour matrice \(B=\begin{pmatrix}0&0&0\\0&-1&1\\0&0&-1\end{pmatrix}\), puis calculer \(B^n\) et \(A^n\).</p><div class="note"><span class="lab">🔎 Analyse de la question</span>La matrice \(B\) <b>dicte</b> les vecteurs : on les trouve en lisant ses colonnes. Puis \(A^n\) se déduit de \(B^n\) (qui, étant bloc triangulaire, se calcule par le binôme).</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-adaptee"><b>M3</b></a> pour 1) ; <a href="#m-puiss"><b>M7</b></a> pour 2) : \(B^n\) par binôme (bloc \(-I+N\), \(N^2=0\)) puis \(A^n=PB^nP^{-1}\).</div><ul><li id="td3-ex6-q1"><b>1)</b> base \((b_1,b_2,b_3)\) <small>→ <a href="#m-adaptee">M3</a></small><br>⚡ \(f(b_1)=0\), \(f(b_2)=-b_2\), \(f(b_3)=b_2-b_3\) ⇒ résoudre \(AX=0\), \((A+I)X=0\), \((A+I)X=b_2\) ; pas diagonalisable</li><li id="td3-ex6-q2"><b>2)</b> \(B^n\) puis \(A^n\) <small>→ <a href="#m-puiss">M7</a></small><br>⚡ \(A^n=(-1)^n\begin{pmatrix}2-n&1-n&n-2\\n&n+1&-n\\1&1&-1\end{pmatrix}\), valable pour \(n\ge1\)</li></ul><div class="warnbox"><span class="lab">Piège</span>La formule de \(A^n\) ne vaut pas pour \(n=0\) (le bloc nul).</div><p><small><a href="ch3-matrices-applications-lineaires.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td3-ex7"><div class="exo-head"><span>TD3 · Exercice 7 — Base de \(\mathbb R_2[X]\), matrices de passage, coordonnées</span></div><div class="exo-body"><p class="enonce">\(\mathcal B=(X^2+1,X+1,2X^2-X)\) : base, matrices de passage, coordonnées de \(X^2-X+2\), matrice de \(\varphi(P)=XP'\) dans \(\mathcal B\).</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Exercice de <b>technique pure</b> sur les changements de base avec des polynômes (on travaille en coordonnées dans \((1,X,X^2)\)).</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-passage"><b>M4</b></a> puis <a href="#m-chgt"><b>M5</b></a> : coordonnées canoniques → matrice \(P\), \(\det\ne0\), \(P^{-1}\), \(X_{\mathcal B}=P^{-1}X_{\text{can}}\), \(B=P^{-1}DP\).</div><ul><li id="td3-ex7-q1"><b>1)</b> \(\mathcal B\) est une base <small>→ <a href="#m-passage">M4</a></small><br>⚡ \(\det P=1\ne0\) en dimension 3</li><li id="td3-ex7-q2"><b>2)</b> matrices de passage canonique ↔ \(\mathcal B\) <small>→ <a href="#m-passage">M4</a></small><br>⚡ \(P\) et \(P^{-1}\) ; vérifier \(PP^{-1}=I\)</li><li id="td3-ex7-q3"><b>3)</b> coordonnées de \(X^2-X+2\) <small>→ <a href="#m-passage">M4</a></small><br>⚡ \(P^{-1}(2,-1,1)=(5,-3,-2)\)</li><li id="td3-ex7-q4"><b>4)</b> \(\varphi(P)=XP'\) dans \(\mathcal B\) <small>→ <a href="#m-mat">M1</a> <a href="#m-chgt">M5</a></small><br>⚡ \(D=\operatorname{diag}(0,1,2)\) en canonique ; \(P^{-1}DP\) devient une matrice pleine</li></ul><div class="warnbox"><span class="lab">Piège</span>Une base « moins naturelle » rend la matrice pleine : on choisit la base adaptée pour simplifier, jamais l'inverse.</div><p><small><a href="ch3-matrices-applications-lineaires.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td3-ex8"><div class="exo-head"><span>TD3 · Exercice 8 — Endomorphisme nilpotent (\(f^2=0\))</span></div><div class="exo-body"><p class="enonce">\(A=\begin{pmatrix}3&-3&6\\1&-1&2\\-1&1&-2\end{pmatrix}\) : \(A^2\), \(\operatorname{Im}f\subset\ker f\), rang, bases, forme normale.</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Exercice <b>structure</b> : un seul calcul (\(A^2=0\)) entraîne toute la suite par des arguments abstraits.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-nilp"><b>M9</b></a> puis <a href="#m-matkerim"><b>M2</b></a> pour le rang et les bases ; <a href="#m-adaptee"><b>M3</b></a> pour la dernière question.</div><ul><li id="td3-ex8-q1"><b>1)</b> \(A^2=0\) et \(\operatorname{Im}f\subset\ker f\) <small>→ <a href="#m-nilp">M9</a></small><br>⚡ \(y=f(x)\Rightarrow f(y)=f^2(x)=0\)</li><li id="td3-ex8-q2"><b>2)</b> rang, bases du noyau et de l'image <small>→ <a href="#m-matkerim">M2</a></small><br>⚡ colonnes proportionnelles ⇒ rang 1 ; \(\ker\) : plan \(x-y+2z=0\)</li><li id="td3-ex8-q3"><b>3)</b> semblable à la forme normale <small>→ <a href="#m-nilp">M9</a> <a href="#m-adaptee">M3</a></small><br>⚡ \(b_1=e_1\), \(b_2=f(b_1)\), \(b_3\in\ker f\) ⇒ \(\det Q=1\)</li></ul><p><small><a href="ch3-matrices-applications-lineaires.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+<div class="exo-card" id="td3-ex9"><div class="exo-head"><span>TD3 · Exercice 9 — Diagonalisation, \(A^n\) et suites récurrentes couplées</span></div><div class="exo-body"><p class="enonce">\(A=\begin{pmatrix}2&\frac23\\-\frac52&-\frac23\end{pmatrix}\), vecteurs \(e_1,e_2\) : base, matrice \(D\), \(A^n\), suites \((x_n),(y_n)\).</p><div class="note"><span class="lab">🔎 Analyse de la question</span>Exercice <b>complet</b> : changement de base ⇒ puissance de matrice ⇒ application à un système de suites.</div><div class="method"><span class="lab">🧭 Méthode générale</span><a href="#m-chgt"><b>M5</b></a> pour 1) (\(e_1,e_2\) propres) ; <a href="#m-puiss"><b>M7</b></a> pour 2) ; <a href="#m-suites"><b>M10</b></a> pour 3).</div><ul><li id="td3-ex9-q1"><b>1)</b> base et matrice dans cette base <small>→ <a href="#m-chgt">M5</a> <a href="#m-passage">M4</a></small><br>⚡ \(\det P=-4\) ; \(Ae_1=e_1\), \(Ae_2=\frac13e_2\) ⇒ \(D=\operatorname{diag}(1,\frac13)\)</li><li id="td3-ex9-q2"><b>2)</b> \(A^n\) <small>→ <a href="#m-puiss">M7</a></small><br>⚡ \(A^n=PD^nP^{-1}\) avec \(D^n=\operatorname{diag}(1,3^{-n})\) (valable dès \(n=0\))</li><li id="td3-ex9-q3"><b>3)</b> suites couplées <small>→ <a href="#m-suites">M10</a></small><br>⚡ \(X_0=ae_1+be_2\) ⇒ \(x_n=-2a-2b3^{-n}\), \(y_n=3a+5b3^{-n}\)</li></ul><p><small><a href="ch3-matrices-applications-lineaires.html#td">↗ Voir la correction détaillée dans le chapitre</a></small></p></div></div>
+  </section>
+</main>
+<script src="../assets/gate.js"></script>
+</body>
+</html>
