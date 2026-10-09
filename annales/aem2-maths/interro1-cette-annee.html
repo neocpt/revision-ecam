@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interro 1 cette année (équivalents, DL) — Révision ECAM</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
+  svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div class="topbar">
+  <a href="../index.html">← Annales</a>
+  <span class="spacer"></span>
+  <a href="#ex1">Ex 1 · Équivalents</a>
+  <a href="#ex2">Ex 2 · DL</a>
+  <a href="#bilan">Bilan</a>
+  <a href="#docs">Documents</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Annales · AM2 Maths · Interrogation n°1 (21/09/2026)</span>
+  <h1 class="title">Interrogation n°1 de cette année — corrigé complet</h1>
+  <p class="lead">Interrogation n°1 d'A&amp;M2 (lundi 21 septembre 2026) : <b>45 min, sur 20 points</b>, aucun document ni appareil électronique.
+  Deux exercices : <b>équivalents</b> (2 questions, 7,5 pts) et <b>développements limités</b> (4 questions, 12,5 pts).
+  Aucun corrigé officiel : tout est résolu ici et <b>vérifié par calcul formel</b>. <b>L'énoncé de chaque question (image) est juste au-dessus de sa correction.</b></p>
+
+  <div class="toc-mini">
+    <b>Sommaire</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#ex1">Exercice 1 — Équivalents (Q1 et Q2)</a></li>
+      <li><a href="#ex2">Exercice 2 — Développements limités (Q3 à Q6)</a></li>
+      <li><a href="#bilan">Bilan : réponses finales et pièges de l'interro</a></li>
+    </ul>
+  </div>
+
+  <div class="note"><span class="lab">À retenir avant de commencer</span>
+    DL usuels en 0 : \(e^u=1+u+\frac{u^2}{2}+\frac{u^3}{6}+o(u^3)\) ; \(\ln(1+u)=u-\frac{u^2}{2}+\frac{u^3}{3}+o(u^3)\) ;
+    \(\cos u=1-\frac{u^2}{2}+\frac{u^4}{24}+o(u^4)\) ; \(\sin u=u-\frac{u^3}{6}+o(u^4)\) ;
+    \(\frac{1}{1+u}=1-u+u^2-u^3+o(u^3)\) ; \((1+u)^\alpha=1+\alpha u+\frac{\alpha(\alpha-1)}{2}u^2+\frac{\alpha(\alpha-1)(\alpha-2)}{6}u^3+o(u^3)\).
+    <b>Point en \(a\neq0\)</b> : on pose \(X=x-a\) pour revenir en 0, on fait le DL <b>en \(X\)</b> (jamais en \(x\)), puis on remplace \(X\) par \(x-a\) à la toute fin.
+  </div>
+
+  <!-- ======================= EXERCICE 1 ======================= -->
+  <section class="block" id="ex1">
+    <h2>Exercice 1 — Équivalents · 7,5 pts</h2>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q1 — Convergence de \(U_n=\left(\dfrac{12+5n}{2+5n}\right)^n\) <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <figure><img src="enonces/j1.png" alt="Énoncé Q1"><figcaption>Énoncé de la question 1 (3 pts).</figcaption></figure>
+
+        <p><b>Forme indéterminée.</b> La base \(\dfrac{12+5n}{2+5n}\to1\) et l'exposant \(n\to+\infty\) : forme \(1^\infty\). On passe à l'exponentielle :
+        \[ U_n=\exp\big(n\ln(\text{base})\big). \]</p>
+        <p><b>Écrire la base comme \(1+\)(quelque chose qui tend vers 0).</b>
+        \[ \frac{12+5n}{2+5n}=\frac{(2+5n)+10}{2+5n}=1+\frac{10}{5n+2}. \]
+        Ici \(v_n=\dfrac{10}{5n+2}\to0\).</p>
+        <p><b>Équivalent du logarithme.</b> Comme \(v_n\to0\), \(\ln(1+v_n)\sim v_n\) (car \(\ln(1+v)\sim v\) quand \(v\to0\)).</p>
+        <p><b>Équivalent de l'exposant, puis sa limite.</b>
+        \[ n\ln\!\Big(1+\frac{10}{5n+2}\Big)\sim\frac{10n}{5n+2}\ \xrightarrow[n\to+\infty]{}\ \frac{10}{5}=2. \]
+        Un équivalent d'une suite qui a une limite finie \(\ell\) a la même limite : l'exposant tend vers \(2\).</p>
+        <p><b>Conclusion.</b> Par continuité de l'exponentielle :</p>
+        <div class="res">\(U_n\) converge et \[ \boxed{\lim_{n\to+\infty}U_n=e^{2}}. \]</div>
+        <p><b>Contrôle numérique.</b> \(n=10^6\) : \(U_n\approx7{,}38904\) et \(e^2\approx7{,}38906\). ✔</p>
+        <div class="warnbox"><span class="lab">Piège (le point où l'on perd tous les points)</span>
+          On ne peut <b>pas</b> écrire « \(\exp(a_n)\sim\exp(b_n)\) » dès que \(a_n\sim b_n\) : c'est faux en général (par exemple \(a_n=n+1\sim b_n=n\), mais \(e^{n+1}=e\cdot e^{n}\not\sim e^n\)).
+          On exploite l'équivalent <b>pour trouver la limite de l'exposant</b>, puis on applique \(\exp\) à cette limite. Écrire « \(U_n\sim e^{10n/(5n+2)}\sim e^2(1-\frac{4}{5n+2})\) » puis en déduire la limite par des manipulations d'équivalents sur l'exponentielle est donc <b>incorrect</b> : on s'arrête à « l'exposant tend vers 2 ».
+        </div>
+        <div class="note"><span class="lab">Pourquoi pas \(+\infty\) ?</span>
+          Le fait que \(\frac{10}{5n+2}\to0\) ne dit rien sur \(U_n\) : c'est le <b>produit</b> \(n\times\frac{10}{5n+2}\) (de type \(\infty\times0\)) qui compte, et il tend vers 2, pas vers \(+\infty\).
+        </div>
+        <p><b>Interprétation.</b> C'est la version « discrète » de \(\left(1+\frac{a}{n}\right)^n\to e^{a}\) : ici \(\frac{10}{5n+2}\approx\frac{2}{n}\), donc \(a=2\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q2 — \(\displaystyle\lim_{x\to-\pi/2}\dfrac{\ln\!\big(\frac{1}{\sin^2x}\big)}{\frac23\big(x+\frac\pi2\big)^2}\) <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <figure><img src="enonces/j2.png" alt="Énoncé Q2"><figcaption>Énoncé de la question 2 (4,5 pts).</figcaption></figure>
+
+        <p><b>Changement de variable.</b> On pose \(X=x+\dfrac\pi2\). Alors \(x\to-\dfrac\pi2\iff X\to0\), et \(\dfrac23\big(x+\frac\pi2\big)^2=\dfrac23X^2\).</p>
+        <p><b>Réécriture de \(\sin x\).</b> \(x=X-\dfrac\pi2\), donc
+        \[ \sin x=\sin\!\Big(X-\frac\pi2\Big)=-\cos X \qquad(\text{car }\sin(\theta-\tfrac\pi2)=-\cos\theta). \]
+        Donc \(\sin^2x=\cos^2X=1-\sin^2X\).</p>
+        <p><b>Numérateur.</b> \(\ln\!\Big(\dfrac1{\sin^2x}\Big)=-\ln(\sin^2x)=-\ln\big(1-\sin^2X\big)\).</p>
+        <p><b>Équivalents.</b> \(\sin^2X\to0\), donc \(\ln(1-\sin^2X)\sim-\sin^2X\) (c'est \(\ln(1+v)\sim v\) avec \(v=-\sin^2X\to0\)). Donc
+        \[ -\ln(1-\sin^2X)\sim\sin^2X\sim X^2, \]
+        car \(\sin X\sim X\) et un équivalent peut être élevé au carré.</p>
+        <p><b>Quotient.</b> Un quotient d'équivalents est un équivalent :
+        \[ \frac{-\ln(1-\sin^2X)}{\frac23X^2}\sim\frac{X^2}{\frac23X^2}=\frac32. \]</p>
+        <div class="res">\[ \boxed{\lim_{x\to-\pi/2}\frac{\ln\!\big(\frac1{\sin^2x}\big)}{\frac23\left(x+\frac\pi2\right)^2}=\frac32} \]</div>
+        <p><b>Contrôle (autre méthode).</b> \(\ln(\cos^2X)=2\ln(\cos X)\) et \(\cos X=1-\frac{X^2}{2}+o(X^2)\), donc \(\ln\cos X=-\frac{X^2}{2}+o(X^2)\). Le numérateur vaut \(-2\ln\cos X=X^2+o(X^2)\) : on retrouve \(\dfrac{X^2}{\frac23X^2}=\dfrac32\). ✔</p>
+        <div class="warnbox"><span class="lab">Pièges</span>
+          <ul>
+            <li><b>\(\sin\big(X-\frac\pi2\big)=-\cos X\)</b>, et non \(-\sin X\) ni « \(1-\sin X\) ». On vérifie toujours avec une valeur : en \(X=0\), \(\sin(-\frac\pi2)=-1=-\cos0\). ✔</li>
+            <li>Le \(\ln\) est appliqué à \(\sin^2x\) (donc au <b>carré</b>) : on ramène à \(\ln(1-\text{petit})\) grâce à \(\cos^2=1-\sin^2\), sinon \(\ln(\cos^2X)\) est de la forme \(\ln(1)\) sans équivalent direct.</li>
+            <li>On ne sait <b>pas</b> « additionner » des équivalents. Ici il n'y a que des produits/quotients/puissances, c'est licite.</li>
+            <li>Le signe : le numérateur \(-\ln(\sin^2x)\) est <b>positif</b> (car \(\sin^2x\le1\)), la limite ne peut donc pas être négative ni \(\pm\infty\) sans raison.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= EXERCICE 2 ======================= -->
+  <section class="block" id="ex2">
+    <h2>Exercice 2 — Développements limités · 12,5 pts</h2>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q3 — DL₂ en 0 de \(f(x)=\dfrac{-2x}{-4x^3+3x^2-2x}\) <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <figure><img src="enonces/j3.png" alt="Énoncé Q3"><figcaption>Énoncé de la question 3 (1,5 pt).</figcaption></figure>
+
+        <p><b>Étape 1 — Simplifier avant tout.</b> Pour \(x\neq0\), on divise numérateur et dénominateur par \(-2x\) :
+        \[ f(x)=\frac{1}{2x^2-\frac32x+1}=\frac{1}{1-\frac32x+2x^2}. \]
+        (Vérification : \(\frac{-4x^3}{-2x}=2x^2\), \(\frac{3x^2}{-2x}=-\frac32x\), \(\frac{-2x}{-2x}=1\).)</p>
+        <p><b>Étape 2 — Forme \(\dfrac1{1+u}\).</b> On pose \(u=-\dfrac32x+2x^2\to0\). Formule : \(\dfrac1{1+u}=1-u+u^2+o(u^2)\).</p>
+        <p><b>Étape 3 — Puissances de \(u\) à l'ordre 2.</b>
+        \[ u=-\frac32x+2x^2,\qquad u^2=\frac94x^2+o(x^2)\quad(\text{les termes en }x^3,x^4\text{ sont des }o(x^2)). \]</p>
+        <p><b>Étape 4 — Assemblage.</b>
+        \[ f(x)=1-\Big(-\frac32x+2x^2\Big)+\frac94x^2+o(x^2)=1+\frac32x+\Big(-2+\frac94\Big)x^2+o(x^2). \]
+        Or \(-2+\dfrac94=\dfrac{-8+9}{4}=\dfrac14\).</p>
+        <div class="res">\[ \boxed{f(x)=1+\frac32x+\frac14x^2+o(x^2)} \]</div>
+        <div class="warnbox"><span class="lab">Piège</span>
+          Ne pas garder les termes d'ordre &gt; 2 : écrire « \(-6x^3+4x^4\) » dans le calcul est inutile et il faut ensuite les <b>jeter</b> (ils sont dans le \(o(x^2)\)). On demande l'ordre 2 : on s'arrête à \(x^2\).
+          Autre piège : appliquer \(\frac1{1+u}\) <b>sans</b> avoir simplifié par \(-2x\) donnerait une forme \(\frac{0}{0}\) inexploitable.
+        </div>
+        <p><b>Contrôle numérique.</b> \(x=0{,}01\) : \(f=\dfrac1{1-0{,}015+0{,}0002}=\dfrac1{0{,}9852}\approx1{,}015022\) ; le DL donne \(1+0{,}015+0{,}000025=1{,}015025\) (écart en \(x^3\)). ✔</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q4 — DL₃ en 0 de \(\sqrt[4]{1-2x}\) <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <figure><img src="enonces/j4.png" alt="Énoncé Q4"><figcaption>Énoncé de la question 4 (2 pts).</figcaption></figure>
+
+        <p><b>Cadre.</b> \(\sqrt[4]{1-2x}=(1+u)^{1/4}\) avec \(u=-2x\to0\), donc \(\alpha=\dfrac14\).</p>
+        <p><b>Coefficients du binôme généralisé.</b></p>
+        \[ \binom{\alpha}{1}=\frac14,\qquad \frac{\alpha(\alpha-1)}{2}=\frac{\frac14\cdot\left(-\frac34\right)}{2}=-\frac{3}{32},\qquad \frac{\alpha(\alpha-1)(\alpha-2)}{6}=\frac{\frac14\cdot\left(-\frac34\right)\cdot\left(-\frac74\right)}{6}=\frac{21/64}{6}=\frac{7}{128}. \]
+        <p><b>Remplacement.</b> \(u=-2x\), \(u^2=4x^2\), \(u^3=-8x^3\) :
+        \[ (1-2x)^{1/4}=1+\frac14(-2x)-\frac3{32}(4x^2)+\frac7{128}(-8x^3)+o(x^3). \]
+        Terme par terme : \(\frac14\cdot(-2)=-\frac12\) ; \(-\frac{3}{32}\cdot4=-\frac38\) ; \(\frac{7}{128}\cdot(-8)=-\frac{7}{16}\).</p>
+        <div class="res">\[ \boxed{\sqrt[4]{1-2x}=1-\frac12x-\frac38x^2-\frac7{16}x^3+o(x^3)} \]</div>
+        <p><b>Contrôle numérique.</b> \(x=0{,}01\) : \(\sqrt[4]{0{,}98}\approx0{,}9949621\) ; le DL donne \(1-0{,}005-0{,}0000375-0{,}000000438\approx0{,}9949621\) (écart \(\sim10^{-8}\), de l'ordre de \(x^4\)). ✔</p>
+        <div class="warnbox"><span class="lab">Pièges</span>
+          <ul>
+            <li><b>Toujours simplifier les fractions finales</b> : \(\frac{21}{48}=\frac{7}{16}\) (on divise par 3 en haut et en bas), \(\frac24=\frac12\). Une réponse non simplifiée est sanctionnée.</li>
+            <li>Les signes : \(\alpha-1=-\frac34\) et \(\alpha-2=-\frac74\) sont <b>négatifs</b>, et \(u^3=(-2x)^3=-8x^3\) : trois signes « − » se compensent pour le terme en \(x^3\).</li>
+            <li>\(\sqrt[4]{\cdot}\) c'est la puissance \(\frac14\), pas \(\frac12\).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q5 — DL₃ en \(\frac\pi6\) de \(f(x)=\ln(2\sin x)\) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <figure><img src="enonces/j5.png" alt="Énoncé Q5"><figcaption>Énoncé de la question 5 (4,5 pts).</figcaption></figure>
+
+        <p><b>Étape 1 — Revenir en 0.</b> On pose \(X=x-\dfrac\pi6\), donc \(x=X+\dfrac\pi6\) et \(X\to0\). Le DL se fait <b>en \(X\)</b> :
+        \[ f(x)=\ln\!\Big(2\sin\!\big(X+\tfrac\pi6\big)\Big). \]</p>
+        <p><b>Étape 2 — Formule d'addition.</b>
+        \[ \sin\!\Big(X+\frac\pi6\Big)=\sin X\cos\frac\pi6+\cos X\sin\frac\pi6=\frac{\sqrt3}{2}\sin X+\frac12\cos X. \]
+        Donc \(2\sin\big(X+\frac\pi6\big)=\sqrt3\sin X+\cos X\).</p>
+        <p><b>Étape 3 — DL₃ de l'intérieur.</b> \(\sin X=X-\dfrac{X^3}{6}+o(X^3)\) et \(\cos X=1-\dfrac{X^2}{2}+o(X^3)\) :
+        \[ \sqrt3\sin X+\cos X=1+\sqrt3X-\frac{X^2}{2}-\frac{\sqrt3}{6}X^3+o(X^3). \]</p>
+        <p><b>Étape 4 — On pose \(u\) et on applique \(\ln(1+u)\).</b>
+        \[ u=\sqrt3X-\frac{X^2}{2}-\frac{\sqrt3}{6}X^3+o(X^3)\to0,\qquad \ln(1+u)=u-\frac{u^2}{2}+\frac{u^3}{3}+o(u^3). \]
+        Puissances de \(u\) (on garde jusqu'à \(X^3\)) :
+        \[ u^2=\big(\sqrt3X\big)^2+2\cdot\sqrt3X\cdot\Big(-\frac{X^2}{2}\Big)+o(X^3)=3X^2-\sqrt3X^3+o(X^3), \]
+        \[ u^3=\big(\sqrt3X\big)^3+o(X^3)=3\sqrt3X^3+o(X^3). \]</p>
+        <p><b>Étape 5 — Assemblage.</b>
+        \[ \ln(1+u)=\Big(\sqrt3X-\frac{X^2}{2}-\frac{\sqrt3}{6}X^3\Big)-\frac12\big(3X^2-\sqrt3X^3\big)+\frac13\big(3\sqrt3X^3\big)+o(X^3). \]
+        Regroupement par puissance :</p>
+        <ul>
+          <li>\(X\) : \(\sqrt3\) ;</li>
+          <li>\(X^2\) : \(-\dfrac12-\dfrac32=-2\) ;</li>
+          <li>\(X^3\) : \(-\dfrac{\sqrt3}{6}+\dfrac{\sqrt3}{2}+\sqrt3=\sqrt3\Big(-\dfrac16+\dfrac36+\dfrac66\Big)=\dfrac{8\sqrt3}{6}=\dfrac{4\sqrt3}{3}\).</li>
+        </ul>
+        <div class="res">\[ \boxed{\ln(2\sin x)=\sqrt3\Big(x-\frac\pi6\Big)-2\Big(x-\frac\pi6\Big)^2+\frac{4\sqrt3}{3}\Big(x-\frac\pi6\Big)^3+o\Big(\big(x-\tfrac\pi6\big)^3\Big)} \]</div>
+        <p><b>Contrôle.</b> Le terme constant est \(\ln(2\sin\frac\pi6)=\ln1=0\) ✔ (le DL commence bien à l'ordre 1). Le terme en \(X\) est \(f'(\frac\pi6)=\cot\frac\pi6=\sqrt3\) ✔ (car \(f'(x)=\frac{\cos x}{\sin x}\)). Le terme en \(X^2\) est \(\frac{f''}{2}\) avec \(f''=-\frac{1}{\sin^2x}=-4\) en \(\frac\pi6\) : \(\frac{-4}{2}=-2\) ✔.</p>
+        <div class="warnbox"><span class="lab">Pièges</span>
+          <ul>
+            <li><b>Le DL se fait en \(X\)</b>, pas en \(x\) : écrire « \(\sqrt3x-\frac{x^2}{2}\ldots\) » (avec \(x\) au lieu de \(X\)) est faux, car \(x\) ne tend pas vers 0. À la fin, on écrit \(X=x-\frac\pi6\).</li>
+            <li>Dans \(u^2\), il faut le <b>double produit</b> \(2\cdot\sqrt3X\cdot(-\frac{X^2}{2})=-\sqrt3X^3\) : il contribue à l'ordre 3. L'oublier fausse le coefficient de \(X^3\).</li>
+            <li>Ne pas oublier \(\frac{u^3}{3}\) : \(u^3\) commence en \(X^3\) donc il compte à l'ordre 3.</li>
+            <li>Le DL d'ordre 3 doit contenir <b>tous</b> les termes jusqu'à \(X^3\) (donc 3 coefficients non nuls ici) ; un résultat s'arrêtant à \(X^2\) est incomplet.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">✏️ Q6 — \(\displaystyle\lim_{x\to0}\dfrac{x-\arcsin x}{x^2\arcsin x}\) par DL <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <figure><img src="enonces/j6.png" alt="Énoncé Q6"><figcaption>Énoncé de la question 6 (4,5 pts).</figcaption></figure>
+
+        <p><b>Étape 1 — DL de \(\arcsin\) à l'ordre 3.</b> \(\arcsin'(x)=\dfrac1{\sqrt{1-x^2}}=(1-x^2)^{-1/2}\). Avec \(u=-x^2\) et \(\alpha=-\dfrac12\) :
+        \[ (1+u)^{-1/2}=1-\frac12u+o(u)\ \Longrightarrow\ \arcsin'(x)=1+\frac{x^2}{2}+o(x^2). \]
+        On <b>intègre</b> le DL (autorisé), avec \(\arcsin0=0\) :
+        \[ \arcsin x=x+\frac{x^3}{6}+o(x^3). \]</p>
+        <p><b>Étape 2 — Numérateur.</b>
+        \[ x-\arcsin x=-\frac{x^3}{6}+o(x^3)\ \sim\ -\frac{x^3}{6}. \]</p>
+        <p><b>Étape 3 — Dénominateur.</b> \(\arcsin x\sim x\), donc \(x^2\arcsin x\sim x^3\).</p>
+        <p><b>Étape 4 — Quotient.</b>
+        \[ \frac{x-\arcsin x}{x^2\arcsin x}\sim\frac{-\frac{x^3}{6}}{x^3}=-\frac16. \]</p>
+        <div class="res">\[ \boxed{\lim_{x\to0}\frac{x-\arcsin x}{x^2\arcsin x}=-\frac16} \]</div>
+        <p><b>Contrôle.</b> Avec le DL à l'ordre 5, \(\arcsin x=x+\frac{x^3}6+\frac{3x^5}{40}+o(x^5)\) : numérateur \(-\frac{x^3}{6}-\frac{3x^5}{40}\), dénominateur \(x^3+\frac{x^5}{6}\), le quotient vaut \(-\frac16+O(x^2)\to-\frac16\). ✔</p>
+        <div class="warnbox"><span class="lab">Pièges</span>
+          <ul>
+            <li><b>Choix de l'ordre.</b> Le dénominateur est en \(x^3\) : il faut un numérateur au moins à l'ordre 3 pour avoir un terme non nul. Un DL à l'ordre 1 (\(\arcsin x=x+o(x)\)) donnerait \(x-\arcsin x=o(x)\) : <b>inexploitable</b> (forme \(\frac00\)).</li>
+            <li>Ne pas remplacer \(\arcsin x\) par \(x\) <b>dans le numérateur</b> d'une différence : \(x-\arcsin x\sim0\) n'a aucun sens. On n'utilise l'équivalent \(\arcsin x\sim x\) que dans les <b>produits/quotients</b> (ici au dénominateur).</li>
+            <li>La dérivée de \(\arcsin\) est \(\dfrac1{\sqrt{1-x^2}}\) (et non \(\frac1{1-x^2}\)) : d'où \(\alpha=-\frac12\). On arrête le développement de \((1+u)^{-1/2}\) à l'ordre 1 car on intègre ensuite (l'intégration monte l'ordre de 1).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= BILAN ======================= -->
+  <section class="block" id="bilan">
+    <h2>Bilan — réponses finales</h2>
+    <div class="overflow">
+    <table>
+      <tr><th>Question</th><th>Barème</th><th>Réponse</th></tr>
+      <tr><td>Q1 \(\left(\frac{12+5n}{2+5n}\right)^n\)</td><td>3</td><td>converge vers \(e^{2}\)</td></tr>
+      <tr><td>Q2 limite en \(-\pi/2\)</td><td>4,5</td><td>\(\dfrac32\)</td></tr>
+      <tr><td>Q3 DL₂ \(\frac{-2x}{-4x^3+3x^2-2x}\)</td><td>1,5</td><td>\(1+\frac32x+\frac14x^2+o(x^2)\)</td></tr>
+      <tr><td>Q4 DL₃ \(\sqrt[4]{1-2x}\)</td><td>2</td><td>\(1-\frac12x-\frac38x^2-\frac7{16}x^3+o(x^3)\)</td></tr>
+      <tr><td>Q5 DL₃ \(\ln(2\sin x)\) en \(\frac\pi6\)</td><td>4,5</td><td>\(\sqrt3X-2X^2+\frac{4\sqrt3}{3}X^3+o(X^3)\), \(X=x-\frac\pi6\)</td></tr>
+      <tr><td>Q6 \(\frac{x-\arcsin x}{x^2\arcsin x}\)</td><td>4,5</td><td>\(-\dfrac16\)</td></tr>
+    </table>
+    </div>
+    <div class="method"><span class="lab">Réflexes à retenir</span>
+      <ul>
+        <li><b>Forme \(1^\infty\)</b> : passer par \(\exp(n\ln(\dots))\), écrire la base \(1+v\), utiliser \(\ln(1+v)\sim v\), calculer la <b>limite de l'exposant</b>, jamais d'équivalent « dans » l'exponentielle.</li>
+        <li><b>Limite avec \(\ln\) en un point \(a\neq0\)</b> : poser \(X=x-a\), réécrire par les formules trigonométriques (\(\sin(X-\frac\pi2)=-\cos X\)), se ramener à \(\ln(1+v)\) avec \(v\to0\).</li>
+        <li><b>Fraction rationnelle</b> : simplifier d'abord (ici par \(-2x\)), puis \(\frac1{1+u}=1-u+u^2\).</li>
+        <li><b>Racine / puissance</b> : binôme généralisé \((1+u)^\alpha\), signes des \(\alpha-k\), <b>simplifier</b> les fractions finales.</li>
+        <li><b>DL en \(a\neq0\)</b> : DL <b>en \(X=x-a\)</b>, tous les termes jusqu'à l'ordre demandé, double produit dans \(u^2\), \(u^3\) à garder.</li>
+        <li><b>Limite d'un quotient par DL</b> : choisir l'ordre pour que le premier terme non nul apparaisse (dénominateur en \(x^3\) ⇒ numérateur à l'ordre 3) ; \(\arcsin x=x+\frac{x^3}6+o(x^3)\).</li>
+        <li><b>Rédaction</b> : chaque étape justifiée (« \(u\to0\) donc… »), résultat final encadré et simplifié.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================= DOCUMENTS ======================= -->
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Sujet de l'interro tel qu'il figure sur le scan reçu (énoncés nettoyés).</p>
+    <div class="docs-group">
+      <h3>Interro n°1 — 21/09/2026</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="documents/Interro1_2026_sujet_extraits.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Énoncés de l'interro 1 (6 questions)</span><span class="badge">Sujet</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">La copie scannée annotée reste en local et n'est pas publiée : les énoncés ci-dessus sont reconstitués à partir de découpes nettoyées.</p>
+  </section>
+</main>
+<script src="../../assets/gate.js"></script>
+</body>
+</html>
