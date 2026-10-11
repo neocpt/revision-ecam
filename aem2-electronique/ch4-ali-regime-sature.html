@@ -19,6 +19,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
   <a href="#memo">📌 Fiche mémo</a>
   <a href="#cours">Cours</a>
   <a href="#exos">Exercices créés</a>
+  <a href="#activite">Activité (stabilité)</a>
   <a href="#docs">Documents donnés</a>
 </div>
 
@@ -37,6 +38,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
       <li><a href="#memo">📌 Fiche mémo</a></li>
       <li><a href="#cours">1. Résumé de cours — comparateurs, triggers de Schmitt, stabilité</a></li>
       <li><a href="#exos">2. Exercices créés (à partir du TP4) avec corrections</a></li>
+      <li><a href="#activite">3. Activité du Ch4 — stabilité des montages avec ALI (corrigée)</a></li>
       <li><a href="#docs">📂 Documents donnés</a></li>
     </ul>
   </div>
@@ -654,6 +656,198 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     </div>
   </section>
 
+  <section class="block" id="activite">
+    <h2>3. Activité du Ch4 — Stabilité des montages avec ALI (corrigé intégral)</h2>
+    <p>Activité du 01/10/2026 (D. Courtois, AEM2 P2030 S3). Objectif : déterminer la stabilité d'un montage à ALI
+    avec trois outils : (1) le modèle de gain dynamique \(\underline{A_d}\) quand il y a de la rétroaction sur
+    <b>les deux</b> entrées, (2) le modèle de gain infini, (3) un gain constant \(G\).</p>
+
+    <div class="method"><span class="lab">Méthode (Ch4 §2) — critère de stabilité</span>
+    <ol>
+      <li>Modèle \(\underline{A_d}=\dfrac{\mu_0}{1+j\omega\tau}\) (\(\mu_0\approx2\times10^5\), \(\tau>0\)), ALI supposé en
+      <b>régime linéaire</b> : \(\underline s=\underline{A_d}\,\underline\varepsilon\) avec \(\underline\varepsilon\neq0\).</li>
+      <li>Exprimer \(v_+\) et \(v_-\) en fonction de \(\underline e\) et \(\underline s\) (diviseur de tension, ou
+      Millman/superposition), puis \(\underline\varepsilon=v_+-v_-\).</li>
+      <li>Injecter dans \(\underline s(1+j\omega\tau)=\mu_0\underline\varepsilon\) et mettre sous la forme
+      \(\underline H=\dfrac{N}{a_0+a_1\,j\omega}\) (dénominateur de degré 1).</li>
+      <li><b>Stable ssi \(a_0\) et \(a_1\) sont de même signe</b> (équation différentielle
+      \(a_1\dot s+a_0 s=\dots\) : solution homogène \(e^{-a_0t/a_1}\), qui décroît ssi \(a_0/a_1>0\)). Sinon
+      instable : l'ALI sort du régime linéaire et <b>sature</b>.</li>
+    </ol></div>
+
+    <!-- ===== EXERCICE 1 ===== -->
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice 1 — Montage avec rétroaction sur (+) et (−) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <figure class="enonce-img"><img src="td4-img/ex1.jpg" alt="Énoncé activité Ch4, exercice 1" style="max-width:100%"><figcaption>Énoncé (scan)</figcaption></figure>
+
+        <p class="q">Question 1.1 — Modèle, régime et relation entre \(\underline s\) et \(\underline\varepsilon\)</p>
+        <p>Comme \(\varepsilon\neq0\) ici, on ne peut pas utiliser le modèle de gain infini. On choisit le modèle de
+        gain différentiel <b>dynamique</b> (passe-bas du premier ordre) :</p>
+        \[ \underline{A_d}(j\omega)=\frac{\mu_0}{1+j\omega\tau} \]
+        <p>On <b>suppose le régime linéaire</b> (c'est la seule situation où \(\underline{A_d}\) a un sens), d'où :</p>
+        <div class="res">\(\underline s=\underline{A_d}\,\underline\varepsilon=\dfrac{\mu_0}{1+j\omega\tau}\,\underline\varepsilon
+        \iff \underline s\,(1+j\omega\tau)=\mu_0\,\underline\varepsilon\)</div>
+
+        <p class="q">Question 1.2 — Étapes pour exprimer \(\underline\varepsilon\) en fonction de \(\underline e\) et \(\underline s\)</p>
+        <ol>
+          <li>Définition : \(\underline\varepsilon=\underline v_+-\underline v_-\).</li>
+          <li>Calculer \(\underline v_+\) en fonction de \(\underline e\) et \(\underline s\) (deux résistances sur la
+          borne (+), courant d'entrée de l'ALI nul : théorème de Millman ou superposition).</li>
+          <li>Calculer \(\underline v_-\) en fonction de \(\underline s\) (diviseur de tension sur la borne (−), car
+          l'entrée \(e\) n'y est pas reliée).</li>
+          <li>Faire la différence.</li>
+        </ol>
+
+        <p class="q">Question 1.3 — Comment conclure sur la stabilité ?</p>
+        <p>On remplace \(\underline\varepsilon\) dans \(\underline s(1+j\omega\tau)=\mu_0\underline\varepsilon\), on isole
+        \(\underline s\) et on obtient \(\underline H=\underline s/\underline e\) avec un dénominateur du premier ordre
+        \(a_0+a_1j\omega\). Le système est <b>stable ssi \(a_0\) et \(a_1\) sont de même signe</b> (voir encart ci-dessus).</p>
+
+        <p class="q">Question 2 — Application au montage</p>
+        <p><b>Cadre.</b> Résistances : \(R\) entre \(e\) et (+) ; \(R\) entre \(s\) et (+) ; \(R\) entre (−) et la masse ;
+        \(kR\) entre \(s\) et (−). Courants d'entrée de l'ALI nuls. On note \(k>0\).</p>
+        <p><b>Tension \(v_+\)</b> (Millman, ou deux résistances égales entre \(e\) et \(s\)) :</p>
+        \[ \underline v_+=\frac{\dfrac{\underline e}{R}+\dfrac{\underline s}{R}}{\dfrac1R+\dfrac1R}=\frac{\underline e+\underline s}{2} \]
+        <p><b>Tension \(v_-\)</b> (diviseur entre \(kR\) côté \(s\) et \(R\) côté masse) :</p>
+        \[ \underline v_-=\underline s\,\frac{R}{R+kR}=\frac{\underline s}{1+k} \]
+        <p><b>Erreur de l'ALI :</b></p>
+        \[ \underline\varepsilon=\underline v_+-\underline v_-=\frac{\underline e}{2}+\underline s\Big(\frac12-\frac1{1+k}\Big)
+        =\frac{\underline e}{2}+\underline s\,\frac{k-1}{2(k+1)} \]
+        <p><b>Unification</b> avec \(\underline s(1+j\omega\tau)=\mu_0\underline\varepsilon\) :</p>
+        \[ \underline s\,(1+j\omega\tau)=\frac{\mu_0}{2}\underline e+\mu_0\frac{k-1}{2(k+1)}\,\underline s
+        \ \Longrightarrow\ \underline s\Big(1-\mu_0\frac{k-1}{2(k+1)}+j\omega\tau\Big)=\frac{\mu_0}{2}\underline e \]
+        \[ \boxed{\ \underline H=\frac{\underline s}{\underline e}=\frac{\mu_0/2}{\,1-\mu_0\dfrac{k-1}{2(k+1)}+j\omega\tau\,}\ } \]
+        <p>Ici \(a_1=\tau>0\) toujours. La stabilité est donc équivalente à \(a_0>0\) :</p>
+        \[ 1-\mu_0\frac{k-1}{2(k+1)}>0\iff 2(k+1)>\mu_0(k-1)\iff k(\mu_0-2)<\mu_0+2
+        \iff k<\frac{\mu_0+2}{\mu_0-2}\simeq1+\frac{4}{\mu_0} \]
+        <p><b>Application numérique</b> (\(\mu_0=2\times10^5\)) : \(\dfrac{\mu_0+2}{\mu_0-2}=1{,}00002\).</p>
+        <div class="res"><b>Stable si \(k<1+4/\mu_0\simeq1{,}00002\)</b>, c'est-à-dire en pratique <b>si \(k\le1\)</b> ;
+        <b>instable dès que \(k>1\)</b> (à \(2\times10^{-5}\) près) : l'ALI sature alors. Le cas \(k=1\) est la limite
+        (montage « symétrique », \(\beta_+=\beta_-\)).</div>
+        <div class="note"><span class="lab">Interprétation</span> Les taux de réinjection valent
+        \(\beta_+=\dfrac12\) (sur (+)) et \(\beta_-=\dfrac1{1+k}\) (sur (−)). La rétroaction <b>négative</b> l'emporte
+        (stabilité) si \(\beta_->\beta_+\iff k<1\) ; la <b>positive</b> l'emporte (instabilité) si \(k>1\). Le critère
+        est exactement la comparaison des deux boucles.</div>
+        <div class="note"><span class="lab">Vérification</span> Pour \(k<1\) et \(\mu_0\to\infty\) :
+        \(\underline H\to\dfrac{\mu_0/2}{-\mu_0\frac{k-1}{2(k+1)}}=\dfrac{1+k}{1-k}\). Le modèle de gain infini
+        (\(v_+=v_-\)) donne \((e+s)(1+k)=2s\), soit \(s/e=\dfrac{1+k}{1-k}\) : identique ✓. Pour \(k>1\) ce résultat
+        serait <b>négatif</b> (\(H<0\) pour \(k>1\)) mais n'a pas de sens puisque le montage est instable.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Ne pas poser \(\varepsilon=0\) dès le départ : on perdrait
+        justement le terme \(\mu_0\) qui décide du signe de \(a_0\). Et on n'applique la règle « rétroaction
+        sur (−) ⟹ linéaire » que si la boucle sur (−) est <b>seule</b> : ici les deux boucles coexistent, d'où l'étude.</div>
+      </div>
+    </div>
+
+    <!-- ===== EXERCICE 2 ===== -->
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice 2 — Modèle de gain infini <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <figure class="enonce-img"><img src="td4-img/ex2.jpg" alt="Énoncé activité Ch4, exercice 2" style="max-width:100%"><figcaption>Énoncé (scan)</figcaption></figure>
+
+        <p class="q">Question 1 — Conditions de stabilité</p>
+        <p><b>Cadre.</b> \(v_e\) alimente \(R\) vers (−) ; un condensateur \(C\) relie (−) à la sortie \(s\) ; sur (+) un
+        pont de deux résistances \(R\) (une vers la masse, une vers \(s\)). Courants d'entrée nuls. On note
+        \(\theta=RC\). Avec le modèle de gain infini, <b>en régime linéaire</b> : \(\varepsilon=0\), soit \(v_+=v_-\).</p>
+        <p><b>Tension \(v_+\)</b> (diviseur de deux \(R\) égales) : \(v_+=\dfrac{v_s}{2}\), donc \(v_-=\dfrac{v_s}{2}\).</p>
+        <p><b>Loi des nœuds en (−)</b> (courant d'entrée nul : le courant dans \(R\) traverse \(C\)) :</p>
+        \[ \frac{v_e-v_-}{R}=C\,\frac{d(v_--v_s)}{dt}
+        \ \Longrightarrow\ \frac{v_e-\frac{v_s}{2}}{R}=C\,\frac{d}{dt}\Big(\frac{v_s}{2}-v_s\Big)=-\frac{C}{2}\frac{dv_s}{dt} \]
+        <p>On multiplie par \(2R\) :</p>
+        \[ 2v_e-v_s=-RC\,\frac{dv_s}{dt}\ \Longrightarrow\ \boxed{\ RC\,\frac{dv_s}{dt}-v_s=-2v_e\ } \]
+        <p>En complexes : \(v_s(j\omega RC-1)=-2v_e\), soit \(\underline H=\dfrac{2}{1-j\omega RC}\). Dénominateur
+        \(a_0+a_1j\omega\) avec \(a_0=1>0\) et \(a_1=-RC<0\) : <b>signes opposés</b>.</p>
+        <p>Solution homogène : \(v_s=A\,e^{t/RC}\), qui <b>diverge</b> (exposant positif).</p>
+        <div class="res">Le système est <b>instable pour toutes les valeurs</b> \(R>0\), \(C>0\). Il n'existe aucune
+        condition de stabilité (il faudrait \(RC<0\), impossible). L'ALI sature : \(v_s\to\pm V_{sat}\).</div>
+        <div class="note"><span class="lab">Interprétation</span> Aux basses fréquences, \(C\) est un circuit ouvert :
+        la boucle sur (−) disparaît et il ne reste que la rétroaction sur (+) (\(\beta_+=\frac12\)), qui domine :
+        c'est la règle « rétroaction sur (+) ⟹ saturé ». Le pôle instable est en \(p=+\dfrac1{RC}\) (partie réelle
+        positive), et la sortie croît comme \(e^{t/RC}\) jusqu'à \(\pm V_{sat}\).</div>
+
+        <svg viewBox="0 0 420 190" width="420" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif" font-size="11" style="max-width:100%;color:inherit">
+          <line x1="40" y1="160" x2="400" y2="160" stroke="currentColor"/><line x1="40" y1="160" x2="40" y2="10" stroke="currentColor"/>
+          <text x="392" y="176" fill="currentColor">t</text><text x="46" y="16" fill="currentColor">v_s</text>
+          <line x1="40" y1="40" x2="400" y2="40" stroke="currentColor" stroke-dasharray="5 4" opacity=".6"/><text x="46" y="35" fill="currentColor">+V_sat</text>
+          <path d="M40,150 C150,148 200,140 240,100 C265,70 280,45 300,40 L395,40" fill="none" stroke="#dc2626" stroke-width="2.2"/>
+          <text x="310" y="32" fill="#dc2626">instable : e^{t/RC} puis saturation</text>
+          <path d="M40,150 C100,120 160,110 395,108" fill="none" stroke="#0d9488" stroke-width="2.2"/>
+          <text x="250" y="124" fill="#0d9488">stable : e^{-t/τ} → valeur finie</text>
+        </svg>
+
+        <p class="q">Question 2 — Pourquoi se passer du modèle de gain dynamique ?</p>
+        <p>Si on garde \(\underline{A_d}\) (avec \(\varepsilon\neq0\)) :</p>
+        \[ \underline\varepsilon=\frac{\underline s}{2}-\frac{\underline e+j\omega\theta\,\underline s}{1+j\omega\theta}
+        =\frac{\underline s\,(1-j\omega\theta)/2-\underline e}{1+j\omega\theta} \]
+        <p>(\(v_-\) : diviseur entre \(R\) et \(C\), \(v_-=\dfrac{e+j\omega\theta\,s}{1+j\omega\theta}\)). Avec
+        \(\underline s(1+j\omega\tau)=\mu_0\underline\varepsilon\), le dénominateur de \(\underline H\) devient, en posant
+        \(p=j\omega\) :</p>
+        \[ \tau\theta\,p^2+\Big(\tau+\theta+\frac{\mu_0\theta}{2}\Big)p+\Big(1-\frac{\mu_0}{2}\Big) \]
+        <p>Le terme constant est négatif (\(\mu_0\gg2\)), les autres positifs : <b>il y a changement de signe</b>, donc
+        au moins un pôle à partie réelle positive. Les racines valent approximativement \(p\simeq+\dfrac1{RC}\)
+        (instable, <b>lent</b>) et \(p\simeq-\dfrac{\mu_0}{2\tau}\) (stable, très rapide, hors bande utile).</p>
+        <div class="res">On a pu se passer du modèle dynamique car l'instabilité est portée par le pôle
+        <b>lent</b> \(p=1/RC\), très inférieur à la bande passante de l'ALI (\(\omega_0=1/\tau\)) : à cette échelle de
+        temps, l'ALI se comporte comme un gain quasi infini. La dynamique de l'ALI n'ajoute qu'un pôle rapide
+        <b>stable</b> qui ne peut pas corriger le signe : le modèle de gain infini suffit pour conclure à
+        l'instabilité.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Le modèle de gain infini donne une conclusion fiable
+        <b>seulement</b> quand l'instabilité est détectée (signes opposés). Pour conclure à la <b>stabilité</b>
+        d'un montage, il faut au contraire le modèle dynamique (un pôle rapide peut déstabiliser).</div>
+      </div>
+    </div>
+
+    <!-- ===== EXERCICE 3 ===== -->
+    <div class="exo-card">
+      <div class="exo-head">✏️ Exercice 3 — Gain constant \(G\) <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <figure class="enonce-img"><img src="td4-img/ex3.jpg" alt="Énoncé activité Ch4, exercice 3" style="max-width:100%"><figcaption>Énoncé (scan)</figcaption></figure>
+
+        <p><b>Lecture du schéma.</b> \(e(t)\) attaque le condensateur \(C\) ; le nœud suivant a la tension \(v'(t)\) par
+        rapport à la masse. L'amplificateur idéal (en pointillé) a une <b>entrée</b> \(v'\) sans courant d'entrée
+        et une <b>sortie</b> \(s=G\,v'\) (source de tension commandée de gain constant \(G\)) ; \(R\) relie le nœud
+        \(v'\) à la sortie. Le même courant \(i(t)\) traverse \(C\) puis \(R\). L'entrée \(v'\) est donc la borne
+        <b>(+)</b> d'un ALI dont la sortie est rebouclée sur (+) par \(R\) : rétroaction positive.</p>
+
+        <p class="q">Question 1 — Fonction de transfert et équation différentielle</p>
+        <p><b>Lois utilisées.</b> Condensateur : \(i=C\dfrac{d(e-v')}{dt}\). Résistance : \(i=\dfrac{v'-s}{R}\) (\(i\) va de
+        \(v'\) vers \(s\), flèche du schéma). Amplificateur : \(s=G\,v'\).</p>
+        <p>Égalité des deux expressions de \(i\), avec \(s=Gv'\) :</p>
+        \[ C\frac{de}{dt}-C\frac{dv'}{dt}=\frac{v'(1-G)}{R} \ \Longrightarrow\
+        RC\frac{dv'}{dt}+(1-G)\,v'=RC\frac{de}{dt} \]
+        <p>On multiplie par \(G\) (\(s=Gv'\)) :</p>
+        \[ \boxed{\ RC\,\frac{ds}{dt}+(1-G)\,s=G\,RC\,\frac{de}{dt}\ } \]
+        <p>En complexes (\(\dfrac{d}{dt}\to j\omega\)) :</p>
+        \[ \boxed{\ \underline H=\frac{\underline s}{\underline e}=\frac{G\,j\omega RC}{(1-G)+j\omega RC}\ } \]
+        <p>Forme canonique (\(G<1\)) : avec \(\omega_c=\dfrac{1-G}{RC}\), \(\underline H=G\,\dfrac{j\omega/\omega_c}{1+j\omega/\omega_c}\) :
+filtre <b>passe-haut du premier ordre</b>, de gain haute fréquence \(G\) et de pulsation de coupure \(\omega_c\).</p>
+        <p><b>Vérification dimensionnelle.</b> \(RC\) est un temps (s) ; \(G\) est sans unité ; les trois termes de
+        l'équation sont des tensions ✓. Cas \(G=0\) : \(s=0\), donc \(H=0\) ✓ (formule : numérateur nul).</p>
+
+        <p class="q">Question 2 — Stabilité en fonction de \(G\)</p>
+        <p>Dénominateur : \(a_0=1-G\), \(a_1=RC>0\). Stable ssi \(a_0\) et \(a_1\) de même signe, soit
+        \(1-G>0\) (solution homogène \(s=A\,e^{-(1-G)t/RC}\)).</p>
+        <div class="res"><b>Stable ssi \(G<1\)</b> ; instable si \(G>1\) (\(s\propto e^{(G-1)t/RC}\) diverge) ;
+        \(G=1\) : cas limite (pôle nul, régime marginal).</div>
+        <p><b>Discussion avec le comportement des ALI.</b></p>
+        <ul>
+          <li>La boucle ci-dessus est <b>positive</b> (retour de \(s\) sur l'entrée « + » de l'amplificateur de
+          gain \(G\)). Plus \(G\) est grand, plus la réinjection est forte : au-delà de \(G=1\), le gain de boucle
+          dépasse l'unité et le système diverge.</li>
+          <li>Un <b>vrai ALI</b> a \(\mu_0\approx2\times10^5\gg1\) : le critère \(G<1\) n'est jamais satisfait. On
+          retrouve le résultat du cours : <b>une rétroaction sur (+) rend le montage instable</b> ⟹ régime saturé
+          (comparateur à hystérésis, Ex. 2 de ce chapitre).</li>
+          <li>Si la boucle était sur l'entrée inverseuse (\(s=-Gv'\)), l'équation deviendrait
+          \(RC\,\dot s+(1+G)s=-G\,RC\,\dot e\) : \(a_0=1+G>0\), <b>stable pour tout \(G>0\)</b>. C'est la rétroaction
+          négative : régime linéaire.</li>
+        </ul>
+        <div class="warnbox"><span class="lab">Hypothèse de lecture</span> ⚠️ Le symbole « cercle + flèche »
+        de l'amplificateur est interprété comme une source de tension commandée \(s=G\,v'\) (\(G\) sans unité, « gain
+        constant », cohérent avec l'énoncé).</div>
+      </div>
+    </div>
+  </section>
+
   <section class="block" id="docs">
     <h2>📂 Documents donnés</h2>
     <p class="docs-intro">Fichiers originaux du cours et du TP, déjà présents dans ce dossier. Cliquez pour
@@ -668,6 +862,12 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
       <h3>TP</h3>
       <ul class="doc-list">
         <li><a class="doc-item" href="TP4.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TP4 — Quelques comparateurs</span><span class="badge">TP</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <div class="docs-group">
+      <h3>Activité</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="Ch4_Activite_stabilite_scan.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Activité du Ch4 — Stabilité des montages avec ALI (01/10/2026)</span><span class="badge">TD</span><span class="arrow">↗</span></a></li>
       </ul>
     </div>
     <p class="docs-note">Cursus AM2 · P2030 · Semestre 3 · Partie Électronique, D. Courtois, Cours4 du
