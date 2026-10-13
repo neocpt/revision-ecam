@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C13 — Actions internes de structures fermées — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-sii">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#app">Applications du cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SII · C13 — Actions internes de structures fermées</span>
+  <h1 class="title">C13 — Déterminer les actions internes de structures fermées en équilibre</h1>
+  <p class="lead">Utiliser le <b>principe fondamental de la statique</b> pour obtenir la <b>loi entrée-sortie en effort</b> d'un transmetteur en chaîne fermée : torseur des actions transmissibles des liaisons parfaites,
+  actions usuelles (ressort, amortisseur, pression, contact), problème plan, <b>ensembles soumis à 2 forces</b>, bielles et vérins, structures « pieuvre » et <b>stratégie d'isolement</b>.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#memo">📌 Fiche mémo</a></li>
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#app">2. Applications du cours corrigées (vérin A1–A2, bielle-manivelle A3)</a></li>
+      <li><a href="#exos">3. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#docs">📂 Documents donnés (CM)</a></li>
+    </ul>
+  </div>
+
+  <section class="memo-sheet" id="memo">
+    <div class="memo-head">📌 Fiche mémo — C13 Actions internes de structures fermées</div>
+    <div class="memo-grid">
+      <div class="memo-item"><b>Torseur d'actions transmissibles</b>\(\{\mathcal T_{1\to2}\}=\{\vec R_{1\to2};\vec M_{A,1\to2}\}\) : 6 paramètres, 6 actions élémentaires (3 forces + 3 couples)</div>
+      <div class="memo-item"><b>Liaison parfaite</b>1 DDL ⟹ 1 composante <b>nulle</b> ; 1 blocage ⟹ 1 paramètre statique ; \(n_{DDL}+n_{blocages}=6\)</div>
+      <div class="memo-item"><b>Liaison à 3 rotations libres</b>(sphérique en 3D, pivot en plan) : l'action est <b>une force</b> (\(\vec M=\vec0\) au centre)</div>
+      <div class="memo-item"><b>Hélicoïdale</b>\(\vec M\cdot\vec y=\mp\dfrac p{2\pi}\vec R\cdot\vec y\) (« − » pas à droite, « + » pas à gauche)</div>
+      <div class="memo-item"><b>Ressort</b>\(\vec F_{1\to2}=-k(L-L_0)\vec u\) ; <b>amortisseur</b> \(\vec F_{1\to2}=-\lambda\dot L\vec u\)</div>
+      <div class="memo-item"><b>Ressorts</b>parallèle : \(k=k_1+k_2\) ; série : \(\tfrac1k=\tfrac1{k_1}+\tfrac1{k_2}\) (les souplesses s'ajoutent)</div>
+      <div class="memo-item"><b>Pression uniforme</b>sur une surface plane \(S\), normale sortante \(\vec n\) : \(\vec F=-p\,S\,\vec n\) passant par le centre géométrique</div>
+      <div class="memo-item"><b>Contact ponctuel sans frottement</b>force de droite d'action \((I,\vec n_{12})\), intensité \(>0\) (≡ sphère-plan)</div>
+      <div class="memo-item"><b>Problème plan</b>2 composantes de résultante dans le plan + 1 moment ⟂ plan ⟹ <b>3 équations</b> de PFS au maximum</div>
+      <div class="memo-item"><b>Ensemble soumis à 2 forces</b>résultantes opposées, droites d'action <b>confondues</b> (\((AB)\)) ; <b>1 seule inconnue</b> : l'intensité</div>
+      <div class="memo-item"><b>Vérin</b>poids négligé ⟹ poussée de droite d'action \((BD)\) ; \(F_p=p_1S_1-p_2S_2\)</div>
+      <div class="memo-item method"><b>Structure « pieuvre »</b>isoler les ensembles à 2 forces (bielles, vérins), puis chaque pièce principale ; choisir l'équation d'après le DDL de la liaison avec le bâti</div>
+      <div class="memo-item method"><b>Stratégie d'isolement</b>1) s'appuyer sur les DDL ; 2) au moins un isolement avec entrée/sortie extérieures ; 3) <b>ne jamais isoler le bâti</b> ; 4) suivre la chaîne depuis l'entrée</div>
+    </div>
+  </section>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Objectif et modèle de comportement statique</h3>
+    <p>On veut déterminer les <b>actions transmises</b> entre les composants d'un mécanisme modélisé par une <b>structure fermée</b>, en utilisant le <b>principe fondamental de la statique (PFS)</b>.</p>
+    <div class="def">
+      <span class="lab">Modèle de comportement statique</span>
+      C'est un <b>modèle cinématique complété</b> pour caractériser les <b>interactions en effort</b> entre les ensembles indéformables et entre ces ensembles et l'environnement. Il précise :<br>
+      • les <b>actions mécaniques transmissibles par les liaisons</b> ;<br>
+      • les <b>actions mécaniques d'entrée et de sortie</b> associées aux chaînes fonctionnelles (couple d'un moteur, effort d'un vérin…) ;<br>
+      • des actions mécaniques <b>internes ou externes</b> sollicitant le modèle : poids, ressort, amortisseur…<br>
+      Il est représenté par un <b>graphe de structure</b> associé aux modèles des actions d'E/S et des sollicitations, et par un <b>schéma cinématique</b> complété de la représentation des actions.
+    </div>
+    <p>Utilisations : relation d'entrée/sortie d'un transmetteur <b>linéaire ou non linéaire</b> ; actions transmises par une liaison ; conditions d'équilibre (en particulier de <b>non-basculement</b>). Exemple du cours (échelle EPAS) : 3 paramètres de position pilotés \(x,\alpha,\theta\), une sollicitation (poids des parties mobiles en \(D\)) et 3 actions d'E/S \(C_m\), \(F_v\), \(F_{2-3}\) correspondant aux 3 chaînes fonctionnelles.</p>
+
+    <h3>1.2 Actions transmissibles par des liaisons parfaites</h3>
+    <div class="def">
+      <span class="lab">Torseur des actions mécaniques transmissibles (« torseur statique »)</span>
+      \[\{\mathcal T_{1\to2}^{liaison}\}=\Big\{\begin{array}{l}\vec R_{1\to2}=X_{12}\vec x+Y_{12}\vec y+Z_{12}\vec z\\ \vec M_{A,1\to2}=L_{12}\vec x+M_{12}\vec y+N_{12}\vec z\end{array}\Big\}_{A}\]
+      <b>6 paramètres statiques indépendants</b> = 6 <b>actions élémentaires</b> : 3 forces \(F_X,F_Y,F_Z\) (droites d'action \((A,\vec x),(A,\vec y),(A,\vec z)\), paramétrées par \(X_{12},Y_{12},Z_{12}\)) et 3 couples \(C_X,C_Y,C_Z\) (directions \(\vec x,\vec y,\vec z\), paramétrés par \(L_{12},M_{12},N_{12}\)).
+    </div>
+    <div class="thm">
+      <span class="lab">Liaison parfaite : correspondance cinématique ↔ statique</span>
+      Une <b>liaison parfaite</b> (sans frottement, sans jeu) ne dissipe pas d'énergie quels que soient les efforts transmis et les mouvements relatifs. Conséquence : <b>si la liaison accepte un DDL, aucune action s'opposant à ce mouvement n'est transmissible</b>.<br>
+      • pour chaque <b>blocage</b>, il existe un <b>paramètre statique</b> ; • pour chaque <b>DDL</b>, il existe une <b>composante nulle</b> dans le torseur des actions transmissibles.<br>
+      \[n_{DDL}+n_{blocages}=6\quad\Longrightarrow\quad n_{paramètres\ cinématiques}+n_{paramètres\ statiques}=6.\]
+      Le domaine de validité du torseur d'actions transmissibles est <b>le même</b> que celui du torseur cinématique.
+    </div>
+    <p><b>Exemple 1 — glissière de direction \(\vec x\) entre 1 et 2</b> : 1 DDL (\(T_X\)) ⟹ la liaison ne peut pas transmettre la force élémentaire \(F_X\), donc \(X_{12}=0\). En tout point \(A\) :
+    \[\{\mathcal T_{1\to2}\}=\Big\{\begin{array}{l}Y_{12}\vec y+Z_{12}\vec z\\ L_{12}\vec x+M_{12}\vec y+N_{12}\vec z\end{array}\Big\}_A\ \Leftrightarrow\ \vec R_{1\to2}\cdot\vec x=0\]
+    5 paramètres statiques ↔ 5 blocages. Torseur cinématique correspondant : \(\{\mathcal V_{2/1}\}=\{\vec 0;\,V_{12}\vec x\}\).<br>
+    <b>Exemple 2 — liaison sphérique de centre \(A\)</b> : 3 rotations libres, 3 translations bloquées ⟹ elle ne peut pas transmettre les couples \(C_X,C_Y,C_Z\) mais peut transmettre \(F_X,F_Y,F_Z\) :
+    \(\{\mathcal T_{1\to2}\}=\{\vec R_{1\to2};\vec0\}_A\) (<b>valable uniquement au centre \(A\)</b>). 3 paramètres statiques.</p>
+
+    <h4>Torseurs d'actions transmissibles des liaisons usuelles</h4>
+    <p>Forme du torseur dans le repère de la liaison, au point \(A\) du domaine de validité (axe, centre, plan…), pour les liaisons <b>parfaites</b>. On obtient chaque ligne en annulant les composantes associées aux DDL :</p>
+    <div class="overflow"><table>
+      <tr><th>Liaison</th><th>DDL</th><th>Résultante \(\vec R_{1\to2}\)</th><th>Moment \(\vec M_{A,1\to2}\)</th><th>Nb param. statiques</th></tr>
+      <tr><td>Encastrement</td><td>0</td><td>\(X,Y,Z\)</td><td>\(L,M,N\)</td><td>6</td></tr>
+      <tr><td>Pivot d'axe \((A,\vec x)\)</td><td>\(R_x\)</td><td>\(X,Y,Z\)</td><td>\(0,M,N\) (\(\vec M\cdot\vec x=0\))</td><td>5</td></tr>
+      <tr><td>Glissière de direction \(\vec x\)</td><td>\(T_x\)</td><td>\(0,Y,Z\) (\(\vec R\cdot\vec x=0\))</td><td>\(L,M,N\)</td><td>5</td></tr>
+      <tr><td>Hélicoïdale d'axe \((A,\vec y)\), pas \(p\)</td><td>\(R_y\equiv T_y\)</td><td>\(X,Y,Z\)</td><td>\(L,M,N\) avec \(M=\mp\dfrac p{2\pi}Y\)</td><td>5</td></tr>
+      <tr><td>Pivot glissant d'axe \((A,\vec x)\)</td><td>\(R_x,T_x\)</td><td>\(0,Y,Z\)</td><td>\(0,M,N\)</td><td>4</td></tr>
+      <tr><td>Appui plan de normale \(\vec z\)</td><td>\(T_x,T_y,R_z\)</td><td>\(0,0,Z\)</td><td>\(L,M,0\)</td><td>3</td></tr>
+      <tr><td>Sphérique de centre \(A\)</td><td>\(R_x,R_y,R_z\)</td><td>\(X,Y,Z\)</td><td>\(\vec0\) (au centre)</td><td>3</td></tr>
+      <tr><td>Sphère-cylindre d'axe \((A,\vec x)\)</td><td>\(R_x,R_y,R_z,T_x\)</td><td>\(0,Y,Z\)</td><td>\(\vec0\)</td><td>2</td></tr>
+      <tr><td>Sphère-plan de normale \((A,\vec y)\)</td><td>\(R_x,R_y,R_z,T_x,T_z\)</td><td>\(0,Y,0\) (\(\vec R_{1\to2}=Y_{12}\vec y\))</td><td>\(\vec0\)</td><td>1</td></tr>
+    </table></div>
+    <div class="note">
+      <span class="lab">Cas particulier de la liaison hélicoïdale</span>
+      Une seule DDL qui <b>combine</b> translation et rotation de même direction, liées par le pas \(p\). On impose une <b>puissance nulle</b> dans la liaison parfaite :
+      \(P(1\leftrightarrow2)=\vec R_{1\to2}\cdot\vec V_{J\in2/1}+\vec M_{J,1\to2}\cdot\vec\Omega_{2/1}=0\). Avec l'axe \((A,\vec y)\) : \(\vec V_{J\in 2/1}=\pm\dfrac{p}{2\pi}\omega_{21}\vec y\) et \(\vec\Omega_{2/1}=\omega_{21}\vec y\), donc
+      \(\pm Y_{12}\dfrac p{2\pi}\omega_{21}+M_{12}\omega_{21}=0\), d'où \(\boxed{M_{12}=\mp\dfrac p{2\pi}Y_{12}}\) : « \(-\) » si <b>pas à droite</b>, « \(+\) » si <b>pas à gauche</b>.
+    </div>
+    <div class="note">
+      <span class="lab">Notation des torseurs</span>
+      Pour une propriété écrite en vecteur : <b>3 composantes</b> ⟹ vecteur laissé tel quel ; <b>2 composantes</b> ⟹ la composante nulle est indiquée (ex. \(\vec R_{1\to2}\cdot\vec x=0\)) ; <b>1 composante</b> ⟹ on la paramètre (ex. \(Z_{12}\vec z\)).
+      Pour définir les paramètres scalaires ou écrire dans une base, on met à zéro les termes associés à un DDL.
+    </div>
+
+    <h3>1.3 Actions mécaniques usuelles</h3>
+    <h4>Ressort et amortisseur de traction/compression</h4>
+    <p>Deux ensembles (1) et (2) reliés par un ressort et un amortisseur <b>en parallèle</b>, attachés en \(A\in1\) et \(B\in2\). \(L\) est leur longueur : \(\vec{AB}=L\,\vec u\).</p>
+    <div class="thm">
+      <span class="lab">Actions de 1 sur 2</span>
+      <b>Ressort</b> (longueur à vide \(L_0\), raideur \(k\) en N/m) : force de droite d'action passant par les points d'attache, proportionnelle à la variation de longueur :
+      \(\vec F_{1\to2}=-k\,(L-L_0)\,\vec u\) ; torseur \(\{\mathcal T^r_{1\to2}\}=\{-k(L-L_0)\vec u;\vec0\}_A=\{-k(L-L_0)\vec u;\vec0\}_B\).<br>
+      <b>Amortisseur</b> linéaire (coefficient \(\lambda\) en N/(m·s⁻¹)) : force qui <b>s'oppose au mouvement</b>, proportionnelle à la vitesse de variation de longueur :
+      \(\vec F_{1\to2}=-\lambda\,\dot L\,\vec u\) ; torseur \(\{\mathcal T^{am}_{1\to2}\}=\{-\lambda\dot L\vec u;\vec0\}_A\).<br>
+      Ressorts <b>en parallèle</b> : les raideurs s'ajoutent (\(k=k_1+k_2\)). Ressorts <b>en série</b> : les <b>souplesses</b> (inverse de la raideur) s'ajoutent (\(\tfrac1k=\tfrac1{k_1}+\tfrac1{k_2}\)).
+    </div>
+    <div class="warnbox">
+      <span class="lab">Piège — signes</span>
+      Avec \(\vec{AB}=L\vec u\) et \(\vec F_{1\to2}\) appliquée en \(B\) : si \(L>L_0\) (ressort <b>étiré</b>), \(-k(L-L_0)<0\) : la force sur 2 est dirigée vers \(A\) (le ressort <b>rappelle</b>). Si \(L&lt;L_0\) (<b>comprimé</b>), la force pousse 2 loin de \(A\). Ne pas confondre \(L\) (longueur actuelle) et \(L-L_0\) (allongement).
+    </div>
+
+    <h4>Action hydraulique sur une surface plane à pression constante</h4>
+    <div class="thm">
+      <span class="lab">Résultat</span>
+      Un fluide à pression \(p\) <b>uniforme</b> sur une surface plane de dimension \(S\), de normale sortante \(\vec n\), exerce une force de résultante \(-p\,S\,\vec n\) <b>de droite d'action passant par le centre géométrique \(C\)</b> de la surface :
+      \(\{\mathcal F_{f\to1}\}=\{-pS\,\vec n;\vec0\}_C\).
+    </div>
+
+    <h4>Contact ponctuel sans « frottement »</h4>
+    <div class="def">
+      <span class="lab">Définition</span>
+      Deux ensembles (1) et (2) en contact ponctuel en \(I\), de normale \(\vec n_{12}\) (perpendiculaire au plan tangent commun, orientée de 1 vers 2) : l'action transmise de 1 sur 2 est une <b>force de droite d'action \((I,\vec n_{12})\) d'intensité strictement positive</b>. Le contact est modélisé par une <b>liaison sphère-plan</b> de droite normale \((I,\vec n_{12})\) ; le modèle est <b>bilatéral</b> (la positivité de l'intensité est à vérifier a posteriori).
+    </div>
+
+    <h3>1.4 Cas d'un problème plan</h3>
+    <div class="thm">
+      <span class="lab">Conditions</span>
+      On admet un problème « plan » si : (i) la géométrie des liaisons présente un <b>plan de symétrie</b> ; (ii) la <b>cinématique est plane</b> (trajectoires dans des plans parallèles) ; (iii) les <b>sollicitations sont symétriques</b> par rapport à ce plan : résultantes <b>parallèles</b> au plan, moments <b>perpendiculaires</b> au plan.<br>
+      La cinématique plane ne comprend que 3 mouvements élémentaires (2 translations dans le plan, 1 rotation ⟂ plan) et 3 actions élémentaires (2 forces dans le plan, 1 couple ⟂ plan).
+    </div>
+    <p>Pour un problème plan \((O,\vec x,\vec y)\) : \(\{\mathcal V_{j/i}\}=\{\omega_{z}\vec z;\,u_x\vec x+v_y\vec y\}\) et tous les torseurs d'actions mécaniques ont la forme
+    \(\{\mathcal T_{i\to j}\}=\{X\vec x+Y\vec y;\ N\vec z\}\). De même pour \((O,\vec y,\vec z)\) (composantes \(Y,Z,L\)) et \((O,\vec x,\vec z)\) (composantes \(X,Z,M\)). Il faut être capable de <b>simplifier soi-même les torseurs</b> en annulant les composantes, même si l'énoncé ne dit pas « problème plan ».</p>
+    <div class="note">
+      <span class="lab">À retenir</span>
+      Pour un problème plan, le PFS ne fournit <b>au maximum que 3 équations scalaires</b> : 2 équations du <b>théorème de la résultante statique</b> projeté sur 2 directions du plan et 1 équation du <b>théorème du moment statique</b> projeté sur la direction perpendiculaire au plan.
+    </div>
+
+    <h3>1.5 Relation entre 2 sollicitations (loi E/S en effort) dans un système fermé</h3>
+    <p>La démarche consiste à définir la <b>stratégie d'isolement</b> : la succession des isolements à réaliser et, pour chacun, la ou les équations du PFS à écrire. Elle demande de connaître quelques cas particuliers (ensemble soumis à 2 forces, bielle, vérin) et de comprendre la cinématique.</p>
+
+    <h4>Ensembles soumis à 2 forces</h4>
+    <div class="thm">
+      <span class="lab">Résultat fondamental</span>
+      Un ensemble \(\Sigma\) à l'équilibre soumis à <b>deux glisseurs</b> \(\{\vec F_1;\vec0\}_A\) et \(\{\vec F_2;\vec0\}_B\) :<br>
+      • <b>résultante</b> : \(\vec F_1+\vec F_2=\vec0\Rightarrow\vec F_1=-\vec F_2\) (opposées) ;<br>
+      • <b>moment en \(A\)</b> : \(\vec M_{A,1\to\Sigma}=\vec0\) et \(\vec M_{A,2\to\Sigma}=\vec M_{B,2\to\Sigma}+\vec{AB}\wedge\vec F_2=\vec{AB}\wedge\vec F_2\) (car \(\vec M_B=\vec0\)), donc \(\vec{AB}\wedge\vec F_2=\vec0\) : <b>\(\vec F_2\) est colinéaire à \(\vec{AB}\)</b>.<br>
+      Avec \(\vec u=\vec{AB}/\|\vec{AB}\|\) : \(\vec F_1=F\vec u\), \(\vec F_2=-F\vec u\). <b>Les droites d'action sont confondues avec \((AB)\)</b> et la <b>seule inconnue restante est l'intensité \(F\)</b> (positive en traction ou compression selon le signe).
+    </div>
+    <div class="method">
+      <span class="lab">Exemple de rédaction</span>
+      « Isolons l'ensemble (1+2), soumis aux deux actions extérieures \(\{\mathcal T_{0\to1}\}=\{\vec R_{01};\vec 0\}_A\) et \(\{\mathcal T_{3\to2}\}=\{\vec R_{32};\vec 0\}_B\). À l'équilibre, le théorème de la résultante statique donne \(\vec R_{01}=-\vec R_{32}\). Le théorème du moment statique en \(A\) donne \(\vec0+\vec M_{A,3\to2}=\vec0\), soit \(\vec{AB}\wedge\vec R_{32}=\vec0\) : \(\vec R_{32}\) est colinéaire à \(\vec{AB}\). On pose \(\vec R_{32}=X_{32}\vec x_1\), d'où \(\{\mathcal T_{0\to1}\}=\{-X_{32}\vec x_1;\vec0\}_A\) et \(\{\mathcal T_{3\to2}\}=\{X_{32}\vec x_1;\vec0\}_B\). »
+    </div>
+
+    <h4>Identifier des actions de type « force » transmissibles par les liaisons</h4>
+    <div class="note">
+      <span class="lab">Règle</span>
+      Si une liaison parfaite possède <b>tous les DDL en rotation</b> (3 pour un modèle spatial, 1 pour un modèle plan), son action transmissible est <b>nécessairement une force</b> (moment nul en son centre).
+      <b>Exemple</b> : bielle d'un système bielle-manivelle (liaisons sphériques/pivots à ses deux extrémités) : à l'équilibre, \(\{\mathcal T_{1\to2}\}=\{X_{12}\vec x_2;\vec0\}_A\) et \(\{\mathcal T_{3\to2}\}=\{-X_{12}\vec x_2;\vec0\}_B\) (les notations du cours mélangent \(\vec x_1\) et \(\vec x_2\) ; l'effort sur la bielle est porté par <b>sa propre direction</b> \(\vec x_2\)).
+    </div>
+
+    <h4>Vérin linéaire articulé de poids négligé : relation poussée / pression</h4>
+    <p>Un <b>vérin linéaire</b> est un composant de <b>longueur variable</b> pouvant imposer une longueur ou un effort de poussée. Il est modélisé par 2 ensembles (corps et tige), articulé à ses deux extrémités.</p>
+    <div class="method">
+      <span class="lab">Stratégie d'isolement du vérin (pneumatique ou hydraulique) — 2 étapes</span>
+      1. <b>PFS appliqué à l'ensemble du vérin</b> (ensemble à 2 forces, à vérifier : poids négligeable). Cette étape donne l'<b>effort de poussée</b> (force de droite d'action passant par les centres des articulations).<br>
+      2. <b>Théorème de la résultante statique appliqué à l'un des ensembles du vérin</b> (corps ou tige), projeté <b>sur la direction reliant les articulations</b>, pour relier la poussée aux efforts internes (pression, ressort…).
+    </div>
+
+    <h4>Structures « pieuvre »</h4>
+    <div class="def">
+      <span class="lab">Définition</span>
+      Un graphe de structure « pieuvre » comporte : des <b>ensembles principaux</b> en liaison élémentaire (pivot ou glissière) avec le <b>bâti</b> ; des <b>éléments de couplage</b> des mouvements de ces ensembles (bielle, vérin, liaison sphère-plan, hélicoïdale, engrenage, courroie…).
+      Après avoir exprimé les efforts de poussée des bielles et vérins, on <b>isole tour à tour les pièces principales</b> et on utilise le <b>DDL de la liaison avec le bâti</b> pour choisir l'équation (même logique que les structures ouvertes : moment sur l'axe d'un pivot, résultante sur la direction d'une glissière).
+    </div>
+
+    <h4>Démarche générale et règles d'isolement</h4>
+    <ol>
+      <li><b>Modéliser / représenter</b> : graphe de structure, figures de changement de base.</li>
+      <li><b>Analyser</b> : identifier les paramètres d'E/S ; chercher les <b>ensembles soumis à 2 forces</b> et nommer le paramètre restant sur le graphe ; repérer les ensembles en liaison élémentaire avec le bâti et les éléments de couplage.</li>
+      <li><b>Choisir une stratégie d'isolement</b> : isoler tour à tour les ensembles à 2 forces ; choisir les autres ensembles à isoler ; choisir théorème de la résultante ou du moment et la <b>direction de projection</b> à partir des DDL des liaisons.</li>
+      <li><b>Recenser les AM extérieures</b> (torseurs en tenant compte du caractère 3D ou plan).</li>
+      <li><b>Appliquer le PFS</b> (résultante ou moment selon le choix préalable).</li>
+      <li><b>Résoudre</b> si cela répond à la problématique ; applications numériques.</li>
+    </ol>
+    <div class="warnbox">
+      <span class="lab">4 règles à ne pas oublier</span>
+      1) S'appuyer sur les <b>DDL des liaisons parfaites</b> pour déterminer isolements et projections. 2) Pour au moins un isolement, les actions d'<b>entrée</b> ou de <b>sortie</b> doivent être des actions <b>extérieures</b>. 3) <b>Ne jamais isoler le bâti</b> (ses inconnues ne servent à rien). 4) Chercher des isolements successifs <b>à partir de l'entrée</b>, en suivant la <b>chaîne fonctionnelle</b> de transformation de mouvement.
+    </div>
+  </section>
+
+  <!-- ======================= APPLICATIONS DU COURS =============================== -->
+  <section class="block" id="app">
+    <h2>2. Applications du cours corrigées</h2>
+    <p class="lead" style="font-size:.95rem">Questions A1, A2 (vérin pneumatique) et A3 (structure « pieuvre » bielle-manivelle) du CM : le cours laisse les réponses en blanc, on les rédige entièrement.</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Application 1 — Vérin pneumatique : poussée et pressions (A1, A2)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Le vérin pneumatique est constitué de la tige (2) et du corps (3) de poids négligés. La tige est articulée en \(B\) sur l'ensemble (1) (sphérique de centre \(B\)), le corps est articulé en \(D\) sur le bâti 0 (sphérique de centre \(D\)) ; liaison pivot glissant d'axe \((B,D)=(B,\vec x_2)\) entre 2 et 3. L'ensemble (1) (masse \(m\), centre de gravité \(G\)) est en pivot d'axe \((A,\vec y_0)\) avec le bâti. Le vérin est alimenté par les pressions \(p_1\) (chambre 1, côté corps, section \(S_1\)) et \(p_2\) (chambre 2, côté tige, section \(S_2\)). On cherche le lien entre pressions et poids.</div>
+        <p><b>Cadre.</b> Problème traité à l'équilibre. Notation : \(F_p\) = intensité de la poussée du vérin sur (1) ; \(\vec x_2\) dirigé de \(D\) vers \(B\) (de sorte que \(F_p>0\) correspond à une <b>poussée</b>).</p>
+
+        <p class="q">A1 — Isoler le vérin et définir l'action de poussée \(F_p\) sur (1)</p>
+        <p><b>Système isolé :</b> le vérin \(\{2+3\}\). <b>Actions extérieures :</b></p>
+        <p>• action de (1) sur la tige (2) en \(B\) : liaison <b>sphérique de centre \(B\)</b> ⟹ torseur de la forme \(\{\vec R_{1\to2};\vec0\}_B\) (force en \(B\)) ;<br>
+        • action du bâti (0) sur le corps (3) en \(D\) : liaison <b>sphérique de centre \(D\)</b> ⟹ \(\{\vec R_{0\to3};\vec0\}_D\) (force en \(D\)) ;<br>
+        • poids de (2) et (3) : <b>négligés</b> ; pressions et pivot glissant (2/3) : actions <b>intérieures</b> à l'ensemble isolé.</p>
+        <p>L'ensemble est donc <b>soumis à 2 forces</b> aux points \(B\) et \(D\) : à l'équilibre, les résultantes sont opposées et de droite d'action \((BD)\). On pose \(\vec R_{2\to1}=F_p\,\vec x_2\) (poussée sur (1)), d'où :
+        \[\{\mathcal T_{1\to2}\}=\{-F_p\,\vec x_2;\vec0\}_B,\qquad \{\mathcal T_{0\to3}\}=\{+F_p\,\vec x_2;\vec0\}_D\ \ (\text{et }\{\mathcal T_{3\to0}\}=\{-F_p\vec x_2;\vec0\}_D).\]</p>
+        <p class="res">L'action de poussée du vérin sur (1) est <b>une force de droite d'action \((B,\vec x_2)=(BD)\)</b> : \(\{\mathcal T_{vérin\to1}\}=\{F_p\vec x_2;\vec0\}_B\). On l'obtient <b>sans connaître la pression</b>.</p>
+
+        <p class="q">A2 — Relation entre la poussée et les pressions</p>
+        <p>Étape 2 de la stratégie : on isole <b>un seul</b> des deux ensembles du vérin, ici la <b>tige (2) avec son piston</b>, et on projette le théorème de la résultante sur \(\vec x_2\).</p>
+        <p><b>Actions sur (2) projetées sur \(\vec x_2\) :</b></p>
+        <p>• de (1) sur (2) en \(B\) : \(-F_p\,\vec x_2\) (résultat de A1) → \(-F_p\) ;<br>
+        • de la pression \(p_1\) (chambre 1) sur la face du piston de section \(S_1\) : elle pousse le piston vers \(B\), donc dans le sens \(+\vec x_2\) : \(+p_1S_1\) (force \(-pS\vec n\) avec \(\vec n=-\vec x_2\) normale sortante du piston) ;<br>
+        • de la pression \(p_2\) (chambre 2) sur la face de section \(S_2=S_1-S_{tige}\) : elle pousse le piston vers \(D\), donc \(-p_2S_2\) ;<br>
+        • du corps (3) sur la tige (2) par le pivot glissant parfait d'axe \(\vec x_2\) : <b>aucune composante sur \(\vec x_2\)</b> (liaison parfaite, la glissière ne transmet pas d'effort suivant sa direction).</p>
+        <p>Équation de résultante sur \(\vec x_2\) :
+        \[-F_p+p_1S_1-p_2S_2=0.\]</p>
+        <p class="res">\[\boxed{F_p=p_1\,S_1-p_2\,S_2}\]
+        La poussée est la <b>différence des forces pressantes</b> sur les deux faces du piston. Pour un vérin à tige : \(S_2&lt;S_1\) (la tige occupe une partie de la chambre 2), donc à \(p_1=p_2\) le vérin <b>pousse</b> (\(F_p>0\)) mais moins qu'à \(p_2=0\).</p>
+
+        <p class="q">Lien avec le poids (complément)</p>
+        <p>On isole (1) : actions extérieures : poids \(\{m\vec g;\vec0\}_G\), poussée \(\{F_p\vec x_2;\vec0\}_B\) et liaison pivot d'axe \((A,\vec y_0)\) (dont le moment sur \(\vec y_0\) est nul). Le théorème du moment statique en \(A\), projeté sur \(\vec y_0\) (qui <b>élimine la liaison inconnue</b>) :
+        \[\vec y_0\cdot(\vec{AG}\wedge m\vec g)+\vec y_0\cdot(\vec{AB}\wedge F_p\vec x_2)=0.\]
+        En notant \(d_G\) le bras de levier du poids et \(d_B\) celui de la poussée par rapport à l'axe \((A,\vec y_0)\), avec le poids et la poussée en sens contraires de rotation : \(F_p\,d_B=m\,g\,d_G\). D'où, avec A2 :
+        \(\ p_1S_1-p_2S_2=m\,g\,\dfrac{d_G}{d_B}\ \). (Application numérique : exercice D.)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Application 2 — Structure « pieuvre » : relation entre \(C\) et \(F\) du système bielle-manivelle (A3)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Manivelle (1) en pivot d'axe \((O,\vec z_0)\) avec le bâti, \(\vec{OA}=a\,\vec x_1\), \(\alpha=(\vec x_0,\vec x_1)\). Bielle (2) : \(\vec{AB}=L\,\vec x_2\) avec \(\vec x_2=\cos\beta\,\vec x_0-\sin\beta\,\vec y_0\), liaisons sphériques (pivots en plan) en \(A\) et \(B\). Coulisseau (3) en glissière de direction \(\vec x_0\) avec le bâti. Le moteur exerce sur (1) un couple \(C\,\vec z_0\) ; l'environnement exerce sur (3) la force \(-F\,\vec x_0\) (effort résistant). Poids et frottements négligés. Problème plan \((O,\vec x_0,\vec y_0)\).</div>
+        <figure>
+          <svg viewBox="0 0 640 270" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Segoe UI, system-ui, sans-serif" font-size="13"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker></defs><rect x="0" y="0" width="640" height="270" fill="white"/><line x1="40.0" y1="150.0" x2="491.4" y2="150.0" stroke="#94a3b8" stroke-width="1" stroke-dasharray="8 4 2 4"/><line x1="70.0" y1="162.0" x2="70.0" y2="50.0" stroke="#94a3b8" stroke-width="1" stroke-dasharray="8 4 2 4"/><rect x="132.0" y="166.0" width="374.4" height="9" fill="#e2e8f0" stroke="#94a3b8"/><rect x="389.4" y="138.0" width="44" height="24" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><line x1="70.0" y1="150.0" x2="108.8" y2="82.9" stroke="#16a34a" stroke-width="5"/><line x1="108.8" y1="82.9" x2="411.4" y2="150.0" stroke="#ea580c" stroke-width="5"/><circle cx="70.0" cy="150.0" r="6" fill="white" stroke="#1e293b" stroke-width="2"/><circle cx="108.8" cy="82.9" r="6" fill="white" stroke="#1e293b" stroke-width="2"/><circle cx="411.4" cy="150.0" r="6" fill="white" stroke="#1e293b" stroke-width="2"/><path d="M54,172 L86,172 M58,172 l-8,10 M67,172 l-8,10 M76,172 l-8,10 M85,172 l-8,10" stroke="#1e293b" stroke-width="1.5" fill="none"/><path d="M70,156 L56,172 M70,156 L84,172" stroke="#1e293b" stroke-width="2" fill="none"/><text x="56.0" y="142.0" text-anchor="middle" font-size="15" fill="#1e293b" font-weight="700" >O</text><text x="94.8" y="74.9" text-anchor="middle" font-size="15" fill="#1e293b" font-weight="700" >A</text><text x="413.4" y="130.0" text-anchor="middle" font-size="15" fill="#1e293b" font-weight="700" >B</text><text x="77.4" y="120.4" text-anchor="middle" font-size="15" fill="#16a34a" font-weight="800" >1</text><text x="264.1" y="104.4" text-anchor="middle" font-size="15" fill="#ea580c" font-weight="800" >2</text><text x="425.4" y="172.0" text-anchor="middle" font-size="14" fill="#2563eb" font-weight="800" >3</text><path d="M104,150 A34,34 0 0 0 87.0,120.6" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#ah)"/><text x="116.0" y="138.0" text-anchor="middle" font-size="15" fill="#475569" font-weight="700" >α</text><line x1="108.8" y1="82.9" x2="178.8" y2="82.9" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 3"/><path d="M144.75,82.88303120670601 A36,36 0 0 1 143.9,90.7" fill="none" stroke="#475569" stroke-width="1.5"/><text x="156.8" y="104.9" text-anchor="middle" font-size="15" fill="#475569" font-weight="700" >β</text><line x1="70.0" y1="212.0" x2="411.4" y2="212.0" stroke="#475569" stroke-width="1.3" marker-start="url(#ah)" marker-end="url(#ah)"/><line x1="70.0" y1="186.0" x2="70.0" y2="218.0" stroke="#94a3b8" stroke-width="1"/><line x1="411.4" y1="164.0" x2="411.4" y2="218.0" stroke="#94a3b8" stroke-width="1"/><text x="240.7" y="206.0" text-anchor="middle" font-size="14" fill="#475569" font-weight="700" >x = OB</text><text x="113.4" y="138.4" text-anchor="start" font-size="13" fill="#16a34a" font-weight="700" >OA = a</text><text x="280.1" y="146.4" text-anchor="middle" font-size="13" fill="#ea580c" font-weight="700" >AB = L</text><text x="628.0" y="144.0" text-anchor="end" font-size="14" fill="#475569" font-weight="400" >x⃗₀</text><text x="78.0" y="46.0" text-anchor="start" font-size="14" fill="#475569" font-weight="400" >y⃗₀</text><line x1="506.4" y1="150.0" x2="443.4" y2="150.0" stroke="#dc2626" stroke-width="3.5" marker-end="url(#ah)"/><text x="491.4" y="140.0" text-anchor="middle" font-size="16" fill="#dc2626" font-weight="800" >F</text><path d="M44,146 A26,26 0 1 1 52,168" fill="none" stroke="#dc2626" stroke-width="3" marker-end="url(#ah)"/><text x="32.0" y="128.0" text-anchor="middle" font-size="16" fill="#dc2626" font-weight="800" >C</text></svg>
+          <figcaption>Structure « pieuvre » : les ensembles principaux (1) et (3) sont en liaison élémentaire (pivot, glissière) avec le bâti ; la <b>bielle (2)</b> est l'élément de couplage.</figcaption>
+        </figure>
+        <p><b>Cadre.</b> Entrée : \(C\) (action sur la liaison pivot 1/0). Sortie : \(F\) (action sur la glissière 3/0). On cherche \(F\) en fonction de \(C\) (ou l'inverse), en un <b>paramètre de position</b> \(\alpha\) donné. Plan : 3 équations de PFS par isolement, mais on n'écrit que celle qui <b>élimine les liaisons inconnues</b>.</p>
+
+        <p class="q">Étape 1 — Isoler la bielle (2) : ensemble à 2 forces</p>
+        <p>La bielle est soumise à 2 actions de liaisons à <b>3 (resp. 1 en plan) rotations libres</b> en \(A\) et \(B\), donc à deux forces ; son poids est négligé. Elle est à l'équilibre sous 2 glisseurs ⟹ les résultantes sont opposées et portées par \((AB)\), direction \(\vec x_2\). On pose :
+        \[\{\mathcal T_{1\to2}\}=\{-X_{12}\vec x_2;\vec0\}_A,\qquad \{\mathcal T_{3\to2}\}=\{+X_{12}\vec x_2;\vec0\}_B,\]
+        donc (principe des actions réciproques) \(\{\mathcal T_{2\to1}\}=\{+X_{12}\vec x_2;\vec0\}_A\) et \(\{\mathcal T_{2\to3}\}=\{-X_{12}\vec x_2;\vec0\}_B\). L'unique inconnue de la bielle est \(X_{12}\).</p>
+
+        <p class="q">Étape 2 — Isoler le coulisseau (3) : relier \(X_{12}\) à \(F\)</p>
+        <p><b>Choix de l'équation.</b> Liaison avec le bâti = glissière de direction \(\vec x_0\) : elle transmet des efforts \(\perp\vec x_0\) (inconnus) mais <b>aucun effort suivant \(\vec x_0\)</b>. On projette donc le <b>théorème de la résultante sur \(\vec x_0\)</b>, qui élimine l'action du bâti.</p>
+        <p>Actions extérieures sur (3) : de la bielle \(-X_{12}\vec x_2\) ; de l'environnement \(-F\vec x_0\) ; du bâti (glissière) : composante \(Y_{03}\vec y_0\), sans composante sur \(\vec x_0\). Sur \(\vec x_0\) :
+        \[-X_{12}\cos\beta-F=0\ \Longrightarrow\ X_{12}=-\frac{F}{\cos\beta}.\]
+        (\(X_{12}<0\) pour \(F>0\) : la bielle est <b>comprimée</b>.)</p>
+
+        <p class="q">Étape 3 — Isoler la manivelle (1) : relier \(C\) à \(X_{12}\)</p>
+        <p><b>Choix de l'équation.</b> Liaison avec le bâti = pivot d'axe \((O,\vec z_0)\) : elle transmet une force quelconque mais <b>aucun moment sur \(\vec z_0\)</b>. On projette donc le <b>théorème du moment statique en \(O\) sur \(\vec z_0\)</b>, qui élimine le bâti.</p>
+        <p>Moment en \(O\) sur \(\vec z_0\) : du couple moteur \(C\) ; de la bielle \(\vec{OA}\wedge X_{12}\vec x_2=a\,X_{12}\,(\vec x_1\wedge\vec x_2)\) avec \(\vec x_1\wedge\vec x_2=\big(\cos\alpha\cdot(-\sin\beta)-\sin\alpha\cos\beta\big)\vec z_0=-\sin(\alpha+\beta)\,\vec z_0\) ; du bâti : 0 (pivot parfait, et sa force passe par \(O\)). D'où
+        \[C-a\,X_{12}\sin(\alpha+\beta)=0\ \Longrightarrow\ C=a\,X_{12}\sin(\alpha+\beta).\]</p>
+
+        <p class="q">Étape 4 — Éliminer \(X_{12}\) (relations de proportionnalité)</p>
+        <p>En remplaçant \(X_{12}=-F/\cos\beta\) :
+        \[\boxed{C=-\,a\,F\,\frac{\sin(\alpha+\beta)}{\cos\beta}}\qquad\Longleftrightarrow\qquad \frac{F}{|C|}=\frac{1}{a}\,\frac{\cos\beta}{\sin(\alpha+\beta)}.\]
+        Le signe « − » : pour \(F>0\) (force qui repousse le coulisseau vers \(O\)), le moteur doit exercer un couple <b>négatif</b> (sens horaire) qui retient/entraîne l'ensemble, cohérent avec la compression de la bielle.</p>
+        <p class="res"><b>Contrôle par la cinématique (C11).</b> La loi E/S en vitesse est \(\dot x=-a\,\dot\alpha\,\dfrac{\sin(\alpha+\beta)}{\cos\beta}=\dot\alpha\,f'(\alpha)\). La loi statique avec liaisons parfaites doit être \(\dfrac{F}{C}=\dfrac{1}{|f'|}\) (conservation de la puissance \(C\dot\alpha+(-F\vec x_0)\cdot\dot x\vec x_0=0\)) :
+        \(C\dot\alpha-F\dot x=0\Rightarrow C=F\,\dfrac{\dot x}{\dot\alpha}=F\,f'(\alpha)=-aF\dfrac{\sin(\alpha+\beta)}{\cos\beta}\). ✔ <b>Les deux méthodes (PFS par isolements successifs et énergétique) donnent le même résultat.</b></p>
+
+        <p class="q">Représentation du coefficient \(|C|/(aF)\) pour \(a=50\) mm, \(L=200\) mm</p>
+        <figure>
+          <svg viewBox="0 0 640 250" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Segoe UI, system-ui, sans-serif" font-size="13"><rect width="640" height="250" fill="white"/><line x1="70.0" y1="20.0" x2="70.0" y2="190.0" stroke="#e2e8f0" stroke-width="1"/><text x="70.0" y="206.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >0</text><line x1="160.0" y1="20.0" x2="160.0" y2="190.0" stroke="#e2e8f0" stroke-width="1"/><text x="160.0" y="206.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >30</text><line x1="250.0" y1="20.0" x2="250.0" y2="190.0" stroke="#e2e8f0" stroke-width="1"/><text x="250.0" y="206.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >60</text><line x1="340.0" y1="20.0" x2="340.0" y2="190.0" stroke="#e2e8f0" stroke-width="1"/><text x="340.0" y="206.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >90</text><line x1="430.0" y1="20.0" x2="430.0" y2="190.0" stroke="#e2e8f0" stroke-width="1"/><text x="430.0" y="206.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >120</text><line x1="520.0" y1="20.0" x2="520.0" y2="190.0" stroke="#e2e8f0" stroke-width="1"/><text x="520.0" y="206.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >150</text><line x1="610.0" y1="20.0" x2="610.0" y2="190.0" stroke="#e2e8f0" stroke-width="1"/><text x="610.0" y="206.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >180</text><line x1="70.0" y1="190.0" x2="610.0" y2="190.0" stroke="#e2e8f0" stroke-width="1"/><text x="64.0" y="194.0" text-anchor="end" font-size="11" fill="#64748b" font-weight="400" >0</text><line x1="70.0" y1="165.7" x2="610.0" y2="165.7" stroke="#e2e8f0" stroke-width="1"/><text x="64.0" y="169.7" text-anchor="end" font-size="11" fill="#64748b" font-weight="400" >0.2</text><line x1="70.0" y1="141.4" x2="610.0" y2="141.4" stroke="#e2e8f0" stroke-width="1"/><text x="64.0" y="145.4" text-anchor="end" font-size="11" fill="#64748b" font-weight="400" >0.4</text><line x1="70.0" y1="117.1" x2="610.0" y2="117.1" stroke="#e2e8f0" stroke-width="1"/><text x="64.0" y="121.1" text-anchor="end" font-size="11" fill="#64748b" font-weight="400" >0.6</text><line x1="70.0" y1="92.9" x2="610.0" y2="92.9" stroke="#e2e8f0" stroke-width="1"/><text x="64.0" y="96.9" text-anchor="end" font-size="11" fill="#64748b" font-weight="400" >0.8</text><line x1="70.0" y1="68.6" x2="610.0" y2="68.6" stroke="#e2e8f0" stroke-width="1"/><text x="64.0" y="72.6" text-anchor="end" font-size="11" fill="#64748b" font-weight="400" >1</text><line x1="70.0" y1="44.3" x2="610.0" y2="44.3" stroke="#e2e8f0" stroke-width="1"/><text x="64.0" y="48.3" text-anchor="end" font-size="11" fill="#64748b" font-weight="400" >1.2</text><line x1="70.0" y1="20.0" x2="610.0" y2="20.0" stroke="#e2e8f0" stroke-width="1"/><text x="64.0" y="24.0" text-anchor="end" font-size="11" fill="#64748b" font-weight="400" >1.4</text><rect x="70" y="20" width="540" height="170" fill="none" stroke="#94a3b8"/><text x="340.0" y="224.0" text-anchor="middle" font-size="12" fill="#1e293b" font-weight="400" >α (°)</text><text transform="translate(28,105.0) rotate(-90)" text-anchor="middle" font-size="12" fill="#1e293b">|C| / (a·F)</text><polyline points="70.0,190.0 73.0,187.4 76.0,184.7 79.0,182.1 82.0,179.4 85.0,176.8 88.0,174.2 91.0,171.5 94.0,168.9 97.0,166.3 100.0,163.7 103.0,161.1 106.0,158.6 109.0,156.0 112.0,153.5 115.0,151.0 118.0,148.5 121.0,146.0 124.0,143.5 127.0,141.1 130.0,138.7 133.0,136.3 136.0,133.9 139.0,131.6 142.0,129.3 145.0,127.0 148.0,124.7 151.0,122.5 154.0,120.3 157.0,118.2 160.0,116.0 163.0,113.9 166.0,111.9 169.0,109.9 172.0,107.9 175.0,105.9 178.0,104.0 181.0,102.2 184.0,100.3 187.0,98.5 190.0,96.8 193.0,95.1 196.0,93.4 199.0,91.8 202.0,90.2 205.0,88.7 208.0,87.2 211.0,85.8 214.0,84.4 217.0,83.1 220.0,81.8 223.0,80.5 226.0,79.3 229.0,78.1 232.0,77.0 235.0,76.0 238.0,74.9 241.0,74.0 244.0,73.1 247.0,72.2 250.0,71.4 253.0,70.6 256.0,69.9 259.0,69.2 262.0,68.6 265.0,68.0 268.0,67.5 271.0,67.0 274.0,66.6 277.0,66.2 280.0,65.9 283.0,65.6 286.0,65.3 289.0,65.1 292.0,65.0 295.0,64.9 298.0,64.8 301.0,64.8 304.0,64.9 307.0,64.9 310.0,65.1 313.0,65.2 316.0,65.4 319.0,65.7 322.0,66.0 325.0,66.3 328.0,66.7 331.0,67.1 334.0,67.6 337.0,68.0 340.0,68.6 343.0,69.1 346.0,69.7 349.0,70.4 352.0,71.0 355.0,71.8 358.0,72.5 361.0,73.3 364.0,74.1 367.0,74.9 370.0,75.8 373.0,76.7 376.0,77.6 379.0,78.5 382.0,79.5 385.0,80.5 388.0,81.6 391.0,82.6 394.0,83.7 397.0,84.8 400.0,85.9 403.0,87.1 406.0,88.3 409.0,89.4 412.0,90.7 415.0,91.9 418.0,93.1 421.0,94.4 424.0,95.7 427.0,97.0 430.0,98.3 433.0,99.6 436.0,101.0 439.0,102.3 442.0,103.7 445.0,105.1 448.0,106.5 451.0,107.9 454.0,109.3 457.0,110.8 460.0,112.2 463.0,113.7 466.0,115.1 469.0,116.6 472.0,118.1 475.0,119.6 478.0,121.1 481.0,122.6 484.0,124.1 487.0,125.6 490.0,127.1 493.0,128.6 496.0,130.1 499.0,131.7 502.0,133.2 505.0,134.8 508.0,136.3 511.0,137.9 514.0,139.4 517.0,141.0 520.0,142.5 523.0,144.1 526.0,145.7 529.0,147.2 532.0,148.8 535.0,150.4 538.0,151.9 541.0,153.5 544.0,155.1 547.0,156.7 550.0,158.3 553.0,159.8 556.0,161.4 559.0,163.0 562.0,164.6 565.0,166.2 568.0,167.8 571.0,169.3 574.0,170.9 577.0,172.5 580.0,174.1 583.0,175.7 586.0,177.3 589.0,178.9 592.0,180.5 595.0,182.1 598.0,183.6 601.0,185.2 604.0,186.8 607.0,188.4 610.0,190.0" fill="none" stroke="#16a34a" stroke-width="2.4" stroke-linejoin="round"/><text x="80.0" y="182.0" text-anchor="start" font-size="11" fill="#16a34a" font-weight="400" >point mort : C = 0</text><text x="600.0" y="182.0" text-anchor="end" font-size="11" fill="#16a34a" font-weight="400" >point mort : C = 0</text><circle cx="340.0" cy="68.6" r="4" fill="#16a34a"/><text x="348.0" y="60.6" text-anchor="start" font-size="11" fill="#16a34a" font-weight="400" >α = 90° : |C| = a·F</text></svg>
+          <figcaption>\(\dfrac{|C|}{aF}=\dfrac{\sin(\alpha+\beta)}{\cos\beta}\) : maximum \(\approx1{,}03\) (atteint vers \(\alpha\approx77^\circ\)), égal à 1 en \(\alpha=90^\circ\), <b>nul aux points morts</b> (\(\alpha=0^\circ\) et \(180^\circ\)) : une force sur le coulisseau n'engendre aucun couple sur la manivelle.</figcaption>
+        </figure>
+        <div class="note">
+          <span class="lab">Pourquoi cette stratégie ?</span>
+          Chaque isolement a été choisi pour que la liaison avec le <b>bâti</b> (jamais isolé) soit éliminée : <b>résultante sur la direction de la glissière</b>, <b>moment sur l'axe du pivot</b>. Il reste à chaque étape une seule inconnue, et la dernière étape consiste simplement à éliminer \(X_{12}\) par proportionnalité.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= EXOS CRÉÉS =============================== -->
+  <section class="block" id="exos">
+    <h2>3. Exercices d'entraînement (créés) avec corrections</h2>
+    <p class="lead" style="font-size:.95rem">Seul le CM de C13 a été fourni (pas de TD) : exercices créés à partir du cours.</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Torseurs d'actions transmissibles</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">Écrire la forme du torseur d'actions transmissibles (parfait) de 1 sur 2 pour :</p>
+        <p>1) <b>pivot d'axe \((A,\vec z)\)</b> : 1 DDL (\(R_z\)) ⟹ \(N_{12}=0\). \(\{\mathcal T_{1\to2}\}=\{X\vec x+Y\vec y+Z\vec z;\ L\vec x+M\vec y\}_A\) (5 paramètres).</p>
+        <p>2) <b>glissière de direction \(\vec y\)</b> : \(Y_{12}=0\). \(\{\mathcal T\}=\{X\vec x+Z\vec z;\ L\vec x+M\vec y+N\vec z\}\) (5 paramètres).</p>
+        <p>3) <b>sphérique de centre \(B\)</b> : \(\{X\vec x+Y\vec y+Z\vec z;\ \vec0\}_B\) (3 paramètres, valable au seul point \(B\)).</p>
+        <p>4) <b>appui plan de normale \(\vec x\)</b> : DDL \(T_y,T_z,R_x\) ⟹ \(Y=Z=0\), \(L=0\). \(\{\mathcal T\}=\{X\vec x;\ M\vec y+N\vec z\}\) (3 paramètres).</p>
+        <p>5) <b>hélicoïdale d'axe \((A,\vec z)\), pas à droite \(p=8\) mm</b> : \(N_{12}=-\dfrac p{2\pi}Z_{12}=-1{,}27\cdot10^{-3}\,Z_{12}\) (m). Si \(Z_{12}=500\) N : \(N_{12}=-0{,}637\) N·m.</p>
+        <p class="res">Vérification : DDL + paramètres statiques = 6 pour chaque liaison (1+5, 1+5, 3+3, 3+3, 1+5).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Ressort et amortisseur</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Ressort \(k=2000\) N/m, \(L_0=0{,}300\) m, monté en parallèle avec un amortisseur \(\lambda=150\) N·s/m. À l'instant considéré \(L=0{,}260\) m et \(\dot L=+0{,}2\) m/s (le montage s'<b>allonge</b>).</div>
+        <p class="q">Q1 — Action du ressort</p>
+        <p>\(L-L_0=-0{,}040\) m (comprimé) ⟹ \(\vec F^r_{1\to2}=-2000\times(-0{,}040)\vec u=+80\,\vec u\) N : le ressort <b>pousse</b> (2) loin de \(A\).</p>
+        <p class="q">Q2 — Action de l'amortisseur</p>
+        <p>\(\vec F^{am}_{1\to2}=-150\times0{,}2\,\vec u=-30\,\vec u\) N : il <b>freine</b> l'allongement.</p>
+        <p class="q">Q3 — Action totale et ressorts équivalents</p>
+        <p class="res">\(\vec F_{1\to2}=(80-30)\vec u=+50\,\vec u\) N.</p>
+        <p>Deux ressorts \(k_1=3000\) N/m et \(k_2=6000\) N/m : <b>en parallèle</b> \(k=9000\) N/m ; <b>en série</b> \(\dfrac1k=\dfrac1{3000}+\dfrac1{6000}=\dfrac{3}{6000}\Rightarrow k=2000\) N/m. La série est <b>plus souple</b> que chaque ressort pris seul.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Action hydraulique sur un piston</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Piston circulaire de diamètre \(D=50\) mm soumis sur une face à la pression relative \(p=6\) bar \(=6\cdot10^5\) Pa.</div>
+        <p>\(S=\dfrac{\pi D^2}{4}=\dfrac{\pi\times0{,}050^2}{4}=1{,}963\cdot10^{-3}\) m². Force : \(F=pS\) (de norme), de droite d'action passant par le centre du piston, dirigée <b>vers l'extérieur de la chambre</b> (\(\vec F=-pS\vec n\) avec \(\vec n\) normale sortante du piston).</p>
+        <p class="res">\(F=6\cdot10^5\times1{,}963\cdot10^{-3}\approx1178\) N (≈ 120 kgf)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice D — Vérin : pression nécessaire pour tenir un poids</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Mêmes notations que l'application 1. \(m=40\) kg, \(g=9{,}81\) m/s², bras de levier du poids \(d_G=0{,}40\) m et de la poussée \(d_B=0{,}20\) m par rapport à l'axe du pivot ; vérin de diamètre \(D=63\) mm, tige de diamètre \(d=20\) mm. Pressions relatives.</div>
+        <p class="q">Q1 — Poussée nécessaire</p>
+        <p>\(F_p\,d_B=m\,g\,d_G\Rightarrow F_p=\dfrac{40\times9{,}81\times0{,}40}{0{,}20}=784{,}8\) N.</p>
+        <p class="q">Q2 — Sections</p>
+        <p>\(S_1=\dfrac{\pi D^2}{4}=\dfrac{\pi\times0{,}063^2}{4}=3{,}117\cdot10^{-3}\) m² ; \(S_{tige}=\dfrac{\pi d^2}{4}=3{,}142\cdot10^{-4}\) m² ; \(S_2=S_1-S_{tige}=2{,}803\cdot10^{-3}\) m².</p>
+        <p class="q">Q3 — Pression \(p_1\)</p>
+        <p>a) échappement libre (\(p_2=0\)) : \(p_1=\dfrac{F_p}{S_1}=\dfrac{784{,}8}{3{,}117\cdot10^{-3}}=2{,}52\cdot10^5\) Pa.</p>
+        <p>b) avec une contre-pression \(p_2=1\) bar : \(p_1=\dfrac{F_p+p_2S_2}{S_1}=\dfrac{784{,}8+1\cdot10^5\times2{,}803\cdot10^{-3}}{3{,}117\cdot10^{-3}}=\dfrac{784{,}8+280{,}3}{3{,}117\cdot10^{-3}}=3{,}42\cdot10^5\) Pa.</p>
+        <p class="res">a) \(p_1\approx2{,}5\) bar ; b) \(p_1\approx3{,}4\) bar (la contre-pression coûte \(\approx0{,}9\) bar)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice E — Application numérique de la bielle-manivelle</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(a=50\) mm, \(L=200\) mm ; l'environnement exerce \(F=1000\) N sur le coulisseau (repoussé vers \(O\)). Calculer le couple moteur à fournir pour \(\alpha=30^\circ,\ 60^\circ,\ 90^\circ,\ 120^\circ\).</div>
+        <p>On applique \(|C|=aF\dfrac{\sin(\alpha+\beta)}{\cos\beta}\) avec \(\sin\beta=\dfrac aL\sin\alpha\) :</p>
+        <div class="overflow"><table>
+          <tr><th>\(\alpha\)</th><th>\(\sin\beta=\tfrac14\sin\alpha\)</th><th>\(\beta\)</th><th>\(\sin(\alpha+\beta)/\cos\beta\)</th><th>\(|C|=0{,}05\times1000\times(\cdot)\)</th></tr>
+          <tr><td>30°</td><td>0,1250</td><td>7,18°</td><td>0,6091</td><td><b>30,5 N·m</b></td></tr>
+          <tr><td>60°</td><td>0,2165</td><td>12,50°</td><td>0,9769</td><td><b>48,8 N·m</b></td></tr>
+          <tr><td>90°</td><td>0,2500</td><td>14,48°</td><td>1,0000</td><td><b>50,0 N·m</b></td></tr>
+          <tr><td>120°</td><td>0,2165</td><td>12,50°</td><td>0,7551</td><td><b>37,8 N·m</b></td></tr>
+        </table></div>
+        <p class="res">Le couple varie fortement avec la position (0 aux points morts, ≈ 50 N·m au maximum) : c'est le caractère « non linéaire » du transmetteur. À \(\alpha=60^\circ\), \(\omega=10\) rad/s : \(P=|C|\omega=488\) W \(=F\,|\dot x|=1000\times0{,}488\) ✔.</p>
+        <div class="warnbox"><span class="lab">Piège</span>Pour \(\alpha=90^\circ\), \(\sin(\alpha+\beta)=\cos\beta\) donc le rapport vaut exactement 1 (\(|C|=aF\)) : les deux variantes \(\sin(\alpha+\beta)\) et \(\sin\alpha\) ne coïncident <b>pas</b> pour les autres angles.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice F — Reconnaître un ensemble soumis à 2 forces</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">Pour chaque cas, dire si l'ensemble est soumis à 2 forces et en déduire l'inconnue restante</p>
+        <p>1) <b>Bielle</b> articulée par 2 sphériques, poids négligé, aucune autre action : <b>oui</b> ; actions = 2 forces opposées portées par la droite joignant les centres ; <b>1 inconnue : l'intensité</b>.</p>
+        <p>2) <b>Levier</b> articulé en \(O\) (pivot), chargé en \(A\) et poussé en \(B\) : <b>non</b> (3 actions : pivot + 2 forces) ; il faut écrire les moments.</p>
+        <p>3) <b>Vérin</b> dont le poids <b>n'est pas négligé</b> : <b>non</b> (3 actions : 2 liaisons + poids) ; la poussée n'est plus portée par \((BD)\).</p>
+        <p>4) <b>Pièce encastrée</b> au bâti : <b>non</b> (l'encastrement transmet 6 paramètres, dont un couple).</p>
+        <p>5) <b>Ressort</b> massless entre deux points d'attache : <b>oui</b> ; la force est portée par la droite des points d'attache, d'intensité \(k(L-L_0)\).</p>
+        <p class="res">Condition clé : <b>exactement deux actions</b>, chacune <b>réductible à une force</b> (liaison à rotations libres ou action de type glisseur).</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Document original du chapitre (cours magistral). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours (CM)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c13-actions-internes/S2I-C13-D%C3%A9terminer%20les%20actions%20internes%20de%20structures%20ferm%C3%A9es%20en%20%C3%A9quilibre.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C13-Déterminer les actions internes de structures fermées en équilibre</span><span class="badge">CM</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+<script src="../assets/gate.js"></script>
+</body>
+</html>

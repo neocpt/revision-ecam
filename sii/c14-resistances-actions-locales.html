@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C14 — Résistances au mouvement et actions locales — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-sii">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SII · C14 — Résistances au mouvement et actions locales</span>
+  <h1 class="title">C14 — Modéliser les résistances au mouvement et les actions locales</h1>
+  <p class="lead">Modéliser une action mécanique à partir d'un <b>modèle local</b> (champs de forces volumiques / surfaciques / linéiques) ; en déduire le <b>modèle global</b> (pesanteur, centre de gravité) ;
+  modéliser les <b>actions de contact avec frottement</b> : cinématique du contact ponctuel, <b>lois de Coulomb</b>, cône d'adhérence, arc-boutement, résistance au roulement et au pivotement.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#memo">📌 Fiche mémo</a></li>
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#docs">📂 Documents donnés (CM)</a></li>
+    </ul>
+  </div>
+
+  <section class="memo-sheet" id="memo">
+    <div class="memo-head">📌 Fiche mémo — C14 Résistances au mouvement et actions locales</div>
+    <div class="memo-grid">
+      <div class="memo-item"><b>Non-pénétration</b>\(\vec V_{J\in2/1}\cdot\vec n=0\) ; \(\vec\Omega_{2/1}=\Omega_{piv}\vec n+\vec\Omega_{roul}\)</div>
+      <div class="memo-item"><b>Vitesse de glissement</b>\(\vec V_{J\in2/1}=\vec V_{J\in2/0}-\vec V_{J\in1/0}\) (dans le plan tangent)</div>
+      <div class="memo-item"><b>Loi de Coulomb</b>\(\|\vec T_{1\to2}\|\le\mu\|\vec N_{1\to2}\|\) ; adhérence si \(\vec V_{J\in2/1}=\vec0\), frottement si \(\neq\vec0\) (alors <b>égalité</b>)</div>
+      <div class="memo-item"><b>Direction du frottement</b>\(\vec T_{1\to2}=-\mu\|\vec N\|\,\vec t\) avec \(\vec t=\vec V_{J\in2/1}/\|\vec V_{J\in2/1}\|\) : <b>s'oppose au glissement</b></div>
+      <div class="memo-item"><b>Cône d'adhérence</b>\(\mu=\tan\varphi_{lim}\) ; \(\vec R_{1\to2}\) <b>dans</b> le cône ⟹ adhérence ; <b>sur</b> le cône ⟹ glissement</div>
+      <div class="memo-item"><b>Coefficient \(\mu\)</b>indépendant de la force de pression et de l'aire de contact ; dépend des <b>matériaux</b> et de la <b>lubrification</b></div>
+      <div class="memo-item"><b>Arc-boutement</b>équilibre maintenu <b>quel que soit</b> l'effort qui tend à le rompre</div>
+      <div class="memo-item"><b>Pivotement / roulement</b>\(\|\vec M^p\|\le\delta\|\vec N\|\) ; \(\|\vec M^r\|\le\eta\|\vec N\|\) (\(\delta,\eta\) en m)</div>
+      <div class="memo-item"><b>Action locale</b>\(d\vec F=\vec q\,dl\ /\ \vec q\,dS\ /\ \vec q\,dV\) ; global : \(\vec R=\int d\vec F\), \(\vec M_A=\int\vec{AQ}\wedge d\vec F\)</div>
+      <div class="memo-item"><b>Pesanteur</b>\(d\vec F=\rho\,dV\,\vec g\) ; global : glisseur \(\{m\vec g;\vec0\}_G\), \(G\) barycentre : \(\int\vec{GQ}\,dm=\vec0\)</div>
+      <div class="memo-item"><b>Masses volumiques</b>acier 7800 ; aluminium 2700 ; PVC ≈ 1400 kg·m⁻³</div>
+      <div class="memo-item"><b>Contact surfacique</b>\(d\vec N=-p\,dS\,\vec n_{21}\) ; \(\|d\vec T\|\le\mu\,p\,dS\) (adhérence) ou \(=\mu\,p\,dS\) (glissement)</div>
+      <div class="memo-item method"><b>Limite de glissement (ponctuel)</b>supposer le mouvement 2/1 ⟹ direction de \(\vec T\) ⟹ appliquer Coulomb (égalité) ⟹ <b>vérifier l'équilibre</b> (PFS) pour valider l'hypothèse</div>
+    </div>
+  </section>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Notion d'adhérence et de frottement</h3>
+    <p>Les phénomènes de frottement et d'adhérence sont <b>omniprésents</b> dans l'étude du comportement et la conception des systèmes. Ils peuvent être :</p>
+    <ul>
+      <li><b>utiles</b> lorsqu'il s'agit de freiner ou d'accélérer un solide ;</li>
+      <li><b>néfastes</b> lorsqu'ils sont à l'origine de pertes d'énergie ou d'usure trop importante ;</li>
+      <li><b>négligés</b> dans de nombreuses études (liaisons parfaites).</li>
+    </ul>
+    <div class="def">
+      <span class="lab">Définitions</span>
+      Frottement et adhérence caractérisent une <b>résistance au glissement</b> entre 2 solides en contact :<br>
+      • <b>Frottement</b> s'il existe un <b>mouvement relatif</b> (glissement) ;<br>
+      • <b>Adhérence</b> s'il n'existe <b>pas de mouvement relatif</b> (pas de glissement).
+    </div>
+    <p>Ces phénomènes sont présents pour des actions mécaniques de contact <b>surfacique</b> et <b>ponctuel</b> ; ils sont liés au glissement et plus généralement au <b>roulement</b> et au <b>pivotement</b>, c'est-à-dire à la <b>cinématique du contact</b>.</p>
+
+    <h3>1.2 Cinématique du contact ponctuel</h3>
+    <p>Soient deux solides (1) et (2) en contact en un point \(J\) de normale \(\vec n\). La condition de <b>non-pénétration et de maintien du contact</b> s'écrit \(\ \vec V_{J\in2/1}\cdot\vec n=0\). Le torseur cinématique de 2/1 est
+    \[\{\mathcal V_{2/1}\}=\Big\{\begin{array}{l}\vec\Omega_{2/1}\\ \vec V_{J\in2/1}\end{array}\Big\}_J=\Big\{\begin{array}{l}\Omega_{piv\,2/1}\,\vec n+\vec\Omega_{roul\,2/1}\\ \vec V_{J\in2/1}\end{array}\Big\}_J .\]</p>
+    <div class="def">
+      <span class="lab">Caractéristiques cinématiques du contact</span>
+      • \(\Omega_{piv\,2/1}\vec n\) : composante de <b>pivotement</b> de 2/1, de direction \(\vec n\) ;<br>
+      • \(\vec\Omega_{roul\,2/1}\) : composante de <b>roulement</b> de 2/1 — perpendiculaire à \(\vec n\), donc <b>parallèle au plan tangent commun</b> ;<br>
+      • \(\vec V_{J\in2/1}\) : <b>vitesse de glissement</b> de 2/1 — parallèle au plan tangent commun (puisque \(\vec V\cdot\vec n=0\)).
+    </div>
+    <div class="method">
+      <span class="lab">Calculs</span>
+      • <b>Vitesse de glissement</b> : composition des vitesses \(\ \vec V_{J\in2/1}=\vec V_{J\in2/0}+\vec V_{J\in0/1}=\vec V_{J\in2/0}-\vec V_{J\in1/0}\).<br>
+      • <b>Pivotement et roulement</b> : on cherche le vecteur rotation \(\vec\Omega_{2/1}\), puis on le <b>projette suivant la normale</b> (\(\Omega_{piv}=\vec\Omega_{2/1}\cdot\vec n\)) <b>et suivant le plan tangent</b> (\(\vec\Omega_{roul}=\vec\Omega_{2/1}-\Omega_{piv}\vec n\)).
+    </div>
+    <div class="warnbox">
+      <span class="lab">Piège</span>
+      Le vecteur rotation \(\vec\Omega_{2/1}\) n'est lié à <b>aucun point</b> particulier, alors que ses composantes de pivotement et de roulement <b>dépendent du contact</b>, donc du point \(J\) et de sa normale. Le roulement <i>sans glissement</i> est le cas \(\vec V_{J\in2/1}=\vec0\) (pas \(\vec\Omega_{roul}=\vec0\)).
+    </div>
+
+    <h3>1.3 Résistance au glissement et loi de Coulomb</h3>
+    <h4>Mise en évidence (expérience du colis)</h4>
+    <p>Un colis \(S_2\) est posé sur un plan horizontal \(S_1\). On lui applique un effort horizontal \(\vec F\) <b>de plus en plus important</b>, de droite d'action passant par \(G\), pour le faire glisser. On suppose l'équilibre à tout instant. Actions sur \(S_2\) : le poids \(\vec P_2\), l'effort \(\vec F\), et l'action de \(S_1\) sur \(S_2\). L'action équivalente à \(\vec P_2\) et \(\vec F\) est une force, donc (PFS) l'action de \(S_1\) sur \(S_2\) est <b>aussi une force passant par \(G\)</b>, de résultante \(\vec R_{1\to2}=\vec N_{1\to2}+\vec T_{1\to2}\) :
+    \(\vec N_{1\to2}\) composante <b>normale</b>, \(\vec T_{1\to2}\) composante <b>tangentielle</b> (adhérence ou frottement).</p>
+    <div class="overflow"><table>
+      <tr><th>Situation</th><th>Au repos</th><th>Tendance au glissement</th><th>Limite ou glissement</th></tr>
+      <tr><td>Effort \(\vec F\)</td><td>\(\|\vec F\|=0\)</td><td>\(\vec F\) agit sur \(S_2\), tend à le faire glisser</td><td>\(S_2\) est à la limite de glisser (ou glisse dans le même sens que \(\vec F\))</td></tr>
+      <tr><td>Action de \(S_1\) sur \(S_2\)</td><td>\(\vec N_{1\to2}=-\vec P_2\), \(\vec T=\vec0\)</td><td>\(\vec T_{1\to2}\ne\vec0\) s'oppose au mouvement relatif ; \(\vec R\) inclinée de \(\varphi\) par rapport à la normale</td><td>\(\vec T=\vec T_{lim}\), \(\varphi=\varphi_{lim}\)</td></tr>
+      <tr><td>Norme de \(\vec T\)</td><td>\(\|\vec T\|=\|\vec F\|=0\)</td><td>\(\|\vec T\|=\|\vec F\|<\|\vec T_{lim}\|\)</td><td>\(\|\vec T\|=\|\vec F\|=\|\vec T_{lim}\|\)</td></tr>
+      <tr><td>Nom</td><td>repos</td><td><b>Adhérence</b> (équilibre stable)</td><td><b>Adhérence limite</b> ou <b>frottement</b></td></tr>
+    </table></div>
+    <p>\(\vec T_{lim}\) est <b>l'action tangentielle limite</b> à partir de laquelle l'équilibre est rompu : \(S_2\) se met à glisser par rapport à \(S_1\). Au-delà, le « comportement dynamique » : l'équilibre est rompu, l'accélération est non nulle, le solide glisse.</p>
+    <figure>
+      <svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Segoe UI, system-ui, sans-serif" font-size="13"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker></defs><rect width="640" height="300" fill="white"/><rect x="80" y="24" width="520" height="200" fill="none" stroke="#94a3b8"/><rect x="80" y="24" width="218.4" height="200" fill="#ecfdf5" opacity=".7"/><rect x="298.4" y="24" width="301.6" height="200" fill="#fef2f2" opacity=".7"/><line x1="80.0" y1="224.0" x2="298.4" y2="114.0" stroke="#16a34a" stroke-width="3.5"/><line x1="298.4" y1="114.0" x2="600.0" y2="114.0" stroke="#dc2626" stroke-width="3.5"/><line x1="298.4" y1="114.0" x2="298.4" y2="224.0" stroke="#94a3b8" stroke-width="1" stroke-dasharray="5 4"/><line x1="80.0" y1="114.0" x2="298.4" y2="114.0" stroke="#94a3b8" stroke-width="1" stroke-dasharray="5 4"/><text x="72.0" y="118.0" text-anchor="end" font-size="12" fill="#1e293b" font-weight="400" >Tlim = μN</text><text x="189.2" y="46.0" text-anchor="middle" font-size="13" fill="#065f46" font-weight="800" >ADHÉRENCE</text><text x="189.2" y="64.0" text-anchor="middle" font-size="11" fill="#065f46" font-weight="400" >équilibre : ‖T‖ = ‖F‖ ≤ μN</text><text x="449.2" y="46.0" text-anchor="middle" font-size="13" fill="#991b1b" font-weight="800" >FROTTEMENT (glissement)</text><text x="449.2" y="64.0" text-anchor="middle" font-size="11" fill="#991b1b" font-weight="400" >‖T‖ = μN (constant) &lt; ‖F‖</text><text x="189.2" y="210.0" text-anchor="middle" font-size="11" fill="#16a34a" font-weight="700" >‖T‖ = ‖F‖ (pente 1)</text><text x="340.0" y="246.0" text-anchor="middle" font-size="12" fill="#1e293b" font-weight="400" >intensité de l'effort tangentiel appliqué ‖F‖</text><text transform="translate(28,124.0) rotate(-90)" text-anchor="middle" font-size="12" fill="#1e293b">‖T‖ (action tangentielle de 1 sur 2)</text><text x="298.4" y="264.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >‖F‖ = Tlim</text></svg>
+      <figcaption>Évolution de l'action tangentielle \(\|\vec T\|\) en fonction de l'effort appliqué \(\|\vec F\|\) : droite de pente 1 tant que le colis est en équilibre (adhérence), puis palier à \(\mu N\) pendant le glissement.</figcaption>
+    </figure>
+    <div class="warnbox">
+      <span class="lab">Piège</span>
+      <b>En adhérence, \(\|\vec T\|\ne\mu N\)</b> : \(\|\vec T\|\) vaut ce que l'équilibre <i>exige</i> (ici \(\|\vec F\|\)), qui est <b>inférieur ou égal</b> à \(\mu N\). L'égalité \(\|\vec T\|=\mu N\) n'est vraie que <b>à la limite du glissement</b> ou <b>pendant le glissement</b>.
+    </div>
+
+    <h4>Lois de Coulomb</h4>
+    <p>Pour deux solides (1) et (2) en contact supposé ponctuel en \(P\), le torseur d'action mécanique de (1) sur (2) s'écrit \(\{\mathcal T_{1\to2}\}=\{\vec R_{1\to2}=\vec N_{1\to2}+\vec T_{1\to2};\ \vec0\}_P\), avec \(\vec N_{1\to2}\) normale au contact et \(\vec T_{1\to2}\) tangentielle (dans le plan tangent commun).</p>
+    <div class="thm">
+      <span class="lab">Loi de Coulomb</span>
+      \[\boxed{\|\vec T_{1\to2}\|\le\mu\,\|\vec N_{1\to2}\|}\qquad(\mu\ge0\ :\ \text{coefficient d'adhérence, souvent noté } f\text{, « coefficient de frottement »})\]
+      • Si \(\vec V_{P\in2/1}=\vec0\) : \(\|\vec T_{1\to2}\|\le\mu\|\vec N_{1\to2}\|\) → <b>adhérence</b> ;<br>
+      • Si \(\vec V_{P\in2/1}\ne\vec0\) : \(\|\vec T_{1\to2}\|=\mu\|\vec N_{1\to2}\|\) → <b>frottement</b> ;<br>
+      et la composante tangentielle <b>s'oppose au glissement</b>. Avec \(\vec t=\dfrac{\vec V_{P\in2/1}}{\|\vec V_{P\in2/1}\|}\) (dans le plan tangent) :
+      \(\ \vec T_{1\to2}=-\mu\|\vec N_{1\to2}\|\,\vec t\), d'où \(\vec T_{1\to2}\wedge\vec V_{P\in2/1}=\vec0\) (colinéaire) et \(\vec T_{1\to2}\cdot\vec V_{P\in2/1}<0\) (opposée).
+    </div>
+    <div class="method">
+      <span class="lab">À la limite de glissement (démarche pour un contact ponctuel)</span>
+      On suppose qu'il y a adhérence et que la <b>direction</b> de la composante tangentielle est déterminée par la <b>tendance au glissement</b> :<br>
+      1. Supposer un <b>mouvement de 2/1 en cas de rupture de l'adhérence</b> ;<br>
+      2. En déduire la <b>direction</b> de la composante tangentielle \(\vec T_{1\to2}=-T_{1\to2}\vec t\), avec \(\vec t=\vec V_{P\in2/1}/\|\vec V_{P\in2/1}\|\) ;<br>
+      3. <b>Appliquer la loi de Coulomb</b> (égalité) : \(\{\mathcal T_{1\to2}\}=\{\vec N_{1\to2}-\mu\|\vec N_{1\to2}\|\vec t;\ \vec0\}_P\) ;<br>
+      4. <b>Vérifier l'équilibre</b> de \(S_2\) (PFS) : cela valide l'hypothèse cinématique.
+    </div>
+
+    <h4>Cône de frottement (ou d'adhérence)</h4>
+    <div class="def">
+      <span class="lab">Définitions</span>
+      L'<b>angle d'adhérence</b> \(\varphi\) est tel que \(\|\vec T_{1\to2}\|=\tan\varphi\,\|\vec N_{1\to2}\|\). L'<b>angle d'adhérence limite</b> \(\varphi_{lim}\) est tel que \(\mu=\tan\varphi_{lim}\). Le <b>cône d'adhérence</b> est le cône de sommet le point de contact et de demi-angle \(\varphi_{lim}\), d'axe la normale.
+    </div>
+    <figure>
+      <svg viewBox="0 0 640 270" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Segoe UI, system-ui, sans-serif" font-size="13"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker></defs><rect width="640" height="270" fill="white"/><rect x="40" y="200" width="260" height="14" fill="#fed7aa" stroke="#ea580c"/><text x="270.0" y="230.0" text-anchor="middle" font-size="11" fill="#9a3412" font-weight="400" >plan tangent commun</text><path d="M170,200 L95.0,70.1 L245.0,70.1 Z" fill="#dcfce7" stroke="#16a34a" stroke-dasharray="6 4" opacity=".8"/><text x="170.0" y="64.1" text-anchor="middle" font-size="11" fill="#166534" font-weight="400" >cône d'adhérence (demi-angle φlim)</text><line x1="170" y1="200" x2="170" y2="80" stroke="#2563eb" stroke-width="3" marker-end="url(#ah)"/><text x="158.0" y="84.0" text-anchor="middle" font-size="15" fill="#2563eb" font-weight="800" >N</text><line x1="170" y1="200" x2="202.2" y2="200" stroke="#dc2626" stroke-width="3" marker-end="url(#ah)"/><text x="186.1" y="218.0" text-anchor="middle" font-size="15" fill="#dc2626" font-weight="800" >T</text><line x1="170" y1="200" x2="202.2" y2="80" stroke="#111827" stroke-width="3" marker-end="url(#ah)"/><text x="216.2" y="78.0" text-anchor="middle" font-size="15" fill="#1e293b" font-weight="800" >R</text><path d="M170,156 A44,44 0 0 1 181.4,157.5" fill="none" stroke="#475569" stroke-width="1.5"/><text x="184.0" y="148.0" text-anchor="middle" font-size="14" fill="#475569" font-weight="700" >φ</text><text x="170.0" y="24.0" text-anchor="middle" font-size="13" fill="#065f46" font-weight="800" >Adhérence : R à l'intérieur du cône</text><rect x="340" y="200" width="260" height="14" fill="#fed7aa" stroke="#ea580c"/><text x="570.0" y="230.0" text-anchor="middle" font-size="11" fill="#9a3412" font-weight="400" >plan tangent commun</text><path d="M470,200 L395.0,70.1 L545.0,70.1 Z" fill="#dcfce7" stroke="#16a34a" stroke-dasharray="6 4" opacity=".8"/><text x="470.0" y="64.1" text-anchor="middle" font-size="11" fill="#166534" font-weight="400" >cône d'adhérence (demi-angle φlim)</text><line x1="470" y1="200" x2="470" y2="80" stroke="#2563eb" stroke-width="3" marker-end="url(#ah)"/><text x="458.0" y="84.0" text-anchor="middle" font-size="15" fill="#2563eb" font-weight="800" >N</text><line x1="470" y1="200" x2="539.3" y2="200" stroke="#dc2626" stroke-width="3" marker-end="url(#ah)"/><text x="504.6" y="218.0" text-anchor="middle" font-size="15" fill="#dc2626" font-weight="800" >T</text><line x1="470" y1="200" x2="539.3" y2="80" stroke="#111827" stroke-width="3" marker-end="url(#ah)"/><text x="553.3" y="78.0" text-anchor="middle" font-size="15" fill="#1e293b" font-weight="800" >R</text><path d="M470,156 A44,44 0 0 1 492.0,161.9" fill="none" stroke="#475569" stroke-width="1.5"/><text x="484.0" y="148.0" text-anchor="middle" font-size="14" fill="#475569" font-weight="700" >φ</text><text x="470.0" y="24.0" text-anchor="middle" font-size="13" fill="#991b1b" font-weight="800" >Glissement : R sur le cône (φ = φlim)</text></svg>
+      <figcaption>À gauche : non-glissement ⟺ adhérence, \(\vec R_{1\to2}\) <b>à l'intérieur</b> du cône. À droite : glissement ⟺ frottement, \(\vec R_{1\to2}\) <b>sur</b> le cône (limite d'adhérence = limite de glissement), \(\vec T\) opposée à la vitesse de glissement.</figcaption>
+    </figure>
+    <div class="note">
+      <span class="lab">À retenir</span>
+      <b>L'équilibre n'est possible que si la résultante \(\vec R_{1\to2}\) reste dans le cône d'adhérence</b> : \(\varphi\le\varphi_{lim}=\arctan\mu\). C'est la forme géométrique de \(\|\vec T\|\le\mu\|\vec N\|\).
+    </div>
+
+    <h4>Hypothèses sur le coefficient d'adhérence \(\mu\)</h4>
+    <div class="overflow"><table>
+      <tr><th>\(\mu\) ne dépend pas…</th><th>\(\mu\) dépend essentiellement…</th></tr>
+      <tr><td>de l'intensité de la force élémentaire de pression ; de l'étendue de la surface de contact</td><td>de la <b>nature des matériaux</b> en contact ; de la <b>présence ou non de lubrifiant</b> (et aussi de l'état de rugosité, de la température…)</td></tr>
+    </table></div>
+    <p><b>Ordres de grandeur</b> de \(f\) ou \(\mu\) :</p>
+    <div class="overflow"><table>
+      <tr><th>Matériaux en contact</th><th>Surfaces sèches</th><th>Surfaces lubrifiées</th></tr>
+      <tr><td>Téflon / Acier</td><td>0,04</td><td>—</td></tr>
+      <tr><td>Acier / Bronze</td><td>0,10</td><td>0,09</td></tr>
+      <tr><td>Acier / Acier</td><td>0,15</td><td></td></tr>
+      <tr><td>Bronze / Bronze</td><td>0,2</td><td></td></tr>
+      <tr><td>Acier / Fonte</td><td>0,16</td><td>0,08 à 0,04</td></tr>
+      <tr><td>Fonte / Bronze</td><td>0,20</td><td>0,08 à 0,04</td></tr>
+      <tr><td>Nylon / Acier</td><td>0,35</td><td>0,12</td></tr>
+      <tr><td>Bois / Bois</td><td>0,4 à 0,2</td><td>0,16 à 0,04</td></tr>
+      <tr><td>Pneu / Route</td><td>0,6</td><td>0,30 à 0,10</td></tr>
+    </table></div>
+
+    <h3>1.4 Phénomène d'arc-boutement</h3>
+    <div class="def">
+      <span class="lab">Définition</span>
+      On appelle <b>arc-boutement</b> un phénomène issu de l'adhérence pour lequel un <b>équilibre subsiste indépendamment de l'intensité de l'effort</b> qui tend à le rompre. Exemple : sur un meuble à étagère réglable, l'arc-boutement <b>solidarise l'étagère mobile à la colonne fixe</b> (voir l'exercice C pour la condition).
+    </div>
+
+    <h3>1.5 Phénomènes de roulement et de pivotement</h3>
+    <p>Le raisonnement du glissement s'applique par analogie au <b>roulement</b> et au <b>pivotement</b> : une résistance au roulement (resp. pivotement) est modélisée par un <b>moment</b> de résistance, qui s'oppose au roulement (resp. pivotement) ou à sa <b>tendance</b>. Soit \(A\) un point de contact entre (1) et (2), torseur de (1) sur (2) en \(A\) :</p>
+    <div class="overflow"><table>
+      <tr><th>Phénomène</th><th>Torseur de (1) sur (2)</th><th>Condition</th></tr>
+      <tr><td><b>Glissement</b> (Coulomb)</td><td>\(\{\vec N_{1\to2}+\vec T_{1\to2};\ \vec0\}_A\)</td><td>\(\|\vec T_{1\to2}\|\le\mu\|\vec N_{1\to2}\|\), \(\mu\) sans dimension ; \(\vec T\) s'oppose au glissement (ou à sa tendance)</td></tr>
+      <tr><td><b>Pivotement</b></td><td>\(\{\vec N_{1\to2};\ \vec M^p_{A,1\to2}\}_A\)</td><td>\(\|\vec M^p_{A,1\to2}\|\le\delta\|\vec N_{1\to2}\|\), \(\delta\) <b>paramètre de résistance au pivotement (en m)</b> ; \(\vec M^p\) s'oppose au pivotement</td></tr>
+      <tr><td><b>Roulement</b></td><td>\(\{\vec N_{1\to2};\ \vec M^r_{A,1\to2}\}_A\)</td><td>\(\|\vec M^r_{A,1\to2}\|\le\eta\|\vec N_{1\to2}\|\), \(\eta\) <b>paramètre de résistance au roulement (en m)</b> ; \(\vec M^r\) s'oppose au roulement</td></tr>
+      <tr><td><b>Cas général</b></td><td>\(\{\vec N_{1\to2}+\vec T_{1\to2};\ \vec M^p_{A,1\to2}+\vec M^r_{A,1\to2}\}_A\)</td><td>combinaison de tous les mouvements ou tendances aux mouvements ; <b>toujours</b> les relations pour \(\vec T,\vec M^p,\vec M^r\) en fonction de \(\vec N\)</td></tr>
+    </table></div>
+    <p><b>N.B.</b> tous ces vecteurs sont obtenus par <b>projection sur la normale</b> et <b>sur le plan tangent commun</b> en \(A\) à (1) et (2). Les paramètres \(\delta\) et \(\eta\) ont la dimension d'une <b>longueur</b> (car moment ÷ force).</p>
+
+    <h3>1.6 Modèle local et modèle global d'une action mécanique</h3>
+    <h4>1.6.1 Modèle local des actions à distance et de contact</h4>
+    <p>Les <b>actions locales</b> modélisent finement les actions à distance et de contact (cette modélisation est aussi nécessaire pour la prise en compte des résistances au glissement) par des <b>champs de forces volumiques ou surfaciques</b>.</p>
+    <div class="def">
+      <span class="lab">Actions locales</span>
+      • <b>Action à distance locale</b> de (1) sur (2) sur le volume élémentaire \(dV\) centré en \(Q\) : <b>force élémentaire</b> \(d\vec F_{1\to2}(Q)=\vec q(Q)\,dV\), passant par \(Q\).<br>
+      • <b>Action de contact locale</b> de (1) sur (2) sur la surface élémentaire \(dS\) centrée en \(Q\) : \(d\vec F_{1\to2}(Q)=\vec q(Q)\,dS\), passant par \(Q\).<br>
+      • Torseur d'action locale : \(\{d\mathcal T_{1\to2}\}(Q)=\{d\vec F_{1\to2}(Q);\vec0\}_Q\).
+    </div>
+    <div class="overflow"><table>
+      <tr><th>Nature de l'élément</th><th>Élément</th><th>Densité de l'action \(\vec q\)</th><th>\(d\vec F_{1\to2}(Q)\)</th></tr>
+      <tr><td>Ligne</td><td>\(dl\) (\(dx\), \(dy\), \(r\,d\theta\))</td><td>linéique, en N·m⁻¹</td><td>\(\vec q\,dl\)</td></tr>
+      <tr><td>Surface</td><td>\(dS\) (\(dx\,dy\), \(r\,d\theta\,dr\))</td><td>surfacique, en N·m⁻² (= Pa)</td><td>\(\vec q\,dS\)</td></tr>
+      <tr><td>Volume</td><td>\(dV\)</td><td>volumique, en N·m⁻³</td><td>\(\vec q\,dV\)</td></tr>
+    </table></div>
+    <p>L'ensemble des forces élémentaires sur l'ensemble des éléments concernés définit un <b>champ de forces</b> associé à l'action mécanique.</p>
+
+    <h4>1.6.2 Du modèle local au modèle global</h4>
+    <div class="thm">
+      <span class="lab">Principe</span>
+      Le <b>modèle global</b> d'une action mécanique est l'action <b>équivalente</b> à l'ensemble des actions locales : son torseur est la <b>somme des torseurs des actions locales</b> :
+      \[\{\mathcal T_{1\to2}\}=\int\{d\mathcal T_{1\to2}\}(Q),\qquad \vec R_{1\to2}=\int d\vec F_{1\to2}(Q)\ (\text{N}),\qquad \vec M_{A,1\to2}=\int\vec{AQ}\wedge d\vec F_{1\to2}(Q)\ (\text{N·m}),\]
+      les moments étant sommés <b>en un même point</b> (ici \(A\)).
+    </div>
+
+    <h4>1.6.3 Cas de la pesanteur</h4>
+    <p>Si un solide est supposé <b>homogène</b>, sa masse volumique est constante : \(\rho(Q)=\rho\) pour tout \(Q\) du solide. Ordres de grandeur : <b>acier</b> \(\rho=7800\) kg·m⁻³ ; <b>aluminium</b> \(2700\) kg·m⁻³ ; <b>PVC</b> \(\approx1400\) kg·m⁻³.</p>
+    <p><b>Point de vue local</b> : la pesanteur est une action mécanique <b>à distance</b>, le champ de force est \(\ \forall Q\in1,\ d\vec F_{pes\to1}(Q)=dm\,\vec g=\rho\,dV\,\vec g\).</p>
+    <p><b>Point de vue global</b> : les forces locales sont de résultantes <b>parallèles à \(\vec g\)</b>, donc le torseur global est nécessairement une <b>force orientée selon \(\vec g\)</b> : le poids. La résultante :
+    \[\vec R_{pes\to1}=\int_{V_1}\rho\,dV\,\vec g=\rho\vec g\int_{V_1}dV=\rho\,\vec g\,V_1=m_1\vec g\qquad(V_1:\text{volume},\ m_1:\text{masse}).\]
+    Soit \(G_1\) le <b>centre de gravité</b> de (1) : par définition, c'est le <b>barycentre des masses</b> : \(\displaystyle\int_{V_1}\vec{G_1Q}\,dm=\vec0\). Alors
+    \[\vec M_{G_1,pes\to1}=\int_{V_1}\vec{G_1Q}\wedge d\vec F_{pes\to1}(Q)=\int_{V_1}\vec{G_1Q}\wedge(\vec g\,dm)=\underbrace{\Big(\int_{V_1}\vec{G_1Q}\,dm\Big)}_{=\vec0\ \text{par déf. de }G_1}\wedge\vec g=\vec0.\]</p>
+    <div class="thm">
+      <span class="lab">Résultat</span>
+      L'action de la pesanteur sur un solide (1) est une <b>force (un glisseur)</b> passant par le centre de gravité \(G_1\) :
+      \[\boxed{\{\mathcal T_{pes\to1}\}=\{m_1\vec g;\ \vec 0\}_{G_1}}\]
+    </div>
+    <div class="note">
+      <span class="lab">Calcul du centre de gravité</span>
+      Solide homogène : \(m_1=\rho V_1\) et \(\rho(Q)=\rho\), donc \(\ \vec{OG_1}=\dfrac1{V_1}\displaystyle\int_{V_1}\vec{OQ}\,dV\). Pour des solides dont certaines dimensions sont négligeables (plaques, tiges), on utilise un élément \(dS\) ou \(dl\) à la place de \(dV\) et une masse <b>surfacique</b> ou <b>linéique</b> à la place de \(\rho\).
+      Le centre de gravité est <b>toujours situé sur les éléments de symétrie</b> du solide : point, plan, droite…
+    </div>
+
+    <h4>1.6.4 Point de vue local des actions de contact avec adhérence ou frottement</h4>
+    <div class="thm">
+      <span class="lab">Action de contact locale</span>
+      En tout point \(P\) de la surface de contact : \(\ \{d\mathcal T_{1\to2}\}(P)=\{d\vec R_{1\to2}(P)=d\vec N_{1\to2}(P)+d\vec T_{1\to2}(P);\ \vec0\}_P\), avec<br>
+      • \(d\vec N_{1\to2}(P)=-p(P)\,dS\,\vec n_{21}(P)\) : composante normale locale (\(p(P)\) : <b>pression</b> en \(P\), \(\vec n_{21}(P)\) : <b>normale sortante</b> à \(S_2\)) ;<br>
+      • \(d\vec T_{1\to2}(P)\) : composante tangentielle locale (dans le plan tangent commun en \(P\)).<br>
+      <b>La loi de Coulomb s'applique aux actions locales</b> : \(\ \|d\vec T_{1\to2}\|\le\mu\|d\vec N_{1\to2}\|\Rightarrow\|d\vec T_{1\to2}\|\le\mu\,p\,dS\) en adhérence ;
+      \(\ \|d\vec T_{1\to2}\|=\mu\,p\,dS\) en glissement, avec \(\vec t(P)=\dfrac{\vec V_{P\in2/1}}{\|\vec V_{P\in2/1}\|}\) et \(d\vec T_{1\to2}(P)=-\mu\,p(P)\,dS\,\vec t(P)\).
+    </div>
+    <div class="method">
+      <span class="lab">À la limite de glissement (contact surfacique)</span>
+      Même démarche que pour l'action ponctuelle, avec une <b>hypothèse sur le champ de pression</b> et la détermination de l'action <b>globale</b> :<br>
+      1. Supposer un mouvement de 2/1 en cas de rupture d'adhérence, en définissant un <b>torseur cinématique</b> \(\{\mathcal V_{2/1}\}\) ;<br>
+      2. En déduire la <b>direction</b> de la composante tangentielle en tout point de la surface : \(\vec t(P)=\vec V_{P\in2/1}/\|\vec V_{P\in2/1}\|\) ;<br>
+      3. Appliquer Coulomb à l'action locale : \(\ \{d\mathcal T_{1\to2}\}(P)=\{(\vec n_{21}(P)-\mu\,\vec t(P))\,p(P)\,dS;\ \vec0\}_P\) ;<br>
+      4. Déterminer l'action <b>globale</b> par <b>intégration</b> avec une <b>hypothèse sur le champ de pression</b> ;<br>
+      5. <b>Vérifier l'équilibre</b> de \(S_2\) (PFS) : cela valide l'hypothèse cinématique <b>et</b> l'hypothèse sur le champ de pression.
+    </div>
+  </section>
+
+  <!-- ======================= EXOS CRÉÉS =============================== -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+    <p class="lead" style="font-size:.95rem">Seul le CM de C14 a été fourni (pas de TD) : exercices créés à partir du cours.</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Colis tiré sur un plan horizontal</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Colis de masse \(m=20\) kg sur un sol horizontal, coefficient d'adhérence \(\mu=0{,}4\) (bois / bois sec), \(g=9{,}81\) m/s². On le tire horizontalement avec \(F\) passant par \(G\).</div>
+        <p><b>Cadre.</b> Équilibre vertical : \(N=mg\). Loi de Coulomb : \(T\le\mu N\).</p>
+        <p class="q">Q1 — Effort limite</p>
+        <p>\(N=mg=20\times9{,}81=196{,}2\) N ; \(T_{lim}=\mu N=0{,}4\times196{,}2=78{,}5\) N.</p>
+        <p class="res">Le colis glisse dès que \(F>78{,}5\) N.</p>
+        <p class="q">Q2 — \(F=50\) N</p>
+        <p>\(F&lt;T_{lim}\) : équilibre horizontal \(T=F\) (la composante tangentielle s'oppose à \(F\)). <b>Adhérence</b> : \(T=50\) N (et <b>non</b> \(78{,}5\) N).</p>
+        <p class="q">Q3 — \(F=100\) N</p>
+        <p>\(F>T_{lim}\) : <b>glissement</b>, \(T=\mu N=78{,}5\) N (opposée au mouvement). PFS horizontal : \(ma=F-T\Rightarrow a=\dfrac{100-78{,}5}{20}=1{,}08\) m/s².</p>
+        <p class="res">\(T=50\) N (adhérence) ; \(T=78{,}5\) N et \(a\approx1{,}08\) m/s² (glissement)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Plan incliné et angle d'adhérence limite</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Solide de masse \(m=10\) kg sur un plan incliné d'angle \(\theta\) par rapport à l'horizontale, \(\mu=0{,}3\).</div>
+        <p class="q">Q1 — Condition d'équilibre</p>
+        <p>Base liée au plan : \(\vec x\) le long de la pente (vers le bas), \(\vec y\) normale. PFS à l'équilibre : sur \(\vec y\) : \(N=mg\cos\theta\) ; sur \(\vec x\) : \(T=mg\sin\theta\) (\(T\) dirigée vers le haut). Donc \(\dfrac TN=\tan\theta\). Coulomb : \(\tan\theta\le\mu\), soit \(\theta\le\varphi_{lim}=\arctan\mu\).</p>
+        <p class="res">\(\varphi_{lim}=\arctan0{,}3=16{,}7^\circ\) — la condition <b>ne dépend pas de la masse</b> : c'est la définition du cône d'adhérence (\(\vec R=-m\vec g\) est verticale et doit rester dans le cône d'axe la normale).</p>
+        <p class="q">Q2 — \(\theta=15^\circ\)</p>
+        <p>\(\tan15^\circ=0{,}268<0{,}3\) : <b>adhérence</b>. \(N=98{,}1\times\cos15^\circ=94{,}76\) N ; \(T=98{,}1\times\sin15^\circ=25{,}39\) N \(<\mu N=28{,}43\) N ✔.</p>
+        <p class="q">Q3 — \(\theta=20^\circ\)</p>
+        <p>\(\tan20^\circ=0{,}364>0{,}3\) : <b>glissement</b>. \(N=98{,}1\times\cos20^\circ=92{,}19\) N ; \(T=\mu N=27{,}66\) N. Accélération : \(a=g(\sin\theta-\mu\cos\theta)=9{,}81\times(0{,}3420-0{,}2819)=0{,}59\) m/s².</p>
+        <p class="res">\(\theta=15^\circ\) : adhérence, \(T=25{,}4\) N ; \(\theta=20^\circ\) : glissement, \(T=27{,}7\) N, \(a=0{,}59\) m/s²</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Arc-boutement d'une étagère sur une colonne</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">Un manchon (étagère) de hauteur de guidage \(h\) coulisse sur une colonne verticale. Une charge \(P\) (poids) est appliquée à une distance horizontale \(d\) de la colonne. Le manchon touche la colonne en deux points : \(A\) (haut, d'un côté) et \(B\) (bas, de l'autre côté). Coefficient d'adhérence \(\mu\) en \(A\) et \(B\). On néglige le poids du manchon et le diamètre de la colonne devant \(d\).</div>
+        <p><b>Cadre.</b> En \(A\) et \(B\) : action = composante normale horizontale \(N_A,N_B\) + composante tangentielle verticale \(T_A,T_B\) (vers le haut, car la tendance est de glisser vers le bas). Problème plan, 3 équations.</p>
+        <p class="q">Q1 — Équations d'équilibre</p>
+        <p>Résultante horizontale : \(N_A=N_B=N\). Résultante verticale : \(T_A+T_B=P\). Moment en \(B\) (on néglige le diamètre de la colonne) : \(P\,d=N\,h\Rightarrow N=\dfrac{P\,d}{h}\).</p>
+        <p class="q">Q2 — Condition d'adhérence</p>
+        <p>\(T_A\le\mu N\) et \(T_B\le\mu N\) donc \(P=T_A+T_B\le2\mu N=2\mu\dfrac{P\,d}{h}\). On simplifie par \(P>0\) :</p>
+        <p class="res">\[1\le\frac{2\mu d}{h}\quad\Longleftrightarrow\quad\boxed{d\ge\frac{h}{2\mu}}\]
+        La condition <b>ne dépend pas de \(P\)</b> : si elle est satisfaite, l'étagère tient <b>quelle que soit la charge</b> — c'est l'arc-boutement.</p>
+        <p class="q">Q3 — Application numérique</p>
+        <p>\(h=3\) cm, \(\mu=0{,}15\) (acier/acier sec) : \(d\ge\dfrac{3}{2\times0{,}15}=10\) cm. Pour une charge plus près de la colonne (\(d<10\) cm), l'étagère glisse. Lubrifier (\(\mu\) plus petit) <b>augmente</b> la distance minimale ; augmenter \(h\) aussi.</p>
+        <div class="warnbox"><span class="lab">Piège</span>Lire l'inégalité dans le bon sens : on cherche la condition pour que l'équilibre <b>subsiste</b> (\(T\le\mu N\)) ; le résultat est une borne <b>inférieure</b> sur \(d\) (bras de levier assez grand pour que les \(N\) soient grands).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice D — Cône d'adhérence</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Un contact transmet \(N=500\) N et \(T=150\) N. \(\mu=0{,}35\).</div>
+        <p>Angle de la résultante : \(\tan\varphi=\dfrac TN=0{,}30\Rightarrow\varphi=16{,}7^\circ\). Angle limite : \(\varphi_{lim}=\arctan0{,}35=19{,}3^\circ\).</p>
+        <p class="res">\(\varphi=16{,}7^\circ<\varphi_{lim}=19{,}3^\circ\) : \(\vec R\) est <b>dans</b> le cône ⟹ <b>adhérence</b>. Marge : \(T_{lim}=\mu N=175\) N, il reste 25 N avant le glissement.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice E — Centre de gravité et poids d'un demi-disque</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Plaque homogène en acier, en forme de demi-disque de rayon \(R=50\) mm, épaisseur \(e=5\) mm, \(\rho=7800\) kg/m³. Axe de symétrie \((O,\vec y)\), \(O\) centre du diamètre. Trouver \(G\) et le poids.</div>
+        <p class="q">Q1 — Position de \(G\)</p>
+        <p>\(G\) est sur l'axe de symétrie : \(x_G=0\). Plaque mince : élément de surface en polaires, \(dS=r\,dr\,d\theta\), \(y=r\sin\theta\), \(\theta\in[0,\pi]\), \(r\in[0,R]\). Aire \(S=\dfrac{\pi R^2}{2}\).
+        \[y_G=\frac1S\iint y\,dS=\frac1S\int_0^\pi\sin\theta\,d\theta\int_0^R r^2\,dr=\frac1S\times2\times\frac{R^3}{3}=\frac{2R^3/3}{\pi R^2/2}=\frac{4R}{3\pi}.\]</p>
+        <p class="res">\(y_G=\dfrac{4R}{3\pi}=\dfrac{4\times50}{3\pi}=21{,}2\) mm</p>
+        <p class="q">Q2 — Poids</p>
+        <p>\(S=\dfrac{\pi\times0{,}05^2}{2}=3{,}927\cdot10^{-3}\) m² ; \(V=S\,e=1{,}963\cdot10^{-5}\) m³ ; \(m=\rho V=7800\times1{,}963\cdot10^{-5}=0{,}153\) kg ; \(P=mg=0{,}153\times9{,}81=1{,}50\) N.</p>
+        <p class="res">\(\{\mathcal T_{pes\to1}\}=\{-1{,}50\,\vec y;\vec0\}_G\) (si \(\vec y\) vertical ascendant), \(G\) à \(21{,}2\) mm de \(O\) sur l'axe de symétrie.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice F — Du local au global : pression hydrostatique sur une paroi</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Paroi plane verticale rectangulaire de largeur \(b=2\) m et de hauteur immergée \(h=3\) m. La pression relative à la profondeur \(y\) (depuis la surface) est \(p(y)=\rho_e\,g\,y\) avec \(\rho_e=1000\) kg/m³. Calculer la force résultante de l'eau et sa position.</div>
+        <p><b>Local</b> : sur une bande horizontale \(dS=b\,dy\) à la profondeur \(y\), \(d\vec F=-p(y)\,dS\,\vec n\) de norme \(dF=\rho_e g\,y\,b\,dy\), perpendiculaire à la paroi.</p>
+        <p class="q">Q1 — Résultante (global)</p>
+        <p>\(F=\displaystyle\int_0^h\rho_eg\,b\,y\,dy=\rho_eg\,b\,\frac{h^2}{2}=1000\times9{,}81\times2\times\frac{9}{2}\).</p>
+        <p class="res">\(F=88\,290\) N \(\approx88\) kN</p>
+        <p class="q">Q2 — Point d'application (profondeur du centre de poussée)</p>
+        <p>Les forces élémentaires sont parallèles ⟹ le torseur global est une force. Moment par rapport à la surface libre : \(F\,y_c=\displaystyle\int_0^h y\,dF=\rho_eg\,b\frac{h^3}{3}\Rightarrow y_c=\dfrac{h^3/3}{h^2/2}=\dfrac{2h}{3}\).</p>
+        <p class="res">\(y_c=\dfrac{2h}{3}=2\) m sous la surface (soit \(1\) m au-dessus du fond) : plus bas que le centre géométrique (1,5 m) car la pression augmente avec la profondeur. Moment sur la base : \(F\times1=88\,290\) N·m.</p>
+        <div class="warnbox"><span class="lab">Piège</span>Pour une pression <b>uniforme</b> la force passe par le centre géométrique de la surface (\(F=-pS\vec n\)) ; pour une pression <b>non uniforme</b> le point d'application se calcule par intégration des moments.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice G — Résistance au roulement d'une roue</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Roue de rayon \(R=0{,}25\) m portant une charge totale \(N=500\) N, roulant à vitesse constante sur un sol horizontal. Paramètre de résistance au roulement \(\eta=2\) mm. Roulement sans glissement.</div>
+        <p class="q">Q1 — Moment de résistance au roulement</p>
+        <p>En mouvement, \(\|\vec M^r\|=\eta\,N=0{,}002\times500=1{,}0\) N·m (opposé au roulement).</p>
+        <p class="q">Q2 — Force motrice horizontale pour maintenir la vitesse</p>
+        <p>Équilibre des moments au centre de la roue en régime permanent (vitesse constante) : \(F\,R=\eta N\Rightarrow F=\dfrac{\eta N}{R}=\dfrac{1{,}0}{0{,}25}\).</p>
+        <p class="res">\(F=4\) N (soit \(F/N=\eta/R=0{,}8\%\)) — très inférieur à la force pour <b>glisser</b> (\(\mu N\approx75\) N pour \(\mu=0{,}15\)) : c'est pourquoi on utilise des roues.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Document original du chapitre (cours magistral). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours (CM)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c14-frottement-actions-locales/S2I-C14-R%C3%A9sistances%20aux%20mouvements%20et%20actions%20m%C3%A9caniques%20locales.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C14-Résistances aux mouvements et actions mécaniques locales</span><span class="badge">CM</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+<script src="../assets/gate.js"></script>
+</body>
+</html>

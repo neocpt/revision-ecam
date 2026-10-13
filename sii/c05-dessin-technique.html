@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C05 — Initiation au dessin technique — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-sii">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SII · C05 — Initiation au dessin technique</span>
+  <h1 class="title">C05 — Initiation au dessin technique : lire une mise en plan</h1>
+  <p class="lead">Comprendre les <b>normes du dessin industriel</b> : projections orthogonales et disposition des vues, <b>types de traits</b>, formats et cartouche ;
+  vues particulières, <b>coupes et sections</b>, hachures, <b>filetages</b> ; <b>terminologie</b> des surfaces, formes techniques et éléments standards (assemblage, guidage, transmission…).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#memo">📌 Fiche mémo</a></li>
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#exos">2. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#docs">📂 Documents donnés (CM)</a></li>
+    </ul>
+  </div>
+
+  <section class="memo-sheet" id="memo">
+    <div class="memo-head">📌 Fiche mémo — C05 Initiation au dessin technique</div>
+    <div class="memo-grid">
+      <div class="memo-item"><b>Projection européenne</b>vue de face au centre ; <b>droite → à gauche</b>, <b>gauche → à droite</b>, <b>dessus → en dessous</b>, <b>dessous → au-dessus</b>, arrière à droite ou à gauche</div>
+      <div class="memo-item"><b>Échelle</b>\(\text{échelle}=\dfrac{\text{dimension dessinée}}{\text{dimension réelle}}\) (1, 1/2, 1/5… réduction ; 2, 5, 10… agrandissement)</div>
+      <div class="memo-item"><b>Continu fort</b>arêtes et contours visibles — <b>Interrompu fin</b> : arêtes cachées — <b>Mixte fort</b> : plan de coupe</div>
+      <div class="memo-item"><b>Continu fin</b>cotes, hachures, arêtes fictives, fonds de filets vus — <b>Mixte fin</b> : axes, cercle primitif</div>
+      <div class="memo-item"><b>Priorité des traits</b>continu fort &gt; interrompu fin &gt; mixte fin &gt; continu fin ; espace ≥ 0,7 mm entre 2 traits</div>
+      <div class="memo-item"><b>Formats ISO A</b>rapport \(\sqrt2\) ; A0 = 1 m² (841×1189) ; A4 = 210×297 ; on plie en 2 → format inférieur</div>
+      <div class="memo-item"><b>Cartouche</b>auteur, date, révision, normes, désignation, matière, nomenclature : le dessin est un <b>document contractuel</b></div>
+      <div class="memo-item"><b>Coupe</b>hachures en trait fin sur la surface touchée ; plan de coupe en trait fort + flèche + 2 lettres (A-A) ; <b>les hachures ne coupent jamais un trait fort</b></div>
+      <div class="memo-item"><b>Exceptions aux hachures</b>axes dans un alésage, petites pièces (vis, clavette), pièces minces dans leur plus grande dimension (nervures)</div>
+      <div class="memo-item"><b>Filetage</b>traits forts : sommet de filet ; trait fin : fond de filet ; cotation sur les traits extérieurs, <b>M</b> sans symbole Ø</div>
+      <div class="memo-item"><b>Taraudage borgne</b>fond de trou à 120° ; la convention de la vis l'emporte dans l'assemblage</div>
+      <div class="memo-item"><b>Surfaces élémentaires</b>plan, cylindre, cône, sphère, hélicoïde, tore</div>
+      <div class="memo-item method"><b>Lire une mise en plan</b>cartouche → échelle → vue de face → vues liées (flèches, traces de coupe) → hachures (matière) → formes techniques → éléments standards</div>
+    </div>
+  </section>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Introduction : pourquoi un dessin normalisé ?</h3>
+    <p>Le dessin technique vise à une <b>représentation fidèle des objets, en forme et en dimension</b>. Le support (papier puis écran) impose de déformer l'objet par un jeu de perspective. <b>Gaspard Monge</b> (1746-1818), ingénieur lyonnais, propose les premières formalisations de représentation (perspective conique, diédrique, triédrique…). La <b>normalisation</b> arrive au début du XXᵉ siècle (norme allemande DIN) en réponse aux exigences croissantes de l'industrie.</p>
+    <div class="note">
+      <span class="lab">À retenir</span>
+      Le dessin industriel normalisé est <b>lisible, condensé et commun à tous les acteurs</b> de la conception et de la production d'un objet : un <b>langage</b> fondé sur des règles et conventions, qui « laisse peu de place à l'erreur » et favorise les échanges entre concepteurs.
+    </div>
+
+    <h3>1.2 Projections (norme NF E04-108-520)</h3>
+    <p>Une seule projection ne suffit pas pour représenter un objet sans ambiguïté : on utilise un <b>ensemble de projections</b> qui sont des <b>projections orthogonales</b>. Leurs positions relatives et leurs directions sont normalisées dans un <b>cube de projection</b>.</p>
+    <div class="method">
+      <span class="lab">Principes de projection</span>
+      1. On choisit un <b>trièdre orthogonal</b> de projection.<br>
+      2. On place l'objet au « centre » du trièdre de sorte que des <b>directions privilégiées</b> de l'objet soient parallèles aux faces du trièdre.<br>
+      3. On représente sur les faces du trièdre les <b>projections de l'objet suivant des directions orthogonales à chacun des plans</b>.<br>
+      <b>Échelle</b> de représentation = <b>rapport</b> \(\dfrac{\text{dimension dessinée}}{\text{dimension de l'objet réel}}\) (norme NF E04-506). On se limite, sauf besoin, aux échelles normalisées : réduction 1/2, 1/2,5, 1/5, 1/10, 1/20, 1/50… ; vraie grandeur 1 ; agrandissement 2, 2,5, 5, 10, 20, 50…
+    </div>
+    <p>Projection dans le plan P1 = <b>vue de face</b> (observateur en face de l'objet) ; plan P2 = <b>vue de dessus</b> (observateur au-dessus) ; plan P3 = <b>vue de droite</b> (observateur à droite)…</p>
+    <p>En « dépliant » le cube de projection autour de la vue de face :</p>
+    <ul>
+      <li>la <b>vue de droite</b> est placée <b>à gauche</b> de la vue de face ;</li>
+      <li>la <b>vue de gauche</b> est placée <b>à droite</b> de la vue de face ;</li>
+      <li>la <b>vue de dessus</b> est placée <b>au-dessous</b> de la vue de face ;</li>
+      <li>la <b>vue de dessous</b> est placée <b>au-dessus</b> de la vue de face ;</li>
+      <li>la <b>vue d'arrière</b> est placée indifféremment à droite ou à gauche des vues.</li>
+    </ul>
+    <figure>
+      <svg viewBox="0 0 640 370" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Segoe UI, system-ui, sans-serif" font-size="13"><rect width="640" height="370" fill="white"/><rect x="230" y="150" width="112" height="70" fill="#fef9c3" stroke="#1e293b" stroke-width="2.2"/><text x="286.0" y="190.0" text-anchor="middle" font-size="13" fill="#1e293b" font-weight="700" >VUE DE FACE</text><rect x="230" y="70" width="112" height="70" fill="#f8fafc" stroke="#1e293b" stroke-width="1.4"/><text x="286.0" y="110.0" text-anchor="middle" font-size="13" fill="#1e293b" font-weight="400" >vue de dessous</text><rect x="230" y="230" width="112" height="70" fill="#f8fafc" stroke="#1e293b" stroke-width="1.4"/><text x="286.0" y="270.0" text-anchor="middle" font-size="13" fill="#1e293b" font-weight="400" >vue de dessus</text><rect x="108" y="150" width="112" height="70" fill="#f8fafc" stroke="#1e293b" stroke-width="1.4"/><text x="164.0" y="190.0" text-anchor="middle" font-size="13" fill="#1e293b" font-weight="400" >vue de droite</text><rect x="352" y="150" width="112" height="70" fill="#f8fafc" stroke="#1e293b" stroke-width="1.4"/><text x="408.0" y="190.0" text-anchor="middle" font-size="13" fill="#1e293b" font-weight="400" >vue de gauche</text><rect x="474" y="150" width="112" height="70" fill="#f8fafc" stroke="#1e293b" stroke-width="1.4"/><text x="530.0" y="190.0" text-anchor="middle" font-size="13" fill="#1e293b" font-weight="400" >vue d'arrière</text><text x="320.0" y="24.0" text-anchor="middle" font-size="14" fill="#1e293b" font-weight="700" >Disposition normalisée des vues (projection européenne)</text><text x="320.0" y="44.0" text-anchor="middle" font-size="12" fill="#64748b" font-weight="400" >on place la vue de face puis on « déplie » le cube de projection autour d'elle</text><path d="M286.0,68 v-0" /><text x="286.0" y="50.0" text-anchor="middle" font-size="1" fill="#1e293b" font-weight="400" ></text><text x="20.0" y="352.0" text-anchor="start" font-size="12" fill="#9a3412" font-weight="700" >La vue de droite est À GAUCHE de la face ; la vue de dessus est EN DESSOUS.</text></svg>
+      <figcaption>Disposition des 6 vues autour de la vue de face (projection européenne). Un tronc de cône vu de côté à gauche puis deux cercles concentriques à droite est le <b>symbole</b> qui spécifie ce type de représentation.</figcaption>
+    </figure>
+    <figure>
+      <img src="c05-img/p05.png" alt="Cube de projection déplié et premiers traits (extrait du CM)" loading="lazy">
+      <figcaption>Extrait du CM (p. 5) — cube déplié : vue de face, de dessus, de dessous, de droite, de gauche, d'arrière.</figcaption>
+    </figure>
+    <div class="warnbox">
+      <span class="lab">Piège</span>
+      Dans la projection européenne, la vue de droite se place à <b>gauche</b> de la vue de face et la vue de dessus <b>en dessous</b> : c'est « l'inverse de l'intuition ». En projection américaine, c'est l'inverse : d'où l'importance du <b>symbole</b> dans le cartouche.
+    </div>
+
+    <h3>1.3 Les types de traits</h3>
+    <p>Un trait est caractérisé par sa <b>nature</b> (continue, interrompue, mixte) et sa <b>largeur</b> (fort E ou fin E/2). Pour la reprographie, la <b>distance entre deux traits ne doit jamais être inférieure à 0,7 mm</b> (portemines recommandés en 0,5 ou 0,7 mm).</p>
+    <figure>
+      <svg viewBox="0 0 640 250" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Segoe UI, system-ui, sans-serif" font-size="13"><rect width="640" height="250" fill="white"/><text x="18.0" y="34.0" text-anchor="middle" font-size="13" fill="#a16207" font-weight="800" >1</text><line x1="40" y1="30" x2="210" y2="30" stroke="#1e293b" stroke-width="3.2"/><text x="224.0" y="27.0" text-anchor="start" font-size="12" fill="#1e293b" font-weight="700" >Continu fort</text><text x="224.0" y="42.0" text-anchor="start" font-size="11" fill="#64748b" font-weight="400" >arêtes et contours vus, flèches de sens d'observation</text><text x="18.0" y="70.0" text-anchor="middle" font-size="13" fill="#a16207" font-weight="800" >2</text><line x1="40" y1="66" x2="210" y2="66" stroke="#1e293b" stroke-width="1.4" stroke-dasharray="9 5"/><text x="224.0" y="63.0" text-anchor="start" font-size="12" fill="#1e293b" font-weight="700" >Interrompu fin</text><text x="224.0" y="78.0" text-anchor="start" font-size="11" fill="#64748b" font-weight="400" >arêtes et contours cachés</text><text x="18.0" y="106.0" text-anchor="middle" font-size="13" fill="#a16207" font-weight="800" >3</text><line x1="40" y1="102" x2="210" y2="102" stroke="#1e293b" stroke-width="1.2"/><text x="224.0" y="99.0" text-anchor="start" font-size="12" fill="#1e293b" font-weight="700" >Continu fin</text><text x="224.0" y="114.0" text-anchor="start" font-size="11" fill="#64748b" font-weight="400" >cotes, lignes d'attache, hachures, axes courts</text><text x="18.0" y="142.0" text-anchor="middle" font-size="13" fill="#a16207" font-weight="800" >4</text><line x1="40" y1="138" x2="210" y2="138" stroke="#1e293b" stroke-width="1.4" stroke-dasharray="16 4 2 4"/><text x="224.0" y="135.0" text-anchor="start" font-size="12" fill="#1e293b" font-weight="700" >Mixte fin (1 point, 1 tiret long)</text><text x="224.0" y="150.0" text-anchor="start" font-size="11" fill="#64748b" font-weight="400" >axes de révolution et de symétrie, cercle primitif</text><text x="18.0" y="178.0" text-anchor="middle" font-size="13" fill="#a16207" font-weight="800" >6</text><line x1="40" y1="174" x2="210" y2="174" stroke="#1e293b" stroke-width="3.2" stroke-dasharray="16 4 2 4"/><text x="224.0" y="171.0" text-anchor="start" font-size="12" fill="#1e293b" font-weight="700" >Mixte fort (1 point, 1 tiret long)</text><text x="224.0" y="186.0" text-anchor="start" font-size="11" fill="#64748b" font-weight="400" >plan de coupe, surfaces à spécification</text><text x="18.0" y="214.0" text-anchor="middle" font-size="13" fill="#a16207" font-weight="800" >7</text><line x1="40" y1="210" x2="210" y2="210" stroke="#1e293b" stroke-width="1.4" stroke-dasharray="16 4 2 4 2 4"/><text x="224.0" y="207.0" text-anchor="start" font-size="12" fill="#1e293b" font-weight="700" >Mixte fin (2 points, 1 tiret long)</text><text x="224.0" y="222.0" text-anchor="start" font-size="11" fill="#64748b" font-weight="400" >pièces voisines, positions extrêmes</text></svg>
+      <figcaption>Les principaux types de traits (numérotation du CM) et leurs usages.</figcaption>
+    </figure>
+    <div class="overflow"><table>
+      <tr><th>N°</th><th>Trait</th><th>Utilisation</th></tr>
+      <tr><td>1</td><td><b>Continu fort</b> (E)</td><td>arêtes visibles, contours vus, flèches de sens d'observation</td></tr>
+      <tr><td>2</td><td><b>Interrompu fin</b> (E/2)</td><td>arêtes cachées, contours cachés, fonds de filets cachés</td></tr>
+      <tr><td>3</td><td><b>Continu fin</b></td><td>lignes d'attache et de cote ; hachures ; axes courts ; fonds de filets vus ; cercles de pied des roues dentées ; contours de sections rabattues ; arêtes fictives ; constructions géométriques</td></tr>
+      <tr><td>4</td><td><b>Mixte fin à point et un tiret long</b></td><td>axes de révolution, axes de symétrie, cercle primitif des engrenages</td></tr>
+      <tr><td>5</td><td><b>Continu fin ondulé ou rectiligne en zigzag</b></td><td>limites de vues partielles, limites de coupes et sections locales</td></tr>
+      <tr><td>6</td><td><b>Mixte fort à un point et un tiret long</b></td><td>indication de plan de coupe et de section ; surfaces à spécification particulière ; traitement des surfaces ; partie restreinte d'un élément ; zone de mesure restreinte</td></tr>
+      <tr><td>7</td><td><b>Mixte fin à deux points et un tiret long</b></td><td>contours de pièces voisines ; positions de pièces mobiles ; contours primitifs ; lignes de centre de gravité ; parties situées en avant d'un plan</td></tr>
+    </table></div>
+    <div class="thm">
+      <span class="lab">Priorité des traits en cas de superposition</span>
+      <b>Continu fort</b> &gt; <b>Interrompu fin</b> &gt; <b>Mixte fin</b> &gt; <b>Continu fin</b>.
+    </div>
+    <figure>
+      <img src="c05-img/p06.png" alt="Tableau des types de traits (extrait du CM)" loading="lazy">
+      <figcaption>Extrait du CM (p. 6) — tableau des types de traits.</figcaption>
+    </figure>
+
+    <h3>1.4 Formats des dessins et cartouche</h3>
+    <p>Le format et la présentation sont normalisés : réduction du nombre de formats, archivage et classement simplifiés, cohérence de présentation facilitant la consultation (cf. « Guide du dessinateur industriel », § 3).</p>
+    <div class="def">
+      <span class="lab">Formats de feuilles (série A)</span>
+      En 1918, Walter Porstmann propose, d'après le rapport de Lichtenberg, les formats de papier de la norme DIN : <b>chaque format plié en deux donne le format inférieur</b> et reste <b>homothétique</b>, ce qui impose un rapport de \(\sqrt2\) entre la longueur et la largeur. Le format de référence est le <b>A0</b>, de surface <b>1 m²</b> (841 × 1189 mm).
+    </div>
+    <figure>
+      <svg viewBox="0 0 640 250" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Segoe UI, system-ui, sans-serif" font-size="13"><rect width="640" height="250" fill="white"/><rect x="20" y="152.7" width="54.7" height="77.3" fill="#fef9c3" stroke="#1e293b" stroke-width="1.6"/><text x="47.3" y="191.3" text-anchor="middle" font-size="15" fill="#1e293b" font-weight="800" >A4</text><text x="47.3" y="246.0" text-anchor="middle" font-size="10" fill="#64748b" font-weight="400" >210×297</text><rect x="98.684" y="120.6" width="77.3" height="109.4" fill="#fef9c3" stroke="#1e293b" stroke-width="1.6"/><text x="137.4" y="175.3" text-anchor="middle" font-size="15" fill="#1e293b" font-weight="800" >A3</text><text x="137.4" y="246.0" text-anchor="middle" font-size="10" fill="#64748b" font-weight="400" >297×420</text><rect x="200.0228" y="75.3" width="109.4" height="154.7" fill="#fef9c3" stroke="#1e293b" stroke-width="1.6"/><text x="254.7" y="152.7" text-anchor="middle" font-size="15" fill="#1e293b" font-weight="800" >A2</text><text x="254.7" y="246.0" text-anchor="middle" font-size="10" fill="#64748b" font-weight="400" >420×594</text><rect x="333.3908" y="11.0" width="154.7" height="219.0" fill="#fef9c3" stroke="#1e293b" stroke-width="1.6"/><text x="410.7" y="120.5" text-anchor="middle" font-size="15" fill="#1e293b" font-weight="800" >A1</text><text x="410.7" y="246.0" text-anchor="middle" font-size="10" fill="#64748b" font-weight="400" >594×841</text><text x="20.0" y="30.0" text-anchor="start" font-size="13" fill="#1e293b" font-weight="700" >Ratio √2 ≈ 1,414 entre longueur et largeur</text><text x="20.0" y="50.0" text-anchor="start" font-size="12" fill="#64748b" font-weight="400" >A0 : 841 × 1189 mm → 1 m² ; plier en 2 → format inférieur</text></svg>
+      <figcaption>Formats A4 à A1 (échelle réduite) : chaque format a pour côtés \((l,\ l\sqrt2)\) ; plier en deux la grande longueur donne le format suivant.</figcaption>
+    </figure>
+    <div class="def">
+      <span class="lab">Cartouche</span>
+      Le dessin technique est un <b>document contractuel</b> : il engage son auteur juridiquement. On y porte des informations non graphiques : auteur, date, révision, normes utilisées, nom et référence du produit, matières, nomenclature, <b>échelle</b>, <b>symbole de projection</b>… Elles sont intégrées au <b>cartouche</b>.
+    </div>
+
+    <h3>1.5 Exemple et applications du cours</h3>
+    <p>Le CM propose trois applications graphiques à réaliser sur le dessin d'un bloc à rainure en V :</p>
+    <ul>
+      <li><b>A1</b> — Reporter un point (repéré sur la vue en perspective) dans les trois vues ;</li>
+      <li><b>A2</b> — Colorier trois surfaces (avec des couleurs différentes) dans les trois vues ;</li>
+      <li><b>A3</b> — Parmi 4 figures de cubes assemblés (1, A, B, C), trouver les deux figures identiques (test de vision dans l'espace).</li>
+    </ul>
+    <div class="method">
+      <span class="lab">Méthode pour A1 et A2 (à faire sur papier)</span>
+      Une vue donne <b>2 des 3 coordonnées</b> du point : vue de face → (abscisse, hauteur) ; vue de dessus → (abscisse, profondeur) ; vue de droite/gauche → (profondeur, hauteur).<br>
+      1. Placer le point sur une vue, par exemple la vue de face ;<br>
+      2. Le reporter sur la vue de dessus par une <b>ligne de rappel verticale</b> (même abscisse) puis la profondeur lue sur la perspective ;<br>
+      3. Le reporter sur la vue de gauche/droite par une <b>ligne de rappel horizontale</b> (même hauteur) ;<br>
+      4. Pour colorier une surface : l'identifier sur la perspective (plan incliné, plan de face…), puis la retrouver dans <b>chaque vue</b> (une surface plane inclinée apparaît <b>déformée</b> — en raccourci — dans les vues où elle n'est pas de bout ; un plan parallèle au plan de projection apparaît en <b>vraie grandeur</b>, un plan perpendiculaire apparaît <b>en trait</b>).
+    </div>
+    <div class="note">
+      <span class="lab">Remarque du CM</span>
+      Pour s'entraîner à voir dans l'espace, un test de vision dans l'espace est proposé en ligne (mon-qi.com). Les figures de A1-A3 sont des images : les réponses doivent être construites au crayon sur le sujet.
+    </div>
+
+    <h3>1.6 Représentations particulières</h3>
+    <p>Ces représentations allègent le tracé, évitent des projections complexes et s'adaptent à la mise en page :</p>
+    <div class="overflow"><table>
+      <tr><th>Représentation</th><th>Principe</th></tr>
+      <tr><td><b>Vue déplacée</b></td><td>observation suivant une <b>direction oblique</b> (flèche + lettre), la vue est placée là où la mise en page le permet ; évite des projections déformées</td></tr>
+      <tr><td><b>Vue interrompue</b></td><td>on « raccourcit » une pièce trop longue en n'en représentant que les extrémités, avec un trait fin ondulé ou en zigzag (ex. arbre de moteur)</td></tr>
+      <tr><td><b>Demi-vue / quart de vue</b> (vues partielles)</td><td>pièce <b>symétrique</b> : on ne dessine qu'une moitié (ou un quart) ; <b>indication d'une demi-vue</b> par deux petits traits à l'axe de symétrie</td></tr>
+      <tr><td><b>Vue locale</b></td><td>représentation d'un <b>détail</b> extrait de la vue principale, relié par un <b>trait mixte fin</b></td></tr>
+      <tr><td><b>Demi-vue rabattue</b></td><td>la demi-face cachée est représentée par des <b>traits mixtes fins à deux tirets</b>, rattachée à la vue principale</td></tr>
+      <tr><td><b>Position extrême de pièces mobiles</b></td><td>une position en traits normaux et l'autre en <b>trait mixte fin à deux tirets</b></td></tr>
+      <tr><td><b>Méplat</b> (surface plane de manœuvre)</td><td>usiné sur des surfaces de révolution, indiqué par ses <b>diagonales principales en trait fin</b></td></tr>
+      <tr><td><b>Détail</b></td><td>grossissement d'une partie peu visible à l'échelle du tracé ; indiquer le <b>nom du détail</b> (lettre) et l'<b>échelle du détail</b></td></tr>
+      <tr><td><b>Arêtes fictives</b></td><td>sur pièces moulées ou pliées, intersections masquées par un arrondi : génératrices fictives en <b>traits continus fins</b>, <b>non reliées au bord</b> de la pièce</td></tr>
+    </table></div>
+    <figure>
+      <img src="c05-img/p10.png" alt="Vues interrompues, partielles, locales (extrait du CM)" loading="lazy">
+      <figcaption>Extrait du CM (p. 10) — vues interrompues et vues partielles (demi-vue, quart de vue).</figcaption>
+    </figure>
+    <figure>
+      <img src="c05-img/p11.png" alt="Vues locales, demi-vue rabattue, position extrême, méplat (extrait du CM)" loading="lazy">
+      <figcaption>Extrait du CM (p. 11) — vue locale, demi-vue rabattue, position extrême de pièces mobiles, méplat.</figcaption>
+    </figure>
+
+    <h3>1.7 Coupes</h3>
+    <div class="def">
+      <span class="lab">Définition</span>
+      Les <b>vues en coupe</b> permettent de couper la pièce « par la pensée » : on <b>enlève la partie située en avant du plan de coupe</b> pour visualiser la partie en arrière. On doit faire apparaître ce qui est <b>situé en arrière du plan de coupe</b>.
+    </div>
+    <div class="method">
+      <span class="lab">Pour dessiner une coupe</span>
+      1. <b>Hachurer en traits fins</b> la surface touchée par le « trait de scie » (la matière coupée) ;<br>
+      2. <b>Repérer en traits forts</b> la trace du plan de coupe (mixte fort, extrémités) ;<br>
+      3. <b>Repérer le sens de projection par une flèche</b> en traits forts ;<br>
+      4. <b>Repérer la coupe par deux lettres</b> (A-A…), sur le plan de coupe et sur la vue coupée.
+    </div>
+    <figure>
+      <img src="c05-img/p13.png" alt="Définition d'une coupe (extrait du CM)" loading="lazy">
+      <figcaption>Extrait du CM (p. 13) — principe de la vue en coupe et indications A-A.</figcaption>
+    </figure>
+
+    <h4>Remarques et hachures</h4>
+    <div class="warnbox">
+      <span class="lab">Règles de hachurage</span>
+      • <b>Les hachures ne coupent jamais un trait fort.</b><br>
+      • Les hachures ne peuvent pas s'arrêter sur un trait <b>interrompu</b>.<br>
+      • Dans certains cas (<b>demi-coupe</b>), les hachures s'arrêtent sur un <b>trait mixte</b> (axe de symétrie).<br>
+      • L'<b>intervalle</b> entre les traits est fonction de la surface à hachurer ; l'<b>orientation</b> ne doit pas suivre les directions principales des contours.
+    </div>
+    <p>Un <b>type de hachure caractérise une famille de matériaux</b> :</p>
+    <div class="overflow"><table>
+      <tr><th>Matériau</th><th>Hachure</th></tr>
+      <tr><td>Acier et fonte</td><td>traits fins parallèles inclinés à 45° (hachure de référence)</td></tr>
+      <tr><td>Aluminium et alliages</td><td>traits inclinés, motif propre à la famille (voir la figure ci-dessous)</td></tr>
+      <tr><td>Cuivre et alliages</td><td>traits inclinés plus rapprochés, motif propre à la famille (voir la figure)</td></tr>
+      <tr><td>Plastiques et isolants</td><td>traits fins horizontaux</td></tr>
+      <tr><td>Béton</td><td>trame pointillée (petits cercles et points)</td></tr>
+    </table></div>
+    <figure>
+      <img src="c05-img/p14.png" alt="Hachures et matériaux (extrait du CM)" loading="lazy">
+      <figcaption>Extrait du CM (p. 14) — règles de hachurage et hachures par famille de matériaux.</figcaption>
+    </figure>
+
+    <h4>Coupes particulières</h4>
+    <ul>
+      <li><b>Arêtes curvilignes</b> : ne pas oublier de représenter les arêtes curvilignes révélées par la coupe.</li>
+      <li><b>Exceptions — on ne hachure pas</b> : un <b>axe</b> qui traverse un alésage ; les <b>pièces de petites dimensions</b> (vis, clavette…) ; les <b>pièces minces dans leur plus grande dimension</b> (nervures).</li>
+      <li><b>Demi-coupe</b> : pour une pièce <b>symétrique</b> par rapport à un axe, on dessine une <b>demi-vue accolée à une demi-coupe</b> ; les traits forts ou les hachures peuvent s'arrêter sur l'axe de symétrie.</li>
+      <li><b>Coupe par plans décalés</b> : couper différentes parties de la pièce par des <b>plans parallèles</b> ; supposer ces plans ramenés sur un seul plan de projection ; <b>changements de plan en traits forts</b> ; un <b>trait d'axe</b> indique le changement de plan ; hachurage avec <b>décalage d'un demi-pas</b> entre les surfaces.</li>
+      <li><b>Coupe par plans concourants</b> : couper par des plans <b>concourants</b> ; le plan de coupe oblique est <b>ramené par rotation dans le prolongement de l'autre</b> et on projette sur ce plan ; changements de plan en traits forts ; trait d'axe pour le changement de plan ; <b>on ne dessine pas les parties cachées dans le plan rabattu</b>.</li>
+    </ul>
+    <figure>
+      <img src="c05-img/p16.png" alt="Demi-coupe et coupe par plans décalés (extrait du CM)" loading="lazy">
+      <figcaption>Extrait du CM (p. 16) — demi-coupe et coupe par plans décalés (changements de plan en trait fort, hachures décalées d'un demi-pas).</figcaption>
+    </figure>
+    <figure>
+      <img src="c05-img/p17.png" alt="Coupe par plans concourants (extrait du CM)" loading="lazy">
+      <figcaption>Extrait du CM (p. 17) — coupe par plans concourants.</figcaption>
+    </figure>
+
+    <h4>Sections</h4>
+    <div class="def">
+      <span class="lab">Section</span>
+      Une <b>section</b> représente <b>uniquement la partie de la pièce située dans le plan sécant</b> (alors que la coupe montre aussi ce qui est en arrière). Une section <b>sortie</b> se présente comme une coupe dans laquelle « on ne verrait pas l'arrière de la pièce » ; pour dissiper les ambiguïtés, on indique « Section » en toutes lettres.
+      Une section <b>rabattue</b> est dessinée <b>en surcharge sur une vue</b>, avec le <b>contour de la section en traits fins</b>.
+    </div>
+    <figure>
+      <img src="c05-img/p18.png" alt="Sections sortie et rabattue (extrait du CM)" loading="lazy">
+      <figcaption>Extrait du CM (p. 18-19) — sections sorties et sections rabattues.</figcaption>
+    </figure>
+
+    <h3>1.8 Filetages</h3>
+    <div class="method">
+      <span class="lab">Conventions de représentation</span>
+      <b>Tige filetée</b> : en <b>traits forts</b>, la forme qu'avait l'axe avant l'usinage de l'hélice (diamètre extérieur, sommet des filets) et le début du filetage ; en <b>traits fins</b>, le fond du filetage ; mêmes conventions en vue de côté et en coupe ; dans les vues cachées, toutes les arêtes en traits interrompus.<br>
+      <b>Trou taraudé borgne</b> : en traits forts, le trou existant avant l'usinage de l'hélice <b>ainsi que la fin du taraudage</b> (fond du trou à <b>120°</b> d'angle au sommet) ; en traits fins, le fond du taraudage.<br>
+      <b>Tige filetée dans trou taraudé</b> : <b>la convention de dessin de la vis l'emporte dans l'assemblage</b> (la tige reste dessinée entière, le taraud n'apparaît pas à sa place).<br>
+      <b>Trou taraudé débouchant</b> ; <b>gorges</b> sur l'arbre ou dans l'alésage : elles permettent de dégager la <b>fin de l'usinage</b> (sortie de l'outil).<br>
+      <b>Cotation</b> : toujours sur les <b>traits extérieurs</b> ; <b>ne pas mettre le symbole Ø</b> ; la lettre <b>M</b> indique un filetage métrique normalisé (ex. M8).
+    </div>
+    <figure>
+      <img src="c05-img/p19.png" alt="Tige filetée (extrait du CM)" loading="lazy">
+      <figcaption>Extrait du CM (p. 19) — représentation d'une tige filetée.</figcaption>
+    </figure>
+    <figure>
+      <img src="c05-img/p20.png" alt="Taraudage borgne et assemblage (extrait du CM)" loading="lazy">
+      <figcaption>Extrait du CM (p. 20) — trou taraudé borgne, tige filetée dans un trou taraudé, taraudage débouchant et gorges.</figcaption>
+    </figure>
+
+    <h3>1.9 Terminologie</h3>
+    <h4>Les surfaces élémentaires</h4>
+    <p>Surface <b>plane</b> (un plan), <b>cylindrique</b> (un cylindre), <b>conique</b> (un cône), <b>sphérique</b> (une sphère), <b>hélicoïdale</b> (un hélicoïde), <b>torique</b> (un tore).</p>
+
+    <h4>Les formes techniques</h4>
+    <div class="overflow"><table>
+      <tr><th>Forme</th><th>Définition</th></tr>
+      <tr><td><b>Fraisure</b></td><td>surface <b>conique intérieure</b> utilisée, en général, pour « noyer » une tête de vis (FS, FHC)</td></tr>
+      <tr><td><b>Épaulement</b></td><td>composé en général d'une surface cylindrique et d'une surface plane, ou de deux surfaces planes implicitement perpendiculaires</td></tr>
+      <tr><td><b>Rainure</b></td><td>entaille de différentes formes et dimensions selon le rôle fonctionnel ; généralement trois plans perpendiculaires (rainure de guidage, rainure de clavetage)</td></tr>
+      <tr><td><b>Chanfrein</b></td><td>surface de faible étendue obtenue par <b>suppression d'une arête</b> (sécurité) ; sur une pièce cylindrique, c'est une surface <b>conique de révolution</b> ; facilite aussi le montage des pièces</td></tr>
+      <tr><td><b>Arrondi</b> (surface convexe)</td><td>petite surface arrondie qui supprime une arête vive ou raccorde deux surfaces (pièces moulées en particulier)</td></tr>
+      <tr><td><b>Congé</b> (surface concave)</td><td>petite surface raccordant deux surfaces formant un <b>angle rentrant</b> (pièces moulées en particulier)</td></tr>
+      <tr><td><b>Méplat</b></td><td>surface plane coupant un cylindre droit <b>parallèlement à son axe</b></td></tr>
+      <tr><td><b>Filetage</b></td><td>surface hélicoïdale <b>extérieure</b> taillée sur un cylindre, utilisée avec un taraudage</td></tr>
+      <tr><td><b>Gorge</b></td><td>rainure circulaire sur un arbre : permet la mise en place d'un anneau élastique, d'un joint ; sert de dégagement pour éviter un contact</td></tr>
+      <tr><td><b>Tenon (languette)</b></td><td>forme destinée à s'ajuster dans une rainure, en général pour assurer une <b>liaison glissière</b> ; « languette » = tenon de grande longueur</td></tr>
+      <tr><td><b>Trou oblong</b> (lumière)</td><td>trou plus long que large, terminé par deux demi-cylindres ; en général pour une fonction de <b>réglage</b></td></tr>
+      <tr><td><b>Lumière</b></td><td>orifice de forme quelconque, généralement dans des pièces minces</td></tr>
+      <tr><td><b>Bossage</b></td><td>volume en saillie qui limite l'importance d'une surface usinée sur des pièces moulées</td></tr>
+      <tr><td><b>Nervure</b></td><td>volume de base en général triangulaire, rapporté ou moulé sur une pièce pour <b>augmenter sa rigidité</b> sans trop de poids</td></tr>
+      <tr><td><b>Évidement circulaire</b></td><td>dégagement permettant de réduire la <b>longueur de portée</b> d'un arbre</td></tr>
+      <tr><td><b>Évidement sur semelle</b></td><td>dégagement permettant de réduire l'<b>étendue de la surface d'appui</b></td></tr>
+      <tr><td><b>Chambrage</b></td><td>évidement <b>intérieur</b> qui réduit la longueur de portée d'un alésage</td></tr>
+    </table></div>
+    <figure>
+      <img src="c05-img/p22.png" alt="Surfaces élémentaires et formes techniques (extrait du CM)" loading="lazy">
+      <figcaption>Extrait du CM (p. 22) — surfaces élémentaires, fraisure, épaulement, rainure.</figcaption>
+    </figure>
+    <figure>
+      <img src="c05-img/p23.png" alt="Chanfrein, arrondi, congé, méplat, filetage (extrait du CM)" loading="lazy">
+      <figcaption>Extrait du CM (p. 23) — chanfrein, arrondi, congé, méplat, filetage (représentation réelle et normalisée).</figcaption>
+    </figure>
+    <figure>
+      <img src="c05-img/p24.png" alt="Gorge, tenon, trou oblong, lumière, bossage, nervure (extrait du CM)" loading="lazy">
+      <figcaption>Extrait du CM (p. 24) — gorge, tenon, trou oblong, lumière, bossage, nervure.</figcaption>
+    </figure>
+
+    <h4>Éléments standards et éléments normalisés</h4>
+    <div class="overflow"><table>
+      <tr><th>Catégorie</th><th>Éléments</th></tr>
+      <tr><td><b>Profilés / produits semi-finis</b></td><td>tube carré, tube rond, barre ronde, barre carrée, tôle, plaque, plat, cornière</td></tr>
+      <tr><td><b>Assemblage</b></td><td>vis à tête hexagonale (vis H), vis à tête cylindrique à six pans creux (vis CHC), rondelle, écrou, goujon, <b>anneau élastique</b> d'extérieur (circlips pour <b>arbre</b>) et d'intérieur (circlips pour <b>alésage</b>), goupille élastique (goupille Mécanindus)</td></tr>
+      <tr><td><b>Guidage en rotation</b></td><td>bague autolubrifiée (coussinet), roulement rigide à une rangée de billes</td></tr>
+      <tr><td><b>Transmission de mouvement</b></td><td>train d'engrenages, pignons et chaîne, poulies et courroie, pignon-crémaillère</td></tr>
+      <tr><td><b>Autres</b></td><td><b>joint torique</b> (fonction étanchéité, matière caoutchouc) ; <b>ressort</b> (restitution d'effort, matière acier) ; <b>clavette</b> (liaison complète démontable)</td></tr>
+    </table></div>
+    <div class="note">
+      <span class="lab">Lien avec les autres chapitres</span>
+      Ces éléments sont les « briques » des mécanismes étudiés ailleurs : guidages (pivot, glissière) → <a href="c10-liaisons.html">C10 Liaisons usuelles</a> ; transmetteurs → <a href="c04-transmetteurs.html">C04</a> ; la lecture d'un dessin sert à construire le <b>schéma cinématique</b>.
+    </div>
+    <figure>
+      <img src="c05-img/p26.png" alt="Éléments d'assemblage et de guidage (extrait du CM)" loading="lazy">
+      <figcaption>Extrait du CM (p. 26) — éléments d'assemblage (vis H, CHC, rondelle, écrou, goujon, circlips, goupille) et de guidage en rotation.</figcaption>
+    </figure>
+    <figure>
+      <img src="c05-img/p27.png" alt="Transmission de mouvement et autres éléments (extrait du CM)" loading="lazy">
+      <figcaption>Extrait du CM (p. 27) — transmission de mouvement, joint torique, ressort, clavette.</figcaption>
+    </figure>
+
+    <h3>1.10 Savoirs et savoir-faire (bilan du CM)</h3>
+    <div class="note">
+      <span class="lab">Je connais</span>
+      les vues principales associées à une pièce ; comment disposer ces vues sur un plan ; la signification des traits ; toutes les vues utilisables dans une mise en plan.
+    </div>
+    <div class="note">
+      <span class="lab">Je sais</span>
+      lire une mise en plan ; reconnaître les matériaux usuels ; identifier les surfaces élémentaires ; identifier les formes techniques usuelles ; les éléments techniques usuels ; faire une mise en plan d'une pièce 3D.
+    </div>
+  </section>
+
+  <!-- ======================= EXOS CRÉÉS =============================== -->
+  <section class="block" id="exos">
+    <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
+    <p class="lead" style="font-size:.95rem">Seul le CM de C05 a été fourni (pas de TD) : exercices créés à partir du cours (questions de lecture de dessin, de normes et de vocabulaire).</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Quel trait pour quoi ?</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">Associer chaque élément du dessin au type de trait normalisé</p>
+        <div class="overflow"><table>
+          <tr><th>Élément à tracer</th><th>Trait</th></tr>
+          <tr><td>Contour d'une pièce visible</td><td><b>continu fort</b></td></tr>
+          <tr><td>Alésage non visible (derrière une paroi)</td><td><b>interrompu fin</b></td></tr>
+          <tr><td>Ligne de cote et ligne d'attache</td><td><b>continu fin</b></td></tr>
+          <tr><td>Hachures d'une coupe</td><td><b>continu fin</b></td></tr>
+          <tr><td>Axe d'un arbre, axe de symétrie</td><td><b>mixte fin (1 point, 1 tiret long)</b></td></tr>
+          <tr><td>Extrémités du plan de coupe A-A</td><td><b>mixte fort (1 point, 1 tiret long)</b></td></tr>
+          <tr><td>Position extrême d'une pièce mobile, contour d'une pièce voisine</td><td><b>mixte fin à deux points</b></td></tr>
+          <tr><td>Limite d'une vue interrompue</td><td><b>continu fin ondulé / zigzag</b></td></tr>
+        </table></div>
+        <p class="res">Si un trait continu fort et un trait interrompu se superposent, <b>le continu fort l'emporte</b> (priorité : fort &gt; interrompu fin &gt; mixte fin &gt; continu fin).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Placer les vues</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Projection européenne (NF E04-108-520). On a dessiné la vue de face d'une pièce.</div>
+        <p class="q">Q1 — Où place-t-on la vue de droite ? la vue de dessus ? la vue de dessous ? la vue de gauche ?</p>
+        <p class="res">Vue de droite : <b>à gauche</b> de la vue de face. Vue de dessus : <b>en dessous</b>. Vue de dessous : <b>au-dessus</b>. Vue de gauche : <b>à droite</b>. Vue d'arrière : à droite ou à gauche des autres vues (indifféremment).</p>
+        <p class="q">Q2 — Combien de vues minimum faut-il pour représenter sans ambiguïté un cylindre plein ? Un bloc avec un trou borgne sur la face de dessus ?</p>
+        <p>Un cylindre plein : <b>2 vues</b> suffisent (vue de côté : rectangle ; vue de face : cercle). Le bloc avec trou borgne : la <b>vue de dessus</b> (cercle) + une vue de côté avec le trou en <b>interrompu fin</b> (ou en coupe) pour donner la <b>profondeur</b>. Une seule projection ne suffit jamais.</p>
+        <div class="warnbox"><span class="lab">Piège</span>En projection européenne, une pièce vue « de dessus » est dessinée <b>sous</b> la vue de face, pas au-dessus ; ne pas confondre avec la projection américaine.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Échelles et formats</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">Q1 — Une pièce de 120 mm est représentée par un segment de 60 mm. Quelle est l'échelle ?</p>
+        <p>Échelle \(=\dfrac{\text{dessinée}}{\text{réelle}}=\dfrac{60}{120}=\dfrac12\) : <b>1/2</b> (réduction).</p>
+        <p class="q">Q2 — Un détail de 4 mm est dessiné à l'échelle 5 : quelle longueur sur le dessin ?</p>
+        <p>\(4\times5=20\) mm (agrandissement).</p>
+        <p class="q">Q3 — Retrouver les dimensions A3 à partir de l'A0 (841 × 1189 mm)</p>
+        <p>On plie en deux le grand côté à chaque fois : A1 : 594 × 841 ; A2 : 420 × 594 ; A3 : <b>297 × 420</b> ; A4 : 210 × 297. Vérification du rapport : \(\dfrac{1189}{841}\approx1{,}414=\sqrt2\) ✔ ; \(\dfrac{420}{297}\approx1{,}414\) ✔.</p>
+        <p class="q">Q4 — Surface d'un A4 ?</p>
+        <p>\(210\times297=62\,370\) mm² \(=0{,}0624\) m² \(\approx\dfrac{1}{16}\) m² (l'A0 vaut ≈ 1 m² et on divise la surface par 2 quatre fois).</p>
+        <p class="res">1/2 ; 20 mm ; A3 = 297 × 420 mm ; A4 ≈ 0,0624 m²</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice D — Hachures : justes ou fausses ?</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Dire si chaque affirmation est vraie (V) ou fausse (F) et corriger</p>
+        <p>1) « Les hachures peuvent traverser un trait fort. » <b>F</b> — elles ne coupent <b>jamais</b> un trait fort.</p>
+        <p>2) « Les hachures s'arrêtent sur un trait interrompu fin. » <b>F</b> — elles ne s'arrêtent pas sur un interrompu ; elles s'arrêtent sur un trait fort (contour) ou, en demi-coupe, sur un trait mixte (axe de symétrie).</p>
+        <p>3) « On hachure les nervures coupées dans leur plus grande dimension. » <b>F</b> — on <b>ne hachure pas</b> les pièces minces dans leur plus grande dimension (nervures), ni les petites pièces (vis, clavette), ni un axe qui traverse un alésage.</p>
+        <p>4) « Deux pièces voisines coupées doivent avoir des hachures de même sens. » <b>F</b> — on change l'orientation ou l'espacement pour distinguer les pièces voisines ; les hachures d'une <b>même</b> pièce gardent la même orientation et le même pas (avec un décalage d'un demi-pas aux changements de plan d'une coupe à plans décalés).</p>
+        <p>5) « Le type de hachure renseigne sur la famille de matériau. » <b>V</b> — acier/fonte, aluminium, cuivre, plastiques, béton.</p>
+        <p class="res">Règle de fond : <b>la hachure représente la matière touchée par le plan de coupe, rien d'autre</b>.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice E — Quel type de coupe ?</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Choisir la représentation la plus adaptée</p>
+        <p>1) Pièce <b>de révolution symétrique</b> dont on veut voir à la fois l'extérieur et l'intérieur : <b>demi-coupe</b> (demi-vue accolée à une demi-coupe, axe de symétrie en mixte fin).</p>
+        <p>2) Pièce avec plusieurs <b>perçages parallèles non alignés</b> : <b>coupe par plans décalés</b> (changements de plan en traits forts, hachures décalées d'un demi-pas).</p>
+        <p>3) Pièce avec des <b>perçages à 120°</b> autour d'un axe : <b>coupe par plans concourants</b> (plan oblique rabattu dans le prolongement de l'autre ; on ne dessine pas les parties cachées dans le plan rabattu).</p>
+        <p>4) On ne veut montrer que <b>la forme du profil d'un bras</b> sans le reste de la pièce : <b>section</b> (sortie ou rabattue).</p>
+        <p>5) Un <b>détail trop petit</b> pour être lu : <b>vue en détail</b> (nom et échelle du détail).</p>
+        <div class="note"><span class="lab">Différence coupe / section</span>La <b>coupe</b> montre la matière coupée <b>et</b> ce qui est en arrière du plan de coupe ; la <b>section</b> ne montre <b>que</b> la matière coupée.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice F — Filetages</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">Q1 — Comment cote-t-on un filetage de diamètre 8 mm métrique ?</p>
+        <p>« <b>M8</b> » (la lettre M indique un filetage métrique normalisé), <b>sans symbole Ø</b>, la cote étant portée sur les <b>traits extérieurs</b> (diamètre du filetage).</p>
+        <p class="q">Q2 — Quels traits pour une tige filetée vue de côté ?</p>
+        <p><b>Trait fort</b> pour le sommet des filets (forme avant usinage de l'hélice) et la limite de filetage ; <b>trait fin</b> pour le fond du filetage.</p>
+        <p class="q">Q3 — Quel angle au fond d'un taraudage borgne et pourquoi une gorge ?</p>
+        <p>Fond de trou à <b>120°</b> (pointe du foret). La <b>gorge</b> sert de dégagement à l'outil en fin de filetage.</p>
+        <p class="res">Dans l'assemblage d'une vis dans un taraudage, <b>la convention de la vis l'emporte</b> : la vis est dessinée entière, sans interrompre ses filets par ceux du taraudage.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice G — Vocabulaire des formes techniques</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">Nommer la forme technique décrite</p>
+        <p>1) « Surface conique intérieure pour noyer une tête de vis FHC » → <b>fraisure</b>.</p>
+        <p>2) « Raccordement concave entre deux surfaces formant un angle rentrant sur pièce moulée » → <b>congé</b>.</p>
+        <p>3) « Suppression d'une arête vive, en cône de révolution sur un arbre, facilite le montage » → <b>chanfrein</b>.</p>
+        <p>4) « Volume triangulaire ajouté pour rigidifier sans alourdir » → <b>nervure</b>.</p>
+        <p>5) « Trou plus long que large pour le réglage de position » → <b>trou oblong</b> (lumière).</p>
+        <p>6) « Rainure circulaire sur un arbre recevant un anneau élastique » → <b>gorge</b>.</p>
+        <p>7) « Surface plane usinée sur un cylindre, parallèle à son axe, pour une clé » → <b>méplat</b>.</p>
+        <p>8) « Évidement intérieur qui réduit la longueur de portée d'un alésage » → <b>chambrage</b>.</p>
+        <p class="res">À ne pas confondre : <b>arrondi</b> (convexe, adoucit une arête) et <b>congé</b> (concave, angle rentrant) ; <b>évidement circulaire</b> (sur arbre) et <b>chambrage</b> (dans un alésage).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice H — Méthode : lire une mise en plan</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="q">Quelle démarche suivre devant un dessin d'ensemble ?</p>
+        <p>1) <b>Cartouche</b> : nom du produit, échelle, format, symbole de projection (européen ?), matière, révision.<br>
+        2) <b>Vue principale</b> (de face) : repérer l'objet global et son orientation.<br>
+        3) <b>Vues liées</b> : flèches de sens d'observation, traces de plan de coupe (mixte fort) et lettres A-A, B-B ; positionner chaque vue par la règle de projection.<br>
+        4) <b>Hachures</b> : identifier les pièces coupées (orientation et type → matériau) ; deux pièces voisines ont des hachures différentes.<br>
+        5) <b>Formes techniques</b> de chaque pièce (alésages, rainures, congés, filetages).<br>
+        6) <b>Éléments standards</b> (vis, rondelles, roulements, joints) via la <b>nomenclature</b> repérée par des numéros cerclés.</p>
+        <p class="res">Objectif final : être capable de <b>construire le schéma cinématique</b> (identifier les pièces, les liaisons) et de comprendre le <b>fonctionnement</b> du mécanisme (voir C10).</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Document original du chapitre (cours magistral). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours (CM)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c05-dessin-technique/S2I-C05-Initiation%20au%20dessin%20technique.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C05-Initiation au dessin technique</span><span class="badge">CM</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+<script src="../assets/gate.js"></script>
+</body>
+</html>

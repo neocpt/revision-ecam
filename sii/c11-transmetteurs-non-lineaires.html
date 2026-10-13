@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C11 — Transmetteurs non linéaires — Révision ECAM 1</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-sii">
+<div class="topbar">
+  <a href="../index.html">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#app">Applications du cours</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SII · C11 — Transmetteurs non linéaires</span>
+  <h1 class="title">C11 — Comportement cinématique et statique d'un transmetteur non linéaire</h1>
+  <p class="lead">Loi <b>entrée-sortie</b> d'un mécanisme en <b>chaîne fermée</b> : en position (\(x=f(\alpha)\)), en vitesse (\(v_s=\omega_e\,f'(\alpha)\)) et en effort
+  (\(\tfrac{\text{effort}_s}{\text{effort}_e}=\tfrac{\eta}{f'}\)). Quatre méthodes : fermeture géométrique, fermeture cinématique, propriété angulaire, non-pénétration au contact.
+  Mécanismes usuels : bielle-manivelle, 3 et 4 barres, cames, joints de cardan et d'Oldham.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#memo">📌 Fiche mémo</a></li>
+      <li><a href="#cours">1. Résumé de cours détaillé</a></li>
+      <li><a href="#app">2. Applications du cours corrigées (bielle-manivelle A1–A3)</a></li>
+      <li><a href="#exos">3. Exercices d'entraînement (créés) avec corrections</a></li>
+      <li><a href="#docs">📂 Documents donnés (CM)</a></li>
+    </ul>
+  </div>
+
+  <section class="memo-sheet" id="memo">
+    <div class="memo-head">📌 Fiche mémo — C11 Transmetteurs non linéaires</div>
+    <div class="memo-grid">
+      <div class="memo-item"><b>Loi E/S en position</b>relation entre paramètres de position : \(x=f(\alpha)\)</div>
+      <div class="memo-item"><b>Loi E/S en vitesse</b>dérivée de la loi en position : \(v_s=\omega_e\,f'(\alpha)\) (proportionnelle, coefficient \(f'\) dépendant de la position)</div>
+      <div class="memo-item"><b>Loi E/S en position depuis la vitesse</b>intégration, constante déterminée par une « condition initiale »</div>
+      <div class="memo-item"><b>Loi E/S statique</b>équilibre/permanent/quasi-statique, liaisons parfaites (\(P_s=P_e\)) : \(\tfrac{\text{effort}_s}{\text{effort}_e}=\tfrac1{f'}\)</div>
+      <div class="memo-item"><b>Avec rendement</b>\(P_s=\eta P_e\) : \(\tfrac{\text{effort}_s}{\text{effort}_e}=\tfrac{\eta}{f'}\)</div>
+      <div class="memo-item"><b>Éliminer un angle \(\beta\)</b>\((R\cos\beta)^2+(R\sin\beta)^2=R^2\)</div>
+      <div class="memo-item"><b>Éliminer une distance \(\lambda\)</b>\(\lambda\sin\beta\,/\,\lambda\cos\beta=\tan\beta\)</div>
+      <div class="memo-item"><b>\(A\cos\alpha+B\sin\alpha\)</b>\(=\sqrt{A^2+B^2}\,\cos(\alpha-\varphi)\), \(\varphi=\arctan\tfrac BA\ [\pi]\)</div>
+      <div class="memo-item"><b>Bielle-manivelle</b>\(x=e\cos\alpha+\sqrt{L^2-e^2\sin^2\alpha}\) ; \(\dot x=-e\,\dot\alpha\,\tfrac{\sin(\alpha+\beta)}{\cos\beta}\)</div>
+      <div class="memo-item"><b>Cardan</b>\(\tfrac{\omega_2}{\omega_1}=\tfrac{\cos\gamma}{1-\sin^2\gamma\cos^2\theta_1}\) (non homocinétique) ; <b>Oldham</b> : \(\omega_2=\omega_1\)</div>
+      <div class="memo-item method"><b>Fermeture géométrique</b>\(\vec{AB}+\vec{BC}+\dots+\vec{DA}=\vec0\) → projeter dans la base de référence → éliminer les paramètres intermédiaires (ou norme au carré)</div>
+      <div class="memo-item method"><b>Fermeture cinématique</b>composer les torseurs \(\{\mathcal V_{n/0}\}=\{\mathcal V_{n/n-1}\}+\dots+\{\mathcal V_{1/0}\}\), choisir le point, <b>projeter</b> pour éliminer l'inconnue</div>
+      <div class="memo-item method"><b>Contact came</b>\(\vec V_{B\in2/1}\cdot\vec n=0\) (non-pénétration, liaison sphère-plan)</div>
+    </div>
+  </section>
+
+  <!-- ======================= COURS =============================== -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours détaillé</h2>
+
+    <h3>1.1 Loi entrée-sortie cinématique d'un mécanisme en chaîne fermée</h3>
+    <p>Un transmetteur en <b>chaîne fermée</b> n'a qu'<b>une seule liaison « motorisée »</b> (celle qui reçoit la puissance de la chaîne d'énergie). À cause de la boucle,
+    le mouvement de cette seule liaison entraîne celui de tout le mécanisme. Exemple du cours : une <b>barrière</b> — le solide 1 tourne en continu (motoréducteur) et la
+    bielle fait osciller le solide 4 qui porte la lisse. Le même mouvement d'entrée donne ainsi un mouvement de sortie <i>alternatif</i> : c'est un
+    <b>transformateur de mouvement</b>.</p>
+
+    <div class="def">
+      <span class="lab">Définitions</span>
+      Les grandeurs d'entrée et de sortie sont associées à des <b>DDL de liaisons</b> : paramètres cinématiques des torseurs cinématiques et paramètres de position associés.<br>
+      • Loi E/S <b>en position</b> : relation entre des <b>paramètres de position</b> des liaisons, ex. \(x=f(\alpha)\).<br>
+      • Loi E/S <b>en vitesse</b> : relation entre des <b>paramètres cinématiques</b> des liaisons, ex. \(v_s=g(\omega_e)\).
+    </div>
+
+    <div class="thm">
+      <span class="lab">Passage position ↔ vitesse</span>
+      <b>Dérivation</b> temporelle de la loi en position ⟹ loi en vitesse : si \(x=f(\alpha)\), alors
+      \[\dot x=\frac{d f(\alpha(t))}{dt}=\dot\alpha\,f'(\alpha)\qquad\text{soit}\qquad \boxed{v_s=\omega_e\,f'(\alpha)}\]
+      <b>Intégration</b> de la loi en vitesse ⟹ loi en position, <b>à une constante près</b>, fixée par une position particulière du mécanisme (« condition initiale »).<br>
+      À chaque instant la grandeur de sortie est <b>proportionnelle</b> à la grandeur d'entrée ; le <b>coefficient de proportionnalité dépend de la position</b> (ici de \(\alpha\)) : c'est ce qui rend le transmetteur <b>non linéaire</b>.
+    </div>
+    <div class="warnbox">
+      <span class="lab">Piège</span>
+      « Non linéaire » ne veut pas dire « non proportionnel » : en vitesse, la sortie reste <i>à chaque instant</i> proportionnelle à l'entrée. Mais le rapport \(f'(\alpha)\) <b>varie au cours du mouvement</b>
+      (contrairement à un réducteur où \(i\) est constant). En <b>position</b> en revanche, la relation \(x=f(\alpha)\) n'est pas proportionnelle (sinusoïdale, etc.).
+    </div>
+
+    <p>Exemple du cours (système bielle-manivelle) : 4 liaisons, donc 4 DDL / 4 paramètres cinématiques. Torseurs retenus : \(\{\mathcal V_{1/0}\}=\{\omega_{10}\vec z_0;\vec 0\}_O\) avec \(\omega_{10}=\dot\alpha\)
+    et \(\{\mathcal V_{3/0}\}=\{\vec0;v_{30}\vec x_0\}\) avec \(v_{30}=\dot x\). Les grandeurs d'E/S sont \(\omega_e=\omega_{10}\) et \(v_s=v_{30}\).</p>
+
+    <h3>1.2 Loi entrée-sortie statique (en effort)</h3>
+    <div class="thm">
+      <span class="lab">Conditions et résultat</span>
+      <b>Hypothèses</b> : le mécanisme ne comprend que les sollicitations associées aux actions d'entrée et de sortie, <i>ou</i> les efforts résistants sont caractérisés par un rendement en régime permanent.
+      On applique le théorème de l'énergie cinétique à l'ensemble du mécanisme. Si \(\dfrac{\text{paramètre cinématique sortie}}{\text{paramètre cinématique entrée}}=f(\text{paramètres de position})\), alors :<br>
+      • à l'<b>équilibre</b>, en <b>régime permanent</b> ou <b>quasi-statique</b>, liaisons parfaites (\(P_s=P_e\)) : \(\boxed{\dfrac{\text{paramètre en effort sortie}}{\text{paramètre en effort entrée}}=\dfrac1{f(\text{positions})}}\)<br>
+      • en régime permanent / quasi-statique avec <b>rendement</b> \(\eta\) (\(P_s=\eta\,P_e\)) : \(\boxed{\dfrac{\text{effort}_s}{\text{effort}_e}=\dfrac{\eta}{f(\text{positions})}}\)
+    </div>
+    <p>La grandeur en effort de sortie est donc proportionnelle à celle d'entrée, avec un coefficient qui dépend de la position. <b>Interprétation</b> : si la vitesse est « démultipliée » dans une
+    position (\(|f'|\) petit), l'effort est « multiplié » dans cette même position (\(1/|f'|\) grand) — c'est le principe du <b>levier</b> / de la conservation de la puissance.</p>
+
+    <h3>1.3 Les 4 méthodes pour obtenir une loi E/S d'une chaîne fermée</h3>
+    <p>Après avoir <b>identifié les paramètres d'entrée et de sortie</b> :</p>
+    <table>
+      <tr><th>#</th><th>Méthode</th><th>Donne directement</th></tr>
+      <tr><td>1</td><td><b>Fermeture géométrique</b></td><td>loi en <b>position</b> (puis vitesse par dérivation)</td></tr>
+      <tr><td>2</td><td><b>Fermeture cinématique</b></td><td>loi en <b>vitesse</b> (puis position par intégration)</td></tr>
+      <tr><td>3</td><td><b>Produit scalaire</b> (angle constant)</td><td>loi en <b>position</b> (propriété angulaire)</td></tr>
+      <tr><td>4</td><td><b>Condition de non-glissement / non-pénétration</b></td><td>loi en <b>vitesse</b> (contact)</td></tr>
+    </table>
+
+    <h3>1.4 Fermeture géométrique</h3>
+    <div class="method">
+      <span class="lab">Démarche (loi E/S en position)</span>
+      1. Écrire la <b>relation de Chasles</b> en parcourant la chaîne fermée entre les points caractéristiques des liaisons : \(\vec{AB}+\vec{BC}+\dots+\vec{DA}=\vec0\).<br>
+      2. <b>Projeter</b> dans une base choisie pour faire apparaître les paramètres d'E/S et éliminer les paramètres intermédiaires (en général la <b>base de référence</b>). On obtient <b>3 équations scalaires</b> pour un modèle spatial (2 pour un modèle plan).<br>
+      3. <b>Éliminer</b> les paramètres intermédiaires en combinant les équations<br>
+      <b>OU</b> écrire la <b>norme au carré</b> d'un des termes de la fermeture : \(\|\vec{AE}\|^2=(\vec{AB}+\vec{BC}+\dots+\vec{DE})^2\).
+    </div>
+
+    <h4>Outils trigonométriques d'élimination</h4>
+    <div class="note">
+      <span class="lab">Éliminer un <u>angle</u> \(\beta\) présent dans deux équations</span>
+      Si (1) \(R\cos\beta=f(\alpha,\lambda)\) et (2) \(R\sin\beta=g(\alpha,\lambda)\), alors \((1)^2+(2)^2\) donne \(R^2=f^2+g^2\), car \((R\cos\beta)^2+(R\sin\beta)^2=R^2(\cos^2\beta+\sin^2\beta)=R^2\).
+    </div>
+    <div class="note">
+      <span class="lab">Éliminer une <u>distance</u> \(\lambda\) en facteur d'un cosinus et d'un sinus</span>
+      Si (1) \(\lambda\cos\beta=f(\alpha)\) et (2) \(\lambda\sin\beta=g(\alpha)\), alors \((2)/(1)\) donne \(\tan\beta=\dfrac{g(\alpha)}{f(\alpha)}\).
+    </div>
+    <div class="note">
+      <span class="lab">Retrouver un angle à partir d'une fonction trigonométrique (\(n\in\mathbb N\), \(|A|\le1\))</span>
+      \(\sin\alpha=A\Rightarrow\alpha=(-1)^n\arcsin A+n\pi\) ; \(\cos\alpha=A\Rightarrow\alpha=\pm\arccos A\ [2\pi]\) ; \(\tan\alpha=B\Rightarrow\alpha=\arctan B\ [\pi]\).
+      Toujours avec les précautions sur le <b>signe</b> de \(g(\alpha)\) et le <b>domaine</b> des fonctions inverses.
+    </div>
+    <div class="thm">
+      <span class="lab">Somme de sinus et cosinus</span>
+      \[A\cos\alpha+B\sin\alpha=\sqrt{A^2+B^2}\,\cos(\alpha-\varphi),\qquad \varphi=\arctan\frac BA\ [\pi].\]
+      <b>Preuve</b> : on pose \(\cos\varphi=\dfrac{A}{\sqrt{A^2+B^2}}\) et \(\sin\varphi=\dfrac{B}{\sqrt{A^2+B^2}}\) (on a bien \(\cos^2\varphi+\sin^2\varphi=1\) et \(\tan\varphi=B/A\)). Alors
+      \(A\cos\alpha+B\sin\alpha=\sqrt{A^2+B^2}(\cos\varphi\cos\alpha+\sin\varphi\sin\alpha)=\sqrt{A^2+B^2}\cos(\alpha-\varphi)\).<br>
+      <b>Équation</b> \(A\cos\alpha+B\sin\alpha=C\) avec \(\left|\dfrac{C}{\sqrt{A^2+B^2}}\right|\le1\) : \(\cos(\alpha-\varphi)=\dfrac{C}{\sqrt{A^2+B^2}}\), donc
+      \(\alpha=\pm\arccos\dfrac{C}{\sqrt{A^2+B^2}}\ [2\pi]+\arctan\dfrac BA\ [\pi]\). Les « bonnes » solutions se choisissent d'après la <b>géométrie</b> du système.
+      (Autre pose possible : \(\sin\varphi=\tfrac{A}{\sqrt{A^2+B^2}}\), \(\cos\varphi=\tfrac{B}{\sqrt{A^2+B^2}}\), \(\tan\varphi=\tfrac AB\), \(\sin(\alpha+\varphi)=\tfrac{C}{\sqrt{A^2+B^2}}\).)
+    </div>
+
+    <h3>1.5 Fermeture cinématique</h3>
+    <div class="method">
+      <span class="lab">Démarche (loi E/S en vitesse)</span>
+      1. Écrire la <b>composition des torseurs cinématiques</b> en parcourant la chaîne fermée : \(\{\mathcal V_{n/0}\}=\{\mathcal V_{n/n-1}\}+\dots+\{\mathcal V_{2/1}\}+\{\mathcal V_{1/0}\}\).
+      On obtient <b>2 équations vectorielles</b> de fermeture : fermeture du vecteur vitesse angulaire et fermeture du vecteur vitesse en un point.<br>
+      2. Selon les <b>domaines de validité</b> des liaisons et les paramètres d'E/S à faire apparaître, choisir : l'<b>équation vectorielle</b> (rotation ou vitesse) ; le <b>point de composition</b> (en général le point d'intersection des domaines de validité des liaisons intermédiaires) ; la <b>direction de projection</b>.
+    </div>
+
+    <h3>1.6 Propriété angulaire (produit scalaire)</h3>
+    <div class="method">
+      <span class="lab">Démarche (loi E/S en position)</span>
+      Écrire le produit scalaire qui traduit la particularité angulaire du système : \(\vec x_i\cdot\vec x_j=\text{constante}\) (\(=0\) si les vecteurs sont orthogonaux). Il s'agit de la conservation, imposée par certaines liaisons, d'un angle pendant le mouvement
+      (ex. les deux axes perpendiculaires du croisillon d'un joint de cardan).
+    </div>
+
+    <h3>1.7 Mécanismes de transformation de mouvement usuels</h3>
+
+    <h4>Mécanisme 3 barres / système bielle-manivelle (à connaître)</h4>
+    <p><b>Fermeture géométrique dans un triangle déformable</b> (A, B, C) avec un angle et une longueur variables, avec ou sans transformation de mouvement. Le système <b>bielle-manivelle</b> : (1) manivelle, (2) bielle, (3) coulisseau. Utilisé dans les moteurs, compresseurs… Entrée / sortie : \(\alpha\) et \(x\).</p>
+    <figure>
+      <svg viewBox="0 0 640 270" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Segoe UI, system-ui, sans-serif" font-size="13"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker></defs><rect x="0" y="0" width="640" height="270" fill="white"/><line x1="40.0" y1="150.0" x2="491.4" y2="150.0" stroke="#94a3b8" stroke-width="1" stroke-dasharray="8 4 2 4"/><line x1="70.0" y1="162.0" x2="70.0" y2="50.0" stroke="#94a3b8" stroke-width="1" stroke-dasharray="8 4 2 4"/><rect x="132.0" y="166.0" width="374.4" height="9" fill="#e2e8f0" stroke="#94a3b8"/><rect x="389.4" y="138.0" width="44" height="24" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><line x1="70.0" y1="150.0" x2="108.8" y2="82.9" stroke="#16a34a" stroke-width="5"/><line x1="108.8" y1="82.9" x2="411.4" y2="150.0" stroke="#ea580c" stroke-width="5"/><circle cx="70.0" cy="150.0" r="6" fill="white" stroke="#1e293b" stroke-width="2"/><circle cx="108.8" cy="82.9" r="6" fill="white" stroke="#1e293b" stroke-width="2"/><circle cx="411.4" cy="150.0" r="6" fill="white" stroke="#1e293b" stroke-width="2"/><path d="M54,172 L86,172 M58,172 l-8,10 M67,172 l-8,10 M76,172 l-8,10 M85,172 l-8,10" stroke="#1e293b" stroke-width="1.5" fill="none"/><path d="M70,156 L56,172 M70,156 L84,172" stroke="#1e293b" stroke-width="2" fill="none"/><text x="56.0" y="142.0" text-anchor="middle" font-size="15" fill="#1e293b" font-weight="700" >A</text><text x="94.8" y="74.9" text-anchor="middle" font-size="15" fill="#1e293b" font-weight="700" >B</text><text x="413.4" y="130.0" text-anchor="middle" font-size="15" fill="#1e293b" font-weight="700" >C</text><text x="77.4" y="120.4" text-anchor="middle" font-size="15" fill="#16a34a" font-weight="800" >1</text><text x="264.1" y="104.4" text-anchor="middle" font-size="15" fill="#ea580c" font-weight="800" >2</text><text x="425.4" y="172.0" text-anchor="middle" font-size="14" fill="#2563eb" font-weight="800" >3</text><path d="M104,150 A34,34 0 0 0 87.0,120.6" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#ah)"/><text x="116.0" y="138.0" text-anchor="middle" font-size="15" fill="#475569" font-weight="700" >α</text><line x1="108.8" y1="82.9" x2="178.8" y2="82.9" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 3"/><path d="M144.75,82.88303120670601 A36,36 0 0 1 143.9,90.7" fill="none" stroke="#475569" stroke-width="1.5"/><text x="156.8" y="104.9" text-anchor="middle" font-size="15" fill="#475569" font-weight="700" >β</text><line x1="70.0" y1="212.0" x2="411.4" y2="212.0" stroke="#475569" stroke-width="1.3" marker-start="url(#ah)" marker-end="url(#ah)"/><line x1="70.0" y1="186.0" x2="70.0" y2="218.0" stroke="#94a3b8" stroke-width="1"/><line x1="411.4" y1="164.0" x2="411.4" y2="218.0" stroke="#94a3b8" stroke-width="1"/><text x="240.7" y="206.0" text-anchor="middle" font-size="14" fill="#475569" font-weight="700" >x = AC</text><text x="113.4" y="138.4" text-anchor="start" font-size="13" fill="#16a34a" font-weight="700" >AB = e</text><text x="280.1" y="146.4" text-anchor="middle" font-size="13" fill="#ea580c" font-weight="700" >BC = L</text><text x="628.0" y="144.0" text-anchor="end" font-size="14" fill="#475569" font-weight="400" >x⃗₀</text><text x="78.0" y="46.0" text-anchor="start" font-size="14" fill="#475569" font-weight="400" >y⃗₀</text></svg>
+      <figcaption>Bielle-manivelle (dessinée pour \(e=50\) mm, \(L=200\) mm, \(\alpha=60^\circ\)) : manivelle (1) \(AB=e\), bielle (2) \(BC=L\), coulisseau (3) en glissière de direction \(\vec x_0\). \(\vec x_1\) dirige \(\vec{AB}\) (angle \(\alpha\) avec \(\vec x_0\)), \(\vec x_2\) dirige \(\vec{BC}\) (angle \(-\beta\)).</figcaption>
+    </figure>
+    <p><b>Variantes</b> (cours) : coulisseau <b>désaxé</b> ; 3 barres avec bielle de <b>longueur variable pilotée</b> (par un vérin électrique par exemple) ; 3 barres avec bielle de longueur variable <b>non pilotée</b> (liaison sphère-cylindre non pilotée) qui transforme une rotation continue en <b>rotation alternative</b>.</p>
+    <div class="method">
+      <span class="lab">Obtenir la relation E/S en position (3 barres)</span>
+      • projeter la relation vectorielle dans la base de référence des angles, puis éliminer l'angle en trop (sans nécessairement développer la relation) ;<br>
+      • ou écrire la <b>longueur au carré de la bielle</b> (d'une manière générale, du côté <b>opposé à l'angle à conserver</b>) : c'est la relation d'<b>Al-Kashi</b>.
+    </div>
+
+    <h4>Mécanisme 4 barres</h4>
+    <p><b>Fermeture géométrique dans un quadrilatère déformable</b> (A, B, C, D), souvent avec des pièces de <b>longueurs constantes</b>. (1) et (3) sont les manivelles, (2) la bielle ; l'entrée est généralement sur une manivelle et la sortie est soit la deuxième manivelle, soit la bielle.
+    Les lois obtenues sont <b>très variables</b> selon les longueurs relatives. Méthode : fermeture géométrique, projection dans la base de définition des angles, élimination de l'angle intermédiaire — <b>une résolution numérique est souvent pertinente</b>.</p>
+    <div class="note">
+      <span class="lab">Cas du parallélogramme déformable</span>
+      Si le quadrilatère est un parallélogramme (côtés opposés égaux), la bielle effectue une <b>translation circulaire</b> (tous ses points décrivent des cercles identiques, sans tourner) : un transformateur <b>rotation → translation circulaire</b>. Une <b>analyse géométrique suffit</b> : la sortie est identique à l'entrée (\(\theta_{sortie}=\theta_{entrée}\)).
+    </div>
+
+    <h4>Système à came</h4>
+    <p>Une came <b>couple le mouvement de 2 pièces par contact</b>. Cinématiquement, le contact (supposé ponctuel) impose le maintien d'un point sur une surface : c'est une liaison <b>sphère-plan</b> (ou sphère-cylindre). La surface peut être plane ou cylindrique (structures simples) ou beaucoup plus complexe pour imposer des lois de mouvement particulières (par exemple avec continuité de la dérivée de l'accélération).</p>
+    <table>
+      <tr><th>Came</th><th>Contrainte imposée</th><th>Transformation</th><th>Remarques</th></tr>
+      <tr><td><b>à plateau axial</b></td><td>le point de contact reste sur un <b>plan</b></td><td>rotation continue → translation alternative <b>sinusoïdale</b></td><td>directions <b>perpendiculaires</b> ; \(x_{max}=R+e\), \(x_{min}=R-e\) ; <b>amplitude \(=2e\)</b></td></tr>
+      <tr><td><b>à plateau incliné</b></td><td>le point de contact reste sur un <b>plan</b></td><td>rotation continue → translation alternative <b>sinusoïdale</b></td><td>directions <b>parallèles</b></td></tr>
+      <tr><td><b>circulaire excentrée</b></td><td>le point de contact reste sur un <b>cercle</b></td><td>rotation continue → translation alternative</td><td>amplitude \(=2e\) (\(e\) : excentricité)</td></tr>
+    </table>
+    <div class="method">
+      <span class="lab">Loi E/S d'une came</span>
+      • <b>Loi géométrique</b> : écrire une <b>fermeture géométrique passant par le point de contact</b>.<br>
+      • <b>Loi cinématique directe</b> : fermeture cinématique en vitesse <b>au point de contact</b>, projetée sur la <b>normale au contact</b> : propriété de la liaison sphère-cylindre (non-pénétration), \(\ \vec V_{B\in2/1}\cdot\vec n=0\).
+    </div>
+
+    <h4>Joint d'accouplement</h4>
+    <p>Un joint d'accouplement couple le mouvement de <b>2 arbres en rotation dont les axes ne sont pas confondus</b>. Il est dit <b>homocinétique</b> si la vitesse angulaire de sortie vaut, à tout instant, celle d'entrée.</p>
+    <table>
+      <tr><th>Joint</th><th>Description</th><th>Propriété</th><th>Méthode</th></tr>
+      <tr><td><b>Cardan</b></td><td>(1) et (2) = fourches ; (3) = croisillon, en pivot avec les 2 fourches ; <b>axes des pivots perpendiculaires et coïncidents</b></td><td><b>non homocinétique</b></td><td>produit scalaire nul entre les directions des axes des pivots</td></tr>
+      <tr><td><b>Oldham</b></td><td>disque intermédiaire en <b>glissière</b> avec les plateaux d'entrée et de sortie</td><td><b>homocinétique</b></td><td>fermeture cinématique</td></tr>
+    </table>
+    <div class="thm">
+      <span class="lab">Joint de cardan — loi E/S (résultat classique, redémontré ici)</span>
+      Soit \(\gamma\) l'angle entre les deux arbres et \(\theta_1,\theta_2\) les angles de rotation d'entrée et de sortie, comptés à partir du plan contenant les deux axes. Le produit scalaire (axes de pivots perpendiculaires) donne
+      \(\tan\theta_1=\cos\gamma\,\tan\theta_2\). En dérivant : \(\dfrac{\dot\theta_1}{\cos^2\theta_1}=\cos\gamma\,\dfrac{\dot\theta_2}{\cos^2\theta_2}\), puis avec \(\cos^2\theta_2=\dfrac{\cos^2\gamma}{\cos^2\gamma+\tan^2\theta_1}\) :
+      \[\boxed{\frac{\omega_2}{\omega_1}=\frac{\cos\gamma}{1-\sin^2\gamma\,\cos^2\theta_1}}\]
+      Le rapport oscille entre \(\cos\gamma\) (minimum, pour \(\theta_1=90^\circ\)) et \(\dfrac1{\cos\gamma}\) (maximum, pour \(\theta_1=0\)), <b>2 fois par tour</b>. Il est égal à 1 si \(\gamma=0\).
+    </div>
+    <div class="warnbox">
+      <span class="lab">Piège</span>
+      Le cours renvoie au sujet de TD pour les détails du cardan et d'Oldham. La forme précise de la loi dépend de l'origine choisie pour les angles : la <b>propriété à retenir</b> est que le cardan n'est <b>pas homocinétique</b> (la vitesse de sortie fluctue autour de celle d'entrée, plus fort quand \(\gamma\) est grand), alors que l'Oldham l'est.
+    </div>
+  </section>
+
+  <!-- ======================= APPLICATIONS DU COURS =============================== -->
+  <section class="block" id="app">
+    <h2>2. Applications du cours corrigées — bielle-manivelle</h2>
+    <p class="lead" style="font-size:.95rem">Questions A1, A2, A3 du CM : « Déterminer la relation E/S en position du système bielle-manivelle avec \(AB=e\), \(BC=L\) ». Le CM laisse les réponses en blanc, on les rédige entièrement.</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Application — Loi E/S en position et en vitesse de la bielle-manivelle</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Modèle plan. Bâti 0 de repère \((A,\vec x_0,\vec y_0,\vec z_0)\). Manivelle 1 en pivot d'axe \((A,\vec z_0)\), \(AB=e\), \(\vec{AB}=e\,\vec x_1\), \(\alpha=(\vec x_0,\vec x_1)\). Bielle 2, \(BC=L\), \(\vec{BC}=L\,\vec x_2\) avec \(\vec x_2=\cos\beta\,\vec x_0-\sin\beta\,\vec y_0\). Coulisseau 3 en glissière de direction \(\vec x_0\) avec le bâti ; \(\vec{AC}=x\,\vec x_0\). Entrée \(\alpha\), sortie \(x\).</div>
+        <p><b>Cadre.</b> Paramètres d'entrée/sortie : \(\alpha\) (pivot 1/0) et \(x\) (glissière 3/0). Paramètre intermédiaire à éliminer : \(\beta\) (angle de la bielle). Formules utilisées : relation de Chasles et \(\cos^2+\sin^2=1\).</p>
+
+        <p class="q">A1 — Écrire la fermeture géométrique</p>
+        <p>On parcourt la boucle \(A\to B\to C\to A\) :
+        \[\vec{AB}+\vec{BC}+\vec{CA}=\vec0\quad\Longleftrightarrow\quad e\,\vec x_1+L\,\vec x_2-x\,\vec x_0=\vec0 .\]</p>
+        <p class="res"><b>Fermeture géométrique :</b> \(e\,\vec x_1+L\,\vec x_2=x\,\vec x_0\).</p>
+
+        <p class="q">A2 — Projeter l'équation et identifier le paramètre à éliminer</p>
+        <p>On projette dans la <b>base de référence</b> \((\vec x_0,\vec y_0)\). Avec \(\vec x_1=\cos\alpha\,\vec x_0+\sin\alpha\,\vec y_0\) et \(\vec x_2=\cos\beta\,\vec x_0-\sin\beta\,\vec y_0\) :</p>
+        <p>\[\text{sur }\vec x_0:\ \ e\cos\alpha+L\cos\beta=x\qquad(1)\]
+        \[\text{sur }\vec y_0:\ \ e\sin\alpha-L\sin\beta=0\qquad(2)\]</p>
+        <p>Les paramètres d'E/S sont \(\alpha\) et \(x\) ; <b>\(\beta\) est intermédiaire</b>. Il apparaît dans un cosinus (1) et un sinus (2), multiplié par la <b>constante</b> \(L\) : on utilise l'élimination d'un angle par la somme des carrés.</p>
+        <p class="res"><b>Paramètre à éliminer : l'angle \(\beta\)</b> (2 équations, 3 inconnues \(\alpha,\beta,x\) ⟹ une relation entre \(\alpha\) et \(x\)).</p>
+
+        <p class="q">A3 — Relation E/S en position</p>
+        <p><b>Cas 1 : l'entrée est \(\alpha\)</b>, on cherche \(x=f(\alpha)\). De (1) : \(L\cos\beta=x-e\cos\alpha\). De (2) : \(L\sin\beta=e\sin\alpha\). Somme des carrés :
+        \[L^2=(x-e\cos\alpha)^2+e^2\sin^2\alpha\ \Longrightarrow\ x-e\cos\alpha=\pm\sqrt{L^2-e^2\sin^2\alpha}.\]
+        <b>Choix du signe</b> (géométrie) : le coulisseau est du côté de \(\vec x_0>0\) par rapport à la manivelle et \(L>e\) donc \(L\cos\beta>0\) : on retient le <b>+</b>.</p>
+        <p class="res">\[x=f(\alpha)=e\cos\alpha+\sqrt{L^2-e^2\sin^2\alpha}\]
+        (valable car \(L\ge e\) assure \(L^2-e^2\sin^2\alpha>0\)).</p>
+
+        <p><b>Cas 2 : l'entrée est \(x\)</b> (« en supposant \(x\) l'entrée », cf. énoncé du CM), on cherche \(\alpha=g(x)\). On utilise la <b>norme au carré</b> du terme opposé à l'angle conservé : \(L\,\vec x_2=x\,\vec x_0-e\,\vec x_1\), donc
+        \[L^2=x^2-2xe\,\vec x_0\cdot\vec x_1+e^2=x^2-2xe\cos\alpha+e^2\ \ \text{(relation d'Al-Kashi)}.\]
+        \[\cos\alpha=\frac{x^2+e^2-L^2}{2\,x\,e}\ \Longrightarrow\ \alpha=\pm\arccos\!\Big(\frac{x^2+e^2-L^2}{2\,x\,e}\Big)\ [2\pi].\]
+        Le \(\pm\) traduit les deux positions symétriques de la manivelle (au-dessus ou au-dessous de l'axe) pour une même position du coulisseau : on choisit selon le sens de rotation / la configuration.</p>
+        <p class="res">\[\cos\alpha=\frac{x^2+e^2-L^2}{2\,x\,e}\quad(\text{et }\ \sin\beta=\tfrac{e}{L}\sin\alpha)\]</p>
+
+        <p class="q">Loi E/S en vitesse (dérivation)</p>
+        <p>On dérive \(f(\alpha)=e\cos\alpha+\sqrt{L^2-e^2\sin^2\alpha}\) :
+        \[f'(\alpha)=-e\sin\alpha+\frac{-2e^2\sin\alpha\cos\alpha}{2\sqrt{L^2-e^2\sin^2\alpha}}=-e\sin\alpha\left(1+\frac{e\cos\alpha}{\sqrt{L^2-e^2\sin^2\alpha}}\right).\]
+        Or \(\sqrt{L^2-e^2\sin^2\alpha}=L\cos\beta\) et \(e\sin\alpha=L\sin\beta\). Donc
+        \(f'(\alpha)=-e\sin\alpha-\dfrac{e\cos\alpha\,L\sin\beta}{L\cos\beta}=-e\,\dfrac{\sin\alpha\cos\beta+\cos\alpha\sin\beta}{\cos\beta}\).</p>
+        <p class="res">\[\boxed{\dot x=-e\,\dot\alpha\,\frac{\sin(\alpha+\beta)}{\cos\beta}}\qquad\text{i.e.}\quad v_s=\omega_e\,f'(\alpha)\ \ \text{avec}\ \ f'(\alpha)=-e\,\frac{\sin(\alpha+\beta)}{\cos\beta}\]</p>
+
+        <p class="q">Contrôle par la fermeture cinématique (autre méthode)</p>
+        <p>Composition : \(\{\mathcal V_{3/0}\}=\{\mathcal V_{3/2}\}+\{\mathcal V_{2/1}\}+\{\mathcal V_{1/0}\}\). Avec \(\vec\Omega_{1/0}=\dot\alpha\,\vec z_0\) et \(\vec\Omega_{2/0}=-\dot\beta\,\vec z_0\) (l'angle de \(\vec x_2\) est \(-\beta\)). Au point \(B\), \(\vec V_{B\in1/0}=\dot\alpha\,\vec z_0\wedge e\,\vec x_1=e\dot\alpha\,\vec y_1\). Au point \(C\) (centre de la sphérique 3/2 : \(\vec V_{C\in3/2}=\vec0\)) :
+        \[\dot x\,\vec x_0=\vec V_{C\in3/0}=\vec V_{C\in2/0}=\vec V_{B\in2/0}+\vec{CB}\wedge\vec\Omega_{2/0}=e\dot\alpha\,\vec y_1+(-L\vec x_2)\wedge(-\dot\beta\,\vec z_0)=e\dot\alpha\,\vec y_1-L\dot\beta\,\vec y_2,\]
+        car \(\vec x_2\wedge\vec z_0=-\vec y_2\). <b>Pour éliminer \(\dot\beta\)</b>, on projette sur \(\vec x_2\) (direction de la bielle, orthogonale à \(\vec y_2\)) :
+        \[\dot x\,(\vec x_0\cdot\vec x_2)=e\dot\alpha\,(\vec y_1\cdot\vec x_2)\ \Longrightarrow\ \dot x\cos\beta=e\dot\alpha\,(-\sin\alpha\cos\beta-\cos\alpha\sin\beta)=-e\dot\alpha\sin(\alpha+\beta).\]
+        <span class="res" style="display:block">On retrouve exactement \(\dot x=-e\,\dot\alpha\,\sin(\alpha+\beta)/\cos\beta\). ✔</span></p>
+        <div class="note">
+          <span class="lab">À retenir</span>
+          <b>Astuce de projection</b> : pour éliminer une vitesse angulaire inconnue \(\dot\beta\) d'une bielle, on projette l'équation vectorielle sur la <b>direction de la bielle</b> : le terme \(\vec\Omega\wedge\overrightarrow{\cdots}\) est orthogonal à cette direction et disparaît.
+        </div>
+
+        <p class="q">Représentation (\(e=50\) mm, \(L=200\) mm)</p>
+        <figure>
+          <svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Segoe UI, system-ui, sans-serif" font-size="13"><rect width="640" height="480" fill="white"/><line x1="70.0" y1="20.0" x2="70.0" y2="190.0" stroke="#e2e8f0" stroke-width="1"/><text x="70.0" y="206.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >0</text><line x1="160.0" y1="20.0" x2="160.0" y2="190.0" stroke="#e2e8f0" stroke-width="1"/><text x="160.0" y="206.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >60</text><line x1="250.0" y1="20.0" x2="250.0" y2="190.0" stroke="#e2e8f0" stroke-width="1"/><text x="250.0" y="206.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >120</text><line x1="340.0" y1="20.0" x2="340.0" y2="190.0" stroke="#e2e8f0" stroke-width="1"/><text x="340.0" y="206.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >180</text><line x1="430.0" y1="20.0" x2="430.0" y2="190.0" stroke="#e2e8f0" stroke-width="1"/><text x="430.0" y="206.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >240</text><line x1="520.0" y1="20.0" x2="520.0" y2="190.0" stroke="#e2e8f0" stroke-width="1"/><text x="520.0" y="206.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >300</text><line x1="610.0" y1="20.0" x2="610.0" y2="190.0" stroke="#e2e8f0" stroke-width="1"/><text x="610.0" y="206.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >360</text><line x1="70.0" y1="190.0" x2="610.0" y2="190.0" stroke="#e2e8f0" stroke-width="1"/><text x="64.0" y="194.0" text-anchor="end" font-size="11" fill="#64748b" font-weight="400" >140</text><line x1="70.0" y1="161.7" x2="610.0" y2="161.7" stroke="#e2e8f0" stroke-width="1"/><text x="64.0" y="165.7" text-anchor="end" font-size="11" fill="#64748b" font-weight="400" >160</text><line x1="70.0" y1="133.3" x2="610.0" y2="133.3" stroke="#e2e8f0" stroke-width="1"/><text x="64.0" y="137.3" text-anchor="end" font-size="11" fill="#64748b" font-weight="400" >180</text><line x1="70.0" y1="105.0" x2="610.0" y2="105.0" stroke="#e2e8f0" stroke-width="1"/><text x="64.0" y="109.0" text-anchor="end" font-size="11" fill="#64748b" font-weight="400" >200</text><line x1="70.0" y1="76.7" x2="610.0" y2="76.7" stroke="#e2e8f0" stroke-width="1"/><text x="64.0" y="80.7" text-anchor="end" font-size="11" fill="#64748b" font-weight="400" >220</text><line x1="70.0" y1="48.3" x2="610.0" y2="48.3" stroke="#e2e8f0" stroke-width="1"/><text x="64.0" y="52.3" text-anchor="end" font-size="11" fill="#64748b" font-weight="400" >240</text><line x1="70.0" y1="20.0" x2="610.0" y2="20.0" stroke="#e2e8f0" stroke-width="1"/><text x="64.0" y="24.0" text-anchor="end" font-size="11" fill="#64748b" font-weight="400" >260</text><rect x="70" y="20" width="540" height="170" fill="none" stroke="#94a3b8"/><text x="340.0" y="224.0" text-anchor="middle" font-size="12" fill="#1e293b" font-weight="400" >α (°)</text><text transform="translate(28,105.0) rotate(-90)" text-anchor="middle" font-size="12" fill="#1e293b">x (mm)</text><polyline points="70.0,34.2 73.0,34.2 76.0,34.4 79.0,34.7 82.0,35.0 85.0,35.5 88.0,36.1 91.0,36.8 94.0,37.6 97.0,38.5 100.0,39.5 103.0,40.6 106.0,41.8 109.0,43.0 112.0,44.4 115.0,45.9 118.0,47.4 121.0,49.1 124.0,50.8 127.0,52.6 130.0,54.4 133.0,56.4 136.0,58.4 139.0,60.4 142.0,62.5 145.0,64.7 148.0,66.9 151.0,69.2 154.0,71.5 157.0,73.9 160.0,76.3 163.0,78.7 166.0,81.2 169.0,83.7 172.0,86.2 175.0,88.7 178.0,91.2 181.0,93.8 184.0,96.3 187.0,98.9 190.0,101.4 193.0,104.0 196.0,106.5 199.0,109.0 202.0,111.5 205.0,114.0 208.0,116.5 211.0,118.9 214.0,121.3 217.0,123.7 220.0,126.0 223.0,128.3 226.0,130.6 229.0,132.8 232.0,135.0 235.0,137.2 238.0,139.3 241.0,141.3 244.0,143.3 247.0,145.2 250.0,147.1 253.0,149.0 256.0,150.8 259.0,152.5 262.0,154.2 265.0,155.8 268.0,157.3 271.0,158.8 274.0,160.3 277.0,161.6 280.0,162.9 283.0,164.2 286.0,165.4 289.0,166.5 292.0,167.6 295.0,168.6 298.0,169.5 301.0,170.4 304.0,171.2 307.0,171.9 310.0,172.6 313.0,173.2 316.0,173.8 319.0,174.2 322.0,174.7 325.0,175.0 328.0,175.3 331.0,175.5 334.0,175.7 337.0,175.8 340.0,175.8 343.0,175.8 346.0,175.7 349.0,175.5 352.0,175.3 355.0,175.0 358.0,174.7 361.0,174.2 364.0,173.8 367.0,173.2 370.0,172.6 373.0,171.9 376.0,171.2 379.0,170.4 382.0,169.5 385.0,168.6 388.0,167.6 391.0,166.5 394.0,165.4 397.0,164.2 400.0,162.9 403.0,161.6 406.0,160.3 409.0,158.8 412.0,157.3 415.0,155.8 418.0,154.2 421.0,152.5 424.0,150.8 427.0,149.0 430.0,147.1 433.0,145.2 436.0,143.3 439.0,141.3 442.0,139.3 445.0,137.2 448.0,135.0 451.0,132.8 454.0,130.6 457.0,128.3 460.0,126.0 463.0,123.7 466.0,121.3 469.0,118.9 472.0,116.5 475.0,114.0 478.0,111.5 481.0,109.0 484.0,106.5 487.0,104.0 490.0,101.4 493.0,98.9 496.0,96.3 499.0,93.8 502.0,91.2 505.0,88.7 508.0,86.2 511.0,83.7 514.0,81.2 517.0,78.7 520.0,76.3 523.0,73.9 526.0,71.5 529.0,69.2 532.0,66.9 535.0,64.7 538.0,62.5 541.0,60.4 544.0,58.4 547.0,56.4 550.0,54.4 553.0,52.6 556.0,50.8 559.0,49.1 562.0,47.4 565.0,45.9 568.0,44.4 571.0,43.0 574.0,41.8 577.0,40.6 580.0,39.5 583.0,38.5 586.0,37.6 589.0,36.8 592.0,36.1 595.0,35.5 598.0,35.0 601.0,34.7 604.0,34.4 607.0,34.2 610.0,34.2" fill="none" stroke="#2563eb" stroke-width="2.4" stroke-linejoin="round"/><circle cx="70.0" cy="34.2" r="4" fill="#2563eb"/><text x="78.0" y="28.2" text-anchor="start" font-size="11" fill="#2563eb" font-weight="400" >x max = L+e = 250</text><text x="350.0" y="167.8" text-anchor="start" font-size="11" fill="#2563eb" font-weight="400" >x min = L−e = 150</text><circle cx="340.0" cy="175.8" r="4" fill="#2563eb"/><line x1="70.0" y1="270.0" x2="70.0" y2="440.0" stroke="#e2e8f0" stroke-width="1"/><text x="70.0" y="456.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >0</text><line x1="160.0" y1="270.0" x2="160.0" y2="440.0" stroke="#e2e8f0" stroke-width="1"/><text x="160.0" y="456.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >60</text><line x1="250.0" y1="270.0" x2="250.0" y2="440.0" stroke="#e2e8f0" stroke-width="1"/><text x="250.0" y="456.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >120</text><line x1="340.0" y1="270.0" x2="340.0" y2="440.0" stroke="#e2e8f0" stroke-width="1"/><text x="340.0" y="456.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >180</text><line x1="430.0" y1="270.0" x2="430.0" y2="440.0" stroke="#e2e8f0" stroke-width="1"/><text x="430.0" y="456.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >240</text><line x1="520.0" y1="270.0" x2="520.0" y2="440.0" stroke="#e2e8f0" stroke-width="1"/><text x="520.0" y="456.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >300</text><line x1="610.0" y1="270.0" x2="610.0" y2="440.0" stroke="#e2e8f0" stroke-width="1"/><text x="610.0" y="456.0" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >360</text><line x1="70.0" y1="427.9" x2="610.0" y2="427.9" stroke="#e2e8f0" stroke-width="1"/><text x="64.0" y="431.9" text-anchor="end" font-size="11" fill="#64748b" font-weight="400" >-60</text><line x1="70.0" y1="391.4" x2="610.0" y2="391.4" stroke="#e2e8f0" stroke-width="1"/><text x="64.0" y="395.4" text-anchor="end" font-size="11" fill="#64748b" font-weight="400" >-30</text><line x1="70.0" y1="355.0" x2="610.0" y2="355.0" stroke="#e2e8f0" stroke-width="1"/><text x="64.0" y="359.0" text-anchor="end" font-size="11" fill="#64748b" font-weight="400" >0</text><line x1="70.0" y1="318.6" x2="610.0" y2="318.6" stroke="#e2e8f0" stroke-width="1"/><text x="64.0" y="322.6" text-anchor="end" font-size="11" fill="#64748b" font-weight="400" >30</text><line x1="70.0" y1="282.1" x2="610.0" y2="282.1" stroke="#e2e8f0" stroke-width="1"/><text x="64.0" y="286.1" text-anchor="end" font-size="11" fill="#64748b" font-weight="400" >60</text><line x1="70.0" y1="355.0" x2="610.0" y2="355.0" stroke="#94a3b8" stroke-width="1.2"/><rect x="70" y="270" width="540" height="170" fill="none" stroke="#94a3b8"/><text x="340.0" y="474.0" text-anchor="middle" font-size="12" fill="#1e293b" font-weight="400" >α (°)</text><text transform="translate(28,355.0) rotate(-90)" text-anchor="middle" font-size="12" fill="#1e293b">f′(α) = v/ω (mm/rad)</text><polyline points="70.0,355.0 73.0,357.6 76.0,360.3 79.0,362.9 82.0,365.5 85.0,368.1 88.0,370.7 91.0,373.3 94.0,375.8 97.0,378.2 100.0,380.7 103.0,383.0 106.0,385.4 109.0,387.6 112.0,389.8 115.0,392.0 118.0,394.1 121.0,396.1 124.0,398.0 127.0,399.8 130.0,401.6 133.0,403.3 136.0,404.9 139.0,406.4 142.0,407.8 145.0,409.1 148.0,410.4 151.0,411.5 154.0,412.5 157.0,413.5 160.0,414.3 163.0,415.1 166.0,415.7 169.0,416.3 172.0,416.7 175.0,417.1 178.0,417.3 181.0,417.5 184.0,417.6 187.0,417.6 190.0,417.5 193.0,417.3 196.0,417.0 199.0,416.7 202.0,416.2 205.0,415.7 208.0,415.1 211.0,414.5 214.0,413.8 217.0,413.0 220.0,412.1 223.0,411.2 226.0,410.2 229.0,409.2 232.0,408.2 235.0,407.0 238.0,405.9 241.0,404.7 244.0,403.4 247.0,402.2 250.0,400.8 253.0,399.5 256.0,398.1 259.0,396.7 262.0,395.3 265.0,393.9 268.0,392.4 271.0,391.0 274.0,389.5 277.0,388.0 280.0,386.5 283.0,384.9 286.0,383.4 289.0,381.8 292.0,380.3 295.0,378.7 298.0,377.2 301.0,375.6 304.0,374.0 307.0,372.4 310.0,370.9 313.0,369.3 316.0,367.7 319.0,366.1 322.0,364.5 325.0,362.9 328.0,361.4 331.0,359.8 334.0,358.2 337.0,356.6 340.0,355.0 343.0,353.4 346.0,351.8 349.0,350.2 352.0,348.6 355.0,347.1 358.0,345.5 361.0,343.9 364.0,342.3 367.0,340.7 370.0,339.1 373.0,337.6 376.0,336.0 379.0,334.4 382.0,332.8 385.0,331.3 388.0,329.7 391.0,328.2 394.0,326.6 397.0,325.1 400.0,323.5 403.0,322.0 406.0,320.5 409.0,319.0 412.0,317.6 415.0,316.1 418.0,314.7 421.0,313.3 424.0,311.9 427.0,310.5 430.0,309.2 433.0,307.8 436.0,306.6 439.0,305.3 442.0,304.1 445.0,303.0 448.0,301.8 451.0,300.8 454.0,299.8 457.0,298.8 460.0,297.9 463.0,297.0 466.0,296.2 469.0,295.5 472.0,294.9 475.0,294.3 478.0,293.8 481.0,293.3 484.0,293.0 487.0,292.7 490.0,292.5 493.0,292.4 496.0,292.4 499.0,292.5 502.0,292.7 505.0,292.9 508.0,293.3 511.0,293.7 514.0,294.3 517.0,294.9 520.0,295.7 523.0,296.5 526.0,297.5 529.0,298.5 532.0,299.6 535.0,300.9 538.0,302.2 541.0,303.6 544.0,305.1 547.0,306.7 550.0,308.4 553.0,310.2 556.0,312.0 559.0,313.9 562.0,315.9 565.0,318.0 568.0,320.2 571.0,322.4 574.0,324.6 577.0,327.0 580.0,329.3 583.0,331.8 586.0,334.2 589.0,336.7 592.0,339.3 595.0,341.9 598.0,344.5 601.0,347.1 604.0,349.7 607.0,352.4 610.0,355.0" fill="none" stroke="#ea580c" stroke-width="2.4" stroke-linejoin="round"/><text x="340.0" y="347.0" text-anchor="middle" font-size="11" fill="#ea580c" font-weight="400" >f′ = 0 aux points morts (α = 0°, 180°)</text><text x="205.0" y="430.9" text-anchor="middle" font-size="11" fill="#64748b" font-weight="400" >v = −e·ω·sinα pour L ≫ e</text></svg>
+          <figcaption>En haut : \(x(\alpha)\) — course totale \(2e=100\) mm (de \(L-e=150\) à \(L+e=250\) mm), non sinusoïdale pure à cause du terme en racine. En bas : \(f'(\alpha)=v/\omega\) — nul aux <b>points morts</b> (\(\alpha=0^\circ\) et \(180^\circ\)) où la bielle est alignée avec la manivelle, extremum \(|f'|\approx 51{,}5\) mm/rad (légèrement > \(e\) car \(L\) est fini ; si \(L\gg e\), \(f'\approx-e\sin\alpha\)).</figcaption>
+        </figure>
+        <div class="warnbox">
+          <span class="lab">Piège : « les points morts »</span>
+          Quand \(f'(\alpha)=0\) (bielle alignée avec la manivelle), le coulisseau est <b>à l'arrêt</b> et, en statique, \(|C/F|=|f'|\to0\) : une force sur le coulisseau n'exerce <b>aucun couple</b> sur la manivelle (bras de levier nul), elle ne peut donc pas la faire tourner. Inversement \(1/f'\to\infty\) : un petit couple moteur peut développer un très grand effort au coulisseau (effet « genou »). Un moteur à pistons a besoin d'un <b>volant d'inertie</b> pour franchir les points morts.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= EXOS CRÉÉS =============================== -->
+  <section class="block" id="exos">
+    <h2>3. Exercices d'entraînement (créés) avec corrections</h2>
+    <p class="lead" style="font-size:.95rem">Seul le CM de C11 a été fourni (pas de TD) : les exercices ci-dessous sont créés à partir du cours.</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice A — Application numérique de la bielle-manivelle</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">\(e=50\) mm, \(L=200\) mm, manivelle tournant à \(N=100\) tr/min. Pour \(\alpha=60^\circ\) : position \(x\), angle \(\beta\), coefficient \(f'\), vitesse \(\dot x\) du coulisseau. Pour \(\alpha=0^\circ\) et \(180^\circ\) : positions extrêmes et course.</div>
+        <p class="q">Q1 — Position \(x\) et angle \(\beta\) pour \(\alpha=60^\circ\)</p>
+        <p>\(e\sin\alpha=50\times0{,}8660=43{,}30\) mm, donc \((e\sin\alpha)^2=1875\) mm². \(\sqrt{L^2-e^2\sin^2\alpha}=\sqrt{40000-1875}=\sqrt{38125}=195{,}26\) mm. \(e\cos\alpha=25\) mm.</p>
+        <p class="res">\(x=25+195{,}26=220{,}26\) mm</p>
+        <p>\(\sin\beta=\dfrac{e\sin\alpha}{L}=\dfrac{43{,}30}{200}=0{,}2165\Rightarrow\beta=12{,}50^\circ\).</p>
+        <p class="q">Q2 — \(f'(\alpha)\) et vitesse du coulisseau</p>
+        <p>\(f'(60^\circ)=-e\dfrac{\sin(\alpha+\beta)}{\cos\beta}=-50\times\dfrac{\sin72{,}50^\circ}{\cos12{,}50^\circ}=-50\times\dfrac{0{,}9537}{0{,}9763}=-48{,}85\) mm/rad.
+        \(\omega_e=\dfrac{2\pi N}{60}=\dfrac{2\pi\times100}{60}=10{,}47\) rad/s.</p>
+        <p class="res">\(\dot x=\omega_e f'=10{,}47\times(-48{,}85)\approx-511\) mm/s (≈ −0,51 m/s : le coulisseau <b>se rapproche</b> de \(A\))</p>
+        <p class="q">Q3 — Positions extrêmes et course</p>
+        <p>\(\alpha=0\) : \(x=e+L=250\) mm. \(\alpha=180^\circ\) : \(x=-e+L=150\) mm.</p>
+        <p class="res">Course \(=2e=100\) mm ; vitesse nulle (\(f'=0\)) aux deux extrémités (points morts).</p>
+        <div class="warnbox"><span class="lab">Piège</span>Calculer \(\sin(\alpha+\beta)\) avec \(\alpha+\beta=72{,}5^\circ\) (et non \(\alpha-\beta\)). Si on prend le signe opposé de \(\beta\) (bielle montante), la formule devient \(\sin(\alpha-\beta)/\cos\beta\) : toujours vérifier le <b>sens de \(\beta\)</b> sur la figure.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice B — Loi statique avec rendement (effort sur le coulisseau)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Même mécanisme (\(e=50\) mm, \(L=200\) mm), \(\alpha=60^\circ\). Le moteur exerce un couple \(C_m=20\) N·m sur la manivelle. Rendement du mécanisme \(\eta=0{,}9\). Quel effort \(F\) le coulisseau peut-il exercer ?</div>
+        <p class="q">Q1 — Effort en l'absence de pertes</p>
+        <p>Liaisons parfaites : \(P_s=P_e\Rightarrow F\,|\dot x|=C_m\,\omega_e\Rightarrow F=\dfrac{C_m}{|f'|}\) avec \(|f'|=48{,}85\cdot10^{-3}\) m/rad.</p>
+        <p>\(F=\dfrac{20}{0{,}04885}=409{,}4\) N.</p>
+        <p class="q">Q2 — Avec rendement</p>
+        <p>\(P_s=\eta P_e\Rightarrow \dfrac{F}{C_m}=\dfrac{\eta}{|f'|}\Rightarrow F=0{,}9\times409{,}4\).</p>
+        <p class="res">\(F\approx368{,}5\) N (le rendement <b>diminue</b> l'effort disponible en sortie)</p>
+        <div class="note"><span class="lab">Interprétation</span>Même couple moteur, mais en \(\alpha=90^\circ\) : \(|f'|=e=0{,}05\) m/rad ⟹ \(F=\eta C_m/e=360\) N ; en \(\alpha\to0\) : \(|f'|\to0\) ⟹ \(F\to\infty\) (levier infini, effet « genou »).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice C — Came circulaire excentrée</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Came = disque de rayon \(R=30\) mm monté excentré de \(e=8\) mm sur un arbre tournant à \(\omega=2\pi\) rad/s (60 tr/min), poussoir à plateau perpendiculaire à l'axe de translation.</div>
+        <p class="q">Q1 — Loi de position</p>
+        <p>Le point de contact reste sur le plateau (plan) ; la distance de l'axe de rotation au plateau est celle du centre de la came majorée de \(R\) : \(x=R+e\cos\alpha\) avec l'origine de \(\alpha\) prise à \(x_{max}\) (\(x_{max}=R+e=38\) mm, \(x_{min}=R-e=22\) mm).</p>
+        <p class="res">Course \(=x_{max}-x_{min}=2e=16\) mm ; mouvement <b>sinusoïdal</b>.</p>
+        <p class="q">Q2 — Loi en vitesse</p>
+        <p>\(\dot x=-e\,\dot\alpha\sin\alpha=-e\,\omega\sin\alpha\) (\(f'(\alpha)=-e\sin\alpha\)). Maximum en \(\alpha=90^\circ\) : \(|\dot x|_{max}=e\,\omega=8\times6{,}283=50{,}3\) mm/s.</p>
+        <p class="res">\(|\dot x|_{max}\approx50{,}3\) mm/s (nulle aux positions extrêmes)</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice D — Joint de cardan</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">Cardan d'angle \(\gamma=20^\circ\), arbre d'entrée à \(N_1=3000\) tr/min constant.</div>
+        <p class="q">Q1 — Plage de variation du rapport \(\omega_2/\omega_1\)</p>
+        <p>\(\dfrac{\omega_2}{\omega_1}=\dfrac{\cos\gamma}{1-\sin^2\gamma\cos^2\theta_1}\). Maximum pour \(\cos^2\theta_1=1\) (\(\theta_1=0\)) : le dénominateur vaut \(1-\sin^2\gamma=\cos^2\gamma\), donc \(\dfrac1{\cos\gamma}=1{,}0642\). Minimum pour \(\cos^2\theta_1=0\) (\(\theta_1=90^\circ\)) : \(\cos\gamma=0{,}9397\).</p>
+        <p class="q">Q2 — Vitesse de sortie</p>
+        <p>\(N_{2,min}=3000\times0{,}9397=2819\) tr/min ; \(N_{2,max}=3000\times1{,}0642=3193\) tr/min.</p>
+        <p class="res">La vitesse de sortie oscille, 2 fois par tour, entre ≈ 2819 et ≈ 3193 tr/min (≈ \(\pm6\) %). Un seul cardan n'est donc <b>pas homocinétique</b> ; un joint d'Oldham l'est (\(\omega_2=\omega_1\)).</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice E — Quelle méthode choisir ?</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="q">Associer à chaque besoin la méthode la plus directe</p>
+        <p>1) Loi en <b>position</b> d'une bielle-manivelle : <b>fermeture géométrique</b> (projection puis somme des carrés, ou norme au carré / Al-Kashi).</p>
+        <p>2) Loi en <b>vitesse</b> d'un mécanisme dont on n'a pas besoin de la loi en position : <b>fermeture cinématique</b> (composition des torseurs, projection bien choisie).</p>
+        <p>3) Loi E/S d'un <b>cardan</b> (axes de pivots perpendiculaires constamment) : <b>produit scalaire</b> \(\vec x_i\cdot\vec x_j=0\).</p>
+        <p>4) Loi E/S d'une <b>came</b> en vitesse : <b>non-pénétration</b> \(\vec V_{B\in2/1}\cdot\vec n=0\) ; en position : fermeture passant par le point de contact.</p>
+        <p>5) Mécanisme à <b>parallélogramme déformable</b> : <b>analyse géométrique</b> seule (translation circulaire, sortie = entrée).</p>
+        <div class="res">Dans tous les cas : <b>identifier E/S</b> d'abord, nommer les paramètres intermédiaires, puis éliminer.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Document original du chapitre (cours magistral). Cliquez pour ouvrir le PDF.</p>
+    <div class="docs-group">
+      <h3>Cours (CM)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../documents/sii/c11-transmetteurs-non-lineaires/S2I-C11-Determiner%20le%20comportement%20cin%C3%A9matique%20et%20en%20statique%20d%E2%80%99un%20transmetteur%20non%20lin%C3%A9aire.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">S2I-C11-Déterminer le comportement cinématique et en statique d'un transmetteur non linéaire</span><span class="badge">CM</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Les documents sont inclus dans ce dossier (sous-dossier <code>documents\</code>) — le paquet est autonome et partageable tel quel.</p>
+  </section>
+</main>
+<script src="../assets/gate.js"></script>
+</body>
+</html>
