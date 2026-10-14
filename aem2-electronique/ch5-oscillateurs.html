@@ -20,8 +20,10 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
   <a href="#cours">Cours</a>
   <a href="#td">Correction TD5</a>
   <a href="#tp">Correction TP5a</a>
+  <a href="#tp5b">Correction TP5b</a>
   <a href="#exos">Exercices créés</a>
   <a href="#docs">Documents donnés</a>
+  <a href="ch6-electronique-numerique.html">Ch6 →</a>
 </div>
 
 <main class="wrap">
@@ -31,17 +33,18 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
   On en étudie deux familles : les <b>multivibrateurs astables</b> (comparateur à hystérésis bouclé sur un
   intégrateur ou un filtre RC : créneau + triangle, ALI en régime saturé) et les <b>oscillateurs
   quasi-sinusoïdaux</b> (amplificateur bouclé sur un filtre sélectif, critère de Barkhausen, ALI en régime
-  linéaire). Le chapitre contient le <b>TP5a corrigé</b> (conception, puis réalisation) et le <b>TD5 corrigé</b>.
-  AM2 · P2030 · Semestre 3 — D. Courtois, octobre 2026.</p>
+  linéaire). Le chapitre contient le <b>TP5a corrigé</b> (conception, puis réalisation), le <b>TP5b corrigé</b> (oscillateur quasi-sinusoïdal, oscillateur de Wien) et le <b>TD5 corrigé</b>, tous rédigés d'après les feuilles officielles du professeur.
+  AM2 · P2030 · Semestre 3 — D. Courtois, octobre 2026. Suite : <a href="ch6-electronique-numerique.html">Ch6 — Électronique numérique</a>.</p>
 
   <div class="toc-mini">
     <b>Sommaire du chapitre</b>
     <ul>
       <li><a href="#memo">📌 Fiche mémo</a></li>
-      <li><a href="#cours">1. Résumé de cours — multivibrateurs, rapport cyclique, critère de Barkhausen</a></li>
+      <li><a href="#cours">1. Résumé de cours — multivibrateurs, rapport cyclique, Barkhausen, OQS et oscillateur de Wien</a></li>
       <li><a href="#td">2. Correction intégrale du TD5 (Ex1 à Ex4)</a></li>
       <li><a href="#tp">3. Correction du TP5a — conception (Q1 à Q14) et réalisation (§1 à §4)</a></li>
-      <li><a href="#exos">4. Exercices d'entraînement créés (3) avec corrections</a></li>
+      <li><a href="#tp5b">4. Correction du TP5b — OQS : conception (Q1 à Q11) et réalisation (§1 à §3)</a></li>
+      <li><a href="#exos">5. Exercices d'entraînement créés (3) avec corrections</a></li>
       <li><a href="#docs">📂 Documents donnés</a></li>
     </ul>
   </div>
@@ -64,16 +67,20 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
       <div class="memo-item method"><b>Oscillateur RLC + NIC</b>\(r=R\) : oscillations sinusoïdales à \(f_0=\dfrac1{2\pi\sqrt{LC}}\) ; démarrage si \(r\lt R\) ; amplitude limitée par la saturation</div>
       <div class="memo-item"><b>Filtre / amplificateur</b>\(\underline A=1+\dfrac{R_1}{r}\) ; \(\underline H=\dfrac{H_0}{1+jQ(x-1/x)}\), \(H_0=\dfrac{R}{R+R_1}\), \(Q=(R\parallel R_1)\sqrt{C/L}\)</div>
       <div class="memo-item"><b>Sinus-cosinus</b>\(\underline H_1=1+\dfrac1{j\tau_1\omega}\), \(\underline H_2=-\dfrac1{j\tau_2\omega}\), \(\underline H_3=\dfrac1{1+j\tau_3\omega}\) ⟹ \(\tau_1=\tau_3\), \(\omega_0=\dfrac1{\sqrt{\tau_1\tau_2}}\)</div>
+      <div class="memo-item"><b>Stabilité 2ᵈ ordre</b>\(\ddot s+D_1\dot s+\omega_0^2s=0\) : \(D_1&gt;0\) amorti ; \(=0\) sinus pur (limite) ; \(\lt0\) instable ; la saturation de l'ALI borne l'amplitude</div>
+      <div class="memo-item"><b>OQS = passe-bande + amplificateur</b>\(D_1=\dfrac{\omega_0}{Q}(1-H_0A_0)\) : \(H_0A_0=1\) sinus pur, \(\gtrsim1\) quasi-sinus, \(\gg1\) déformé (\(\omega&lt;\omega_0\), harmoniques impaires)</div>
+      <div class="memo-item"><b>Oscillateur de Wien</b>\(H_0=Q=\tfrac13\), \(\omega_0=\tfrac1{RC}\), \(A_0=1+\tfrac{R_2}{R_1}\gtrsim3\Rightarrow R_2\gtrsim2R_1\) ; \(T=2\pi RC\)</div>
+      <div class="memo-item"><b>RLC + NIC</b>\(D_1=\dfrac{R+r-R_1R_3/R_2}{L}\) ; \(R_{3min}=\dfrac{R_2}{R_1}(R+r)\)</div>
       <div class="memo-item method"><b>Réflexe</b>astable ⟹ chercher les 2 blocs, le signe de chacun (inverseur ?), les 2 seuils, puis la durée de chaque demi-période</div>
     </div>
   </section>
 
   <section class="block" id="cours">
     <h2>1. Résumé de cours</h2>
-    <div class="note"><span class="lab">Source</span> Aucun « Cours5.pdf » n'a encore été remis : ce résumé est <b>reconstitué
-    à partir du TP5a (conception, avec sa correction en page 2) et du TD5</b> (D. Courtois, 05–08/10/2026). Tout
-    ce qui est écrit ici est redémontré dans les corrections ci-dessous ; si un cours officiel arrive, on
-    l'ajoutera sans rien casser.</div>
+    <div class="note"><span class="lab">Source</span> Le dossier Moodle du Ch5 ne contient <b>aucun « Cours5.pdf »</b> : seulement les feuilles
+    <b>Exos5</b> (TD5, 08/10/2026), <b>TP5a</b> (conception 05/10 avec réponses, réalisation 07/10) et <b>TP5b</b> (conception 12/10, réalisation 14/10), de D. Courtois.
+    Ce résumé est donc <b>reconstitué à partir de ces cinq feuilles officielles</b> (le renvoi « T : Ch6 » de l'énoncé du TD renvoie au manuel de cours, pas au Ch6 d'électronique numérique).
+    Tout ce qui est écrit ici est redémontré dans les corrections ci-dessous ; si un cours officiel est publié, on l'ajoutera sans rien casser.</div>
 
     <h3>1.1 · Multivibrateurs : monostable, bistable, astable</h3>
     <div class="def"><span class="lab">Multivibrateur</span> Circuit électronique qui n'a que <b>deux états de
@@ -149,13 +156,36 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     oscillations <b>démarrent</b> à partir du bruit, il faut un gain de boucle <b>légèrement supérieur</b> à 1 (oscillation
     croissante). Elles cessent de croître quand l'ALI <b>sature</b> : le circuit n'est alors plus linéaire et
     l'amplitude se stabilise (TD5 Ex3).</div>
+
+    <h3>1.6 · Stabilité d'un système du 2ᵈ ordre : le coefficient \(D_1\) (TP5b §1)</h3>
+    <p>Un système linéaire du 2ᵈ ordre sans second membre s'écrit \(\ \ddot s+D_1\dot s+\omega_0^2s=0\). Le signe de \(D_1\) donne le bilan d'énergie :</p>
+    <div class="overflow"><table>
+      <tr><th>\(D_1\)</th><th>Bilan</th><th>Solution</th></tr>
+      <tr><td>\(>0\)</td><td>amortissement (pertes) &gt; amplification</td><td>stable : \(s\to0\) (pseudo-périodique, critique ou apériodique selon \(\Delta=D_1^2-4\omega_0^2\))</td></tr>
+      <tr><td>\(=0\)</td><td>pertes exactement compensées</td><td>sinusoïde pure \(A\cos(\omega_0t+\varphi)\), amplitude constante : <b>limite de stabilité</b> (inatteignable en pratique)</td></tr>
+      <tr><td>\(\lt0\)</td><td>amplification &gt; pertes</td><td>instable : enveloppe en \(e^{|D_1|t/2}\) (pseudo-périodique divergente si \(|D_1|\lt2\omega_0\))</td></tr>
+    </table></div>
+    <div class="note"><span class="lab">À retenir</span> Un oscillateur sinusoïdal se règle sur la frontière \(D_1\approx0^-\) : <b>légèrement instable</b> pour démarrer à partir du bruit, puis la <b>saturation de l'ALI</b> (non-linéarité) borne l'amplitude. Le signal obtenu est <b>périodique, borné, quasi-sinusoïdal</b>, non linéaire.</div>
+
+    <h3>1.7 · Oscillateur quasi-sinusoïdal (OQS) : passe-bande + amplificateur ; oscillateur de Wien (TP5b)</h3>
+    <p>Un OQS boucle un <b>filtre passe-bande du 2ᵈ ordre</b> \(\ \underline H=\dfrac{H_0}{1+jQ(x-1/x)}\) (\(x=\omega/\omega_0\)) sur un <b>amplificateur de gain réel \(A_0>0\)</b>. La boucle fermée conduit à
+    \[ \ddot V_2+\frac{\omega_0}{Q}\,(1-H_0A_0)\,\dot V_2+\omega_0^2V_2=0\qquad\Longrightarrow\qquad D_1=\frac{\omega_0}{Q}(1-H_0A_0). \]</p>
+    <ul>
+      <li>\(H_0A_0=1\) : oscillations sinusoïdales pures à \(\omega_0\) (Barkhausen : \(\operatorname{Im}(\underline HA_0)=0\Leftrightarrow\omega=\omega_0\) ; \(\operatorname{Re}=1\Leftrightarrow A_0=1/H_0\)) ;</li>
+      <li>\(H_0A_0\gtrsim1\) : quasi-sinusoïdal (démarrage depuis le bruit, saturation brève) ;</li>
+      <li>\(H_0A_0\gg1\) : ALI saturé longtemps, signal déformé, pulsation \(<\omega_0\), nombreuses harmoniques impaires ;</li>
+      <li>\(H_0A_0<1\) : oscillations amorties.</li>
+    </ul>
+    <div class="thm"><span class="lab">Oscillateur de Wien</span> Pont de Wien (\(R\) série \(C\), puis \(R\parallel C\)) : \(H_0=Q=\tfrac13\), \(\omega_0=\tfrac1{RC}\) ; amplificateur non inverseur \(A_0=1+\tfrac{R_2}{R_1}\).
+    Conditions : \(\ R_2\gtrsim2R_1\), \(\ T=2\pi RC\). Ex. \(R=1\ \text{k}\Omega\), \(C=47\) nF, \(R_1=500\ \Omega\) : \(R_{2min}=1\ \text{k}\Omega\), \(T_0\approx295\ \mu\text{s}\), \(f_0\approx3{,}39\) kHz.</div>
+    <div class="note"><span class="lab">Variante</span> Un circuit RLC série peut jouer le rôle d'oscillateur si une <b>résistance négative</b> (NIC, \(-R_1R_3/R_2\)) compense ses pertes : \(D_1=\dfrac{R+r-R_1R_3/R_2}{L}\), seuil \(R_{3min}=\dfrac{R_2}{R_1}(R+r)\), \(\omega_0=1/\sqrt{LC}\) (TP5b §3 et TD5 Ex3).</div>
   </section>
 
   <section class="block" id="td">
     <h2>2. Correction intégrale du TD5</h2>
     <p>TD5 du 08/10/2026 (D. Courtois, AEM2 · P2030 · S3). Quatre exercices : un MVA compact (Ex1), un générateur
     de balayage (Ex2), un oscillateur quasi-sinusoïdal à résistance négative traité de deux façons (Ex3) et un
-    oscillateur sinus-cosinus (Ex4). Pas de corrigé officiel : tout est résolu ici et <b>vérifié numériquement</b>.
+    oscillateur sinus-cosinus (Ex4). L'énoncé officiel est <code>Exos5.pdf</code> ; il n'y a pas de corrigé officiel : tout est résolu ici et <b>vérifié numériquement</b>.
     Convention : l'ALI est idéal (\(i_\pm=0\)), \(V_{sat}=V_{CC}=15\) V.</p>
 
     <!-- ================= EX 1 ================= -->
@@ -360,7 +390,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
           <img src="td5-img/ex2.jpg" alt="Énoncé Exercice 2 du TD5 — générateur de balayage : oscillogramme en rampes dissymétriques, ALI 1 intégrateur avec R1-D1 et R2-D2, ALI 2 comparateur avec R3 et R4" loading="lazy">
           <figcaption>Énoncé (TD5) — générateur de balayage</figcaption>
         </figure>
-        <p>Schéma repris et vérifié sur le scan (le fil du haut relie la sortie \(v_s\) à l'entrée \(v_e\) : <b>\(v_e=v_s\)</b>) :</p>
+        <p>Schéma repris et vérifié sur l'énoncé officiel (le fil du haut relie la sortie \(v_s\) à l'entrée \(v_e\) : <b>\(v_e=v_s\)</b>) :</p>
         <figure><svg viewBox="0 0 760 250" width="760" xmlns="http://www.w3.org/2000/svg" role="img">
 <polygon points="300,120 300,180 364,150" fill="#e2e8f0" stroke="#1e293b" stroke-width="1.7"/>
 <text x="307" y="140" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="15" text-anchor="start" font-weight="700">−</text>
@@ -1639,8 +1669,502 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     </div>
   </section>
 
+  <section class="block" id="tp5b">
+    <h2>4. Correction du TP5b — l'oscillateur quasi-sinusoïdal (OQS)</h2>
+    <p>Le TP5b comporte deux feuilles : <b>« Conception d'un autre type d'oscillateur »</b> (12/10/2026 : stabilité d'un système du 2ᵈ ordre,
+    structure de l'OQS, oscillateur de Wien, 11 questions + une question 8b optionnelle) et <b>« Réalisation d'un oscillateur
+    quasi-sinusoïdal »</b> (14/10/2026 : étude séparée des deux blocs, câblage de l'oscillateur de Wien, distorsion harmonique, OQS à
+    résistance négative). La conception est corrigée <b>question par question</b>, la réalisation <b>manipulation par manipulation</b>.
+    Données du labo : ALI alimenté en \(\pm15\) V (\(V_{sat}\approx15\) V en théorie), \(R=1{,}0\ \text{k}\Omega\), \(C=47\) nF,
+    \(R_1=500\ \Omega\), \(R_2=R_{var}\).</p>
+
+    <!-- ============ TP5b CONCEPTION ============ -->
+    <h3>4.1 · TP5b — Conception d'un autre type d'oscillateur (Q1 à Q11)</h3>
+    <figure>
+      <img src="tp5-img/tpbc-p1.jpg" alt="Énoncé TP5b conception, page 1 : stabilité, équation différentielle du second ordre, questions 1 à 7" loading="lazy">
+      <figcaption>Énoncé (TP5b conception, p.1) — §1 stabilité des systèmes, §2 début de la conception de l'OQS</figcaption>
+    </figure>
+    <figure>
+      <img src="tp5-img/tpbc-p2.jpg" alt="Énoncé TP5b conception, page 2 : résumé de la structure d'un OQS, questions 8 à 11 et tableau des situations observables" loading="lazy">
+      <figcaption>Énoncé (TP5b conception, p.2) — structure d'un OQS, questions 8 à 11, tableau de l'oscillateur de Wien</figcaption>
+    </figure>
+
+    <div class="exo-card" id="tpb-q1-5">
+      <div class="exo-head">Q1 à Q5 — Stabilité d'un système du 2ᵈ ordre : le rôle du coefficient \(D_1\) <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p>Cadre : \(\ D_2\ddot s+D_1\dot s+D_0 s=0\) avec \(D_2=1\), \(D_0=\omega_0^2>0\). Équation caractéristique \(r^2+D_1r+\omega_0^2=0\),
+        de discriminant \(\Delta=D_1^2-4\omega_0^2\) et de racines de partie réelle \(-D_1/2\). Le coefficient \(D_1\) mesure le <b>bilan d'énergie</b> :
+        \(D_1>0\) = les pertes l'emportent (<b>amortissement</b>) ; \(D_1&lt;0\) = le gain l'emporte (<b>amplification</b>).</p>
+
+        <p class="q">Q1) Solution quand \(D_1=0\) ; stabilité ; amortissement vs amplification ; circuit passif d'exemple</p>
+        <p>L'équation devient \(\ddot s+\omega_0^2s=0\) : les racines sont imaginaires pures \(\pm j\omega_0\), donc</p>
+        <div class="res">\(s(t)=A\cos(\omega_0t+\varphi)\) : sinusoïde <b>pure, d'amplitude constante</b> \(A\) et de phase \(\varphi\) fixées par les conditions initiales.</div>
+        <ul>
+          <li><b>Stabilité</b> : le signal ne diverge pas mais ne tend pas non plus vers 0 : le système est <b>à la limite de la stabilité</b> (« juste instable » dans le vocabulaire du cours) — borné, mais pas asymptotiquement stable.</li>
+          <li><b>Bilan d'énergie</b> : l'amortissement (pertes) est <b>exactement compensé</b> par l'amplification (apport d'énergie) : ici ni l'un ni l'autre n'agit, l'énergie se conserve.</li>
+          <li><b>Exemple de circuit passif</b> : le circuit \(LC\) idéal (sans résistance) : \(\ddot u+\dfrac{u}{LC}=0\), donc \(\omega_0=\dfrac1{\sqrt{LC}}\). <b>En théorie seulement</b> : toute résistance réelle donne \(D_1=R/L>0\) et amortit les oscillations.</li>
+        </ul>
+
+        <p class="q">Q2) Situation \(D_1&lt;0\) : grandeur prépondérante, stabilité, types de solutions</p>
+        <div class="res">C'est l'<b>amplification</b> qui domine ; le système est <b>instable</b> (divergent).</div>
+        <p>Les racines ont une partie réelle \(-D_1/2=|D_1|/2>0\) : l'enveloppe croît en \(e^{|D_1|t/2}\). Selon le discriminant :</p>
+        <ul>
+          <li>\(\Delta&lt;0\) soit \(|D_1|&lt;2\omega_0\) : solution <b>pseudo-périodique divergente</b>, \(s=e^{|D_1|t/2}(A\cos\Omega t+B\sin\Omega t)\) avec \(\Omega=\sqrt{\omega_0^2-D_1^2/4}\) ;</li>
+          <li>\(\Delta\ge0\) soit \(|D_1|\ge2\omega_0\) : solution <b>apériodique divergente</b> (somme d'exponentielles croissantes), sans oscillation.</li>
+        </ul>
+
+        <p class="q">Q3) Signal pseudo-périodique divergent au départ, puis d'amplitude constante : explication</p>
+        <p>Sur la courbe fournie, l'enveloppe croît d'abord exponentiellement (courbe pointillée) avec des oscillations de période presque constante ; puis les oscillations cessent de croître et s'installent à une <b>amplitude constante</b> (environ ±8 V). Explication en deux temps :</p>
+        <ul>
+          <li><b>Au départ</b> : \(D_1\) est <b>légèrement négatif</b> (\(D_1\approx0^-\), donc \(|D_1|\ll2\omega_0\)) : l'ALI est en régime linéaire, l'équation est celle de Q2 (pseudo-périodique divergent, pulsation \(\Omega\simeq\omega_0\)), l'enveloppe croît lentement en \(e^{|D_1|t/2}\) (lecture grossière sur la courbe : l'enveloppe est multipliée par ≈12 entre 10 ms et 25 ms, soit \(|D_1|/2\approx1{,}7\times10^2\ \text{s}^{-1}\)).</li>
+          <li><b>Ensuite</b> : la <b>sortie de l'ALI est bornée</b> par ses tensions d'alimentation (\(|s|\le V_{sat}\)). Quand l'amplitude atteint cette limite, l'ALI <b>sature</b> : le modèle linéaire (\(D_1\) constant) n'est plus valable, le gain effectif chute (il diminue quand l'amplitude croît) et l'amplitude cesse de croître.</li>
+        </ul>
+
+        <p class="q">Q4) Adjectifs décrivant la réponse après un temps long</p>
+        <div class="res"><b>Périodique, quasi-sinusoïdale, bornée, non linéaire.</b></div>
+        <ul>
+          <li><b>périodique</b> : le régime permanent se répète à l'identique ; <b>bornée</b> : l'amplitude ne diverge plus (saturation) ; <b>non linéaire</b> : c'est précisément la saturation (non-linéarité) qui borne le signal ;</li>
+          <li><b>quasi-sinusoïdale</b> et non sinusoïdale : la saturation, même brève, déforme légèrement le sinus (apparition d'harmoniques, cf. Q11 et réalisation §2) ;</li>
+          <li>exclus : <i>sinusoïdale</i> (sinus pur seulement si \(D_1=0\) exactement), <i>créneau</i> (il faudrait \(D_1\) très négatif, cf. Q5), <i>divergente</i> (bornée par la saturation), <i>linéaire</i>.</li>
+        </ul>
+
+        <p class="q">Q5) Effet d'une légère augmentation / diminution de \(D_1\)</p>
+        <ul>
+          <li><b>\(D_1\) augmente légèrement</b> (se rapproche de 0⁻) : l'exponentielle croît plus lentement (démarrage plus long), l'ALI ne sature que sur des durées <b>plus courtes</b>, le signal est <b>plus proche d'une sinusoïde</b>. À \(D_1=0\) : sinus pur (inatteignable en pratique) ; à \(D_1>0\) : oscillations amorties, qui s'éteignent.</li>
+          <li><b>\(D_1\) diminue légèrement</b> (plus négatif) : croissance plus rapide, saturation plus tôt et sur des <b>durées plus longues</b> ; le signal est <b>plus déformé</b> (tendance au créneau) et sa pulsation s'éloigne de \(\omega_0\) (colonne de droite du tableau de la Q11).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exo-card" id="tpb-q6-8">
+      <div class="exo-head">Q6 à Q8b — Structure d'un OQS : passe-bande + amplificateur <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Q6) Quelle sinusoïde le filtre passe-bande favorise-t-il ? Gain ? Et les autres ?</p>
+        <p>Avec \(x=\omega/\omega_0\), \(\ \underline H=H_0\dfrac{jx/Q}{1+jx/Q-x^2}\). En divisant numérateur et dénominateur par \(jx/Q\) :</p>
+        \[ \underline H=\frac{H_0}{1+jQ\left(x-\dfrac1x\right)},\qquad |\underline H|=\frac{H_0}{\sqrt{1+Q^2\left(x-\dfrac1x\right)^2}} . \]
+        <p>Le dénominateur est minimal quand \(x-\dfrac1x=0\), c'est-à-dire \(x=1\) :</p>
+        <div class="res">La sinusoïde de pulsation <b>\(\omega_0\)</b> (fréquence de résonance) a le gain maximal \(|\underline H|=H_0\), avec une phase nulle. Toutes les autres sinusoïdes (\(x\neq1\)) ont un gain strictement inférieur à \(H_0\) : elles sont <b>plus atténuées</b>, d'autant plus qu'elles sont loin de \(\omega_0\) et que \(Q\) est grand.</div>
+
+        <p class="q">Q7) Choix de \(A_0\) pour un signal quasi-sinusoïdal ; devenir de \(\omega_0\) et des autres sinusoïdes</p>
+        <p>Après un tour de boucle, une sinusoïde de pulsation \(\omega\) est multipliée par le <b>gain de boucle</b> \(A_0\underline H(j\omega)\).</p>
+        <div class="res">On choisit \(A_0\) <b>légèrement supérieur à \(1/H_0\)</b> : \(\ A_0\gtrsim\dfrac1{H_0}\), soit \(H_0A_0=1+\varepsilon\) avec \(0&lt;\varepsilon\ll1\).</div>
+        <ul>
+          <li>Pour \(\omega_0\) : \(|A_0\underline H|=1+\varepsilon>1\) et phase nulle : la sinusoïde est <b>amplifiée à chaque tour</b> (croissance lente, \(D_1\approx0^-\)), jusqu'à ce que l'ALI sature légèrement.</li>
+          <li>Pour toute autre pulsation (hors d'une bande très étroite autour de \(\omega_0\)) : \(|A_0\underline H|&lt;1\) : elle est <b>atténuée à chaque tour</b> et finit par disparaître.</li>
+        </ul>
+        <p>Seule la sinusoïde \(\omega_0\) survit : le signal est quasi-sinusoïdal. Avec \(A_0\gg1/H_0\), une <b>large bande</b> de fréquences (harmoniques comprises) aurait un gain de boucle supérieur à 1 : elles seraient toutes entretenues, d'où un signal très déformé (Q11, colonne de droite).</p>
+
+        <p class="q">Q8) Équation différentielle du filtre bouclé ; critères dans le domaine temporel</p>
+        <p>On traduit \(\underline H\) en équation différentielle : \(\bigl(1+\tfrac{jx}{Q}-x^2\bigr)V_2=H_0\tfrac{jx}{Q}V_1\), avec \(jx\leftrightarrow\dfrac1{\omega_0}\dfrac{d}{dt}\) :</p>
+        \[ V_2+\frac1{Q\omega_0}\dot V_2+\frac1{\omega_0^2}\ddot V_2=\frac{H_0}{Q\omega_0}\dot V_1 . \]
+        <p>L'amplificateur impose \(V_1=A_0V_2\). En remplaçant et en multipliant par \(\omega_0^2\) :</p>
+        \[ \boxed{\ \ddot V_2+\frac{\omega_0}{Q}\,(1-H_0A_0)\,\dot V_2+\omega_0^2V_2=0\ } \]
+        <p>C'est l'équation \(D_2\ddot s+D_1\dot s+D_0s=0\) avec \(D_2=1\), \(\ D_1=\dfrac{\omega_0}{Q}(1-H_0A_0)\), \(\ D_0=\omega_0^2\). On retrouve en temporel tous les critères :</p>
+        <ul>
+          <li>\(D_1=0\iff H_0A_0=1\iff A_0=\dfrac1{H_0}\) : oscillations sinusoïdales pures, de pulsation \(\sqrt{D_0/D_2}=\omega_0\) (Barkhausen, \(\operatorname{Re}(\underline H A_0)=1\) et \(\operatorname{Im}=0\)) ;</li>
+          <li>\(D_1\lt0\iff H_0A_0>1\) : <b>instabilité</b> (oscillations croissantes) — avec \(H_0A_0\gtrsim1\), \(D_1\approx0^-\) : démarrage à partir du bruit, pseudo-pulsation \(\Omega=\omega_0\sqrt{1-D_1^2/(4\omega_0^2)}\simeq\omega_0\) ;</li>
+          <li>\(D_1>0\iff H_0A_0&lt;1\) : oscillations <b>amorties</b>, rien ne s'entretient.</li>
+        </ul>
+        <div class="note"><span class="lab">Lien avec la Q11</span> Le gain de boucle \(H_0A_0\) joue le rôle de curseur : \(=1\) (sinus pur, inatteignable), \(\gtrsim1\) (quasi-sinus), \(\gg1\) (non sinusoïdal).</div>
+
+        <p class="q">Q8b) (optionnelle) Pourquoi le système \(A_0\gtrsim1/H_0\), instable en régime linéaire, devient-il stable en régime saturé ?</p>
+        <p>Raisonnement par le <b>premier harmonique</b> (méthode approchée, valable car le passe-bande filtre les harmoniques créés). L'amplificateur est linéaire de gain \(A_0\) tant que \(|s|&lt;V_{sat}\), puis écrête. Pour \(V_2=V_m\cos\omega t\) :</p>
+        <ul>
+          <li>si \(V_m&lt;V_{sat}/A_0\) : \(s=A_0V_2\), gain \(A_0\) ;</li>
+          <li>si \(V_m>V_{sat}/A_0\) : \(s\) est écrêtée ; l'amplitude de son <b>fondamental</b> est \(A_{eq}(V_m)\,V_m\) avec un <b>gain équivalent \(A_{eq}(V_m)&lt;A_0\), décroissant quand \(V_m\) augmente</b> (pour \(V_m\gg V_{sat}/A_0\) : \(A_{eq}\to\dfrac{4V_{sat}}{\pi V_m}\), fondamental d'un créneau).</li>
+        </ul>
+        <p>Le système se comporte donc comme un système linéaire de coefficient \(D_1(V_m)=\dfrac{\omega_0}{Q}\bigl(1-H_0A_{eq}(V_m)\bigr)\) <b>qui augmente avec l'amplitude</b> :</p>
+        <ul>
+          <li>\(V_m\) petit : \(H_0A_0>1\), \(D_1&lt;0\) : l'amplitude <b>croît</b> ;</li>
+          <li>\(V_m\) grand : \(H_0A_{eq}&lt;1\), \(D_1>0\) : l'amplitude <b>décroît</b> ;</li>
+          <li>il existe une amplitude \(V_m^*\) telle que \(H_0A_{eq}(V_m^*)=1\) (\(D_1=0\)) ; c'est un <b>équilibre stable</b> (cycle limite) : on y revient dans les deux sens.</li>
+        </ul>
+        <p>Ordres de grandeur pour l'oscillateur de Wien (\(H_0=\tfrac13\)) : \(H_0A_0\gtrsim1\) donne \(V_m^*\gtrsim V_{sat}/A_0\simeq5\) V sur \(V_2\) (écrêtage à peine amorcé) ; \(H_0A_0\gg1\) donne \(V_m^*\approx\dfrac{4H_0V_{sat}}{\pi}\approx6{,}4\) V, avec un fort écrêtage.</p>
+      </div>
+    </div>
+
+    <div class="exo-card" id="tpb-q9-10">
+      <div class="exo-head">Q9 et Q10 — L'oscillateur de Wien : schéma, paramètres, dimensionnement <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Q9) Schéma global ; valeurs de \(H_0\), \(Q\), \(\omega_0\) du pont de Wien ; gain \(A_0\) de l'amplificateur non inverseur</p>
+        <p>On boucle le <b>filtre à pont de Wien</b> (TD1, Ex5) avec un <b>amplificateur non inverseur</b> : la sortie de l'amplificateur \(V_1\) attaque le pont, et la sortie du pont \(V_2\) est renvoyée sur l'entrée \((+)\) de l'ALI.</p>
+        <figure><svg viewBox="0 0 590 290" width="590" xmlns="http://www.w3.org/2000/svg" role="img">
+<polygon points="150,70 150,130 214,100" fill="#e2e8f0" stroke="#1e293b" stroke-width="1.7"/>
+<text x="156" y="87" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="15" text-anchor="start" font-weight="700">+</text>
+<text x="156" y="123" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="15" text-anchor="start" font-weight="700">−</text>
+<polyline points="214,100 330,100" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<circle cx="250" cy="100" r="3.2" fill="#1e293b"/>
+<polyline points="470,100 470,45 125,45 125,82 150,82" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="250,100 250,170 197,170" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<rect x="163" y="163.5" width="34" height="13" fill="#fff" stroke="#1e293b" stroke-width="1.7"/>
+<text x="180" y="159" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="13" text-anchor="middle">R₂</text>
+<polyline points="163,170 110,170 110,118 150,118" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<circle cx="110" cy="170" r="3.2" fill="#1e293b"/>
+<polyline points="110,170 110,180" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<rect x="103.5" y="180" width="13" height="34" fill="#fff" stroke="#1e293b" stroke-width="1.7"/>
+<text x="124" y="201" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="13" text-anchor="start">R₁</text>
+<polyline points="110,214 110,232" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="110,232 110,238" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="101,238 119,238" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="104,242 116,242" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="107,246 113,246" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<rect x="330" y="93.5" width="34" height="13" fill="#fff" stroke="#1e293b" stroke-width="1.7"/>
+<text x="347" y="89" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="13" text-anchor="middle">R</text>
+<polyline points="364,100 386,100" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="386,89 386,111" fill="none" stroke="#1e293b" stroke-width="2.4" stroke-linejoin="round"/>
+<polyline points="394,89 394,111" fill="none" stroke="#1e293b" stroke-width="2.4" stroke-linejoin="round"/>
+<text x="390" y="83" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="13" text-anchor="middle">C</text>
+<polyline points="394,100 440,100" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<circle cx="440" cy="100" r="3.2" fill="#1e293b"/>
+<polyline points="440,100 440,150" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<circle cx="470" cy="100" r="3.2" fill="#1e293b"/>
+<polyline points="440,100 500,100" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<rect x="433.5" y="150" width="13" height="34" fill="#fff" stroke="#1e293b" stroke-width="1.7"/>
+<text x="454" y="171" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="13" text-anchor="start">R</text>
+<polyline points="440,184 440,232" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="440,232 440,238" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="431,238 449,238" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="434,242 446,242" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="437,246 443,246" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="500,100 500,150" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="489,151 511,151" fill="none" stroke="#1e293b" stroke-width="2.4" stroke-linejoin="round"/>
+<polyline points="489,159 511,159" fill="none" stroke="#1e293b" stroke-width="2.4" stroke-linejoin="round"/>
+<text x="516" y="159" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="13" text-anchor="start">C</text>
+<polyline points="500,159 500,232" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="500,232 500,238" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="491,238 509,238" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="494,242 506,242" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="497,246 503,246" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="500,100 548,100" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="300,128 300,106" fill="none" stroke="#1e293b" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="300,106 302.7,112.4 297.3,112.4" fill="#1e293b"/>
+<text x="294" y="132" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="14" text-anchor="end" font-weight="700" font-style="italic">V₁</text>
+<polyline points="548,232 548,106" fill="none" stroke="#1e293b" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="548,106 550.7,112.4 545.3,112.4" fill="#1e293b"/>
+<polyline points="548,232 548,238" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="539,238 557,238" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="542,242 554,242" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="545,246 551,246" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<text x="558" y="170" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="14" text-anchor="start" font-weight="700" font-style="italic">V₂</text>
+<rect x="92" y="62" width="190" height="190" rx="6" fill="none" stroke="#64748b" stroke-width="1.3" stroke-dasharray="6 4"/>
+<text x="187.0" y="267" fill="#64748b" font-family="Segoe UI,Arial,sans-serif" font-size="12" text-anchor="middle" font-weight="700">amplificateur : A₀ = 1 + R₂/R₁</text>
+<rect x="324" y="62" width="199" height="190" rx="6" fill="none" stroke="#64748b" stroke-width="1.3" stroke-dasharray="6 4"/>
+<text x="423.5" y="267" fill="#64748b" font-family="Segoe UI,Arial,sans-serif" font-size="12" text-anchor="middle" font-weight="700">filtre à pont de Wien : H₀ = Q = 1/3</text>
+</svg><figcaption>Oscillateur de Wien : amplificateur non inverseur (\(A_0=1+R_2/R_1\)) bouclé sur le pont de Wien (\(H_0=Q=\tfrac13\)). La sortie du pont \(V_2\) rentre sur l'entrée \((+)\) de l'ALI.</figcaption></figure>
+        <p>Pont de Wien (rappel TD1 Ex5) : \(R\) en série avec \(C\), puis \(R\parallel C\) en sortie :</p>
+        \[ \underline H=\frac{jRC\omega}{1+3jRC\omega-(RC\omega)^2}\ \Longrightarrow\ H_0=\frac13,\quad Q=\frac13,\quad \omega_0=\frac1{RC}. \]
+        <p>Amplificateur non inverseur : \(V_2\) sur \((+)\), \(R_1\) de \((-)\) à la masse, \(R_2\) de la sortie à \((-)\) : \(\ v_-=\dfrac{R_1}{R_1+R_2}V_1=V_2\) (ALI idéal linéaire) donc</p>
+        <div class="res">\(\underline A_0=\dfrac{V_1}{V_2}=1+\dfrac{R_2}{R_1}\) (réel, positif, \(\ge1\)).</div>
+
+        <p class="q">Q10) \(R=1{,}0\ \text{k}\Omega\), \(C=47\) nF, \(R_1=500\ \Omega\) : valeur de \(R_2\) pour des oscillations quasi-sinusoïdales ; période</p>
+        <p>Condition d'oscillations quasi-sinusoïdales : \(A_0\gtrsim\dfrac1{H_0}=3\). Soit \(1+\dfrac{R_2}{R_1}\gtrsim3\), c'est-à-dire :</p>
+        <div class="res">\(R_2\gtrsim2R_1=\mathbf{1{,}0\ k\Omega}\) (<b>\(R_{2min}=1{,}0\ \text{k}\Omega\)</b> : à ce seuil \(A_0=3\) et \(H_0A_0=1\) ; on prend un peu plus, par exemple \(R_2\approx1{,}05\) à \(1{,}1\ \text{k}\Omega\)).</div>
+        <p>Pulsation, fréquence et période (le montage oscille à \(\omega_0\), pulsation propre du pont) :</p>
+        \[ \omega_0=\frac1{RC}=\frac1{10^3\times47\times10^{-9}}=2{,}13\times10^4\ \text{rad·s}^{-1},\quad f_0=\frac{\omega_0}{2\pi}\approx3{,}39\ \text{kHz},\quad T_0=2\pi RC\approx\mathbf{295\ \mu s}. \]
+      </div>
+    </div>
+
+    <div class="exo-card" id="tpb-q11">
+      <div class="exo-head">Q11 — Lecture du tableau des situations observables (oscillateur de Wien) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p>Le tableau de la feuille (reproduit en page 2 de l'énoncé ci-dessus) compare trois colonnes : \(H_0A=1\), \(H_0A\gtrsim1\), \(H_0A\gg1\), avec, pour chacune, les oscillogrammes (bleu = sortie du filtre \(V_2\), vert = sortie de l'ALI \(V_1\), droites rouges = limites de linéarité), le spectre (raie rouge = pulsation propre du filtre) et le démarrage des oscillations.</p>
+
+        <p class="q">a) Le cas non évoqué : \(H_0A_0&lt;1\)</p>
+        <div class="res">\(D_1=\dfrac{\omega_0}{Q}(1-H_0A_0)>0\) : l'<b>amortissement l'emporte</b> ; aucune oscillation ne s'entretient. Le bruit initial donne des oscillations <b>pseudo-périodiques amorties</b> qui <b>s'éteignent</b> (\(V_1\) et \(V_2\to0\)) : le circuit reste au repos. C'est ce que l'on voit au démarrage avec \(R_2=500\ \Omega\) (\(A_0=2\), \(H_0A_0=\tfrac23\)) : « il est normal de ne rien voir ».</div>
+
+        <p class="q">b) Quelles valeurs suggèrent un oscillateur de Wien ?</p>
+        <ul>
+          <li><b>Les limites de linéarité</b> : colonne centrale, le filtre sature l'ALI vers \(\pm5\) V (droites rouges sur \(V_2\)) alors que l'ALI sature à \(\pm15\) V (droites rouges sur \(V_1\)). Le rapport \(V_1/V_2=15/5=3\) est le gain \(A_0\) au seuil, donc \(H_0=1/A_0=\tfrac13\) : c'est exactement le \(H_0\) du pont de Wien.</li>
+          <li><b>Le rapport des amplitudes</b> en première colonne : la sortie de l'ALI (vert, ≈9 V) vaut environ <b>3 fois</b> celle du filtre (bleu, ≈3 V), cohérent avec \(A_0H_0=1\) et \(H_0=\tfrac13\).</li>
+          <li><b>La pulsation propre</b> : la raie rouge des spectres est à \(\omega_0\approx10\times10^3\) rad·s⁻¹ ; pour un Wien \(\omega_0=1/RC\) (pas de facteur supplémentaire).</li>
+        </ul>
+
+        <p class="q">c) Capacité utilisée (même \(R\) et même \(R_1\) qu'en Q10)</p>
+        <div class="res">\(C=\dfrac1{R\,\omega_0}=\dfrac1{10^3\times10^4}=1{,}0\times10^{-7}\ \text{F}=\mathbf{100\ nF}\).</div>
+        <p>(Ce n'est donc pas la valeur de 47 nF du TP, pour lequel \(\omega_0=2{,}13\times10^4\) rad·s⁻¹.)</p>
+
+        <p class="q">d) Valeur probable de \(R_2\) pour la dernière colonne (\(H_0A_0\gg1\))</p>
+        <p>Sur les oscillogrammes de la dernière colonne, les droites rouges de linéarité du filtre sont à environ \(\pm1{,}7\) V. L'ALI sature donc quand \(|A_0V_2|=15\) V avec \(V_2\approx1{,}7\) V : \(A_0\approx\dfrac{15}{1{,}7}\approx9\). Alors \(R_2=(A_0-1)R_1\approx(9\text{ à }10-1)\times500\) :</p>
+        <div class="res">\(R_2\approx4\ \text{k}\Omega\) à \(4{,}5\ \text{k}\Omega\), soit <b>4500 Ω</b> parmi les cinq valeurs proposées (\(A_0=10\), limite de linéarité \(15/10=1{,}5\) V).</div>
+        <p>Vérification par élimination : 150 Ω et 450 Ω (\(A_0=1{,}3\) et \(1{,}9\)) donnent \(H_0A_0&lt;1\), donc pas d'oscillations ; 1500 Ω (\(A_0=4\), \(H_0A_0=1{,}33\)) est trop proche du seuil, limite de linéarité \(15/4=3{,}75\) V ; 15000 Ω (\(A_0=31\)) donnerait une limite de \(15/31\approx0{,}5\) V, plus faible que les \(\pm1{,}7\) V lus.</p>
+
+        <p class="q">e) Allure des spectres</p>
+        <ul>
+          <li><b>\(H_0A=1\)</b> : <b>une seule raie</b>, exactement à \(\omega_0\) : sinusoïde pure (aucune harmonique).</li>
+          <li><b>\(H_0A\gtrsim1\)</b> : une raie dominante à \(\omega\simeq\omega_0\) (très légèrement décalée), et des harmoniques <b>très faibles</b> à \(3\omega_0\), \(5\omega_0\)… (distorsion harmonique faible) : quasi-sinusoïdal.</li>
+          <li><b>\(H_0A\gg1\)</b> : la raie fondamentale est <b>décalée vers les basses pulsations</b> (≈6×10³ rad·s⁻¹ au lieu de \(\omega_0\) : \(\omega&lt;\omega_0\)) et des harmoniques <b>impairs</b> (≈18, 30, 42… ×10³ rad·s⁻¹) d'amplitude lentement décroissante (≈0,3 ; 0,1 ; 0,07…) : signal très déformé, proche d'un signal à symétrie « créneau ». Il n'y a que des harmoniques impairs car le signal garde la symétrie \(s(t+T/2)=-s(t)\).</li>
+          <li><b>Démarrage</b> : colonne centrale, croissance exponentielle lente jusqu'à la limite de linéarité (≈ ±4,8 V sur \(V_2\)), puis amplitude constante ; colonne de droite, démarrage très rapide directement dans un régime saturé ; colonne de gauche, pas de phase de croissance (l'amplitude reste égale à la condition initiale, cas idéal).</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ============ TP5b REALISATION ============ -->
+    <h3>4.2 · TP5b — Réalisation d'un oscillateur quasi-sinusoïdal (14/10/2026)</h3>
+    <figure>
+      <img src="tp5-img/tpbr-p1.jpg" alt="Énoncé TP5b réalisation, page 1 : objectifs, matériel, schéma des deux blocs, étude du filtre de Wien et du montage avec ALI" loading="lazy">
+      <figcaption>Énoncé (TP5b réalisation, p.1) — objectifs, matériel, §1 étude des deux blocs séparément</figcaption>
+    </figure>
+    <figure>
+      <img src="tp5-img/tpbr-p2.jpg" alt="Énoncé TP5b réalisation, page 2 : câblage de l'oscillateur de Wien, distorsion harmonique, OQS à résistance négative" loading="lazy">
+      <figcaption>Énoncé (TP5b réalisation, p.2) — §2 câblage de l'oscillateur de Wien, §3 OQS à résistance négative</figcaption>
+    </figure>
+    <div class="note"><span class="lab">Ce qui est « corrigé » ici</span> Les manipulations produisent des <b>mesures</b> que je n'ai pas : pour chaque étape je donne le <b>dimensionnement et les valeurs théoriques attendues</b> (à comparer à l'oscilloscope) et les <b>causes habituelles d'écart</b>. Les valeurs des §2 pour \(R_2\gg R_{2min}\) (période, distorsion) viennent d'une <b>simulation numérique</b> de l'oscillateur avec ALI idéal saturant à \(\pm15\) V ; le vrai ALI (bande passante, vitesse de balayage, \(V_{sat}\approx13\)–\(14\) V) s'en écarte légèrement.</div>
+
+    <div class="exo-card" id="tpb-r1">
+      <div class="exo-head">§1.1 — Le filtre de Wien seul <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Type du filtre ; \(H_0\), \(Q\), \(\omega_0\), \(f_0\), \(T_0\) ; fréquences de coupure</p>
+        <p>C'est un <b>filtre passe-bande du 2ᵈ ordre</b> (pont de Wien, \(R\) et \(C\) série puis \(R\parallel C\)), avec \(R=1\ \text{k}\Omega\) et \(C=47\) nF :</p>
+        <div class="overflow"><table>
+          <tr><th>Grandeur</th><th>Expression</th><th>Valeur</th></tr>
+          <tr><td>\(H_0\)</td><td>\(\dfrac13\)</td><td>0,333</td></tr>
+          <tr><td>\(Q\)</td><td>\(\dfrac13\)</td><td>0,333</td></tr>
+          <tr><td>\(\omega_0\)</td><td>\(\dfrac1{RC}\)</td><td>\(2{,}13\times10^4\ \text{rad·s}^{-1}\)</td></tr>
+          <tr><td>\(f_0\)</td><td>\(\dfrac1{2\pi RC}\)</td><td>3,39 kHz</td></tr>
+          <tr><td>\(T_0\)</td><td>\(2\pi RC\)</td><td>295 µs</td></tr>
+        </table></div>
+        <p>Fréquences de coupure à −3 dB : \(\ f_c=\dfrac{f_0}2\Bigl(\sqrt{\tfrac1{Q^2}+4}\pm\tfrac1Q\Bigr)=\dfrac{f_0}2\bigl(\sqrt{13}\pm3\bigr)\), car \(1/Q^2=9\) et \(1/Q=3\). Avec \(\sqrt{13}\approx3{,}606\) :</p>
+        \[ f_{c,haute}=\frac{3386}{2}\,(3{,}606+3)\approx11{,}2\ \text{kHz},\qquad f_{c,basse}=\frac{3386}{2}\,(3{,}606-3)\approx1{,}03\ \text{kHz}. \]
+        <p>Vérifications : \(f_{c,basse}\,f_{c,haute}=f_0^2\) (\(1{,}025\times11{,}18\approx11{,}46=3{,}386^2\)) et bande passante \(\Delta f=f_0/Q=3f_0\approx10{,}2\) kHz \(=11{,}18-1{,}03\) ✓.</p>
+
+        <p class="q">Protocole en trois mesures pour vérifier le filtre ; mise en œuvre</p>
+        <p><b>Entrée</b> : tension <b>sinusoïdale</b> du GF, amplitude \(E_m=3{,}0\) V (choix commode : sortie de 1,0 V au maximum), sans offset ; on relève \(V_{2m}\) (voie 2) et le déphasage par rapport à l'entrée (voie 1). On réalise trois mesures :</p>
+        <div class="overflow"><table>
+          <tr><th>Fréquence</th><th>Gain attendu \(\lvert H\rvert\)</th><th>\(V_{2m}\) pour \(E_m=3\) V</th><th>Déphasage attendu</th></tr>
+          <tr><td>\(f_0=3{,}39\) kHz</td><td>\(H_0=\tfrac13\)</td><td>1,00 V</td><td>0° (en phase)</td></tr>
+          <tr><td>\(f_{c,basse}\approx1{,}03\) kHz</td><td>\(\dfrac{H_0}{\sqrt2}=0{,}236\)</td><td>0,71 V</td><td>+45° (avance)</td></tr>
+          <tr><td>\(f_{c,haute}\approx11{,}2\) kHz</td><td>\(\dfrac{H_0}{\sqrt2}=0{,}236\)</td><td>0,71 V</td><td>−45° (retard)</td></tr>
+        </table></div>
+        <p><b>Conclusion attendue</b> : au centre le gain vaut \(\tfrac13\) et la sortie est en phase avec l'entrée (courbe de Lissajous réduite à une droite) ; aux deux coupures le gain tombe de \(\sqrt2\) et le déphasage vaut ±45°. Si c'est vérifié (à quelques % près, tolérance de \(R\) et \(C\) comprise), le filtre fonctionne comme prévu.</p>
+      </div>
+    </div>
+
+    <div class="exo-card" id="tpb-r2">
+      <div class="exo-head">§1.2 — L'amplificateur non inverseur seul <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="q">Protocole en deux mesures pour vérifier \(A_0=1+R_2/R_1\) (\(R_1=500\ \Omega\), \(R_2=R_{var}\))</p>
+        <p><b>Entrée</b> : sinusoïde \(E_m=1{,}0\) V à \(f=1\) kHz (bien en dessous de la limite de bande de l'ALI, et sortie bornée loin de la saturation : \(A_0E_m\le5\) V\(&lt;V_{sat}\)). On règle \(R_{var}\) à deux valeurs et on mesure le gain et la phase :</p>
+        <div class="overflow"><table>
+          <tr><th>\(R_2\)</th><th>\(A_0=1+R_2/R_1\)</th><th>\(s_m\) attendu</th><th>Phase \(s/e\)</th></tr>
+          <tr><td>1,0 kΩ</td><td>3</td><td>3,0 V</td><td>0° (non inverseur)</td></tr>
+          <tr><td>2,0 kΩ</td><td>5</td><td>5,0 V</td><td>0°</td></tr>
+        </table></div>
+        <p><b>Conclusion attendue</b> : gain réel positif égal à \(1+R_2/R_1\) (pas de déphasage). On mesure \(R_{var}\) à l'ohmmètre (composant débranché) pour éviter l'erreur sur \(R_2\). Si on se trompe de borne de l'ALI, le gain devient négatif (montage inverseur) : à vérifier absolument car l'oscillateur ne démarrerait pas.</p>
+      </div>
+    </div>
+
+    <div class="exo-card" id="tpb-r3">
+      <div class="exo-head">§2 — Câblage de l'oscillateur quasi-sinusoïdal de Wien et distorsion harmonique <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Condition « juste instable » \(R_2=R_{2min}^+\)</p>
+        <p>Condition d'oscillation \(H_0A_0=1\) avec \(H_0=\tfrac13\) : \(A_0=3\), c'est-à-dire \(1+\dfrac{R_2}{R_1}=3\) :</p>
+        <div class="res">\(R_{2min}=2R_1=1{,}0\ \text{k}\Omega\) ; on veut \(R_2=R_{2min}^+\), c'est-à-dire <b>très légèrement au-dessus de 1 kΩ</b> (typiquement 1,05 à 1,1 kΩ) : \(H_0A_0\gtrsim1\), \(D_1\approx0^-\).</div>
+
+        <p class="q">Câblage ; choix des échelles ; départ à \(R_2=500\ \Omega\)</p>
+        <ul>
+          <li><b>Voie 1 : \(V_1\)</b> (sortie de l'ALI), <b>voie 2 : \(V_2\)</b> (sortie du pont) ; masses communes obligatoires (oscillo, GF absent, deux platines).</li>
+          <li><b>Échelles</b> : période \(T_0\approx295\ \mu\text{s}\) ⇒ base de temps 50 à 100 µs/div (3 à 6 périodes à l'écran) ; \(V_1\) monte jusqu'à \(\pm V_{sat}\) ⇒ 5 V/div ; \(V_2\) vaut environ \(V_1/3\) ⇒ 2 V/div. Déclenchement sur la voie 2 (front montant, niveau 0).</li>
+          <li><b>\(R_2=500\ \Omega\)</b> : \(A_0=2\), \(H_0A_0=\tfrac23&lt;1\) : \(D_1>0\), le bruit est amorti, <b>on ne voit rien</b> (normal).</li>
+        </ul>
+
+        <p class="q">Protocole expérimental de vérification</p>
+        <ol>
+          <li>Augmenter lentement \(R_{var}\) en partant de 500 Ω : le signal apparaît quand \(R_2\) dépasse \(\approx1{,}0\) kΩ (seuil réel un peu différent : tolérances de \(R\), \(C\), \(R_1\), résistance de sortie de l'ALI).</li>
+          <li>Mesurer la <b>période</b> : \(T\approx T_0=295\ \mu\text{s}\) (\(f\approx3{,}4\) kHz).</li>
+          <li>Vérifier que \(V_1\) et \(V_2\) sont <b>en phase</b> (\(A_0\) réel positif) et que \(V_{1m}/V_{2m}\approx A_0\approx3\) tant que l'ALI ne sature pas.</li>
+          <li>Relever l'amplitude : elle croît avec \(R_2\) (écrêtage de plus en plus marqué) ; mesurer le spectre par FFT (cf. plus bas).</li>
+        </ol>
+
+        <p class="q">Deux valeurs de \(R_2\) : \(R_2=R_{2min}^+\) et \(R_2\gg R_{2min}\) — oscillogrammes, spectres, périodes</p>
+        <p>Résultats d'une simulation de l'oscillateur (équations du pont + ALI idéal saturant à \(\pm15\) V) pour \(R_2=1{,}05\ \text{k}\Omega\) et \(R_2=5\ \text{k}\Omega\), régime permanent :</p>
+        <figure><svg viewBox="0 0 660 470" width="660" xmlns="http://www.w3.org/2000/svg" role="img">
+<text x="70.0" y="36.0" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="13" text-anchor="start" font-weight="700">a) R₂ = R₂min⁺ ≈ 1,05 kΩ  (H₀A₀ ≈ 1,03)</text>
+<line x1="70.0" y1="198.6" x2="640.0" y2="198.6" stroke="#e2e8f0" stroke-width="1"/>
+<text x="64.0" y="202.6" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">−15</text>
+<line x1="70.0" y1="175.1" x2="640.0" y2="175.1" stroke="#e2e8f0" stroke-width="1"/>
+<text x="64.0" y="179.1" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">−10</text>
+<line x1="70.0" y1="151.5" x2="640.0" y2="151.5" stroke="#e2e8f0" stroke-width="1"/>
+<text x="64.0" y="155.5" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">−5</text>
+<line x1="70.0" y1="128.0" x2="640.0" y2="128.0" stroke="#94a3b8" stroke-width="1.3"/>
+<text x="64.0" y="132.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">0</text>
+<line x1="70.0" y1="104.5" x2="640.0" y2="104.5" stroke="#e2e8f0" stroke-width="1"/>
+<text x="64.0" y="108.5" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">5</text>
+<line x1="70.0" y1="80.9" x2="640.0" y2="80.9" stroke="#e2e8f0" stroke-width="1"/>
+<text x="64.0" y="84.9" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">10</text>
+<line x1="70.0" y1="57.4" x2="640.0" y2="57.4" stroke="#e2e8f0" stroke-width="1"/>
+<text x="64.0" y="61.4" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">15</text>
+<line x1="70.0" y1="48.0" x2="70.0" y2="208.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="70.0" y="222.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">0</text>
+<line x1="260.0" y1="48.0" x2="260.0" y2="208.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="260.0" y="222.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">297</text>
+<line x1="450.0" y1="48.0" x2="450.0" y2="208.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="450.0" y="222.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">595</text>
+<line x1="640.0" y1="48.0" x2="640.0" y2="208.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="640.0" y="222.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">892</text>
+<text x="355.0" y="236.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="middle">t (µs)</text>
+<text x="22.0" y="128.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="middle" transform="rotate(-90 22 128.0)">tension (V)</text>
+<polyline points="70.0,128.1 71.2,124.9 72.5,121.7 73.7,118.4 74.9,115.2 76.1,111.9 77.4,108.7 78.6,105.5 79.8,102.3 81.0,99.2 82.3,96.1 83.5,93.0 84.7,90.0 85.9,87.0 87.2,84.1 88.4,81.2 89.6,78.4 90.9,75.7 92.1,73.1 93.3,70.5 94.5,68.0 95.8,65.7 97.0,63.4 98.2,61.2 99.4,59.1 100.7,57.4 101.9,57.4 103.1,57.4 104.3,57.4 105.6,57.4 106.8,57.4 108.0,57.4 109.3,57.4 110.5,57.4 111.7,57.4 112.9,57.4 114.2,57.4 115.4,57.4 116.6,57.4 117.8,57.4 119.1,57.4 120.3,57.4 121.5,57.4 122.7,57.4 124.0,57.4 125.2,57.4 126.4,57.4 127.7,57.5 128.9,58.4 130.1,59.4 131.3,60.6 132.6,61.8 133.8,63.2 135.0,64.7 136.2,66.2 137.5,67.9 138.7,69.8 139.9,71.7 141.1,73.7 142.4,75.8 143.6,78.0 144.8,80.3 146.1,82.7 147.3,85.2 148.5,87.7 149.7,90.3 151.0,93.1 152.2,95.8 153.4,98.7 154.6,101.6 155.9,104.5 157.1,107.5 158.3,110.6 159.5,113.7 160.8,116.8 162.0,120.0 163.2,123.2 164.5,126.4 165.7,129.6 166.9,132.9 168.1,136.1 169.4,139.4 170.6,142.6 171.8,145.8 173.0,149.0 174.3,152.2 175.5,155.4 176.7,158.5 177.9,161.6 179.2,164.7 180.4,167.7 181.6,170.6 182.9,173.5 184.1,176.3 185.3,179.1 186.5,181.7 187.8,184.3 189.0,186.9 190.2,189.3 191.4,191.6 192.7,193.9 193.9,196.0 195.1,198.0 196.3,198.6 197.6,198.6 198.8,198.6 200.0,198.6 201.3,198.6 202.5,198.6 203.7,198.6 204.9,198.6 206.2,198.6 207.4,198.6 208.6,198.6 209.8,198.6 211.1,198.6 212.3,198.6 213.5,198.6 214.7,198.6 216.0,198.6 217.2,198.6 218.4,198.6 219.7,198.6 220.9,198.6 222.1,198.6 223.3,198.0 224.6,197.0 225.8,195.9 227.0,194.8 228.2,193.4 229.5,192.0 230.7,190.5 231.9,188.8 233.1,187.1 234.4,185.2 235.6,183.2 236.8,181.2 238.1,179.0 239.3,176.8 240.5,174.4 241.7,172.0 243.0,169.5 244.2,166.9 245.4,164.2 246.6,161.4 247.9,158.6 249.1,155.7 250.3,152.8 251.5,149.8 252.8,146.8 254.0,143.7 255.2,140.6 256.5,137.4 257.7,134.3 258.9,131.0 260.1,127.8 261.4,124.6 262.6,121.3 263.8,118.1 265.0,114.9 266.3,111.6 267.5,108.4 268.7,105.2 269.9,102.0 271.2,98.9 272.4,95.8 273.6,92.7 274.9,89.7 276.1,86.7 277.3,83.8 278.5,81.0 279.8,78.2 281.0,75.5 282.2,72.8 283.4,70.3 284.7,67.8 285.9,65.4 287.1,63.1 288.3,61.0 289.6,58.9 290.8,57.4 292.0,57.4 293.3,57.4 294.5,57.4 295.7,57.4 296.9,57.4 298.2,57.4 299.4,57.4 300.6,57.4 301.8,57.4 303.1,57.4 304.3,57.4 305.5,57.4 306.7,57.4 308.0,57.4 309.2,57.4 310.4,57.4 311.7,57.4 312.9,57.4 314.1,57.4 315.3,57.4 316.6,57.4 317.8,57.6 319.0,58.5 320.2,59.6 321.5,60.7 322.7,62.0 323.9,63.3 325.1,64.8 326.4,66.4 327.6,68.1 328.8,69.9 330.1,71.9 331.3,73.9 332.5,76.0 333.7,78.2 335.0,80.5 336.2,82.9 337.4,85.4 338.6,88.0 339.9,90.6 341.1,93.3 342.3,96.1 343.5,99.0 344.8,101.9 346.0,104.8 347.2,107.8 348.5,110.9 349.7,114.0 350.9,117.1 352.1,120.3 353.4,123.5 354.6,126.7 355.8,130.0 357.0,133.2 358.3,136.4 359.5,139.7 360.7,142.9 361.9,146.1 363.2,149.4 364.4,152.5 365.6,155.7 366.9,158.8 368.1,161.9 369.3,165.0 370.5,167.9 371.8,170.9 373.0,173.8 374.2,176.6 375.4,179.3 376.7,182.0 377.9,184.6 379.1,187.1 380.3,189.5 381.6,191.8 382.8,194.1 384.0,196.2 385.3,198.2 386.5,198.6 387.7,198.6 388.9,198.6 390.2,198.6 391.4,198.6 392.6,198.6 393.8,198.6 395.1,198.6 396.3,198.6 397.5,198.6 398.7,198.6 400.0,198.6 401.2,198.6 402.4,198.6 403.7,198.6 404.9,198.6 406.1,198.6 407.3,198.6 408.6,198.6 409.8,198.6 411.0,198.6 412.2,198.6 413.5,197.9 414.7,196.9 415.9,195.8 417.1,194.6 418.4,193.3 419.6,191.9 420.8,190.3 422.1,188.7 423.3,186.9 424.5,185.0 425.7,183.0 427.0,181.0 428.2,178.8 429.4,176.5 430.6,174.2 431.9,171.7 433.1,169.2 434.3,166.6 435.5,163.9 436.8,161.2 438.0,158.3 439.2,155.5 440.5,152.5 441.7,149.5 442.9,146.5 444.1,143.4 445.4,140.3 446.6,137.1 447.8,133.9 449.0,130.7 450.3,127.5 451.5,124.3 452.7,121.0 453.9,117.8 455.2,114.5 456.4,111.3 457.6,108.1 458.9,104.9 460.1,101.7 461.3,98.6 462.5,95.5 463.8,92.4 465.0,89.4 466.2,86.4 467.4,83.5 468.7,80.7 469.9,77.9 471.1,75.2 472.3,72.6 473.6,70.0 474.8,67.6 476.0,65.2 477.3,62.9 478.5,60.8 479.7,58.7 480.9,57.4 482.2,57.4 483.4,57.4 484.6,57.4 485.8,57.4 487.1,57.4 488.3,57.4 489.5,57.4 490.7,57.4 492.0,57.4 493.2,57.4 494.4,57.4 495.7,57.4 496.9,57.4 498.1,57.4 499.3,57.4 500.6,57.4 501.8,57.4 503.0,57.4 504.2,57.4 505.5,57.4 506.7,57.4 507.9,57.7 509.1,58.6 510.4,59.7 511.6,60.8 512.8,62.1 514.1,63.5 515.3,65.0 516.5,66.6 517.7,68.3 519.0,70.1 520.2,72.0 521.4,74.1 522.6,76.2 523.9,78.4 525.1,80.8 526.3,83.2 527.5,85.7 528.8,88.2 530.0,90.9 531.2,93.6 532.5,96.4 533.7,99.2 534.9,102.2 536.1,105.1 537.4,108.1 538.6,111.2 539.8,114.3 541.0,117.5 542.3,120.6 543.5,123.8 544.7,127.0 545.9,130.3 547.2,133.5 548.4,136.8 549.6,140.0 550.9,143.2 552.1,146.5 553.3,149.7 554.5,152.9 555.8,156.0 557.0,159.1 558.2,162.2 559.4,165.3 560.7,168.2 561.9,171.2 563.1,174.0 564.3,176.9 565.6,179.6 566.8,182.3 568.0,184.8 569.3,187.3 570.5,189.7 571.7,192.1 572.9,194.3 574.2,196.4 575.4,198.4 576.6,198.6 577.8,198.6 579.1,198.6 580.3,198.6 581.5,198.6 582.7,198.6 584.0,198.6 585.2,198.6 586.4,198.6 587.6,198.6 588.9,198.6 590.1,198.6 591.3,198.6 592.6,198.6 593.8,198.6 595.0,198.6 596.2,198.6 597.5,198.6 598.7,198.6 599.9,198.6 601.1,198.6 602.4,198.6 603.6,197.8 604.8,196.8 606.0,195.7 607.3,194.5 608.5,193.2 609.7,191.7 611.0,190.2 612.2,188.5 613.4,186.7 614.6,184.8 615.9,182.8 617.1,180.8 618.3,178.6 619.5,176.3 620.8,173.9 622.0,171.5 623.2,168.9 624.4,166.3 625.7,163.6 626.9,160.9 628.1,158.1 629.4,155.2 630.6,152.2 631.8,149.2 633.0,146.2 634.3,143.1 635.5,140.0 636.7,136.8 637.9,133.6 639.2,130.4" fill="none" stroke="#15803d" stroke-width="1.9" stroke-linejoin="round"/>
+<polyline points="70.0,128.0 71.2,127.0 72.5,126.0 73.7,124.9 74.9,123.9 76.1,122.8 77.4,121.8 78.6,120.7 79.8,119.7 81.0,118.7 82.3,117.7 83.5,116.7 84.7,115.7 85.9,114.8 87.2,113.8 88.4,112.9 89.6,112.0 90.9,111.1 92.1,110.3 93.3,109.5 94.5,108.7 95.8,107.9 97.0,107.1 98.2,106.4 99.4,105.8 100.7,105.1 101.9,104.6 103.1,104.1 104.3,103.8 105.6,103.5 106.8,103.3 108.0,103.1 109.3,103.0 110.5,103.0 111.7,103.0 112.9,103.0 114.2,103.1 115.4,103.2 116.6,103.3 117.8,103.5 119.1,103.7 120.3,103.8 121.5,104.1 122.7,104.3 124.0,104.5 125.2,104.8 126.4,105.0 127.7,105.3 128.9,105.6 130.1,105.9 131.3,106.3 132.6,106.7 133.8,107.1 135.0,107.6 136.2,108.1 137.5,108.6 138.7,109.2 139.9,109.8 141.1,110.5 142.4,111.2 143.6,111.9 144.8,112.6 146.1,113.4 147.3,114.2 148.5,115.0 149.7,115.9 151.0,116.7 152.2,117.6 153.4,118.5 154.6,119.5 155.9,120.4 157.1,121.4 158.3,122.4 159.5,123.4 160.8,124.4 162.0,125.4 163.2,126.4 164.5,127.5 165.7,128.5 166.9,129.6 168.1,130.6 169.4,131.7 170.6,132.7 171.8,133.8 173.0,134.8 174.3,135.8 175.5,136.8 176.7,137.8 177.9,138.8 179.2,139.8 180.4,140.8 181.6,141.7 182.9,142.7 184.1,143.6 185.3,144.5 186.5,145.3 187.8,146.2 189.0,147.0 190.2,147.8 191.4,148.5 192.7,149.2 193.9,149.9 195.1,150.6 196.3,151.2 197.6,151.7 198.8,152.1 200.0,152.4 201.3,152.7 202.5,152.8 203.7,153.0 204.9,153.0 206.2,153.0 207.4,153.0 208.6,153.0 209.8,152.9 211.1,152.7 212.3,152.6 213.5,152.4 214.7,152.2 216.0,152.0 217.2,151.8 218.4,151.6 219.7,151.4 220.9,151.1 222.1,150.8 223.3,150.6 224.6,150.3 225.8,149.9 227.0,149.5 228.2,149.1 229.5,148.7 230.7,148.2 231.9,147.6 233.1,147.1 234.4,146.5 235.6,145.8 236.8,145.2 238.1,144.5 239.3,143.7 240.5,143.0 241.7,142.2 243.0,141.4 244.2,140.5 245.4,139.7 246.6,138.8 247.9,137.9 249.1,136.9 250.3,136.0 251.5,135.0 252.8,134.1 254.0,133.1 255.2,132.1 256.5,131.0 257.7,130.0 258.9,129.0 260.1,127.9 261.4,126.9 262.6,125.9 263.8,124.8 265.0,123.8 266.3,122.7 267.5,121.7 268.7,120.6 269.9,119.6 271.2,118.6 272.4,117.6 273.6,116.6 274.9,115.6 276.1,114.7 277.3,113.7 278.5,112.8 279.8,111.9 281.0,111.1 282.2,110.2 283.4,109.4 284.7,108.6 285.9,107.8 287.1,107.1 288.3,106.4 289.6,105.7 290.8,105.1 292.0,104.5 293.3,104.1 294.5,103.7 295.7,103.4 296.9,103.2 298.2,103.1 299.4,103.0 300.6,103.0 301.8,103.0 303.1,103.0 304.3,103.1 305.5,103.2 306.7,103.3 308.0,103.5 309.2,103.7 310.4,103.9 311.7,104.1 312.9,104.3 314.1,104.5 315.3,104.8 316.6,105.0 317.8,105.3 319.0,105.6 320.2,105.9 321.5,106.3 322.7,106.7 323.9,107.1 325.1,107.6 326.4,108.1 327.6,108.7 328.8,109.3 330.1,109.9 331.3,110.5 332.5,111.2 333.7,111.9 335.0,112.7 336.2,113.5 337.4,114.3 338.6,115.1 339.9,115.9 341.1,116.8 342.3,117.7 343.5,118.6 344.8,119.6 346.0,120.5 347.2,121.5 348.5,122.5 349.7,123.5 350.9,124.5 352.1,125.5 353.4,126.5 354.6,127.6 355.8,128.6 357.0,129.7 358.3,130.7 359.5,131.8 360.7,132.8 361.9,133.9 363.2,134.9 364.4,135.9 365.6,136.9 366.9,137.9 368.1,138.9 369.3,139.9 370.5,140.9 371.8,141.8 373.0,142.8 374.2,143.7 375.4,144.6 376.7,145.4 377.9,146.3 379.1,147.1 380.3,147.8 381.6,148.6 382.8,149.3 384.0,150.0 385.3,150.7 386.5,151.2 387.7,151.7 388.9,152.1 390.2,152.4 391.4,152.7 392.6,152.8 393.8,153.0 395.1,153.0 396.3,153.0 397.5,153.0 398.7,152.9 400.0,152.8 401.2,152.7 402.4,152.6 403.7,152.4 404.9,152.2 406.1,152.0 407.3,151.8 408.6,151.6 409.8,151.3 411.0,151.1 412.2,150.8 413.5,150.5 414.7,150.2 415.9,149.9 417.1,149.5 418.4,149.1 419.6,148.6 420.8,148.1 422.1,147.6 423.3,147.0 424.5,146.4 425.7,145.8 427.0,145.1 428.2,144.4 429.4,143.7 430.6,142.9 431.9,142.1 433.1,141.3 434.3,140.4 435.5,139.6 436.8,138.7 438.0,137.8 439.2,136.9 440.5,135.9 441.7,134.9 442.9,134.0 444.1,133.0 445.4,132.0 446.6,130.9 447.8,129.9 449.0,128.9 450.3,127.8 451.5,126.8 452.7,125.8 453.9,124.7 455.2,123.7 456.4,122.6 457.6,121.6 458.9,120.5 460.1,119.5 461.3,118.5 462.5,117.5 463.8,116.5 465.0,115.5 466.2,114.6 467.4,113.7 468.7,112.7 469.9,111.8 471.1,111.0 472.3,110.1 473.6,109.3 474.8,108.5 476.0,107.7 477.3,107.0 478.5,106.3 479.7,105.6 480.9,105.0 482.2,104.5 483.4,104.0 484.6,103.7 485.8,103.4 487.1,103.2 488.3,103.1 489.5,103.0 490.7,103.0 492.0,103.0 493.2,103.0 494.4,103.1 495.7,103.2 496.9,103.4 498.1,103.5 499.3,103.7 500.6,103.9 501.8,104.1 503.0,104.3 504.2,104.6 505.5,104.8 506.7,105.1 507.9,105.3 509.1,105.6 510.4,106.0 511.6,106.3 512.8,106.7 514.1,107.2 515.3,107.7 516.5,108.2 517.7,108.7 519.0,109.3 520.2,110.0 521.4,110.6 522.6,111.3 523.9,112.0 525.1,112.8 526.3,113.5 527.5,114.3 528.8,115.2 530.0,116.0 531.2,116.9 532.5,117.8 533.7,118.7 534.9,119.7 536.1,120.6 537.4,121.6 538.6,122.6 539.8,123.6 541.0,124.6 542.3,125.6 543.5,126.7 544.7,127.7 545.9,128.7 547.2,129.8 548.4,130.8 549.6,131.9 550.9,132.9 552.1,134.0 553.3,135.0 554.5,136.0 555.8,137.0 557.0,138.0 558.2,139.0 559.4,140.0 560.7,141.0 561.9,141.9 563.1,142.9 564.3,143.8 565.6,144.6 566.8,145.5 568.0,146.3 569.3,147.1 570.5,147.9 571.7,148.7 572.9,149.4 574.2,150.1 575.4,150.7 576.6,151.3 577.8,151.8 579.1,152.2 580.3,152.5 581.5,152.7 582.7,152.9 584.0,153.0 585.2,153.0 586.4,153.0 587.6,153.0 588.9,152.9 590.1,152.8 591.3,152.7 592.6,152.6 593.8,152.4 595.0,152.2 596.2,152.0 597.5,151.8 598.7,151.5 599.9,151.3 601.1,151.1 602.4,150.8 603.6,150.5 604.8,150.2 606.0,149.8 607.3,149.5 608.5,149.0 609.7,148.6 611.0,148.1 612.2,147.5 613.4,146.9 614.6,146.3 615.9,145.7 617.1,145.0 618.3,144.3 619.5,143.6 620.8,142.8 622.0,142.0 623.2,141.2 624.4,140.4 625.7,139.5 626.9,138.6 628.1,137.7 629.4,136.8 630.6,135.8 631.8,134.8 633.0,133.9 634.3,132.9 635.5,131.9 636.7,130.8 637.9,129.8 639.2,128.8" fill="none" stroke="#1d4ed8" stroke-width="1.9" stroke-linejoin="round"/>
+<text x="634.0" y="60.0" fill="#15803d" font-family="Segoe UI,Arial,sans-serif" font-size="11.5" text-anchor="end" font-weight="700">V₁ (sortie ALI)</text>
+<text x="634.0" y="75.0" fill="#1d4ed8" font-family="Segoe UI,Arial,sans-serif" font-size="11.5" text-anchor="end" font-weight="700">V₂ (sortie filtre)</text>
+<text x="70.0" y="251.0" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="13" text-anchor="start" font-weight="700">b) R₂ = 5 kΩ ≫ R₂min  (H₀A₀ ≈ 3,7)</text>
+<line x1="70.0" y1="413.6" x2="640.0" y2="413.6" stroke="#e2e8f0" stroke-width="1"/>
+<text x="64.0" y="417.6" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">−15</text>
+<line x1="70.0" y1="390.1" x2="640.0" y2="390.1" stroke="#e2e8f0" stroke-width="1"/>
+<text x="64.0" y="394.1" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">−10</text>
+<line x1="70.0" y1="366.5" x2="640.0" y2="366.5" stroke="#e2e8f0" stroke-width="1"/>
+<text x="64.0" y="370.5" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">−5</text>
+<line x1="70.0" y1="343.0" x2="640.0" y2="343.0" stroke="#94a3b8" stroke-width="1.3"/>
+<text x="64.0" y="347.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">0</text>
+<line x1="70.0" y1="319.5" x2="640.0" y2="319.5" stroke="#e2e8f0" stroke-width="1"/>
+<text x="64.0" y="323.5" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">5</text>
+<line x1="70.0" y1="295.9" x2="640.0" y2="295.9" stroke="#e2e8f0" stroke-width="1"/>
+<text x="64.0" y="299.9" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">10</text>
+<line x1="70.0" y1="272.4" x2="640.0" y2="272.4" stroke="#e2e8f0" stroke-width="1"/>
+<text x="64.0" y="276.4" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">15</text>
+<line x1="70.0" y1="263.0" x2="70.0" y2="423.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="70.0" y="437.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">0</text>
+<line x1="260.0" y1="263.0" x2="260.0" y2="423.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="260.0" y="437.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">571</text>
+<line x1="450.0" y1="263.0" x2="450.0" y2="423.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="450.0" y="437.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">1142</text>
+<line x1="640.0" y1="263.0" x2="640.0" y2="423.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="640.0" y="437.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">1713</text>
+<text x="355.0" y="451.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="middle">t (µs)</text>
+<text x="22.0" y="343.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="middle" transform="rotate(-90 22 343.0)">tension (V)</text>
+<polyline points="70.0,343.3 71.2,277.0 72.5,272.4 73.7,272.4 74.9,272.4 76.1,272.4 77.4,272.4 78.6,272.4 79.8,272.4 81.1,272.4 82.3,272.4 83.5,272.4 84.7,272.4 86.0,272.4 87.2,272.4 88.4,272.4 89.7,272.4 90.9,272.4 92.1,272.4 93.3,272.4 94.6,272.4 95.8,272.4 97.0,272.4 98.3,272.4 99.5,272.4 100.7,272.4 101.9,272.4 103.2,272.4 104.4,272.4 105.6,272.4 106.9,272.4 108.1,272.4 109.3,272.4 110.5,272.4 111.8,272.4 113.0,272.4 114.2,272.4 115.5,272.4 116.7,272.4 117.9,272.4 119.1,272.4 120.4,272.4 121.6,272.4 122.8,272.4 124.0,272.4 125.3,272.4 126.5,272.4 127.7,272.4 129.0,272.4 130.2,272.4 131.4,272.4 132.6,272.4 133.9,272.4 135.1,272.4 136.3,272.4 137.6,272.4 138.8,272.4 140.0,272.4 141.2,272.4 142.5,272.4 143.7,272.4 144.9,272.4 146.2,272.4 147.4,272.4 148.6,272.4 149.8,272.4 151.1,272.4 152.3,272.4 153.5,272.4 154.8,272.4 156.0,272.4 157.2,272.4 158.4,272.4 159.7,273.0 160.9,276.8 162.1,284.6 163.4,299.6 164.6,328.2 165.8,381.9 167.0,413.6 168.3,413.6 169.5,413.6 170.7,413.6 172.0,413.6 173.2,413.6 174.4,413.6 175.6,413.6 176.9,413.6 178.1,413.6 179.3,413.6 180.6,413.6 181.8,413.6 183.0,413.6 184.2,413.6 185.5,413.6 186.7,413.6 187.9,413.6 189.2,413.6 190.4,413.6 191.6,413.6 192.8,413.6 194.1,413.6 195.3,413.6 196.5,413.6 197.8,413.6 199.0,413.6 200.2,413.6 201.4,413.6 202.7,413.6 203.9,413.6 205.1,413.6 206.4,413.6 207.6,413.6 208.8,413.6 210.0,413.6 211.3,413.6 212.5,413.6 213.7,413.6 215.0,413.6 216.2,413.6 217.4,413.6 218.6,413.6 219.9,413.6 221.1,413.6 222.3,413.6 223.6,413.6 224.8,413.6 226.0,413.6 227.2,413.6 228.5,413.6 229.7,413.6 230.9,413.6 232.1,413.6 233.4,413.6 234.6,413.6 235.8,413.6 237.1,413.6 238.3,413.6 239.5,413.6 240.7,413.6 242.0,413.6 243.2,413.6 244.4,413.6 245.7,413.6 246.9,413.6 248.1,413.6 249.3,413.6 250.6,413.6 251.8,413.6 253.0,413.6 254.3,413.6 255.5,410.8 256.7,404.7 257.9,392.6 259.2,369.5 260.4,326.1 261.6,272.4 262.9,272.4 264.1,272.4 265.3,272.4 266.5,272.4 267.8,272.4 269.0,272.4 270.2,272.4 271.5,272.4 272.7,272.4 273.9,272.4 275.1,272.4 276.4,272.4 277.6,272.4 278.8,272.4 280.1,272.4 281.3,272.4 282.5,272.4 283.7,272.4 285.0,272.4 286.2,272.4 287.4,272.4 288.7,272.4 289.9,272.4 291.1,272.4 292.3,272.4 293.6,272.4 294.8,272.4 296.0,272.4 297.3,272.4 298.5,272.4 299.7,272.4 300.9,272.4 302.2,272.4 303.4,272.4 304.6,272.4 305.9,272.4 307.1,272.4 308.3,272.4 309.5,272.4 310.8,272.4 312.0,272.4 313.2,272.4 314.5,272.4 315.7,272.4 316.9,272.4 318.1,272.4 319.4,272.4 320.6,272.4 321.8,272.4 323.1,272.4 324.3,272.4 325.5,272.4 326.7,272.4 328.0,272.4 329.2,272.4 330.4,272.4 331.7,272.4 332.9,272.4 334.1,272.4 335.3,272.4 336.6,272.4 337.8,272.4 339.0,272.4 340.2,272.4 341.5,272.4 342.7,272.4 343.9,272.4 345.2,272.4 346.4,272.4 347.6,272.4 348.8,272.4 350.1,273.9 351.3,278.8 352.5,288.4 353.8,307.0 355.0,342.1 356.2,408.0 357.4,413.6 358.7,413.6 359.9,413.6 361.1,413.6 362.4,413.6 363.6,413.6 364.8,413.6 366.0,413.6 367.3,413.6 368.5,413.6 369.7,413.6 371.0,413.6 372.2,413.6 373.4,413.6 374.6,413.6 375.9,413.6 377.1,413.6 378.3,413.6 379.6,413.6 380.8,413.6 382.0,413.6 383.2,413.6 384.5,413.6 385.7,413.6 386.9,413.6 388.2,413.6 389.4,413.6 390.6,413.6 391.8,413.6 393.1,413.6 394.3,413.6 395.5,413.6 396.8,413.6 398.0,413.6 399.2,413.6 400.4,413.6 401.7,413.6 402.9,413.6 404.1,413.6 405.4,413.6 406.6,413.6 407.8,413.6 409.0,413.6 410.3,413.6 411.5,413.6 412.7,413.6 414.0,413.6 415.2,413.6 416.4,413.6 417.6,413.6 418.9,413.6 420.1,413.6 421.3,413.6 422.6,413.6 423.8,413.6 425.0,413.6 426.2,413.6 427.5,413.6 428.7,413.6 429.9,413.6 431.2,413.6 432.4,413.6 433.6,413.6 434.8,413.6 436.1,413.6 437.3,413.6 438.5,413.6 439.8,413.6 441.0,413.6 442.2,413.6 443.4,413.6 444.7,413.1 445.9,409.3 447.1,401.6 448.3,386.6 449.6,358.2 450.8,304.9 452.0,272.4 453.3,272.4 454.5,272.4 455.7,272.4 456.9,272.4 458.2,272.4 459.4,272.4 460.6,272.4 461.9,272.4 463.1,272.4 464.3,272.4 465.5,272.4 466.8,272.4 468.0,272.4 469.2,272.4 470.5,272.4 471.7,272.4 472.9,272.4 474.1,272.4 475.4,272.4 476.6,272.4 477.8,272.4 479.1,272.4 480.3,272.4 481.5,272.4 482.7,272.4 484.0,272.4 485.2,272.4 486.4,272.4 487.7,272.4 488.9,272.4 490.1,272.4 491.3,272.4 492.6,272.4 493.8,272.4 495.0,272.4 496.3,272.4 497.5,272.4 498.7,272.4 499.9,272.4 501.2,272.4 502.4,272.4 503.6,272.4 504.9,272.4 506.1,272.4 507.3,272.4 508.5,272.4 509.8,272.4 511.0,272.4 512.2,272.4 513.5,272.4 514.7,272.4 515.9,272.4 517.1,272.4 518.4,272.4 519.6,272.4 520.8,272.4 522.1,272.4 523.3,272.4 524.5,272.4 525.7,272.4 527.0,272.4 528.2,272.4 529.4,272.4 530.7,272.4 531.9,272.4 533.1,272.4 534.3,272.4 535.6,272.4 536.8,272.4 538.0,272.4 539.3,272.4 540.5,275.1 541.7,281.2 542.9,293.2 544.2,316.1 545.4,359.3 546.6,413.6 547.8,413.6 549.1,413.6 550.3,413.6 551.5,413.6 552.8,413.6 554.0,413.6 555.2,413.6 556.4,413.6 557.7,413.6 558.9,413.6 560.1,413.6 561.4,413.6 562.6,413.6 563.8,413.6 565.0,413.6 566.3,413.6 567.5,413.6 568.7,413.6 570.0,413.6 571.2,413.6 572.4,413.6 573.6,413.6 574.9,413.6 576.1,413.6 577.3,413.6 578.6,413.6 579.8,413.6 581.0,413.6 582.2,413.6 583.5,413.6 584.7,413.6 585.9,413.6 587.2,413.6 588.4,413.6 589.6,413.6 590.8,413.6 592.1,413.6 593.3,413.6 594.5,413.6 595.8,413.6 597.0,413.6 598.2,413.6 599.4,413.6 600.7,413.6 601.9,413.6 603.1,413.6 604.4,413.6 605.6,413.6 606.8,413.6 608.0,413.6 609.3,413.6 610.5,413.6 611.7,413.6 613.0,413.6 614.2,413.6 615.4,413.6 616.6,413.6 617.9,413.6 619.1,413.6 620.3,413.6 621.6,413.6 622.8,413.6 624.0,413.6 625.2,413.6 626.5,413.6 627.7,413.6 628.9,413.6 630.2,413.6 631.4,413.6 632.6,413.6 633.8,413.6 635.1,412.1 636.3,407.3 637.5,397.7 638.8,379.3 640.0,344.4" fill="none" stroke="#15803d" stroke-width="1.9" stroke-linejoin="round"/>
+<polyline points="70.0,343.0 71.2,337.0 72.5,329.5 73.7,323.6 74.9,319.1 76.1,315.6 77.4,313.1 78.6,311.2 79.8,309.9 81.1,309.0 82.3,308.6 83.5,308.4 84.7,308.4 86.0,308.6 87.2,309.0 88.4,309.5 89.7,310.0 90.9,310.6 92.1,311.3 93.3,312.0 94.6,312.7 95.8,313.5 97.0,314.2 98.3,315.0 99.5,315.7 100.7,316.5 101.9,317.2 103.2,317.9 104.4,318.6 105.6,319.3 106.9,320.0 108.1,320.6 109.3,321.3 110.5,321.9 111.8,322.5 113.0,323.1 114.2,323.7 115.5,324.3 116.7,324.8 117.9,325.3 119.1,325.9 120.4,326.4 121.6,326.9 122.8,327.3 124.0,327.8 125.3,328.2 126.5,328.7 127.7,329.1 129.0,329.5 130.2,329.9 131.4,330.3 132.6,330.7 133.9,331.0 135.1,331.4 136.3,331.7 137.6,332.1 138.8,332.4 140.0,332.7 141.2,333.0 142.5,333.3 143.7,333.6 144.9,333.9 146.2,334.1 147.4,334.4 148.6,334.7 149.8,334.9 151.1,335.1 152.3,335.4 153.5,335.6 154.8,335.8 156.0,336.0 157.2,336.2 158.4,336.4 159.7,336.6 160.9,337.0 162.1,337.7 163.4,339.1 164.6,341.7 165.8,346.5 167.0,354.2 168.3,360.6 169.5,365.5 170.7,369.3 172.0,372.2 173.2,374.2 174.4,375.7 175.6,376.7 176.9,377.3 178.1,377.6 179.3,377.6 180.6,377.5 181.8,377.1 183.0,376.7 184.2,376.2 185.5,375.6 186.7,374.9 187.9,374.2 189.2,373.5 190.4,372.8 191.6,372.0 192.8,371.3 194.1,370.5 195.3,369.8 196.5,369.1 197.8,368.3 199.0,367.6 200.2,366.9 201.4,366.2 202.7,365.6 203.9,364.9 205.1,364.3 206.4,363.7 207.6,363.1 208.8,362.5 210.0,361.9 211.3,361.4 212.5,360.8 213.7,360.3 215.0,359.8 216.2,359.3 217.4,358.8 218.6,358.4 219.9,357.9 221.1,357.5 222.3,357.0 223.6,356.6 224.8,356.2 226.0,355.8 227.2,355.5 228.5,355.1 229.7,354.7 230.9,354.4 232.1,354.0 233.4,353.7 234.6,353.4 235.8,353.1 237.1,352.8 238.3,352.5 239.5,352.2 240.7,352.0 242.0,351.7 243.2,351.4 244.4,351.2 245.7,350.9 246.9,350.7 248.1,350.5 249.3,350.3 250.6,350.0 251.8,349.8 253.0,349.6 254.3,349.4 255.5,349.2 256.7,348.6 257.9,347.5 259.2,345.4 260.4,341.5 261.6,334.4 262.9,327.4 264.1,322.0 265.3,317.9 266.5,314.7 267.8,312.4 269.0,310.7 270.2,309.6 271.5,308.9 272.7,308.5 273.9,308.4 275.1,308.5 276.4,308.7 277.6,309.1 278.8,309.6 280.1,310.2 281.3,310.9 282.5,311.5 283.7,312.3 285.0,313.0 286.2,313.7 287.4,314.5 288.7,315.2 289.9,316.0 291.1,316.7 292.3,317.4 293.6,318.1 294.8,318.8 296.0,319.5 297.3,320.2 298.5,320.9 299.7,321.5 300.9,322.1 302.2,322.7 303.4,323.3 304.6,323.9 305.9,324.4 307.1,325.0 308.3,325.5 309.5,326.0 310.8,326.5 312.0,327.0 313.2,327.5 314.5,327.9 315.7,328.4 316.9,328.8 318.1,329.2 319.4,329.6 320.6,330.0 321.8,330.4 323.1,330.8 324.3,331.2 325.5,331.5 326.7,331.8 328.0,332.2 329.2,332.5 330.4,332.8 331.7,333.1 332.9,333.4 334.1,333.7 335.3,334.0 336.6,334.2 337.8,334.5 339.0,334.7 340.2,335.0 341.5,335.2 342.7,335.4 343.9,335.7 345.2,335.9 346.4,336.1 347.6,336.3 348.8,336.5 350.1,336.7 351.3,337.2 352.5,338.0 353.8,339.7 355.0,342.9 356.2,348.9 357.4,356.4 358.7,362.3 359.9,366.9 361.1,370.3 362.4,372.9 363.6,374.8 364.8,376.1 366.0,376.9 367.3,377.4 368.5,377.6 369.7,377.6 371.0,377.4 372.2,377.0 373.4,376.5 374.6,376.0 375.9,375.4 377.1,374.7 378.3,374.0 379.6,373.3 380.8,372.5 382.0,371.8 383.2,371.0 384.5,370.3 385.7,369.5 386.9,368.8 388.2,368.1 389.4,367.4 390.6,366.7 391.8,366.0 393.1,365.4 394.3,364.7 395.5,364.1 396.8,363.5 398.0,362.9 399.2,362.3 400.4,361.7 401.7,361.2 402.9,360.7 404.1,360.1 405.4,359.6 406.6,359.1 407.8,358.7 409.0,358.2 410.3,357.8 411.5,357.3 412.7,356.9 414.0,356.5 415.2,356.1 416.4,355.7 417.6,355.3 418.9,355.0 420.1,354.6 421.3,354.3 422.6,353.9 423.8,353.6 425.0,353.3 426.2,353.0 427.5,352.7 428.7,352.4 429.9,352.1 431.2,351.9 432.4,351.6 433.6,351.3 434.8,351.1 436.1,350.9 437.3,350.6 438.5,350.4 439.8,350.2 441.0,350.0 442.2,349.8 443.4,349.6 444.7,349.4 445.9,349.0 447.1,348.3 448.3,347.0 449.6,344.4 450.8,339.5 452.0,331.9 453.3,325.5 454.5,320.5 455.7,316.7 456.9,313.9 458.2,311.8 459.4,310.3 460.6,309.3 461.9,308.7 463.1,308.4 464.3,308.4 465.5,308.5 466.8,308.9 468.0,309.3 469.2,309.8 470.5,310.4 471.7,311.1 472.9,311.8 474.1,312.5 475.4,313.2 476.6,314.0 477.8,314.7 479.1,315.5 480.3,316.2 481.5,316.9 482.7,317.7 484.0,318.4 485.2,319.1 486.4,319.7 487.7,320.4 488.9,321.1 490.1,321.7 491.3,322.3 492.6,322.9 493.8,323.5 495.0,324.1 496.3,324.6 497.5,325.2 498.7,325.7 499.9,326.2 501.2,326.7 502.4,327.2 503.6,327.6 504.9,328.1 506.1,328.5 507.3,329.0 508.5,329.4 509.8,329.8 511.0,330.2 512.2,330.5 513.5,330.9 514.7,331.3 515.9,331.6 517.1,332.0 518.4,332.3 519.6,332.6 520.8,332.9 522.1,333.2 523.3,333.5 524.5,333.8 525.7,334.0 527.0,334.3 528.2,334.6 529.4,334.8 530.7,335.1 531.9,335.3 533.1,335.5 534.3,335.7 535.6,336.0 536.8,336.2 538.0,336.4 539.3,336.6 540.5,336.8 541.7,337.4 542.9,338.5 544.2,340.6 545.4,344.5 546.6,351.6 547.8,358.5 549.1,363.9 550.3,368.1 551.5,371.3 552.8,373.6 554.0,375.3 555.2,376.4 556.4,377.1 557.7,377.5 558.9,377.6 560.1,377.5 561.4,377.3 562.6,376.9 563.8,376.4 565.0,375.8 566.3,375.1 567.5,374.5 568.7,373.8 570.0,373.0 571.2,372.3 572.4,371.5 573.6,370.8 574.9,370.0 576.1,369.3 577.3,368.6 578.6,367.9 579.8,367.2 581.0,366.5 582.2,365.8 583.5,365.2 584.7,364.5 585.9,363.9 587.2,363.3 588.4,362.7 589.6,362.1 590.8,361.6 592.1,361.0 593.3,360.5 594.5,360.0 595.8,359.5 597.0,359.0 598.2,358.5 599.4,358.1 600.7,357.6 601.9,357.2 603.1,356.8 604.4,356.4 605.6,356.0 606.8,355.6 608.0,355.2 609.3,354.8 610.5,354.5 611.7,354.2 613.0,353.8 614.2,353.5 615.4,353.2 616.6,352.9 617.9,352.6 619.1,352.3 620.3,352.0 621.6,351.8 622.8,351.5 624.0,351.3 625.2,351.0 626.5,350.8 627.7,350.6 628.9,350.3 630.2,350.1 631.4,349.9 632.6,349.7 633.8,349.5 635.1,349.3 636.3,348.8 637.5,348.0 638.8,346.3 640.0,343.1" fill="none" stroke="#1d4ed8" stroke-width="1.9" stroke-linejoin="round"/>
+</svg><figcaption>Oscillogrammes simulés de l'oscillateur de Wien (\(R=1\ \text{k}\Omega\), \(C=47\) nF, \(R_1=500\ \Omega\), ALI saturant à ±15 V) : (a) juste au-dessus du seuil, quasi-sinusoïdal ; (b) \(R_2\gg R_{2min}\), très déformé.</figcaption></figure>
+        <figure><svg viewBox="0 0 660 230" width="660" xmlns="http://www.w3.org/2000/svg" role="img">
+<line x1="60.0" y1="175.0" x2="640.0" y2="175.0" stroke="#94a3b8" stroke-width="1"/>
+<text x="54.0" y="179.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">0,00</text>
+<line x1="60.0" y1="138.8" x2="640.0" y2="138.8" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54.0" y="142.8" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">0,25</text>
+<line x1="60.0" y1="102.5" x2="640.0" y2="102.5" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54.0" y="106.5" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">0,50</text>
+<line x1="60.0" y1="66.2" x2="640.0" y2="66.2" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54.0" y="70.2" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">0,75</text>
+<line x1="60.0" y1="30.0" x2="640.0" y2="30.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54.0" y="34.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">1,00</text>
+<line x1="60.0" y1="30.0" x2="60.0" y2="175.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="60.0" y="189.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">0</text>
+<line x1="205.0" y1="30.0" x2="205.0" y2="175.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="205.0" y="189.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">5</text>
+<line x1="350.0" y1="30.0" x2="350.0" y2="175.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="350.0" y="189.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">10</text>
+<line x1="495.0" y1="30.0" x2="495.0" y2="175.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="495.0" y="189.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">15</text>
+<line x1="640.0" y1="30.0" x2="640.0" y2="175.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="640.0" y="189.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">20</text>
+<text x="350.0" y="205.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="middle">f (kHz)</text>
+<text x="18.0" y="102.5" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="middle" transform="rotate(-90 18 102.5)">amplitude normalisée de V₂</text>
+<line x1="158.2" y1="26.0" x2="158.2" y2="175.0" stroke="#dc2626" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="162.2" y="36.0" fill="#dc2626" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="start" font-weight="700">f₀ = 3,39 kHz</text>
+<rect x="151.5" y="30.0" width="6" height="145.0" fill="#1d4ed8"/>
+<rect x="346.6" y="170.3" width="6" height="4.7" fill="#1d4ed8"/>
+<rect x="541.7" y="173.2" width="6" height="1.8" fill="#1d4ed8"/>
+<rect x="736.8" y="174.3" width="6" height="0.7" fill="#1d4ed8"/>
+<rect x="110.8" y="30.0" width="6" height="145.0" fill="#0d9488"/>
+<rect x="212.4" y="124.3" width="6" height="50.7" fill="#0d9488"/>
+<rect x="314.0" y="149.9" width="6" height="25.1" fill="#0d9488"/>
+<rect x="415.5" y="160.6" width="6" height="14.4" fill="#0d9488"/>
+<rect x="450" y="46" width="10" height="10" fill="#1d4ed8"/><text x="465.0" y="55.0" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="start">R₂ = 1,05 kΩ (f₁ ≈ 3,36 kHz)</text>
+<rect x="450" y="62" width="10" height="10" fill="#0d9488"/><text x="465.0" y="71.0" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="start">R₂ = 5 kΩ (f₁ ≈ 1,75 kHz)</text>
+</svg><figcaption>Spectres de \(V_2\) (amplitudes normalisées à la raie fondamentale) : quasi-sinusoïdal (bleu) contre très déformé (vert d'eau), avec \(f_0=3{,}39\) kHz en rouge.</figcaption></figure>
+        <div class="overflow"><table>
+          <tr><th></th><th>\(R_2=R_{2min}^+\approx1{,}05\ \text{k}\Omega\)</th><th>\(R_2=5\ \text{k}\Omega\gg R_{2min}\)</th></tr>
+          <tr><td>\(A_0\), \(H_0A_0\)</td><td>3,1 ; 1,03</td><td>11 ; 3,7</td></tr>
+          <tr><td>Saturation de l'ALI</td><td>à peine, sur de très courtes durées</td><td>sur de longues durées (V₁ ≈ créneau ±15 V)</td></tr>
+          <tr><td>Période \(T\)</td><td>≈ 297 µs (≈ \(T_0\), \(f\approx3{,}36\) kHz)</td><td>≈ 570 µs (\(f\approx1{,}75\) kHz ≈ \(0{,}52\,f_0\))</td></tr>
+          <tr><td>Amplitude de \(V_2\)</td><td>≈ 5,3 V (≈ \(V_{sat}/A_0\))</td><td>≈ 7,4 V (pics)</td></tr>
+          <tr><td>Harmoniques de \(V_2\) (rapport à la raie fondamentale)</td><td>\(3f\) : 3 % ; \(5f\) : 1 %</td><td>\(3f\) : 35 % ; \(5f\) : 17 % ; \(7f\) : 10 %</td></tr>
+          <tr><td>Distorsion harmonique totale de \(V_2\)</td><td>≈ 3,5 %</td><td>≈ 40 %</td></tr>
+        </table></div>
+        <p><b>Commentaires.</b> Pour \(R_2=R_{2min}^+\) le montage est « juste instable » : la saturation ne se produit qu'au sommet des alternances, le signal est quasi-sinusoïdal, de période égale à \(T_0\). Pour \(R_2\gg R_{2min}\) (\(H_0A_0\gg1\)), \(V_1\) devient presque un créneau et \(V_2\) (le créneau filtré par le passe-bande, qui « arrondit » chaque palier) est très déformé : <b>distorsion des harmoniques</b> (spectre riche en harmoniques impairs, \(3f\), \(5f\), …). La <b>période est aussi plus longue</b> (\(\omega&lt;\omega_0\)) : l'ALI sature longtemps, le système n'est plus dans le régime sinusoïdal à \(\omega_0\) imposé par la condition de phase de Barkhausen ; c'est un oscillateur à relaxation dont la fréquence dépend de \(R_2\).</p>
+        <div class="note"><span class="lab">FFT à l'oscilloscope</span> Avec \(f_e=20\,f_{div}\), régler \(f_{div}\approx2\) kHz/div pour afficher 0–20 kHz (fondamental à 3,4 kHz, harmoniques à 10,2 et 17 kHz) ; fenêtre de Hann ; mesure de la fréquence par curseur. La résolution vaut \(\Delta f=1/\tau\) où \(\tau\) est la durée d'acquisition (Ch6 §2.4).</div>
+        <div class="warnbox"><span class="lab">Piège</span> La condition \(A_0=1/H_0\) <b>exacte</b> est inatteignable en pratique (la moindre dérive donne soit l'extinction, soit la croissance). On vise toujours \(A_0\) <b>un peu</b> au-dessus de \(1/H_0\) : c'est la saturation qui fixe ensuite l'amplitude, pas le réglage de \(R_2\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="tpb-r4">
+      <div class="exo-head">§3 — L'OQS à résistance négative <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">1) Nommer les deux blocs et leur rôle</p>
+        <figure><svg viewBox="0 0 600 285" width="600" xmlns="http://www.w3.org/2000/svg" role="img">
+<polyline points="60,70 60,95" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<path d="M 60,95 q 14,4.2 0,8.5 q 14,4.2 0,8.5 q 14,4.2 0,8.5 q 14,4.2 0,8.5" fill="none" stroke="#1e293b" stroke-width="1.7"/>
+<text x="82" y="117" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="13" text-anchor="start">(L, r)</text>
+<polyline points="60,129 60,172" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="49,172 71,172" fill="none" stroke="#1e293b" stroke-width="2.4" stroke-linejoin="round"/>
+<polyline points="49,180 71,180" fill="none" stroke="#1e293b" stroke-width="2.4" stroke-linejoin="round"/>
+<text x="44" y="180" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="13" text-anchor="end">C</text>
+<polyline points="60,180 60,250" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="26,240 26,184" fill="none" stroke="#1e293b" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="26,184 28.7,190.4 23.3,190.4" fill="#1e293b"/>
+<text x="20" y="208" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="13" text-anchor="end" font-weight="700" font-style="italic">V<tspan dy="4" font-size="10">C</tspan></text>
+<polyline points="60,70 104,70" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<rect x="104" y="63.5" width="34" height="13" fill="#fff" stroke="#1e293b" stroke-width="1.7"/>
+<text x="121" y="59" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="13" text-anchor="middle">R</text>
+<polyline points="138,70 340,70" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<circle cx="340" cy="70" r="3.2" fill="#1e293b"/>
+<polyline points="230,58 262,58" fill="none" stroke="#1e293b" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="262,58 255.6,60.7 255.6,55.3" fill="#1e293b"/>
+<text x="246" y="50" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="13" text-anchor="middle" font-weight="700" font-style="italic">iₑ</text>
+<polygon points="400,60 400,120 464,90" fill="#e2e8f0" stroke="#1e293b" stroke-width="1.7"/>
+<text x="406" y="77" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="15" text-anchor="start" font-weight="700">−</text>
+<text x="406" y="113" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="15" text-anchor="start" font-weight="700">+</text>
+<polyline points="340,70 400,70" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="464,90 540,90" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<circle cx="540" cy="90" r="3.2" fill="#1e293b"/>
+<polyline points="340,70 340,25 410,25" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<rect x="410" y="18.5" width="34" height="13" fill="#fff" stroke="#1e293b" stroke-width="1.7"/>
+<text x="427" y="14" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="13" text-anchor="middle">R₁</text>
+<polyline points="444,25 540,25 540,90" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="540,90 540,150 474,150" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<rect x="440" y="143.5" width="34" height="13" fill="#fff" stroke="#1e293b" stroke-width="1.7"/>
+<text x="457" y="139" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="13" text-anchor="middle">R₂</text>
+<polyline points="440,150 370,150 370,110 400,110" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<circle cx="370" cy="150" r="3.2" fill="#1e293b"/>
+<polyline points="370,150 370,163" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<rect x="363.5" y="163" width="13" height="34" fill="#fff" stroke="#1e293b" stroke-width="1.7"/>
+<text x="384" y="184" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="13" text-anchor="start">R₃</text>
+<polyline points="357,195 383,165" fill="none" stroke="#1e293b" stroke-width="1.5" stroke-linejoin="round"/>
+<polygon points="383,165 375,168 380,174" fill="#1e293b"/>
+<polyline points="370,197 370,250" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="60,250 540,250" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="300,250 300,256" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="291,256 309,256" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="294,260 306,260" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<polyline points="297,264 303,264" fill="none" stroke="#1e293b" stroke-width="1.7" stroke-linejoin="round"/>
+<text x="550" y="84" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="14" text-anchor="start" font-weight="700" font-style="italic">S</text>
+<rect x="318" y="2" width="262" height="214" rx="6" fill="none" stroke="#64748b" stroke-width="1.3" stroke-dasharray="6 4"/>
+<text x="449.0" y="231" fill="#64748b" font-family="Segoe UI,Arial,sans-serif" font-size="12" text-anchor="middle" font-weight="700">NIC : résistance négative −R₁R₃/R₂ (TD3)</text>
+</svg><figcaption>OQS à résistance négative : circuit RLC série \((R,\ L,r,\ C)\) fermé sur le NIC (ALI, \(R_1\), \(R_2\), \(R_3\)).</figcaption></figure>
+        <ul>
+          <li><b>Bloc de gauche (TP1)</b> : le circuit <b>RLC série</b> (\(R\), bobine \((L,r)\), condensateur \(C\)), d'après la tension \(V_C\) du condensateur. C'est le <b>siège des oscillations</b> (échange d'énergie entre \(L\) et \(C\), pulsation \(\omega_0=1/\sqrt{LC}\)), mais avec des <b>pertes</b> (\(R+r\)) : seul, il est amorti.</li>
+          <li><b>Bloc de droite (TD3, Ex3)</b> : le <b>convertisseur à résistance négative</b> (NIC), ALI idéal avec \(R_1\) vers \((-)\), \(R_2\) vers \((+)\), \(R_3\) de \((+)\) à la masse, qui se comporte comme une résistance \(-R_n\) avec \(R_n=\dfrac{R_1R_3}{R_2}\) (TD3 : \(v_e/i_e=-R_1R_3/R_2\)). Son rôle : <b>compenser l'amortissement</b>, en fournissant de l'énergie (prélevée sur l'alimentation de l'ALI) au circuit RLC.</li>
+        </ul>
+
+        <p class="q">2) Condition sur \(R_3\) pour que le système soit « juste instable », \(R_3=R_{3min}^+\)</p>
+        <p>On remplace le NIC par sa résistance équivalente \(-R_n\) : la maille est un RLC série de résistance totale \(R_t=R+r-R_n\). La loi des mailles (avec \(i=-C\dot V_C\), le courant circulant vers le haut dans la branche de \(C\)) donne l'équation de \(V_C\) :</p>
+        \[ \ddot V_C+\frac{R+r-R_n}{L}\,\dot V_C+\frac1{LC}V_C=0,\qquad R_n=\frac{R_1R_3}{R_2}. \]
+        <p>On est ramené à la forme \(\ddot s+D_1\dot s+\omega_0^2s=0\) avec \(\omega_0=\dfrac1{\sqrt{LC}}\) et \(D_1=\dfrac{R+r-R_n}L\). Comme pour le Wien :</p>
+        <ul>
+          <li>\(D_1>0\iff R_n&lt;R+r\) : amorti ; \(D_1=0\iff R_n=R+r\) : oscillations sinusoïdales pures ; \(D_1&lt;0\iff R_n>R+r\) : instable.</li>
+        </ul>
+        <div class="res">« Juste instable » : \(\dfrac{R_1R_3}{R_2}\) légèrement supérieur à \(R+r\), soit \(\boxed{R_{3min}=\dfrac{R_2}{R_1}\,(R+r)}\) et \(R_3=R_{3min}^+\).</div>
+
+        <p class="q">3) Calcul de \(R_{3min}\) : \(R_1=R_2=1\ \text{k}\Omega\), \(R=500\ \Omega\), \(L=10\) mH, \(C=47\) nF</p>
+        <p>L'énoncé ne donne pas la résistance \(r\) de la bobine : on la <b>néglige</b> (hypothèse à signaler ; pour une vraie bobine de 10 mH, \(r\) vaut de l'ordre de la dizaine d'ohms, ce qui décale \(R_{3min}\) de la même quantité). Avec \(R_2/R_1=1\) :</p>
+        <div class="res">\(R_{3min}=\dfrac{R_2}{R_1}\,R=1\times500\ \Omega=\mathbf{500\ \Omega}\) (avec \(r\neq0\) : \(R_{3min}=500+r\) ohms).</div>
+        <p>Fréquence des oscillations attendue : \(\omega_0=\dfrac1{\sqrt{10^{-2}\times47\times10^{-9}}}=\dfrac1{\sqrt{4{,}7\times10^{-10}}}\approx4{,}61\times10^4\ \text{rad·s}^{-1}\), soit \(f_0=\dfrac{\omega_0}{2\pi}\approx7{,}34\ \text{kHz}\) (\(T\approx136\ \mu\)s). Facteur de qualité du RLC seul : \(Q=\dfrac1R\sqrt{\dfrac LC}=\dfrac{461}{500}\approx0{,}92\) (\(\sqrt{L/C}=\sqrt{10^{-2}/(47\times10^{-9})}\approx461\ \Omega\)). Réglage pratique : on part de \(R_3&lt;500\ \Omega\) (rien ne se passe), on augmente \(R_3\) jusqu'à voir apparaître les oscillations à \(\approx7{,}3\) kHz.</p>
+        <div class="note"><span class="lab">Comparaison des deux OQS</span> <b>Wien</b> : filtre sélectif (\(H_0=\tfrac13\)) + amplificateur de gain \(A_0\gtrsim3\) (la boucle de réaction, par l'entrée \((+)\), apporte le gain). <b>RLC + NIC</b> : le circuit RLC joue le filtre, et le NIC compense les pertes (\(R_n\gtrsim R+r\)). Dans les deux cas : <b>amortissement exactement compensé \(\Rightarrow D_1=0\)</b>, on se place juste en dessous (\(D_1\approx0^-\)), et la saturation de l'ALI limite l'amplitude.</div>
+      </div>
+    </div>
+  </section>
+
   <section class="block" id="exos">
-    <h2>4. Exercices d'entraînement créés</h2>
+    <h2>5. Exercices d'entraînement créés</h2>
     <p>Trois exercices dans l'esprit du TD5 et du TP5a (dimensionner un oscillateur), avec solutions complètes <b>vérifiées numériquement</b>.</p>
 
     <div class="exo-card" id="exo-a">
@@ -1701,20 +2225,28 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 
   <section class="block" id="docs">
     <h2>📂 Documents donnés</h2>
-    <p class="docs-intro">Scans originaux remis en cours (feuilles de D. Courtois). Cliquez pour ouvrir.</p>
+    <p class="docs-intro">Feuilles officielles de D. Courtois, récupérées sur Moodle (AM2 · Électronique · Chapitre 5). Cliquez pour ouvrir.</p>
     <div class="docs-group">
       <h3>TD (énoncé)</h3>
       <ul class="doc-list">
-        <li><a class="doc-item" href="TD5_et_TP5a_realisation_scan.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD5 (p.1-2) + TP5a Réalisation d'un MVA typique (p.3-4) — scan</span><span class="badge">TD / TP</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="Exos5.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD5 — Exos5 : MVA compact, générateur de balayage, OQS, oscillateur sinus-cosinus (08/10/2026)</span><span class="badge">TD</span><span class="arrow">↗</span></a></li>
       </ul>
     </div>
     <div class="docs-group">
-      <h3>TP</h3>
+      <h3>TP5a — multivibrateur astable</h3>
       <ul class="doc-list">
-        <li><a class="doc-item" href="TP5a_conception_scan.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TP5a Conception d'un oscillateur auto-entretenu (avec réponses p.2) — scan</span><span class="badge">TP</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="TP5a_Conception.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TP5a Conception d'un oscillateur auto-entretenu (avec réponses p.2) — 05/10/2026</span><span class="badge">TP</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="TP5a_Realisation.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TP5a Réalisation d'un MVA typique — 07/10/2026</span><span class="badge">TP</span><span class="arrow">↗</span></a></li>
       </ul>
     </div>
-    <p class="docs-note">Cursus AM2 · P2030 · Semestre 3 · Partie Électronique, D. Courtois : TP5a conception du 05/10/2026, TP5a réalisation du 07/10/2026, TD5 du 08/10/2026. Ce chapitre prolonge le <a href="ch4-ali-regime-sature.html">Ch4 — ALI en régime saturé</a> (comparateurs, trigger de Schmitt) et le <a href="ch3-ali-regime-lineaire.html">Ch3 — ALI en régime linéaire</a> (intégrateur, NIC, résistance négative). Aucun polycopié de cours du chapitre 5 n'a encore été fourni.</p>
+    <div class="docs-group">
+      <h3>TP5b — oscillateur quasi-sinusoïdal</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="TP5b_Conception.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TP5b Conception d'un autre type d'oscillateur — 12/10/2026</span><span class="badge">TP</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="TP5b_Realisation.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TP5b Réalisation d'un oscillateur quasi-sinusoïdal — 14/10/2026</span><span class="badge">TP</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Cursus AM2 · P2030 · Semestre 3 · Partie Électronique, D. Courtois : TP5a conception du 05/10/2026, TP5a réalisation du 07/10/2026, TD5 du 08/10/2026, TP5b conception du 12/10/2026, TP5b réalisation du 14/10/2026. Ce chapitre prolonge le <a href="ch4-ali-regime-sature.html">Ch4 — ALI en régime saturé</a> (comparateurs, trigger de Schmitt) et précède le <a href="ch6-electronique-numerique.html">Ch6 — Électronique numérique</a>.</p>
   </section>
 </main>
 <script src="../assets/gate.js"></script>

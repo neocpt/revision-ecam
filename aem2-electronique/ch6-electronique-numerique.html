@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ch6 — Électronique numérique — AM2 Électronique — Révision ECAM</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div class="topbar">
+  <a href="../index.html#am2">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="ch5-oscillateurs.html">← Ch5</a>
+  <a href="#memo">📌 Fiche mémo</a>
+  <a href="#cours">Cours</a>
+  <a href="#app">Applications corrigées</a>
+  <a href="#exos">Exercices créés</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">Électronique AM2 (2ᵉ année) · Chapitre 6</span>
+  <h1 class="title">Ch6 — Électronique numérique : numérisation, échantillonnage, spectre numérique</h1>
+  <p class="lead">Une grande partie des filtres actuels sont des <b>algorithmes de calcul</b> appliqués à un signal préalablement <b>numérisé</b>.
+  Ce chapitre explique comment on passe d'un signal analogique à une suite de nombres : la <b>chaîne d'acquisition</b>, l'<b>échantillonnage</b>
+  (critère de Nyquist-Shannon, repliement spectral), la <b>quantification</b> (résolution, pas de quantification) et la <b>résolution du spectre numérique</b>
+  (FFT, fuite spectrale). Les 10 questions du cours sont corrigées en entier, puis 4 exercices d'entraînement. AM2 · P2030 · Semestre 3 — D. Courtois, cours daté du 19/10/2026.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul>
+      <li><a href="#memo">📌 Fiche mémo</a></li>
+      <li><a href="#cours">1. Résumé de cours — numérisation, échantillonnage, résolution du spectre</a></li>
+      <li><a href="#app">2. Applications du cours corrigées (Q1 à Q10)</a></li>
+      <li><a href="#exos">3. Exercices d'entraînement créés (4) avec corrections</a></li>
+      <li><a href="#docs">📂 Documents donnés</a></li>
+    </ul>
+  </div>
+
+  <section class="memo-sheet" id="memo">
+    <div class="memo-head">📌 Fiche mémo — Électronique numérique</div>
+    <div class="memo-grid">
+      <div class="memo-item"><b>Chaîne d'acquisition</b>transducteur → passe-bas anti-repliement → échantillonneur-bloqueur → CAN → traitement/stockage → CNA → filtre → transducteur</div>
+      <div class="memo-item"><b>Échantillonnage</b>\(t=nT_e\), \(f_e=\dfrac1{T_e}\) ; durée d'acquisition \(\tau=N\,T_e=\dfrac N{f_e}\)</div>
+      <div class="memo-item"><b>Quantification</b>résolution \(p\) bits ⇒ \(2^p\) codes ; pas \(q=\dfrac{\Delta s}{2^p-1}\simeq\dfrac{\Delta s}{2^p}\) ; erreur max \(\dfrac q2\)</div>
+      <div class="memo-item"><b>Taille d'un fichier</b>\(N\times p\) bits \(\times\) nombre de voies (÷ 8 pour les octets)</div>
+      <div class="memo-item"><b>Nyquist-Shannon</b>\(f_e>2f_{max}\) (au moins 2 points par période)</div>
+      <div class="memo-item"><b>Spectre échantillonné</b>spectre analogique + répliques autour de \(nf_e\) (raies à \(nf_e\pm f\)) ; \(f_{max}&lt;f_e-f_{max}\)</div>
+      <div class="memo-item"><b>Si Nyquist respecté</b>passe-bas a posteriori \(f_c=f_e/2\) ⇒ reconstitution du signal analogique</div>
+      <div class="memo-item"><b>Repliement spectral</b>\(f_e&lt;2f_{max}\) : \(f_{alias}=|f-kf_e|\) ; non corrigeable a posteriori ⇒ filtre <b>anti-repliement</b> \(f_c=f_e/2\) <b>avant</b> l'échantillonneur</div>
+      <div class="memo-item"><b>Résolution du spectre</b>\(\Delta f=\dfrac{f_e}N=\dfrac1\tau\) ; \(N\) fréquences entre 0 et \(f_e\) (utiles : 0 à \(f_e/2\))</div>
+      <div class="memo-item"><b>Fuite spectrale</b>évitée si \(\tau=N_0T\) (nombre entier de périodes) ; fenêtre de Hann pour lisser les bords</div>
+      <div class="memo-item"><b>FFT de l'oscilloscope</b>\(f_e=20\,f_{div}\) : les 10 divisions couvrent exactement \([0\,;\,f_e/2]\)</div>
+      <div class="memo-item method"><b>Réflexe</b>numérisation : (1) \(f_{max}\) ⇒ \(f_e\) ; (2) \(N=f_e\tau\) ; (3) \(\Delta f=1/\tau\) ; (4) \(q=\Delta s/(2^p-1)\) et taille \(=N\,p\)</div>
+    </div>
+  </section>
+
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours</h2>
+    <div class="note"><span class="lab">Source</span> <code>Cours6.pdf</code>, « Ch6 Électronique numérique » (D. Courtois, AEM2 · P2030 · S3, daté du 19/10/2026), 4 pages. Les <b>questions</b> du polycopié (Q1 à Q10) sont corrigées dans la section 2 ;
+    les figures du cours sont reproduites là où elles servent la correction.</div>
+
+    <h3>1.1 · Généralités</h3>
+    <p>Un <b>signal</b> est une grandeur physique porteuse d'information. Ces grandeurs varient en général <b>continûment</b> dans le temps et l'espace : ce sont des <b>signaux analogiques</b>. On les convertit en tensions électriques (faciles à traiter) avec des <b>capteurs / transducteurs</b>.</p>
+    <div class="def"><span class="lab">Signal analogique / numérique</span> Un signal analogique est une <b>fonction d'une variable réelle</b> (le temps \(t\)) à valeurs dans \(\mathbb R\). Un signal <b>numérique</b> est une <b>suite</b> à valeurs dans un <b>ensemble fini</b>. La <b>numérisation</b> opère donc <b>deux discrétisations</b> : l'une en <b>temps</b> (échantillonnage), l'autre en <b>tension</b> (quantification, avec arrondi), puis les valeurs sont codées en bits (0 et 1).</div>
+    <p>Intérêts du numérique : stockage, transmission (sans altération) et traitement (filtrage par calcul) facilités.</p>
+
+    <h3>1.2 · Structure d'une chaîne d'acquisition</h3>
+    <ol>
+      <li><b>conversion</b> du signal physique en signal électrique analogique \(u\) (transducteur) ;</li>
+      <li><b>échantillonnage</b> : discrétisation temporelle de \(u\) en un nombre donné de mesures ;</li>
+      <li><b>quantification</b> : on assigne à chaque mesure une valeur discrète ;</li>
+      <li><b>traitement numérique</b> (filtrage, analyse), stockage ou transmission ;</li>
+      <li>(optionnel) <b>conversion numérique-analogique</b> + transduction pour restituer une réponse analogique.</li>
+    </ol>
+    <figure><img src="ch6-img/chaine.jpg" alt="Chaîne d'acquisition : transducteur d'entrée, filtre passe-bas anti-repliement, échantillonneur, CAN, traitement numérique, CNA, filtrage et amplification, transducteur de sortie" loading="lazy" style="max-width:520px">
+    <figcaption>Chaîne d'acquisition complète (Cours6, §1.2).</figcaption></figure>
+
+    <h3>1.3 · Les deux grandes étapes : échantillonnage et quantification</h3>
+    <div class="def"><span class="lab">Échantillonnage (+ blocage)</span> On prend <b>périodiquement</b> une mesure du signal aux dates \(t=nT_e\) (\(n\) entier), avec \(T_e\) la <b>période d'échantillonnage</b> et \(f_e=1/T_e\) la <b>fréquence d'échantillonnage</b>. L'opération est réalisée par un <b>interrupteur commandé</b>, l'<b>échantillonneur-bloqueur</b> (le blocage maintient la valeur pendant la conversion). Si le CAN peut prélever au plus \(N\) échantillons, la <b>durée d'acquisition</b> est
+    \[ \tau=N\,T_e=\frac N{f_e}. \]</div>
+    <div class="def"><span class="lab">Quantification (+ codage)</span> On affecte à chaque mesure la valeur discrète <b>la plus proche</b>, à laquelle on associe un nombre binaire : le <b>code de sortie</b>. Le nombre de valeurs possibles dépend de la <b>résolution</b> \(p\) du CAN (nombre de bits) : \(2^p\) codes (par exemple, un CAN de 4 bits donne \(2^4=16\) codes). L'écart entre deux valeurs successives est le <b>pas de quantification</b> (ou quantum) \(q\), déduit de la <b>pleine échelle</b> (plage de conversion) \(\Delta s\) :
+    \[ q=\frac{\Delta s}{2^p-1}\ \simeq\ \frac{\Delta s}{2^p}. \]</div>
+    <figure><img src="ch6-img/numerisation.jpg" alt="Principe de la numérisation : signal analogique, échantillonnage, blocage, quantification, signal numérique, stockage en mémoire" loading="lazy" style="max-width:340px">
+    <figcaption>Principe de la numérisation (Cours6, §1.3) : 1. échantillonneur-bloqueur (période \(T_e\)) ; 2. quantification dans le CAN (pas \(q\)) ; 3. stockage.</figcaption></figure>
+    <figure><svg viewBox="0 0 690 250" width="690" xmlns="http://www.w3.org/2000/svg" role="img">
+<line x1="70.0" y1="200.0" x2="640.0" y2="200.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="64.0" y="204.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">000</text>
+<line x1="70.0" y1="175.7" x2="640.0" y2="175.7" stroke="#e2e8f0" stroke-width="1"/>
+<text x="64.0" y="179.7" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">001</text>
+<line x1="70.0" y1="151.4" x2="640.0" y2="151.4" stroke="#e2e8f0" stroke-width="1"/>
+<text x="64.0" y="155.4" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">010</text>
+<line x1="70.0" y1="127.1" x2="640.0" y2="127.1" stroke="#e2e8f0" stroke-width="1"/>
+<text x="64.0" y="131.1" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">011</text>
+<line x1="70.0" y1="102.9" x2="640.0" y2="102.9" stroke="#e2e8f0" stroke-width="1"/>
+<text x="64.0" y="106.9" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">100</text>
+<line x1="70.0" y1="78.6" x2="640.0" y2="78.6" stroke="#e2e8f0" stroke-width="1"/>
+<text x="64.0" y="82.6" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">101</text>
+<line x1="70.0" y1="54.3" x2="640.0" y2="54.3" stroke="#e2e8f0" stroke-width="1"/>
+<text x="64.0" y="58.3" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">110</text>
+<line x1="70.0" y1="30.0" x2="640.0" y2="30.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="64.0" y="34.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">111</text>
+<line x1="70.0" y1="200.0" x2="640.0" y2="200.0" stroke="#1e293b" stroke-width="1.5"/>
+<line x1="70.0" y1="30.0" x2="70.0" y2="200.0" stroke="#1e293b" stroke-width="1.5"/>
+<polyline points="70.0,93.9 71.4,92.8 72.9,91.8 74.3,90.7 75.7,89.6 77.1,88.6 78.6,87.6 80.0,86.5 81.4,85.5 82.9,84.5 84.3,83.5 85.7,82.5 87.1,81.5 88.6,80.5 90.0,79.5 91.4,78.5 92.9,77.6 94.3,76.6 95.7,75.7 97.1,74.7 98.6,73.8 100.0,72.9 101.4,72.0 102.9,71.1 104.3,70.2 105.7,69.3 107.1,68.5 108.6,67.6 110.0,66.8 111.4,66.0 112.9,65.2 114.3,64.4 115.7,63.6 117.1,62.8 118.6,62.1 120.0,61.3 121.4,60.6 122.9,59.8 124.3,59.1 125.7,58.4 127.1,57.8 128.6,57.1 130.0,56.5 131.4,55.8 132.9,55.2 134.3,54.6 135.7,54.0 137.1,53.4 138.6,52.9 140.0,52.3 141.4,51.8 142.9,51.3 144.3,50.8 145.7,50.3 147.1,49.8 148.6,49.4 150.0,48.9 151.4,48.5 152.9,48.1 154.3,47.7 155.7,47.4 157.1,47.0 158.6,46.7 160.0,46.4 161.4,46.1 162.9,45.8 164.3,45.5 165.7,45.3 167.1,45.0 168.6,44.8 170.0,44.6 171.4,44.4 172.9,44.3 174.3,44.1 175.7,44.0 177.1,43.9 178.6,43.8 180.0,43.7 181.4,43.7 182.9,43.6 184.3,43.6 185.7,43.6 187.1,43.6 188.6,43.6 190.0,43.7 191.4,43.8 192.9,43.8 194.3,44.0 195.7,44.1 197.1,44.2 198.6,44.4 200.0,44.5 201.4,44.7 202.9,44.9 204.3,45.2 205.7,45.4 207.1,45.7 208.6,45.9 210.0,46.2 211.4,46.5 212.9,46.9 214.3,47.2 215.7,47.6 217.1,48.0 218.6,48.4 220.0,48.8 221.4,49.2 222.9,49.6 224.3,50.1 225.7,50.6 227.1,51.1 228.6,51.6 230.0,52.1 231.4,52.6 232.9,53.2 234.3,53.8 235.7,54.4 237.1,55.0 238.6,55.6 240.0,56.2 241.4,56.8 242.9,57.5 244.3,58.2 245.7,58.9 247.1,59.6 248.6,60.3 250.0,61.0 251.4,61.8 252.9,62.5 254.3,63.3 255.7,64.1 257.1,64.9 258.6,65.7 260.0,66.5 261.4,67.3 262.9,68.2 264.3,69.0 265.7,69.9 267.1,70.7 268.6,71.6 270.0,72.5 271.4,73.4 272.9,74.4 274.3,75.3 275.7,76.2 277.1,77.2 278.6,78.1 280.0,79.1 281.4,80.1 282.9,81.1 284.3,82.1 285.7,83.1 287.1,84.1 288.6,85.1 290.0,86.1 291.4,87.1 292.9,88.2 294.3,89.2 295.7,90.3 297.1,91.3 298.6,92.4 300.0,93.5 301.4,94.5 302.9,95.6 304.3,96.7 305.7,97.8 307.1,98.9 308.6,100.0 310.0,101.1 311.4,102.2 312.9,103.3 314.3,104.4 315.7,105.5 317.1,106.6 318.6,107.8 320.0,108.9 321.4,110.0 322.9,111.1 324.3,112.2 325.7,113.4 327.1,114.5 328.6,115.6 330.0,116.7 331.4,117.9 332.9,119.0 334.3,120.1 335.7,121.2 337.1,122.4 338.6,123.5 340.0,124.6 341.4,125.7 342.9,126.8 344.3,127.9 345.7,129.0 347.1,130.1 348.6,131.2 350.0,132.3 351.4,133.4 352.9,134.5 354.3,135.6 355.7,136.6 357.1,137.7 358.6,138.8 360.0,139.8 361.4,140.9 362.9,141.9 364.3,143.0 365.7,144.0 367.1,145.0 368.6,146.0 370.0,147.0 371.4,148.0 372.9,149.0 374.3,150.0 375.7,151.0 377.1,152.0 378.6,152.9 380.0,153.9 381.4,154.8 382.9,155.7 384.3,156.6 385.7,157.6 387.1,158.5 388.6,159.3 390.0,160.2 391.4,161.1 392.9,161.9 394.3,162.8 395.7,163.6 397.1,164.4 398.6,165.2 400.0,166.0 401.4,166.8 402.9,167.6 404.3,168.3 405.7,169.1 407.1,169.8 408.6,170.5 410.0,171.2 411.4,171.9 412.9,172.6 414.3,173.2 415.7,173.9 417.1,174.5 418.6,175.1 420.0,175.7 421.4,176.3 422.9,176.9 424.3,177.4 425.7,178.0 427.1,178.5 428.6,179.0 430.0,179.5 431.4,180.0 432.9,180.4 434.3,180.9 435.7,181.3 437.1,181.7 438.6,182.1 440.0,182.5 441.4,182.8 442.9,183.2 444.3,183.5 445.7,183.8 447.1,184.1 448.6,184.4 450.0,184.6 451.4,184.9 452.9,185.1 454.3,185.3 455.7,185.5 457.1,185.7 458.6,185.8 460.0,185.9 461.4,186.1 462.9,186.2 464.3,186.2 465.7,186.3 467.1,186.4 468.6,186.4 470.0,186.4 471.4,186.4 472.9,186.4 474.3,186.3 475.7,186.3 477.1,186.2 478.6,186.1 480.0,186.0 481.4,185.9 482.9,185.7 484.3,185.6 485.7,185.4 487.1,185.2 488.6,185.0 490.0,184.7 491.4,184.5 492.9,184.2 494.3,183.9 495.7,183.6 497.1,183.3 498.6,183.0 500.0,182.6 501.4,182.2 502.9,181.8 504.3,181.4 505.7,181.0 507.1,180.6 508.6,180.1 510.0,179.7 511.4,179.2 512.9,178.7 514.3,178.2 515.7,177.6 517.1,177.1 518.6,176.5 520.0,175.9 521.4,175.4 522.9,174.7 524.3,174.1 525.7,173.5 527.1,172.8 528.6,172.2 530.0,171.5 531.4,170.8 532.9,170.1 534.3,169.4 535.7,168.6 537.1,167.9 538.6,167.1 540.0,166.3 541.4,165.5 542.9,164.7 544.3,163.9 545.7,163.1 547.1,162.3 548.6,161.4 550.0,160.6 551.4,159.7 552.9,158.8 554.3,157.9 555.7,157.0 557.1,156.1 558.6,155.2 560.0,154.2 561.4,153.3 562.9,152.3 564.3,151.4 565.7,150.4 567.1,149.4 568.6,148.4 570.0,147.4 571.4,146.4 572.9,145.4 574.3,144.4 575.7,143.4 577.1,142.3 578.6,141.3 580.0,140.2 581.4,139.2 582.9,138.1 584.3,137.1 585.7,136.0 587.1,134.9 588.6,133.8 590.0,132.7 591.4,131.7 592.9,130.6 594.3,129.5 595.7,128.4 597.1,127.2 598.6,126.1 600.0,125.0 601.4,123.9 602.9,122.8 604.3,121.7 605.7,120.6 607.1,119.4 608.6,118.3 610.0,117.2 611.4,116.1 612.9,114.9 614.3,113.8 615.7,112.7 617.1,111.6 618.6,110.4 620.0,109.3 621.4,108.2 622.9,107.1 624.3,106.0 625.7,104.9 627.1,103.7 628.6,102.6 630.0,101.5 631.4,100.4 632.9,99.3 634.3,98.2 635.7,97.1 637.1,96.1 638.6,95.0 640.0,93.9" fill="none" stroke="#1d4ed8" stroke-width="1.8" stroke-linejoin="round"/>
+<circle cx="70.0" cy="93.9" r="3.2" fill="#1e293b"/>
+<circle cx="105.6" cy="69.4" r="3.2" fill="#1e293b"/>
+<circle cx="141.2" cy="51.8" r="3.2" fill="#1e293b"/>
+<circle cx="176.9" cy="43.9" r="3.2" fill="#1e293b"/>
+<circle cx="212.5" cy="46.8" r="3.2" fill="#1e293b"/>
+<circle cx="248.1" cy="60.1" r="3.2" fill="#1e293b"/>
+<circle cx="283.8" cy="81.7" r="3.2" fill="#1e293b"/>
+<circle cx="319.4" cy="108.4" r="3.2" fill="#1e293b"/>
+<circle cx="355.0" cy="136.1" r="3.2" fill="#1e293b"/>
+<circle cx="390.6" cy="160.6" r="3.2" fill="#1e293b"/>
+<circle cx="426.2" cy="178.2" r="3.2" fill="#1e293b"/>
+<circle cx="461.9" cy="186.1" r="3.2" fill="#1e293b"/>
+<circle cx="497.5" cy="183.2" r="3.2" fill="#1e293b"/>
+<circle cx="533.1" cy="169.9" r="3.2" fill="#1e293b"/>
+<circle cx="568.8" cy="148.3" r="3.2" fill="#1e293b"/>
+<circle cx="604.4" cy="121.6" r="3.2" fill="#1e293b"/>
+<polyline points="70.0,102.9 105.6,102.9 105.6,78.6 141.2,78.6 141.2,54.3 176.9,54.3 176.9,54.3 212.5,54.3 212.5,54.3 248.1,54.3 248.1,54.3 283.8,54.3 283.8,78.6 319.4,78.6 319.4,102.9 355.0,102.9 355.0,127.1 390.6,127.1 390.6,151.4 426.2,151.4 426.2,175.7 461.9,175.7 461.9,175.7 497.5,175.7 497.5,175.7 533.1,175.7 533.1,175.7 568.8,175.7 568.8,151.4 604.4,151.4 604.4,127.1 640.0,127.1" fill="none" stroke="#dc2626" stroke-width="2" stroke-linejoin="round"/>
+<text x="20.0" y="115.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="middle" transform="rotate(-90 20 115.0)">code de sortie (p = 3 bits)</text>
+<text x="355.0" y="222.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="middle">t (un échantillon tous les Te)</text>
+<text x="640.0" y="18.0" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="11.5" text-anchor="end" font-weight="700">— signal analogique   ● échantillons   ▬ valeur quantifiée (bloquée)</text>
+<line x1="654" y1="127.1" x2="654" y2="102.9" stroke="#1e293b" stroke-width="1.5"/>
+<text x="659.0" y="119.0" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="12" text-anchor="start" font-weight="700" font-style="italic">q</text>
+</svg><figcaption>Échantillonnage et quantification d'un signal avec \(p=3\) bits (8 niveaux) : le signal analogique (bleu) est prélevé aux échantillons (points), puis arrondi au niveau le plus proche (marches rouges) ; l'écart entre deux niveaux est le pas \(q\).</figcaption></figure>
+    <p>Un CAN se caractérise, outre sa pleine échelle et sa résolution, par sa <b>vitesse</b> et sa <b>précision</b>, qui dépendent de la technologie : les convertisseurs à <b>rampe</b> sont lents mais très précis et bon marché ; ceux à <b>approximations successives</b> sont plus rapides et sont les plus utilisés. <i>(Le polycopié écrit « 10 ms » dans les deux cas, ce qui est manifestement une coquille pour les approximations successives, nettement plus rapides, de l'ordre de la dizaine de µs.)</i></p>
+    <div class="note"><span class="lab">Bruit de quantification</span> Deux convertisseurs CAN puis CNA en cascade ne restituent <b>pas exactement</b> le signal d'entrée, à cause des arrondis : la perte d'information s'appelle le <b>bruit de quantification</b> (erreur maximale \(q/2\)). C'est largement compensé par les avantages du numérique (transmission et stockage sans altération, traitement facile, autres bruits faciles à éliminer).</div>
+    <figure><img src="ch6-img/can-cna.jpg" alt="CAN suivi d'un CNA : une sinusoïde devient un signal en marches d'escalier" loading="lazy" style="max-width:480px"><figcaption>CAN puis CNA (Cours6) : le signal restitué est « en escalier ».</figcaption></figure>
+
+    <h3>1.4 · Échantillonnage : le critère de Nyquist-Shannon</h3>
+    <p>Le choix de \(f_e\) est un <b>compromis</b> : assez basse pour limiter le nombre d'échantillons \(N\) (donc la taille du fichier) et laisser au CAN le temps de convertir ; assez haute pour refléter correctement les variations du signal (sinon perte d'information).</p>
+    <div class="thm"><span class="lab">Critère de Nyquist-Shannon — point de vue temporel</span> Pour numériser correctement une sinusoïde de fréquence \(f\), il faut <b>au minimum deux points par période</b> : \(f_e>2f\). Plus généralement, si \(f_{max}\) est la plus grande fréquence présente dans le spectre de \(s(t)\) :
+    \[ \boxed{f_e>2f_{max}}\ . \]
+    Alors le signal peut être <b>parfaitement reconstitué</b>.</div>
+    <figure><img src="ch6-img/nyquist.jpg" alt="Sinusoïde de 10 kHz échantillonnée à 14,5 kHz (à gauche, insuffisant) et à 52,5 kHz (à droite, suffisant)" loading="lazy" style="max-width:640px"><figcaption>Sinusoïde de 10 kHz échantillonnée à 14,5 kHz (insuffisant) et à 52,5 kHz (largement suffisant).</figcaption></figure>
+
+    <h3>1.5 · Point de vue spectral : répliques et repliement</h3>
+    <p>Il y a une <b>dualité temps-fréquence</b> : une périodicité dans un domaine donne une discrétisation dans l'autre.</p>
+    <ul>
+      <li>Un signal <b>périodique</b> (période \(T\)) se décompose en une somme <b>discrète</b> d'harmoniques à \(f_n=n/T\).</li>
+      <li>Une <b>discrétisation temporelle</b> (une capture tous les \(T_e\)) rend le <b>spectre périodique</b> : le spectre échantillonné contient les raies du signal analogique <b>et leurs répliques</b> autour de \(f_e\) et de ses multiples (\(nf_e\pm f\)). C'est un <b>enrichissement spectral</b> : l'échantillonnage n'est pas une opération invariante temporellement.</li>
+    </ul>
+    <div class="thm"><span class="lab">Disjonction des spectres</span> Les intervalles spectraux sont disjoints si \(f_{max}&lt;f_e-f_{max}\), soit \(f_e>2f_{max}\). Dans ce cas, un <b>passe-bas a posteriori</b> de fréquence de coupure \(f_c=f_e/2\) élimine les répliques et « retrouve » le signal analogique d'origine.</div>
+    <div class="def"><span class="lab">Repliement spectral</span> Si \(f_e&lt;2f_{max}\), des raies répliquées autour de \(f_e\) <b>empiètent</b> sur \([0,f_{max}]\) : c'est le <b>repliement spectral</b> (aliasing). Il n'est <b>pas corrigeable a posteriori</b> : il doit être anticipé <b>en amont</b>, par un filtre passe-bas <b>anti-repliement</b> de coupure \(f_c=f_e/2\) placé <b>avant</b> l'échantillonneur, au prix d'une perte des hautes fréquences.</div>
+    <figure><img src="ch6-img/echantillonneur.jpg" alt="Échantillonneur : interrupteur commandé à tn = nTe" loading="lazy" style="max-width:260px"><figcaption>Échantillonneur (Cours6, §2.1) : un interrupteur commandé qui se ferme aux dates \(t_n=nT_e\).</figcaption></figure>
+
+    <h3>1.6 · Résolution du spectre numérique (FFT)</h3>
+    <p>En pratique, on calcule le spectre sur une <b>fenêtre de calcul</b> (une portion de temps = la durée d'acquisition), dont les bords sont lissés pour éviter des effets parasites : l'oscilloscope propose plusieurs <b>fenêtrages</b> (en TP : fenêtre de <b>Hann</b>). Le spectre calculé ne contient que \(N\) fréquences (\(N\) = nombre d'échantillons) <b>entre 0 et \(f_e\)</b>, donc sa résolution est fixée par la durée d'acquisition :
+    \[ \boxed{\Delta f=\frac{f_e}{N}=\frac1\tau}\ . \]
+    Pour un spectre précis, l'acquisition doit être <b>longue</b> et contenir un grand nombre de périodes.</p>
+    <div class="def"><span class="lab">Fuite spectrale</span> Quand une fréquence \(f\) du signal ne correspond à <b>aucune</b> fréquence du spectre numérique (multiple de \(\Delta f\)), son pic est <b>éclaté</b> en plusieurs pics séparés de \(\Delta f\) autour de la fréquence absente : c'est la <b>fuite spectrale</b>. Elle est évitée en calculant le spectre sur un <b>nombre entier de périodes</b> : \(\tau=N_0T\) avec \(T=1/f\).</div>
+  </section>
+
+  <section class="block" id="app">
+    <h2>2. Applications du cours corrigées (Q1 à Q10)</h2>
+    <p>Les dix questions du polycopié, dans l'ordre. L'énoncé de chaque question est rappelé juste au-dessus de sa correction ; les figures dont la question dépend sont reproduites ou tracées.</p>
+
+    <div class="exo-card" id="q1">
+      <div class="exo-head">Q1 — Transducteurs et conversion énergétique <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">« Associer les transducteurs suivants à la conversion énergétique adéquate : des écouteurs, une photodiode, une thermorésistance, un cristal piézoélectrique, un capteur à effet Hall et un hydrophone. »</p>
+        <div class="overflow"><table>
+          <tr><th>Transducteur</th><th>Conversion</th><th>Remarque</th></tr>
+          <tr><td>Écouteurs</td><td>électrique → <b>acoustique</b> (sonore)</td><td>transducteur de <b>sortie</b> (après le CNA)</td></tr>
+          <tr><td>Photodiode</td><td><b>lumineuse</b> → électrique</td><td>photocourant proportionnel à l'éclairement</td></tr>
+          <tr><td>Thermorésistance (CTN/CTP)</td><td><b>thermique</b> → électrique</td><td>la <b>résistance</b> varie avec la température ; un montage (diviseur, pont) la convertit en tension</td></tr>
+          <tr><td>Cristal piézoélectrique</td><td><b>mécanique</b> (contrainte, pression) → électrique</td><td>réversible : une tension déforme le cristal (quartz, buzzer)</td></tr>
+          <tr><td>Capteur à effet Hall</td><td><b>magnétique</b> (champ \(B\)) → électrique</td><td>tension de Hall proportionnelle à \(B\)</td></tr>
+          <tr><td>Hydrophone</td><td><b>acoustique</b> sous-marine (pression) → électrique</td><td>« microphone » immergé, souvent à céramique piézoélectrique</td></tr>
+        </table></div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="q2">
+      <div class="exo-head">Q2 — Numérisation dans le temps et dans l'espace <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">« Citer un exemple où un signal analogique est numérisé dans le temps et un exemple où un signal analogique est numérisé dans l'espace. »</p>
+        <ul>
+          <li><b>Dans le temps</b> : un enregistrement audio (la tension du microphone est mesurée 44 100 fois par seconde pour un CD, \(T_e\approx22{,}7\ \mu\text{s}\)) ; un relevé de température toutes les minutes ; un électrocardiogramme.</li>
+          <li><b>Dans l'espace</b> : une <b>image numérique</b> (le capteur CCD/CMOS d'un appareil photo mesure l'éclairement en un nombre fini de points, les <b>pixels</b>, régulièrement espacés) ; un scanner ; une carte de pression échantillonnée sur une grille de capteurs.</li>
+        </ul>
+        <p>Dans les deux cas : discrétisation de la variable (temps ou position), puis quantification de la grandeur mesurée.</p>
+      </div>
+    </div>
+
+    <div class="exo-card" id="q3">
+      <div class="exo-head">Q3 — La chaîne d'acquisition <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <figure><img src="ch6-img/chaine.jpg" alt="Chaîne d'acquisition" loading="lazy" style="max-width:520px"><figcaption>Énoncé (Cours6, Q3) — schéma de la chaîne d'acquisition.</figcaption></figure>
+        <p class="enonce">« a) Donner le nom et les signaux convertis des deux transducteurs. b) Retrouver le bloc de la discrétisation temporelle et expliquer les symboles qu'il contient. c) Retrouver le bloc de la quantification. d) Que signifie CNA ? Que dire du signal en sortie ? e) Lister les blocs impliquant du filtrage ; proposer un intérêt à chacun. »</p>
+        <p class="q">a) Les deux transducteurs</p>
+        <ul>
+          <li><b>Entrée : un microphone</b> — convertit le signal <b>acoustique</b> (variations de pression) en signal <b>électrique</b> (tension) ;</li>
+          <li><b>Sortie : un haut-parleur</b> (ou casque) — convertit la tension <b>électrique</b> en signal <b>acoustique</b>.</li>
+        </ul>
+        <p class="q">b) Discrétisation temporelle</p>
+        <div class="res">C'est le bloc <b>« Échantillonneur »</b>, noté \(T_e=1/f_e\).</div>
+        <p>Il contient deux symboles : <b>\(T_e=1/f_e\)</b> (période et fréquence d'échantillonnage : un prélèvement toutes les \(T_e\)) et un <b>interrupteur</b> (symbole du contact) : c'est l'<b>interrupteur commandé</b> qui se ferme brièvement aux dates \(t=nT_e\) pour laisser passer la valeur du signal, puis s'ouvre ; le blocage maintient la valeur le temps de la conversion.</p>
+        <p class="q">c) Quantification</p>
+        <div class="res">Elle a lieu dans le bloc <b>« CAN »</b> (convertisseur <b>analogique-numérique</b>) : c'est lui qui assigne à chaque échantillon une valeur discrète et le code binaire associé.</div>
+        <p class="q">d) CNA</p>
+        <div class="res">CNA = <b>convertisseur numérique-analogique</b>. Sa sortie est un signal <b>analogique</b> (tension), mais <b>en marches d'escalier</b> (valeurs bloquées) : il reste des « crans » de quantification et des répliques spectrales à lisser.</div>
+        <p class="q">e) Blocs impliquant du filtrage</p>
+        <div class="overflow"><table>
+          <tr><th>Bloc</th><th>Intérêt</th></tr>
+          <tr><td><b>Filtre passe-bas anti-repliement</b> (\(f_c&lt;f_e/2\)), avant l'échantillonneur</td><td>supprimer les fréquences \(>f_e/2\) qui, sinon, se replieraient dans la bande utile (repliement spectral, non corrigeable après coup)</td></tr>
+          <tr><td><b>Traitement numérique</b> (analyse, filtrage…)</td><td>filtrage <b>par calcul</b> du signal numérisé (filtres numériques : suppression du bruit, sélection d'une bande, etc.)</td></tr>
+          <tr><td><b>Filtrage éventuel et amplification</b>, après le CNA</td><td>lisser les marches d'escalier et éliminer les répliques spectrales (filtre de <b>reconstruction</b>), puis amplifier pour attaquer le transducteur de sortie</td></tr>
+        </table></div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="q4">
+      <div class="exo-head">Q4 — Vitesse du CAN <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">« Pourquoi la vitesse du CAN est-elle un critère important ? »</p>
+        <p>Le CAN doit <b>terminer la conversion d'un échantillon avant l'arrivée du suivant</b> : son temps de conversion \(t_{conv}\) doit vérifier \(t_{conv}&lt;T_e=1/f_e\), donc \(f_e&lt;1/t_{conv}\). La vitesse du CAN <b>limite la fréquence d'échantillonnage</b> maximale, et donc, par Nyquist-Shannon, la fréquence maximale \(f_{max}&lt;f_e/2\) des signaux qu'on peut numériser correctement.</p>
+        <div class="res">Un CAN lent ne peut numériser que des signaux lents ; un CAN rapide est nécessaire pour l'audio, la vidéo, les signaux haute fréquence.</div>
+        <p>Compromis : les CAN rapides (approximations successives) sont plus chers/moins précis que les CAN à rampe (lents, très précis, bon marché).</p>
+      </div>
+    </div>
+
+    <div class="exo-card" id="q5">
+      <div class="exo-head">Q5 — Taille d'un fichier musical <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">« Calculer la taille d'un fichier numérique (en Mo) d'un morceau de musique de 3 minutes numérisé à 80 kHz avec un CAN 8 bits. »</p>
+        <p><b>Données.</b> Durée \(\tau=3\ \text{min}=180\) s ; \(f_e=80\) kHz \(=8{,}0\times10^4\) Hz ; résolution \(p=8\) bits \(=1\) octet par échantillon.</p>
+        <p><b>Nombre d'échantillons.</b> \(N=f_e\,\tau=8{,}0\times10^4\times180=1{,}44\times10^7\).</p>
+        <p><b>Taille.</b> \(N\times p=1{,}44\times10^7\times8\) bits \(=1{,}152\times10^8\) bits \(=1{,}44\times10^7\) octets.</p>
+        <div class="res">Taille \(\approx\mathbf{14{,}4\ Mo}\) (\(1\ \text{Mo}=10^6\) octets), soit \(\approx13{,}7\) Mio. (Pour un signal <b>mono</b> ; en stéréo, on double.)</div>
+        <div class="note"><span class="lab">Vérification Nyquist</span> \(f_e=80\) kHz \(>2\times20\) kHz (limite de l'audition) : la musique est bien échantillonnée. Pour comparaison, un CD utilise 44,1 kHz et 16 bits.</div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="q6">
+      <div class="exo-head">Q6 — Voltmètre numérique 6 bits <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">« On dispose d'un voltmètre numérique de résolution 6 bits. Pour mesurer une tension dont la valeur vraie est 154,45 mV, on se place sur le calibre 0–200 mV. Calculer le pas de quantification, la valeur affichée par le voltmètre et affecter le code de sortie binaire correspondant. »</p>
+        <p><b>1) Pas de quantification.</b> \(p=6\) : \(2^6=64\) codes (de 0 à 63), pleine échelle \(\Delta s=200\) mV :</p>
+        \[ q=\frac{\Delta s}{2^p-1}=\frac{200}{63}\approx3{,}17\ \text{mV}\qquad\Bigl(\text{et }\tfrac{\Delta s}{2^p}=3{,}125\ \text{mV avec l'approximation}\Bigr). \]
+        <p><b>2) Valeur affichée.</b> Nombre de pas dans la valeur vraie : \(\dfrac{154{,}45}{3{,}1746}=48{,}65\). On prend la valeur discrète <b>la plus proche</b> : \(n=49\).</p>
+        \[ U_{aff}=49\times3{,}1746\approx\mathbf{155{,}6\ mV}\quad(\text{erreur }+1{,}1\ \text{mV}&lt;q/2=1{,}59\ \text{mV},\ \text{soit }0{,}7\ \%). \]
+        <p><b>3) Code binaire.</b> \(49=32+16+1=2^5+2^4+2^0\) :</p>
+        <div class="res">Code de sortie : <b>110001</b> (6 bits), c'est-à-dire \(49_{10}\).</div>
+        <p>Avec l'approximation \(q=3{,}125\) mV : \(154{,}45/3{,}125=49{,}4\to49\) donc le <b>même code 110001</b>, affichage \(49\times3{,}125=153{,}1\) mV : les deux conventions donnent le même code, à \(q/2\) près sur la valeur affichée.</p>
+        <div class="warnbox"><span class="lab">Piège</span> On <b>arrondit au plus proche</b>, on ne tronque pas : \(48{,}65\to49\) et non 48. Et le code d'un CAN \(p\) bits va de 0 à \(2^p-1\) (ici 63), pas jusqu'à \(2^p\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="q7">
+      <div class="exo-head">Q7 — Spectre échantillonné : répliques et filtre passe-bas <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <figure><img src="ch6-img/spectres-q7.jpg" alt="Deux graphiques d'amplitude en fonction de la fréquence : spectre analogique entre 1 et 3,5 kHz, fe = 10 kHz, 2fe = 20 kHz ; à droite le spectre avec répliques" loading="lazy" style="max-width:640px"><figcaption>Énoncé (Cours6, Q7) — graphiques à compléter (\(f_e=10\) kHz).</figcaption></figure>
+        <p class="enonce">« Compléter le(s) graphique(s) pour illustrer correctement les explications ci-dessus. »</p>
+        <p><b>Lecture.</b> Le spectre analogique (en bleu) occupe \([1\,;\,3{,}5]\) kHz : il vaut 4 V à 1 kHz, décroît jusqu'à 2 V à 2 kHz, reste à 2 V jusqu'à 3 kHz, puis tombe à 0 à 3,5 kHz. Donc \(f_{max}=3{,}5\) kHz, et \(f_e=10\) kHz \(>2f_{max}=7\) kHz : Nyquist-Shannon est <b>respecté</b>.</p>
+        <p><b>Construction.</b> Le spectre échantillonné contient le spectre analogique <b>et ses répliques</b> autour de \(f_e\), \(2f_e\)… : chaque réplique est la copie du spectre analogique (côté \(+f\)) et son <b>image miroir</b> (côté \(-f\)) :</p>
+        <ul>
+          <li>autour de \(f_e=10\) kHz : \(f_e+f\) (de 11 à 13,5 kHz, copie directe) et \(f_e-f\) (de 6,5 à 9 kHz, <b>miroir</b>) ;</li>
+          <li>autour de \(2f_e=20\) kHz : \(2f_e-f\) (de 16,5 à 19 kHz) et \(2f_e+f\) (de 21 à 23,5 kHz, hors du cadre du graphe fourni).</li>
+        </ul>
+        <figure><svg viewBox="0 0 700 272" width="700" xmlns="http://www.w3.org/2000/svg" role="img">
+<line x1="60.0" y1="192.0" x2="680.0" y2="192.0" stroke="#1e293b" stroke-width="1.5"/>
+<text x="54.0" y="196.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">0</text>
+<line x1="60.0" y1="161.6" x2="680.0" y2="161.6" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54.0" y="165.6" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">1</text>
+<line x1="60.0" y1="131.2" x2="680.0" y2="131.2" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54.0" y="135.2" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">2</text>
+<line x1="60.0" y1="100.8" x2="680.0" y2="100.8" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54.0" y="104.8" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">3</text>
+<line x1="60.0" y1="70.4" x2="680.0" y2="70.4" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54.0" y="74.4" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">4</text>
+<line x1="60.0" y1="40.0" x2="680.0" y2="40.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54.0" y="44.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">5</text>
+<line x1="60.0" y1="40.0" x2="60.0" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="60.0" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">0</text>
+<line x1="111.7" y1="40.0" x2="111.7" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="111.7" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">2</text>
+<line x1="163.3" y1="40.0" x2="163.3" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="163.3" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">4</text>
+<line x1="215.0" y1="40.0" x2="215.0" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="215.0" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">6</text>
+<line x1="266.7" y1="40.0" x2="266.7" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="266.7" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">8</text>
+<line x1="318.3" y1="40.0" x2="318.3" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="318.3" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">10</text>
+<line x1="370.0" y1="40.0" x2="370.0" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="370.0" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">12</text>
+<line x1="421.7" y1="40.0" x2="421.7" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="421.7" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">14</text>
+<line x1="473.3" y1="40.0" x2="473.3" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="473.3" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">16</text>
+<line x1="525.0" y1="40.0" x2="525.0" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="525.0" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">18</text>
+<line x1="576.7" y1="40.0" x2="576.7" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="576.7" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">20</text>
+<line x1="628.3" y1="40.0" x2="628.3" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="628.3" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">22</text>
+<line x1="680.0" y1="40.0" x2="680.0" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="680.0" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">24</text>
+<text x="390.0" y="222.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="middle">f (kHz)</text>
+<text x="64.0" y="26.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="start">amplitude (V)</text>
+<rect x="60.0" y="40" width="129.2" height="152" fill="#0d9488" fill-opacity="0.08"/>
+<line x1="189.2" y1="40.0" x2="189.2" y2="192.0" stroke="#0d9488" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="193.2" y="52.0" fill="#0d9488" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="start" font-weight="700">fc = fe/2</text>
+<line x1="318.3" y1="36.0" x2="318.3" y2="192.0" stroke="#dc2626" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="318.3" y="32.0" fill="#dc2626" font-family="Segoe UI,Arial,sans-serif" font-size="12" text-anchor="middle" font-weight="700" font-style="italic">fe</text>
+<line x1="576.7" y1="36.0" x2="576.7" y2="192.0" stroke="#dc2626" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="576.7" y="32.0" fill="#dc2626" font-family="Segoe UI,Arial,sans-serif" font-size="12" text-anchor="middle" font-weight="700" font-style="italic">2fe</text>
+<polygon points="85.8,192.0 85.8,70.4 111.7,131.2 137.5,131.2 150.4,192.0" fill="#1d4ed8" fill-opacity="0.55" stroke="#1d4ed8" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="292.5,192.0 292.5,70.4 266.7,131.2 240.8,131.2 227.9,192.0" fill="#15803d" fill-opacity="0.3" stroke="#15803d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="344.2,192.0 344.2,70.4 370.0,131.2 395.8,131.2 408.8,192.0" fill="#15803d" fill-opacity="0.45" stroke="#15803d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="550.8,192.0 550.8,70.4 525.0,131.2 499.2,131.2 486.2,192.0" fill="#15803d" fill-opacity="0.3" stroke="#15803d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="602.5,192.0 602.5,70.4 628.3,131.2 654.2,131.2 667.1,192.0" fill="#15803d" fill-opacity="0.45" stroke="#15803d" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="116.8" y="56.7" fill="#1d4ed8" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="middle" font-weight="700">spectre analogique</text>
+<text x="256.3" y="56.7" fill="#15803d" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="middle" font-weight="700">fe − f</text>
+<text x="377.8" y="56.7" fill="#15803d" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="middle" font-weight="700">fe + f</text>
+<text x="514.7" y="56.7" fill="#15803d" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="middle" font-weight="700">2fe − f</text>
+<text x="633.5" y="56.7" fill="#15803d" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="middle" font-weight="700">2fe + f</text>
+<text x="124.6" y="238.0" fill="#0d9488" font-family="Segoe UI,Arial,sans-serif" font-size="11.5" text-anchor="start" font-weight="700">seule la bande [0 ; fe/2] est conservée par le filtre passe-bas</text>
+</svg><figcaption>Spectre échantillonné (\(f_e=10\) kHz) : spectre analogique en bleu, répliques en vert autour de \(f_e\) et \(2f_e\) (côtés \(f_e\pm f\), \(2f_e\pm f\)), bande conservée par le passe-bas \(f_c=f_e/2\) en vert d'eau.</figcaption></figure>
+        <div class="res">Les intervalles <b>ne se recouvrent pas</b> car \(f_{max}=3{,}5\ \text{kHz}&lt;f_e-f_{max}=6{,}5\ \text{kHz}\). Un <b>filtre passe-bas</b> de coupure \(f_c=f_e/2=5\) kHz (bande verte) ne garde que le spectre analogique d'origine et élimine toutes les répliques : le signal analogique est <b>parfaitement retrouvé</b>.</div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="q8">
+      <div class="exo-head">Q8 — Le repliement spectral <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">« Schématiser la situation du repliement spectral (comme précédemment, avec \(f_e=10\) kHz mais maintenant avec \(f_{max}=7\) kHz). »</p>
+        <p>Ici \(f_{max}=7\ \text{kHz}>f_e/2=5\) kHz : <b>Nyquist-Shannon n'est pas respecté</b> (\(f_e=10&lt;2f_{max}=14\) kHz). La réplique \(f_e-f\) s'étend de \(f_e-f_{max}=3\) kHz à \(f_e=10\) kHz, alors que le spectre analogique occupe de 0 à 7 kHz : les deux se <b>recouvrent entre 3 et 7 kHz</b>.</p>
+        <figure><svg viewBox="0 0 700 286" width="700" xmlns="http://www.w3.org/2000/svg" role="img">
+<line x1="60.0" y1="192.0" x2="680.0" y2="192.0" stroke="#1e293b" stroke-width="1.5"/>
+<text x="54.0" y="196.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">0</text>
+<line x1="60.0" y1="161.6" x2="680.0" y2="161.6" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54.0" y="165.6" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">1</text>
+<line x1="60.0" y1="131.2" x2="680.0" y2="131.2" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54.0" y="135.2" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">2</text>
+<line x1="60.0" y1="100.8" x2="680.0" y2="100.8" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54.0" y="104.8" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">3</text>
+<line x1="60.0" y1="70.4" x2="680.0" y2="70.4" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54.0" y="74.4" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">4</text>
+<line x1="60.0" y1="40.0" x2="680.0" y2="40.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54.0" y="44.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">5</text>
+<line x1="60.0" y1="40.0" x2="60.0" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="60.0" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">0</text>
+<line x1="122.0" y1="40.0" x2="122.0" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="122.0" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">2</text>
+<line x1="184.0" y1="40.0" x2="184.0" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="184.0" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">4</text>
+<line x1="246.0" y1="40.0" x2="246.0" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="246.0" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">6</text>
+<line x1="308.0" y1="40.0" x2="308.0" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="308.0" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">8</text>
+<line x1="370.0" y1="40.0" x2="370.0" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="370.0" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">10</text>
+<line x1="432.0" y1="40.0" x2="432.0" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="432.0" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">12</text>
+<line x1="494.0" y1="40.0" x2="494.0" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="494.0" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">14</text>
+<line x1="556.0" y1="40.0" x2="556.0" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="556.0" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">16</text>
+<line x1="618.0" y1="40.0" x2="618.0" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="618.0" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">18</text>
+<line x1="680.0" y1="40.0" x2="680.0" y2="192.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="680.0" y="206.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">20</text>
+<text x="390.0" y="222.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="middle">f (kHz)</text>
+<text x="64.0" y="26.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="start">amplitude (V)</text>
+<rect x="60.0" y="40" width="155.0" height="152" fill="#0d9488" fill-opacity="0.08"/>
+<line x1="215.0" y1="40.0" x2="215.0" y2="192.0" stroke="#0d9488" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="219.0" y="52.0" fill="#0d9488" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="start" font-weight="700">fe/2 = 5 kHz</text>
+<line x1="370.0" y1="36.0" x2="370.0" y2="192.0" stroke="#dc2626" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="370.0" y="32.0" fill="#dc2626" font-family="Segoe UI,Arial,sans-serif" font-size="12" text-anchor="middle" font-weight="700" font-style="italic">fe</text>
+<polygon points="370.0,192.0 370.0,70.4 153.0,192.0" fill="#15803d" fill-opacity="0.3" stroke="#15803d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="370.0,192.0 370.0,70.4 587.0,192.0" fill="#15803d" fill-opacity="0.3" stroke="#15803d" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="60.0,192.0 60.0,70.4 277.0,192.0" fill="#1d4ed8" fill-opacity="0.35" stroke="#1d4ed8" stroke-width="1.6" stroke-linejoin="round"/>
+<rect x="153.0" y="228" width="124.0" height="8" fill="#dc2626" fill-opacity="0.55"/>
+<text x="215.0" y="250.0" fill="#dc2626" font-family="Segoe UI,Arial,sans-serif" font-size="11.5" text-anchor="middle" font-weight="700">recouvrement 3 → 7 kHz : repliement spectral</text>
+<text x="69.3" y="52.2" fill="#1d4ed8" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="start" font-weight="700">spectre analogique</text>
+<text x="410.3" y="94.7" fill="#15803d" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="start" font-weight="700">réplique fe + f</text>
+<text x="295.6" y="140.3" fill="#15803d" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="start" font-weight="700">réplique fe − f</text>
+</svg><figcaption>Repliement spectral pour \(f_{max}=7\) kHz et \(f_e=10\) kHz : la réplique \(f_e-f\) (de 3 à 10 kHz) recouvre le spectre analogique (de 0 à 7 kHz) entre 3 et 7 kHz.</figcaption></figure>
+        <div class="res">Dans la zone de recouvrement, une composante à la fréquence \(f\in[3\,;7]\) kHz est confondue avec sa réplique de fréquence \(f_e-f\in[3\,;7]\) kHz : par exemple <b>7 kHz apparaît à \(10-7=3\) kHz</b>. Les hautes fréquences se « replient » dans la bande utile ; l'information est <b>perdue</b> et ne peut plus être corrigée par un filtre passe-bas a posteriori.</div>
+        <div class="method"><span class="lab">Remède</span> Placer <b>avant</b> l'échantillonneur un filtre passe-bas anti-repliement de coupure \(f_c=f_e/2=5\) kHz : on perd les composantes entre 5 et 7 kHz, mais on évite qu'elles viennent polluer la bande \([0\,;5]\) kHz ; ou bien <b>augmenter \(f_e\)</b> au-dessus de 14 kHz.</div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="q9">
+      <div class="exo-head">Q9 — La FFT de l'oscilloscope : \(f_e=20\,f_{div}\) <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">« Quand on effectue une FFT avec les oscilloscopes du labo, la fréquence d'échantillonnage utilisée dépend de l'échelle choisie \(f_{div}\) (en Hz/div), de sorte que \(f_e=20\times f_{div}\). Quel est l'intérêt d'un tel rapport ? »</p>
+        <p>L'écran compte <b>10 divisions</b> horizontales. L'axe des fréquences affiché va donc de 0 à \(10\,f_{div}\) :</p>
+        \[ 10\,f_{div}=\frac{20\,f_{div}}2=\frac{f_e}2 . \]
+        <div class="res">Les 10 divisions de l'écran couvrent <b>exactement \([0\,;\,f_e/2]\)</b> : toute la bande où le spectre est utilisable (<b>au-dessus de \(f_e/2\), il n'y a que des répliques / images miroir</b>). Le rapport 20 garantit donc que tout ce qui est affiché respecte Nyquist-Shannon (pas de repliement visible) et que tout le spectre utile est affiché, sans gaspiller d'espace écran.</div>
+        <p>En pratique : on choisit \(f_{div}\) tel que \(10\,f_{div}>f_{max}\) du signal, et l'oscilloscope règle seul \(f_e=20f_{div}\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card" id="q10">
+      <div class="exo-head">Q10 — Nombre d'échantillons et fréquences du spectre <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">« On considère un signal échantillonné à 100 kHz pendant 500 ms. Combien d'échantillons auront été enregistrés ? Quelles seront les fréquences possiblement présentes dans le spectre ? »</p>
+        <p><b>Échantillons.</b> \(N=f_e\,\tau=100\times10^3\times0{,}5=\mathbf{5{,}0\times10^4}\) échantillons.</p>
+        <p><b>Résolution.</b> \(\Delta f=\dfrac1\tau=\dfrac1{0{,}5}=2\ \text{Hz}\) (ou \(\dfrac{f_e}N=\dfrac{10^5}{5\times10^4}=2\) Hz ✓).</p>
+        <div class="res">Le spectre contient \(N=50\,000\) fréquences, <b>multiples de 2 Hz</b> : \(f_k=k\times2\ \text{Hz}\), \(k=0,1,\dots,49\,999\), soit de <b>0 à 99 998 Hz</b>. Seules celles de <b>0 à \(f_e/2=50\) kHz</b> (25 000 fréquences) sont exploitables : au-delà, ce sont les images miroir.</div>
+        <div class="note"><span class="lab">Conséquence</span> Une composante de fréquence non multiple de 2 Hz (par exemple 1 001 Hz) tombe entre deux fréquences calculées : son pic est éclaté (fuite spectrale). Pour l'éviter, il faut un nombre entier de périodes dans la fenêtre : \(\tau=N_0T\).</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="exos">
+    <h2>3. Exercices d'entraînement créés</h2>
+    <p>Quatre exercices pour fixer les calculs types du chapitre. Toutes les valeurs numériques ont été vérifiées par calcul.</p>
+
+    <div class="exo-card" id="ex1">
+      <div class="exo-head">Ex 1 — Dimensionner la numérisation d'un signal audio <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Un microphone délivre une tension comprise entre \(-1\) V et \(+1\) V. On le numérise avec un CAN de 16 bits, à \(f_e=44{,}1\) kHz, en stéréo, pendant 4 minutes. (1) Pas de quantification ? (2) Nombre minimal de bits pour \(q\le100\ \mu\)V ? (3) Taille du fichier et débit ? (4) Fréquence de coupure du filtre anti-repliement pour un signal audio jusqu'à 20 kHz ?</p>
+        <p class="q">1) Pas de quantification</p>
+        <p>\(\Delta s=2\) V, \(p=16\) : \(\ q=\dfrac{2}{2^{16}-1}=\dfrac2{65\,535}\approx\mathbf{30{,}5\ \mu V}\).</p>
+        <p class="q">2) Bits minimaux pour \(q\le100\ \mu\)V</p>
+        <p>\(\dfrac2{2^p-1}\le10^{-4}\iff2^p-1\ge20\,000\iff2^p\ge20\,001\iff p\ge\log_2(20\,001)\approx14{,}29\). Donc :</p>
+        <div class="res">\(p=\mathbf{15}\) bits (\(q=61\ \mu\)V) ; avec 14 bits, \(q=2/16\,383=122\ \mu\)V \(>100\ \mu\)V : insuffisant.</div>
+        <p class="q">3) Taille du fichier et débit</p>
+        <p>\(\tau=4\times60=240\) s ; \(N=240\times44\,100=10\,584\,000\) échantillons <b>par voie</b>. Deux voies, 16 bits :</p>
+        \[ \text{taille}=10\,584\,000\times2\times16=3{,}387\times10^8\ \text{bits}=4{,}23\times10^7\ \text{octets}\approx\mathbf{42{,}3\ Mo}\ (40{,}4\ \text{Mio}). \]
+        <div class="res">Débit : \(44\,100\times16\times2=1\,411\,200\) bit/s \(\approx\mathbf{1{,}41\ Mbit/s}\) : c'est le débit d'un CD audio.</div>
+        <p class="q">4) Filtre anti-repliement</p>
+        <p>Nyquist : \(f_e=44{,}1\ \text{kHz}>2\times20=40\) kHz ✓. Le filtre passe-bas placé avant l'échantillonneur a pour coupure \(f_c=\dfrac{f_e}2=\mathbf{22{,}05\ kHz}\) : il laisse passer toute la bande audio (jusqu'à 20 kHz) et élimine ce qui dépasse \(f_e/2\). L'écart entre 20 et 22,05 kHz laisse la place à la pente non idéale du filtre.</p>
+      </div>
+    </div>
+
+    <div class="exo-card" id="ex2">
+      <div class="exo-head">Ex 2 — Voltmètre numérique 8 bits <span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Un voltmètre numérique 8 bits, calibre 0–5 V, mesure une tension vraie de 3,30 V. (1) Pas de quantification ? (2) Valeur affichée et code binaire ? (3) Erreur de quantification maximale ? (4) Combien de bits faut-il pour \(q\le1\) mV sur ce calibre ?</p>
+        <p class="q">1) Pas de quantification</p>
+        <p>\(q=\dfrac{5}{2^8-1}=\dfrac5{255}\approx\mathbf{19{,}6\ mV}\).</p>
+        <p class="q">2) Valeur affichée et code</p>
+        <p>\(\dfrac{3{,}30}{0{,}019608}=168{,}3\ \to\ n=168\). Valeur affichée \(=168\times19{,}608\ \text{mV}\approx\mathbf{3{,}294\ V}\). Code : \(168=128+32+8=2^7+2^5+2^3\) :</p>
+        <div class="res">Code de sortie : <b>10101000</b> (8 bits) ; affichage 3,294 V ; erreur \(-5{,}9\) mV.</div>
+        <p class="q">3) Erreur maximale</p>
+        <p>L'arrondi au plus proche donne une erreur au plus égale à \(q/2\) :</p>
+        <div class="res">\(\varepsilon_{max}=\dfrac q2\approx9{,}8\ \text{mV}\) (soit \(0{,}2\ \%\) de la pleine échelle) ; l'erreur de 5,9 mV obtenue est bien inférieure.</div>
+        <p class="q">4) Bits nécessaires pour \(q\le1\) mV</p>
+        <p>\(\dfrac5{2^p-1}\le10^{-3}\iff2^p-1\ge5\,000\iff p\ge\log_2(5\,001)\approx12{,}29\). </p>
+        <div class="res">\(p=\mathbf{13}\) bits (\(q=5/8\,191=0{,}61\) mV) ; avec 12 bits \(q=1{,}22\) mV \(>1\) mV : insuffisant.</div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="ex3">
+      <div class="exo-head">Ex 3 — Repliement d'une sinusoïde de 7 kHz <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Un signal \(s(t)=\sin(2\pi f t)\) avec \(f=7\) kHz est échantillonné à \(f_e=10\) kHz. (1) Nyquist-Shannon est-il respecté ? (2) Placer les raies du spectre échantillonné et la fréquence apparente. (3) Montrer par le calcul que les échantillons sont ceux d'une sinusoïde de 3 kHz. (4) Que se passerait-il pour \(f=10\) kHz échantillonné à \(f_e=14{,}5\) kHz (figure du cours) ? (5) Remèdes.</p>
+        <p class="q">1) Critère de Nyquist-Shannon</p>
+        <p>\(2f=14\) kHz \(>f_e=10\) kHz : <b>non respecté</b> (il faudrait \(f_e>14\) kHz). Il y a repliement.</p>
+        <p class="q">2) Spectre échantillonné</p>
+        <p>Raies à \(nf_e\pm f\) : 7 kHz (signal), \(f_e-7=3\) kHz, \(f_e+7=17\) kHz, \(2f_e-7=13\) kHz, \(2f_e+7=27\) kHz… Dans la bande \([0\,;f_e/2]=[0\,;5]\) kHz (celle que l'on « voit » après reconstruction), la <b>seule raie</b> est à <b>3 kHz</b> : c'est la fréquence apparente (l'<b>alias</b>), \(f_{alias}=|f-kf_e|=|7-10|=3\) kHz.</p>
+        <p class="q">3) Calcul sur les échantillons</p>
+        <p>Aux dates \(t_n=nT_e=n/10^4\) s :</p>
+        \[ s_n=\sin\Bigl(2\pi\frac{7000\,n}{10\,000}\Bigr)=\sin(1{,}4\pi n)=\sin(1{,}4\pi n-2\pi n)=\sin(-0{,}6\pi n)=-\sin\Bigl(2\pi\frac{3000\,n}{10\,000}\Bigr). \]
+        <p>Les échantillons de la sinusoïde de 7 kHz sont <b>exactement</b> ceux de \(-\sin(2\pi\cdot3000\,t)\) (alias à 3 kHz, de phase inversée).</p>
+        <figure><svg viewBox="0 0 660 230" width="660" xmlns="http://www.w3.org/2000/svg" role="img">
+<line x1="60.0" y1="161.1" x2="640.0" y2="161.1" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54.0" y="165.1" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">−1</text>
+<line x1="60.0" y1="102.0" x2="640.0" y2="102.0" stroke="#1e293b" stroke-width="1"/>
+<text x="54.0" y="106.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">0</text>
+<line x1="60.0" y1="42.9" x2="640.0" y2="42.9" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54.0" y="46.9" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="end">1</text>
+<line x1="60.0" y1="34.0" x2="60.0" y2="170.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="60.0" y="184.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">0,0</text>
+<line x1="176.0" y1="34.0" x2="176.0" y2="170.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="176.0" y="184.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">0,2</text>
+<line x1="292.0" y1="34.0" x2="292.0" y2="170.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="292.0" y="184.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">0,4</text>
+<line x1="408.0" y1="34.0" x2="408.0" y2="170.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="408.0" y="184.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">0,6</text>
+<line x1="524.0" y1="34.0" x2="524.0" y2="170.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="524.0" y="184.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">0,8</text>
+<line x1="640.0" y1="34.0" x2="640.0" y2="170.0" stroke="#e2e8f0" stroke-width="1"/>
+<text x="640.0" y="184.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="10.5" text-anchor="middle">1,0</text>
+<text x="350.0" y="200.0" fill="#475569" font-family="Segoe UI,Arial,sans-serif" font-size="11" text-anchor="middle">t (ms)</text>
+<polyline points="60.0,102.0 61.4,95.8 62.8,89.7 64.2,83.7 65.5,77.9 66.9,72.4 68.3,67.2 69.7,62.4 71.1,58.0 72.5,54.1 73.8,50.7 75.2,47.9 76.6,45.7 78.0,44.1 79.4,43.2 80.8,42.9 82.1,43.2 83.5,44.2 84.9,45.8 86.3,48.1 87.7,50.9 89.1,54.3 90.5,58.3 91.8,62.7 93.2,67.5 94.6,72.8 96.0,78.3 97.4,84.1 98.8,90.1 100.1,96.2 101.5,102.4 102.9,108.6 104.3,114.8 105.7,120.7 107.1,126.5 108.4,132.0 109.8,137.2 111.2,142.0 112.6,146.3 114.0,150.2 115.4,153.5 116.8,156.3 118.1,158.4 119.5,160.0 120.9,160.9 122.3,161.1 123.7,160.7 125.1,159.7 126.4,158.0 127.8,155.7 129.2,152.8 130.6,149.4 132.0,145.4 133.4,141.0 134.7,136.1 136.1,130.9 137.5,125.3 138.9,119.5 140.3,113.5 141.7,107.3 143.1,101.1 144.4,94.9 145.8,88.8 147.2,82.8 148.6,77.1 150.0,71.6 151.4,66.5 152.7,61.7 154.1,57.4 155.5,53.6 156.9,50.3 158.3,47.6 159.7,45.4 161.1,43.9 162.4,43.1 163.8,42.9 165.2,43.3 166.6,44.4 168.0,46.1 169.4,48.5 170.7,51.4 172.1,54.9 173.5,58.9 174.9,63.4 176.3,68.3 177.7,73.5 179.0,79.1 180.4,85.0 181.8,91.0 183.2,97.1 184.6,103.3 186.0,109.5 187.4,115.6 188.7,121.6 190.1,127.3 191.5,132.8 192.9,137.9 194.3,142.6 195.7,146.9 197.0,150.7 198.4,153.9 199.8,156.6 201.2,158.7 202.6,160.1 204.0,160.9 205.3,161.1 206.7,160.6 208.1,159.5 209.5,157.7 210.9,155.3 212.3,152.4 213.7,148.9 215.0,144.8 216.4,140.3 217.8,135.4 219.2,130.1 220.6,124.5 222.0,118.6 223.3,112.6 224.7,106.4 226.1,100.2 227.5,94.0 228.9,87.9 230.3,82.0 231.6,76.3 233.0,70.8 234.4,65.8 235.8,61.1 237.2,56.8 238.6,53.1 240.0,49.9 241.3,47.2 242.7,45.2 244.1,43.8 245.5,43.0 246.9,42.9 248.3,43.4 249.6,44.6 251.0,46.4 252.4,48.8 253.8,51.9 255.2,55.4 256.6,59.5 257.9,64.0 259.3,69.0 260.7,74.3 262.1,79.9 263.5,85.8 264.9,91.9 266.3,98.0 267.6,104.2 269.0,110.4 270.4,116.5 271.8,122.4 273.2,128.1 274.6,133.5 275.9,138.6 277.3,143.3 278.7,147.5 280.1,151.2 281.5,154.3 282.9,156.9 284.2,158.9 285.6,160.3 287.0,161.0 288.4,161.1 289.8,160.5 291.2,159.3 292.6,157.4 293.9,155.0 295.3,151.9 296.7,148.3 298.1,144.2 299.5,139.6 300.9,134.6 302.2,129.3 303.6,123.7 305.0,117.8 306.4,111.7 307.8,105.5 309.2,99.3 310.5,93.2 311.9,87.1 313.3,81.2 314.7,75.5 316.1,70.1 317.5,65.1 318.9,60.4 320.2,56.2 321.6,52.6 323.0,49.4 324.4,46.9 325.8,45.0 327.2,43.6 328.5,43.0 329.9,42.9 331.3,43.6 332.7,44.8 334.1,46.7 335.5,49.2 336.8,52.3 338.2,56.0 339.6,60.1 341.0,64.7 342.4,69.7 343.8,75.1 345.2,80.8 346.5,86.7 347.9,92.7 349.3,98.9 350.7,105.1 352.1,111.3 353.5,117.3 354.8,123.2 356.2,128.9 357.6,134.3 359.0,139.3 360.4,143.9 361.8,148.0 363.2,151.7 364.5,154.8 365.9,157.3 367.3,159.2 368.7,160.4 370.1,161.1 371.5,161.0 372.8,160.4 374.2,159.0 375.6,157.1 377.0,154.6 378.4,151.4 379.8,147.8 381.1,143.6 382.5,138.9 383.9,133.9 385.3,128.5 386.7,122.8 388.1,116.9 389.5,110.8 390.8,104.7 392.2,98.5 393.6,92.3 395.0,86.2 396.4,80.3 397.8,74.7 399.1,69.4 400.5,64.4 401.9,59.8 403.3,55.7 404.7,52.1 406.1,49.0 407.4,46.6 408.8,44.7 410.2,43.5 411.6,42.9 413.0,43.0 414.4,43.7 415.8,45.1 417.1,47.1 418.5,49.7 419.9,52.8 421.3,56.5 422.7,60.7 424.1,65.4 425.4,70.5 426.8,75.9 428.2,81.6 429.6,87.5 431.0,93.6 432.4,99.8 433.7,106.0 435.1,112.1 436.5,118.2 437.9,124.1 439.3,129.7 440.7,135.0 442.1,140.0 443.4,144.5 444.8,148.6 446.2,152.1 447.6,155.2 449.0,157.6 450.4,159.4 451.7,160.6 453.1,161.1 454.5,161.0 455.9,160.2 457.3,158.8 458.7,156.8 460.0,154.1 461.4,150.9 462.8,147.2 464.2,142.9 465.6,138.2 467.0,133.2 468.4,127.7 469.7,122.0 471.1,116.1 472.5,110.0 473.9,103.8 475.3,97.6 476.7,91.4 478.0,85.4 479.4,79.5 480.8,73.9 482.2,68.6 483.6,63.7 485.0,59.2 486.3,55.1 487.7,51.6 489.1,48.7 490.5,46.3 491.9,44.5 493.3,43.4 494.7,42.9 496.0,43.1 497.4,43.9 498.8,45.3 500.2,47.4 501.6,50.1 503.0,53.3 504.3,57.1 505.7,61.4 507.1,66.1 508.5,71.2 509.9,76.7 511.3,82.4 512.6,88.4 514.0,94.5 515.4,100.7 516.8,106.9 518.2,113.0 519.6,119.0 521.0,124.9 522.3,130.5 523.7,135.7 525.1,140.6 526.5,145.1 527.9,149.1 529.3,152.6 530.6,155.5 532.0,157.9 533.4,159.6 534.8,160.7 536.2,161.1 537.6,160.9 538.9,160.1 540.3,158.6 541.7,156.4 543.1,153.7 544.5,150.4 545.9,146.6 547.3,142.3 548.6,137.5 550.0,132.4 551.4,126.9 552.8,121.2 554.2,115.2 555.6,109.1 556.9,102.9 558.3,96.7 559.7,90.5 561.1,84.5 562.5,78.7 563.9,73.1 565.3,67.9 566.6,63.0 568.0,58.6 569.4,54.6 570.8,51.2 572.2,48.3 573.6,46.0 574.9,44.3 576.3,43.3 577.7,42.9 579.1,43.1 580.5,44.0 581.9,45.6 583.2,47.7 584.6,50.5 586.0,53.8 587.4,57.7 588.8,62.0 590.2,66.8 591.6,72.0 592.9,77.5 594.3,83.3 595.7,89.2 597.1,95.4 598.5,101.6 599.9,107.8 601.2,113.9 602.6,119.9 604.0,125.7 605.4,131.2 606.8,136.5 608.2,141.3 609.5,145.7 610.9,149.7 612.3,153.1 613.7,155.9 615.1,158.2 616.5,159.8 617.9,160.8 619.2,161.1 620.6,160.8 622.0,159.9 623.4,158.3 624.8,156.1 626.2,153.3 627.5,149.9 628.9,146.0 630.3,141.6 631.7,136.8 633.1,131.6 634.5,126.1 635.8,120.3 637.2,114.3 638.6,108.2 640.0,102.0" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-linejoin="round"/>
+<polyline points="60.0,102.0 61.4,104.7 62.8,107.3 64.2,110.0 65.5,112.6 66.9,115.2 68.3,117.8 69.7,120.3 71.1,122.8 72.5,125.3 73.8,127.7 75.2,130.1 76.6,132.4 78.0,134.6 79.4,136.8 80.8,138.9 82.1,141.0 83.5,142.9 84.9,144.8 86.3,146.6 87.7,148.3 89.1,149.9 90.5,151.4 91.8,152.8 93.2,154.1 94.6,155.3 96.0,156.4 97.4,157.4 98.8,158.3 100.1,159.0 101.5,159.7 102.9,160.2 104.3,160.6 105.7,160.9 107.1,161.1 108.4,161.1 109.8,161.1 111.2,160.9 112.6,160.6 114.0,160.1 115.4,159.6 116.8,158.9 118.1,158.2 119.5,157.3 120.9,156.3 122.3,155.2 123.7,153.9 125.1,152.6 126.4,151.2 127.8,149.7 129.2,148.0 130.6,146.3 132.0,144.5 133.4,142.6 134.7,140.6 136.1,138.6 137.5,136.5 138.9,134.3 140.3,132.0 141.7,129.7 143.1,127.3 144.4,124.9 145.8,122.4 147.2,119.9 148.6,117.3 150.0,114.8 151.4,112.1 152.7,109.5 154.1,106.9 155.5,104.2 156.9,101.6 158.3,98.9 159.7,96.2 161.1,93.6 162.4,91.0 163.8,88.4 165.2,85.8 166.6,83.3 168.0,80.8 169.4,78.3 170.7,75.9 172.1,73.5 173.5,71.2 174.9,69.0 176.3,66.8 177.7,64.7 179.0,62.7 180.4,60.7 181.8,58.9 183.2,57.1 184.6,55.4 186.0,53.8 187.4,52.3 188.7,50.9 190.1,49.7 191.5,48.5 192.9,47.4 194.3,46.4 195.7,45.6 197.0,44.8 198.4,44.2 199.8,43.7 201.2,43.3 202.6,43.1 204.0,42.9 205.3,42.9 206.7,43.0 208.1,43.2 209.5,43.5 210.9,43.9 212.3,44.5 213.7,45.2 215.0,46.0 216.4,46.9 217.8,47.9 219.2,49.0 220.6,50.3 222.0,51.6 223.3,53.1 224.7,54.6 226.1,56.2 227.5,58.0 228.9,59.8 230.3,61.7 231.6,63.7 233.0,65.8 234.4,67.9 235.8,70.1 237.2,72.4 238.6,74.7 240.0,77.1 241.3,79.5 242.7,82.0 244.1,84.5 245.5,87.1 246.9,89.7 248.3,92.3 249.6,94.9 251.0,97.6 252.4,100.2 253.8,102.9 255.2,105.5 256.6,108.2 257.9,110.8 259.3,113.5 260.7,116.1 262.1,118.6 263.5,121.2 264.9,123.7 266.3,126.1 267.6,128.5 269.0,130.9 270.4,133.2 271.8,135.4 273.2,137.5 274.6,139.6 275.9,141.6 277.3,143.6 278.7,145.4 280.1,147.2 281.5,148.9 282.9,150.4 284.2,151.9 285.6,153.3 287.0,154.6 288.4,155.7 289.8,156.8 291.2,157.7 292.6,158.6 293.9,159.3 295.3,159.9 296.7,160.4 298.1,160.7 299.5,161.0 300.9,161.1 302.2,161.1 303.6,161.0 305.0,160.8 306.4,160.4 307.8,160.0 309.2,159.4 310.5,158.7 311.9,157.9 313.3,156.9 314.7,155.9 316.1,154.8 317.5,153.5 318.9,152.1 320.2,150.7 321.6,149.1 323.0,147.5 324.4,145.7 325.8,143.9 327.2,142.0 328.5,140.0 329.9,137.9 331.3,135.7 332.7,133.5 334.1,131.2 335.5,128.9 336.8,126.5 338.2,124.1 339.6,121.6 341.0,119.0 342.4,116.5 343.8,113.9 345.2,111.3 346.5,108.6 347.9,106.0 349.3,103.3 350.7,100.7 352.1,98.0 353.5,95.4 354.8,92.7 356.2,90.1 357.6,87.5 359.0,85.0 360.4,82.4 361.8,79.9 363.2,77.5 364.5,75.1 365.9,72.8 367.3,70.5 368.7,68.3 370.1,66.1 371.5,64.0 372.8,62.0 374.2,60.1 375.6,58.3 377.0,56.5 378.4,54.9 379.8,53.3 381.1,51.9 382.5,50.5 383.9,49.2 385.3,48.1 386.7,47.1 388.1,46.1 389.5,45.3 390.8,44.6 392.2,44.0 393.6,43.6 395.0,43.2 396.4,43.0 397.8,42.9 399.1,42.9 400.5,43.0 401.9,43.3 403.3,43.6 404.7,44.1 406.1,44.7 407.4,45.4 408.8,46.3 410.2,47.2 411.6,48.3 413.0,49.4 414.4,50.7 415.8,52.1 417.1,53.6 418.5,55.1 419.9,56.8 421.3,58.6 422.7,60.4 424.1,62.4 425.4,64.4 426.8,66.5 428.2,68.6 429.6,70.8 431.0,73.1 432.4,75.5 433.7,77.9 435.1,80.3 436.5,82.8 437.9,85.4 439.3,87.9 440.7,90.5 442.1,93.2 443.4,95.8 444.8,98.5 446.2,101.1 447.6,103.8 449.0,106.4 450.4,109.1 451.7,111.7 453.1,114.3 454.5,116.9 455.9,119.5 457.3,122.0 458.7,124.5 460.0,126.9 461.4,129.3 462.8,131.6 464.2,133.9 465.6,136.1 467.0,138.2 468.4,140.3 469.7,142.3 471.1,144.2 472.5,146.0 473.9,147.8 475.3,149.4 476.7,150.9 478.0,152.4 479.4,153.7 480.8,155.0 482.2,156.1 483.6,157.1 485.0,158.0 486.3,158.8 487.7,159.5 489.1,160.1 490.5,160.5 491.9,160.8 493.3,161.0 494.7,161.1 496.0,161.1 497.4,160.9 498.8,160.7 500.2,160.3 501.6,159.8 503.0,159.2 504.3,158.4 505.7,157.6 507.1,156.6 508.5,155.5 509.9,154.3 511.3,153.1 512.6,151.7 514.0,150.2 515.4,148.6 516.8,146.9 518.2,145.1 519.6,143.3 521.0,141.3 522.3,139.3 523.7,137.2 525.1,135.0 526.5,132.8 527.9,130.5 529.3,128.1 530.6,125.7 532.0,123.2 533.4,120.7 534.8,118.2 536.2,115.6 537.6,113.0 538.9,110.4 540.3,107.8 541.7,105.1 543.1,102.4 544.5,99.8 545.9,97.1 547.3,94.5 548.6,91.9 550.0,89.2 551.4,86.7 552.8,84.1 554.2,81.6 555.6,79.1 556.9,76.7 558.3,74.3 559.7,72.0 561.1,69.7 562.5,67.5 563.9,65.4 565.3,63.4 566.6,61.4 568.0,59.5 569.4,57.7 570.8,56.0 572.2,54.3 573.6,52.8 574.9,51.4 576.3,50.1 577.7,48.8 579.1,47.7 580.5,46.7 581.9,45.8 583.2,45.1 584.6,44.4 586.0,43.9 587.4,43.4 588.8,43.1 590.2,42.9 591.6,42.9 592.9,42.9 594.3,43.1 595.7,43.4 597.1,43.8 598.5,44.3 599.9,45.0 601.2,45.7 602.6,46.6 604.0,47.6 605.4,48.7 606.8,49.9 608.2,51.2 609.5,52.6 610.9,54.1 612.3,55.7 613.7,57.4 615.1,59.2 616.5,61.1 617.9,63.0 619.2,65.1 620.6,67.2 622.0,69.4 623.4,71.6 624.8,73.9 626.2,76.3 627.5,78.7 628.9,81.2 630.3,83.7 631.7,86.2 633.1,88.8 634.5,91.4 635.8,94.0 637.2,96.7 638.6,99.3 640.0,102.0" fill="none" stroke="#dc2626" stroke-width="1.8" stroke-linejoin="round" stroke-dasharray="6 4"/>
+<circle cx="60.0" cy="102.0" r="3.8" fill="#1e293b"/>
+<circle cx="118.0" cy="158.2" r="3.8" fill="#1e293b"/>
+<circle cx="176.0" cy="67.2" r="3.8" fill="#1e293b"/>
+<circle cx="234.0" cy="67.2" r="3.8" fill="#1e293b"/>
+<circle cx="292.0" cy="158.2" r="3.8" fill="#1e293b"/>
+<circle cx="350.0" cy="102.0" r="3.8" fill="#1e293b"/>
+<circle cx="408.0" cy="45.8" r="3.8" fill="#1e293b"/>
+<circle cx="466.0" cy="136.8" r="3.8" fill="#1e293b"/>
+<circle cx="524.0" cy="136.8" r="3.8" fill="#1e293b"/>
+<circle cx="582.0" cy="45.8" r="3.8" fill="#1e293b"/>
+<circle cx="640.0" cy="102.0" r="3.8" fill="#1e293b"/>
+<text x="64.0" y="20.0" fill="#1d4ed8" font-family="Segoe UI,Arial,sans-serif" font-size="11.5" text-anchor="start" font-weight="700">— signal 7 kHz</text>
+<text x="250.0" y="20.0" fill="#dc2626" font-family="Segoe UI,Arial,sans-serif" font-size="11.5" text-anchor="start" font-weight="700">- - alias à 3 kHz</text>
+<text x="640.0" y="20.0" fill="#1e293b" font-family="Segoe UI,Arial,sans-serif" font-size="11.5" text-anchor="end" font-weight="700">● échantillons à fe = 10 kHz</text>
+</svg><figcaption>Signal de 7 kHz (bleu) échantillonné à 10 kHz (points) : les points se trouvent aussi sur la sinusoïde de 3 kHz de phase inversée (rouge pointillé) — c'est l'alias.</figcaption></figure>
+        <div class="res">Un signal à 7 kHz, sous-échantillonné à 10 kHz, est indiscernable (à partir des échantillons seuls) d'un signal à 3 kHz.</div>
+        <p class="q">4) Cas du cours : 10 kHz à 14,5 kHz</p>
+        <p>\(2f=20>14{,}5\) : repliement. Alias \(=|10-14{,}5|=4{,}5\) kHz : l'allure « à gauche » de la figure du cours, avec une enveloppe à basse fréquence qui n'est pas celle du signal. À \(f_e=52{,}5\) kHz \(>20\) kHz : correct (à droite).</p>
+        <p class="q">5) Remèdes</p>
+        <ul>
+          <li>filtrer <b>avant</b> l'échantillonneur : passe-bas anti-repliement de coupure \(f_c&lt;f_e/2=5\) kHz, qui supprime la composante à 7 kHz ;</li>
+          <li>ou <b>augmenter \(f_e\)</b> au-dessus de 14 kHz.</li>
+        </ul>
+        <div class="warnbox"><span class="lab">Piège</span> Une fois échantillonné, <b>on ne peut pas dire</b> si la composante à 3 kHz est réelle ou si elle est l'alias d'une composante à 7, 13 ou 17 kHz : d'où la nécessité du filtre anti-repliement <b>en amont</b>.</div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="ex4">
+      <div class="exo-head">Ex 4 — FFT à l'oscilloscope : résolution et fuite spectrale <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">L'oscilloscope calcule une FFT sur \(N=10\,000\) échantillons avec l'échelle \(f_{div}=500\) Hz/div. (1) \(f_e\), durée d'acquisition, résolution, plage de fréquences affichée ? (2) On injecte une sinusoïde de 1 000 Hz : que voit-on ? (3) Et pour 1 000,5 Hz ? (4) Comment supprimer la fuite pour 1 000,5 Hz ? (5) Peut-on séparer deux raies à 1 000 et 1 002 Hz ?</p>
+        <p class="q">1) Paramètres de la FFT</p>
+        <p>\(f_e=20f_{div}=20\times500=10\ \text{kHz}\) ; \(\tau=\dfrac N{f_e}=\dfrac{10\,000}{10\,000}=\mathbf{1\ s}\) ; \(\Delta f=\dfrac1\tau=\mathbf{1\ Hz}\). Plage affichée : \(10\,f_{div}=5\) kHz \(=f_e/2\) (cf. Q9).</p>
+        <p class="q">2) Sinusoïde de 1 000 Hz</p>
+        <p>\(f\tau=1000\) <b>périodes entières</b> dans la fenêtre et 1 000 Hz est un multiple de \(\Delta f=1\) Hz : on voit <b>une seule raie</b> fine à 1 000 Hz (pas de fuite).</p>
+        <p class="q">3) Sinusoïde de 1 000,5 Hz</p>
+        <p>\(f\tau=1\,000{,}5\) périodes : <b>non entier</b>. 1 000,5 Hz n'est pas un multiple de \(\Delta f=1\) Hz (les fréquences calculées sont 1000 et 1001 Hz) : le pic est <b>éclaté</b> en plusieurs pics autour (fuite spectrale), d'amplitude diminuée à chaque fréquence calculée.</p>
+        <p class="q">4) Suppression de la fuite</p>
+        <p>Il faut un nombre entier de périodes : \(\tau=N_0T=N_0/f\). Avec \(f=1\,000{,}5\) Hz, \(N_0=2001\) donne \(\tau=2001/1000{,}5=2\) s :</p>
+        <div class="res">On double la durée d'acquisition : \(\tau=2\) s, soit \(N=f_e\tau=20\,000\) échantillons ; alors \(\Delta f=0{,}5\) Hz et 1 000,5 Hz est un multiple de \(\Delta f\) : raie unique.</div>
+        <p class="q">5) Résolution de deux raies</p>
+        <p>L'écart 2 Hz vaut deux fois \(\Delta f=1\) Hz : les deux raies tombent sur deux fréquences calculées distinctes (1 000 et 1 002 Hz), séparées par une fréquence intermédiaire (1 001 Hz) : on peut les séparer. Avec \(\tau=0{,}5\) s (\(\Delta f=2\) Hz) elles seraient côte à côte, à la limite de la résolution. En règle générale, plus l'écart entre deux raies est petit, plus il faut une durée d'acquisition longue (\(\tau\) grand devant l'inverse de l'écart).</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Feuille officielle de D. Courtois, récupérée sur Moodle (AM2 · Électronique · Chapitre 6). Cliquez pour ouvrir.</p>
+    <div class="docs-group">
+      <h3>Cours</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="Cours6.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Ch6 Électronique numérique — cours avec questions (19/10/2026)</span><span class="badge">Cours</span><span class="arrow">↗</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Cursus AM2 · P2030 · Semestre 3 · Partie Électronique, D. Courtois. Ce chapitre fait suite au <a href="ch5-oscillateurs.html">Ch5 — Oscillateurs auto-entretenus</a> ; la résolution du spectre est utilisée dans les FFT des TP d'électronique.</p>
+  </section>
+</main>
+<script src="../assets/gate.js"></script>
+</body>
+</html>
