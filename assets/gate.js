@@ -1,3 +1,32 @@
+/* Lien « Documents donnés » : la page (images chargées tardivement) change de hauteur
+   pendant le scroll lisse, qui s'arrête trop haut. On recale jusqu'à stabilisation. */
+(function () {
+  "use strict";
+  function goDocs() {
+    var el = document.getElementById("docs");
+    if (!el) return;
+    var tries = 0;
+    function fix() {
+      var de = document.documentElement;
+      var top = el.getBoundingClientRect().top + window.pageYOffset - 70;
+      var max = de.scrollHeight - window.innerHeight;
+      de.style.scrollBehavior = "auto";
+      window.scrollTo(0, Math.max(0, Math.min(top, max)));
+      de.style.scrollBehavior = "";
+      if (++tries < 12) setTimeout(fix, 150);
+    }
+    fix();
+  }
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href="#docs"]');
+    if (!a) return;
+    e.preventDefault();
+    if (history.replaceState) history.replaceState(null, "", "#docs");
+    goDocs();
+  });
+  if (location.hash === "#docs") window.addEventListener("load", goDocs);
+})();
+
 (function () {
   "use strict";
   var STORAGE_KEY = "revecam_unlocked_v1";
