@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Document — Révision ECAM</title>
+<style>
+  :root { --bg:#1e1f22; --bar:#2b2d31; --fg:#e8e8e8; --ac:#6aa9ff; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font-family:system-ui,sans-serif; }
+  header { position:sticky; top:0; z-index:5; display:flex; gap:8px; align-items:center; padding:8px 12px; background:var(--bar); box-shadow:0 1px 6px #0006; }
+  header .t { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:14px; }
+  header button, header a { background:#3a3d44; color:var(--fg); border:0; border-radius:6px; padding:6px 11px; font-size:14px; text-decoration:none; cursor:pointer; }
+  header button:hover, header a:hover { background:#4a4e57; }
+  #pages { display:flex; flex-direction:column; align-items:center; gap:10px; padding:12px 6px 40px; }
+  canvas { max-width:100%; height:auto; background:#fff; box-shadow:0 2px 10px #0008; }
+  #msg { text-align:center; padding:40px 16px; }
+</style>
+</head>
+<body>
+<header>
+  <span class="t" id="title">Chargement…</span>
+  <button id="zo" title="Dézoomer">−</button>
+  <button id="zi" title="Zoomer">+</button>
+  <a id="dl" download title="Télécharger">⬇</a>
+</header>
+<div id="msg">Chargement du document…</div>
+<div id="pages"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+(function () {
+  var f = new URLSearchParams(location.search).get("f");
+  var msg = document.getElementById("msg"), box = document.getElementById("pages");
+  if (!f || /^[a-z]+:/i.test(f)) { msg.textContent = "Document introuvable."; return; }
+  var url = new URL(f, location.href).href;
+  var name = decodeURIComponent(f.split("/").pop());
+  document.title = name + " — Révision ECAM";
+  document.getElementById("title").textContent = name;
+  document.getElementById("dl").href = url;
+  document.getElementById("dl").setAttribute("download", name);
+
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  var scale = Math.min(2, Math.max(1, window.devicePixelRatio || 1) * 1.4), cssW = null, pdf;
+
+  function widthFor(vp1) { return Math.min(window.innerWidth - 12, 1000 * (cssW || 1)); }
+
+  function render() {
+    box.innerHTML = "";
+    var chain = Promise.resolve();
+    for (let n = 1; n <= pdf.numPages; n++) {
+      chain = chain.then(function () { return pdf.getPage(n); }).then(function (page) {
+        var v1 = page.getViewport({ scale: 1 });
+        var w = Math.min(window.innerWidth - 12, 1000 * (cssW || 1));
+        var css = w / v1.width;
+        var vp = page.getViewport({ scale: css * scale });
+        var c = document.createElement("canvas");
+        c.width = vp.width; c.height = vp.height;
+        c.style.width = w + "px";
+        box.appendChild(c);
+        return page.render({ canvasContext: c.getContext("2d"), viewport: vp }).promise;
+      });
+    }
+    return chain;
+  }
+
+  pdfjsLib.getDocument(url).promise.then(function (d) {
+    pdf = d; msg.style.display = "none"; return render();
+  }).catch(function () {
+    msg.innerHTML = 'Impossible d’afficher ce document. <a style="color:var(--ac)" href="' + url + '">Ouvrir le fichier</a>';
+  });
+
+  function zoom(k) { cssW = Math.max(0.4, Math.min(3, (cssW || 1) * k)); if (pdf) render(); }
+  document.getElementById("zi").onclick = function () { zoom(1.25); };
+  document.getElementById("zo").onclick = function () { zoom(0.8); };
+})();
+</script>
+<script src="gate.js"></script>
+</body>
+</html>
