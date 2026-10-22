@@ -29,8 +29,7 @@ window.MathJax = {
   <h1 class="title">Matrices et applications linéaires</h1>
   <p class="lead">Chapitre 3 de L. Graissot (ECAM AM2, 2026-2027) : rang, matrice d'une application linéaire,
   changement de base, matrices semblables. La page contient le <b>cours complet</b> (14 exemples du polycopié
-  corrigés pas à pas), 3 exercices créés et le <b>TD3 corrigé (exercices 1 → 9)</b>. L'énoncé de l'exercice 10
-  est incomplet dans le scan fourni (voir la note en fin de TD).</p>
+  corrigés pas à pas), 3 exercices créés et le <b>TD3 corrigé (exercices 1 → 13)</b>. Les exercices 10 à 13 viennent de la dernière page du TD, fournie séparément.</p>
 
   <div class="toc-mini">
     <b>Sommaire du chapitre</b>
@@ -606,7 +605,7 @@ window.MathJax = {
 
   <!-- ============================================================= -->
   <section class="block" id="td">
-    <h2>2. Correction TD3 — Matrices et applications linéaires (exercices 1 → 9)</h2>
+    <h2>2. Correction TD3 — Matrices et applications linéaires (exercices 1 → 13)</h2>
     <div class="note">
       TD3 de L. Graissot (ECAM AM2, 2026-2027), <b>pas de corrigé officiel</b> → tout résolu maison, méthode
       complète sans raccourci, avec vérification de chaque résultat (produit matriciel ou substitution).
@@ -1083,9 +1082,116 @@ window.MathJax = {
       </div>
     </div>
 
-    <div class="warnbox"><b>Exercice 10 — non traité (scan incomplet).</b> Le scan s'arrête au début de l'exercice 10 : on lit seulement
-    « Soit \(f\in\mathcal L(\mathbb R^3)\), l'application linéaire dont la matrice dans la base canonique est : » puis la page se termine, sans la matrice ni les questions.
-    Les pages 4 à 20 du PDF sont directement le cours (la page du TD qui contenait la suite manque). Il suffit d'envoyer une photo de cette dernière page du TD pour que je corrige l'exercice.</div>
+    <!-- ======================= EX 10 ======================= -->
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 10 — Polynôme annulateur, sous-espaces propres et diagonalisation</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <figure>
+          <img src="td3-img/ex10.png" alt="Énoncé TD3 Exercice 10 — matrice M de f dans la base canonique, (M−I)(M+3I)=0" loading="lazy">
+          <figcaption>Énoncé (TD3, L. Graissot) — Exercice 10 (dernière page du TD).</figcaption>
+        </figure>
+        \[ M=\begin{pmatrix}2&-2&-1\\2&-3&-2\\1&-2&0\end{pmatrix}. \]
+
+        <p class="q">1) Vérifier que \((M-I)(M+3I)=0\)</p>
+        \[ M-I=\begin{pmatrix}1&-2&-1\\2&-4&-2\\1&-2&-1\end{pmatrix},\qquad M+3I=\begin{pmatrix}5&-2&-1\\2&0&-2\\1&-2&3\end{pmatrix}. \]
+        <p>Ligne 1 de \(M-I\) par les colonnes de \(M+3I\) : \((5-4-1,\ -2+0+2,\ -1+4-3)=(0,0,0)\). Ligne 2 : \((10-8-2,\ -4+0+4,\ -2+8-6)=(0,0,0)\). Ligne 3 : \((5-4-1,\ -2+0+2,\ -1+4-3)=(0,0,0)\).</p>
+        <div class="res">\((M-I)(M+3I)=0\), c'est-à-dire \(M^2+2M-3I=0\).</div>
+
+        <p class="q">2) En déduire \(\operatorname{Ker}(f-\mathrm{id})\oplus\operatorname{Ker}(f+3\,\mathrm{id})=\mathbb R^3\)</p>
+        <p>Soit \(x\in\mathbb R^3\). On pose \(a=\tfrac14(M+3I)x\) et \(b=\tfrac14(I-M)x\). Alors \(a+b=\tfrac14\cdot4x=x\).</p>
+        <p>\((M-I)a=\tfrac14(M-I)(M+3I)x=0\) : \(a\in\operatorname{Ker}(f-\mathrm{id})\). Et \((M+3I)b=\tfrac14(M+3I-M^2-3M)x=\tfrac14(M+3I-(3I-2M)-3M)x=0\) (car \(M^2=3I-2M\)) : \(b\in\operatorname{Ker}(f+3\,\mathrm{id})\).</p>
+        <p>Intersection nulle : si \(v\) est dans les deux noyaux, \(Mv=v\) et \(Mv=-3v\), donc \(4v=0\).</p>
+        <div class="res">\(\operatorname{Ker}(f-\mathrm{id})+\operatorname{Ker}(f+3\,\mathrm{id})=\mathbb R^3\) et la somme est directe.</div>
+
+        <p class="q">3) Dimension et base de chacun des deux noyaux</p>
+        <p>\(\operatorname{Ker}(f-\mathrm{id})\) : \(MX=X\iff(M-I)X=0\iff x-2y-z=0\) (les lignes de \(M-I\) sont proportionnelles à \((1,-2,-1)\)). Base : \(u_1=(2,1,0)\), \(u_2=(1,0,1)\) ; dimension \(2\).</p>
+        <p>\(\operatorname{Ker}(f+3\,\mathrm{id})\) : \((M+3I)X=0\) : ligne 2 donne \(x=z\), ligne 1 donne \(5x-2y-x=0\), soit \(y=2x\). Base : \(u_3=(1,2,1)\) ; dimension \(1\). Contrôle ligne 3 : \(1-4+3=0\) ✓.</p>
+        <div class="res">\(\dim\operatorname{Ker}(f-\mathrm{id})=2\), base \(\big((2,1,0),(1,0,1)\big)\) ; \(\dim\operatorname{Ker}(f+3\,\mathrm{id})=1\), base \(\big((1,2,1)\big)\). Total \(2+1=3\) ✓.</div>
+
+        <p class="q">4) Base diagonalisante, matrice diagonale (sans calcul)</p>
+        <p>La base \(\big((2,1,0),(1,0,1),(1,2,1)\big)\) réunit une base de chaque noyau : \(f(u_1)=u_1\), \(f(u_2)=u_2\), \(f(u_3)=-3u_3\). Elle est bien une base de \(\mathbb R^3\) (question 2).</p>
+        <div class="res">\(\operatorname{Mat}_{\mathcal B}(f)=\operatorname{diag}(1,\,1,\,-3)\).</div>
+      </div>
+    </div>
+
+    <!-- ======================= EX 11 ======================= -->
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 11 — Projecteur : noyau, image et matrice diagonale</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <figure>
+          <img src="td3-img/ex11.png" alt="Énoncé TD3 Exercice 11 — matrice A de f dans la base canonique" loading="lazy">
+          <figcaption>Énoncé (TD3, L. Graissot) — Exercice 11 (dernière page du TD).</figcaption>
+        </figure>
+        \[ A=\begin{pmatrix}3&-2&-4\\1&0&-2\\1&-1&-1\end{pmatrix}. \]
+
+        <p class="q">1) Calcul de \(A^2\) ; conséquence pour \(f\)</p>
+        <p>Ligne 1 de \(A\) × colonnes de \(A\) : \((9-2-4,\ -6+0+4,\ -12+4+4)=(3,-2,-4)\). Ligne 2 : \((3+0-2,\ -2+0+2,\ -4+0+2)=(1,0,-2)\). Ligne 3 : \((3-1-1,\ -2+0+1,\ -4+2+1)=(1,-1,-1)\).</p>
+        <div class="res">\(A^2=A\), donc \(f\circ f=f\) : \(f\) est un <b>projecteur</b>. On a \(\mathbb R^3=\operatorname{Ker}f\oplus\operatorname{Im}f\) et \(f\) est l'identité sur \(\operatorname{Im}f\).</div>
+
+        <p class="q">2) Base de \(\operatorname{Ker}f\) et de \(\operatorname{Im}f\)</p>
+        <p><b>Noyau.</b> \(AX=0\) : ligne 2 donne \(x=2z\) ; ligne 3 donne \(x-y-z=0\), soit \(y=z\). Ligne 1 : \(6z-2z-4z=0\) ✓. Donc \(\operatorname{Ker}f=\operatorname{Vect}(2,1,1)\), dimension \(1\).</p>
+        <p><b>Image.</b> Comme \(f\) est un projecteur, \(\operatorname{Im}f=\operatorname{Ker}(f-\mathrm{id})\) : \((A-I)X=0\) avec \(A-I=\begin{pmatrix}2&-2&-4\\1&-1&-2\\1&-1&-2\end{pmatrix}\), soit \(x-y-2z=0\). Base : \((1,1,0)\), \((2,0,1)\), dimension \(2\).</p>
+        <p>Contrôle : \(A(1,1,0)=(1,1,0)\) et \(A(2,0,1)=(2,0,1)\) ✓ ; \(A(2,1,1)=(0,0,0)\) ✓.</p>
+        <div class="res">\(\operatorname{Ker}f=\operatorname{Vect}\big((2,1,1)\big)\), \(\operatorname{Im}f=\operatorname{Vect}\big((1,1,0),(2,0,1)\big)\).</div>
+
+        <p class="q">3) Matrice de \(f\) dans une base de vecteurs de \(\operatorname{Ker}f\) et \(\operatorname{Im}f\)</p>
+        <p>Base \(\mathcal B=(u_1,u_2,u_3)\) avec \(u_1=(2,1,1)\in\operatorname{Ker}f\), \(u_2=(1,1,0)\) et \(u_3=(2,0,1)\) dans \(\operatorname{Im}f\). Matrice de passage \(P=\begin{pmatrix}2&1&2\\1&1&0\\1&0&1\end{pmatrix}\), \(\det P=2(1)-1(1)+2(-1)=-1\neq0\) : c'est une base.
+        \(f(u_1)=0\), \(f(u_2)=u_2\), \(f(u_3)=u_3\).</p>
+        <div class="res">\(\operatorname{Mat}_{\mathcal B}(f)=\operatorname{diag}(0,\,1,\,1)\), soit \(P^{-1}AP=\operatorname{diag}(0,1,1)\).</div>
+      </div>
+    </div>
+
+    <!-- ======================= EX 12 ======================= -->
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 12 — Symétrie : éléments caractéristiques</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <figure>
+          <img src="td3-img/ex12.png" alt="Énoncé TD3 Exercice 12 — matrice M de s dans la base canonique" loading="lazy">
+          <figcaption>Énoncé (TD3, L. Graissot) — Exercice 12 (dernière page du TD).</figcaption>
+        </figure>
+        \[ M=\begin{pmatrix}0&-2&-1\\0&1&0\\-1&-2&0\end{pmatrix}. \]
+
+        <p class="q">Prouver que \(s\) est une symétrie</p>
+        <p>Ligne 1 × colonnes : \((0+0+1,\ 0-2+2,\ 0+0+0)=(1,0,0)\). Ligne 2 : \((0,1,0)\). Ligne 3 \((-1,-2,0)\) : colonne 1 \(\to(-1)(0)+(-2)(0)+0(-1)=0\), colonne 2 \(\to(-1)(-2)+(-2)(1)+0=0\), colonne 3 \(\to(-1)(-1)+(-2)(0)+0=1\) : \((0,0,1)\).</p>
+        <div class="res">\(M^2=I\), donc \(s\circ s=\mathrm{id}\). Comme \(M\neq\pm I\), \(s\) est une <b>symétrie</b> (involution non triviale).</div>
+
+        <p class="q">Éléments caractéristiques</p>
+        <p><b>Espace fixe</b> \(\operatorname{Ker}(s-\mathrm{id})=\operatorname{Ker}(M-I)\) : \(M-I=\begin{pmatrix}-1&-2&-1\\0&0&0\\-1&-2&-1\end{pmatrix}\), donc \(x+2y+z=0\). C'est un plan \(\mathcal P\), base \((2,-1,0)\), \((1,0,-1)\). Contrôle : \(M(2,-1,0)=(2,-1,0)\) ✓.</p>
+        <p><b>Direction</b> \(\operatorname{Ker}(s+\mathrm{id})=\operatorname{Ker}(M+I)\) : \(M+I=\begin{pmatrix}1&-2&-1\\0&2&0\\-1&-2&1\end{pmatrix}\) ; ligne 2 donne \(y=0\), ligne 1 donne \(x=z\). Direction \(\mathcal D=\operatorname{Vect}(1,0,1)\). Contrôle : \(M(1,0,1)=(-1,0,-1)=-(1,0,1)\) ✓.</p>
+        <p>\((1,0,1)\notin\mathcal P\) car \(1+0+1=2\neq0\) : \(\mathbb R^3=\mathcal P\oplus\mathcal D\).</p>
+        <div class="res">\(s\) est la <b>symétrie par rapport au plan \(\mathcal P : x+2y+z=0\), parallèlement à la droite \(\mathcal D=\operatorname{Vect}(1,0,1)\)</b>.</div>
+      </div>
+    </div>
+
+    <!-- ======================= EX 13 ======================= -->
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 13 — Déplacement d'un robot : translation puis rotation (coordonnées homogènes)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <figure>
+          <img src="td3-img/ex13.png" alt="Énoncé TD3 Exercice 13 — translation de 1 m selon Ox suivie d'une rotation de π/2 autour de Oz" loading="lazy">
+          <figcaption>Énoncé (TD3, L. Graissot) — Exercice 13 (dernière page du TD).</figcaption>
+        </figure>
+
+        <p class="q">1) Matrices du déplacement et image d'un vecteur quelconque</p>
+        <p>La <b>translation</b> \(t(x,y,z)=(x+1,y,z)\) n'est pas linéaire (\(t(0)\neq0\)) : on passe en <b>coordonnées homogènes</b> \((x,y,z,1)\) pour que tout soit une matrice \(4\times4\).</p>
+        <p>Rotation d'angle \(\tfrac\pi2\) autour de \(Oz\) : \((x,y)\mapsto(-y,x)\), \(z\mapsto z\), soit \(R=\begin{pmatrix}0&-1&0\\1&0&0\\0&0&1\end{pmatrix}\) (partie linéaire).</p>
+        \[ T=\begin{pmatrix}1&0&0&1\\0&1&0&0\\0&0&1&0\\0&0&0&1\end{pmatrix},\qquad
+        \mathrm{Rot}=\begin{pmatrix}0&-1&0&0\\1&0&0&0\\0&0&1&0\\0&0&0&1\end{pmatrix}. \]
+        <p>Le robot translate <b>puis</b> tourne : la translation agit en premier, donc elle est à droite dans le produit \(\mathcal A=\mathrm{Rot}\times T\) :</p>
+        \[ \mathcal A=\mathrm{Rot}\,T=\begin{pmatrix}0&-1&0&0\\1&0&0&1\\0&0&1&0\\0&0&0&1\end{pmatrix}. \]
+        <div class="res">Pour un point \(M(x,y,z)\), son image est \(M'(-y,\ x+1,\ z)\) : \(\mathcal A\,(x,y,z,1)^T=(-y,\ x+1,\ z,\ 1)^T\). Pour un <b>vecteur</b> \(\vec v=(x,y,z)\), la translation ne le déplace pas : son image est \((-y,\ x,\ z)\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> Inverser l'ordre (rotation puis translation) donnerait \((-y+1,\ x,\ z)\) : le texte dit « translation <b>suivie</b> d'une rotation », donc la translation agit en premier.</div>
+
+        <p class="q">2) Image de \(M(1,-1,0)\)</p>
+        <p>\(\mathcal A\,(1,-1,0,1)^T=(-(-1),\ 1+1,\ 0,\ 1)^T=(1,2,0,1)^T\).</p>
+        <div class="res">La pièce initialement en \(M(1,-1,0)\) arrive en \((1,2,0)\).</div>
+
+        <p class="q">3) Point de départ pour arriver en \(N(1,\sqrt3,0)\)</p>
+        <p>On cherche \(P(x,y,z)\) tel que \((-y,\ x+1,\ z)=(1,\sqrt3,0)\) : \(y=-1\), \(x=\sqrt3-1\), \(z=0\).</p>
+        <p>Contrôle : l'image de \(P\) est \((1,\ \sqrt3-1+1,\ 0)=(1,\sqrt3,0)\) ✓.</p>
+        <div class="res">Il faut positionner la pièce en \(P\big(\sqrt3-1,\ -1,\ 0\big)\).</div>
+      </div>
+    </div>
   </section>
 
   <section class="block" id="docs">
@@ -1095,9 +1201,10 @@ window.MathJax = {
       <h3>TD3 (p.1-3) + cours du chapitre 3 (p.4-20) (L. Graissot)</h3>
       <ul class="doc-list">
         <li><a class="doc-item" href="../assets/pdf.html?f=../aem2-mathematiques/2026-10-05_scan-TD3-et-cours-ch3.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Scan TD3 + cours Ch3 — 20 p.</span><span class="badge">p.1 → 3 = TD3 · p.4 → 20 = cours</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../assets/pdf.html?f=../documents/aem2-mathematiques/ch3-matrices-applications-lineaires/TD3-derniere-page.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD3 — dernière page (exercices 10 → 13)</span><span class="badge">exercices 10 → 13</span><span class="arrow">↗</span></a></li>
       </ul>
     </div>
-    <p class="docs-note">Cursus AM2 · Mathématiques · L. Graissot, 2026-2027. <b>Cours complet</b> ; <b>TD3 : exercices 1 → 9 corrigés</b> (pas de corrigé officiel — résolu maison).
+    <p class="docs-note">Cursus AM2 · Mathématiques · L. Graissot, 2026-2027. <b>Cours complet</b> ; <b>TD3 : exercices 1 → 13 corrigés</b> (pas de corrigé officiel — résolu maison).
     Voir aussi <a href="ch2-applications-lineaires.html">Ch2 — Applications linéaires</a>.</p>
   </section>
 
