@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lecteur de DVD — correction détaillée (PFD)</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  :root{
+    --bg:#fafafa; --text:#2d3748; --muted:#64748b; --title:#1a202c;
+    --accent:#0f766e; --accent-soft:#ccfbf1; --line:#e5e7eb; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--text);
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    font-size:17px; line-height:1.7}
+  .page{max-width:800px; margin:0 auto; padding:2.5rem 2rem 4rem}
+  .nav{display:flex; flex-wrap:wrap; gap:1rem; font-size:.92rem; margin-bottom:1.5rem}
+  .nav a{color:var(--accent); text-decoration:none; font-weight:600}
+  .nav a:hover{text-decoration:underline}
+  p, ul, ol{margin:0 0 1.5rem}
+  li{margin-bottom:.45rem}
+  strong{color:var(--title)}
+  h1{font-size:2.1rem; line-height:1.2; color:var(--title); margin:.6rem 0 .6rem}
+  h2{font-size:1.5rem; color:var(--title); margin:3.4rem 0 1.1rem; padding-bottom:.45rem;
+    border-bottom:2px solid var(--accent-soft)}
+  h3{font-size:1.15rem; color:var(--accent); margin:2.2rem 0 .7rem}
+  .kicker{font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
+  .lead{color:var(--muted); font-size:1.08rem; margin-bottom:2rem}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1.4rem 1.6rem; margin:1.5rem 0}
+  .card h3:first-child{margin-top:0}
+
+  /* ---- Question : texte à gauche, encadré méthode à droite ---- */
+  .qblock{display:grid; grid-template-columns:minmax(0,1fr) 250px; gap:1.8rem;
+    margin:2.4rem 0 0; padding-top:1.8rem; border-top:1px solid var(--line)}
+  .qtitle{font-size:1.2rem; font-weight:800; color:var(--title); margin:0 0 1rem}
+  .qnum{display:inline-block; background:var(--accent); color:#fff; border-radius:7px;
+    padding:.12rem .6rem; font-size:.9rem; margin-right:.5rem; vertical-align:middle}
+  .ask{background:#f8fafc; border-left:4px solid #94a3b8; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .ask .lab, .lab{display:block; font-size:.72rem; font-weight:800; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:.25rem}
+  .demarche{margin:0 0 1.2rem}
+  .calc{background:#fff; border:1px solid var(--line); border-radius:10px; padding:.8rem 1rem .4rem; margin:0 0 1.2rem; overflow-x:auto}
+  .res{background:#ecfdf5; border-left:4px solid #059669; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .res .lab{color:#047857}
+
+  .aside{align-self:start; border-radius:12px; padding:1rem 1.1rem; font-size:.93rem; line-height:1.55;
+    background:#f0fdfa; border:1px solid #99f6e4}
+  .aside.formula{background:#f5f3ff; border-color:#ddd6fe}
+  .aside.apply{background:#fffbeb; border-color:#fde68a}
+  .aside.piege{background:#fff1f2; border-color:#fecdd3}
+  .aside .lab{color:var(--accent); margin-bottom:.35rem}
+  .aside.formula .lab{color:#6d28d9}
+  .aside.apply .lab{color:#b45309}
+  .aside.piege .lab{color:#be123c}
+  .aside p, .aside ul{margin:0 0 .7rem}
+  .aside ul{padding-left:1.1rem}
+  .aside li{margin-bottom:.3rem}
+  .aside > :last-child{margin-bottom:0}
+
+  .warn{background:#fff7ed; border-left:4px solid #ea580c; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .warn .lab{color:#c2410c}
+  .info{background:#f0f9ff; border-left:4px solid #0284c7; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .info .lab{color:#0369a1}
+
+  figure{margin:1.4rem 0 1.8rem; text-align:center}
+  figure img{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:10px; padding:.5rem}
+  figcaption{font-size:.88rem; color:var(--muted); margin-top:.5rem; line-height:1.5}
+
+  /* ---- Schéma de la chaîne ---- */
+  .chain{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:.5rem; margin:1.4rem 0 1.8rem}
+  .node{background:var(--accent); color:#fff; font-weight:700; border-radius:10px; padding:.6rem .95rem; text-align:center; font-size:.95rem}
+  .node.bati{background:#475569}
+  .link{font-size:.82rem; color:var(--muted); text-align:center; padding:0 .3rem; max-width:150px; line-height:1.3}
+  .link::before{content:"→"; display:block; font-size:1.3rem; color:var(--accent); line-height:1.1}
+
+  table{width:100%; border-collapse:collapse; margin:.6rem 0 1.4rem; font-size:.93rem; background:#fff}
+  th, td{border:1px solid var(--line); padding:.5rem .6rem; text-align:center}
+  th{background:#f1f5f9; color:var(--title)}
+  td.l, th.l{text-align:left}
+  tr.ok td{background:#f0fdf4}
+  tr.pick td{background:#ccfbf1; font-weight:700}
+
+  .svgwrap{background:#fff; border:1px solid var(--line); border-radius:12px; padding:1rem; margin:1.2rem 0 1.6rem}
+  .svgwrap svg{display:block; width:100%; height:auto}
+  .svgwrap figcaption{margin-top:.6rem}
+
+  .steps{counter-reset:s; list-style:none; padding:0; margin:0 0 1.5rem}
+  .steps li{counter-increment:s; position:relative; padding:.2rem 0 .2rem 2.7rem; margin-bottom:.9rem}
+  .steps li::before{content:counter(s); position:absolute; left:0; top:.1rem; width:1.9rem; height:1.9rem;
+    border-radius:50%; background:var(--accent-soft); color:var(--accent); font-weight:800; text-align:center; line-height:1.9rem}
+  .steps a{color:var(--accent); font-weight:600}
+
+  footer{margin-top:3.5rem; padding-top:1.2rem; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem}
+  footer a{color:var(--accent)}
+  mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%}
+
+  @media (max-width:680px){
+    body{font-size:16px}
+    .page{padding:1.6rem 1.1rem 3rem}
+    h1{font-size:1.65rem}
+    h2{font-size:1.3rem; margin-top:2.6rem}
+    .qblock{grid-template-columns:1fr; gap:1rem}
+    .chain{flex-direction:column}
+    .link::before{content:"↓"}
+  }
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+<div class="page">
+
+  <nav class="nav">
+    <a href="../index.html#am2">← Accueil</a>
+    <a href="ch3-dynamique-solide.html">← Chapitre 3 (cours)</a>
+    <a href="../assets/pdf.html?f=../documents/aem2-si/ch3-dynamique-solide/PFD-PT-TD-lecteur_de_dvd-prof.pdf" target="_blank" rel="noopener">Énoncé original (PDF)</a>
+  </nav>
+
+  <div class="kicker">AM2 · SI · Chapitre 3 — Principe fondamental de la dynamique (TD)</div>
+  <h1>Lecteur de DVD : correction détaillée</h1>
+  <p class="lead">Un exercice du TD « Principe fondamental de la dynamique » (CPGE PT, S2I). Pour chaque question,
+  on dit d'abord ce qu'elle demande, puis la démarche, puis le calcul complet. Les encadrés à droite
+  donnent la méthode, la formule à retenir ou le piège à éviter.</p>
+
+  <!-- ============================================================ -->
+  <h2>1. Avant de commencer : l'essentiel en quelques lignes</h2>
+
+  <div class="card">
+    <h3>Le principe fondamental de la dynamique (PFD)</h3>
+    <p>Le PFD relie <strong>les actions qui agissent sur un objet</strong> à <strong>la façon dont il accélère</strong>.
+    Il existe deux versions utiles ici :</p>
+    <ul>
+      <li><strong>En translation</strong> (le chariot glisse) : la somme des forces est égale à la masse fois l'accélération,
+      \(\sum \vec F = m\,\vec a\).</li>
+      <li><strong>En rotation autour d'un axe fixe</strong> (la vis tourne) : la somme des moments autour de cet axe est égale à
+      l'inertie fois l'accélération angulaire, \(\sum M = I\,\ddot\theta\).</li>
+    </ul>
+    <h3>Les mots du TD</h3>
+    <ul>
+      <li><strong>Torseur de liaison</strong> : une liaison entre deux pièces transmet des actions. On les écrit sous forme
+      de deux vecteurs : une <em>résultante</em> (forces \(X, Y, Z\)) et un <em>moment</em> (couples \(L, M, N\)).
+      Les lettres sont les inconnues du problème.</li>
+      <li><strong>Liaison hélicoïdale</strong> : c'est une liaison « vis-écrou ». Quand la vis tourne d'un tour, l'écrou avance
+      d'une distance appelée <strong>pas</strong> \(p\).</li>
+      <li><strong>Liaison glissière</strong> : une pièce ne peut que glisser le long d'un axe (ici les deux colonnes, direction \(\vec x_0\)).</li>
+      <li><strong>Liaison pivot</strong> : une pièce ne peut que tourner autour d'un axe.</li>
+    </ul>
+  </div>
+
+  <h3>Le système en une chaîne</h3>
+  <div class="chain" role="img" aria-label="Moteur 1 vers vis 2 vers chariot 3, le bâti 0 guide le chariot">
+    <span class="node">Moteur 1</span>
+    <span class="link">couple \(C_m\)</span>
+    <span class="node">Vis 2</span>
+    <span class="link">liaison hélicoïdale, pas \(p\)</span>
+    <span class="node">Chariot 3<br><small>(diode laser)</small></span>
+  </div>
+  <p>Le moteur fait tourner la vis. La vis fait avancer le chariot, qui porte la diode laser. Le chariot est guidé par deux
+  colonnes fixées au bâti 0 : il ne peut donc que glisser, pas tourner.</p>
+
+  <figure>
+    <img src="img/pfd-dvd-photo.png" alt="Photo du lecteur de DVD ouvert avec les pièces 0, 2, 3 et 4 repérées" loading="lazy">
+    <figcaption>Le lecteur de DVD ouvert. Pièce 3 : le chariot avec la diode laser. Pièce 2 : la vis. Pièce 1 : le moteur.
+    Pièce 0 : le bâti. Pièce 4 : le plateau qui fait tourner le DVD (non étudié ici).</figcaption>
+  </figure>
+
+  <div class="info">
+    <span class="lab">Ce que demande le TD au final</span>
+    Trouver le <strong>couple que le moteur doit fournir</strong> pour accélérer le chariot, puis trouver le <strong>pas de vis</strong>
+    qui rend ce couple le plus petit possible, et enfin vérifier que le <strong>moteur choisi</strong> convient.
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>2. La démarche en 5 étapes</h2>
+  <p>Toute la correction suit le même fil. Chaque étape produit une équation qu'on réutilise dans la suivante :</p>
+  <ol class="steps">
+    <li><strong>Isoler le chariot 3</strong> et appliquer le PFD en translation (questions 1 à 3). On obtient l'effort
+    \(X_{23}=m_3\,a\).</li>
+    <li><strong>Isoler la vis 2</strong> et appliquer le PFD en rotation (questions 4 à 6). On obtient
+    \(C_m + L_{32} = I_{vis}\,\ddot\theta\).</li>
+    <li><strong>Relier translation et rotation</strong> grâce au pas de la liaison hélicoïdale (question 7).</li>
+    <li><strong>Éliminer les inconnues</strong> pour exprimer \(C_m\) en fonction de \(a\) et de \(p\) (question 8).</li>
+    <li><strong>Optimiser le pas</strong> (question 9), puis faire l'application numérique et choisir le moteur (questions 10 et 11).</li>
+  </ol>
+
+  <!-- ============================================================ -->
+  <h2>3. Le modèle et les données</h2>
+
+  <p>Le modèle (schéma de l'énoncé, hypothèses, données) est rappelé ici. Le schéma de l'énoncé est répété juste au-dessus de la correction de la question 1.</p>
+
+  <div class="card">
+    <h3>Hypothèses (à garder en tête)</h3>
+    <ul>
+      <li>Les liaisons sont <strong>parfaites</strong> : pas de frottement.</li>
+      <li>Le centre de gravité de la vis est <strong>sur l'axe de rotation</strong>.</li>
+      <li>Le <strong>poids de la vis est négligé</strong>.</li>
+      <li>Le couple moteur \(C_m\) est <strong>constant</strong> pendant le démarrage.</li>
+    </ul>
+    <h3>Données numériques</h3>
+    <table>
+      <tr><th class="l">Grandeur</th><th>Valeur</th><th class="l">Signification</th></tr>
+      <tr><td class="l">\(m_3\)</td><td>10 g = \(0{,}01\) kg</td><td class="l">masse du chariot (laser compris)</td></tr>
+      <tr><td class="l">\(I_{vis}\)</td><td>\(4{,}2\cdot10^{-9}\) kg·m²</td><td class="l">inertie de la vis autour de son axe (modèle SolidWorks)</td></tr>
+      <tr><td class="l">\(p\)</td><td>à déterminer</td><td class="l">pas de la vis (distance avancée par tour)</td></tr>
+      <tr><td class="l">\(g\)</td><td>9,81 m·s⁻²</td><td class="l">pesanteur</td></tr>
+    </table>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>4. Correction question par question</h2>
+
+  <!-- ---- Partie A ---- -->
+  <h3>Partie A — Le chariot 3 (questions 1 à 3)</h3>
+
+  <div class="card">
+    <span class="lab">Énoncé (modèle de l'exercice)</span>
+    <figure>
+      <img src="img/pfd-dvd-modele.png" alt="Schéma cinématique : vis 2 en rouge, chariot 3 en bleu, moteur, bâti 0, repère x0 y0" loading="lazy">
+      <figcaption>Schéma du modèle. Les points \(B\), \(C\), \(D\), \(A\) sont les points de liaison. La vis 2 tourne autour de l'axe
+      \((D,\vec x_0)\). Le chariot 3 glisse suivant \(\vec x_0\).</figcaption>
+    </figure>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span> Quel est le mouvement de 3 par rapport à 0 ?</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Le chariot tourne-t-il, glisse-t-il, ou fait-il autre chose ? Dans quelle direction ?</div>
+      <p class="demarche"><span class="lab">Démarche</span>
+        Le chariot est guidé par deux colonnes parallèles à \(\vec x_0\). Une pièce guidée ainsi ne peut que glisser le long de ces colonnes.
+        Il suffit donc de donner la direction de ce glissement.</p>
+      <div class="res"><span class="lab">Réponse</span>
+        Le chariot 3 a une <strong>translation rectiligne de direction \(\vec x_0\)</strong> par rapport à 0.
+        Tous ses points ont la même vitesse et la même accélération. Un seul paramètre suffit : la position \(x(t)\), avec \(a=\ddot x\).</div>
+    </div>
+    <aside class="aside">
+      <span class="lab">Méthode</span>
+      <p>Une <strong>translation</strong> signifie que tous les points de la pièce font le même mouvement. Si la pièce tourne, ce n'est pas une translation.</p>
+      <p>« Rectiligne » veut dire en ligne droite.</p>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q2</span> Établir l'inventaire des actions mécaniques extérieures sur 3.</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Lister tout ce qui pousse ou retient le chariot, en l'écrivant sous forme de torseurs. « Extérieur » signifie : venant d'une autre pièce.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Le <strong>poids</strong> du chariot, toujours présent, appliqué en son centre de gravité \(G_3\).</li>
+        <li>La <strong>glissière</strong> avec le bâti 0, aux colonnes, au point \(A\).</li>
+        <li>La <strong>liaison hélicoïdale</strong> avec la vis 2, au point \(B\).</li>
+        <li>Pour chaque liaison, on met une inconnue par composante. Une liaison qui laisse libre un mouvement annule la composante correspondante :
+        la glissière laisse le chariot glisser suivant \(\vec x_0\), donc il n'y a <strong>aucune force suivant \(\vec x_0\)</strong> venant de 0.</li>
+      </ol>
+      <div class="calc">
+        \[\{\tau_{\text{pes}\to3}\}:\quad \vec R=-m_3\,g\,\vec y_0,\qquad \vec M_{G_3}=\vec 0\]
+        \[\{\tau_{0\to3}\}\ (\text{glissière en }A):\quad \vec R=Y_{03}\vec y_0+Z_{03}\vec z_0,\qquad \vec M_A=L_{03}\vec x_0+M_{03}\vec y_0+N_{03}\vec z_0\]
+        \[\{\tau_{2\to3}\}\ (\text{hélicoïdale en }B):\quad \vec R=X_{23}\vec x_0+Y_{23}\vec y_0+Z_{23}\vec z_0,\qquad \vec M_B=L_{23}\vec x_0+M_{23}\vec y_0+N_{23}\vec z_0\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        Trois actions : le poids (\(-m_3 g\,\vec y_0\) en \(G_3\)), la glissière en \(A\) (forces \(Y_{03},Z_{03}\) et moments \(L_{03},M_{03},N_{03}\)),
+        l'hélicoïdale en \(B\) (forces \(X_{23},Y_{23},Z_{23}\) et moments \(L_{23},M_{23},N_{23}\)).</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Ne pas oublier le <strong>poids</strong>.</li>
+        <li>Le moteur n'agit <strong>pas directement</strong> sur le chariot. Son action passe par la vis.</li>
+        <li>La glissière ne donne <strong>pas</strong> de force suivant \(\vec x_0\) (c'est le sens libre).</li>
+      </ul>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3</span> Appliquer le PFD à la pièce 3 (projection sur \(\vec x_0\) seulement).</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Écrire l'équation qui relie les forces agissant sur 3 à son accélération. On ne garde que la projection sur \(\vec x_0\),
+        car c'est la seule direction utile pour trouver \(X_{23}\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>PFD en résultante : \(\sum \vec F_{\text{ext}\to3}=m_3\,\vec a_{G_3\in3/0}\).</li>
+        <li>L'accélération est suivant \(\vec x_0\) : \(\vec a = a\,\vec x_0\).</li>
+        <li>On projette sur \(\vec x_0\). Le poids et \(Y, Z\) sont perpendiculaires à \(\vec x_0\) : leur projection est nulle. Il reste \(X_{23}\).</li>
+      </ol>
+      <div class="calc">
+        \[\sum \vec F_{\text{ext}\to3}\cdot\vec x_0 = m_3\,a \;\Longrightarrow\; X_{23}=m_3\,a\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \(X_{23}=m_3\,a\). L'effort axial de la vis sur le chariot est égal à la masse du chariot fois son accélération.</div>
+      <p><strong>Ce que ça veut dire :</strong> avec \(a=128\) m·s⁻² (question 10), \(X_{23}=0{,}01\times128=1{,}28\) N.
+      C'est l'effort que la vis doit exercer pour pousser le chariot.</p>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>\(\sum \vec F = m\,\vec a\)</p>
+      <span class="lab">Pourquoi projeter ?</span>
+      <p>Projeter, c'est ne garder que la composante suivant une direction. Ça élimine d'un coup les inconnues inutiles (\(Y, Z\)).</p>
+    </aside>
+  </div>
+
+  <!-- ---- Partie B ---- -->
+  <h3>Partie B — La vis 2 (questions 4 à 6)</h3>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q4</span> Quel est le mouvement de 2 par rapport à 0 ?</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        La vis tourne-t-elle, glisse-t-elle, ou les deux ? Autour de quel axe ?</div>
+      <p class="demarche"><span class="lab">Démarche</span>
+        La vis est posée sur son axe, dans le bâti, et ne fait que tourner (elle ne se déplace pas en translation).
+        Son axe est \((D,\vec x_0)\).</p>
+      <div class="res"><span class="lab">Réponse</span>
+        La vis 2 a une <strong>rotation d'axe \((D,\vec x_0)\)</strong> par rapport à 0. On note son angle \(\theta(t)\),
+        sa vitesse \(\dot\theta=\omega_{2/0}\) et son accélération angulaire \(\ddot\theta\).</div>
+    </div>
+    <aside class="aside">
+      <span class="lab">Méthode</span>
+      <p>Une <strong>rotation autour d'un axe fixe</strong> : tous les points tournent du même angle. On repère tout avec un seul angle \(\theta\).</p>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q5</span> Établir l'inventaire des actions mécaniques extérieures sur 2.</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Lister ce qui agit sur la vis : le moteur, le bâti (au pivot \(C\)) et le chariot (à l'hélicoïdale \(B\)).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Moteur 1 → 2</strong> en \(D\) : le moteur donne un <strong>couple</strong> \(C_m\) autour de \(\vec x_0\), sans force.</li>
+        <li><strong>Bâti 0 → 2</strong> en \(C\) : c'est un <strong>pivot</strong>. Il laisse la rotation libre, donc il ne transmet <strong>pas de couple suivant \(\vec x_0\)</strong> (\(L_{02}=0\)).</li>
+        <li><strong>Chariot 3 → 2</strong> en \(B\) : l'hélicoïdale. Elle transmet un effort axial et un couple axial \(L_{32}\).</li>
+      </ol>
+      <div class="calc">
+        \[\{\tau_{\text{mot}\to2}\}:\quad \vec R=\vec 0,\qquad \vec M_D=C_m\,\vec x_0\]
+        \[\{\tau_{0\to2}\}\ (\text{pivot en }C):\quad \vec R=X_{02}\vec x_0+Y_{02}\vec y_0+Z_{02}\vec z_0,\qquad \vec M_C=M_{02}\vec y_0+N_{02}\vec z_0\]
+        \[\{\tau_{3\to2}\}\ (\text{hélicoïdale en }B):\quad \vec R=X_{32}\vec x_0+Y_{32}\vec y_0+Z_{32}\vec z_0,\qquad \vec M_B=L_{32}\vec x_0+M_{32}\vec y_0+N_{32}\vec z_0\]
+      </div>
+      <p><strong>Action-réaction :</strong> \(\{\tau_{3\to2}\}=-\{\tau_{2\to3}\}\). Donc \(L_{32}=-L_{23}\) et \(X_{32}=-X_{23}\).</p>
+      <div class="res"><span class="lab">Réponse</span>
+        Trois actions : le couple moteur \(C_m\) en \(D\), le pivot en \(C\) (sans couple suivant \(\vec x_0\)), et l'hélicoïdale en \(B\) avec le couple axial \(L_{32}\).</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Le <strong>pivot</strong> ne transmet pas de couple autour de son propre axe : \(L_{02}=0\).</li>
+        <li>On change de signe lors d'une action-réaction : \(L_{32}=-L_{23}\).</li>
+      </ul>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q6</span> Appliquer le PFD à la pièce 2 (moment en \(D\), projeté sur \(\vec x_0\)).</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Écrire l'équation qui relie les couples autour de l'axe de la vis à son accélération angulaire.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>PFD en rotation autour d'un axe fixe : \(\sum M_{D,\text{ext}\to2}\cdot\vec x_0 = I_{vis}\,\ddot\theta\).</li>
+        <li>On prend le moment en \(D\), point de l'axe de rotation. Un effort appliqué sur l'axe (au point \(B\) ou \(C\)) ne crée <strong>aucun moment suivant cet axe</strong>.</li>
+        <li>Il ne reste donc que les couples axiaux : \(C_m\) (moteur) et \(L_{32}\) (hélicoïdale). Le pivot donne \(0\).</li>
+      </ol>
+      <div class="calc">
+        \[C_m + L_{32} = I_{vis}\,\ddot\theta\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \(C_m + L_{32} = I_{vis}\,\ddot\theta\). Le moteur accélère la vis, et le chariot « freine » la vis par le couple \(L_{32}\).</div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>Rotation autour d'un axe fixe \(\Delta\) : \(\sum M_\Delta = I_\Delta\,\ddot\theta\)</p>
+      <span class="lab">Remarque</span>
+      <p>Les signes de \(C_m\) et \(L_{32}\) sont algébriques : ils suivent les conventions du TD.</p>
+    </aside>
+  </div>
+
+  <!-- ---- Partie C ---- -->
+  <h3>Partie C — Le lien entre translation et rotation (questions 7 et 8)</h3>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q7</span> Relation entre \(X_{23}\), \(L_{23}\) et \(p\), puis entre \(\ddot\theta\), \(a\) et \(p\).</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Quand la vis tourne, le chariot avance. Comment la distance d'avance est-elle liée à l'angle, et l'effort axial au couple axial ?</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Avance du chariot :</strong> un tour de vis (\(\Delta\theta = 2\pi\)) fait avancer le chariot de \(p\).
+        Donc un angle \(\theta\) donne une avance \(x=-\dfrac{p}{2\pi}\,\theta\). Le signe moins vient de la convention « pas à droite » du TD.</li>
+        <li><strong>Dérivées :</strong> on dérive une fois (vitesse), puis deux fois (accélération) :
+        \(\dot x=-\dfrac{p}{2\pi}\dot\theta\) et \(a=-\dfrac{p}{2\pi}\ddot\theta\).</li>
+        <li><strong>Couple axial :</strong> dans une liaison hélicoïdale parfaite, la puissance développée est nulle. Cela impose que le couple axial et l'effort axial soient liés par le même rapport \(p/2\pi\).
+        C'est le même principe que le tire-bouchon : tourner fait avancer, et pousser crée un couple.</li>
+      </ol>
+      <div class="calc">
+        \[L_{23}=-\frac{p}{2\pi}\,X_{23}\qquad\text{et}\qquad a=-\frac{p}{2\pi}\,\ddot\theta\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \(L_{23}=-\dfrac{p}{2\pi}X_{23}\) et \(\ddot\theta=-\dfrac{2\pi}{p}\,a\).</div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>Vis-écrou : vitesse d'avance \(= \dfrac{p}{2\pi}\times\) vitesse de rotation.</p>
+      <span class="lab">Attention</span>
+      <p>\(p\) est une longueur (mm par tour). \(\theta\) est un angle (radians). Ne pas les confondre.</p>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q8</span> En déduire une expression de \(C_m\) en fonction de \(I_{vis}\), \(m_3\), \(p\) et \(a\).</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Il faut éliminer \(X_{23}\), \(L_{32}\) et \(\ddot\theta\) des équations précédentes pour ne garder que \(C_m\), \(a\) et \(p\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>On part de la question 6 : \(C_m = I_{vis}\,\ddot\theta - L_{32}\).</li>
+        <li>On remplace \(L_{32}=-L_{23}=\dfrac{p}{2\pi}X_{23}\) et \(X_{23}=m_3\,a\) (question 3) : \(L_{32}=\dfrac{p}{2\pi}m_3\,a\).</li>
+        <li>On remplace \(\ddot\theta=-\dfrac{2\pi}{p}\,a\) (question 7).</li>
+        <li>On regroupe les termes en \(a\).</li>
+      </ol>
+      <div class="calc">
+        \[C_m = -\frac{2\pi}{p}I_{vis}\,a-\frac{p}{2\pi}m_3\,a = -\,a\left(\frac{2\pi\,I_{vis}}{p}+\frac{p\,m_3}{2\pi}\right)\]
+        \[\text{Forme équivalente : }\ C_m = I_{eq}\,\ddot\theta\quad\text{avec}\quad I_{eq}=I_{vis}+\left(\frac{p}{2\pi}\right)^2 m_3\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \(C_m = -a\left(\dfrac{2\pi I_{vis}}{p}+\dfrac{p\,m_3}{2\pi}\right)\). En valeur absolue :
+        \(|C_m|=|a|\left(\dfrac{2\pi I_{vis}}{p}+\dfrac{p\,m_3}{2\pi}\right)\).</div>
+      <p><strong>Interprétation.</strong> Le couple est la somme de deux termes :</p>
+      <ul>
+        <li>\(\dfrac{2\pi I_{vis}}{p}\) : le couple pour faire tourner la <strong>vis</strong> elle-même ;</li>
+        <li>\(\dfrac{p\,m_3}{2\pi}\) : le couple pour faire avancer la <strong>masse du chariot</strong>, « ramenée » sur l'arbre moteur.
+        C'est le sens de \(I_{eq}\) : la masse qui avance se comporte, vue du moteur, comme une inertie supplémentaire.</li>
+      </ul>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>Masse en translation ramenée sur une rotation : \(I_{eq}=I+\left(\dfrac{p}{2\pi}\right)^2 m\)</p>
+      <span class="lab">Piège</span>
+      <p>Le signe moins ne change rien au dimensionnement : on travaille en valeur absolue pour choisir le moteur.</p>
+    </aside>
+  </div>
+
+  <!-- ---- Partie D ---- -->
+  <h3>Partie D — Le pas optimal (question 9)</h3>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q9</span> Quelle valeur du pas \(p\) rend le couple moteur minimal ?</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Parmi tous les pas possibles, lequel demande le moins de couple au moteur ? C'est un problème de <strong>minimum</strong>.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Seul \(p\) varie. \(a\), \(I_{vis}\) et \(m_3\) sont des constantes.</li>
+        <li>On dérive \(|C_m|\) par rapport à \(p\) et on cherche où la dérivée s'annule (c'est la condition d'un extremum).</li>
+        <li>On vérifie que c'est bien un <strong>minimum</strong> (dérivée seconde positive).</li>
+        <li>On fait l'application numérique avec les unités du SI (mètres, kilogrammes).</li>
+      </ol>
+      <div class="calc">
+        \[\frac{d|C_m|}{dp}=|a|\left(-\frac{2\pi I_{vis}}{p^2}+\frac{m_3}{2\pi}\right)=0\]
+        \[\Longrightarrow\ p^2=\frac{4\pi^2 I_{vis}}{m_3}\ \Longrightarrow\ p_{opt}=2\pi\sqrt{\frac{I_{vis}}{m_3}}\]
+        \[\text{Vérification : }\ \frac{d^2|C_m|}{dp^2}=|a|\,\frac{4\pi I_{vis}}{p^3}>0\ \Rightarrow\ \text{c'est bien un minimum}\]
+        \[\frac{I_{vis}}{m_3}=\frac{4{,}2\cdot10^{-9}}{0{,}01}=4{,}2\cdot10^{-7}\ \text{m}^2\ \Rightarrow\ \sqrt{4{,}2\cdot10^{-7}}=6{,}48\cdot10^{-4}\ \text{m}\]
+        \[p_{opt}=2\pi\times6{,}48\cdot10^{-4}=4{,}07\cdot10^{-3}\ \text{m}=4{,}07\ \text{mm}\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \(p_{opt}=2\pi\sqrt{I_{vis}/m_3}\approx 4{,}07\) mm.</div>
+      <p>La section 5 montre cette courbe : elle a bien un minimum en 4,07 mm.</p>
+    </div>
+    <aside class="aside apply">
+      <span class="lab">Méthode d'optimisation</span>
+      <ul>
+        <li>1) Dériver par rapport à la variable à optimiser.</li>
+        <li>2) Mettre la dérivée égale à 0.</li>
+        <li>3) Dérivée seconde positive : minimum ; négative : maximum.</li>
+      </ul>
+      <span class="lab">Piège</span>
+      <p>Convertir en mètres avant de calculer : \(4{,}2\cdot10^{-9}\) kg·m², pas en mm.</p>
+    </aside>
+  </div>
+
+  <!-- ---- Partie E ---- -->
+  <h3>Partie E — Application numérique (questions 10 et 11)</h3>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q10</span> Calculer l'accélération \(a\).</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Le cahier des charges donne un graphe de la position du chariot en fonction du temps. Il faut en tirer l'accélération.</div>
+      <figure>
+        <img src="img/pfd-dvd-cahier.png" alt="Trois graphes : accélération a(t) en créneaux, vitesse V(t) triangulaire, position x(t) en S de 0 à 20 mm" loading="lazy">
+        <figcaption>Extrait du cahier des charges : accélération \(a(t)\), vitesse \(V(t)\) et position \(x(t)\). Le mouvement dure 25 ms,
+        avec une phase d'accélération puis une phase de décélération symétriques.</figcaption>
+      </figure>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Lire le graphe de \(x(t)\) : à \(t=12{,}5\) ms, \(X=10\) mm.</li>
+        <li>Le graphe de \(a(t)\) montre une accélération <strong>constante</strong> pendant la première moitié. Le chariot part de l'arrêt (\(x=0\), \(v=0\)).
+        Donc \(x(t)=\tfrac12\,a\,t^2\).</li>
+        <li>On isole \(a\).</li>
+      </ol>
+      <div class="calc">
+        \[X=\tfrac12 a t^2\ \Longrightarrow\ a=\frac{2X}{t^2}=\frac{2\times0{,}010}{(12{,}5\cdot10^{-3})^2}=\frac{0{,}020}{1{,}5625\cdot10^{-4}}\]
+        \[a=128\ \text{m·s}^{-2}\]
+        \[\text{Vérification : }\ v_{max}=a\,t=128\times0{,}0125=1{,}6\ \text{m/s}\ ;\ \ \text{distance totale}=2\times\tfrac12\,a\,t^2=0{,}020\ \text{m}=20\ \text{mm}\ \checkmark\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \(a = 128\) m·s⁻² (environ 13 fois \(g\)). C'est une accélération forte, qui explique un couple moteur non négligeable.</div>
+      <div class="warn"><span class="lab">Coquille dans le corrigé</span>
+        Le texte écrit « \(t=12{,}5\) s ». C'est une erreur de frappe : il faut lire <strong>12,5 ms</strong>. Le calcul numérique du corrigé utilise bien \(12{,}5\cdot10^{-3}\) s.</div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>Mouvement uniformément accéléré depuis l'arrêt : \(x(t)=\tfrac12 a t^2\), donc \(a=\dfrac{2x}{t^2}\).</p>
+      <span class="lab">Appliquer</span>
+      <p>Lire une valeur précise sur un graphe (ici, \(x=10\) mm à 12,5 ms), puis la reporter dans la formule. Vérifier avec une autre grandeur (vitesse, distance totale).</p>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q11</span> Calculer \(C_m\) avec le pas réel \(3{,}6\) mm et conclure.</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        La vis réelle a un pas de 3,6 mm, pas 4,07 mm. Quel couple faut-il avec ce pas, et ce pas est-il bon ?</div>
+      <p class="demarche"><span class="lab">Démarche</span>
+        On reprend la formule de la question 8 et on remplace par les valeurs : \(p=3{,}6\cdot10^{-3}\) m, \(a=128\) m·s⁻², \(I_{vis}=4{,}2\cdot10^{-9}\) kg·m², \(m_3=0{,}01\) kg.</p>
+      <div class="calc">
+        \[|C_m|=128\left(4{,}2\cdot10^{-9}\times\frac{2\pi}{3{,}6\cdot10^{-3}}+\frac{3{,}6\cdot10^{-3}}{2\pi}\times0{,}01\right)\]
+        \[=128\,\bigl(7{,}33\cdot10^{-6}+5{,}73\cdot10^{-6}\bigr)=128\times1{,}306\cdot10^{-5}\]
+        \[|C_m|=1{,}67\cdot10^{-3}\ \text{N·m}=\mathbf{1{,}67\ N·mm}\]
+        \[\text{Détail : }\ \underbrace{0{,}94\ \text{N·mm}}_{\text{vis}}+\underbrace{0{,}73\ \text{N·mm}}_{\text{chariot}}=1{,}67\ \text{N·mm}\]
+      </div>
+      <p><strong>Conversion en g·cm</strong> (le catalogue moteur est en g·cm) : 1 g·cm = 9,81·10⁻⁵ N·m, donc
+      \(1{,}67\cdot10^{-3}/9{,}81\cdot10^{-5}\approx 17\) g·cm.</p>
+      <div class="warn"><span class="lab">Petit écart avec le corrigé</span>
+        Le corrigé écrit 16,7 g·cm : il a pris 1 N·mm ≈ 10 g·cm. Avec \(g=9{,}81\), on trouve 17 g·cm. L'écart est de 2 %, sans conséquence pour le choix du moteur.</div>
+      <p><strong>Comparaison avec le pas optimal :</strong></p>
+      <ul>
+        <li>Pour \(p=3{,}6\) mm : \(|C_m|=1{,}67\) N·mm.</li>
+        <li>Pour \(p=4{,}07\) mm (optimal) : \(|C_m|=1{,}66\) N·mm.</li>
+        <li>Écart : environ <strong>0,8 %</strong>.</li>
+      </ul>
+      <div class="res"><span class="lab">Conclusion</span>
+        Le couple nécessaire est \(|C_m|\approx1{,}67\) N·mm, soit environ 17 g·cm. Le pas réel de 3,6 mm donne un couple presque minimal : il est proche de l'optimum.
+        Le cahier des charges demande aussi de la <strong>précision</strong> : une vis fine avance peu à chaque tour, ce qui facilite le positionnement.
+        Le pas réel est donc un <strong>compromis</strong> entre précision et couple minimal.</div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>\(|C_m|=|a|\left(\dfrac{2\pi I_{vis}}{p}+\dfrac{p\,m_3}{2\pi}\right)\)</p>
+      <span class="lab">Appliquer</span>
+      <ul>
+        <li>Calculer chaque terme séparément, puis additionner.</li>
+        <li>Garder les unités du SI, et convertir en g·cm seulement à la fin.</li>
+        <li>\(1\) N·m \(= 10\,197\) g·cm environ.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ---- Choix du moteur ---- -->
+  <h3>Choix du moteur (suite de la question 11)</h3>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle">Quel moteur du catalogue choisir ?</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Le moteur doit fournir au moins 17 g·cm, fonctionner sous la tension disponible dans le PC (5 V) et être le plus compact possible.</div>
+      <figure>
+        <img src="img/pfd-dvd-catalogue.png" alt="Tableau du catalogue MotionKing : modèles 15BY20L01 à 20BY20L02 avec tension, couple de maintien et inertie du rotor" loading="lazy">
+        <figcaption>Extrait du catalogue moteur. Le <em>couple de maintien</em> (holding torque) est le couple maximal que le moteur peut tenir à l'arrêt,
+        alimenté. Le <em>couple de détente</em> (detent torque) est le couple résiduel moteur non alimenté. Le <em>rotor inertia</em> est l'inertie du rotor.</figcaption>
+      </figure>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>On élimine les moteurs alimentés en 12 V : le PC fournit 5 V.</li>
+        <li>On garde ceux dont le couple de maintien est supérieur à 17 g·cm.</li>
+        <li>Parmi eux, on prend le plus petit (série 15 plutôt que 20), donc le moins de couple inutile et le plus compact.</li>
+      </ol>
+      <table>
+        <tr><th class="l">Modèle</th><th>Tension</th><th>Couple de maintien</th><th>Résultat</th></tr>
+        <tr><td class="l">15BY20L01</td><td>5 V</td><td>27 g·cm</td><td>convient, le plus petit</td></tr>
+        <tr><td class="l">15BY20L03</td><td>5 V</td><td>30 g·cm</td><td>convient, un peu plus gros</td></tr>
+        <tr><td class="l">15BY20L02</td><td>12 V</td><td>40 g·cm</td><td>écarté (12 V)</td></tr>
+        <tr><td class="l">15BY20L04</td><td>12 V</td><td>35 g·cm</td><td>écarté (12 V)</td></tr>
+        <tr><td class="l">20BY20L02</td><td>5 V</td><td>65 g·cm</td><td>convient, mais plus gros</td></tr>
+        <tr><td class="l">20BY20L01</td><td>5 V</td><td>75 g·cm</td><td>convient, mais plus gros</td></tr>
+      </table>
+      <div class="res"><span class="lab">Réponse</span>
+        Moteur retenu : <strong>15BY20L01</strong> (5 V, couple de maintien 27 g·cm, soit environ 1,6 fois le besoin de 17 g·cm).
+        Le corrigé officiel dit seulement que « tous les moteurs conviennent » et qu'on prend 5 V : le choix du 15BY20L01 est le nôtre.</div>
+      <div class="warn"><span class="lab">Point de vigilance (hors TD, à confirmer avec le prof)</span>
+        Le TD compare le couple nécessaire au <strong>couple de maintien</strong>, qui est une valeur à l'arrêt. Il ne tient pas compte de l'<strong>inertie du rotor</strong> du moteur.
+        Or le rotor est lui aussi accéléré. Avec \(I_{rotor}=0{,}3\) g·cm² \(=3\cdot10^{-8}\) kg·m² (catalogue) et
+        \(|\ddot\theta|=\dfrac{2\pi}{p}|a|\approx2{,}2\cdot10^{5}\) rad·s⁻², le rotor demande environ \(6{,}7\) N·mm de plus.
+        Le couple total serait alors d'environ \(8{,}4\) N·mm, soit environ 85 g·cm, ce qui dépasse 27 g·cm.
+        Le choix du moteur est donc à vérifier : il faudrait sans doute un moteur plus puissant, ou un autre pas.</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Ne pas confondre <strong>couple de maintien</strong> (à l'arrêt, le plus important ici) et <strong>couple de détente</strong> (moteur éteint).</li>
+        <li>Vérifier la <strong>tension</strong> : un moteur 12 V ne se branche pas sur les 5 V du PC.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>5. Graphique : le couple en fonction du pas</h2>
+  <p>On trace \(|C_m|\) en fonction de \(p\), avec \(|a|=128\) m·s⁻², \(I_{vis}\) et \(m_3\) constants. La courbe a un minimum,
+  et elle est <strong>assez plate</strong> autour de ce minimum : un pas entre 3,5 et 5 mm donne un couple presque identique.</p>
+
+  <div class="svgwrap">
+    <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img"
+      aria-label="Courbe du couple moteur en fonction du pas : minimum à 4,07 mm, pas réel à 3,6 mm">
+      <!-- axes -->
+      <line x1="70" y1="300" x2="612" y2="300" stroke="#475569" stroke-width="1.5"/>
+      <line x1="70" y1="30" x2="70" y2="300" stroke="#475569" stroke-width="1.5"/>
+      <!-- graduations x -->
+      <g font-size="13" fill="#475569" text-anchor="middle">
+        <text x="70" y="318">2</text><text x="160" y="318">3</text><text x="250" y="318">4</text>
+        <text x="340" y="318">5</text><text x="430" y="318">6</text><text x="520" y="318">7</text><text x="610" y="318">8</text>
+        <text x="340" y="342" font-size="14" fill="#2d3748">pas p (mm)</text>
+      </g>
+      <!-- graduations y -->
+      <g font-size="13" fill="#475569" text-anchor="end">
+        <text x="62" y="304">1,5</text><text x="62" y="214">2,0</text><text x="62" y="124">2,5</text><text x="62" y="34">3,0</text>
+      </g>
+      <text x="22" y="165" font-size="14" fill="#2d3748" transform="rotate(-90 22 165)" text-anchor="middle">|C_m| (N·mm)</text>
+      <!-- couple de maintien du moteur 15BY20L01 -->
+      <line x1="70" y1="93.2" x2="612" y2="93.2" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="6 5"/>
+      <text x="600" y="86" font-size="13" fill="#c2410c" text-anchor="end">couple de maintien 15BY20L01 : 27 g·cm ≈ 2,65 N·mm</text>
+      <!-- courbe -->
+      <polyline fill="none" stroke="#0f766e" stroke-width="3" stroke-linejoin="round"
+        points="70.0,192.7 73.6,197.1 77.2,201.4 80.8,205.5 84.4,209.3 88.0,213.0 91.6,216.4 95.2,219.7 98.8,222.9 102.4,225.8 106.0,228.7 109.6,231.3 113.2,233.9 116.8,236.3 120.4,238.6 124.0,240.8 127.6,242.9 131.2,244.9 134.8,246.7 138.4,248.5 142.0,250.2 145.6,251.8 149.2,253.3 152.8,254.7 156.4,256.0 160.0,257.3 163.6,258.5 167.2,259.7 170.8,260.7 174.4,261.7 178.0,262.7 181.6,263.5 185.2,264.4 188.8,265.1 192.4,265.8 196.0,266.5 199.6,267.1 203.2,267.7 206.8,268.2 210.4,268.7 214.0,269.1 217.6,269.5 221.2,269.8 224.8,270.1 228.4,270.4 232.0,270.7 235.6,270.9 239.2,271.0 242.8,271.2 246.4,271.3 250.0,271.3 253.6,271.4 257.2,271.4 260.8,271.3 264.4,271.3 268.0,271.2 271.6,271.1 275.2,271.0 278.8,270.8 282.4,270.7 286.0,270.5 289.6,270.2 293.2,270.0 296.8,269.7 300.4,269.5 304.0,269.1 307.6,268.8 311.2,268.5 314.8,268.1 318.4,267.7 322.0,267.3 325.6,266.9 329.2,266.5 332.8,266.0 336.4,265.5 340.0,265.1 343.6,264.5 347.2,264.0 350.8,263.5 354.4,263.0 358.0,262.4 361.6,261.8 365.2,261.2 368.8,260.6 372.4,260.0 376.0,259.4 379.6,258.8 383.2,258.1 386.8,257.4 390.4,256.8 394.0,256.1 397.6,255.4 401.2,254.7 404.8,254.0 408.4,253.2 412.0,252.5 415.6,251.7 419.2,251.0 422.8,250.2 426.4,249.4 430.0,248.6 433.6,247.9 437.2,247.0 440.8,246.2 444.4,245.4 448.0,244.6 451.6,243.7 455.2,242.9 458.8,242.0 462.4,241.2 466.0,240.3 469.6,239.4 473.2,238.6 476.8,237.7 480.4,236.8 484.0,235.9 487.6,234.9 491.2,234.0 494.8,233.1 498.4,232.2 502.0,231.2 505.6,230.3 509.2,229.3 512.8,228.4 516.4,227.4 520.0,226.5 523.6,225.5 527.2,224.5 530.8,223.5 534.4,222.5 538.0,221.5 541.6,220.5 545.2,219.5 548.8,218.5 552.4,217.5 556.0,216.5 559.6,215.5 563.2,214.4 566.8,213.4 570.4,212.4 574.0,211.3 577.6,210.3 581.2,209.2 584.8,208.2 588.4,207.1 592.0,206.0 595.6,205.0 599.2,203.9 602.8,202.8 606.4,201.7 610.0,200.6"/>
+      <!-- points remarquables -->
+      <circle cx="256.3" cy="271.4" r="6" fill="#dc2626"/>
+      <text x="256.3" y="250" font-size="13" fill="#b91c1c" text-anchor="middle" font-weight="700">optimum : 4,07 mm</text>
+      <circle cx="214" cy="269.1" r="6" fill="#2563eb"/>
+      <text x="214" y="292" font-size="13" fill="#1d4ed8" text-anchor="middle" font-weight="700">pas réel : 3,6 mm</text>
+    </svg>
+    <figcaption>Couple nécessaire \(|C_m|\) selon le pas \(p\). Point rouge : minimum à 4,07 mm (1,66 N·mm). Point bleu : pas réel 3,6 mm (1,67 N·mm).
+    Trait pointillé : couple de maintien du moteur retenu (27 g·cm).</figcaption>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>6. À retenir</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Translation :</strong> \(\sum \vec F=m\,\vec a\). Ici, \(X_{23}=m_3\,a\).</li>
+      <li><strong>Rotation autour d'un axe fixe :</strong> \(\sum M=I\,\ddot\theta\). Ici, \(C_m+L_{32}=I_{vis}\,\ddot\theta\).</li>
+      <li><strong>Vis-écrou (hélicoïdale) :</strong> \(a=-\dfrac{p}{2\pi}\ddot\theta\) et \(L=-\dfrac{p}{2\pi}X\).</li>
+      <li><strong>Couple moteur :</strong> \(|C_m|=|a|\left(\dfrac{2\pi I_{vis}}{p}+\dfrac{p\,m_3}{2\pi}\right)\).</li>
+      <li><strong>Pas optimal :</strong> \(p_{opt}=2\pi\sqrt{I_{vis}/m_3}\approx4{,}07\) mm. Le pas réel 3,6 mm est presque optimal.</li>
+      <li><strong>Application :</strong> \(a=128\) m·s⁻², \(|C_m|\approx1{,}67\) N·mm, soit environ 17 g·cm. Moteur retenu : 15BY20L01 (sous réserve de la vérification de l'inertie du rotor).</li>
+    </ul>
+  </div>
+
+  <footer>
+    Source : TD « Principe fondamental de la dynamique — Lecteur de DVD » (CPGE PT / S2I, Lycée Jean Zay, E. Bigeard, v1.7).
+    <a href="../assets/pdf.html?f=../documents/aem2-si/ch3-dynamique-solide/PFD-PT-TD-lecteur_de_dvd-prof.pdf" target="_blank" rel="noopener">Ouvrir l'énoncé original (PDF)</a>.
+    Corrigé rédigé et étoffé pour la révision. Les encadrés orange signalent les coquilles de l'énoncé et les points à vérifier.
+  </footer>
+
+</div>
+
+<script src="../assets/gate.js"></script>
+</body>
+</html>
