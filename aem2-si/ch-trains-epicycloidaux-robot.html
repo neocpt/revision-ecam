@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Robot tondeur — trains épicycloïdaux (correction détaillée)</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  :root{
+    --bg:#fafafa; --text:#2d3748; --muted:#64748b; --title:#1a202c;
+    --accent:#0f766e; --accent-soft:#ccfbf1; --line:#e5e7eb; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--text);
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    font-size:17px; line-height:1.7}
+  .page{max-width:800px; margin:0 auto; padding:2.5rem 2rem 4rem}
+  .nav{display:flex; flex-wrap:wrap; gap:1rem; font-size:.92rem; margin-bottom:1.5rem}
+  .nav a{color:var(--accent); text-decoration:none; font-weight:600}
+  .nav a:hover{text-decoration:underline}
+  p, ul, ol{margin:0 0 1.5rem}
+  li{margin-bottom:.45rem}
+  strong{color:var(--title)}
+  h1{font-size:2.1rem; line-height:1.2; color:var(--title); margin:.6rem 0 .6rem}
+  h2{font-size:1.5rem; color:var(--title); margin:3.4rem 0 1.1rem; padding-bottom:.45rem;
+    border-bottom:2px solid var(--accent-soft)}
+  h3{font-size:1.15rem; color:var(--accent); margin:2.2rem 0 .7rem}
+  .kicker{font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
+  .lead{color:var(--muted); font-size:1.08rem; margin-bottom:2rem}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1.4rem 1.6rem; margin:1.5rem 0}
+  .card h3:first-child{margin-top:0}
+
+  /* ---- Question : texte à gauche, encadré méthode à droite ---- */
+  .qblock{display:grid; grid-template-columns:minmax(0,1fr) 250px; gap:1.8rem;
+    margin:2.4rem 0 0; padding-top:1.8rem; border-top:1px solid var(--line)}
+  .qblock.wide{grid-template-columns:minmax(0,1fr)}
+  .qtitle{font-size:1.2rem; font-weight:800; color:var(--title); margin:0 0 1rem}
+  .qnum{display:inline-block; background:var(--accent); color:#fff; border-radius:7px;
+    padding:.12rem .6rem; font-size:.9rem; margin-right:.5rem; vertical-align:middle}
+  .ask{background:#f8fafc; border-left:4px solid #94a3b8; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .ask .lab, .lab{display:block; font-size:.72rem; font-weight:800; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:.25rem}
+  .demarche{margin:0 0 1.2rem}
+  .calc{background:#fff; border:1px solid var(--line); border-radius:10px; padding:.8rem 1rem .4rem; margin:0 0 1.2rem; overflow-x:auto}
+  .res{background:#ecfdf5; border-left:4px solid #059669; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .res .lab{color:#047857}
+
+  .aside{align-self:start; border-radius:12px; padding:1rem 1.1rem; font-size:.93rem; line-height:1.55;
+    background:#f0fdfa; border:1px solid #99f6e4}
+  .aside.formula{background:#f5f3ff; border-color:#ddd6fe}
+  .aside.apply{background:#fffbeb; border-color:#fde68a}
+  .aside.piege{background:#fff1f2; border-color:#fecdd3}
+  .aside .lab{color:var(--accent); margin-bottom:.35rem}
+  .aside.formula .lab{color:#6d28d9}
+  .aside.apply .lab{color:#b45309}
+  .aside.piege .lab{color:#be123c}
+  .aside p, .aside ul{margin:0 0 .7rem}
+  .aside ul{padding-left:1.1rem}
+  .aside li{margin-bottom:.3rem}
+  .aside > :last-child{margin-bottom:0}
+
+  .warn{background:#fff7ed; border-left:4px solid #ea580c; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .warn .lab{color:#c2410c}
+  .info{background:#f0f9ff; border-left:4px solid #0284c7; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .info .lab{color:#0369a1}
+
+  figure{margin:1.4rem 0 1.8rem; text-align:center}
+  figure img{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:10px; padding:.5rem}
+  figcaption{font-size:.88rem; color:var(--muted); margin-top:.5rem; line-height:1.5}
+
+  table{width:100%; border-collapse:collapse; margin:.6rem 0 1.4rem; font-size:.93rem; background:#fff}
+  th, td{border:1px solid var(--line); padding:.5rem .6rem; text-align:center}
+  th{background:#f1f5f9; color:var(--title)}
+  td.l, th.l{text-align:left}
+
+  .steps{counter-reset:s; list-style:none; padding:0; margin:0 0 1.5rem}
+  .steps li{counter-increment:s; position:relative; padding:.2rem 0 .2rem 2.7rem; margin-bottom:.9rem}
+  .steps li::before{content:counter(s); position:absolute; left:0; top:.1rem; width:1.9rem; height:1.9rem;
+    border-radius:50%; background:var(--accent-soft); color:var(--accent); font-weight:800; text-align:center; line-height:1.9rem}
+
+  footer{margin-top:3.5rem; padding-top:1.2rem; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem}
+  footer a{color:var(--accent)}
+  mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%}
+
+  @media (max-width:680px){
+    body{font-size:16px}
+    .page{padding:1.6rem 1.1rem 3rem}
+    h1{font-size:1.65rem}
+    h2{font-size:1.3rem; margin-top:2.6rem}
+    .qblock{grid-template-columns:1fr; gap:1rem}
+  }
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+<div class="page">
+
+  <nav class="nav">
+    <a href="../index.html#am2">← Accueil</a>
+
+  </nav>
+
+  <div class="kicker">AM2 · SI · Cinématique (rapports de réduction) — exercice « Trains épicycloïdaux, robot tondeur »</div>
+  <h1>Trains épicycloïdaux du robot tondeur : formule de Willis, correction détaillée</h1>
+  <p class="lead">Réducteur à trois étages en série. On démontre la formule de Willis, on calcule les rapports, puis on vérifie que le moteur du catalogue convient.</p>
+
+  <!-- ============================================================ -->
+  <h2>1. Avant de commencer : l'essentiel</h2>
+  <div class="card">
+    <h3>Train épicycloïdal et formule de Willis</h3>
+    <p>Dans un train épicycloïdal, un <strong>porte-satellite</strong> entraîne des roues qui tournent autour de lui. La formule de Willis relie les vitesses des trois éléments principaux (deux planétaires et le porte-satellite) :</p>
+    \[\lambda=\dfrac{\omega_{3/4}}{\omega_{1/4}}=\dfrac{\omega_{3/0}-\omega_{4/0}}{\omega_{1/0}-\omega_{4/0}}\]
+    <p>où \(\lambda\) est la <strong>raison basique</strong> : le rapport obtenu quand le porte-satellite est bloqué. Chaque engrènement extérieur change le sens de rotation (signe \(-1\)), chaque engrènement intérieur le conserve (signe \(+1\)).</p>
+  </div>
+  <div class="info">
+    <span class="lab">Pourquoi ce montage</span>
+    Un train à axes fixes donnerait un rapport trop grand pour tenir dans l'encombrement d'une roue. Un train épicycloïdal atteint un rapport élevé dans un volume compact, en trois étages en série.
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>2. Question 1 — Démonstration de la formule (cas \(\omega_{3/0}=0\))</h2>
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Rapport de réduction global quand la couronne 3 est fixe</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Énoncer la formule de Willis, puis démontrer le rapport \(\omega_{4/0}/\omega_{1/0}\) quand \(\omega_{3/0}=0\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Raison basique</strong> : porte-satellite bloqué (\(\omega_{4/0}=0\)). Le train devient un train à axes fixes entre 1 et 3.</li>
+        <li>Engrènement 1–2 extérieur : un seul signe \(-1\). Engrènement 2–3 intérieur : signe \(+1\). Donc \(\lambda=(-1)^1\,\dfrac{Z_1}{Z_3}=-\dfrac{Z_1}{Z_3}\).</li>
+        <li>Couronne fixe : \(\omega_{3/0}=0\). Willis : \(\lambda=\dfrac{-\omega_{4/0}}{\omega_{1/0}-\omega_{4/0}}\).</li>
+        <li>On résout pour \(\omega_{4/0}/\omega_{1/0}\) : \(\lambda(\omega_{1/0}-\omega_{4/0})=-\omega_{4/0}\), donc \(\lambda\,\omega_{1/0}=(\lambda-1)\,\omega_{4/0}\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span>
+        \[\dfrac{\omega_{4/0}}{\omega_{1/0}}=\dfrac{\lambda}{\lambda-1}\qquad\text{avec}\quad \lambda=-\dfrac{Z_1}{Z_3}\]
+      </div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Compter les engrènements <strong>extérieurs</strong> pour le signe : un seul ici, donc \(\lambda\) est négatif.</li>
+        <li>\(\omega_{1/0}\) est la vitesse d'entrée, \(\omega_{4/0}\) celle du porte-satellite : ne pas inverser.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>3. Question 2 — Rapports par étage et global</h2>
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q2</span>Rapport de chaque étage</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer le rapport de chaque étage, puis le rapport global \(\omega_{8/0}/\omega_{6/0}\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>La couronne extérieure 7 est fixe : chaque étage applique la formule de la Q1 avec ses propres planétaires.</li>
+        <li><strong>Étage 1</strong> (entrée moteur 6, sortie porte-satellite 3, couronne 7) : \(\lambda_1=-\dfrac{Z_6}{Z_7}=-\dfrac{11}{61}\).</li>
+        <li><strong>Étage 2</strong> (entrée 3, couronne 7) : \(\lambda_2=-\dfrac{Z_3}{Z_7}=-\dfrac{17}{61}\).</li>
+        <li><strong>Étage 3</strong> (entrée 2, couronne 7) : \(\lambda_3=-\dfrac{Z_2}{Z_7}=-\dfrac{11}{61}\).</li>
+        <li>Étages en série : le rapport global est le produit des trois rapports.</li>
+      </ol>
+      <div class="calc">
+        \[r_1=\dfrac{\lambda_1}{\lambda_1-1}=\dfrac{11}{72}\approx0{,}1528,\qquad r_2=\dfrac{17}{78}\approx0{,}2179,\qquad r_3=\dfrac{11}{72}\approx0{,}1528\]
+        \[r_g=r_1r_2r_3=\dfrac{2057}{404\,352}\approx5{,}09\times10^{-3}\qquad\text{soit environ}\ \dfrac{1}{197}\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span> Rapport global \(\omega_{8/0}/\omega_{6/0}\approx1/197\).</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>4. Question 3 — Vitesse du moteur</h2>
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3</span>Vitesse de rotation du moteur</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Avec \(V_{T/0}=0{,}4\) m/s et des roues de diamètre 240 mm, en déduire la vitesse du moteur.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Vitesse angulaire de la roue : \(\omega_{8/0}=V/R=0{,}4/0{,}12\approx3{,}33\) rad/s.</li>
+        <li>En tours par minute : \(N_{roue}=\omega\cdot\dfrac{60}{2\pi}\approx63{,}7\) tr/min.</li>
+        <li>Moteur : \(N_{moteur}=N_{roue}/r_g\approx12\,500\) tr/min.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> \(N_{moteur}\approx12\,500\) tr/min.</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>5. Question 4 — Choix du moteur</h2>
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q4</span>Référence du moteur dans le catalogue</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Choisir la référence du moteur qui correspond à l'étude théorique.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Le catalogue donne, pour une tension de 12 V, des vitesses en charge entre environ 4100 et 4900 tr/min.</li>
+        <li>Le besoin théorique (\(\approx12\,500\) tr/min) dépasse de loin ce maximum.</li>
+      </ol>
+      <div class="warn"><span class="lab">⚠️ Conclusion du corrigé</span> Aucun moteur du catalogue ne convient directement sous 12 V. Il faudrait un moteur plus rapide, ou un étage de réduction supplémentaire. Le corrigé le signale comme point d'esprit critique : c'est une réponse à garder, pas une erreur de calcul.</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>6. Question 5 — Comparaison avec un train classique</h2>
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q5</span>Train à axes fixes à trois étages</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Comparer avec une solution à axes fixes, à trois étages équivalents.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Un train à axes fixes a un rapport par étage égal à \(\pm Z_{entrée}/Z_{sortie}\) : pour atteindre un rapport global aussi petit, il faut des pignons très contrastés.</li>
+        <li>Chaque étage devient donc très encombrant, et le diamètre total augmente vite.</li>
+        <li>Le train épicycloïdal reste compact parce que la couronne 7, fixe, sert de référence commune à tous les étages.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> À rapport global égal, le train épicycloïdal occupe beaucoup moins de place. C'est le critère qui justifie son choix ici.</div>
+    </div>
+  </div>
+
+
+  <footer>
+    Source : « Trains épicycloïdaux — Robot tondeur » (S2I, ECAM). Éléments de correction repris et étoffés.
+  </footer>
+
+</div>
+
+<script src="../assets/gate.js"></script>
+</body>
+</html>
