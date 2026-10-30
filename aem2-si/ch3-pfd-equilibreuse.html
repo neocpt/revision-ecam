@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Équilibreuse — correction détaillée (PFD)</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  :root{
+    --bg:#fafafa; --text:#2d3748; --muted:#64748b; --title:#1a202c;
+    --accent:#0f766e; --accent-soft:#ccfbf1; --line:#e5e7eb; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--text);
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    font-size:17px; line-height:1.7}
+  .page{max-width:800px; margin:0 auto; padding:2.5rem 2rem 4rem}
+  .nav{display:flex; flex-wrap:wrap; gap:1rem; font-size:.92rem; margin-bottom:1.5rem}
+  .nav a{color:var(--accent); text-decoration:none; font-weight:600}
+  .nav a:hover{text-decoration:underline}
+  p, ul, ol{margin:0 0 1.5rem}
+  li{margin-bottom:.45rem}
+  strong{color:var(--title)}
+  h1{font-size:2.1rem; line-height:1.2; color:var(--title); margin:.6rem 0 .6rem}
+  h2{font-size:1.5rem; color:var(--title); margin:3.4rem 0 1.1rem; padding-bottom:.45rem;
+    border-bottom:2px solid var(--accent-soft)}
+  h3{font-size:1.15rem; color:var(--accent); margin:2.2rem 0 .7rem}
+  .kicker{font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
+  .lead{color:var(--muted); font-size:1.08rem; margin-bottom:2rem}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1.4rem 1.6rem; margin:1.5rem 0}
+  .card h3:first-child{margin-top:0}
+
+  /* ---- Question : texte à gauche, encadré méthode à droite ---- */
+  .qblock{display:grid; grid-template-columns:minmax(0,1fr) 250px; gap:1.8rem;
+    margin:2.4rem 0 0; padding-top:1.8rem; border-top:1px solid var(--line)}
+  .qtitle{font-size:1.2rem; font-weight:800; color:var(--title); margin:0 0 1rem}
+  .qnum{display:inline-block; background:var(--accent); color:#fff; border-radius:7px;
+    padding:.12rem .6rem; font-size:.9rem; margin-right:.5rem; vertical-align:middle}
+  .ask{background:#f8fafc; border-left:4px solid #94a3b8; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .ask .lab, .lab{display:block; font-size:.72rem; font-weight:800; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:.25rem}
+  .demarche{margin:0 0 1.2rem}
+  .calc{background:#fff; border:1px solid var(--line); border-radius:10px; padding:.8rem 1rem .4rem; margin:0 0 1.2rem; overflow-x:auto}
+  .res{background:#ecfdf5; border-left:4px solid #059669; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .res .lab{color:#047857}
+
+  .aside{align-self:start; border-radius:12px; padding:1rem 1.1rem; font-size:.93rem; line-height:1.55;
+    background:#f0fdfa; border:1px solid #99f6e4}
+  .aside.formula{background:#f5f3ff; border-color:#ddd6fe}
+  .aside.apply{background:#fffbeb; border-color:#fde68a}
+  .aside.piege{background:#fff1f2; border-color:#fecdd3}
+  .aside .lab{color:var(--accent); margin-bottom:.35rem}
+  .aside.formula .lab{color:#6d28d9}
+  .aside.apply .lab{color:#b45309}
+  .aside.piege .lab{color:#be123c}
+  .aside p, .aside ul{margin:0 0 .7rem}
+  .aside ul{padding-left:1.1rem}
+  .aside li{margin-bottom:.3rem}
+  .aside > :last-child{margin-bottom:0}
+
+  .warn{background:#fff7ed; border-left:4px solid #ea580c; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .warn .lab{color:#c2410c}
+  .info{background:#f0f9ff; border-left:4px solid #0284c7; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .info .lab{color:#0369a1}
+
+  figure{margin:1.4rem 0 1.8rem; text-align:center}
+  figure img{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:10px; padding:.5rem}
+  figcaption{font-size:.88rem; color:var(--muted); margin-top:.5rem; line-height:1.5}
+
+  /* ---- Schéma de la chaîne ---- */
+  .chain{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:.5rem; margin:1.4rem 0 1.8rem}
+  .node{background:var(--accent); color:#fff; font-weight:700; border-radius:10px; padding:.6rem .95rem; text-align:center; font-size:.95rem}
+  .node.bati{background:#475569}
+  .link{font-size:.82rem; color:var(--muted); text-align:center; padding:0 .3rem; max-width:150px; line-height:1.3}
+  .link::before{content:"→"; display:block; font-size:1.3rem; color:var(--accent); line-height:1.1}
+
+  table{width:100%; border-collapse:collapse; margin:.6rem 0 1.4rem; font-size:.93rem; background:#fff}
+  th, td{border:1px solid var(--line); padding:.5rem .6rem; text-align:center}
+  th{background:#f1f5f9; color:var(--title)}
+  td.l, th.l{text-align:left}
+  tr.ok td{background:#f0fdf4}
+  tr.pick td{background:#ccfbf1; font-weight:700}
+
+  .svgwrap{background:#fff; border:1px solid var(--line); border-radius:12px; padding:1rem; margin:1.2rem 0 1.6rem}
+  .svgwrap > svg{display:block; width:100%; height:auto}
+  .svgwrap figcaption{margin-top:.6rem}
+
+  .steps{counter-reset:s; list-style:none; padding:0; margin:0 0 1.5rem}
+  .steps li{counter-increment:s; position:relative; padding:.2rem 0 .2rem 2.7rem; margin-bottom:.9rem}
+  .steps li::before{content:counter(s); position:absolute; left:0; top:.1rem; width:1.9rem; height:1.9rem;
+    border-radius:50%; background:var(--accent-soft); color:var(--accent); font-weight:800; text-align:center; line-height:1.9rem}
+  .steps a{color:var(--accent); font-weight:600}
+
+  footer{margin-top:3.5rem; padding-top:1.2rem; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem}
+  footer a{color:var(--accent)}
+  mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%}
+
+  @media (max-width:680px){
+    body{font-size:16px}
+    .page{padding:1.6rem 1.1rem 3rem}
+    h1{font-size:1.65rem}
+    h2{font-size:1.3rem; margin-top:2.6rem}
+    .qblock{grid-template-columns:1fr; gap:1rem}
+    .chain{flex-direction:column}
+    .link::before{content:"↓"}
+  }
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+<div class="page">
+
+  <nav class="nav">
+    <a href="../index.html#am2">← Accueil</a>
+    <a href="ch3-dynamique-solide.html">← Chapitre 3 (cours)</a>
+    <a href="../assets/pdf.html?f=../documents/aem2-si/ch3-dynamique-solide/PFD-PT-TD-equilibreuse-prof.pdf" target="_blank" rel="noopener">Énoncé original (PDF)</a>
+  </nav>
+
+  <div class="kicker">AM2 · SI · Chapitre 3 — Principe fondamental de la dynamique (TD)</div>
+  <h1>Équilibreuse : correction détaillée</h1>
+  <p class="lead">Un exercice du TD « Principe fondamental de la dynamique » (CPGE PT, S2I). L'arbre 1 porte une roue 2 mal équilibrée.
+  On mesure les efforts dans les paliers, puis on en déduit la position du défaut de la roue, puis on place deux masselottes pour l'annuler.
+  Pour chaque question : ce qu'elle demande, la démarche, le calcul complet, et les encadrés de méthode.</p>
+
+  <!-- ============================================================ -->
+  <h2>1. Avant de commencer : l'essentiel en quelques lignes</h2>
+
+  <div class="card">
+    <h3>Le principe fondamental de la dynamique (PFD)</h3>
+    <p>Pour un ensemble \(\Sigma\), la somme des torseurs des actions extérieures est égale au <strong>torseur dynamique</strong> :
+    \(\{\mathcal T_{\text{ext}\to\Sigma}\}=\{\mathcal D_{\Sigma/0}\}\). Le torseur dynamique a deux parties :</p>
+    <ul>
+      <li>la <strong>résultante dynamique</strong> \(\vec R\{\mathcal D\}=m\,\vec\Gamma_G\) (accélération du centre d'inertie) ;</li>
+      <li>le <strong>moment dynamique</strong> \(\vec\delta_P\) (variation du moment cinétique), à calculer en un point \(P\) fixe ou en \(G\).</li>
+    </ul>
+    <h3>Le balourd</h3>
+    <p>Une roue « mal équilibrée » a son centre d'inertie \(G_2\) décalé de l'axe de rotation (distance \(\rho\)) et des produits
+    d'inertie \(E\) et \(F\) non nuls. En tournant, elle fait naître dans les paliers des efforts <strong>sinusoïdes en fonction de l'angle</strong>.
+    C'est ce que mesurent les deux capteurs. Le problème inverse est donc : à partir de ces mesures, retrouver \(\rho\), \(\alpha\), \(E\), \(F\),
+    puis placer les masselottes.</p>
+  </div>
+
+  <div class="info">
+    <span class="lab">Ce que demande le TD au final</span>
+    Déterminer les <strong>masses</strong> des masselottes à ajouter sur la roue, ainsi que leur <strong>position angulaire</strong>.
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>2. La démarche en 5 étapes</h2>
+  <ol class="steps">
+    <li><strong>Isoler</strong> \(\Sigma=\{1+2\}\) et faire le bilan des actions (paliers \(O\) et \(A\), courroie, poids). Question 1.</li>
+    <li><strong>Calculer le torseur dynamique</strong> de la roue 2 (accélération de \(G_2\), moment en \(B\) puis en \(O\)). Question 1.</li>
+    <li><strong>Projeter</strong> la résultante et le moment, puis isoler \(Z_O\), \(Z_A\) (capteurs). Question 1.</li>
+    <li><strong>Inverser</strong> avec les valeurs \(\theta=0\) et \(\theta=\pi/2\) pour trouver \(\rho\), \(\alpha\), \(E\), \(F\). Questions 2 et 3.</li>
+    <li><strong>Équilibrer</strong> : conditions statiques et dynamiques pour deux masselottes 3 et 4. Questions 4 et 5.</li>
+  </ol>
+
+  <!-- ============================================================ -->
+  <h2>3. Le modèle et les données</h2>
+
+  <figure>
+    <img src="img/c03-td-equilibreuse.png" alt="Équilibreuse : arbre 1 sur paliers O et A, roue 2 en B, dimensions a, b, c, d" loading="lazy">
+    <figcaption>Schéma de l'énoncé. Arbre 1 sur les paliers \(O\) (rotule instrumentée) et \(A\), roue 2 en \(B\), courroie qui entraîne l'arbre au point \(G_1\).</figcaption>
+  </figure>
+
+  <div class="card">
+    <h3>Hypothèses (à garder en tête)</h3>
+    <ul>
+      <li>\(R_0\) est lié au bâti, \(\vec y_0\) est vertical ascendant. \(\theta=(\vec y_0,\vec y_1)\), et \(\dot\theta=\omega=\text{cste}\) : \(\ddot\theta=0\).</li>
+      <li>L'arbre 1 (avec sa poulie) est <strong>équilibré</strong> : \(G_1\) est sur l'axe, \(\vec x_0\) est axe principal d'inertie. Sa contribution au torseur dynamique est donc nulle.</li>
+      <li>La courroie exerce sur la poulie \(\{\mathcal T_{C\to P}\}=\left\{\begin{smallmatrix}C_m\,\vec x_0\\ -T\,\vec y_0\end{smallmatrix}\right\}\) en \(G_1\).</li>
+      <li>La roue 2 est fixée sur l'arbre, de masse \(m_2\), avec \(\overrightarrow{BG_2}=h\,\vec x_0+\rho\,\vec z_2\). L'angle \(\alpha=(\vec y_1,\vec y_2)\) est constant mais inconnu.</li>
+      <li>Matrice d'inertie de la roue en \(B\) dans \((\vec x_0,\vec y_2,\vec z_2)\) : \(\bar{\bar I}_{(B,2)}=\begin{pmatrix}A&-F&-E\\-F&B&-D\\-E&-D&C\end{pmatrix}\).</li>
+    </ul>
+    <h3>Données numériques</h3>
+    <table>
+      <tr><th class="l">Grandeur</th><th>Valeur</th><th class="l">Grandeur</th><th>Valeur</th></tr>
+      <tr><td class="l">\(m_2\)</td><td>18 kg</td><td class="l">\(\omega=\dot\theta\)</td><td>60 rad·s⁻¹</td></tr>
+      <tr><td class="l">\(a\)</td><td>460 mm</td><td class="l">\(b\)</td><td>80 mm</td></tr>
+    </table>
+    <p style="margin:0">Les courbes et le tableau des mesures sont donnés à la question 3 (image juste au-dessus).</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>4. Les questions</h2>
+
+  <!-- ---- Question 1 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Efforts dans les paliers : PFD sur \(\{1+2\}\) en \(O\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Exprimer \(X_O\), \(Y_O\), \(Z_O\), \(Y_A\), \(Z_A\) (composantes des actions du bâti 0 sur l'arbre 1) en fonction des données.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>On isole \(\Sigma=\{1+2\}\) et on écrit les torseurs extérieurs : paliers \(O\) (\(X_O,Y_O,Z_O\)), \(A\) (\(Y_A,Z_A\), pas d'effort axial), courroie, poids de 1 et de 2.</li>
+        <li>On calcule le torseur dynamique \(\{\mathcal D_{\Sigma/0}\}=\{\mathcal D_{1/0}\}+\{\mathcal D_{2/0}\}\). Pour l'arbre : \(\{\mathcal D_{1/0}\}=\{0\}\) (équilibré, \(\ddot\theta=0\)).</li>
+        <li>Pour la roue : \(\overrightarrow{OG_2}=(b+h)\vec x_0+\rho\vec z_2\). Comme \(\dot\theta=\omega\) est constant, \(\vec\Gamma_{G_2/0}=-\rho\omega^2\vec z_2\).</li>
+        <li>On projette la résultante et le moment, et on isole chaque inconnue.</li>
+      </ol>
+      <div class="calc">
+        <p><strong>Résultante</strong> (projection sur \(\vec x_0,\vec y_0,\vec z_0\)) :</p>
+        \[m_2\vec\Gamma_{G_2}=-m_2\rho\omega^2\vec z_2=-m_2\rho\omega^2\big[-\sin(\alpha{+}\theta)\vec y_0+\cos(\alpha{+}\theta)\vec z_0\big]\]
+        \[X_O=0,\qquad Y_O+Y_A-T-(m_1+m_2)g=m_2\rho\omega^2\sin(\alpha{+}\theta),\qquad Z_O+Z_A=-m_2\rho\omega^2\cos(\alpha{+}\theta)\]
+        <p><strong>Moment dynamique en \(B\)</strong> : \(\sigma_B=\bar{\bar I}_{(B,2)}\,\omega\vec x_0=\omega\,(A\vec x_0-F\vec y_2-E\vec z_2)\).
+        Comme \(\vec y_2\) et \(\vec z_2\) tournent à \(\omega\) autour de \(\vec x_0\), leur dérivée donne :
+        \(\vec\delta_B=\omega^2\,(E\,\vec y_2-F\,\vec z_2)\).</p>
+        <p><strong>Transport en \(O\)</strong> : \(\vec\delta_O=\vec\delta_B+\overrightarrow{OB}\wedge m_2\vec\Gamma_{G_2}\), avec \(\overrightarrow{OB}=b\vec x_0\) :
+        \(b\vec x_0\wedge(-m_2\rho\omega^2\vec z_2)=bm_2\rho\omega^2\vec y_2\). Donc :</p>
+        \[\vec\delta_{O}=\omega^2\big[(E+bm_2\rho)\,\vec y_2-F\,\vec z_2\big]\]
+        <p>On projette sur \(\vec y_0,\vec z_0\) avec \(\vec y_2=\cos(\alpha{+}\theta)\vec y_0+\sin(\alpha{+}\theta)\vec z_0\) et
+        \(\vec z_2=-\sin(\alpha{+}\theta)\vec y_0+\cos(\alpha{+}\theta)\vec z_0\).
+        Les équations de moment sont : \(\vec z_0\) donne \(-aY_A+dT+m_1gd-m_2g(b+h)=\delta_{O}\cdot\vec z_0\), et \(\vec y_0\) donne \(aZ_A=\delta_O\cdot\vec y_0\).
+        Le moment selon \(\vec y_0\) ne contient que \(Z_A\) (bras \(a\)), ce qui isole \(Z_A\) directement.</p>
+      </div>
+      <div class="res"><span class="lab">Réponse (formules du corrigé ; signe de \(Y_O\) corrigé, voir l'encadré)</span>
+        \[X_O=0\qquad Z_A=\dfrac{\omega^2}{a}\big[(E+m_2\rho b)\cos(\alpha{+}\theta)+F\sin(\alpha{+}\theta)\big]\]
+        \[Z_O=-\dfrac{\omega^2}{a}\big[(E+m_2\rho(a+b))\cos(\alpha{+}\theta)+F\sin(\alpha{+}\theta)\big]\]
+        \[Y_A=\dfrac{\omega^2}{a}\big[-(E+m_2\rho b)\sin(\alpha{+}\theta)+F\cos(\alpha{+}\theta)\big]+\dfrac{d}{a}(T+m_1g)-\dfrac{b+h}{a}\,m_2g\]
+        \[Y_O=-\dfrac{\omega^2}{a}\big[-(E+m_2\rho(a+b))\sin(\alpha{+}\theta)+F\cos(\alpha{+}\theta)\big]+\dfrac{a-d}{a}(T+m_1g)+\dfrac{a+b+h}{a}\,m_2g\]
+      </div>
+      <div class="warn"><span class="lab">⚠️ Signe à vérifier dans le corrigé officiel</span>
+        Le corrigé écrit <strong>\(-\frac{a+b+h}{a}m_2g\)</strong> dans \(Y_O\). Or la somme des résultantes donne
+        \(Y_O+Y_A=T+(m_1+m_2)g+m_2\rho\omega^2\sin(\alpha{+}\theta)\) : le terme en \(m_2g\) doit donc être
+        \(+\frac{a+b+h}{a}m_2g\) (contrôle : \(Y_A\) contient \(-\frac{b+h}{a}m_2g\), la somme donne bien \(+m_2g\)).
+        Test statique (\(\omega=0\), \(T=0\)) : \(Y_A=-\frac{b+h}{a}m_2g\) et \(Y_O=m_2g\bigl(1+\frac{b+h}{a}\bigr)\) — le poids est bien repris par les deux paliers.</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>L'arbre est équilibré : il ne contribue pas au torseur dynamique. Seule la roue compte.</li>
+        <li>\(\dot\theta\) est constante, donc \(\ddot\theta=0\) : pas de terme en accélération angulaire.</li>
+        <li>Le moment en \(O\) selon \(\vec y_0\) isole \(Z_A\) (bras \(a\)) ; selon \(\vec z_0\) il isole \(Y_A\).</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ---- Question 2 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q2</span>Position de la roue : \(\rho\), \(\alpha\), \(E\), \(F\) à partir des capteurs</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer \(\rho\), \(\alpha\), \(E\) et \(F\) en fonction de \(Z_O(0)\), \(Z_O(\pi/2)\), \(Z_A(0)\), \(Z_A(\pi/2)\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Pour \(\theta=0\) : on écrit \(Z_A(0)\) et \(Z_O(0)\) (équations 1 et 2). La somme élimine \(E\) et \(F\).</li>
+        <li>Pour \(\theta=\pi/2\) : on fait de même (équations 4 et 5). La somme donne une deuxième relation indépendante.</li>
+        <li>On combine les deux sommes : \(\rho\) vient du module, \(\alpha\) du rapport des deux sommes.</li>
+        <li>Enfin, les combinaisons \((1)\sin\alpha+(4)\cos\alpha\) et \((1)\cos\alpha-(4)\sin\alpha\) donnent \(F\) et \(E\).</li>
+      </ol>
+      <div class="calc">
+        <p>Pour \(\theta=0\) : \(Z_A(0)=\dfrac{\omega^2}{a}[(E+m_2\rho b)\cos\alpha+F\sin\alpha]\) (1), \(Z_O(0)=-\dfrac{\omega^2}{a}[(E+m_2\rho(a+b))\cos\alpha+F\sin\alpha]\) (2).
+        Par somme : \(Z_A(0)+Z_O(0)=-m_2\rho\omega^2\cos\alpha\) (3).</p>
+        <p>Pour \(\theta=\pi/2\) : \(Z_A(\tfrac\pi2)=\dfrac{\omega^2}{a}[-(E+m_2\rho b)\sin\alpha+F\cos\alpha]\) (4), \(Z_O(\tfrac\pi2)=-\dfrac{\omega^2}{a}[-(E+m_2\rho(a+b))\sin\alpha+F\cos\alpha]\) (5).
+        Par somme : \(Z_A(\tfrac\pi2)+Z_O(\tfrac\pi2)=m_2\rho\omega^2\sin\alpha\) (6).</p>
+        <p>Module : \((3)^2+(6)^2\) donne \(\rho\). Rapport : \((6)/(3)\) donne \(\tan\alpha\). Puis :</p>
+        \[\rho=\dfrac{1}{m_2\omega^2}\sqrt{\big(Z_A(0)+Z_O(0)\big)^2+\big(Z_A(\tfrac\pi2)+Z_O(\tfrac\pi2)\big)^2}\qquad
+        \tan\alpha=-\dfrac{Z_A(\tfrac\pi2)+Z_O(\tfrac\pi2)}{Z_A(0)+Z_O(0)}\]
+        \[F=\dfrac{a}{\omega^2}\Big(Z_A(0)\sin\alpha+Z_A(\tfrac\pi2)\cos\alpha\Big)\qquad
+        E=\dfrac{a}{\omega^2}\Big(Z_A(0)\cos\alpha-Z_A(\tfrac\pi2)\sin\alpha\Big)-m_2\rho b\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \(\rho\) : module de la somme des \(Z\) ; \(\alpha\) : angle donné par \(\tan\alpha\), à \(\pi\) près ;
+        \(F\) et \(E\) : combinaisons des mesures en \(\theta=0\) et \(\theta=\pi/2\), corrigées du terme \(m_2\rho b\).
+      </div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>\(Z_O\) et \(Z_A\) sont des <strong>sinusoïdes pures</strong> : \(P\cos\theta+Q\sin\theta\). Deux mesures (\(\theta=0\) et \(\pi/2\)) suffisent à tout déterminer.</p>
+      <p>La somme \(Z_O+Z_A\) ne contient que \(\rho\) et \(\alpha\) : c'est la résultante, sans \(E\) ni \(F\).</p>
+    </aside>
+  </div>
+
+  <!-- ---- Question 3 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3</span>Application numérique : \(\rho\), \(\alpha\), \(E\), \(F\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Lire les mesures sur les courbes et le tableau, puis calculer \(\rho\), \(\alpha\), \(E\), \(F\).</div>
+
+      <figure>
+        <img src="img/pfd-eq-donnees.png" alt="Données de l'équilibreuse : masse, cotes, vitesse, courbes Z_O et Z_A et tableau des mesures" loading="lazy">
+        <figcaption>Énoncé : données, courbes relevées par les capteurs (\(Z_O\) et \(Z_A\) en fonction de \(\theta\)) et tableau des mesures.</figcaption>
+      </figure>
+
+      <div class="calc">
+        <p>Mesures utilisées (tableau) : \(Z_O(0)=44{,}05\) N, \(Z_A(0)=-10{,}53\) N, \(Z_O(90°)=-40{,}29\) N, \(Z_A(90°)=17{,}68\) N.</p>
+        \[S_0=Z_A(0)+Z_O(0)=33{,}52\ \text N\qquad S_p=Z_A(\tfrac\pi2)+Z_O(\tfrac\pi2)=-22{,}61\ \text N\]
+        \[\rho=\dfrac{\sqrt{33{,}52^2+22{,}61^2}}{18\times 60^2}=\dfrac{40{,}43}{64\,800}\approx 6{,}2\times10^{-4}\ \text m\approx 0{,}62\ \text{mm}\]
+        \[\alpha:\ \tan\alpha=\dfrac{-22{,}61}{-33{,}52}\ \text{avec}\ \cos\alpha<0\ \Rightarrow\ \alpha\approx 214^\circ\]
+        <p>Avec \(K_0=Z_A(0)\,a/\omega^2=-10{,}53\times0{,}46/3600\approx-1{,}35\times10^{-3}\) kg·m² et
+        \(K_p=Z_A(\tfrac\pi2)\,a/\omega^2=17{,}68\times0{,}46/3600\approx2{,}26\times10^{-3}\) kg·m², avec \(\cos\alpha\approx-0{,}829\), \(\sin\alpha\approx-0{,}559\) :</p>
+        \[E+m_2\rho b=K_0\cos\alpha-K_p\sin\alpha\approx2{,}38\times10^{-3}\ \Rightarrow\ E\approx2{,}38\times10^{-3}-0{,}89\times10^{-3}\approx1{,}5\times10^{-3}\ \text{kg·m}^2\]
+        \[F=K_0\sin\alpha+K_p\cos\alpha\approx-1{,}1\times10^{-3}\ \text{kg·m}^2\]
+      </div>
+      <div class="res"><span class="lab">Réponse (corrigé officiel)</span>
+        \(\rho=0{,}62\) mm, \(\alpha=214^\circ\) (défini à \(\pi\) près), \(E\approx1{,}5\times10^{-3}\) kg·m², \(F\approx-1{,}1\times10^{-3}\) kg·m².
+        Le corrigé imprime « \(F=1{,}5\times10^{-3}\) » : c'est \(E\), la valeur de \(F\) étant \(-1{,}1\times10^{-3}\).
+      </div>
+      <p>Les courbes mesurées sont bien des sinusoïdes : le graphique ci-dessous compare les mesures à la sinusoïde \(P\cos\theta+Q\sin\theta\).</p>
+    </div>
+    <aside class="aside apply">
+      <span class="lab">Appliquer</span>
+      <ul>
+        <li>\(\rho\) se lit comme un module : \(\sqrt{S_0^2+S_p^2}\), pas une somme.</li>
+        <li>\(\alpha\) est donné à \(\pi\) près : le signe des deux \(\cos\alpha\) et \(\sin\alpha\) fixe le quadrant.</li>
+        <li>Penser à retirer \(m_2\rho b\) avant de conclure sur \(E\).</li>
+      </ul>
+    </aside>
+  </div>
+
+  <div class="svgwrap">
+<svg viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Courbes Z_O et Z_A en fonction de theta : sinusoides, points mesures tous les 30 degres">
+  <line x1="80" y1="49.3" x2="580" y2="49.3" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="80" y1="87.9" x2="580" y2="87.9" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="80" y1="126.4" x2="580" y2="126.4" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="80" y1="203.6" x2="580" y2="203.6" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="80" y1="242.1" x2="580" y2="242.1" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="80" y1="280.7" x2="580" y2="280.7" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="80" y1="165.0" x2="580" y2="165.0" stroke="#475569" stroke-width="1.5"/>
+  <line x1="80" y1="30.0" x2="80" y2="300.0" stroke="#475569" stroke-width="1.5"/>
+  <g font-size="20" fill="#334155" text-anchor="end">
+    <text x="70" y="56.3">60</text>
+    <text x="70" y="94.9">40</text>
+    <text x="70" y="133.4">20</text>
+    <text x="70" y="172.0">0</text>
+    <text x="70" y="210.6">−20</text>
+    <text x="70" y="249.1">−40</text>
+    <text x="70" y="287.7">−60</text>
+  </g>
+  <g font-size="20" fill="#334155" text-anchor="middle">
+    <text x="80.0" y="328">0°</text>
+    <text x="205.0" y="328">90°</text>
+    <text x="330.0" y="328">180°</text>
+    <text x="455.0" y="328">270°</text>
+    <text x="580.0" y="328">360°</text>
+  </g>
+  <text x="330" y="356" font-size="22" fill="#1e293b" text-anchor="middle">θ (degrés)</text>
+  <text x="24" y="165" font-size="22" fill="#1e293b" text-anchor="middle" transform="rotate(-90 24 165)">Z (N)</text>
+  <polyline fill="none" stroke="#0f766e" stroke-width="3" stroke-linejoin="round" points="80.0,80.0 85.6,85.7 91.1,91.7 96.7,98.1 102.2,104.8 107.8,111.7 113.3,119.0 118.9,126.5 124.4,134.1 130.0,141.9 135.6,149.9 141.1,157.9 146.7,165.9 152.2,173.9 157.8,181.9 163.3,189.8 168.9,197.6 174.4,205.2 180.0,212.6 185.6,219.8 191.1,226.8 196.7,233.4 202.2,239.7 207.8,245.6 213.3,251.2 218.9,256.3 224.4,260.9 230.0,265.2 235.6,268.9 241.1,272.1 246.7,274.8 252.2,276.9 257.8,278.5 263.3,279.6 268.9,280.1 274.4,280.0 280.0,279.4 285.6,278.2 291.1,276.5 296.7,274.2 302.2,271.4 307.8,268.1 313.3,264.3 318.9,259.9 324.4,255.2 330.0,250.0 335.6,244.3 341.1,238.3 346.7,231.9 352.2,225.2 357.8,218.3 363.3,211.0 368.9,203.5 374.4,195.9 380.0,188.1 385.6,180.1 391.1,172.1 396.7,164.1 402.2,156.1 407.8,148.1 413.3,140.2 418.9,132.4 424.4,124.8 430.0,117.4 435.6,110.2 441.1,103.2 446.7,96.6 452.2,90.3 457.8,84.4 463.3,78.8 468.9,73.7 474.4,69.1 480.0,64.8 485.6,61.1 491.1,57.9 496.7,55.2 502.2,53.1 507.8,51.5 513.3,50.4 518.9,49.9 524.4,50.0 530.0,50.6 535.6,51.8 541.1,53.5 546.7,55.8 552.2,58.6 557.8,61.9 563.3,65.7 568.9,70.1 574.4,74.8 580.0,80.0"/>
+  <polyline fill="none" stroke="#c2410c" stroke-width="3" stroke-linejoin="round" points="80.0,185.3 85.6,182.9 91.1,180.4 96.7,177.8 102.2,175.1 107.8,172.4 113.3,169.7 118.9,166.9 124.4,164.2 130.0,161.4 135.6,158.6 141.1,155.9 146.7,153.2 152.2,150.6 157.8,148.1 163.3,145.6 168.9,143.3 174.4,141.0 180.0,138.8 185.6,136.8 191.1,134.9 196.7,133.2 202.2,131.6 207.8,130.2 213.3,129.0 218.9,127.9 224.4,127.0 230.0,126.3 235.6,125.8 241.1,125.5 246.7,125.3 252.2,125.4 257.8,125.6 263.3,126.1 268.9,126.7 274.4,127.5 280.0,128.5 285.6,129.7 291.1,131.1 296.7,132.6 302.2,134.3 307.8,136.1 313.3,138.0 318.9,140.1 324.4,142.4 330.0,144.7 335.6,147.1 341.1,149.6 346.7,152.2 352.2,154.9 357.8,157.6 363.3,160.3 368.9,163.1 374.4,165.8 380.0,168.6 385.6,171.4 391.1,174.1 396.7,176.8 402.2,179.4 407.8,181.9 413.3,184.4 418.9,186.7 424.4,189.0 430.0,191.2 435.6,193.2 441.1,195.1 446.7,196.8 452.2,198.4 457.8,199.8 463.3,201.0 468.9,202.1 474.4,203.0 480.0,203.7 485.6,204.2 491.1,204.5 496.7,204.7 502.2,204.6 507.8,204.4 513.3,203.9 518.9,203.3 524.4,202.5 530.0,201.5 535.6,200.3 541.1,198.9 546.7,197.4 552.2,195.7 557.8,193.9 563.3,192.0 568.9,189.9 574.4,187.6 580.0,185.3"/>
+  <circle cx="80.0" cy="80.0" r="5.5" fill="#0f766e"/>
+  <circle cx="121.7" cy="130.3" r="5.5" fill="#0f766e"/>
+  <circle cx="163.3" cy="189.8" r="5.5" fill="#0f766e"/>
+  <circle cx="205.0" cy="242.7" r="5.5" fill="#0f766e"/>
+  <circle cx="246.7" cy="274.8" r="5.5" fill="#0f766e"/>
+  <circle cx="288.3" cy="277.4" r="5.5" fill="#0f766e"/>
+  <circle cx="330.0" cy="250.0" r="5.5" fill="#0f766e"/>
+  <circle cx="371.7" cy="199.7" r="5.5" fill="#0f766e"/>
+  <circle cx="413.3" cy="140.2" r="5.5" fill="#0f766e"/>
+  <circle cx="455.0" cy="87.3" r="5.5" fill="#0f766e"/>
+  <circle cx="496.7" cy="55.2" r="5.5" fill="#0f766e"/>
+  <circle cx="538.3" cy="52.6" r="5.5" fill="#0f766e"/>
+  <circle cx="80.0" cy="185.3" r="5.5" fill="#c2410c"/>
+  <circle cx="121.7" cy="165.5" r="5.5" fill="#c2410c"/>
+  <circle cx="163.3" cy="145.6" r="5.5" fill="#c2410c"/>
+  <circle cx="205.0" cy="130.9" r="5.5" fill="#c2410c"/>
+  <circle cx="246.7" cy="125.3" r="5.5" fill="#c2410c"/>
+  <circle cx="288.3" cy="130.4" r="5.5" fill="#c2410c"/>
+  <circle cx="330.0" cy="144.7" r="5.5" fill="#c2410c"/>
+  <circle cx="371.7" cy="164.5" r="5.5" fill="#c2410c"/>
+  <circle cx="413.3" cy="184.4" r="5.5" fill="#c2410c"/>
+  <circle cx="455.0" cy="199.1" r="5.5" fill="#c2410c"/>
+  <circle cx="496.7" cy="204.7" r="5.5" fill="#c2410c"/>
+  <circle cx="538.3" cy="199.6" r="5.5" fill="#c2410c"/>
+  <text x="455" y="38" font-size="22" font-weight="700" fill="#0f766e">Z<tspan baseline-shift="sub" font-size="18">O</tspan>(θ)</text>
+  <text x="250" y="110" font-size="22" font-weight="700" fill="#c2410c">Z<tspan baseline-shift="sub" font-size="18">A</tspan>(θ)</text>
+</svg>
+    <figcaption>Points : mesures du tableau tous les 30°. Trait plein : sinusoïdes \(Z_O=44{,}05\cos\theta-40{,}29\sin\theta\) et \(Z_A=-10{,}53\cos\theta+17{,}68\sin\theta\) (écart maximal de l'ajustement : 0,01 N).
+    Amplitudes : \(Z_O\) environ 60 N, \(Z_A\) environ 21 N.</figcaption>
+  </div>
+
+  <!-- ---- Question 4 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q4</span>Conditions d'équilibrage de la roue</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Écrire les conditions pour que la roue soit équilibrée avec deux masselottes 3 et 4 : \(\overrightarrow{BM_3}=r\vec u_3\) et \(\overrightarrow{BM_4}=c\vec x_0+r\vec u_4\), avec \(\beta_i=(\vec z_2,\vec u_i)\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Équilibrage statique</strong> : le centre d'inertie \(G\) de l'ensemble doit être sur l'axe \((B,\vec x_0)\), donc \(\overrightarrow{BG}\cdot\vec y_2=\overrightarrow{BG}\cdot\vec z_2=0\).</li>
+        <li><strong>Équilibrage dynamique</strong> : l'axe doit être <strong>principal d'inertie</strong>, donc les produits d'inertie \(E'\) et \(F'\) de l'ensemble sont nuls.</li>
+        <li>On projette les positions : \(\overrightarrow{BM_3}=-r\sin\beta_3\vec y_2+r\cos\beta_3\vec z_2\) et \(\overrightarrow{BM_4}=c\vec x_0-r\sin\beta_4\vec y_2+r\cos\beta_4\vec z_2\).</li>
+      </ol>
+      <div class="calc">
+        <p><strong>Statique</strong> (\(G\) sur l'axe) :</p>
+        \[(7):\ -m_3r\sin\beta_3-m_4r\sin\beta_4=0\qquad (8):\ m_2\rho+m_3r\cos\beta_3+m_4r\cos\beta_4=0\]
+        <p><strong>Dynamique</strong> : la masselotte 3 est dans le plan \(B\) (bras axial nul), elle ne crée aucun produit d'inertie.
+        Seule la masselotte 4, déportée de \(c\), en crée. On annule donc les produits d'inertie totaux :</p>
+        \[(9):\ E+m_4cr\cos\beta_4=0\qquad (10):\ F-m_4cr\sin\beta_4=0\]
+      </div>
+      <div class="warn"><span class="lab">Point de vigilance (signe)</span>
+        La matrice d'inertie porte \(-F\) et \(-E\) en \(I_{xy}\) et \(I_{xz}\). Un point de masse \(m_4\) à \((x,y,z)=(c,\,-r\sin\beta_4,\,r\cos\beta_4)\) apporte \(-m_4xy=+m_4cr\sin\beta_4\) en \(xy\)
+        et \(-m_4xz=-m_4cr\cos\beta_4\) en \(xz\). On annule donc la somme : \((9)\) \(E+m_4cr\cos\beta_4=0\) et \((10)\) \(F-m_4cr\sin\beta_4=0\).
+        Avec ces signes on obtient \(\beta_4\approx216^\circ\), comme le corrigé officiel (voir Q5). Le corrigé imprime (10) de façon peu lisible : c'est ce sens des signes qu'il faut retenir.</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Deux masselottes sont nécessaires : une pour l'équilibrage <strong>statique</strong> (force), une pour la <strong>dynamique</strong> (couple).</li>
+        <li>La masselotte 3 est dans le plan \(B\) : elle n'apporte pas de produit d'inertie.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ---- Question 5 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q5</span>Valeurs numériques : \(m_3\), \(m_4\), \(\beta_3\), \(\beta_4\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Avec \(r=190\) mm et \(c=180\) mm, calculer les masses et les angles des deux masselottes.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Les équations (9) et (10) donnent \(m_4\) et \(\beta_4\) : \(m_4cr\) est le module de \((E,F)\).</li>
+        <li>Les équations (7) et (8) donnent \(m_3\) et \(\beta_3\) : on y remplace \(m_4\), \(\beta_4\), \(E\), \(F\).</li>
+      </ol>
+      <div class="calc">
+        <p><strong>Masselotte 4</strong> : \(m_4cr=\sqrt{E^2+F^2}=\sqrt{(1{,}5\times10^{-3})^2+(1{,}1\times10^{-3})^2}\approx1{,}86\times10^{-3}\) kg·m²,
+        \(cr=0{,}18\times0{,}19=0{,}0342\) m², donc :</p>
+        \[m_4=\dfrac{1}{cr}\sqrt{E^2+F^2}\approx 54\ \text g\]
+        \[\cos\beta_4=-\dfrac{E}{m_4cr}\approx-0{,}80,\qquad \sin\beta_4=\dfrac{F}{m_4cr}\approx-0{,}60\ \Rightarrow\ \beta_4\approx216^\circ\]
+        <p><strong>Masselotte 3</strong> (déduite de (7) et (8)) : \(m_3\cos\beta_3\,cr=E-m_2\rho c\) et \(m_3\sin\beta_3\,cr=-F\), soit :</p>
+        \[m_3=\dfrac{1}{cr}\sqrt{F^2+(E-m_2\rho c)^2}\approx36\ \text g\qquad \tan\beta_3=\dfrac{F}{m_2\rho c-E}\ \Rightarrow\ \beta_3\approx115^\circ\]
+        <p>Avec \(m_2\rho c=18\times0{,}62\times10^{-3}\times0{,}18\approx2{,}0\times10^{-3}\) kg·m², \(E-m_2\rho c\approx-0{,}5\times10^{-3}\) : \(\cos\beta_3<0\) et \(\sin\beta_3>0\), donc \(\beta_3\) est dans le 2ᵉ quadrant.</p>
+      </div>
+      <div class="res"><span class="lab">Réponse (corrigé officiel)</span>
+        \(m_3\approx36\) g à \(\beta_3\approx115^\circ\) ; \(m_4\approx54\) g à \(\beta_4\approx216^\circ\).
+        Les masselottes sont placées de part et d'autre de la jante (3 dans le plan \(B\), 4 déportée de \(c\)).
+      </div>
+    </div>
+    <aside class="aside apply">
+      <span class="lab">Appliquer</span>
+      <ul>
+        <li>Pour \(\beta\), toujours regarder les <strong>signes</strong> de \(\cos\beta\) et \(\sin\beta\) avant \(\arctan\) : sinon on rate le quadrant.</li>
+        <li>Vérifier les résultats : \(m_3\cos\beta_3\) et \(m_3\sin\beta_3\) doivent redonner (7) et (8).</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>5. À retenir</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Torseur dynamique</strong> : \(\vec R=m\vec\Gamma_G\), \(\vec\delta\) à calculer au point fixe, ici \(B\) puis \(O\) par transport.</li>
+      <li><strong>Mesures</strong> : \(Z_O(\theta)\) et \(Z_A(\theta)\) sont des sinusoïdes ; \(\theta=0\) et \(\pi/2\) suffisent.</li>
+      <li><strong>Balourd</strong> : \(\rho\) (défaut de position), \(E\) et \(F\) (défauts d'inertie). Ce sont eux que les masselottes annulent.</li>
+      <li><strong>Équilibrage</strong> : une masselotte pour la statique (force), une pour la dynamique (couple). Résultat : \(m_3\approx36\) g à \(115^\circ\), \(m_4\approx54\) g à \(216^\circ\).</li>
+    </ul>
+  </div>
+
+  <footer>
+    Source : TD « Principe fondamental de la dynamique — Équilibreuse » (CPGE PT / S2I, Lycée Jean Zay, E. Bigeard, v1.5). Corrigé officiel adapté d'A. Chabert et A. Meurdefroid.
+    <a href="../assets/pdf.html?f=../documents/aem2-si/ch3-dynamique-solide/PFD-PT-TD-equilibreuse-prof.pdf" target="_blank" rel="noopener">Ouvrir l'énoncé et le corrigé (PDF)</a>.
+    Les encadrés orange signalent les points à vérifier ou les écarts avec le corrigé.
+  </footer>
+
+</div>
+
+<script src="../assets/gate.js"></script>
+</body>
+</html>

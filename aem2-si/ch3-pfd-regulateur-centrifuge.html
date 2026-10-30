@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Régulateur centrifuge — correction détaillée (PFD)</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  :root{
+    --bg:#fafafa; --text:#2d3748; --muted:#64748b; --title:#1a202c;
+    --accent:#0f766e; --accent-soft:#ccfbf1; --line:#e5e7eb; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--text);
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    font-size:17px; line-height:1.7}
+  .page{max-width:800px; margin:0 auto; padding:2.5rem 2rem 4rem}
+  .nav{display:flex; flex-wrap:wrap; gap:1rem; font-size:.92rem; margin-bottom:1.5rem}
+  .nav a{color:var(--accent); text-decoration:none; font-weight:600}
+  .nav a:hover{text-decoration:underline}
+  p, ul, ol{margin:0 0 1.5rem}
+  li{margin-bottom:.45rem}
+  strong{color:var(--title)}
+  h1{font-size:2.1rem; line-height:1.2; color:var(--title); margin:.6rem 0 .6rem}
+  h2{font-size:1.5rem; color:var(--title); margin:3.4rem 0 1.1rem; padding-bottom:.45rem;
+    border-bottom:2px solid var(--accent-soft)}
+  h3{font-size:1.15rem; color:var(--accent); margin:2.2rem 0 .7rem}
+  .kicker{font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
+  .lead{color:var(--muted); font-size:1.08rem; margin-bottom:2rem}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1.4rem 1.6rem; margin:1.5rem 0}
+  .card h3:first-child{margin-top:0}
+
+  /* ---- Question : texte à gauche, encadré méthode à droite ---- */
+  .qblock{display:grid; grid-template-columns:minmax(0,1fr) 250px; gap:1.8rem;
+    margin:2.4rem 0 0; padding-top:1.8rem; border-top:1px solid var(--line)}
+  .qblock.wide{grid-template-columns:1fr}
+  .qtitle{font-size:1.2rem; font-weight:800; color:var(--title); margin:0 0 1rem}
+  .qnum{display:inline-block; background:var(--accent); color:#fff; border-radius:7px;
+    padding:.12rem .6rem; font-size:.9rem; margin-right:.5rem; vertical-align:middle}
+  .ask{background:#f8fafc; border-left:4px solid #94a3b8; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .ask .lab, .lab{display:block; font-size:.72rem; font-weight:800; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:.25rem}
+  .demarche{margin:0 0 1.2rem}
+  .calc{background:#fff; border:1px solid var(--line); border-radius:10px; padding:.8rem 1rem .4rem; margin:0 0 1.2rem; overflow-x:auto}
+  .res{background:#ecfdf5; border-left:4px solid #059669; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .res .lab{color:#047857}
+
+  .aside{align-self:start; border-radius:12px; padding:1rem 1.1rem; font-size:.93rem; line-height:1.55;
+    background:#f0fdfa; border:1px solid #99f6e4}
+  .aside.formula{background:#f5f3ff; border-color:#ddd6fe}
+  .aside.apply{background:#fffbeb; border-color:#fde68a}
+  .aside.piege{background:#fff1f2; border-color:#fecdd3}
+  .aside .lab{color:var(--accent); margin-bottom:.35rem}
+  .aside.formula .lab{color:#6d28d9}
+  .aside.apply .lab{color:#b45309}
+  .aside.piege .lab{color:#be123c}
+  .aside p, .aside ul{margin:0 0 .7rem}
+  .aside ul{padding-left:1.1rem}
+  .aside li{margin-bottom:.3rem}
+  .aside > :last-child{margin-bottom:0}
+
+  .warn{background:#fff7ed; border-left:4px solid #ea580c; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .warn .lab{color:#c2410c}
+  .info{background:#f0f9ff; border-left:4px solid #0284c7; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .info .lab{color:#0369a1}
+
+  figure{margin:1.4rem 0 1.8rem; text-align:center}
+  figure img{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:10px; padding:.5rem}
+  figcaption{font-size:.88rem; color:var(--muted); margin-top:.5rem; line-height:1.5}
+
+  /* ---- Schéma de la chaîne ---- */
+  .chain{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:.5rem; margin:1.4rem 0 1.8rem}
+  .node{background:var(--accent); color:#fff; font-weight:700; border-radius:10px; padding:.6rem .95rem; text-align:center; font-size:.95rem}
+  .node.bati{background:#475569}
+  .link{font-size:.82rem; color:var(--muted); text-align:center; padding:0 .3rem; max-width:150px; line-height:1.3}
+  .link::before{content:"→"; display:block; font-size:1.3rem; color:var(--accent); line-height:1.1}
+
+  table{width:100%; border-collapse:collapse; margin:.6rem 0 1.4rem; font-size:.93rem; background:#fff}
+  th, td{border:1px solid var(--line); padding:.5rem .6rem; text-align:center}
+  th{background:#f1f5f9; color:var(--title)}
+  td.l, th.l{text-align:left}
+  tr.ok td{background:#f0fdf4}
+  tr.pick td{background:#ccfbf1; font-weight:700}
+
+  .svgwrap{background:#fff; border:1px solid var(--line); border-radius:12px; padding:1rem; margin:1.2rem 0 1.6rem}
+  .svgwrap > svg{display:block; width:100%; height:auto}
+  .svgwrap figcaption{margin-top:.6rem}
+
+  .steps{counter-reset:s; list-style:none; padding:0; margin:0 0 1.5rem}
+  .steps li{counter-increment:s; position:relative; padding:.2rem 0 .2rem 2.7rem; margin-bottom:.9rem}
+  .steps li::before{content:counter(s); position:absolute; left:0; top:.1rem; width:1.9rem; height:1.9rem;
+    border-radius:50%; background:var(--accent-soft); color:var(--accent); font-weight:800; text-align:center; line-height:1.9rem}
+  .steps a{color:var(--accent); font-weight:600}
+
+  footer{margin-top:3.5rem; padding-top:1.2rem; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem}
+  footer a{color:var(--accent)}
+  mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%}
+
+  @media (max-width:680px){
+    body{font-size:16px}
+    .page{padding:1.6rem 1.1rem 3rem}
+    h1{font-size:1.65rem}
+    h2{font-size:1.3rem; margin-top:2.6rem}
+    .qblock{grid-template-columns:1fr; gap:1rem}
+    .chain{flex-direction:column}
+    .link::before{content:"↓"}
+  }
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+<div class="page">
+
+  <nav class="nav">
+    <a href="../index.html#am2">← Accueil</a>
+    <a href="ch3-dynamique-solide.html">← Chapitre 3 (cours)</a>
+    <a href="../assets/pdf.html?f=../documents/aem2-si/ch3-dynamique-solide/PFD-PT-TD-regulateur_centrifuge-prof.pdf" target="_blank" rel="noopener">Énoncé original (PDF)</a>
+  </nav>
+
+  <div class="kicker">AM2 · SI · Chapitre 3 — Principe fondamental de la dynamique (TD)</div>
+  <h1>Régulateur centrifuge : correction détaillée</h1>
+  <p class="lead">Un exercice du TD « Principe fondamental de la dynamique » (CPGE PT, S2I). Un régulateur de vitesse d'une machine thermique :
+  la masselotte 2 s'écarte sous l'effet de la rotation et comprime un ressort 3 par l'intermédiaire d'un tiroir. Le but est de dimensionner
+  la raideur du ressort. Pour chaque question : ce qu'elle demande, la démarche, le calcul complet, et les encadrés de méthode.</p>
+
+  <!-- ============================================================ -->
+  <h2>1. Avant de commencer : l'essentiel en quelques lignes</h2>
+
+  <div class="card">
+    <h3>Le moment dynamique et la liaison pivot</h3>
+    <p>Le PFD appliqué à un solide \(\Sigma\) s'écrit en moment en un point \(P\) : \(\sum\vec M_P(\text{ext})=\vec\delta_{P\in\Sigma/0}\).
+    Le moment dynamique \(\vec\delta_{A}\) est la dérivée du moment cinétique \(\vec\sigma_A\) (calculé dans le repère de référence).</p>
+    <ul>
+      <li><strong>Liaison pivot</strong> d'axe \((A,\vec z_1)\) : elle ne transmet aucun moment selon son propre axe. Projeter l'équation de moment sur \(\vec z_1\)
+      élimine donc les réactions inconnues en \(A\).</li>
+      <li><strong>Deux contacts symétriques</strong> : un même ressort agit sur deux positions symétriques de la masselotte. Leurs effets
+      s'additionnent (les termes en poids s'annulent).</li>
+    </ul>
+  </div>
+
+  <div class="info">
+    <span class="lab">Ce que demande le TD au final</span>
+    Déterminer la <strong>composante \(F_R\)</strong> de l'effort du ressort, puis la <strong>raideur minimale</strong> \(k\) du ressort
+    pour que son allongement reste inférieur à une course maximale \(\Delta l_{max}\).
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>2. La démarche en 5 étapes</h2>
+  <ol class="steps">
+    <li><strong>Graphe des liaisons</strong> : repérer qui est lié à qui et où agissent les efforts (question 1).</li>
+    <li><strong>Moment cinétique en \(A\)</strong> de la masselotte 2 (question 2), puis sa dérivée (question 3).</li>
+    <li><strong>Projection sur \(\vec z_1\)</strong> du PFD : équation de moment qui ne contient plus le pivot (question 4).</li>
+    <li><strong>Isoler le ressort</strong> 3 pour trouver \(F_R\) à partir de l'effort \(X_{32}\) (question 5).</li>
+    <li><strong>Dimensionner</strong> la raideur (question 6).</li>
+  </ol>
+
+  <!-- ============================================================ -->
+  <h2>3. Le modèle et les données</h2>
+
+  <figure>
+    <img src="img/c03-td-regulateur.png" alt="Régulateur centrifuge : arbre 1 tournant autour de l'axe x, masselotte 2 pivotant en A, ressort 3 et tiroir" loading="lazy">
+    <figcaption>Schéma de l'énoncé. Le bras 1 tourne autour de l'axe \((O,\vec x)\). La masselotte 2 pivote autour de \((A,\vec z_1)\).
+    Le tiroir 3 se déplace suivant \(\vec x\) et comprime le ressort.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="img/c03-td-regulateur-hyp.png" alt="Paramétrage : angles alpha et beta, points O, A, B, G, bases b1 et b2" loading="lazy">
+    <figcaption>Paramétrage. Angle \(\alpha\) : rotation du bras 1 autour de \(\vec x\). Angle \(\beta\) : bascule de la masselotte 2 autour de \(\vec z_1\).</figcaption>
+  </figure>
+
+  <div class="card">
+    <h3>Hypothèses (à garder en tête)</h3>
+    <ul>
+      <li>\(\overrightarrow{OA}=a\,\vec y_1\), \(\overrightarrow{AG}=b\,\vec y_2\), \(\overrightarrow{BA}=c\,\vec x_2\).</li>
+      <li>Matrice d'inertie de la masselotte en \(A\), dans \(\vec b_2=(\vec x_2,\vec y_2,\vec z_2)\) : \(\bar{\bar I}_{(A,2)}=\begin{pmatrix}A&-F&0\\-F&B&0\\0&0&C\end{pmatrix}\).</li>
+      <li>Le bras 1 tourne autour de \((O,\vec x)\) à la vitesse \(\dot\alpha\) ; la masselotte 2 tourne par rapport à 1 autour de \((A,\vec z_1)\) à la vitesse \(\dot\beta\).</li>
+      <li>On admet que \(\beta\) est <strong>constant</strong> pendant la phase étudiée : \(\dot\beta=\ddot\beta=0\).</li>
+      <li>Pas de valeurs numériques dans l'énoncé : les résultats restent littéraux.</li>
+    </ul>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>4. Les questions</h2>
+
+  <!-- ---- Question 1 ---- -->
+  <div class="qblock wide">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Graphe des liaisons</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Proposer un graphe des liaisons qui fait apparaître les paramètres et les actions mécaniques.</div>
+
+      <div class="svgwrap">
+        <svg viewBox="0 0 600 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Graphe des liaisons : 0 pivot 1 ; 1 pivot 2 ; 1 glissiere 3 ; 2 ponctuelle 3 ; poids sur 2 ; ressort F_R entre 1 et 3">
+          <!-- poids sur 2 -->
+          <line x1="330" y1="12" x2="330" y2="58" stroke="#475569" stroke-width="2.5"/>
+          <text x="345" y="34" font-size="20" fill="#334155">poids (T pes→2)</text>
+          <!-- liaisons -->
+          <line x1="96" y1="170" x2="224" y2="170" stroke="#0f766e" stroke-width="3"/>
+          <line x1="262" y1="156" x2="316" y2="104" stroke="#0f766e" stroke-width="3"/>
+          <line x1="352" y1="100" x2="478" y2="150" stroke="#0f766e" stroke-width="3"/>
+          <path d="M 276 186 Q 375 250 474 186" fill="none" stroke="#0f766e" stroke-width="3"/>
+          <!-- noeuds -->
+          <circle cx="70" cy="170" r="26" fill="#ffffff" stroke="#475569" stroke-width="2.5"/>
+          <circle cx="250" cy="170" r="26" fill="#ffffff" stroke="#475569" stroke-width="2.5"/>
+          <circle cx="330" cy="90" r="26" fill="#ffffff" stroke="#475569" stroke-width="2.5"/>
+          <circle cx="500" cy="170" r="26" fill="#ffffff" stroke="#475569" stroke-width="2.5"/>
+          <g font-size="24" font-weight="700" fill="#1e293b" text-anchor="middle">
+            <text x="70" y="177">0</text>
+            <text x="250" y="177">1</text>
+            <text x="330" y="97">2</text>
+            <text x="500" y="177">3</text>
+          </g>
+          <!-- etiquettes -->
+          <g font-size="19" fill="#0f766e" text-anchor="middle">
+            <text x="160" y="150">pivot (O, x)</text>
+            <text x="200" y="110" text-anchor="end">pivot (A, z₁)</text>
+            <text x="450" y="72">ponctuelle (B, x)</text>
+            <text x="375" y="204">ressort F<tspan baseline-shift="sub" font-size="14">R</tspan></text>
+            <text x="375" y="250">glissière (C, x)</text>
+          </g>
+        </svg>
+        <figcaption>Graphe des liaisons. Les traits verts sont les liaisons : pivot 0/1, pivot 1/2, ponctuelle 2/3 (contact normal en \(B\)),
+        glissière 1/3 (direction \(\vec x\)). Le ressort agit entre 1 et 3 avec l'effort \(F_R\).</figcaption>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---- Question 2 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q2</span>Moment cinétique en \(A\) de la masselotte 2</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer \(\vec\sigma_{A\in2/0}\) dans le mouvement de 2 par rapport à \(R\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Formule générale : \(\vec\sigma_{A}=\bar{\bar I}_{(A,2)}\cdot\vec\Omega_{2/0}+m\,\overrightarrow{AG}\wedge\vec V_{A\in2/0}\).</li>
+        <li>Rotation : \(\vec\Omega_{2/0}=\dot\alpha\,\vec x+\dot\beta\,\vec z_1\). Dans \(\vec b_2\), avec \(\vec x=\cos\beta\,\vec x_2-\sin\beta\,\vec y_2\) :
+        \(\vec\Omega_{2/0}=(\dot\alpha\cos\beta,\ -\dot\alpha\sin\beta,\ \dot\beta)\).</li>
+        <li>Vitesse de \(A\) : \(A\) est porté par le bras 1 (\(\overrightarrow{OA}=a\vec y_1\)) et \(A\) est le pivot de 2 par rapport à 1, donc \(\vec V_{A\in2/0}=\vec V_{A\in1/0}=\dot\alpha\,\vec x\wedge a\vec y_1=a\dot\alpha\,\vec z_2\).</li>
+        <li>\(\overrightarrow{AG}=b\vec y_2\) : \(\overrightarrow{AG}\wedge\vec V_A=b\,a\dot\alpha\,\vec x_2\).</li>
+      </ol>
+      <div class="calc">
+        \[\vec\sigma_{A\in2/0}=\bar{\bar I}_{(A,2)}\begin{pmatrix}\dot\alpha\cos\beta\\-\dot\alpha\sin\beta\\\dot\beta\end{pmatrix}+m\,ab\dot\alpha\,\vec x_2\]
+        <p>Composante par composante :</p>
+        \[\text{(}x_2\text{)}:\ A\dot\alpha\cos\beta+F\dot\alpha\sin\beta+mab\dot\alpha\qquad\text{(}y_2\text{)}:\ -F\dot\alpha\cos\beta-B\dot\alpha\sin\beta\qquad\text{(}z_2\text{)}:\ C\dot\beta\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \[\vec\sigma_{A\in2/0}=\begin{pmatrix}\dot\alpha\,(A\cos\beta+F\sin\beta+mab)\\-\dot\alpha\,(F\cos\beta+B\sin\beta)\\C\,\dot\beta\end{pmatrix}_{\vec b_2}\]
+      </div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Le terme \(mab\dot\alpha\) vient du <strong>mouvement du centre d'inertie</strong> \(\overrightarrow{AG}\wedge m\vec V_A\) : il n'est pas dans \(\bar{\bar I}\).</li>
+        <li>Les composantes sont données dans \(\vec b_2\), qui tourne avec 2 : ne pas les confondre avec celles dans \(\vec b_1\).</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ---- Question 3 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3</span>Projection du moment dynamique sur \(\vec z_1\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer \(\vec\delta_{A\in2/0}\cdot\vec z_1\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Formule : \(\vec\delta_{A\in2/0}=\big[\tfrac{d}{dt}\vec\sigma_A\big]_R+\vec V_{A/0}\wedge m\vec V_{G\in3/0}\) (formule du cours, à appliquer ici avec le bon point).
+        Le terme \(\vec V_{A/0}\wedge m\vec V_{G}\) ne contribue pas sur \(\vec z_1\) : \(\vec V_{A/0}=a\dot\alpha\,\vec z_1\) est colinéaire à \(\vec z_1\), donc son produit vectoriel avec n'importe quel vecteur est orthogonal à \(\vec z_1\).</li>
+        <li>Astuce : \(\vec\delta\cdot\vec z_1=\dfrac{d}{dt}(\vec\sigma_A\cdot\vec z_1)-\vec\sigma_A\cdot\Big[\dfrac{d\vec z_1}{dt}\Big]_R\), car \(\vec z_1\) n'est pas fixe dans \(R\).</li>
+        <li>Dérivée de \(\vec z_1\) dans \(R\) : \(\big[\tfrac{d\vec z_1}{dt}\big]_R=\dot\alpha\,\vec x\wedge\vec z_1=\dot\alpha(-\sin\beta\,\vec x_2-\cos\beta\,\vec y_2)\), soit \((-\dot\alpha\sin\beta,\ -\dot\alpha\cos\beta,\ 0)_{\vec b_2}\).</li>
+      </ol>
+      <div class="calc">
+        <p>Premier terme : \(\dfrac{d}{dt}(\sigma_A\cdot z_1)=\dfrac{d}{dt}(C\dot\beta)=C\ddot\beta\).</p>
+        <p>Second terme : \(\vec\sigma_A\cdot\big[\tfrac{d\vec z_1}{dt}\big]_R=\dot\alpha\big[-\sin\beta\cdot\dot\alpha(A\cos\beta+F\sin\beta+mab)-\cos\beta\cdot(-\dot\alpha)(F\cos\beta+B\sin\beta)\big]\)
+        \(=\dot\alpha^2\big[(B-A)\sin\beta\cos\beta+F(\cos^2\beta-\sin^2\beta)-mab\sin\beta\big]\).</p>
+        \[\vec\delta_{A\in2/0}\cdot\vec z_1=C\ddot\beta+\dot\alpha^2\Big[mab\sin\beta+(A-B)\cos\beta\sin\beta+F(\sin^2\beta-\cos^2\beta)\Big]\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        Avec \(\beta\) constant (\(\ddot\beta=0\)) : \(\vec\delta_{A\in2/0}\cdot\vec z_1=\dot\alpha^2\big[mab\sin\beta+(A-B)\cos\beta\sin\beta+F(\sin^2\beta-\cos^2\beta)\big]\).
+      </div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>Dériver une projection sur un vecteur qui <strong>tourne</strong> : \(\dfrac{d}{dt}(\vec\sigma\cdot\vec u)=\dfrac{d\vec\sigma}{dt}\cdot\vec u+\vec\sigma\cdot\dfrac{d\vec u}{dt}\).
+      C'est ce second terme qui donne les \(\dot\alpha^2\).</p>
+    </aside>
+  </div>
+
+  <!-- ---- Question 4 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q4</span>Équation de moment sur \(\vec z_1\) : effort \(X_{32}\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Écrire le théorème du moment dynamique selon \((A,\vec z_1)\), et justifier ce choix par rapport à l'objectif.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>On isole 2 et on fait le bilan : effort \(X_{32}\vec x\) du tiroir 3 en \(B\) (normal au contact), liaison pivot en \(A\) (inconnue), poids de 2 (vertical) en \(G\).</li>
+        <li>On ramène les actions en \(A\) et on projette sur \(\vec z_1\) : la liaison pivot en \(A\) n'apporte aucun moment selon son axe.</li>
+        <li>Moment de l'effort du tiroir : \(\overrightarrow{AB}=-c\vec x_2\), \(\overrightarrow{AB}\wedge X_{32}\vec x\cdot\vec z_1=c\,X_{32}\sin\beta\).</li>
+        <li>Moment du poids : \(\overrightarrow{AG}=b\vec y_2\) ; le poids projeté sur \(\vec z_1\) donne \(bmg\cos\alpha\sin\beta\) (résultat du corrigé).</li>
+      </ol>
+      <div class="calc">
+        \[\sum\vec M_A(\text{ext}\to2)\cdot\vec z_1=\vec\delta_{A\in2/0}\cdot\vec z_1\qquad\Longrightarrow\qquad cX_{32}\sin\beta+bmg\cos\alpha\sin\beta=\vec\delta_{A\in2/0}\cdot\vec z_1\]
+        \[X_{32}=\dfrac{\vec\delta_{A\in2/0}\cdot\vec z_1-bmg\cos\alpha\sin\beta}{c\sin\beta}\]
+        <p>En remplaçant \(\vec\delta\cdot\vec z_1\) par la réponse de Q3 :</p>
+        \[X_{32}=\dfrac{\dot\alpha^2\big[mab\sin\beta+(A-B)\cos\beta\sin\beta+F(\sin^2\beta-\cos^2\beta)\big]-bmg\cos\alpha\sin\beta}{c\sin\beta}\]
+      </div>
+      <div class="res"><span class="lab">Justification du choix</span>
+        L'objectif est l'effort du ressort. Une équation de moment projetée sur \(\vec z_1\) ne contient <strong>ni la réaction en \(A\)</strong> (pivot), ni les
+        autres inconnues de la liaison ; elle contient \(X_{32}\), qui est directement relié à \(F_R\) (question 5).
+      </div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Le bras de levier du tiroir vaut \(c\) et le sinus de \(\beta\) apparaît : pour \(\sin\beta=0\), l'équation est singulière.</li>
+        <li>Le poids \(bmg\cos\alpha\sin\beta\) dépend de \(\alpha\) : il disparaîtra à la question 5 grâce aux deux contacts.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ---- Question 5 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q5</span>Effort \(F_R\) du ressort</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer la composante \(F_R\) de l'effort du ressort, en précisant le solide isolé et les hypothèses utiles.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Isoler le tiroir 3</strong>. Bilan : actions du bâti 1 en \(O\), du solide 2 en \(B\) (\(X_{23}\)), en \(B'\) (\(X_{2'3}\)) et \(\{\mathcal T_{res\to3}\}\) du ressort (\(F_R\vec x\)).</li>
+        <li>PFD en translation suivant \(\vec x\) : \(\sum\vec R\cdot\vec x=m\ddot x\). Comme \(\beta\) est constant, \(x\) est constante : \(\ddot x=0\).</li>
+        <li><strong>Deux contacts symétriques</strong> : la masselotte 2 touche le tiroir en \(B\) et en \(B'\), avec \(\alpha'=\alpha+\pi\), donc \(\cos\alpha'=-\cos\alpha\) et \(\beta'=\beta\).</li>
+        <li>\(F_R=-X_{23}-X_{2'3}=X_{32}+X_{32'}\).</li>
+      </ol>
+      <div class="calc">
+        <p>Pour le premier contact : \(X_{32}=\dfrac{\delta-bmg\cos\alpha\sin\beta}{c\sin\beta}\), avec \(\delta\) la partie en \(\dot\alpha^2\).
+        Pour le second : \(X_{32'}=\dfrac{\delta-bmg\cos\alpha'\sin\beta}{c\sin\beta}=\dfrac{\delta+bmg\cos\alpha\sin\beta}{c\sin\beta}\).
+        La somme élimine les termes en poids :</p>
+        \[F_R=X_{32}+X_{32'}=\dfrac{2\delta}{c\sin\beta}\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \[\boxed{F_R=\dfrac{2\dot\alpha^2\big[mab\sin\beta+(A-B)\cos\beta\sin\beta+F(\sin^2\beta-\cos^2\beta)\big]}{c\sin\beta}}\]
+      </div>
+      <div class="info"><span class="lab">Lecture physique</span>
+        \(F_R\) croît avec \(\dot\alpha^2\) : plus le régulateur tourne vite, plus la masselotte veut s'écarter, et plus le ressort doit résister.
+        Le poids n'intervient pas (il s'annule par symétrie des deux contacts).
+      </div>
+    </div>
+    <aside class="aside apply">
+      <span class="lab">Appliquer</span>
+      <ul>
+        <li>Toujours écrire \(\alpha'=\alpha+\pi\) pour un contact symétrique : c'est ce qui fait changer le signe du poids.</li>
+        <li>Vérifier l'unité : \(\dot\alpha^2\) en s⁻², \(mab\) en kg·m², donc \(\dfrac{mab\,\dot\alpha^2}{c}\) est une force (N).</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ---- Question 6 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q6</span>Dimensionnement de la raideur</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Dimensionner le ressort en raideur pour garantir un critère d'allongement maximal.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Loi du ressort linéaire : \(F_R=k\,\Delta l\).</li>
+        <li>Condition d'allongement : \(\Delta l=\dfrac{F_R}{k}\le\Delta l_{max}\).</li>
+        <li>On en tire la raideur minimale.</li>
+      </ol>
+      <div class="calc">
+        \[\Delta l=\dfrac{F_R}{k}\le\Delta l_{max}\quad\Longrightarrow\quad k\ \ge\ \dfrac{F_R}{\Delta l_{max}}\]
+        <p>Comme \(F_R\) dépend de \(\dot\alpha\), la condition la plus sévère est obtenue à la vitesse maximale de régulation.</p>
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \[\boxed{k\ \ge\ \dfrac{2\dot\alpha_{max}^2\big[mab\sin\beta+(A-B)\cos\beta\sin\beta+F(\sin^2\beta-\cos^2\beta)\big]}{c\,\sin\beta\,\Delta l_{max}}}\]
+      </div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>Un ressort est dimensionné sur le <strong>cas le plus défavorable</strong> : effort maximal (vitesse maximale) et course maximale admise.</p>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>5. À retenir</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Moment cinétique</strong> en \(A\) : \(\vec\sigma_A=\bar{\bar I}\cdot\vec\Omega+m\overrightarrow{AG}\wedge\vec V_A\) (le second terme est souvent oublié).</li>
+      <li><strong>Projection sur l'axe du pivot</strong> : \(\vec z_1\) élimine les réactions du pivot \((A,\vec z_1)\).</li>
+      <li><strong>Dérivée d'une projection</strong> : penser au terme \(\vec\sigma\cdot\dfrac{d\vec u}{dt}\) quand le vecteur \(\vec u\) tourne.</li>
+      <li><strong>Deux contacts symétriques</strong> : l'effort du ressort est \(2\delta/(c\sin\beta)\), sans le poids.</li>
+    </ul>
+  </div>
+
+  <footer>
+    Source : TD « Principe fondamental de la dynamique — Régulateur centrifuge » (CPGE PT / S2I, Lycée Jean Zay, E. Bigeard, v1.7). Corrigé officiel adapté d'A. Chabert et A. Meurdefroid.
+    <a href="../assets/pdf.html?f=../documents/aem2-si/ch3-dynamique-solide/PFD-PT-TD-regulateur_centrifuge-prof.pdf" target="_blank" rel="noopener">Ouvrir l'énoncé et le corrigé (PDF)</a>.
+  </footer>
+
+</div>
+
+<script src="../assets/gate.js"></script>
+</body>
+</html>

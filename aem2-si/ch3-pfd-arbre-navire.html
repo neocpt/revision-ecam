@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arbre de navire — phénomènes gyroscopiques (PFD)</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  :root{
+    --bg:#fafafa; --text:#2d3748; --muted:#64748b; --title:#1a202c;
+    --accent:#0f766e; --accent-soft:#ccfbf1; --line:#e5e7eb; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--text);
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    font-size:17px; line-height:1.7}
+  .page{max-width:800px; margin:0 auto; padding:2.5rem 2rem 4rem}
+  .nav{display:flex; flex-wrap:wrap; gap:1rem; font-size:.92rem; margin-bottom:1.5rem}
+  .nav a{color:var(--accent); text-decoration:none; font-weight:600}
+  .nav a:hover{text-decoration:underline}
+  p, ul, ol{margin:0 0 1.5rem}
+  li{margin-bottom:.45rem}
+  strong{color:var(--title)}
+  h1{font-size:2.1rem; line-height:1.2; color:var(--title); margin:.6rem 0 .6rem}
+  h2{font-size:1.5rem; color:var(--title); margin:3.4rem 0 1.1rem; padding-bottom:.45rem;
+    border-bottom:2px solid var(--accent-soft)}
+  h3{font-size:1.15rem; color:var(--accent); margin:2.2rem 0 .7rem}
+  .kicker{font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
+  .lead{color:var(--muted); font-size:1.08rem; margin-bottom:2rem}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1.4rem 1.6rem; margin:1.5rem 0}
+  .card h3:first-child{margin-top:0}
+
+  /* ---- Question : texte à gauche, encadré méthode à droite ---- */
+  .qblock{display:grid; grid-template-columns:minmax(0,1fr) 250px; gap:1.8rem;
+    margin:2.4rem 0 0; padding-top:1.8rem; border-top:1px solid var(--line)}
+  .qtitle{font-size:1.2rem; font-weight:800; color:var(--title); margin:0 0 1rem}
+  .qnum{display:inline-block; background:var(--accent); color:#fff; border-radius:7px;
+    padding:.12rem .6rem; font-size:.9rem; margin-right:.5rem; vertical-align:middle}
+  .ask{background:#f8fafc; border-left:4px solid #94a3b8; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .ask .lab, .lab{display:block; font-size:.72rem; font-weight:800; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:.25rem}
+  .demarche{margin:0 0 1.2rem}
+  .calc{background:#fff; border:1px solid var(--line); border-radius:10px; padding:.8rem 1rem .4rem; margin:0 0 1.2rem; overflow-x:auto}
+  .res{background:#ecfdf5; border-left:4px solid #059669; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .res .lab{color:#047857}
+
+  .aside{align-self:start; border-radius:12px; padding:1rem 1.1rem; font-size:.93rem; line-height:1.55;
+    background:#f0fdfa; border:1px solid #99f6e4}
+  .aside.formula{background:#f5f3ff; border-color:#ddd6fe}
+  .aside.apply{background:#fffbeb; border-color:#fde68a}
+  .aside.piege{background:#fff1f2; border-color:#fecdd3}
+  .aside .lab{color:var(--accent); margin-bottom:.35rem}
+  .aside.formula .lab{color:#6d28d9}
+  .aside.apply .lab{color:#b45309}
+  .aside.piege .lab{color:#be123c}
+  .aside p, .aside ul{margin:0 0 .7rem}
+  .aside ul{padding-left:1.1rem}
+  .aside li{margin-bottom:.3rem}
+  .aside > :last-child{margin-bottom:0}
+
+  .warn{background:#fff7ed; border-left:4px solid #ea580c; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .warn .lab{color:#c2410c}
+  .info{background:#f0f9ff; border-left:4px solid #0284c7; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .info .lab{color:#0369a1}
+
+  figure{margin:1.4rem 0 1.8rem; text-align:center}
+  figure img{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:10px; padding:.5rem}
+  figcaption{font-size:.88rem; color:var(--muted); margin-top:.5rem; line-height:1.5}
+
+  /* ---- Schéma de la chaîne ---- */
+  .chain{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:.5rem; margin:1.4rem 0 1.8rem}
+  .node{background:var(--accent); color:#fff; font-weight:700; border-radius:10px; padding:.6rem .95rem; text-align:center; font-size:.95rem}
+  .node.bati{background:#475569}
+  .link{font-size:.82rem; color:var(--muted); text-align:center; padding:0 .3rem; max-width:150px; line-height:1.3}
+  .link::before{content:"→"; display:block; font-size:1.3rem; color:var(--accent); line-height:1.1}
+
+  table{width:100%; border-collapse:collapse; margin:.6rem 0 1.4rem; font-size:.93rem; background:#fff}
+  th, td{border:1px solid var(--line); padding:.5rem .6rem; text-align:center}
+  th{background:#f1f5f9; color:var(--title)}
+  td.l, th.l{text-align:left}
+  tr.ok td{background:#f0fdf4}
+  tr.pick td{background:#ccfbf1; font-weight:700}
+
+  .svgwrap{background:#fff; border:1px solid var(--line); border-radius:12px; padding:1rem; margin:1.2rem 0 1.6rem}
+  .svgwrap > svg{display:block; width:100%; height:auto}
+  .svgwrap figcaption{margin-top:.6rem}
+
+  .steps{counter-reset:s; list-style:none; padding:0; margin:0 0 1.5rem}
+  .steps li{counter-increment:s; position:relative; padding:.2rem 0 .2rem 2.7rem; margin-bottom:.9rem}
+  .steps li::before{content:counter(s); position:absolute; left:0; top:.1rem; width:1.9rem; height:1.9rem;
+    border-radius:50%; background:var(--accent-soft); color:var(--accent); font-weight:800; text-align:center; line-height:1.9rem}
+  .steps a{color:var(--accent); font-weight:600}
+
+  footer{margin-top:3.5rem; padding-top:1.2rem; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem}
+  footer a{color:var(--accent)}
+  mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%}
+
+  @media (max-width:680px){
+    body{font-size:16px}
+    .page{padding:1.6rem 1.1rem 3rem}
+    h1{font-size:1.65rem}
+    h2{font-size:1.3rem; margin-top:2.6rem}
+    .qblock{grid-template-columns:1fr; gap:1rem}
+    .chain{flex-direction:column}
+    .link::before{content:"↓"}
+  }
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+<div class="page">
+
+  <nav class="nav">
+    <a href="../index.html#am2">← Accueil</a>
+    <a href="ch3-dynamique-solide.html">← Chapitre 3 (cours)</a>
+    <a href="../assets/pdf.html?f=../documents/aem2-si/ch3-dynamique-solide/PFD-PT-TD-arbre_de_navire_phenomenes_gyroscopiques-prof.pdf" target="_blank" rel="noopener">Énoncé original (PDF)</a>
+  </nav>
+
+  <div class="kicker">AM2 · SI · Chapitre 3 — Principe fondamental de la dynamique (TD)</div>
+  <h1>Arbre de navire : phénomènes gyroscopiques</h1>
+  <p class="lead">Un TD du chapitre « Principe fondamental de la dynamique » (CPGE PT, S2I). Un rotor de machine tourne à grande vitesse
+  dans un navire qui vire. Le virage fait apparaître un <strong>couple gyroscopique</strong> qui modifie les efforts dans les paliers.
+  Une seule question, mais le calcul demande de bien construire le torseur dynamique.</p>
+
+  <!-- ============================================================ -->
+  <h2>1. Avant de commencer : l'essentiel en quelques lignes</h2>
+
+  <div class="card">
+    <h3>Le torseur dynamique du rotor</h3>
+    <p>Pour un solide \(S\) en rotation, le torseur dynamique est formé de la <strong>résultante dynamique</strong> \(m\vec\Gamma_G\)
+    et du <strong>moment dynamique</strong> \(\vec\delta_G=\big[\tfrac{d}{dt}\vec\sigma_G\big]_{R_0}\), dérivée du moment cinétique dans le repère fixe.</p>
+    <h3>Le phénomène gyroscopique</h3>
+    <p>Un solide qui tourne vite autour de son axe (<em>spin</em>, vitesse \(\dot\varphi\)) et dont l'axe <strong>tourne</strong> lui-même (<em>précession</em>, vitesse \(\dot\psi\))
+    subit un moment, le <strong>couple gyroscopique</strong> \(\vec\delta_G\). Il est perpendiculaire à l'axe de spin et à l'axe de précession.</p>
+  </div>
+
+  <div class="info">
+    <span class="lab">Ce que demande le TD au final</span>
+    Déterminer les <strong>efforts de liaison en \(A\) et \(B\)</strong> du rotor, pour voir l'effet du virage sur les paliers.
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>2. La démarche en 4 étapes</h2>
+  <ol class="steps">
+    <li><strong>Paramétrer</strong> le navire (cap \(\psi\), vitesse \(\dot\psi=V/R\)) et le rotor (spin \(\varphi\), vitesse \(\Omega\)).</li>
+    <li><strong>Calculer le torseur dynamique</strong> du rotor en \(G\) : résultante \(m\vec\Gamma_G\), moment \(\vec\delta_G\).</li>
+    <li><strong>Écrire le bilan</strong> des actions de liaison \(A\) (rotule) et \(B\) (linéaire annulaire) et du poids, puis le transporter en \(G\).</li>
+    <li><strong>Résoudre</strong> : résultante (3 équations), moment en \(G\) (3 équations), avec les unités.</li>
+  </ol>
+
+  <!-- ============================================================ -->
+  <h2>3. Le modèle et les données</h2>
+
+  <figure>
+    <img src="img/c03-td-arbrenavire.png" alt="Arbre de navire : rotor 2 sur paliers A (rotule) et B (linéaire annulaire), navire 1 en virage" loading="lazy">
+    <figcaption>Schéma de l'énoncé. Le rotor 2 est monté sur le navire 1, sur deux paliers \(A\) (rotule) et \(B\) (linéaire annulaire) distants de \(3L\).
+    Le navire vire à bâbord sur un cercle de rayon \(R\).</figcaption>
+  </figure>
+
+  <div class="card">
+    <h3>Paramétrage</h3>
+    <ul>
+      <li>Rotation du navire \(R_1/R_0\) : \(\psi=\omega t\) avec \(\omega=\dfrac{V}{R}\), autour de l'axe vertical \(\vec z_0=\vec z_1\).</li>
+      <li>Rotation du rotor \(R_2/R_1\) : \(\varphi=\Omega t\) avec \(\Omega=\dfrac{\pi N}{30}\), autour de l'axe \(\vec x_1\) de l'arbre.</li>
+      <li>\(\overrightarrow{AG}=L\vec x_1\), \(\overrightarrow{AB}=3L\vec x_1\) : \(G\) est à \(L\) de \(A\), \(B\) est à \(2L\) de \(G\).</li>
+      <li>Le rotor est un <strong>solide de révolution</strong> : \(\bar{\bar I}_{(G,2)}=\begin{pmatrix}A&0&0\\0&B&0\\0&0&B\end{pmatrix}_{\vec b_1}\) avec \(A\) l'inertie axiale.</li>
+    </ul>
+    <h3>Données numériques</h3>
+    <table>
+      <tr><th class="l">Grandeur</th><th>Valeur</th><th class="l">Grandeur</th><th>Valeur</th></tr>
+      <tr><td class="l">Masse \(m\)</td><td>2 t = 2000 kg</td><td class="l">Vitesse du navire \(V\)</td><td>10 m·s⁻¹</td></tr>
+      <tr><td class="l">Rayon de giration \(a\)</td><td>0,3 m</td><td class="l">Rayon du virage \(R\)</td><td>200 m</td></tr>
+      <tr><td class="l">Distance \(L\)</td><td>1 m (\(AB=3\) m)</td><td class="l">Vitesse du rotor \(N\)</td><td>4000 tr/min</td></tr>
+    </table>
+    <p style="margin:0">Application : \(\Omega=\dfrac{\pi\times4000}{30}\approx418{,}9\) rad·s⁻¹, \(\omega=\dfrac{10}{200}=0{,}05\) rad·s⁻¹.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>4. Les questions</h2>
+
+  <!-- ---- Question 1 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Efforts de liaison en \(A\) et \(B\) : PFD appliqué au rotor 2</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        En appliquant le PFD au rotor 2, déterminer les efforts de liaison en \(A\) et \(B\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Torseur dynamique en \(G\)</strong> : calculer \(\vec\Gamma_G\) et \(\vec\delta_G\) (le rotor a deux rotations : \(\dot\psi\) et \(\dot\varphi\)).</li>
+        <li><strong>Bilan des actions</strong> : poids en \(G\), réactions \(A\) et \(B\) ramenées en \(G\).</li>
+        <li><strong>PFD en \(G\)</strong> : résultante, puis moment (on projette dans \(\vec b_1\)).</li>
+        <li><strong>Résoudre</strong> le système linéaire pour \(X_A\), \(Y_A\), \(Z_A\), \(Y_B\), \(Z_B\).</li>
+      </ol>
+
+      <div class="calc">
+        <p><strong>Torseur dynamique.</strong> Le centre d'inertie \(G\) décrit le cercle de rayon \(R\) à vitesse \(V\) constante : \(\vec\Gamma_G=\dfrac{V^2}{R}\,\vec y_1\) (vers l'intérieur du virage, bâbord).
+        Donc :</p>
+        \[\vec R\{\mathcal D_{2/0}\}=m\,\frac{V^2}{R}\,\vec y_1\]
+        <p>Moment : \(\vec\sigma_G=\bar{\bar I}_{(G,2)}\cdot\vec\Omega_{2/0}\) avec \(\vec\Omega_{2/0}=\Omega\,\vec x_1+\omega\,\vec z_1\), soit
+        \(\vec\sigma_G=A\Omega\,\vec x_1+B\omega\,\vec z_1\) (la base \(\vec b_1\) est liée au navire, pas au spin).
+        Dans \(R_0\) : \(\dfrac{d\vec x_1}{dt}=\omega\,\vec z_1\wedge\vec x_1=\omega\,\vec y_1\) et \(\dfrac{d\vec z_1}{dt}=\vec 0\) : donc</p>
+        \[\vec\delta_{G\in2/0}=A\Omega\omega\,\vec y_1\]
+        <p>Pour un rotor de révolution d'axe \(\vec x_1\) : \(A=\dfrac{ma^2}{2}\) dans le corrigé officiel (voir encadré ci-dessous), d'où \(\vec\delta_G=\dfrac{ma^2}{2}\,\Omega\omega\,\vec y_1\).</p>
+
+        <p><strong>Bilan des actions</strong> (\(\vec b_1\)) :</p>
+        \[\{\mathcal T_{\text{pes}\to2}\}_G=\begin{Bmatrix}-mg\,\vec z_1\\ \vec 0\end{Bmatrix}\qquad
+        \{\mathcal T_{A\to2}\}_G=\begin{Bmatrix}X_A\vec x_1+Y_A\vec y_1+Z_A\vec z_1\\ LZ_A\,\vec y_1-LY_A\,\vec z_1\end{Bmatrix}\qquad
+        \{\mathcal T_{B\to2}\}_G=\begin{Bmatrix}Y_B\vec y_1+Z_B\vec z_1\\ -2LZ_B\,\vec y_1+2LY_B\,\vec z_1\end{Bmatrix}\]
+        <p>Les moments viennent de \(\overrightarrow{GA}=-L\vec x_1\) et \(\overrightarrow{GB}=2L\vec x_1\). Le palier \(B\) n'a pas d'effort axial ni de moment (linéaire annulaire).</p>
+
+        <p><strong>PFD</strong> (\(\{\mathcal T_{\text{ext}\to2}\}_G=\{\mathcal D_{2/0}\}_G\), projeté dans \(\vec b_1\)) :</p>
+        \[\begin{cases}
+        0=X_A\\[2pt]
+        \dfrac{mV^2}{R}=Y_A+Y_B\\[2pt]
+        0=Z_A+Z_B-mg\\[2pt]
+        \dfrac{ma^2}{2}\,\Omega\omega=L\,Z_A-2L\,Z_B\\[2pt]
+        0=2L\,Y_B-L\,Y_A
+        \end{cases}\]
+      </div>
+
+      <div class="calc">
+        <p><strong>Résolution.</strong> \(X_A=0\). De la dernière équation, \(Y_A=2Y_B\) ; avec la résultante en \(y_1\) :
+        \(Y_B=\dfrac{mV^2}{3R}\), \(Y_A=\dfrac{2mV^2}{3R}\).</p>
+        <p>En \(z_1\) : \(Z_B=mg-Z_A\). Dans l'équation de moment, \(\dfrac{ma^2}{2}\Omega\omega=LZ_A-2LZ_B=L(mg-Z_B)-2LZ_B=L(mg-3Z_B)\), donc :</p>
+        \[Z_B=\dfrac{mg}{3}-\dfrac{ma^2\,\Omega\,\omega}{6L}\qquad\qquad Z_A=\dfrac{2mg}{3}+\dfrac{ma^2\,\Omega\,\omega}{6L}\]
+        <p>Avec \(\omega=V/R\) : le terme correctif vaut \(\dfrac{ma^2V\Omega}{6RL}\).</p>
+      </div>
+
+      <div class="res"><span class="lab">Réponse (corrigé officiel)</span>
+        \[X_A=0\qquad Y_A=\dfrac{2mV^2}{3R}\approx666{,}6\ \text N\qquad Y_B=\dfrac{mV^2}{3R}\approx333{,}3\ \text N\]
+        \[Z_A=\dfrac{2mg}{3}+\dfrac{ma^2V\Omega}{6RL}\approx13\,706{,}7\ \text N\qquad Z_B=\dfrac{mg}{3}-\dfrac{ma^2V\Omega}{6RL}\approx5\,913\ \text N\]
+        <p style="margin:.6rem 0 0"><em>Le corrigé prend \(\Omega=133\pi\approx417{,}8\) rad·s⁻¹ (valeur arrondie de \(4000\pi/30=418{,}9\)). Avec \(418{,}9\) on trouve \(Z_A\approx13\,708\) N et \(Z_B\approx5\,912\) N : écart d'arrondi.</em></p>
+      </div>
+
+      <div class="warn"><span class="lab">⚠️ À vérifier avec le prof : rayon de giration ou inertie \(ma^2/2\) ?</span>
+        L'énoncé dit « rayon de <strong>giration</strong> \(a\) » : par définition l'inertie axiale est \(A=ma^2\). Le corrigé écrit \(A=\dfrac{ma^2}{2}\) (inertie d'un disque plein de rayon \(a\))
+        et imprime pourtant « \(A=2000\times0{,}3^2=180\) kg·m² », qui correspond à \(ma^2\). Le calcul du corrigé utilise bien \(ma^2/2\) (\(90\) kg·m²).
+        <br><br>Si l'on prend \(A=ma^2=180\) kg·m² : \(\vec\delta_G\) double, \(Z_B\approx6540-1257\approx5283\) N et \(Z_A\approx14337\) N.
+        Le sens physique ne change pas, seule la valeur du couple gyroscopique change.</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Le moment dynamique n'est pas nul : la rotation de l'axe \(\vec x_1\) (précession \(\omega\)) crée \(\vec\delta_G=A\Omega\omega\vec y_1\).</li>
+        <li>La base \(\vec b_1\) contient \(\vec x_1\) et \(\vec z_1\) : c'est elle qui permet de projeter sans dériver les composantes.</li>
+        <li>Le moment en \(G\) utilise \(\overrightarrow{GA}=-L\vec x_1\) et \(\overrightarrow{GB}=2L\vec x_1\) : le signe de \(L\) compte.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>5. Lecture physique : pourquoi le virage change les paliers</h2>
+  <div class="card">
+    <p>Sans virage (\(\omega=0\)) : \(Y_A=Y_B=0\), \(Z_B=mg/3=6540\) N, \(Z_A=2mg/3=13080\) N. Le centre d'inertie est au tiers de \(AB\) et le rotor se comporte comme une poutre sur deux appuis.</p>
+    <p>Pendant le virage, le couple gyroscopique vaut \(\dfrac{ma^2}{2}\Omega\omega\approx1\,885\) N·m (avec \(A=ma^2/2\)). Il se traduit en efforts verticaux de \(\dfrac{1\,885}{3L}\approx628\) N : il <strong>décharge le palier \(B\)</strong> de 628 N et <strong>surcharge \(A\)</strong> d'autant.
+    De plus, le virage crée un effort latéral \(Y_A+Y_B=mV^2/R=1000\) N, absent en ligne droite.</p>
+    <div class="info"><span class="lab">Pour retenir</span>
+      Le couple gyroscopique est proportionnel à la <strong>vitesse de spin</strong> (\(\Omega\)) et à la <strong>vitesse de virage</strong> (\(\omega=V/R\)).
+      Sur un navire, des vitesses de rotation élevées et des virages serrés augmentent les efforts dans les paliers.</div>
+  </div>
+
+  <footer>
+    Source : TD « Principe fondamental de la dynamique — Arbre de navire, phénomènes gyroscopiques » (CPGE PT / S2I, Lycée Jean Zay, E. Bigeard, v1.6). Corrigé officiel adapté de F. Bronsard, C. Cheze, M. Delègue.
+    <a href="../assets/pdf.html?f=../documents/aem2-si/ch3-dynamique-solide/PFD-PT-TD-arbre_de_navire_phenomenes_gyroscopiques-prof.pdf" target="_blank" rel="noopener">Ouvrir l'énoncé et le corrigé (PDF)</a>.
+  </footer>
+
+</div>
+
+<script src="../assets/gate.js"></script>
+</body>
+</html>

@@ -644,6 +644,8 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
   <!-- ======================= EX3 NAVIRE =============================== -->
   <section class="block" id="navire">
     <h2>3. Arbre de navire — mise en évidence de l'effet gyroscopique</h2>
+    <div class="note"><span class="lab">Corrigé officiel trouvé</span> Correction pas à pas : <a href="ch3-pfd-arbre-navire.html">arbre de navire (page détaillée)</a>.
+    Écart à retenir : le corrigé prend l'inertie axiale \(A=ma^2/2\) (\(Z_B\approx5\,913\) N), alors que cette section prend \(A=ma^2\) (\(Z_B\approx5\,283\) N). À confirmer avec le prof.</div>
     <figure>
       <img src="img/c03-td-arbrenavire.png" alt="Arbre de navire : rotor 2 sur paliers A (rotule) et B (linéaire annulaire), navire 1 en virage" loading="lazy">
       <figcaption>Rotor de machine 2 (masse \(m\), rayon de giration axial \(a\)), monté sur le navire 1 qui vire
@@ -793,6 +795,8 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
   <!-- ======================= EX5 REGULATEUR =============================== -->
   <section class="block" id="regulateur">
     <h2>5. Régulateur centrifuge — dimensionnement du ressort</h2>
+    <div class="note"><span class="lab">Corrigé officiel trouvé : modèle différent</span> Le corrigé fait tourner le bras 1 autour de l'axe \(\vec x\) (pivot \((O,\vec x)\)), et non autour de \(\vec y_1\) comme ci-dessous.
+    Les résultats du corrigé (\(\sigma_A\), \(\vec\delta_A\cdot\vec z_1\), \(F_R=2\dot\alpha^2[\dots]/(c\sin\beta)\)) sont dans la <a href="ch3-pfd-regulateur-centrifuge.html">correction détaillée</a>, à utiliser de préférence.</div>
     <figure>
       <img src="img/c03-td-regulateur.png" alt="Régulateur centrifuge : bras 1 tournant, masselotte 2 pivotant en A, ressort 3" loading="lazy">
       <figcaption>Régulateur de vitesse d'une machine thermique : masselotte 2 (pivot \((A,\vec z_1)\) sur le bras
@@ -896,6 +900,8 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
   <!-- ======================= EX6 EQUILIBREUSE =============================== -->
   <section class="block" id="equilibreuse">
     <h2>6. Équilibreuse dynamique — extraction numérique du balourd</h2>
+    <div class="note"><span class="lab">Corrigé officiel trouvé</span> Correction pas à pas : <a href="ch3-pfd-equilibreuse.html">équilibreuse (page détaillée)</a>.
+    Corrections faites ici : sens des produits d'inertie (\(F-m_4cr\sin\beta_4=0\)), donc \(\beta_4\approx216°\) et \(\beta_3\approx115°\).</div>
     <figure>
       <img src="img/c03-td-equilibreuse.png" alt="Équilibreuse : arbre 1 sur paliers O et A, roue 2 en B, dimensions a, b, c, d" loading="lazy">
       <figcaption>Arbre 1 (paliers \(O\), \(A\), \(OA=-a\), \(OB=b\)) portant la roue à équilibrer 2, en liaison
@@ -992,20 +998,20 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
         crée un produit d'inertie \(m_4cr\cos\beta_4\) (contribution à \(E\)) et \(m_4cr\sin\beta_4\) (contribution
         à \(F\)) : c'est elle qui doit annuler le balourd <b>dynamique</b> \((E,F)\).</p>
         <div class="res">
-        \[\text{Annulation de }E,F:\quad E+m_4cr\cos\beta_4=0\quad,\quad F+m_4cr\sin\beta_4=0\]
+        \[\text{Annulation de }E,F:\quad E+m_4cr\cos\beta_4=0\quad,\quad F-m_4cr\sin\beta_4=0\]
         \[\text{Équilibrage statique (plan }y_2,z_2\text{)}:\quad m_2\rho+m_3r\cos\beta_3+m_4r\cos\beta_4=0\quad,\quad
         m_3r\sin\beta_3+m_4r\sin\beta_4=0\]
         </div>
         <p class="q">5) Résolution numérique (\(r=190\,\)mm, \(c=180\,\)mm)</p>
         \[m_4=\dfrac{\sqrt{E^2+F^2}}{cr}=\dfrac{\sqrt{(1{,}48\times10^{-3})^2+(1{,}12\times10^{-3})^2}}{0{,}18\times0{,}19}
         =\dfrac{1{,}858\times10^{-3}}{0{,}0342}\approx0{,}0543\ \text{kg}\]
-        \[\cos\beta_4=-E/(m_4cr)\approx-0{,}797\ ,\quad \sin\beta_4=-F/(m_4cr)\approx0{,}603\quad\Rightarrow\quad\beta_4\approx142{,}9°\]
-        \[m_3r\sin\beta_3=-m_4r\sin\beta_4\approx-6{,}23\times10^{-3}\ ,\quad
-        m_3r\cos\beta_3=-(m_2\rho+m_4r\cos\beta_4)\approx-3{,}00\times10^{-3}\]
-        \[m_3=\dfrac{\sqrt{(6{,}23\times10^{-3})^2+(3{,}00\times10^{-3})^2}}{0{,}19}\approx0{,}0364\ \text{kg}\ ,\quad
-        \beta_3\approx244{,}2°\]
-        <div class="res">\(\boxed{m_3\approx36\,\text{g}}\), \(\boxed{\beta_3\approx244°}\),
-        \(\boxed{m_4\approx54\,\text{g}}\), \(\boxed{\beta_4\approx143°}\) — des masselottes de quelques dizaines
+        \[\cos\beta_4=-E/(m_4cr)\approx-0{,}797\ ,\quad \sin\beta_4=F/(m_4cr)\approx-0{,}603\quad\Rightarrow\quad\beta_4\approx216°\]
+        \[m_3r\sin\beta_3=-m_4r\sin\beta_4\approx+6{,}23\times10^{-3}\ ,\quad
+        m_3r\cos\beta_3=-(m_2\rho+m_4r\cos\beta_4)\approx-2{,}94\times10^{-3}\]
+        \[m_3=\dfrac{\sqrt{(6{,}23\times10^{-3})^2+(2{,}94\times10^{-3})^2}}{0{,}19}\approx0{,}0363\ \text{kg}\ ,\quad
+        \beta_3\approx115°\]
+        <div class="res">\(\boxed{m_3\approx36\,\text{g}}\), \(\boxed{\beta_3\approx115°}\),
+        \(\boxed{m_4\approx54\,\text{g}}\), \(\boxed{\beta_4\approx216°}\) (valeurs du corrigé officiel) — des masselottes de quelques dizaines
         de grammes, tout à fait cohérentes avec les plombs d'équilibrage réels utilisés en pneumatique
         automobile (bon indicateur que la chaîne de calcul est correcte).</div>
       </div>
