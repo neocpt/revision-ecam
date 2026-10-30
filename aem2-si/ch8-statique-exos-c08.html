@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PFS — lève-malade, SPRAT, action équivalente (correction détaillée)</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  :root{
+    --bg:#fafafa; --text:#2d3748; --muted:#64748b; --title:#1a202c;
+    --accent:#0f766e; --accent-soft:#ccfbf1; --line:#e5e7eb; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--text);
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    font-size:17px; line-height:1.7}
+  .page{max-width:800px; margin:0 auto; padding:2.5rem 2rem 4rem}
+  .nav{display:flex; flex-wrap:wrap; gap:1rem; font-size:.92rem; margin-bottom:1.5rem}
+  .nav a{color:var(--accent); text-decoration:none; font-weight:600}
+  .nav a:hover{text-decoration:underline}
+  p, ul, ol{margin:0 0 1.5rem}
+  li{margin-bottom:.45rem}
+  strong{color:var(--title)}
+  h1{font-size:2.1rem; line-height:1.2; color:var(--title); margin:.6rem 0 .6rem}
+  h2{font-size:1.5rem; color:var(--title); margin:3.4rem 0 1.1rem; padding-bottom:.45rem;
+    border-bottom:2px solid var(--accent-soft)}
+  h3{font-size:1.15rem; color:var(--accent); margin:2.2rem 0 .7rem}
+  .kicker{font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
+  .lead{color:var(--muted); font-size:1.08rem; margin-bottom:2rem}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1.4rem 1.6rem; margin:1.5rem 0}
+  .card h3:first-child{margin-top:0}
+
+  /* ---- Question : texte à gauche, encadré méthode à droite ---- */
+  .qblock{display:grid; grid-template-columns:minmax(0,1fr) 250px; gap:1.8rem;
+    margin:2.4rem 0 0; padding-top:1.8rem; border-top:1px solid var(--line)}
+  .qblock.wide{grid-template-columns:minmax(0,1fr)}
+  .qtitle{font-size:1.2rem; font-weight:800; color:var(--title); margin:0 0 1rem}
+  .qnum{display:inline-block; background:var(--accent); color:#fff; border-radius:7px;
+    padding:.12rem .6rem; font-size:.9rem; margin-right:.5rem; vertical-align:middle}
+  .ask{background:#f8fafc; border-left:4px solid #94a3b8; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .ask .lab, .lab{display:block; font-size:.72rem; font-weight:800; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:.25rem}
+  .demarche{margin:0 0 1.2rem}
+  .calc{background:#fff; border:1px solid var(--line); border-radius:10px; padding:.8rem 1rem .4rem; margin:0 0 1.2rem; overflow-x:auto}
+  .res{background:#ecfdf5; border-left:4px solid #059669; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .res .lab{color:#047857}
+
+  .aside{align-self:start; border-radius:12px; padding:1rem 1.1rem; font-size:.93rem; line-height:1.55;
+    background:#f0fdfa; border:1px solid #99f6e4}
+  .aside.formula{background:#f5f3ff; border-color:#ddd6fe}
+  .aside.apply{background:#fffbeb; border-color:#fde68a}
+  .aside.piege{background:#fff1f2; border-color:#fecdd3}
+  .aside .lab{color:var(--accent); margin-bottom:.35rem}
+  .aside.formula .lab{color:#6d28d9}
+  .aside.apply .lab{color:#b45309}
+  .aside.piege .lab{color:#be123c}
+  .aside p, .aside ul{margin:0 0 .7rem}
+  .aside ul{padding-left:1.1rem}
+  .aside li{margin-bottom:.3rem}
+  .aside > :last-child{margin-bottom:0}
+
+  .warn{background:#fff7ed; border-left:4px solid #ea580c; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .warn .lab{color:#c2410c}
+  .info{background:#f0f9ff; border-left:4px solid #0284c7; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .info .lab{color:#0369a1}
+
+  figure{margin:1.4rem 0 1.8rem; text-align:center}
+  figure img{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:10px; padding:.5rem}
+  figcaption{font-size:.88rem; color:var(--muted); margin-top:.5rem; line-height:1.5}
+
+  table{width:100%; border-collapse:collapse; margin:.6rem 0 1.4rem; font-size:.93rem; background:#fff}
+  th, td{border:1px solid var(--line); padding:.5rem .6rem; text-align:center}
+  th{background:#f1f5f9; color:var(--title)}
+  td.l, th.l{text-align:left}
+
+  .steps{counter-reset:s; list-style:none; padding:0; margin:0 0 1.5rem}
+  .steps li{counter-increment:s; position:relative; padding:.2rem 0 .2rem 2.7rem; margin-bottom:.9rem}
+  .steps li::before{content:counter(s); position:absolute; left:0; top:.1rem; width:1.9rem; height:1.9rem;
+    border-radius:50%; background:var(--accent-soft); color:var(--accent); font-weight:800; text-align:center; line-height:1.9rem}
+
+  footer{margin-top:3.5rem; padding-top:1.2rem; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem}
+  footer a{color:var(--accent)}
+  mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%}
+
+  @media (max-width:680px){
+    body{font-size:16px}
+    .page{padding:1.6rem 1.1rem 3rem}
+    h1{font-size:1.65rem}
+    h2{font-size:1.3rem; margin-top:2.6rem}
+    .qblock{grid-template-columns:1fr; gap:1rem}
+  }
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+<div class="page">
+
+  <nav class="nav">
+    <a href="../index.html#am2">← Accueil</a>
+    <a href="ch8-camion-grue.html">← Camion grue (même chapitre)</a>
+    <a href="../assets/pdf.html?f=../documents/aem2-si/ch8-statique/S2I-C08-TD-Déterminer les efforts aux effecteurs de structures ouverts à léquilibre.pdf" target="_blank" rel="noopener">Énoncé du TD (PDF)</a>
+  </nav>
+
+  <div class="kicker">AM2 · SI · Statique (PFS, C08) — TD « Efforts aux effecteurs », exercices 1.2, 2.1, 3.1</div>
+  <h1>Efforts aux effecteurs : lève-malade, châssis basculeur, action équivalente</h1>
+  <p class="lead">Trois exercices du TD C08 dans l'ordre du TD : lève-malade (glissière et ressort), châssis basculeur à deux corps (SPRAT), puis action équivalente. On applique le PFS, en choisissant le bon point pour les moments.</p>
+
+  <!-- ============================================================ -->
+  <h2>1. Avant de commencer : l'essentiel</h2>
+  <div class="card">
+    <h3>Ce qui change par rapport au camion-grue</h3>
+    <ul>
+      <li><strong>Un seul solide isolé</strong> : on applique le PFS à un solide en équilibre, et on récupère l'effort du vérin et les actions de liaison en même temps.</li>
+      <li><strong>Glissière</strong> : elle bloque tout sauf la translation selon son axe. Elle transmet une force perpendiculaire à l'axe et un moment autour de ce même axe (moment de guidage).</li>
+      <li><strong>Structure à plusieurs corps</strong> (SPRAT) : on isole d'abord un ensemble pour faire disparaître une action interne, puis on isole un autre.</li>
+    </ul>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>2. Exercice 1.2 — Lève-malade (glissière, ressort, vérin)</h2>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1–Q2</span>Actions et graphe de structure</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Placer les résultantes du poids, du ressort et du vérin sur le schéma ; tracer le graphe de structure.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Le bras 1 glisse verticalement sur le support 0 : la liaison est une glissière de direction \(\vec y_0\). Elle est seule entre 0 et 1.</li>
+        <li>Trois actions sur 1 : le poids \(-mg\vec y_0\) en \(G\), le ressort \(-k(y-y_0)\vec y_0\) qui agit sur l'axe \((O,\vec y_0)\), et le vérin \(F_v\vec y_0\) au point \(A\).</li>
+        <li>Le signe du ressort dépend de la position : si le ressort est comprimé (\(y&lt;y_0\)), la force \(k(y-y_0)\) est négative et il pousse le bras vers le haut : il aide le vérin.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> Graphe : 0 —glissière \((\vec y_0)\)— 1, avec les trois actions extérieures \(\vec P\), \(\vec F_{ressort}\), \(\vec F_v\) sur 1. Inconnues : les 5 composantes de la glissière (\(X_{01}\), \(Z_{01}\), \(L_{01}\), \(M_{01}\), \(N_{01}\)).</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3</span>PFS en \(O\) : six équations</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Isoler 1 et écrire les six équations du PFS exprimé en \(O\), à l'équilibre.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Moments en \(O\) : le poids en \(G\) (avec \(\overrightarrow{OG}=a\vec x_0+y\vec y_0\)) donne un moment selon \(\vec z_0\) : \(+mga\,\vec z_0\).</li>
+        <li>Le ressort agit sur l'axe \((O,\vec y_0)\) : son moment en \(O\) est nul.</li>
+        <li>Le vérin en \(A\) (avec \(\overrightarrow{OA}=-b\vec x_0+c\vec y_0\)) donne un moment selon \(\vec z_0\) : \(+bF_v\,\vec z_0\).</li>
+        <li>Équations : résultante selon \(\vec x_0\) et \(\vec z_0\) : \(X_{01}=0\), \(Z_{01}=0\). Résultante selon \(\vec y_0\) : \(-mg-k(y-y_0)+F_v=0\). Moments selon \(\vec x_0\) et \(\vec y_0\) : nuls. Moment selon \(\vec z_0\) : \(N_{01}+mga+bF_v=0\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> Résultante sur \(\vec y_0\) : \(F_v=mg+k(y-y_0)\). Moment sur \(\vec z_0\) : \(N_{01}=-mga-bF_v\).</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q4–Q5</span>Effort du vérin et torseur de la glissière</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Exprimer \(F_v\), puis le torseur de la liaison 0/1 en fonction de \(m\), \(g\), \(a\), \(b\), \(k\), \(y\), \(y_0\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>On reporte \(F_v\) dans l'équation du moment : \(N_{01}=-mga-b\big[mg+k(y-y_0)\big]\).</li>
+        <li>Torseur en \(O\) : seules \(N_{01}\) (moment selon \(\vec z_0\)) et la composante \(X\), \(Z\) nulles subsistent. La glissière ne transmet pas d'effort selon \(\vec y_0\).</li>
+      </ol>
+      <div class="calc">
+        \[F_v=mg+k(y-y_0)\qquad\qquad N_{01}=-mg(a+b)-bk(y-y_0)\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span> \(\{\mathcal T_{0\to1}\}_O=\begin{Bmatrix}\vec 0\\ -mg(a+b)-bk(y-y_0)\,\vec z_0\end{Bmatrix}\). La liaison transmet un moment de guidage, qui résiste au basculement du bras chargé.</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Le moment de guidage \(N_{01}\) est une inconnue de la glissière : ne pas le confondre avec le moment du vérin.</li>
+        <li>Plus le bras est long (\(a\)) ou plus le point d'attache du vérin est proche (\(b\) petit), plus le guide est sollicité.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>3. Exercice 2.1 — Châssis basculeur (SPRAT, deux corps)</h2>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Graphe et bases</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Tracer le graphe de structure, placer les actions, et donner le changement de base.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Chaîne ouverte : 0 —pivot \((O,\vec z)\)— 1 —glissière \((\vec x_1)\)— 2.</li>
+        <li>Actions extérieures : poids \(M_1g\) de 1 (en \(G_1\)), poids \(M_2g\) de 2 (en \(G_2\)), vérin \(F_{01}\vec y_1\) en \(B\) sur 1, pignon-crémaillère \(F_{12}\vec x_1\) sur 2.</li>
+        <li>Changement de base avec l'angle de basculement \(\alpha\) : \(\vec x_1=\cos\alpha\,\vec x+\sin\alpha\,\vec y\) et \(\vec y_1=-\sin\alpha\,\vec x+\cos\alpha\,\vec y\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> Graphe de structure à trois solides en chaîne, avec les actions précisées ci-dessus.</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q2</span>Effort \(F_{12}\) du pignon-crémaillère</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Exprimer \(F_{12}\), en déduire ses valeurs extrêmes.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>On isole 2. La liaison glissière ne transmet aucune force selon \(\vec x_1\) (direction libre) : on prend donc la projection du PFS sur \(\vec x_1\).</li>
+        <li>Seuls \(F_{12}\vec x_1\) et le poids \(-M_2g\vec y\) ont une composante selon \(\vec x_1\). Le poids donne \(-M_2g\sin\alpha\).</li>
+        <li>Donc \(F_{12}-M_2g\sin\alpha=0\).</li>
+      </ol>
+      <div class="calc">
+        \[F_{12}=M_2\,g\,\sin\alpha\]
+        <p>Application : \(M_2=18\,800\) kg, \(g=9{,}81\) m·s⁻². À \(\alpha=0^\circ\) : \(F_{12}=0\). À \(\alpha=10^\circ\) : \(F_{12}\approx 32\) kN.</p>
+      </div>
+      <div class="res"><span class="lab">Réponse</span> \(F_{12}\) croît avec \(\alpha\) : minimum 0 (à \(0^\circ\)), maximum \(\approx32\) kN (à \(10^\circ\)). Le pignon pousse la tige vers l'avant pour retenir la composante du poids.</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3</span>Effort \(F_{01}\) du vérin</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Exprimer \(F_{01}\), en déduire ses valeurs extrêmes.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Isoler l'ensemble \(\{1+2\}\)</strong> : l'action interne \(F_{12}\) disparaît.</li>
+        <li>Moments en \(O\) selon \(\vec z\) (la pivot en \(O\) n'apporte pas de moment selon son axe) : poids de 1 (bras \(a\)), poids de 2 (bras \(-x\)), vérin en \(B\) (bras \(c\)).</li>
+        <li>Équation : \(M_1ga\cos\alpha-M_2gx\cos\alpha+cF_{01}=0\).</li>
+      </ol>
+      <div class="calc">
+        \[F_{01}=\dfrac{g\cos\alpha\,(M_2x-M_1a)}{c}\]
+        <p>Application : \(M_1=7\,500\) kg, \(a=1\) m, \(M_2=18\,800\) kg, \(x=13\) m, \(c=2\) m. \(M_2x-M_1a=236\,900\) kg·m.</p>
+        <p>À \(\alpha=0^\circ\) : \(F_{01}\approx1\,162\) kN. À \(\alpha=10^\circ\) : \(F_{01}\approx1\,144\) kN.</p>
+      </div>
+      <div class="res"><span class="lab">Réponse</span> \(F_{01}\) est toujours positif (le vérin tire). Maximum à \(\alpha=0^\circ\), minimum à \(\alpha=10^\circ\).</div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>Dans un problème plan, le moment se lit directement : bras de levier × composante perpendiculaire. Penser à prendre le point où se trouve la liaison pivot, pour qu'elle disparaisse.</p>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q4–Q5</span>Motoréducteur à la place du vérin</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Refaire le graphe avec un motoréducteur de couple \(C_{01}\vec z\), puis exprimer \(C_{01}\) et ses valeurs extrêmes.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Le motoréducteur est un couple interne à la liaison pivot : il se représente sur l'arc 0–1 du graphe.</li>
+        <li>Le même équilibre en moments selon \(\vec z\) sur \(\{1+2\}\), mais avec \(C_{01}\) au lieu de \(cF_{01}\).</li>
+      </ol>
+      <div class="calc">
+        \[C_{01}=g\cos\alpha\,(M_2x-M_1a)\]
+        <p>À \(\alpha=0^\circ\) : \(C_{01}\approx2\,324\) kN·m. À \(\alpha=10^\circ\) : \(C_{01}\approx2\,289\) kN·m.</p>
+      </div>
+      <div class="res"><span class="lab">Réponse</span> \(C_{01}=c\,F_{01}\) : le motoréducteur doit fournir le couple du vérin, soit le produit de la force par le bras de levier \(c=2\) m.</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>4. Exercice 3.1 — Action mécanique équivalente (cas 1)</h2>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Deux forces parallèles, même sens</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer l'action mécanique équivalente à deux forces appliquées en \(A\) et \(B\), avec \(AC=CB=a\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Résultante : somme des deux forces, soit \(-2F\vec y\).</li>
+        <li>Moment en \(C\) (milieu de \(AB\)) : les deux moments sont opposés (\(\overrightarrow{CA}\) et \(\overrightarrow{CB}\) sont opposés, la force est la même), donc leur somme est nulle.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> Une force unique \(-2F\vec y\) passant par \(C\). Le moment est nul en \(C\), donc la droite d'action passe par \(C\).</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <p>Deux forces parallèles de même sens se réduisent à une force de somme égale, située entre les deux (ici au milieu). Le cas 2 du corrigé (forces de sens contraire) se traite de la même façon mais avec un moment non nul : voir le corrigé.</p>
+    </aside>
+  </div>
+
+
+  <footer>
+    Source : TD « C08 — Déterminer les efforts aux effecteurs de structures ouvertes à l'équilibre » (S2I, ECAM-EMI). Corrigé détaillé d'après le corrigé ECAM LaSalle, repris et étoffé.
+  </footer>
+
+</div>
+
+<script src="../assets/gate.js"></script>
+</body>
+</html>
