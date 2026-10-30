@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Association de liaisons — correction détaillée (théorie des mécanismes)</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  :root{
+    --bg:#fafafa; --text:#2d3748; --muted:#64748b; --title:#1a202c;
+    --accent:#0f766e; --accent-soft:#ccfbf1; --line:#e5e7eb; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--text);
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    font-size:17px; line-height:1.7}
+  .page{max-width:800px; margin:0 auto; padding:2.5rem 2rem 4rem}
+  .nav{display:flex; flex-wrap:wrap; gap:1rem; font-size:.92rem; margin-bottom:1.5rem}
+  .nav a{color:var(--accent); text-decoration:none; font-weight:600}
+  .nav a:hover{text-decoration:underline}
+  p, ul, ol{margin:0 0 1.5rem}
+  li{margin-bottom:.45rem}
+  strong{color:var(--title)}
+  h1{font-size:2.1rem; line-height:1.2; color:var(--title); margin:.6rem 0 .6rem}
+  h2{font-size:1.5rem; color:var(--title); margin:3.4rem 0 1.1rem; padding-bottom:.45rem;
+    border-bottom:2px solid var(--accent-soft)}
+  h3{font-size:1.15rem; color:var(--accent); margin:2.2rem 0 .7rem}
+  .kicker{font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
+  .lead{color:var(--muted); font-size:1.08rem; margin-bottom:2rem}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1.4rem 1.6rem; margin:1.5rem 0}
+  .card h3:first-child{margin-top:0}
+
+  /* ---- Question : texte à gauche, encadré méthode à droite ---- */
+  .qblock{display:grid; grid-template-columns:minmax(0,1fr) 250px; gap:1.8rem;
+    margin:2.4rem 0 0; padding-top:1.8rem; border-top:1px solid var(--line)}
+  .qblock.wide{grid-template-columns:minmax(0,1fr)}
+  .qtitle{font-size:1.2rem; font-weight:800; color:var(--title); margin:0 0 1rem}
+  .qnum{display:inline-block; background:var(--accent); color:#fff; border-radius:7px;
+    padding:.12rem .6rem; font-size:.9rem; margin-right:.5rem; vertical-align:middle}
+  .ask{background:#f8fafc; border-left:4px solid #94a3b8; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .ask .lab, .lab{display:block; font-size:.72rem; font-weight:800; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:.25rem}
+  .demarche{margin:0 0 1.2rem}
+  .calc{background:#fff; border:1px solid var(--line); border-radius:10px; padding:.8rem 1rem .4rem; margin:0 0 1.2rem; overflow-x:auto}
+  .res{background:#ecfdf5; border-left:4px solid #059669; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .res .lab{color:#047857}
+
+  .aside{align-self:start; border-radius:12px; padding:1rem 1.1rem; font-size:.93rem; line-height:1.55;
+    background:#f0fdfa; border:1px solid #99f6e4}
+  .aside.formula{background:#f5f3ff; border-color:#ddd6fe}
+  .aside.apply{background:#fffbeb; border-color:#fde68a}
+  .aside.piege{background:#fff1f2; border-color:#fecdd3}
+  .aside .lab{color:var(--accent); margin-bottom:.35rem}
+  .aside.formula .lab{color:#6d28d9}
+  .aside.apply .lab{color:#b45309}
+  .aside.piege .lab{color:#be123c}
+  .aside p, .aside ul{margin:0 0 .7rem}
+  .aside ul{padding-left:1.1rem}
+  .aside li{margin-bottom:.3rem}
+  .aside > :last-child{margin-bottom:0}
+
+  .warn{background:#fff7ed; border-left:4px solid #ea580c; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .warn .lab{color:#c2410c}
+  .info{background:#f0f9ff; border-left:4px solid #0284c7; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .info .lab{color:#0369a1}
+
+  figure{margin:1.4rem 0 1.8rem; text-align:center}
+  figure img{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:10px; padding:.5rem}
+  figcaption{font-size:.88rem; color:var(--muted); margin-top:.5rem; line-height:1.5}
+
+  table{width:100%; border-collapse:collapse; margin:.6rem 0 1.4rem; font-size:.93rem; background:#fff}
+  th, td{border:1px solid var(--line); padding:.5rem .6rem; text-align:center}
+  th{background:#f1f5f9; color:var(--title)}
+  td.l, th.l{text-align:left}
+
+  .steps{counter-reset:s; list-style:none; padding:0; margin:0 0 1.5rem}
+  .steps li{counter-increment:s; position:relative; padding:.2rem 0 .2rem 2.7rem; margin-bottom:.9rem}
+  .steps li::before{content:counter(s); position:absolute; left:0; top:.1rem; width:1.9rem; height:1.9rem;
+    border-radius:50%; background:var(--accent-soft); color:var(--accent); font-weight:800; text-align:center; line-height:1.9rem}
+
+  footer{margin-top:3.5rem; padding-top:1.2rem; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem}
+  footer a{color:var(--accent)}
+  mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%}
+
+  @media (max-width:680px){
+    body{font-size:16px}
+    .page{padding:1.6rem 1.1rem 3rem}
+    h1{font-size:1.65rem}
+    h2{font-size:1.3rem; margin-top:2.6rem}
+    .qblock{grid-template-columns:1fr; gap:1rem}
+  }
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+<div class="page">
+
+  <nav class="nav">
+    <a href="../index.html#am2">← Accueil</a>
+    <a href="ch2-theorie-mecanismes.html">← Chapitre 2 (cours)</a>
+    <a href="../assets/pdf.html?f=../documents/aem2-si/ch2-theorie-mecanismes/TDM-PT-TD-association_de_liaisons-prof.pdf" target="_blank" rel="noopener">Corrigé original (PDF)</a>
+  </nav>
+
+  <div class="kicker">AM2 · SI · Chapitre 2 — Théorie des mécanismes (TD, partie 1)</div>
+  <h1>Association de liaisons : correction détaillée</h1>
+  <p class="lead">Première partie du TD « Théorie des mécanismes (C02) », dans l'ordre du TD : articulation, double guidage cylindrique,
+  accouplement par goupille (deux versions), accouplement de deux arbres par manchon. Pour chaque question : la démarche, le calcul,
+  puis le résultat du corrigé. L'idée centrale : des liaisons <strong>en série</strong> s'additionnent, des liaisons <strong>en parallèle</strong> s'égalisent.</p>
+
+  <!-- ============================================================ -->
+  <h2>1. Avant de commencer : l'essentiel</h2>
+
+  <div class="card">
+    <h3>Deux façons d'associer des liaisons</h3>
+    <ul>
+      <li><strong>En série</strong> (une pièce intermédiaire entre deux liaisons) : les mouvements s'<em>ajoutent</em>. Le torseur cinématique équivalent est la somme des torseurs. Les efforts, eux, passent d'une liaison à l'autre : le torseur des actions équivalent est celui de la chaîne, mesuré au même point.</li>
+      <li><strong>En parallèle</strong> (deux liaisons entre les mêmes pièces) : les mouvements doivent être <em>identiques</em> sur les deux liaisons. On égalise donc les torseurs cinématiques, et les efforts s'<em>ajoutent</em>.</li>
+    </ul>
+    <h3>Isostatisme : compter les degrés de liberté</h3>
+    <p>Pour un mécanisme à \(\gamma\) boucles et \(m\) mobilités internes, on compare le nombre de conditions cinématiques indépendantes (\(I_c\)) au nombre de mouvements autorisés. Le degré d'hyperstatisme est :</p>
+    \[h = m - I_c + E_c,\qquad E_c=6\,\gamma\]
+    <p>Le corrigé fait le même calcul en statique (\(h=m-E_s+I_s\)) et trouve le même résultat : ces deux approches servent de contrôle croisé.
+    Un mécanisme à \(h=0\) est <strong>isostatique</strong> ; \(h>0\) signifie hyperstatique de degré \(h\).</p>
+  </div>
+
+  <div class="info">
+    <span class="lab">Méthode commune</span>
+    1) Tracer le graphe des liaisons. 2) Écrire le torseur cinématique et le torseur des actions de chaque liaison, au même point.
+    3) Réduire les liaisons en série (somme) ou en parallèle (égalité). 4) Identifier la liaison équivalente. 5) Compter \(h\).
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>2. Exercice 1 — Articulation</h2>
+
+  <figure>
+    <img src="img/meca-articulation.png" alt="Articulation : tube 1, axe 2 avec croisillon, tige 3, dessin en coupe" loading="lazy">
+    <figcaption>Énoncé : un tube 1 est lié à un axe 2, lui-même lié à une tige 3 (articulation en coupe).</figcaption>
+  </figure>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Graphe des liaisons</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Établir le graphe des liaisons. Comment sont associées les deux liaisons ?</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Une liaison entre 1 et 2, une autre entre 2 et 3 : 2 est au milieu, donc les deux liaisons sont <strong>en série</strong>.</li>
+        <li>Pour leur nature, on regarde les axes : la liaison 1/2 tourne autour de \(\vec z\) en \(O\), la liaison 2/3 autour de \(\vec y\) en \(O\). Ce sont deux <strong>pivots</strong>.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span>
+        Graphe : \(0\)–(bâti)–\(1\) — pivot d'axe \((O,\vec z)\) — \(2\) — pivot d'axe \((O,\vec y)\) — \(3\). Les deux liaisons sont en série.
+      </div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Repère</span>
+      <p>Deux pivots d'axes perpendiculaires qui se coupent au même point \(O\) : c'est le principe du joint de Cardan (croisillon).</p>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q2</span>Torseurs de la liaison 1/2</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Définir le torseur cinématique \(\{\mathcal V_{2/1}\}\) et le torseur des actions \(\{\mathcal T_{2\to1}\}\) de la liaison \(\mathcal L_{1/2}\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Un pivot d'axe \(\vec z\) laisse libre la rotation autour de \(\vec z\) : \(\vec\Omega_{2/1}=\omega_z\,\vec z\), et interdit toute vitesse de translation.</li>
+        <li>Les actions : on bloque les 5 autres composantes. Il reste le moment selon \(\vec z\) (\(N_{21}\)) — ici noté avec les composantes \(X,Y,Z\) et \(L,M\) à déterminer.</li>
+      </ol>
+      <div class="calc">
+        \[\{\mathcal V_{2/1}\}_O=\begin{Bmatrix}\omega_{x}=0,\ \omega_y=0,\ \omega_z\\ V_{O}=\vec 0\end{Bmatrix}\qquad
+        \{\mathcal T_{2\to1}\}_O=\begin{Bmatrix}X_{21}\,\vec x+Y_{21}\,\vec y+Z_{21}\,\vec z\\ L_{21}\,\vec x+M_{21}\,\vec y+0\,\vec z\end{Bmatrix}\]
+        <p>Le moment selon \(\vec z\) est nul pour un pivot : la liaison laisse tourner librement autour de \(\vec z\).</p>
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        Torseur cinématique : rotation \(\omega_z\) seule. Torseur des actions : \(X_{21},Y_{21},Z_{21}\) en résultante, \(L_{21},M_{21}\) en moment (\(N_{21}=0\)).
+      </div>
+      <div class="warn"><span class="lab">⚠️ Lecture du corrigé</span>
+        Dans le corrigé imprimé, le torseur cinématique de cette liaison est écrit avec une composante de translation selon \(\vec z\) (notée \(V_{O,2/1}^z\)).
+        Pour un <em>pivot</em> pur, cette translation est nulle : c'est la rotation \(\omega_z\) qui est libre. Vérifie le sens dans ton cours avant de t'en servir.</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Un torseur cinématique se note toujours au même point : ici \(O\), centre commun des deux pivots.</li>
+        <li>Un pivot autorise une rotation, une glissière une translation. Ne pas confondre les deux colonnes du torseur.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3</span>Torseurs de la liaison 2/3</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Même question pour la liaison \(\mathcal L_{2/3}\) (pivot d'axe \(\vec y\)).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Même raisonnement, avec l'axe \(\vec y\) : \(\vec\Omega_{3/2}=\omega_y\,\vec y\), vitesse nulle en \(O\).</li>
+        <li>Les actions : résultante \(X_{32},Y_{32},Z_{32}\), moments \(L_{32}\) et \(N_{32}\) selon \(\vec x\) et \(\vec z\) ; le moment selon \(\vec y\) est nul.</li>
+      </ol>
+      <div class="calc">
+        \[\{\mathcal V_{3/2}\}_O=\begin{Bmatrix}\omega_y\,\vec y\\ \vec 0\end{Bmatrix}\qquad
+        \{\mathcal T_{3\to2}\}_O=\begin{Bmatrix}X_{32}\vec x+Y_{32}\vec y+Z_{32}\vec z\\ L_{32}\vec x+0\,\vec y+N_{32}\vec z\end{Bmatrix}\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        Rotation libre \(\omega_y\) seule ; actions \(X_{32},Y_{32},Z_{32}\) et moments \(L_{32},N_{32}\) (\(M_{32}=0\)).
+      </div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q4</span>Liaison équivalente 1/3</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déduire le torseur de la liaison équivalente \(\mathcal L_{1/3}\) entre 1 et 3, et dire quelle liaison c'est.</div>
+      <p class="demarche"><span class="lab">Démarche (approche cinématique)</span></p>
+      <ol>
+        <li>Les liaisons sont en série : on <strong>additionne</strong> les torseurs cinématiques, en \(O\).
+        \(\{\mathcal V_{3/1}\}_O=\{\mathcal V_{3/2}\}_O+\{\mathcal V_{2/1}\}_O\).</li>
+        <li>On obtient deux rotations libres (\(\omega_y\) et \(\omega_z\)) et aucune translation : la rotation autour de \(\vec x\) est bloquée.</li>
+      </ol>
+      <p class="demarche"><span class="lab">Approche statique</span></p>
+      <ol>
+        <li>Les efforts passent d'une liaison à l'autre : \(\{\mathcal T_{3\to2}\}_O=\{\mathcal T_{2\to1}\}_O\) et on en déduit \(M_{21}=0\) et \(N_{32}=0\) (un moment ne peut pas traverser une liaison qui le laisse libre).</li>
+        <li>Résultat : \(\{\mathcal T_{3\to1}\}_O\) a une résultante \(X_{31},Y_{31},Z_{31}\) et un moment \(L_{31}\) ; les moments \(M_{31}\) et \(N_{31}\) sont nuls.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span>
+        Liaison équivalente : <strong>sphérique à doigt</strong> de centre \(O\) (rotation autour de \(\vec x\) bloquée, rotations autour de \(\vec y\) et \(\vec z\) libres).
+      </div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à retenir</span>
+      <p>En série : \(\{\mathcal V_{eq}\}=\sum\{\mathcal V_i\}\) au même point. En parallèle : \(\{\mathcal V_{1}\}=\{\mathcal V_{2}\}\) au même point, et \(\{\mathcal T_{eq}\}=\sum\{\mathcal T_i\}\).</p>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q5</span>L'articulation est-elle isostatique ?</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Dire si la liaison est isostatique.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Il n'y a pas de boucle fermée : c'est une <strong>chaîne ouverte</strong> (1–2–3 sans retour sur 1).</li>
+        <li>Dans une chaîne ouverte, le nombre de mobilités ne peut pas créer de sur-contrainte : \(h=0\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span>
+        La liaison équivalente est <strong>isostatique</strong> (chaîne ouverte).</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <p>Une chaîne ouverte est toujours isostatique, même avec deux liaisons sphériques ou pivots en série. L'hyperstatisme apparaît seulement avec une <strong>boucle</strong> (deux liaisons en parallèle, ou un retour sur la même pièce).</p>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>3. Exercice 2 — Double guidage cylindrique</h2>
+
+  <figure>
+    <img src="img/meca-double-guidage.png" alt="Double guidage : bâti 0 avec deux colonnes d'axes y en A et B, entraxe e, coulisseau 2" loading="lazy">
+    <figcaption>Énoncé : un bâti 0 porte deux colonnes d'axes \((A,\vec y)\) et \((B,\vec y)\), d'entraxe \(e=\overrightarrow{AB}\cdot\vec z\). Le coulisseau 2 glisse sur les deux colonnes.</figcaption>
+  </figure>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Torseurs de la liaison \(\mathcal L^A_{2/0}\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Torseur cinématique et torseur des actions de la liaison en \(A\) (axe \((A,\vec y)\)).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>La colonne autorise à la fois une translation selon \(\vec y\) et une rotation autour de \(\vec y\) : c'est un <strong>pivot glissant</strong> d'axe \(\vec y\).</li>
+        <li>Actions : on bloque les composantes qui ne sont pas libres, il reste \(X_A,Z_A\), \(L_A,N_A\) (\(Y_A\) et \(M_A\) sont nuls : mouvement selon \(\vec y\) et rotation autour de \(\vec y\)).</li>
+      </ol>
+      <div class="calc">
+        \[\{\mathcal V^A_{2/0}\}_A=\begin{Bmatrix}\omega_yA\,\vec y\\ V_{yA}\,\vec y\end{Bmatrix}\qquad
+        \{\mathcal T^A_{2\to0}\}_A=\begin{Bmatrix}X_A\vec x+Z_A\vec z\\ L_A\vec x+N_A\vec z\end{Bmatrix}\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        Pivot glissant d'axe \((A,\vec y)\) : rotation \(\omega_{yA}\) et translation \(V_{yA}\) libres ; actions \(X_A,Z_A,L_A,N_A\).
+      </div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q2</span>Torseurs de la liaison \(\mathcal L^B_{2/0}\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Même question pour la liaison en \(B\) (axe \((B,\vec y)\)).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Même type de liaison : pivot glissant d'axe \(\vec y\), mais en \(B\), à l'entraxe \(e\).</li>
+      </ol>
+      <div class="calc">
+        \[\{\mathcal V^B_{2/0}\}_B=\begin{Bmatrix}\omega_yB\,\vec y\\ V_{yB}\,\vec y\end{Bmatrix}\qquad
+        \{\mathcal T^B_{2\to0}\}_B=\begin{Bmatrix}X_B\vec x+Z_B\vec z\\ L_B\vec x+N_B\vec z\end{Bmatrix}\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        Pivot glissant d'axe \((B,\vec y)\) : \(\omega_{yB}\), \(V_{yB}\) libres ; actions \(X_B,Z_B,L_B,N_B\).
+      </div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3</span>Liaison équivalente 2/0</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déduire le torseur de la liaison équivalente \(\mathcal L_{2/0}\). Quelle est cette liaison ?</div>
+      <p class="demarche"><span class="lab">Démarche (approche cinématique)</span></p>
+      <ol>
+        <li>Les deux pivots glissants relient les mêmes pièces : ils sont <strong>en parallèle</strong>. Les mouvements doivent donc être identiques.</li>
+        <li>On déplace les deux torseurs au même point \(A\) (avec \(\overrightarrow{AB}=e\,\vec z\)). Le torseur en \(B\) donne un terme de rotation en plus : \(\overrightarrow{AB}\wedge\vec\Omega_{2/0}\).</li>
+        <li>L'égalité des torseurs impose \(\omega_{yB}=0\) : les deux colonnes empêchent toute rotation autour de \(\vec y\).</li>
+      </ol>
+      <p class="demarche"><span class="lab">Approche statique</span></p>
+      <ol>
+        <li>Les efforts s'ajoutent : \(\{\mathcal T^{eq}_{2\to0}\}_A=\{\mathcal T^A_{2\to0}\}_A+\{\mathcal T^B_{2\to0}\}_A\), en déplaçant \(\{\mathcal T^B\}\) de \(B\) vers \(A\).</li>
+        <li>Le déplacement de \(\vec F_B=X_B\vec x+Z_B\vec z\) de \(B\) vers \(A\) crée un moment \(\overrightarrow{AB}\wedge\vec F_B=e\,X_B\,\ldots\) : c'est ce qui donne le terme \(e\,X_B\) dans le torseur équivalent.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span>
+        Liaison équivalente : <strong>glissière de direction \(\vec y\)</strong> (translation selon \(\vec y\) seule, rotation bloquée).
+        Torseur des actions en \(A\) : résultante \((X_A+X_B)\vec x+(Z_A+Z_B)\vec z\), moment \((L_A+L_B)\vec x+e\,X_B\,\vec y+(N_A+N_B)\vec z\).
+        Le terme \(e\,X_B\,\vec y\) vient du transport de \(\vec F_B\) de \(B\) vers \(A\) (bras \(e\)).
+      </div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à retenir</span>
+      <p>Deux pivots glissants parallèles sur le même axe \(\vec y\), décalés de \(e\) : leur combinaison est une glissière, plus une liaison hyperstatique.</p>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q4</span>Isostatisme du double guidage</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        La liaison est-elle isostatique ?</div>
+      <p class="demarche"><span class="lab">Démarche (approche cinématique)</span></p>
+      <ol>
+        <li>Mobilités : \(m_u=1\) (translation selon \(\vec y\)), \(m_i=0\).</li>
+        <li>Une boucle (\(\gamma=1\)) : \(E_c=6\gamma=6\).</li>
+        <li>Conditions cinématiques : chacun des 2 pivots glissants impose \(I_c=2\times2=4\).</li>
+        <li>\(h=m-I_c+E_c=1-4+6=3\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span>
+        <strong>Hyperstatique de degré 3</strong>. Le contrôle en statique (\(E_s=6\), \(I_s=8\)) donne aussi \(h=3\).
+      </div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Deux liaisons en parallèle créent une boucle : c'est là que l'hyperstatisme apparaît.</li>
+        <li>Pour un coulisseau bien guidé, on ajuste une des deux liaisons (ou on la remplace par une liaison sphérique) pour retrouver l'isostatisme.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>4. Exercice 3 — Accouplement par goupille</h2>
+
+  <h3>Version 1 : poulie large (22 mm)</h3>
+
+  <figure>
+    <img src="img/meca-goupille-v1.png" alt="Arbre 1 de diamètre 20 mm, poulie 2 de largeur 22 mm, goupille élastique 3 de diamètre 8 mm, axe y" loading="lazy">
+    <figcaption>Énoncé, version 1 : arbre 1 (\(\varnothing20\)) et poulie 2 (largeur 22) reliés par une goupille élastique 3 (\(\varnothing8\)).</figcaption>
+  </figure>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Graphe des liaisons</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Établir le graphe des liaisons de la version 1.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Le moyeu de la poulie glisse sur l'arbre selon \(\vec y\) et tourne autour de \(\vec y\) : pivot glissant d'axe \(\vec y\) entre 1 et 2.</li>
+        <li>La goupille traverse 1 et 2 selon \(\vec z\) : elle permet une rotation et une translation selon \(\vec z\) avec chaque pièce, donc deux pivots glissants d'axe \(\vec z\) (liaison 1/3 et 3/2).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span>
+        Graphe : 1 — pivot glissant d'axe \((O,\vec y)\) — 2 ; 1 — pivot glissant d'axe \((O,\vec z)\) — 3 ; 3 — pivot glissant d'axe \((O,\vec z)\) — 2.
+      </div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q2</span>Torseurs de la liaison 1/2</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Torseur cinématique et torseur des actions de \(\mathcal L_{1/2}\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Pivot glissant \(\vec y\) : rotation \(\omega_y\) et translation \(V_y\) libres.</li>
+        <li>Actions : \(X_{21},Z_{21},N_{21}\) et \(L_{21}\), \(M_{21}\) nul.</li>
+      </ol>
+      <div class="calc">
+        \[\{\mathcal V_{2/1}\}_O=\begin{Bmatrix}\omega_y\vec y\\ V_{y}\vec y\end{Bmatrix}\qquad
+        \{\mathcal T_{2\to1}\}_O=\begin{Bmatrix}X_{21}\vec x+Z_{21}\vec z\\ L_{21}\vec x+N_{21}\vec z\end{Bmatrix}\]
+      </div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3</span>Torseurs de la liaison 3/2</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Torseur cinématique et torseur des efforts de \(\mathcal L_{3/2}\) (goupille dans la poulie).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>La goupille tourne et coulisse selon \(\vec z\) : \(\omega_z\) et \(V_z\) libres.</li>
+        <li>Efforts : \(X_{32},Y_{32}\) (efforts transverses), moments \(L_{32},M_{32}\) ; le moment selon \(\vec z\) est nul.</li>
+      </ol>
+      <div class="calc">
+        \[\{\mathcal V_{3/2}\}_O=\begin{Bmatrix}\omega_z\vec z\\ V_z\vec z\end{Bmatrix}\qquad
+        \{\mathcal T_{3\to2}\}_O=\begin{Bmatrix}X_{32}\vec x+Y_{32}\vec y\\ L_{32}\vec x+M_{32}\vec y\end{Bmatrix}\]
+      </div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q4</span>Torseurs de la liaison 1/3</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Même question pour \(\mathcal L_{1/3}\) (goupille dans l'arbre).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Même principe que Q3 : pivot glissant d'axe \(\vec z\), donc \(\omega_z\) et \(V_z\) libres.</li>
+      </ol>
+      <div class="calc">
+        \[\{\mathcal V_{3/1}\}_O=\begin{Bmatrix}\omega_z\vec z\\ V_z\vec z\end{Bmatrix}\qquad
+        \{\mathcal T_{3\to1}\}_O=\begin{Bmatrix}X_{31}\vec x+Y_{31}\vec y\\ L_{31}\vec x+M_{31}\vec y\end{Bmatrix}\]
+      </div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q5</span>Liaison équivalente 1/2</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déduire le torseur de la liaison équivalente entre 1 et 2. Quelle est cette liaison ?</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Les deux pivots glissants d'axe \(\vec z\) (1/3 puis 3/2) sont <strong>en série</strong> : leur association est un pivot glissant d'axe \(\vec z\).</li>
+        <li>Ce pivot glissant \(\vec z\) est en <strong>parallèle</strong> avec le pivot glissant \(\vec y\) (1/2). On égalise les mouvements : \(\omega_y=0\) et \(V_y=0\). Il ne reste aucun mouvement.</li>
+        <li>On additionne les efforts (parallèle). Résultat : une liaison fixe.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span>
+        Liaison équivalente : <strong>encastrement</strong> entre 1 et 2 (aucun mouvement, torseur cinématique nul).
+      </div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q6</span>Isostatisme de la version 1</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        La liaison est-elle isostatique ?</div>
+      <p class="demarche"><span class="lab">Démarche (approche cinématique)</span></p>
+      <ol>
+        <li>Mobilités : \(m_u=0\), \(m_i=2\) (les deux rotations \(\omega_y\) et \(\omega_z\) de la goupille ; compter les mobilités internes de la goupille).</li>
+        <li>\(\gamma=1\), donc \(E_c=6\).</li>
+        <li>\(I_c=6\) (les trois liaisons en parallèle imposent 6 conditions au total).</li>
+        <li>\(h=m-I_c+E_c=2-6+6=2\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span>
+        <strong>Hyperstatique de degré 2</strong>. En statique on trouve aussi \(h=2\) (\(E_s=12\), \(I_s=12\)).
+      </div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <p>Le corrigé écrit \(I_c=6\) pour cette version, ce qui donne \(h=2\). Ce nombre est cohérent avec le calcul statique : c'est un bon contrôle croisé.</p>
+    </aside>
+  </div>
+
+  <h3>Version 2 : poulie étroite (10 mm)</h3>
+
+  <figure>
+    <img src="img/meca-goupille-v2.png" alt="Arbre 1 de diamètre 20 mm, poulie 2 de largeur 10 mm, goupille 3 de diamètre 8 mm" loading="lazy">
+    <figcaption>Énoncé, version 2 : même arbre et même goupille, poulie plus étroite (largeur 10 mm).</figcaption>
+  </figure>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1–Q2</span>Graphe et torseur de 1/2</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Le graphe change-t-il ? Quel est le torseur de la liaison 1/2 (guidage sur l'arbre) ?</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Avec une poulie étroite, le guidage sur l'arbre se fait sur une faible longueur. Le rapport \(L/D\) est petit (\(L\) : longueur de guidage, \(D\) : diamètre) : le corrigé conclut que le contact est une <strong>liaison sphère-cylindre</strong> (linéaire annulaire) et non plus un pivot glissant.</li>
+        <li>La liaison sphère-cylindre autorise la translation selon \(\vec y\) et les trois rotations, sauf que la rotation autour de \(\vec y\) doit rester libre. Il reste \(X_{21},Z_{21}\) en efforts, et le moment est nul.</li>
+      </ol>
+      <div class="calc">
+        \[\{\mathcal V_{2/1}\}_O=\begin{Bmatrix}\omega_x\vec x+\omega_y\vec y+\omega_z\vec z\\ V_y\vec y\end{Bmatrix}\qquad
+        \{\mathcal T_{2\to1}\}_O=\begin{Bmatrix}X_{21}\vec x+Z_{21}\vec z\\ \vec 0\end{Bmatrix}\]
+      </div>
+      <div class="warn"><span class="lab">⚠️ À vérifier</span>
+        Le critère \(L/D\) du corrigé est écrit de façon peu lisible dans le PDF : il faut le relire sur le cours (seuil \(L/D\)) pour être sûr de la règle à retenir.</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3–Q6</span>Équivalent, isostatisme</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Torseurs de 3/2 et 1/3, liaison équivalente 1/2, isostatisme.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Les liaisons 3/2 et 1/3 restent des pivots glissants d'axe \(\vec z\), comme en version 1.</li>
+        <li>En série : pivot glissant \(\vec z\). En parallèle avec la sphère-cylindre : la rotation \(\omega_y\) et la translation \(V_y\) sont bloquées, mais la rotation \(\omega_z\) reste libre.</li>
+        <li>La liaison équivalente est donc un <strong>pivot d'axe \((O,\vec z)\)</strong>.</li>
+        <li>Mobilités \(m=m_u+m_i=1+2=3\), \(I_c=2\times2+1\times4=8\) (\(2\times2\) pour les deux pivots glissants, \(1\times4\) pour la sphère-cylindre) ; \(E_c=6\). Donc \(h=3-8+6=1\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span>
+        Liaison équivalente 1/2 : <strong>pivot d'axe \((O,\vec z)\)</strong>. <strong>Hyperstatique de degré 1</strong> (statique : \(E_s=12\), \(I_s=10\), \(h=1\)).
+      </div>
+      <div class="warn"><span class="lab">⚠️ Arithmétique à vérifier</span>
+        Dans le corrigé, la ligne \(2\times1+1\times4\) est donnée égale à 4, alors que \(2+4=6\). Avec 6, on retrouve bien \(h=1\) comme écrit. Il s'agit probablement d'une coquille.</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Concl.</span>Quelle version privilégier ?</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Quelle association doit-on privilégier en construction ?</div>
+      <div class="res"><span class="lab">Réponse</span>
+        La <strong>version 1</strong> : la version 2 crée un léger rotulage dû à la portée trop courte entre poulie et arbre. La version 1, plus longue, est plus rigide.
+      </div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">À retenir</span>
+      <p>Plus la portée de guidage est courte, plus la liaison se rapproche d'une rotule : le montage devient moins rigide, même si le nombre de liaisons ne change pas.</p>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>5. Exercice 4 — Accouplement de deux arbres par manchon</h2>
+
+  <figure>
+    <img src="img/meca-manchon-schema.png" alt="Deux arbres 1 et 2 de même axe reliés par un manchon 3 encastré sur les deux, sur paliers 0" loading="lazy">
+    <figcaption>Énoncé : deux arbres de même axe \(\vec y\), reliés par un manchon 3 encastré sur 1 et sur 2, chacun guidé sur un palier du bâti 0.</figcaption>
+  </figure>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Graphe et isostatisme (manchon encastré)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Établir le graphe des liaisons. La liaison est-elle isostatique ?</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>On pose \(\Sigma=\{1+2+3\}\) (les deux arbres et le manchon sont solidaires). Chaque arbre est en pivot d'axe \(\vec y\) sur le bâti.</li>
+        <li>Mobilités : \(m_u=1\) (rotation autour de \(\vec y\)), \(m_i=0\). \(\gamma=1\), donc \(E_c=6\).</li>
+        <li>\(I_c=2\times1=2\) (les deux pivots imposent deux conditions de rotation de plus, comptées ici comme dans le corrigé).</li>
+        <li>\(h=m-I_c+E_c=1-2+6=5\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span>
+        <strong>Hyperstatique de degré 5</strong>. Le manchon encastré sur les deux arbres crée une boucle très sur-contrainte.
+      </div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <p>Un manchon encastré sur deux arbres déjà guidés sur deux paliers : la chaîne se referme sur le bâti, donc on compte les sur-contraintes. C'est exactement ce que les deux réalisations suivantes cherchent à réduire.</p>
+    </aside>
+  </div>
+
+  <h3>Réalisation 1 : manchon encastré sur 1, jeu radial sur 2</h3>
+
+  <figure>
+    <img src="img/meca-manchon-real1.png" alt="Réalisation 1 : manchon 3 encastré sur l'arbre 1, avec jeu radial sur l'arbre 2, goupille traversant 3 et 2" loading="lazy">
+    <figcaption>Réalisation 1 : le manchon 3 est encastré sur 1 mais avec jeu radial sur 2 ; une goupille traverse 3 et 2.</figcaption>
+  </figure>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q2</span>Graphe et isostatisme</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Établir le graphe. Cette solution est-elle isostatique ?</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Le manchon ne touche plus 2 en rotation libre : la goupille le relie à 2 par un pivot glissant d'axe \(\vec z\). L'arbre 2 reste en pivot sur le bâti.</li>
+        <li>Mobilités : \(m=1\). Conditions cinématiques : \(I_c=2\times1+1\times2=4\) (une liaison pivot, plus un pivot glissant qui impose deux conditions). \(E_c=6\).</li>
+        <li>\(h=1-4+6=3\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span>
+        <strong>Hyperstatique de degré 3</strong> : la solution n'est pas isostatique, mais elle est moins sur-contrainte que le manchon encastré (degré 5).
+      </div>
+    </div>
+  </div>
+
+  <h3>Réalisation 2 : goupille liée à 2 en contact par rainure</h3>
+
+  <figure>
+    <img src="img/meca-manchon-real2.png" alt="Réalisation 2 : manchon 3 encastré sur l'arbre 1, goupille liée à 2 engagée dans une rainure du manchon" loading="lazy">
+    <figcaption>Réalisation 2 : le manchon 3 est encastré sur 1, avec un jeu radial sur 2 ; une goupille liée à 2 est en contact avec 3 par une rainure.</figcaption>
+  </figure>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3</span>Graphe et isostatisme</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Établir le graphe. Cette solution est-elle isostatique ?</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>La goupille, liée à 2, pénètre dans une rainure du manchon : le contact se fait par une <strong>sphère-cylindre</strong> (dans la rainure, selon \(\vec z\)) et non par une pivot glissant.</li>
+        <li>Mobilités \(m=1\), \(\gamma=1\), \(E_c=6\). Le corrigé annonce \(h=1\) ; le détail des conditions \(I_c\) est peu lisible, à refaire avec le contact retenu.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span>
+        <strong>Hyperstatique de degré 1</strong>. Cette solution est plus proche de l'isostatisme que la réalisation 1.
+      </div>
+      <div class="warn"><span class="lab">⚠️ À vérifier</span>
+        Le détail du calcul \(I_c\) pour cette réalisation est peu lisible dans le corrigé ; le résultat \(h=1\) est donné, il faut le refaire avec le contact choisi pour être certain.</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q4</span>Solution isostatique</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Proposer une solution isostatique pour transmettre la rotation entre 1 et 2 avec le manchon lié par goupilles aux arbres.</div>
+      <div class="res"><span class="lab">Réponse (corrigé)</span>
+        Il suffit de <strong>combiner les deux réalisations</strong> : une liaison pivot glissant par goupille sur chaque arbre, et une liaison sphère-cylindre qui permet le jeu radial nécessaire. Le manchon ne transmet que la rotation, et les jeux évitent toute sur-contrainte.
+      </div>
+    </div>
+    <aside class="aside apply">
+      <span class="lab">Appliquer</span>
+      <ul>
+        <li>Pour rendre une liaison isostatique, on remplace chaque encastrement par une liaison qui laisse le jeu nécessaire (pivot glissant, sphère-cylindre, linéaire annulaire).</li>
+        <li>Vérifier toujours avec \(h=m-I_c+E_c\) après chaque modification.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>6. À retenir</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Série</strong> : les mouvements s'ajoutent. <strong>Parallèle</strong> : les mouvements s'égalisent, les efforts s'ajoutent.</li>
+      <li><strong>Chaîne ouverte</strong> : toujours isostatique. <strong>Boucle</strong> : l'hyperstatisme apparaît.</li>
+      <li><strong>Formule</strong> : \(h=m-I_c+E_c\), avec \(E_c=6\gamma\). Le contrôle statique (\(h=m-E_s+I_s\)) doit donner le même résultat.</li>
+      <li><strong>Montages réels</strong> : une portée courte rapproche le montage d'une rotule, une liaison en jeu limite la sur-contrainte.</li>
+    </ul>
+  </div>
+
+  <footer>
+    Source : TD « Théorie des mécanismes (C02) » (CPGE PT / S2I, Lycée Jean Zay, E. Bigeard, v1.3). Corrigé officiel : D. Bigeard, d'après M. Jacquot.
+    <a href="../assets/pdf.html?f=../documents/aem2-si/ch2-theorie-mecanismes/TDM-PT-TD-association_de_liaisons-prof.pdf" target="_blank" rel="noopener">Ouvrir le corrigé (PDF)</a>.
+    Les encadrés orange signalent les points à relire ou les coquilles du corrigé.
+  </footer>
+
+</div>
+
+<script src="../assets/gate.js"></script>
+</body>
+</html>
