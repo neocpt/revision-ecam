@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Robot de peinture — lois de pilotage (correction détaillée)</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  :root{
+    --bg:#fafafa; --text:#2d3748; --muted:#64748b; --title:#1a202c;
+    --accent:#0f766e; --accent-soft:#ccfbf1; --line:#e5e7eb; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--text);
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    font-size:17px; line-height:1.7}
+  .page{max-width:800px; margin:0 auto; padding:2.5rem 2rem 4rem}
+  .nav{display:flex; flex-wrap:wrap; gap:1rem; font-size:.92rem; margin-bottom:1.5rem}
+  .nav a{color:var(--accent); text-decoration:none; font-weight:600}
+  .nav a:hover{text-decoration:underline}
+  p, ul, ol{margin:0 0 1.5rem}
+  li{margin-bottom:.45rem}
+  strong{color:var(--title)}
+  h1{font-size:2.1rem; line-height:1.2; color:var(--title); margin:.6rem 0 .6rem}
+  h2{font-size:1.5rem; color:var(--title); margin:3.4rem 0 1.1rem; padding-bottom:.45rem;
+    border-bottom:2px solid var(--accent-soft)}
+  h3{font-size:1.15rem; color:var(--accent); margin:2.2rem 0 .7rem}
+  .kicker{font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
+  .lead{color:var(--muted); font-size:1.08rem; margin-bottom:2rem}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1.4rem 1.6rem; margin:1.5rem 0}
+  .card h3:first-child{margin-top:0}
+
+  /* ---- Question : texte à gauche, encadré méthode à droite ---- */
+  .qblock{display:grid; grid-template-columns:minmax(0,1fr) 250px; gap:1.8rem;
+    margin:2.4rem 0 0; padding-top:1.8rem; border-top:1px solid var(--line)}
+  .qblock.wide{grid-template-columns:minmax(0,1fr)}
+  .qtitle{font-size:1.2rem; font-weight:800; color:var(--title); margin:0 0 1rem}
+  .qnum{display:inline-block; background:var(--accent); color:#fff; border-radius:7px;
+    padding:.12rem .6rem; font-size:.9rem; margin-right:.5rem; vertical-align:middle}
+  .ask{background:#f8fafc; border-left:4px solid #94a3b8; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .ask .lab, .lab{display:block; font-size:.72rem; font-weight:800; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:.25rem}
+  .demarche{margin:0 0 1.2rem}
+  .calc{background:#fff; border:1px solid var(--line); border-radius:10px; padding:.8rem 1rem .4rem; margin:0 0 1.2rem; overflow-x:auto}
+  .res{background:#ecfdf5; border-left:4px solid #059669; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .res .lab{color:#047857}
+
+  .aside{align-self:start; border-radius:12px; padding:1rem 1.1rem; font-size:.93rem; line-height:1.55;
+    background:#f0fdfa; border:1px solid #99f6e4}
+  .aside.formula{background:#f5f3ff; border-color:#ddd6fe}
+  .aside.apply{background:#fffbeb; border-color:#fde68a}
+  .aside.piege{background:#fff1f2; border-color:#fecdd3}
+  .aside .lab{color:var(--accent); margin-bottom:.35rem}
+  .aside.formula .lab{color:#6d28d9}
+  .aside.apply .lab{color:#b45309}
+  .aside.piege .lab{color:#be123c}
+  .aside p, .aside ul{margin:0 0 .7rem}
+  .aside ul{padding-left:1.1rem}
+  .aside li{margin-bottom:.3rem}
+  .aside > :last-child{margin-bottom:0}
+
+  .warn{background:#fff7ed; border-left:4px solid #ea580c; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .warn .lab{color:#c2410c}
+  .info{background:#f0f9ff; border-left:4px solid #0284c7; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .info .lab{color:#0369a1}
+
+  figure{margin:1.4rem 0 1.8rem; text-align:center}
+  figure img{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:10px; padding:.5rem}
+  figcaption{font-size:.88rem; color:var(--muted); margin-top:.5rem; line-height:1.5}
+
+  table{width:100%; border-collapse:collapse; margin:.6rem 0 1.4rem; font-size:.93rem; background:#fff}
+  th, td{border:1px solid var(--line); padding:.5rem .6rem; text-align:center}
+  th{background:#f1f5f9; color:var(--title)}
+  td.l, th.l{text-align:left}
+
+  .steps{counter-reset:s; list-style:none; padding:0; margin:0 0 1.5rem}
+  .steps li{counter-increment:s; position:relative; padding:.2rem 0 .2rem 2.7rem; margin-bottom:.9rem}
+  .steps li::before{content:counter(s); position:absolute; left:0; top:.1rem; width:1.9rem; height:1.9rem;
+    border-radius:50%; background:var(--accent-soft); color:var(--accent); font-weight:800; text-align:center; line-height:1.9rem}
+
+  footer{margin-top:3.5rem; padding-top:1.2rem; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem}
+  footer a{color:var(--accent)}
+  mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%}
+
+  @media (max-width:680px){
+    body{font-size:16px}
+    .page{padding:1.6rem 1.1rem 3rem}
+    h1{font-size:1.65rem}
+    h2{font-size:1.3rem; margin-top:2.6rem}
+    .qblock{grid-template-columns:1fr; gap:1rem}
+  }
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+<div class="page">
+
+  <nav class="nav">
+    <a href="../index.html#am2">← Accueil</a>
+    <a href="ch-c03-lois-pilotage-td3.html">← TD3 : centrifugeuse et savons</a>
+
+  </nav>
+
+  <div class="kicker">AM2 · SI · Cinématique (lois de pilotage, C03) — TD3, exercice 3.3</div>
+  <h1>Robot de peinture : balayage horizontal, lois de pilotage</h1>
+  <p class="lead">Le pistolet doit balayer la carrosserie à vitesse constante. On écrit la vitesse de son point, puis les conditions de pilotage des deux axes.</p>
+
+  <!-- ============================================================ -->
+  <h2>1. Avant de commencer : l'essentiel</h2>
+  <div class="card">
+    <h3>Piloter un robot pour une trajectoire imposée</h3>
+    <ul>
+      <li><strong>Décomposer le mouvement</strong> : \(\vec\omega_{2/0}=\vec\omega_{2/1}+\vec\omega_{1/0}\). On écrit la rotation de chaque solide sur son axe.</li>
+      <li><strong>Vitesse d'un point</strong> : on écrit \(\overrightarrow{OP}\) en une somme de vecteurs simples, puis on dérive chaque terme dans le repère de référence.</li>
+      <li><strong>Contrainte</strong> : une condition sur la vitesse du point (ici un déplacement horizontal à vitesse constante) donne des équations scalaires, qui permettent de calculer les lois de pilotage \(\dot\lambda(t)\), \(\dot\alpha(t)\).</li>
+    </ul>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>2. Exercice 3.3 — Robot de peinture (balayage horizontal)</h2>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q11</span>Vitesses de rotation de chaque solide</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Exprimer \(\vec\Omega_{1/0}\), \(\vec\Omega_{2/1}\), \(\vec\Omega_{3/2}\), puis en déduire \(\vec\Omega_{2/0}\) et \(\vec\Omega_{3/0}\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Le solide 1 par rapport à 0 ne tourne pas : son mouvement est une translation, donc \(\vec\Omega_{1/0}=\vec 0\).</li>
+        <li>Solide 2 par rapport à 1 : rotation \(\dot\alpha\) autour de \(\vec z\). Solide 3 par rapport à 2 : rotation \(\dot\beta\) autour de \(\vec y_2\).</li>
+        <li>Composition : \(\vec\Omega_{2/0}=\dot\alpha\,\vec z\) ; \(\vec\Omega_{3/0}=\dot\beta\,\vec y_2+\dot\alpha\,\vec z\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> \(\vec\Omega_{1/0}=\vec 0\), \(\vec\Omega_{2/0}=\dot\alpha\,\vec z\), \(\vec\Omega_{3/0}=\dot\beta\,\vec y_2+\dot\alpha\,\vec z\).</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q12</span>Vitesse du point \(P\) (pistolet)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer \(\vec V_{P\in3/0}\), où \(P\) est la position du pistolet.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>On décompose \(\overrightarrow{OP}=\lambda\,\vec y_0+H\,\vec z_0+L\,\vec z_3\) (\(H\) et \(L\) constants, \(L=BP\)).</li>
+        <li>On dérive dans \(R_0\) : seul \(\vec z_3\) tourne, avec \(\vec\Omega_{3/0}\). Les vecteurs \(\vec y_0\) et \(\vec z_0\) sont fixes.</li>
+        <li>Résultat : \(\vec V_{P\in3/0}=\dot\lambda\,\vec y_0+L\dot\beta\,\vec x_3+L\dot\alpha\sin\beta\,\vec y_3\), où \(\beta\) est l'angle entre \(\vec z_0\) et \(\vec z_3\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> \(\vec V_{P\in3/0}=\dot\lambda\,\vec y_0+L\dot\beta\,\vec x_3+L\dot\alpha\sin\beta\,\vec y_3\).</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q13</span>Condition : \(P\) se déplace à vitesse \(V\) selon \(\vec x_0\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Écrire la condition vectorielle \(\vec V_{P\in3/0}=V\,\vec x_0\), puis la projeter sur \(\vec z_0\) pour en déduire \(\beta\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Projection sur \(\vec z_0\) : la vitesse doit être nulle selon \(\vec z_0\). Seul le terme en \(\dot\beta\) (et celui en \(\dot\alpha\sin\beta\)) peut contribuer.</li>
+        <li>On obtient \(-L\dot\beta\sin\beta=0\). Comme \(L\neq0\) et \(\sin\beta\neq0\) en général, \(\dot\beta=0\).</li>
+        <li>L'angle \(\beta\) est donc constant : \(\beta=\beta_0\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> \(\dot\beta=0\) : l'orientation du pistolet par rapport au bras est constante, \(\beta=\beta_0\).</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q14</span>Projections sur \(\vec x_0\) et \(\vec y_0\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Projeter la condition sur \(\vec x_0\) et \(\vec y_0\) pour obtenir les deux équations scalaires restantes.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Avec \(\dot\beta=0\), la vitesse se réduit à \(\dot\lambda\,\vec y_0+L\dot\alpha\sin\beta_0\,\vec y_3\).</li>
+        <li>Projection sur \(\vec x_0\) : \(V=L\dot\beta\cos\beta_0\cos\alpha-L\dot\alpha\sin\beta_0\sin\alpha\). Avec \(\dot\beta=0\), il reste \(V=-L\dot\alpha\sin\beta_0\sin\alpha\).</li>
+        <li>Projection sur \(\vec y_0\) : \(0=\dot\lambda+L\dot\alpha\sin\beta_0\cos\alpha\) (la vitesse suivant \(y\) doit être nulle).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> \(V=-L\dot\alpha\sin\beta_0\sin\alpha\) et \(\dot\lambda=-L\dot\alpha\sin\beta_0\cos\alpha\).</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q15</span>Lois de pilotage \(\dot\alpha\) et \(\dot\lambda\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Exprimer \(\dot\lambda\) et \(\dot\alpha\) en fonction de \(L\), \(V\), \(\alpha\) et \(\beta_0\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Pour que le pistolet ne se déplace que horizontalement avec \(\beta_0\) fixe, la géométrie impose \(\sin\beta_0=\dfrac{b}{L}\) (\(b\) : distance fixe du bras).</li>
+        <li>Remplacer dans la projection sur \(\vec x_0\) : \(\dot\alpha=-\dfrac{V}{L\sin\beta_0\sin\alpha}=-\dfrac{V}{b\sin\alpha}\).</li>
+        <li>Remplacer dans la projection sur \(\vec y_0\) : \(\dot\lambda=-L\dot\alpha\sin\beta_0\cos\alpha=\dfrac{V\cos\alpha}{\sin\alpha}=\dfrac{V}{\tan\alpha}\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span>
+        \[\dot\alpha=-\dfrac{V}{b\sin\alpha}\qquad\qquad\dot\lambda=\dfrac{V}{\tan\alpha}\]
+        Ces deux équations différentielles s'intègrent numériquement pour donner les lois de pilotage du robot.
+      </div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <p>Le signe de \(\dot\alpha\) est négatif : \(\alpha\) diminue quand le pistolet avance dans le sens \(+\vec x_0\). Vérifier le sens de \(V\) avant d'intégrer.</p>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>3. Robot ERICC 3 (exercice 1.2)</h2>
+  <div class="info"><span class="lab">Non traité ici</span> Aucun corrigé de ce robot n'a été trouvé dans les fichiers téléchargés : le corrigé TD3 ne le couvre pas. Cette partie reste à faire.</div>
+
+
+  <footer>
+    Source : TD3 « Déterminer les lois de pilotage en mouvement » (S2I, cycle préparatoire A&M). Corrigé repris, expliqué dans mes propres mots.
+  </footer>
+
+</div>
+
+<script src="../assets/gate.js"></script>
+</body>
+</html>
