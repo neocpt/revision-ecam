@@ -54,7 +54,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
       <li><a href="#association"><b>TD corrigé</b></a>
         <ul>
           <li><a href="#association">1. Association de liaisons — articulation, double guidage, goupille, manchon (correction détaillée)</a></li>
-          <li><a href="#pompe">5. Pompe à piston radial (étude complète)</a></li>
+          <li><a href="#pompe">2. Pompe à piston radial — correction détaillée</a></li>
         </ul>
       </li>
       <li><a href="#tp"><b>TP + DS</b></a>
@@ -474,151 +474,10 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
   </section>
 
   <section class="block" id="pompe">
-    <h2>5. Pompe à piston radial — étude complète</h2>
-    <div class="exo-card">
-      <div class="exo-head">Présentation du mécanisme <span class="diff">à connaître</span></div>
-      <div class="exo-body">
-        <figure>
-          <img src="img/td-pompe-fig12.png" alt="Modèle 3D et schéma cinématique de la pompe à piston radial" loading="lazy">
-        </figure>
-        <figure>
-          <img src="img/td-pompe-fig3.png" alt="Paramétrage : O1C=e, O1D=h, CE=r, k position du piston, α position angulaire de l'arbre d'entrée" loading="lazy">
-        </figure>
-        <p class="enonce">Objectif : mieux comprendre l'hyperstatisme en étudiant les conséquences géométriques
-        d'un degré d'hyperstatisme non nul, puis rendre le mécanisme isostatique. Le ressort est négligé dans
-        toute la suite.</p>
-        <p>3 solides : <b>1</b> (bâti/carter, fixe), <b>2</b> (arbre d'entrée + excentrique, paramètre
-        \(\alpha\)), <b>3</b> (piston, paramètre \(k\)). D'après le schéma cinématique et le paramétrage
-        (\(O_1C=e\), \(O_1D=h\), \(CE=r\)) :</p>
-        <ul style="margin:.3rem 0 0">
-          <li><b>\(\mathscr L_{1/2}\)</b> : pivot d'axe \((O_1,\vec z_1)\) — l'arbre d'entrée tourne dans le carter.</li>
-          <li><b>\(\mathscr L_{1/3}\)</b> : pivot glissant d'axe \((D,\vec y_1)\) — le piston coulisse dans son
-          alésage (le pivot glissant, et non une simple glissière, car rien n'empêche le piston de tourner
-          librement sur lui-même).</li>
-          <li><b>\(\mathscr L_{2/3}\)</b> : linéaire rectiligne, ligne \((E,\vec z_1)\), normale \(\vec y_1\) — le
-          galet cylindrique (rayon \(r\), axe \(\vec z_1\), monté sur l'excentrique 2) roule sur la face plane du
-          piston 3.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="exo-card">
-      <div class="exo-head">Q1–3 — Graphe, nombre cyclomatique, \(I_c\) et \(m\) <span class="diff">approche cinématique</span></div>
-      <div class="exo-body">
-        <p class="q">1) Graphe des liaisons</p>
-        <p>3 solides (1, 2, 3), 3 liaisons formant <b>une seule boucle fermée</b> \(1\!-\!2\!-\!3\!-\!1\).</p>
-
-        <p class="q">2) Nombre cyclomatique</p>
-        \[\gamma = N_L-N_P+1 = 3-3+1 = 1 \qquad\Rightarrow\qquad E_c=6\gamma=6\]
-
-        <p class="q">3) \(I_c\) et \(m\)</p>
-        <p>On additionne les ddl de chaque liaison (cf. tableau des liaisons usuelles, fiche formulaire) :</p>
-        \[I_c = \underbrace{1}_{\text{pivot }1/2} + \underbrace{2}_{\text{pivot glissant }1/3} + \underbrace{4}_{\text{linéaire rectiligne }2/3} = 7\]
-        <p>Mouvement réel : \(\alpha\) entraîne \(k\) (relation utile \(k(\alpha)\), \(m_u=1\)) et le piston peut
-        en plus tourner librement sur son axe \(\vec y_1\) sans aucun effet fonctionnel (\(m_i=1\)) :</p>
-        <div class="res">\[m = m_u+m_i = 1+1 = 2\]</div>
-      </div>
-    </div>
-
-    <div class="exo-card">
-      <div class="exo-head">Q4–6 — Torseurs cinématiques, fermeture, degré d'hyperstatisme <span class="diff">approche cinématique</span></div>
-      <div class="exo-body">
-        <p class="q">4) Torseurs cinématiques de chaque liaison</p>
-        \[\{\mathcal V_{2/1}\}_{O_1} = \{\dot\alpha\,\vec z_1\, ;\ \vec 0\}_{O_1} \qquad
-        \{\mathcal V_{3/1}\}_{D} = \{\dot\psi\,\vec y_1\, ;\ \dot k\,\vec y_1\}_{D} \qquad
-        \{\mathcal V_{2/3}\}_{E} = \{\omega_{z}\vec z_1+\omega_{y}\vec y_1\, ;\ v_{z}\vec z_1+v_{x}\vec x_1\}_{E}\]
-        (\(\dot\psi\) = rotation propre, inutile, du piston ; \(\omega_z,\omega_y,v_z,v_x\) = 4 inconnues de la
-        liaison linéaire rectiligne en \(E\).)
-
-        <p class="q">5) Fermeture cinématique en \(O_1\)</p>
-        <p>On réduit les 3 torseurs au même point \(O_1\) (Varignon, avec \(\overrightarrow{O_1E}\), fonction de
-        \(\alpha\) via \(e\), \(r\)) et on écrit \(\{\mathcal V_{2/1}\}+\{\mathcal V_{1/3}\}+\{\mathcal V_{3/2}\}=\{0\}\) :
-        cela donne <b>6 équations scalaires</b> (3 sur la résultante, 3 sur le moment) à <b>\(I_c=7\)</b>
-        inconnues (\(\dot\alpha,\dot\psi,\dot k,\omega_z,\omega_y,v_z,v_x\)).</p>
-
-        <p class="q">6) Degré d'hyperstatisme</p>
-        <p>La résolution donne la loi \(k(\alpha)\) utile et détermine 4 des 7 inconnues ; en projetant sur les 6
-        directions, <b>une seule équation est du type \(0=0\)</b> (la composante de moment selon \(\vec x_1\),
-        perpendiculaire au plan de fonctionnement \((O_1,\vec y_1,\vec z_1)\)) : \(rg[E_c]=5\).</p>
-        \[m = I_c-rg[E_c] = 7-5 = 2 \ \checkmark \text{(cohérent avec Q3)}\]
-        <div class="res"><b>Mickey :</b> \[h = E_c-rg[E_c] = 6-5 = 1 \qquad\text{ou}\qquad h=m-I_c+E_c=2-7+6=1\]</div>
-      </div>
-    </div>
-
-    <div class="exo-card">
-      <div class="exo-head">Q7–9 — Torseurs des actions, PFS, degré d'hyperstatisme <span class="diff">approche statique</span></div>
-      <div class="exo-body">
-        <figure>
-          <img src="img/td-pompe-fig4.png" alt="Actions mécaniques calculables : isolement de 1, 2 puis 3, PFS" loading="lazy">
-        </figure>
-        <p class="q">7) Torseurs des actions mécaniques transmissibles (complémentaires des torseurs cinématiques)</p>
-        \[\{\mathcal T_{1\to2}\}_{O_1} = \{Y\vec y_1+Z\vec z_1\, ;\ C_m\vec z_1+L_O\vec x_1\}_{O_1} \qquad
-        \{\mathcal T_{1\to3}\}_{D} = \{X\vec x_1+Z\vec z_1\, ;\ L_D\vec x_1+N\vec z_1\}_{D}\]
-        \[\{\mathcal T_{2\to3}\}_{E} = \{Y\vec y_1\, ;\ L_E\vec x_1\}_{E}\]
-
-        <p class="q">8) PFS isolant 2 puis 3</p>
-        <p>En isolant successivement <b>2</b> (sous \(C_m\), la réaction du bâti en \(O_1\), et la réaction du
-        galet en \(E\)) puis <b>3</b> (sous la force de pression du fluide \(F_p\), la réaction du galet en \(E\),
-        et la réaction du guidage en \(D\)), on obtient \(E_s=6(N_P-1)=12\) équations pour \(I_s=5+4+2=11\)
-        inconnues statiques.</p>
-        <div class="note"><span class="lab">Résultat du TD</span> Après résolution, toutes les composantes
-        <b>dans le plan de fonctionnement</b> \((O_1,\vec y_1,\vec z_1)\) sont calculables, avec la relation
-        entrée-sortie \(\boxed{C_m = e\,F_p\cos\alpha}\) (couple moteur minimal \(>eF_p\), maximal pour
-        \(\alpha=0\)). En revanche, les 3 composantes de moment \(L_O,\,L_E,\,L_D\) (selon \(\vec x_1\), hors du
-        plan de fonctionnement) restent <b>indéterminées</b> : c'est la signature de l'hyperstatisme.</div>
-
-        <p class="q">9) Degré d'hyperstatisme</p>
-        \[rg[E_s] = E_s-m = 12-2 = 10\]
-        <div class="res"><b>Messi :</b> \[h = I_s-rg[E_s] = 11-10 = 1 \qquad\text{ou}\qquad h=m-E_s+I_s=2-12+11=1\]
-        Identique à l'approche cinématique (Q6). \(\boxed{h=1}\) : <b>hyperstatique de degré 1</b>, dû aux 3
-        moments \(L_O,L_E,L_D\) liés entre eux par une seule relation redondante.</div>
-      </div>
-    </div>
-
-    <div class="exo-card">
-      <div class="exo-head">Q10 — Rendre l'assemblage isostatique</div>
-      <div class="exo-body">
-        <p class="enonce">La famille d'inconnues hyperstatiques est celle des moments \(L_i\) (défaut \(\theta_x\)).
-        Il faut ajouter 1 degré de liberté en rotation à l'une des liaisons.</p>
-        <p>Les liaisons \(\mathscr L_{1/2}\) (pivot d'entrée) et \(\mathscr L_{1/3}\) (guidage du piston, fonction
-        de guidage précis) ne peuvent pas perdre de contrainte sans nuire à leur fonction. Seule
-        \(\mathscr L_{2/3}\) (linéaire rectiligne, 2 inconnues) est modifiable : on remplace le <b>roulement
-        rigide à une rangée de billes</b> en \(C\) (rotulage résiduel très faible, \(5'\)) par un <b>roulement à
-        rotule</b> (rotulage \(3°\)), ce qui dégrade la liaison en <b>ponctuelle</b> (5 ddl, 1 seule inconnue
-        statique : la composante normale).</p>
-        <div class="res">\(I_c\) passe de 7 à 8 → \(h = m-I_c+E_c = 2-8+6 = 0\) : le mécanisme devient
-        <b>isostatique</b>.</div>
-      </div>
-    </div>
-
-    <div class="exo-card">
-      <div class="exo-head">Q11 — Conclusion</div>
-      <div class="exo-body">
-        <p class="q">Quel défaut est le plus influent ?</p>
-        <div class="res">Le défaut angulaire \(\theta_x\) (bascule hors du plan de fonctionnement) est le seul
-        vraiment gênant : les défauts \(\theta_y\), \(\theta_z\), \(dD_x\), \(dD_z\) sont <b>naturellement
-        absorbés</b> par les degrés de liberté déjà présents dans les liaisons en amont (pivot glissant du
-        piston, linéaire rectiligne du galet), alors qu'<b>aucune</b> liaison ne peut compenser \(\theta_x\) —
-        c'est précisément la direction du degré d'hyperstatisme \(h=1\) trouvé en Q6/Q9, et celle qu'il faut
-        corriger en Q10.</div>
-        <div class="note"><span class="lab">À retenir</span> L'hyperstaticité est un problème <b>structurel</b>
-        (lié au choix des liaisons), pas un problème d'efforts extérieurs : même sans charge (\(F_p=C_m=0\)),
-        le défaut \(\theta_x\) engendre des <b>autocontraintes</b> dès le montage.</div>
-      </div>
-    </div>
+    <h2>2. Pompe à piston radial — hyperstatisme et isostatisme</h2>
+    <div class="note"><span class="lab">Correction détaillée</span> <a href="ch2-pompe-piston-radial.html">Ouvrir la correction pas à pas</a> : graphe de liaisons, degré d'hyperstatisme (cinématique et statique), défaut le plus gênant, montage isostatique.</div>
   </section>
 
-
-
-  <div style="margin:2.2rem 0 .4rem;padding:.7rem 1rem;border-left:5px solid var(--subject);background:#f8fafc;border-radius:8px"><b style="color:var(--subject-ink)">TP + DS</b> — TP Hyperstatisme et DS — corrigés</div>
-  <p class="lead">Deux compléments au <a href="#association">TD du chapitre 2</a> trouvés sur Moodle :
-  le <b>compte-rendu du TP Hyperstatisme</b> (assemblages à 4, 5 et 6 plaquettes de bois) et l'exercice <b>« hydro-nettoyeur »</b> du
-  <i>DS01 2022-2023</i> (pompe à plateau oscillant : degré d'hyperstatisme puis dynamique du piston). <b>⚠️ Aucun corrigé officiel</b> :
-  tout est résolu avec la méthode de la <a href="#torseurs">fiche formulaire</a>
-  (\(h=m-I_c+E_c\)). Rappel : \(E_c=6\gamma\) en modèle spatial et \(E_c=3\gamma\) en modèle plan, \(\gamma=L-S+1\).</p>
-
-
-  <!-- ======================= TP =============================== -->
   <section class="block" id="tp">
     <h2>1. TP Hyperstatisme — compte-rendu</h2>
     <p class="enonce">Avec 6 plaquettes de bois, boulons et rondelles : (1) assemblage articulé de 4 plaquettes en parallélogramme ;

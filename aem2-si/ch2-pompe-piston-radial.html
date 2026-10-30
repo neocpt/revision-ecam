@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pompe à piston radial — hyperstatisme, correction détaillée</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  :root{
+    --bg:#fafafa; --text:#2d3748; --muted:#64748b; --title:#1a202c;
+    --accent:#0f766e; --accent-soft:#ccfbf1; --line:#e5e7eb; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--text);
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    font-size:17px; line-height:1.7}
+  .page{max-width:800px; margin:0 auto; padding:2.5rem 2rem 4rem}
+  .nav{display:flex; flex-wrap:wrap; gap:1rem; font-size:.92rem; margin-bottom:1.5rem}
+  .nav a{color:var(--accent); text-decoration:none; font-weight:600}
+  .nav a:hover{text-decoration:underline}
+  p, ul, ol{margin:0 0 1.5rem}
+  li{margin-bottom:.45rem}
+  strong{color:var(--title)}
+  h1{font-size:2.1rem; line-height:1.2; color:var(--title); margin:.6rem 0 .6rem}
+  h2{font-size:1.5rem; color:var(--title); margin:3.4rem 0 1.1rem; padding-bottom:.45rem;
+    border-bottom:2px solid var(--accent-soft)}
+  h3{font-size:1.15rem; color:var(--accent); margin:2.2rem 0 .7rem}
+  .kicker{font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
+  .lead{color:var(--muted); font-size:1.08rem; margin-bottom:2rem}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1.4rem 1.6rem; margin:1.5rem 0}
+  .card h3:first-child{margin-top:0}
+
+  /* ---- Question : texte à gauche, encadré méthode à droite ---- */
+  .qblock{display:grid; grid-template-columns:minmax(0,1fr) 250px; gap:1.8rem;
+    margin:2.4rem 0 0; padding-top:1.8rem; border-top:1px solid var(--line)}
+  .qblock.wide{grid-template-columns:minmax(0,1fr)}
+  .qtitle{font-size:1.2rem; font-weight:800; color:var(--title); margin:0 0 1rem}
+  .qnum{display:inline-block; background:var(--accent); color:#fff; border-radius:7px;
+    padding:.12rem .6rem; font-size:.9rem; margin-right:.5rem; vertical-align:middle}
+  .ask{background:#f8fafc; border-left:4px solid #94a3b8; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .ask .lab, .lab{display:block; font-size:.72rem; font-weight:800; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:.25rem}
+  .demarche{margin:0 0 1.2rem}
+  .calc{background:#fff; border:1px solid var(--line); border-radius:10px; padding:.8rem 1rem .4rem; margin:0 0 1.2rem; overflow-x:auto}
+  .res{background:#ecfdf5; border-left:4px solid #059669; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .res .lab{color:#047857}
+
+  .aside{align-self:start; border-radius:12px; padding:1rem 1.1rem; font-size:.93rem; line-height:1.55;
+    background:#f0fdfa; border:1px solid #99f6e4}
+  .aside.formula{background:#f5f3ff; border-color:#ddd6fe}
+  .aside.apply{background:#fffbeb; border-color:#fde68a}
+  .aside.piege{background:#fff1f2; border-color:#fecdd3}
+  .aside .lab{color:var(--accent); margin-bottom:.35rem}
+  .aside.formula .lab{color:#6d28d9}
+  .aside.apply .lab{color:#b45309}
+  .aside.piege .lab{color:#be123c}
+  .aside p, .aside ul{margin:0 0 .7rem}
+  .aside ul{padding-left:1.1rem}
+  .aside li{margin-bottom:.3rem}
+  .aside > :last-child{margin-bottom:0}
+
+  .warn{background:#fff7ed; border-left:4px solid #ea580c; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .warn .lab{color:#c2410c}
+  .info{background:#f0f9ff; border-left:4px solid #0284c7; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .info .lab{color:#0369a1}
+
+  figure{margin:1.4rem 0 1.8rem; text-align:center}
+  figure img{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:10px; padding:.5rem}
+  figcaption{font-size:.88rem; color:var(--muted); margin-top:.5rem; line-height:1.5}
+
+  table{width:100%; border-collapse:collapse; margin:.6rem 0 1.4rem; font-size:.93rem; background:#fff}
+  th, td{border:1px solid var(--line); padding:.5rem .6rem; text-align:center}
+  th{background:#f1f5f9; color:var(--title)}
+  td.l, th.l{text-align:left}
+
+  .steps{counter-reset:s; list-style:none; padding:0; margin:0 0 1.5rem}
+  .steps li{counter-increment:s; position:relative; padding:.2rem 0 .2rem 2.7rem; margin-bottom:.9rem}
+  .steps li::before{content:counter(s); position:absolute; left:0; top:.1rem; width:1.9rem; height:1.9rem;
+    border-radius:50%; background:var(--accent-soft); color:var(--accent); font-weight:800; text-align:center; line-height:1.9rem}
+
+  footer{margin-top:3.5rem; padding-top:1.2rem; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem}
+  footer a{color:var(--accent)}
+  mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%}
+
+  @media (max-width:680px){
+    body{font-size:16px}
+    .page{padding:1.6rem 1.1rem 3rem}
+    h1{font-size:1.65rem}
+    h2{font-size:1.3rem; margin-top:2.6rem}
+    .qblock{grid-template-columns:1fr; gap:1rem}
+  }
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+<div class="page">
+
+  <nav class="nav">
+    <a href="../index.html#am2">← Accueil</a>
+    <a href="ch2-theorie-mecanismes.html">← Chapitre 2 (cours)</a>
+    <a href="../assets/pdf.html?f=../documents/aem2-si/ch2-theorie-mecanismes/TDM-PT-TD-pompe_a_piston_radial-prof.pdf" target="_blank" rel="noopener">Corrigé original (PDF)</a>
+  </nav>
+
+  <div class="kicker">AM2 · SI · Chapitre 2 — Théorie des mécanismes (TD, partie 2)</div>
+  <h1>Pompe à piston radial : hyperstatisme, correction détaillée</h1>
+  <p class="lead">Deuxième partie du TD « Théorie des mécanismes (C02) », dans l'ordre du TD : 1) degré d'hyperstatisme, 2) évidence géométrique,
+  3) rendre l'assemblage isostatique, 4) détermination intuitive de \(h\), 5) conclusion. L'objectif : comprendre qu'un montage
+  peut être <strong>hyperstatique sans effort extérieur</strong>, et savoir comment le rendre isostatique.</p>
+
+  <!-- ============================================================ -->
+  <h2>1. Avant de commencer : l'essentiel</h2>
+
+  <div class="card">
+    <h3>Ce qu'il faut savoir</h3>
+    <ul>
+      <li><strong>Hyperstatisme</strong> : un mécanisme est hyperstatique de degré \(h\) si certaines inconnues de liaison ne se calculent pas avec les seules équations du PFS. Ce nombre se calcule de deux façons qui doivent donner le même résultat : cinématique \(h=m-I_c+E_c\), statique \(h=m-E_s+I_s\).</li>
+      <li><strong>Défaut géométrique</strong> : une pièce réelle n'est jamais parfaite. Dans un montage hyperstatique, ce défaut crée des <strong>autocontraintes</strong>, même sans aucun effort extérieur.</li>
+      <li><strong>Remède</strong> : ajouter un degré de liberté (remplacer une liaison par une autre qui laisse le défaut se compenser), jusqu'à atteindre \(h=0\).</li>
+    </ul>
+  </div>
+
+  <div class="info">
+    <span class="lab">Méthode du TD</span>
+    1) Graphe des liaisons et nombre cyclomatique \(\gamma\). 2) Paramétrage (position du piston \(k\), angle d'entrée \(\alpha\)). 3) Approche cinématique (torseurs, fermeture de chaîne).
+    4) Approche statique (PFS en isolant chaque pièce). 5) Comparer les deux \(h\). 6) Chercher le défaut le plus gênant.
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>2. Présentation et modèle</h2>
+
+  <figure>
+    <img src="img/meca-pompe-modele.png" alt="Pompe à piston radial : modèle 3D (gauche) et schéma cinématique avec les solides 1, 2 et 3 (droite)" loading="lazy">
+    <figcaption>Figure 1 (modèle 3D) et figure 2 (schéma cinématique). Solide 1 : carter. Solide 2 : arbre d'entrée (excentrique). Solide 3 : piston. On néglige le ressort.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="img/meca-pompe-parametrage.png" alt="Paramétrage de la pompe : vues de face et de gauche, cotes h, e, r et k, points O1, C, D, E et H" loading="lazy">
+    <figcaption>Figure 3 (paramétrage). Cotes : \(O_1C=e\), \(O_1D=h\), \(CE=r\). Paramètres de mouvement : \(k\) (position axiale du piston) et \(\alpha\) (angle de l'arbre d'entrée).</figcaption>
+  </figure>
+
+  <!-- ============================================================ -->
+  <h2>3. Détermination du degré d'hyperstatisme</h2>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Graphe de liaisons</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Établir le graphe de liaisons de la pompe.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Trois solides : 1 (carter), 2 (arbre), 3 (piston). Il y a trois liaisons : 1–2, 1–3 et 2–3.</li>
+        <li>Entre 2 et 1 : un <strong>pivot</strong> d'axe \((O_1,\vec z_1)\), qui guide l'arbre.</li>
+        <li>Entre 1 et 3 : un <strong>pivot glissant</strong> d'axe \((D,\vec y_1)\), qui guide le piston dans l'alésage.</li>
+        <li>Entre 2 et 3 : une <strong>linéaire rectiligne</strong> en \(E\) (normale \(\vec y_1\), direction \(\vec z_1\)), où l'excentrique pousse le piston.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span>
+        Graphe : 2 —pivot \((O_1,\vec z_1)\)— 1 —pivot glissant \((D,\vec y_1)\)— 3 —linéaire rectiligne \((E)\)— 2 : une seule boucle, fermée sur les trois solides.
+      </div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q2</span>Nombre cyclomatique</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Calculer le nombre cyclomatique \(\gamma\) (nombre de boucles indépendantes).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>\(\gamma=N_L-N_S+1\), avec \(N_L\) = nombre de liaisons et \(N_S\) = nombre de solides.</li>
+        <li>Ici \(N_L=3\) et \(N_S=3\) : \(\gamma=3-3+1=1\). Une seule boucle, donc \(E_c=6\gamma=6\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> \(\gamma=1\). Remarque du corrigé : si l'on découpait la liaison arbre/carter en deux liaisons (rotule + sphère-cylindre), le graphe aurait davantage de boucles.</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3</span>Calcul de \(I_c\) et de \(m\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Calculer \(I_c\) et le nombre de mobilités \(m\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>\(I_c\) = somme des conditions cinématiques imposées par les trois liaisons. Le corrigé les totalise : \(I_c=1+4+2=7\). Le détail par liaison est dans le corrigé ; retiens la méthode (une liaison bloque autant de mouvements qu'il y a de conditions).</li>
+        <li><strong>Mobilités</strong> : \(m_u=1\) (translation d'entrée–sortie du piston), \(m_i=1\) (rotation propre du piston autour de son axe). Donc \(m=m_u+m_i=2\).</li>
+      </ol>
+      <div class="warn"><span class="lab">⚠️ Décompte de \(I_c\)</span>
+        Le détail du décompte \(1+4+2=7\) est donné au raccourci dans le corrigé. Pour un contrôle, on retrouve le même \(h\) par l'approche statique (Q9) : il vaut 1 dans les deux cas, ce qui valide le total.</div>
+      <div class="res"><span class="lab">Réponse</span> \(I_c=7\), \(m=2\).</div>
+    </div>
+  </div>
+
+  <h3>3.1 Approche cinématique</h3>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q4</span>Torseurs cinématiques des trois liaisons</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Écrire les torseurs cinématiques de chaque liaison.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Pivot 2/1</strong> d'axe \(\vec z_1\) : seule la rotation \(\omega_{z}\) est libre, \(\vec V_{O_1}=\vec 0\).</li>
+        <li><strong>Linéaire rectiligne 3/2</strong> en \(E\) : rotation \(\omega_y\) et \(\omega_z\) possibles, translation selon \(\vec x\) et \(\vec z\).</li>
+        <li><strong>Pivot glissant 3/1</strong> d'axe \(\vec y_1\) : rotation \(\omega_y\) et translation \(V_y\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span>
+        \(\{\mathcal V_{2/1}\}_{O_1}=\{\omega_z\vec z_1;\ \vec 0\}\), \(\{\mathcal V_{3/2}\}_E=\{\omega_y\vec y_1+\omega_z\vec z_1;\ V_x\vec x+V_z\vec z\}\), \(\{\mathcal V_{3/1}\}_{O_1}=\{\omega_y\vec y_1;\ V_y\vec y_1\}\).
+        (Les notations exactes des composantes sont celles du corrigé.)
+      </div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q5</span>Équations de fermeture de chaîne en \(O_1\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Écrire les six équations provenant de la fermeture cinématique en \(O_1\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>La fermeture s'écrit : \(\{\mathcal V_{1/1}\}\) doit être nul, donc la somme \(\{\mathcal V_{3/1}\}+\{\mathcal V_{2/3}\}+\{\mathcal V_{1/2}\}\) (chaîne fermée) = \(\{0\}\) en \(O_1\).</li>
+        <li>On écrit les six composantes (trois rotations, trois translations) de ce torseur nul : chacune donne une équation scalaire.</li>
+        <li>Les équations font intervenir les cotes \(e\), \(r\) et l'angle \(\alpha\) : c'est la géométrie qui entre dans les équations de fermeture.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span>
+        Six équations scalaires (trois en rotation, trois en translation), numérotées (1) à (6) dans le corrigé. Le détail des coefficients est dans le corrigé.
+      </div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q6</span>Degré d'hyperstatisme (cinématique)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        En déduire le degré d'hyperstatisme.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>\(h=m-I_c+E_c=2-7+6=1\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> <strong>Hyperstatique de degré 1</strong>.</div>
+    </div>
+  </div>
+
+  <h3>3.2 Approche statique</h3>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q7</span>Torseurs des actions mécaniques</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Écrire les torseurs des actions \(\{\mathcal T_{2\to1}\}\), \(\{\mathcal T_{3\to2}\}\), \(\{\mathcal T_{3\to1}\}\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Une liaison transmet les efforts qu'elle ne laisse pas libres. On écrit donc chaque torseur d'action avec des inconnues \(X,Y,Z\) (résultante) et \(L,M,N\) (moment), en nommant le point de réduction (\(O_1\), \(E\) ou \(H\)).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> Trois torseurs d'action avec les inconnues de chaque liaison, écrits dans la base \(\vec b_1\) (voir corrigé pour les composantes).</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q8</span>PFS sur l'arbre 2 puis sur le piston 3</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Écrire les équations du PFS en isolant 2, puis en isolant 3.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Isoler 2</strong> (arbre d'entrée) : bilan du bâti 1, du piston 3 et du moteur (couple \(C_m\)). On écrit la résultante (3 équations) et le moment en \(O_1\) (3 équations).</li>
+        <li><strong>Isoler 3</strong> (piston) : bilan de 2, de 1 et du fluide (force \(F_P\)). Même écriture.</li>
+        <li>Le moment moteur ressort : \(C_m=e\,Y_E\cos\alpha\) pour l'arbre (équation 12), et l'équilibre du piston donne \(Y_E=F_P\).</li>
+      </ol>
+      <div class="calc">
+        <p>Arbre 2 : \(X_O=0\), \(Y_O+Y_E=0\), \(Z_O=0\), \(L_O+L_E=0\), \(M_O=0\), et \(-eY_E\cos\alpha+C_m=0\).</p>
+        <p>Piston 3 : \(X_H=0\), \(-Y_E+F_P=0\), \(Z_H=0\), \(-L_E+L_H=0\), et \(-eY_E\cos\alpha+N_H=0\).</p>
+      </div>
+      <div class="res"><span class="lab">Réponse</span> Douze équations (1 à 18 dans le corrigé), dont les moments \(L_O\), \(L_E\), \(L_H\) ne sont pas tous déterminés.</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q9</span>Degré d'hyperstatisme (statique) et relation entrée–sortie</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        En déduire le degré d'hyperstatisme, puis la relation entrée–sortie et la position la plus exigeante.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>\(h=m-E_s+I_s=2-12+11=1\). Les deux approches donnent \(h=1\).</li>
+        <li>Les équations dans le plan de fonctionnement permettent de calculer toutes les actions utiles. Elles donnent la relation \(C_m=e\,F_P\cos\alpha\).</li>
+        <li>Le couple est maximal pour \(\alpha=0\) (excentrique « à l'horizontale », début de compression) : le moteur doit donc fournir au moins \(e\,F_P\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span>
+        <strong>Hyperstatique de degré 1</strong>. Relation entrée–sortie : \(C_m=e\,F_P\cos\alpha\). Couple moteur minimal : \(e\,F_P\).
+      </div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Les moments \(L\) ne sont pas déterminés : ce n'est pas une erreur de calcul, c'est la signature de l'hyperstatisme.</li>
+        <li>Les efforts <em>utiles</em> (dans le plan de fonctionnement) restent calculables.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>4. Évidence géométrique de l'hyperstatisme</h2>
+
+  <div class="qblock wide">
+    <div>
+      <p class="qtitle">Où apparaît le problème ?</p>
+      <p>Le problème apparaît dans le plan \((O_1,\vec y_1,\vec z_1)\), perpendiculaire au plan de fonctionnement. Un défaut de rotation \(\theta_x\) (rotation du piston autour de \(\vec x_1\)) crée des moments \(L_O\), \(L_E\), \(L_D\) dans les liaisons. Ce défaut peut venir de n'importe laquelle des pièces : c'est propre aux chaînes en série.</p>
+      <div class="info"><span class="lab">Conséquence</span>
+        Même sans couple moteur ni pression (\(C_m=F_P=0\)), l'hyperstatisme subsiste et le défaut reste entier : c'est un problème de <strong>choix de liaisons</strong>, pas d'efforts extérieurs.
+        Le défaut engendre des autocontraintes qui s'ajoutent aux efforts de service, et dégradent la tenue des pièces et le rendement (le moment \(L_H\) entre piston et cylindre crée des charges radiales qui chauffent).</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>5. Rendre l'assemblage isostatique</h2>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q10</span>Modifier la liaison 2/3 pour la rendre isostatique</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Montrer que la modification proposée (liaison 2/3 remplacée par un contact ponctuel) est équivalente à la solution initiale.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Ce qu'il faut ajouter</strong> : l'inconnue hyperstatique est associée au défaut \(\theta_x\) ; il faut donc ajouter <em>une rotation</em> dans une liaison. Parmi les trois liaisons, seule la 2/3 peut être modifiée sans perdre sa fonction (les deux autres guident l'arbre et le piston).</li>
+        <li><strong>Modification</strong> : le roulement rigide à billes (rotulage très faible) est remplacé par un roulement à rotule (rotulage plus important). En réalité, cela crée une liaison <strong>ponctuelle</strong> entre 2 et 3.</li>
+        <li><strong>Équivalence</strong> : on calcule la liaison équivalente entre 2, 2' et 3 ; on trouve bien une liaison ponctuelle, donc les deux schémas sont équivalents.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span>
+        La liaison ponctuelle permet la rotation \(\theta_x\) qui compensait le défaut : le montage devient isostatique (\(h=0\)).
+      </div>
+    </div>
+    <aside class="aside apply">
+      <span class="lab">Appliquer</span>
+      <ul>
+        <li>Pour rendre isostatique un montage hyperstatique de degré \(h\), il faut ajouter \(h\) degrés de liberté, en général des rotations ou translations au bon endroit.</li>
+        <li>Une rotule (ou un roulement à rotule) est la façon usuelle de « libérer » une rotation dans un montage à arbres.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>6. Détermination intuitive de \(h\)</h2>
+
+  <div class="qblock wide">
+    <div>
+      <p class="qtitle">Recenser les défauts qui gênent le montage</p>
+      <p>On cherche les petits déplacements de 3 par rapport à 1 qui gênent l'assemblage au point \(D\) : trois rotations \(\delta\theta_x,\delta\theta_y,\delta\theta_z\) et trois translations \(\delta D_x,\delta D_y,\delta D_z\). Pour chacun, on regarde si une liaison voisine peut le compenser.</p>
+      <table>
+        <tr><th class="l">Défaut</th><th>Compensé par…</th><th class="l">Influence</th></tr>
+        <tr><td class="l">Rotation \(\theta_y\)</td><td>pivot glissant de sortie et linéaire en \(E\)</td><td class="l">aucune (mobilité interne)</td></tr>
+        <tr><td class="l">Rotation \(\theta_z\)</td><td>pivot d'entrée et linéaire en \(E\)</td><td class="l">aucune (l'axe \((D,\vec y_1)\) ne coupe plus \((O_1,\vec z_1)\), mais le mécanisme marche)</td></tr>
+        <tr><td class="l">Rotation \(\theta_x\)</td><td><strong>rien en amont</strong></td><td class="l"><strong>certaine : c'est la famille hyperstatique</strong></td></tr>
+        <tr><td class="l">Translation \(D_x\)</td><td>translation de la linéaire en \(E\)</td><td class="l">aucune</td></tr>
+        <tr><td class="l">Translation \(D_y\)</td><td>degré de liberté du pivot glissant de sortie</td><td class="l">sans objet</td></tr>
+        <tr><td class="l">Translation \(D_z\)</td><td>translation de la linéaire en \(E\)</td><td class="l">aucune</td></tr>
+      </table>
+      <div class="res"><span class="lab">Conclusion (Q11)</span>
+        Le défaut le plus influent est la <strong>rotation \(\theta_x\)</strong>, car aucune liaison en amont ne la compense. C'est elle qui donne le degré \(h=1\) trouvé par le calcul.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>7. À retenir</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Hyperstatisme</strong> : \(h=m-I_c+E_c=m-E_s+I_s\). Ici \(h=1\), avec \(\gamma=1\), \(m=2\), \(I_c=7\).</li>
+      <li><strong>Signature</strong> : des moments de liaison non calculables ; les efforts utiles restent calculables.</li>
+      <li><strong>Défaut le plus gênant</strong> : la rotation autour de l'axe \(\vec x_1\) (\(\theta_x\)), qui crée des autocontraintes même sans charge.</li>
+      <li><strong>Remède</strong> : remplacer la liaison 2/3 par une rotule (contact ponctuel), qui compense \(\theta_x\) et rend le montage isostatique.</li>
+    </ul>
+  </div>
+
+  <footer>
+    Source : TD « Théorie des mécanismes (C02) — Pompe à piston radial » (CPGE PT / S2I, Lycée Jean Zay, E. Bigeard, v1.6). Corrigé officiel adapté d'A. Chabert et A. Meurdefroid.
+    <a href="../assets/pdf.html?f=../documents/aem2-si/ch2-theorie-mecanismes/TDM-PT-TD-pompe_a_piston_radial-prof.pdf" target="_blank" rel="noopener">Ouvrir le corrigé (PDF)</a>.
+    Les encadrés orange signalent les points à relire.
+  </footer>
+
+</div>
+
+<script src="../assets/gate.js"></script>
+</body>
+</html>
