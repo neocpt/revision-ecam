@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PFS — châssis basculeur, console portante, maquette (suite, correction détaillée)</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  :root{
+    --bg:#fafafa; --text:#2d3748; --muted:#64748b; --title:#1a202c;
+    --accent:#0f766e; --accent-soft:#ccfbf1; --line:#e5e7eb; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--text);
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    font-size:17px; line-height:1.7}
+  .page{max-width:800px; margin:0 auto; padding:2.5rem 2rem 4rem}
+  .nav{display:flex; flex-wrap:wrap; gap:1rem; font-size:.92rem; margin-bottom:1.5rem}
+  .nav a{color:var(--accent); text-decoration:none; font-weight:600}
+  .nav a:hover{text-decoration:underline}
+  p, ul, ol{margin:0 0 1.5rem}
+  li{margin-bottom:.45rem}
+  strong{color:var(--title)}
+  h1{font-size:2.1rem; line-height:1.2; color:var(--title); margin:.6rem 0 .6rem}
+  h2{font-size:1.5rem; color:var(--title); margin:3.4rem 0 1.1rem; padding-bottom:.45rem;
+    border-bottom:2px solid var(--accent-soft)}
+  h3{font-size:1.15rem; color:var(--accent); margin:2.2rem 0 .7rem}
+  .kicker{font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
+  .lead{color:var(--muted); font-size:1.08rem; margin-bottom:2rem}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1.4rem 1.6rem; margin:1.5rem 0}
+  .card h3:first-child{margin-top:0}
+
+  /* ---- Question : texte à gauche, encadré méthode à droite ---- */
+  .qblock{display:grid; grid-template-columns:minmax(0,1fr) 250px; gap:1.8rem;
+    margin:2.4rem 0 0; padding-top:1.8rem; border-top:1px solid var(--line)}
+  .qblock.wide{grid-template-columns:minmax(0,1fr)}
+  .qtitle{font-size:1.2rem; font-weight:800; color:var(--title); margin:0 0 1rem}
+  .qnum{display:inline-block; background:var(--accent); color:#fff; border-radius:7px;
+    padding:.12rem .6rem; font-size:.9rem; margin-right:.5rem; vertical-align:middle}
+  .ask{background:#f8fafc; border-left:4px solid #94a3b8; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .ask .lab, .lab{display:block; font-size:.72rem; font-weight:800; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:.25rem}
+  .demarche{margin:0 0 1.2rem}
+  .calc{background:#fff; border:1px solid var(--line); border-radius:10px; padding:.8rem 1rem .4rem; margin:0 0 1.2rem; overflow-x:auto}
+  .res{background:#ecfdf5; border-left:4px solid #059669; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .res .lab{color:#047857}
+
+  .aside{align-self:start; border-radius:12px; padding:1rem 1.1rem; font-size:.93rem; line-height:1.55;
+    background:#f0fdfa; border:1px solid #99f6e4}
+  .aside.formula{background:#f5f3ff; border-color:#ddd6fe}
+  .aside.apply{background:#fffbeb; border-color:#fde68a}
+  .aside.piege{background:#fff1f2; border-color:#fecdd3}
+  .aside .lab{color:var(--accent); margin-bottom:.35rem}
+  .aside.formula .lab{color:#6d28d9}
+  .aside.apply .lab{color:#b45309}
+  .aside.piege .lab{color:#be123c}
+  .aside p, .aside ul{margin:0 0 .7rem}
+  .aside ul{padding-left:1.1rem}
+  .aside li{margin-bottom:.3rem}
+  .aside > :last-child{margin-bottom:0}
+
+  .warn{background:#fff7ed; border-left:4px solid #ea580c; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .warn .lab{color:#c2410c}
+  .info{background:#f0f9ff; border-left:4px solid #0284c7; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .info .lab{color:#0369a1}
+
+  figure{margin:1.4rem 0 1.8rem; text-align:center}
+  figure img{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:10px; padding:.5rem}
+  figcaption{font-size:.88rem; color:var(--muted); margin-top:.5rem; line-height:1.5}
+
+  table{width:100%; border-collapse:collapse; margin:.6rem 0 1.4rem; font-size:.93rem; background:#fff}
+  th, td{border:1px solid var(--line); padding:.5rem .6rem; text-align:center}
+  th{background:#f1f5f9; color:var(--title)}
+  td.l, th.l{text-align:left}
+
+  .steps{counter-reset:s; list-style:none; padding:0; margin:0 0 1.5rem}
+  .steps li{counter-increment:s; position:relative; padding:.2rem 0 .2rem 2.7rem; margin-bottom:.9rem}
+  .steps li::before{content:counter(s); position:absolute; left:0; top:.1rem; width:1.9rem; height:1.9rem;
+    border-radius:50%; background:var(--accent-soft); color:var(--accent); font-weight:800; text-align:center; line-height:1.9rem}
+
+  footer{margin-top:3.5rem; padding-top:1.2rem; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem}
+  footer a{color:var(--accent)}
+  mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%}
+
+  @media (max-width:680px){
+    body{font-size:16px}
+    .page{padding:1.6rem 1.1rem 3rem}
+    h1{font-size:1.65rem}
+    h2{font-size:1.3rem; margin-top:2.6rem}
+    .qblock{grid-template-columns:1fr; gap:1rem}
+  }
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+<div class="page">
+
+  <nav class="nav">
+    <a href="../index.html#am2">← Accueil</a>
+    <a href="ch8-statique-exos-c08.html">← Exercices 1.2, 2.1, 3.1</a>
+    <a href="../assets/pdf.html?f=../documents/aem2-si/ch8-statique/S2I-C08-TD-Déterminer les efforts aux effecteurs de structures ouverts à léquilibre.pdf" target="_blank" rel="noopener">Énoncé du TD (PDF)</a>
+  </nav>
+
+  <div class="kicker">AM2 · SI · Statique (PFS, C08) — TD « Efforts aux effecteurs », exercices 1.1, 1.3, 2.2 (début)</div>
+  <h1>Efforts aux effecteurs (suite) : basculeur, console portante, maquette</h1>
+  <p class="lead">Suite des exercices du TD C08 dans l'ordre du TD. Le même principe : isoler le solide, écrire le PFS au bon point, et le moment donne directement l'effort de l'actionneur.</p>
+
+  <!-- ============================================================ -->
+  <h2>5. Exercice 1.1 — Châssis basculeur (un seul corps)</h2>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1–Q3</span>Équilibre du basculeur en \(O\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Isoler le basculeur (1), écrire le PFS en \(O\), puis exprimer l'effort \(F\) du vérin.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Actions sur (1) : poids \(-mg\vec z\) passant par \(G\), vérin \(-F\vec y_1\) passant par \(B\), et la liaison pivot en \(O\) (inconnue).</li>
+        <li>Le pivot est en \(O\) : son moment selon \(\vec z\) est nul, et on prend les moments en \(O\) pour éliminer ses inconnues.</li>
+        <li>Moment du poids : \(\overrightarrow{OG}=-a\vec x_1\) (ou \(a\vec x_1\) selon l'orientation du dessin) donne \(amg\cos\alpha\) sur \(\vec z\).</li>
+        <li>Moment du vérin : bras \(b\) sur \(\vec x_1\) donne \(-bF\) sur \(\vec z\). Équation : \(amg\cos\alpha-bF=0\).</li>
+      </ol>
+      <div class="calc">
+        \[F=\dfrac{a\,m\,g\cos\alpha}{b}\]
+        <p>Application : \(m=26{,}3\) t, \(a=9\) m, \(b=2\) m. À \(\alpha=0\) : \(mg\approx0{,}26\) MN et \(F\approx1{,}16\) MN.</p>
+      </div>
+      <div class="res"><span class="lab">Réponse</span> \(F=\dfrac{amg\cos\alpha}{b}\) ; à \(\alpha=0\), \(F\approx1{,}16\) MN. Cet effort est supérieur au poids : le bras est très déporté.</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <p>Le poids du basculeur est à \(9\) m, le vérin à \(2\) m : le bras de levier du vérin est plus court, donc l'effort doit être plus grand que le poids pour équilibrer.</p>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q4</span>Torseur de la liaison pivot</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        En déduire le torseur des actions transmises par la liaison (0)–(1), à \(\alpha=0\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Résultante : le bilan des forces donne \(\vec R_{0\to1}=-(\vec P+\vec F)\) : la liaison porte la somme du poids et de l'effort du vérin.</li>
+        <li>Moment : la liaison pivot ne transmet pas de moment selon \(\vec z\) ; les autres moments sont nuls à l'équilibre.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> À \(\alpha=0\), la liaison porte environ \(mg+F\approx1{,}4\) MN selon \(\vec y\), sans moment selon \(\vec z\). Ce sont les valeurs à utiliser pour dimensionner le pivot.</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>6. Exercice 1.3 — Console portante de bateau</h2>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1–Q3</span>Équilibre de la console en \(O\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Isoler la console (1) : positionner les actions, puis écrire le PFS en \(O\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Actions : poids \(-mg\vec z_0\) passant par \(G\) (\(\overrightarrow{OG}=a\vec x_1+b\vec z_1\)), vent \(-F_{vent}\vec y_1\) en \(G\), moteur (couple \(C_{01}\vec z_0\)), pivot en \(O\).</li>
+        <li>Résultante : la liaison supporte le vent selon \(\vec y\) et le poids selon \(\vec z\).</li>
+        <li>Moments en \(O\) : le poids donne \(-amg\) sur \(\vec y_1\) ; le vent donne \(-bF_{vent}\) sur \(\vec x_1\) et \(-aF_{vent}\) sur \(\vec z_0\) ; le moteur donne \(C_{01}\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> \(L_{01}=-bF_{vent}\), \(M_{01}=-amg\), \(C_{01}=aF_{vent}\) ; \(X_{01}=0\), \(Y_{01}=F_{vent}\), \(Z_{01}=mg\).</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q4</span>Application numérique</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Donner les torseurs et le couple du motoréducteur : application numérique.</div>
+      <div class="calc">
+        \[F_{vent}=15\ \text{kN},\quad m=4\,000\ \text{kg},\quad a=6\ \text m,\quad b=4\ \text m\]
+        \[C_{01}=aF_{vent}=90\ \text{kN·m},\qquad M_{01}=-amg\approx-235\ \text{kN·m},\qquad L_{01}=-bF_{vent}=-60\ \text{kN·m}\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span> Couple moteur \(C_{01}\approx90\) kN·m. Résultante de liaison : \(Y_{01}=15\) kN, \(Z_{01}\approx39\) kN.</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>7. Exercice 2.2 — Maquette en soufflerie (questions 3 et 4)</h2>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Lien entre les bases et mouvement de 3/0</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Quel lien entre les bases \((\vec i_0,\vec j_3,\vec k_3)\) et \((\vec i_0,\vec j_{01},\vec k_{01})\) pour \(\beta=-\alpha\) ? Quel mouvement pour 3/0 ?</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Si \(\beta=-\alpha\), les rotations de 1 et de 3 se compensent : \(\vec k_{01}=\vec k_3\) et \(\vec j_{01}=\vec j_3\).</li>
+        <li>Le solide 3 garde donc une orientation fixe par rapport à 0 : son mouvement par rapport à 0 est une <strong>translation</strong>.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> \(\vec k_{01}=\vec k_3\), \(\vec j_{01}=\vec j_3\) ; le mouvement \(3/0\) est une translation.</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3</span>Couple \(C_2\) du motoréducteur (3)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Relier \(C_2\) aux sollicitations sur le solide 3.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Isoler 3 : poids \(-m_3g\vec j_{01}\) en \(G_3\), action aérodynamique \(\vec F_a\) en \(G_3\), couple \(C_2\vec i_0\) du motoréducteur, liaison en \(E\) et \(P\).</li>
+        <li>Moments en \(E\) sur \(\vec i_0\) : le poids donne \(m_3gl_3\), l'air donne \(-l_3\vec F_a\cdot\vec j_{01}\), le couple donne \(C_2\).</li>
+        <li>Équilibre : \(C_2=l_3\,(\vec F_a\cdot\vec j_{01}-m_3g)\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> \(C_2=l_3\big(\vec F_a\cdot\vec j_{01}-m_3g\big)\).</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q4</span>Couple \(C_1\) du motoréducteur (2)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Relier \(C_1\) aux sollicitations, en prenant les moments en \(A\) sur \(\vec i_0\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Moments en \(A\) : poids de 3 (bras \(l_3+l_2\cos\alpha\)), poids de 2 (bras \(a_2\cos\alpha\)), air sur 3 (bras \(l_2\) et \(l_3\)), et le couple \(C_1\).</li>
+        <li>Équilibre : \(C_1=-m_3g(l_3+l_2\cos\alpha)-m_2ga_2\cos\alpha+l_2\vec F_a\cdot\vec j_2+l_3\vec F_a\cdot\vec j_3\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> Expression ci-dessus ; la suite (force \(F\) du vérin, Q5) est dans le corrigé live.</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>8. Exercice 3.2 (EPAS) — non encore rédigé</h2>
+  <div class="info"><span class="lab">À faire</span> L'échelle pivotante (questions 1 à 5) est corrigée dans le même fichier, mais cette page ne la couvre pas encore.</div>
+
+
+  <footer>
+    Source : TD « C08 — Déterminer les efforts aux effecteurs de structures ouvertes à l'équilibre » (S2I, ECAM). Corrigé détaillé à partir du corrigé ECAM, repris et étoffé. Exercice 3.2 non traité ici.
+  </footer>
+
+</div>
+
+<script src="../assets/gate.js"></script>
+</body>
+</html>
