@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TD3 C03 — lois de pilotage en mouvement (correction détaillée)</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  :root{
+    --bg:#fafafa; --text:#2d3748; --muted:#64748b; --title:#1a202c;
+    --accent:#0f766e; --accent-soft:#ccfbf1; --line:#e5e7eb; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--text);
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    font-size:17px; line-height:1.7}
+  .page{max-width:800px; margin:0 auto; padding:2.5rem 2rem 4rem}
+  .nav{display:flex; flex-wrap:wrap; gap:1rem; font-size:.92rem; margin-bottom:1.5rem}
+  .nav a{color:var(--accent); text-decoration:none; font-weight:600}
+  .nav a:hover{text-decoration:underline}
+  p, ul, ol{margin:0 0 1.5rem}
+  li{margin-bottom:.45rem}
+  strong{color:var(--title)}
+  h1{font-size:2.1rem; line-height:1.2; color:var(--title); margin:.6rem 0 .6rem}
+  h2{font-size:1.5rem; color:var(--title); margin:3.4rem 0 1.1rem; padding-bottom:.45rem;
+    border-bottom:2px solid var(--accent-soft)}
+  h3{font-size:1.15rem; color:var(--accent); margin:2.2rem 0 .7rem}
+  .kicker{font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
+  .lead{color:var(--muted); font-size:1.08rem; margin-bottom:2rem}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1.4rem 1.6rem; margin:1.5rem 0}
+  .card h3:first-child{margin-top:0}
+
+  /* ---- Question : texte à gauche, encadré méthode à droite ---- */
+  .qblock{display:grid; grid-template-columns:minmax(0,1fr) 250px; gap:1.8rem;
+    margin:2.4rem 0 0; padding-top:1.8rem; border-top:1px solid var(--line)}
+  .qblock.wide{grid-template-columns:minmax(0,1fr)}
+  .qtitle{font-size:1.2rem; font-weight:800; color:var(--title); margin:0 0 1rem}
+  .qnum{display:inline-block; background:var(--accent); color:#fff; border-radius:7px;
+    padding:.12rem .6rem; font-size:.9rem; margin-right:.5rem; vertical-align:middle}
+  .ask{background:#f8fafc; border-left:4px solid #94a3b8; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .ask .lab, .lab{display:block; font-size:.72rem; font-weight:800; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:.25rem}
+  .demarche{margin:0 0 1.2rem}
+  .calc{background:#fff; border:1px solid var(--line); border-radius:10px; padding:.8rem 1rem .4rem; margin:0 0 1.2rem; overflow-x:auto}
+  .res{background:#ecfdf5; border-left:4px solid #059669; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .res .lab{color:#047857}
+
+  .aside{align-self:start; border-radius:12px; padding:1rem 1.1rem; font-size:.93rem; line-height:1.55;
+    background:#f0fdfa; border:1px solid #99f6e4}
+  .aside.formula{background:#f5f3ff; border-color:#ddd6fe}
+  .aside.apply{background:#fffbeb; border-color:#fde68a}
+  .aside.piege{background:#fff1f2; border-color:#fecdd3}
+  .aside .lab{color:var(--accent); margin-bottom:.35rem}
+  .aside.formula .lab{color:#6d28d9}
+  .aside.apply .lab{color:#b45309}
+  .aside.piege .lab{color:#be123c}
+  .aside p, .aside ul{margin:0 0 .7rem}
+  .aside ul{padding-left:1.1rem}
+  .aside li{margin-bottom:.3rem}
+  .aside > :last-child{margin-bottom:0}
+
+  .warn{background:#fff7ed; border-left:4px solid #ea580c; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .warn .lab{color:#c2410c}
+  .info{background:#f0f9ff; border-left:4px solid #0284c7; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .info .lab{color:#0369a1}
+
+  figure{margin:1.4rem 0 1.8rem; text-align:center}
+  figure img{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:10px; padding:.5rem}
+  figcaption{font-size:.88rem; color:var(--muted); margin-top:.5rem; line-height:1.5}
+
+  table{width:100%; border-collapse:collapse; margin:.6rem 0 1.4rem; font-size:.93rem; background:#fff}
+  th, td{border:1px solid var(--line); padding:.5rem .6rem; text-align:center}
+  th{background:#f1f5f9; color:var(--title)}
+  td.l, th.l{text-align:left}
+
+  .steps{counter-reset:s; list-style:none; padding:0; margin:0 0 1.5rem}
+  .steps li{counter-increment:s; position:relative; padding:.2rem 0 .2rem 2.7rem; margin-bottom:.9rem}
+  .steps li::before{content:counter(s); position:absolute; left:0; top:.1rem; width:1.9rem; height:1.9rem;
+    border-radius:50%; background:var(--accent-soft); color:var(--accent); font-weight:800; text-align:center; line-height:1.9rem}
+
+  footer{margin-top:3.5rem; padding-top:1.2rem; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem}
+  footer a{color:var(--accent)}
+  mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%}
+
+  @media (max-width:680px){
+    body{font-size:16px}
+    .page{padding:1.6rem 1.1rem 3rem}
+    h1{font-size:1.65rem}
+    h2{font-size:1.3rem; margin-top:2.6rem}
+    .qblock{grid-template-columns:1fr; gap:1rem}
+  }
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+<div class="page">
+
+  <nav class="nav">
+    <a href="../index.html#am2">← Accueil</a>
+
+  </nav>
+
+  <div class="kicker">AM2 · SI · Cinématique (lois de pilotage, C03) — TD3, exercices 3.1 et 3.2</div>
+  <h1>Lois de pilotage en mouvement : centrifugeuse et découpe de savons</h1>
+  <p class="lead">Deux exercices du TD3 de cinématique. On dérive des vecteurs position et vitesse, puis on impose une accélération ou une coupe droite pour trouver la loi de pilotage.</p>
+
+  <!-- ============================================================ -->
+  <h2>1. Avant de commencer : l'essentiel</h2>
+  <div class="card">
+    <h3>Dériver un vecteur position ou une vitesse</h3>
+    <ul>
+      <li><strong>Loi de composition</strong> : \(\vec\omega_{2/0}=\vec\omega_{2/1}+\vec\omega_{1/0}\). Les vitesses angulaires s'additionnent quand les rotations sont sur des axes successifs.</li>
+      <li><strong>Vitesse d'un point</strong> : \(\vec V_{P\in S/0}=\dfrac{d\overrightarrow{OP}}{dt}\Big|_0\). On décompose \(\overrightarrow{OP}\) en vecteurs simples, puis on dérive chacun dans le repère de référence.</li>
+      <li><strong>Dérivée d'un vecteur tournant</strong> : \(\dfrac{d\vec u}{dt}\Big|_0=\vec\omega_{S/0}\wedge\vec u\). Un vecteur fixe dans son solide ne se dérive que par le mouvement de ce solide.</li>
+      <li><strong>Formule de Bour</strong> : \(\vec\gamma_{P\in S/0}=\dfrac{d\vec V_{P\in S/0}}{dt}\Big|_1+\vec\omega_{1/0}\wedge\vec V_{P\in S/0}\), pour une accélération.</li>
+    </ul>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>2. Exercice 3.1 — Centrifugeuse (contraindre une accélération)</h2>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1–Q2</span>Figures de changement de base et produits vectoriels</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Tracer les figures de changement de base, définir les vitesses de rotation, puis calculer les produits vectoriels utiles.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Bras 1 : \(\vec\omega_{1/0}=\dot\alpha\,\vec z_0\). Cabine 2 par rapport à 1 : \(\vec\omega_{2/1}=\dot\beta\,\vec y_1\).</li>
+        <li>Un produit vectoriel de deux vecteurs situés dans le même plan de la figure se lit directement sur cette figure : pas besoin de changer de base.</li>
+        <li>Pour les autres, on exprime le vecteur dans la base la plus simple (celle du bras 1 ici).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> Les rotations sont \(\dot\alpha\,\vec z_0\) (bras) et \(\dot\beta\,\vec y_1\) (cabine), avec les produits vectoriels de la figure.</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3</span>Vitesse du centre de gravité \(G\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer \(\vec V_{G\in2/0}\), puis vérifier son homogénéité.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>\(\overrightarrow{OG}=a\vec x_1+b\vec x_2\). On dérive chaque terme dans \(R_0\).</li>
+        <li>Pour \(\vec x_1\) : \(\dfrac{d\vec x_1}{dt}\big|_0=\dot\alpha\,\vec y_1\). Pour \(\vec x_2\) : on utilise la rotation de 2 (\(\vec\omega_{2/0}=\dot\alpha\vec z_0+\dot\beta\vec y_1\)).</li>
+        <li>Après regroupement : \(\vec V_{G\in2/0}=\dot\alpha\,(a+b\cos\beta)\,\vec y_1-b\dot\beta\,\vec z_2\).</li>
+        <li>Homogénéité : \(\dot\alpha\) et \(\dot\beta\) sont en rad·s⁻¹, multipliés par des longueurs : on obtient bien des m·s⁻¹.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> \(\vec V_{G\in2/0}=\dot\alpha\,(a+b\cos\beta)\,\vec y_1-b\dot\beta\,\vec z_2\).</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q4</span>Accélération de \(G\), \(\beta\) constant</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer \(\vec\gamma_{G\in2/0}\) lorsque \(\beta\) est constant.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>\(\beta\) constant : \(\dot\beta=0\), donc la cabine ne tourne pas par rapport au bras. Sa vitesse se réduit à \(\dot\alpha(a+b\cos\beta)\,\vec y_1\).</li>
+        <li>Formule de Bour : \(\vec\gamma=\dfrac{d\vec V}{dt}\big|_1+\vec\omega_{1/0}\wedge\vec V\).</li>
+        <li>Le premier terme donne \(\ddot\alpha\) (nul si la vitesse de rotation est constante). Le second donne \(-\dot\alpha^2(a+b\cos\beta)\,\vec x_1\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> À vitesse angulaire constante : \(\vec\gamma_{G\in2/0}=-\dot\alpha^2(a+b\cos\beta)\,\vec x_1\). C'est une accélération centripète, dirigée vers l'axe de rotation.</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <p>L'accélération est centripète : elle pointe vers l'axe, mais le pilote ressent une force opposée (force centrifuge apparente). Le signe ne doit pas être confondu.</p>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q5</span>Vitesse de rotation pour une accélération de 9 g</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Calculer la vitesse de rotation du bras (en tr/min) pour une accélération de 9 g, avec \(\beta=\pi/2\). Prendre \(g=9{,}81\) m·s⁻².</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Avec \(\beta=\pi/2\), \(\cos\beta=0\) : \(|\vec\gamma|=a\dot\alpha^2\).</li>
+        <li>On impose \(a\dot\alpha^2=9g\), donc \(\dot\alpha=\sqrt{9g/a}=\sqrt{9\times9{,}81/3}\approx5{,}4\) rad·s⁻¹.</li>
+        <li>En tours par minute : \(N=\dot\alpha\cdot\dfrac{60}{2\pi}\approx52\) tr/min.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> \(\dot\alpha\approx5{,}4\) rad·s⁻¹, soit environ \(52\) tr/min pour une accélération de 9 g.</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>3. Exercice 3.2 — Découpe de savons (coupe droite)</h2>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q6–Q7</span>Mouvement de 3/0 et analyse du quadrilatère</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Préciser le mouvement de 3 par rapport à 0, puis analyser le schéma (repères, figure plane).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Le bras 3 se déplace sur un cercle de rayon \(AB\), sans tourner sur lui-même : c'est une <strong>translation circulaire</strong>, paramétrée par \(\alpha(t)\).</li>
+        <li>\(ABCD\) est un parallélogramme déformable : \(AB=DC=L\). Les repères 0, 3 et 4 restent parallèles ; 1 et 2 aussi.</li>
+        <li>La lame 4 ne tourne pas par rapport à 3 : sa seule vitesse relative est une translation verticale \(\dot\mu\) selon \(\vec z_0\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> \(3/0\) : translation circulaire de rayon \(AB\), paramétrée par \(\alpha\). Le quadrilatère se déforme, et \(\vec V_{P\in4/3}=-\dot\mu\,\vec z_0\).</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q8</span>Vitesse du point \(P\) de la lame par rapport à 0</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Exprimer \(\vec V_{P\in4/0}\) et vérifier l'homogénéité.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Décomposer \(\overrightarrow{AP}=\overrightarrow{AB}+\overrightarrow{BM}+\overrightarrow{MP}\), soit \(L\vec y_1+b\vec y_0+\mu\,\vec z_0\).</li>
+        <li>Dérivée dans \(R_0\) : le premier terme donne \(\dot\alpha\,L\,\vec z_1\) (car \(\vec\omega_{1/0}\wedge L\vec y_1\)), le deuxième est nul (\(B\) fixe), le troisième donne \(\dot\mu\,\vec z_0\).</li>
+        <li>Vérification : chaque terme est une longueur multipliée par une vitesse angulaire (m·s⁻¹) ou une vitesse de translation (m·s⁻¹).</li>
+        <li>Autre méthode (Varignon) : le point \(P\) se déplace en translation par rapport à 3, donc la vitesse est celle du bras plus \(\dot\mu\). On obtient le même résultat.</li>
+      </ol>
+      <div class="calc">
+        \[\vec V_{P\in4/0}=\dot\alpha L\,\vec z_1+\dot\mu\,\vec z_0=-\dot\alpha L\sin\alpha\,\vec y_0+\big(\dot\alpha L\cos\alpha+\dot\mu\big)\vec z_0\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span> \(\vec V_{P\in4/0}=-\dot\alpha L\sin\alpha\,\vec y_0+(\dot\alpha L\cos\alpha+\dot\mu)\,\vec z_0\).</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q9</span>Condition pour une coupe droite</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Sous quelle condition la coupe sera-t-elle droite ? En déduire une condition sur \(\alpha\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>La coupe est droite si la lame avance selon \(\vec y_0\) à la même vitesse \(V_s\) que le savon (vitesse de translation du boudin).</li>
+        <li>Composante selon \(\vec y_0\) : \(V_{P\in4/0}\cdot\vec y_0=-\dot\alpha L\sin\alpha\). Donc \(V_s=-\dot\alpha L\sin\alpha\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> Condition : \(V_s=-\dot\alpha L\sin\alpha\). La lame suit le savon tant que ce rapport est respecté.</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q10</span>Loi \(\alpha(t)\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer \(\alpha(t)\), sachant que \(\alpha(0)=\pi/2\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>On remarque que \(\dfrac{d}{dt}\big(L\cos\alpha\big)=-\dot\alpha L\sin\alpha=V_s\). Donc \(L\cos\alpha=V_s\,t+C\).</li>
+        <li>Condition initiale : \(\alpha(0)=\pi/2\), \(\cos(\pi/2)=0\), donc \(C=0\).</li>
+        <li>D'où \(\cos\alpha(t)=\dfrac{V_s\,t}{L}\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> \(\alpha(t)=\arccos\!\left(\dfrac{V_s\,t}{L}\right)\), valable pour \(\alpha\in[0,\pi/2]\).</div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>\(\dfrac{d}{dt}\cos\alpha=-\dot\alpha\sin\alpha\). Repérer une dérivée de ce type permet d'intégrer directement la loi de mouvement.</p>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>4. Suite du TD (non traitée ici)</h2>
+  <div class="info"><span class="lab">À faire</span> Le robot de peinture (questions 11 et suivantes) et le robot ERICC 3 de l'exercice 1.2 ne sont pas encore rédigés sur cette page.</div>
+
+
+  <footer>
+    Source : TD3 « Déterminer les lois de pilotage en mouvement » (S2I, cycle préparatoire A&M). Corrigé repris, expliqué et étoffé.
+  </footer>
+
+</div>
+
+<script src="../assets/gate.js"></script>
+</body>
+</html>
