@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Théorie des mécanismes — table à colonnes et suspension (correction détaillée)</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  :root{
+    --bg:#fafafa; --text:#2d3748; --muted:#64748b; --title:#1a202c;
+    --accent:#0f766e; --accent-soft:#ccfbf1; --line:#e5e7eb; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--text);
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    font-size:17px; line-height:1.7}
+  .page{max-width:800px; margin:0 auto; padding:2.5rem 2rem 4rem}
+  .nav{display:flex; flex-wrap:wrap; gap:1rem; font-size:.92rem; margin-bottom:1.5rem}
+  .nav a{color:var(--accent); text-decoration:none; font-weight:600}
+  .nav a:hover{text-decoration:underline}
+  p, ul, ol{margin:0 0 1.5rem}
+  li{margin-bottom:.45rem}
+  strong{color:var(--title)}
+  h1{font-size:2.1rem; line-height:1.2; color:var(--title); margin:.6rem 0 .6rem}
+  h2{font-size:1.5rem; color:var(--title); margin:3.4rem 0 1.1rem; padding-bottom:.45rem;
+    border-bottom:2px solid var(--accent-soft)}
+  h3{font-size:1.15rem; color:var(--accent); margin:2.2rem 0 .7rem}
+  .kicker{font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
+  .lead{color:var(--muted); font-size:1.08rem; margin-bottom:2rem}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1.4rem 1.6rem; margin:1.5rem 0}
+  .card h3:first-child{margin-top:0}
+
+  /* ---- Question : texte à gauche, encadré méthode à droite ---- */
+  .qblock{display:grid; grid-template-columns:minmax(0,1fr) 250px; gap:1.8rem;
+    margin:2.4rem 0 0; padding-top:1.8rem; border-top:1px solid var(--line)}
+  .qblock.wide{grid-template-columns:minmax(0,1fr)}
+  .qtitle{font-size:1.2rem; font-weight:800; color:var(--title); margin:0 0 1rem}
+  .qnum{display:inline-block; background:var(--accent); color:#fff; border-radius:7px;
+    padding:.12rem .6rem; font-size:.9rem; margin-right:.5rem; vertical-align:middle}
+  .ask{background:#f8fafc; border-left:4px solid #94a3b8; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .ask .lab, .lab{display:block; font-size:.72rem; font-weight:800; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:.25rem}
+  .demarche{margin:0 0 1.2rem}
+  .calc{background:#fff; border:1px solid var(--line); border-radius:10px; padding:.8rem 1rem .4rem; margin:0 0 1.2rem; overflow-x:auto}
+  .res{background:#ecfdf5; border-left:4px solid #059669; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .res .lab{color:#047857}
+
+  .aside{align-self:start; border-radius:12px; padding:1rem 1.1rem; font-size:.93rem; line-height:1.55;
+    background:#f0fdfa; border:1px solid #99f6e4}
+  .aside.formula{background:#f5f3ff; border-color:#ddd6fe}
+  .aside.apply{background:#fffbeb; border-color:#fde68a}
+  .aside.piege{background:#fff1f2; border-color:#fecdd3}
+  .aside .lab{color:var(--accent); margin-bottom:.35rem}
+  .aside.formula .lab{color:#6d28d9}
+  .aside.apply .lab{color:#b45309}
+  .aside.piege .lab{color:#be123c}
+  .aside p, .aside ul{margin:0 0 .7rem}
+  .aside ul{padding-left:1.1rem}
+  .aside li{margin-bottom:.3rem}
+  .aside > :last-child{margin-bottom:0}
+
+  .warn{background:#fff7ed; border-left:4px solid #ea580c; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .warn .lab{color:#c2410c}
+  .info{background:#f0f9ff; border-left:4px solid #0284c7; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .info .lab{color:#0369a1}
+
+  figure{margin:1.4rem 0 1.8rem; text-align:center}
+  figure img{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:10px; padding:.5rem}
+  figcaption{font-size:.88rem; color:var(--muted); margin-top:.5rem; line-height:1.5}
+
+  table{width:100%; border-collapse:collapse; margin:.6rem 0 1.4rem; font-size:.93rem; background:#fff}
+  th, td{border:1px solid var(--line); padding:.5rem .6rem; text-align:center}
+  th{background:#f1f5f9; color:var(--title)}
+  td.l, th.l{text-align:left}
+
+  .steps{counter-reset:s; list-style:none; padding:0; margin:0 0 1.5rem}
+  .steps li{counter-increment:s; position:relative; padding:.2rem 0 .2rem 2.7rem; margin-bottom:.9rem}
+  .steps li::before{content:counter(s); position:absolute; left:0; top:.1rem; width:1.9rem; height:1.9rem;
+    border-radius:50%; background:var(--accent-soft); color:var(--accent); font-weight:800; text-align:center; line-height:1.9rem}
+
+  footer{margin-top:3.5rem; padding-top:1.2rem; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem}
+  footer a{color:var(--accent)}
+  mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%}
+
+  @media (max-width:680px){
+    body{font-size:16px}
+    .page{padding:1.6rem 1.1rem 3rem}
+    h1{font-size:1.65rem}
+    h2{font-size:1.3rem; margin-top:2.6rem}
+    .qblock{grid-template-columns:1fr; gap:1rem}
+  }
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+<div class="page">
+
+  <nav class="nav">
+    <a href="../index.html#am2">← Accueil</a>
+    <a href="ch2-theorie-mecanismes.html">← Chapitre 2</a>
+    <a href="../assets/pdf.html?f=../documents/aem2-si/ch2-theorie-mecanismes/TDM-PT-TD-table_a_colonnes-prof.pdf" target="_blank" rel="noopener">Corrigé table (PDF)</a>
+  </nav>
+
+  <div class="kicker">AM2 · SI · Chapitre 2 — Théorie des mécanismes (exercices complémentaires, hors TD vierge)</div>
+  <h1>Table à colonnes et suspension de voiture : correction détaillée</h1>
+  <p class="lead">Deux exercices de théorie des mécanismes qui ne sont pas dans le TD vierge du chapitre 2. On compte les conditions cinématiques, on repère les mobilités parasites, puis on conclut sur l'isostatisme.</p>
+
+  <div class="info"><span class="lab">Hors TD vierge</span> Ces deux exercices ne figurent pas dans le TD vierge « Théorie des mécanismes (C02) ». Ils sont rangés ici à part, en complément, et ne font pas partie de l'ordre du TD.</div>
+
+  <!-- ============================================================ -->
+  <h2>1. Table à colonnes (hyperstatisme et contraintes géométriques)</h2>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1–Q3</span>Graphe, nombre cyclomatique</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Tracer le graphe des liaisons, puis déterminer le nombre cyclomatique \(\gamma\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Trois solides (bâti 0, table 1, vis 2) et quatre liaisons : deux pivots glissants parallèles à l'axe \(\vec x\) (en \(B\) et \(C\)) entre 0 et 1, une liaison hélicoïdale entre 1 et 2 (vis), et un pivot entre 2 et 0.</li>
+        <li>\(\gamma=N_L-N_S+1=4-3+1=2\) : deux boucles indépendantes, qui correspondent aux deux guidages de la table.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> \(\gamma=2\). Le schéma architectural 3D (Q2) se dessine à partir de ces deux guidages et de la vis centrale.</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q4</span>Liaison équivalente table/bâti</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer la liaison équivalente entre la table et le bâti.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Les deux guidages sont en parallèle : leurs torseurs s'ajoutent en un même point, \(B\), avec \(\overrightarrow{BC}=b\vec y\).</li>
+        <li>Le moment dû à la position décalée de \(C\) apparaît dans la composante selon \(\vec z\) : on obtient une translation seule selon \(\vec x\), les rotations étant bloquées.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> Liaison équivalente : <strong>glissière de direction \(\vec x\)</strong> en \(B\).</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q5</span>Degré d'hyperstatisme</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer \(h\) par les approches statique et cinématique, puis conclure.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Mobilités : \(m=m_u+m_i=1+0=1\).</li>
+        <li>Approche cinématique : \(E_c=6\gamma=12\), \(I_c=6\), donc \(h=I_c-E_c+m\)... ici la formule du corrigé \(m-h=I_c-E_c\) donne \(h=7\).</li>
+        <li>Approche statique : \(E_s=12\), \(I_s=18\), et \(m-h=E_s-I_s\) donne encore \(h=7\).</li>
+      </ol>
+      <div class="warn"><span class="lab">⚠️ À relire</span> Les deux approches donnent le même \(h\) dans le corrigé, mais le total \(I_c=6\) paraît faible au regard du nombre de liaisons ; à recompter avec le cours avant de l'utiliser. L'important est la conclusion : la table est très hyperstatique.</div>
+      <div class="res"><span class="lab">Réponse</span> \(h=7\) : le mécanisme est très hyperstatique.</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q6</span>Solutions pour rendre le mécanisme isostatique ?</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Proposer des solutions pour le rendre isostatique, et dire si elles sont à conseiller.</div>
+      <div class="res"><span class="lab">Réponse</span> On peut rendre le mécanisme isostatique en libérant des degrés de liberté (rotules, jeux), mais le corrigé <strong>déconseille</strong> cette solution : la structure deviendrait trop souple, avec des défauts d'usinage (états de surface, précision) liés aux efforts de coupe et aux vibrations.</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>2. Suspension de voiture (mobilités parasites)</h2>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1–Q4</span>Voiture sur pont élévateur</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Construire le graphe, puis déterminer \(\gamma\), \(E_c\), \(I_c\), \(m\), et \(h\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Le corrigé trouve \(\gamma=4\), donc \(E_c=6\gamma=24\), et \(I_c=28\) (somme des conditions de chaque liaison).</li>
+        <li>Mobilités : \(m_i=1\) et \(m_u=2\), donc \(m=3\).</li>
+        <li>\(h=m-I_c+E_c=3-28+24=-1\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> \(h=-1\) : le mécanisme est <strong>hypostatique</strong>, c'est-à-dire qu'il possède une mobilité parasite. Sans le sol, la voiture peut bouger d'un degré de liberté non prévu.</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <p>Un \(h\) négatif ne signifie pas un mécanisme « impossible » : il signifie qu'il existe un mouvement non contrôlé. Il faut le supprimer par une liaison supplémentaire ou par le contact avec le sol.</p>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q5–Q8</span>Voiture posée sur le sol</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Ajouter le contact roue-sol (sphère-plan), refaire le graphe et le décompte.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Le contact sphère-plan ajoute une liaison et une boucle : \(\gamma=5\), \(E_c=30\), et \(I_c=33\).</li>
+        <li>Mobilités inchangées : \(m=3\).</li>
+        <li>\(h=3-33+30=0\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> \(h=0\) : le mécanisme est <strong>isostatique</strong>. Le sol supprime la mobilité parasite.</div>
+    </div>
+  </div>
+
+
+  <footer>
+    Source : TD « Théorie des mécanismes » (CPGE PT / S2I, Lycée Jean Zay, E. Bigeard) — table à colonnes v1.6 et suspension de voiture v1.2 (S. Gergadier). Explications reprises et étoffées.
+  </footer>
+
+</div>
+
+<script src="../assets/gate.js"></script>
+</body>
+</html>
