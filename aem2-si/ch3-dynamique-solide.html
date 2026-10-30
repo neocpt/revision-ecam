@@ -50,8 +50,11 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
       <li><a href="#inerties"><b>TD corrigé</b></a>
         <ul>
           <li><a href="#inerties">1. Calcul de matrices d'inertie (barre, rectangle, quart de disque, cylindres)</a></li>
-          <li><a href="#td-detail">2. Lecteur DVD, arbre de navire, régulateur, équilibreuse — corrections détaillées</a></li>
-          <li><a href="#eolienne">3. Éolienne bipale — moment cinétique/dynamique avec balourd</a></li>
+          <li><a href="#dvd">2. Lecteur DVD — couple moteur optimal, pas de vis</a></li>
+          <li><a href="#navire">3. Arbre de navire — effet gyroscopique</a></li>
+          <li><a href="#eolienne">4. Éolienne bipale — moment cinétique/dynamique avec balourd</a></li>
+          <li><a href="#regulateur">5. Régulateur centrifuge — dimensionnement du ressort</a></li>
+          <li><a href="#equilibreuse">6. Équilibreuse dynamique — extraction du balourd</a></li>
         </ul>
       </li>
       <li><a href="#banc"><b>DS01</b></a>
@@ -404,147 +407,31 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
 
 
   <div style="margin:2.2rem 0 .4rem;padding:.7rem 1rem;border-left:5px solid var(--subject);background:#f8fafc;border-radius:8px"><b style="color:var(--subject-ink)">TD corrigé</b> — TD corrigé — Dynamique du solide (C03)</div>
-  <p class="lead">Correction des exercices du TD : calcul de matrices d'inertie usuelles (section 1), puis les quatre exercices
-  de PFD avec correction pas à pas (section 2), et l'éolienne bipale (section 3, résolue avec la méthode du cours, sans corrigé officiel).
-  Méthode et formules : voir le <a href="ch3-dynamique-solide.html">résumé de cours</a>. Source : <i>S2I TD C03 — Dynamique du solide</i>.</p>
+  <p class="lead">Correction des exercices du TD « Dynamique du solide (C03) », dans l'ordre du TD : calcul de matrices d'inertie
+  (section 1), lecteur DVD (2), arbre de navire (3), éolienne bipale (4), régulateur centrifuge (5), équilibreuse (6).
+  Les exercices 1, 2, 3, 5 et 6 ont une correction pas à pas sur leur page dédiée ; l'éolienne (section 4) est résolue ici
+  avec la méthode du cours, sans corrigé officiel. Méthode et formules : voir le <a href="ch3-dynamique-solide.html">résumé de cours</a>.</p>
 
 
   <!-- ======================= EX1 INERTIES =============================== -->
   <section class="block" id="inerties">
     <h2>1. Calcul de matrices d'inertie</h2>
-
-    <div class="exo-card">
-      <div class="exo-head">1.1 — Barre mince (longueur \(L\), rayon négligeable) <span class="diff">♦</span></div>
-      <div class="exo-body">
-        <p class="enonce">Barre cylindrique de rayon négligeable devant sa longueur \(L\), axe \((O,\vec x)\),
-        \(G\) au milieu. Déterminer l'opérateur d'inertie en \(G\) puis en \(O\).</p>
-        <p class="q">1) En \(G\)</p>
-        <p>La masse est répartie sur le segment \(x\in[-L/2,L/2]\), avec \(y=z=0\) partout (rayon négligé) et
-        densité linéique \(\lambda=m/L\). Donc \(A=\int(y^2+z^2)dm=0\).
-        \[B=\int x^2dm=\lambda\int_{-L/2}^{L/2}x^2dx=\lambda\cdot\dfrac{L^3}{12}=\dfrac{m}{L}\cdot\dfrac{L^3}{12}=\dfrac{mL^2}{12}\]
-        Par symétrie de révolution autour de \(\vec x\), \(C=B\). Tous les produits d'inertie sont nuls (barre
-        confondue avec son axe de symétrie).</p>
-        <div class="res">\[\bar{\bar I}_{(G,barre)}=\begin{pmatrix}0&0&0\\0&\frac{mL^2}{12}&0\\0&0&\frac{mL^2}{12}\end{pmatrix}\]</div>
-        <p class="q">2) En \(O\) (Huygens, \(\overrightarrow{OG}=\frac L2\vec x\), donc \((a,b,c)=(\frac L2,0,0)\))</p>
-        \[\bar{\bar I}_{(O,barre)}=\bar{\bar I}_{(G,barre)}+m\begin{pmatrix}0&0&0\\0&\frac{L^2}{4}&0\\0&0&\frac{L^2}{4}\end{pmatrix}\]
-        <div class="res">\[\bar{\bar I}_{(O,barre)}=\begin{pmatrix}0&0&0\\0&\frac{mL^2}{3}&0\\0&0&\frac{mL^2}{3}\end{pmatrix}
-        \qquad\Big(\tfrac1{12}+\tfrac14=\tfrac1{12}+\tfrac3{12}=\tfrac13\Big)\]</div>
-      </div>
-    </div>
-
-    <div class="exo-card">
-      <div class="exo-head">1.2 — Rectangle mince (longueur \(2a\), largeur \(2b\)) <span class="diff">♦</span></div>
-      <div class="exo-body">
-        <p class="enonce">Plaque rectangulaire mince dans le plan \((G,\vec x,\vec y)\), \(x\in[-a,a]\),
-        \(y\in[-b,b]\), \(z=0\). Densité surfacique \(\sigma=\dfrac{m}{4ab}\).</p>
-        \[A=\int y^2dm=\sigma\!\int_{-a}^a\!dx\!\int_{-b}^b\!y^2dy=\sigma\cdot2a\cdot\dfrac{2b^3}{3}=\dfrac{m}{4ab}\cdot\dfrac{4ab^3}{3}=\dfrac{mb^2}{3}\]
-        \[B=\int x^2dm=\sigma\cdot2b\cdot\dfrac{2a^3}{3}=\dfrac{ma^2}{3}\qquad,\qquad C=\int(x^2+y^2)dm=A+B=\dfrac{m(a^2+b^2)}{3}\]
-        \(D=E=0\) (plaque dans le plan \(z=0\)) et \(F=\int xy\,dm=0\) (fonction impaire sur un domaine symétrique).
-        <div class="res">\[\bar{\bar I}_{(G,rect)}=\begin{pmatrix}\frac{mb^2}{3}&0&0\\0&\frac{ma^2}{3}&0\\0&0&\frac{m(a^2+b^2)}{3}\end{pmatrix}\]</div>
-      </div>
-    </div>
-
-    <div class="exo-card">
-      <div class="exo-head">1.3 — Quart de disque (rayon \(R\), masse surfacique \(\rho\)) <span class="diff">♦♦</span></div>
-      <div class="exo-body">
-        <p class="enonce">Quart de disque de rayon \(R\), centre \(O\), masse surfacique \(\rho\) — occupant le
-        quadrant \(\theta\in[0,\pi/2]\) en coordonnées polaires \((r,\theta)\) depuis \(O\).</p>
-        <p class="q">1) Position de \(G\)</p>
-        <p>Aire \(=\dfrac{\pi R^2}{4}\), masse \(m=\rho\dfrac{\pi R^2}{4}\).
-        \[\bar x=\dfrac1{\text{Aire}}\int_0^R\!\!\int_0^{\pi/2}(r\cos\theta)\,r\,dr\,d\theta
-        =\dfrac{1}{\pi R^2/4}\cdot\dfrac{R^3}{3}\cdot[\sin\theta]_0^{\pi/2}=\dfrac{4R}{3\pi}\]
-        Par symétrie du quart de disque (échange \(x\leftrightarrow y\)) : \(\bar y=\dfrac{4R}{3\pi}\) aussi.
-        \(\overrightarrow{OG}=\dfrac{4R}{3\pi}(\vec x+\vec y)\).</p>
-        <p class="q">2) Opérateur d'inertie en \(O\)</p>
-        \[A_O=\int y^2dm=\rho\!\int_0^R\!r^3dr\!\int_0^{\pi/2}\!\sin^2\theta\,d\theta=\rho\cdot\dfrac{R^4}{4}\cdot\dfrac\pi4=\dfrac{mR^2}{4}\]
-        (en substituant \(\rho=4m/\pi R^2\)). Par symétrie \(x\leftrightarrow y\) : \(B_O=\dfrac{mR^2}{4}\) aussi,
-        donc \(C_O=A_O+B_O=\dfrac{mR^2}{2}\) (résultat général d'un disque/quart de disque : \(C=A+B\) car plan).
-        \[F_O=\int xy\,dm=\rho\!\int_0^R\!r^3dr\!\int_0^{\pi/2}\!\cos\theta\sin\theta\,d\theta=\rho\cdot\dfrac{R^4}{4}\cdot\dfrac12=\dfrac{mR^2}{2\pi}\]
-        \(D_O=E_O=0\) (figure plane, \(z=0\)).
-        <div class="res">\[\bar{\bar I}_{(O,quart)}=\begin{pmatrix}\frac{mR^2}{4}&-\frac{mR^2}{2\pi}&0\\-\frac{mR^2}{2\pi}&\frac{mR^2}{4}&0\\0&0&\frac{mR^2}{2}\end{pmatrix}\]</div>
-        <p class="q">3) Opérateur d'inertie en \(G\) (Huygens inverse, \(d=\frac{4R}{3\pi}\), \((a,b,c)=(d,d,0)\))</p>
-        <p>\(\bar{\bar I}_{(G)}=\bar{\bar I}_{(O)}-m\begin{pmatrix}d^2&-d^2&0\\-d^2&d^2&0\\0&0&2d^2\end{pmatrix}\).
-        Avec \(d^2=\dfrac{16R^2}{9\pi^2}\) :</p>
-        <div class="res">
-        \[A_G=B_G=mR^2\Big(\dfrac14-\dfrac{16}{9\pi^2}\Big)\approx0{,}0699\,mR^2 \qquad,\qquad
-        C_G=mR^2\Big(\dfrac12-\dfrac{32}{9\pi^2}\Big)\approx0{,}140\,mR^2\]
-        \[-F_G=mR^2\Big(\dfrac{16}{9\pi^2}-\dfrac1{2\pi}\Big)\approx-0{,}0210\,mR^2 \quad\Rightarrow\quad F_G\approx0{,}0210\,mR^2\]
-        </div>
-        <div class="note"><span class="lab">Vérification</span> \(C_G=A_G+B_G\) : \(0{,}0699+0{,}0699=0{,}1397\approx0{,}140\)✓
-        (relation générale d'une figure plane, conservée par Huygens car le déplacement \(OG\) est lui aussi dans
-        le plan \(z=0\)).</div>
-      </div>
-    </div>
-
-    <div class="exo-card">
-      <div class="exo-head">1.4 — Cylindre plein (rayon \(R\), hauteur \(h\), masse \(m\)) <span class="diff">♦♦</span></div>
-      <div class="exo-body">
-        <p class="enonce">\(O\) = centre de la base inférieure, \(G\) = centre de masse, axe \((O,\vec z)\).</p>
-        <p class="q">1–2) Opérateur d'inertie en \(G\) puis en \(O\)</p>
-        <p>Résultats classiques (solide de révolution) : \(C=\dfrac{mR^2}{2}\) (identique en \(G\) et en \(O\),
-        l'intégrale \(\int(x^2+y^2)dm\) ne dépend pas de \(z\)) ; par le théorème de Huygens appliqué à un disque
-        élémentaire d'épaisseur \(dz\) puis intégration sur \(h\), on obtient le moment transverse classique
-        \(A_G=B_G=\dfrac{m(3R^2+h^2)}{12}\).</p>
-        <div class="res">\[\bar{\bar I}_{(G,cyl)}=\mathrm{diag}\Big(\dfrac{m(3R^2+h^2)}{12},\dfrac{m(3R^2+h^2)}{12},\dfrac{mR^2}{2}\Big)\]</div>
-        <p>En \(O\) (\(\overrightarrow{OG}=\frac h2\vec z\)), Huygens ajoute \(m(h/2)^2\) sur les deux composantes
-        transverses (\(C\) inchangé, axe de transport) :</p>
-        <div class="res">\[\bar{\bar I}_{(O,cyl)}=\mathrm{diag}\Big(\dfrac{m(3R^2+h^2)}{12}+\dfrac{mh^2}{4}\,,\ \dfrac{m(3R^2+4h^2)}{12}\text{ (idem)}\,,\ \dfrac{mR^2}{2}\Big)
-        =\mathrm{diag}\Big(\dfrac{m(3R^2+4h^2)}{12},\dfrac{m(3R^2+4h^2)}{12},\dfrac{mR^2}{2}\Big)\]</div>
-        <p class="q">3) Retour en \(G\) par Huygens (vérification)</p>
-        <div class="res">\(\dfrac{m(3R^2+4h^2)}{12}-m\dfrac{h^2}{4}=\dfrac{m(3R^2+4h^2)-3mh^2}{12}=\dfrac{m(3R^2+h^2)}{12}\) ✓
-        on retrouve bien la valeur de la question 1.</div>
-      </div>
-    </div>
-
-    <div class="exo-card">
-      <div class="exo-head">1.5 — Cylindre percé (2 cas) <span class="diff">♦♦♦</span></div>
-      <div class="exo-body">
-        <p class="enonce">Cylindre \(R{=}30\)mm, \(h{=}40\)mm, masse volumique \(\rho\). <b>Cas 1</b> : perçage
-        coaxial de rayon \(r{=}10\)mm. <b>Cas 2</b> : perçage de rayon \(r{=}5\)mm, décalé de \(a{=}20\)mm
-        (\(\overrightarrow{GG'}=a\vec x\)). Méthode : <b>soustraction</b> — le cylindre percé = cylindre plein
-        \((R,h,M_1)\) moins le petit cylindre retiré \((r,h,M_2)\), \(M_1=\rho\pi R^2h\), \(M_2=\rho\pi r^2h\),
-        même \(\rho\).</p>
-        <p class="q">Cas 1 — perçage coaxial (les deux cylindres partagent le même axe \((G,\vec z)\), pas de
-        transport nécessaire)</p>
-        <div class="res">
-        \[\bar{\bar I}_{(G,\text{cas 1})}=\mathrm{diag}\Big(\dfrac{M_1(3R^2{+}h^2)}{12}-\dfrac{M_2(3r^2{+}h^2)}{12}\,,\ \text{idem}\,,\ \dfrac{M_1R^2}{2}-\dfrac{M_2r^2}{2}\Big)\]
-        Avec \(R{=}30\), \(h{=}40\), \(r{=}10\)mm et \(M_2/M_1=(r/R)^2=1/9\) : composante \(z\) \(=\dfrac{M_1}{2}\big(R^2-\tfrac{r^2}{9}\big)=\dfrac{M_1}{2}(900-11{,}1)\,\text{mm}^2=444{,}4\,M_1\ \text{mm}^2\).
-        </div>
-        <p class="q">Cas 2 — perçage décalé de \(a{=}20\)mm, \(r{=}5\)mm</p>
-        <p>Le petit cylindre retiré a, en son propre centre \(G'\), le même type de matrice
-        \(\mathrm{diag}\big(\tfrac{M_2'(3r^2+h^2)}{12},\text{idem},\tfrac{M_2'r^2}{2}\big)\) avec
-        \(M_2'=\rho\pi r^2h\) (\(r{=}5\)mm cette fois). On la <b>transporte en \(G\)</b> par Huygens avant de
-        soustraire (\(\overrightarrow{G'G}=-a\vec x\), donc \((a,b,c)=(a,0,0)\) pour le transport \(G'\to G\)) :
-        le décalage selon \(\vec x\) ajoute \(M_2'a^2\) sur les composantes \(y\) et \(z\) <b>uniquement</b>
-        (\(x\) inchangé) :</p>
-        <div class="res">
-        \[I_{xx}^{\text{cas 2}}=\dfrac{M_1(3R^2{+}h^2)}{12}-\dfrac{M_2'(3r^2{+}h^2)}{12}\]
-        \[I_{yy}^{\text{cas 2}}=\dfrac{M_1(3R^2{+}h^2)}{12}-\Big[\dfrac{M_2'(3r^2{+}h^2)}{12}+M_2'a^2\Big]\]
-        \[I_{zz}^{\text{cas 2}}=\dfrac{M_1R^2}{2}-\Big[\dfrac{M_2'r^2}{2}+M_2'a^2\Big]\]
-        </div>
-        <div class="warnbox"><span class="lab">Piège</span> \(I_{xx}\) (axe du décalage) <b>n'est pas affecté</b>
-        par le transport, alors que \(I_{yy}\) et \(I_{zz}\) le sont tous les deux — c'est la même logique que le
-        théorème de Huygens du cours (\(\mathrm{diag}(0,a^2,a^2)\) pour un décalage pur selon \(\vec x\)).</div>
-      </div>
-    </div>
+    <div class="note"><span class="lab">Correction détaillée</span> <a href="ch3-inerties-matrices.html">Ouvrir la correction pas à pas</a> : barre, rectangle, quart de disque, cylindre plein, cylindre percé.</div>
   </section>
 
-  <!-- ======================= TD PAS A PAS =============================== -->
-  <section class="block" id="td-detail">
-    <h2>2. Lecteur DVD, arbre de navire, régulateur, équilibreuse — corrections détaillées</h2>
-    <p>Ces quatre exercices ont une correction pas à pas, construite à partir du corrigé officiel du prof : chaque question,
-    la démarche, le calcul complet, et les points à vérifier signalés.</p>
-    <ul>
-      <li><a href="ch3-pfd-lecteur-dvd.html">Lecteur de DVD</a> : couple moteur, pas de vis optimal, choix du moteur.</li>
-      <li><a href="ch3-pfd-arbre-navire.html">Arbre de navire</a> : effet gyroscopique, efforts dans les paliers A et B.</li>
-      <li><a href="ch3-pfd-regulateur-centrifuge.html">Régulateur centrifuge</a> : moment cinétique, effort du ressort, raideur.</li>
-      <li><a href="ch3-pfd-equilibreuse.html">Équilibreuse</a> : efforts dans les paliers, balourd, masselottes d'équilibrage.</li>
-    </ul>
+  <section class="block" id="dvd">
+    <h2>2. Lecteur DVD — couple moteur, optimisation du pas de vis</h2>
+    <div class="note"><span class="lab">Correction détaillée</span> <a href="ch3-pfd-lecteur-dvd.html">Ouvrir la correction pas à pas</a> : couple moteur nécessaire, pas de vis optimal, choix du moteur.</div>
+  </section>
+
+  <section class="block" id="navire">
+    <h2>3. Arbre de navire — effet gyroscopique</h2>
+    <div class="note"><span class="lab">Correction détaillée</span> <a href="ch3-pfd-arbre-navire.html">Ouvrir la correction pas à pas</a> : torseur dynamique du rotor, efforts dans les paliers A et B.</div>
   </section>
 
   <!-- ======================= EX4 EOLIENNE =============================== -->
   <section class="block" id="eolienne">
-    <h2>3. Éolienne bipale — moment cinétique et dynamique avec balourd</h2>
+    <h2>4. Éolienne bipale — moment cinétique et dynamique avec balourd</h2>
     <figure>
       <img src="img/c03-td-eolienne.png" alt="Éolienne bipale : support 0, girouette 1 (angle α), hélice 2 (angle β), balourd 3 au point P" loading="lazy">
       <figcaption>Support 0 ; girouette 1 pivot \((K,\vec z)\) d'angle \(\alpha\) ; hélice 2 pivot \((K,\vec x_1)\)
@@ -614,6 +501,16 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
     </div>
   </section>
 
+
+  <section class="block" id="regulateur">
+    <h2>5. Régulateur centrifuge — dimensionnement du ressort</h2>
+    <div class="note"><span class="lab">Correction détaillée</span> <a href="ch3-pfd-regulateur-centrifuge.html">Ouvrir la correction pas à pas</a> : moment cinétique en A, projection sur l'axe du pivot, effort du ressort, raideur.</div>
+  </section>
+
+  <section class="block" id="equilibreuse">
+    <h2>6. Équilibreuse dynamique — extraction du balourd</h2>
+    <div class="note"><span class="lab">Correction détaillée</span> <a href="ch3-pfd-equilibreuse.html">Ouvrir la correction pas à pas</a> : efforts dans les paliers, position du balourd, masselottes d'équilibrage.</div>
+  </section>
 
   <div style="margin:2.2rem 0 .4rem;padding:.7rem 1rem;border-left:5px solid var(--subject);background:#f8fafc;border-radius:8px"><b style="color:var(--subject-ink)">DS01</b> — DS01 corrigés — Dynamique du solide</div>
   <p class="lead">Correction intégrale des exercices de <b>dynamique</b> des deux DS01 donnés sur Moodle

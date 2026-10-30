@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calcul de matrices d'inertie — correction détaillée</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  :root{
+    --bg:#fafafa; --text:#2d3748; --muted:#64748b; --title:#1a202c;
+    --accent:#0f766e; --accent-soft:#ccfbf1; --line:#e5e7eb; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--text);
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    font-size:17px; line-height:1.7}
+  .page{max-width:800px; margin:0 auto; padding:2.5rem 2rem 4rem}
+  .nav{display:flex; flex-wrap:wrap; gap:1rem; font-size:.92rem; margin-bottom:1.5rem}
+  .nav a{color:var(--accent); text-decoration:none; font-weight:600}
+  .nav a:hover{text-decoration:underline}
+  p, ul, ol{margin:0 0 1.5rem}
+  li{margin-bottom:.45rem}
+  strong{color:var(--title)}
+  h1{font-size:2.1rem; line-height:1.2; color:var(--title); margin:.6rem 0 .6rem}
+  h2{font-size:1.5rem; color:var(--title); margin:3.4rem 0 1.1rem; padding-bottom:.45rem;
+    border-bottom:2px solid var(--accent-soft)}
+  h3{font-size:1.15rem; color:var(--accent); margin:2.2rem 0 .7rem}
+  .kicker{font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
+  .lead{color:var(--muted); font-size:1.08rem; margin-bottom:2rem}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1.4rem 1.6rem; margin:1.5rem 0}
+  .card h3:first-child{margin-top:0}
+
+  /* ---- Question : texte à gauche, encadré méthode à droite ---- */
+  .qblock{display:grid; grid-template-columns:minmax(0,1fr) 250px; gap:1.8rem;
+    margin:2.4rem 0 0; padding-top:1.8rem; border-top:1px solid var(--line)}
+  .qblock.wide{grid-template-columns:minmax(0,1fr)}
+  .qtitle{font-size:1.2rem; font-weight:800; color:var(--title); margin:0 0 1rem}
+  .qnum{display:inline-block; background:var(--accent); color:#fff; border-radius:7px;
+    padding:.12rem .6rem; font-size:.9rem; margin-right:.5rem; vertical-align:middle}
+  .ask{background:#f8fafc; border-left:4px solid #94a3b8; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .ask .lab, .lab{display:block; font-size:.72rem; font-weight:800; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:.25rem}
+  .demarche{margin:0 0 1.2rem}
+  .calc{background:#fff; border:1px solid var(--line); border-radius:10px; padding:.8rem 1rem .4rem; margin:0 0 1.2rem; overflow-x:auto}
+  .res{background:#ecfdf5; border-left:4px solid #059669; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .res .lab{color:#047857}
+
+  .aside{align-self:start; border-radius:12px; padding:1rem 1.1rem; font-size:.93rem; line-height:1.55;
+    background:#f0fdfa; border:1px solid #99f6e4}
+  .aside.formula{background:#f5f3ff; border-color:#ddd6fe}
+  .aside.apply{background:#fffbeb; border-color:#fde68a}
+  .aside.piege{background:#fff1f2; border-color:#fecdd3}
+  .aside .lab{color:var(--accent); margin-bottom:.35rem}
+  .aside.formula .lab{color:#6d28d9}
+  .aside.apply .lab{color:#b45309}
+  .aside.piege .lab{color:#be123c}
+  .aside p, .aside ul{margin:0 0 .7rem}
+  .aside ul{padding-left:1.1rem}
+  .aside li{margin-bottom:.3rem}
+  .aside > :last-child{margin-bottom:0}
+
+  .warn{background:#fff7ed; border-left:4px solid #ea580c; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .warn .lab{color:#c2410c}
+  .info{background:#f0f9ff; border-left:4px solid #0284c7; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .info .lab{color:#0369a1}
+
+  figure{margin:1.4rem 0 1.8rem; text-align:center}
+  figure img{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:10px; padding:.5rem}
+  figcaption{font-size:.88rem; color:var(--muted); margin-top:.5rem; line-height:1.5}
+
+  table{width:100%; border-collapse:collapse; margin:.6rem 0 1.4rem; font-size:.93rem; background:#fff}
+  th, td{border:1px solid var(--line); padding:.5rem .6rem; text-align:center}
+  th{background:#f1f5f9; color:var(--title)}
+  td.l, th.l{text-align:left}
+
+  .steps{counter-reset:s; list-style:none; padding:0; margin:0 0 1.5rem}
+  .steps li{counter-increment:s; position:relative; padding:.2rem 0 .2rem 2.7rem; margin-bottom:.9rem}
+  .steps li::before{content:counter(s); position:absolute; left:0; top:.1rem; width:1.9rem; height:1.9rem;
+    border-radius:50%; background:var(--accent-soft); color:var(--accent); font-weight:800; text-align:center; line-height:1.9rem}
+
+  footer{margin-top:3.5rem; padding-top:1.2rem; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem}
+  footer a{color:var(--accent)}
+  mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%}
+
+  @media (max-width:680px){
+    body{font-size:16px}
+    .page{padding:1.6rem 1.1rem 3rem}
+    h1{font-size:1.65rem}
+    h2{font-size:1.3rem; margin-top:2.6rem}
+    .qblock{grid-template-columns:1fr; gap:1rem}
+  }
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+<div class="page">
+
+  <nav class="nav">
+    <a href="../index.html#am2">← Accueil</a>
+    <a href="ch3-dynamique-solide.html">← Chapitre 3 (cours)</a>
+    <a href="../assets/pdf.html?f=../documents/aem2-si/ch3-dynamique-solide/PFD-PT-TD-calcul_de_matrices_d_inertie-prof.pdf" target="_blank" rel="noopener">Corrigé original (PDF)</a>
+  </nav>
+
+  <div class="kicker">AM2 · SI · Chapitre 3 — Dynamique du solide (TD, exercice 1)</div>
+  <h1>Calcul de matrices d'inertie : correction détaillée</h1>
+  <p class="lead">Premier exercice du TD « Dynamique du solide (C03) », dans l'ordre du TD : barre, rectangle mince, quart de disque,
+  cylindre plein, cylindre percé. Pour chaque question : l'énoncé en image, la démarche, le calcul complet, puis les résultats du corrigé.
+  L'objectif est de savoir <strong>calculer une matrice d'inertie</strong>, ce qui sert ensuite dans tout le PFD.</p>
+
+  <!-- ============================================================ -->
+  <h2>1. Avant de commencer : l'essentiel</h2>
+
+  <div class="card">
+    <h3>L'opérateur d'inertie</h3>
+    <p>Pour un solide \(S\) de masse \(m\), l'opérateur d'inertie en un point \(P\), exprimé dans une base \(b(\vec x,\vec y,\vec z)\), est une matrice symétrique :</p>
+    \[\bar{\bar I}(P,S)=\begin{pmatrix}A&-F&-E\\-F&B&-D\\-E&-D&C\end{pmatrix}_b,\qquad
+    A=\int_S(y^2+z^2)\,dm,\quad B=\int_S(x^2+z^2)\,dm,\quad C=\int_S(x^2+y^2)\,dm\]
+    <p>Les termes hors diagonale sont \(F=\int_S xy\,dm\), \(E=\int_S xz\,dm\), \(D=\int_S yz\,dm\), avec le signe moins devant dans la matrice.</p>
+    <h3>Trois règles qui simplifient presque tout</h3>
+    <ul>
+      <li><strong>Symétrie par rapport à un plan</strong> \((G,\vec x,\vec y)\) : les termes \(E\) et \(D\) sont nuls (les masses se compensent).</li>
+      <li><strong>Solide de révolution</strong> d'axe \(\vec z\) : \(A=B\), et la matrice est diagonale.</li>
+      <li><strong>Théorème de Huygens</strong> : pour passer du centre de masse \(G\) à un point \(P\) quelconque, avec \(\overrightarrow{PG}=(d_x,d_y,d_z)\) :
+      \(\bar{\bar I}(P,S)=\bar{\bar I}(G,S)+m\begin{pmatrix}d_y^2+d_z^2&-d_xd_y&-d_xd_z\\-d_xd_y&d_x^2+d_z^2&-d_yd_z\\-d_xd_z&-d_yd_z&d_x^2+d_y^2\end{pmatrix}\).</li>
+    </ul>
+  </div>
+
+  <div class="info">
+    <span class="lab">Méthode commune aux 5 exercices</span>
+    Pour une pièce homogène, on écrit \(dm=\rho\,dV\) (ou \(\sigma\,dS\) pour une surface), on intègre \(x^2\), \(y^2\), \(z^2\) ou \(xy\) sur la pièce,
+    et on exprime le résultat avec la masse \(m\). Choisir le repère pour que les intégrales soient simples (centre et axes de symétrie).
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>2. Exercice 1 — Barre</h2>
+
+  <figure>
+    <img src="img/inertie-barre.png" alt="Barre cylindrique de rayon négligeable, longueur L, sur l'axe x, centre G et origine O" loading="lazy">
+    <figcaption>Énoncé de l'exercice 1 : barre de longueur \(L\), de rayon négligeable devant \(L\), centre de masse \(G\).</figcaption>
+  </figure>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Opérateur d'inertie en \(G\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer l'opérateur d'inertie en \(G\), exprimé dans la base \(b(\vec x,\vec y,\vec z)\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Où est la matière ?</strong> Elle est uniquement sur l'axe \((G,\vec x)\). Donc \(y\) et \(z\) sont nuls partout : \(y^2\), \(z^2\), \(yz\), \(xy\), \(xz\) sont nuls.</li>
+        <li><strong>Conséquence</strong> : \(A=0\) (car \(A=\int(y^2+z^2)dm=0\)), et \(D=E=F=0\).</li>
+        <li><strong>Symétrie</strong> : \((G,\vec y)\) et \((G,\vec z)\) jouent le même rôle, donc \(B=C\).</li>
+        <li><strong>Calcul de \(B\)</strong> : \(B=\int x^2dm\) avec \(dm=\dfrac{m}{L}dx\), \(x\in[-L/2,L/2]\).</li>
+      </ol>
+      <div class="calc">
+        \[B=\dfrac{m}{L}\int_{-L/2}^{L/2}x^2\,dx=\dfrac{m}{L}\Big[\dfrac{x^3}{3}\Big]_{-L/2}^{L/2}=\dfrac{m}{L}\cdot\dfrac{L^3}{12}=\dfrac{mL^2}{12}\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \[\bar{\bar I}(G,S)=\begin{pmatrix}0&0&0\\0&\dfrac{mL^2}{12}&0\\0&0&\dfrac{mL^2}{12}\end{pmatrix}_b\]
+      </div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>Une barre fine tournant autour d'un axe perpendiculaire à elle a une inertie \(mL^2/12\) par rapport à son centre. Autour de son propre axe, l'inertie est quasi nulle (rayon négligeable).</p>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q2</span>Opérateur d'inertie en \(O\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Même question, au point \(O\) (extrémité de la barre).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>On garde le résultat en \(G\) et on applique Huygens. Ici \(\overrightarrow{OG}=\dfrac{L}{2}\vec x\), donc \(d_x=L/2\), \(d_y=d_z=0\).</li>
+        <li>Huygens ajoute \(m(d_x^2+d_z^2)\) à \(B\) (axe \(\vec y\)) et \(m(d_x^2+d_y^2)\) à \(C\) (axe \(\vec z\)). Ici \(d_z=0\) et \(d_y=0\), donc on ajoute \(m\,d_x^2\) à \(B\) et à \(C\).</li>
+      </ol>
+      <div class="calc">
+        \[B_O=B_G+m\Big(\dfrac{L}{2}\Big)^2=\dfrac{mL^2}{12}+\dfrac{mL^2}{4}=\dfrac{mL^2}{3}\qquad C_O=\dfrac{mL^2}{3}\qquad A_O=0\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \[\bar{\bar I}(O,S)=\begin{pmatrix}0&0&0\\0&\dfrac{mL^2}{3}&0\\0&0&\dfrac{mL^2}{3}\end{pmatrix}_b\]
+      </div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Huygens ajoute \(m\,d^2\) uniquement aux axes <strong>perpendiculaires</strong> au décalage. Ici le décalage est selon \(\vec x\), donc \(A\) ne change pas (il est déjà nul).</li>
+        <li>Ne pas oublier : \(\dfrac{mL^2}{12}+\dfrac{mL^2}{4}=\dfrac{mL^2}{3}\).</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>3. Exercice 2 — Rectangle mince</h2>
+
+  <figure>
+    <img src="img/inertie-rectangle.png" alt="Rectangle de longueur 2a et de largeur 2b, centre G, base x y z" loading="lazy">
+    <figcaption>Énoncé de l'exercice 2 : rectangle mince de longueur \(2a\) et de largeur \(2b\), centre de masse \(G\).</figcaption>
+  </figure>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Opérateur d'inertie en \(G\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer l'opérateur d'inertie en \(G\), dans la base \(b(\vec x,\vec y,\vec z)\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Symétries</strong> : \(\vec x\) et \(\vec y\) sont axes de symétrie, donc la matrice est diagonale (\(D=E=F=0\)).</li>
+        <li><strong>Matière plane</strong> : le rectangle est dans le plan \((G,\vec x,\vec y)\), donc \(z=0\) partout. D'où \(C=\int(x^2+y^2)dm=A+B\).</li>
+        <li><strong>Surface</strong> : \(dm=\sigma\,dS\) avec \(\sigma=\dfrac{m}{4ab}\) (aire \(4ab\)).</li>
+        <li><strong>Calcul de \(A=\int y^2dm\)</strong>, avec \(y\in[-b,b]\) et \(x\in[-a,a]\).</li>
+      </ol>
+      <div class="calc">
+        \[A=\dfrac{m}{4ab}\int_{-a}^{a}dx\int_{-b}^{b}y^2\,dy=\dfrac{m}{4ab}\cdot 2a\cdot\dfrac{2b^3}{3}=\dfrac{mb^2}{3}\]
+        <p>Par analogie (on échange \(x\) et \(y\)) : \(B=\dfrac{ma^2}{3}\). Puis :</p>
+        \[C=A+B=\dfrac{m(a^2+b^2)}{3}\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \[\bar{\bar I}(G,S)=\begin{pmatrix}\dfrac{mb^2}{3}&0&0\\0&\dfrac{ma^2}{3}&0\\0&0&\dfrac{m(a^2+b^2)}{3}\end{pmatrix}_b\]
+      </div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>Plaque plane : l'inertie perpendiculaire au plan est la somme des deux autres (\(C=A+B\)). C'est le cas dès qu'une pièce est mince et plane.</p>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>4. Exercice 3 — Quart de disque</h2>
+
+  <figure>
+    <img src="img/inertie-quart.png" alt="Quart de disque de rayon R, centre O, angle theta, vecteur u" loading="lazy">
+    <figcaption>Énoncé de l'exercice 3 : quart de disque de rayon \(R\), centre \(O\), masse surfacique \(\rho\).</figcaption>
+  </figure>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Position du centre de gravité</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer la position du centre de gravité \(G\), dans le repère \((O,\vec x,\vec y)\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Définition : \(\overrightarrow{OG}=\dfrac{1}{m}\int_S\overrightarrow{OM}\,dm\).</li>
+        <li>Par symétrie (la figure est symétrique par rapport à la droite \(y=x\)), \(x_G=y_G\).</li>
+        <li>On calcule \(x_G\) en coordonnées polaires : \(x=r\cos\theta\), \(dS=r\,dr\,d\theta\), \(\theta\in[0,\pi/2]\), \(r\in[0,R]\).</li>
+      </ol>
+      <div class="calc">
+        <p>Masse : \(m=\rho\dfrac{\pi R^2}{4}\). Puis :</p>
+        \[x_G=\dfrac{1}{m}\int_0^{\pi/2}\!\!\int_0^R (r\cos\theta)\,\rho\,r\,dr\,d\theta=\dfrac{\rho}{m}\Big[\dfrac{R^3}{3}\Big]\Big[\sin\theta\Big]_0^{\pi/2}=\dfrac{\rho R^3}{3m}=\dfrac{\rho R^3}{3\rho\pi R^2/4}=\dfrac{4R}{3\pi}\]
+        \[\overrightarrow{OG}=\dfrac{4R}{3\pi}(\vec x+\vec y)\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \(x_G=y_G=\dfrac{4R}{3\pi}\approx0{,}42\,R\).
+      </div>
+      <div class="info"><span class="lab">Vérification (théorème de Guldin)</span>
+        Le volume engendré par la rotation du quart de disque autour de l'axe \(x\) (tour complet) vaut \(V=2\pi\,y_G\cdot S\).
+        Pour une demi-sphère de rayon \(R\) il vaut \(\tfrac{2}{3}\pi R^3\), et \(S=\tfrac{\pi R^2}{4}\) : on retrouve \(y_G=\dfrac{V}{2\pi S}=\dfrac{4R}{3\pi}\).</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Le jacobien en polaires est \(r\), pas 1 : sans lui, on oublie un facteur \(r\).</li>
+        <li>\(G\) n'est pas au milieu de l'arc : il est à \(0{,}42\,R\) de \(O\), à l'intérieur du quart.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q2</span>Opérateur d'inertie en \(O\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer l'opérateur d'inertie en \(O\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>La pièce est une plaque d'épaisseur nulle : \(C=A+B\).</li>
+        <li>\(B=\int x^2dm\) : en polaires, \(x^2=r^2\cos^2\theta\), donc on intègre \(\cos^2\theta=\dfrac{1+\cos2\theta}{2}\).</li>
+        <li>\(F=\int xy\,dm\) : on a \(\cos\theta\sin\theta=\dfrac{\sin2\theta}{2}\) et l'intégrale en \(\theta\) de \(\sin2\theta\) donne un terme \(\cos\) qui se simplifie.</li>
+      </ol>
+      <div class="calc">
+        \[B=\dfrac{4m}{\pi R^2}\int_0^{\pi/2}\!\!\int_0^R r^3\cos^2\theta\,dr\,d\theta=\dfrac{4m}{\pi R^2}\cdot\dfrac{R^4}{4}\cdot\dfrac{\pi}{4}=\dfrac{mR^2}{4}\]
+        \[A=\dfrac{mR^2}{4}\ \ (\text{symétrie } x\leftrightarrow y),\qquad C=A+B=\dfrac{mR^2}{2}\]
+        \[F=\int xy\,dm=\dfrac{4m}{\pi R^2}\int_0^{\pi/2}\!\!\int_0^R r^3\cos\theta\sin\theta\,dr\,d\theta=\dfrac{4m}{\pi R^2}\cdot\dfrac{R^4}{4}\cdot\dfrac{1}{2}=\dfrac{mR^2}{2\pi}\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \[\bar{\bar I}(O,S)=\begin{pmatrix}\dfrac{mR^2}{4}&-\dfrac{mR^2}{2\pi}&0\\[4pt]-\dfrac{mR^2}{2\pi}&\dfrac{mR^2}{4}&0\\[4pt]0&0&\dfrac{mR^2}{2}\end{pmatrix}_{b}\]
+        <p style="margin:.6rem 0 0">Le terme hors diagonale est \(-F\) avec \(F=\dfrac{mR^2}{2\pi}\) : le signe moins vient de la convention de la matrice.</p>
+      </div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>En polaires avec une densité constante : \(\int_0^{\pi/2}\cos^2\theta\,d\theta=\dfrac{\pi}{4}\) et \(\int_0^{\pi/2}\cos\theta\sin\theta\,d\theta=\dfrac12\). Ce sont les deux intégrales à connaître.</p>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3</span>Opérateur d'inertie en \(G\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer l'opérateur d'inertie en \(G\) (centre de gravité trouvé en Q1).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>On applique Huygens depuis \(O\) vers \(G\), avec \(\overrightarrow{OG}=d(\vec x+\vec y)\), \(d=\dfrac{4R}{3\pi}\). Donc \(\overrightarrow{GO}=(-d,-d,0)\).</li>
+        <li>Les produits \(d_xd_y=d^2=\dfrac{16R^2}{9\pi^2}\) apparaissent hors diagonale, et \(d_y^2+d_z^2=d^2\), \(d_x^2+d_z^2=d^2\), \(d_x^2+d_y^2=2d^2\).</li>
+        <li>On écrit \(\bar{\bar I}(G)=\bar{\bar I}(O)-m\,(\text{matrice de Huygens})\).</li>
+      </ol>
+      <div class="calc">
+        \[\bar{\bar I}(G)=\bar{\bar I}(O)-m\,\dfrac{16R^2}{9\pi^2}\begin{pmatrix}1&-1&0\\-1&1&0\\0&0&2\end{pmatrix}\]
+        \[A_G=\dfrac{mR^2}{4}-\dfrac{16mR^2}{9\pi^2}=\dfrac{mR^2(9\pi^2-64)}{36\pi^2}\qquad C_G=\dfrac{mR^2}{2}-\dfrac{32mR^2}{9\pi^2}=\dfrac{mR^2(9\pi^2-64)}{18\pi^2}\]
+        \[F_G=\dfrac{mR^2}{2\pi}-\dfrac{16mR^2}{9\pi^2}=\dfrac{mR^2(18\pi-64)}{36\pi^2}\ \Rightarrow\ \text{terme hors diagonale}=-F_G=\dfrac{mR^2(64-18\pi)}{36\pi^2}\]
+      </div>
+      <div class="res"><span class="lab">Réponse (corrigé)</span>
+        \[\bar{\bar I}(G,S)=\dfrac{mR^2}{36\pi^2}\begin{pmatrix}9\pi^2-64&64-18\pi&0\\64-18\pi&9\pi^2-64&0\\0&0&2(9\pi^2-64)\end{pmatrix}_{b}\]
+      </div>
+      <div class="info"><span class="lab">Ordre de grandeur</span>
+        \(9\pi^2-64\approx24{,}8\) et \(64-18\pi\approx7{,}5\) : la matrice est bien définie positive (valeurs propres positives), comme il se doit pour une inertie.</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Le signe de Huygens est <strong>moins</strong> : on passe de \(O\) à \(G\), donc on <em>retranche</em> \(m\,d^2\) (le centre de masse est plus près).</li>
+        <li>Les deux termes \(\dfrac{mR^2}{2\pi}\) et \(\dfrac{16mR^2}{9\pi^2}\) doivent être mis au même dénominateur avant de simplifier.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>5. Exercice 4 — Cylindre plein</h2>
+
+  <figure>
+    <img src="img/inertie-cylindre-plein.png" alt="Cylindre plein de rayon R, hauteur h, masse m, base inférieure O, centre G, base x y z" loading="lazy">
+    <figcaption>Énoncé de l'exercice 4 : cylindre plein homogène, rayon \(R\), hauteur \(h\), masse \(m\). \(O\) = centre de la base inférieure, \(G\) = centre de masse.</figcaption>
+  </figure>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Opérateur d'inertie en \(G\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer l'opérateur d'inertie en \(G\), dans la base \(b(\vec x,\vec y,\vec z)\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Révolution</strong> autour de \((O,\vec z)\) : \(A=B\), et la matrice est diagonale.</li>
+        <li><strong>Axe z</strong> : \(C=\int(x^2+y^2)dm=\int r^2dm\) (ici \(r\) est la distance à l'axe \(z\)).</li>
+        <li><strong>Axe x</strong> : \(A=\int(y^2+z^2)dm=\int y^2dm+\int z^2dm\). Par symétrie de révolution, \(\int y^2dm=\dfrac{C}{2}\) (car \(x^2+y^2\) se répartit également entre \(x\) et \(y\)). Donc \(A=\dfrac{C}{2}+\int z^2dm\).</li>
+      </ol>
+      <div class="calc">
+        <p><strong>Calcul de \(C\)</strong> : en cylindriques, \(dm=\dfrac{m}{\pi R^2h}r\,dr\,d\theta\,dz\), avec \(z\in[-h/2,h/2]\) (on part de \(G\)).</p>
+        \[C=\dfrac{m}{\pi R^2h}\int_0^{2\pi}\!\!d\theta\int_0^R r^3dr\int_{-h/2}^{h/2}dz=\dfrac{m}{\pi R^2h}\cdot2\pi\cdot\dfrac{R^4}{4}\cdot h=\dfrac{mR^2}{2}\]
+        <p><strong>Calcul de \(\int z^2dm\)</strong> (avec \(z\) mesuré depuis \(G\)) :</p>
+        \[\int z^2dm=\dfrac{m}{h}\int_{-h/2}^{h/2}z^2\,dz=\dfrac{m}{h}\Big[\dfrac{z^3}{3}\Big]_{-h/2}^{h/2}=\dfrac{m}{h}\cdot\dfrac{h^3}{12}=\dfrac{mh^2}{12}\]
+        <p>(La densité est uniforme en hauteur : \(dm=\dfrac{m}{h}dz\) une fois la section intégrée. Le rayon n'intervient pas ici.)</p>
+        <p>Donc \(A=\dfrac{C}{2}+\dfrac{mh^2}{12}=\dfrac{mR^2}{4}+\dfrac{mh^2}{12}\).</p>
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \[\bar{\bar I}(G,S)=\begin{pmatrix}\dfrac{mR^2}{4}+\dfrac{mh^2}{12}&0&0\\0&\dfrac{mR^2}{4}+\dfrac{mh^2}{12}&0\\0&0&\dfrac{mR^2}{2}\end{pmatrix}_b\]
+      </div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>Cylindre plein d'axe \(z\) : \(I_{zz}=\dfrac{mR^2}{2}\) et \(I_{xx}=I_{yy}=\dfrac{mR^2}{4}+\dfrac{mh^2}{12}\) (centre de masse). Ces trois formules sont à connaître par cœur.</p>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q2</span>Opérateur d'inertie en \(O\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer l'opérateur d'inertie en \(O\) (centre de la base inférieure), dans la base \(b(\vec x,\vec y,\vec z)\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>On reprend les mêmes calculs, mais avec \(z\) mesuré depuis \(O\) : \(z\in[0,h]\) au lieu de \([-h/2,h/2]\).</li>
+        <li>\(C\) ne change pas (il ne dépend que de \(r\)) : \(C=\dfrac{mR^2}{2}\).</li>
+        <li>\(\int z^2dm\) devient \(\dfrac{m}{h}\displaystyle\int_0^h z^2dz=\dfrac{mh^2}{3}\).</li>
+      </ol>
+      <div class="calc">
+        \[\int z^2dm=\dfrac{m}{h}\int_0^h z^2\,dz=\dfrac{m}{h}\cdot\dfrac{h^3}{3}=\dfrac{mh^2}{3}\]
+        \[A_O=\dfrac{C}{2}+\dfrac{mh^2}{3}=\dfrac{mR^2}{4}+\dfrac{mh^2}{3}\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \[\bar{\bar I}(O,S)=\begin{pmatrix}\dfrac{mR^2}{4}+\dfrac{mh^2}{3}&0&0\\0&\dfrac{mR^2}{4}+\dfrac{mh^2}{3}&0\\0&0&\dfrac{mR^2}{2}\end{pmatrix}_b\]
+      </div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Le terme en \(h^2\) change : \(\dfrac{h^2}{12}\) au centre, \(\dfrac{h^2}{3}\) à la base. La différence \(\dfrac{h^2}{3}-\dfrac{h^2}{12}=\dfrac{h^2}{4}\) est justement \(m(h/2)^2\), le terme de Huygens.</li>
+        <li>Le terme en \(R^2\) est le même partout : seul \(z\) dépend du point de référence.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3</span>Retrouver \(\bar{\bar I}(G,S)\) par Huygens</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Retrouver l'opérateur d'inertie en \(G\) à partir de celui en \(O\), avec le théorème de Huygens.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Le vecteur \(\overrightarrow{OG}=\dfrac{h}{2}\vec z\) : \(d_z=h/2\), \(d_x=d_y=0\).</li>
+        <li>Huygens : seuls \(A\) et \(B\) changent, de \(m\,d_z^2=m\dfrac{h^2}{4}\). \(C\) ne change pas (l'axe \(z\) est parallèle au décalage).</li>
+      </ol>
+      <div class="calc">
+        \[A_G=A_O-m\dfrac{h^2}{4}=\dfrac{mR^2}{4}+\dfrac{mh^2}{3}-\dfrac{mh^2}{4}=\dfrac{mR^2}{4}+\dfrac{mh^2}{12}\]
+        <p>On retrouve bien le résultat directement obtenu en \(G\) (Q1).</p>
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        Même résultat qu'en Q1 : \(A_G=B_G=\dfrac{mR^2}{4}+\dfrac{mh^2}{12}\), \(C_G=\dfrac{mR^2}{2}\).
+      </div>
+    </div>
+    <aside class="aside apply">
+      <span class="lab">Appliquer</span>
+      <ul>
+        <li>Pour vérifier une matrice, refaire le passage Huygens dans les deux sens : c'est une bonne façon de repérer un signe faux.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>6. Exercice 5 — Cylindre percé</h2>
+
+  <figure>
+    <img src="img/inertie-cylindre-perce.png" alt="Cylindre percé : cas 1 perçage centré, cas 2 perçage décalé de a selon x" loading="lazy">
+    <figcaption>Énoncé de l'exercice 5 : cylindre de hauteur \(h\) et de rayon \(R\), avec un perçage de rayon \(r\). Cas 1 : perçage centré. Cas 2 : perçage décalé de \(a\) selon \(\vec x\) (\(\overrightarrow{GG'}=a\vec x\)).</figcaption>
+  </figure>
+
+  <div class="qblock wide">
+    <div>
+      <p class="qtitle"><span class="qnum">Q</span>Opérateur d'inertie en \(G\) : cas 1 (perçage centré) et cas 2 (perçage décalé)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Connaissant la matrice d'un cylindre plein de hauteur \(h\) et de rayon \(R\), déterminer celle du cylindre percé au point \(G\).
+        Données : \(h=40\) mm, \(R=30\) mm. Cas 1 : \(r=10\) mm. Cas 2 : \(r=5\) mm, \(a=20\) mm.</div>
+      <p class="demarche"><span class="lab">Démarche (commune aux deux cas)</span></p>
+      <ol>
+        <li><strong>Soustraction</strong> : le cylindre percé \(S\) est le cylindre plein \(P\) (rayon \(R\)) moins le cylindre \(C\) (rayon \(r\)) qu'on a enlevé. Donc \(\bar{\bar I}(G,S)=\bar{\bar I}(G,P)-\bar{\bar I}(G,C)\) pour les deux termes, avec les masses \(m_P\) et \(m_C\).</li>
+        <li><strong>Masses</strong> : \(m_P=\pi\rho hR^2\), \(m_C=\pi\rho hr^2\), donc \(m=m_P-m_C=\pi\rho h(R^2-r^2)\).</li>
+        <li><strong>Inerties du plein</strong> (Ex. 4) : \(I_{xx}=I_{yy}=\dfrac{m R^2}{4}+\dfrac{mh^2}{12}\), \(I_{zz}=\dfrac{mR^2}{2}\), à remplacer par \(m_P\) puis \(m_C\) (avec \(r\)).</li>
+      </ol>
+
+      <div class="calc">
+        <p><strong>Cas 1 (perçage centré).</strong> Les deux cylindres ont le même centre \(G\). On soustrait terme à terme :</p>
+        \[A=\Big(\dfrac{m_PR^2}{4}+\dfrac{m_Ph^2}{12}\Big)-\Big(\dfrac{m_Cr^2}{4}+\dfrac{m_Ch^2}{12}\Big)=\dfrac{\pi\rho h(R^4-r^4)}{4}+\dfrac{\pi\rho h^3(R^2-r^2)}{12}\]
+        <p>En factorisant \(\pi\rho h(R^2-r^2)=m\) et en remarquant que \(R^4-r^4=(R^2-r^2)(R^2+r^2)\) :</p>
+        \[A=B=\dfrac{m(R^2+r^2)}{4}+\dfrac{mh^2}{12}\qquad\qquad C=\dfrac{m(R^2+r^2)}{2}\]
+      </div>
+
+      <div class="calc">
+        <p><strong>Cas 2 (perçage décalé de \(a\) selon \(\vec x\)).</strong> Le cylindre enlevé est centré en \(G'=G+a\vec x\). Il faut donc :</p>
+        <ul>
+          <li>calculer l'inertie du cylindre enlevé \(C\) en son propre centre \(G'\) (formules de l'Ex. 4 avec \(r\)) ;</li>
+          <li>la ramener en \(G\) par Huygens : \(m_C\,a^2\) s'ajoute aux axes perpendiculaires à \(\overrightarrow{GG'}=a\vec x\), c'est-à-dire \(\vec y\) et \(\vec z\), mais pas \(\vec x\).</li>
+        </ul>
+        <p>On obtient donc \(\bar{\bar I}(G,S)=\bar{\bar I}(G,P)-\bar{\bar I}(G',C)-m_C\begin{pmatrix}0&0&0\\0&a^2&0\\0&0&a^2\end{pmatrix}\), soit, avec \(m_C\,a^2=\dfrac{m\,r^2a^2}{R^2-r^2}\) :</p>
+        \[A=\dfrac{m(R^2+r^2)}{4}+\dfrac{mh^2}{12}\qquad B=A-\dfrac{mr^2a^2}{R^2-r^2}\qquad C=\dfrac{m(R^2+r^2)}{2}-\dfrac{mr^2a^2}{R^2-r^2}\]
+        <p>Le terme \(\dfrac{mr^2a^2}{R^2-r^2}\) n'apparaît que dans \(B\) et \(C\) : le décalage est selon \(\vec x\), donc l'axe \(\vec x\) n'est pas affecté.</p>
+      </div>
+
+      <div class="res"><span class="lab">Application numérique (corrigé)</span>
+        Cas 1 : \(m=784{,}14\) g, \(A=B=300{,}59\) kg·mm², \(C=392{,}07\) kg·mm².<br>
+        Cas 2 : \(m=857{,}65\) g, \(A=312{,}68\) kg·mm², \(B=302{,}6\) kg·mm², \(C=386{,}58\) kg·mm².
+        <p style="margin:.6rem 0 0"><em>Ces valeurs supposent une masse volumique \(\rho\approx7\,800\) kg·m⁻³ : c'est celle qui reproduit \(m=784{,}14\) g avec \(\pi\rho h(R^2-r^2)\), \(h=40\) mm et \(R^2-r^2=800\) mm².</em></p>
+      </div>
+
+      <div class="warn"><span class="lab">⚠️ Deux points du corrigé à noter</span>
+        <ul>
+          <li>Le corrigé écrit \(m_c=2\pi\rho hr^2\), probablement une coquille (à vérifier sur le PDF) : avec \(m_c=\pi\rho hr^2\) (aire d'un disque de rayon \(r\)), on retrouve bien \(m=m_P-m_c=\pi\rho h(R^2-r^2)\), qu'il utilise ensuite. Le calcul ci-dessus est fait avec \(\pi\rho hr^2\).</li>
+          <li>Pour le cas 2, en recalculant \(B\) à partir de \(A=312{,}68\) : \(B=312{,}68-9{,}80\approx302{,}9\) kg·mm² (le corrigé écrit 302,6). C'est un écart d'arrondi, sans conséquence.</li>
+        </ul>
+      </div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Un perçage est une <strong>soustraction</strong> : on enlève la masse et l'inertie du cylindre \(r\), sans oublier de changer la masse \(m\) dans les formules.</li>
+        <li>Le décalage \(a\) crée un terme \(m_C a^2\) qu'on oublie souvent. Il faut le retrancher dans \(B\) et \(C\) seulement.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>7. À retenir</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Barre</strong> : \(mL^2/12\) au centre, \(mL^2/3\) à l'extrémité.</li>
+      <li><strong>Plaque plane</strong> : \(C=A+B\). <strong>Plaque rectangulaire</strong> : \(A=mb^2/3\), \(B=ma^2/3\).</li>
+      <li><strong>Quart de disque</strong> : \(G\) à \(4R/(3\pi)\) selon \(x\) et \(y\). Les intégrales en polaires donnent \(\pi/4\) et \(1/2\).</li>
+      <li><strong>Cylindre</strong> : \(I_{zz}=mR^2/2\), \(I_{xx}=I_{yy}=mR^2/4+mh^2/12\) au centre (\(h^2/3\) à la base).</li>
+      <li><strong>Perçage</strong> : soustraction des deux cylindres ; décalage = Huygens sur les axes perpendiculaires.</li>
+    </ul>
+  </div>
+
+  <footer>
+    Source : TD de transfert « Calcul de matrices d'inertie » (CPGE PT / S2I, Lycée Jean Zay, E. Bigeard, v1.9). Corrigé officiel adapté d'A. Chabert et A. Meurdefroid.
+    <a href="../assets/pdf.html?f=../documents/aem2-si/ch3-dynamique-solide/PFD-PT-TD-calcul_de_matrices_d_inertie-prof.pdf" target="_blank" rel="noopener">Ouvrir le corrigé (PDF)</a>.
+  </footer>
+
+</div>
+
+<script src="../assets/gate.js"></script>
+</body>
+</html>
