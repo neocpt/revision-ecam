@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Statique — réducteur à engrenages et touret de meulage (correction détaillée)</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  :root{
+    --bg:#fafafa; --text:#2d3748; --muted:#64748b; --title:#1a202c;
+    --accent:#0f766e; --accent-soft:#ccfbf1; --line:#e5e7eb; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--text);
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    font-size:17px; line-height:1.7}
+  .page{max-width:800px; margin:0 auto; padding:2.5rem 2rem 4rem}
+  .nav{display:flex; flex-wrap:wrap; gap:1rem; font-size:.92rem; margin-bottom:1.5rem}
+  .nav a{color:var(--accent); text-decoration:none; font-weight:600}
+  .nav a:hover{text-decoration:underline}
+  p, ul, ol{margin:0 0 1.5rem}
+  li{margin-bottom:.45rem}
+  strong{color:var(--title)}
+  h1{font-size:2.1rem; line-height:1.2; color:var(--title); margin:.6rem 0 .6rem}
+  h2{font-size:1.5rem; color:var(--title); margin:3.4rem 0 1.1rem; padding-bottom:.45rem;
+    border-bottom:2px solid var(--accent-soft)}
+  h3{font-size:1.15rem; color:var(--accent); margin:2.2rem 0 .7rem}
+  .kicker{font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
+  .lead{color:var(--muted); font-size:1.08rem; margin-bottom:2rem}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1.4rem 1.6rem; margin:1.5rem 0}
+  .card h3:first-child{margin-top:0}
+
+  /* ---- Question : texte à gauche, encadré méthode à droite ---- */
+  .qblock{display:grid; grid-template-columns:minmax(0,1fr) 250px; gap:1.8rem;
+    margin:2.4rem 0 0; padding-top:1.8rem; border-top:1px solid var(--line)}
+  .qblock.wide{grid-template-columns:minmax(0,1fr)}
+  .qtitle{font-size:1.2rem; font-weight:800; color:var(--title); margin:0 0 1rem}
+  .qnum{display:inline-block; background:var(--accent); color:#fff; border-radius:7px;
+    padding:.12rem .6rem; font-size:.9rem; margin-right:.5rem; vertical-align:middle}
+  .ask{background:#f8fafc; border-left:4px solid #94a3b8; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .ask .lab, .lab{display:block; font-size:.72rem; font-weight:800; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:.25rem}
+  .demarche{margin:0 0 1.2rem}
+  .calc{background:#fff; border:1px solid var(--line); border-radius:10px; padding:.8rem 1rem .4rem; margin:0 0 1.2rem; overflow-x:auto}
+  .res{background:#ecfdf5; border-left:4px solid #059669; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .res .lab{color:#047857}
+
+  .aside{align-self:start; border-radius:12px; padding:1rem 1.1rem; font-size:.93rem; line-height:1.55;
+    background:#f0fdfa; border:1px solid #99f6e4}
+  .aside.formula{background:#f5f3ff; border-color:#ddd6fe}
+  .aside.apply{background:#fffbeb; border-color:#fde68a}
+  .aside.piege{background:#fff1f2; border-color:#fecdd3}
+  .aside .lab{color:var(--accent); margin-bottom:.35rem}
+  .aside.formula .lab{color:#6d28d9}
+  .aside.apply .lab{color:#b45309}
+  .aside.piege .lab{color:#be123c}
+  .aside p, .aside ul{margin:0 0 .7rem}
+  .aside ul{padding-left:1.1rem}
+  .aside li{margin-bottom:.3rem}
+  .aside > :last-child{margin-bottom:0}
+
+  .warn{background:#fff7ed; border-left:4px solid #ea580c; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .warn .lab{color:#c2410c}
+  .info{background:#f0f9ff; border-left:4px solid #0284c7; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .info .lab{color:#0369a1}
+
+  figure{margin:1.4rem 0 1.8rem; text-align:center}
+  figure img{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:10px; padding:.5rem}
+  figcaption{font-size:.88rem; color:var(--muted); margin-top:.5rem; line-height:1.5}
+
+  table{width:100%; border-collapse:collapse; margin:.6rem 0 1.4rem; font-size:.93rem; background:#fff}
+  th, td{border:1px solid var(--line); padding:.5rem .6rem; text-align:center}
+  th{background:#f1f5f9; color:var(--title)}
+  td.l, th.l{text-align:left}
+
+  .steps{counter-reset:s; list-style:none; padding:0; margin:0 0 1.5rem}
+  .steps li{counter-increment:s; position:relative; padding:.2rem 0 .2rem 2.7rem; margin-bottom:.9rem}
+  .steps li::before{content:counter(s); position:absolute; left:0; top:.1rem; width:1.9rem; height:1.9rem;
+    border-radius:50%; background:var(--accent-soft); color:var(--accent); font-weight:800; text-align:center; line-height:1.9rem}
+
+  footer{margin-top:3.5rem; padding-top:1.2rem; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem}
+  footer a{color:var(--accent)}
+  mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%}
+
+  @media (max-width:680px){
+    body{font-size:16px}
+    .page{padding:1.6rem 1.1rem 3rem}
+    h1{font-size:1.65rem}
+    h2{font-size:1.3rem; margin-top:2.6rem}
+    .qblock{grid-template-columns:1fr; gap:1rem}
+  }
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+<div class="page">
+
+  <nav class="nav">
+    <a href="../index.html#am2">← Accueil</a>
+    <a href="ch8-camion-grue.html">← Camion grue</a>
+
+  </nav>
+
+  <div class="kicker">AM2 · SI · Statique (PFS) — exercices de révision « réducteur à engrenages » et « touret de meulage »</div>
+  <h1>Statique : réducteur à engrenages et touret de meulage</h1>
+  <p class="lead">Deux exercices de statique : on isole l'arbre ou l'ensemble, on écrit le PFS au bon point, et on résout le système de six équations.</p>
+
+  <!-- ============================================================ -->
+  <h2>1. Avant de commencer : l'essentiel</h2>
+  <div class="card">
+    <h3>Méthode commune aux deux exercices</h3>
+    <ol>
+      <li><strong>Isoler</strong> le système (arbre seul, ou arbre + poulie + meule) et faire le bilan des actions extérieures, en donnant chaque torseur à son point d'application.</li>
+      <li><strong>Choisir un point de réduction</strong> : on prend les moments au point où se trouve une liaison inconnue (ici \(A\), la rotule). Ses inconnues disparaissent de l'équation de moment.</li>
+      <li><strong>Transporter</strong> les moments : \(\vec M_A(\vec F)=\vec M_P(\vec F)+\overrightarrow{AP}\wedge\vec F\). Attention, un moment pur (couple) ne change pas quand on change de point.</li>
+      <li><strong>Résoudre</strong> le système de six équations (trois résultantes, trois moments) dans l'ordre le plus simple.</li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>2. Réducteur à engrenages : arbre (1) en statique</h2>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Torseurs des actions extérieures sur l'arbre</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Donner les torseurs des actions extérieures sur l'arbre 1, en \(A\), \(B\), \(D\), \(C\) et \(E\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Rotule en \(A\)</strong> : trois résultantes inconnues \(X_A\), \(Y_A\), \(Z_A\), pas de moment.</li>
+        <li><strong>Linéaire annulaire en \(C\)</strong> : pas d'effort selon \(\vec x\), donc \(Y_C\) et \(Z_C\) comme résultantes, sans moment.</li>
+        <li><strong>Engrènement en \(D\)</strong> : l'effort \(\vec F_{2/1}=F_R\vec y+F_T\vec z\) appliqué au pignon.</li>
+        <li><strong>Moteur en \(E\)</strong> : un couple pur \(C_m\) selon \(\vec x\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> Torseurs en \(A\) : \(\{X_A,Y_A,Z_A\}\) sans moment ; en \(C\) : \(\{Y_C,Z_C\}\) ; en \(D\) : \(\{F_R,F_T\}\) ; en \(E\) : \(C_m\). L'effort de l'engrènement est donné dans l'énoncé.</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q2</span>Résolution par le PFS en \(A\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Appliquer le PFS au point \(A\) pour trouver \(X_A\), \(Y_A\), \(Z_A\), \(Y_C\), \(Z_C\) et \(F_T\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Résultantes : \(X_A=0\) ; \(Y_A+Y_C+F_R=0\) ; \(Z_A+Z_C+F_T=0\).</li>
+        <li>Moments en \(A\) : le moteur donne \(C_m\) ; le transport des efforts de \(C\) et de \(D\) donne les bras \(\overrightarrow{AC}=-440\vec x\) et \(\overrightarrow{AD}=-220\vec x+56\vec y\).</li>
+        <li>Moment selon \(\vec x\) : \(C_m-56F_T=0\), donc \(F_T=C_m/56\).</li>
+        <li>Moments selon \(\vec y\) et \(\vec z\) : \(-440Z_C-220F_T=0\) et \(440Y_C+220F_R=0\).</li>
+      </ol>
+      <div class="calc">
+        \[F_T=\dfrac{C_m}{56}=\dfrac{56\,000}{56}=1\,000\ \text N\]
+        \[Z_C=-\dfrac{F_T}{2}=-500\ \text N\qquad Y_C=-\dfrac{F_R}{2}=-182\ \text N\]
+        \[Z_A=-Z_C-F_T=-500\ \text N\qquad Y_A=-Y_C-F_R=-182\ \text N\qquad X_A=0\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span> \(X_A=0\), \(Y_A=-182\) N, \(Z_A=-500\) N, \(Y_C=-182\) N, \(Z_C=-500\) N, \(F_T=1\,000\) N.</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Les efforts de la liaison linéaire annulaire en \(C\) ne comportent pas de moment : seul le bras \(\overrightarrow{AC}\) crée un moment.</li>
+        <li>Le couple moteur \(C_m\) est donné en N·mm, le rayon en mm : le quotient donne des newtons.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>3. Touret de meulage : système (1 + 2 + 3) en statique</h2>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Torseurs sur le système \(S=\{1+2+3\}\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Donner les torseurs des actions extérieures sur \(S\) aux points \(O\), \(D\), \(A\), \(C\) et \(B\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Rotule \(A\)</strong> : \(X_A\), \(Y_A\), \(Z_A\). <strong>Linéaire annulaire \(C\)</strong> : \(Y_C\), \(Z_C\).</li>
+        <li><strong>Poids de la meule</strong> en \(O\) : \(-p\vec z\) (sens vertical, valeur \(p\)).</li>
+        <li><strong>Courroie</strong> en \(B\) : résultante \(-(T+t)\vec z\) et moment \((T-t)R_p\) autour de \(\vec x\).</li>
+        <li><strong>Outil à affûter</strong> en \(O\) (sur la meule) : \(F_R\vec y+F_T\vec z\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> Six torseurs, un par action. Le plus délicat est la courroie : elle donne à la fois une force et un moment autour de l'axe de l'arbre.</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q2</span>Résolution par le PFS en \(A\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Appliquer le PFS au point \(A\) et déterminer \(X_A\), \(Y_A\), \(Z_A\), \(Y_C\), \(Z_C\) et la tension \(T\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Transport des moments en \(A\), puis projection. Il y a 6 équations pour 6 inconnues : \(X_A\), \(Y_A\), \(Z_A\), \(Y_C\), \(Z_C\) et \(T\) (avec \(t\)).</li>
+        <li>Moment selon \(\vec x\) : la courroie donne \(F_T R_m=R_p(T-t)\), c'est-à-dire un lien entre \(F_T\) et \(T-t\).</li>
+        <li>La relation des brins de courroie donne \(T=4t\). En combinant : \(F_TR_m=3tR_p\), donc \(t=\dfrac{F_TR_m}{3R_p}\).</li>
+        <li>Les autres équations donnent successivement \(Y_C\), \(Z_C\), \(Y_A\) et \(Z_A\).</li>
+      </ol>
+      <div class="calc">
+        \[t=\dfrac{110\times75}{3\times22}=125\ \text N,\qquad T=4t=500\ \text N\]
+        \[Y_C=\dfrac{100\,F_R}{240}=\dfrac{100\times16}{240}\approx6{,}7\ \text N\]
+        \[Z_C=\dfrac{-100\,p+330\,(T+t)+100\,F_T}{240}=\dfrac{-1000+206\,250+11\,000}{240}\approx901\ \text N\]
+        \[Y_A=-F_R-Y_C\approx-22{,}7\ \text N,\qquad Z_A=(T+t)+p-Z_C-F_T\approx-376\ \text N,\qquad X_A=0\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span> \(T=500\) N, \(t=125\) N, \(Y_C\approx6{,}7\) N, \(Z_C\approx901\) N, \(Y_A\approx-22{,}7\) N, \(Z_A\approx-376\) N, \(X_A=0\).</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>La tension \(T\) est trouvée à partir du moment, pas de la résultante : on passe par la relation entre les brins \(T=4t\).</li>
+        <li>Les valeurs numériques sont très sensibles aux unités : tout est en newtons et millimètres dans l'énoncé.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>4. À retenir</h2>
+  <div class="card">
+    <ul>
+      <li>Un bon point de réduction (la rotule \(A\)) supprime l'essentiel des inconnues dans l'équation de moment.</li>
+      <li>Un couple pur (moteur, courroie) ne change pas quand on change de point : seule la partie force crée un moment supplémentaire.</li>
+      <li>Vérifier le système en réinjectant les résultats dans une équation qu'on n'a pas utilisée.</li>
+    </ul>
+  </div>
+
+
+  <footer>
+    Source : exercices de révision « Statique d'un réducteur à engrenages » et « Statique d'un touret de meulage » (S2I, fichiers téléchargés). Corrigés repris, expliqués dans mes propres mots.
+  </footer>
+
+</div>
+
+<script src="../assets/gate.js"></script>
+</body>
+</html>
