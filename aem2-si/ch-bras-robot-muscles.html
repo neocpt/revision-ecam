@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bras de robot à muscles artificiels — analyse harmonique (correction détaillée)</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  :root{
+    --bg:#fafafa; --text:#2d3748; --muted:#64748b; --title:#1a202c;
+    --accent:#0f766e; --accent-soft:#ccfbf1; --line:#e5e7eb; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--text);
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    font-size:17px; line-height:1.7}
+  .page{max-width:800px; margin:0 auto; padding:2.5rem 2rem 4rem}
+  .nav{display:flex; flex-wrap:wrap; gap:1rem; font-size:.92rem; margin-bottom:1.5rem}
+  .nav a{color:var(--accent); text-decoration:none; font-weight:600}
+  .nav a:hover{text-decoration:underline}
+  p, ul, ol{margin:0 0 1.5rem}
+  li{margin-bottom:.45rem}
+  strong{color:var(--title)}
+  h1{font-size:2.1rem; line-height:1.2; color:var(--title); margin:.6rem 0 .6rem}
+  h2{font-size:1.5rem; color:var(--title); margin:3.4rem 0 1.1rem; padding-bottom:.45rem;
+    border-bottom:2px solid var(--accent-soft)}
+  h3{font-size:1.15rem; color:var(--accent); margin:2.2rem 0 .7rem}
+  .kicker{font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
+  .lead{color:var(--muted); font-size:1.08rem; margin-bottom:2rem}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1.4rem 1.6rem; margin:1.5rem 0}
+  .card h3:first-child{margin-top:0}
+
+  /* ---- Question : texte à gauche, encadré méthode à droite ---- */
+  .qblock{display:grid; grid-template-columns:minmax(0,1fr) 250px; gap:1.8rem;
+    margin:2.4rem 0 0; padding-top:1.8rem; border-top:1px solid var(--line)}
+  .qblock.wide{grid-template-columns:minmax(0,1fr)}
+  .qtitle{font-size:1.2rem; font-weight:800; color:var(--title); margin:0 0 1rem}
+  .qnum{display:inline-block; background:var(--accent); color:#fff; border-radius:7px;
+    padding:.12rem .6rem; font-size:.9rem; margin-right:.5rem; vertical-align:middle}
+  .ask{background:#f8fafc; border-left:4px solid #94a3b8; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .ask .lab, .lab{display:block; font-size:.72rem; font-weight:800; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:.25rem}
+  .demarche{margin:0 0 1.2rem}
+  .calc{background:#fff; border:1px solid var(--line); border-radius:10px; padding:.8rem 1rem .4rem; margin:0 0 1.2rem; overflow-x:auto}
+  .res{background:#ecfdf5; border-left:4px solid #059669; border-radius:8px; padding:.8rem 1rem; margin:0 0 1.2rem}
+  .res .lab{color:#047857}
+
+  .aside{align-self:start; border-radius:12px; padding:1rem 1.1rem; font-size:.93rem; line-height:1.55;
+    background:#f0fdfa; border:1px solid #99f6e4}
+  .aside.formula{background:#f5f3ff; border-color:#ddd6fe}
+  .aside.apply{background:#fffbeb; border-color:#fde68a}
+  .aside.piege{background:#fff1f2; border-color:#fecdd3}
+  .aside .lab{color:var(--accent); margin-bottom:.35rem}
+  .aside.formula .lab{color:#6d28d9}
+  .aside.apply .lab{color:#b45309}
+  .aside.piege .lab{color:#be123c}
+  .aside p, .aside ul{margin:0 0 .7rem}
+  .aside ul{padding-left:1.1rem}
+  .aside li{margin-bottom:.3rem}
+  .aside > :last-child{margin-bottom:0}
+
+  .warn{background:#fff7ed; border-left:4px solid #ea580c; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .warn .lab{color:#c2410c}
+  .info{background:#f0f9ff; border-left:4px solid #0284c7; border-radius:8px; padding:.8rem 1rem; margin:1.2rem 0}
+  .info .lab{color:#0369a1}
+
+  figure{margin:1.4rem 0 1.8rem; text-align:center}
+  figure img{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:10px; padding:.5rem}
+  figcaption{font-size:.88rem; color:var(--muted); margin-top:.5rem; line-height:1.5}
+
+  table{width:100%; border-collapse:collapse; margin:.6rem 0 1.4rem; font-size:.93rem; background:#fff}
+  th, td{border:1px solid var(--line); padding:.5rem .6rem; text-align:center}
+  th{background:#f1f5f9; color:var(--title)}
+  td.l, th.l{text-align:left}
+
+  .steps{counter-reset:s; list-style:none; padding:0; margin:0 0 1.5rem}
+  .steps li{counter-increment:s; position:relative; padding:.2rem 0 .2rem 2.7rem; margin-bottom:.9rem}
+  .steps li::before{content:counter(s); position:absolute; left:0; top:.1rem; width:1.9rem; height:1.9rem;
+    border-radius:50%; background:var(--accent-soft); color:var(--accent); font-weight:800; text-align:center; line-height:1.9rem}
+
+  footer{margin-top:3.5rem; padding-top:1.2rem; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem}
+  footer a{color:var(--accent)}
+  mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%}
+
+  @media (max-width:680px){
+    body{font-size:16px}
+    .page{padding:1.6rem 1.1rem 3rem}
+    h1{font-size:1.65rem}
+    h2{font-size:1.3rem; margin-top:2.6rem}
+    .qblock{grid-template-columns:1fr; gap:1rem}
+  }
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+<div class="page">
+
+  <nav class="nav">
+    <a href="../index.html#am2">← Accueil</a>
+
+  </nav>
+
+  <div class="kicker">AM2 · SI · Analyse harmonique des SLCI — TD « Bras de robot à muscles artificiels »</div>
+  <h1>Bras de robot à muscles artificiels : modèle, Bode et stabilité</h1>
+  <p class="lead">Un bras articulé par deux muscles en opposition. On écrit les équations, on identifie le modulateur, puis on règle le correcteur proportionnel par les diagrammes de Bode.</p>
+
+  <!-- ============================================================ -->
+  <h2>1. Avant de commencer : l'essentiel</h2>
+  <div class="card">
+    <h3>Modèle d'un bras articulé par deux muscles en opposition</h3>
+    <ul>
+      <li><strong>Principe</strong> : la différence de pression \(p_1-p_2\) entre les deux muscles crée un couple moteur \(C_m\). Le signe de \(p_1-p_2\) donne le sens de rotation.</li>
+      <li><strong>Équation mécanique</strong> : \(C_m-C_{ext}=I_e\ddot\theta\), avec \(C_m=K_4(p_1-p_2)-K_5\theta-K_7\dot\theta\) (raideur \(K_5\), amortissement \(K_7\)).</li>
+      <li><strong>Passage en Laplace</strong> : avec des conditions initiales nulles, \(\dot{}\to p\) et \(\ddot{}\to p^2\). On obtient deux fonctions de transfert : \(H_m(p)\) (couple des muscles) et \(H_b(p)\) (bras seul).</li>
+      <li><strong>Boucle</strong> : un correcteur \(H_c\) pilote un modulateur de pression \(H_M\) à partir de l'écart \(\varepsilon\) entre consigne et angle réel.</li>
+    </ul>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>2. Modélisation du bras (questions 1 à 4)</h2>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Sens de rotation</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Montrer que le bras tourne grâce à la différence de pressions \(p_1-p_2\), et donner le sens de rotation selon son signe.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Un muscle sous pression se raccourcit (la vessie gonfle, la tresse se contracte). Le muscle le plus pressurisé tire donc plus fort.</li>
+        <li>Les deux muscles s'opposent autour de l'articulation : leurs efforts forment un couple, proportionnel à \(p_1-p_2\).</li>
+        <li>Si \(p_1>p_2\), le couple tourne le bras dans un sens, et \(\dot\theta>0\). Si \(p_1<p_2\), le sens s'inverse.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> Le bras tourne dans le sens du muscle le plus pressurisé. Le signe de \(\dot\theta\) suit celui de \(p_1-p_2\).</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3–Q4</span>Transformées de Laplace et fonctions de transfert</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Passer les équations (1) et (2) en Laplace, puis en déduire \(H_m(p)\) et \(H_b(p)\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Conditions initiales nulles : \(\ddot\theta\to p^2\Theta\), \(\dot\theta\to p\Theta\).</li>
+        <li>On obtient \(C_m(p)-C_{ext}(p)=I_ep^2\Theta(p)\) et \(C_m(p)=K_4(P_1-P_2)-K_5\Theta-K_7p\Theta\).</li>
+        <li>En remplaçant \(C_m\) : \(\Theta(p)\big(I_ep^2+K_7p+K_5\big)=K_4(P_1-P_2)-C_{ext}\).</li>
+      </ol>
+      <div class="calc">
+        \[H_m(p)=\dfrac{K_4}{I_ep^2+K_7p+K_5}\qquad\qquad H_b(p)=\dfrac{1}{I_ep^2+K_7p+K_5}\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span> \(\Theta(p)=H_b(p)\big[H_m(p)\cdots\big]\) : les deux fonctions de transfert ont le même dénominateur, celui du second ordre du bras.</div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>Un second ordre s'écrit \(\dfrac{K}{1+\frac{2\xi}{\omega_0}p+\frac{p^2}{\omega_0^2}}\). Il suffit d'identifier \(\omega_0\) et \(\xi\) avec les coefficients du dénominateur.</p>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>3. Modulateur de pression (questions 5 et 6)</h2>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q5–Q6</span>Modèle du premier ordre et identification</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Justifier un modèle du premier ordre \(H_M=\dfrac{K_M}{1+T_Mp}\) sur la bande \([0;25]\) rad/s, puis identifier \(K_M\) et \(T_M\) sur les diagrammes de Bode.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Sur la bande étudiée, le gain décroît à \(-20\) dB/décade et la phase reste comprise entre 0 et \(-90^\circ\) : c'est la signature d'un premier ordre.</li>
+        <li>\(K_M\) se lit sur le gain aux basses fréquences (asymptote horizontale) : \(K_M=0{,}2\) bar/V.</li>
+        <li>\(T_M\) se lit à la cassure, où la pulsation de coupure vaut \(1/T_M\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> \(K_M=0{,}2\) bar/V. Pour la constante de temps, le corrigé écrit \(T_M=10\) rad/s : c'est en fait la <strong>pulsation de cassure</strong>, donc \(T_M=1/10=0{,}1\) s. Cette confusion est à retenir.</div>
+      <div class="warn"><span class="lab">⚠️ Incohérence du corrigé</span> La forme numérique retenue plus loin, \((1+0{,}06p)\), ne correspond pas exactement à \(T_M=0{,}1\) s. Il faut vérifier \(T_M\) avant de l'utiliser dans un calcul.</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>4. Correcteur proportionnel (questions 7 à 9)</h2>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q7</span>Fonction de transfert en boucle ouverte</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Écrire \(H_{BO}(p)\) avec \(H_c=K\) et \(C_{ext}=0\), puis identifier \(K_{BO}\), \(\xi\) et \(\omega_0\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>\(H_{BO}=H_c\cdot H_M\cdot K_4\cdot H_b=\dfrac{K\,K_M\,K_4}{(1+T_Mp)(I_ep^2+K_7p+K_5)}\).</li>
+        <li>On met le second ordre sous forme canonique : \(\omega_0=\sqrt{K_5/I_e}\) et \(\xi=\dfrac{K_7}{2\sqrt{K_5I_e}}\).</li>
+        <li>Le gain statique est \(K_{BO}=\dfrac{K_4K_MK}{K_5}\).</li>
+      </ol>
+      <div class="calc">
+        \[K_{BO}=\dfrac{K_4K_MK}{K_5},\qquad\xi=\dfrac{K_7}{2\sqrt{K_5I_e}},\qquad\omega_0=\sqrt{\dfrac{K_5}{I_e}}\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span> Forme demandée : \(H_{BO}=K_{BO}\dfrac{1+T_Mp}{\ldots}\) avec les expressions ci-dessus.</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q8</span>Valeurs numériques, résonance</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Calculer \(\xi\) et \(\omega_0\) numériquement. Quel phénomène apparaît sur le diagramme de gain ?</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>\(\omega_0=\sqrt{5/0{,}5}=\sqrt{10}\approx3{,}16\) rad/s.</li>
+        <li>\(\xi=\dfrac{0{,}8}{2\sqrt{5\times0{,}5}}=\dfrac{0{,}8}{3{,}16}\approx0{,}25\).</li>
+        <li>\(\xi<\dfrac{\sqrt2}{2}\approx0{,}707\) : le second ordre est peu amorti, il présente une <strong>résonance</strong> (bosse) autour de \(\omega_0\).</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> \(\xi\approx0{,}25\), \(\omega_0\approx3{,}16\) rad/s. Il y a une résonance sur le diagramme de gain, à la pulsation \(\omega_0\).</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q11</span>Marge de gain</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Avec le diagramme de Bode réel pour \(K=1\), indiquer si le système vérifie le premier critère de stabilité, et donner la marge de gain.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Le premier critère : le gain doit être négatif (en dB) quand la phase vaut \(-180^\circ\). On lit cette pulsation, environ \(6\) rad/s.</li>
+        <li>À cette pulsation, le gain vaut environ \(-23\) dB : le critère est vérifié.</li>
+        <li>Marge de gain : \(MG=0-G_{dB}\approx23\) dB.</li>
+        <li>Pour \(K=1\), il n'y a pas de pulsation de coupure (gain toujours négatif) : le second critère est vérifié aussi, le système est stable.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> Système stable, marge de gain d'environ \(23\) dB.</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q12–Q13</span>Réglage du gain pour une marge de phase de 45°</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Comment évolue le diagramme quand \(K\) augmente ? Quelle valeur de \(K\) donne une phase de \(-135^\circ\) à la pulsation de coupure ?</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Augmenter \(K\) (positif) déplace le diagramme de gain vers le haut, sans modifier la phase.</li>
+        <li>On cherche la pulsation où la phase vaut \(-135^\circ\) : environ \(3{,}7\) rad/s, où le gain vaut \(-11\) dB.</li>
+        <li>Il faut donc \(20\log K=11\) dB, soit \(K\approx3{,}5\). Le corrigé écrit \(20\log K=10\), ce qui donne \(K\approx3{,}2\) : écart d'arrondi.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> \(K\approx3{,}5\) (marge de phase 45°).</div>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q14–Q15</span>Erreur statique en réponse à un échelon</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer l'erreur statique \(\varepsilon_s\) pour un échelon \(\theta_0=1\) rad, puis vérifier sur la réponse indicielle pour \(K=1\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Théorème de la valeur finale : \(\varepsilon_s=\lim_{p\to0}p\,\varepsilon(p)=\theta_0\big(1-\text{FTBF}(0)\big)\).</li>
+        <li>\(\text{FTBF}(0)=\dfrac{H_{BO}(0)}{1+H_{BO}(0)}\) avec \(H_{BO}(0)=0{,}2K\) : on trouve \(\varepsilon_s=\dfrac{1}{1+0{,}2K}\).</li>
+        <li>Pour \(K=1\) : \(\varepsilon_s=\dfrac{1}{1{,}2}\approx0{,}833\) rad. La valeur finale vaut donc \(1-0{,}833\approx0{,}167\), ce qui est bien lu sur la réponse indicielle.</li>
+      </ol>
+      <div class="res"><span class="lab">Réponse</span> \(\varepsilon_s=\dfrac{1}{1+0{,}2K}\). Pour \(K=1\), \(\varepsilon_s\approx0{,}83\) rad.</div>
+      <div class="warn"><span class="lab">⚠️ Erreur dans le corrigé</span> Le corrigé affirme que pour \(K=5\) l'erreur statique est nulle. Avec la formule ci-dessus, \(K=5\) donne \(\varepsilon_s=1/(1+1)=0{,}5\) rad, pas zéro. Pour une erreur nulle, il faudrait un intégrateur dans la chaîne. Et pour \(K=3{,}5\), l'erreur reste \(\approx0{,}59\) rad, ce qui est très grand.</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <p>Un correcteur proportionnel ne supprime jamais l'erreur statique sur un système sans intégrateur : il la réduit seulement quand \(K\) augmente.</p>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>5. Suite du TD (non traitée ici)</h2>
+  <div class="info"><span class="lab">À faire</span> Les questions suivantes (correction par un correcteur plus élaboré, étude de la réponse indicielle) ne sont pas encore rédigées sur cette page.</div>
+
+
+  <footer>
+    Source : TD 4 « Analyse harmonique des SLCI — Bras de robot à muscles artificiels » (S2I, CPGE MPSI). Corrigé repris, expliqué dans mes propres mots ; erreurs du corrigé signalées.
+  </footer>
+
+</div>
+
+<script src="../assets/gate.js"></script>
+</body>
+</html>
