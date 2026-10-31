@@ -109,166 +109,166 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
   <p class="lead">Un bras articulé par deux muscles en opposition. On écrit les équations, on identifie le modulateur, puis on règle le correcteur proportionnel par les diagrammes de Bode.</p>
 
   <!-- ============================================================ -->
-  <h2>1. Avant de commencer : l'essentiel</h2>
-  <div class="card">
-    <h3>Modèle d'un bras articulé par deux muscles en opposition</h3>
-    <ul>
-      <li><strong>Principe</strong> : la différence de pression \(p_1-p_2\) entre les deux muscles crée un couple moteur \(C_m\). Le signe de \(p_1-p_2\) donne le sens de rotation.</li>
-      <li><strong>Équation mécanique</strong> : \(C_m-C_{ext}=I_e\ddot\theta\), avec \(C_m=K_4(p_1-p_2)-K_5\theta-K_7\dot\theta\) (raideur \(K_5\), amortissement \(K_7\)).</li>
-      <li><strong>Passage en Laplace</strong> : avec des conditions initiales nulles, \(\dot{}\to p\) et \(\ddot{}\to p^2\). On obtient deux fonctions de transfert : \(H_m(p)\) (couple des muscles) et \(H_b(p)\) (bras seul).</li>
-      <li><strong>Boucle</strong> : un correcteur \(H_c\) pilote un modulateur de pression \(H_M\) à partir de l'écart \(\varepsilon\) entre consigne et angle réel.</li>
+  &lt;h2>1. Avant de commencer : l'essentiel</h2>
+  &lt;div class="card">
+    &lt;h3>Modèle d'un bras articulé par deux muscles en opposition</h3>
+    &lt;ul>
+      &lt;li>&lt;strong>Principe</strong> : la différence de pression \(p_1-p_2\) entre les deux muscles crée un couple moteur \(C_m\). Le signe de \(p_1-p_2\) donne le sens de rotation.</li>
+      &lt;li>&lt;strong>Équation mécanique</strong> : \(C_m-C_{ext}=I_e\ddot\theta\), avec \(C_m=K_4(p_1-p_2)-K_5\theta-K_7\dot\theta\) (raideur \(K_5\), amortissement \(K_7\)).</li>
+      &lt;li>&lt;strong>Passage en Laplace</strong> : avec des conditions initiales nulles, \(\dot{}\to p\) et \(\ddot{}\to p^2\). On obtient deux fonctions de transfert : \(H_m(p)\) (couple des muscles) et \(H_b(p)\) (bras seul).</li>
+      &lt;li>&lt;strong>Boucle</strong> : un correcteur \(H_c\) pilote un modulateur de pression \(H_M\) à partir de l'écart \(\varepsilon\) entre consigne et angle réel.</li>
     </ul>
   </div>
 
   <!-- ============================================================ -->
-  <h2>2. Modélisation du bras (questions 1 à 4)</h2>
+  &lt;h2>2. Modélisation du bras (questions 1 à 4)</h2>
 
-  <div class="qblock">
-    <div>
-      <p class="qtitle"><span class="qnum">Q1</span>Sens de rotation</p>
-      <div class="ask"><span class="lab">La question en clair</span>
+  &lt;div class="qblock">
+    &lt;div>
+      &lt;p class="qtitle">&lt;span class="qnum">Q1</span>Sens de rotation</p>
+      &lt;div class="ask">&lt;span class="lab">La question en clair</span>
         Montrer que le bras tourne grâce à la différence de pressions \(p_1-p_2\), et donner le sens de rotation selon son signe.</div>
-      <p class="demarche"><span class="lab">Démarche</span></p>
-      <ol>
-        <li>Un muscle sous pression se raccourcit (la vessie gonfle, la tresse se contracte). Le muscle le plus pressurisé tire donc plus fort.</li>
-        <li>Les deux muscles s'opposent autour de l'articulation : leurs efforts forment un couple, proportionnel à \(p_1-p_2\).</li>
-        <li>Si \(p_1>p_2\), le couple tourne le bras dans un sens, et \(\dot\theta>0\). Si \(p_1<p_2\), le sens s'inverse.</li>
+      &lt;p class="demarche">&lt;span class="lab">Démarche</span></p>
+      &lt;ol>
+        &lt;li>Un muscle sous pression se raccourcit (la vessie gonfle, la tresse se contracte). Le muscle le plus pressurisé tire donc plus fort.</li>
+        &lt;li>Les deux muscles s'opposent autour de l'articulation : leurs efforts forment un couple, proportionnel à \(p_1-p_2\).</li>
+        &lt;li>Si \(p_1>p_2\), le couple tourne le bras dans un sens, et \(\dot\theta>0\). Si \(p_1&lt;p_2\), le sens s'inverse.</li>
       </ol>
-      <div class="res"><span class="lab">Réponse</span> Le bras tourne dans le sens du muscle le plus pressurisé. Le signe de \(\dot\theta\) suit celui de \(p_1-p_2\).</div>
+      &lt;div class="res">&lt;span class="lab">Réponse</span> Le bras tourne dans le sens du muscle le plus pressurisé. Le signe de \(\dot\theta\) suit celui de \(p_1-p_2\).</div>
     </div>
   </div>
 
-  <div class="qblock">
-    <div>
-      <p class="qtitle"><span class="qnum">Q3–Q4</span>Transformées de Laplace et fonctions de transfert</p>
-      <div class="ask"><span class="lab">La question en clair</span>
+  &lt;div class="qblock">
+    &lt;div>
+      &lt;p class="qtitle">&lt;span class="qnum">Q3–Q4</span>Transformées de Laplace et fonctions de transfert</p>
+      &lt;div class="ask">&lt;span class="lab">La question en clair</span>
         Passer les équations (1) et (2) en Laplace, puis en déduire \(H_m(p)\) et \(H_b(p)\).</div>
-      <p class="demarche"><span class="lab">Démarche</span></p>
-      <ol>
-        <li>Conditions initiales nulles : \(\ddot\theta\to p^2\Theta\), \(\dot\theta\to p\Theta\).</li>
-        <li>On obtient \(C_m(p)-C_{ext}(p)=I_ep^2\Theta(p)\) et \(C_m(p)=K_4(P_1-P_2)-K_5\Theta-K_7p\Theta\).</li>
-        <li>En remplaçant \(C_m\) : \(\Theta(p)\big(I_ep^2+K_7p+K_5\big)=K_4(P_1-P_2)-C_{ext}\).</li>
+      &lt;p class="demarche">&lt;span class="lab">Démarche</span></p>
+      &lt;ol>
+        &lt;li>Conditions initiales nulles : \(\ddot\theta\to p^2\Theta\), \(\dot\theta\to p\Theta\).</li>
+        &lt;li>On obtient \(C_m(p)-C_{ext}(p)=I_ep^2\Theta(p)\) et \(C_m(p)=K_4(P_1-P_2)-K_5\Theta-K_7p\Theta\).</li>
+        &lt;li>En remplaçant \(C_m\) : \(\Theta(p)\big(I_ep^2+K_7p+K_5\big)=K_4(P_1-P_2)-C_{ext}\).</li>
       </ol>
-      <div class="calc">
+      &lt;div class="calc">
         \[H_m(p)=\dfrac{K_4}{I_ep^2+K_7p+K_5}\qquad\qquad H_b(p)=\dfrac{1}{I_ep^2+K_7p+K_5}\]
       </div>
-      <div class="res"><span class="lab">Réponse</span> \(\Theta(p)=H_b(p)\big[H_m(p)\cdots\big]\) : les deux fonctions de transfert ont le même dénominateur, celui du second ordre du bras.</div>
+      &lt;div class="res">&lt;span class="lab">Réponse</span> \(\Theta(p)=H_b(p)\big[H_m(p)\cdots\big]\) : les deux fonctions de transfert ont le même dénominateur, celui du second ordre du bras.</div>
     </div>
-    <aside class="aside formula">
-      <span class="lab">Formule à savoir</span>
-      <p>Un second ordre s'écrit \(\dfrac{K}{1+\frac{2\xi}{\omega_0}p+\frac{p^2}{\omega_0^2}}\). Il suffit d'identifier \(\omega_0\) et \(\xi\) avec les coefficients du dénominateur.</p>
+    &lt;aside class="aside formula">
+      &lt;span class="lab">Formule à savoir</span>
+      &lt;p>Un second ordre s'écrit \(\dfrac{K}{1+\frac{2\xi}{\omega_0}p+\frac{p^2}{\omega_0^2}}\). Il suffit d'identifier \(\omega_0\) et \(\xi\) avec les coefficients du dénominateur.</p>
     </aside>
   </div>
 
   <!-- ============================================================ -->
-  <h2>3. Modulateur de pression (questions 5 et 6)</h2>
+  &lt;h2>3. Modulateur de pression (questions 5 et 6)</h2>
 
-  <div class="qblock">
-    <div>
-      <p class="qtitle"><span class="qnum">Q5–Q6</span>Modèle du premier ordre et identification</p>
-      <div class="ask"><span class="lab">La question en clair</span>
+  &lt;div class="qblock">
+    &lt;div>
+      &lt;p class="qtitle">&lt;span class="qnum">Q5–Q6</span>Modèle du premier ordre et identification</p>
+      &lt;div class="ask">&lt;span class="lab">La question en clair</span>
         Justifier un modèle du premier ordre \(H_M=\dfrac{K_M}{1+T_Mp}\) sur la bande \([0;25]\) rad/s, puis identifier \(K_M\) et \(T_M\) sur les diagrammes de Bode.</div>
-      <p class="demarche"><span class="lab">Démarche</span></p>
-      <ol>
-        <li>Sur la bande étudiée, le gain décroît à \(-20\) dB/décade et la phase reste comprise entre 0 et \(-90^\circ\) : c'est la signature d'un premier ordre.</li>
-        <li>\(K_M\) se lit sur le gain aux basses fréquences (asymptote horizontale) : \(K_M=0{,}2\) bar/V.</li>
-        <li>\(T_M\) se lit à la cassure, où la pulsation de coupure vaut \(1/T_M\).</li>
+      &lt;p class="demarche">&lt;span class="lab">Démarche</span></p>
+      &lt;ol>
+        &lt;li>Sur la bande étudiée, le gain décroît à \(-20\) dB/décade et la phase reste comprise entre 0 et \(-90^\circ\) : c'est la signature d'un premier ordre.</li>
+        &lt;li>\(K_M\) se lit sur le gain aux basses fréquences (asymptote horizontale) : \(K_M=0{,}2\) bar/V.</li>
+        &lt;li>\(T_M\) se lit à la cassure, où la pulsation de coupure vaut \(1/T_M\).</li>
       </ol>
-      <div class="res"><span class="lab">Réponse</span> \(K_M=0{,}2\) bar/V. Pour la constante de temps, le corrigé écrit \(T_M=10\) rad/s : c'est en fait la <strong>pulsation de cassure</strong>, donc \(T_M=1/10=0{,}1\) s. Cette confusion est à retenir.</div>
-      <div class="warn"><span class="lab">⚠️ Incohérence du corrigé</span> La forme numérique retenue plus loin, \((1+0{,}06p)\), ne correspond pas exactement à \(T_M=0{,}1\) s. Il faut vérifier \(T_M\) avant de l'utiliser dans un calcul.</div>
+      &lt;div class="res">&lt;span class="lab">Réponse</span> \(K_M=0{,}2\) bar/V. Pour la constante de temps, le corrigé écrit \(T_M=10\) rad/s : c'est en fait la &lt;strong>pulsation de cassure</strong>, donc \(T_M=1/10=0{,}1\) s. Cette confusion est à retenir.</div>
+      &lt;div class="warn">&lt;span class="lab">⚠️ Incohérence du corrigé</span> La forme numérique retenue plus loin, \((1+0{,}06p)\), ne correspond pas exactement à \(T_M=0{,}1\) s. Il faut vérifier \(T_M\) avant de l'utiliser dans un calcul.</div>
     </div>
   </div>
 
   <!-- ============================================================ -->
-  <h2>4. Correcteur proportionnel (questions 7 à 9)</h2>
+  &lt;h2>4. Correcteur proportionnel (questions 7 à 9)</h2>
 
-  <div class="qblock">
-    <div>
-      <p class="qtitle"><span class="qnum">Q7</span>Fonction de transfert en boucle ouverte</p>
-      <div class="ask"><span class="lab">La question en clair</span>
+  &lt;div class="qblock">
+    &lt;div>
+      &lt;p class="qtitle">&lt;span class="qnum">Q7</span>Fonction de transfert en boucle ouverte</p>
+      &lt;div class="ask">&lt;span class="lab">La question en clair</span>
         Écrire \(H_{BO}(p)\) avec \(H_c=K\) et \(C_{ext}=0\), puis identifier \(K_{BO}\), \(\xi\) et \(\omega_0\).</div>
-      <p class="demarche"><span class="lab">Démarche</span></p>
-      <ol>
-        <li>\(H_{BO}=H_c\cdot H_M\cdot K_4\cdot H_b=\dfrac{K\,K_M\,K_4}{(1+T_Mp)(I_ep^2+K_7p+K_5)}\).</li>
-        <li>On met le second ordre sous forme canonique : \(\omega_0=\sqrt{K_5/I_e}\) et \(\xi=\dfrac{K_7}{2\sqrt{K_5I_e}}\).</li>
-        <li>Le gain statique est \(K_{BO}=\dfrac{K_4K_MK}{K_5}\).</li>
+      &lt;p class="demarche">&lt;span class="lab">Démarche</span></p>
+      &lt;ol>
+        &lt;li>\(H_{BO}=H_c\cdot H_M\cdot K_4\cdot H_b=\dfrac{K\,K_M\,K_4}{(1+T_Mp)(I_ep^2+K_7p+K_5)}\).</li>
+        &lt;li>On met le second ordre sous forme canonique : \(\omega_0=\sqrt{K_5/I_e}\) et \(\xi=\dfrac{K_7}{2\sqrt{K_5I_e}}\).</li>
+        &lt;li>Le gain statique est \(K_{BO}=\dfrac{K_4K_MK}{K_5}\).</li>
       </ol>
-      <div class="calc">
+      &lt;div class="calc">
         \[K_{BO}=\dfrac{K_4K_MK}{K_5},\qquad\xi=\dfrac{K_7}{2\sqrt{K_5I_e}},\qquad\omega_0=\sqrt{\dfrac{K_5}{I_e}}\]
       </div>
-      <div class="res"><span class="lab">Réponse</span> Forme demandée : \(H_{BO}=K_{BO}\dfrac{1+T_Mp}{\ldots}\) avec les expressions ci-dessus.</div>
+      &lt;div class="res">&lt;span class="lab">Réponse</span> Forme demandée : \(H_{BO}=K_{BO}\dfrac{1+T_Mp}{\ldots}\) avec les expressions ci-dessus.</div>
     </div>
   </div>
 
-  <div class="qblock">
-    <div>
-      <p class="qtitle"><span class="qnum">Q8</span>Valeurs numériques, résonance</p>
-      <div class="ask"><span class="lab">La question en clair</span>
+  &lt;div class="qblock">
+    &lt;div>
+      &lt;p class="qtitle">&lt;span class="qnum">Q8</span>Valeurs numériques, résonance</p>
+      &lt;div class="ask">&lt;span class="lab">La question en clair</span>
         Calculer \(\xi\) et \(\omega_0\) numériquement. Quel phénomène apparaît sur le diagramme de gain ?</div>
-      <p class="demarche"><span class="lab">Démarche</span></p>
-      <ol>
-        <li>\(\omega_0=\sqrt{5/0{,}5}=\sqrt{10}\approx3{,}16\) rad/s.</li>
-        <li>\(\xi=\dfrac{0{,}8}{2\sqrt{5\times0{,}5}}=\dfrac{0{,}8}{3{,}16}\approx0{,}25\).</li>
-        <li>\(\xi<\dfrac{\sqrt2}{2}\approx0{,}707\) : le second ordre est peu amorti, il présente une <strong>résonance</strong> (bosse) autour de \(\omega_0\).</li>
+      &lt;p class="demarche">&lt;span class="lab">Démarche</span></p>
+      &lt;ol>
+        &lt;li>\(\omega_0=\sqrt{5/0{,}5}=\sqrt{10}\approx3{,}16\) rad/s.</li>
+        &lt;li>\(\xi=\dfrac{0{,}8}{2\sqrt{5\times0{,}5}}=\dfrac{0{,}8}{3{,}16}\approx0{,}25\).</li>
+        &lt;li>\(\xi<\dfrac{\sqrt2}{2}\approx0{,}707\) : le second ordre est peu amorti, il présente une &lt;strong>résonance</strong> (bosse) autour de \(\omega_0\).</li>
       </ol>
-      <div class="res"><span class="lab">Réponse</span> \(\xi\approx0{,}25\), \(\omega_0\approx3{,}16\) rad/s. Il y a une résonance sur le diagramme de gain, à la pulsation \(\omega_0\).</div>
+      &lt;div class="res">&lt;span class="lab">Réponse</span> \(\xi\approx0{,}25\), \(\omega_0\approx3{,}16\) rad/s. Il y a une résonance sur le diagramme de gain, à la pulsation \(\omega_0\).</div>
     </div>
   </div>
 
-  <div class="qblock">
-    <div>
-      <p class="qtitle"><span class="qnum">Q11</span>Marge de gain</p>
-      <div class="ask"><span class="lab">La question en clair</span>
+  &lt;div class="qblock">
+    &lt;div>
+      &lt;p class="qtitle">&lt;span class="qnum">Q11</span>Marge de gain</p>
+      &lt;div class="ask">&lt;span class="lab">La question en clair</span>
         Avec le diagramme de Bode réel pour \(K=1\), indiquer si le système vérifie le premier critère de stabilité, et donner la marge de gain.</div>
-      <p class="demarche"><span class="lab">Démarche</span></p>
-      <ol>
-        <li>Le premier critère : le gain doit être négatif (en dB) quand la phase vaut \(-180^\circ\). On lit cette pulsation, environ \(6\) rad/s.</li>
-        <li>À cette pulsation, le gain vaut environ \(-23\) dB : le critère est vérifié.</li>
-        <li>Marge de gain : \(MG=0-G_{dB}\approx23\) dB.</li>
-        <li>Pour \(K=1\), il n'y a pas de pulsation de coupure (gain toujours négatif) : le second critère est vérifié aussi, le système est stable.</li>
+      &lt;p class="demarche">&lt;span class="lab">Démarche</span></p>
+      &lt;ol>
+        &lt;li>Le premier critère : le gain doit être négatif (en dB) quand la phase vaut \(-180^\circ\). On lit cette pulsation, environ \(6\) rad/s.</li>
+        &lt;li>À cette pulsation, le gain vaut environ \(-23\) dB : le critère est vérifié.</li>
+        &lt;li>Marge de gain : \(MG=0-G_{dB}\approx23\) dB.</li>
+        &lt;li>Pour \(K=1\), il n'y a pas de pulsation de coupure (gain toujours négatif) : le second critère est vérifié aussi, le système est stable.</li>
       </ol>
-      <div class="res"><span class="lab">Réponse</span> Système stable, marge de gain d'environ \(23\) dB.</div>
+      &lt;div class="res">&lt;span class="lab">Réponse</span> Système stable, marge de gain d'environ \(23\) dB.</div>
     </div>
   </div>
 
-  <div class="qblock">
-    <div>
-      <p class="qtitle"><span class="qnum">Q12–Q13</span>Réglage du gain pour une marge de phase de 45°</p>
-      <div class="ask"><span class="lab">La question en clair</span>
+  &lt;div class="qblock">
+    &lt;div>
+      &lt;p class="qtitle">&lt;span class="qnum">Q12–Q13</span>Réglage du gain pour une marge de phase de 45°</p>
+      &lt;div class="ask">&lt;span class="lab">La question en clair</span>
         Comment évolue le diagramme quand \(K\) augmente ? Quelle valeur de \(K\) donne une phase de \(-135^\circ\) à la pulsation de coupure ?</div>
-      <p class="demarche"><span class="lab">Démarche</span></p>
-      <ol>
-        <li>Augmenter \(K\) (positif) déplace le diagramme de gain vers le haut, sans modifier la phase.</li>
-        <li>On cherche la pulsation où la phase vaut \(-135^\circ\) : environ \(3{,}7\) rad/s, où le gain vaut \(-11\) dB.</li>
-        <li>Il faut donc \(20\log K=11\) dB, soit \(K\approx3{,}5\). Le corrigé écrit \(20\log K=10\), ce qui donne \(K\approx3{,}2\) : écart d'arrondi.</li>
+      &lt;p class="demarche">&lt;span class="lab">Démarche</span></p>
+      &lt;ol>
+        &lt;li>Augmenter \(K\) (positif) déplace le diagramme de gain vers le haut, sans modifier la phase.</li>
+        &lt;li>On cherche la pulsation où la phase vaut \(-135^\circ\) : environ \(3{,}7\) rad/s, où le gain vaut \(-11\) dB.</li>
+        &lt;li>Il faut donc \(20\log K=11\) dB, soit \(K\approx3{,}5\). Le corrigé écrit \(20\log K=10\), ce qui donne \(K\approx3{,}2\) : écart d'arrondi.</li>
       </ol>
-      <div class="res"><span class="lab">Réponse</span> \(K\approx3{,}5\) (marge de phase 45°).</div>
+      &lt;div class="res">&lt;span class="lab">Réponse</span> \(K\approx3{,}5\) (marge de phase 45°).</div>
     </div>
   </div>
 
-  <div class="qblock">
-    <div>
-      <p class="qtitle"><span class="qnum">Q14–Q15</span>Erreur statique en réponse à un échelon</p>
-      <div class="ask"><span class="lab">La question en clair</span>
+  &lt;div class="qblock">
+    &lt;div>
+      &lt;p class="qtitle">&lt;span class="qnum">Q14–Q15</span>Erreur statique en réponse à un échelon</p>
+      &lt;div class="ask">&lt;span class="lab">La question en clair</span>
         Déterminer l'erreur statique \(\varepsilon_s\) pour un échelon \(\theta_0=1\) rad, puis vérifier sur la réponse indicielle pour \(K=1\).</div>
-      <p class="demarche"><span class="lab">Démarche</span></p>
-      <ol>
-        <li>Théorème de la valeur finale : \(\varepsilon_s=\lim_{p\to0}p\,\varepsilon(p)=\theta_0\big(1-\text{FTBF}(0)\big)\).</li>
-        <li>\(\text{FTBF}(0)=\dfrac{H_{BO}(0)}{1+H_{BO}(0)}\) avec \(H_{BO}(0)=0{,}2K\) : on trouve \(\varepsilon_s=\dfrac{1}{1+0{,}2K}\).</li>
-        <li>Pour \(K=1\) : \(\varepsilon_s=\dfrac{1}{1{,}2}\approx0{,}833\) rad. La valeur finale vaut donc \(1-0{,}833\approx0{,}167\), ce qui est bien lu sur la réponse indicielle.</li>
+      &lt;p class="demarche">&lt;span class="lab">Démarche</span></p>
+      &lt;ol>
+        &lt;li>Théorème de la valeur finale : \(\varepsilon_s=\lim_{p\to0}p\,\varepsilon(p)=\theta_0\big(1-\text{FTBF}(0)\big)\).</li>
+        &lt;li>\(\text{FTBF}(0)=\dfrac{H_{BO}(0)}{1+H_{BO}(0)}\) avec \(H_{BO}(0)=0{,}2K\) : on trouve \(\varepsilon_s=\dfrac{1}{1+0{,}2K}\).</li>
+        &lt;li>Pour \(K=1\) : \(\varepsilon_s=\dfrac{1}{1{,}2}\approx0{,}833\) rad. La valeur finale vaut donc \(1-0{,}833\approx0{,}167\), ce qui est bien lu sur la réponse indicielle.</li>
       </ol>
-      <div class="res"><span class="lab">Réponse</span> \(\varepsilon_s=\dfrac{1}{1+0{,}2K}\). Pour \(K=1\), \(\varepsilon_s\approx0{,}83\) rad.</div>
-      <div class="warn"><span class="lab">⚠️ Erreur dans le corrigé</span> Le corrigé affirme que pour \(K=5\) l'erreur statique est nulle. Avec la formule ci-dessus, \(K=5\) donne \(\varepsilon_s=1/(1+1)=0{,}5\) rad, pas zéro. Pour une erreur nulle, il faudrait un intégrateur dans la chaîne. Et pour \(K=3{,}5\), l'erreur reste \(\approx0{,}59\) rad, ce qui est très grand.</div>
+      &lt;div class="res">&lt;span class="lab">Réponse</span> \(\varepsilon_s=\dfrac{1}{1+0{,}2K}\). Pour \(K=1\), \(\varepsilon_s\approx0{,}83\) rad.</div>
+      &lt;div class="warn">&lt;span class="lab">⚠️ Erreur dans le corrigé</span> Le corrigé affirme que pour \(K=5\) l'erreur statique est nulle. Avec la formule ci-dessus, \(K=5\) donne \(\varepsilon_s=1/(1+1)=0{,}5\) rad, pas zéro. Pour une erreur nulle, il faudrait un intégrateur dans la chaîne. Et pour \(K=3{,}5\), l'erreur reste \(\approx0{,}59\) rad, ce qui est très grand.</div>
     </div>
-    <aside class="aside piege">
-      <span class="lab">Piège</span>
-      <p>Un correcteur proportionnel ne supprime jamais l'erreur statique sur un système sans intégrateur : il la réduit seulement quand \(K\) augmente.</p>
+    &lt;aside class="aside piege">
+      &lt;span class="lab">Piège</span>
+      &lt;p>Un correcteur proportionnel ne supprime jamais l'erreur statique sur un système sans intégrateur : il la réduit seulement quand \(K\) augmente.</p>
     </aside>
   </div>
 
   <!-- ============================================================ -->
-  <h2>5. Suite du TD (non traitée ici)</h2>
-  <div class="info"><span class="lab">À faire</span> Les questions suivantes (correction par un correcteur plus élaboré, étude de la réponse indicielle) ne sont pas encore rédigées sur cette page.</div>
+  &lt;h2>5. Suite du TD (non traitée ici)</h2>
+  &lt;div class="info">&lt;span class="lab">À faire</span> Les questions suivantes (correction par un correcteur plus élaboré, étude de la réponse indicielle) ne sont pas encore rédigées sur cette page.</div>
 
 
   <footer>
