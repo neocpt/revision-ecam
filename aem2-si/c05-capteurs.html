@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapitre C05 — Capteurs et chaîne de mesures — Révision ECAM</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div class="topbar">
+  <a href="../index.html#am2">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#memo">Fiche mémo</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SI AM2 (2ᵉ année) · Chapitre C05 — Capteurs et chaîne de mesures</span>
+  <h1 class="title">Chapitre C05 — Capteurs et chaîne de mesures</h1>
+  <p class="lead">Rôle des capteurs dans la chaîne d'information, performances (statiques et dynamiques), détecteurs
+  tout ou rien, capteurs usuels (distance, position, vitesse, accélération, force, température, champ magnétique),
+  codeurs, et comment obtenir une mesure fiable. Prérequis : C02 (chaîne d'information : types de signaux et constituants).
+  Source : <i>S2I CM C05 — Capteurs et chaîne de mesures</i> (21 p.). Moodle ne fournit pas de TD pour ce chapitre :
+  le contenu est uniquement le cours, retranscrit en texte.</p>
+
+  <section class="memo-sheet" id="memo">
+    <div class="memo-head">📌 Fiche mémo — Capteurs et chaîne de mesures</div>
+    <div class="memo-grid">
+      <div class="memo-item">Chaîne d'information : Acquérir (capteur) → Traiter → Communiquer</div>
+      <div class="memo-item">Capteur = corps d'épreuve + transducteur, puis conditionneur (amplificateur, filtre, mise en forme)</div>
+      <div class="memo-item">Mesurande = grandeur physique en entrée ; Mesure = signal électrique en sortie (analogique, TOR, numérique)</div>
+      <div class="memo-item">Sensibilité : \(\dfrac{\Delta S_{sortie}}{\Delta S_{entrée}}\) ; résolution = plus petite variation mesurable</div>
+      <div class="memo-item">Justesse (valeur vraie) + fidélité (reproductibilité) = précision</div>
+      <div class="memo-item">Erreurs : offset (décalage), échelle (pente), linéarité, hystérésis</div>
+      <div class="memo-item">Temps de réponse à 95 % ; bande passante à −3 dB</div>
+      <div class="memo-item">Détecteur inductif : \(F_0=\dfrac{1}{2\pi\sqrt{LC}}\) ; une pièce métallique diminue le coefficient de qualité</div>
+      <div class="memo-item">Jauge de contrainte : \(\dfrac{\Delta R}{R}=k\,\varepsilon_l\) ; métaux \(k=1+2\nu\)</div>
+      <div class="memo-item">Pont de Wheatstone : \(V_s=\dfrac{V_e}{4}\Big(\dfrac{\Delta R_1}{R_1}-\dfrac{\Delta R_2}{R_2}+\dfrac{\Delta R_4}{R_4}-\dfrac{\Delta R_3}{R_3}\Big)\)</div>
+      <div class="memo-item">Codeur absolu : code Gray (une seule variation de bit entre deux positions) ; codeur incrémental : comptage des impulsions, sens par les voies A et B</div>
+      <div class="memo-item method">Mesure fiable = toutes les caractéristiques quantifiées et toutes les perturbations quantifiées dans la gamme étudiée</div>
+    </div>
+  </section>
+
+  <h2 id="cours" class="part">Partie 1 — Cours</h2>
+
+  <section class="block" id="intro">
+    <h3>1. Introduction</h3>
+    <p>La chaîne d'énergie d'un système multiphysique est pilotée en fonction de son état et de la séquence d'actions prévue. Il faut donc
+    <b>acquérir</b> l'état du système (c'est le rôle des capteurs), puis le traiter et le corriger pour adapter la consigne.
+    Pour mesurer une grandeur, il faut utiliser des phénomènes physiques permettant de la passer en une grandeur quantifiable.</p>
+  </section>
+
+  <section class="block" id="generalites">
+    <h3>2. Généralités</h3>
+    <h4>2.1 Positionnement dans la chaîne d'information</h4>
+    <p>Le capteur est l'élément central de la fonction <b>Acquérir</b>. Il se décompose en :</p>
+    <ul>
+      <li>un <b>corps d'épreuve</b>, sollicité par la grandeur physique à mesurer ;</li>
+      <li>un <b>transducteur</b>, qui convertit la nature de la grandeur (le plus souvent en signal électrique) ;</li>
+    </ul>
+    <p>suivi d'un <b>conditionneur</b> (amplificateur, filtre, mise en forme) qui délivre une information exploitable par la fonction <i>Traiter</i>.</p>
+
+    <h4>2.2 Classification des capteurs</h4>
+    <ul>
+      <li><b>Mesurande</b> (entrée) : objet (présence, déplacement, vitesse), action mécanique (force, couple, pression), environnement (température, hygrométrie, luminosité).</li>
+      <li><b>Mesure</b> (sortie) : analogique, binaire (TOR, « tout ou rien »), numérique.</li>
+      <li>Selon le procédé de génération du signal : <b>passifs</b> (la grandeur fait varier une impédance, alimentation externe nécessaire : résistifs, inductifs, capacitifs) ou <b>actifs</b> (la grandeur génère directement une tension ou un courant : photoélectrique, thermoélectrique, piézoélectrique, à effet Hall).</li>
+    </ul>
+    <div class="def"><span class="lab">Définitions</span>
+    <b>Capteur analogique</b> : signal continu dans le temps, à une infinité de valeurs possibles.<br>
+    <b>Capteur TOR</b> : deux états seulement (par exemple 0 V et 5 V).<br>
+    <b>Capteur numérique</b> : valeurs discontinues (un capteur codé sur 8 bits ne peut prendre que 255 valeurs distinctes).</div>
+
+    <h4>2.3 Critères de performance</h4>
+    <div class="def"><span class="lab">Caractéristiques statiques</span>
+    <b>Étendue de mesure</b> : amplitude des valeurs mesurables.<br>
+    <b>Sensibilité</b> : \(\dfrac{\Delta S_{sortie}}{\Delta S_{entrée}}\), capacité à détecter une faible variation.<br>
+    <b>Résolution</b> : plus petite variation mesurable.<br>
+    <b>Linéarité</b> : constance de la relation entre la variation de la grandeur physique et celle de la sortie.<br>
+    <b>Justesse</b> : capacité à fournir les mêmes valeurs qu'un étalon de référence.<br>
+    <b>Fidélité</b> : capacité à reproduire la même valeur pour la même grandeur.<br>
+    <b>Précision</b> : justesse et fidélité réunies.</div>
+    <p>Trois cibles illustrent la différence : juste mais pas fidèle, fidèle mais pas juste, précis (juste et fidèle).</p>
+    <p><b>Erreurs</b> : décalage d'origine (<i>offset</i>), erreur d'échelle (pente), erreur de linéarité, erreur d'hystérésis (la courbe d'aller et celle de retour diffèrent).</p>
+    <div class="def"><span class="lab">Caractéristiques dynamiques</span>
+    <b>Temps de réponse</b> : temps mis pour atteindre 95 % de la valeur finale en réponse indicielle.<br>
+    <b>Bande passante à −3 dB</b> : fréquence au-delà de laquelle le fonctionnement n'est plus celui attendu (la réponse fréquentielle n'est plus une droite de gain nul).</div>
+  </section>
+
+  <section class="block" id="technologie">
+    <h3>3. Technologie des capteurs et détecteurs</h3>
+    <h4>3.1 Capteur ou détecteur ?</h4>
+    <div class="def"><span class="lab">Détecteur</span>
+    Un détecteur est un capteur « tout ou rien » : il détecte la présence ou l'absence d'une grandeur physique. Un capteur fournit une information quantifiée représentative de la valeur mesurée.</div>
+
+    <h4>3.2 Détection avec contact : l'interrupteur électromécanique</h4>
+    <div class="def"><span class="lab">Définition</span>
+    La détection est réalisée par un contact physique (palpeur) avec un objet ; l'information transite par un contact électrique (tout ou rien).</div>
+    <ul>
+      <li><b>Avantages</b> : bonne fidélité sur les points d'enclenchement (jusqu'à 0,01 mm), tension d'emploi élevée, mise en œuvre simple.</li>
+      <li><b>Inconvénients</b> : les palpeurs s'usent, et les efforts de contact sont à dimensionner pour choisir le capteur.</li>
+      <li><b>Symbole</b> : <b>NC</b> (normalement fermé, « NF ») ou <b>NO</b> (normalement ouvert).</li>
+    </ul>
+
+    <h4>3.3 Détection sans contact</h4>
+    <p><b>Détecteur inductif.</b> Un circuit inductif (bobine d'inductance \(L\)) associé à un condensateur \(C\) forme un circuit résonant à \(F_0=\dfrac{1}{2\pi\sqrt{LC}}\) (généralement entre 100 kHz et 1 MHz). Un écran métallique placé dans le champ est le siège de courants de Foucault : il diminue le coefficient de qualité du circuit. La portée dépend de la taille de la pièce, de la température, de la tension d'alimentation et du matériau (la portée nominale est donnée pour de l'acier doux).
+    Avantages : pas d'usure, cadences élevées, durée de vie indépendante du nombre de manœuvres.</p>
+    <p><b>Détecteur capacitif.</b> Il mesure la variation de capacité provoquée par l'approche d'un objet dans le champ électrique d'un condensateur ; la permittivité du matériau doit être supérieure à 1, il peut donc détecter des objets conducteurs ou isolants (niveau d'eau, présence de carton…).</p>
+    <p><b>Détecteur photoélectrique.</b> Un émetteur de lumière (diode électroluminescente) est associé à un récepteur (phototransistor). Trois montages :</p>
+    <ul>
+      <li><b>Barrage</b> : émetteur et récepteur séparés, face à face ; portée jusqu'à 50 m (100 m en laser). Un objet interrompt le faisceau.</li>
+      <li><b>Proximité</b> : émetteur et récepteur dans le même boîtier ; l'objet réfléchit le faisceau. Portée de 5 mm à 2 m.</li>
+      <li><b>Réflex</b> : le faisceau est renvoyé par un réflecteur ; portée de 4 m à 8 m, jusqu'à 15 m.</li>
+    </ul>
+    <p>Les détecteurs à fibre optique suivent les mêmes trois configurations, le faisceau étant guidé dans des fibres.</p>
+
+    <h4>3.4 Algorithme de sélection d'un détecteur</h4>
+    <p>Le choix dépend de la nature de l'objet (solide, liquide, métallique), de la présence ou non d'un contact possible et de la distance objet/détecteur (seuils de 15 mm et 60 mm dans l'algorithme du cours), de la masse (seuil 500 g), de la vitesse (seuil 1,5 m/s) et de la fréquence de passage (seuil 1 Hz). Les capteurs à ultrasons (pressostat, vacuostat) ne sont pas traités dans ce cours.</p>
+  </section>
+
+  <section class="block" id="capteurs">
+    <h3>4. Capteurs usuels</h3>
+    <h4>4.1 Mesure de distance</h4>
+    <p>Capteur actif à <b>ultrasons</b>, utilisable dans l'air et les liquides. Un émetteur piézoélectrique émet une onde qui se réfléchit sur une interface entre deux milieux d'impédances acoustiques différentes ; on mesure l'écho. Deux configurations : <b>par réflexion</b> (un même palpeur émet et reçoit) et <b>par transmission</b> (récepteur distinct, à placer exactement à l'endroit où le signal sort). La méthode par contact nécessite un couplant (eau ou gel).</p>
+
+    <h4>4.2 Mesure de position</h4>
+    <p>Capteur à <b>potentiomètre</b> monté en pont diviseur de tension : la tension mesurée est représentative de la résistance, donc de la position angulaire ou linéaire. Limité par le débattement du potentiomètre : il ne convient que pour des plages bornées.</p>
+
+    <h4>4.3 Mesure de vitesse</h4>
+    <ul>
+      <li><b>Génératrice tachymétrique</b> : machine à courant continu utilisée en génératrice à vide, qui suit la relation \(E=k\,\Omega\) ; le signal nécessite souvent un filtrage.</li>
+      <li><b>Capteur de vitesse et de distance embarqué</b> (technologie infrarouge) : mesure de 0,3 à 400 km/h et de la distance parcourue, avec une précision de 0,1 km/h et 0,1 % en distance.</li>
+    </ul>
+
+    <h4>4.4 Mesure d'accélération</h4>
+    <p>L'accéléromètre applique le PFD à une <b>masse d'épreuve</b> reliée à un ressort :</p>
+    <ul>
+      <li><b>non asservi</b> : on mesure la déformation du ressort (simple, mais limité par le capteur de déformation) ;</li>
+      <li><b>asservi</b> : on applique une force de rappel qui annule le déplacement de la masse. Rapide et efficace, mais il faut aussi un capteur de position.</li>
+    </ul>
+
+    <h4>4.5 Mesure de force</h4>
+    <p><b>Jauges de contrainte (extensométriques)</b>. La résistance d'un fil est \(R=\rho\dfrac{l}{A}=\rho\dfrac{4l}{\pi D^2}\). Sous contrainte, le fil s'allonge et son diamètre diminue, donc sa résistance varie :
+    \(\dfrac{\Delta R}{R_0}=k\,\dfrac{\Delta L}{L_0}=k\,\varepsilon_l\), où \(k\) est la sensibilité de la jauge et \(\varepsilon_l\) la déformation relative.</p>
+    <ul>
+      <li><b>Métaux</b> : \(k=1+2\nu\) (\(\nu\) : coefficient de Poisson), variation géométrique seule.</li>
+      <li><b>Semi-conducteurs</b> (silicium, germanium) : \(k\) peut être cent fois plus grand ; la variation de conductivité s'ajoute à la variation géométrique.</li>
+    </ul>
+    <p>Les variations sont trop faibles pour être mesurées à l'ohmmètre : on utilise un <b>pont de Wheatstone</b> alimenté sous \(V_e\). Pour de faibles variations, la tension de sortie vaut
+    \(V_s=\dfrac{V_e}{4}\Big(\dfrac{\Delta R_1}{R_1}-\dfrac{\Delta R_2}{R_2}+\dfrac{\Delta R_4}{R_4}-\dfrac{\Delta R_3}{R_3}\Big)\).
+    Une jauge seule forme un <i>quart de pont</i>, deux jauges un <i>demi-pont</i>, quatre jauges un <i>pont complet</i> (meilleure précision et réjection des perturbations, comme la température).</p>
+    <p><b>Piézoélectricité.</b> Certains matériaux (quartz, céramiques PZT) délivrent une tension sous compression (effet direct) et se déforment sous tension (effet indirect, utilisé pour les actionneurs de précision).</p>
+    <div class="warnbox"><span class="lab">Attention</span> Ne pas confondre piézoélectricité (la compression crée une différence de charges, donc une tension) et piézorésistivité (la compression change la résistance).</div>
+
+    <h4>4.6 Mesure de température</h4>
+    <p>L'<b>effet Seebeck</b> : une différence de potentiel apparaît à la jonction de deux matériaux soumis à une différence de température. Un <b>thermocouple</b> est formé de deux fils de métaux différents soudés à une extrémité (soudure chaude, placée dans le milieu dont on mesure la température). Les deux autres extrémités, reliées au voltmètre, forment les soudures froides (de référence). Il existe plusieurs types de thermocouples (E, J, K, N, T…) selon les couples de matériaux et les gammes de température.</p>
+
+    <h4>4.7 Capteurs de champ magnétique</h4>
+    <p><b>Effet Hall</b> : un courant traversant un matériau placé dans un champ magnétique engendre une tension perpendiculaire au champ. Inconvénient : le corps d'épreuve doit être ferromagnétique.</p>
+  </section>
+
+  <section class="block" id="codeurs">
+    <h3>5. Les codeurs</h3>
+    <p>Les codeurs mesurent directement ou indirectement une position angulaire (ou linéaire avec une règle).</p>
+    <ul>
+      <li><b>Codeur incrémental</b> : un disque imprimé est lu optiquement et délivre en général 5 ou 6 signaux. Le comptage des impulsions donne un déplacement relatif ; les voies \(A\) et \(B\) (en quadrature) donnent le sens de rotation ; une piste \(Z\) donne une position de référence. La fréquence des impulsions donne une image de la vitesse.</li>
+      <li><b>Codeur absolu</b> : chaque position est codée. Solution 1 : code Gray (une seule variation de bit d'une position à la suivante), converti en binaire naturel pour le microcontrôleur. Solution 2 : une piste supplémentaire permet de lire le code de position sans ambiguïté, le disque peut alors être imprimé en binaire naturel.</li>
+    </ul>
+
+  </section>
+
+  <section class="block" id="mesure">
+    <h3>6. Comment obtenir une bonne mesure ?</h3>
+    <h4>6.1 La chaîne de mesure</h4>
+    <p>Une chaîne de mesure ressemble à la chaîne d'information : un capteur acquiert la grandeur, un centre de commande la traite et la filtre, une interface transmet l'information. On y ajoute le <b>protocole de mesure</b>, qui définit les étapes pour effectuer la mesure. Une mesure est toujours imparfaite, car elle comble une méconnaissance du phénomène : on cherche à s'en approcher.</p>
+    <div class="def"><span class="lab">Définition</span>
+    Une mesure est <b>fiable</b> si et seulement si toutes ses caractéristiques propres sont quantifiées, et si les perturbations (et donc les erreurs associées) sont quantifiées dans la gamme de mesure étudiée.</div>
+    <p>Le capteur est généralement le maillon limitant de la chaîne ; cela ne dispense pas de soigner le reste, notamment le protocole.</p>
+
+    <h4>6.2 Perturbations</h4>
+    <ul>
+      <li><b>Sur la grandeur mesurée</b> : variations de température, appareils parasites… (plus ou moins faciles à limiter).</li>
+      <li><b>Sur le signal de mesure</b> : surtout pour les capteurs électriques (bruit électrique).</li>
+      <li><b>Du capteur</b> : non-linéarité, hystérésis (peu évitables sans changer de capteur).</li>
+      <li><b>De la communication</b> : une information traitée peut être altérée par des phénomènes parasites.</li>
+    </ul>
+
+    <h4>6.3 Protocole de mesure</h4>
+    <p>Il définit les informations nécessaires pour rendre la mesure fiable, dans l'ordre :</p>
+    <ol>
+      <li><b>Contexte</b> : pour qui, dans quelles conditions et pourquoi la mesure est faite.</li>
+      <li><b>Phénomène mesuré</b> : présentation du banc d'essai, du phénomène et des capteurs utilisés.</li>
+      <li><b>Déroulé</b> : la liste des étapes de la mesure.</li>
+      <li><b>Quantification des caractéristiques</b> : étendue, sensibilité, résolution, justesse et fidélité, définies et mesurées.</li>
+      <li><b>Quantification des perturbations</b> : les présenter, comment les éviter ou, à défaut, les quantifier.</li>
+    </ol>
+  </section>
+
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <div class="docs-group">
+      <h3>Cours (Moodle)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../assets/pdf.html?f=../aem2-si/S2I_CM_C05_Capteurs_et_chaine_de_mesures.pdf" target="_blank" rel="noopener"><span class="ic">📄</span><span class="nm">S2I_CM_C05_Capteurs_et_chaîne_de_mesures.pdf</span><span class="badge">Cours</span></a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Généré comme support de révision personnel · Contenu basé sur le CM de S2I (Sciences Industrielles de
+  l'Ingénieur) de l'ECAM — <a href="../assets/pdf.html?f=../aem2-si/S2I_CM_C03_Dynamique_du_solide.pdf" target="_blank" rel="noopener">PDF source</a>.
+</footer>
+<script src="../assets/gate.js"></script>
+</body>
+</html>

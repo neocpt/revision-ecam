@@ -240,19 +240,43 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
 
   <section class="block td-exo" id="td-ex5">
     <h2 class="exo-title">5. Étude de cas</h2>
-    <h3>Exercice 5.1 — Duo Voyageur Concept (siège de véhicule pivotant)</h3>
-    <div class="enonce">Système permettant de faciliter l'accès d'une personne à mobilité réduite au siège avant d'un véhicule. Le bras \(\mathbf 1\) (liaison pivot d'axe \((O,\vec z_0)\) avec le châssis \(\mathbf 0\)) porte le siège.
-    Un moteur (axe \(A\)) entraîne en rotation le bras via un engrenage entre le rotor \(\mathbf 2\) (roue de rayon primitif \(r_2\)) et une roue fixe liée au châssis (rayon primitif \(r_0\)), avec roulement sans glissement en \(J\).
-    Le cahier des charges impose une loi d'évolution de la vitesse angulaire du bras en trapèze, une vitesse nominale de \(3\ \text{tr/min}\) et une durée de phase d'accélération \(> 1\ \text{s}\).</div>
-    <div class="warnbox"><span class="lab">À rédiger</span> Correction non encore rédigée (étude de cas avec inertie équivalente et vérification du cahier des charges).</div>
+    <h3>Exercice 5.1 — Duo Voyageur Concept (siège pivotant de véhicule)</h3>
+    <div class="enonce">Le Duo Voyageur Concept facilite l'accès d'une personne à mobilité réduite au siège avant côté passager. Le bras \(\mathbf 1\) (liaison pivot d'axe \((O,\vec z_0)\) avec le châssis \(\mathbf 0\)) porte le siège.
+    Le moteur (stator lié au bras \(\mathbf 1\), axe \(A\)) fait tourner son rotor \(\mathbf 2\), dont la roue de rayon \(r_2\) roule sans glisser en \(J\) sur la roue de rayon \(r_0\) liée au châssis.
+    Donnée : \(C=40\ \text{N·m}\) (couple ramené au bras), \(I_{eq}=270\ \text{kg·m}^2\), \(r_0=30\ \text{cm}\), \(r_2=15\ \text{cm}\).
+    Cahier des charges : vitesse angulaire du bras en trapèze, vitesse nominale \(3\ \text{tr/min}\), durée de la phase d'accélération \(>1\ \text{s}\).
+    <ol><li>Donner la relation entre \(\omega_m\) (moteur) et \(\omega_{10}\) (bras).</li>
+    <li>Déterminer, par le TEC appliqué à l'ensemble des solides en mouvement, l'accélération angulaire du bras \(\mathbf 1\) par rapport au châssis \(\mathbf 0\).</li>
+    <li>Vérifier le critère du cahier des charges sur la durée de la phase d'accélération.</li></ol></div>
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q1</span>Relation entre \(\omega_m\) et \(\omega_{10}\)</p>
+      <p>Le centre \(A\) du rotor décrit un cercle de rayon \(r_0+r_2\) autour de \(O\) : \(V_{A\in 2/0}=(r_0+r_2)\,\omega_{10}\). Le rotor 2 roule sans glisser en \(J\) sur la roue fixe : \(\vec V_{J\in 2/0}=\vec 0\), donc \(\omega_{20}\,r_2=(r_0+r_2)\,\omega_{10}\).
+      Le moteur donne \(\omega_m=\omega_{21}=\omega_{20}-\omega_{10}\), d'où \(\omega_m=\dfrac{r_0}{r_2}\,\omega_{10}\).</p>
+      <div class="res">\(\omega_{10}=\dfrac{r_2}{r_0}\,\omega_m=\dfrac{\omega_m}{2}\) (avec \(r_0=2r_2\)).</div>
+    </div>
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q2</span>Accélération angulaire du bras</p>
+      <p>Le TEC pour l'ensemble, dont l'énergie cinétique est \(E_c=\tfrac12 I_{eq}\,\omega_{10}^2\), donne \(\dfrac{d}{dt}\big(\tfrac12 I_{eq}\omega_{10}^2\big)=C\,\omega_{10}\) (seul le couple moteur travaille, frottements négligés) :
+      \(I_{eq}\,\dot\omega_{10}\,\omega_{10}=C\,\omega_{10}\).</p>
+      <div class="res">\(\dot\omega_{10}=\dfrac{C}{I_{eq}}=\dfrac{40}{270}\approx 0{,}148\ \text{rad/s}^2\)</div>
+      <p class="note">L'énoncé donne \(I_{eq}\) ; le calcul détaillé de \(I_{eq}\) à partir des énergies cinétiques de \(\mathbf 1\) et \(\mathbf 2\) n'est pas repris ici.</p>
+    </div>
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q3</span>Critère de durée</p>
+      <p>Vitesse nominale : \(\omega_{nom}=3\ \text{tr/min}=\dfrac{2\pi\cdot 3}{60}\approx 0{,}314\ \text{rad/s}\). Accélération constante : durée \(t=\dfrac{\omega_{nom}}{\dot\omega_{10}}\approx\dfrac{0{,}314}{0{,}148}\approx 2{,}1\ \text{s}\).</p>
+      <div class="res">\(2{,}1\ \text{s}>1\ \text{s}\) : le critère du cahier des charges est respecté.</div>
+    </div>
 
     <h3>Exercice 5.2 — Embrayage assisté (commande électrique d'embrayage et restituteur d'effort)</h3>
-    <div class="enonce">La commande électrique d'embrayage remplace l'effort musculaire du conducteur. Un restituteur électrique d'efforts (système poulies–courroie, moteur de couple \(C_m\) et d'inertie \(J_m\), vis à billes de pas \(p_v\), écrou de masse \(M_e\)) transmet l'effort de la pédale.
-    Données : \(C=40\ \text{N·m}\), \(I_{eq}=270\ \text{kg·m}^2\), \(r_0=30\ \text{cm}\), \(r_2=15\ \text{cm}\) pour le cahier des charges de la phase d'accélération.
-    <ol><li>Donner la relation entre \(\omega_m\) (moteur) et \(\omega_{10}\) (vitesse angulaire du bras \(\mathbf 1\) par rapport au châssis).</li>
-    <li>Déterminer l'inertie équivalente \(I_{eq}\) de l'ensemble des solides en mouvement, ramenée à l'axe \((O,ec z_0)\) du bras, puis l'accélération angulaire du bras \(\mathbf 1\) par rapport au châssis \(\mathbf 0\) (TEC).</li>
-    <li>Vérifier le critère du cahier des charges concernant la durée de la phase d'accélération angulaire du bras.</li></ol></div>
-    <div class="warnbox"><span class="lab">À rédiger</span> Correction non encore rédigée. La partie restituteur (modèle dynamique de la pédale, linéarisation, schéma-bloc) reste à traiter.</div>
+    <div class="enonce">La conduite en ville impose de nombreux embrayages et débrayages. Pour réduire l'effort du conducteur, l'embrayage est commandé électriquement, avec un restituteur d'effort électrique qui recrée la sensation d'une commande mécanique.
+    Le restituteur comporte un moteur (couple \(C_m\), inertie \(J_m\) de l'arbre moteur, poulie 1), une poulie 2 de diamètre double, une vis à billes de pas \(p_v\), un écrou (piston) de masse \(M_p\) et un ressort de torsion \(K_R\) sur la pédale.
+    La pédale (centre \(G\), moment d'inertie \(J_P\)) reçoit l'effort du pied et transmet l'effort au piston par une tige de poussée. On néglige les frottements secs et visqueux.
+    <ol><li>En l'absence d'action du pied et du restituteur, déterminer le couple \(C_{R_0}\) du ressort pour la position \(\theta=0\) (étude statique).</li>
+    <li>Déterminer l'équation différentielle du mouvement de la pédale.</li>
+    <li>La linéariser autour de \(\theta=0\).</li>
+    <li>Par le TEC, déterminer l'équation du mouvement du restituteur en fonction de \(C_m\), \(F_P\), \(F_T\), \(K_R\), \(\theta\).</li>
+    <li>Exprimer le système des deux équations différentielles.</li></ol></div>
+    <div class="warnbox"><span class="lab">À rédiger</span> Correction non encore rédigée. Le modèle est saisi, mais les équations (Q1 à Q5) restent à résoudre.</div>
   </section>
 
   <section class="block" id="docs">
