@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapitre C04 — Énergétique du solide — Révision ECAM</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div class="topbar">
+  <a href="../index.html#am2">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SI AM2 (2ᵉ année) · Chapitre C04 — Énergétique du solide</span>
+  <h1 class="title">Chapitre C04 — Énergétique du solide</h1>
+  <p class="lead">Énergie cinétique, inertie équivalente, puissance des actions mécaniques et des inter-efforts,
+  théorème de l'énergie cinétique (TEC), rendement. Prérequis : C09 (comportement statique des transmetteurs).
+  Source : <i>S2I CM C04 — Énergétique du solide</i> (11 p.) et <i>S2I TD C04</i> (10 p.), tous deux image seule sur Moodle :
+  le cours et les énoncés sont retranscrits ici en texte.</p>
+
+  <h2 id="cours" class="part">Partie 1 — Cours</h2>
+
+  <section class="memo-sheet" id="memo">
+    <div class="memo-head">📌 Fiche mémo — Énergétique du solide</div>
+    <div class="memo-grid">
+      <div class="memo-item">Énergie cinétique : \(2E_{c(S/R)}=\{\mathcal V_{S/R}\}\otimes\{\mathcal C_{S/R}\}\) (comoment, torseurs au même point)</div>
+      <div class="memo-item">Translation : \(2E_c=m\,V_G^2\)</div>
+      <div class="memo-item">Rotation autour d'un axe fixe : \(2E_c=J\,\omega^2\)</div>
+      <div class="memo-item">Solide, point \(A\) fixe : \(2E_c=\vec\Omega\cdot\bar I_{(A,S)}\cdot\vec\Omega\)</div>
+      <div class="memo-item">Solide, \(A=G\) : \(2E_c=m\,V_G^2+\vec\Omega\cdot\bar I_{(G,S)}\cdot\vec\Omega\)</div>
+      <div class="memo-item">Ensemble : \(E_{c(\Sigma/R)}=\sum_i E_{c(S_i/R)}\)</div>
+      <div class="memo-item">Inertie équivalente : \(2E_{c(\Sigma/R)}=I_{eq\Delta}\,\omega_\Delta^2\)</div>
+      <div class="memo-item">Puissance d'un glisseur : \(P=\vec F\cdot\vec V\) ; d'un couple : \(P=\vec C\cdot\vec\omega\)</div>
+      <div class="memo-item">Puissance d'un torseur : \(P=\vec R\cdot\vec V_A+\vec M_A\cdot\vec\Omega\)</div>
+      <div class="memo-item">Inter-efforts : \(P_{E_1\leftrightarrow E_2}=\{\mathcal T_{E_1\to E_2}\}\otimes\{\mathcal V_{E_2/E_1}\}\) (indépendante du repère, nulle si liaison parfaite)</div>
+      <div class="memo-item method">TEC : \(\dfrac{dE_{c(S/R)}}{dt}=P_{\bar S\to S/R}\) ; ensemble : \(\dfrac{dE_{c(E/R)}}{dt}=P_{\bar E\to E/R}+\sum P_{S_i\leftrightarrow S_j}\)</div>
+      <div class="memo-item method">Rendement : \(\eta=\dfrac{E_u}{E_{fournie}}=1-\dfrac{E_{perdue}}{E_{fournie}}\le 1\) ; en régime établi \(\eta=\dfrac{P_u}{P_{fournie}}\)</div>
+    </div>
+  </section>
+
+  <section class="block" id="energie">
+    <h3>1. Historique, énergie, travail, puissance</h3>
+    <p>L'énergie se conserve et se transforme (chaleur, pression, vitesse, hauteur…). Pour un système, l'énergie est ce
+    qu'il faut lui fournir pour le faire passer d'un état initial à un état final : elle ne dépend pas du chemin.
+    La <b>puissance</b> est le débit d'énergie à chaque instant ; elle dépend du mouvement.</p>
+    <p>Travail élémentaire d'une force : \(dW=\vec F\cdot d\vec\ell\) (en J). Pour un point matériel \(M\) de masse \(dm\) :
+    \(W=\tfrac12\,dm\,V_{M\in S/R}^2\) entre deux instants (démonstration par le PFD).</p>
+    <div class="note"><span class="lab">À retenir</span> 1 J = énergie pour déplacer 1 N sur 1 m. 1 kWh = 3,6 MJ.
+    Unité de puissance : le watt, \(1\,\text{W}=1\,\text{J/s}\).</div>
+  </section>
+
+  <section class="block" id="ec">
+    <h3>2. Énergie cinétique d'un solide</h3>
+    <div class="def"><span class="lab">Définition</span>
+    \(2E_{c(S/R)}=\{\mathcal V_{S/R}\}\otimes\{\mathcal C_{S/R}\}=\vec V_{A\in S/R}\cdot m\vec V_{G\in S/R}+\vec\Omega_{S/R}\cdot\vec\sigma_{A\in S/R}\).</div>
+    <div class="warnbox"><span class="lab">Attention</span> Pour le comoment, les deux torseurs doivent être exprimés au même point.
+    L'expression de l'énergie cinétique, elle, ne dépend pas du point d'écriture.</div>
+    <p><b>Cas particuliers :</b></p>
+    <ul>
+      <li>\(A\) fixe dans \(R\) : \(2E_c=\vec\Omega\cdot\bar I_{(A,S)}\cdot\vec\Omega\).</li>
+      <li>\(A=G\) : \(2E_c=m V_G^2+\vec\Omega\cdot\bar I_{(G,S)}\cdot\vec\Omega\).</li>
+      <li>Translation : \(2E_c=m V_G^2\).</li>
+      <li>Rotation autour d'un axe fixe \(\vec z\) : \(2E_c=J\omega^2\), avec \(J\) le moment d'inertie autour de \(\vec z\).</li>
+    </ul>
+    <p><b>Ensemble de solides :</b> \(E_{c(\Sigma/R)}=\sum_i E_{c(S_i/R)}\).</p>
+  </section>
+
+  <section class="block" id="inertie-eq">
+    <h3>3. Inertie équivalente</h3>
+    <p>Pour un système de pièces en rotation (et parfois en translation) à des vitesses différentes, on appelle
+    <b>inertie équivalente ramenée à l'axe \(\Delta\)</b> l'inertie \(I_{eq\Delta}\) telle que
+    \(2E_{c(\Sigma/R)}=I_{eq\Delta}\,\omega_\Delta^2\). Elle permet d'estimer rapidement le dimensionnement d'un actionneur.</p>
+  </section>
+
+  <section class="block" id="puissance">
+    <h3>4. Puissance d'une action extérieure</h3>
+    <div class="def"><span class="lab">Définition</span>
+    \(P_{\Sigma\to S/R}=\{\mathcal T_{\Sigma\to S}\}\otimes\{\mathcal V_{S/R}\}=\vec R_{\{\mathcal T\}}\cdot\vec V_{A\in S/R}+\vec M_{A\{\mathcal T\}}\cdot\vec\Omega_{S/R}\).</div>
+    <ul>
+      <li>Glisseur : \(P=\vec R\cdot\vec V_A\) ; couple : \(P=\vec C\cdot\vec\omega\).</li>
+      <li>La puissance n'a de sens que par rapport à un repère : elle est nulle dans tout repère lié au solide sur lequel elle s'exerce.</li>
+    </ul>
+  </section>
+
+  <section class="block" id="inter">
+    <h3>5. Puissance des inter-efforts</h3>
+    <div class="def"><span class="lab">Définition</span>
+    \(P_{E_1\leftrightarrow E_2}=P_{E_1\to E_2/R}+P_{E_2\to E_1/R}=\{\mathcal T_{E_1\to E_2}\}\otimes\{\mathcal V_{E_2/E_1}\}\).</div>
+    <div class="thm"><span class="lab">Théorème</span> Cette puissance est indépendante du repère \(R\).</div>
+    <ul>
+      <li>Si elle est négative, c'est une puissance perdue par frottement.</li>
+      <li>Si la liaison entre \(S_1\) et \(S_2\) est parfaite, \(P_{S_1\leftrightarrow S_2}=0\).</li>
+    </ul>
+  </section>
+
+  <section class="block" id="tec">
+    <h3>6. Théorème de l'énergie cinétique (TEC)</h3>
+    <div class="thm"><span class="lab">Théorème 9</span>
+    Pour un solide : \(\dfrac{dE_{c(S/R)}}{dt}=P_{\bar S\to S/R}\) (dérivée de l'énergie cinétique = puissance des actions extérieures).</div>
+    <p>Pour un ensemble \(E\) de \(n\) solides :
+    \(\dfrac{d}{dt}\Big(\sum_i E_{c(S_i/R)}\Big)=\sum_i P_{\bar S_i\to S_i/R}\), soit
+    \(\dfrac{dE_{c(E/R)}}{dt}=P_{\bar E\to E/R}+\sum_{i,j}P_{S_i\leftrightarrow S_j}\) : puissance des actions extérieures à chaque solide
+    plus puissance des inter-efforts entre solides.</p>
+    <div class="method"><span class="lab">Méthode</span> Pour un mécanisme à un degré de liberté, on isole le système, on écrit
+    \(E_c\) en fonction de la vitesse, puis on écrit le TEC : on obtient directement l'équation du mouvement, sans les inter-efforts
+    des liaisons parfaites (ils ne travaillent pas).</div>
+  </section>
+
+  <section class="block" id="rendement">
+    <h3>7. Notion de rendement</h3>
+    <p>Une partie de l'énergie fournie est perdue (chaleur, frottements). Rendement :
+    \(\eta=\dfrac{E_u}{E_{fournie}}=1-\dfrac{E_{perdue}}{E_{fournie}}\), compris entre 0 et 1. En régime établi, on raisonne en puissance :
+    \(\eta=\dfrac{P_u}{P_{fournie}}\).</p>
+  </section>
+
+  <h2 id="td" class="part">Partie 2 — Correction des exercices de TD</h2>
+  <p class="lead">Énoncés retranscrits du TD C04 (les figures sont décrites). Les exercices dont la correction n'est pas encore rédigée sont signalés.</p>
+
+  <section class="block td-exo" id="td-ex1">
+    <h2 class="exo-title">1. Calcul d'énergie cinétique</h2>
+    <h3>Exercice 1.1 — Cylindre sur plan incliné</h3>
+    <div class="enonce">Un cylindre homogène (S) de masse \(m\), de rayon \(R\) et de centre \(G\) roule sans glisser en \(I\) sur un plan incliné.
+    <ol><li>Déterminer l'énergie cinétique du cylindre par rapport à \(R\) en \(I\).</li><li>Même question en \(G\).</li></ol></div>
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q1</span>Énergie cinétique en \(I\)</p>
+      <p>Roulement sans glissement : \(V_{I\in S/R}=\vec 0\). Le moment d'inertie en \(I\) vaut \(J_I=J_G+mR^2=\tfrac12 mR^2+mR^2=\tfrac32 mR^2\).
+      Donc \(E_{c(S/R)}=\tfrac12 J_I\,\omega^2=\tfrac34\,mR^2\omega^2\).</p>
+    </div>
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q2</span>Énergie cinétique en \(G\)</p>
+      <p>Avec \(V_G=R\omega\) : \(E_c=\tfrac12 mV_G^2+\tfrac12 J_G\omega^2=\tfrac12 mR^2\omega^2+\tfrac14 mR^2\omega^2=\tfrac34 mR^2\omega^2\).
+      On retrouve bien la même valeur, comme le veut le fait que \(E_c\) ne dépend pas du point d'écriture.</p>
+    </div>
+
+    <h3>Exercice 1.2 — Toupie</h3>
+    <div class="enonce">Une toupie \(S\), de masse \(m\) et de centre de gravité \(G\), a un axe de symétrie matérielle \((A,\vec z_1)\) et son point \(O\) reste immobile.
+    Matrice d'inertie en \(O\) : \(\bar I_{(O,S)}=\begin{pmatrix}A&0&0\\0&A&0\\0&0&C\end{pmatrix}_{(\vec x_1,\vec y_1,\vec z_1)}\).
+    Les angles d'Euler sont \(\psi\) (précession), \(\theta\) (nutation) et \(\varphi\) (rotation propre).
+    <ol><li>Déterminer l'énergie cinétique de la toupie.</li></ol></div>
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q1</span>Énergie cinétique</p>
+      <p>Le point \(O\) est fixe : \(E_c=\tfrac12\,\vec\sigma_O\cdot\vec\Omega\) avec \(\vec\Omega_{S/R}=\dot\psi\,\vec z_0+\dot\theta\,\vec x_1+\dot\varphi\,\vec z_1\).
+      Dans la base \((\vec x_1,\vec y_1,\vec z_1)\) : \(\Omega_{x_1}=\dot\theta\), \(\Omega_{y_1}=\dot\psi\sin\theta\) (au signe près), \(\Omega_{z_1}=\dot\psi\cos\theta+\dot\varphi\).</p>
+      <div class="res">\(2E_{c(S/R)}=A\,(\dot\theta^2+\dot\psi^2\sin^2\theta)+C\,(\dot\varphi+\dot\psi\cos\theta)^2\)</div>
+    </div>
+  </section>
+
+  <section class="block td-exo" id="td-ex2">
+    <h2 class="exo-title">2. Calcul d'inertie équivalente</h2>
+    <h3>Exercice 2.1 — Réducteur à deux étages</h3>
+    <div class="enonce">Un réducteur à deux étages comporte un pignon d'entrée moteur \(\mathbf 1\) (\(Z_1\), moment d'inertie \(J_1\) autour de son axe), un arbre intermédiaire \(\mathbf 2\)
+    avec deux pignons \(Z_{2a}\) et \(Z_{2b}\) (moment \(J_2\)) et un arbre de sortie \(\mathbf 3\) avec un pignon \(Z_3\) (moment \(J_3\)). Les arbres sont en liaison pivot d'axe \(\vec z\) par rapport au bâti \(\mathbf 0\).
+    On note \(\lambda\) le rapport de réduction du 1<sup>er</sup> engrenage et \(\mu\) celui du 2<sup>e</sup>.
+    <ol><li>Calculer l'énergie cinétique de l'ensemble \(\Sigma=\{1,2,3\}\) par rapport à \(\mathbf 0\).</li><li>En déduire l'inertie équivalente ramenée à l'axe du moteur.</li></ol></div>
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q1</span>Énergie cinétique de \(\Sigma\)</p>
+      <p>Chaque solide tourne autour d'un axe fixe : \(E_{c(\Sigma/0)}=\tfrac12(J_1\omega_1^2+J_2\omega_2^2+J_3\omega_3^2)\).</p>
+    </div>
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q2</span>Inertie équivalente</p>
+      <p>Avec \(\lambda=\omega_2/\omega_1\) et \(\mu=\omega_3/\omega_2\) : \(\omega_2=\lambda\omega_1\), \(\omega_3=\lambda\mu\,\omega_1\).</p>
+      <div class="res">\(I_{eq}=J_1+\lambda^2 J_2+\lambda^2\mu^2 J_3\), ramenée à l'axe moteur.</div>
+      <p class="note">Les rapports sont définis ici comme \(\omega_{\text{sortie}}/\omega_{\text{entrée}}\) ; si le TD les définit à l'inverse, les puissances de \(\lambda\) et \(\mu\) s'inversent.</p>
+    </div>
+
+    <h3>Exercice 2.2 — Système d'entraînement en translation</h3>
+    <div class="enonce">Une table (\(\mathbf 2\)), supportant une charge embarquée, est en liaison glissière sans frottement par rapport au bâti \(\mathbf 0\).
+    Elle est entraînée par une crémaillère avec le pignon moteur \(\mathbf 1\) (rayon \(R\), moment d'inertie \(J\) autour de son axe). Masse totale du solide en translation : \(M\).
+    <ol><li>Calculer l'énergie cinétique de \(\Sigma=\{1,2\}\) par rapport à \(\mathbf 0\).</li><li>En déduire l'inertie équivalente ramenée à l'axe moteur.</li></ol></div>
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q1</span>Énergie cinétique</p>
+      <p>Pignon en rotation : \(\tfrac12 J\omega_1^2\). Table en translation à la vitesse \(V=R\,\omega_1\) (roulement pignon–crémaillère) : \(\tfrac12 MV^2\).</p>
+      <div class="res">\(E_{c(\Sigma/0)}=\tfrac12\big(J+MR^2\big)\omega_1^2\)</div>
+    </div>
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q2</span>Inertie équivalente</p>
+      <div class="res">\(I_{eq}=J+MR^2\)</div>
+    </div>
+  </section>
+
+  <section class="block td-exo" id="td-ex3">
+    <h2 class="exo-title">3. Calcul de puissance</h2>
+    <h3>Exercice 3.1 — Solides en contact avec frottement</h3>
+    <div class="enonce">Deux solides \(S_1\) et \(S_2\) sont en contact ponctuel en \(A\), avec frottement de coefficient \(f=\tan\varphi\).
+    Torseur de l'action de \(S_1\) sur \(S_2\) : \(\{\mathcal T_{S_1\to S_2}\}_A=\{\vec R=\vec N+\vec T\,;\,\vec 0\}\), et \(\{\mathcal V_{S_2/S_1}\}_A=\{\vec\Omega_{S_2/S_1}\,;\,\vec V_{A\in S_2/S_1}\}\).
+    On a \(\vec V_{A\in S_2/S_1}\cdot\vec N=0\) et \(\vec V_{A\in S_2/S_1}\cdot\vec T<0\).
+    <ol><li>Déterminer \(P_{S_1\leftrightarrow S_2}\).</li></ol></div>
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q1</span>Puissance des inter-efforts</p>
+      <p>Le moment en \(A\) du torseur est nul, donc \(P=\vec R\cdot\vec V_{A\in S_2/S_1}=(\vec N+\vec T)\cdot\vec V_A=\vec T\cdot\vec V_A\) (car \(\vec N\cdot\vec V_A=0\)).</p>
+      <div class="res">\(P_{S_1\leftrightarrow S_2}=\vec T\cdot\vec V_{A\in S_2/S_1}<0\) : puissance perdue par frottement (le frottement s'oppose au glissement, \(|\vec T|=fN\)).</div>
+    </div>
+
+    <h3>Exercice 3.2 — Liaison pivot glissant parfaite</h3>
+    <div class="enonce">Dans le cas d'une liaison pivot glissant parfaite d'axe \(\vec x\) entre deux solides, déterminer la puissance des inter-efforts.</div>
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q1</span>Puissance</p>
+      <div class="res">\(P_{S_1\leftrightarrow S_2}=0\) : la liaison parfaite ne dissipe pas d'énergie, car le torseur des inter-efforts est réciproque au torseur cinématique.</div>
+    </div>
+  </section>
+
+  <section class="block td-exo" id="td-ex4">
+    <h2 class="exo-title">4. Application du théorème de l'énergie cinétique</h2>
+    <h3>Exercice 4.1 — Cylindre sur plan incliné (TEC)</h3>
+    <div class="enonce">Le cylindre homogène de l'exercice 1.1 roule sans glisser sur le plan incliné, d'angle \(\alpha\) avec l'horizontale. Le schéma du TD note cet angle \(\theta\) ;
+    on le note ici \(\alpha\) pour éviter la confusion avec l'angle de rotation \(\theta\) du cylindre.
+    <ol><li>En utilisant le TEC, déterminer l'accélération angulaire du cylindre.</li><li>Retrouver le même résultat par le PFD.</li></ol></div>
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q1</span>Par le TEC</p>
+      <p>Énergie cinétique (exercice 1.1) : \(E_c=\tfrac34 mR^2\dot\theta^2\). Puissances extérieures : la réaction en \(I\) ne travaille pas (\(V_I=0\)) ;
+      le poids travaille : \(P_{\vec P}=m\vec g\cdot\vec V_G=mg\sin\alpha\,R\dot\theta\) (descente).</p>
+      <p>TEC : \(\dfrac{d}{dt}\Big(\tfrac34 mR^2\dot\theta^2\Big)=mgR\sin\alpha\,\dot\theta\), soit \(\tfrac32 mR^2\dot\theta\ddot\theta=mgR\sin\alpha\,\dot\theta\).</p>
+      <div class="res">\(\ddot\theta=\dfrac{2g\sin\alpha}{3R}\)</div>
+    </div>
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q2</span>Par le PFD</p>
+      <p>Résultante sur l'axe du plan : \(m a_G=mg\sin\alpha-F_I\). Moment en \(G\) : \(\tfrac12 mR^2\ddot\theta=F_I R\). Avec \(a_G=R\ddot\theta\) : \(mR\ddot\theta=mg\sin\alpha-\tfrac12 mR\ddot\theta\), donc \(\tfrac32 R\ddot\theta=g\sin\alpha\).</p>
+      <div class="res">On retrouve \(\ddot\theta=\dfrac{2g\sin\alpha}{3R}\).</div>
+    </div>
+
+    <h3>Exercice 4.2 — Pendule double</h3>
+    <div class="enonce">Un pendule double oscille dans le plan vertical. La tige 1 (longueur \(2a\), masse \(m\)) est en liaison pivot d'axe \((O,\vec z)\) avec le bâti ; la tige 2 (même longueur et masse) est en liaison pivot d'axe \((A,\vec z)\) avec la tige 1.
+    On note \(\alpha=(\vec x,\vec x_1)\) et \(\beta=(\vec x_1,\vec x_2)\). Les matrices d'inertie des tiges sont données en leur centre d'inertie.
+    <ol><li>Déterminer la puissance de chacune des actions mécaniques (de \(\mathbf 0\) sur \(\mathbf 1\), de \(\mathbf 1\) sur \(\mathbf 2\), de la pesanteur sur chaque tige) dans le mouvement considéré.</li>
+    <li>Parmi ces puissances, indiquer celles qui correspondent à des puissances d'action mécanique extérieure et celles qui correspondent à des inter-efforts.</li>
+    <li>Calculer l'énergie cinétique de la tige 2 dans son mouvement par rapport à \(\mathbf 0\).</li>
+    <li>L'application du TEC à la tige 2 peut-elle permettre d'obtenir les deux équations différentielles du mouvement ? (Même question en isolant \(\{1+2\}\).)</li></ol></div>
+    <div class="warnbox"><span class="lab">À rédiger</span> Correction non encore rédigée (exercice à deux degrés de liberté, à reprendre dans une prochaine passe).</div>
+  </section>
+
+  <section class="block td-exo" id="td-ex5">
+    <h2 class="exo-title">5. Étude de cas</h2>
+    <h3>Exercice 5.1 — Duo Voyageur Concept (siège de véhicule pivotant)</h3>
+    <div class="enonce">Système permettant de faciliter l'accès d'une personne à mobilité réduite au siège avant d'un véhicule. Le bras \(\mathbf 1\) (liaison pivot d'axe \((O,\vec z_0)\) avec le châssis \(\mathbf 0\)) porte le siège.
+    Un moteur (axe \(A\)) entraîne en rotation le bras via un engrenage entre le rotor \(\mathbf 2\) (roue de rayon primitif \(r_2\)) et une roue fixe liée au châssis (rayon primitif \(r_0\)), avec roulement sans glissement en \(J\).
+    Le cahier des charges impose une loi d'évolution de la vitesse angulaire du bras en trapèze, une vitesse nominale de \(3\ \text{tr/min}\) et une durée de phase d'accélération \(> 1\ \text{s}\).</div>
+    <div class="warnbox"><span class="lab">À rédiger</span> Correction non encore rédigée (étude de cas avec inertie équivalente et vérification du cahier des charges).</div>
+
+    <h3>Exercice 5.2 — Embrayage assisté (commande électrique d'embrayage et restituteur d'effort)</h3>
+    <div class="enonce">La commande électrique d'embrayage remplace l'effort musculaire du conducteur. Un restituteur électrique d'efforts (système poulies–courroie, moteur de couple \(C_m\) et d'inertie \(J_m\), vis à billes de pas \(p_v\), écrou de masse \(M_e\)) transmet l'effort de la pédale.
+    Données : \(C=40\ \text{N·m}\), \(I_{eq}=270\ \text{kg·m}^2\), \(r_0=30\ \text{cm}\), \(r_2=15\ \text{cm}\) pour le cahier des charges de la phase d'accélération.
+    <ol><li>Donner la relation entre \(\omega_m\) (moteur) et \(\omega_{10}\) (vitesse angulaire du bras \(\mathbf 1\) par rapport au châssis).</li>
+    <li>Déterminer l'inertie équivalente \(I_{eq}\) de l'ensemble des solides en mouvement, ramenée à l'axe \((O,ec z_0)\) du bras, puis l'accélération angulaire du bras \(\mathbf 1\) par rapport au châssis \(\mathbf 0\) (TEC).</li>
+    <li>Vérifier le critère du cahier des charges concernant la durée de la phase d'accélération angulaire du bras.</li></ol></div>
+    <div class="warnbox"><span class="lab">À rédiger</span> Correction non encore rédigée. La partie restituteur (modèle dynamique de la pédale, linéarisation, schéma-bloc) reste à traiter.</div>
+  </section>
+
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <div class="docs-group">
+      <h3>Cours et TD (Moodle)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../assets/pdf.html?f=../aem2-si/S2I_CM_C04_Energetique_du_solide.pdf" target="_blank" rel="noopener"><span class="ic">📄</span><span class="nm">S2I_CM_C04_Énergétique_du_solide.pdf</span><span class="badge">Cours</span></a></li>
+        <li><a class="doc-item" href="../assets/pdf.html?f=../aem2-si/S2I_TD_C04_Energetique_du_solide.pdf" target="_blank" rel="noopener"><span class="ic">📄</span><span class="nm">S2I_TD_C04_Énergétique_du_solide.pdf</span><span class="badge">TD</span></a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Généré comme support de révision personnel · Contenu basé sur le CM de S2I (Sciences Industrielles de
+  l'Ingénieur) de l'ECAM — <a href="../assets/pdf.html?f=../aem2-si/S2I_CM_C03_Dynamique_du_solide.pdf" target="_blank" rel="noopener">PDF source</a>.
+</footer>
+<script src="../assets/gate.js"></script>
+</body>
+</html>
