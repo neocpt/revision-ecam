@@ -1,0 +1,2154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapitre C03 — Dynamique du solide — Révision ECAM</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div class="topbar">
+  <a href="../index.html#am2">← Accueil</a>
+  <span class="spacer"></span>
+  <a href="#cours">Cours</a>
+  <a href="#td">Correction TD</a>
+  <a href="#docs">Documents donnés</a>
+</div>
+
+<main class="wrap">
+  <span class="chip">SI AM2 (2ᵉ année) · Chapitre C03 — Dynamique du solide</span>
+  <h1 class="title">Chapitre C03 — Dynamique du solide</h1>
+  <h2 id="cours" class="part">Partie 1 — Cours</h2>
+  <!-- ======================= MEMO ==================================== -->
+  <section class="memo-sheet" id="memo">
+    <div class="memo-head">📌 Fiche mémo — Dynamique du solide</div>
+    <div class="memo-grid">
+      <div class="memo-item"><b>PFD point matériel</b>\(\exists R_g:\ \sum\vec F_{ext\to P}=m\vec\Gamma_{P/R_g}\), \(\sum\vec M_{P,ext\to P}=\vec0\)</div>
+      <div class="memo-item"><b>Théorème résultante dynamique</b>\(\sum\vec F_{ext\to S}=m\vec\Gamma_{G\in S/R_g}\)</div>
+      <div class="memo-item"><b>Théorème moment dynamique</b>\(\vec M_{A,ext\to S}=\vec\delta_{A\in S/R_g}=\displaystyle\int_S\overrightarrow{AM}\wedge\vec\Gamma_{M\in S/R_g}\,dm\)</div>
+      <div class="memo-item"><b>Torseur dynamique</b>\(\{\mathcal D_{S/R_g}\}_A=\{m\vec\Gamma_{G\in S/R_g}\,;\ \vec\delta_{A\in S/R_g}\}\) ; PFD galiléen : \(\{\mathcal T_{ext\to S}\}_A=\{\mathcal D_{S/R_g}\}_A\)</div>
+      <div class="memo-item"><b>Torseur cinétique</b>\(\{\mathcal C_{S/R_g}\}_A=\{m\vec V_{G\in S/R_g}\,;\ \vec\sigma_{A\in S/R_g}\}\), \(\vec\sigma_{A\in S/R_g}=\int\overrightarrow{AM}\wedge\vec V_{M\in S/R_g}\,dm\)</div>
+      <div class="memo-item"><b>Moment cinétique pratique</b>\(\vec\sigma_{A\in S/R_g}=\bar{\bar I}_{(A,S)}.\vec\Omega_{S/R_g}+m\,\overrightarrow{AG}\wedge\vec V_{A\in S/R_g}\)</div>
+      <div class="memo-item"><b>Moment dynamique / cinétique</b>\(\vec\delta_{A\in S/R_g}=\Big[\dfrac{d\vec\sigma_{A\in S/R_g}}{dt}\Big]_{R_g}+\vec V_{A/R_g}\wedge m\vec V_{G\in S/R_g}\)</div>
+      <div class="memo-item"><b>Opérateur d'inertie</b>\(\bar{\bar I}_{(A,S)}=\begin{pmatrix}A&-F&-E\\-F&B&-D\\-E&-D&C\end{pmatrix}\), \(A{=}\int(y^2{+}z^2)dm\), \(D{=}\int yz\,dm\) (idem \(B,C,E,F\) par permutation)</div>
+      <div class="memo-item"><b>Théorème de Huygens</b>\(\bar{\bar I}_{(O,S)}=\bar{\bar I}_{(G,S)}+m\begin{pmatrix}b^2{+}c^2&-ab&-ac\\-ab&a^2{+}c^2&-bc\\-ac&-bc&a^2{+}b^2\end{pmatrix}\), \(\overrightarrow{OG}=a\vec x{+}b\vec y{+}c\vec z\)</div>
+      <div class="memo-item"><b>Translation</b>\(\{\mathcal T_{ext\to S}\}_A=\{m\vec\Gamma_{G\in S/R_g}\,;\ m\,\overrightarrow{AG}\wedge\vec\Gamma_{G\in S/R_g}\}\), nul en \(G\)</div>
+      <div class="memo-item"><b>Rotation autour d'un axe fixe \((O,\vec z)\)</b>\(\{\mathcal T_{ext\to S}\}_O=\{m\vec\Gamma_{G\in S/R_g}\,;\ J\ddot\theta\,\vec z\}\) si \(G\) sur l'axe et axe principal</div>
+      <div class="memo-item method"><b>Dérivée d'une composante (astuce)</b>\(\Big[\dfrac{d\vec u}{dt}\Big]_R\!\cdot\vec z=\Big[\dfrac{d(\vec u\cdot\vec z)}{dt}\Big]_R-\vec u\cdot\Big[\dfrac{d\vec z}{dt}\Big]_R\) — nul si \(\vec z\) fixe dans \(R\)</div>
+      <div class="memo-item method"><b>Formule de Bour</b>\(\Big[\dfrac{d\vec u}{dt}\Big]_{R_1}=\Big[\dfrac{d\vec u}{dt}\Big]_{R_2}+\vec\Omega_{R_2/R_1}\wedge\vec u\)</div>
+      <div class="memo-item method"><b>Méthode (6 étapes)</b>graphe de structure → isolement → IAME → écriture du PFD → détermination du torseur dynamique → équations/résolution (mêmes point + base)</div>
+    </div>
+  </section>
+
+  <!-- ======================= INTRO ==================================== -->
+  <section class="block" id="intro">
+    <h2>1. Introduction — référentiels, PFD du point matériel</h2>
+    <p>La dynamique étudie les relations entre les <b>mouvements</b> d'un solide et leurs <b>causes</b> (les
+    actions mécaniques) : c'est le carrefour entre la cinématique et la statique. Deux problématiques types :
+    les efforts sont connus et on cherche le mouvement, ou le mouvement est imposé et on cherche les actions
+    mécaniques qu'il engendre (dimensionnement d'actionneur, tenue de pièce en accélération...).</p>
+
+    <div class="def">
+      <span class="lab">Référentiel galiléen</span>
+      Pour écrire les lois de Newton, il faut un référentiel « absolu » (repère + horloge). En mécanique
+      classique on admet le <b>référentiel de Copernic</b> (origine = centre d'inertie du système solaire, axes
+      pointant vers des étoiles fixes) comme absolu. Tout référentiel en <b>translation rectiligne uniforme</b>
+      par rapport à lui est dit <b>galiléen</b> — en particulier le référentiel terrestre (géocentrique), en
+      négligeant la rotation propre de la Terre.
+    </div>
+    <div class="note">
+      <span class="lab">Base / repère / référentiel</span>
+      <b>Base</b> : 3 vecteurs orthonormés directs. <b>Repère</b> : un point origine + une base (outil de calcul,
+      projections). <b>Référentiel</b> : un repère + une horloge (permet de définir vitesse/accélération). En
+      pratique on confond souvent repère et référentiel.
+    </div>
+
+    <div class="thm">
+      <span class="lab">★ PFD du point matériel (rappel de physique — 2<sup>e</sup> loi de Newton)</span>
+      Pour un point matériel \(P\) de masse \(m\) :
+      \[\exists R_g\ \text{tq}:\qquad \sum\overrightarrow{F_{ext\to P}}=m\,\overrightarrow{\Gamma_{P/R_g}}
+      \qquad\text{et}\qquad \sum\overrightarrow{M_{P,ext\to P}}=\vec0\]
+      La seconde équation est triviale pour un point (toutes les forces sont concourantes en \(P\)) — elle
+      devient l'enjeu principal du chapitre dès qu'on passe au solide étendu (§2).
+    </div>
+  </section>
+
+  <!-- ======================= PFD SOLIDE ==================================== -->
+  <section class="block" id="pfd">
+    <h2>2. PFD du solide — torseur dynamique</h2>
+    <p>Un solide \(S\) est modélisé comme un ensemble continu de points matériels \(M\) affectés d'une masse
+    élémentaire \(dm\). On applique le PFD à chaque \(dm\), puis on <b>intègre sur tout le solide</b>.</p>
+
+    <h3>2.1 Théorème de la résultante dynamique</h3>
+    <div class="method">
+      <span class="lab">Démonstration (idée)</span>
+      \(\displaystyle\int_S dm\,\overrightarrow{\Gamma_{M\in S/R_g}}=\int_S\Big[\dfrac{d^2\overrightarrow{OM}}{dt^2}\Big]_{R_g}dm
+      =\Big[\dfrac{d^2}{dt^2}\int_S\overrightarrow{OM}\,dm\Big]_{R_g}=\Big[\dfrac{d^2}{dt^2}\big(m\,\overrightarrow{OG}\big)\Big]_{R_g}
+      =m\,\overrightarrow{\Gamma_{G\in S/R_g}}\) (masse indépendante du temps, définition de \(G\)).
+    </div>
+    <div class="thm">
+      <span class="lab">★★ Théorème de la résultante dynamique (à savoir par cœur)</span>
+      \[\boxed{\ \sum\overrightarrow{F_{ext\to S}}=m\,\overrightarrow{\Gamma_{G\in S/R_g}}\ }\]
+    </div>
+
+    <h3>2.2 Théorème du moment dynamique</h3>
+    <div class="method">
+      <span class="lab">Démonstration (idée)</span>
+      En un point \(A\) lié à \(S\) : \(\displaystyle\int_S\sum\overrightarrow{M_{M,ext\to M}}=\vec0\) se réécrit
+      (changement de point puis PFD ponctuel) :
+      \[\overrightarrow{M_{A,ext\to S}}+\int_S\overrightarrow{MA}\wedge dm\,\overrightarrow{\Gamma_{M\in S/R_g}}=\vec0
+      \quad\Longrightarrow\quad \overrightarrow{M_{A,ext\to S}}=\int_S\overrightarrow{AM}\wedge\overrightarrow{\Gamma_{M\in S/R_g}}\,dm\]
+    </div>
+    <div class="thm">
+      <span class="lab">★★ Théorème du moment dynamique</span>
+      \[\boxed{\ \overrightarrow{M_{A,ext\to S}}=\overrightarrow{\delta_{A\in S/R_g}}=\int_S\overrightarrow{AM}\wedge\overrightarrow{\Gamma_{M\in S/R_g}}\,dm\ }\]
+    </div>
+
+    <h3>2.3 Torseur dynamique</h3>
+    <div class="def">
+      <span class="lab">Définition</span>
+      \(\overrightarrow{F_{ext\to S}}\) et \(\overrightarrow{M_{A,ext\to S}}\) forment le <b>torseur des actions
+      mécaniques extérieures</b> à \(S\) au point \(A\) (transport de Varignon habituel). De même,
+      \(m\overrightarrow{\Gamma_{G\in S/R_g}}\) et \(\overrightarrow{\delta_{A\in S/R_g}}\) forment un torseur, le
+      <b>torseur dynamique</b> de \(S/R_g\) au point \(A\) (lié à \(S\)) :
+      \[\{\mathcal D_{S/R_g}\}_A=\left\{\begin{array}{l} R\{\mathcal D_{S/R_g}\}=m\,\overrightarrow{\Gamma_{G\in S/R_g}}\\[.2em]
+      M_A\{\mathcal D_{S/R_g}\}=\overrightarrow{\delta_{A\in S/R_g}}\end{array}\right\}_A\]
+      \(m\overrightarrow{\Gamma_{G\in S/R_g}}\) est la <b>quantité d'accélération</b> (kg·m·s⁻²), \(\overrightarrow{\delta_{A\in S/R_g}}\)
+      le <b>moment dynamique</b> (kg·m²·s⁻² ou N·m). Comme tout torseur, il se transporte par Varignon :
+      \(\overrightarrow{\delta_{B\in S/R_g}}=\overrightarrow{\delta_{A\in S/R_g}}+\overrightarrow{BA}\wedge m\overrightarrow{\Gamma_{G\in S/R_g}}\).
+    </div>
+
+    <div class="thm" style="text-align:center">
+      <span class="lab">★★★ PFD torseuriel galiléen (résultat central du chapitre)</span>
+      \[\boxed{\ \{\mathcal T_{ext\to S}\}_A=\{\mathcal D_{S/R_g}\}_A\ }\]
+      Soit, en séparant résultante et moment (au <b>même point</b>, dans la <b>même base</b>) :
+      \[\overrightarrow{F_{ext\to S}}=m\,\overrightarrow{\Gamma_{G\in S/R_g}}\qquad,\qquad
+      \overrightarrow{M_{A,ext\to S}}=\overrightarrow{\delta_{A\in S/R_g}}\]
+    </div>
+    <div class="warnbox">
+      <span class="lab">Piège classique</span>
+      Les deux torseurs \(\{\mathcal T_{ext\to S}\}\) (bilan des actions mécaniques) et \(\{\mathcal D_{S/R_g}\}\)
+      (issu du mouvement) se déterminent <b>séparément et indépendamment</b> — puis on les <b>égalise</b> au même
+      point et dans la même base pour obtenir au maximum 6 équations scalaires.
+    </div>
+
+    <h3>2.4 Cas d'un ensemble de solides</h3>
+    <div class="note">
+      Pour \(\Sigma=S_1+S_2+\dots+S_n\), les torseurs dynamiques <b>s'additionnent au même point</b> :
+      \(\{\mathcal T_{ext\to\Sigma}\}_A=\{\mathcal D_{S_1/R_g}\}_A+\dots+\{\mathcal D_{S_n/R_g}\}_A\). Le PFS
+      (statique) est le cas particulier du PFD où l'accélération est nulle (solide immobile ou en translation
+      rectiligne uniforme).
+    </div>
+
+    <h3>2.5 PFD dans un référentiel non galiléen \(R_{ng}\)</h3>
+    <div class="method">
+      Si \(R_{ng}\) n'est pas galiléen, on doit ajouter des <b>forces d'inertie</b> (fictives, proportionnelles à
+      la masse) :
+      \[\{\mathcal D_{S/R_{ng}}\}_A=\{\mathcal T_{ext\to S}\}_A-\{\mathcal D_{E,R_{ng}/R_g}\}-\{\mathcal D_{Cor,S/R_g}\}\]
+      (torseurs des forces d'inertie d'entraînement et de Coriolis). Si \(R_{ng}\) est en <b>translation
+      rectiligne uniforme</b> par rapport à \(R_g\), ces deux torseurs sont nuls : \(R_{ng}\) est en fait
+      galiléen. Hors programme de ce chapitre (rappelé pour mémoire).
+    </div>
+  </section>
+
+  <!-- ======================= CINETIQUE ==================================== -->
+  <section class="block" id="cinetique">
+    <h2>3. Torseur cinétique</h2>
+    <div class="def">
+      <span class="lab">Définition</span>
+      \[\{\mathcal C_{S/R_g}\}_A=\left\{\begin{array}{l} R\{\mathcal C_{S/R_g}\}=\displaystyle\int_S\overrightarrow{V_{M\in S/R_g}}\,dm=m\,\overrightarrow{V_{G\in S/R_g}}\\[.3em]
+      M_A\{\mathcal C_{S/R_g}\}=\overrightarrow{\sigma_{A\in S/R_g}}=\displaystyle\int_S\overrightarrow{AM}\wedge\overrightarrow{V_{M\in S/R_g}}\,dm\end{array}\right\}_A\]
+      \(m\overrightarrow{V_{G\in S/R_g}}\) = <b>quantité de mouvement</b> (kg·m·s⁻¹), \(\overrightarrow{\sigma_{A\in S/R_g}}\)
+      = <b>moment cinétique</b> (kg·m²·rad·s⁻¹). Le torseur cinétique se transporte aussi par Varignon (théorème
+      de König) : \(\overrightarrow{\sigma_{B\in S/R_g}}=\overrightarrow{\sigma_{A\in S/R_g}}+\overrightarrow{BA}\wedge m\overrightarrow{V_{G\in S/R_g}}\).
+    </div>
+
+    <h3>3.1 Relation entre torseur cinétique et torseur dynamique</h3>
+    <div class="thm">
+      <span class="lab">Résultantes</span>
+      \(R\{\mathcal D_{S/R_g}\}=\Big[\dfrac{dR\{\mathcal C_{S/R_g}\}}{dt}\Big]_{R_g}\) (immédiat : dérivée seconde
+      de position = dérivée première de vitesse).
+    </div>
+    <div class="thm">
+      <span class="lab">Moments (point \(A\) géométrique quelconque)</span>
+      \[\boxed{\ \overrightarrow{\delta_{A\in S/R_g}}=\Big[\dfrac{d\overrightarrow{\sigma_{A\in S/R_g}}}{dt}\Big]_{R_g}+\overrightarrow{V_{A/R_g}}\wedge m\,\overrightarrow{V_{G\in S/R_g}}\ }\]
+    </div>
+    <div class="note">
+      <span class="lab">Cas particuliers (le terme correctif s'annule)</span>
+      Si <b>\(A\) est fixe</b> dans \(R_g\) (\(\overrightarrow{V_{A/R_g}}=\vec0\)), ou si <b>\(A=G\)</b>
+      (\(\overrightarrow{V_{A/R_g}}\wedge\overrightarrow{V_{G\in S/R_g}}=\vec0\)) :
+      \[\overrightarrow{\delta_{A\in S/R_g}}=\Big[\dfrac{d\overrightarrow{\sigma_{A\in S/R_g}}}{dt}\Big]_{R_g}\]
+      C'est la forme la plus utilisée en pratique (choisir \(A=O\) fixe ou \(A=G\) simplifie toujours le calcul).
+    </div>
+
+    <h3>3.2 Calcul pratique du moment cinétique — l'opérateur d'inertie</h3>
+    <div class="method">
+      <span class="lab">★ Méthode (évite les doubles produits vectoriels)</span>
+      En écrivant \(\overrightarrow{V_{M\in S/R_g}}=\overrightarrow{V_{A\in S/R_g}}+\overrightarrow{MA}\wedge\overrightarrow{\Omega_{S/R_g}}\)
+      puis en intégrant, on isole un opérateur linéaire \(\bar{\bar I}_{(A,S)}\) tel que
+      \(\bar{\bar I}_{(A,S)}.\vec u=\int_S\overrightarrow{AM}\wedge(\vec u\wedge\overrightarrow{AM})\,dm\) — c'est
+      l'<b>opérateur d'inertie</b>, étudié en détail au §4. Le moment cinétique se réécrit alors sans aucune
+      intégrale « pénible » à refaire à chaque exercice :
+      \[\boxed{\ \overrightarrow{\sigma_{A\in S/R_g}}=\bar{\bar I}_{(A,S)}.\overrightarrow{\Omega_{S/R_g}}+m\,\overrightarrow{AG}\wedge\overrightarrow{V_{A\in S/R_g}}\ }\]
+      Cas particuliers : si \(A=G\) ou si \(A\in S\) est <b>fixe dans \(R_g\)</b>, le second terme s'annule :
+      \(\overrightarrow{\sigma_{A\in S/R_g}}=\bar{\bar I}_{(A,S)}.\overrightarrow{\Omega_{S/R_g}}\).
+    </div>
+  </section>
+
+  <!-- ======================= INERTIE ==================================== -->
+  <section class="block" id="inertie">
+    <h2>4. L'opérateur d'inertie</h2>
+    <div class="def">
+      <span class="lab">Définition — matrice d'inertie</span>
+      \(\bar{\bar I}_{(A,S)}\) est une application linéaire de \(\mathbb R^3\) dans \(\mathbb R^3\), représentée
+      dans une base \(b(\vec x,\vec y,\vec z)\) par une matrice <b>symétrique</b> (en posant \(\overrightarrow{AM}=x\vec x+y\vec y+z\vec z\)) :
+      \[\bar{\bar I}_{(A,S)}=\begin{pmatrix}A&-F&-E\\-F&B&-D\\-E&-D&C\end{pmatrix}_{\!b}\]
+    </div>
+    <div class="overflow">
+    <table>
+      <tr><th>Moments d'inertie (kg·m²)</th><th>Produits d'inertie (kg·m²)</th></tr>
+      <tr><td>\(A=\displaystyle\int_S(y^2+z^2)\,dm\)</td><td>\(D=\displaystyle\int_S yz\,dm\)</td></tr>
+      <tr><td>\(B=\displaystyle\int_S(x^2+z^2)\,dm\)</td><td>\(E=\displaystyle\int_S xz\,dm\)</td></tr>
+      <tr><td>\(C=\displaystyle\int_S(x^2+y^2)\,dm\)</td><td>\(F=\displaystyle\int_S xy\,dm\)</td></tr>
+    </table>
+    </div>
+    <p>L'opérateur d'inertie décrit la <b>répartition des masses</b> du solide autour du point \(A\). Un moment
+    d'inertie est <b>toujours positif</b> (nul seulement pour un solide infiniment fin selon l'axe considéré) et
+    est <b>minimal</b> pour un axe passant par le centre d'inertie \(G\).</p>
+
+    <h3>4.1 Moment d'inertie par rapport à un axe</h3>
+    <div class="thm">
+      Pour un axe \(\Delta=(O,\vec u)\) : \(\displaystyle I_\Delta=\vec u\cdot\big(\bar{\bar I}_{(O,S)}.\vec u\big)\).
+      <span class="warnbox" style="display:block;margin-top:.5rem">Le produit matriciel \(\bar{\bar I}.\vec u\) n'a de
+      sens que si la matrice et \(\vec u\) sont exprimés <b>dans la même base</b>.</span>
+    </div>
+
+    <h3>4.2 Base propre d'inertie, simplifications par symétrie</h3>
+    <div class="note">
+      <span class="lab">Base propre</span>
+      Il existe toujours, en \(G\), une base \((\vec x',\vec y',\vec z')\) où \(\bar{\bar I}_{(G,S)}\) est
+      <b>diagonale</b> (produits d'inertie nuls). Une rotation autour d'un de ces axes se fait sans vibration
+      (solide <b>dynamiquement équilibré</b>). Dynamiquement équilibré ⟹ statiquement équilibré (\(G\) sur
+      l'axe) ; la réciproque est fausse.
+    </div>
+    <div class="method">
+      <span class="lab">★ Simplifications à connaître par cœur (gain de temps considérable)</span>
+      <ul style="margin:.3rem 0 0">
+        <li><b>Plan de symétrie \((O,\vec x_s,\vec y_s)\)</b> : les produits d'inertie impliquant \(z_s\) sont nuls
+        (\(D=E=0\)) → \(\bar{\bar I}_{(O,S)}=\begin{pmatrix}A&-F&0\\-F&B&0\\0&0&C\end{pmatrix}\).</li>
+        <li><b>Deux plans de symétrie perpendiculaires</b> : tous les produits nuls, matrice diagonale
+        \(\mathrm{diag}(A,B,C)\).</li>
+        <li><b>Axe de révolution \((O,\vec z_s)\)</b> : matrice diagonale avec en plus \(A=B\) (isotropie
+        transverse), et \(A=B=\dfrac{C}{2}+\displaystyle\int_S z^2\,dm\).</li>
+      </ul>
+    </div>
+
+    <h3>4.3 Théorème de Huygens</h3>
+    <div class="thm" style="text-align:center">
+      <span class="lab">★★★ À savoir par cœur — change de point (uniquement entre \(G\) et un autre point !)</span>
+      En posant \(\overrightarrow{OG}=a\vec x_s+b\vec y_s+c\vec z_s\) :
+      \[\boxed{\ \bar{\bar I}_{(O,S)}=\bar{\bar I}_{(G,S)}+m\begin{pmatrix}b^2{+}c^2&-ab&-ac\\-ab&a^2{+}c^2&-bc\\-ac&-bc&a^2{+}b^2\end{pmatrix}\ }\]
+    </div>
+    <div class="warnbox">
+      <span class="lab">Piège classique</span>
+      Cette relation n'est valable <b>qu'entre le centre de gravité \(G\)</b> et un autre point. Pour passer d'un
+      point \(A\) à un point \(B\) (ni l'un ni l'autre n'étant \(G\)), il faut obligatoirement passer par
+      <b>\(A\to G\to B\)</b> (deux applications du théorème).
+    </div>
+  </section>
+
+  <!-- ======================= CAS PARTICULIERS ==================================== -->
+  <section class="block" id="cas-part">
+    <h2>5. Cas particuliers classiques (formes toutes faites du PFD)</h2>
+
+    <div class="exo-card">
+      <div class="exo-head">Solide en translation</div>
+      <div class="exo-body">
+        <p>Au centre de gravité \(G\) : \(\overrightarrow{\delta_{G\in S/R_g}}=\vec0\) (démonstration : intégrale
+        de \(\overrightarrow{GM}\wedge\overrightarrow{\Gamma_{G\in S/R_g}}\,dm\), le vecteur accélération sort de
+        l'intégrale car identique en tout point, puis \(\int\overrightarrow{GM}dm=\vec0\) par définition de
+        \(G\)). En un point quelconque \(A\) lié à \(S\) :
+        <div class="res">
+        \[\{\mathcal T_{ext\to S}\}_A=\left\{\begin{array}{l}m\,\overrightarrow{\Gamma_{G\in S/R_g}}\\ m\,\overrightarrow{AG}\wedge\overrightarrow{\Gamma_{G\in S/R_g}}\end{array}\right\}_A\]
+        </div>
+        <b>En translation, l'inertie ne dépend que de la masse</b> (pas de sa répartition) — logique, le moment
+        dynamique en \(A\ne G\) reste non nul sauf si \(\overrightarrow{AG}\) est colinéaire à
+        \(\overrightarrow{\Gamma_{G\in S/R_g}}\) (point sur l'axe de translation passant par \(G\)).
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Solide en rotation autour d'un axe fixe \((O,\vec z)\), avec \(G\) sur l'axe</div>
+      <div class="exo-body">
+        <p>En notant \(\theta\) l'angle de rotation, \(J\) le moment d'inertie de \(S\) par rapport à \((O,\vec z)\)
+        (axe supposé principal d'inertie en \(O\)) :</p>
+        <div class="res">
+        \[\{\mathcal T_{ext\to S}\}_O=\left\{\begin{array}{l}\vec0\\ J\ddot\theta\,\vec z\end{array}\right\}_O\]
+        </div>
+        <p><b>En rotation, l'inertie dépend de la valeur ET de la répartition</b> de la masse (le moment
+        d'inertie \(J\)) — c'est la différence fondamentale avec la translation, et la raison d'être de
+        l'opérateur d'inertie.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= METHODOLOGIE ==================================== -->
+  <section class="block" id="methode">
+    <h2>6. Méthodologie de résolution</h2>
+    <div class="method">
+      <span class="lab">★ Démarche complète, dans l'ordre</span>
+      <ol style="margin:.3rem 0 0">
+        <li><b>Graphe de structure</b> : repérer les liaisons entre sous-ensembles et les actions mécaniques
+        extérieures.</li>
+        <li><b>Isolement</b> : choisir le solide (ou l'ensemble de solides) \(S\) étudié — définit ce qui est
+        extérieur/intérieur.</li>
+        <li><b>Inventaire des actions mécaniques extérieures (IAME)</b> : comme en statique (actions à distance,
+        actions de contact).</li>
+        <li><b>Écriture du PFD</b> : \(\{\mathcal T_{ext\to S}\}_A=\{\mathcal D_{S/R_g}\}_A\).</li>
+        <li><b>Détermination du torseur dynamique</b> — l'étape la plus calculatoire, surtout pour le moment.
+        Deux méthodes selon la donnée disponible :
+          <ul style="margin:.3rem 0 0">
+            <li>Matrice d'inertie connue en \(A\) : moment cinétique \(\vec\sigma_A=\bar{\bar I}_{(A,S)}.\vec\Omega+m\overrightarrow{AG}\wedge\vec V_A\),
+            puis \(\vec\delta_A=[\tfrac{d\vec\sigma_A}{dt}]_{R_g}+\vec V_{A/R_g}\wedge m\vec V_G\).</li>
+            <li>Matrice connue en \(G\) : soit on la transporte en \(A\) par Huygens (retombe sur le cas
+            précédent), soit on calcule \(\vec\sigma_G=\bar{\bar I}_{(G,S)}.\vec\Omega\), on transporte en \(A\)
+            (\(\vec\sigma_A=\vec\sigma_G+\overrightarrow{AG}\wedge m\vec V_G\)), puis on dérive.</li>
+          </ul>
+        </li>
+        <li><b>Écriture des équations / résolution</b> : au maximum 6 équations scalaires, <b>au même point et
+        dans la même base</b>. Si la résolution n'aboutit pas : hypothèses simplificatrices ou isolement d'un
+        autre sous-système.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ======================= CONSEILS ==================================== -->
+  <section class="block" id="conseils">
+    <h2>7. Conseils pratiques de calcul</h2>
+    <div class="method">
+      <span class="lab">★ Astuce n°1 — ne jamais tout exprimer dans la base globale</span>
+      Il est inutile (et source d'erreurs) de projeter tous les vecteurs dans la base fixe. Pour obtenir la
+      composante d'un vecteur dérivé selon un axe \(\vec z\), on préfère :
+      \[\Big[\dfrac{d\vec u}{dt}\Big]_R\cdot\vec z=\Big[\dfrac{d(\vec u\cdot\vec z)}{dt}\Big]_R-\vec u\cdot\Big[\dfrac{d\vec z}{dt}\Big]_R\]
+      qui vient simplement de la dérivée d'un produit scalaire. <b>Si \(\vec z\) est fixe dans \(R\)</b>
+      (\([\tfrac{d\vec z}{dt}]_R=\vec0\)), le second terme disparaît : \([\tfrac{d\vec u}{dt}]_R\cdot\vec z=\tfrac{d(\vec u\cdot\vec z)}{dt}\)
+      — très utilisé pour extraire une seule composante du moment dynamique sans dériver le vecteur entier.
+    </div>
+    <div class="method">
+      <span class="lab">★ Astuce n°2 — formule de Bour (changement de référentiel de dérivation)</span>
+      Pour dériver un vecteur \(\vec u\) exprimé dans une base \(R_2\) mobile par rapport à \(R_1\), on n'a jamais
+      besoin de tout projeter dans \(R_1\) : la formule de dérivation vectorielle (Bour) donne directement
+      \[\Big[\dfrac{d\vec u}{dt}\Big]_{R_1}=\Big[\dfrac{d\vec u}{dt}\Big]_{R_2}+\overrightarrow{\Omega_{R_2/R_1}}\wedge\vec u\]
+      Cas très fréquent : \(\vec u\) constant dans \(R_2\) (vecteur de base attaché au solide 2) →
+      \([\tfrac{d\vec u}{dt}]_{R_2}=\vec0\), donc \([\tfrac{d\vec u}{dt}]_{R_1}=\overrightarrow{\Omega_{2/1}}\wedge\vec u\).
+    </div>
+    <div class="warnbox">
+      <span class="lab">Erreur fréquente</span>
+      Oublier qu'un moment dynamique dépend <b>à la fois</b> du mouvement étudié <b>et</b> du point où on
+      l'écrit — deux points différents donnent, en général, deux valeurs différentes de \(\vec\delta\) (contrairement
+      à la résultante \(m\vec\Gamma_G\), qui elle est unique). Toujours vérifier qu'on compare des torseurs
+      exprimés au <b>même point</b>.
+    </div>
+  </section>
+
+
+
+  <div style="margin:2.2rem 0 .4rem;padding:.7rem 1rem;border-left:5px solid var(--subject);background:#f8fafc;border-radius:8px"><b style="color:var(--subject-ink)">TD corrigé</b> — TD corrigé — Dynamique du solide (C03)</div>
+  <p class="lead">Correction des exercices du TD « Dynamique du solide (C03) », dans l'ordre du TD : calcul de matrices d'inertie
+  (section 1), lecteur DVD (2), arbre de navire (3), éolienne bipale (4), régulateur centrifuge (5), équilibreuse (6).
+  Les exercices 1, 2, 3, 5 et 6 ont une correction pas à pas sur leur page dédiée ; l'éolienne (section 4) est résolue ici
+  avec la méthode du cours, sans corrigé officiel. Méthode et formules : voir le <a href="#cours">résumé de cours</a>.</p>
+
+
+  <h2 id="td" class="part">Partie 2 — Correction des exercices de TD</h2>
+  <section class="block td-exo" id="td-ex1">
+
+  <div class="kicker">AM2 · SI · Chapitre 3 — Dynamique du solide (TD, exercice 1)</div>
+  <h2 class="exo-title">Calcul de matrices d'inertie : correction détaillée</h2>
+  <p class="lead">Premier exercice du TD « Dynamique du solide (C03) », dans l'ordre du TD : barre, rectangle mince, quart de disque,
+  cylindre plein, cylindre percé. Pour chaque question : l'énoncé en image, la démarche, le calcul complet, puis les résultats du corrigé.
+  L'objectif est de savoir <strong>calculer une matrice d'inertie</strong>, ce qui sert ensuite dans tout le PFD.</p>
+
+  <!-- ============================================================ -->
+  <h2>1. Avant de commencer : l'essentiel</h2>
+
+  <div class="card">
+    <h3>L'opérateur d'inertie</h3>
+    <p>Pour un solide \(S\) de masse \(m\), l'opérateur d'inertie en un point \(P\), exprimé dans une base \(b(\vec x,\vec y,\vec z)\), est une matrice symétrique :</p>
+    \[\bar{\bar I}(P,S)=\begin{pmatrix}A&-F&-E\\-F&B&-D\\-E&-D&C\end{pmatrix}_b,\qquad
+    A=\int_S(y^2+z^2)\,dm,\quad B=\int_S(x^2+z^2)\,dm,\quad C=\int_S(x^2+y^2)\,dm\]
+    <p>Les termes hors diagonale sont \(F=\int_S xy\,dm\), \(E=\int_S xz\,dm\), \(D=\int_S yz\,dm\), avec le signe moins devant dans la matrice.</p>
+    <h3>Trois règles qui simplifient presque tout</h3>
+    <ul>
+      <li><strong>Symétrie par rapport à un plan</strong> \((G,\vec x,\vec y)\) : les termes \(E\) et \(D\) sont nuls (les masses se compensent).</li>
+      <li><strong>Solide de révolution</strong> d'axe \(\vec z\) : \(A=B\), et la matrice est diagonale.</li>
+      <li><strong>Théorème de Huygens</strong> : pour passer du centre de masse \(G\) à un point \(P\) quelconque, avec \(\overrightarrow{PG}=(d_x,d_y,d_z)\) :
+      \(\bar{\bar I}(P,S)=\bar{\bar I}(G,S)+m\begin{pmatrix}d_y^2+d_z^2&-d_xd_y&-d_xd_z\\-d_xd_y&d_x^2+d_z^2&-d_yd_z\\-d_xd_z&-d_yd_z&d_x^2+d_y^2\end{pmatrix}\).</li>
+    </ul>
+  </div>
+
+  <div class="info">
+    <span class="lab">Méthode commune aux 5 exercices</span>
+    Pour une pièce homogène, on écrit \(dm=\rho\,dV\) (ou \(\sigma\,dS\) pour une surface), on intègre \(x^2\), \(y^2\), \(z^2\) ou \(xy\) sur la pièce,
+    et on exprime le résultat avec la masse \(m\). Choisir le repère pour que les intégrales soient simples (centre et axes de symétrie).
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>2. Exercice 1 — Barre</h2>
+
+  <figure>
+    <img src="img/inertie-barre.png" alt="Barre cylindrique de rayon négligeable, longueur L, sur l'axe x, centre G et origine O" loading="lazy">
+    <figcaption>Énoncé de l'exercice 1 : barre de longueur \(L\), de rayon négligeable devant \(L\), centre de masse \(G\).</figcaption>
+  </figure>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Opérateur d'inertie en \(G\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer l'opérateur d'inertie en \(G\), exprimé dans la base \(b(\vec x,\vec y,\vec z)\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Où est la matière ?</strong> Elle est uniquement sur l'axe \((G,\vec x)\). Donc \(y\) et \(z\) sont nuls partout : \(y^2\), \(z^2\), \(yz\), \(xy\), \(xz\) sont nuls.</li>
+        <li><strong>Conséquence</strong> : \(A=0\) (car \(A=\int(y^2+z^2)dm=0\)), et \(D=E=F=0\).</li>
+        <li><strong>Symétrie</strong> : \((G,\vec y)\) et \((G,\vec z)\) jouent le même rôle, donc \(B=C\).</li>
+        <li><strong>Calcul de \(B\)</strong> : \(B=\int x^2dm\) avec \(dm=\dfrac{m}{L}dx\), \(x\in[-L/2,L/2]\).</li>
+      </ol>
+      <div class="calc">
+        \[B=\dfrac{m}{L}\int_{-L/2}^{L/2}x^2\,dx=\dfrac{m}{L}\Big[\dfrac{x^3}{3}\Big]_{-L/2}^{L/2}=\dfrac{m}{L}\cdot\dfrac{L^3}{12}=\dfrac{mL^2}{12}\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \[\bar{\bar I}(G,S)=\begin{pmatrix}0&0&0\\0&\dfrac{mL^2}{12}&0\\0&0&\dfrac{mL^2}{12}\end{pmatrix}_b\]
+      </div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>Une barre fine tournant autour d'un axe perpendiculaire à elle a une inertie \(mL^2/12\) par rapport à son centre. Autour de son propre axe, l'inertie est quasi nulle (rayon négligeable).</p>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q2</span>Opérateur d'inertie en \(O\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Même question, au point \(O\) (extrémité de la barre).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>On garde le résultat en \(G\) et on applique Huygens. Ici \(\overrightarrow{OG}=\dfrac{L}{2}\vec x\), donc \(d_x=L/2\), \(d_y=d_z=0\).</li>
+        <li>Huygens ajoute \(m(d_x^2+d_z^2)\) à \(B\) (axe \(\vec y\)) et \(m(d_x^2+d_y^2)\) à \(C\) (axe \(\vec z\)). Ici \(d_z=0\) et \(d_y=0\), donc on ajoute \(m\,d_x^2\) à \(B\) et à \(C\).</li>
+      </ol>
+      <div class="calc">
+        \[B_O=B_G+m\Big(\dfrac{L}{2}\Big)^2=\dfrac{mL^2}{12}+\dfrac{mL^2}{4}=\dfrac{mL^2}{3}\qquad C_O=\dfrac{mL^2}{3}\qquad A_O=0\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \[\bar{\bar I}(O,S)=\begin{pmatrix}0&0&0\\0&\dfrac{mL^2}{3}&0\\0&0&\dfrac{mL^2}{3}\end{pmatrix}_b\]
+      </div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Huygens ajoute \(m\,d^2\) uniquement aux axes <strong>perpendiculaires</strong> au décalage. Ici le décalage est selon \(\vec x\), donc \(A\) ne change pas (il est déjà nul).</li>
+        <li>Ne pas oublier : \(\dfrac{mL^2}{12}+\dfrac{mL^2}{4}=\dfrac{mL^2}{3}\).</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>3. Exercice 2 — Rectangle mince</h2>
+
+  <figure>
+    <img src="img/inertie-rectangle.png" alt="Rectangle de longueur 2a et de largeur 2b, centre G, base x y z" loading="lazy">
+    <figcaption>Énoncé de l'exercice 2 : rectangle mince de longueur \(2a\) et de largeur \(2b\), centre de masse \(G\).</figcaption>
+  </figure>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Opérateur d'inertie en \(G\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer l'opérateur d'inertie en \(G\), dans la base \(b(\vec x,\vec y,\vec z)\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Symétries</strong> : \(\vec x\) et \(\vec y\) sont axes de symétrie, donc la matrice est diagonale (\(D=E=F=0\)).</li>
+        <li><strong>Matière plane</strong> : le rectangle est dans le plan \((G,\vec x,\vec y)\), donc \(z=0\) partout. D'où \(C=\int(x^2+y^2)dm=A+B\).</li>
+        <li><strong>Surface</strong> : \(dm=\sigma\,dS\) avec \(\sigma=\dfrac{m}{4ab}\) (aire \(4ab\)).</li>
+        <li><strong>Calcul de \(A=\int y^2dm\)</strong>, avec \(y\in[-b,b]\) et \(x\in[-a,a]\).</li>
+      </ol>
+      <div class="calc">
+        \[A=\dfrac{m}{4ab}\int_{-a}^{a}dx\int_{-b}^{b}y^2\,dy=\dfrac{m}{4ab}\cdot 2a\cdot\dfrac{2b^3}{3}=\dfrac{mb^2}{3}\]
+        <p>Par analogie (on échange \(x\) et \(y\)) : \(B=\dfrac{ma^2}{3}\). Puis :</p>
+        \[C=A+B=\dfrac{m(a^2+b^2)}{3}\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \[\bar{\bar I}(G,S)=\begin{pmatrix}\dfrac{mb^2}{3}&0&0\\0&\dfrac{ma^2}{3}&0\\0&0&\dfrac{m(a^2+b^2)}{3}\end{pmatrix}_b\]
+      </div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>Plaque plane : l'inertie perpendiculaire au plan est la somme des deux autres (\(C=A+B\)). C'est le cas dès qu'une pièce est mince et plane.</p>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>4. Exercice 3 — Quart de disque</h2>
+
+  <figure>
+    <img src="img/inertie-quart.png" alt="Quart de disque de rayon R, centre O, angle theta, vecteur u" loading="lazy">
+    <figcaption>Énoncé de l'exercice 3 : quart de disque de rayon \(R\), centre \(O\), masse surfacique \(\rho\).</figcaption>
+  </figure>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Position du centre de gravité</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer la position du centre de gravité \(G\), dans le repère \((O,\vec x,\vec y)\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Définition : \(\overrightarrow{OG}=\dfrac{1}{m}\int_S\overrightarrow{OM}\,dm\).</li>
+        <li>Par symétrie (la figure est symétrique par rapport à la droite \(y=x\)), \(x_G=y_G\).</li>
+        <li>On calcule \(x_G\) en coordonnées polaires : \(x=r\cos\theta\), \(dS=r\,dr\,d\theta\), \(\theta\in[0,\pi/2]\), \(r\in[0,R]\).</li>
+      </ol>
+      <div class="calc">
+        <p>Masse : \(m=\rho\dfrac{\pi R^2}{4}\). Puis :</p>
+        \[x_G=\dfrac{1}{m}\int_0^{\pi/2}\!\!\int_0^R (r\cos\theta)\,\rho\,r\,dr\,d\theta=\dfrac{\rho}{m}\Big[\dfrac{R^3}{3}\Big]\Big[\sin\theta\Big]_0^{\pi/2}=\dfrac{\rho R^3}{3m}=\dfrac{\rho R^3}{3\rho\pi R^2/4}=\dfrac{4R}{3\pi}\]
+        \[\overrightarrow{OG}=\dfrac{4R}{3\pi}(\vec x+\vec y)\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \(x_G=y_G=\dfrac{4R}{3\pi}\approx0{,}42\,R\).
+      </div>
+      <div class="info"><span class="lab">Vérification (théorème de Guldin)</span>
+        Le volume engendré par la rotation du quart de disque autour de l'axe \(x\) (tour complet) vaut \(V=2\pi\,y_G\cdot S\).
+        Pour une demi-sphère de rayon \(R\) il vaut \(\tfrac{2}{3}\pi R^3\), et \(S=\tfrac{\pi R^2}{4}\) : on retrouve \(y_G=\dfrac{V}{2\pi S}=\dfrac{4R}{3\pi}\).</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Le jacobien en polaires est \(r\), pas 1 : sans lui, on oublie un facteur \(r\).</li>
+        <li>\(G\) n'est pas au milieu de l'arc : il est à \(0{,}42\,R\) de \(O\), à l'intérieur du quart.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q2</span>Opérateur d'inertie en \(O\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer l'opérateur d'inertie en \(O\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>La pièce est une plaque d'épaisseur nulle : \(C=A+B\).</li>
+        <li>\(B=\int x^2dm\) : en polaires, \(x^2=r^2\cos^2\theta\), donc on intègre \(\cos^2\theta=\dfrac{1+\cos2\theta}{2}\).</li>
+        <li>\(F=\int xy\,dm\) : on a \(\cos\theta\sin\theta=\dfrac{\sin2\theta}{2}\) et l'intégrale en \(\theta\) de \(\sin2\theta\) donne un terme \(\cos\) qui se simplifie.</li>
+      </ol>
+      <div class="calc">
+        \[B=\dfrac{4m}{\pi R^2}\int_0^{\pi/2}\!\!\int_0^R r^3\cos^2\theta\,dr\,d\theta=\dfrac{4m}{\pi R^2}\cdot\dfrac{R^4}{4}\cdot\dfrac{\pi}{4}=\dfrac{mR^2}{4}\]
+        \[A=\dfrac{mR^2}{4}\ \ (\text{symétrie } x\leftrightarrow y),\qquad C=A+B=\dfrac{mR^2}{2}\]
+        \[F=\int xy\,dm=\dfrac{4m}{\pi R^2}\int_0^{\pi/2}\!\!\int_0^R r^3\cos\theta\sin\theta\,dr\,d\theta=\dfrac{4m}{\pi R^2}\cdot\dfrac{R^4}{4}\cdot\dfrac{1}{2}=\dfrac{mR^2}{2\pi}\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \[\bar{\bar I}(O,S)=\begin{pmatrix}\dfrac{mR^2}{4}&-\dfrac{mR^2}{2\pi}&0\\[4pt]-\dfrac{mR^2}{2\pi}&\dfrac{mR^2}{4}&0\\[4pt]0&0&\dfrac{mR^2}{2}\end{pmatrix}_{b}\]
+        <p style="margin:.6rem 0 0">Le terme hors diagonale est \(-F\) avec \(F=\dfrac{mR^2}{2\pi}\) : le signe moins vient de la convention de la matrice.</p>
+      </div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>En polaires avec une densité constante : \(\int_0^{\pi/2}\cos^2\theta\,d\theta=\dfrac{\pi}{4}\) et \(\int_0^{\pi/2}\cos\theta\sin\theta\,d\theta=\dfrac12\). Ce sont les deux intégrales à connaître.</p>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3</span>Opérateur d'inertie en \(G\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer l'opérateur d'inertie en \(G\) (centre de gravité trouvé en Q1).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>On applique Huygens depuis \(O\) vers \(G\), avec \(\overrightarrow{OG}=d(\vec x+\vec y)\), \(d=\dfrac{4R}{3\pi}\). Donc \(\overrightarrow{GO}=(-d,-d,0)\).</li>
+        <li>Les produits \(d_xd_y=d^2=\dfrac{16R^2}{9\pi^2}\) apparaissent hors diagonale, et \(d_y^2+d_z^2=d^2\), \(d_x^2+d_z^2=d^2\), \(d_x^2+d_y^2=2d^2\).</li>
+        <li>On écrit \(\bar{\bar I}(G)=\bar{\bar I}(O)-m\,(\text{matrice de Huygens})\).</li>
+      </ol>
+      <div class="calc">
+        \[\bar{\bar I}(G)=\bar{\bar I}(O)-m\,\dfrac{16R^2}{9\pi^2}\begin{pmatrix}1&-1&0\\-1&1&0\\0&0&2\end{pmatrix}\]
+        \[A_G=\dfrac{mR^2}{4}-\dfrac{16mR^2}{9\pi^2}=\dfrac{mR^2(9\pi^2-64)}{36\pi^2}\qquad C_G=\dfrac{mR^2}{2}-\dfrac{32mR^2}{9\pi^2}=\dfrac{mR^2(9\pi^2-64)}{18\pi^2}\]
+        \[F_G=\dfrac{mR^2}{2\pi}-\dfrac{16mR^2}{9\pi^2}=\dfrac{mR^2(18\pi-64)}{36\pi^2}\ \Rightarrow\ \text{terme hors diagonale}=-F_G=\dfrac{mR^2(64-18\pi)}{36\pi^2}\]
+      </div>
+      <div class="res"><span class="lab">Réponse (corrigé)</span>
+        \[\bar{\bar I}(G,S)=\dfrac{mR^2}{36\pi^2}\begin{pmatrix}9\pi^2-64&64-18\pi&0\\64-18\pi&9\pi^2-64&0\\0&0&2(9\pi^2-64)\end{pmatrix}_{b}\]
+      </div>
+      <div class="info"><span class="lab">Ordre de grandeur</span>
+        \(9\pi^2-64\approx24{,}8\) et \(64-18\pi\approx7{,}5\) : la matrice est bien définie positive (valeurs propres positives), comme il se doit pour une inertie.</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Le signe de Huygens est <strong>moins</strong> : on passe de \(O\) à \(G\), donc on <em>retranche</em> \(m\,d^2\) (le centre de masse est plus près).</li>
+        <li>Les deux termes \(\dfrac{mR^2}{2\pi}\) et \(\dfrac{16mR^2}{9\pi^2}\) doivent être mis au même dénominateur avant de simplifier.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>5. Exercice 4 — Cylindre plein</h2>
+
+  <figure>
+    <img src="img/inertie-cylindre-plein.png" alt="Cylindre plein de rayon R, hauteur h, masse m, base inférieure O, centre G, base x y z" loading="lazy">
+    <figcaption>Énoncé de l'exercice 4 : cylindre plein homogène, rayon \(R\), hauteur \(h\), masse \(m\). \(O\) = centre de la base inférieure, \(G\) = centre de masse.</figcaption>
+  </figure>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Opérateur d'inertie en \(G\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer l'opérateur d'inertie en \(G\), dans la base \(b(\vec x,\vec y,\vec z)\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Révolution</strong> autour de \((O,\vec z)\) : \(A=B\), et la matrice est diagonale.</li>
+        <li><strong>Axe z</strong> : \(C=\int(x^2+y^2)dm=\int r^2dm\) (ici \(r\) est la distance à l'axe \(z\)).</li>
+        <li><strong>Axe x</strong> : \(A=\int(y^2+z^2)dm=\int y^2dm+\int z^2dm\). Par symétrie de révolution, \(\int y^2dm=\dfrac{C}{2}\) (car \(x^2+y^2\) se répartit également entre \(x\) et \(y\)). Donc \(A=\dfrac{C}{2}+\int z^2dm\).</li>
+      </ol>
+      <div class="calc">
+        <p><strong>Calcul de \(C\)</strong> : en cylindriques, \(dm=\dfrac{m}{\pi R^2h}r\,dr\,d\theta\,dz\), avec \(z\in[-h/2,h/2]\) (on part de \(G\)).</p>
+        \[C=\dfrac{m}{\pi R^2h}\int_0^{2\pi}\!\!d\theta\int_0^R r^3dr\int_{-h/2}^{h/2}dz=\dfrac{m}{\pi R^2h}\cdot2\pi\cdot\dfrac{R^4}{4}\cdot h=\dfrac{mR^2}{2}\]
+        <p><strong>Calcul de \(\int z^2dm\)</strong> (avec \(z\) mesuré depuis \(G\)) :</p>
+        \[\int z^2dm=\dfrac{m}{h}\int_{-h/2}^{h/2}z^2\,dz=\dfrac{m}{h}\Big[\dfrac{z^3}{3}\Big]_{-h/2}^{h/2}=\dfrac{m}{h}\cdot\dfrac{h^3}{12}=\dfrac{mh^2}{12}\]
+        <p>(La densité est uniforme en hauteur : \(dm=\dfrac{m}{h}dz\) une fois la section intégrée. Le rayon n'intervient pas ici.)</p>
+        <p>Donc \(A=\dfrac{C}{2}+\dfrac{mh^2}{12}=\dfrac{mR^2}{4}+\dfrac{mh^2}{12}\).</p>
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \[\bar{\bar I}(G,S)=\begin{pmatrix}\dfrac{mR^2}{4}+\dfrac{mh^2}{12}&0&0\\0&\dfrac{mR^2}{4}+\dfrac{mh^2}{12}&0\\0&0&\dfrac{mR^2}{2}\end{pmatrix}_b\]
+      </div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>Cylindre plein d'axe \(z\) : \(I_{zz}=\dfrac{mR^2}{2}\) et \(I_{xx}=I_{yy}=\dfrac{mR^2}{4}+\dfrac{mh^2}{12}\) (centre de masse). Ces trois formules sont à connaître par cœur.</p>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q2</span>Opérateur d'inertie en \(O\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer l'opérateur d'inertie en \(O\) (centre de la base inférieure), dans la base \(b(\vec x,\vec y,\vec z)\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>On reprend les mêmes calculs, mais avec \(z\) mesuré depuis \(O\) : \(z\in[0,h]\) au lieu de \([-h/2,h/2]\).</li>
+        <li>\(C\) ne change pas (il ne dépend que de \(r\)) : \(C=\dfrac{mR^2}{2}\).</li>
+        <li>\(\int z^2dm\) devient \(\dfrac{m}{h}\displaystyle\int_0^h z^2dz=\dfrac{mh^2}{3}\).</li>
+      </ol>
+      <div class="calc">
+        \[\int z^2dm=\dfrac{m}{h}\int_0^h z^2\,dz=\dfrac{m}{h}\cdot\dfrac{h^3}{3}=\dfrac{mh^2}{3}\]
+        \[A_O=\dfrac{C}{2}+\dfrac{mh^2}{3}=\dfrac{mR^2}{4}+\dfrac{mh^2}{3}\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \[\bar{\bar I}(O,S)=\begin{pmatrix}\dfrac{mR^2}{4}+\dfrac{mh^2}{3}&0&0\\0&\dfrac{mR^2}{4}+\dfrac{mh^2}{3}&0\\0&0&\dfrac{mR^2}{2}\end{pmatrix}_b\]
+      </div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Le terme en \(h^2\) change : \(\dfrac{h^2}{12}\) au centre, \(\dfrac{h^2}{3}\) à la base. La différence \(\dfrac{h^2}{3}-\dfrac{h^2}{12}=\dfrac{h^2}{4}\) est justement \(m(h/2)^2\), le terme de Huygens.</li>
+        <li>Le terme en \(R^2\) est le même partout : seul \(z\) dépend du point de référence.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3</span>Retrouver \(\bar{\bar I}(G,S)\) par Huygens</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Retrouver l'opérateur d'inertie en \(G\) à partir de celui en \(O\), avec le théorème de Huygens.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Le vecteur \(\overrightarrow{OG}=\dfrac{h}{2}\vec z\) : \(d_z=h/2\), \(d_x=d_y=0\).</li>
+        <li>Huygens : seuls \(A\) et \(B\) changent, de \(m\,d_z^2=m\dfrac{h^2}{4}\). \(C\) ne change pas (l'axe \(z\) est parallèle au décalage).</li>
+      </ol>
+      <div class="calc">
+        \[A_G=A_O-m\dfrac{h^2}{4}=\dfrac{mR^2}{4}+\dfrac{mh^2}{3}-\dfrac{mh^2}{4}=\dfrac{mR^2}{4}+\dfrac{mh^2}{12}\]
+        <p>On retrouve bien le résultat directement obtenu en \(G\) (Q1).</p>
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        Même résultat qu'en Q1 : \(A_G=B_G=\dfrac{mR^2}{4}+\dfrac{mh^2}{12}\), \(C_G=\dfrac{mR^2}{2}\).
+      </div>
+    </div>
+    <aside class="aside apply">
+      <span class="lab">Appliquer</span>
+      <ul>
+        <li>Pour vérifier une matrice, refaire le passage Huygens dans les deux sens : c'est une bonne façon de repérer un signe faux.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>6. Exercice 5 — Cylindre percé</h2>
+
+  <figure>
+    <img src="img/inertie-cylindre-perce.png" alt="Cylindre percé : cas 1 perçage centré, cas 2 perçage décalé de a selon x" loading="lazy">
+    <figcaption>Énoncé de l'exercice 5 : cylindre de hauteur \(h\) et de rayon \(R\), avec un perçage de rayon \(r\). Cas 1 : perçage centré. Cas 2 : perçage décalé de \(a\) selon \(\vec x\) (\(\overrightarrow{GG'}=a\vec x\)).</figcaption>
+  </figure>
+
+  <div class="qblock wide">
+    <div>
+      <p class="qtitle"><span class="qnum">Q</span>Opérateur d'inertie en \(G\) : cas 1 (perçage centré) et cas 2 (perçage décalé)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Connaissant la matrice d'un cylindre plein de hauteur \(h\) et de rayon \(R\), déterminer celle du cylindre percé au point \(G\).
+        Données : \(h=40\) mm, \(R=30\) mm. Cas 1 : \(r=10\) mm. Cas 2 : \(r=5\) mm, \(a=20\) mm.</div>
+      <p class="demarche"><span class="lab">Démarche (commune aux deux cas)</span></p>
+      <ol>
+        <li><strong>Soustraction</strong> : le cylindre percé \(S\) est le cylindre plein \(P\) (rayon \(R\)) moins le cylindre \(C\) (rayon \(r\)) qu'on a enlevé. Donc \(\bar{\bar I}(G,S)=\bar{\bar I}(G,P)-\bar{\bar I}(G,C)\) pour les deux termes, avec les masses \(m_P\) et \(m_C\).</li>
+        <li><strong>Masses</strong> : \(m_P=\pi\rho hR^2\), \(m_C=\pi\rho hr^2\), donc \(m=m_P-m_C=\pi\rho h(R^2-r^2)\).</li>
+        <li><strong>Inerties du plein</strong> (Ex. 4) : \(I_{xx}=I_{yy}=\dfrac{m R^2}{4}+\dfrac{mh^2}{12}\), \(I_{zz}=\dfrac{mR^2}{2}\), à remplacer par \(m_P\) puis \(m_C\) (avec \(r\)).</li>
+      </ol>
+
+      <div class="calc">
+        <p><strong>Cas 1 (perçage centré).</strong> Les deux cylindres ont le même centre \(G\). On soustrait terme à terme :</p>
+        \[A=\Big(\dfrac{m_PR^2}{4}+\dfrac{m_Ph^2}{12}\Big)-\Big(\dfrac{m_Cr^2}{4}+\dfrac{m_Ch^2}{12}\Big)=\dfrac{\pi\rho h(R^4-r^4)}{4}+\dfrac{\pi\rho h^3(R^2-r^2)}{12}\]
+        <p>En factorisant \(\pi\rho h(R^2-r^2)=m\) et en remarquant que \(R^4-r^4=(R^2-r^2)(R^2+r^2)\) :</p>
+        \[A=B=\dfrac{m(R^2+r^2)}{4}+\dfrac{mh^2}{12}\qquad\qquad C=\dfrac{m(R^2+r^2)}{2}\]
+      </div>
+
+      <div class="calc">
+        <p><strong>Cas 2 (perçage décalé de \(a\) selon \(\vec x\)).</strong> Le cylindre enlevé est centré en \(G'=G+a\vec x\). Il faut donc :</p>
+        <ul>
+          <li>calculer l'inertie du cylindre enlevé \(C\) en son propre centre \(G'\) (formules de l'Ex. 4 avec \(r\)) ;</li>
+          <li>la ramener en \(G\) par Huygens : \(m_C\,a^2\) s'ajoute aux axes perpendiculaires à \(\overrightarrow{GG'}=a\vec x\), c'est-à-dire \(\vec y\) et \(\vec z\), mais pas \(\vec x\).</li>
+        </ul>
+        <p>On obtient donc \(\bar{\bar I}(G,S)=\bar{\bar I}(G,P)-\bar{\bar I}(G',C)-m_C\begin{pmatrix}0&0&0\\0&a^2&0\\0&0&a^2\end{pmatrix}\), soit, avec \(m_C\,a^2=\dfrac{m\,r^2a^2}{R^2-r^2}\) :</p>
+        \[A=\dfrac{m(R^2+r^2)}{4}+\dfrac{mh^2}{12}\qquad B=A-\dfrac{mr^2a^2}{R^2-r^2}\qquad C=\dfrac{m(R^2+r^2)}{2}-\dfrac{mr^2a^2}{R^2-r^2}\]
+        <p>Le terme \(\dfrac{mr^2a^2}{R^2-r^2}\) n'apparaît que dans \(B\) et \(C\) : le décalage est selon \(\vec x\), donc l'axe \(\vec x\) n'est pas affecté.</p>
+      </div>
+
+      <div class="res"><span class="lab">Application numérique (corrigé)</span>
+        Cas 1 : \(m=784{,}14\) g, \(A=B=300{,}59\) kg·mm², \(C=392{,}07\) kg·mm².<br>
+        Cas 2 : \(m=857{,}65\) g, \(A=312{,}68\) kg·mm², \(B=302{,}6\) kg·mm², \(C=386{,}58\) kg·mm².
+        <p style="margin:.6rem 0 0"><em>Ces valeurs supposent une masse volumique \(\rho\approx7\,800\) kg·m⁻³ : c'est celle qui reproduit \(m=784{,}14\) g avec \(\pi\rho h(R^2-r^2)\), \(h=40\) mm et \(R^2-r^2=800\) mm².</em></p>
+      </div>
+
+      <div class="warn"><span class="lab">⚠️ Deux points du corrigé à noter</span>
+        <ul>
+          <li>Le corrigé écrit \(m_c=2\pi\rho hr^2\), probablement une coquille (à vérifier sur le PDF) : avec \(m_c=\pi\rho hr^2\) (aire d'un disque de rayon \(r\)), on retrouve bien \(m=m_P-m_c=\pi\rho h(R^2-r^2)\), qu'il utilise ensuite. Le calcul ci-dessus est fait avec \(\pi\rho hr^2\).</li>
+          <li>Pour le cas 2, en recalculant \(B\) à partir de \(A=312{,}68\) : \(B=312{,}68-9{,}80\approx302{,}9\) kg·mm² (le corrigé écrit 302,6). C'est un écart d'arrondi, sans conséquence.</li>
+        </ul>
+      </div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Un perçage est une <strong>soustraction</strong> : on enlève la masse et l'inertie du cylindre \(r\), sans oublier de changer la masse \(m\) dans les formules.</li>
+        <li>Le décalage \(a\) crée un terme \(m_C a^2\) qu'on oublie souvent. Il faut le retrancher dans \(B\) et \(C\) seulement.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>7. À retenir</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Barre</strong> : \(mL^2/12\) au centre, \(mL^2/3\) à l'extrémité.</li>
+      <li><strong>Plaque plane</strong> : \(C=A+B\). <strong>Plaque rectangulaire</strong> : \(A=mb^2/3\), \(B=ma^2/3\).</li>
+      <li><strong>Quart de disque</strong> : \(G\) à \(4R/(3\pi)\) selon \(x\) et \(y\). Les intégrales en polaires donnent \(\pi/4\) et \(1/2\).</li>
+      <li><strong>Cylindre</strong> : \(I_{zz}=mR^2/2\), \(I_{xx}=I_{yy}=mR^2/4+mh^2/12\) au centre (\(h^2/3\) à la base).</li>
+      <li><strong>Perçage</strong> : soustraction des deux cylindres ; décalage = Huygens sur les axes perpendiculaires.</li>
+    </ul>
+  </div>
+
+  </section>
+
+  <section class="block td-exo" id="td-ex2">
+
+  <div class="kicker">AM2 · SI · Chapitre 3 — Principe fondamental de la dynamique (TD)</div>
+  <h2 class="exo-title">Lecteur de DVD : correction détaillée</h2>
+  <p class="lead">Un exercice du TD « Principe fondamental de la dynamique » (CPGE PT, S2I). Pour chaque question,
+  on dit d'abord ce qu'elle demande, puis la démarche, puis le calcul complet. Les encadrés à droite
+  donnent la méthode, la formule à retenir ou le piège à éviter.</p>
+
+  <!-- ============================================================ -->
+  <h2>1. Avant de commencer : l'essentiel en quelques lignes</h2>
+
+  <div class="card">
+    <h3>Le principe fondamental de la dynamique (PFD)</h3>
+    <p>Le PFD relie <strong>les actions qui agissent sur un objet</strong> à <strong>la façon dont il accélère</strong>.
+    Il existe deux versions utiles ici :</p>
+    <ul>
+      <li><strong>En translation</strong> (le chariot glisse) : la somme des forces est égale à la masse fois l'accélération,
+      \(\sum \vec F = m\,\vec a\).</li>
+      <li><strong>En rotation autour d'un axe fixe</strong> (la vis tourne) : la somme des moments autour de cet axe est égale à
+      l'inertie fois l'accélération angulaire, \(\sum M = I\,\ddot\theta\).</li>
+    </ul>
+    <h3>Les mots du TD</h3>
+    <ul>
+      <li><strong>Torseur de liaison</strong> : une liaison entre deux pièces transmet des actions. On les écrit sous forme
+      de deux vecteurs : une <em>résultante</em> (forces \(X, Y, Z\)) et un <em>moment</em> (couples \(L, M, N\)).
+      Les lettres sont les inconnues du problème.</li>
+      <li><strong>Liaison hélicoïdale</strong> : c'est une liaison « vis-écrou ». Quand la vis tourne d'un tour, l'écrou avance
+      d'une distance appelée <strong>pas</strong> \(p\).</li>
+      <li><strong>Liaison glissière</strong> : une pièce ne peut que glisser le long d'un axe (ici les deux colonnes, direction \(\vec x_0\)).</li>
+      <li><strong>Liaison pivot</strong> : une pièce ne peut que tourner autour d'un axe.</li>
+    </ul>
+  </div>
+
+  <h3>Le système en une chaîne</h3>
+  <div class="chain" role="img" aria-label="Moteur 1 vers vis 2 vers chariot 3, le bâti 0 guide le chariot">
+    <span class="node">Moteur 1</span>
+    <span class="link">couple \(C_m\)</span>
+    <span class="node">Vis 2</span>
+    <span class="link">liaison hélicoïdale, pas \(p\)</span>
+    <span class="node">Chariot 3<br><small>(diode laser)</small></span>
+  </div>
+  <p>Le moteur fait tourner la vis. La vis fait avancer le chariot, qui porte la diode laser. Le chariot est guidé par deux
+  colonnes fixées au bâti 0 : il ne peut donc que glisser, pas tourner.</p>
+
+  <figure>
+    <img src="img/pfd-dvd-photo.png" alt="Photo du lecteur de DVD ouvert avec les pièces 0, 2, 3 et 4 repérées" loading="lazy">
+    <figcaption>Le lecteur de DVD ouvert. Pièce 3 : le chariot avec la diode laser. Pièce 2 : la vis. Pièce 1 : le moteur.
+    Pièce 0 : le bâti. Pièce 4 : le plateau qui fait tourner le DVD (non étudié ici).</figcaption>
+  </figure>
+
+  <div class="info">
+    <span class="lab">Ce que demande le TD au final</span>
+    Trouver le <strong>couple que le moteur doit fournir</strong> pour accélérer le chariot, puis trouver le <strong>pas de vis</strong>
+    qui rend ce couple le plus petit possible, et enfin vérifier que le <strong>moteur choisi</strong> convient.
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>2. La démarche en 5 étapes</h2>
+  <p>Toute la correction suit le même fil. Chaque étape produit une équation qu'on réutilise dans la suivante :</p>
+  <ol class="steps">
+    <li><strong>Isoler le chariot 3</strong> et appliquer le PFD en translation (questions 1 à 3). On obtient l'effort
+    \(X_{23}=m_3\,a\).</li>
+    <li><strong>Isoler la vis 2</strong> et appliquer le PFD en rotation (questions 4 à 6). On obtient
+    \(C_m + L_{32} = I_{vis}\,\ddot\theta\).</li>
+    <li><strong>Relier translation et rotation</strong> grâce au pas de la liaison hélicoïdale (question 7).</li>
+    <li><strong>Éliminer les inconnues</strong> pour exprimer \(C_m\) en fonction de \(a\) et de \(p\) (question 8).</li>
+    <li><strong>Optimiser le pas</strong> (question 9), puis faire l'application numérique et choisir le moteur (questions 10 et 11).</li>
+  </ol>
+
+  <!-- ============================================================ -->
+  <h2>3. Le modèle et les données</h2>
+
+  <p>Le modèle (schéma de l'énoncé, hypothèses, données) est rappelé ici. Le schéma de l'énoncé est répété juste au-dessus de la correction de la question 1.</p>
+
+  <div class="card">
+    <h3>Hypothèses (à garder en tête)</h3>
+    <ul>
+      <li>Les liaisons sont <strong>parfaites</strong> : pas de frottement.</li>
+      <li>Le centre de gravité de la vis est <strong>sur l'axe de rotation</strong>.</li>
+      <li>Le <strong>poids de la vis est négligé</strong>.</li>
+      <li>Le couple moteur \(C_m\) est <strong>constant</strong> pendant le démarrage.</li>
+    </ul>
+    <h3>Données numériques</h3>
+    <table>
+      <tr><th class="l">Grandeur</th><th>Valeur</th><th class="l">Signification</th></tr>
+      <tr><td class="l">\(m_3\)</td><td>10 g = \(0{,}01\) kg</td><td class="l">masse du chariot (laser compris)</td></tr>
+      <tr><td class="l">\(I_{vis}\)</td><td>\(4{,}2\cdot10^{-9}\) kg·m²</td><td class="l">inertie de la vis autour de son axe (modèle SolidWorks)</td></tr>
+      <tr><td class="l">\(p\)</td><td>à déterminer</td><td class="l">pas de la vis (distance avancée par tour)</td></tr>
+      <tr><td class="l">\(g\)</td><td>9,81 m·s⁻²</td><td class="l">pesanteur</td></tr>
+    </table>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>4. Correction question par question</h2>
+
+  <!-- ---- Partie A ---- -->
+  <h3>Partie A — Le chariot 3 (questions 1 à 3)</h3>
+
+  <div class="card">
+    <span class="lab">Énoncé (modèle de l'exercice)</span>
+    <figure>
+      <img src="img/pfd-dvd-modele.png" alt="Schéma cinématique : vis 2 en rouge, chariot 3 en bleu, moteur, bâti 0, repère x0 y0" loading="lazy">
+      <figcaption>Schéma du modèle. Les points \(B\), \(C\), \(D\), \(A\) sont les points de liaison. La vis 2 tourne autour de l'axe
+      \((D,\vec x_0)\). Le chariot 3 glisse suivant \(\vec x_0\).</figcaption>
+    </figure>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span> Quel est le mouvement de 3 par rapport à 0 ?</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Le chariot tourne-t-il, glisse-t-il, ou fait-il autre chose ? Dans quelle direction ?</div>
+      <p class="demarche"><span class="lab">Démarche</span>
+        Le chariot est guidé par deux colonnes parallèles à \(\vec x_0\). Une pièce guidée ainsi ne peut que glisser le long de ces colonnes.
+        Il suffit donc de donner la direction de ce glissement.</p>
+      <div class="res"><span class="lab">Réponse</span>
+        Le chariot 3 a une <strong>translation rectiligne de direction \(\vec x_0\)</strong> par rapport à 0.
+        Tous ses points ont la même vitesse et la même accélération. Un seul paramètre suffit : la position \(x(t)\), avec \(a=\ddot x\).</div>
+    </div>
+    <aside class="aside">
+      <span class="lab">Méthode</span>
+      <p>Une <strong>translation</strong> signifie que tous les points de la pièce font le même mouvement. Si la pièce tourne, ce n'est pas une translation.</p>
+      <p>« Rectiligne » veut dire en ligne droite.</p>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q2</span> Établir l'inventaire des actions mécaniques extérieures sur 3.</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Lister tout ce qui pousse ou retient le chariot, en l'écrivant sous forme de torseurs. « Extérieur » signifie : venant d'une autre pièce.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Le <strong>poids</strong> du chariot, toujours présent, appliqué en son centre de gravité \(G_3\).</li>
+        <li>La <strong>glissière</strong> avec le bâti 0, aux colonnes, au point \(A\).</li>
+        <li>La <strong>liaison hélicoïdale</strong> avec la vis 2, au point \(B\).</li>
+        <li>Pour chaque liaison, on met une inconnue par composante. Une liaison qui laisse libre un mouvement annule la composante correspondante :
+        la glissière laisse le chariot glisser suivant \(\vec x_0\), donc il n'y a <strong>aucune force suivant \(\vec x_0\)</strong> venant de 0.</li>
+      </ol>
+      <div class="calc">
+        \[\{\tau_{\text{pes}\to3}\}:\quad \vec R=-m_3\,g\,\vec y_0,\qquad \vec M_{G_3}=\vec 0\]
+        \[\{\tau_{0\to3}\}\ (\text{glissière en }A):\quad \vec R=Y_{03}\vec y_0+Z_{03}\vec z_0,\qquad \vec M_A=L_{03}\vec x_0+M_{03}\vec y_0+N_{03}\vec z_0\]
+        \[\{\tau_{2\to3}\}\ (\text{hélicoïdale en }B):\quad \vec R=X_{23}\vec x_0+Y_{23}\vec y_0+Z_{23}\vec z_0,\qquad \vec M_B=L_{23}\vec x_0+M_{23}\vec y_0+N_{23}\vec z_0\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        Trois actions : le poids (\(-m_3 g\,\vec y_0\) en \(G_3\)), la glissière en \(A\) (forces \(Y_{03},Z_{03}\) et moments \(L_{03},M_{03},N_{03}\)),
+        l'hélicoïdale en \(B\) (forces \(X_{23},Y_{23},Z_{23}\) et moments \(L_{23},M_{23},N_{23}\)).</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Ne pas oublier le <strong>poids</strong>.</li>
+        <li>Le moteur n'agit <strong>pas directement</strong> sur le chariot. Son action passe par la vis.</li>
+        <li>La glissière ne donne <strong>pas</strong> de force suivant \(\vec x_0\) (c'est le sens libre).</li>
+      </ul>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3</span> Appliquer le PFD à la pièce 3 (projection sur \(\vec x_0\) seulement).</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Écrire l'équation qui relie les forces agissant sur 3 à son accélération. On ne garde que la projection sur \(\vec x_0\),
+        car c'est la seule direction utile pour trouver \(X_{23}\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>PFD en résultante : \(\sum \vec F_{\text{ext}\to3}=m_3\,\vec a_{G_3\in3/0}\).</li>
+        <li>L'accélération est suivant \(\vec x_0\) : \(\vec a = a\,\vec x_0\).</li>
+        <li>On projette sur \(\vec x_0\). Le poids et \(Y, Z\) sont perpendiculaires à \(\vec x_0\) : leur projection est nulle. Il reste \(X_{23}\).</li>
+      </ol>
+      <div class="calc">
+        \[\sum \vec F_{\text{ext}\to3}\cdot\vec x_0 = m_3\,a \;\Longrightarrow\; X_{23}=m_3\,a\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \(X_{23}=m_3\,a\). L'effort axial de la vis sur le chariot est égal à la masse du chariot fois son accélération.</div>
+      <p><strong>Ce que ça veut dire :</strong> avec \(a=128\) m·s⁻² (question 10), \(X_{23}=0{,}01\times128=1{,}28\) N.
+      C'est l'effort que la vis doit exercer pour pousser le chariot.</p>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>\(\sum \vec F = m\,\vec a\)</p>
+      <span class="lab">Pourquoi projeter ?</span>
+      <p>Projeter, c'est ne garder que la composante suivant une direction. Ça élimine d'un coup les inconnues inutiles (\(Y, Z\)).</p>
+    </aside>
+  </div>
+
+  <!-- ---- Partie B ---- -->
+  <h3>Partie B — La vis 2 (questions 4 à 6)</h3>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q4</span> Quel est le mouvement de 2 par rapport à 0 ?</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        La vis tourne-t-elle, glisse-t-elle, ou les deux ? Autour de quel axe ?</div>
+      <p class="demarche"><span class="lab">Démarche</span>
+        La vis est posée sur son axe, dans le bâti, et ne fait que tourner (elle ne se déplace pas en translation).
+        Son axe est \((D,\vec x_0)\).</p>
+      <div class="res"><span class="lab">Réponse</span>
+        La vis 2 a une <strong>rotation d'axe \((D,\vec x_0)\)</strong> par rapport à 0. On note son angle \(\theta(t)\),
+        sa vitesse \(\dot\theta=\omega_{2/0}\) et son accélération angulaire \(\ddot\theta\).</div>
+    </div>
+    <aside class="aside">
+      <span class="lab">Méthode</span>
+      <p>Une <strong>rotation autour d'un axe fixe</strong> : tous les points tournent du même angle. On repère tout avec un seul angle \(\theta\).</p>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q5</span> Établir l'inventaire des actions mécaniques extérieures sur 2.</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Lister ce qui agit sur la vis : le moteur, le bâti (au pivot \(C\)) et le chariot (à l'hélicoïdale \(B\)).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Moteur 1 → 2</strong> en \(D\) : le moteur donne un <strong>couple</strong> \(C_m\) autour de \(\vec x_0\), sans force.</li>
+        <li><strong>Bâti 0 → 2</strong> en \(C\) : c'est un <strong>pivot</strong>. Il laisse la rotation libre, donc il ne transmet <strong>pas de couple suivant \(\vec x_0\)</strong> (\(L_{02}=0\)).</li>
+        <li><strong>Chariot 3 → 2</strong> en \(B\) : l'hélicoïdale. Elle transmet un effort axial et un couple axial \(L_{32}\).</li>
+      </ol>
+      <div class="calc">
+        \[\{\tau_{\text{mot}\to2}\}:\quad \vec R=\vec 0,\qquad \vec M_D=C_m\,\vec x_0\]
+        \[\{\tau_{0\to2}\}\ (\text{pivot en }C):\quad \vec R=X_{02}\vec x_0+Y_{02}\vec y_0+Z_{02}\vec z_0,\qquad \vec M_C=M_{02}\vec y_0+N_{02}\vec z_0\]
+        \[\{\tau_{3\to2}\}\ (\text{hélicoïdale en }B):\quad \vec R=X_{32}\vec x_0+Y_{32}\vec y_0+Z_{32}\vec z_0,\qquad \vec M_B=L_{32}\vec x_0+M_{32}\vec y_0+N_{32}\vec z_0\]
+      </div>
+      <p><strong>Action-réaction :</strong> \(\{\tau_{3\to2}\}=-\{\tau_{2\to3}\}\). Donc \(L_{32}=-L_{23}\) et \(X_{32}=-X_{23}\).</p>
+      <div class="res"><span class="lab">Réponse</span>
+        Trois actions : le couple moteur \(C_m\) en \(D\), le pivot en \(C\) (sans couple suivant \(\vec x_0\)), et l'hélicoïdale en \(B\) avec le couple axial \(L_{32}\).</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Le <strong>pivot</strong> ne transmet pas de couple autour de son propre axe : \(L_{02}=0\).</li>
+        <li>On change de signe lors d'une action-réaction : \(L_{32}=-L_{23}\).</li>
+      </ul>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q6</span> Appliquer le PFD à la pièce 2 (moment en \(D\), projeté sur \(\vec x_0\)).</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Écrire l'équation qui relie les couples autour de l'axe de la vis à son accélération angulaire.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>PFD en rotation autour d'un axe fixe : \(\sum M_{D,\text{ext}\to2}\cdot\vec x_0 = I_{vis}\,\ddot\theta\).</li>
+        <li>On prend le moment en \(D\), point de l'axe de rotation. Un effort appliqué sur l'axe (au point \(B\) ou \(C\)) ne crée <strong>aucun moment suivant cet axe</strong>.</li>
+        <li>Il ne reste donc que les couples axiaux : \(C_m\) (moteur) et \(L_{32}\) (hélicoïdale). Le pivot donne \(0\).</li>
+      </ol>
+      <div class="calc">
+        \[C_m + L_{32} = I_{vis}\,\ddot\theta\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \(C_m + L_{32} = I_{vis}\,\ddot\theta\). Le moteur accélère la vis, et le chariot « freine » la vis par le couple \(L_{32}\).</div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>Rotation autour d'un axe fixe \(\Delta\) : \(\sum M_\Delta = I_\Delta\,\ddot\theta\)</p>
+      <span class="lab">Remarque</span>
+      <p>Les signes de \(C_m\) et \(L_{32}\) sont algébriques : ils suivent les conventions du TD.</p>
+    </aside>
+  </div>
+
+  <!-- ---- Partie C ---- -->
+  <h3>Partie C — Le lien entre translation et rotation (questions 7 et 8)</h3>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q7</span> Relation entre \(X_{23}\), \(L_{23}\) et \(p\), puis entre \(\ddot\theta\), \(a\) et \(p\).</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Quand la vis tourne, le chariot avance. Comment la distance d'avance est-elle liée à l'angle, et l'effort axial au couple axial ?</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Avance du chariot :</strong> un tour de vis (\(\Delta\theta = 2\pi\)) fait avancer le chariot de \(p\).
+        Donc un angle \(\theta\) donne une avance \(x=-\dfrac{p}{2\pi}\,\theta\). Le signe moins vient de la convention « pas à droite » du TD.</li>
+        <li><strong>Dérivées :</strong> on dérive une fois (vitesse), puis deux fois (accélération) :
+        \(\dot x=-\dfrac{p}{2\pi}\dot\theta\) et \(a=-\dfrac{p}{2\pi}\ddot\theta\).</li>
+        <li><strong>Couple axial :</strong> dans une liaison hélicoïdale parfaite, la puissance développée est nulle. Cela impose que le couple axial et l'effort axial soient liés par le même rapport \(p/2\pi\).
+        C'est le même principe que le tire-bouchon : tourner fait avancer, et pousser crée un couple.</li>
+      </ol>
+      <div class="calc">
+        \[L_{23}=-\frac{p}{2\pi}\,X_{23}\qquad\text{et}\qquad a=-\frac{p}{2\pi}\,\ddot\theta\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \(L_{23}=-\dfrac{p}{2\pi}X_{23}\) et \(\ddot\theta=-\dfrac{2\pi}{p}\,a\).</div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>Vis-écrou : vitesse d'avance \(= \dfrac{p}{2\pi}\times\) vitesse de rotation.</p>
+      <span class="lab">Attention</span>
+      <p>\(p\) est une longueur (mm par tour). \(\theta\) est un angle (radians). Ne pas les confondre.</p>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q8</span> En déduire une expression de \(C_m\) en fonction de \(I_{vis}\), \(m_3\), \(p\) et \(a\).</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Il faut éliminer \(X_{23}\), \(L_{32}\) et \(\ddot\theta\) des équations précédentes pour ne garder que \(C_m\), \(a\) et \(p\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>On part de la question 6 : \(C_m = I_{vis}\,\ddot\theta - L_{32}\).</li>
+        <li>On remplace \(L_{32}=-L_{23}=\dfrac{p}{2\pi}X_{23}\) et \(X_{23}=m_3\,a\) (question 3) : \(L_{32}=\dfrac{p}{2\pi}m_3\,a\).</li>
+        <li>On remplace \(\ddot\theta=-\dfrac{2\pi}{p}\,a\) (question 7).</li>
+        <li>On regroupe les termes en \(a\).</li>
+      </ol>
+      <div class="calc">
+        \[C_m = -\frac{2\pi}{p}I_{vis}\,a-\frac{p}{2\pi}m_3\,a = -\,a\left(\frac{2\pi\,I_{vis}}{p}+\frac{p\,m_3}{2\pi}\right)\]
+        \[\text{Forme équivalente : }\ C_m = I_{eq}\,\ddot\theta\quad\text{avec}\quad I_{eq}=I_{vis}+\left(\frac{p}{2\pi}\right)^2 m_3\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \(C_m = -a\left(\dfrac{2\pi I_{vis}}{p}+\dfrac{p\,m_3}{2\pi}\right)\). En valeur absolue :
+        \(|C_m|=|a|\left(\dfrac{2\pi I_{vis}}{p}+\dfrac{p\,m_3}{2\pi}\right)\).</div>
+      <p><strong>Interprétation.</strong> Le couple est la somme de deux termes :</p>
+      <ul>
+        <li>\(\dfrac{2\pi I_{vis}}{p}\) : le couple pour faire tourner la <strong>vis</strong> elle-même ;</li>
+        <li>\(\dfrac{p\,m_3}{2\pi}\) : le couple pour faire avancer la <strong>masse du chariot</strong>, « ramenée » sur l'arbre moteur.
+        C'est le sens de \(I_{eq}\) : la masse qui avance se comporte, vue du moteur, comme une inertie supplémentaire.</li>
+      </ul>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>Masse en translation ramenée sur une rotation : \(I_{eq}=I+\left(\dfrac{p}{2\pi}\right)^2 m\)</p>
+      <span class="lab">Piège</span>
+      <p>Le signe moins ne change rien au dimensionnement : on travaille en valeur absolue pour choisir le moteur.</p>
+    </aside>
+  </div>
+
+  <!-- ---- Partie D ---- -->
+  <h3>Partie D — Le pas optimal (question 9)</h3>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q9</span> Quelle valeur du pas \(p\) rend le couple moteur minimal ?</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Parmi tous les pas possibles, lequel demande le moins de couple au moteur ? C'est un problème de <strong>minimum</strong>.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Seul \(p\) varie. \(a\), \(I_{vis}\) et \(m_3\) sont des constantes.</li>
+        <li>On dérive \(|C_m|\) par rapport à \(p\) et on cherche où la dérivée s'annule (c'est la condition d'un extremum).</li>
+        <li>On vérifie que c'est bien un <strong>minimum</strong> (dérivée seconde positive).</li>
+        <li>On fait l'application numérique avec les unités du SI (mètres, kilogrammes).</li>
+      </ol>
+      <div class="calc">
+        \[\frac{d|C_m|}{dp}=|a|\left(-\frac{2\pi I_{vis}}{p^2}+\frac{m_3}{2\pi}\right)=0\]
+        \[\Longrightarrow\ p^2=\frac{4\pi^2 I_{vis}}{m_3}\ \Longrightarrow\ p_{opt}=2\pi\sqrt{\frac{I_{vis}}{m_3}}\]
+        \[\text{Vérification : }\ \frac{d^2|C_m|}{dp^2}=|a|\,\frac{4\pi I_{vis}}{p^3}>0\ \Rightarrow\ \text{c'est bien un minimum}\]
+        \[\frac{I_{vis}}{m_3}=\frac{4{,}2\cdot10^{-9}}{0{,}01}=4{,}2\cdot10^{-7}\ \text{m}^2\ \Rightarrow\ \sqrt{4{,}2\cdot10^{-7}}=6{,}48\cdot10^{-4}\ \text{m}\]
+        \[p_{opt}=2\pi\times6{,}48\cdot10^{-4}=4{,}07\cdot10^{-3}\ \text{m}=4{,}07\ \text{mm}\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \(p_{opt}=2\pi\sqrt{I_{vis}/m_3}\approx 4{,}07\) mm.</div>
+      <p>La section 5 montre cette courbe : elle a bien un minimum en 4,07 mm.</p>
+    </div>
+    <aside class="aside apply">
+      <span class="lab">Méthode d'optimisation</span>
+      <ul>
+        <li>1) Dériver par rapport à la variable à optimiser.</li>
+        <li>2) Mettre la dérivée égale à 0.</li>
+        <li>3) Dérivée seconde positive : minimum ; négative : maximum.</li>
+      </ul>
+      <span class="lab">Piège</span>
+      <p>Convertir en mètres avant de calculer : \(4{,}2\cdot10^{-9}\) kg·m², pas en mm.</p>
+    </aside>
+  </div>
+
+  <!-- ---- Partie E ---- -->
+  <h3>Partie E — Application numérique (questions 10 et 11)</h3>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q10</span> Calculer l'accélération \(a\).</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Le cahier des charges donne un graphe de la position du chariot en fonction du temps. Il faut en tirer l'accélération.</div>
+      <figure>
+        <img src="img/pfd-dvd-cahier.png" alt="Trois graphes : accélération a(t) en créneaux, vitesse V(t) triangulaire, position x(t) en S de 0 à 20 mm" loading="lazy">
+        <figcaption>Extrait du cahier des charges : accélération \(a(t)\), vitesse \(V(t)\) et position \(x(t)\). Le mouvement dure 25 ms,
+        avec une phase d'accélération puis une phase de décélération symétriques.</figcaption>
+      </figure>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Lire le graphe de \(x(t)\) : à \(t=12{,}5\) ms, \(X=10\) mm.</li>
+        <li>Le graphe de \(a(t)\) montre une accélération <strong>constante</strong> pendant la première moitié. Le chariot part de l'arrêt (\(x=0\), \(v=0\)).
+        Donc \(x(t)=\tfrac12\,a\,t^2\).</li>
+        <li>On isole \(a\).</li>
+      </ol>
+      <div class="calc">
+        \[X=\tfrac12 a t^2\ \Longrightarrow\ a=\frac{2X}{t^2}=\frac{2\times0{,}010}{(12{,}5\cdot10^{-3})^2}=\frac{0{,}020}{1{,}5625\cdot10^{-4}}\]
+        \[a=128\ \text{m·s}^{-2}\]
+        \[\text{Vérification : }\ v_{max}=a\,t=128\times0{,}0125=1{,}6\ \text{m/s}\ ;\ \ \text{distance totale}=2\times\tfrac12\,a\,t^2=0{,}020\ \text{m}=20\ \text{mm}\ \checkmark\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \(a = 128\) m·s⁻² (environ 13 fois \(g\)). C'est une accélération forte, qui explique un couple moteur non négligeable.</div>
+      <div class="warn"><span class="lab">Coquille dans le corrigé</span>
+        Le texte écrit « \(t=12{,}5\) s ». C'est une erreur de frappe : il faut lire <strong>12,5 ms</strong>. Le calcul numérique du corrigé utilise bien \(12{,}5\cdot10^{-3}\) s.</div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>Mouvement uniformément accéléré depuis l'arrêt : \(x(t)=\tfrac12 a t^2\), donc \(a=\dfrac{2x}{t^2}\).</p>
+      <span class="lab">Appliquer</span>
+      <p>Lire une valeur précise sur un graphe (ici, \(x=10\) mm à 12,5 ms), puis la reporter dans la formule. Vérifier avec une autre grandeur (vitesse, distance totale).</p>
+    </aside>
+  </div>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q11</span> Calculer \(C_m\) avec le pas réel \(3{,}6\) mm et conclure.</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        La vis réelle a un pas de 3,6 mm, pas 4,07 mm. Quel couple faut-il avec ce pas, et ce pas est-il bon ?</div>
+      <p class="demarche"><span class="lab">Démarche</span>
+        On reprend la formule de la question 8 et on remplace par les valeurs : \(p=3{,}6\cdot10^{-3}\) m, \(a=128\) m·s⁻², \(I_{vis}=4{,}2\cdot10^{-9}\) kg·m², \(m_3=0{,}01\) kg.</p>
+      <div class="calc">
+        \[|C_m|=128\left(4{,}2\cdot10^{-9}\times\frac{2\pi}{3{,}6\cdot10^{-3}}+\frac{3{,}6\cdot10^{-3}}{2\pi}\times0{,}01\right)\]
+        \[=128\,\bigl(7{,}33\cdot10^{-6}+5{,}73\cdot10^{-6}\bigr)=128\times1{,}306\cdot10^{-5}\]
+        \[|C_m|=1{,}67\cdot10^{-3}\ \text{N·m}=\mathbf{1{,}67\ N·mm}\]
+        \[\text{Détail : }\ \underbrace{0{,}94\ \text{N·mm}}_{\text{vis}}+\underbrace{0{,}73\ \text{N·mm}}_{\text{chariot}}=1{,}67\ \text{N·mm}\]
+      </div>
+      <p><strong>Conversion en g·cm</strong> (le catalogue moteur est en g·cm) : 1 g·cm = 9,81·10⁻⁵ N·m, donc
+      \(1{,}67\cdot10^{-3}/9{,}81\cdot10^{-5}\approx 17\) g·cm.</p>
+      <div class="warn"><span class="lab">Petit écart avec le corrigé</span>
+        Le corrigé écrit 16,7 g·cm : il a pris 1 N·mm ≈ 10 g·cm. Avec \(g=9{,}81\), on trouve 17 g·cm. L'écart est de 2 %, sans conséquence pour le choix du moteur.</div>
+      <p><strong>Comparaison avec le pas optimal :</strong></p>
+      <ul>
+        <li>Pour \(p=3{,}6\) mm : \(|C_m|=1{,}67\) N·mm.</li>
+        <li>Pour \(p=4{,}07\) mm (optimal) : \(|C_m|=1{,}66\) N·mm.</li>
+        <li>Écart : environ <strong>0,8 %</strong>.</li>
+      </ul>
+      <div class="res"><span class="lab">Conclusion</span>
+        Le couple nécessaire est \(|C_m|\approx1{,}67\) N·mm, soit environ 17 g·cm. Le pas réel de 3,6 mm donne un couple presque minimal : il est proche de l'optimum.
+        Le cahier des charges demande aussi de la <strong>précision</strong> : une vis fine avance peu à chaque tour, ce qui facilite le positionnement.
+        Le pas réel est donc un <strong>compromis</strong> entre précision et couple minimal.</div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>\(|C_m|=|a|\left(\dfrac{2\pi I_{vis}}{p}+\dfrac{p\,m_3}{2\pi}\right)\)</p>
+      <span class="lab">Appliquer</span>
+      <ul>
+        <li>Calculer chaque terme séparément, puis additionner.</li>
+        <li>Garder les unités du SI, et convertir en g·cm seulement à la fin.</li>
+        <li>\(1\) N·m \(= 10\,197\) g·cm environ.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ---- Choix du moteur ---- -->
+  <h3>Choix du moteur (suite de la question 11)</h3>
+
+  <div class="qblock">
+    <div>
+      <p class="qtitle">Quel moteur du catalogue choisir ?</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Le moteur doit fournir au moins 17 g·cm, fonctionner sous la tension disponible dans le PC (5 V) et être le plus compact possible.</div>
+      <figure>
+        <img src="img/pfd-dvd-catalogue.png" alt="Tableau du catalogue MotionKing : modèles 15BY20L01 à 20BY20L02 avec tension, couple de maintien et inertie du rotor" loading="lazy">
+        <figcaption>Extrait du catalogue moteur. Le <em>couple de maintien</em> (holding torque) est le couple maximal que le moteur peut tenir à l'arrêt,
+        alimenté. Le <em>couple de détente</em> (detent torque) est le couple résiduel moteur non alimenté. Le <em>rotor inertia</em> est l'inertie du rotor.</figcaption>
+      </figure>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>On élimine les moteurs alimentés en 12 V : le PC fournit 5 V.</li>
+        <li>On garde ceux dont le couple de maintien est supérieur à 17 g·cm.</li>
+        <li>Parmi eux, on prend le plus petit (série 15 plutôt que 20), donc le moins de couple inutile et le plus compact.</li>
+      </ol>
+      <table>
+        <tr><th class="l">Modèle</th><th>Tension</th><th>Couple de maintien</th><th>Résultat</th></tr>
+        <tr><td class="l">15BY20L01</td><td>5 V</td><td>27 g·cm</td><td>convient, le plus petit</td></tr>
+        <tr><td class="l">15BY20L03</td><td>5 V</td><td>30 g·cm</td><td>convient, un peu plus gros</td></tr>
+        <tr><td class="l">15BY20L02</td><td>12 V</td><td>40 g·cm</td><td>écarté (12 V)</td></tr>
+        <tr><td class="l">15BY20L04</td><td>12 V</td><td>35 g·cm</td><td>écarté (12 V)</td></tr>
+        <tr><td class="l">20BY20L02</td><td>5 V</td><td>65 g·cm</td><td>convient, mais plus gros</td></tr>
+        <tr><td class="l">20BY20L01</td><td>5 V</td><td>75 g·cm</td><td>convient, mais plus gros</td></tr>
+      </table>
+      <div class="res"><span class="lab">Réponse</span>
+        Moteur retenu : <strong>15BY20L01</strong> (5 V, couple de maintien 27 g·cm, soit environ 1,6 fois le besoin de 17 g·cm).
+        Le corrigé officiel dit seulement que « tous les moteurs conviennent » et qu'on prend 5 V : le choix du 15BY20L01 est le nôtre.</div>
+      <div class="warn"><span class="lab">Point de vigilance (hors TD, à confirmer avec le prof)</span>
+        Le TD compare le couple nécessaire au <strong>couple de maintien</strong>, qui est une valeur à l'arrêt. Il ne tient pas compte de l'<strong>inertie du rotor</strong> du moteur.
+        Or le rotor est lui aussi accéléré. Avec \(I_{rotor}=0{,}3\) g·cm² \(=3\cdot10^{-8}\) kg·m² (catalogue) et
+        \(|\ddot\theta|=\dfrac{2\pi}{p}|a|\approx2{,}2\cdot10^{5}\) rad·s⁻², le rotor demande environ \(6{,}7\) N·mm de plus.
+        Le couple total serait alors d'environ \(8{,}4\) N·mm, soit environ 85 g·cm, ce qui dépasse 27 g·cm.
+        Le choix du moteur est donc à vérifier : il faudrait sans doute un moteur plus puissant, ou un autre pas.</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Ne pas confondre <strong>couple de maintien</strong> (à l'arrêt, le plus important ici) et <strong>couple de détente</strong> (moteur éteint).</li>
+        <li>Vérifier la <strong>tension</strong> : un moteur 12 V ne se branche pas sur les 5 V du PC.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>5. Graphique : le couple en fonction du pas</h2>
+  <p>On trace \(|C_m|\) en fonction de \(p\), avec \(|a|=128\) m·s⁻², \(I_{vis}\) et \(m_3\) constants. La courbe a un minimum,
+  et elle est <strong>assez plate</strong> autour de ce minimum : un pas entre 3,5 et 5 mm donne un couple presque identique.</p>
+
+  <div class="svgwrap">
+    <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img"
+      aria-label="Courbe du couple moteur en fonction du pas : minimum à 4,07 mm, pas réel à 3,6 mm">
+      <!-- axes -->
+      <line x1="70" y1="300" x2="612" y2="300" stroke="#475569" stroke-width="1.5"/>
+      <line x1="70" y1="30" x2="70" y2="300" stroke="#475569" stroke-width="1.5"/>
+      <!-- graduations x -->
+      <g font-size="19" fill="#475569" text-anchor="middle">
+        <text x="70" y="318">2</text><text x="160" y="318">3</text><text x="250" y="318">4</text>
+        <text x="340" y="318">5</text><text x="430" y="318">6</text><text x="520" y="318">7</text><text x="610" y="318">8</text>
+        <text x="340" y="342" font-size="21" fill="#2d3748">pas p (mm)</text>
+      </g>
+      <!-- graduations y -->
+      <g font-size="19" fill="#475569" text-anchor="end">
+        <text x="62" y="304">1,5</text><text x="62" y="214">2,0</text><text x="62" y="124">2,5</text><text x="62" y="34">3,0</text>
+      </g>
+      <text x="22" y="165" font-size="21" fill="#2d3748" transform="rotate(-90 22 165)" text-anchor="middle">|C<tspan baseline-shift="sub" font-size="10">m</tspan>| (N·mm)</text>
+      <!-- couple de maintien du moteur 15BY20L01 -->
+      <line x1="70" y1="93.2" x2="612" y2="93.2" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="6 5"/>
+      <text x="600" y="86" font-size="19" fill="#c2410c" text-anchor="end">couple de maintien 15BY20L01 : 27 g·cm ≈ 2,65 N·mm</text>
+      <!-- courbe -->
+      <polyline fill="none" stroke="#0f766e" stroke-width="3" stroke-linejoin="round"
+        points="70.0,192.7 73.6,197.1 77.2,201.4 80.8,205.5 84.4,209.3 88.0,213.0 91.6,216.4 95.2,219.7 98.8,222.9 102.4,225.8 106.0,228.7 109.6,231.3 113.2,233.9 116.8,236.3 120.4,238.6 124.0,240.8 127.6,242.9 131.2,244.9 134.8,246.7 138.4,248.5 142.0,250.2 145.6,251.8 149.2,253.3 152.8,254.7 156.4,256.0 160.0,257.3 163.6,258.5 167.2,259.7 170.8,260.7 174.4,261.7 178.0,262.7 181.6,263.5 185.2,264.4 188.8,265.1 192.4,265.8 196.0,266.5 199.6,267.1 203.2,267.7 206.8,268.2 210.4,268.7 214.0,269.1 217.6,269.5 221.2,269.8 224.8,270.1 228.4,270.4 232.0,270.7 235.6,270.9 239.2,271.0 242.8,271.2 246.4,271.3 250.0,271.3 253.6,271.4 257.2,271.4 260.8,271.3 264.4,271.3 268.0,271.2 271.6,271.1 275.2,271.0 278.8,270.8 282.4,270.7 286.0,270.5 289.6,270.2 293.2,270.0 296.8,269.7 300.4,269.5 304.0,269.1 307.6,268.8 311.2,268.5 314.8,268.1 318.4,267.7 322.0,267.3 325.6,266.9 329.2,266.5 332.8,266.0 336.4,265.5 340.0,265.1 343.6,264.5 347.2,264.0 350.8,263.5 354.4,263.0 358.0,262.4 361.6,261.8 365.2,261.2 368.8,260.6 372.4,260.0 376.0,259.4 379.6,258.8 383.2,258.1 386.8,257.4 390.4,256.8 394.0,256.1 397.6,255.4 401.2,254.7 404.8,254.0 408.4,253.2 412.0,252.5 415.6,251.7 419.2,251.0 422.8,250.2 426.4,249.4 430.0,248.6 433.6,247.9 437.2,247.0 440.8,246.2 444.4,245.4 448.0,244.6 451.6,243.7 455.2,242.9 458.8,242.0 462.4,241.2 466.0,240.3 469.6,239.4 473.2,238.6 476.8,237.7 480.4,236.8 484.0,235.9 487.6,234.9 491.2,234.0 494.8,233.1 498.4,232.2 502.0,231.2 505.6,230.3 509.2,229.3 512.8,228.4 516.4,227.4 520.0,226.5 523.6,225.5 527.2,224.5 530.8,223.5 534.4,222.5 538.0,221.5 541.6,220.5 545.2,219.5 548.8,218.5 552.4,217.5 556.0,216.5 559.6,215.5 563.2,214.4 566.8,213.4 570.4,212.4 574.0,211.3 577.6,210.3 581.2,209.2 584.8,208.2 588.4,207.1 592.0,206.0 595.6,205.0 599.2,203.9 602.8,202.8 606.4,201.7 610.0,200.6"/>
+      <!-- points remarquables -->
+      <circle cx="256.3" cy="271.4" r="6" fill="#dc2626"/>
+      <text x="256.3" y="250" font-size="19" fill="#b91c1c" text-anchor="middle" font-weight="700">optimum : 4,07 mm</text>
+      <circle cx="214" cy="269.1" r="6" fill="#2563eb"/>
+      <text x="214" y="292" font-size="19" fill="#1d4ed8" text-anchor="middle" font-weight="700">pas réel : 3,6 mm</text>
+    </svg>
+    <figcaption>Couple nécessaire \(|C_m|\) selon le pas \(p\). Point rouge : minimum à 4,07 mm (1,66 N·mm). Point bleu : pas réel 3,6 mm (1,67 N·mm).
+    Trait pointillé : couple de maintien du moteur retenu (27 g·cm).</figcaption>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>6. À retenir</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Translation :</strong> \(\sum \vec F=m\,\vec a\). Ici, \(X_{23}=m_3\,a\).</li>
+      <li><strong>Rotation autour d'un axe fixe :</strong> \(\sum M=I\,\ddot\theta\). Ici, \(C_m+L_{32}=I_{vis}\,\ddot\theta\).</li>
+      <li><strong>Vis-écrou (hélicoïdale) :</strong> \(a=-\dfrac{p}{2\pi}\ddot\theta\) et \(L=-\dfrac{p}{2\pi}X\).</li>
+      <li><strong>Couple moteur :</strong> \(|C_m|=|a|\left(\dfrac{2\pi I_{vis}}{p}+\dfrac{p\,m_3}{2\pi}\right)\).</li>
+      <li><strong>Pas optimal :</strong> \(p_{opt}=2\pi\sqrt{I_{vis}/m_3}\approx4{,}07\) mm. Le pas réel 3,6 mm est presque optimal.</li>
+      <li><strong>Application :</strong> \(a=128\) m·s⁻², \(|C_m|\approx1{,}67\) N·mm, soit environ 17 g·cm. Moteur retenu : 15BY20L01 (sous réserve de la vérification de l'inertie du rotor).</li>
+    </ul>
+  </div>
+
+  </section>
+
+  <section class="block td-exo" id="td-ex3">
+
+  <div class="kicker">AM2 · SI · Chapitre 3 — Principe fondamental de la dynamique (TD)</div>
+  <h2 class="exo-title">Arbre de navire : phénomènes gyroscopiques</h2>
+  <p class="lead">Un TD du chapitre « Principe fondamental de la dynamique » (CPGE PT, S2I). Un rotor de machine tourne à grande vitesse
+  dans un navire qui vire. Le virage fait apparaître un <strong>couple gyroscopique</strong> qui modifie les efforts dans les paliers.
+  Une seule question, mais le calcul demande de bien construire le torseur dynamique.</p>
+
+  <!-- ============================================================ -->
+  <h2>1. Avant de commencer : l'essentiel en quelques lignes</h2>
+
+  <div class="card">
+    <h3>Le torseur dynamique du rotor</h3>
+    <p>Pour un solide \(S\) en rotation, le torseur dynamique est formé de la <strong>résultante dynamique</strong> \(m\vec\Gamma_G\)
+    et du <strong>moment dynamique</strong> \(\vec\delta_G=\big[\tfrac{d}{dt}\vec\sigma_G\big]_{R_0}\), dérivée du moment cinétique dans le repère fixe.</p>
+    <h3>Le phénomène gyroscopique</h3>
+    <p>Un solide qui tourne vite autour de son axe (<em>spin</em>, vitesse \(\dot\varphi\)) et dont l'axe <strong>tourne</strong> lui-même (<em>précession</em>, vitesse \(\dot\psi\))
+    subit un moment, le <strong>couple gyroscopique</strong> \(\vec\delta_G\). Il est perpendiculaire à l'axe de spin et à l'axe de précession.</p>
+  </div>
+
+  <div class="info">
+    <span class="lab">Ce que demande le TD au final</span>
+    Déterminer les <strong>efforts de liaison en \(A\) et \(B\)</strong> du rotor, pour voir l'effet du virage sur les paliers.
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>2. La démarche en 4 étapes</h2>
+  <ol class="steps">
+    <li><strong>Paramétrer</strong> le navire (cap \(\psi\), vitesse \(\dot\psi=V/R\)) et le rotor (spin \(\varphi\), vitesse \(\Omega\)).</li>
+    <li><strong>Calculer le torseur dynamique</strong> du rotor en \(G\) : résultante \(m\vec\Gamma_G\), moment \(\vec\delta_G\).</li>
+    <li><strong>Écrire le bilan</strong> des actions de liaison \(A\) (rotule) et \(B\) (linéaire annulaire) et du poids, puis le transporter en \(G\).</li>
+    <li><strong>Résoudre</strong> : résultante (3 équations), moment en \(G\) (3 équations), avec les unités.</li>
+  </ol>
+
+  <!-- ============================================================ -->
+  <h2>3. Le modèle et les données</h2>
+
+  <figure>
+    <img src="img/c03-td-arbrenavire.png" alt="Arbre de navire : rotor 2 sur paliers A (rotule) et B (linéaire annulaire), navire 1 en virage" loading="lazy">
+    <figcaption>Schéma de l'énoncé. Le rotor 2 est monté sur le navire 1, sur deux paliers \(A\) (rotule) et \(B\) (linéaire annulaire) distants de \(3L\).
+    Le navire vire à bâbord sur un cercle de rayon \(R\).</figcaption>
+  </figure>
+
+  <div class="card">
+    <h3>Paramétrage</h3>
+    <ul>
+      <li>Rotation du navire \(R_1/R_0\) : \(\psi=\omega t\) avec \(\omega=\dfrac{V}{R}\), autour de l'axe vertical \(\vec z_0=\vec z_1\).</li>
+      <li>Rotation du rotor \(R_2/R_1\) : \(\varphi=\Omega t\) avec \(\Omega=\dfrac{\pi N}{30}\), autour de l'axe \(\vec x_1\) de l'arbre.</li>
+      <li>\(\overrightarrow{AG}=L\vec x_1\), \(\overrightarrow{AB}=3L\vec x_1\) : \(G\) est à \(L\) de \(A\), \(B\) est à \(2L\) de \(G\).</li>
+      <li>Le rotor est un <strong>solide de révolution</strong> : \(\bar{\bar I}_{(G,2)}=\begin{pmatrix}A&0&0\\0&B&0\\0&0&B\end{pmatrix}_{\vec b_1}\) avec \(A\) l'inertie axiale.</li>
+    </ul>
+    <h3>Données numériques</h3>
+    <table>
+      <tr><th class="l">Grandeur</th><th>Valeur</th><th class="l">Grandeur</th><th>Valeur</th></tr>
+      <tr><td class="l">Masse \(m\)</td><td>2 t = 2000 kg</td><td class="l">Vitesse du navire \(V\)</td><td>10 m·s⁻¹</td></tr>
+      <tr><td class="l">Rayon de giration \(a\)</td><td>0,3 m</td><td class="l">Rayon du virage \(R\)</td><td>200 m</td></tr>
+      <tr><td class="l">Distance \(L\)</td><td>1 m (\(AB=3\) m)</td><td class="l">Vitesse du rotor \(N\)</td><td>4000 tr/min</td></tr>
+    </table>
+    <p style="margin:0">Application : \(\Omega=\dfrac{\pi\times4000}{30}\approx418{,}9\) rad·s⁻¹, \(\omega=\dfrac{10}{200}=0{,}05\) rad·s⁻¹.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>4. Les questions</h2>
+
+  <!-- ---- Question 1 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Efforts de liaison en \(A\) et \(B\) : PFD appliqué au rotor 2</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        En appliquant le PFD au rotor 2, déterminer les efforts de liaison en \(A\) et \(B\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Torseur dynamique en \(G\)</strong> : calculer \(\vec\Gamma_G\) et \(\vec\delta_G\) (le rotor a deux rotations : \(\dot\psi\) et \(\dot\varphi\)).</li>
+        <li><strong>Bilan des actions</strong> : poids en \(G\), réactions \(A\) et \(B\) ramenées en \(G\).</li>
+        <li><strong>PFD en \(G\)</strong> : résultante, puis moment (on projette dans \(\vec b_1\)).</li>
+        <li><strong>Résoudre</strong> le système linéaire pour \(X_A\), \(Y_A\), \(Z_A\), \(Y_B\), \(Z_B\).</li>
+      </ol>
+
+      <div class="calc">
+        <p><strong>Torseur dynamique.</strong> Le centre d'inertie \(G\) décrit le cercle de rayon \(R\) à vitesse \(V\) constante : \(\vec\Gamma_G=\dfrac{V^2}{R}\,\vec y_1\) (vers l'intérieur du virage, bâbord).
+        Donc :</p>
+        \[\vec R\{\mathcal D_{2/0}\}=m\,\frac{V^2}{R}\,\vec y_1\]
+        <p>Moment : \(\vec\sigma_G=\bar{\bar I}_{(G,2)}\cdot\vec\Omega_{2/0}\) avec \(\vec\Omega_{2/0}=\Omega\,\vec x_1+\omega\,\vec z_1\), soit
+        \(\vec\sigma_G=A\Omega\,\vec x_1+B\omega\,\vec z_1\) (la base \(\vec b_1\) est liée au navire, pas au spin).
+        Dans \(R_0\) : \(\dfrac{d\vec x_1}{dt}=\omega\,\vec z_1\wedge\vec x_1=\omega\,\vec y_1\) et \(\dfrac{d\vec z_1}{dt}=\vec 0\) : donc</p>
+        \[\vec\delta_{G\in2/0}=A\Omega\omega\,\vec y_1\]
+        <p>Pour un rotor de révolution d'axe \(\vec x_1\) : \(A=\dfrac{ma^2}{2}\) dans le corrigé officiel (voir encadré ci-dessous), d'où \(\vec\delta_G=\dfrac{ma^2}{2}\,\Omega\omega\,\vec y_1\).</p>
+
+        <p><strong>Bilan des actions</strong> (\(\vec b_1\)) :</p>
+        \[\{\mathcal T_{\text{pes}\to2}\}_G=\begin{Bmatrix}-mg\,\vec z_1\\ \vec 0\end{Bmatrix}\qquad
+        \{\mathcal T_{A\to2}\}_G=\begin{Bmatrix}X_A\vec x_1+Y_A\vec y_1+Z_A\vec z_1\\ LZ_A\,\vec y_1-LY_A\,\vec z_1\end{Bmatrix}\qquad
+        \{\mathcal T_{B\to2}\}_G=\begin{Bmatrix}Y_B\vec y_1+Z_B\vec z_1\\ -2LZ_B\,\vec y_1+2LY_B\,\vec z_1\end{Bmatrix}\]
+        <p>Les moments viennent de \(\overrightarrow{GA}=-L\vec x_1\) et \(\overrightarrow{GB}=2L\vec x_1\). Le palier \(B\) n'a pas d'effort axial ni de moment (linéaire annulaire).</p>
+
+        <p><strong>PFD</strong> (\(\{\mathcal T_{\text{ext}\to2}\}_G=\{\mathcal D_{2/0}\}_G\), projeté dans \(\vec b_1\)) :</p>
+        \[\begin{cases}
+        0=X_A\\[2pt]
+        \dfrac{mV^2}{R}=Y_A+Y_B\\[2pt]
+        0=Z_A+Z_B-mg\\[2pt]
+        \dfrac{ma^2}{2}\,\Omega\omega=L\,Z_A-2L\,Z_B\\[2pt]
+        0=2L\,Y_B-L\,Y_A
+        \end{cases}\]
+      </div>
+
+      <div class="calc">
+        <p><strong>Résolution.</strong> \(X_A=0\). De la dernière équation, \(Y_A=2Y_B\) ; avec la résultante en \(y_1\) :
+        \(Y_B=\dfrac{mV^2}{3R}\), \(Y_A=\dfrac{2mV^2}{3R}\).</p>
+        <p>En \(z_1\) : \(Z_B=mg-Z_A\). Dans l'équation de moment, \(\dfrac{ma^2}{2}\Omega\omega=LZ_A-2LZ_B=L(mg-Z_B)-2LZ_B=L(mg-3Z_B)\), donc :</p>
+        \[Z_B=\dfrac{mg}{3}-\dfrac{ma^2\,\Omega\,\omega}{6L}\qquad\qquad Z_A=\dfrac{2mg}{3}+\dfrac{ma^2\,\Omega\,\omega}{6L}\]
+        <p>Avec \(\omega=V/R\) : le terme correctif vaut \(\dfrac{ma^2V\Omega}{6RL}\).</p>
+      </div>
+
+      <div class="res"><span class="lab">Réponse (corrigé officiel)</span>
+        \[X_A=0\qquad Y_A=\dfrac{2mV^2}{3R}\approx666{,}6\ \text N\qquad Y_B=\dfrac{mV^2}{3R}\approx333{,}3\ \text N\]
+        \[Z_A=\dfrac{2mg}{3}+\dfrac{ma^2V\Omega}{6RL}\approx13\,706{,}7\ \text N\qquad Z_B=\dfrac{mg}{3}-\dfrac{ma^2V\Omega}{6RL}\approx5\,913\ \text N\]
+        <p style="margin:.6rem 0 0"><em>Le corrigé prend \(\Omega=133\pi\approx417{,}8\) rad·s⁻¹ (valeur arrondie de \(4000\pi/30=418{,}9\)). Avec \(418{,}9\) on trouve \(Z_A\approx13\,708\) N et \(Z_B\approx5\,912\) N : écart d'arrondi.</em></p>
+      </div>
+
+      <div class="warn"><span class="lab">⚠️ À vérifier avec le prof : rayon de giration ou inertie \(ma^2/2\) ?</span>
+        L'énoncé dit « rayon de <strong>giration</strong> \(a\) » : par définition l'inertie axiale est \(A=ma^2\). Le corrigé écrit \(A=\dfrac{ma^2}{2}\) (inertie d'un disque plein de rayon \(a\))
+        et imprime pourtant « \(A=2000\times0{,}3^2=180\) kg·m² », qui correspond à \(ma^2\). Le calcul du corrigé utilise bien \(ma^2/2\) (\(90\) kg·m²).
+        <br><br>Si l'on prend \(A=ma^2=180\) kg·m² : \(\vec\delta_G\) double, \(Z_B\approx6540-1257\approx5283\) N et \(Z_A\approx14337\) N.
+        Le sens physique ne change pas, seule la valeur du couple gyroscopique change.</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Le moment dynamique n'est pas nul : la rotation de l'axe \(\vec x_1\) (précession \(\omega\)) crée \(\vec\delta_G=A\Omega\omega\vec y_1\).</li>
+        <li>La base \(\vec b_1\) contient \(\vec x_1\) et \(\vec z_1\) : c'est elle qui permet de projeter sans dériver les composantes.</li>
+        <li>Le moment en \(G\) utilise \(\overrightarrow{GA}=-L\vec x_1\) et \(\overrightarrow{GB}=2L\vec x_1\) : le signe de \(L\) compte.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>5. Lecture physique : pourquoi le virage change les paliers</h2>
+  <div class="card">
+    <p>Sans virage (\(\omega=0\)) : \(Y_A=Y_B=0\), \(Z_B=mg/3=6540\) N, \(Z_A=2mg/3=13080\) N. Le centre d'inertie est au tiers de \(AB\) et le rotor se comporte comme une poutre sur deux appuis.</p>
+    <p>Pendant le virage, le couple gyroscopique vaut \(\dfrac{ma^2}{2}\Omega\omega\approx1\,885\) N·m (avec \(A=ma^2/2\)). Il se traduit en efforts verticaux de \(\dfrac{1\,885}{3L}\approx628\) N : il <strong>décharge le palier \(B\)</strong> de 628 N et <strong>surcharge \(A\)</strong> d'autant.
+    De plus, le virage crée un effort latéral \(Y_A+Y_B=mV^2/R=1000\) N, absent en ligne droite.</p>
+    <div class="info"><span class="lab">Pour retenir</span>
+      Le couple gyroscopique est proportionnel à la <strong>vitesse de spin</strong> (\(\Omega\)) et à la <strong>vitesse de virage</strong> (\(\omega=V/R\)).
+      Sur un navire, des vitesses de rotation élevées et des virages serrés augmentent les efforts dans les paliers.</div>
+  </div>
+
+  </section>
+
+  <section class="block td-exo" id="td-ex4">
+  <section class="block" id="eolienne">
+    <h2>4. Éolienne bipale — moment cinétique et dynamique avec balourd</h2>
+    <figure>
+      <img src="img/c03-td-eolienne.png" alt="Éolienne bipale : support 0, girouette 1 (angle α), hélice 2 (angle β), balourd 3 au point P" loading="lazy">
+      <figcaption>Support 0 ; girouette 1 pivot \((K,\vec z)\) d'angle \(\alpha\) ; hélice 2 pivot \((K,\vec x_1)\)
+      d'angle \(\beta\), \(\overrightarrow{KG}=a\vec x_1\), \(\bar{\bar I}_{(G,2)}=\mathrm{diag}(A,B,C)\) dans
+      \((\vec x_2,\vec y_2,\vec z_2)\) ; balourd ponctuel 3 (masse \(m\)) en \(P\), \(\overrightarrow{GP}=b\vec z_2\).</figcaption>
+    </figure>
+    <div class="enonce">4 solides : support 0 (repère \((K,\vec x,\vec y,\vec z)\)), girouette 1 (pivot
+    \((K,\vec z)\), angle \(\alpha=(\vec x,\vec x_1)\), inertie \(J\) autour de \(\vec z\)), hélice 2 (pivot
+    \((K,\vec x_1)\) avec 1, \(\vec x_2=\vec x_1\), angle \(\beta=(\vec y_1,\vec y_2)\), masse \(M\),
+    \(\overrightarrow{KG}=a\vec x_1\), \(\bar{\bar I}_{(G,2)}=\mathrm{diag}(A,B,C)\) dans \((\vec x_2,\vec y_2,\vec z_2)\)),
+    balourd 3 (masse ponctuelle \(m\) en \(P\), \(\overrightarrow{GP}=b\vec z_2\)). Point \(K\) commun aux deux
+    axes de pivot : il est <b>fixe dans \(R_0\)</b>.</div>
+
+    <div class="exo-card">
+      <div class="exo-head">1 — Composante \(\vec z\cdot\vec\sigma_{K\in1/0}\)</div>
+      <div class="exo-body">
+        <p>La girouette 1 est en rotation pure autour de \((K,\vec z)\) avec \(K\) fixe : \(\vec\sigma_{K\in1/0}=J\dot\alpha\,\vec z\).</p>
+        <div class="res">\[\vec z\cdot\vec\sigma_{K\in1/0}=J\dot\alpha\]</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">2 — Moment cinétique \(\vec\sigma_{K\in2/0}\)</div>
+      <div class="exo-body">
+        <p>\(K\) est fixe dans \(R_0\) : \(\vec\sigma_{K\in2/0}=\bar{\bar I}_{(K,2)}.\vec\Omega_{2/0}\). Huygens
+        (\(\overrightarrow{KG}=a\vec x_2\), donc \((a,0,0)\) dans la formule) : \(\bar{\bar I}_{(K,2)}=\mathrm{diag}(A,\,B+Ma^2,\,C+Ma^2)\)
+        (le décalage purement axial ne modifie pas la composante axiale \(A\)).</p>
+        <p>Composition des rotations : \(\vec\Omega_{2/0}=\dot\beta\vec x_2+\dot\alpha\vec z\), et
+        \(\vec z=\sin\beta\,\vec y_2+\cos\beta\,\vec z_2\) (changement de base \(\beta\) autour de \(x_1=x_2\)),
+        soit \(\vec\Omega_{2/0}=\dot\beta\vec x_2+\dot\alpha\sin\beta\,\vec y_2+\dot\alpha\cos\beta\,\vec z_2\).</p>
+        <div class="res">\[\vec\sigma_{K\in2/0}=A\dot\beta\,\vec x_2+(B+Ma^2)\dot\alpha\sin\beta\,\vec y_2+(C+Ma^2)\dot\alpha\cos\beta\,\vec z_2\]</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">3 — Composante \(\vec z\cdot\vec\delta_{K\in2/0}\)</div>
+      <div class="exo-body">
+        <p>Astuce du cours : \(\vec z\) est <b>fixe</b> dans \(R_0\) ⟹ \(\vec z\cdot\vec\delta_K=\dfrac{d}{dt}(\vec z\cdot\vec\sigma_K)\)
+        sans avoir à dériver le vecteur \(\vec\sigma_K\) en entier.
+        \(\vec z\cdot\vec\sigma_K=(B+Ma^2)\dot\alpha\sin^2\beta+(C+Ma^2)\dot\alpha\cos^2\beta\) (en utilisant
+        \(\vec y_2\cdot\vec z=\sin\beta\), \(\vec z_2\cdot\vec z=\cos\beta\), \(\vec x_2\cdot\vec z=0\)).</p>
+        <div class="res">
+        \[\vec z\cdot\vec\delta_{K\in2/0}=\ddot\alpha\big[(B+Ma^2)\sin^2\beta+(C+Ma^2)\cos^2\beta\big]+\dot\alpha\dot\beta(B-C)\sin2\beta\]
+        </div>
+        <div class="note">Si le rotor était de révolution (\(B=C\)), cette expression se réduirait à
+        \((B+Ma^2)\ddot\alpha\) — le terme croisé en \(\dot\alpha\dot\beta\) provient uniquement de l'asymétrie
+        transverse d'une hélice <b>bipale</b> (\(B\ne C\)).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">4 — Moment cinétique \(\vec\sigma_{K\in3/0}\) du balourd</div>
+      <div class="exo-body">
+        <p>3 est un point matériel \(P\) : \(\vec\sigma_{K\in3/0}=\overrightarrow{KP}\wedge m\vec V_{P/0}\), avec
+        \(\overrightarrow{KP}=a\vec x_2+b\vec z_2\). Vitesse de \(P\) : en dérivant \(\vec x_2,\vec z_2\) via
+        \(\vec\Omega_{2/0}\) (mêmes composantes qu'en Q2) :</p>
+        \[\vec V_{P/0}=b\dot\alpha\sin\beta\,\vec x_2+(a\dot\alpha\cos\beta-b\dot\beta)\vec y_2-a\dot\alpha\sin\beta\,\vec z_2\]
+        <p>D'où, par produit vectoriel \((a,0,b)\wedge m(b\dot\alpha\sin\beta,\,a\dot\alpha\cos\beta-b\dot\beta,\,-a\dot\alpha\sin\beta)\) :</p>
+        <div class="res">
+        \[\vec\sigma_{K\in3/0}=m\big[(b^2\dot\beta-ab\dot\alpha\cos\beta)\vec x_2+(a^2{+}b^2)\dot\alpha\sin\beta\,\vec y_2+(a^2\dot\alpha\cos\beta-ab\dot\beta)\vec z_2\big]\]
+        </div>
+        <div class="note"><span class="lab">Vérification</span> Si \(b=0\) (balourd confondu avec \(G\), sur
+        l'axe), on retrouve \(\vec\sigma_K=ma^2\dot\alpha(\sin\beta\,\vec y_2+\cos\beta\,\vec z_2)=ma^2\dot\alpha\,\vec z\) —
+        cohérent avec un point matériel à distance \(a\) de \(K\) sur l'axe de spin, entraîné uniquement par la
+        précession \(\dot\alpha\) (le spin \(\dot\beta\) seul ne déplace pas un point sur l'axe).</div>
+      </div>
+    </div>
+  </section>
+  </section>
+
+  <section class="block td-exo" id="td-ex5">
+
+  <div class="kicker">AM2 · SI · Chapitre 3 — Principe fondamental de la dynamique (TD)</div>
+  <h2 class="exo-title">Régulateur centrifuge : correction détaillée</h2>
+  <p class="lead">Un exercice du TD « Principe fondamental de la dynamique » (CPGE PT, S2I). Un régulateur de vitesse d'une machine thermique :
+  la masselotte 2 s'écarte sous l'effet de la rotation et comprime un ressort 3 par l'intermédiaire d'un tiroir. Le but est de dimensionner
+  la raideur du ressort. Pour chaque question : ce qu'elle demande, la démarche, le calcul complet, et les encadrés de méthode.</p>
+
+  <!-- ============================================================ -->
+  <h2>1. Avant de commencer : l'essentiel en quelques lignes</h2>
+
+  <div class="card">
+    <h3>Le moment dynamique et la liaison pivot</h3>
+    <p>Le PFD appliqué à un solide \(\Sigma\) s'écrit en moment en un point \(P\) : \(\sum\vec M_P(\text{ext})=\vec\delta_{P\in\Sigma/0}\).
+    Le moment dynamique \(\vec\delta_{A}\) est la dérivée du moment cinétique \(\vec\sigma_A\) (calculé dans le repère de référence).</p>
+    <ul>
+      <li><strong>Liaison pivot</strong> d'axe \((A,\vec z_1)\) : elle ne transmet aucun moment selon son propre axe. Projeter l'équation de moment sur \(\vec z_1\)
+      élimine donc les réactions inconnues en \(A\).</li>
+      <li><strong>Deux contacts symétriques</strong> : un même ressort agit sur deux positions symétriques de la masselotte. Leurs effets
+      s'additionnent (les termes en poids s'annulent).</li>
+    </ul>
+  </div>
+
+  <div class="info">
+    <span class="lab">Ce que demande le TD au final</span>
+    Déterminer la <strong>composante \(F_R\)</strong> de l'effort du ressort, puis la <strong>raideur minimale</strong> \(k\) du ressort
+    pour que son allongement reste inférieur à une course maximale \(\Delta l_{max}\).
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>2. La démarche en 5 étapes</h2>
+  <ol class="steps">
+    <li><strong>Graphe des liaisons</strong> : repérer qui est lié à qui et où agissent les efforts (question 1).</li>
+    <li><strong>Moment cinétique en \(A\)</strong> de la masselotte 2 (question 2), puis sa dérivée (question 3).</li>
+    <li><strong>Projection sur \(\vec z_1\)</strong> du PFD : équation de moment qui ne contient plus le pivot (question 4).</li>
+    <li><strong>Isoler le ressort</strong> 3 pour trouver \(F_R\) à partir de l'effort \(X_{32}\) (question 5).</li>
+    <li><strong>Dimensionner</strong> la raideur (question 6).</li>
+  </ol>
+
+  <!-- ============================================================ -->
+  <h2>3. Le modèle et les données</h2>
+
+  <figure>
+    <img src="img/c03-td-regulateur.png" alt="Régulateur centrifuge : arbre 1 tournant autour de l'axe x, masselotte 2 pivotant en A, ressort 3 et tiroir" loading="lazy">
+    <figcaption>Schéma de l'énoncé. Le bras 1 tourne autour de l'axe \((O,\vec x)\). La masselotte 2 pivote autour de \((A,\vec z_1)\).
+    Le tiroir 3 se déplace suivant \(\vec x\) et comprime le ressort.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="img/c03-td-regulateur-hyp.png" alt="Paramétrage : angles alpha et beta, points O, A, B, G, bases b1 et b2" loading="lazy">
+    <figcaption>Paramétrage. Angle \(\alpha\) : rotation du bras 1 autour de \(\vec x\). Angle \(\beta\) : bascule de la masselotte 2 autour de \(\vec z_1\).</figcaption>
+  </figure>
+
+  <div class="card">
+    <h3>Hypothèses (à garder en tête)</h3>
+    <ul>
+      <li>\(\overrightarrow{OA}=a\,\vec y_1\), \(\overrightarrow{AG}=b\,\vec y_2\), \(\overrightarrow{BA}=c\,\vec x_2\).</li>
+      <li>Matrice d'inertie de la masselotte en \(A\), dans \(\vec b_2=(\vec x_2,\vec y_2,\vec z_2)\) : \(\bar{\bar I}_{(A,2)}=\begin{pmatrix}A&-F&0\\-F&B&0\\0&0&C\end{pmatrix}\).</li>
+      <li>Le bras 1 tourne autour de \((O,\vec x)\) à la vitesse \(\dot\alpha\) ; la masselotte 2 tourne par rapport à 1 autour de \((A,\vec z_1)\) à la vitesse \(\dot\beta\).</li>
+      <li>On admet que \(\beta\) est <strong>constant</strong> pendant la phase étudiée : \(\dot\beta=\ddot\beta=0\).</li>
+      <li>Pas de valeurs numériques dans l'énoncé : les résultats restent littéraux.</li>
+    </ul>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>4. Les questions</h2>
+
+  <!-- ---- Question 1 ---- -->
+  <div class="qblock wide">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Graphe des liaisons</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Proposer un graphe des liaisons qui fait apparaître les paramètres et les actions mécaniques.</div>
+
+      <div class="svgwrap">
+        <svg viewBox="0 0 600 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Graphe des liaisons : 0 pivot 1 ; 1 pivot 2 ; 1 glissiere 3 ; 2 ponctuelle 3 ; poids sur 2 ; ressort F_R entre 1 et 3">
+          <!-- poids sur 2 -->
+          <line x1="330" y1="12" x2="330" y2="58" stroke="#475569" stroke-width="2.5"/>
+          <text x="345" y="34" font-size="20" fill="#334155">poids (T pes→2)</text>
+          <!-- liaisons -->
+          <line x1="96" y1="170" x2="224" y2="170" stroke="#0f766e" stroke-width="3"/>
+          <line x1="262" y1="156" x2="316" y2="104" stroke="#0f766e" stroke-width="3"/>
+          <line x1="352" y1="100" x2="478" y2="150" stroke="#0f766e" stroke-width="3"/>
+          <path d="M 276 186 Q 375 250 474 186" fill="none" stroke="#0f766e" stroke-width="3"/>
+          <!-- noeuds -->
+          <circle cx="70" cy="170" r="26" fill="#ffffff" stroke="#475569" stroke-width="2.5"/>
+          <circle cx="250" cy="170" r="26" fill="#ffffff" stroke="#475569" stroke-width="2.5"/>
+          <circle cx="330" cy="90" r="26" fill="#ffffff" stroke="#475569" stroke-width="2.5"/>
+          <circle cx="500" cy="170" r="26" fill="#ffffff" stroke="#475569" stroke-width="2.5"/>
+          <g font-size="24" font-weight="700" fill="#1e293b" text-anchor="middle">
+            <text x="70" y="177">0</text>
+            <text x="250" y="177">1</text>
+            <text x="330" y="97">2</text>
+            <text x="500" y="177">3</text>
+          </g>
+          <!-- etiquettes -->
+          <g font-size="19" fill="#0f766e" text-anchor="middle">
+            <text x="160" y="150">pivot (O, x)</text>
+            <text x="200" y="110" text-anchor="end">pivot (A, z₁)</text>
+            <text x="450" y="72">ponctuelle (B, x)</text>
+            <text x="375" y="204">ressort F<tspan baseline-shift="sub" font-size="14">R</tspan></text>
+            <text x="375" y="250">glissière (C, x)</text>
+          </g>
+        </svg>
+        <figcaption>Graphe des liaisons. Les traits verts sont les liaisons : pivot 0/1, pivot 1/2, ponctuelle 2/3 (contact normal en \(B\)),
+        glissière 1/3 (direction \(\vec x\)). Le ressort agit entre 1 et 3 avec l'effort \(F_R\).</figcaption>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---- Question 2 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q2</span>Moment cinétique en \(A\) de la masselotte 2</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer \(\vec\sigma_{A\in2/0}\) dans le mouvement de 2 par rapport à \(R\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Formule générale : \(\vec\sigma_{A}=\bar{\bar I}_{(A,2)}\cdot\vec\Omega_{2/0}+m\,\overrightarrow{AG}\wedge\vec V_{A\in2/0}\).</li>
+        <li>Rotation : \(\vec\Omega_{2/0}=\dot\alpha\,\vec x+\dot\beta\,\vec z_1\). Dans \(\vec b_2\), avec \(\vec x=\cos\beta\,\vec x_2-\sin\beta\,\vec y_2\) :
+        \(\vec\Omega_{2/0}=(\dot\alpha\cos\beta,\ -\dot\alpha\sin\beta,\ \dot\beta)\).</li>
+        <li>Vitesse de \(A\) : \(A\) est porté par le bras 1 (\(\overrightarrow{OA}=a\vec y_1\)) et \(A\) est le pivot de 2 par rapport à 1, donc \(\vec V_{A\in2/0}=\vec V_{A\in1/0}=\dot\alpha\,\vec x\wedge a\vec y_1=a\dot\alpha\,\vec z_2\).</li>
+        <li>\(\overrightarrow{AG}=b\vec y_2\) : \(\overrightarrow{AG}\wedge\vec V_A=b\,a\dot\alpha\,\vec x_2\).</li>
+      </ol>
+      <div class="calc">
+        \[\vec\sigma_{A\in2/0}=\bar{\bar I}_{(A,2)}\begin{pmatrix}\dot\alpha\cos\beta\\-\dot\alpha\sin\beta\\\dot\beta\end{pmatrix}+m\,ab\dot\alpha\,\vec x_2\]
+        <p>Composante par composante :</p>
+        \[\text{(}x_2\text{)}:\ A\dot\alpha\cos\beta+F\dot\alpha\sin\beta+mab\dot\alpha\qquad\text{(}y_2\text{)}:\ -F\dot\alpha\cos\beta-B\dot\alpha\sin\beta\qquad\text{(}z_2\text{)}:\ C\dot\beta\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \[\vec\sigma_{A\in2/0}=\begin{pmatrix}\dot\alpha\,(A\cos\beta+F\sin\beta+mab)\\-\dot\alpha\,(F\cos\beta+B\sin\beta)\\C\,\dot\beta\end{pmatrix}_{\vec b_2}\]
+      </div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Le terme \(mab\dot\alpha\) vient du <strong>mouvement du centre d'inertie</strong> \(\overrightarrow{AG}\wedge m\vec V_A\) : il n'est pas dans \(\bar{\bar I}\).</li>
+        <li>Les composantes sont données dans \(\vec b_2\), qui tourne avec 2 : ne pas les confondre avec celles dans \(\vec b_1\).</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ---- Question 3 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3</span>Projection du moment dynamique sur \(\vec z_1\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer \(\vec\delta_{A\in2/0}\cdot\vec z_1\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Formule : \(\vec\delta_{A\in2/0}=\big[\tfrac{d}{dt}\vec\sigma_A\big]_R+\vec V_{A/0}\wedge m\vec V_{G\in3/0}\) (formule du cours, à appliquer ici avec le bon point).
+        Le terme \(\vec V_{A/0}\wedge m\vec V_{G}\) ne contribue pas sur \(\vec z_1\) : \(\vec V_{A/0}=a\dot\alpha\,\vec z_1\) est colinéaire à \(\vec z_1\), donc son produit vectoriel avec n'importe quel vecteur est orthogonal à \(\vec z_1\).</li>
+        <li>Astuce : \(\vec\delta\cdot\vec z_1=\dfrac{d}{dt}(\vec\sigma_A\cdot\vec z_1)-\vec\sigma_A\cdot\Big[\dfrac{d\vec z_1}{dt}\Big]_R\), car \(\vec z_1\) n'est pas fixe dans \(R\).</li>
+        <li>Dérivée de \(\vec z_1\) dans \(R\) : \(\big[\tfrac{d\vec z_1}{dt}\big]_R=\dot\alpha\,\vec x\wedge\vec z_1=\dot\alpha(-\sin\beta\,\vec x_2-\cos\beta\,\vec y_2)\), soit \((-\dot\alpha\sin\beta,\ -\dot\alpha\cos\beta,\ 0)_{\vec b_2}\).</li>
+      </ol>
+      <div class="calc">
+        <p>Premier terme : \(\dfrac{d}{dt}(\sigma_A\cdot z_1)=\dfrac{d}{dt}(C\dot\beta)=C\ddot\beta\).</p>
+        <p>Second terme : \(\vec\sigma_A\cdot\big[\tfrac{d\vec z_1}{dt}\big]_R=\dot\alpha\big[-\sin\beta\cdot\dot\alpha(A\cos\beta+F\sin\beta+mab)-\cos\beta\cdot(-\dot\alpha)(F\cos\beta+B\sin\beta)\big]\)
+        \(=\dot\alpha^2\big[(B-A)\sin\beta\cos\beta+F(\cos^2\beta-\sin^2\beta)-mab\sin\beta\big]\).</p>
+        \[\vec\delta_{A\in2/0}\cdot\vec z_1=C\ddot\beta+\dot\alpha^2\Big[mab\sin\beta+(A-B)\cos\beta\sin\beta+F(\sin^2\beta-\cos^2\beta)\Big]\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        Avec \(\beta\) constant (\(\ddot\beta=0\)) : \(\vec\delta_{A\in2/0}\cdot\vec z_1=\dot\alpha^2\big[mab\sin\beta+(A-B)\cos\beta\sin\beta+F(\sin^2\beta-\cos^2\beta)\big]\).
+      </div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>Dériver une projection sur un vecteur qui <strong>tourne</strong> : \(\dfrac{d}{dt}(\vec\sigma\cdot\vec u)=\dfrac{d\vec\sigma}{dt}\cdot\vec u+\vec\sigma\cdot\dfrac{d\vec u}{dt}\).
+      C'est ce second terme qui donne les \(\dot\alpha^2\).</p>
+    </aside>
+  </div>
+
+  <!-- ---- Question 4 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q4</span>Équation de moment sur \(\vec z_1\) : effort \(X_{32}\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Écrire le théorème du moment dynamique selon \((A,\vec z_1)\), et justifier ce choix par rapport à l'objectif.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>On isole 2 et on fait le bilan : effort \(X_{32}\vec x\) du tiroir 3 en \(B\) (normal au contact), liaison pivot en \(A\) (inconnue), poids de 2 (vertical) en \(G\).</li>
+        <li>On ramène les actions en \(A\) et on projette sur \(\vec z_1\) : la liaison pivot en \(A\) n'apporte aucun moment selon son axe.</li>
+        <li>Moment de l'effort du tiroir : \(\overrightarrow{AB}=-c\vec x_2\), \(\overrightarrow{AB}\wedge X_{32}\vec x\cdot\vec z_1=c\,X_{32}\sin\beta\).</li>
+        <li>Moment du poids : \(\overrightarrow{AG}=b\vec y_2\) ; le poids projeté sur \(\vec z_1\) donne \(bmg\cos\alpha\sin\beta\) (résultat du corrigé).</li>
+      </ol>
+      <div class="calc">
+        \[\sum\vec M_A(\text{ext}\to2)\cdot\vec z_1=\vec\delta_{A\in2/0}\cdot\vec z_1\qquad\Longrightarrow\qquad cX_{32}\sin\beta+bmg\cos\alpha\sin\beta=\vec\delta_{A\in2/0}\cdot\vec z_1\]
+        \[X_{32}=\dfrac{\vec\delta_{A\in2/0}\cdot\vec z_1-bmg\cos\alpha\sin\beta}{c\sin\beta}\]
+        <p>En remplaçant \(\vec\delta\cdot\vec z_1\) par la réponse de Q3 :</p>
+        \[X_{32}=\dfrac{\dot\alpha^2\big[mab\sin\beta+(A-B)\cos\beta\sin\beta+F(\sin^2\beta-\cos^2\beta)\big]-bmg\cos\alpha\sin\beta}{c\sin\beta}\]
+      </div>
+      <div class="res"><span class="lab">Justification du choix</span>
+        L'objectif est l'effort du ressort. Une équation de moment projetée sur \(\vec z_1\) ne contient <strong>ni la réaction en \(A\)</strong> (pivot), ni les
+        autres inconnues de la liaison ; elle contient \(X_{32}\), qui est directement relié à \(F_R\) (question 5).
+      </div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Le bras de levier du tiroir vaut \(c\) et le sinus de \(\beta\) apparaît : pour \(\sin\beta=0\), l'équation est singulière.</li>
+        <li>Le poids \(bmg\cos\alpha\sin\beta\) dépend de \(\alpha\) : il disparaîtra à la question 5 grâce aux deux contacts.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ---- Question 5 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q5</span>Effort \(F_R\) du ressort</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer la composante \(F_R\) de l'effort du ressort, en précisant le solide isolé et les hypothèses utiles.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Isoler le tiroir 3</strong>. Bilan : actions du bâti 1 en \(O\), du solide 2 en \(B\) (\(X_{23}\)), en \(B'\) (\(X_{2'3}\)) et \(\{\mathcal T_{res\to3}\}\) du ressort (\(F_R\vec x\)).</li>
+        <li>PFD en translation suivant \(\vec x\) : \(\sum\vec R\cdot\vec x=m\ddot x\). Comme \(\beta\) est constant, \(x\) est constante : \(\ddot x=0\).</li>
+        <li><strong>Deux contacts symétriques</strong> : la masselotte 2 touche le tiroir en \(B\) et en \(B'\), avec \(\alpha'=\alpha+\pi\), donc \(\cos\alpha'=-\cos\alpha\) et \(\beta'=\beta\).</li>
+        <li>\(F_R=-X_{23}-X_{2'3}=X_{32}+X_{32'}\).</li>
+      </ol>
+      <div class="calc">
+        <p>Pour le premier contact : \(X_{32}=\dfrac{\delta-bmg\cos\alpha\sin\beta}{c\sin\beta}\), avec \(\delta\) la partie en \(\dot\alpha^2\).
+        Pour le second : \(X_{32'}=\dfrac{\delta-bmg\cos\alpha'\sin\beta}{c\sin\beta}=\dfrac{\delta+bmg\cos\alpha\sin\beta}{c\sin\beta}\).
+        La somme élimine les termes en poids :</p>
+        \[F_R=X_{32}+X_{32'}=\dfrac{2\delta}{c\sin\beta}\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \[\boxed{F_R=\dfrac{2\dot\alpha^2\big[mab\sin\beta+(A-B)\cos\beta\sin\beta+F(\sin^2\beta-\cos^2\beta)\big]}{c\sin\beta}}\]
+      </div>
+      <div class="info"><span class="lab">Lecture physique</span>
+        \(F_R\) croît avec \(\dot\alpha^2\) : plus le régulateur tourne vite, plus la masselotte veut s'écarter, et plus le ressort doit résister.
+        Le poids n'intervient pas (il s'annule par symétrie des deux contacts).
+      </div>
+    </div>
+    <aside class="aside apply">
+      <span class="lab">Appliquer</span>
+      <ul>
+        <li>Toujours écrire \(\alpha'=\alpha+\pi\) pour un contact symétrique : c'est ce qui fait changer le signe du poids.</li>
+        <li>Vérifier l'unité : \(\dot\alpha^2\) en s⁻², \(mab\) en kg·m², donc \(\dfrac{mab\,\dot\alpha^2}{c}\) est une force (N).</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ---- Question 6 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q6</span>Dimensionnement de la raideur</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Dimensionner le ressort en raideur pour garantir un critère d'allongement maximal.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Loi du ressort linéaire : \(F_R=k\,\Delta l\).</li>
+        <li>Condition d'allongement : \(\Delta l=\dfrac{F_R}{k}\le\Delta l_{max}\).</li>
+        <li>On en tire la raideur minimale.</li>
+      </ol>
+      <div class="calc">
+        \[\Delta l=\dfrac{F_R}{k}\le\Delta l_{max}\quad\Longrightarrow\quad k\ \ge\ \dfrac{F_R}{\Delta l_{max}}\]
+        <p>Comme \(F_R\) dépend de \(\dot\alpha\), la condition la plus sévère est obtenue à la vitesse maximale de régulation.</p>
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \[\boxed{k\ \ge\ \dfrac{2\dot\alpha_{max}^2\big[mab\sin\beta+(A-B)\cos\beta\sin\beta+F(\sin^2\beta-\cos^2\beta)\big]}{c\,\sin\beta\,\Delta l_{max}}}\]
+      </div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>Un ressort est dimensionné sur le <strong>cas le plus défavorable</strong> : effort maximal (vitesse maximale) et course maximale admise.</p>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>5. À retenir</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Moment cinétique</strong> en \(A\) : \(\vec\sigma_A=\bar{\bar I}\cdot\vec\Omega+m\overrightarrow{AG}\wedge\vec V_A\) (le second terme est souvent oublié).</li>
+      <li><strong>Projection sur l'axe du pivot</strong> : \(\vec z_1\) élimine les réactions du pivot \((A,\vec z_1)\).</li>
+      <li><strong>Dérivée d'une projection</strong> : penser au terme \(\vec\sigma\cdot\dfrac{d\vec u}{dt}\) quand le vecteur \(\vec u\) tourne.</li>
+      <li><strong>Deux contacts symétriques</strong> : l'effort du ressort est \(2\delta/(c\sin\beta)\), sans le poids.</li>
+    </ul>
+  </div>
+
+  </section>
+
+  <section class="block td-exo" id="td-ex6">
+
+  <div class="kicker">AM2 · SI · Chapitre 3 — Principe fondamental de la dynamique (TD)</div>
+  <h2 class="exo-title">Équilibreuse : correction détaillée</h2>
+  <p class="lead">Un exercice du TD « Principe fondamental de la dynamique » (CPGE PT, S2I). L'arbre 1 porte une roue 2 mal équilibrée.
+  On mesure les efforts dans les paliers, puis on en déduit la position du défaut de la roue, puis on place deux masselottes pour l'annuler.
+  Pour chaque question : ce qu'elle demande, la démarche, le calcul complet, et les encadrés de méthode.</p>
+
+  <!-- ============================================================ -->
+  <h2>1. Avant de commencer : l'essentiel en quelques lignes</h2>
+
+  <div class="card">
+    <h3>Le principe fondamental de la dynamique (PFD)</h3>
+    <p>Pour un ensemble \(\Sigma\), la somme des torseurs des actions extérieures est égale au <strong>torseur dynamique</strong> :
+    \(\{\mathcal T_{\text{ext}\to\Sigma}\}=\{\mathcal D_{\Sigma/0}\}\). Le torseur dynamique a deux parties :</p>
+    <ul>
+      <li>la <strong>résultante dynamique</strong> \(\vec R\{\mathcal D\}=m\,\vec\Gamma_G\) (accélération du centre d'inertie) ;</li>
+      <li>le <strong>moment dynamique</strong> \(\vec\delta_P\) (variation du moment cinétique), à calculer en un point \(P\) fixe ou en \(G\).</li>
+    </ul>
+    <h3>Le balourd</h3>
+    <p>Une roue « mal équilibrée » a son centre d'inertie \(G_2\) décalé de l'axe de rotation (distance \(\rho\)) et des produits
+    d'inertie \(E\) et \(F\) non nuls. En tournant, elle fait naître dans les paliers des efforts <strong>sinusoïdes en fonction de l'angle</strong>.
+    C'est ce que mesurent les deux capteurs. Le problème inverse est donc : à partir de ces mesures, retrouver \(\rho\), \(\alpha\), \(E\), \(F\),
+    puis placer les masselottes.</p>
+  </div>
+
+  <div class="info">
+    <span class="lab">Ce que demande le TD au final</span>
+    Déterminer les <strong>masses</strong> des masselottes à ajouter sur la roue, ainsi que leur <strong>position angulaire</strong>.
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>2. La démarche en 5 étapes</h2>
+  <ol class="steps">
+    <li><strong>Isoler</strong> \(\Sigma=\{1+2\}\) et faire le bilan des actions (paliers \(O\) et \(A\), courroie, poids). Question 1.</li>
+    <li><strong>Calculer le torseur dynamique</strong> de la roue 2 (accélération de \(G_2\), moment en \(B\) puis en \(O\)). Question 1.</li>
+    <li><strong>Projeter</strong> la résultante et le moment, puis isoler \(Z_O\), \(Z_A\) (capteurs). Question 1.</li>
+    <li><strong>Inverser</strong> avec les valeurs \(\theta=0\) et \(\theta=\pi/2\) pour trouver \(\rho\), \(\alpha\), \(E\), \(F\). Questions 2 et 3.</li>
+    <li><strong>Équilibrer</strong> : conditions statiques et dynamiques pour deux masselottes 3 et 4. Questions 4 et 5.</li>
+  </ol>
+
+  <!-- ============================================================ -->
+  <h2>3. Le modèle et les données</h2>
+
+  <figure>
+    <img src="img/c03-td-equilibreuse.png" alt="Équilibreuse : arbre 1 sur paliers O et A, roue 2 en B, dimensions a, b, c, d" loading="lazy">
+    <figcaption>Schéma de l'énoncé. Arbre 1 sur les paliers \(O\) (rotule instrumentée) et \(A\), roue 2 en \(B\), courroie qui entraîne l'arbre au point \(G_1\).</figcaption>
+  </figure>
+
+  <div class="card">
+    <h3>Hypothèses (à garder en tête)</h3>
+    <ul>
+      <li>\(R_0\) est lié au bâti, \(\vec y_0\) est vertical ascendant. \(\theta=(\vec y_0,\vec y_1)\), et \(\dot\theta=\omega=\text{cste}\) : \(\ddot\theta=0\).</li>
+      <li>L'arbre 1 (avec sa poulie) est <strong>équilibré</strong> : \(G_1\) est sur l'axe, \(\vec x_0\) est axe principal d'inertie. Sa contribution au torseur dynamique est donc nulle.</li>
+      <li>La courroie exerce sur la poulie \(\{\mathcal T_{C\to P}\}=\left\{\begin{smallmatrix}C_m\,\vec x_0\\ -T\,\vec y_0\end{smallmatrix}\right\}\) en \(G_1\).</li>
+      <li>La roue 2 est fixée sur l'arbre, de masse \(m_2\), avec \(\overrightarrow{BG_2}=h\,\vec x_0+\rho\,\vec z_2\). L'angle \(\alpha=(\vec y_1,\vec y_2)\) est constant mais inconnu.</li>
+      <li>Matrice d'inertie de la roue en \(B\) dans \((\vec x_0,\vec y_2,\vec z_2)\) : \(\bar{\bar I}_{(B,2)}=\begin{pmatrix}A&-F&-E\\-F&B&-D\\-E&-D&C\end{pmatrix}\).</li>
+    </ul>
+    <h3>Données numériques</h3>
+    <table>
+      <tr><th class="l">Grandeur</th><th>Valeur</th><th class="l">Grandeur</th><th>Valeur</th></tr>
+      <tr><td class="l">\(m_2\)</td><td>18 kg</td><td class="l">\(\omega=\dot\theta\)</td><td>60 rad·s⁻¹</td></tr>
+      <tr><td class="l">\(a\)</td><td>460 mm</td><td class="l">\(b\)</td><td>80 mm</td></tr>
+    </table>
+    <p style="margin:0">Les courbes et le tableau des mesures sont donnés à la question 3 (image juste au-dessus).</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>4. Les questions</h2>
+
+  <!-- ---- Question 1 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q1</span>Efforts dans les paliers : PFD sur \(\{1+2\}\) en \(O\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Exprimer \(X_O\), \(Y_O\), \(Z_O\), \(Y_A\), \(Z_A\) (composantes des actions du bâti 0 sur l'arbre 1) en fonction des données.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>On isole \(\Sigma=\{1+2\}\) et on écrit les torseurs extérieurs : paliers \(O\) (\(X_O,Y_O,Z_O\)), \(A\) (\(Y_A,Z_A\), pas d'effort axial), courroie, poids de 1 et de 2.</li>
+        <li>On calcule le torseur dynamique \(\{\mathcal D_{\Sigma/0}\}=\{\mathcal D_{1/0}\}+\{\mathcal D_{2/0}\}\). Pour l'arbre : \(\{\mathcal D_{1/0}\}=\{0\}\) (équilibré, \(\ddot\theta=0\)).</li>
+        <li>Pour la roue : \(\overrightarrow{OG_2}=(b+h)\vec x_0+\rho\vec z_2\). Comme \(\dot\theta=\omega\) est constant, \(\vec\Gamma_{G_2/0}=-\rho\omega^2\vec z_2\).</li>
+        <li>On projette la résultante et le moment, et on isole chaque inconnue.</li>
+      </ol>
+      <div class="calc">
+        <p><strong>Résultante</strong> (projection sur \(\vec x_0,\vec y_0,\vec z_0\)) :</p>
+        \[m_2\vec\Gamma_{G_2}=-m_2\rho\omega^2\vec z_2=-m_2\rho\omega^2\big[-\sin(\alpha{+}\theta)\vec y_0+\cos(\alpha{+}\theta)\vec z_0\big]\]
+        \[X_O=0,\qquad Y_O+Y_A-T-(m_1+m_2)g=m_2\rho\omega^2\sin(\alpha{+}\theta),\qquad Z_O+Z_A=-m_2\rho\omega^2\cos(\alpha{+}\theta)\]
+        <p><strong>Moment dynamique en \(B\)</strong> : \(\sigma_B=\bar{\bar I}_{(B,2)}\,\omega\vec x_0=\omega\,(A\vec x_0-F\vec y_2-E\vec z_2)\).
+        Comme \(\vec y_2\) et \(\vec z_2\) tournent à \(\omega\) autour de \(\vec x_0\), leur dérivée donne :
+        \(\vec\delta_B=\omega^2\,(E\,\vec y_2-F\,\vec z_2)\).</p>
+        <p><strong>Transport en \(O\)</strong> : \(\vec\delta_O=\vec\delta_B+\overrightarrow{OB}\wedge m_2\vec\Gamma_{G_2}\), avec \(\overrightarrow{OB}=b\vec x_0\) :
+        \(b\vec x_0\wedge(-m_2\rho\omega^2\vec z_2)=bm_2\rho\omega^2\vec y_2\). Donc :</p>
+        \[\vec\delta_{O}=\omega^2\big[(E+bm_2\rho)\,\vec y_2-F\,\vec z_2\big]\]
+        <p>On projette sur \(\vec y_0,\vec z_0\) avec \(\vec y_2=\cos(\alpha{+}\theta)\vec y_0+\sin(\alpha{+}\theta)\vec z_0\) et
+        \(\vec z_2=-\sin(\alpha{+}\theta)\vec y_0+\cos(\alpha{+}\theta)\vec z_0\).
+        Les équations de moment sont : \(\vec z_0\) donne \(-aY_A+dT+m_1gd-m_2g(b+h)=\delta_{O}\cdot\vec z_0\), et \(\vec y_0\) donne \(aZ_A=\delta_O\cdot\vec y_0\).
+        Le moment selon \(\vec y_0\) ne contient que \(Z_A\) (bras \(a\)), ce qui isole \(Z_A\) directement.</p>
+      </div>
+      <div class="res"><span class="lab">Réponse (formules du corrigé ; signe de \(Y_O\) corrigé, voir l'encadré)</span>
+        \[X_O=0\qquad Z_A=\dfrac{\omega^2}{a}\big[(E+m_2\rho b)\cos(\alpha{+}\theta)+F\sin(\alpha{+}\theta)\big]\]
+        \[Z_O=-\dfrac{\omega^2}{a}\big[(E+m_2\rho(a+b))\cos(\alpha{+}\theta)+F\sin(\alpha{+}\theta)\big]\]
+        \[Y_A=\dfrac{\omega^2}{a}\big[-(E+m_2\rho b)\sin(\alpha{+}\theta)+F\cos(\alpha{+}\theta)\big]+\dfrac{d}{a}(T+m_1g)-\dfrac{b+h}{a}\,m_2g\]
+        \[Y_O=-\dfrac{\omega^2}{a}\big[-(E+m_2\rho(a+b))\sin(\alpha{+}\theta)+F\cos(\alpha{+}\theta)\big]+\dfrac{a-d}{a}(T+m_1g)+\dfrac{a+b+h}{a}\,m_2g\]
+      </div>
+      <div class="warn"><span class="lab">⚠️ Signe à vérifier dans le corrigé officiel</span>
+        Le corrigé écrit <strong>\(-\frac{a+b+h}{a}m_2g\)</strong> dans \(Y_O\). Or la somme des résultantes donne
+        \(Y_O+Y_A=T+(m_1+m_2)g+m_2\rho\omega^2\sin(\alpha{+}\theta)\) : le terme en \(m_2g\) doit donc être
+        \(+\frac{a+b+h}{a}m_2g\) (contrôle : \(Y_A\) contient \(-\frac{b+h}{a}m_2g\), la somme donne bien \(+m_2g\)).
+        Test statique (\(\omega=0\), \(T=0\)) : \(Y_A=-\frac{b+h}{a}m_2g\) et \(Y_O=m_2g\bigl(1+\frac{b+h}{a}\bigr)\) — le poids est bien repris par les deux paliers.</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>L'arbre est équilibré : il ne contribue pas au torseur dynamique. Seule la roue compte.</li>
+        <li>\(\dot\theta\) est constante, donc \(\ddot\theta=0\) : pas de terme en accélération angulaire.</li>
+        <li>Le moment en \(O\) selon \(\vec y_0\) isole \(Z_A\) (bras \(a\)) ; selon \(\vec z_0\) il isole \(Y_A\).</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ---- Question 2 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q2</span>Position de la roue : \(\rho\), \(\alpha\), \(E\), \(F\) à partir des capteurs</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Déterminer \(\rho\), \(\alpha\), \(E\) et \(F\) en fonction de \(Z_O(0)\), \(Z_O(\pi/2)\), \(Z_A(0)\), \(Z_A(\pi/2)\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Pour \(\theta=0\) : on écrit \(Z_A(0)\) et \(Z_O(0)\) (équations 1 et 2). La somme élimine \(E\) et \(F\).</li>
+        <li>Pour \(\theta=\pi/2\) : on fait de même (équations 4 et 5). La somme donne une deuxième relation indépendante.</li>
+        <li>On combine les deux sommes : \(\rho\) vient du module, \(\alpha\) du rapport des deux sommes.</li>
+        <li>Enfin, les combinaisons \((1)\sin\alpha+(4)\cos\alpha\) et \((1)\cos\alpha-(4)\sin\alpha\) donnent \(F\) et \(E\).</li>
+      </ol>
+      <div class="calc">
+        <p>Pour \(\theta=0\) : \(Z_A(0)=\dfrac{\omega^2}{a}[(E+m_2\rho b)\cos\alpha+F\sin\alpha]\) (1), \(Z_O(0)=-\dfrac{\omega^2}{a}[(E+m_2\rho(a+b))\cos\alpha+F\sin\alpha]\) (2).
+        Par somme : \(Z_A(0)+Z_O(0)=-m_2\rho\omega^2\cos\alpha\) (3).</p>
+        <p>Pour \(\theta=\pi/2\) : \(Z_A(\tfrac\pi2)=\dfrac{\omega^2}{a}[-(E+m_2\rho b)\sin\alpha+F\cos\alpha]\) (4), \(Z_O(\tfrac\pi2)=-\dfrac{\omega^2}{a}[-(E+m_2\rho(a+b))\sin\alpha+F\cos\alpha]\) (5).
+        Par somme : \(Z_A(\tfrac\pi2)+Z_O(\tfrac\pi2)=m_2\rho\omega^2\sin\alpha\) (6).</p>
+        <p>Module : \((3)^2+(6)^2\) donne \(\rho\). Rapport : \((6)/(3)\) donne \(\tan\alpha\). Puis :</p>
+        \[\rho=\dfrac{1}{m_2\omega^2}\sqrt{\big(Z_A(0)+Z_O(0)\big)^2+\big(Z_A(\tfrac\pi2)+Z_O(\tfrac\pi2)\big)^2}\qquad
+        \tan\alpha=-\dfrac{Z_A(\tfrac\pi2)+Z_O(\tfrac\pi2)}{Z_A(0)+Z_O(0)}\]
+        \[F=\dfrac{a}{\omega^2}\Big(Z_A(0)\sin\alpha+Z_A(\tfrac\pi2)\cos\alpha\Big)\qquad
+        E=\dfrac{a}{\omega^2}\Big(Z_A(0)\cos\alpha-Z_A(\tfrac\pi2)\sin\alpha\Big)-m_2\rho b\]
+      </div>
+      <div class="res"><span class="lab">Réponse</span>
+        \(\rho\) : module de la somme des \(Z\) ; \(\alpha\) : angle donné par \(\tan\alpha\), à \(\pi\) près ;
+        \(F\) et \(E\) : combinaisons des mesures en \(\theta=0\) et \(\theta=\pi/2\), corrigées du terme \(m_2\rho b\).
+      </div>
+    </div>
+    <aside class="aside formula">
+      <span class="lab">Formule à savoir</span>
+      <p>\(Z_O\) et \(Z_A\) sont des <strong>sinusoïdes pures</strong> : \(P\cos\theta+Q\sin\theta\). Deux mesures (\(\theta=0\) et \(\pi/2\)) suffisent à tout déterminer.</p>
+      <p>La somme \(Z_O+Z_A\) ne contient que \(\rho\) et \(\alpha\) : c'est la résultante, sans \(E\) ni \(F\).</p>
+    </aside>
+  </div>
+
+  <!-- ---- Question 3 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q3</span>Application numérique : \(\rho\), \(\alpha\), \(E\), \(F\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Lire les mesures sur les courbes et le tableau, puis calculer \(\rho\), \(\alpha\), \(E\), \(F\).</div>
+
+      <figure>
+        <img src="img/pfd-eq-donnees.png" alt="Données de l'équilibreuse : masse, cotes, vitesse, courbes Z_O et Z_A et tableau des mesures" loading="lazy">
+        <figcaption>Énoncé : données, courbes relevées par les capteurs (\(Z_O\) et \(Z_A\) en fonction de \(\theta\)) et tableau des mesures.</figcaption>
+      </figure>
+
+      <div class="calc">
+        <p>Mesures utilisées (tableau) : \(Z_O(0)=44{,}05\) N, \(Z_A(0)=-10{,}53\) N, \(Z_O(90°)=-40{,}29\) N, \(Z_A(90°)=17{,}68\) N.</p>
+        \[S_0=Z_A(0)+Z_O(0)=33{,}52\ \text N\qquad S_p=Z_A(\tfrac\pi2)+Z_O(\tfrac\pi2)=-22{,}61\ \text N\]
+        \[\rho=\dfrac{\sqrt{33{,}52^2+22{,}61^2}}{18\times 60^2}=\dfrac{40{,}43}{64\,800}\approx 6{,}2\times10^{-4}\ \text m\approx 0{,}62\ \text{mm}\]
+        \[\alpha:\ \tan\alpha=\dfrac{-22{,}61}{-33{,}52}\ \text{avec}\ \cos\alpha<0\ \Rightarrow\ \alpha\approx 214^\circ\]
+        <p>Avec \(K_0=Z_A(0)\,a/\omega^2=-10{,}53\times0{,}46/3600\approx-1{,}35\times10^{-3}\) kg·m² et
+        \(K_p=Z_A(\tfrac\pi2)\,a/\omega^2=17{,}68\times0{,}46/3600\approx2{,}26\times10^{-3}\) kg·m², avec \(\cos\alpha\approx-0{,}829\), \(\sin\alpha\approx-0{,}559\) :</p>
+        \[E+m_2\rho b=K_0\cos\alpha-K_p\sin\alpha\approx2{,}38\times10^{-3}\ \Rightarrow\ E\approx2{,}38\times10^{-3}-0{,}89\times10^{-3}\approx1{,}5\times10^{-3}\ \text{kg·m}^2\]
+        \[F=K_0\sin\alpha+K_p\cos\alpha\approx-1{,}1\times10^{-3}\ \text{kg·m}^2\]
+      </div>
+      <div class="res"><span class="lab">Réponse (corrigé officiel)</span>
+        \(\rho=0{,}62\) mm, \(\alpha=214^\circ\) (défini à \(\pi\) près), \(E\approx1{,}5\times10^{-3}\) kg·m², \(F\approx-1{,}1\times10^{-3}\) kg·m².
+        Le corrigé imprime « \(F=1{,}5\times10^{-3}\) » : c'est \(E\), la valeur de \(F\) étant \(-1{,}1\times10^{-3}\).
+      </div>
+      <p>Les courbes mesurées sont bien des sinusoïdes : le graphique ci-dessous compare les mesures à la sinusoïde \(P\cos\theta+Q\sin\theta\).</p>
+    </div>
+    <aside class="aside apply">
+      <span class="lab">Appliquer</span>
+      <ul>
+        <li>\(\rho\) se lit comme un module : \(\sqrt{S_0^2+S_p^2}\), pas une somme.</li>
+        <li>\(\alpha\) est donné à \(\pi\) près : le signe des deux \(\cos\alpha\) et \(\sin\alpha\) fixe le quadrant.</li>
+        <li>Penser à retirer \(m_2\rho b\) avant de conclure sur \(E\).</li>
+      </ul>
+    </aside>
+  </div>
+
+  <div class="svgwrap">
+<svg viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Courbes Z_O et Z_A en fonction de theta : sinusoides, points mesures tous les 30 degres">
+  <line x1="80" y1="49.3" x2="580" y2="49.3" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="80" y1="87.9" x2="580" y2="87.9" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="80" y1="126.4" x2="580" y2="126.4" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="80" y1="203.6" x2="580" y2="203.6" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="80" y1="242.1" x2="580" y2="242.1" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="80" y1="280.7" x2="580" y2="280.7" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="80" y1="165.0" x2="580" y2="165.0" stroke="#475569" stroke-width="1.5"/>
+  <line x1="80" y1="30.0" x2="80" y2="300.0" stroke="#475569" stroke-width="1.5"/>
+  <g font-size="20" fill="#334155" text-anchor="end">
+    <text x="70" y="56.3">60</text>
+    <text x="70" y="94.9">40</text>
+    <text x="70" y="133.4">20</text>
+    <text x="70" y="172.0">0</text>
+    <text x="70" y="210.6">−20</text>
+    <text x="70" y="249.1">−40</text>
+    <text x="70" y="287.7">−60</text>
+  </g>
+  <g font-size="20" fill="#334155" text-anchor="middle">
+    <text x="80.0" y="328">0°</text>
+    <text x="205.0" y="328">90°</text>
+    <text x="330.0" y="328">180°</text>
+    <text x="455.0" y="328">270°</text>
+    <text x="580.0" y="328">360°</text>
+  </g>
+  <text x="330" y="356" font-size="22" fill="#1e293b" text-anchor="middle">θ (degrés)</text>
+  <text x="24" y="165" font-size="22" fill="#1e293b" text-anchor="middle" transform="rotate(-90 24 165)">Z (N)</text>
+  <polyline fill="none" stroke="#0f766e" stroke-width="3" stroke-linejoin="round" points="80.0,80.0 85.6,85.7 91.1,91.7 96.7,98.1 102.2,104.8 107.8,111.7 113.3,119.0 118.9,126.5 124.4,134.1 130.0,141.9 135.6,149.9 141.1,157.9 146.7,165.9 152.2,173.9 157.8,181.9 163.3,189.8 168.9,197.6 174.4,205.2 180.0,212.6 185.6,219.8 191.1,226.8 196.7,233.4 202.2,239.7 207.8,245.6 213.3,251.2 218.9,256.3 224.4,260.9 230.0,265.2 235.6,268.9 241.1,272.1 246.7,274.8 252.2,276.9 257.8,278.5 263.3,279.6 268.9,280.1 274.4,280.0 280.0,279.4 285.6,278.2 291.1,276.5 296.7,274.2 302.2,271.4 307.8,268.1 313.3,264.3 318.9,259.9 324.4,255.2 330.0,250.0 335.6,244.3 341.1,238.3 346.7,231.9 352.2,225.2 357.8,218.3 363.3,211.0 368.9,203.5 374.4,195.9 380.0,188.1 385.6,180.1 391.1,172.1 396.7,164.1 402.2,156.1 407.8,148.1 413.3,140.2 418.9,132.4 424.4,124.8 430.0,117.4 435.6,110.2 441.1,103.2 446.7,96.6 452.2,90.3 457.8,84.4 463.3,78.8 468.9,73.7 474.4,69.1 480.0,64.8 485.6,61.1 491.1,57.9 496.7,55.2 502.2,53.1 507.8,51.5 513.3,50.4 518.9,49.9 524.4,50.0 530.0,50.6 535.6,51.8 541.1,53.5 546.7,55.8 552.2,58.6 557.8,61.9 563.3,65.7 568.9,70.1 574.4,74.8 580.0,80.0"/>
+  <polyline fill="none" stroke="#c2410c" stroke-width="3" stroke-linejoin="round" points="80.0,185.3 85.6,182.9 91.1,180.4 96.7,177.8 102.2,175.1 107.8,172.4 113.3,169.7 118.9,166.9 124.4,164.2 130.0,161.4 135.6,158.6 141.1,155.9 146.7,153.2 152.2,150.6 157.8,148.1 163.3,145.6 168.9,143.3 174.4,141.0 180.0,138.8 185.6,136.8 191.1,134.9 196.7,133.2 202.2,131.6 207.8,130.2 213.3,129.0 218.9,127.9 224.4,127.0 230.0,126.3 235.6,125.8 241.1,125.5 246.7,125.3 252.2,125.4 257.8,125.6 263.3,126.1 268.9,126.7 274.4,127.5 280.0,128.5 285.6,129.7 291.1,131.1 296.7,132.6 302.2,134.3 307.8,136.1 313.3,138.0 318.9,140.1 324.4,142.4 330.0,144.7 335.6,147.1 341.1,149.6 346.7,152.2 352.2,154.9 357.8,157.6 363.3,160.3 368.9,163.1 374.4,165.8 380.0,168.6 385.6,171.4 391.1,174.1 396.7,176.8 402.2,179.4 407.8,181.9 413.3,184.4 418.9,186.7 424.4,189.0 430.0,191.2 435.6,193.2 441.1,195.1 446.7,196.8 452.2,198.4 457.8,199.8 463.3,201.0 468.9,202.1 474.4,203.0 480.0,203.7 485.6,204.2 491.1,204.5 496.7,204.7 502.2,204.6 507.8,204.4 513.3,203.9 518.9,203.3 524.4,202.5 530.0,201.5 535.6,200.3 541.1,198.9 546.7,197.4 552.2,195.7 557.8,193.9 563.3,192.0 568.9,189.9 574.4,187.6 580.0,185.3"/>
+  <circle cx="80.0" cy="80.0" r="5.5" fill="#0f766e"/>
+  <circle cx="121.7" cy="130.3" r="5.5" fill="#0f766e"/>
+  <circle cx="163.3" cy="189.8" r="5.5" fill="#0f766e"/>
+  <circle cx="205.0" cy="242.7" r="5.5" fill="#0f766e"/>
+  <circle cx="246.7" cy="274.8" r="5.5" fill="#0f766e"/>
+  <circle cx="288.3" cy="277.4" r="5.5" fill="#0f766e"/>
+  <circle cx="330.0" cy="250.0" r="5.5" fill="#0f766e"/>
+  <circle cx="371.7" cy="199.7" r="5.5" fill="#0f766e"/>
+  <circle cx="413.3" cy="140.2" r="5.5" fill="#0f766e"/>
+  <circle cx="455.0" cy="87.3" r="5.5" fill="#0f766e"/>
+  <circle cx="496.7" cy="55.2" r="5.5" fill="#0f766e"/>
+  <circle cx="538.3" cy="52.6" r="5.5" fill="#0f766e"/>
+  <circle cx="80.0" cy="185.3" r="5.5" fill="#c2410c"/>
+  <circle cx="121.7" cy="165.5" r="5.5" fill="#c2410c"/>
+  <circle cx="163.3" cy="145.6" r="5.5" fill="#c2410c"/>
+  <circle cx="205.0" cy="130.9" r="5.5" fill="#c2410c"/>
+  <circle cx="246.7" cy="125.3" r="5.5" fill="#c2410c"/>
+  <circle cx="288.3" cy="130.4" r="5.5" fill="#c2410c"/>
+  <circle cx="330.0" cy="144.7" r="5.5" fill="#c2410c"/>
+  <circle cx="371.7" cy="164.5" r="5.5" fill="#c2410c"/>
+  <circle cx="413.3" cy="184.4" r="5.5" fill="#c2410c"/>
+  <circle cx="455.0" cy="199.1" r="5.5" fill="#c2410c"/>
+  <circle cx="496.7" cy="204.7" r="5.5" fill="#c2410c"/>
+  <circle cx="538.3" cy="199.6" r="5.5" fill="#c2410c"/>
+  <text x="455" y="38" font-size="22" font-weight="700" fill="#0f766e">Z<tspan baseline-shift="sub" font-size="18">O</tspan>(θ)</text>
+  <text x="250" y="110" font-size="22" font-weight="700" fill="#c2410c">Z<tspan baseline-shift="sub" font-size="18">A</tspan>(θ)</text>
+</svg>
+    <figcaption>Points : mesures du tableau tous les 30°. Trait plein : sinusoïdes \(Z_O=44{,}05\cos\theta-40{,}29\sin\theta\) et \(Z_A=-10{,}53\cos\theta+17{,}68\sin\theta\) (écart maximal de l'ajustement : 0,01 N).
+    Amplitudes : \(Z_O\) environ 60 N, \(Z_A\) environ 21 N.</figcaption>
+  </div>
+
+  <!-- ---- Question 4 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q4</span>Conditions d'équilibrage de la roue</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Écrire les conditions pour que la roue soit équilibrée avec deux masselottes 3 et 4 : \(\overrightarrow{BM_3}=r\vec u_3\) et \(\overrightarrow{BM_4}=c\vec x_0+r\vec u_4\), avec \(\beta_i=(\vec z_2,\vec u_i)\).</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li><strong>Équilibrage statique</strong> : le centre d'inertie \(G\) de l'ensemble doit être sur l'axe \((B,\vec x_0)\), donc \(\overrightarrow{BG}\cdot\vec y_2=\overrightarrow{BG}\cdot\vec z_2=0\).</li>
+        <li><strong>Équilibrage dynamique</strong> : l'axe doit être <strong>principal d'inertie</strong>, donc les produits d'inertie \(E'\) et \(F'\) de l'ensemble sont nuls.</li>
+        <li>On projette les positions : \(\overrightarrow{BM_3}=-r\sin\beta_3\vec y_2+r\cos\beta_3\vec z_2\) et \(\overrightarrow{BM_4}=c\vec x_0-r\sin\beta_4\vec y_2+r\cos\beta_4\vec z_2\).</li>
+      </ol>
+      <div class="calc">
+        <p><strong>Statique</strong> (\(G\) sur l'axe) :</p>
+        \[(7):\ -m_3r\sin\beta_3-m_4r\sin\beta_4=0\qquad (8):\ m_2\rho+m_3r\cos\beta_3+m_4r\cos\beta_4=0\]
+        <p><strong>Dynamique</strong> : la masselotte 3 est dans le plan \(B\) (bras axial nul), elle ne crée aucun produit d'inertie.
+        Seule la masselotte 4, déportée de \(c\), en crée. On annule donc les produits d'inertie totaux :</p>
+        \[(9):\ E+m_4cr\cos\beta_4=0\qquad (10):\ F-m_4cr\sin\beta_4=0\]
+      </div>
+      <div class="warn"><span class="lab">Point de vigilance (signe)</span>
+        La matrice d'inertie porte \(-F\) et \(-E\) en \(I_{xy}\) et \(I_{xz}\). Un point de masse \(m_4\) à \((x,y,z)=(c,\,-r\sin\beta_4,\,r\cos\beta_4)\) apporte \(-m_4xy=+m_4cr\sin\beta_4\) en \(xy\)
+        et \(-m_4xz=-m_4cr\cos\beta_4\) en \(xz\). On annule donc la somme : \((9)\) \(E+m_4cr\cos\beta_4=0\) et \((10)\) \(F-m_4cr\sin\beta_4=0\).
+        Avec ces signes on obtient \(\beta_4\approx216^\circ\), comme le corrigé officiel (voir Q5). Le corrigé imprime (10) de façon peu lisible : c'est ce sens des signes qu'il faut retenir.</div>
+    </div>
+    <aside class="aside piege">
+      <span class="lab">Piège</span>
+      <ul>
+        <li>Deux masselottes sont nécessaires : une pour l'équilibrage <strong>statique</strong> (force), une pour la <strong>dynamique</strong> (couple).</li>
+        <li>La masselotte 3 est dans le plan \(B\) : elle n'apporte pas de produit d'inertie.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ---- Question 5 ---- -->
+  <div class="qblock">
+    <div>
+      <p class="qtitle"><span class="qnum">Q5</span>Valeurs numériques : \(m_3\), \(m_4\), \(\beta_3\), \(\beta_4\)</p>
+      <div class="ask"><span class="lab">La question en clair</span>
+        Avec \(r=190\) mm et \(c=180\) mm, calculer les masses et les angles des deux masselottes.</div>
+      <p class="demarche"><span class="lab">Démarche</span></p>
+      <ol>
+        <li>Les équations (9) et (10) donnent \(m_4\) et \(\beta_4\) : \(m_4cr\) est le module de \((E,F)\).</li>
+        <li>Les équations (7) et (8) donnent \(m_3\) et \(\beta_3\) : on y remplace \(m_4\), \(\beta_4\), \(E\), \(F\).</li>
+      </ol>
+      <div class="calc">
+        <p><strong>Masselotte 4</strong> : \(m_4cr=\sqrt{E^2+F^2}=\sqrt{(1{,}5\times10^{-3})^2+(1{,}1\times10^{-3})^2}\approx1{,}86\times10^{-3}\) kg·m²,
+        \(cr=0{,}18\times0{,}19=0{,}0342\) m², donc :</p>
+        \[m_4=\dfrac{1}{cr}\sqrt{E^2+F^2}\approx 54\ \text g\]
+        \[\cos\beta_4=-\dfrac{E}{m_4cr}\approx-0{,}80,\qquad \sin\beta_4=\dfrac{F}{m_4cr}\approx-0{,}60\ \Rightarrow\ \beta_4\approx216^\circ\]
+        <p><strong>Masselotte 3</strong> (déduite de (7) et (8)) : \(m_3\cos\beta_3\,cr=E-m_2\rho c\) et \(m_3\sin\beta_3\,cr=-F\), soit :</p>
+        \[m_3=\dfrac{1}{cr}\sqrt{F^2+(E-m_2\rho c)^2}\approx36\ \text g\qquad \tan\beta_3=\dfrac{F}{m_2\rho c-E}\ \Rightarrow\ \beta_3\approx115^\circ\]
+        <p>Avec \(m_2\rho c=18\times0{,}62\times10^{-3}\times0{,}18\approx2{,}0\times10^{-3}\) kg·m², \(E-m_2\rho c\approx-0{,}5\times10^{-3}\) : \(\cos\beta_3<0\) et \(\sin\beta_3>0\), donc \(\beta_3\) est dans le 2ᵉ quadrant.</p>
+      </div>
+      <div class="res"><span class="lab">Réponse (corrigé officiel)</span>
+        \(m_3\approx36\) g à \(\beta_3\approx115^\circ\) ; \(m_4\approx54\) g à \(\beta_4\approx216^\circ\).
+        Les masselottes sont placées de part et d'autre de la jante (3 dans le plan \(B\), 4 déportée de \(c\)).
+      </div>
+    </div>
+    <aside class="aside apply">
+      <span class="lab">Appliquer</span>
+      <ul>
+        <li>Pour \(\beta\), toujours regarder les <strong>signes</strong> de \(\cos\beta\) et \(\sin\beta\) avant \(\arctan\) : sinon on rate le quadrant.</li>
+        <li>Vérifier les résultats : \(m_3\cos\beta_3\) et \(m_3\sin\beta_3\) doivent redonner (7) et (8).</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>5. À retenir</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Torseur dynamique</strong> : \(\vec R=m\vec\Gamma_G\), \(\vec\delta\) à calculer au point fixe, ici \(B\) puis \(O\) par transport.</li>
+      <li><strong>Mesures</strong> : \(Z_O(\theta)\) et \(Z_A(\theta)\) sont des sinusoïdes ; \(\theta=0\) et \(\pi/2\) suffisent.</li>
+      <li><strong>Balourd</strong> : \(\rho\) (défaut de position), \(E\) et \(F\) (défauts d'inertie). Ce sont eux que les masselottes annulent.</li>
+      <li><strong>Équilibrage</strong> : une masselotte pour la statique (force), une pour la dynamique (couple). Résultat : \(m_3\approx36\) g à \(115^\circ\), \(m_4\approx54\) g à \(216^\circ\).</li>
+    </ul>
+  </div>
+
+  </section>
+
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <div class="docs-group">
+      <h3>Cours et TD (Moodle)</h3>
+      <ul class="doc-list">
+      <li><a class="doc-item" href="../assets/pdf.html?f=../aem2-si/S2I_CM_C03_Dynamique_du_solide.pdf" target="_blank" rel="noopener"><span class="ic">📄</span><span class="nm">S2I_CM_C03_Dynamique_du_solide.pdf</span><span class="badge">Cours</span></a></li>
+      <li><a class="doc-item" href="../assets/pdf.html?f=../aem2-si/S2I_TD_C03_Dynamique_du_solide.pdf" target="_blank" rel="noopener"><span class="ic">📄</span><span class="nm">S2I_TD_C03_Dynamique_du_solide.pdf</span><span class="badge">TD</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+<footer>
+  Généré comme support de révision personnel · Contenu basé sur le CM de S2I (Sciences Industrielles de
+  l'Ingénieur) de l'ECAM — <a href="../assets/pdf.html?f=../aem2-si/S2I_CM_C03_Dynamique_du_solide.pdf" target="_blank" rel="noopener">PDF source</a>.
+</footer>
+<script src="../assets/gate.js"></script>
+</body>
+</html>
