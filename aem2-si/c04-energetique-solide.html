@@ -306,6 +306,23 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
     <li>Par le TEC, déterminer l'équation du mouvement du restituteur en fonction de \(C_m\), \(F_P\), \(F_T\), \(K_R\), \(\theta\).</li>
     <li>Exprimer le système des deux équations différentielles.</li></ol></div>
     <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q1</span>Couple du ressort en \(\theta=0\)</p>
+      <p>Étude statique, sans action du pied (\(F_P=0\)) ni du restituteur (\(F_T=0\)). Le couple du ressort compense le moment du poids. En notant \(\alpha_G\) l'angle de \(\overrightarrow{OG}\) avec la verticale à \(\theta=0\), le moment du poids vaut \(m_Pg\,r_G\sin\alpha_G\).</p>
+      <div class="res">\(C_{R_0}=m_P\,g\,r_G\sin\alpha_G\)</div>
+      <p class="note">Hypothèse de géométrie à vérifier sur la figure (angle \(\alpha_G\)).</p>
+    </div>
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q2</span>Équation de la pédale</p>
+      <p>TMD en \(O\) sur la pédale (rotation d'axe \(\vec z\), inertie \(J_P\)) : le pied a le bras de levier \(R_P\), la tige de poussée le bras \(r_T\), le ressort \(C_R=C_{R_0}-K_R\theta\), le poids \(-m_Pg\,r_G\sin(\alpha_G+\theta)\).</p>
+      <div class="res">\(J_P\ddot\theta=R_P\,F_P-r_T\,F_T+C_{R_0}-K_R\,\theta-m_P\,g\,r_G\sin(\alpha_G+\theta)\)</div>
+      <p class="note">Signes et bras de levier à confirmer avec la figure du TD (pied et tige alignés selon \(\vec u\), hypothèse de l'énoncé).</p>
+    </div>
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q3</span>Linéarisation autour de \(\theta=0\)</p>
+      <p>Avec \(C_{R_0}=m_Pgr_G\sin\alpha_G\) et \(\sin(\alpha_G+\theta)\approx\sin\alpha_G+\theta\cos\alpha_G\) :</p>
+      <div class="res">\(J_P\ddot\theta+K\,\theta=R_P\,F_P-r_T\,F_T\), avec \(K=K_R+m_Pgr_G\cos\alpha_G\)</div>
+    </div>
+    <div class="qblock">
       <p class="qtitle"><span class="qnum">Q4</span>TEC appliqué au restituteur</p>
       <p>Hypothèses : poulie 2 de diamètre double de la poulie 1, donc \(\omega_2=\omega_m/2\) (même vitesse de courroie) ; pas \(p_v\) par tour, donc \(V_p=\dfrac{p_v}{2\pi}\omega_2=\dfrac{p_v}{4\pi}\omega_m\). Frottements négligés.</p>
       <p>Énergie cinétique : \(E_c=\tfrac12 J_m\omega_m^2+\tfrac12 J_2\omega_2^2+\tfrac12 M_pV_p^2=\tfrac12 J_{eq}\,\omega_m^2\), avec \(J_{eq}=J_m+\dfrac{J_2}{4}+M_p\Big(\dfrac{p_v}{4\pi}\Big)^2\).</p>
@@ -313,7 +330,15 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
       <div class="res">\(J_{eq}\,\dot\omega_m=C_m-\dfrac{p_v}{4\pi}\,F_T\)</div>
       <p class="note">Signes à vérifier avec la figure du TD (sens de \(F_T\) et de \(V_p\)). \(F_P\) n'apparaît pas dans ce bilan : il entre par l'équation de la pédale (Q2 et Q5).</p>
     </div>
-    <div class="warnbox"><span class="lab">À rédiger</span> Q1 (couple du ressort en \(\theta=0\)), Q2 (équation de la pédale), Q3 (linéarisation) et Q5 (combinaison des deux équations et schéma-bloc) ne sont pas encore rédigées.</div>
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q5</span>Constantes \(\gamma\), \(\beta\), \(\lambda\) et schéma-bloc</p>
+      <p>Pédale sans inertie (\(J_P\) négligé, comme l'énoncé le demande) : \(F_T=\dfrac{R_P}{r_T}F_P-\dfrac{K}{r_T}\theta\), soit \(F_T=\gamma F_P+\beta\theta\).</p>
+      <p>Restituteur : \(J_{eq}\dot\omega_m=C_m-\lambda F_T\). La liaison pédale–écrou impose \(\theta=\alpha\,\theta_m\), avec \(\theta_m\) l'angle moteur ramené, et \(\alpha=\lambda/R_P\).</p>
+      <div class="res">\(\gamma=\dfrac{R_P}{r_T}\), \(\beta=-\dfrac{K}{r_T}\), \(\lambda=\dfrac{p_v}{4\pi}\), \(\alpha=\dfrac{\lambda}{R_P}\)</div>
+      <p>En Laplace (\(\Omega_m=p\,\Theta_m\)) : \(J_{eq}\,p\,\Omega_m=C_m-\lambda(\gamma F_P+\beta\Theta)\) et \(\Theta=\alpha\Theta_m\). Ce bilan correspond au schéma-bloc du TD (p. 36) : boucle électrique \(U\to\dfrac{1}{R+Lp}\to K_C\to C_m\) avec retour \(K_e\Omega_m\), puis \(\dfrac{1}{J_{eq}p}\), \(\dfrac{1}{p}\), \(\alpha\), et le retour \(\beta\Theta\) sur \(F_T\).</p>
+      <p>En éliminant \(\theta_m\) : \(\dfrac{J_{eq}R_P}{\lambda}\,\ddot\theta+\lambda\beta\,\theta=C_m-\lambda\gamma F_P\).</p>
+      <p class="note">Le signe de \(\beta\) dépend du sens choisi pour \(\theta\) : sur le schéma du TD, \(\beta\) est positif, ce qui revient à compter \(\theta\) dans l'autre sens. Les bras de levier \(r_T\) et \(R_P\) restent à confirmer sur la figure.</p>
+    </div>
   </section>
 
   <section class="block" id="docs">
