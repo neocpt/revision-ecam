@@ -229,13 +229,42 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
     </div>
 
     <h3>Exercice 4.2 — Pendule double</h3>
-    <div class="enonce">Un pendule double oscille dans le plan vertical. La tige 1 (longueur \(2a\), masse \(m\)) est en liaison pivot d'axe \((O,\vec z)\) avec le bâti ; la tige 2 (même longueur et masse) est en liaison pivot d'axe \((A,\vec z)\) avec la tige 1.
-    On note \(\alpha=(\vec x,\vec x_1)\) et \(\beta=(\vec x_1,\vec x_2)\). Les matrices d'inertie des tiges sont données en leur centre d'inertie.
-    <ol><li>Déterminer la puissance de chacune des actions mécaniques (de \(\mathbf 0\) sur \(\mathbf 1\), de \(\mathbf 1\) sur \(\mathbf 2\), de la pesanteur sur chaque tige) dans le mouvement considéré.</li>
-    <li>Parmi ces puissances, indiquer celles qui correspondent à des puissances d'action mécanique extérieure et celles qui correspondent à des inter-efforts.</li>
+    <div class="enonce">Pendule double dans le plan vertical \((\vec x,\vec y)\), \(\vec g=g\,\vec x\). Tige 1 : longueur \(2a\), masse \(m\), pivot parfait en \(O\) avec le bâti \(\mathbf 0\), \(\overrightarrow{OA}=2a\,\vec x_1\), \(\alpha=(\vec x,\vec x_1)\).
+    Tige 2 : mêmes longueur et masse, pivot parfait en \(A\), \(\overrightarrow{AB}=2a\,\vec x_2\), \(\beta=(\vec x,\vec x_2)\) (angle mesuré par rapport au bâti). \(G_1\) et \(G_2\) sont les milieux des tiges.
+    Résultats de l'énoncé : \(\vec V_{G_2/0}=a\dot\beta\,\vec y_2+2a\dot\alpha\,\vec y_1\) et \(\vec\sigma_{A\,2/0}=ma^2\big(\tfrac43\dot\beta+2\dot\alpha\cos(\beta-\alpha)\big)\vec z\).
+    <ol><li>Déterminer la puissance de chacune des actions suivantes : 0 sur 1 (mouvement 1/0) ; 1 sur 2 (mouvement 2/0) ; 1 sur 2 (mouvement 2/1) ; 1 sur 2 (mouvement 1/0) ; pesanteur sur 1 (1/0) ; pesanteur sur 2 (2/0).</li>
+    <li>Parmi ces puissances, lesquelles sont extérieures et lesquelles sont inter-efforts, en isolant 2 puis en isolant \(\{1+2\}\) (TEC dans le mouvement par rapport à 0) ?</li>
     <li>Calculer l'énergie cinétique de la tige 2 dans son mouvement par rapport à \(\mathbf 0\).</li>
-    <li>L'application du TEC à la tige 2 peut-elle permettre d'obtenir les deux équations différentielles du mouvement ? (Même question en isolant \(\{1+2\}\).)</li></ol></div>
-    <div class="warnbox"><span class="lab">À rédiger</span> Correction non encore rédigée (exercice à deux degrés de liberté, à reprendre dans une prochaine passe).</div>
+    <li>Le TEC appliqué à la tige 2 permet-il d'obtenir une des deux équations du mouvement ? Même question en isolant \(\{1+2\}\).</li></ol></div>
+
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q1</span>Puissances</p>
+      <ul>
+        <li>0 sur 1, mouvement 1/0 : \(P=0\) (pivot parfait en \(O\), \(\vec V_{O\in1/0}=\vec 0\) et \(N=0\)).</li>
+        <li>1 sur 2, mouvement 2/0 : \(P=\vec R_{1\to2}\cdot\vec V_{A\in2/0}=2a\dot\alpha\,\vec R_{1\to2}\cdot\vec y_1\). Non nul en général : c'est un inter-effort.</li>
+        <li>1 sur 2, mouvement 2/1 : \(P=0\), car \(\vec V_{A\in2/1}=\vec 0\) (pivot parfait).</li>
+        <li>1 sur 2, mouvement 1/0 : \(P=\vec R_{1\to2}\cdot\vec V_{A\in1/0}=2a\dot\alpha\,\vec R_{1\to2}\cdot\vec y_1\), même valeur que ci-dessus puisque \(\vec V_{A\in2/0}=\vec V_{A\in1/0}\).</li>
+        <li>Pesanteur sur 1 : \(P=m\vec g\cdot\vec V_{G_1\in1/0}=mg\,\vec x\cdot a\dot\alpha\,\vec y_1=-mga\dot\alpha\sin\alpha\).</li>
+        <li>Pesanteur sur 2 : \(P=m\vec g\cdot\vec V_{G_2\in2/0}=-mga\,(2\dot\alpha\sin\alpha+\dot\beta\sin\beta)\).</li>
+      </ul>
+    </div>
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q2</span>Extérieures ou inter-efforts</p>
+      <p><b>Isolement de 2</b> : l'action de 1 sur 2 et la pesanteur sur 2 sont extérieures à \(\{2\}\). Il n'y a pas d'inter-effort.</p>
+      <p><b>Isolement de \(\{1+2\}\)</b> : la liaison 0–1 et la pesanteur sur 1 et 2 sont extérieures. L'inter-effort est la somme des puissances 1 sur 2 et 2 sur 1 ; pour une liaison parfaite, elle est nulle.</p>
+    </div>
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q3</span>Énergie cinétique de la tige 2</p>
+      <p>Par le comoment en \(A\) : \(2E_{c(2/0)}=\vec V_{A\in2/0}\cdot m\vec V_{G_2\in2/0}+\vec\Omega_{2/0}\cdot\vec\sigma_{A\,2/0}\), avec \(\vec V_{A\in2/0}=2a\dot\alpha\,\vec y_1\) et \(\vec\Omega_{2/0}=\dot\beta\,\vec z\). Calcul :</p>
+      <div class="res">\(E_{c(2/0)}=ma^2\Big(2\dot\alpha^2+\tfrac23\dot\beta^2+2\dot\alpha\dot\beta\cos(\beta-\alpha)\Big)\)</div>
+    </div>
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q4</span>TEC sur 2 seule, puis sur \(\{1+2\}\)</p>
+      <p>Sur la tige 2 seule, le TEC fait intervenir la puissance de la liaison 1 sur 2 (mouvement 2/0), qui contient les réactions inconnues : il ne donne pas une équation du mouvement sans elles.</p>
+      <p>Sur \(\{1+2\}\), les inter-efforts se compensent (liaisons parfaites) et le TEC donne une équation. Avec \(E_{c(\Sigma)}=ma^2\big(\tfrac83\dot\alpha^2+\tfrac23\dot\beta^2+2\dot\alpha\dot\beta\cos(\beta-\alpha)\big)\) et \(P_{pes1}+P_{pes2}=-mga(3\dot\alpha\sin\alpha+\dot\beta\sin\beta)\) :</p>
+      <div class="res">\(\tfrac{16}{3}\dot\alpha\ddot\alpha+\tfrac43\dot\beta\ddot\beta+2(\ddot\alpha\dot\beta+\dot\alpha\ddot\beta)\cos(\beta-\alpha)-2\dot\alpha\dot\beta(\dot\beta-\dot\alpha)\sin(\beta-\alpha)=-\dfrac{g}{a}\big(3\dot\alpha\sin\alpha+\dot\beta\sin\beta\big)\)</div>
+      <p class="note">Une seule équation scalaire sort du TEC. La seconde équation du mouvement demande un PFD sur une des tiges (ou une autre méthode) : elle n'est pas traitée ici.</p>
+    </div>
   </section>
 
   <section class="block td-exo" id="td-ex5">
@@ -276,7 +305,15 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
     <li>La linéariser autour de \(\theta=0\).</li>
     <li>Par le TEC, déterminer l'équation du mouvement du restituteur en fonction de \(C_m\), \(F_P\), \(F_T\), \(K_R\), \(\theta\).</li>
     <li>Exprimer le système des deux équations différentielles.</li></ol></div>
-    <div class="warnbox"><span class="lab">À rédiger</span> Correction non encore rédigée. Le modèle est saisi, mais les équations (Q1 à Q5) restent à résoudre.</div>
+    <div class="qblock">
+      <p class="qtitle"><span class="qnum">Q4</span>TEC appliqué au restituteur</p>
+      <p>Hypothèses : poulie 2 de diamètre double de la poulie 1, donc \(\omega_2=\omega_m/2\) (même vitesse de courroie) ; pas \(p_v\) par tour, donc \(V_p=\dfrac{p_v}{2\pi}\omega_2=\dfrac{p_v}{4\pi}\omega_m\). Frottements négligés.</p>
+      <p>Énergie cinétique : \(E_c=\tfrac12 J_m\omega_m^2+\tfrac12 J_2\omega_2^2+\tfrac12 M_pV_p^2=\tfrac12 J_{eq}\,\omega_m^2\), avec \(J_{eq}=J_m+\dfrac{J_2}{4}+M_p\Big(\dfrac{p_v}{4\pi}\Big)^2\).</p>
+      <p>Puissances : moteur \(C_m\omega_m\) ; tige sur piston \(\{-F_T\vec y\}\) avec \(\vec V_{B\in\text{piston}/0}=V_p\vec y\), soit \(-F_TV_p\). Le TEC donne \(J_{eq}\,\omega_m\dot\omega_m=C_m\omega_m-F_T\dfrac{p_v}{4\pi}\omega_m\).</p>
+      <div class="res">\(J_{eq}\,\dot\omega_m=C_m-\dfrac{p_v}{4\pi}\,F_T\)</div>
+      <p class="note">Signes à vérifier avec la figure du TD (sens de \(F_T\) et de \(V_p\)). \(F_P\) n'apparaît pas dans ce bilan : il entre par l'équation de la pédale (Q2 et Q5).</p>
+    </div>
+    <div class="warnbox"><span class="lab">À rédiger</span> Q1 (couple du ressort en \(\theta=0\)), Q2 (équation de la pédale), Q3 (linéarisation) et Q5 (combinaison des deux équations et schéma-bloc) ne sont pas encore rédigées.</div>
   </section>
 
   <section class="block" id="docs">
