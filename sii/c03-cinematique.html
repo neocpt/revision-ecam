@@ -139,7 +139,6 @@ window.MathJax = {
     </div>
   </section>
 
-  <!-- ======================= EXOS CRÉÉS =============================== -->
   <section class="block" id="exos">
     <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
 
@@ -147,9 +146,21 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice A — Dérivée d'un vecteur unitaire (Bour)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Base \(B_1\) en rotation d'angle \(\theta(t)\) autour de \(\vec z_0\) par rapport à \(B_0\). Calculer \(\big[\tfrac{d\vec x_1}{dt}\big]_0\) et \(\big[\tfrac{d\vec y_1}{dt}\big]_0\).</div>
-        <p>\(\vec\Omega_{1/0}=\dot\theta\,\vec z_0\). Par Bour : \(\big[\tfrac{d\vec x_1}{dt}\big]_0=\vec\Omega_{1/0}\wedge\vec x_1=\dot\theta\,\vec z_0\wedge\vec x_1=\dot\theta\,\vec y_1\).</p>
-        <p>\(\big[\tfrac{d\vec y_1}{dt}\big]_0=\dot\theta\,\vec z_0\wedge\vec y_1=-\dot\theta\,\vec x_1\).</p>
-        <p class="res">\(\dfrac{d\vec x_1}{dt}\Big|_0=\dot\theta\,\vec y_1\), \(\dfrac{d\vec y_1}{dt}\Big|_0=-\dot\theta\,\vec x_1\)</p>
+
+        <p class="q">1) Dérivée de \(\vec x_1\) dans \(B_0\)</p>
+        <p class="etape">Étape 1 : vecteur rotation</p>
+        <p>\(B_1\) tourne d'un angle \(\theta\) autour de \(\vec z_0 = \vec z_1\) :</p>
+        \[ \vec\Omega_{1/0} = \dot\theta\,\vec z_0 \]
+        <p class="etape">Étape 2 : formule de Bour</p>
+        <div class="rappel"><span class="lab">Rappel · dérivée d'un vecteur unitaire de la base 1 dans la base 0</span>\[ \left[\frac{d\vec u}{dt}\right]_0 = \vec\Omega_{1/0}\wedge\vec u \qquad (\vec u \text{ fixe dans } B_1) \]</div>
+        \[ \left[\frac{d\vec x_1}{dt}\right]_0 = \dot\theta\,\vec z_0\wedge\vec x_1 = \dot\theta\,\vec y_1 \]
+        <p>En effet \((\vec x_1, \vec y_1, \vec z_1)\) est directe et \(\vec z_1 = \vec z_0\), donc \(\vec z_1\wedge\vec x_1 = \vec y_1\).</p>
+        <div class="res">\(\left[\dfrac{d\vec x_1}{dt}\right]_0 = \dot\theta\,\vec y_1\).</div>
+
+        <p class="q">2) Dérivée de \(\vec y_1\) dans \(B_0\)</p>
+        \[ \left[\frac{d\vec y_1}{dt}\right]_0 = \dot\theta\,\vec z_0\wedge\vec y_1 = -\dot\theta\,\vec x_1 \]
+        <div class="res">\(\left[\dfrac{d\vec y_1}{dt}\right]_0 = -\dot\theta\,\vec x_1\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> \(\vec z\wedge\vec y = -\vec x\) : le signe moins vient de l'ordre du produit vectoriel. Un dessin de la figure de changement de base permet de le vérifier : \(\vec y_1\) tourne vers \(-\vec x_1\).</div>
       </div>
     </div>
 
@@ -157,13 +168,30 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice B — Bras à 1 pivot + 1 glissière (vitesse & accélération)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">\(\vec{O_0B}=a\,\vec z_0+\lambda(t)\,\vec x_1\), (1) en rotation d'angle \(\theta\) autour de \(\vec z_0\). Déterminer \(\vec V_{B/0}\) et \(\vec\gamma_{B/0}\).</div>
-        <p class="q">Vitesse</p>
-        <p>\(\vec V_{B/0}=\dot\lambda\,\vec x_1+\lambda\,\big[\tfrac{d\vec x_1}{dt}\big]_0=\dot\lambda\,\vec x_1+\lambda\dot\theta\,\vec y_1\) (le terme \(a\vec z_0\) est constant).</p>
-        <p class="res">\(\vec V_{B/0}=\dot\lambda\,\vec x_1+\lambda\dot\theta\,\vec y_1\)</p>
-        <p class="q">Accélération</p>
-        <p>En dérivant (\(\tfrac{d\vec x_1}{dt}=\dot\theta\vec y_1\), \(\tfrac{d\vec y_1}{dt}=-\dot\theta\vec x_1\)) :</p>
-        <p class="res">\(\vec\gamma_{B/0}=(\ddot\lambda-\lambda\dot\theta^2)\,\vec x_1+(2\dot\lambda\dot\theta+\lambda\ddot\theta)\,\vec y_1\)</p>
-        <p>On reconnaît les termes centripète \(-\lambda\dot\theta^2\) et de Coriolis \(2\dot\lambda\dot\theta\).</p>
+
+        <p class="q">1) Vitesse</p>
+        <p class="etape">Étape 1 : la définition</p>
+        <div class="rappel"><span class="lab">Rappel · vitesse d'un point</span>\[ \vec V_{B/0} = \left[\frac{d\,\vec{O_0B}}{dt}\right]_0 \qquad (O_0 \text{ fixe dans } R_0) \]</div>
+        <p class="etape">Étape 2 : dériver terme à terme</p>
+        <ul>
+          <li>\(a\,\vec z_0\) est constant dans \(B_0\) : sa dérivée est nulle.</li>
+          <li>\(\lambda\,\vec x_1\) est un produit : \(\dot\lambda\,\vec x_1 + \lambda\left[\dfrac{d\vec x_1}{dt}\right]_0\).</li>
+        </ul>
+        <p>Avec l'exercice A, \(\left[\dfrac{d\vec x_1}{dt}\right]_0 = \dot\theta\,\vec y_1\) :</p>
+        \[ \vec V_{B/0} = \dot\lambda\,\vec x_1 + \lambda\dot\theta\,\vec y_1 \]
+        <div class="res">\(\vec V_{B/0} = \dot\lambda\,\vec x_1 + \lambda\dot\theta\,\vec y_1\).</div>
+
+        <p class="q">2) Accélération</p>
+        <div class="rappel"><span class="lab">Rappel · accélération d'un point</span>\[ \vec\gamma_{B/0} = \left[\frac{d\vec V_{B/0}}{dt}\right]_0 \qquad \left[\frac{d\vec x_1}{dt}\right]_0 = \dot\theta\,\vec y_1,\quad \left[\frac{d\vec y_1}{dt}\right]_0 = -\dot\theta\,\vec x_1 \]</div>
+        <p class="etape">Étape 1 : dériver \(\dot\lambda\,\vec x_1\)</p>
+        \[ \ddot\lambda\,\vec x_1 + \dot\lambda\dot\theta\,\vec y_1 \]
+        <p class="etape">Étape 2 : dériver \(\lambda\dot\theta\,\vec y_1\)</p>
+        \[ (\dot\lambda\dot\theta + \lambda\ddot\theta)\,\vec y_1 - \lambda\dot\theta^2\,\vec x_1 \]
+        <p class="etape">Étape 3 : regrouper</p>
+        \[ \vec\gamma_{B/0} = (\ddot\lambda - \lambda\dot\theta^2)\,\vec x_1 + (2\dot\lambda\dot\theta + \lambda\ddot\theta)\,\vec y_1 \]
+        <div class="res">\(\vec\gamma_{B/0} = (\ddot\lambda - \lambda\dot\theta^2)\,\vec x_1 + (2\dot\lambda\dot\theta + \lambda\ddot\theta)\,\vec y_1\).</div>
+        <p>On reconnaît le terme centripète \(-\lambda\dot\theta^2\) et le terme de Coriolis \(2\dot\lambda\dot\theta\).</p>
+        <div class="warnbox"><span class="lab">Piège</span> Le terme \(\dot\lambda\dot\theta\,\vec y_1\) apparaît deux fois (une fois dans chaque étape) : c'est l'origine du facteur 2 de Coriolis. L'oublier est l'erreur la plus fréquente.</div>
       </div>
     </div>
 
@@ -171,10 +199,24 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice C — Roulement sans glissement roue-sol</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Cadre (2) en translation \(V\vec x_0\) ; roue (1) de rayon \(R\), vitesse angulaire \(-\omega\vec z_0\) / cadre ; RSG au contact \(J\) avec le sol (0).</div>
-        <p>\(\vec\Omega_{1/0}=\vec\Omega_{1/2}+\vec\Omega_{2/0}=-\omega\vec z_0\). RSG : \(\vec V_{J\in1/0}=\vec0\).</p>
-        <p>Varignon en \(A\) (centre roue, \(\vec{AJ}=-R\vec y_0\)) : \(\vec V_{A\in1/0}=\vec V_{J\in1/0}+\vec{AJ}\wedge\vec\Omega_{1/0}=-R\vec y_0\wedge(-\omega\vec z_0)=R\omega\,\vec x_0\).</p>
-        <p>Or \(A\) est sur l'axe pivot (1)-(2) : \(\vec V_{A\in1/0}=\vec V_{A\in2/0}=V\vec x_0\).</p>
-        <p class="res">\(V=R\omega\)</p>
+
+        <p class="q">1) Relation entre \(V\) et \(\omega\)</p>
+        <p class="etape">Étape 1 : rotation de la roue par rapport au sol</p>
+        <div class="rappel"><span class="lab">Rappel · composition des vecteurs rotation</span>\[ \vec\Omega_{1/0} = \vec\Omega_{1/2} + \vec\Omega_{2/0} \]</div>
+        <p>Le cadre est en translation : \(\vec\Omega_{2/0} = \vec 0\).</p>
+        \[ \vec\Omega_{1/0} = -\omega\,\vec z_0 \]
+        <p class="etape">Étape 2 : condition de roulement sans glissement</p>
+        <div class="rappel"><span class="lab">Rappel · RSG au point de contact</span>\[ \vec V_{J\in 1/0} = \vec 0 \]</div>
+        <p class="etape">Étape 3 : transport de la vitesse en \(A\), centre de la roue</p>
+        <div class="rappel"><span class="lab">Rappel · relation de Varignon (champ des vitesses)</span>\[ \vec V_{A\in 1/0} = \vec V_{J\in 1/0} + \vec{AJ}\wedge\vec\Omega_{1/0} \]</div>
+        <p>Avec \(\vec{AJ} = -R\,\vec y_0\) :</p>
+        \[ \vec V_{A\in 1/0} = \vec 0 + (-R\,\vec y_0)\wedge(-\omega\,\vec z_0) = R\omega\,(\vec y_0\wedge\vec z_0) = R\omega\,\vec x_0 \]
+        <p class="etape">Étape 4 : le point \(A\) appartient aussi au cadre</p>
+        <p>\(A\) est sur l'axe de la pivot (1)-(2) :</p>
+        \[ \vec V_{A\in 1/0} = \vec V_{A\in 2/0} = V\,\vec x_0 \]
+        <p>On identifie les deux expressions :</p>
+        <div class="res">\(V = R\omega\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> Dans Varignon, l'ordre est \(\vec{AJ}\wedge\vec\Omega\) (ou \(\vec\Omega\wedge\vec{JA}\)). Inverser l'un des deux change le signe et donnerait \(V = -R\omega\).</div>
       </div>
     </div>
   </section>
@@ -191,11 +233,26 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 1.2 — Robot ERICC 3 (coordonnées opérationnelles)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Bras (1) pivot \(\alpha\) autour \(\vec z_0\), avant-bras (2) pivot \(\beta\) ; \(\vec{OA}=a\vec x_1\), \(\vec{AB}=b\vec x_2\), \(\vec z_0\) commun.</div>
-        <p class="q">Vecteur position et coordonnées de \(B\) dans \(R_0\)</p>
-        <p>\(\vec{OB}=a\vec x_1+b\vec x_2\), avec \(\vec x_1=\cos\alpha\,\vec x_0+\sin\alpha\,\vec y_0\) et \(\vec x_2=\cos(\alpha+\beta)\vec x_0+\sin(\alpha+\beta)\vec y_0\).</p>
-        <p class="res">\(X=a\cos\alpha+b\cos(\alpha+\beta)\), \(Y=a\sin\alpha+b\sin(\alpha+\beta)\), \(Z=0\) (homogène : des mètres)</p>
-        <p class="q">Contrainte de sécurité \(\|\vec{OB}\|\leqslant R\)</p>
-        <p>\(\|\vec{OB}\|=\sqrt{a^2+b^2+2ab\cos\beta}\leqslant R\) soit \(\cos\beta\leqslant\dfrac{R^2-a^2-b^2}{2ab}\).</p>
+
+        <p class="q">1) Vecteur position et coordonnées de \(B\) dans \(R_0\)</p>
+        <p class="etape">Étape 1 : chemin de \(O\) à \(B\)</p>
+        <div class="rappel"><span class="lab">Rappel · relation de Chasles</span>\[ \vec{OB} = \vec{OA} + \vec{AB} \]</div>
+        \[ \vec{OB} = a\,\vec x_1 + b\,\vec x_2 \]
+        <p class="etape">Étape 2 : projeter \(\vec x_1\) et \(\vec x_2\) dans \(B_0\)</p>
+        <p>\(\vec x_1\) fait l'angle \(\alpha\) avec \(\vec x_0\) ; \(\vec x_2\) fait l'angle \(\beta\) avec \(\vec x_1\), donc \(\alpha + \beta\) avec \(\vec x_0\) :</p>
+        \[ \vec x_1 = \cos\alpha\,\vec x_0 + \sin\alpha\,\vec y_0 \qquad \vec x_2 = \cos(\alpha+\beta)\,\vec x_0 + \sin(\alpha+\beta)\,\vec y_0 \]
+        <p class="etape">Étape 3 : regrouper par composante</p>
+        <div class="res">\(X = a\cos\alpha + b\cos(\alpha+\beta)\), \(Y = a\sin\alpha + b\sin(\alpha+\beta)\), \(Z = 0\) (homogène : des mètres).</div>
+
+        <p class="q">2) Contrainte de sécurité \(\|\vec{OB}\|\leqslant R\)</p>
+        <p class="etape">Étape 1 : norme de \(\vec{OB}\)</p>
+        <div class="rappel"><span class="lab">Rappel · norme d'une somme</span>\[ \|\vec u + \vec v\|^2 = \|\vec u\|^2 + \|\vec v\|^2 + 2\,\vec u\cdot\vec v \]</div>
+        <p>\(\vec x_1\cdot\vec x_2 = \cos\beta\), donc :</p>
+        \[ \|\vec{OB}\|^2 = a^2 + b^2 + 2ab\cos\beta \]
+        <p class="etape">Étape 2 : la condition</p>
+        \[ a^2 + b^2 + 2ab\cos\beta \leqslant R^2 \]
+        <div class="res">\(\|\vec{OB}\| = \sqrt{a^2 + b^2 + 2ab\cos\beta} \leqslant R\), soit \(\cos\beta \leqslant \dfrac{R^2 - a^2 - b^2}{2ab}\).</div>
+        <p>Remarque : la condition ne dépend que de \(\beta\). L'angle \(\alpha\) fait tourner tout le bras sans changer la distance \(OB\).</p>
       </div>
     </div>
 
@@ -203,15 +260,40 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 2.1 — Échelle EPAS (modèle direct & inverse)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">\(\vec{OD}=-R\vec x_1+b\vec y_0+x(t)\vec x_2\) ; \(\alpha=(\vec x_0,\vec x_1)\) (pivot \(\vec y_0\)), \(\theta=(\vec x_1,\vec x_2)\) (pivot \(\vec z_1\)), \(x(t)\) glissière.</div>
+
         <p class="q">Q1 — Coordonnées \(X,Y,Z\) de \(D\) dans \(R_0\) (par projection)</p>
-        <p>\(X=\vec{OD}\cdot\vec x_0\), etc. En passant \(\vec x_2=\cos\theta\,\vec x_1+\sin\theta\,\vec y_1\) puis \(\vec x_1\) dans \(B_0\) :</p>
-        <p class="res">\(X=(x\cos\theta-R)\cos\alpha\), \(\quad Y=b+x\sin\theta\), \(\quad Z=(R-x\cos\theta)\sin\alpha\)</p>
+        <p class="etape">Étape 1 : les deux figures de changement de base</p>
+        <ul>
+          <li>Rotation \(\alpha\) autour de \(\vec y_0\) : \(\vec x_1 = \cos\alpha\,\vec x_0 - \sin\alpha\,\vec z_0\).</li>
+          <li>Rotation \(\theta\) autour de \(\vec z_1\) : \(\vec x_2 = \cos\theta\,\vec x_1 + \sin\theta\,\vec y_1\), avec \(\vec y_1 = \vec y_0\).</li>
+        </ul>
+        <p class="etape">Étape 2 : tout écrire dans \(B_0\)</p>
+        \[ \vec{OD} = -R(\cos\alpha\,\vec x_0 - \sin\alpha\,\vec z_0) + b\,\vec y_0 + x\left[\cos\theta(\cos\alpha\,\vec x_0 - \sin\alpha\,\vec z_0) + \sin\theta\,\vec y_0\right] \]
+        <p class="etape">Étape 3 : lire chaque composante</p>
+        <div class="res">\(X = (x\cos\theta - R)\cos\alpha\), \(\quad Y = b + x\sin\theta\), \(\quad Z = (R - x\cos\theta)\sin\alpha\).</div>
+
         <p class="q">Q2–Q3 — Modèle inverse (retrouver \(\alpha,\theta,x\))</p>
-        <p>Rapport \(\dfrac ZX=-\tan\alpha\) ; puis \(\theta\) via \(Y\) et \(X\) :</p>
-        <p class="res">\(\alpha=-\arctan\dfrac ZX\), \(\quad\theta=\arctan\dfrac{Y-b}{\frac{X}{\cos\alpha}+R}\), \(\quad x(t)=\dfrac{Y-b}{\sin\theta}\)</p>
-        <p class="q">Q4 — Trajectoire rectiligne verticale (X, Y constants, Z variable)</p>
-        <p>Condition \(Z_0=(R-x\cos\theta)\sin\alpha=0\) : si \(\alpha=\alpha_0=0\), alors \(\theta=\pm\arccos\dfrac{L+R}{x(t)}\) (avec \(X_0=L\) constante).</p>
-        <p class="res">\(\alpha=0\) et \(\theta=\pm\arccos\dfrac{L+R}{x(t)}\) pilotent une montée verticale de la nacelle</p>
+        <p class="etape">Étape 1 : \(\alpha\) par le rapport \(Z/X\)</p>
+        <p>Le facteur \((x\cos\theta - R)\) se simplifie :</p>
+        \[ \frac{Z}{X} = \frac{-(x\cos\theta - R)\sin\alpha}{(x\cos\theta - R)\cos\alpha} = -\tan\alpha \]
+        <p class="etape">Étape 2 : \(\theta\) par \(Y\) et \(X\)</p>
+        <p>De \(X\) on tire \(x\cos\theta = \dfrac{X}{\cos\alpha} + R\) ; de \(Y\) on tire \(x\sin\theta = Y - b\). On divise :</p>
+        \[ \tan\theta = \frac{Y - b}{\dfrac{X}{\cos\alpha} + R} \]
+        <p class="etape">Étape 3 : \(x\) par \(Y\)</p>
+        \[ x = \frac{Y - b}{\sin\theta} \]
+        <div class="res">\(\alpha = -\arctan\dfrac ZX\), \(\quad\theta = \arctan\dfrac{Y-b}{\frac{X}{\cos\alpha}+R}\), \(\quad x(t) = \dfrac{Y-b}{\sin\theta}\).</div>
+
+        <p class="q">Q4 — Trajectoire rectiligne verticale de la nacelle</p>
+        <p class="etape">Étape 1 : traduire « verticale »</p>
+        <p>La verticale est \(\vec y_0\) (c'est l'axe de la pivot \(\alpha\) et la direction de \(b\,\vec y_0\)). On impose donc \(X = L\) constant, \(Z = 0\) constant, et \(Y\) libre.</p>
+        <p class="etape">Étape 2 : condition \(Z = 0\)</p>
+        \[ (R - x\cos\theta)\sin\alpha = 0 \]
+        <p>On choisit la solution \(\alpha = \alpha_0 = 0\) (l'échelle ne tourne pas autour de la verticale).</p>
+        <p class="etape">Étape 3 : condition \(X = L\)</p>
+        <p>Avec \(\cos\alpha = 1\) :</p>
+        \[ x\cos\theta - R = L \iff \cos\theta = \frac{L + R}{x(t)} \]
+        <div class="res">\(\alpha = 0\) et \(\theta = \pm\arccos\dfrac{L+R}{x(t)}\) : en pilotant \(\theta\) ainsi pendant que l'échelle se déploie, la nacelle monte verticalement.</div>
+        <div class="warnbox"><span class="lab">Coquille du corrigé officiel</span> Le corrigé écrit « on veut X et Y constants et Z variable », puis impose \(X = L\) et \(Z = 0\). Ce sont bien \(X\) et \(Z\) qui restent constants ; c'est \(Y\) (la hauteur) qui varie.</div>
       </div>
     </div>
 
@@ -219,13 +301,31 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 2.3 — Robot de manutention (translation circulaire, parallélogramme)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">Parallélogramme \(ABCE\) : \(\alpha=(\vec x_0,\vec x_1)\) (moteur \(M_1\)), \(\beta=(\vec x_0,\vec x_2)\) (moteur \(M_2\)) ; \(\vec{AB}=L\vec x_1\), \(\vec{BJ}=H\vec x_3\), avec \(\vec x_3=\vec x_2\).</div>
-        <p class="q">Bases & mouvement</p>
-        <p>Parallélogramme ⟹ \(\vec x_2=\vec x_3\) et \(\vec x_1=\vec x_4\) : seulement 3 bases \(B_0,B_1,B_2\). Repère lié à (3) : \(R_3(B,\vec x_2,\vec y_2,\vec z)\).</p>
-        <p class="q">\(M_1\) bloqué (\(\alpha\) constant), \(\beta\) varie</p><p class="res">(3)/(0) = <b>rotation</b> d'axe \((B,\vec z)\) ; \(T_{J/0}\), \(T_{C/0}\) cercles de centre \(B\).</p>
-        <p class="q">\(M_2\) bloqué (\(\beta\) constant), \(\alpha\) varie</p><p class="res">(3)/(0) = <b>translation à trajectoire circulaire</b> de rayon \(AB\) ; \(T_{C/0}\) cercle de centre \(E\).</p>
-        <p class="q">Trajectoire verticale de \(J\) à distance \(d\) de \(A\)</p>
-        <p>\(\vec{AJ}=L\vec x_1+H\vec x_2\), condition \(\vec{AJ}\cdot\vec x_0=d=\)cste :</p>
-        <p class="res">\(d=L\cos\alpha+H\cos\beta=\text{cste}\) (loi liant les deux moteurs)</p>
+
+        <p class="q">1) Bases &amp; mouvement</p>
+        <div class="rappel"><span class="lab">Rappel · parallélogramme déformable</span>Les côtés opposés restent parallèles : deux barres opposées ont toujours la même orientation.</div>
+        <ul>
+          <li>Barres opposées : \(\vec x_2 = \vec x_3\) et \(\vec x_1 = \vec x_4\).</li>
+          <li>Il suffit donc de 3 bases : \(B_0\), \(B_1\), \(B_2\).</li>
+        </ul>
+        <div class="res">3 bases \(B_0, B_1, B_2\) ; repère lié à (3) : \(R_3(B,\vec x_2,\vec y_2,\vec z)\).</div>
+
+        <p class="q">2) \(M_1\) bloqué (\(\alpha\) constant), \(\beta\) varie</p>
+        <p>Le point \(B\) reste fixe (\(\alpha\) constant) et la barre (3) change d'orientation avec \(\beta\).</p>
+        <div class="res">(3)/(0) = <b>rotation</b> d'axe \((B,\vec z)\) ; \(T_{J/0}\) et \(T_{C/0}\) sont des cercles de centre \(B\).</div>
+
+        <p class="q">3) \(M_2\) bloqué (\(\beta\) constant), \(\alpha\) varie</p>
+        <div class="rappel"><span class="lab">Rappel · translation circulaire</span>Le solide garde la même orientation (\(\vec\Omega = \vec 0\)), mais chacun de ses points décrit un cercle.</div>
+        <p>L'orientation \(\vec x_2\) de (3) ne change pas, mais \(B\) décrit un cercle de centre \(A\).</p>
+        <div class="res">(3)/(0) = <b>translation à trajectoire circulaire</b> de rayon \(AB\) ; \(T_{C/0}\) est un cercle de centre \(E\).</div>
+
+        <p class="q">4) Trajectoire verticale de \(J\) à distance \(d\) de \(A\)</p>
+        <p class="etape">Étape 1 : vecteur position</p>
+        \[ \vec{AJ} = L\,\vec x_1 + H\,\vec x_2 \]
+        <p class="etape">Étape 2 : la condition</p>
+        <p>Trajectoire verticale à la distance \(d\) : l'abscisse de \(J\) reste égale à \(d\).</p>
+        \[ \vec{AJ}\cdot\vec x_0 = d \]
+        <div class="res">\(d = L\cos\alpha + H\cos\beta = \text{cste}\) : c'est la loi qui lie les deux moteurs.</div>
       </div>
     </div>
 
@@ -235,15 +335,42 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 3.1 — Centrifugeuse (vitesse, accélération, tr/min pour 9 g)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">Bras (1) pivot \(\alpha\) autour \(\vec z_0\), cabine (2) pivot \(\beta\) autour \(\vec y_1\) ; \(\vec{OA}=a\vec x_1\) (\(a=3\) m), \(\vec{AG}=b\vec x_2\) (\(b=1\) m).</div>
+
         <p class="q">Q3 — Vitesse \(\vec V_{G\in2/0}\)</p>
-        <p>\(\vec{OG}=a\vec x_1+b\vec x_2\). \(\tfrac{d\vec x_1}{dt}|_0=\dot\alpha\vec y_1\) ; \(\vec\Omega_{2/0}=\dot\alpha\vec z_1+\dot\beta\vec y_2\), d'où \(\tfrac{d\vec x_2}{dt}|_0=\dot\alpha\cos\beta\,\vec y_1-\dot\beta\,\vec z_2\).</p>
-        <p class="res">\(\vec V_{G\in2/0}=\dot\alpha\,(a+b\cos\beta)\,\vec y_1-b\dot\beta\,\vec z_2\)</p>
+        <p class="etape">Étape 1 : vecteur position</p>
+        \[ \vec{OG} = a\,\vec x_1 + b\,\vec x_2 \]
+        <p class="etape">Étape 2 : dérivée de \(\vec x_1\)</p>
+        <div class="rappel"><span class="lab">Rappel · formule de Bour</span>\[ \left[\frac{d\vec u}{dt}\right]_0 = \vec\Omega_{k/0}\wedge\vec u \qquad (\vec u \text{ fixe dans le solide } k) \]</div>
+        \[ \left[\frac{d\vec x_1}{dt}\right]_0 = \dot\alpha\,\vec z_1\wedge\vec x_1 = \dot\alpha\,\vec y_1 \]
+        <p class="etape">Étape 3 : dérivée de \(\vec x_2\)</p>
+        \[ \vec\Omega_{2/0} = \vec\Omega_{2/1} + \vec\Omega_{1/0} = \dot\beta\,\vec y_1 + \dot\alpha\,\vec z_1 \]
+        <ul>
+          <li>\(\vec z_1\wedge\vec x_2 = \cos\beta\,\vec y_1\), car \(\vec x_2 = \cos\beta\,\vec x_1 - \sin\beta\,\vec z_1\).</li>
+          <li>\(\vec y_1\wedge\vec x_2 = \vec y_2\wedge\vec x_2 = -\vec z_2\).</li>
+        </ul>
+        \[ \left[\frac{d\vec x_2}{dt}\right]_0 = \dot\alpha\cos\beta\,\vec y_1 - \dot\beta\,\vec z_2 \]
+        <p class="etape">Étape 4 : assembler</p>
+        \[ \vec V_{G\in2/0} = a\dot\alpha\,\vec y_1 + b\left(\dot\alpha\cos\beta\,\vec y_1 - \dot\beta\,\vec z_2\right) \]
+        <div class="res">\(\vec V_{G\in2/0} = \dot\alpha\,(a + b\cos\beta)\,\vec y_1 - b\dot\beta\,\vec z_2\).</div>
+
         <p class="q">Q4 — Accélération (\(\beta\) constant, \(\dot\beta=0\))</p>
-        <p>\(\vec V_{G\in2/0}=\dot\alpha(a+b\cos\beta)\vec y_1\) ; par Bour :</p>
-        <p class="res">\(\vec\gamma_{G/0}=-\dot\alpha^2(a+b\cos\beta)\,\vec x_1+\ddot\alpha(a+b\cos\beta)\,\vec y_1\)</p>
+        <p class="etape">Étape 1 : la vitesse se simplifie</p>
+        \[ \vec V_{G\in2/0} = \dot\alpha\,(a + b\cos\beta)\,\vec y_1 \]
+        <p class="etape">Étape 2 : dériver (produit)</p>
+        <p>\((a + b\cos\beta)\) est constant ; \(\left[\dfrac{d\vec y_1}{dt}\right]_0 = -\dot\alpha\,\vec x_1\) :</p>
+        \[ \vec\gamma_{G/0} = \ddot\alpha\,(a + b\cos\beta)\,\vec y_1 + \dot\alpha\,(a + b\cos\beta)(-\dot\alpha\,\vec x_1) \]
+        <div class="res">\(\vec\gamma_{G/0} = -\dot\alpha^2(a + b\cos\beta)\,\vec x_1 + \ddot\alpha\,(a + b\cos\beta)\,\vec y_1\).</div>
+
         <p class="q">Q5 — \(\omega\) du bras pour 9 g (cabine verticale \(\beta=90^\circ\), \(\dot\alpha\) constant)</p>
-        <p>\(\cos90^\circ=0\), \(\ddot\alpha=0\) : \(\|\vec\gamma_G\|=a\dot\alpha^2=9g\), donc \(\dot\alpha=\sqrt{\dfrac{9g}{a}}=\sqrt{\dfrac{9\times9{,}81}{3}}\approx5{,}4\) rad·s⁻¹.</p>
-        <p class="res">\(\dot\alpha=\dfrac{5{,}4\times60}{2\pi}\approx51{,}8\) tr·min⁻¹</p>
+        <p class="etape">Étape 1 : simplifier l'accélération</p>
+        <p>\(\cos 90^\circ = 0\) et \(\ddot\alpha = 0\) : il ne reste que le terme centripète.</p>
+        \[ \|\vec\gamma_{G/0}\| = a\,\dot\alpha^2 \]
+        <p class="etape">Étape 2 : imposer 9 g</p>
+        \[ a\,\dot\alpha^2 = 9g \iff \dot\alpha = \sqrt{\frac{9g}{a}} = \sqrt{\frac{9 \times 9{,}81}{3}} \approx 5{,}42\ \text{rad·s}^{-1} \]
+        <p class="etape">Étape 3 : conversion en tr/min</p>
+        <div class="rappel"><span class="lab">Rappel · conversion</span>\[ N\ (\text{tr/min}) = \frac{60}{2\pi}\,\omega\ (\text{rad/s}) \]</div>
+        \[ N = \frac{60 \times 5{,}42}{2\pi} \approx 51{,}8\ \text{tr·min}^{-1} \]
+        <div class="res">\(\dot\alpha \approx 5{,}4\) rad·s⁻¹, soit environ \(51{,}8\) tr·min⁻¹.</div>
       </div>
     </div>
 
@@ -251,17 +378,38 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 3.2 — Unité de découpe de savons (coupe droite)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">Parallélogramme \(ABCD\), \(\vec{AB}=L\vec y_1\), \(\vec{BM}=b\vec y_0\), \(\vec{MP}=\mu(t)\vec z_0\), \(\alpha=(\vec y_0,\vec y_1)\), \(\vec x_0\) commun. (4)/(3) translation \(\mu(t)\).</div>
-        <p class="q">Q1 — Mouvement de (3)/(0)</p><p class="res">Translation à trajectoire circulaire de rayon \(AB\), paramétrée par \(\alpha(t)\).</p>
+
+        <p class="q">Q1 — Mouvement de (3)/(0)</p>
+        <p>Grâce au parallélogramme, (3) garde l'orientation \(B_0\) ; son point \(B\) décrit un cercle de centre \(A\).</p>
+        <div class="res">Translation à trajectoire circulaire de rayon \(AB\), paramétrée par \(\alpha(t)\).</div>
+
         <p class="q">Q3 — Vitesse \(\vec V_{P\in4/0}\)</p>
-        <p>\(\vec{AP}=L\vec y_1+b\vec y_0+\mu\vec z_0\). Dérivation (\(\tfrac{d\vec y_1}{dt}|_0=\dot\alpha\vec z_1\... \), via \(\vec\Omega_{1/0}=\dot\alpha\vec x_0\)) :</p>
-        <p>\(\vec V_{P\in4/0}=\dot\alpha L\,\vec z_1+\dot\mu\,\vec z_0\), soit avec \(\vec z_1=\cos\alpha\,\vec z_0-\sin\alpha\,\vec y_0\) :</p>
-        <p class="res">\(\vec V_{P\in4/0}=-\dot\alpha L\sin\alpha\,\vec y_0+(\dot\alpha L\cos\alpha+\dot\mu)\,\vec z_0\)</p>
+        <p class="etape">Étape 1 : vecteur position</p>
+        \[ \vec{AP} = L\,\vec y_1 + b\,\vec y_0 + \mu\,\vec z_0 \]
+        <p class="etape">Étape 2 : dérivée de chaque terme</p>
+        <div class="rappel"><span class="lab">Rappel · formule de Bour</span>\[ \left[\frac{d\vec y_1}{dt}\right]_0 = \vec\Omega_{1/0}\wedge\vec y_1, \qquad \vec\Omega_{1/0} = \dot\alpha\,\vec x_0 \]</div>
+        <ul>
+          <li>\(L\,\vec y_1\) : \(L\dot\alpha\,\vec x_0\wedge\vec y_1 = L\dot\alpha\,\vec z_1\).</li>
+          <li>\(b\,\vec y_0\) : constant, dérivée nulle.</li>
+          <li>\(\mu\,\vec z_0\) : \(\dot\mu\,\vec z_0\).</li>
+        </ul>
+        \[ \vec V_{P\in4/0} = \dot\alpha L\,\vec z_1 + \dot\mu\,\vec z_0 \]
+        <p class="etape">Étape 3 : projeter dans \(B_0\)</p>
+        <p>Rotation \(\alpha\) autour de \(\vec x_0\) : \(\vec z_1 = \cos\alpha\,\vec z_0 - \sin\alpha\,\vec y_0\).</p>
+        <div class="res">\(\vec V_{P\in4/0} = -\dot\alpha L\sin\alpha\,\vec y_0 + (\dot\alpha L\cos\alpha + \dot\mu)\,\vec z_0\).</div>
+
         <p class="q">Q4 — Condition de coupe droite</p>
-        <p>La lame doit avancer selon \(\vec y_0\) à la vitesse \(V_s\) du savon : \(\vec V_{P\in4/0}\cdot\vec y_0=V_s\).</p>
-        <p class="res">\(V_s=-\dot\alpha L\sin\alpha\)</p>
+        <p>Pour couper droit, la lame doit suivre le savon qui avance selon \(\vec y_0\) à la vitesse \(V_s\) :</p>
+        \[ \vec V_{P\in4/0}\cdot\vec y_0 = V_s \]
+        <div class="res">\(V_s = -\dot\alpha L\sin\alpha\).</div>
+
         <p class="q">Q5 — \(\alpha(t)\) avec \(\alpha(0)=90^\circ\)</p>
-        <p>En intégrant \(V_s=-\dot\alpha L\sin\alpha=\dfrac{d}{dt}(L\cos\alpha)\) : \(V_s\,t=L\cos\alpha(t)\) (cste \(=0\)).</p>
-        <p class="res">\(\alpha(t)=\arccos\dfrac{V_s\,t}{L}\) (pour \(\alpha\in[0,\tfrac\pi2]\))</p>
+        <p class="etape">Étape 1 : reconnaître une dérivée</p>
+        <div class="rappel"><span class="lab">Rappel · dérivée d'une fonction composée</span>\[ \frac{d}{dt}\cos\alpha(t) = -\dot\alpha\sin\alpha \]</div>
+        \[ V_s = -\dot\alpha L\sin\alpha = \frac{d}{dt}\big(L\cos\alpha\big) \]
+        <p class="etape">Étape 2 : intégrer de 0 à \(t\)</p>
+        \[ V_s\,t = L\cos\alpha(t) - L\cos\alpha(0) = L\cos\alpha(t) \qquad (\cos 90^\circ = 0) \]
+        <div class="res">\(\alpha(t) = \arccos\dfrac{V_s\,t}{L}\) (pour \(\alpha\in[0,\tfrac\pi2]\)).</div>
       </div>
     </div>
 
@@ -269,11 +417,21 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 3.3 — Robot de peinture (loi de pilotage)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">Pistolet en \(P\). On impose que \(P\) balaie horizontalement à vitesse \(V\) suivant \(\vec x_0\) : \(\vec V_{P/0}=V\vec x_0\).</div>
-        <p class="q">Démarche</p>
-        <p>On exprime \(\vec V_{P/0}\) en fonction de \(\dot\lambda,\dot\alpha,\dot\beta\) puis on projette la contrainte \(\vec V_{P/0}=V\vec x_0\) sur \(\vec x_0,\vec y_0,\vec z_0\).
-        La projection sur \(\vec z_0\) donne \(\beta\) ; les deux autres donnent \(\dot\lambda\) et \(\dot\alpha\).</p>
-        <p class="res">\(\dot\lambda=\dfrac{V}{\tan\alpha}\), \(\qquad\dot\alpha=-\dfrac{V}{b\sin\alpha}\)</p>
-        <p>Ces deux EDO s'intègrent numériquement pour fournir les lois de pilotage \(\lambda(t)\) et \(\alpha(t)\) des axes.</p>
+
+        <p class="q">1) Démarche et lois de pilotage</p>
+        <p class="etape">Étape 1 : exprimer la vitesse du pistolet</p>
+        <p>On écrit \(\vec V_{P/0}\) en fonction des paramètres articulaires \(\dot\lambda\), \(\dot\alpha\), \(\dot\beta\), par dérivation du vecteur position (Bour).</p>
+        <p class="etape">Étape 2 : écrire la contrainte</p>
+        \[ \vec V_{P/0} = V\,\vec x_0 \]
+        <p class="etape">Étape 3 : projeter sur les trois axes</p>
+        <ul>
+          <li>Sur \(\vec z_0\) : la composante doit être nulle, ce qui fixe \(\beta = \beta_0\).</li>
+          <li>Sur \(\vec x_0\) et \(\vec y_0\) : deux équations qui donnent \(\dot\lambda\) et \(\dot\alpha\).</li>
+        </ul>
+        <p class="etape">Étape 4 : simplifier avec la géométrie</p>
+        <p>L'énoncé donne \(\sin(\pi - \beta_0) = \sin\beta_0 = \dfrac{b}{L}\), ce qui conduit à :</p>
+        <div class="res">\(\dot\lambda = \dfrac{V}{\tan\alpha}\), \(\qquad\dot\alpha = -\dfrac{V}{b\sin\alpha}\).</div>
+        <p>Ces deux équations différentielles s'intègrent numériquement pour fournir les lois de pilotage \(\lambda(t)\) et \(\alpha(t)\) des axes.</p>
       </div>
     </div>
 
@@ -286,6 +444,7 @@ window.MathJax = {
       Non détaillés ici mais de même méthode : TD4 (torseurs — maquette soufflerie, robot soudeur 4 axes), TD5 (contact ponctuel — came/poussoir, banc pneus), TD6 (centre d'usinage 5 axes).
     </div>
   </section>
+
   <section class="block" id="docs">
     <h2>📂 Documents donnés</h2>
     <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>

@@ -16,7 +16,7 @@ Conventions retenues :
 |---|---|---|
 | c01-sysml | fait | Chapitre sans calcul. Q du TD ajoutées en `.q` en tête de carte ; flexibilités recalculées (+20 %, +50 %) : justes. |
 | c02-systeme-asservi | fait | 6 exercices du TD + 2 créés ; tous les résultats revérifiés, justes. |
-| c03-cinematique | à faire | |
+| c03-cinematique | fait | 3 créés + 6 ex. du TD. Coquille du corrigé officiel (EPAS Q4) signalée. Aucun corrigé Bigeard applicable. |
 | c04-transmetteurs | à faire | |
 | c05-dessin-technique | à faire | |
 | c06-slci | à faire | |
@@ -44,6 +44,10 @@ Conventions retenues :
 | c02 | Ex A, Ex B (créés) | aucun | correction actuelle |
 | c02 | Ex 1.1 Prothèse transtibiale, 1.3 Clipflow, 2.1 Axe de machine-outil, 2.2 Ramses, 2.3 Four | aucun dossier correspondant | correction actuelle, revérifiée |
 | c02 | Ex 1.2 Sécateur Pellenc (chaînes fonctionnelles) | `transmission-de-puissance_secateur-pellenc/TDP-MPSI-TD-secateur_pellenc-prof.pdf` | non utilisé : sujet différent (dimensionnement du train épicycloïdal) |
+| c03 | Ex A, B, C (créés) | aucun | correction actuelle |
+| c03 | Ex 1.2 ERICC 3, 2.1 EPAS, 2.3 Robot de manutention, 3.2 Savons, 3.3 Peinture | aucun dossier correspondant | correction actuelle, revérifiée avec le corrigé LECONTE |
+| c03 | Ex 3.1 Centrifugeuse (a = 3 m, b = 1 m, 9 g) | `cinematique-du-solide_acceleration-dans-une-centrifugeuse-humaine/…-prof.pdf` | non utilisé : autre sujet (3 rotations lacet/roulis/tangage, R = 7,62 m, condition de colinéarité) |
 
 - **c01 revu avec la règle Bigeard** : aucun corrigé Bigeard ne traite ces questions (voir tableau) ; page inchangée.
 - **c02** : TD 1 (3 ex.) + TD 2 (3 ex.) + 2 créés. Recalculs : \(D_1\%=3/19=15{,}8\%\), \(e_r\%=10/40=25\%\), \(D_1\%=9/50=18\%\), \(\eta=0{,}83\) : justes. Ajout de pièges (division par \(\Delta s\) et non par \(s(\infty)\), unités incompatibles du four). Aucun corrigé Bigeard applicable.
+- **c03** : vitesses/accélérations rederivées à la main (Bour, Varignon, composition) ; \(\dot\alpha=\sqrt{9g/a}=5{,}42\) rad/s = 51,8 tr/min (Python) : juste. EPAS Q4 : le corrigé officiel écrit « X et Y constants, Z variable » alors qu'il impose X = L et Z = 0 → `.warnbox` « Coquille du corrigé officiel » (Y vertical est la grandeur variable). Expression tronquée « dy1/dt = α̇ z1… » de l'ancienne version (savons) réécrite proprement.
