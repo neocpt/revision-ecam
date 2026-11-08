@@ -11,7 +11,7 @@ Chaque exercice : `.exo-card#id` > `.exo-head` + `.exo-body` (énoncé en tête,
 | `aem2-si/c02-theorie-mecanismes.html` | fait | Bigeard : `theorie-des-mecanismes_association-de-liaisons/TDM-PT-TD-association_de_liaisons-prof.pdf`, `theorie-des-mecanismes_pompe-a-piston-radial/TDM-PT-TD-pompe_a_piston_radial-prof.pdf` |
 | `aem2-si/c03-dynamique-solide.html` | fait | Bigeard (5 PDF `principe-fondamental-de-la-dynamique_*`), éolienne rédigée par nous |
 | `aem2-si/c04-energetique-solide.html` | fait | Bigeard (4 PDF `energetique_*`) pour 1.1 à 4.1 ; 4.2, 5.1, 5.2 rédigés par nous |
-| `aem2-si/c05-capteurs.html` | à faire | |
+| `aem2-si/c05-capteurs.html` | rien à réécrire | pas de TD, pas d'application corrigée ; Bigeard : `divers_les-capteurs` = cours seul, sans -prof |
 
 ## Journal
 
@@ -67,3 +67,32 @@ Chaque exercice : `.exo-card#id` > `.exo-head` + `.exo-body` (énoncé en tête,
 - **Erreur de l'ancienne page corrigée** (5.1 Duo) : la puissance moteur vaut C·ω_m = 2C·ω10 ; ω̇10 = 2C/I_eq ≈ 0,296 rad/s² (et non 0,148) ; durée d'accélération ≈ 1,06 s (et non 2,1 s), critère > 1 s respecté de justesse. Expression de I_eq ajoutée.
 - 4.2 : ancienne réponse « 1 sur 2 dans le mouvement 1/0 » supprimée (non demandée) ; Q4 répond d'abord à la question posée (non, inconnue de liaison), le TEC sur {1+2} reste en complément.
 - 5.2 : conventions d'angle lues sur la figure et explicitées ; le schéma-bloc de la p. 36 du TD (absent des énoncés) a été ajouté en image `img/c04-ex5-2-embrayage-d.png` ; β = (K_R − m_P g r_G cos(θ0 − α_G))/r_T, signes cohérents avec les « + » du schéma-bloc (l'ancienne page avait K_R + … cos α_G).
+
+### c05-capteurs
+- La page ne contient que le cours (sections intro → mesure) et la fiche mémo : aucun exercice, aucune application corrigée.
+- Vérifié sur le PDF du cours (21 p., scan) : pas d'exercice ni de question d'application. Bigeard : `divers_les-capteurs/DIV-PT-CO-les_capteurs.pdf` est un cours, sans corrigé.
+- Page non modifiée.
+
+## Résumé final
+
+| Page | Exercices réécrits | Corrigés Bigeard utilisés | Rédigés par nous |
+|---|---|---|---|
+| ch4-cotations-gps | 3 (A, B, C) | 0 | 3 |
+| c02-theorie-mecanismes | 13 cartes (Ex 1.1 à 1.4, pompe Q1–Q11) | 2 PDF | compléments Q2, Q26, Q10 |
+| c03-dynamique-solide | 10 cartes (Ex 1.1 à 1.5, 2, 3, 4, 5, 6) | 5 PDF | Ex 4 éolienne |
+| c04-energetique-solide | 10 cartes (Ex 1.1 à 5.2) | 4 PDF | Ex 4.2, 5.1, 5.2 |
+| c05-capteurs | 0 (pas de TD) | — | — |
+
+Erreurs de **résultat** trouvées :
+1. C03 arbre de navire (Bigeard) : A = ma²/2 au lieu de ma² (rayon de giration) → Z_A ≈ 14 337 N, Z_B ≈ 5 283 N.
+2. C03 équilibreuse (Bigeard) : équation (10) F + m4 cr cos β4 → F − m4 cr sin β4 = 0 (ses valeurs numériques sont cohérentes avec la forme corrigée).
+3. C02 manchon réalisation 2 (Bigeard) : I_c = 4 écrit au lieu de 6 (résultat h = 1 juste).
+4. C03 cylindre percé cas 2 (Bigeard) : B, C arrondis faux (302,6 / 386,58 → 302,9 / 386,9).
+5. C04 Duo Voyageur (ancienne page, pas Bigeard) : ω̇10 = 2C/I_eq ≈ 0,296 rad/s², t ≈ 1,06 s.
+Plus de nombreuses coquilles de notation (signalées dans des `.warnbox`).
+
+Contrôles faits sur chaque page : div et section équilibrées, aucun `<` brut suivi d'une lettre dans les formules, énoncé en tête de chaque `.exo-body`, liens relatifs existants, `../assets/lecture.js` chargé, toutes les formules compilées sans erreur par MathJax 3 (mathjax-full en local).
+
+Remarques hors périmètre (non touchées, dans le cours) :
+- c02 : `id="cours"` en double (h2 de partie et section « Résumé de cours annoté ») ; un `</section>` isolé juste après le `<h1>`.
+- c03 : les deux cartes « cas particuliers » du cours sont des `.exo-card` sans id ni question.
