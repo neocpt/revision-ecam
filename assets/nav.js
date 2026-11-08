@@ -111,11 +111,19 @@
     lienAnn.hidden = false;
   }
 
-  selM.addEventListener("change", function () { choisirMatiere(selM.value); });
+  // Chaque choix affiche tout de suite : matière seule = toute la matière, année = cette année,
+  // aucun choix = tout le site. Le chapitre, lui, ouvre directement la page.
+  var surAnnales = !!document.getElementById("page-annales");
+  function aller(params) {
+    var page = surAnnales ? "annales.html" : "matiere.html";
+    location.href = url(page + (params ? "?" + params : ""));
+  }
+  selM.addEventListener("change", function () {
+    aller(selM.value ? "m=" + selM.value : "");
+  });
   selA.addEventListener("change", function () {
-    var m = matiere(selM.value), a = m && annee(m, selA.value);
-    if (!a) { selC.disabled = true; return; }
-    remplirChapitres(m, a);
+    if (!selM.value) return;
+    aller("m=" + selM.value + (!surAnnales && selA.value ? "&a=" + selA.value : ""));
   });
   selC.addEventListener("change", function () {
     var m = matiere(selM.value), a = m && annee(m, selA.value);
@@ -179,26 +187,31 @@
   var pageAn = document.getElementById("page-annales");
   var p0 = new URLSearchParams(location.search);
 
+  function rendreMatiere(m, anneeId) {
+    return m.annees.filter(function (a) { return !anneeId || a.id === anneeId; }).map(function (a) {
+      return '<section class="cat-annee"><h2>' + esc(a.label) + '</h2><ol class="cat-liste">' +
+        a.chapitres.map(function (ch) {
+          return '<li><a href="' + url(ch.url) + '"><span class="num">' + esc(ch.n) + '</span> ' + esc(ch.titre) + '</a></li>';
+        }).join('') + '</ol></section>';
+    }).join('');
+  }
   if (page) {
     var mm = matiere(p0.get("m"));
-    var html = "";
+    var html;
     if (!mm) {
-      html = '<p class="lead">Choisis une matière :</p><div class="cat-grid">' + C.matieres.map(function (m) {
-        return '<a class="cat-card" href="matiere.html?m=' + m.id + '"><b>' + esc(m.nom) + "</b><span>" +
-          m.annees.map(function (a) { return esc(a.label); }).join(" · ") + "</span></a>";
-      }).join("") + "</div>";
-      document.title = "Matières — Révision ECAM";
+      // rien de choisi : tout voir
+      document.title = "Toutes les matières — Révision ECAM";
+      document.getElementById("titre-page").textContent = "Toutes les matières";
+      html = C.matieres.map(function (m) {
+        return '<h2 class="cat-matiere">' + esc(m.nom) + '</h2>' + rendreMatiere(m, null) +
+          '<p><a class="nav-btn" href="' + url("annales.html?m=" + m.id) + '">📂 Annales de ' + esc(m.nom) + '</a></p>';
+      }).join('');
     } else {
+      var aid = p0.get("a") && annee(mm, p0.get("a")) ? p0.get("a") : null;
       document.title = mm.nom + " — Révision ECAM";
-      document.getElementById("titre-page").textContent = mm.nom;
-      var anns = mm.annees.filter(function (a) { return !p0.get("a") || a.id === p0.get("a"); });
-      html = anns.map(function (a) {
-        return '<section class="cat-annee"><h2>' + esc(a.label) + "</h2><ol class=\"cat-liste\">" +
-          a.chapitres.map(function (ch) {
-            return '<li><a href="' + url(ch.url) + '"><span class="num">' + esc(ch.n) + "</span> " + esc(ch.titre) + "</a></li>";
-          }).join("") + "</ol></section>";
-      }).join("");
-      html += '<p><a class="nav-btn" href="annales.html?m=' + mm.id + '">📂 Annales de ' + esc(mm.nom) + "</a></p>";
+      document.getElementById("titre-page").textContent = mm.nom + (aid ? " · " + annee(mm, aid).label : "");
+      html = rendreMatiere(mm, aid) +
+        '<p><a class="nav-btn" href="' + url("annales.html?m=" + mm.id) + '">📂 Annales de ' + esc(mm.nom) + '</a></p>';
     }
     page.innerHTML = html;
   }
