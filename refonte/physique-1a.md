@@ -9,8 +9,8 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 |---|---|---|
 | cinematique.html | 39 | fait |
 | dynamique.html | 46 | fait |
-| electro-stationnaire.html | 35 | en cours |
-| electro-transitoire.html | 18 | à faire |
+| electro-stationnaire.html | 35 | fait |
+| electro-transitoire.html | 18 | en cours |
 | electro-2nd-ordre.html | 19 | à faire |
 | filtrage.html | 38 | à faire |
 | rsf-resonance-filtrage.html | 11 | à faire |
@@ -35,3 +35,10 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 - Erreur corrigée : EC 4, pour m3 = 40 kg, sin α1 = 1475/800 ≈ 1,84 (et non 2,2) → warnbox ; conclusion inchangée.
 - Ajouts : EC 15, valeur numérique L_eq = 1,1 m ; EC 23, Q ≈ 8,86 (au lieu de 8,88, arrondi).
 - Cartes sans questions numérotées (EC 13, EC 16, Ex 12 à 16, Ex 18) : questions numérotées ajoutées après l'énoncé.
+
+### electro-stationnaire.html — fait
+- 35 cartes réécrites (3 créées + 32 TD, numérotation du fichier TD_Elec_regime_stationnaire.pdf).
+- 24 cartes n'avaient pas d'énoncé : énoncé reconstitué à partir du TD (en précisant « schéma du TD » quand le circuit n'est qu'en figure).
+- Erreur corrigée : Ex 12, R = 1,5 V / 0,1 A = 15 Ω (et non 150 Ω) → warnbox.
+- Ex 7 : signalé que les données de l'énoncé (e = 9 V, I3 = 200 mA) sont incohérentes avec la maille de gauche (11 V) ; on garde les valeurs demandées.
+- Ex 10 Q5 : puissance réécrite P = e²/R_eq. Ex 21 : I4 ≈ 19 mA (au lieu de 20) pour x = 0.

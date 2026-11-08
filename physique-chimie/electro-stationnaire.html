@@ -141,46 +141,64 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
     <p class="lead">Trois exercices originaux : associations, pont diviseur, Thévenin.</p>
 
     <div class="exo-card">
-      <div class="exo-head">✏️ Exercice A — Résistance équivalente <span class="diff">♦◊◊</span></div>
+      <div class="exo-head">Exercice A — Résistance équivalente <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">\(R_1=10\ \Omega\) en série avec le parallèle de \(R_2=30\ \Omega\) et \(R_3=60\ \Omega\).
         Trouver \(R_{eq}\), puis le courant total débité par un générateur \(E=12\)&nbsp;V (idéal).</p>
-        <p class="q">Parallèle \(R_2\|R_3\)</p>
-        \[R_{23}=\frac{R_2 R_3}{R_2+R_3}=\frac{30\times60}{90}=20\ \Omega\]
-        <p class="q">Série avec \(R_1\)</p>
-        <p>\(R_{eq}=R_1+R_{23}=10+20=30\ \Omega\).</p>
-        <p class="q">Courant total</p>
-        <p>\(I=\dfrac{E}{R_{eq}}=\dfrac{12}{30}=0{,}40\)&nbsp;A.</p>
-        <div class="res">\(R_{eq}=30\ \Omega\), \(I=0{,}40\)&nbsp;A.</div>
+
+        <p class="q">1) Résistance équivalente</p>
+        <p class="etape">Étape 1 : le parallèle \(R_2 \parallel R_3\)</p>
+        <div class="rappel"><span class="lab">Rappel · deux résistances en parallèle</span>\[ R_{//} = \frac{R_a\,R_b}{R_a + R_b} \]</div>
+        \[ R_{23} = \frac{30 \times 60}{30 + 60} = 20\ \Omega \]
+        <p class="etape">Étape 2 : en série avec \(R_1\)</p>
+        <div class="rappel"><span class="lab">Rappel · résistances en série</span>\[ R_{série} = R_a + R_b \]</div>
+        \[ R_{eq} = R_1 + R_{23} = 10 + 20 = 30\ \Omega \]
+        <div class="res">\(R_{eq} = 30\ \Omega\).</div>
+
+        <p class="q">2) Courant débité par le générateur</p>
+        <div class="rappel"><span class="lab">Rappel · loi d'Ohm</span>\[ U = R\,I \]</div>
+        \[ I = \frac{E}{R_{eq}} = \frac{12}{30} = 0{,}40\ \text{A} \]
+        <div class="res">\(I = 0{,}40\) A.</div>
       </div>
     </div>
 
     <div class="exo-card">
-      <div class="exo-head">✏️ Exercice B — Pont diviseur de tension <span class="diff">♦◊◊</span></div>
+      <div class="exo-head">Exercice B — Pont diviseur de tension <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">\(E=15\)&nbsp;V alimente \(R_1=2{,}0\ \text{k}\Omega\) et \(R_2=1{,}0\ \text{k}\Omega\) en
         série. Tension \(U_2\) aux bornes de \(R_2\) ? Courant ?</p>
-        <p class="q">Diviseur de tension</p>
-        \[U_2=\frac{R_2}{R_1+R_2}E=\frac{1{,}0}{3{,}0}\times15=5{,}0\ \text{V}\]
-        <p class="q">Courant (série)</p>
-        <p>\(I=\dfrac{E}{R_1+R_2}=\dfrac{15}{3000}=5{,}0\)&nbsp;mA. Vérification : \(U_2=R_2 I=1000\times5\times10^{-3}=5{,}0\)&nbsp;V ✔</p>
-        <div class="res">\(U_2=5{,}0\)&nbsp;V, \(I=5{,}0\)&nbsp;mA.</div>
+
+        <p class="q">1) Tension \(U_2\)</p>
+        <div class="rappel"><span class="lab">Rappel · pont diviseur de tension</span>\[ U_2 = \frac{R_2}{R_1 + R_2}\,E \]Valable si les deux résistances sont parcourues par le même courant (rien ne part entre elles).</div>
+        \[ U_2 = \frac{1{,}0}{2{,}0 + 1{,}0} \times 15 = 5{,}0\ \text{V} \]
+        <div class="res">\(U_2 = 5{,}0\) V.</div>
+
+        <p class="q">2) Courant</p>
+        \[ I = \frac{E}{R_1 + R_2} = \frac{15}{3000} = 5{,}0\times10^{-3}\ \text{A} \]
+        <p>Vérification : \(U_2 = R_2\,I = 1000 \times 5{,}0\times10^{-3} = 5{,}0\) V.</p>
+        <div class="res">\(I = 5{,}0\) mA.</div>
       </div>
     </div>
 
     <div class="exo-card">
-      <div class="exo-head">✏️ Exercice C — Modèle de Thévenin <span class="diff">♦♦◊</span></div>
+      <div class="exo-head">Exercice C — Modèle de Thévenin <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">Un générateur \(E=10\)&nbsp;V en série avec \(R_0=100\ \Omega\), puis \(R_1=100\ \Omega\)
         en parallèle vue des bornes A-B. Donner \((E_{th},R_{th})\), puis le courant dans une charge
         \(R_L=50\ \Omega\).</p>
-        <p class="q">\(R_{th}\) (passivation : \(E\)→fil)</p>
-        <p>\(R_0\) et \(R_1\) deviennent en parallèle : \(R_{th}=\dfrac{R_0 R_1}{R_0+R_1}=\dfrac{100\times100}{200}=50\ \Omega\).</p>
-        <p class="q">\(E_{th}=U_{AB}\) à vide (diviseur de tension)</p>
-        <p>\(E_{th}=\dfrac{R_1}{R_0+R_1}E=\dfrac{100}{200}\times10=5{,}0\)&nbsp;V.</p>
-        <p class="q">Courant dans \(R_L\)</p>
-        <p>\(I=\dfrac{E_{th}}{R_{th}+R_L}=\dfrac{5{,}0}{50+50}=0{,}050\)&nbsp;A \(=50\)&nbsp;mA.</p>
-        <div class="res">Modèle : \((E_{th}=5{,}0\)&nbsp;V, \(R_{th}=50\ \Omega)\) ; \(I=50\)&nbsp;mA dans \(R_L\).</div>
+
+        <p class="q">1) Résistance de Thévenin \(R_{th}\)</p>
+        <div class="rappel"><span class="lab">Rappel · passiver un circuit</span>On remplace chaque générateur de tension par un fil, puis on calcule la résistance vue entre A et B.</div>
+        <p>\(E\) devient un fil : \(R_0\) et \(R_1\) se retrouvent en parallèle entre A et B.</p>
+        \[ R_{th} = \frac{R_0\,R_1}{R_0 + R_1} = \frac{100 \times 100}{200} = 50\ \Omega \]
+
+        <p class="q">2) Tension de Thévenin \(E_{th}\)</p>
+        <p>C'est la tension \(U_{AB}\) à vide (sans charge). Diviseur de tension :</p>
+        \[ E_{th} = \frac{R_1}{R_0 + R_1}\,E = \frac{100}{200} \times 10 = 5{,}0\ \text{V} \]
+
+        <p class="q">3) Courant dans la charge \(R_L\)</p>
+        \[ I = \frac{E_{th}}{R_{th} + R_L} = \frac{5{,}0}{50 + 50} = 0{,}050\ \text{A} \]
+        <div class="res">\(E_{th} = 5{,}0\) V, \(R_{th} = 50\ \Omega\) ; \(I = 50\) mA dans \(R_L\).</div>
       </div>
     </div>
   </section>
@@ -196,34 +214,70 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
     <div class="exo-card">
       <div class="exo-head">Exercice 1 — Résistance équivalente <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
+        <p class="enonce">1) Calculer la résistance équivalente : a) 150 Ω et 20 Ω en série ; b) 150 Ω et 2 Ω en série ; c) 150 Ω et 2 Ω en parallèle. 2) Combien y a-t-il de nœuds et de branches dans les deux circuits du TD (résistances \(R\), schémas en carré) ? 3) Donner leurs résistances équivalentes et les comparer.</p>
         <p class="q">1) Calculs</p>
-        <p>a) Série 150 + 20 = <b>170 Ω</b>. b) Série 150 + 2 = <b>152 Ω</b>. c) Parallèle :
-        \(\dfrac{1}{R_{eq}}=\dfrac{1}{150}+\dfrac{1}{2}=0{,}507\ \Omega^{-1}\Rightarrow R_{eq}\approx1{,}97\ \Omega\).</p>
-        <div class="note" style="margin:.3rem 0">En série, la grande résistance domine (la petite « ne sert à rien ») ; en parallèle, c'est la petite qui domine.</div>
-        <p class="q">2–3) Nœuds/branches et équivalents (carrés)</p>
-        <p>Seuls A et B sont des nœuds (3 connexions). Chaque circuit a 2 branches (2 chemins de A à B).
-        1ᵉʳ circuit : deux branches \(2R\) en parallèle ⇒ \(R_{eq}=R\). 2ᵉ : \(\dfrac{1}{R_{eq}}=\dfrac{1}{3R}+\dfrac{1}{R}=\dfrac{4}{3R}\Rightarrow R_{eq}=\dfrac{3R}{4}\).</p>
+        <div class="rappel"><span class="lab">Rappel · associations</span>\[ R_{série} = R_a + R_b \qquad \frac{1}{R_{//}} = \frac{1}{R_a} + \frac{1}{R_b} \]</div>
+        <ul>
+          <li>a) \(150 + 20 = 170\ \Omega\).</li>
+          <li>b) \(150 + 2 = 152\ \Omega\).</li>
+          <li>c) \(\dfrac{1}{R_{eq}} = \dfrac{1}{150} + \dfrac{1}{2} \approx 0{,}507\ \Omega^{-1}\), donc \(R_{eq} \approx 1{,}97\ \Omega\).</li>
+        </ul>
+        <div class="res">En série, la grande résistance impose sa valeur ; en parallèle, c'est la petite.</div>
+
+        <p class="q">2) Nœuds et branches</p>
+        <div class="res">Seuls A et B sont des nœuds (au moins trois fils s'y rejoignent). Chaque circuit a deux branches, c'est-à-dire deux chemins de A à B.</div>
+
+        <p class="q">3) Résistances équivalentes</p>
+        <ul>
+          <li>Premier circuit : deux branches de \(2R\) en parallèle, donc \(R_{eq} = \dfrac{2R \times 2R}{4R} = R\).</li>
+          <li>Second circuit : branches \(3R\) et \(R\) en parallèle, donc \(\dfrac{1}{R_{eq}} = \dfrac{1}{3R} + \dfrac{1}{R} = \dfrac{4}{3R}\).</li>
+        </ul>
+        <div class="res">\(R_{eq,1} = R\) et \(R_{eq,2} = \dfrac{3R}{4}\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">Exercice 2 — Encore des résistances équivalentes <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p>1) A et B reliés par un fil ⇒ \(R_{eq}=0\) (aucun nœud). 2) \(\dfrac{1}{R_{eq}}=\dfrac{1}{4R}+\dfrac{1}{R}=\dfrac{5}{4R}\Rightarrow R_{eq}=\dfrac{4R}{5}\).
-        3) Maille rectangulaire \(\dfrac{3R}{4}\) puis + \(R\) série ⇒ \(R'_{eq}=R+\dfrac{3R}{4}=\dfrac{7R}{4}\).
-        4) \(\dfrac{1}{R_{eq}}=\dfrac{1}{3R}+\dfrac{1}{R}+\dfrac{1}{3R}=\dfrac{5}{3R}\Rightarrow R_{eq}=\dfrac{3R}{5}\).</p>
+        <p class="enonce">Donner, pour chacun des quatre circuits du TD (schémas à base de résistances \(R\)), l'expression de la résistance équivalente entre A et B.</p>
+        <p class="q">1) Circuit 1</p>
+        <p>A et B sont reliés directement par un fil : tout le courant passe par ce fil.</p>
+        <div class="res">\(R_{eq} = 0\).</div>
+
+        <p class="q">2) Circuit 2</p>
+        <div class="rappel"><span class="lab">Rappel · résistances en parallèle</span>\[ \frac{1}{R_{//}} = \sum \frac{1}{R_i} \]</div>
+        \[ \frac{1}{R_{eq}} = \frac{1}{4R} + \frac{1}{R} = \frac{5}{4R} \]
+        <div class="res">\(R_{eq} = \dfrac{4R}{5}\).</div>
+
+        <p class="q">3) Circuit 3</p>
+        <p>La maille rectangulaire vaut \(\dfrac{3R}{4}\) (comme à l'exercice 1), puis elle est en série avec \(R\) :</p>
+        <div class="res">\(R_{eq} = R + \dfrac{3R}{4} = \dfrac{7R}{4}\).</div>
+
+        <p class="q">4) Circuit 4</p>
+        \[ \frac{1}{R_{eq}} = \frac{1}{3R} + \frac{1}{R} + \frac{1}{3R} = \frac{5}{3R} \]
+        <div class="res">\(R_{eq} = \dfrac{3R}{5}\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">Exercice 3 — Petites et grandes résistances <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p class="q">1) Expression (via \(B\)-\(C\))</p>
-        \[R_{eq}=R_1+\frac{1}{\frac{1}{R_2}+\frac{1}{R_4+R_5}}+R_3=R_1+\frac{R_2(R_4+R_5)}{R_2+R_4+R_5}+R_3\]
-        <p class="q">2) A.N. (\(R_1=R_2=R_3=R_5=10\ \Omega\), \(R_4=10\ \text{k}\Omega\))</p>
-        <p>\(R_{eq}=10+\dfrac{10\times10^4+10\times10}{10^4+10+10}+10\approx29{,}99\ \Omega\).</p>
-        <p class="q">3) Raccourci</p>
-        <div class="res">\(R_4\) énorme ⇒ presque aucun courant n'y passe : le courant suit \(R_1,R_2,R_3\) en série ⇒ \(R_{eq}\approx10+10+10=30\ \Omega\) (valeur arrondie de 29,99).</div>
+        <p class="enonce">Circuit du TD : \(R_1\) entre A et B, \(R_3\) entre C et D, et entre B et C la résistance \(R_2\) en parallèle avec la branche \(R_4 + R_5\). 1) Donner l'expression de \(R_{eq}\) entre A et D (commencer par B-C). 2) Calculer \(R_{eq}\) pour \(R_1 = R_2 = R_3 = R_5 = 10\ \Omega\) et \(R_4 = 10\) kΩ. 3) Montrer qu'avec ces valeurs, on aurait pu conclure beaucoup plus vite.</p>
+        <p class="q">1) Expression de \(R_{eq}\)</p>
+        <p class="etape">Étape 1 : entre B et C</p>
+        <p>\(R_4\) et \(R_5\) sont en série, et cette branche est en parallèle avec \(R_2\) :</p>
+        \[ R_{BC} = \frac{R_2\,(R_4 + R_5)}{R_2 + R_4 + R_5} \]
+        <p class="etape">Étape 2 : de A à D</p>
+        <p>\(R_1\), \(R_{BC}\) et \(R_3\) sont en série :</p>
+        <div class="res">\[ R_{eq} = R_1 + \frac{R_2\,(R_4 + R_5)}{R_2 + R_4 + R_5} + R_3 \]</div>
+
+        <p class="q">2) Application numérique</p>
+        \[ R_{eq} = 10 + \frac{10 \times 10\,010}{10\,020} + 10 \approx 29{,}99\ \Omega \]
+        <div class="res">\(R_{eq} \approx 29{,}99\ \Omega\).</div>
+
+        <p class="q">3) Le raccourci</p>
+        <p>\(R_4 = 10\) kΩ est énorme devant \(R_2 = 10\ \Omega\) : presque tout le courant passe par \(R_2\). On peut ignorer la branche \(R_4 + R_5\) :</p>
+        <div class="res">\(R_{eq} \approx 10 + 10 + 10 = 30\ \Omega\), très proche de 29,99 Ω.</div>
       </div>
     </div>
 
@@ -232,28 +286,52 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
       <div class="exo-body">
         <p class="enonce">\(R_A=1\ \Omega\) (ampèremètre), \(R_V=1\ \text{M}\Omega\) (voltmètre), \(R=1\ \text{k}\Omega\),
         pile 1,5&nbsp;V.</p>
-        <p class="q">1) Circuit idéal</p><p>Loi des mailles : \(e-RI=0\Rightarrow I=\dfrac{1{,}5}{1000}=1{,}5\)&nbsp;mA, \(U_{AB}=RI=1{,}5\)&nbsp;V.</p>
-        <p class="q">2–3) Avec appareils</p>
-        <p>Voltmètre en parallèle : \(R_{eq}=\dfrac{1}{\frac{1}{R_V}+\frac{1}{R+R_A}}\approx999{,}99\ \Omega\).
-        Ampèremètre en série puis parallèle voltmètre : \(R_{eq}=R_A+\dfrac{RR_V}{R+R_V}\approx1000\ \Omega\).
-        Courant mesuré \(I_3=\dfrac{e}{1001}\approx1{,}5\)&nbsp;mA.</p>
-        <p class="q">4) Impact</p>
-        <div class="res">Négligeable : ampèremètre (très faible \(R\)) en série et voltmètre (très grand \(R\)) en parallèle perturbent très peu le circuit.</div>
+
+        <p class="q">1) Circuit sans appareil de mesure</p>
+        <div class="rappel"><span class="lab">Rappel · loi des mailles</span>La somme algébrique des tensions le long d'une maille est nulle.</div>
+        \[ e - R\,I = 0 \iff I = \frac{e}{R} = \frac{1{,}5}{1000} = 1{,}5\ \text{mA} \qquad U_{AB} = R\,I = 1{,}5\ \text{V} \]
+        <div class="res">\(I = 1{,}5\) mA et \(U_{AB} = 1{,}5\) V.</div>
+
+        <p class="q">2–3) Avec les appareils remplacés par leur résistance interne</p>
+        <p class="etape">Étape 1 : premier montage (voltmètre aux bornes de {ampèremètre + R})</p>
+        \[ R_{eq} = \frac{R_V\,(R + R_A)}{R_V + R + R_A} = \frac{10^6 \times 1001}{10^6 + 1001} \approx 1000\ \Omega \]
+        <p class="etape">Étape 2 : second montage (ampèremètre en série avec {R parallèle voltmètre})</p>
+        \[ R_{eq} = R_A + \frac{R\,R_V}{R + R_V} \approx 1 + 999 = 1000\ \Omega \]
+        <p class="etape">Étape 3 : courant et tension</p>
+        <p>Dans les deux cas, \(I = e/R_{eq} \approx 1{,}5\) mA et \(U \approx 1{,}5\) V.</p>
+
+        <p class="q">4) Impact des appareils</p>
+        <div class="res">Négligeable : l'ampèremètre (1 Ω) est petit devant \(R\) et le voltmètre (1 MΩ) grand devant \(R\). Ils perturbent très peu le circuit.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">Exercice 5 — Écriture de la loi des nœuds <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p>\(I_1\) entre, \(I_2,I_3\) sortent : \(I_1-I_2-I_3=0\), soit \(I_1=I_2+I_3\) (le courant se partage, conservation de la charge).</p>
+        <p class="enonce">Sur la portion de circuit du TD, le courant \(I_1\) arrive sur un nœud d'où partent \(I_2\) et \(I_3\). Écrire la loi des nœuds.</p>
+        <p class="q">1) Loi des nœuds</p>
+        <div class="rappel"><span class="lab">Rappel · loi des nœuds</span>\[ \sum I_{entrants} = \sum I_{sortants} \]</div>
+        <div class="res">\(I_1 = I_2 + I_3\) : le courant se partage, la charge se conserve.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">Exercice 6 — Pile de 1,5 V <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p>Loi des mailles : \(e-RI=0\). Pour \(I=5\)&nbsp;mA : \(R=\dfrac{e}{I}=\dfrac{1{,}5}{5\times10^{-3}}=300\ \Omega\).
-        Pour augmenter \(I\) (à \(e\) fixe) : <b>diminuer \(R\)</b>.</p>
+        <p class="enonce">Une résistance \(R\) est branchée aux bornes d'une pile de \(e = 1{,}5\) V. 1) Faire le schéma avec les flèches de courant et de tension. 2) Écrire la loi des mailles. 3) Quelle résistance donne un courant de 5 mA ? 4) Comment augmenter le courant en ne modifiant que la résistance ?</p>
+        <p class="q">1) Schéma</p>
+        <p>Pile en convention générateur (flèche de \(e\) et courant dans le même sens), résistance en convention récepteur (flèche de \(U_R\) opposée au courant).</p>
+
+        <p class="q">2) Loi des mailles</p>
+        <div class="rappel"><span class="lab">Rappel · loi d'Ohm (convention récepteur)</span>\[ U_R = R\,I \]</div>
+        <div class="res">\(e - R\,I = 0\).</div>
+
+        <p class="q">3) Résistance pour 5 mA</p>
+        \[ R = \frac{e}{I} = \frac{1{,}5}{5\times10^{-3}} = 300\ \Omega \]
+        <div class="res">\(R = 300\ \Omega\).</div>
+
+        <p class="q">4) Augmenter le courant</p>
+        <div class="res">\(I = e/R\) : il faut diminuer \(R\).</div>
       </div>
     </div>
 
@@ -261,25 +339,60 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
       <div class="exo-head">Exercice 7 — Circuit à 3 résistances <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">\(e=9\)&nbsp;V, \(R_1=10,\ R_2=20,\ R_3=30\ \Omega\).</p>
-        <p>Maille gauche : \(e-R_2 I_2-R_1 I_1=0\). Maille droite : \(-R_3 I_3+R_2 I_2=0\Rightarrow R_2 I_2=R_3 I_3\),
-        donc \(I_2=\dfrac{R_3}{R_2}I_3=1{,}5\,I_3\). Si \(I_3=200\)&nbsp;mA : \(I_2=300\)&nbsp;mA et
-        \(I_1=I_2+I_3=500\)&nbsp;mA.</p>
+
+        <p class="q">1) Schéma</p>
+        <p>Pile en convention générateur, résistances en convention récepteur. \(I_1\) traverse \(R_1\), puis se partage en \(I_2\) (dans \(R_2\)) et \(I_3\) (dans \(R_3\)).</p>
+
+        <p class="q">2) Lois des mailles</p>
+        <div class="rappel"><span class="lab">Rappel · loi des mailles</span>La somme algébrique des tensions le long d'une maille est nulle.</div>
+        <ul>
+          <li>Maille de gauche : \(e - R_1 I_1 - R_2 I_2 = 0\).</li>
+          <li>Maille de droite : \(R_2 I_2 - R_3 I_3 = 0\).</li>
+        </ul>
+
+        <p class="q">3) Relation entre \(I_2\) et \(I_3\)</p>
+        \[ R_2 I_2 = R_3 I_3 \iff I_2 = \frac{R_3}{R_2}\,I_3 = \frac{30}{20}\,I_3 = 1{,}5\,I_3 \]
+
+        <p class="q">4) Valeurs pour \(I_3 = 200\) mA</p>
+        <div class="rappel"><span class="lab">Rappel · loi des nœuds</span>\[ I_1 = I_2 + I_3 \]</div>
+        \[ I_2 = 1{,}5 \times 200 = 300\ \text{mA} \qquad I_1 = 300 + 200 = 500\ \text{mA} \]
+        <p>Vérification avec la maille de gauche : \(10 \times 0{,}5 + 20 \times 0{,}3 = 11\) V. L'énoncé donne \(e = 9\) V : les données sont incohérentes entre elles, on garde les valeurs demandées.</p>
+        <div class="res">\(I_2 = 300\) mA et \(I_1 = 500\) mA.</div>
       </div>
     </div>
 
     <div class="exo-card">
-      <div class="exo-head">Exercice 8 — Encore une résistance équivalente ⁉️ <span class="diff">♦♦◊</span></div>
+      <div class="exo-head">Exercice 8 — Encore une résistance équivalente <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p>La difficulté est de <b>redessiner</b> le schéma : en identifiant les nœuds équivalents, les 3
-        résistances apparaissent <b>en parallèle</b> ⇒ \(R_{eq}=\dfrac{R}{3}\).</p>
+        <p class="enonce">Trouver la résistance équivalente entre A et D du circuit du TD (trois résistances \(R\) reliées par des fils qui se croisent). Aide : repérer les nœuds équivalents, les représenter par un seul point, puis relier chaque résistance à ces points.</p>
+        <p class="q">1) Nœuds équivalents</p>
+        <p>Deux points reliés par un simple fil sont au même potentiel : ce sont le même nœud.</p>
+        <p class="etape">Étape 1 : redessiner</p>
+        <p>En regroupant les nœuds équivalents, il ne reste que deux nœuds : A et D.</p>
+        <p class="etape">Étape 2 : constater</p>
+        <p>Chacune des trois résistances relie A à D : elles sont en parallèle.</p>
+        <div class="rappel"><span class="lab">Rappel · résistances en parallèle</span>\[ \frac{1}{R_{eq}} = \sum \frac{1}{R_i} \]</div>
+        \[ \frac{1}{R_{eq}} = \frac{3}{R} \]
+        <div class="res">\(R_{eq} = \dfrac{R}{3}\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">Exercice 9 — Résistances équivalentes (suite) <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p>Entre A-B : deux \(2R\) en parallèle ⇒ \(R\). Puis entre A-C : encore deux \(2R\) en parallèle ⇒ \(R\).
-        De proche en proche, la résistance équivalente A-D vaut finalement <b>\(R\)</b>.</p>
+        <p class="enonce">Quelle est la résistance équivalente entre A et D du circuit du TD (échelle de résistances \(R\) et \(2R\)) ? Aide : trouver la résistance entre A et B, redessiner ; puis entre A et C, redessiner ; conclure.</p>
+        <p class="q">1) Entre A et B</p>
+        <div class="rappel"><span class="lab">Rappel · deux résistances égales en parallèle</span>\[ R \parallel R = \frac{R}{2} \]</div>
+        <p>Deux résistances \(2R\) en parallèle :</p>
+        \[ R_{AB} = \frac{2R}{2} = R \]
+
+        <p class="q">2) Entre A et C</p>
+        <p>\(R_{AB} = R\) en série avec \(R\) donne \(2R\), en parallèle avec une autre \(2R\) :</p>
+        \[ R_{AC} = R \]
+
+        <p class="q">3) Entre A et D</p>
+        <p>Le même motif se répète jusqu'à D.</p>
+        <div class="res">\(R_{AD} = R\).</div>
       </div>
     </div>
 
@@ -287,10 +400,29 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
       <div class="exo-head">Exercice 10 — Accumulateur au lithium <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">\(R=100\ \Omega\) sur accumulateur (\(e=3{,}6\)&nbsp;V).</p>
-        <p>1) Générateur de <b>tension</b>. 2) \(I=\dfrac{e}{R}=\dfrac{3{,}6}{100}=36\)&nbsp;mA. 3) Plus de courant ⇒
-        diminuer \(R\). 4) On ne peut pas augmenter la tension (imposée par construction). 5) Fil entre A-B :
-        \(R_{eq}=\dfrac{rR}{r+R}\approx0\) ⇒ puissance \(P=\dfrac{U e}{R_{eq}}\to\infty\) : <b>court-circuit</b>,
-        l'accumulateur est détruit.</p>
+
+        <p class="q">1) Nature du générateur</p>
+        <div class="res">Un accumulateur impose une tension à ses bornes : c'est un générateur de tension.</div>
+
+        <p class="q">2) Courant délivré</p>
+        <div class="rappel"><span class="lab">Rappel · loi d'Ohm</span>\[ I = \frac{U}{R} \]</div>
+        \[ I = \frac{e}{R} = \frac{3{,}6}{100} = 36\ \text{mA} \]
+        <div class="res">\(I = 36\) mA.</div>
+
+        <p class="q">3) Délivrer plus de courant</p>
+        <div class="res">Diminuer \(R\).</div>
+
+        <p class="q">4) Avoir une tension plus grande</p>
+        <div class="res">Impossible avec un seul accumulateur : sa tension est fixée par sa chimie. Il faut en associer plusieurs en série.</div>
+
+        <p class="q">5) Fil entre A et B</p>
+        <p class="etape">Étape 1 : résistance équivalente</p>
+        <p>Le fil (\(r \approx 0\)) est en parallèle avec \(R\) :</p>
+        \[ R_{eq} = \frac{rR}{r + R} \approx r \approx 0 \]
+        <p class="etape">Étape 2 : puissance demandée</p>
+        <div class="rappel"><span class="lab">Rappel · puissance dans une résistance</span>\[ P = \frac{U^2}{R} \]</div>
+        \[ P = \frac{e^2}{R_{eq}} \to \infty \]
+        <div class="res">Court-circuit : l'accumulateur devrait fournir une puissance énorme, il chauffe et peut être détruit.</div>
       </div>
     </div>
 
@@ -299,50 +431,116 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
     <div class="exo-card">
       <div class="exo-head">Exercice 11 — Association d'accumulateurs Li-Fe-PO₄ <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p>Accus \(e=3{,}2\)&nbsp;V. 1) Pour 9,6&nbsp;V : <b>3 en série</b> (− relié au + du suivant),
-        \(3\times3{,}2=9{,}6\)&nbsp;V. 2) Si un accu est inversé : \(e-e+e=e=3{,}2\)&nbsp;V (les deux premiers s'annulent).</p>
+        <p class="enonce">Les accumulateurs Li-Fe-PO₄ sont des générateurs de tension de \(e = 3{,}2\) V. 1) Représenter un montage donnant 9,6 V. 2) Que se passe-t-il si un des accumulateurs est branché à l'envers ?</p>
+        <p class="q">1) Montage pour 9,6 V</p>
+        <div class="rappel"><span class="lab">Rappel · générateurs de tension en série</span>Les tensions s'ajoutent (avec leur signe).</div>
+        \[ \frac{9{,}6}{3{,}2} = 3 \]
+        <div class="res">Trois accumulateurs en série, la borne − de chacun reliée à la borne + du suivant.</div>
+
+        <p class="q">2) Un accumulateur inversé</p>
+        \[ e + e - e = e = 3{,}2\ \text{V} \]
+        <div class="res">On n'obtient plus que 3,2 V : l'accumulateur inversé annule l'un des deux autres.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">Exercice 12 — Générateur de courant (1) <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p>\(i=100\)&nbsp;mA, on veut \(e=1{,}5\)&nbsp;V : \(R=\dfrac{e}{I}=\dfrac{1{,}5}{0{,}1}=150\ \Omega\).</p>
+        <p class="enonce">1) Quelle résistance, branchée aux bornes d'un générateur de courant délivrant \(i = 100\) mA, donne une tension \(e = 1{,}5\) V à ses bornes ? 2) Faire le schéma avec les flèches de courant et de tension.</p>
+        <p class="q">1) Valeur de la résistance</p>
+        <p>Le générateur impose le courant dans la résistance.</p>
+        <div class="rappel"><span class="lab">Rappel · loi d'Ohm</span>\[ U = R\,I \]</div>
+        \[ R = \frac{U}{I} = \frac{1{,}5}{0{,}1} = 15\ \Omega \]
+        <div class="res">\(R = 15\ \Omega\).</div>
+        <div class="warnbox"><span class="lab">Correction d'une erreur de l'ancienne version</span> L'ancienne version donnait 150 Ω. Or \(1{,}5 / 0{,}1 = 15\ \Omega\).</div>
+
+        <p class="q">2) Schéma</p>
+        <p>Générateur en convention générateur (flèche de tension dans le sens du courant), résistance en convention récepteur (flèche de tension opposée au courant).</p>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">Exercice 13 — Générateur de courant (2) <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p>Le courant d'un générateur de courant ne dépend pas de ce qu'il y a dans sa branche. Le reste du circuit
-        étant identique, \(I=I'\).</p>
+        <p class="enonce">Comparer les intensités \(I\) et \(I'\) des deux circuits du TD : ils ne diffèrent que par un élément placé en série avec le générateur de courant.</p>
+        <p class="q">1) Comparaison</p>
+        <div class="rappel"><span class="lab">Rappel · générateur de courant idéal</span>Il impose le courant de sa branche, quels que soient les dipôles qui y sont placés.</div>
+        <p>L'élément ajouté est dans la branche du générateur : il ne change pas le courant de cette branche. Le reste du circuit étant identique, les courants sont les mêmes.</p>
+        <div class="res">\(I = I'\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">Exercice 14 — Loi d'Ohm d'une dérivation <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p>3 résistances identiques ⇒ le courant se répartit également : \(I=3I_d\). Loi d'Ohm : \(U_R=RI_d\).
-        Comme \(U_R=R_{eq}I=R\dfrac{I}{3}\) : \(R_{eq}=\dfrac{R}{3}\) (retrouvé sans la formule).</p>
+        <p class="enonce">Circuit du TD : trois résistances identiques \(R\) en dérivation, parcourues par \(I'\) chacune ; le courant total est \(I\). 1) Relation entre \(I\) et \(I'\) ? 2) Loi d'Ohm aux bornes de chaque résistance. 3) Loi d'Ohm aux bornes de la résistance équivalente. 4) En déduire celle-ci sans la formule toute faite.</p>
+        <p class="q">1) Relation entre \(I\) et \(I'\)</p>
+        <p>Les trois résistances sont identiques et ont la même tension : elles ont le même courant. Loi des nœuds :</p>
+        <div class="res">\(I = 3\,I'\).</div>
+
+        <p class="q">2) Loi d'Ohm pour chaque résistance</p>
+        <div class="res">\(U = R\,I'\).</div>
+
+        <p class="q">3) Loi d'Ohm pour la résistance équivalente</p>
+        <div class="res">\(U = R_{eq}\,I\).</div>
+
+        <p class="q">4) Résistance équivalente</p>
+        \[ R_{eq}\,I = R\,I' = R\,\frac{I}{3} \]
+        <div class="res">\(R_{eq} = \dfrac{R}{3}\), comme avec la formule du parallèle.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">Exercice 15 — Caractéristiques des générateurs <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p>1) Tension idéal : \(U=5\)&nbsp;V (horizontale). 2) Thévenin (\(e=5,R=20\)) : \(U=5-20I\) (pente −R).
-        3) Courant idéal : \(I=0{,}3\)&nbsp;A (verticale). 4) Norton (\(\eta=0{,}3,R=20\)) : \(U=6-20I\).
-        5) Résistance \(R'=15\) : \(U=15I\).</p>
-        <p class="q">6) Points de fonctionnement (intersection avec \(U=15I\))</p>
-        <div class="res">Dans l'ordre : \((5\,\text{V};0{,}33\,\text{A})\), \((2{,}14\,\text{V};0{,}14\,\text{A})\), \((4{,}5\,\text{V};0{,}3\,\text{A})\), \((2{,}57\,\text{V};0{,}17\,\text{A})\).</div>
+        <p class="enonce">Tracer en justifiant la caractéristique \(U = f(I)\) : 1) d'un générateur de tension idéal \(e = 5\) V ; 2) d'un générateur de Thévenin (\(e = 5\) V, \(R = 20\ \Omega\)) ; 3) d'un générateur de courant idéal \(\eta = 0{,}3\) A ; 4) d'un générateur de Norton (\(\eta = 0{,}3\) A, \(R = 20\ \Omega\)) ; 5) d'une résistance \(R' = 15\ \Omega\). 6) Brancher \(R'\) sur chaque générateur et trouver le point de fonctionnement.</p>
+        <p class="q">1) Générateur de tension idéal</p>
+        <div class="res">\(U = 5\) V quel que soit \(I\) : droite horizontale.</div>
+
+        <p class="q">2) Générateur de Thévenin</p>
+        <div class="rappel"><span class="lab">Rappel · générateur de Thévenin (convention générateur)</span>\[ U = e - R\,I \]</div>
+        <div class="res">\(U = 5 - 20\,I\) : droite de pente \(-20\ \Omega\).</div>
+
+        <p class="q">3) Générateur de courant idéal</p>
+        <div class="res">\(I = 0{,}3\) A quelle que soit \(U\) : droite verticale.</div>
+
+        <p class="q">4) Générateur de Norton</p>
+        <div class="rappel"><span class="lab">Rappel · générateur de Norton</span>\[ I = \eta - \frac{U}{R} \iff U = R\eta - R\,I \]</div>
+        <div class="res">\(U = 6 - 20\,I\).</div>
+
+        <p class="q">5) Résistance</p>
+        <div class="res">\(U = 15\,I\) : droite passant par l'origine.</div>
+
+        <p class="q">6) Points de fonctionnement</p>
+        <p>On cherche l'intersection de chaque caractéristique avec \(U = 15\,I\).</p>
+        <ul>
+          <li>Tension idéal : \(15I = 5\), donc \(I \approx 0{,}33\) A et \(U = 5\) V.</li>
+          <li>Thévenin : \(15I = 5 - 20I\), donc \(I = 5/35 \approx 0{,}14\) A et \(U \approx 2{,}14\) V.</li>
+          <li>Courant idéal : \(I = 0{,}3\) A, donc \(U = 4{,}5\) V.</li>
+          <li>Norton : \(15I = 6 - 20I\), donc \(I = 6/35 \approx 0{,}17\) A et \(U \approx 2{,}57\) V.</li>
+        </ul>
+        <div class="res">(5 V ; 0,33 A), (2,14 V ; 0,14 A), (4,5 V ; 0,3 A), (2,57 V ; 0,17 A).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">Exercice 16 — Utilisation de la loi des nœuds <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p>Mailles : \(e-R_1 I_1+R_2 I_2=0\). Nœud A : \(I=I_1+I_2\). En résolvant :</p>
-        \[I_1=\frac{e+R_2 I}{R_1+R_2},\qquad I_2=\frac{R_1 I-e}{R_1+R_2},\qquad U_{AB}=-R_2 I_2=\frac{R_2(e-R_1 I)}{R_1+R_2}\]
+        <p class="enonce">Dans le circuit du TD (générateur de tension \(e\), résistances \(R_1\) et \(R_2\), courant \(I\) arrivant au nœud A), on cherche \(I_1\) et \(I_2\) en fonction de \(I\), \(e\), \(R_1\) et \(R_2\). 1) Écrire la loi des mailles. 2) Écrire la loi des nœuds en A. 3) En déduire \(I_1\) et \(I_2\). 4) Trouver \(U_{AB}\).</p>
+        <p class="q">1) Loi des mailles</p>
+        <div class="res">\(e - R_1 I_1 + R_2 I_2 = 0\).</div>
+
+        <p class="q">2) Loi des nœuds en A</p>
+        <div class="res">\(I = I_1 + I_2\).</div>
+
+        <p class="q">3) Courants</p>
+        <p>On remplace \(I_2 = I - I_1\) dans la loi des mailles :</p>
+        \[ e - R_1 I_1 + R_2\,(I - I_1) = 0 \iff I_1 = \frac{e + R_2 I}{R_1 + R_2} \]
+        \[ I_2 = I - I_1 = \frac{R_1 I - e}{R_1 + R_2} \]
+        <div class="res">\(I_1 = \dfrac{e + R_2 I}{R_1 + R_2}\) et \(I_2 = \dfrac{R_1 I - e}{R_1 + R_2}\).</div>
+
+        <p class="q">4) Tension \(U_{AB}\)</p>
+        <div class="res">\(U_{AB} = -R_2 I_2 = \dfrac{R_2\,(e - R_1 I)}{R_1 + R_2}\).</div>
       </div>
     </div>
 
@@ -350,9 +548,25 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
       <div class="exo-head">Exercice 17 — Mesures ampèremètre/voltmètre <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">\(e=6{,}0\)&nbsp;V, \(U_{AB}=2{,}4\)&nbsp;V, \(I_1=0{,}80\)&nbsp;A, \(I_2=250\)&nbsp;mA.</p>
-        <p>2) \(R_2=\dfrac{U_{AB}}{I_2}=\dfrac{2{,}4}{0{,}25}=9{,}6\ \Omega\). 3) \(I_3=I_1-I_2=0{,}55\)&nbsp;A.
-        4) \(R_3=\dfrac{U_{AB}}{I_3}=\dfrac{2{,}4}{0{,}55}\approx4{,}36\ \Omega\). 5) Maille gauche :
-        \(e-R_1 I_1-U_{AB}=0\Rightarrow R_1=\dfrac{e-U_{AB}}{I_1}=\dfrac{6{,}0-2{,}4}{0{,}80}=4{,}5\ \Omega\).</p>
+
+        <p class="q">1) Emplacement des appareils</p>
+        <p>Ampèremètres en série dans les branches de \(I_1\) et \(I_2\) ; voltmètre en parallèle entre A et B.</p>
+
+        <p class="q">2) Résistance \(R_2\)</p>
+        <div class="rappel"><span class="lab">Rappel · loi d'Ohm</span>\[ R = \frac{U}{I} \]</div>
+        \[ R_2 = \frac{U_{AB}}{I_2} = \frac{2{,}4}{0{,}25} = 9{,}6\ \Omega \]
+
+        <p class="q">3) Courant \(I_3\)</p>
+        <div class="rappel"><span class="lab">Rappel · loi des nœuds</span>\[ I_1 = I_2 + I_3 \]</div>
+        \[ I_3 = 0{,}80 - 0{,}25 = 0{,}55\ \text{A} \]
+
+        <p class="q">4) Résistance \(R_3\)</p>
+        \[ R_3 = \frac{U_{AB}}{I_3} = \frac{2{,}4}{0{,}55} \approx 4{,}36\ \Omega \]
+
+        <p class="q">5) Résistance \(R_1\)</p>
+        <p>Maille de gauche :</p>
+        \[ e - R_1 I_1 - U_{AB} = 0 \iff R_1 = \frac{e - U_{AB}}{I_1} = \frac{6{,}0 - 2{,}4}{0{,}80} = 4{,}5\ \Omega \]
+        <div class="res">\(R_2 = 9{,}6\ \Omega\), \(I_3 = 0{,}55\) A, \(R_3 \approx 4{,}4\ \Omega\), \(R_1 = 4{,}5\ \Omega\).</div>
       </div>
     </div>
 
@@ -362,9 +576,22 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
       <div class="exo-head">Exercice 18 — Retrouver le diviseur de tension <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">\(e=15\)&nbsp;V, \(R_1=1{,}0\ \text{k}\Omega\), \(R_2=3{,}5\ \text{k}\Omega\).</p>
-        <p>Courant : \(I=\dfrac{e}{R_1+R_2}=\dfrac{15}{4500}\approx3{,}3\)&nbsp;mA. Via mailles + Ohm :
-        \(U_{R_1}=\dfrac{R_1}{R_1+R_2}e=3{,}3\)&nbsp;V, \(U_{R_2}=\dfrac{R_2}{R_1+R_2}e=11{,}7\)&nbsp;V. Fractions
-        \(\dfrac{R_1}{R_1+R_2}\) et \(\dfrac{R_2}{R_1+R_2}\), de somme 1.</p>
+
+        <p class="q">1) Flèches</p>
+        <p>Générateur en convention générateur ; \(R_1\) et \(R_2\) en convention récepteur.</p>
+
+        <p class="q">2) Courant</p>
+        \[ I = \frac{e}{R_1 + R_2} = \frac{15}{4500} \approx 3{,}3\ \text{mA} \]
+
+        <p class="q">3) Tensions</p>
+        <p class="etape">Étape 1 : loi des mailles et loi d'Ohm</p>
+        \[ e = R_1 I + R_2 I \iff I = \frac{e}{R_1 + R_2} \]
+        <p class="etape">Étape 2 : on reporte dans \(U = RI\)</p>
+        \[ U_1 = \frac{R_1}{R_1 + R_2}\,e = \frac{1{,}0}{4{,}5} \times 15 \approx 3{,}3\ \text{V} \qquad U_2 = \frac{R_2}{R_1 + R_2}\,e = \frac{3{,}5}{4{,}5} \times 15 \approx 11{,}7\ \text{V} \]
+        <div class="res">\(U_1 \approx 3{,}3\) V et \(U_2 \approx 11{,}7\) V.</div>
+
+        <p class="q">4) Fraction de tension</p>
+        <div class="res">Chaque résistance reçoit la fraction \(\dfrac{R_k}{R_1 + R_2}\) de \(e\) (somme des fractions égale à 1) : c'est le pont diviseur de tension.</div>
       </div>
     </div>
 
@@ -372,11 +599,26 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
       <div class="exo-head">Exercice 19 — Adapter une tension <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">Pile 9,2&nbsp;V pour un dispositif fonctionnant entre 5,5 et 6,0&nbsp;V, courant limité à 0,75&nbsp;A.</p>
-        <p>1) Diviseur de tension ; \(\sum R=\dfrac{e}{I}=\dfrac{9{,}2}{0{,}75}\approx12{,}3\ \Omega\).
-        2) On impose \(5{,}5<\dfrac{R_2}{R_1+R_2}\times9{,}2<6{,}0\) : borne basse
-        \(\dfrac{R_2}{12{,}3}=\dfrac{5{,}5}{9{,}2}\Rightarrow R_2\approx7{,}33\ \Omega\) (\(R_1\approx4{,}9\ \Omega\)) ;
-        borne haute \(R_2\approx8{,}0\ \Omega\). 3) Pour \(I=0{,}75\)&nbsp;mA : résistances ×1000 (\(\sum R\approx12{,}3\ \text{k}\Omega\)).
-        4) On a supposé la résistance interne du dispositif <b>grande</b> devant \(R_2\).</p>
+
+        <p class="q">1) Montage et somme des résistances</p>
+        <p class="etape">Étape 1 : montage</p>
+        <p>Un pont diviseur de tension : \(R_1\) et \(R_2\) en série sur la pile, le dispositif branché aux bornes de \(R_2\).</p>
+        <p class="etape">Étape 2 : somme des résistances</p>
+        \[ R_1 + R_2 = \frac{e}{I} = \frac{9{,}2}{0{,}75} \approx 12{,}3\ \Omega \]
+
+        <p class="q">2) Valeur de \(R_2\)</p>
+        <div class="rappel"><span class="lab">Rappel · pont diviseur de tension</span>\[ U_2 = \frac{R_2}{R_1 + R_2}\,e \]</div>
+        <ul>
+          <li>Pour 5,5 V : \(R_2 = 12{,}3 \times \dfrac{5{,}5}{9{,}2} \approx 7{,}3\ \Omega\) (et \(R_1 \approx 4{,}9\ \Omega\)).</li>
+          <li>Pour 6,0 V : \(R_2 = 12{,}3 \times \dfrac{6{,}0}{9{,}2} \approx 8{,}0\ \Omega\) (et \(R_1 \approx 4{,}3\ \Omega\)).</li>
+        </ul>
+        <div class="res">\(R_2\) entre 7,3 Ω et 8,0 Ω.</div>
+
+        <p class="q">3) Courant de 0,75 mA</p>
+        <div class="res">Les rapports ne changent pas, mais les résistances sont 1000 fois plus grandes : \(R_1 + R_2 \approx 12{,}3\) kΩ.</div>
+
+        <p class="q">4) Hypothèse implicite</p>
+        <div class="res">On a supposé la résistance interne du dispositif très grande devant \(R_2\) : il ne prélève presque pas de courant.</div>
       </div>
     </div>
 
@@ -384,11 +626,27 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
       <div class="exo-head">Exercice 20 — Courant divisé et puissance <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">\(\eta=20\)&nbsp;mA, \(R=2\ \text{k}\Omega\) supportant 250&nbsp;mW.</p>
-        <p>1) \(P=Ri^2=2000\times(0{,}02)^2=0{,}80\)&nbsp;W > 0,25&nbsp;W : <b>détériorée</b>. 2) En série : même courant,
-        même puissance ⇒ les deux détériorées. 3) En parallèle : \(i=\eta/2=10\)&nbsp;mA, \(P=Ri^2=0{,}20\)&nbsp;W < 0,25 :
-        <b>supportent</b>. 4) Montage \(R\ \|\ 2R\) : \(i_1=\dfrac{2\eta}{3}\approx13{,}3\)&nbsp;mA,
-        \(u=\dfrac{2R}{3}\eta\approx26{,}7\)&nbsp;V, \(P_1=u i_1\approx0{,}355\)&nbsp;W (détériorée) ;
-        la branche \(2R\) : \(P\approx0{,}089\)&nbsp;W (supporte).</p>
+
+        <p class="q">1) Une seule résistance</p>
+        <div class="rappel"><span class="lab">Rappel · puissance dissipée</span>\[ P = R\,I^2 \]</div>
+        \[ P = 2000 \times 0{,}020^2 = 0{,}80\ \text{W} > 0{,}25\ \text{W} \]
+        <div class="res">La résistance est détériorée.</div>
+
+        <p class="q">2) Deux résistances en série</p>
+        <div class="res">Même courant de 20 mA dans chacune, donc 0,80 W chacune : toutes deux détériorées.</div>
+
+        <p class="q">3) Deux résistances en parallèle</p>
+        <p>Le courant se partage en deux : 10 mA chacune.</p>
+        \[ P = 2000 \times 0{,}010^2 = 0{,}20\ \text{W} &lt; 0{,}25\ \text{W} \]
+        <div class="res">Les deux résistances supportent.</div>
+
+        <p class="q">4) Montage du TD : \(R\) en parallèle avec deux \(R\) en série</p>
+        <div class="rappel"><span class="lab">Rappel · pont diviseur de courant</span>\[ i_1 = \frac{R_2}{R_1 + R_2}\,\eta \]</div>
+        <ul>
+          <li>Branche \(R\) : \(i_1 = \dfrac{2R}{3R}\,\eta \approx 13{,}3\) mA, donc \(P = 2000 \times 0{,}0133^2 \approx 0{,}36\) W : détériorée.</li>
+          <li>Branche \(2R\) : \(i_2 \approx 6{,}7\) mA, donc \(P = 2000 \times 0{,}0067^2 \approx 0{,}089\) W par résistance : elles supportent.</li>
+        </ul>
+        <div class="res">Seule la résistance seule dans sa branche est détériorée.</div>
       </div>
     </div>
 
@@ -396,10 +654,27 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
       <div class="exo-head">Exercice 21 — Rhéostat <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">Rhéostat \(R_1=100\ \Omega\) (\(R_2=x,\ R_3=100-x\)), \(e=20\)&nbsp;V, \(R_0=5\ \Omega\), \(R_4=1000\ \Omega\).</p>
-        <p><b>Montage gauche (diviseur) :</b> \(I_0=\dfrac{e}{R_0+R_2+R_{eq}}\) avec \(R_{eq}=\dfrac{R_3 R_4}{R_3+R_4}\).
-        Pour \(x=0\) : \(I_0\approx0{,}21\)&nbsp;A, \(I_4=\dfrac{I_0 R_3}{R_3+R_4}\approx0{,}020\)&nbsp;A. Pour \(x=100\) :
-        \(I_4\approx0\). <b>Montage droit (série) :</b> \(I_4=\dfrac{20}{1005+x}\) : 0,020&nbsp;A (x=0) → 0,018&nbsp;A (x=100).</p>
-        <div class="res">Le montage de gauche offre la plus large gamme de courant (0 → 20&nbsp;mA) ; le montage droit varie à peine.</div>
+
+        <p class="q">1–3) Montage de gauche (rhéostat en diviseur de courant)</p>
+        <p class="etape">Étape 1 : résistance équivalente</p>
+        <p>\(R_3 = 100 - x\) est en parallèle avec \(R_4\), et l'ensemble est en série avec \(R_0\) et \(R_2 = x\) :</p>
+        \[ R_{eq} = \frac{R_3 R_4}{R_3 + R_4} \qquad I_0 = \frac{e}{R_0 + R_2 + R_{eq}} \]
+        <p class="etape">Étape 2 : courant dans \(R_4\)</p>
+        <div class="rappel"><span class="lab">Rappel · pont diviseur de courant</span>\[ I_4 = \frac{R_3}{R_3 + R_4}\,I_0 \]</div>
+        <ul>
+          <li>\(x = 0\) : \(R_{eq} = 90{,}9\ \Omega\), \(I_0 = \dfrac{20}{5 + 90{,}9} \approx 0{,}21\) A, \(I_4 = \dfrac{100}{1100} \times 0{,}21 \approx 19\) mA.</li>
+          <li>\(x = 100\ \Omega\) : \(R_3 = 0\), \(R_4\) est court-circuitée, \(I_4 = 0\).</li>
+        </ul>
+
+        <p class="q">4) Montage de droite (rhéostat en série)</p>
+        \[ I_4 = \frac{e}{R_0 + x + R_4} = \frac{20}{1005 + x} \]
+        <ul>
+          <li>\(x = 0\) : \(I_4 \approx 19{,}9\) mA.</li>
+          <li>\(x = 100\ \Omega\) : \(I_4 \approx 18{,}1\) mA.</li>
+        </ul>
+
+        <p class="q">5) Comparaison</p>
+        <div class="res">Le montage de gauche offre la plus grande plage (de 0 à environ 19 mA) ; celui de droite ne fait varier le courant que de 10 %.</div>
       </div>
     </div>
 
@@ -407,10 +682,26 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
       <div class="exo-head">Exercice 22 — Utilisation de la loi d'Ohm <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">\(R=1\ \Omega\), \(E=5\)&nbsp;V, \(E'=3\)&nbsp;V.</p>
-        <p>1) \(U_{EF}=\dfrac{R}{3R}E'=\dfrac{E'}{3}=1\)&nbsp;V. 2) Masse en F : \(U_{AD}=E-E'=2\)&nbsp;V,
-        \(R_{eq}=R+\dfrac{2R}{5}+R=2{,}4\ \Omega\), \(I_0=\dfrac{U_{AD}}{R_{eq}}=\dfrac{2}{2{,}4}\approx0{,}83\)&nbsp;A.
-        3) \(I_E=\dfrac{U_{FD}}{3R}=1\)&nbsp;A ; loi des nœuds \(I'=I_0-I_E=-0{,}17\)&nbsp;A (donc orienté vers D).
-        4) \(u_{BC}=\dfrac{R'_{eq}}{R+R'_{eq}+R}U_{AD}\approx0{,}33\)&nbsp;V ⇒ \(I_1=I_3=0{,}33\)&nbsp;A, \(I_2=0{,}17\)&nbsp;A.</p>
+
+        <p class="q">1) Tension \(U_{EF}\)</p>
+        <div class="rappel"><span class="lab">Rappel · pont diviseur de tension</span>\[ U = \frac{R}{R_{tot}}\,E \]</div>
+        \[ U_{EF} = \frac{R}{3R}\,E' = \frac{E'}{3} = 1\ \text{V} \]
+
+        <p class="q">2) Courant \(I_0\)</p>
+        <p>On prend F comme référence. La tension disponible vaut \(U_{AD} = E - E' = 2\) V et la résistance du circuit vaut :</p>
+        \[ R_{eq} = R + \frac{2R}{5} + R = 2{,}4\ \Omega \]
+        \[ I_0 = \frac{U_{AD}}{R_{eq}} = \frac{2}{2{,}4} \approx 0{,}83\ \text{A} \]
+
+        <p class="q">3) Courant \(I'\)</p>
+        \[ I_E = \frac{U_{FD}}{3R} = 1\ \text{A} \]
+        <div class="rappel"><span class="lab">Rappel · loi des nœuds</span>\[ \sum I_{entrants} = \sum I_{sortants} \]</div>
+        \[ I' = I_0 - I_E \approx 0{,}83 - 1 = -0{,}17\ \text{A} \]
+        <div class="res">\(I' \approx -0{,}17\) A : le courant circule en réalité dans l'autre sens, vers D.</div>
+
+        <p class="q">4) Courants \(I_1\), \(I_2\), \(I_3\)</p>
+        <p>Diviseur de tension sur la partie BC, puis loi d'Ohm :</p>
+        \[ u_{BC} = \frac{R'_{eq}}{R + R'_{eq} + R}\,U_{AD} \approx 0{,}33\ \text{V} \]
+        <div class="res">\(I_1 = I_3 \approx 0{,}33\) A et \(I_2 \approx 0{,}17\) A.</div>
       </div>
     </div>
 
@@ -419,53 +710,102 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
     <div class="exo-card">
       <div class="exo-head">Exercice 23 — Simplification d'un schéma <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p>1) On transforme le générateur de Norton en Thévenin, on regroupe les résistances, puis on repasse en
-        Norton. Les résistances \(R\ \|\ 2R\) donnent \(R_{th}=\dfrac{2R}{3}\), et \(E_{th}=\dfrac{Ri}{3}\).</p>
-        <p>2) On regroupe \(R_2+R_3\) série, on convertit Thévenin↔Norton, on regroupe les générateurs de
-        courant et les résistances (en conservant A-B) :</p>
-        \[U_{AB}=\frac{R_1(R_2+R_3)}{R_1+(R_2+R_3)}\Big(\eta+\frac{e}{R_2+R_3}\Big),\quad
-        I_1=\frac{U_{AB}}{R_1}=\frac{R_2+R_3}{R_1+R_2+R_3}\Big(\eta+\frac{e}{R_2+R_3}\Big)\]
-        <div class="note" style="margin:.3rem 0">Règle d'or : <b>conserver les nœuds A et B</b> à chaque transformation.</div>
+        <p class="enonce">1) Avec l'équivalence Thévenin/Norton, simplifier au maximum le premier schéma du TD (générateur de Norton \(i\), résistances \(R\) et \(2R\)) et donner \(E_{th}\) et \(R_{th}\). 2) Même travail sur le second schéma (générateurs \(e\) et \(\eta\), résistances \(R_1\), \(R_2\), \(R_3\)) : exprimer \(U_{AB}\), puis le courant \(I_1\) dans \(R_1\).</p>
+        <div class="rappel"><span class="lab">Rappel · équivalence Thévenin ↔ Norton</span>\[ E_{th} = R\,\eta \qquad \eta = \frac{E_{th}}{R} \qquad \text{même résistance } R \]</div>
+        <p class="q">1) Premier schéma</p>
+        <p class="etape">Étape 1 : transformations</p>
+        <p>Norton → Thévenin, regroupement des résistances en série, puis retour en Norton pour regrouper avec la résistance en parallèle.</p>
+        <p class="etape">Étape 2 : résultat</p>
+        <div class="res">\(R_{th} = R \parallel 2R = \dfrac{2R}{3}\) et \(E_{th} = \dfrac{R\,i}{3}\).</div>
+
+        <p class="q">2) Second schéma</p>
+        <p class="etape">Étape 1 : regrouper \(R_2 + R_3\)</p>
+        <p>Le générateur \(e\) en série avec \(R_2 + R_3\) devient un Norton de courant \(\dfrac{e}{R_2 + R_3}\).</p>
+        <p class="etape">Étape 2 : regrouper les Norton</p>
+        <p>Les courants s'ajoutent et les résistances \(R_1\) et \(R_2 + R_3\) sont en parallèle :</p>
+        \[ \eta_{tot} = \eta + \frac{e}{R_2 + R_3} \qquad R_{//} = \frac{R_1\,(R_2 + R_3)}{R_1 + R_2 + R_3} \]
+        <p class="etape">Étape 3 : tension et courant</p>
+        <div class="res">\[ U_{AB} = \frac{R_1\,(R_2 + R_3)}{R_1 + R_2 + R_3}\left(\eta + \frac{e}{R_2 + R_3}\right) \qquad I_1 = \frac{U_{AB}}{R_1} = \frac{R_2 + R_3}{R_1 + R_2 + R_3}\left(\eta + \frac{e}{R_2 + R_3}\right) \]</div>
+        <div class="warnbox"><span class="lab">Piège</span> À chaque transformation, garder les points A et B : sinon on perd la grandeur cherchée.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">Exercice 24 — Équivalence Thévenin/Norton <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p>Par substitutions : générateur de tension → courant, regroupement des résistances parallèles, retour
-        en tension. En sommant les tensions (attention aux sens) :</p>
-        \[U=e'-R_{eq}I=\frac{R_2 e}{R_1+R_2}-\frac{R_1 R_2 i}{R_1+R_2}=\frac{R_2(e-R_1 i)}{R_1+R_2}\]
+        <p class="enonce">Sur le schéma du TD (générateur \(e\) en série avec \(R_1\), résistance \(R_2\), générateur de courant \(i\)), procéder par substitutions : 1) transformer le générateur de tension en générateur de courant ; 2) regrouper les résistances en parallèle ; 3) transformer le générateur de courant obtenu en générateur de tension ; 4) trouver la tension \(U\) aux bornes du circuit.</p>
+        <div class="rappel"><span class="lab">Rappel · équivalence Thévenin ↔ Norton</span>\[ \eta = \frac{e}{R} \qquad e = R\,\eta \]</div>
+        <p class="q">1) Générateur de tension → courant</p>
+        <p>\((e, R_1)\) devient un Norton de courant \(\dfrac{e}{R_1}\) en parallèle avec \(R_1\).</p>
+
+        <p class="q">2) Regroupement</p>
+        \[ R_{eq} = \frac{R_1 R_2}{R_1 + R_2} \]
+
+        <p class="q">3) Retour en générateur de tension</p>
+        \[ e' = R_{eq}\,\frac{e}{R_1} = \frac{R_2\,e}{R_1 + R_2} \]
+
+        <p class="q">4) Tension \(U\)</p>
+        <p>Le courant \(i\) traverse \(R_{eq}\) en sens opposé à \(e'\) :</p>
+        \[ U = e' - R_{eq}\,i = \frac{R_2\,e}{R_1 + R_2} - \frac{R_1R_2\,i}{R_1 + R_2} \]
+        <div class="res">\(U = \dfrac{R_2\,(e - R_1 i)}{R_1 + R_2}\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">Exercice 25 — Norton et diviseur de courant <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p>Norton → Thévenin, regroupement (en gardant B). Diviseur de tension :
-        \(U_{BC}=\dfrac{R_1}{R_1+R_2+R_3}R_3\eta=\dfrac{R_1 R_3\eta}{R_1+R_2+R_3}\). Puis
-        \(I_3=\dfrac{U_{BC}}{R_3}=\dfrac{R_1\eta}{R_1+R_2+R_3}\).</p>
-        <div class="res">Directement : au point A, diviseur de courant ⇒ \(I_3=\dfrac{R_1\eta}{R_1+R_2+R_3}\) (même résultat sans transformation).</div>
+        <p class="enonce">Dans le circuit du TD, un générateur de Norton (\(\eta\), \(R_1\)) alimente \(R_2\) en série avec \(R_3\) (entre B et C). 1) Transformer le Norton en Thévenin. 2) Regrouper les résistances. 3) Exprimer \(U_{BC}\) le plus simplement possible. 4) En déduire le courant dans \(R_3\). 5) Montrer qu'on pouvait l'obtenir sans transformer le circuit.</p>
+        <p class="q">1) Norton → Thévenin</p>
+        \[ E = R_1\,\eta \qquad \text{en série avec } R_1 \]
+
+        <p class="q">2) Regroupement</p>
+        <p>\(R_1\), \(R_2\) et \(R_3\) sont en série : \(R_{tot} = R_1 + R_2 + R_3\).</p>
+
+        <p class="q">3) Tension \(U_{BC}\)</p>
+        <div class="rappel"><span class="lab">Rappel · pont diviseur de tension</span>\[ U_{BC} = \frac{R_3}{R_{tot}}\,E \]</div>
+        <div class="res">\(U_{BC} = \dfrac{R_1 R_3\,\eta}{R_1 + R_2 + R_3}\).</div>
+
+        <p class="q">4) Courant dans \(R_3\)</p>
+        <div class="res">\(I_3 = \dfrac{U_{BC}}{R_3} = \dfrac{R_1\,\eta}{R_1 + R_2 + R_3}\).</div>
+
+        <p class="q">5) Sans transformation</p>
+        <div class="rappel"><span class="lab">Rappel · pont diviseur de courant</span>\[ I_k = \frac{R_{autre}}{R_{autre} + R_k}\,I_{total} \]</div>
+        <p>Le courant \(\eta\) se partage entre \(R_1\) et la branche \(R_2 + R_3\) :</p>
+        <div class="res">\(I_3 = \dfrac{R_1}{R_1 + (R_2 + R_3)}\,\eta\) : même résultat, en une ligne.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">Exercice 26 — Générateurs de tension en parallèle <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p>On transforme les 3 Thévenin en Norton : leurs courants s'ajoutent
-        \(\eta=0{,}13+0{,}50+0{,}50=1{,}13\)&nbsp;A, et les 3 résistances en parallèle donnent
-        \(R_{eq}=\dfrac{1}{\frac{1}{15}+\frac{1}{10}+\frac{1}{30}}=5\ \Omega\). Générateur de Thévenin équivalent :
-        \(R=5\ \Omega\), \(e=5\times1{,}13=5{,}7\)&nbsp;V.</p>
+        <p class="enonce">Trois générateurs de Thévenin sont branchés en parallèle (TD : résistances 15 Ω, 10 Ω et 30 Ω, courants de court-circuit 0,13 A, 0,50 A et 0,50 A). 1) Les transformer en générateurs de Norton. 2) En déduire qu'ils équivalent à un unique Norton. 3) Le remplacer par un générateur de Thévenin.</p>
+        <div class="rappel"><span class="lab">Rappel · Thévenin → Norton</span>\[ \eta = \frac{e}{R} \qquad \text{même } R,\ \text{placée en parallèle} \]</div>
+        <p class="q">1–2) Norton équivalent</p>
+        <p class="etape">Étape 1 : les courants s'ajoutent</p>
+        \[ \eta = 0{,}13 + 0{,}50 + 0{,}50 = 1{,}13\ \text{A} \]
+        <p class="etape">Étape 2 : les résistances sont en parallèle</p>
+        \[ \frac{1}{R_{eq}} = \frac{1}{15} + \frac{1}{10} + \frac{1}{30} = \frac{2 + 3 + 1}{30} = \frac15 \iff R_{eq} = 5\ \Omega \]
+        <div class="res">Norton : \(\eta = 1{,}13\) A et \(R = 5\ \Omega\).</div>
+
+        <p class="q">3) Thévenin équivalent</p>
+        \[ e = R\,\eta = 5 \times 1{,}13 \approx 5{,}7\ \text{V} \]
+        <div class="res">Thévenin : \(e \approx 5{,}7\) V et \(R = 5\ \Omega\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">Exercice 27 — Courant résultant <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p>Les courants ne s'ajoutent <b>pas</b> directement (générateurs de courant en parallèle avec des
-        résistances). On transforme en Thévenin, on regroupe les tensions et résistances en série, puis on repasse
-        en Norton :</p>
-        \[i=\eta'=\frac{e_1+e_2}{R_1+R_2}=\frac{\eta_1 R_1+\eta_2 R_2}{R_1+R_2}\]
-        <div class="res">Les intensités des générateurs initiaux ne se somment pas directement : la résistance de chaque branche « détourne » une partie du courant.</div>
+        <p class="enonce">Exprimer le courant \(I\) en fonction des caractéristiques des générateurs de courant du circuit du TD (deux Norton \((\eta_1, R_1)\) et \((\eta_2, R_2)\) placés en série). Aide : s'inspirer de l'exercice précédent.</p>
+        <p class="q">1) Courant résultant</p>
+        <p class="etape">Étape 1 : passer en Thévenin</p>
+        <div class="rappel"><span class="lab">Rappel · Norton → Thévenin</span>\[ e = R\,\eta \qquad \text{même } R,\ \text{placée en série} \]</div>
+        \[ e_1 = R_1\eta_1 \qquad e_2 = R_2\eta_2 \]
+        <p class="etape">Étape 2 : regrouper en série</p>
+        <p>Les tensions s'ajoutent, les résistances aussi : \(e_1 + e_2\) et \(R_1 + R_2\).</p>
+        <p class="etape">Étape 3 : repasser en Norton</p>
+        <div class="res">\[ I = \frac{e_1 + e_2}{R_1 + R_2} = \frac{\eta_1 R_1 + \eta_2 R_2}{R_1 + R_2} \]</div>
+        <div class="warnbox"><span class="lab">Piège</span> Les courants des générateurs ne s'additionnent pas ici : chaque résistance en parallèle détourne une partie de son courant.</div>
       </div>
     </div>
 
@@ -474,21 +814,37 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
     <div class="exo-card">
       <div class="exo-head">Exercice 28 — Circuit en grillage <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p>Par symétrie, les deux points centraux P et Q sont au <b>même potentiel</b> : on peut les fusionner sans
-        rien changer. On associe alors les résistances (deux groupes de \(3R\) en parallèle) :</p>
-        \[R_{AB}=\frac{(3R)(3R)}{3R+3R}=\frac{3}{2}R\]
+        <p class="enonce">Par un argument de symétrie, justifier que deux points du circuit en grillage du TD sont au même potentiel. En déduire que le circuit peut être simplifié, puis calculer \(R_{AB}\) (toutes les résistances valent \(R\)).</p>
+        <p class="q">1) Symétrie</p>
+        <p>Le circuit est symétrique par rapport à l'axe AB : les deux points centraux P et Q jouent exactement le même rôle. Ils sont donc au même potentiel.</p>
+        <p class="q">2) Simplification</p>
+        <p>Deux points au même potentiel peuvent être reliés par un fil sans rien changer : on les fusionne.</p>
+        <p class="q">3) Résistance équivalente</p>
+        <p>Il reste deux groupes de résistance \(3R\) en parallèle :</p>
+        \[ R_{AB} = \frac{3R \times 3R}{3R + 3R} = \frac{3R}{2} \]
+        <div class="res">\(R_{AB} = \dfrac32\,R\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">Exercice 29 — Utilisation de la symétrie <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p>1–3) Après regroupements (\(2R_1\ \|\ 2R_1=R_1\)…), le circuit est symétrique : intensités identiques
-        dans les branches symétriques, donc \(V_C=V_D\). 4) Comme \(V_C=V_D\), <b>aucun courant dans \(R_3\)</b> :
-        on la supprime.</p>
-        \[R_{AB}=\frac{(R_1+R_2)(R_1+R_2)}{(R_1+R_2)+(R_1+R_2)}=\frac{R_1+R_2}{2}\]
-        <p>5) Le courant dans une branche \(2R_1\) vaut \(\dfrac{I}{4}\).</p>
-        <div class="note" style="margin:.3rem 0">Sans symétrie (ex. \(R_2\neq R_4\)), les résistances ne seraient ni série ni parallèle : seul un calcul mailles/nœuds fonctionnerait.</div>
+        <p class="enonce">On cherche la résistance équivalente \(R_{AB}\) du circuit du TD (branches \(2R_1\), \(R_2\), et une résistance \(R_3\) entre C et D). 1) Montrer que le circuit est symétrique. 2) Que dire des intensités dans les deux résistances \(R_1\) ? 3) Que dire de \(V_C\) et \(V_D\) ? 4) En déduire une simplification et exprimer \(R_{AB}\). 5) Si le courant entrant en A est \(I\), quel courant passe dans une branche \(2R_1\) ?</p>
+        <p class="q">1) Symétrie</p>
+        <p>Après regroupement (\(2R_1 \parallel 2R_1 = R_1\)), les deux moitiés du circuit, de part et d'autre de \(R_3\), sont identiques.</p>
+        <p class="q">2) Intensités dans les \(R_1\)</p>
+        <div class="res">Elles sont égales, par symétrie.</div>
+        <p class="q">3) Potentiels de C et D</p>
+        <p>Même courant dans des résistances égales, depuis le même point A : même chute de tension.</p>
+        <div class="res">\(V_C = V_D\).</div>
+        <p class="q">4) Simplification</p>
+        <p>\(V_C = V_D\) : aucun courant ne traverse \(R_3\), on peut la retirer. Il reste deux branches \(R_1 + R_2\) en parallèle :</p>
+        \[ R_{AB} = \frac{(R_1 + R_2)^2}{2\,(R_1 + R_2)} \]
+        <div class="res">\(R_{AB} = \dfrac{R_1 + R_2}{2}\).</div>
+        <p class="q">5) Courant dans une branche \(2R_1\)</p>
+        <p>\(I\) se partage en deux branches égales (\(I/2\)), puis chaque \(R_1\) est fait de deux \(2R_1\) en parallèle (\(I/4\)).</p>
+        <div class="res">\(I/4\).</div>
+        <p>Remarque : sans symétrie, il faudrait passer par les lois des mailles et des nœuds.</p>
       </div>
     </div>
 
@@ -497,32 +853,43 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
     <div class="exo-card">
       <div class="exo-head">Exercice 30 — Méthode de substitution <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p>Thévenin → Norton (\(I'_1=\dfrac{e_1}{R_1+R_3}\), \(I'_2=\dfrac{e_2}{R_2}\)), regroupement des générateurs
-        de courant (\(I'_1+I'_2\)) et résistances parallèles
-        (\(R_{eq}=\dfrac{R_1R_2+R_2R_3}{R_1+R_2+R_3}\)), retour en Thévenin (\(E_{th}=R_{eq}(I'_1+I'_2)\)), puis
-        diviseur de tension \(U_{AB}=\dfrac{R_4}{R_{eq}+R_4}E_{th}\) :</p>
-        \[U_{AB}=\frac{R_4\big(e_1 R_2+e_2(R_1+R_3)\big)}{R_1R_2+R_2R_3+R_1R_4+R_2R_4+R_3R_4},\quad
-        I_4=\frac{U_{AB}}{R_4}\]
+        <p class="enonce">Circuit commun aux exercices 30 à 32 (TD) : deux générateurs de Thévenin \((e_1, R_1 + R_3)\) et \((e_2, R_2)\) alimentent \(R_4\) entre A et B. Méthode de substitution : 1) regrouper les résistances en série ; 2) transformer chaque Thévenin en Norton ; 3) remplacer les deux Norton par un seul ; 4) faire apparaître un Thévenin ; 5) trouver \(U_{AB}\) et \(I_4\) par un diviseur de tension.</p>
+        <div class="rappel"><span class="lab">Rappel · Thévenin ↔ Norton</span>\[ \eta = \frac{e}{R} \qquad e = R\,\eta \]</div>
+        <p class="q">1–2) Regroupement et passage en Norton</p>
+        \[ I'_1 = \frac{e_1}{R_1 + R_3} \qquad I'_2 = \frac{e_2}{R_2} \]
+        <p class="q">3) Un seul Norton</p>
+        \[ \eta = I'_1 + I'_2 \qquad R_{eq} = \frac{(R_1 + R_3)\,R_2}{R_1 + R_2 + R_3} \]
+        <p class="q">4) Retour en Thévenin</p>
+        \[ E_{th} = R_{eq}\,(I'_1 + I'_2) \]
+        <p class="q">5) Diviseur de tension sur \(R_4\)</p>
+        <div class="rappel"><span class="lab">Rappel · pont diviseur de tension</span>\[ U_{AB} = \frac{R_4}{R_{eq} + R_4}\,E_{th} \]</div>
+        <div class="res">\[ U_{AB} = \frac{R_4\left(e_1 R_2 + e_2\,(R_1 + R_3)\right)}{R_1R_2 + R_2R_3 + R_1R_4 + R_2R_4 + R_3R_4} \qquad I_4 = \frac{U_{AB}}{R_4} \]</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">Exercice 31 — Loi des nœuds en termes de potentiel <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p>On met B à la masse (\(V_B=0\), donc \(V_A=U_{AB}\)) et on écrit que la somme des courants arrivant en A
-        est nulle :</p>
-        \[\frac{e_1-V_A}{R_1+R_3}-\frac{V_A}{R_4}+\frac{e_2-V_A}{R_2}=0\]
-        <p>En isolant \(V_A\), on retrouve exactement le même résultat qu'à l'exercice 30 :</p>
-        \[V_A=\frac{R_4\big(e_1 R_2+e_2(R_1+R_3)\big)}{R_2R_4+R_1R_2+R_2R_3+R_1R_4+R_3R_4}\]
+        <p class="enonce">Même circuit qu'à l'exercice 30. On met B à la masse (\(V_B = 0\), donc \(U_{AB} = V_A\)) et on écrit la loi des nœuds en A en exprimant chaque courant à l'aide des potentiels.</p>
+        <p class="q">1) Loi des nœuds en potentiels</p>
+        <div class="rappel"><span class="lab">Rappel · courant dans une branche (générateur \(e_k\) et résistance \(R_k\))</span>\[ I_k = \frac{e_k - V_A}{R_k} \]</div>
+        <p>La somme des courants qui arrivent en A est nulle :</p>
+        \[ \frac{e_1 - V_A}{R_1 + R_3} + \frac{e_2 - V_A}{R_2} - \frac{V_A}{R_4} = 0 \]
+        <p class="q">2) Potentiel de A</p>
+        <p>On multiplie par \((R_1 + R_3)R_2R_4\) et on isole \(V_A\) :</p>
+        <div class="res">\[ V_A = U_{AB} = \frac{R_4\left(e_1 R_2 + e_2\,(R_1 + R_3)\right)}{R_1R_2 + R_2R_3 + R_1R_4 + R_2R_4 + R_3R_4} \]Même résultat qu'à l'exercice 30.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">Exercice 32 — Théorème de Millman <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p>Application directe de la formule générale (B à la masse) :</p>
-        \[V_A=\frac{\dfrac{e_1}{R_1+R_3}+\dfrac{0}{R_4}+\dfrac{e_2}{R_2}}{\dfrac{1}{R_1+R_3}+\dfrac{1}{R_4}+\dfrac{1}{R_2}}\]
-        <div class="res">Après réduction au même dénominateur, on retrouve le résultat des exercices 30 et 31 : Millman est le moyen le plus <b>rapide</b> d'obtenir un potentiel de nœud.</div>
+        <p class="enonce">Même circuit qu'à l'exercice 30. Exprimer \(U_{AB}\) à partir de la formule de Millman \(V_A = \dfrac{\sum e_k/R_k}{\sum 1/R_k}\) (B à la masse).</p>
+        <p class="q">1) Application de Millman</p>
+        <div class="rappel"><span class="lab">Rappel · théorème de Millman</span>\[ V_A = \frac{\displaystyle\sum_k \frac{e_k}{R_k}}{\displaystyle\sum_k \frac{1}{R_k}} \]avec \(e_k\) le potentiel (ou la f.é.m.) au bout de chaque branche.</div>
+        <p>Trois branches arrivent en A : \((e_1, R_1 + R_3)\), \((e_2, R_2)\) et \((0, R_4)\).</p>
+        \[ V_A = \frac{\dfrac{e_1}{R_1 + R_3} + \dfrac{e_2}{R_2} + \dfrac{0}{R_4}}{\dfrac{1}{R_1 + R_3} + \dfrac{1}{R_2} + \dfrac{1}{R_4}} \]
+        <div class="res">En réduisant au même dénominateur, on retrouve le résultat des exercices 30 et 31. Millman est la méthode la plus rapide pour un potentiel de nœud.</div>
       </div>
     </div>
 
