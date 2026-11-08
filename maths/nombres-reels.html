@@ -145,10 +145,18 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice A — Encadrement d'un quotient</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Soit \(x\in[2,3]\). Encadrer le plus précisément possible \(\dfrac{2x-1}{x+1}\).</div>
-        <p>La fonction \(g(x)=\dfrac{2x-1}{x+1}\) vérifie \(g'(x)=\dfrac{2(x+1)-(2x-1)}{(x+1)^2}=\dfrac{3}{(x+1)^2}>0\),
-        elle est donc <b>strictement croissante</b>. Sur \([2,3]\), les bornes sont atteintes aux extrémités :</p>
-        \[ g(2)=\frac{3}{3}=1,\qquad g(3)=\frac{5}{4}. \]
+
+        <p class="q">1) Encadrement optimal</p>
+        <p>On étudie les variations de \(g(x)=\dfrac{2x-1}{x+1}\) sur \([2,3]\).</p>
+        <div class="rappel"><span class="lab">Rappel · dérivée d'un quotient</span>\[ \left(\frac uv\right)'=\frac{u'v-uv'}{v^2} \]</div>
+        <p class="etape">Étape 1 : dérivée</p>
+        \[ g'(x)=\frac{2(x+1)-(2x-1)}{(x+1)^2}=\frac{3}{(x+1)^2}>0 \]
+        <p>\(g\) est strictement croissante sur \([2,3]\).</p>
+        <p class="etape">Étape 2 : valeurs aux bornes</p>
+        <p>Une fonction croissante atteint son minimum à gauche et son maximum à droite :</p>
+        \[ g(2)=\frac{3}{3}=1 \qquad g(3)=\frac{5}{4} \]
         <div class="res">\(1\leqslant\dfrac{2x-1}{x+1}\leqslant\dfrac54\), encadrement optimal (bornes atteintes).</div>
+        <div class="warnbox"><span class="lab">Piège</span> Encadrer séparément le numérateur (\([3,5]\)) et le dénominateur (\([3,4]\)) donne \(\left[\tfrac34,\tfrac53\right]\) : c'est juste, mais pas optimal, car \(x\) apparaît deux fois.</div>
       </div>
     </div>
 
@@ -156,14 +164,24 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice B — Équation avec deux valeurs absolues</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Résoudre dans \(\mathbb R\) : \(|x-1|+|x-3|=4\).</div>
-        <p>Points de changement : \(x=1\) et \(x=3\). On procède par disjonction de cas.</p>
-        <p class="q">Cas \(x<1\) : \(|x-1|=1-x\), \(|x-3|=3-x\).</p>
-        <p>\((1-x)+(3-x)=4-2x=4\Rightarrow x=0\). Comme \(0<1\), <b>valide</b>.</p>
-        <p class="q">Cas \(1\leqslant x\leqslant 3\) : \(|x-1|=x-1\), \(|x-3|=3-x\).</p>
-        <p>\((x-1)+(3-x)=2=4\) : <b>faux</b>, aucune solution (la somme vaut constamment \(2\) sur \([1,3]\)).</p>
-        <p class="q">Cas \(x>3\) : \(|x-1|=x-1\), \(|x-3|=x-3\).</p>
-        <p>\((x-1)+(x-3)=2x-4=4\Rightarrow x=4\). Comme \(4>3\), <b>valide</b>.</p>
-        <div class="res">\(S=\{0,\ 4\}\) (les deux points à distance-somme \(4\) des bornes \(1\) et \(3\)).</div>
+
+        <p class="q">1) Résolution</p>
+        <p>On raisonne par disjonction de cas, selon la position de \(x\) par rapport à 1 et 3.</p>
+        <div class="rappel"><span class="lab">Rappel · valeur absolue</span>\[ |a|=a \text{ si } a\geqslant 0 \qquad |a|=-a \text{ si } a&lt;0 \]</div>
+        <p class="etape">Étape 1 : cas \(x&lt;1\)</p>
+        <p>\(|x-1|=1-x\) et \(|x-3|=3-x\).</p>
+        \[ (1-x)+(3-x)=4 \iff 4-2x=4 \iff x=0 \]
+        <p>\(0&lt;1\) : solution valable.</p>
+        <p class="etape">Étape 2 : cas \(1\leqslant x\leqslant 3\)</p>
+        <p>\(|x-1|=x-1\) et \(|x-3|=3-x\).</p>
+        \[ (x-1)+(3-x)=2 \]
+        <p>La somme vaut toujours 2, jamais 4 : pas de solution.</p>
+        <p class="etape">Étape 3 : cas \(x>3\)</p>
+        <p>\(|x-1|=x-1\) et \(|x-3|=x-3\).</p>
+        \[ 2x-4=4 \iff x=4 \]
+        <p>\(4>3\) : solution valable.</p>
+        <div class="res">\(S=\{0,\ 4\}\)</div>
+        <p>Lecture géométrique : la somme des distances de \(x\) à 1 et à 3 vaut 4.</p>
       </div>
     </div>
 
@@ -171,12 +189,20 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice C — Max, min, sup, inf d'une suite d'ensemble</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">Soit \(A=\left\{\dfrac{n}{n+1}\ \middle|\ n\in\mathbb N\right\}\). Déterminer \(\min,\max,\inf,\sup\).</div>
-        <p>Posons \(u_n=\dfrac{n}{n+1}=1-\dfrac{1}{n+1}\). Pour \(n\in\mathbb N\), \(u_n\) est <b>croissante</b>
-        (\(\tfrac1{n+1}\) décroît) et \(u_n<1\).</p>
-        <p><b>Minimum</b> : \(u_0=0\), atteint, et c'est le plus petit terme. Donc \(\min A=\inf A=0\).</p>
-        <p><b>Supremum</b> : \(u_n<1\) donc \(1\) majore \(A\). Est-ce le plus petit majorant ? Pour tout \(\varepsilon>0\),
-        \(u_n>1-\varepsilon\iff \tfrac1{n+1}<\varepsilon\), vrai pour \(n\) assez grand : aucun majorant \(<1\).
-        Donc \(\sup A=1\), <b>non atteint</b> (pas de maximum).</p>
+
+        <p class="q">1) Bornes de \(A\)</p>
+        <p class="etape">Étape 1 : réécrire le terme général</p>
+        \[ u_n=\frac{n}{n+1}=1-\frac{1}{n+1} \]
+        <p>\(\dfrac{1}{n+1}\) décroît, donc \(u_n\) croît ; et \(u_n&lt;1\) pour tout \(n\).</p>
+        <p class="etape">Étape 2 : minimum</p>
+        <p>Le plus petit terme est le premier : \(u_0=0\). Il appartient à \(A\).</p>
+        <p class="etape">Étape 3 : borne supérieure</p>
+        <div class="rappel"><span class="lab">Rappel · caractérisation de la borne supérieure</span>\(M=\sup A\) si et seulement si \(M\) majore \(A\) et, pour tout \(\varepsilon>0\), il existe \(a\in A\) avec \(a>M-\varepsilon\).</div>
+        <ul>
+          <li>1 majore \(A\), car \(u_n&lt;1\).</li>
+          <li>Soit \(\varepsilon>0\) : \(u_n>1-\varepsilon\iff\dfrac{1}{n+1}&lt;\varepsilon\), ce qui est vrai pour \(n\) assez grand.</li>
+        </ul>
+        <p>Donc \(\sup A=1\). Comme \(u_n&lt;1\) toujours, 1 n'est pas atteint.</p>
         <div class="res">\(\min A=\inf A=0\) ; \(\sup A=1\) ; \(\max A\) n'existe pas.</div>
       </div>
     </div>
@@ -197,11 +223,40 @@ window.MathJax = {
           <img src="td-img/td4-ex1.png" alt="Énoncé TD4 Exercice 1" loading="lazy" style="max-width:100%;height:auto">
           <figcaption>Énoncé (TD4) — Exercice 1.</figcaption>
         </figure>
-        <p class="q">(a) \(x+y\)</p><p>\([-1,3]+[-5,-4]\) : min \(-1-5=-6\), max \(3-4=-1\).</p><p class="res">\(-6\leqslant x+y\leqslant -1\)</p>
-        <p class="q">(b) \(x-y\)</p><p>\(-y\in[4,5]\) : min \(-1+4=3\), max \(3+5=8\).</p><p class="res">\(3\leqslant x-y\leqslant 8\)</p>
-        <p class="q">(c) \(xy\)</p><p>\(y<0\) : on teste les 4 coins \((\mp1)(\mp5),\dots\) : \((-1)(-5)=5\), \((3)(-5)=-15\).</p><p class="res">\(-15\leqslant xy\leqslant 5\)</p>
-        <p class="q">(d) \(\dfrac xy\)</p><p>\(\tfrac1y\in\left[-\tfrac14,-\tfrac15\right]\). Coins : \((3)\!\cdot\!(-\tfrac14)=-\tfrac34\), \((-1)\!\cdot\!(-\tfrac14)=\tfrac14\).</p><p class="res">\(-\tfrac34\leqslant\dfrac xy\leqslant \tfrac14\)</p>
-        <p class="q">(e) \(\left(\dfrac xy\right)^2\)</p><p>\(\tfrac xy\in\left[-\tfrac34,\tfrac14\right]\) contient \(0\) : le carré va de \(0\) à \(\left(\tfrac34\right)^2\).</p><p class="res">\(0\leqslant\left(\dfrac xy\right)^2\leqslant \dfrac9{16}\)</p>
+
+        <p class="q">a) \(x+y\)</p>
+        <div class="rappel"><span class="lab">Rappel · opérations sur les encadrements</span>On peut <b>ajouter</b> des encadrements membre à membre. On ne peut <b>pas les soustraire</b> : on ajoute l'opposé. Pour un produit, on teste les quatre produits des bornes.</div>
+        <p class="etape">Étape 1 : additionner</p>
+        \[ -1+(-5)\leqslant x+y\leqslant 3+(-4) \]
+        <div class="res">\(-6\leqslant x+y\leqslant -1\)</div>
+
+        <p class="q">b) \(x-y\)</p>
+        <p class="etape">Étape 1 : encadrer \(-y\)</p>
+        <p>Multiplier par \(-1\) renverse : \(4\leqslant -y\leqslant 5\).</p>
+        <p class="etape">Étape 2 : additionner</p>
+        \[ -1+4\leqslant x-y\leqslant 3+5 \]
+        <div class="res">\(3\leqslant x-y\leqslant 8\)</div>
+
+        <p class="q">c) \(xy\)</p>
+        <p class="etape">Étape 1 : les quatre produits des bornes</p>
+        \[ (-1)(-5)=5,\quad (-1)(-4)=4,\quad 3\times(-5)=-15,\quad 3\times(-4)=-12 \]
+        <p class="etape">Étape 2 : garder le plus petit et le plus grand</p>
+        <div class="res">\(-15\leqslant xy\leqslant 5\)</div>
+
+        <p class="q">d) \(\dfrac xy\)</p>
+        <p class="etape">Étape 1 : encadrer \(\dfrac1y\)</p>
+        <p>La fonction inverse est décroissante sur \(]-\infty,0[\) : \(-\dfrac14\leqslant\dfrac1y\leqslant-\dfrac15\).</p>
+        <p class="etape">Étape 2 : les quatre produits \(x\times\dfrac1y\)</p>
+        \[ (-1)\left(-\tfrac14\right)=\tfrac14,\quad (-1)\left(-\tfrac15\right)=\tfrac15,\quad 3\left(-\tfrac14\right)=-\tfrac34,\quad 3\left(-\tfrac15\right)=-\tfrac35 \]
+        <div class="res">\(-\dfrac34\leqslant\dfrac xy\leqslant \dfrac14\)</div>
+
+        <p class="q">e) \(\left(\dfrac xy\right)^2\)</p>
+        <p class="etape">Étape 1 : l'intervalle contient 0</p>
+        <p>\(\dfrac xy\in\left[-\tfrac34,\tfrac14\right]\) contient 0 : le carré descend jusqu'à 0.</p>
+        <p class="etape">Étape 2 : le maximum</p>
+        <p>Le carré est maximal pour la valeur de plus grande valeur absolue, \(-\tfrac34\).</p>
+        <div class="res">\(0\leqslant\left(\dfrac xy\right)^2\leqslant \dfrac9{16}\)</div>
+        <div class="warnbox"><span class="lab">Piège</span> Élever au carré les bornes donne \(\tfrac{9}{16}\) et \(\tfrac{1}{16}\) : ce n'est pas l'encadrement, car le carré n'est pas monotone sur un intervalle qui contient 0.</div>
       </div>
     </div>
 
@@ -212,11 +267,38 @@ window.MathJax = {
           <img src="td-img/td4-ex2.png" alt="Énoncé TD4 Exercice 2" loading="lazy" style="max-width:100%;height:auto">
           <figcaption>Énoncé (TD4) — Exercice 2.</figcaption>
         </figure>
-        <p class="q">(a) \(2x-3y\)</p><p>\(2x\in[2,8]\), \(-3y\in[-15,-6]\).</p><p class="res">\(-13\leqslant 2x-3y\leqslant 2\)</p>
-        <p class="q">(b) \(\dfrac1y+3\)</p><p>\(\tfrac1y\in\left[\tfrac15,\tfrac12\right]\).</p><p class="res">\(\dfrac{16}{5}\leqslant\dfrac1y+3\leqslant \dfrac72\)</p>
-        <p class="q">(c) \((x-5)(2-y)\)</p><p>\(x-5\in[-4,-1]\), \(2-y\in[-3,0]\) (deux facteurs \(\leqslant0\) → produit \(\geqslant0\)) ; max \((-4)(-3)=12\).</p><p class="res">\(0\leqslant (x-5)(2-y)\leqslant 12\)</p>
-        <p class="q">(d) \(\dfrac{x+2}{y-1}\)</p><p>\(x+2\in[3,6]\), \(\tfrac1{y-1}\in\left[\tfrac14,1\right]\).</p><p class="res">\(\dfrac34\leqslant\dfrac{x+2}{y-1}\leqslant 6\)</p>
-        <p class="q">(e) \(x^2-4x+4=(x-2)^2\)</p><p>\(x-2\in[-1,2]\), le carré va de \(0\) (en \(x=2\)) à \(4\) (en \(x=4\)).</p><p class="res">\(0\leqslant x^2-4x+4\leqslant 4\)</p>
+
+        <p class="q">a) \(2x-3y\)</p>
+        <p class="etape">Étape 1 : encadrer chaque terme</p>
+        \[ 2\leqslant 2x\leqslant 8 \qquad -15\leqslant -3y\leqslant -6 \]
+        <p class="etape">Étape 2 : additionner</p>
+        <div class="res">\(-13\leqslant 2x-3y\leqslant 2\)</div>
+
+        <p class="q">b) \(\dfrac1y+3\)</p>
+        <p class="etape">Étape 1 : encadrer \(\dfrac1y\)</p>
+        <p>L'inverse est décroissant sur \(]0,+\infty[\) : \(\dfrac15\leqslant\dfrac1y\leqslant\dfrac12\).</p>
+        <p class="etape">Étape 2 : ajouter 3</p>
+        <div class="res">\(\dfrac{16}{5}\leqslant\dfrac1y+3\leqslant \dfrac72\)</div>
+
+        <p class="q">c) \((x-5)(2-y)\)</p>
+        <p class="etape">Étape 1 : encadrer chaque facteur</p>
+        \[ -4\leqslant x-5\leqslant -1 \qquad -3\leqslant 2-y\leqslant 0 \]
+        <p class="etape">Étape 2 : produit de deux négatifs</p>
+        <p>Les deux facteurs sont négatifs : le produit est positif. Il vaut 0 pour \(y=2\), et au plus \((-4)(-3)=12\).</p>
+        <div class="res">\(0\leqslant (x-5)(2-y)\leqslant 12\)</div>
+
+        <p class="q">d) \(\dfrac{x+2}{y-1}\)</p>
+        <p class="etape">Étape 1 : encadrer chaque morceau</p>
+        \[ 3\leqslant x+2\leqslant 6 \qquad \frac14\leqslant\frac{1}{y-1}\leqslant 1 \]
+        <p class="etape">Étape 2 : multiplier (tout est positif)</p>
+        <div class="res">\(\dfrac34\leqslant\dfrac{x+2}{y-1}\leqslant 6\)</div>
+
+        <p class="q">e) \(x^2-4x+4\)</p>
+        <p class="etape">Étape 1 : reconnaître un carré</p>
+        \[ x^2-4x+4=(x-2)^2 \qquad -1\leqslant x-2\leqslant 2 \]
+        <p class="etape">Étape 2 : carré d'un intervalle contenant 0</p>
+        <p>Le minimum est 0 (en \(x=2\)), le maximum \(2^2=4\) (en \(x=4\)).</p>
+        <div class="res">\(0\leqslant x^2-4x+4\leqslant 4\)</div>
       </div>
     </div>
 
@@ -227,15 +309,25 @@ window.MathJax = {
           <img src="td-img/td4-ex3.png" alt="Énoncé TD4 Exercice 3" loading="lazy" style="max-width:100%;height:auto">
           <figcaption>Énoncé (TD4) — Exercice 3.</figcaption>
         </figure>
-        <p class="q">(a) \(1<a\leqslant7,\ 2\leqslant b\leqslant5\)</p>
-        <p>\(a,b>0\), \(\tfrac1b\in\left[\tfrac15,\tfrac12\right]\). Comme \(a>1\) (strict), \(\tfrac ab>\tfrac15\) (non atteint) ; max \(\tfrac72\) (en \(a=7,b=2\)).</p>
-        <p class="res">\(\dfrac15<\dfrac ab\leqslant \dfrac72\)</p>
-        <p class="q">(b) \(-1\leqslant a\leqslant7,\ -2\leqslant b\leqslant5,\ b\neq0\)</p>
-        <p>\(b\) <b>change de signe</b> et peut être arbitrairement proche de \(0\) : \(\tfrac ab\) n'est ni majoré ni minoré.</p>
-        <p class="res">Encadrement <b>impossible</b> (\(\dfrac ab\) non borné).</p>
-        <p class="q">(c) \(1<a\leqslant7,\ 0<b\leqslant5\)</p>
-        <p>\(b\to0^+\) rend \(\tfrac ab\to+\infty\) : pas de majorant. Minorant : \(\tfrac ab>\tfrac15\) (comme en (a)).</p>
-        <p class="res">Minoré seulement : \(\dfrac ab>\dfrac15\) (non majoré).</p>
+
+        <p class="q">a) \(1&lt;a\leqslant7,\ 2\leqslant b\leqslant5\)</p>
+        <p class="etape">Étape 1 : encadrer \(\dfrac1b\)</p>
+        <p>\(b>0\) : \(\dfrac15\leqslant\dfrac1b\leqslant\dfrac12\).</p>
+        <p class="etape">Étape 2 : multiplier (tout est positif)</p>
+        <p>Le minimum \(\tfrac15\) demanderait \(a=1\), exclu : l'inégalité de gauche est stricte. Le maximum \(\tfrac72\) est atteint pour \(a=7\), \(b=2\).</p>
+        <div class="res">\(\dfrac15&lt;\dfrac ab\leqslant \dfrac72\)</div>
+
+        <p class="q">b) \(-1\leqslant a\leqslant7,\ -2\leqslant b\leqslant5,\ b\neq0\)</p>
+        <p class="etape">Étape 1 : \(b\) peut être proche de 0</p>
+        <p>Avec \(a=7\) et \(b=\tfrac1n\), \(\dfrac ab=7n\) devient aussi grand qu'on veut ; avec \(b=-\tfrac1n\), \(-7n\) aussi petit qu'on veut.</p>
+        <div class="res">Encadrement <b>impossible</b> : \(\dfrac ab\) n'est ni majoré ni minoré.</div>
+
+        <p class="q">c) \(1&lt;a\leqslant7,\ 0&lt;b\leqslant5\)</p>
+        <p class="etape">Étape 1 : pas de majorant</p>
+        <p>Quand \(b\to 0^+\), \(\dfrac ab\to+\infty\).</p>
+        <p class="etape">Étape 2 : un minorant</p>
+        <p>\(a>1\) et \(\dfrac1b\geqslant\dfrac15\), donc \(\dfrac ab>\dfrac15\).</p>
+        <div class="res">Minoré seulement : \(\dfrac ab>\dfrac15\), non majoré.</div>
       </div>
     </div>
 
@@ -248,16 +340,54 @@ window.MathJax = {
           <img src="td-img/td4-ex4.png" alt="Énoncé TD4 Exercice 4" loading="lazy" style="max-width:100%;height:auto">
           <figcaption>Énoncé (TD4) — Exercice 4.</figcaption>
         </figure>
-        <p class="q">(a) \(\sqrt{x-2}=10\)</p><p>Domaine \(x\geqslant2\). Carré : \(x-2=100\).</p><p class="res">\(x=102\)</p>
-        <p class="q">(b) \(\sqrt{x-3}+2=9\)</p><p>\(\sqrt{x-3}=7\), \(x-3=49\).</p><p class="res">\(x=52\)</p>
-        <p class="q">(c) \(2\sqrt{x+1}+3=1\)</p><p>\(\sqrt{x+1}=-1\) : impossible (une racine est \(\geqslant0\)).</p><p class="res">\(S=\varnothing\)</p>
-        <p class="q">(d) \(\sqrt{4x-1}=\sqrt{3-x}\)</p><p>Domaine \(\tfrac14\leqslant x\leqslant3\). Carré : \(4x-1=3-x\Rightarrow 5x=4\).</p><p class="res">\(x=\tfrac45\)</p>
-        <p class="q">(e) \(\sqrt{x+12}=\sqrt{x^2+2x-8}\)</p>
-        <p>Carré : \(x+12=x^2+2x-8\Rightarrow x^2+x-20=0\Rightarrow(x+5)(x-4)=0\). Domaine : \(x^2+2x-8\geqslant0\Rightarrow x\leqslant-4\) ou \(x\geqslant2\), et \(x\geqslant-12\). Les deux candidats \(-5\) et \(4\) conviennent (\(x+12\) et le radicande valent \(7\) et \(16\)).</p>
-        <p class="res">\(S=\{-5,\ 4\}\)</p>
-        <p class="q">(f) \(\sqrt{x+4}+\sqrt{x+2}=1\)</p>
-        <p>Domaine \(x\geqslant-2\). On isole : \(\sqrt{x+4}=1-\sqrt{x+2}\), qui exige \(\sqrt{x+2}\leqslant1\) (\(x\leqslant-1\)). Carré : \(x+4=x+3-2\sqrt{x+2}\Rightarrow\sqrt{x+2}=-\tfrac12\) : impossible.</p>
-        <p class="res">\(S=\varnothing\)</p>
+
+        <p class="q">a) \(\sqrt{x-2}=10\)</p>
+        <div class="rappel"><span class="lab">Rappel · équation avec racine</span>\[ \sqrt A=B \iff A=B^2 \text{ et } B\geqslant 0 \]</div>
+        <p class="etape">Étape 1 : élever au carré</p>
+        <p>\(10\geqslant 0\), donc \(x-2=100\).</p>
+        <div class="res">\(S=\{102\}\)</div>
+
+        <p class="q">b) \(\sqrt{x-3}+2=9\)</p>
+        <p class="etape">Étape 1 : isoler la racine</p>
+        \[ \sqrt{x-3}=7 \]
+        <p class="etape">Étape 2 : élever au carré</p>
+        \[ x-3=49 \]
+        <div class="res">\(S=\{52\}\)</div>
+
+        <p class="q">c) \(2\sqrt{x+1}+3=1\)</p>
+        <p class="etape">Étape 1 : isoler la racine</p>
+        \[ \sqrt{x+1}=-1 \]
+        <p>Une racine carrée est toujours positive.</p>
+        <div class="res">\(S=\varnothing\)</div>
+
+        <p class="q">d) \(\sqrt{4x-1}=\sqrt{3-x}\)</p>
+        <p class="etape">Étape 1 : domaine</p>
+        <p>\(4x-1\geqslant 0\) et \(3-x\geqslant 0\) : \(\tfrac14\leqslant x\leqslant 3\).</p>
+        <p class="etape">Étape 2 : élever au carré</p>
+        \[ 4x-1=3-x \iff x=\frac45 \]
+        <p>\(\tfrac45\) est dans le domaine.</p>
+        <div class="res">\(S=\left\{\tfrac45\right\}\)</div>
+
+        <p class="q">e) \(\sqrt{x+12}=\sqrt{x^2+2x-8}\)</p>
+        <p class="etape">Étape 1 : élever au carré</p>
+        \[ x+12=x^2+2x-8 \iff x^2+x-20=0 \iff (x+5)(x-4)=0 \]
+        <p class="etape">Étape 2 : vérifier les candidats</p>
+        <ul>
+          <li>\(x=-5\) : \(x+12=7\) et \(25-10-8=7\). Valable.</li>
+          <li>\(x=4\) : \(x+12=16\) et \(16+8-8=16\). Valable.</li>
+        </ul>
+        <div class="res">\(S=\{-5,\ 4\}\)</div>
+
+        <p class="q">f) \(\sqrt{x+4}+\sqrt{x+2}=1\)</p>
+        <p class="etape">Étape 1 : domaine</p>
+        <p>\(x\geqslant -2\).</p>
+        <p class="etape">Étape 2 : isoler une racine</p>
+        <p>\(\sqrt{x+4}=1-\sqrt{x+2}\) ; il faut \(1-\sqrt{x+2}\geqslant 0\).</p>
+        <p class="etape">Étape 3 : élever au carré</p>
+        \[ x+4=1-2\sqrt{x+2}+x+2 \iff \sqrt{x+2}=-\frac12 \]
+        <p>Impossible : une racine est positive.</p>
+        <div class="res">\(S=\varnothing\)</div>
+        <p>Plus rapide : pour \(x\geqslant-2\), \(\sqrt{x+4}\geqslant\sqrt2>1\), donc la somme dépasse toujours 1.</p>
       </div>
     </div>
 
@@ -268,16 +398,55 @@ window.MathJax = {
           <img src="td-img/td4-ex5.png" alt="Énoncé TD4 Exercice 5" loading="lazy" style="max-width:100%;height:auto">
           <figcaption>Énoncé (TD4) — Exercice 5.</figcaption>
         </figure>
-        <p class="q">(a) \(\sqrt{x-3}>2\)</p><p>Domaine \(x\geqslant3\), carré : \(x-3>4\).</p><p class="res">\(S=\,]7,+\infty[\)</p>
-        <p class="q">(b) \(\sqrt{2x-5}\leqslant5\)</p><p>Domaine \(x\geqslant\tfrac52\), carré : \(2x-5\leqslant25\Rightarrow x\leqslant15\).</p><p class="res">\(S=\left[\tfrac52,\ 15\right]\)</p>
-        <p class="q">(c) \(\sqrt{2+x}\leqslant-1\)</p><p>Une racine est \(\geqslant0\), jamais \(\leqslant-1\).</p><p class="res">\(S=\varnothing\)</p>
-        <p class="q">(d) \(\sqrt{x^2-4}\leqslant x-4\)</p><p>Il faut \(x-4\geqslant0\) (\(x\geqslant4\)) et \(|x|\geqslant2\). Carré : \(x^2-4\leqslant x^2-8x+16\Rightarrow 8x\leqslant20\Rightarrow x\leqslant\tfrac52\), incompatible avec \(x\geqslant4\).</p><p class="res">\(S=\varnothing\)</p>
-        <p class="q">(e) \(\sqrt{x^2-3x+2}\leqslant x+1\)</p>
-        <p>Domaine \((x-1)(x-2)\geqslant0\Rightarrow x\leqslant1\) ou \(x\geqslant2\), et \(x+1\geqslant0\ (x\geqslant-1)\). Carré : \(x^2-3x+2\leqslant x^2+2x+1\Rightarrow 5x\geqslant1\Rightarrow x\geqslant\tfrac15\). Intersection :</p>
-        <p class="res">\(S=\left[\tfrac15,\ 1\right]\cup[2,+\infty[\)</p>
-        <p class="q">(f) \(\sqrt{2x^2-2}-x\geqslant0\), i.e. \(\sqrt{2x^2-2}\geqslant x\)</p>
-        <p>Domaine \(x^2\geqslant1\) (\(x\leqslant-1\) ou \(x\geqslant1\)). Si \(x\leqslant-1<0\), l'inégalité est vraie (membre gauche \(\geqslant0>x\)). Si \(x\geqslant1\), carré : \(2x^2-2\geqslant x^2\Rightarrow x^2\geqslant2\Rightarrow x\geqslant\sqrt2\).</p>
-        <p class="res">\(S=\,]-\infty,-1]\cup[\sqrt2,+\infty[\)</p>
+
+        <p class="q">a) \(\sqrt{x-3}>2\)</p>
+        <div class="rappel"><span class="lab">Rappel · élever au carré une inégalité</span>Pour \(a,b\geqslant 0\) : \(a\leqslant b\iff a^2\leqslant b^2\). Il faut donc que les <b>deux membres soient positifs</b>.</div>
+        <p class="etape">Étape 1 : domaine</p>
+        <p>\(x\geqslant 3\).</p>
+        <p class="etape">Étape 2 : élever au carré (deux membres positifs)</p>
+        \[ x-3>4 \iff x>7 \]
+        <div class="res">\(S=\,]7,+\infty[\)</div>
+
+        <p class="q">b) \(\sqrt{2x-5}\leqslant5\)</p>
+        <p class="etape">Étape 1 : domaine</p>
+        <p>\(x\geqslant\tfrac52\).</p>
+        <p class="etape">Étape 2 : élever au carré</p>
+        \[ 2x-5\leqslant 25 \iff x\leqslant 15 \]
+        <div class="res">\(S=\left[\tfrac52,\ 15\right]\)</div>
+
+        <p class="q">c) \(\sqrt{2+x}\leqslant-1\)</p>
+        <p class="etape">Étape 1 : signe</p>
+        <p>Une racine est positive, donc jamais inférieure à \(-1\).</p>
+        <div class="res">\(S=\varnothing\)</div>
+
+        <p class="q">d) \(\sqrt{x^2-4}\leqslant x-4\)</p>
+        <p class="etape">Étape 1 : conditions</p>
+        <p>Domaine : \(x^2\geqslant 4\). Et le membre de droite doit être positif : \(x\geqslant 4\).</p>
+        <p class="etape">Étape 2 : élever au carré</p>
+        \[ x^2-4\leqslant x^2-8x+16 \iff 8x\leqslant 20 \iff x\leqslant\frac52 \]
+        <p class="etape">Étape 3 : confronter</p>
+        <p>\(x\leqslant\tfrac52\) et \(x\geqslant 4\) sont incompatibles.</p>
+        <div class="res">\(S=\varnothing\)</div>
+
+        <p class="q">e) \(\sqrt{x^2-3x+2}\leqslant x+1\)</p>
+        <p class="etape">Étape 1 : domaine</p>
+        <p>\(x^2-3x+2=(x-1)(x-2)\geqslant 0\) : \(x\leqslant 1\) ou \(x\geqslant 2\).</p>
+        <p class="etape">Étape 2 : membre de droite positif</p>
+        <p>\(x+1\geqslant 0\) : \(x\geqslant -1\).</p>
+        <p class="etape">Étape 3 : élever au carré</p>
+        \[ x^2-3x+2\leqslant x^2+2x+1 \iff 5x\geqslant 1 \iff x\geqslant\frac15 \]
+        <p class="etape">Étape 4 : intersection des conditions</p>
+        <div class="res">\(S=\left[\tfrac15,\ 1\right]\cup[2,+\infty[\)</div>
+
+        <p class="q">f) \(\sqrt{2x^2-2}-x\geqslant0\)</p>
+        <p class="etape">Étape 1 : domaine</p>
+        <p>\(2x^2-2\geqslant 0\iff x^2\geqslant 1\) : \(x\leqslant -1\) ou \(x\geqslant 1\). On résout \(\sqrt{2x^2-2}\geqslant x\).</p>
+        <p class="etape">Étape 2 : cas \(x\leqslant -1\)</p>
+        <p>Le membre de droite est négatif, la racine est positive : toujours vrai.</p>
+        <p class="etape">Étape 3 : cas \(x\geqslant 1\)</p>
+        <p>Les deux membres sont positifs, on élève au carré :</p>
+        \[ 2x^2-2\geqslant x^2 \iff x^2\geqslant 2 \iff x\geqslant\sqrt2 \]
+        <div class="res">\(S=\,]-\infty,-1]\cup[\sqrt2,+\infty[\)</div>
       </div>
     </div>
 
@@ -289,9 +458,19 @@ window.MathJax = {
           <figcaption>Énoncé (TD4) — Exercice 6.</figcaption>
         </figure>
         <div class="enonce">\(ABC\) rectangle en \(B\), hypoténuse \(AC=x\), \(AB=2\,BC\). Périmètre \(=50\).</div>
-        <p>Posons \(BC=a\), donc \(AB=2a\). Pythagore : \(AC^2=AB^2+BC^2=4a^2+a^2=5a^2\), donc \(x=a\sqrt5\), soit \(a=\dfrac{x}{\sqrt5}\).</p>
-        <p>Périmètre : \(AB+BC+AC=2a+a+x=3a+x=\dfrac{3x}{\sqrt5}+x=x\left(1+\dfrac{3}{\sqrt5}\right)=x\cdot\dfrac{5+3\sqrt5}{5}\).</p>
-        <p>On résout \(x\cdot\dfrac{5+3\sqrt5}{5}=50\Rightarrow x=\dfrac{250}{5+3\sqrt5}=\dfrac{25(3\sqrt5-5)}{2}\) (après rationalisation).</p>
+
+        <p class="q">1) Valeur de \(x\)</p>
+        <p class="etape">Étape 1 : exprimer les côtés en fonction de \(x\)</p>
+        <p>On pose \(BC=a\), donc \(AB=2a\).</p>
+        <div class="rappel"><span class="lab">Rappel · Pythagore</span>\[ AC^2=AB^2+BC^2 \quad\text{(triangle rectangle en } B) \]</div>
+        \[ x^2=4a^2+a^2=5a^2 \iff a=\frac{x}{\sqrt5} \]
+        <p class="etape">Étape 2 : écrire le périmètre</p>
+        \[ AB+BC+AC=3a+x=\frac{3x}{\sqrt5}+x=x\,\frac{5+3\sqrt5}{5} \]
+        <p class="etape">Étape 3 : résoudre</p>
+        \[ x\,\frac{5+3\sqrt5}{5}=50 \iff x=\frac{250}{5+3\sqrt5} \]
+        <p class="etape">Étape 4 : rationaliser</p>
+        <p>On multiplie en haut et en bas par la quantité conjuguée \(3\sqrt5-5\) :</p>
+        \[ x=\frac{250\,(3\sqrt5-5)}{45-25}=\frac{25\,(3\sqrt5-5)}{2} \]
         <div class="res">\(x=\dfrac{75\sqrt5-125}{2}\approx 21{,}35\text{ cm}\).</div>
       </div>
     </div>
@@ -305,16 +484,71 @@ window.MathJax = {
           <img src="td-img/td4-ex7.png" alt="Énoncé TD4 Exercice 7" loading="lazy" style="max-width:100%;height:auto">
           <figcaption>Énoncé (TD4) — Exercice 7.</figcaption>
         </figure>
-        <p class="q">(a) \(|8x-4|=|-2x+3|\)</p><p>\(8x-4=\pm(2x-3)\) : \(6x=1\) ou \(10x=7\).</p><p class="res">\(S=\left\{\tfrac16,\ \tfrac{7}{10}\right\}\)</p>
-        <p class="q">(b) \(|x-2|=2|x+1|\)</p><p>\(x-2=\pm(2x+2)\) : \(-x=4\) (\(x=-4\)) ou \(3x=0\) (\(x=0\)).</p><p class="res">\(S=\{-4,\ 0\}\)</p>
-        <p class="q">(c) \(|x^2-x+5|=|x-1|\)</p><p>\(x^2-x+5>0\) (\(\Delta<0\)) donc \(=|x-1|\) donne \(x^2-x+5=\pm(x-1)\), soit \(x^2-2x+6=0\) ou \(x^2+4=0\) : aucun réel.</p><p class="res">\(S=\varnothing\)</p>
-        <p class="q">(d) \(|x+1|+|1-2x|=9\)</p>
-        <p>Points \(x=-1\) et \(x=\tfrac12\). Cas \(x<-1\) : \(-3x=9\Rightarrow x=-3\) ✓. Cas \([-1,\tfrac12]\) : \(-x+2=9\Rightarrow x=-7\) ✗. Cas \(x>\tfrac12\) : \(3x=9\Rightarrow x=3\) ✓.</p>
-        <p class="res">\(S=\{-3,\ 3\}\)</p>
-        <p class="q">(e) \(|3x-5|\geqslant-2\)</p><p>Une valeur absolue est toujours \(\geqslant0\geqslant-2\).</p><p class="res">\(S=\mathbb R\)</p>
-        <p class="q">(f) \(|2x-7|<1\)</p><p>\(-1<2x-7<1\Rightarrow 6<2x<8\).</p><p class="res">\(S=\,]3,4[\)</p>
-        <p class="q">(g) \(|x-1|\leqslant|-3x+4|\)</p><p>Carré : \((3x-4)^2-(x-1)^2\geqslant0\Rightarrow(2x-3)(4x-5)\geqslant0\).</p><p class="res">\(S=\left]-\infty,\tfrac54\right]\cup\left[\tfrac32,+\infty\right[\)</p>
-        <p class="q">(h) \(|2x-7|>|4x+2|\)</p><p>Carré : \((2x-7)^2-(4x+2)^2>0\Rightarrow(2x+9)(6x-5)<0\).</p><p class="res">\(S=\left]-\tfrac92,\ \tfrac56\right[\)</p>
+
+        <p class="q">a) \(|8x-4|=|-2x+3|\)</p>
+        <div class="rappel"><span class="lab">Rappel · égalité de valeurs absolues</span>\[ |A|=|B| \iff A=B \text{ ou } A=-B \]</div>
+        <p class="etape">Étape 1 : les deux cas</p>
+        <ul>
+          <li>\(8x-4=-2x+3\iff 10x=7\iff x=\tfrac{7}{10}\)</li>
+          <li>\(8x-4=2x-3\iff 6x=1\iff x=\tfrac16\)</li>
+        </ul>
+        <div class="res">\(S=\left\{\tfrac16,\ \tfrac{7}{10}\right\}\)</div>
+
+        <p class="q">b) \(|x-2|=2|x+1|\)</p>
+        <p class="etape">Étape 1 : les deux cas (\(2|x+1|=|2x+2|\))</p>
+        <ul>
+          <li>\(x-2=2x+2\iff x=-4\)</li>
+          <li>\(x-2=-2x-2\iff x=0\)</li>
+        </ul>
+        <div class="res">\(S=\{-4,\ 0\}\)</div>
+
+        <p class="q">c) \(|x^2-x+5|=|x-1|\)</p>
+        <p class="etape">Étape 1 : les deux cas</p>
+        <ul>
+          <li>\(x^2-x+5=x-1\iff x^2-2x+6=0\) : \(\Delta=4-24&lt;0\).</li>
+          <li>\(x^2-x+5=-x+1\iff x^2+4=0\) : impossible.</li>
+        </ul>
+        <div class="res">\(S=\varnothing\)</div>
+
+        <p class="q">d) \(|x+1|+|1-2x|=9\)</p>
+        <p class="etape">Étape 1 : repérer les points de changement</p>
+        <p>\(x+1\) change de signe en \(-1\), \(1-2x\) en \(\tfrac12\). On raisonne par disjonction de cas.</p>
+        <p class="etape">Étape 2 : cas \(x&lt;-1\)</p>
+        \[ -(x+1)+(1-2x)=-3x=9 \iff x=-3 \quad(\text{valable}) \]
+        <p class="etape">Étape 3 : cas \(-1\leqslant x\leqslant\tfrac12\)</p>
+        \[ (x+1)+(1-2x)=2-x=9 \iff x=-7 \quad(\text{hors du cas, rejeté}) \]
+        <p class="etape">Étape 4 : cas \(x>\tfrac12\)</p>
+        \[ (x+1)+(2x-1)=3x=9 \iff x=3 \quad(\text{valable}) \]
+        <div class="res">\(S=\{-3,\ 3\}\)</div>
+
+        <p class="q">e) \(|3x-5|\geqslant-2\)</p>
+        <p class="etape">Étape 1 : signe</p>
+        <p>Une valeur absolue est toujours positive, donc supérieure à \(-2\).</p>
+        <div class="res">\(S=\mathbb R\)</div>
+
+        <p class="q">f) \(|2x-7|&lt;1\)</p>
+        <div class="rappel"><span class="lab">Rappel · inégalité avec valeur absolue</span>\[ |A|&lt;r \iff -r&lt;A&lt;r \]</div>
+        <p class="etape">Étape 1 : traduire</p>
+        \[ -1&lt;2x-7&lt;1 \iff 6&lt;2x&lt;8 \iff 3&lt;x&lt;4 \]
+        <div class="res">\(S=\,]3,4[\)</div>
+
+        <p class="q">g) \(|x-1|\leqslant|-3x+4|\)</p>
+        <p class="etape">Étape 1 : élever au carré (deux membres positifs)</p>
+        \[ (x-1)^2\leqslant(3x-4)^2 \iff (3x-4)^2-(x-1)^2\geqslant 0 \]
+        <p class="etape">Étape 2 : factoriser \(A^2-B^2\)</p>
+        \[ (3x-4-x+1)(3x-4+x-1)=(2x-3)(4x-5)\geqslant 0 \]
+        <p class="etape">Étape 3 : signe du produit</p>
+        <p>Racines \(\tfrac54\) et \(\tfrac32\) ; le produit est positif à l'extérieur des racines.</p>
+        <div class="res">\(S=\left]-\infty,\tfrac54\right]\cup\left[\tfrac32,+\infty\right[\)</div>
+
+        <p class="q">h) \(|2x-7|>|4x+2|\)</p>
+        <p class="etape">Étape 1 : élever au carré</p>
+        \[ (2x-7)^2-(4x+2)^2>0 \]
+        <p class="etape">Étape 2 : factoriser</p>
+        \[ (2x-7-4x-2)(2x-7+4x+2)=-(2x+9)(6x-5)>0 \iff (2x+9)(6x-5)&lt;0 \]
+        <p class="etape">Étape 3 : signe</p>
+        <p>Négatif entre les racines \(-\tfrac92\) et \(\tfrac56\).</p>
+        <div class="res">\(S=\left]-\tfrac92,\ \tfrac56\right[\)</div>
       </div>
     </div>
 
@@ -325,28 +559,46 @@ window.MathJax = {
           <img src="td-img/td4-ex8.png" alt="Énoncé TD4 Exercice 8" loading="lazy" style="max-width:100%;height:auto">
           <figcaption>Énoncé (TD4) — Exercice 8.</figcaption>
         </figure>
-        <p class="q">(a) Inégalité triangulaire pour \(x+y\) et \(-y\)</p>
-        <p>\(\big|(x+y)+(-y)\big|\leqslant|x+y|+|-y|\), soit \(|x|\leqslant|x+y|+|y|\), d'où \(|x|-|y|\leqslant|x+y|\).</p>
-        <p class="q">(b) Pour \(x+y\) et \(-x\)</p>
-        <p>\(\big|(x+y)+(-x)\big|\leqslant|x+y|+|-x|\), soit \(|y|\leqslant|x+y|+|x|\), d'où \(|y|-|x|\leqslant|x+y|\).</p>
-        <p class="q">(c) Conclusion</p>
-        <p>(a) et (b) donnent \(\pm(|x|-|y|)\leqslant|x+y|\), donc \(\big|\,|x|-|y|\,\big|\leqslant|x+y|\). Avec l'inégalité triangulaire usuelle :</p>
-        <p class="res">\(\big|\,|x|-|y|\,\big|\leqslant|x+y|\leqslant|x|+|y|\). ∎</p>
+
+        <p class="q">a) Inégalité triangulaire pour \(x+y\) et \(-y\)</p>
+        <div class="rappel"><span class="lab">Rappel · inégalité triangulaire</span>\[ |a+b|\leqslant|a|+|b| \]</div>
+        <p class="etape">Étape 1 : appliquer avec \(a=x+y\), \(b=-y\)</p>
+        \[ \big|(x+y)+(-y)\big|\leqslant|x+y|+|-y| \iff |x|\leqslant|x+y|+|y| \]
+        <div class="res">\(|x|-|y|\leqslant|x+y|\)</div>
+
+        <p class="q">b) Pour \(x+y\) et \(-x\)</p>
+        <p class="etape">Étape 1 : appliquer avec \(a=x+y\), \(b=-x\)</p>
+        \[ \big|(x+y)+(-x)\big|\leqslant|x+y|+|-x| \iff |y|\leqslant|x+y|+|x| \]
+        <div class="res">\(|y|-|x|\leqslant|x+y|\)</div>
+
+        <p class="q">c) Conclusion</p>
+        <p class="etape">Étape 1 : rassembler a) et b)</p>
+        <p>\(|x|-|y|\) et son opposé sont tous deux inférieurs à \(|x+y|\). Or \(\big|\,|x|-|y|\,\big|\) est l'un des deux.</p>
+        <p class="etape">Étape 2 : ajouter l'inégalité usuelle</p>
+        <div class="res">\(\big|\,|x|-|y|\,\big|\leqslant|x+y|\leqslant|x|+|y|\).</div>
       </div>
     </div>
 
     <div class="exo-card">
-      <div class="exo-head"><span>Exercice 9 — \(\left|\dfrac{x+y}{1+xy}\right|<1\) sur \(]-1,1[^2\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-head"><span>Exercice 9 — \(\left|\dfrac{x+y}{1+xy}\right|&lt;1\) sur \(]-1,1[^2\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <figure>
           <img src="td-img/td4-ex9.png" alt="Énoncé TD4 Exercice 9" loading="lazy" style="max-width:100%;height:auto">
           <figcaption>Énoncé (TD4) — Exercice 9.</figcaption>
         </figure>
-        <p>Pour \(x,y\in\,]-1,1[\), on a \(xy>-1\), donc \(1+xy>0\). L'inégalité \(\left|\dfrac{x+y}{1+xy}\right|<1\)
-        équivaut (dénominateur positif) à \(|x+y|<1+xy\), soit \((x+y)^2<(1+xy)^2\). Or :</p>
-        \[ (1+xy)^2-(x+y)^2=1+x^2y^2-x^2-y^2=(1-x^2)(1-y^2). \]
-        <p>Comme \(x^2<1\) et \(y^2<1\), les deux facteurs sont \(>0\), donc le produit est \(>0\).</p>
-        <div class="res">\((1+xy)^2>(x+y)^2\), d'où \(\left|\dfrac{x+y}{1+xy}\right|<1\). ∎</div>
+
+        <p class="q">1) Démonstration</p>
+        <p>On se ramène à une inégalité entre carrés.</p>
+        <p class="etape">Étape 1 : signe du dénominateur</p>
+        <p>\(|x|&lt;1\) et \(|y|&lt;1\) donnent \(|xy|&lt;1\), donc \(1+xy>0\).</p>
+        <p class="etape">Étape 2 : se ramener aux carrés</p>
+        <p>Le dénominateur étant positif, l'inégalité équivaut à \(|x+y|&lt;1+xy\). Les deux membres sont positifs :</p>
+        \[ |x+y|&lt;1+xy \iff (x+y)^2&lt;(1+xy)^2 \]
+        <p class="etape">Étape 3 : calculer la différence</p>
+        \[ (1+xy)^2-(x+y)^2=1+x^2y^2-x^2-y^2=(1-x^2)(1-y^2) \]
+        <p class="etape">Étape 4 : signe</p>
+        <p>\(x^2&lt;1\) et \(y^2&lt;1\) : les deux facteurs sont strictement positifs.</p>
+        <div class="res">\((1+xy)^2>(x+y)^2\), donc \(\left|\dfrac{x+y}{1+xy}\right|&lt;1\).</div>
       </div>
     </div>
 
@@ -357,11 +609,27 @@ window.MathJax = {
           <img src="td-img/td4-ex10.png" alt="Énoncé TD4 Exercice 10" loading="lazy" style="max-width:100%;height:auto">
           <figcaption>Énoncé (TD4) — Exercice 10.</figcaption>
         </figure>
-        <p class="q">(a) \(\lfloor x\rfloor=3\)</p><p>\(\iff 3\leqslant x<4\).</p><p class="res">\(S=[3,4[\)</p>
-        <p class="q">(b) \(2\lfloor x-1\rfloor-3=4\)</p><p>\(\lfloor x-1\rfloor=\tfrac72\) : impossible (une partie entière est un entier).</p><p class="res">\(S=\varnothing\)</p>
-        <p class="q">(c) \(-5\left\lfloor-\tfrac17(x-3)\right\rfloor+1=6\)</p>
-        <p>\(\left\lfloor-\tfrac{x-3}{7}\right\rfloor=-1\iff -1\leqslant-\tfrac{x-3}{7}<0\). En multipliant par \(-7\) (sens inversé) : \(0<x-3\leqslant7\).</p>
-        <p class="res">\(S=\,]3,\ 10]\)</p>
+
+        <p class="q">a) \(\lfloor x\rfloor=3\)</p>
+        <div class="rappel"><span class="lab">Rappel · partie entière</span>\[ \lfloor x\rfloor=n \iff n\in\mathbb Z \text{ et } n\leqslant x&lt;n+1 \]</div>
+        <p class="etape">Étape 1 : appliquer la définition</p>
+        \[ 3\leqslant x&lt;4 \]
+        <div class="res">\(S=[3,4[\)</div>
+
+        <p class="q">b) \(2\lfloor x-1\rfloor-3=4\)</p>
+        <p class="etape">Étape 1 : isoler la partie entière</p>
+        \[ \lfloor x-1\rfloor=\frac72 \]
+        <p>Une partie entière est un entier : impossible.</p>
+        <div class="res">\(S=\varnothing\)</div>
+
+        <p class="q">c) \(-5\left\lfloor-\tfrac17(x-3)\right\rfloor+1=6\)</p>
+        <p class="etape">Étape 1 : isoler la partie entière</p>
+        \[ \left\lfloor-\frac{x-3}{7}\right\rfloor=-1 \]
+        <p class="etape">Étape 2 : appliquer la définition</p>
+        \[ -1\leqslant-\frac{x-3}{7}&lt;0 \]
+        <p class="etape">Étape 3 : multiplier par \(-7\) (le sens change)</p>
+        \[ 0&lt;x-3\leqslant 7 \iff 3&lt;x\leqslant 10 \]
+        <div class="res">\(S=\,]3,\ 10]\)</div>
       </div>
     </div>
 
@@ -372,15 +640,25 @@ window.MathJax = {
           <img src="td-img/td4-ex11.png" alt="Énoncé TD4 Exercice 11" loading="lazy" style="max-width:100%;height:auto">
           <figcaption>Énoncé (TD4) — Exercice 11.</figcaption>
         </figure>
-        <p class="q">(a) \(x\leqslant y\Rightarrow\lfloor x\rfloor\leqslant\lfloor y\rfloor\)</p>
-        <p>\(\lfloor x\rfloor\leqslant x\leqslant y\), et \(\lfloor x\rfloor\in\mathbb Z\). Comme \(\lfloor y\rfloor\) est le
-        <b>plus grand</b> entier \(\leqslant y\), on a \(\lfloor x\rfloor\leqslant\lfloor y\rfloor\).</p>
-        <p class="q">(b) \(\lfloor x\rfloor+\lfloor y\rfloor\leqslant\lfloor x+y\rfloor\leqslant\lfloor x\rfloor+\lfloor y\rfloor+1\)</p>
-        <p>Écrivons \(x=\lfloor x\rfloor+\{x\}\), \(y=\lfloor y\rfloor+\{y\}\) avec \(0\leqslant\{x\},\{y\}<1\). Alors
-        \(x+y=\big(\lfloor x\rfloor+\lfloor y\rfloor\big)+(\{x\}+\{y\})\) avec \(0\leqslant\{x\}+\{y\}<2\). Comme
-        \(\lfloor x\rfloor+\lfloor y\rfloor\in\mathbb Z\) :</p>
-        \[ \lfloor x+y\rfloor=\lfloor x\rfloor+\lfloor y\rfloor+\underbrace{\lfloor\{x\}+\{y\}\rfloor}_{\in\{0,1\}}. \]
-        <p class="res">D'où l'encadrement. ∎</p>
+
+        <p class="q">a) \(x\leqslant y\Rightarrow\lfloor x\rfloor\leqslant\lfloor y\rfloor\)</p>
+        <div class="rappel"><span class="lab">Rappel · caractérisation</span>\(\lfloor y\rfloor\) est le <b>plus grand entier</b> inférieur ou égal à \(y\).</div>
+        <p class="etape">Étape 1 : \(\lfloor x\rfloor\) est un entier inférieur à \(y\)</p>
+        \[ \lfloor x\rfloor\leqslant x\leqslant y \]
+        <p class="etape">Étape 2 : utiliser la maximalité</p>
+        <p>\(\lfloor y\rfloor\) est le plus grand entier sous \(y\), donc il dépasse l'entier \(\lfloor x\rfloor\).</p>
+        <div class="res">\(\lfloor x\rfloor\leqslant\lfloor y\rfloor\) : la partie entière est croissante.</div>
+
+        <p class="q">b) \(\lfloor x\rfloor+\lfloor y\rfloor\leqslant\lfloor x+y\rfloor\leqslant\lfloor x\rfloor+\lfloor y\rfloor+1\)</p>
+        <p class="etape">Étape 1 : séparer partie entière et partie fractionnaire</p>
+        <p>On écrit \(x=\lfloor x\rfloor+\{x\}\) et \(y=\lfloor y\rfloor+\{y\}\), avec \(0\leqslant\{x\},\{y\}&lt;1\).</p>
+        \[ x+y=\big(\lfloor x\rfloor+\lfloor y\rfloor\big)+\big(\{x\}+\{y\}\big),\qquad 0\leqslant\{x\}+\{y\}&lt;2 \]
+        <p class="etape">Étape 2 : sortir l'entier de la partie entière</p>
+        <div class="rappel"><span class="lab">Rappel · translation par un entier</span>\[ \lfloor n+t\rfloor=n+\lfloor t\rfloor \quad (n\in\mathbb Z) \]</div>
+        \[ \lfloor x+y\rfloor=\lfloor x\rfloor+\lfloor y\rfloor+\big\lfloor\{x\}+\{y\}\big\rfloor \]
+        <p class="etape">Étape 3 : le dernier terme vaut 0 ou 1</p>
+        <p>Car \(0\leqslant\{x\}+\{y\}&lt;2\).</p>
+        <div class="res">\(\lfloor x\rfloor+\lfloor y\rfloor\leqslant\lfloor x+y\rfloor\leqslant\lfloor x\rfloor+\lfloor y\rfloor+1\).</div>
       </div>
     </div>
 
@@ -394,6 +672,16 @@ window.MathJax = {
           <figcaption>Énoncé (TD4) — Exercice 12.</figcaption>
         </figure>
         <div class="enonce">L'intérieur ôte les extrémités, la fermeture les ajoute (\(\pm\infty\) inclus).</div>
+
+        <p class="q">1) Intérieur et fermeture des six intervalles</p>
+        <div class="rappel"><span class="lab">Rappel · intervalle d'extrémités \(a\leqslant b\)</span>Intérieur : \(]a,b[\) (on retire les extrémités). Fermeture dans \(\overline{\mathbb R}\) : \([a,b]\) (on ajoute les extrémités, même infinies).</div>
+        <p class="etape">Étape 1 : repérer les extrémités</p>
+        <ul>
+          <li>\(\mathbb R\) : \(-\infty\) et \(+\infty\).</li>
+          <li>\(\mathbb R_+\) : \(0\) et \(+\infty\) ; \(\mathbb R_-^*\) : \(-\infty\) et \(0\).</li>
+          <li>Les trois autres : \(1\) et \(2\).</li>
+        </ul>
+        <p class="etape">Étape 2 : appliquer la règle</p>
         <div class="overflow"><table>
           <thead><tr><th>\(I\)</th><th>Intérieur \(\mathring I\)</th><th>Fermeture \(\overline I\)</th></tr></thead>
           <tbody>
@@ -405,6 +693,7 @@ window.MathJax = {
             <tr><td>\(]1,2[\)</td><td>\(]1,2[\)</td><td>\([1,2]\)</td></tr>
           </tbody>
         </table></div>
+        <div class="res">Les trois intervalles d'extrémités 1 et 2 ont tous pour intérieur \(]1,2[\) et pour fermeture \([1,2]\).</div>
       </div>
     </div>
 
@@ -416,6 +705,33 @@ window.MathJax = {
           <figcaption>Énoncé (TD4) — Exercice 13.</figcaption>
         </figure>
         <div class="enonce">« — » = n'existe pas. Bornes considérées dans \(\overline{\mathbb R}\).</div>
+
+        <p class="q">1) Bornes des treize ensembles</p>
+        <div class="rappel"><span class="lab">Rappel · max et sup</span>Le \(\sup\) est le plus petit majorant ; c'est un \(\max\) seulement s'il <b>appartient</b> à l'ensemble. Idem pour \(\inf\) et \(\min\).</div>
+        <p class="etape">Étape 1 : les intervalles et réunions d'intervalles</p>
+        <p>On lit les extrémités ; un crochet fermé donne un max ou un min.</p>
+        <ul>
+          <li>\(]-\infty,0[\) : sup 0 non atteint, inf \(-\infty\).</li>
+          <li>\([0,1[\) : min 0, sup 1 non atteint.</li>
+          <li>\([0,1]\cup[2,3]\) : min 0, max 3.</li>
+          <li>\(]-\infty,3]\) : max 3, inf \(-\infty\).</li>
+          <li>\(]6,+\infty[\) : inf 6 non atteint, sup \(+\infty\).</li>
+          <li>\([1,5[\cup\{0\}\) : min 0, sup 5 non atteint.</li>
+          <li>\(x^2-2x-3=(x+1)(x-3)&lt;0\iff x\in\,]-1,3[\) : inf \(-1\), sup 3, non atteints.</li>
+        </ul>
+        <p class="etape">Étape 2 : les ensembles définis par une suite</p>
+        <ul>
+          <li>\(\dfrac{n+5}{n+1}=1+\dfrac{4}{n+1}\) décroît de 5 (\(n=0\)) vers 1 sans l'atteindre : max 5, inf 1.</li>
+          <li>\(1-\dfrac1n\) croît de 0 (\(n=1\)) vers 1 sans l'atteindre : min 0, sup 1.</li>
+          <li>\((-1)^n+\dfrac1n\) : pour \(n\) pair, \(1+\tfrac1n\) décroît depuis \(\tfrac32\) (\(n=2\)) ; pour \(n\) impair, \(-1+\tfrac1n\) décroît vers \(-1\) sans l'atteindre. Max \(\tfrac32\), inf \(-1\).</li>
+          <li>\(\dfrac{(-1)^n}{n}\) : termes \(-1,\ \tfrac12,\ -\tfrac13,\ \tfrac14,\dots\) Max \(\tfrac12\) (\(n=2\)), min \(-1\) (\(n=1\)).</li>
+        </ul>
+        <p class="etape">Étape 3 : les deux derniers</p>
+        <ul>
+          <li>Rationnels strictement positifs : non majorés (sup \(+\infty\)) ; \(\tfrac1n\to 0\) donc inf 0, non atteint.</li>
+          <li>\(\sqrt n-\lfloor\sqrt n\rfloor\) est dans \([0,1[\) ; il vaut 0 pour les carrés parfaits ; pour \(n=k^2-1\), il vaut \(\sqrt{k^2-1}-(k-1)\), qui tend vers 1. Min 0, sup 1 non atteint.</li>
+        </ul>
+        <p class="etape">Étape 4 : tableau récapitulatif</p>
         <div class="overflow"><table>
           <thead><tr><th>Ensemble \(A\)</th><th>\(\max A\)</th><th>\(\sup A\)</th><th>\(\min A\)</th><th>\(\inf A\)</th></tr></thead>
           <tbody>
@@ -428,16 +744,13 @@ window.MathJax = {
             <tr><td>\(\left\{\tfrac{n+5}{n+1}\mid n\in\mathbb N\right\}\)</td><td>\(5\)</td><td>\(5\)</td><td>—</td><td>\(1\)</td></tr>
             <tr><td>\(\left\{1-\tfrac1n\mid n\in\mathbb N^*\right\}\)</td><td>—</td><td>\(1\)</td><td>\(0\)</td><td>\(0\)</td></tr>
             <tr><td>\(\{q\in\mathbb Q\mid q>0\}\)</td><td>—</td><td>\(+\infty\)</td><td>—</td><td>\(0\)</td></tr>
-            <tr><td>\(\{x\mid x^2-2x-3<0\}=\,]-1,3[\)</td><td>—</td><td>\(3\)</td><td>—</td><td>\(-1\)</td></tr>
+            <tr><td>\(\{x\mid x^2-2x-3&lt;0\}=\,]-1,3[\)</td><td>—</td><td>\(3\)</td><td>—</td><td>\(-1\)</td></tr>
             <tr><td>\(\left\{(-1)^n+\tfrac1n\mid n\in\mathbb N^*\right\}\)</td><td>\(\tfrac32\)</td><td>\(\tfrac32\)</td><td>—</td><td>\(-1\)</td></tr>
             <tr><td>\(\left\{\tfrac{(-1)^n}{n}\mid n\in\mathbb N^*\right\}\)</td><td>\(\tfrac12\)</td><td>\(\tfrac12\)</td><td>\(-1\)</td><td>\(-1\)</td></tr>
             <tr><td>\(\{\sqrt n-\lfloor\sqrt n\rfloor\mid n\in\mathbb N\}\)</td><td>—</td><td>\(1\)</td><td>\(0\)</td><td>\(0\)</td></tr>
           </tbody>
         </table></div>
-        <p style="font-size:.9rem;opacity:.85">Justifications-clés : \(\tfrac{n+5}{n+1}=1+\tfrac4{n+1}\) décroît de
-        \(5\) (n=0) vers \(1\) (non atteint) ; \((-1)^n+\tfrac1n\) : sous-suite paire décroît vers \(1\) (max \(\tfrac32\) en \(n=2\)),
-        sous-suite impaire croît vers \(-1\) (inf \(-1\) non atteint) ; \(\{\sqrt n\}\) prend \(0\) aux carrés parfaits et
-        s'approche de \(1\) (sup non atteint).</p>
+        <div class="res">Un max (ou min) n'existe que si la borne est atteinte ; sinon on donne seulement le sup (ou l'inf).</div>
       </div>
     </div>
 
@@ -450,21 +763,41 @@ window.MathJax = {
           <img src="td-img/td4-ex14.png" alt="Énoncé TD4 Exercice 14" loading="lazy" style="max-width:100%;height:auto">
           <figcaption>Énoncé (TD4) — Exercice 14.</figcaption>
         </figure>
-        <p class="q">(a) \(2x+3y-2z=3\ ;\ x+2y+z=4\ ;\ x-6y+4z=-1\)</p>
-        <p>De \(L_2\) : \(x=4-2y-z\). Report dans \(L_1\) : \(y+4z=5\) ; dans \(L_3\) : \(8y-3z=5\).
-        On tire \(z=1\), \(y=1\), \(x=1\).</p>
-        <p class="res">\(S=\{(1,1,1)\}\)</p>
-        <p class="q">(b) \(x+y-2z=1\ ;\ x+2y+z=4\ ;\ -3x-3y+6z=-1\)</p>
-        <p>\(L_3=-3(x+y-2z)\), donc \(L_3\) impose \(-3\cdot1=-1\), soit \(-3=-1\) : contradiction.</p>
-        <p class="res">\(S=\varnothing\) (système incompatible)</p>
-        <p class="q">(c) \(x-y+z=1\ ;\ 2x-2y+3z=3\ ;\ x-3y+2z=2\)</p>
-        <p>\(L_2-2L_1\) : \(z=1\). \(L_3-L_1\) : \(-2y+z=1\Rightarrow y=0\). \(L_1\) : \(x=0\).</p>
-        <p class="res">\(S=\{(0,0,1)\}\)</p>
-        <p class="q">(d) \(-x+y+z=0\ ;\ 3x+y+3z=-1\ ;\ x+y+2z=-\tfrac12\)</p>
-        <p>De \(L_1\) : \(y=x-z\). Report : \(L_2\Rightarrow 4x+2z=-1\), \(L_3\Rightarrow 2x+z=-\tfrac12\).
-        La seconde est la moitié de la première (\(-1=-1\)) : système <b>indéterminé</b>. En posant \(x=t\) :
-        \(z=-\tfrac12-2t\), \(y=x-z=3t+\tfrac12\).</p>
-        <p class="res">\(S=\left\{\left(t,\ 3t+\tfrac12,\ -2t-\tfrac12\right)\ \middle|\ t\in\mathbb R\right\}\) (infinité de solutions)</p>
+
+        <p class="q">a) \(2x+3y-2z=3\ ;\ x+2y+z=4\ ;\ x-6y+4z=-1\)</p>
+        <div class="rappel"><span class="lab">Rappel · substitution</span>On exprime une inconnue avec une équation, on la remplace dans les autres : on obtient un système à une inconnue de moins.</div>
+        <p class="etape">Étape 1 : exprimer \(x\) avec \(L_2\)</p>
+        \[ x=4-2y-z \]
+        <p class="etape">Étape 2 : remplacer dans \(L_1\) et \(L_3\)</p>
+        \[ L_1:\ 8-4y-2z+3y-2z=3 \iff y+4z=5 \]
+        \[ L_3:\ 4-2y-z-6y+4z=-1 \iff 8y-3z=5 \]
+        <p class="etape">Étape 3 : résoudre le système \(2\times 2\)</p>
+        <p>\(y=5-4z\), donc \(40-32z-3z=5\), soit \(z=1\), puis \(y=1\), puis \(x=4-2-1=1\).</p>
+        <p class="etape">Étape 4 : vérifier</p>
+        <p>\(2+3-2=3\) ; \(1+2+1=4\) ; \(1-6+4=-1\).</p>
+        <div class="res">\(S=\{(1,1,1)\}\)</div>
+
+        <p class="q">b) \(x+y-2z=1\ ;\ x+2y+z=4\ ;\ -3x-3y+6z=-1\)</p>
+        <p class="etape">Étape 1 : comparer \(L_3\) et \(L_1\)</p>
+        <p>Le membre de gauche de \(L_3\) vaut \(-3\) fois celui de \(L_1\) : \(L_3\) impose \(-3\times 1=-1\).</p>
+        <div class="res">\(S=\varnothing\) : système incompatible.</div>
+
+        <p class="q">c) \(x-y+z=1\ ;\ 2x-2y+3z=3\ ;\ x-3y+2z=2\)</p>
+        <p class="etape">Étape 1 : éliminer \(x\)</p>
+        \[ L_2-2L_1:\ z=1 \qquad L_3-L_1:\ -2y+z=1 \]
+        <p class="etape">Étape 2 : remonter</p>
+        <p>\(z=1\), puis \(-2y=0\) donc \(y=0\), puis \(x=1+y-z=0\).</p>
+        <div class="res">\(S=\{(0,0,1)\}\)</div>
+
+        <p class="q">d) \(-x+y+z=0\ ;\ 3x+y+3z=-1\ ;\ x+y+2z=-\tfrac12\)</p>
+        <p class="etape">Étape 1 : exprimer \(y\) avec \(L_1\)</p>
+        \[ y=x-z \]
+        <p class="etape">Étape 2 : remplacer</p>
+        \[ L_2:\ 4x+2z=-1 \qquad L_3:\ 2x+z=-\tfrac12 \]
+        <p>\(L_2\) est le double de \(L_3\) : une seule équation utile. Le système a une infinité de solutions.</p>
+        <p class="etape">Étape 3 : paramétrer</p>
+        <p>On pose \(x=t\). Alors \(z=-\tfrac12-2t\) et \(y=x-z=3t+\tfrac12\).</p>
+        <div class="res">\(S=\left\{\left(t,\ 3t+\tfrac12,\ -2t-\tfrac12\right)\ \middle|\ t\in\mathbb R\right\}\)</div>
       </div>
     </div>
 
@@ -476,10 +809,17 @@ window.MathJax = {
           <figcaption>Énoncé (TD4) — Exercice 15.</figcaption>
         </figure>
         <div class="enonce">(1) \(D-B=7\) (Donald aîné) ; (2) \(D+L+B=192\) ; (3) \(\tfrac{B+L}{2}=56\).</div>
-        <p>De (3) : \(B+L=112\). Report dans (2) : \(D+112=192\Rightarrow D=80\). Puis (1) : \(B=D-7=73\), et
-        \(L=112-B=39\).</p>
-        <div class="res">Donald \(=80\) ans, Brigitte \(=73\) ans, Léo \(=39\) ans.</div>
-        <p style="font-size:.9rem;opacity:.85">Vérif : \(80+39+73=192\) ✓ et \(\tfrac{73+39}{2}=56\) ✓.</p>
+
+        <p class="q">1) Âges des trois personnes</p>
+        <p class="etape">Étape 1 : utiliser (3)</p>
+        \[ B+L=112 \]
+        <p class="etape">Étape 2 : remplacer dans (2)</p>
+        \[ D+112=192 \iff D=80 \]
+        <p class="etape">Étape 3 : utiliser (1), puis (3)</p>
+        \[ B=D-7=73 \qquad L=112-73=39 \]
+        <p class="etape">Étape 4 : vérifier</p>
+        <p>\(80+39+73=192\) et \(\tfrac{73+39}{2}=56\).</p>
+        <div class="res">Donald a 80 ans, Brigitte 73 ans, Léo 39 ans.</div>
       </div>
     </div>
 
