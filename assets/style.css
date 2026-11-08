@@ -226,3 +226,59 @@ details.sol>.sol-body{padding:.3rem 1rem .8rem}
 .ali-eq{display:block;font-family:Consolas,monospace;background:#f1f5f9;padding:.2rem .6rem;border-radius:6px;margin:.25rem 0}
 .ali-card.hide .ans{filter:blur(7px);cursor:pointer;user-select:none}
 .ali-test,.ali-score{font-size:.9rem;color:var(--ink-soft)}
+
+/* ===== Barre commune (assets/nav.js) : matière > année > chapitre, annales, recherche ===== */
+.topbar.nav-main{flex-wrap:wrap; gap:.5rem .6rem; padding:.6rem 1rem}
+.topbar.nav-main .brand{margin-right:.4rem; white-space:nowrap}
+.nav-main select{background:#1e293b; color:#e2e8f0; border:.5px solid #334155; border-radius:8px;
+  padding:.4rem .5rem; font:inherit; font-size:.9rem; max-width:210px}
+.nav-main select:disabled{opacity:.45}
+.nav-btn{background:#1e293b; border:.5px solid #334155; border-radius:8px; padding:.4rem .7rem;
+  color:#e2e8f0; text-decoration:none; font-size:.9rem; font-weight:600; display:inline-block}
+.nav-btn:hover{color:#fff; border-color:#64748b}
+.nav-btn[hidden]{display:none}
+.nav-search{position:relative; flex:1; min-width:170px}
+.nav-search input{width:100%; background:#fff; color:#0f172a; border:0; border-radius:8px;
+  padding:.45rem .7rem; font:inherit; font-size:.92rem}
+.nav-res{position:absolute; left:0; right:0; top:calc(100% + 4px); background:#fff; color:#0f172a;
+  border-radius:10px; box-shadow:0 8px 24px rgba(0,0,0,.25); max-height:60vh; overflow:auto; z-index:60}
+.nav-res a{display:block; padding:.55rem .8rem; color:#0f172a; text-decoration:none; font-size:.9rem;
+  border-top:.5px solid #e2e8f0}
+.nav-res a:first-child{border-top:0}
+.nav-res a:hover{background:#f1f5f9}
+.nav-res[hidden]{display:none}
+.nav-vide{padding:.6rem .8rem; color:#64748b; font-size:.9rem}
+.subnav{background:#1e293b; color:#cbd5e1; display:flex; gap:.9rem; padding:.45rem 1.2rem;
+  overflow-x:auto; white-space:nowrap; font-size:.9rem}
+.subnav a{color:#cbd5e1; text-decoration:none; font-weight:600}
+.subnav a:hover{color:#fff}
+html{scroll-padding-top:120px}
+
+/* ===== Pages matière, annales et accueil ===== */
+.cat-grid,.home-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin-top:1.2rem}
+.cat-card,.home-card{background:#fff; border-radius:14px; box-shadow:var(--shadow); border-top:5px solid var(--brand);
+  padding:16px 18px; text-decoration:none; color:var(--ink); display:block}
+.cat-card:hover,.home-card:hover{box-shadow:0 12px 32px rgba(0,0,0,.12)}
+.cat-card b,.home-card b{display:block; font-size:1.1rem; font-weight:700; margin-bottom:4px}
+.cat-card span,.home-card span{color:var(--ink-soft); font-size:.9rem}
+.home-card.phys{border-top-color:var(--phys)}
+.home-card.math{border-top-color:var(--math)}
+.home-card.sii{border-top-color:var(--sii)}
+.home-card.am2{border-top-color:var(--am2)}
+.home-card.bigeard{border-top-color:#64748b}
+.cat-annee{margin:1.6rem 0 0}
+.cat-annee h2{font-size:1.1rem; border:none; margin:0 0 .5rem; color:var(--ink)}
+.cat-matiere{margin:2rem 0 0; font-size:1.25rem; color:var(--ink)}
+.cat-liste{list-style:none; margin:0; padding:0; background:#fff; border-radius:12px; box-shadow:var(--shadow); overflow:hidden}
+.cat-liste li{border-top:.5px solid var(--line)}
+.cat-liste li:first-child{border-top:0}
+.cat-liste a{display:flex; gap:.8rem; align-items:baseline; padding:.65rem 1rem; color:var(--ink); text-decoration:none}
+.cat-liste a:hover{background:#f8fafc}
+.cat-liste .num{font-weight:700; color:var(--subject-ink); min-width:3.4rem}
+.home-titre{font-size:1.9rem; margin:.4rem 0 .2rem}
+@media(max-width:600px){
+  .topbar.nav-main{gap:.4rem}
+  .nav-main select{max-width:none; flex:1 1 0; min-width:0; font-size:.82rem; padding:.4rem .3rem}
+  .nav-search{flex-basis:100%}
+  .home-titre{font-size:1.5rem}
+}
