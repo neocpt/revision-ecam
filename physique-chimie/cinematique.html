@@ -216,7 +216,7 @@ window.MathJax = {
 
     <!-- EXO CRÉÉ 1 -->
     <div class="exo-card">
-      <div class="exo-head">✏️ Exercice A — Bille lâchée d'un balcon (cartésien) <span class="diff">♦◊◊</span></div>
+      <div class="exo-head">Exercice A — Bille lâchée d'un balcon (cartésien) <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">Une bille est lancée depuis un balcon situé à \(y_0=8{,}0\)&nbsp;m du sol, avec une
         vitesse initiale horizontale \(v_0=5{,}0\)&nbsp;m·s\(^{-1}\). On prend \(g=9{,}81\)&nbsp;m·s\(^{-2}\),
@@ -226,35 +226,61 @@ window.MathJax = {
         l'instant \(t=0{,}5\)&nbsp;s&nbsp;?</p>
 
         <p class="q">1) Équations horaires</p>
-        <p>Conditions initiales : \(x(0)=0,\ y(0)=8{,}0\) ; \(v_x(0)=5{,}0,\ v_y(0)=0\). L'accélération est
-        \(\vec a=-g\,\vec u_y\), soit \(a_x=0,\ a_y=-g\).</p>
-        <p>On intègre \(a_x=\ddot x=0\) : \(\dot x=v_x=\)cte\(=5{,}0\), puis \(x(t)=5{,}0\,t\) (car \(x(0)=0\)).</p>
-        <p>On intègre \(a_y=\ddot y=-g\) : \(\dot y=v_y=-g\,t+C\). Or \(v_y(0)=0\Rightarrow C=0\), donc
-        \(v_y=-g\,t\). Puis \(y(t)=-\tfrac12 g t^2+D\), et \(y(0)=8{,}0\Rightarrow D=8{,}0\).</p>
-        <div class="res">\(x(t)=5{,}0\,t\qquad;\qquad y(t)=8{,}0-\tfrac12(9{,}81)\,t^2=8{,}0-4{,}905\,t^2\) (en m)</div>
+
+        <p class="etape">Étape 1 : repère et conditions initiales</p>
+        <p>On prend \(Ox\) horizontal dans le sens du lancer, \(Oy\) vertical vers le haut, origine au pied du balcon.</p>
+        <ul>
+          <li>Position initiale : \(x(0) = 0\) et \(y(0) = 8{,}0\) m.</li>
+          <li>Vitesse initiale : \(v_x(0) = 5{,}0\) m·s\(^{-1}\) et \(v_y(0) = 0\).</li>
+        </ul>
+
+        <p class="etape">Étape 2 : l'accélération</p>
+        <p>Seul le poids agit : l'accélération est verticale, vers le bas.</p>
+        \[ \vec a = -g\,\vec u_y \qquad\Longrightarrow\qquad a_x = 0, \quad a_y = -g \]
+
+        <p class="etape">Étape 3 : on intègre selon \(x\)</p>
+        <div class="rappel"><span class="lab">Rappel · intégrer pour remonter à la position</span>\[ v = \int a\,dt + C, \qquad x = \int v\,dt + D \]Les constantes se fixent avec les conditions initiales.</div>
+        \[ \ddot x = 0 \;\Longrightarrow\; \dot x = \text{cte} = 5{,}0 \;\Longrightarrow\; x(t) = 5{,}0\,t \]
+        <p>(car \(x(0) = 0\)).</p>
+
+        <p class="etape">Étape 4 : on intègre selon \(y\)</p>
+        \[ \ddot y = -g \;\Longrightarrow\; \dot y = -g\,t + C \]
+        <p>Or \(v_y(0) = 0\), donc \(C = 0\) et \(\dot y = -g\,t\).</p>
+        \[ y(t) = -\tfrac12 g\,t^2 + D \]
+        <p>Or \(y(0) = 8{,}0\), donc \(D = 8{,}0\).</p>
+        <div class="res">\(x(t) = 5{,}0\,t\) et \(y(t) = 8{,}0 - 4{,}905\,t^2\) (en m, \(t\) en s).</div>
 
         <p class="q">2) Équation de la trajectoire</p>
-        <p>On élimine \(t\) : de \(x=5{,}0\,t\) on tire \(t=\dfrac{x}{5{,}0}\). En reportant dans \(y\) :</p>
-        \[y=8{,}0-4{,}905\left(\frac{x}{5{,}0}\right)^2=8{,}0-0{,}196\,x^2\]
-        <div class="res">Trajectoire <b>parabolique</b> : \(y(x)=8{,}0-0{,}196\,x^2\).</div>
+        <p class="etape">Étape 1 : éliminer le temps</p>
+        <p>De \(x = 5{,}0\,t\), on tire :</p>
+        \[ t = \frac{x}{5{,}0} \]
+        <p class="etape">Étape 2 : reporter dans \(y(t)\)</p>
+        \[ y = 8{,}0 - 4{,}905\left(\frac{x}{5{,}0}\right)^2 = 8{,}0 - 0{,}196\,x^2 \]
+        <div class="res">Trajectoire parabolique : \(y(x) = 8{,}0 - 0{,}196\,x^2\).</div>
 
         <p class="q">3) Impact au sol</p>
-        <p>Le sol correspond à \(y=0\) : \(8{,}0-4{,}905\,t^2=0\Rightarrow t^2=\dfrac{8{,}0}{4{,}905}=1{,}631
-        \Rightarrow t_{sol}=1{,}28\)&nbsp;s (on garde la racine positive).</p>
-        <p>La distance horizontale : \(x(t_{sol})=5{,}0\times1{,}28=6{,}39\)&nbsp;m.</p>
-        <div class="res">La bille touche le sol après \(t_{sol}\approx1{,}28\)&nbsp;s, à \(\approx6{,}4\)&nbsp;m du balcon.</div>
+        <p class="etape">Étape 1 : l'instant d'impact</p>
+        <p>Le sol correspond à \(y = 0\) :</p>
+        \[ 8{,}0 - 4{,}905\,t^2 = 0 \iff t^2 = \frac{8{,}0}{4{,}905} = 1{,}631 \]
+        <p>On garde la racine positive :</p>
+        \[ t_{sol} = \sqrt{1{,}631} \approx 1{,}28\ \text{s} \]
+        <p class="etape">Étape 2 : la distance horizontale</p>
+        \[ x(t_{sol}) = 5{,}0 \times 1{,}28 \approx 6{,}39\ \text{m} \]
+        <div class="res">La bille touche le sol après \(t_{sol} \approx 1{,}28\) s, à environ 6,4 m du pied du balcon.</div>
 
-        <p class="q">4) Mouvement accéléré à \(t=0{,}5\)&nbsp;s&nbsp;?</p>
-        <p>On calcule \(\vec a\cdot\vec v\). À \(t=0{,}5\) : \(\vec v=(5{,}0\,;\,-g\cdot0{,}5)=(5{,}0\,;\,-4{,}905)\),
-        \(\vec a=(0\,;\,-9{,}81)\).</p>
-        \[\vec a\cdot\vec v=0\times5{,}0+(-9{,}81)\times(-4{,}905)=+48{,}1>0\]
-        <div class="res">\(\vec a\cdot\vec v>0\) : le mouvement est <b>accéléré</b> (la bille accélère vers le bas, sa vitesse augmente en norme).</div>
+        <p class="q">4) Mouvement accéléré à \(t = 0{,}5\) s ?</p>
+        <div class="rappel"><span class="lab">Rappel · accéléré ou décéléré</span>\[ \vec a\cdot\vec v > 0 \;\Rightarrow\; \text{accéléré} \qquad \vec a\cdot\vec v &lt; 0 \;\Rightarrow\; \text{décéléré} \]</div>
+        <p class="etape">Étape 1 : les vecteurs à \(t = 0{,}5\) s</p>
+        \[ \vec v = \begin{pmatrix} 5{,}0 \\ -9{,}81 \times 0{,}5 \end{pmatrix} = \begin{pmatrix} 5{,}0 \\ -4{,}905 \end{pmatrix} \qquad \vec a = \begin{pmatrix} 0 \\ -9{,}81 \end{pmatrix} \]
+        <p class="etape">Étape 2 : le produit scalaire</p>
+        \[ \vec a\cdot\vec v = 0 \times 5{,}0 + (-9{,}81) \times (-4{,}905) \approx +48{,}1\ \text{m}^2\text{·s}^{-3} \]
+        <div class="res">\(\vec a\cdot\vec v > 0\) : le mouvement est accéléré (la norme de la vitesse augmente pendant la chute).</div>
       </div>
     </div>
 
     <!-- EXO CRÉÉ 2 -->
     <div class="exo-card">
-      <div class="exo-head">✏️ Exercice B — Plateau tournant (polaire) <span class="diff">♦♦◊</span></div>
+      <div class="exo-head">Exercice B — Plateau tournant (polaire) <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">Un point \(M\) se déplace sur un disque : sa distance à l'axe croît selon
         \(r(t)=R_0+bt\) (avec \(R_0=0{,}20\)&nbsp;m, \(b=0{,}10\)&nbsp;m·s\(^{-1}\)) tandis qu'il tourne à
@@ -263,51 +289,67 @@ window.MathJax = {
         composante de \(\vec a\).</p>
 
         <p class="q">1) Vecteur vitesse</p>
-        <p>On a \(\dot r=b=0{,}10\) (constant) et \(r\dot\theta=(R_0+bt)\,\omega\). D'après la formule polaire :</p>
-        \[\vec v=\dot r\,\vec u_r+r\dot\theta\,\vec u_\theta=b\,\vec u_r+(R_0+bt)\,\omega\,\vec u_\theta\]
-        <p>À \(t=2{,}0\)&nbsp;s : \(r=0{,}20+0{,}10\times2{,}0=0{,}40\)&nbsp;m, donc
-        \(v_r=0{,}10\) et \(v_\theta=0{,}40\times2{,}0=0{,}80\).</p>
-        \[v=\sqrt{v_r^2+v_\theta^2}=\sqrt{0{,}10^2+0{,}80^2}=\sqrt{0{,}01+0{,}64}=\sqrt{0{,}65}\approx0{,}81\ \text{m·s}^{-1}\]
-        <div class="res">\(\vec v=0{,}10\,\vec u_r+0{,}80\,\vec u_\theta\) ; \(v\approx0{,}81\)&nbsp;m·s\(^{-1}\).</div>
+        <div class="rappel"><span class="lab">Rappel · vitesse en coordonnées polaires</span>\[ \vec v = \dot r\,\vec u_r + r\dot\theta\,\vec u_\theta \]</div>
+        <p class="etape">Étape 1 : les dérivées</p>
+        <ul>
+          <li>\(r = R_0 + bt\), donc \(\dot r = b = 0{,}10\) m·s\(^{-1}\) (constant).</li>
+          <li>\(\dot\theta = \omega = 2{,}0\) rad·s\(^{-1}\).</li>
+        </ul>
+        \[ \vec v = b\,\vec u_r + (R_0 + bt)\,\omega\,\vec u_\theta \]
+        <p class="etape">Étape 2 : valeurs à \(t = 2{,}0\) s</p>
+        \[ r = 0{,}20 + 0{,}10 \times 2{,}0 = 0{,}40\ \text{m} \]
+        \[ v_r = 0{,}10\ \text{m·s}^{-1} \qquad v_\theta = r\omega = 0{,}40 \times 2{,}0 = 0{,}80\ \text{m·s}^{-1} \]
+        <p class="etape">Étape 3 : la norme</p>
+        \[ v = \sqrt{v_r^2 + v_\theta^2} = \sqrt{0{,}10^2 + 0{,}80^2} = \sqrt{0{,}65} \approx 0{,}81\ \text{m·s}^{-1} \]
+        <div class="res">\(\vec v = 0{,}10\,\vec u_r + 0{,}80\,\vec u_\theta\) et \(v \approx 0{,}81\) m·s\(^{-1}\) à \(t = 2{,}0\) s.</div>
 
         <p class="q">2) Vecteur accélération</p>
-        <p>Ici \(\ddot r=0\) (car \(\dot r=b\) constant) et \(\ddot\theta=0\). La formule
-        \(\vec a=(\ddot r-r\dot\theta^2)\vec u_r+(2\dot r\dot\theta+r\ddot\theta)\vec u_\theta\) devient :</p>
-        \[\vec a=-r\omega^2\,\vec u_r+2b\omega\,\vec u_\theta\]
-        <p>À \(t=2{,}0\)&nbsp;s : \(a_r=-0{,}40\times2{,}0^2=-1{,}60\) ; \(a_\theta=2\times0{,}10\times2{,}0=0{,}40\).</p>
-        <div class="res">\(\vec a=-1{,}60\,\vec u_r+0{,}40\,\vec u_\theta\) (m·s\(^{-2}\)).</div>
+        <div class="rappel"><span class="lab">Rappel · accélération en coordonnées polaires</span>\[ \vec a = \left(\ddot r - r\dot\theta^2\right)\vec u_r + \left(2\dot r\dot\theta + r\ddot\theta\right)\vec u_\theta \]</div>
+        <p class="etape">Étape 1 : simplifier</p>
+        <p>Ici \(\dot r = b\) est constant, donc \(\ddot r = 0\). Et \(\dot\theta\) est constant, donc \(\ddot\theta = 0\) :</p>
+        \[ \vec a = -r\omega^2\,\vec u_r + 2b\omega\,\vec u_\theta \]
+        <p class="etape">Étape 2 : valeurs à \(t = 2{,}0\) s</p>
+        \[ a_r = -0{,}40 \times 2{,}0^2 = -1{,}60\ \text{m·s}^{-2} \qquad a_\theta = 2 \times 0{,}10 \times 2{,}0 = 0{,}40\ \text{m·s}^{-2} \]
+        <div class="res">\(\vec a = -1{,}60\,\vec u_r + 0{,}40\,\vec u_\theta\) (en m·s\(^{-2}\)).</div>
 
         <p class="q">3) Interprétation</p>
         <ul>
-          <li>\(a_r=-r\omega^2\) : terme <b>centripète</b>, dirigé vers l'axe — bien que la vitesse angulaire soit constante, la rotation courbe la trajectoire.</li>
-          <li>\(a_\theta=2b\omega\) : terme de <b>Coriolis</b>, non nul car le point s'éloigne (\(\dot r\neq0\)) tout en tournant (\(\dot\theta\neq0\)).</li>
+          <li>\(a_r = -r\omega^2\) : terme <b>centripète</b>, dirigé vers l'axe. Même à vitesse angulaire constante, la rotation courbe la trajectoire.</li>
+          <li>\(a_\theta = 2b\omega\) : terme de <b>Coriolis</b>. Il existe parce que le point s'éloigne (\(\dot r \neq 0\)) tout en tournant (\(\dot\theta \neq 0\)).</li>
         </ul>
       </div>
     </div>
 
     <!-- EXO CRÉÉ 3 -->
     <div class="exo-card">
-      <div class="exo-head">✏️ Exercice C — Vis sans fin (cylindrique) <span class="diff">♦◊◊</span></div>
+      <div class="exo-head">Exercice C — Vis sans fin (cylindrique) <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">Un point suit une hélice : \(r(t)=R=0{,}05\)&nbsp;m (constant), \(\theta(t)=\omega t\)
         avec \(\omega=10\)&nbsp;rad·s\(^{-1}\), \(z(t)=h\,t\) avec \(h=0{,}02\)&nbsp;m·s\(^{-1}\).
         1) Vitesse et sa norme. 2) Accélération. 3) Nature du mouvement.</p>
 
         <p class="q">1) Vitesse</p>
-        <p>\(\dot r=0\), \(\dot\theta=\omega\), \(\dot z=h\). Donc :</p>
-        \[\vec v=0\cdot\vec u_r+R\omega\,\vec u_\theta+h\,\vec u_z=R\omega\,\vec u_\theta+h\,\vec u_z\]
-        \[v=\sqrt{(R\omega)^2+h^2}=\sqrt{(0{,}05\times10)^2+0{,}02^2}=\sqrt{0{,}25+0{,}0004}\approx0{,}50\ \text{m·s}^{-1}\]
-        <div class="res">\(\vec v=0{,}50\,\vec u_\theta+0{,}02\,\vec u_z\) ; \(v\approx0{,}50\)&nbsp;m·s\(^{-1}\) <b>constante</b>.</div>
+        <div class="rappel"><span class="lab">Rappel · vitesse en coordonnées cylindriques</span>\[ \vec v = \dot r\,\vec u_r + r\dot\theta\,\vec u_\theta + \dot z\,\vec u_z \]</div>
+        <p class="etape">Étape 1 : les dérivées</p>
+        \[ \dot r = 0, \qquad \dot\theta = \omega, \qquad \dot z = h \]
+        \[ \vec v = R\omega\,\vec u_\theta + h\,\vec u_z \]
+        <p class="etape">Étape 2 : la norme</p>
+        \[ v = \sqrt{(R\omega)^2 + h^2} = \sqrt{(0{,}05 \times 10)^2 + 0{,}02^2} = \sqrt{0{,}25 + 0{,}0004} \approx 0{,}50\ \text{m·s}^{-1} \]
+        <div class="res">\(\vec v = 0{,}50\,\vec u_\theta + 0{,}02\,\vec u_z\) et \(v \approx 0{,}50\) m·s\(^{-1}\), constante.</div>
 
         <p class="q">2) Accélération</p>
-        <p>\(\ddot r=0\), \(\ddot\theta=0\), \(\ddot z=0\). Il ne reste que le terme centripète :</p>
-        \[\vec a=(\ddot r-r\dot\theta^2)\vec u_r+\dots=-R\omega^2\,\vec u_r=-0{,}05\times10^2\,\vec u_r=-5{,}0\,\vec u_r\]
-        <div class="res">\(\vec a=-5{,}0\,\vec u_r\) (m·s\(^{-2}\)), purement radiale (centripète).</div>
+        <div class="rappel"><span class="lab">Rappel · accélération en coordonnées cylindriques</span>\[ \vec a = \left(\ddot r - r\dot\theta^2\right)\vec u_r + \left(2\dot r\dot\theta + r\ddot\theta\right)\vec u_\theta + \ddot z\,\vec u_z \]</div>
+        <p>Ici \(\dot r = \ddot r = 0\), \(\ddot\theta = 0\) et \(\ddot z = 0\). Il ne reste que le terme centripète :</p>
+        \[ \vec a = -R\omega^2\,\vec u_r = -0{,}05 \times 10^2\,\vec u_r = -5{,}0\,\vec u_r \]
+        <div class="res">\(\vec a = -5{,}0\,\vec u_r\) (m·s\(^{-2}\)) : accélération purement radiale, centripète.</div>
 
-        <p class="q">3) Nature</p>
-        <p>\(r\) constant + \(z\) linéaire + \(\theta\) linéaire = <b>mouvement hélicoïdal uniforme</b> (hélice
-        circulaire à pas constant). \(v\) est constante et \(\vec a\cdot\vec v=(-5{,}0)(0)=0\) : mouvement uniforme,
-        confirmé.</p>
+        <p class="q">3) Nature du mouvement</p>
+        <ul>
+          <li>\(r\) constant et \(\theta\) linéaire en \(t\) : on tourne en cercle à vitesse angulaire constante.</li>
+          <li>\(z\) linéaire en \(t\) : on monte à vitesse constante.</li>
+          <li>\(\vec a\cdot\vec v = (-5{,}0) \times 0 = 0\) : la norme de la vitesse ne varie pas.</li>
+        </ul>
+        <div class="res">Mouvement hélicoïdal uniforme (hélice circulaire à pas constant).</div>
       </div>
     </div>
   </section>
@@ -333,21 +375,32 @@ window.MathJax = {
         <p class="enonce">Un véhicule se déplace sur une trajectoire rectiligne. À partir d'un cas exemple, on
         doit compléter, pour 3 autres cas, les représentations (courbe \(v(t)\), diagramme stroboscopique,
         description, sens de \(\vec v\) et \(\vec a\)).</p>
+
         <p class="q">Cas 1 — « sens négatif, vitesse constante »</p>
-        <p>Vitesse constante ⇒ \(\vec a=\vec 0\). La courbe \(v(t)\) est une <b>horizontale sous l'axe</b>
-        (valeur algébrique négative, car le déplacement se fait dans le sens négatif). Le diagramme
-        stroboscopique montre des points <b>régulièrement espacés</b> (pas d'accélération) allant dans le sens
-        négatif. \(\vec v\) pointe dans le sens négatif, \(\vec a=\vec 0\).</p>
+        <div class="rappel"><span class="lab">Rappel · lire un mouvement rectiligne</span>Le signe de \(v\) donne le sens du déplacement. La pente de \(v(t)\) donne le signe de \(a\). Si \(\vec a\) et \(\vec v\) sont dans le même sens, le mouvement est accéléré ; sinon il est décéléré.</div>
+        <ul>
+          <li>Vitesse constante, donc \(\vec a = \vec 0\).</li>
+          <li>Courbe \(v(t)\) : une horizontale sous l'axe (valeur négative, car on va dans le sens négatif).</li>
+          <li>Diagramme stroboscopique : points régulièrement espacés, allant dans le sens négatif.</li>
+          <li>\(\vec v\) pointe dans le sens négatif ; \(\vec a = \vec 0\).</li>
+        </ul>
+
         <p class="q">Cas 2 — diagramme stroboscopique donné (points de plus en plus resserrés dans le sens positif)</p>
-        <p>Points qui se rapprochent ⇒ la vitesse <b>diminue</b> : <b>déplacement dans le sens positif et
-        décélération</b>. \(\vec v\) pointe dans le sens positif, \(\vec a\) dans le sens négatif (opposé à
-        \(\vec v\), donc \(\vec a\cdot\vec v<0\)). Courbe \(v(t)\) : droite décroissante partant d'une valeur
-        positive.</p>
+        <ul>
+          <li>Les points se rapprochent : la distance parcourue par intervalle diminue, donc la vitesse diminue.</li>
+          <li>Description : déplacement dans le sens positif, décéléré.</li>
+          <li>\(\vec v\) dans le sens positif, \(\vec a\) dans le sens négatif, donc \(\vec a\cdot\vec v &lt; 0\).</li>
+          <li>Courbe \(v(t)\) : droite décroissante, partant d'une valeur positive.</li>
+        </ul>
+
         <p class="q">Cas 3 — courbe \(v(t)\) donnée (droite sous l'axe, de pente négative)</p>
-        <p>\(v<0\) (sens négatif) et \(|v|\) augmente ⇒ <b>déplacement dans le sens négatif et accélération</b>.
-        Points stroboscopiques de plus en plus espacés vers le sens négatif. \(\vec v\) et \(\vec a\) tous deux
-        dans le sens négatif (\(\vec a\cdot\vec v>0\)).</p>
-        <div class="res">Règle générale : \(\vec a\) même sens que \(\vec v\) ⇒ accéléré ; sens opposé ⇒ décéléré. Le signe de \(v\) donne le sens du déplacement, la pente de \(v(t)\) donne le signe de \(a\).</div>
+        <ul>
+          <li>\(v &lt; 0\) : déplacement dans le sens négatif.</li>
+          <li>\(|v|\) augmente : mouvement accéléré.</li>
+          <li>Points stroboscopiques de plus en plus espacés vers le sens négatif.</li>
+          <li>\(\vec v\) et \(\vec a\) tous deux dans le sens négatif : \(\vec a\cdot\vec v > 0\).</li>
+        </ul>
+        <div class="res">\(\vec a\) dans le même sens que \(\vec v\) : accéléré. Sens opposé : décéléré. Le signe de \(v\) donne le sens du déplacement, la pente de \(v(t)\) donne le signe de \(a\).</div>
       </div>
     </div>
 
@@ -357,16 +410,19 @@ window.MathJax = {
         <p class="enonce">Une balle monte puis redescend un plan incliné (diagramme stroboscopique, mêmes
         instants à la montée et à la descente). Représenter, pour les 8 positions, le vecteur accélération selon
         l'axe \(Ox\).</p>
-        <p><b>Correction.</b> Les 8 vecteurs accélération sont <b>identiques</b> : sur tout le trajet,
-        l'accélération est constante et <b>dirigée vers le bas du plan incliné</b> (elle est due à la composante
-        du poids le long du plan, qui ne change pas).</p>
+
+        <p class="q">Vecteurs accélération aux 8 positions</p>
+        <p class="etape">Étape 1 : d'où vient l'accélération</p>
+        <p>Sur le plan incliné (sans frottement), l'accélération vient de la composante du poids parallèle au plan. Elle ne dépend ni de la position ni du sens du mouvement.</p>
+        <p class="etape">Étape 2 : conclusion pour les 8 positions</p>
+        <p>Les 8 vecteurs accélération sont identiques : même norme, dirigés vers le bas du plan.</p>
+        <p class="etape">Étape 3 : effet sur la vitesse</p>
         <ul>
-          <li><b>À la montée</b> : \(\vec v\) est vers le haut, \(\vec a\) vers le bas ⇒ \(\vec a\cdot\vec v<0\),
-          la balle <b>freine</b> jusqu'au point culminant où \(v=0\).</li>
-          <li><b>À la descente</b> : \(\vec v\) est vers le bas, \(\vec a\) vers le bas ⇒ \(\vec a\cdot\vec v>0\),
-          la balle <b>accélère</b>.</li>
+          <li>À la montée : \(\vec v\) vers le haut, \(\vec a\) vers le bas, donc \(\vec a\cdot\vec v &lt; 0\). La balle freine jusqu'au point haut où \(v = 0\).</li>
+          <li>À la descente : \(\vec v\) et \(\vec a\) vers le bas, donc \(\vec a\cdot\vec v > 0\). La balle accélère.</li>
         </ul>
-        <div class="res">L'accélération est la même partout (même vecteur), seul son effet (freiner/accélérer) change selon le sens de la vitesse.</div>
+        <div class="res">L'accélération est la même en tout point (même vecteur, vers le bas du plan). Seul son effet change : elle freine à la montée et accélère à la descente.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Au point le plus haut, \(v = 0\) mais l'accélération n'est pas nulle. Sinon la balle resterait immobile en haut.</div>
       </div>
     </div>
 
@@ -375,17 +431,28 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Balle qui monte puis descend un plan incliné. Cas 1 : axe orienté vers le haut du plan.
         Cas 2 : axe orienté vers le bas. Tracer \(x(t)\), \(v(t)\), \(a(t)\) (accélération supposée constante).</p>
-        <p class="q">Cas 1 — axe vers le haut</p>
-        <p>La balle part vers le haut (sens \(+\)) puis retombe. L'accélération (vers le bas du plan) est dans le
-        sens \(-\), donc <b>\(a(t)=-a_0\) constante (droite horizontale sous l'axe)</b>.</p>
-        <p>\(v(t)=-a_0 t+v_0\) : droite <b>décroissante</b>, positive au départ, qui s'annule au sommet
-        (\(t^*=v_0/a_0\)) puis devient négative.</p>
-        <p>\(x(t)=-\tfrac12 a_0 t^2+v_0 t\) : <b>parabole \(\cap\)</b> (concavité vers le bas), maximum en \(t^*\).</p>
-        <p class="q">Cas 2 — axe vers le bas</p>
-        <p>Tout est inversé en signe : la balle part dans le sens \(-\) (elle monte, mais l'axe pointe vers le
-        bas), \(a(t)=+a_0\) (horizontale au-dessus de l'axe), \(v(t)=a_0 t - v_0\) (droite croissante, négative
-        puis positive), \(x(t)=\tfrac12 a_0 t^2 - v_0 t\) : <b>parabole \(\cup\)</b> (concavité vers le haut).</p>
-        <div class="res">Changer l'orientation de l'axe change tous les signes, mais décrit le même mouvement physique. La forme des courbes (droite pour \(a\) et \(v\), parabole pour \(x\)) est conservée, la concavité s'inverse.</div>
+
+        <p class="q">Cas 1 — axe orienté vers le haut du plan</p>
+        <div class="rappel"><span class="lab">Rappel · mouvement à accélération constante</span>\[ a(t) = a, \qquad v(t) = a\,t + v_0, \qquad x(t) = \tfrac12 a\,t^2 + v_0\,t + x_0 \]</div>
+        <p class="etape">Étape 1 : signes</p>
+        <p>La balle part vers le haut : \(v_0 > 0\). L'accélération est dirigée vers le bas du plan : \(a = -a_0\), avec \(a_0 > 0\).</p>
+        <p class="etape">Étape 2 : les trois courbes</p>
+        <ul>
+          <li>\(a(t) = -a_0\) : droite horizontale sous l'axe.</li>
+          <li>\(v(t) = -a_0 t + v_0\) : droite décroissante. Elle s'annule au sommet, en \(t^* = v_0/a_0\), puis devient négative.</li>
+          <li>\(x(t) = -\tfrac12 a_0 t^2 + v_0 t\) : parabole tournée vers le bas, maximale en \(t^*\).</li>
+        </ul>
+
+        <p class="q">Cas 2 — axe orienté vers le bas du plan</p>
+        <p class="etape">Étape 1 : signes</p>
+        <p>Tous les signes s'inversent : la balle part dans le sens négatif (\(-v_0\)) et l'accélération vaut \(+a_0\).</p>
+        <p class="etape">Étape 2 : les trois courbes</p>
+        <ul>
+          <li>\(a(t) = +a_0\) : horizontale au-dessus de l'axe.</li>
+          <li>\(v(t) = a_0 t - v_0\) : droite croissante, négative puis positive.</li>
+          <li>\(x(t) = \tfrac12 a_0 t^2 - v_0 t\) : parabole tournée vers le haut, minimale en \(t^*\).</li>
+        </ul>
+        <div class="res">Changer l'orientation de l'axe change tous les signes, mais décrit le même mouvement. Les formes sont conservées (droites pour \(a\) et \(v\), parabole pour \(x\)) ; la concavité de \(x(t)\) s'inverse.</div>
       </div>
     </div>
 
@@ -398,39 +465,50 @@ window.MathJax = {
         \(t=7\)&nbsp;s. 3) Que dire aux points anguleux&nbsp;?</p>
 
         <p class="q">1) Description par intervalles</p>
+        <div class="rappel"><span class="lab">Rappel · lecture d'un graphe \(v(t)\)</span>Pente de \(v(t)\) = accélération. Signe de \(v\) = sens du déplacement. Aire sous la courbe = déplacement algébrique.</div>
         <table>
           <tr><th>Intervalle</th><th>Description</th></tr>
-          <tr><td>\([0;2]\)</td><td>Uniformément accéléré. Le joueur va d'abord dans le sens négatif (vitesse \(<0\) qui décroît en valeur absolue), s'arrête à \(t=4/3\), puis repart dans le sens positif (vitesse croissante).</td></tr>
-          <tr><td>\([2;5]\)</td><td>Uniforme dans le sens positif : \(v=1\) constante.</td></tr>
-          <tr><td>\([5;6]\)</td><td>Uniformément décéléré : le joueur va dans le sens positif, vitesse décroissante.</td></tr>
-          <tr><td>\([6;7]\)</td><td>Immobile : \(v=0\).</td></tr>
+          <tr><td>\([0\,;\,2]\)</td><td>Uniformément accéléré (pente constante positive). Le joueur va d'abord dans le sens négatif, s'arrête à \(t = 4/3\) s, puis repart dans le sens positif.</td></tr>
+          <tr><td>\([2\,;\,5]\)</td><td>Uniforme dans le sens positif : \(v = 1\) m·s\(^{-1}\).</td></tr>
+          <tr><td>\([5\,;\,6]\)</td><td>Uniformément décéléré dans le sens positif.</td></tr>
+          <tr><td>\([6\,;\,7]\)</td><td>Immobile : \(v = 0\).</td></tr>
         </table>
 
-        <p class="q">2) Distance parcourue \(D=\int|v(t)|\,dt\)</p>
-        <p><b>Sur \([0;2]\).</b> La vitesse est la droite passant par \((0,-2)\) et \((2,1)\) :
-        pente \(a=\dfrac{1-(-2)}{2-0}=\dfrac32\), ordonnée à l'origine \(b=-2\), d'où \(v(t)=\tfrac32 t-2\).
-        Elle s'annule et change de signe en \(t=\tfrac43\). Il faut donc couper l'intégrale :</p>
-        \[D_1=\int_0^{4/3}\!\!\Big(2-\tfrac32 t\Big)dt+\int_{4/3}^{2}\!\!\Big(\tfrac32 t-2\Big)dt
-        =\Big[2t-\tfrac34 t^2\Big]_0^{4/3}+\Big[\tfrac34 t^2-2t\Big]_{4/3}^{2}\]
-        \[D_1=\Big(\tfrac83-\tfrac43\Big)+\Big(\tfrac32-4-\tfrac43+\tfrac83\Big)=\tfrac83+\tfrac32-4\approx1{,}6\ \text{m}\]
-        <div class="warnbox"><span class="lab">Piège important</span>
-        Ce n'est <b>pas</b> \(x(2)-x(0)\). En effet \(x(t)=\tfrac34 t^2-2t\) donne \(x(2)-x(0)=3-4=-1\)&nbsp;m :
-        la position finale est à \(-1\)&nbsp;m, mais la <b>distance réellement parcourue</b> est \(1{,}6\)&nbsp;m
-        car la vitesse a changé de signe (aller-retour partiel). On ne peut faire \(\int v\,dt = \Delta x\) que
-        si \(v\) garde un signe constant.</div>
-        <p><b>Sur \([2;5]\).</b> \(v=1\) constante : \(D_2=\int_2^5 1\,dt=3\)&nbsp;m.</p>
-        <p><b>Sur \([5;6]\).</b> Droite par \((5,1)\) et \((6,0)\) : pente \(-1\), \(v(t)=-t+6\), positive sur
-        l'intervalle. \(D_3=\int_5^6(-t+6)dt=\big[-\tfrac12 t^2+6t\big]_5^6=(-18+36)-(-12{,}5+30)=0{,}5\)&nbsp;m.</p>
-        <p><b>Sur \([6;7]\).</b> Immobile : \(D_4=0\).</p>
-        <div class="res">Distance totale : \(D=D_1+D_2+D_3+D_4\approx1{,}6+3+0{,}5+0=\mathbf{5{,}1\ m}\).
-        Position finale : \(x(7)=x(6)=x(2)+ (D_2+D_3)=-1+3+0{,}5=+2{,}5\)&nbsp;m de l'origine (la vitesse est
-        positive après \(t=4/3\), donc position = \(-1+3{,}5=2{,}5\)&nbsp;m).</div>
+        <p class="q">2) Distance parcourue et position à \(t = 7\) s</p>
+        <div class="rappel"><span class="lab">Rappel · distance parcourue</span>\[ D = \int |v(t)|\,dt \]On coupe l'intégrale à chaque changement de signe de \(v\).</div>
+
+        <p class="etape">Étape 1 : équation de \(v\) sur \([0\,;\,2]\)</p>
+        <p>Droite passant par \((0\,;\,-2)\) et \((2\,;\,1)\) :</p>
+        \[ \text{pente} = \frac{1 - (-2)}{2 - 0} = \frac32 \qquad\Longrightarrow\qquad v(t) = \tfrac32 t - 2 \]
+        <p>Elle s'annule en \(t = 4/3\) s.</p>
+
+        <p class="etape">Étape 2 : distance sur \([0\,;\,2]\)</p>
+        \[ D_1 = \int_0^{4/3}\left(2 - \tfrac32 t\right)dt + \int_{4/3}^{2}\left(\tfrac32 t - 2\right)dt \]
+        \[ D_1 = \Big[2t - \tfrac34 t^2\Big]_0^{4/3} + \Big[\tfrac34 t^2 - 2t\Big]_{4/3}^{2} = \left(\tfrac83 - \tfrac43\right) + \left(-1 + \tfrac43\right) = \tfrac43 + \tfrac13 \]
+        \[ D_1 = \frac53 \approx 1{,}67\ \text{m} \]
+
+        <p class="etape">Étape 3 : distance sur \([2\,;\,5]\)</p>
+        \[ D_2 = \int_2^5 1\,dt = 3\ \text{m} \]
+
+        <p class="etape">Étape 4 : distance sur \([5\,;\,6]\)</p>
+        <p>Droite par \((5\,;\,1)\) et \((6\,;\,0)\) : \(v(t) = -t + 6\), positive sur l'intervalle.</p>
+        \[ D_3 = \int_5^6 (-t + 6)\,dt = \Big[-\tfrac12 t^2 + 6t\Big]_5^6 = 18 - 17{,}5 = 0{,}5\ \text{m} \]
+
+        <p class="etape">Étape 5 : bilan</p>
+        \[ D = D_1 + D_2 + D_3 + 0 = \frac53 + 3 + 0{,}5 \approx 5{,}17\ \text{m} \]
+        <p>Position : sur \([0\,;\,2]\), \(x(t) = \tfrac34 t^2 - 2t\), donc \(x(2) = 3 - 4 = -1\) m. Ensuite \(v \ge 0\) :</p>
+        \[ x(7) = x(2) + D_2 + D_3 = -1 + 3 + 0{,}5 = 2{,}5\ \text{m} \]
+        <div class="res">Distance parcourue : \(D \approx 5{,}2\) m. Position finale : \(x(7) = +2{,}5\) m.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Sur \([0\,;\,2]\), \(x(2) - x(0) = -1\) m, mais la distance parcourue est \(5/3\) m : la vitesse change de signe. On n'a \(\int v\,dt = D\) que si \(v\) garde un signe constant.</div>
+        <div class="warnbox"><span class="lab">Correction d'une erreur de l'ancienne version</span> L'ancienne version donnait \(D_1 \approx 1{,}6\) m avec un calcul intermédiaire faux (\(\tfrac83 + \tfrac32 - 4\) vaut \(0{,}17\)). Le bon calcul donne \(D_1 = 5/3 \approx 1{,}67\) m, donc \(D \approx 5{,}17\) m (et non 5,1 m).</div>
 
         <p class="q">3) Points anguleux</p>
-        <p>Un point anguleux sur \(v(t)\) correspond à un changement <b>instantané</b> de la pente, c'est-à-dire
-        une variation instantanée de l'accélération. Un vrai « coin » (discontinuité de \(v\)) exigerait une
-        accélération <b>infinie</b> : physiquement impossible. En réalité il existe toujours un raccord continu,
-        très bref mais non nul.</p>
+        <p>Un point anguleux de \(v(t)\) correspond à un changement instantané de pente, donc à un saut de l'accélération.</p>
+        <ul>
+          <li>Un saut de \(v\) lui-même demanderait une accélération infinie : impossible.</li>
+          <li>Un saut de \(a\) est une idéalisation : en réalité, le raccord est très bref mais continu.</li>
+        </ul>
+        <div class="res">Les coins du graphe sont une modélisation : le vrai mouvement est lissé sur une durée très courte.</div>
       </div>
     </div>
 
@@ -440,20 +518,33 @@ window.MathJax = {
         <p class="enonce">Graphe de \(a(t)\) d'une balle initialement au repos : \(a\) monte linéairement de
         \((0,0)\) à \((4,2)\), puis redescend de \((4,2)\) à \((6,0)\) (en m·s\(^{-2}\), passant par \(0\) en
         \(t=5\)). 1) Quand \(v\) est-elle maximale&nbsp;? 2) Reformuler proprement. 3) Valeur de cette vitesse.</p>
-        <p class="q">1) Instant de vitesse maximale</p>
-        <p>La balle partant du repos, \(v(t)=\int_0^t a\,dt'\) : \(v\) <b>augmente tant que \(a>0\)</b> et diminue
-        quand \(a<0\). L'accélération s'annule (en changeant de signe \(+\to-\)) à \(t=5\)&nbsp;s, pas à
-        \(t=4\)&nbsp;s. Donc \(v\) est maximale à <b>\(t=5\)&nbsp;s</b> (piège : le pic de \(a\) est à \(t=4\),
-        mais \(a\) y est encore positive, donc \(v\) croît encore).</p>
+
+        <p class="q">1) Instant où la vitesse est maximale</p>
+        <div class="rappel"><span class="lab">Rappel · vitesse et accélération</span>\[ v(t) = v(0) + \int_0^t a(t')\,dt' \]\(v\) croît tant que \(a > 0\) et décroît quand \(a &lt; 0\).</div>
+        <p class="etape">Étape 1 : signe de \(a\)</p>
+        <ul>
+          <li>Sur \([0\,;\,5]\) : \(a \ge 0\), donc \(v\) augmente.</li>
+          <li>Sur \([5\,;\,6]\) : \(a &lt; 0\), donc \(v\) diminue.</li>
+        </ul>
+        <p class="etape">Étape 2 : conclusion</p>
+        <div class="res">La vitesse est maximale à \(t = 5\) s, quand \(a\) s'annule en changeant de signe.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Le pic de \(a\) est à \(t = 4\) s, mais \(a\) y est encore positive : \(v\) continue de croître jusqu'à \(t = 5\) s.</div>
+
         <p class="q">2) Reformulation</p>
-        <p>Le mot « vitesse » est ambigu. En physique \(\vec v\) est un vecteur ; ici on parle de sa norme. Bonne
-        formulation : « à quel instant la <b>norme du vecteur vitesse</b> est-elle maximale ? ».</p>
-        <p class="q">3) Valeur (intégration de \(a\))</p>
-        <p>Équations de \(a\) : sur \([0;4]\), \(a(t)=\tfrac12 t\) ; sur \([4;6]\), \(a(t)=-2t+10\). On intègre
-        de \(0\) à \(5\) :</p>
-        \[v(5)=\int_0^4\tfrac12 t\,dt+\int_4^5(-2t+10)\,dt=\Big[\tfrac14 t^2\Big]_0^4+\big[-t^2+10t\big]_4^5\]
-        \[v(5)=4+\big[(-25+50)-(-16+40)\big]=4+(25-24)=\mathbf{5\ \text{m·s}^{-1}}\]
-        <div class="res">La vitesse est maximale à \(t=5\)&nbsp;s et vaut \(5\)&nbsp;m·s\(^{-1}\).</div>
+        <p>En physique, \(\vec v\) est un vecteur ; « vitesse maximale » n'a de sens que pour sa norme.</p>
+        <div class="res">« À quel instant la norme du vecteur vitesse est-elle maximale ? »</div>
+
+        <p class="q">3) Valeur de la vitesse maximale</p>
+        <p class="etape">Étape 1 : équations de \(a(t)\)</p>
+        <ul>
+          <li>Sur \([0\,;\,4]\) : droite de \((0\,;\,0)\) à \((4\,;\,2)\), donc \(a(t) = \tfrac12 t\).</li>
+          <li>Sur \([4\,;\,5]\) : droite passant par \((4\,;\,2)\) et \((5\,;\,0)\), de pente \(-2\), donc \(a(t) = -2t + 10\).</li>
+        </ul>
+        <p>Seule la partie \([0\,;\,5]\) sert pour \(v(5)\) : on n'a pas besoin de la fin du graphe.</p>
+        <p class="etape">Étape 2 : intégration de 0 à 5 s (départ au repos)</p>
+        \[ v(5) = \int_0^4 \tfrac12 t\,dt + \int_4^5 (-2t + 10)\,dt = \Big[\tfrac14 t^2\Big]_0^4 + \Big[-t^2 + 10t\Big]_4^5 \]
+        \[ v(5) = 4 + \big[(-25 + 50) - (-16 + 40)\big] = 4 + 1 = 5\ \text{m·s}^{-1} \]
+        <div class="res">\(v_{max} = 5\) m·s\(^{-1}\), atteinte à \(t = 5\) s.</div>
       </div>
     </div>
 
@@ -462,18 +553,29 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">1) Exemple de MRU + équation horaire. 2) Exemple de MRUA + équation horaire.
         3) Caractériser le mouvement défini par \(x(t)=3t\), \(y(t)=-2t+1\).</p>
+
         <p class="q">1) Mouvement rectiligne uniforme</p>
-        <p>Exemple : un vélo à vitesse constante sur une route droite. \(\ddot x=0\), double intégration :
-        \(x(t)=v_0 t+x_0\) (\(x_0\) position initiale, \(v_0\) vitesse).</p>
+        <p>Exemple : un vélo roulant à vitesse constante sur une route droite.</p>
+        <div class="rappel"><span class="lab">Rappel · MRU</span>\[ \ddot x = 0 \;\Longrightarrow\; \dot x = v_0 \;\Longrightarrow\; x(t) = v_0\,t + x_0 \]</div>
+        <div class="res">\(x(t) = v_0\,t + x_0\), avec \(x_0\) la position initiale et \(v_0\) la vitesse.</div>
+
         <p class="q">2) Mouvement rectiligne uniformément accéléré</p>
-        <p>Exemple : une chute libre (\(\ddot x=g\)). Double intégration : \(x(t)=\tfrac12 g t^2+v_0 t+x_0\).</p>
-        <p class="q">3) Caractérisation de \(x=3t,\ y=-2t+1\)</p>
-        <p><b>Rectiligne ?</b> On élimine \(t\) : \(t=\dfrac{x}{3}\Rightarrow y=-\dfrac{2x}{3}+1\). C'est une
-        droite ⇒ mouvement <b>rectiligne</b>.</p>
-        <p><b>Uniforme ?</b> \(\vec v=\dot x\,\vec u_x+\dot y\,\vec u_y=3\,\vec u_x-2\,\vec u_y\). Les composantes
-        ne dépendent pas de \(t\), donc \(v=\sqrt{3^2+(-2)^2}=\sqrt{13}\) est <b>constante</b> ⇒ <b>uniforme</b>.</p>
-        <p><b>Accélération :</b> \(\vec a=\ddot x\,\vec u_x+\ddot y\,\vec u_y=\vec 0\).</p>
-        <div class="res">Mouvement <b>rectiligne uniforme</b>, \(\vec v=3\vec u_x-2\vec u_y\) (norme \(\sqrt{13}\approx3{,}61\)&nbsp;m·s\(^{-1}\)), \(\vec a=\vec 0\).</div>
+        <p>Exemple : une chute libre verticale, \(\ddot x = g\) (axe vers le bas).</p>
+        <div class="rappel"><span class="lab">Rappel · MRUA</span>\[ \ddot x = a \;\Longrightarrow\; \dot x = a\,t + v_0 \;\Longrightarrow\; x(t) = \tfrac12 a\,t^2 + v_0\,t + x_0 \]</div>
+        <div class="res">\(x(t) = \tfrac12 g\,t^2 + v_0\,t + x_0\).</div>
+
+        <p class="q">3) Caractériser \(x = 3t,\ y = -2t + 1\)</p>
+        <p class="etape">Étape 1 : rectiligne ?</p>
+        <p>On élimine \(t\) : \(t = x/3\), donc</p>
+        \[ y = -\frac{2}{3}\,x + 1 \]
+        <p>C'est l'équation d'une droite : le mouvement est rectiligne.</p>
+        <p class="etape">Étape 2 : uniforme ?</p>
+        <div class="rappel"><span class="lab">Rappel · vitesse en cartésiennes</span>\[ \vec v = \dot x\,\vec u_x + \dot y\,\vec u_y \]</div>
+        \[ \vec v = 3\,\vec u_x - 2\,\vec u_y \qquad v = \sqrt{3^2 + (-2)^2} = \sqrt{13} \approx 3{,}61\ \text{m·s}^{-1} \]
+        <p>Les composantes ne dépendent pas de \(t\) : la vitesse est constante.</p>
+        <p class="etape">Étape 3 : accélération</p>
+        \[ \vec a = \ddot x\,\vec u_x + \ddot y\,\vec u_y = \vec 0 \]
+        <div class="res">Mouvement rectiligne uniforme : \(\vec v = 3\,\vec u_x - 2\,\vec u_y\) (norme \(\sqrt{13} \approx 3{,}61\) m·s\(^{-1}\)), \(\vec a = \vec 0\).</div>
       </div>
     </div>
 
@@ -482,25 +584,35 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Voiture à \(50\)&nbsp;km/h freinant jusqu'à l'arrêt sur \(d=15\)&nbsp;m. Calculer
         l'accélération (constante) et tracer \(x(t)\).</p>
+
         <p class="q">1) Conditions initiales</p>
-        <p>\(v(0)=v_0=50\ \text{km/h}=\dfrac{50}{3{,}6}=13{,}9\)&nbsp;m·s\(^{-1}\) ; \(x(0)=0\).
-        <br><em>Rappel conversion :</em> \(1\ \text{km/h}=\dfrac{1000}{3600}=\dfrac{1}{3{,}6}\)&nbsp;m·s\(^{-1}\)
-        (on divise les km/h par 3,6).</p>
+        <div class="rappel"><span class="lab">Rappel · conversion</span>\[ 1\ \text{km/h} = \frac{1000\ \text{m}}{3600\ \text{s}} = \frac{1}{3{,}6}\ \text{m·s}^{-1} \]</div>
+        \[ v_0 = \frac{50}{3{,}6} \approx 13{,}9\ \text{m·s}^{-1} \qquad x(0) = 0 \]
+
         <p class="q">2) Expressions de \(v(t)\) et \(x(t)\)</p>
-        <p>\(a\) constante ⇒ \(v(t)=at+v_0\) et \(x(t)=\tfrac12 a t^2+v_0 t\).</p>
+        <p>L'accélération \(a\) est constante (et négative) :</p>
+        \[ v(t) = a\,t + v_0 \qquad x(t) = \tfrac12 a\,t^2 + v_0\,t \]
+
         <p class="q">3) Instant d'arrêt</p>
-        <p>\(v(t_{stop})=0\Rightarrow t_{stop}=-\dfrac{v_0}{a}\).</p>
+        \[ v(t_{stop}) = 0 \iff t_{stop} = -\frac{v_0}{a} \]
+
         <p class="q">4) Accélération</p>
-        <p>À \(t_{stop}\), \(x=d\). On remplace :</p>
-        \[d=\tfrac12 a\,t_{stop}^2+v_0 t_{stop}=\tfrac12 a\frac{v_0^2}{a^2}-\frac{v_0^2}{a}=-\frac12\frac{v_0^2}{a}
-        \quad\Rightarrow\quad a=-\frac{1}{2}\frac{v_0^2}{d}\]
-        \[a=-\frac{13{,}9^2}{2\times15}=\mathbf{-6{,}44\ \text{m·s}^{-2}}\]
-        <p class="q">5) Graphe</p>
-        <p>\(x(t)=\tfrac12 a t^2+v_0 t\) est une <b>parabole \(\cap\)</b> partant de \(0\), croissante jusqu'à
-        l'arrêt en \(t_{stop}=-v_0/a=13{,}9/6{,}44\approx2{,}16\)&nbsp;s où \(x=15\)&nbsp;m (sommet de la
-        parabole). On arrête le tracé là (au-delà, le modèle ferait « repartir » la voiture en arrière, ce qui
-        n'est pas physique).</p>
-        <div class="res">\(a\approx-6{,}44\)&nbsp;m·s\(^{-2}\) ; arrêt à \(t_{stop}\approx2{,}2\)&nbsp;s.</div>
+        <p class="etape">Étape 1 : écrire que l'arrêt a lieu à \(x = d\)</p>
+        \[ d = \tfrac12 a\,t_{stop}^2 + v_0\,t_{stop} = \tfrac12 a\,\frac{v_0^2}{a^2} - \frac{v_0^2}{a} = -\frac12\,\frac{v_0^2}{a} \]
+        <p class="etape">Étape 2 : isoler \(a\)</p>
+        \[ a = -\frac{v_0^2}{2d} \]
+        <p class="etape">Étape 3 : application numérique</p>
+        \[ a = -\frac{13{,}9^2}{2 \times 15} \approx -6{,}4\ \text{m·s}^{-2} \]
+        <div class="res">\(a \approx -6{,}4\) m·s\(^{-2}\).</div>
+
+        <p class="q">5) Graphe de \(x(t)\)</p>
+        \[ t_{stop} = \frac{13{,}9}{6{,}43} \approx 2{,}16\ \text{s} \]
+        <ul>
+          <li>\(x(t)\) est une parabole tournée vers le bas, partant de 0.</li>
+          <li>Elle croît jusqu'à son sommet en \(t_{stop} \approx 2{,}2\) s, où \(x = 15\) m.</li>
+          <li>On arrête le tracé là : au-delà, le modèle ferait repartir la voiture en arrière.</li>
+        </ul>
+        <div class="res">\(a \approx -6{,}4\) m·s\(^{-2}\) ; arrêt à \(t_{stop} \approx 2{,}2\) s, à \(x = 15\) m.</div>
       </div>
     </div>
 
@@ -510,21 +622,33 @@ window.MathJax = {
         <p class="enonce">Freinage d'urgence : \(a_0=-10\)&nbsp;m·s\(^{-2}\). 1) Exprimer \(x_F\) et \(t_F\) en
         fonction de \(v_0\). 2) Tableau à 30, 50, 90, 110, 130&nbsp;km/h. 3) Ajouter le temps de réaction
         \(t_{reac}=1\)&nbsp;s et la distance totale \(D_{tot}\).</p>
-        <p class="q">1) Expressions</p>
-        <p>CI : \(\dot x(0)=v_0,\ x(0)=0\). Intégrations : \(v(t)=a_0 t+v_0\), \(x(t)=\tfrac12 a_0 t^2+v_0 t\).</p>
-        <p>Arrêt (\(v=0\)) : \(\boxed{t_F=-\dfrac{v_0}{a_0}}\). Distance : \(x_F=x(t_F)=-\dfrac12\dfrac{v_0^2}{a_0}\),
-        soit \(\boxed{x_F=-\dfrac{1}{2}\dfrac{v_0^2}{a_0}}\).</p>
-        <p class="q">2–3) Tableau (\(a_0=-10\) ⇒ \(t_F=0{,}1\,v_0\) et \(x_F=0{,}05\,v_0^2\), \(v_0\) en m/s ;
-        \(D_{tot}=x_F+v_0 t_{reac}\))</p>
+
+        <p class="q">1) Expressions de \(t_F\) et \(x_F\)</p>
+        <p class="etape">Étape 1 : équations horaires</p>
+        <p>Conditions initiales : \(\dot x(0) = v_0\), \(x(0) = 0\). Accélération constante \(a_0\) :</p>
+        \[ v(t) = a_0\,t + v_0 \qquad x(t) = \tfrac12 a_0\,t^2 + v_0\,t \]
+        <p class="etape">Étape 2 : instant d'arrêt</p>
+        \[ v(t_F) = 0 \iff t_F = -\frac{v_0}{a_0} \]
+        <p class="etape">Étape 3 : distance de freinage</p>
+        \[ x_F = x(t_F) = \tfrac12 a_0\,\frac{v_0^2}{a_0^2} - \frac{v_0^2}{a_0} = -\frac{v_0^2}{2a_0} \]
+        <div class="res">\(t_F = -\dfrac{v_0}{a_0}\) et \(x_F = -\dfrac{v_0^2}{2a_0}\).</div>
+
+        <p class="q">2–3) Tableau avec le temps de réaction</p>
+        <p class="etape">Étape 1 : formules avec \(a_0 = -10\) m·s\(^{-2}\)</p>
+        \[ t_F = 0{,}1\,v_0 \qquad x_F = 0{,}05\,v_0^2 \qquad (v_0\ \text{en m·s}^{-1}) \]
+        <p class="etape">Étape 2 : temps de réaction</p>
+        <p>Pendant \(t_{reac} = 1\) s, la voiture roule encore à \(v_0\) :</p>
+        \[ D_{tot} = v_0\,t_{reac} + x_F \]
+        <p class="etape">Étape 3 : valeurs</p>
         <div class="overflow"><table>
-          <tr><th>\(v_0\) (km/h)</th><th>\(v_0\) (m/s)</th><th>\(x_F\) (m)</th><th>\(t_F\) (s)</th><th>\(t_{réel}=t_F+1\) (s)</th><th>\(D_{tot}\) (m)</th></tr>
+          <tr><th>\(v_0\) (km/h)</th><th>\(v_0\) (m/s)</th><th>\(x_F\) (m)</th><th>\(t_F\) (s)</th><th>\(t_F + 1\) (s)</th><th>\(D_{tot}\) (m)</th></tr>
           <tr><td>30</td><td>8,33</td><td>3,5</td><td>0,833</td><td>1,833</td><td>11,8</td></tr>
           <tr><td>50</td><td>13,89</td><td>9,6</td><td>1,389</td><td>2,389</td><td>23,5</td></tr>
           <tr><td>90</td><td>25,0</td><td>31,3</td><td>2,5</td><td>3,5</td><td>56,3</td></tr>
-          <tr><td>110</td><td>30,56</td><td>46,7</td><td>3,056</td><td>4,056</td><td>77,3</td></tr>
+          <tr><td>110</td><td>30,56</td><td>46,7</td><td>3,056</td><td>4,056</td><td>77,2</td></tr>
           <tr><td>130</td><td>36,11</td><td>65,2</td><td>3,611</td><td>4,611</td><td>101,3</td></tr>
         </table></div>
-        <div class="res">La distance de freinage varie comme \(v_0^2\) : passer de 50 à 30&nbsp;km/h la divise par ~3 ; entre 110 et 130&nbsp;km/h l'écart est considérable. \(D_{tot}\) est la distance de sécurité à respecter.</div>
+        <div class="res">La distance de freinage varie comme \(v_0^2\) : de 130 à 110 km/h, on gagne près de 20 m. \(D_{tot}\) est la distance de sécurité à respecter.</div>
       </div>
     </div>
 
@@ -533,27 +657,37 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Monte-charge : 3,0&nbsp;s pour atteindre \(v_{max}=1{,}2\)&nbsp;m/s (MRUA). Puis vitesse
         constante, puis décélération \(-a\). \(h_2=15{,}0\)&nbsp;m (2ᵉ étage), \(h_1=7{,}50\)&nbsp;m (1ᵉʳ).</p>
+
         <p class="q">1) Accélération de démarrage</p>
-        <p>\(\ddot z=a\Rightarrow \dot z=at\) (départ du repos). Donc \(a=\dfrac{v_{max}}{t}=\dfrac{1{,}2}{3{,}0}
-        =\mathbf{0{,}40\ \text{m·s}^{-2}}\).</p>
+        <div class="rappel"><span class="lab">Rappel · MRUA depuis le repos</span>\[ \dot z = a\,t \qquad z = \tfrac12 a\,t^2 \]</div>
+        \[ a = \frac{v_{max}}{t} = \frac{1{,}2}{3{,}0} = 0{,}40\ \text{m·s}^{-2} \]
+        <div class="res">\(a = 0{,}40\) m·s\(^{-2}\).</div>
+
         <p class="q">2) Distance pendant la phase d'accélération</p>
-        <p>\(z=\tfrac12 a t^2\) ⇒ \(d=z(3)=\tfrac12(0{,}40)(3{,}0)^2=\mathbf{1{,}8\ m}\).</p>
-        <p class="q">3) Distance \(h\) où commencer à décélérer (pour s'arrêter à \(h_2=15\)&nbsp;m)</p>
-        <p>Par symétrie, la phase de décélération (\(-a\), de \(v_{max}\) à 0) parcourt la même distance
-        \(1{,}8\)&nbsp;m que la phase d'accélération. Il faut donc entamer le freinage à
-        \(h=h_2-1{,}8=15-1{,}8=\mathbf{13{,}2\ m}\) du sol.</p>
-        <p class="q">4) Durée de la montée des deux étages</p>
-        <p>Trois phases : accélération (\(t_1=3{,}0\)&nbsp;s, \(1{,}8\)&nbsp;m), palier à vitesse constante
-        (distance \(15-2\times1{,}8=11{,}4\)&nbsp;m à \(1{,}2\)&nbsp;m/s ⇒ \(t_2=\dfrac{11{,}4}{1{,}2}=9{,}5\)&nbsp;s),
-        décélération (\(t_3=3{,}0\)&nbsp;s). Total : \(t=3{,}0+9{,}5+3{,}0=\mathbf{15{,}5\ s}\).</p>
-        <p class="q">5) Durée pour le 1ᵉʳ étage (\(h_1=7{,}50\)&nbsp;m)</p>
-        <p>Accélération \(1{,}8\)&nbsp;m + décélération \(1{,}8\)&nbsp;m = \(3{,}6\)&nbsp;m ; il reste
-        \(7{,}5-3{,}6=3{,}9\)&nbsp;m à \(1{,}2\)&nbsp;m/s ⇒ \(t_2=3{,}25\)&nbsp;s. Total :
-        \(3{,}0+3{,}25+3{,}0=\mathbf{9{,}25\ s}\).</p>
-        <p class="q">6) Équation horaire de la phase d'accélération de la descente (départ du 2ᵉ étage)</p>
-        <p>On descend depuis \(z_0=h_2=15\)&nbsp;m, du repos, avec accélération dirigée vers le bas
-        (\(-a=-0{,}40\)) : \(\ddot z=-0{,}40\Rightarrow \dot z=-0{,}40\,t\Rightarrow\)
-        \(\boxed{z(t)=15-\tfrac12(0{,}40)t^2=15-0{,}20\,t^2}\) (m).</p>
+        \[ d = \tfrac12 a\,t^2 = \tfrac12 \times 0{,}40 \times 3{,}0^2 = 1{,}8\ \text{m} \]
+        <div class="res">\(d = 1{,}8\) m.</div>
+
+        <p class="q">3) Hauteur \(h\) où commencer à décélérer</p>
+        <p>La décélération (\(-a\)) fait passer de \(v_{max}\) à 0 : c'est la phase d'accélération jouée à l'envers. Elle dure 3,0 s et parcourt aussi 1,8 m.</p>
+        \[ h = h_2 - 1{,}8 = 15 - 1{,}8 = 13{,}2\ \text{m} \]
+        <div class="res">On commence à freiner à \(h = 13{,}2\) m du sol.</div>
+
+        <p class="q">4) Durée de la montée de deux étages</p>
+        <p class="etape">Étape 1 : distance à vitesse constante</p>
+        \[ 15 - 2 \times 1{,}8 = 11{,}4\ \text{m} \qquad t_2 = \frac{11{,}4}{1{,}2} = 9{,}5\ \text{s} \]
+        <p class="etape">Étape 2 : total des trois phases</p>
+        \[ t = 3{,}0 + 9{,}5 + 3{,}0 = 15{,}5\ \text{s} \]
+        <div class="res">Durée : 15,5 s.</div>
+
+        <p class="q">5) Durée pour le 1er étage (\(h_1 = 7{,}50\) m)</p>
+        \[ 7{,}5 - 3{,}6 = 3{,}9\ \text{m à vitesse constante} \qquad t_2 = \frac{3{,}9}{1{,}2} = 3{,}25\ \text{s} \]
+        \[ t = 3{,}0 + 3{,}25 + 3{,}0 = 9{,}25\ \text{s} \]
+        <div class="res">Durée : 9,25 s.</div>
+
+        <p class="q">6) Équation horaire de la phase d'accélération à la descente</p>
+        <p>Départ du repos à \(z_0 = h_2 = 15\) m, accélération vers le bas \(-a = -0{,}40\) m·s\(^{-2}\) :</p>
+        \[ \ddot z = -0{,}40 \;\Longrightarrow\; \dot z = -0{,}40\,t \;\Longrightarrow\; z(t) = 15 - 0{,}20\,t^2 \]
+        <div class="res">\(z(t) = 15 - 0{,}20\,t^2\) (en m).</div>
       </div>
     </div>
 
@@ -565,24 +699,33 @@ window.MathJax = {
         <p class="enonce">\(x(t)=20t\), \(y(t)=-4{,}9\,t^2+32t+20\). 1) Identifier la trajectoire parmi 3
         propositions. 2) \(\vec v\) et \(\vec a\) à \(t=0\). 3) Les représenter. 4) Propriété remarquable&nbsp;?
         5) Dimension et unité des deux « 20 ».</p>
+
         <p class="q">1) Trajectoire</p>
-        <p>À \(t=0\) : \(y(0)=20\)&nbsp;m ⇒ l'ordonnée à l'origine vaut 20 (élimine la proposition dont
-        l'ordonnée initiale diffère). Équation de la trajectoire (on pose \(t=x/20\)) :</p>
-        \[y(x)=-\frac{4{,}9}{20^2}x^2+\frac{32}{20}x+20=-0{,}01225\,x^2+1{,}6\,x+20\]
-        <div class="res">C'est une <b>parabole</b> (terme en \(x^2\)) tournée vers le bas, d'ordonnée initiale 20 : c'est la 3ᵉ proposition.</div>
-        <p class="q">2) Vecteurs à \(t=0\)</p>
-        <p>Dérivées : \(\vec v=\dot x\,\vec u_x+\dot y\,\vec u_y=20\,\vec u_x+(-9{,}8\,t+32)\,\vec u_y\), puis
-        \(\vec a=\ddot x\,\vec u_x+\ddot y\,\vec u_y=0\,\vec u_x-9{,}8\,\vec u_y\).</p>
-        \[\vec v(0)=\begin{pmatrix}20\\32\end{pmatrix}\qquad \vec a(0)=\begin{pmatrix}0\\-9{,}8\end{pmatrix}\]
+        <p class="etape">Étape 1 : point de départ</p>
+        <p>À \(t = 0\) : \(x(0) = 0\) et \(y(0) = 20\) m. Cela élimine la proposition dont l'ordonnée initiale diffère.</p>
+        <p class="etape">Étape 2 : équation de la trajectoire</p>
+        <p>On remplace \(t = x/20\) dans \(y(t)\) :</p>
+        \[ y(x) = -\frac{4{,}9}{20^2}\,x^2 + \frac{32}{20}\,x + 20 = -0{,}01225\,x^2 + 1{,}6\,x + 20 \]
+        <div class="res">Parabole tournée vers le bas, d'ordonnée initiale 20 m : c'est la 3ᵉ proposition.</div>
+
+        <p class="q">2) Vecteurs vitesse et accélération à \(t = 0\)</p>
+        <div class="rappel"><span class="lab">Rappel · cartésiennes</span>\[ \vec v = \dot x\,\vec u_x + \dot y\,\vec u_y \qquad \vec a = \ddot x\,\vec u_x + \ddot y\,\vec u_y \]</div>
+        \[ \vec v = 20\,\vec u_x + (-9{,}8\,t + 32)\,\vec u_y \qquad \vec a = -9{,}8\,\vec u_y \]
+        \[ \vec v(0) = \begin{pmatrix} 20 \\ 32 \end{pmatrix} \qquad \vec a(0) = \begin{pmatrix} 0 \\ -9{,}8 \end{pmatrix} \]
+
         <p class="q">3–4) Représentation et propriété remarquable</p>
-        <p>Sur la trajectoire, \(\vec v(0)\) part vers le haut-droite (tangent à la courbe), \(\vec a(0)\) est
-        vertical vers le bas. <b>Remarquable :</b> l'accélération est <b>constante et toujours dirigée vers le
-        bas</b> (c'est \(-g\,\vec u_y\), une chute libre/projectile), et le vecteur vitesse est <b>toujours
-        tangent à la trajectoire</b>.</p>
-        <p class="q">5) Les deux « 20 »</p>
-        <p>Dans \(x=20t\) : \([x]=[20]\,[t]\Rightarrow[20]=L\,T^{-1}\) → c'est une <b>vitesse</b> (m·s\(^{-1}\)).
-        Dans \(y=\dots+20\) : chaque terme d'une somme a la même dimension que \(y\), donc \([20]=L\) → c'est une
-        <b>longueur</b> (m).</p>
+        <ul>
+          <li>\(\vec v(0)\) part vers le haut et la droite, tangent à la trajectoire.</li>
+          <li>\(\vec a(0)\) est vertical, vers le bas.</li>
+        </ul>
+        <div class="res">L'accélération est constante et toujours verticale vers le bas (\(\vec a = -g\,\vec u_y\) : mouvement de projectile). Le vecteur vitesse est toujours tangent à la trajectoire.</div>
+
+        <p class="q">5) Dimension des deux « 20 »</p>
+        <div class="rappel"><span class="lab">Rappel · homogénéité</span>Les deux membres d'une égalité, et tous les termes d'une somme, ont la même dimension.</div>
+        <ul>
+          <li>Dans \(x = 20\,t\) : \([20] = [x]/[t] = \text{L·T}^{-1}\). C'est une vitesse, en m·s\(^{-1}\).</li>
+          <li>Dans \(y = \dots + 20\) : \([20] = [y] = \text{L}\). C'est une longueur, en m.</li>
+        </ul>
       </div>
     </div>
 
@@ -592,17 +735,35 @@ window.MathJax = {
         <p class="enonce">\(\vec a=\begin{pmatrix}0\\-10\end{pmatrix}\), et à \(t=1\)&nbsp;s :
         \(\overrightarrow{OM}(1)=\begin{pmatrix}2\\5\end{pmatrix}\), \(\vec v(1)=\begin{pmatrix}2\\2\end{pmatrix}\).
         1) Équations horaires. 2) Équation de la trajectoire. 3) Décrire.</p>
-        <p class="q">1) Équations horaires — attention aux constantes (CI en \(t=1\), pas \(t=0\))</p>
-        <p><b>Vitesse</b> (1ʳᵉ intégration) : \(\ddot x=0\Rightarrow\dot x=\)cte ; \(\dot x(1)=2\Rightarrow\dot x=2\).
-        \(\ddot y=-10\Rightarrow\dot y=-10t+C\) ; \(\dot y(1)=2\Rightarrow 2=-10+C\Rightarrow C=12\), donc
-        \(\dot y=-10t+12\).</p>
-        <p><b>Position</b> (2ᵉ intégration) : \(x=2t+C'\) ; \(x(1)=2\Rightarrow C'=0\), donc \(x=2t\).
-        \(y=-5t^2+12t+C''\) ; \(y(1)=5\Rightarrow5=-5+12+C''\Rightarrow C''=-2\).</p>
-        <div class="res">\(x(t)=2t\qquad y(t)=-5t^2+12t-2\).</div>
-        <p class="q">2) Trajectoire (on élimine \(t=x/2\))</p>
-        \[y(x)=-5\Big(\frac{x}{2}\Big)^2+12\Big(\frac{x}{2}\Big)-2=-\frac54 x^2+6x-2\]
+
+        <p class="q">1) Équations horaires</p>
+        <div class="rappel"><span class="lab">Rappel · intégrer avec des conditions initiales</span>\[ v(t) = \int a\,dt + C \qquad x(t) = \int v\,dt + D \]On fixe \(C\) et \(D\) avec les valeurs connues, ici à \(t = 1\) s.</div>
+
+        <p class="etape">Étape 1 : vitesse selon \(x\)</p>
+        \[ \ddot x = 0 \;\Longrightarrow\; \dot x = \text{cte} \]
+        <p>Or \(\dot x(1) = 2\), donc \(\dot x = 2\).</p>
+
+        <p class="etape">Étape 2 : vitesse selon \(y\)</p>
+        \[ \ddot y = -10 \;\Longrightarrow\; \dot y = -10\,t + C \]
+        <p>Or \(\dot y(1) = 2\) : \(2 = -10 + C\), donc \(C = 12\).</p>
+        \[ \dot y = -10\,t + 12 \]
+
+        <p class="etape">Étape 3 : position selon \(x\)</p>
+        \[ x = 2t + C' \qquad x(1) = 2 \;\Longrightarrow\; C' = 0 \]
+
+        <p class="etape">Étape 4 : position selon \(y\)</p>
+        \[ y = -5t^2 + 12t + C'' \]
+        <p>Or \(y(1) = 5\) : \(5 = -5 + 12 + C''\), donc \(C'' = -2\).</p>
+        <div class="res">\(x(t) = 2t\) et \(y(t) = -5t^2 + 12t - 2\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> Les conditions sont données à \(t = 1\) s, pas à \(t = 0\). On ne peut pas lire directement les constantes : il faut les calculer.</div>
+
+        <p class="q">2) Équation de la trajectoire</p>
+        <p>On élimine \(t = x/2\) :</p>
+        \[ y(x) = -5\left(\frac{x}{2}\right)^2 + 12\left(\frac{x}{2}\right) - 2 = -\frac54\,x^2 + 6x - 2 \]
+        <div class="res">\(y(x) = -\dfrac54\,x^2 + 6x - 2\).</div>
+
         <p class="q">3) Description</p>
-        <div class="res">Accélération constante ⇒ mouvement <b>uniformément accéléré</b>, trajectoire <b>parabolique</b>.</div>
+        <div class="res">Accélération constante : mouvement uniformément accéléré, sur une trajectoire parabolique (tournée vers le bas).</div>
       </div>
     </div>
 
@@ -614,26 +775,36 @@ window.MathJax = {
         <p class="enonce">\(x(t)=3\sin(2t)\), \(y(t)=3\cos(2t)\). 1) Unités de 3 et 2. 2) Montrer que
         \(x^2+y^2\) est constant. 3) Trajectoire. 4) \(\vec v\) et sa représentation à \(t=0\). 5) \(\vec a\) idem.
         6) Propriété géométrique.</p>
-        <p class="q">1) Unités</p>
-        <p>Le « 3 » multiplie une fonction trigo (sans dimension) et doit avoir la dimension de \(x,y\) :
-        c'est une <b>longueur</b> (m). Le « 2 » est dans l'argument \(2t\) ; l'argument d'une fonction est sans
-        dimension, donc \([2]=T^{-1}\) : c'est une <b>pulsation</b> en rad·s\(^{-1}\).</p>
-        <p class="q">2) \(x^2+y^2\)</p>
-        \[x^2+y^2=9\sin^2(2t)+9\cos^2(2t)=9\big[\sin^2(2t)+\cos^2(2t)\big]=9\]
-        <p>C'est une somme de carrés de distances : dimension \(L^2\) (en m²), valeur \(9\)&nbsp;m².</p>
+
+        <p class="q">1) Unités de 3 et de 2</p>
+        <ul>
+          <li>« 3 » multiplie un sinus (sans dimension) et donne \(x\) : c'est une longueur, en m.</li>
+          <li>« 2 » est dans l'argument \(2t\). Un argument de sinus est sans dimension, donc \([2] = \text{T}^{-1}\) : c'est une pulsation, en rad·s\(^{-1}\).</li>
+        </ul>
+
+        <p class="q">2) \(x^2 + y^2\) est constant</p>
+        <div class="rappel"><span class="lab">Rappel · trigonométrie</span>\[ \sin^2\alpha + \cos^2\alpha = 1 \]</div>
+        \[ x^2 + y^2 = 9\sin^2(2t) + 9\cos^2(2t) = 9\left[\sin^2(2t) + \cos^2(2t)\right] = 9 \]
+        <div class="res">\(x^2 + y^2 = 9\) m², indépendant du temps.</div>
+
         <p class="q">3) Trajectoire</p>
-        <p>L'équation d'un cercle est \(x^2+y^2=R^2\). Ici \(R^2=9\) ⇒ <b>cercle de rayon \(R=3\)&nbsp;m</b> centré
-        sur l'origine.</p>
-        <p class="q">4) Vitesse</p>
-        <p>\(\dot x=6\cos(2t)\), \(\dot y=-6\sin(2t)\). À \(t=0\) : \(\vec v(0)=6\,\vec u_x+0\,\vec u_y\)
-        (horizontal, tangent au cercle au point \((0,3)\)).</p>
-        <p class="q">5) Accélération</p>
-        <p>\(\ddot x=-12\sin(2t)\), \(\ddot y=-12\cos(2t)\). À \(t=0\) : \(\vec a(0)=0\,\vec u_x-12\,\vec u_y\)
-        (vertical vers le bas, c.-à-d. vers le centre).</p>
-        <p class="q">6) Propriété</p>
-        <div class="res">\(\vec v\perp\vec a\) (ici \(\vec v(0)\cdot\vec a(0)=0\)) : c'est un <b>mouvement circulaire
-        uniforme</b>. La vitesse est tangente, l'accélération est <b>centripète</b> (dirigée vers le centre),
-        \(v=\|\vec v\|=6\)&nbsp;m·s\(^{-1}\) constante.</div>
+        <div class="rappel"><span class="lab">Rappel · équation d'un cercle centré en O</span>\[ x^2 + y^2 = R^2 \]</div>
+        <div class="res">Cercle de centre O et de rayon \(R = 3\) m.</div>
+
+        <p class="q">4) Vecteur vitesse</p>
+        \[ \dot x = 6\cos(2t) \qquad \dot y = -6\sin(2t) \]
+        <p>À \(t = 0\), le point est en \((0\,;\,3)\) :</p>
+        \[ \vec v(0) = 6\,\vec u_x \]
+        <div class="res">\(\vec v(0) = 6\,\vec u_x\) : horizontal, tangent au cercle en \((0\,;\,3)\).</div>
+
+        <p class="q">5) Vecteur accélération</p>
+        \[ \ddot x = -12\sin(2t) \qquad \ddot y = -12\cos(2t) \]
+        \[ \vec a(0) = -12\,\vec u_y \]
+        <div class="res">\(\vec a(0) = -12\,\vec u_y\) : vertical, vers le bas, donc vers le centre du cercle.</div>
+
+        <p class="q">6) Propriété géométrique</p>
+        \[ \vec v\cdot\vec a = 6\cos(2t)\,(-12\sin(2t)) + (-6\sin(2t))(-12\cos(2t)) = 0 \]
+        <div class="res">\(\vec v \perp \vec a\) à chaque instant. La norme \(v = 6\) m·s\(^{-1}\) est constante : mouvement circulaire uniforme, accélération centripète.</div>
       </div>
     </div>
 
@@ -644,23 +815,35 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">1) Base polaire en base cartésienne. 2) Vecteur position dans les deux bases ⇒ \(x,y\)
         en fonction de \(r,\theta\). 3) Retrouver \(\vec v\) en polaires. 4) En déduire \(\dot x,\dot y\).</p>
-        <p class="q">1) Vecteurs de base</p>
-        \[\vec u_r=\cos\theta\,\vec u_x+\sin\theta\,\vec u_y\qquad \vec u_\theta=-\sin\theta\,\vec u_x+\cos\theta\,\vec u_y\]
-        <p class="q">2) Vecteur position et identification</p>
-        <p>Polaire : \(\overrightarrow{OM}=r\,\vec u_r\). Cartésien : \(\overrightarrow{OM}=x\,\vec u_x+y\,\vec u_y\).
-        C'est le même vecteur, donc :</p>
-        \[r\vec u_r=r\big(\cos\theta\,\vec u_x+\sin\theta\,\vec u_y\big)=x\,\vec u_x+y\,\vec u_y
-        \ \Rightarrow\ \boxed{x=r\cos\theta,\quad y=r\sin\theta}\]
-        <p class="note" style="margin:.4rem 0">Utile pour tracer une trajectoire polaire dans un tableur (Excel ne comprend pas \(r,\theta\)).</p>
+
+        <p class="q">1) Vecteurs de la base polaire</p>
+        <p>On projette \(\vec u_r\) et \(\vec u_\theta\) sur les axes fixes (\(\vec u_\theta\) est \(\vec u_r\) tourné de \(+90°\)) :</p>
+        \[ \vec u_r = \cos\theta\,\vec u_x + \sin\theta\,\vec u_y \qquad \vec u_\theta = -\sin\theta\,\vec u_x + \cos\theta\,\vec u_y \]
+
+        <p class="q">2) Vecteur position dans les deux bases</p>
+        <ul>
+          <li>En polaires : \(\overrightarrow{OM} = r\,\vec u_r\).</li>
+          <li>En cartésiennes : \(\overrightarrow{OM} = x\,\vec u_x + y\,\vec u_y\).</li>
+        </ul>
+        <p>C'est le même vecteur. On remplace \(\vec u_r\) :</p>
+        \[ r\cos\theta\,\vec u_x + r\sin\theta\,\vec u_y = x\,\vec u_x + y\,\vec u_y \]
+        <div class="res">\(x = r\cos\theta\) et \(y = r\sin\theta\).</div>
+        <p>Remarque : c'est ce qu'on utilise pour tracer une trajectoire polaire dans un tableur.</p>
+
         <p class="q">3) Vitesse en polaires</p>
-        \[\vec v=\frac{d}{dt}(r\vec u_r)=\dot r\,\vec u_r+r\frac{d\vec u_r}{dt}=\dot r\,\vec u_r+r\dot\theta\,\vec u_\theta\]
-        <p>où \(\dfrac{d\vec u_r}{dt}=\dfrac{d}{dt}(\cos\theta\,\vec u_x+\sin\theta\,\vec u_y)
-        =-\dot\theta\sin\theta\,\vec u_x+\dot\theta\cos\theta\,\vec u_y=\dot\theta\,\vec u_\theta\) (base cartésienne fixe).</p>
-        <p class="q">4) \(\dot x,\dot y\)</p>
-        <p>On réinjecte \(\vec u_r,\vec u_\theta\) dans \(\vec v=\dot r\vec u_r+r\dot\theta\vec u_\theta\) et on
-        regroupe selon \(\vec u_x,\vec u_y\) (car \(\vec v=\dot x\vec u_x+\dot y\vec u_y\)) :</p>
-        \[\boxed{\dot x=\dot r\cos\theta-r\dot\theta\sin\theta\qquad \dot y=\dot r\sin\theta+r\dot\theta\cos\theta}\]
-        <p>(On reconnaît la dérivée directe de \(x=r\cos\theta\) et \(y=r\sin\theta\), \(r\) et \(\theta\) dépendant de \(t\).)</p>
+        <p class="etape">Étape 1 : dérivée de \(\vec u_r\)</p>
+        <p>La base cartésienne est fixe ; \(\theta\) dépend du temps :</p>
+        \[ \frac{d\vec u_r}{dt} = -\dot\theta\sin\theta\,\vec u_x + \dot\theta\cos\theta\,\vec u_y = \dot\theta\,\vec u_\theta \]
+        <p class="etape">Étape 2 : dérivée du produit</p>
+        <div class="rappel"><span class="lab">Rappel · dérivée d'un produit</span>\[ (f\,g)' = f'\,g + f\,g' \]</div>
+        \[ \vec v = \frac{d}{dt}\left(r\,\vec u_r\right) = \dot r\,\vec u_r + r\,\frac{d\vec u_r}{dt} \]
+        <div class="res">\(\vec v = \dot r\,\vec u_r + r\dot\theta\,\vec u_\theta\).</div>
+
+        <p class="q">4) Expressions de \(\dot x\) et \(\dot y\)</p>
+        <p>On remplace \(\vec u_r\) et \(\vec u_\theta\) dans \(\vec v\), puis on regroupe selon \(\vec u_x\) et \(\vec u_y\) :</p>
+        \[ \vec v = \left(\dot r\cos\theta - r\dot\theta\sin\theta\right)\vec u_x + \left(\dot r\sin\theta + r\dot\theta\cos\theta\right)\vec u_y \]
+        <div class="res">\(\dot x = \dot r\cos\theta - r\dot\theta\sin\theta\) et \(\dot y = \dot r\sin\theta + r\dot\theta\cos\theta\).</div>
+        <p>Vérification : c'est la dérivée directe de \(x = r\cos\theta\) et \(y = r\sin\theta\), avec \(r\) et \(\theta\) fonctions du temps.</p>
       </div>
     </div>
 
@@ -669,14 +852,26 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Enfant courant à \(7{,}2\)&nbsp;km/h. 1) En m/s. 2) Sur piste \(r=10\)&nbsp;m,
         \(\dot\theta\) via \(v=\dot\theta r\). 3) \(\dot\theta\) via périmètre/temps, comparer. 4) Si \(r=20\)&nbsp;m.</p>
-        <p class="q">1)</p><p>\(v=\dfrac{7{,}2}{3{,}6}=2\)&nbsp;m·s\(^{-1}\).</p>
-        <p class="q">2)</p><p>\(v=\dot\theta\,r\Rightarrow\dot\theta=\dfrac{v}{r}=\dfrac{2}{10}=0{,}2\)&nbsp;rad·s\(^{-1}\).</p>
-        <p class="q">3)</p><p>Périmètre \(P=2\pi r=20\pi\approx62{,}8\)&nbsp;m ; temps d'un tour
-        \(T=\dfrac{P}{v}=\dfrac{20\pi}{2}=10\pi\approx31{,}4\)&nbsp;s. Alors
-        \(\dot\theta=\dfrac{2\pi}{T}=\dfrac{2\pi}{10\pi}=0{,}2\)&nbsp;rad·s\(^{-1}\) : <b>même résultat</b> qu'en Q2.</p>
-        <p class="q">4)</p><p>\(\dot\theta=\dfrac{v}{r}=\dfrac{2}{20}=0{,}1\)&nbsp;rad·s\(^{-1}\).
-        Même vitesse \(v\), mais \(\dot\theta\) deux fois plus faible : le cercle est plus grand, il faut plus de
-        temps pour un tour.</p>
+
+        <p class="q">1) Vitesse en m/s</p>
+        \[ v = \frac{7{,}2}{3{,}6} = 2\ \text{m·s}^{-1} \]
+        <div class="res">\(v = 2\) m·s\(^{-1}\).</div>
+
+        <p class="q">2) Vitesse angulaire sur une piste de 10 m</p>
+        <div class="rappel"><span class="lab">Rappel · mouvement circulaire</span>\[ v = r\,\dot\theta \]</div>
+        \[ \dot\theta = \frac{v}{r} = \frac{2}{10} = 0{,}2\ \text{rad·s}^{-1} \]
+        <div class="res">\(\dot\theta = 0{,}2\) rad·s\(^{-1}\).</div>
+
+        <p class="q">3) Par le périmètre et la durée d'un tour</p>
+        <p class="etape">Étape 1 : durée d'un tour</p>
+        \[ P = 2\pi r = 20\pi \approx 62{,}8\ \text{m} \qquad T = \frac{P}{v} = \frac{20\pi}{2} = 10\pi \approx 31{,}4\ \text{s} \]
+        <p class="etape">Étape 2 : vitesse angulaire</p>
+        \[ \dot\theta = \frac{2\pi}{T} = \frac{2\pi}{10\pi} = 0{,}2\ \text{rad·s}^{-1} \]
+        <div class="res">Même résultat qu'en 2).</div>
+
+        <p class="q">4) Piste de rayon 20 m</p>
+        \[ \dot\theta = \frac{v}{r} = \frac{2}{20} = 0{,}1\ \text{rad·s}^{-1} \]
+        <div class="res">\(\dot\theta = 0{,}1\) rad·s\(^{-1}\) : à vitesse égale, deux fois plus lent en angle, car le tour est deux fois plus long.</div>
       </div>
     </div>
 
@@ -685,20 +880,32 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">\(R_T=6371\)&nbsp;km. 1) Distance parcourue par un point de l'équateur en 1 jour.
         2) \(\dot\theta\). 3) Comparer à l'enfant. 4) \(v\) en m/s. 5) Comparer. 6) Contradiction&nbsp;?</p>
-        <p class="q">1)</p><p>Un tour complet = périmètre : \(2\pi R_T=2\pi\times6{,}371\times10^6\approx4{,}0\times10^7\)&nbsp;m.</p>
-        <p class="q">2)</p><p>\(\dot\theta=\dfrac{2\pi}{T_{jour}}=\dfrac{2\pi}{24\times3600}=\dfrac{2\pi}{86400}
-        \approx7{,}27\times10^{-5}\)&nbsp;rad·s\(^{-1}\).</p>
-        <div class="warnbox"><span class="lab">Correction d'une coquille du corrigé</span>
-        Le corrigé distribué indique « \(2{,}3\cdot10^{5}\)&nbsp;rad/s », ce qui est faux (une vitesse angulaire
-        aussi énorme n'a aucun sens physique). La bonne valeur est \(\dfrac{2\pi}{86400}\approx7{,}3\times10^{-5}\)&nbsp;rad·s\(^{-1}\).</div>
-        <p class="q">3)</p><p>\(7{,}3\times10^{-5}\) ≪ \(0{,}2\)&nbsp;rad·s\(^{-1}\) : la Terre tourne
-        <b>angulairement bien plus lentement</b> que l'enfant.</p>
-        <p class="q">4)</p><p>\(v=\dfrac{4{,}0\times10^7}{86400}\approx463\)&nbsp;m·s\(^{-1}\) (≈ 1667&nbsp;km/h).</p>
-        <p class="q">5)</p><p>\(463\) ≫ \(2\)&nbsp;m·s\(^{-1}\) : en vitesse linéaire, le point de l'équateur va
-        <b>beaucoup plus vite</b> que l'enfant.</p>
-        <p class="q">6)</p><div class="res">Pas de contradiction : \(v=\dot\theta\,r\). La Terre a un \(\dot\theta\)
-        minuscule mais un rayon \(r\) gigantesque ; le produit \(v\) est donc grand. Petite vitesse angulaire +
-        très grand rayon = grande vitesse linéaire.</div>
+
+        <p class="q">1) Distance parcourue en un jour</p>
+        <p>Un point de l'équateur fait un tour complet, soit un périmètre :</p>
+        \[ 2\pi R_T = 2\pi \times 6{,}371\times10^{6} \approx 4{,}0\times10^{7}\ \text{m} \]
+        <div class="res">Environ 40 000 km.</div>
+
+        <p class="q">2) Vitesse angulaire</p>
+        <div class="rappel"><span class="lab">Rappel · rotation uniforme</span>\[ \dot\theta = \frac{2\pi}{T} \]</div>
+        \[ \dot\theta = \frac{2\pi}{24 \times 3600} = \frac{2\pi}{86\,400} \approx 7{,}27\times10^{-5}\ \text{rad·s}^{-1} \]
+        <div class="res">\(\dot\theta \approx 7{,}3\times10^{-5}\) rad·s\(^{-1}\).</div>
+        <div class="warnbox"><span class="lab">Coquille du corrigé distribué</span> Le corrigé papier indique « \(2{,}3\times10^{5}\) rad/s », ce qui n'a aucun sens physique. La bonne valeur est \(7{,}3\times10^{-5}\) rad·s\(^{-1}\).</div>
+
+        <p class="q">3) Comparaison avec l'enfant</p>
+        <p>\(7{,}3\times10^{-5}\) rad·s\(^{-1}\) est très inférieur à \(0{,}2\) rad·s\(^{-1}\).</p>
+        <div class="res">En angle, la Terre tourne beaucoup plus lentement que l'enfant.</div>
+
+        <p class="q">4) Vitesse d'un point de l'équateur</p>
+        \[ v = \frac{4{,}0\times10^{7}}{86\,400} \approx 463\ \text{m·s}^{-1} \approx 1\,670\ \text{km/h} \]
+        <div class="res">\(v \approx 463\) m·s\(^{-1}\).</div>
+
+        <p class="q">5) Comparaison</p>
+        <div class="res">463 m·s\(^{-1}\) contre 2 m·s\(^{-1}\) : en vitesse linéaire, le point de l'équateur va beaucoup plus vite.</div>
+
+        <p class="q">6) Contradiction ?</p>
+        <div class="rappel"><span class="lab">Rappel · lien vitesse et vitesse angulaire</span>\[ v = r\,\dot\theta \]</div>
+        <div class="res">Pas de contradiction : la Terre a un \(\dot\theta\) minuscule mais un rayon énorme. Le produit \(v = R_T\,\dot\theta\) est donc grand.</div>
       </div>
     </div>
 
@@ -707,20 +914,26 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Scie : diamètre \(180\)&nbsp;mm (rayon au bout des dents), \(3800\)&nbsp;tours/min.
         1) Vitesse angulaire \(\omega\). 2) Vitesse d'une dent. 3) Durée d'un tour.</p>
+
         <p class="q">1) Vitesse angulaire</p>
-        <p>Convertir tours/min en rad/s : 1 tour \(=2\pi\)&nbsp;rad, 1 min \(=60\)&nbsp;s.</p>
-        \[\omega=\frac{3800\times2\pi}{60}=\frac{380}{3}\pi\approx397{,}9\ \text{rad·s}^{-1}\]
+        <div class="rappel"><span class="lab">Rappel · conversion tr/min en rad/s</span>\[ 1\ \text{tour} = 2\pi\ \text{rad} \qquad 1\ \text{min} = 60\ \text{s} \]</div>
+        \[ \omega = \frac{3800 \times 2\pi}{60} \approx 397{,}9\ \text{rad·s}^{-1} \]
+        <div class="res">\(\omega \approx 398\) rad·s\(^{-1}\).</div>
+
         <p class="q">2) Vitesse d'une dent</p>
-        <p>La dent est à \(R=\dfrac{180}{2}=90\)&nbsp;mm \(=90\times10^{-3}\)&nbsp;m du centre. Attention : le
-        diamètre est 180&nbsp;mm, donc \(R=90\)&nbsp;mm.</p>
-        \[v=\omega R=397{,}9\times90\times10^{-3}\approx35{,}8\ \text{m·s}^{-1}\]
+        <p class="etape">Étape 1 : le rayon</p>
+        <p>Le diamètre vaut 180 mm, donc le rayon vaut :</p>
+        \[ R = \frac{180}{2} = 90\ \text{mm} = 9{,}0\times10^{-2}\ \text{m} \]
+        <p class="etape">Étape 2 : la vitesse</p>
+        <div class="rappel"><span class="lab">Rappel · mouvement circulaire</span>\[ v = R\,\omega \]</div>
+        \[ v = 397{,}9 \times 9{,}0\times10^{-2} \approx 35{,}8\ \text{m·s}^{-1} \]
+        <div class="res">\(v \approx 35{,}8\) m·s\(^{-1}\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> Ne pas prendre le diamètre pour le rayon. Le corrigé distribué utilise \(R = 180\) mm et trouve \(71{,}6\) m·s\(^{-1}\) : c'est faux.</div>
+
         <p class="q">3) Durée d'un tour</p>
-        <p>Le plus direct via la fréquence de rotation : \(T=\dfrac{60}{3800}\approx1{,}58\times10^{-2}\)&nbsp;s
-        (soit ≈ 15,8&nbsp;ms). Vérification par \(T=\dfrac{2\pi}{\omega}=\dfrac{2\pi}{397{,}9}\approx1{,}58\times10^{-2}\)&nbsp;s. ✔</p>
-        <div class="warnbox"><span class="lab">Attention rayon vs diamètre</span>
-        Le corrigé distribué a utilisé \(R=180\times10^{-3}\)&nbsp;m (le <em>diamètre</em>) au lieu du rayon
-        \(90\)&nbsp;mm, donnant \(v\approx71{,}6\)&nbsp;m/s. La vitesse au bout des dents (rayon 90&nbsp;mm) est en
-        réalité \(\approx35{,}8\)&nbsp;m·s\(^{-1}\). La durée d'un tour, elle, ne dépend pas du rayon : \(15{,}8\)&nbsp;ms.</div>
+        \[ T = \frac{60}{3800} \approx 1{,}58\times10^{-2}\ \text{s} \]
+        <p>Vérification : \(T = \dfrac{2\pi}{\omega} = \dfrac{2\pi}{397{,}9} \approx 1{,}58\times10^{-2}\) s.</p>
+        <div class="res">\(T \approx 15{,}8\) ms (ne dépend pas du rayon).</div>
       </div>
     </div>
 
@@ -729,17 +942,34 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Dragster : \(402\)&nbsp;m (¼ de mile) départ arrêté en \(3{,}58\)&nbsp;s (record).
         Accélération (supposée constante) et vitesse à l'arrivée. Q5 : comparer au record réel \(621\)&nbsp;km/h.</p>
-        <p class="q">1) Définition</p>
-        <p>\(\vec a=\ddot{\overrightarrow{OM}}\). Mouvement rectiligne selon \(Ox\) : \(a=\ddot x\).</p>
-        <p class="q">2) Double intégration (MRUA, \(v_0=0,\ x_0=0\))</p>
-        <p>\(\ddot x=a_0\Rightarrow\dot x=a_0 t\Rightarrow x(t)=\tfrac12 a_0 t^2\).</p>
+
+        <p class="q">1) Définition de l'accélération</p>
+        <div class="rappel"><span class="lab">Rappel · accélération</span>\[ \vec a = \frac{d\vec v}{dt} = \frac{d^2\overrightarrow{OM}}{dt^2} \]</div>
+        <p>Mouvement rectiligne selon \(Ox\) :</p>
+        \[ a = \ddot x \]
+
+        <p class="q">2) Équation horaire</p>
+        <p>Accélération constante \(a_0\), départ arrêté en \(x = 0\) :</p>
+        \[ \ddot x = a_0 \;\Longrightarrow\; \dot x = a_0\,t \;\Longrightarrow\; x(t) = \tfrac12 a_0\,t^2 \]
+
         <p class="q">3) Valeur de l'accélération</p>
-        \[a_0=\frac{2x}{t^2}=\frac{2\times402}{3{,}58^2}\approx62{,}7\ \text{m·s}^{-2}\]
-        <p>Comparaison : \(a_0=\dfrac{62{,}7}{9{,}81}\approx6{,}4\,g\). C'est énorme (au-delà de ~5g on perd souvent connaissance).</p>
+        \[ a_0 = \frac{2x}{t^2} = \frac{2 \times 402}{3{,}58^2} \approx 62{,}7\ \text{m·s}^{-2} \]
+        <p>Comparaison avec \(g\) :</p>
+        \[ \frac{a_0}{g} = \frac{62{,}7}{9{,}81} \approx 6{,}4 \]
+        <div class="res">\(a_0 \approx 62{,}7\) m·s\(^{-2}\), soit environ \(6{,}4\,g\).</div>
+
         <p class="q">4) Vitesse à l'arrivée</p>
-        <p>\(v=a_0 t=62{,}7\times3{,}58\approx224\)&nbsp;m·s\(^{-1}\) (≈ 806&nbsp;km/h). Atteinte en 3,58&nbsp;s : colossal.</p>
-        <p class="q">5) Réflexion critique</p>
-        <div class="res">On convertit : \(224\times3{,}6\approx806\)&nbsp;km/h, supérieur au record mesuré \(621\)&nbsp;km/h. L'écart vient du modèle : on a négligé les <b>frottements</b>. La poussée moteur est ~constante, mais les frottements croissent avec la vitesse, donc l'accélération réelle <b>diminue</b> en fin de course : le modèle à \(a\) constante surestime la vitesse finale.</div>
+        \[ v = a_0\,t = 62{,}7 \times 3{,}58 \approx 225\ \text{m·s}^{-1} \]
+        \[ 225 \times 3{,}6 \approx 808\ \text{km/h} \]
+        <div class="res">\(v \approx 225\) m·s\(^{-1}\), soit environ 810 km/h.</div>
+
+        <p class="q">5) Comparaison avec le record réel</p>
+        <p>Le modèle donne environ 810 km/h, au-dessus du record mesuré de 621 km/h.</p>
+        <ul>
+          <li>On a négligé les frottements, qui augmentent avec la vitesse.</li>
+          <li>L'accélération réelle diminue donc en fin de course.</li>
+        </ul>
+        <div class="res">Le modèle à accélération constante surestime la vitesse finale.</div>
       </div>
     </div>
 
@@ -749,18 +979,27 @@ window.MathJax = {
         <p class="enonce">Centrifugeuse \(R=6{,}5\)&nbsp;m. 1) \(\dot\theta\) (en tours/s) pour \(9{,}0\,g\).
         2) Nombre de tours et vitesse en 1&nbsp;min. 3) Accélération angulaire \(\ddot\theta\) si on monte à
         cette vitesse en 1&nbsp;min&nbsp;40&nbsp;s.</p>
+
         <p class="q">1) Vitesse angulaire pour 9 g</p>
-        <p>Rayon constant (\(\dot r=\ddot r=0\)) et rotation uniforme (\(\ddot\theta=0\)) ⇒ l'accélération est
-        purement centripète : \(\vec a=-R\dot\theta^2\,\vec u_r\), de norme \(a=R\dot\theta^2\).</p>
-        <p>On veut \(a=9g=9\times9{,}81\approx88{,}3\)&nbsp;m·s\(^{-2}\), donc :</p>
-        \[\dot\theta=\sqrt{\frac{a}{R}}=\sqrt{\frac{88{,}3}{6{,}5}}\approx3{,}7\ \text{rad·s}^{-1}
-        =\frac{3{,}7}{2\pi}\approx0{,}59\ \text{tour·s}^{-1}\]
-        <p class="q">2) Tours en 1 min, vitesse</p>
-        <p>\(N=0{,}59\times60\approx35\)&nbsp;tours. \(v=\dot\theta R=3{,}7\times6{,}5\approx24\)&nbsp;m·s\(^{-1}\).</p>
+        <div class="rappel"><span class="lab">Rappel · accélération en polaires</span>\[ \vec a = \left(\ddot r - r\dot\theta^2\right)\vec u_r + \left(2\dot r\dot\theta + r\ddot\theta\right)\vec u_\theta \]</div>
+        <p class="etape">Étape 1 : simplifier</p>
+        <p>Rayon constant (\(\dot r = \ddot r = 0\)) et rotation uniforme (\(\ddot\theta = 0\)) :</p>
+        \[ \vec a = -R\dot\theta^2\,\vec u_r \qquad a = R\dot\theta^2 \]
+        <p class="etape">Étape 2 : isoler \(\dot\theta\)</p>
+        \[ a = 9g = 9 \times 9{,}81 \approx 88{,}3\ \text{m·s}^{-2} \]
+        \[ \dot\theta = \sqrt{\frac{a}{R}} = \sqrt{\frac{88{,}3}{6{,}5}} \approx 3{,}7\ \text{rad·s}^{-1} \]
+        <p class="etape">Étape 3 : en tours par seconde</p>
+        \[ \frac{3{,}7}{2\pi} \approx 0{,}59\ \text{tour·s}^{-1} \]
+        <div class="res">\(\dot\theta \approx 3{,}7\) rad·s\(^{-1}\), soit environ 0,59 tour par seconde.</div>
+
+        <p class="q">2) Nombre de tours en 1 min et vitesse</p>
+        \[ N = 0{,}59 \times 60 \approx 35\ \text{tours} \qquad v = R\,\dot\theta = 6{,}5 \times 3{,}7 \approx 24\ \text{m·s}^{-1} \]
+        <div class="res">Environ 35 tours par minute, à \(v \approx 24\) m·s\(^{-1}\).</div>
+
         <p class="q">3) Accélération angulaire au démarrage</p>
-        <p>\(\ddot\theta\) constante, \(\dot\theta(0)=0\) ⇒ \(\dot\theta(t)=\ddot\theta\,t\). À \(t=1\)min\(40\)s\(=100\)s,
-        \(\dot\theta=3{,}7\) :</p>
-        \[\ddot\theta=\frac{3{,}7}{100}=3{,}7\times10^{-2}\ \text{rad·s}^{-2}\]
+        <p>\(\ddot\theta\) constante et \(\dot\theta(0) = 0\), donc \(\dot\theta(t) = \ddot\theta\,t\). On atteint 3,7 rad·s\(^{-1}\) en 1 min 40 s = 100 s :</p>
+        \[ \ddot\theta = \frac{3{,}7}{100} = 3{,}7\times10^{-2}\ \text{rad·s}^{-2} \]
+        <div class="res">\(\ddot\theta \approx 3{,}7\times10^{-2}\) rad·s\(^{-2}\).</div>
       </div>
     </div>
 
@@ -769,16 +1008,22 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Accélération « raisonnable » = celle qui fait 0→100&nbsp;km/h en 10&nbsp;s, aussi valeur
         limite en virage. 1) Sa valeur. 2) Vitesse max en virage \(R=200\)&nbsp;m (autoroute) et \(20\)&nbsp;m (ville).</p>
-        <p class="q">1)</p>
-        \[a=\frac{\Delta v}{\Delta t}=\frac{100/3{,}6}{10}\approx2{,}8\ \text{m·s}^{-2}\]
-        <p class="q">2) Vitesse max en virage</p>
-        <p>En virage à \(v_0\) constante et rayon \(R\) constant : \(\vec a=-R\dot\theta^2\,\vec u_r\) et
-        \(v_0=R\dot\theta\Rightarrow\dot\theta=v_0/R\). Donc \(a=R\dot\theta^2=\dfrac{v_0^2}{R}\). On impose
-        \(a=2{,}8\) :</p>
-        \[v_0=\sqrt{a\,R}\quad\Rightarrow\quad
-        v_{0,ville}=\sqrt{2{,}8\times20}\approx7{,}5\ \text{m·s}^{-1}\approx27\ \text{km/h}\]
-        \[v_{0,autoroute}=\sqrt{2{,}8\times200}\approx24\ \text{m·s}^{-1}\approx85\ \text{km/h}\]
-        <div class="res">La vitesse de sécurité en virage vaut \(v_0=\sqrt{aR}\) : ~27&nbsp;km/h pour un virage serré de 20&nbsp;m, ~85&nbsp;km/h pour un grand rayon de 200&nbsp;m.</div>
+
+        <p class="q">1) Valeur de l'accélération « raisonnable »</p>
+        \[ a = \frac{\Delta v}{\Delta t} = \frac{100/3{,}6}{10} \approx 2{,}8\ \text{m·s}^{-2} \]
+        <div class="res">\(a \approx 2{,}8\) m·s\(^{-2}\).</div>
+
+        <p class="q">2) Vitesse maximale en virage</p>
+        <p class="etape">Étape 1 : accélération en virage</p>
+        <div class="rappel"><span class="lab">Rappel · mouvement circulaire uniforme</span>\[ a = R\dot\theta^2 = \frac{v^2}{R} \qquad (\text{car } v = R\dot\theta) \]</div>
+        <p class="etape">Étape 2 : isoler la vitesse</p>
+        \[ \frac{v_0^2}{R} = a \iff v_0 = \sqrt{a\,R} \]
+        <p class="etape">Étape 3 : applications numériques</p>
+        <ul>
+          <li>En ville (\(R = 20\) m) : \(v_0 = \sqrt{2{,}8 \times 20} \approx 7{,}5\) m·s\(^{-1}\), soit environ 27 km/h.</li>
+          <li>Sur autoroute (\(R = 200\) m) : \(v_0 = \sqrt{2{,}8 \times 200} \approx 24\) m·s\(^{-1}\), soit environ 85 km/h.</li>
+        </ul>
+        <div class="res">\(v_0 = \sqrt{aR}\) : environ 27 km/h pour \(R = 20\) m et 85 km/h pour \(R = 200\) m.</div>
       </div>
     </div>
 
@@ -787,33 +1032,55 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Point \(M\) à \(R_0=5{,}0\)&nbsp;m de l'axe. Manège à 3,0 tours/min, puis arrêt uniforme en
         40&nbsp;s. 9 questions (trajectoire, coordonnées, \(\dot\theta_0\), \(\vec v\), \(\vec a\), phase de décélération…).</p>
+
         <p class="q">1) Trajectoire</p>
-        <p>Cercle. Cartésien : \(x^2+y^2=R_0^2\) soit \(y=\pm\sqrt{R_0^2-x^2}\). Polaire : \(r(\theta)=R_0\)
-        (indépendant de \(\theta\)) — bien plus simple.</p>
+        <ul>
+          <li>C'est un cercle de rayon \(R_0\).</li>
+          <li>En cartésiennes : \(x^2 + y^2 = R_0^2\), soit \(y = \pm\sqrt{R_0^2 - x^2}\).</li>
+          <li>En polaires : \(r(\theta) = R_0\), bien plus simple.</li>
+        </ul>
+
         <p class="q">2) Système de coordonnées</p>
-        <p>Rotation autour d'un point ⇒ <b>coordonnées polaires</b> (2D). Autour d'un axe ⇒ cylindriques (3D).</p>
+        <div class="res">Rotation autour d'un point, dans un plan : coordonnées polaires (cylindriques si on tient compte de la hauteur).</div>
+
         <p class="q">3) Vitesse angulaire</p>
-        <p>\(\dot\theta_0=\dfrac{3{,}0\times2\pi}{60}\approx0{,}31\)&nbsp;rad·s\(^{-1}\).</p>
-        <p class="q">4) Vitesse</p>
-        <p>Général : \(\vec v=\dot r\,\vec u_r+r\dot\theta\,\vec u_\theta\). Ici \(r=R_0\) cte (\(\dot r=0\)) et
-        \(\dot\theta=\dot\theta_0\) cte : \(\vec v=R_0\dot\theta_0\,\vec u_\theta\), de norme
-        \(v=5{,}0\times0{,}31\approx1{,}6\)&nbsp;m·s\(^{-1}\).</p>
-        <p class="q">5) Accélération</p>
-        <p>\(\vec a=(\ddot r-r\dot\theta^2)\vec u_r+(2\dot r\dot\theta+r\ddot\theta)\vec u_\theta=-R_0\dot\theta_0^2\,\vec u_r\)
-        (centripète, vers l'axe), norme \(a=R_0\dot\theta_0^2=5{,}0\times0{,}31^2\approx0{,}48\)&nbsp;m·s\(^{-2}\).</p>
-        <p class="q">6) Pourquoi \(\vec a\neq\vec 0\) si \(v\) constante&nbsp;?</p>
-        <div class="res">Parce que c'est la <b>direction</b> de \(\vec v\) qui change (pas sa norme). Changer une direction exige une accélération. En circulaire uniforme, \(\vec a\) (centripète) n'est jamais nulle.</div>
-        <p class="q">7) Décélération : \(\theta(t)\) et nombre de tours</p>
-        <p>Ralentissement uniforme : \(\ddot\theta=\ddot\theta_0\) cte. \(\dot\theta(t)=\ddot\theta_0 t+\dot\theta_0\),
-        \(\theta(t)=\tfrac12\ddot\theta_0 t^2+\dot\theta_0 t\) (avec \(\theta_0=0\)). L'arrêt en \(t=40\)s :
-        \(\dot\theta(40)=0\Rightarrow\ddot\theta_0=-\dfrac{0{,}31}{40}\approx-7{,}8\times10^{-3}\)&nbsp;rad·s\(^{-2}\)
-        (négative : on freine le sens \(+\vec u_\theta\)).</p>
-        \[\theta(40)=\tfrac12(-7{,}8\times10^{-3})(40)^2+0{,}31\times40\approx6{,}2\ \text{rad}=\frac{6{,}2}{2\pi}\approx0{,}99\ \text{tour}\]
+        \[ \dot\theta_0 = \frac{3{,}0 \times 2\pi}{60} \approx 0{,}31\ \text{rad·s}^{-1} \]
+        <div class="res">\(\dot\theta_0 \approx 0{,}31\) rad·s\(^{-1}\).</div>
+
+        <p class="q">4) Vecteur vitesse</p>
+        <div class="rappel"><span class="lab">Rappel · vitesse en polaires</span>\[ \vec v = \dot r\,\vec u_r + r\dot\theta\,\vec u_\theta \]</div>
+        <p>Ici \(r = R_0\) est constant (\(\dot r = 0\)) :</p>
+        \[ \vec v = R_0\dot\theta_0\,\vec u_\theta \qquad v = 5{,}0 \times 0{,}314 \approx 1{,}6\ \text{m·s}^{-1} \]
+        <div class="res">\(\vec v = R_0\dot\theta_0\,\vec u_\theta\), \(v \approx 1{,}6\) m·s\(^{-1}\).</div>
+
+        <p class="q">5) Vecteur accélération</p>
+        <div class="rappel"><span class="lab">Rappel · accélération en polaires</span>\[ \vec a = \left(\ddot r - r\dot\theta^2\right)\vec u_r + \left(2\dot r\dot\theta + r\ddot\theta\right)\vec u_\theta \]</div>
+        <p>Ici \(\dot r = \ddot r = 0\) et \(\ddot\theta = 0\) :</p>
+        \[ \vec a = -R_0\dot\theta_0^2\,\vec u_r \qquad a = 5{,}0 \times 0{,}314^2 \approx 0{,}49\ \text{m·s}^{-2} \]
+        <div class="res">\(\vec a = -R_0\dot\theta_0^2\,\vec u_r\) (centripète), \(a \approx 0{,}49\) m·s\(^{-2}\).</div>
+
+        <p class="q">6) Pourquoi \(\vec a \neq \vec 0\) alors que \(v\) est constante ?</p>
+        <div class="res">C'est la direction de \(\vec v\) qui change, pas sa norme. Changer de direction demande une accélération : en mouvement circulaire uniforme, elle est centripète et jamais nulle.</div>
+
+        <p class="q">7) Phase de décélération : \(\theta(t)\) et nombre de tours</p>
+        <p class="etape">Étape 1 : équations</p>
+        <p>Ralentissement uniforme : \(\ddot\theta = \ddot\theta_0\) constante. Avec \(\theta(0) = 0\) :</p>
+        \[ \dot\theta(t) = \ddot\theta_0\,t + \dot\theta_0 \qquad \theta(t) = \tfrac12\ddot\theta_0\,t^2 + \dot\theta_0\,t \]
+        <p class="etape">Étape 2 : arrêt à \(t = 40\) s</p>
+        \[ \dot\theta(40) = 0 \iff \ddot\theta_0 = -\frac{0{,}314}{40} \approx -7{,}9\times10^{-3}\ \text{rad·s}^{-2} \]
+        <p class="etape">Étape 3 : angle parcouru</p>
+        \[ \theta(40) = \tfrac12 \times (-7{,}85\times10^{-3}) \times 40^2 + 0{,}314 \times 40 \approx 6{,}28\ \text{rad} \]
+        \[ \frac{6{,}28}{2\pi} \approx 1{,}0\ \text{tour} \]
+        <div class="res">\(\ddot\theta_0 \approx -7{,}9\times10^{-3}\) rad·s\(^{-2}\) ; le manège fait 1 tour pendant le freinage.</div>
+
         <p class="q">8) Accélération pendant la décélération</p>
-        <p>\(r=R_0\) cte mais \(\dot\theta\) variable : \(\vec a=-R_0\dot\theta^2\,\vec u_r+R_0\ddot\theta_0\,\vec u_\theta\).</p>
+        <p>\(r = R_0\) constant mais \(\dot\theta\) varie :</p>
+        \[ \vec a = -R_0\dot\theta^2\,\vec u_r + R_0\ddot\theta_0\,\vec u_\theta \]
+
         <p class="q">9) Accélération tangentielle</p>
-        <p>\(a_T=R_0\ddot\theta_0=6{,}5\times(-7{,}8\times10^{-3})\)… <em>(le corrigé utilise ici par erreur \(R=6{,}5\) au lieu de \(R_0=5{,}0\))</em>. Avec \(R_0=5{,}0\) : \(a_T=5{,}0\times(-7{,}8\times10^{-3})\approx-3{,}9\times10^{-2}\)&nbsp;m·s\(^{-2}\).</p>
-        <div class="res">La composante tangentielle \(a_T\) (selon \(-\vec u_\theta\)) traduit le <b>freinage</b> : elle est absente en mouvement uniforme (où \(\ddot\theta=0\)) et n'apparaît que parce que la vitesse angulaire varie.</div>
+        \[ a_T = R_0\,\ddot\theta_0 = 5{,}0 \times (-7{,}85\times10^{-3}) \approx -3{,}9\times10^{-2}\ \text{m·s}^{-2} \]
+        <div class="res">\(a_T \approx -3{,}9\times10^{-2}\) m·s\(^{-2}\) : elle traduit le freinage et n'existe que parce que \(\dot\theta\) varie.</div>
+        <div class="warnbox"><span class="lab">Coquille du corrigé distribué</span> Le corrigé papier utilise \(R = 6{,}5\) m (valeur d'un autre exercice). Le rayon est ici \(R_0 = 5{,}0\) m.</div>
       </div>
     </div>
 
@@ -822,21 +1089,39 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Vu d'hélicoptère : \(r(t)=v_0 t\), \(\theta(t)=\omega_0 t\) (\(v_0,\omega_0>0\) constants).
         Unités, \(\dot\theta\), trajectoire, \(\vec v\), \(\vec a\), trajectoire dans le repère du manège.</p>
-        <p class="q">1) Unités</p>
-        <p>Homogénéité : \([v_0]=[r]/[t]=\)m·s\(^{-1}\) ; \([\omega_0]=[\theta]/[t]=\)rad·s\(^{-1}\).</p>
-        <p class="q">2)</p><p>\(\dot\theta=\omega_0\).</p>
-        <p class="q">3) Trajectoire (repère terrestre)</p>
-        <p>\(r\) et \(\theta\) croissent ⇒ on s'éloigne du centre en tournant : <b>spirale (d'Archimède)</b>.</p>
-        <p class="q">4) Vitesse</p>
-        <p>\(\dot r=v_0\), \(r\dot\theta=v_0 t\,\omega_0\) : \(\vec v=v_0\,\vec u_r+v_0\omega_0 t\,\vec u_\theta\).</p>
-        <p class="q">5) Accélération</p>
-        <p>\(\ddot r=0\), \(\ddot\theta=0\) : \(\vec a=(0-v_0 t\,\omega_0^2)\vec u_r+(2v_0\omega_0+0)\vec u_\theta
-        =-v_0\omega_0^2 t\,\vec u_r+2v_0\omega_0\,\vec u_\theta\).</p>
-        <p class="q">6) Schéma</p><p>\(\vec a\) a une composante radiale rentrante (croissant avec \(t\)) et une composante orthoradiale constante (Coriolis).</p>
+
+        <p class="q">1) Unités de \(v_0\) et \(\omega_0\)</p>
+        <ul>
+          <li>\(r = v_0 t\) : \([v_0] = [r]/[t]\), en m·s\(^{-1}\).</li>
+          <li>\(\theta = \omega_0 t\) : \([\omega_0] = [\theta]/[t]\), en rad·s\(^{-1}\).</li>
+        </ul>
+
+        <p class="q">2) Vitesse angulaire</p>
+        \[ \dot\theta = \omega_0 \]
+
+        <p class="q">3) Trajectoire dans le repère terrestre</p>
+        <div class="res">\(r\) et \(\theta\) croissent proportionnellement au temps : l'enfant s'éloigne du centre en tournant. C'est une spirale (d'Archimède).</div>
+
+        <p class="q">4) Vecteur vitesse</p>
+        <div class="rappel"><span class="lab">Rappel · vitesse en polaires</span>\[ \vec v = \dot r\,\vec u_r + r\dot\theta\,\vec u_\theta \]</div>
+        \[ \dot r = v_0 \qquad r\dot\theta = v_0 t\,\omega_0 \]
+        <div class="res">\(\vec v = v_0\,\vec u_r + v_0\omega_0 t\,\vec u_\theta\).</div>
+
+        <p class="q">5) Vecteur accélération</p>
+        <div class="rappel"><span class="lab">Rappel · accélération en polaires</span>\[ \vec a = \left(\ddot r - r\dot\theta^2\right)\vec u_r + \left(2\dot r\dot\theta + r\ddot\theta\right)\vec u_\theta \]</div>
+        <p>Ici \(\ddot r = 0\) et \(\ddot\theta = 0\) :</p>
+        \[ \vec a = -v_0 t\,\omega_0^2\,\vec u_r + 2v_0\omega_0\,\vec u_\theta \]
+        <div class="res">\(\vec a = -v_0\omega_0^2\,t\,\vec u_r + 2v_0\omega_0\,\vec u_\theta\).</div>
+
+        <p class="q">6) Schéma</p>
+        <ul>
+          <li>Composante radiale vers le centre, qui grandit avec \(t\).</li>
+          <li>Composante orthoradiale constante (terme de Coriolis).</li>
+        </ul>
+
         <p class="q">7) Trajectoire dans le repère du manège</p>
-        <p>On élimine \(t=\theta/\omega_0\) : \(r(\theta)=\dfrac{v_0}{\omega_0}\theta\)… mais dans le repère
-        <em>tournant</em> avec le manège (\(\omega_0\)), l'angle relatif est nul : l'enfant <b>ne tourne pas</b>,
-        il s'éloigne en <b>ligne droite</b> radiale du centre.</p>
+        <p>Le repère du manège tourne lui aussi à \(\omega_0\). L'angle de l'enfant par rapport au manège reste donc nul : seul \(r = v_0 t\) varie.</p>
+        <div class="res">Dans le repère du manège, l'enfant s'éloigne du centre en ligne droite.</div>
       </div>
     </div>
 
@@ -844,16 +1129,23 @@ window.MathJax = {
       <div class="exo-head">EC 13 — Introduction aux coordonnées cylindriques <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">Établir position, base, vitesse et accélération en cylindriques.</p>
-        <p class="q">1) Position</p>
-        <p>\(\overrightarrow{OM}=r\,\vec u_r+z\,\vec u_z\). <b>Attention : pas de terme \(\theta\,\vec u_\theta\) !</b> (l'information angulaire est portée par la direction de \(\vec u_r\)).</p>
+
+        <p class="q">1) Vecteur position</p>
+        \[ \overrightarrow{OM} = r\,\vec u_r + z\,\vec u_z \]
+        <div class="warnbox"><span class="lab">Piège</span> Pas de terme \(\theta\,\vec u_\theta\) : l'angle est déjà contenu dans la direction de \(\vec u_r\).</div>
+
         <p class="q">2) Base locale dans la base fixe</p>
-        <p>\(\vec u_r=\cos\theta\,\vec u_x+\sin\theta\,\vec u_y\) ; \(\vec u_\theta=-\sin\theta\,\vec u_x+\cos\theta\,\vec u_y\) ; \(\vec u_z=\vec u_z\) (fixe).</p>
+        \[ \vec u_r = \cos\theta\,\vec u_x + \sin\theta\,\vec u_y \qquad \vec u_\theta = -\sin\theta\,\vec u_x + \cos\theta\,\vec u_y \qquad \vec u_z\ \text{fixe} \]
+
         <p class="q">3) Vitesse</p>
-        <p>On dérive \(\overrightarrow{OM}=r\vec u_r+z\vec u_z\) avec \(\dot{\vec u}_r=\dot\theta\vec u_\theta\) et \(\dot{\vec u}_z=\vec 0\) :
-        \(\vec v=\dot r\,\vec u_r+r\dot\theta\,\vec u_\theta+\dot z\,\vec u_z\).</p>
+        <div class="rappel"><span class="lab">Rappel · dérivées des vecteurs de base</span>\[ \frac{d\vec u_r}{dt} = \dot\theta\,\vec u_\theta \qquad \frac{d\vec u_\theta}{dt} = -\dot\theta\,\vec u_r \qquad \frac{d\vec u_z}{dt} = \vec 0 \]</div>
+        <p>On dérive \(\overrightarrow{OM} = r\,\vec u_r + z\,\vec u_z\) :</p>
+        \[ \vec v = \dot r\,\vec u_r + r\dot\theta\,\vec u_\theta + \dot z\,\vec u_z \]
+
         <p class="q">4) Accélération</p>
-        \[\vec a=(\ddot r-r\dot\theta^2)\vec u_r+(2\dot r\dot\theta+r\ddot\theta)\vec u_\theta+\ddot z\,\vec u_z\]
-        <p>Identique au polaire, plus la composante selon \(\vec u_z\) (car \(\vec u_z\) ne tourne pas).</p>
+        <p>On dérive encore, avec les mêmes règles :</p>
+        \[ \vec a = \left(\ddot r - r\dot\theta^2\right)\vec u_r + \left(2\dot r\dot\theta + r\ddot\theta\right)\vec u_\theta + \ddot z\,\vec u_z \]
+        <div class="res">C'est l'accélération polaire, plus la composante \(\ddot z\,\vec u_z\) (car \(\vec u_z\) ne tourne pas).</div>
       </div>
     </div>
 
@@ -861,14 +1153,23 @@ window.MathJax = {
       <div class="exo-head">Exercice 10 — Mouvement hélicoïdal <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">\(r=R\), \(\theta=\omega t\), \(z=v_0 t\) (constants). Position, vitesse (+norme), accélération, trajectoire.</p>
-        <p class="q">1) Position</p><p>\(\overrightarrow{OM}=R\,\vec u_r+v_0 t\,\vec u_z\).</p>
+
+        <p class="q">1) Position</p>
+        \[ \overrightarrow{OM} = R\,\vec u_r + v_0 t\,\vec u_z \]
+
         <p class="q">2) Vitesse</p>
-        <p>\(\dot r=0,\ \dot\theta=\omega,\ \dot z=v_0\) : \(\vec v=R\omega\,\vec u_\theta+v_0\,\vec u_z\),
-        \(v=\sqrt{(R\omega)^2+v_0^2}\) <b>constante</b> ⇒ mouvement uniforme.</p>
+        <div class="rappel"><span class="lab">Rappel · vitesse en cylindriques</span>\[ \vec v = \dot r\,\vec u_r + r\dot\theta\,\vec u_\theta + \dot z\,\vec u_z \]</div>
+        \[ \dot r = 0 \qquad \dot\theta = \omega \qquad \dot z = v_0 \]
+        \[ \vec v = R\omega\,\vec u_\theta + v_0\,\vec u_z \qquad v = \sqrt{(R\omega)^2 + v_0^2} \]
+        <div class="res">La norme \(v\) est constante : mouvement uniforme.</div>
+
         <p class="q">3) Accélération</p>
-        <p>\(\vec a=-R\omega^2\,\vec u_r\), norme \(R\omega^2\) <b>non nulle</b> bien que \(v\) constante (la direction de \(\vec v\) change).</p>
+        <div class="rappel"><span class="lab">Rappel · accélération en cylindriques</span>\[ \vec a = \left(\ddot r - r\dot\theta^2\right)\vec u_r + \left(2\dot r\dot\theta + r\ddot\theta\right)\vec u_\theta + \ddot z\,\vec u_z \]</div>
+        \[ \vec a = -R\omega^2\,\vec u_r \]
+        <div class="res">\(\vec a = -R\omega^2\,\vec u_r\) : non nulle bien que \(v\) soit constante, car la direction de \(\vec v\) change.</div>
+
         <p class="q">4) Trajectoire</p>
-        <div class="res"><b>Hélice circulaire</b> (comme le long d'une vis) : \(r\) constant (distance à l'axe fixe), \(\theta\) et \(z\) croissant linéairement (on tourne et on monte à vitesse constante).</div>
+        <div class="res">Hélice circulaire, comme le filet d'une vis : distance à l'axe constante, rotation et montée à vitesse constante.</div>
       </div>
     </div>
 
@@ -876,15 +1177,26 @@ window.MathJax = {
       <div class="exo-head">EC 14 — Mouvement sur un cône <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">\(r=v_0 t\), \(\theta=\omega t\), \(z=v_0 t\). Position, vitesse (+norme), accélération, trajectoire.</p>
-        <p class="q">1) Position</p><p>\(\overrightarrow{OM}=v_0 t\,\vec u_r+v_0 t\,\vec u_z\).</p>
+
+        <p class="q">1) Position</p>
+        \[ \overrightarrow{OM} = v_0 t\,\vec u_r + v_0 t\,\vec u_z \]
+
         <p class="q">2) Vitesse</p>
-        <p>\(\dot r=v_0,\ \dot\theta=\omega,\ \dot z=v_0\) : \(\vec v=v_0\,\vec u_r+v_0\omega t\,\vec u_\theta+v_0\,\vec u_z\),
-        \(v=\sqrt{v_0^2+(v_0\omega t)^2+v_0^2}\). La norme <b>augmente</b> avec \(t\) (à cause du terme orthoradial).</p>
+        <div class="rappel"><span class="lab">Rappel · vitesse en cylindriques</span>\[ \vec v = \dot r\,\vec u_r + r\dot\theta\,\vec u_\theta + \dot z\,\vec u_z \]</div>
+        \[ \dot r = v_0 \qquad \dot\theta = \omega \qquad \dot z = v_0 \]
+        \[ \vec v = v_0\,\vec u_r + v_0\omega t\,\vec u_\theta + v_0\,\vec u_z \]
+        \[ v = \sqrt{v_0^2 + (v_0\omega t)^2 + v_0^2} = v_0\sqrt{2 + \omega^2 t^2} \]
+        <div class="res">La norme de la vitesse augmente avec \(t\), à cause du terme orthoradial.</div>
+
         <p class="q">3) Accélération</p>
-        <p>\(\ddot r=0,\ \ddot\theta=0\) : \(\vec a=(0-v_0 t\,\omega^2)\vec u_r+(2v_0\omega+0)\vec u_\theta
-        =-v_0\omega^2 t\,\vec u_r+2v_0\omega\,\vec u_\theta\).</p>
+        <div class="rappel"><span class="lab">Rappel · accélération en cylindriques</span>\[ \vec a = \left(\ddot r - r\dot\theta^2\right)\vec u_r + \left(2\dot r\dot\theta + r\ddot\theta\right)\vec u_\theta + \ddot z\,\vec u_z \]</div>
+        <p>Ici \(\ddot r = 0\), \(\ddot\theta = 0\) et \(\ddot z = 0\) :</p>
+        \[ \vec a = -v_0\omega^2 t\,\vec u_r + 2v_0\omega\,\vec u_\theta \]
+        <div class="res">\(\vec a = -v_0\omega^2 t\,\vec u_r + 2v_0\omega\,\vec u_\theta\).</div>
+
         <p class="q">4) Trajectoire</p>
-        <div class="res">Comme \(r=z=v_0 t\), le point reste sur la droite \(z=r\) en tournant : c'est une <b>hélice conique</b> (spirale s'enroulant sur un cône, dont le rayon croît linéairement).</div>
+        <p>\(r = z = v_0 t\) : à chaque instant, le point est sur le cône d'équation \(z = r\), et il tourne autour de l'axe.</p>
+        <div class="res">Hélice conique : une spirale qui s'enroule sur un cône, avec un rayon qui croît linéairement.</div>
       </div>
     </div>
 
@@ -896,21 +1208,35 @@ window.MathJax = {
         <p class="enonce">Lancer franc à \(15\)&nbsp;pieds du panier (haut de \(10\)&nbsp;pieds), ballon lâché à
         \(h=2{,}20\)&nbsp;m, \(g=9{,}81\)&nbsp;m·s\(^{-2}\) (1 pied \(=30{,}5\)&nbsp;cm). 1) Relation \(\alpha\)–\(v_0\)
         pour un swish. 2) \(v_0\) pour \(\alpha=30°\).</p>
+
         <p class="q">Mise en place</p>
-        <p>Distances : \(H=10\times0{,}305=3{,}05\)&nbsp;m (hauteur panier), \(d=15\times0{,}305=4{,}58\)&nbsp;m
-        (distance horizontale). Repère : origine au ballon, \(\vec a=-g\,\vec u_y\), vitesse initiale
-        \(\vec v(0)=v_0\cos\alpha\,\vec u_x+v_0\sin\alpha\,\vec u_y\), position initiale \((0,h)\).</p>
-        <p class="q">1) Équations horaires puis trajectoire</p>
-        <p>Double intégration :</p>
-        \[\overrightarrow{OM}(t)=\begin{pmatrix}v_0\cos\alpha\,t\\[2pt]-\tfrac12 g t^2+v_0\sin\alpha\,t+h\end{pmatrix}\]
-        <p>On élimine \(t=\dfrac{x}{v_0\cos\alpha}\) :</p>
-        \[y(x)=-\frac{g}{2v_0^2\cos^2\alpha}x^2+\tan\alpha\,x+h\]
-        <p>Le ballon passe par le centre du panier \((d,H)\), d'où la relation cherchée :</p>
-        \[\boxed{H=-\frac{g}{2v_0^2\cos^2\alpha}\,d^2+\tan\alpha\,d+h}\]
-        <p class="q">2) \(v_0\) pour \(\alpha=30°\)</p>
-        <p>On isole \(v_0\) :</p>
-        \[v_0=\sqrt{\frac{g\,d^2}{2\cos^2\alpha\,[\tan\alpha\,d+h-H]}}\]
-        \[v_0=\sqrt{\frac{9{,}81\times4{,}58^2}{2\times(\tfrac{\sqrt3}{2})^2\,[\tfrac{1}{\sqrt3}\times4{,}58+2{,}20-3{,}05]}}\approx8{,}74\ \text{m·s}^{-1}\]
+        <p class="etape">Étape 1 : conversions</p>
+        \[ H = 10 \times 0{,}305 = 3{,}05\ \text{m} \qquad d = 15 \times 0{,}305 \approx 4{,}58\ \text{m} \]
+        <p class="etape">Étape 2 : repère et conditions initiales</p>
+        <ul>
+          <li>Origine au pied du lanceur, \(Ox\) vers le panier, \(Oy\) vers le haut.</li>
+          <li>Position initiale : \((0\,;\,h)\).</li>
+          <li>Vitesse initiale : \(\vec v(0) = v_0\cos\alpha\,\vec u_x + v_0\sin\alpha\,\vec u_y\).</li>
+          <li>Accélération : \(\vec a = -g\,\vec u_y\).</li>
+        </ul>
+
+        <p class="q">1) Relation entre \(\alpha\) et \(v_0\)</p>
+        <p class="etape">Étape 1 : équations horaires</p>
+        <p>Deux intégrations successives donnent :</p>
+        \[ x(t) = v_0\cos\alpha\,t \qquad y(t) = -\tfrac12 g\,t^2 + v_0\sin\alpha\,t + h \]
+        <p class="etape">Étape 2 : trajectoire</p>
+        <p>On élimine \(t = \dfrac{x}{v_0\cos\alpha}\) :</p>
+        \[ y(x) = -\frac{g}{2v_0^2\cos^2\alpha}\,x^2 + \tan\alpha\,x + h \]
+        <p class="etape">Étape 3 : le ballon passe par le centre du panier \((d\,;\,H)\)</p>
+        <div class="res">\[ H = -\frac{g}{2v_0^2\cos^2\alpha}\,d^2 + \tan\alpha\,d + h \]</div>
+
+        <p class="q">2) Vitesse pour \(\alpha = 30°\)</p>
+        <p class="etape">Étape 1 : isoler \(v_0\)</p>
+        \[ \frac{g\,d^2}{2v_0^2\cos^2\alpha} = \tan\alpha\,d + h - H \iff v_0 = \sqrt{\frac{g\,d^2}{2\cos^2\alpha\,\left(\tan\alpha\,d + h - H\right)}} \]
+        <p class="etape">Étape 2 : application numérique</p>
+        <p>Avec \(\cos^2 30° = 3/4\) et \(\tan 30° = 1/\sqrt3\) :</p>
+        \[ v_0 = \sqrt{\frac{9{,}81 \times 4{,}58^2}{2 \times 0{,}75 \times \left(0{,}577 \times 4{,}58 + 2{,}20 - 3{,}05\right)}} \approx 8{,}74\ \text{m·s}^{-1} \]
+        <div class="res">\(v_0 \approx 8{,}74\) m·s\(^{-1}\) pour \(\alpha = 30°\).</div>
       </div>
     </div>
 
@@ -919,22 +1245,39 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Porte de longueur fixe : \(A\) reste en \(x_A=0\) (glissière verticale), \(B\) reste en
         \(y_B=H\) (glissière horizontale), \(B\) avance à \(v_B\) constante.</p>
-        <p class="q">1) Longueur \(AB\)</p><p>Porte fermée = verticale de hauteur \(H\), longueur fixe ⇒ \(AB=H\).</p>
-        <p class="q">2) \(y_A\) en fonction de \(H,x_B\)</p>
-        <p>Le segment \(AB\) a pour longueur \(H\) : par Pythagore, \((x_B-0)^2+(H-y_A)^2=H^2\), d'où
-        \(y_A=H-\sqrt{H^2-x_B^2}\).</p>
+
+        <p class="q">1) Longueur \(AB\)</p>
+        <p>Porte fermée, elle est verticale et occupe toute la hauteur \(H\). Sa longueur ne change pas :</p>
+        <div class="res">\(AB = H\).</div>
+
+        <p class="q">2) \(y_A\) en fonction de \(H\) et \(x_B\)</p>
+        <div class="rappel"><span class="lab">Rappel · théorème de Pythagore</span>\[ AB^2 = (x_B - x_A)^2 + (y_B - y_A)^2 \]</div>
+        <p>Avec \(x_A = 0\), \(y_B = H\) et \(AB = H\) :</p>
+        \[ x_B^2 + (H - y_A)^2 = H^2 \iff H - y_A = \sqrt{H^2 - x_B^2} \]
+        <div class="res">\(y_A = H - \sqrt{H^2 - x_B^2}\).</div>
+
         <p class="q">3) Les dérivées</p>
-        \[\frac{dy_A}{dx_B}=-\frac{-2x_B}{2\sqrt{H^2-x_B^2}}=\frac{x_B}{\sqrt{H^2-x_B^2}}\qquad\quad \frac{dx_B}{dt}=v_B\]
-        <p>Dimension : \(\left[\dfrac{dy_A}{dx_B}\right]=\dfrac{L}{L}=1\) (sans dimension) et
-        \(\left[\dfrac{x_B}{\sqrt{H^2-x_B^2}}\right]=\dfrac{L}{L}=1\) : homogène. ✔</p>
-        <p class="q">4) \(v_A\) (dérivée composée)</p>
-        \[v_A=\frac{dy_A}{dt}=\frac{dy_A}{dx_B}\cdot\frac{dx_B}{dt}=\frac{x_B}{\sqrt{H^2-x_B^2}}\,v_B\]
-        <p class="q">5) \(x_B(t)\)</p><p>\(B\) en MRU : \(x_B(t)=v_B t\).</p>
+        <div class="rappel"><span class="lab">Rappel · dérivée d'une racine</span>\[ \left(\sqrt{u}\right)' = \frac{u'}{2\sqrt u} \]</div>
+        \[ \frac{dy_A}{dx_B} = -\frac{-2x_B}{2\sqrt{H^2 - x_B^2}} = \frac{x_B}{\sqrt{H^2 - x_B^2}} \qquad \frac{dx_B}{dt} = v_B \]
+        <p>Homogénéité : \(\dfrac{dy_A}{dx_B}\) est un rapport de deux longueurs, sans dimension, comme \(\dfrac{x_B}{\sqrt{H^2 - x_B^2}}\).</p>
+
+        <p class="q">4) Vitesse de \(A\)</p>
+        <div class="rappel"><span class="lab">Rappel · dérivée composée</span>\[ \frac{dy_A}{dt} = \frac{dy_A}{dx_B}\times\frac{dx_B}{dt} \]</div>
+        <div class="res">\[ v_A = \frac{x_B}{\sqrt{H^2 - x_B^2}}\,v_B \]</div>
+
+        <p class="q">5) \(x_B(t)\)</p>
+        <p>\(B\) avance à vitesse constante depuis \(x_B = 0\) :</p>
+        <div class="res">\(x_B(t) = v_B\,t\).</div>
+
         <p class="q">6) \(y_A(t)\) et \(v_A(t)\)</p>
-        \[y_A(t)=H-\sqrt{H^2-v_B^2t^2}\qquad v_A(t)=\frac{v_B^2\,t}{\sqrt{H^2-v_B^2t^2}}\]
+        <p>On remplace \(x_B\) par \(v_B t\) :</p>
+        <div class="res">\[ y_A(t) = H - \sqrt{H^2 - v_B^2 t^2} \qquad v_A(t) = \frac{v_B^2\,t}{\sqrt{H^2 - v_B^2 t^2}} \]</div>
+
         <p class="q">7) Durée d'ouverture</p>
-        <p>La porte est ouverte quand \(x_B=H\), soit \(v_B t=H\) ⇒ \(t=\dfrac{H}{v_B}\).</p>
-        <div class="note">Remarque physique : \(v_A\to\infty\) quand \(x_B\to H\) : le point \(A\) accélère brutalement en fin d'ouverture (le modèle idéalisé diverge).</div>
+        <p>La porte est ouverte quand \(x_B = H\) :</p>
+        \[ v_B\,t = H \iff t = \frac{H}{v_B} \]
+        <div class="res">Durée d'ouverture : \(t = H/v_B\).</div>
+        <p>Remarque : \(v_A\) tend vers l'infini quand \(x_B \to H\). Le modèle idéal prédit une fin d'ouverture très brutale pour le point \(A\).</p>
       </div>
     </div>
 
@@ -944,22 +1287,39 @@ window.MathJax = {
         <p class="enonce">Alice marche à \(v_A=1\)&nbsp;m·s\(^{-1}\), passe en \(x=0\) à \(t_0=0\). Un corbeau lâche
         une noix (sans vitesse) au temps \(t_1\), depuis \((D,H)\), \(g=9{,}81\). Puis Alice lance une balle depuis
         \(D/2\).</p>
-        <p class="q">2) Position d'Alice</p><p>\(v_A\) constante, \(x_A(0)=0\) ⇒ \(x_A(t)=v_A t\).</p>
-        <p class="q">3) Équations de la noix (attention aux constantes, chute à partir de \(t_1\))</p>
-        <p>\(x_N(t)=D\) (constante). Verticalement \(\ddot y_N=-g\), \(\dot y_N(t_1)=0\) ⇒
-        \(\dot y_N=-g(t-t_1)\) ; \(y_N(t_1)=H\) ⇒ \(y_N(t)=-\tfrac12 g(t-t_1)^2+H\) (valable pour \(t>t_1\), sinon \(y_N=H\)).</p>
-        <p class="q">4) Conditions de capture (Alice attrape à hauteur \(h\), en \(x=D\))</p>
-        <p>Il faut \(x_A(t_A)=D\) et \(y_N(t_N)=h\) au même instant :</p>
-        \[t_A=\frac{D}{v_A}\qquad\qquad t_N=t_1+\sqrt{\frac{2(H-h)}{g}}\]
-        <p>Capture ⇔ \(t_A=t_N\) ⇒ instant de lâcher :</p>
-        \[\boxed{t_1=\frac{D}{v_A}-\sqrt{\frac{2(H-h)}{g}}}\]
-        <p class="q">5) Distance \(D\) pour que \(t_1=0\)</p>
-        <p>\(\dfrac{D}{v_A}=\sqrt{\dfrac{2(H-h)}{g}}\) ⇒ \(D=v_A\sqrt{\dfrac{2(H-h)}{g}}\).</p>
-        <p class="q">6) Balle lancée depuis \(D/2\) (à l'instant \(t_L=\dfrac{D}{2v_A}\), hauteur \(h'\), angle \(\alpha\))</p>
-        \[x_B(t)=v_B\cos\alpha\,(t-t_L)+\tfrac{D}{2}\qquad y_B(t)=-\tfrac12 g(t-t_L)^2+v_B\sin\alpha\,(t-t_L)+h'\]
-        <p class="q">7) Impact balle-noix</p>
-        <p>Égalité des positions. De \(x_B(t_{impact})=x_N=D\) on tire directement l'instant d'impact :</p>
-        \[t_{impact}=\frac{D}{2v_B\cos\alpha}+t_L\]
+
+        <p class="q">2) Position d'Alice</p>
+        <p>Vitesse constante et \(x_A(0) = 0\) :</p>
+        <div class="res">\(x_A(t) = v_A\,t\).</div>
+
+        <p class="q">3) Équations horaires de la noix</p>
+        <p class="etape">Étape 1 : horizontalement</p>
+        <p>La noix est lâchée sans vitesse : \(x_N(t) = D\).</p>
+        <p class="etape">Étape 2 : verticalement</p>
+        <p>La chute commence à \(t_1\) et non à 0 : on intègre avec les conditions \(\dot y_N(t_1) = 0\) et \(y_N(t_1) = H\).</p>
+        \[ \ddot y_N = -g \;\Longrightarrow\; \dot y_N = -g\,(t - t_1) \;\Longrightarrow\; y_N(t) = H - \tfrac12 g\,(t - t_1)^2 \]
+        <div class="res">\(x_N = D\) et \(y_N(t) = H - \tfrac12 g(t - t_1)^2\) pour \(t \ge t_1\) (avant, \(y_N = H\)).</div>
+
+        <p class="q">4) Instant de lâcher pour qu'Alice attrape la noix</p>
+        <p class="etape">Étape 1 : Alice arrive sous la noix</p>
+        \[ x_A(t_A) = D \iff t_A = \frac{D}{v_A} \]
+        <p class="etape">Étape 2 : la noix arrive à hauteur des mains \(h\)</p>
+        \[ y_N(t_N) = h \iff t_N = t_1 + \sqrt{\frac{2(H - h)}{g}} \]
+        <p class="etape">Étape 3 : les deux instants coïncident</p>
+        <div class="res">\[ t_1 = \frac{D}{v_A} - \sqrt{\frac{2(H - h)}{g}} \]</div>
+
+        <p class="q">5) Distance \(D\) pour que \(t_1 = 0\)</p>
+        \[ \frac{D}{v_A} = \sqrt{\frac{2(H - h)}{g}} \]
+        <div class="res">\(D = v_A\sqrt{\dfrac{2(H - h)}{g}}\).</div>
+
+        <p class="q">6) Équations de la balle lancée depuis \(D/2\)</p>
+        <p>Alice est en \(D/2\) à l'instant \(t_L = \dfrac{D}{2v_A}\). La balle part de la hauteur \(h'\) avec la vitesse \(v_B\) sous l'angle \(\alpha\) :</p>
+        \[ x_B(t) = \frac{D}{2} + v_B\cos\alpha\,(t - t_L) \qquad y_B(t) = h' + v_B\sin\alpha\,(t - t_L) - \tfrac12 g\,(t - t_L)^2 \]
+
+        <p class="q">7) Instant de l'impact balle-noix</p>
+        <p>À l'impact, les abscisses sont égales : \(x_B = D\).</p>
+        \[ v_B\cos\alpha\,(t - t_L) = \frac{D}{2} \]
+        <div class="res">\(t_{impact} = t_L + \dfrac{D}{2v_B\cos\alpha}\).</div>
       </div>
     </div>
 
@@ -968,30 +1328,54 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Grue : M1 monte/descend (\(z\)), M2 rapproche/éloigne (\(r\)), M3 tourne (\(\theta\)),
         tous à vitesse constante. Flèche \(R=10\)&nbsp;m.</p>
-        <p class="q">2) Coordonnées</p><p>Rotation autour d'un axe vertical ⇒ <b>coordonnées cylindriques</b>.</p>
-        <p class="q">3) M1 seul : +30&nbsp;m en 15&nbsp;s</p>
-        <p>\(v_z=30/15=2\)&nbsp;m·s\(^{-1}\). \(r,\theta\) constants, \(z(t)=2t\). <b>Rectiligne uniforme vertical</b> (\(\vec a=\vec0\)).</p>
-        <p class="q">4) M2 seul : charge à 10&nbsp;m du sol, en bout de flèche, −8&nbsp;m en 5&nbsp;s</p>
-        <p>\(v_r=8/5=1{,}6\)&nbsp;m·s\(^{-1}\), rapprochement ⇒ \(r(t)=-1{,}6t+10\) ; \(\theta\) cte, \(z=10\).
-        <b>Rectiligne uniforme radial</b>.</p>
-        <p class="q">5) M3 seul : ¼ tour en 6&nbsp;s</p>
-        <p>\(\dot\theta_0=\dfrac{2\pi/4}{6}=\dfrac{\pi}{12}\)&nbsp;rad·s\(^{-1}\), \(r,z\) constants,
-        \(\theta(t)=\tfrac{\pi}{12}t\). <b>Circulaire uniforme</b>.</p>
-        <p class="q">6) Rapprocher une charge de 10&nbsp;m (au sol) au pied, sans tourner</p>
-        <p><b>a.</b> Moteur M2. <b>b.</b> Possible avec M2 (rapprocher) + M1 (monter puis redescendre à mi-course).
-        <b>c.</b> Deux phases. Montée (\(t<t_I\)) : \(r=-1{,}6t+10,\ z=2t\). Inversion de M1 quand \(r=5\) :
-        \(t_I=\dfrac{5}{1{,}6}=3{,}125\)&nbsp;s, \(z(t_I)=6{,}25\)&nbsp;m. Descente (\(t>t_I\)) :
-        \(r=-1{,}6t+10,\ z=-2(t-t_I)+6{,}25\). <b>d.</b> Fin quand \(r=0\) : \(t_f=\dfrac{10}{1{,}6}=6{,}25\)&nbsp;s
-        \(=2t_I\). <b>e.</b> \(\vec v=-1{,}6\,\vec u_r-2\,\vec u_z\) (phase montée), \(v=\sqrt{1{,}6^2+2^2}\approx2{,}56\)&nbsp;m·s\(^{-1}\).</p>
-        <p class="q">7) Les 3 moteurs ensemble (charge au sol sous la flèche)</p>
-        <p><b>a.</b> \(r=-1{,}6t+10\), \(\theta=\tfrac{\pi}{12}t\), \(z=2t\) (puis \(z=-2(t-t_I)+6{,}25\) après \(t_I\)).
-        <b>b.</b> \(\vec v=\dot r\,\vec u_r+r\dot\theta\,\vec u_\theta+\dot z\,\vec u_z\).
-        <b>c.</b> À \(t=1\)&nbsp;s : \(\vec v=-1{,}6\,\vec u_r+8{,}4\cdot\tfrac{\pi}{12}\,\vec u_\theta+2\,\vec u_z
-        =-1{,}60\,\vec u_r+2{,}20\,\vec u_\theta+2\,\vec u_z\), \(v=\sqrt{1{,}6^2+2{,}2^2+2^2}\approx3{,}38\)&nbsp;m·s\(^{-1}\).
-        <b>d.</b> \(\vec a=-r\dot\theta^2\,\vec u_r+2\dot r\dot\theta\,\vec u_\theta\) (termes en \(\ddot{}\) nuls).
-        <b>e.</b> À \(t=1\) : \(\vec a=-8{,}4(\tfrac{\pi}{12})^2\,\vec u_r+2(-1{,}6)\tfrac{\pi}{12}\,\vec u_\theta
-        =-0{,}576\,\vec u_r-0{,}838\,\vec u_\theta\), \(a\approx1{,}02\)&nbsp;m·s\(^{-2}\).</p>
-        <div class="note">Interprétation : \(\vec a\) a une composante \(-\vec u_\theta\) alors que la vitesse est \(+\vec u_\theta\) : en se rapprochant de l'axe (périmètre plus petit), la vitesse orthoradiale doit diminuer pour compenser — trace de la <b>conservation du moment cinétique</b>.</div>
+
+        <p class="q">2) Système de coordonnées</p>
+        <div class="res">Rotation autour d'un axe vertical, avec une hauteur : coordonnées cylindriques \((r, \theta, z)\).</div>
+
+        <p class="q">3) Moteur M1 seul : montée de 30 m en 15 s</p>
+        \[ v_z = \frac{30}{15} = 2\ \text{m·s}^{-1} \qquad z(t) = 2t \]
+        <div class="res">\(r\) et \(\theta\) constants : mouvement rectiligne uniforme vertical, \(\vec a = \vec 0\).</div>
+
+        <p class="q">4) Moteur M2 seul : la charge se rapproche de 8 m en 5 s</p>
+        \[ v_r = \frac{8}{5} = 1{,}6\ \text{m·s}^{-1} \qquad r(t) = 10 - 1{,}6\,t \]
+        <div class="res">\(\theta\) constant et \(z = 10\) m : mouvement rectiligne uniforme radial.</div>
+
+        <p class="q">5) Moteur M3 seul : un quart de tour en 6 s</p>
+        \[ \dot\theta_0 = \frac{2\pi/4}{6} = \frac{\pi}{12}\ \text{rad·s}^{-1} \qquad \theta(t) = \frac{\pi}{12}\,t \]
+        <div class="res">\(r\) et \(z\) constants : mouvement circulaire uniforme.</div>
+
+        <p class="q">6) Amener une charge posée à 10 m au pied de la grue, sans tourner</p>
+        <p class="etape">Étape 1 : moteurs utiles</p>
+        <p>M2 rapproche la charge. M1 doit la soulever puis la reposer : on monte pendant la première moitié du trajet, on redescend pendant la seconde.</p>
+        <p class="etape">Étape 2 : phase de montée</p>
+        \[ r(t) = 10 - 1{,}6\,t \qquad z(t) = 2t \]
+        <p>On inverse M1 à mi-course, quand \(r = 5\) m :</p>
+        \[ t_I = \frac{5}{1{,}6} = 3{,}125\ \text{s} \qquad z(t_I) = 6{,}25\ \text{m} \]
+        <p class="etape">Étape 3 : phase de descente (\(t > t_I\))</p>
+        \[ r(t) = 10 - 1{,}6\,t \qquad z(t) = 6{,}25 - 2\,(t - t_I) \]
+        <p class="etape">Étape 4 : durée totale</p>
+        \[ r(t_f) = 0 \iff t_f = \frac{10}{1{,}6} = 6{,}25\ \text{s} = 2\,t_I \]
+        <p class="etape">Étape 5 : vitesse pendant la montée</p>
+        <div class="rappel"><span class="lab">Rappel · vitesse en cylindriques</span>\[ \vec v = \dot r\,\vec u_r + r\dot\theta\,\vec u_\theta + \dot z\,\vec u_z \]</div>
+        \[ \vec v = -1{,}6\,\vec u_r + 2\,\vec u_z \qquad v = \sqrt{1{,}6^2 + 2^2} \approx 2{,}56\ \text{m·s}^{-1} \]
+        <div class="res">\(t_I = 3{,}125\) s, \(z_{max} = 6{,}25\) m, \(t_f = 6{,}25\) s, \(v \approx 2{,}56\) m·s\(^{-1}\).</div>
+
+        <p class="q">7) Les trois moteurs ensemble</p>
+        <p class="etape">Étape 1 : équations horaires</p>
+        \[ r = 10 - 1{,}6\,t \qquad \theta = \frac{\pi}{12}\,t \qquad z = 2t\ \ (\text{puis } 6{,}25 - 2(t - t_I)) \]
+        <p class="etape">Étape 2 : vitesse à \(t = 1\) s</p>
+        <p>\(r(1) = 8{,}4\) m :</p>
+        \[ \vec v = -1{,}6\,\vec u_r + 8{,}4 \times \frac{\pi}{12}\,\vec u_\theta + 2\,\vec u_z = -1{,}60\,\vec u_r + 2{,}20\,\vec u_\theta + 2\,\vec u_z \]
+        \[ v = \sqrt{1{,}6^2 + 2{,}2^2 + 2^2} \approx 3{,}38\ \text{m·s}^{-1} \]
+        <p class="etape">Étape 3 : accélération</p>
+        <div class="rappel"><span class="lab">Rappel · accélération en cylindriques</span>\[ \vec a = \left(\ddot r - r\dot\theta^2\right)\vec u_r + \left(2\dot r\dot\theta + r\ddot\theta\right)\vec u_\theta + \ddot z\,\vec u_z \]</div>
+        <p>Tous les termes en dérivée seconde sont nuls :</p>
+        \[ \vec a = -r\dot\theta^2\,\vec u_r + 2\dot r\dot\theta\,\vec u_\theta \]
+        <p class="etape">Étape 4 : accélération à \(t = 1\) s</p>
+        \[ \vec a = -8{,}4\left(\frac{\pi}{12}\right)^2\vec u_r + 2 \times (-1{,}6) \times \frac{\pi}{12}\,\vec u_\theta = -0{,}576\,\vec u_r - 0{,}838\,\vec u_\theta \]
+        \[ a = \sqrt{0{,}576^2 + 0{,}838^2} \approx 1{,}02\ \text{m·s}^{-2} \]
+        <div class="res">À \(t = 1\) s : \(v \approx 3{,}38\) m·s\(^{-1}\) et \(a \approx 1{,}02\) m·s\(^{-2}\).</div>
+        <p>Interprétation : la composante \(-\vec u_\theta\) de \(\vec a\) freine la rotation de la charge, car celle-ci se rapproche de l'axe.</p>
       </div>
     </div>
 
@@ -1000,20 +1384,27 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Chat 1 sur \(Ox\) (part de \(-x_0\) vers \(O\), vitesse \(v_1\)), chat 2 sur \(Oy\)
         (vitesse \(v_2\)), axes orthogonaux.</p>
+
         <p class="q">1) Instant et distance minimale</p>
-        <p>Positions : \(x_1(t)=v_1 t-x_0\), \(y_2(t)=v_2 t\). Distance (Pythagore, axes orthogonaux) :
-        \(D=\sqrt{(v_1t-x_0)^2+(v_2t)^2}\).</p>
-        <p>\(D\) est minimale quand le radicande l'est (racine croissante). On dérive et on annule :</p>
-        \[\frac{d}{dt}\big[(v_1t-x_0)^2+(v_2t)^2\big]=2(v_1t-x_0)v_1+2v_2^2 t=0\ \Rightarrow\
-        t_{min}=\frac{v_1 x_0}{v_1^2+v_2^2}\]
-        <p>En reportant et après factorisation :</p>
-        \[D_{min}=\frac{v_2\,x_0}{\sqrt{v_1^2+v_2^2}}\]
-        <p class="q">2) Si le chat 2 décélère (\(a_2\) constante)</p>
-        <p>\(y_2(t)=-\tfrac12 a_2 t^2+v_2 t\), d'où \(D=\sqrt{(v_1t-x_0)^2+\big(-\tfrac12 a_2 t^2+v_2 t\big)^2}\).</p>
+        <p class="etape">Étape 1 : positions et distance</p>
+        \[ x_1(t) = v_1 t - x_0 \qquad y_2(t) = v_2 t \]
+        <div class="rappel"><span class="lab">Rappel · distance entre deux points (axes orthogonaux)</span>\[ D = \sqrt{\Delta x^2 + \Delta y^2} \]</div>
+        \[ D(t) = \sqrt{(v_1 t - x_0)^2 + (v_2 t)^2} \]
+        <p class="etape">Étape 2 : minimiser</p>
+        <p>La racine est croissante : \(D\) est minimale quand ce qu'il y a sous la racine l'est. On dérive et on annule :</p>
+        \[ 2(v_1 t - x_0)\,v_1 + 2v_2^2\,t = 0 \iff t_{min} = \frac{v_1 x_0}{v_1^2 + v_2^2} \]
+        <p class="etape">Étape 3 : distance minimale</p>
+        <p>On reporte \(t_{min}\) dans \(D\) et on factorise :</p>
+        <div class="res">\[ t_{min} = \frac{v_1 x_0}{v_1^2 + v_2^2} \qquad D_{min} = \frac{v_2\,x_0}{\sqrt{v_1^2 + v_2^2}} \]</div>
+
+        <p class="q">2) Le chat 2 décélère (\(a_2\) constante)</p>
+        \[ y_2(t) = v_2 t - \tfrac12 a_2 t^2 \]
+        <div class="res">\[ D(t) = \sqrt{(v_1 t - x_0)^2 + \left(v_2 t - \tfrac12 a_2 t^2\right)^2} \]</div>
+
         <p class="q">3) Condition de rencontre</p>
-        <p>\(D=0\) exige les deux carrés nuls au même instant \(t_R\) :</p>
-        \[v_1 t_R-x_0=0\Rightarrow t_R=\frac{x_0}{v_1}\ ;\qquad -\tfrac12 a_2 t_R^2+v_2 t_R=0\Rightarrow t_R=\frac{2v_2}{a_2}\]
-        <div class="res">Rencontre possible ⇔ \(\dfrac{x_0}{v_1}=\dfrac{2v_2}{a_2}\).</div>
+        <p>\(D = 0\) exige que les deux carrés soient nuls au même instant \(t_R\) :</p>
+        \[ v_1 t_R - x_0 = 0 \iff t_R = \frac{x_0}{v_1} \qquad\qquad v_2 t_R - \tfrac12 a_2 t_R^2 = 0 \iff t_R = \frac{2v_2}{a_2} \]
+        <div class="res">Rencontre possible si et seulement si \(\dfrac{x_0}{v_1} = \dfrac{2v_2}{a_2}\).</div>
       </div>
     </div>
 
@@ -1022,28 +1413,52 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">4 chiens aux sommets d'un carré, chacun poursuit son voisin à vitesse constante \(v_0\).
         Étude du chien en haut à droite (\(\theta_0=0\)), en polaires.</p>
+
         <p class="q">3) Angle \(\beta\) entre \(\vec u_\theta\) et \(\vec v\)</p>
-        <p>La vitesse pointe vers le voisin. Géométrie du carré : l'angle entre \(\vec v\) et \(\overrightarrow{MO}\)
-        est \(45°\) ; \(\overrightarrow{MO}\) et \(\vec u_\theta\) font \(90°\). Donc \(\beta=90°-45°=45°=\tfrac{\pi}{4}\) (constant).</p>
+        <ul>
+          <li>Le chien vise son voisin : \(\vec v\) suit un côté du carré.</li>
+          <li>Un côté et la diagonale \(\overrightarrow{MO}\) font 45°.</li>
+          <li>\(\overrightarrow{MO}\) (direction \(-\vec u_r\)) et \(\vec u_\theta\) font 90°.</li>
+        </ul>
+        <div class="res">\(\beta = 90° - 45° = 45° = \pi/4\), constant pendant toute la poursuite.</div>
+
         <p class="q">4) Décomposition de \(\vec v\)</p>
-        <p>\(\vec v=-v_0\sin\beta\,\vec u_r+v_0\cos\beta\,\vec u_\theta\) (composante radiale rentrante).</p>
-        <p class="q">5) Équations différentielles (identification avec \(\vec v=\dot r\,\vec u_r+r\dot\theta\,\vec u_\theta\))</p>
-        \[\dot r=-v_0\sin\beta\qquad r\dot\theta=v_0\cos\beta\]
+        <div class="res">\(\vec v = -v_0\sin\beta\,\vec u_r + v_0\cos\beta\,\vec u_\theta\) (composante radiale vers le centre).</div>
+
+        <p class="q">5) Équations différentielles</p>
+        <div class="rappel"><span class="lab">Rappel · vitesse en polaires</span>\[ \vec v = \dot r\,\vec u_r + r\dot\theta\,\vec u_\theta \]</div>
+        <p>On identifie composante par composante :</p>
+        <div class="res">\[ \dot r = -v_0\sin\beta \qquad r\,\dot\theta = v_0\cos\beta \]</div>
+
         <p class="q">6) Intégration de \(\dot r\)</p>
-        <p>\(r(t)=-v_0\sin\beta\,t+R_0\) (avec \(r(0)=R_0\)), soit \(r(t)=-\dfrac{v_0}{\sqrt2}\,t+R_0\).</p>
+        <p>\(\dot r\) est constant et \(r(0) = R_0\) :</p>
+        <div class="res">\(r(t) = R_0 - v_0\sin\beta\,t = R_0 - \dfrac{v_0}{\sqrt2}\,t\).</div>
+
         <p class="q">7) Équation en \(\theta\)</p>
-        <p>\(\dot\theta=\dfrac{v_0\cos\beta}{-v_0\sin\beta\,t+R_0}\) : forme \(U'/U\), donc
-        \(\theta(t)=-\ln\!\big|{-v_0\sin\beta\,t+R_0}\big|+\)cte. Avec \(\theta(0)=0\) et \(\sin\beta=\tfrac{1}{\sqrt2}\) :</p>
-        \[\theta(t)=-\ln\!\left(\Big|1-\frac{v_0}{R_0\sqrt2}\,t\Big|\right)\]
-        <p class="q">8) Autres chiens</p><p>Même forme, en ajoutant \(\theta_0=\tfrac{\pi}{2},\pi,\tfrac{3\pi}{2}\).</p>
+        <p class="etape">Étape 1 : isoler \(\dot\theta\)</p>
+        \[ \dot\theta = \frac{v_0\cos\beta}{R_0 - v_0\sin\beta\,t} \]
+        <p class="etape">Étape 2 : intégrer</p>
+        <div class="rappel"><span class="lab">Rappel · primitive</span>\[ \int \frac{u'}{u}\,dt = \ln|u| + C \]</div>
+        <p>Ici \(u = R_0 - v_0\sin\beta\,t\) et \(u' = -v_0\sin\beta\). Comme \(\cos\beta = \sin\beta\) :</p>
+        \[ \theta(t) = -\ln\left|R_0 - v_0\sin\beta\,t\right| + C \]
+        <p class="etape">Étape 3 : constante avec \(\theta(0) = 0\)</p>
+        <div class="res">\[ \theta(t) = -\ln\left(1 - \frac{v_0}{R_0\sqrt2}\,t\right) \]</div>
+
+        <p class="q">8) Les autres chiens</p>
+        <div class="res">Même expression, à laquelle on ajoute l'angle de départ \(\theta_0 = \pi/2\), \(\pi\) ou \(3\pi/2\).</div>
+
         <p class="q">9) Durée de la poursuite</p>
-        <p>Le \(\ln\) diverge quand son argument s'annule : \(1-\dfrac{v_0}{R_0\sqrt2}t=0\Rightarrow
-        t_{max}=\dfrac{R_0\sqrt2}{v_0}\) (instant où \(r=0\), les chiens se rejoignent).</p>
+        <p>Les chiens se rejoignent quand \(r = 0\), c'est-à-dire quand l'argument du logarithme s'annule :</p>
+        \[ 1 - \frac{v_0}{R_0\sqrt2}\,t_{max} = 0 \iff t_{max} = \frac{R_0\sqrt2}{v_0} \]
+        <div class="res">\(t_{max} = \dfrac{R_0\sqrt2}{v_0}\).</div>
+
         <p class="q">10) Nombre de tours</p>
-        <p>\(\theta\to-\ln(0)=+\infty\) quand \(t\to t_{max}\) : nombre de tours <b>infini</b> ! Paradoxe dû aux
-        chiens ponctuels : \(\dot\theta\) diverge alors que la distance par tour tend vers 0.</p>
+        <p>Quand \(t \to t_{max}\), \(\theta = -\ln(\to 0) \to +\infty\).</p>
+        <div class="res">Le modèle prédit un nombre de tours infini. C'est possible car chaque tour, de plus en plus près du centre, est de plus en plus court (chiens ponctuels).</div>
+
         <p class="q">11) Distance parcourue</p>
-        <p>Vitesse constante \(v_0\) pendant \(t_{max}\) : \(D=v_0\,t_{max}=R_0\sqrt2\) (la longueur du côté du carré !).</p>
+        \[ D = v_0\,t_{max} = R_0\sqrt2 \]
+        <div class="res">\(D = R_0\sqrt2\) : exactement la longueur du côté du carré.</div>
       </div>
     </div>
 
@@ -1052,29 +1467,59 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">On part de \(H=-\dfrac{g}{2v_0^2\cos^2\alpha}d^2+\tan\alpha\,d+h\). Angles limites, angle
         optimal, prise en compte du diamètre du ballon.</p>
-        <p class="q">1a) Angle limite supérieur</p><p>\(\alpha_{sup}=90°\) : tir vertical, n'atteint jamais le panier.</p>
-        <p class="q">1b) Angle limite inférieur</p><p>Si \(v_0\to\infty\), \(y(x)\to\tan\alpha\,x+h\) (droite) : on vise en ligne droite. L'angle limite est celui de la visée directe.</p>
-        <p class="q">1c) Géométrie (\(R=\sqrt{d^2+(H-h)^2}\))</p>
-        \[\cos\theta=\frac{d}{R},\quad \sin\theta=\frac{H-h}{R},\quad \tan\theta=\frac{H-h}{d}\]
+
+        <p class="q">1a) Angle limite supérieur</p>
+        <div class="res">\(\alpha_{sup} = 90°\) : un tir vertical n'atteint jamais le panier.</div>
+
+        <p class="q">1b) Angle limite inférieur</p>
+        <p>Si \(v_0 \to \infty\), le terme en \(x^2\) disparaît : \(y(x) \to \tan\alpha\,x + h\), une droite.</p>
+        <div class="res">L'angle limite inférieur est celui de la visée en ligne droite vers le panier.</div>
+
+        <p class="q">1c) Géométrie</p>
+        <p>On note \(R = \sqrt{d^2 + (H - h)^2}\) la distance en ligne droite du ballon au panier, et \(\theta\) l'angle de visée :</p>
+        \[ \cos\theta = \frac{d}{R} \qquad \sin\theta = \frac{H - h}{R} \qquad \tan\theta = \frac{H - h}{d} \]
+
         <p class="q">1d–1e) Mise en forme</p>
-        <p>En multipliant par \(-2v_0^2\cos^2\alpha\) et via \(2\cos^2\alpha=\cos2\alpha+1\),
-        \(2\sin\alpha\cos\alpha=\sin2\alpha\), puis en factorisant par \(R\) et avec \(\sin(a-b)=\sin a\cos b-\sin b\cos a\) :</p>
-        \[v_0^2 R\,[\sin(2\alpha-\theta)-\sin\theta]=g\,d^2\]
+        <p class="etape">Étape 1 : multiplier la relation par \(2v_0^2\cos^2\alpha\)</p>
+        \[ 2v_0^2\cos^2\alpha\,(H - h) = -g\,d^2 + 2v_0^2\sin\alpha\cos\alpha\,d \]
+        <div class="rappel"><span class="lab">Rappel · formules de trigonométrie</span>\[ 2\cos^2\alpha = 1 + \cos 2\alpha \qquad 2\sin\alpha\cos\alpha = \sin 2\alpha \qquad \sin(a - b) = \sin a\cos b - \cos a\sin b \]</div>
+        <p class="etape">Étape 2 : remplacer et factoriser par \(R\)</p>
+        <p>Avec \(d = R\cos\theta\) et \(H - h = R\sin\theta\) :</p>
+        \[ v_0^2 R\left[\sin 2\alpha\cos\theta - \cos 2\alpha\sin\theta - \sin\theta\right] = g\,d^2 \]
+        <div class="res">\[ v_0^2 R\left[\sin(2\alpha - \theta) - \sin\theta\right] = g\,d^2 \]</div>
+
         <p class="q">1f) Angle critique</p>
-        <p>Le membre de gauche doit être \(>0\) : \(\sin(2\alpha-\theta)>\sin\theta\Rightarrow 2\alpha-\theta>\theta
-        \Rightarrow \alpha>\theta=\alpha_c\). Réaliste : dès que \(v_0\) est finie, un tir est possible.</p>
-        <p class="q">1g) A.N.</p><p>\(\theta=\arctan\dfrac{H-h}{d}=\arctan\dfrac{0{,}85}{4{,}58}\approx10{,}5°\). Il faut \(\alpha>10{,}5°\).</p>
+        <p>Le membre de droite est positif, donc le crochet aussi :</p>
+        \[ \sin(2\alpha - \theta) > \sin\theta \iff 2\alpha - \theta > \theta \iff \alpha > \theta \]
+        <div class="res">L'angle critique est \(\alpha_c = \theta\), l'angle de visée directe.</div>
+
+        <p class="q">1g) Application numérique</p>
+        \[ \theta = \arctan\frac{H - h}{d} = \arctan\frac{0{,}85}{4{,}58} \approx 10{,}5° \]
+        <div class="res">Il faut \(\alpha > 10{,}5°\).</div>
+
         <p class="q">2a–2b) Vitesse minimale</p>
-        <p>\(v_0(\alpha)=\sqrt{\dfrac{g d^2/R}{\sin(2\alpha-\theta)-\sin\theta}}\). \(v_0\) minimale quand le
-        dénominateur est maximal, i.e. \(\sin(2\alpha-\theta)=1\Rightarrow \alpha_{min}=\dfrac{\pi}{4}+\dfrac{\theta}{2}\).</p>
-        <p class="q">2c–2d) A.N.</p><p>\(\alpha_{min}=\dfrac{\pi}{4}+\dfrac{0{,}184}{2}\approx50{,}2°\) ;
-        \(R=\sqrt{4{,}58^2+0{,}85^2}\approx4{,}66\)&nbsp;m ; \(v_{0,min}\approx7{,}35\)&nbsp;m·s\(^{-1}\).</p>
-        <p class="q">3) Ballon non ponctuel (\(D=20\)&nbsp;cm, arceau \(D_a=45\)&nbsp;cm)</p>
-        <p><b>a–b.</b> À l'entrée \(t_P=\dfrac{d}{v_0\cos\alpha}\), \(\tan\beta=\dfrac{v_y}{v_x}\).
-        <b>c.</b> \(\beta=\arctan\!\big(\tan\alpha-\dfrac{gd}{v_0^2\cos^2\alpha}\big)\), A.N. \(\beta_{min}\approx-39{,}7°\).
-        <b>d.</b> Condition d'entrée : \(\beta\ge\arcsin(D/D_a)=\arcsin(20/45)\approx26{,}4°\).</p>
+        \[ v_0(\alpha) = \sqrt{\frac{g\,d^2/R}{\sin(2\alpha - \theta) - \sin\theta}} \]
+        <p>\(v_0\) est minimale quand le dénominateur est maximal, c'est-à-dire quand \(\sin(2\alpha - \theta) = 1\) :</p>
+        <div class="res">\(\alpha_{min} = \dfrac{\pi}{4} + \dfrac{\theta}{2}\).</div>
+
+        <p class="q">2c–2d) Applications numériques</p>
+        \[ \alpha_{min} = 45° + \frac{10{,}5°}{2} \approx 50{,}3° \qquad R = \sqrt{4{,}58^2 + 0{,}85^2} \approx 4{,}66\ \text{m} \]
+        \[ v_{0,min} = \sqrt{\frac{9{,}81 \times 4{,}58^2 / 4{,}66}{1 - \sin 10{,}5°}} \approx 7{,}35\ \text{m·s}^{-1} \]
+        <div class="res">\(\alpha_{min} \approx 50°\) et \(v_{0,min} \approx 7{,}35\) m·s\(^{-1}\).</div>
+
+        <p class="q">3) Ballon non ponctuel (\(D = 20\) cm, arceau \(D_a = 45\) cm)</p>
+        <p class="etape">Étape 1 : instant de passage au panier</p>
+        \[ t_P = \frac{d}{v_0\cos\alpha} \]
+        <p class="etape">Étape 2 : angle de la vitesse à l'arrivée</p>
+        \[ \tan\beta = \frac{v_y}{v_x} = \tan\alpha - \frac{g\,d}{v_0^2\cos^2\alpha} \]
+        <p>Avec \(\alpha_{min}\) et \(v_{0,min}\) :</p>
+        \[ \beta_{min} \approx -39{,}7° \]
+        <p class="etape">Étape 3 : condition d'entrée</p>
+        <p>Le ballon passe si sa trajectoire descend assez raide :</p>
+        \[ |\beta| \ge \arcsin\frac{D}{D_a} = \arcsin\frac{20}{45} \approx 26{,}4° \]
+
         <p class="q">4) Conclusion</p>
-        <div class="res">\(|\beta_{min}|\approx39{,}7°>26{,}4°\) : le tir à vitesse minimale <b>réussit le swish</b> même en tenant compte du diamètre du ballon.</div>
+        <div class="res">\(39{,}7° > 26{,}4°\) : le tir à vitesse minimale réussit, même en tenant compte du diamètre du ballon.</div>
       </div>
     </div>
 
@@ -1084,10 +1529,18 @@ window.MathJax = {
       <div class="exo-head">Exercice 15 — Sprint du 100 m <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">100&nbsp;m en 10&nbsp;s. Athlète A : vitesse constante. Athlète B : accélération constante. Lequel se surestime&nbsp;?</p>
-        <p><b>A (vitesse constante) :</b> \(x=v_0 t\), \(x(10)=100\Rightarrow v_0=10\)&nbsp;m·s\(^{-1}=36\)&nbsp;km/h.</p>
-        <p><b>B (accélération constante, départ arrêté) :</b> \(x=\tfrac12 a_0 t^2\), \(x(10)=100\Rightarrow
-        a_0=\dfrac{100}{50}=2\)&nbsp;m·s\(^{-2}\), d'où vitesse finale \(v(10)=a_0\times10=20\)&nbsp;m·s\(^{-1}=72\)&nbsp;km/h.</p>
-        <div class="res">L'athlète B se surestime : une vitesse d'arrivée de 72&nbsp;km/h est irréaliste (record d'Usain Bolt ≈ 44&nbsp;km/h en pointe).</div>
+
+        <p class="q">1) Athlète A : vitesse constante</p>
+        <div class="rappel"><span class="lab">Rappel · MRU</span>\[ x(t) = v_0\,t \]</div>
+        \[ x(10) = 100 \iff v_0 = 10\ \text{m·s}^{-1} = 36\ \text{km/h} \]
+
+        <p class="q">2) Athlète B : accélération constante</p>
+        <div class="rappel"><span class="lab">Rappel · MRUA depuis le repos</span>\[ x(t) = \tfrac12 a_0\,t^2 \qquad v(t) = a_0\,t \]</div>
+        \[ x(10) = 100 \iff a_0 = \frac{2 \times 100}{10^2} = 2\ \text{m·s}^{-2} \]
+        \[ v(10) = 2 \times 10 = 20\ \text{m·s}^{-1} = 72\ \text{km/h} \]
+
+        <p class="q">3) Qui se surestime ?</p>
+        <div class="res">L'athlète B : il devrait finir à 72 km/h, ce qui est irréaliste (pointe d'Usain Bolt environ 44 km/h).</div>
       </div>
     </div>
 
@@ -1095,17 +1548,26 @@ window.MathJax = {
       <div class="exo-head">Exercice 16 — Sécurité routière <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">Décélération \(6\)&nbsp;m·s\(^{-2}\), temps de réaction \(1\)&nbsp;s. Distances de sécurité à 130, 90, 50&nbsp;km/h.</p>
-        <p class="q">Modèle</p>
-        <p>Réaction (à vitesse constante) : \(d_{reac}=v_0\times1\). Freinage : \(v=-6t+v_0\) s'annule en
-        \(t=v_0/6\), d'où \(d_{frein}=-\dfrac{6}{2}\Big(\dfrac{v_0}{6}\Big)^2+v_0\dfrac{v_0}{6}=\dfrac{v_0^2}{12}\).
-        Distance totale \(d_{tot}=d_{reac}+d_{frein}\) (cas voiture percutant un obstacle immobile — le plus défavorable).</p>
+
+        <p class="q">1) Modèle</p>
+        <p class="etape">Étape 1 : phase de réaction</p>
+        <p>Pendant 1 s, la voiture roule encore à \(v_0\) :</p>
+        \[ d_{reac} = v_0 \times 1 \]
+        <p class="etape">Étape 2 : phase de freinage</p>
+        <p>\(v(t) = v_0 - 6t\) s'annule en \(t = v_0/6\). La distance parcourue vaut :</p>
+        \[ d_{frein} = v_0\,\frac{v_0}{6} - \frac{6}{2}\left(\frac{v_0}{6}\right)^2 = \frac{v_0^2}{12} \]
+        <p class="etape">Étape 3 : distance totale</p>
+        \[ d_{tot} = v_0 + \frac{v_0^2}{12} \qquad (v_0\ \text{en m·s}^{-1}) \]
+        <p>C'est le cas le plus défavorable : obstacle immobile devant la voiture.</p>
+
+        <p class="q">2) Valeurs</p>
         <div class="overflow"><table>
           <tr><th>Route</th><th>\(v_0\) (km/h)</th><th>\(v_0\) (m/s)</th><th>\(d_{reac}\) (m)</th><th>\(d_{frein}\) (m)</th><th>\(d_{tot}\) (m)</th></tr>
-          <tr><td>Autoroute</td><td>130</td><td>36</td><td>36</td><td>108</td><td>144</td></tr>
-          <tr><td>Nationale</td><td>90</td><td>25</td><td>25</td><td>52</td><td>77</td></tr>
-          <tr><td>Ville</td><td>50</td><td>14</td><td>14</td><td>16</td><td>30</td></tr>
+          <tr><td>Autoroute</td><td>130</td><td>36,1</td><td>36</td><td>109</td><td>145</td></tr>
+          <tr><td>Nationale</td><td>90</td><td>25,0</td><td>25</td><td>52</td><td>77</td></tr>
+          <tr><td>Ville</td><td>50</td><td>13,9</td><td>14</td><td>16</td><td>30</td></tr>
         </table></div>
-        <div class="res">On préconise \(d_{tot}\) : ≈ 144&nbsp;m (autoroute), 77&nbsp;m (nationale), 30&nbsp;m (ville) — cohérent avec les recommandations officielles.</div>
+        <div class="res">Distances de sécurité : environ 145 m sur autoroute, 77 m sur nationale, 30 m en ville.</div>
       </div>
     </div>
 
@@ -1113,10 +1575,18 @@ window.MathJax = {
       <div class="exo-head">Exercice 17 — Profondeur d'un puits (son instantané) <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">Caillou lâché, « plouf » entendu \(2{,}5\)&nbsp;s après. Son supposé instantané, \(g=9{,}81\).</p>
-        <p>Axe \(Oz\) vers le haut, origine au niveau de l'eau, caillou lâché de \(h\) sans vitesse :
-        \(\ddot z=-g\Rightarrow \dot z=-gt\Rightarrow z(t)=-\tfrac12 g t^2+h\). Il touche l'eau (\(z=0\)) à
-        \(t_{plouf}=\sqrt{\dfrac{2h}{g}}\), donc :</p>
-        \[h=\frac{g\,t_{plouf}^2}{2}=\frac{9{,}81\times2{,}5^2}{2}\approx31\ \text{m}\]
+
+        <p class="q">1) Profondeur du puits</p>
+        <p class="etape">Étape 1 : repère</p>
+        <p>Axe \(Oz\) vers le haut, origine à la surface de l'eau. Le caillou part de \(z = h\) sans vitesse.</p>
+        <p class="etape">Étape 2 : équation horaire</p>
+        \[ \ddot z = -g \;\Longrightarrow\; \dot z = -g\,t \;\Longrightarrow\; z(t) = h - \tfrac12 g\,t^2 \]
+        <p class="etape">Étape 3 : instant du plouf</p>
+        <p>Le son est instantané : le plouf est entendu quand \(z = 0\).</p>
+        \[ h - \tfrac12 g\,t_{plouf}^2 = 0 \iff h = \frac{g\,t_{plouf}^2}{2} \]
+        <p class="etape">Étape 4 : application numérique</p>
+        \[ h = \frac{9{,}81 \times 2{,}5^2}{2} \approx 31\ \text{m} \]
+        <div class="res">\(h \approx 31\) m.</div>
       </div>
     </div>
 
@@ -1124,12 +1594,21 @@ window.MathJax = {
       <div class="exo-head">Exercice 18 — Profondeur d'un puits (son non instantané) <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">Idem mais son à \(V=340\)&nbsp;m/s. Le temps mesuré = chute du caillou + remontée du son.</p>
-        <p>\(t_{chute}=\sqrt{\dfrac{2h}{g}}\), \(t_{montée}=\dfrac{h}{V}\), d'où
-        \(t=\sqrt{\dfrac{2h}{g}}+\dfrac{h}{V}\). On isole la racine et on élève au carré :</p>
-        \[\sqrt{\frac{2h}{g}}=t-\frac{h}{V}\ \Rightarrow\ \frac{1}{V^2}h^2-2\Big(\frac{t}{V}+\frac1g\Big)h+t^2=0\]
-        <p>Équation du 2ᵈ degré en \(h\). On garde la racine « \(-\) » (l'autre donne une profondeur aberrante) :</p>
-        \[h=tV+\frac{V^2}{g}-\frac{\sqrt{V^4+2g\,t\,V^3}}{g}\]
-        <p>A.N. avec \(t=2{,}5\)&nbsp;s : \(h\approx28{,}6\)&nbsp;m (un peu moins qu'au calcul précédent : une partie du temps mesuré est « perdue » par la remontée du son).</p>
+
+        <p class="q">1) Profondeur du puits</p>
+        <p class="etape">Étape 1 : décomposer le temps mesuré</p>
+        \[ t = t_{chute} + t_{son} = \sqrt{\frac{2h}{g}} + \frac{h}{V} \]
+        <p class="etape">Étape 2 : se ramener à un trinôme en \(h\)</p>
+        <p>On isole la racine puis on élève au carré :</p>
+        \[ \sqrt{\frac{2h}{g}} = t - \frac{h}{V} \;\Longrightarrow\; \frac{2h}{g} = t^2 - \frac{2th}{V} + \frac{h^2}{V^2} \]
+        \[ \frac{1}{V^2}\,h^2 - 2\left(\frac{t}{V} + \frac1g\right)h + t^2 = 0 \]
+        <p class="etape">Étape 3 : résoudre</p>
+        <div class="rappel"><span class="lab">Rappel · trinôme du second degré</span>\[ ah^2 + bh + c = 0 \;\Longrightarrow\; h = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]</div>
+        <p>On garde la racine « − » : l'autre donne \(h/V > t\), un son qui mettrait plus de temps que la mesure totale.</p>
+        \[ h = tV + \frac{V^2}{g} - \frac{\sqrt{V^4 + 2g\,t\,V^3}}{g} \]
+        <p class="etape">Étape 4 : application numérique</p>
+        \[ h = 2{,}5 \times 340 + \frac{340^2}{9{,}81} - \frac{\sqrt{340^4 + 2 \times 9{,}81 \times 2{,}5 \times 340^3}}{9{,}81} \approx 28{,}6\ \text{m} \]
+        <div class="res">\(h \approx 28{,}6\) m, un peu moins que 31 m : une partie du temps mesuré correspond à la remontée du son.</div>
       </div>
     </div>
 
@@ -1138,17 +1617,30 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Motard retombant à \(L=23\)&nbsp;m sur une bosse de même hauteur que le tremplin,
         \(\alpha=30°\), \(g=9{,}81\). Durée, hauteur, vitesse en sortie de tremplin.</p>
-        <p>Origine en haut du tremplin (= hauteur de la bosse), \(\vec a=-g\,\vec u_y\),
-        \(\vec v(0)=v_0\cos\alpha\,\vec u_x+v_0\sin\alpha\,\vec u_y\). Trajectoire :
-        \(y(x)=-\dfrac{g}{2v_0^2\cos^2\alpha}x^2+\tan\alpha\,x\).</p>
-        <p class="q">Vitesse en sortie</p>
-        <p>Retombée en \(y(L)=0\) :</p>
-        \[v_0=\sqrt{\frac{gL}{2\sin\alpha\cos\alpha}}=\sqrt{\frac{gL}{\sin 2\alpha}}=\sqrt{\frac{9{,}81\times23}{\sin 60°}}\approx16\ \text{m·s}^{-1}\ (58\ \text{km/h})\]
-        <p class="q">Durée du saut</p>
-        <p>\(y(t_f)=0\) (hors \(t=0\)) : \(t_f=\dfrac{2v_0\sin\alpha}{g}=\dfrac{2\times16\times\sin30°}{9{,}81}\approx1{,}6\)&nbsp;s.</p>
-        <p class="q">Hauteur maximale</p>
-        <p>Au sommet \(\dot y=0\) : \(t_H=\dfrac{v_0\sin\alpha}{g}=\tfrac12 t_f\) (parabole symétrique), d'où :</p>
-        \[H=\frac{v_0^2\sin^2\alpha}{2g}=\frac{16^2\times\sin^2 30°}{2\times9{,}81}\approx3{,}3\ \text{m}\]
+
+        <p class="q">1) Mise en équation</p>
+        <p class="etape">Étape 1 : repère</p>
+        <p>Origine au sommet du tremplin (même hauteur que la bosse), \(\vec a = -g\,\vec u_y\) et :</p>
+        \[ \vec v(0) = v_0\cos\alpha\,\vec u_x + v_0\sin\alpha\,\vec u_y \]
+        <p class="etape">Étape 2 : trajectoire</p>
+        <p>Comme pour tout projectile (deux intégrations puis élimination de \(t\)) :</p>
+        \[ y(x) = -\frac{g}{2v_0^2\cos^2\alpha}\,x^2 + \tan\alpha\,x \]
+
+        <p class="q">2) Vitesse en sortie de tremplin</p>
+        <p>Le motard retombe à la même hauteur en \(x = L\) : \(y(L) = 0\).</p>
+        \[ \frac{g\,L}{2v_0^2\cos^2\alpha} = \tan\alpha \iff v_0^2 = \frac{g\,L}{2\sin\alpha\cos\alpha} = \frac{g\,L}{\sin 2\alpha} \]
+        \[ v_0 = \sqrt{\frac{9{,}81 \times 23}{\sin 60°}} \approx 16\ \text{m·s}^{-1} \]
+        <div class="res">\(v_0 \approx 16\) m·s\(^{-1}\), soit environ 58 km/h.</div>
+
+        <p class="q">3) Durée du saut</p>
+        \[ y(t) = v_0\sin\alpha\,t - \tfrac12 g\,t^2 = 0 \iff t_f = \frac{2v_0\sin\alpha}{g} \]
+        \[ t_f = \frac{2 \times 16{,}1 \times 0{,}5}{9{,}81} \approx 1{,}6\ \text{s} \]
+        <div class="res">\(t_f \approx 1{,}6\) s.</div>
+
+        <p class="q">4) Hauteur maximale</p>
+        <p>Au sommet, \(\dot y = 0\) : \(t_H = \dfrac{v_0\sin\alpha}{g} = \dfrac{t_f}{2}\).</p>
+        \[ H = \frac{v_0^2\sin^2\alpha}{2g} = \frac{16{,}1^2 \times 0{,}25}{2 \times 9{,}81} \approx 3{,}3\ \text{m} \]
+        <div class="res">\(H \approx 3{,}3\) m au-dessus du tremplin.</div>
       </div>
     </div>
 
