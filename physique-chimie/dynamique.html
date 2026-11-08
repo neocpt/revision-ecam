@@ -154,54 +154,94 @@ window.MathJax = {
     <p class="lead">Trois exercices originaux couvrant statique, frottement fluide et oscillateur.</p>
 
     <div class="exo-card">
-      <div class="exo-head">✏️ Exercice A — Caisse à l'équilibre sur un plan incliné <span class="diff">♦◊◊</span></div>
+      <div class="exo-head">Exercice A — Caisse à l'équilibre sur un plan incliné <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">Une caisse (\(m=20\)&nbsp;kg) est maintenue immobile sur un plan incliné à
         \(\alpha=25°\) par une force \(\vec F\) parallèle au plan, dirigée vers le haut. Frottements négligés,
         \(g=9{,}81\). 1) Bilan des forces. 2) Valeurs de \(N\) et \(F\).</p>
-        <p class="q">1) Bilan (repère : \(x\) le long du plan vers le haut, \(y\) perpendiculaire)</p>
-        <p>Trois forces : poids \(\vec P=m\vec g\), réaction normale \(\vec N\) (selon \(+y\)), traction
-        \(\vec F\) (selon \(+x\)). Composantes du poids : \(P_x=-mg\sin\alpha\), \(P_y=-mg\cos\alpha\).</p>
-        <p class="q">2) PFD à l'équilibre (\(\vec a=\vec 0\))</p>
-        <p>Projection sur \(x\) : \(F-mg\sin\alpha=0\Rightarrow F=mg\sin\alpha=20\times9{,}81\times\sin25°\approx82{,}9\)&nbsp;N.
-        Projection sur \(y\) : \(N-mg\cos\alpha=0\Rightarrow N=mg\cos\alpha=20\times9{,}81\times\cos25°\approx177{,}8\)&nbsp;N.</p>
-        <div class="res">\(N\approx178\)&nbsp;N, \(F\approx83\)&nbsp;N.</div>
+
+        <p class="q">1) Bilan des forces</p>
+        <p class="etape">Étape 1 : système et repère</p>
+        <p>Système : la caisse. Axe \(x\) le long du plan vers le haut, axe \(y\) perpendiculaire au plan.</p>
+        <p class="etape">Étape 2 : les trois forces</p>
+        <ul>
+          <li>Poids \(\vec P = m\vec g\) : \(P_x = -mg\sin\alpha\), \(P_y = -mg\cos\alpha\).</li>
+          <li>Réaction normale \(\vec N = N\,\vec u_y\).</li>
+          <li>Traction \(\vec F = F\,\vec u_x\).</li>
+        </ul>
+
+        <p class="q">2) Valeurs de \(N\) et \(F\)</p>
+        <div class="rappel"><span class="lab">Rappel · principe fondamental de la dynamique (PFD)</span>\[ m\,\vec a = \sum \vec F_{ext} \]À l'équilibre, \(\vec a = \vec 0\) : la somme des forces est nulle.</div>
+        <p class="etape">Étape 1 : projection sur \(x\)</p>
+        \[ F - mg\sin\alpha = 0 \iff F = mg\sin\alpha \]
+        \[ F = 20 \times 9{,}81 \times \sin 25° \approx 82{,}9\ \text{N} \]
+        <p class="etape">Étape 2 : projection sur \(y\)</p>
+        \[ N - mg\cos\alpha = 0 \iff N = mg\cos\alpha \]
+        \[ N = 20 \times 9{,}81 \times \cos 25° \approx 177{,}8\ \text{N} \]
+        <div class="res">\(N \approx 178\) N et \(F \approx 83\) N.</div>
       </div>
     </div>
 
     <div class="exo-card">
-      <div class="exo-head">✏️ Exercice B — Chute avec frottement fluide et vitesse limite <span class="diff">♦♦◊</span></div>
+      <div class="exo-head">Exercice B — Chute avec frottement fluide et vitesse limite <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">Une bille (\(m=50\)&nbsp;g) tombe sans vitesse initiale, frottement \(\vec f=-\lambda\vec v\)
         avec \(\lambda=0{,}10\)&nbsp;kg·s⁻¹, \(g=9{,}81\). 1) Vitesse limite. 2) \(v(t)\). 3) Constante de temps.</p>
+
         <p class="q">1) Vitesse limite</p>
-        <p>Axe \(Oz\) vers le bas. PFD : \(m\dot v=mg-\lambda v\). En régime permanent \(\dot v=0\) :</p>
-        \[v_{lim}=\frac{mg}{\lambda}=\frac{0{,}050\times9{,}81}{0{,}10}\approx4{,}9\ \text{m·s}^{-1}\]
-        <p class="q">2) Résolution de \(\dot v+\frac{\lambda}{m}v=g\)</p>
-        <p>Équation linéaire du 1ᵉʳ ordre. Solution = homogène + particulière :
-        \(v(t)=v_{lim}+C e^{-t/\tau}\) avec \(\tau=\dfrac{m}{\lambda}\). Condition \(v(0)=0\Rightarrow C=-v_{lim}\) :</p>
-        \[v(t)=v_{lim}\left(1-e^{-t/\tau}\right)=4{,}9\left(1-e^{-t/0{,}5}\right)\]
+        <p class="etape">Étape 1 : PFD</p>
+        <div class="rappel"><span class="lab">Rappel · PFD</span>\[ m\,\vec a = \sum \vec F_{ext} \]</div>
+        <p>Axe \(Oz\) vers le bas. Forces : poids \(mg\) et frottement \(-\lambda v\) :</p>
+        \[ m\,\dot v = mg - \lambda v \]
+        <p class="etape">Étape 2 : régime permanent</p>
+        <p>La vitesse ne varie plus : \(\dot v = 0\).</p>
+        \[ v_{lim} = \frac{mg}{\lambda} = \frac{0{,}050 \times 9{,}81}{0{,}10} \approx 4{,}9\ \text{m·s}^{-1} \]
+        <div class="res">\(v_{lim} \approx 4{,}9\) m·s\(^{-1}\).</div>
+
+        <p class="q">2) Expression de \(v(t)\)</p>
+        <p class="etape">Étape 1 : forme canonique</p>
+        \[ \dot v + \frac{\lambda}{m}\,v = g \qquad\text{avec}\quad \tau = \frac{m}{\lambda} \]
+        <div class="rappel"><span class="lab">Rappel · équation du 1er ordre à coefficients constants</span>\[ \dot y + \frac{y}{\tau} = \text{cte} \;\Longrightarrow\; y(t) = y_{\infty} + C\,e^{-t/\tau} \]</div>
+        <p class="etape">Étape 2 : solution générale</p>
+        \[ v(t) = v_{lim} + C\,e^{-t/\tau} \]
+        <p class="etape">Étape 3 : condition initiale</p>
+        <p>\(v(0) = 0\), donc \(C = -v_{lim}\).</p>
+        <div class="res">\(v(t) = v_{lim}\left(1 - e^{-t/\tau}\right) = 4{,}9\left(1 - e^{-t/0{,}5}\right)\) (en m·s\(^{-1}\)).</div>
+
         <p class="q">3) Constante de temps</p>
-        <p>\(\tau=\dfrac{m}{\lambda}=\dfrac{0{,}050}{0{,}10}=0{,}5\)&nbsp;s. À \(t=5\tau\approx2{,}5\)&nbsp;s, la bille
-        a atteint 99&nbsp;% de \(v_{lim}\).</p>
+        \[ \tau = \frac{m}{\lambda} = \frac{0{,}050}{0{,}10} = 0{,}5\ \text{s} \]
+        <div class="res">\(\tau = 0{,}5\) s. À \(t = 5\tau \approx 2{,}5\) s, la bille a atteint 99 % de \(v_{lim}\).</div>
       </div>
     </div>
 
     <div class="exo-card">
-      <div class="exo-head">✏️ Exercice C — Oscillateur : ressort horizontal <span class="diff">♦◊◊</span></div>
+      <div class="exo-head">Exercice C — Oscillateur : ressort horizontal <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">Masse \(m=200\)&nbsp;g sur ressort horizontal \(k=8{,}0\)&nbsp;N·m⁻¹, sans frottement.
         Écartée de \(x_0=5{,}0\)&nbsp;cm et lâchée sans vitesse. 1) Équation. 2) \(x(t)\). 3) Période, vitesse max.</p>
-        <p class="q">1) PFD (origine à l'équilibre)</p>
-        <p>Seule la force de rappel agit selon \(x\) : \(m\ddot x=-kx\Rightarrow\ddot x+\omega_0^2 x=0\) avec
-        \(\omega_0=\sqrt{\dfrac{k}{m}}=\sqrt{\dfrac{8{,}0}{0{,}20}}=6{,}32\)&nbsp;rad·s⁻¹.</p>
-        <p class="q">2) Solution</p>
-        <p>\(x(t)=A\cos(\omega_0 t+\varphi)\). CI : \(x(0)=x_0\Rightarrow A\cos\varphi=0{,}05\) ;
-        \(\dot x(0)=0\Rightarrow-A\omega_0\sin\varphi=0\Rightarrow\varphi=0\), donc \(A=x_0\) :</p>
-        \[x(t)=0{,}05\cos(6{,}32\,t)\ \text{(m)}\]
-        <p class="q">3) Période et vitesse max</p>
-        <p>\(T=\dfrac{2\pi}{\omega_0}\approx0{,}99\)&nbsp;s. \(v_{max}=A\omega_0=0{,}05\times6{,}32\approx0{,}32\)&nbsp;m·s⁻¹
-        (atteinte au passage par l'équilibre).</p>
+
+        <p class="q">1) Équation du mouvement</p>
+        <p class="etape">Étape 1 : forces</p>
+        <p>Origine à la position d'équilibre. Poids et réaction se compensent (verticaux). Selon \(x\), seule la force de rappel agit :</p>
+        <div class="rappel"><span class="lab">Rappel · force de rappel d'un ressort</span>\[ \vec F = -k\,(\ell - \ell_0)\,\vec u \]Ici \(\ell - \ell_0 = x\).</div>
+        <p class="etape">Étape 2 : PFD selon \(x\)</p>
+        \[ m\ddot x = -kx \iff \ddot x + \omega_0^2\,x = 0 \qquad\text{avec}\quad \omega_0 = \sqrt{\frac{k}{m}} \]
+        \[ \omega_0 = \sqrt{\frac{8{,}0}{0{,}20}} \approx 6{,}32\ \text{rad·s}^{-1} \]
+        <div class="res">\(\ddot x + \omega_0^2\,x = 0\), avec \(\omega_0 \approx 6{,}32\) rad·s\(^{-1}\).</div>
+
+        <p class="q">2) Expression de \(x(t)\)</p>
+        <div class="rappel"><span class="lab">Rappel · oscillateur harmonique</span>\[ \ddot x + \omega_0^2 x = 0 \;\Longrightarrow\; x(t) = A\cos(\omega_0 t + \varphi) \]</div>
+        <p>Conditions initiales :</p>
+        <ul>
+          <li>\(\dot x(0) = 0\) : \(-A\omega_0\sin\varphi = 0\), donc \(\varphi = 0\).</li>
+          <li>\(x(0) = x_0\) : \(A = x_0 = 0{,}05\) m.</li>
+        </ul>
+        <div class="res">\(x(t) = 0{,}05\cos(6{,}32\,t)\) (en m).</div>
+
+        <p class="q">3) Période et vitesse maximale</p>
+        \[ T = \frac{2\pi}{\omega_0} = \frac{2\pi}{6{,}32} \approx 0{,}99\ \text{s} \]
+        \[ v_{max} = A\,\omega_0 = 0{,}05 \times 6{,}32 \approx 0{,}32\ \text{m·s}^{-1} \]
+        <div class="res">\(T \approx 0{,}99\) s et \(v_{max} \approx 0{,}32\) m·s\(^{-1}\), atteinte au passage par l'équilibre.</div>
       </div>
     </div>
   </section>
@@ -222,27 +262,45 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">3 briques identiques poussées à vitesse constante, avec frottement.
         A = 2 briques, B = 1 brique. \(m=2{,}5\)&nbsp;kg/brique, \(\mu_c=0{,}2\), \(g=10\).</p>
+
         <p class="q">1) Force totale sur A et sur B</p>
-        <p>Vitesse constante ⇒ \(\vec a=\vec 0\) ⇒ d'après le PFD, la <b>résultante est nulle</b> sur chaque système.</p>
+        <div class="rappel"><span class="lab">Rappel · 1re et 2e lois de Newton</span>\[ m\,\vec a = \sum \vec F_{ext} \]Vitesse constante en ligne droite : \(\vec a = \vec 0\), donc \(\sum \vec F = \vec 0\).</div>
+        <div class="res">La résultante est nulle sur A comme sur B.</div>
+
         <p class="q">2) Bilan des forces</p>
-        <p>Sur chaque système : poids \(\vec P\), réaction \(\vec R\) (verticaux), frottement \(\vec F_{table}\)
-        (vers l'arrière). Sur A en plus : force de la main \(\vec F_{main/A}\) et \(\vec F_{B/A}\). Sur B :
-        \(\vec F_{A/B}\).</p>
-        <p class="q">3) \(F_{A/B}\) vs \(F_{B/A}\)</p>
-        <p>Égales (3ᵉ loi de Newton), quel que soit le sens de la poussée.</p>
+        <ul>
+          <li>Sur chaque système : poids \(\vec P\) et réaction \(\vec R\) (verticaux), frottement de la table \(\vec F_{table}\) (vers l'arrière).</li>
+          <li>Sur A en plus : force de la main \(\vec F_{main/A}\) et force de B \(\vec F_{B/A}\).</li>
+          <li>Sur B en plus : force de A \(\vec F_{A/B}\).</li>
+        </ul>
+
+        <p class="q">3) Comparer \(F_{A/B}\) et \(F_{B/A}\)</p>
+        <div class="rappel"><span class="lab">Rappel · 3e loi de Newton</span>\[ \vec F_{A/B} = -\vec F_{B/A} \]</div>
+        <div class="res">\(F_{A/B} = F_{B/A}\), quel que soit le sens de la poussée.</div>
+
         <p class="q">4) Paires action-réaction</p>
-        <p>\((\vec F_{A/B},\vec F_{B/A})\) : même droite, même norme, sens opposés (critères de la 3ᵉ loi).</p>
+        <div class="res">\((\vec F_{A/B}, \vec F_{B/A})\) : même droite d'action, même norme, sens opposés.</div>
+
         <p class="q">5) Classement des forces horizontales</p>
-        <p>Sur A : \(F_{main/A}=F_{B/A}+F_{table/A}\) (2ᵉ loi). Frottements statiques : \(F_{table}=\mu_c P\), et
-        \(P_A=2P_B\) ⇒ \(F_{table/A}=2F_{table/B}\). Or (2ᵉ loi sur B) \(F_{table/B}=F_{A/B}\), et (3ᵉ loi)
-        \(F_{B/A}=F_{A/B}\). D'où :</p>
-        \[F_{main/A}>F_{table/A}>F_{B/A}\]
+        <p class="etape">Étape 1 : équilibre de A</p>
+        \[ F_{main/A} = F_{B/A} + F_{table/A} \]
+        <p class="etape">Étape 2 : frottements</p>
+        <div class="rappel"><span class="lab">Rappel · frottement solide</span>\[ F_{table} = \mu_c\,R \]</div>
+        <p>A est deux fois plus lourd que B : \(F_{table/A} = 2\,F_{table/B}\).</p>
+        <p class="etape">Étape 3 : équilibre de B et 3e loi</p>
+        \[ F_{A/B} = F_{table/B} = F_{B/A} \]
+        <div class="res">\(F_{main/A} > F_{table/A} > F_{B/A}\).</div>
+
         <p class="q">6) Valeurs numériques</p>
-        <p>Sur B : \(P_B=R_B=mg=25\)&nbsp;N, \(F_{table/B}=F_{A/B}=0{,}2\times25=5\)&nbsp;N.
-        Sur A : \(F_{B/A}=5\)&nbsp;N, \(P_A=R_A=50\)&nbsp;N, \(F_{table/A}=0{,}2\times50=10\)&nbsp;N,
-        \(F_{main/A}=5+10=15\)&nbsp;N.</p>
+        <p class="etape">Étape 1 : sur B</p>
+        \[ P_B = R_B = mg = 2{,}5 \times 10 = 25\ \text{N} \qquad F_{table/B} = F_{A/B} = 0{,}2 \times 25 = 5\ \text{N} \]
+        <p class="etape">Étape 2 : sur A</p>
+        \[ P_A = R_A = 50\ \text{N} \qquad F_{table/A} = 0{,}2 \times 50 = 10\ \text{N} \qquad F_{B/A} = 5\ \text{N} \]
+        \[ F_{main/A} = 5 + 10 = 15\ \text{N} \]
+        <div class="res">\(F_{main/A} = 15\) N, \(F_{table/A} = 10\) N, \(F_{B/A} = F_{A/B} = 5\) N.</div>
+
         <p class="q">7) Dépendance à la vitesse</p>
-        <div class="res">Aucune : tout est indépendant de la vitesse (frottements statiques/cinétiques \(\propto N\), pas à \(v\)). Il suffit que \(v\) soit constante.</div>
+        <div class="res">Aucune : les frottements solides dépendent de \(R\), pas de \(v\). Il suffit que la vitesse soit constante.</div>
       </div>
     </div>
 
@@ -251,16 +309,24 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Masse \(m\) au bout d'un ressort vertical (raideur \(k\)), allongement
         \(\Delta l=l-l_0\), masse immobile.</p>
-        <p class="q">2) Force du ressort</p>
-        <p>Axe \(Oz\) vers le haut. Le ressort est étiré (masse en dessous), il tire vers le haut :
-        \(\vec F_r=k\,\Delta l\,\vec u_z\).</p>
+
+        <p class="q">2) Force exercée par le ressort</p>
+        <div class="rappel"><span class="lab">Rappel · force de rappel</span>\[ F = k\,|\ell - \ell_0| \]dirigée de façon à ramener le ressort à sa longueur à vide.</div>
+        <p>Axe \(Oz\) vers le haut. Le ressort est étiré (la masse est en dessous) : il tire la masse vers le haut.</p>
+        <div class="res">\(\vec F_r = k\,\Delta l\,\vec u_z\).</div>
+
         <p class="q">3) PFD à l'équilibre</p>
-        <p>\(\vec F_r+\vec P=\vec 0\) ⇒ projection sur \(\vec u_z\) : \(k\Delta l-mg=0\), d'où :</p>
-        \[k=\frac{mg}{\Delta l}\]
+        <div class="rappel"><span class="lab">Rappel · PFD à l'équilibre</span>\[ \sum \vec F_{ext} = \vec 0 \]</div>
+        \[ \vec F_r + \vec P = \vec 0 \;\Longrightarrow\; k\,\Delta l - mg = 0 \]
+        <div class="res">\(k = \dfrac{mg}{\Delta l}\).</div>
+
         <p class="q">4) Dans un ascenseur</p>
-        <p>a) Vitesse constante : l'ascenseur reste galiléen, la longueur est <b>inchangée</b>.
-        b) Démarrage (accélère vers le haut) : référentiel non galiléen, le ressort s'<b>allonge</b> (poids apparent
-        augmenté). c) Freinage à l'arrêt (décélère) : le ressort se <b>raccourcit</b> (poids apparent diminué).</p>
+        <ul>
+          <li>a) Vitesse constante : le référentiel reste galiléen. La longueur ne change pas.</li>
+          <li>b) Démarrage vers le haut : l'ascenseur accélère vers le haut, le poids apparent augmente. Le ressort s'allonge.</li>
+          <li>c) Freinage avant l'arrêt (en montée) : l'accélération est vers le bas, le poids apparent diminue. Le ressort se raccourcit.</li>
+        </ul>
+        <div class="res">Seules les phases accélérées modifient la longueur : l'ascenseur n'est alors plus galiléen.</div>
       </div>
     </div>
 
@@ -269,15 +335,26 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Deux ressorts identiques (raideur \(k\)) tiennent une masse \(m\) immobile ; ressort 1 fait
         un angle \(\alpha\) avec la verticale, ressort 2 horizontal.</p>
-        <p class="q">1) Bilan</p>
-        <p>Poids \(\vec P=+mg\,\vec u_y\) (axe \(y\) vers le bas), \(\vec F_1=-k\Delta l_1(\sin\alpha\,\vec u_x+\cos\alpha\,\vec u_y)\),
-        \(\vec F_2=+k\Delta l_2\,\vec u_x\).</p>
-        <p class="q">2) PFD projeté (équilibre)</p>
-        <p>Sur \(\vec u_x\) : \(-k\Delta l_1\sin\alpha+k\Delta l_2=0\Rightarrow\Delta l_2=\Delta l_1\sin\alpha\).
-        Sur \(\vec u_y\) : \(mg-k\Delta l_1\cos\alpha=0\Rightarrow\)</p>
-        \[\Delta l_1=\frac{mg}{k\cos\alpha}\qquad \Delta l_2=\frac{mg\tan\alpha}{k}\]
-        <p class="q">3) Ressorts horizontaux impossibles</p>
-        <div class="res">Si \(\alpha=\tfrac{\pi}{2}\), \(\Delta l_1=\dfrac{mg}{k\cos(\pi/2)}\to\infty\) : il faudrait une force infinie pour équilibrer le poids avec des ressorts horizontaux.</div>
+
+        <p class="q">1) Bilan des forces</p>
+        <p>Axe \(x\) horizontal, axe \(y\) vers le bas.</p>
+        <ul>
+          <li>Poids : \(\vec P = mg\,\vec u_y\).</li>
+          <li>Ressort 1 (vers le haut, incliné de \(\alpha\)) : \(\vec F_1 = -k\Delta l_1\left(\sin\alpha\,\vec u_x + \cos\alpha\,\vec u_y\right)\).</li>
+          <li>Ressort 2 (horizontal) : \(\vec F_2 = k\Delta l_2\,\vec u_x\).</li>
+        </ul>
+
+        <p class="q">2) Allongements à l'équilibre</p>
+        <div class="rappel"><span class="lab">Rappel · PFD à l'équilibre</span>\[ \vec P + \vec F_1 + \vec F_2 = \vec 0 \]</div>
+        <p class="etape">Étape 1 : projection sur \(y\)</p>
+        \[ mg - k\Delta l_1\cos\alpha = 0 \iff \Delta l_1 = \frac{mg}{k\cos\alpha} \]
+        <p class="etape">Étape 2 : projection sur \(x\)</p>
+        \[ -k\Delta l_1\sin\alpha + k\Delta l_2 = 0 \iff \Delta l_2 = \Delta l_1\sin\alpha = \frac{mg\tan\alpha}{k} \]
+        <div class="res">\(\Delta l_1 = \dfrac{mg}{k\cos\alpha}\) et \(\Delta l_2 = \dfrac{mg\tan\alpha}{k}\).</div>
+
+        <p class="q">3) Deux ressorts horizontaux ?</p>
+        <p>Si \(\alpha = \pi/2\), \(\cos\alpha = 0\) et \(\Delta l_1 \to \infty\).</p>
+        <div class="res">Impossible : des ressorts horizontaux n'ont aucune composante verticale pour compenser le poids.</div>
       </div>
     </div>
 
@@ -286,16 +363,31 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Chariot \(m=500\)&nbsp;g, plan à \(\alpha=30°\), traction \(\vec T\) parallèle au plan,
         vitesse constante, \(g=9{,}81\).</p>
-        <p class="q">1) Bilan (axe \(x\) le long du plan vers le haut, \(y\) perpendiculaire)</p>
-        <p>\(\vec T=T\,\vec u_x\), \(\vec P=-mg\sin\alpha\,\vec u_x-mg\cos\alpha\,\vec u_y\), \(\vec R=R\,\vec u_y\).</p>
-        <p class="q">2) PFD projeté (vitesse constante ⇒ \(\vec a=\vec 0\))</p>
-        <p>Sur \(x\) : \(T-mg\sin\alpha=0\Rightarrow T=mg\sin\alpha=0{,}5\times9{,}81\times0{,}5\approx2{,}5\)&nbsp;N.
-        Sur \(y\) : \(R=mg\cos\alpha=0{,}5\times9{,}81\times\cos30°\approx4{,}2\)&nbsp;N.</p>
-        <p class="q">3) Masse maximale (fil casse à \(T=4\)&nbsp;N)</p>
-        <p>\(m_{max}=\dfrac{T_{max}}{g\sin\alpha}=\dfrac{4}{9{,}81\times0{,}5}\approx0{,}82\)&nbsp;kg.</p>
-        <p class="q">4) Avec frottement \(f=1\)&nbsp;N (montée)</p>
-        <p>Le frottement s'oppose au mouvement (vers le bas du plan) : \(T-mg\sin\alpha-f=0\Rightarrow
-        T=mg\sin\alpha+f=2{,}5+1=3{,}5\)&nbsp;N.</p>
+
+        <p class="q">1) Bilan des forces</p>
+        <p>Axe \(x\) le long du plan vers le haut, axe \(y\) perpendiculaire.</p>
+        <ul>
+          <li>Traction : \(\vec T = T\,\vec u_x\).</li>
+          <li>Poids : \(\vec P = -mg\sin\alpha\,\vec u_x - mg\cos\alpha\,\vec u_y\).</li>
+          <li>Réaction : \(\vec R = R\,\vec u_y\).</li>
+        </ul>
+
+        <p class="q">2) Valeurs de \(T\) et \(R\)</p>
+        <div class="rappel"><span class="lab">Rappel · PFD</span>\[ m\,\vec a = \sum \vec F_{ext} \]Vitesse constante : \(\vec a = \vec 0\).</div>
+        <p class="etape">Étape 1 : projection sur \(x\)</p>
+        \[ T - mg\sin\alpha = 0 \iff T = 0{,}5 \times 9{,}81 \times 0{,}5 \approx 2{,}5\ \text{N} \]
+        <p class="etape">Étape 2 : projection sur \(y\)</p>
+        \[ R = mg\cos\alpha = 0{,}5 \times 9{,}81 \times \cos 30° \approx 4{,}2\ \text{N} \]
+        <div class="res">\(T \approx 2{,}5\) N et \(R \approx 4{,}2\) N.</div>
+
+        <p class="q">3) Masse maximale (le fil casse à 4 N)</p>
+        \[ m_{max} = \frac{T_{max}}{g\sin\alpha} = \frac{4}{9{,}81 \times 0{,}5} \approx 0{,}82\ \text{kg} \]
+        <div class="res">\(m_{max} \approx 0{,}82\) kg.</div>
+
+        <p class="q">4) Avec un frottement \(f = 1\) N</p>
+        <p>À la montée, le frottement est dirigé vers le bas du plan :</p>
+        \[ T - mg\sin\alpha - f = 0 \iff T = 2{,}5 + 1 = 3{,}5\ \text{N} \]
+        <div class="res">\(T = 3{,}5\) N.</div>
       </div>
     </div>
 
@@ -304,15 +396,26 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Deux personnes portent un seau : \(F_1=60\)&nbsp;N, \(F_2=90\)&nbsp;N, angle total
         \(\alpha+\beta=40°\). Trouver \(\alpha,\beta\) et le poids.</p>
-        <p class="q">1–2) Bilan et PFD</p>
-        <p>\(\vec F_1=F_1\sin\alpha\,\vec u_x+F_1\cos\alpha\,\vec u_y\),
-        \(\vec F_2=-F_2\sin\beta\,\vec u_x+F_2\cos\beta\,\vec u_y\), \(\vec P=-mg\,\vec u_y\). Équilibre :</p>
-        \[F_1\sin\alpha=F_2\sin\beta\quad(1)\qquad F_1\cos\alpha+F_2\cos\beta=mg\quad(2)\]
-        <p class="q">3) Résolution (avec \(\beta=40°-\alpha\))</p>
-        <p>Dans (1) : \(F_1\sin\alpha=F_2\sin(40°-\alpha)\). On développe et on isole :</p>
-        \[\tan\alpha=\frac{\sin40°}{\frac{F_1}{F_2}+\cos40°}\ \Rightarrow\ \alpha=\arctan\!\left(\frac{\sin40°}{\frac{60}{90}+\cos40°}\right)\approx24°\]
-        <p>Puis \(\beta=40°-24°=16°\), et \(mg=F_1\cos24°+F_2\cos16°\approx60\times0{,}91+90\times0{,}96\approx1{,}4\times10^2\)&nbsp;N.</p>
-        <div class="res">\(\alpha\approx24°\), \(\beta\approx16°\), poids \(\approx1{,}4\times10^2\)&nbsp;N (≈ 140&nbsp;N).</div>
+
+        <p class="q">1–2) Bilan des forces et PFD</p>
+        <p class="etape">Étape 1 : composantes</p>
+        \[ \vec F_1 = F_1\sin\alpha\,\vec u_x + F_1\cos\alpha\,\vec u_y \qquad \vec F_2 = -F_2\sin\beta\,\vec u_x + F_2\cos\beta\,\vec u_y \qquad \vec P = -mg\,\vec u_y \]
+        <p class="etape">Étape 2 : équilibre</p>
+        <div class="rappel"><span class="lab">Rappel · PFD à l'équilibre</span>\[ \vec F_1 + \vec F_2 + \vec P = \vec 0 \]</div>
+        \[ F_1\sin\alpha = F_2\sin\beta \quad (1) \qquad F_1\cos\alpha + F_2\cos\beta = mg \quad (2) \]
+
+        <p class="q">3) Angles et poids</p>
+        <p class="etape">Étape 1 : remplacer \(\beta = 40° - \alpha\) dans (1)</p>
+        <div class="rappel"><span class="lab">Rappel · sinus d'une différence</span>\[ \sin(a - b) = \sin a\cos b - \cos a\sin b \]</div>
+        \[ F_1\sin\alpha = F_2\left(\sin 40°\cos\alpha - \cos 40°\sin\alpha\right) \]
+        <p>On divise par \(F_2\cos\alpha\) et on isole \(\tan\alpha\) :</p>
+        \[ \tan\alpha = \frac{\sin 40°}{\dfrac{F_1}{F_2} + \cos 40°} = \frac{0{,}643}{0{,}667 + 0{,}766} \approx 0{,}449 \]
+        <p class="etape">Étape 2 : les angles</p>
+        \[ \alpha \approx 24° \qquad \beta = 40° - 24° = 16° \]
+        <p class="etape">Étape 3 : le poids, avec (2)</p>
+        \[ mg = 60\cos 24° + 90\cos 16° \approx 54{,}7 + 86{,}5 \approx 1{,}4\times10^{2}\ \text{N} \]
+        <div class="res">\(\alpha \approx 24°\), \(\beta \approx 16°\), poids \(\approx 140\) N.</div>
+        <p>Remarque : celui qui tire le plus fort (\(F_2\)) a le bras le plus proche de la verticale.</p>
       </div>
     </div>
 
@@ -320,14 +423,20 @@ window.MathJax = {
       <div class="exo-head">Exercice 3 — Poulie fixe <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">Masse \(m=100\)&nbsp;g suspendue à une ficelle via une poulie fixe reliée à un moteur.</p>
+
         <p class="q">1) Moteur arrêté</p>
-        <p>Système = masse, immobile : \(\vec P+\vec T=\vec 0\Rightarrow T=mg=0{,}1\times9{,}81=0{,}981\)&nbsp;N.
-        La poulie ne fait que rediriger : le moteur subit cette force de \(0{,}981\)&nbsp;N.</p>
-        <p class="q">2) Montée à vitesse constante (\(v_0=3\)&nbsp;cm/s)</p>
-        <p>Vitesse constante ⇒ PFD identique ⇒ \(T=mg=0{,}981\)&nbsp;N (inchangée).</p>
-        <p class="q">3) Descente à vitesse constante (\(v_0=4\)&nbsp;cm/s)</p>
-        <p>Idem : le sens ni la valeur de la vitesse (tant qu'elle est constante) ne change rien, \(T=0{,}981\)&nbsp;N.</p>
-        <div class="note"><span class="lab">Choix du système</span> \(T\) est la force que la ficelle exerce sur la masse ; par la 3ᵉ loi, la masse tire le moteur avec \(-\vec T\) : on ne « pousse » pas le moteur.</div>
+        <div class="rappel"><span class="lab">Rappel · PFD à l'équilibre</span>\[ \vec P + \vec T = \vec 0 \]</div>
+        \[ T = mg = 0{,}1 \times 9{,}81 = 0{,}981\ \text{N} \]
+        <p>La poulie fixe redirige la force sans la changer : le moteur subit 0,981 N.</p>
+        <div class="res">\(T = 0{,}981\) N.</div>
+
+        <p class="q">2) Montée à vitesse constante</p>
+        <p>Vitesse constante : \(\vec a = \vec 0\), le PFD est le même qu'à l'arrêt.</p>
+        <div class="res">\(T = 0{,}981\) N, inchangée.</div>
+
+        <p class="q">3) Descente à vitesse constante</p>
+        <div class="res">Même raisonnement : \(T = 0{,}981\) N. Ni le sens ni la valeur d'une vitesse constante ne changent la tension.</div>
+        <div class="warnbox"><span class="lab">Piège</span> \(\vec T\) est la force du fil sur la masse. Par la 3e loi, la masse tire le fil (donc le moteur) avec \(-\vec T\).</div>
       </div>
     </div>
 
@@ -335,16 +444,24 @@ window.MathJax = {
       <div class="exo-head">Exercice 4 — Poulie mobile <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">Poulie mobile : elle redirige les forces de la corde. Masse immobile.</p>
+
         <p class="q">1–2) Force pour soutenir la masse</p>
-        <p>Une poulie mobile supporte la masse par <b>deux brins</b> de corde ; chaque brin porte la même tension
-        \(F\). L'équilibre de la masse (+ poulie) donne \(2F=mg\), d'où \(F=\dfrac{mg}{2}\) : il suffit de tirer
-        avec la <b>moitié</b> du poids.</p>
-        <p class="q">3) Conservation de l'énergie</p>
-        <p>Pas de problème : on tire deux fois moins fort, mais sur <b>deux fois plus de longueur</b> de corde.
-        Le travail (\(W=F\times d\)) est conservé.</p>
-        <p class="q">4) Système de poulies, masse 300&nbsp;kg</p>
-        <p>Avec \(n\) brins porteurs, \(F=\dfrac{mg}{n}\). Pour le montage à \(n\) brins (poulie mobile double,
-        \(n=4\)) : \(F=\dfrac{300\times9{,}81}{4}\approx736\)&nbsp;N (soit la force pour soulever ≈ 75&nbsp;kg).</p>
+        <p class="etape">Étape 1 : système {masse + poulie mobile}</p>
+        <p>Il est tenu par deux brins de corde. Une même corde a la même tension \(F\) partout.</p>
+        <p class="etape">Étape 2 : équilibre</p>
+        \[ 2F - mg = 0 \iff F = \frac{mg}{2} \]
+        <div class="res">Il suffit de tirer avec la moitié du poids.</div>
+
+        <p class="q">3) Et la conservation de l'énergie ?</p>
+        <div class="rappel"><span class="lab">Rappel · travail d'une force constante</span>\[ W = F \times d \]</div>
+        <p>Pour monter la masse de \(h\), chacun des deux brins doit se raccourcir de \(h\) : on tire \(2h\) de corde.</p>
+        \[ W = \frac{mg}{2} \times 2h = mgh \]
+        <div class="res">Pas de contradiction : on tire deux fois moins fort, mais sur deux fois plus de longueur.</div>
+
+        <p class="q">4) Masse de 300 kg</p>
+        <p>Avec \(n\) brins porteurs, \(F = mg/n\). Le montage proposé a \(n = 4\) brins :</p>
+        \[ F = \frac{300 \times 9{,}81}{4} \approx 736\ \text{N} \]
+        <div class="res">\(F \approx 736\) N, soit l'effort pour soulever environ 75 kg.</div>
       </div>
     </div>
 
@@ -353,20 +470,32 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">\(m_1=10\)&nbsp;kg et \(m_2=15\)&nbsp;kg pendent de part et d'autre via deux poulies, la
         masse \(m_3=20\)&nbsp;kg au nœud central. Trouver les angles \(\alpha_1,\alpha_2\) des brins.</p>
-        <p class="q">1) PFD sur la masse 3</p>
-        <p>Les poulies redirigent : la tension du brin 1 vaut \(F_1=m_1 g\), celle du brin 2 \(F_2=m_2 g\)
-        (équilibre de \(m_1\) et \(m_2\)). Sur \(m_3\) :</p>
-        \[-m_1 g\cos\alpha_1+m_2 g\cos\alpha_2=0\quad(1)\qquad m_1 g\sin\alpha_1+m_2 g\sin\alpha_2-m_3 g=0\quad(2)\]
-        <p>On élève au carré et on somme pour éliminer \(\alpha_2\) (via \(\cos^2+\sin^2=1\)) :</p>
-        \[m_1^2+m_3^2-2m_1 m_3\sin\alpha_1=m_2^2\ \Rightarrow\
-        \alpha_1=\arcsin\!\left(\frac{m_1^2+m_3^2-m_2^2}{2m_1 m_3}\right)\]
-        <p>A.N. : \(\alpha_1=\arcsin\!\left(\dfrac{10^2+20^2-15^2}{2\times10\times20}\right)\approx43°\), puis
-        \(\alpha_2=\arccos\!\left(\dfrac{m_1}{m_2}\cos\alpha_1\right)\approx61°\).</p>
-        <p class="q">2–3) Cas \(m_3=40\)&nbsp;kg et limite</p>
-        <p>Avec \(m_3=40\) : \(\sin\alpha_1=\dfrac{10^2+40^2-15^2}{2\times10\times40}\approx2{,}2>1\) : <b>impossible</b>.
-        Physiquement, \(m_3\) est trop lourde, l'équilibre ne peut exister (elle tombe). La limite est atteinte
-        quand \(\sin\alpha_1=1\), soit \(m_1^2+m_3^2-2m_1 m_3=m_2^2\Rightarrow(m_3-m_1)^2=m_2^2\Rightarrow
-        m_{3,max}=m_1+m_2=25\)&nbsp;kg.</p>
+
+        <p class="q">1) Angles des brins à l'équilibre</p>
+        <p class="etape">Étape 1 : tensions des brins</p>
+        <p>Chaque masse \(m_1\), \(m_2\) est à l'équilibre et la poulie redirige la force :</p>
+        \[ F_1 = m_1 g \qquad F_2 = m_2 g \]
+        <p class="etape">Étape 2 : PFD sur la masse 3</p>
+        <div class="rappel"><span class="lab">Rappel · PFD à l'équilibre</span>\[ \vec F_1 + \vec F_2 + \vec P_3 = \vec 0 \]</div>
+        \[ -m_1\cos\alpha_1 + m_2\cos\alpha_2 = 0 \quad (1) \qquad m_1\sin\alpha_1 + m_2\sin\alpha_2 = m_3 \quad (2) \]
+        <p class="etape">Étape 3 : éliminer \(\alpha_2\)</p>
+        <div class="rappel"><span class="lab">Rappel · trigonométrie</span>\[ \cos^2\alpha_2 + \sin^2\alpha_2 = 1 \]</div>
+        <p>On isole les termes en \(\alpha_2\), on élève au carré et on additionne :</p>
+        \[ (m_1\cos\alpha_1)^2 + (m_3 - m_1\sin\alpha_1)^2 = m_2^2 \]
+        \[ m_1^2 + m_3^2 - 2m_1m_3\sin\alpha_1 = m_2^2 \iff \sin\alpha_1 = \frac{m_1^2 + m_3^2 - m_2^2}{2m_1m_3} \]
+        <p class="etape">Étape 4 : applications numériques</p>
+        \[ \sin\alpha_1 = \frac{100 + 400 - 225}{2 \times 10 \times 20} = 0{,}6875 \;\Longrightarrow\; \alpha_1 \approx 43° \]
+        \[ \cos\alpha_2 = \frac{m_1}{m_2}\cos\alpha_1 = \frac{10}{15} \times 0{,}726 \approx 0{,}484 \;\Longrightarrow\; \alpha_2 \approx 61° \]
+        <div class="res">\(\alpha_1 \approx 43°\) et \(\alpha_2 \approx 61°\).</div>
+
+        <p class="q">2–3) Cas \(m_3 = 40\) kg et masse limite</p>
+        <p class="etape">Étape 1 : cas \(m_3 = 40\) kg</p>
+        \[ \sin\alpha_1 = \frac{100 + 1600 - 225}{2 \times 10 \times 40} \approx 1{,}84 > 1 \]
+        <p>Impossible : \(m_3\) est trop lourde, aucun équilibre n'existe.</p>
+        <p class="etape">Étape 2 : masse limite (\(\sin\alpha_1 = 1\))</p>
+        \[ m_1^2 + m_3^2 - 2m_1m_3 = m_2^2 \iff (m_3 - m_1)^2 = m_2^2 \iff m_{3,max} = m_1 + m_2 \]
+        <div class="res">\(m_{3,max} = 25\) kg : au-delà, la masse 3 descend sans s'arrêter.</div>
+        <div class="warnbox"><span class="lab">Correction d'une erreur de l'ancienne version</span> L'ancienne version donnait \(\sin\alpha_1 \approx 2{,}2\) pour \(m_3 = 40\) kg. Le calcul donne \(1475/800 \approx 1{,}84\). La conclusion (impossible) ne change pas.</div>
       </div>
     </div>
 
@@ -377,21 +506,32 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Caillou lancé verticalement, \(h=5\)&nbsp;m, \(v_0=2\)&nbsp;m·s⁻¹ vers le haut, \(g=10\).
         4 modélisations (axe haut/bas, origine sol/caillou). Montrer que le temps de chute ne dépend pas du choix.</p>
-        <p class="q">1) Les 4 cas (PFD : \(m\ddot z=\pm mg\))</p>
+
+        <p class="q">1) Les quatre modélisations</p>
+        <div class="rappel"><span class="lab">Rappel · PFD en chute libre</span>\[ m\ddot z = \pm mg \]Le signe dépend du sens de l'axe : \(-mg\) si l'axe monte, \(+mg\) s'il descend.</div>
+        <p class="etape">Étape 1 : tableau</p>
         <div class="overflow"><table>
           <tr><th></th><th>a — axe ↑, origine sol</th><th>b — axe ↑, origine caillou</th><th>c — axe ↓, origine sol</th><th>d — axe ↓, origine caillou</th></tr>
-          <tr><td>CI</td><td>\(v_0>0,\ z_0=h\)</td><td>\(v_0>0,\ z_0=0\)</td><td>\(v_0<0,\ z_0=-h\)</td><td>\(v_0<0,\ z_0=0\)</td></tr>
+          <tr><td>CI</td><td>\(v_0 > 0,\ z_0 = h\)</td><td>\(v_0 > 0,\ z_0 = 0\)</td><td>\(v_0 &lt; 0,\ z_0 = -h\)</td><td>\(v_0 &lt; 0,\ z_0 = 0\)</td></tr>
           <tr><td>\(\ddot z\)</td><td>\(-g\)</td><td>\(-g\)</td><td>\(+g\)</td><td>\(+g\)</td></tr>
-          <tr><td>\(z(t)\)</td><td>\(-\tfrac12 gt^2+v_0 t+h\)</td><td>\(-\tfrac12 gt^2+v_0 t\)</td><td>\(+\tfrac12 gt^2-v_0 t-h\)</td><td>\(+\tfrac12 gt^2-v_0 t\)</td></tr>
-          <tr><td>fin</td><td>\(z=0\)</td><td>\(z=-h\)</td><td>\(z=0\)</td><td>\(z=+h\)</td></tr>
+          <tr><td>\(z(t)\)</td><td>\(-\tfrac12 gt^2 + v_0t + h\)</td><td>\(-\tfrac12 gt^2 + v_0t\)</td><td>\(\tfrac12 gt^2 - v_0t - h\)</td><td>\(\tfrac12 gt^2 - v_0t\)</td></tr>
+          <tr><td>fin</td><td>\(z = 0\)</td><td>\(z = -h\)</td><td>\(z = 0\)</td><td>\(z = +h\)</td></tr>
         </table></div>
-        <p>Dans chaque cas, la condition de fin mène à la <b>même équation du 2ᵈ degré</b>, donc au même temps :</p>
-        \[t_{fin}=\frac{-v_0-\sqrt{v_0^2+2gh}}{-g}=\frac{v_0+\sqrt{v_0^2+2gh}}{g}=\frac{2+\sqrt{4+100}}{10}\approx1{,}22\ \text{s}\]
+        <p>(\(v_0\) désigne ici la valeur positive 2 m·s\(^{-1}\).)</p>
+        <p class="etape">Étape 2 : même équation dans les quatre cas</p>
+        \[ \tfrac12 g\,t^2 - v_0\,t - h = 0 \]
+        <div class="rappel"><span class="lab">Rappel · trinôme</span>\[ at^2 + bt + c = 0 \;\Longrightarrow\; t = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]</div>
+        <p>On garde la racine positive :</p>
+        \[ t_{fin} = \frac{v_0 + \sqrt{v_0^2 + 2gh}}{g} = \frac{2 + \sqrt{4 + 100}}{10} \approx 1{,}22\ \text{s} \]
+        <div class="res">\(t_{fin} \approx 1{,}22\) s dans les quatre modélisations.</div>
+
         <p class="q">2) Vitesse initiale vers le bas</p>
-        <p>Le signe de \(v_0\) s'inverse : le caillou ne « monte » plus, il se rapproche directement du sol. La
-        durée diminue : \(t_{fin}=\dfrac{-v_0+\sqrt{v_0^2+2gh}}{g}=\dfrac{-2+\sqrt{104}}{10}\approx0{,}82\)&nbsp;s.</p>
+        <p>Le signe de \(v_0\) s'inverse dans l'équation :</p>
+        \[ t_{fin} = \frac{-v_0 + \sqrt{v_0^2 + 2gh}}{g} = \frac{-2 + \sqrt{104}}{10} \approx 0{,}82\ \text{s} \]
+        <div class="res">\(t_{fin} \approx 0{,}82\) s : plus court, car le caillou ne monte pas d'abord.</div>
+
         <p class="q">3) Conclusion</p>
-        <div class="res">La <b>modélisation</b> (choix des axes/origine) change les équations et les graphes, mais <b>jamais la physique</b> : le temps de chute est identique. Bien choisir le repère ne fait que simplifier les calculs.</div>
+        <div class="res">Le choix des axes et de l'origine change les équations, jamais la physique : le temps de chute est le même. Un bon repère simplifie seulement les calculs.</div>
       </div>
     </div>
 
@@ -400,19 +540,42 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Ballon frappé du sol à vitesse \(v_0\), angle \(\alpha\), frottements négligés.
         Équations horaires, portée, hauteur max, angle optimal.</p>
-        <p class="q">2) Équations horaires et trajectoire (PFD : \(\vec P=-mg\vec u_y\), le pied ne donne qu'une CI)</p>
-        \[x=v_0\cos\alpha\,t,\quad y=-\tfrac12 gt^2+v_0\sin\alpha\,t,\quad
-        y(x)=-\frac{g}{2v_0^2\cos^2\alpha}x^2+\tan\alpha\,x\]
-        <p class="q">3) Portée \(D\) et \(t_{sol}\)</p>
-        <p>\(y(t_{sol})=0\Rightarrow t_{sol}=\dfrac{2v_0\sin\alpha}{g}\), d'où
-        \(D=x(t_{sol})=\dfrac{2v_0^2\sin\alpha\cos\alpha}{g}=\dfrac{v_0^2}{g}\sin(2\alpha)\).</p>
-        <p class="q">4) Hauteur max</p>
-        <p>\(\dot y(t_H)=0\Rightarrow t_H=\dfrac{v_0\sin\alpha}{g}=\dfrac{t_{sol}}{2}\) (trajectoire symétrique),
-        \(H=\dfrac{v_0^2\sin^2\alpha}{2g}\), \(x_H=\dfrac{D}{2}\).</p>
+
+        <p class="q">2) Équations horaires et trajectoire</p>
+        <p class="etape">Étape 1 : PFD</p>
+        <div class="rappel"><span class="lab">Rappel · PFD</span>\[ m\,\vec a = \sum \vec F_{ext} \]</div>
+        <p>Après la frappe, seul le poids agit (le pied ne fixe que la vitesse initiale) :</p>
+        \[ m\,\vec a = -mg\,\vec u_y \iff \ddot x = 0, \quad \ddot y = -g \]
+        <p class="etape">Étape 2 : intégrations</p>
+        <p>Avec \(\vec v(0) = v_0\cos\alpha\,\vec u_x + v_0\sin\alpha\,\vec u_y\) et départ en O :</p>
+        \[ x(t) = v_0\cos\alpha\,t \qquad y(t) = -\tfrac12 g\,t^2 + v_0\sin\alpha\,t \]
+        <p class="etape">Étape 3 : trajectoire (on élimine \(t\))</p>
+        <div class="res">\[ y(x) = -\frac{g}{2v_0^2\cos^2\alpha}\,x^2 + \tan\alpha\,x \]</div>
+
+        <p class="q">3) Portée \(D\) et instant d'arrivée</p>
+        \[ y(t_{sol}) = 0 \iff t_{sol} = \frac{2v_0\sin\alpha}{g} \]
+        <div class="rappel"><span class="lab">Rappel · trigonométrie</span>\[ 2\sin\alpha\cos\alpha = \sin 2\alpha \]</div>
+        \[ D = x(t_{sol}) = \frac{2v_0^2\sin\alpha\cos\alpha}{g} = \frac{v_0^2}{g}\sin 2\alpha \]
+        <div class="res">\(t_{sol} = \dfrac{2v_0\sin\alpha}{g}\) et \(D = \dfrac{v_0^2}{g}\sin 2\alpha\).</div>
+
+        <p class="q">4) Hauteur maximale</p>
+        <p>Au sommet, la vitesse verticale s'annule :</p>
+        \[ \dot y(t_H) = 0 \iff t_H = \frac{v_0\sin\alpha}{g} = \frac{t_{sol}}{2} \]
+        \[ H = y(t_H) = \frac{v_0^2\sin^2\alpha}{2g} \qquad x_H = \frac{D}{2} \]
+        <div class="res">\(H = \dfrac{v_0^2\sin^2\alpha}{2g}\), atteinte au milieu de la portée.</div>
+
         <p class="q">5) Angle de portée maximale</p>
-        <p>\(D\propto\sin(2\alpha)\) maximal quand \(2\alpha=\dfrac{\pi}{2}\Rightarrow\alpha_{max}=45°\).</p>
+        <p>\(D\) est proportionnelle à \(\sin 2\alpha\), maximal pour \(2\alpha = 90°\).</p>
+        <div class="res">\(\alpha_{max} = 45°\).</div>
+
         <p class="q">6–7) Graphes</p>
-        <div class="res">Trajectoire = parabole (sommet en \(x_H=D/2\)). \(v_x=v_0\cos\alpha\) constante ; \(v_y\) décroît, s'annule au sommet, devient négative ; \(a_x=0\), \(a_y=-g\) constante. À l'arrivée, \(\|\vec v\|=v_0\) de nouveau.</div>
+        <ul>
+          <li>Trajectoire : parabole, sommet en \(x_H = D/2\).</li>
+          <li>\(v_x = v_0\cos\alpha\) : constante.</li>
+          <li>\(v_y\) : décroît linéairement, s'annule au sommet, puis devient négative.</li>
+          <li>\(a_x = 0\) et \(a_y = -g\) : constantes.</li>
+        </ul>
+        <div class="res">À l'arrivée au sol, la norme de la vitesse vaut de nouveau \(v_0\).</div>
       </div>
     </div>
 
@@ -421,23 +584,41 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Balle \(m=100\)&nbsp;g lancée vers le haut à \(v_0=4\)&nbsp;m·s⁻¹ depuis \(h=3\)&nbsp;m,
         frottement \(\vec f=-\lambda\vec v\), \(\lambda=0{,}2\), \(g=10\).</p>
+
         <p class="q">2) Unité de \(\lambda\)</p>
-        <p>\(f=\lambda\dot z\) doit être en N, donc \([\lambda]=\)N·s·m⁻¹ \(=\)kg·s⁻¹.</p>
+        <p>\(f = \lambda\,v\) est en newtons, donc :</p>
+        \[ [\lambda] = \frac{\text{N}}{\text{m·s}^{-1}} = \text{N·s·m}^{-1} = \text{kg·s}^{-1} \]
+        <div class="res">\(\lambda\) s'exprime en kg·s\(^{-1}\).</div>
+
         <p class="q">3) PFD et vitesse limite</p>
-        <p>Axe \(Oz\) vers le haut. On ne met pas de signe « à la main » au frottement : c'est \(\dot z\) qui
-        porte le signe.</p>
-        \[m\ddot z=-\lambda\dot z-mg\ \Rightarrow\ \ddot z+\frac{\lambda}{m}\dot z=-g\]
-        <p>En régime permanent (\(\ddot z=0\)) : \(v_{lim}=-\dfrac{mg}{\lambda}=-\dfrac{0{,}1\times10}{0{,}2}=-5\)&nbsp;m·s⁻¹
-        (négative : la balle finit par retomber).</p>
-        <p class="q">4) Résolution (équation d'ordre 1 en \(\dot z\), \(\tau=m/\lambda\))</p>
-        <p>Solution = particulière (\(v_{lim}\)) + homogène (\(Ae^{-t/\tau}\)). CI \(\dot z(0)=v_0\Rightarrow A=v_0-v_{lim}\) :</p>
-        \[\dot z(t)=(v_0-v_{lim})e^{-t/\tau}+v_{lim}\]
-        <p class="q">5) Temps du point le plus haut (\(\dot z=0\))</p>
-        \[t_H=\tau\ln\!\left(\frac{v_0-v_{lim}}{-v_{lim}}\right)=\frac{0{,}1}{0{,}2}\ln\!\left(\frac{4+5}{5}\right)\approx0{,}3\ \text{s}\]
-        <p class="q">6) Équation horaire (intégration)</p>
-        \[z(t)=-\tau(v_0-v_{lim})e^{-t/\tau}+v_{lim}\,t+h+\tau(v_0-v_{lim})\]
+        <p class="etape">Étape 1 : PFD sur l'axe \(Oz\) vers le haut</p>
+        <div class="rappel"><span class="lab">Rappel · PFD</span>\[ m\,\vec a = \sum \vec F_{ext} \]</div>
+        \[ m\ddot z = -\lambda\dot z - mg \iff \ddot z + \frac{\lambda}{m}\,\dot z = -g \]
+        <div class="warnbox"><span class="lab">Piège</span> On écrit \(\vec f = -\lambda\dot z\,\vec u_z\) sans choisir de signe « à la main » : c'est \(\dot z\) qui porte le signe, à la montée comme à la descente.</div>
+        <p class="etape">Étape 2 : régime permanent (\(\ddot z = 0\))</p>
+        \[ v_{lim} = -\frac{mg}{\lambda} = -\frac{0{,}1 \times 10}{0{,}2} = -5\ \text{m·s}^{-1} \]
+        <div class="res">\(v_{lim} = -5\) m·s\(^{-1}\) (négative : la balle finit par descendre).</div>
+
+        <p class="q">4) Expression de \(\dot z(t)\)</p>
+        <div class="rappel"><span class="lab">Rappel · équation du 1er ordre</span>\[ \dot y + \frac{y}{\tau} = \text{cte} \;\Longrightarrow\; y(t) = y_\infty + A\,e^{-t/\tau} \]</div>
+        <p>Ici \(y = \dot z\), \(\tau = m/\lambda = 0{,}5\) s et \(y_\infty = v_{lim}\). Avec \(\dot z(0) = v_0\) : \(A = v_0 - v_{lim}\).</p>
+        <div class="res">\(\dot z(t) = (v_0 - v_{lim})\,e^{-t/\tau} + v_{lim}\).</div>
+
+        <p class="q">5) Instant du point le plus haut</p>
+        <p>Au sommet, \(\dot z = 0\) :</p>
+        \[ e^{-t_H/\tau} = \frac{-v_{lim}}{v_0 - v_{lim}} \iff t_H = \tau\ln\left(\frac{v_0 - v_{lim}}{-v_{lim}}\right) \]
+        \[ t_H = 0{,}5 \times \ln\left(\frac{4 + 5}{5}\right) \approx 0{,}29\ \text{s} \]
+        <div class="res">\(t_H \approx 0{,}3\) s.</div>
+
+        <p class="q">6) Équation horaire</p>
+        <p>On intègre \(\dot z(t)\) avec \(z(0) = h\) :</p>
+        <div class="res">\[ z(t) = h + \tau(v_0 - v_{lim})\left(1 - e^{-t/\tau}\right) + v_{lim}\,t \]</div>
+
         <p class="q">7) Graphes</p>
-        <div class="res">Quand \(t\gg\tau\), l'exponentielle s'éteint : \(z\) devient linéaire (chute à \(v_{lim}\)). La vitesse est positive (montée), s'annule en \(t_H\), puis négative (descente) en tendant vers \(v_{lim}\).</div>
+        <ul>
+          <li>\(\dot z\) : positive (montée), nulle en \(t_H\), puis négative et tend vers \(v_{lim}\).</li>
+          <li>\(z\) : monte, passe par un maximum en \(t_H\), puis devient une droite de pente \(v_{lim}\) quand \(t \gg \tau\).</li>
+        </ul>
       </div>
     </div>
 
@@ -445,14 +626,26 @@ window.MathJax = {
       <div class="exo-head">EC 8 — Arrêt d'une caisse lancée sur le sol <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">Caisse lancée à \(v_0=4\)&nbsp;m·s⁻¹, \(\mu_D=0{,}2\), \(m=10\)&nbsp;kg, \(g=10\), frottement solide.</p>
+
         <p class="q">1) Équation horaire</p>
-        <p>Bilan : poids, réaction \(\vec N\), frottement \(\vec f=-f\vec u_x\) avec \(f=\mu_D N\). Projection sur
-        \(y\) : \(N=mg\). Sur \(x\) : \(m\ddot x=-\mu_D mg\Rightarrow\ddot x=-\mu_D g\). Intégration :</p>
-        \[\dot x=-\mu_D g\,t+v_0,\qquad x(t)=-\tfrac12\mu_D g\,t^2+v_0 t\]
-        <p class="q">2) Temps d'arrêt (\(\dot x=0\))</p>
-        \[t=\frac{v_0}{\mu_D g}=\frac{4}{0{,}2\times10}=2\ \text{s}\]
+        <p class="etape">Étape 1 : bilan des forces</p>
+        <p>Poids \(\vec P\), réaction \(\vec N\), frottement \(\vec f = -f\,\vec u_x\) (opposé au mouvement).</p>
+        <div class="rappel"><span class="lab">Rappel · frottement solide en glissement</span>\[ f = \mu_D\,N \]</div>
+        <p class="etape">Étape 2 : PFD projeté</p>
+        <ul>
+          <li>Sur \(y\) : \(N - mg = 0\), donc \(N = mg\).</li>
+          <li>Sur \(x\) : \(m\ddot x = -\mu_D mg\), donc \(\ddot x = -\mu_D g\).</li>
+        </ul>
+        <p class="etape">Étape 3 : intégrations</p>
+        \[ \dot x = v_0 - \mu_D g\,t \qquad x(t) = v_0\,t - \tfrac12\mu_D g\,t^2 \]
+        <div class="res">\(x(t) = v_0\,t - \tfrac12\mu_D g\,t^2\), tant que la caisse glisse.</div>
+
+        <p class="q">2) Temps d'arrêt</p>
+        \[ \dot x = 0 \iff t = \frac{v_0}{\mu_D g} = \frac{4}{0{,}2 \times 10} = 2\ \text{s} \]
+        <div class="res">La caisse s'arrête après 2 s.</div>
+
         <p class="q">3) Analogie</p>
-        <div class="res">Même équation (\(\ddot x=\)cte) qu'une chute libre lancée vers le haut. Différence : la caisse <b>s'arrête</b> une fois \(v=0\) (le frottement solide disparaît), alors qu'en chute libre l'objet <b>repart</b> dans l'autre sens.</div>
+        <div class="res">Même équation (\(\ddot x\) constante) qu'un objet lancé vers le haut en chute libre. Différence : la caisse reste arrêtée quand \(v = 0\) (le frottement de glissement disparaît), alors que l'objet en chute libre repart dans l'autre sens.</div>
       </div>
     </div>
 
@@ -461,25 +654,46 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">\(\omega\) et \(R\) constants, frottements négligés. Étude générale, objet au bout d'une
         tige (plan vertical), bille dans un tube tournant, seau d'eau.</p>
+
         <p class="q">1) Résultats généraux</p>
-        <p>\([\omega]=T^{-1}\) (rad·s⁻¹). \(\vec v=R\omega\,\vec u_\theta\), norme \(v=R\omega\) <b>constante</b>,
-        mais direction (celle de \(\vec u_\theta\)) variable. \(\vec a=-R\omega^2\,\vec u_r\) (centripète, non
-        nulle car elle fait tourner \(\vec v\)). Norme : \(a=R\omega^2=\dfrac{v^2}{R}=\omega v\).</p>
+        <div class="rappel"><span class="lab">Rappel · polaires, \(r = R\) et \(\dot\theta = \omega\) constants</span>\[ \vec v = R\omega\,\vec u_\theta \qquad \vec a = -R\omega^2\,\vec u_r \]</div>
+        <ul>
+          <li>\([\omega] = \text{T}^{-1}\), en rad·s\(^{-1}\).</li>
+          <li>Norme de la vitesse \(v = R\omega\) constante, mais sa direction tourne.</li>
+          <li>Accélération centripète, non nulle : c'est elle qui fait tourner \(\vec v\).</li>
+        </ul>
+        \[ a = R\omega^2 = \frac{v^2}{R} = \omega\,v \]
+
         <p class="q">2) Objet au bout d'une tige (plan vertical)</p>
-        <p>Forces : tension \(\vec T=-T\vec u_r\) et poids. \(\vec a=-R\omega^2\vec u_r\) (centripète). L'objet
-        « ne tombe pas » en haut car les forces changent l'accélération, pas instantanément la vitesse (1ʳᵉ loi :
-        il continue sa direction). La projection sur \(\vec u_\theta\) donne \(-mg\cos\theta=0\), non vérifiée
-        partout : c'est qu'une <b>force orthoradiale non modélisée</b> (le moteur) impose le mouvement uniforme.
-        Si on coupe le fil : trajectoire rectiligne (tangente) — parabole si on garde la gravité.</p>
-        <p class="q">3) Bille dans un tube tournant (sans frottement, plan horizontal)</p>
-        <p>Le tube n'exerce aucune force radiale (pas de frottement) ⇒ \(a_r=0\) : \(\ddot r-\omega^2 r=0\).
-        Solution \(r(t)=A\cosh(\omega t)+B\sinh(\omega t)\) ; CI \(r(0)=0,\dot r(0)=v_0\) ⇒
-        \(r(t)=\dfrac{v_0}{\omega}\sinh(\omega t)\). Sortie du tube : \(t_{max}=\dfrac{1}{\omega}\text{arcsinh}\!\left(\dfrac{r_{max}\omega}{v_0}\right)\approx1{,}15\)&nbsp;s.
-        Principe de la <b>centrifugeuse</b> / essoreuse.</p>
-        <p class="q">4) Seau d'eau (plan vertical, point haut)</p>
-        <p>Forces : poids \(-mg\vec u_y\), réaction \(\vec N=-N\vec u_r\). \(N\) s'annule si l'eau décolle.
-        PFD sur \(\vec u_r\) au point haut : \(-N-mg=-mR\omega^2\). Condition \(N\ge0\) :</p>
-        \[\omega\ge\sqrt{\frac{g}{R}}\quad(\text{sinon l'eau tombe})\]
+        <p class="etape">Étape 1 : forces</p>
+        <p>Tension \(\vec T = -T\,\vec u_r\) et poids \(m\vec g\).</p>
+        <p class="etape">Étape 2 : pourquoi l'objet ne tombe pas en haut</p>
+        <p>Les forces modifient l'accélération, pas directement la vitesse. En haut, l'objet a une vitesse horizontale et continue son chemin sur le cercle.</p>
+        <p class="etape">Étape 3 : projection sur \(\vec u_\theta\)</p>
+        <p>Le PFD donnerait \(-mg\cos\theta = 0\), ce qui n'est pas vrai partout. Pour garder \(\omega\) constant, il faut une force orthoradiale non modélisée (un moteur).</p>
+        <p class="etape">Étape 4 : si on coupe le fil</p>
+        <p>Plus de force centripète : l'objet part selon la tangente, puis décrit une parabole sous l'effet du poids.</p>
+
+        <p class="q">3) Bille dans un tube tournant (plan horizontal, sans frottement)</p>
+        <p class="etape">Étape 1 : équation radiale</p>
+        <div class="rappel"><span class="lab">Rappel · accélération radiale en polaires</span>\[ a_r = \ddot r - r\dot\theta^2 \]</div>
+        <p>Sans frottement, le tube ne pousse la bille que selon \(\vec u_\theta\) : \(a_r = 0\).</p>
+        \[ \ddot r - \omega^2 r = 0 \]
+        <p class="etape">Étape 2 : solution</p>
+        \[ r(t) = A\cosh(\omega t) + B\sinh(\omega t) \]
+        <p>Avec \(r(0) = 0\) et \(\dot r(0) = v_0\) :</p>
+        \[ r(t) = \frac{v_0}{\omega}\sinh(\omega t) \]
+        <p class="etape">Étape 3 : sortie du tube</p>
+        \[ t_{max} = \frac{1}{\omega}\,\text{arcsinh}\left(\frac{r_{max}\,\omega}{v_0}\right) \approx 1{,}15\ \text{s} \]
+        <div class="res">La bille est éjectée vers l'extérieur : principe de la centrifugeuse et de l'essoreuse.</div>
+
+        <p class="q">4) Seau d'eau au point haut</p>
+        <p class="etape">Étape 1 : forces sur l'eau</p>
+        <p>Poids et réaction du fond du seau \(\vec N = -N\,\vec u_r\) (vers le centre). L'eau décolle si \(N\) s'annule.</p>
+        <p class="etape">Étape 2 : PFD sur \(\vec u_r\) au point haut</p>
+        \[ -N - mg = -mR\omega^2 \iff N = m\left(R\omega^2 - g\right) \]
+        <p class="etape">Étape 3 : condition \(N \ge 0\)</p>
+        <div class="res">\(\omega \ge \sqrt{g/R}\) ; sinon l'eau tombe.</div>
       </div>
     </div>
 
@@ -487,15 +701,27 @@ window.MathJax = {
       <div class="exo-head">EC 10 — Virage en voiture et la « force interdite » <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">Voiture en virage (rayon \(R\) constant, vitesse constante), vue de dessus, poids ⊥ au plan.</p>
+
         <p class="q">2–4) Forces et accélération</p>
-        <p>Seule reste (après compensation traction/frottement de roulement) la force de frottement <b>normale au
-        mouvement</b> \(\vec f_N\). L'accélération est centripète : \(\vec a=-R\dot\theta^2\vec u_r\). Cohérent
-        par le PFD : \(\vec f_N=-mR\dot\theta^2\vec u_r\).</p>
+        <p class="etape">Étape 1 : forces</p>
+        <ul>
+          <li>Poids et réaction verticale se compensent.</li>
+          <li>Traction et frottement de roulement se compensent (vitesse constante).</li>
+          <li>Il reste le frottement latéral du sol \(\vec f_N\), perpendiculaire à la vitesse.</li>
+        </ul>
+        <p class="etape">Étape 2 : accélération</p>
+        <div class="rappel"><span class="lab">Rappel · mouvement circulaire uniforme</span>\[ \vec a = -R\dot\theta^2\,\vec u_r \]</div>
+        <p class="etape">Étape 3 : PFD</p>
+        <div class="res">\(\vec f_N = -mR\dot\theta^2\,\vec u_r\) : le frottement latéral est dirigé vers le centre du virage.</div>
+
         <p class="q">5) Sol parfaitement glissant</p>
-        <p>Sans frottement, aucune force pour courber la trajectoire : la voiture irait <b>tout droit</b> (1ʳᵉ loi).</p>
-        <p class="q">6) Frottement insuffisant</p><p>La voiture <b>dérape</b> (part vers l'extérieur, tourne trop peu).</p>
+        <div class="res">Aucune force pour courber la trajectoire : la voiture continue tout droit (1re loi de Newton).</div>
+
+        <p class="q">6) Frottement insuffisant</p>
+        <div class="res">La voiture dérape vers l'extérieur du virage : elle tourne moins que la route.</div>
+
         <p class="q">7) La force centrifuge fait-elle tourner la voiture ?</p>
-        <div class="res"><b>Non.</b> La force centrifuge n'existe pas dans le référentiel terrestre (galiléen) : c'est le frottement qui fournit l'accélération centripète. La « force centrifuge » est une force d'inertie <b>ressentie</b> dans le référentiel non galiléen de la voiture — une conséquence de la trajectoire courbe, pas sa cause.</div>
+        <div class="res">Non. Dans le référentiel terrestre (galiléen), il n'y a pas de force centrifuge : c'est le frottement qui fournit l'accélération centripète. La « force centrifuge » est ressentie par les passagers dans le référentiel de la voiture, non galiléen : c'est une conséquence du virage, pas sa cause.</div>
       </div>
     </div>
 
@@ -503,10 +729,18 @@ window.MathJax = {
       <div class="exo-head">Exercice 5 — Forces lors de l'arrêt d'un manège <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">Enfant à \(r=R\) constant, le manège s'arrête en ¼ de tour.</p>
+
         <p class="q">1) Accélération</p>
-        <p>\(r=R\) cte, \(\dot\theta\) variable : \(\vec a=-R\dot\theta^2\vec u_r+R\ddot\theta\vec u_\theta\).</p>
+        <div class="rappel"><span class="lab">Rappel · accélération en polaires</span>\[ \vec a = \left(\ddot r - r\dot\theta^2\right)\vec u_r + \left(2\dot r\dot\theta + r\ddot\theta\right)\vec u_\theta \]</div>
+        <p>\(r = R\) constant (\(\dot r = \ddot r = 0\)) mais \(\dot\theta\) varie :</p>
+        <div class="res">\(\vec a = -R\dot\theta^2\,\vec u_r + R\ddot\theta\,\vec u_\theta\).</div>
+
         <p class="q">2) Interprétation</p>
-        <div class="res">\(-R\dot\theta^2\vec u_r\) : accélération <b>centripète</b> (le rebord extérieur pousse l'enfant vers l'intérieur, sinon il partirait tout droit). \(R\ddot\theta\vec u_\theta\) avec \(\ddot\theta<0\) : <b>freinage</b> (dirigé vers l'arrière). S'il ne se tient pas, l'enfant continue vers l'avant (à sa vitesse) tandis que le manège ralentit : il est « projeté » vers l'avant.</div>
+        <ul>
+          <li>\(-R\dot\theta^2\,\vec u_r\) : accélération centripète. Le rebord pousse l'enfant vers l'intérieur.</li>
+          <li>\(R\ddot\theta\,\vec u_\theta\) avec \(\ddot\theta &lt; 0\) : freinage, dirigé vers l'arrière.</li>
+        </ul>
+        <div class="res">Si l'enfant ne se tient pas, il garde sa vitesse pendant que le manège ralentit : il est « projeté » vers l'avant.</div>
       </div>
     </div>
 
@@ -514,23 +748,42 @@ window.MathJax = {
       <div class="exo-head">EC 11 — Étude du pendule simple <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">Masse \(m=100\)&nbsp;g, fil \(L=1\)&nbsp;m, \(\theta_0=5°\), sans vitesse ni frottement.</p>
-        <p class="q">1–3) Cadre, accélération, PFD</p>
-        <p>Coordonnées polaires (rotation autour d'un point). \(r=L\) cte ⇒
-        \(\vec a=-L\dot\theta^2\vec u_r+L\ddot\theta\vec u_\theta\). Forces : poids
-        \(\vec P=mg\cos\theta\,\vec u_r-mg\sin\theta\,\vec u_\theta\), tension \(\vec T=-T\vec u_r\). PFD :</p>
-        \[\begin{cases}-mL\dot\theta^2=mg\cos\theta-T &(\vec u_r)\\ mL\ddot\theta=-mg\sin\theta &(\vec u_\theta)\end{cases}\]
-        <p class="q">4) Petits angles (\(\sin\theta\approx\theta\))</p>
-        <p>\(\ddot\theta+\dfrac{g}{L}\theta=0\) : oscillateur harmonique, \(\omega_0=\sqrt{g/L}\). Avec
-        \(\theta(0)=\theta_0,\dot\theta(0)=0\) : \(\theta(t)=\theta_0\cos(\omega_0 t)\).</p>
-        <p class="q">5–7) Angle max, période</p>
-        <p>\(\theta_{max}=\theta_0\) (ne remonte pas plus haut). \(T=2\pi\sqrt{L/g}=2\pi\sqrt{1/9{,}81}\approx2{,}0\)&nbsp;s
-        (demi-période ≈ 1&nbsp;s ⇒ « bat la seconde »). La période ne dépend <b>pas</b> de \(m\). Pendule de Foucault
-        (\(L=63\)&nbsp;m) : \(T=2\pi\sqrt{63/9{,}81}\approx16\)&nbsp;s.</p>
-        <p class="q">8–10) Vitesses max, tension en bas</p>
-        <p>\(\dot\theta=-\omega_0\theta_0\sin(\omega_0 t)\), \(|\dot\theta|_{max}=\omega_0\theta_0
-        =\sqrt{9{,}81}\times\tfrac{5\pi}{180}\approx0{,}27\)&nbsp;rad·s⁻¹.
-        \(v_{max}=L\omega_0\theta_0\approx0{,}27\)&nbsp;m·s⁻¹, atteinte <b>en bas</b> (\(\theta=0\)). La tension y vaut
-        \(T=mg+mL\omega_0^2\theta_0^2>mg\) (l'accélération centripète « alourdit » le pendule).</p>
+
+        <p class="q">1–3) Cadre, accélération et PFD</p>
+        <p class="etape">Étape 1 : coordonnées</p>
+        <p>Rotation autour du point d'attache : coordonnées polaires, avec \(r = L\) constant.</p>
+        <div class="rappel"><span class="lab">Rappel · accélération en polaires</span>\[ \vec a = \left(\ddot r - r\dot\theta^2\right)\vec u_r + \left(2\dot r\dot\theta + r\ddot\theta\right)\vec u_\theta \]</div>
+        \[ \vec a = -L\dot\theta^2\,\vec u_r + L\ddot\theta\,\vec u_\theta \]
+        <p class="etape">Étape 2 : forces</p>
+        \[ \vec P = mg\cos\theta\,\vec u_r - mg\sin\theta\,\vec u_\theta \qquad \vec T = -T\,\vec u_r \]
+        <p class="etape">Étape 3 : PFD projeté</p>
+        <div class="res">\[ \begin{cases} -mL\dot\theta^2 = mg\cos\theta - T & (\vec u_r) \\ mL\ddot\theta = -mg\sin\theta & (\vec u_\theta) \end{cases} \]</div>
+
+        <p class="q">4) Petits angles</p>
+        <div class="rappel"><span class="lab">Rappel · approximation des petits angles</span>\[ \sin\theta \approx \theta \quad (\theta\ \text{en rad}) \]</div>
+        \[ \ddot\theta + \frac{g}{L}\,\theta = 0 \qquad \omega_0 = \sqrt{\frac{g}{L}} \]
+        <p>Avec \(\theta(0) = \theta_0\) et \(\dot\theta(0) = 0\) :</p>
+        <div class="res">\(\theta(t) = \theta_0\cos(\omega_0 t)\).</div>
+
+        <p class="q">5–7) Angle maximal et période</p>
+        \[ \theta_{max} = \theta_0 \qquad T = 2\pi\sqrt{\frac{L}{g}} = 2\pi\sqrt{\frac{1}{9{,}81}} \approx 2{,}0\ \text{s} \]
+        <ul>
+          <li>La demi-période vaut environ 1 s : le pendule « bat la seconde ».</li>
+          <li>\(T\) ne dépend pas de \(m\).</li>
+          <li>Pendule de Foucault (\(L = 63\) m) : \(T = 2\pi\sqrt{63/9{,}81} \approx 16\) s.</li>
+        </ul>
+        <div class="res">\(T \approx 2{,}0\) s, indépendante de la masse.</div>
+
+        <p class="q">8–10) Vitesses maximales et tension en bas</p>
+        <p class="etape">Étape 1 : vitesse angulaire</p>
+        \[ \dot\theta = -\omega_0\theta_0\sin(\omega_0 t) \qquad |\dot\theta|_{max} = \omega_0\theta_0 = \sqrt{9{,}81} \times \frac{5\pi}{180} \approx 0{,}27\ \text{rad·s}^{-1} \]
+        <p class="etape">Étape 2 : vitesse</p>
+        \[ v_{max} = L\,\omega_0\theta_0 \approx 0{,}27\ \text{m·s}^{-1} \]
+        <p>Elle est atteinte en bas (\(\theta = 0\)).</p>
+        <p class="etape">Étape 3 : tension en bas</p>
+        <p>Projection sur \(\vec u_r\) avec \(\theta = 0\) et \(\dot\theta = \omega_0\theta_0\) :</p>
+        \[ T = mg + mL\,\omega_0^2\theta_0^2 > mg \]
+        <div class="res">En bas, \(v_{max} \approx 0{,}27\) m·s\(^{-1}\) et la tension dépasse le poids.</div>
       </div>
     </div>
 
@@ -539,18 +792,29 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Pendule tournant en cône, fil de longueur \(L\), angle \(\alpha\) avec la verticale,
         rayon \(R\) et altitude \(z\) constants. Coordonnées cylindriques.</p>
-        <p class="q">1–3) Cadre, cinématique, forces</p>
-        <p>\(r=R\) cte : \(\vec a=-R\dot\theta^2\vec u_r+R\ddot\theta\vec u_\theta\), \(\vec v=R\dot\theta\vec u_\theta\).
-        Forces : poids \(-mg\vec u_z\), tension \(\vec T=-T\sin\alpha\,\vec u_r+T\cos\alpha\,\vec u_z\) (aucune
-        composante selon \(\vec u_\theta\)).</p>
+
+        <p class="q">1–3) Cadre, cinématique et forces</p>
+        <div class="rappel"><span class="lab">Rappel · cylindriques avec \(r = R\) et \(z\) constants</span>\[ \vec v = R\dot\theta\,\vec u_\theta \qquad \vec a = -R\dot\theta^2\,\vec u_r + R\ddot\theta\,\vec u_\theta \]</div>
+        <p>Forces :</p>
+        <ul>
+          <li>Poids : \(-mg\,\vec u_z\).</li>
+          <li>Tension : \(\vec T = -T\sin\alpha\,\vec u_r + T\cos\alpha\,\vec u_z\) (aucune composante selon \(\vec u_\theta\)).</li>
+        </ul>
+
         <p class="q">4) PFD projeté</p>
-        \[\begin{cases}-mR\dot\theta^2=-T\sin\alpha &(\vec u_r)\\ mR\ddot\theta=0 &(\vec u_\theta)\\ 0=T\cos\alpha-mg &(\vec u_z)\end{cases}\]
+        <div class="res">\[ \begin{cases} -mR\dot\theta^2 = -T\sin\alpha & (1) \\ mR\ddot\theta = 0 & (2) \\ 0 = T\cos\alpha - mg & (3) \end{cases} \]</div>
+
         <p class="q">5–7) Conséquences</p>
-        <p>(2) ⇒ \(\ddot\theta=0\Rightarrow\dot\theta=\)cte ; alors (1) ⇒ \(\alpha=\)cte. (3) ⇒
-        \(T=\dfrac{mg}{\cos\alpha}\). En injectant dans (1) : \(\dot\theta=\omega=\sqrt{\dfrac{g}{R}\tan\alpha}\)
-        (car \(R=L\sin\alpha\)).</p>
-        <p class="q">8) Fil horizontal impossible</p>
-        <div class="res">Si \(\alpha=\tfrac{\pi}{2}\), \(\tan\alpha\to\infty\) ⇒ \(\omega\to\infty\) : il faudrait une vitesse angulaire infinie. Le fil ne peut jamais être parfaitement horizontal.</div>
+        <p class="etape">Étape 1 : équation (2)</p>
+        <p>\(\ddot\theta = 0\) : la vitesse angulaire \(\omega\) est constante. Alors, d'après (1), \(\alpha\) est constant.</p>
+        <p class="etape">Étape 2 : équation (3)</p>
+        \[ T = \frac{mg}{\cos\alpha} \]
+        <p class="etape">Étape 3 : on reporte dans (1)</p>
+        \[ mR\omega^2 = mg\tan\alpha \iff \omega = \sqrt{\frac{g}{R}\tan\alpha} \]
+        <div class="res">\(T = \dfrac{mg}{\cos\alpha}\) et \(\omega = \sqrt{\dfrac{g\tan\alpha}{R}}\), avec \(R = L\sin\alpha\).</div>
+
+        <p class="q">8) Fil horizontal ?</p>
+        <div class="res">Si \(\alpha \to \pi/2\), \(\tan\alpha \to \infty\), donc \(\omega \to \infty\) : le fil ne peut jamais être parfaitement horizontal.</div>
       </div>
     </div>
 
@@ -559,10 +823,17 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Associer (sans calcul) chaque schéma à un graphe et à une équation :
         \(\ddot z+\omega_0^2 z=0\) (1) ou \(\ddot z+\omega_0^2 z=\)cte (2).</p>
-        <p><b>Principe :</b> il suffit de regarder <b>autour de quoi</b> le ressort oscille. Oscillation autour de
-        \(0\) ⇒ pas de second membre (équation 1). Oscillation autour d'une valeur non nulle ⇒ second membre
-        (équation 2), la constante fixe la position d'équilibre.</p>
-        <div class="res">Le choix d'origine/axe ne change <b>jamais</b> la physique (période, amplitude). Se placer de façon à osciller <b>autour de 0</b> supprime le second membre et simplifie les calculs.</div>
+
+        <p class="q">1) Associer schémas, graphes et équations</p>
+        <p class="etape">Étape 1 : la question à se poser</p>
+        <p>Autour de quelle valeur de \(z\) le ressort oscille-t-il ?</p>
+        <div class="rappel"><span class="lab">Rappel · oscillateur harmonique</span>\[ \ddot z + \omega_0^2 z = \omega_0^2\,z_{eq} \;\Longrightarrow\; z(t) = z_{eq} + A\cos(\omega_0 t + \varphi) \]</div>
+        <p class="etape">Étape 2 : règle d'association</p>
+        <ul>
+          <li>Oscillation autour de \(z = 0\) (origine à l'équilibre) : pas de second membre, équation (1).</li>
+          <li>Oscillation autour d'une valeur non nulle : second membre constant, équation (2). La constante vaut \(\omega_0^2\,z_{eq}\).</li>
+        </ul>
+        <div class="res">Le choix de l'origine ne change ni la période ni l'amplitude. Placer l'origine à l'équilibre supprime le second membre et simplifie les calculs.</div>
       </div>
     </div>
 
@@ -571,19 +842,27 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">\(m=100\)&nbsp;g, \(k=5{,}0\)&nbsp;N·m⁻¹, \(L_{vide}=20\)&nbsp;cm, comprimé de 10&nbsp;cm et
         lâché sans vitesse. Traité avec deux origines (attache du ressort / position d'équilibre).</p>
-        <p class="q">Repère 1 — origine à l'attache (\(x=L\))</p>
-        <p>PFD sur \(x\) : \(m\ddot x=-k(x-L_{vide})\Rightarrow\ddot x+\dfrac{k}{m}x=\dfrac{k}{m}L_{vide}\)
-        (avec second membre). Solution : \(x(t)=A\cos\omega_0 t+B\sin\omega_0 t+L_{vide}\).
-        CI \(x(0)=x_0=10\)&nbsp;cm, \(\dot x(0)=0\) ⇒ \(B=0,\ A=x_0-L_{vide}=-10\)&nbsp;cm :</p>
-        \[x(t)=(x_0-L_{vide})\cos(\omega_0 t)+L_{vide}\]
-        <p>Oscillation <b>autour de \(L_{vide}\)</b>, amplitude 10&nbsp;cm.</p>
-        <p class="q">Repère 2 — origine à l'équilibre (\(x=L-L_{vide}\))</p>
-        <p>PFD : \(m\ddot x=-kx\Rightarrow\ddot x+\omega_0^2 x=0\) (sans second membre). CI \(x(0)=-10\)&nbsp;cm,
-        \(\dot x(0)=0\) : \(x(t)=x_0\cos(\omega_0 t)\), oscillation <b>autour de 0</b>, amplitude 10&nbsp;cm.</p>
-        <p class="q">Période, conclusion</p>
-        <p>\(\omega_0=\sqrt{k/m}\), \(T=\dfrac{2\pi}{\omega_0}=2\pi\sqrt{0{,}1/5}\approx0{,}89\)&nbsp;s (identique
-        dans les deux repères).</p>
-        <div class="res">Physique, période et amplitude sont indépendantes du repère ; seul le repère à l'équilibre supprime le second membre (calculs plus simples).</div>
+
+        <p class="q">1) Repère 1 — origine à l'attache du ressort (\(x = L\))</p>
+        <p class="etape">Étape 1 : PFD selon \(x\)</p>
+        <div class="rappel"><span class="lab">Rappel · force de rappel</span>\[ F_x = -k\,(L - L_{vide}) \]</div>
+        \[ m\ddot x = -k\,(x - L_{vide}) \iff \ddot x + \frac{k}{m}\,x = \frac{k}{m}\,L_{vide} \]
+        <p>Il y a un second membre.</p>
+        <p class="etape">Étape 2 : solution générale</p>
+        <div class="rappel"><span class="lab">Rappel · oscillateur avec second membre constant</span>\[ \ddot x + \omega_0^2 x = \omega_0^2\,x_{eq} \;\Longrightarrow\; x(t) = A\cos\omega_0 t + B\sin\omega_0 t + x_{eq} \]</div>
+        \[ x(t) = A\cos\omega_0 t + B\sin\omega_0 t + L_{vide} \]
+        <p class="etape">Étape 3 : conditions initiales</p>
+        <p>\(x(0) = x_0 = 10\) cm (ressort comprimé de 10 cm) et \(\dot x(0) = 0\) : \(B = 0\) et \(A = x_0 - L_{vide} = -10\) cm.</p>
+        <div class="res">\(x(t) = L_{vide} + (x_0 - L_{vide})\cos(\omega_0 t)\) : oscillation autour de \(L_{vide} = 20\) cm, amplitude 10 cm.</div>
+
+        <p class="q">2) Repère 2 — origine à l'équilibre (\(x = L - L_{vide}\))</p>
+        \[ m\ddot x = -kx \iff \ddot x + \omega_0^2\,x = 0 \]
+        <p>Pas de second membre. Avec \(x(0) = -10\) cm et \(\dot x(0) = 0\) :</p>
+        <div class="res">\(x(t) = -0{,}10\cos(\omega_0 t)\) (en m) : oscillation autour de 0, amplitude 10 cm.</div>
+
+        <p class="q">3) Période et conclusion</p>
+        \[ T = \frac{2\pi}{\omega_0} = 2\pi\sqrt{\frac{m}{k}} = 2\pi\sqrt{\frac{0{,}1}{5}} \approx 0{,}89\ \text{s} \]
+        <div class="res">\(T \approx 0{,}89\) s dans les deux repères. Période et amplitude ne dépendent pas du repère ; l'origine à l'équilibre supprime le second membre.</div>
       </div>
     </div>
 
@@ -592,19 +871,35 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">\(m=1{,}0\)&nbsp;kg, \(k=10\)&nbsp;N·m⁻¹, \(L_{vide}=10\)&nbsp;cm, axe \(Oz\) vers le bas,
         origine à \(L_{eq}\), \(g=10\).</p>
+
         <p class="q">2) Longueur d'équilibre</p>
-        <p>À l'équilibre : \(mg-k(L_{eq}-L_{vide})=0\Rightarrow L_{eq}=\dfrac{mg}{k}+L_{vide}\).</p>
-        <p class="q">3–5) Astuce du « \(+L_{eq}-L_{eq}\) »</p>
-        <p>Avec \(z=L-L_{eq}\), le PFD \(m\ddot z=mg-k(L-L_{vide})\) se réécrit en insérant \(L_{eq}\) :
-        \(m\ddot z=mg-k(z+\tfrac{mg}{k})=-kz\). Le poids <b>disparaît</b> (absorbé par le décalage d'équilibre).</p>
+        <div class="rappel"><span class="lab">Rappel · PFD à l'équilibre</span>\[ \sum \vec F_{ext} = \vec 0 \]</div>
+        <p>Axe vers le bas : poids \(+mg\), ressort \(-k(L - L_{vide})\).</p>
+        \[ mg - k\,(L_{eq} - L_{vide}) = 0 \iff L_{eq} = L_{vide} + \frac{mg}{k} \]
+        <div class="res">\(L_{eq} = L_{vide} + \dfrac{mg}{k} = 0{,}10 + \dfrac{1{,}0 \times 10}{10} = 1{,}1\) m.</div>
+
+        <p class="q">3–5) Faire disparaître le poids</p>
+        <p class="etape">Étape 1 : PFD</p>
+        \[ m\ddot z = mg - k\,(L - L_{vide}) \]
+        <p class="etape">Étape 2 : changement de variable \(z = L - L_{eq}\)</p>
+        <p>On écrit \(L - L_{vide} = z + (L_{eq} - L_{vide}) = z + \dfrac{mg}{k}\) :</p>
+        \[ m\ddot z = mg - k\left(z + \frac{mg}{k}\right) = -kz \]
+        <div class="res">Le poids disparaît : il est entièrement compensé par l'allongement d'équilibre.</div>
+
         <p class="q">6) Forme canonique et solution</p>
-        <p>\(\ddot z+\omega_0^2 z=0\), \(\omega_0=\sqrt{k/m}\), \(z(t)=A\cos\omega_0 t+B\sin\omega_0 t\).</p>
-        <p class="q">7–8) Deux jeux de CI</p>
-        <p>• Étiré de 5&nbsp;cm sans vitesse : \(z(t)=z_0\cos(\omega_0 t)\), amplitude 5&nbsp;cm.
-        • Lâché de \(z=0\) à \(\dot z_0=0{,}1\)&nbsp;m·s⁻¹ : \(z(t)=\dfrac{\dot z_0}{\omega_0}\sin(\omega_0 t)\),
-        amplitude \(\dfrac{0{,}1}{\sqrt{10}}\approx3{,}2\)&nbsp;cm. Dans les deux cas \(T=2\pi\sqrt{m/k}=2{,}0\)&nbsp;s.</p>
-        <p class="q">9–10) Différence avec l'horizontal</p>
-        <div class="res">Physiquement identique, mais le ressort oscille autour de \(L_{eq}\) (et non \(L_{vide}\)) : le poids allonge l'équilibre de \(\dfrac{mg}{k}\). Si on prenait l'origine à l'attache, un second membre apparaîtrait et les oscillations seraient centrées sur \(L_{eq}\).</div>
+        \[ \ddot z + \omega_0^2\,z = 0 \qquad \omega_0 = \sqrt{\frac{k}{m}} = \sqrt{10} \approx 3{,}16\ \text{rad·s}^{-1} \]
+        \[ z(t) = A\cos\omega_0 t + B\sin\omega_0 t \]
+
+        <p class="q">7–8) Deux jeux de conditions initiales</p>
+        <ul>
+          <li>Étiré de \(z_0 = 5\) cm sans vitesse : \(B = 0\), \(A = z_0\), donc \(z(t) = z_0\cos(\omega_0 t)\). Amplitude 5 cm.</li>
+          <li>Lâché de \(z = 0\) avec \(\dot z_0 = 0{,}1\) m·s\(^{-1}\) : \(A = 0\), \(B = \dot z_0/\omega_0\), donc \(z(t) = \dfrac{\dot z_0}{\omega_0}\sin(\omega_0 t)\). Amplitude \(0{,}1/\sqrt{10} \approx 3{,}2\) cm.</li>
+        </ul>
+        \[ T = 2\pi\sqrt{\frac{m}{k}} = 2\pi\sqrt{\frac{1{,}0}{10}} \approx 2{,}0\ \text{s} \]
+        <div class="res">Amplitudes 5 cm et 3,2 cm ; même période \(T \approx 2{,}0\) s.</div>
+
+        <p class="q">9–10) Différence avec le ressort horizontal</p>
+        <div class="res">Même physique, mais l'oscillation est centrée sur \(L_{eq}\) au lieu de \(L_{vide}\) : le poids décale l'équilibre de \(mg/k\). Avec l'origine à l'attache, un second membre réapparaîtrait.</div>
       </div>
     </div>
 
@@ -612,16 +907,22 @@ window.MathJax = {
       <div class="exo-head">Exercice 6 — Ressort sur plan incliné <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">Ressort \(k\) sur plan incliné d'angle \(\alpha\), masse \(m\).</p>
+
         <p class="q">1) Allongement à l'équilibre</p>
-        <p>Projection du PFD sur le plan (\(x\) le long, vers le bas) à l'équilibre :
-        \(mg\sin\alpha-k(L_{eq}-L_0)=0\Rightarrow\Delta L=L_{eq}-L_0=\dfrac{mg\sin\alpha}{k}\).</p>
-        <p class="q">2–3) Équation et période (origine à l'équilibre)</p>
-        <p>Même astuce qu'au vertical : \(m\ddot x=-kx\Rightarrow\ddot x+\omega_0^2 x=0\), \(\omega_0=\sqrt{k/m}\).
-        La période \(T=2\pi\sqrt{m/k}\) est <b>identique</b> à celle du ressort vertical (l'inclinaison ne change
-        que la position d'équilibre, pas la pulsation).</p>
-        <p class="q">4–5) Résolutions</p>
-        <p>Étiré de \(x_0\) sans vitesse : \(x(t)=x_0\cos(\omega_0 t)\). Pichenette \(v_0\) vers le haut depuis
-        l'équilibre : \(x(t)=-\dfrac{v_0}{\omega_0}\sin(\omega_0 t)\).</p>
+        <p>Axe \(x\) le long du plan, vers le bas. Composante du poids le long du plan : \(mg\sin\alpha\).</p>
+        <div class="rappel"><span class="lab">Rappel · PFD à l'équilibre, projeté sur le plan</span>\[ mg\sin\alpha - k\,(L_{eq} - L_0) = 0 \]</div>
+        <div class="res">\(\Delta L = L_{eq} - L_0 = \dfrac{mg\sin\alpha}{k}\).</div>
+
+        <p class="q">2–3) Équation et période</p>
+        <p>Avec l'origine à l'équilibre, la composante du poids disparaît comme pour le ressort vertical :</p>
+        \[ m\ddot x = -kx \iff \ddot x + \omega_0^2\,x = 0 \qquad \omega_0 = \sqrt{\frac{k}{m}} \]
+        <div class="res">\(T = 2\pi\sqrt{m/k}\), la même qu'à la verticale : l'inclinaison ne change que la position d'équilibre.</div>
+
+        <p class="q">4–5) Deux lancements</p>
+        <ul>
+          <li>Étiré de \(x_0\) sans vitesse : \(x(t) = x_0\cos(\omega_0 t)\).</li>
+          <li>Pichenette \(v_0\) vers le haut depuis l'équilibre (\(\dot x(0) = -v_0\)) : \(x(t) = -\dfrac{v_0}{\omega_0}\sin(\omega_0 t)\).</li>
+        </ul>
       </div>
     </div>
 
@@ -630,15 +931,22 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">\(x(t)=5\,e^{-t/2}[\cos(4t)+0{,}1\sin(4t)]\). Combien d'oscillations avant que
         l'amplitude passe sous 0,5&nbsp;m ? avant −95&nbsp;% ? −99&nbsp;% ?</p>
-        <p>Comme \(B=0{,}1\ll1\), l'amplitude est pilotée par l'enveloppe \(5\,e^{-t/2}\) (\(\tau=2\)&nbsp;s). La
-        pseudo-période vaut \(T=\dfrac{2\pi}{\Omega}=\dfrac{2\pi}{4}\approx1{,}57\)&nbsp;s.</p>
+
+        <p class="q">1) Enveloppe et pseudo-période</p>
+        <p class="etape">Étape 1 : l'enveloppe</p>
+        <p>Le coefficient 0,1 devant le sinus est petit : l'amplitude suit l'enveloppe \(5\,e^{-t/2}\), de constante de temps \(\tau = 2\) s.</p>
+        <p class="etape">Étape 2 : la pseudo-période</p>
+        \[ T = \frac{2\pi}{\Omega} = \frac{2\pi}{4} \approx 1{,}57\ \text{s} \]
+
+        <p class="q">2) Nombre d'oscillations pour chaque seuil</p>
+        <div class="rappel"><span class="lab">Rappel · résoudre une exponentielle</span>\[ e^{-t/\tau} = p \iff t = -\tau\ln p \]</div>
         <div class="overflow"><table>
-          <tr><th>Cible</th><th>Condition</th><th>\(t\)</th><th>\(N=t/T\)</th></tr>
-          <tr><td>amplitude &lt; 0,5&nbsp;m</td><td>\(5e^{-t/2}=0{,}5\)</td><td>\(-2\ln(0{,}1)\approx4{,}6\)&nbsp;s</td><td>≈ 2,9 osc.</td></tr>
-          <tr><td>−95&nbsp;% (reste 5&nbsp;%)</td><td>\(5e^{-t/2}=0{,}05\times5\)</td><td>\(-2\ln(0{,}05)\approx6{,}0\)&nbsp;s</td><td>≈ 3,8 osc.</td></tr>
-          <tr><td>−99&nbsp;% (reste 1&nbsp;%)</td><td>\(5e^{-t/2}=0{,}01\times5\)</td><td>\(-2\ln(0{,}01)\approx9{,}2\)&nbsp;s</td><td>≈ 5,9 osc.</td></tr>
+          <tr><th>Cible</th><th>Condition</th><th>\(t\)</th><th>\(N = t/T\)</th></tr>
+          <tr><td>amplitude &lt; 0,5 m</td><td>\(e^{-t/2} = 0{,}1\)</td><td>\(-2\ln 0{,}1 \approx 4{,}6\) s</td><td>≈ 2,9</td></tr>
+          <tr><td>−95 % (reste 5 %)</td><td>\(e^{-t/2} = 0{,}05\)</td><td>\(-2\ln 0{,}05 \approx 6{,}0\) s</td><td>≈ 3,8</td></tr>
+          <tr><td>−99 % (reste 1 %)</td><td>\(e^{-t/2} = 0{,}01\)</td><td>\(-2\ln 0{,}01 \approx 9{,}2\) s</td><td>≈ 5,9</td></tr>
         </table></div>
-        <div class="note"><span class="lab">À retenir</span> Une exponentielle amortie a perdu ≈ <b>95&nbsp;% à \(3\tau\)</b> et &gt; <b>99&nbsp;% à \(5\tau\)</b>.</div>
+        <div class="res">Environ 3, 4 et 6 oscillations. À retenir : 95 % perdus à \(3\tau\), plus de 99 % à \(5\tau\).</div>
       </div>
     </div>
 
@@ -647,22 +955,34 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">\(m=150\)&nbsp;g, \(k=5{,}00\)&nbsp;N·m⁻¹, frottement fluide \(\lambda\), origine à
         l'équilibre, étiré de \(x_0=10{,}0\)&nbsp;cm sans vitesse.</p>
+
         <p class="q">1–2) PFD et forme canonique</p>
-        <p>Forces selon \(x\) : rappel \(-kx\) et frottement \(-\lambda\dot x\). D'où :</p>
-        \[m\ddot x=-kx-\lambda\dot x\ \Rightarrow\ \ddot x+\frac{\lambda}{m}\dot x+\frac{k}{m}x=0
-        \ \equiv\ \ddot x+\frac{\omega_0}{Q}\dot x+\omega_0^2 x=0\]
-        <p>avec \(\omega_0=\sqrt{k/m}=5{,}77\)&nbsp;rad·s⁻¹ et \(Q=\dfrac{m\omega_0}{\lambda}=\dfrac{\sqrt{km}}{\lambda}\).</p>
-        <p class="q">3) Deux cas selon \(Q\)</p>
-        <p><b>\(\lambda=0{,}08\)&nbsp;kg·s⁻¹ :</b> \(Q=\dfrac{\sqrt{5\times0{,}15}}{0{,}08}\approx10{,}8>\tfrac12\)
-        → <b>pseudo-périodique</b>. \(x(t)=e^{-t/\tau}[A\cos\Omega t+B\sin\Omega t]\), \(\tau=\dfrac{2Q}{\omega_0}\approx3{,}74\)&nbsp;s,
-        \(\Omega=\omega_0\sqrt{1-\tfrac{1}{4Q^2}}\approx5{,}76\)&nbsp;rad·s⁻¹. CI (\(x_0,\dot x(0)=0\)) :
-        \(A=x_0\), \(B=\dfrac{x_0}{\tau\Omega}\), soit :</p>
-        \[x(t)=x_0\,e^{-t/\tau}\left[\cos\Omega t+\frac{1}{\tau\Omega}\sin\Omega t\right]\]
-        <p><b>\(\lambda=3{,}10\)&nbsp;kg·s⁻¹ :</b> \(Q\approx0{,}28<\tfrac12\) → <b>apériodique</b> (pas
-        d'oscillation, retour lent) : \(x(t)=e^{-t/\tau}[A e^{\beta t}+B e^{-\beta t}]\) avec
-        \(\beta=\omega_0\sqrt{\tfrac{1}{4Q^2}-1}\approx8{,}54\)&nbsp;rad·s⁻¹.</p>
-        <p class="q">4) Retour le plus rapide sans oscillation (régime critique \(Q=\tfrac12\))</p>
-        \[\frac12=\frac{\sqrt{km}}{\lambda}\ \Rightarrow\ \lambda=2\sqrt{km}=2\sqrt{5\times0{,}15}\approx1{,}73\ \text{kg·s}^{-1}\]
+        <p class="etape">Étape 1 : forces selon \(x\)</p>
+        <p>Rappel \(-kx\) (origine à l'équilibre) et frottement fluide \(-\lambda\dot x\).</p>
+        \[ m\ddot x = -kx - \lambda\dot x \iff \ddot x + \frac{\lambda}{m}\,\dot x + \frac{k}{m}\,x = 0 \]
+        <p class="etape">Étape 2 : identification</p>
+        <div class="rappel"><span class="lab">Rappel · forme canonique d'un oscillateur amorti</span>\[ \ddot x + \frac{\omega_0}{Q}\,\dot x + \omega_0^2\,x = 0 \]</div>
+        \[ \omega_0 = \sqrt{\frac{k}{m}} = \sqrt{\frac{5{,}00}{0{,}150}} \approx 5{,}77\ \text{rad·s}^{-1} \qquad Q = \frac{m\,\omega_0}{\lambda} = \frac{\sqrt{km}}{\lambda} \]
+
+        <p class="q">3) Deux valeurs de \(\lambda\)</p>
+        <div class="rappel"><span class="lab">Rappel · les trois régimes</span>\(Q > \tfrac12\) : pseudo-périodique. \(Q = \tfrac12\) : critique. \(Q &lt; \tfrac12\) : apériodique.</div>
+        <p class="etape">Étape 1 : \(\lambda = 0{,}08\) kg·s\(^{-1}\)</p>
+        \[ Q = \frac{\sqrt{5 \times 0{,}15}}{0{,}08} \approx 10{,}8 > \tfrac12 \]
+        <p>Régime pseudo-périodique :</p>
+        \[ \tau = \frac{2Q}{\omega_0} \approx 3{,}75\ \text{s} \qquad \Omega = \omega_0\sqrt{1 - \frac{1}{4Q^2}} \approx 5{,}77\ \text{rad·s}^{-1} \]
+        \[ x(t) = e^{-t/\tau}\left[A\cos\Omega t + B\sin\Omega t\right] \]
+        <p>Avec \(x(0) = x_0\) et \(\dot x(0) = 0\) : \(A = x_0\) et \(-A/\tau + B\Omega = 0\), donc \(B = \dfrac{x_0}{\tau\Omega}\).</p>
+        <div class="res">\(x(t) = x_0\,e^{-t/\tau}\left[\cos\Omega t + \dfrac{1}{\tau\Omega}\sin\Omega t\right]\), avec \(\tau \approx 3{,}75\) s et \(\Omega \approx 5{,}77\) rad·s\(^{-1}\).</div>
+        <p class="etape">Étape 2 : \(\lambda = 3{,}10\) kg·s\(^{-1}\)</p>
+        \[ Q = \frac{0{,}866}{3{,}10} \approx 0{,}28 &lt; \tfrac12 \]
+        <p>Régime apériodique (pas d'oscillation) :</p>
+        \[ x(t) = e^{-t/\tau}\left[A\,e^{\beta t} + B\,e^{-\beta t}\right] \qquad \beta = \omega_0\sqrt{\frac{1}{4Q^2} - 1} \approx 8{,}5\ \text{rad·s}^{-1} \]
+        <div class="res">\(Q \approx 0{,}28\) : retour lent à l'équilibre, sans oscillation.</div>
+
+        <p class="q">4) Retour le plus rapide sans oscillation</p>
+        <p>C'est le régime critique, \(Q = \tfrac12\) :</p>
+        \[ \frac{\sqrt{km}}{\lambda} = \frac12 \iff \lambda = 2\sqrt{km} = 2\sqrt{5 \times 0{,}15} \approx 1{,}73\ \text{kg·s}^{-1} \]
+        <div class="res">\(\lambda_c \approx 1{,}73\) kg·s\(^{-1}\).</div>
       </div>
     </div>
 
@@ -673,16 +993,28 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Caisse poussée par \(\vec F\), frottement solide. \(m=20\)&nbsp;kg, elle bouge dès
         \(F=30\)&nbsp;N (force horizontale).</p>
+
         <p class="q">1) Force horizontale, caisse immobile</p>
-        <p>Équilibre : \(f=F\), \(N=mg\). Or \(f\le\mu_s N\), donc \(\mu_s\ge\dfrac{F}{mg}\).</p>
+        <div class="rappel"><span class="lab">Rappel · frottement solide statique</span>\[ f \le \mu_s\,N \]</div>
+        <p>Équilibre : \(f = F\) et \(N = mg\). La condition d'adhérence donne :</p>
+        <div class="res">\(\mu_s \ge \dfrac{F}{mg}\).</div>
+
         <p class="q">2) Coefficient statique</p>
-        <p>Au démarrage, égalité : \(\mu_s=\dfrac{F}{mg}=\dfrac{30}{20\times10}=0{,}15\).</p>
-        <p class="q">3) Force oblique à \(\alpha\) vers le haut (\(F=30\)&nbsp;N)</p>
-        <p>La composante verticale \(F\sin\alpha\) « soulage » le sol : \(N=mg-F\sin\alpha\) (frottement réduit),
-        mais la traction horizontale \(F\cos\alpha\) diminue aussi. La caisse reste immobile tant que
-        \(f<\mu_s N\), soit :</p>
-        \[\cos\alpha+\mu_s\sin\alpha<1\]
-        <div class="res">Elle bouge quand \(\cos\alpha+\mu_s\sin\alpha=1\). Incliner la force réduit la traction utile mais aussi le frottement : selon \(\alpha\), l'incliner peut aider ou nuire (le graphe donne l'angle de démarrage).</div>
+        <p>À la limite du démarrage, il y a égalité :</p>
+        \[ \mu_s = \frac{F}{mg} = \frac{30}{20 \times 10} = 0{,}15 \]
+        <div class="res">\(\mu_s = 0{,}15\).</div>
+
+        <p class="q">3) Force oblique, inclinée de \(\alpha\) vers le haut</p>
+        <p class="etape">Étape 1 : projections</p>
+        <ul>
+          <li>Verticale : \(N + F\sin\alpha - mg = 0\), donc \(N = mg - F\sin\alpha\). Le sol est soulagé.</li>
+          <li>Horizontale : \(F\cos\alpha - f = 0\). La traction utile diminue.</li>
+        </ul>
+        <p class="etape">Étape 2 : condition pour rester immobile</p>
+        \[ F\cos\alpha &lt; \mu_s\left(mg - F\sin\alpha\right) \]
+        <p>Avec \(F = 30\) N \(= \mu_s\,mg\), on divise par \(F\) :</p>
+        \[ \cos\alpha + \mu_s\sin\alpha &lt; 1 \]
+        <div class="res">La caisse démarre quand \(\cos\alpha + \mu_s\sin\alpha \ge 1\). Incliner la force réduit la traction mais aussi le frottement : selon \(\alpha\), cela aide ou non (le graphe donne l'angle de démarrage).</div>
       </div>
     </div>
 
@@ -690,20 +1022,30 @@ window.MathJax = {
       <div class="exo-head">Exercice 8 — Parabole de sûreté <span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <p class="enonce">Projectile à \(v_0\) fixé, angle \(\theta\in[0,\pi]\). Trouver la zone atteignable.</p>
+
         <p class="q">1–2) Équations horaires et trajectoire</p>
-        \[x=v_0\cos\theta\,t,\quad y=-\tfrac12 gt^2+v_0\sin\theta\,t,\quad
-        y(x)=-\frac{g}{2v_0^2\cos^2\theta}x^2+\tan\theta\,x\ (\text{parabole})\]
+        <div class="rappel"><span class="lab">Rappel · projectile sans frottement</span>\[ \ddot x = 0 \qquad \ddot y = -g \]</div>
+        \[ x = v_0\cos\theta\,t \qquad y = -\tfrac12 g\,t^2 + v_0\sin\theta\,t \]
+        <div class="res">\(y(x) = -\dfrac{g}{2v_0^2\cos^2\theta}\,x^2 + \tan\theta\,x\) : une parabole.</div>
+
         <p class="q">3–4) Altitude et portée maximales</p>
-        <p>\(y_{max}=\dfrac{v_0^2\sin^2\theta}{2g}\), max pour \(\theta_1=\dfrac{\pi}{2}\) (tir vertical).
-        \(x_{max}=\dfrac{v_0^2}{g}\sin(2\theta)\), max pour \(\theta_2=\dfrac{\pi}{4}\).</p>
-        <p class="q">5–6) Zone atteignable et courbe de sûreté</p>
-        <p>Un point \(M_0(x_0,y_0)\) est atteint si l'équation \(y_0=y(x_0)\) a une solution en \(\theta\). En
-        utilisant \(\dfrac{1}{\cos^2\theta}=1+\tan^2\theta\), elle devient du 2ᵈ degré en \(\tan\theta\) :</p>
-        \[\tan^2\theta-\frac{2v_0^2}{gx_0}\tan\theta+\left(1+\frac{2v_0^2 y_0}{gx_0^2}\right)=0\]
-        <p>Discriminant \(\Delta>0\) : deux angles possibles ; \(\Delta<0\) : point inatteignable. La frontière
-        \(\Delta=0\) donne la <b>parabole de sûreté</b> :</p>
-        \[\boxed{\ y_0=\frac{v_0^2}{2g}-\frac{g\,x_0^2}{2v_0^2}\ }\]
-        <div class="res">Tout point <b>au-dessus</b> de cette parabole est hors d'atteinte quelle que soit la visée. En dessous, deux trajectoires (tendue / en cloche) l'atteignent.</div>
+        <ul>
+          <li>Altitude maximale : \(y_{max} = \dfrac{v_0^2\sin^2\theta}{2g}\), la plus grande pour \(\theta_1 = \pi/2\) (tir vertical).</li>
+          <li>Portée : \(x_{max} = \dfrac{v_0^2}{g}\sin 2\theta\), la plus grande pour \(\theta_2 = \pi/4\).</li>
+        </ul>
+
+        <p class="q">5–6) Zone atteignable</p>
+        <p class="etape">Étape 1 : équation en \(\tan\theta\)</p>
+        <p>Le point \(M_0(x_0, y_0)\) est atteint si \(y_0 = y(x_0)\) admet une solution \(\theta\).</p>
+        <div class="rappel"><span class="lab">Rappel · trigonométrie</span>\[ \frac{1}{\cos^2\theta} = 1 + \tan^2\theta \]</div>
+        \[ \tan^2\theta - \frac{2v_0^2}{g\,x_0}\tan\theta + \left(1 + \frac{2v_0^2\,y_0}{g\,x_0^2}\right) = 0 \]
+        <p class="etape">Étape 2 : discriminant</p>
+        <ul>
+          <li>\(\Delta > 0\) : deux angles possibles (tir tendu et tir en cloche).</li>
+          <li>\(\Delta &lt; 0\) : point hors d'atteinte.</li>
+        </ul>
+        <p class="etape">Étape 3 : frontière \(\Delta = 0\)</p>
+        <div class="res">\[ y_0 = \frac{v_0^2}{2g} - \frac{g\,x_0^2}{2v_0^2} \]C'est la parabole de sûreté : tout point au-dessus est hors d'atteinte, quel que soit l'angle.</div>
       </div>
     </div>
 
@@ -712,21 +1054,34 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Bille sphérique lâchée sans vitesse dans l'huile, frottement \(-\lambda\vec v\),
         poussée d'Archimède, \(\rho_L\) (liquide), \(\rho_B\) (bille).</p>
+
         <p class="q">2) Mise en équation</p>
-        <p>Axe \(Oz\) vers le bas. Forces : poids \(\rho_B Vg\), frottement \(-\lambda\dot z\), Archimède
-        \(-\rho_L Vg\). PFD (\(m=\rho_B V\)) :</p>
-        \[\rho_B V\ddot z=\rho_B Vg-\lambda\dot z-\rho_L Vg\ \Rightarrow\
-        \ddot z+\frac{1}{\tau}\dot z=gD,\quad D=1-\frac{\rho_L}{\rho_B},\ \tau=\frac{m}{\lambda}\]
+        <p class="etape">Étape 1 : forces (axe \(Oz\) vers le bas)</p>
+        <ul>
+          <li>Poids : \(+\rho_B V g\).</li>
+          <li>Frottement : \(-\lambda\dot z\).</li>
+          <li>Poussée d'Archimède : \(-\rho_L V g\).</li>
+        </ul>
+        <div class="rappel"><span class="lab">Rappel · poussée d'Archimède</span>\[ \vec\Pi = -\rho_{fluide}\,V_{immergé}\,\vec g \]</div>
+        <p class="etape">Étape 2 : PFD avec \(m = \rho_B V\)</p>
+        \[ \rho_B V\ddot z = \rho_B V g - \lambda\dot z - \rho_L V g \]
+        <div class="res">\(\ddot z + \dfrac{1}{\tau}\,\dot z = g\,D\), avec \(D = 1 - \dfrac{\rho_L}{\rho_B}\) et \(\tau = \dfrac{m}{\lambda}\).</div>
+
         <p class="q">3) Résolution et vitesse limite</p>
-        <p>Ordre 1 en \(\dot z\). Solution particulière \(v_{lim}=\tau g D\), homogène \(Ae^{-t/\tau}\).
-        CI \(\dot z(0)=0\) ⇒ \(A=-v_{lim}\) :</p>
-        \[\dot z(t)=v_{lim}\left(1-e^{-t/\tau}\right),\qquad v_{lim}=\tau g D=\frac{mg}{\lambda}\left(1-\frac{\rho_L}{\rho_B}\right)\]
+        <div class="rappel"><span class="lab">Rappel · équation du 1er ordre</span>\[ \dot v + \frac{v}{\tau} = \text{cte} \;\Longrightarrow\; v(t) = v_\infty + A\,e^{-t/\tau} \]</div>
+        <p>Solution particulière : \(v_{lim} = \tau g D\). Avec \(\dot z(0) = 0\) : \(A = -v_{lim}\).</p>
+        <div class="res">\(\dot z(t) = v_{lim}\left(1 - e^{-t/\tau}\right)\), avec \(v_{lim} = \dfrac{mg}{\lambda}\left(1 - \dfrac{\rho_L}{\rho_B}\right)\).</div>
+
         <p class="q">4–6) Régimes et écart relatif</p>
-        <p>Régime transitoire (exponentielle) puis permanent (\(v_{lim}\)) après ~\(5\tau\). La tangente à
-        l'origine coupe \(v_{lim}\) en \(t=\tau\). Écart relatif \(\varepsilon(t)=e^{-t/\tau}\) :
-        \(\varepsilon(\tau)=37\%\), \(\varepsilon(3\tau)=5\%\), \(\varepsilon(5\tau)=0{,}7\%\).</p>
+        <ul>
+          <li>Régime transitoire (exponentielle), puis régime permanent (\(v_{lim}\)) après environ \(5\tau\).</li>
+          <li>La tangente à l'origine coupe l'asymptote \(v_{lim}\) en \(t = \tau\).</li>
+          <li>Écart relatif \(\varepsilon(t) = e^{-t/\tau}\) : 37 % à \(\tau\), 5 % à \(3\tau\), 0,7 % à \(5\tau\).</li>
+        </ul>
+
         <p class="q">7) Équation horaire</p>
-        \[z(t)=v_{lim}\left[t+\tau e^{-t/\tau}\right]-\tau v_{lim}\]
+        <p>On intègre \(\dot z\) avec \(z(0) = 0\) :</p>
+        <div class="res">\(z(t) = v_{lim}\left[t + \tau\,e^{-t/\tau}\right] - \tau\,v_{lim}\).</div>
       </div>
     </div>
 
@@ -735,18 +1090,33 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Tir à \(v_0,\theta\), frottement \(-\lambda\vec v\). \(\tau=\dfrac{m}{\lambda}\),
         \(v_{lim}=\dfrac{mg}{\lambda}=\tau g\).</p>
-        <p class="q">1) Équations horaires (PFD projeté, chaque axe est un ordre 1)</p>
-        <p>\(\ddot x+\dfrac{1}{\tau}\dot x=0\) et \(\ddot y+\dfrac{1}{\tau}\dot y=-g\). Avec les CI :</p>
-        \[\dot x=v_0\cos\theta\,e^{-t/\tau},\qquad \dot y=[v_{lim}+v_0\sin\theta]e^{-t/\tau}-v_{lim}\]
-        \[x(t)=\tau v_0\cos\theta\,(1-e^{-t/\tau}),\quad
-        y(t)=-\tau[v_{lim}+v_0\sin\theta](e^{-t/\tau}-1)-v_{lim}\,t\]
-        <p class="q">2) Abscisse de l'apogée (\(\dot y=0\))</p>
-        \[x_{apogée}=\tau v_0^2\,\frac{\sin\theta\cos\theta}{v_{lim}+v_0\sin\theta}\]
-        <p class="q">3) Limites en \(t\to\infty\)</p>
-        <p>\(x_\infty=\tau v_0\cos\theta\) (asymptote verticale) et \(y_\infty=-\infty\). En pratique <b>aucune</b>
-        n'est atteinte : le projectile touche le sol avant.</p>
+
+        <p class="q">1) Équations horaires</p>
+        <p class="etape">Étape 1 : PFD projeté</p>
+        <div class="rappel"><span class="lab">Rappel · PFD avec frottement fluide</span>\[ m\,\vec a = m\vec g - \lambda\vec v \]</div>
+        \[ \ddot x + \frac{1}{\tau}\,\dot x = 0 \qquad \ddot y + \frac{1}{\tau}\,\dot y = -g \]
+        <p>Chaque axe est une équation du 1er ordre en vitesse.</p>
+        <p class="etape">Étape 2 : vitesses</p>
+        <p>Avec \(\dot x(0) = v_0\cos\theta\) et \(\dot y(0) = v_0\sin\theta\) :</p>
+        \[ \dot x = v_0\cos\theta\,e^{-t/\tau} \qquad \dot y = \left(v_{lim} + v_0\sin\theta\right)e^{-t/\tau} - v_{lim} \]
+        <p class="etape">Étape 3 : positions (départ en O)</p>
+        <div class="res">\[ x(t) = \tau v_0\cos\theta\left(1 - e^{-t/\tau}\right) \qquad y(t) = \tau\left(v_{lim} + v_0\sin\theta\right)\left(1 - e^{-t/\tau}\right) - v_{lim}\,t \]</div>
+
+        <p class="q">2) Abscisse de l'apogée</p>
+        <p>À l'apogée, \(\dot y = 0\) :</p>
+        \[ e^{-t_A/\tau} = \frac{v_{lim}}{v_{lim} + v_0\sin\theta} \]
+        <p>On reporte dans \(x(t)\) :</p>
+        <div class="res">\[ x_{apogée} = \tau v_0^2\,\frac{\sin\theta\cos\theta}{v_{lim} + v_0\sin\theta} \]</div>
+
+        <p class="q">3) Limites quand \(t \to \infty\)</p>
+        <ul>
+          <li>\(x_\infty = \tau v_0\cos\theta\) : asymptote verticale.</li>
+          <li>\(y \to -\infty\).</li>
+        </ul>
+        <div class="res">En pratique, aucune n'est atteinte : le projectile touche le sol avant.</div>
+
         <p class="q">4) Allure</p>
-        <div class="res">Trajectoire <b>dissymétrique</b> (contrairement à la parabole sans frottement) : la descente est plus raide, le projectile tend vers une chute verticale le long de l'asymptote \(x=x_\infty\).</div>
+        <div class="res">Trajectoire dissymétrique : la descente est plus raide que la montée, et le projectile tend vers une chute verticale le long de \(x = x_\infty\).</div>
       </div>
     </div>
 
@@ -754,18 +1124,28 @@ window.MathJax = {
       <div class="exo-head">EC 20 — Glissement avec frottements solides <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">Palet sur planche d'inclinaison \(\theta\) réglable, frottement solide (\(\mu_s,\mu_D\)).</p>
+
         <p class="q">1) Angle critique de mise en mouvement</p>
-        <p>Statique : \(f=mg\sin\theta\), \(N=mg\cos\theta\). Condition \(f<\mu_s N\) :
-        \(\tan\theta<\mu_s\). Donc l'angle critique vérifie \(\boxed{\mu_s=\tan\theta_c}\).</p>
-        <p class="q">2) Équation du mouvement (à \(\theta=\theta_c\))</p>
-        <p>En mouvement, \(f=\mu_D N=\mu_D mg\cos\theta_c\). Sur \(x\) :
-        \(m\ddot x=mg\sin\theta_c-\mu_D mg\cos\theta_c\). En factorisant \(\cos\theta_c\) et via \(\tan\theta_c=\mu_s\) :</p>
-        \[\ddot x=g\cos\theta_c\,(\mu_s-\mu_D)\]
-        <p class="q">3) Vitesse, position, arrêt ?</p>
-        <p>\(\dot x=g\cos\theta_c(\mu_s-\mu_D)t\), \(x=\tfrac12 g\cos\theta_c(\mu_s-\mu_D)t^2\). Accélération
-        constante ⇒ le palet <b>ne s'arrête jamais</b> spontanément.</p>
-        <p class="q">4) \(\mu_s>\mu_D\)</p>
-        <div class="res">La vitesse doit être positive (le palet descend, ne remonte pas), donc \(\mu_s-\mu_D>0\) : cohérent avec le cours (\(\mu_s>\mu_D\)).</div>
+        <p class="etape">Étape 1 : équilibre</p>
+        <p>Axe \(x\) le long du plan vers le bas :</p>
+        \[ f = mg\sin\theta \qquad N = mg\cos\theta \]
+        <p class="etape">Étape 2 : condition d'adhérence</p>
+        <div class="rappel"><span class="lab">Rappel · frottement solide statique</span>\[ f \le \mu_s\,N \]</div>
+        \[ mg\sin\theta \le \mu_s\,mg\cos\theta \iff \tan\theta \le \mu_s \]
+        <div class="res">Le palet démarre à l'angle critique \(\theta_c\) tel que \(\tan\theta_c = \mu_s\).</div>
+
+        <p class="q">2) Équation du mouvement à \(\theta = \theta_c\)</p>
+        <div class="rappel"><span class="lab">Rappel · frottement solide en glissement</span>\[ f = \mu_D\,N \]</div>
+        \[ m\ddot x = mg\sin\theta_c - \mu_D\,mg\cos\theta_c \]
+        <p>On factorise par \(\cos\theta_c\) et on utilise \(\tan\theta_c = \mu_s\) :</p>
+        <div class="res">\(\ddot x = g\cos\theta_c\,(\mu_s - \mu_D)\).</div>
+
+        <p class="q">3) Vitesse et position</p>
+        \[ \dot x = g\cos\theta_c\,(\mu_s - \mu_D)\,t \qquad x = \tfrac12\,g\cos\theta_c\,(\mu_s - \mu_D)\,t^2 \]
+        <div class="res">Accélération constante et positive : le palet ne s'arrête pas tout seul.</div>
+
+        <p class="q">4) Pourquoi \(\mu_s > \mu_D\) ?</p>
+        <div class="res">Le palet descend, donc \(\dot x > 0\), ce qui impose \(\mu_s - \mu_D > 0\). C'est cohérent avec le cours.</div>
       </div>
     </div>
 
@@ -774,20 +1154,35 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">4 systèmes ressort (\(k\)) + amortisseur (\(\lambda\)), masse \(M\) répartie. Châssis
         abaissé de \(h\) puis relâché.</p>
-        <p class="q">1) Équilibre</p>
-        <p>Les 4 ressorts portent \(M\) : \(L_e=L_0-\dfrac{Mg}{4k}\), garde au sol \(z_e=R+L_e=R+L_0-\dfrac{Mg}{4k}\).</p>
+
+        <p class="q">1) Position d'équilibre</p>
+        <p>Les quatre ressorts portent ensemble le poids \(Mg\) ; chacun est comprimé de \(\dfrac{Mg}{4k}\) :</p>
+        \[ L_e = L_0 - \frac{Mg}{4k} \]
+        <div class="res">Garde au sol : \(z_e = R + L_e = R + L_0 - \dfrac{Mg}{4k}\).</div>
+
         <p class="q">2a) Équation canonique</p>
-        <p>PFD \(M\ddot z=-Mg-4k(L-L_0)-4\lambda\dot z\) (avec \(L=z-R\)) :</p>
-        \[\ddot z+\frac{\omega_0}{Q}\dot z+\omega_0^2 z=\omega_0^2 z_e,\quad
-        \omega_0=2\sqrt{\frac{k}{M}},\ Q=\frac{\sqrt{kM}}{2\lambda}\]
-        <p class="q">2b) Réglage confort (régime critique)</p>
-        <p>Retour le plus rapide sans osciller ⇒ \(Q=\tfrac12\Rightarrow\lambda=\sqrt{kM}\).</p>
-        <p class="q">2c) Solution (critique)</p>
-        <p>\(z(t)=z_e-h\,e^{-\omega_0 t}(\omega_0 t+1)\) (avec CI \(z(0)=z_e-h,\dot z(0)=0\)).</p>
-        <p class="q">3) Voiture chargée (\(M'=1580\) au lieu de 1100&nbsp;kg)</p>
-        <p>\(Q'=\dfrac12\sqrt{\dfrac{M'}{M}}=\dfrac12\sqrt{\dfrac{1580}{1100}}\approx0{,}60>\tfrac12\) :
-        régime <b>pseudo-périodique</b>, \(z(t)=z_e-h\,e^{-t/\tau}\big[\cos\Omega t+\tfrac{1}{\Omega\tau}\sin\Omega t\big]\).</p>
-        <div class="res">Chargée, la voiture oscille légèrement et revient moins vite : <b>moins confortable</b>. Mais \(Q'\) reste proche de ½ (peu d'oscillations).</div>
+        <div class="rappel"><span class="lab">Rappel · PFD</span>\[ m\,\vec a = \sum \vec F_{ext} \]</div>
+        <p>Avec \(L = z - R\), quatre ressorts et quatre amortisseurs :</p>
+        \[ M\ddot z = -Mg - 4k\,(z - R - L_0) - 4\lambda\dot z \]
+        <div class="rappel"><span class="lab">Rappel · forme canonique</span>\[ \ddot z + \frac{\omega_0}{Q}\,\dot z + \omega_0^2 z = \omega_0^2\,z_e \]</div>
+        <div class="res">\(\omega_0 = 2\sqrt{\dfrac{k}{M}}\) et \(Q = \dfrac{\sqrt{kM}}{2\lambda}\).</div>
+
+        <p class="q">2b) Réglage pour le confort</p>
+        <p>Retour le plus rapide sans oscillation : régime critique, \(Q = \tfrac12\).</p>
+        \[ \frac{\sqrt{kM}}{2\lambda} = \frac12 \iff \lambda = \sqrt{kM} \]
+        <div class="res">\(\lambda = \sqrt{kM}\).</div>
+
+        <p class="q">2c) Solution en régime critique</p>
+        <div class="rappel"><span class="lab">Rappel · régime critique</span>\[ z(t) = z_e + (A + Bt)\,e^{-\omega_0 t} \]</div>
+        <p>Avec \(z(0) = z_e - h\) et \(\dot z(0) = 0\) : \(A = -h\), puis \(B - \omega_0 A = 0\), donc \(B = -h\omega_0\).</p>
+        <div class="res">\(z(t) = z_e - h\,(1 + \omega_0 t)\,e^{-\omega_0 t}\).</div>
+
+        <p class="q">3) Voiture chargée (\(M' = 1580\) kg au lieu de 1100 kg)</p>
+        <p>\(\lambda = \sqrt{kM}\) ne change pas, mais \(Q\) dépend de la masse :</p>
+        \[ Q' = \frac{\sqrt{kM'}}{2\sqrt{kM}} = \frac12\sqrt{\frac{M'}{M}} = \frac12\sqrt{\frac{1580}{1100}} \approx 0{,}60 > \tfrac12 \]
+        <p>Régime pseudo-périodique :</p>
+        \[ z(t) = z_e - h\,e^{-t/\tau}\left[\cos\Omega t + \frac{1}{\Omega\tau}\sin\Omega t\right] \]
+        <div class="res">Chargée, la voiture oscille un peu avant de se stabiliser : moins confortable. \(Q'\) reste proche de \(\tfrac12\), les oscillations sont faibles.</div>
       </div>
     </div>
 
@@ -796,20 +1191,32 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Enfant glissant sans frottement depuis le sommet d'un igloo hémisphérique de rayon \(R\).
         Trouver l'angle où il décolle.</p>
-        <p class="q">2–3) Forces et PFD (polaires)</p>
-        <p>Poids \(-mg\sin\theta\,\vec u_r-mg\cos\theta\,\vec u_\theta\), réaction \(N\vec u_r\) (\(\theta\)
-        mesuré depuis l'horizontale). \(r=R\) :</p>
-        \[\begin{cases}-mR\dot\theta^2=-mg\sin\theta+N &(\vec u_r)\\ mR\ddot\theta=-mg\cos\theta &(\vec u_\theta)\end{cases}\]
-        <p class="q">4) Intégrale première (× \(\dot\theta\))</p>
-        <p>\(mR\dot\theta\ddot\theta=-mg\dot\theta\cos\theta\) se reconnaît comme
-        \(\tfrac{d}{dt}(\tfrac12 R\dot\theta^2)=-g\tfrac{d}{dt}\sin\theta\). En intégrant (CI \(\dot\theta=0\) à
-        \(\theta=\tfrac{\pi}{2}\)) : \(R\dot\theta^2=2g(1-\sin\theta)\).</p>
+
+        <p class="q">2–3) Forces et PFD</p>
+        <p class="etape">Étape 1 : coordonnées polaires</p>
+        <p>Centre O de l'igloo, \(r = R\) constant, \(\theta\) mesuré depuis l'horizontale (\(\theta = \pi/2\) au sommet).</p>
+        <div class="rappel"><span class="lab">Rappel · accélération pour \(r = R\) constant</span>\[ \vec a = -R\dot\theta^2\,\vec u_r + R\ddot\theta\,\vec u_\theta \]</div>
+        <p class="etape">Étape 2 : forces</p>
+        \[ \vec P = -mg\sin\theta\,\vec u_r - mg\cos\theta\,\vec u_\theta \qquad \vec N = N\,\vec u_r \]
+        <p class="etape">Étape 3 : PFD projeté</p>
+        <div class="res">\[ \begin{cases} -mR\dot\theta^2 = -mg\sin\theta + N & (\vec u_r) \\ mR\ddot\theta = -mg\cos\theta & (\vec u_\theta) \end{cases} \]</div>
+
+        <p class="q">4) Intégrale première</p>
+        <p class="etape">Étape 1 : multiplier par \(\dot\theta\)</p>
+        \[ R\,\dot\theta\ddot\theta = -g\,\dot\theta\cos\theta \iff \frac{d}{dt}\left(\tfrac12 R\dot\theta^2\right) = -g\,\frac{d}{dt}\left(\sin\theta\right) \]
+        <p class="etape">Étape 2 : intégrer</p>
+        <p>Au départ, \(\theta = \pi/2\) et \(\dot\theta = 0\) :</p>
+        <div class="res">\(R\dot\theta^2 = 2g\,(1 - \sin\theta)\).</div>
+
         <p class="q">5–6) Réaction et décollage</p>
-        <p>En injectant dans l'équation radiale : \(N=3mg\left(\sin\theta-\dfrac{2}{3}\right)\). Le décollage se
-        produit quand \(N=0\) :</p>
-        \[\sin\theta_d=\frac{2}{3}\ \Rightarrow\ \theta_d=\arcsin\!\left(\frac{2}{3}\right)\approx41{,}8°\]
-        <p class="q">7) Suite</p>
-        <div class="res">Après décollage, plus aucun contact : l'enfant suit une <b>parabole</b> de chute libre.</div>
+        <p>On reporte dans l'équation radiale :</p>
+        \[ N = mg\sin\theta - mR\dot\theta^2 = mg\sin\theta - 2mg\,(1 - \sin\theta) = 3mg\left(\sin\theta - \frac23\right) \]
+        <p>L'enfant décolle quand \(N\) s'annule :</p>
+        \[ \sin\theta_d = \frac23 \iff \theta_d \approx 41{,}8° \]
+        <div class="res">Décollage à \(\theta_d = \arcsin(2/3) \approx 41{,}8°\) au-dessus de l'horizontale.</div>
+
+        <p class="q">7) Suite du mouvement</p>
+        <div class="res">Plus de contact : seul le poids agit, l'enfant suit une parabole de chute libre.</div>
       </div>
     </div>
 
@@ -817,17 +1224,30 @@ window.MathJax = {
       <div class="exo-head">Exercice 9 — Anneau glissant sur cerceau <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">Anneau sur cerceau vertical de rayon \(R\), sans frottement, lâché de \(\theta_0\ll1\).</p>
+
         <p class="q">2–3) PFD et petits angles</p>
-        <p>Poids \(mg\cos\theta\,\vec u_r-mg\sin\theta\,\vec u_\theta\), réaction \(-N\vec u_r\). L'équation
-        orthoradiale donne \(\ddot\theta+\dfrac{g}{R}\theta=0\) (petits angles) : oscillateur, \(\omega_0=\sqrt{g/R}\),
-        \(\theta(t)=\theta_0\cos(\omega_0 t)\).</p>
+        <p class="etape">Étape 1 : forces (polaires, \(r = R\))</p>
+        \[ \vec P = mg\cos\theta\,\vec u_r - mg\sin\theta\,\vec u_\theta \qquad \vec N = -N\,\vec u_r \]
+        <div class="rappel"><span class="lab">Rappel · accélération pour \(r = R\) constant</span>\[ \vec a = -R\dot\theta^2\,\vec u_r + R\ddot\theta\,\vec u_\theta \]</div>
+        <p class="etape">Étape 2 : projection orthoradiale</p>
+        \[ mR\ddot\theta = -mg\sin\theta \]
+        <p class="etape">Étape 3 : petits angles (\(\sin\theta \approx \theta\))</p>
+        \[ \ddot\theta + \frac{g}{R}\,\theta = 0 \qquad \omega_0 = \sqrt{\frac{g}{R}} \]
+        <div class="res">\(\theta(t) = \theta_0\cos(\omega_0 t)\).</div>
+
         <p class="q">4) Vitesses angulaires</p>
-        <p>\(\dot\theta=-\theta_0\omega_0\sin(\omega_0 t)\) : nulle en haut (\(\theta=\theta_0\)), maximale en bas
-        \(|\dot\theta_{bas}|=\theta_0\omega_0\).</p>
-        <p class="q">5) Réaction</p>
-        <p>Équation radiale \(-mR\dot\theta^2=mg\cos\theta-N\Rightarrow N=mg\cos\theta+mR\dot\theta^2\).
-        En haut (\(\dot\theta=0\)) : \(N=mg\cos\theta_0\). En bas (\(\theta=0\)) :
-        \(N=mg+mR\theta_0^2\omega_0^2=mg(1+\theta_0^2)\) (car \(R\omega_0^2=g\)).</p>
+        \[ \dot\theta = -\theta_0\,\omega_0\sin(\omega_0 t) \]
+        <div class="res">\(\dot\theta = 0\) aux extrémités (\(\theta = \pm\theta_0\)), et \(|\dot\theta|_{max} = \theta_0\,\omega_0\) en bas.</div>
+
+        <p class="q">5) Réaction du cerceau</p>
+        <p class="etape">Étape 1 : projection radiale</p>
+        \[ -mR\dot\theta^2 = mg\cos\theta - N \iff N = mg\cos\theta + mR\dot\theta^2 \]
+        <p class="etape">Étape 2 : aux deux positions</p>
+        <ul>
+          <li>En haut de l'oscillation (\(\dot\theta = 0\)) : \(N = mg\cos\theta_0\).</li>
+          <li>En bas (\(\theta = 0\)) : \(N = mg + mR\theta_0^2\omega_0^2 = mg\,(1 + \theta_0^2)\), car \(R\omega_0^2 = g\).</li>
+        </ul>
+        <div class="res">\(N_{haut} = mg\cos\theta_0\) et \(N_{bas} = mg\,(1 + \theta_0^2)\).</div>
       </div>
     </div>
 
@@ -835,12 +1255,16 @@ window.MathJax = {
       <div class="exo-head">Exercice 10 — Looping de pendule <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">Pendule simple (longueur \(L\), masse \(m\)) faisant un tour complet.</p>
-        <p class="q">2–3) Tension</p>
-        <p>Si \(T=0\), le fil ne tire plus : le pendule tomberait. Pour un looping, \(T>0\) partout. Équation
-        radiale : \(-mL\dot\theta^2=mg\cos\theta-T\Rightarrow T=mL\dot\theta^2+mg\cos\theta\).</p>
-        <p class="q">4) Condition en haut (\(\theta=\pi\))</p>
-        <p>Il faut \(T\ge0\) : \(mL\dot\theta^2\ge mg\Rightarrow\dot\theta\ge\sqrt{\dfrac{g}{L}}\) au sommet.</p>
-        <div class="res">La masse ne tombe pas si sa vitesse angulaire en haut vérifie \(\dot\theta\ge\sqrt{g/L}\) (l'accélération centripète compense au moins le poids).</div>
+
+        <p class="q">2–3) Rôle de la tension</p>
+        <p>Un fil ne peut que tirer : \(T \ge 0\). Si \(T\) s'annule, le fil se détend et la masse quitte le cercle.</p>
+        <div class="rappel"><span class="lab">Rappel · PFD radial pour \(r = L\)</span>\[ -mL\dot\theta^2 = mg\cos\theta - T \]</div>
+        <div class="res">\(T = mL\dot\theta^2 + mg\cos\theta\).</div>
+
+        <p class="q">4) Condition au sommet (\(\theta = \pi\))</p>
+        <p>\(\cos\pi = -1\), donc \(T = mL\dot\theta^2 - mg\). On impose \(T \ge 0\) :</p>
+        \[ mL\dot\theta^2 \ge mg \iff \dot\theta \ge \sqrt{\frac{g}{L}} \]
+        <div class="res">Le looping réussit si \(\dot\theta_{sommet} \ge \sqrt{g/L}\) : l'accélération centripète doit au moins égaler \(g\).</div>
       </div>
     </div>
 
@@ -849,18 +1273,23 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Bille dans un tube horizontal tournant à \(\omega\) fixe, lâchée sans vitesse à \(r_0\),
         sans frottement.</p>
+
         <p class="q">1–2) Cinématique et forces</p>
-        <p>Cylindriques, \(z=0\), \(\theta=\omega t\), \(\ddot\theta=0\). \(\vec a=(\ddot r-r\omega^2)\vec u_r+2\dot r\omega\,\vec u_\theta\).
-        Forces : poids \(-mg\vec u_z\), réaction du tube \(R_\theta\vec u_\theta+R_z\vec u_z\) (aucune composante radiale : pas de frottement).</p>
+        <div class="rappel"><span class="lab">Rappel · accélération en cylindriques avec \(\dot\theta = \omega\) constant</span>\[ \vec a = \left(\ddot r - r\omega^2\right)\vec u_r + 2\dot r\omega\,\vec u_\theta \]</div>
+        <ul>
+          <li>Poids : \(-mg\,\vec u_z\).</li>
+          <li>Réaction du tube : \(R_\theta\,\vec u_\theta + R_z\,\vec u_z\). Aucune composante radiale : pas de frottement.</li>
+        </ul>
+
         <p class="q">3) PFD et équation du mouvement</p>
-        \[\begin{cases}m(\ddot r-r\omega^2)=0\\ 2m\dot r\omega=R_\theta\\ 0=R_z-mg\end{cases}\ \Rightarrow\
-        \ddot r-\omega^2 r=0\]
-        <p>Le signe « − » (au lieu de « + ») est normal : la solution <b>diverge</b> (la bille s'éloigne
-        indéfiniment du centre), conformément à l'intuition.</p>
-        <p class="q">4–5) Résolution</p>
-        <p>\(r=Ae^{\omega t}+Be^{-\omega t}\), CI \(r(0)=r_0,\dot r(0)=0\) ⇒ \(A=B=\dfrac{r_0}{2}\), soit
-        \(r(t)=r_0\cosh(\omega t)\). Comme \(\theta\) et \(r\) croissent, la trajectoire est une <b>spirale</b>
-        divergente.</p>
+        \[ \begin{cases} m\left(\ddot r - r\omega^2\right) = 0 \\ 2m\dot r\omega = R_\theta \\ 0 = R_z - mg \end{cases} \]
+        <div class="res">\(\ddot r - \omega^2 r = 0\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> Le signe « − » n'est pas une erreur : la solution n'oscille pas, elle diverge. La bille s'éloigne du centre.</div>
+
+        <p class="q">4–5) Résolution et trajectoire</p>
+        <div class="rappel"><span class="lab">Rappel · solution de \(\ddot r - \omega^2 r = 0\)</span>\[ r(t) = A\,e^{\omega t} + B\,e^{-\omega t} \]</div>
+        <p>Avec \(r(0) = r_0\) et \(\dot r(0) = 0\) : \(A + B = r_0\) et \(A - B = 0\), donc \(A = B = r_0/2\).</p>
+        <div class="res">\(r(t) = r_0\cosh(\omega t)\). Comme \(r\) et \(\theta\) croissent, la trajectoire est une spirale divergente.</div>
       </div>
     </div>
 
@@ -870,10 +1299,16 @@ window.MathJax = {
       <div class="exo-head">Exercice 12 — Pourquoi Hergé n'a rien compris (poulie fixe) <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">Tintin tente de soulever une poutre avec une poulie fixe. Pourquoi est-ce vain ?</p>
-        <p>Une poulie fixe ne fait que <b>rediriger</b> la force (elle ne la multiplie pas). Système = Tintin (au
-        sol) : poids \(-mg\vec u_z\), tension \(T\vec u_z\), réaction \(N\vec u_z\). Équilibre :
-        \(N=mg-T\).</p>
-        <div class="res">S'il tire fort (\(T\) grand), c'est <b>lui</b> qui décolle (\(N\to0\)) avant de soulever la poutre s'il est plus léger qu'elle. La poulie fixe n'aide pas à vaincre un poids supérieur au sien.</div>
+
+        <p class="q">1) Pourquoi la poulie fixe ne sert à rien ici</p>
+        <p class="etape">Étape 1 : rôle de la poulie fixe</p>
+        <p>Elle redirige la force sans la multiplier : Tintin doit tirer avec une tension égale au poids de la poutre.</p>
+        <p class="etape">Étape 2 : équilibre de Tintin</p>
+        <p>Forces : poids \(-mg\,\vec u_z\), tension de la corde \(T\,\vec u_z\), réaction du sol \(N\,\vec u_z\).</p>
+        \[ N + T - mg = 0 \iff N = mg - T \]
+        <p class="etape">Étape 3 : conclusion</p>
+        <p>\(N\) ne peut pas être négatif : Tintin ne peut pas tirer plus que son propre poids. Dès que \(T = mg\), il décolle.</p>
+        <div class="res">Si la poutre est plus lourde que Tintin, c'est lui qui monte : la poulie fixe ne permet pas de soulever plus que son poids.</div>
       </div>
     </div>
 
@@ -881,11 +1316,22 @@ window.MathJax = {
       <div class="exo-head">Exercice 13 — Accrochage d'une pancarte <span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">Pancarte \(m=60\)&nbsp;kg, câble + barre (masses négligeables), angle câble/barre 30°.</p>
-        <p>Équilibre : câble en tension \(T\) le long du fil, barre en compression \(F\) horizontale.</p>
-        \[\begin{cases}F-T\cos30°=0\\ -mg+T\sin30°=0\end{cases}\ \Rightarrow\
-        T=\frac{mg}{\sin30°}=\frac{600}{0{,}5}=1200\ \text{N}\]
-        \[F=T\cos30°=1200\times\frac{\sqrt3}{2}\approx1040\ \text{N}\]
-        <div class="res">Tension du câble \(T=1200\)&nbsp;N, force dans la barre \(F\approx1040\)&nbsp;N (compression).</div>
+
+        <p class="q">1) Tension du câble et force dans la barre</p>
+        <p class="etape">Étape 1 : forces au point d'accroche</p>
+        <ul>
+          <li>Poids de la pancarte : \(mg = 600\) N, vers le bas.</li>
+          <li>Câble : tension \(T\), le long du câble, à 30° de la barre.</li>
+          <li>Barre : force \(F\) horizontale (barre comprimée).</li>
+        </ul>
+        <p class="etape">Étape 2 : PFD à l'équilibre</p>
+        <div class="rappel"><span class="lab">Rappel · PFD à l'équilibre</span>\[ \sum \vec F = \vec 0 \]</div>
+        \[ \begin{cases} F - T\cos 30° = 0 \\ T\sin 30° - mg = 0 \end{cases} \]
+        <p class="etape">Étape 3 : résolution</p>
+        \[ T = \frac{mg}{\sin 30°} = \frac{600}{0{,}5} = 1200\ \text{N} \]
+        \[ F = T\cos 30° = 1200 \times \frac{\sqrt3}{2} \approx 1040\ \text{N} \]
+        <div class="res">\(T = 1200\) N dans le câble, \(F \approx 1040\) N dans la barre (compression).</div>
+        <p>Remarque : le câble porte deux fois le poids de la pancarte, à cause du petit angle.</p>
       </div>
     </div>
 
@@ -894,12 +1340,23 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Sphère \(m=45\)&nbsp;g, charge \(+q\), écartée de \(\theta=36°\) par une charge \(-q\) à
         \(d=22\)&nbsp;cm (même hauteur), \(\dfrac{1}{4\pi\varepsilon_0}=9\times10^9\).</p>
-        <p>Équilibre : poids, tension \(-T\sin\theta\,\vec u_x+T\cos\theta\,\vec u_z\), force de Coulomb
-        (attractive, horizontale) \(F=\dfrac{q^2}{4\pi\varepsilon_0 d^2}\).</p>
-        \[\begin{cases}-T\sin\theta+F=0\\ -mg+T\cos\theta=0\end{cases}\ \Rightarrow\
-        T=\frac{mg}{\cos\theta}=\frac{0{,}045\times10}{\cos36°}\approx0{,}56\ \text{N}\]
-        \[q=\sqrt{4\pi\varepsilon_0\,d^2\,T\sin\theta}=\sqrt{\frac{d^2 T\sin\theta}{9\times10^9}}\approx1{,}3\times10^{-6}\ \text{C}\]
-        <div class="res">\(q\approx1{,}3\)&nbsp;µC.</div>
+
+        <p class="q">1) Charge \(q\)</p>
+        <p class="etape">Étape 1 : forces</p>
+        <ul>
+          <li>Poids : \(-mg\,\vec u_z\).</li>
+          <li>Tension : \(-T\sin\theta\,\vec u_x + T\cos\theta\,\vec u_z\).</li>
+          <li>Force de Coulomb, attractive et horizontale : \(F\,\vec u_x\).</li>
+        </ul>
+        <div class="rappel"><span class="lab">Rappel · loi de Coulomb</span>\[ F = \frac{1}{4\pi\varepsilon_0}\,\frac{|q_1 q_2|}{d^2} \]</div>
+        <p class="etape">Étape 2 : PFD à l'équilibre</p>
+        \[ \begin{cases} -T\sin\theta + F = 0 \\ T\cos\theta - mg = 0 \end{cases} \]
+        <p class="etape">Étape 3 : tension</p>
+        \[ T = \frac{mg}{\cos\theta} = \frac{0{,}045 \times 10}{\cos 36°} \approx 0{,}56\ \text{N} \]
+        <p class="etape">Étape 4 : charge</p>
+        \[ \frac{q^2}{4\pi\varepsilon_0\,d^2} = T\sin\theta \iff q = \sqrt{\frac{d^2\,T\sin\theta}{9\times10^{9}}} \]
+        \[ q = \sqrt{\frac{0{,}22^2 \times 0{,}56 \times \sin 36°}{9\times10^{9}}} \approx 1{,}3\times10^{-6}\ \text{C} \]
+        <div class="res">\(q \approx 1{,}3\) µC.</div>
       </div>
     </div>
 
@@ -908,11 +1365,21 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Masse sur un plateau, reliée à un ressort vertical (raideur \(k\), longueur à vide \(L_0\))
         fixé en haut à la hauteur \(h\). Équilibre.</p>
-        <p>Forces : poids \(-mg\vec u_z\), ressort \(+k(L-L_0)\vec u_z\) (ici \(L=h\)), réaction plateau \(N\vec u_z\).
-        Équilibre : \(N=mg-k(h-L_0)\).</p>
-        <p>Condition \(N>0\) (la masse repose bien sur le plateau) :</p>
-        \[h<\frac{mg}{k}+L_0=h_{max}\]
-        <div class="res">Si \(h>h_{max}\), le ressort tire plus que le poids : \(N\) deviendrait négatif (impossible), la masse <b>décolle</b> du plateau.</div>
+
+        <p class="q">1) Réaction du plateau</p>
+        <p class="etape">Étape 1 : forces sur la masse</p>
+        <ul>
+          <li>Poids : \(-mg\,\vec u_z\).</li>
+          <li>Ressort étiré (longueur \(L = h\)) : \(+k(h - L_0)\,\vec u_z\).</li>
+          <li>Réaction du plateau : \(N\,\vec u_z\).</li>
+        </ul>
+        <p class="etape">Étape 2 : équilibre</p>
+        \[ N + k\,(h - L_0) - mg = 0 \iff N = mg - k\,(h - L_0) \]
+
+        <p class="q">2) Condition pour que la masse reste posée</p>
+        <p>Un plateau ne peut que pousser : \(N > 0\).</p>
+        \[ mg - k\,(h - L_0) > 0 \iff h &lt; L_0 + \frac{mg}{k} = h_{max} \]
+        <div class="res">Si \(h > h_{max}\), le ressort tire plus que le poids : la masse décolle du plateau.</div>
       </div>
     </div>
 
@@ -921,10 +1388,20 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Pierre \(m=10\)&nbsp;kg, \(M_{Terre}=6\times10^{24}\)&nbsp;kg. Force Terre→pierre ? Déplacement
         de la Terre en 1&nbsp;s de chute ?</p>
-        <p>Force Terre→pierre : \(mg=100\)&nbsp;N. Par la 3ᵉ loi, la pierre attire la Terre avec 100&nbsp;N. PFD sur
-        la Terre : \(Ma=mg\Rightarrow a=\dfrac{m}{M}g\). Déplacement en 1&nbsp;s :</p>
-        \[x=\frac{1}{2}\frac{m}{M}g\,t^2=\frac{1}{2}\frac{100}{6\times10^{24}}\times1^2\approx8\times10^{-24}\ \text{m}\]
-        <div class="res">La Terre se déplace de \(\sim10^{-23}\)&nbsp;m : totalement immesurable, mais non nul — lancer une pierre fait « osciller » la Terre !</div>
+
+        <p class="q">1) Force exercée par la Terre sur la pierre</p>
+        \[ P = mg = 10 \times 10 = 100\ \text{N} \]
+
+        <p class="q">2) Force exercée par la pierre sur la Terre</p>
+        <div class="rappel"><span class="lab">Rappel · 3e loi de Newton</span>\[ \vec F_{pierre/Terre} = -\vec F_{Terre/pierre} \]</div>
+        <div class="res">La pierre attire la Terre avec 100 N.</div>
+
+        <p class="q">3) Déplacement de la Terre en 1 s</p>
+        <p class="etape">Étape 1 : PFD sur la Terre</p>
+        \[ M\,a = mg \iff a = \frac{m}{M}\,g \]
+        <p class="etape">Étape 2 : déplacement depuis le repos</p>
+        \[ x = \tfrac12\,a\,t^2 = \frac12 \times \frac{100}{6\times10^{24}} \times 1^2 \approx 8\times10^{-24}\ \text{m} \]
+        <div class="res">La Terre se déplace d'environ \(10^{-23}\) m : immesurable, mais pas nul.</div>
       </div>
     </div>
 
@@ -933,19 +1410,29 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">\(m=100\)&nbsp;g, \(\lambda=5{,}00\times10^{-2}\)&nbsp;kg·s⁻¹, \(L=50{,}0\)&nbsp;cm, lâché
         de 30° sans vitesse, petits angles, \(g=9{,}81\).</p>
-        <p class="q">Équation et solution</p>
-        <p>PFD orthoradial : \(mL\ddot\theta=-mg\sin\theta-\lambda L\dot\theta\). Petits angles :</p>
-        \[\ddot\theta+\frac{\lambda}{m}\dot\theta+\frac{g}{L}\theta=0
-        \equiv\ddot\theta+\frac{\omega_0}{Q}\dot\theta+\omega_0^2\theta=0,\quad
-        \omega_0=\sqrt{\tfrac{g}{L}}=4{,}43\ \text{rad·s}^{-1},\ Q=\frac{m}{\lambda}\omega_0\approx8{,}88\]
-        <p>\(Q>\tfrac12\) ⇒ pseudo-périodique : \(\theta(t)=\theta_0 e^{-t/\tau}\big[\cos\Omega t+\tfrac{1}{\tau\Omega}\sin\Omega t\big]\),
-        \(\tau=\tfrac{2Q}{\omega_0}\approx4{,}0\)&nbsp;s, \(\Omega\approx\omega_0\) (car \(Q>2\)),
-        \(T=\tfrac{2\pi}{\Omega}\approx1{,}42\)&nbsp;s.</p>
-        <p class="q">Nombre d'oscillations avant \(<5°\)</p>
-        <p>L'amplitude \(\theta_0 e^{-t/\tau}=5°\) ⇒ \(t=-\tau\ln\!\left(\tfrac{5}{30}\right)\approx7{,}2\)&nbsp;s,
-        soit \(N=\tfrac{t}{T}\approx5\)&nbsp;oscillations.</p>
-        <p class="q">Altitude</p>
-        <p>Géométrie : \(z(t)=L[1-\cos\theta(t)]\).</p>
+
+        <p class="q">1) Équation du mouvement</p>
+        <p class="etape">Étape 1 : PFD orthoradial</p>
+        <p>Le frottement \(-\lambda\vec v\) a pour composante orthoradiale \(-\lambda L\dot\theta\) :</p>
+        \[ mL\ddot\theta = -mg\sin\theta - \lambda L\dot\theta \]
+        <p class="etape">Étape 2 : petits angles</p>
+        \[ \ddot\theta + \frac{\lambda}{m}\,\dot\theta + \frac{g}{L}\,\theta = 0 \]
+        <div class="rappel"><span class="lab">Rappel · forme canonique</span>\[ \ddot\theta + \frac{\omega_0}{Q}\,\dot\theta + \omega_0^2\,\theta = 0 \]</div>
+        \[ \omega_0 = \sqrt{\frac{g}{L}} = \sqrt{\frac{9{,}81}{0{,}500}} \approx 4{,}43\ \text{rad·s}^{-1} \qquad Q = \frac{m\,\omega_0}{\lambda} = \frac{0{,}1 \times 4{,}43}{0{,}05} \approx 8{,}86 \]
+
+        <p class="q">2) Solution</p>
+        <p>\(Q > \tfrac12\) : régime pseudo-périodique.</p>
+        \[ \tau = \frac{2Q}{\omega_0} = 4{,}0\ \text{s} \qquad \Omega = \omega_0\sqrt{1 - \frac{1}{4Q^2}} \approx 4{,}42\ \text{rad·s}^{-1} \qquad T = \frac{2\pi}{\Omega} \approx 1{,}42\ \text{s} \]
+        <div class="res">\(\theta(t) = \theta_0\,e^{-t/\tau}\left[\cos\Omega t + \dfrac{1}{\tau\Omega}\sin\Omega t\right]\), avec \(\theta_0 = 30°\).</div>
+
+        <p class="q">3) Nombre d'oscillations avant que l'amplitude passe sous 5°</p>
+        \[ 30°\,e^{-t/\tau} = 5° \iff t = -\tau\ln\frac{5}{30} \approx 7{,}2\ \text{s} \]
+        \[ N = \frac{t}{T} = \frac{7{,}2}{1{,}42} \approx 5 \]
+        <div class="res">Environ 5 oscillations.</div>
+
+        <p class="q">4) Altitude de la masse</p>
+        <p>La masse est à \(L\cos\theta\) sous le point d'attache ; on mesure l'altitude depuis le point le plus bas :</p>
+        <div class="res">\(z(t) = L\left[1 - \cos\theta(t)\right]\).</div>
       </div>
     </div>
 
@@ -954,17 +1441,28 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">\(L_{vide}=5{,}0\)&nbsp;cm, \(k=140\)&nbsp;N·m⁻¹, \(m=1{,}4\)&nbsp;kg, \(\lambda=7{,}0\)&nbsp;N·s·m⁻¹.
         Deux CI. Période, équation horaire, oscillations avant amplitude 1&nbsp;mm.</p>
-        <p class="q">Équation (origine à l'équilibre)</p>
-        <p>Comme au ressort vertical non amorti, le poids disparaît : \(\ddot z+\dfrac{\omega_0}{Q}\dot z+\omega_0^2 z=0\),
-        \(\omega_0=\sqrt{k/m}=10\)&nbsp;rad·s⁻¹, \(Q=\dfrac{\sqrt{km}}{\lambda}=2>\tfrac12\) → pseudo-périodique.
-        \(\tau=\tfrac{2Q}{\omega_0}=0{,}4\)&nbsp;s, \(\Omega=\omega_0\sqrt{1-\tfrac{1}{4Q^2}}\approx9{,}7\)&nbsp;rad·s⁻¹,
-        \(T=\tfrac{2\pi}{\Omega}\approx0{,}65\)&nbsp;s (identique pour les deux CI).</p>
-        <p class="q">Cas 1 — étiré de 10&nbsp;cm sans vitesse</p>
-        <p>\(z(t)=z_0 e^{-t/\tau}\big[\cos\Omega t+\tfrac{1}{\Omega\tau}\sin\Omega t\big]\). Amplitude ≈ \(z_0 e^{-t/\tau}\)
-        ; \(=1\)&nbsp;mm en \(t=-\tau\ln(10^{-3}/10^{-1})\approx1{,}8\)&nbsp;s ⇒ \(N\approx2{,}8\)&nbsp;oscillations.</p>
-        <p class="q">Cas 2 — lâché de l'équilibre à \(\dot z_0=0{,}1\)&nbsp;m·s⁻¹</p>
-        <p>\(z(t)=\dfrac{\dot z_0}{\Omega}e^{-t/\tau}\sin\Omega t\). Amplitude \(=1\)&nbsp;mm en
-        \(t=-\tau\ln(10^{-3}/10^{-2})\approx0{,}92\)&nbsp;s ⇒ \(N\approx1{,}4\)&nbsp;oscillation.</p>
+
+        <p class="q">1) Équation et période</p>
+        <p class="etape">Étape 1 : équation</p>
+        <p>Origine à l'équilibre : le poids disparaît comme pour le ressort vertical sans frottement.</p>
+        <div class="rappel"><span class="lab">Rappel · forme canonique</span>\[ \ddot z + \frac{\omega_0}{Q}\,\dot z + \omega_0^2\,z = 0 \qquad \omega_0 = \sqrt{\frac{k}{m}} \qquad Q = \frac{\sqrt{km}}{\lambda} \]</div>
+        \[ \omega_0 = \sqrt{\frac{140}{1{,}4}} = 10\ \text{rad·s}^{-1} \qquad Q = \frac{\sqrt{140 \times 1{,}4}}{7{,}0} = 2 \]
+        <p class="etape">Étape 2 : pseudo-période</p>
+        <p>\(Q > \tfrac12\) : régime pseudo-périodique.</p>
+        \[ \tau = \frac{2Q}{\omega_0} = 0{,}4\ \text{s} \qquad \Omega = \omega_0\sqrt{1 - \frac{1}{4Q^2}} \approx 9{,}7\ \text{rad·s}^{-1} \qquad T = \frac{2\pi}{\Omega} \approx 0{,}65\ \text{s} \]
+        <div class="res">\(T \approx 0{,}65\) s, la même pour les deux conditions initiales.</div>
+
+        <p class="q">2) Cas 1 — étiré de 10 cm sans vitesse</p>
+        <div class="res">\(z(t) = z_0\,e^{-t/\tau}\left[\cos\Omega t + \dfrac{1}{\Omega\tau}\sin\Omega t\right]\), avec \(z_0 = 0{,}10\) m.</div>
+        <p>L'amplitude vaut environ \(z_0\,e^{-t/\tau}\). Elle atteint 1 mm quand :</p>
+        \[ t = -\tau\ln\frac{10^{-3}}{10^{-1}} \approx 1{,}8\ \text{s} \qquad N = \frac{1{,}8}{0{,}65} \approx 2{,}8 \]
+        <div class="res">Environ 3 oscillations.</div>
+
+        <p class="q">3) Cas 2 — lâché de l'équilibre à \(\dot z_0 = 0{,}1\) m·s\(^{-1}\)</p>
+        <div class="res">\(z(t) = \dfrac{\dot z_0}{\Omega}\,e^{-t/\tau}\sin\Omega t\).</div>
+        <p>Amplitude initiale : \(\dot z_0/\Omega \approx 1\) cm. Elle atteint 1 mm quand :</p>
+        \[ t = -\tau\ln\frac{10^{-3}}{10^{-2}} \approx 0{,}92\ \text{s} \qquad N = \frac{0{,}92}{0{,}65} \approx 1{,}4 \]
+        <div class="res">Environ 1,4 oscillation.</div>
       </div>
     </div>
 
@@ -973,10 +1471,19 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Ressort avec masse : on donne \(x_0\) <em>et</em> \(v_0\) « qui se compensent ». L'amplitude
         est-elle plus grande ou plus petite que sans vitesse initiale ?</p>
-        <p>On écrit \(z(t)=A\cos(\omega_0 t+\varphi)\), \(\dot z=-A\omega_0\sin(\omega_0 t+\varphi)\). CI :
-        \(A\cos\varphi=z_0\), \(A\sin\varphi=-\dfrac{v_0}{\omega_0}\). Somme des carrés :</p>
-        \[A=\sqrt{z_0^2+\left(\frac{v_0}{\omega_0}\right)^2}\]
-        <div class="res">L'amplitude ne dépend <b>pas du signe</b> de \(v_0\) : toute vitesse initiale (dans un sens ou l'autre) <b>augmente</b> l'amplitude par rapport à \(A=|z_0|\) sans vitesse. Interprétation énergétique : on ajoute de l'énergie cinétique à l'énergie potentielle, quel que soit le sens.</div>
+
+        <p class="q">1) Amplitude avec \(z_0\) et \(v_0\)</p>
+        <p class="etape">Étape 1 : forme de la solution</p>
+        <div class="rappel"><span class="lab">Rappel · oscillateur harmonique</span>\[ z(t) = A\cos(\omega_0 t + \varphi) \qquad \dot z(t) = -A\,\omega_0\sin(\omega_0 t + \varphi) \]</div>
+        <p class="etape">Étape 2 : conditions initiales</p>
+        \[ A\cos\varphi = z_0 \qquad A\sin\varphi = -\frac{v_0}{\omega_0} \]
+        <p class="etape">Étape 3 : somme des carrés</p>
+        \[ A^2\left(\cos^2\varphi + \sin^2\varphi\right) = z_0^2 + \left(\frac{v_0}{\omega_0}\right)^2 \]
+        <div class="res">\[ A = \sqrt{z_0^2 + \left(\frac{v_0}{\omega_0}\right)^2} \ge |z_0| \]</div>
+
+        <p class="q">2) Conclusion</p>
+        <div class="res">L'amplitude ne dépend pas du signe de \(v_0\) : toute vitesse initiale l'augmente. On ajoute de l'énergie cinétique à l'énergie du ressort, dans un sens comme dans l'autre.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Lancer la masse vers l'équilibre ne « compense » rien : elle dépasse l'équilibre et va plus loin de l'autre côté.</div>
       </div>
     </div>
 
@@ -985,15 +1492,26 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Pendule conique (longueur \(L\), masse \(m\)), angle \(\alpha\) avec la verticale (notation,
         pas donnée). Équations horaires, tension, vitesse angulaire limite.</p>
-        <p class="q">PFD (cylindriques, \(\dot\theta=\omega\) cte)</p>
-        \[\begin{cases}m(\ddot r-r\omega^2)=-T\sin\alpha\\ 2m\dot r\omega=0\\ m\ddot z=T\cos\alpha-mg\end{cases}\quad\text{et }L=\sqrt{r^2+z^2}\]
-        <p>(2) ⇒ \(\dot r=0\Rightarrow r=R\) cte : <b>circulaire uniforme</b>, \(z=\sqrt{L^2-R^2}\) cte.</p>
-        <p class="q">Tension et angle</p>
-        <p>De (1)+(3) avec \(R=L\sin\alpha\) : \(T=mL\omega^2\), puis \(\cos\alpha=\dfrac{g}{L\omega^2}\).</p>
-        <p class="q">Vitesse angulaire limite</p>
-        <p>Comme \(\cos\alpha<1\) : \(\dfrac{g}{L\omega^2}<1\Rightarrow\omega>\sqrt{\dfrac{g}{L}}=\omega_{lim}\).
-        En dessous, le pendule reste vertical (\(\alpha=0\)).</p>
-        \[R=L\sqrt{1-\frac{g^2}{L^2\omega^4}}\qquad(\omega\to\infty\Rightarrow R\to L,\text{ fil horizontal})\]
+
+        <p class="q">1) PFD et nature du mouvement</p>
+        <div class="rappel"><span class="lab">Rappel · accélération en cylindriques avec \(\dot\theta = \omega\) constant</span>\[ \vec a = \left(\ddot r - r\omega^2\right)\vec u_r + 2\dot r\omega\,\vec u_\theta + \ddot z\,\vec u_z \]</div>
+        \[ \begin{cases} m\left(\ddot r - r\omega^2\right) = -T\sin\alpha & (1) \\ 2m\dot r\omega = 0 & (2) \\ m\ddot z = T\cos\alpha - mg & (3) \end{cases} \qquad L = \sqrt{r^2 + z^2} \]
+        <p>(2) donne \(\dot r = 0\) : \(r = R\) constant, donc \(z = \sqrt{L^2 - R^2}\) constant aussi.</p>
+        <div class="res">Mouvement circulaire uniforme dans un plan horizontal.</div>
+
+        <p class="q">2) Tension et angle</p>
+        <p class="etape">Étape 1 : équation (1) avec \(R = L\sin\alpha\)</p>
+        \[ -mL\sin\alpha\,\omega^2 = -T\sin\alpha \iff T = mL\omega^2 \]
+        <p class="etape">Étape 2 : équation (3) avec \(\ddot z = 0\)</p>
+        \[ T\cos\alpha = mg \iff \cos\alpha = \frac{g}{L\omega^2} \]
+        <div class="res">\(T = mL\omega^2\) et \(\cos\alpha = \dfrac{g}{L\omega^2}\).</div>
+
+        <p class="q">3) Vitesse angulaire limite</p>
+        <p>Il faut \(\cos\alpha &lt; 1\) :</p>
+        \[ \frac{g}{L\omega^2} &lt; 1 \iff \omega > \sqrt{\frac{g}{L}} = \omega_{lim} \]
+        <p>En dessous, le pendule reste vertical (\(\alpha = 0\)). Le rayon vaut :</p>
+        \[ R = L\sin\alpha = L\sqrt{1 - \frac{g^2}{L^2\omega^4}} \]
+        <div class="res">\(\omega_{lim} = \sqrt{g/L}\). Quand \(\omega \to \infty\), \(R \to L\) : le fil tend vers l'horizontale sans l'atteindre.</div>
       </div>
     </div>
 
@@ -1002,17 +1520,25 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Flèche : \(H_F=1{,}8\)&nbsp;m, \(x_F=0\), \(v_0=10\)&nbsp;m/s, \(\alpha=45°\). Singe : \(d=3{,}0\)&nbsp;m,
         lâché sans vitesse de \(H_S=5{,}0\)&nbsp;m. \(g=10\). Touché si croisement à moins de 0,1&nbsp;s d'écart.</p>
-        <p class="q">Trajectoires</p>
-        <p>Flèche : \(x_F=v_0\cos\alpha\,t\), \(y_F=-\tfrac12 gt^2+v_0\sin\alpha\,t+H_F\). Singe :
-        \(x_S=d\), \(y_S=-\tfrac12 gt^2+H_S\).</p>
-        <p class="q">La flèche atteint l'abscisse du singe</p>
-        <p>\(t=\dfrac{d}{v_0\cos\alpha}=\dfrac{3}{10\cos45°}\approx0{,}42\)&nbsp;s ; à cet instant
-        \(y_F\approx3{,}9\)&nbsp;m. Le singe est alors à \(y_S=-\tfrac12\times10\times0{,}42^2+5\approx4{,}1\)&nbsp;m
-        (20&nbsp;cm au-dessus).</p>
-        <p class="q">Écart temporel au croisement</p>
-        <p>Le singe passe par la hauteur 3,9&nbsp;m à \(t_S=\sqrt{\dfrac{2(H_S-3{,}9)}{g}}\approx0{,}47\)&nbsp;s.
-        Écart avec la flèche : \(|0{,}47-0{,}42|=0{,}05\)&nbsp;s \(<0{,}1\)&nbsp;s.</p>
-        <div class="warnbox"><span class="lab">Verdict</span> Les deux se croisent à moins de 0,1&nbsp;s : <b>le singe est touché, il ne survit pas</b>. (C'est le classique « chasseur et le singe » : viser directement la cible qui tombe fonctionne, car flèche et singe subissent la même chute \(-\tfrac12 gt^2\).)</div>
+
+        <p class="q">1) Équations horaires</p>
+        <div class="rappel"><span class="lab">Rappel · chute libre</span>\[ \ddot x = 0 \qquad \ddot y = -g \]</div>
+        <ul>
+          <li>Flèche : \(x_F = v_0\cos\alpha\,t\) et \(y_F = H_F + v_0\sin\alpha\,t - \tfrac12 g\,t^2\).</li>
+          <li>Singe : \(x_S = d\) et \(y_S = H_S - \tfrac12 g\,t^2\).</li>
+        </ul>
+
+        <p class="q">2) La flèche arrive à l'abscisse du singe</p>
+        \[ t = \frac{d}{v_0\cos\alpha} = \frac{3{,}0}{10\cos 45°} \approx 0{,}42\ \text{s} \]
+        \[ y_F = 1{,}8 + 10 \times 0{,}707 \times 0{,}42 - 5 \times 0{,}42^2 \approx 3{,}9\ \text{m} \qquad y_S = 5{,}0 - 5 \times 0{,}42^2 \approx 4{,}1\ \text{m} \]
+        <p>À cet instant, le singe est 20 cm au-dessus de la flèche.</p>
+
+        <p class="q">3) Écart de temps au croisement</p>
+        <p>Le singe passe à la hauteur 3,9 m à l'instant :</p>
+        \[ t_S = \sqrt{\frac{2\,(H_S - 3{,}9)}{g}} = \sqrt{\frac{2 \times 1{,}1}{10}} \approx 0{,}47\ \text{s} \]
+        \[ |t_S - t| = |0{,}47 - 0{,}42| \approx 0{,}05\ \text{s} &lt; 0{,}1\ \text{s} \]
+        <div class="res">Le singe est touché.</div>
+        <p>Explication : flèche et singe tombent de la même quantité \(\tfrac12 g t^2\). Viser une cible qui se lâche au moment du tir fonctionne (problème classique du « chasseur et du singe »).</p>
       </div>
     </div>
 

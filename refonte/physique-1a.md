@@ -8,8 +8,8 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 | Page | Cartes | État |
 |---|---|---|
 | cinematique.html | 39 | fait |
-| dynamique.html | 46 | en cours |
-| electro-stationnaire.html | 35 | à faire |
+| dynamique.html | 46 | fait |
+| electro-stationnaire.html | 35 | en cours |
 | electro-transitoire.html | 18 | à faire |
 | electro-2nd-ordre.html | 19 | à faire |
 | filtrage.html | 38 | à faire |
@@ -30,3 +30,8 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 - Coquilles du corrigé papier signalées et conservées (EC 9, Ex 7, EC 11).
 - `t<t_I` brut dans une formule (EC 16) supprimé.
 
+### dynamique.html — fait
+- 46 cartes réécrites (3 créés + 43 TD) ; ✏️ retirés des titres.
+- Erreur corrigée : EC 4, pour m3 = 40 kg, sin α1 = 1475/800 ≈ 1,84 (et non 2,2) → warnbox ; conclusion inchangée.
+- Ajouts : EC 15, valeur numérique L_eq = 1,1 m ; EC 23, Q ≈ 8,86 (au lieu de 8,88, arrondi).
+- Cartes sans questions numérotées (EC 13, EC 16, Ex 12 à 16, Ex 18) : questions numérotées ajoutées après l'énoncé.
