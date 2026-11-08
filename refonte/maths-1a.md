@@ -19,7 +19,7 @@ Conventions retenues :
 | applications | fait | 3 créés + 14 TD. Aucune erreur de résultat. Exo C : le `.q` révélait la formule, remplacé ; Ex 13 c) : branche \(x<-1\) traitée explicitement ; Ex 14 a) : ajout de \(f^{-1}\) explicite (vérifiée). |
 | nombres-reels | fait | 3 créés + 15 TD. Aucune erreur de résultat (systèmes Ex 14 et tableau Ex 13 revérifiés). Ex 6, 9, 15 : `.q` ajouté. Ex 12-13 : justification par étapes avant le tableau. Remarque : déséquilibre `<p>` préexistant dans la fiche mémo / le cours (non touchés). |
 | sommes-produits | fait | 3 créés + 12 TD, toutes les formules fermées revérifiées (SymPy, n = 1..8) : aucune erreur. Plusieurs `.q` (Ex 4, 7, 8, 10, 11) contenaient le calcul ou le résultat : énoncé seul gardé dans le `.q`. `.enonce` court ajouté (consigne générale) aux exercices de TD qui n'en avaient pas. Ex 6 b) : preuve par regroupement de paires (plus de formule admise). |
-| trigonometrie-fonctions | à faire | |
+| trigonometrie-fonctions | fait | 3 créés + 12 TD. Aucune erreur de résultat (équations Ex 1 et inéquations Ex 2 revérifiées). `.q` qui contenaient la formule ou la valeur (Ex 1 b-c, 3, 4) nettoyés. Ex 9 a) : cas « f impaire, g quelconque » ajouté. `.enonce` court ajouté aux exercices sans énoncé. |
 | suites-reelles | à faire | |
 | limites-fonctions | à faire | |
 | continuite | à faire | |

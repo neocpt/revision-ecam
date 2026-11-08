@@ -127,10 +127,22 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice A — Équation \(a\cos x+b\sin x\) (forme harmonique)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Résoudre dans \(\mathbb R\) : \(\cos x-\sqrt3\,\sin x=1\).</div>
-        <p>On met sous forme \(R\cos(x+\varphi)\). Ici \(R=\sqrt{1^2+(\sqrt3)^2}=2\) :</p>
-        \[ \cos x-\sqrt3\sin x=2\Big(\tfrac12\cos x-\tfrac{\sqrt3}2\sin x\Big)=2\big(\cos\tfrac\pi3\cos x-\sin\tfrac\pi3\sin x\big)=2\cos\!\Big(x+\tfrac\pi3\Big). \]
-        <p>L'équation devient \(\cos\!\big(x+\tfrac\pi3\big)=\tfrac12=\cos\tfrac\pi3\), donc \(x+\tfrac\pi3\equiv\pm\tfrac\pi3\,[2\pi]\).</p>
-        <div class="res">\(x\equiv 0\,[2\pi]\) ou \(x\equiv -\tfrac{2\pi}3\,[2\pi]\), i.e. \(S=\{2k\pi\}\cup\{-\tfrac{2\pi}3+2k\pi\mid k\in\mathbb Z\}\).</div>
+
+        <p class="q">1) Résolution</p>
+        <p>On met le membre de gauche sous la forme \(R\cos(x+\varphi)\).</p>
+        <div class="rappel"><span class="lab">Rappel · formule d'addition</span>\[ \cos(a+b)=\cos a\cos b-\sin a\sin b \]</div>
+        <p class="etape">Étape 1 : factoriser par \(R=\sqrt{a^2+b^2}\)</p>
+        \[ R=\sqrt{1^2+(\sqrt3)^2}=2 \qquad \cos x-\sqrt3\sin x=2\Big(\tfrac12\cos x-\tfrac{\sqrt3}2\sin x\Big) \]
+        <p class="etape">Étape 2 : reconnaître un cosinus et un sinus</p>
+        <p>\(\tfrac12=\cos\tfrac\pi3\) et \(\tfrac{\sqrt3}2=\sin\tfrac\pi3\) :</p>
+        \[ \cos x-\sqrt3\sin x=2\Big(\cos\tfrac\pi3\cos x-\sin\tfrac\pi3\sin x\Big)=2\cos\!\Big(x+\tfrac\pi3\Big) \]
+        <p class="etape">Étape 3 : résoudre \(\cos\!\big(x+\tfrac\pi3\big)=\tfrac12\)</p>
+        <div class="rappel"><span class="lab">Rappel · équation \(\cos X=\cos a\)</span>\[ X=a+2k\pi \quad\text{ou}\quad X=-a+2k\pi,\qquad k\in\mathbb Z \]</div>
+        <ul>
+          <li>\(x+\tfrac\pi3=\tfrac\pi3+2k\pi\iff x=2k\pi\)</li>
+          <li>\(x+\tfrac\pi3=-\tfrac\pi3+2k\pi\iff x=-\tfrac{2\pi}3+2k\pi\)</li>
+        </ul>
+        <div class="res">\(S=\{2k\pi\mid k\in\mathbb Z\}\cup\left\{-\tfrac{2\pi}3+2k\pi\mid k\in\mathbb Z\right\}\).</div>
       </div>
     </div>
 
@@ -138,10 +150,18 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice B — Formule de l'angle triple</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Montrer que \(\cos(3x)=4\cos^3x-3\cos x\).</div>
-        <p>On écrit \(3x=2x+x\) et on applique addition puis duplication :</p>
-        \[ \cos(3x)=\cos(2x)\cos x-\sin(2x)\sin x=(2\cos^2x-1)\cos x-(2\sin x\cos x)\sin x. \]
-        \[ =2\cos^3x-\cos x-2\cos x\sin^2x=2\cos^3x-\cos x-2\cos x(1-\cos^2x). \]
-        <div class="res">\(=2\cos^3x-\cos x-2\cos x+2\cos^3x=4\cos^3x-3\cos x\). ∎</div>
+
+        <p class="q">1) Démonstration</p>
+        <p>On écrit \(3x=2x+x\).</p>
+        <p class="etape">Étape 1 : formule d'addition</p>
+        \[ \cos(3x)=\cos(2x)\cos x-\sin(2x)\sin x \]
+        <p class="etape">Étape 2 : formules de duplication</p>
+        <div class="rappel"><span class="lab">Rappel · duplication</span>\[ \cos(2x)=2\cos^2x-1 \qquad \sin(2x)=2\sin x\cos x \]</div>
+        \[ \cos(3x)=(2\cos^2x-1)\cos x-2\sin^2x\cos x \]
+        <p class="etape">Étape 3 : tout exprimer en \(\cos x\)</p>
+        <p>On remplace \(\sin^2x=1-\cos^2x\) :</p>
+        \[ \cos(3x)=2\cos^3x-\cos x-2\cos x+2\cos^3x \]
+        <div class="res">\(\cos(3x)=4\cos^3x-3\cos x\).</div>
       </div>
     </div>
 
@@ -149,12 +169,22 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice C — Domaine et parité</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Étudier le domaine et la parité de \(f(x)=\ln\!\dfrac{1+x}{1-x}\).</div>
-        <p class="q">Domaine.</p>
-        <p>Il faut \(\dfrac{1+x}{1-x}>0\), soit (tableau de signes) \(-1<x<1\).</p>
-        <div class="res">\(D_f=\,]-1,1[\), qui est centré en \(0\).</div>
-        <p class="q">Parité.</p>
-        <p>Pour \(x\in\,]-1,1[\) : \(f(-x)=\ln\dfrac{1-x}{1+x}=\ln\Big(\dfrac{1+x}{1-x}\Big)^{-1}=-\ln\dfrac{1+x}{1-x}=-f(x)\).</p>
-        <div class="res">\(f\) est <b>impaire</b> (graphe symétrique par rapport à l'origine).</div>
+
+        <p class="q">1) Domaine</p>
+        <p class="etape">Étape 1 : condition</p>
+        <p>Il faut \(1-x\neq 0\) et \(\dfrac{1+x}{1-x}>0\).</p>
+        <p class="etape">Étape 2 : tableau de signes</p>
+        <p>\(1+x\) s'annule en \(-1\), \(1-x\) en \(1\). Le quotient est positif quand les deux ont le même signe, c'est-à-dire entre \(-1\) et \(1\).</p>
+        <div class="res">\(D_f=\,]-1,1[\), centré en 0.</div>
+
+        <p class="q">2) Parité</p>
+        <div class="rappel"><span class="lab">Rappel · parité</span>\(D_f\) symétrique par rapport à 0, et \(f(-x)=f(x)\) (paire) ou \(f(-x)=-f(x)\) (impaire).</div>
+        <p class="etape">Étape 1 : calculer \(f(-x)\)</p>
+        \[ f(-x)=\ln\frac{1-x}{1+x} \]
+        <p class="etape">Étape 2 : reconnaître l'inverse</p>
+        <p>\(\ln\dfrac1u=-\ln u\) :</p>
+        \[ f(-x)=-\ln\frac{1+x}{1-x}=-f(x) \]
+        <div class="res">\(f\) est <b>impaire</b> : son graphe est symétrique par rapport à l'origine.</div>
       </div>
     </div>
   </section>
@@ -170,38 +200,118 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 1 — Équations dans \(\mathbb R\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\cos x=-1\)</p><p class="res">\(x=\pi+2k\pi,\ k\in\mathbb Z\)</p>
-        <p class="q">(b) \(\sin x=\tfrac12=\sin\tfrac\pi6\)</p><p class="res">\(x=\tfrac\pi6+2k\pi\) ou \(x=\tfrac{5\pi}6+2k\pi\)</p>
-        <p class="q">(c) \(\tan x=\sqrt3=\tan\tfrac\pi3\)</p><p class="res">\(x=\tfrac\pi3+k\pi\)</p>
-        <p class="q">(d) \(\sin(3x)=1\)</p><p>\(3x=\tfrac\pi2+2k\pi\).</p><p class="res">\(x=\tfrac\pi6+\tfrac{2k\pi}3\)</p>
-        <p class="q">(e) \(\sin x\cos x=\tfrac12\)</p><p>\(\tfrac12\sin(2x)=\tfrac12\Rightarrow\sin(2x)=1\Rightarrow 2x=\tfrac\pi2+2k\pi\).</p><p class="res">\(x=\tfrac\pi4+k\pi\)</p>
-        <p class="q">(f) \(\tan x=2\sin x\)</p>
-        <p>\(\dfrac{\sin x}{\cos x}=2\sin x\Rightarrow\sin x\Big(\dfrac1{\cos x}-2\Big)=0\Rightarrow\sin x=0\) ou \(\cos x=\tfrac12\).</p>
-        <p class="res">\(x=k\pi\) ou \(x=\pm\tfrac\pi3+2k\pi\)</p>
-        <p class="q">(g) \(\tan(2x)=\tan\!\big(\tfrac\pi4+x\big)\)</p>
-        <p>\(2x\equiv\tfrac\pi4+x\,[\pi]\Rightarrow x\equiv\tfrac\pi4\,[\pi]\). Mais alors \(2x=\tfrac\pi2+2k\pi\), où \(\tan(2x)\) n'est pas défini : ces valeurs sont exclues.</p>
-        <p class="res">\(S=\varnothing\) (aucune solution : le seul candidat annule \(\cos(2x)\)).</p>
-        <p class="q">(h) \(\cos(3x)=\sin x\)</p>
-        <p>\(\sin x=\cos\!\big(\tfrac\pi2-x\big)\), donc \(3x\equiv\tfrac\pi2-x\,[2\pi]\) ou \(3x\equiv-(\tfrac\pi2-x)\,[2\pi]\).</p>
-        <p class="res">\(x=\tfrac\pi8+\tfrac{k\pi}2\) ou \(x=-\tfrac\pi4+k\pi\)</p>
-        <p class="q">(i) \(\cos\!\big(\tfrac x3\big)=\sin\!\big(2x-\tfrac\pi3\big)\)</p>
-        <p>\(\sin(2x-\tfrac\pi3)=\cos\!\big(\tfrac{5\pi}6-2x\big)\), d'où \(\tfrac x3\equiv\tfrac{5\pi}6-2x\,[2\pi]\) ou \(\tfrac x3\equiv-(\tfrac{5\pi}6-2x)\,[2\pi]\).</p>
-        <p class="res">\(x=\tfrac{5\pi}{14}+\tfrac{6k\pi}7\) ou \(x=\tfrac\pi2+\tfrac{6k\pi}5\)</p>
+        <div class="enonce">Résoudre dans \(\mathbb R\) les équations suivantes.</div>
+
+        <p class="q">a) \(\cos x=-1\)</p>
+        <p class="etape">Étape 1 : lire le cercle trigonométrique</p>
+        <p>Le seul point d'abscisse \(-1\) correspond à l'angle \(\pi\).</p>
+        <div class="res">\(x=\pi+2k\pi,\ k\in\mathbb Z\)</div>
+
+        <p class="q">b) \(\sin x=\tfrac12\)</p>
+        <div class="rappel"><span class="lab">Rappel · équations trigonométriques de base</span>\[ \sin X=\sin a\iff X=a+2k\pi \text{ ou } X=\pi-a+2k\pi \]\[ \cos X=\cos a\iff X=\pm a+2k\pi \qquad \tan X=\tan a\iff X=a+k\pi \]</div>
+        <p class="etape">Étape 1 : valeur remarquable</p>
+        <p>\(\tfrac12=\sin\tfrac\pi6\).</p>
+        <p class="etape">Étape 2 : appliquer la règle du sinus</p>
+        <div class="res">\(x=\tfrac\pi6+2k\pi\) ou \(x=\tfrac{5\pi}6+2k\pi\), \(k\in\mathbb Z\)</div>
+
+        <p class="q">c) \(\tan x=\sqrt3\)</p>
+        <p class="etape">Étape 1 : valeur remarquable</p>
+        <p>\(\sqrt3=\tan\tfrac\pi3\).</p>
+        <p class="etape">Étape 2 : la tangente est \(\pi\)-périodique</p>
+        <div class="res">\(x=\tfrac\pi3+k\pi\), \(k\in\mathbb Z\)</div>
+
+        <p class="q">d) \(\sin(3x)=1\)</p>
+        <p class="etape">Étape 1 : résoudre en \(X=3x\)</p>
+        \[ 3x=\frac\pi2+2k\pi \]
+        <p class="etape">Étape 2 : diviser par 3 (y compris la période)</p>
+        <div class="res">\(x=\tfrac\pi6+\tfrac{2k\pi}3\), \(k\in\mathbb Z\)</div>
+
+        <p class="q">e) \(\sin x\cos x=\tfrac12\)</p>
+        <p class="etape">Étape 1 : duplication</p>
+        \[ \sin x\cos x=\tfrac12\sin(2x) \quad\Longrightarrow\quad \sin(2x)=1 \]
+        <p class="etape">Étape 2 : résoudre</p>
+        \[ 2x=\frac\pi2+2k\pi \]
+        <div class="res">\(x=\tfrac\pi4+k\pi\), \(k\in\mathbb Z\)</div>
+
+        <p class="q">f) \(\tan x=2\sin x\)</p>
+        <p class="etape">Étape 1 : domaine et réécriture</p>
+        <p>Il faut \(\cos x\neq 0\). On écrit \(\tan x=\dfrac{\sin x}{\cos x}\) et on factorise :</p>
+        \[ \sin x\left(\frac1{\cos x}-2\right)=0 \]
+        <p class="etape">Étape 2 : produit nul</p>
+        <ul>
+          <li>\(\sin x=0\iff x=k\pi\) (là, \(\cos x=\pm1\neq0\)).</li>
+          <li>\(\cos x=\tfrac12\iff x=\pm\tfrac\pi3+2k\pi\).</li>
+        </ul>
+        <div class="res">\(x=k\pi\) ou \(x=\pm\tfrac\pi3+2k\pi\), \(k\in\mathbb Z\)</div>
+
+        <p class="q">g) \(\tan(2x)=\tan\!\big(\tfrac\pi4+x\big)\)</p>
+        <p class="etape">Étape 1 : règle de la tangente</p>
+        \[ 2x=\frac\pi4+x+k\pi \iff x=\frac\pi4+k\pi \]
+        <p class="etape">Étape 2 : vérifier le domaine</p>
+        <p>Pour ces valeurs, \(2x=\tfrac\pi2+2k\pi\) : \(\tan(2x)\) n'est pas définie.</p>
+        <div class="res">\(S=\varnothing\) : le seul candidat sort du domaine.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Avec une tangente, toujours vérifier que les solutions trouvées n'annulent pas un cosinus.</div>
+
+        <p class="q">h) \(\cos(3x)=\sin x\)</p>
+        <p class="etape">Étape 1 : tout écrire en cosinus</p>
+        <div class="rappel"><span class="lab">Rappel · angles complémentaires</span>\[ \sin x=\cos\!\Big(\frac\pi2-x\Big) \]</div>
+        \[ \cos(3x)=\cos\!\Big(\frac\pi2-x\Big) \]
+        <p class="etape">Étape 2 : les deux familles</p>
+        <ul>
+          <li>\(3x=\tfrac\pi2-x+2k\pi\iff 4x=\tfrac\pi2+2k\pi\iff x=\tfrac\pi8+\tfrac{k\pi}2\)</li>
+          <li>\(3x=-\tfrac\pi2+x+2k\pi\iff 2x=-\tfrac\pi2+2k\pi\iff x=-\tfrac\pi4+k\pi\)</li>
+        </ul>
+        <div class="res">\(x=\tfrac\pi8+\tfrac{k\pi}2\) ou \(x=-\tfrac\pi4+k\pi\), \(k\in\mathbb Z\)</div>
+
+        <p class="q">i) \(\cos\!\big(\tfrac x3\big)=\sin\!\big(2x-\tfrac\pi3\big)\)</p>
+        <p class="etape">Étape 1 : tout écrire en cosinus</p>
+        \[ \sin\!\Big(2x-\frac\pi3\Big)=\cos\!\Big(\frac\pi2-2x+\frac\pi3\Big)=\cos\!\Big(\frac{5\pi}6-2x\Big) \]
+        <p class="etape">Étape 2 : première famille</p>
+        \[ \frac x3=\frac{5\pi}6-2x+2k\pi \iff \frac{7x}3=\frac{5\pi}6+2k\pi \iff x=\frac{5\pi}{14}+\frac{6k\pi}7 \]
+        <p class="etape">Étape 3 : seconde famille</p>
+        \[ \frac x3=-\frac{5\pi}6+2x+2k\pi \iff -\frac{5x}3=-\frac{5\pi}6+2k\pi \iff x=\frac\pi2-\frac{6k\pi}5 \]
+        <p>\(k\) parcourt \(\mathbb Z\), on peut écrire \(+\tfrac{6k\pi}5\).</p>
+        <div class="res">\(x=\tfrac{5\pi}{14}+\tfrac{6k\pi}7\) ou \(x=\tfrac\pi2+\tfrac{6k\pi}5\), \(k\in\mathbb Z\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 2 — Inéquations sur \([0,2\pi[\) et \(]-\pi,\pi]\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\cos x\geqslant\tfrac12\)</p>
-        <p>\(\cos x\geqslant\tfrac12\) autour de \(0\), entre \(-\tfrac\pi3\) et \(\tfrac\pi3\).</p>
-        <p class="res">Sur \([0,2\pi[\) : \([0,\tfrac\pi3]\cup[\tfrac{5\pi}3,2\pi[\) ; sur \(]-\pi,\pi]\) : \([-\tfrac\pi3,\tfrac\pi3]\)</p>
-        <p class="q">(b) \(\sin(2x)\geqslant\tfrac12\)</p>
-        <p>\(\sin(2x)\geqslant\tfrac12\Rightarrow 2x\in[\tfrac\pi6+2k\pi,\tfrac{5\pi}6+2k\pi]\Rightarrow x\in[\tfrac\pi{12}+k\pi,\tfrac{5\pi}{12}+k\pi]\).</p>
-        <p class="res">Sur \([0,2\pi[\) : \([\tfrac\pi{12},\tfrac{5\pi}{12}]\cup[\tfrac{13\pi}{12},\tfrac{17\pi}{12}]\) ; sur \(]-\pi,\pi]\) : \([-\tfrac{11\pi}{12},-\tfrac{7\pi}{12}]\cup[\tfrac\pi{12},\tfrac{5\pi}{12}]\)</p>
-        <p class="q">(c) \(\tan x\leqslant 1\)</p>
-        <p>Sur chaque branche \(]{-\tfrac\pi2}+k\pi,\tfrac\pi2+k\pi[\), \(\tan\) croît et vaut \(1\) en \(\tfrac\pi4+k\pi\).</p>
-        <p class="res">Sur \([0,2\pi[\) : \([0,\tfrac\pi4]\cup\,]\tfrac\pi2,\tfrac{5\pi}4]\cup\,]\tfrac{3\pi}2,2\pi[\) ; sur \(]-\pi,\pi]\) : \(]-\pi,-\tfrac{3\pi}4]\cup\,]-\tfrac\pi2,\tfrac\pi4]\cup\,]\tfrac\pi2,\pi]\)</p>
+        <div class="enonce">Résoudre sur \([0,2\pi[\), puis sur \(]-\pi,\pi]\).</div>
+
+        <p class="q">a) \(\cos x\geqslant\tfrac12\)</p>
+        <p class="etape">Étape 1 : les bornes</p>
+        <p>\(\cos x=\tfrac12\) pour \(x=\pm\tfrac\pi3\) (modulo \(2\pi\)).</p>
+        <p class="etape">Étape 2 : lire le cercle</p>
+        <p>\(\cos x\geqslant\tfrac12\) sur l'arc de droite, entre \(-\tfrac\pi3\) et \(\tfrac\pi3\).</p>
+        <p class="etape">Étape 3 : écrire dans chaque intervalle</p>
+        <ul>
+          <li>Sur \([0,2\pi[\), l'arc \([-\tfrac\pi3,0]\) devient \([\tfrac{5\pi}3,2\pi[\).</li>
+          <li>Sur \(]-\pi,\pi]\), l'arc est d'un seul tenant.</li>
+        </ul>
+        <div class="res">Sur \([0,2\pi[\) : \([0,\tfrac\pi3]\cup[\tfrac{5\pi}3,2\pi[\) ; sur \(]-\pi,\pi]\) : \([-\tfrac\pi3,\tfrac\pi3]\)</div>
+
+        <p class="q">b) \(\sin(2x)\geqslant\tfrac12\)</p>
+        <p class="etape">Étape 1 : résoudre en \(X=2x\)</p>
+        <p>\(\sin X\geqslant\tfrac12\iff X\in[\tfrac\pi6+2k\pi,\ \tfrac{5\pi}6+2k\pi]\).</p>
+        <p class="etape">Étape 2 : diviser par 2</p>
+        \[ x\in\left[\frac\pi{12}+k\pi,\ \frac{5\pi}{12}+k\pi\right] \]
+        <p class="etape">Étape 3 : choisir les \(k\) utiles</p>
+        <ul>
+          <li>Sur \([0,2\pi[\) : \(k=0\) et \(k=1\).</li>
+          <li>Sur \(]-\pi,\pi]\) : \(k=-1\) et \(k=0\).</li>
+        </ul>
+        <div class="res">Sur \([0,2\pi[\) : \([\tfrac\pi{12},\tfrac{5\pi}{12}]\cup[\tfrac{13\pi}{12},\tfrac{17\pi}{12}]\) ; sur \(]-\pi,\pi]\) : \([-\tfrac{11\pi}{12},-\tfrac{7\pi}{12}]\cup[\tfrac\pi{12},\tfrac{5\pi}{12}]\)</div>
+
+        <p class="q">c) \(\tan x\leqslant 1\)</p>
+        <p class="etape">Étape 1 : sur une branche</p>
+        <p>Sur chaque intervalle \(]-\tfrac\pi2+k\pi,\ \tfrac\pi2+k\pi[\), \(\tan\) est croissante de \(-\infty\) à \(+\infty\) et vaut 1 en \(\tfrac\pi4+k\pi\). Donc \(\tan x\leqslant 1\) sur \(]-\tfrac\pi2+k\pi,\ \tfrac\pi4+k\pi]\).</p>
+        <p class="etape">Étape 2 : découper \([0,2\pi[\)</p>
+        <p>Branches \([0,\tfrac\pi2[\), \(]\tfrac\pi2,\tfrac{3\pi}2[\), \(]\tfrac{3\pi}2,2\pi[\) (sur la dernière, \(\tan\leqslant 0\)).</p>
+        <p class="etape">Étape 3 : découper \(]-\pi,\pi]\)</p>
+        <p>Branches \(]-\pi,-\tfrac\pi2[\), \(]-\tfrac\pi2,\tfrac\pi2[\), \(]\tfrac\pi2,\pi]\) (sur la dernière, \(\tan\leqslant 0\)).</p>
+        <div class="res">Sur \([0,2\pi[\) : \([0,\tfrac\pi4]\cup\,]\tfrac\pi2,\tfrac{5\pi}4]\cup\,]\tfrac{3\pi}2,2\pi[\) ; sur \(]-\pi,\pi]\) : \(]-\pi,-\tfrac{3\pi}4]\cup\,]-\tfrac\pi2,\tfrac\pi4]\cup\,]\tfrac\pi2,\pi]\)</div>
       </div>
     </div>
 
@@ -210,22 +320,66 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 3 — \(\cos x=-\tfrac45\)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\cos(x-\pi)=-\cos x\)</p><p class="res">\(\tfrac45\)</p>
-        <p class="q">(b) \(\cos(-\pi-x)=\cos(\pi+x)=-\cos x\)</p><p class="res">\(\tfrac45\)</p>
-        <p class="q">(c) \(\cos(-2\pi+x)=\cos x\)</p><p class="res">\(-\tfrac45\)</p>
-        <p class="q">(d) \(\cos(-2\pi-x)=\cos x\)</p><p class="res">\(-\tfrac45\)</p>
-        <p class="q">(e) \(\sin x\)</p><p>\(\sin^2x=1-\tfrac{16}{25}=\tfrac9{25}\).</p><p class="res">\(\sin x=\pm\tfrac35\) (signe non déterminé)</p>
-        <p class="q">(f) \(\tan x=\dfrac{\sin x}{\cos x}\)</p><p class="res">\(\tan x=\mp\tfrac34\) (\(-\tfrac34\) si \(\sin x=\tfrac35\), \(+\tfrac34\) sinon)</p>
+        <div class="enonce">On sait que \(\cos x=-\tfrac45\). Calculer les quantités suivantes.</div>
+
+        <p class="q">a) \(\cos(x-\pi)\)</p>
+        <div class="rappel"><span class="lab">Rappel · angles associés</span>\[ \cos(x\pm\pi)=-\cos x \qquad \cos(-x)=\cos x \qquad \cos(x+2k\pi)=\cos x \]</div>
+        <p class="etape">Étape 1 : angle associé</p>
+        \[ \cos(x-\pi)=-\cos x \]
+        <div class="res">\(\tfrac45\)</div>
+
+        <p class="q">b) \(\cos(-\pi-x)\)</p>
+        <p class="etape">Étape 1 : parité puis angle associé</p>
+        \[ \cos(-\pi-x)=\cos(\pi+x)=-\cos x \]
+        <div class="res">\(\tfrac45\)</div>
+
+        <p class="q">c) \(\cos(-2\pi+x)\)</p>
+        <p class="etape">Étape 1 : périodicité</p>
+        \[ \cos(x-2\pi)=\cos x \]
+        <div class="res">\(-\tfrac45\)</div>
+
+        <p class="q">d) \(\cos(-2\pi-x)\)</p>
+        <p class="etape">Étape 1 : parité puis périodicité</p>
+        \[ \cos(-2\pi-x)=\cos(2\pi+x)=\cos x \]
+        <div class="res">\(-\tfrac45\)</div>
+
+        <p class="q">e) \(\sin x\)</p>
+        <div class="rappel"><span class="lab">Rappel · relation fondamentale</span>\[ \cos^2x+\sin^2x=1 \]</div>
+        <p class="etape">Étape 1 : calculer \(\sin^2x\)</p>
+        \[ \sin^2x=1-\frac{16}{25}=\frac9{25} \]
+        <p class="etape">Étape 2 : le signe</p>
+        <p>L'énoncé ne dit pas dans quel quadrant est \(x\) : les deux signes sont possibles.</p>
+        <div class="res">\(\sin x=\tfrac35\) ou \(\sin x=-\tfrac35\)</div>
+
+        <p class="q">f) \(\tan x\)</p>
+        <p class="etape">Étape 1 : quotient</p>
+        \[ \tan x=\frac{\sin x}{\cos x}=\frac{\pm 3/5}{-4/5} \]
+        <div class="res">\(\tan x=-\tfrac34\) si \(\sin x=\tfrac35\), et \(\tan x=\tfrac34\) si \(\sin x=-\tfrac35\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 4 — \(\tfrac\pi{12}=\tfrac\pi3-\tfrac\pi4\)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\cos\tfrac\pi{12}=\cos\tfrac\pi3\cos\tfrac\pi4+\sin\tfrac\pi3\sin\tfrac\pi4\)</p>
-        <p>\(=\tfrac12\cdot\tfrac{\sqrt2}2+\tfrac{\sqrt3}2\cdot\tfrac{\sqrt2}2\).</p><p class="res">\(\cos\tfrac\pi{12}=\dfrac{\sqrt6+\sqrt2}4\)</p>
-        <p class="q">(b) \(\sin\tfrac\pi{12}=\sin\tfrac\pi3\cos\tfrac\pi4-\cos\tfrac\pi3\sin\tfrac\pi4\)</p><p class="res">\(\sin\tfrac\pi{12}=\dfrac{\sqrt6-\sqrt2}4\)</p>
-        <p class="q">(c) \(\tan\tfrac\pi{12}=\dfrac{\sqrt6-\sqrt2}{\sqrt6+\sqrt2}\)</p><p>Après rationalisation \(\times(\sqrt6-\sqrt2)\) :</p><p class="res">\(\tan\tfrac\pi{12}=2-\sqrt3\)</p>
+        <div class="enonce">En écrivant \(\tfrac\pi{12}=\tfrac\pi3-\tfrac\pi4\), calculer les valeurs exactes suivantes.</div>
+
+        <p class="q">a) \(\cos\tfrac\pi{12}\)</p>
+        <div class="rappel"><span class="lab">Rappel · formules de soustraction</span>\[ \cos(a-b)=\cos a\cos b+\sin a\sin b \qquad \sin(a-b)=\sin a\cos b-\cos a\sin b \]</div>
+        <p class="etape">Étape 1 : appliquer avec \(a=\tfrac\pi3\), \(b=\tfrac\pi4\)</p>
+        \[ \cos\frac\pi{12}=\frac12\times\frac{\sqrt2}2+\frac{\sqrt3}2\times\frac{\sqrt2}2 \]
+        <div class="res">\(\cos\tfrac\pi{12}=\dfrac{\sqrt6+\sqrt2}4\)</div>
+
+        <p class="q">b) \(\sin\tfrac\pi{12}\)</p>
+        <p class="etape">Étape 1 : appliquer la formule du sinus</p>
+        \[ \sin\frac\pi{12}=\frac{\sqrt3}2\times\frac{\sqrt2}2-\frac12\times\frac{\sqrt2}2 \]
+        <div class="res">\(\sin\tfrac\pi{12}=\dfrac{\sqrt6-\sqrt2}4\)</div>
+
+        <p class="q">c) \(\tan\tfrac\pi{12}\)</p>
+        <p class="etape">Étape 1 : quotient</p>
+        \[ \tan\frac\pi{12}=\frac{\sqrt6-\sqrt2}{\sqrt6+\sqrt2} \]
+        <p class="etape">Étape 2 : multiplier par la quantité conjuguée \(\sqrt6-\sqrt2\)</p>
+        \[ \frac{(\sqrt6-\sqrt2)^2}{6-2}=\frac{8-2\sqrt{12}}{4}=\frac{8-4\sqrt3}{4} \]
+        <div class="res">\(\tan\tfrac\pi{12}=2-\sqrt3\)</div>
       </div>
     </div>
 
@@ -233,15 +387,28 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 5 — Formules de Weierstrass (\(t=\tan\tfrac x2\))</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">On divise par \(\cos^2\tfrac x2+\sin^2\tfrac x2=1\), puis par \(\cos^2\tfrac x2\).</div>
-        <p class="q">(a) \(\cos x=\dfrac{1-t^2}{1+t^2}\)</p>
-        <p>\(\cos x=\cos^2\tfrac x2-\sin^2\tfrac x2=\dfrac{\cos^2\tfrac x2-\sin^2\tfrac x2}{\cos^2\tfrac x2+\sin^2\tfrac x2}=\dfrac{1-\tan^2\tfrac x2}{1+\tan^2\tfrac x2}\).</p>
-        <p class="res">\(\cos x=\dfrac{1-t^2}{1+t^2}\)</p>
-        <p class="q">(b) \(\sin x=\dfrac{2t}{1+t^2}\)</p>
-        <p>\(\sin x=2\sin\tfrac x2\cos\tfrac x2=\dfrac{2\sin\tfrac x2\cos\tfrac x2}{\cos^2\tfrac x2+\sin^2\tfrac x2}=\dfrac{2\tan\tfrac x2}{1+\tan^2\tfrac x2}\).</p>
-        <p class="res">\(\sin x=\dfrac{2t}{1+t^2}\)</p>
-        <p class="q">(c) \(\tan x=\dfrac{2t}{1-t^2}\)</p>
-        <p>\(\tan x=\dfrac{\sin x}{\cos x}=\dfrac{2t/(1+t^2)}{(1-t^2)/(1+t^2)}\).</p>
-        <p class="res">\(\tan x=\dfrac{2t}{1-t^2}\)</p>
+
+        <p class="q">a) \(\cos x=\dfrac{1-t^2}{1+t^2}\)</p>
+        <p class="etape">Étape 1 : duplication avec l'angle \(\tfrac x2\)</p>
+        <div class="rappel"><span class="lab">Rappel · duplication</span>\[ \cos(2a)=\cos^2a-\sin^2a \qquad \sin(2a)=2\sin a\cos a \]</div>
+        \[ \cos x=\cos^2\tfrac x2-\sin^2\tfrac x2 \]
+        <p class="etape">Étape 2 : diviser par 1</p>
+        \[ \cos x=\frac{\cos^2\tfrac x2-\sin^2\tfrac x2}{\cos^2\tfrac x2+\sin^2\tfrac x2} \]
+        <p class="etape">Étape 3 : diviser en haut et en bas par \(\cos^2\tfrac x2\)</p>
+        \[ \cos x=\frac{1-\tan^2\tfrac x2}{1+\tan^2\tfrac x2} \]
+        <div class="res">\(\cos x=\dfrac{1-t^2}{1+t^2}\)</div>
+
+        <p class="q">b) \(\sin x=\dfrac{2t}{1+t^2}\)</p>
+        <p class="etape">Étape 1 : duplication puis division par 1</p>
+        \[ \sin x=\frac{2\sin\tfrac x2\cos\tfrac x2}{\cos^2\tfrac x2+\sin^2\tfrac x2} \]
+        <p class="etape">Étape 2 : diviser par \(\cos^2\tfrac x2\)</p>
+        \[ \sin x=\frac{2\tan\tfrac x2}{1+\tan^2\tfrac x2} \]
+        <div class="res">\(\sin x=\dfrac{2t}{1+t^2}\)</div>
+
+        <p class="q">c) \(\tan x=\dfrac{2t}{1-t^2}\)</p>
+        <p class="etape">Étape 1 : quotient de b) par a)</p>
+        \[ \tan x=\frac{2t/(1+t^2)}{(1-t^2)/(1+t^2)} \]
+        <div class="res">\(\tan x=\dfrac{2t}{1-t^2}\)</div>
       </div>
     </div>
 
@@ -250,81 +417,206 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 6 — Domaines de définition</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(f_1=\sqrt{1-x^2}\)</p><p>\(1-x^2\geqslant0\).</p><p class="res">\(D=[-1,1]\)</p>
-        <p class="q">(b) \(f_2=\sqrt{5x-x^2-6}\)</p><p>\(-x^2+5x-6\geqslant0\Leftrightarrow(x-2)(x-3)\leqslant0\).</p><p class="res">\(D=[2,3]\)</p>
-        <p class="q">(c) \(f_3=e^{\sqrt{x^2+x+1}}\)</p><p>\(x^2+x+1>0\) partout (\(\Delta<0\)).</p><p class="res">\(D=\mathbb R\)</p>
-        <p class="q">(d) \(f_4=\dfrac{x}{\sqrt{2-x}}\)</p><p>\(2-x>0\) (au dénominateur).</p><p class="res">\(D=\,]-\infty,2[\)</p>
-        <p class="q">(e) \(f_5=\dfrac{x}{x^2-3x+2}\)</p><p>\((x-1)(x-2)\neq0\).</p><p class="res">\(D=\mathbb R\setminus\{1,2\}\)</p>
-        <p class="q">(f) \(f_6=\dfrac1{\cos(2x)}\)</p><p>\(\cos(2x)\neq0\Rightarrow 2x\neq\tfrac\pi2+k\pi\).</p><p class="res">\(D=\mathbb R\setminus\{\tfrac\pi4+\tfrac{k\pi}2\mid k\in\mathbb Z\}\)</p>
-        <p class="q">(g) \(f_7=\ln(\sqrt{2x^2-2}-x)\)</p>
-        <p>\(2x^2-2\geqslant0\) (\(|x|\geqslant1\)) et \(\sqrt{2x^2-2}>x\). Si \(x\leqslant-1\) : toujours vrai ; si \(x\geqslant1\) : carré \(\Rightarrow x^2>2\Rightarrow x>\sqrt2\).</p>
-        <p class="res">\(D=\,]-\infty,-1]\cup\,]\sqrt2,+\infty[\)</p>
-        <p class="q">(h) \(f_8=\ln(3-x)+\dfrac{\sqrt{x-1}}{x-2}\)</p><p>\(3-x>0\), \(x-1\geqslant0\), \(x\neq2\).</p><p class="res">\(D=[1,2[\cup\,]2,3[\)</p>
-        <p class="q">(i) \(f_9=\sin\!\Big(\ln\dfrac{e^{2x}-1}{e^{2x}+3}\Big)\)</p><p>\(\dfrac{e^{2x}-1}{e^{2x}+3}>0\Rightarrow e^{2x}>1\Rightarrow x>0\).</p><p class="res">\(D=\,]0,+\infty[\)</p>
+        <div class="enonce">Déterminer le domaine de définition des fonctions suivantes.</div>
+
+        <p class="q">a) \(f_1(x)=\sqrt{1-x^2}\)</p>
+        <div class="rappel"><span class="lab">Rappel · conditions d'existence</span>\(\sqrt u\) : \(u\geqslant 0\). \(\dfrac1u\) : \(u\neq 0\). \(\ln u\) : \(u>0\).</div>
+        <p class="etape">Étape 1 : condition</p>
+        \[ 1-x^2\geqslant 0 \iff x^2\leqslant 1 \]
+        <div class="res">\(D=[-1,1]\)</div>
+
+        <p class="q">b) \(f_2(x)=\sqrt{5x-x^2-6}\)</p>
+        <p class="etape">Étape 1 : condition</p>
+        \[ -x^2+5x-6\geqslant0 \iff x^2-5x+6\leqslant 0 \iff (x-2)(x-3)\leqslant0 \]
+        <p class="etape">Étape 2 : signe</p>
+        <p>Le trinôme est négatif entre ses racines.</p>
+        <div class="res">\(D=[2,3]\)</div>
+
+        <p class="q">c) \(f_3(x)=e^{\sqrt{x^2+x+1}}\)</p>
+        <p class="etape">Étape 1 : condition</p>
+        <p>\(x^2+x+1\geqslant 0\). Or \(\Delta=1-4=-3&lt;0\) : le trinôme est toujours positif.</p>
+        <div class="res">\(D=\mathbb R\)</div>
+
+        <p class="q">d) \(f_4(x)=\dfrac{x}{\sqrt{2-x}}\)</p>
+        <p class="etape">Étape 1 : condition</p>
+        <p>Racine au dénominateur : il faut \(2-x>0\) (strict).</p>
+        <div class="res">\(D=\,]-\infty,2[\)</div>
+
+        <p class="q">e) \(f_5(x)=\dfrac{x}{x^2-3x+2}\)</p>
+        <p class="etape">Étape 1 : condition</p>
+        \[ x^2-3x+2=(x-1)(x-2)\neq0 \]
+        <div class="res">\(D=\mathbb R\setminus\{1,2\}\)</div>
+
+        <p class="q">f) \(f_6(x)=\dfrac1{\cos(2x)}\)</p>
+        <p class="etape">Étape 1 : condition</p>
+        \[ \cos(2x)\neq0 \iff 2x\neq\frac\pi2+k\pi \iff x\neq\frac\pi4+\frac{k\pi}2 \]
+        <div class="res">\(D=\mathbb R\setminus\{\tfrac\pi4+\tfrac{k\pi}2\mid k\in\mathbb Z\}\)</div>
+
+        <p class="q">g) \(f_7(x)=\ln(\sqrt{2x^2-2}-x)\)</p>
+        <p class="etape">Étape 1 : conditions</p>
+        <p>\(2x^2-2\geqslant 0\), soit \(x\leqslant -1\) ou \(x\geqslant 1\) ; et \(\sqrt{2x^2-2}>x\).</p>
+        <p class="etape">Étape 2 : cas \(x\leqslant -1\)</p>
+        <p>La racine est positive, \(x\) est négatif : toujours vrai.</p>
+        <p class="etape">Étape 3 : cas \(x\geqslant 1\)</p>
+        <p>Deux membres positifs, on élève au carré : \(2x^2-2>x^2\iff x^2>2\iff x>\sqrt2\).</p>
+        <div class="res">\(D=\,]-\infty,-1]\cup\,]\sqrt2,+\infty[\)</div>
+
+        <p class="q">h) \(f_8(x)=\ln(3-x)+\dfrac{\sqrt{x-1}}{x-2}\)</p>
+        <p class="etape">Étape 1 : les trois conditions</p>
+        <ul>
+          <li>\(\ln\) : \(3-x>0\iff x&lt;3\).</li>
+          <li>\(\sqrt{\ }\) : \(x-1\geqslant 0\iff x\geqslant 1\).</li>
+          <li>Dénominateur : \(x\neq 2\).</li>
+        </ul>
+        <div class="res">\(D=[1,2[\cup\,]2,3[\)</div>
+
+        <p class="q">i) \(f_9(x)=\sin\!\Big(\ln\dfrac{e^{2x}-1}{e^{2x}+3}\Big)\)</p>
+        <p class="etape">Étape 1 : condition du \(\ln\)</p>
+        <p>\(e^{2x}+3>0\) toujours, donc il faut \(e^{2x}-1>0\).</p>
+        \[ e^{2x}>1 \iff 2x>0 \iff x>0 \]
+        <div class="res">\(D=\,]0,+\infty[\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 7 — Parité (sur \(\mathbb R\))</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(f_1(x)=e^x-e^{-x}\)</p><p>\(f_1(-x)=e^{-x}-e^x=-f_1(x)\).</p><p class="res"><b>Impaire</b> (c'est \(2\sinh x\)).</p>
-        <p class="q">(b) \(f_2(x)=\dfrac{e^{2x}-1}{e^{2x}+1}\)</p><p>\(f_2(-x)=\dfrac{e^{-2x}-1}{e^{-2x}+1}=\dfrac{1-e^{2x}}{1+e^{2x}}=-f_2(x)\) (\(\times e^{2x}\)).</p><p class="res"><b>Impaire</b> (c'est \(\tanh x\)).</p>
-        <p class="q">(c) \(f_3(x)=\dfrac{e^x}{(e^x+1)^2}\)</p><p>\(f_3(-x)=\dfrac{e^{-x}}{(e^{-x}+1)^2}=\dfrac{e^x}{(1+e^x)^2}=f_3(x)\) (\(\times e^{2x}\)).</p><p class="res"><b>Paire</b>.</p>
+        <div class="enonce">Étudier la parité des fonctions suivantes, définies sur \(\mathbb R\).</div>
+
+        <p class="q">a) \(f_1(x)=e^x-e^{-x}\)</p>
+        <div class="rappel"><span class="lab">Rappel · parité</span>Paire : \(f(-x)=f(x)\). Impaire : \(f(-x)=-f(x)\).</div>
+        <p class="etape">Étape 1 : calculer \(f_1(-x)\)</p>
+        \[ f_1(-x)=e^{-x}-e^{x}=-f_1(x) \]
+        <div class="res"><b>Impaire</b> (c'est \(2\,\mathrm{sh}\,x\)).</div>
+
+        <p class="q">b) \(f_2(x)=\dfrac{e^{2x}-1}{e^{2x}+1}\)</p>
+        <p class="etape">Étape 1 : calculer \(f_2(-x)\)</p>
+        \[ f_2(-x)=\frac{e^{-2x}-1}{e^{-2x}+1} \]
+        <p class="etape">Étape 2 : multiplier en haut et en bas par \(e^{2x}\)</p>
+        \[ f_2(-x)=\frac{1-e^{2x}}{1+e^{2x}}=-f_2(x) \]
+        <div class="res"><b>Impaire</b> (c'est \(\mathrm{th}\,x\)).</div>
+
+        <p class="q">c) \(f_3(x)=\dfrac{e^x}{(e^x+1)^2}\)</p>
+        <p class="etape">Étape 1 : calculer \(f_3(-x)\)</p>
+        \[ f_3(-x)=\frac{e^{-x}}{(e^{-x}+1)^2} \]
+        <p class="etape">Étape 2 : multiplier en haut et en bas par \(e^{2x}\)</p>
+        <p>En bas, \(e^{2x}(e^{-x}+1)^2=\big(e^x(e^{-x}+1)\big)^2=(1+e^x)^2\) ; en haut, \(e^{2x}e^{-x}=e^x\).</p>
+        \[ f_3(-x)=\frac{e^x}{(1+e^x)^2}=f_3(x) \]
+        <div class="res"><b>Paire</b>.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 8 — Périodicité</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(f_1(x)=\sin x\cos^2x\)</p><p>\(f_1(x+\pi)=(-\sin x)(\cos x)^2=-f_1(x)\), donc \(\pi\) n'est pas période, mais \(f_1(x+2\pi)=f_1(x)\).</p><p class="res">Période fondamentale \(2\pi\).</p>
-        <p class="q">(b) \(f_2(x)=\tan(3x)\)</p><p>\(\tan\) a pour période \(\pi\), donc \(\tan(3x)\) a pour période \(\tfrac\pi3\).</p><p class="res">Période fondamentale \(\tfrac\pi3\).</p>
-        <p class="q">(c) \(f_3(x)=x-\lfloor x\rfloor\)</p><p>\(f_3(x+1)=x+1-(\lfloor x\rfloor+1)=f_3(x)\).</p><p class="res">Période fondamentale \(1\) (partie fractionnaire).</p>
+        <div class="enonce">Étudier la périodicité des fonctions suivantes.</div>
+
+        <p class="q">a) \(f_1(x)=\sin x\cos^2x\)</p>
+        <p class="etape">Étape 1 : tester \(\pi\)</p>
+        \[ f_1(x+\pi)=(-\sin x)(-\cos x)^2=-f_1(x) \]
+        <p>\(\pi\) n'est pas une période.</p>
+        <p class="etape">Étape 2 : tester \(2\pi\)</p>
+        <p>\(\sin\) et \(\cos\) sont \(2\pi\)-périodiques, donc \(f_1(x+2\pi)=f_1(x)\).</p>
+        <div class="res">\(f_1\) est \(2\pi\)-périodique.</div>
+
+        <p class="q">b) \(f_2(x)=\tan(3x)\)</p>
+        <div class="rappel"><span class="lab">Rappel · période de \(g(ax)\)</span>Si \(g\) est \(T\)-périodique, \(x\mapsto g(ax)\) est \(\dfrac{T}{|a|}\)-périodique.</div>
+        <p class="etape">Étape 1 : appliquer avec \(T=\pi\), \(a=3\)</p>
+        \[ \tan\big(3(x+\tfrac\pi3)\big)=\tan(3x+\pi)=\tan(3x) \]
+        <div class="res">\(f_2\) est \(\tfrac\pi3\)-périodique.</div>
+
+        <p class="q">c) \(f_3(x)=x-\lfloor x\rfloor\)</p>
+        <p class="etape">Étape 1 : décaler de 1</p>
+        <p>\(\lfloor x+1\rfloor=\lfloor x\rfloor+1\), donc :</p>
+        \[ f_3(x+1)=x+1-\lfloor x\rfloor-1=f_3(x) \]
+        <div class="res">\(f_3\) est 1-périodique (partie fractionnaire).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 9 — Parité &amp; périodicité de \(g\circ f\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">(a) Parité</p>
+        <div class="enonce">Étudier la parité, puis la périodicité, de \(g\circ f\) selon les propriétés de \(f\) et \(g\).</div>
+
+        <p class="q">a) Parité</p>
+        <p class="etape">Étape 1 : écrire \((g\circ f)(-x)=g\big(f(-x)\big)\) et discuter</p>
         <ul>
-          <li>Si \(f\) est <b>paire</b> : \((g\circ f)(-x)=g(f(-x))=g(f(x))=(g\circ f)(x)\) → \(g\circ f\) <b>paire</b> (quelle que soit \(g\)).</li>
-          <li>Si \(f\) est <b>impaire</b> et \(g\) <b>paire</b> : \(g(f(-x))=g(-f(x))=g(f(x))\) → \(g\circ f\) <b>paire</b>.</li>
-          <li>Si \(f\) et \(g\) sont toutes deux <b>impaires</b> : \(g(-f(x))=-g(f(x))\) → \(g\circ f\) <b>impaire</b>.</li>
+          <li>\(f\) <b>paire</b> : \(g(f(-x))=g(f(x))\). Donc \(g\circ f\) est <b>paire</b>, quelle que soit \(g\).</li>
+          <li>\(f\) <b>impaire</b>, \(g\) <b>paire</b> : \(g(-f(x))=g(f(x))\). Donc \(g\circ f\) est <b>paire</b>.</li>
+          <li>\(f\) et \(g\) <b>impaires</b> : \(g(-f(x))=-g(f(x))\). Donc \(g\circ f\) est <b>impaire</b>.</li>
+          <li>\(f\) impaire, \(g\) sans parité : on ne peut rien dire (exemple : \(f(x)=x\), \(g=\exp\)).</li>
         </ul>
-        <p class="q">(b) Périodicité</p>
-        <p>Si \(f\) est \(T\)-périodique : \((g\circ f)(x+T)=g(f(x+T))=g(f(x))=(g\circ f)(x)\).</p>
-        <div class="res">La période de \(f\) se transmet : \(g\circ f\) est \(T\)-périodique (la périodicité de \(g\) n'intervient pas).</div>
+        <div class="res">\(f\) paire \(\Rightarrow g\circ f\) paire ; \(f\) impaire : \(g\circ f\) a la parité de \(g\).</div>
+
+        <p class="q">b) Périodicité</p>
+        <p class="etape">Étape 1 : décaler de la période de \(f\)</p>
+        <p>Si \(f\) est \(T\)-périodique :</p>
+        \[ (g\circ f)(x+T)=g\big(f(x+T)\big)=g\big(f(x)\big) \]
+        <div class="res">\(g\circ f\) est \(T\)-périodique : la période de \(f\) se transmet, celle de \(g\) n'intervient pas.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 10 — Bornes et extremums (fonctions par morceaux)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <div class="enonce">\(f(x)=4\) si \(x\geqslant2\), \(x^2\) si \(x<2\). \(g(x)=1+\tfrac1x\) si \(x>1\), \(2+\sqrt{1-x}\) si \(x\leqslant1\).</div>
-        <p class="q">(a) Majorées ? Minorées ?</p>
-        <p><b>\(f\)</b> : pour \(x<2\), \(x^2\to+\infty\) quand \(x\to-\infty\) : <b>non majorée</b>. Et \(f\geqslant0\) : <b>minorée</b> (par \(0\)).</p>
-        <p><b>\(g\)</b> : pour \(x\leqslant1\), \(2+\sqrt{1-x}\to+\infty\) quand \(x\to-\infty\) : <b>non majorée</b>. Sur \(x>1\), \(g\in\,]1,2[\) ; sur \(x\leqslant1\), \(g\geqslant2\) : donc \(g>1\), <b>minorée</b> (borne inf \(1\), non atteinte).</p>
-        <div class="res">Les deux sont <b>minorées</b> mais <b>non majorées</b>.</div>
-        <p class="q">(b) \(f\) a-t-elle un extremum global en \(2\) ?</p>
-        <p>\(f(2)=4\). Mais \(f(-3)=9>4\) (pas un max) et \(f(0)=0<4\) (pas un min).</p>
-        <div class="res"><b>Non</b> : \(f(2)=4\) n'est ni max ni min global.</div>
-        <p class="q">(c) \(g\) a-t-elle un extremum global en \(1\) ?</p>
-        <p>\(g(1)=2\). À gauche (\(x<1\)) : \(g>2\) ; à droite (\(x>1\)) : \(g<2\). C'est un point de saut.</p>
-        <div class="res"><b>Non</b> : \(g(1)=2\) n'est ni max ni min global.</div>
+        <div class="enonce">\(f(x)=4\) si \(x\geqslant2\), \(x^2\) si \(x&lt;2\). \(g(x)=1+\tfrac1x\) si \(x>1\), \(2+\sqrt{1-x}\) si \(x\leqslant1\).</div>
+
+        <p class="q">a) \(f\) et \(g\) sont-elles majorées ? minorées ?</p>
+        <p class="etape">Étape 1 : \(f\)</p>
+        <ul>
+          <li>Pour \(x\to-\infty\), \(f(x)=x^2\to+\infty\) : non majorée.</li>
+          <li>\(x^2\geqslant 0\) et \(4\geqslant 0\) : minorée par 0 (atteint en 0).</li>
+        </ul>
+        <p class="etape">Étape 2 : \(g\)</p>
+        <ul>
+          <li>Pour \(x\to-\infty\), \(2+\sqrt{1-x}\to+\infty\) : non majorée.</li>
+          <li>Pour \(x>1\), \(g(x)=1+\tfrac1x\in\,]1,2[\) ; pour \(x\leqslant 1\), \(g(x)\geqslant 2\). Donc \(g>1\) : minorée par 1, non atteint.</li>
+        </ul>
+        <div class="res">\(f\) et \(g\) sont <b>minorées</b> mais <b>non majorées</b>.</div>
+
+        <p class="q">b) \(f\) a-t-elle un extremum global en 2 ?</p>
+        <p class="etape">Étape 1 : comparer \(f(2)\) à d'autres valeurs</p>
+        <p>\(f(2)=4\), mais \(f(-3)=9>4\) et \(f(0)=0&lt;4\).</p>
+        <div class="res"><b>Non</b> : \(f(2)\) n'est ni maximum ni minimum global.</div>
+
+        <p class="q">c) \(g\) a-t-elle un extremum global en 1 ?</p>
+        <p class="etape">Étape 1 : comparer \(g(1)\) à ses voisins</p>
+        <p>\(g(1)=2+0=2\). Pour \(x&lt;1\), \(g(x)>2\) ; pour \(x>1\), \(g(x)&lt;2\).</p>
+        <div class="res"><b>Non</b> : \(g(1)\) n'est ni maximum ni minimum global.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 11 — Monotonie de \(f+g\) et \(f\times g\)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">(a) Définition</p><p>\(f\) croissante : \(\forall(a,b)\in\mathbb R^2,\ a\leqslant b\Rightarrow f(a)\leqslant f(b)\).</p>
-        <p class="q">(b) \(f+g\) croissante</p><p>\(a\leqslant b\Rightarrow f(a)\leqslant f(b)\) et \(g(a)\leqslant g(b)\) ; en additionnant, \((f+g)(a)\leqslant(f+g)(b)\).</p>
-        <p class="q">(c) \(f,g\) positives</p>
-        <p>\(a\leqslant b\) : \(0\leqslant f(a)\leqslant f(b)\), \(0\leqslant g(a)\leqslant g(b)\). Alors \(f(a)g(a)\leqslant f(b)g(a)\leqslant f(b)g(b)\).</p>
+        <div class="enonce">\(f\) et \(g\) sont deux fonctions croissantes sur \(\mathbb R\).</div>
+
+        <p class="q">a) Définition d'une fonction croissante</p>
+        <p class="etape">Étape 1 : écrire avec les quantificateurs</p>
+        <div class="res">\(f\) croissante : \(\forall(a,b)\in\mathbb R^2,\ a\leqslant b\Rightarrow f(a)\leqslant f(b)\).</div>
+
+        <p class="q">b) \(f+g\) est croissante</p>
+        <p class="etape">Étape 1 : partir de \(a\leqslant b\)</p>
+        <p>\(f(a)\leqslant f(b)\) et \(g(a)\leqslant g(b)\).</p>
+        <p class="etape">Étape 2 : additionner membre à membre</p>
+        <div class="res">\((f+g)(a)\leqslant(f+g)(b)\) : \(f+g\) est croissante.</div>
+
+        <p class="q">c) \(f\) et \(g\) positives : monotonie de \(f\times g\)</p>
+        <div class="rappel"><span class="lab">Rappel · multiplier des inégalités</span>On peut multiplier membre à membre des inégalités <b>entre nombres positifs</b>.</div>
+        <p class="etape">Étape 1 : les inégalités de départ</p>
+        <p>Pour \(a\leqslant b\) : \(0\leqslant f(a)\leqslant f(b)\) et \(0\leqslant g(a)\leqslant g(b)\).</p>
+        <p class="etape">Étape 2 : multiplier en deux temps</p>
+        \[ f(a)g(a)\leqslant f(b)g(a)\leqslant f(b)g(b) \]
         <div class="res">\(f\times g\) est <b>croissante</b>.</div>
-        <p class="q">(d) \(f,g\) négatives</p>
-        <p>\(a\leqslant b\) : \(f(a)\leqslant f(b)\leqslant0\) donc \(|f(a)|\geqslant|f(b)|\) (idem \(g\)). Les produits sont positifs et \(|f(a)g(a)|\geqslant|f(b)g(b)|\), donc \(f(a)g(a)\geqslant f(b)g(b)\).</p>
-        <div class="res">\(f\times g\) est <b>décroissante</b>.</div>
+
+        <p class="q">d) \(f\) et \(g\) négatives : monotonie de \(f\times g\)</p>
+        <p class="etape">Étape 1 : passer aux valeurs absolues</p>
+        <p>Pour \(a\leqslant b\) : \(f(a)\leqslant f(b)\leqslant 0\), donc \(|f(a)|\geqslant|f(b)|\geqslant 0\). Pareil pour \(g\).</p>
+        <p class="etape">Étape 2 : multiplier (nombres positifs)</p>
+        \[ |f(a)|\,|g(a)|\geqslant|f(b)|\,|g(b)| \]
+        <p class="etape">Étape 3 : revenir aux produits</p>
+        <p>Produit de deux négatifs : \(f(a)g(a)=|f(a)||g(a)|\), et pareil en \(b\).</p>
+        <div class="res">\(f(a)g(a)\geqslant f(b)g(b)\) : \(f\times g\) est <b>décroissante</b>.</div>
       </div>
     </div>
 
@@ -332,11 +624,17 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 12 — Fonctions monotones ET périodiques</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">Déterminer toutes les fonctions \(f:\mathbb R\to\mathbb R\) à la fois monotones et périodiques.</div>
-        <p>Soit \(f\) croissante (le cas décroissant est analogue) et \(T\)-périodique (\(T>0\)). Soient \(x<y\).
-        Comme \(T>0\), il existe \(n\in\mathbb N\) tel que \(y\leqslant x+nT\). Par croissance puis périodicité :</p>
-        \[ f(y)\leqslant f(x+nT)=f(x). \]
-        <p>Or \(x<y\) et \(f\) croissante donnent \(f(x)\leqslant f(y)\). Donc \(f(x)=f(y)\), et ceci pour tous \(x,y\).</p>
-        <div class="res">Les seules fonctions monotones <b>et</b> périodiques sont les fonctions <b>constantes</b>.</div>
+
+        <p class="q">1) Détermination</p>
+        <p>On suppose \(f\) croissante (le cas décroissant se traite en remplaçant \(f\) par \(-f\)) et \(T\)-périodique avec \(T>0\).</p>
+        <p class="etape">Étape 1 : prendre deux réels \(x&lt;y\)</p>
+        <p>Par croissance : \(f(x)\leqslant f(y)\).</p>
+        <p class="etape">Étape 2 : dépasser \(y\) en ajoutant des périodes</p>
+        <p>Comme \(T>0\), il existe \(n\in\mathbb N\) tel que \(x+nT\geqslant y\). Par croissance puis périodicité :</p>
+        \[ f(y)\leqslant f(x+nT)=f(x) \]
+        <p class="etape">Étape 3 : conclure</p>
+        <p>\(f(x)\leqslant f(y)\leqslant f(x)\), donc \(f(x)=f(y)\), pour tous \(x&lt;y\).</p>
+        <div class="res">Les seules fonctions monotones <b>et</b> périodiques sont les fonctions <b>constantes</b> (qui conviennent bien).</div>
       </div>
     </div>
 
