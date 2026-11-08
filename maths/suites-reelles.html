@@ -139,15 +139,25 @@ window.MathJax = {
       <div class="exo-body">
         <div class="enonce">\(u_0=2\) et \(u_{n+1}=\dfrac12\Big(u_n+\dfrac2{u_n}\Big)\). Montrer que \((u_n)\) converge et
         déterminer sa limite.</div>
-        <p class="q">Minoration par \(\sqrt2\).</p>
-        <p>Pour \(u_n>0\) : \(u_{n+1}-\sqrt2=\dfrac{u_n^2-2\sqrt2\,u_n+2}{2u_n}=\dfrac{(u_n-\sqrt2)^2}{2u_n}\geqslant0\).
-        Donc \(u_n\geqslant\sqrt2\) pour tout \(n\geqslant1\) (et \(u_0=2\geqslant\sqrt2\)).</p>
-        <p class="q">Décroissance.</p>
-        <p>\(u_{n+1}-u_n=\dfrac12\Big(\dfrac2{u_n}-u_n\Big)=\dfrac{2-u_n^2}{2u_n}\leqslant0\) car \(u_n^2\geqslant2\).</p>
-        <p class="q">Conclusion.</p>
-        <p>\((u_n)\) est décroissante et minorée par \(\sqrt2\) : elle converge vers \(\ell\geqslant\sqrt2\).
-        Par passage à la limite dans la relation, \(\ell=\tfrac12(\ell+2/\ell)\Rightarrow\ell^2=2\).</p>
-        <div class="res">\(\displaystyle\lim u_n=\sqrt2\) (convergence quadratique très rapide).</div>
+
+        <p class="q">1) Convergence et limite</p>
+        <p>On montre que la suite est minorée par \(\sqrt2\) et décroissante.</p>
+        <p class="etape">Étape 1 : tous les termes sont positifs</p>
+        <p>\(u_0=2>0\), et si \(u_n>0\), alors \(u_{n+1}>0\) (somme et quotient de positifs). Par récurrence, \(u_n>0\) pour tout \(n\).</p>
+        <p class="etape">Étape 2 : minoration par \(\sqrt2\)</p>
+        <p>On réduit au même dénominateur et on reconnaît une identité remarquable :</p>
+        \[ u_{n+1}-\sqrt2=\frac{u_n^2-2\sqrt2\,u_n+2}{2u_n}=\frac{(u_n-\sqrt2)^2}{2u_n}\geqslant0 \]
+        <p>Donc \(u_n\geqslant\sqrt2\) pour \(n\geqslant 1\), et aussi pour \(n=0\) car \(2\geqslant\sqrt2\).</p>
+        <p class="etape">Étape 3 : décroissance</p>
+        \[ u_{n+1}-u_n=\frac12\Big(\frac2{u_n}-u_n\Big)=\frac{2-u_n^2}{2u_n}\leqslant0 \quad\text{car } u_n^2\geqslant 2 \]
+        <p class="etape">Étape 4 : convergence</p>
+        <div class="rappel"><span class="lab">Rappel · théorème de la limite monotone</span>Une suite décroissante et minorée converge.</div>
+        <p>\((u_n)\) converge vers un réel \(\ell\geqslant\sqrt2\).</p>
+        <p class="etape">Étape 5 : identifier la limite</p>
+        <p>On passe à la limite dans la relation de récurrence (\(\ell\neq 0\)) :</p>
+        \[ \ell=\frac12\Big(\ell+\frac2\ell\Big) \iff \ell=\frac2\ell \iff \ell^2=2 \]
+        <p>Comme \(\ell\geqslant\sqrt2>0\), \(\ell=\sqrt2\).</p>
+        <div class="res">\(\displaystyle\lim u_n=\sqrt2\). La convergence est très rapide : \(u_3\approx 1{,}414\,216\), pour \(\sqrt2\approx 1{,}414\,214\).</div>
       </div>
     </div>
 
@@ -155,12 +165,21 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice B — Suite de Fibonacci (formule de Binet)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">\(F_0=0,\ F_1=1,\ F_{n+2}=F_{n+1}+F_n\). Donner le terme général.</div>
-        <p>Équation caractéristique \(r^2=r+1\), soit \(r^2-r-1=0\), de racines
-        \(\varphi=\dfrac{1+\sqrt5}2\) (nombre d'or) et \(\psi=\dfrac{1-\sqrt5}2\).</p>
-        <p>Donc \(F_n=\alpha\varphi^n+\beta\psi^n\). Les conditions initiales donnent \(\alpha+\beta=0\) et
-        \(\alpha\varphi+\beta\psi=1\), d'où \(\alpha(\varphi-\psi)=1\) avec \(\varphi-\psi=\sqrt5\).</p>
+
+        <p class="q">1) Terme général</p>
+        <div class="rappel"><span class="lab">Rappel · récurrence linéaire d'ordre 2</span>Pour \(u_{n+2}=au_{n+1}+bu_n\), si l'équation caractéristique \(r^2=ar+b\) a deux racines réelles distinctes \(r_1,r_2\), alors \(u_n=\alpha r_1^n+\beta r_2^n\).</div>
+        <p class="etape">Étape 1 : équation caractéristique</p>
+        \[ r^2=r+1 \iff r^2-r-1=0 \qquad \Delta=5 \]
+        \[ \varphi=\frac{1+\sqrt5}2 \qquad \psi=\frac{1-\sqrt5}2 \]
+        <p class="etape">Étape 2 : forme du terme général</p>
+        \[ F_n=\alpha\varphi^n+\beta\psi^n \]
+        <p class="etape">Étape 3 : conditions initiales</p>
+        <ul>
+          <li>\(F_0=0\) : \(\alpha+\beta=0\), donc \(\beta=-\alpha\).</li>
+          <li>\(F_1=1\) : \(\alpha(\varphi-\psi)=1\), avec \(\varphi-\psi=\sqrt5\), donc \(\alpha=\dfrac1{\sqrt5}\).</li>
+        </ul>
         <div class="res">\(\displaystyle F_n=\frac1{\sqrt5}\left(\Big(\tfrac{1+\sqrt5}2\Big)^n-\Big(\tfrac{1-\sqrt5}2\Big)^n\right)\) (formule de Binet).</div>
-        <p style="font-size:.9rem;opacity:.85">Comme \(|\psi|<1\), \(F_n\sim\dfrac{\varphi^n}{\sqrt5}\) et \(\dfrac{F_{n+1}}{F_n}\to\varphi\).</p>
+        <p>Comme \(|\psi|&lt;1\), \(\psi^n\to 0\) : \(F_n\sim\dfrac{\varphi^n}{\sqrt5}\) et \(\dfrac{F_{n+1}}{F_n}\to\varphi\) (nombre d'or).</p>
       </div>
     </div>
 
@@ -168,11 +187,18 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice C — Limite par encadrement (gendarmes)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Déterminer \(\displaystyle\lim_{n\to+\infty}\sum_{k=1}^n\frac1{\sqrt{n^2+k}}\).</div>
-        <p>Chaque terme (\(1\leqslant k\leqslant n\)) est encadré : \(\dfrac1{\sqrt{n^2+n}}\leqslant\dfrac1{\sqrt{n^2+k}}\leqslant\dfrac1{\sqrt{n^2+1}}\).
-        Il y a \(n\) termes, donc :</p>
-        \[ \frac{n}{\sqrt{n^2+n}}\leqslant u_n\leqslant\frac{n}{\sqrt{n^2+1}}. \]
-        <p>Les deux membres tendent vers \(1\) (\(\tfrac{n}{\sqrt{n^2+n}}=\tfrac1{\sqrt{1+1/n}}\to1\)).</p>
-        <div class="res">Par le théorème des gendarmes, \(\displaystyle\lim u_n=1\).</div>
+
+        <p class="q">1) Calcul de la limite</p>
+        <p>On note \(u_n\) la somme et on l'encadre.</p>
+        <p class="etape">Étape 1 : encadrer chaque terme</p>
+        <p>Pour \(1\leqslant k\leqslant n\), \(n^2+1\leqslant n^2+k\leqslant n^2+n\), et l'inverse de la racine est décroissant :</p>
+        \[ \frac1{\sqrt{n^2+n}}\leqslant\frac1{\sqrt{n^2+k}}\leqslant\frac1{\sqrt{n^2+1}} \]
+        <p class="etape">Étape 2 : sommer les \(n\) termes</p>
+        \[ \frac{n}{\sqrt{n^2+n}}\leqslant u_n\leqslant\frac{n}{\sqrt{n^2+1}} \]
+        <p class="etape">Étape 3 : limites des bornes</p>
+        \[ \frac{n}{\sqrt{n^2+n}}=\frac1{\sqrt{1+1/n}}\to1 \qquad \frac{n}{\sqrt{n^2+1}}=\frac1{\sqrt{1+1/n^2}}\to1 \]
+        <div class="rappel"><span class="lab">Rappel · théorème des gendarmes</span>Si \(a_n\leqslant u_n\leqslant b_n\) et \(a_n,b_n\to\ell\), alors \(u_n\to\ell\).</div>
+        <div class="res">\(\displaystyle\lim u_n=1\).</div>
       </div>
     </div>
   </section>
@@ -188,12 +214,46 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 1 — Monotonie</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(u_n=\tfrac1n+\tfrac1{n+1}\)</p><p>\(u_{n+1}-u_n=\tfrac1{n+2}-\tfrac1n<0\).</p><p class="res"><b>Décroissante</b>.</p>
-        <p class="q">(b) \(u_n=n-2^n\)</p><p>\(u_{n+1}-u_n=1-2^n\leqslant0\) (pour \(n\geqslant1\)).</p><p class="res"><b>Décroissante</b>.</p>
-        <p class="q">(c) \(u_n=\tfrac{e^n}{n!}\)</p><p>\(\tfrac{u_{n+1}}{u_n}=\tfrac{e}{n+1}\) : \(>1\) pour \(n\leqslant1\), \(<1\) pour \(n\geqslant2\).</p><p class="res"><b>Non monotone</b> (croît jusqu'à \(n=2\), puis décroît).</p>
-        <p class="q">(d) \(u_n=\tfrac{n-1}{n+3}\)</p><p>\(u_{n+1}-u_n=\tfrac{4}{(n+4)(n+3)}>0\).</p><p class="res"><b>Croissante</b>.</p>
-        <p class="q">(e) \(u_n=\prod_{i=0}^n(n-i)\)</p><p>Le facteur \(i=n\) vaut \(n-n=0\).</p><p class="res"><b>Constante</b> (nulle) : \(u_n=0\).</p>
-        <p class="q">(f) \(u_n=\prod_{i=0}^n(n+i)=n(n+1)\cdots(2n)\)</p><p>\(\tfrac{u_{n+1}}{u_n}=\tfrac{(2n+1)(2n+2)}{n}>1\).</p><p class="res"><b>Croissante</b>.</p>
+        <div class="enonce">Étudier la monotonie des suites suivantes.</div>
+
+        <p class="q">a) \(u_n=\tfrac1n+\tfrac1{n+1}\)</p>
+        <div class="rappel"><span class="lab">Rappel · deux méthodes</span>Signe de \(u_{n+1}-u_n\) ; ou, si \(u_n>0\), comparer \(\dfrac{u_{n+1}}{u_n}\) à 1.</div>
+        <p class="etape">Étape 1 : différence</p>
+        \[ u_{n+1}-u_n=\frac1{n+1}+\frac1{n+2}-\frac1n-\frac1{n+1}=\frac1{n+2}-\frac1n&lt;0 \]
+        <div class="res"><b>Décroissante</b>.</div>
+
+        <p class="q">b) \(u_n=n-2^n\)</p>
+        <p class="etape">Étape 1 : différence</p>
+        \[ u_{n+1}-u_n=1-(2^{n+1}-2^n)=1-2^n\leqslant 0 \]
+        <div class="res"><b>Décroissante</b> (strictement à partir de \(n=1\)).</div>
+
+        <p class="q">c) \(u_n=\tfrac{e^n}{n!}\)</p>
+        <p class="etape">Étape 1 : quotient (termes positifs)</p>
+        \[ \frac{u_{n+1}}{u_n}=\frac{e^{n+1}}{(n+1)!}\times\frac{n!}{e^n}=\frac{e}{n+1} \]
+        <p class="etape">Étape 2 : comparer à 1</p>
+        <ul>
+          <li>\(n=0\) ou \(n=1\) : \(n+1&lt;e\), le quotient dépasse 1, la suite croît.</li>
+          <li>\(n\geqslant 2\) : \(n+1>e\), la suite décroît.</li>
+        </ul>
+        <div class="res"><b>Non monotone</b> : croissante jusqu'à \(u_2\), puis décroissante.</div>
+
+        <p class="q">d) \(u_n=\tfrac{n-1}{n+3}\)</p>
+        <p class="etape">Étape 1 : différence au même dénominateur</p>
+        \[ u_{n+1}-u_n=\frac{n}{n+4}-\frac{n-1}{n+3}=\frac{n(n+3)-(n-1)(n+4)}{(n+4)(n+3)}=\frac{4}{(n+4)(n+3)}>0 \]
+        <div class="res"><b>Croissante</b>.</div>
+
+        <p class="q">e) \(u_n=\prod_{i=0}^n(n-i)\)</p>
+        <p class="etape">Étape 1 : regarder le dernier facteur</p>
+        <p>Pour \(i=n\), le facteur vaut \(n-n=0\).</p>
+        <div class="res"><b>Constante</b> : \(u_n=0\) pour tout \(n\).</div>
+
+        <p class="q">f) \(u_n=\prod_{i=0}^n(n+i)\)</p>
+        <p class="etape">Étape 1 : écrire le produit</p>
+        <p>\(u_n=n(n+1)\cdots(2n)\), donc \(u_0=0\) et \(u_n>0\) pour \(n\geqslant 1\).</p>
+        <p class="etape">Étape 2 : quotient pour \(n\geqslant 1\)</p>
+        <p>\(u_{n+1}=(n+1)\cdots(2n)(2n+1)(2n+2)\) : par rapport à \(u_n\), on perd le facteur \(n\) et on gagne \((2n+1)(2n+2)\).</p>
+        \[ \frac{u_{n+1}}{u_n}=\frac{(2n+1)(2n+2)}{n}>1 \]
+        <div class="res"><b>Croissante</b> (et \(u_0=0&lt;u_1=2\)).</div>
       </div>
     </div>
 
@@ -202,25 +262,107 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 2 — Limites + justification formelle</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(u_n=n^2\to+\infty\)</p><p>\(\forall A>0\), prendre \(n_0=\lceil\sqrt A\rceil\) : \(n\geqslant n_0\Rightarrow n^2\geqslant A\).</p>
-        <p class="q">(b) \(u_n=\sqrt{n+3}\to+\infty\)</p><p>\(\forall A>0\), \(n_0=\lceil A^2\rceil\) : \(n\geqslant n_0\Rightarrow\sqrt{n+3}\geqslant A\).</p>
-        <p class="q">(c) \(u_n=\tfrac1{2n+3}\to0\)</p><p>\(\tfrac1{2n+3}\leqslant\varepsilon\iff n\geqslant\tfrac{1/\varepsilon-3}2\).</p>
-        <p class="q">(d) \(u_n=\tfrac{2n-1}{n+1}\to2\)</p><p>\(|u_n-2|=\tfrac{3}{n+1}\leqslant\varepsilon\iff n\geqslant\tfrac3\varepsilon-1\).</p>
+        <div class="enonce">Donner la limite de chaque suite et la justifier avec la définition (\(\varepsilon\) ou \(A\)).</div>
+
+        <p class="q">a) \(u_n=n^2\)</p>
+        <div class="rappel"><span class="lab">Rappel · définitions</span>\(u_n\to+\infty\) : \(\forall A>0,\ \exists n_0,\ \forall n\geqslant n_0,\ u_n\geqslant A\).<br>\(u_n\to\ell\) : \(\forall\varepsilon>0,\ \exists n_0,\ \forall n\geqslant n_0,\ |u_n-\ell|\leqslant\varepsilon\).</div>
+        <p class="etape">Étape 1 : conjecture</p>
+        <p>\(u_n\to+\infty\).</p>
+        <p class="etape">Étape 2 : trouver \(n_0\)</p>
+        <p>Soit \(A>0\). On prend \(n_0=\lceil\sqrt A\rceil\). Pour \(n\geqslant n_0\) : \(n^2\geqslant n_0^2\geqslant A\).</p>
+        <div class="res">\(n^2\to+\infty\).</div>
+
+        <p class="q">b) \(u_n=\sqrt{n+3}\)</p>
+        <p class="etape">Étape 1 : conjecture</p>
+        <p>\(u_n\to+\infty\).</p>
+        <p class="etape">Étape 2 : trouver \(n_0\)</p>
+        <p>Soit \(A>0\). On prend \(n_0=\lceil A^2\rceil\). Pour \(n\geqslant n_0\) : \(\sqrt{n+3}\geqslant\sqrt n\geqslant A\).</p>
+        <div class="res">\(\sqrt{n+3}\to+\infty\).</div>
+
+        <p class="q">c) \(u_n=\tfrac1{2n+3}\)</p>
+        <p class="etape">Étape 1 : conjecture</p>
+        <p>\(u_n\to 0\).</p>
+        <p class="etape">Étape 2 : résoudre \(|u_n-0|\leqslant\varepsilon\)</p>
+        \[ \frac1{2n+3}\leqslant\varepsilon \iff 2n+3\geqslant\frac1\varepsilon \iff n\geqslant\frac{1/\varepsilon-3}{2} \]
+        <p>Tout entier \(n_0\) au-delà de cette valeur convient.</p>
+        <div class="res">\(\dfrac1{2n+3}\to 0\).</div>
+
+        <p class="q">d) \(u_n=\tfrac{2n-1}{n+1}\)</p>
+        <p class="etape">Étape 1 : conjecture</p>
+        <p>Rapport des termes dominants : \(u_n\to 2\).</p>
+        <p class="etape">Étape 2 : calculer l'écart</p>
+        \[ u_n-2=\frac{2n-1-2n-2}{n+1}=\frac{-3}{n+1} \]
+        <p class="etape">Étape 3 : résoudre \(|u_n-2|\leqslant\varepsilon\)</p>
+        \[ \frac{3}{n+1}\leqslant\varepsilon \iff n\geqslant\frac3\varepsilon-1 \]
+        <div class="res">\(\dfrac{2n-1}{n+1}\to 2\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 3 — Limites diverses</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\tfrac{-2n^3+3n-4}{n^2+9}\sim-2n\)</p><p class="res">\(-\infty\)</p>
-        <p class="q">(b) \(\tfrac{3n^2-2n+1}{n\sqrt n+n-1}\sim\tfrac{3n^2}{n^{3/2}}=3\sqrt n\)</p><p class="res">\(+\infty\)</p>
-        <p class="q">(c) \(\tfrac1n\sin n\)</p><p>\(|u_n|\leqslant\tfrac1n\) (bornée \(\times\) limite nulle).</p><p class="res">\(0\)</p>
-        <p class="q">(d) \(\sqrt{n+1}-\sqrt n=\tfrac1{\sqrt{n+1}+\sqrt n}\)</p><p class="res">\(0\)</p>
-        <p class="q">(e) \(\sqrt{n^2+1}-\sqrt{2n^2-1}\sim n(1-\sqrt2)\)</p><p class="res">\(-\infty\)</p>
-        <p class="q">(f) \(n-\sqrt{(n+1)(n+3)}=\dfrac{-4n-3}{n+\sqrt{n^2+4n+3}}\sim\tfrac{-4n}{2n}\)</p><p class="res">\(-2\)</p>
-        <p class="q">(g) \(\sum_{k=1}^{3n}\tfrac1{\sqrt{4n+k}}\geqslant\tfrac{3n}{\sqrt{7n}}=\tfrac{3\sqrt n}{\sqrt7}\)</p><p class="res">\(+\infty\)</p>
-        <p class="q">(h) \(\sum_{k=1}^{2n+1}\tfrac1{\sqrt{n^2+k}}\), encadré entre \(\tfrac{2n+1}{\sqrt{n^2+2n+1}}\) et \(\tfrac{2n+1}{\sqrt{n^2+1}}\)</p><p class="res">\(2\) (gendarmes)</p>
-        <p class="q">(i) \(\sum_{k=1}^{n^2}\tfrac1{\sqrt{n^2+k}}\geqslant\tfrac{n^2}{\sqrt{2n^2}}=\tfrac{n}{\sqrt2}\)</p><p class="res">\(+\infty\)</p>
+        <div class="enonce">Déterminer la limite des suites suivantes.</div>
+
+        <p class="q">a) \(\tfrac{-2n^3+3n-4}{n^2+9}\)</p>
+        <div class="rappel"><span class="lab">Rappel · fraction rationnelle en l'infini</span>On factorise par le terme de plus haut degré en haut et en bas : la limite est celle du quotient des termes dominants.</div>
+        <p class="etape">Étape 1 : termes dominants</p>
+        \[ \frac{-2n^3\,(1+\cdots)}{n^2\,(1+\cdots)}\approx-2n \]
+        <div class="res">\(-\infty\)</div>
+
+        <p class="q">b) \(\tfrac{3n^2-2n+1}{n\sqrt n+n-1}\)</p>
+        <p class="etape">Étape 1 : termes dominants</p>
+        <p>En haut \(3n^2\), en bas \(n^{3/2}\) :</p>
+        \[ \frac{3n^2}{n^{3/2}}=3\sqrt n \]
+        <div class="res">\(+\infty\)</div>
+
+        <p class="q">c) \(\tfrac1n\sin n\)</p>
+        <p class="etape">Étape 1 : majorer la valeur absolue</p>
+        \[ \Big|\frac{\sin n}{n}\Big|\leqslant\frac1n \]
+        <p class="etape">Étape 2 : gendarmes</p>
+        <p>\(\tfrac1n\to 0\) : une suite bornée fois une suite qui tend vers 0 tend vers 0.</p>
+        <div class="res">\(0\)</div>
+
+        <p class="q">d) \(\sqrt{n+1}-\sqrt n\)</p>
+        <p class="etape">Étape 1 : forme indéterminée \(\infty-\infty\), quantité conjuguée</p>
+        \[ \sqrt{n+1}-\sqrt n=\frac{(n+1)-n}{\sqrt{n+1}+\sqrt n}=\frac1{\sqrt{n+1}+\sqrt n} \]
+        <div class="res">\(0\)</div>
+
+        <p class="q">e) \(\sqrt{n^2+1}-\sqrt{2n^2-1}\)</p>
+        <p class="etape">Étape 1 : factoriser par \(n\)</p>
+        \[ n\left(\sqrt{1+\tfrac1{n^2}}-\sqrt{2-\tfrac1{n^2}}\right) \]
+        <p class="etape">Étape 2 : limite de la parenthèse</p>
+        <p>Elle tend vers \(1-\sqrt2&lt;0\), et \(n\to+\infty\).</p>
+        <div class="res">\(-\infty\)</div>
+
+        <p class="q">f) \(n-\sqrt{(n+1)(n+3)}\)</p>
+        <p class="etape">Étape 1 : quantité conjuguée</p>
+        \[ n-\sqrt{n^2+4n+3}=\frac{n^2-(n^2+4n+3)}{n+\sqrt{n^2+4n+3}}=\frac{-4n-3}{n+\sqrt{n^2+4n+3}} \]
+        <p class="etape">Étape 2 : diviser en haut et en bas par \(n\)</p>
+        \[ \frac{-4-3/n}{1+\sqrt{1+4/n+3/n^2}}\to\frac{-4}{2} \]
+        <div class="res">\(-2\)</div>
+
+        <p class="q">g) \(\sum_{k=1}^{3n}\tfrac1{\sqrt{4n+k}}\)</p>
+        <p class="etape">Étape 1 : minorer chaque terme</p>
+        <p>Pour \(k\leqslant 3n\), \(4n+k\leqslant 7n\), donc \(\dfrac1{\sqrt{4n+k}}\geqslant\dfrac1{\sqrt{7n}}\).</p>
+        <p class="etape">Étape 2 : sommer les \(3n\) termes</p>
+        \[ u_n\geqslant\frac{3n}{\sqrt{7n}}=\frac{3\sqrt n}{\sqrt7}\to+\infty \]
+        <div class="res">\(+\infty\) (par comparaison).</div>
+
+        <p class="q">h) \(\sum_{k=1}^{2n+1}\tfrac1{\sqrt{n^2+k}}\)</p>
+        <p class="etape">Étape 1 : encadrer chaque terme</p>
+        <p>Pour \(1\leqslant k\leqslant 2n+1\) : \(n^2+1\leqslant n^2+k\leqslant(n+1)^2\).</p>
+        <p class="etape">Étape 2 : sommer les \(2n+1\) termes</p>
+        \[ \frac{2n+1}{n+1}\leqslant u_n\leqslant\frac{2n+1}{\sqrt{n^2+1}} \]
+        <p class="etape">Étape 3 : gendarmes</p>
+        <p>Les deux bornes tendent vers 2.</p>
+        <div class="res">\(2\)</div>
+
+        <p class="q">i) \(\sum_{k=1}^{n^2}\tfrac1{\sqrt{n^2+k}}\)</p>
+        <p class="etape">Étape 1 : minorer chaque terme</p>
+        <p>Pour \(k\leqslant n^2\), \(n^2+k\leqslant 2n^2\).</p>
+        <p class="etape">Étape 2 : sommer les \(n^2\) termes</p>
+        \[ u_n\geqslant\frac{n^2}{\sqrt2\,n}=\frac{n}{\sqrt2}\to+\infty \]
+        <div class="res">\(+\infty\)</div>
       </div>
     </div>
 
@@ -229,26 +371,61 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 4 — Montrer l'adjacence</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(u_n=\sum_{k=1}^n\tfrac1{k^2}\), \(v_n=u_n+\tfrac1n\)</p>
-        <p>\(u\) croissante (\(u_{n+1}-u_n=\tfrac1{(n+1)^2}>0\)). \(v_{n+1}-v_n=\tfrac1{(n+1)^2}-\tfrac1{n(n+1)}=\tfrac{-1}{n(n+1)^2}<0\) (\(v\) décroissante). \(v_n-u_n=\tfrac1n\to0\).</p>
-        <p class="res"><b>Adjacentes</b> (elles encadrent \(\sum_{k\geqslant1}\tfrac1{k^2}=\tfrac{\pi^2}6\)).</p>
-        <p class="q">(b) \(u_n=\sum_{k=1}^n\tfrac1{k^3}\), \(v_n=u_n+\tfrac1{n^2}\)</p>
-        <p>\(u\) croissante. \(v_{n+1}-v_n=\tfrac1{(n+1)^3}+\big(\tfrac1{(n+1)^2}-\tfrac1{n^2}\big)=\tfrac1{(n+1)^3}-\tfrac{2n+1}{n^2(n+1)^2}<0\) (le second terme domine). \(v_n-u_n=\tfrac1{n^2}\to0\).</p>
-        <p class="res"><b>Adjacentes</b>.</p>
+        <div class="enonce">Montrer que les suites \((u_n)\) et \((v_n)\) sont adjacentes (\(n\geqslant 1\)).</div>
+
+        <p class="q">a) \(u_n=\sum_{k=1}^n\tfrac1{k^2}\), \(v_n=u_n+\tfrac1n\)</p>
+        <div class="rappel"><span class="lab">Rappel · suites adjacentes</span>\((u_n)\) croissante, \((v_n)\) décroissante et \(v_n-u_n\to 0\). Elles convergent alors vers la même limite.</div>
+        <p class="etape">Étape 1 : \(u\) croissante</p>
+        \[ u_{n+1}-u_n=\frac1{(n+1)^2}>0 \]
+        <p class="etape">Étape 2 : \(v\) décroissante</p>
+        \[ v_{n+1}-v_n=\frac1{(n+1)^2}+\frac1{n+1}-\frac1n=\frac1{(n+1)^2}-\frac1{n(n+1)}=\frac{n-(n+1)}{n(n+1)^2}=\frac{-1}{n(n+1)^2}&lt;0 \]
+        <p class="etape">Étape 3 : l'écart tend vers 0</p>
+        \[ v_n-u_n=\frac1n\to0 \]
+        <div class="res"><b>Adjacentes</b> : elles ont une limite commune (qui vaut \(\tfrac{\pi^2}6\)).</div>
+
+        <p class="q">b) \(u_n=\sum_{k=1}^n\tfrac1{k^3}\), \(v_n=u_n+\tfrac1{n^2}\)</p>
+        <p class="etape">Étape 1 : \(u\) croissante</p>
+        <p>\(u_{n+1}-u_n=\tfrac1{(n+1)^3}>0\).</p>
+        <p class="etape">Étape 2 : \(v\) décroissante</p>
+        \[ v_{n+1}-v_n=\frac1{(n+1)^3}+\frac1{(n+1)^2}-\frac1{n^2}=\frac1{(n+1)^3}-\frac{2n+1}{n^2(n+1)^2} \]
+        <p>Au dénominateur commun \(n^2(n+1)^3\) :</p>
+        \[ v_{n+1}-v_n=\frac{n^2-(2n+1)(n+1)}{n^2(n+1)^3}=\frac{-(n^2+3n+1)}{n^2(n+1)^3}&lt;0 \]
+        <p class="etape">Étape 3 : l'écart tend vers 0</p>
+        <p>\(v_n-u_n=\tfrac1{n^2}\to 0\).</p>
+        <div class="res"><b>Adjacentes</b>.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 5 — Moyenne arithmético-géométrique</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <div class="enonce">\(0<a<b\), \(u_0=a\), \(v_0=b\), \(u_{n+1}=\sqrt{u_nv_n}\), \(v_{n+1}=\tfrac{u_n+v_n}2\).</div>
-        <p class="q">(a) \(0<u_n<v_n\)</p>
-        <p>Init \(0<a<b\). Hérédité : \(u_{n+1}=\sqrt{u_nv_n}>0\), \(v_{n+1}>0\), et par l'inégalité arithmético-géométrique \(\sqrt{u_nv_n}<\tfrac{u_n+v_n}2\) (stricte car \(u_n\neq v_n\)).</p>
-        <p class="q">(b) \(v_n-u_n\leqslant\tfrac1{2^n}(v_0-u_0)\)</p>
-        <p>\(v_{n+1}-u_{n+1}=\tfrac{u_n+v_n}2-\sqrt{u_nv_n}\leqslant\tfrac{u_n+v_n}2-u_n=\tfrac{v_n-u_n}2\) (car \(\sqrt{u_nv_n}\geqslant u_n\)). D'où par récurrence l'encadrement.</p>
-        <p class="q">(c) Adjacence</p>
-        <p>\(u\) croissante (\(u_{n+1}=\sqrt{u_nv_n}\geqslant u_n\)), \(v\) décroissante (\(v_{n+1}=\tfrac{u_n+v_n}2\leqslant v_n\)), et \(v_n-u_n\to0\) par (b).</p>
-        <div class="res">\(u\) et \(v\) sont <b>adjacentes</b> : elles convergent vers la <b>moyenne arithmético-géométrique</b> de \(a\) et \(b\).</div>
+        <div class="enonce">\(0&lt;a&lt;b\), \(u_0=a\), \(v_0=b\), \(u_{n+1}=\sqrt{u_nv_n}\), \(v_{n+1}=\tfrac{u_n+v_n}2\).</div>
+
+        <p class="q">a) \(0&lt;u_n&lt;v_n\)</p>
+        <p>On raisonne par récurrence.</p>
+        <div class="rappel"><span class="lab">Rappel · inégalité arithmético-géométrique</span>\[ x,y>0:\quad \sqrt{xy}\leqslant\frac{x+y}2, \quad\text{égalité si et seulement si } x=y \]Elle vient de \(\frac{x+y}{2}-\sqrt{xy}=\frac12(\sqrt x-\sqrt y)^2\).</div>
+        <p class="etape">Étape 1 : initialisation</p>
+        <p>\(0&lt;a&lt;b\).</p>
+        <p class="etape">Étape 2 : hérédité</p>
+        <p>Si \(0&lt;u_n&lt;v_n\) : \(u_{n+1}=\sqrt{u_nv_n}>0\), et l'inégalité stricte (car \(u_n\neq v_n\)) donne \(u_{n+1}&lt;v_{n+1}\).</p>
+        <div class="res">\(0&lt;u_n&lt;v_n\) pour tout \(n\).</div>
+
+        <p class="q">b) \(v_n-u_n\leqslant\tfrac1{2^n}(v_0-u_0)\)</p>
+        <p class="etape">Étape 1 : relier deux écarts successifs</p>
+        <p>Comme \(u_n&lt;v_n\), \(\sqrt{u_nv_n}\geqslant\sqrt{u_nu_n}=u_n\). Donc :</p>
+        \[ v_{n+1}-u_{n+1}=\frac{u_n+v_n}2-\sqrt{u_nv_n}\leqslant\frac{u_n+v_n}2-u_n=\frac{v_n-u_n}2 \]
+        <p class="etape">Étape 2 : récurrence</p>
+        <p>L'écart est au moins divisé par 2 à chaque étape.</p>
+        <div class="res">\(v_n-u_n\leqslant\dfrac{v_0-u_0}{2^n}\).</div>
+
+        <p class="q">c) Adjacence</p>
+        <p class="etape">Étape 1 : \(u\) croissante</p>
+        <p>\(u_{n+1}=\sqrt{u_nv_n}\geqslant\sqrt{u_n^2}=u_n\).</p>
+        <p class="etape">Étape 2 : \(v\) décroissante</p>
+        <p>\(v_{n+1}=\dfrac{u_n+v_n}2\leqslant\dfrac{v_n+v_n}2=v_n\).</p>
+        <p class="etape">Étape 3 : l'écart tend vers 0</p>
+        <p>Par b), \(0\leqslant v_n-u_n\leqslant\dfrac{b-a}{2^n}\to 0\).</p>
+        <div class="res">\(u\) et \(v\) sont <b>adjacentes</b> : leur limite commune est la <b>moyenne arithmético-géométrique</b> de \(a\) et \(b\).</div>
       </div>
     </div>
 
@@ -256,11 +433,39 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 6 — Moyenne harmonico-arithmétique</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">\(u_0=1\), \(v_0>1\), \(u_{n+1}=\tfrac{2u_nv_n}{u_n+v_n}\), \(v_{n+1}=\tfrac12(u_n+v_n)\).</div>
-        <p class="q">(a) \(0<u_n<v_n\)</p><p>Init OK. Hérédité : moyenne harmonique \(<\) moyenne arithmétique (strict si \(u_n\neq v_n\)), les deux \(>0\).</p>
-        <p class="q">(b) Adjacence</p>
-        <p>\(u_{n+1}-u_n=\tfrac{u_n(v_n-u_n)}{u_n+v_n}>0\) (croissante) ; \(v_{n+1}-v_n=\tfrac{u_n-v_n}2<0\) (décroissante) ; et \(v_{n+1}-u_{n+1}=\tfrac{(v_n-u_n)^2}{2(u_n+v_n)}\leqslant\tfrac12(v_n-u_n)\to0\).</p>
-        <p class="q">(c) \(uv\) constante</p><p>\(u_{n+1}v_{n+1}=\tfrac{2u_nv_n}{u_n+v_n}\cdot\tfrac{u_n+v_n}2=u_nv_n\).</p><p class="res">\(u_nv_n=u_0v_0=v_0\) pour tout \(n\).</p>
-        <p class="q">(d) Limite</p><p>\(u,v\to\ell\) (adjacentes) et \(u_nv_n\to\ell^2=v_0\).</p><p class="res">\(\ell=\sqrt{v_0}\) (moyenne géométrique de \(u_0=1\) et \(v_0\)).</p>
+
+        <p class="q">a) \(0&lt;u_n&lt;v_n\)</p>
+        <p>On raisonne par récurrence.</p>
+        <p class="etape">Étape 1 : initialisation</p>
+        <p>\(0&lt;1&lt;v_0\).</p>
+        <p class="etape">Étape 2 : hérédité</p>
+        <p>Si \(0&lt;u_n&lt;v_n\), les deux nouveaux termes sont positifs, et :</p>
+        \[ v_{n+1}-u_{n+1}=\frac{u_n+v_n}2-\frac{2u_nv_n}{u_n+v_n}=\frac{(u_n+v_n)^2-4u_nv_n}{2(u_n+v_n)}=\frac{(v_n-u_n)^2}{2(u_n+v_n)}>0 \]
+        <div class="res">\(0&lt;u_n&lt;v_n\) pour tout \(n\).</div>
+
+        <p class="q">b) Adjacence</p>
+        <p class="etape">Étape 1 : \(u\) croissante</p>
+        \[ u_{n+1}-u_n=\frac{2u_nv_n-u_n^2-u_nv_n}{u_n+v_n}=\frac{u_n(v_n-u_n)}{u_n+v_n}>0 \]
+        <p class="etape">Étape 2 : \(v\) décroissante</p>
+        \[ v_{n+1}-v_n=\frac{u_n-v_n}2&lt;0 \]
+        <p class="etape">Étape 3 : l'écart tend vers 0</p>
+        <p>D'après le calcul de a), et comme \(v_n-u_n\leqslant u_n+v_n\) :</p>
+        \[ v_{n+1}-u_{n+1}=\frac{v_n-u_n}{2}\times\frac{v_n-u_n}{u_n+v_n}\leqslant\frac{v_n-u_n}2 \]
+        <p>Par récurrence \(0&lt;v_n-u_n\leqslant\dfrac{v_0-1}{2^n}\to 0\).</p>
+        <div class="res"><b>Adjacentes</b>.</div>
+
+        <p class="q">c) \(u_nv_n\) est constante</p>
+        <p class="etape">Étape 1 : multiplier les deux relations</p>
+        \[ u_{n+1}v_{n+1}=\frac{2u_nv_n}{u_n+v_n}\times\frac{u_n+v_n}2=u_nv_n \]
+        <div class="res">\(u_nv_n=u_0v_0=v_0\) pour tout \(n\).</div>
+
+        <p class="q">d) Limite commune</p>
+        <p class="etape">Étape 1 : passer à la limite dans c)</p>
+        <p>\(u_n\to\ell\) et \(v_n\to\ell\), donc \(u_nv_n\to\ell^2\). Or \(u_nv_n=v_0\).</p>
+        \[ \ell^2=v_0 \]
+        <p class="etape">Étape 2 : signe</p>
+        <p>\(\ell\geqslant u_0=1>0\).</p>
+        <div class="res">\(\ell=\sqrt{v_0}\) : la moyenne géométrique de \(u_0=1\) et \(v_0\).</div>
       </div>
     </div>
 
@@ -270,10 +475,22 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 7 — Suite entière : converge \(\iff\) stationnaire</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">\(u\in\mathbb Z^{\mathbb N}\).</div>
-        <p class="q">\(\Leftarrow\)</p><p>Stationnaire \(\Rightarrow\) constante à partir d'un rang \(\Rightarrow\) converge.</p>
-        <p class="q">\(\Rightarrow\)</p>
-        <p>Si \(u\to\ell\), avec \(\varepsilon=\tfrac12\) : \(\exists n_0,\ \forall m,n\geqslant n_0,\ |u_n-u_m|\leqslant|u_n-\ell|+|\ell-u_m|<1\). Or \(u_n-u_m\in\mathbb Z\) et \(|u_n-u_m|<1\Rightarrow u_n=u_m\).</p>
-        <div class="res">\(u\) est <b>stationnaire</b>. ∎</div>
+
+        <p class="q">1) Sens \(\Leftarrow\)</p>
+        <p class="etape">Étape 1 : traduire « stationnaire »</p>
+        <p>À partir d'un rang, \(u_n\) est constante égale à \(c\). Donc \(u_n\to c\).</p>
+        <div class="res">Une suite stationnaire converge.</div>
+
+        <p class="q">2) Sens \(\Rightarrow\)</p>
+        <p class="etape">Étape 1 : appliquer la définition avec \(\varepsilon=\tfrac12\)</p>
+        <p>Si \(u_n\to\ell\), il existe \(n_0\) tel que \(|u_n-\ell|&lt;\tfrac12\) pour \(n\geqslant n_0\).</p>
+        <p class="etape">Étape 2 : comparer deux termes</p>
+        <div class="rappel"><span class="lab">Rappel · inégalité triangulaire</span>\[ |a-b|\leqslant|a-c|+|c-b| \]</div>
+        <p>Pour \(m,n\geqslant n_0\) :</p>
+        \[ |u_n-u_m|\leqslant|u_n-\ell|+|\ell-u_m|&lt;\frac12+\frac12=1 \]
+        <p class="etape">Étape 3 : utiliser que ce sont des entiers</p>
+        <p>\(u_n-u_m\) est un entier de valeur absolue \(&lt;1\) : il est nul.</p>
+        <div class="res">\(u_n=u_{n_0}\) pour tout \(n\geqslant n_0\) : \(u\) est <b>stationnaire</b>.</div>
       </div>
     </div>
 
@@ -281,25 +498,54 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 8 — Théorème de Cesàro</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">\(v_n=\tfrac1n\sum_{k=1}^n u_k\).</div>
-        <p class="q">(a) Différence</p>
-        <p>Avec \(S_n=\sum_{k=1}^n u_k\) : \(v_{n+1}-v_n=\tfrac{S_{n+1}}{n+1}-\tfrac{S_n}n=\tfrac{nu_{n+1}-S_n}{n(n+1)}=\tfrac1{n(n+1)}\big(nu_{n+1}-\sum_{k=1}^n u_k\big)\).</p>
-        <p class="q">(b) \(u\) croissante \(\Rightarrow v\) croissante</p>
-        <p>\(nu_{n+1}-\sum_{k=1}^n u_k=\sum_{k=1}^n(u_{n+1}-u_k)\geqslant0\) car \(u_{n+1}\geqslant u_k\).</p>
-        <p class="q">(c) Majoration</p>
-        <p>\(v_n-\ell=\tfrac1n\sum_{k=1}^n(u_k-\ell)\), d'où par inégalité triangulaire \(|v_n-\ell|\leqslant\tfrac1n\sum_{k=1}^{n_0}|u_k-\ell|+\tfrac1n\sum_{k=n_0+1}^n|u_k-\ell|\).</p>
-        <p class="q">(d) \(u\to\ell\Rightarrow v\to\ell\)</p>
-        <p>Soit \(\varepsilon>0\). Choisir \(n_0\) tel que \(|u_k-\ell|<\tfrac\varepsilon2\) pour \(k>n_0\) : la 2ᵉ somme est \(\leqslant\tfrac\varepsilon2\). La 1ʳᵉ somme \(=\tfrac{C}n\to0\) : \(<\tfrac\varepsilon2\) pour \(n\) grand.</p>
-        <div class="res">\(v_n\to\ell\) (théorème de Cesàro). La réciproque est fausse (\(u_n=(-1)^n\)). ∎</div>
+
+        <p class="q">a) Expression de \(v_{n+1}-v_n\)</p>
+        <p class="etape">Étape 1 : notation</p>
+        <p>On note \(S_n=\sum_{k=1}^n u_k\), donc \(v_n=\dfrac{S_n}{n}\) et \(S_{n+1}=S_n+u_{n+1}\).</p>
+        <p class="etape">Étape 2 : réduire au même dénominateur</p>
+        \[ v_{n+1}-v_n=\frac{S_n+u_{n+1}}{n+1}-\frac{S_n}n=\frac{nS_n+nu_{n+1}-(n+1)S_n}{n(n+1)}=\frac{nu_{n+1}-S_n}{n(n+1)} \]
+        <div class="res">\(v_{n+1}-v_n=\dfrac{1}{n(n+1)}\Big(nu_{n+1}-\displaystyle\sum_{k=1}^n u_k\Big)\)</div>
+
+        <p class="q">b) \(u\) croissante \(\Rightarrow v\) croissante</p>
+        <p class="etape">Étape 1 : écrire \(nu_{n+1}\) comme une somme</p>
+        \[ nu_{n+1}-\sum_{k=1}^n u_k=\sum_{k=1}^n\big(u_{n+1}-u_k\big) \]
+        <p class="etape">Étape 2 : signe</p>
+        <p>\(u\) croissante : \(u_{n+1}\geqslant u_k\) pour \(k\leqslant n\). Chaque terme est positif.</p>
+        <div class="res">\(v_{n+1}-v_n\geqslant 0\) : \(v\) est croissante.</div>
+
+        <p class="q">c) Majoration de \(|v_n-\ell|\)</p>
+        <p class="etape">Étape 1 : écrire \(v_n-\ell\) comme une moyenne</p>
+        \[ v_n-\ell=\frac1n\sum_{k=1}^n(u_k-\ell) \]
+        <p class="etape">Étape 2 : inégalité triangulaire et découpage en \(n_0\)</p>
+        <div class="res">\(\displaystyle |v_n-\ell|\leqslant\frac1n\sum_{k=1}^{n_0}|u_k-\ell|+\frac1n\sum_{k=n_0+1}^n|u_k-\ell|\) pour \(n>n_0\).</div>
+
+        <p class="q">d) \(u\to\ell\Rightarrow v\to\ell\)</p>
+        <p class="etape">Étape 1 : contrôler la seconde somme</p>
+        <p>Soit \(\varepsilon>0\). On choisit \(n_0\) tel que \(|u_k-\ell|&lt;\tfrac\varepsilon2\) pour \(k>n_0\). Elle a au plus \(n\) termes :</p>
+        \[ \frac1n\sum_{k=n_0+1}^n|u_k-\ell|\leqslant\frac{n-n_0}{n}\times\frac\varepsilon2\leqslant\frac\varepsilon2 \]
+        <p class="etape">Étape 2 : contrôler la première somme</p>
+        <p>\(n_0\) étant fixé, \(C=\sum_{k=1}^{n_0}|u_k-\ell|\) est une constante et \(\tfrac Cn\to 0\) : il existe \(n_1\) tel que \(\tfrac Cn&lt;\tfrac\varepsilon2\) pour \(n\geqslant n_1\).</p>
+        <p class="etape">Étape 3 : conclure</p>
+        <p>Pour \(n\geqslant\max(n_0+1,n_1)\), \(|v_n-\ell|&lt;\varepsilon\).</p>
+        <div class="res">\(v_n\to\ell\) (théorème de Cesàro).</div>
+        <div class="warnbox"><span class="lab">Piège</span> La réciproque est fausse : \(u_n=(-1)^n\) diverge, mais ses moyennes \(v_n\) tendent vers 0.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 9 — Croissante + \((u_{2n})\) converge</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p>\(u\) croissante \(\Rightarrow(u_{2n})\) croissante ; sa convergence vers \(\ell\) donne \(u_{2n}\leqslant\ell\) pour tout \(n\).
-        Pour tout \(m\), il existe \(n\) avec \(2n\geqslant m\), donc \(u_m\leqslant u_{2n}\leqslant\ell\) : \(u\) est majorée par \(\ell\).</p>
-        <p>\(u\) croissante et majorée \(\Rightarrow\) converge (limite monotone), et sa limite coïncide avec celle de l'extraite.</p>
-        <div class="res">\(u\) converge (vers \(\ell\)). ∎</div>
+        <div class="enonce">\((u_n)\) est croissante et \((u_{2n})\) converge vers \(\ell\). Montrer que \((u_n)\) converge.</div>
+
+        <p class="q">1) Démonstration</p>
+        <p class="etape">Étape 1 : \(u_{2n}\leqslant\ell\)</p>
+        <p>\((u_{2n})\) est croissante (extraite d'une suite croissante) et tend vers \(\ell\) : tous ses termes sont inférieurs à \(\ell\).</p>
+        <p class="etape">Étape 2 : \(u\) est majorée par \(\ell\)</p>
+        <p>Pour tout \(m\), on a \(2m\geqslant m\), donc par croissance \(u_m\leqslant u_{2m}\leqslant\ell\).</p>
+        <p class="etape">Étape 3 : limite monotone</p>
+        <div class="rappel"><span class="lab">Rappel · limite monotone et suites extraites</span>Une suite croissante et majorée converge. Toute suite extraite d'une suite convergente a la même limite.</div>
+        <p>\(u\) converge vers une limite \(L\) ; \((u_{2n})\) en est extraite, donc \(L=\ell\).</p>
+        <div class="res">\((u_n)\) converge vers \(\ell\).</div>
       </div>
     </div>
 
@@ -308,11 +554,38 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 10 — Terme général</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(u_0=0,\ u_{n+1}=\tfrac13u_n+2\)</p><p>Point fixe \(c=\tfrac2{1-1/3}=3\), \(u_n=(\tfrac13)^n(0-3)+3\).</p><p class="res">\(u_n=3\big(1-3^{-n}\big)\)</p>
-        <p class="q">(b) \(u_0=1,\ u_{n+1}=-u_n+4\)</p><p>\(c=\tfrac4{1-(-1)}=2\), \(u_n=(-1)^n(1-2)+2\).</p><p class="res">\(u_n=2-(-1)^n\) (alterne \(1,3,1,3,\dots\))</p>
-        <p class="q">(c) \(u_0=u_1=1,\ 2u_{n+2}=u_{n+1}+u_n\)</p><p>\(2r^2-r-1=0\Rightarrow r=1\) ou \(r=-\tfrac12\). \(u_n=\alpha+\beta(-\tfrac12)^n\), CI \(\Rightarrow\beta=0,\alpha=1\).</p><p class="res">\(u_n=1\) (constante)</p>
-        <p class="q">(d) \(u_0=0,\ u_1=1,\ u_{n+2}=u_{n+1}+\tfrac12u_n\)</p><p>\(2r^2-2r-1=0\Rightarrow r=\tfrac{1\pm\sqrt3}2\). CI : \(\alpha=-\beta=\tfrac1{\sqrt3}\).</p>
-        <p class="res">\(u_n=\dfrac1{\sqrt3}\left(\Big(\tfrac{1+\sqrt3}2\Big)^n-\Big(\tfrac{1-\sqrt3}2\Big)^n\right)\)</p>
+        <div class="enonce">Déterminer le terme général des suites suivantes.</div>
+
+        <p class="q">a) \(u_0=0,\ u_{n+1}=\tfrac13u_n+2\)</p>
+        <div class="rappel"><span class="lab">Rappel · suite arithmético-géométrique</span>Pour \(u_{n+1}=au_n+b\) (\(a\neq1\)) : on cherche le point fixe \(c=\dfrac{b}{1-a}\) ; alors \(u_n-c\) est géométrique de raison \(a\) : \(u_n=a^n(u_0-c)+c\).</div>
+        <p class="etape">Étape 1 : point fixe</p>
+        \[ c=\frac13c+2 \iff c=3 \]
+        <p class="etape">Étape 2 : suite géométrique</p>
+        \[ u_n-3=\Big(\frac13\Big)^n(u_0-3)=-3\times 3^{-n} \]
+        <div class="res">\(u_n=3\big(1-3^{-n}\big)\)</div>
+
+        <p class="q">b) \(u_0=1,\ u_{n+1}=-u_n+4\)</p>
+        <p class="etape">Étape 1 : point fixe</p>
+        \[ c=-c+4 \iff c=2 \]
+        <p class="etape">Étape 2 : suite géométrique de raison \(-1\)</p>
+        \[ u_n-2=(-1)^n(1-2) \]
+        <div class="res">\(u_n=2-(-1)^n\) : la suite alterne \(1,3,1,3,\dots\)</div>
+
+        <p class="q">c) \(u_0=u_1=1,\ 2u_{n+2}=u_{n+1}+u_n\)</p>
+        <div class="rappel"><span class="lab">Rappel · récurrence linéaire d'ordre 2</span>Équation caractéristique ; deux racines réelles distinctes \(r_1,r_2\) : \(u_n=\alpha r_1^n+\beta r_2^n\), avec \(\alpha,\beta\) fixés par \(u_0,u_1\).</div>
+        <p class="etape">Étape 1 : équation caractéristique</p>
+        \[ 2r^2-r-1=0 \iff (r-1)(2r+1)=0 \iff r=1 \text{ ou } r=-\tfrac12 \]
+        <p class="etape">Étape 2 : conditions initiales</p>
+        <p>\(u_n=\alpha+\beta(-\tfrac12)^n\) : \(\alpha+\beta=1\) et \(\alpha-\tfrac12\beta=1\), donc \(\beta=0\), \(\alpha=1\).</p>
+        <div class="res">\(u_n=1\) : la suite est constante.</div>
+
+        <p class="q">d) \(u_0=0,\ u_1=1,\ u_{n+2}=u_{n+1}+\tfrac12u_n\)</p>
+        <p class="etape">Étape 1 : équation caractéristique</p>
+        \[ r^2=r+\frac12 \iff 2r^2-2r-1=0 \qquad \Delta=4+8=12 \]
+        \[ r_1=\frac{1+\sqrt3}2 \qquad r_2=\frac{1-\sqrt3}2 \]
+        <p class="etape">Étape 2 : conditions initiales</p>
+        <p>\(\alpha+\beta=0\) et \(\alpha r_1+\beta r_2=1\), donc \(\alpha(r_1-r_2)=1\) avec \(r_1-r_2=\sqrt3\).</p>
+        <div class="res">\(u_n=\dfrac1{\sqrt3}\left(\Big(\tfrac{1+\sqrt3}2\Big)^n-\Big(\tfrac{1-\sqrt3}2\Big)^n\right)\)</div>
       </div>
     </div>
 
@@ -320,9 +593,23 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 11 — \(u_{n+1}=\sqrt{2-u_n}\)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">\(f(x)=\sqrt{2-x}\) sur \(]-\infty,2]\), \(u_0=1\).</div>
-        <p class="q">(a) \([0,2]\) stable</p><p>\(x\in[0,2]\Rightarrow 2-x\in[0,2]\Rightarrow\sqrt{2-x}\in[0,\sqrt2]\subseteq[0,2]\).</p>
-        <p class="q">(b) Bien définie</p><p>\(u_0=1\in[0,2]\) et \([0,2]\) stable \(\Rightarrow\) par récurrence \(u_n\in[0,2]\) pour tout \(n\).</p>
-        <p class="q">(c) Point fixe</p><p>\(\sqrt{2-\ell}=\ell\ (\ell\geqslant0)\Rightarrow \ell^2+\ell-2=0\Rightarrow(\ell-1)(\ell+2)=0\).</p><p class="res">\(\ell=1\)</p>
+
+        <p class="q">a) \([0,2]\) est stable par \(f\)</p>
+        <p class="etape">Étape 1 : suivre un \(x\in[0,2]\)</p>
+        <p>\(0\leqslant 2-x\leqslant 2\), donc \(0\leqslant\sqrt{2-x}\leqslant\sqrt2\leqslant 2\).</p>
+        <div class="res">\(f([0,2])\subseteq[0,2]\).</div>
+
+        <p class="q">b) La suite est bien définie</p>
+        <p>On raisonne par récurrence.</p>
+        <p class="etape">Étape 1 : initialisation et hérédité</p>
+        <p>\(u_0=1\in[0,2]\). Si \(u_n\in[0,2]\), alors \(u_{n+1}=f(u_n)\) existe et \(u_{n+1}\in[0,2]\) par a).</p>
+        <div class="res">\(u_n\) est défini et \(u_n\in[0,2]\) pour tout \(n\).</div>
+
+        <p class="q">c) Point fixe</p>
+        <p class="etape">Étape 1 : résoudre \(f(\ell)=\ell\) avec \(\ell\geqslant 0\)</p>
+        \[ \sqrt{2-\ell}=\ell \iff 2-\ell=\ell^2 \iff \ell^2+\ell-2=0 \iff (\ell-1)(\ell+2)=0 \]
+        <p class="etape">Étape 2 : garder la racine positive</p>
+        <div class="res">\(\ell=1\). D'ailleurs \(u_0=1\) est déjà le point fixe : la suite est constante égale à 1.</div>
       </div>
     </div>
 
@@ -330,17 +617,55 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 12 — \(f(x)=\dfrac{\sqrt x}{\sqrt x+\sqrt{1-x}}\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">Sur \([0,1]\), \(f\) croissante (admis), \(u_0\in[0,1]\), \(u_{n+1}=f(u_n)\).</div>
-        <p class="q">(a) \([0,1]\) stable</p><p>\(f(0)=0\), \(f(1)=1\), \(f\) croissante \(\Rightarrow f([0,1])=[0,1]\).</p>
-        <p class="q">(b) Bien définie</p><p>\(u_0\in[0,1]\), stable \(\Rightarrow u_n\in[0,1]\) pour tout \(n\).</p>
-        <p class="q">(c) Points fixes</p>
-        <p>\(f(x)=x\) : \(x=0\) et \(x=1\) conviennent. Pour \(x\in\,]0,1[\), \(\tfrac{\sqrt x}{\sqrt x+\sqrt{1-x}}=x\Rightarrow\sqrt x\sqrt{1-x}=x\Rightarrow\sqrt{x(1-x)}=x\Rightarrow 1-x=x\).</p>
-        <p class="res">3 points fixes : \(0,\ \tfrac12,\ 1\).</p>
-        <p class="q">(d) Monotonie selon \(u_0\)</p>
-        <p>\(f\) croissante. Sur \(]0,\tfrac12[\), \(f(x)>x\) (ex. \(f(\tfrac14)\approx0{,}37\)) ; sur \(]\tfrac12,1[\), \(f(x)<x\).</p>
-        <p class="res">\(u_0\in\,]0,\tfrac12[\) : <b>croissante</b> ; \(u_0\in\,]\tfrac12,1[\) : <b>décroissante</b> ; \(u_0\in\{0,\tfrac12,1\}\) : constante.</p>
-        <p class="q">(e) Convergence</p><p>\(u\) est monotone (\(f\) croissante) et bornée dans \([0,1]\) : elle converge (limite monotone).</p>
-        <p class="q">(f) Limite selon \(u_0\)</p>
-        <div class="res">\(u_0=0\to0\) ; \(u_0=1\to1\) ; \(u_0\in\,]0,1[\to\tfrac12\) (le seul point fixe atteignable par monotonie).</div>
+
+        <p class="q">a) \([0,1]\) est stable par \(f\)</p>
+        <p class="etape">Étape 1 : valeurs aux bornes et croissance</p>
+        <p>\(f(0)=0\) et \(f(1)=1\). \(f\) est croissante, donc pour \(x\in[0,1]\), \(0\leqslant f(x)\leqslant 1\).</p>
+        <div class="res">\(f([0,1])\subseteq[0,1]\).</div>
+
+        <p class="q">b) La suite est bien définie</p>
+        <p class="etape">Étape 1 : récurrence</p>
+        <p>\(u_0\in[0,1]\) et l'intervalle est stable.</p>
+        <div class="res">\(u_n\in[0,1]\) pour tout \(n\).</div>
+
+        <p class="q">c) Points fixes de \(f\)</p>
+        <p class="etape">Étape 1 : les bornes</p>
+        <p>\(f(0)=0\) et \(f(1)=1\).</p>
+        <p class="etape">Étape 2 : cas \(x\in\,]0,1[\)</p>
+        \[ \frac{\sqrt x}{\sqrt x+\sqrt{1-x}}=x \iff \sqrt x=x\sqrt x+x\sqrt{1-x} \iff \sqrt x(1-x)=x\sqrt{1-x} \]
+        <p>On divise par \(\sqrt x\,\sqrt{1-x}>0\) :</p>
+        \[ \sqrt{1-x}=\sqrt x \iff 1-x=x \iff x=\frac12 \]
+        <div class="res">Trois points fixes : \(0,\ \tfrac12,\ 1\).</div>
+
+        <p class="q">d) Monotonie selon \(u_0\)</p>
+        <p class="etape">Étape 1 : position de \(f(x)\) par rapport à \(x\)</p>
+        <p>Le même calcul qu'en c), avec des inégalités, donne pour \(x\in\,]0,1[\) :</p>
+        \[ f(x)>x \iff \sqrt{1-x}>\sqrt x \iff x&lt;\frac12 \]
+        <p class="etape">Étape 2 : intervalles stables</p>
+        <p>\(f\) croissante avec \(f(0)=0\), \(f(\tfrac12)=\tfrac12\), \(f(1)=1\) : \(]0,\tfrac12[\) et \(]\tfrac12,1[\) sont stables.</p>
+        <p class="etape">Étape 3 : conclure</p>
+        <div class="rappel"><span class="lab">Rappel · \(u_{n+1}=f(u_n)\), \(f\) croissante</span>La suite est monotone : croissante si \(u_1\geqslant u_0\), décroissante si \(u_1\leqslant u_0\).</div>
+        <ul>
+          <li>\(u_0\in\,]0,\tfrac12[\) : \(u_1=f(u_0)>u_0\), la suite est <b>croissante</b>.</li>
+          <li>\(u_0\in\,]\tfrac12,1[\) : \(u_1&lt;u_0\), la suite est <b>décroissante</b>.</li>
+          <li>\(u_0\in\{0,\tfrac12,1\}\) : la suite est constante.</li>
+        </ul>
+        <div class="res">Croissante si \(u_0\in\,]0,\tfrac12[\), décroissante si \(u_0\in\,]\tfrac12,1[\), constante sinon.</div>
+
+        <p class="q">e) Convergence</p>
+        <p class="etape">Étape 1 : limite monotone</p>
+        <p>La suite est monotone (d) et bornée dans \([0,1]\) (b).</p>
+        <div class="res">\((u_n)\) converge, quel que soit \(u_0\).</div>
+
+        <p class="q">f) Limite selon \(u_0\)</p>
+        <p class="etape">Étape 1 : la limite est un point fixe</p>
+        <p>\(f\) est continue sur \([0,1]\) : la limite \(\ell\) vérifie \(f(\ell)=\ell\), donc \(\ell\in\{0,\tfrac12,1\}\).</p>
+        <p class="etape">Étape 2 : choisir selon l'intervalle stable</p>
+        <ul>
+          <li>\(u_0\in\,]0,\tfrac12[\) : suite croissante, coincée dans \(]u_0,\tfrac12[\) : \(\ell=\tfrac12\).</li>
+          <li>\(u_0\in\,]\tfrac12,1[\) : suite décroissante, coincée dans \(]\tfrac12,u_0[\) : \(\ell=\tfrac12\).</li>
+        </ul>
+        <div class="res">\(u_0=0\) : limite 0 ; \(u_0=1\) : limite 1 ; \(u_0\in\,]0,1[\) : limite \(\tfrac12\).</div>
       </div>
     </div>
 

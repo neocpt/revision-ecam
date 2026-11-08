@@ -20,7 +20,7 @@ Conventions retenues :
 | nombres-reels | fait | 3 créés + 15 TD. Aucune erreur de résultat (systèmes Ex 14 et tableau Ex 13 revérifiés). Ex 6, 9, 15 : `.q` ajouté. Ex 12-13 : justification par étapes avant le tableau. Remarque : déséquilibre `<p>` préexistant dans la fiche mémo / le cours (non touchés). |
 | sommes-produits | fait | 3 créés + 12 TD, toutes les formules fermées revérifiées (SymPy, n = 1..8) : aucune erreur. Plusieurs `.q` (Ex 4, 7, 8, 10, 11) contenaient le calcul ou le résultat : énoncé seul gardé dans le `.q`. `.enonce` court ajouté (consigne générale) aux exercices de TD qui n'en avaient pas. Ex 6 b) : preuve par regroupement de paires (plus de formule admise). |
 | trigonometrie-fonctions | fait | 3 créés + 12 TD. Aucune erreur de résultat (équations Ex 1 et inéquations Ex 2 revérifiées). `.q` qui contenaient la formule ou la valeur (Ex 1 b-c, 3, 4) nettoyés. Ex 9 a) : cas « f impaire, g quelconque » ajouté. `.enonce` court ajouté aux exercices sans énoncé. |
-| suites-reelles | à faire | |
+| suites-reelles | fait | 3 créés + 12 TD. Aucune erreur de résultat. Ex 2 et 3 : les `.q` donnaient la limite ou l'équivalent, retirés. Ex 6 b) : majoration de l'écart justifiée. Ex 8 d) : choix de \(n_1\) explicité. Ex 11 : remarque \(u_0=1\) point fixe (suite constante). Ex 12 d) : signe de \(f(x)-x\) démontré (était affirmé sur un exemple). Exo A : valeur numérique \(u_3\) précisée. |
 | limites-fonctions | à faire | |
 | continuite | à faire | |
 | derivabilite | à faire | |
