@@ -142,7 +142,19 @@ figcaption{font-size:.85rem; color:var(--ink-soft); margin-top:.3rem}
 .overflow{overflow-x:auto}
 footer{text-align:center; color:var(--ink-soft); font-size:.85rem; padding:2rem 1rem}
 mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%}
-@media(max-width:600px){body{font-size:16px} .hero h1{font-size:1.8rem} section.block{padding:1.1rem}}
+@media(max-width:600px){body{font-size:16px} .hero h1{font-size:1.8rem} section.block{padding:1.1rem}
+  /* barre du haut : titre sur sa propre ligne, liens qui passent à la ligne au lieu de déborder */
+  .topbar{flex-wrap:wrap; gap:.25rem .9rem; padding:.55rem .9rem}
+  .topbar .spacer{display:none}
+  .topbar .brand{width:100%; font-size:1rem}
+  .topbar a{font-size:.86rem}
+  .wrap{padding:1.2rem .9rem 4rem}
+  h1.title{font-size:1.6rem}
+  /* schémas et graphes SVG : réduits à la largeur de l'écran (les formules MathJax restent intactes) */
+  svg:not(mjx-container svg){max-width:100%; height:auto}
+  /* menu MathJax (clic droit, caché) : ne doit jamais créer de défilement horizontal */
+  html,body{overflow-x:clip}
+}
 
 /* ---- Fiche mémo (récap formules + méthodes en tête de chapitre) ---- */
 .memo-sheet{border:2px solid var(--subject); border-radius:14px; margin:1.2rem 0 1.6rem;
@@ -159,7 +171,7 @@ mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%}
 .docs-intro{color:var(--ink-soft); margin:.2rem 0 1.1rem}
 .docs-group{margin:1.1rem 0}
 .docs-group h3{margin:.6rem 0 .5rem}
-.doc-list{list-style:none; margin:0; padding:0; display:grid; gap:.5rem}
+.doc-list{list-style:none; margin:0; padding:0; display:grid; gap:.5rem; grid-template-columns:minmax(0,1fr)}
 .doc-list li{margin:0}
 .doc-item{display:flex; align-items:center; gap:.7rem; text-decoration:none; color:var(--ink);
   background:#f8fafc; border:1px solid var(--line); border-left:4px solid var(--subject);
@@ -167,7 +179,8 @@ mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%}
 .doc-item:hover{background:#eef2ff; box-shadow:var(--shadow)}
 .doc-item .ic{flex:none; width:1.6rem; height:1.6rem; display:grid; place-items:center;
   background:var(--subject); color:var(--chip-ink); border-radius:6px; font-size:.62rem; font-weight:800}
-.doc-item .nm{flex:1; font-weight:600}
+.doc-item{min-width:0}
+.doc-item .nm{flex:1; min-width:0; font-weight:600; overflow-wrap:anywhere}
 .doc-item .badge{flex:none; font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.4px;
   padding:.15rem .55rem; border-radius:20px; background:var(--subject); color:var(--chip-ink); opacity:.92}
 .doc-item .arrow{flex:none; color:var(--subject-ink); font-weight:800}
