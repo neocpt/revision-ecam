@@ -117,10 +117,16 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice A — Quantité conjuguée à l'infini</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Calculer \(\displaystyle\lim_{x\to+\infty}\big(\sqrt{4x^2+x}-2x\big)\).</div>
-        <p>Forme \(\infty-\infty\). On multiplie par la quantité conjuguée :</p>
-        \[ \sqrt{4x^2+x}-2x=\frac{(4x^2+x)-4x^2}{\sqrt{4x^2+x}+2x}=\frac{x}{\sqrt{4x^2+x}+2x}. \]
-        <p>Pour \(x>0\), \(\sqrt{4x^2+x}=2x\sqrt{1+\tfrac1{4x}}\), donc le dénominateur \(\sim 4x\) :</p>
-        \[ \frac{x}{2x\sqrt{1+\tfrac1{4x}}+2x}=\frac{1}{2\sqrt{1+\tfrac1{4x}}+2}\xrightarrow[x\to+\infty]{}\frac1{2+2}. \]
+
+        <p class="q">1) Calcul de la limite</p>
+        <p class="etape">Étape 1 : repérer la forme indéterminée</p>
+        <p>\(\sqrt{4x^2+x}\to+\infty\) et \(2x\to+\infty\) : forme \(\infty-\infty\).</p>
+        <p class="etape">Étape 2 : quantité conjuguée</p>
+        <div class="rappel"><span class="lab">Rappel · quantité conjuguée</span>\[ \sqrt A-B=\frac{A-B^2}{\sqrt A+B} \]</div>
+        \[ \sqrt{4x^2+x}-2x=\frac{(4x^2+x)-4x^2}{\sqrt{4x^2+x}+2x}=\frac{x}{\sqrt{4x^2+x}+2x} \]
+        <p class="etape">Étape 3 : factoriser par \(x\) au dénominateur</p>
+        <p>Pour \(x>0\), \(\sqrt{4x^2+x}=2x\sqrt{1+\tfrac1{4x}}\) :</p>
+        \[ \frac{x}{2x\sqrt{1+\tfrac1{4x}}+2x}=\frac{1}{2\sqrt{1+\tfrac1{4x}}+2}\xrightarrow[x\to+\infty]{}\frac1{2+2} \]
         <div class="res">\(\displaystyle\lim_{x\to+\infty}\big(\sqrt{4x^2+x}-2x\big)=\frac14\).</div>
       </div>
     </div>
@@ -129,10 +135,16 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice B — Produit borné × limite nulle</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Montrer que \(\displaystyle\lim_{x\to0}x\sin\!\Big(\frac1x\Big)=0\).</div>
-        <p>Pour \(x\neq0\), \(\big|\sin(1/x)\big|\leqslant1\), donc \(\big|x\sin(1/x)\big|\leqslant|x|\).</p>
-        <p>Or \(\lim_{x\to0}|x|=0\), d'où par le mini-théorème d'encadrement :</p>
+
+        <p class="q">1) Démonstration</p>
+        <p class="etape">Étape 1 : majorer la valeur absolue</p>
+        <p>Pour \(x\neq0\), \(\big|\sin(1/x)\big|\leqslant1\), donc :</p>
+        \[ \Big|x\sin\Big(\frac1x\Big)\Big|\leqslant|x| \]
+        <p class="etape">Étape 2 : encadrement</p>
+        <div class="rappel"><span class="lab">Rappel · encadrement</span>Si \(|f(x)-\ell|\leqslant g(x)\) et \(g(x)\to0\), alors \(f(x)\to\ell\).</div>
+        <p>\(|x|\to 0\) quand \(x\to 0\).</p>
         <div class="res">\(\displaystyle\lim_{x\to0}x\sin\!\Big(\frac1x\Big)=0\).</div>
-        <p style="font-size:.9rem;opacity:.85">Bien que \(\sin(1/x)\) n'ait aucune limite en \(0\), le facteur \(x\) « écrase » les oscillations.</p>
+        <p>\(\sin(1/x)\) n'a pas de limite en 0 (exercice C), mais le facteur \(x\) écrase les oscillations.</p>
       </div>
     </div>
 
@@ -140,11 +152,17 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice C — Non-existence par les suites</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">Montrer que \(x\mapsto\sin(1/x)\) n'a pas de limite en \(0\).</div>
-        <p>On utilise la caractérisation séquentielle. Posons deux suites tendant vers \(0\) :</p>
-        \[ u_n=\frac1{2n\pi}\to0\quad\text{et}\quad v_n=\frac1{\tfrac\pi2+2n\pi}\to0. \]
-        <p>Alors \(\sin(1/u_n)=\sin(2n\pi)=0\to0\), tandis que \(\sin(1/v_n)=\sin\!\big(\tfrac\pi2+2n\pi\big)=1\to1\).</p>
-        <div class="res">Deux suites de même limite \(0\) donnent des images de limites <b>différentes</b> (\(0\neq1\)) :
-        \(\sin(1/x)\) n'a <b>pas de limite</b> en \(0\). ∎</div>
+
+        <p class="q">1) Démonstration</p>
+        <p>On raisonne par l'absurde avec la caractérisation séquentielle.</p>
+        <div class="rappel"><span class="lab">Rappel · caractérisation séquentielle</span>Si \(f(x)\to\ell\) quand \(x\to a\), alors pour <b>toute</b> suite \(u_n\to a\), \(f(u_n)\to\ell\).</div>
+        <p class="etape">Étape 1 : deux suites qui tendent vers 0</p>
+        \[ u_n=\frac1{2n\pi} \qquad v_n=\frac1{\tfrac\pi2+2n\pi} \]
+        <p class="etape">Étape 2 : leurs images</p>
+        \[ \sin\Big(\frac1{u_n}\Big)=\sin(2n\pi)=0 \qquad \sin\Big(\frac1{v_n}\Big)=\sin\Big(\frac\pi2+2n\pi\Big)=1 \]
+        <p class="etape">Étape 3 : contradiction</p>
+        <p>Si une limite \(\ell\) existait, on aurait à la fois \(\ell=0\) et \(\ell=1\).</p>
+        <div class="res">\(\sin(1/x)\) n'a <b>pas de limite</b> en 0.</div>
       </div>
     </div>
   </section>
@@ -161,28 +179,79 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 1 — Fonction par morceaux</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <div class="enonce">\(f(x)=-2x\) si \(x\leqslant-1\) ; \(x^2+1\) si \(-1<x\leqslant0\) ; \(\sin(x/4)\) si \(x>0\).</div>
-        <p class="q">(a) \(\lim_{x\to-1^-}f=-2(-1)\)</p><p class="res">\(2\)</p>
-        <p class="q">(b) \(\lim_{x\to-1^+}f=(-1)^2+1\)</p><p class="res">\(2\)</p>
-        <p class="q">(c) \(\lim_{x\to0^-}f=0^2+1\)</p><p class="res">\(1\)</p>
-        <p class="q">(d) \(\lim_{x\to0^+}f=\sin0\)</p><p class="res">\(0\)</p>
-        <p class="q">(e) \(\lim_{x\to\pi^-}f=\sin(\pi/4)\)</p><p class="res">\(\tfrac{\sqrt2}2\)</p>
-        <p class="q">(f) \(\lim_{x\to\pi^+}f=\sin(\pi/4)\)</p><p class="res">\(\tfrac{\sqrt2}2\) (continue en \(\pi\))</p>
+        <div class="enonce">\(f(x)=-2x\) si \(x\leqslant-1\) ; \(x^2+1\) si \(-1&lt;x\leqslant0\) ; \(\sin(x/4)\) si \(x>0\).</div>
+
+        <p class="q">a) \(\lim_{x\to-1^-}f(x)\)</p>
+        <div class="rappel"><span class="lab">Rappel · limite latérale d'une fonction par morceaux</span>On utilise l'expression valable <b>du côté</b> où l'on arrive ; si elle est continue, on remplace \(x\) par le point.</div>
+        <p class="etape">Étape 1 : le bon morceau</p>
+        <p>Pour \(x&lt;-1\), \(f(x)=-2x\).</p>
+        <p class="etape">Étape 2 : remplacer</p>
+        \[ -2\times(-1)=2 \]
+        <div class="res">\(2\)</div>
+
+        <p class="q">b) \(\lim_{x\to-1^+}f(x)\)</p>
+        <p class="etape">Étape 1 : le bon morceau</p>
+        <p>Pour \(-1&lt;x\leqslant 0\), \(f(x)=x^2+1\).</p>
+        <p class="etape">Étape 2 : remplacer</p>
+        \[ (-1)^2+1=2 \]
+        <div class="res">\(2\) : les deux limites latérales en \(-1\) coïncident.</div>
+
+        <p class="q">c) \(\lim_{x\to0^-}f(x)\)</p>
+        <p class="etape">Étape 1 : morceau \(x^2+1\)</p>
+        \[ 0^2+1=1 \]
+        <div class="res">\(1\)</div>
+
+        <p class="q">d) \(\lim_{x\to0^+}f(x)\)</p>
+        <p class="etape">Étape 1 : morceau \(\sin(x/4)\)</p>
+        \[ \sin 0=0 \]
+        <div class="res">\(0\) : il y a un saut en 0.</div>
+
+        <p class="q">e) \(\lim_{x\to\pi^-}f(x)\)</p>
+        <p class="etape">Étape 1 : morceau \(\sin(x/4)\), des deux côtés de \(\pi\)</p>
+        \[ \sin\frac\pi4=\frac{\sqrt2}2 \]
+        <div class="res">\(\tfrac{\sqrt2}2\)</div>
+
+        <p class="q">f) \(\lim_{x\to\pi^+}f(x)\)</p>
+        <p class="etape">Étape 1 : même morceau, même calcul</p>
+        <div class="res">\(\tfrac{\sqrt2}2\) : \(f\) est continue en \(\pi\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 2 — Limites latérales</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\dfrac{x^2-(a+1)x+a}{x^3-a^3}\) en \(a\)</p>
-        <p>Numérateur \(=(x-1)(x-a)\), dénominateur \(=(x-a)(x^2+ax+a^2)\). Après simplification : \(\dfrac{x-1}{x^2+ax+a^2}\).</p>
-        <p class="res">Si \(a\neq0\) : limite (des deux côtés) \(=\dfrac{a-1}{3a^2}\). Si \(a=0\) : \(\dfrac{x-1}{x^2}\to-\infty\).</p>
-        <p class="q">(b) \(\dfrac{\sqrt{x^3-2x^2+x}}{x-1}\) en \(1\)</p>
-        <p>\(x^3-2x^2+x=x(x-1)^2\), donc \(\sqrt{\cdots}=|x-1|\sqrt x\). Ratio \(=\dfrac{|x-1|\sqrt x}{x-1}\).</p>
-        <p class="res">À droite : \(+1\) ; à gauche : \(-1\). Pas de limite en \(1\).</p>
-        <p class="q">(c) \(\dfrac{\sqrt{1+x}-\sqrt{1-x}}{|x|}\) en \(0\)</p>
-        <p>Numérateur \(=\dfrac{2x}{\sqrt{1+x}+\sqrt{1-x}}\), donc ratio \(=\dfrac{2x}{|x|(\sqrt{1+x}+\sqrt{1-x})}\).</p>
-        <p class="res">À droite : \(+1\) ; à gauche : \(-1\). Pas de limite en \(0\).</p>
+        <div class="enonce">Étudier les limites à droite et à gauche au point considéré.</div>
+
+        <p class="q">a) \(\dfrac{x^2-(a+1)x+a}{x^3-a^3}\) en \(a\in\mathbb R\)</p>
+        <p class="etape">Étape 1 : forme \(\tfrac00\), factoriser</p>
+        <div class="rappel"><span class="lab">Rappel · factorisations</span>\[ x^3-a^3=(x-a)(x^2+ax+a^2) \]Un polynôme qui s'annule en \(a\) se factorise par \((x-a)\).</div>
+        <p>Le numérateur a pour racines 1 et \(a\) (somme \(a+1\), produit \(a\)) :</p>
+        \[ \frac{(x-1)(x-a)}{(x-a)(x^2+ax+a^2)}=\frac{x-1}{x^2+ax+a^2} \]
+        <p class="etape">Étape 2 : cas \(a\neq 0\)</p>
+        <p>Le dénominateur tend vers \(3a^2\neq 0\) :</p>
+        \[ \frac{a-1}{3a^2} \]
+        <p class="etape">Étape 3 : cas \(a=0\)</p>
+        <p>L'expression vaut \(\dfrac{x-1}{x^2}\) : numérateur \(\to-1\), dénominateur \(\to 0^+\).</p>
+        <div class="res">Si \(a\neq0\) : même limite des deux côtés, \(\dfrac{a-1}{3a^2}\). Si \(a=0\) : \(-\infty\) des deux côtés.</div>
+
+        <p class="q">b) \(\dfrac{\sqrt{x^3-2x^2+x}}{x-1}\) en \(1\)</p>
+        <p class="etape">Étape 1 : factoriser sous la racine</p>
+        \[ x^3-2x^2+x=x(x-1)^2 \quad\Longrightarrow\quad \sqrt{x(x-1)^2}=\sqrt x\,|x-1| \]
+        <div class="rappel"><span class="lab">Rappel · racine d'un carré</span>\[ \sqrt{u^2}=|u| \]</div>
+        <p class="etape">Étape 2 : simplifier selon le côté</p>
+        <ul>
+          <li>\(x>1\) : \(\dfrac{|x-1|}{x-1}=1\), l'expression vaut \(\sqrt x\to 1\).</li>
+          <li>\(x&lt;1\) : \(\dfrac{|x-1|}{x-1}=-1\), l'expression vaut \(-\sqrt x\to -1\).</li>
+        </ul>
+        <div class="res">À droite \(1\), à gauche \(-1\) : pas de limite en 1.</div>
+
+        <p class="q">c) \(\dfrac{\sqrt{1+x}-\sqrt{1-x}}{|x|}\) en \(0\)</p>
+        <p class="etape">Étape 1 : quantité conjuguée au numérateur</p>
+        \[ \sqrt{1+x}-\sqrt{1-x}=\frac{(1+x)-(1-x)}{\sqrt{1+x}+\sqrt{1-x}}=\frac{2x}{\sqrt{1+x}+\sqrt{1-x}} \]
+        <p class="etape">Étape 2 : simplifier \(\dfrac{x}{|x|}\)</p>
+        \[ \frac{x}{|x|}\times\frac{2}{\sqrt{1+x}+\sqrt{1-x}} \qquad\text{et}\qquad \frac{2}{\sqrt{1+x}+\sqrt{1-x}}\to 1 \]
+        <p>\(\dfrac{x}{|x|}=1\) à droite, \(-1\) à gauche.</p>
+        <div class="res">À droite \(1\), à gauche \(-1\) : pas de limite en 0.</div>
       </div>
     </div>
 
@@ -190,18 +259,44 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 3 — Déduire \(\lim f\) de limites de quotients</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">On donne 4 limites de \(\tfrac{f(x)-5}{x+2}\) et \(\tfrac{f(x)}{x^2}\).</div>
-        <p class="q">(a) \(\lim_{x\to-2^-}f\), sachant \(\tfrac{f(x)-5}{x+2}\to+\infty\)</p>
-        <p>\(f(x)-5=(x+2)\cdot\underbrace{\tfrac{f(x)-5}{x+2}}_{\to+\infty}\) : forme \(0\times\infty\). On sait seulement
-        que \(f(x)<5\) au voisinage, mais la limite <b>n'est pas déterminée</b> (ex. \(f\equiv4\) donne \(+\infty\), \(f=5-\sqrt{|x+2|}\) aussi avec \(f\to5\)).</p>
-        <p class="res">Indéterminée.</p>
-        <p class="q">(b) \(\lim_{x\to-2^+}f\), sachant \(\tfrac{f(x)-5}{x+2}\to5\)</p>
-        <p>\(f(x)-5=(x+2)\cdot(\to5)\to0\).</p><p class="res">\(\lim f=5\)</p>
-        <p class="q">(c) \(\lim_{x\to0^-}f\), sachant \(\tfrac{f(x)}{x^2}\to-2\)</p>
-        <p>\(f(x)=x^2\cdot(\to-2)\to0\).</p><p class="res">\(\lim f=0\)</p>
-        <p class="q">(d) \(\lim_{x\to0^+}f\), sachant \(\tfrac{f(x)}{x^2}\to0\)</p>
-        <p>\(f(x)=x^2\cdot(\to0)\to0\).</p><p class="res">\(\lim f=0\)</p>
-        <p class="q">Exemple de fonction convenable</p>
-        <p class="res">\(f(x)=\begin{cases}5-\sqrt{-x-2}&x<-2\\5+5(x+2)&-2<x<-1\\-2x^2&-1\leqslant x<0\\0&x\geqslant0\end{cases}\) vérifie les 4 conditions.</p>
+
+        <p class="q">a) \(\lim_{x\to-2^-}f(x)\), sachant \(\tfrac{f(x)-5}{x+2}\to+\infty\)</p>
+        <p class="etape">Étape 1 : isoler \(f(x)\)</p>
+        \[ f(x)=5+(x+2)\times\frac{f(x)-5}{x+2} \]
+        <p>Le produit est de la forme \(0\times\infty\) : indéterminé.</p>
+        <p class="etape">Étape 2 : deux exemples qui donnent des résultats différents</p>
+        <ul>
+          <li>\(f\equiv 4\) : \(\dfrac{-1}{x+2}\to+\infty\) (car \(x+2\to0^-\)), et \(f\to 4\).</li>
+          <li>\(f(x)=5-\sqrt{-x-2}\) : avec \(t=-x-2\to0^+\), \(\dfrac{-\sqrt t}{-t}=\dfrac1{\sqrt t}\to+\infty\), et \(f\to 5\).</li>
+        </ul>
+        <div class="res">On ne peut pas conclure : la limite de \(f\) n'est pas déterminée par l'hypothèse (on sait seulement que \(f(x)&lt;5\) près de \(-2\)).</div>
+
+        <p class="q">b) \(\lim_{x\to-2^+}f(x)\), sachant \(\tfrac{f(x)-5}{x+2}\to5\)</p>
+        <p class="etape">Étape 1 : isoler \(f(x)\)</p>
+        \[ f(x)=5+(x+2)\times\frac{f(x)-5}{x+2} \]
+        <p class="etape">Étape 2 : limite du produit</p>
+        <p>\((x+2)\to 0\) et le quotient \(\to 5\) : le produit tend vers \(0\times 5=0\).</p>
+        <div class="res">\(\lim f=5\)</div>
+
+        <p class="q">c) \(\lim_{x\to0^-}f(x)\), sachant \(\tfrac{f(x)}{x^2}\to-2\)</p>
+        <p class="etape">Étape 1 : écrire \(f\) comme un produit</p>
+        \[ f(x)=x^2\times\frac{f(x)}{x^2}\to 0\times(-2) \]
+        <div class="res">\(\lim f=0\)</div>
+
+        <p class="q">d) \(\lim_{x\to0^+}f(x)\), sachant \(\tfrac{f(x)}{x^2}\to0\)</p>
+        <p class="etape">Étape 1 : même méthode</p>
+        \[ f(x)=x^2\times\frac{f(x)}{x^2}\to 0\times 0 \]
+        <div class="res">\(\lim f=0\)</div>
+
+        <p class="q">e) Exemple d'une telle fonction</p>
+        <p class="etape">Étape 1 : un morceau par condition</p>
+        <ul>
+          <li>\(x&lt;-2\) : \(5-\sqrt{-x-2}\) (vu en a).</li>
+          <li>\(-2&lt;x&lt;-1\) : \(5+5(x+2)\), pour que le quotient vaille 5.</li>
+          <li>\(-1\leqslant x&lt;0\) : \(-2x^2\), pour que \(f/x^2=-2\).</li>
+          <li>\(x\geqslant 0\) : \(0\), pour que \(f/x^2=0\).</li>
+        </ul>
+        <div class="res">\(f(x)=\begin{cases}5-\sqrt{-x-2}&x&lt;-2\\5+5(x+2)&-2&lt;x&lt;-1\\-2x^2&-1\leqslant x&lt;0\\0&x\geqslant0\end{cases}\) vérifie les 4 conditions (on pose par exemple \(f(-2)=5\)).</div>
       </div>
     </div>
 
@@ -210,36 +305,179 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 4 — Limites (point fini)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\dfrac{x^2-4}{x-2}=x+2\to\)</p><p class="res">\(4\)</p>
-        <p class="q">(b) \(\dfrac{x^3-1}{x^2-1}=\dfrac{x^2+x+1}{x+1}\to\)</p><p class="res">\(\tfrac32\)</p>
-        <p class="q">(c) \(\dfrac{2x+5}{x-4}\) en \(4\)</p><p>Numérateur \(\to13\neq0\), dénom \(\to0\).</p><p class="res">Pas de limite (à gauche \(-\infty\), à droite \(+\infty\)).</p>
-        <p class="q">(d) \(|x-1|\) en \(1\)</p><p class="res">\(0\)</p>
-        <p class="q">(e) \(\dfrac1{|x-1|}\) en \(1\)</p><p>\(|x-1|\to0^+\).</p><p class="res">\(+\infty\)</p>
-        <p class="q">(f) \(\dfrac{2x^2+|x|}{2x^2-|x|}=\dfrac{2|x|+1}{2|x|-1}\to\)</p><p class="res">\(-1\)</p>
-        <p class="q">(g) \(\dfrac1{\sqrt{x+1}-1}=\dfrac{\sqrt{x+1}+1}{x}\) en \(0\)</p><p>Numérateur \(\to2\), dénom \(\to0\).</p><p class="res">Pas de limite (à droite \(+\infty\), à gauche \(-\infty\)).</p>
-        <p class="q">(h) \(\dfrac{\sqrt{x+4}-2}{1-\sqrt{2x+1}}\) en \(0\)</p><p>\(=\dfrac{1+\sqrt{2x+1}}{-2(\sqrt{x+4}+2)}\to\dfrac{2}{-8}\).</p><p class="res">\(-\tfrac14\)</p>
-        <p class="q">(i) \(\dfrac{\sqrt{x^2+1}-x-1}{x}=\dfrac{-2}{\sqrt{x^2+1}+x+1}\to\)</p><p class="res">\(-1\)</p>
-        <p class="q">(j) \(\dfrac1{1-x}-\dfrac1{1-x^2}=\dfrac{x}{(1-x)(1+x)}\) en \(1\)</p><p class="res">Pas de limite (à gauche \(+\infty\), à droite \(-\infty\)).</p>
-        <p class="q">(k) \(\dfrac3{\lfloor x+1\rfloor}\) en \(0\)</p><p>À droite \(\lfloor x+1\rfloor=1\) ; à gauche \(\lfloor x+1\rfloor=0\).</p><p class="res">À droite \(3\), à gauche \(+\infty\) : pas de limite.</p>
-        <p class="q">(l) \(x\lfloor\tfrac1x\rfloor\) en \(0\)</p><p>\(\tfrac1x-1<\lfloor\tfrac1x\rfloor\leqslant\tfrac1x\), d'où \(1-|x|<x\lfloor\tfrac1x\rfloor\leqslant1\) : gendarmes.</p><p class="res">\(1\)</p>
+        <div class="enonce">Calculer, lorsqu'elles existent, les limites suivantes.</div>
+
+        <p class="q">a) \(\lim_{x\to2}\dfrac{x^2-4}{x-2}\)</p>
+        <p class="etape">Étape 1 : forme \(\tfrac00\), factoriser</p>
+        \[ \frac{(x-2)(x+2)}{x-2}=x+2 \]
+        <div class="res">\(4\)</div>
+
+        <p class="q">b) \(\lim_{x\to1}\dfrac{x^3-1}{x^2-1}\)</p>
+        <p class="etape">Étape 1 : factoriser par \(x-1\)</p>
+        \[ \frac{(x-1)(x^2+x+1)}{(x-1)(x+1)}=\frac{x^2+x+1}{x+1} \]
+        <p class="etape">Étape 2 : remplacer</p>
+        <div class="res">\(\tfrac32\)</div>
+
+        <p class="q">c) \(\lim_{x\to4}\dfrac{2x+5}{x-4}\)</p>
+        <p class="etape">Étape 1 : forme \(\tfrac{13}{0}\)</p>
+        <p>Le numérateur tend vers \(13\neq 0\), le dénominateur vers 0 : il faut le signe de \(x-4\).</p>
+        <ul>
+          <li>\(x\to4^+\) : \(+\infty\).</li>
+          <li>\(x\to4^-\) : \(-\infty\).</li>
+        </ul>
+        <div class="res">Pas de limite.</div>
+
+        <p class="q">d) \(\lim_{x\to1}|x-1|\)</p>
+        <p class="etape">Étape 1 : continuité de la valeur absolue</p>
+        <div class="res">\(0\)</div>
+
+        <p class="q">e) \(\lim_{x\to1}\dfrac1{|x-1|}\)</p>
+        <p class="etape">Étape 1 : forme \(\tfrac{1}{0^+}\)</p>
+        <p>\(|x-1|\to 0\) en restant positif.</p>
+        <div class="res">\(+\infty\)</div>
+
+        <p class="q">f) \(\lim_{x\to0}\dfrac{2x^2+|x|}{2x^2-|x|}\)</p>
+        <p class="etape">Étape 1 : diviser par \(|x|\)</p>
+        <p>\(x^2=|x|^2\), donc :</p>
+        \[ \frac{2|x|^2+|x|}{2|x|^2-|x|}=\frac{2|x|+1}{2|x|-1}\to\frac{1}{-1} \]
+        <div class="res">\(-1\)</div>
+
+        <p class="q">g) \(\lim_{x\to0}\dfrac1{\sqrt{x+1}-1}\)</p>
+        <p class="etape">Étape 1 : quantité conjuguée</p>
+        \[ \frac1{\sqrt{x+1}-1}=\frac{\sqrt{x+1}+1}{x} \]
+        <p class="etape">Étape 2 : forme \(\tfrac20\)</p>
+        <ul>
+          <li>\(x\to0^+\) : \(+\infty\).</li>
+          <li>\(x\to0^-\) : \(-\infty\).</li>
+        </ul>
+        <div class="res">Pas de limite.</div>
+
+        <p class="q">h) \(\lim_{x\to0}\dfrac{\sqrt{x+4}-2}{1-\sqrt{2x+1}}\)</p>
+        <p class="etape">Étape 1 : conjuguer en haut et en bas</p>
+        \[ \sqrt{x+4}-2=\frac{x}{\sqrt{x+4}+2} \qquad 1-\sqrt{2x+1}=\frac{-2x}{1+\sqrt{2x+1}} \]
+        <p class="etape">Étape 2 : simplifier par \(x\)</p>
+        \[ \frac{1+\sqrt{2x+1}}{-2(\sqrt{x+4}+2)}\to\frac{2}{-2\times 4} \]
+        <div class="res">\(-\tfrac14\)</div>
+
+        <p class="q">i) \(\lim_{x\to0}\dfrac{\sqrt{x^2+1}-x-1}{x}\)</p>
+        <p class="etape">Étape 1 : quantité conjuguée</p>
+        \[ \sqrt{x^2+1}-(x+1)=\frac{(x^2+1)-(x+1)^2}{\sqrt{x^2+1}+x+1}=\frac{-2x}{\sqrt{x^2+1}+x+1} \]
+        <p class="etape">Étape 2 : diviser par \(x\)</p>
+        \[ \frac{-2}{\sqrt{x^2+1}+x+1}\to\frac{-2}{2} \]
+        <div class="res">\(-1\)</div>
+
+        <p class="q">j) \(\lim_{x\to1}\Big(\dfrac1{1-x}-\dfrac1{1-x^2}\Big)\)</p>
+        <p class="etape">Étape 1 : même dénominateur</p>
+        \[ \frac{1+x}{1-x^2}-\frac1{1-x^2}=\frac{x}{(1-x)(1+x)} \]
+        <p class="etape">Étape 2 : forme \(\tfrac{1}{0}\), signe de \(1-x\)</p>
+        <ul>
+          <li>\(x\to1^-\) : \(1-x\to0^+\), limite \(+\infty\).</li>
+          <li>\(x\to1^+\) : limite \(-\infty\).</li>
+        </ul>
+        <div class="res">Pas de limite.</div>
+
+        <p class="q">k) \(\lim_{x\to0}\dfrac3{\lfloor x+1\rfloor}\)</p>
+        <p class="etape">Étape 1 : partie entière de chaque côté</p>
+        <ul>
+          <li>\(x\to0^+\) : \(x+1\in\,]1,2[\), \(\lfloor x+1\rfloor=1\), l'expression vaut 3.</li>
+          <li>\(x\to0^-\) : \(x+1\in\,]0,1[\), \(\lfloor x+1\rfloor=0\) : l'expression n'est pas définie.</li>
+        </ul>
+        <div class="res">À droite la limite vaut \(3\) ; à gauche l'expression n'existe pas (division par 0). Pas de limite en 0 au sens bilatéral.</div>
+        <div class="warnbox"><span class="lab">Correction d'une erreur de l'ancienne version</span> L'ancienne correction donnait « à gauche \(+\infty\) ». Or pour \(-1&lt;x&lt;0\), \(\lfloor x+1\rfloor=0\) exactement : on divise par 0, il n'y a pas de limite à gauche.</div>
+
+        <p class="q">l) \(\lim_{x\to0}x\big\lfloor\tfrac1x\big\rfloor\)</p>
+        <div class="rappel"><span class="lab">Rappel · encadrement de la partie entière</span>\[ t-1&lt;\lfloor t\rfloor\leqslant t \]</div>
+        <p class="etape">Étape 1 : appliquer avec \(t=\tfrac1x\)</p>
+        \[ \frac1x-1&lt;\Big\lfloor\frac1x\Big\rfloor\leqslant\frac1x \]
+        <p class="etape">Étape 2 : multiplier par \(x\), selon son signe</p>
+        <ul>
+          <li>\(x>0\) : \(1-x&lt;x\lfloor\tfrac1x\rfloor\leqslant 1\).</li>
+          <li>\(x&lt;0\) : le sens change, \(1\leqslant x\lfloor\tfrac1x\rfloor&lt;1-x\).</li>
+        </ul>
+        <p class="etape">Étape 3 : gendarmes</p>
+        <p>Dans les deux cas, les bornes tendent vers 1.</p>
+        <div class="res">\(1\)</div>
+        <div class="warnbox"><span class="lab">Correction d'une erreur de l'ancienne version</span> L'ancien encadrement \(1-|x|&lt;x\lfloor\tfrac1x\rfloor\leqslant1\) n'est vrai que pour \(x>0\) ; pour \(x&lt;0\) l'inégalité est renversée. La limite, 1, est inchangée.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 5 — Limites à l'infini</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\dfrac{3x^8-17}{x^7}\sim3x\) en \(-\infty\)</p><p class="res">\(-\infty\)</p>
-        <p class="q">(b) \(\dfrac{3x^3-5x^2+7}{8+2x-5x^3}\sim\dfrac{3}{-5}\)</p><p class="res">\(-\tfrac35\)</p>
-        <p class="q">(c) \(\dfrac{x^2+\sin x}{x^2+\cos x}\to\)</p><p>(\(\sin,\cos\) bornés, terme dominant \(x^2\)).</p><p class="res">\(1\)</p>
-        <p class="q">(d) \(\sqrt{x+5}-\sqrt{x-3}=\dfrac8{\sqrt{x+5}+\sqrt{x-3}}\to\)</p><p class="res">\(0\)</p>
-        <p class="q">(e) \(\sqrt{x^2+x+1}-(x+1)=\dfrac{-x}{\sqrt{x^2+x+1}+x+1}\sim\dfrac{-x}{2x}\)</p><p class="res">\(-\tfrac12\)</p>
-        <p class="q">(f) \(\sqrt{x+\sqrt x}-\sqrt x=\dfrac{\sqrt x}{\sqrt{x+\sqrt x}+\sqrt x}\to\)</p><p class="res">\(\tfrac12\)</p>
-        <p class="q">(g) \(\sqrt{x^2+2x+5}-x\) en \(-\infty\)</p><p>\(x\to-\infty\) : \(\sqrt{\cdots}\to+\infty\) et \(-x\to+\infty\).</p><p class="res">\(+\infty\)</p>
-        <p class="q">(h) \(\dfrac{\sqrt{x^2+4}-x}{1-\sqrt{1+2x}}\) en \(+\infty\)</p><p>Numérateur \(\to0\), dénominateur \(\to-\infty\).</p><p class="res">\(0\)</p>
-        <p class="q">(i) \(\dfrac{1+2\sin x}{1+\sqrt x}\)</p><p>Numérateur borné, dénom \(\to+\infty\).</p><p class="res">\(0\)</p>
-        <p class="q">(j) \(e^{x-\sin x}\) en \(+\infty\)</p><p>\(x-\sin x\geqslant x-1\to+\infty\).</p><p class="res">\(+\infty\)</p>
-        <p class="q">(k) \(e^{x-\sin x}\) en \(-\infty\)</p><p>\(x-\sin x\leqslant x+1\to-\infty\).</p><p class="res">\(0\)</p>
-        <p class="q">(l) \(x\lfloor\tfrac1x\rfloor\) en \(+\infty\)</p><p>\(\tfrac1x\to0^+\Rightarrow\lfloor\tfrac1x\rfloor=0\).</p><p class="res">\(0\)</p>
+        <div class="enonce">Calculer, lorsqu'elles existent, les limites suivantes.</div>
+
+        <p class="q">a) \(\lim_{x\to-\infty}\dfrac{3x^8-17}{x^7}\)</p>
+        <div class="rappel"><span class="lab">Rappel · fraction rationnelle en \(\pm\infty\)</span>Même limite que le quotient des termes de plus haut degré.</div>
+        <p class="etape">Étape 1 : termes dominants</p>
+        \[ \frac{3x^8}{x^7}=3x\to-\infty \]
+        <div class="res">\(-\infty\)</div>
+
+        <p class="q">b) \(\lim_{x\to-\infty}\dfrac{3x^3-5x^2+7}{8+2x-5x^3}\)</p>
+        <p class="etape">Étape 1 : termes dominants</p>
+        \[ \frac{3x^3}{-5x^3}=-\frac35 \]
+        <div class="res">\(-\tfrac35\)</div>
+
+        <p class="q">c) \(\lim_{x\to-\infty}\dfrac{x^2+\sin x}{x^2+\cos x}\)</p>
+        <p class="etape">Étape 1 : diviser par \(x^2\)</p>
+        \[ \frac{1+\frac{\sin x}{x^2}}{1+\frac{\cos x}{x^2}} \]
+        <p class="etape">Étape 2 : termes bornés sur \(x^2\)</p>
+        <p>\(\Big|\dfrac{\sin x}{x^2}\Big|\leqslant\dfrac1{x^2}\to 0\), et pareil pour le cosinus.</p>
+        <div class="res">\(1\)</div>
+
+        <p class="q">d) \(\lim_{x\to+\infty}\big(\sqrt{x+5}-\sqrt{x-3}\big)\)</p>
+        <p class="etape">Étape 1 : quantité conjuguée</p>
+        \[ \frac{(x+5)-(x-3)}{\sqrt{x+5}+\sqrt{x-3}}=\frac{8}{\sqrt{x+5}+\sqrt{x-3}} \]
+        <p class="etape">Étape 2 : le dénominateur tend vers \(+\infty\)</p>
+        <div class="res">\(0\)</div>
+
+        <p class="q">e) \(\lim_{x\to+\infty}\big(\sqrt{x^2+x+1}-(x+1)\big)\)</p>
+        <p class="etape">Étape 1 : quantité conjuguée</p>
+        \[ \frac{(x^2+x+1)-(x+1)^2}{\sqrt{x^2+x+1}+x+1}=\frac{-x}{\sqrt{x^2+x+1}+x+1} \]
+        <p class="etape">Étape 2 : diviser par \(x>0\)</p>
+        \[ \frac{-1}{\sqrt{1+\frac1x+\frac1{x^2}}+1+\frac1x}\to\frac{-1}{2} \]
+        <div class="res">\(-\tfrac12\)</div>
+
+        <p class="q">f) \(\lim_{x\to+\infty}\big(\sqrt{x+\sqrt x}-\sqrt x\big)\)</p>
+        <p class="etape">Étape 1 : quantité conjuguée</p>
+        \[ \frac{(x+\sqrt x)-x}{\sqrt{x+\sqrt x}+\sqrt x}=\frac{\sqrt x}{\sqrt{x+\sqrt x}+\sqrt x} \]
+        <p class="etape">Étape 2 : diviser par \(\sqrt x\)</p>
+        \[ \frac{1}{\sqrt{1+\frac1{\sqrt x}}+1}\to\frac12 \]
+        <div class="res">\(\tfrac12\)</div>
+
+        <p class="q">g) \(\lim_{x\to-\infty}\big(\sqrt{x^2+2x+5}-x\big)\)</p>
+        <p class="etape">Étape 1 : pas de forme indéterminée</p>
+        <p>\(\sqrt{x^2+2x+5}\to+\infty\) et \(-x\to+\infty\) : on ajoute deux quantités qui tendent vers \(+\infty\).</p>
+        <div class="res">\(+\infty\)</div>
+        <div class="warnbox"><span class="lab">Piège</span> En \(-\infty\), \(-x\) est positif : ce n'est pas un \(\infty-\infty\), inutile de conjuguer.</div>
+
+        <p class="q">h) \(\lim_{x\to+\infty}\dfrac{\sqrt{x^2+4}-x}{1-\sqrt{1+2x}}\)</p>
+        <p class="etape">Étape 1 : le numérateur</p>
+        \[ \sqrt{x^2+4}-x=\frac{4}{\sqrt{x^2+4}+x}\to 0 \]
+        <p class="etape">Étape 2 : le dénominateur</p>
+        <p>\(1-\sqrt{1+2x}\to-\infty\).</p>
+        <div class="res">\(0\)</div>
+
+        <p class="q">i) \(\lim_{x\to+\infty}\dfrac{1+2\sin x}{1+\sqrt x}\)</p>
+        <p class="etape">Étape 1 : majorer</p>
+        <p>\(|1+2\sin x|\leqslant 3\), donc \(\Big|\dfrac{1+2\sin x}{1+\sqrt x}\Big|\leqslant\dfrac{3}{1+\sqrt x}\to 0\).</p>
+        <div class="res">\(0\)</div>
+
+        <p class="q">j) \(\lim_{x\to+\infty}e^{x-\sin x}\)</p>
+        <p class="etape">Étape 1 : minorer l'exposant</p>
+        <p>\(\sin x\leqslant 1\), donc \(x-\sin x\geqslant x-1\to+\infty\).</p>
+        <p class="etape">Étape 2 : composer par \(\exp\)</p>
+        <div class="res">\(+\infty\)</div>
+
+        <p class="q">k) \(\lim_{x\to-\infty}e^{x-\sin x}\)</p>
+        <p class="etape">Étape 1 : majorer l'exposant</p>
+        <p>\(-\sin x\leqslant 1\), donc \(x-\sin x\leqslant x+1\to-\infty\).</p>
+        <p class="etape">Étape 2 : composer par \(\exp\)</p>
+        <div class="res">\(0\)</div>
+
+        <p class="q">l) \(\lim_{x\to+\infty}x\big\lfloor\tfrac1x\big\rfloor\)</p>
+        <p class="etape">Étape 1 : la partie entière</p>
+        <p>Pour \(x>1\), \(0&lt;\tfrac1x&lt;1\), donc \(\lfloor\tfrac1x\rfloor=0\) et l'expression vaut 0.</p>
+        <div class="res">\(0\)</div>
       </div>
     </div>
 
@@ -249,10 +487,16 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 6 — Fonction paire</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">\(f\) paire, \(\lim_{x\to-\infty}f=\ell\). Montrer \(\lim_{x\to+\infty}f=\ell\).</div>
-        <p>Comme \(f\) est paire, \(f(x)=f(-x)\). Soit \(\varepsilon>0\). Par hypothèse,
-        \(\exists A,\ \forall y\leqslant A,\ |f(y)-\ell|\leqslant\varepsilon\). Pour \(x\geqslant-A\), on a \(-x\leqslant A\), donc :</p>
-        \[ |f(x)-\ell|=|f(-x)-\ell|\leqslant\varepsilon. \]
-        <div class="res">\(\lim_{x\to+\infty}f(x)=\ell\). ∎ (Le graphe étant symétrique / \(Oy\), les deux « bouts » ont même limite.)</div>
+
+        <p class="q">1) Démonstration</p>
+        <p>On revient à la définition de la limite.</p>
+        <div class="rappel"><span class="lab">Rappel · limite en \(\pm\infty\)</span>\(f\to\ell\) en \(-\infty\) : \(\forall\varepsilon>0,\ \exists A,\ \forall y\leqslant A,\ |f(y)-\ell|\leqslant\varepsilon\).</div>
+        <p class="etape">Étape 1 : traduire l'hypothèse</p>
+        <p>Soit \(\varepsilon>0\). Il existe \(A\) tel que \(|f(y)-\ell|\leqslant\varepsilon\) pour tout \(y\leqslant A\).</p>
+        <p class="etape">Étape 2 : utiliser la parité</p>
+        <p>Pour \(x\geqslant -A\), on a \(-x\leqslant A\), et \(f(x)=f(-x)\) :</p>
+        \[ |f(x)-\ell|=|f(-x)-\ell|\leqslant\varepsilon \]
+        <div class="res">\(\lim_{x\to+\infty}f(x)=\ell\) : le graphe est symétrique par rapport à l'axe des ordonnées.</div>
       </div>
     </div>
 
@@ -260,10 +504,15 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 7 — Fonction périodique avec limite en \(+\infty\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">\(f\) périodique de période \(T>0\), \(\lim_{x\to+\infty}f=\ell\in\mathbb R\).</div>
-        <p>Soit \(x_0\in\mathbb R\). La suite \(x_0+nT\to+\infty\), donc \(f(x_0+nT)\to\ell\). Or par périodicité
-        \(f(x_0+nT)=f(x_0)\) pour tout \(n\). La suite constante \(f(x_0)\) converge vers \(\ell\), donc \(f(x_0)=\ell\).</p>
-        <div class="res">\(x_0\) étant quelconque, \(f\) est <b>constante</b> égale à \(\ell\). (Une fonction périodique non constante
-        n'a pas de limite en \(+\infty\).)</div>
+
+        <p class="q">1) Que peut-on dire de \(f\) ?</p>
+        <p class="etape">Étape 1 : fixer un point et une suite</p>
+        <p>Soit \(x_0\in\mathbb R\). La suite \(x_n=x_0+nT\) tend vers \(+\infty\).</p>
+        <p class="etape">Étape 2 : caractérisation séquentielle</p>
+        <p>Comme \(f\to\ell\) en \(+\infty\), \(f(x_0+nT)\to\ell\).</p>
+        <p class="etape">Étape 3 : périodicité</p>
+        <p>\(f(x_0+nT)=f(x_0)\) pour tout \(n\) : c'est une suite constante. Sa limite est \(f(x_0)\), donc \(f(x_0)=\ell\).</p>
+        <div class="res">\(x_0\) est quelconque : \(f\) est <b>constante</b> égale à \(\ell\). Une fonction périodique non constante n'a pas de limite en \(+\infty\).</div>
       </div>
     </div>
 
