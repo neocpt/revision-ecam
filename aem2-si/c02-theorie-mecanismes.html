@@ -525,210 +525,514 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
   </section>
 
   <h2 id="td" class="part">Partie 2 — Correction des exercices de TD</h2>
-  <p class="lead">Les deux exercices (association de liaisons et pompe à piston radial) ont un corrigé du prof dans le dossier Bigeard : il est repris et étoffé. Chaque énoncé est une image, le titre de l'exercice est écrit en dessous (Ctrl+F).</p>
+  <p class="lead">Les deux exercices du TD (association de liaisons et pompe à piston radial) ont un corrigé de E. Bigeard :
+  <i>TDM-PT-TD-association_de_liaisons-prof.pdf</i> et <i>TDM-PT-TD-pompe_a_piston_radial-prof.pdf</i>. On garde ses résultats et on réexplique chaque étape.
+  Les coquilles du corrigé sont signalées dans des encadrés. Chaque énoncé est une image, avec le titre de l'exercice écrit dessous (Ctrl+F).</p>
+  <div class="rappel"><span class="lab">Rappel · notation des torseurs</span>Un torseur est écrit en colonnes au point de réduction, dans la base \((\vec x,\vec y,\vec z)\) : à gauche la résultante (ou le vecteur rotation), à droite le moment (ou la vitesse du point).
+  \[ \{\mathcal V_{2/1}\} = \left\{\begin{array}{cc} \omega_x &amp; V_x\\ \omega_y &amp; V_y\\ \omega_z &amp; V_z \end{array}\right\}_{A} \qquad \{\mathcal T_{2\to1}\} = \left\{\begin{array}{cc} X &amp; L\\ Y &amp; M\\ Z &amp; N \end{array}\right\}_{A} \]</div>
 
   <section class="block td-exo" id="td-1">
     <h2>1. Association de liaisons</h2>
 
-    <figure><img class="enonce-img" src="img/c02-ex1-1-articulation.png" alt="Énoncé exercice 1.1 articulation" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 1.1 — Articulation</h3>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q1</span>Graphe des liaisons</p>
-      <div class="res">Deux liaisons pivots, d'axes \((O,\vec z)\) (entre 1 et 2) et \((O,\vec y)\) (entre 2 et 3) : elles sont <b>en série</b>.</div>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q2</span>Torseurs de \(L_{1/2}\)</p>
-      <p>\(\{\mathcal V_{2/1}\}_O=\{0,0,0\,;\,0,0,V_{z}\}\) (pivot : rotation autour de \(\vec z\)) et \(\{\mathcal T_{2\to1}\}_O=\{X_{21},Y_{21},Z_{21}\,;\,L_{21},M_{21},0\}\).</p>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q3</span>Torseurs de \(L_{2/3}\)</p>
-      <p>\(\{\mathcal V_{3/2}\}_O=\{0,\omega_y,0\,;\,0,0,0\}\) et \(\{\mathcal T_{3\to2}\}_O=\{X_{32},Y_{32},Z_{32}\,;\,L_{32},0,N_{32}\}\).</p>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q4</span>Liaison équivalente \(L_{1/3}\)</p>
-      <p><b>Cinématique</b> : \(\{\mathcal V_{3/1}\}=\{\mathcal V_{3/2}\}+\{\mathcal V_{2/1}\}\) donne \(\{0,\omega_y,\omega_z\,;\,0,0,0\}\) : rotation bloquée selon \(\vec x\).</p>
-      <p><b>Statique</b> : les torseurs se transmettent tels quels, donc \(M_{21}=N_{32}=0\) et \(\{\mathcal T_{3\to1}\}=\{X,Y,Z\,;\,L,0,0\}\).</p>
-      <div class="res">Liaison <b>sphérique à doigt</b> de centre \(O\) (rotation bloquée selon \(\vec x\)).</div>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q5</span>Isostatisme</p>
-      <div class="res">Chaîne ouverte : la liaison est toujours isostatique.</div>
+    <div class="exo-card" id="td1-articulation">
+      <div class="exo-head">Exercice 1.1 — Articulation</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c02-ex1-1-articulation.png" alt="Énoncé exercice 1.1 articulation" style="max-width:100%;height:auto"><figcaption>Exercice 1.1 — Articulation (tube 1, axe 2, tige 3)</figcaption></figure>
+
+        <p class="q">1) Graphe des liaisons, type d'association</p>
+        <p class="etape">Étape 1 : les solides</p>
+        <p>Trois solides : le tube 1, l'axe 2, la tige 3.</p>
+        <p class="etape">Étape 2 : les liaisons</p>
+        <ul>
+          <li>1–2 : l'axe tourne dans le tube autour de \(\vec z\) : <b>pivot d'axe \((O,\vec z)\)</b>.</li>
+          <li>2–3 : la tige tourne autour de l'axe 2, selon \(\vec y\) : <b>pivot d'axe \((O,\vec y)\)</b>.</li>
+        </ul>
+        <p class="etape">Étape 3 : série ou parallèle ?</p>
+        <div class="rappel"><span class="lab">Rappel · série et parallèle</span>Série : les liaisons se suivent, avec un solide intermédiaire (1–2–3). Parallèle : plusieurs liaisons relient directement les deux mêmes solides.</div>
+        <p>On passe de 1 à 3 en traversant 2 : chaîne 1 – 2 – 3.</p>
+        <div class="res">Graphe : 1 —pivot \((O,\vec z)\)— 2 —pivot \((O,\vec y)\)— 3. Les deux liaisons sont <b>en série</b>.</div>
+
+        <p class="q">2) Torseurs de la liaison \(L_{1/2}\)</p>
+        <div class="rappel"><span class="lab">Rappel · liaison pivot d'axe \((O,\vec z)\)</span>Un seul mouvement : la rotation autour de \(\vec z\). Tout le reste est transmis, sauf le moment autour de \(\vec z\).</div>
+        \[ \{\mathcal V_{2/1}\} = \left\{\begin{array}{cc} 0 &amp; 0\\ 0 &amp; 0\\ \omega_z &amp; 0 \end{array}\right\}_{O} \qquad \{\mathcal T_{2\to1}\} = \left\{\begin{array}{cc} X_{21} &amp; L_{21}\\ Y_{21} &amp; M_{21}\\ Z_{21} &amp; 0 \end{array}\right\}_{O} \]
+        <div class="res">1 inconnue cinématique, 5 inconnues statiques : \(1 + 5 = 6\).</div>
+
+        <p class="q">3) Torseurs de la liaison \(L_{2/3}\)</p>
+        <p>Même liaison, mais d'axe \((O,\vec y)\) : la rotation et le moment nul passent sur la 2ᵉ ligne.</p>
+        \[ \{\mathcal V_{3/2}\} = \left\{\begin{array}{cc} 0 &amp; 0\\ \omega_y &amp; 0\\ 0 &amp; 0 \end{array}\right\}_{O} \qquad \{\mathcal T_{3\to2}\} = \left\{\begin{array}{cc} X_{32} &amp; L_{32}\\ Y_{32} &amp; 0\\ Z_{32} &amp; N_{32} \end{array}\right\}_{O} \]
+
+        <p class="q">4) Liaison équivalente \(L_{1/3}\)</p>
+        <p class="etape">Étape 1 : approche cinématique</p>
+        <div class="rappel"><span class="lab">Rappel · liaisons en série</span>\[ \{\mathcal V_{3/1}\} = \{\mathcal V_{3/2}\} + \{\mathcal V_{2/1}\} \quad\text{(au même point)} \]</div>
+        <p>Les deux torseurs sont déjà écrits en \(O\) : on additionne ligne par ligne.</p>
+        \[ \{\mathcal V_{3/1}\} = \left\{\begin{array}{cc} 0 &amp; 0\\ \omega_y &amp; 0\\ \omega_z &amp; 0 \end{array}\right\}_{O} \]
+        <p>Il reste deux rotations (\(\vec y\) et \(\vec z\)), aucune translation. La rotation autour de \(\vec x\) est bloquée.</p>
+        <p class="etape">Étape 2 : approche statique</p>
+        <div class="rappel"><span class="lab">Rappel · liaisons en série (statique)</span>\[ \{\mathcal T_{3\to1}\} = \{\mathcal T_{3\to2}\} = \{\mathcal T_{2\to1}\} \]</div>
+        <p>Le même torseur traverse les deux liaisons. Il doit donc respecter les zéros des deux :</p>
+        <ul>
+          <li>\(L_{2/1}\) impose un moment nul selon \(\vec z\) : \(N = 0\).</li>
+          <li>\(L_{3/2}\) impose un moment nul selon \(\vec y\) : \(M = 0\).</li>
+        </ul>
+        \[ \{\mathcal T_{3\to1}\} = \left\{\begin{array}{cc} X &amp; L\\ Y &amp; 0\\ Z &amp; 0 \end{array}\right\}_{O} \]
+        <p>Les deux approches concordent : 2 mouvements, 4 inconnues d'effort.</p>
+        <div class="res">\(L_{1/3}\) est une <b>liaison sphérique à doigt de centre \(O\)</b> : rotations libres autour de \(\vec y\) et \(\vec z\), rotation bloquée autour de \(\vec x\).</div>
+
+        <p class="q">5) Cette liaison est-elle isostatique ?</p>
+        <div class="rappel"><span class="lab">Rappel · degré d'hyperstatisme</span>\[ h = m - I_c + E_c \qquad E_c = 6\gamma \qquad \gamma = N_L - N_S + 1 \]</div>
+        <p>2 liaisons, 3 solides : \(\gamma = 2 - 3 + 1 = 0\). La chaîne est <b>ouverte</b> : il n'y a aucune équation de fermeture.</p>
+        \[ h = m - I_c + 0 = 2 - 2 = 0 \]
+        <div class="res">Chaîne ouverte : toujours isostatique (\(h = 0\)).</div>
+      </div>
     </div>
 
-    <figure><img class="enonce-img" src="img/c02-ex1-2-double-guidage.png" alt="Énoncé exercice 1.2 double guidage" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 1.2 — Double guidage cylindrique</h3>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q6</span>Torseurs des liaisons \(L^A_{2/0}\) et \(L^B_{2/0}\)</p>
-      <p>Chaque colonne donne une liaison pivot glissant d'axe \(\vec y\) : \(\{\mathcal V\}=\{0,\omega_{yA},0\,;\,0,V_{yA},0\}\) et \(\{\mathcal T_{2\to0}\}_A=\{X_A,0,Z_A\,;\,L_A,0,N_A\}\) ; même écriture en \(B\).</p>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q7</span>Torseurs de la seconde liaison</p>
-      <p>Même écriture en \(B\) : \(\{\mathcal V\}=\{0,\omega_{yB},0\,;\,0,V_{yB},0\}\), \(\{\mathcal T_{2\to0}\}_B=\{X_B,0,Z_B\,;\,L_B,0,N_B\}\).</p>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q8</span>Liaison équivalente</p>
-      <p><b>Cinématique</b> : on transporte \(\{\mathcal V_{2/0}\}\) de \(B\) en \(A\) : \(\vec V_{A\in2/0}=\vec V_{B\in2/0}+\vec{AB}\wedge\vec\Omega_{2/0}=-e\,\omega_{yB}\,\vec x+\vec V_{B}\). L'égalité des deux torseurs donne \(\omega_{yB}=0\) : rotation bloquée.</p>
-      <p><b>Statique</b> : on additionne \(\{\mathcal T_{A}\}+\{\mathcal T_{B}\}\), et \(\vec M_{A,2\to0}=\vec M_{B,2\to0}+\vec{AB}\wedge\vec F_{2\to0}=e\,X_B\,\vec y\).</p>
-      <div class="res">Liaison <b>glissière de direction \(\vec y\)</b>.</div>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q9</span>Isostatisme (double guidage)</p>
-      <p><b>Approche cinématique</b> : \(m_u=1\), \(m_i=0\), \(\gamma=1\), \(E_c=6\gamma=6\), \(I_c=2\times2=4\) : \(h=m-I_c+E_c=1-4+6=3\).</p>
-      <p><b>Approche statique</b> : \(E_s=6\times1=6\), \(I_s=2\times4=8\) : \(h=m-E_s+I_s=1-6+8=3\).</p>
-      <div class="res">Hyperstatique de degré 3 : le double guidage est sur-contraint, il faut l'un des deux pivots glissants libre en rotation (ou un jeu) pour le rendre acceptable.</div>
+    <div class="exo-card" id="td1-double-guidage">
+      <div class="exo-head">Exercice 1.2 — Double guidage cylindrique</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c02-ex1-2-double-guidage.png" alt="Énoncé exercice 1.2 double guidage" style="max-width:100%;height:auto"><figcaption>Exercice 1.2 — Double guidage cylindrique (colonnes d'axes \((A,\vec y)\) et \((B,\vec y)\), entraxe \(e\))</figcaption></figure>
+
+        <p class="q">6) Torseurs de la liaison \(L^A_{2/0}\) (axe \((A,\vec y)\))</p>
+        <div class="rappel"><span class="lab">Rappel · pivot glissant d'axe \((A,\vec y)\)</span>Deux mouvements : rotation autour de \(\vec y\) et translation selon \(\vec y\). Pas d'effort selon \(\vec y\), pas de moment autour de \(\vec y\).</div>
+        \[ \{\mathcal V^A_{2/0}\} = \left\{\begin{array}{cc} 0 &amp; 0\\ \omega_{yA} &amp; V_{yA}\\ 0 &amp; 0 \end{array}\right\}_{A} \qquad \{\mathcal T^A_{2\to0}\} = \left\{\begin{array}{cc} X_A &amp; L_A\\ 0 &amp; 0\\ Z_A &amp; N_A \end{array}\right\}_{A} \]
+
+        <p class="q">7) Torseurs de la liaison \(L^B_{2/0}\) (axe \((B,\vec y)\))</p>
+        <p>Même liaison, écrite en \(B\) :</p>
+        \[ \{\mathcal V^B_{2/0}\} = \left\{\begin{array}{cc} 0 &amp; 0\\ \omega_{yB} &amp; V_{yB}\\ 0 &amp; 0 \end{array}\right\}_{B} \qquad \{\mathcal T^B_{2\to0}\} = \left\{\begin{array}{cc} X_B &amp; L_B\\ 0 &amp; 0\\ Z_B &amp; N_B \end{array}\right\}_{B} \]
+
+        <p class="q">8) Liaison équivalente \(L_{2/0}\)</p>
+        <p class="etape">Étape 1 : type d'association</p>
+        <p>Les deux pivots glissants relient directement 2 et 0 : ils sont <b>en parallèle</b>.</p>
+        <div class="rappel"><span class="lab">Rappel · liaisons en parallèle (cinématique)</span>\[ \{\mathcal V^{eq}_{2/0}\} = \{\mathcal V^A_{2/0}\} = \{\mathcal V^B_{2/0}\} \quad\text{(au même point)} \]</div>
+        <p class="etape">Étape 2 : on ramène le torseur de \(B\) en \(A\)</p>
+        <div class="rappel"><span class="lab">Rappel · changement de point (vitesses)</span>\[ \vec V_{A\in2/0} = \vec V_{B\in2/0} + \overrightarrow{AB}\wedge\vec\Omega_{2/0} \]</div>
+        <p>Avec \(\overrightarrow{AB} = e\,\vec z\) et \(\vec\Omega_{2/0} = \omega_{yB}\,\vec y\) :</p>
+        \[ e\,\vec z \wedge \omega_{yB}\,\vec y = -e\,\omega_{yB}\,\vec x \]
+        \[ \{\mathcal V^B_{2/0}\} = \left\{\begin{array}{cc} 0 &amp; -e\,\omega_{yB}\\ \omega_{yB} &amp; V_{yB}\\ 0 &amp; 0 \end{array}\right\}_{A} \]
+        <p class="etape">Étape 3 : on égalise les deux torseurs en \(A\)</p>
+        <ul>
+          <li>Ligne \(\vec x\) des vitesses : \(0 = -e\,\omega_{yB}\), donc \(\omega_{yB} = 0\).</li>
+          <li>Ligne \(\vec y\) : \(\omega_{yA} = \omega_{yB} = 0\) et \(V_{yA} = V_{yB}\).</li>
+        </ul>
+        \[ \{\mathcal V^{eq}_{2/0}\} = \left\{\begin{array}{cc} 0 &amp; 0\\ 0 &amp; V_y\\ 0 &amp; 0 \end{array}\right\}_{A} \]
+        <p>Il ne reste qu'une translation selon \(\vec y\).</p>
+        <p class="etape">Étape 4 : approche statique</p>
+        <div class="rappel"><span class="lab">Rappel · liaisons en parallèle (statique)</span>\[ \{\mathcal T^{eq}_{2\to0}\} = \{\mathcal T^A_{2\to0}\} + \{\mathcal T^B_{2\to0}\} \quad\text{(au même point)} \]</div>
+        <div class="rappel"><span class="lab">Rappel · changement de point (moments)</span>\[ \vec M_{A} = \vec M_{B} + \overrightarrow{AB}\wedge\vec R \]</div>
+        <p>Le terme qui change : \(e\,\vec z \wedge (X_B\,\vec x + Z_B\,\vec z) = e\,X_B\,\vec y\). On additionne en \(A\) :</p>
+        \[ \{\mathcal T^{eq}_{2\to0}\} = \left\{\begin{array}{cc} X_A + X_B &amp; L_A + L_B\\ 0 &amp; e\,X_B\\ Z_A + Z_B &amp; N_A + N_B \end{array}\right\}_{A} \]
+        <p>Seul l'effort selon \(\vec y\) est nul : c'est bien la signature d'une glissière.</p>
+        <div class="res">\(L_{2/0}\) est une <b>glissière de direction \(\vec y\)</b>.</div>
+
+        <p class="q">9) Cette liaison est-elle isostatique ?</p>
+        <p class="etape">Étape 1 : approche cinématique</p>
+        <div class="rappel"><span class="lab">Rappel · approche cinématique</span>\[ h = m - I_c + E_c, \qquad E_c = 6\gamma, \qquad \gamma = N_L - N_S + 1 \]</div>
+        <ul>
+          <li>2 liaisons, 2 solides : \(\gamma = 2 - 2 + 1 = 1\), donc \(E_c = 6\).</li>
+          <li>\(I_c = 2 + 2 = 4\) (deux pivots glissants).</li>
+          <li>\(m_u = 1\) (la translation selon \(\vec y\)), \(m_i = 0\), donc \(m = 1\).</li>
+        </ul>
+        \[ h = 1 - 4 + 6 = 3 \]
+        <p class="etape">Étape 2 : approche statique (vérification)</p>
+        <div class="rappel"><span class="lab">Rappel · approche statique</span>\[ h = m - E_s + I_s, \qquad E_s = 6\,(N_S - 1) \]</div>
+        <ul>
+          <li>\(E_s = 6 \times (2 - 1) = 6\).</li>
+          <li>\(I_s = 4 + 4 = 8\).</li>
+        </ul>
+        \[ h = 1 - 6 + 8 = 3 \]
+        <div class="res">Hyperstatique de degré 3.</div>
+        <p>Remarque (rédigée par nous) : les trois inconnues non calculables sont la répartition des \(L\), des \(N\) et des \(Z\) entre \(A\) et \(B\). Elles correspondent aux trois exigences géométriques : parallélisme des colonnes dans les deux plans, et entraxe \(e\) identique sur 0 et sur 2. Remplacer le pivot glissant en \(B\) par une ponctuelle de normale \(\vec x\) donne \(I_c = 2 + 5 = 7\) et \(h = 1 - 7 + 6 = 0\).</p>
+      </div>
     </div>
 
-    <figure><img class="enonce-img" src="img/c02-ex1-3-goupille-v1.png" alt="Énoncé accouplement par goupille, version 1" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 1.3 — Accouplement par goupille, version 1</h3>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q10</span>Graphe des liaisons</p>
-      <div class="res">1–2 : pivot glissant d'axe \((O,\vec y)\) ; 1–3 : pivot glissant d'axe \((O,\vec z)\) ; 3–2 : pivot glissant d'axe \((O,\vec z)\). Les deux pivots glissants entre 1 et 2 sont en parallèle (via la goupille 3).</div>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q11–Q13</span>Torseurs des trois liaisons</p>
-      <p>\(\{\mathcal V_{2/1}\}=\{0,\omega_y,0\,;\,0,V_y,0\}\), \(\{\mathcal T_{2\to1}\}=\{X_{21},0,Z_{21}\,;\,L_{21},0,N_{21}\}\) ; \(\{\mathcal V_{3/2}\}=\{0,0,\omega_z\,;\,0,0,V_z\}\), \(\{\mathcal T_{3\to2}\}=\{X_{32},Y_{32},0\,;\,L_{32},M_{32},0\}\) ; \(\{\mathcal V_{3/1}\}=\{0,0,\omega_z\,;\,0,0,V_z\}\), \(\{\mathcal T_{3\to1}\}=\{X_{31},Y_{31},0\,;\,L_{31},M_{31},0\}\).</p>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q14</span>Liaison équivalente entre 1 et 2</p>
-      <p>Les deux pivots glissants d'axe \(\vec z\) en série forment un pivot glissant \(L'_{1/2}\) de même axe. Ce pivot est en parallèle avec la liaison \(L_{2/1}\) d'axe \(\vec y\). Cinématique : \(\omega_y=V_y=0\) ; statique : on additionne les torseurs.</p>
-      <div class="res">Liaison <b>encastrement</b> (tous les mouvements bloqués).</div>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q15</span>Isostatisme de la version 1</p>
-      <p><b>Cinématique</b> : \(m=m_u+m_i=0+2=2\), \(\gamma=1\), \(E_c=6\gamma=6\), \(I_c=6\) : \(h=m-I_c+E_c=2-6+6=2\).</p>
-      <p><b>Statique</b> : \(E_s=6\times2=12\), \(I_s=3\times4=12\) : \(h=2\).</p>
-      <div class="res">Hyperstatique de degré 2.</div>
+    <div class="exo-card" id="td1-goupille-v1">
+      <div class="exo-head">Exercice 1.3 — Accouplement par goupille, version 1</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c02-ex1-3-goupille-v1.png" alt="Énoncé accouplement par goupille, version 1" style="max-width:100%;height:auto"><figcaption>Exercice 1.3 — Accouplement par goupille, version 1 (arbre Ø20, poulie de largeur 22, goupille Ø8)</figcaption></figure>
+
+        <p class="q">10) Graphe des liaisons</p>
+        <p class="etape">Étape 1 : les solides</p>
+        <p>L'arbre 1, la poulie 2, la goupille 3.</p>
+        <p class="etape">Étape 2 : les liaisons</p>
+        <ul>
+          <li>1–2 : la poulie est centrée sur l'arbre (portée 22 sur Ø20, contact long) : <b>pivot glissant d'axe \((O,\vec y)\)</b>.</li>
+          <li>1–3 : la goupille traverse l'arbre : <b>pivot glissant d'axe \((O,\vec z)\)</b>.</li>
+          <li>3–2 : la goupille traverse la poulie : <b>pivot glissant d'axe \((O,\vec z)\)</b>.</li>
+        </ul>
+        <div class="res">Une boucle : 1 —PG \((O,\vec y)\)— 2, et 1 —PG \((O,\vec z)\)— 3 —PG \((O,\vec z)\)— 2.</div>
+
+        <p class="q">11) Torseurs de \(L_{1/2}\)</p>
+        \[ \{\mathcal V_{2/1}\} = \left\{\begin{array}{cc} 0 &amp; 0\\ \omega^y_{2/1} &amp; V^y_{O,2/1}\\ 0 &amp; 0 \end{array}\right\}_{O} \qquad \{\mathcal T_{2\to1}\} = \left\{\begin{array}{cc} X_{21} &amp; L_{21}\\ 0 &amp; 0\\ Z_{21} &amp; N_{21} \end{array}\right\}_{O} \]
+
+        <p class="q">12) Torseurs de \(L_{3/2}\)</p>
+        \[ \{\mathcal V_{3/2}\} = \left\{\begin{array}{cc} 0 &amp; 0\\ 0 &amp; 0\\ \omega^z_{3/2} &amp; V^z_{O,3/2} \end{array}\right\}_{O} \qquad \{\mathcal T_{3\to2}\} = \left\{\begin{array}{cc} X_{32} &amp; L_{32}\\ Y_{32} &amp; M_{32}\\ 0 &amp; 0 \end{array}\right\}_{O} \]
+
+        <p class="q">13) Torseurs de \(L_{1/3}\)</p>
+        \[ \{\mathcal V_{3/1}\} = \left\{\begin{array}{cc} 0 &amp; 0\\ 0 &amp; 0\\ \omega^z_{3/1} &amp; V^z_{O,3/1} \end{array}\right\}_{O} \qquad \{\mathcal T_{3\to1}\} = \left\{\begin{array}{cc} X_{31} &amp; L_{31}\\ Y_{31} &amp; M_{31}\\ 0 &amp; 0 \end{array}\right\}_{O} \]
+
+        <p class="q">14) Liaison équivalente entre 1 et 2</p>
+        <p class="etape">Étape 1 : la branche qui passe par la goupille (série)</p>
+        <p>Deux pivots glissants de même axe \((O,\vec z)\) en série : on additionne, on obtient un pivot glissant \(L'_{1/2}\) du même axe.</p>
+        \[ \{\mathcal V'_{2/1}\} = \left\{\begin{array}{cc} 0 &amp; 0\\ 0 &amp; 0\\ \omega_z &amp; V_z \end{array}\right\}_{O} \qquad \{\mathcal T'_{2\to1}\} = \left\{\begin{array}{cc} X_O &amp; L_O\\ Y_O &amp; M_O\\ 0 &amp; 0 \end{array}\right\}_{O} \]
+        <div class="warnbox"><span class="lab">Coquille du corrigé</span> Le corrigé écrit \(\{\mathcal V'_{2/1}\}\) avec \(\omega_y\) et \(V_x\). Il s'agit bien d'un pivot glissant d'axe \(\vec z\) : rotation \(\omega_z\) et translation \(V_z\).</div>
+        <p class="etape">Étape 2 : les deux branches (parallèle), cinématique</p>
+        <p>On égalise \(\{\mathcal V_{2/1}\}\) (PG d'axe \(\vec y\)) et \(\{\mathcal V'_{2/1}\}\) (PG d'axe \(\vec z\)) :</p>
+        <ul>
+          <li>ligne \(\vec y\) : \(\omega^y_{2/1} = 0\) et \(V^y_{O,2/1} = 0\) ;</li>
+          <li>ligne \(\vec z\) : \(\omega_z = 0\) et \(V_z = 0\).</li>
+        </ul>
+        \[ \{\mathcal V^{eq}_{2/1}\} = \left\{\begin{array}{cc} 0 &amp; 0\\ 0 &amp; 0\\ 0 &amp; 0 \end{array}\right\}_{O} \]
+        <p class="etape">Étape 3 : les deux branches (parallèle), statique</p>
+        <p>On additionne les deux torseurs, tous deux en \(O\) :</p>
+        \[ \{\mathcal T^{eq}_{2\to1}\} = \left\{\begin{array}{cc} X_{21} + X_O &amp; L_{21} + L_O\\ Y_O &amp; M_O\\ Z_{21} &amp; N_{21} \end{array}\right\}_{O} \]
+        <p>Les 6 composantes peuvent être non nulles.</p>
+        <div class="res">Liaison équivalente : <b>encastrement</b>.</div>
+
+        <p class="q">15) Isostatisme de la version 1</p>
+        <p class="etape">Étape 1 : approche cinématique</p>
+        <ul>
+          <li>3 liaisons, 3 solides : \(\gamma = 3 - 3 + 1 = 1\), \(E_c = 6\).</li>
+          <li>\(I_c = 2 + 2 + 2 = 6\).</li>
+          <li>\(m_u = 0\) (encastrement). \(m_i = 2\) : la goupille peut tourner sur elle-même et glisser selon son axe (\(\omega^z_{3/1}\), \(V^z_{O,3/1}\)).</li>
+        </ul>
+        \[ h = m - I_c + E_c = 2 - 6 + 6 = 2 \]
+        <p class="etape">Étape 2 : approche statique</p>
+        <p>\(E_s = 6 \times (3 - 1) = 12\) et \(I_s = 4 + 4 + 4 = 12\) :</p>
+        \[ h = m - E_s + I_s = 2 - 12 + 12 = 2 \]
+        <div class="res">Hyperstatique de degré 2.</div>
+      </div>
     </div>
 
-    <figure><img class="enonce-img" src="img/c02-ex1-3-goupille-v2.png" alt="Énoncé accouplement par goupille, version 2" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 1.3 (suite) — Accouplement par goupille, version 2</h3>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q16</span>Graphe</p>
-      <p>Même graphe que la version 1, sauf la liaison 1–2 : avec \(L/D=10/80<0{,}5\), le guidage est une <b>liaison sphère–cylindre</b> (linéaire annulaire) d'axe \((O,\vec y)\).</p>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q17–Q19</span>Torseurs</p>
-      <p>\(\{\mathcal V_{2/1}\}=\{\omega_x,\omega_y,\omega_z\,;\,0,V_y,0\}\), \(\{\mathcal T_{2\to1}\}=\{X_{21},0,Z_{21}\,;\,0,0,0\}\) ; les liaisons 2–3 et 3–1 restent des pivots glissants d'axe \(\vec z\).</p>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q20</span>Liaison équivalente</p>
-      <p><b>Cinématique</b> : \(\omega_x=\omega_y=\omega_y\) et \(V_y=0\) : il reste \(\omega_z\) : pivot d'axe \((O,\vec z)\).</p>
-      <p><b>Statique</b> : on additionne les torseurs ; \(\{\mathcal T^{eq}_{2\to1}\}=\{X_{21}+X_O,\,Y_O,\,Z_{21}\,;\,L_O,\,M_{32},\,0\}\).</p>
-      <div class="res">Liaison <b>pivot d'axe \((O,\vec z)\)</b>.</div>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q21</span>Isostatisme de la version 2</p>
-      <p><b>Cinématique</b> : \(m=m_u+m_i=1+2=3\), \(\gamma=1\), \(E_c=6\), \(I_c=2\times2+1\times4=8\) : \(h=3-8+6=1\).</p>
-      <p><b>Statique</b> : \(E_s=6\times2=12\), \(I_s=2\times4+1\times2=10\) : \(h=3-12+10=1\).</p>
-      <div class="res">Hyperstatique de degré 1 (les deux approches concordent).</div>
+    <div class="exo-card" id="td1-goupille-v2">
+      <div class="exo-head">Exercice 1.3 (suite) — Accouplement par goupille, version 2</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c02-ex1-3-goupille-v2.png" alt="Énoncé accouplement par goupille, version 2" style="max-width:100%;height:auto"><figcaption>Exercice 1.3 (suite) — Accouplement par goupille, version 2 (poulie de largeur 10)</figcaption></figure>
+
+        <p class="q">16) Graphe des liaisons</p>
+        <p class="etape">Étape 1 : le centrage de la poulie est-il long ou court ?</p>
+        <div class="rappel"><span class="lab">Rappel · centrage long ou court</span>On compare la longueur de contact \(L\) au diamètre \(D\). Contact long (\(L/D\) grand) : pivot glissant. Contact court (\(L/D\) petit, de l'ordre de 0,5 ou moins) : sphère-cylindre (linéaire annulaire).</div>
+        \[ \frac{L}{D} = \frac{10}{20} = 0{,}5 \]
+        <p>Le contact est court : la poulie peut légèrement basculer sur l'arbre.</p>
+        <div class="warnbox"><span class="lab">Coquille du corrigé</span> Le corrigé écrit \(L/D = 10/80 &lt; 0{,}5\). L'arbre fait Ø20 : \(L/D = 10/20 = 0{,}5\). La conclusion (contact court) ne change pas.</div>
+        <p class="etape">Étape 2 : le graphe</p>
+        <div class="res">Même graphe qu'en version 1, sauf 1–2 : <b>sphère-cylindre (linéaire annulaire) d'axe \((O,\vec y)\)</b>. Les liaisons 1–3 et 3–2 restent des pivots glissants d'axe \((O,\vec z)\).</div>
+
+        <p class="q">17) Torseurs de \(L_{1/2}\)</p>
+        <div class="rappel"><span class="lab">Rappel · sphère-cylindre d'axe \((O,\vec y)\)</span>Trois rotations et la translation selon \(\vec y\) sont libres. Seuls les efforts selon \(\vec x\) et \(\vec z\) passent, sans moment en \(O\).</div>
+        \[ \{\mathcal V_{2/1}\} = \left\{\begin{array}{cc} \omega^x_{2/1} &amp; 0\\ \omega^y_{2/1} &amp; V^y_{O,2/1}\\ \omega^z_{2/1} &amp; 0 \end{array}\right\}_{O} \qquad \{\mathcal T_{2\to1}\} = \left\{\begin{array}{cc} X_{21} &amp; 0\\ 0 &amp; 0\\ Z_{21} &amp; 0 \end{array}\right\}_{O} \]
+
+        <p class="q">18) Torseurs de \(L_{3/2}\)</p>
+        <p>Inchangés par rapport à la version 1 :</p>
+        \[ \{\mathcal V_{3/2}\} = \left\{\begin{array}{cc} 0 &amp; 0\\ 0 &amp; 0\\ \omega^z_{3/2} &amp; V^z_{O,3/2} \end{array}\right\}_{O} \qquad \{\mathcal T_{3\to2}\} = \left\{\begin{array}{cc} X_{32} &amp; L_{32}\\ Y_{32} &amp; M_{32}\\ 0 &amp; 0 \end{array}\right\}_{O} \]
+
+        <p class="q">19) Torseurs de \(L_{1/3}\)</p>
+        \[ \{\mathcal V_{3/1}\} = \left\{\begin{array}{cc} 0 &amp; 0\\ 0 &amp; 0\\ \omega^z_{3/1} &amp; V^z_{O,3/1} \end{array}\right\}_{O} \qquad \{\mathcal T_{3\to1}\} = \left\{\begin{array}{cc} X_{31} &amp; L_{31}\\ Y_{31} &amp; M_{31}\\ 0 &amp; 0 \end{array}\right\}_{O} \]
+
+        <p class="q">20) Liaison équivalente entre 1 et 2</p>
+        <p class="etape">Étape 1 : la branche par la goupille (série)</p>
+        <p>Comme en version 1 : pivot glissant \(L'_{1/2}\) d'axe \((O,\vec z)\).</p>
+        \[ \{\mathcal V'_{2/1}\} = \left\{\begin{array}{cc} 0 &amp; 0\\ 0 &amp; 0\\ \omega_z &amp; V_z \end{array}\right\}_{O} \qquad \{\mathcal T'_{2\to1}\} = \left\{\begin{array}{cc} X_O &amp; L_O\\ Y_O &amp; M_O\\ 0 &amp; 0 \end{array}\right\}_{O} \]
+        <div class="warnbox"><span class="lab">Coquille du corrigé</span> Ici le corrigé appelle \(L'_{1/2}\) une « glissière » : c'est un pivot glissant d'axe \(\vec z\), comme en version 1.</div>
+        <p class="etape">Étape 2 : parallèle, cinématique</p>
+        <p>On égalise le torseur de la sphère-cylindre et celui du pivot glissant :</p>
+        <ul>
+          <li>ligne \(\vec x\) : \(\omega^x_{2/1} = 0\) ;</li>
+          <li>ligne \(\vec y\) : \(\omega^y_{2/1} = 0\) et \(V^y_{O,2/1} = 0\) ;</li>
+          <li>ligne \(\vec z\) : \(\omega^z_{2/1} = \omega_z\) reste libre, et \(V_z = 0\).</li>
+        </ul>
+        \[ \{\mathcal V^{eq}_{2/1}\} = \left\{\begin{array}{cc} 0 &amp; 0\\ 0 &amp; 0\\ \omega_z &amp; 0 \end{array}\right\}_{O} \]
+        <p class="etape">Étape 3 : parallèle, statique</p>
+        \[ \{\mathcal T^{eq}_{2\to1}\} = \left\{\begin{array}{cc} X_{21} + X_O &amp; L_O\\ Y_O &amp; M_O\\ Z_{21} &amp; 0 \end{array}\right\}_{O} \]
+        <p>Seul le moment autour de \(\vec z\) est nul.</p>
+        <div class="warnbox"><span class="lab">Coquille du corrigé</span> Le corrigé écrit \(M_{32}\) sur la 2ᵉ ligne : c'est \(M_O\), le moment de la branche par la goupille.</div>
+        <div class="res">Liaison équivalente : <b>pivot d'axe \((O,\vec z)\)</b>. La poulie peut basculer autour de la goupille.</div>
+
+        <p class="q">21) Isostatisme de la version 2</p>
+        <p class="etape">Étape 1 : approche cinématique</p>
+        <ul>
+          <li>\(\gamma = 1\), \(E_c = 6\).</li>
+          <li>\(I_c = 4 + 2 + 2 = 8\).</li>
+          <li>\(m_u = 1\) (le basculement autour de \(\vec z\)), \(m_i = 2\) (goupille), donc \(m = 3\).</li>
+        </ul>
+        \[ h = 3 - 8 + 6 = 1 \]
+        <p class="etape">Étape 2 : approche statique</p>
+        <p>\(E_s = 12\) et \(I_s = 2 + 4 + 4 = 10\) :</p>
+        \[ h = 3 - 12 + 10 = 1 \]
+        <div class="res">Hyperstatique de degré 1 (les deux approches concordent).</div>
+      </div>
     </div>
 
-    <figure><img class="enonce-img" src="img/c02-ex1-3-conclusion.png" alt="Énoncé accouplement par goupille, conclusion" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 1.3 (conclusion) — Quelle version privilégier ?</h3>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q22</span>Choix en construction</p>
-      <div class="res">La <b>version 1</b> : la portée de la poulie (22 mm) est assez grande pour éviter un rotulage léger, dû à la portée trop courte de la version 2 (10 mm). L'accouplement est alors plus rigide.</div>
+    <div class="exo-card" id="td1-goupille-conclusion">
+      <div class="exo-head">Exercice 1.3 (conclusion) — Quelle version privilégier ?</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c02-ex1-3-conclusion.png" alt="Énoncé accouplement par goupille, conclusion" style="max-width:100%;height:auto"><figcaption>Exercice 1.3 (conclusion) — Quelle version privilégier ?</figcaption></figure>
+
+        <p class="q">22) Version à privilégier en construction</p>
+        <p class="etape">Étape 1 : comparer les liaisons équivalentes</p>
+        <ul>
+          <li>Version 1 : encastrement. La poulie est tenue dans toutes les directions.</li>
+          <li>Version 2 : pivot d'axe \(\vec z\). La poulie peut basculer (léger rotulage), car la portée de 10 mm est trop courte.</li>
+        </ul>
+        <p class="etape">Étape 2 : conclure</p>
+        <p>Un accouplement doit transmettre la rotation sans laisser la poulie basculer.</p>
+        <div class="res">On privilégie la <b>version 1</b> : la portée de 22 mm évite le rotulage, l'accouplement est plus rigide.</div>
+      </div>
     </div>
 
-    <figure><img class="enonce-img" src="img/c02-ex1-4-manchon.png" alt="Énoncé accouplement de 2 arbres par manchon" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 1.4 — Accouplement de deux arbres par manchon</h3>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q23</span>Graphe et isostatisme</p>
-      <p>Avec \(\Sigma=\{1+2+3\}\), deux pivots d'axe \((O,\vec y)\) : \(m_u=1\), \(m_i=0\), \(\gamma=1\), \(E_c=6\), \(I_c=2\) : \(h=1-2+6=5\).</p>
-      <div class="res">Hyperstatique de degré 5 : il faut réduire l'hyperstatisme.</div>
+    <div class="exo-card" id="td1-manchon">
+      <div class="exo-head">Exercice 1.4 — Accouplement de deux arbres par manchon</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c02-ex1-4-manchon.png" alt="Énoncé accouplement de 2 arbres par manchon" style="max-width:100%;height:auto"><figcaption>Exercice 1.4 — Accouplement de deux arbres par manchon (manchon 3 encastré sur 1 et sur 2)</figcaption></figure>
+
+        <p class="q">23) Graphe des liaisons, isostatisme</p>
+        <p class="etape">Étape 1 : regrouper les pièces encastrées</p>
+        <p>Le manchon 3 est encastré sur 1 et sur 2 : les trois pièces forment un seul solide \(\Sigma = \{1 + 2 + 3\}\).</p>
+        <p class="etape">Étape 2 : le graphe</p>
+        <p>Chaque arbre tourne dans son palier du bâti 0 : deux pivots d'axe \((O,\vec y)\) entre 0 et \(\Sigma\), en parallèle.</p>
+        <p class="etape">Étape 3 : le degré d'hyperstatisme</p>
+        <ul>
+          <li>2 liaisons, 2 solides : \(\gamma = 1\), \(E_c = 6\).</li>
+          <li>\(I_c = 1 + 1 = 2\) ; \(m_u = 1\) (rotation de l'ensemble), \(m_i = 0\).</li>
+        </ul>
+        \[ h = 1 - 2 + 6 = 5 \]
+        <div class="res">Hyperstatique de degré 5 : les deux paliers doivent être parfaitement coaxiaux (2 décalages, 2 angles, 1 position axiale). Il faut réduire l'hyperstatisme.</div>
+      </div>
     </div>
 
-    <figure><img class="enonce-img" src="img/c02-ex1-4-realisation1.png" alt="Énoncé réalisation 1 du manchon" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 1.4 — Réalisation 1 (manchon encastré sur 1, jeu radial sur 2, goupille)</h3>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q24</span>Graphe et isostatisme</p>
-      <p>Pivot d'axe \((O,\vec y)\) entre 0 et \(\Sigma_{1+3}\), pivot glissant d'axe \((O,\vec z)\) entre \(\Sigma\) et 2, pivot d'axe \((O,\vec y)\) entre 2 et 0. \(I_c=2\times1+1\times2=4\), \(E_c=6\) : \(h=1-4+6=3\).</p>
-      <div class="res">Hyperstatique de degré 3 : solution encore insuffisante.</div>
+    <div class="exo-card" id="td1-manchon-r1">
+      <div class="exo-head">Exercice 1.4 — Réalisation 1 (manchon encastré sur 1, jeu radial sur 2, goupille)</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c02-ex1-4-realisation1.png" alt="Énoncé réalisation 1 du manchon" style="max-width:100%;height:auto"><figcaption>Exercice 1.4 — Réalisation 1 (manchon encastré sur 1, jeu radial sur 2, goupille)</figcaption></figure>
+
+        <p class="q">24) Graphe des liaisons, isostatisme</p>
+        <p class="etape">Étape 1 : les solides</p>
+        <p>Le manchon reste encastré sur 1 : solide \(\{1 + 3\}\). L'arbre 2 est séparé (jeu radial). Avec le bâti 0 : 3 solides.</p>
+        <p class="etape">Étape 2 : les liaisons</p>
+        <ul>
+          <li>0 – \(\{1+3\}\) : pivot d'axe \((O,\vec y)\).</li>
+          <li>0 – 2 : pivot d'axe \((O,\vec y)\).</li>
+          <li>\(\{1+3\}\) – 2 : seule la goupille guide (jeu radial ailleurs) : pivot glissant d'axe \((O,\vec z)\).</li>
+        </ul>
+        <p class="etape">Étape 3 : le degré d'hyperstatisme</p>
+        <ul>
+          <li>3 liaisons, 3 solides : \(\gamma = 1\), \(E_c = 6\).</li>
+          <li>\(I_c = 1 + 1 + 2 = 4\) ; \(m = m_u = 1\).</li>
+        </ul>
+        \[ h = 1 - 4 + 6 = 3 \]
+        <div class="res">Hyperstatique de degré 3 : mieux, mais encore insuffisant.</div>
+      </div>
     </div>
 
-    <figure><img class="enonce-img" src="img/c02-ex1-4-realisation2.png" alt="Énoncé réalisation 2 du manchon" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 1.4 — Réalisation 2 (goupille liée à 2, en contact par rainure)</h3>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q25</span>Graphe et isostatisme</p>
-      <p>Pivot d'axe \((O,\vec y)\) avec 0, sphère–cylindre (direction \(\vec z\), normale \((O,\vec x)\)) entre 2 et \(\Sigma\), pivot d'axe \((O,\vec y)\) avec 2. \(I_c=2\times1+1\times4=4\) : \(h=1-4+6=1\).</p>
-      <div class="res">Hyperstatique de degré 1.</div>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q26</span>Solution isostatique</p>
-      <p>Le corrigé du prof propose de <b>combiner les deux réalisations</b> : le manchon encastré sur 1 avec une goupille et une rainure sur 2 ramène le degré à zéro. La vérification du degré (\(h=0\)) de la combinaison est à refaire par le même comptage cinématique que ci-dessus.</p>
-      <div class="res">Solution isostatique : combiner les deux réalisations (corrigé du prof).</div>
+    <div class="exo-card" id="td1-manchon-r2">
+      <div class="exo-head">Exercice 1.4 — Réalisation 2 (goupille liée à 2, en contact par rainure)</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c02-ex1-4-realisation2.png" alt="Énoncé réalisation 2 du manchon" style="max-width:100%;height:auto"><figcaption>Exercice 1.4 — Réalisation 2 (goupille liée à 2, en contact avec 3 par une rainure)</figcaption></figure>
+
+        <p class="q">25) Graphe des liaisons, isostatisme</p>
+        <p class="etape">Étape 1 : la nouvelle liaison entre \(\{1+3\}\) et 2</p>
+        <p>La goupille (cylindre d'axe \(\vec z\), liée à 2) appuie sur un flanc plan de la rainure de 3, de normale \(\vec x\). C'est un contact cylindre / plan : une ligne de direction \(\vec z\).</p>
+        <div class="rappel"><span class="lab">Rappel · linéaire rectiligne de normale \(\vec x\), de direction \(\vec z\)</span>4 mouvements : translations selon \(\vec y\) et \(\vec z\), rotations autour de \(\vec x\) et \(\vec z\). Sont bloqués : la translation selon \(\vec x\) et la rotation autour de \(\vec y\).</div>
+        <p class="etape">Étape 2 : le graphe</p>
+        <ul>
+          <li>0 – \(\{1+3\}\) : pivot d'axe \((O,\vec y)\).</li>
+          <li>0 – 2 : pivot d'axe \((O,\vec y)\).</li>
+          <li>2 – \(\{1+3\}\) : linéaire rectiligne de normale \((O,\vec x)\), de direction \(\vec z\).</li>
+        </ul>
+        <p class="etape">Étape 3 : le degré d'hyperstatisme</p>
+        \[ I_c = 1 + 1 + 4 = 6, \qquad m = 1, \qquad E_c = 6 \]
+        \[ h = 1 - 6 + 6 = 1 \]
+        <div class="res">Hyperstatique de degré 1.</div>
+        <div class="warnbox"><span class="lab">Erreurs du corrigé</span> Le corrigé écrit \(I_c = 2\times1 + 1\times4 = 4\) : le calcul donne 6. Avec 4, on trouverait \(h = 3\) ; le résultat \(h = 1\) du corrigé correspond bien à \(I_c = 6\). Le corrigé nomme aussi la liaison « Sph./Cyl. » tout en donnant « direction \(\vec z\), normale \((O,\vec x)\) » : c'est une linéaire rectiligne (cylindre sur plan).</div>
+
+        <p class="q">26) Une solution isostatique</p>
+        <p>Le corrigé de Bigeard dit seulement : « il suffit de combiner les 2 solutions précédentes ». La vérification qui suit est rédigée par nous.</p>
+        <p class="etape">Étape 1 : la solution</p>
+        <ul>
+          <li>Côté 1 : le manchon 3 a un jeu radial sur 1 et une goupille le traverse avec 1 : pivot glissant d'axe \(\vec z\) (comme la réalisation 1).</li>
+          <li>Côté 2 : goupille liée à 2 dans une rainure de 3 : linéaire rectiligne (comme la réalisation 2).</li>
+        </ul>
+        <p class="etape">Étape 2 : le comptage</p>
+        <ul>
+          <li>Solides 0, 1, 2, 3 ; liaisons 0–1, 0–2, 1–3, 3–2 : \(\gamma = 4 - 4 + 1 = 1\), \(E_c = 6\).</li>
+          <li>\(I_c = 1 + 1 + 2 + 4 = 8\).</li>
+          <li>\(m_u = 1\) ; \(m_i = 1\) : le manchon peut glisser selon \(\vec z\), le long de la goupille et de la rainure.</li>
+        </ul>
+        \[ h = 2 - 8 + 6 = 0 \]
+        <div class="res">Manchon lié par goupille à 1 (avec jeu radial) et par goupille + rainure à 2 : montage isostatique (\(h = 0\)).</div>
+      </div>
     </div>
   </section>
 
   <section class="block td-exo" id="td-2">
     <h2>2. Pompe à piston radial</h2>
 
-    <figure><img class="enonce-img" src="img/c02-ex2-intro.png" alt="Énoncé pompe, introduction et objectif" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 2 — Pompe à piston radial : introduction</h3>
-    <p class="note">Objectif : comprendre l'hyperstatisme, ses conséquences géométriques, puis rendre le mécanisme isostatique. Le ressort est négligé.</p>
+    <div class="exo-card" id="td2-degre">
+      <div class="exo-head">Exercice 2.1 — Pompe à piston radial : graphe et nombre cyclomatique (Q1–Q2)</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c02-ex2-intro.png" alt="Énoncé pompe, introduction et objectif" style="max-width:100%;height:auto"></figure>
+        <figure><img class="enonce-img" src="img/c02-ex2-degre.png" alt="Énoncé pompe, degré d'hyperstatisme et paramétrage" style="max-width:100%;height:auto"><figcaption>Exercice 2 — Pompe à piston radial : introduction, graphe, paramétrage. Le ressort est négligé.</figcaption></figure>
 
-    <figure><img class="enonce-img" src="img/c02-ex2-degre.png" alt="Énoncé pompe, degré d'hyperstatisme" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 2.1 — Détermination du degré d'hyperstatisme (Q1–Q3)</h3>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q1</span>Graphe de liaisons</p>
-      <div class="res">Solides 1 (carter), 2 (arbre d'entrée), 3 (piston). Liaisons : 1–2 pivot d'axe \((O_1,\vec z_1)\) ; 1–3 linéaire rectiligne (normale \(\vec y_1\), direction \(\vec z_1\)) ; 3–2 pivot glissant d'axe \((D,\vec y_1)\).</div>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q2</span>Nombre cyclomatique</p>
-      <p>3 solides, 3 liaisons : \(\gamma=N_L-N_S+1=1\) (une seule boucle).</p>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q3</span>\(I_c\) et \(m\)</p>
-      <div class="res">\(I_c=1+4+2=7\) ; \(m_u=1\) (mouvement d'entrée/sortie), \(m_i=1\) (rotation propre du piston), \(m=m_u+m_i=2\).</div>
-    </div>
+        <p class="q">1) Graphe de liaisons de la pompe</p>
+        <p class="etape">Étape 1 : les solides</p>
+        <p>Le carter 1, l'arbre d'entrée 2 (avec son excentrique de centre \(C\)), le piston 3.</p>
+        <p class="etape">Étape 2 : les liaisons</p>
+        <ul>
+          <li>1–2 : l'arbre tourne dans le carter : <b>pivot d'axe \((O_1,\vec z_1)\)</b>.</li>
+          <li>2–3 : l'excentrique (cylindre d'axe \(\vec z_1\)) appuie sur le plateau du piston en \(E\) : contact cylindre / plan, <b>linéaire rectiligne de normale \(\vec y_1\), de direction \(\vec z_1\)</b>.</li>
+          <li>3–1 : le piston coulisse et tourne dans son cylindre : <b>pivot glissant d'axe \((D,\vec y_1)\)</b>.</li>
+        </ul>
+        <div class="res">Une seule boucle : 1 —pivot— 2 —linéaire rectiligne— 3 —pivot glissant— 1.</div>
 
-    <figure><img class="enonce-img" src="img/c02-ex2-cinematique.png" alt="Énoncé pompe, approche cinématique" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 2.1 — Approche cinématique (Q4–Q6)</h3>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q4</span>Torseurs cinématiques</p>
-      <p>\(\{\mathcal V_{2/1}\}_{O_1}=\{0,0,\omega_{z2/1}\,;\,0,0,0\}\) ; \(\{\mathcal V_{3/2}\}_E=\{0,\omega_{y3/2},\omega_{z3/2}\,;\,V_{x},0,V_{z}\}\) ; \(\{\mathcal V_{3/1}\}_{O_1}=\{0,\omega_{y3/1},0\,;\,0,V_{y},0\}\).</p>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q5</span>Fermeture de la chaîne cinématique en \(O_1\)</p>
-      <p>\(\vec\Omega_{1/2}+\vec\Omega_{2/3}+\vec\Omega_{3/1}=\vec 0\) et \(\vec V_{O_1\in1/2}+\vec V_{O_1\in2/3}+\vec V_{O_1\in3/1}=\vec 0\) donnent six équations, dont \(\omega_{y2/3}+\omega_{y3/1}=0\), \(\omega_{z2/3}=\omega_{z2/1}\), \(V_{x,E2/3}-\omega_{z2/3}(r+e\sin\alpha)=0\), \(\omega_{z2/3}e\cos\alpha+V_{y,O_13/1}=0\), \(V_{z,E2/3}-\omega_{y2/3}e\cos\alpha=0\).</p>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q6</span>Degré d'hyperstatisme (cinématique)</p>
-      <div class="res">\(h=m-I_c+E_c=2-7+6=1\) : hyperstatique de degré 1.</div>
+        <p class="q">2) Nombre cyclomatique dans les deux cas</p>
+        <div class="rappel"><span class="lab">Rappel · nombre cyclomatique</span>\[ \gamma = N_L - N_S + 1 \]</div>
+        <ul>
+          <li>Modèle du schéma : 3 liaisons, 3 solides : \(\gamma = 3 - 3 + 1 = 1\).</li>
+          <li>Si 1–2 est décomposée en rotule + sphère-cylindre : 4 liaisons, 3 solides : \(\gamma = 4 - 3 + 1 = 2\) (deux boucles).</li>
+        </ul>
+        <div class="res">\(\gamma = 1\) avec le schéma proposé ; \(\gamma = 2\) avec la décomposition rotule + sphère-cylindre.</div>
+        <p>Le corrigé ne traite que le premier cas ; le second est complété par nous.</p>
+      </div>
     </div>
 
-    <figure><img class="enonce-img" src="img/c02-ex2-statique.png" alt="Énoncé pompe, approche statique" style="max-width:100%;height:auto"></figure>
-    <figure><img class="enonce-img" src="img/c02-ex2-statique-b.png" alt="Énoncé pompe, approche statique, suite" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 2.1 — Approche statique (Q7–Q9)</h3>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q7–Q8</span>Torseurs et PFS</p>
-      <p>PFS sur l'arbre 2 : \(X_O=0\), \(Y_O+Y_E=0\), \(Z_O=0\), \(L_O+L_E=0\), \(M_O=0\), \(-eY_E\cos\alpha+C_m=0\). PFS sur le piston 3 : \(X_H=0\), \(-Y_E+F_P=0\), \(Z_H=0\), \(-L_E+L_H=0\), \(-eY_E\cos\alpha+N_H=0\).</p>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q9</span>Degré d'hyperstatisme (statique)</p>
-      <div class="res">\(h=m-E_s+I_s=2-12+11=1\). Les moments \(L\) restent indéterminés, mais dans le plan de fonctionnement toutes les actions sont calculables. La relation entrée–sortie est \(C_m=e\,F_p\cos\alpha\) : le couple maximal est en \(\alpha=0\).</div>
+    <div class="exo-card" id="td2-cinematique">
+      <div class="exo-head">Exercice 2.1 — Approche cinématique (Q3–Q6)</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c02-ex2-cinematique.png" alt="Énoncé pompe, approche cinématique" style="max-width:100%;height:auto"><figcaption>Exercice 2.1 — Pompe à piston radial, approche cinématique (Q3 à Q6)</figcaption></figure>
+
+        <p class="q">3) Calcul de \(I_c\) et \(m\)</p>
+        <p class="etape">Étape 1 : \(I_c\), somme des inconnues cinématiques</p>
+        \[ I_c = \underbrace{1}_{\text{pivot}} + \underbrace{4}_{\text{lin. rect.}} + \underbrace{2}_{\text{pivot gl.}} = 7 \]
+        <p class="etape">Étape 2 : les mobilités</p>
+        <ul>
+          <li>\(m_u = 1\) : la rotation de l'arbre pilote la translation du piston (mouvement d'entrée/sortie).</li>
+          <li>\(m_i = 1\) : le piston peut tourner sur lui-même autour de \(\vec y_1\), sans effet sur la sortie.</li>
+        </ul>
+        <div class="res">\(I_c = 7\) et \(m = m_u + m_i = 2\).</div>
+
+        <p class="q">4) Torseurs cinématiques des liaisons</p>
+        <p>Chaque torseur est écrit en un point de son axe, dans la base 1 :</p>
+        \[ \{\mathcal V_{2/1}\} = \left\{\begin{array}{cc} 0 &amp; 0\\ 0 &amp; 0\\ \omega^z_{2/1} &amp; 0 \end{array}\right\}_{O_1} \quad \{\mathcal V_{3/2}\} = \left\{\begin{array}{cc} 0 &amp; V^x_{E,3/2}\\ \omega^y_{3/2} &amp; 0\\ \omega^z_{3/2} &amp; V^z_{E,3/2} \end{array}\right\}_{E} \quad \{\mathcal V_{3/1}\} = \left\{\begin{array}{cc} 0 &amp; 0\\ \omega^y_{3/1} &amp; V^y_{O_1,3/1}\\ 0 &amp; 0 \end{array}\right\}_{O_1} \]
+        <p>Le point \(D\) est sur l'axe \((O_1,\vec y_1)\) : le torseur du pivot glissant s'écrit pareil en \(O_1\).</p>
+
+        <p class="q">5) Les 6 équations de fermeture en \(O_1\)</p>
+        <p class="etape">Étape 1 : la fermeture de chaîne</p>
+        <div class="rappel"><span class="lab">Rappel · fermeture cinématique d'une boucle</span>\[ \{\mathcal V_{1/2}\} + \{\mathcal V_{2/3}\} + \{\mathcal V_{3/1}\} = \{0\} \quad\text{(au même point)} \]</div>
+        <p>On note les composantes de \(2/3\) (opposées à celles de \(3/2\)).</p>
+        <p class="etape">Étape 2 : ramener le torseur de \(E\) en \(O_1\)</p>
+        <div class="rappel"><span class="lab">Rappel · changement de point</span>\[ \vec V_{O_1} = \vec V_{E} + \overrightarrow{O_1E}\wedge\vec\Omega \]</div>
+        <p>D'après le paramétrage, \(\overrightarrow{O_1C} = -e\,(\cos\alpha\,\vec x_1 + \sin\alpha\,\vec y_1)\) et \(\overrightarrow{CE} = -r\,\vec y_1\) :</p>
+        \[ \overrightarrow{O_1E} = -e\cos\alpha\,\vec x_1 - (r + e\sin\alpha)\,\vec y_1 \]
+        <p>Avec \(\vec\Omega_{2/3} = \omega^y_{2/3}\,\vec y_1 + \omega^z_{2/3}\,\vec z_1\) :</p>
+        \[ \overrightarrow{O_1E}\wedge\vec\Omega_{2/3} = -(r + e\sin\alpha)\,\omega^z_{2/3}\,\vec x_1 + e\cos\alpha\,\omega^z_{2/3}\,\vec y_1 - e\cos\alpha\,\omega^y_{2/3}\,\vec z_1 \]
+        <p class="etape">Étape 3 : les 6 équations</p>
+        <p>Rotations :</p>
+        \[ (1)\ \ 0 = 0 \qquad (2)\ \ \omega^y_{2/3} + \omega^y_{3/1} = 0 \qquad (3)\ \ -\omega^z_{2/1} + \omega^z_{2/3} = 0 \]
+        <p>Vitesses en \(O_1\) :</p>
+        \[ (4)\ \ V^x_{E,2/3} - (r + e\sin\alpha)\,\omega^z_{2/3} = 0 \]
+        \[ (5)\ \ e\cos\alpha\,\omega^z_{2/3} + V^y_{O_1,3/1} = 0 \]
+        \[ (6)\ \ V^z_{E,2/3} - e\cos\alpha\,\omega^y_{2/3} = 0 \]
+        <div class="res">Six équations, dont l'équation (1) réduite à \(0 = 0\) : aucune liaison ne laisse tourner autour de \(\vec x_1\).</div>
+        <p>L'équation (5) donne la loi entrée-sortie : \(V^y_{O_1,3/1} = -e\cos\alpha\,\omega^z_{2/1}\).</p>
+
+        <p class="q">6) Degré d'hyperstatisme</p>
+        <p class="etape">Étape 1 : le rang du système</p>
+        <p>Sur 6 équations, (1) est vide : le rang vaut \(r_c = 5\). On vérifie : \(m = I_c - r_c = 7 - 5 = 2\).</p>
+        <p class="etape">Étape 2 : la formule</p>
+        <div class="rappel"><span class="lab">Rappel · approche cinématique</span>\[ h = m - I_c + E_c = E_c - r_c \]</div>
+        \[ h = 2 - 7 + 6 = 1 \]
+        <div class="res">Hyperstatique de degré 1. L'équation \(0 = 0\) autour de \(\vec x_1\) en est la trace.</div>
+      </div>
     </div>
 
-    <figure><img class="enonce-img" src="img/c02-ex2-defauts.png" alt="Énoncé pompe, évidence géométrique et défauts" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 2.2 à 2.4 — Évidence géométrique de l'hyperstatisme et défauts</h3>
-    <p class="note">Le corrigé du prof : le défaut \(\theta_x\) (rotation de 3 par rapport à l'alésage de 1, autour de \(\vec x_1\)) n'est compensé par aucune liaison en amont ; il crée des moments \(L_O\), \(L_E\), \(L_D\) dans les liaisons. Les autres défauts (\(\theta_y\), \(\theta_z\), \(dD_x\), \(dD_y\), \(dD_z\)) sont absorbés par les degrés de liberté des liaisons.</p>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Bilan</span>Conséquence</p>
-      <p>Le défaut hyperstatique apparaît dès le montage et crée des autocontraintes dans les pièces : le mécanisme fonctionne, mais avec des efforts, des pertes énergétiques et une usure supplémentaires. C'est un problème de <b>choix de liaisons</b>, pas d'efforts extérieurs.</p>
+    <div class="exo-card" id="td2-statique">
+      <div class="exo-head">Exercice 2.1 — Approche statique (Q7–Q9)</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c02-ex2-statique.png" alt="Énoncé pompe, approche statique" style="max-width:100%;height:auto"></figure>
+        <figure><img class="enonce-img" src="img/c02-ex2-statique-b.png" alt="Énoncé pompe, approche statique, suite : actions mécaniques calculables" style="max-width:100%;height:auto"><figcaption>Exercice 2.1 — Pompe à piston radial, approche statique (Q7 à Q9)</figcaption></figure>
+
+        <p class="q">7) Torseurs des actions mécaniques</p>
+        <p>Chaque liaison transmet les composantes complémentaires de ses mouvements :</p>
+        \[ \{\mathcal T_{2\to1}\} = \left\{\begin{array}{cc} X_O &amp; L_O\\ Y_O &amp; M_O\\ Z_O &amp; 0 \end{array}\right\}_{O_1} \quad \{\mathcal T_{3\to2}\} = \left\{\begin{array}{cc} 0 &amp; L_E\\ Y_E &amp; 0\\ 0 &amp; 0 \end{array}\right\}_{E} \quad \{\mathcal T_{3\to1}\} = \left\{\begin{array}{cc} X_H &amp; L_H\\ 0 &amp; 0\\ Z_H &amp; N_H \end{array}\right\}_{H} \]
+        <div class="res">\(I_s = 5 + 2 + 4 = 11\) inconnues de liaison.</div>
+
+        <p class="q">8) Équations du PFS en isolant 2 puis 3</p>
+        <div class="rappel"><span class="lab">Rappel · principe fondamental de la statique</span>\[ \sum \{\mathcal T_{ext\to S}\} = \{0\} \qquad\text{et}\qquad \{\mathcal T_{1\to2}\} = -\{\mathcal T_{2\to1}\} \]</div>
+        <p class="etape">Étape 1 : on isole l'arbre 2</p>
+        <p>Actions extérieures : \(-\{\mathcal T_{2\to1}\}\), \(\{\mathcal T_{3\to2}\}\), le couple moteur \(C_m\,\vec z_1\). Moments en \(O_1\).</p>
+        <p>Moment en \(O_1\) de l'action de 3 : \(L_E\,\vec x_1 + \overrightarrow{O_1E}\wedge Y_E\,\vec y_1 = L_E\,\vec x_1 - e\cos\alpha\,Y_E\,\vec z_1\).</p>
+        \[ -X_O = 0 \qquad -Y_O + Y_E = 0 \qquad -Z_O = 0 \]
+        \[ -L_O + L_E = 0 \qquad -M_O = 0 \qquad -e\cos\alpha\,Y_E + C_m = 0 \]
+        <p class="etape">Étape 2 : on isole le piston 3</p>
+        <p>Actions extérieures : \(-\{\mathcal T_{3\to2}\}\), \(-\{\mathcal T_{3\to1}\}\), la poussée du fluide \(F_P\,\vec y_1\) sur l'axe. Moments en \(H\).</p>
+        <p>Moment en \(H\) de l'action de 2 : \(-L_E\,\vec x_1 + e\cos\alpha\,Y_E\,\vec z_1\).</p>
+        \[ -X_H = 0 \qquad -Y_E + F_P = 0 \qquad -Z_H = 0 \]
+        \[ -L_E - L_H = 0 \qquad 0 = 0 \qquad e\cos\alpha\,Y_E - N_H = 0 \]
+        <p class="etape">Étape 3 : résolution</p>
+        <ul>
+          <li>\(Y_E = F_P\), \(Y_O = F_P\), \(N_H = e\,F_P\cos\alpha\).</li>
+          <li>\(X_O = Z_O = M_O = X_H = Z_H = 0\).</li>
+          <li>\(L_O = L_E = -L_H\) : une seule relation pour trois inconnues, leur valeur reste <b>indéterminée</b>.</li>
+        </ul>
+        <div class="res">Loi entrée-sortie : \(C_m = e\,F_P\cos\alpha\). Les moments \(L\) (autour de \(\vec x_1\)) ne sont pas calculables.</div>
+        <div class="warnbox"><span class="lab">Signes du corrigé</span> Le corrigé écrit \(Y_O + Y_E = 0\), \(L_O + L_E = 0\), \(-L_E + L_H = 0\) : il utilise les composantes de \(\{\mathcal T_{2\to1}\}\) et \(\{\mathcal T_{3\to1}\}\) comme si c'étaient les actions sur 2 et sur 3. Son tableau final donne aussi \(N = -eF_P\cos\alpha\) alors que son équation (18) donne \(+eF_P\cos\alpha\). Seuls des signes changent : \(C_m = eF_P\cos\alpha\), l'indétermination des \(L\) et \(h = 1\) restent justes.</div>
+
+        <p class="q">9) Degré d'hyperstatisme (statique)</p>
+        <div class="rappel"><span class="lab">Rappel · approche statique</span>\[ h = m - E_s + I_s, \qquad E_s = 6\,(N_S - 1) \]</div>
+        <p>On isole 2 et 3 : \(E_s = 6 \times 2 = 12\). Et \(I_s = 11\).</p>
+        \[ h = 2 - 12 + 11 = 1 \]
+        <div class="res">Hyperstatique de degré 1, comme avec l'approche cinématique.</div>
+        <p>Le couple est maximal pour \(\alpha = 0\) (excentrique à l'horizontale, début de compression) : le moteur doit fournir plus que \(e\,F_P\).</p>
+      </div>
     </div>
 
-    <figure><img class="enonce-img" src="img/c02-ex2-rendre-isostatique.png" alt="Énoncé pompe, rendre l'assemblage isostatique" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 2.3 — Rendre l'assemblage isostatique (Q10)</h3>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q10</span>Équivalence des deux schémas</p>
-      <p>La liaison modifiable est \(L_{2/3}\). Le roulement rigide à billes en \(C\) (rotulage faible) est remplacé par un roulement à rotule (rotulage de 3°) : les deux schémas sont équivalents si la liaison équivalente entre 2, 2' et 3 est une <b>ponctuelle</b>, ce qui est le cas.</p>
+    <div class="exo-card" id="td2-isostatique">
+      <div class="exo-head">Exercice 2.3 — Rendre l'assemblage isostatique (Q10)</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c02-ex2-rendre-isostatique.png" alt="Énoncé pompe, rendre l'assemblage isostatique" style="max-width:100%;height:auto"><figcaption>Exercice 2.3 — Pompe à piston radial : rendre l'assemblage isostatique (Q10)</figcaption></figure>
+
+        <p class="q">10) Montrer que les deux schémas sont équivalents</p>
+        <p class="etape">Étape 1 : ce qu'il faut obtenir</p>
+        <p>Le premier schéma remplace la linéaire rectiligne en \(E\) par une <b>ponctuelle de normale \(\vec y_1\)</b>. Il faut montrer que le second schéma donne la même liaison entre 2 et 3.</p>
+        <p class="etape">Étape 2 : les liaisons du second schéma</p>
+        <ul>
+          <li>2 – 2' (bague extérieure du roulement à rotule) : rotule de centre \(C\).</li>
+          <li>2' – 3 : appui plan de normale \(\vec y_1\).</li>
+        </ul>
+        <p class="etape">Étape 3 : association en série</p>
+        <div class="rappel"><span class="lab">Rappel · liaisons en série</span>\[ \{\mathcal V_{3/2}\} = \{\mathcal V_{3/2'}\} + \{\mathcal V_{2'/2}\} \]</div>
+        \[ \{\mathcal V_{2'/2}\} = \left\{\begin{array}{cc} \omega_x &amp; 0\\ \omega_y &amp; 0\\ \omega_z &amp; 0 \end{array}\right\}_{C} \qquad \{\mathcal V_{3/2'}\} = \left\{\begin{array}{cc} 0 &amp; V_x\\ \omega'_y &amp; 0\\ 0 &amp; V_z \end{array}\right\}_{C} \]
+        <p>Le torseur d'un appui plan s'écrit pareil en tout point (sa seule rotation est selon la normale \(\vec y_1\), et \(\overrightarrow{CE}\) est porté par \(\vec y_1\)). On additionne en \(C\) :</p>
+        \[ \{\mathcal V_{3/2}\} = \left\{\begin{array}{cc} \omega_x &amp; V_x\\ \omega_y + \omega'_y &amp; 0\\ \omega_z &amp; V_z \end{array}\right\}_{C} \]
+        <p>Trois rotations et deux translations sont libres ; seule la translation selon \(\vec y_1\) est bloquée.</p>
+        <div class="res">La liaison équivalente entre 2 et 3 est une <b>ponctuelle de normale \(\vec y_1\)</b> : les deux schémas sont équivalents.</div>
+        <p class="etape">Étape 4 : vérification de l'isostatisme</p>
+        <p>La ponctuelle ajoute la rotation autour de \(\vec x_1\) qui manquait : \(I_c = 1 + 5 + 2 = 8\), \(m = 2\) inchangé.</p>
+        \[ h = 2 - 8 + 6 = 0 \]
+        <div class="res">Le mécanisme modifié est isostatique.</div>
+      </div>
     </div>
 
-    <figure><img class="enonce-img" src="img/c02-ex2-conclusion.png" alt="Énoncé pompe, défauts et conclusion" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 2.4 et conclusion — Défaut le plus influent (Q11)</h3>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q11</span>Défaut le plus influent</p>
-      <div class="res">Le défaut \(\theta_x\) : c'est lui qui correspond à la famille d'inconnues hyperstatiques \(L_i\) mise en évidence dans l'étude statique.</div>
+    <div class="exo-card" id="td2-defaut">
+      <div class="exo-head">Exercice 2.4 et conclusion — Détermination intuitive de h, défaut le plus influent (Q11)</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c02-ex2-defauts.png" alt="Énoncé pompe, détermination intuitive de h, défauts angulaires" style="max-width:100%;height:auto"></figure>
+        <figure><img class="enonce-img" src="img/c02-ex2-conclusion.png" alt="Énoncé pompe, défauts dimensionnels et conclusion" style="max-width:100%;height:auto"><figcaption>Exercice 2.4 et conclusion — Pompe à piston radial : défauts angulaires et dimensionnels, défaut le plus influent (Q11)</figcaption></figure>
+
+        <p class="q">11) Quel est le défaut le plus influent ?</p>
+        <p class="etape">Étape 1 : la méthode</p>
+        <p>Pour chaque petit défaut de position de 3 par rapport à 1 en \(D\), on cherche une liaison qui l'absorbe grâce à un de ses mouvements.</p>
+        <p class="etape">Étape 2 : les défauts un par un</p>
+        <ul>
+          <li>\(\theta_y\) : absorbé par la rotation du pivot glissant (axe \(\vec y_1\)) et par celle de la linéaire rectiligne autour de \(\vec y_1\).</li>
+          <li>\(\theta_z\) : absorbé par le pivot d'entrée (axe \(\vec z_1\)) et par la rotation de la linéaire rectiligne autour de \(\vec z_1\).</li>
+          <li>\(dD_x\) : absorbé par la translation selon \(\vec x_1\) de la linéaire rectiligne.</li>
+          <li>\(dD_y\) : c'est la direction du mouvement de sortie (pivot glissant), ce défaut n'a pas de sens.</li>
+          <li>\(dD_z\) : absorbé par la translation selon \(\vec z_1\) de la linéaire rectiligne.</li>
+          <li>\(\theta_x\) : <b>aucune</b> liaison ne permet de tourner autour de \(\vec x_1\). Le défaut n'est pas absorbé.</li>
+        </ul>
+        <p class="etape">Étape 3 : le lien avec les calculs</p>
+        <p>\(\theta_x\) correspond à l'équation (1) \(0 = 0\) de la fermeture cinématique et aux moments \(L_O\), \(L_E\), \(L_H\) indéterminés en statique. Au montage, ce défaut crée des autocontraintes, même sans couple moteur ni pression.</p>
+        <div class="res">Le défaut le plus influent est \(\theta_x\) : la rotation de 3 par rapport à 1 autour de \(\vec x_1\).</div>
+      </div>
     </div>
   </section>
 
