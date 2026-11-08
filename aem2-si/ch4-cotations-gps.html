@@ -252,9 +252,9 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
   <section class="block" id="exos">
     <h2>5. Exercices créés</h2>
     <p>Aucun TD officiel n'accompagne ce cours : les 3 exercices suivants ont été construits pour appliquer les
-    notions ci-dessus (ajustement ISO, lecture de tolérance géométrique, calcul d'angle maximal).</p>
+    notions ci-dessus (ajustement ISO, lecture de tolérance géométrique, calcul d'angle maximal). Correction rédigée par nous.</p>
 
-    <div class="exo-card">
+    <div class="exo-card" id="exo-a">
       <div class="exo-head">Exercice A — Calcul d'un ajustement ISO <span class="diff">♦</span></div>
       <div class="exo-body">
         <p class="enonce">Un arbre est monté dans un alésage selon l'ajustement \(\varnothing40\,\text{H7/g6}\).
@@ -262,65 +262,102 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
         \(E_i=0\), \(E_s=+25\,\)µm ; \(\text{g6}\) : \(e_s=-9\,\)µm, \(e_i=-20\,\)µm. Calculer les cotes limites de
         l'alésage et de l'arbre, puis le jeu minimal et le jeu maximal de cet assemblage. L'ajustement est-il
         cohérent avec la règle du cours (H7/g6 → jeu) ?</p>
+
         <p class="q">1) Cotes limites de l'alésage (H7)</p>
-        \[D_{min}=D+E_i=40{,}000+0=40{,}000\ \text{mm}\qquad D_{max}=D+E_s=40{,}000+0{,}025=40{,}025\ \text{mm}\]
+        <div class="rappel"><span class="lab">Rappel · cotes limites</span>\[ D_{min} = D + E_i \qquad D_{max} = D + E_s \]</div>
+        <p>La cote nominale vaut \(D = 40\) mm. On convertit les écarts en mm : \(25\) µm \(= 0{,}025\) mm.</p>
+        \[ D_{min} = 40{,}000 + 0 = 40{,}000\ \text{mm} \]
+        \[ D_{max} = 40{,}000 + 0{,}025 = 40{,}025\ \text{mm} \]
+        <div class="res">Alésage : \(D_{min} = 40{,}000\) mm et \(D_{max} = 40{,}025\) mm (IT = 25 µm).</div>
+
         <p class="q">2) Cotes limites de l'arbre (g6)</p>
-        \[d_{max}=D+e_s=40{,}000-0{,}009=39{,}991\ \text{mm}\qquad d_{min}=D+e_i=40{,}000-0{,}020=39{,}980\ \text{mm}\]
-        <p class="q">3) Jeu minimal et maximal</p>
-        \[J_{min}=D_{min}-d_{max}=40{,}000-39{,}991=0{,}009\ \text{mm}=9\ \text{µm}\]
-        \[J_{max}=D_{max}-d_{min}=40{,}025-39{,}980=0{,}045\ \text{mm}=45\ \text{µm}\]
-        <div class="res">\(J_{min}=9\,\)µm \(>0\) et \(J_{max}=45\,\)µm \(>0\) : l'assemblage a <b>toujours du
-        jeu</b> (jamais de serrage, même dans le pire des cas) — cohérent avec la règle du cours (à partir de
-        H/g, toujours du jeu). L'IT de l'alésage (\(25\,\)µm) est bien supérieur à celui de l'arbre (\(11\,\)µm),
-        conformément à la remarque du cours.</div>
+        <p>Même formule, avec les écarts de l'arbre (notés en minuscules) :</p>
+        \[ d_{max} = D + e_s = 40{,}000 - 0{,}009 = 39{,}991\ \text{mm} \]
+        \[ d_{min} = D + e_i = 40{,}000 - 0{,}020 = 39{,}980\ \text{mm} \]
+        <div class="res">Arbre : \(d_{min} = 39{,}980\) mm et \(d_{max} = 39{,}991\) mm (IT = 11 µm).</div>
+
+        <p class="q">3) Jeu minimal, jeu maximal, cohérence avec le cours</p>
+
+        <p class="etape">Étape 1 : le jeu minimal</p>
+        <p>Le jeu est le plus petit quand l'alésage est le plus petit et l'arbre le plus gros.</p>
+        <div class="rappel"><span class="lab">Rappel · jeux limites</span>\[ J_{min} = D_{min} - d_{max} \qquad J_{max} = D_{max} - d_{min} \]</div>
+        \[ J_{min} = 40{,}000 - 39{,}991 = 0{,}009\ \text{mm} = 9\ \text{µm} \]
+
+        <p class="etape">Étape 2 : le jeu maximal</p>
+        <p>Le jeu est le plus grand quand l'alésage est le plus gros et l'arbre le plus petit.</p>
+        \[ J_{max} = 40{,}025 - 39{,}980 = 0{,}045\ \text{mm} = 45\ \text{µm} \]
+
+        <p class="etape">Étape 3 : conclusion</p>
+        <ul>
+          <li>\(J_{min} > 0\) : même dans le pire des cas, il reste du jeu. Il n'y a jamais de serrage.</li>
+          <li>C'est cohérent avec la règle du cours : à partir de H/g, toujours du jeu.</li>
+          <li>L'IT de l'alésage (25 µm) est plus grand que celui de l'arbre (11 µm) : un alésage est plus difficile à usiner précisément.</li>
+        </ul>
+        <div class="res">\(J_{min} = 9\) µm et \(J_{max} = 45\) µm : ajustement avec jeu, conforme à « H7g6 = glissant ».</div>
+        <div class="warnbox"><span class="lab">Piège</span> Le jeu minimal se calcule avec l'alésage <b>mini</b> et l'arbre <b>maxi</b>, pas avec les deux minis. Vérification : \(J_{max} - J_{min} = IT_{alésage} + IT_{arbre} = 25 + 11 = 36\) µm.</div>
       </div>
     </div>
 
-    <div class="exo-card">
+    <div class="exo-card" id="exo-b">
       <div class="exo-head">Exercice B — Interprétation d'une tolérance de localisation <span class="diff">♦♦</span></div>
       <div class="exo-body">
         <p class="enonce">Un trou de \(\varnothing12\) est spécifié \(\oplus\ \varnothing0{,}08\ A\), avec des
         cotes théoriques encadrées de 25 mm et 45 mm par rapport à la référence \(A\) (surface plane). Décrire la
         zone de tolérance, puis déterminer l'écart de position maximal admissible du centre du trou par rapport
         à sa position théorique, dans n'importe quelle direction du plan.</p>
-        <p class="q">1) Description de la zone</p>
-        <p>Le symbole \(\oplus\) (localisation) avec une seule référence \(A\) et un diamètre de zone \(\varnothing0{,}08\)
-        définit une <b>zone cylindrique de diamètre 0,08 mm</b>, d'axe perpendiculaire à \(A\), positionnée
-        exactement par les cotes théoriques 25 et 45 mm (sans tolérance propre — c'est le rôle des cotes
-        <b>encadrées</b>). L'axe réel du trou de \(\varnothing12\) doit être contenu tout entier à l'intérieur de
-        ce petit cylindre.</p>
-        <p class="q">2) Écart maximal du centre</p>
-        <div class="warnbox"><span class="lab">Piège classique</span> On donne le <b>diamètre</b> de la zone
-        (0,08 mm), pas son rayon : l'écart maximal du centre par rapport à la position théorique, dans
-        n'importe quelle direction, est donc la <b>moitié</b> du diamètre.</div>
-        <div class="res">\[\text{écart maxi}=\dfrac{\varnothing0{,}08}{2}=0{,}04\ \text{mm}=40\ \text{µm}\]
-        Le centre réel du trou peut se trouver n'importe où à l'intérieur d'un disque de rayon 0,04 mm centré sur
-        la position théorique (25 ; 45), quelle que soit la direction de l'écart.</div>
+
+        <p class="q">1) Description de la zone de tolérance</p>
+        <div class="rappel"><span class="lab">Rappel · lire une spécification</span>Type (symbole) et valeur \(t\) ; élément toléré (flèche) ; référence (lettre) ; zone de largeur \(t\) placée par des cotes encadrées.</div>
+
+        <p class="etape">Étape 1 : le type et la valeur</p>
+        <p>Le symbole \(\oplus\) est une <b>localisation</b>. Le signe \(\varnothing\) devant 0,08 indique une zone <b>cylindrique</b> de diamètre 0,08 mm.</p>
+
+        <p class="etape">Étape 2 : l'élément toléré et la référence</p>
+        <ul>
+          <li>Élément toléré : l'<b>axe</b> réel du trou \(\varnothing12\).</li>
+          <li>Référence : le plan \(A\). L'axe de la zone est perpendiculaire à \(A\).</li>
+        </ul>
+
+        <p class="etape">Étape 3 : la position de la zone</p>
+        <p>Les cotes 25 et 45 sont <b>encadrées</b> : ce sont des cotes théoriques exactes, sans tolérance propre. Elles placent le centre de la zone.</p>
+        <div class="res">Zone : un cylindre de \(\varnothing0{,}08\) mm, perpendiculaire à \(A\), centré à la position théorique (25 ; 45). L'axe réel du trou doit y être contenu en entier.</div>
+
+        <p class="q">2) Écart maximal du centre du trou</p>
+        <p>Le centre réel doit rester dans un disque de diamètre 0,08 mm centré sur la position théorique. L'écart maximal, dans n'importe quelle direction, est le <b>rayon</b> de ce disque :</p>
+        \[ e_{max} = \frac{\varnothing}{2} = \frac{0{,}08}{2} = 0{,}04\ \text{mm} \]
+        <div class="res">\(e_{max} = 0{,}04\) mm \(= 40\) µm, quelle que soit la direction.</div>
+        <div class="warnbox"><span class="lab">Piège</span> La valeur du cadre est un <b>diamètre</b> de zone, pas un rayon. Répondre 0,08 mm double l'écart admissible.</div>
       </div>
     </div>
 
-    <div class="exo-card">
+    <div class="exo-card" id="exo-c">
       <div class="exo-head">Exercice C — Perpendicularité : angle de désalignement maximal <span class="diff">♦♦</span></div>
       <div class="exo-body">
         <p class="enonce">Une surface plane, de hauteur utile \(L=50\,\)mm, est spécifiée
         \(\perp\ 0{,}1\ A\) (perpendicularité par rapport à une référence \(A\)). Cette surface doit rester
         comprise entre 2 plans parallèles distants de \(t=0{,}1\,\)mm, perpendiculaires à \(A\). Déterminer
         l'angle maximal \(\theta_{max}\) dont la surface réelle peut s'écarter de la perpendicularité stricte.</p>
-        <p class="q">Mise en équation</p>
-        <p>Dans le pire des cas, la surface réelle est un plan incliné qui reste tangent aux deux plans limites
-        de la zone de tolérance sur toute la hauteur \(L\) : l'écart transversal maximal entre le haut et le bas
-        de la surface est alors égal à la largeur de la zone \(t\) (cas limite où le défaut d'inclinaison
-        « consomme » toute la tolérance sur la hauteur \(L\)). On a un petit triangle rectangle de côtés
-        opposé \(t\) et adjacent \(L\) :</p>
-        \[\tan\theta_{max}=\dfrac{t}{L}=\dfrac{0{,}1}{50}=0{,}002\]
-        <div class="res">\[\theta_{max}=\arctan(0{,}002)\approx0{,}115°\ (\approx6{,}9\ \text{minutes d'arc})\]</div>
-        <p>Interprétation physique : un écart angulaire supérieur à environ 0,115° ferait sortir la surface
-        réelle de la zone de tolérance de 0,1 mm avant même d'atteindre la hauteur \(L=50\,\)mm — c'est donc bien
-        la valeur limite admissible pour un défaut d'inclinaison pur (sans défaut de forme superposé).</p>
-        <div class="note"><span class="lab">À retenir</span> Plus la <b>hauteur de référence \(L\)</b> est
-        grande, plus l'angle maximal admissible \(\theta_{max}=\arctan(t/L)\) est <b>petit</b> à tolérance \(t\)
-        égale — d'où l'usage de mesurer les défauts d'orientation sur la plus grande longueur utile disponible
-        pour être plus exigeant (ou au contraire sur une longueur réduite si on veut assouplir la contrainte).</div>
+
+        <p class="q">1) Angle maximal \(\theta_{max}\)</p>
+
+        <p class="etape">Étape 1 : le cas limite</p>
+        <p>On suppose la surface parfaitement plane, mais inclinée. Le pire cas : elle touche un plan limite en bas et l'autre plan limite en haut.</p>
+        <p>Sur la hauteur \(L\), le décalage horizontal vaut alors exactement la largeur de zone \(t\).</p>
+
+        <p class="etape">Étape 2 : le triangle rectangle</p>
+        <div class="rappel"><span class="lab">Rappel · tangente dans un triangle rectangle</span>\[ \tan\theta = \frac{\text{côté opposé}}{\text{côté adjacent}} \]</div>
+        <p>Côté opposé : \(t\). Côté adjacent : \(L\).</p>
+        \[ \tan\theta_{max} = \frac{t}{L} = \frac{0{,}1}{50} = 0{,}002 \]
+
+        <p class="etape">Étape 3 : l'angle</p>
+        \[ \theta_{max} = \arctan(0{,}002) \approx 0{,}115^\circ \]
+        <p>En minutes d'arc : \(0{,}1146 \times 60 \approx 6{,}9'\).</p>
+        <div class="res">\(\theta_{max} \approx 0{,}115^\circ\), soit environ 6,9 minutes d'arc.</div>
+        <ul>
+          <li>Plus \(L\) est grand, plus \(\theta_{max}\) est petit, à \(t\) égal.</li>
+          <li>Ce résultat vaut pour un défaut d'inclinaison pur. Un défaut de forme en plus consomme une partie de la zone : l'angle admissible diminue.</li>
+        </ul>
+        <div class="warnbox"><span class="lab">Piège</span> La calculatrice doit être en degrés pour lire 0,115°. En radians, on lit 0,002 rad (même angle, autre unité).</div>
       </div>
     </div>
   </section>
