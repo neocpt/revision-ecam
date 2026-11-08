@@ -119,190 +119,358 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
   </section>
 
   <h2 id="td" class="part">Partie 2 — Correction des exercices de TD</h2>
-  <p class="lead">Pour les exercices 1.1, 1.2, 2.1, 2.2, 3.1, 3.2 et 4.1, la correction du prof (dossier Bigeard) est reprise et étoffée. Pour 4.2, 5.1 et 5.2, il n'existe pas de corrigé dans ce dossier : la correction est la mienne, construite avec la même méthode (TEC, puissances, torseurs). Chaque énoncé est une image, le titre de l'exercice est écrit en dessous pour la recherche (Ctrl+F).</p>
+  <p class="lead">Exercices dans l'ordre du TD. Les exercices 1 à 4.1 suivent les corrigés de E. Bigeard
+  (<i>ENE-PT-TD-calcul_d_energie_cinetique-prof.pdf</i>, <i>ENE-PT-TD-calcul_d_inertie_equivalente-prof.pdf</i>, <i>ENE-PT-TD-calcul_de_puissance-prof.pdf</i>,
+  <i>ENE-PT-TD-application_du_theoreme_de_l_energie_cinetique-prof.pdf</i>). Les exercices 4.2, 5.1 et 5.2 n'ont pas de corrigé Bigeard : correction rédigée par nous, avec sa méthode.
+  Chaque énoncé est une image, avec le titre de l'exercice dessous (Ctrl+F).</p>
+  <div class="rappel"><span class="lab">Rappel · les trois outils du chapitre</span>
+  \[ 2E_{c(S/R)} = \{\mathcal V_{S/R}\}\otimes\{\mathcal C_{S/R}\} = \vec\Omega_{S/R}\cdot\vec\sigma_{A\in S/R} + m\,\vec V_{A\in S/R}\cdot\vec V_{G\in S/R} \]
+  \[ P_{ext\to S/R} = \{\mathcal T_{ext\to S}\}\otimes\{\mathcal V_{S/R}\} = \vec R\cdot\vec V_{A\in S/R} + \vec M_A\cdot\vec\Omega_{S/R} \]
+  \[ \frac{dE_{c(\Sigma/R_g)}}{dt} = P_{ext\to\Sigma/R_g} + P_{int} \quad\text{(TEC)} \]</div>
 
   <section class="block td-exo" id="td-1">
     <h2>1. Calcul d'énergie cinétique</h2>
 
-    <figure><img class="enonce-img" src="img/c04-ex1-1-cylindre.png" alt="Énoncé de l'exercice 1.1" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 1.1 — Cylindre sur plan incliné</h3>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q1</span>Énergie cinétique calculée en \(I\)</p>
-      <p>Le roulement sans glissement donne \(\vec V_{I\in S/R}=\vec 0\) : le point \(I\) est le centre instantané de rotation. Le comoment en \(I\) se réduit donc à \(2E_c=\vec\Omega_{S/R}\cdot\vec\sigma_{I\in S/R}\).</p>
-      <p>Avec \(\vec\Omega_{S/R}=\dot\theta\,\vec z\) et \(\vec\sigma_{I}=\bar I_{(G,S)}\cdot\vec\Omega+\vec{IG}\wedge m\vec V_G\), on obtient \(\vec\sigma_{I}=(C+mR^2)\dot\theta\,\vec z\). Pour un cylindre plein, \(C=\tfrac12 mR^2\) : \(\vec\sigma_I=\tfrac32 mR^2\dot\theta\,\vec z\).</p>
-      <div class="res">\(E_{c(S/R)}=\tfrac34\,mR^2\dot\theta^2\)</div>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q2</span>Même question en \(G\)</p>
-      <p>En \(G\) : \(2E_c=m\,V_G^2+\vec\Omega\cdot\vec\sigma_G\) avec \(V_G=R\dot\theta\) et \(\vec\sigma_G=C\dot\theta\,\vec z\) : \(E_c=\tfrac12 mR^2\dot\theta^2+\tfrac12 C\dot\theta^2=\tfrac12 mR^2\dot\theta^2+\tfrac14 mR^2\dot\theta^2\).</p>
-      <div class="res">On retrouve \(E_{c(S/R)}=\tfrac34\,mR^2\dot\theta^2\) : le résultat ne dépend pas du point choisi.</div>
+    <div class="exo-card" id="td1-cylindre">
+      <div class="exo-head">Exercice 1.1 — Cylindre sur plan incliné</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c04-ex1-1-cylindre.png" alt="Énoncé de l'exercice 1.1" style="max-width:100%;height:auto"><figcaption>Exercice 1.1 — Cylindre sur plan incliné, roulement sans glissement en I</figcaption></figure>
+
+        <p class="q">1) Énergie cinétique du cylindre, calcul en \(I\)</p>
+        <p class="etape">Étape 1 : la formule en \(I\)</p>
+        \[ 2E_{c(S/R)} = \vec\Omega_{S/R}\cdot\vec\sigma_{I\in S/R} + m\,\vec V_{I\in S/R}\cdot\vec V_{G\in S/R} \]
+        <p>Roulement sans glissement en \(I\) : \(\vec V_{I\in S/R} = \vec 0\). Le second terme disparaît.</p>
+        \[ 2E_{c(S/R)} = \vec\Omega_{S/R}\cdot\vec\sigma_{I\in S/R} \qquad \vec\Omega_{S/R} = \dot\theta\,\vec z \]
+        <p class="etape">Étape 2 : moment cinétique en \(I\)</p>
+        <div class="rappel"><span class="lab">Rappel · changement de point (moment cinétique)</span>\[ \vec\sigma_{I} = \vec\sigma_{G} + \overrightarrow{IG}\wedge m\,\vec V_{G} \]</div>
+        <p>\(\vec\sigma_G = \bar I_{(G,S)}\cdot\dot\theta\,\vec z = C\dot\theta\,\vec z\). Avec \(\overrightarrow{IG} = R\,\vec x\) et \(\vec V_G = R\dot\theta\,\vec y\) :</p>
+        \[ R\,\vec x\wedge mR\dot\theta\,\vec y = mR^2\dot\theta\,\vec z \qquad\Longrightarrow\qquad \vec\sigma_{I} = (C + mR^2)\,\dot\theta\,\vec z \]
+        <p class="etape">Étape 3 : cylindre plein</p>
+        \[ C = \frac{mR^2}{2} \qquad \vec\sigma_I = \frac32 mR^2\dot\theta\,\vec z \]
+        <div class="res">\(E_{c(S/R)} = \dfrac34\,mR^2\dot\theta^2\)</div>
+
+        <p class="q">2) Même calcul en \(G\)</p>
+        <p>En \(G\), la formule devient \(2E_c = m\,V_G^2 + \vec\Omega\cdot\vec\sigma_G\) :</p>
+        \[ 2E_c = mR^2\dot\theta^2 + C\dot\theta^2 = mR^2\dot\theta^2 + \frac12 mR^2\dot\theta^2 \]
+        <div class="res">\(E_{c(S/R)} = \dfrac12 mR^2\dot\theta^2 + \dfrac12 C\dot\theta^2 = \dfrac34 mR^2\dot\theta^2\) : même résultat, l'énergie ne dépend pas du point de calcul.</div>
+        <div class="warnbox"><span class="lab">Piège</span> En \(G\), il ne faut pas oublier le terme de translation \(\frac12 mV_G^2\). En \(I\), il est « caché » dans \(mR^2\) (Huygens).</div>
+      </div>
     </div>
 
-    <figure><img class="enonce-img" src="img/c04-ex1-2-toupie-a.png" alt="Énoncé de l'exercice 1.2, figure" style="max-width:100%;height:auto"></figure>
-    <figure><img class="enonce-img" src="img/c04-ex1-2-toupie-b.png" alt="Énoncé de l'exercice 1.2, texte" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 1.2 — Toupie</h3>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q3</span>Énergie cinétique de la toupie</p>
-      <p>Le point \(O\) est fixe : \(V_{O\in S/R}=\vec 0\), donc \(2E_c=\vec\Omega_{S/R}\cdot\bar I_{(O,S)}\cdot\vec\Omega_{S/R}\).</p>
-      <p>Les angles d'Euler donnent \(\vec\Omega_{S/R}=\dot\psi\,\vec z_0+\dot\theta\,\vec u+\dot\varphi\,\vec z_1\). Dans la base \((\vec x_1,\vec y_1,\vec z_1)\), les composantes sont \(\dot\theta\), \(\dot\psi\sin\theta\) et \(\dot\varphi+\dot\psi\cos\theta\) (la matrice de \(O\) est diagonale, \(A\) étant le moment équatorial et \(C\) le moment autour de l'axe de symétrie).</p>
-      <div class="res">\(E_{c(S/R)}=\tfrac12\Big[A\big(\dot\theta^2+\dot\psi^2\sin^2\theta\big)+C\big(\dot\varphi+\dot\psi\cos\theta\big)^2\Big]\)</div>
-    </div>
+    <div class="exo-card" id="td1-toupie">
+      <div class="exo-head">Exercice 1.2 — Toupie</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c04-ex1-2-toupie-a.png" alt="Énoncé de l'exercice 1.2, figure" style="max-width:100%;height:auto"></figure>
+        <figure><img class="enonce-img" src="img/c04-ex1-2-toupie-b.png" alt="Énoncé de l'exercice 1.2, texte" style="max-width:100%;height:auto"><figcaption>Exercice 1.2 — Toupie (angles d'Euler ψ, θ, φ, pointe O fixe)</figcaption></figure>
 
+        <p class="q">3) Énergie cinétique de la toupie</p>
+        <p class="etape">Étape 1 : la formule au point fixe \(O\)</p>
+        <p>\(O\) reste immobile : \(\vec V_{O\in S/R} = \vec 0\). Donc :</p>
+        \[ 2E_{c(S/R)} = \vec\Omega_{S/R}\cdot\vec\sigma_{O\in S/R} = \vec\Omega_{S/R}\cdot\bar I_{(O,S)}\cdot\vec\Omega_{S/R} \]
+        <p class="etape">Étape 2 : le vecteur rotation</p>
+        <div class="rappel"><span class="lab">Rappel · angles d'Euler</span>\[ \vec\Omega_{S/R} = \dot\psi\,\vec z + \dot\theta\,\vec u + \dot\varphi\,\vec z_1 \]</div>
+        <p>On l'exprime dans la 2ᵉ base intermédiaire \((\vec u,\vec w,\vec z_1)\), avec \(\vec z = \sin\theta\,\vec w + \cos\theta\,\vec z_1\) :</p>
+        \[ \vec\Omega_{S/R} = \dot\theta\,\vec u + \dot\psi\sin\theta\,\vec w + (\dot\varphi + \dot\psi\cos\theta)\,\vec z_1 \]
+        <p>La matrice \(\mathrm{diag}(A, A, C)\) reste la même dans cette base, car la toupie est de révolution autour de \(\vec z_1\).</p>
+        <p class="etape">Étape 3 : le produit</p>
+        \[ 2E_c = A\dot\theta^2 + A\dot\psi^2\sin^2\theta + C(\dot\varphi + \dot\psi\cos\theta)^2 \]
+        <div class="res">\(E_{c(S/R)} = \dfrac12\left[A\left(\dot\theta^2 + \dot\psi^2\sin^2\theta\right) + C\left(\dot\varphi + \dot\psi\cos\theta\right)^2\right]\)</div>
+        <div class="warnbox"><span class="lab">Piège</span> Les composantes de \(\vec\Omega\) sont dans la base \((\vec u,\vec w,\vec z_1)\), pas dans \((\vec x_1,\vec y_1,\vec z_1)\). Ici cela ne change rien, grâce à la symétrie de révolution.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block td-exo" id="td-2">
     <h2>2. Calcul d'inertie équivalente</h2>
-    <figure><img class="enonce-img" src="img/c04-ex2-1-reducteur.png" alt="Énoncé de l'exercice 2.1" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 2.1 — Réducteur à deux étages</h3>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q1</span>Énergie cinétique de \(\Sigma=\{1+2+3\}\)</p>
-      <p>Chaque solide tourne autour d'un axe fixe : \(2E_c(S_i/0)=J_i\omega_i^2\), donc \(2E_c(\Sigma/0)=J_1\omega_1^2+J_2\omega_2^2+J_3\omega_3^2\).</p>
-      <p>Pour un engrenage extérieur, les deux roues tournent en sens contraire : on pose \(\omega_2=-\lambda\,\omega_1\) et \(\omega_3=-\mu\,\omega_2=\lambda\mu\,\omega_1\), avec \(\lambda\) et \(\mu\) positifs (rapports de réduction du prof). Le signe moins n'intervient pas dans l'énergie, puisqu'il est élevé au carré.</p>
-      <div class="res">\(E_{c(\Sigma/0)}=\tfrac12\big(J_1+\lambda^2J_2+\lambda^2\mu^2J_3\big)\,\omega_1^2\)</div>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q2</span>Inertie équivalente ramenée à l'axe moteur</p>
-      <p>Par identification avec \(E_c=\tfrac12 I_{eq}\,\omega_1^2\), chaque inertie est ramenée à l'axe moteur en la multipliant par le carré du rapport de vitesse qui la lie au moteur.</p>
-      <div class="res">\(I_{eq}=J_1+\lambda^2J_2+\lambda^2\mu^2J_3\)</div>
+
+    <div class="exo-card" id="td2-reducteur">
+      <div class="exo-head">Exercice 2.1 — Réducteur à deux étages</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c04-ex2-1-reducteur.png" alt="Énoncé de l'exercice 2.1" style="max-width:100%;height:auto"><figcaption>Exercice 2.1 — Réducteur à deux étages (arbres 1, 2, 3, rapports λ et μ)</figcaption></figure>
+
+        <p class="q">1) Énergie cinétique de \(\Sigma = \{1+2+3\}\) par rapport à 0</p>
+        <p class="etape">Étape 1 : additivité</p>
+        <div class="rappel"><span class="lab">Rappel · solide en rotation autour d'un axe fixe</span>\[ 2E_{c(S_i/0)} = J_i\,\omega_i^2 \]</div>
+        \[ 2E_{c(\Sigma/0)} = J_1\omega_1^2 + J_2\omega_2^2 + J_3\omega_3^2 \]
+        <p class="etape">Étape 2 : tout exprimer avec \(\omega_1\)</p>
+        <p>Engrenages extérieurs : sens de rotation inversé à chaque étage.</p>
+        \[ \frac{\omega_2}{\omega_1} = -\lambda \qquad \frac{\omega_3}{\omega_2} = -\mu \qquad\Longrightarrow\qquad \omega_2 = -\lambda\omega_1,\quad \omega_3 = \lambda\mu\,\omega_1 \]
+        <div class="res">\(E_{c(\Sigma/0)} = \dfrac12\left(J_1 + \lambda^2J_2 + \lambda^2\mu^2J_3\right)\omega_1^2\)</div>
+
+        <p class="q">2) Inertie équivalente ramenée à l'axe moteur</p>
+        <div class="rappel"><span class="lab">Rappel · inertie équivalente</span>\[ E_{c(\Sigma/0)} = \frac12\,J_{eq}\,\omega_1^2 \]</div>
+        <div class="res">\(J_{eq} = J_1 + \lambda^2J_2 + \lambda^2\mu^2J_3\)</div>
+        <p>Chaque inertie est multipliée par le carré du rapport de vitesse qui la relie au moteur. Les signes disparaissent au carré.</p>
+      </div>
     </div>
 
-    <figure><img class="enonce-img" src="img/c04-ex2-2-translation.png" alt="Énoncé de l'exercice 2.2" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 2.2 — Système d'entraînement en translation</h3>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q3</span>Énergie cinétique de \(\Sigma=\{1+2\}\)</p>
-      <p>Le pignon 1 tourne autour d'un axe fixe : \(\tfrac12 J\omega^2\). La table 2 est en translation pure à la vitesse \(v\) : \(\tfrac12 Mv^2\). Pour la liaison pignon–crémaillère sans glissement, \(v=R\omega\).</p>
-      <div class="res">\(E_{c(\Sigma/0)}=\tfrac12\big(Mv^2+J\omega^2\big)=\tfrac12\big(MR^2+J\big)\omega^2\)</div>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q4</span>Inertie équivalente</p>
-      <div class="res">\(I_{eq}=MR^2+J\)</div>
-      <p class="note">Une masse \(M\) en translation se ramène à l'axe moteur comme une inertie \(MR^2\), avec \(R\) le rayon primitif du pignon.</p>
-    </div>
+    <div class="exo-card" id="td2-translation">
+      <div class="exo-head">Exercice 2.2 — Système d'entraînement en translation</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c04-ex2-2-translation.png" alt="Énoncé de l'exercice 2.2" style="max-width:100%;height:auto"><figcaption>Exercice 2.2 — Système d'entraînement en translation (pignon 1, table 2, pignon-crémaillère)</figcaption></figure>
 
+        <p class="q">3) Énergie cinétique de \(\Sigma = \{1+2\}\) par rapport à 0</p>
+        <ul>
+          <li>Pignon 1, rotation autour d'un axe fixe : \(E_{c(1/0)} = \dfrac12 J\omega^2\).</li>
+          <li>Table 2, translation à la vitesse \(v\) : \(E_{c(2/0)} = \dfrac12 Mv^2\).</li>
+        </ul>
+        <div class="res">\(E_{c(\Sigma/0)} = \dfrac12\left(Mv^2 + J\omega^2\right)\)</div>
+
+        <p class="q">4) Inertie équivalente ramenée à l'axe moteur</p>
+        <div class="rappel"><span class="lab">Rappel · pignon-crémaillère sans glissement</span>\[ v = R\,\omega \]</div>
+        \[ E_{c(\Sigma/0)} = \frac12\left(MR^2 + J\right)\omega^2 \]
+        <div class="res">\(J_{eq} = J + MR^2\)</div>
+        <p>Une masse \(M\) en translation « pèse » \(MR^2\) sur l'arbre du pignon de rayon primitif \(R\).</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block td-exo" id="td-3">
     <h2>3. Calcul de puissance</h2>
-    <figure><img class="enonce-img" src="img/c04-ex3-1-solides-contact.png" alt="Énoncé de l'exercice 3.1" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 3.1 — Solides en contact</h3>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q1</span>Puissance des inter-efforts \(P_{S_1\leftrightarrow S_2}\)</p>
-      <p>Par définition, \(P_{S_1\leftrightarrow S_2}=\{\mathcal T_{S_1\to S_2}\}\otimes\{\mathcal V_{S_2/S_1}\}\), car le torseur de \(S_2\) sur \(S_1\) travaille à vitesse nulle (\(\{\mathcal V_{S_1/S_1}\}=\{0\}\)). Le moment en \(A\) de \(\{\mathcal T_{S_1\to S_2}\}\) est nul, donc :</p>
-      <p>\(P=\vec F_{S_1\to S_2}\cdot\vec V_{A\in S_2/S_1}=(\vec N+\vec T)\cdot\vec V_A=\vec T\cdot\vec V_A\), car \(\vec N\cdot\vec V_A=0\).</p>
-      <div class="res">\(P_{S_1\leftrightarrow S_2}=\vec T\cdot\vec V_{A\in S_2/S_1}<0\) : la puissance est perdue par frottement.</div>
-      <p class="note">Le frottement s'oppose au glissement, donc \(\vec T\) et \(\vec V_A\) sont de sens opposés : le produit est négatif.</p>
+
+    <div class="exo-card" id="td3-contact">
+      <div class="exo-head">Exercice 3.1 — Solides en contact</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c04-ex3-1-solides-contact.png" alt="Énoncé de l'exercice 3.1" style="max-width:100%;height:auto"><figcaption>Exercice 3.1 — Solides S1 et S2 en contact ponctuel avec frottement en A</figcaption></figure>
+
+        <p class="q">1) Puissance des inter-efforts \(P_{S_1\leftrightarrow S_2}\)</p>
+        <p class="etape">Étape 1 : la définition</p>
+        <div class="rappel"><span class="lab">Rappel · puissance des inter-efforts</span>\[ P_{S_1\leftrightarrow S_2} = \{\mathcal T_{S_1\to S_2}\}\otimes\{\mathcal V_{S_2/S_1}\} \]</div>
+        <p>Elle ne dépend pas du repère : on la calcule dans le mouvement relatif \(S_2/S_1\) (le terme \(\{\mathcal T_{S_2\to S_1}\}\otimes\{\mathcal V_{S_1/S_1}\}\) est nul).</p>
+        <p class="etape">Étape 2 : le comoment en \(A\)</p>
+        <p>Le torseur de contact a un moment nul en \(A\) :</p>
+        \[ P_{S_1\leftrightarrow S_2} = \vec F_{S_1\to S_2}\cdot\vec V_{A\in S_2/S_1} = (\vec T + \vec N)\cdot\vec V_{A\in S_2/S_1} \]
+        <p class="etape">Étape 3 : simplification</p>
+        <p>La vitesse de glissement est dans le plan tangent : \(\vec N\cdot\vec V_{A\in S_2/S_1} = 0\).</p>
+        <div class="res">\(P_{S_1\leftrightarrow S_2} = \vec T_{S_1\to S_2}\cdot\vec V_{A\in S_2/S_1} &lt; 0\) : c'est la puissance perdue par frottement.</div>
+        <p>Le frottement s'oppose au glissement : \(\vec T\) et \(\vec V_A\) sont opposés, le produit est négatif. On retrouve la formule du cours.</p>
+      </div>
     </div>
 
-    <figure><img class="enonce-img" src="img/c04-ex3-2-pivot-glissant.png" alt="Énoncé de l'exercice 3.2" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 3.2 — Cas d'une liaison pivot glissant parfaite</h3>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q2</span>Puissance des inter-efforts</p>
-      <p>Torseur de la liaison : \(\{\mathcal T_{2\to1}\}_A=\{0,\,Y_A,\,Z_A\,;\,0,\,M_A,\,N_A\}\). Torseur cinématique : \(\{\mathcal V_{1/2}\}_A=\{\omega_x,0,0\,;\,V_x,0,0\}\).</p>
-      <p>\(P=\vec R\cdot\vec V_A+\vec M_A\cdot\vec\Omega=(0\cdot V_x+Y_A\cdot 0+Z_A\cdot 0)+(0\cdot\omega_x+0+0)=0\).</p>
-      <div class="res">\(P_{S_1\leftrightarrow S_2}=0\) : la liaison pivot glissant parfaite ne dissipe pas d'énergie, les torseurs statique et cinématique sont réciproques.</div>
-    </div>
+    <div class="exo-card" id="td3-pivot-glissant">
+      <div class="exo-head">Exercice 3.2 — Cas d'une liaison pivot glissant parfaite</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c04-ex3-2-pivot-glissant.png" alt="Énoncé de l'exercice 3.2" style="max-width:100%;height:auto"><figcaption>Exercice 3.2 — Liaison pivot glissant parfaite d'axe x</figcaption></figure>
 
+        <p class="q">2) Puissance des inter-efforts</p>
+        <p class="etape">Étape 1 : les deux torseurs en \(A\)</p>
+        \[ \{\mathcal T_{2\to1}\} = \left\{\begin{array}{cc} 0 &amp; 0\\ Y_A &amp; M_A\\ Z_A &amp; N_A \end{array}\right\}_{A} \qquad \{\mathcal V_{1/2}\} = \left\{\begin{array}{cc} \omega_x &amp; V_x\\ 0 &amp; 0\\ 0 &amp; 0 \end{array}\right\}_{A} \]
+        <p class="etape">Étape 2 : le comoment</p>
+        \[ P_{1\leftrightarrow2} = \vec R\cdot\vec V_A + \vec M_A\cdot\vec\Omega = (0\cdot V_x + Y_A\cdot0 + Z_A\cdot0) + (0\cdot\omega_x + M_A\cdot0 + N_A\cdot0) = 0 \]
+        <div class="res">\(P_{1\leftrightarrow2} = 0\) : une liaison parfaite ne dissipe aucune puissance.</div>
+        <p>Chaque composante d'effort non nulle correspond à un mouvement bloqué, et inversement : les produits sont tous nuls.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block td-exo" id="td-4">
     <h2>4. Application du théorème de l'énergie cinétique</h2>
-    <figure><img class="enonce-img" src="img/c04-ex4-1-cylindre-tec.png" alt="Énoncé de l'exercice 4.1" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 4.1 — Cylindre sur plan incliné (TEC puis PFD)</h3>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q1</span>Accélération angulaire par le TEC</p>
-      <p>Énergie cinétique (exercice 1.1) : \(E_c=\tfrac34 mR^2\dot\theta^2\), donc \(\dfrac{dE_c}{dt}=\tfrac32 mR^2\dot\theta\ddot\theta\).</p>
-      <p>Puissances extérieures. Le poids : \(P_{pes}=m\vec g\cdot\vec V_G=mg\sin\alpha\,R\dot\theta\) (le cylindre descend). L'action du sol en \(I\) : \(P=0\) car \(\vec V_I=\vec 0\).</p>
-      <p>TEC : \(\tfrac32 mR^2\dot\theta\ddot\theta=mgR\sin\alpha\,\dot\theta\).</p>
-      <div class="res">\(\ddot\theta=\dfrac{2g\sin\alpha}{3R}\)</div>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q2</span>Vérification par le PFD</p>
-      <p>Torseur dynamique en \(G\) : \(\{\mathcal D\}=\{m\ddot\theta R\,\vec y\,;\,\tfrac12 mR^2\ddot\theta\,\vec z\}\). Torseur de l'action du sol : \(\{\mathcal T_{sol\to S}\}_I=\{N\vec x-fN\vec y\,;\,0\}\) ramené en \(G\), et poids \(\{-mg\vec x\}\) en \(G\).</p>
-      <p>En projetant dans le plan : \(-mg\cos\alpha+N=0\) ; \(mg\sin\alpha-fN=mR\ddot\theta\) ; moment en \(G\) : \(fNR=\tfrac12 mR^2\ddot\theta\).</p>
-      <p>On élimine \(f\) : \(R\big(mg\sin\alpha-mR\ddot\theta\big)=\tfrac12 mR^2\ddot\theta\), donc \(\tfrac32 R\ddot\theta=g\sin\alpha\).</p>
-      <div class="res">On retrouve \(\ddot\theta=\dfrac{2g\sin\alpha}{3R}\) ; la valeur de \(f\) qui en découle doit rester inférieure à \(\tan\varphi\) pour que le roulement sans glissement soit possible.</div>
+
+    <div class="exo-card" id="td4-cylindre">
+      <div class="exo-head">Exercice 4.1 — Cylindre sur plan incliné (TEC puis PFD)</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c04-ex4-1-cylindre-tec.png" alt="Énoncé de l'exercice 4.1" style="max-width:100%;height:auto"><figcaption>Exercice 4.1 — Cylindre sur plan incliné d'angle α : TEC puis PFD</figcaption></figure>
+
+        <p class="q">1) Accélération angulaire par le TEC</p>
+        <p class="etape">Étape 1 : énergie cinétique (exercice 1.1)</p>
+        \[ E_{c(S/R)} = \frac34 mR^2\dot\theta^2 \qquad \frac{dE_c}{dt} = \frac32 mR^2\dot\theta\ddot\theta \]
+        <p class="etape">Étape 2 : puissances extérieures</p>
+        <ul>
+          <li>Poids : \(P_{pes} = -mg\,\vec x_0\cdot R\dot\theta\,\vec y = mgR\dot\theta\sin\alpha\) (le cylindre descend).</li>
+          <li>Sol, en \(I\) : \(P_{sol} = \vec R\cdot\vec V_{I\in S/R} = 0\), car \(\vec V_{I\in S/R} = \vec 0\) (roulement sans glissement).</li>
+        </ul>
+        <p class="etape">Étape 3 : le TEC</p>
+        \[ \frac32 mR^2\dot\theta\ddot\theta = mgR\dot\theta\sin\alpha \]
+        <div class="res">\(\ddot\theta = \dfrac{2g\sin\alpha}{3R}\)</div>
+        <div class="warnbox"><span class="lab">Piège</span> L'action du sol ne travaille pas, même avec frottement : le point de contact a une vitesse nulle. C'est ce qui rend le TEC si rapide ici.</div>
+
+        <p class="q">2) Retrouver ce résultat par le PFD</p>
+        <p class="etape">Étape 1 : actions extérieures, réduites en \(G\)</p>
+        <p>On note \(f\) le rapport \(T/N\) nécessaire au contact (inconnu).</p>
+        \[ \{\mathcal T_{pes\to S}\} = \left\{\begin{array}{c} -mg\,\vec x_0\\ \vec 0\end{array}\right\}_G \qquad \{\mathcal T_{sol\to S}\} = \left\{\begin{array}{c} N\,\vec x - fN\,\vec y\\ RfN\,\vec z\end{array}\right\}_G \]
+        <p class="etape">Étape 2 : torseur dynamique en \(G\)</p>
+        \[ \{\mathcal D_{S/R}\} = \left\{\begin{array}{c} mR\ddot\theta\,\vec y\\ \frac12 mR^2\ddot\theta\,\vec z\end{array}\right\}_G \]
+        <p class="etape">Étape 3 : les équations (problème plan)</p>
+        \[ -mg\cos\alpha + N = 0 \qquad mg\sin\alpha - fN = mR\ddot\theta \qquad RfN = \frac12 mR^2\ddot\theta \]
+        <p class="etape">Étape 4 : on élimine \(fN\)</p>
+        \[ R\left(mg\sin\alpha - mR\ddot\theta\right) = \frac12 mR^2\ddot\theta \quad\Longrightarrow\quad g\sin\alpha = \frac32 R\ddot\theta \]
+        <div class="res">\(\ddot\theta = \dfrac{2g\sin\alpha}{3R}\) : même résultat qu'avec le TEC.</div>
+        <p>On en tire aussi \(f = \dfrac{g\sin\alpha - R\ddot\theta}{g\cos\alpha} = \dfrac{\tan\alpha}{3}\). Le roulement sans glissement n'est possible que si le coefficient de frottement vaut au moins \(\tan\alpha/3\) (calcul ajouté par nous).</p>
+      </div>
     </div>
 
-    <h3>Exercice 4.2 — Pendule double</h3>
-    <figure><img class="enonce-img" src="img/c04-ex4-2-pendule.png" alt="Énoncé de l'exercice 4.2" style="max-width:100%;height:auto"></figure>
-    <p class="note">Pas de corrigé dans le dossier Bigeard : correction propre, construite avec les mêmes formules que le TD (\(\vec V_{G_2/0}\), \(\vec\sigma_{A\,2/0}\) et \(\vec\sigma_{O\,1/0}\) donnés dans l'énoncé).</p>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q1</span>Puissances</p>
-      <ul>
-        <li>0 sur 1, mouvement 1/0 : \(P=0\) (pivot parfait en \(O\), \(\vec V_{O\in1/0}=\vec 0\)).</li>
-        <li>1 sur 2, mouvement 2/0 : \(P=\vec R_{1\to2}\cdot\vec V_{A\in2/0}=2a\dot\alpha\,\vec R_{1\to2}\cdot\vec y_1\). Non nul en général : c'est un inter-effort.</li>
-        <li>1 sur 2, mouvement 2/1 : \(P=0\), car \(\vec V_{A\in2/1}=\vec 0\) (pivot parfait).</li>
-        <li>1 sur 2, mouvement 1/0 : \(P=\vec R_{1\to2}\cdot\vec V_{A\in1/0}=2a\dot\alpha\,\vec R_{1\to2}\cdot\vec y_1\), même valeur, car \(\vec V_{A\in2/0}=\vec V_{A\in1/0}\).</li>
-        <li>Pesanteur sur 1 : \(P=m\vec g\cdot\vec V_{G_1\in1/0}=mg\,\vec x\cdot a\dot\alpha\,\vec y_1=-mga\dot\alpha\sin\alpha\).</li>
-        <li>Pesanteur sur 2 : \(P=m\vec g\cdot\vec V_{G_2\in2/0}=-mga\,(2\dot\alpha\sin\alpha+\dot\beta\sin\beta)\).</li>
-      </ul>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q2</span>Extérieures ou inter-efforts</p>
-      <p><b>Isolement de 2</b> : l'action de 1 sur 2 (mouvement 2/0) et la pesanteur sur 2 sont extérieures à \(\{2\}\). Aucun inter-effort.</p>
-      <p><b>Isolement de \(\{1+2\}\)</b> : la liaison 0–1 et la pesanteur sur 1 et 2 sont extérieures. L'action 1 sur 2 et l'action 2 sur 1 forment un inter-effort dont la somme des puissances est nulle (liaisons parfaites).</p>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q3</span>Énergie cinétique de la tige 2</p>
-      <p>Par le comoment en \(A\) : \(2E_{c(2/0)}=\vec V_{A\in2/0}\cdot m\vec V_{G_2\in2/0}+\vec\Omega_{2/0}\cdot\vec\sigma_{A\,2/0}\), avec \(\vec V_{A\in2/0}=2a\dot\alpha\,\vec y_1\), \(\vec\Omega_{2/0}=\dot\beta\,\vec z\) et \(\vec\sigma_{A\,2/0}\) donné par l'énoncé.</p>
-      <div class="res">\(E_{c(2/0)}=ma^2\Big(2\dot\alpha^2+\tfrac23\dot\beta^2+2\dot\alpha\dot\beta\cos(\beta-\alpha)\Big)\)</div>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q4</span>TEC sur 2 seule, puis sur \(\{1+2\}\)</p>
-      <p>Sur la tige 2 seule, le TEC fait intervenir la puissance de la liaison 1 sur 2 dans le mouvement 2/0, qui contient les réactions inconnues : il ne donne pas une équation du mouvement sans elles.</p>
-      <p>Sur \(\{1+2\}\), les inter-efforts se compensent et le TEC donne une équation. Avec \(E_{c(\Sigma)}=ma^2\big(\tfrac83\dot\alpha^2+\tfrac23\dot\beta^2+2\dot\alpha\dot\beta\cos(\beta-\alpha)\big)\) et \(P_{pes1}+P_{pes2}=-mga(3\dot\alpha\sin\alpha+\dot\beta\sin\beta)\) :</p>
-      <div class="res">\(\tfrac{16}{3}\dot\alpha\ddot\alpha+\tfrac43\dot\beta\ddot\beta+2(\ddot\alpha\dot\beta+\dot\alpha\ddot\beta)\cos(\beta-\alpha)-2\dot\alpha\dot\beta(\dot\beta-\dot\alpha)\sin(\beta-\alpha)=-\dfrac{g}{a}\big(3\dot\alpha\sin\alpha+\dot\beta\sin\beta\big)\)</div>
-      <p class="note">Une seule équation scalaire sort du TEC. La seconde demande un PFD sur une des tiges : je ne l'ai pas rédigée.</p>
-    </div>
+    <p class="note">Exercice 4.2 : correction rédigée par nous, pas de corrigé Bigeard.</p>
+    <div class="exo-card" id="td4-pendule">
+      <div class="exo-head">Exercice 4.2 — Pendule double</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c04-ex4-2-pendule.png" alt="Énoncé de l'exercice 4.2" style="max-width:100%;height:auto"><figcaption>Exercice 4.2 — Pendule double (tiges 1 et 2 de masse m, de longueur 2a)</figcaption></figure>
 
+        <p class="q">1) Les cinq puissances</p>
+        <div class="rappel"><span class="lab">Rappel · puissance d'une action sur un solide</span>\[ P_{1\to2/0} = \vec R_{1\to2}\cdot\vec V_{A\in2/0} + \vec M_{A,1\to2}\cdot\vec\Omega_{2/0} \]</div>
+        <p class="etape">Étape 1 : les liaisons</p>
+        <ul>
+          <li>0 sur 1, mouvement 1/0 : pivot parfait en \(O\), \(\vec V_{O\in1/0} = \vec 0\) et \(\vec M_O\cdot\vec z = 0\). Donc \(P = 0\).</li>
+          <li>1 sur 2, mouvement 2/0 : \(\vec M_A\cdot\vec z = 0\) (pivot parfait), et \(\vec V_{A\in2/0} = \vec V_{A\in1/0} = 2a\dot\alpha\,\vec y_1\). Donc \(P = 2a\dot\alpha\,\vec R_{1\to2}\cdot\vec y_1\), non nulle en général.</li>
+          <li>1 sur 2, mouvement 2/1 : \(\vec V_{A\in2/1} = \vec 0\) et \(\vec\Omega_{2/1} = (\dot\beta - \dot\alpha)\,\vec z\), avec \(\vec M_A\cdot\vec z = 0\). Donc \(P = 0\).</li>
+        </ul>
+        <p class="etape">Étape 2 : la pesanteur</p>
+        <p>\(\vec g = g\,\vec x\), \(\vec x\cdot\vec y_1 = -\sin\alpha\), \(\vec x\cdot\vec y_2 = -\sin\beta\). Et \(\vec V_{G_1\in1/0} = a\dot\alpha\,\vec y_1\).</p>
+        \[ P_{pes\to1/0} = mg\,\vec x\cdot a\dot\alpha\,\vec y_1 = -mga\,\dot\alpha\sin\alpha \]
+        \[ P_{pes\to2/0} = mg\,\vec x\cdot\left(a\dot\beta\,\vec y_2 + 2a\dot\alpha\,\vec y_1\right) = -mga\left(\dot\beta\sin\beta + 2\dot\alpha\sin\alpha\right) \]
+        <div class="res">\(P_{0\to1/0} = 0\) ; \(P_{1\to2/0} = 2a\dot\alpha\,\vec R_{1\to2}\cdot\vec y_1\) ; \(P_{1\to2/1} = 0\) ; \(P_{pes\to1/0} = -mga\dot\alpha\sin\alpha\) ; \(P_{pes\to2/0} = -mga(\dot\beta\sin\beta + 2\dot\alpha\sin\alpha)\).</div>
+
+        <p class="q">2) Puissances extérieures ou d'inter-efforts</p>
+        <ul>
+          <li><b>On isole 2</b> : \(P_{1\to2/0}\) et \(P_{pes\to2/0}\) sont des puissances extérieures. Pas d'inter-effort (un seul solide).</li>
+          <li><b>On isole \(\{1+2\}\)</b> : \(P_{0\to1/0}\), \(P_{pes\to1/0}\), \(P_{pes\to2/0}\) sont extérieures. La liaison 1–2 est un inter-effort, de puissance \(P_{1\leftrightarrow2} = P_{1\to2/1} = 0\).</li>
+        </ul>
+
+        <p class="q">3) Énergie cinétique de la tige 2</p>
+        <p class="etape">Étape 1 : la formule en \(A\)</p>
+        \[ 2E_{c(2/0)} = \vec\Omega_{2/0}\cdot\vec\sigma_{A\in2/0} + m\,\vec V_{A\in2/0}\cdot\vec V_{G_2\in2/0} \]
+        <p class="etape">Étape 2 : les deux termes</p>
+        <p>Avec \(\vec y_1\cdot\vec y_2 = \cos(\beta - \alpha)\) :</p>
+        \[ \dot\beta\,\vec z\cdot\vec\sigma_{A\in2/0} = ma^2\left(\frac43\dot\beta^2 + 2\dot\alpha\dot\beta\cos(\beta - \alpha)\right) \]
+        \[ m\,2a\dot\alpha\,\vec y_1\cdot\left(a\dot\beta\,\vec y_2 + 2a\dot\alpha\,\vec y_1\right) = ma^2\left(4\dot\alpha^2 + 2\dot\alpha\dot\beta\cos(\beta - \alpha)\right) \]
+        <div class="res">\(E_{c(2/0)} = ma^2\left(2\dot\alpha^2 + \dfrac23\dot\beta^2 + 2\dot\alpha\dot\beta\cos(\beta - \alpha)\right)\)</div>
+
+        <p class="q">4) Le TEC appliqué à 2 donne-t-il une équation du mouvement ?</p>
+        <p class="etape">Étape 1 : le TEC sur 2</p>
+        \[ \frac{dE_{c(2/0)}}{dt} = 2a\dot\alpha\,\vec R_{1\to2}\cdot\vec y_1 - mga\left(\dot\beta\sin\beta + 2\dot\alpha\sin\alpha\right) \]
+        <p class="etape">Étape 2 : conclusion</p>
+        <p>L'équation contient l'inconnue de liaison \(\vec R_{1\to2}\cdot\vec y_1\). Ce n'est pas une équation du mouvement (qui ne doit contenir que \(\alpha\), \(\beta\) et leurs dérivées).</p>
+        <div class="res">Non : le TEC sur 2 seule fait intervenir l'action inconnue de 1 sur 2.</div>
+        <p>Pour aller plus loin (rédigé par nous) : le TEC sur \(\{1+2\}\) donne une équation du mouvement, car la liaison 1–2 a une puissance nulle. Avec \(E_{c(1/0)} = \frac12\,\frac{4ma^2}{3}\dot\alpha^2\) :</p>
+        \[ \frac{d}{dt}\left[ma^2\left(\frac83\dot\alpha^2 + \frac23\dot\beta^2 + 2\dot\alpha\dot\beta\cos(\beta - \alpha)\right)\right] = -mga\left(3\dot\alpha\sin\alpha + \dot\beta\sin\beta\right) \]
+        <p>La seconde équation du mouvement demande un théorème du moment dynamique en \(A\) sur 2, autour de \(\vec z\).</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block td-exo" id="td-5">
     <h2>5. Étude de cas</h2>
-    <figure><img class="enonce-img" src="img/c04-ex5-1-duo-a.png" alt="Énoncé de l'exercice 5.1, présentation" style="max-width:100%;height:auto"></figure>
-    <figure><img class="enonce-img" src="img/c04-ex5-1-duo-b.png" alt="Énoncé de l'exercice 5.1, questions" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 5.1 — Duo Voyageur Concept</h3>
-    <p class="note">Pas de corrigé dans le dossier Bigeard : correction propre. Données de l'énoncé : \(C=40\ \text{N·m}\), \(I_{eq}=270\ \text{kg·m}^2\), \(r_0=30\ \text{cm}\), \(r_2=15\ \text{cm}\).</p>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q1</span>Relation entre \(\omega_m\) et \(\omega_{10}\)</p>
-      <p>Le centre \(A\) du rotor décrit un cercle de rayon \(r_0+r_2\) autour de \(O\) : \(V_{A\in2/0}=(r_0+r_2)\,\omega_{10}\). Le rotor 2 roule sans glisser en \(J\) sur la roue fixe, donc \(\vec V_{J\in2/0}=\vec 0\), ce qui donne \(\omega_{20}\,r_2=(r_0+r_2)\,\omega_{10}\).</p>
-      <p>Le moteur donne \(\omega_m=\omega_{21}=\omega_{20}-\omega_{10}\), d'où \(\omega_m=\dfrac{r_0}{r_2}\,\omega_{10}\).</p>
-      <div class="res">\(\omega_{10}=\dfrac{r_2}{r_0}\,\omega_m=\dfrac{\omega_m}{2}\)</div>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q2</span>Accélération angulaire du bras, par le TEC</p>
-      <p>Énergie cinétique de l'ensemble en mouvement ramené à l'axe \((O,\vec z_0)\) : \(E_c=\tfrac12 I_{eq}\,\omega_{10}^2\). Seul le couple moteur travaille (frottements négligés) : \(\dfrac{d}{dt}\big(\tfrac12 I_{eq}\omega_{10}^2\big)=C\,\omega_{10}\), soit \(I_{eq}\dot\omega_{10}=C\).</p>
-      <div class="res">\(\dot\omega_{10}=\dfrac{C}{I_{eq}}=\dfrac{40}{270}\approx 0{,}148\ \text{rad/s}^2\)</div>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q3</span>Critère de durée de la phase d'accélération</p>
-      <p>Vitesse nominale : \(\omega_{nom}=3\ \text{tr/min}=\dfrac{2\pi\cdot3}{60}\approx0{,}314\ \text{rad/s}\). Accélération constante : \(t=\dfrac{\omega_{nom}}{\dot\omega_{10}}\approx\dfrac{0{,}314}{0{,}148}\approx 2{,}1\ \text{s}\).</p>
-      <div class="res">\(2{,}1\ \text{s}>1\ \text{s}\) : le critère du cahier des charges est respecté.</div>
+    <p class="note">Exercices 5.1 et 5.2 : correction rédigée par nous, pas de corrigé Bigeard (aucun dossier « Duo Voyageur » ni « restituteur » ; le dossier « embrayage » de Bigeard porte sur un autre exercice).</p>
+
+    <div class="exo-card" id="td5-duo">
+      <div class="exo-head">Exercice 5.1 — Duo Voyageur Concept</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c04-ex5-1-duo-a.png" alt="Énoncé de l'exercice 5.1, présentation" style="max-width:100%;height:auto"></figure>
+        <figure><img class="enonce-img" src="img/c04-ex5-1-duo-b.png" alt="Énoncé de l'exercice 5.1, questions" style="max-width:100%;height:auto"><figcaption>Exercice 5.1 — Duo Voyageur Concept (bras 1, rotor 2, roue fixe du châssis 0)</figcaption></figure>
+
+        <p class="q">1) Relation entre \(\omega_m\) et \(\omega_{10}\)</p>
+        <p class="etape">Étape 1 : roulement sans glissement en \(J\)</p>
+        <p>\(J\) est entre \(O\) et \(A\), avec \(\overrightarrow{AJ} = -r_2\,\vec x_1\). On écrit \(\vec V_{J\in2/0} = \vec 0\).</p>
+        <div class="rappel"><span class="lab">Rappel · champ des vitesses</span>\[ \vec V_{J\in2/0} = \vec V_{A\in2/0} + \vec\Omega_{2/0}\wedge\overrightarrow{AJ} \]</div>
+        <p class="etape">Étape 2 : les termes</p>
+        <ul>
+          <li>\(A\) est sur l'axe de la pivot 2/1 : \(\vec V_{A\in2/0} = \vec V_{A\in1/0} = \omega_{10}\,\vec z_0\wedge(r_0 + r_2)\,\vec x_1 = (r_0 + r_2)\,\omega_{10}\,\vec y_1\).</li>
+          <li>\(\vec\Omega_{2/0} = \vec\Omega_{2/1} + \vec\Omega_{1/0} = (\omega_m + \omega_{10})\,\vec z_0\), donc \(\vec\Omega_{2/0}\wedge\overrightarrow{AJ} = -r_2(\omega_m + \omega_{10})\,\vec y_1\).</li>
+        </ul>
+        \[ (r_0 + r_2)\,\omega_{10} - r_2(\omega_m + \omega_{10}) = 0 \quad\Longrightarrow\quad r_0\,\omega_{10} = r_2\,\omega_m \]
+        <div class="res">\(\omega_{10} = \dfrac{r_2}{r_0}\,\omega_m = \dfrac{15}{30}\,\omega_m = \dfrac{\omega_m}{2}\)</div>
+
+        <p class="q">2) Accélération angulaire du bras par le TEC, inertie \(I_{eq}\)</p>
+        <p class="etape">Étape 1 : système isolé et énergie cinétique</p>
+        <p>On isole \(\Sigma = \{1 + 2\}\) dans son mouvement par rapport à 0.</p>
+        \[ 2E_{c(\Sigma/0)} = I_1\,\omega_{10}^2 + m_2\,V_{G_2}^2 + I_2\,\Omega_{20}^2 \qquad V_{G_2} = (r_0 + r_2)\,\omega_{10} \qquad \Omega_{20} = \omega_m + \omega_{10} = \frac{r_0 + r_2}{r_2}\,\omega_{10} \]
+        \[ E_{c(\Sigma/0)} = \frac12\,I_{eq}\,\omega_{10}^2 \qquad I_{eq} = I_1 + m_2(r_0 + r_2)^2 + I_2\left(\frac{r_0 + r_2}{r_2}\right)^2 \]
+        <p class="etape">Étape 2 : puissances</p>
+        <ul>
+          <li>Pivot 0–1 parfaite : 0.</li>
+          <li>Contact 0–2 en \(J\) : 0, car \(\vec V_{J\in2/0} = \vec 0\).</li>
+          <li>Pesanteur : 0, les centres de gravité restent à la même hauteur.</li>
+          <li>Moteur (inter-effort entre stator 1 et rotor 2) : \(P = C\,\omega_{21} = C\,\omega_m = C\,\dfrac{r_0}{r_2}\,\omega_{10}\).</li>
+          <li>Pivot 1–2 parfaite : 0.</li>
+        </ul>
+        <p class="etape">Étape 3 : le TEC</p>
+        \[ I_{eq}\,\omega_{10}\,\dot\omega_{10} = C\,\frac{r_0}{r_2}\,\omega_{10} \quad\Longrightarrow\quad \dot\omega_{10} = \frac{r_0}{r_2}\,\frac{C}{I_{eq}} = \frac{2\times40}{270} \]
+        <div class="res">\(\dot\omega_{10} \approx 0{,}296\) rad/s².</div>
+        <div class="warnbox"><span class="lab">Piège (erreur de l'ancienne version)</span> La puissance du moteur se calcule avec la vitesse du rotor par rapport au stator, \(\omega_m = 2\,\omega_{10}\), pas avec \(\omega_{10}\). L'ancienne correction donnait \(C/I_{eq} \approx 0{,}148\) rad/s² : c'est deux fois trop peu.</div>
+
+        <p class="q">3) Vérifier le critère de durée d'accélération</p>
+        <p class="etape">Étape 1 : vitesse nominale en rad/s</p>
+        \[ \omega_{nom} = 3\ \text{tr/min} = \frac{3\times2\pi}{60} \approx 0{,}314\ \text{rad/s} \]
+        <p class="etape">Étape 2 : durée à accélération constante (loi en trapèze)</p>
+        \[ t_a = \frac{\omega_{nom}}{\dot\omega_{10}} = \frac{0{,}314}{0{,}296} \approx 1{,}06\ \text{s} \]
+        <div class="res">\(t_a \approx 1{,}06\) s, supérieur à 1 s : le critère est respecté, de justesse.</div>
+      </div>
     </div>
 
-    <figure><img class="enonce-img" src="img/c04-ex5-2-embrayage-a.png" alt="Énoncé de l'exercice 5.2, présentation" style="max-width:100%;height:auto"></figure>
-    <figure><img class="enonce-img" src="img/c04-ex5-2-embrayage-b.png" alt="Énoncé de l'exercice 5.2, restituteur" style="max-width:100%;height:auto"></figure>
-    <figure><img class="enonce-img" src="img/c04-ex5-2-embrayage-c.png" alt="Énoncé de l'exercice 5.2, pédale et questions" style="max-width:100%;height:auto"></figure>
-    <h3>Exercice 5.2 — Embrayage assisté (restituteur d'effort)</h3>
-    <p class="note">Pas de corrigé dans le dossier Bigeard (le fichier « embrayage » porte sur un autre exercice, avec frottement entre disques). Correction propre. La géométrie de la pédale est lue sur la figure du TD : à confirmer.</p>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q1</span>Couple du ressort en \(\theta=0\)</p>
-      <p>Étude statique, sans action du pied (\(F_P=0\)) ni du restituteur (\(F_T=0\)) : le ressort compense le moment du poids. En notant \(\alpha_G\) l'angle de \(\overrightarrow{OG}\) avec la verticale à \(\theta=0\), le poids a pour moment \(m_Pg\,r_G\sin\alpha_G\).</p>
-      <div class="res">\(C_{R_0}=m_P\,g\,r_G\sin\alpha_G\)</div>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q2</span>Équation de la pédale</p>
-      <p>Les deux forces agissent selon \(\vec u\), perpendiculaire à \(\overrightarrow{OP}\) : le pied (\(-F_P\vec u\) en \(P\), bras \(R_P\)) et la tige (\(F_T\vec u\), bras \(r_T\) par la vitesse de la tige, cf. Q5). Moment en \(O\) du ressort \(C_{R_0}-K_R\theta\) et du poids \(-m_Pg\,r_G\sin(\alpha_G+\theta)\) :</p>
-      <div class="res">\(J_P\ddot\theta=r_T\,F_T-R_P\,F_P+C_{R_0}-K_R\,\theta-m_P\,g\,r_G\sin(\alpha_G+\theta)\)</div>
-      <p class="note">Convention : \(\theta\) croît quand la tige pousse la pédale. À confirmer avec la figure.</p>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q3</span>Linéarisation autour de \(\theta=0\)</p>
-      <p>Avec \(C_{R_0}=m_Pgr_G\sin\alpha_G\) et \(\sin(\alpha_G+\theta)\approx\sin\alpha_G+\theta\cos\alpha_G\), les termes constants se compensent :</p>
-      <div class="res">\(J_P\ddot\theta+K\,\theta=r_T\,F_T-R_P\,F_P\), avec \(K=K_R+m_P\,g\,r_G\cos\alpha_G\)</div>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q4</span>TEC appliqué au restituteur</p>
-      <p>Hypothèses : poulie 2 de diamètre double de la poulie 1, donc \(\omega_2=\omega_m/2\) (même vitesse de courroie). Pas \(p_v\) par tour de vis : \(V_p=\dfrac{p_v}{2\pi}\omega_2=\dfrac{p_v}{4\pi}\omega_m\). On pose \(\lambda=\dfrac{p_v}{4\pi}\), donc \(V_p=\lambda\omega_m\). Frottements négligés.</p>
-      <p>Énergie cinétique : \(E_c=\tfrac12 J_m\omega_m^2+\tfrac12 J_2\omega_2^2+\tfrac12 M_pV_p^2=\tfrac12 J_{eq}\omega_m^2\), avec \(J_{eq}=J_m+\dfrac{J_2}{4}+M_p\lambda^2\).</p>
-      <p>Puissances : moteur \(C_m\omega_m\) ; tige sur le piston \(\{-F_T\vec y\}\) avec \(\vec V_{piston}=V_p\vec y\), soit \(-F_T\lambda\omega_m\). Le TEC donne \(J_{eq}\,\omega_m\dot\omega_m=C_m\omega_m-\lambda F_T\omega_m\).</p>
-      <div class="res">\(J_{eq}\,\dot\omega_m=C_m-\lambda\,F_T\), avec \(\lambda=\dfrac{p_v}{4\pi}\) et \(J_{eq}=J_m+\dfrac{J_2}{4}+M_p\lambda^2\)</div>
-    </div>
-    <div class="qblock">
-      <p class="qtitle"><span class="qnum">Q5</span>Constantes \(\gamma\), \(\beta\), \(\lambda\), \(J\) et schéma-bloc</p>
-      <p>Pédale sans inertie (\(J_P\) négligé, comme le demande l'énoncé) : \(r_TF_T=R_PF_P+K\theta\), soit \(F_T=\gamma F_P+\beta\theta\) avec :</p>
-      <div class="res">\(\gamma=\dfrac{R_P}{r_T}\), \(\beta=\dfrac{K}{r_T}\), \(\lambda=\dfrac{p_v}{4\pi}\), \(J=J_{eq}\)</div>
-      <p>Cinématique : la tige déplace le piston de \(x=r_T\,\theta\) (égalité des puissances : \(r_TF_T\,\dot\theta=F_T\dot x\)). Le moteur donne \(x=\lambda\,\theta_m\) ; donc \(\theta=\alpha\,\theta_m\) avec \(\alpha=\dfrac{\lambda}{r_T}\).</p>
-      <p>En Laplace (\(\Omega_m=p\,\Theta_m\), \(\Theta=\alpha\Theta_m\)) : \(J\,p\,\Omega_m=C_m-\lambda(\gamma F_P+\beta\Theta)\). C'est le schéma-bloc du TD (p. 36) : boucle électrique \(U\to\dfrac{1}{R+Lp}\to K_C\to C_m\) avec retour \(K_e\Omega_m\), puis \(\dfrac{1}{Jp}\), \(\dfrac{1}{p}\), \(\alpha\), et retour \(\beta\Theta\) vers \(F_T\).</p>
-      <p>En éliminant \(\theta_m\) : \(\dfrac{J\,r_T}{\lambda}\,\ddot\theta+\lambda\beta\,\theta=C_m-\lambda\gamma F_P\).</p>
+    <div class="exo-card" id="td5-embrayage">
+      <div class="exo-head">Exercice 5.2 — Embrayage assisté (restituteur d'effort)</div>
+      <div class="exo-body">
+        <figure><img class="enonce-img" src="img/c04-ex5-2-embrayage-a.png" alt="Énoncé de l'exercice 5.2, présentation" style="max-width:100%;height:auto"></figure>
+        <figure><img class="enonce-img" src="img/c04-ex5-2-embrayage-b.png" alt="Énoncé de l'exercice 5.2, restituteur" style="max-width:100%;height:auto"></figure>
+        <figure><img class="enonce-img" src="img/c04-ex5-2-embrayage-c.png" alt="Énoncé de l'exercice 5.2, pédale et questions" style="max-width:100%;height:auto"></figure>
+        <figure><img class="enonce-img" src="img/c04-ex5-2-embrayage-d.png" alt="Schéma-bloc de la commande du restituteur : F_T = γ F_p + β Θ, puis λ, 1/(Jp), 1/p, α" style="max-width:100%;height:auto"><figcaption>Exercice 5.2 — Embrayage assisté (restituteur d'effort) ; schéma-bloc de la page 36 du TD</figcaption></figure>
+
+        <p class="q">1) Action \(C_{R_0}\) du ressort pour l'équilibre en \(\theta = 0\)</p>
+        <p class="etape">Étape 1 : conventions lues sur la figure</p>
+        <ul>
+          <li>\(\vec x\) sort de la feuille : un moment positif fait tourner la pédale dans le sens trigonométrique.</li>
+          <li>\(\theta\) est compté dans le sens horaire (pédale enfoncée) : \(\vec\Omega_{pédale/0} = -\dot\theta\,\vec x\).</li>
+          <li>\(\overrightarrow{OG}\) fait l'angle \(\varphi = \theta_0 - \alpha_G - \theta\) avec la verticale descendante.</li>
+        </ul>
+        <p class="etape">Étape 2 : moments en \(O\) sur \(\vec x\)</p>
+        <ul>
+          <li>Poids \(-m_Pg\,\vec z\) en \(G\) : \(-m_P\,g\,r_G\sin\varphi\).</li>
+          <li>Ressort : \(C_R = C_{R_0} - K_R\theta\).</li>
+          <li>Pivot parfait en \(O\) : 0.</li>
+        </ul>
+        <p class="etape">Étape 3 : équilibre en \(\theta = 0\), sans pied ni tige</p>
+        <div class="rappel"><span class="lab">Rappel · PFS, moment autour de l'axe de la pivot</span>\[ \sum M_{(O,\vec x)}(ext\to S) = 0 \]</div>
+        \[ C_{R_0} - m_P\,g\,r_G\sin(\theta_0 - \alpha_G) = 0 \]
+        <div class="res">\(C_{R_0} = m_P\,g\,r_G\sin(\theta_0 - \alpha_G)\)</div>
+
+        <p class="q">2) Équation différentielle du mouvement de la pédale</p>
+        <p class="etape">Étape 1 : solide isolé, théorème</p>
+        <p>On isole la pédale, en rotation autour de l'axe fixe \((O,\vec x)\). On écrit le théorème du moment dynamique en \(O\) sur \(\vec x\) : les inconnues de la pivot disparaissent.</p>
+        <div class="rappel"><span class="lab">Rappel · rotation autour d'un axe fixe</span>\[ J_{(O,\vec x)}\,\ddot\psi = \sum M_{(O,\vec x)}(ext\to S) \qquad \text{ici } \psi = -\theta \]</div>
+        <p class="etape">Étape 2 : bilan des moments</p>
+        <ul>
+          <li>Pied (\(-F_P\,\vec u\) en \(P\), \(\vec u\perp\overrightarrow{OP}\)) : \(-R_P\,F_P\).</li>
+          <li>Tige (\(F_T\,\vec u\) en \(T\), inclinaison négligée) : \(+r_T\,F_T\).</li>
+          <li>Ressort : \(C_{R_0} - K_R\theta\) ; poids : \(-m_Pgr_G\sin(\theta_0 - \alpha_G - \theta)\).</li>
+        </ul>
+        <p class="etape">Étape 3 : l'équation</p>
+        \[ -J_P\,\ddot\theta = r_T\,F_T - R_P\,F_P + C_{R_0} - K_R\theta - m_P\,g\,r_G\sin(\theta_0 - \alpha_G - \theta) \]
+        <div class="res">\[ J_P\,\ddot\theta = R_P\,F_P - r_T\,F_T - C_{R_0} + K_R\,\theta + m_P\,g\,r_G\sin(\theta_0 - \alpha_G - \theta) \]</div>
+        <div class="warnbox"><span class="lab">Attention</span> Les signes dépendent des orientations lues sur la figure (sens de \(\theta\), position de \(G\)). Avec ces conventions, l'équation est cohérente avec les signes « + » du schéma-bloc (question 5).</div>
+
+        <p class="q">3) Linéarisation autour de \(\theta = 0\)</p>
+        <div class="rappel"><span class="lab">Rappel · développement au premier ordre</span>\[ \sin(a - \theta) \approx \sin a - \theta\cos a \]</div>
+        <p>Avec \(a = \theta_0 - \alpha_G\) et \(C_{R_0} = m_Pgr_G\sin a\), les termes constants s'annulent :</p>
+        <div class="res">\[ J_P\,\ddot\theta = R_P\,F_P - r_T\,F_T + K\,\theta \qquad K = K_R - m_P\,g\,r_G\cos(\theta_0 - \alpha_G) \]</div>
+
+        <p class="q">4) Équation du restituteur par le TEC</p>
+        <p class="etape">Étape 1 : hypothèses et solides isolés</p>
+        <p>On isole {rotor + poulie 1}, {poulie 2 + écrou}, {vis + piston} et la courroie (masse négligée). Liaisons parfaites, pas de frottement.</p>
+        <p class="etape">Étape 2 : la cinématique</p>
+        <ul>
+          <li>Poulie 2 de diamètre double : \(\omega_2 = \dfrac{\omega_m}{2}\).</li>
+          <li>Vis-écrou de pas \(p_v\) : \(V_v = \dfrac{p_v}{2\pi}\,\omega_2 = \dfrac{p_v}{4\pi}\,\omega_m = \lambda\,\omega_m\), avec \(\lambda = \dfrac{p_v}{4\pi}\).</li>
+        </ul>
+        <p class="etape">Étape 3 : énergie cinétique</p>
+        \[ E_c = \frac12 J_m\omega_m^2 + \frac12 J_2\omega_2^2 + \frac12 M_vV_v^2 = \frac12\left(J_m + \frac{J_2}{4} + M_v\lambda^2\right)\omega_m^2 \]
+        <p class="etape">Étape 4 : puissances</p>
+        <ul>
+          <li>Couple moteur : \(C_m\,\omega_m\).</li>
+          <li>Tige sur piston : \(-F_T\,\vec y\cdot V_v\,\vec y = -\lambda\,F_T\,\omega_m\).</li>
+          <li>Liaisons parfaites, pesanteur (vis horizontale) : 0.</li>
+        </ul>
+        <p class="etape">Étape 5 : le TEC</p>
+        \[ J_{eq}\,\omega_m\,\dot\omega_m = C_m\,\omega_m - \lambda\,F_T\,\omega_m \]
+        <div class="res">\[ J_{eq}\,\dot\omega_m = C_m - \lambda\,F_T \qquad \lambda = \frac{p_v}{4\pi},\quad J_{eq} = J_m + \frac{J_2}{4} + M_v\lambda^2 \]</div>
+
+        <p class="q">5) Constantes \(\gamma\), \(\beta\), \(\lambda\) et \(J\) du schéma-bloc</p>
+        <p class="etape">Étape 1 : la pédale sans inertie</p>
+        <p>On néglige \(J_P\) dans l'équation de la question 3 :</p>
+        \[ 0 = R_P\,F_P - r_T\,F_T + K\,\theta \quad\Longrightarrow\quad F_T = \frac{R_P}{r_T}\,F_P + \frac{K}{r_T}\,\theta \]
+        <p class="etape">Étape 2 : identification avec le schéma-bloc</p>
+        <p>Le schéma-bloc donne \(F_T = \gamma\,F_P + \beta\,\Theta\) et \(J\,p\,\Omega_m = C_m - \lambda\,F_T\).</p>
+        <div class="res">\[ \gamma = \frac{R_P}{r_T} \qquad \beta = \frac{K_R - m_P\,g\,r_G\cos(\theta_0 - \alpha_G)}{r_T} \qquad \lambda = \frac{p_v}{4\pi} \qquad J = J_m + \frac{J_2}{4} + M_v\lambda^2 \]</div>
+        <p>Remarque : le gain \(\alpha\) du schéma (\(\Theta = \alpha\,\Theta_m\)) n'est pas demandé. La tige impose environ \(r_T\,\theta = \lambda\,\theta_m\), d'où \(\alpha \approx \lambda/r_T\) au signe près.</p>
+      </div>
     </div>
   </section>
 

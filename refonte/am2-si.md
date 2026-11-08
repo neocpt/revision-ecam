@@ -10,7 +10,7 @@ Chaque exercice : `.exo-card#id` > `.exo-head` + `.exo-body` (énoncé en tête,
 | `aem2-si/ch4-cotations-gps.html` | fait | pas de TD ni de corrigé : 3 exercices créés, correction rédigée par nous |
 | `aem2-si/c02-theorie-mecanismes.html` | fait | Bigeard : `theorie-des-mecanismes_association-de-liaisons/TDM-PT-TD-association_de_liaisons-prof.pdf`, `theorie-des-mecanismes_pompe-a-piston-radial/TDM-PT-TD-pompe_a_piston_radial-prof.pdf` |
 | `aem2-si/c03-dynamique-solide.html` | fait | Bigeard (5 PDF `principe-fondamental-de-la-dynamique_*`), éolienne rédigée par nous |
-| `aem2-si/c04-energetique-solide.html` | à faire | |
+| `aem2-si/c04-energetique-solide.html` | fait | Bigeard (4 PDF `energetique_*`) pour 1.1 à 4.1 ; 4.2, 5.1, 5.2 rédigés par nous |
 | `aem2-si/c05-capteurs.html` | à faire | |
 
 ## Journal
@@ -54,3 +54,16 @@ Chaque exercice : `.exo-card#id` > `.exo-head` + `.exo-body` (énoncé en tête,
   - Régulateur : V_{G∈3/0} au lieu de V_{G∈2/0}.
   - Équilibreuse : σ_B noté au lieu de δ_B ; « F = 1,5e-3 » est E ; **équation (10) fausse** (F + m4 cr cos β4) → F − m4 cr sin β4 = 0 ; β4 ≈ 217°, β3 ≈ 116° (216°/115° avec E, F arrondis).
 - Ancienne page : la masse de l'hélice (M dans l'énoncé) était notée m ; le doute sur les signes du quart de disque est levé (résultat Bigeard exact) ; l'ancienne forme « F + m4 cr sin β4 » était fausse.
+
+### c04-energetique-solide
+- Partie 2 (TD) réécrite ; sections `td-1` (gardée) à `td-5` ; une carte par exercice (10 cartes).
+- Exercices → PDF (dans `documents/si-bigeard/`) :
+  - 1.1 Cylindre, 1.2 Toupie → `energetique_calcul-denergie-cinetique/ENE-PT-TD-calcul_d_energie_cinetique-prof.pdf`
+  - 2.1 Réducteur, 2.2 Translation → `energetique_calcul-dinertie-equivalente/ENE-PT-TD-calcul_d_inertie_equivalente-prof.pdf`
+  - 3.1 Solides en contact, 3.2 Pivot glissant → `energetique_calcul-de-puissance/ENE-PT-TD-calcul_de_puissance-prof.pdf`
+  - 4.1 Cylindre TEC + PFD → `energetique_application-du-theoreme-de-lenergie-cinetique/ENE-PT-TD-application_du_theoreme_de_l_energie_cinetique-prof.pdf`
+  - 4.2 Pendule double, 5.1 Duo Voyageur Concept, 5.2 Embrayage assisté → aucun PDF (recherche par titre et plein texte dans tous les PDF : rien ; `modelisation-des-actions-mecaniques_embrayage` est un autre exercice). Rédigés par nous, mention dans la page.
+- Aucune erreur de résultat dans les corrigés Bigeard ; précisions : toupie, Ω est exprimé dans (u, w, z1) et non (x1, y1, z1) (l'ancienne page le disait) ; 4.1 ajout f = tan α / 3.
+- **Erreur de l'ancienne page corrigée** (5.1 Duo) : la puissance moteur vaut C·ω_m = 2C·ω10 ; ω̇10 = 2C/I_eq ≈ 0,296 rad/s² (et non 0,148) ; durée d'accélération ≈ 1,06 s (et non 2,1 s), critère > 1 s respecté de justesse. Expression de I_eq ajoutée.
+- 4.2 : ancienne réponse « 1 sur 2 dans le mouvement 1/0 » supprimée (non demandée) ; Q4 répond d'abord à la question posée (non, inconnue de liaison), le TEC sur {1+2} reste en complément.
+- 5.2 : conventions d'angle lues sur la figure et explicitées ; le schéma-bloc de la p. 36 du TD (absent des énoncés) a été ajouté en image `img/c04-ex5-2-embrayage-d.png` ; β = (K_R − m_P g r_G cos(θ0 − α_G))/r_T, signes cohérents avec les « + » du schéma-bloc (l'ancienne page avait K_R + … cos α_G).
