@@ -758,68 +758,197 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
     <figcaption>Énoncé (TD1, D. Courtois) — \(R{=}50\,\text{k}\Omega\), \(C{=}3{,}2\,\text{nF}\) ; bras série \((R,C)\) + bras parallèle \((R\parallel C)\)</figcaption>
   </figure>
 
-    <div class="note"><span class="lab">Le montage</span> Bras <b>série</b> \(\underline Z_1=R+\frac{1}{jC\omega}\)
-    (un \(R\) et un \(C\) en série) et bras <b>parallèle</b> \(\underline Z_2=R\parallel\frac{1}{jC\omega}\)
-    vers la masse ; sortie \(s=v_s\) aux bornes de \(\underline Z_2\).</div>
+    <p class="q">1) Nature du filtre (analyse qualitative)</p>
 
-    <p class="q">1) Nature (analyse qualitative)</p>
+    <p class="etape">Étape 1 : lire le montage</p>
     <ul>
-      <li><b>BF</b> : le \(C\) du bras <b>série</b> bloque (\(Z\to\infty\)) &rArr; \(s\to0\).</li>
-      <li><b>HF</b> : le \(C\) du bras <b>parallèle</b> court-circuite la sortie &rArr; \(s\to0\).</li>
+      <li>En haut, le <b>bras série</b> : \(R\) puis \(C\) l'un après l'autre.</li>
+      <li>Vers la masse, le <b>bras parallèle</b> : \(R\) et \(C\) côte à côte. La sortie \(v_s\) est prise à ses bornes.</li>
     </ul>
-    <div class="res">Nul aux deux bouts, non nul au milieu &rArr; <b>passe-bande</b>.</div>
 
-    <p class="q">2) Fonction de transfert &amp; forme canonique</p>
-    \[ \underline H=\frac{\underline Z_2}{\underline Z_1+\underline Z_2}
-      =\frac{jRC\omega}{1-(RC\omega)^2+3\,jRC\omega} \]
-    <p>En posant \(\omega_0=\dfrac{1}{RC}\) et \(x=\dfrac{\omega}{\omega_0}=RC\omega\), on divise par \(3jRC\omega\) :</p>
-    <div class="res">
-      \[ \boxed{\ \underline H=\frac{1}{3+j\!\left(x-\dfrac1x\right)}=\frac{H_0}{1+jQ\!\left(x-\dfrac1x\right)}
-         ,\quad H_0=\frac13,\ \ Q=\frac13,\ \ \omega_0=\frac{1}{RC}\ }\]
-    </div>
-    <p>Au pont de Wien le maximum vaut \(H_0=\tfrac13\) (et non 1) : c'est un passe-bande <b>peu sélectif</b>
-    (\(Q=1/3\)).</p>
+    <p class="etape">Étape 2 : comment se comporte un condensateur</p>
+    <div class="rappel"><span class="lab">Rappel · impédance d'un condensateur</span>\[ \underline Z_C = \frac{1}{jC\omega} \]
+      En basse fréquence (\(\omega\to0\)) : \(Z_C\to\infty\), le condensateur est un <b>interrupteur ouvert</b>.<br>
+      En haute fréquence (\(\omega\to\infty\)) : \(Z_C\to0\), le condensateur est un <b>fil</b>.</div>
+
+    <p class="etape">Étape 3 : en basse fréquence</p>
+    <p>Le \(C\) du bras série est ouvert : aucun courant n'arrive jusqu'à la sortie.</p>
+    \[ v_{s,BF} = 0 \]
+
+    <p class="etape">Étape 4 : en haute fréquence</p>
+    <p>Le \(C\) du bras parallèle devient un fil : il relie directement la sortie à la masse.</p>
+    \[ v_{s,HF} = 0 \]
+    <div class="res">La sortie est nulle aux deux extrémités et non nulle entre les deux : c'est un <b>filtre passe-bande</b>.</div>
+
+    <p class="q">2) Fonction de transfert et forme canonique</p>
+
+    <p class="etape">Étape 1 : impédance de chaque bras</p>
+    <p>Bras série, les impédances s'additionnent :</p>
+    \[ \underline Z_1 = R + \frac{1}{jC\omega} = \frac{1 + jRC\omega}{jC\omega} \]
+    <div class="rappel"><span class="lab">Rappel · deux impédances en parallèle</span>\[ \frac{1}{\underline Z} = \frac{1}{\underline Z_a} + \frac{1}{\underline Z_b} \]</div>
+    <p>Bras parallèle :</p>
+    \[ \frac{1}{\underline Z_2} = \frac{1}{R} + jC\omega = \frac{1 + jRC\omega}{R}
+       \qquad\Longrightarrow\qquad \underline Z_2 = \frac{R}{1 + jRC\omega} \]
+
+    <p class="etape">Étape 2 : diviseur de tension</p>
+    <div class="rappel"><span class="lab">Rappel · pont diviseur de tension (sortie non chargée)</span>\[ \underline V_s = \frac{\underline Z_2}{\underline Z_1 + \underline Z_2}\,\underline V_e \]</div>
+    <p>On écrit \(\underline H\) sous une forme plus pratique, en divisant en haut et en bas par \(\underline Z_2\) :</p>
+    \[ \underline H = \frac{\underline V_s}{\underline V_e} = \frac{1}{1 + \dfrac{\underline Z_1}{\underline Z_2}} \]
+    <p>On calcule le rapport des deux impédances :</p>
+    \[ \frac{\underline Z_1}{\underline Z_2} = \frac{1 + jRC\omega}{jC\omega} \times \frac{1 + jRC\omega}{R} = \frac{(1 + jRC\omega)^2}{jRC\omega} \]
+    <p>On pose \(x = RC\omega\) (sans dimension) pour alléger. Comme \((1 + jx)^2 = 1 + 2jx - x^2\) :</p>
+    \[ \underline H = \frac{1}{1 + \dfrac{1 - x^2 + 2jx}{jx}} = \frac{jx}{1 - x^2 + 3jx} \]
+
+    <p class="etape">Étape 3 : mise sous forme canonique</p>
+    <div class="rappel"><span class="lab">Rappel · forme canonique d'un passe-bande du 2ᵉ ordre</span>\[ \underline H = \frac{H_0}{1 + jQ\left(x - \dfrac{1}{x}\right)}, \qquad x = \frac{\omega}{\omega_0} \]</div>
+    <p>On divise en haut et en bas par \(3jx\) :</p>
+    \[ \underline H = \frac{\frac13}{1 + \dfrac{1 - x^2}{3jx}} \]
+    <p>Comme \(\dfrac1j = -j\), on a \(\dfrac{1 - x^2}{3jx} = j\,\dfrac{x^2 - 1}{3x} = j\,\dfrac13\left(x - \dfrac1x\right)\). D'où :</p>
+    \[ \underline H = \frac{\frac13}{1 + j\,\frac13\left(x - \dfrac1x\right)} \]
+    <p>Par identification avec la forme canonique :</p>
+    <ul>
+      <li>Gain maximal : \(H_0 = \dfrac13\)</li>
+      <li>Facteur de qualité : \(Q = \dfrac13\)</li>
+      <li>Pulsation de résonance : \(\omega_0 = \dfrac{1}{RC}\) (car \(x = RC\omega = \omega/\omega_0\))</li>
+    </ul>
+    <div class="res">\[ \underline H = \frac{H_0}{1 + jQ\left(x - \frac1x\right)}, \qquad H_0 = \frac13,\quad Q = \frac13,\quad \omega_0 = \frac{1}{RC} \]</div>
+    <p>Remarque : le maximum ne vaut que \(1/3\), et \(Q = 1/3\) est petit. C'est un passe-bande <b>large</b>, peu sélectif.</p>
 
     <p class="q">3) Fréquence de résonance</p>
-    \[ f_0=\frac{\omega_0}{2\pi}=\frac{1}{2\pi RC}=\frac{1}{2\pi\times5\times10^4\times3{,}2\times10^{-9}}
-       \approx \boxed{995\ \text{Hz}\ \approx1{,}0\ \text{kHz}} \]
+    <div class="rappel"><span class="lab">Rappel · pulsation et fréquence</span>\[ f = \frac{\omega}{2\pi} \]</div>
+    \[ f_0 = \frac{\omega_0}{2\pi} = \frac{1}{2\pi RC} \]
+    <p>Application numérique, d'abord la constante \(RC\) :</p>
+    \[ RC = 5\times10^{4} \times 3{,}2\times10^{-9} = 1{,}6\times10^{-4}\ \text{s} \]
+    \[ f_0 = \frac{1}{2\pi \times 1{,}6\times10^{-4}} \approx 995\ \text{Hz} \]
+    <div class="res">\(f_0 \approx 995\) Hz, soit environ 1 kHz.</div>
 
-    <p class="q">4) Équation différentielle en \(v_s\)</p>
-    <p>À partir de \(\underline H=\dfrac{s}{e}=\dfrac{jRC\omega}{1-(RC\omega)^2+3jRC\omega}\), produit en
-    croix puis \(j\omega\to\frac{d}{dt}\), \((j\omega)^2\to\frac{d^2}{dt^2}\) :</p>
-    \[ \boxed{\ R^2C^2\,\frac{d^2v_s}{dt^2}+3RC\,\frac{dv_s}{dt}+v_s=RC\,\frac{de}{dt}\ } \]
+    <p class="q">4) Équation différentielle vérifiée par \(v_s(t)\)</p>
+
+    <p class="etape">Étape 1 : produit en croix</p>
+    <p>On repart de \(\underline H = \dfrac{\underline V_s}{\underline V_e} = \dfrac{jRC\omega}{1 - (RC\omega)^2 + 3jRC\omega}\) :</p>
+    \[ \left(1 - (RC\omega)^2 + 3jRC\omega\right)\underline V_s = jRC\omega\,\underline V_e \]
+
+    <p class="etape">Étape 2 : retour au temps</p>
+    <div class="rappel"><span class="lab">Rappel · du complexe au temporel</span>\[ j\omega \;\longleftrightarrow\; \frac{d}{dt} \qquad\qquad (j\omega)^2 = -\omega^2 \;\longleftrightarrow\; \frac{d^2}{dt^2} \]</div>
+    <p>On fait apparaître des \(j\omega\) partout, en écrivant \(-(RC\omega)^2 = R^2C^2\,(j\omega)^2\) :</p>
+    \[ \left(1 + 3RC\,(j\omega) + R^2C^2\,(j\omega)^2\right)\underline V_s = RC\,(j\omega)\,\underline V_e \]
+    <div class="res">\[ R^2C^2\,\frac{d^2v_s}{dt^2} + 3RC\,\frac{dv_s}{dt} + v_s = RC\,\frac{dv_e}{dt} \]</div>
 
     <p class="q">5) Fréquences de coupure d'un passe-bande</p>
-    <p>Coupure : \(|\underline H|=\dfrac{H_0}{\sqrt2}\Rightarrow Q^2\!\left(x-\tfrac1x\right)^2=1\Rightarrow
-    x-\dfrac1x=\pm\dfrac1Q\), soit \(x^2\mp\dfrac1Q x-1=0\). Racines positives :</p>
-    <div class="res">
-      \[ \boxed{\ f_c=\frac{f_0}{2}\left(\sqrt{\frac{1}{Q^2}+4}\ \pm\ \frac1Q\right)\ }\]
-      Avec \(Q=\tfrac13\) : \(f_{cB}\approx0{,}30\ \text{kHz}\), \(f_{cH}\approx3{,}29\ \text{kHz}\).</div>
+    <div class="rappel"><span class="lab">Rappel · fréquence de coupure</span>C'est la fréquence où le gain vaut le maximum divisé par \(\sqrt2\) (−3 dB sous le maximum).</div>
 
-    <p class="q">6) Relation \(Q,\ f_0,\ \Delta f\)</p>
-    <p>\(\Delta f=f_{cH}-f_{cB}=f_0\!\left(\dfrac{\sqrt{\cdots}+1/Q}{2}-\dfrac{\sqrt{\cdots}-1/Q}{2}\right)
-    =\dfrac{f_0}{Q}\). Donc</p>
-    <div class="res">\[ \boxed{\ Q=\frac{f_0}{\Delta f}\ }\qquad\text{ici }\ \Delta f=\frac{f_0}{Q}=3f_0\approx2{,}99\ \text{kHz}. \]</div>
+    <p class="etape">Étape 1 : le module de \(\underline H\)</p>
+    \[ |\underline H| = \frac{H_0}{\sqrt{1 + Q^2\left(x - \frac1x\right)^2}} \]
+    <p>Il est maximal, égal à \(H_0\), pour \(x = 1\).</p>
 
-    <p class="q">7) Comportement asymptotique &amp; Bode</p>
-    <ul>
-      <li>BF \(x\ll1\) : \(|\underline H|\approx\dfrac{H_0}{Q}\,x\) &rArr; <b>+20 dB/déc</b>, \(\varphi\to+90^\circ\).</li>
-      <li>HF \(x\gg1\) : \(|\underline H|\approx\dfrac{H_0}{Qx}\) &rArr; <b>&minus;20 dB/déc</b>, \(\varphi\to-90^\circ\).</li>
-      <li>\(x=1\) : \(|\underline H|=H_0=\tfrac13\) (\(-9{,}5\) dB), \(\varphi=0\).</li>
-    </ul>
-    <figure><svg viewBox="0 0 760 500" width="760" xmlns="http://www.w3.org/2000/svg"><line x1="70.0" y1="44" x2="70.0" y2="225" stroke="#cbd5e1" stroke-width="1.1"/><line x1="70.0" y1="290" x2="70.0" y2="470" stroke="#cbd5e1" stroke-width="1.1"/><text x="70.0" y="488" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">0.1</text><line x1="171.4" y1="44" x2="171.4" y2="225" stroke="#e2e8f0" stroke-width="0.6"/><line x1="171.4" y1="290" x2="171.4" y2="470" stroke="#e2e8f0" stroke-width="0.6"/><text x="171.4" y="488" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">0.2</text><line x1="305.6" y1="44" x2="305.6" y2="225" stroke="#e2e8f0" stroke-width="0.6"/><line x1="305.6" y1="290" x2="305.6" y2="470" stroke="#e2e8f0" stroke-width="0.6"/><text x="305.6" y="488" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">0.5</text><line x1="407.0" y1="44" x2="407.0" y2="225" stroke="#cbd5e1" stroke-width="1.1"/><line x1="407.0" y1="290" x2="407.0" y2="470" stroke="#cbd5e1" stroke-width="1.1"/><text x="407.0" y="488" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">1</text><line x1="508.4" y1="44" x2="508.4" y2="225" stroke="#e2e8f0" stroke-width="0.6"/><line x1="508.4" y1="290" x2="508.4" y2="470" stroke="#e2e8f0" stroke-width="0.6"/><text x="508.4" y="488" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">2</text><line x1="642.6" y1="44" x2="642.6" y2="225" stroke="#e2e8f0" stroke-width="0.6"/><line x1="642.6" y1="290" x2="642.6" y2="470" stroke="#e2e8f0" stroke-width="0.6"/><text x="642.6" y="488" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">5</text><line x1="744.0" y1="44" x2="744.0" y2="225" stroke="#cbd5e1" stroke-width="1.1"/><line x1="744.0" y1="290" x2="744.0" y2="470" stroke="#cbd5e1" stroke-width="1.1"/><text x="744.0" y="488" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">10</text><line x1="70" y1="73.0" x2="744" y2="73.0" stroke="#e2e8f0" stroke-width="1" /><text x="62" y="77.0" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">0</text><line x1="70" y1="83.8" x2="744" y2="83.8" stroke="#dc2626" stroke-width="1" stroke-dasharray="5 4"/><text x="62" y="87.8" fill="#dc2626" font-family="monospace" font-size="11" text-anchor="end">-3</text><line x1="70" y1="107.3" x2="744" y2="107.3" stroke="#e2e8f0" stroke-width="0.6" /><text x="62" y="111.3" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">-9.5</text><line x1="70" y1="145.4" x2="744" y2="145.4" stroke="#e2e8f0" stroke-width="0.6" /><text x="62" y="149.4" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">-20</text><line x1="70" y1="181.6" x2="744" y2="181.6" stroke="#e2e8f0" stroke-width="0.6" /><text x="62" y="185.6" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">-30</text><line x1="70" y1="217.8" x2="744" y2="217.8" stroke="#e2e8f0" stroke-width="0.6" /><text x="62" y="221.8" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">-40</text><line x1="70" y1="294.7" x2="744" y2="294.7" stroke="#e2e8f0" stroke-width=".6" /><text x="62" y="298.7" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">90°</text><line x1="70" y1="337.4" x2="744" y2="337.4" stroke="#cbd5e1" stroke-width=".6" stroke-dasharray="4 4"/><text x="62" y="341.4" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">45°</text><line x1="70" y1="380.0" x2="744" y2="380.0" stroke="#e2e8f0" stroke-width=".6" /><text x="62" y="384.0" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">0°</text><line x1="70" y1="422.6" x2="744" y2="422.6" stroke="#cbd5e1" stroke-width=".6" stroke-dasharray="4 4"/><text x="62" y="426.6" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">-45°</text><line x1="70" y1="465.3" x2="744" y2="465.3" stroke="#e2e8f0" stroke-width=".6" /><text x="62" y="469.3" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">-90°</text><rect x="70" y="44" width="674" height="181" fill="none" stroke="#cbd5e1" stroke-width="1.1"/><rect x="70" y="290" width="674" height="180" fill="none" stroke="#cbd5e1" stroke-width="1.1"/><text x="70" y="31" fill="#0d9488" font-family="monospace" font-size="12.5" font-weight="700">GAIN  20·log|H|  (pont de Wien, passe-bande)</text><text x="70" y="277" fill="#0891b2" font-family="monospace" font-size="12.5" font-weight="700">PHASE  arg(H)</text><text x="407" y="504" fill="#475569" font-family="monospace" font-size="11.5" text-anchor="middle">x = ω / ω₀ = f / f₀   (échelle log)</text><path d="M70.0 145.4 L407.0 73.0 " fill="none" stroke="#d97706" stroke-width="1.6" stroke-dasharray="7 5"/><path d="M407.0 73.0 L744.0 145.4 " fill="none" stroke="#d97706" stroke-width="1.6" stroke-dasharray="7 5"/><path d="M70.0 146.4 L71.6 146.1 L73.2 145.8 L74.8 145.5 L76.4 145.1 L78.0 144.8 L79.6 144.5 L81.2 144.2 L82.8 143.9 L84.4 143.5 L86.0 143.2 L87.7 142.9 L89.3 142.6 L90.9 142.3 L92.5 142.0 L94.1 141.7 L95.7 141.3 L97.3 141.0 L98.9 140.7 L100.5 140.4 L102.1 140.1 L103.7 139.8 L105.3 139.5 L106.9 139.2 L108.5 138.9 L110.1 138.5 L111.7 138.2 L113.3 137.9 L114.9 137.6 L116.5 137.3 L118.1 137.0 L119.7 136.7 L121.4 136.4 L123.0 136.1 L124.6 135.8 L126.2 135.5 L127.8 135.2 L129.4 134.9 L131.0 134.6 L132.6 134.3 L134.2 134.0 L135.8 133.7 L137.4 133.4 L139.0 133.1 L140.6 132.9 L142.2 132.6 L143.8 132.3 L145.4 132.0 L147.0 131.7 L148.6 131.4 L150.2 131.1 L151.8 130.8 L153.4 130.6 L155.1 130.3 L156.7 130.0 L158.3 129.7 L159.9 129.4 L161.5 129.2 L163.1 128.9 L164.7 128.6 L166.3 128.3 L167.9 128.1 L169.5 127.8 L171.1 127.5 L172.7 127.3 L174.3 127.0 L175.9 126.7 L177.5 126.5 L179.1 126.2 L180.7 125.9 L182.3 125.7 L183.9 125.4 L185.5 125.2 L187.1 124.9 L188.8 124.7 L190.4 124.4 L192.0 124.1 L193.6 123.9 L195.2 123.6 L196.8 123.4 L198.4 123.2 L200.0 122.9 L201.6 122.7 L203.2 122.4 L204.8 122.2 L206.4 122.0 L208.0 121.7 L209.6 121.5 L211.2 121.3 L212.8 121.0 L214.4 120.8 L216.0 120.6 L217.6 120.3 L219.2 120.1 L220.8 119.9 L222.5 119.7 L224.1 119.5 L225.7 119.3 L227.3 119.0 L228.9 118.8 L230.5 118.6 L232.1 118.4 L233.7 118.2 L235.3 118.0 L236.9 117.8 L238.5 117.6 L240.1 117.4 L241.7 117.2 L243.3 117.0 L244.9 116.8 L246.5 116.6 L248.1 116.4 L249.7 116.2 L251.3 116.1 L252.9 115.9 L254.5 115.7 L256.2 115.5 L257.8 115.3 L259.4 115.2 L261.0 115.0 L262.6 114.8 L264.2 114.7 L265.8 114.5 L267.4 114.3 L269.0 114.2 L270.6 114.0 L272.2 113.8 L273.8 113.7 L275.4 113.5 L277.0 113.4 L278.6 113.2 L280.2 113.1 L281.8 112.9 L283.4 112.8 L285.0 112.6 L286.6 112.5 L288.2 112.4 L289.9 112.2 L291.5 112.1 L293.1 112.0 L294.7 111.8 L296.3 111.7 L297.9 111.6 L299.5 111.5 L301.1 111.3 L302.7 111.2 L304.3 111.1 L305.9 111.0 L307.5 110.9 L309.1 110.8 L310.7 110.7 L312.3 110.5 L313.9 110.4 L315.5 110.3 L317.1 110.2 L318.7 110.1 L320.3 110.0 L321.9 109.9 L323.6 109.8 L325.2 109.8 L326.8 109.7 L328.4 109.6 L330.0 109.5 L331.6 109.4 L333.2 109.3 L334.8 109.2 L336.4 109.2 L338.0 109.1 L339.6 109.0 L341.2 108.9 L342.8 108.9 L344.4 108.8 L346.0 108.7 L347.6 108.7 L349.2 108.6 L350.8 108.5 L352.4 108.5 L354.0 108.4 L355.6 108.4 L357.3 108.3 L358.9 108.3 L360.5 108.2 L362.1 108.2 L363.7 108.1 L365.3 108.1 L366.9 108.0 L368.5 108.0 L370.1 108.0 L371.7 107.9 L373.3 107.9 L374.9 107.8 L376.5 107.8 L378.1 107.8 L379.7 107.7 L381.3 107.7 L382.9 107.7 L384.5 107.7 L386.1 107.6 L387.7 107.6 L389.3 107.6 L391.0 107.6 L392.6 107.6 L394.2 107.6 L395.8 107.5 L397.4 107.5 L399.0 107.5 L400.6 107.5 L402.2 107.5 L403.8 107.5 L405.4 107.5 L407.0 107.5 L408.6 107.5 L410.2 107.5 L411.8 107.5 L413.4 107.5 L415.0 107.5 L416.6 107.5 L418.2 107.5 L419.8 107.6 L421.4 107.6 L423.0 107.6 L424.7 107.6 L426.3 107.6 L427.9 107.6 L429.5 107.7 L431.1 107.7 L432.7 107.7 L434.3 107.7 L435.9 107.8 L437.5 107.8 L439.1 107.8 L440.7 107.9 L442.3 107.9 L443.9 108.0 L445.5 108.0 L447.1 108.0 L448.7 108.1 L450.3 108.1 L451.9 108.2 L453.5 108.2 L455.1 108.3 L456.7 108.3 L458.4 108.4 L460.0 108.4 L461.6 108.5 L463.2 108.5 L464.8 108.6 L466.4 108.7 L468.0 108.7 L469.6 108.8 L471.2 108.9 L472.8 108.9 L474.4 109.0 L476.0 109.1 L477.6 109.2 L479.2 109.2 L480.8 109.3 L482.4 109.4 L484.0 109.5 L485.6 109.6 L487.2 109.7 L488.8 109.8 L490.4 109.8 L492.1 109.9 L493.7 110.0 L495.3 110.1 L496.9 110.2 L498.5 110.3 L500.1 110.4 L501.7 110.5 L503.3 110.7 L504.9 110.8 L506.5 110.9 L508.1 111.0 L509.7 111.1 L511.3 111.2 L512.9 111.3 L514.5 111.5 L516.1 111.6 L517.7 111.7 L519.3 111.8 L520.9 112.0 L522.5 112.1 L524.1 112.2 L525.8 112.4 L527.4 112.5 L529.0 112.6 L530.6 112.8 L532.2 112.9 L533.8 113.1 L535.4 113.2 L537.0 113.4 L538.6 113.5 L540.2 113.7 L541.8 113.8 L543.4 114.0 L545.0 114.2 L546.6 114.3 L548.2 114.5 L549.8 114.7 L551.4 114.8 L553.0 115.0 L554.6 115.2 L556.2 115.3 L557.8 115.5 L559.5 115.7 L561.1 115.9 L562.7 116.1 L564.3 116.2 L565.9 116.4 L567.5 116.6 L569.1 116.8 L570.7 117.0 L572.3 117.2 L573.9 117.4 L575.5 117.6 L577.1 117.8 L578.7 118.0 L580.3 118.2 L581.9 118.4 L583.5 118.6 L585.1 118.8 L586.7 119.0 L588.3 119.3 L589.9 119.5 L591.5 119.7 L593.2 119.9 L594.8 120.1 L596.4 120.3 L598.0 120.6 L599.6 120.8 L601.2 121.0 L602.8 121.3 L604.4 121.5 L606.0 121.7 L607.6 122.0 L609.2 122.2 L610.8 122.4 L612.4 122.7 L614.0 122.9 L615.6 123.2 L617.2 123.4 L618.8 123.6 L620.4 123.9 L622.0 124.1 L623.6 124.4 L625.2 124.7 L626.9 124.9 L628.5 125.2 L630.1 125.4 L631.7 125.7 L633.3 125.9 L634.9 126.2 L636.5 126.5 L638.1 126.7 L639.7 127.0 L641.3 127.3 L642.9 127.5 L644.5 127.8 L646.1 128.1 L647.7 128.3 L649.3 128.6 L650.9 128.9 L652.5 129.2 L654.1 129.4 L655.7 129.7 L657.3 130.0 L658.9 130.3 L660.6 130.6 L662.2 130.8 L663.8 131.1 L665.4 131.4 L667.0 131.7 L668.6 132.0 L670.2 132.3 L671.8 132.6 L673.4 132.9 L675.0 133.1 L676.6 133.4 L678.2 133.7 L679.8 134.0 L681.4 134.3 L683.0 134.6 L684.6 134.9 L686.2 135.2 L687.8 135.5 L689.4 135.8 L691.0 136.1 L692.6 136.4 L694.3 136.7 L695.9 137.0 L697.5 137.3 L699.1 137.6 L700.7 137.9 L702.3 138.2 L703.9 138.5 L705.5 138.9 L707.1 139.2 L708.7 139.5 L710.3 139.8 L711.9 140.1 L713.5 140.4 L715.1 140.7 L716.7 141.0 L718.3 141.3 L719.9 141.7 L721.5 142.0 L723.1 142.3 L724.7 142.6 L726.3 142.9 L728.0 143.2 L729.6 143.5 L731.2 143.9 L732.8 144.2 L734.4 144.5 L736.0 144.8 L737.6 145.1 L739.2 145.5 L740.8 145.8 L742.4 146.1 L744.0 146.4 " fill="none" stroke="#0d9488" stroke-width="2.6" stroke-linejoin="round"/><path d="M70.0 310.7 L71.6 310.9 L73.2 311.0 L74.8 311.2 L76.4 311.4 L78.0 311.6 L79.6 311.7 L81.2 311.9 L82.8 312.1 L84.4 312.3 L86.0 312.5 L87.7 312.7 L89.3 312.9 L90.9 313.0 L92.5 313.2 L94.1 313.4 L95.7 313.6 L97.3 313.8 L98.9 314.0 L100.5 314.2 L102.1 314.4 L103.7 314.6 L105.3 314.8 L106.9 315.0 L108.5 315.3 L110.1 315.5 L111.7 315.7 L113.3 315.9 L114.9 316.1 L116.5 316.3 L118.1 316.6 L119.7 316.8 L121.4 317.0 L123.0 317.2 L124.6 317.5 L126.2 317.7 L127.8 317.9 L129.4 318.2 L131.0 318.4 L132.6 318.6 L134.2 318.9 L135.8 319.1 L137.4 319.4 L139.0 319.6 L140.6 319.9 L142.2 320.1 L143.8 320.4 L145.4 320.6 L147.0 320.9 L148.6 321.1 L150.2 321.4 L151.8 321.7 L153.4 321.9 L155.1 322.2 L156.7 322.5 L158.3 322.7 L159.9 323.0 L161.5 323.3 L163.1 323.6 L164.7 323.9 L166.3 324.1 L167.9 324.4 L169.5 324.7 L171.1 325.0 L172.7 325.3 L174.3 325.6 L175.9 325.9 L177.5 326.2 L179.1 326.5 L180.7 326.8 L182.3 327.1 L183.9 327.4 L185.5 327.7 L187.1 328.0 L188.8 328.3 L190.4 328.6 L192.0 328.9 L193.6 329.2 L195.2 329.6 L196.8 329.9 L198.4 330.2 L200.0 330.5 L201.6 330.8 L203.2 331.2 L204.8 331.5 L206.4 331.8 L208.0 332.2 L209.6 332.5 L211.2 332.8 L212.8 333.2 L214.4 333.5 L216.0 333.9 L217.6 334.2 L219.2 334.5 L220.8 334.9 L222.5 335.2 L224.1 335.6 L225.7 335.9 L227.3 336.3 L228.9 336.6 L230.5 337.0 L232.1 337.4 L233.7 337.7 L235.3 338.1 L236.9 338.4 L238.5 338.8 L240.1 339.2 L241.7 339.5 L243.3 339.9 L244.9 340.3 L246.5 340.6 L248.1 341.0 L249.7 341.4 L251.3 341.7 L252.9 342.1 L254.5 342.5 L256.2 342.9 L257.8 343.2 L259.4 343.6 L261.0 344.0 L262.6 344.4 L264.2 344.8 L265.8 345.1 L267.4 345.5 L269.0 345.9 L270.6 346.3 L272.2 346.7 L273.8 347.1 L275.4 347.5 L277.0 347.8 L278.6 348.2 L280.2 348.6 L281.8 349.0 L283.4 349.4 L285.0 349.8 L286.6 350.2 L288.2 350.6 L289.9 351.0 L291.5 351.4 L293.1 351.8 L294.7 352.1 L296.3 352.5 L297.9 352.9 L299.5 353.3 L301.1 353.7 L302.7 354.1 L304.3 354.5 L305.9 354.9 L307.5 355.3 L309.1 355.7 L310.7 356.1 L312.3 356.5 L313.9 356.9 L315.5 357.3 L317.1 357.7 L318.7 358.1 L320.3 358.5 L321.9 358.9 L323.6 359.3 L325.2 359.7 L326.8 360.1 L328.4 360.5 L330.0 360.9 L331.6 361.3 L333.2 361.7 L334.8 362.1 L336.4 362.5 L338.0 362.9 L339.6 363.3 L341.2 363.7 L342.8 364.1 L344.4 364.5 L346.0 364.9 L347.6 365.3 L349.2 365.7 L350.8 366.1 L352.4 366.5 L354.0 366.9 L355.6 367.3 L357.3 367.7 L358.9 368.1 L360.5 368.5 L362.1 368.9 L363.7 369.3 L365.3 369.7 L366.9 370.1 L368.5 370.5 L370.1 370.9 L371.7 371.3 L373.3 371.7 L374.9 372.1 L376.5 372.5 L378.1 372.9 L379.7 373.3 L381.3 373.6 L382.9 374.0 L384.5 374.4 L386.1 374.8 L387.7 375.2 L389.3 375.6 L391.0 376.0 L392.6 376.4 L394.2 376.8 L395.8 377.2 L397.4 377.6 L399.0 378.0 L400.6 378.4 L402.2 378.8 L403.8 379.2 L405.4 379.6 L407.0 380.0 L408.6 380.4 L410.2 380.8 L411.8 381.2 L413.4 381.6 L415.0 382.0 L416.6 382.4 L418.2 382.8 L419.8 383.2 L421.4 383.6 L423.0 384.0 L424.7 384.4 L426.3 384.8 L427.9 385.2 L429.5 385.6 L431.1 386.0 L432.7 386.4 L434.3 386.7 L435.9 387.1 L437.5 387.5 L439.1 387.9 L440.7 388.3 L442.3 388.7 L443.9 389.1 L445.5 389.5 L447.1 389.9 L448.7 390.3 L450.3 390.7 L451.9 391.1 L453.5 391.5 L455.1 391.9 L456.7 392.3 L458.4 392.7 L460.0 393.1 L461.6 393.5 L463.2 393.9 L464.8 394.3 L466.4 394.7 L468.0 395.1 L469.6 395.5 L471.2 395.9 L472.8 396.3 L474.4 396.7 L476.0 397.1 L477.6 397.5 L479.2 397.9 L480.8 398.3 L482.4 398.7 L484.0 399.1 L485.6 399.5 L487.2 399.9 L488.8 400.3 L490.4 400.7 L492.1 401.1 L493.7 401.5 L495.3 401.9 L496.9 402.3 L498.5 402.7 L500.1 403.1 L501.7 403.5 L503.3 403.9 L504.9 404.3 L506.5 404.7 L508.1 405.1 L509.7 405.5 L511.3 405.9 L512.9 406.3 L514.5 406.7 L516.1 407.1 L517.7 407.5 L519.3 407.9 L520.9 408.2 L522.5 408.6 L524.1 409.0 L525.8 409.4 L527.4 409.8 L529.0 410.2 L530.6 410.6 L532.2 411.0 L533.8 411.4 L535.4 411.8 L537.0 412.2 L538.6 412.5 L540.2 412.9 L541.8 413.3 L543.4 413.7 L545.0 414.1 L546.6 414.5 L548.2 414.9 L549.8 415.2 L551.4 415.6 L553.0 416.0 L554.6 416.4 L556.2 416.8 L557.8 417.1 L559.5 417.5 L561.1 417.9 L562.7 418.3 L564.3 418.6 L565.9 419.0 L567.5 419.4 L569.1 419.7 L570.7 420.1 L572.3 420.5 L573.9 420.8 L575.5 421.2 L577.1 421.6 L578.7 421.9 L580.3 422.3 L581.9 422.6 L583.5 423.0 L585.1 423.4 L586.7 423.7 L588.3 424.1 L589.9 424.4 L591.5 424.8 L593.2 425.1 L594.8 425.5 L596.4 425.8 L598.0 426.1 L599.6 426.5 L601.2 426.8 L602.8 427.2 L604.4 427.5 L606.0 427.8 L607.6 428.2 L609.2 428.5 L610.8 428.8 L612.4 429.2 L614.0 429.5 L615.6 429.8 L617.2 430.1 L618.8 430.4 L620.4 430.8 L622.0 431.1 L623.6 431.4 L625.2 431.7 L626.9 432.0 L628.5 432.3 L630.1 432.6 L631.7 432.9 L633.3 433.2 L634.9 433.5 L636.5 433.8 L638.1 434.1 L639.7 434.4 L641.3 434.7 L642.9 435.0 L644.5 435.3 L646.1 435.6 L647.7 435.9 L649.3 436.1 L650.9 436.4 L652.5 436.7 L654.1 437.0 L655.7 437.3 L657.3 437.5 L658.9 437.8 L660.6 438.1 L662.2 438.3 L663.8 438.6 L665.4 438.9 L667.0 439.1 L668.6 439.4 L670.2 439.6 L671.8 439.9 L673.4 440.1 L675.0 440.4 L676.6 440.6 L678.2 440.9 L679.8 441.1 L681.4 441.4 L683.0 441.6 L684.6 441.8 L686.2 442.1 L687.8 442.3 L689.4 442.5 L691.0 442.8 L692.6 443.0 L694.3 443.2 L695.9 443.4 L697.5 443.7 L699.1 443.9 L700.7 444.1 L702.3 444.3 L703.9 444.5 L705.5 444.7 L707.1 445.0 L708.7 445.2 L710.3 445.4 L711.9 445.6 L713.5 445.8 L715.1 446.0 L716.7 446.2 L718.3 446.4 L719.9 446.6 L721.5 446.8 L723.1 447.0 L724.7 447.1 L726.3 447.3 L728.0 447.5 L729.6 447.7 L731.2 447.9 L732.8 448.1 L734.4 448.3 L736.0 448.4 L737.6 448.6 L739.2 448.8 L740.8 449.0 L742.4 449.1 L744.0 449.3 " fill="none" stroke="#0891b2" stroke-width="2.6" stroke-linejoin="round"/><circle cx="407.0" cy="107.5" r="4.5" fill="#d97706" stroke="#1e293b" stroke-width="1.5"/><circle cx="407.0" cy="380.0" r="4.5" fill="#d97706" stroke="#1e293b" stroke-width="1.5"/><text x="414.0" y="101.5" fill="#d97706" font-family="monospace" font-size="11">f₀ : |H|=1/3 → −9,5 dB</text></svg>
-      <figcaption>Bode du pont de Wien (\(H_0=1/3\), \(Q=1/3\)). Sommet à \(-9{,}5\) dB en \(f_0\) : passe-bande large.</figcaption>
+    <p class="etape">Étape 2 : la condition de coupure</p>
+    \[ \frac{H_0}{\sqrt{1 + Q^2\left(x - \frac1x\right)^2}} = \frac{H_0}{\sqrt2}
+       \iff Q^2\left(x - \frac1x\right)^2 = 1
+       \iff x - \frac1x = \pm\frac1Q \]
+
+    <p class="etape">Étape 3 : résoudre le trinôme</p>
+    <p>On multiplie par \(x > 0\) :</p>
+    \[ x^2 \mp \frac1Q\,x - 1 = 0 \]
+    <div class="rappel"><span class="lab">Rappel · trinôme du second degré</span>\[ ax^2 + bx + c = 0 \;\Longrightarrow\; \Delta = b^2 - 4ac, \qquad x = \frac{-b \pm \sqrt\Delta}{2a} \]</div>
+    <p>Ici \(\Delta = \dfrac{1}{Q^2} + 4\). On ne garde que la racine positive de chaque trinôme :</p>
+    \[ x_c = \frac12\left(\sqrt{\frac{1}{Q^2} + 4} \pm \frac1Q\right)
+       \qquad\Longrightarrow\qquad
+       f_c = \frac{f_0}{2}\left(\sqrt{\frac{1}{Q^2} + 4} \pm \frac1Q\right) \]
+    <p>On retrouve bien la formule de l'énoncé. Application numérique avec \(Q = 1/3\), donc \(1/Q = 3\) et \(\sqrt{9 + 4} = \sqrt{13} \approx 3{,}606\) :</p>
+    \[ f_{cB} = \frac{995}{2}\,(3{,}606 - 3) \approx 301\ \text{Hz} \qquad\qquad f_{cH} = \frac{995}{2}\,(3{,}606 + 3) \approx 3{,}29\ \text{kHz} \]
+    <div class="res">\(f_{cB} \approx 301\) Hz et \(f_{cH} \approx 3{,}29\) kHz.</div>
+
+    <p class="q">6) Relation entre \(Q\), \(f_0\) et la bande passante \(\Delta f\)</p>
+    <p>La bande passante est l'écart entre les deux fréquences de coupure. Les racines carrées se simplifient :</p>
+    \[ \Delta f = f_{cH} - f_{cB} = \frac{f_0}{2}\left[\left(\sqrt{\cdots} + \frac1Q\right) - \left(\sqrt{\cdots} - \frac1Q\right)\right] = \frac{f_0}{2}\times\frac2Q = \frac{f_0}{Q} \]
+    <div class="res">\[ Q = \frac{f_0}{\Delta f} \qquad\text{ici}\quad \Delta f = 3f_0 \approx 2{,}98\ \text{kHz} \]</div>
+    <p>Vérification avec la question 5 : \(3\,285 - 301 \approx 2\,984\) Hz, ça colle.</p>
+
+    <p class="q">7) Comportement asymptotique et diagrammes de Bode</p>
+    <p>Ici \(\dfrac{H_0}{Q} = 1\), ce qui simplifie les calculs.</p>
+
+    <p class="etape">Étape 1 : en basse fréquence (\(x \ll 1\))</p>
+    <p>Le terme \(\dfrac1x\) domine : \(x - \dfrac1x \approx -\dfrac1x\).</p>
+    \[ \underline H \approx \frac{H_0}{-jQ/x} = j\,\frac{H_0}{Q}\,x = jx
+       \qquad\Longrightarrow\qquad G_{dB} \approx 20\log x, \quad \varphi \approx +90^\circ \]
+    <p>C'est une droite de pente <b>+20 dB/décade</b>.</p>
+
+    <p class="etape">Étape 2 : en haute fréquence (\(x \gg 1\))</p>
+    <p>Le terme \(x\) domine : \(x - \dfrac1x \approx x\).</p>
+    \[ \underline H \approx \frac{H_0}{jQx} = \frac{-j}{x}
+       \qquad\Longrightarrow\qquad G_{dB} \approx -20\log x, \quad \varphi \approx -90^\circ \]
+    <p>C'est une droite de pente <b>−20 dB/décade</b>.</p>
+
+    <p class="etape">Étape 3 : à la résonance (\(x = 1\))</p>
+    \[ \underline H = H_0 = \frac13 \qquad\Longrightarrow\qquad G_{dB} = 20\log\frac13 \approx -9{,}5\ \text{dB}, \quad \varphi = 0 \]
+    <p>Les deux asymptotes se croisent en \(x = 1\) à 0 dB. La vraie courbe passe 9,5 dB en dessous : c'est la marque d'un \(Q\) faible.</p>
+    <figure>
+      <svg viewBox="0 0 760 680" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrammes de Bode du pont de Wien : gain et phase en fonction de x = f/f0">
+      <rect x="100" y="60" width="635" height="240" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+      <rect x="100" y="390" width="635" height="210" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+      <line x1="100.0" y1="60" x2="100.0" y2="300" stroke="#cbd5e1" stroke-width="1"/>
+      <line x1="100.0" y1="390" x2="100.0" y2="600" stroke="#cbd5e1" stroke-width="1"/>
+      <text x="100.0" y="630" font-size="20" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">0,1</text>
+      <line x1="251.5" y1="60" x2="251.5" y2="300" stroke="#cbd5e1" stroke-width="1"/>
+      <line x1="251.5" y1="390" x2="251.5" y2="600" stroke="#cbd5e1" stroke-width="1"/>
+      <text x="251.5" y="630" font-size="20" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">0,3</text>
+      <line x1="417.5" y1="60" x2="417.5" y2="300" stroke="#cbd5e1" stroke-width="1"/>
+      <line x1="417.5" y1="390" x2="417.5" y2="600" stroke="#cbd5e1" stroke-width="1"/>
+      <text x="417.5" y="630" font-size="20" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">1</text>
+      <line x1="569.0" y1="60" x2="569.0" y2="300" stroke="#cbd5e1" stroke-width="1"/>
+      <line x1="569.0" y1="390" x2="569.0" y2="600" stroke="#cbd5e1" stroke-width="1"/>
+      <text x="569.0" y="630" font-size="20" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">3</text>
+      <line x1="735.0" y1="60" x2="735.0" y2="300" stroke="#cbd5e1" stroke-width="1"/>
+      <line x1="735.0" y1="390" x2="735.0" y2="600" stroke="#cbd5e1" stroke-width="1"/>
+      <text x="735.0" y="630" font-size="20" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">10</text>
+      <line x1="100" y1="85.7" x2="735" y2="85.7" stroke="#cbd5e1" stroke-width="1"/>
+      <text x="90" y="92.7" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">0</text>
+      <line x1="100" y1="167.1" x2="735" y2="167.1" stroke="#cbd5e1" stroke-width="1"/>
+      <text x="90" y="174.1" font-size="20" fill="#0f766e" text-anchor="end" font-family="Segoe UI, sans-serif">−9,5</text>
+      <line x1="100" y1="257.1" x2="735" y2="257.1" stroke="#cbd5e1" stroke-width="1"/>
+      <text x="90" y="264.1" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">−20</text>
+      <line x1="100" y1="390.0" x2="735" y2="390.0" stroke="#cbd5e1" stroke-width="1"/>
+      <text x="90" y="397.0" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">+90°</text>
+      <line x1="100" y1="495.0" x2="735" y2="495.0" stroke="#cbd5e1" stroke-width="1"/>
+      <text x="90" y="502.0" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">0°</text>
+      <line x1="100" y1="600.0" x2="735" y2="600.0" stroke="#cbd5e1" stroke-width="1"/>
+      <text x="90" y="607.0" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">−90°</text>
+      <polyline points="100.0,257.1 417.5,85.7 735.0,257.1" fill="none" stroke="#d97706" stroke-width="2.5" stroke-dasharray="9 6"/>
+      <line x1="100.0" y1="390.0" x2="417.5" y2="390.0" stroke="#d97706" stroke-width="2.5" stroke-dasharray="9 6"/>
+      <line x1="417.5" y1="600.0" x2="735.0" y2="600.0" stroke="#d97706" stroke-width="2.5" stroke-dasharray="9 6"/>
+      <polyline points="100.0,259.7 101.6,258.9 103.2,258.1 104.8,257.3 106.4,256.5 107.9,255.7 109.5,254.9 111.1,254.1 112.7,253.3 114.3,252.5 115.9,251.7 117.5,250.9 119.1,250.1 120.6,249.4 122.2,248.6 123.8,247.8 125.4,247.0 127.0,246.2 128.6,245.5 130.2,244.7 131.8,243.9 133.3,243.2 134.9,242.4 136.5,241.6 138.1,240.9 139.7,240.1 141.3,239.3 142.9,238.6 144.4,237.8 146.0,237.1 147.6,236.3 149.2,235.6 150.8,234.8 152.4,234.1 154.0,233.3 155.6,232.6 157.1,231.8 158.7,231.1 160.3,230.4 161.9,229.6 163.5,228.9 165.1,228.2 166.7,227.5 168.3,226.7 169.8,226.0 171.4,225.3 173.0,224.6 174.6,223.9 176.2,223.2 177.8,222.5 179.4,221.8 181.0,221.1 182.6,220.4 184.1,219.7 185.7,219.0 187.3,218.3 188.9,217.6 190.5,216.9 192.1,216.3 193.7,215.6 195.2,214.9 196.8,214.2 198.4,213.6 200.0,212.9 201.6,212.3 203.2,211.6 204.8,211.0 206.4,210.3 208.0,209.7 209.5,209.0 211.1,208.4 212.7,207.8 214.3,207.2 215.9,206.5 217.5,205.9 219.1,205.3 220.7,204.7 222.2,204.1 223.8,203.5 225.4,202.9 227.0,202.3 228.6,201.7 230.2,201.1 231.8,200.5 233.3,200.0 234.9,199.4 236.5,198.8 238.1,198.3 239.7,197.7 241.3,197.2 242.9,196.6 244.5,196.1 246.0,195.5 247.6,195.0 249.2,194.5 250.8,193.9 252.4,193.4 254.0,192.9 255.6,192.4 257.2,191.9 258.8,191.4 260.3,190.9 261.9,190.4 263.5,189.9 265.1,189.5 266.7,189.0 268.3,188.5 269.9,188.1 271.5,187.6 273.0,187.1 274.6,186.7 276.2,186.3 277.8,185.8 279.4,185.4 281.0,185.0 282.6,184.5 284.1,184.1 285.7,183.7 287.3,183.3 288.9,182.9 290.5,182.5 292.1,182.1 293.7,181.7 295.3,181.4 296.9,181.0 298.4,180.6 300.0,180.3 301.6,179.9 303.2,179.6 304.8,179.2 306.4,178.9 308.0,178.5 309.6,178.2 311.1,177.9 312.7,177.6 314.3,177.2 315.9,176.9 317.5,176.6 319.1,176.3 320.7,176.0 322.2,175.8 323.8,175.5 325.4,175.2 327.0,174.9 328.6,174.7 330.2,174.4 331.8,174.1 333.4,173.9 334.9,173.6 336.5,173.4 338.1,173.2 339.7,172.9 341.3,172.7 342.9,172.5 344.5,172.3 346.1,172.1 347.6,171.9 349.2,171.7 350.8,171.5 352.4,171.3 354.0,171.1 355.6,170.9 357.2,170.7 358.8,170.6 360.3,170.4 361.9,170.2 363.5,170.1 365.1,169.9 366.7,169.8 368.3,169.6 369.9,169.5 371.5,169.4 373.1,169.2 374.6,169.1 376.2,169.0 377.8,168.9 379.4,168.8 381.0,168.7 382.6,168.6 384.2,168.5 385.8,168.4 387.3,168.3 388.9,168.2 390.5,168.1 392.1,168.1 393.7,168.0 395.3,167.9 396.9,167.9 398.4,167.8 400.0,167.8 401.6,167.7 403.2,167.7 404.8,167.6 406.4,167.6 408.0,167.6 409.6,167.6 411.1,167.5 412.7,167.5 414.3,167.5 415.9,167.5 417.5,167.5 419.1,167.5 420.7,167.5 422.3,167.5 423.9,167.5 425.4,167.6 427.0,167.6 428.6,167.6 430.2,167.6 431.8,167.7 433.4,167.7 435.0,167.8 436.6,167.8 438.1,167.9 439.7,167.9 441.3,168.0 442.9,168.1 444.5,168.1 446.1,168.2 447.7,168.3 449.2,168.4 450.8,168.5 452.4,168.6 454.0,168.7 455.6,168.8 457.2,168.9 458.8,169.0 460.4,169.1 461.9,169.2 463.5,169.4 465.1,169.5 466.7,169.6 468.3,169.8 469.9,169.9 471.5,170.1 473.1,170.2 474.6,170.4 476.2,170.6 477.8,170.7 479.4,170.9 481.0,171.1 482.6,171.3 484.2,171.5 485.8,171.7 487.3,171.9 488.9,172.1 490.5,172.3 492.1,172.5 493.7,172.7 495.3,172.9 496.9,173.2 498.5,173.4 500.1,173.6 501.6,173.9 503.2,174.1 504.8,174.4 506.4,174.7 508.0,174.9 509.6,175.2 511.2,175.5 512.8,175.8 514.3,176.0 515.9,176.3 517.5,176.6 519.1,176.9 520.7,177.2 522.3,177.6 523.9,177.9 525.5,178.2 527.0,178.5 528.6,178.9 530.2,179.2 531.8,179.6 533.4,179.9 535.0,180.3 536.6,180.6 538.1,181.0 539.7,181.4 541.3,181.7 542.9,182.1 544.5,182.5 546.1,182.9 547.7,183.3 549.3,183.7 550.8,184.1 552.4,184.5 554.0,185.0 555.6,185.4 557.2,185.8 558.8,186.3 560.4,186.7 562.0,187.1 563.5,187.6 565.1,188.1 566.7,188.5 568.3,189.0 569.9,189.5 571.5,189.9 573.1,190.4 574.7,190.9 576.2,191.4 577.8,191.9 579.4,192.4 581.0,192.9 582.6,193.4 584.2,193.9 585.8,194.5 587.4,195.0 589.0,195.5 590.5,196.1 592.1,196.6 593.7,197.2 595.3,197.7 596.9,198.3 598.5,198.8 600.1,199.4 601.7,200.0 603.2,200.5 604.8,201.1 606.4,201.7 608.0,202.3 609.6,202.9 611.2,203.5 612.8,204.1 614.4,204.7 615.9,205.3 617.5,205.9 619.1,206.5 620.7,207.2 622.3,207.8 623.9,208.4 625.5,209.0 627.0,209.7 628.6,210.3 630.2,211.0 631.8,211.6 633.4,212.3 635.0,212.9 636.6,213.6 638.2,214.2 639.8,214.9 641.3,215.6 642.9,216.3 644.5,216.9 646.1,217.6 647.7,218.3 649.3,219.0 650.9,219.7 652.5,220.4 654.0,221.1 655.6,221.8 657.2,222.5 658.8,223.2 660.4,223.9 662.0,224.6 663.6,225.3 665.1,226.0 666.7,226.7 668.3,227.5 669.9,228.2 671.5,228.9 673.1,229.6 674.7,230.4 676.3,231.1 677.9,231.8 679.4,232.6 681.0,233.3 682.6,234.1 684.2,234.8 685.8,235.6 687.4,236.3 689.0,237.1 690.6,237.8 692.1,238.6 693.7,239.3 695.3,240.1 696.9,240.9 698.5,241.6 700.1,242.4 701.7,243.2 703.2,243.9 704.8,244.7 706.4,245.5 708.0,246.2 709.6,247.0 711.2,247.8 712.8,248.6 714.4,249.4 715.9,250.1 717.5,250.9 719.1,251.7 720.7,252.5 722.3,253.3 723.9,254.1 725.5,254.9 727.1,255.7 728.6,256.5 730.2,257.3 731.8,258.1 733.4,258.9 735.0,259.7" fill="none" stroke="#0d9488" stroke-width="3.5" stroke-linejoin="round"/>
+      <polyline points="100.0,409.7 101.6,409.9 103.2,410.1 104.8,410.3 106.4,410.6 107.9,410.8 109.5,411.0 111.1,411.2 112.7,411.5 114.3,411.7 115.9,412.0 117.5,412.2 119.1,412.4 120.6,412.7 122.2,412.9 123.8,413.2 125.4,413.5 127.0,413.7 128.6,414.0 130.2,414.2 131.8,414.5 133.3,414.8 134.9,415.0 136.5,415.3 138.1,415.6 139.7,415.9 141.3,416.1 142.9,416.4 144.4,416.7 146.0,417.0 147.6,417.3 149.2,417.6 150.8,417.9 152.4,418.2 154.0,418.5 155.6,418.8 157.1,419.1 158.7,419.4 160.3,419.7 161.9,420.0 163.5,420.3 165.1,420.7 166.7,421.0 168.3,421.3 169.8,421.6 171.4,422.0 173.0,422.3 174.6,422.6 176.2,423.0 177.8,423.3 179.4,423.7 181.0,424.0 182.6,424.4 184.1,424.7 185.7,425.1 187.3,425.4 188.9,425.8 190.5,426.2 192.1,426.5 193.7,426.9 195.2,427.3 196.8,427.6 198.4,428.0 200.0,428.4 201.6,428.8 203.2,429.2 204.8,429.6 206.4,429.9 208.0,430.3 209.5,430.7 211.1,431.1 212.7,431.5 214.3,431.9 215.9,432.4 217.5,432.8 219.1,433.2 220.7,433.6 222.2,434.0 223.8,434.4 225.4,434.9 227.0,435.3 228.6,435.7 230.2,436.1 231.8,436.6 233.3,437.0 234.9,437.4 236.5,437.9 238.1,438.3 239.7,438.8 241.3,439.2 242.9,439.7 244.5,440.1 246.0,440.6 247.6,441.0 249.2,441.5 250.8,441.9 252.4,442.4 254.0,442.9 255.6,443.3 257.2,443.8 258.8,444.3 260.3,444.7 261.9,445.2 263.5,445.7 265.1,446.2 266.7,446.6 268.3,447.1 269.9,447.6 271.5,448.1 273.0,448.6 274.6,449.0 276.2,449.5 277.8,450.0 279.4,450.5 281.0,451.0 282.6,451.5 284.1,452.0 285.7,452.5 287.3,453.0 288.9,453.5 290.5,454.0 292.1,454.5 293.7,455.0 295.3,455.5 296.9,456.0 298.4,456.5 300.0,457.0 301.6,457.5 303.2,458.0 304.8,458.5 306.4,459.0 308.0,459.5 309.6,460.0 311.1,460.5 312.7,461.0 314.3,461.6 315.9,462.1 317.5,462.6 319.1,463.1 320.7,463.6 322.2,464.1 323.8,464.6 325.4,465.1 327.0,465.7 328.6,466.2 330.2,466.7 331.8,467.2 333.4,467.7 334.9,468.2 336.5,468.7 338.1,469.3 339.7,469.8 341.3,470.3 342.9,470.8 344.5,471.3 346.1,471.8 347.6,472.4 349.2,472.9 350.8,473.4 352.4,473.9 354.0,474.4 355.6,474.9 357.2,475.5 358.8,476.0 360.3,476.5 361.9,477.0 363.5,477.5 365.1,478.0 366.7,478.5 368.3,479.1 369.9,479.6 371.5,480.1 373.1,480.6 374.6,481.1 376.2,481.6 377.8,482.2 379.4,482.7 381.0,483.2 382.6,483.7 384.2,484.2 385.8,484.7 387.3,485.2 388.9,485.8 390.5,486.3 392.1,486.8 393.7,487.3 395.3,487.8 396.9,488.3 398.4,488.8 400.0,489.4 401.6,489.9 403.2,490.4 404.8,490.9 406.4,491.4 408.0,491.9 409.6,492.4 411.1,492.9 412.7,493.5 414.3,494.0 415.9,494.5 417.5,495.0 419.1,495.5 420.7,496.0 422.3,496.5 423.9,497.1 425.4,497.6 427.0,498.1 428.6,498.6 430.2,499.1 431.8,499.6 433.4,500.1 435.0,500.6 436.6,501.2 438.1,501.7 439.7,502.2 441.3,502.7 442.9,503.2 444.5,503.7 446.1,504.2 447.7,504.8 449.2,505.3 450.8,505.8 452.4,506.3 454.0,506.8 455.6,507.3 457.2,507.8 458.8,508.4 460.4,508.9 461.9,509.4 463.5,509.9 465.1,510.4 466.7,510.9 468.3,511.5 469.9,512.0 471.5,512.5 473.1,513.0 474.6,513.5 476.2,514.0 477.8,514.5 479.4,515.1 481.0,515.6 482.6,516.1 484.2,516.6 485.8,517.1 487.3,517.6 488.9,518.2 490.5,518.7 492.1,519.2 493.7,519.7 495.3,520.2 496.9,520.7 498.5,521.3 500.1,521.8 501.6,522.3 503.2,522.8 504.8,523.3 506.4,523.8 508.0,524.3 509.6,524.9 511.2,525.4 512.8,525.9 514.3,526.4 515.9,526.9 517.5,527.4 519.1,527.9 520.7,528.4 522.3,529.0 523.9,529.5 525.5,530.0 527.0,530.5 528.6,531.0 530.2,531.5 531.8,532.0 533.4,532.5 535.0,533.0 536.6,533.5 538.1,534.0 539.7,534.5 541.3,535.0 542.9,535.5 544.5,536.0 546.1,536.5 547.7,537.0 549.3,537.5 550.8,538.0 552.4,538.5 554.0,539.0 555.6,539.5 557.2,540.0 558.8,540.5 560.4,541.0 562.0,541.4 563.5,541.9 565.1,542.4 566.7,542.9 568.3,543.4 569.9,543.8 571.5,544.3 573.1,544.8 574.7,545.3 576.2,545.7 577.8,546.2 579.4,546.7 581.0,547.1 582.6,547.6 584.2,548.1 585.8,548.5 587.4,549.0 589.0,549.4 590.5,549.9 592.1,550.3 593.7,550.8 595.3,551.2 596.9,551.7 598.5,552.1 600.1,552.6 601.7,553.0 603.2,553.4 604.8,553.9 606.4,554.3 608.0,554.7 609.6,555.1 611.2,555.6 612.8,556.0 614.4,556.4 615.9,556.8 617.5,557.2 619.1,557.6 620.7,558.1 622.3,558.5 623.9,558.9 625.5,559.3 627.0,559.7 628.6,560.1 630.2,560.4 631.8,560.8 633.4,561.2 635.0,561.6 636.6,562.0 638.2,562.4 639.8,562.7 641.3,563.1 642.9,563.5 644.5,563.8 646.1,564.2 647.7,564.6 649.3,564.9 650.9,565.3 652.5,565.6 654.0,566.0 655.6,566.3 657.2,566.7 658.8,567.0 660.4,567.4 662.0,567.7 663.6,568.0 665.1,568.4 666.7,568.7 668.3,569.0 669.9,569.3 671.5,569.7 673.1,570.0 674.7,570.3 676.3,570.6 677.9,570.9 679.4,571.2 681.0,571.5 682.6,571.8 684.2,572.1 685.8,572.4 687.4,572.7 689.0,573.0 690.6,573.3 692.1,573.6 693.7,573.9 695.3,574.1 696.9,574.4 698.5,574.7 700.1,575.0 701.7,575.2 703.2,575.5 704.8,575.8 706.4,576.0 708.0,576.3 709.6,576.5 711.2,576.8 712.8,577.1 714.4,577.3 715.9,577.6 717.5,577.8 719.1,578.0 720.7,578.3 722.3,578.5 723.9,578.8 725.5,579.0 727.1,579.2 728.6,579.4 730.2,579.7 731.8,579.9 733.4,580.1 735.0,580.3" fill="none" stroke="#0891b2" stroke-width="3.5" stroke-linejoin="round"/>
+      <circle cx="417.5" cy="167.5" r="6" fill="#0d9488"/>
+      <text x="417.5" y="214.3" font-size="20" fill="#0f766e" text-anchor="middle" font-family="Segoe UI, sans-serif">sommet : −9,5 dB</text>
+      <text x="173.2" y="145.7" font-size="20" fill="#b45309" text-anchor="middle" font-family="Segoe UI, sans-serif">+20 dB/déc</text>
+      <text x="662.2" y="145.7" font-size="20" fill="#b45309" text-anchor="middle" font-family="Segoe UI, sans-serif">−20 dB/déc</text>
+      <text x="100" y="42" font-size="22" font-weight="700" fill="#0f766e" font-family="Segoe UI, sans-serif">Gain G (dB)</text>
+      <text x="100" y="372" font-size="22" font-weight="700" fill="#0e7490" font-family="Segoe UI, sans-serif">Phase φ</text>
+      <text x="417.5" y="665" font-size="22" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">x = f / f₀ (échelle log)</text>
+      </svg>
+      <figcaption>Bode du pont de Wien : courbe réelle en trait plein, asymptotes en pointillés orange.</figcaption>
     </figure>
+    <div class="res">Asymptotes : +20 dB/déc en BF (\(\varphi = +90^\circ\)), −20 dB/déc en HF (\(\varphi = -90^\circ\)). Sommet à −9,5 dB en \(f_0\), avec \(\varphi = 0\).</div>
 
-    <p class="q">8) Sortie pour une sinusoïde d'entrée de 1 kHz</p>
-    <p>\(f=1\ \text{kHz}\approx f_0\) &rArr; \(x\approx1{,}005\approx1\) : on est <b>au sommet</b> de la bande.</p>
-    <div class="res">Gain \(|\underline H|\approx H_0=\dfrac13\), déphasage \(\approx0\).
-      Pour \(e(t)=E_m\cos(2\pi\,1000\,t)\) :
-      \[ s(t)\approx\frac{E_m}{3}\cos(2\pi\,1000\,t) \]
-      &mdash; <b>même fréquence, amplitude divisée par 3, quasiment en phase</b>.</div>
+    <p class="q">8) Signal de sortie pour une sinusoïde de 1 kHz</p>
+
+    <p class="etape">Étape 1 : où se trouve 1 kHz ?</p>
+    \[ x = \frac{f}{f_0} = \frac{1000}{995} \approx 1{,}005 \]
+    <p>On est pratiquement au sommet de la bande passante.</p>
+
+    <p class="etape">Étape 2 : gain et déphasage</p>
+    \[ Q\left(x - \frac1x\right) \approx \frac13\,(1{,}005 - 0{,}995) \approx 0{,}0035 \]
+    <p>Ce terme est très petit devant 1, donc :</p>
+    \[ |\underline H| = \frac{1/3}{\sqrt{1 + 0{,}0035^2}} \approx \frac13 \qquad\qquad \varphi = -\arctan(0{,}0035) \approx -0{,}2^\circ \]
+
+    <p class="etape">Étape 3 : le signal de sortie</p>
+    <p>Pour une entrée \(v_e(t) = E_m\cos(2\pi \times 1000\,t)\) :</p>
+    \[ v_s(t) \approx \frac{E_m}{3}\cos(2\pi \times 1000\,t) \]
+    <div class="res">Même fréquence, amplitude divisée par 3, et quasiment en phase avec l'entrée (−0,2°).</div>
     </div>
   </div>
   </section>
+
   <section class="block" id="ex6">
   <div class="exo-card">
     <div class="exo-head">Ex 6 — Filtre avec trois dipôles en série <span class="diff">V : 19.2</span></div>
@@ -1066,6 +1195,6 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
 <script src="../assets/gate.js"></script>
 <script src="../assets/catalogue.js?v=2"></script>
 <script src="../assets/nav.js?v=2"></script>
-<script src="../assets/lecture.js?v=2"></script>
+<script src="../assets/lecture.js?v=3"></script>
 </body>
 </html>

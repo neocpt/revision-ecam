@@ -75,18 +75,26 @@
     som = document.createElement("nav");
     som.className = "lecture-sommaire";
     var html = '<div class="ls-titre">Sommaire</div>';
+    function texteTete(h) {
+      return h.firstChild && h.firstChild.nodeType === 3 && h.firstChild.textContent.trim()
+        ? h.firstChild.textContent : h.textContent;
+    }
     secs.forEach(function (s) {
       var t = s.querySelector("h2, .memo-head");
-      if (!t) return;
-      html += '<a href="#' + s.id + '" data-id="' + s.id + '">' + esc(t.textContent.trim()) + "</a>";
+      var tete0 = s.querySelector(".exo-head");
+      // section sans titre h2 (ex. une section par exercice) : le titre de l'exercice sert d'entrée
+      var label = t ? t.textContent : (tete0 ? texteTete(tete0) : "");
+      if (!label.trim()) return;
+      html += '<a href="#' + s.id + '" data-id="' + s.id + '">' + esc(label.trim()) + "</a>";
       // sous-parties : titres du cours (h3) et exercices, dans l'ordre de la page
       s.querySelectorAll("h3, .exo-card").forEach(function (el) {
         if (el.tagName === "H3" && el.closest(".exo-card, .memo-sheet")) return;
+        if (!t && el.classList.contains("exo-card") && el.querySelector(".exo-head") === tete0) return;
         var txt;
         if (el.classList.contains("exo-card")) {
           var h = el.querySelector(".exo-head");
           if (!h) return;
-          txt = h.firstChild && h.firstChild.nodeType === 3 ? h.firstChild.textContent : h.textContent;
+          txt = texteTete(h);
         } else {
           txt = el.textContent;
         }
