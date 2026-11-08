@@ -211,30 +211,43 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
       <div class="exo-body">
         <p class="enonce">Retrouver le jeu de coefficients de l'ED du montage ci-dessus.</p>
 
-        <p class="q">1) Cadre et notations</p>
-        <p>On note \(s\) la tension de sortie (aux bornes du parallèle \(C\parallel L\), donc aussi la
-        tension commune à \(C\) et \(L\)). Le courant qui sort de \(R\) se partage entre la branche
-        capacitive \(i_C\) et la branche inductive \(i_L\).</p>
+        <p class="q">Coefficients \(D_0, D_1, D_2, N_0, N_1\) de l'équation différentielle</p>
 
-        <p class="q">2) Loi des nœuds</p>
-        <p>Le courant dans \(R\) vaut \(i_R=\dfrac{e-s}{R}\). Au nœud de sortie :</p>
-        \[ i_R=i_C+i_L \qquad\Longrightarrow\qquad \frac{e-s}{R}=i_C+i_L \]
+        <p class="etape">Étape 1 : notations</p>
+        <p>On note \(s\) la tension de sortie. Elle est prise aux bornes du parallèle \(C\parallel L\) : c'est la même tension aux bornes de \(C\) et de \(L\).</p>
+        <p>Le courant \(i_R\) qui traverse \(R\) se partage en deux : \(i_C\) dans le condensateur et \(i_L\) dans la bobine.</p>
 
-        <p class="q">3) Lois de comportement des dipôles</p>
-        <p>On remplace les <b>intensités</b> par des <b>tensions</b> (la grandeur intéressante) :</p>
-        \[ i_C=C\,\frac{ds}{dt}\ ,\qquad s=L\,\frac{di_L}{dt}\Rightarrow i_L=\frac1L\!\int s\,dt \]
-        \[ \frac{e-s}{R}=C\frac{ds}{dt}+\frac1L\!\int s\,dt \]
+        <p class="etape">Étape 2 : loi des nœuds</p>
+        <div class="rappel"><span class="lab">Rappel · loi d'Ohm</span>\[ i = \frac{U}{R} \]</div>
+        <p>La tension aux bornes de \(R\) vaut \(e - s\), donc :</p>
+        \[ i_R = \frac{e - s}{R} \]
+        <p>Au nœud de sortie, le courant entrant égale la somme des courants sortants :</p>
+        \[ \frac{e - s}{R} = i_C + i_L \]
 
-        <p class="q">4) Multiplication par \(R\) puis dérivation (pour supprimer l'intégrale)</p>
-        \[ e-s=RC\frac{ds}{dt}+\frac{R}{L}\!\int s\,dt \]
-        \[ \frac{de}{dt}-\frac{ds}{dt}=RC\frac{d^2s}{dt^2}+\frac{R}{L}\,s \]
+        <p class="etape">Étape 3 : lois de comportement</p>
+        <div class="rappel"><span class="lab">Rappel · condensateur et bobine</span>\[ i_C = C\,\frac{du_C}{dt} \qquad\qquad u_L = L\,\frac{di_L}{dt} \]</div>
+        <p>Ici \(u_C = u_L = s\). On exprime les courants avec \(s\) :</p>
+        \[ i_C = C\,\frac{ds}{dt} \qquad\qquad i_L = \frac1L\int s\,dt \]
+        <p>On remplace dans la loi des nœuds :</p>
+        \[ \frac{e - s}{R} = C\,\frac{ds}{dt} + \frac1L\int s\,dt \]
 
-        <p class="q">5) Regroupement sous la forme \(D_0s+D_1\dot s+D_2\ddot s=N_0e+N_1\dot e\)</p>
-        \[ \boxed{\,RC\,\frac{d^2s}{dt^2}+\frac{ds}{dt}+\frac{R}{L}\,s=\frac{de}{dt}\,} \]
-        <div class="res">Par identification :
-        \[ D_0=\frac{R}{L}\ ,\quad D_1=1\ ,\quad D_2=RC\ ,\quad N_0=0\ ,\quad N_1=1. \]
-        <b>Filtre d'ordre 2</b> (\(D_2\neq0\)), avec un numérateur en \(\dot e\) seul ⇒ comportement
-        de type <b>passe-bande</b> (confirmé en Q2).</div>
+        <p class="etape">Étape 4 : supprimer l'intégrale</p>
+        <p>On multiplie par \(R\) :</p>
+        \[ e - s = RC\,\frac{ds}{dt} + \frac{R}{L}\int s\,dt \]
+        <p>On dérive chaque terme par rapport au temps :</p>
+        \[ \frac{de}{dt} - \frac{ds}{dt} = RC\,\frac{d^2s}{dt^2} + \frac{R}{L}\,s \]
+
+        <p class="etape">Étape 5 : regrouper et identifier</p>
+        <p>On met tous les termes en \(s\) à gauche :</p>
+        \[ RC\,\frac{d^2s}{dt^2} + \frac{ds}{dt} + \frac{R}{L}\,s = \frac{de}{dt} \]
+        <p>On compare à la forme \(D_0 s + D_1\dot s + D_2\ddot s = N_0 e + N_1\dot e\) :</p>
+        <ul>
+          <li>\(D_0 = \dfrac{R}{L}\)</li>
+          <li>\(D_1 = 1\)</li>
+          <li>\(D_2 = RC\)</li>
+          <li>\(N_0 = 0\) et \(N_1 = 1\)</li>
+        </ul>
+        <div class="res">\(D_0 = \dfrac{R}{L},\ D_1 = 1,\ D_2 = RC,\ N_0 = 0,\ N_1 = 1\). Filtre d'ordre 2 (\(D_2 \neq 0\)). Le second membre ne contient que \(\dot e\) : comportement de type <b>passe-bande</b>, confirmé en Q2.</div>
       </div>
     </div>
 
@@ -245,35 +258,35 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
         <p class="enonce">Retrouver la FTH et l'écrire sous la forme
         \(\displaystyle \underline H=\frac{1}{1+jQ\!\left(\frac{\omega}{\omega_0}-\frac{\omega_0}{\omega}\right)}\).</p>
 
-        <p class="q">1) Impédance du parallèle \(C\parallel L\)</p>
-        \[ \underline Z_{p}=\frac{\underline Z_C\,\underline Z_L}{\underline Z_C+\underline Z_L}
-           =\frac{\frac{1}{jC\omega}\cdot jL\omega}{\frac{1}{jC\omega}+jL\omega}
-           =\frac{\frac{L}{C}}{\frac{1-LC\omega^2}{jC\omega}}
-           =\frac{jL\omega}{1-LC\omega^2} \]
+        <p class="q">Fonction de transfert sous forme canonique</p>
 
-        <p class="q">2) Pont diviseur de tension</p>
-        \[ \underline H=\frac{\underline Z_p}{R+\underline Z_p}
-           =\frac{jL\omega}{R\left(1-LC\omega^2\right)+jL\omega} \]
+        <p class="etape">Étape 1 : impédance du parallèle \(C\parallel L\)</p>
+        <div class="rappel"><span class="lab">Rappel · deux impédances en parallèle</span>\[ \underline Z = \frac{\underline Z_a\,\underline Z_b}{\underline Z_a + \underline Z_b} \]</div>
+        <p>Avec \(\underline Z_C = \dfrac{1}{jC\omega}\) et \(\underline Z_L = jL\omega\) :</p>
+        \[ \underline Z_p = \frac{\frac{1}{jC\omega}\times jL\omega}{\frac{1}{jC\omega} + jL\omega} = \frac{\frac{L}{C}}{\frac{1 - LC\omega^2}{jC\omega}} \]
+        \[ \underline Z_p = \frac{jL\omega}{1 - LC\omega^2} \]
 
-        <p class="q">3) Mise sous forme canonique — on divise haut et bas par \(jL\omega\)</p>
-        \[ \underline H=\frac{1}{1+\dfrac{R(1-LC\omega^2)}{jL\omega}}
-           =\frac{1}{1+jR\!\left(C\omega-\dfrac{1}{L\omega}\right)} \]
-        <p><em>(on a utilisé \(\tfrac1j=-j\), d'où
-        \(\tfrac{R}{jL\omega}=-j\tfrac{R}{L\omega}\) et \(-\tfrac{RC\omega}{j}=+jRC\omega\)).</em></p>
+        <p class="etape">Étape 2 : diviseur de tension</p>
+        <div class="rappel"><span class="lab">Rappel · pont diviseur de tension (sortie non chargée)</span>\[ \underline V_s = \frac{\underline Z_2}{\underline Z_1 + \underline Z_2}\,\underline V_e \]</div>
+        <p>Ici \(\underline Z_1 = R\) et \(\underline Z_2 = \underline Z_p\) :</p>
+        \[ \underline H = \frac{\underline Z_p}{R + \underline Z_p} = \frac{jL\omega}{R\left(1 - LC\omega^2\right) + jL\omega} \]
 
-        <p class="q">4) Identification de \(\omega_0\) et \(Q\)</p>
-        <p>On veut faire apparaître \(\dfrac{\omega}{\omega_0}-\dfrac{\omega_0}{\omega}\). Avec
-        \(\omega_0=\dfrac{1}{\sqrt{LC}}\) on a \(RC\omega_0=\dfrac{R}{L\omega_0}=R\sqrt{\tfrac{C}{L}}\),
-        donc :</p>
-        \[ R\!\left(C\omega-\frac{1}{L\omega}\right)=R\sqrt{\tfrac{C}{L}}\left(\frac{\omega}{\omega_0}-\frac{\omega_0}{\omega}\right) \]
-        <div class="res"><b>Résultat.</b>
-        \[ \boxed{\ \underline H=\dfrac{1}{1+jQ\!\left(\dfrac{\omega}{\omega_0}-\dfrac{\omega_0}{\omega}\right)}
-          \quad\text{avec}\quad \omega_0=\dfrac{1}{\sqrt{LC}}\ ,\quad Q=R\sqrt{\dfrac{C}{L}}=RC\omega_0=\dfrac{R}{L\omega_0}\ }\]
-        C'est bien un <b>passe-bande 2ᵈ ordre</b>, de gain statique \(H_0=1\) (soit \(0\) dB au maximum).</div>
-        <div class="warnbox"><span class="lab">Piège à ne pas confondre</span>
-        Pour ce <b>tank parallèle</b>, \(Q=R\sqrt{C/L}\) : un <b>grand \(R\)</b> ⇒ \(Q\) grand ⇒ filtre
-        sélectif. Pour le <b>RLC série</b> du TP, c'est l'inverse : \(Q=\dfrac1R\sqrt{L/C}\) (un grand
-        \(R\) amortit). Toujours vérifier la topologie avant d'écrire \(Q\).</div>
+        <p class="etape">Étape 3 : faire apparaître « 1 + … » au dénominateur</p>
+        <p>On divise en haut et en bas par \(jL\omega\) :</p>
+        \[ \underline H = \frac{1}{1 + \dfrac{R\,(1 - LC\omega^2)}{jL\omega}} \]
+        <p>Comme \(\dfrac1j = -j\) :</p>
+        \[ \frac{R\,(1 - LC\omega^2)}{jL\omega} = -j\,\frac{R}{L\omega} + j\,RC\omega = jR\left(C\omega - \frac{1}{L\omega}\right) \]
+        \[ \underline H = \frac{1}{1 + jR\left(C\omega - \dfrac{1}{L\omega}\right)} \]
+
+        <p class="etape">Étape 4 : identification de \(\omega_0\) et \(Q\)</p>
+        <div class="rappel"><span class="lab">Rappel · forme canonique d'un passe-bande du 2ᵉ ordre</span>\[ \underline H = \frac{H_0}{1 + jQ\left(\dfrac{\omega}{\omega_0} - \dfrac{\omega_0}{\omega}\right)} \]</div>
+        <p>On pose \(\omega_0 = \dfrac{1}{\sqrt{LC}}\). Alors :</p>
+        \[ RC\,\omega_0 = \frac{R}{L\,\omega_0} = R\sqrt{\frac{C}{L}} \]
+        <p>On peut donc factoriser :</p>
+        \[ R\left(C\omega - \frac{1}{L\omega}\right) = R\sqrt{\frac{C}{L}}\left(\frac{\omega}{\omega_0} - \frac{\omega_0}{\omega}\right) \]
+        <div class="res">\[ \underline H = \frac{1}{1 + jQ\left(\dfrac{\omega}{\omega_0} - \dfrac{\omega_0}{\omega}\right)}, \qquad \omega_0 = \frac{1}{\sqrt{LC}}, \qquad Q = R\sqrt{\frac{C}{L}} = RC\omega_0 = \frac{R}{L\omega_0} \]
+        Passe-bande du 2ᵉ ordre, de gain maximal \(H_0 = 1\) (0 dB).</div>
+        <div class="warnbox"><span class="lab">Piège</span> Pour ce circuit bouchon (\(L\parallel C\)), \(Q = R\sqrt{C/L}\) : un grand \(R\) donne un grand \(Q\), donc un filtre sélectif. Pour le RLC série du TP, c'est l'inverse : \(Q = \dfrac1R\sqrt{L/C}\). On vérifie toujours le montage avant d'écrire \(Q\).</div>
       </div>
     </div>
 
@@ -284,27 +297,42 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
         <p class="enonce">Identifier le filtre de Q2 et tracer ses diagrammes de Bode en gain et en
         phase pour \(Q=5\) et \(Q=0{,}5\).</p>
 
-        <p><b>Filtre :</b> passe-bande 2ᵈ ordre, \(|\underline H|_{\max}=1\) en \(x=1\) (\(\omega=\omega_0\)).
-        Avec \(x=\omega/\omega_0\) :</p>
-        \[ G_{dB}(x)=20\log|\underline H|=-10\log\!\Big[1+Q^2\big(x-\tfrac1x\big)^2\Big]\ ,\qquad
-           \varphi(x)=-\arctan\!\Big[Q\big(x-\tfrac1x\big)\Big] \]
-        <h4>Points remarquables</h4>
+        <p class="q">Nature du filtre et diagrammes de Bode</p>
+
+        <p class="etape">Étape 1 : nature du filtre</p>
+        <p>La forme trouvée en Q2 est celle d'un <b>passe-bande du 2ᵉ ordre</b>. Son module est maximal, égal à 1, pour \(\omega = \omega_0\).</p>
+
+        <p class="etape">Étape 2 : gain et phase en fonction de \(x\)</p>
+        <div class="rappel"><span class="lab">Rappel · gain en décibels et phase</span>\[ G_{dB} = 20\log|\underline H| \qquad\qquad \varphi = \arg\underline H \]</div>
+        <p>On pose \(x = \omega/\omega_0\) :</p>
+        \[ |\underline H| = \frac{1}{\sqrt{1 + Q^2\left(x - \frac1x\right)^2}} \]
+        \[ G_{dB}(x) = -10\log\left[1 + Q^2\left(x - \tfrac1x\right)^2\right] \]
+        \[ \varphi(x) = -\arctan\left[Q\left(x - \tfrac1x\right)\right] \]
+
+        <p class="etape">Étape 3 : comportements limites</p>
+        <ul>
+          <li>Basses fréquences (\(x \ll 1\)) : \(\underline H \approx j\,x/Q\). Pente <b>+20 dB/décade</b>, phase \(+90^\circ\).</li>
+          <li>Résonance (\(x = 1\)) : \(\underline H = 1\). Gain <b>0 dB</b> (maximum), phase \(0^\circ\).</li>
+          <li>Hautes fréquences (\(x \gg 1\)) : \(\underline H \approx -j/(Qx)\). Pente <b>−20 dB/décade</b>, phase \(-90^\circ\).</li>
+        </ul>
         <div class="overflow">
         <table>
           <tr><th>Régime</th><th>\(x\to 0\) (BF)</th><th>\(x=1\) (résonance)</th><th>\(x\to\infty\) (HF)</th></tr>
-          <tr><td><b>Gain</b></td><td>\(\approx x/Q\) → pente \(+20\) dB/déc</td><td>\(0\) dB (max)</td><td>\(\approx 1/(Qx)\) → pente \(-20\) dB/déc</td></tr>
+          <tr><td><b>Gain</b></td><td>\(\approx x/Q\) : pente \(+20\) dB/déc</td><td>\(0\) dB (max)</td><td>\(\approx 1/(Qx)\) : pente \(-20\) dB/déc</td></tr>
           <tr><td><b>Phase</b></td><td>\(+90^\circ\)</td><td>\(0^\circ\)</td><td>\(-90^\circ\)</td></tr>
         </table>
         </div>
+
+        <p class="etape">Étape 4 : influence de \(Q\)</p>
+        <div class="rappel"><span class="lab">Rappel · bande passante d'un passe-bande</span>\[ \Delta x = \frac{1}{Q} \qquad\text{soit}\qquad \Delta\omega = \frac{\omega_0}{Q} \]</div>
         <ul>
-          <li><b>\(Q=5\)</b> : résonance <b>marquée et étroite</b> (filtre sélectif), bande passante
-          réduite \(\Delta x=1/Q=0{,}2\).</li>
-          <li><b>\(Q=0{,}5\)</b> : résonance <b>plate et large</b> (peu sélectif), bande passante
-          \(\Delta x=1/Q=2\).</li>
+          <li>\(Q = 5\) : \(\Delta x = 0{,}2\). Résonance <b>étroite et marquée</b> : filtre sélectif.</li>
+          <li>\(Q = 0{,}5\) : \(\Delta x = 2\). Résonance <b>plate et large</b> : filtre peu sélectif.</li>
         </ul>
+        <div class="res">Passe-bande du 2ᵉ ordre : asymptotes +20 dB/déc en BF et −20 dB/déc en HF, sommet à 0 dB en \(x = 1\). Plus \(Q\) est grand, plus la bande passante \(\Delta x = 1/Q\) est étroite.</div>
         <div class="note"><span class="lab">Vois-le en direct</span> Le widget interactif juste en dessous
-        (<a href="#bode">§ Bode interactif</a>) trace exactement ces deux courbes — bouge le curseur
-        \(Q\) ou clique les préréglages <b>Q = 5</b> / <b>Q = 0,5</b>.</div>
+        (<a href="#bode">§ Bode interactif</a>) trace exactement ces deux courbes. On peut bouger le curseur
+        \(Q\) ou cliquer les préréglages <b>Q = 5</b> / <b>Q = 0,5</b>.</div>
       </div>
     </div>
 
@@ -315,25 +343,28 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
         <p class="enonce">Rappeler \(\log(1),\log(2),\log(5),\log(10)\), illustrer la correspondance
         axes \(x\) ↔ \(\log(x)\), puis montrer qu'à la coupure le gain vaut le gain max \(-3\) dB.</p>
 
-        <p class="q">1) Valeurs de référence (log décimal)</p>
+        <p class="q">1) Valeurs de référence du logarithme décimal</p>
         <div class="overflow"><table>
           <tr><th>\(x\)</th><th>1</th><th>2</th><th>5</th><th>10</th></tr>
           <tr><td><b>\(\log x\)</b></td><td>0</td><td>≈ 0,301</td><td>≈ 0,699</td><td>1</td></tr>
         </table></div>
-        <p>Astuce : \(\log5=\log\frac{10}{2}=1-\log2\), et \(\log2+\log5=1\). Une décade
-        (\(\times10\)) correspond à \(+1\) sur l'axe \(\log\) ; le milieu géométrique visuel d'une
-        décade tombe vers \(x\approx3{,}16\) (\(\log\approx0{,}5\)).</p>
+        <div class="rappel"><span class="lab">Rappel · propriétés du logarithme</span>\[ \log(ab) = \log a + \log b \qquad \log\frac{a}{b} = \log a - \log b \qquad \log 10 = 1 \]</div>
+        <p>On n'a qu'une valeur à retenir, \(\log 2 \approx 0{,}301\). Les autres s'en déduisent :</p>
+        \[ \log 5 = \log\frac{10}{2} = 1 - \log 2 \approx 0{,}699 \]
+        <p>Correspondance des axes :</p>
+        <ul>
+          <li>Une décade (\(x\) multiplié par 10) correspond à \(+1\) sur l'axe \(\log x\).</li>
+          <li>Le milieu visuel d'une décade est en \(x = \sqrt{10} \approx 3{,}16\), car \(\log 3{,}16 \approx 0{,}5\).</li>
+        </ul>
+        <div class="res">\(\log 1 = 0\), \(\log 2 \approx 0{,}301\), \(\log 5 \approx 0{,}699\), \(\log 10 = 1\).</div>
 
-        <p class="q">2) Le gain « –3 dB » à la pulsation de coupure</p>
-        <p>Par définition, aux pulsations de coupure le gain (linéaire) vaut \(\dfrac{1}{\sqrt2}\) du
-        gain maximal. En décibels :</p>
-        \[ 20\log\!\left(\frac{|\underline H|_{\max}}{\sqrt2}\right)
-           =20\log|\underline H|_{\max}-20\log\sqrt2
-           =G_{\max}-20\times\frac{\log 2}{2} \]
-        \[ 20\times\frac{0{,}301}{2}\approx 3{,}01\ \text{dB} \]
-        <div class="res"><b>Conclusion.</b> \(\ G_{dB}(\text{coupure})=G_{\max}-3\ \text{dB}\).
-        Le « \(-3\) dB » n'est rien d'autre que le facteur \(1/\sqrt2\) en puissance :
-        \(\left(\tfrac{1}{\sqrt2}\right)^2=\tfrac12\) ⇒ moitié de la puissance.</div>
+        <p class="q">2) Le gain « −3 dB » à la coupure</p>
+        <div class="rappel"><span class="lab">Rappel · fréquence de coupure</span>À la coupure, le gain linéaire vaut le gain maximal divisé par \(\sqrt2\) : \(|\underline H|_c = \dfrac{|\underline H|_{max}}{\sqrt2}\).</div>
+        <p>On passe en décibels :</p>
+        \[ G_{dB,c} = 20\log\left(\frac{|\underline H|_{max}}{\sqrt2}\right) = 20\log|\underline H|_{max} - 20\log\sqrt2 \]
+        <p>Or \(\log\sqrt2 = \dfrac12\log 2\) :</p>
+        \[ 20\log\sqrt2 = 10\log 2 \approx 10 \times 0{,}301 \approx 3{,}01\ \text{dB} \]
+        <div class="res">\(G_{dB}(\text{coupure}) = G_{max} - 3\ \text{dB}\). Le facteur \(1/\sqrt2\) sur l'amplitude correspond à \(\left(1/\sqrt2\right)^2 = 1/2\) sur la puissance : à la coupure, la puissance transmise est divisée par deux.</div>
       </div>
     </div>
 
@@ -342,18 +373,23 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
       <div class="exo-head">✏️ Q5 — Retrouver l'ED (Q1) à partir de la FTH (Q2) <span class="diff">♦</span></div>
       <div class="exo-body">
         <p class="enonce">Retrouver l'équation différentielle de Q1 à partir de la FTH de Q2.</p>
-        <p class="q">1) Repartir de la forme « impédances » de Q2</p>
-        \[ \underline H=\frac{\underline s}{\underline e}
-           =\frac{jL\omega}{R(1-LC\omega^2)+jL\omega} \]
-        <p>On « croise » (produit en croix) :</p>
-        \[ \underline s\Big[R+jL\omega-RLC\omega^2\Big]=jL\omega\,\underline e \]
-        <p class="q">2) Traduction \(j\omega\to \dfrac{d}{dt}\), \((j\omega)^2\to\dfrac{d^2}{dt^2}\)</p>
-        \[ R\,s+L\frac{ds}{dt}+RLC\frac{d^2s}{dt^2}=L\frac{de}{dt} \]
-        <p class="q">3) Division par \(L\)</p>
-        \[ \boxed{\,RC\frac{d^2s}{dt^2}+\frac{ds}{dt}+\frac{R}{L}s=\frac{de}{dt}\,} \]
-        <div class="res">On retrouve <b>exactement</b> l'ED de Q1 : la description temporelle (ED) et
-        la description fréquentielle (FTH) sont deux visages du <b>même</b> SLCI, reliés par
-        \(\dfrac{d}{dt}\leftrightarrow j\omega\).</div>
+
+        <p class="q">De la FTH à l'équation différentielle</p>
+
+        <p class="etape">Étape 1 : repartir de la forme « impédances »</p>
+        <p>D'après Q2 :</p>
+        \[ \underline H = \frac{\underline s}{\underline e} = \frac{jL\omega}{R\,(1 - LC\omega^2) + jL\omega} \]
+        <p>Produit en croix :</p>
+        \[ \underline s\left[R + jL\omega - RLC\omega^2\right] = jL\omega\,\underline e \]
+
+        <p class="etape">Étape 2 : retour au temps</p>
+        <div class="rappel"><span class="lab">Rappel · du complexe au temporel</span>\[ j\omega \;\longleftrightarrow\; \frac{d}{dt} \qquad\qquad (j\omega)^2 = -\omega^2 \;\longleftrightarrow\; \frac{d^2}{dt^2} \]</div>
+        <p>On écrit \(-RLC\omega^2 = RLC\,(j\omega)^2\), puis on traduit chaque terme :</p>
+        \[ R\,s + L\,\frac{ds}{dt} + RLC\,\frac{d^2s}{dt^2} = L\,\frac{de}{dt} \]
+
+        <p class="etape">Étape 3 : diviser par \(L\)</p>
+        \[ RC\,\frac{d^2s}{dt^2} + \frac{ds}{dt} + \frac{R}{L}\,s = \frac{de}{dt} \]
+        <div class="res">On retrouve exactement l'ED de Q1. L'équation différentielle et la FTH décrivent le même système, reliées par \(\dfrac{d}{dt} \leftrightarrow j\omega\).</div>
       </div>
     </div>
   </section>
@@ -406,81 +442,136 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
     <div class="exo-card">
       <div class="exo-head">P1.1 — Schéma, \(\omega_0\) et \(Q\)</div>
       <div class="exo-body">
-        <p><b>Montage :</b> GBF → \(R\), \(L\), \(C\) en série ; l'oscilloscope mesure \(e\) sur CH1
-        (aux bornes du GBF) et \(s\) sur CH2 <b>aux bornes de \(R\)</b> (masses communes).</p>
-        <p>La sortie aux bornes de \(R\) donne \(\underline H=\dfrac{R}{R+j(L\omega-\frac{1}{C\omega})}\),
-        maximale quand la partie imaginaire s'annule ⇒ <b>résonance d'intensité</b> :</p>
-        \[ L\omega_0=\frac{1}{C\omega_0}\ \Longrightarrow\
-           \boxed{\omega_0=\frac{1}{\sqrt{LC}}}\ ,\qquad
-           \boxed{Q=\frac{1}{R}\sqrt{\frac{L}{C}}} \]
+        <p class="enonce">Montage : GBF, puis \(R\), \(L\), \(C\) en série. L'oscilloscope mesure \(e\) sur CH1 (aux bornes du GBF) et \(s\) sur CH2, aux bornes de \(R\) (masses communes). Donner \(\omega_0\) et \(Q\).</p>
+
+        <p class="q">Pulsation propre \(\omega_0\) et facteur de qualité \(Q\)</p>
+
+        <p class="etape">Étape 1 : fonction de transfert</p>
+        <div class="rappel"><span class="lab">Rappel · pont diviseur de tension (série)</span>\[ \underline V_s = \frac{\underline Z_s}{\underline Z_{tot}}\,\underline V_e \]</div>
+        <p>La sortie est prise sur \(R\), et l'impédance totale vaut \(R + jL\omega + \dfrac{1}{jC\omega}\) :</p>
+        \[ \underline H = \frac{R}{R + j\left(L\omega - \dfrac{1}{C\omega}\right)} \]
+
+        <p class="etape">Étape 2 : condition de résonance</p>
+        <p>\(|\underline H|\) est maximal quand la partie imaginaire du dénominateur s'annule (résonance d'intensité) :</p>
+        \[ L\omega_0 = \frac{1}{C\omega_0} \]
+        \[ \omega_0 = \frac{1}{\sqrt{LC}} \]
+
+        <p class="etape">Étape 3 : facteur de qualité</p>
+        <p>On divise en haut et en bas par \(R\), puis on fait apparaître \(\dfrac{\omega}{\omega_0} - \dfrac{\omega_0}{\omega}\) :</p>
+        \[ \underline H = \frac{1}{1 + j\,\dfrac{L\omega_0}{R}\left(\dfrac{\omega}{\omega_0} - \dfrac{\omega_0}{\omega}\right)} \]
+        <div class="res">\(\omega_0 = \dfrac{1}{\sqrt{LC}}\) et \(Q = \dfrac{L\omega_0}{R} = \dfrac1R\sqrt{\dfrac{L}{C}}\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">P1.2 — Calcul de \(C\) puis \(R\) (\(L=0{,}25\) H, \(f_0=2{,}0\) kHz, \(Q=0{,}5\))</div>
       <div class="exo-body">
+        <p class="enonce">On impose \(L = 0{,}25\) H, \(f_0 = 2{,}0\) kHz et \(Q = 0{,}5\). Calculer \(C\) puis \(R\).</p>
+
         <p class="q">1) Pulsation cible</p>
-        \[ \omega_0=2\pi f_0=2\pi(2000)=1{,}257\times10^{4}\ \text{rad·s}^{-1} \]
-        <p class="q">2) Condensateur (depuis \(\omega_0=1/\sqrt{LC}\))</p>
-        \[ C=\frac{1}{L\,\omega_0^{2}}=\frac{1}{0{,}25\times(1{,}257\times10^4)^2}
-           \approx \boxed{2{,}53\times10^{-8}\ \text{F}=25{,}3\ \text{nF}} \]
-        <p class="q">3) Résistance (depuis \(Q=\frac1R\sqrt{L/C}\))</p>
-        \[ \sqrt{\tfrac{L}{C}}=\sqrt{\tfrac{0{,}25}{2{,}53\times10^{-8}}}\approx 3{,}14\times10^3\ \Omega
-           \quad(\,=L\omega_0\,) \]
-        \[ R=\frac{1}{Q}\sqrt{\tfrac{L}{C}}=\frac{3{,}14\times10^3}{0{,}5}
-           \approx \boxed{6{,}28\ \text{k}\Omega} \]
+        <div class="rappel"><span class="lab">Rappel · pulsation et fréquence</span>\[ \omega = 2\pi f \]</div>
+        \[ \omega_0 = 2\pi \times 2000 \approx 1{,}257\times10^{4}\ \text{rad·s}^{-1} \]
+
+        <p class="q">2) Condensateur</p>
+        <div class="rappel"><span class="lab">Rappel · pulsation propre</span>\[ \omega_0 = \frac{1}{\sqrt{LC}} \]</div>
+        <p>On isole \(C\) :</p>
+        \[ C = \frac{1}{L\,\omega_0^{2}} \]
+        \[ C = \frac{1}{0{,}25\times(1{,}257\times10^4)^2} \approx 2{,}53\times10^{-8}\ \text{F} \]
+        <div class="res">\(C \approx 25{,}3\) nF.</div>
+
+        <p class="q">3) Résistance</p>
+        <div class="rappel"><span class="lab">Rappel · facteur de qualité du RLC série</span>\[ Q = \frac1R\sqrt{\frac{L}{C}} \]</div>
+        <p>On calcule d'abord \(\sqrt{L/C}\), qui vaut aussi \(L\omega_0\) :</p>
+        \[ \sqrt{\frac{L}{C}} = \sqrt{\frac{0{,}25}{2{,}53\times10^{-8}}} \approx 3{,}14\times10^3\ \Omega \]
+        <p>On isole \(R\) :</p>
+        \[ R = \frac{1}{Q}\sqrt{\frac{L}{C}} = \frac{3{,}14\times10^3}{0{,}5} \approx 6{,}28\times10^3\ \Omega \]
+        <div class="res">\(R \approx 6{,}28\) kΩ.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">P1.3 — Gain et déphasage attendus à \(f=f_0\)</div>
       <div class="exo-body">
-        <p>À la résonance, \(L\omega_0=1/C\omega_0\) : l'impédance série se réduit à \(R\), la tension
-        de sortie \(=\) tension d'entrée.</p>
-        <div class="res"><b>Attendu :</b> \(\;G=\dfrac{S_m}{E_m}=1\;\) et \(\;\Delta\varphi=\varphi_s-\varphi_e=0^\circ\).
-        Avec \(E_m=3{,}0\) V ⇒ \(S_m\approx3{,}0\) V. On vérifie que les valeurs mesurées sont proches.</div>
+        <p class="enonce">Quels gain et déphasage attend-on à \(f = f_0\) ?</p>
+
+        <p class="q">Gain et déphasage à la résonance</p>
+        <p class="etape">Étape 1 : impédance à la résonance</p>
+        <p>À \(f_0\), on a \(L\omega_0 = \dfrac{1}{C\omega_0}\) : les impédances de \(L\) et de \(C\) se compensent. L'impédance totale se réduit à \(R\).</p>
+        <p class="etape">Étape 2 : fonction de transfert</p>
+        \[ \underline H(\omega_0) = \frac{R}{R} = 1 \]
+        <div class="res">\(G = \dfrac{S_m}{E_m} = 1\) et \(\Delta\varphi = \varphi_s - \varphi_e = 0^\circ\). Avec \(E_m = 3{,}0\) V, on attend \(S_m \approx 3{,}0\) V. On vérifie que les mesures en sont proches.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">P1.4 — Affichage « XY » (Lissajous) &amp; intensité à \(f_0\)</div>
       <div class="exo-body">
-        <p>En mode <b>XY</b> l'oscilloscope trace \(s\) en fonction de \(e\). Le déphasage produit une
-        <b>ellipse</b> ; à la résonance \(\Delta\varphi=0\) ⇒ l'ellipse dégénère en une
-        <b>droite</b>. Repérer l'instant où la figure devient une droite parfaite localise \(f_0\)
-        <b>bien plus précisément</b> que la lecture d'un maximum (plat près du sommet).</p>
-        <p><b>Intensité dans le circuit à \(f_0\)</b></p>
-        <p>À la résonance \(Z=R\), donc \(I_m=\dfrac{E_m}{R}\) :</p>
-        \[ I_m=\frac{3{,}0}{6{,}28\times10^3}\approx \boxed{4{,}8\times10^{-4}\ \text{A}=0{,}48\ \text{mA}} \]
+        <p class="enonce">Utiliser l'affichage « XY » (Lissajous) pour repérer \(f_0\), puis calculer l'intensité dans le circuit à \(f_0\).</p>
+
+        <p class="q">1) Repérer \(f_0\) en mode XY</p>
+        <p>En mode XY, l'oscilloscope trace \(s\) en fonction de \(e\).</p>
+        <ul>
+          <li>Si \(s\) et \(e\) sont déphasés, la figure est une <b>ellipse</b>.</li>
+          <li>À la résonance, \(\Delta\varphi = 0\) : l'ellipse s'aplatit en une <b>droite</b>.</li>
+        </ul>
+        <div class="res">On règle \(f\) jusqu'à obtenir une droite parfaite : on est à \(f_0\). C'est bien plus précis que de chercher le maximum de \(S_m\), qui est plat près du sommet.</div>
+
+        <p class="q">2) Intensité à \(f_0\)</p>
+        <div class="rappel"><span class="lab">Rappel · loi d'Ohm en amplitude</span>\[ I_m = \frac{E_m}{Z} \]</div>
+        <p>À la résonance, \(Z = R\) :</p>
+        \[ I_m = \frac{3{,}0}{6{,}28\times10^3} \approx 4{,}8\times10^{-4}\ \text{A} \]
+        <div class="res">\(I_m \approx 0{,}48\) mA.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">P1.5 — Fréquences de coupure &amp; bande passante à \(-3\) dB</div>
       <div class="exo-body">
-        <p>Aux coupures : \(G=\dfrac{1}{\sqrt2}\approx0{,}707\) et \(\Delta\varphi=\pm45^\circ\)
-        (\(+45^\circ\) en \(f_{cB}\), \(-45^\circ\) en \(f_{cH}\)).</p>
-        <p><b>Bande passante</b></p>
-        <p>Propriété du 2ᵈ ordre passe-bande : \(\ \Delta f=\dfrac{f_0}{Q}\).</p>
-        \[ \Delta f=\frac{2000}{0{,}5}=\boxed{4000\ \text{Hz}} \]
-        <p>Avec \(f_{cB}\,f_{cH}=f_0^2\) et \(f_{cH}-f_{cB}=\Delta f\), on résout
-        \(f_c=f_0\!\left(\mp\frac{1}{2Q}+\sqrt{1+\frac{1}{4Q^2}}\right)\) :</p>
-        \[ f_{cB}\approx 0{,}83\ \text{kHz}\ ,\qquad f_{cH}\approx 4{,}83\ \text{kHz} \]
-        <div class="res">Vérification : \(f_{cH}-f_{cB}\approx4{,}0\) kHz \(=\Delta f\), et
-        \(Q=\dfrac{f_0}{\Delta f}=\dfrac{2000}{4000}=0{,}5\) ✔. Protocole : balayer \(f\), lire
-        \(G\) jusqu'à \(G_{\max}/\sqrt2\), confirmer par \(\Delta\varphi=\pm45^\circ\) (mode XY).
-        <br><b>À savoir retrouver :</b> les expressions de \(f_{cB}\) et \(f_{cH}\).</div>
+        <p class="enonce">Donner le gain et le déphasage aux fréquences de coupure, puis la bande passante à −3 dB et les fréquences \(f_{cB}\) et \(f_{cH}\).</p>
+
+        <p class="q">1) Gain et déphasage aux coupures</p>
+        <div class="rappel"><span class="lab">Rappel · coupure à −3 dB</span>\[ G_c = \frac{G_{max}}{\sqrt2} \]</div>
+        <p>Ici \(G_{max} = 1\). À la coupure, \(Q\left(x - \frac1x\right) = \pm1\), donc \(\varphi = -\arctan(\pm1) = \mp45^\circ\).</p>
+        <ul>
+          <li>\(G_c = \dfrac{1}{\sqrt2} \approx 0{,}707\).</li>
+          <li>\(\Delta\varphi = +45^\circ\) en \(f_{cB}\) et \(-45^\circ\) en \(f_{cH}\).</li>
+        </ul>
+
+        <p class="q">2) Bande passante</p>
+        <div class="rappel"><span class="lab">Rappel · bande passante d'un passe-bande du 2ᵉ ordre</span>\[ \Delta f = \frac{f_0}{Q} \]</div>
+        \[ \Delta f = \frac{2000}{0{,}5} = 4000\ \text{Hz} \]
+        <div class="res">\(\Delta f = 4{,}0\) kHz.</div>
+
+        <p class="q">3) Fréquences de coupure</p>
+        <p class="etape">Étape 1 : la condition de coupure</p>
+        \[ Q\left(x - \frac1x\right) = \pm1 \iff x^2 \mp \frac1Q\,x - 1 = 0 \]
+        <div class="rappel"><span class="lab">Rappel · trinôme du second degré</span>\[ ax^2 + bx + c = 0 \;\Longrightarrow\; x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]</div>
+        <p class="etape">Étape 2 : la racine positive</p>
+        \[ f_c = f_0\left(\sqrt{1 + \frac{1}{4Q^2}} \mp \frac{1}{2Q}\right) \]
+        <p>Avec \(Q = 0{,}5\) : \(\dfrac{1}{2Q} = 1\) et \(\sqrt{1 + 1} \approx 1{,}414\).</p>
+        \[ f_{cB} = 2000\times(1{,}414 - 1) \approx 828\ \text{Hz} \qquad f_{cH} = 2000\times(1{,}414 + 1) \approx 4{,}83\ \text{kHz} \]
+        <p class="etape">Étape 3 : vérification</p>
+        <ul>
+          <li>\(f_{cH} - f_{cB} \approx 4{,}0\) kHz \(= \Delta f\).</li>
+          <li>\(f_{cB}\times f_{cH} = f_0^2\).</li>
+        </ul>
+        <div class="res">\(f_{cB} \approx 0{,}83\) kHz et \(f_{cH} \approx 4{,}83\) kHz. Protocole : on balaye \(f\), on cherche \(G = G_{max}/\sqrt2\), et on confirme avec \(\Delta\varphi = \pm45^\circ\) (mode XY). Les expressions de \(f_{cB}\) et \(f_{cH}\) sont à savoir retrouver.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">P1.6 — Mesures pour tracer \(G(x)\) et \(\varphi(x)\)</div>
       <div class="exo-body">
-        <p>Relever plusieurs points pertinents autour de \(f_0\) (typiquement \(f_{cB}\), \(f_0/2\),
-        \(f_0\), \(2f_0\), \(f_{cH}\)…), avec \(x=f/f_0\), et reporter dans un tableur
-        (fichier <a href="TP1.xlsx">TP1.xlsx</a> fourni). <b>Astuce oscillo :</b> menu
-        <span class="mono">Measure / CH2 / maximum</span> et <span class="mono">phase</span> pour lire
-        directement \(S_m\) et \(\Delta\varphi\) — beaucoup plus rapide qu'à la main.</p>
+        <p class="enonce">Quelles mesures faire pour tracer \(G(x)\) et \(\varphi(x)\) ?</p>
+
+        <p class="q">Mesures pour tracer \(G(x)\) et \(\varphi(x)\)</p>
+        <p class="etape">Étape 1 : choisir les points</p>
+        <p>On relève plusieurs points autour de \(f_0\), là où la courbe change : \(f_{cB}\), \(f_0/2\), \(f_0\), \(2f_0\), \(f_{cH}\), puis quelques points loin en BF et en HF.</p>
+        <p class="etape">Étape 2 : mesurer</p>
+        <p>À chaque fréquence, on lit \(S_m\) et \(\Delta\varphi\). Sur l'oscilloscope, le menu <span class="mono">Measure / CH2 / maximum</span> et <span class="mono">phase</span> donne directement ces valeurs.</p>
+        <p class="etape">Étape 3 : exploiter</p>
+        <p>On calcule \(x = f/f_0\), \(G = S_m/E_m\), puis on reporte dans le tableur fourni (<a href="TP1.xlsx">TP1.xlsx</a>).</p>
+        <div class="res">Une dizaine de points bien placés autour de \(f_0\) suffisent, en lisant \(S_m\) et \(\Delta\varphi\) avec les mesures automatiques.</div>
       </div>
     </div>
 
@@ -489,30 +580,53 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
     <div class="exo-card">
       <div class="exo-head">P2.1 — Refaire avec \(Q=5\) — sélectivité</div>
       <div class="exo-body">
-        <p>On ne change que \(Q\) : \(R=\dfrac1Q\sqrt{L/C}=\dfrac{3{,}14\times10^3}{5}\approx
-        \boxed{6{,}3\times10^2\ \Omega\ (\approx628\ \Omega)}\). Bande passante
-        \(\Delta f=\dfrac{f_0}{Q}=\dfrac{2000}{5}=\boxed{400\ \text{Hz}}\) ⇒ coupures
-        \(f_{cB}\approx1{,}81\) kHz, \(f_{cH}\approx2{,}21\) kHz.</p>
-        <div class="res"><b>Comparaison.</b> \(Q=5\) donne une bande 10× plus étroite que \(Q=0{,}5\)
-        (\(400\) Hz contre \(4000\) Hz) : le filtre à <b>\(Q=5\) est nettement plus sélectif</b>
-        (résonance pointue). Un \(Q\) élevé ⇒ meilleure sélectivité en fréquence.</div>
+        <p class="enonce">Refaire l'étude avec \(Q = 5\) (même \(L\) et même \(C\)) et comparer la sélectivité.</p>
+
+        <p class="q">1) Nouvelle résistance</p>
+        <div class="rappel"><span class="lab">Rappel · facteur de qualité du RLC série</span>\[ Q = \frac1R\sqrt{\frac{L}{C}} \]</div>
+        <p>\(L\) et \(C\) ne changent pas, donc \(\sqrt{L/C} \approx 3{,}14\times10^3\ \Omega\) :</p>
+        \[ R = \frac{3{,}14\times10^3}{5} \approx 628\ \Omega \]
+        <div class="res">\(R \approx 628\ \Omega\).</div>
+
+        <p class="q">2) Bande passante et coupures</p>
+        <div class="rappel"><span class="lab">Rappel · bande passante</span>\[ \Delta f = \frac{f_0}{Q} \]</div>
+        \[ \Delta f = \frac{2000}{5} = 400\ \text{Hz} \]
+        <p>Avec \(\dfrac{1}{2Q} = 0{,}1\) et \(\sqrt{1 + 0{,}01} \approx 1{,}005\) :</p>
+        \[ f_{cB} \approx 2000\times0{,}905 \approx 1{,}81\ \text{kHz} \qquad f_{cH} \approx 2000\times1{,}105 \approx 2{,}21\ \text{kHz} \]
+        <div class="res">\(\Delta f = 400\) Hz, \(f_{cB} \approx 1{,}81\) kHz, \(f_{cH} \approx 2{,}21\) kHz.</div>
+
+        <p class="q">3) Comparaison</p>
+        <ul>
+          <li>\(Q = 0{,}5\) : \(\Delta f = 4000\) Hz.</li>
+          <li>\(Q = 5\) : \(\Delta f = 400\) Hz, dix fois plus étroite.</li>
+        </ul>
+        <div class="res">Le filtre à \(Q = 5\) est nettement plus <b>sélectif</b> : sa résonance est pointue. Un \(Q\) élevé donne une meilleure sélectivité en fréquence.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head">P2.2 — Transformer en passe-bas 1ᵉʳ ordre</div>
       <div class="exo-body">
-        <p><b>Modification :</b> retirer la bobine \(L\) (on garde \(R\) et \(C\) en série) et prendre
-        la sortie <b>aux bornes de \(C\)</b>. On obtient un passe-bas du 1ᵉʳ ordre
-        \(\underline H=\dfrac{1}{1+jRC\omega}\), de pulsation de coupure :</p>
-        \[ \omega_c=\frac{1}{RC}\ \Longrightarrow\ f_c=\frac{1}{2\pi RC} \]
-        <p><b>Grandeur à modifier pour \(f_c=2\) kHz (à \(C=25{,}3\) nF fixé)</b></p>
-        \[ R=\frac{1}{2\pi f_c\,C}=\frac{1}{2\pi(2000)(2{,}53\times10^{-8})}
-           \approx \boxed{3{,}1\ \text{k}\Omega} \]
-        <p>Mesures Bode : gain plat (\(0\) dB) en BF puis pente \(-20\) dB/déc ; phase \(0^\circ\to-90^\circ\)
-        (passant par \(-45^\circ\) en \(f_c\)). Pour les déphasages en très basses / très hautes
-        fréquences, exploiter la <b>méthode de Lissajous</b> (mode XY) si la lecture directe est
-        difficile.</p>
+        <p class="enonce">Modifier le montage pour obtenir un passe-bas du 1ᵉʳ ordre de fréquence de coupure 2 kHz, puis le caractériser.</p>
+
+        <p class="q">1) Modification du montage</p>
+        <p>On retire la bobine \(L\) : il reste \(R\) et \(C\) en série. On prend la sortie <b>aux bornes de \(C\)</b>.</p>
+        <div class="rappel"><span class="lab">Rappel · pont diviseur de tension</span>\[ \underline H = \frac{\underline Z_C}{R + \underline Z_C} \]</div>
+        <p>Avec \(\underline Z_C = \dfrac{1}{jC\omega}\), on multiplie en haut et en bas par \(jC\omega\) :</p>
+        \[ \underline H = \frac{1}{1 + jRC\omega} \]
+        <div class="res">Passe-bas du 1ᵉʳ ordre, de pulsation de coupure \(\omega_c = \dfrac{1}{RC}\), soit \(f_c = \dfrac{1}{2\pi RC}\).</div>
+
+        <p class="q">2) Grandeur à modifier pour \(f_c = 2\) kHz</p>
+        <p>On garde \(C = 25{,}3\) nF et on isole \(R\) :</p>
+        \[ R = \frac{1}{2\pi f_c\,C} = \frac{1}{2\pi \times 2000 \times 2{,}53\times10^{-8}} \approx 3{,}1\times10^3\ \Omega \]
+        <div class="res">\(R \approx 3{,}1\) kΩ.</div>
+
+        <p class="q">3) Diagramme de Bode attendu</p>
+        <ul>
+          <li>Gain : plat à 0 dB en BF, puis pente −20 dB/déc après \(f_c\).</li>
+          <li>Phase : de \(0^\circ\) à \(-90^\circ\), en passant par \(-45^\circ\) à \(f_c\).</li>
+        </ul>
+        <div class="res">Pour les déphasages en très basses ou très hautes fréquences, la lecture directe est difficile : on utilise la méthode de Lissajous (mode XY).</div>
       </div>
     </div>
   </section>
@@ -535,71 +649,80 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
     <figcaption>Énoncé (TD1, D. Courtois) — circuit R série + (L ∥ C ∥ r), réponse à un échelon</figcaption>
   </figure>
 
-    <div class="note"><span class="lab">Le montage</span> Source idéale \(E\) (continue) + interrupteur,
-    en série avec \(R\). Elle alimente un dipôle <b>parallèle</b> \(L\parallel C\parallel r\) ; la
-    sortie \(u(t)\) est la tension commune à ce parallèle. \(i(t)\) est le courant dans \(R\).
-    À \(t<0\) tout est nul ; à \(t=0\) on ferme \(K\).</div>
+    <div class="enonce"><b>Le montage.</b> Source idéale \(E\) (continue) et interrupteur \(K\), en série avec \(R\). Elle alimente un dipôle parallèle \(L\parallel C\parallel r\) ; la sortie \(u(t)\) est la tension commune à ce parallèle. \(i(t)\) est le courant dans \(R\). Pour \(t&lt;0\) tout est nul ; à \(t=0\) on ferme \(K\).</div>
 
     <p class="q">1) Générateur idéal de tension</p>
-    <p>Un <b>générateur idéal de tension</b> impose entre ses bornes une tension \(E\)
-    <b>indépendante du courant</b> qu'il débite : sa résistance interne est nulle, sa caractéristique
-    \(u=E\) est une droite horizontale. Ici \(E\) est <b>continue</b> (constante dans le temps).</p>
+    <p>Un <b>générateur idéal de tension</b> impose entre ses bornes une tension \(E\) qui ne dépend pas du courant débité.</p>
+    <ul>
+      <li>Sa résistance interne est nulle.</li>
+      <li>Sa caractéristique \(u = E\) est une droite horizontale.</li>
+      <li>Ici \(E\) est <b>continue</b> : constante dans le temps.</li>
+    </ul>
+    <div class="res">Tension \(E\) imposée quel que soit le courant, résistance interne nulle.</div>
 
     <p class="q">2) Tensions et intensités à \(t=0^{+}\)</p>
-    <p>On utilise les <b>continuités</b> : le courant dans une bobine et la tension aux bornes d'un
-    condensateur ne peuvent pas sauter.</p>
-    \[ i_L(0^+)=i_L(0^-)=0 \qquad,\qquad u_C(0^+)=u_C(0^-)=0 \]
-    <p>Or \(C\), \(L\) et \(r\) sont en parallèle : \(u=u_C\). Donc \(\;u(0^+)=0\).</p>
-    <p><b>On en déduit tout le reste à \(t=0^+\)</b></p>
+    <p class="etape">Étape 1 : les grandeurs continues</p>
+    <div class="rappel"><span class="lab">Rappel · continuités</span>Le courant dans une bobine et la tension aux bornes d'un condensateur ne peuvent pas sauter : \(i_L(0^+) = i_L(0^-)\) et \(u_C(0^+) = u_C(0^-)\).</div>
+    \[ i_L(0^+) = 0 \qquad\qquad u_C(0^+) = 0 \]
+    <p>\(C\), \(L\) et \(r\) sont en parallèle, donc \(u = u_C\) :</p>
+    \[ u(0^+) = 0 \]
+
+    <p class="etape">Étape 2 : on en déduit le reste</p>
     <ul>
-      <li>Tension de sortie : \(\;u(0^+)=0\).</li>
-      <li>Courant dans \(r\) : \(\;i_r=\dfrac{u}{r}=0\).</li>
-      <li>Courant dans \(L\) : \(\;i_L(0^+)=0\).</li>
-      <li>Maille d'entrée : \(E=R\,i+u \Rightarrow i(0^+)=\dfrac{E-0}{R}=\dfrac{E}{R}\).</li>
-      <li>Loi des nœuds \(i=i_L+i_C+i_r \Rightarrow i_C(0^+)=\dfrac{E}{R}\).</li>
-      <li>Tension aux bornes de \(R\) : \(u_R=R\,i=E\).</li>
+      <li>Courant dans \(r\) : \(i_r = \dfrac{u}{r} = 0\).</li>
+      <li>Courant dans \(L\) : \(i_L(0^+) = 0\).</li>
+      <li>Loi des mailles : \(E = R\,i + u\), donc \(i(0^+) = \dfrac{E}{R}\).</li>
+      <li>Loi des nœuds \(i = i_L + i_C + i_r\), donc \(i_C(0^+) = \dfrac{E}{R}\).</li>
+      <li>Tension aux bornes de \(R\) : \(u_R = R\,i = E\).</li>
     </ul>
-    <div class="res"><b>À \(t=0^+\)</b> tout le courant \(E/R\) part dans le <b>condensateur</b>
-    (\(i_C=E/R\)), la bobine ne conduit pas encore, \(u=0\).</div>
+    <div class="res">À \(t=0^+\) : \(u = 0\), \(i = i_C = E/R\), \(i_L = i_r = 0\). Tout le courant part dans le condensateur.</div>
 
     <p class="q">3) Régime permanent \(t\to+\infty\)</p>
-    <p>En continu établi : le condensateur est <b>ouvert</b> (\(i_C=0\)), la bobine est un
-    <b>court-circuit</b> (\(u_L=0\)). Comme \(u=u_L=0\) :</p>
+    <p class="etape">Étape 1 : comportement en continu</p>
+    <div class="rappel"><span class="lab">Rappel · régime continu établi</span>Condensateur : interrupteur ouvert (\(i_C = 0\)). Bobine : fil (\(u_L = 0\)).</div>
+    <p>La bobine est en parallèle avec la sortie, donc \(u = u_L = 0\).</p>
+    <p class="etape">Étape 2 : les autres grandeurs</p>
     <ul>
-      <li>\(u(\infty)=0\), donc \(i_r=u/r=0\) et \(i_C=0\).</li>
-      <li>Maille : \(E=R\,i+u=R\,i \Rightarrow i(\infty)=\dfrac{E}{R}\).</li>
-      <li>Nœuds : \(i_L(\infty)=i=\dfrac{E}{R}\).</li>
+      <li>\(u(\infty) = 0\), donc \(i_r = 0\), et \(i_C = 0\).</li>
+      <li>Loi des mailles : \(E = R\,i + 0\), donc \(i(\infty) = \dfrac{E}{R}\).</li>
+      <li>Loi des nœuds : \(i_L(\infty) = i = \dfrac{E}{R}\).</li>
     </ul>
-    <div class="res">Même \(i=E/R\) et même \(u=0\) qu'à \(t=0^+\), mais le courant a
-    <b>migré du condensateur vers la bobine</b> (\(i_C:E/R\to0\), \(i_L:0\to E/R\)).</div>
+    <div class="res">En régime permanent : \(u = 0\), \(i = i_L = E/R\), \(i_C = i_r = 0\). Même \(i\) et même \(u\) qu'à \(t = 0^+\), mais le courant est passé du condensateur à la bobine.</div>
 
     <p class="q">4) Équation différentielle en \(u(t)\)</p>
-    <p><b>Loi des nœuds au nœud de sortie</b></p>
-    \[ i=i_C+i_L+i_r \quad\text{avec}\quad i=\frac{E-u}{R} \]
-    <p><b>Lois de comportement (on garde \(u\))</b></p>
-    \[ i_C=C\frac{du}{dt}\ ,\quad i_r=\frac{u}{r}\ ,\quad i_L=\frac1L\!\int u\,dt \]
-    \[ \frac{E-u}{R}=C\frac{du}{dt}+\frac{u}{r}+\frac1L\!\int u\,dt \]
-    <p><b>On dérive (aide de l'énoncé) — \(E\) constante disparaît</b></p>
-    \[ -\frac1R\frac{du}{dt}=C\frac{d^2u}{dt^2}+\frac1r\frac{du}{dt}+\frac1L\,u \]
-    <p><b>On regroupe</b></p>
-    \[ \boxed{\,C\frac{d^2u}{dt^2}+\Big(\frac1R+\frac1r\Big)\frac{du}{dt}+\frac1L\,u=0\,} \]
-    <p>C'est une ED <b>homogène du 2ᵈ ordre</b> (le forçage a disparu : cohérent avec \(u(0^+)=u(\infty)=0\)).
-    Forme canonique \(\ddot u+\dfrac{\omega_0}{Q}\dot u+\omega_0^2u=0\) avec</p>
-    \[ \omega_0=\frac{1}{\sqrt{LC}}\ ,\qquad \frac{\omega_0}{Q}=\frac1C\Big(\frac1R+\frac1r\Big)
-       \ \Rightarrow\ Q=\frac{1}{\frac1R+\frac1r}\sqrt{\frac{C}{L}} \]
+    <p class="etape">Étape 1 : loi des nœuds</p>
+    \[ i = i_C + i_L + i_r \qquad\text{avec}\qquad i = \frac{E - u}{R} \]
+    <p class="etape">Étape 2 : lois de comportement</p>
+    <div class="rappel"><span class="lab">Rappel · dipôles</span>\[ i_C = C\,\frac{du}{dt} \qquad i_r = \frac{u}{r} \qquad i_L = \frac1L\int u\,dt \]</div>
+    \[ \frac{E - u}{R} = C\,\frac{du}{dt} + \frac{u}{r} + \frac1L\int u\,dt \]
+    <p class="etape">Étape 3 : on dérive</p>
+    <p>\(E\) est constante, sa dérivée est nulle :</p>
+    \[ -\frac1R\,\frac{du}{dt} = C\,\frac{d^2u}{dt^2} + \frac1r\,\frac{du}{dt} + \frac1L\,u \]
+    <p class="etape">Étape 4 : on regroupe</p>
+    \[ C\,\frac{d^2u}{dt^2} + \left(\frac1R + \frac1r\right)\frac{du}{dt} + \frac1L\,u = 0 \]
+    <p class="etape">Étape 5 : forme canonique</p>
+    <div class="rappel"><span class="lab">Rappel · forme canonique du 2ᵉ ordre</span>\[ \ddot u + \frac{\omega_0}{Q}\,\dot u + \omega_0^2\,u = 0 \]</div>
+    <p>On divise par \(C\) et on identifie :</p>
+    \[ \omega_0 = \frac{1}{\sqrt{LC}} \qquad\qquad \frac{\omega_0}{Q} = \frac1C\left(\frac1R + \frac1r\right) \]
+    \[ Q = \frac{1}{\frac1R + \frac1r}\sqrt{\frac{C}{L}} \]
+    <div class="res">\(C\,\ddot u + \left(\dfrac1R + \dfrac1r\right)\dot u + \dfrac{u}{L} = 0\) : ED homogène du 2ᵉ ordre. C'est cohérent avec \(u(0^+) = u(\infty) = 0\).</div>
 
     <p class="q">5) Condition de régime pseudopériodique</p>
-    <p>Équation caractéristique \(C\,x^2+\big(\tfrac1R+\tfrac1r\big)x+\tfrac1L=0\), de discriminant</p>
-    \[ \Delta=\Big(\frac1R+\frac1r\Big)^2-\frac{4C}{L} \]
-    <p>Le régime est <b>pseudopériodique</b> (racines complexes, oscillations amorties) ssi \(\Delta<0\) :</p>
-    <div class="res"><b>Condition.</b>
-      \[ \boxed{\ \frac1R+\frac1r<2\sqrt{\frac{C}{L}}\ }\quad\Longleftrightarrow\quad Q>\frac12 \]
-      Une conductance totale trop grande (\(R\) et/ou \(r\) faibles) amortit trop : régime apériodique.</div>
+    <p class="etape">Étape 1 : équation caractéristique</p>
+    \[ C\,\lambda^2 + \left(\frac1R + \frac1r\right)\lambda + \frac1L = 0 \]
+    <div class="rappel"><span class="lab">Rappel · régimes du 2ᵉ ordre</span>\(\Delta &lt; 0\) : pseudopériodique (oscillations amorties) ; \(\Delta = 0\) : critique ; \(\Delta &gt; 0\) : apériodique.</div>
+    <p class="etape">Étape 2 : discriminant</p>
+    \[ \Delta = \left(\frac1R + \frac1r\right)^2 - \frac{4C}{L} \]
+    <p class="etape">Étape 3 : condition \(\Delta &lt; 0\)</p>
+    <p>Les deux membres sont positifs, on peut prendre la racine :</p>
+    \[ \frac1R + \frac1r &lt; 2\sqrt{\frac{C}{L}} \iff Q &gt; \frac12 \]
+    <div class="res">Régime pseudopériodique si et seulement si \(\dfrac1R + \dfrac1r &lt; 2\sqrt{\dfrac{C}{L}}\), c'est-à-dire \(Q &gt; \dfrac12\).</div>
+    <div class="warnbox"><span class="lab">Piège</span> On note \(\lambda\) l'inconnue de l'équation caractéristique, pour ne pas la confondre avec la résistance \(r\). Si \(R\) ou \(r\) sont faibles, la conductance \(\frac1R + \frac1r\) est grande : le circuit est trop amorti et le régime devient apériodique.</div>
 
     <figure><svg viewBox="0 0 680 300" width="680" xmlns="http://www.w3.org/2000/svg"><line x1="64" y1="150" x2="658" y2="150" stroke="#94a3b8" stroke-width="1.4"/><line x1="64" y1="245" x2="64" y2="45" stroke="#94a3b8" stroke-width="1.4"/><text x="652" y="170" fill="#475569" font-family="monospace" font-size="12">t</text><text x="56" y="50" fill="#475569" font-family="monospace" font-size="12" text-anchor="end">u(t)</text><path d="M64.0 59.8 L66.9 61.5 L69.9 63.1 L72.8 64.8 L75.7 66.4 L78.7 68.0 L81.6 69.6 L84.5 71.1 L87.4 72.6 L90.4 74.1 L93.3 75.5 L96.2 76.9 L99.2 78.3 L102.1 79.7 L105.0 81.0 L107.9 82.3 L110.9 83.6 L113.8 84.9 L116.7 86.1 L119.7 87.3 L122.6 88.5 L125.5 89.7 L128.5 90.8 L131.4 92.0 L134.3 93.1 L137.2 94.2 L140.2 95.2 L143.1 96.3 L146.0 97.3 L149.0 98.3 L151.9 99.3 L154.8 100.2 L157.8 101.2 L160.7 102.1 L163.6 103.0 L166.6 103.9 L169.5 104.8 L172.4 105.6 L175.3 106.5 L178.3 107.3 L181.2 108.1 L184.1 108.9 L187.1 109.7 L190.0 110.5 L192.9 111.2 L195.8 112.0 L198.8 112.7 L201.7 113.4 L204.6 114.1 L207.6 114.8 L210.5 115.4 L213.4 116.1 L216.4 116.7 L219.3 117.4 L222.2 118.0 L225.1 118.6 L228.1 119.2 L231.0 119.8 L233.9 120.4 L236.9 120.9 L239.8 121.5 L242.7 122.0 L245.7 122.6 L248.6 123.1 L251.5 123.6 L254.5 124.1 L257.4 124.6 L260.3 125.1 L263.2 125.5 L266.2 126.0 L269.1 126.5 L272.0 126.9 L275.0 127.3 L277.9 127.8 L280.8 128.2 L283.8 128.6 L286.7 129.0 L289.6 129.4 L292.5 129.8 L295.5 130.2 L298.4 130.6 L301.3 130.9 L304.3 131.3 L307.2 131.7 L310.1 132.0 L313.0 132.4 L316.0 132.7 L318.9 133.0 L321.8 133.3 L324.8 133.7 L327.7 134.0 L330.6 134.3 L333.6 134.6 L336.5 134.9 L339.4 135.2 L342.4 135.4 L345.3 135.7 L348.2 136.0 L351.1 136.3 L354.1 136.5 L357.0 136.8 L359.9 137.0 L362.9 137.3 L365.8 137.5 L368.7 137.7 L371.7 138.0 L374.6 138.2 L377.5 138.4 L380.4 138.7 L383.4 138.9 L386.3 139.1 L389.2 139.3 L392.2 139.5 L395.1 139.7 L398.0 139.9 L401.0 140.1 L403.9 140.3 L406.8 140.5 L409.7 140.6 L412.7 140.8 L415.6 141.0 L418.5 141.2 L421.5 141.3 L424.4 141.5 L427.3 141.7 L430.2 141.8 L433.2 142.0 L436.1 142.1 L439.0 142.3 L442.0 142.4 L444.9 142.6 L447.8 142.7 L450.8 142.8 L453.7 143.0 L456.6 143.1 L459.5 143.2 L462.5 143.4 L465.4 143.5 L468.3 143.6 L471.3 143.7 L474.2 143.9 L477.1 144.0 L480.1 144.1 L483.0 144.2 L485.9 144.3 L488.8 144.4 L491.8 144.5 L494.7 144.6 L497.6 144.7 L500.6 144.8 L503.5 144.9 L506.4 145.0 L509.4 145.1 L512.3 145.2 L515.2 145.3 L518.2 145.4 L521.1 145.5 L524.0 145.6 L526.9 145.7 L529.9 145.7 L532.8 145.8 L535.7 145.9 L538.7 146.0 L541.6 146.1 L544.5 146.1 L547.5 146.2 L550.4 146.3 L553.3 146.3 L556.2 146.4 L559.2 146.5 L562.1 146.5 L565.0 146.6 L568.0 146.7 L570.9 146.7 L573.8 146.8 L576.8 146.9 L579.7 146.9 L582.6 147.0 L585.5 147.0 L588.5 147.1 L591.4 147.2 L594.3 147.2 L597.3 147.3 L600.2 147.3 L603.1 147.4 L606.0 147.4 L609.0 147.5 L611.9 147.5 L614.8 147.6 L617.8 147.6 L620.7 147.6 L623.6 147.7 L626.6 147.7 L629.5 147.8 L632.4 147.8 L635.4 147.9 L638.3 147.9 L641.2 147.9 L644.1 148.0 L647.1 148.0 L650.0 148.1 " fill="none" stroke="#dc2626" stroke-width="1" stroke-dasharray="4 4" opacity=".8"/><path d="M64.0 240.2 L66.9 238.5 L69.9 236.9 L72.8 235.2 L75.7 233.6 L78.7 232.0 L81.6 230.4 L84.5 228.9 L87.4 227.4 L90.4 225.9 L93.3 224.5 L96.2 223.1 L99.2 221.7 L102.1 220.3 L105.0 219.0 L107.9 217.7 L110.9 216.4 L113.8 215.1 L116.7 213.9 L119.7 212.7 L122.6 211.5 L125.5 210.3 L128.5 209.2 L131.4 208.0 L134.3 206.9 L137.2 205.8 L140.2 204.8 L143.1 203.7 L146.0 202.7 L149.0 201.7 L151.9 200.7 L154.8 199.8 L157.8 198.8 L160.7 197.9 L163.6 197.0 L166.6 196.1 L169.5 195.2 L172.4 194.4 L175.3 193.5 L178.3 192.7 L181.2 191.9 L184.1 191.1 L187.1 190.3 L190.0 189.5 L192.9 188.8 L195.8 188.0 L198.8 187.3 L201.7 186.6 L204.6 185.9 L207.6 185.2 L210.5 184.6 L213.4 183.9 L216.4 183.3 L219.3 182.6 L222.2 182.0 L225.1 181.4 L228.1 180.8 L231.0 180.2 L233.9 179.6 L236.9 179.1 L239.8 178.5 L242.7 178.0 L245.7 177.4 L248.6 176.9 L251.5 176.4 L254.5 175.9 L257.4 175.4 L260.3 174.9 L263.2 174.5 L266.2 174.0 L269.1 173.5 L272.0 173.1 L275.0 172.7 L277.9 172.2 L280.8 171.8 L283.8 171.4 L286.7 171.0 L289.6 170.6 L292.5 170.2 L295.5 169.8 L298.4 169.4 L301.3 169.1 L304.3 168.7 L307.2 168.3 L310.1 168.0 L313.0 167.6 L316.0 167.3 L318.9 167.0 L321.8 166.7 L324.8 166.3 L327.7 166.0 L330.6 165.7 L333.6 165.4 L336.5 165.1 L339.4 164.8 L342.4 164.6 L345.3 164.3 L348.2 164.0 L351.1 163.7 L354.1 163.5 L357.0 163.2 L359.9 163.0 L362.9 162.7 L365.8 162.5 L368.7 162.3 L371.7 162.0 L374.6 161.8 L377.5 161.6 L380.4 161.3 L383.4 161.1 L386.3 160.9 L389.2 160.7 L392.2 160.5 L395.1 160.3 L398.0 160.1 L401.0 159.9 L403.9 159.7 L406.8 159.5 L409.7 159.4 L412.7 159.2 L415.6 159.0 L418.5 158.8 L421.5 158.7 L424.4 158.5 L427.3 158.3 L430.2 158.2 L433.2 158.0 L436.1 157.9 L439.0 157.7 L442.0 157.6 L444.9 157.4 L447.8 157.3 L450.8 157.2 L453.7 157.0 L456.6 156.9 L459.5 156.8 L462.5 156.6 L465.4 156.5 L468.3 156.4 L471.3 156.3 L474.2 156.1 L477.1 156.0 L480.1 155.9 L483.0 155.8 L485.9 155.7 L488.8 155.6 L491.8 155.5 L494.7 155.4 L497.6 155.3 L500.6 155.2 L503.5 155.1 L506.4 155.0 L509.4 154.9 L512.3 154.8 L515.2 154.7 L518.2 154.6 L521.1 154.5 L524.0 154.4 L526.9 154.3 L529.9 154.3 L532.8 154.2 L535.7 154.1 L538.7 154.0 L541.6 153.9 L544.5 153.9 L547.5 153.8 L550.4 153.7 L553.3 153.7 L556.2 153.6 L559.2 153.5 L562.1 153.5 L565.0 153.4 L568.0 153.3 L570.9 153.3 L573.8 153.2 L576.8 153.1 L579.7 153.1 L582.6 153.0 L585.5 153.0 L588.5 152.9 L591.4 152.8 L594.3 152.8 L597.3 152.7 L600.2 152.7 L603.1 152.6 L606.0 152.6 L609.0 152.5 L611.9 152.5 L614.8 152.4 L617.8 152.4 L620.7 152.4 L623.6 152.3 L626.6 152.3 L629.5 152.2 L632.4 152.2 L635.4 152.1 L638.3 152.1 L641.2 152.1 L644.1 152.0 L647.1 152.0 L650.0 151.9 " fill="none" stroke="#dc2626" stroke-width="1" stroke-dasharray="4 4" opacity=".8"/><path d="M64.0 150.0 L65.5 144.4 L66.9 138.9 L68.4 133.5 L69.9 128.3 L71.3 123.3 L72.8 118.6 L74.3 114.0 L75.7 109.6 L77.2 105.5 L78.7 101.7 L80.1 98.1 L81.6 94.8 L83.0 91.8 L84.5 89.1 L86.0 86.7 L87.4 84.5 L88.9 82.7 L90.4 81.2 L91.8 80.0 L93.3 79.1 L94.8 78.5 L96.2 78.2 L97.7 78.2 L99.2 78.4 L100.6 79.0 L102.1 79.8 L103.6 80.9 L105.0 82.3 L106.5 83.9 L107.9 85.8 L109.4 87.8 L110.9 90.1 L112.3 92.6 L113.8 95.2 L115.3 98.0 L116.7 101.0 L118.2 104.1 L119.7 107.4 L121.1 110.8 L122.6 114.2 L124.1 117.7 L125.5 121.3 L127.0 125.0 L128.5 128.6 L129.9 132.3 L131.4 136.0 L132.9 139.7 L134.3 143.3 L135.8 146.9 L137.2 150.5 L138.7 153.9 L140.2 157.3 L141.6 160.6 L143.1 163.8 L144.6 166.9 L146.0 169.9 L147.5 172.7 L149.0 175.4 L150.4 177.9 L151.9 180.2 L153.4 182.4 L154.8 184.4 L156.3 186.3 L157.8 188.0 L159.2 189.4 L160.7 190.7 L162.2 191.8 L163.6 192.7 L165.1 193.5 L166.6 194.0 L168.0 194.3 L169.5 194.5 L170.9 194.5 L172.4 194.3 L173.9 193.9 L175.3 193.4 L176.8 192.7 L178.3 191.8 L179.7 190.8 L181.2 189.6 L182.7 188.3 L184.1 186.9 L185.6 185.4 L187.1 183.7 L188.5 181.9 L190.0 180.1 L191.5 178.1 L192.9 176.1 L194.4 174.0 L195.8 171.9 L197.3 169.7 L198.8 167.5 L200.2 165.2 L201.7 162.9 L203.2 160.7 L204.6 158.4 L206.1 156.1 L207.6 153.8 L209.0 151.6 L210.5 149.4 L212.0 147.3 L213.4 145.2 L214.9 143.1 L216.4 141.2 L217.8 139.3 L219.3 137.5 L220.8 135.7 L222.2 134.1 L223.7 132.5 L225.1 131.1 L226.6 129.7 L228.1 128.5 L229.5 127.4 L231.0 126.4 L232.5 125.5 L233.9 124.7 L235.4 124.0 L236.9 123.5 L238.3 123.0 L239.8 122.7 L241.3 122.5 L242.7 122.4 L244.2 122.4 L245.7 122.6 L247.1 122.8 L248.6 123.2 L250.1 123.6 L251.5 124.2 L253.0 124.8 L254.5 125.5 L255.9 126.4 L257.4 127.2 L258.8 128.2 L260.3 129.3 L261.8 130.4 L263.2 131.5 L264.7 132.7 L266.2 134.0 L267.6 135.3 L269.1 136.6 L270.6 138.0 L272.0 139.4 L273.5 140.8 L275.0 142.2 L276.4 143.6 L277.9 145.0 L279.4 146.4 L280.8 147.8 L282.3 149.2 L283.8 150.5 L285.2 151.9 L286.7 153.2 L288.1 154.4 L289.6 155.6 L291.1 156.8 L292.5 157.9 L294.0 159.0 L295.5 160.0 L296.9 160.9 L298.4 161.8 L299.9 162.7 L301.3 163.4 L302.8 164.1 L304.3 164.7 L305.7 165.3 L307.2 165.8 L308.7 166.2 L310.1 166.5 L311.6 166.7 L313.0 166.9 L314.5 167.0 L316.0 167.1 L317.4 167.1 L318.9 167.0 L320.4 166.8 L321.8 166.6 L323.3 166.3 L324.8 166.0 L326.2 165.5 L327.7 165.1 L329.2 164.6 L330.6 164.0 L332.1 163.4 L333.6 162.8 L335.0 162.1 L336.5 161.4 L338.0 160.6 L339.4 159.8 L340.9 159.0 L342.4 158.2 L343.8 157.3 L345.3 156.5 L346.7 155.6 L348.2 154.7 L349.7 153.9 L351.1 153.0 L352.6 152.1 L354.1 151.2 L355.5 150.4 L357.0 149.6 L358.5 148.7 L359.9 147.9 L361.4 147.2 L362.9 146.4 L364.3 145.7 L365.8 145.0 L367.3 144.3 L368.7 143.7 L370.2 143.1 L371.7 142.6 L373.1 142.1 L374.6 141.6 L376.0 141.2 L377.5 140.8 L379.0 140.5 L380.4 140.2 L381.9 140.0 L383.4 139.8 L384.8 139.6 L386.3 139.5 L387.8 139.4 L389.2 139.4 L390.7 139.4 L392.2 139.5 L393.6 139.6 L395.1 139.7 L396.6 139.9 L398.0 140.1 L399.5 140.4 L401.0 140.7 L402.4 141.0 L403.9 141.4 L405.3 141.7 L406.8 142.1 L408.3 142.6 L409.7 143.0 L411.2 143.5 L412.7 144.0 L414.1 144.5 L415.6 145.0 L417.1 145.5 L418.5 146.1 L420.0 146.6 L421.5 147.1 L422.9 147.7 L424.4 148.2 L425.9 148.8 L427.3 149.3 L428.8 149.8 L430.2 150.3 L431.7 150.9 L433.2 151.3 L434.6 151.8 L436.1 152.3 L437.6 152.7 L439.0 153.2 L440.5 153.6 L442.0 153.9 L443.4 154.3 L444.9 154.6 L446.4 154.9 L447.8 155.2 L449.3 155.5 L450.8 155.7 L452.2 155.9 L453.7 156.1 L455.2 156.2 L456.6 156.4 L458.1 156.5 L459.5 156.5 L461.0 156.6 L462.5 156.6 L463.9 156.5 L465.4 156.5 L466.9 156.4 L468.3 156.3 L469.8 156.2 L471.3 156.1 L472.7 155.9 L474.2 155.7 L475.7 155.5 L477.1 155.3 L478.6 155.1 L480.1 154.8 L481.5 154.6 L483.0 154.3 L484.5 154.0 L485.9 153.7 L487.4 153.4 L488.8 153.1 L490.3 152.7 L491.8 152.4 L493.2 152.1 L494.7 151.7 L496.2 151.4 L497.6 151.1 L499.1 150.7 L500.6 150.4 L502.0 150.1 L503.5 149.7 L505.0 149.4 L506.4 149.1 L507.9 148.8 L509.4 148.5 L510.8 148.3 L512.3 148.0 L513.8 147.8 L515.2 147.5 L516.7 147.3 L518.2 147.1 L519.6 146.9 L521.1 146.7 L522.5 146.6 L524.0 146.4 L525.5 146.3 L526.9 146.2 L528.4 146.1 L529.9 146.1 L531.3 146.0 L532.8 146.0 L534.3 145.9 L535.7 145.9 L537.2 145.9 L538.7 146.0 L540.1 146.0 L541.6 146.1 L543.1 146.2 L544.5 146.2 L546.0 146.3 L547.5 146.5 L548.9 146.6 L550.4 146.7 L551.8 146.9 L553.3 147.0 L554.8 147.2 L556.2 147.4 L557.7 147.6 L559.2 147.7 L560.6 147.9 L562.1 148.1 L563.6 148.3 L565.0 148.5 L566.5 148.7 L568.0 149.0 L569.4 149.2 L570.9 149.4 L572.4 149.6 L573.8 149.8 L575.3 150.0 L576.8 150.2 L578.2 150.4 L579.7 150.6 L581.1 150.7 L582.6 150.9 L584.1 151.1 L585.5 151.3 L587.0 151.4 L588.5 151.5 L589.9 151.7 L591.4 151.8 L592.9 151.9 L594.3 152.0 L595.8 152.1 L597.3 152.2 L598.7 152.3 L600.2 152.4 L601.7 152.4 L603.1 152.5 L604.6 152.5 L606.0 152.5 L607.5 152.5 L609.0 152.5 L610.4 152.5 L611.9 152.5 L613.4 152.5 L614.8 152.4 L616.3 152.4 L617.8 152.3 L619.2 152.3 L620.7 152.2 L622.2 152.1 L623.6 152.0 L625.1 151.9 L626.6 151.8 L628.0 151.7 L629.5 151.6 L631.0 151.5 L632.4 151.4 L633.9 151.3 L635.4 151.1 L636.8 151.0 L638.3 150.9 L639.7 150.8 L641.2 150.6 L642.7 150.5 L644.1 150.4 L645.6 150.2 L647.1 150.1 L648.5 150.0 L650.0 149.9 " fill="none" stroke="#0d9488" stroke-width="2.6" stroke-linejoin="round"/><text x="504" y="98" fill="#dc2626" font-family="monospace" font-size="11">enveloppe e^(−t/2τ)</text><text x="70" y="50" fill="#94a3b8" font-family="monospace" font-size="10.5">régime pseudo-périodique (Q&gt;½) — u(0⁺)=0, u(∞)=0</text></svg>
       <figcaption>Allure de \(u(t)\) en régime pseudopériodique : oscillation amortie qui part de 0 et retourne à 0.</figcaption>
     </figure>
-    </div>
+      </div>
   </div>
   </section>
   <section class="block" id="ex2">
@@ -611,64 +734,67 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
     <figcaption>Énoncé (TD1, D. Courtois) — RLC série, sortie \(s\) aux bornes de la bobine \(L\)</figcaption>
   </figure>
 
-    <div class="note"><span class="lab">Le montage</span> \(R\), \(C\) puis \(L\) <b>en série</b>
-    (un seul courant), sortie \(s\) prise <b>aux bornes de \(L\)</b>.</div>
+    <div class="enonce"><b>Le montage.</b> \(R\), \(C\) puis \(L\) en série (un seul courant), sortie \(s\) prise aux bornes de \(L\).</div>
 
-    <p class="q">1) Analyse qualitative → passe-haut</p>
-    <ul>
-      <li><b>BF</b> (\(\omega\to0\)) : \(C\) se comporte comme un <b>interrupteur ouvert</b>
-      (\(Z_C\to\infty\)) et \(L\) comme un <b>fil</b> (\(Z_L\to0\)). La sortie, prise sur \(L\) (fil),
-      est \(\approx0\).</li>
-      <li><b>HF</b> (\(\omega\to\infty\)) : \(C\) est un <b>fil</b> (\(Z_C\to0\)), \(L\) un
-      <b>interrupteur ouvert</b> (\(Z_L\to\infty\)) : presque toute la tension se retrouve sur \(L\),
-      \(s\approx e\).</li>
-    </ul>
-    <div class="res">Gain nul en BF, gain 1 en HF &rArr; <b>filtre passe-haut</b> (du 2ᵈ ordre).</div>
+    <p class="q">1) Analyse qualitative</p>
+    <div class="rappel"><span class="lab">Rappel · comportements limites</span>Condensateur : ouvert en BF, fil en HF. Bobine : fil en BF, ouverte en HF.</div>
+    <p class="etape">Étape 1 : en basse fréquence</p>
+    <p>\(L\) est un fil : la sortie est prise aux bornes d'un fil.</p>
+    \[ s_{BF} = 0 \]
+    <p class="etape">Étape 2 : en haute fréquence</p>
+    <p>\(C\) est un fil et \(L\) un interrupteur ouvert : aucun courant, donc pas de tension aux bornes de \(R\). Toute la tension se retrouve sur \(L\).</p>
+    \[ s_{HF} = e \]
+    <div class="res">Gain nul en BF, gain 1 en HF : <b>filtre passe-haut</b> (du 2ᵉ ordre).</div>
 
     <p class="q">2) Fonction de transfert</p>
-    <p><b>Diviseur de tension (série)</b></p>
-    \[ \underline H=\frac{\underline Z_L}{\underline Z_R+\underline Z_C+\underline Z_L}
-       =\frac{jL\omega}{R+\dfrac{1}{jC\omega}+jL\omega} \]
-    <p><b>On multiplie haut et bas par \(jC\omega\)</b></p>
-    \[ \underline H=\frac{-LC\omega^2}{1-LC\omega^2+jRC\omega} \]
-    <p><b>Forme canonique — on pose \(\omega_0=\dfrac{1}{\sqrt{LC}}\), \(x=\dfrac{\omega}{\omega_0}\)</b></p>
-    <p>Alors \(LC\omega^2=x^2\) et \(RC\omega=RC\omega_0\,x=\dfrac{x}{Q}\) en posant \(\dfrac1Q=RC\omega_0=R\sqrt{\tfrac{C}{L}}\).
-    En factorisant \( \tfrac{jx}{Q}\) au dénominateur on obtient exactement la forme demandée :</p>
-    <div class="res">
-      \[ \boxed{\ \underline H=H_0\,\frac{jQx}{1+jQ\!\left(x-\dfrac1x\right)}\ ,\quad
-         H_0=1,\ \ \omega_0=\frac{1}{\sqrt{LC}},\ \ Q=\frac1R\sqrt{\frac{L}{C}}=\frac{L\omega_0}{R}\ }\]
-    </div>
-    <div class="warnbox"><span class="lab">RLC série</span> Ici \(Q=\dfrac1R\sqrt{L/C}\) : un <b>grand \(R\)
-    amortit</b> (contrairement au tank parallèle du cours où \(Q=R\sqrt{C/L}\)).</div>
+    <p class="etape">Étape 1 : diviseur de tension</p>
+    <div class="rappel"><span class="lab">Rappel · pont diviseur de tension (série)</span>\[ \underline H = \frac{\underline Z_{sortie}}{\underline Z_{totale}} \]</div>
+    \[ \underline H = \frac{jL\omega}{R + \dfrac{1}{jC\omega} + jL\omega} \]
+    <p class="etape">Étape 2 : on multiplie en haut et en bas par \(jC\omega\)</p>
+    \[ \underline H = \frac{-LC\omega^2}{1 - LC\omega^2 + jRC\omega} \]
+    <p class="etape">Étape 3 : variable réduite</p>
+    <p>On pose \(\omega_0 = \dfrac{1}{\sqrt{LC}}\) et \(x = \dfrac{\omega}{\omega_0}\). Alors \(LC\omega^2 = x^2\) et \(RC\omega = RC\omega_0\,x = \dfrac{x}{Q}\), avec :</p>
+    \[ \frac1Q = RC\omega_0 = R\sqrt{\frac{C}{L}} \]
+    \[ \underline H = \frac{-x^2}{1 - x^2 + j\,\dfrac{x}{Q}} \]
+    <p class="etape">Étape 4 : forme demandée</p>
+    <p>On divise en haut et en bas par \(j\,\dfrac{x}{Q}\). En haut : \(\dfrac{-x^2}{jx/Q} = jQx\). En bas : \(1 + \dfrac{1 - x^2}{jx/Q} = 1 + jQ\left(x - \dfrac1x\right)\).</p>
+    <div class="res">\[ \underline H = H_0\,\frac{jQx}{1 + jQ\left(x - \dfrac1x\right)}, \qquad H_0 = 1,\quad \omega_0 = \frac{1}{\sqrt{LC}},\quad Q = \frac1R\sqrt{\frac{L}{C}} = \frac{L\omega_0}{R} \]</div>
+    <div class="warnbox"><span class="lab">Piège</span> Pour le RLC série, \(Q = \dfrac1R\sqrt{L/C}\) : un grand \(R\) amortit. C'est l'inverse du circuit bouchon du cours, où \(Q = R\sqrt{C/L}\).</div>
 
     <p class="q">3) Équivalents BF / HF, valeur en \(x=1\), tableau (\(Q=\tfrac12\))</p>
-    \[ |\underline H|=\frac{x^2}{\sqrt{(1-x^2)^2+(x/Q)^2}}\ ,\qquad
-       \varphi=90^\circ-\arg\!\big(1-x^2+j\tfrac{x}{Q}\big) \]
+    <p class="etape">Étape 1 : module et phase</p>
+    \[ |\underline H| = \frac{x^2}{\sqrt{(1 - x^2)^2 + (x/Q)^2}} \]
+    \[ \varphi = 180^\circ - \arg\left(1 - x^2 + j\,\frac{x}{Q}\right) \]
+    <div class="warnbox"><span class="lab">Correction d'une erreur de l'ancienne version</span> L'ancienne correction écrivait \(\varphi = 90^\circ - \arg(\dots)\), ce qui donnait \(0^\circ\) en \(x = 1\) au lieu de \(+90^\circ\). Le numérateur \(-x^2\) est un réel négatif, d'argument \(180^\circ\) : la bonne formule est \(\varphi = 180^\circ - \arg(1 - x^2 + jx/Q)\). Le tableau, lui, était juste.</div>
+    <p class="etape">Étape 2 : les trois régimes</p>
+    <ul>
+      <li>BF (\(x \ll 1\)) : le dénominateur tend vers 1, \(\underline H \approx -x^2 = (jx)^2\). Gain \(40\log x\) : pente <b>+40 dB/déc</b>, phase \(+180^\circ\).</li>
+      <li>\(x = 1\) : \(\underline H = jQ = j/2\). Gain \(20\log\frac12 \approx -6\) dB, phase \(+90^\circ\).</li>
+      <li>HF (\(x \gg 1\)) : \(\underline H \approx \dfrac{-x^2}{-x^2} = 1\). Gain 0 dB, phase \(0^\circ\).</li>
+    </ul>
     <div class="overflow"><table>
       <tr><th>Régime</th><th>\(\underline H\) approché</th><th>\(G_{dB}\)</th><th>\(\Delta\varphi\)</th></tr>
-      <tr><td><b>BF \(x\ll1\)</b></td><td>\(\underline H\approx -x^2=(jx)^2\)</td><td>\(40\log x\) &rarr; pente <b>+40 dB/déc</b></td><td>\(+180^\circ\)</td></tr>
+      <tr><td><b>BF \(x\ll1\)</b></td><td>\(\underline H\approx -x^2=(jx)^2\)</td><td>\(40\log x\) : pente <b>+40 dB/déc</b></td><td>\(+180^\circ\)</td></tr>
       <tr><td><b>\(x=1\)</b></td><td>\(\underline H=jQ=j/2\)</td><td>\(20\log\tfrac12=\mathbf{-6\ dB}\)</td><td>\(+90^\circ\)</td></tr>
       <tr><td><b>HF \(x\gg1\)</b></td><td>\(\underline H\approx 1\)</td><td>\(0\ dB\)</td><td>\(0^\circ\)</td></tr>
     </table></div>
     <figure><svg viewBox="0 0 760 500" width="760" xmlns="http://www.w3.org/2000/svg"><line x1="70.0" y1="44" x2="70.0" y2="225" stroke="#cbd5e1" stroke-width="1.1"/><line x1="70.0" y1="290" x2="70.0" y2="470" stroke="#cbd5e1" stroke-width="1.1"/><text x="70.0" y="488" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">0.1</text><line x1="171.4" y1="44" x2="171.4" y2="225" stroke="#e2e8f0" stroke-width="0.6"/><line x1="171.4" y1="290" x2="171.4" y2="470" stroke="#e2e8f0" stroke-width="0.6"/><text x="171.4" y="488" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">0.2</text><line x1="305.6" y1="44" x2="305.6" y2="225" stroke="#e2e8f0" stroke-width="0.6"/><line x1="305.6" y1="290" x2="305.6" y2="470" stroke="#e2e8f0" stroke-width="0.6"/><text x="305.6" y="488" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">0.5</text><line x1="407.0" y1="44" x2="407.0" y2="225" stroke="#cbd5e1" stroke-width="1.1"/><line x1="407.0" y1="290" x2="407.0" y2="470" stroke="#cbd5e1" stroke-width="1.1"/><text x="407.0" y="488" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">1</text><line x1="508.4" y1="44" x2="508.4" y2="225" stroke="#e2e8f0" stroke-width="0.6"/><line x1="508.4" y1="290" x2="508.4" y2="470" stroke="#e2e8f0" stroke-width="0.6"/><text x="508.4" y="488" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">2</text><line x1="642.6" y1="44" x2="642.6" y2="225" stroke="#e2e8f0" stroke-width="0.6"/><line x1="642.6" y1="290" x2="642.6" y2="470" stroke="#e2e8f0" stroke-width="0.6"/><text x="642.6" y="488" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">5</text><line x1="744.0" y1="44" x2="744.0" y2="225" stroke="#cbd5e1" stroke-width="1.1"/><line x1="744.0" y1="290" x2="744.0" y2="470" stroke="#cbd5e1" stroke-width="1.1"/><text x="744.0" y="488" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">10</text><line x1="70" y1="51.2" x2="744" y2="51.2" stroke="#e2e8f0" stroke-width="0.6" /><text x="62" y="55.2" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">6</text><line x1="70" y1="73.0" x2="744" y2="73.0" stroke="#e2e8f0" stroke-width="1" /><text x="62" y="77.0" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">0</text><line x1="70" y1="83.8" x2="744" y2="83.8" stroke="#dc2626" stroke-width="1" stroke-dasharray="5 4"/><text x="62" y="87.8" fill="#dc2626" font-family="monospace" font-size="11" text-anchor="end">-3</text><line x1="70" y1="109.2" x2="744" y2="109.2" stroke="#e2e8f0" stroke-width="0.6" /><text x="62" y="113.2" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">-10</text><line x1="70" y1="145.4" x2="744" y2="145.4" stroke="#e2e8f0" stroke-width="0.6" /><text x="62" y="149.4" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">-20</text><line x1="70" y1="181.6" x2="744" y2="181.6" stroke="#e2e8f0" stroke-width="0.6" /><text x="62" y="185.6" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">-30</text><line x1="70" y1="217.8" x2="744" y2="217.8" stroke="#e2e8f0" stroke-width="0.6" /><text x="62" y="221.8" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">-40</text><line x1="70" y1="294.7" x2="744" y2="294.7" stroke="#e2e8f0" stroke-width=".6" /><text x="62" y="298.7" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">90°</text><line x1="70" y1="337.4" x2="744" y2="337.4" stroke="#cbd5e1" stroke-width=".6" stroke-dasharray="4 4"/><text x="62" y="341.4" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">45°</text><line x1="70" y1="380.0" x2="744" y2="380.0" stroke="#e2e8f0" stroke-width=".6" /><text x="62" y="384.0" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">0°</text><line x1="70" y1="422.6" x2="744" y2="422.6" stroke="#cbd5e1" stroke-width=".6" stroke-dasharray="4 4"/><text x="62" y="426.6" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">-45°</text><line x1="70" y1="465.3" x2="744" y2="465.3" stroke="#e2e8f0" stroke-width=".6" /><text x="62" y="469.3" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">-90°</text><rect x="70" y="44" width="674" height="181" fill="none" stroke="#cbd5e1" stroke-width="1.1"/><rect x="70" y="290" width="674" height="180" fill="none" stroke="#cbd5e1" stroke-width="1.1"/><text x="70" y="31" fill="#0d9488" font-family="monospace" font-size="12.5" font-weight="700">GAIN  20·log|H|  (passe-haut)</text><text x="70" y="277" fill="#0891b2" font-family="monospace" font-size="12.5" font-weight="700">PHASE  arg(H)</text><text x="407" y="504" fill="#475569" font-family="monospace" font-size="11.5" text-anchor="middle">x = ω / ω₀   (échelle log)</text><path d="M70.0 217.8 L407.0 73.0 " fill="none" stroke="#d97706" stroke-width="1.6" stroke-dasharray="7 5"/><path d="M407.0 73.0 L744.0 73.0 " fill="none" stroke="#d97706" stroke-width="1.6" stroke-dasharray="7 5"/><path d="M70.0 218.1 L71.6 217.4 L73.2 216.7 L74.8 216.0 L76.4 215.3 L78.0 214.7 L79.6 214.0 L81.2 213.3 L82.8 212.6 L84.4 211.9 L86.0 211.3 L87.7 210.6 L89.3 209.9 L90.9 209.2 L92.5 208.5 L94.1 207.9 L95.7 207.2 L97.3 206.5 L98.9 205.8 L100.5 205.1 L102.1 204.5 L103.7 203.8 L105.3 203.1 L106.9 202.4 L108.5 201.7 L110.1 201.1 L111.7 200.4 L113.3 199.7 L114.9 199.0 L116.5 198.4 L118.1 197.7 L119.7 197.0 L121.4 196.3 L123.0 195.6 L124.6 195.0 L126.2 194.3 L127.8 193.6 L129.4 192.9 L131.0 192.3 L132.6 191.6 L134.2 190.9 L135.8 190.3 L137.4 189.6 L139.0 188.9 L140.6 188.2 L142.2 187.6 L143.8 186.9 L145.4 186.2 L147.0 185.6 L148.6 184.9 L150.2 184.2 L151.8 183.5 L153.4 182.9 L155.1 182.2 L156.7 181.5 L158.3 180.9 L159.9 180.2 L161.5 179.5 L163.1 178.9 L164.7 178.2 L166.3 177.5 L167.9 176.9 L169.5 176.2 L171.1 175.5 L172.7 174.9 L174.3 174.2 L175.9 173.6 L177.5 172.9 L179.1 172.2 L180.7 171.6 L182.3 170.9 L183.9 170.3 L185.5 169.6 L187.1 168.9 L188.8 168.3 L190.4 167.6 L192.0 167.0 L193.6 166.3 L195.2 165.7 L196.8 165.0 L198.4 164.4 L200.0 163.7 L201.6 163.1 L203.2 162.4 L204.8 161.8 L206.4 161.1 L208.0 160.5 L209.6 159.8 L211.2 159.2 L212.8 158.5 L214.4 157.9 L216.0 157.2 L217.6 156.6 L219.2 156.0 L220.8 155.3 L222.5 154.7 L224.1 154.0 L225.7 153.4 L227.3 152.8 L228.9 152.1 L230.5 151.5 L232.1 150.9 L233.7 150.2 L235.3 149.6 L236.9 149.0 L238.5 148.4 L240.1 147.7 L241.7 147.1 L243.3 146.5 L244.9 145.9 L246.5 145.2 L248.1 144.6 L249.7 144.0 L251.3 143.4 L252.9 142.8 L254.5 142.2 L256.2 141.5 L257.8 140.9 L259.4 140.3 L261.0 139.7 L262.6 139.1 L264.2 138.5 L265.8 137.9 L267.4 137.3 L269.0 136.7 L270.6 136.1 L272.2 135.5 L273.8 134.9 L275.4 134.3 L277.0 133.7 L278.6 133.1 L280.2 132.6 L281.8 132.0 L283.4 131.4 L285.0 130.8 L286.6 130.2 L288.2 129.6 L289.9 129.1 L291.5 128.5 L293.1 127.9 L294.7 127.4 L296.3 126.8 L297.9 126.2 L299.5 125.7 L301.1 125.1 L302.7 124.6 L304.3 124.0 L305.9 123.4 L307.5 122.9 L309.1 122.3 L310.7 121.8 L312.3 121.3 L313.9 120.7 L315.5 120.2 L317.1 119.6 L318.7 119.1 L320.3 118.6 L321.9 118.1 L323.6 117.5 L325.2 117.0 L326.8 116.5 L328.4 116.0 L330.0 115.5 L331.6 115.0 L333.2 114.5 L334.8 114.0 L336.4 113.4 L338.0 113.0 L339.6 112.5 L341.2 112.0 L342.8 111.5 L344.4 111.0 L346.0 110.5 L347.6 110.0 L349.2 109.6 L350.8 109.1 L352.4 108.6 L354.0 108.1 L355.6 107.7 L357.3 107.2 L358.9 106.8 L360.5 106.3 L362.1 105.9 L363.7 105.4 L365.3 105.0 L366.9 104.5 L368.5 104.1 L370.1 103.7 L371.7 103.2 L373.3 102.8 L374.9 102.4 L376.5 102.0 L378.1 101.6 L379.7 101.2 L381.3 100.8 L382.9 100.3 L384.5 100.0 L386.1 99.6 L387.7 99.2 L389.3 98.8 L391.0 98.4 L392.6 98.0 L394.2 97.6 L395.8 97.3 L397.4 96.9 L399.0 96.5 L400.6 96.2 L402.2 95.8 L403.8 95.5 L405.4 95.1 L407.0 94.8 L408.6 94.4 L410.2 94.1 L411.8 93.7 L413.4 93.4 L415.0 93.1 L416.6 92.8 L418.2 92.4 L419.8 92.1 L421.4 91.8 L423.0 91.5 L424.7 91.2 L426.3 90.9 L427.9 90.6 L429.5 90.3 L431.1 90.0 L432.7 89.7 L434.3 89.4 L435.9 89.2 L437.5 88.9 L439.1 88.6 L440.7 88.3 L442.3 88.1 L443.9 87.8 L445.5 87.6 L447.1 87.3 L448.7 87.1 L450.3 86.8 L451.9 86.6 L453.5 86.3 L455.1 86.1 L456.7 85.8 L458.4 85.6 L460.0 85.4 L461.6 85.2 L463.2 84.9 L464.8 84.7 L466.4 84.5 L468.0 84.3 L469.6 84.1 L471.2 83.9 L472.8 83.7 L474.4 83.5 L476.0 83.3 L477.6 83.1 L479.2 82.9 L480.8 82.7 L482.4 82.6 L484.0 82.4 L485.6 82.2 L487.2 82.0 L488.8 81.9 L490.4 81.7 L492.1 81.5 L493.7 81.4 L495.3 81.2 L496.9 81.0 L498.5 80.9 L500.1 80.7 L501.7 80.6 L503.3 80.4 L504.9 80.3 L506.5 80.1 L508.1 80.0 L509.7 79.9 L511.3 79.7 L512.9 79.6 L514.5 79.5 L516.1 79.3 L517.7 79.2 L519.3 79.1 L520.9 79.0 L522.5 78.9 L524.1 78.7 L525.8 78.6 L527.4 78.5 L529.0 78.4 L530.6 78.3 L532.2 78.2 L533.8 78.1 L535.4 78.0 L537.0 77.9 L538.6 77.8 L540.2 77.7 L541.8 77.6 L543.4 77.5 L545.0 77.4 L546.6 77.3 L548.2 77.2 L549.8 77.1 L551.4 77.1 L553.0 77.0 L554.6 76.9 L556.2 76.8 L557.8 76.7 L559.5 76.7 L561.1 76.6 L562.7 76.5 L564.3 76.4 L565.9 76.4 L567.5 76.3 L569.1 76.2 L570.7 76.2 L572.3 76.1 L573.9 76.0 L575.5 76.0 L577.1 75.9 L578.7 75.8 L580.3 75.8 L581.9 75.7 L583.5 75.7 L585.1 75.6 L586.7 75.5 L588.3 75.5 L589.9 75.4 L591.5 75.4 L593.2 75.3 L594.8 75.3 L596.4 75.2 L598.0 75.2 L599.6 75.1 L601.2 75.1 L602.8 75.1 L604.4 75.0 L606.0 75.0 L607.6 74.9 L609.2 74.9 L610.8 74.8 L612.4 74.8 L614.0 74.8 L615.6 74.7 L617.2 74.7 L618.8 74.7 L620.4 74.6 L622.0 74.6 L623.6 74.5 L625.2 74.5 L626.9 74.5 L628.5 74.4 L630.1 74.4 L631.7 74.4 L633.3 74.4 L634.9 74.3 L636.5 74.3 L638.1 74.3 L639.7 74.2 L641.3 74.2 L642.9 74.2 L644.5 74.2 L646.1 74.1 L647.7 74.1 L649.3 74.1 L650.9 74.1 L652.5 74.0 L654.1 74.0 L655.7 74.0 L657.3 74.0 L658.9 73.9 L660.6 73.9 L662.2 73.9 L663.8 73.9 L665.4 73.9 L667.0 73.8 L668.6 73.8 L670.2 73.8 L671.8 73.8 L673.4 73.8 L675.0 73.8 L676.6 73.7 L678.2 73.7 L679.8 73.7 L681.4 73.7 L683.0 73.7 L684.6 73.7 L686.2 73.6 L687.8 73.6 L689.4 73.6 L691.0 73.6 L692.6 73.6 L694.3 73.6 L695.9 73.6 L697.5 73.5 L699.1 73.5 L700.7 73.5 L702.3 73.5 L703.9 73.5 L705.5 73.5 L707.1 73.5 L708.7 73.5 L710.3 73.5 L711.9 73.4 L713.5 73.4 L715.1 73.4 L716.7 73.4 L718.3 73.4 L719.9 73.4 L721.5 73.4 L723.1 73.4 L724.7 73.4 L726.3 73.4 L728.0 73.3 L729.6 73.3 L731.2 73.3 L732.8 73.3 L734.4 73.3 L736.0 73.3 L737.6 73.3 L739.2 73.3 L740.8 73.3 L742.4 73.3 L744.0 73.3 " fill="none" stroke="#0d9488" stroke-width="2.6" stroke-linejoin="round"/><path d="M70.0 290.0 L71.6 290.0 L73.2 290.0 L74.8 290.0 L76.4 290.0 L78.0 290.0 L79.6 290.0 L81.2 290.0 L82.8 290.0 L84.4 290.0 L86.0 290.0 L87.7 290.0 L89.3 290.0 L90.9 290.0 L92.5 290.0 L94.1 290.0 L95.7 290.0 L97.3 290.0 L98.9 290.0 L100.5 290.0 L102.1 290.0 L103.7 290.0 L105.3 290.0 L106.9 290.0 L108.5 290.0 L110.1 290.0 L111.7 290.0 L113.3 290.0 L114.9 290.0 L116.5 290.0 L118.1 290.0 L119.7 290.0 L121.4 290.0 L123.0 290.0 L124.6 290.0 L126.2 290.0 L127.8 290.0 L129.4 290.0 L131.0 290.0 L132.6 290.0 L134.2 290.0 L135.8 290.0 L137.4 290.0 L139.0 290.0 L140.6 290.0 L142.2 290.0 L143.8 290.0 L145.4 290.0 L147.0 290.0 L148.6 290.0 L150.2 290.0 L151.8 290.0 L153.4 290.0 L155.1 290.0 L156.7 290.0 L158.3 290.0 L159.9 290.0 L161.5 290.0 L163.1 290.0 L164.7 290.0 L166.3 290.0 L167.9 290.0 L169.5 290.0 L171.1 290.0 L172.7 290.0 L174.3 290.0 L175.9 290.0 L177.5 290.0 L179.1 290.0 L180.7 290.0 L182.3 290.0 L183.9 290.0 L185.5 290.0 L187.1 290.0 L188.8 290.0 L190.4 290.0 L192.0 290.0 L193.6 290.0 L195.2 290.0 L196.8 290.0 L198.4 290.0 L200.0 290.0 L201.6 290.0 L203.2 290.0 L204.8 290.0 L206.4 290.0 L208.0 290.0 L209.6 290.0 L211.2 290.0 L212.8 290.0 L214.4 290.0 L216.0 290.0 L217.6 290.0 L219.2 290.0 L220.8 290.0 L222.5 290.0 L224.1 290.0 L225.7 290.0 L227.3 290.0 L228.9 290.0 L230.5 290.0 L232.1 290.0 L233.7 290.0 L235.3 290.0 L236.9 290.0 L238.5 290.0 L240.1 290.0 L241.7 290.0 L243.3 290.0 L244.9 290.0 L246.5 290.0 L248.1 290.0 L249.7 290.0 L251.3 290.0 L252.9 290.0 L254.5 290.0 L256.2 290.0 L257.8 290.0 L259.4 290.0 L261.0 290.0 L262.6 290.0 L264.2 290.0 L265.8 290.0 L267.4 290.0 L269.0 290.0 L270.6 290.0 L272.2 290.0 L273.8 290.0 L275.4 290.0 L277.0 290.0 L278.6 290.0 L280.2 290.0 L281.8 290.0 L283.4 290.0 L285.0 290.0 L286.6 290.0 L288.2 290.0 L289.9 290.0 L291.5 290.0 L293.1 290.0 L294.7 290.0 L296.3 290.0 L297.9 290.0 L299.5 290.0 L301.1 290.0 L302.7 290.0 L304.3 290.0 L305.9 290.0 L307.5 290.0 L309.1 290.0 L310.7 290.0 L312.3 290.0 L313.9 290.0 L315.5 290.0 L317.1 290.0 L318.7 290.0 L320.3 290.0 L321.9 290.0 L323.6 290.0 L325.2 290.0 L326.8 290.0 L328.4 290.0 L330.0 290.0 L331.6 290.0 L333.2 290.0 L334.8 290.0 L336.4 290.0 L338.0 290.0 L339.6 290.0 L341.2 290.0 L342.8 290.0 L344.4 290.0 L346.0 290.0 L347.6 290.0 L349.2 290.0 L350.8 290.0 L352.4 290.0 L354.0 290.0 L355.6 290.0 L357.3 290.0 L358.9 290.0 L360.5 290.0 L362.1 290.0 L363.7 290.0 L365.3 290.0 L366.9 290.0 L368.5 290.0 L370.1 290.0 L371.7 290.0 L373.3 290.0 L374.9 290.0 L376.5 290.0 L378.1 290.0 L379.7 290.0 L381.3 290.0 L382.9 290.0 L384.5 290.0 L386.1 290.0 L387.7 290.0 L389.3 290.0 L391.0 290.0 L392.6 290.0 L394.2 290.0 L395.8 290.6 L397.4 291.2 L399.0 291.8 L400.6 292.4 L402.2 293.0 L403.8 293.5 L405.4 294.1 L407.0 294.7 L408.6 295.3 L410.2 295.9 L411.8 296.5 L413.4 297.1 L415.0 297.7 L416.6 298.3 L418.2 298.9 L419.8 299.5 L421.4 300.1 L423.0 300.7 L424.7 301.3 L426.3 301.9 L427.9 302.4 L429.5 303.0 L431.1 303.6 L432.7 304.2 L434.3 304.8 L435.9 305.4 L437.5 306.0 L439.1 306.5 L440.7 307.1 L442.3 307.7 L443.9 308.3 L445.5 308.9 L447.1 309.4 L448.7 310.0 L450.3 310.6 L451.9 311.1 L453.5 311.7 L455.1 312.3 L456.7 312.8 L458.4 313.4 L460.0 314.0 L461.6 314.5 L463.2 315.1 L464.8 315.6 L466.4 316.2 L468.0 316.7 L469.6 317.3 L471.2 317.8 L472.8 318.4 L474.4 318.9 L476.0 319.4 L477.6 320.0 L479.2 320.5 L480.8 321.0 L482.4 321.5 L484.0 322.1 L485.6 322.6 L487.2 323.1 L488.8 323.6 L490.4 324.1 L492.1 324.6 L493.7 325.1 L495.3 325.7 L496.9 326.1 L498.5 326.6 L500.1 327.1 L501.7 327.6 L503.3 328.1 L504.9 328.6 L506.5 329.1 L508.1 329.6 L509.7 330.0 L511.3 330.5 L512.9 331.0 L514.5 331.4 L516.1 331.9 L517.7 332.4 L519.3 332.8 L520.9 333.3 L522.5 333.7 L524.1 334.2 L525.8 334.6 L527.4 335.1 L529.0 335.5 L530.6 335.9 L532.2 336.4 L533.8 336.8 L535.4 337.2 L537.0 337.6 L538.6 338.0 L540.2 338.5 L541.8 338.9 L543.4 339.3 L545.0 339.7 L546.6 340.1 L548.2 340.5 L549.8 340.9 L551.4 341.3 L553.0 341.7 L554.6 342.0 L556.2 342.4 L557.8 342.8 L559.5 343.2 L561.1 343.5 L562.7 343.9 L564.3 344.3 L565.9 344.6 L567.5 345.0 L569.1 345.4 L570.7 345.7 L572.3 346.1 L573.9 346.4 L575.5 346.8 L577.1 347.1 L578.7 347.4 L580.3 347.8 L581.9 348.1 L583.5 348.4 L585.1 348.7 L586.7 349.1 L588.3 349.4 L589.9 349.7 L591.5 350.0 L593.2 350.3 L594.8 350.6 L596.4 350.9 L598.0 351.2 L599.6 351.5 L601.2 351.8 L602.8 352.1 L604.4 352.4 L606.0 352.7 L607.6 353.0 L609.2 353.3 L610.8 353.6 L612.4 353.8 L614.0 354.1 L615.6 354.4 L617.2 354.7 L618.8 354.9 L620.4 355.2 L622.0 355.4 L623.6 355.7 L625.2 356.0 L626.9 356.2 L628.5 356.5 L630.1 356.7 L631.7 357.0 L633.3 357.2 L634.9 357.4 L636.5 357.7 L638.1 357.9 L639.7 358.2 L641.3 358.4 L642.9 358.6 L644.5 358.8 L646.1 359.1 L647.7 359.3 L649.3 359.5 L650.9 359.7 L652.5 359.9 L654.1 360.2 L655.7 360.4 L657.3 360.6 L658.9 360.8 L660.6 361.0 L662.2 361.2 L663.8 361.4 L665.4 361.6 L667.0 361.8 L668.6 362.0 L670.2 362.2 L671.8 362.4 L673.4 362.6 L675.0 362.8 L676.6 362.9 L678.2 363.1 L679.8 363.3 L681.4 363.5 L683.0 363.7 L684.6 363.8 L686.2 364.0 L687.8 364.2 L689.4 364.3 L691.0 364.5 L692.6 364.7 L694.3 364.8 L695.9 365.0 L697.5 365.2 L699.1 365.3 L700.7 365.5 L702.3 365.6 L703.9 365.8 L705.5 366.0 L707.1 366.1 L708.7 366.3 L710.3 366.4 L711.9 366.6 L713.5 366.7 L715.1 366.8 L716.7 367.0 L718.3 367.1 L719.9 367.3 L721.5 367.4 L723.1 367.5 L724.7 367.7 L726.3 367.8 L728.0 367.9 L729.6 368.1 L731.2 368.2 L732.8 368.3 L734.4 368.4 L736.0 368.6 L737.6 368.7 L739.2 368.8 L740.8 368.9 L742.4 369.1 L744.0 369.2 " fill="none" stroke="#0891b2" stroke-width="2.6" stroke-linejoin="round"/><circle cx="407.0" cy="94.8" r="4.5" fill="#d97706" stroke="#1e293b" stroke-width="1.5"/><circle cx="407.0" cy="294.7" r="4.5" fill="#d97706" stroke="#1e293b" stroke-width="1.5"/><text x="414.0" y="88.8" fill="#d97706" font-family="monospace" font-size="11">H(1)=jQ → −6 dB, +90°</text></svg>
-      <figcaption>Bode passe-haut 2ᵈ ordre, \(Q=1/2\). Asymptotes (tiret jaune) +40 dB/déc puis 0 dB, courbe réelle en vert.</figcaption>
+      <figcaption>Bode passe-haut 2ᵉ ordre, \(Q=1/2\). Asymptotes (tiret jaune) +40 dB/déc puis 0 dB, courbe réelle en vert.</figcaption>
     </figure>
 
     <p class="q">4) Résonance ?</p>
-    <p>Un pic (gain &gt; gain HF) n'apparaît que si \(Q&gt;\dfrac{1}{\sqrt2}\approx0{,}707\). Ici on prend
-    \(Q=\dfrac12&lt;\dfrac{1}{\sqrt2}\).</p>
-    <div class="res"><b>Pas de résonance</b> pour \(Q=1/2\) : la courbe monte de façon monotone vers 0 dB
-    sans dépassement (à \(x=1\) elle vaut même \(-6\) dB, sous l'asymptote).</div>
+    <div class="rappel"><span class="lab">Rappel · résonance d'un 2ᵉ ordre</span>Un pic (gain supérieur au gain HF ou BF) n'apparaît que si \(Q &gt; \dfrac{1}{\sqrt2} \approx 0{,}707\).</div>
+    <p>Ici \(Q = \dfrac12 &lt; 0{,}707\).</p>
+    <div class="res"><b>Pas de résonance</b> pour \(Q = 1/2\) : la courbe monte sans dépassement vers 0 dB. En \(x = 1\) elle vaut même −6 dB, sous l'asymptote.</div>
 
     <p class="q">5) Comportement dérivateur / intégrateur ?</p>
+    <div class="rappel"><span class="lab">Rappel · dérivateur</span>Un comportement dérivateur correspond à \(\underline H \propto j\omega\) (pente +20 dB/déc) ; doublement dérivateur à \(\underline H \propto (j\omega)^2\) (pente +40 dB/déc).</div>
     <ul>
-      <li><b>En BF</b> : \(\underline H\approx(jx)^2\) &rArr; comportement <b>doublement dérivateur</b>
-      (\(s\propto \mathrm d^2e/\mathrm dt^2\), pente +40 dB/déc, phase \(+180^\circ\)).</li>
-      <li><b>En HF</b> : \(\underline H\to1\) &rArr; simple <b>suiveur</b> (gain unité), ni dérivateur ni intégrateur.</li>
+      <li>En BF : \(\underline H \approx (jx)^2\). Le filtre est <b>doublement dérivateur</b> : \(s \propto \dfrac{d^2e}{dt^2}\), pente +40 dB/déc, phase \(+180^\circ\).</li>
+      <li>En HF : \(\underline H \to 1\). Le filtre recopie l'entrée : ni dérivateur, ni intégrateur.</li>
     </ul>
-    <div class="res">Ce passe-haut est <b>dérivateur en basses fréquences</b> et <b>ne présente aucun
-    comportement intégrateur</b>.</div>
-    </div>
+    <div class="res">Ce passe-haut est <b>dérivateur en basses fréquences</b> et n'a <b>aucun comportement intégrateur</b>.</div>
+      </div>
   </div>
   </section>
   <section class="block" id="ex3">
@@ -680,42 +806,57 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
     <figcaption>Énoncé (TD1, D. Courtois) — pont en échelle \(R,\,nR,\,R,\,C\), sortie \(s\) aux bornes de \(C\)</figcaption>
   </figure>
 
-    <div class="note"><span class="lab">Le montage</span> Depuis \(e\) : une \(R\) vers le nœud \(A\) ;
-    en \(A\), une résistance \(nR\) vers la masse ; de \(A\), une seconde \(R\) vers le nœud \(B\) ;
-    en \(B\), un condensateur \(C\) vers la masse. Sortie \(s=v_B\) (aux bornes de \(C\), <b>à vide</b>).</div>
+    <div class="enonce"><b>Le montage.</b> Depuis \(e\) : une \(R\) vers le nœud \(A\) ; en \(A\), une résistance \(nR\) vers la masse ; de \(A\), une seconde \(R\) vers le nœud \(B\) ; en \(B\), un condensateur \(C\) vers la masse. Sortie \(s=v_B\) (aux bornes de \(C\), à vide).</div>
 
     <p class="q">1) Fonction de transfert (Millman + diviseur)</p>
-    <p><b>Millman au nœud \(B\) (relié à \(A\) par \(R\), à la masse par \(C\))</b></p>
-    \[ \underline v_B=\frac{\underline v_A/R}{\,1/R+jC\omega\,}=\frac{\underline v_A}{1+jRC\omega} \]
-    <p><b>Millman au nœud \(A\) (relié à \(e\) par \(R\), masse par \(nR\), à \(B\) par \(R\))</b></p>
-    \[ \underline v_A=\frac{\dfrac{e}{R}+\dfrac{\underline v_B}{R}}{\dfrac1R+\dfrac{1}{nR}+\dfrac1R}
-       =\frac{n\,(e+\underline v_B)}{2n+1} \]
-    <p><b>On élimine \(\underline v_A\) avec \(\underline v_A=(1+jRC\omega)\,\underline v_B\)</b></p>
-    \[ (2n+1)(1+jRC\omega)\underline v_B=n\,e+n\,\underline v_B
-       \;\Rightarrow\; \big[(n+1)+(2n+1)jRC\omega\big]\underline v_B=n\,e \]
-    <div class="res">
-      \[ \boxed{\ \underline H=\frac{\underline v_B}{e}=\frac{n}{(n+1)+(2n+1)\,jRC\omega}
-         =\frac{H_0}{1+j\dfrac{\omega}{\omega_c}}\ } \]
-      avec \(\;H_0=\dfrac{n}{n+1}\;\) et \(\;\omega_c=\dfrac{n+1}{(2n+1)RC}\;\) : <b>passe-bas du 1ᵉʳ ordre</b>.</div>
+    <p class="etape">Étape 1 : relation entre \(v_B\) et \(v_A\)</p>
+    <div class="rappel"><span class="lab">Rappel · pont diviseur de tension</span>\[ \underline V_s = \frac{\underline Z_2}{\underline Z_1 + \underline Z_2}\,\underline V_e \]</div>
+    <p>La sortie est à vide : \(R\) et \(C\) forment un diviseur alimenté par \(v_A\).</p>
+    \[ \underline v_B = \frac{\frac{1}{jC\omega}}{R + \frac{1}{jC\omega}}\,\underline v_A = \frac{\underline v_A}{1 + jRC\omega} \]
+    <p>Donc \(\underline v_A = (1 + jRC\omega)\,\underline v_B\).</p>
+
+    <p class="etape">Étape 2 : Millman au nœud \(A\)</p>
+    <div class="rappel"><span class="lab">Rappel · théorème de Millman</span>\[ V_A = \frac{\sum_k V_k/Z_k}{\sum_k 1/Z_k} \]</div>
+    <p>\(A\) est relié à \(e\) par \(R\), à la masse par \(nR\) et à \(B\) par \(R\) :</p>
+    \[ \underline v_A = \frac{\dfrac{e}{R} + \dfrac{0}{nR} + \dfrac{\underline v_B}{R}}{\dfrac1R + \dfrac{1}{nR} + \dfrac1R} \]
+    <p>On multiplie en haut et en bas par \(nR\) :</p>
+    \[ \underline v_A = \frac{n\,(e + \underline v_B)}{2n + 1} \]
+
+    <p class="etape">Étape 3 : on élimine \(\underline v_A\)</p>
+    \[ (2n + 1)(1 + jRC\omega)\,\underline v_B = n\,e + n\,\underline v_B \]
+    \[ \left[(n + 1) + (2n + 1)\,jRC\omega\right]\underline v_B = n\,e \]
+
+    <p class="etape">Étape 4 : forme canonique</p>
+    <div class="rappel"><span class="lab">Rappel · forme canonique d'un passe-bas du 1ᵉʳ ordre</span>\[ \underline H = \frac{H_0}{1 + j\dfrac{\omega}{\omega_c}} \]</div>
+    <p>On divise en haut et en bas par \(n + 1\) :</p>
+    <div class="res">\[ \underline H = \frac{n}{(n+1) + (2n+1)\,jRC\omega} = \frac{H_0}{1 + j\dfrac{\omega}{\omega_c}}, \qquad H_0 = \frac{n}{n+1}, \qquad \omega_c = \frac{n+1}{(2n+1)RC} \]
+    C'est un <b>passe-bas du 1ᵉʳ ordre</b>.</div>
 
     <p class="q">2) Équation différentielle associée</p>
-    <p>\(\underline H=\dfrac{s}{e}=\dfrac{H_0}{1+j\tau\omega}\) avec \(\tau=\dfrac{(2n+1)RC}{n+1}\).
-    On « croise » puis \(j\omega\to\dfrac{d}{dt}\) :</p>
-    \[ \boxed{\ (2n+1)RC\,\frac{ds}{dt}+(n+1)\,s=n\,e\ } \]
+    <p class="etape">Étape 1 : produit en croix</p>
+    \[ \left[(n + 1) + (2n + 1)RC\,(j\omega)\right]\underline s = n\,\underline e \]
+    <p class="etape">Étape 2 : retour au temps</p>
+    <div class="rappel"><span class="lab">Rappel · du complexe au temporel</span>\[ j\omega \;\longleftrightarrow\; \frac{d}{dt} \]</div>
+    <div class="res">\[ (2n+1)RC\,\frac{ds}{dt} + (n+1)\,s = n\,e \]</div>
 
     <p class="q">3) Nature par schémas redessinés BF / HF</p>
-    <ul>
-      <li><b>BF</b> : \(C\) ouvert &rArr; aucun courant dans la 2ᵈ \(R\) &rArr; \(v_B=v_A\) ;
-      \(A\) est un simple diviseur \(R/nR\) : \(s=\dfrac{nR}{R+nR}\,e=\dfrac{n}{n+1}\,e\). Gain \(=H_0\ne0\).</li>
-      <li><b>HF</b> : \(C\) court-circuité &rArr; \(v_B=0\) &rArr; \(s=0\).</li>
-    </ul>
-    <div class="res">Gain \(H_0\) en BF, 0 en HF &rArr; confirme un <b>passe-bas 1ᵉʳ ordre</b>.</div>
+    <p class="etape">Étape 1 : en basse fréquence</p>
+    <p>\(C\) est ouvert : aucun courant dans la deuxième \(R\), donc pas de chute de tension et \(v_B = v_A\).</p>
+    <p>Il reste un diviseur \(R\) / \(nR\) :</p>
+    \[ s = \frac{nR}{R + nR}\,e = \frac{n}{n+1}\,e \]
+    <p class="etape">Étape 2 : en haute fréquence</p>
+    <p>\(C\) est un fil entre \(B\) et la masse :</p>
+    \[ s = 0 \]
+    <div class="res">Gain \(H_0 = \dfrac{n}{n+1}\) en BF, 0 en HF : c'est bien un <b>passe-bas</b>.</div>
 
     <p class="q">4) Cohérence</p>
-    <p>\(\underline H(\omega\!\to\!0)=\dfrac{n}{n+1}=H_0\) et \(\underline H(\omega\!\to\!\infty)\to0\) :
-    identiques aux limites trouvées sur les schémas. Un seul pôle &rArr; pente unique \(-20\) dB/déc.
-    <b>Tout est cohérent.</b></p>
-    </div>
+    <ul>
+      <li>\(\underline H(\omega \to 0) = \dfrac{n}{n+1} = H_0\) : même valeur que le schéma BF.</li>
+      <li>\(\underline H(\omega \to \infty) \to 0\) : même valeur que le schéma HF.</li>
+      <li>Un seul terme en \(j\omega\) au dénominateur : une seule pente, −20 dB/déc.</li>
+    </ul>
+    <div class="res">Les deux méthodes donnent le même résultat : tout est cohérent.</div>
+      </div>
   </div>
   </section>
   <section class="block" id="ex4">
@@ -730,23 +871,31 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
     <p class="enonce"><b>Question :</b> pour quelle pulsation \(\omega\)
     l'intensité \(i\) traversant \(R\) est-elle <b>indépendante de \(R\)</b> ?</p>
 
-    <p><b>Mise en équation</b></p>
-    <p>La source \(e\) alimente, à travers \(C\) (série), le parallèle \(L\parallel R\). Notons \(V\)
-    la tension aux bornes du parallèle ; alors \(i=\dfrac{V}{R}\) et, par diviseur de tension,
-    \(V=e\,\dfrac{\underline Z_p}{\underline Z_C+\underline Z_p}\) avec \(\underline Z_p=\dfrac{jL\omega\,R}{R+jL\omega}\).</p>
-    <p><b>On calcule \(i\) et on simplifie (multiplier par \(jC\omega\))</b></p>
-    \[ i=\frac{V}{R}=\frac{e\;jL\omega}{\,\dfrac{R+jL\omega}{jC\omega}+jL\omega R\,}
-        =\frac{-\,e\,LC\omega^2}{\,R\,(1-LC\omega^2)+jL\omega\,} \]
-    <p><b>Rendre \(i\) indépendant de \(R\)</b></p>
-    <p>\(R\) n'apparaît qu'au dénominateur, dans le terme \(R\,(1-LC\omega^2)\). Il disparaît ssi ce
-    facteur s'annule :</p>
-    \[ 1-LC\omega^2=0 \quad\Longrightarrow\quad \boxed{\ \omega=\omega_0=\frac{1}{\sqrt{LC}}\ } \]
-    <div class="res">À cette pulsation \(\omega_0\), il reste
-      \[ i=\frac{-e\,LC\omega_0^2}{jL\omega_0}=\frac{-e}{jL\omega_0}=j\,e\,C\omega_0
-         \quad\Rightarrow\quad |i|=e\,C\omega_0=e\sqrt{\frac{C}{L}} \]
-      <b>totalement indépendant de \(R\)</b> (l'ensemble \(L\parallel R\) « antirésonne » : à \(\omega_0\)
-      la branche \(L\) impose le courant, \(R\) ne joue plus).</div>
-    </div>
+    <p class="q">Pulsation pour laquelle \(i\) ne dépend pas de \(R\)</p>
+
+    <p class="etape">Étape 1 : mise en équation</p>
+    <p>La source \(e\) alimente, à travers \(C\), le parallèle \(L\parallel R\). On note \(V\) la tension aux bornes de ce parallèle.</p>
+    <div class="rappel"><span class="lab">Rappel · deux impédances en parallèle</span>\[ \underline Z = \frac{\underline Z_a\,\underline Z_b}{\underline Z_a + \underline Z_b} \]</div>
+    \[ \underline Z_p = \frac{jL\omega\,R}{R + jL\omega} \]
+    <div class="rappel"><span class="lab">Rappel · pont diviseur de tension</span>\[ \underline V = \frac{\underline Z_p}{\underline Z_C + \underline Z_p}\,\underline e \]</div>
+    <p>Et le courant dans \(R\) vaut \(i = \dfrac{V}{R}\).</p>
+
+    <p class="etape">Étape 2 : expression de \(i\)</p>
+    \[ \underline i = \frac{\underline Z_p}{R\,(\underline Z_C + \underline Z_p)}\,\underline e \]
+    <p>On remplace, puis on multiplie en haut et en bas par \(jC\omega\,(R + jL\omega)\) :</p>
+    \[ \underline i = \frac{jL\omega \times jC\omega}{(R + jL\omega) + jL\omega R \times jC\omega}\,\underline e \]
+    \[ \underline i = \frac{-LC\omega^2}{R\,(1 - LC\omega^2) + jL\omega}\,\underline e \]
+
+    <p class="etape">Étape 3 : faire disparaître \(R\)</p>
+    <p>\(R\) n'apparaît que dans le terme \(R\,(1 - LC\omega^2)\). Il disparaît si ce facteur est nul :</p>
+    \[ 1 - LC\omega^2 = 0 \iff \omega = \omega_0 = \frac{1}{\sqrt{LC}} \]
+
+    <p class="etape">Étape 4 : valeur du courant</p>
+    <p>À \(\omega_0\), on a \(LC\omega_0^2 = 1\) et \(\dfrac{1}{L\omega_0} = C\omega_0\) :</p>
+    \[ \underline i = \frac{-1}{jL\omega_0}\,\underline e = j\,C\omega_0\,\underline e \]
+    \[ |\underline i| = C\omega_0\,|\underline e| = \sqrt{\frac{C}{L}}\,|\underline e| \]
+    <div class="res">Pour \(\omega = \omega_0 = \dfrac{1}{\sqrt{LC}}\), le courant \(i\) vaut \(j\,C\omega_0\,e\) : il ne dépend pas de \(R\).</div>
+      </div>
   </div>
   </section>
   <section class="block" id="ex5">
@@ -959,8 +1108,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
   </figure>
 
     <p class="q">1) Schéma du montage</p>
-    <p>Les trois dipôles en série ; \(e\) est appliquée aux bornes de l'ensemble, \(s\) est prise aux
-    bornes du sous-ensemble \(\{R_1,C\}\) (donc \(R_2\) est exclu de la sortie) :</p>
+    <p>Les trois dipôles sont en série. \(e\) est appliquée aux bornes de l'ensemble ; \(s\) est prise aux bornes de \(\{R_1, C\}\), donc \(R_2\) est hors de la sortie.</p>
     <figure>
     <svg viewBox="0 0 640 190" width="640" xmlns="http://www.w3.org/2000/svg">
       <g fill="none" stroke="#475569" stroke-width="2.2" stroke-linecap="round">
@@ -987,76 +1135,98 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
     </figure>
 
     <p class="q">2) Gains BF et HF (sur le schéma)</p>
-    <ul>
-      <li><b>BF</b> : \(C\) ouvert, aucun courant &rArr; pas de chute dans \(R_1,R_2\) ;
-      toute \(e\) est sur \(C\) &rArr; \(s=e\), <b>gain \(=1\)</b>.</li>
-      <li><b>HF</b> : \(C\) court-circuité &rArr; diviseur résistif \(s=\dfrac{R_1}{R_1+R_2}\,e\),
-      <b>gain \(=\dfrac{10}{100}=0{,}1\)</b> (\(-20\) dB).</li>
-    </ul>
+    <div class="rappel"><span class="lab">Rappel · condensateur</span>Interrupteur ouvert en BF, fil en HF.</div>
+    <p class="etape">Étape 1 : en basse fréquence</p>
+    <p>\(C\) est ouvert : aucun courant, donc aucune tension aux bornes de \(R_1\) et \(R_2\). Toute la tension \(e\) est sur \(C\), qui fait partie de la sortie.</p>
+    \[ s = e \qquad\Longrightarrow\qquad G_{BF} = 1 \]
+    <p class="etape">Étape 2 : en haute fréquence</p>
+    <p>\(C\) est un fil : il reste un diviseur résistif.</p>
+    <div class="rappel"><span class="lab">Rappel · pont diviseur de tension</span>\[ s = \frac{R_1}{R_1 + R_2}\,e \]</div>
+    \[ G_{HF} = \frac{10}{10 + 90} = 0{,}1 \]
+    <div class="res">Gain 1 (0 dB) en BF et 0,1 (−20 dB) en HF.</div>
 
     <p class="q">3) Fonction de transfert</p>
-    \[ \underline H=\frac{R_1+\frac{1}{jC\omega}}{R_1+R_2+\frac{1}{jC\omega}}
-       \;\xrightarrow{\times\,jC\omega}\; \boxed{\ \underline H=H_0\,\frac{1+j\omega\tau_1}{1+j\omega\tau_2}\ } \]
+    <p class="etape">Étape 1 : diviseur de tension</p>
+    \[ \underline H = \frac{R_1 + \frac{1}{jC\omega}}{R_1 + R_2 + \frac{1}{jC\omega}} \]
+    <p class="etape">Étape 2 : on multiplie en haut et en bas par \(jC\omega\)</p>
+    \[ \underline H = \frac{1 + jR_1C\omega}{1 + j(R_1 + R_2)C\omega} \]
+    <div class="res">\[ \underline H = H_0\,\frac{1 + j\omega\tau_1}{1 + j\omega\tau_2} \]</div>
 
     <p class="q">4) Valeurs de \(H_0,\ \tau_1,\ \tau_2\)</p>
-    <div class="res">
-      \(H_0=1\) ;
-      \(\ \tau_1=R_1C=10^4\times10^{-8}=\mathbf{10^{-4}\ s}\ (100\ \mu s,\ \omega_1=10^4\ \text{rad/s})\) ;
-      \(\ \tau_2=(R_1+R_2)C=10^5\times10^{-8}=\mathbf{10^{-3}\ s}\ (1\ ms,\ \omega_2=10^3\ \text{rad/s})\).
-      <br>Comme \(\tau_2>\tau_1\) : le <b>pôle</b> \(\omega_2\) agit avant le <b>zéro</b> \(\omega_1\).</div>
+    <p>Par identification : \(H_0 = 1\), \(\tau_1 = R_1C\), \(\tau_2 = (R_1 + R_2)C\).</p>
+    \[ \tau_1 = 10^4 \times 10^{-8} = 10^{-4}\ \text{s} \]
+    \[ \tau_2 = 10^5 \times 10^{-8} = 10^{-3}\ \text{s} \]
+    <ul>
+      <li>\(\tau_1 = 100\ \mu\)s, soit \(\omega_1 = 1/\tau_1 = 10^4\) rad/s.</li>
+      <li>\(\tau_2 = 1\) ms, soit \(\omega_2 = 1/\tau_2 = 10^3\) rad/s.</li>
+    </ul>
+    <div class="res">\(H_0 = 1\), \(\tau_1 = 10^{-4}\) s, \(\tau_2 = 10^{-3}\) s. Comme \(\tau_2 &gt; \tau_1\), le terme du dénominateur (\(\omega_2\)) agit avant celui du numérateur (\(\omega_1\)).</div>
 
     <p class="q">5) Décomposition \(\underline H=\underline H_1\times\underline H_2\)</p>
-    \[ \underline H_1=1+j\omega\tau_1\quad(\text{zéro / avance})\ ,\qquad
-       \underline H_2=\frac{1}{1+j\omega\tau_2}\quad(\text{pôle / passe-bas}) \]
+    \[ \underline H_1 = 1 + j\omega\tau_1 \qquad\qquad \underline H_2 = \frac{1}{1 + j\omega\tau_2} \]
+    <div class="res">\(\underline H_1\) : terme du 1ᵉʳ ordre au numérateur (fait monter le gain). \(\underline H_2\) : passe-bas du 1ᵉʳ ordre.</div>
 
     <p class="q">6) \(G_{dB}\) et \(\Delta\varphi\)</p>
-    <p>Un produit devient une somme en dB et en phase :</p>
-    \[ G_{dB}=G_{dB1}+G_{dB2}\ ,\qquad \Delta\varphi=\Delta\varphi_1+\Delta\varphi_2 \]
+    <div class="rappel"><span class="lab">Rappel · produit de fonctions de transfert</span>\[ \log(ab) = \log a + \log b \qquad \arg(ab) = \arg a + \arg b \]</div>
+    <div class="res">\[ G_{dB} = G_{dB1} + G_{dB2} \qquad\qquad \Delta\varphi = \Delta\varphi_1 + \Delta\varphi_2 \]</div>
 
     <p class="q">7) Bode asymptotique en amplitude</p>
     <ul>
-      <li>\(\omega<\omega_2\) : plat à <b>0 dB</b>.</li>
-      <li>\(\omega_2<\omega<\omega_1\) : pôle actif &rArr; <b>&minus;20 dB/déc</b>.</li>
-      <li>\(\omega>\omega_1\) : zéro compense &rArr; plat à <b>&minus;20 dB</b> (\(=R_1/(R_1+R_2)\)).</li>
+      <li>\(\omega &lt; \omega_2\) : les deux termes valent 1. Plateau à <b>0 dB</b>.</li>
+      <li>\(\omega_2 &lt; \omega &lt; \omega_1\) : seul \(\underline H_2\) agit. Pente <b>−20 dB/déc</b>.</li>
+      <li>\(\omega &gt; \omega_1\) : \(\underline H_1\) apporte +20 dB/déc, qui compense. Plateau à <b>−20 dB</b>, soit \(R_1/(R_1 + R_2)\).</li>
     </ul>
     <figure><svg viewBox="0 0 760 500" width="760" xmlns="http://www.w3.org/2000/svg"><line x1="70.0" y1="44" x2="70.0" y2="225" stroke="#cbd5e1" stroke-width="1.1"/><line x1="70.0" y1="290" x2="70.0" y2="470" stroke="#cbd5e1" stroke-width="1.1"/><text x="70.0" y="488" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">100</text><line x1="238.5" y1="44" x2="238.5" y2="225" stroke="#cbd5e1" stroke-width="1.1"/><line x1="238.5" y1="290" x2="238.5" y2="470" stroke="#cbd5e1" stroke-width="1.1"/><text x="238.5" y="488" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">10^3</text><line x1="407.0" y1="44" x2="407.0" y2="225" stroke="#cbd5e1" stroke-width="1.1"/><line x1="407.0" y1="290" x2="407.0" y2="470" stroke="#cbd5e1" stroke-width="1.1"/><text x="407.0" y="488" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">10^4</text><line x1="575.5" y1="44" x2="575.5" y2="225" stroke="#cbd5e1" stroke-width="1.1"/><line x1="575.5" y1="290" x2="575.5" y2="470" stroke="#cbd5e1" stroke-width="1.1"/><text x="575.5" y="488" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">10^5</text><line x1="744.0" y1="44" x2="744.0" y2="225" stroke="#cbd5e1" stroke-width="1.1"/><line x1="744.0" y1="290" x2="744.0" y2="470" stroke="#cbd5e1" stroke-width="1.1"/><text x="744.0" y="488" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="middle">10^6</text><line x1="70" y1="77.9" x2="744" y2="77.9" stroke="#e2e8f0" stroke-width="1" /><text x="62" y="81.9" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">0</text><line x1="70" y1="94.9" x2="744" y2="94.9" stroke="#dc2626" stroke-width="1" stroke-dasharray="5 4"/><text x="62" y="98.9" fill="#dc2626" font-family="monospace" font-size="11" text-anchor="end">-3</text><line x1="70" y1="134.5" x2="744" y2="134.5" stroke="#e2e8f0" stroke-width="0.6" /><text x="62" y="138.5" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">-10</text><line x1="70" y1="191.1" x2="744" y2="191.1" stroke="#e2e8f0" stroke-width="0.6" /><text x="62" y="195.1" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">-20</text><line x1="70" y1="320.0" x2="744" y2="320.0" stroke="#e2e8f0" stroke-width=".6" /><text x="62" y="324.0" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">0°</text><line x1="70" y1="365.0" x2="744" y2="365.0" stroke="#e2e8f0" stroke-width=".6" /><text x="62" y="369.0" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">-15°</text><line x1="70" y1="410.0" x2="744" y2="410.0" stroke="#e2e8f0" stroke-width=".6" /><text x="62" y="414.0" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">-30°</text><line x1="70" y1="455.0" x2="744" y2="455.0" stroke="#cbd5e1" stroke-width=".6" stroke-dasharray="4 4"/><text x="62" y="459.0" fill="#94a3b8" font-family="monospace" font-size="11" text-anchor="end">-45°</text><rect x="70" y="44" width="674" height="181" fill="none" stroke="#cbd5e1" stroke-width="1.1"/><rect x="70" y="290" width="674" height="180" fill="none" stroke="#cbd5e1" stroke-width="1.1"/><text x="70" y="31" fill="#0d9488" font-family="monospace" font-size="12.5" font-weight="700">GAIN  20·log|H|  (avance/retard 1er ordre)</text><text x="70" y="277" fill="#0891b2" font-family="monospace" font-size="12.5" font-weight="700">PHASE  arg(H)</text><text x="407" y="504" fill="#475569" font-family="monospace" font-size="11.5" text-anchor="middle">ω  (rad·s⁻¹, échelle log)</text><path d="M70.0 77.9 L238.5 77.9 " fill="none" stroke="#d97706" stroke-width="1.6" stroke-dasharray="7 5"/><path d="M238.5 77.9 L407.0 191.1 " fill="none" stroke="#d97706" stroke-width="1.6" stroke-dasharray="7 5"/><path d="M407.0 191.1 L744.0 191.1 " fill="none" stroke="#d97706" stroke-width="1.6" stroke-dasharray="7 5"/><path d="M70.0 78.2 L71.6 78.2 L73.2 78.2 L74.8 78.2 L76.4 78.2 L78.0 78.2 L79.6 78.3 L81.2 78.3 L82.8 78.3 L84.4 78.3 L86.0 78.3 L87.7 78.3 L89.3 78.3 L90.9 78.4 L92.5 78.4 L94.1 78.4 L95.7 78.4 L97.3 78.4 L98.9 78.5 L100.5 78.5 L102.1 78.5 L103.7 78.5 L105.3 78.6 L106.9 78.6 L108.5 78.6 L110.1 78.7 L111.7 78.7 L113.3 78.7 L114.9 78.8 L116.5 78.8 L118.1 78.8 L119.7 78.9 L121.4 78.9 L123.0 78.9 L124.6 79.0 L126.2 79.0 L127.8 79.1 L129.4 79.1 L131.0 79.2 L132.6 79.2 L134.2 79.3 L135.8 79.4 L137.4 79.4 L139.0 79.5 L140.6 79.6 L142.2 79.6 L143.8 79.7 L145.4 79.8 L147.0 79.9 L148.6 79.9 L150.2 80.0 L151.8 80.1 L153.4 80.2 L155.1 80.3 L156.7 80.4 L158.3 80.5 L159.9 80.6 L161.5 80.7 L163.1 80.8 L164.7 81.0 L166.3 81.1 L167.9 81.2 L169.5 81.4 L171.1 81.5 L172.7 81.7 L174.3 81.8 L175.9 82.0 L177.5 82.1 L179.1 82.3 L180.7 82.5 L182.3 82.7 L183.9 82.9 L185.5 83.1 L187.1 83.3 L188.8 83.5 L190.4 83.7 L192.0 83.9 L193.6 84.2 L195.2 84.4 L196.8 84.7 L198.4 84.9 L200.0 85.2 L201.6 85.5 L203.2 85.8 L204.8 86.1 L206.4 86.4 L208.0 86.7 L209.6 87.0 L211.2 87.4 L212.8 87.7 L214.4 88.1 L216.0 88.4 L217.6 88.8 L219.2 89.2 L220.8 89.6 L222.5 90.0 L224.1 90.4 L225.7 90.9 L227.3 91.3 L228.9 91.8 L230.5 92.2 L232.1 92.7 L233.7 93.2 L235.3 93.7 L236.9 94.2 L238.5 94.7 L240.1 95.3 L241.7 95.8 L243.3 96.4 L244.9 96.9 L246.5 97.5 L248.1 98.1 L249.7 98.7 L251.3 99.3 L252.9 99.9 L254.5 100.6 L256.2 101.2 L257.8 101.9 L259.4 102.5 L261.0 103.2 L262.6 103.9 L264.2 104.6 L265.8 105.3 L267.4 106.0 L269.0 106.7 L270.6 107.4 L272.2 108.2 L273.8 108.9 L275.4 109.7 L277.0 110.5 L278.6 111.2 L280.2 112.0 L281.8 112.8 L283.4 113.6 L285.0 114.4 L286.6 115.2 L288.2 116.0 L289.9 116.8 L291.5 117.7 L293.1 118.5 L294.7 119.3 L296.3 120.2 L297.9 121.0 L299.5 121.9 L301.1 122.7 L302.7 123.6 L304.3 124.4 L305.9 125.3 L307.5 126.2 L309.1 127.0 L310.7 127.9 L312.3 128.8 L313.9 129.7 L315.5 130.5 L317.1 131.4 L318.7 132.3 L320.3 133.2 L321.9 134.1 L323.6 134.9 L325.2 135.8 L326.8 136.7 L328.4 137.6 L330.0 138.5 L331.6 139.3 L333.2 140.2 L334.8 141.1 L336.4 142.0 L338.0 142.8 L339.6 143.7 L341.2 144.6 L342.8 145.4 L344.4 146.3 L346.0 147.1 L347.6 148.0 L349.2 148.8 L350.8 149.7 L352.4 150.5 L354.0 151.3 L355.6 152.2 L357.3 153.0 L358.9 153.8 L360.5 154.6 L362.1 155.4 L363.7 156.2 L365.3 157.0 L366.9 157.8 L368.5 158.5 L370.1 159.3 L371.7 160.1 L373.3 160.8 L374.9 161.6 L376.5 162.3 L378.1 163.0 L379.7 163.7 L381.3 164.4 L382.9 165.1 L384.5 165.8 L386.1 166.5 L387.7 167.1 L389.3 167.8 L391.0 168.4 L392.6 169.1 L394.2 169.7 L395.8 170.3 L397.4 170.9 L399.0 171.5 L400.6 172.1 L402.2 172.6 L403.8 173.2 L405.4 173.7 L407.0 174.3 L408.6 174.8 L410.2 175.3 L411.8 175.8 L413.4 176.3 L415.0 176.8 L416.6 177.2 L418.2 177.7 L419.8 178.1 L421.4 178.6 L423.0 179.0 L424.7 179.4 L426.3 179.8 L427.9 180.2 L429.5 180.6 L431.1 180.9 L432.7 181.3 L434.3 181.6 L435.9 182.0 L437.5 182.3 L439.1 182.6 L440.7 182.9 L442.3 183.2 L443.9 183.5 L445.5 183.8 L447.1 184.1 L448.7 184.3 L450.3 184.6 L451.9 184.8 L453.5 185.1 L455.1 185.3 L456.7 185.5 L458.4 185.7 L460.0 185.9 L461.6 186.1 L463.2 186.3 L464.8 186.5 L466.4 186.7 L468.0 186.9 L469.6 187.0 L471.2 187.2 L472.8 187.3 L474.4 187.5 L476.0 187.6 L477.6 187.8 L479.2 187.9 L480.8 188.0 L482.4 188.2 L484.0 188.3 L485.6 188.4 L487.2 188.5 L488.8 188.6 L490.4 188.7 L492.1 188.8 L493.7 188.9 L495.3 189.0 L496.9 189.1 L498.5 189.1 L500.1 189.2 L501.7 189.3 L503.3 189.4 L504.9 189.4 L506.5 189.5 L508.1 189.6 L509.7 189.6 L511.3 189.7 L512.9 189.8 L514.5 189.8 L516.1 189.9 L517.7 189.9 L519.3 190.0 L520.9 190.0 L522.5 190.1 L524.1 190.1 L525.8 190.1 L527.4 190.2 L529.0 190.2 L530.6 190.2 L532.2 190.3 L533.8 190.3 L535.4 190.3 L537.0 190.4 L538.6 190.4 L540.2 190.4 L541.8 190.5 L543.4 190.5 L545.0 190.5 L546.6 190.5 L548.2 190.6 L549.8 190.6 L551.4 190.6 L553.0 190.6 L554.6 190.6 L556.2 190.7 L557.8 190.7 L559.5 190.7 L561.1 190.7 L562.7 190.7 L564.3 190.7 L565.9 190.7 L567.5 190.8 L569.1 190.8 L570.7 190.8 L572.3 190.8 L573.9 190.8 L575.5 190.8 L577.1 190.8 L578.7 190.8 L580.3 190.9 L581.9 190.9 L583.5 190.9 L585.1 190.9 L586.7 190.9 L588.3 190.9 L589.9 190.9 L591.5 190.9 L593.2 190.9 L594.8 190.9 L596.4 190.9 L598.0 190.9 L599.6 190.9 L601.2 190.9 L602.8 190.9 L604.4 191.0 L606.0 191.0 L607.6 191.0 L609.2 191.0 L610.8 191.0 L612.4 191.0 L614.0 191.0 L615.6 191.0 L617.2 191.0 L618.8 191.0 L620.4 191.0 L622.0 191.0 L623.6 191.0 L625.2 191.0 L626.9 191.0 L628.5 191.0 L630.1 191.0 L631.7 191.0 L633.3 191.0 L634.9 191.0 L636.5 191.0 L638.1 191.0 L639.7 191.0 L641.3 191.0 L642.9 191.0 L644.5 191.0 L646.1 191.0 L647.7 191.0 L649.3 191.0 L650.9 191.0 L652.5 191.0 L654.1 191.0 L655.7 191.0 L657.3 191.0 L658.9 191.0 L660.6 191.0 L662.2 191.0 L663.8 191.0 L665.4 191.0 L667.0 191.0 L668.6 191.0 L670.2 191.0 L671.8 191.0 L673.4 191.0 L675.0 191.0 L676.6 191.0 L678.2 191.0 L679.8 191.0 L681.4 191.0 L683.0 191.0 L684.6 191.1 L686.2 191.1 L687.8 191.1 L689.4 191.1 L691.0 191.1 L692.6 191.1 L694.3 191.1 L695.9 191.1 L697.5 191.1 L699.1 191.1 L700.7 191.1 L702.3 191.1 L703.9 191.1 L705.5 191.1 L707.1 191.1 L708.7 191.1 L710.3 191.1 L711.9 191.1 L713.5 191.1 L715.1 191.1 L716.7 191.1 L718.3 191.1 L719.9 191.1 L721.5 191.1 L723.1 191.1 L724.7 191.1 L726.3 191.1 L728.0 191.1 L729.6 191.1 L731.2 191.1 L732.8 191.1 L734.4 191.1 L736.0 191.1 L737.6 191.1 L739.2 191.1 L740.8 191.1 L742.4 191.1 L744.0 191.1 " fill="none" stroke="#0d9488" stroke-width="2.6" stroke-linejoin="round"/><path d="M70.0 335.4 L71.6 335.8 L73.2 336.1 L74.8 336.5 L76.4 336.8 L78.0 337.2 L79.6 337.6 L81.2 337.9 L82.8 338.3 L84.4 338.7 L86.0 339.2 L87.7 339.6 L89.3 340.0 L90.9 340.4 L92.5 340.9 L94.1 341.3 L95.7 341.8 L97.3 342.3 L98.9 342.8 L100.5 343.3 L102.1 343.8 L103.7 344.3 L105.3 344.8 L106.9 345.4 L108.5 345.9 L110.1 346.5 L111.7 347.0 L113.3 347.6 L114.9 348.2 L116.5 348.8 L118.1 349.5 L119.7 350.1 L121.4 350.7 L123.0 351.4 L124.6 352.1 L126.2 352.8 L127.8 353.5 L129.4 354.2 L131.0 354.9 L132.6 355.7 L134.2 356.4 L135.8 357.2 L137.4 358.0 L139.0 358.8 L140.6 359.6 L142.2 360.4 L143.8 361.3 L145.4 362.2 L147.0 363.0 L148.6 363.9 L150.2 364.9 L151.8 365.8 L153.4 366.7 L155.1 367.7 L156.7 368.7 L158.3 369.7 L159.9 370.7 L161.5 371.7 L163.1 372.8 L164.7 373.8 L166.3 374.9 L167.9 376.0 L169.5 377.1 L171.1 378.3 L172.7 379.4 L174.3 380.6 L175.9 381.8 L177.5 383.0 L179.1 384.2 L180.7 385.5 L182.3 386.7 L183.9 388.0 L185.5 389.3 L187.1 390.6 L188.8 391.9 L190.4 393.3 L192.0 394.6 L193.6 396.0 L195.2 397.4 L196.8 398.7 L198.4 400.2 L200.0 401.6 L201.6 403.0 L203.2 404.5 L204.8 405.9 L206.4 407.4 L208.0 408.9 L209.6 410.4 L211.2 411.9 L212.8 413.4 L214.4 414.9 L216.0 416.4 L217.6 417.9 L219.2 419.5 L220.8 421.0 L222.5 422.5 L224.1 424.1 L225.7 425.6 L227.3 427.2 L228.9 428.7 L230.5 430.2 L232.1 431.8 L233.7 433.3 L235.3 434.8 L236.9 436.4 L238.5 437.9 L240.1 439.4 L241.7 440.9 L243.3 442.4 L244.9 443.8 L246.5 445.3 L248.1 446.8 L249.7 448.2 L251.3 449.6 L252.9 451.0 L254.5 452.4 L256.2 453.8 L257.8 455.1 L259.4 456.5 L261.0 457.8 L262.6 459.0 L264.2 460.3 L265.8 461.5 L267.4 462.8 L269.0 463.9 L270.6 465.1 L272.2 466.2 L273.8 467.3 L275.4 468.4 L277.0 469.5 L278.6 470.0 L280.2 470.0 L281.8 470.0 L283.4 470.0 L285.0 470.0 L286.6 470.0 L288.2 470.0 L289.9 470.0 L291.5 470.0 L293.1 470.0 L294.7 470.0 L296.3 470.0 L297.9 470.0 L299.5 470.0 L301.1 470.0 L302.7 470.0 L304.3 470.0 L305.9 470.0 L307.5 470.0 L309.1 470.0 L310.7 470.0 L312.3 470.0 L313.9 470.0 L315.5 470.0 L317.1 470.0 L318.7 470.0 L320.3 470.0 L321.9 470.0 L323.6 470.0 L325.2 470.0 L326.8 470.0 L328.4 470.0 L330.0 470.0 L331.6 470.0 L333.2 470.0 L334.8 470.0 L336.4 470.0 L338.0 470.0 L339.6 470.0 L341.2 470.0 L342.8 470.0 L344.4 470.0 L346.0 470.0 L347.6 470.0 L349.2 470.0 L350.8 470.0 L352.4 470.0 L354.0 470.0 L355.6 470.0 L357.3 470.0 L358.9 470.0 L360.5 470.0 L362.1 470.0 L363.7 470.0 L365.3 470.0 L366.9 470.0 L368.5 469.5 L370.1 468.4 L371.7 467.3 L373.3 466.2 L374.9 465.1 L376.5 463.9 L378.1 462.8 L379.7 461.5 L381.3 460.3 L382.9 459.0 L384.5 457.8 L386.1 456.5 L387.7 455.1 L389.3 453.8 L391.0 452.4 L392.6 451.0 L394.2 449.6 L395.8 448.2 L397.4 446.8 L399.0 445.3 L400.6 443.8 L402.2 442.4 L403.8 440.9 L405.4 439.4 L407.0 437.9 L408.6 436.4 L410.2 434.8 L411.8 433.3 L413.4 431.8 L415.0 430.2 L416.6 428.7 L418.2 427.2 L419.8 425.6 L421.4 424.1 L423.0 422.5 L424.7 421.0 L426.3 419.5 L427.9 417.9 L429.5 416.4 L431.1 414.9 L432.7 413.4 L434.3 411.9 L435.9 410.4 L437.5 408.9 L439.1 407.4 L440.7 405.9 L442.3 404.5 L443.9 403.0 L445.5 401.6 L447.1 400.2 L448.7 398.7 L450.3 397.4 L451.9 396.0 L453.5 394.6 L455.1 393.3 L456.7 391.9 L458.4 390.6 L460.0 389.3 L461.6 388.0 L463.2 386.7 L464.8 385.5 L466.4 384.2 L468.0 383.0 L469.6 381.8 L471.2 380.6 L472.8 379.4 L474.4 378.3 L476.0 377.1 L477.6 376.0 L479.2 374.9 L480.8 373.8 L482.4 372.8 L484.0 371.7 L485.6 370.7 L487.2 369.7 L488.8 368.7 L490.4 367.7 L492.1 366.7 L493.7 365.8 L495.3 364.9 L496.9 363.9 L498.5 363.0 L500.1 362.2 L501.7 361.3 L503.3 360.4 L504.9 359.6 L506.5 358.8 L508.1 358.0 L509.7 357.2 L511.3 356.4 L512.9 355.7 L514.5 354.9 L516.1 354.2 L517.7 353.5 L519.3 352.8 L520.9 352.1 L522.5 351.4 L524.1 350.7 L525.8 350.1 L527.4 349.5 L529.0 348.8 L530.6 348.2 L532.2 347.6 L533.8 347.0 L535.4 346.5 L537.0 345.9 L538.6 345.4 L540.2 344.8 L541.8 344.3 L543.4 343.8 L545.0 343.3 L546.6 342.8 L548.2 342.3 L549.8 341.8 L551.4 341.3 L553.0 340.9 L554.6 340.4 L556.2 340.0 L557.8 339.6 L559.5 339.2 L561.1 338.7 L562.7 338.3 L564.3 337.9 L565.9 337.6 L567.5 337.2 L569.1 336.8 L570.7 336.5 L572.3 336.1 L573.9 335.8 L575.5 335.4 L577.1 335.1 L578.7 334.8 L580.3 334.4 L581.9 334.1 L583.5 333.8 L585.1 333.5 L586.7 333.2 L588.3 332.9 L589.9 332.7 L591.5 332.4 L593.2 332.1 L594.8 331.9 L596.4 331.6 L598.0 331.4 L599.6 331.1 L601.2 330.9 L602.8 330.6 L604.4 330.4 L606.0 330.2 L607.6 330.0 L609.2 329.7 L610.8 329.5 L612.4 329.3 L614.0 329.1 L615.6 328.9 L617.2 328.7 L618.8 328.5 L620.4 328.4 L622.0 328.2 L623.6 328.0 L625.2 327.8 L626.9 327.7 L628.5 327.5 L630.1 327.3 L631.7 327.2 L633.3 327.0 L634.9 326.9 L636.5 326.7 L638.1 326.6 L639.7 326.4 L641.3 326.3 L642.9 326.2 L644.5 326.0 L646.1 325.9 L647.7 325.8 L649.3 325.6 L650.9 325.5 L652.5 325.4 L654.1 325.3 L655.7 325.2 L657.3 325.1 L658.9 324.9 L660.6 324.8 L662.2 324.7 L663.8 324.6 L665.4 324.5 L667.0 324.4 L668.6 324.3 L670.2 324.2 L671.8 324.1 L673.4 324.1 L675.0 324.0 L676.6 323.9 L678.2 323.8 L679.8 323.7 L681.4 323.6 L683.0 323.6 L684.6 323.5 L686.2 323.4 L687.8 323.3 L689.4 323.3 L691.0 323.2 L692.6 323.1 L694.3 323.1 L695.9 323.0 L697.5 322.9 L699.1 322.9 L700.7 322.8 L702.3 322.7 L703.9 322.7 L705.5 322.6 L707.1 322.6 L708.7 322.5 L710.3 322.5 L711.9 322.4 L713.5 322.3 L715.1 322.3 L716.7 322.2 L718.3 322.2 L719.9 322.1 L721.5 322.1 L723.1 322.1 L724.7 322.0 L726.3 322.0 L728.0 321.9 L729.6 321.9 L731.2 321.8 L732.8 321.8 L734.4 321.8 L736.0 321.7 L737.6 321.7 L739.2 321.7 L740.8 321.6 L742.4 321.6 L744.0 321.5 " fill="none" stroke="#0891b2" stroke-width="2.6" stroke-linejoin="round"/><circle cx="238.5" cy="94.7" r="4.5" fill="#d97706" stroke="#1e293b" stroke-width="1.5"/><circle cx="238.5" cy="437.9" r="4.5" fill="#d97706" stroke="#1e293b" stroke-width="1.5"/><text x="245.5" y="88.7" fill="#d97706" font-family="monospace" font-size="11">ω₂=1/τ₂</text><circle cx="407.0" cy="174.3" r="4.5" fill="#d97706" stroke="#1e293b" stroke-width="1.5"/><circle cx="407.0" cy="437.9" r="4.5" fill="#d97706" stroke="#1e293b" stroke-width="1.5"/><text x="414.0" y="168.3" fill="#d97706" font-family="monospace" font-size="11">ω₁=1/τ₁</text></svg>
       <figcaption>Bode « avance/retard » : plateau 0 dB, décroche à \(\omega_2=10^3\), replat à \(-20\) dB après \(\omega_1=10^4\) rad/s.</figcaption>
     </figure>
 
-    <p class="q">8) Pulsation de coupure à &minus;3 dB</p>
-    <p>\(|\underline H|^2=\dfrac{1+\omega^2\tau_1^2}{1+\omega^2\tau_2^2}=\dfrac12\Rightarrow
-    \omega_c=\dfrac{1}{\sqrt{\tau_2^2-2\tau_1^2}}\).</p>
-    \[ \omega_c=\frac{1}{\sqrt{10^{-6}-2\times10^{-8}}}\approx \boxed{1{,}01\times10^{3}\ \text{rad/s}}
-       \ (\approx\omega_2,\ f_c\approx161\ \text{Hz}) \]
+    <p class="q">8) Pulsation de coupure à −3 dB</p>
+    <p class="etape">Étape 1 : condition de coupure</p>
+    <p>Le gain maximal vaut 1. À la coupure, \(|\underline H|^2 = \dfrac12\) :</p>
+    \[ \frac{1 + \omega^2\tau_1^2}{1 + \omega^2\tau_2^2} = \frac12 \]
+    <p class="etape">Étape 2 : on résout</p>
+    \[ 2 + 2\omega^2\tau_1^2 = 1 + \omega^2\tau_2^2 \iff \omega^2\left(\tau_2^2 - 2\tau_1^2\right) = 1 \]
+    \[ \omega_c = \frac{1}{\sqrt{\tau_2^2 - 2\tau_1^2}} = \frac{1}{\sqrt{10^{-6} - 2\times10^{-8}}} \approx 1{,}01\times10^{3}\ \text{rad/s} \]
+    <div class="res">\(\omega_c \approx 1{,}01\times10^3\) rad/s, très proche de \(\omega_2\). Soit \(f_c \approx 161\) Hz.</div>
 
     <p class="q">9) Équation différentielle</p>
-    \[ \boxed{\ (R_1+R_2)C\,\frac{ds}{dt}+s=R_1C\,\frac{de}{dt}+e\ }
-       \quad\Longleftrightarrow\quad \tau_2\,\dot s+s=\tau_1\,\dot e+e \]
+    <div class="rappel"><span class="lab">Rappel · du complexe au temporel</span>\[ j\omega \;\longleftrightarrow\; \frac{d}{dt} \]</div>
+    <p>Produit en croix : \((1 + j\omega\tau_2)\,\underline s = (1 + j\omega\tau_1)\,\underline e\).</p>
+    <div class="res">\[ (R_1 + R_2)C\,\frac{ds}{dt} + s = R_1C\,\frac{de}{dt} + e \qquad\text{soit}\qquad \tau_2\,\dot s + s = \tau_1\,\dot e + e \]</div>
 
     <p class="q">10) Réponse à un échelon \(e=A\) (\(t>0\))</p>
-    <p>Pour \(t>0\), \(\dot e=0\) : \(\tau_2\dot s+s=A\). Solution \(s(t)=A+K e^{-t/\tau_2}\).
-    Le saut initial est réglé par le gain <b>HF</b> (\(C\) déchargé se comporte en court-circuit) :
-    \(s(0^+)=\dfrac{R_1}{R_1+R_2}A=0{,}1A\). D'où \(K=-0{,}9A\) :</p>
-    <div class="res">
-      \[ \boxed{\ s(t)=A\Big(1-0{,}9\,e^{-t/\tau_2}\Big)\ ,\quad \tau_2=(R_1+R_2)C=1\ \text{ms}\ }\]
-      Saut à \(0{,}1A\) en \(t=0^+\), puis montée exponentielle vers \(A\).</div>
+    <p class="etape">Étape 1 : l'équation pour \(t &gt; 0\)</p>
+    <p>\(e = A\) est constante, donc \(\dot e = 0\) :</p>
+    \[ \tau_2\,\dot s + s = A \]
+    <div class="rappel"><span class="lab">Rappel · solution d'une ED du 1ᵉʳ ordre à second membre constant</span>\[ s(t) = s_\infty + K\,e^{-t/\tau} \]</div>
+    \[ s(t) = A + K\,e^{-t/\tau_2} \]
+    <p class="etape">Étape 2 : condition initiale</p>
+    <p>À \(t = 0^+\), le condensateur est déchargé : tension nulle à ses bornes, il se comporte comme un fil. On retrouve le diviseur résistif HF :</p>
+    \[ s(0^+) = \frac{R_1}{R_1 + R_2}\,A = 0{,}1\,A \]
+    <p>Donc \(A + K = 0{,}1\,A\), soit \(K = -0{,}9\,A\).</p>
+    <div class="res">\[ s(t) = A\left(1 - 0{,}9\,e^{-t/\tau_2}\right), \qquad \tau_2 = (R_1 + R_2)C = 1\ \text{ms} \]
+    Saut à \(0{,}1\,A\) en \(t = 0^+\), puis montée exponentielle vers \(A\).</div>
+    <div class="warnbox"><span class="lab">Piège</span> \(s\) est discontinue en \(t = 0\) : seule la tension aux bornes de \(C\) est continue, pas celle aux bornes de \(\{R_1, C\}\).</div>
     <figure><svg viewBox="0 0 680 300" width="680" xmlns="http://www.w3.org/2000/svg"><line x1="64" y1="250" x2="658" y2="250" stroke="#94a3b8" stroke-width="1.4"/><line x1="64" y1="256" x2="64" y2="32" stroke="#94a3b8" stroke-width="1.4"/><text x="652" y="270" fill="#475569" font-family="monospace" font-size="12">t (ms)</text><text x="56" y="30" fill="#475569" font-family="monospace" font-size="12" text-anchor="end">s(t)</text><line x1="64" y1="59.1" x2="650" y2="59.1" stroke="#0d9488" stroke-width=".8" stroke-dasharray="5 4" opacity=".7"/><text x="56" y="63.1" fill="#0d9488" font-family="monospace" font-size="11" text-anchor="end">A</text><line x1="64" y1="230.9" x2="650" y2="230.9" stroke="#d97706" stroke-width=".8" stroke-dasharray="5 4" opacity=".7"/><text x="56" y="234.9" fill="#d97706" font-family="monospace" font-size="11" text-anchor="end">0,1A</text><line x1="181.2" y1="250" x2="181.2" y2="40" stroke="#0891b2" stroke-width=".8" stroke-dasharray="4 4"/><text x="181.2" y="270" fill="#0891b2" font-family="monospace" font-size="11" text-anchor="middle">τ₂=1ms</text><path d="M64.0 250.0 L64.0 230.9 L64.0 230.9 L66.9 226.7 L69.9 222.5 L72.8 218.5 L75.7 214.6 L78.7 210.7 L81.6 207.0 L84.5 203.3 L87.4 199.8 L90.4 196.3 L93.3 192.9 L96.2 189.6 L99.2 186.4 L102.1 183.2 L105.0 180.2 L107.9 177.2 L110.9 174.3 L113.8 171.4 L116.7 168.6 L119.7 165.9 L122.6 163.3 L125.5 160.7 L128.5 158.2 L131.4 155.8 L134.3 153.4 L137.2 151.1 L140.2 148.8 L143.1 146.6 L146.0 144.4 L149.0 142.3 L151.9 140.3 L154.8 138.2 L157.8 136.3 L160.7 134.4 L163.6 132.5 L166.6 130.7 L169.5 128.9 L172.4 127.2 L175.3 125.5 L178.3 123.9 L181.2 122.3 L184.1 120.7 L187.1 119.2 L190.0 117.7 L192.9 116.3 L195.8 114.9 L198.8 113.5 L201.7 112.2 L204.6 110.8 L207.6 109.6 L210.5 108.3 L213.4 107.1 L216.4 105.9 L219.3 104.8 L222.2 103.6 L225.2 102.5 L228.1 101.5 L231.0 100.4 L233.9 99.4 L236.9 98.4 L239.8 97.4 L242.7 96.5 L245.7 95.6 L248.6 94.7 L251.5 93.8 L254.5 92.9 L257.4 92.1 L260.3 91.3 L263.2 90.5 L266.2 89.7 L269.1 88.9 L272.0 88.2 L275.0 87.5 L277.9 86.8 L280.8 86.1 L283.8 85.4 L286.7 84.8 L289.6 84.2 L292.5 83.5 L295.5 82.9 L298.4 82.3 L301.3 81.8 L304.3 81.2 L307.2 80.7 L310.1 80.1 L313.0 79.6 L316.0 79.1 L318.9 78.6 L321.8 78.1 L324.8 77.7 L327.7 77.2 L330.6 76.8 L333.6 76.3 L336.5 75.9 L339.4 75.5 L342.3 75.1 L345.3 74.7 L348.2 74.3 L351.1 73.9 L354.1 73.6 L357.0 73.2 L359.9 72.8 L362.9 72.5 L365.8 72.2 L368.7 71.9 L371.7 71.5 L374.6 71.2 L377.5 70.9 L380.4 70.6 L383.4 70.4 L386.3 70.1 L389.2 69.8 L392.2 69.5 L395.1 69.3 L398.0 69.0 L400.9 68.8 L403.9 68.5 L406.8 68.3 L409.7 68.1 L412.7 67.9 L415.6 67.6 L418.5 67.4 L421.5 67.2 L424.4 67.0 L427.3 66.8 L430.2 66.6 L433.2 66.5 L436.1 66.3 L439.0 66.1 L442.0 65.9 L444.9 65.8 L447.8 65.6 L450.8 65.4 L453.7 65.3 L456.6 65.1 L459.6 65.0 L462.5 64.8 L465.4 64.7 L468.3 64.5 L471.3 64.4 L474.2 64.3 L477.1 64.2 L480.1 64.0 L483.0 63.9 L485.9 63.8 L488.8 63.7 L491.8 63.6 L494.7 63.4 L497.6 63.3 L500.6 63.2 L503.5 63.1 L506.4 63.0 L509.4 62.9 L512.3 62.8 L515.2 62.7 L518.2 62.7 L521.1 62.6 L524.0 62.5 L526.9 62.4 L529.9 62.3 L532.8 62.2 L535.7 62.2 L538.7 62.1 L541.6 62.0 L544.5 61.9 L547.5 61.9 L550.4 61.8 L553.3 61.7 L556.2 61.7 L559.2 61.6 L562.1 61.5 L565.0 61.5 L568.0 61.4 L570.9 61.4 L573.8 61.3 L576.8 61.3 L579.7 61.2 L582.6 61.1 L585.5 61.1 L588.5 61.0 L591.4 61.0 L594.3 61.0 L597.3 60.9 L600.2 60.9 L603.1 60.8 L606.1 60.8 L609.0 60.7 L611.9 60.7 L614.8 60.7 L617.8 60.6 L620.7 60.6 L623.6 60.5 L626.6 60.5 L629.5 60.5 L632.4 60.4 L635.4 60.4 L638.3 60.4 L641.2 60.3 L644.1 60.3 L647.1 60.3 L650.0 60.2 " fill="none" stroke="#0d9488" stroke-width="2.6" stroke-linejoin="round"/><circle cx="64.0" cy="230.9" r="4" fill="#d97706"/><text x="72.0" y="224.9" fill="#d97706" font-family="monospace" font-size="11">saut à 0,1A</text></svg>
       <figcaption>Réponse indicielle : saut à \(0{,}1A\) puis charge du condensateur vers \(A\) (\(\tau_2=1\) ms).</figcaption>
     </figure>
 
     <p class="q">11) Entrée \(e(t)=A\cos^2(\omega t)\), \(A=1\) V, \(\omega=5\times10^4\) rad/s</p>
-    <p>Linéarisation : \(\cos^2(\omega t)=\dfrac{1+\cos(2\omega t)}{2}\) &rArr; une composante <b>continue</b>
-    \(0{,}5\) V et une composante à \(\Omega=2\omega=10^5\) rad/s, d'amplitude \(0{,}5\) V.</p>
-    <ul>
-      <li><b>Continu</b> (\(\omega=0\)) : \(\underline H(0)=H_0=1\) &rArr; passe intégralement : \(0{,}5\) V.</li>
-      <li><b>\(\Omega=10^5\) rad/s</b> : \(\omega\tau_1=10\), \(\omega\tau_2=100\) &rArr;
-      \(\underline H=\dfrac{1+10j}{1+100j}\), \(|\underline H|\approx0{,}1005\), \(\arg\approx-5{,}1^\circ\).</li>
-    </ul>
-    <div class="res">
-      \[ \boxed{\ s(t)\approx0{,}5+0{,}050\,\cos\!\big(2\omega t-5{,}1^\circ\big)\ \text{V}\ }\]
-      La composante continue passe sans atténuation ; l'ondulation à \(2\omega\) (bien au-dessus de
-      \(\omega_1\)) est <b>atténuée d'un facteur 10</b>.</div>
-    </div>
+    <p class="etape">Étape 1 : linéariser l'entrée</p>
+    <div class="rappel"><span class="lab">Rappel · linéarisation</span>\[ \cos^2 a = \frac{1 + \cos(2a)}{2} \]</div>
+    \[ e(t) = 0{,}5 + 0{,}5\cos(2\omega t) \]
+    <p>Deux composantes : une continue de 0,5 V, et une sinusoïde de pulsation \(\Omega = 2\omega = 10^5\) rad/s et d'amplitude 0,5 V.</p>
+    <p class="etape">Étape 2 : la composante continue</p>
+    <p>À \(\omega = 0\), \(\underline H(0) = 1\) : elle passe entièrement, 0,5 V.</p>
+    <p class="etape">Étape 3 : la composante à \(\Omega = 10^5\) rad/s</p>
+    <p>\(\Omega\tau_1 = 10\) et \(\Omega\tau_2 = 100\) :</p>
+    \[ \underline H(\Omega) = \frac{1 + 10j}{1 + 100j} \]
+    \[ |\underline H| = \frac{\sqrt{101}}{\sqrt{10\,001}} \approx 0{,}1005 \qquad \arg\underline H = \arctan 10 - \arctan 100 \approx -5{,}1^\circ \]
+    <p>Amplitude de sortie : \(0{,}5 \times 0{,}1005 \approx 0{,}050\) V.</p>
+    <div class="res">\[ s(t) \approx 0{,}5 + 0{,}050\,\cos\left(2\omega t - 5{,}1^\circ\right)\ \text{V} \]
+    La composante continue passe sans atténuation ; l'ondulation à \(2\omega\), bien au-dessus de \(\omega_1\), est divisée par 10.</div>
+    <div class="warnbox"><span class="lab">Piège</span> On applique \(\underline H\) à la pulsation \(2\omega\) (celle de la composante), pas à \(\omega\).</div>
+      </div>
   </div>
   </section>
 
