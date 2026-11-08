@@ -11,8 +11,8 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 | dynamique.html | 46 | fait |
 | electro-stationnaire.html | 35 | fait |
 | electro-transitoire.html | 18 | fait |
-| electro-2nd-ordre.html | 19 | en cours |
-| filtrage.html | 38 | à faire |
+| electro-2nd-ordre.html | 19 | fait |
+| filtrage.html | 38 | en cours |
 | rsf-resonance-filtrage.html | 11 | à faire |
 | acides-bases.html | 29 | à faire |
 | oxydoreduction.html | 29 | à faire |
@@ -49,3 +49,9 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 - Erreur corrigée : Ex 14, expression du courant (il manquait le facteur C/τ : l'ancienne formule était homogène à une tension) → warnbox.
 - Exercice B : 3τ ≈ 1,4 ms (au lieu de 1,3 ms, arrondi).
 - Ex 15 (Wien, hors corrigé officiel) : équation re-démontrée pas à pas (RC v'' + 3v' + v/RC = 0), résultats inchangés.
+
+### electro-2nd-ordre.html — fait
+- 19 cartes réécrites (3 créées + 16 TD). EC 6 n'avait pas d'énoncé : énoncé reconstitué.
+- Erreur corrigée : Ex 9, période idéale T = 2π√(LC) ≈ 0,14 ms (et non 0,25 ms) → warnbox.
+- Erreur corrigée : Ex 8, L ≈ 13 mH n'était pas arrondi à 10 mH avant le calcul de C : C ≈ 4 nF (et non 5 nF) ; signalé que le montage est probablement 10 mH / 5 nF et que l'écart vient de la lecture graphique → warnbox.
+- Ex 7 : amplitude initiale η/(CΩ) ≈ 2,3 V ajoutée. Ex 10 : pseudo-période ≈ 13 µs ajoutée.
