@@ -282,3 +282,33 @@ html{scroll-padding-top:120px}
   .nav-search{flex-basis:100%}
   .home-titre{font-size:1.5rem}
 }
+
+/* ===== Lecture confortable + mode examen (assets/lecture.js, pages qui l'activent) ===== */
+body.lecture{line-height:1.75}
+.lecture section.block{padding:2rem 2.2rem; margin:1.8rem 0}
+.lecture .note{border-left-width:6px}
+.lecture-progres{position:fixed; top:0; left:0; height:3px; width:0; background:var(--subject); z-index:200}
+.lecture-sommaire{position:fixed; top:120px; left:max(12px, calc(50% - 700px)); width:230px;
+  max-height:calc(100vh - 150px); overflow:auto; font-size:.85rem; line-height:1.4; display:none}
+.lecture-sommaire .ls-titre{font-weight:700; color:var(--ink); margin:0 0 .5rem .6rem}
+.lecture-sommaire a{display:block; color:var(--ink-soft); text-decoration:none; padding:.3rem .6rem;
+  border-left:2px solid var(--line)}
+.lecture-sommaire a.ls-sous{padding-left:1.3rem; font-size:.8rem}
+.lecture-sommaire a.actif{color:var(--subject-ink); border-left-color:var(--subject); font-weight:700}
+.lecture-sommaire a:hover{color:var(--ink)}
+@media(min-width:1420px){.lecture-sommaire{display:block}}
+.examen-toggle{position:fixed; right:16px; bottom:16px; z-index:150; display:flex; align-items:center; gap:.45rem;
+  background:#0f172a; color:#fde68a; font-weight:700; font-size:.92rem; padding:.6rem 1rem; border-radius:999px;
+  box-shadow:0 6px 18px rgba(0,0,0,.25); cursor:pointer; white-space:nowrap; user-select:none}
+.examen-toggle input{accent-color:#f59e0b; width:1rem; height:1rem}
+.examen .reponse:not(.vue){position:relative; height:2.8rem; overflow:hidden; cursor:pointer; margin:.5rem 0}
+.examen .reponse:not(.vue)::after{content:"Voir la réponse"; position:absolute; inset:0; display:flex;
+  align-items:center; justify-content:center; background:#f1f5f9; border:1.5px dashed #94a3b8; border-radius:10px;
+  color:#334155; font-weight:700; font-size:.92rem}
+.examen .reponse:not(.vue):hover::after{background:#e2e8f0; border-color:var(--subject)}
+.examen .reponse.vue{animation:reponse-apparait .25s ease}
+@keyframes reponse-apparait{from{opacity:.2}to{opacity:1}}
+@media(max-width:600px){
+  .lecture section.block{padding:1.1rem .9rem}
+  .examen-toggle{right:10px; bottom:10px; font-size:.85rem; padding:.5rem .8rem}
+}
