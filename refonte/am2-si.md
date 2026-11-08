@@ -9,7 +9,7 @@ Chaque exercice : `.exo-card#id` > `.exo-head` + `.exo-body` (énoncé en tête,
 |---|---|---|
 | `aem2-si/ch4-cotations-gps.html` | fait | pas de TD ni de corrigé : 3 exercices créés, correction rédigée par nous |
 | `aem2-si/c02-theorie-mecanismes.html` | fait | Bigeard : `theorie-des-mecanismes_association-de-liaisons/TDM-PT-TD-association_de_liaisons-prof.pdf`, `theorie-des-mecanismes_pompe-a-piston-radial/TDM-PT-TD-pompe_a_piston_radial-prof.pdf` |
-| `aem2-si/c03-dynamique-solide.html` | à faire | |
+| `aem2-si/c03-dynamique-solide.html` | fait | Bigeard (5 PDF `principe-fondamental-de-la-dynamique_*`), éolienne rédigée par nous |
 | `aem2-si/c04-energetique-solide.html` | à faire | |
 | `aem2-si/c05-capteurs.html` | à faire | |
 
@@ -35,3 +35,22 @@ Chaque exercice : `.exo-card#id` > `.exo-head` + `.exo-body` (énoncé en tête,
   - Q25 : I_c = 2×1 + 1×4 écrit « = 4 » (vaut 6, ce qui donne bien h = 1) ; liaison nommée Sph./Cyl. alors que c'est une linéaire rectiligne (normale x, direction z).
   - Pompe Q8 : signes mélangés (T2→1 utilisé comme action sur 2 ; N = −eF_P cos α dans le tableau contre +eF_P cos α dans l'équation 18). Résultats utiles inchangés.
 - Ajouts rédigés par nous (indiqués dans la page) : Q2 cas rotule + sphère-cylindre (γ = 2) ; Q26 vérification h = 0 ; remarque 1.2 (PG + ponctuelle → h = 0) ; Q10 vérification h = 0.
+
+### c03-dynamique-solide
+- Seule la Partie 2 (TD) est réécrite (le bandeau « TD corrigé » en double et l'ancien chapeau sont remplacés). Cours intact, y compris les deux cartes « cas particuliers » du cours (sans id, hors TD).
+- Exercices → PDF (dans `documents/si-bigeard/`) :
+  - 1.1 à 1.5 Matrices d'inertie → `principe-fondamental-de-la-dynamique_calcul-de-matrices-dinertie/PFD-PT-TD-calcul_de_matrices_d_inertie-prof.pdf`
+  - 2 Lecteur de DVD → `principe-fondamental-de-la-dynamique_lecteur-de-dvd/PFD-PT-TD-lecteur_de_dvd-prof.pdf`
+  - 3 Arbre de navire → `principe-fondamental-de-la-dynamique_arbre-de-navire-phenomenes-gyroscopiques/PFD-PT-TD-arbre_de_navire_phenomenes_gyroscopiques-prof.pdf`
+  - 4 Éolienne bipale → aucun (le dossier `analyse-des-slci_eolienne` est un TD d'asservissement ; `cinematique-du-solide_aerogenerateur` n'a pas de -prof et traite autre chose). Correction rédigée par nous, mention dans la page.
+  - 5 Régulateur centrifuge → `principe-fondamental-de-la-dynamique_regulateur-centrifuge/PFD-PT-TD-regulateur_centrifuge-prof.pdf`
+  - 6 Équilibreuse → `principe-fondamental-de-la-dynamique_equilibreuse/PFD-PT-TD-equilibreuse-prof.pdf`
+- Une carte par exercice (5 cartes pour l'exercice 1) ; toutes les images d'énoncé en tête (l'image du DVD « question 1 » était seule sur sa page, les questions 2 à 11 sont dans l'image suivante).
+- Vérifications Python / sympy : σ et δ·z1 du régulateur, σ_K et δ_K·z de l'éolienne, σ_K du balourd, Huygens du quart de disque, toutes les AN.
+- Erreurs du corrigé signalées :
+  - Matrices : m_c = 2πρhr² (coquille) ; cas 2 B = 302,6 et C = 386,58 alors que ses formules donnent 302,9 et 386,9.
+  - DVD : « t = 12,5 s » au lieu de ms ; 1,67 N·mm ≈ 17 g·cm (16,7 avec g ≈ 10).
+  - Arbre de navire : **résultat faux** — A = ma²/2 dans le calcul littéral alors que a est un rayon de giration (A = ma² = 180 kg·m², valeur qu'il écrit lui-même). Corrigé : Z_A ≈ 14 337 N, Z_B ≈ 5 283 N (au lieu de 13 706,7 et 5 913).
+  - Régulateur : V_{G∈3/0} au lieu de V_{G∈2/0}.
+  - Équilibreuse : σ_B noté au lieu de δ_B ; « F = 1,5e-3 » est E ; **équation (10) fausse** (F + m4 cr cos β4) → F − m4 cr sin β4 = 0 ; β4 ≈ 217°, β3 ≈ 116° (216°/115° avec E, F arrondis).
+- Ancienne page : la masse de l'hélice (M dans l'énoncé) était notée m ; le doute sur les signes du quart de disque est levé (résultat Bigeard exact) ; l'ancienne forme « F + m4 cr sin β4 » était fausse.
