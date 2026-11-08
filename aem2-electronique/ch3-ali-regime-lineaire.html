@@ -94,15 +94,29 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
       <div class="exo-head">✏️ Q1 — Attribuer à chaque borne de l'ALI les bonnes fiches de la platine
       <span class="diff">♦</span></div>
       <div class="exo-body">
-        <p class="q">Attribuer à chaque borne de l'ALI les bonnes fiches de la platine utilisée au labo de
-        l'ECAM.</p>
+        <p class="enonce">Attribuer à chaque borne de l'ALI les bonnes fiches de la platine utilisée au labo de l'ECAM.</p>
         <figure><img src="ch3-img/platine-photo.png" alt="Photo de la platine ALI du labo ECAM, fiches +15V/0V/-15V et symbole du triangle ALI imprimé">
           <figcaption>Platine « Amplificateur opérationnel » du labo ECAM : rails d'alimentation en haut
           (\(+15\) V, \(0\) V, \(-15\) V), triangle ALI imprimé au centre (entrée « − » en haut, entrée « + »
           en bas d'après le symbole), fiches banane à relier de part et d'autre.</figcaption>
         </figure>
-        <p>En comparant le brochage DIP8 officiel (ci-dessus) au triangle ALI imprimé sur la platine, chaque
-        broche du boîtier doit être reliée par un fil à la fiche de <b>même rôle électrique</b> :</p>
+
+        <p class="q">Correspondance broches du boîtier / fiches de la platine</p>
+        <p class="etape">Étape 1 : la règle</p>
+        <p>On compare le brochage DIP8 du cours au triangle imprimé sur la platine. Chaque broche se relie à la fiche qui a le <b>même rôle électrique</b>.</p>
+        <p class="etape">Étape 2 : les signaux</p>
+        <ul>
+          <li>Broche 2, entrée (−) : fiche « − » du triangle (en haut).</li>
+          <li>Broche 3, entrée (+) : fiche « + » du triangle (en bas).</li>
+          <li>Broche 6, sortie \(v_s\) : fiche de sortie, à droite du triangle.</li>
+        </ul>
+        <p class="etape">Étape 3 : l'alimentation</p>
+        <ul>
+          <li>Broche 7, \(+V_{CC}\) : rail « +15 V ».</li>
+          <li>Broche 4, \(-V_{CC}\) : rail « −15 V ».</li>
+          <li>Masse du montage : rail « 0 V ».</li>
+          <li>Broches 1 et 5 (réglage d'offset) et 8 : non utilisées au labo.</li>
+        </ul>
         <div class="overflow"><table>
           <tr><th>Broche DIP8</th><th>Rôle</th><th>Fiche de la platine à relier</th></tr>
           <tr><td>2</td><td>entrée (−)</td><td>fiche « − » (entrée du triangle imprimé, en haut)</td></tr>
@@ -114,9 +128,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
           <tr><td>1, 5</td><td>réglage offset</td><td>non utilisées en usage standard au labo</td></tr>
           <tr><td>8</td><td>inutilisée</td><td>—</td></tr>
         </table></div>
-        <div class="res">Chaque broche <b>2/3/6</b> (entrées et sortie du signal) se relie aux fiches du
-        triangle imprimé sur la platine, et les broches d'alimentation <b>4/7</b> + la masse se relient aux
-        trois rails du haut (\(+15\) V, \(0\) V, \(-15\) V). Les broches 1, 5 et 8 restent libres.</div>
+        <div class="res">Broches 2, 3, 6 (entrées et sortie) : fiches du triangle imprimé. Broches 4, 7 et la masse : les trois rails \(+15\) V, \(0\) V, \(-15\) V. Broches 1, 5 et 8 : libres.</div>
       </div>
     </div>
 
@@ -139,7 +151,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     \(s=\pm V_{sat}\approx\pm V_{CC}\), sans relation linéaire avec l'entrée. Sinon, quand le système est
     stable, la réponse de l'ALI est <b>linéaire</b>.</p>
     <ul>
-      <li><b>Régime linéaire</b> : \(-V_{sat}<s<+V_{sat}\), et \(s=A_d\times\varepsilon\), où \(A_d\)
+      <li><b>Régime linéaire</b> : \(-V_{sat}&lt;s&lt;+V_{sat}\), et \(s=A_d\times\varepsilon\), où \(A_d\)
       (noté aussi \(\mu_0\)) est le <b>gain différentiel</b> de l'ALI.</li>
     </ul>
     <div class="warnbox"><span class="lab">Piège</span> Ne pas confondre le gain différentiel <b>intrinsèque</b>
@@ -160,38 +172,38 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
       <div class="exo-head">✏️ Q2 — Réponse réelle \(v_s=f(\varepsilon)\) : gain \(A_d\) et zones de
       saturation/linéarité <span class="diff">♦</span></div>
       <div class="exo-body">
-        <p class="q">Visualiser sur le graphique le gain \(A_d\), ainsi que les domaines de saturation et de
-        linéarité.</p>
-        <p>Autour de \(\varepsilon=0\), la caractéristique \(v_s=f(\varepsilon)\) est une droite de pente
-        \(A_d\) (régime linéaire) ; dès que \(v_s\) atteint \(\pm V_{sat}\), la courbe devient horizontale
-        (régime saturé), car \(v_s\) ne peut physiquement pas dépasser les tensions d'alimentation.</p>
+        <p class="enonce">Visualiser sur le graphique \(v_s=f(\varepsilon)\) le gain \(A_d\), ainsi que les domaines de saturation et de linéarité.</p>
+
+        <p class="q">Gain \(A_d\), zone linéaire et zones saturées</p>
+        <p class="etape">Étape 1 : autour de \(\varepsilon = 0\)</p>
+        <div class="rappel"><span class="lab">Rappel · ALI en régime linéaire</span>\[ v_s = A_d\,\varepsilon \qquad\text{avec}\qquad \varepsilon = v_+ - v_- \]</div>
+        <p>La caractéristique est une droite de pente \(A_d\) : c'est la zone linéaire.</p>
+        <p class="etape">Étape 2 : loin de \(\varepsilon = 0\)</p>
+        <p>\(v_s\) ne peut pas dépasser les tensions d'alimentation. Dès que \(A_d\,\varepsilon\) atteindrait \(\pm V_{sat}\), la courbe devient horizontale : ce sont les zones saturées.</p>
         <figure>
-          <svg viewBox="0 0 640 340" width="640" xmlns="http://www.w3.org/2000/svg">
-<line x1="70" y1="170.0" x2="600" y2="170.0" stroke="#94a3b8" stroke-width="1.4"/>
-<line x1="335.0" y1="320" x2="335.0" y2="20" stroke="#94a3b8" stroke-width="1.4"/>
-<text x="608" y="174.0" fill="#1e293b" font-family="monospace" font-size="13">eps</text>
-<text x="327.0" y="14" fill="#1e293b" font-family="monospace" font-size="13" text-anchor="end">v_s</text>
-<rect x="70" y="40" width="239.0" height="260" fill="#dc2626" opacity="0.06"/>
-<rect x="361.0" y="40" width="239.0" height="260" fill="#dc2626" opacity="0.06"/>
-<rect x="309.0" y="40" width="52" height="260" fill="#0d9488" opacity="0.10"/>
-<line x1="70" y1="58" x2="600" y2="58" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,3"/>
-<line x1="70" y1="282" x2="600" y2="282" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,3"/>
-<text x="64" y="62" fill="#1e293b" font-family="monospace" font-size="12" text-anchor="end">+Vsat</text>
-<text x="64" y="278" fill="#1e293b" font-family="monospace" font-size="12" text-anchor="end">-Vsat</text>
-<path d="M 70.0,282.0 L 309.0,282.0 L 361.0,58.0 L 600.0,58.0" fill="none" stroke="#0d9488" stroke-width="3.2" stroke-linejoin="round"/>
-<line x1="293.4" y1="349.2" x2="376.6" y2="-9.2" stroke="#d97706" stroke-width="1.6" stroke-dasharray="2,3" opacity="0.85"/>
-<text x="367.0" y="146.6" fill="#d97706" font-family="monospace" font-size="12" font-weight="700">pente = Ad</text>
-<text x="189.5" y="80" fill="#dc2626" font-family="monospace" font-size="11.5" text-anchor="middle">zone saturee</text>
-<text x="480.5" y="80" fill="#dc2626" font-family="monospace" font-size="11.5" text-anchor="middle">zone saturee</text>
-<text x="335.0" y="136.0" fill="#0d9488" font-family="monospace" font-size="11.5" text-anchor="middle" font-weight="700">zone lineaire</text>
-<text x="70" y="26" fill="#334155" font-family="monospace" font-size="13" font-weight="700">Q2 - Reponse reelle vs=f(eps) : gain Ad + zones</text>
+          <svg viewBox="0 0 760 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Caractéristique vs = f(epsilon) de l'ALI réel : zone linéaire et zones saturées">
+<defs><marker id="fl-139797520937856" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect x="110.0" y="50.0" width="270.0" height="290.0" rx="0" fill="#fef2f2" stroke="#fee2e2" stroke-width="0"/>
+<rect x="440.0" y="50.0" width="270.0" height="290.0" rx="0" fill="#fef2f2" stroke="#fee2e2" stroke-width="0"/>
+<rect x="380.0" y="50.0" width="60.0" height="290.0" rx="0" fill="#f0fdfa" stroke="#ccfbf1" stroke-width="0"/>
+<line x1="110.0" y1="195.0" x2="725.0" y2="195.0" stroke="#334155" stroke-width="2" marker-end="url(#fl-139797520937856)"/>
+<line x1="110.0" y1="340.0" x2="110.0" y2="35.0" stroke="#334155" stroke-width="2" marker-end="url(#fl-139797520937856)"/>
+<text x="720.0" y="225.0" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">ε</text>
+<text x="120.0" y="30.0" font-size="20" fill="#334155" text-anchor="start" font-family="Segoe UI, sans-serif">vₛ</text>
+<line x1="410.0" y1="340.0" x2="410.0" y2="195.0" stroke="#334155" stroke-width="2"/>
+<polyline points="110.0,79.0 710.0,79.0" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<polyline points="110.0,311.0 710.0,311.0" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="100.0" y="86.0" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">+Vsat</text>
+<text x="100.0" y="318.0" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">−Vsat</text>
+<polyline points="110.0,311.0 380.0,311.0 440.0,79.0 710.0,79.0" fill="none" stroke="#0d9488" stroke-width="3.5" stroke-linejoin="round"/>
+<text x="245.0" y="131.2" font-size="20" fill="#dc2626" text-anchor="middle" font-family="Segoe UI, sans-serif">zone saturée</text>
+<text x="575.0" y="258.8" font-size="20" fill="#dc2626" text-anchor="middle" font-family="Segoe UI, sans-serif">zone saturée</text>
+<text x="454.0" y="154.4" font-size="20" fill="#0d9488" text-anchor="start" font-family="Segoe UI, sans-serif">zone linéaire : pente = gain Ad</text>
 </svg>
           <figcaption>Pente \(A_d\) au voisinage de \(\varepsilon=0\) (zone linéaire, en vert) ; paliers
           \(\pm V_{sat}\) dès que \(|\varepsilon|\) devient trop grand (zones saturées, en rouge).</figcaption>
         </figure>
-        <div class="res">La <b>zone linéaire</b> est la portion oblique de pente \(A_d\) autour de
-        \(\varepsilon=0\) ; les <b>zones saturées</b> sont les deux paliers horizontaux \(v_s=+V_{sat}\) et
-        \(v_s=-V_{sat}\) de part et d'autre.</div>
+        <div class="res">Zone linéaire : la portion oblique de pente \(A_d\) autour de \(\varepsilon = 0\). Zones saturées : les deux paliers \(v_s = +V_{sat}\) et \(v_s = -V_{sat}\).</div>
       </div>
     </div>
 
@@ -203,33 +215,29 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
       <div class="exo-head">✏️ Q3 — Prédire le régime (linéaire ou saturé) de 4 montages
       <span class="diff">♦♦</span></div>
       <div class="exo-body">
-        <p class="q">Prédire pour chaque montage ci-dessous si l'ALI fonctionne en régime linéaire ou
-        saturé.</p>
+        <p class="enonce">Prédire pour chaque montage ci-dessous si l'ALI fonctionne en régime linéaire ou saturé.</p>
         <figure><img src="ch3-img/q3-quatre-montages.png" alt="Quatre montages à ALI à analyser : sommateur, comparateur ouvert, suiveur, montage à diode/condensateur">
           <figcaption>Quatre montages à examiner. Le seul critère qui compte : <b>où va la rétroaction ?</b>
           (peu importe l'apparence globale, simple ou complexe, du reste du circuit.)</figcaption>
         </figure>
-        <p class="q">Montage 1 (à gauche) — trois entrées \(v_1,v_2,v_3\) via des résistances \(R\), plus une
-        résistance de contre-réaction \(R\) entre la sortie et ce même nœud d'entrée.</p>
-        <div class="res">La résistance de contre-réaction relie <b>uniquement</b> la sortie à l'entrée
-        <b>(−)</b> (nœud commun aux trois résistances d'entrée). <b>Régime linéaire</b>, quel que soit le
-        détail des branches \(v_1,v_2,v_3\) : seule compte la destination de la rétroaction.</div>
-        <p class="q">Montage 2 (haut, au centre-gauche) — \(V_+\) et \(V_-\) imposés directement et
-        indépendamment sur les deux entrées, sortie \(v_s\) non reconnectée.</p>
-        <div class="res"><b>Aucune rétroaction</b> entre la sortie et les entrées (comparateur en boucle
-        ouverte). <b>Régime saturé.</b></div>
-        <p class="q">Montage 3 (haut, au centre-droit) — \(v_e\) directement sur une entrée, boucle reliant la
-        sortie directement à l'autre entrée.</p>
-        <div class="res">La boucle relie la sortie à l'entrée <b>(−)</b> (montage suiveur, non nommé comme
-        tel dans l'énoncé mais topologiquement identique à celui du §3.1). <b>Régime linéaire</b> — c'est le
-        cas « piège » du QCM : il a l'air différent du suiveur habituel mais c'est exactement le même
-        montage.</div>
-        <p class="q">Montage 4 (à droite) — réseau diode + condensateur sur une branche, résistance
-        \(R_2\) rebouclant la sortie vers cette même branche.</p>
-        <div class="res">La résistance \(R_2\) reboucle la sortie vers l'entrée <b>(+)</b> (à travers le
-        réseau diode/condensateur) : c'est une <b>rétroaction positive</b>. <b>Régime saturé</b> — ce montage
-        est en réalité un multivibrateur astable/oscillateur de relaxation, hors programme de ce chapitre
-        (étudié plus en détail en fin de Ch4).</div>
+        <div class="rappel"><span class="lab">Rappel · critère de régime</span>Sortie reliée seulement à l'entrée (−) : régime linéaire. Aucune liaison sortie-entrées, ou liaison vers (+) : régime saturé.</div>
+
+        <p class="q">1) Montage 1 (à gauche) : trois entrées et une résistance de contre-réaction</p>
+        <p>La résistance de contre-réaction relie la sortie uniquement à l'entrée (−), le nœud commun aux trois résistances d'entrée. Le détail des branches \(v_1, v_2, v_3\) ne compte pas.</p>
+        <div class="res">Montage 1 : <b>régime linéaire</b>.</div>
+
+        <p class="q">2) Montage 2 (haut, centre gauche) : \(V_+\) et \(V_-\) imposés, sortie non reliée</p>
+        <p>Aucune liaison entre la sortie et les entrées : c'est un comparateur en boucle ouverte.</p>
+        <div class="res">Montage 2 : <b>régime saturé</b>.</div>
+
+        <p class="q">3) Montage 3 (haut, centre droit) : \(v_e\) sur une entrée, sortie reliée à l'autre</p>
+        <p>Le fil relie la sortie à l'entrée (−). C'est le montage suiveur du §3.1, même s'il est dessiné autrement.</p>
+        <div class="res">Montage 3 : <b>régime linéaire</b>.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Ce montage a l'air différent du suiveur habituel, mais il est topologiquement identique : on regarde où arrive la rétroaction, pas l'allure du dessin.</div>
+
+        <p class="q">4) Montage 4 (à droite) : diode, condensateur et résistance \(R_2\)</p>
+        <p>\(R_2\) reboucle la sortie vers l'entrée (+), à travers le réseau diode/condensateur : c'est une rétroaction positive.</p>
+        <div class="res">Montage 4 : <b>régime saturé</b>. C'est un multivibrateur (oscillateur de relaxation), étudié en fin de Ch4.</div>
       </div>
     </div>
   </section>
@@ -253,38 +261,39 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     <ul>
       <li>en <b>régime linéaire</b> : \(\varepsilon=0\ \Leftrightarrow\ v_+=v_-\) ;</li>
       <li>en <b>régime saturé</b> : \(v_s=+V_{sat}\) si \(\varepsilon>0\ (v_+>v_-)\), et \(v_s=-V_{sat}\) si
-      \(\varepsilon<0\ (v_+<v_-)\).</li>
+      \(\varepsilon&lt;0\ (v_+&lt;v_-)\).</li>
     </ul>
 
     <div class="exo-card">
       <div class="exo-head">✏️ Q4 — Courbe \(v_s=f(\varepsilon)\) pour l'ALI idéal « de gain infini »
       <span class="diff">♦</span></div>
       <div class="exo-body">
-        <p class="q">Tracer la courbe \(v_s=f(\varepsilon)\) (similaire à celle de Q2) dans le cas d'un ALI
-        idéal « de gain infini ».</p>
-        <p>Quand \(A_d\to\infty\), la pente de la zone linéaire (Q2) devient infinie : la zone linéaire se
-        réduit à un unique segment <b>vertical</b> en \(\varepsilon=0\). On obtient une caractéristique en
-        créneau (fonction signe), typique d'un comparateur idéal.</p>
+        <p class="enonce">Tracer la courbe \(v_s=f(\varepsilon)\) (similaire à celle de Q2) dans le cas d'un ALI idéal « de gain infini ».</p>
+
+        <p class="q">Caractéristique de l'ALI idéal de gain infini</p>
+        <p class="etape">Étape 1 : que devient la zone linéaire ?</p>
+        <p>La zone linéaire a pour pente \(A_d\). Quand \(A_d \to \infty\), la pente devient infinie : la droite devient un segment <b>vertical</b> en \(\varepsilon = 0\).</p>
+        <p class="etape">Étape 2 : la courbe obtenue</p>
+        <p>Il ne reste que les deux paliers \(\pm V_{sat}\), reliés par un saut en \(\varepsilon = 0\) : c'est la caractéristique d'un comparateur idéal.</p>
         <figure>
-          <svg viewBox="0 0 640 300" width="640" xmlns="http://www.w3.org/2000/svg">
-<line x1="70" y1="150.0" x2="600" y2="150.0" stroke="#94a3b8" stroke-width="1.4"/>
-<line x1="335.0" y1="276" x2="335.0" y2="24" stroke="#94a3b8" stroke-width="1.4"/>
-<text x="608" y="154.0" fill="#1e293b" font-family="monospace" font-size="13">eps</text>
-<text x="327.0" y="18" fill="#1e293b" font-family="monospace" font-size="13" text-anchor="end">v_s</text>
-<line x1="70" y1="58" x2="600" y2="58" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,3"/>
-<line x1="70" y1="242" x2="600" y2="242" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,3"/>
-<text x="64" y="62" fill="#1e293b" font-family="monospace" font-size="12" text-anchor="end">+Vsat</text>
-<text x="64" y="238" fill="#1e293b" font-family="monospace" font-size="12" text-anchor="end">-Vsat</text>
-<path d="M 70,242 L 335.0,242 L 335.0,58 L 600,58" fill="none" stroke="#0d9488" stroke-width="3.2" stroke-linejoin="round"/>
-<circle cx="335.0" cy="150.0" r="3.4" fill="#0d9488"/>
-<text x="70" y="24" fill="#334155" font-family="monospace" font-size="13" font-weight="700">Q4 - ALI ideal de gain infini : echelon en eps=0</text>
+          <svg viewBox="0 0 760 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Caractéristique de l'ALI idéal de gain infini : saut en epsilon = 0">
+<defs><marker id="fl-139797520158544" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<line x1="110.0" y1="185.0" x2="725.0" y2="185.0" stroke="#334155" stroke-width="2" marker-end="url(#fl-139797520158544)"/>
+<line x1="110.0" y1="320.0" x2="110.0" y2="35.0" stroke="#334155" stroke-width="2" marker-end="url(#fl-139797520158544)"/>
+<text x="720.0" y="215.0" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">ε</text>
+<text x="120.0" y="30.0" font-size="20" fill="#334155" text-anchor="start" font-family="Segoe UI, sans-serif">vₛ</text>
+<line x1="410.0" y1="320.0" x2="410.0" y2="185.0" stroke="#334155" stroke-width="2"/>
+<text x="100.0" y="84.0" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">+Vsat</text>
+<text x="100.0" y="300.0" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">−Vsat</text>
+<polyline points="110.0,293.0 410.0,293.0 410.0,77.0 710.0,77.0" fill="none" stroke="#0d9488" stroke-width="3.5" stroke-linejoin="round"/>
+<text x="260.0" y="279.0" font-size="20" fill="#0d9488" text-anchor="middle" font-family="Segoe UI, sans-serif">ε &lt; 0 : vₛ = −Vsat</text>
+<text x="560.0" y="107.0" font-size="20" fill="#0d9488" text-anchor="middle" font-family="Segoe UI, sans-serif">ε &gt; 0 : vₛ = +Vsat</text>
 </svg>
           <figcaption>À la limite \(A_d\to\infty\), la droite de pente \(A_d\) devient un saut vertical en
-          \(\varepsilon=0\) : \(v_s=-V_{sat}\) pour \(\varepsilon<0\), \(v_s=+V_{sat}\) pour
-          \(\varepsilon>0\).</figcaption>
+          \(\varepsilon=0\) : \(v_s=-V_{sat}\) pour \(\varepsilon&lt;0\), \(v_s=+V_{sat}\) pour
+          \(\varepsilon&gt;0\).</figcaption>
         </figure>
-        <div class="res">\(\boxed{\ v_s=+V_{sat}\text{ si }\varepsilon>0\ ;\quad v_s=-V_{sat}\text{ si
-        }\varepsilon<0\ }\) — la zone linéaire n'existe plus qu'au point \(\varepsilon=0\) exactement.</div>
+        <div class="res">\(v_s = +V_{sat}\) si \(\varepsilon &gt; 0\) ; \(v_s = -V_{sat}\) si \(\varepsilon &lt; 0\). La zone linéaire se réduit au seul point \(\varepsilon = 0\).</div>
       </div>
     </div>
 
@@ -302,29 +311,32 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
       <div class="exo-head">✏️ Q5 — Schéma équivalent de l'ALI réel : différences avec l'ALI idéal de gain
       infini <span class="diff">♦♦</span></div>
       <div class="exo-body">
-        <p class="q">Le schéma équivalent d'un ALI réel est donné ci-contre. Discuter des différences avec un
-        ALI idéal de gain infini.</p>
+        <p class="enonce">Le schéma équivalent d'un ALI réel est donné ci-contre. Discuter des différences avec un ALI idéal de gain infini.</p>
         <figure><img src="ch3-img/ali-reel-schema.png" alt="Schéma électrique équivalent de l'ALI réel : Re, Voff, Ie+, Ie-, gain mu0.vd, impédance de sortie Zs">
           <figcaption>Modèle équivalent de l'ALI réel : résistance d'entrée \(R_e\) finie, source de décalage
           \(V_{off}\), courants de polarisation \(I_{e+}\), \(I_{e-}\), source dépendante \(\mu_0 v_d\) en
           série avec une impédance de sortie \(Z_s\).</figcaption>
         </figure>
-        <p>En comparant terme à terme avec les deux hypothèses du modèle idéal de gain infini
-        (§2.1–2.2) :</p>
+
+        <p class="q">Différences entre l'ALI réel et l'ALI idéal</p>
+        <p class="etape">Étape 1 : les hypothèses du modèle idéal</p>
+        <div class="rappel"><span class="lab">Rappel · ALI idéal de gain infini</span>\[ i_+ = i_- = 0 \qquad \mu_0 \to \infty \qquad v_s \text{ ne dépend pas du courant de sortie} \]</div>
+        <p class="etape">Étape 2 : comparaison terme à terme</p>
         <div class="overflow"><table>
           <tr><th>Grandeur</th><th>Modèle idéal (gain infini)</th><th>ALI réel (schéma ci-dessus)</th></tr>
           <tr><td>Résistance d'entrée \(R_e\)</td><td>\(\to\infty\)</td><td>finie (\(\approx10^9\)–\(10^{12}\ \Omega\))</td></tr>
           <tr><td>Courants de polarisation \(I_{e+},I_{e-}\)</td><td>nuls</td><td>non nuls, résiduels (\(\approx10^{-8}\)–\(10^{-11}\) A)</td></tr>
           <tr><td>Tension de décalage \(V_{off}\)</td><td>nulle</td><td>non nulle (dissymétrie interne du composant)</td></tr>
           <tr><td>Gain différentiel \(\mu_0\)</td><td>\(\to\infty\)</td><td>fini (\(\approx2\times10^5\))</td></tr>
-          <tr><td>Impédance de sortie \(Z_s\)</td><td>\(\to0\)</td><td>non nulle (\(\approx\)qq dizaines de \(\Omega\))</td></tr>
+          <tr><td>Impédance de sortie \(Z_s\)</td><td>\(\to0\)</td><td>non nulle (\(\approx\) quelques dizaines de \(\Omega\))</td></tr>
         </table></div>
-        <div class="res">Le modèle idéal de gain infini néglige cinq écarts réels de l'ALI : une résistance
-        d'entrée finie, des courants de polarisation résiduels, une tension de décalage \(V_{off}\)
-        (compensable via les broches de réglage offset, §1.1), un gain fini (donc \(\varepsilon\) jamais
-        rigoureusement nul), et une impédance de sortie non nulle (donc \(v_s\) légèrement sensible à la
-        charge \(i_s\)). Ces écarts sont numériquement négligeables dans l'immense majorité des cas
-        pratiques — d'où la pertinence du modèle idéal par défaut.</div>
+        <p class="etape">Étape 3 : conséquences</p>
+        <ul>
+          <li>Gain fini : \(\varepsilon\) n'est jamais rigoureusement nul.</li>
+          <li>Impédance de sortie non nulle : \(v_s\) dépend un peu de la charge.</li>
+          <li>\(V_{off}\) se compense avec les broches de réglage d'offset (§1.1).</li>
+        </ul>
+        <div class="res">Le modèle idéal néglige cinq écarts : \(R_e\) finie, courants de polarisation, tension de décalage, gain fini, impédance de sortie non nulle. Ils sont numériquement négligeables dans presque tous les cas pratiques, d'où l'usage du modèle idéal par défaut.</div>
       </div>
     </div>
   </section>
@@ -341,13 +353,20 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     <div class="exo-card">
       <div class="exo-head">✏️ Q6 — Montrer que \(v_s=v_e\) pour le montage suiveur <span class="diff">♦</span></div>
       <div class="exo-body">
-        <p class="q">En utilisant les relations du modèle de l'ALI idéal de gain infini, montrer que pour un
-        montage suiveur \(v_s=v_e\) (donc \(H=1\)).</p>
-        <p>La borne (+) reçoit directement \(v_e\) : \(v_+=v_e\). Le fil reliant la sortie à la borne (−)
-        impose \(v_-=v_s\). La rétroaction se fait exclusivement sur (−), donc l'ALI fonctionne en régime
-        linéaire (§1.3), ce qui donne \(v_+=v_-\) :</p>
-        \[ v_e=v_+=v_-=v_s \]
-        <div class="res">\[ \boxed{\ v_s=v_e\ ,\quad H=\frac{v_s}{v_e}=1\ } \]</div>
+        <p class="enonce">En utilisant les relations du modèle de l'ALI idéal de gain infini, montrer que pour un montage suiveur \(v_s=v_e\) (donc \(H=1\)).</p>
+
+        <p class="q">Le suiveur recopie l'entrée</p>
+        <p class="etape">Étape 1 : régime de fonctionnement</p>
+        <p>La sortie est reliée seulement à l'entrée (−) : régime linéaire.</p>
+        <div class="rappel"><span class="lab">Rappel · ALI idéal en régime linéaire</span>\[ v_+ = v_- \qquad\text{et}\qquad i_+ = i_- = 0 \]</div>
+        <p class="etape">Étape 2 : potentiels des entrées</p>
+        <ul>
+          <li>L'entrée (+) reçoit directement \(v_e\) : \(v_+ = v_e\).</li>
+          <li>Un fil relie la sortie à l'entrée (−) : \(v_- = v_s\).</li>
+        </ul>
+        <p class="etape">Étape 3 : conclusion</p>
+        \[ v_e = v_+ = v_- = v_s \]
+        <div class="res">\(v_s = v_e\), donc \(H = \dfrac{v_s}{v_e} = 1\).</div>
       </div>
     </div>
 
@@ -355,7 +374,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
       <div class="exo-head">✏️ Q7 — Intérêt du suiveur : tension \(u_0\) aux bornes d'une résistance de
       charge \(R_0\) <span class="diff">♦♦</span></div>
       <div class="exo-body">
-        <p class="q">En exprimant la tension \(u_0\) aux bornes d'une résistance de charge \(R_0\) pour deux
+        <p class="enonce">En exprimant la tension \(u_0\) aux bornes d'une résistance de charge \(R_0\) pour deux
         configurations différentes (sans ou avec un montage suiveur inséré), réfléchir à l'intérêt d'un tel
         montage au labo, quand on utilise une source de tension réelle, ou quand on connecte des filtres
         passifs analogiques en cascade.</p>
@@ -363,25 +382,29 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
           <figcaption>À gauche : générateur réel \((E,r)\) directement chargé par \(R_0\). À droite : le
           même générateur, avec un suiveur inséré entre lui et \(R_0\).</figcaption>
         </figure>
-        <p><b>Sans suiveur</b> (générateur réel \(E,r\) directement relié à \(R_0\)) : un courant
-        \(i=E/(R_0+r)\) circule dans la maille, et \(u_0\) est donnée par un pont diviseur de tension :</p>
-        \[ u_0=E\cdot\frac{R_0}{R_0+r} \]
-        <p>Cette tension \(u_0\) dépend de \(R_0\) : le générateur réel est <b>« chargé »</b> par \(R_0\), sa
-        tension de sortie chute d'autant plus que \(R_0\) est faible (comparable à \(r\)).</p>
-        <p><b>Avec suiveur</b> inséré entre le générateur et \(R_0\) : l'entrée (+) du suiveur, de résistance
-        d'entrée infinie (\(i_+=0\)), ne tire <b>aucun courant</b> du générateur \((E,r)\) — il n'y a donc
-        <b>aucune chute de tension</b> dans \(r\), et \(v_e=E\) exactement (pas de division de tension). D'après
-        Q6, \(v_s=v_e=E\). L'ALI ayant une résistance de sortie nulle (modèle idéal), cette tension \(v_s=E\)
-        est ensuite délivrée à \(R_0\) <b>sans chute supplémentaire</b>, quel que soit le courant demandé par
-        \(R_0\) :</p>
-        \[ u_0=v_s=E,\qquad\text{indépendamment de }R_0\text{ et de }r. \]
-        <div class="res"><b>Intérêt du suiveur : adaptation d'impédance (« tampon », buffer).</b> Il isole
-        électriquement une source (impédance de sortie \(r\) quelconque) d'une charge \(R_0\), sans jamais
-        les faire interagir : la charge ne « voit » jamais la résistance interne de la source. Au labo, ceci
-        évite qu'une source de tension réelle ne soit faussée par la résistance qu'on lui connecte ; c'est
-        aussi indispensable pour connecter des <b>filtres passifs analogiques en cascade</b> (Ch1) : sans
-        suiveur entre deux étages, le second filtre « charge » le premier et fausse sa fonction de transfert
-        \(\underline H\) (hypothèse de non-interaction violée).</div>
+
+        <p class="q">1) Sans suiveur</p>
+        <div class="rappel"><span class="lab">Rappel · pont diviseur de tension</span>\[ u = E\,\frac{R_{sortie}}{R_{totale}} \]</div>
+        <p>Le générateur réel \((E, r)\) est relié directement à \(R_0\) : \(r\) et \(R_0\) sont en série.</p>
+        \[ u_0 = E\,\frac{R_0}{R_0 + r} \]
+        <div class="res">\(u_0\) dépend de \(R_0\) : le générateur est « chargé ». Sa tension chute d'autant plus que \(R_0\) est faible devant \(r\).</div>
+
+        <p class="q">2) Avec suiveur</p>
+        <p class="etape">Étape 1 : côté générateur</p>
+        <p>L'entrée (+) du suiveur ne tire aucun courant (\(i_+ = 0\)). Il n'y a donc aucune chute de tension dans \(r\) :</p>
+        \[ v_e = E \]
+        <p class="etape">Étape 2 : côté charge</p>
+        <p>D'après Q6, \(v_s = v_e = E\). La sortie de l'ALI idéal fournit le courant demandé par \(R_0\) sans que sa tension change :</p>
+        \[ u_0 = v_s = E \]
+        <div class="res">\(u_0 = E\), quels que soient \(R_0\) et \(r\).</div>
+
+        <p class="q">3) Intérêt du suiveur</p>
+        <ul>
+          <li>Il <b>isole</b> la source de la charge : la charge ne « voit » plus la résistance interne de la source (adaptation d'impédance, rôle de « tampon »).</li>
+          <li>Au labo : la tension d'une source réelle n'est plus faussée par ce qu'on lui branche.</li>
+          <li>Filtres en cascade (Ch1) : sans suiveur, le second filtre charge le premier et fausse sa fonction de transfert.</li>
+        </ul>
+        <div class="res">Le suiveur sert d'<b>étage tampon</b> : impédance d'entrée infinie, impédance de sortie nulle, gain 1.</div>
       </div>
     </div>
 
@@ -394,18 +417,22 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     <div class="exo-card">
       <div class="exo-head">✏️ Q8 — Montrer que \(v_s=v_e(1+R_2/R_1)\) <span class="diff">♦♦</span></div>
       <div class="exo-body">
-        <p class="q">Montrer que, pour un montage amplificateur non inverseur,
-        \(v_s=v_e\times\left(1+\dfrac{R_2}{R_1}\right)\) (donc \(H=1+\dfrac{R_2}{R_1}>1\)). On pourra utiliser
+        <p class="enonce">Montrer que, pour un montage amplificateur non inverseur,
+        \(v_s=v_e\times\left(1+\dfrac{R_2}{R_1}\right)\) (donc \(H=1+\dfrac{R_2}{R_1}&gt;1\)). On pourra utiliser
         un pont diviseur de tension ou une LNTP.</p>
-        <p><b>Méthode du pont diviseur</b> : la rétroaction se fait sur (−), qui est le point milieu du pont
-        diviseur \(R_1\)–\(R_2\) entre la masse (\(0\) V, via \(R_1\)) et la sortie \(v_s\) (via \(R_2\)),
-        sans courant prélevé sur ce nœud (\(i_-=0\)) :</p>
-        \[ v_-=v_s\cdot\frac{R_1}{R_1+R_2} \]
-        <p>La borne (+) reçoit directement \(v_e\) : \(v_+=v_e\). Rétroaction exclusive sur (−) ⟹ régime
-        linéaire ⟹ \(v_+=v_-\) :</p>
-        \[ v_e=v_s\cdot\frac{R_1}{R_1+R_2}\ \Longrightarrow\ v_s=v_e\cdot\frac{R_1+R_2}{R_1} \]
-        <div class="res">\[ \boxed{\ v_s=v_e\left(1+\frac{R_2}{R_1}\right)\ ,\quad
-        H=1+\frac{R_2}{R_1}>1\ } \]</div>
+
+        <p class="q">Gain de l'amplificateur non inverseur</p>
+        <p class="etape">Étape 1 : régime de fonctionnement</p>
+        <p>La rétroaction arrive seulement sur l'entrée (−) : régime linéaire, \(v_+ = v_-\).</p>
+        <p class="etape">Étape 2 : potentiel de l'entrée (−)</p>
+        <p>L'entrée (−) est le point milieu du pont \(R_1\) (vers la masse) – \(R_2\) (vers \(v_s\)). Aucun courant n'entre dans l'ALI.</p>
+        <div class="rappel"><span class="lab">Rappel · pont diviseur de tension</span>\[ v_- = v_s\,\frac{R_1}{R_1 + R_2} \]</div>
+        <p class="etape">Étape 3 : potentiel de l'entrée (+)</p>
+        <p>L'entrée (+) reçoit directement \(v_e\) : \(v_+ = v_e\).</p>
+        <p class="etape">Étape 4 : on égalise</p>
+        \[ v_e = v_s\,\frac{R_1}{R_1 + R_2} \]
+        \[ v_s = v_e\,\frac{R_1 + R_2}{R_1} = v_e\left(1 + \frac{R_2}{R_1}\right) \]
+        <div class="res">\(v_s = v_e\left(1 + \dfrac{R_2}{R_1}\right)\) et \(H = 1 + \dfrac{R_2}{R_1} &gt; 1\).</div>
       </div>
     </div>
 
@@ -419,16 +446,24 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     <div class="exo-card">
       <div class="exo-head">✏️ Q9 — Exemple d'application de la LNTP : exprimer \(V_A\) <span class="diff">♦</span></div>
       <div class="exo-body">
-        <p class="q">Exemple : exprimer \(V_A\) dans le cas ci-contre.</p>
+        <p class="enonce">Exemple : exprimer \(V_A\) dans le cas ci-contre.</p>
         <figure><img src="ch3-img/lntp-exemple-schema.png" alt="Exemple LNTP : noeud A entre Z1 (relié à v1), Z2 (relié à v2) et Z3 (relié à la masse)">
           <figcaption>Nœud \(A\) relié à \(v_1\) via \(\underline Z_1\), à \(v_2\) via \(\underline Z_2\), et à
           la masse (\(0\) V) via \(\underline Z_3\).</figcaption>
         </figure>
-        <p>Trois branches arrivent en \(A\) : \(v_1\) via \(\underline Z_1\), \(v_2\) via
-        \(\underline Z_2\), et la masse (potentiel \(0\)) via \(\underline Z_3\). En appliquant directement la
-        formule de Millman avec \(n=3\) et \(V_3=0\) :</p>
-        <div class="res">\[ \boxed{\ V_A=\dfrac{\dfrac{v_1}{\underline Z_1}+\dfrac{v_2}{\underline Z_2}}
-        {\dfrac{1}{\underline Z_1}+\dfrac{1}{\underline Z_2}+\dfrac{1}{\underline Z_3}}\ } \]</div>
+
+        <p class="q">Expression de \(V_A\)</p>
+        <div class="rappel"><span class="lab">Rappel · théorème de Millman (LNTP)</span>\[ V_A = \frac{\sum_k V_k/\underline Z_k}{\sum_k 1/\underline Z_k} \]</div>
+        <p class="etape">Étape 1 : les branches qui arrivent en \(A\)</p>
+        <ul>
+          <li>\(v_1\) à travers \(\underline Z_1\) ;</li>
+          <li>\(v_2\) à travers \(\underline Z_2\) ;</li>
+          <li>la masse (potentiel 0) à travers \(\underline Z_3\).</li>
+        </ul>
+        <p class="etape">Étape 2 : on applique la formule</p>
+        <p>Le terme de la masse vaut \(0/\underline Z_3 = 0\) au numérateur, mais \(1/\underline Z_3\) reste au dénominateur.</p>
+        <div class="res">\[ V_A = \frac{\dfrac{v_1}{\underline Z_1} + \dfrac{v_2}{\underline Z_2}}{\dfrac{1}{\underline Z_1} + \dfrac{1}{\underline Z_2} + \dfrac{1}{\underline Z_3}} \]</div>
+        <div class="warnbox"><span class="lab">Piège</span> On n'oublie pas la branche reliée à la masse au dénominateur.</div>
       </div>
     </div>
 
@@ -441,21 +476,25 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     <div class="exo-card">
       <div class="exo-head">✏️ Q10 — Montrer que \(v_s=-v_e\times R_2/R_1\) <span class="diff">♦♦</span></div>
       <div class="exo-body">
-        <p class="q">Montrer que, pour un montage amplificateur inverseur,
+        <p class="enonce">Montrer que, pour un montage amplificateur inverseur,
         \(v_s=v_e\times\left(-\dfrac{R_2}{R_1}\right)\) (donc \(H=-\dfrac{R_2}{R_1}\), déphasage \(\pi\)).</p>
-        <p>La borne (+) est reliée à la masse : \(v_+=0\). Rétroaction sur (−) exclusivement ⟹ régime
-        linéaire ⟹ \(v_-=v_+=0\) : c'est une <b>masse virtuelle</b>. Comme \(i_-=0\) (ALI idéal), le courant
-        qui traverse \(R_1\) (de \(v_e\) vers le nœud (−)) traverse intégralement \(R_2\) (du nœud (−) vers
-        \(v_s\)) :</p>
-        \[ i_1=\frac{v_e-v_-}{R_1}=\frac{v_e}{R_1}\ ,\qquad i_1=\frac{v_--v_s}{R_2}=\frac{-v_s}{R_2} \]
-        \[ \frac{v_e}{R_1}=\frac{-v_s}{R_2}\ \Longrightarrow\ v_s=-v_e\cdot\frac{R_2}{R_1} \]
-        <div class="res">\[ \boxed{\ v_s=-v_e\cdot\frac{R_2}{R_1}\ ,\quad H=-\frac{R_2}{R_1}\ } \]</div>
-        <p><b>Remarque 1.</b> Selon les valeurs relatives de \(R_1\) et \(R_2\), ce montage amplifie
-        (\(R_2>R_1\)) ou atténue (\(R_2<R_1\)) le signal, tout en l'inversant.</p>
-        <p><b>Remarque 2.</b> Contrairement aux deux montages précédents (suiveur, non inverseur), l'impédance
-        d'entrée de ce montage vue par \(v_e\) est \(R_1\) (finie, pas infinie) : un montage amplificateur
-        inverseur inséré dans un circuit plus complexe peut donc <b>affecter les sections en amont</b>
-        (contrairement au suiveur, cf. Q7).</p>
+
+        <p class="q">Gain de l'amplificateur inverseur</p>
+        <p class="etape">Étape 1 : masse virtuelle</p>
+        <p>L'entrée (+) est à la masse, \(v_+ = 0\). La rétroaction arrive seulement sur (−) : régime linéaire.</p>
+        \[ v_- = v_+ = 0 \]
+        <p class="etape">Étape 2 : le même courant traverse \(R_1\) et \(R_2\)</p>
+        <div class="rappel"><span class="lab">Rappel · loi d'Ohm</span>\[ i = \frac{U}{R} \]</div>
+        <p>Comme \(i_- = 0\), le courant \(i_1\) qui arrive par \(R_1\) repart entièrement par \(R_2\) :</p>
+        \[ i_1 = \frac{v_e - v_-}{R_1} = \frac{v_e}{R_1} \qquad\qquad i_1 = \frac{v_- - v_s}{R_2} = \frac{-v_s}{R_2} \]
+        <p class="etape">Étape 3 : on égalise</p>
+        \[ \frac{v_e}{R_1} = \frac{-v_s}{R_2} \]
+        \[ v_s = -v_e\,\frac{R_2}{R_1} \]
+        <div class="res">\(v_s = -v_e\,\dfrac{R_2}{R_1}\) et \(H = -\dfrac{R_2}{R_1}\) : déphasage de \(\pi\).</div>
+        <ul>
+          <li>Si \(R_2 &gt; R_1\), le montage amplifie ; si \(R_2 &lt; R_1\), il atténue. Dans les deux cas, il inverse.</li>
+          <li>Son impédance d'entrée vaut \(R_1\), finie : il peut perturber le circuit placé en amont, contrairement au suiveur (Q7).</li>
+        </ul>
       </div>
     </div>
 
@@ -469,27 +508,28 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
       <div class="exo-head">✏️ Q11 — Montrer la relation intégrale \(v_s(t)\) du montage intégrateur
       <span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">Montrer que, pour un montage intégrateur,
+        <p class="enonce">Montrer que, pour un montage intégrateur,
         \(v_s(t)=v_s(0)-\dfrac{1}{RC}\displaystyle\int_0^t v_e(t')\,dt'\) (donc
         \(\underline H=-\dfrac{1}{jRC\omega}\)). On exprimera la LNTP à la borne (−) en complexes avant de
         passer en temporel.</p>
-        <p>Comme en Q10, \(v_+=0\) (masse) et la rétroaction est exclusivement sur (−) : \(v_-=v_+=0\)
-        (masse virtuelle). En complexes, le courant traversant \(R\) (de \(\underline{v_e}\) vers le nœud
-        (−)) est intégralement transmis à \(C\) (de (−) vers \(\underline{v_s}\), \(i_-=0\)) :</p>
-        \[ \underline{i_1}=\frac{\underline{v_e}-0}{R}=\frac{\underline{v_e}}{R}\ ,\qquad
-        \underline{i_C}=j C\omega\,(0-\underline{v_s})=-jC\omega\,\underline{v_s} \]
-        \[ \frac{\underline{v_e}}{R}=-jC\omega\,\underline{v_s}\ \Longrightarrow\
-        \underline H=\frac{\underline{v_s}}{\underline{v_e}}=-\frac{1}{jRC\omega} \]
-        <p>Repassage au temporel : la relation \(i_1=i_C\) s'écrit, en instantané,
-        \(\dfrac{v_e(t)}{R}=-C\dfrac{dv_s}{dt}\), soit \(\dfrac{dv_s}{dt}=-\dfrac{v_e(t)}{RC}\). En intégrant
-        entre \(0\) et \(t\) :</p>
-        <div class="res">\[ \boxed{\ v_s(t)=v_s(0)-\frac{1}{RC}\int_0^t v_e(t')\,dt'\ ,\qquad
-        \underline H=-\frac{1}{jRC\omega}\ } \]</div>
-        <div class="warnbox"><span class="lab">Piège — divergence du vrai intégrateur</span> À basse
-        fréquence, \(|\underline H|\to\infty\) : le montage intégrateur intègre la moindre petite composante
-        continue de \(v_e\), et l'ALI finit par saturer en quelques secondes. Pour éviter ce problème, on
-        ajoute une résistance de fuite \(R'\) en parallèle à \(C\) — on parle alors de montage
-        <b>pseudo-intégrateur</b>.</div>
+
+        <p class="q">Relation intégrale du montage intégrateur</p>
+        <p class="etape">Étape 1 : masse virtuelle</p>
+        <p>Comme en Q10 : \(v_+ = 0\), rétroaction sur (−) seulement, donc \(v_- = 0\).</p>
+        <p class="etape">Étape 2 : les deux courants en complexes</p>
+        <div class="rappel"><span class="lab">Rappel · impédance d'un condensateur</span>\[ \underline Z_C = \frac{1}{jC\omega} \qquad\Longrightarrow\qquad \underline i_C = jC\omega\,\underline u_C \]</div>
+        <p>Le courant qui traverse \(R\) (de \(v_e\) vers la borne (−)) passe entièrement dans \(C\) (de la borne (−) vers \(v_s\)) :</p>
+        \[ \underline i_1 = \frac{\underline v_e - 0}{R} = \frac{\underline v_e}{R} \qquad\qquad \underline i_C = jC\omega\,(0 - \underline v_s) = -jC\omega\,\underline v_s \]
+        <p class="etape">Étape 3 : fonction de transfert</p>
+        \[ \frac{\underline v_e}{R} = -jC\omega\,\underline v_s \]
+        \[ \underline H = \frac{\underline v_s}{\underline v_e} = -\frac{1}{jRC\omega} \]
+        <p class="etape">Étape 4 : retour au temps</p>
+        <div class="rappel"><span class="lab">Rappel · du complexe au temporel</span>\[ j\omega \;\longleftrightarrow\; \frac{d}{dt} \]</div>
+        <p>La relation \(\underline i_1 = \underline i_C\) devient :</p>
+        \[ \frac{v_e(t)}{R} = -C\,\frac{dv_s}{dt} \qquad\Longrightarrow\qquad \frac{dv_s}{dt} = -\frac{v_e(t)}{RC} \]
+        <p>On intègre entre 0 et \(t\) :</p>
+        <div class="res">\[ v_s(t) = v_s(0) - \frac{1}{RC}\int_0^t v_e(t')\,dt' \qquad\qquad \underline H = -\frac{1}{jRC\omega} \]</div>
+        <div class="warnbox"><span class="lab">Piège</span> En basse fréquence, \(|\underline H| \to \infty\) : le montage intègre la moindre composante continue de \(v_e\), et l'ALI sature en quelques secondes. On ajoute donc une résistance \(R'\) en parallèle de \(C\) : c'est le <b>pseudo-intégrateur</b>.</div>
         <figure><img src="ch3-img/pseudo-integrateur-schema.png" alt="Montage pseudo-integrateur : R' en parallele a C, en contre-reaction">
           <figcaption>Pseudo-intégrateur : \(R'\) en parallèle de \(C\), pour borner le gain en basse
           fréquence et éviter la dérive/saturation.</figcaption>
@@ -501,51 +541,54 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     <div class="exo-card">
       <div class="exo-head">✏️ Q12 — Schématiser le montage dérivateur <span class="diff">♦</span></div>
       <div class="exo-body">
-        <p class="q">Schématiser le montage dérivateur qui suit le comportement
-        \(v_s(t)=-RC\dfrac{dv_e(t)}{dt}\).</p>
-        <p>Le montage dérivateur s'obtient en <b>échangeant</b> les rôles de \(R\) et \(C\) par rapport au
-        montage intégrateur (§3.4) : le condensateur \(C\) passe en entrée (en série avec \(v_e\)), et la
-        résistance \(R\) passe en contre-réaction (entre la sortie et (−)). (+) reste relié à la masse.</p>
+        <p class="enonce">Schématiser le montage dérivateur qui suit le comportement \(v_s(t)=-RC\dfrac{dv_e(t)}{dt}\).</p>
+
+        <p class="q">Schéma du dérivateur</p>
+        <p class="etape">Étape 1 : partir de l'intégrateur</p>
+        <p>On échange les rôles de \(R\) et \(C\) par rapport à l'intégrateur (§3.4) :</p>
+        <ul>
+          <li>\(C\) passe en entrée, entre \(v_e\) et la borne (−) ;</li>
+          <li>\(R\) passe en contre-réaction, entre la sortie et la borne (−) ;</li>
+          <li>la borne (+) reste à la masse.</li>
+        </ul>
         <figure>
-          <svg viewBox="0 0 480 260" width="480" xmlns="http://www.w3.org/2000/svg" font-family="monospace">
-            <line x1="170" y1="60" x2="170" y2="30" stroke="#1e293b" stroke-width="1.6"/>
-            <line x1="170" y1="30" x2="340" y2="30" stroke="#1e293b" stroke-width="1.6"/>
-            <rect x="228" y="20" width="54" height="20" fill="none" stroke="#1e293b" stroke-width="1.6"/>
-            <line x1="340" y1="30" x2="340" y2="130" stroke="#1e293b" stroke-width="1.6"/>
-            <line x1="40" y1="130" x2="40" y2="178" stroke="#1e293b" stroke-width="1.4"/>
-            <line x1="24" y1="178" x2="56" y2="178" stroke="#1e293b" stroke-width="1.4"/>
-            <line x1="30" y1="184" x2="50" y2="184" stroke="#1e293b" stroke-width="1.4"/>
-            <line x1="35" y1="190" x2="45" y2="190" stroke="#1e293b" stroke-width="1.4"/>
-            <text x="10" y="200" fill="#1e293b" font-size="14">ve</text>
-            <line x1="40" y1="130" x2="128" y2="130" stroke="#1e293b" stroke-width="1.6"/>
-            <line x1="138" y1="112" x2="138" y2="148" stroke="#1e293b" stroke-width="2.4"/>
-            <line x1="150" y1="112" x2="150" y2="148" stroke="#1e293b" stroke-width="2.4"/>
-            <line x1="128" y1="130" x2="138" y2="130" stroke="#1e293b" stroke-width="1.6"/>
-            <line x1="150" y1="130" x2="170" y2="130" stroke="#1e293b" stroke-width="1.6"/>
-            <text x="132" y="104" fill="#1e293b" font-size="15" font-weight="700">C</text>
-            <polygon points="170,98 170,162 250,130" fill="#e2e8f0" stroke="#1e293b" stroke-width="1.8"/>
-            <text x="178" y="118" fill="#1e293b" font-size="14">−</text>
-            <text x="178" y="152" fill="#1e293b" font-size="14">+</text>
-            <line x1="170" y1="150" x2="150" y2="150" stroke="#1e293b" stroke-width="1.4"/>
-            <line x1="150" y1="150" x2="150" y2="188" stroke="#1e293b" stroke-width="1.4"/>
-            <line x1="134" y1="188" x2="166" y2="188" stroke="#1e293b" stroke-width="1.4"/>
-            <line x1="140" y1="194" x2="160" y2="194" stroke="#1e293b" stroke-width="1.4"/>
-            <line x1="145" y1="200" x2="155" y2="200" stroke="#1e293b" stroke-width="1.4"/>
-            <line x1="250" y1="130" x2="340" y2="130" stroke="#1e293b" stroke-width="1.6"/>
-            <line x1="380" y1="130" x2="380" y2="178" stroke="#1e293b" stroke-width="1.4"/>
-            <line x1="364" y1="178" x2="396" y2="178" stroke="#1e293b" stroke-width="1.4"/>
-            <line x1="370" y1="184" x2="390" y2="184" stroke="#1e293b" stroke-width="1.4"/>
-            <line x1="375" y1="190" x2="385" y2="190" stroke="#1e293b" stroke-width="1.4"/>
-            <text x="368" y="200" fill="#1e293b" font-size="14">vs</text>
-            <line x1="340" y1="130" x2="380" y2="130" stroke="#1e293b" stroke-width="1.6"/>
-            <text x="248" y="18" fill="#1e293b" font-size="15" font-weight="700">R</text>
-          </svg>
-          <figcaption>Montage dérivateur (redessiné) : \(v_e\to C\to(-)\), résistance \(R\) en contre-réaction
-          entre la sortie et (−), (+) à la masse. Vérification rapide (non demandée par l'énoncé) : par la
-          même méthode qu'en Q11 (masse virtuelle, \(i_-=0\)), \(\underline{i_C}=jC\omega\,\underline{v_e}\)
-          traverse \(R\) vers la sortie, d'où \(\underline{v_s}=-R\cdot jC\omega\,\underline{v_e}\), soit en
-          temporel \(v_s(t)=-RC\,dv_e/dt\) — bien la relation demandée.</figcaption>
+          <svg viewBox="0 0 760 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Montage dérivateur : C en entrée, R en contre-réaction, entrée + à la masse">
+<defs><marker id="fl-139797520159184" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<polygon points="330,175 330,285 440,230" fill="#eef2ff" stroke="#334155" stroke-width="2.5"/>
+<text x="340.0" y="213.0" font-size="24" fill="#334155" text-anchor="start" font-weight="700" font-family="Segoe UI, sans-serif">−</text>
+<text x="340.0" y="263.0" font-size="24" fill="#334155" text-anchor="start" font-weight="700" font-family="Segoe UI, sans-serif">+</text>
+<circle cx="60" cy="205" r="6" fill="#fff" stroke="#334155" stroke-width="2.5"/>
+<text x="60.0" y="187.0" font-size="22" fill="#334155" text-anchor="middle" font-style="italic" font-family="Segoe UI, sans-serif">vₑ</text>
+<polyline points="66.0,205.0 161.0,205.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="175.0,205.0 270.0,205.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<line x1="161.0" y1="187.0" x2="161.0" y2="223.0" stroke="#2563eb" stroke-width="4"/>
+<line x1="175.0" y1="187.0" x2="175.0" y2="223.0" stroke="#2563eb" stroke-width="4"/>
+<text x="168.0" y="179.0" font-size="20" fill="#2563eb" text-anchor="middle" font-family="Segoe UI, sans-serif">C</text>
+<polyline points="270.0,205.0 330.0,205.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="270.0" cy="205.0" r="4.5" fill="#334155" stroke="#334155" stroke-width="2"/>
+<polyline points="270.0,205.0 270.0,110.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="270.0,110.0 350.0,110.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="420.0,110.0 500.0,110.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="350.0" y="98.0" width="70.0" height="24.0" rx="3" fill="#f8fafc" stroke="#0d9488" stroke-width="2.5"/>
+<text x="385.0" y="88.0" font-size="20" fill="#0d9488" text-anchor="middle" font-family="Segoe UI, sans-serif">R</text>
+<polyline points="500.0,110.0 500.0,230.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="440.0,230.0 600.0,230.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="500.0" cy="230.0" r="4.5" fill="#334155" stroke="#334155" stroke-width="2"/>
+<circle cx="606" cy="230" r="6" fill="#fff" stroke="#334155" stroke-width="2.5"/>
+<text x="625.0" y="238.0" font-size="22" fill="#334155" text-anchor="start" font-style="italic" font-family="Segoe UI, sans-serif">vₛ</text>
+<polyline points="330.0,255.0 300.0,255.0 300.0,300.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<line x1="300.0" y1="300.0" x2="300.0" y2="314.0" stroke="#334155" stroke-width="2.5"/>
+<line x1="278.0" y1="314.0" x2="322.0" y2="314.0" stroke="#334155" stroke-width="2.5"/>
+<line x1="286.0" y1="320.0" x2="314.0" y2="320.0" stroke="#334155" stroke-width="2.5"/>
+<line x1="294.0" y1="326.0" x2="306.0" y2="326.0" stroke="#334155" stroke-width="2.5"/>
+<text x="330.0" y="380.0" font-size="19" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">vₑ et vₛ sont repérées par rapport à la masse</text>
+</svg>
+          <figcaption>Montage dérivateur : \(v_e\), puis \(C\), puis borne (−) ; \(R\) en contre-réaction entre la sortie et (−) ; (+) à la masse.</figcaption>
         </figure>
+        <p class="etape">Étape 2 : vérification</p>
+        <p>Masse virtuelle (\(v_- = 0\)) et \(i_- = 0\) : le courant \(\underline i_C = jC\omega\,\underline v_e\) traverse \(R\) vers la sortie.</p>
+        \[ \underline v_s = -R\,\underline i_C = -jRC\omega\,\underline v_e \qquad\Longleftrightarrow\qquad v_s(t) = -RC\,\frac{dv_e}{dt} \]
+        <div class="res">Dérivateur : \(C\) en entrée, \(R\) en contre-réaction, (+) à la masse. On retrouve bien \(v_s = -RC\,\dfrac{dv_e}{dt}\).</div>
       </div>
     </div>
   </section>
@@ -563,48 +606,50 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
       <div class="exo-head">✏️ Q13 — Valeur limite de \(R_2\) pour éviter la saturation en tension
       <span class="diff">♦♦</span></div>
       <div class="exo-body">
-        <p class="q">Proposer une valeur limite pour \(R_2\) dans le cas d'un montage amplificateur inverseur
+        <p class="enonce">Proposer une valeur limite pour \(R_2\) dans le cas d'un montage amplificateur inverseur
         avec un signal d'entrée tel que \(E_m=5{,}0\) V et une résistance \(R_1=100\ \Omega\). Sur un même
         graphique, tracer l'allure de l'oscillogramme de \(v_s(t)\) dans deux cas distincts : pour
         \(R_2=200\ \Omega\) et pour \(R_2=400\ \Omega\).</p>
-        <p>D'après Q10, le montage inverseur donne \(v_s=-v_e\times R_2/R_1\). Avec \(v_e\) sinusoïdal
-        d'amplitude \(E_m\), l'amplitude de sortie attendue (sans saturation) est
-        \(|v_s|_{max}=E_m\cdot R_2/R_1\). Pour rester en régime linéaire, il faut que cette amplitude reste
-        sous \(V_{sat}\approx V_{CC}=15\) V (alimentation \(\pm15\) V, §1.1) :</p>
-        \[ E_m\cdot\frac{R_2}{R_1}\le V_{sat}\ \Longrightarrow\ R_2\le\frac{V_{sat}\cdot R_1}{E_m}
-        =\frac{15\times100}{5{,}0} \]
-        <div class="res">\[ \boxed{\ R_2\le300\ \Omega\ } \]</div>
-        <p>Vérification sur les deux cas demandés :</p>
+
+        <p class="q">1) Valeur limite de \(R_2\)</p>
+        <p class="etape">Étape 1 : amplitude de sortie attendue</p>
+        <div class="rappel"><span class="lab">Rappel · amplificateur inverseur</span>\[ v_s = -\frac{R_2}{R_1}\,v_e \]</div>
+        \[ V_{s,m} = E_m\,\frac{R_2}{R_1} \]
+        <p class="etape">Étape 2 : condition de non-saturation</p>
+        <p>Avec une alimentation \(\pm 15\) V, il faut \(V_{s,m} \le V_{sat} \approx 15\) V :</p>
+        \[ E_m\,\frac{R_2}{R_1} \le V_{sat} \iff R_2 \le \frac{V_{sat}\,R_1}{E_m} \]
+        \[ R_2 \le \frac{15\times100}{5{,}0} = 300\ \Omega \]
+        <div class="res">\(R_2 \le 300\ \Omega\).</div>
+
+        <p class="q">2) Oscillogrammes pour \(R_2 = 200\ \Omega\) et \(R_2 = 400\ \Omega\)</p>
         <ul>
-          <li>\(R_2=200\ \Omega<300\ \Omega\) : gain \(=2\), amplitude idéale \(=2\times5{,}0=10\) V
-          \(<15\) V — <b>pas de saturation</b>, sinusoïde propre \(\pm10\) V.</li>
-          <li>\(R_2=400\ \Omega>300\ \Omega\) : gain \(=4\), amplitude idéale \(=4\times5{,}0=20\) V
-          \(>15\) V — <b>écrêtage</b> à \(\pm15\) V au lieu des \(\pm20\) V attendus.</li>
+          <li>\(R_2 = 200\ \Omega\) : gain 2, amplitude \(2\times5{,}0 = 10\) V, sous 15 V. Pas de saturation : sinusoïde \(\pm10\) V, en opposition de phase avec \(v_e\).</li>
+          <li>\(R_2 = 400\ \Omega\) : gain 4, amplitude idéale \(4\times5{,}0 = 20\) V, au-dessus de 15 V. La sinusoïde est <b>écrêtée</b> à \(\pm15\) V.</li>
         </ul>
         <figure>
-          <svg viewBox="0 0 680 380" width="680" xmlns="http://www.w3.org/2000/svg">
-<line x1="60" y1="200" x2="640" y2="200" stroke="#94a3b8" stroke-width="1.4"/>
-<line x1="60" y1="40" x2="60" y2="350" stroke="#94a3b8" stroke-width="1.4"/>
-<text x="642" y="216" fill="#1e293b" font-family="monospace" font-size="12">t</text>
-<line x1="60" y1="107.0" x2="640" y2="107.0" stroke="#e2e8f0" stroke-width="1"/>
-<text x="54" y="111.0" fill="#94a3b8" font-family="monospace" font-size="10.5" text-anchor="end">+15V</text>
-<line x1="60" y1="138.0" x2="640" y2="138.0" stroke="#e2e8f0" stroke-width="1"/>
-<text x="54" y="142.0" fill="#94a3b8" font-family="monospace" font-size="10.5" text-anchor="end">+10V</text>
-<line x1="60" y1="262.0" x2="640" y2="262.0" stroke="#e2e8f0" stroke-width="1"/>
-<text x="54" y="266.0" fill="#94a3b8" font-family="monospace" font-size="10.5" text-anchor="end">-10V</text>
-<line x1="60" y1="293.0" x2="640" y2="293.0" stroke="#e2e8f0" stroke-width="1"/>
-<text x="54" y="297.0" fill="#94a3b8" font-family="monospace" font-size="10.5" text-anchor="end">-15V</text>
-<line x1="60" y1="107.0" x2="640" y2="107.0" stroke="#dc2626" stroke-width="1" stroke-dasharray="5,3" opacity="0.7"/>
-<line x1="60" y1="293.0" x2="640" y2="293.0" stroke="#dc2626" stroke-width="1" stroke-dasharray="5,3" opacity="0.7"/>
-<path d="M 60.0,262.0 L 64.1,261.9 L 68.3,261.8 L 72.4,261.4 L 76.6,261.0 L 80.7,260.4 L 84.9,259.8 L 89.0,259.0 L 93.1,258.0 L 97.3,257.0 L 101.4,255.9 L 105.6,254.6 L 109.7,253.2 L 113.9,251.7 L 118.0,250.2 L 122.1,248.5 L 126.3,246.7 L 130.4,244.8 L 134.6,242.8 L 138.7,240.8 L 142.9,238.7 L 147.0,236.4 L 151.1,234.2 L 155.3,231.8 L 159.4,229.4 L 163.6,226.9 L 167.7,224.4 L 171.9,221.8 L 176.0,219.2 L 180.1,216.5 L 184.3,213.8 L 188.4,211.1 L 192.6,208.3 L 196.7,205.6 L 200.9,202.8 L 205.0,200.0 L 209.1,197.2 L 213.3,194.4 L 217.4,191.7 L 221.6,188.9 L 225.7,186.2 L 229.9,183.5 L 234.0,180.8 L 238.1,178.2 L 242.3,175.6 L 246.4,173.1 L 250.6,170.6 L 254.7,168.2 L 258.9,165.8 L 263.0,163.6 L 267.1,161.3 L 271.3,159.2 L 275.4,157.2 L 279.6,155.2 L 283.7,153.3 L 287.9,151.5 L 292.0,149.8 L 296.1,148.3 L 300.3,146.8 L 304.4,145.4 L 308.6,144.1 L 312.7,143.0 L 316.9,142.0 L 321.0,141.0 L 325.1,140.2 L 329.3,139.6 L 333.4,139.0 L 337.6,138.6 L 341.7,138.2 L 345.9,138.1 L 350.0,138.0 L 354.1,138.1 L 358.3,138.2 L 362.4,138.6 L 366.6,139.0 L 370.7,139.6 L 374.9,140.2 L 379.0,141.0 L 383.1,142.0 L 387.3,143.0 L 391.4,144.1 L 395.6,145.4 L 399.7,146.8 L 403.9,148.3 L 408.0,149.8 L 412.1,151.5 L 416.3,153.3 L 420.4,155.2 L 424.6,157.2 L 428.7,159.2 L 432.9,161.3 L 437.0,163.6 L 441.1,165.8 L 445.3,168.2 L 449.4,170.6 L 453.6,173.1 L 457.7,175.6 L 461.9,178.2 L 466.0,180.8 L 470.1,183.5 L 474.3,186.2 L 478.4,188.9 L 482.6,191.7 L 486.7,194.4 L 490.9,197.2 L 495.0,200.0 L 499.1,202.8 L 503.3,205.6 L 507.4,208.3 L 511.6,211.1 L 515.7,213.8 L 519.9,216.5 L 524.0,219.2 L 528.1,221.8 L 532.3,224.4 L 536.4,226.9 L 540.6,229.4 L 544.7,231.8 L 548.9,234.2 L 553.0,236.4 L 557.1,238.7 L 561.3,240.8 L 565.4,242.8 L 569.6,244.8 L 573.7,246.7 L 577.9,248.5 L 582.0,250.2 L 586.1,251.7 L 590.3,253.2 L 594.4,254.6 L 598.6,255.9 L 602.7,257.0 L 606.9,258.0 L 611.0,259.0 L 615.1,259.8 L 619.3,260.4 L 623.4,261.0 L 627.6,261.4 L 631.7,261.8 L 635.9,261.9 L 640.0,262.0" fill="none" stroke="#0d9488" stroke-width="2.6"/>
-<path d="M 60.0,293.0 L 64.1,293.0 L 68.3,293.0 L 72.4,293.0 L 76.6,293.0 L 80.7,293.0 L 84.9,293.0 L 89.0,293.0 L 93.1,293.0 L 97.3,293.0 L 101.4,293.0 L 105.6,293.0 L 109.7,293.0 L 113.9,293.0 L 118.0,293.0 L 122.1,293.0 L 126.3,293.0 L 130.4,289.6 L 134.6,285.7 L 138.7,281.6 L 142.9,277.3 L 147.0,272.9 L 151.1,268.3 L 155.3,263.6 L 159.4,258.8 L 163.6,253.8 L 167.7,248.7 L 171.9,243.6 L 176.0,238.3 L 180.1,233.0 L 184.3,227.6 L 188.4,222.1 L 192.6,216.6 L 196.7,211.1 L 200.9,205.6 L 205.0,200.0 L 209.1,194.4 L 213.3,188.9 L 217.4,183.4 L 221.6,177.9 L 225.7,172.4 L 229.9,167.0 L 234.0,161.7 L 238.1,156.4 L 242.3,151.3 L 246.4,146.2 L 250.6,141.2 L 254.7,136.4 L 258.9,131.7 L 263.0,127.1 L 267.1,122.7 L 271.3,118.4 L 275.4,114.3 L 279.6,110.4 L 283.7,107.0 L 287.9,107.0 L 292.0,107.0 L 296.1,107.0 L 300.3,107.0 L 304.4,107.0 L 308.6,107.0 L 312.7,107.0 L 316.9,107.0 L 321.0,107.0 L 325.1,107.0 L 329.3,107.0 L 333.4,107.0 L 337.6,107.0 L 341.7,107.0 L 345.9,107.0 L 350.0,107.0 L 354.1,107.0 L 358.3,107.0 L 362.4,107.0 L 366.6,107.0 L 370.7,107.0 L 374.9,107.0 L 379.0,107.0 L 383.1,107.0 L 387.3,107.0 L 391.4,107.0 L 395.6,107.0 L 399.7,107.0 L 403.9,107.0 L 408.0,107.0 L 412.1,107.0 L 416.3,107.0 L 420.4,110.4 L 424.6,114.3 L 428.7,118.4 L 432.9,122.7 L 437.0,127.1 L 441.1,131.7 L 445.3,136.4 L 449.4,141.2 L 453.6,146.2 L 457.7,151.3 L 461.9,156.4 L 466.0,161.7 L 470.1,167.0 L 474.3,172.4 L 478.4,177.9 L 482.6,183.4 L 486.7,188.9 L 490.9,194.4 L 495.0,200.0 L 499.1,205.6 L 503.3,211.1 L 507.4,216.6 L 511.6,222.1 L 515.7,227.6 L 519.9,233.0 L 524.0,238.3 L 528.1,243.6 L 532.3,248.7 L 536.4,253.8 L 540.6,258.8 L 544.7,263.6 L 548.9,268.3 L 553.0,272.9 L 557.1,277.3 L 561.3,281.6 L 565.4,285.7 L 569.6,289.6 L 573.7,293.0 L 577.9,293.0 L 582.0,293.0 L 586.1,293.0 L 590.3,293.0 L 594.4,293.0 L 598.6,293.0 L 602.7,293.0 L 606.9,293.0 L 611.0,293.0 L 615.1,293.0 L 619.3,293.0 L 623.4,293.0 L 627.6,293.0 L 631.7,293.0 L 635.9,293.0 L 640.0,293.0" fill="none" stroke="#d97706" stroke-width="2.6"/>
-<text x="70" y="60" fill="#0d9488" font-family="monospace" font-size="12" font-weight="700">R2=200 ohm (gain 2, propre, +-10V)</text>
-<text x="70" y="78" fill="#d97706" font-family="monospace" font-size="12" font-weight="700">R2=400 ohm (gain 4, ecrete a +-15V au lieu de +-20V)</text>
-<text x="60" y="24" fill="#334155" font-family="monospace" font-size="13" font-weight="700">Q13 - Saturation en tension, montage inverseur (Em=5V, R1=100 ohm)</text>
+          <svg viewBox="0 0 760 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="vs(t) pour R2 = 200 ohms (sinusoïde ±10 V) et R2 = 400 ohms (écrêtée à ±15 V)">
+<defs><marker id="fl-139797520565216" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<line x1="90.0" y1="225.0" x2="725.0" y2="225.0" stroke="#334155" stroke-width="2" marker-end="url(#fl-139797520565216)"/>
+<line x1="90.0" y1="360.0" x2="90.0" y2="75.0" stroke="#334155" stroke-width="2" marker-end="url(#fl-139797520565216)"/>
+<text x="720.0" y="255.0" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">t</text>
+<text x="100.0" y="70.0" font-size="20" fill="#334155" text-anchor="start" font-family="Segoe UI, sans-serif">vₛ (V)</text>
+<polyline points="90.0,133.0 710.0,133.0" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="80.0" y="140.0" font-size="20" fill="#dc2626" text-anchor="end" font-family="Segoe UI, sans-serif">15</text>
+<polyline points="90.0,163.6 710.0,163.6" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="80.0" y="170.6" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">10</text>
+<polyline points="90.0,286.4 710.0,286.4" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="80.0" y="293.4" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">−10</text>
+<polyline points="90.0,317.0 710.0,317.0" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="80.0" y="324.0" font-size="20" fill="#dc2626" text-anchor="end" font-family="Segoe UI, sans-serif">−15</text>
+<polyline points="90.0,225.0 91.5,226.0 93.1,226.9 94.7,227.9 96.2,228.9 97.8,229.8 99.3,230.8 100.8,231.7 102.4,232.7 104.0,233.6 105.5,234.6 107.0,235.6 108.6,236.5 110.2,237.4 111.7,238.4 113.2,239.3 114.8,240.3 116.3,241.2 117.9,242.1 119.5,243.0 121.0,244.0 122.5,244.9 124.1,245.8 125.7,246.7 127.2,247.6 128.8,248.5 130.3,249.4 131.8,250.3 133.4,251.1 134.9,252.0 136.5,252.9 138.1,253.7 139.6,254.6 141.2,255.4 142.7,256.2 144.2,257.1 145.8,257.9 147.3,258.7 148.9,259.5 150.4,260.3 152.0,261.1 153.6,261.8 155.1,262.6 156.7,263.4 158.2,264.1 159.8,264.9 161.3,265.6 162.8,266.3 164.4,267.0 165.9,267.7 167.5,268.4 169.1,269.1 170.6,269.7 172.2,270.4 173.7,271.0 175.2,271.7 176.8,272.3 178.3,272.9 179.9,273.5 181.4,274.1 183.0,274.6 184.6,275.2 186.1,275.8 187.7,276.3 189.2,276.8 190.8,277.3 192.3,277.8 193.9,278.3 195.4,278.8 196.9,279.2 198.5,279.7 200.1,280.1 201.6,280.5 203.1,280.9 204.7,281.3 206.2,281.7 207.8,282.1 209.4,282.4 210.9,282.7 212.4,283.1 214.0,283.4 215.6,283.7 217.1,283.9 218.7,284.2 220.2,284.4 221.8,284.7 223.3,284.9 224.8,285.1 226.4,285.3 227.9,285.4 229.5,285.6 231.1,285.8 232.6,285.9 234.2,286.0 235.7,286.1 237.2,286.2 238.8,286.2 240.3,286.3 241.9,286.3 243.4,286.4 245.0,286.4 246.6,286.4 248.1,286.3 249.7,286.3 251.2,286.2 252.8,286.2 254.3,286.1 255.9,286.0 257.4,285.9 259.0,285.8 260.5,285.6 262.1,285.4 263.6,285.3 265.1,285.1 266.7,284.9 268.2,284.7 269.8,284.4 271.4,284.2 272.9,283.9 274.4,283.7 276.0,283.4 277.5,283.1 279.1,282.7 280.6,282.4 282.2,282.1 283.8,281.7 285.3,281.3 286.9,280.9 288.4,280.5 290.0,280.1 291.5,279.7 293.1,279.2 294.6,278.8 296.1,278.3 297.7,277.8 299.2,277.3 300.8,276.8 302.4,276.3 303.9,275.8 305.4,275.2 307.0,274.6 308.5,274.1 310.1,273.5 311.6,272.9 313.2,272.3 314.8,271.7 316.3,271.0 317.9,270.4 319.4,269.7 320.9,269.1 322.5,268.4 324.1,267.7 325.6,267.0 327.1,266.3 328.7,265.6 330.2,264.9 331.8,264.1 333.4,263.4 334.9,262.6 336.5,261.8 338.0,261.1 339.6,260.3 341.1,259.5 342.6,258.7 344.2,257.9 345.8,257.1 347.3,256.2 348.8,255.4 350.4,254.6 351.9,253.7 353.5,252.9 355.1,252.0 356.6,251.1 358.1,250.3 359.7,249.4 361.2,248.5 362.8,247.6 364.4,246.7 365.9,245.8 367.4,244.9 369.0,244.0 370.6,243.0 372.1,242.1 373.7,241.2 375.2,240.3 376.8,239.3 378.3,238.4 379.9,237.4 381.4,236.5 382.9,235.6 384.5,234.6 386.1,233.6 387.6,232.7 389.1,231.7 390.7,230.8 392.2,229.8 393.8,228.9 395.4,227.9 396.9,226.9 398.4,226.0 400.0,225.0 401.5,224.0 403.1,223.1 404.6,222.1 406.2,221.1 407.8,220.2 409.3,219.2 410.8,218.3 412.4,217.3 413.9,216.4 415.5,215.4 417.0,214.4 418.6,213.5 420.1,212.6 421.7,211.6 423.2,210.7 424.8,209.7 426.3,208.8 427.9,207.9 429.4,207.0 431.0,206.0 432.6,205.1 434.1,204.2 435.6,203.3 437.2,202.4 438.8,201.5 440.3,200.6 441.9,199.7 443.4,198.9 444.9,198.0 446.5,197.1 448.1,196.3 449.6,195.4 451.2,194.6 452.7,193.8 454.2,192.9 455.8,192.1 457.4,191.3 458.9,190.5 460.5,189.7 462.0,188.9 463.6,188.2 465.1,187.4 466.7,186.6 468.2,185.9 469.8,185.1 471.3,184.4 472.9,183.7 474.4,183.0 476.0,182.3 477.5,181.6 479.0,180.9 480.6,180.3 482.1,179.6 483.7,179.0 485.2,178.3 486.8,177.7 488.3,177.1 489.9,176.5 491.4,175.9 493.0,175.4 494.5,174.8 496.1,174.2 497.6,173.7 499.2,173.2 500.8,172.7 502.3,172.2 503.8,171.7 505.4,171.2 506.9,170.8 508.5,170.3 510.1,169.9 511.6,169.5 513.1,169.1 514.7,168.7 516.2,168.3 517.8,167.9 519.4,167.6 520.9,167.3 522.5,166.9 524.0,166.6 525.5,166.3 527.1,166.1 528.7,165.8 530.2,165.6 531.8,165.3 533.3,165.1 534.9,164.9 536.4,164.7 538.0,164.6 539.5,164.4 541.0,164.2 542.6,164.1 544.2,164.0 545.7,163.9 547.2,163.8 548.8,163.8 550.4,163.7 551.9,163.7 553.5,163.6 555.0,163.6 556.5,163.6 558.1,163.7 559.6,163.7 561.2,163.8 562.8,163.8 564.3,163.9 565.8,164.0 567.4,164.1 569.0,164.2 570.5,164.4 572.0,164.6 573.6,164.7 575.1,164.9 576.7,165.1 578.2,165.3 579.8,165.6 581.3,165.8 582.9,166.1 584.5,166.3 586.0,166.6 587.5,166.9 589.1,167.3 590.6,167.6 592.2,167.9 593.8,168.3 595.3,168.7 596.9,169.1 598.4,169.5 600.0,169.9 601.5,170.3 603.0,170.8 604.6,171.2 606.1,171.7 607.7,172.2 609.2,172.7 610.8,173.2 612.4,173.7 613.9,174.2 615.5,174.8 617.0,175.4 618.6,175.9 620.1,176.5 621.6,177.1 623.2,177.7 624.8,178.3 626.3,179.0 627.9,179.6 629.4,180.3 631.0,180.9 632.5,181.6 634.0,182.3 635.6,183.0 637.1,183.7 638.7,184.4 640.2,185.1 641.8,185.9 643.4,186.6 644.9,187.4 646.4,188.2 648.0,188.9 649.5,189.7 651.1,190.5 652.6,191.3 654.2,192.1 655.8,192.9 657.3,193.8 658.9,194.6 660.4,195.4 662.0,196.3 663.5,197.1 665.0,198.0 666.6,198.9 668.1,199.7 669.7,200.6 671.2,201.5 672.8,202.4 674.4,203.3 675.9,204.2 677.5,205.1 679.0,206.0 680.5,207.0 682.1,207.9 683.6,208.8 685.2,209.7 686.8,210.7 688.3,211.6 689.9,212.6 691.4,213.5 693.0,214.4 694.5,215.4 696.1,216.4 697.6,217.3 699.1,218.3 700.7,219.2 702.2,220.2 703.8,221.1 705.4,222.1 706.9,223.1 708.5,224.0 710.0,225.0" fill="none" stroke="#0d9488" stroke-width="3.5" stroke-linejoin="round"/>
+<polyline points="90.0,225.0 91.5,226.9 93.1,228.9 94.7,230.8 96.2,232.7 97.8,234.6 99.3,236.5 100.8,238.5 102.4,240.4 104.0,242.3 105.5,244.2 107.0,246.1 108.6,248.0 110.2,249.9 111.7,251.8 113.2,253.7 114.8,255.5 116.3,257.4 117.9,259.2 119.5,261.1 121.0,262.9 122.5,264.8 124.1,266.6 125.7,268.4 127.2,270.2 128.8,272.0 130.3,273.7 131.8,275.5 133.4,277.3 134.9,279.0 136.5,280.7 138.1,282.4 139.6,284.1 141.2,285.8 142.7,287.5 144.2,289.1 145.8,290.8 147.3,292.4 148.9,294.0 150.4,295.6 152.0,297.1 153.6,298.7 155.1,300.2 156.7,301.7 158.2,303.2 159.8,304.7 161.3,306.2 162.8,307.6 164.4,309.0 165.9,310.4 167.5,311.8 169.1,313.1 170.6,314.5 172.2,315.8 173.7,317.0 175.2,317.0 176.8,317.0 178.3,317.0 179.9,317.0 181.4,317.0 183.0,317.0 184.6,317.0 186.1,317.0 187.7,317.0 189.2,317.0 190.8,317.0 192.3,317.0 193.9,317.0 195.4,317.0 196.9,317.0 198.5,317.0 200.1,317.0 201.6,317.0 203.1,317.0 204.7,317.0 206.2,317.0 207.8,317.0 209.4,317.0 210.9,317.0 212.4,317.0 214.0,317.0 215.6,317.0 217.1,317.0 218.7,317.0 220.2,317.0 221.8,317.0 223.3,317.0 224.8,317.0 226.4,317.0 227.9,317.0 229.5,317.0 231.1,317.0 232.6,317.0 234.2,317.0 235.7,317.0 237.2,317.0 238.8,317.0 240.3,317.0 241.9,317.0 243.4,317.0 245.0,317.0 246.6,317.0 248.1,317.0 249.7,317.0 251.2,317.0 252.8,317.0 254.3,317.0 255.9,317.0 257.4,317.0 259.0,317.0 260.5,317.0 262.1,317.0 263.6,317.0 265.1,317.0 266.7,317.0 268.2,317.0 269.8,317.0 271.4,317.0 272.9,317.0 274.4,317.0 276.0,317.0 277.5,317.0 279.1,317.0 280.6,317.0 282.2,317.0 283.8,317.0 285.3,317.0 286.9,317.0 288.4,317.0 290.0,317.0 291.5,317.0 293.1,317.0 294.6,317.0 296.1,317.0 297.7,317.0 299.2,317.0 300.8,317.0 302.4,317.0 303.9,317.0 305.4,317.0 307.0,317.0 308.5,317.0 310.1,317.0 311.6,317.0 313.2,317.0 314.8,317.0 316.3,317.0 317.9,315.8 319.4,314.5 320.9,313.1 322.5,311.8 324.1,310.4 325.6,309.0 327.1,307.6 328.7,306.2 330.2,304.7 331.8,303.2 333.4,301.7 334.9,300.2 336.5,298.7 338.0,297.1 339.6,295.6 341.1,294.0 342.6,292.4 344.2,290.8 345.8,289.1 347.3,287.5 348.8,285.8 350.4,284.1 351.9,282.4 353.5,280.7 355.1,279.0 356.6,277.3 358.1,275.5 359.7,273.7 361.2,272.0 362.8,270.2 364.4,268.4 365.9,266.6 367.4,264.8 369.0,262.9 370.6,261.1 372.1,259.2 373.7,257.4 375.2,255.5 376.8,253.7 378.3,251.8 379.9,249.9 381.4,248.0 382.9,246.1 384.5,244.2 386.1,242.3 387.6,240.4 389.1,238.5 390.7,236.5 392.2,234.6 393.8,232.7 395.4,230.8 396.9,228.9 398.4,226.9 400.0,225.0 401.5,223.1 403.1,221.1 404.6,219.2 406.2,217.3 407.8,215.4 409.3,213.5 410.8,211.5 412.4,209.6 413.9,207.7 415.5,205.8 417.0,203.9 418.6,202.0 420.1,200.1 421.7,198.2 423.2,196.3 424.8,194.5 426.3,192.6 427.9,190.8 429.4,188.9 431.0,187.1 432.6,185.2 434.1,183.4 435.6,181.6 437.2,179.8 438.8,178.0 440.3,176.3 441.9,174.5 443.4,172.7 444.9,171.0 446.5,169.3 448.1,167.6 449.6,165.9 451.2,164.2 452.7,162.5 454.2,160.9 455.8,159.2 457.4,157.6 458.9,156.0 460.5,154.4 462.0,152.9 463.6,151.3 465.1,149.8 466.7,148.3 468.2,146.8 469.8,145.3 471.3,143.8 472.9,142.4 474.4,141.0 476.0,139.6 477.5,138.2 479.0,136.9 480.6,135.5 482.1,134.2 483.7,133.0 485.2,133.0 486.8,133.0 488.3,133.0 489.9,133.0 491.4,133.0 493.0,133.0 494.5,133.0 496.1,133.0 497.6,133.0 499.2,133.0 500.8,133.0 502.3,133.0 503.8,133.0 505.4,133.0 506.9,133.0 508.5,133.0 510.1,133.0 511.6,133.0 513.1,133.0 514.7,133.0 516.2,133.0 517.8,133.0 519.4,133.0 520.9,133.0 522.5,133.0 524.0,133.0 525.5,133.0 527.1,133.0 528.7,133.0 530.2,133.0 531.8,133.0 533.3,133.0 534.9,133.0 536.4,133.0 538.0,133.0 539.5,133.0 541.0,133.0 542.6,133.0 544.2,133.0 545.7,133.0 547.2,133.0 548.8,133.0 550.4,133.0 551.9,133.0 553.5,133.0 555.0,133.0 556.5,133.0 558.1,133.0 559.6,133.0 561.2,133.0 562.8,133.0 564.3,133.0 565.8,133.0 567.4,133.0 569.0,133.0 570.5,133.0 572.0,133.0 573.6,133.0 575.1,133.0 576.7,133.0 578.2,133.0 579.8,133.0 581.3,133.0 582.9,133.0 584.5,133.0 586.0,133.0 587.5,133.0 589.1,133.0 590.6,133.0 592.2,133.0 593.8,133.0 595.3,133.0 596.9,133.0 598.4,133.0 600.0,133.0 601.5,133.0 603.0,133.0 604.6,133.0 606.1,133.0 607.7,133.0 609.2,133.0 610.8,133.0 612.4,133.0 613.9,133.0 615.5,133.0 617.0,133.0 618.6,133.0 620.1,133.0 621.6,133.0 623.2,133.0 624.8,133.0 626.3,133.0 627.9,134.2 629.4,135.5 631.0,136.9 632.5,138.2 634.0,139.6 635.6,141.0 637.1,142.4 638.7,143.8 640.2,145.3 641.8,146.8 643.4,148.3 644.9,149.8 646.4,151.3 648.0,152.9 649.5,154.4 651.1,156.0 652.6,157.6 654.2,159.2 655.8,160.9 657.3,162.5 658.9,164.2 660.4,165.9 662.0,167.6 663.5,169.3 665.0,171.0 666.6,172.7 668.1,174.5 669.7,176.3 671.2,178.0 672.8,179.8 674.4,181.6 675.9,183.4 677.5,185.2 679.0,187.1 680.5,188.9 682.1,190.8 683.6,192.6 685.2,194.5 686.8,196.3 688.3,198.2 689.9,200.1 691.4,202.0 693.0,203.9 694.5,205.8 696.1,207.7 697.6,209.6 699.1,211.5 700.7,213.5 702.2,215.4 703.8,217.3 705.4,219.2 706.9,221.1 708.5,223.1 710.0,225.0" fill="none" stroke="#d97706" stroke-width="3.5" stroke-linejoin="round"/>
+<text x="150.0" y="30.0" font-size="20" fill="#0d9488" text-anchor="start" font-family="Segoe UI, sans-serif">vert : R₂ = 200 Ω (±10 V)</text>
+<text x="430.0" y="30.0" font-size="20" fill="#b45309" text-anchor="start" font-family="Segoe UI, sans-serif">orange : R₂ = 400 Ω (écrêtée)</text>
 </svg>
           <figcaption>\(R_2=200\ \Omega\) (vert) : sinusoïde propre \(\pm10\) V. \(R_2=400\ \Omega\) (orange) :
           écrêtage plat à \(\pm15\) V dès que la sinusoïde idéale dépasserait cette valeur.</figcaption>
         </figure>
+        <div class="res">200 Ω : sinusoïde \(\pm10\) V. 400 Ω : sinusoïde écrêtée à \(\pm15\) V.</div>
       </div>
     </div>
 
@@ -616,42 +661,47 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
     <div class="exo-card">
       <div class="exo-head">✏️ Q14 — Oscillogramme du suiveur en saturation de courant <span class="diff">♦♦</span></div>
       <div class="exo-body">
-        <p class="q">Sur un même graphique, tracer l'allure de l'oscillogramme de \(v_s(t)\) d'un montage
+        <p class="enonce">Sur un même graphique, tracer l'allure de l'oscillogramme de \(v_s(t)\) d'un montage
         suiveur dont le signal d'entrée est sinusoïdal symétrique, d'amplitude \(6{,}0\) V, dans deux cas
         distincts : lorsque l'ALI est en sortie ouverte, et lorsque la sortie de l'ALI est branchée à une
         charge de résistance \(200\ \Omega\).</p>
-        <p><b>Sortie ouverte</b> : aucun courant n'est demandé à l'ALI (\(i_s=0\)), donc pas de saturation en
-        courant possible. D'après Q6, \(v_s=v_e\) : sinusoïde propre d'amplitude \(6{,}0\) V.</p>
-        <p><b>Sortie chargée par \(R_0=200\ \Omega\)</b> : le courant délivré par l'ALI est
-        \(i_s=v_s/R_0\). La saturation en courant est atteinte dès que \(|i_s|=i_{s,max}\), soit pour
-        \(|v_s|=i_{s,max}\times R_0\) :</p>
-        \[ |v_s|_{max,\,courant}=20\times10^{-3}\times200=4{,}0\text{ V} \]
-        <p>Comme \(4{,}0\) V \(<6{,}0\) V (amplitude idéale visée), la sortie <b>écrête à \(\pm4{,}0\) V</b>
-        dès que la sinusoïde idéale dépasserait cette valeur.</p>
-        <div class="res">Sortie ouverte : \(v_s=v_e\), sinusoïde propre \(\pm6{,}0\) V. Sortie chargée par
-        \(200\ \Omega\) : écrêtage à \(\pm4{,}0\) V (saturation en courant, \(i_{s,max}\approx20\) mA).</div>
+
+        <p class="q">1) Sortie ouverte</p>
+        <p>Aucun courant n'est demandé à l'ALI (\(i_s = 0\)) : pas de saturation en courant possible. D'après Q6, \(v_s = v_e\).</p>
+        <div class="res">Sinusoïde \(\pm 6{,}0\) V, identique à l'entrée.</div>
+
+        <p class="q">2) Sortie chargée par \(R_0 = 200\ \Omega\)</p>
+        <p class="etape">Étape 1 : courant demandé à l'ALI</p>
+        <div class="rappel"><span class="lab">Rappel · loi d'Ohm</span>\[ i_s = \frac{v_s}{R_0} \]</div>
+        <p>L'ALI ne peut pas fournir plus que \(i_{s,max} \approx 20\) mA.</p>
+        <p class="etape">Étape 2 : tension maximale en sortie</p>
+        \[ |v_s|_{max} = i_{s,max}\times R_0 = 20\times10^{-3}\times200 = 4{,}0\ \text{V} \]
+        <p class="etape">Étape 3 : comparaison</p>
+        <p>\(4{,}0\) V est inférieur aux \(6{,}0\) V visés : la sortie est écrêtée dès que la sinusoïde dépasserait 4,0 V.</p>
         <figure>
-          <svg viewBox="0 0 680 340" width="680" xmlns="http://www.w3.org/2000/svg">
-<line x1="60" y1="170" x2="640" y2="170" stroke="#94a3b8" stroke-width="1.4"/>
-<line x1="60" y1="30" x2="60" y2="320" stroke="#94a3b8" stroke-width="1.4"/>
-<text x="642" y="186" fill="#1e293b" font-family="monospace" font-size="12">t</text>
-<line x1="60" y1="95.0" x2="640" y2="95.0" stroke="#e2e8f0" stroke-width="1"/>
-<text x="54" y="99.0" fill="#94a3b8" font-family="monospace" font-size="10.5" text-anchor="end">6V</text>
-<line x1="60" y1="120.0" x2="640" y2="120.0" stroke="#e2e8f0" stroke-width="1"/>
-<text x="54" y="124.0" fill="#94a3b8" font-family="monospace" font-size="10.5" text-anchor="end">4V</text>
-<line x1="60" y1="220.0" x2="640" y2="220.0" stroke="#e2e8f0" stroke-width="1"/>
-<text x="54" y="224.0" fill="#94a3b8" font-family="monospace" font-size="10.5" text-anchor="end">-4V</text>
-<line x1="60" y1="245.0" x2="640" y2="245.0" stroke="#e2e8f0" stroke-width="1"/>
-<text x="54" y="249.0" fill="#94a3b8" font-family="monospace" font-size="10.5" text-anchor="end">-6V</text>
-<path d="M 60.0,95.0 L 64.1,95.1 L 68.3,95.3 L 72.4,95.7 L 76.6,96.2 L 80.7,96.9 L 84.9,97.7 L 89.0,98.7 L 93.1,99.8 L 97.3,101.0 L 101.4,102.4 L 105.6,104.0 L 109.7,105.6 L 113.9,107.4 L 118.0,109.3 L 122.1,111.4 L 126.3,113.5 L 130.4,115.8 L 134.6,118.2 L 138.7,120.7 L 142.9,123.2 L 147.0,125.9 L 151.1,128.7 L 155.3,131.5 L 159.4,134.5 L 163.6,137.5 L 167.7,140.5 L 171.9,143.6 L 176.0,146.8 L 180.1,150.0 L 184.3,153.3 L 188.4,156.6 L 192.6,159.9 L 196.7,163.3 L 200.9,166.6 L 205.0,170.0 L 209.1,173.4 L 213.3,176.7 L 217.4,180.1 L 221.6,183.4 L 225.7,186.7 L 229.9,190.0 L 234.0,193.2 L 238.1,196.4 L 242.3,199.5 L 246.4,202.5 L 250.6,205.5 L 254.7,208.5 L 258.9,211.3 L 263.0,214.1 L 267.1,216.8 L 271.3,219.3 L 275.4,221.8 L 279.6,224.2 L 283.7,226.5 L 287.9,228.6 L 292.0,230.7 L 296.1,232.6 L 300.3,234.4 L 304.4,236.0 L 308.6,237.6 L 312.7,239.0 L 316.9,240.2 L 321.0,241.3 L 325.1,242.3 L 329.3,243.1 L 333.4,243.8 L 337.6,244.3 L 341.7,244.7 L 345.9,244.9 L 350.0,245.0 L 354.1,244.9 L 358.3,244.7 L 362.4,244.3 L 366.6,243.8 L 370.7,243.1 L 374.9,242.3 L 379.0,241.3 L 383.1,240.2 L 387.3,239.0 L 391.4,237.6 L 395.6,236.0 L 399.7,234.4 L 403.9,232.6 L 408.0,230.7 L 412.1,228.6 L 416.3,226.5 L 420.4,224.2 L 424.6,221.8 L 428.7,219.3 L 432.9,216.8 L 437.0,214.1 L 441.1,211.3 L 445.3,208.5 L 449.4,205.5 L 453.6,202.5 L 457.7,199.5 L 461.9,196.4 L 466.0,193.2 L 470.1,190.0 L 474.3,186.7 L 478.4,183.4 L 482.6,180.1 L 486.7,176.7 L 490.9,173.4 L 495.0,170.0 L 499.1,166.6 L 503.3,163.3 L 507.4,159.9 L 511.6,156.6 L 515.7,153.3 L 519.9,150.0 L 524.0,146.8 L 528.1,143.6 L 532.3,140.5 L 536.4,137.5 L 540.6,134.5 L 544.7,131.5 L 548.9,128.7 L 553.0,125.9 L 557.1,123.2 L 561.3,120.7 L 565.4,118.2 L 569.6,115.8 L 573.7,113.5 L 577.9,111.4 L 582.0,109.3 L 586.1,107.4 L 590.3,105.6 L 594.4,104.0 L 598.6,102.4 L 602.7,101.0 L 606.9,99.8 L 611.0,98.7 L 615.1,97.7 L 619.3,96.9 L 623.4,96.2 L 627.6,95.7 L 631.7,95.3 L 635.9,95.1 L 640.0,95.0" fill="none" stroke="#0d9488" stroke-width="2.6"/>
-<path d="M 60.0,120.0 L 64.1,120.0 L 68.3,120.0 L 72.4,120.0 L 76.6,120.0 L 80.7,120.0 L 84.9,120.0 L 89.0,120.0 L 93.1,120.0 L 97.3,120.0 L 101.4,120.0 L 105.6,120.0 L 109.7,120.0 L 113.9,120.0 L 118.0,120.0 L 122.1,120.0 L 126.3,120.0 L 130.4,120.0 L 134.6,120.0 L 138.7,120.7 L 142.9,123.2 L 147.0,125.9 L 151.1,128.7 L 155.3,131.5 L 159.4,134.5 L 163.6,137.5 L 167.7,140.5 L 171.9,143.6 L 176.0,146.8 L 180.1,150.0 L 184.3,153.3 L 188.4,156.6 L 192.6,159.9 L 196.7,163.3 L 200.9,166.6 L 205.0,170.0 L 209.1,173.4 L 213.3,176.7 L 217.4,180.1 L 221.6,183.4 L 225.7,186.7 L 229.9,190.0 L 234.0,193.2 L 238.1,196.4 L 242.3,199.5 L 246.4,202.5 L 250.6,205.5 L 254.7,208.5 L 258.9,211.3 L 263.0,214.1 L 267.1,216.8 L 271.3,219.3 L 275.4,220.0 L 279.6,220.0 L 283.7,220.0 L 287.9,220.0 L 292.0,220.0 L 296.1,220.0 L 300.3,220.0 L 304.4,220.0 L 308.6,220.0 L 312.7,220.0 L 316.9,220.0 L 321.0,220.0 L 325.1,220.0 L 329.3,220.0 L 333.4,220.0 L 337.6,220.0 L 341.7,220.0 L 345.9,220.0 L 350.0,220.0 L 354.1,220.0 L 358.3,220.0 L 362.4,220.0 L 366.6,220.0 L 370.7,220.0 L 374.9,220.0 L 379.0,220.0 L 383.1,220.0 L 387.3,220.0 L 391.4,220.0 L 395.6,220.0 L 399.7,220.0 L 403.9,220.0 L 408.0,220.0 L 412.1,220.0 L 416.3,220.0 L 420.4,220.0 L 424.6,220.0 L 428.7,219.3 L 432.9,216.8 L 437.0,214.1 L 441.1,211.3 L 445.3,208.5 L 449.4,205.5 L 453.6,202.5 L 457.7,199.5 L 461.9,196.4 L 466.0,193.2 L 470.1,190.0 L 474.3,186.7 L 478.4,183.4 L 482.6,180.1 L 486.7,176.7 L 490.9,173.4 L 495.0,170.0 L 499.1,166.6 L 503.3,163.3 L 507.4,159.9 L 511.6,156.6 L 515.7,153.3 L 519.9,150.0 L 524.0,146.8 L 528.1,143.6 L 532.3,140.5 L 536.4,137.5 L 540.6,134.5 L 544.7,131.5 L 548.9,128.7 L 553.0,125.9 L 557.1,123.2 L 561.3,120.7 L 565.4,120.0 L 569.6,120.0 L 573.7,120.0 L 577.9,120.0 L 582.0,120.0 L 586.1,120.0 L 590.3,120.0 L 594.4,120.0 L 598.6,120.0 L 602.7,120.0 L 606.9,120.0 L 611.0,120.0 L 615.1,120.0 L 619.3,120.0 L 623.4,120.0 L 627.6,120.0 L 631.7,120.0 L 635.9,120.0 L 640.0,120.0" fill="none" stroke="#d97706" stroke-width="2.6"/>
-<text x="70" y="48" fill="#0d9488" font-family="monospace" font-size="12" font-weight="700">sortie ouverte : vs=ve, +-6V</text>
-<text x="70" y="66" fill="#d97706" font-family="monospace" font-size="12" font-weight="700">charge R0=200 ohm : ecrete a +-4V (|ismax|=20mA)</text>
-<text x="60" y="20" fill="#334155" font-family="monospace" font-size="13" font-weight="700">Q14 - Saturation en courant, montage suiveur (Em=6V)</text>
+          <svg viewBox="0 0 760 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Suiveur : sortie ouverte (±6 V) et chargée par 200 ohms (écrêtée à ±4 V)">
+<defs><marker id="fl-139797520142352" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<line x1="90.0" y1="215.0" x2="725.0" y2="215.0" stroke="#334155" stroke-width="2" marker-end="url(#fl-139797520142352)"/>
+<line x1="90.0" y1="340.0" x2="90.0" y2="75.0" stroke="#334155" stroke-width="2" marker-end="url(#fl-139797520142352)"/>
+<text x="720.0" y="245.0" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">t</text>
+<text x="100.0" y="70.0" font-size="20" fill="#334155" text-anchor="start" font-family="Segoe UI, sans-serif">vₛ (V)</text>
+<polyline points="90.0,115.0 710.0,115.0" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="80.0" y="122.0" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">6</text>
+<polyline points="90.0,148.3 710.0,148.3" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="80.0" y="155.3" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">4</text>
+<polyline points="90.0,281.7 710.0,281.7" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="80.0" y="288.7" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">−4</text>
+<polyline points="90.0,315.0 710.0,315.0" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="6 6"/>
+<text x="80.0" y="322.0" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">−6</text>
+<polyline points="90.0,215.0 91.5,213.4 93.1,211.9 94.7,210.3 96.2,208.7 97.8,207.2 99.3,205.6 100.8,204.0 102.4,202.5 104.0,200.9 105.5,199.4 107.0,197.8 108.6,196.3 110.2,194.7 111.7,193.2 113.2,191.7 114.8,190.1 116.3,188.6 117.9,187.1 119.5,185.6 121.0,184.1 122.5,182.6 124.1,181.1 125.7,179.7 127.2,178.2 128.8,176.7 130.3,175.3 131.8,173.8 133.4,172.4 134.9,171.0 136.5,169.6 138.1,168.2 139.6,166.8 141.2,165.5 142.7,164.1 144.2,162.8 145.8,161.4 147.3,160.1 148.9,158.8 150.4,157.5 152.0,156.2 153.6,155.0 155.1,153.7 156.7,152.5 158.2,151.3 159.8,150.1 161.3,148.9 162.8,147.7 164.4,146.5 165.9,145.4 167.5,144.3 169.1,143.2 170.6,142.1 172.2,141.0 173.7,140.0 175.2,139.0 176.8,137.9 178.3,137.0 179.9,136.0 181.4,135.0 183.0,134.1 184.6,133.2 186.1,132.3 187.7,131.4 189.2,130.6 190.8,129.7 192.3,128.9 193.9,128.1 195.4,127.4 196.9,126.6 198.5,125.9 200.1,125.2 201.6,124.5 203.1,123.9 204.7,123.2 206.2,122.6 207.8,122.0 209.4,121.5 210.9,120.9 212.4,120.4 214.0,119.9 215.6,119.4 217.1,119.0 218.7,118.5 220.2,118.1 221.8,117.8 223.3,117.4 224.8,117.1 226.4,116.8 227.9,116.5 229.5,116.2 231.1,116.0 232.6,115.8 234.2,115.6 235.7,115.4 237.2,115.3 238.8,115.2 240.3,115.1 241.9,115.0 243.4,115.0 245.0,115.0 246.6,115.0 248.1,115.0 249.7,115.1 251.2,115.2 252.8,115.3 254.3,115.4 255.9,115.6 257.4,115.8 259.0,116.0 260.5,116.2 262.1,116.5 263.6,116.8 265.1,117.1 266.7,117.4 268.2,117.8 269.8,118.1 271.4,118.5 272.9,119.0 274.4,119.4 276.0,119.9 277.5,120.4 279.1,120.9 280.6,121.5 282.2,122.0 283.8,122.6 285.3,123.2 286.9,123.9 288.4,124.5 290.0,125.2 291.5,125.9 293.1,126.6 294.6,127.4 296.1,128.1 297.7,128.9 299.2,129.7 300.8,130.6 302.4,131.4 303.9,132.3 305.4,133.2 307.0,134.1 308.5,135.0 310.1,136.0 311.6,137.0 313.2,137.9 314.8,139.0 316.3,140.0 317.9,141.0 319.4,142.1 320.9,143.2 322.5,144.3 324.1,145.4 325.6,146.5 327.1,147.7 328.7,148.9 330.2,150.1 331.8,151.3 333.4,152.5 334.9,153.7 336.5,155.0 338.0,156.2 339.6,157.5 341.1,158.8 342.6,160.1 344.2,161.4 345.8,162.8 347.3,164.1 348.8,165.5 350.4,166.8 351.9,168.2 353.5,169.6 355.1,171.0 356.6,172.4 358.1,173.8 359.7,175.3 361.2,176.7 362.8,178.2 364.4,179.7 365.9,181.1 367.4,182.6 369.0,184.1 370.6,185.6 372.1,187.1 373.7,188.6 375.2,190.1 376.8,191.7 378.3,193.2 379.9,194.7 381.4,196.3 382.9,197.8 384.5,199.4 386.1,200.9 387.6,202.5 389.1,204.0 390.7,205.6 392.2,207.2 393.8,208.7 395.4,210.3 396.9,211.9 398.4,213.4 400.0,215.0 401.5,216.6 403.1,218.1 404.6,219.7 406.2,221.3 407.8,222.8 409.3,224.4 410.8,226.0 412.4,227.5 413.9,229.1 415.5,230.6 417.0,232.2 418.6,233.7 420.1,235.3 421.7,236.8 423.2,238.3 424.8,239.9 426.3,241.4 427.9,242.9 429.4,244.4 431.0,245.9 432.6,247.4 434.1,248.9 435.6,250.3 437.2,251.8 438.8,253.3 440.3,254.7 441.9,256.2 443.4,257.6 444.9,259.0 446.5,260.4 448.1,261.8 449.6,263.2 451.2,264.5 452.7,265.9 454.2,267.2 455.8,268.6 457.4,269.9 458.9,271.2 460.5,272.5 462.0,273.8 463.6,275.0 465.1,276.3 466.7,277.5 468.2,278.7 469.8,279.9 471.3,281.1 472.9,282.3 474.4,283.5 476.0,284.6 477.5,285.7 479.0,286.8 480.6,287.9 482.1,289.0 483.7,290.0 485.2,291.0 486.8,292.1 488.3,293.0 489.9,294.0 491.4,295.0 493.0,295.9 494.5,296.8 496.1,297.7 497.6,298.6 499.2,299.4 500.8,300.3 502.3,301.1 503.8,301.9 505.4,302.6 506.9,303.4 508.5,304.1 510.1,304.8 511.6,305.5 513.1,306.1 514.7,306.8 516.2,307.4 517.8,308.0 519.4,308.5 520.9,309.1 522.5,309.6 524.0,310.1 525.5,310.6 527.1,311.0 528.7,311.5 530.2,311.9 531.8,312.2 533.3,312.6 534.9,312.9 536.4,313.2 538.0,313.5 539.5,313.8 541.0,314.0 542.6,314.2 544.2,314.4 545.7,314.6 547.2,314.7 548.8,314.8 550.4,314.9 551.9,315.0 553.5,315.0 555.0,315.0 556.5,315.0 558.1,315.0 559.6,314.9 561.2,314.8 562.8,314.7 564.3,314.6 565.8,314.4 567.4,314.2 569.0,314.0 570.5,313.8 572.0,313.5 573.6,313.2 575.1,312.9 576.7,312.6 578.2,312.2 579.8,311.9 581.3,311.5 582.9,311.0 584.5,310.6 586.0,310.1 587.5,309.6 589.1,309.1 590.6,308.5 592.2,308.0 593.8,307.4 595.3,306.8 596.9,306.1 598.4,305.5 600.0,304.8 601.5,304.1 603.0,303.4 604.6,302.6 606.1,301.9 607.7,301.1 609.2,300.3 610.8,299.4 612.4,298.6 613.9,297.7 615.5,296.8 617.0,295.9 618.6,295.0 620.1,294.0 621.6,293.0 623.2,292.1 624.8,291.0 626.3,290.0 627.9,289.0 629.4,287.9 631.0,286.8 632.5,285.7 634.0,284.6 635.6,283.5 637.1,282.3 638.7,281.1 640.2,279.9 641.8,278.7 643.4,277.5 644.9,276.3 646.4,275.0 648.0,273.8 649.5,272.5 651.1,271.2 652.6,269.9 654.2,268.6 655.8,267.2 657.3,265.9 658.9,264.5 660.4,263.2 662.0,261.8 663.5,260.4 665.0,259.0 666.6,257.6 668.1,256.2 669.7,254.7 671.2,253.3 672.8,251.8 674.4,250.3 675.9,248.9 677.5,247.4 679.0,245.9 680.5,244.4 682.1,242.9 683.6,241.4 685.2,239.9 686.8,238.3 688.3,236.8 689.9,235.3 691.4,233.7 693.0,232.2 694.5,230.6 696.1,229.1 697.6,227.5 699.1,226.0 700.7,224.4 702.2,222.8 703.8,221.3 705.4,219.7 706.9,218.1 708.5,216.6 710.0,215.0" fill="none" stroke="#0d9488" stroke-width="3.5" stroke-linejoin="round"/>
+<polyline points="90.0,215.0 91.5,213.4 93.1,211.9 94.7,210.3 96.2,208.7 97.8,207.2 99.3,205.6 100.8,204.0 102.4,202.5 104.0,200.9 105.5,199.4 107.0,197.8 108.6,196.3 110.2,194.7 111.7,193.2 113.2,191.7 114.8,190.1 116.3,188.6 117.9,187.1 119.5,185.6 121.0,184.1 122.5,182.6 124.1,181.1 125.7,179.7 127.2,178.2 128.8,176.7 130.3,175.3 131.8,173.8 133.4,172.4 134.9,171.0 136.5,169.6 138.1,168.2 139.6,166.8 141.2,165.5 142.7,164.1 144.2,162.8 145.8,161.4 147.3,160.1 148.9,158.8 150.4,157.5 152.0,156.2 153.6,155.0 155.1,153.7 156.7,152.5 158.2,151.3 159.8,150.1 161.3,148.9 162.8,148.3 164.4,148.3 165.9,148.3 167.5,148.3 169.1,148.3 170.6,148.3 172.2,148.3 173.7,148.3 175.2,148.3 176.8,148.3 178.3,148.3 179.9,148.3 181.4,148.3 183.0,148.3 184.6,148.3 186.1,148.3 187.7,148.3 189.2,148.3 190.8,148.3 192.3,148.3 193.9,148.3 195.4,148.3 196.9,148.3 198.5,148.3 200.1,148.3 201.6,148.3 203.1,148.3 204.7,148.3 206.2,148.3 207.8,148.3 209.4,148.3 210.9,148.3 212.4,148.3 214.0,148.3 215.6,148.3 217.1,148.3 218.7,148.3 220.2,148.3 221.8,148.3 223.3,148.3 224.8,148.3 226.4,148.3 227.9,148.3 229.5,148.3 231.1,148.3 232.6,148.3 234.2,148.3 235.7,148.3 237.2,148.3 238.8,148.3 240.3,148.3 241.9,148.3 243.4,148.3 245.0,148.3 246.6,148.3 248.1,148.3 249.7,148.3 251.2,148.3 252.8,148.3 254.3,148.3 255.9,148.3 257.4,148.3 259.0,148.3 260.5,148.3 262.1,148.3 263.6,148.3 265.1,148.3 266.7,148.3 268.2,148.3 269.8,148.3 271.4,148.3 272.9,148.3 274.4,148.3 276.0,148.3 277.5,148.3 279.1,148.3 280.6,148.3 282.2,148.3 283.8,148.3 285.3,148.3 286.9,148.3 288.4,148.3 290.0,148.3 291.5,148.3 293.1,148.3 294.6,148.3 296.1,148.3 297.7,148.3 299.2,148.3 300.8,148.3 302.4,148.3 303.9,148.3 305.4,148.3 307.0,148.3 308.5,148.3 310.1,148.3 311.6,148.3 313.2,148.3 314.8,148.3 316.3,148.3 317.9,148.3 319.4,148.3 320.9,148.3 322.5,148.3 324.1,148.3 325.6,148.3 327.1,148.3 328.7,148.9 330.2,150.1 331.8,151.3 333.4,152.5 334.9,153.7 336.5,155.0 338.0,156.2 339.6,157.5 341.1,158.8 342.6,160.1 344.2,161.4 345.8,162.8 347.3,164.1 348.8,165.5 350.4,166.8 351.9,168.2 353.5,169.6 355.1,171.0 356.6,172.4 358.1,173.8 359.7,175.3 361.2,176.7 362.8,178.2 364.4,179.7 365.9,181.1 367.4,182.6 369.0,184.1 370.6,185.6 372.1,187.1 373.7,188.6 375.2,190.1 376.8,191.7 378.3,193.2 379.9,194.7 381.4,196.3 382.9,197.8 384.5,199.4 386.1,200.9 387.6,202.5 389.1,204.0 390.7,205.6 392.2,207.2 393.8,208.7 395.4,210.3 396.9,211.9 398.4,213.4 400.0,215.0 401.5,216.6 403.1,218.1 404.6,219.7 406.2,221.3 407.8,222.8 409.3,224.4 410.8,226.0 412.4,227.5 413.9,229.1 415.5,230.6 417.0,232.2 418.6,233.7 420.1,235.3 421.7,236.8 423.2,238.3 424.8,239.9 426.3,241.4 427.9,242.9 429.4,244.4 431.0,245.9 432.6,247.4 434.1,248.9 435.6,250.3 437.2,251.8 438.8,253.3 440.3,254.7 441.9,256.2 443.4,257.6 444.9,259.0 446.5,260.4 448.1,261.8 449.6,263.2 451.2,264.5 452.7,265.9 454.2,267.2 455.8,268.6 457.4,269.9 458.9,271.2 460.5,272.5 462.0,273.8 463.6,275.0 465.1,276.3 466.7,277.5 468.2,278.7 469.8,279.9 471.3,281.1 472.9,281.7 474.4,281.7 476.0,281.7 477.5,281.7 479.0,281.7 480.6,281.7 482.1,281.7 483.7,281.7 485.2,281.7 486.8,281.7 488.3,281.7 489.9,281.7 491.4,281.7 493.0,281.7 494.5,281.7 496.1,281.7 497.6,281.7 499.2,281.7 500.8,281.7 502.3,281.7 503.8,281.7 505.4,281.7 506.9,281.7 508.5,281.7 510.1,281.7 511.6,281.7 513.1,281.7 514.7,281.7 516.2,281.7 517.8,281.7 519.4,281.7 520.9,281.7 522.5,281.7 524.0,281.7 525.5,281.7 527.1,281.7 528.7,281.7 530.2,281.7 531.8,281.7 533.3,281.7 534.9,281.7 536.4,281.7 538.0,281.7 539.5,281.7 541.0,281.7 542.6,281.7 544.2,281.7 545.7,281.7 547.2,281.7 548.8,281.7 550.4,281.7 551.9,281.7 553.5,281.7 555.0,281.7 556.5,281.7 558.1,281.7 559.6,281.7 561.2,281.7 562.8,281.7 564.3,281.7 565.8,281.7 567.4,281.7 569.0,281.7 570.5,281.7 572.0,281.7 573.6,281.7 575.1,281.7 576.7,281.7 578.2,281.7 579.8,281.7 581.3,281.7 582.9,281.7 584.5,281.7 586.0,281.7 587.5,281.7 589.1,281.7 590.6,281.7 592.2,281.7 593.8,281.7 595.3,281.7 596.9,281.7 598.4,281.7 600.0,281.7 601.5,281.7 603.0,281.7 604.6,281.7 606.1,281.7 607.7,281.7 609.2,281.7 610.8,281.7 612.4,281.7 613.9,281.7 615.5,281.7 617.0,281.7 618.6,281.7 620.1,281.7 621.6,281.7 623.2,281.7 624.8,281.7 626.3,281.7 627.9,281.7 629.4,281.7 631.0,281.7 632.5,281.7 634.0,281.7 635.6,281.7 637.1,281.7 638.7,281.1 640.2,279.9 641.8,278.7 643.4,277.5 644.9,276.3 646.4,275.0 648.0,273.8 649.5,272.5 651.1,271.2 652.6,269.9 654.2,268.6 655.8,267.2 657.3,265.9 658.9,264.5 660.4,263.2 662.0,261.8 663.5,260.4 665.0,259.0 666.6,257.6 668.1,256.2 669.7,254.7 671.2,253.3 672.8,251.8 674.4,250.3 675.9,248.9 677.5,247.4 679.0,245.9 680.5,244.4 682.1,242.9 683.6,241.4 685.2,239.9 686.8,238.3 688.3,236.8 689.9,235.3 691.4,233.7 693.0,232.2 694.5,230.6 696.1,229.1 697.6,227.5 699.1,226.0 700.7,224.4 702.2,222.8 703.8,221.3 705.4,219.7 706.9,218.1 708.5,216.6 710.0,215.0" fill="none" stroke="#d97706" stroke-width="3.5" stroke-linejoin="round"/>
+<text x="150.0" y="30.0" font-size="20" fill="#0d9488" text-anchor="start" font-family="Segoe UI, sans-serif">vert : sortie ouverte (±6 V)</text>
+<text x="430.0" y="30.0" font-size="20" fill="#b45309" text-anchor="start" font-family="Segoe UI, sans-serif">orange : charge 200 Ω</text>
 </svg>
           <figcaption>Sortie ouverte (vert) : sinusoïde propre \(\pm6\) V. Chargée par \(200\ \Omega\)
           (orange) : écrêtage plat à \(\pm4\) V dès que \(|i_s|\) atteindrait \(i_{s,max}\).</figcaption>
         </figure>
+        <div class="res">Chargée par 200 Ω : écrêtage à \(\pm4{,}0\) V (saturation en courant, \(i_{s,max} \approx 20\) mA).</div>
       </div>
     </div>
 
@@ -831,59 +881,47 @@ cards();start();
     <figcaption>Énoncé (TD3, D. Courtois) — sommateur non inverseur à 3 entrées</figcaption>
   </figure>
 
-  <div class="note"><span class="lab">Le circuit</span> Les trois tensions \(v_1,v_2,v_3\) attaquent
-  <b>l'entrée +</b> de l'ALI par les résistances \(R_1,R_2,R_3\), qui se rejoignent toutes sur ce même nœud
-  (aucune autre connexion sur \(+\)). L'entrée <b>−</b> est reliée à la masse par \(R_0\) et à la sortie
-  \(v_s\) par la résistance \(R\) (contre-réaction).</div>
+  <div class="enonce"><b>Le circuit.</b> Les trois tensions \(v_1,v_2,v_3\) attaquent l'entrée + de l'ALI par les résistances \(R_1,R_2,R_3\), qui se rejoignent sur ce même nœud. L'entrée − est reliée à la masse par \(R_0\) et à la sortie \(v_s\) par la résistance \(R\).</div>
 
   <p class="q">1) Quel est le régime de l'ALI : linéaire ou saturé ? Justifier.</p>
-  <p>La sortie \(v_s\) ne revient <b>que</b> sur l'entrée <b>−</b> (via \(R\), avec \(R_0\) pour seule autre
-  connexion de ce nœud) : c'est une contre-réaction pure, sans <b>aucun</b> chemin de retour vers <b>+</b>
-  (qui ne voit que \(v_1,v_2,v_3\)). Une telle rétroaction est <b>nécessairement négative</b> : elle
-  stabilise le point de fonctionnement autour de \(v_-=v_+\).</p>
-  <div class="res"><b>L'ALI fonctionne en régime linéaire</b> (\(v_-=v_+\)), et ceci est garanti par la
-  structure du montage (feedback exclusivement vers <b>−</b>) — on n'a pas besoin de le « supposer » comme
-  on le fera à l'exercice 3.</div>
+  <div class="rappel"><span class="lab">Rappel · critère de régime</span>Si la sortie revient <b>seulement</b> sur l'entrée (−), la rétroaction est négative et l'ALI est en régime linéaire.</div>
+  <ul>
+    <li>La sortie revient sur l'entrée (−) par \(R\).</li>
+    <li>Aucun chemin ne ramène la sortie vers l'entrée (+), qui ne voit que \(v_1, v_2, v_3\).</li>
+  </ul>
+  <div class="res"><b>Régime linéaire</b> : \(v_- = v_+\). La structure du montage le garantit, on n'a pas besoin de le supposer (contrairement à l'exercice 3).</div>
 
   <p class="q">2) S'agit-il d'un montage inverseur ou non inverseur ?</p>
-  <p>Les trois signaux d'entrée \(v_1,v_2,v_3\) sont tous appliqués sur l'entrée <b>+</b> (via
-  \(R_1,R_2,R_3\)), tandis que l'entrée <b>−</b> ne voit qu'un diviseur \(R_0\)/\(R\) issu de la sortie.
-  C'est la signature du montage <b>non inverseur</b> : chaque entrée sera recopiée en sortie avec un
-  <b>signe positif</b>.</p>
-  <div class="res"><b>Montage non inverseur</b> (généralisation à 3 entrées de l'amplificateur non
-  inverseur simple).</div>
+  <ul>
+    <li>Les trois signaux \(v_1, v_2, v_3\) arrivent sur l'entrée (+).</li>
+    <li>L'entrée (−) ne voit qu'un diviseur \(R_0\) / \(R\) issu de la sortie.</li>
+  </ul>
+  <p>C'est la structure de l'amplificateur non inverseur : chaque entrée se retrouve en sortie avec un signe \(+\).</p>
+  <div class="res"><b>Montage non inverseur</b> (amplificateur non inverseur à trois entrées).</div>
 
   <p class="q">3) Exprimer \(v_s\) en fonction de \(v_1\), \(v_2\) et \(v_3\)</p>
-  <p><b>Nœud \(v_+\)</b> — LNTP au nœud \(v_+\) (aucun courant n'entre dans l'ALI, donc la somme des
-  courants qui en repartent vers \(v_1\), \(v_2\) et \(v_3\) est nulle) :</p>
-  \[ \frac{v_+-v_1}{R_1}+\frac{v_+-v_2}{R_2}+\frac{v_+-v_3}{R_3}=0
-     \ \Longrightarrow\
-     v_+=\dfrac{\dfrac{v_1}{R_1}+\dfrac{v_2}{R_2}+\dfrac{v_3}{R_3}}{\dfrac{1}{R_1}+\dfrac{1}{R_2}+\dfrac{1}{R_3}}. \]
-  <p>\(v_+\) est donc une <b>moyenne pondérée</b> de \(v_1,v_2,v_3\) (pondération par les conductances
-  \(1/R_i\)) — un simple réseau résistif « moyenneur », qui ne tire aucun courant sur l'ALI.</p>
-  <p><b>Nœud \(v_-\)</b> — même méthode, avec \(v_-\) relié à la masse par \(R_0\) et à \(v_s\) par \(R\) :</p>
-  \[ \frac{v_--0}{R_0}+\frac{v_--v_s}{R}=0
-     \ \Longrightarrow\ v_s=v_-\left(1+\frac{R}{R_0}\right). \]
-  <p>En régime linéaire \(v_-=v_+\) (question 1), d'où :</p>
-  <div class="res">\[ \boxed{\ v_s=\left(1+\frac{R}{R_0}\right)\cdot
-     \dfrac{\dfrac{v_1}{R_1}+\dfrac{v_2}{R_2}+\dfrac{v_3}{R_3}}{\dfrac{1}{R_1}+\dfrac{1}{R_2}+\dfrac{1}{R_3}}\ } \]</div>
-  <p>On reconnaît la structure classique <b>amplificateur non inverseur</b> (gain \(1+R/R_0\)) appliqué à
-  un <b>moyenneur résistif</b> placé sur l'entrée \(+\).</p>
+  <p class="etape">Étape 1 : Millman sur l'entrée (+)</p>
+  <div class="rappel"><span class="lab">Rappel · théorème de Millman (LNTP)</span>\[ V_A = \frac{\sum_k V_k/R_k}{\sum_k 1/R_k} \]</div>
+  <p>Aucun courant n'entre dans l'ALI. L'entrée (+) est reliée à \(v_1, v_2, v_3\) par \(R_1, R_2, R_3\) :</p>
+  \[ v_+ = \frac{\dfrac{v_1}{R_1} + \dfrac{v_2}{R_2} + \dfrac{v_3}{R_3}}{\dfrac{1}{R_1} + \dfrac{1}{R_2} + \dfrac{1}{R_3}} \]
+  <p>\(v_+\) est une moyenne de \(v_1, v_2, v_3\), pondérée par les conductances \(1/R_i\).</p>
+  <p class="etape">Étape 2 : l'entrée (−)</p>
+  <div class="rappel"><span class="lab">Rappel · pont diviseur de tension</span>\[ v_- = v_s\,\frac{R_0}{R_0 + R} \]</div>
+  \[ v_s = v_-\left(1 + \frac{R}{R_0}\right) \]
+  <p class="etape">Étape 3 : on égalise \(v_- = v_+\)</p>
+  <div class="res">\[ v_s = \left(1 + \frac{R}{R_0}\right)\frac{\dfrac{v_1}{R_1} + \dfrac{v_2}{R_2} + \dfrac{v_3}{R_3}}{\dfrac{1}{R_1} + \dfrac{1}{R_2} + \dfrac{1}{R_3}} \]
+  Un amplificateur non inverseur (gain \(1 + R/R_0\)) appliqué à un moyenneur résistif.</div>
 
   <p class="q">4) Exprimer \(v_s\) pour toutes les résistances égales à \(R\) ; justifier le titre de l'exercice</p>
-  <p>Dès que \(R_1=R_2=R_3\) (peu importe leur valeur commune), la moyenne pondérée devient une
-  <b>moyenne arithmétique</b> simple :</p>
-  \[ v_+=\frac{v_1+v_2+v_3}{3}. \]
-  <p>En posant en plus \(R_1=R_2=R_3=R_0=R\) (toutes les résistances valent \(R\), y compris \(R_0\) — la
-  résistance de contre-réaction s'appelle déjà \(R\) dans l'énoncé), le gain non inverseur vaut
-  \(1+R/R_0=1+R/R=2\), d'où :</p>
-  \[ v_s=2\cdot\frac{v_1+v_2+v_3}{3} \]
-  <div class="res">\[ \boxed{\ v_s=\frac{2}{3}(v_1+v_2+v_3)\ } \]</div>
-  <p>La sortie est <b>proportionnelle</b> à la <b>somme</b> des trois tensions d'entrée (avec un facteur
-  \(2/3\) ici, mais déjà proportionnelle à la somme dès que \(R_1=R_2=R_3\), quel que soit \(R_0\)) : le
-  montage réalise bien une <b>addition</b> de signaux, d'où le nom de <b>montage sommateur</b> — non
-  inverseur, cette fois, contrairement à la version « classique » que l'on rencontre souvent en cours.</p>
-    </div>
+  <p class="etape">Étape 1 : l'entrée (+)</p>
+  <p>Avec \(R_1 = R_2 = R_3\), la moyenne pondérée devient une moyenne simple :</p>
+  \[ v_+ = \frac{v_1 + v_2 + v_3}{3} \]
+  <p class="etape">Étape 2 : le gain</p>
+  <p>Avec \(R_0 = R\) : \(1 + \dfrac{R}{R_0} = 2\).</p>
+  \[ v_s = 2\times\frac{v_1 + v_2 + v_3}{3} \]
+  <div class="res">\[ v_s = \frac{2}{3}\,(v_1 + v_2 + v_3) \]
+  La sortie est proportionnelle à la <b>somme</b> des entrées : c'est un <b>sommateur</b> (non inverseur).</div>
+      </div>
   </div>
   </section>
 
@@ -892,113 +930,118 @@ cards();start();
   <div class="exo-card">
     <div class="exo-head">Ex 2 — Montage pseudo-intégrateur <span class="diff">♦ · T : Ch5, appli 2</span></div>
     <div class="exo-body">
-
-  <p class="q">1) Schématiser le montage, retrouver \(\underline H\) par la LNTP en complexes</p>
-  <p>On part du montage <b>intégrateur</b> classique (\(v_e\) par \(R\) sur l'entrée <b>−</b>, \(C\) en
-  contre-réaction, \(v_+\) à la masse) et on met, comme demandé, une résistance \(R'\) <b>en dérivation</b>
-  (en parallèle) du condensateur \(C\) :</p>
-
-  <figure><svg viewBox="0 0 460 230" width="460" xmlns="http://www.w3.org/2000/svg">
-    <text x="10" y="105" fill="#334155" font-family="Georgia,serif" font-size="15" font-style="italic">v_e</text>
-    <line x1="30" y1="112" x2="70" y2="112" stroke="#0d9488" stroke-width="2"/>
-    <rect x="70" y="100" width="55" height="24" fill="none" stroke="#0d9488" stroke-width="2"/>
-    <text x="87" y="96" fill="#0d9488" font-family="monospace" font-size="13">R</text>
-    <line x1="125" y1="112" x2="170" y2="112" stroke="#0d9488" stroke-width="2"/>
-    <circle cx="170" cy="112" r="3" fill="#0d9488"/>
-    <text x="176" y="128" fill="#475569" font-family="monospace" font-size="12">v₋</text>
-    <!-- op amp box -->
-    <rect x="170" y="80" width="100" height="65" fill="none" stroke="#334155" stroke-width="2"/>
-    <text x="180" y="100" fill="#334155" font-family="monospace" font-size="14">−</text>
-    <text x="180" y="138" fill="#334155" font-family="monospace" font-size="14">+</text>
-    <line x1="170" y1="130" x2="150" y2="130" stroke="#0d9488" stroke-width="2"/>
-    <line x1="150" y1="130" x2="150" y2="165" stroke="#0d9488" stroke-width="2"/>
-    <line x1="135" y1="165" x2="165" y2="165" stroke="#334155" stroke-width="2"/>
-    <line x1="140" y1="171" x2="160" y2="171" stroke="#334155" stroke-width="1.6"/>
-    <line x1="145" y1="177" x2="155" y2="177" stroke="#334155" stroke-width="1.2"/>
-    <line x1="270" y1="112" x2="300" y2="112" stroke="#0d9488" stroke-width="2"/>
-    <text x="306" y="105" fill="#334155" font-family="Georgia,serif" font-size="15" font-style="italic">v_s</text>
-    <line x1="300" y1="112" x2="300" y2="112" stroke="#0d9488" stroke-width="2"/>
-    <!-- feedback C top -->
-    <line x1="170" y1="112" x2="170" y2="40" stroke="#0d9488" stroke-width="2"/>
-    <line x1="170" y1="40" x2="290" y2="40" stroke="#0d9488" stroke-width="2"/>
-    <line x1="290" y1="40" x2="290" y2="112" stroke="#0d9488" stroke-width="2"/>
-    <line x1="285" y1="30" x2="285" y2="50" stroke="#334155" stroke-width="2.4"/>
-    <line x1="295" y1="30" x2="295" y2="50" stroke="#334155" stroke-width="2.4"/>
-    <text x="270" y="24" fill="#334155" font-family="monospace" font-size="13">C</text>
-    <!-- feedback R' bottom -->
-    <line x1="170" y1="112" x2="170" y2="190" stroke="#d97706" stroke-width="2"/>
-    <line x1="170" y1="190" x2="290" y2="190" stroke="#d97706" stroke-width="2"/>
-    <line x1="290" y1="190" x2="290" y2="112" stroke="#d97706" stroke-width="2"/>
-    <rect x="200" y="178" width="55" height="24" fill="none" stroke="#d97706" stroke-width="2"/>
-    <text x="215" y="220" fill="#d97706" font-family="monospace" font-size="13">R' (ajoutée)</text>
-  </svg>
-  <figcaption>Pseudo-intégrateur : \(R'\) (orange) ajoutée en dérivation de \(C\) (bleu), en contre-réaction de l'ALI.</figcaption>
+  <figure>
+    <img src="td3-img/ex2.jpg" alt="Énoncé Exercice 2 — montage pseudo-intégrateur : R' en dérivation du condensateur d'un intégrateur ; trois questions" loading="lazy">
+    <figcaption>Énoncé (TD3, D. Courtois) — montage pseudo-intégrateur</figcaption>
   </figure>
 
-  <p>Le nœud \(v_-\) est en <b>masse virtuelle</b> (\(v_-=v_+=0\), contre-réaction pure vers <b>−</b>
-  uniquement — même argument qu'à l'exercice 1). L'impédance de contre-réaction est le parallèle de
-  \(R'\) et \(C\) :</p>
-  \[ \underline{Z_f}=\frac{R'\times\frac{1}{jC\omega}}{R'+\frac{1}{jC\omega}}=\frac{R'}{1+jR'C\omega}. \]
-  <p>LNTP au nœud \(v_-=0\) (courant entrant de \(v_e\) par \(R\) = courant sortant vers \(v_s\) par
-  \(\underline{Z_f}\), puisque l'ALI n'absorbe aucun courant) :</p>
-  \[ \frac{0-\underline{v_e}}{R}+\frac{0-\underline{v_s}}{\underline{Z_f}}=0
-     \ \Longrightarrow\ \underline{v_s}=-\frac{\underline{Z_f}}{R}\,\underline{v_e}. \]
-  <div class="res">\[ \boxed{\ \underline H=\frac{\underline{v_s}}{\underline{v_e}}
-     =-\frac{R'/R}{1+jR'C\omega}\ } \]
-  On reconnaît la forme <b>connue</b> d'un <b>filtre passe-bas du 1ᵉʳ ordre inversé</b> (gain statique
-  \(-R'/R\), pulsation de coupure \(\omega_1=1/R'C\)) : c'est exactement la forme du <b>pseudo-intégrateur</b>
-  vu en cours §3.4.</div>
+  <p class="q">1) Schématiser le montage, retrouver \(\underline H\) par la LNTP en complexes</p>
+  <p class="etape">Étape 1 : le schéma</p>
+  <p>On part de l'intégrateur : \(v_e\) arrive par \(R\) sur l'entrée (−), \(C\) est en contre-réaction, l'entrée (+) est à la masse. On ajoute \(R'\) en parallèle de \(C\).</p>
+  <figure><svg viewBox="0 0 760 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pseudo-intégrateur : R en entrée, C et R' en parallèle en contre-réaction">
+<defs><marker id="fl-139797520564912" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<polygon points="330,175 330,285 440,230" fill="#eef2ff" stroke="#334155" stroke-width="2.5"/>
+<text x="340.0" y="213.0" font-size="24" fill="#334155" text-anchor="start" font-weight="700" font-family="Segoe UI, sans-serif">−</text>
+<text x="340.0" y="263.0" font-size="24" fill="#334155" text-anchor="start" font-weight="700" font-family="Segoe UI, sans-serif">+</text>
+<circle cx="60" cy="205" r="6" fill="#fff" stroke="#334155" stroke-width="2.5"/>
+<text x="60.0" y="187.0" font-size="22" fill="#334155" text-anchor="middle" font-style="italic" font-family="Segoe UI, sans-serif">vₑ</text>
+<polyline points="66.0,205.0 133.0,205.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="203.0,205.0 270.0,205.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="133.0" y="193.0" width="70.0" height="24.0" rx="3" fill="#f8fafc" stroke="#0d9488" stroke-width="2.5"/>
+<text x="168.0" y="183.0" font-size="20" fill="#0d9488" text-anchor="middle" font-family="Segoe UI, sans-serif">R</text>
+<polyline points="270.0,205.0 330.0,205.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="270.0" cy="205.0" r="4.5" fill="#334155" stroke="#334155" stroke-width="2"/>
+<polyline points="270.0,205.0 270.0,130.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="270.0,130.0 378.0,130.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="392.0,130.0 500.0,130.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<line x1="378.0" y1="112.0" x2="378.0" y2="148.0" stroke="#2563eb" stroke-width="4"/>
+<line x1="392.0" y1="112.0" x2="392.0" y2="148.0" stroke="#2563eb" stroke-width="4"/>
+<text x="385.0" y="104.0" font-size="20" fill="#2563eb" text-anchor="middle" font-family="Segoe UI, sans-serif">C</text>
+<polyline points="500.0,130.0 500.0,230.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="270.0,205.0 270.0,50.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="270.0,50.0 350.0,50.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="420.0,50.0 500.0,50.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="350.0" y="38.0" width="70.0" height="24.0" rx="3" fill="#f8fafc" stroke="#d97706" stroke-width="2.5"/>
+<text x="385.0" y="30.0" font-size="20" fill="#d97706" text-anchor="middle" font-family="Segoe UI, sans-serif">R′ (ajoutée)</text>
+<polyline points="500.0,50.0 500.0,230.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="440.0,230.0 600.0,230.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="500.0" cy="230.0" r="4.5" fill="#334155" stroke="#334155" stroke-width="2"/>
+<circle cx="606" cy="230" r="6" fill="#fff" stroke="#334155" stroke-width="2.5"/>
+<text x="625.0" y="238.0" font-size="22" fill="#334155" text-anchor="start" font-style="italic" font-family="Segoe UI, sans-serif">vₛ</text>
+<polyline points="330.0,255.0 300.0,255.0 300.0,300.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<line x1="300.0" y1="300.0" x2="300.0" y2="314.0" stroke="#334155" stroke-width="2.5"/>
+<line x1="278.0" y1="314.0" x2="322.0" y2="314.0" stroke="#334155" stroke-width="2.5"/>
+<line x1="286.0" y1="320.0" x2="314.0" y2="320.0" stroke="#334155" stroke-width="2.5"/>
+<line x1="294.0" y1="326.0" x2="306.0" y2="326.0" stroke="#334155" stroke-width="2.5"/>
+<text x="330.0" y="380.0" font-size="19" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">vₑ et vₛ sont repérées par rapport à la masse</text>
+</svg>
+  <figcaption>Pseudo-intégrateur : \(R'\) (orange) ajoutée en dérivation de \(C\) (bleu), en contre-réaction de l'ALI.</figcaption>
+  </figure>
+  <p class="etape">Étape 2 : masse virtuelle</p>
+  <p>La rétroaction arrive seulement sur (−) : régime linéaire, \(v_- = v_+ = 0\).</p>
+  <p class="etape">Étape 3 : impédance de contre-réaction</p>
+  <div class="rappel"><span class="lab">Rappel · deux impédances en parallèle</span>\[ \underline Z = \frac{\underline Z_a\,\underline Z_b}{\underline Z_a + \underline Z_b} \]</div>
+  \[ \underline Z_f = \frac{R'\times\frac{1}{jC\omega}}{R' + \frac{1}{jC\omega}} = \frac{R'}{1 + jR'C\omega} \]
+  <p class="etape">Étape 4 : LNTP sur l'entrée (−)</p>
+  <p>Aucun courant n'entre dans l'ALI : la somme des courants qui partent du nœud est nulle.</p>
+  \[ \frac{0 - \underline v_e}{R} + \frac{0 - \underline v_s}{\underline Z_f} = 0 \]
+  \[ \underline v_s = -\frac{\underline Z_f}{R}\,\underline v_e \]
+  <div class="res">\[ \underline H = -\frac{R'/R}{1 + jR'C\omega} \]
+  Passe-bas du 1ᵉʳ ordre inverseur, de gain statique \(-R'/R\) et de pulsation de coupure \(\omega_1 = 1/(R'C)\) : c'est le pseudo-intégrateur du cours (§3.4).</div>
 
   <p class="q">2) Montrer que ce montage se comporte comme l'intégrateur à HF mais ne diverge pas à BF</p>
-  <p><b>Haute fréquence</b> (\(\omega\gg\omega_1=1/R'C\), donc \(R'C\omega\gg1\)) : au dénominateur,
-  \(1+jR'C\omega\approx jR'C\omega\), donc :</p>
-  \[ \underline H\approx-\frac{R'/R}{jR'C\omega}=-\frac{1}{jRC\omega}. \]
-  <div class="res">À HF, \(\underline H\to-\dfrac{1}{jRC\omega}\) : c'est <b>exactement</b> la fonction de
-  transfert de l'intégrateur pur (sans \(R'\)). Le montage se comporte donc bien comme un intégrateur
-  quand \(\omega\) est assez grand.</div>
-  <p><b>Basse fréquence</b> (\(\omega\ll\omega_1\), donc \(R'C\omega\ll1\)) : au dénominateur,
-  \(1+jR'C\omega\approx1\), donc :</p>
-  \[ \underline H\approx-\frac{R'}{R}\quad\text{(réel, fini, indépendant de }\omega\text{).} \]
-  <div class="res">À BF, le gain <b>sature</b> à la valeur finie \(-R'/R\) au lieu de diverger comme
-  \(-1/(jRC\omega)\to\infty\) pour l'intégrateur pur en \(\omega\to0\). C'est exactement l'effet recherché
-  de \(R'\) : elle borne le gain continu.</p>
-
-  <figure><svg viewBox="0 0 700 260" width="700" xmlns="http://www.w3.org/2000/svg">
-    <line x1="60" y1="230" x2="620" y2="230" stroke="#94a3b8" stroke-width="1.3"/>
-    <line x1="60" y1="230" x2="60" y2="20" stroke="#94a3b8" stroke-width="1.3"/>
-    <text x="20" y="30" fill="#475569" font-family="monospace" font-size="12">|H| (dB)</text>
-    <text x="590" y="252" fill="#475569" font-family="monospace" font-size="12">ω (log)</text>
-    <line x1="60" y1="44.7" x2="340" y2="44.7" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
-    <text x="64" y="41" fill="#94a3b8" font-family="monospace" font-size="10">plateau −R'/R</text>
-    <path d="M60,44.7 74,44.7 88,44.7 102,44.7 116,44.7 130,44.7 144,44.7 158,44.8 172,44.8 186,44.8 200,44.9 214,45.0 228,45.1 242,45.4 256,45.8 270,46.4 284,47.3 298,48.7 312,50.7 326,53.5 340,57.1 354,61.7 368,67.2 382,73.4 396,80.3 410,87.6 424,95.2 438,103.1 452,111.0 466,119.1 480,127.2 494,135.4 508,143.6 522,151.8 536,160.0 550,168.3 564,176.5 578,184.7 592,192.9 606,201.2 620,209.4" fill="none" stroke="#0d9488" stroke-width="2.6"/>
-    <line x1="340" y1="230" x2="340" y2="20" stroke="#d97706" stroke-width="1" stroke-dasharray="4 4"/>
-    <text x="346" y="30" fill="#d97706" font-family="monospace" font-size="11">ω₁ = 1/R'C</text>
-    <text x="420" y="200" fill="#475569" font-family="monospace" font-size="11">pente −20 dB/décade (intégrateur)</text>
-  </svg>
-  <figcaption>Gain asymptotique du pseudo-intégrateur : plateau \(-R'/R\) puis roll-off en intégrateur au-delà de \(\omega_1=1/R'C\).</figcaption>
+  <p class="etape">Étape 1 : en haute fréquence (\(\omega \gg \omega_1\))</p>
+  <p>\(R'C\omega \gg 1\), donc \(1 + jR'C\omega \approx jR'C\omega\) :</p>
+  \[ \underline H \approx -\frac{R'/R}{jR'C\omega} = -\frac{1}{jRC\omega} \]
+  <p>C'est exactement la fonction de transfert de l'intégrateur pur.</p>
+  <p class="etape">Étape 2 : en basse fréquence (\(\omega \ll \omega_1\))</p>
+  <p>\(R'C\omega \ll 1\), donc \(1 + jR'C\omega \approx 1\) :</p>
+  \[ \underline H \approx -\frac{R'}{R} \]
+  <p>Le gain reste fini, alors que celui de l'intégrateur pur, \(1/(RC\omega)\), tend vers l'infini.</p>
+  <div class="res">Intégrateur en HF ; en BF, gain borné à \(R'/R\). C'est l'effet recherché de \(R'\).</div>
+  <figure><svg viewBox="0 0 760 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gain du pseudo-intégrateur : plateau puis pente −20 dB/décade">
+<defs><marker id="fl-139797520063200" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect x="100.0" y="60.0" width="620.0" height="260.0" rx="0" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+<line x1="100.0" y1="60.0" x2="100.0" y2="320.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="100.0" y="350.0" font-size="20" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">0,01</text>
+<line x1="255.0" y1="60.0" x2="255.0" y2="320.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="255.0" y="350.0" font-size="20" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">0,1</text>
+<line x1="410.0" y1="60.0" x2="410.0" y2="320.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="410.0" y="350.0" font-size="20" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">1</text>
+<line x1="565.0" y1="60.0" x2="565.0" y2="320.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="565.0" y="350.0" font-size="20" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">10</text>
+<line x1="720.0" y1="60.0" x2="720.0" y2="320.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="720.0" y="350.0" font-size="20" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">100</text>
+<line x1="100.0" y1="107.3" x2="720.0" y2="107.3" stroke="#cbd5e1" stroke-width="1"/>
+<text x="90.0" y="114.3" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">+20</text>
+<line x1="100.0" y1="201.8" x2="720.0" y2="201.8" stroke="#cbd5e1" stroke-width="1"/>
+<text x="90.0" y="208.8" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">0</text>
+<line x1="100.0" y1="296.4" x2="720.0" y2="296.4" stroke="#cbd5e1" stroke-width="1"/>
+<text x="90.0" y="303.4" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">−20</text>
+<polyline points="100.0,107.3 410.0,107.3 720.0,296.4" fill="none" stroke="#d97706" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="9 6"/>
+<polyline points="100.0,107.3 102.1,107.3 104.1,107.3 106.2,107.3 108.3,107.3 110.3,107.3 112.4,107.3 114.5,107.3 116.5,107.3 118.6,107.3 120.7,107.3 122.7,107.3 124.8,107.3 126.9,107.3 128.9,107.3 131.0,107.3 133.1,107.3 135.1,107.3 137.2,107.3 139.3,107.3 141.3,107.3 143.4,107.3 145.5,107.3 147.5,107.3 149.6,107.3 151.7,107.3 153.7,107.3 155.8,107.3 157.9,107.3 159.9,107.3 162.0,107.3 164.1,107.3 166.1,107.3 168.2,107.3 170.3,107.3 172.3,107.3 174.4,107.3 176.5,107.3 178.5,107.3 180.6,107.3 182.7,107.3 184.7,107.3 186.8,107.3 188.9,107.3 190.9,107.3 193.0,107.3 195.1,107.3 197.1,107.3 199.2,107.3 201.3,107.3 203.3,107.3 205.4,107.3 207.5,107.3 209.5,107.3 211.6,107.3 213.7,107.3 215.7,107.3 217.8,107.3 219.9,107.3 221.9,107.3 224.0,107.4 226.1,107.4 228.1,107.4 230.2,107.4 232.3,107.4 234.3,107.4 236.4,107.4 238.5,107.4 240.5,107.4 242.6,107.4 244.7,107.4 246.7,107.4 248.8,107.4 250.9,107.5 252.9,107.5 255.0,107.5 257.1,107.5 259.1,107.5 261.2,107.5 263.3,107.5 265.3,107.5 267.4,107.6 269.5,107.6 271.5,107.6 273.6,107.6 275.7,107.6 277.7,107.7 279.8,107.7 281.9,107.7 283.9,107.8 286.0,107.8 288.1,107.8 290.1,107.8 292.2,107.9 294.3,107.9 296.3,108.0 298.4,108.0 300.5,108.1 302.5,108.1 304.6,108.1 306.7,108.2 308.7,108.3 310.8,108.3 312.9,108.4 314.9,108.5 317.0,108.5 319.1,108.6 321.1,108.7 323.2,108.8 325.3,108.9 327.3,109.0 329.4,109.1 331.5,109.2 333.5,109.3 335.6,109.4 337.7,109.5 339.7,109.7 341.8,109.8 343.9,110.0 345.9,110.1 348.0,110.3 350.1,110.5 352.1,110.7 354.2,110.9 356.3,111.1 358.3,111.3 360.4,111.5 362.5,111.7 364.5,112.0 366.6,112.3 368.7,112.5 370.7,112.8 372.8,113.1 374.9,113.5 376.9,113.8 379.0,114.2 381.1,114.5 383.1,114.9 385.2,115.3 387.3,115.7 389.3,116.2 391.4,116.6 393.5,117.1 395.5,117.6 397.6,118.1 399.7,118.6 401.7,119.1 403.8,119.7 405.9,120.3 407.9,120.9 410.0,121.5 412.1,122.1 414.1,122.8 416.2,123.5 418.3,124.2 420.3,124.9 422.4,125.6 424.5,126.4 426.5,127.2 428.6,127.9 430.7,128.8 432.7,129.6 434.8,130.4 436.9,131.3 438.9,132.2 441.0,133.1 443.1,134.0 445.1,134.9 447.2,135.8 449.3,136.8 451.3,137.8 453.4,138.7 455.5,139.7 457.5,140.7 459.6,141.8 461.7,142.8 463.7,143.8 465.8,144.9 467.9,146.0 469.9,147.0 472.0,148.1 474.1,149.2 476.1,150.3 478.2,151.4 480.3,152.5 482.3,153.7 484.4,154.8 486.5,155.9 488.5,157.1 490.6,158.2 492.7,159.4 494.7,160.6 496.8,161.7 498.9,162.9 500.9,164.1 503.0,165.3 505.1,166.4 507.1,167.6 509.2,168.8 511.3,170.0 513.3,171.2 515.4,172.4 517.5,173.7 519.5,174.9 521.6,176.1 523.7,177.3 525.7,178.5 527.8,179.7 529.9,181.0 531.9,182.2 534.0,183.4 536.1,184.6 538.1,185.9 540.2,187.1 542.3,188.4 544.3,189.6 546.4,190.8 548.5,192.1 550.5,193.3 552.6,194.5 554.7,195.8 556.7,197.0 558.8,198.3 560.9,199.5 562.9,200.8 565.0,202.0 567.1,203.3 569.1,204.5 571.2,205.8 573.3,207.0 575.3,208.3 577.4,209.5 579.5,210.8 581.5,212.0 583.6,213.3 585.7,214.5 587.7,215.8 589.8,217.0 591.9,218.3 593.9,219.6 596.0,220.8 598.1,222.1 600.1,223.3 602.2,224.6 604.3,225.8 606.3,227.1 608.4,228.3 610.5,229.6 612.5,230.9 614.6,232.1 616.7,233.4 618.7,234.6 620.8,235.9 622.9,237.2 624.9,238.4 627.0,239.7 629.1,240.9 631.1,242.2 633.2,243.4 635.3,244.7 637.3,246.0 639.4,247.2 641.5,248.5 643.5,249.7 645.6,251.0 647.7,252.3 649.7,253.5 651.8,254.8 653.9,256.0 655.9,257.3 658.0,258.6 660.1,259.8 662.1,261.1 664.2,262.3 666.3,263.6 668.3,264.9 670.4,266.1 672.5,267.4 674.5,268.6 676.6,269.9 678.7,271.2 680.7,272.4 682.8,273.7 684.9,274.9 686.9,276.2 689.0,277.5 691.1,278.7 693.1,280.0 695.2,281.2 697.3,282.5 699.3,283.8 701.4,285.0 703.5,286.3 705.5,287.5 707.6,288.8 709.7,290.1 711.7,291.3 713.8,292.6 715.9,293.8 717.9,295.1 720.0,296.4" fill="none" stroke="#0d9488" stroke-width="3.5" stroke-linejoin="round"/>
+<polyline points="410.0,320.0 410.0,60.0" fill="none" stroke="#d97706" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<text x="418.0" y="78.9" font-size="20" fill="#b45309" text-anchor="start" font-family="Segoe UI, sans-serif">ω₁ = 1/(R′C)</text>
+<text x="220.6" y="137.3" font-size="20" fill="#0d9488" text-anchor="middle" font-family="Segoe UI, sans-serif">plateau 20 log(R′/R) : gain borné</text>
+<text x="348.3" y="258.5" font-size="20" fill="#b45309" text-anchor="start" font-family="Segoe UI, sans-serif">−20 dB/déc : intégrateur</text>
+<text x="100.0" y="40.0" font-size="22" fill="#0f766e" text-anchor="start" font-weight="700" font-family="Segoe UI, sans-serif">Gain (dB)</text>
+<text x="410.0" y="385.0" font-size="20" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">ω / ω₁ (échelle log) — exemple R′/R = 10</text>
+</svg>
+  <figcaption>Gain du pseudo-intégrateur : plateau à \(R'/R\) puis pente −20 dB/décade (intégrateur) au-delà de \(\omega_1=1/R'C\).</figcaption>
   </figure>
 
   <p class="q">3) Gamme de fréquence utilisable comme intégrateur ; choix de \(R'\)</p>
-  <p>D'après la question 2, le comportement « intégrateur » n'est valable que pour \(\omega\gg\omega_1\),
-  c'est-à-dire :</p>
-  \[ f\gg f_1=\frac{1}{2\pi R'C}. \]
-  <p>En pratique on exige un facteur ~10 (une décade) : \(f\geq10f_1\) pour que l'approximation
-  \(1+jR'C\omega\approx jR'C\omega\) soit bonne à mieux que quelques %.</p>
-  <div class="method"><span class="lab">Choix de \(R'\)</span> Deux contraintes opposées pèsent sur \(R'\) :
+  <p class="etape">Étape 1 : gamme de fréquence</p>
+  <p>Le comportement intégrateur demande \(\omega \gg \omega_1\), c'est-à-dire :</p>
+  \[ f \gg f_1 = \frac{1}{2\pi R'C} \]
+  <p>En pratique on prend au moins une décade : \(f \ge 10\,f_1\).</p>
+  <p class="etape">Étape 2 : deux contraintes sur \(R'\)</p>
   <ul>
-  <li><b>\(R'\) grande</b> : repousse \(f_1=1/(2\pi R'C)\) vers le <b>bas</b>, ce qui élargit la plage de
-  fréquences où le montage se comporte en intégrateur (il faut \(f_1\) bien en dessous des fréquences
-  utiles du signal à intégrer).</li>
-  <li><b>\(R'\) pas trop grande (donc finie)</b> : c'est justement elle qui <b>limite le gain continu</b> à
-  \(-R'/R\) au lieu de l'infini. Un intégrateur <b>pur</b> (sans \(R'\)) a un gain infini en continu :
-  la moindre tension de décalage (« offset ») ou le moindre courant de polarisation de l'ALI réel, intégrés
-  indéfiniment par \(C\), font <b>dériver la sortie jusqu'à saturation</b> — problème classique de
-  l'intégrateur réel.</li>
+    <li>\(R'\) grande : \(f_1\) descend, la plage où le montage intègre s'élargit.</li>
+    <li>\(R'\) finie : c'est elle qui limite le gain continu à \(R'/R\). Sans elle, la moindre tension de décalage de l'ALI réel, intégrée sans fin, fait dériver la sortie jusqu'à saturation.</li>
   </ul>
-  <b>Compromis</b> : on choisit \(R'\) grande devant \(R\) (pour garder un gain \(-R'/R\) confortable dans
-  la bande utile) mais telle que \(f_1=1/(2\pi R'C)\) reste <b>nettement en dessous</b> de la plus basse
-  fréquence du signal à intégrer — typiquement une à deux décades en dessous.</div>
-    </div>
+  <div class="res">On choisit \(R'\) grande devant \(R\), telle que \(f_1 = \dfrac{1}{2\pi R'C}\) soit une à deux décades sous la plus basse fréquence du signal à intégrer.</div>
+      </div>
   </div>
   </section>
 
@@ -1012,46 +1055,32 @@ cards();start();
     <figcaption>Énoncé (TD3) — montage à résistance négative</figcaption>
   </figure>
 
-  <div class="note"><span class="lab">Le circuit</span> Le point \(A\) est <b>directement</b> l'entrée
-  <b>−</b> de l'ALI (le courant \(i_e\) y entre) ; \(R_1\) reboucle la sortie \(S\) sur \(A\). L'entrée
-  <b>+</b> est reliée à un diviseur : \(R_2\) vers la sortie \(S\), et \(R_3\) (rhéostat) vers la masse \(M\).
-  On repère \(v_e\) le potentiel de l'entrée <b>+</b> par rapport à \(M\).</div>
+  <div class="enonce"><b>Le circuit.</b> Le point \(A\) est directement l'entrée − de l'ALI (le courant \(i_e\) y entre) ; \(R_1\) relie la sortie \(S\) à \(A\). L'entrée + est reliée à un diviseur : \(R_2\) vers la sortie \(S\), et \(R_3\) (rhéostat) vers la masse \(M\). On note \(v_e\) le potentiel de l'entrée + par rapport à \(M\).</div>
 
   <p class="q">1) Régime linéaire supposé : peut-on le prévoir au premier coup d'œil ?</p>
-  <p><b>Non.</b> Contrairement à l'exercice 1 (contre-réaction pure sur <b>−</b> uniquement), la sortie
-  \(S\) revient ici <b>simultanément</b> sur les <b>deux</b> entrées : sur <b>−</b> via \(R_1\), et sur
-  <b>+</b> via le diviseur \(R_2\)/\(R_3\). On a donc en même temps une réaction négative (vers <b>−</b>)
-  et une réaction positive (vers <b>+</b>).</p>
-  <div class="warnbox"><span class="lab">Piège</span> La simple présence d'un chemin de retour vers
-  <b>−</b> ne suffit <b>pas</b> à conclure au régime linéaire dès qu'il existe <b>aussi</b> un chemin de
-  retour vers <b>+</b>. Il faut comparer les deux « facteurs de réaction » (la part de \(S\) qui revient sur
-  chaque entrée) : si la réaction vers <b>−</b> l'emporte, le bouclage net est négatif (linéaire) ; si celle
-  vers <b>+</b> l'emporte, il est positif (saturation/bistable). Seul un <b>calcul</b> tranche — d'où
-  l'énoncé qui nous demande de <b>supposer</b> le régime linéaire plutôt que de l'affirmer.</div>
+  <ul>
+    <li>La sortie revient sur l'entrée (−) par \(R_1\) : rétroaction négative.</li>
+    <li>Elle revient <b>aussi</b> sur l'entrée (+) par le diviseur \(R_2\) / \(R_3\) : rétroaction positive.</li>
+  </ul>
+  <div class="res"><b>Non.</b> Les deux rétroactions coexistent : seul un calcul permet de savoir laquelle l'emporte. C'est pourquoi l'énoncé demande de <b>supposer</b> le régime linéaire.</div>
+  <div class="warnbox"><span class="lab">Piège</span> Un chemin de retour vers (−) ne suffit pas à conclure au régime linéaire s'il existe aussi un chemin vers (+).</div>
 
   <p class="q">2) Relation \(v_e\)–\(s\) par pont diviseur ; relation \(v_e\)–\(i_e\) ; nom du montage</p>
-  <p><b>Pont diviseur sur l'entrée +</b> — l'entrée <b>+</b> n'absorbant aucun courant, \(R_2\) et \(R_3\)
-  sont simplement en série entre \(S\) et la masse, et \(v_e\) est le potentiel du point milieu :</p>
-  \[ v_e = s\cdot\frac{R_3}{R_2+R_3}. \]
-  <p><b>Report sur l'entrée −</b> — en régime linéaire (supposé), \(v_-=v_+\). Or \(v_-\) est justement le
-  potentiel du point \(A\) : \(v_-=v_A\). Donc :</p>
-  \[ v_A = v_e. \]
-  <p><b>Courant \(i_e\)</b> — au nœud \(A\), tout le courant \(i_e\) entrant de l'extérieur doit ressortir
-  par \(R_1\) vers \(S\) (l'ALI n'absorbe rien) :</p>
-  \[ i_e=\frac{v_A-s}{R_1}=\frac{v_e-s}{R_1}. \]
-  <p>On y injecte \(s=v_e\dfrac{R_2+R_3}{R_3}\) (obtenu en inversant la relation du pont) :</p>
-  \[ i_e=\frac{1}{R_1}\left[v_e-v_e\frac{R_2+R_3}{R_3}\right]
-       =\frac{v_e}{R_1}\left[\frac{R_3-R_2-R_3}{R_3}\right]=-\frac{v_e}{R_1}\cdot\frac{R_2}{R_3}. \]
-  <div class="res">\[ \boxed{\ \frac{v_e}{i_e}=-\frac{R_1R_3}{R_2}\ } \]
-  Le rapport \(v_e/i_e\) est une <b>résistance négative</b> \(-R_{eq}\) avec \(R_{eq}=R_1R_3/R_2\) : vu de
-  la source \(v_e\), le montage se comporte comme une résistance de valeur <b>négative</b>, réglable via le
-  rhéostat \(R_3\).</div>
-  <div class="note"><span class="lab">« Un indice est caché dans l'énoncé »</span> Il suffit de relire le
-  <b>titre même</b> de l'exercice : « Montage à <b>résistance négative</b> ». Le nom du montage est le
-  <b>convertisseur à résistance négative</b> (NIC, <i>Negative Impedance Converter</i>) — utilisé par exemple
-  pour compenser des pertes résistives dans un oscillateur, ou (voir Ex 6) comme brique de base d'un
-  simulateur d'inductance.</div>
-    </div>
+  <p class="etape">Étape 1 : pont diviseur sur l'entrée (+)</p>
+  <div class="rappel"><span class="lab">Rappel · pont diviseur de tension</span>\[ u = U\,\frac{R_{bas}}{R_{haut} + R_{bas}} \]</div>
+  <p>L'entrée (+) n'absorbe aucun courant : \(R_2\) et \(R_3\) sont en série entre \(S\) et la masse.</p>
+  \[ v_e = s\,\frac{R_3}{R_2 + R_3} \qquad\Longleftrightarrow\qquad s = v_e\,\frac{R_2 + R_3}{R_3} \]
+  <p class="etape">Étape 2 : potentiel de \(A\)</p>
+  <p>En régime linéaire, \(v_- = v_+\). Or \(v_- = v_A\) :</p>
+  \[ v_A = v_e \]
+  <p class="etape">Étape 3 : courant \(i_e\)</p>
+  <p>Au nœud \(A\), l'ALI n'absorbe rien : tout \(i_e\) repart par \(R_1\) vers \(S\).</p>
+  \[ i_e = \frac{v_A - s}{R_1} = \frac{v_e - s}{R_1} \]
+  <p>On remplace \(s\) :</p>
+  \[ i_e = \frac{v_e}{R_1}\left(1 - \frac{R_2 + R_3}{R_3}\right) = -\frac{v_e}{R_1}\times\frac{R_2}{R_3} \]
+  <div class="res">\[ \frac{v_e}{i_e} = -\frac{R_1R_3}{R_2} \]
+  Vu de l'entrée, le montage se comporte comme une <b>résistance négative</b> \(-R_{eq}\), avec \(R_{eq} = R_1R_3/R_2\), réglable par le rhéostat \(R_3\). C'est un <b>convertisseur à résistance négative</b> (indice : le titre de l'exercice).</div>
+      </div>
   </div>
   </section>
 
@@ -1065,43 +1094,29 @@ cards();start();
     <figcaption>Énoncé (TD3) — montage à deux ALI, gain paramétré par α</figcaption>
   </figure>
 
-  <div class="note"><span class="lab">Le circuit</span> ALI n°1 : \(v_1\) directement sur l'entrée <b>+</b> ;
-  l'entrée <b>−</b> (nœud \(A\)) est reliée à la masse par \(R\) et à la sortie \(v'\) par \(R/\alpha\).
-  ALI n°2 : \(v_2\) directement sur l'entrée <b>+</b> ; l'entrée <b>−</b> (nœud \(B\)) est reliée à \(v'\)
-  par \(R\) et à la sortie \(v_s\) par \(\alpha R\). Les deux ALI fonctionnent en régime linéaire (donné).</div>
+  <div class="enonce"><b>Le circuit.</b> ALI n°1 : \(v_1\) directement sur l'entrée + ; l'entrée − (nœud \(A\)) est reliée à la masse par \(R\) et à la sortie \(v'\) par \(R/\alpha\). ALI n°2 : \(v_2\) directement sur l'entrée + ; l'entrée − (nœud \(B\)) est reliée à \(v'\) par \(R\) et à la sortie \(v_s\) par \(\alpha R\). Les deux ALI fonctionnent en régime linéaire.</div>
 
   <p class="q">Exprimer \(v_s\) en fonction de \(\alpha\), \(v_1\) et \(v_2\)</p>
-  <p><b>Étage 1 (amplificateur non inverseur classique)</b> — \(v_{+1}=v_1\) (fil direct), donc en régime
-  linéaire \(v_A=v_-=v_+=v_1\). Le nœud \(A\) voit \(R\) vers la masse et \(R/\alpha\) vers \(v'\), sans
-  courant entrant dans l'ALI : le courant qui traverse \(R\) (de \(A\) vers la masse) doit être fourni par
-  \(R/\alpha\) (de \(v'\) vers \(A\)) :</p>
-  \[ \frac{v'-v_1}{R/\alpha}=\frac{v_1-0}{R}
-     \ \Longrightarrow\ \frac{\alpha(v'-v_1)}{R}=\frac{v_1}{R}
-     \ \Longrightarrow\ \alpha(v'-v_1)=v_1
-     \ \Longrightarrow\ \boxed{\ v'=v_1\,\frac{1+\alpha}{\alpha}\ } \]
-  <p>(on reconnaît le gain non inverseur usuel \(1+R_f/R_{in}=1+\dfrac{R/\alpha}{R}=1+\dfrac1\alpha
-  =\dfrac{1+\alpha}{\alpha}\)).</p>
+  <p class="etape">Étape 1 : étage 1</p>
+  <div class="rappel"><span class="lab">Rappel · ALI idéal en régime linéaire</span>\[ v_+ = v_- \qquad\text{et}\qquad i_+ = i_- = 0 \]</div>
+  <p>\(v_{+1} = v_1\), donc \(v_A = v_1\). Le courant qui descend dans \(R\) (de \(A\) vers la masse) arrive par \(R/\alpha\) (de \(v'\) vers \(A\)) :</p>
+  \[ \frac{v' - v_1}{R/\alpha} = \frac{v_1 - 0}{R} \]
+  \[ \alpha\,(v' - v_1) = v_1 \qquad\Longrightarrow\qquad v' = v_1\,\frac{1 + \alpha}{\alpha} \]
+  <p>On reconnaît le gain du non inverseur : \(1 + \dfrac{R/\alpha}{R} = \dfrac{1 + \alpha}{\alpha}\).</p>
 
-  <p><b>Étage 2</b> — \(v_{+2}=v_2\) (fil direct), donc \(v_B=v_2\) en régime linéaire. Au nœud \(B\)
-  (LNTP, aucun courant absorbé par l'ALI) :</p>
-  \[ \frac{v_B-v'}{R}+\frac{v_B-v_s}{\alpha R}=0
-     \ \Longrightarrow\ \alpha(v_B-v')+(v_B-v_s)=0
-     \ \Longrightarrow\ v_s=(1+\alpha)v_B-\alpha v' \]
-  <p>Avec \(v_B=v_2\) et \(v'=v_1\dfrac{1+\alpha}{\alpha}\), le facteur \(\alpha\) se simplifie
-  <b>exactement</b> avec celui déjà présent devant \(v'\) :</p>
-  \[ v_s=(1+\alpha)v_2-\alpha\cdot v_1\frac{1+\alpha}{\alpha}=(1+\alpha)v_2-(1+\alpha)v_1 \]
-  <div class="res">\[ \boxed{\ v_s=(1+\alpha)\,(v_2-v_1)\ } \]</div>
-  <div class="method"><span class="lab">Vérification \(\alpha=1\)</span> On doit retrouver un montage à
-  résistances toutes égales : \(v'=2v_1\) puis \(\frac{v_2-v'}{R}+\frac{v_2-v_s}{R}=0\Rightarrow
-  v_s=2v_2-v'=2v_2-2v_1\). La formule générale donne \((1+1)(v_2-v_1)=2v_2-2v_1\) : ✔ cohérent.</div>
-  <div class="method"><span class="lab">Vérification \(\alpha=2\)</span> \(v'=v_1(1+2)/2=1{,}5v_1\) ;
-  \(\dfrac{v_2-v'}{R}+\dfrac{v_2-v_s}{2R}=0\Rightarrow2(v_2-v')+(v_2-v_s)=0\Rightarrow
-  v_s=3v_2-2v'=3v_2-3v_1\). La formule générale donne \((1+2)(v_2-v_1)=3v_2-3v_1\) : ✔ cohérent.</div>
-  <p>Ce montage réalise donc un <b>amplificateur de différence</b> de gain \((1+\alpha)\), <b>identique</b>
-  sur \(v_1\) et \(v_2\) : le paramètre \(\alpha\) règle le <b>gain global</b> de la différence
-  \(v_2-v_1\) sans jamais déséquilibrer les deux entrées — un résultat plus élégant qu'il n'y paraît,
-  puisque les deux étages ont pourtant des composants différents (\(R/\alpha\) puis \(\alpha R\)).</p>
-    </div>
+  <p class="etape">Étape 2 : étage 2</p>
+  <p>\(v_{+2} = v_2\), donc \(v_B = v_2\). LNTP au nœud \(B\) :</p>
+  \[ \frac{v_B - v'}{R} + \frac{v_B - v_s}{\alpha R} = 0 \]
+  <p>On multiplie par \(\alpha R\) :</p>
+  \[ \alpha\,(v_B - v') + (v_B - v_s) = 0 \qquad\Longrightarrow\qquad v_s = (1 + \alpha)\,v_B - \alpha\,v' \]
+
+  <p class="etape">Étape 3 : on remplace</p>
+  \[ v_s = (1 + \alpha)\,v_2 - \alpha\times v_1\,\frac{1 + \alpha}{\alpha} = (1 + \alpha)\,v_2 - (1 + \alpha)\,v_1 \]
+  <div class="res">\[ v_s = (1 + \alpha)\,(v_2 - v_1) \]
+  Amplificateur de différence, de gain \(1 + \alpha\) réglable.</div>
+  <p class="etape">Étape 4 : vérification avec \(\alpha = 1\)</p>
+  <p>\(v' = 2v_1\), puis \(v_s = 2v_2 - v' = 2v_2 - 2v_1\). La formule donne \((1 + 1)(v_2 - v_1)\) : c'est cohérent.</p>
+      </div>
   </div>
   </section>
 
@@ -1115,139 +1130,142 @@ cards();start();
     <figcaption>Énoncé (TD3) — \(F_1\) : passe-bas RC ; \(F_2\) : passe-haut CR, caractérisés en sortie ouverte</figcaption>
   </figure>
 
-  <div class="note"><span class="lab">Les deux filtres (en sortie ouverte)</span>
-  \[ \underline{H_1}=\frac{\underline{v_{s1}}}{\underline{v_{e1}}}=\frac{1}{1+jR_1C_1\omega}
-     \ \text{(passe-bas RC)},\qquad
-     \underline{H_2}=\frac{\underline{v_{s2}}}{\underline{v_{e2}}}=\frac{jR_2C_2\omega}{1+jR_2C_2\omega}
-     \ \text{(passe-haut CR)}. \]</div>
+  <div class="enonce"><b>Les deux filtres (en sortie ouverte).</b>
+  \[ \underline{H_1}=\frac{1}{1+jR_1C_1\omega}\ \text{(passe-bas RC)},\qquad
+     \underline{H_2}=\frac{jR_2C_2\omega}{1+jR_2C_2\omega}\ \text{(passe-haut CR)}. \]</div>
 
   <p class="q">1) Montage à intercaler pour obtenir \(\underline H=\underline{H_1}\times\underline{H_2}\)</p>
-  <p>Si l'on branche \(F_2\) directement à la sortie de \(F_1\), \(F_2\) <b>charge</b> \(F_1\) : il consomme
-  un courant non nul dans \(C_1\)/\(R_1\), ce qui modifie \(H_1\) par rapport à sa valeur « sortie ouverte »
-  donnée. Pour que \(H=H_1\times H_2\) reste valable telle quelle, il faut que \(F_2\) ne tire <b>aucun
-  courant</b> sur \(F_1\), et que la source qui attaque \(F_2\) ait une <b>impédance de sortie nulle</b>
-  (pour ne pas être chargée par \(F_2\) plus tard).</p>
-  <div class="res"><b>On intercale un montage suiveur</b> (gain 1, impédance d'entrée infinie, impédance
-  de sortie nulle) entre \(F_1\) et \(F_2\) : \(v_{s1}\) attaque l'entrée <b>+</b> du suiveur, dont la
-  sortie (à impédance nulle) attaque \(F_2\) sans le charger, ni être chargée par lui. Le suiveur ayant un
-  gain 1, \(\underline H=\underline{H_1}\times1\times\underline{H_2}=\underline{H_1}\,\underline{H_2}\).</div>
+  <p class="etape">Étape 1 : le problème</p>
+  <p>Si on branche \(F_2\) directement après \(F_1\), \(F_2\) tire du courant sur \(F_1\) : il le « charge ». \(\underline H_1\) n'est alors plus la fonction de transfert en sortie ouverte.</p>
+  <p class="etape">Étape 2 : ce qu'il faut</p>
+  <ul>
+    <li>Un étage qui ne tire aucun courant sur \(F_1\) : impédance d'entrée infinie.</li>
+    <li>Un étage qui alimente \(F_2\) sans que sa tension change : impédance de sortie nulle.</li>
+    <li>Un gain 1, pour ne rien modifier d'autre.</li>
+  </ul>
+  <div class="res">On intercale un <b>montage suiveur</b> entre \(F_1\) et \(F_2\). Alors \(\underline H = \underline H_1\times1\times\underline H_2\).</div>
 
   <p class="q">2) Avec \(R_1=R_2=R\), \(C_1=C_2=C\), \(\omega_0=1/RC\) : comportement asymptotique et \(\underline H\)</p>
-  <p>On pose \(x=\omega/\omega_0=RC\omega\) (variable réduite). Alors \(\underline{H_1}=\dfrac{1}{1+jx}\) et
-  \(\underline{H_2}=\dfrac{jx}{1+jx}\), donc :</p>
-  \[ \underline H=\underline{H_1}\,\underline{H_2}=\frac{jx}{(1+jx)^2}. \]
-  <p><b>BF</b> (\(x\ll1\)) : \(1+jx\approx1\), donc \(\underline H\approx jx=jRC\omega\) — gain
-  <b>proportionnel à \(\omega\)</b> (pente \(+20\) dB/décade), phase \(\to+90°\).</p>
-  <p><b>HF</b> (\(x\gg1\)) : \((1+jx)^2\approx(jx)^2=-x^2\) (le terme dominant), donc
-  \(\underline H\approx \dfrac{jx}{-x^2}=-\dfrac{j}{x}=\dfrac{1}{jx}\) — gain
-  <b>proportionnel à \(1/\omega\)</b> (pente \(-20\) dB/décade), phase \(\to-90°\).</p>
-  <div class="res">Comportement en « cloche » : \(F\) <b>monte</b> à \(+20\) dB/décade en BF, puis
-  <b>redescend</b> à \(-20\) dB/décade en HF — c'est la signature d'un filtre <b>passe-bande</b> (ici du
-  2ᵈ ordre, sans pic de résonance puisque les deux pôles sont réels et confondus, cf. Q5).</div>
-  <p><b>Confirmation par le module exact</b> : \(|\underline{H_1}|\,|\underline{H_2}|
-  =\dfrac{1}{\sqrt{1+x^2}}\cdot\dfrac{x}{\sqrt{1+x^2}}\), soit :</p>
-  \[ \boxed{\ |\underline H(x)|=\frac{x}{1+x^2}\ } \]
-  <p>qui redonne bien \(|\underline H|\approx x\) pour \(x\ll1\) et \(|\underline H|\approx1/x\) pour
-  \(x\gg1\) : le comportement asymptotique est confirmé.</p>
+  <p class="etape">Étape 1 : fonction de transfert</p>
+  <p>On pose \(x = \omega/\omega_0 = RC\omega\) :</p>
+  \[ \underline H = \frac{1}{1 + jx}\times\frac{jx}{1 + jx} = \frac{jx}{(1 + jx)^2} \]
+  <p class="etape">Étape 2 : en basse fréquence (\(x \ll 1\))</p>
+  <p>\(1 + jx \approx 1\) :</p>
+  \[ \underline H \approx jx \]
+  <p>Gain proportionnel à \(\omega\) : pente +20 dB/déc, phase \(+90^\circ\).</p>
+  <p class="etape">Étape 3 : en haute fréquence (\(x \gg 1\))</p>
+  <p>\((1 + jx)^2 \approx (jx)^2 = -x^2\) :</p>
+  \[ \underline H \approx \frac{jx}{-x^2} = \frac{1}{jx} \]
+  <p>Gain proportionnel à \(1/\omega\) : pente −20 dB/déc, phase \(-90^\circ\).</p>
+  <p class="etape">Étape 4 : module exact</p>
+  \[ |\underline H| = \frac{1}{\sqrt{1 + x^2}}\times\frac{x}{\sqrt{1 + x^2}} = \frac{x}{1 + x^2} \]
+  <div class="res">\(\underline H = \dfrac{jx}{(1 + jx)^2}\), \(|\underline H| = \dfrac{x}{1 + x^2}\). Le gain monte à +20 dB/déc puis redescend à −20 dB/déc : c'est un <b>passe-bande</b> du 2ᵉ ordre.</div>
 
   <p class="q">3) Pour quelles fréquences \(F\) se comporte-t-il en dérivateur ? en intégrateur ?</p>
-  <div class="res">
-  <b>Dérivateur en BF</b> (\(\omega\ll\omega_0\)) : \(\underline H\approx jRC\omega\) correspond à
-  \(v_s=RC\,\dfrac{dv_e}{dt}\) (multiplication par \(j\omega\) ⟺ dérivation temporelle).<br>
-  <b>Intégrateur en HF</b> (\(\omega\gg\omega_0\)) : \(\underline H\approx\dfrac{1}{jRC\omega}\) correspond
-  à \(v_s=\dfrac{1}{RC}\displaystyle\int v_e\,dt\) (division par \(j\omega\) ⟺ intégration temporelle) —
-  exactement la fonction de transfert de l'intégrateur pur retrouvée à l'exercice 2.</div>
+  <div class="rappel"><span class="lab">Rappel · dérivateur et intégrateur</span>\[ \underline H \propto j\omega \;\Longleftrightarrow\; \text{dérivation} \qquad\qquad \underline H \propto \frac{1}{j\omega} \;\Longleftrightarrow\; \text{intégration} \]</div>
+  <ul>
+    <li>BF (\(\omega \ll \omega_0\)) : \(\underline H \approx jRC\omega\), soit \(v_s = RC\,\dfrac{dv_e}{dt}\).</li>
+    <li>HF (\(\omega \gg \omega_0\)) : \(\underline H \approx \dfrac{1}{jRC\omega}\), soit \(v_s = \dfrac{1}{RC}\displaystyle\int v_e\,dt\).</li>
+  </ul>
+  <div class="res"><b>Dérivateur</b> pour \(\omega \ll \omega_0\), <b>intégrateur</b> pour \(\omega \gg \omega_0\).</div>
 
   <p class="q">4) Diagrammes de Bode asymptotiques de \(F\)</p>
-  <p><b>Gain</b> : asymptote BF \(20\log|x|\) (pente \(+20\) dB/déc, passe par 0 dB en \(x=1\)) ; asymptote
-  HF \(-20\log|x|\) (pente \(-20\) dB/déc, passe aussi par 0 dB en \(x=1\)). Les deux droites se croisent
-  donc en \(x=1\) à 0 dB, mais la courbe réelle y vaut \(|\underline H(1)|=1/2\), soit <b>\(-6\) dB</b> —
-  <b>en dessous</b> de l'intersection des asymptotes (pas de dépassement, car pôle double réel, voir Q5).</p>
-  <p><b>Phase</b> : \(\varphi=90°-2\arctan(x)\). Plateau à \(+90°\) pour \(x\ll1\), décroissance linéaire
-  entre \(x\approx0{,}1\) et \(x\approx10\) passant par \(0°\) en \(x=1\), plateau à \(-90°\) pour
-  \(x\gg1\).</p>
-
-  <figure><svg viewBox="0 0 700 520" width="700" xmlns="http://www.w3.org/2000/svg">
-    <!-- GAIN plot -->
-    <line x1="60" y1="230" x2="620" y2="230" stroke="#94a3b8" stroke-width="1.3"/>
-    <line x1="60" y1="230" x2="60" y2="20" stroke="#94a3b8" stroke-width="1.3"/>
-    <text x="16" y="30" fill="#475569" font-family="monospace" font-size="12">|H| (dB)</text>
-    <line x1="60" y1="44.7" x2="620" y2="44.7" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
-    <text x="626" y="48" fill="#94a3b8" font-family="monospace" font-size="10">0 dB</text>
-    <line x1="60" y1="127.1" x2="620" y2="127.1" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
-    <text x="626" y="131" fill="#94a3b8" font-family="monospace" font-size="10">−20</text>
-    <!-- asymptotes -->
-    <line x1="60" y1="209.4" x2="340" y2="44.7" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3"/>
-    <line x1="340" y1="44.7" x2="620" y2="209.4" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3"/>
-    <!-- real curve -->
-    <path d="M60.0,209.4 74.0,201.2 88.0,193.0 102.0,184.7 116.0,176.5 130.0,168.3 144.0,160.1 158.0,151.9 172.0,143.7 186.0,135.5 200.0,127.4 214.0,119.4 228.0,111.5 242.0,103.7 256.0,96.3 270.0,89.3 284.0,82.9 298.0,77.4 312.0,73.2 326.0,70.4 340.0,69.5 354.0,70.4 368.0,73.2 382.0,77.4 396.0,82.9 410.0,89.3 424.0,96.3 438.0,103.7 452.0,111.5 466.0,119.4 480.0,127.4 494.0,135.5 508.0,143.7 522.0,151.9 536.0,160.1 550.0,168.3 564.0,176.5 578.0,184.7 592.0,193.0 606.0,201.2 620.0,209.4" fill="none" stroke="#0d9488" stroke-width="2.8"/>
-    <circle cx="340" cy="69.5" r="3.5" fill="#dc2626"/>
-    <text x="346" y="65" fill="#dc2626" font-family="monospace" font-size="11">max = −6 dB (x=1)</text>
-    <text x="60" y="245" fill="#475569" font-family="monospace" font-size="11">0,01</text>
-    <text x="330" y="245" fill="#475569" font-family="monospace" font-size="11">x=1</text>
-    <text x="600" y="245" fill="#475569" font-family="monospace" font-size="11">100</text>
-    <text x="290" y="20" fill="#334155" font-family="monospace" font-size="12">Gain (dB) vs x=ω/ω₀ (log)</text>
-
-    <!-- PHASE plot -->
-    <line x1="60" y1="490" x2="620" y2="490" stroke="#94a3b8" stroke-width="1.3"/>
-    <line x1="60" y1="490" x2="60" y2="280" stroke="#94a3b8" stroke-width="1.3"/>
-    <text x="16" y="290" fill="#475569" font-family="monospace" font-size="12">φ (°)</text>
-    <line x1="60" y1="290.5" x2="620" y2="290.5" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
-    <text x="626" y="294" fill="#94a3b8" font-family="monospace" font-size="10">+90°</text>
-    <line x1="60" y1="385.0" x2="620" y2="385.0" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
-    <text x="626" y="389" fill="#94a3b8" font-family="monospace" font-size="10">0°</text>
-    <line x1="60" y1="479.5" x2="620" y2="479.5" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/>
-    <text x="626" y="483" fill="#94a3b8" font-family="monospace" font-size="10">−90°</text>
-    <path d="M60.0,291.7 74.0,292.0 88.0,292.4 102.0,292.9 116.0,293.5 130.0,294.3 144.0,295.3 158.0,296.5 172.0,298.1 186.0,300.0 200.0,302.5 214.0,305.6 228.0,309.4 242.0,314.2 256.0,320.1 270.0,327.4 284.0,336.1 298.0,346.4 312.0,358.2 326.0,371.3 340.0,385.0 354.0,398.7 368.0,411.8 382.0,423.6 396.0,433.9 410.0,442.6 424.0,449.9 438.0,455.8 452.0,460.6 466.0,464.4 480.0,467.5 494.0,470.0 508.0,471.9 522.0,473.5 536.0,474.7 550.0,475.7 564.0,476.5 578.0,477.1 592.0,477.6 606.0,478.0 620.0,478.3" fill="none" stroke="#0891b2" stroke-width="2.8"/>
-    <text x="270" y="272" fill="#334155" font-family="monospace" font-size="12">Phase (°) vs x=ω/ω₀ (log)</text>
-  </svg>
+  <p class="etape">Étape 1 : gain</p>
+  <ul>
+    <li>Asymptote BF : \(20\log x\), pente +20 dB/déc, passe par 0 dB en \(x = 1\).</li>
+    <li>Asymptote HF : \(-20\log x\), pente −20 dB/déc, passe aussi par 0 dB en \(x = 1\).</li>
+    <li>Courbe réelle en \(x = 1\) : \(|\underline H| = 1/2\), soit −6 dB, sous le croisement des asymptotes.</li>
+  </ul>
+  <p class="etape">Étape 2 : phase</p>
+  <div class="rappel"><span class="lab">Rappel · argument d'un produit et d'un quotient</span>\[ \arg\frac{ab}{c} = \arg a + \arg b - \arg c \]</div>
+  \[ \varphi = 90^\circ - 2\arctan x \]
+  <p>\(+90^\circ\) en BF, \(0^\circ\) en \(x = 1\), \(-90^\circ\) en HF.</p>
+  <figure><svg viewBox="0 0 760 680" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bode du filtre en cascade : gain en cloche et phase de +90° à −90°">
+<defs><marker id="fl-139797520062656" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<rect x="100.0" y="60.0" width="635.0" height="240.0" rx="0" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="100.0" y="390.0" width="635.0" height="210.0" rx="0" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+<line x1="100.0" y1="60.0" x2="100.0" y2="300.0" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="258.8" y1="60.0" x2="258.8" y2="300.0" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="417.5" y1="60.0" x2="417.5" y2="300.0" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="576.2" y1="60.0" x2="576.2" y2="300.0" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="735.0" y1="60.0" x2="735.0" y2="300.0" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="100.0" y1="390.0" x2="100.0" y2="600.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="100.0" y="630.0" font-size="20" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">0,01</text>
+<line x1="258.8" y1="390.0" x2="258.8" y2="600.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="258.8" y="630.0" font-size="20" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">0,1</text>
+<line x1="417.5" y1="390.0" x2="417.5" y2="600.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="417.5" y="630.0" font-size="20" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">1</text>
+<line x1="576.2" y1="390.0" x2="576.2" y2="600.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="576.2" y="630.0" font-size="20" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">10</text>
+<line x1="735.0" y1="390.0" x2="735.0" y2="600.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="735.0" y="630.0" font-size="20" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">100</text>
+<line x1="100.0" y1="84.0" x2="735.0" y2="84.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="90.0" y="91.0" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">0</text>
+<line x1="100.0" y1="112.8" x2="735.0" y2="112.8" stroke="#cbd5e1" stroke-width="1"/>
+<text x="90.0" y="119.8" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">−6</text>
+<line x1="100.0" y1="180.0" x2="735.0" y2="180.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="90.0" y="187.0" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">−20</text>
+<line x1="100.0" y1="276.0" x2="735.0" y2="276.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="90.0" y="283.0" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">−40</text>
+<line x1="100.0" y1="390.0" x2="735.0" y2="390.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="90.0" y="397.0" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">+90°</text>
+<line x1="100.0" y1="495.0" x2="735.0" y2="495.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="90.0" y="502.0" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">0°</text>
+<line x1="100.0" y1="600.0" x2="735.0" y2="600.0" stroke="#cbd5e1" stroke-width="1"/>
+<text x="90.0" y="607.0" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">−90°</text>
+<polyline points="100.0,276.0 417.5,84.0 735.0,276.0" fill="none" stroke="#d97706" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="9 6"/>
+<polyline points="100.0,390.0 258.8,390.0 576.2,600.0 735.0,600.0" fill="none" stroke="#d97706" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="9 6"/>
+<polyline points="100.0,276.0 102.1,274.7 104.2,273.4 106.4,272.2 108.5,270.9 110.6,269.6 112.7,268.3 114.8,267.0 116.9,265.8 119.1,264.5 121.2,263.2 123.3,261.9 125.4,260.6 127.5,259.4 129.6,258.1 131.8,256.8 133.9,255.5 136.0,254.3 138.1,253.0 140.2,251.7 142.3,250.4 144.4,249.1 146.6,247.9 148.7,246.6 150.8,245.3 152.9,244.0 155.0,242.7 157.1,241.5 159.3,240.2 161.4,238.9 163.5,237.6 165.6,236.3 167.7,235.1 169.8,233.8 172.0,232.5 174.1,231.2 176.2,230.0 178.3,228.7 180.4,227.4 182.6,226.1 184.7,224.8 186.8,223.6 188.9,222.3 191.0,221.0 193.1,219.7 195.2,218.5 197.4,217.2 199.5,215.9 201.6,214.6 203.7,213.4 205.8,212.1 208.0,210.8 210.1,209.5 212.2,208.3 214.3,207.0 216.4,205.7 218.5,204.4 220.7,203.2 222.8,201.9 224.9,200.6 227.0,199.4 229.1,198.1 231.2,196.8 233.3,195.6 235.5,194.3 237.6,193.0 239.7,191.8 241.8,190.5 243.9,189.2 246.0,188.0 248.2,186.7 250.3,185.4 252.4,184.2 254.5,182.9 256.6,181.7 258.8,180.4 260.9,179.2 263.0,177.9 265.1,176.7 267.2,175.4 269.3,174.2 271.5,172.9 273.6,171.7 275.7,170.4 277.8,169.2 279.9,168.0 282.0,166.7 284.1,165.5 286.3,164.3 288.4,163.1 290.5,161.8 292.6,160.6 294.7,159.4 296.9,158.2 299.0,157.0 301.1,155.8 303.2,154.6 305.3,153.4 307.4,152.2 309.6,151.1 311.7,149.9 313.8,148.7 315.9,147.6 318.0,146.4 320.1,145.3 322.2,144.2 324.4,143.0 326.5,141.9 328.6,140.8 330.7,139.7 332.8,138.6 334.9,137.6 337.1,136.5 339.2,135.5 341.3,134.4 343.4,133.4 345.5,132.4 347.6,131.4 349.8,130.4 351.9,129.5 354.0,128.5 356.1,127.6 358.2,126.7 360.3,125.8 362.5,125.0 364.6,124.1 366.7,123.3 368.8,122.5 370.9,121.8 373.1,121.0 375.2,120.3 377.3,119.6 379.4,119.0 381.5,118.3 383.6,117.7 385.8,117.2 387.9,116.6 390.0,116.1 392.1,115.7 394.2,115.2 396.3,114.8 398.4,114.5 400.6,114.1 402.7,113.9 404.8,113.6 406.9,113.4 409.0,113.2 411.1,113.1 413.3,113.0 415.4,112.9 417.5,112.9 419.6,112.9 421.7,113.0 423.9,113.1 426.0,113.2 428.1,113.4 430.2,113.6 432.3,113.9 434.4,114.1 436.6,114.5 438.7,114.8 440.8,115.2 442.9,115.7 445.0,116.1 447.1,116.6 449.2,117.2 451.4,117.7 453.5,118.3 455.6,119.0 457.7,119.6 459.8,120.3 461.9,121.0 464.1,121.8 466.2,122.5 468.3,123.3 470.4,124.1 472.5,125.0 474.6,125.8 476.8,126.7 478.9,127.6 481.0,128.5 483.1,129.5 485.2,130.4 487.3,131.4 489.5,132.4 491.6,133.4 493.7,134.4 495.8,135.5 497.9,136.5 500.1,137.6 502.2,138.6 504.3,139.7 506.4,140.8 508.5,141.9 510.6,143.0 512.8,144.2 514.9,145.3 517.0,146.4 519.1,147.6 521.2,148.7 523.3,149.9 525.5,151.1 527.6,152.2 529.7,153.4 531.8,154.6 533.9,155.8 536.0,157.0 538.1,158.2 540.3,159.4 542.4,160.6 544.5,161.8 546.6,163.1 548.7,164.3 550.8,165.5 553.0,166.7 555.1,168.0 557.2,169.2 559.3,170.4 561.4,171.7 563.5,172.9 565.7,174.2 567.8,175.4 569.9,176.7 572.0,177.9 574.1,179.2 576.2,180.4 578.4,181.7 580.5,182.9 582.6,184.2 584.7,185.4 586.8,186.7 589.0,188.0 591.1,189.2 593.2,190.5 595.3,191.8 597.4,193.0 599.5,194.3 601.7,195.6 603.8,196.8 605.9,198.1 608.0,199.4 610.1,200.6 612.2,201.9 614.4,203.2 616.5,204.4 618.6,205.7 620.7,207.0 622.8,208.3 624.9,209.5 627.0,210.8 629.2,212.1 631.3,213.4 633.4,214.6 635.5,215.9 637.6,217.2 639.8,218.5 641.9,219.7 644.0,221.0 646.1,222.3 648.2,223.6 650.3,224.8 652.5,226.1 654.6,227.4 656.7,228.7 658.8,230.0 660.9,231.2 663.0,232.5 665.1,233.8 667.3,235.1 669.4,236.3 671.5,237.6 673.6,238.9 675.7,240.2 677.9,241.5 680.0,242.7 682.1,244.0 684.2,245.3 686.3,246.6 688.4,247.9 690.6,249.1 692.7,250.4 694.8,251.7 696.9,253.0 699.0,254.3 701.1,255.5 703.2,256.8 705.4,258.1 707.5,259.4 709.6,260.6 711.7,261.9 713.8,263.2 715.9,264.5 718.1,265.8 720.2,267.0 722.3,268.3 724.4,269.6 726.5,270.9 728.6,272.2 730.8,273.4 732.9,274.7 735.0,276.0" fill="none" stroke="#0d9488" stroke-width="3.5" stroke-linejoin="round"/>
+<polyline points="100.0,391.3 102.1,391.4 104.2,391.4 106.4,391.5 108.5,391.5 110.6,391.6 112.7,391.6 114.8,391.7 116.9,391.7 119.1,391.8 121.2,391.8 123.3,391.9 125.4,391.9 127.5,392.0 129.6,392.1 131.8,392.1 133.9,392.2 136.0,392.3 138.1,392.3 140.2,392.4 142.3,392.5 144.4,392.5 146.6,392.6 148.7,392.7 150.8,392.8 152.9,392.9 155.0,393.0 157.1,393.1 159.3,393.2 161.4,393.3 163.5,393.4 165.6,393.5 167.7,393.6 169.8,393.7 172.0,393.8 174.1,393.9 176.2,394.0 178.3,394.2 180.4,394.3 182.6,394.4 184.7,394.6 186.8,394.7 188.9,394.9 191.0,395.0 193.1,395.2 195.2,395.3 197.4,395.5 199.5,395.7 201.6,395.8 203.7,396.0 205.8,396.2 208.0,396.4 210.1,396.6 212.2,396.8 214.3,397.0 216.4,397.2 218.5,397.5 220.7,397.7 222.8,397.9 224.9,398.2 227.0,398.4 229.1,398.7 231.2,399.0 233.3,399.2 235.5,399.5 237.6,399.8 239.7,400.1 241.8,400.4 243.9,400.8 246.0,401.1 248.2,401.4 250.3,401.8 252.4,402.2 254.5,402.5 256.6,402.9 258.8,403.3 260.9,403.7 263.0,404.2 265.1,404.6 267.2,405.1 269.3,405.5 271.5,406.0 273.6,406.5 275.7,407.0 277.8,407.5 279.9,408.1 282.0,408.6 284.1,409.2 286.3,409.8 288.4,410.4 290.5,411.0 292.6,411.7 294.7,412.3 296.9,413.0 299.0,413.7 301.1,414.4 303.2,415.2 305.3,415.9 307.4,416.7 309.6,417.5 311.7,418.4 313.8,419.2 315.9,420.1 318.0,421.0 320.1,421.9 322.2,422.9 324.4,423.9 326.5,424.9 328.6,425.9 330.7,427.0 332.8,428.1 334.9,429.2 337.1,430.4 339.2,431.5 341.3,432.7 343.4,434.0 345.5,435.3 347.6,436.6 349.8,437.9 351.9,439.3 354.0,440.7 356.1,442.1 358.2,443.5 360.3,445.0 362.5,446.5 364.6,448.1 366.7,449.7 368.8,451.3 370.9,452.9 373.1,454.6 375.2,456.3 377.3,458.0 379.4,459.8 381.5,461.6 383.6,463.4 385.8,465.3 387.9,467.1 390.0,469.0 392.1,470.9 394.2,472.8 396.3,474.8 398.4,476.8 400.6,478.7 402.7,480.7 404.8,482.8 406.9,484.8 409.0,486.8 411.1,488.9 413.3,490.9 415.4,492.9 417.5,495.0 419.6,497.1 421.7,499.1 423.9,501.1 426.0,503.2 428.1,505.2 430.2,507.2 432.3,509.3 434.4,511.3 436.6,513.2 438.7,515.2 440.8,517.2 442.9,519.1 445.0,521.0 447.1,522.9 449.2,524.7 451.4,526.6 453.5,528.4 455.6,530.2 457.7,532.0 459.8,533.7 461.9,535.4 464.1,537.1 466.2,538.7 468.3,540.3 470.4,541.9 472.5,543.5 474.6,545.0 476.8,546.5 478.9,547.9 481.0,549.3 483.1,550.7 485.2,552.1 487.3,553.4 489.5,554.7 491.6,556.0 493.7,557.3 495.8,558.5 497.9,559.6 500.1,560.8 502.2,561.9 504.3,563.0 506.4,564.1 508.5,565.1 510.6,566.1 512.8,567.1 514.9,568.1 517.0,569.0 519.1,569.9 521.2,570.8 523.3,571.6 525.5,572.5 527.6,573.3 529.7,574.1 531.8,574.8 533.9,575.6 536.0,576.3 538.1,577.0 540.3,577.7 542.4,578.3 544.5,579.0 546.6,579.6 548.7,580.2 550.8,580.8 553.0,581.4 555.1,581.9 557.2,582.5 559.3,583.0 561.4,583.5 563.5,584.0 565.7,584.5 567.8,584.9 569.9,585.4 572.0,585.8 574.1,586.3 576.2,586.7 578.4,587.1 580.5,587.5 582.6,587.8 584.7,588.2 586.8,588.6 589.0,588.9 591.1,589.2 593.2,589.6 595.3,589.9 597.4,590.2 599.5,590.5 601.7,590.8 603.8,591.0 605.9,591.3 608.0,591.6 610.1,591.8 612.2,592.1 614.4,592.3 616.5,592.5 618.6,592.8 620.7,593.0 622.8,593.2 624.9,593.4 627.0,593.6 629.2,593.8 631.3,594.0 633.4,594.2 635.5,594.3 637.6,594.5 639.8,594.7 641.9,594.8 644.0,595.0 646.1,595.1 648.2,595.3 650.3,595.4 652.5,595.6 654.6,595.7 656.7,595.8 658.8,596.0 660.9,596.1 663.0,596.2 665.1,596.3 667.3,596.4 669.4,596.5 671.5,596.6 673.6,596.7 675.7,596.8 677.9,596.9 680.0,597.0 682.1,597.1 684.2,597.2 686.3,597.3 688.4,597.4 690.6,597.5 692.7,597.5 694.8,597.6 696.9,597.7 699.0,597.7 701.1,597.8 703.2,597.9 705.4,597.9 707.5,598.0 709.6,598.1 711.7,598.1 713.8,598.2 715.9,598.2 718.1,598.3 720.2,598.3 722.3,598.4 724.4,598.4 726.5,598.5 728.6,598.5 730.8,598.6 732.9,598.6 735.0,598.7" fill="none" stroke="#0891b2" stroke-width="3.5" stroke-linejoin="round"/>
+<circle cx="417.5" cy="112.9" r="6" fill="#0d9488" stroke="#0d9488" stroke-width="2"/>
+<text x="417.5" y="218.4" font-size="20" fill="#0d9488" text-anchor="middle" font-family="Segoe UI, sans-serif">maximum −6 dB en x = 1</text>
+<text x="286.7" y="256.8" font-size="20" fill="#b45309" text-anchor="start" font-family="Segoe UI, sans-serif">+20 dB/déc</text>
+<text x="551.7" y="256.8" font-size="20" fill="#b45309" text-anchor="end" font-family="Segoe UI, sans-serif">−20 dB/déc</text>
+<circle cx="417.5" cy="495.0" r="6" fill="#0891b2" stroke="#0891b2" stroke-width="2"/>
+<text x="100.0" y="42.0" font-size="22" fill="#0f766e" text-anchor="start" font-weight="700" font-family="Segoe UI, sans-serif">Gain G (dB)</text>
+<text x="100.0" y="372.0" font-size="22" fill="#0e7490" text-anchor="start" font-weight="700" font-family="Segoe UI, sans-serif">Phase φ</text>
+<text x="417.5" y="665.0" font-size="22" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">x = ω / ω₀ (échelle log)</text>
+</svg>
   <figcaption>Bode du filtre en cascade F = F₁·(suiveur)·F₂ : gain en cloche (max −6 dB en x=1) et phase +90°→−90°.</figcaption>
   </figure>
+  <div class="res">Gain : deux asymptotes ±20 dB/déc qui se croisent à 0 dB en \(x = 1\), courbe réelle à −6 dB. Phase : de \(+90^\circ\) à \(-90^\circ\), \(0^\circ\) en \(x = 1\).</div>
 
   <p class="q">5) Maximum de \(|\underline H|\), bande passante à −3 dB, facteur de qualité</p>
-  <p><b>Maximum</b> — on dérive \(|\underline H(x)|=\dfrac{x}{1+x^2}\) par rapport à \(x\) :</p>
-  \[ \frac{d}{dx}\left(\frac{x}{1+x^2}\right)=\frac{(1+x^2)-x(2x)}{(1+x^2)^2}=\frac{1-x^2}{(1+x^2)^2}=0
-     \ \Longrightarrow\ x=1\ (x>0). \]
-  \[ \boxed{\ |\underline H|_{max}=|\underline H(1)|=\frac12\ (=-6{,}02\text{ dB, en }\omega=\omega_0)\ } \]
-  <p><b>Bande à \(-3\) dB</b> — on cherche \(x\) tel que \(|\underline H(x)|=\dfrac{H_{max}}{\sqrt2}
-  =\dfrac{1}{2\sqrt2}\) :</p>
-  \[ \frac{x}{1+x^2}=\frac{1}{2\sqrt2}
-     \ \Longrightarrow\ 2\sqrt2\,x=1+x^2
-     \ \Longrightarrow\ x^2-2\sqrt2\,x+1=0
-     \ \Longrightarrow\ x=\sqrt2\pm1. \]
-  <p>D'où \(x_{bas}=\sqrt2-1\approx0{,}414\) et \(x_{haut}=\sqrt2+1\approx2{,}414\) (on vérifie
-  \(x_{bas}\,x_{haut}=2-1=1=x_0^2\) : \(x_0=1\) est bien la <b>moyenne géométrique</b> des deux coupures,
-  propriété typique d'un passe-bande). Largeur de bande :</p>
-  \[ \Delta x = x_{haut}-x_{bas}=(\sqrt2+1)-(\sqrt2-1)=2\qquad\Longrightarrow\qquad
-     \Delta\omega=2\,\omega_0. \]
-  <div class="res">\[ \boxed{\ Q=\frac{x_0}{\Delta x}=\frac{1}{2}\ } \]
-  \(Q=0{,}5\) : filtre <b>peu sélectif</b> (pas de résonance), cohérent avec un pôle double <b>réel</b>
-  (voir Q6) — la valeur \(Q=1/2\) est justement la valeur limite en dessous de laquelle un système du 2ᵉ
-  ordre n'oscille plus (régime critique/apériodique).</div>
+  <p class="etape">Étape 1 : maximum</p>
+  <div class="rappel"><span class="lab">Rappel · dérivée d'un quotient</span>\[ \left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2} \]</div>
+  \[ \frac{d}{dx}\left(\frac{x}{1 + x^2}\right) = \frac{(1 + x^2) - 2x^2}{(1 + x^2)^2} = \frac{1 - x^2}{(1 + x^2)^2} \]
+  <p>Elle s'annule pour \(x = 1\) (on garde \(x &gt; 0\)) :</p>
+  \[ |\underline H|_{max} = |\underline H(1)| = \frac12 \quad(-6{,}0\ \text{dB}) \]
+  <p class="etape">Étape 2 : coupures à −3 dB</p>
+  <p>On cherche \(|\underline H| = \dfrac{H_{max}}{\sqrt2} = \dfrac{1}{2\sqrt2}\) :</p>
+  \[ \frac{x}{1 + x^2} = \frac{1}{2\sqrt2} \iff x^2 - 2\sqrt2\,x + 1 = 0 \]
+  <div class="rappel"><span class="lab">Rappel · trinôme du second degré</span>\[ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]</div>
+  <p>\(\Delta = 8 - 4 = 4\), donc :</p>
+  \[ x = \frac{2\sqrt2 \pm 2}{2} = \sqrt2 \pm 1 \]
+  <p>\(x_{bas} \approx 0{,}414\) et \(x_{haut} \approx 2{,}414\). Leur produit vaut 1 : \(x = 1\) est leur moyenne géométrique.</p>
+  <p class="etape">Étape 3 : bande passante et facteur de qualité</p>
+  <div class="rappel"><span class="lab">Rappel · facteur de qualité d'un passe-bande</span>\[ Q = \frac{\omega_0}{\Delta\omega} = \frac{1}{\Delta x} \]</div>
+  \[ \Delta x = (\sqrt2 + 1) - (\sqrt2 - 1) = 2 \qquad\Longrightarrow\qquad \Delta\omega = 2\,\omega_0 \]
+  <div class="res">\(|\underline H|_{max} = 1/2\) en \(\omega = \omega_0\), bande passante \(\Delta\omega = 2\omega_0\), et \(Q = \dfrac12\) : filtre peu sélectif, sans résonance.</div>
 
   <p class="q">6) Équation différentielle vérifiée par \(s(t)\) ; facteur de qualité retrouvé sur l'ED</p>
-  <p>On repart de \(\underline H=\dfrac{\underline S}{\underline E}=\dfrac{jRC\omega}{(1+jRC\omega)^2}\).
-  En notant \(p=j\omega\) et \(\tau=RC\), et en « repassant » \((1+\tau p)^2\underline S=\tau p\,\underline E\)
-  du domaine complexe au domaine temporel (\(p\leftrightarrow d/dt\)) :</p>
-  \[ (1+2\tau p+\tau^2p^2)\,s = \tau p\,e
-     \quad\Longrightarrow\quad
-     \boxed{\ \tau^2\,\ddot s(t)+2\tau\,\dot s(t)+s(t)=\tau\,\dot e(t)\ } \]
-  <p>On identifie avec la forme <b>canonique</b> du 2ᵈ ordre \(\dfrac{1}{\omega_0^2}\ddot s
-  +\dfrac{1}{Q\omega_0}\dot s+s=(\cdots)\) :</p>
-  \[ \frac{1}{\omega_0^2}=\tau^2\ \Rightarrow\ \omega_0=\frac1\tau=\frac1{RC}\ \text{(cohérent avec Q2)},
-  \qquad
-  \frac{1}{Q\omega_0}=2\tau\ \Rightarrow\ Q=\frac{1}{2\tau\omega_0}=\frac{1}{2}. \]
-  <div class="res">On retrouve directement \(\boxed{Q=1/2}\) sur les coefficients de l'équation
-  différentielle, sans repasser par le calcul du maximum : <b>même résultat</b> qu'en Q5, ce qui valide les
-  deux méthodes.</div>
-  <p>Pour un <b>échelon</b> \(e(t)=E\,\Gamma(t)\) en entrée, \(\dot e(t)=E\,\delta(t)\) (impulsion de Dirac
-  à \(t=0\)). Pour \(t>0\), l'équation devient homogène :</p>
-  \[ \tau^2\ddot s+2\tau\dot s+s=0, \]
-  <p>d'équation caractéristique \(\tau^2r^2+2\tau r+1=0\), de discriminant \(\Delta=4\tau^2-4\tau^2=0\) :
-  <b>racine double</b> \(r=-1/\tau\). Ce discriminant nul confirme, indépendamment du calcul de \(Q\),
-  que l'on est exactement à la <b>frontière apériodique/critique</b> (\(Q=1/2\)) : la réponse à l'échelon ne
-  présente <b>aucune oscillation</b>.</p>
-    </div>
+  <p class="etape">Étape 1 : produit en croix</p>
+  <p>On note \(\tau = RC\) :</p>
+  \[ (1 + j\tau\omega)^2\,\underline S = j\tau\omega\,\underline E \]
+  \[ \left(1 + 2\tau\,(j\omega) + \tau^2\,(j\omega)^2\right)\underline S = \tau\,(j\omega)\,\underline E \]
+  <p class="etape">Étape 2 : retour au temps</p>
+  <div class="rappel"><span class="lab">Rappel · du complexe au temporel</span>\[ j\omega \;\longleftrightarrow\; \frac{d}{dt} \qquad\qquad (j\omega)^2 \;\longleftrightarrow\; \frac{d^2}{dt^2} \]</div>
+  \[ \tau^2\,\ddot s + 2\tau\,\dot s + s = \tau\,\dot e \]
+  <p class="etape">Étape 3 : identification</p>
+  <div class="rappel"><span class="lab">Rappel · forme canonique du 2ᵉ ordre</span>\[ \frac{1}{\omega_0^2}\,\ddot s + \frac{1}{Q\,\omega_0}\,\dot s + s = \dots \]</div>
+  \[ \frac{1}{\omega_0^2} = \tau^2 \;\Longrightarrow\; \omega_0 = \frac1\tau = \frac{1}{RC} \]
+  \[ \frac{1}{Q\,\omega_0} = 2\tau \;\Longrightarrow\; Q = \frac{1}{2\tau\,\omega_0} = \frac12 \]
+  <div class="res">\(\tau^2\,\ddot s + 2\tau\,\dot s + s = \tau\,\dot e\), avec \(\tau = RC\). On retrouve \(Q = 1/2\), comme en Q5.</div>
+  <p class="etape">Étape 4 : réponse à un échelon</p>
+  <p>Pour \(t &gt; 0\), \(\dot e = 0\) : l'équation est homogène, d'équation caractéristique \(\tau^2\lambda^2 + 2\tau\lambda + 1 = 0\).</p>
+  \[ \Delta = 4\tau^2 - 4\tau^2 = 0 \qquad\Longrightarrow\qquad \lambda = -\frac1\tau\ \text{(racine double)} \]
+  <div class="res">Discriminant nul : régime <b>critique</b> (\(Q = 1/2\)). La réponse à un échelon ne présente aucune oscillation.</div>
+      </div>
   </div>
   </section>
 
@@ -1261,145 +1279,110 @@ cards();start();
     <figcaption>Énoncé (TD3) — simulateur d'inductance à deux ALI (gyrateur)</figcaption>
   </figure>
 
-  <div class="note"><span class="lab">Repérage des nœuds</span> Le point \(E\) (courant \(i_e\)) est commun à
-  trois branches : le fil direct vers l'entrée <b>+</b> de l'ALI n°1, la résistance <b>locale</b> \(R\)
-  vers la sortie \(S\) de l'ALI n°1, et la résistance <b>extérieure</b> \(R\) vers la sortie finale \(S'\).
-  L'entrée <b>−</b> de l'ALI n°1 (nœud \(N_1\)) voit deux résistances \(R_0\) égales : l'une vers la masse,
-  l'autre vers \(S\). L'ALI n°2 est un <b>intégrateur</b> classique : \(S\) attaque son entrée <b>−</b> par
-  \(R\), sa contre-réaction est \(C\), et son entrée <b>+</b> est à la masse.</div>
+  <div class="enonce"><b>Repérage des nœuds.</b> Le point \(E\) (courant \(i_e\)) est relié à l'entrée + de l'ALI n°1, à la résistance locale \(R\) vers la sortie \(S\) de l'ALI n°1, et à la résistance extérieure \(R\) vers la sortie finale \(S'\). L'entrée − de l'ALI n°1 (nœud \(N_1\)) voit deux résistances \(R_0\) : l'une vers la masse, l'autre vers \(S\). L'ALI n°2 : \(S\) attaque son entrée − par \(R\), \(C\) en contre-réaction, entrée + à la masse.</div>
 
   <p class="q">1) Quel composant le bloc autour de l'ALI de gauche permet-il de simuler ?</p>
-  <p>Isolons l'ALI n°1 et son réseau local. Son entrée <b>−</b> (\(N_1\)) est prise entre deux résistances
-  égales \(R_0\) (une vers la masse, une vers \(S\)) : par pont diviseur, \(v_{N_1}=S/2\). En régime
-  linéaire \(v_{N_1}=v_{+1}=E\), donc :</p>
-  \[ \frac{S}{2}=E \quad\Longrightarrow\quad \boxed{\ S=2E\ } \]
-  <p>indépendamment de tout ce qui est branché sur \(E\) par ailleurs : ALI n°1 se comporte comme un
-  <b>amplificateur non inverseur de gain fixe 2</b> (cas particulier \(R_0=R_0\) du montage non inverseur
-  déjà rencontré, ex. Ex 4 étage 1 avec \(\alpha=1\)). Reste alors la résistance <b>locale</b> \(R\), qui
-  relie \(E\) à ce même point \(S=2E\) : le courant qu'elle impose est</p>
-  \[ i_{(E\to S)}=\frac{E-S}{R}=\frac{E-2E}{R}=-\frac{E}{R}, \]
-  <div class="res">soit un rapport \(v/i=E/(-E/R)=-R\) : <b>exactement la structure de l'exercice 3</b>
-  (résistance négative), ici avec \(R_2=R_3=R_0\) dans la formule \(R_{eq}=R_1R_3/R_2\) de l'Ex 3, ce qui
-  donne \(R_{eq}=R\). <b>Le bloc de gauche simule une résistance négative \(-R\).</b></div>
+  <p class="etape">Étape 1 : le diviseur \(R_0\) / \(R_0\)</p>
+  <div class="rappel"><span class="lab">Rappel · pont diviseur de tension</span>\[ v_{N_1} = S\,\frac{R_0}{R_0 + R_0} = \frac{S}{2} \]</div>
+  <p class="etape">Étape 2 : régime linéaire</p>
+  <p>\(v_- = v_+\), avec \(v_+ = E\) :</p>
+  \[ \frac{S}{2} = E \qquad\Longrightarrow\qquad S = 2E \]
+  <p>L'ALI n°1 est un amplificateur non inverseur de gain 2.</p>
+  <p class="etape">Étape 3 : courant dans la résistance locale \(R\)</p>
+  \[ i_{E\to S} = \frac{E - S}{R} = \frac{E - 2E}{R} = -\frac{E}{R} \]
+  <p>Le rapport tension/courant vaut \(\dfrac{E}{-E/R} = -R\).</p>
+  <div class="res">Le bloc de gauche simule une <b>résistance négative</b> \(-R\) : c'est le montage de l'exercice 3, avec \(R_2 = R_3 = R_0\) et \(R_1 = R\), d'où \(R_{eq} = R\).</div>
 
   <p class="q">2) Reschématiser le montage entier ; montrer que \(Z_{in}\) est une inductance, exprimer \(L\)</p>
-  <figure><svg viewBox="0 0 900 420" width="900" xmlns="http://www.w3.org/2000/svg">
-    <!-- E node and ground -->
-    <circle cx="50" cy="180" r="3.5" fill="#0d9488"/>
-    <text x="20" y="170" fill="#334155" font-family="Georgia,serif" font-size="15" font-style="italic">E</text>
-    <line x1="50" y1="180" x2="50" y2="240" stroke="#0d9488" stroke-width="2"/>
-    <line x1="35" y1="248" x2="65" y2="248" stroke="#334155" stroke-width="2"/>
-    <line x1="40" y1="255" x2="60" y2="255" stroke="#334155" stroke-width="1.6"/>
-    <line x1="45" y1="262" x2="55" y2="262" stroke="#334155" stroke-width="1.2"/>
-    <text x="8" y="235" fill="#94a3b8" font-family="monospace" font-size="11">Vₑ</text>
-    <!-- vertical bus up from E -->
-    <line x1="50" y1="180" x2="50" y2="60" stroke="#0d9488" stroke-width="2"/>
-    <circle cx="50" cy="110" r="3" fill="#0d9488"/>
-    <!-- outer R : E(50,60) -> S'(800,60) -> down to 800,180 -->
-    <line x1="50" y1="60" x2="330" y2="60" stroke="#d97706" stroke-width="2"/>
-    <rect x="330" y="48" width="60" height="24" fill="none" stroke="#d97706" stroke-width="2"/>
-    <text x="345" y="44" fill="#d97706" font-family="monospace" font-size="13">R (ext.)</text>
-    <line x1="390" y1="60" x2="800" y2="60" stroke="#d97706" stroke-width="2"/>
-    <line x1="800" y1="60" x2="800" y2="180" stroke="#d97706" stroke-width="2"/>
-    <!-- local R : E(50,110) -> S(260,180) -->
-    <line x1="50" y1="110" x2="140" y2="110" stroke="#0d9488" stroke-width="2"/>
-    <rect x="140" y="98" width="55" height="24" fill="none" stroke="#0d9488" stroke-width="2"/>
-    <text x="150" y="94" fill="#0d9488" font-family="monospace" font-size="13">R (loc.)</text>
-    <line x1="195" y1="110" x2="260" y2="110" stroke="#0d9488" stroke-width="2"/>
-    <line x1="260" y1="110" x2="260" y2="180" stroke="#0d9488" stroke-width="2"/>
-    <!-- direct wire E to + input -->
-    <line x1="50" y1="180" x2="170" y2="165" stroke="#0d9488" stroke-width="2"/>
-    <!-- Op-amp 1 box -->
-    <rect x="170" y="140" width="90" height="80" fill="none" stroke="#334155" stroke-width="2"/>
-    <text x="180" y="168" fill="#334155" font-family="monospace" font-size="15">+</text>
-    <text x="180" y="205" fill="#334155" font-family="monospace" font-size="15">−</text>
-    <text x="205" y="185" fill="#94a3b8" font-family="monospace" font-size="10">ALI1</text>
-    <text x="266" y="175" fill="#475569" font-family="monospace" font-size="12">S</text>
-    <!-- minus input to N1 -->
-    <line x1="170" y1="198" x2="110" y2="198" stroke="#0d9488" stroke-width="2"/>
-    <line x1="110" y1="198" x2="110" y2="300" stroke="#0d9488" stroke-width="2"/>
-    <circle cx="110" cy="300" r="3" fill="#0d9488"/>
-    <text x="80" y="292" fill="#475569" font-family="monospace" font-size="12">N₁</text>
-    <!-- R0 vertical to ground -->
-    <rect x="98" y="310" width="24" height="55" fill="none" stroke="#334155" stroke-width="2"/>
-    <text x="128" y="342" fill="#334155" font-family="monospace" font-size="13">R₀</text>
-    <line x1="110" y1="365" x2="110" y2="390" stroke="#334155" stroke-width="2"/>
-    <line x1="95" y1="390" x2="125" y2="390" stroke="#334155" stroke-width="2"/>
-    <line x1="100" y1="397" x2="120" y2="397" stroke="#334155" stroke-width="1.6"/>
-    <line x1="105" y1="404" x2="115" y2="404" stroke="#334155" stroke-width="1.2"/>
-    <!-- R0 horizontal N1 to S -->
-    <line x1="110" y1="300" x2="260" y2="300" stroke="#0d9488" stroke-width="2"/>
-    <rect x="165" y="288" width="55" height="24" fill="none" stroke="#0d9488" stroke-width="2"/>
-    <text x="175" y="332" fill="#0d9488" font-family="monospace" font-size="13">R₀</text>
-    <line x1="260" y1="300" x2="260" y2="220" stroke="#0d9488" stroke-width="2"/>
-    <!-- S to R mid to N2 -->
-    <line x1="260" y1="180" x2="300" y2="180" stroke="#0d9488" stroke-width="2"/>
-    <rect x="300" y="168" width="55" height="24" fill="none" stroke="#0d9488" stroke-width="2"/>
-    <text x="312" y="164" fill="#0d9488" font-family="monospace" font-size="13">R (mid)</text>
-    <line x1="355" y1="180" x2="420" y2="180" stroke="#0d9488" stroke-width="2"/>
-    <line x1="420" y1="180" x2="420" y2="165" stroke="#0d9488" stroke-width="2"/>
-    <!-- Op-amp 2 box -->
-    <rect x="420" y="140" width="90" height="80" fill="none" stroke="#334155" stroke-width="2"/>
-    <text x="430" y="168" fill="#334155" font-family="monospace" font-size="15">−</text>
-    <text x="430" y="205" fill="#334155" font-family="monospace" font-size="15">+</text>
-    <text x="455" y="185" fill="#94a3b8" font-family="monospace" font-size="10">ALI2</text>
-    <text x="80" y="175" fill="#475569" font-family="monospace" font-size="12"></text>
-    <text x="420" y="135" fill="#475569" font-family="monospace" font-size="12">N₂</text>
-    <!-- + input to ground -->
-    <line x1="420" y1="198" x2="420" y2="260" stroke="#0d9488" stroke-width="2"/>
-    <line x1="405" y1="260" x2="435" y2="260" stroke="#334155" stroke-width="2"/>
-    <line x1="410" y1="267" x2="430" y2="267" stroke="#334155" stroke-width="1.6"/>
-    <line x1="415" y1="274" x2="425" y2="274" stroke="#334155" stroke-width="1.2"/>
-    <!-- feedback C -->
-    <line x1="420" y1="165" x2="420" y2="95" stroke="#0d9488" stroke-width="2"/>
-    <line x1="420" y1="95" x2="700" y2="95" stroke="#0d9488" stroke-width="2"/>
-    <line x1="700" y1="95" x2="700" y2="180" stroke="#0d9488" stroke-width="2"/>
-    <line x1="640" y1="85" x2="640" y2="105" stroke="#334155" stroke-width="2.4"/>
-    <line x1="650" y1="85" x2="650" y2="105" stroke="#334155" stroke-width="2.4"/>
-    <text x="630" y="78" fill="#334155" font-family="monospace" font-size="13">C</text>
-    <!-- output S' -->
-    <line x1="510" y1="180" x2="800" y2="180" stroke="#0d9488" stroke-width="2"/>
-    <circle cx="800" cy="180" r="3.5" fill="#0d9488"/>
-    <text x="810" y="184" fill="#475569" font-family="monospace" font-size="13">S'</text>
-  </svg>
-  <figcaption>Reschématisation claire du gyrateur : \(E\) commun à \(R_{loc}\), \(R_{ext}\) et l'entrée +
+  <figure><svg viewBox="0 0 760 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Simulateur d'inductance reschématisé">
+<defs><marker id="fl-139797519904080" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs>
+<polygon points="220,195 220,305 330,250" fill="#eef2ff" stroke="#334155" stroke-width="2.5"/>
+<text x="230.0" y="283.0" font-size="24" fill="#334155" text-anchor="start" font-weight="700" font-family="Segoe UI, sans-serif">−</text>
+<text x="230.0" y="233.0" font-size="24" fill="#334155" text-anchor="start" font-weight="700" font-family="Segoe UI, sans-serif">+</text>
+<text x="265.0" y="257.0" font-size="19" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">ALI 1</text>
+<polygon points="500,220 500,330 610,275" fill="#eef2ff" stroke="#334155" stroke-width="2.5"/>
+<text x="510.0" y="258.0" font-size="24" fill="#334155" text-anchor="start" font-weight="700" font-family="Segoe UI, sans-serif">−</text>
+<text x="510.0" y="308.0" font-size="24" fill="#334155" text-anchor="start" font-weight="700" font-family="Segoe UI, sans-serif">+</text>
+<text x="545.0" y="282.0" font-size="19" fill="#334155" text-anchor="middle" font-family="Segoe UI, sans-serif">ALI 2</text>
+<circle cx="60" cy="225" r="6" fill="#fff" stroke="#334155" stroke-width="2.5"/>
+<text x="45.0" y="232.0" font-size="22" fill="#334155" text-anchor="end" font-style="italic" font-family="Segoe UI, sans-serif">E</text>
+<polyline points="66.0,225.0 220.0,225.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="100.0" cy="225.0" r="4.5" fill="#334155" stroke="#334155" stroke-width="2"/>
+<polyline points="100.0,225.0 100.0,70.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="100.0" cy="150.0" r="4.5" fill="#334155" stroke="#334155" stroke-width="2"/>
+<polyline points="100.0,150.0 195.0,150.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="265.0,150.0 360.0,150.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="195.0" y="138.0" width="70.0" height="24.0" rx="3" fill="#f8fafc" stroke="#0d9488" stroke-width="2.5"/>
+<text x="230.0" y="128.0" font-size="20" fill="#0d9488" text-anchor="middle" font-family="Segoe UI, sans-serif">R (locale)</text>
+<polyline points="360.0,150.0 360.0,250.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="100.0,70.0 360.0,70.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="430.0,70.0 690.0,70.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="360.0" y="58.0" width="70.0" height="24.0" rx="3" fill="#f8fafc" stroke="#d97706" stroke-width="2.5"/>
+<text x="395.0" y="48.0" font-size="20" fill="#d97706" text-anchor="middle" font-family="Segoe UI, sans-serif">R (extérieure)</text>
+<polyline points="690.0,70.0 690.0,275.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="330.0,250.0 360.0,250.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="360.0" cy="250.0" r="4.5" fill="#334155" stroke="#334155" stroke-width="2"/>
+<text x="370.0" y="238.0" font-size="22" fill="#334155" text-anchor="start" font-style="italic" font-family="Segoe UI, sans-serif">S</text>
+<polyline points="220.0,275.0 190.0,275.0 190.0,360.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="190.0" cy="360.0" r="4.5" fill="#334155" stroke="#334155" stroke-width="2"/>
+<text x="160.0" y="360.0" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">N₁</text>
+<polyline points="190.0,360.0 190.0,380.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="190.0,430.0 190.0,450.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="178.0" y="380.0" width="24.0" height="50.0" rx="3" fill="#f8fafc" stroke="#7c3aed" stroke-width="2.5"/>
+<text x="212.0" y="412.0" font-size="20" fill="#7c3aed" text-anchor="start" font-family="Segoe UI, sans-serif">R₀</text>
+<line x1="190.0" y1="450.0" x2="190.0" y2="464.0" stroke="#334155" stroke-width="2.5"/>
+<line x1="168.0" y1="464.0" x2="212.0" y2="464.0" stroke="#334155" stroke-width="2.5"/>
+<line x1="176.0" y1="470.0" x2="204.0" y2="470.0" stroke="#334155" stroke-width="2.5"/>
+<line x1="184.0" y1="476.0" x2="196.0" y2="476.0" stroke="#334155" stroke-width="2.5"/>
+<polyline points="190.0,360.0 240.0,360.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="310.0,360.0 360.0,360.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="240.0" y="348.0" width="70.0" height="24.0" rx="3" fill="#f8fafc" stroke="#7c3aed" stroke-width="2.5"/>
+<text x="275.0" y="396.0" font-size="20" fill="#7c3aed" text-anchor="middle" font-family="Segoe UI, sans-serif">R₀</text>
+<polyline points="360.0,360.0 360.0,250.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="360.0,250.0 380.0,250.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="450.0,250.0 470.0,250.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="380.0" y="238.0" width="70.0" height="24.0" rx="3" fill="#f8fafc" stroke="#0d9488" stroke-width="2.5"/>
+<text x="415.0" y="228.0" font-size="20" fill="#0d9488" text-anchor="middle" font-family="Segoe UI, sans-serif">R</text>
+<polyline points="470.0,250.0 500.0,250.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="470.0" cy="250.0" r="4.5" fill="#334155" stroke="#334155" stroke-width="2"/>
+<text x="462.0" y="290.0" font-size="20" fill="#334155" text-anchor="end" font-family="Segoe UI, sans-serif">N₂</text>
+<polyline points="470.0,250.0 470.0,175.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="470.0,175.0 553.0,175.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="567.0,175.0 650.0,175.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<line x1="553.0" y1="157.0" x2="553.0" y2="193.0" stroke="#2563eb" stroke-width="4"/>
+<line x1="567.0" y1="157.0" x2="567.0" y2="193.0" stroke="#2563eb" stroke-width="4"/>
+<text x="560.0" y="149.0" font-size="20" fill="#2563eb" text-anchor="middle" font-family="Segoe UI, sans-serif">C</text>
+<polyline points="650.0,175.0 650.0,275.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="500.0,300.0 480.0,300.0 480.0,330.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<line x1="480.0" y1="330.0" x2="480.0" y2="344.0" stroke="#334155" stroke-width="2.5"/>
+<line x1="458.0" y1="344.0" x2="502.0" y2="344.0" stroke="#334155" stroke-width="2.5"/>
+<line x1="466.0" y1="350.0" x2="494.0" y2="350.0" stroke="#334155" stroke-width="2.5"/>
+<line x1="474.0" y1="356.0" x2="486.0" y2="356.0" stroke="#334155" stroke-width="2.5"/>
+<polyline points="610.0,275.0 690.0,275.0" fill="none" stroke="#334155" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="650.0" cy="275.0" r="4.5" fill="#334155" stroke="#334155" stroke-width="2"/>
+<circle cx="690.0" cy="275.0" r="4.5" fill="#334155" stroke="#334155" stroke-width="2"/>
+<text x="705.0" y="282.0" font-size="22" fill="#334155" text-anchor="start" font-style="italic" font-family="Segoe UI, sans-serif">S′</text>
+<text x="60.0" y="290.0" font-size="19" fill="#334155" text-anchor="start" font-family="Segoe UI, sans-serif">iₑ entre en E</text>
+</svg>
+  <figcaption>Reschématisation du gyrateur : \(E\) commun à \(R_{loc}\), \(R_{ext}\) et l'entrée +
   de l'ALI1 ; \(N_1\) = diviseur \(R_0\)/\(R_0\) ; ALI2 = intégrateur \(R\)-\(C\).</figcaption>
   </figure>
-
-  <p><b>Étape 1 — Étage intégrateur (ALI2).</b> \(v_{+2}=0\) (masse), donc \(v_{N_2}=0\) en régime linéaire
-  (contre-réaction pure sur <b>−</b> via \(C\) : régime linéaire garanti, comme à l'exercice 1). LNTP en
-  \(N_2\) :</p>
-  \[ \frac{S-0}{R}+\frac{S'-0}{1/(jC\omega)}=0
-     \ \Longrightarrow\ \frac{S}{R}+jC\omega\,S'=0
-     \ \Longrightarrow\ \boxed{\ S'=-\frac{S}{jRC\omega}\ } \]
-
-  <p><b>Étape 2 — Report du gain de l'étage 1.</b> D'après la question 1, \(S=2E\), donc :</p>
-  \[ S'=-\frac{2E}{jRC\omega}. \]
-
-  <p><b>Étape 3 — Courant d'entrée \(i_e\).</b> Au nœud \(E\), aucun courant n'entre dans l'entrée <b>+</b>
-  de l'ALI1 : tout le courant fourni par la source se répartit entre la branche locale (vers \(S\)) et la
-  branche extérieure (vers \(S'\)) :</p>
-  \[ i_e=\frac{E-S}{R}+\frac{E-S'}{R}. \]
-  <p>Avec \(S=2E\) :</p>
-  \[ \frac{E-S}{R}=\frac{E-2E}{R}=-\frac{E}{R}
-  \quad\Longrightarrow\quad
-  i_e=-\frac{E}{R}+\frac{E-S'}{R}=\frac{-E+E-S'}{R}=-\frac{S'}{R}. \]
-  <p>On y injecte \(S'=-2E/(jRC\omega)\) :</p>
-  \[ i_e=-\frac{1}{R}\left(-\frac{2E}{jRC\omega}\right)=\frac{2E}{jR^2C\omega}. \]
-
-  <div class="res">\[ \boxed{\ Z_{in}=\frac{E}{i_e}=\frac{jR^2C\omega}{2}=j\omega\cdot\frac{R^2C}{2}\ } \]
-  \(Z_{in}\) est <b>purement imaginaire et proportionnelle à \(\omega\)</b> : c'est exactement l'impédance
-  d'une <b>bobine idéale</b> \(Z_L=jL\omega\), avec :
-  \[ \boxed{\ L=\frac{R^2C}{2}\ } \]</div>
-
-  <div class="method"><span class="lab">Relecture physique</span> Le bloc de gauche (négatif, \(-R\)) et
-  l'intégrateur de droite (en \(1/(jRC\omega)\)) se combinent en boucle via l'unique résistance
-  <b>extérieure</b> \(R\) : c'est ce bouclage résistance-négative + intégrateur qui transforme un réseau
-  <b>purement résistif et capacitif</b> (aucune bobine physique !) en une impédance d'entrée
-  <b>proportionnelle à \(\omega\)</b>, la signature électrique d'une inductance. Le résultat est
-  <b>exact</b> (pas seulement une approximation BF ou HF), ce qui est la caractéristique remarquable du
-  gyrateur (convertisseur généralisé d'impédance).</div>
-    </div>
+  <p class="etape">Étape 1 : l'intégrateur (ALI n°2)</p>
+  <p>Entrée (+) à la masse, contre-réaction par \(C\) : régime linéaire, \(v_{N_2} = 0\). LNTP en \(N_2\) :</p>
+  \[ \frac{S - 0}{R} + \frac{S' - 0}{1/(jC\omega)} = 0 \qquad\Longrightarrow\qquad S' = -\frac{S}{jRC\omega} \]
+  <p class="etape">Étape 2 : on remplace \(S = 2E\)</p>
+  \[ S' = -\frac{2E}{jRC\omega} \]
+  <p class="etape">Étape 3 : courant d'entrée</p>
+  <p>Aucun courant n'entre dans l'entrée (+) de l'ALI n°1. Le courant \(i_e\) se partage entre la résistance locale et la résistance extérieure :</p>
+  \[ i_e = \frac{E - S}{R} + \frac{E - S'}{R} = -\frac{E}{R} + \frac{E - S'}{R} = -\frac{S'}{R} \]
+  \[ i_e = \frac{2E}{jR^2C\omega} \]
+  <p class="etape">Étape 4 : impédance d'entrée</p>
+  <div class="rappel"><span class="lab">Rappel · impédance d'une bobine</span>\[ \underline Z_L = jL\omega \]</div>
+  \[ \underline Z_{in} = \frac{E}{i_e} = \frac{jR^2C\omega}{2} = j\omega\,\frac{R^2C}{2} \]
+  <div class="res">\(\underline Z_{in}\) est imaginaire pure et proportionnelle à \(\omega\) : c'est une <b>inductance</b>
+  \[ L = \frac{R^2C}{2} \]
+  Le montage ne contient aucune bobine : la résistance négative et l'intégrateur combinés simulent exactement une inductance (gyrateur).</div>
+      </div>
   </div>
   </section>
 
