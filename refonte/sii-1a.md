@@ -23,7 +23,7 @@ Conventions retenues :
 | c07-performances | fait | 2 créés + 3 cartes du TD. **Erreur corrigée** : RAMSES n'est pas insensible au débit sortant. Q2, Q5, Q6 de RAMSES ajoutées. |
 | c08-statique | fait | 2 créés + 3 ex. du TD. **2 erreurs corrigées** (signe du couple Ex A, moment de liaison du lève-malade). Torseurs de liaison complets ajoutés (SPRAT, lève-malade, console). |
 | c09-statique-transmetteurs | fait | 2 créés + 2 ex. du TD ; tous les résultats justes. Aucun corrigé Bigeard applicable. |
-| c10-liaisons | à faire | |
+| c10-liaisons | fait | 2 créés + 4 cartes du TD. Bigeard utilisé (guidage en rotation, pompe hydraulique). **2 erreurs corrigées** (biellette = sphère-plan, pas sphère-cylindre). |
 | c11-transmetteurs-non-lineaires | à faire | |
 | c12-bode | à faire | |
 | c13-actions-internes | à faire | |
@@ -55,6 +55,9 @@ Conventions retenues :
 | c07 | Ex A, B (créés), réduction de schéma-bloc, 2.4 MCC, 2.1 RAMSES | aucun dossier correspondant | correction actuelle, revérifiée (RAMSES refait) |
 | c08 | Ex A, B (créés), 1.1 SPRAT, 1.2 Lève-malade, 1.3 Console de bateau | aucun dossier correspondant | correction actuelle, revérifiée avec l'énoncé ECAM |
 | c09 | Ex A, B (créés), 1.1 EPAS, 1.2 Grue de chantier | aucun dossier correspondant (`transmission-de-puissance_joint-de-oldham-du-maxpid` traite l'Oldham, pas le vis-écrou ; `camion-grue`, `moteur-de-levage-dune-grue` = autres sujets) | correction actuelle, revérifiée |
+| c10 | Ex A, B (créés), 1.4 Liaisons équivalentes, 2.4 Biellette | aucun corrigé Bigeard de ces questions (`mecanisme-dinclinaison-des-pales-dun-helicoptere` ne traite pas la biellette ; `liaisons-equivalentes_liaisons-equivalentes*` = autres cas) | correction refaite (erreur corrigée) |
+| c10 | Ex 2.2 Guidage en rotation | `liaisons-equivalentes_guidage-en-rotation/LEQ-MPSI-TD-guidage_en_rotation-prof.pdf` | utilisé : même exercice (même texte) ; méthode « 4 arrêts → sphérique, 2 arrêts → sphère-cylindre » et égalisation des torseurs par Varignon ; lettres A/B inversées chez Bigeard (dessin différent) → `.warnbox` |
+| c10 | Ex 2.3 Pompe hydraulique (Hydro-Leduc) | `liaisons-equivalentes_pompe-hydraulique/LEQ-MPSI-TD-pompe_hydraulique-prof.pdf` | utilisé : appui-plan + sphérique en série → sphère-plan de normale y (Q4 Bigeard) ; rôle des plots/patins (Q6 Bigeard) |
 
 - **c01 revu avec la règle Bigeard** : aucun corrigé Bigeard ne traite ces questions (voir tableau) ; page inchangée.
 - **c02** : TD 1 (3 ex.) + TD 2 (3 ex.) + 2 créés. Recalculs : \(D_1\%=3/19=15{,}8\%\), \(e_r\%=10/40=25\%\), \(D_1\%=9/50=18\%\), \(\eta=0{,}83\) : justes. Ajout de pièges (division par \(\Delta s\) et non par \(s(\infty)\), unités incompatibles du four). Aucun corrigé Bigeard applicable.
@@ -65,3 +68,4 @@ Conventions retenues :
 - **c07** : recalculs Python MCC (29,6 / 9,4 / −20,2 rad/s) et forme canonique du schéma-bloc (16 qui se simplifie) : justes. **RAMSES (Ex 2.1)** : l'ancienne version affirmait Δh(∞) = 0 pour un échelon de débit sortant ; faux, car le dérivateur du correcteur annule l'intégration de la vanne et il n'y a plus d'intégrateur en amont de q_s. Refait : F1 = aG/(aG + Sp + Sτp²) (précis en poursuite), F2 = −(1+τp)/(aG + Sp + Sτp²), erreur de régulation q0/(aG) → `.warnbox` « Correction d'une erreur de l'ancienne version ». Hypothèses explicitées : limnimètre de même gain a que le potentiomètre, chaîne régulateur-moteur-réducteur-vanne de C06 Ex 1.3.
 - **c08** : Ex A : l'ancienne version donnait C = −a·mg·cos α (signe du moment du poids faux, x1∧y0 = cos α z mais la force est −mg y0) → C = +a·mg·cos α, `.warnbox` « Correction d'une erreur ». Lève-malade Q5 : l'ancienne version oubliait le moment du vérin (OA = −b x0 + c y0) → N01 = (a+b)mg + bk(y−y0), `.warnbox`. SPRAT : torseur complet X01 = −F sin α, Y01 = mg + F cos α ; AN F = 1,16 MN, R = 1,42 MN (Python) : justes. Console : C01 = 90 kN·m juste ; L01 = −60 kN·m, M01 = −235 kN·m, Y01 = 15 kN, Z01 = 39,2 kN ajoutés (Q4 demande aussi la liaison).
 - **c09** : recalculs Python : 0,113 N·m, 177 N, 0,0707 N·m, 4,42 N·m, 3,31 N·m, 104,2 N·m, 2452 N·m, 3562 N·m : justes. Énoncé ajouté à l'Ex A (les données étaient dans les questions).
+- **c10** : 1.4 (sphérique + sphérique en série) et 2.4 (biellette) : l'ancienne version donnait « sphère-cylindre de direction AB » ; le calcul par Varignon donne v selon AB nulle et les deux autres libres → **sphère-plan de normale (AB)**, `.warnbox` « Correction d'une erreur ». Pompe Q3 : l'ancienne réponse (« appui-plan en série avec les liaisons du piston ») ne donnait pas l'équivalent ; remplacée par la sphère-plan de Bigeard. Guidage : modèle A sphérique / B sphère-cylindre vérifié sur la figure de l'énoncé ECAM (arrêts axiaux de chaque bague).

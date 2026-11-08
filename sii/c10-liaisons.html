@@ -118,7 +118,6 @@ window.MathJax = {
     </div>
   </section>
 
-  <!-- ======================= EXOS CRÉÉS =============================== -->
   <section class="block" id="exos">
     <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
 
@@ -126,8 +125,15 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice A — Identifier une liaison par son torseur</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <div class="enonce">\(\{\mathcal V_{2/1}\}=\{\omega_x\vec x;\ v_x\vec x\}_A\). Quelle liaison ?</div>
-        <p>2 paramètres non nuls : rotation \(R_x\) + translation \(T_x\) (même axe) → 2 DDL, 4 blocages.</p>
-        <p class="res"><b>Pivot glissant</b> d'axe \((A,\vec x)\)</p>
+
+        <p class="q">1) Nom de la liaison</p>
+        <p class="etape">Étape 1 : compter les mobilités</p>
+        <div class="rappel"><span class="lab">Rappel · torseur cinématique</span>\[ \{\mathcal V_{2/1}\} = \begin{Bmatrix} \omega_x & v_x \\ \omega_y & v_y \\ \omega_z & v_z \end{Bmatrix}_A \]
+          Chaque composante non nulle est un degré de liberté (DDL) ; chaque composante nulle est un blocage.</div>
+        <p>Deux composantes non nulles : une rotation \(R_x\) et une translation \(T_x\), sur le même axe. Donc 2 DDL et 4 blocages.</p>
+        <p class="etape">Étape 2 : reconnaître la liaison</p>
+        <p>Rotation et translation autour du même axe : c'est le cas d'un arbre qui tourne et coulisse dans un alésage.</p>
+        <div class="res"><b>Pivot glissant</b> d'axe \((A,\vec x)\).</div>
       </div>
     </div>
 
@@ -135,8 +141,15 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice B — Liaison équivalente (2 pivots coaxiaux en parallèle)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Deux pivots de même axe \((O,\vec x)\) montés en parallèle entre (1) et (0).</div>
-        <p>Parallèle → addition des blocages. Chaque pivot bloque tout sauf \(R_x\) ; l'union bloque encore tout sauf \(R_x\).</p>
-        <p class="res">Équivalent : <b>pivot</b> d'axe \((O,\vec x)\) (les deux pivots coaxiaux se comportent comme un seul)</p>
+
+        <p class="q">1) Liaison équivalente</p>
+        <div class="rappel"><span class="lab">Rappel · liaisons en parallèle</span>Les liaisons relient les deux mêmes pièces : les torseurs cinématiques sont égaux, les <b>blocages s'additionnent</b>.</div>
+        <ul>
+          <li>Chaque pivot bloque tout sauf \(R_x\).</li>
+          <li>L'ensemble des blocages des deux pivots laisse encore libre \(R_x\), et seulement \(R_x\).</li>
+        </ul>
+        <div class="res">Équivalent : <b>pivot</b> d'axe \((O,\vec x)\) ; les deux pivots coaxiaux se comportent comme un seul.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Cinématiquement, c'est un pivot ; mais les blocages en double (2 × 5 = 10 pour 5 utiles) rendent le montage hyperstatique : il faut un alignement parfait des deux paliers.</div>
       </div>
     </div>
   </section>
@@ -145,17 +158,38 @@ window.MathJax = {
   <section class="block" id="td">
     <h2>3. Correction du TD</h2>
     <p class="lead" style="font-size:.95rem">Source : <i>S2I-C10-TD</i> (représenter/interpréter un schéma cinématique ; liaisons équivalentes).
-    <b>Pas de corrigé officiel</b> → résolu maison. Beaucoup de questions sont graphiques (schémas) ; on restitue les résultats de modélisation.</p>
+    <b>Pas de corrigé officiel</b> → résolu maison, et repris du corrigé Bigeard quand l'exercice y figure (guidage en rotation, pompe hydraulique). Beaucoup de questions sont graphiques (schémas) ; on restitue les résultats de modélisation.</p>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 1.4 — Liaisons équivalentes en série</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">Sphérique (\(A\)) + glissière (\(\vec y\)) en série</p>
-        <p>Composition : \(\{\vec\Omega;\ \vec 0\}_A+\{\vec 0;\ v\vec y\}_A=\{\vec\Omega;\ v\vec y\}_A\) → 4 DDL (3 rot. + \(T_y\)).</p>
-        <p class="res"><b>Sphère-cylindre</b> de centre \(A\), direction \(\vec y\)</p>
-        <p class="q">Sphérique (\(A\)) + sphérique (\(B\)) en série (biellette)</p>
-        <p>Deux rotules reliées par une barre rigide \(AB\) : translation possible le long de \(AB\) + rotations.</p>
-        <p class="res"><b>Sphère-cylindre</b> de direction \(\vec{AB}\) (modèle d'une biellette)</p>
+        <div class="enonce">Donner la liaison équivalente à deux liaisons montées en série (exemples types du tableau du TD).</div>
+
+        <p class="q">1) Sphérique (\(A\)) + glissière (\(\vec y\)) en série</p>
+        <div class="rappel"><span class="lab">Rappel · liaisons en série</span>\[ \{\mathcal V_{2/0}\} = \{\mathcal V_{2/1}\} + \{\mathcal V_{1/0}\} \]
+          Les torseurs s'additionnent (exprimés au même point) : les <b>DDL s'additionnent</b>.</div>
+        <p class="etape">Étape 1 : les deux torseurs en \(A\)</p>
+        <p>Sphérique : \(\{\vec\Omega;\ \vec 0\}_A\). Glissière : \(\{\vec 0;\ v\,\vec y\}\), identique en tout point.</p>
+        <p class="etape">Étape 2 : somme</p>
+        \[ \{\vec\Omega;\ \vec 0\}_A + \{\vec 0;\ v\,\vec y\}_A = \{\vec\Omega;\ v\,\vec y\}_A \]
+        <p>4 DDL : 3 rotations et la translation \(T_y\).</p>
+        <div class="res"><b>Sphère-cylindre</b> (linéaire annulaire) de centre \(A\), d'axe \((A,\vec y)\).</div>
+
+        <p class="q">2) Sphérique (\(A\)) + sphérique (\(B\)) en série (biellette)</p>
+        <p class="etape">Étape 1 : les deux torseurs</p>
+        <p>On pose \(\vec{AB} = L\,\vec x\). Rotule en \(A\) : \(\{\vec\Omega_1;\ \vec 0\}_A\). Rotule en \(B\) : \(\{\vec\Omega_2;\ \vec 0\}_B\).</p>
+        <p class="etape">Étape 2 : transporter le second torseur en \(A\)</p>
+        <div class="rappel"><span class="lab">Rappel · relation de Varignon</span>\[ \vec V_A = \vec V_B + \vec\Omega\wedge\vec{BA} \]</div>
+        \[ \vec V_A = \vec 0 + \vec\Omega_2\wedge(-L\,\vec x) = L\,\omega_{2y}\,\vec z - L\,\omega_{2z}\,\vec y \]
+        <p class="etape">Étape 3 : somme</p>
+        \[ \{\mathcal V_{eq}\} = \{\vec\Omega_1 + \vec\Omega_2;\ L\,\omega_{2y}\,\vec z - L\,\omega_{2z}\,\vec y\}_A \]
+        <ul>
+          <li>3 rotations libres.</li>
+          <li>2 translations libres, selon \(\vec y\) et \(\vec z\), perpendiculaires à \(AB\).</li>
+          <li>Aucune translation selon \(\vec x\) : la barre garde sa longueur.</li>
+        </ul>
+        <div class="res"><b>Sphère-plan</b> (ponctuelle) de centre \(A\), de normale \((AB)\) : 5 DDL. C'est le modèle d'une biellette (plus une mobilité interne : rotation de la biellette sur son axe).</div>
+        <div class="warnbox"><span class="lab">Correction d'une erreur de l'ancienne version</span> L'ancienne correction donnait une sphère-cylindre de direction \(\vec{AB}\), en affirmant qu'une translation le long de \(AB\) était possible. C'est l'inverse : la longueur \(AB\) est fixe, la translation selon \(AB\) est la seule bloquée. On obtient une sphère-plan de normale \((AB)\), qui ne transmet qu'un effort selon l'axe de la biellette.</div>
       </div>
     </div>
 
@@ -163,12 +197,35 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 2.2 — Guidage en rotation par 2 roulements à billes</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">Axe (1) guidé / bâti (0) par 2 roulements ; l'angle de rotulage n'est pas négligeable.</div>
+
         <p class="q">Q1–Q2 — Modèle de chaque roulement</p>
-        <p>Roulement <b>A</b> (arrête aussi la translation axiale) : rotulage → 3 rotations mais pas de translation → <b>sphérique</b> (rotule) de centre \(A\) : \(\{\mathcal V\}=\{\vec\Omega_{1/0};\ \vec 0\}_A\).</p>
-        <p>Roulement <b>B</b> (libre axialement) : rotulage + glissement axial → <b>sphère-cylindre</b> de centre \(B\), direction \(\vec x\) : \(\{\mathcal V\}=\{\vec\Omega_{1/0};\ v_x\vec x\}_B\).</p>
-        <p class="q">Q3–Q5 — Liaison équivalente (parallèle)</p>
-        <p>Les deux roulements relient (1) à (0) → <b>parallèle</b> → addition des blocages. Sphérique bloque \(T_x,T_y,T_z\) ; sphère-cylindre bloque \(T_y,T_z\). De plus, les 2 centres \(A,B\) alignés sur \(\vec x\) bloquent \(R_y,R_z\). Il ne reste que \(R_x\).</p>
-        <p class="res">Équivalent : <b>pivot</b> d'axe \((AB)=(O,\vec x)\), torseur \(\{\omega_x\vec x;\ \vec 0\}_O\) (montage classique : une rotule fixe axialement + un palier libre pour éviter l'hyperstatisme)</p>
+        <p class="etape">Étape 1 : la méthode du corrigé Bigeard</p>
+        <div class="rappel"><span class="lab">Rappel · modèle d'un roulement à billes à rotulage non négligeable</span>
+          <ul>
+            <li>Les deux bagues sont arrêtées axialement (4 arrêts : 2 sur la bague intérieure, 2 sur la bague extérieure) : <b>sphérique</b>.</li>
+            <li>Une seule bague est arrêtée (2 arrêts) : l'autre peut glisser, <b>sphère-cylindre</b>.</li>
+          </ul></div>
+        <p class="etape">Étape 2 : roulement \(A\)</p>
+        <p>Bague intérieure tenue par l'épaulement de l'arbre et l'anneau élastique ; bague extérieure tenue par l'épaulement du bâti et la pièce d'arrêt vissée : 4 arrêts.</p>
+        \[ \{\mathcal V_{1/0}^{roul\,A}\} = \{\vec\Omega_{1/0};\ \vec 0\}_A \]
+        <p class="etape">Étape 3 : roulement \(B\)</p>
+        <p>Seule la bague intérieure est arrêtée (anneau élastique et entretoise) ; la bague extérieure est libre dans son logement : 2 arrêts.</p>
+        \[ \{\mathcal V_{1/0}^{roul\,B}\} = \{\vec\Omega_{1/0};\ v_x\,\vec x\}_B \]
+        <div class="res">Roulement \(A\) : <b>sphérique</b> de centre \(A\). Roulement \(B\) : <b>sphère-cylindre</b> de centre \(B\), d'axe \((B,\vec x)\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> Dans le corrigé Bigeard, les lettres sont inversées (la rotule y est en \(B\), la sphère-cylindre en \(A\)) car le dessin est différent. Ce n'est pas la lettre qui décide, c'est le nombre d'arrêts axiaux de chaque roulement.</div>
+
+        <p class="q">Q3–Q5 — Graphe, liaison équivalente</p>
+        <p class="etape">Étape 1 : graphe des liaisons</p>
+        <p>Les deux roulements relient les mêmes pièces (1) et (0) : liaisons en <b>parallèle</b>.</p>
+        <p class="etape">Étape 2 : écrire les deux torseurs au même point</p>
+        <div class="rappel"><span class="lab">Rappel · liaisons en parallèle</span>\[ \{\mathcal V_{eq}\} = \{\mathcal V_{roul\,A}\} = \{\mathcal V_{roul\,B}\} \quad\text{(exprimés au même point)} \]</div>
+        <p>On transporte le torseur de \(B\) en \(A\), avec \(\vec{BA} = a\,\vec x\) :</p>
+        \[ \vec V_{A} = v_x\,\vec x + \vec\Omega_{1/0}\wedge a\,\vec x = v_x\,\vec x + a\,\omega_z\,\vec y - a\,\omega_y\,\vec z \]
+        <p class="etape">Étape 3 : égaler avec le torseur de la rotule en \(A\)</p>
+        <p>La rotule impose \(\vec V_A = \vec 0\) :</p>
+        \[ v_x = 0 \qquad \omega_z = 0 \qquad \omega_y = 0 \]
+        <p>Il ne reste que \(\omega_x\).</p>
+        <div class="res">Équivalent : <b>pivot</b> d'axe \((AB) = (A,\vec x)\), torseur \(\{\omega_x\,\vec x;\ \vec 0\}_A\). C'est le montage classique : une rotule arrêtée axialement + un palier libre, pour éviter l'hyperstatisme.</div>
       </div>
     </div>
 
@@ -176,11 +233,28 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 2.3 — Pompe à pistons axiaux (patins)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Arbre à plateau incliné → mouvement alternatif des pistons via patins bronze.</div>
+
         <p class="q">Q3 — Liaison équivalente piston / plateau</p>
-        <p>Le piston (via patin) appuie sur le plateau incliné : contact → liaison qui autorise le glissement du patin sur le plateau + rotations. Transformation rotation continue → translation alternative.</p>
-        <p class="res">Modèle : <b>appui-plan</b> (patin/plateau) en série avec les liaisons du piston → mouvement alternatif</p>
+        <p class="etape">Étape 1 : les deux liaisons en série (corrigé Bigeard)</p>
+        <ul>
+          <li>Patin / plateau incliné : contact plan, <b>appui-plan</b> de normale \(\vec y\) (normale au plateau) : \(\{\omega_y\,\vec y;\ v_x\,\vec x + v_z\,\vec z\}\).</li>
+          <li>Piston / patin : rotule, <b>sphérique</b> de centre \(A\) : \(\{\vec\Omega;\ \vec 0\}_A\).</li>
+        </ul>
+        <p class="etape">Étape 2 : somme des torseurs en \(A\)</p>
+        <div class="rappel"><span class="lab">Rappel · liaisons en série</span>\[ \{\mathcal V_{3/1}\} = \{\mathcal V_{3/2}\} + \{\mathcal V_{2/1}\} \]
+          Le torseur d'un appui-plan garde la même forme en tout point.</div>
+        \[ \{\mathcal V_{eq}\} = \{\vec\Omega + \omega_y\,\vec y;\ v_x\,\vec x + v_z\,\vec z\}_A \]
+        <p>3 rotations et 2 translations dans le plan du plateau : 5 DDL.</p>
+        <div class="res">Liaison équivalente piston / plateau : <b>sphère-plan</b> (ponctuelle) de centre \(A\), de normale \(\vec y\) (normale au plateau incliné). C'est elle qui transforme la rotation de l'arbre en translation alternative du piston.</div>
+
         <p class="q">Q5 — Rôle des patins</p>
-        <p class="res">Les patins bronze <b>réduisent le frottement</b> (meilleur rendement, moins d'usure) entre piston et plateau incliné, en transformant un contact ponctuel/linéique glissant en un <b>appui-plan</b> lubrifié.</p>
+        <p>D'après le corrigé Bigeard, interposer les patins :</p>
+        <ul>
+          <li>augmente la <b>surface de contact</b> : la pression de contact baisse (\(F = p\,S\) ; un contact ponctuel donnerait une pression théoriquement infinie) ;</li>
+          <li>fait frotter un matériau à <b>faible coefficient de frottement</b> (bronze) sur l'acier : meilleur rendement ;</li>
+          <li>reporte l'<b>usure</b> sur le patin, pièce simple et peu coûteuse à changer, plutôt que sur le piston.</li>
+        </ul>
+        <div class="res">Les patins remplacent un contact ponctuel glissant par un appui-plan : moins de pression, moins de frottement, et l'usure porte sur une pièce bon marché.</div>
       </div>
     </div>
 
@@ -188,10 +262,19 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 2.4 — Liaison équivalente par une biellette</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Biellette (6) sphérique aux 2 extrémités (\(C\) côté plateau 4, \(B\) côté pale 7), \(\vec{CB}=L\vec x_6\).</div>
+
         <p class="q">Q1–Q3 — Équivalent \(L_{4/7}\)</p>
-        <p>\(L_{4/6}\) sphérique en \(C\) + \(L_{6/7}\) sphérique en \(B\), en série : \(\{\vec\Omega_{4/6};\vec 0\}_C+\{\vec\Omega_{6/7};\vec 0\}_B\).
-        En exprimant en \(C\), la translation le long de \(\vec{CB}\) apparaît.</p>
-        <p class="res">Équivalent : <b>sphère-cylindre</b> de centre \(C\), direction \(\vec x_6\) (la biellette transmet un effort uniquement selon son axe)</p>
+        <p class="etape">Étape 1 : torseurs dans la base \(B_6\)</p>
+        \[ \{\mathcal V_{4/6}\} = \{\vec\Omega_{4/6};\ \vec 0\}_C \qquad \{\mathcal V_{6/7}\} = \{\vec\Omega_{6/7};\ \vec 0\}_B \]
+        <p class="etape">Étape 2 : transporter \(\{\mathcal V_{6/7}\}\) en \(C\)</p>
+        <div class="rappel"><span class="lab">Rappel · relation de Varignon</span>\[ \vec V_C = \vec V_B + \vec\Omega\wedge\vec{BC} \]</div>
+        <p>Avec \(\vec{BC} = -L\,\vec x_6\) :</p>
+        \[ \vec V_{C,6/7} = \vec\Omega_{6/7}\wedge(-L\,\vec x_6) = L\,\omega_{z}\,\vec y_6 - L\,\omega_{y}\,\vec z_6 \]
+        <p class="etape">Étape 3 : somme (liaisons en série)</p>
+        \[ \{\mathcal V_{4/7}\} = \{\mathcal V_{4/6}\} + \{\mathcal V_{6/7}\} = \{\vec\Omega_{4/6} + \vec\Omega_{6/7};\ L\,\omega_{z}\,\vec y_6 - L\,\omega_{y}\,\vec z_6\}_C \]
+        <p>Aucune vitesse selon \(\vec x_6\) : la translation le long de la biellette est bloquée, les deux autres sont libres.</p>
+        <div class="res">Équivalent : <b>sphère-plan</b> (ponctuelle) de centre \(C\), de normale \(\vec x_6\). La biellette ne transmet qu'un effort selon son axe \((CB)\).</div>
+        <div class="warnbox"><span class="lab">Correction d'une erreur de l'ancienne version</span> L'ancienne correction concluait à une sphère-cylindre de direction \(\vec x_6\), ce qui autoriserait justement la translation selon la biellette. Le calcul montre le contraire : seule \(v_x\) est nulle. Le résultat « effort transmis uniquement selon l'axe » correspond bien à une sphère-plan de normale \(\vec x_6\).</div>
       </div>
     </div>
 
@@ -203,6 +286,7 @@ window.MathJax = {
       cinématique (C03) et statique (C08) des mécanismes. Beaucoup d'exercices sont des tracés de schémas cinématiques (EPAS, plateau cyclique, capteur fin de course).
     </div>
   </section>
+
   <section class="block" id="docs">
     <h2>📂 Documents donnés</h2>
     <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
