@@ -22,7 +22,7 @@ Conventions retenues :
 | c06-slci | fait | 2 créés + 5 ex. du TD ; tout revérifié (simulation de l'indicielle PTZ). Aucun corrigé Bigeard applicable. |
 | c07-performances | fait | 2 créés + 3 cartes du TD. **Erreur corrigée** : RAMSES n'est pas insensible au débit sortant. Q2, Q5, Q6 de RAMSES ajoutées. |
 | c08-statique | fait | 2 créés + 3 ex. du TD. **2 erreurs corrigées** (signe du couple Ex A, moment de liaison du lève-malade). Torseurs de liaison complets ajoutés (SPRAT, lève-malade, console). |
-| c09-statique-transmetteurs | à faire | |
+| c09-statique-transmetteurs | fait | 2 créés + 2 ex. du TD ; tous les résultats justes. Aucun corrigé Bigeard applicable. |
 | c10-liaisons | à faire | |
 | c11-transmetteurs-non-lineaires | à faire | |
 | c12-bode | à faire | |
@@ -54,6 +54,7 @@ Conventions retenues :
 | c06 | Ex A, B (créés), 1.1, 1.2 Four, 1.3 RAMSES, 2.1 Hémodialyse, 3.1 Caméra PTZ | aucun dossier correspondant (`analyse-et-modelisation-des-systemes_camera-speedcam` = autre caméra, sujet SysML/chaîne) | correction actuelle, revérifiée |
 | c07 | Ex A, B (créés), réduction de schéma-bloc, 2.4 MCC, 2.1 RAMSES | aucun dossier correspondant | correction actuelle, revérifiée (RAMSES refait) |
 | c08 | Ex A, B (créés), 1.1 SPRAT, 1.2 Lève-malade, 1.3 Console de bateau | aucun dossier correspondant | correction actuelle, revérifiée avec l'énoncé ECAM |
+| c09 | Ex A, B (créés), 1.1 EPAS, 1.2 Grue de chantier | aucun dossier correspondant (`transmission-de-puissance_joint-de-oldham-du-maxpid` traite l'Oldham, pas le vis-écrou ; `camion-grue`, `moteur-de-levage-dune-grue` = autres sujets) | correction actuelle, revérifiée |
 
 - **c01 revu avec la règle Bigeard** : aucun corrigé Bigeard ne traite ces questions (voir tableau) ; page inchangée.
 - **c02** : TD 1 (3 ex.) + TD 2 (3 ex.) + 2 créés. Recalculs : \(D_1\%=3/19=15{,}8\%\), \(e_r\%=10/40=25\%\), \(D_1\%=9/50=18\%\), \(\eta=0{,}83\) : justes. Ajout de pièges (division par \(\Delta s\) et non par \(s(\infty)\), unités incompatibles du four). Aucun corrigé Bigeard applicable.
@@ -63,3 +64,4 @@ Conventions retenues :
 - **c06** : recalculs Python : ω0 = 16,90 rad/s, z = 0,507, ωa = 14,57 rad/s, Ta = 0,431 s, D1 = 15,7 %, D2 = 2,5 %, D3 = 0,39 %, tr5% simulé = 0,313 s (abaque 5,3/ω0 = 0,31 s) : justes. Ex 1.1-D : « instable (classe ≠ 0) » reformulé en « non stable (pôle nul) ». **Hors périmètre, non corrigé** : la fiche mémo (`#memo`, lignes ~45-50) contient `0<z<1` et `\(<0\)` bruts ; le navigateur lit `<z` comme une balise et casse l'affichage de la fiche (à remplacer par `&lt;`).
 - **c07** : recalculs Python MCC (29,6 / 9,4 / −20,2 rad/s) et forme canonique du schéma-bloc (16 qui se simplifie) : justes. **RAMSES (Ex 2.1)** : l'ancienne version affirmait Δh(∞) = 0 pour un échelon de débit sortant ; faux, car le dérivateur du correcteur annule l'intégration de la vanne et il n'y a plus d'intégrateur en amont de q_s. Refait : F1 = aG/(aG + Sp + Sτp²) (précis en poursuite), F2 = −(1+τp)/(aG + Sp + Sτp²), erreur de régulation q0/(aG) → `.warnbox` « Correction d'une erreur de l'ancienne version ». Hypothèses explicitées : limnimètre de même gain a que le potentiomètre, chaîne régulateur-moteur-réducteur-vanne de C06 Ex 1.3.
 - **c08** : Ex A : l'ancienne version donnait C = −a·mg·cos α (signe du moment du poids faux, x1∧y0 = cos α z mais la force est −mg y0) → C = +a·mg·cos α, `.warnbox` « Correction d'une erreur ». Lève-malade Q5 : l'ancienne version oubliait le moment du vérin (OA = −b x0 + c y0) → N01 = (a+b)mg + bk(y−y0), `.warnbox`. SPRAT : torseur complet X01 = −F sin α, Y01 = mg + F cos α ; AN F = 1,16 MN, R = 1,42 MN (Python) : justes. Console : C01 = 90 kN·m juste ; L01 = −60 kN·m, M01 = −235 kN·m, Y01 = 15 kN, Z01 = 39,2 kN ajoutés (Q4 demande aussi la liaison).
+- **c09** : recalculs Python : 0,113 N·m, 177 N, 0,0707 N·m, 4,42 N·m, 3,31 N·m, 104,2 N·m, 2452 N·m, 3562 N·m : justes. Énoncé ajouté à l'Ex A (les données étaient dans les questions).

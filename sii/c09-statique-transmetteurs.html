@@ -80,15 +80,25 @@ window.MathJax = {
     </div>
   </section>
 
-  <!-- ======================= EXOS CRÉÉS =============================== -->
   <section class="block" id="exos">
     <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice A — Réducteur & multiplicateur (couples)</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p class="q">1) Réducteur \(i=0{,}25\), \(C_s=10\) N·m</p><p>\(\dfrac{C_s}{C_e}=\dfrac1i\Rightarrow C_e=i\,C_s=0{,}25\times10\).</p><p class="res">\(C_e=2{,}5\) N·m</p>
-        <p class="q">2) Multiplicateur \(i=5\), \(C_s=3\) N·m</p><p>\(C_e=i\,C_s=5\times3\).</p><p class="res">\(C_e=15\) N·m (le multiplicateur augmente la vitesse mais réduit le couple de sortie)</p>
+        <div class="enonce">Transmetteurs sans pertes, \(i = \omega_s/\omega_e\). Calculer le couple d'entrée \(C_e\) dans les deux cas suivants.</div>
+
+        <p class="q">1) Réducteur \(i=0{,}25\), \(C_s=10\) N·m</p>
+        <p class="etape">Étape 1 : la loi entrée-sortie en effort</p>
+        <div class="rappel"><span class="lab">Rappel · conservation de la puissance (sans pertes)</span>\[ C_e\,\omega_e = C_s\,\omega_s \qquad\Longrightarrow\qquad \frac{C_s}{C_e} = \frac{\omega_e}{\omega_s} = \frac1i \]</div>
+        <p class="etape">Étape 2 : application</p>
+        \[ C_e = i\,C_s = 0{,}25 \times 10 = 2{,}5\ \text{N·m} \]
+        <div class="res">\(C_e = 2{,}5\) N·m : le réducteur divise la vitesse par 4 et multiplie le couple par 4.</div>
+
+        <p class="q">2) Multiplicateur \(i=5\), \(C_s=3\) N·m</p>
+        \[ C_e = i\,C_s = 5 \times 3 = 15\ \text{N·m} \]
+        <div class="res">\(C_e = 15\) N·m : le multiplicateur augmente la vitesse mais réduit le couple de sortie.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Le rapport des couples est l'<b>inverse</b> du rapport des vitesses. Ce qu'on gagne en vitesse, on le perd en couple.</div>
       </div>
     </div>
 
@@ -96,12 +106,22 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice B — Vis-écrou du Maxpid</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Vis-écrou pas \(p=4\) mm/tr ; moteur \(k_c=52{,}5\) mN·m/A, \(I_m=2{,}15\) A.</div>
-        <p class="q">Effort de poussée maximal (sans pertes)</p>
-        <p>\(C_e=k_cI_m=0{,}0525\times2{,}15=0{,}1129\) N·m. \(F_{max}=\dfrac{2\pi}{p}C_e=\dfrac{2\pi}{0{,}004}\times0{,}1129\).</p>
-        <p class="res">\(F_{max}\approx177\) N</p>
-        <p class="q">Avec rendement \(\eta=0{,}9\), pour un effort de 100 N</p>
-        <p>\(C_e=\dfrac{F_s\,p}{2\pi\,\eta}=\dfrac{100\times0{,}004}{2\pi\times0{,}9}\).</p>
-        <p class="res">\(C_e\approx0{,}071\) N·m (71 mN·m)</p>
+
+        <p class="q">1) Effort de poussée maximal (sans pertes)</p>
+        <p class="etape">Étape 1 : couple moteur</p>
+        <div class="rappel"><span class="lab">Rappel · moteur à courant continu</span>\[ C_m = k_c\,I \]</div>
+        \[ C_e = 0{,}0525 \times 2{,}15 \approx 0{,}113\ \text{N·m} \]
+        <p class="etape">Étape 2 : loi entrée-sortie du vis-écrou</p>
+        <div class="rappel"><span class="lab">Rappel · vis-écrou sans pertes</span>\[ V = \frac{p}{2\pi}\,\omega \quad\text{et}\quad F\,V = C\,\omega \qquad\Longrightarrow\qquad F = \frac{2\pi}{p}\,C \]</div>
+        \[ F_{max} = \frac{2\pi}{0{,}004} \times 0{,}113 \approx 177\ \text{N} \]
+        <div class="res">\(F_{max} \approx 177\) N.</div>
+
+        <p class="q">2) Avec rendement \(\eta=0{,}9\), pour un effort de 100 N</p>
+        <div class="rappel"><span class="lab">Rappel · rendement</span>\[ P_{sortie} = \eta\,P_{entrée} \qquad\Longrightarrow\qquad F\,V = \eta\,C_e\,\omega \]</div>
+        <p>On isole \(C_e\) avec \(V = \dfrac{p}{2\pi}\,\omega\) :</p>
+        \[ C_e = \frac{F\,p}{2\pi\,\eta} = \frac{100 \times 0{,}004}{2\pi \times 0{,}9} \approx 0{,}071\ \text{N·m} \]
+        <div class="res">\(C_e \approx 0{,}071\) N·m (71 mN·m).</div>
+        <div class="warnbox"><span class="lab">Piège</span> Le pas doit être en mètres (0,004 m) pour obtenir des newtons et des N·m.</div>
       </div>
     </div>
   </section>
@@ -116,13 +136,23 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 1.1 — Échelle EPAS (couples moteurs)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="q">Q1 — Chaîne « orienter la plate-forme » : \(C_{m36}\)</p>
-        <p>Effort à l'effecteur : \(C_{36}=eMg=2650\) N·m (donné). Motoréducteur \(r=\tfrac1{1000}\), \(\eta_{réd}=0{,}6\) :
-        \(C_{36}=\dfrac{\eta}{r}C_{m36}\Rightarrow C_{m36}=\dfrac{C_{36}\,r}{\eta}=\dfrac{2650\times0{,}001}{0{,}6}\).</p>
-        <p class="res">\(C_{m36}\approx4{,}4\) N·m</p>
+        <p class="etape">Étape 1 : effort à l'effecteur</p>
+        <p>Donné par l'énoncé : \(C_{36} = eMg = 2650\) N·m.</p>
+        <p class="etape">Étape 2 : remonter le motoréducteur</p>
+        <div class="rappel"><span class="lab">Rappel · réducteur avec rendement</span>\[ C_s\,\omega_s = \eta\,C_m\,\omega_m \qquad\Longrightarrow\qquad C_s = \frac{\eta}{r}\,C_m \qquad (r = \omega_s/\omega_m) \]</div>
+        <p>Avec \(r = \tfrac{1}{1000}\) et \(\eta_{réd} = 0{,}6\) :</p>
+        \[ C_{m36} = \frac{C_{36}\,r}{\eta} = \frac{2650 \times 0{,}001}{0{,}6} \approx 4{,}4\ \text{N·m} \]
+        <div class="res">\(C_{m36} \approx 4{,}4\) N·m.</div>
+
         <p class="q">Q2 — Chaîne « déplacer le parc échelle » : \(C_{m23}\)</p>
-        <p>Effort : \(F_{23}=Mg\sin\theta=1870\) N (donné). Vis-écrou à billes \(p=10\) mm, \(\eta_{vis}=0{,}9\) :
-        \(|C_{m23}|=\dfrac{F_{23}\,p}{2\pi\,\eta_{vis}}=\dfrac{1870\times0{,}010}{2\pi\times0{,}9}\).</p>
-        <p class="res">\(|C_{m23}|\approx3{,}3\) N·m</p>
+        <p class="etape">Étape 1 : effort à l'effecteur</p>
+        <p>Donné : \(F_{23} = Mg\sin\theta = 1870\) N.</p>
+        <p class="etape">Étape 2 : vis-écrou à billes</p>
+        <div class="rappel"><span class="lab">Rappel · vis-écrou avec rendement</span>\[ C_m = \frac{F\,p}{2\pi\,\eta} \]</div>
+        <p>Avec \(p = 10\) mm et \(\eta_{vis} = 0{,}9\) :</p>
+        \[ |C_{m23}| = \frac{1870 \times 0{,}010}{2\pi \times 0{,}9} \approx 3{,}3\ \text{N·m} \]
+        <div class="res">\(|C_{m23}| \approx 3{,}3\) N·m.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Le rendement est toujours au dénominateur quand on remonte de l'effecteur vers le moteur : les pertes demandent <b>plus</b> de couple au moteur.</div>
       </div>
     </div>
 
@@ -130,23 +160,47 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 1.2 — Grue de chantier</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">Flèche (1) pivot vertical \(z_0\), \(L=30\) m ; charge \(M_3=5\) t ; vent \(F_v=5000\) N en \(G_1\).</div>
+
         <p class="q">Q1 — Couple d'orientation \(C_{01}\) (moment en \(O\) /\(z_0\))</p>
-        <p>Poids (verticaux) : moment /\(z_0\) nul. Vent \(F_v\vec y_1\) en \(G_1\) (\(\vec{OG_1}=L\vec x_1\)) : \(\vec{OG_1}\wedge F_v\vec y_1\cdot z_0=L F_v\).</p>
-        <p class="res">\(|C_{01}|=L\,F_v=30\times5000=1{,}5\cdot10^5\) N·m (150 kN·m)</p>
+        <div class="rappel"><span class="lab">Rappel · pivot d'axe \((O,\vec z_0)\)</span>Le théorème du moment en \(O\) projeté sur \(\vec z_0\) élimine la liaison pivot ; une force parallèle à \(\vec z_0\) n'a pas de moment sur cet axe.</div>
+        <ul>
+          <li>Poids (verticaux) : moment nul sur \(\vec z_0\).</li>
+          <li>Vent \(F_v\,\vec y_1\) en \(G_1\), avec \(\vec{OG_1} = L\,\vec x_1\) : \(L\,\vec x_1\wedge F_v\,\vec y_1 = L\,F_v\,\vec z_0\).</li>
+        </ul>
+        \[ C_{01} + L\,F_v = 0 \qquad\Longrightarrow\qquad |C_{01}| = L\,F_v = 30 \times 5000 = 1{,}5\times10^5\ \text{N·m} \]
+        <div class="res">\(|C_{01}| = 1{,}5\times10^5\) N·m (150 kN·m).</div>
+
         <p class="q">Q2 — Tension du câble de levage \(F_{23}\)</p>
-        <p>Le câble supporte le poids de la charge : \(F_{23}=M_3\,g=5000\times9{,}81\).</p>
-        <p class="res">\(F_{23}\approx4{,}9\cdot10^4\) N (49 kN)</p>
+        <p>On isole la charge (3), à l'équilibre : la tension du câble compense son poids.</p>
+        \[ F_{23} = M_3\,g = 5000 \times 9{,}81 \approx 4{,}9\times10^4\ \text{N} \]
+        <div class="res">\(F_{23} \approx 4{,}9\times10^4\) N (49 kN).</div>
+
         <p class="q">Q4–Q5 — Couple moteur « orienter » \(C_{m01}\)</p>
-        <p>Train épicycloïdal (couronne \(z_c=90\) fixe, planétaire \(z_p=18\)), 1 étage : \(i_{ét}=\dfrac1{1-\lambda}\) avec \(\lambda=-\dfrac{z_c}{z_p}=-5\), soit \(i_{ét}=\dfrac16\). Trois étages : \(i_{épi}=\big(\tfrac16\big)^3=\tfrac1{216}\).</p>
-        <p>Réducteur à axes fixes : \(|i_2|=\dfrac{z_A}{z_B}=\dfrac{18}{153}=0{,}118\). Total \(|i|=\dfrac1{216}\times0{,}118=5{,}45\cdot10^{-4}\).</p>
-        <p>\(C_{m01}=\dfrac{|C_{01}|\,|i|}{\eta_1\eta_2}=\dfrac{1{,}5\cdot10^5\times5{,}45\cdot10^{-4}}{0{,}8\times0{,}98}\).</p>
-        <p class="res">\(C_{m01}\approx104\) N·m</p>
+        <p class="etape">Étape 1 : un étage épicycloïdal</p>
+        <div class="rappel"><span class="lab">Rappel · Willis, couronne fixe</span>\[ \lambda = -\frac{z_c}{z_p} \qquad i_{ét} = \frac{\omega_{PS}}{\omega_p} = \frac{1}{1 - \lambda} \]</div>
+        <p>Couronne \(z_c = 90\) fixe, planétaire \(z_p = 18\) :</p>
+        \[ \lambda = -\frac{90}{18} = -5 \qquad i_{ét} = \frac{1}{1 + 5} = \frac16 \]
+        <p class="etape">Étape 2 : trois étages en série</p>
+        \[ i_{épi} = \left(\frac16\right)^3 = \frac{1}{216} \]
+        <p class="etape">Étape 3 : réducteur à axes fixes et rapport total</p>
+        \[ |i_2| = \frac{z_A}{z_B} = \frac{18}{153} \approx 0{,}118 \qquad |i| = \frac{1}{216} \times 0{,}118 \approx 5{,}45\times10^{-4} \]
+        <p class="etape">Étape 4 : couple moteur avec rendements</p>
+        <div class="rappel"><span class="lab">Rappel · couple ramené au moteur</span>\[ C_m = \frac{|i|\,C_s}{\eta_{total}} \]</div>
+        \[ C_{m01} = \frac{1{,}5\times10^5 \times 5{,}45\times10^{-4}}{0{,}8 \times 0{,}98} \approx 104\ \text{N·m} \]
+        <div class="res">\(C_{m01} \approx 104\) N·m.</div>
+
         <p class="q">Q7–Q8 — Chaîne « lever » : \(v_{3/2}\) et \(C_{m23}\)</p>
-        <p>Réducteur \(Z_{12}=Z_{13b}=50\), \(Z_{13a}=Z_{14}=100\) : \(i=\big(\tfrac{50}{100}\big)^2=0{,}25\). Tambour \(R=0{,}2\) m :
-        \(v_{3/2}=R\,i\,\omega_{m}=0{,}05\,\omega_m\).</p>
-        <p>Sans pertes : \(C_{m23}=F_{23}\,R\,i=M_3g\times0{,}05\approx2452\) N·m. Avec \(\eta_{eng}^2\,\eta_{tamb}=0{,}9^2\times0{,}85=0{,}689\) :
-        \(C_{m23}=\dfrac{2452}{0{,}689}\).</p>
-        <p class="res">\(v_{3/2}=0{,}05\,\omega_m\) (m/s) ; \(C_{m23}\approx3560\) N·m avec rendements</p>
+        <p class="etape">Étape 1 : rapport du réducteur</p>
+        <p>Deux engrenages identiques, \(Z_{12} = Z_{13b} = 50\) menants, \(Z_{13a} = Z_{14} = 100\) menés :</p>
+        \[ i = \left(\frac{50}{100}\right)^2 = 0{,}25 \]
+        <p class="etape">Étape 2 : vitesse du câble</p>
+        <div class="rappel"><span class="lab">Rappel · tambour (enroulement sans glissement)</span>\[ v = R\,\omega_{tambour} \]</div>
+        \[ v_{3/2} = R\,i\,\omega_m = 0{,}2 \times 0{,}25\,\omega_m = 0{,}05\,\omega_m \]
+        <p class="etape">Étape 3 : couple moteur sans pertes</p>
+        \[ C_{m23} = F_{23}\,R\,i = M_3\,g \times 0{,}05 \approx 2452\ \text{N·m} \]
+        <p class="etape">Étape 4 : avec les rendements</p>
+        \[ \eta = \eta_{eng}^2\,\eta_{tamb} = 0{,}9^2 \times 0{,}85 \approx 0{,}689 \qquad C_{m23} = \frac{2452}{0{,}689} \approx 3560\ \text{N·m} \]
+        <div class="res">\(v_{3/2} = 0{,}05\,\omega_m\) (m/s) ; \(C_{m23} \approx 3560\) N·m avec les rendements.</div>
       </div>
     </div>
 
@@ -158,6 +212,7 @@ window.MathJax = {
       avec le calcul des rapports de transmission (trains simples et épicycloïdaux, C04).
     </div>
   </section>
+
   <section class="block" id="docs">
     <h2>📂 Documents donnés</h2>
     <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
