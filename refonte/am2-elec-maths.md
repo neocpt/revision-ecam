@@ -8,7 +8,7 @@ Modèles suivis : `aem2-electronique/ch6-electronique-numerique.html#td6-ex6` et
 | Page | État |
 |---|---|
 | aem2-electronique/ch1-filtres-passifs.html | fait (Q1–Q5 du cours, TP P1.1–P2.2, Ex 1–4 et 6 ; Ex 5 = modèle) |
-| aem2-electronique/ch2-filtrage-fourier.html | à faire |
+| aem2-electronique/ch2-filtrage-fourier.html | fait (Q1–Q2 du cours, Ex 1–5) |
 | aem2-electronique/ch3-ali-regime-lineaire.html | à faire |
 | aem2-electronique/ch4-ali-regime-sature.html | à faire |
 | aem2-electronique/ch5-oscillateurs.html | à faire |
