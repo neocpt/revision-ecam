@@ -10,8 +10,8 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 | cinematique.html | 39 | fait |
 | dynamique.html | 46 | fait |
 | electro-stationnaire.html | 35 | fait |
-| electro-transitoire.html | 18 | en cours |
-| electro-2nd-ordre.html | 19 | à faire |
+| electro-transitoire.html | 18 | fait |
+| electro-2nd-ordre.html | 19 | en cours |
 | filtrage.html | 38 | à faire |
 | rsf-resonance-filtrage.html | 11 | à faire |
 | acides-bases.html | 29 | à faire |
@@ -42,3 +42,10 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 - Erreur corrigée : Ex 12, R = 1,5 V / 0,1 A = 15 Ω (et non 150 Ω) → warnbox.
 - Ex 7 : signalé que les données de l'énoncé (e = 9 V, I3 = 200 mA) sont incohérentes avec la maille de gauche (11 V) ; on garde les valeurs demandées.
 - Ex 10 Q5 : puissance réécrite P = e²/R_eq. Ex 21 : I4 ≈ 19 mA (au lieu de 20) pour x = 0.
+
+### electro-transitoire.html — fait
+- 18 cartes réécrites (3 créées + 15 TD) ; énoncés tous présents.
+- Erreur corrigée : Ex 11, constante A = −E/R (et non +E/R, sinon i(0+) = 2E/R) ; B et l'instant du maximum recalculés : t_m = (π − arctan(τ1·Ω))/Ω ; vérifié par intégration numérique → warnbox.
+- Erreur corrigée : Ex 14, expression du courant (il manquait le facteur C/τ : l'ancienne formule était homogène à une tension) → warnbox.
+- Exercice B : 3τ ≈ 1,4 ms (au lieu de 1,3 ms, arrondi).
+- Ex 15 (Wien, hors corrigé officiel) : équation re-démontrée pas à pas (RC v'' + 3v' + v/RC = 0), résultats inchangés.
