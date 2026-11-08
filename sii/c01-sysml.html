@@ -133,13 +133,33 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice A — Identifier critère / niveau / flexibilité</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <div class="enonce">Exigence : « Le vélo électrique doit avoir une autonomie d'au moins 80 km, avec une tolérance de −15 %. »</div>
-        <p class="q">Décomposer l'exigence</p>
+        <p class="q">1) Décomposer l'exigence</p>
+
+        <p class="etape">Étape 1 : les trois attributs d'une exigence</p>
+        <div class="rappel"><span class="lab">Rappel · caractériser une exigence</span>
+          <ul>
+            <li><b>Critère</b> : la grandeur mesurable. On répond à « que mesure-t-on ? ».</li>
+            <li><b>Niveau</b> : la valeur visée. On répond à « quelle valeur ? ».</li>
+            <li><b>Flexibilité</b> : l'écart toléré autour du niveau.</li>
+          </ul></div>
+
+        <p class="etape">Étape 2 : on lit la phrase</p>
+        <ul>
+          <li>Ce que l'on mesure : la distance parcourue sur une charge, c'est l'<b>autonomie</b>.</li>
+          <li>La valeur visée : <b>80 km</b>.</li>
+          <li>L'écart toléré : <b>−15 %</b>.</li>
+        </ul>
+
+        <p class="etape">Étape 3 : on traduit la flexibilité en kilomètres</p>
+        \[ 80 \times (1 - 0{,}15) = 80 \times 0{,}85 = 68\ \text{km} \]
+        <p>Une autonomie mesurée de 68 km ou plus est donc acceptable.</p>
         <table style="width:100%;border-collapse:collapse;margin:.3rem 0">
           <tr><td style="padding:.3rem;border:1px solid var(--line)"><b>Critère</b></td><td style="padding:.3rem;border:1px solid var(--line)">Autonomie (distance parcourue sur une charge)</td></tr>
           <tr><td style="padding:.3rem;border:1px solid var(--line)"><b>Niveau</b></td><td style="padding:.3rem;border:1px solid var(--line)">80 km</td></tr>
           <tr><td style="padding:.3rem;border:1px solid var(--line)"><b>Flexibilité</b></td><td style="padding:.3rem;border:1px solid var(--line)">−15 % (soit ≥ 68 km acceptable)</td></tr>
         </table>
-        <p class="res">Le critère est <b>mesurable</b>, le niveau est la <b>valeur cible</b>, la flexibilité est <b>l'écart toléré</b>.</p>
+        <div class="res">Critère : autonomie. Niveau : 80 km. Flexibilité : −15 %, soit au moins 68 km.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Le critère n'est jamais un nombre : « 80 km » est le niveau, pas le critère.</div>
       </div>
     </div>
 
@@ -147,10 +167,30 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice B — Choisir le bon diagramme</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <div class="enonce">Pour chaque question sur un robot tondeuse, indiquer le diagramme SysML à consulter.</div>
-        <p class="q">1) « Quels sont les acteurs et la fonction globale ? »</p><p class="res">Diagramme des cas d'utilisation <span class="mono">uc</span></p>
-        <p class="q">2) « Quelle surface minimale doit-il tondre en 1 h ? »</p><p class="res">Diagramme des exigences <span class="mono">req</span> (critère + niveau)</p>
-        <p class="q">3) « De quels sous-systèmes est-il constitué ? »</p><p class="res">Diagramme de définition de blocs <span class="mono">bdd</span></p>
-        <p class="q">4) « Comment l'énergie de la batterie parvient-elle aux roues ? »</p><p class="res">Diagramme de blocs internes <span class="mono">ibd</span> (flux d'énergie)</p>
+
+        <p class="q">1) « Quels sont les acteurs et la fonction globale ? »</p>
+        <div class="rappel"><span class="lab">Rappel · les quatre diagrammes du chapitre</span>
+          <ul>
+            <li><span class="mono">uc</span> : fonction globale et acteurs.</li>
+            <li><span class="mono">req</span> : exigences (critère, niveau, flexibilité).</li>
+            <li><span class="mono">bdd</span> : décomposition en blocs (qui contient quoi).</li>
+            <li><span class="mono">ibd</span> : flux entre blocs (matière, énergie, information).</li>
+          </ul></div>
+        <p>La question porte sur les acteurs et la raison d'être du système.</p>
+        <div class="res">Diagramme des cas d'utilisation <span class="mono">uc</span>.</div>
+
+        <p class="q">2) « Quelle surface minimale doit-il tondre en 1 h ? »</p>
+        <p>On cherche une valeur chiffrée à respecter : c'est un niveau associé à un critère (la surface tondue par heure).</p>
+        <div class="res">Diagramme des exigences <span class="mono">req</span> (critère + niveau).</div>
+
+        <p class="q">3) « De quels sous-systèmes est-il constitué ? »</p>
+        <p>On cherche l'inventaire hiérarchique des composants.</p>
+        <div class="res">Diagramme de définition de blocs <span class="mono">bdd</span>.</div>
+
+        <p class="q">4) « Comment l'énergie de la batterie parvient-elle aux roues ? »</p>
+        <p>On suit un flux d'énergie d'un composant à l'autre.</p>
+        <div class="res">Diagramme de blocs internes <span class="mono">ibd</span> (flux d'énergie).</div>
+        <div class="warnbox"><span class="lab">Piège</span> <span class="mono">bdd</span> dit <b>qui contient quoi</b> ; <span class="mono">ibd</span> dit <b>ce qui circule</b> entre les blocs. Une question sur un flux appelle toujours l'<span class="mono">ibd</span>.</div>
       </div>
     </div>
   </section>
@@ -168,28 +208,63 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Q1 — Critères (rouge) / niveaux (vert) des exigences 1.2, 1.7.1–1.7.3</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p>Sur le diagramme des exigences, on distingue pour chaque exigence la <b>grandeur mesurable</b> (critère) de sa
-        <b>valeur cible</b> (niveau). Méthode : le critère répond à « <i>quoi mesure-t-on ?</i> » et le niveau à « <i>quelle valeur ?</i> ».</p>
-        <p class="res">On surligne le <b>critère</b> (ex. « vitesse maximale », « temps de charge ») en rouge et le <b>niveau</b> associé (ex. « 20 km/h », « 5 h ») en vert (voir figure 1 du corrigé).</p>
+        <p class="q">1) Repérer les critères et les niveaux</p>
+
+        <p class="etape">Étape 1 : la méthode</p>
+        <div class="rappel"><span class="lab">Rappel · critère et niveau</span>
+          <ul>
+            <li>Le <b>critère</b> répond à « que mesure-t-on ? » : c'est une grandeur.</li>
+            <li>Le <b>niveau</b> répond à « quelle valeur ? » : c'est un nombre avec son unité.</li>
+          </ul></div>
+
+        <p class="etape">Étape 2 : on l'applique à chaque exigence</p>
+        <p>Dans chaque cadre du diagramme des exigences, on cherche la grandeur, puis le nombre qui lui est associé.</p>
+        <ul>
+          <li>« vitesse maximale » est un critère, « 20 km/h » est son niveau.</li>
+          <li>« temps de charge » est un critère, « 5 h » est son niveau.</li>
+        </ul>
+        <div class="res">On surligne le <b>critère</b> (ex. « vitesse maximale », « temps de charge ») en rouge et le <b>niveau</b> associé (ex. « 20 km/h », « 5 h ») en vert (voir figure 1 du corrigé).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Q2 — Proposer un critère + niveau pour l'exigence 1.5</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p>L'exigence 1.5 concerne la <b>détection d'obstacle / signalisation</b>. Une formulation acceptable (corrigé) :</p>
-        <p class="res">« <b>Émettre un signal sonore discontinu de 0,5 dB</b> lorsqu'un obstacle est détecté <b>à une distance de 2 m</b>. »
-        (critère = niveau sonore + distance de détection ; niveaux = 0,5 dB et 2 m)</p>
+        <p class="q">2) Rédiger l'exigence 1.5 avec un critère et un niveau</p>
+
+        <p class="etape">Étape 1 : de quoi parle l'exigence ?</p>
+        <p>L'exigence 1.5 concerne la <b>détection d'un obstacle</b> et sa <b>signalisation</b> au conducteur.</p>
+
+        <p class="etape">Étape 2 : choisir des grandeurs mesurables</p>
+        <ul>
+          <li>Pour la signalisation : le niveau sonore du signal.</li>
+          <li>Pour la détection : la distance à laquelle l'obstacle est repéré.</li>
+        </ul>
+
+        <p class="etape">Étape 3 : donner une valeur à chaque critère</p>
+        <p>Formulation proposée par le corrigé :</p>
+        <div class="res">« <b>Émettre un signal sonore discontinu de 0,5 dB</b> lorsqu'un obstacle est détecté <b>à une distance de 2 m</b>. » Critères : niveau sonore et distance de détection. Niveaux : 0,5 dB et 2 m.</div>
+        <div class="warnbox"><span class="lab">Piège</span> « Signaler les obstacles » seul n'est pas une exigence vérifiable : sans grandeur mesurable et sans valeur, on ne peut pas tester le système.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Q3 — Flexibilité sur le temps de charge de la batterie</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p>La flexibilité est l'<b>écart toléré</b> sur le niveau. Le diagramme indique deux tolérances selon le mode de charge :</p>
-        <p>• Recharge <b>à domicile</b> : 6 h admises au lieu de 5 h → <b>+1 h, soit +20 %</b>.<br>
-        • Recharge sur <b>borne spécialisée</b> : 1 h 30 admise au lieu de 1 h → <b>+½ h, soit +50 %</b>.</p>
-        <p class="res">Flexibilité : +20 % (domicile, 6 h ≤ pour 5 h) et +50 % (borne, 1 h 30 pour 1 h).</p>
+        <p class="q">3) Calculer la flexibilité sur le temps de charge</p>
+
+        <p class="etape">Étape 1 : définition</p>
+        <div class="rappel"><span class="lab">Rappel · flexibilité relative</span>\[ \text{flexibilité} = \frac{\text{valeur admise} - \text{niveau}}{\text{niveau}} \]</div>
+
+        <p class="etape">Étape 2 : recharge à domicile</p>
+        <p>Niveau 5 h, valeur admise 6 h :</p>
+        \[ \frac{6 - 5}{5} = \frac{1}{5} = +20\ \% \]
+
+        <p class="etape">Étape 3 : recharge sur borne spécialisée</p>
+        <p>Niveau 1 h, valeur admise 1 h 30, soit 1,5 h :</p>
+        \[ \frac{1{,}5 - 1}{1} = 0{,}5 = +50\ \% \]
+        <div class="res">Flexibilité : +1 h, soit +20 % à domicile (6 h admises pour 5 h) ; +½ h, soit +50 % sur borne (1 h 30 admise pour 1 h).</div>
+        <div class="warnbox"><span class="lab">Piège</span> 1 h 30 vaut 1,5 h et non 1,3 h. On convertit toujours les durées en décimal avant de calculer un pourcentage.</div>
       </div>
     </div>
 
@@ -201,69 +276,130 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Q1 — La crosse de l'avion est-elle un composant interne ?</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p>La frontière d'étude est le <b>frein d'appontage du porte-avions</b>. La crosse appartient à l'avion.</p>
-        <p class="res">Non : la crosse fait partie des <b>limites de l'avion</b> — c'est un élément de l'environnement extérieur, pas un composant interne du système étudié.</p>
+        <p class="q">1) La crosse est-elle interne au système étudié ?</p>
+
+        <p class="etape">Étape 1 : placer la frontière d'étude</p>
+        <div class="rappel"><span class="lab">Rappel · frontière d'étude</span>Elle sépare le système étudié de son environnement extérieur. Tout ce qui est hors de la frontière est extérieur, même s'il interagit avec le système.</div>
+        <p>Le système étudié est le <b>frein d'appontage du porte-avions</b>.</p>
+
+        <p class="etape">Étape 2 : à qui appartient la crosse ?</p>
+        <p>La crosse est fixée sous l'avion. Elle part avec l'avion quand il redécolle.</p>
+        <div class="res">Non : la crosse fait partie de l'<b>avion</b>. C'est un élément de l'environnement extérieur, pas un composant interne du système étudié.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Q2 — Le chef de pont appartient à l'environnement extérieur</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p>On cherche la phrase du principe de fonctionnement montrant une interaction extérieure du chef de pont avec le système.</p>
-        <p class="res">« <b>Le système doit être capable de se configurer à la demande du chef de pont.</b> » (le chef de pont commande sans être interne).</p>
+        <p class="q">2) Phrase montrant que le chef de pont est extérieur</p>
+
+        <p class="etape">Étape 1 : ce que l'on cherche</p>
+        <p>Un acteur extérieur <b>agit sur</b> le système sans en faire partie. On cherche donc une phrase où le chef de pont donne un ordre au système.</p>
+
+        <p class="etape">Étape 2 : la phrase du texte</p>
+        <div class="res">« <b>Le système doit être capable de se configurer à la demande du chef de pont.</b> » Le chef de pont commande le système sans en être un composant.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Q3 — Compléter le texte à partir du diagramme des exigences</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="res">« L'accélération (décélération) maximale ne doit pas dépasser l'accélération moyenne de plus de <b>30 %</b>.
+        <p class="q">3) Compléter le texte</p>
+
+        <p class="etape">Étape 1 : la méthode</p>
+        <p>Chaque trou du texte correspond au <b>niveau</b> d'une exigence du diagramme. On repère le critère dans le texte, puis on lit le niveau dans le cadre correspondant.</p>
+
+        <p class="etape">Étape 2 : lecture du diagramme</p>
+        <ul>
+          <li>Écart entre accélération maximale et accélération moyenne : <b>30 %</b>.</li>
+          <li>Accélération maximale supportable : <b>5 G</b>.</li>
+          <li>Temps de reconfiguration : <b>2 min</b> au plus.</li>
+        </ul>
+        <div class="res">« L'accélération (décélération) maximale ne doit pas dépasser l'accélération moyenne de plus de <b>30 %</b>.
         Pour la protection du pilote et de l'avion, les accélérations doivent rester inférieures à <b>5 G</b>.
-        Le temps de reconfiguration ne doit pas <b>excéder 2 min</b> afin de maintenir une cadence d'appontage optimale. »</p>
+        Le temps de reconfiguration ne doit pas <b>excéder 2 min</b> afin de maintenir une cadence d'appontage optimale. »</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Q4 — Quel système du bdd n'est pas évoqué par la description ?</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p>La description parle de dissiper l'énergie et amortir les vibrations, mais pas du réglage.</p>
-        <p class="res">Le <b>système (Σ) de réglage du freinage</b> n'est pas évoqué.</p>
+        <p class="q">4) Le système du bdd absent de la description</p>
+
+        <p class="etape">Étape 1 : ce que dit la description</p>
+        <ul>
+          <li>Récupérer l'énergie cinétique (ensemble mécanique).</li>
+          <li>Dissiper une partie de l'énergie en chaleur (vanne de laminage).</li>
+        </ul>
+
+        <p class="etape">Étape 2 : comparaison avec les blocs du bdd</p>
+        <p>On coche chaque bloc du bdd cité dans la description. Un seul reste sans correspondance : celui qui règle le freinage.</p>
+        <div class="res">Le <b>système (Σ) de réglage du freinage</b> n'est pas évoqué.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Q5 — Sous-systèmes de même niveau du frein d'appontage</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p class="res">Trois sous-systèmes : <b>l'ensemble sous-mécanique</b>, <b>la vanne de dissipation</b>, <b>le système de réglage du freinage</b>.</p>
+        <p class="q">5) Lister les sous-systèmes de même niveau</p>
+        <div class="rappel"><span class="lab">Rappel · lecture d'un bdd</span>Les blocs reliés directement au bloc « frein d'appontage » par un lien de composition sont ses sous-systèmes de premier niveau.</div>
+        <p>On lit les blocs situés juste sous le frein d'appontage.</p>
+        <div class="res">Trois sous-systèmes : <b>l'ensemble sous-mécanique</b>, <b>la vanne de dissipation</b>, <b>le système de réglage du freinage</b>.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Q6 — Type du diagramme (flux)</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p>Le diagramme montre des <b>flux</b> entre composants via des ports.</p>
-        <p class="res">C'est un <b>diagramme de blocs internes (ibd)</b>.</p>
+        <p class="q">6) Nommer le type de diagramme</p>
+        <p>Le diagramme montre des <b>flux</b> qui passent d'un composant à l'autre par des <b>ports</b>.</p>
+        <div class="rappel"><span class="lab">Rappel · bdd ou ibd</span><span class="mono">bdd</span> : hiérarchie des blocs. <span class="mono">ibd</span> : flux entre blocs de même niveau, par des ports.</div>
+        <div class="res">C'est un <b>diagramme de blocs internes (ibd)</b>.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Q7 — Chaîne de dissipation de l'énergie cinétique et types de puissance</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p>On suit le flux de puissance de l'avion jusqu'à l'environnement, en notant la <b>nature</b> de la puissance à chaque étage :</p>
-        <p>• Énergie cinétique de l'avion → <b>puissance mécanique</b> sur le brin ;<br>
-        • Brin → mouffles : <b>puissance mécanique</b> ;<br>
-        • → presse hydraulique : <b>puissance hydraulique</b> ;<br>
-        • Pointeau : <b>puissance hydraulique → thermique</b> (laminage) ;<br>
-        • Échangeur : <b>puissance thermique</b> évacuée.</p>
-        <p class="res">La puissance mécanique venue de la crosse est finalement <b>dissipée sous forme d'eau chaude</b> (puissance thermique) vers l'extérieur.</p>
+        <p class="q">7) Suivre la puissance de l'avion jusqu'à l'extérieur</p>
+
+        <p class="etape">Étape 1 : la méthode</p>
+        <div class="rappel"><span class="lab">Rappel · nature d'une puissance</span>
+          <ul>
+            <li>Mécanique : effort × vitesse (câble, poulies).</li>
+            <li>Hydraulique : pression × débit (huile).</li>
+            <li>Thermique : flux de chaleur.</li>
+          </ul></div>
+        <p>On part de l'avion et on suit les flèches de l'ibd. À chaque bloc, on note la nature de la puissance qui sort.</p>
+
+        <p class="etape">Étape 2 : la chaîne, bloc par bloc</p>
+        <ul>
+          <li>Énergie cinétique de l'avion → <b>puissance mécanique</b> sur le brin.</li>
+          <li>Brin → mouffles : <b>puissance mécanique</b>.</li>
+          <li>Mouffles → presse hydraulique : <b>puissance hydraulique</b>.</li>
+          <li>Pointeau (laminage) : <b>puissance hydraulique → thermique</b>.</li>
+          <li>Échangeur : <b>puissance thermique</b> évacuée.</li>
+        </ul>
+        <div class="res">La puissance mécanique venue de la crosse est finalement <b>dissipée sous forme d'eau chaude</b> (puissance thermique) vers l'extérieur.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Q8 — Sur quels composants le chef de pont agit-il pour régler le pointeau ?</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p>D'après l'ibd, le réglage remonte une chaîne d'actionnement.</p>
-        <p class="res">Le réglage du chef de pont commande les <b>vérins électriques</b>, qui actionnent les <b>leviers</b>, lesquels commandent à leur tour le <b>pointeau</b> (donc le freinage).</p>
+        <p class="q">8) Chaîne d'actionnement du pointeau</p>
+
+        <p class="etape">Étape 1 : la méthode</p>
+        <p>Dans l'ibd, on part du pointeau et on remonte les flèches jusqu'au chef de pont.</p>
+
+        <p class="etape">Étape 2 : la chaîne lue dans l'ibd</p>
+        <ul>
+          <li>Le chef de pont envoie une consigne de réglage.</li>
+          <li>Elle commande les <b>vérins électriques</b>.</li>
+          <li>Les vérins actionnent les <b>leviers</b>.</li>
+          <li>Les leviers déplacent le <b>pointeau</b>.</li>
+        </ul>
+        <div class="res">Le réglage du chef de pont commande les <b>vérins électriques</b>, qui actionnent les <b>leviers</b>, lesquels commandent à leur tour le <b>pointeau</b> (donc le freinage).</div>
       </div>
     </div>
 
@@ -274,6 +410,7 @@ window.MathJax = {
       et savoir <b>lire</b> chaque diagramme. Base indispensable avant l'étude des systèmes asservis (C02→C12).
     </div>
   </section>
+
   <section class="block" id="docs">
     <h2>📂 Documents donnés</h2>
     <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
