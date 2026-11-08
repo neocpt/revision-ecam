@@ -137,8 +137,14 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice A — Télescopage par décomposition</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Calculer \(\displaystyle S_n=\sum_{k=1}^{n}\frac{1}{k(k+1)}\).</div>
-        <p>On décompose en éléments simples : \(\dfrac{1}{k(k+1)}=\dfrac1k-\dfrac1{k+1}\). D'où par télescopage :</p>
-        \[ S_n=\sum_{k=1}^n\left(\frac1k-\frac1{k+1}\right)=1-\frac1{n+1}. \]
+
+        <p class="q">1) Calcul de \(S_n\)</p>
+        <p class="etape">Étape 1 : décomposer le terme général</p>
+        \[ \frac1k-\frac1{k+1}=\frac{(k+1)-k}{k(k+1)}=\frac{1}{k(k+1)} \]
+        <p class="etape">Étape 2 : télescoper</p>
+        <div class="rappel"><span class="lab">Rappel · somme télescopique</span>\[ \sum_{k=1}^{n}\big(u_k-u_{k+1}\big)=u_1-u_{n+1} \]</div>
+        <p>Ici \(u_k=\dfrac1k\) :</p>
+        \[ S_n=\sum_{k=1}^n\left(\frac1k-\frac1{k+1}\right)=1-\frac1{n+1} \]
         <div class="res">\(S_n=\dfrac{n}{n+1}\).</div>
       </div>
     </div>
@@ -147,10 +153,18 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice B — Somme binomiale pondérée</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">Calculer \(\displaystyle T_n=\sum_{k=0}^{n}k\binom nk\).</div>
-        <p>Le terme \(k=0\) est nul. Pour \(k\geqslant1\), on utilise la formule du capitaine
-        \(k\binom nk=n\binom{n-1}{k-1}\) :</p>
-        \[ T_n=\sum_{k=1}^n n\binom{n-1}{k-1}=n\sum_{k=1}^n\binom{n-1}{k-1}=n\sum_{j=0}^{n-1}\binom{n-1}{j}. \]
-        <p>La dernière somme vaut \(2^{n-1}\) (binôme de Newton avec \(a=b=1\)).</p>
+
+        <p class="q">1) Calcul de \(T_n\)</p>
+        <p class="etape">Étape 1 : enlever le terme nul</p>
+        <p>Pour \(k=0\), le terme vaut 0 : la somme commence à \(k=1\).</p>
+        <p class="etape">Étape 2 : formule du capitaine</p>
+        <div class="rappel"><span class="lab">Rappel · formule du capitaine</span>\[ k\binom nk=n\binom{n-1}{k-1} \qquad (1\leqslant k\leqslant n) \]</div>
+        \[ T_n=\sum_{k=1}^n n\binom{n-1}{k-1}=n\sum_{k=1}^n\binom{n-1}{k-1} \]
+        <p class="etape">Étape 3 : changer d'indice</p>
+        <p>On pose \(j=k-1\), qui va de 0 à \(n-1\) :</p>
+        \[ T_n=n\sum_{j=0}^{n-1}\binom{n-1}{j} \]
+        <p class="etape">Étape 4 : binôme de Newton</p>
+        <div class="rappel"><span class="lab">Rappel · binôme de Newton</span>\[ (a+b)^m=\sum_{j=0}^m\binom mj a^jb^{m-j} \quad\Longrightarrow\quad \sum_{j=0}^m\binom mj=2^m \]</div>
         <div class="res">\(T_n=n\,2^{\,n-1}\).</div>
       </div>
     </div>
@@ -159,12 +173,23 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice C — Somme double avec \(\min(i,j)\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">Calculer \(\displaystyle M_n=\sum_{1\leqslant i,j\leqslant n}\min(i,j)\).</div>
-        <p>On compte selon la valeur \(m=\min(i,j)\). Le nombre de couples \((i,j)\) avec \(\min=m\) est
-        \((n-m+1)^2-(n-m)^2=2(n-m)+1\) (les deux \(\geqslant m\), moins les deux \(\geqslant m+1\)). Donc :</p>
-        \[ M_n=\sum_{m=1}^n m\big(2(n-m)+1\big)=(2n+1)\sum_{m=1}^n m-2\sum_{m=1}^n m^2. \]
-        \[ =(2n+1)\frac{n(n+1)}2-2\frac{n(n+1)(2n+1)}6=n(n+1)(2n+1)\left(\frac12-\frac13\right). \]
+
+        <p class="q">1) Calcul de \(M_n\)</p>
+        <p>On regroupe les couples \((i,j)\) selon la valeur \(m=\min(i,j)\).</p>
+        <p class="etape">Étape 1 : compter les couples de minimum \(m\)</p>
+        <ul>
+          <li>Couples avec \(i\geqslant m\) et \(j\geqslant m\) : \((n-m+1)^2\).</li>
+          <li>Parmi eux, ceux avec \(i\geqslant m+1\) et \(j\geqslant m+1\) : \((n-m)^2\).</li>
+        </ul>
+        <p>La différence donne les couples de minimum exactement \(m\) :</p>
+        \[ (n-m+1)^2-(n-m)^2=2(n-m)+1 \]
+        <p class="etape">Étape 2 : écrire la somme</p>
+        \[ M_n=\sum_{m=1}^n m\big(2n+1-2m\big)=(2n+1)\sum_{m=1}^n m-2\sum_{m=1}^n m^2 \]
+        <p class="etape">Étape 3 : sommes usuelles</p>
+        <div class="rappel"><span class="lab">Rappel · sommes usuelles</span>\[ \sum_{m=1}^n m=\frac{n(n+1)}2 \qquad \sum_{m=1}^n m^2=\frac{n(n+1)(2n+1)}6 \]</div>
+        \[ M_n=(2n+1)\frac{n(n+1)}2-\frac{n(n+1)(2n+1)}3=n(n+1)(2n+1)\left(\frac12-\frac13\right) \]
         <div class="res">\(M_n=\dfrac{n(n+1)(2n+1)}{6}\).</div>
-        <p style="font-size:.9rem;opacity:.85">Cohérent avec \(\sum\max+\sum\min=\sum(i+j)=n^2(n+1)\).</p>
+        <p>Contrôle : avec \(\max\) (exercice 7 e du TD), \(\sum\max+\sum\min=\sum(i+j)=n^2(n+1)\).</p>
       </div>
     </div>
   </section>
@@ -180,33 +205,75 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 1 — Écrire avec \(\sum\)</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(1-a+a^2-a^3+\cdots+a^{2n}-a^{2n+1}\)</p>
-        <p>Terme général \((-1)^k a^k\), \(k\) de \(0\) à \(2n+1\).</p>
-        <p class="res">\(\displaystyle\sum_{k=0}^{2n+1}(-1)^k a^k\)</p>
-        <p class="q">(b) \(\dfrac11-\dfrac22+\dfrac43-\dfrac84+\cdots+\dfrac{2^{2026}}{2027}\)</p>
-        <p>Terme général \((-1)^k\dfrac{2^k}{k+1}\), \(k\) de \(0\) à \(2026\).</p>
-        <p class="res">\(\displaystyle\sum_{k=0}^{2026}(-1)^k\frac{2^k}{k+1}\)</p>
+        <div class="enonce">Écrire les sommes suivantes à l'aide du symbole \(\sum\).</div>
+
+        <p class="q">a) \(1-a+a^2-a^3+\cdots+a^{2n}-a^{2n+1}\)</p>
+        <p class="etape">Étape 1 : le terme général</p>
+        <p>Les puissances de \(a\) montent de 1 en 1 ; le signe alterne, \(+\) pour les puissances paires : \((-1)^k a^k\).</p>
+        <p class="etape">Étape 2 : les bornes</p>
+        <p>Premier terme \(a^0\), dernier \(a^{2n+1}\) : \(k\) va de 0 à \(2n+1\).</p>
+        <div class="res">\(\displaystyle\sum_{k=0}^{2n+1}(-1)^k a^k\)</div>
+
+        <p class="q">b) \(\dfrac11-\dfrac22+\dfrac43-\dfrac84+\cdots+\dfrac{2^{2026}}{2027}\)</p>
+        <p class="etape">Étape 1 : le terme général</p>
+        <p>Numérateurs \(2^0,2^1,2^2,\dots\) ; dénominateurs \(1,2,3,\dots\) (exposant + 1) ; signe alterné : \((-1)^k\dfrac{2^k}{k+1}\).</p>
+        <p class="etape">Étape 2 : les bornes</p>
+        <p>Dernier terme \(\dfrac{2^{2026}}{2027}\) : \(k=2026\), de signe \((-1)^{2026}=+1\), cohérent.</p>
+        <div class="res">\(\displaystyle\sum_{k=0}^{2026}(-1)^k\frac{2^k}{k+1}\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 2 — Écrire sans \(\sum\)</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\sum_{k=0}^3(2+k)\)</p><p class="res">\(2+3+4+5=14\)</p>
-        <p class="q">(b) \(\sum_{k=2}^2 n^k\)</p><p>Un seul terme (\(k=2\)).</p><p class="res">\(n^2\)</p>
-        <p class="q">(c) \(\sum_{k=1}^5 k^2\)</p><p class="res">\(1+4+9+16+25=55\)</p>
-        <p class="q">(d) \(\sum_{j=7}^5 \dfrac{j^2}{j+1}\)</p><p>Borne basse \(>\) borne haute : somme vide.</p><p class="res">\(0\)</p>
+        <div class="enonce">Écrire les sommes suivantes sans le symbole \(\sum\), puis les calculer.</div>
+
+        <p class="q">a) \(\sum_{k=0}^3(2+k)\)</p>
+        <p class="etape">Étape 1 : remplacer \(k=0,1,2,3\)</p>
+        \[ 2+3+4+5 \]
+        <div class="res">\(14\)</div>
+
+        <p class="q">b) \(\sum_{k=2}^2 n^k\)</p>
+        <p class="etape">Étape 1 : un seul indice, \(k=2\)</p>
+        <div class="res">\(n^2\)</div>
+
+        <p class="q">c) \(\sum_{k=1}^5 k^2\)</p>
+        <p class="etape">Étape 1 : remplacer \(k=1,\dots,5\)</p>
+        \[ 1+4+9+16+25 \]
+        <div class="res">\(55\)</div>
+
+        <p class="q">d) \(\sum_{j=7}^5 \dfrac{j^2}{j+1}\)</p>
+        <p class="etape">Étape 1 : comparer les bornes</p>
+        <div class="rappel"><span class="lab">Rappel · somme vide</span>Si l'indice de départ dépasse l'indice d'arrivée, la somme ne contient aucun terme : elle vaut 0.</div>
+        <div class="res">\(0\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 3 — Vrai / faux</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\sum_{k=1}^n(\alpha+a_k)=\alpha+\sum a_j\)</p>
-        <p><b>Faux</b> : le membre de gauche vaut \(n\alpha+\sum a_k\) (le terme constant est sommé \(n\) fois).</p>
-        <p class="q">(b) \(\sum(a_k+b_k)=\sum a_j+\sum b_k\)</p><p><b>Vrai</b> (linéarité).</p>
-        <p class="q">(c) \(\sum a_k^\alpha=\big(\sum a_k\big)^\alpha\)</p><p><b>Faux</b> : une somme de puissances n'est pas la puissance de la somme.</p>
-        <p class="q">(d) \(\sum a_kb_k=\big(\sum a_k\big)\big(\sum b_k\big)\)</p><p><b>Faux</b> : le produit de sommes contient tous les termes croisés \(a_ib_j\).</p>
+        <div class="enonce">Les égalités suivantes (sommes de \(k=1\) à \(n\)) sont-elles vraies ?</div>
+
+        <p class="q">a) \(\sum_{k=1}^n(\alpha+a_k)=\alpha+\sum a_j\)</p>
+        <div class="rappel"><span class="lab">Rappel · linéarité de \(\sum\)</span>\[ \sum_{k=1}^n(\lambda a_k+b_k)=\lambda\sum_{k=1}^n a_k+\sum_{k=1}^n b_k \qquad \sum_{k=1}^n\alpha=n\alpha \]</div>
+        <p class="etape">Étape 1 : séparer la somme</p>
+        \[ \sum_{k=1}^n(\alpha+a_k)=n\alpha+\sum_{k=1}^n a_k \]
+        <div class="res"><b>Faux</b> (sauf si \(n=1\) ou \(\alpha=0\)) : la constante est ajoutée \(n\) fois.</div>
+
+        <p class="q">b) \(\sum(a_k+b_k)=\sum a_j+\sum b_k\)</p>
+        <p class="etape">Étape 1 : linéarité</p>
+        <p>Le nom de l'indice muet ne compte pas.</p>
+        <div class="res"><b>Vrai</b>.</div>
+
+        <p class="q">c) \(\sum a_k^\alpha=\big(\sum a_k\big)^\alpha\)</p>
+        <p class="etape">Étape 1 : contre-exemple</p>
+        <p>\(n=2\), \(a_1=a_2=1\), \(\alpha=2\) : à gauche \(1+1=2\), à droite \((1+1)^2=4\).</p>
+        <div class="res"><b>Faux</b>.</div>
+
+        <p class="q">d) \(\sum a_kb_k=\big(\sum a_k\big)\big(\sum b_k\big)\)</p>
+        <p class="etape">Étape 1 : contre-exemple</p>
+        <p>\(n=2\), tous les termes égaux à 1 : à gauche \(2\), à droite \(2\times 2=4\). Le produit des sommes contient aussi les termes croisés \(a_ib_j\), \(i\neq j\).</p>
+        <div class="res"><b>Faux</b>.</div>
       </div>
     </div>
 
@@ -215,61 +282,168 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 4 — Sommes simples</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\sum_{k=2}^{n+1}3\)</p><p>\(3\times(\text{nb de termes})=3n\).</p><p class="res">\(3n\)</p>
-        <p class="q">(b) \(\sum_{k=1}^n 2k=2\cdot\frac{n(n+1)}2\)</p><p class="res">\(n(n+1)\)</p>
-        <p class="q">(c) \(\sum_{k=0}^n(k+2)=\frac{n(n+1)}2+2(n+1)\)</p><p class="res">\(\dfrac{(n+1)(n+4)}2\)</p>
-        <p class="q">(d) \(\sum_{k=0}^n(k-1)^2\)</p><p>Changement \(j=k-1\) : \(\sum_{j=-1}^{n-1}j^2=1+\sum_{j=0}^{n-1}j^2\).</p><p class="res">\(1+\dfrac{(n-1)n(2n-1)}6\)</p>
-        <p class="q">(e) \(\sum_{k=2}^{n-1}3^{k-2}\)</p><p>\(j=k-2\) : \(\sum_{j=0}^{n-3}3^j=\frac{3^{n-2}-1}{3-1}\).</p><p class="res">\(\dfrac{3^{n-2}-1}{2}\)</p>
-        <p class="q">(f) \(\sum_{k=n}^{2n}\dfrac{2^{k-1}}{3^{k+2}}\)</p>
-        <p>\(\dfrac{2^{k-1}}{3^{k+2}}=\dfrac1{18}\left(\dfrac23\right)^k\). Somme géométrique (\(n+1\) termes, \(q=\tfrac23\)) :</p>
-        \[ \frac1{18}\sum_{k=n}^{2n}\Big(\tfrac23\Big)^k=\frac1{18}\cdot\Big(\tfrac23\Big)^n\cdot\frac{1-(2/3)^{n+1}}{1-2/3}. \]
-        <p class="res">\(\dfrac16\left(\dfrac23\right)^n\left(1-\left(\dfrac23\right)^{n+1}\right)\)</p>
+        <div class="enonce">Calculer les sommes suivantes en fonction de \(n\).</div>
+
+        <p class="q">a) \(\sum_{k=2}^{n+1}3\)</p>
+        <p class="etape">Étape 1 : compter les termes</p>
+        <p>De 2 à \(n+1\) : \((n+1)-2+1=n\) termes, tous égaux à 3.</p>
+        <div class="res">\(3n\)</div>
+
+        <p class="q">b) \(\sum_{k=1}^n 2k\)</p>
+        <div class="rappel"><span class="lab">Rappel · sommes usuelles</span>\[ \sum_{k=1}^n k=\frac{n(n+1)}2 \qquad \sum_{k=1}^n k^2=\frac{n(n+1)(2n+1)}6 \]</div>
+        <p class="etape">Étape 1 : sortir le 2</p>
+        \[ 2\sum_{k=1}^n k=2\times\frac{n(n+1)}2 \]
+        <div class="res">\(n(n+1)\)</div>
+
+        <p class="q">c) \(\sum_{k=0}^n(k+2)\)</p>
+        <p class="etape">Étape 1 : séparer</p>
+        <p>Il y a \(n+1\) termes (de 0 à \(n\)) :</p>
+        \[ \sum_{k=0}^n k+\sum_{k=0}^n 2=\frac{n(n+1)}2+2(n+1) \]
+        <p class="etape">Étape 2 : factoriser par \(\dfrac{n+1}{2}\)</p>
+        \[ \frac{n+1}{2}\,(n+4) \]
+        <div class="res">\(\dfrac{(n+1)(n+4)}2\)</div>
+
+        <p class="q">d) \(\sum_{k=0}^n(k-1)^2\)</p>
+        <p class="etape">Étape 1 : changer d'indice</p>
+        <p>On pose \(j=k-1\) : \(j\) va de \(-1\) à \(n-1\).</p>
+        \[ \sum_{j=-1}^{n-1}j^2=(-1)^2+0^2+\sum_{j=1}^{n-1}j^2 \]
+        <p class="etape">Étape 2 : somme des carrés jusqu'à \(n-1\)</p>
+        <div class="res">\(1+\dfrac{(n-1)n(2n-1)}6\)</div>
+
+        <p class="q">e) \(\sum_{k=2}^{n-1}3^{k-2}\)</p>
+        <p class="etape">Étape 1 : changer d'indice</p>
+        <p>\(j=k-2\) va de 0 à \(n-3\) : \(\displaystyle\sum_{j=0}^{n-3}3^j\).</p>
+        <p class="etape">Étape 2 : somme géométrique</p>
+        <div class="rappel"><span class="lab">Rappel · somme géométrique</span>\[ \sum_{j=0}^{m}q^j=\frac{q^{m+1}-1}{q-1} \qquad (q\neq 1) \]</div>
+        \[ \sum_{j=0}^{n-3}3^j=\frac{3^{n-2}-1}{3-1} \]
+        <div class="res">\(\dfrac{3^{n-2}-1}{2}\)</div>
+
+        <p class="q">f) \(\sum_{k=n}^{2n}\dfrac{2^{k-1}}{3^{k+2}}\)</p>
+        <p class="etape">Étape 1 : faire apparaître \(q^k\)</p>
+        \[ \frac{2^{k-1}}{3^{k+2}}=\frac{2^k}{2}\times\frac{1}{9\times 3^k}=\frac1{18}\left(\frac23\right)^k \]
+        <p class="etape">Étape 2 : somme géométrique qui ne commence pas à 0</p>
+        <p>On factorise le premier terme \(\left(\tfrac23\right)^n\) ; il reste \(n+1\) termes :</p>
+        \[ \sum_{k=n}^{2n}\Big(\tfrac23\Big)^k=\Big(\tfrac23\Big)^n\sum_{j=0}^{n}\Big(\tfrac23\Big)^j=\Big(\tfrac23\Big)^n\,\frac{1-(2/3)^{n+1}}{1-2/3} \]
+        <p class="etape">Étape 3 : simplifier</p>
+        \[ \frac1{18}\times 3\Big(\tfrac23\Big)^n\Big(1-\big(\tfrac23\big)^{n+1}\Big) \]
+        <div class="res">\(\dfrac16\left(\dfrac23\right)^n\left(1-\left(\dfrac23\right)^{n+1}\right)\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 5 — Télescopage (avec \(\ln\))</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\sum_{k=1}^n\ln\!\big(1+\tfrac1k\big)\)</p>
-        <p>\(=\sum\ln\frac{k+1}k=\sum(\ln(k+1)-\ln k)=\ln(n+1)-\ln1\).</p><p class="res">\(\ln(n+1)\)</p>
-        <p class="q">(b) \(\sum_{k=1}^n\ln\!\big(1+\tfrac2k\big)\)</p>
-        <p>\(=\sum\ln\frac{k+2}k=\sum\ln(k+2)-\sum\ln k=\big[\ln(n+1)+\ln(n+2)\big]-\big[\ln1+\ln2\big]\).</p>
-        <p class="res">\(\ln\dfrac{(n+1)(n+2)}{2}\)</p>
+        <div class="enonce">Calculer les sommes suivantes.</div>
+
+        <p class="q">a) \(\sum_{k=1}^n\ln\!\big(1+\tfrac1k\big)\)</p>
+        <p class="etape">Étape 1 : écrire le log comme une différence</p>
+        \[ \ln\!\Big(1+\frac1k\Big)=\ln\frac{k+1}{k}=\ln(k+1)-\ln k \]
+        <p class="etape">Étape 2 : télescoper</p>
+        <div class="rappel"><span class="lab">Rappel · somme télescopique</span>\[ \sum_{k=1}^n\big(u_{k+1}-u_k\big)=u_{n+1}-u_1 \]</div>
+        \[ \sum_{k=1}^n\big(\ln(k+1)-\ln k\big)=\ln(n+1)-\ln 1 \]
+        <div class="res">\(\ln(n+1)\)</div>
+
+        <p class="q">b) \(\sum_{k=1}^n\ln\!\big(1+\tfrac2k\big)\)</p>
+        <p class="etape">Étape 1 : écrire le log comme une différence</p>
+        \[ \ln\frac{k+2}{k}=\ln(k+2)-\ln k \]
+        <p class="etape">Étape 2 : télescopage « à deux crans »</p>
+        <p>Dans \(\sum_{k=1}^n\ln(k+2)-\sum_{k=1}^n\ln k\), tous les \(\ln 3,\dots,\ln n\) se simplifient. Il reste :</p>
+        \[ \big[\ln(n+1)+\ln(n+2)\big]-\big[\ln1+\ln2\big] \]
+        <div class="res">\(\ln\dfrac{(n+1)(n+2)}{2}\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 6 — Regroupement pair/impair</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\sum_{k=0}^{2n}\cos(k\pi)\)</p>
-        <p>\(\cos(k\pi)=(-1)^k\). \(\sum_{k=0}^{2n}(-1)^k=(n+1)-n=1\) (pairs \(-\) impairs).</p><p class="res">\(1\)</p>
-        <p class="q">(b) \(\sum_{k=0}^{2n}(-1)^k k^2\)</p>
-        <p>On utilise \(\sum_{k=1}^m(-1)^k k^2=(-1)^m\frac{m(m+1)}2\) (récurrence). Ici \(m=2n\) (pair) :</p>
-        <p class="res">\(\dfrac{2n(2n+1)}2=n(2n+1)\)</p>
+        <div class="enonce">Calculer les sommes suivantes en séparant les indices pairs et impairs.</div>
+
+        <p class="q">a) \(\sum_{k=0}^{2n}\cos(k\pi)\)</p>
+        <p class="etape">Étape 1 : simplifier le terme</p>
+        \[ \cos(k\pi)=(-1)^k \]
+        <p class="etape">Étape 2 : compter les \(+1\) et les \(-1\)</p>
+        <p>De 0 à \(2n\) : \(n+1\) indices pairs (\(+1\)) et \(n\) indices impairs (\(-1\)).</p>
+        \[ (n+1)-n \]
+        <div class="res">\(1\)</div>
+
+        <p class="q">b) \(\sum_{k=0}^{2n}(-1)^k k^2\)</p>
+        <p class="etape">Étape 1 : regrouper par paires</p>
+        <p>Le terme \(k=0\) est nul. On associe chaque pair \(2j\) à l'impair qui le précède \(2j-1\), pour \(j=1,\dots,n\) :</p>
+        \[ (2j)^2-(2j-1)^2=4j-1 \]
+        <p class="etape">Étape 2 : sommer les paires</p>
+        \[ \sum_{j=1}^n(4j-1)=4\,\frac{n(n+1)}2-n=2n^2+n \]
+        <div class="res">\(n(2n+1)\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 7 — Sommes doubles</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\sum_{1\leqslant i\leqslant n,\,1\leqslant j\leqslant q}i=\sum_{i=1}^n q\,i=q\cdot\frac{n(n+1)}2\)</p><p class="res">\(\dfrac{q\,n(n+1)}2\)</p>
-        <p class="q">(b) \(\sum_{1\leqslant i,j\leqslant n}(i-j)\)</p><p>Antisymétrique en \((i,j)\) : chaque \((i,j)\) s'annule avec \((j,i)\).</p><p class="res">\(0\)</p>
-        <p class="q">(c) \(\sum_{1\leqslant i,j\leqslant n}ij=\big(\sum i\big)\big(\sum j\big)=\left(\frac{n(n+1)}2\right)^2\)</p><p class="res">\(\dfrac{n^2(n+1)^2}4\)</p>
-        <p class="q">(d) \(\sum_{1\leqslant i,j\leqslant n}(i+j)^2\)</p>
-        <p>\((i+j)^2=i^2+2ij+j^2\) : \(2n\sum i^2+2\big(\sum i\big)^2=\frac{n^2(n+1)(2n+1)}3+\frac{n^2(n+1)^2}2\).</p>
-        <p class="res">\(\dfrac{n^2(n+1)(7n+5)}6\)</p>
-        <p class="q">(e) \(\sum_{1\leqslant i,j\leqslant n}\max(i,j)\)</p>
-        <p>Nb de couples de \(\max=m\) : \(2m-1\). \(\sum_{m=1}^n m(2m-1)=2\frac{n(n+1)(2n+1)}6-\frac{n(n+1)}2\).</p>
-        <p class="res">\(\dfrac{n(n+1)(4n-1)}6\)</p>
-        <p class="q">(f) \(\sum_{1\leqslant i\leqslant j\leqslant n}(i+j)\)</p>
-        <p>\(=\sum_{j=1}^n\Big(\frac{j(j+1)}2+j^2\Big)=\sum_{j=1}^n\frac{3j^2+j}2=\frac12\Big(3\frac{n(n+1)(2n+1)}6+\frac{n(n+1)}2\Big)\).</p>
-        <p class="res">\(\dfrac{n(n+1)^2}2\)</p>
-        <p class="q">(g) \(\sum_{1\leqslant i\leqslant j\leqslant n}\dfrac ij\)</p>
-        <p>\(=\sum_{j=1}^n\frac1j\sum_{i=1}^j i=\sum_{j=1}^n\frac1j\cdot\frac{j(j+1)}2=\sum_{j=1}^n\frac{j+1}2\).</p>
-        <p class="res">\(\dfrac{n(n+3)}4\)</p>
-        <p class="q">(h) \(\sum_{1\leqslant i<j\leqslant n}ij\)</p>
-        <p>\(=\dfrac{\big(\sum i\big)^2-\sum i^2}2=\dfrac12\left(\frac{n^2(n+1)^2}4-\frac{n(n+1)(2n+1)}6\right)\).</p>
-        <p class="res">\(\dfrac{(n-1)n(n+1)(3n+2)}{24}\)</p>
+        <div class="enonce">Calculer les sommes doubles suivantes.</div>
+
+        <p class="q">a) \(\sum_{1\leqslant i\leqslant n,\,1\leqslant j\leqslant q}i\)</p>
+        <div class="rappel"><span class="lab">Rappel · somme double sur un rectangle</span>\[ \sum_{\substack{1\leqslant i\leqslant n\\1\leqslant j\leqslant q}}a_{ij}=\sum_{i=1}^n\Big(\sum_{j=1}^q a_{ij}\Big) \]</div>
+        <p class="etape">Étape 1 : somme intérieure sur \(j\)</p>
+        <p>\(i\) ne dépend pas de \(j\) : \(\sum_{j=1}^q i=q\,i\).</p>
+        <p class="etape">Étape 2 : somme sur \(i\)</p>
+        \[ \sum_{i=1}^n q\,i=q\,\frac{n(n+1)}2 \]
+        <div class="res">\(\dfrac{q\,n(n+1)}2\)</div>
+
+        <p class="q">b) \(\sum_{1\leqslant i,j\leqslant n}(i-j)\)</p>
+        <p class="etape">Étape 1 : séparer</p>
+        \[ \sum_{i,j}i-\sum_{i,j}j=n\sum_i i-n\sum_j j \]
+        <p>Les deux sommes sont égales (indices muets).</p>
+        <div class="res">\(0\)</div>
+
+        <p class="q">c) \(\sum_{1\leqslant i,j\leqslant n}ij\)</p>
+        <p class="etape">Étape 1 : variables séparées</p>
+        <p>Le terme est un produit d'un facteur en \(i\) et d'un facteur en \(j\) :</p>
+        \[ \sum_{i,j}ij=\Big(\sum_{i=1}^n i\Big)\Big(\sum_{j=1}^n j\Big)=\left(\frac{n(n+1)}2\right)^2 \]
+        <div class="res">\(\dfrac{n^2(n+1)^2}4\)</div>
+
+        <p class="q">d) \(\sum_{1\leqslant i,j\leqslant n}(i+j)^2\)</p>
+        <p class="etape">Étape 1 : développer</p>
+        \[ (i+j)^2=i^2+2ij+j^2 \]
+        <p class="etape">Étape 2 : sommer chaque morceau</p>
+        <ul>
+          <li>\(\sum_{i,j}i^2=n\sum_i i^2\), et \(\sum_{i,j}j^2\) est égal.</li>
+          <li>\(\sum_{i,j}2ij=2\big(\sum i\big)^2\) d'après c).</li>
+        </ul>
+        \[ 2n\,\frac{n(n+1)(2n+1)}6+2\,\frac{n^2(n+1)^2}4=\frac{n^2(n+1)(2n+1)}3+\frac{n^2(n+1)^2}2 \]
+        <p class="etape">Étape 3 : factoriser par \(\dfrac{n^2(n+1)}6\)</p>
+        \[ \frac{n^2(n+1)}6\big(2(2n+1)+3(n+1)\big)=\frac{n^2(n+1)(7n+5)}6 \]
+        <div class="res">\(\dfrac{n^2(n+1)(7n+5)}6\)</div>
+
+        <p class="q">e) \(\sum_{1\leqslant i,j\leqslant n}\max(i,j)\)</p>
+        <p class="etape">Étape 1 : compter les couples de maximum \(m\)</p>
+        <p>Couples dans \(\{1..m\}^2\) moins ceux dans \(\{1..m-1\}^2\) : \(m^2-(m-1)^2=2m-1\).</p>
+        <p class="etape">Étape 2 : sommer</p>
+        \[ \sum_{m=1}^n m(2m-1)=2\,\frac{n(n+1)(2n+1)}6-\frac{n(n+1)}2=\frac{n(n+1)}6\big(2(2n+1)-3\big) \]
+        <div class="res">\(\dfrac{n(n+1)(4n-1)}6\)</div>
+
+        <p class="q">f) \(\sum_{1\leqslant i\leqslant j\leqslant n}(i+j)\)</p>
+        <div class="rappel"><span class="lab">Rappel · somme sur un triangle</span>\[ \sum_{1\leqslant i\leqslant j\leqslant n}a_{ij}=\sum_{j=1}^n\Big(\sum_{i=1}^{j}a_{ij}\Big) \]</div>
+        <p class="etape">Étape 1 : somme intérieure (\(j\) fixé, \(i\) de 1 à \(j\))</p>
+        \[ \sum_{i=1}^j(i+j)=\frac{j(j+1)}2+j\times j=\frac{3j^2+j}2 \]
+        <p class="etape">Étape 2 : somme sur \(j\)</p>
+        \[ \frac12\left(3\,\frac{n(n+1)(2n+1)}6+\frac{n(n+1)}2\right)=\frac{n(n+1)}4\,(2n+1+1) \]
+        <div class="res">\(\dfrac{n(n+1)^2}2\)</div>
+
+        <p class="q">g) \(\sum_{1\leqslant i\leqslant j\leqslant n}\dfrac ij\)</p>
+        <p class="etape">Étape 1 : somme intérieure</p>
+        \[ \sum_{i=1}^j\frac ij=\frac1j\times\frac{j(j+1)}2=\frac{j+1}2 \]
+        <p class="etape">Étape 2 : somme sur \(j\)</p>
+        \[ \sum_{j=1}^n\frac{j+1}2=\frac12\left(\frac{n(n+1)}2+n\right)=\frac{n(n+3)}4 \]
+        <div class="res">\(\dfrac{n(n+3)}4\)</div>
+
+        <p class="q">h) \(\sum_{1\leqslant i&lt;j\leqslant n}ij\)</p>
+        <p class="etape">Étape 1 : découper le carré</p>
+        <p>Le carré \(\sum_{i,j}ij\) se coupe en : diagonale \(i=j\), partie \(i&lt;j\), partie \(i>j\). Les deux dernières sont égales par symétrie.</p>
+        \[ \Big(\sum i\Big)^2=\sum_{i}i^2+2\sum_{i&lt;j}ij \]
+        <p class="etape">Étape 2 : isoler et calculer</p>
+        \[ \sum_{i&lt;j}ij=\frac12\left(\frac{n^2(n+1)^2}4-\frac{n(n+1)(2n+1)}6\right)=\frac{n(n+1)}{24}\big(3n(n+1)-2(2n+1)\big) \]
+        <p>Or \(3n^2+3n-4n-2=3n^2-n-2=(n-1)(3n+2)\).</p>
+        <div class="res">\(\dfrac{(n-1)n(n+1)(3n+2)}{24}\)</div>
       </div>
     </div>
 
@@ -278,29 +452,86 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 8 — Écrire sans \(\prod\)</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\prod_{k=1}^5 k^2=(1\cdot2\cdot3\cdot4\cdot5)^2=120^2\)</p><p class="res">\(14400\)</p>
-        <p class="q">(b) \(\prod_{s=0}^4\dfrac{s^2}{s^2+1}\)</p><p>Le facteur \(s=0\) vaut \(\frac{0}{1}=0\).</p><p class="res">\(0\)</p>
-        <p class="q">(c) \(\prod_{n=1}^4\dfrac{x^{2n+4}}{n}\)</p><p>\(=\dfrac{x^{\sum(2n+4)}}{4!}=\dfrac{x^{36}}{24}\) (car \(\sum_{n=1}^4(2n+4)=36\)).</p><p class="res">\(\dfrac{x^{36}}{24}\)</p>
+        <div class="enonce">Écrire sans le symbole \(\prod\) puis calculer.</div>
+
+        <p class="q">a) \(\prod_{k=1}^5 k^2\)</p>
+        <p class="etape">Étape 1 : regrouper les carrés</p>
+        \[ \prod_{k=1}^5 k^2=\Big(\prod_{k=1}^5 k\Big)^2=(5!)^2=120^2 \]
+        <div class="res">\(14\,400\)</div>
+
+        <p class="q">b) \(\prod_{s=0}^4\dfrac{s^2}{s^2+1}\)</p>
+        <p class="etape">Étape 1 : regarder le premier facteur</p>
+        <p>Pour \(s=0\) : \(\dfrac{0}{1}=0\). Un produit avec un facteur nul est nul.</p>
+        <div class="res">\(0\)</div>
+
+        <p class="q">c) \(\prod_{n=1}^4\dfrac{x^{2n+4}}{n}\)</p>
+        <p class="etape">Étape 1 : séparer numérateurs et dénominateurs</p>
+        <div class="rappel"><span class="lab">Rappel · produit de puissances</span>\[ \prod_k x^{a_k}=x^{\sum_k a_k} \]</div>
+        \[ \frac{x^{6}\,x^{8}\,x^{10}\,x^{12}}{1\times2\times3\times4}=\frac{x^{6+8+10+12}}{4!} \]
+        <div class="res">\(\dfrac{x^{36}}{24}\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 9 — Vrai / faux (produits)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\prod(\alpha a_k)=\alpha\prod a_k\)</p><p><b>Faux</b> : \(\prod(\alpha a_k)=\alpha^n\prod a_k\).</p>
-        <p class="q">(b) \(\prod(a_kb_k)=\big(\prod a_j\big)\big(\prod b_k\big)\)</p><p><b>Vrai</b>.</p>
-        <p class="q">(c) \(\prod(a_k+b_k)=\prod a_k+\prod b_k\)</p><p><b>Faux</b> : le produit n'est pas linéaire.</p>
-        <p class="q">(d) \(\prod a_k^\beta=\big(\prod a_k\big)^\beta\)</p><p><b>Vrai</b>.</p>
+        <div class="enonce">Les égalités suivantes (produits de \(k=1\) à \(n\)) sont-elles vraies ?</div>
+
+        <p class="q">a) \(\prod(\alpha a_k)=\alpha\prod a_k\)</p>
+        <p class="etape">Étape 1 : compter les \(\alpha\)</p>
+        <p>Chacun des \(n\) facteurs apporte un \(\alpha\) : \(\prod(\alpha a_k)=\alpha^n\prod a_k\).</p>
+        <div class="res"><b>Faux</b> en général.</div>
+
+        <p class="q">b) \(\prod(a_kb_k)=\big(\prod a_j\big)\big(\prod b_k\big)\)</p>
+        <p class="etape">Étape 1 : réordonner les facteurs</p>
+        <p>La multiplication est commutative : on peut regrouper tous les \(a\) puis tous les \(b\).</p>
+        <div class="res"><b>Vrai</b>.</div>
+
+        <p class="q">c) \(\prod(a_k+b_k)=\prod a_k+\prod b_k\)</p>
+        <p class="etape">Étape 1 : contre-exemple</p>
+        <p>\(n=2\), tous égaux à 1 : à gauche \(2\times2=4\), à droite \(1+1=2\).</p>
+        <div class="res"><b>Faux</b>.</div>
+
+        <p class="q">d) \(\prod a_k^\beta=\big(\prod a_k\big)^\beta\)</p>
+        <p class="etape">Étape 1 : propriété des puissances</p>
+        <p>\((ab)^\beta=a^\beta b^\beta\), répétée sur les \(n\) facteurs (pour \(a_k>0\) si \(\beta\) n'est pas entier).</p>
+        <div class="res"><b>Vrai</b>.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 10 — Calculer des produits</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\prod_{k=3}^n k^2=\big(\prod_{k=3}^n k\big)^2=\left(\frac{n!}{2}\right)^2\)</p><p class="res">\(\dfrac{(n!)^2}{4}\)</p>
-        <p class="q">(b) \(\prod_{k=1}^n\dfrac{2k+1}{2k-1}\)</p><p>Télescopique : \(\frac31\cdot\frac53\cdot\frac75\cdots\frac{2n+1}{2n-1}\).</p><p class="res">\(2n+1\)</p>
-        <p class="q">(c) \(\prod_{k=2}^n\big(1-\tfrac1k\big)=\prod\frac{k-1}k=\frac12\cdot\frac23\cdots\frac{n-1}n\)</p><p class="res">\(\dfrac1n\)</p>
-        <p class="q">(d) \(\prod_{k=2}^n\big(1-\tfrac1{k^2}\big)=\prod\frac{(k-1)(k+1)}{k^2}=\underbrace{\prod\tfrac{k-1}k}_{1/n}\cdot\underbrace{\prod\tfrac{k+1}k}_{(n+1)/2}\)</p><p class="res">\(\dfrac{n+1}{2n}\)</p>
+        <div class="enonce">Calculer les produits suivants en fonction de \(n\).</div>
+
+        <p class="q">a) \(\prod_{k=3}^n k^2\)</p>
+        <p class="etape">Étape 1 : sortir le carré</p>
+        \[ \prod_{k=3}^n k^2=\Big(\prod_{k=3}^n k\Big)^2 \]
+        <p class="etape">Étape 2 : faire apparaître \(n!\)</p>
+        \[ \prod_{k=3}^n k=\frac{1\times2\times3\times\cdots\times n}{1\times 2}=\frac{n!}{2} \]
+        <div class="res">\(\dfrac{(n!)^2}{4}\)</div>
+
+        <p class="q">b) \(\prod_{k=1}^n\dfrac{2k+1}{2k-1}\)</p>
+        <div class="rappel"><span class="lab">Rappel · produit télescopique</span>\[ \prod_{k=1}^n\frac{u_{k+1}}{u_k}=\frac{u_{n+1}}{u_1} \]</div>
+        <p class="etape">Étape 1 : écrire les premiers facteurs</p>
+        \[ \frac31\times\frac53\times\frac75\times\cdots\times\frac{2n+1}{2n-1} \]
+        <p class="etape">Étape 2 : simplifier</p>
+        <p>Chaque numérateur se simplifie avec le dénominateur suivant. Il reste \(\dfrac{2n+1}{1}\).</p>
+        <div class="res">\(2n+1\)</div>
+
+        <p class="q">c) \(\prod_{k=2}^n\big(1-\tfrac1k\big)\)</p>
+        <p class="etape">Étape 1 : réduire au même dénominateur</p>
+        \[ 1-\frac1k=\frac{k-1}{k} \]
+        <p class="etape">Étape 2 : télescoper</p>
+        \[ \frac12\times\frac23\times\cdots\times\frac{n-1}{n}=\frac1n \]
+        <div class="res">\(\dfrac1n\)</div>
+
+        <p class="q">d) \(\prod_{k=2}^n\big(1-\tfrac1{k^2}\big)\)</p>
+        <p class="etape">Étape 1 : factoriser</p>
+        \[ 1-\frac1{k^2}=\frac{k^2-1}{k^2}=\frac{k-1}{k}\times\frac{k+1}{k} \]
+        <p class="etape">Étape 2 : deux produits télescopiques</p>
+        \[ \prod_{k=2}^n\frac{k-1}{k}=\frac1n \qquad \prod_{k=2}^n\frac{k+1}{k}=\frac32\times\frac43\times\cdots\times\frac{n+1}{n}=\frac{n+1}{2} \]
+        <div class="res">\(\dfrac{n+1}{2n}\)</div>
       </div>
     </div>
 
@@ -309,9 +540,23 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 11 — Sommes binomiales</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\sum_{k=0}^n\binom nk=(1+1)^n\)</p><p class="res">\(2^n\)</p>
-        <p class="q">(b) \(\sum_{k=0}^n\binom nk 2^k=(2+1)^n\)</p><p class="res">\(3^n\)</p>
-        <p class="q">(c) \(\sum_{k=0}^n(-1)^k\binom nk=(1-1)^n\)</p><p class="res">\(0\) (pour \(n\geqslant1\))</p>
+        <div class="enonce">Calculer les sommes suivantes.</div>
+
+        <p class="q">a) \(\sum_{k=0}^n\binom nk\)</p>
+        <div class="rappel"><span class="lab">Rappel · binôme de Newton</span>\[ (a+b)^n=\sum_{k=0}^n\binom nk a^k b^{n-k} \]</div>
+        <p class="etape">Étape 1 : choisir \(a=b=1\)</p>
+        \[ \sum_{k=0}^n\binom nk 1^k1^{n-k}=(1+1)^n \]
+        <div class="res">\(2^n\)</div>
+
+        <p class="q">b) \(\sum_{k=0}^n\binom nk 2^k\)</p>
+        <p class="etape">Étape 1 : choisir \(a=2\), \(b=1\)</p>
+        \[ (2+1)^n \]
+        <div class="res">\(3^n\)</div>
+
+        <p class="q">c) \(\sum_{k=0}^n(-1)^k\binom nk\)</p>
+        <p class="etape">Étape 1 : choisir \(a=-1\), \(b=1\)</p>
+        \[ (-1+1)^n=0^n \]
+        <div class="res">\(0\) pour \(n\geqslant1\) (et \(1\) pour \(n=0\)).</div>
       </div>
     </div>
 
@@ -319,15 +564,22 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 12 — Identité de Vandermonde-like</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">\((n,p,q)\in\mathbb N^3\), \(p\leqslant q\leqslant n\).</div>
-        <p class="q">(a) \(\binom{n-p}{q-p}\binom np=\binom nq\binom qp\)</p>
-        <p>On développe les deux membres avec les factorielles :</p>
-        \[ \binom np\binom{n-p}{q-p}=\frac{n!}{p!(n-p)!}\cdot\frac{(n-p)!}{(q-p)!(n-q)!}=\frac{n!}{p!\,(q-p)!\,(n-q)!}, \]
-        \[ \binom nq\binom qp=\frac{n!}{q!(n-q)!}\cdot\frac{q!}{p!(q-p)!}=\frac{n!}{p!\,(q-p)!\,(n-q)!}. \]
-        <p class="res">Les deux membres sont égaux. ∎</p>
-        <p class="q">(b) En déduire \(\sum_{p=0}^q\binom{n-p}{q-p}\binom np\)</p>
-        <p>Par (a), chaque terme vaut \(\binom nq\binom qp\), et \(\binom nq\) ne dépend pas de \(p\) :</p>
-        \[ \sum_{p=0}^q\binom{n-p}{q-p}\binom np=\binom nq\sum_{p=0}^q\binom qp=\binom nq\cdot 2^q. \]
-        <p class="res">\(\displaystyle\sum_{p=0}^q\binom{n-p}{q-p}\binom np=2^q\binom nq\)</p>
+
+        <p class="q">a) \(\binom{n-p}{q-p}\binom np=\binom nq\binom qp\)</p>
+        <p>On développe les deux membres avec les factorielles.</p>
+        <div class="rappel"><span class="lab">Rappel · coefficient binomial</span>\[ \binom nk=\frac{n!}{k!\,(n-k)!} \]</div>
+        <p class="etape">Étape 1 : membre de gauche</p>
+        \[ \binom np\binom{n-p}{q-p}=\frac{n!}{p!\,(n-p)!}\times\frac{(n-p)!}{(q-p)!\,(n-q)!}=\frac{n!}{p!\,(q-p)!\,(n-q)!} \]
+        <p class="etape">Étape 2 : membre de droite</p>
+        \[ \binom nq\binom qp=\frac{n!}{q!\,(n-q)!}\times\frac{q!}{p!\,(q-p)!}=\frac{n!}{p!\,(q-p)!\,(n-q)!} \]
+        <div class="res">Les deux membres sont égaux.</div>
+
+        <p class="q">b) En déduire \(\sum_{p=0}^q\binom{n-p}{q-p}\binom np\)</p>
+        <p class="etape">Étape 1 : remplacer chaque terme grâce à a)</p>
+        \[ \sum_{p=0}^q\binom{n-p}{q-p}\binom np=\sum_{p=0}^q\binom nq\binom qp \]
+        <p class="etape">Étape 2 : sortir \(\binom nq\), qui ne dépend pas de \(p\)</p>
+        \[ \binom nq\sum_{p=0}^q\binom qp=\binom nq\times 2^q \]
+        <div class="res">\(\displaystyle\sum_{p=0}^q\binom{n-p}{q-p}\binom np=2^q\binom nq\)</div>
       </div>
     </div>
 
