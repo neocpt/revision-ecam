@@ -155,9 +155,26 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice A — Effort, flux et puissance</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <div class="enonce">Un moteur tourne à \(\omega=150\) rad·s⁻¹ sous un couple \(C=8\) N·m ; il est alimenté sous \(u=48\) V, \(i=30\) A.</div>
-        <p class="q">1) Puissance mécanique</p><p>\(P_{méca}=C\cdot\omega=8\times150=1200\) W.</p><p class="res">\(P_{méca}=1200\) W</p>
-        <p class="q">2) Puissance électrique</p><p>\(P_{élec}=u\cdot i=48\times30=1440\) W.</p><p class="res">\(P_{élec}=1440\) W</p>
-        <p class="q">3) Rendement</p><p>\(\eta=\dfrac{P_{méca}}{P_{élec}}=\dfrac{1200}{1440}\approx0{,}83\).</p><p class="res">\(\eta\approx83\%\) (les 240 W perdus = pertes Joule + méca)</p>
+
+        <p class="q">1) Puissance mécanique</p>
+        <div class="rappel"><span class="lab">Rappel · puissance = effort × flux</span>\[ P_{méca} = C\,\omega \qquad\qquad P_{élec} = u\,i \]</div>
+        <p>Côté arbre, l'effort est le couple et le flux est la vitesse angulaire :</p>
+        \[ P_{méca} = 8 \times 150 = 1200\ \text{W} \]
+        <div class="res">\(P_{méca} = 1200\) W.</div>
+
+        <p class="q">2) Puissance électrique</p>
+        <p>Côté alimentation, l'effort est la tension et le flux est le courant :</p>
+        \[ P_{élec} = 48 \times 30 = 1440\ \text{W} \]
+        <div class="res">\(P_{élec} = 1440\) W.</div>
+
+        <p class="q">3) Rendement</p>
+        <div class="rappel"><span class="lab">Rappel · rendement</span>\[ \eta = \frac{P_{sortie}}{P_{entrée}} \]</div>
+        <p>Le moteur reçoit de la puissance électrique et fournit de la puissance mécanique :</p>
+        \[ \eta = \frac{1200}{1440} \approx 0{,}83 \]
+        <p>La puissance perdue vaut :</p>
+        \[ P_{pertes} = 1440 - 1200 = 240\ \text{W} \]
+        <div class="res">\(\eta \approx 83\ \%\). Les 240 W perdus sont des pertes Joule et mécaniques.</div>
+        <div class="warnbox"><span class="lab">Piège</span> On divise toujours la puissance de sortie par la puissance d'entrée. Un rendement supérieur à 1 signale une inversion.</div>
       </div>
     </div>
 
@@ -165,10 +182,33 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice B — Lire les performances sur une réponse indicielle</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Réponse à un échelon : \(s_0=2\), valeur finale \(s(+\infty)=6\), premier extrémum \(s(t_1)=7{,}2\). Consigne : échelon de \(+5\) (donc \(\Delta e=5\)).</div>
-        <p class="q">1) Variation finale</p><p>\(\Delta s(+\infty)=6-2=4\).</p><p class="res">\(\Delta s(+\infty)=4\)</p>
-        <p class="q">2) Premier dépassement</p><p>\(D_1=|7{,}2-6|=1{,}2\) ; \(D_1\%=\dfrac{1{,}2}{4}=30\%\).</p><p class="res">\(D_1=1{,}2\), \(D_1\%=30\%\)</p>
-        <p class="q">3) Erreur statique</p><p>\(e_r=\Delta e-\Delta s=5-4=1\) ; \(e_r\%=\dfrac{1}{5}=20\%\).</p><p class="res">\(e_r=1\) (20 %)</p>
-        <p class="q">4) Tube à 5 %</p><p>\([6-0{,}05\cdot4\,;\,6+0{,}05\cdot4]=[5{,}8\,;\,6{,}2]\).</p><p class="res">La réponse doit rester dans \([5{,}8\,;\,6{,}2]\) pour définir \(t_{r5\%}\)</p>
+
+        <p class="q">1) Variation finale</p>
+        <div class="rappel"><span class="lab">Rappel · variation de la sortie</span>\[ \Delta s(+\infty) = s(+\infty) - s_0 \]</div>
+        \[ \Delta s(+\infty) = 6 - 2 = 4 \]
+        <div class="res">\(\Delta s(+\infty) = 4\).</div>
+
+        <p class="q">2) Premier dépassement</p>
+        <div class="rappel"><span class="lab">Rappel · dépassement relatif</span>\[ D_1 = |s(t_1) - s(+\infty)| \qquad D_1\% = \frac{D_1}{\Delta s(+\infty)} \]</div>
+        <p class="etape">Étape 1 : dépassement en valeur</p>
+        \[ D_1 = |7{,}2 - 6| = 1{,}2 \]
+        <p class="etape">Étape 2 : dépassement relatif</p>
+        <p>On divise par la variation de la sortie (et non par la valeur finale) :</p>
+        \[ D_1\% = \frac{1{,}2}{4} = 0{,}30 = 30\ \% \]
+        <div class="res">\(D_1 = 1{,}2\) et \(D_1\% = 30\ \%\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> Diviser par \(s(+\infty) = 6\) donnerait 20 %, ce qui est faux : la sortie ne part pas de 0.</div>
+
+        <p class="q">3) Erreur statique</p>
+        <div class="rappel"><span class="lab">Rappel · erreur statique</span>\[ e_r = \Delta e - \Delta s(+\infty) \qquad e_r\% = \frac{e_r}{\Delta e} \]</div>
+        \[ e_r = 5 - 4 = 1 \qquad\qquad e_r\% = \frac{1}{5} = 20\ \% \]
+        <div class="res">\(e_r = 1\), soit 20 %.</div>
+
+        <p class="q">4) Tube à 5 %</p>
+        <div class="rappel"><span class="lab">Rappel · tube à 5 %</span>\[ \left[\,s(+\infty) - 0{,}05\,\Delta s\ ;\ s(+\infty) + 0{,}05\,\Delta s\,\right] \]</div>
+        <p>La demi-largeur du tube vaut :</p>
+        \[ 0{,}05 \times 4 = 0{,}2 \]
+        \[ [\,6 - 0{,}2\ ;\ 6 + 0{,}2\,] = [\,5{,}8\ ;\ 6{,}2\,] \]
+        <div class="res">La réponse doit entrer dans \([5{,}8\ ;\ 6{,}2]\) et ne plus en sortir : l'instant où cela arrive est \(t_{r5\%}\).</div>
       </div>
     </div>
   </section>
@@ -185,18 +225,46 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 1.1 — Prothèse active transtibiale (MIT)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="q">Q1 — Composants de chaque chaîne</p>
-        <p><b>Chaîne d'information</b> : codeur incrémental, capteurs capacitifs avant (×4), capteurs capacitifs arrière (×2),
-        potentiomètre linéaire, calculateur.</p>
-        <p><b>Chaîne d'énergie</b> : batterie (16 V), hacheur, moteur à courant continu (MCC), réducteur poulie-courroie, vis-écrou.</p>
-        <p class="q">Q2 — Matière d'œuvre & effecteur</p>
-        <p class="res">Matière d'œuvre : <b>la position de la semelle</b> (de l'horizontale à inclinée). Effecteur : le système <b>vis-écrou</b>.</p>
+        <div class="rappel"><span class="lab">Rappel · les deux chaînes</span>
+          <ul>
+            <li>Chaîne d'<b>information</b> : ACQUÉRIR (capteurs), TRAITER (calculateur), COMMUNIQUER.</li>
+            <li>Chaîne d'<b>énergie</b> : ALIMENTER, MODULER (ou DISTRIBUER), CONVERTIR, TRANSMETTRE, AGIR.</li>
+          </ul></div>
+        <p class="etape">Étape 1 : trier les composants</p>
+        <p>Un capteur ou un calculateur manipule une information ; une batterie, un moteur ou un réducteur transportent de la puissance.</p>
+        <p class="etape">Étape 2 : les deux listes</p>
+        <ul>
+          <li><b>Chaîne d'information</b> : codeur incrémental, capteurs capacitifs avant (×4), capteurs capacitifs arrière (×2), potentiomètre linéaire, calculateur.</li>
+          <li><b>Chaîne d'énergie</b> : batterie (16 V), hacheur, moteur à courant continu (MCC), réducteur poulie-courroie, vis-écrou.</li>
+        </ul>
+        <div class="res">Information : capteurs + calculateur. Énergie : batterie, hacheur, MCC, poulie-courroie, vis-écrou.</div>
+
+        <p class="q">Q2 — Matière d'œuvre &amp; effecteur</p>
+        <ul>
+          <li>La matière d'œuvre est ce que le système modifie : ici l'orientation de la semelle.</li>
+          <li>L'effecteur est le dernier composant de la chaîne d'énergie, celui qui agit sur la matière d'œuvre.</li>
+        </ul>
+        <div class="res">Matière d'œuvre : <b>la position de la semelle</b> (de l'horizontale à inclinée). Effecteur : le système <b>vis-écrou</b>.</div>
+
         <p class="q">Q3 — Ordre chaîne info → chaîne énergie</p>
-        <p class="res">Le <b>calculateur</b> transmet l'ordre (fonction TRAITER) ; le <b>hacheur</b> le reçoit (fonction MODULER).</p>
+        <p>L'ordre part du dernier bloc de la chaîne d'information et arrive au premier bloc de commande de puissance.</p>
+        <div class="res">Le <b>calculateur</b> transmet l'ordre (fonction TRAITER) ; le <b>hacheur</b> le reçoit (fonction MODULER).</div>
+
         <p class="q">Q4 — Diagramme des deux chaînes</p>
-        <p>Chaîne d'énergie : Batterie <span class="mono">(NRJ élec. continue)</span> → Hacheur <b>MODULER</b> <span class="mono">(élec. modulée)</span>
-        → MCC <b>CONVERTIR</b> <span class="mono">(méca. rotation)</span> → Poulie-courroie <b>TRANSMETTRE</b> → Vis-écrou <b>TRANSMETTRE</b>
-        <span class="mono">(méca. translation)</span> → AGIR sur la semelle.<br>
-        Chaîne d'information : Codeur + Potentiomètre <b>ACQUÉRIR</b> → Calculateur <b>TRAITER</b> → ordre au hacheur.</p>
+        <p class="etape">Étape 1 : chaîne d'énergie, bloc par bloc</p>
+        <ul>
+          <li>Batterie : ALIMENTER (énergie électrique continue).</li>
+          <li>Hacheur : <b>MODULER</b> (énergie électrique modulée).</li>
+          <li>MCC : <b>CONVERTIR</b> (énergie mécanique de rotation).</li>
+          <li>Poulie-courroie : <b>TRANSMETTRE</b> (rotation).</li>
+          <li>Vis-écrou : <b>TRANSMETTRE</b> (rotation → translation), puis AGIR sur la semelle.</li>
+        </ul>
+        <p class="etape">Étape 2 : chaîne d'information</p>
+        <ul>
+          <li>Codeur + potentiomètre : <b>ACQUÉRIR</b>.</li>
+          <li>Calculateur : <b>TRAITER</b>, puis ordre envoyé au hacheur.</li>
+        </ul>
+        <div class="res">Énergie : Batterie → Hacheur (MODULER) → MCC (CONVERTIR) → Poulie-courroie (TRANSMETTRE) → Vis-écrou (TRANSMETTRE) → semelle. Information : Codeur + Potentiomètre (ACQUÉRIR) → Calculateur (TRAITER) → ordre au hacheur.</div>
       </div>
     </div>
 
@@ -204,13 +272,24 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 1.2 — Sécateur électrique Pellenc</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="q">Q1 — Chaînes de l'activité « sectionner une branche » + grandeurs effort/flux</p>
-        <p><b>Chaîne d'énergie</b>, avec effort (rouge) / flux (bleu) à chaque étage :</p>
-        <p>Batterie <span class="mono">\(U_{batt}\) (V) / \(I_{batt}\) (A)</span> → Pont en H <b>DISTRIBUER</b> <span class="mono">\(U_{mot}\) / \(I_{mot}\)</span>
-        → MCC <b>CONVERTIR</b> <span class="mono">\(C_{mot}\) (N·m) / \(\omega_{mot}\) (rad·s⁻¹)</span>
-        → Réducteur <b>TRANSMETTRE</b> <span class="mono">\(C_{red}\) / \(\omega_{red}\)</span>
-        → Vis-écrou <b>TRANSMETTRE</b> <span class="mono">\(F\) (N) / \(V\) (m·s⁻¹)</span> → AGIR (lame).</p>
-        <p><b>Chaîne d'information</b> : capteurs à effet Hall <b>ACQUÉRIR</b> → UTC (unité de traitement) <b>TRAITER</b>.</p>
-        <p class="res">Chaque puissance transmise se lit comme un couple <b>effort × flux</b> cohérent avec le domaine physique.</p>
+        <div class="rappel"><span class="lab">Rappel · couples effort / flux</span>
+          <ul>
+            <li>Électrique : tension \(U\) (V) / courant \(I\) (A).</li>
+            <li>Mécanique de rotation : couple \(C\) (N·m) / vitesse angulaire \(\omega\) (rad·s⁻¹).</li>
+            <li>Mécanique de translation : force \(F\) (N) / vitesse \(V\) (m·s⁻¹).</li>
+          </ul>
+          \[ P = \text{effort} \times \text{flux} \]</div>
+        <p class="etape">Étape 1 : chaîne d'énergie avec effort / flux à chaque étage</p>
+        <ul>
+          <li>Batterie : \(U_{batt}\) (V) / \(I_{batt}\) (A).</li>
+          <li>Pont en H, <b>DISTRIBUER</b> : \(U_{mot}\) / \(I_{mot}\).</li>
+          <li>MCC, <b>CONVERTIR</b> : \(C_{mot}\) (N·m) / \(\omega_{mot}\) (rad·s⁻¹).</li>
+          <li>Réducteur, <b>TRANSMETTRE</b> : \(C_{red}\) / \(\omega_{red}\).</li>
+          <li>Vis-écrou, <b>TRANSMETTRE</b> : \(F\) (N) / \(V\) (m·s⁻¹), puis AGIR (lame).</li>
+        </ul>
+        <p class="etape">Étape 2 : chaîne d'information</p>
+        <p>Capteurs à effet Hall <b>ACQUÉRIR</b> → UTC (unité de traitement) <b>TRAITER</b>.</p>
+        <div class="res">Chaque puissance transmise se lit comme un couple <b>effort × flux</b> cohérent avec le domaine physique (électrique, rotation, translation).</div>
       </div>
     </div>
 
@@ -218,10 +297,19 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 1.3 — Système Clipflow (couper l'arrivée d'eau)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="q">Q1 — Diagramme chaîne info / énergie de l'activité « couper l'arrivée d'eau »</p>
-        <p><b>Chaîne d'information</b> : Capteur à effet Hall <b>ACQUÉRIR</b> (image du débit d'eau) + acquisition du réarmement du levier ;
-        <b>COMMUNIQUER</b> via réseau local (100 Mbps).</p>
-        <p><b>Chaîne d'énergie</b> : ventouse magnétique + ressort de torsion <b>CONVERTIR</b> → levier ¼ tour en ≈ 1/10 s → vanne ¼ tour <b>AGIR</b> (coupe l'eau).</p>
-        <p class="res">Actionnement rapide (¼ tour ≈ 0,1 s) déclenché par un ordre logique ; réarmement manuel.</p>
+        <p class="etape">Étape 1 : chaîne d'information</p>
+        <ul>
+          <li>Capteur à effet Hall : <b>ACQUÉRIR</b> une image du débit d'eau.</li>
+          <li>Acquisition du réarmement du levier.</li>
+          <li><b>COMMUNIQUER</b> par le réseau local (100 Mbps).</li>
+        </ul>
+        <p class="etape">Étape 2 : chaîne d'énergie</p>
+        <ul>
+          <li>Ventouse magnétique + ressort de torsion : <b>CONVERTIR</b> (le ressort libère son énergie).</li>
+          <li>Levier : tourne d'un quart de tour en environ 1/10 s.</li>
+          <li>Vanne ¼ tour : <b>AGIR</b>, elle coupe l'eau.</li>
+        </ul>
+        <div class="res">Actionnement rapide (¼ tour en 0,1 s environ) déclenché par un ordre logique ; réarmement manuel.</div>
       </div>
     </div>
 
@@ -231,49 +319,102 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 2.1 — Axe asservi de machine-outil</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <p class="q">Q1 — Système asservi ? Grandeur asservie ? Perturbations ?</p>
-        <p><b>Oui</b> : à chaque instant la position \(x(t)\) du chariot est comparée à une consigne via des grandeurs électriques (continu dans le temps).
-        Grandeur asservie : <b>position \(x(t)\) du chariot</b>. Perturbations : effort trop grand sur la vis-écrou, jeux aux paliers,
-        courroie distendue/élastique…</p>
-        <p class="q">Q2–Q3 — Chaîne fonctionnelle & structure de l'asservissement</p>
-        <p>Chaîne d'énergie : Transfo <b>ALIMENTER</b> → Variateur <b>MODULER</b> → Moteur <b>CONVERTIR</b> → Poulie-courroie + Vis-écrou <b>TRANSMETTRE</b> → chariot.
-        Unité de commande (à entourer) = <b>comparateur + correcteur (+ adapter)</b>, avec \(\varepsilon(t)=u_c(t)-u_{mes}(t)\).</p>
+        <div class="rappel"><span class="lab">Rappel · système asservi</span>La sortie est mesurée en permanence et comparée à la consigne ; c'est l'écart \(\varepsilon\) qui pilote l'action.</div>
+        <ul>
+          <li>La position \(x(t)\) du chariot est mesurée et comparée à chaque instant à une consigne (grandeurs électriques continues dans le temps) : c'est bien un système asservi.</li>
+          <li>Grandeur asservie : la <b>position \(x(t)\) du chariot</b>.</li>
+          <li>Perturbations : effort trop grand sur la vis-écrou, jeux aux paliers, courroie distendue ou élastique.</li>
+        </ul>
+        <div class="res"><b>Oui</b>, système asservi en position \(x(t)\) ; perturbations : effort sur la vis, jeux, élasticité de la courroie.</div>
+
+        <p class="q">Q2–Q3 — Chaîne fonctionnelle &amp; structure de l'asservissement</p>
+        <p class="etape">Étape 1 : chaîne d'énergie</p>
+        <p>Transfo <b>ALIMENTER</b> → Variateur <b>MODULER</b> → Moteur <b>CONVERTIR</b> → Poulie-courroie + Vis-écrou <b>TRANSMETTRE</b> → chariot.</p>
+        <p class="etape">Étape 2 : unité de commande</p>
+        <div class="rappel"><span class="lab">Rappel · comparateur</span>\[ \varepsilon(t) = u_c(t) - u_{mes}(t) \]</div>
+        <div class="res">Unité de commande (à entourer) = <b>comparateur + correcteur (+ adapter)</b>, avec \(\varepsilon(t)=u_c(t)-u_{mes}(t)\).</div>
+
         <p class="q">Q4 — Composant non pris en compte dans l'asservissement</p>
-        <p class="res">La fonction <b>ALIMENTER</b> (transformateur) : on suppose l'alimentation <b>idéale</b> (correctement dimensionnée).</p>
+        <p>Le transformateur ne reçoit aucun ordre et n'est pas dans la boucle : on le suppose parfait.</p>
+        <div class="res">La fonction <b>ALIMENTER</b> (transformateur) : on suppose l'alimentation <b>idéale</b> (correctement dimensionnée).</div>
+
         <p class="q">Q5 — Performances du test 1 (échelon +20 mm depuis 10 mm)</p>
-        <p>Stable (converge vers <b>29 mm</b>). Dépassement : \(D_1\%=\left|\dfrac{s(t_1)-s(\infty)}{s(\infty)-s(t_0)}\right|=\left|\dfrac{32-29}{29-10}\right|\approx15{,}8\%\) (2 dépassements).
-        Rapidité : \(t_{r5\%}=1{,}4\) s. Précision : \(e_r=\Delta e-\Delta s=(30-10)-(29-10)=\mathbf{1\ mm}\).</p>
-        <p class="res">Test 1 : stable, \(D_1\%\approx15{,}8\%\), \(t_{r5\%}=1{,}4\) s, \(e_r=1\) mm</p>
+        <p class="etape">Étape 1 : stabilité</p>
+        <p>La courbe converge vers <b>29 mm</b> : le système est stable. On compte 2 dépassements.</p>
+        <p class="etape">Étape 2 : dépassement relatif</p>
+        <div class="rappel"><span class="lab">Rappel · dépassement relatif</span>\[ D_1\% = \left|\frac{s(t_1) - s(+\infty)}{s(+\infty) - s(t_0)}\right| \]</div>
+        <p>Valeurs lues : \(s(t_0) = 10\) mm, \(s(t_1) = 32\) mm, \(s(+\infty) = 29\) mm.</p>
+        \[ D_1\% = \left|\frac{32 - 29}{29 - 10}\right| = \frac{3}{19} \approx 15{,}8\ \% \]
+        <p class="etape">Étape 3 : rapidité</p>
+        <p>Lu sur le graphe avec le tube à 5 % :</p>
+        \[ t_{r5\%} = 1{,}4\ \text{s} \]
+        <p class="etape">Étape 4 : précision</p>
+        <div class="rappel"><span class="lab">Rappel · erreur statique</span>\[ e_r = \Delta e - \Delta s(+\infty) \]</div>
+        <p>La consigne passe de 10 à 30 mm, la sortie de 10 à 29 mm :</p>
+        \[ e_r = (30 - 10) - (29 - 10) = 20 - 19 = 1\ \text{mm} \]
+        <div class="res">Test 1 : stable, \(D_1\% \approx 15{,}8\ \%\), \(t_{r5\%} = 1{,}4\) s, \(e_r = 1\) mm.</div>
+
         <p class="q">Q6 — Performances du test 2 (échelon −10 mm depuis 29 mm)</p>
-        <p>Stable (converge vers <b>19 mm</b>). <b>Aucun dépassement</b> (\(D_1\%=0\)). \(t_{r5\%}=1{,}1\) s.
-        \(e_r=(30-20)-(29-19)=\mathbf{0\ mm}\).</p>
-        <p class="res">Test 2 : stable, \(D_1\%=0\), \(t_{r5\%}=1{,}1\) s, \(e_r=0\) mm</p>
+        <p class="etape">Étape 1 : stabilité et dépassement</p>
+        <p>La courbe converge vers <b>19 mm</b> sans jamais passer en dessous : stable, \(D_1\% = 0\).</p>
+        <p class="etape">Étape 2 : rapidité</p>
+        \[ t_{r5\%} = 1{,}1\ \text{s} \]
+        <p class="etape">Étape 3 : précision</p>
+        <p>La consigne passe de 30 à 20 mm, la sortie de 29 à 19 mm :</p>
+        \[ e_r = (30 - 20) - (29 - 19) = 10 - 10 = 0\ \text{mm} \]
+        <div class="res">Test 2 : stable, \(D_1\% = 0\), \(t_{r5\%} = 1{,}1\) s, \(e_r = 0\) mm.</div>
+
         <p class="q">Q7 — Conclusion vs exigences</p>
-        <p>Exigences : \(0{,}6\,\text{s}<t_{r5\%}<1\,\text{s}\) et \(e_r<0{,}2\) mm. Le test 2 valide <b>l'erreur</b> (\(e_r=0\)) mais
-        <b>aucun des deux tests</b> ne respecte le temps de réponse (1,1 s et 1,4 s > 1 s).</p>
-        <p class="res">Précision OK (test 2), rapidité non conforme dans les deux cas</p>
+        <p>Exigences du cahier des charges :</p>
+        \[ 0{,}6\ \text{s} \lt t_{r5\%} \lt 1\ \text{s} \qquad\qquad e_r \lt 0{,}2\ \text{mm} \]
+        <ul>
+          <li>Précision : test 1, \(e_r = 1\) mm, non conforme ; test 2, \(e_r = 0\), conforme.</li>
+          <li>Rapidité : 1,4 s et 1,1 s, toutes deux supérieures à 1 s : non conforme.</li>
+        </ul>
+        <div class="res">Précision validée par le test 2 seulement ; rapidité non conforme dans les deux cas.</div>
+
         <p class="q">Q8 — Erreur de poursuite (test 3)</p>
-        <p class="res">La consigne est une rampe → oui, on peut évaluer l'erreur de poursuite : \(e_p=\mathbf{4\ mm}\).</p>
+        <div class="rappel"><span class="lab">Rappel · erreur de poursuite</span>Pour une consigne en rampe, c'est l'écart constant entre la consigne et la sortie une fois le régime permanent atteint.</div>
+        <p>La consigne du test 3 est une rampe : on peut mesurer l'écart vertical entre les deux droites parallèles.</p>
+        <div class="res">Oui : \(e_p = 4\) mm.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 2.2 — Système Ramses (régulation niveau d'un bassin)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">Q1 — Grandeur asservie & consigne</p>
-        <p class="res">Grandeur asservie : le <b>niveau (hauteur) d'eau</b> \(h(t)\). Grandeur de consigne : la tension image \(u_c(t)\).</p>
+        <p class="q">Q1 — Grandeur asservie &amp; consigne</p>
+        <p>La grandeur asservie est celle que l'on veut maîtriser en sortie ; la consigne est la tension que l'on règle en entrée.</p>
+        <div class="res">Grandeur asservie : le <b>niveau (hauteur) d'eau</b> \(h(t)\). Grandeur de consigne : la tension image \(u_c(t)\).</div>
+
         <p class="q">Q2 — Chaîne fonctionnelle</p>
-        <p>Acquérir : potentiomètre (consigne) + limnimètre (niveau) → Corriger (correcteur) → Moduler (régulateur) → Moteur <b>CONVERTIR</b>
-        → Réducteur + Vanne <b>TRANSMETTRE/AGIR</b> sur le débit \(Q_e(t)\). Unité de commande = comparateur + correcteur.</p>
+        <ul>
+          <li>ACQUÉRIR : potentiomètre (consigne) et limnimètre (niveau).</li>
+          <li>Corriger : correcteur. MODULER : régulateur.</li>
+          <li>Moteur : <b>CONVERTIR</b>.</li>
+          <li>Réducteur + vanne : <b>TRANSMETTRE / AGIR</b> sur le débit \(Q_e(t)\).</li>
+        </ul>
+        <div class="res">Unité de commande = comparateur + correcteur ; la vanne agit sur le débit entrant \(Q_e(t)\).</div>
+
         <p class="q">Q3 — Performances des deux essais (initial 10 m, consigne 14 m)</p>
+        <p class="etape">Étape 1 : stabilité et dépassement</p>
+        <p>Les deux courbes montent vers environ 15 m sans dépasser : stables, \(D_1\% = 0\).</p>
+        <p class="etape">Étape 2 : rapidité</p>
+        <p>Lu avec le tube à 5 % : 500 min pour le 1ᵉʳ essai, 100 min pour le 2ᵉ.</p>
+        <p class="etape">Étape 3 : précision</p>
+        <div class="rappel"><span class="lab">Rappel · erreur statique relative</span>\[ e_r\% = \frac{|\Delta e - \Delta s|}{\Delta e} \]</div>
+        <p>Valeurs lues en dm : départ 100, consigne 140, valeur atteinte 150.</p>
+        \[ e_r\% = \frac{|(140 - 100) - (150 - 100)|}{140 - 100} = \frac{10}{40} = 25\ \% \]
+        <p class="etape">Étape 4 : gain de rapidité</p>
+        \[ \frac{500 - 100}{500} = 0{,}80 = 80\ \% \]
         <table>
           <tr><th>Performance</th><th>1ᵉʳ essai</th><th>2ᵉ essai</th></tr>
           <tr><td>Stabilité</td><td>stable, valeur finale ≈ 15 m, \(D_1\%=0\)</td><td>stable, ≈ 15 m, \(D_1\%=0\)</td></tr>
           <tr><td>Rapidité \(t_{r5\%}\)</td><td>500 min</td><td>100 min</td></tr>
           <tr><td>Précision \(e_r\%\)</td><td>25 %</td><td>25 %</td></tr>
         </table>
-        <p>Erreur statique relative : \(e_r\%=\dfrac{|\Delta e-\Delta s|}{\Delta e}=\dfrac{|(140-100)-(150-100)|}{140-100}=\dfrac{10}{40}=25\%\)
-        (valeurs lues sur le graphe, en dm : 10 m → 14 m visé, 15 m atteint).</p>
-        <p class="res">Après réglage : <b>même précision</b> (25 %) mais <b>80 % plus rapide</b> (\(\tfrac{500-100}{500}=80\%\)).</p>
+        <div class="res">Après réglage : <b>même précision</b> (25 %) mais <b>80 % plus rapide</b> (100 min au lieu de 500 min).</div>
+        <div class="warnbox"><span class="lab">Piège</span> Ici la sortie dépasse la consigne en régime permanent (15 m pour 14 m) : l'erreur est négative, on prend sa valeur absolue.</div>
       </div>
     </div>
 
@@ -281,13 +422,27 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 2.3 — Four électrique</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">À 50 V, température stabilisée à 100 °C. À \(t=100\) s, la tension passe à 75 V (cible 150 °C).</div>
+
         <p class="q">Q1 — Stabilité</p>
-        <p>Stable : la température tend vers une valeur finie <b>150 °C</b> (en ≈ 700 s). \(\Delta s(+\infty)=150-100=50\) °C.
-        Dépassement : \(D_1=|159-150|=9\) °C, \(D_1\%=\dfrac{9}{50}=18\%\) (1 dépassement).</p>
-        <p class="res">Stable, \(D_1\%=18\%\), 1 dépassement</p>
-        <p class="q">Q2 — Rapidité</p><p class="res">\(t_{r5\%}=400\) s (tube \([147{,}5\,;\,152{,}5]\) °C)</p>
+        <p class="etape">Étape 1 : la sortie converge-t-elle ?</p>
+        <p>La température tend vers une valeur finie, <b>150 °C</b>, atteinte vers 700 s : le four est stable.</p>
+        \[ \Delta s(+\infty) = 150 - 100 = 50\ ^\circ\text{C} \]
+        <p class="etape">Étape 2 : dépassement</p>
+        <div class="rappel"><span class="lab">Rappel · dépassement relatif</span>\[ D_1\% = \frac{|s(t_1) - s(+\infty)|}{\Delta s(+\infty)} \]</div>
+        <p>Le maximum lu vaut 159 °C :</p>
+        \[ D_1 = |159 - 150| = 9\ ^\circ\text{C} \qquad\qquad D_1\% = \frac{9}{50} = 18\ \% \]
+        <div class="res">Stable, \(D_1\% = 18\ \%\), un seul dépassement.</div>
+
+        <p class="q">Q2 — Rapidité</p>
+        <div class="rappel"><span class="lab">Rappel · tube à 5 %</span>\[ s(+\infty) \pm 0{,}05\,\Delta s(+\infty) \]</div>
+        \[ 0{,}05 \times 50 = 2{,}5\ ^\circ\text{C} \qquad\Longrightarrow\qquad [\,147{,}5\ ;\ 152{,}5\,]\ ^\circ\text{C} \]
+        <p>On lit l'instant où la courbe entre dans ce tube sans plus en sortir.</p>
+        <div class="res">\(t_{r5\%} = 400\) s (tube \([147{,}5\ ;\ 152{,}5]\) °C).</div>
+
         <p class="q">Q3 — Précision</p>
-        <p class="res warnbox">Non évaluable : l'<b>entrée (tension, V)</b> et la <b>sortie (température, °C)</b> ne sont pas de même nature → l'erreur n'a pas de sens ici.</p>
+        <p>L'erreur statique \(e_r = \Delta e - \Delta s\) soustrait une entrée à une sortie : il faut qu'elles aient la même unité.</p>
+        <div class="res">Non évaluable : l'<b>entrée (tension, V)</b> et la <b>sortie (température, °C)</b> ne sont pas de même nature, l'erreur n'a pas de sens ici.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Calculer \(25 - 50\) en mélangeant volts et degrés n'a aucun sens. On ne parle d'erreur que si la consigne et la sortie sont comparables.</div>
       </div>
     </div>
 
@@ -299,6 +454,7 @@ window.MathJax = {
       Socle de toute l'automatique des chapitres suivants (C06, C07, C12).
     </div>
   </section>
+
   <section class="block" id="docs">
     <h2>📂 Documents donnés</h2>
     <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
