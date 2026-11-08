@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ch6 — Électronique numérique — AM2 Électronique — Révision ECAM</title>
-<link rel="stylesheet" href="../assets/style.css?v=3">
+<link rel="stylesheet" href="../assets/style.css?v=4">
 <script>
 window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
 </script>
@@ -857,19 +857,50 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
           <img src="td6-img/ex6.jpg" alt="Énoncé Exercice 6 du TD6 — schéma du CNA 4 bits à résistances pondérées R, R/2, R/4, R/8, avec interrupteurs K0 à K3 et amplificateur inverseur de résistance de contre-réaction R'" loading="lazy">
           <figcaption>Énoncé (TD6) — CNA 4 bits à résistances pondérées</figcaption>
         </figure>
-        <p><b>Lecture du schéma :</b> l'entrée (+) est à la masse ; l'entrée (−) est reliée à la sortie par \(R'\) et reçoit les branches \(R_n=R/2^n\) ; chaque branche est connectée à \(E\) par un interrupteur \(K_n\) (\(K_n=1\) fermé, \(K_n=0\) ouvert). Dans le texte de l'énoncé, « un interrupteur ouvert est l'état 1 » est une coquille : c'est <b>fermé</b> qui vaut 1.</p>
 
         <p class="q">1) Courant dans \(R_n\) et tension \(u_s\)</p>
-        <p>L'ALI idéal en régime linéaire impose \(v_-=v_+=0\) : chaque branche voit \(E\) à une extrémité et 0 V à l'autre. Donc :</p>
-        \[ i_n=\frac{K_nE}{R_n}=K_n\,\frac{2^{n}E}{R}. \]
-        <p>L'entrée (−) n'absorbe aucun courant (\(i_-=0\)), donc le courant total \(\sum_n i_n\) traverse \(R'\), et :</p>
-        \[ u_s=-R'\sum_{n=0}^{3}i_n=-\frac{R'E}{R}\sum_{n=0}^{3}K_n\,2^{n}. \]
-        <p>Or \(\sum_n K_n2^n\) est la valeur décimale \(N\) du mot binaire \(K_3K_2K_1K_0\). Donc :</p>
-        \[ u_s=-\frac{R'E}{R}\,N. \]
-        <div class="res">\(u_s\) est proportionnelle au nombre binaire \(N\) : c'est bien un convertisseur numérique-analogique. Le pas de conversion est \(R'E/R\) (tension de sortie pour le bit de poids faible). Le signe moins vient du montage inverseur.</div>
 
-        <p class="q">2) Cas \(R=R'\) et \(E=1\) V</p>
-        <p>Le facteur \(R'E/R\) vaut alors 1 V et \(u_s=-N\) volts :</p>
+        <p class="etape">Étape 1 : ce qu'impose l'ALI</p>
+        <p>L'ALI est rebouclé sur son entrée (−) par \(R'\) : il fonctionne en régime linéaire.</p>
+        <div class="rappel"><span class="lab">Rappel · ALI idéal en régime linéaire</span>\[ v_- = v_+ \qquad\text{et}\qquad i_- = i_+ = 0 \]</div>
+        <p>L'entrée (+) est reliée à la masse, donc :</p>
+        \[ v_- = v_+ = 0\ \text{V} \]
+        <p>L'entrée (−) est une <b>masse virtuelle</b> : chaque résistance \(R_n\) a 0 V à son extrémité côté ALI.</p>
+
+        <p class="etape">Étape 2 : courant dans la branche \(R_n\)</p>
+        <div class="rappel"><span class="lab">Rappel · loi d'Ohm</span>\[ i = \frac{U}{R} \]</div>
+        <ul>
+          <li>Si \(K_n = 1\) (interrupteur fermé), la branche est soumise à \(E - 0 = E\) :
+            \[ i_n = \frac{E}{R_n} = \frac{E}{R/2^n} = \frac{2^n\,E}{R} \]</li>
+          <li>Si \(K_n = 0\) (interrupteur ouvert), aucun courant ne passe : \(i_n = 0\).</li>
+        </ul>
+        <p>Les deux cas tiennent en une seule formule :</p>
+        \[ i_n = K_n\,\frac{2^n\,E}{R} \]
+
+        <p class="etape">Étape 3 : loi des nœuds sur l'entrée (−)</p>
+        <p>Comme \(i_- = 0\), tout le courant des quatre branches traverse \(R'\) :</p>
+        \[ i_{R'} = i_0 + i_1 + i_2 + i_3 = \frac{E}{R}\left(K_0 + 2K_1 + 4K_2 + 8K_3\right) \]
+
+        <p class="etape">Étape 4 : tension de sortie</p>
+        <p>Le courant \(i_{R'}\) va de l'entrée (−), à 0 V, vers la sortie. La loi d'Ohm aux bornes de \(R'\) donne \(0 - u_s = R'\,i_{R'}\), soit :</p>
+        \[ u_s = -R'\,i_{R'} = -\frac{R'E}{R}\left(8K_3 + 4K_2 + 2K_1 + K_0\right) \]
+        <p>La parenthèse est exactement la valeur décimale \(N\) du mot binaire \(K_3K_2K_1K_0\) :</p>
+        \[ N = 8K_3 + 4K_2 + 2K_1 + K_0 \qquad\Longrightarrow\qquad u_s = -\frac{R'E}{R}\,N \]
+        <p><b>Commentaire :</b></p>
+        <ul>
+          <li>\(u_s\) est proportionnelle au nombre \(N\) : le montage transforme un nombre binaire en tension. C'est bien un CNA.</li>
+          <li>Le pas de conversion (tension du bit de poids faible) vaut \(q = \dfrac{R'E}{R}\).</li>
+          <li>Le signe moins vient du montage inverseur.</li>
+        </ul>
+        <div class="res">\(i_n = K_n\,\dfrac{2^n E}{R}\) et \(u_s = -\dfrac{R'E}{R}\,N\), avec \(N\) la valeur décimale du mot \(K_3K_2K_1K_0\).</div>
+        <div class="warnbox"><span class="lab">Coquille de l'énoncé</span> L'énoncé écrit « un interrupteur ouvert est l'état 1 ». L'exemple qui suit (1101 donne \(K_3 = 1\)) montre qu'il faut lire : <b>fermé = 1</b>, ouvert = 0.</div>
+
+        <p class="q">2) Cas \(R = R'\) et \(E = 1\) V</p>
+
+        <p class="etape">Étape 1 : le pas de conversion</p>
+        \[ q = \frac{R'E}{R} = \frac{R \times 1}{R} = 1\ \text{V} \qquad\Longrightarrow\qquad u_s = -N\ \text{(en volts)} \]
+
+        <p class="etape">Étape 2 : on lit chaque code</p>
         <table>
           <thead><tr><th>Mot</th><th>0000</th><th>0001</th><th>0010</th><th>0011</th><th>0100</th><th>1111</th></tr></thead>
           <tbody>
@@ -877,25 +908,59 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
             <tr><td>\(u_s\)</td><td>0 V</td><td>−1 V</td><td>−2 V</td><td>−3 V</td><td>−4 V</td><td>−15 V</td></tr>
           </tbody>
         </table>
-        <div class="res">\(u_s\) max (1111) \(=-15\) V, valeur égale à la tension d'alimentation : à la limite de saturation.</div>
+        <p>Pour 1111 : \(N = 8 + 4 + 2 + 1 = 15\), donc \(u_s = -15\) V.</p>
+        <div class="res">\(u_{s,max} = -15\) V, pour le code 1111.</div>
+        <p>Remarque : \(-15\) V, c'est justement la tension d'alimentation de l'ALI. On est à la limite de la saturation.</p>
 
-        <p class="q">3) Passage à un CAN 16 bits</p>
-        <p>Il faut un bit de poids \(2^n\) par bit, donc \(16\) résistances en parallèle, de valeurs \(R_n=R/2^n\) pour \(n=0\) à \(15\) : \(R,\ R/2,\ R/4,\dots,\ R/32\,768\). Le bit de poids fort correspond à \(n=15\) ; la plus petite résistance est \(R/2^{15}\).</p>
-        <div class="res">16 résistances, de \(R\) à \(R/2^{15}\).</div>
+        <p class="q">3) Passage à un signal codé sur 16 bits</p>
+        <div class="rappel"><span class="lab">Rappel · principe du CNA pondéré</span>Une résistance par bit : le bit de rang \(n\) commande la branche \(R_n = R/2^n\).</div>
+        <p>Un mot de 16 bits a des rangs \(n = 0\) à \(15\). Il faut donc 16 branches en parallèle :</p>
+        \[ R_n = \frac{R}{2^n}, \qquad n = 0, 1, \dots, 15 \]
+        <ul>
+          <li>Plus grande résistance : \(R_0 = R\) (bit de poids faible).</li>
+          <li>Plus petite résistance : \(R_{15} = \dfrac{R}{2^{15}} = \dfrac{R}{32\,768}\) (bit de poids fort).</li>
+        </ul>
+        <div class="res">16 résistances : \(R,\ R/2,\ R/4,\ \dots,\ R/32\,768\).</div>
 
         <p class="q">4) Tension maximale et problème posé</p>
-        <p>Pour le code \(1\ldots1\) (16 bits), \(N=2^{16}-1=65\,535\) :</p>
-        \[ u_{s,max}=-\frac{R'E}{R}\,(2^{16}-1)=-65\,535\,\frac{R'E}{R}. \]
-        <p>Avec \(R=R'\) et \(E=1\) V, cela donne \(-65\,535\) V : très au-delà de l'alimentation \(\pm15\) V. L'ALI sature à environ \(-15\) V dès que \(N\ge16\). Seuls les 16 premiers codes (environ 4 bits) sont convertis correctement : la sortie ne suit plus le code, la conversion est fausse.</p>
-        <div class="res">Problème : saturation de l'ALI. Au-delà de quelques codes, \(u_s\) reste bloqué à \(-15\) V et l'information est perdue.</div>
+
+        <p class="etape">Étape 1 : le plus grand code</p>
+        <p>Les 16 bits valent 1 :</p>
+        \[ N_{max} = 2^{16} - 1 = 65\,535 \]
+
+        <p class="etape">Étape 2 : la tension demandée</p>
+        <p>Avec les mêmes valeurs qu'en 2) (\(q = 1\) V) :</p>
+        \[ u_{s,max} = -q\,N_{max} = -1 \times 65\,535 = -65\,535\ \text{V} \]
+
+        <p class="etape">Étape 3 : comparaison avec l'alimentation</p>
+        <p>L'ALI est alimenté en \(\pm 15\) V : sa sortie ne peut pas dépasser environ 15 V en valeur absolue (saturation).</p>
+        <ul>
+          <li>Dès que \(N \ge 16\), il faudrait \(|u_s| \ge 16\) V : la sortie reste bloquée vers \(-15\) V.</li>
+          <li>Seuls les 16 premiers codes, sur 65 536, sont convertis correctement.</li>
+        </ul>
+        <div class="res">L'ALI sature : au-delà du code 15, \(u_s\) reste vers \(-15\) V. Le signal envoyé au haut-parleur est écrêté, donc très déformé.</div>
 
         <p class="q">5) Conditions pour ne jamais saturer</p>
-        <p>Il faut \(|u_s|\le V_{sat}=15\) V pour tous les codes, donc pour \(N_{max}=65\,535\) :</p>
-        \[ \frac{R'E}{R}\,(2^{16}-1)\le V_{sat}\iff \frac{R'E}{R}\le\frac{15}{65\,535}\approx2{,}3\times10^{-4}\ \text{V}. \]
-        <p>Il faut aussi que le courant maximal dans \(R'\) reste compatible avec la sortie de l'ALI (\(\approx20\) mA, cf. Ch3) : \(i_{max}=\dfrac{E\,(2^{16}-1)}{R}\le20\) mA.</p>
-        <p>Exemple : \(E=0{,}2\) V, \(R'=1\) k\(\Omega\), \(R=1\) M\(\Omega\). Alors \(R'E/R=0{,}2\) mV, \(u_{s,max}=65\,535\times0{,}2\) mV \(\approx13{,}1\) V \(&lt;15\) V, et \(i_{max}=0{,}2\times65\,535/10^{6}\approx13\) mA \(&lt;20\) mA. La plus petite résistance vaut \(10^6/32\,768\approx30\,\Omega\).</p>
-        <div class="res">Condition : \(\dfrac{R'E}{R}<\dfrac{V_{sat}}{2^{16}-1}\approx2{,}3\times10^{-4}\) V (et \(i_{max}\) inférieur au courant de sortie admissible).</div>
-        <div class="warnbox"><span class="lab">Piège</span> \(E\), \(R\) et \(R'\) ne sont pas indépendants : une seule grandeur, le pas \(R'E/R\), fixe à la fois la résolution et la plage de sortie. Il faut donc garder une marge par rapport à 15 V (la saturation réelle se produit souvent un peu avant).</div>
+
+        <p class="etape">Étape 1 : condition sur la tension</p>
+        <p>Il faut \(|u_s| \le V_{sat} = 15\) V pour tous les codes, donc pour le plus grand :</p>
+        \[ \frac{R'E}{R}\,(2^{16} - 1) \le V_{sat} \iff \frac{R'E}{R} \le \frac{15}{65\,535} \approx 2{,}3\times10^{-4}\ \text{V} \]
+
+        <p class="etape">Étape 2 : condition sur le courant</p>
+        <p>Quand tous les interrupteurs sont fermés, le courant dans \(R'\) est maximal, et c'est la sortie de l'ALI qui le fournit :</p>
+        \[ i_{max} = \frac{E}{R}\,(2^{16} - 1) \]
+        <p>Il doit rester sous le courant de sortie maximal de l'ALI (environ 20 mA, voir Ch3).</p>
+
+        <p class="etape">Étape 3 : un exemple de valeurs</p>
+        <p>On prend \(E = 0{,}2\) V, \(R' = 1\) kΩ et \(R = 1\) MΩ :</p>
+        <ul>
+          <li>Pas : \(q = \dfrac{10^3 \times 0{,}2}{10^6} = 2\times10^{-4}\) V \(= 0{,}2\) mV, inférieur à \(2{,}3\times10^{-4}\) V.</li>
+          <li>Tension maximale : \(65\,535 \times 0{,}2\) mV \(\approx 13{,}1\) V, sous les 15 V.</li>
+          <li>Courant maximal : \(\dfrac{0{,}2 \times 65\,535}{10^6} \approx 13{,}1\) mA, sous les 20 mA.</li>
+          <li>Plus petite résistance : \(R_{15} = \dfrac{10^6}{32\,768} \approx 30{,}5\ \Omega\).</li>
+        </ul>
+        <div class="res">Conditions : \(\dfrac{R'E}{R} \le \dfrac{V_{sat}}{2^{16}-1} \approx 2{,}3\times10^{-4}\) V, et \(\dfrac{E}{R}\,(2^{16}-1)\) inférieur au courant de sortie admissible de l'ALI.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Une seule grandeur, le pas \(q = R'E/R\), fixe à la fois la résolution et la plage de sortie. Il faut garder une marge sous 15 V : en pratique, la saturation arrive un peu avant.</div>
       </div>
     </div>
   </section>
@@ -921,6 +986,6 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 <script src="../assets/gate.js"></script>
 <script src="../assets/catalogue.js?v=2"></script>
 <script src="../assets/nav.js?v=2"></script>
-<script src="../assets/lecture.js?v=1"></script>
+<script src="../assets/lecture.js?v=2"></script>
 </body>
 </html>

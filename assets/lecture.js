@@ -37,8 +37,10 @@
   var CLE = "revecam_examen";
   function lire() { try { return localStorage.getItem(CLE) === "1"; } catch (e) { return false; } }
   function ecrire(v) { try { localStorage.setItem(CLE, v ? "1" : "0"); } catch (e) {} }
-  // bouton flottant en bas à droite : accessible partout dans la page
+  // bouton flottant en bas à droite : accessible partout dans la page (seulement s'il y a des réponses)
+  var aDesReponses = !!document.querySelector(".reponse");
   var lab = document.createElement("label");
+  if (!aDesReponses) lab.hidden = true;
   lab.className = "examen-toggle";
   lab.innerHTML = '<input type="checkbox"> Mode examen';
   body.appendChild(lab);
@@ -66,8 +68,9 @@
   }
 
   // 4) Sommaire fixe (sections + exercices)
+  // Toujours accessible : barre fixe sur grand écran, tiroir + bouton « Sommaire » sinon.
   var secs = Array.prototype.slice.call(document.querySelectorAll("main section[id]"));
-  var som = null;
+  var som = null, compteur = 0;
   if (secs.length > 1) {
     som = document.createElement("nav");
     som.className = "lecture-sommaire";
@@ -76,21 +79,44 @@
       var t = s.querySelector("h2, .memo-head");
       if (!t) return;
       html += '<a href="#' + s.id + '" data-id="' + s.id + '">' + esc(t.textContent.trim()) + "</a>";
-      s.querySelectorAll(".exo-card[id]").forEach(function (c) {
-        var h = c.querySelector(".exo-head");
-        if (!h) return;
-        var txt = (h.firstChild && h.firstChild.nodeType === 3 ? h.firstChild.textContent : h.textContent).trim();
-        html += '<a class="ls-sous" href="#' + c.id + '">' + esc(txt) + "</a>";
+      // sous-parties : titres du cours (h3) et exercices, dans l'ordre de la page
+      s.querySelectorAll("h3, .exo-card").forEach(function (el) {
+        if (el.tagName === "H3" && el.closest(".exo-card, .memo-sheet")) return;
+        var txt;
+        if (el.classList.contains("exo-card")) {
+          var h = el.querySelector(".exo-head");
+          if (!h) return;
+          txt = h.firstChild && h.firstChild.nodeType === 3 ? h.firstChild.textContent : h.textContent;
+        } else {
+          txt = el.textContent;
+        }
+        if (!el.id) el.id = "som-" + (++compteur);
+        html += '<a class="ls-sous" href="#' + el.id + '">' + esc(txt.trim()) + "</a>";
       });
     });
     som.innerHTML = html;
     body.appendChild(som);
+    body.classList.add("avec-sommaire");
+    var btnSom = document.createElement("button");
+    btnSom.type = "button";
+    btnSom.className = "sommaire-btn";
+    btnSom.textContent = "☰ Sommaire";
+    body.appendChild(btnSom);
+    btnSom.addEventListener("click", function (e) { e.stopPropagation(); som.classList.toggle("ouvert"); });
+    som.addEventListener("click", function (e) { if (e.target.closest("a")) som.classList.remove("ouvert"); });
+    document.addEventListener("click", function (e) {
+      if (som.classList.contains("ouvert") && !e.target.closest(".lecture-sommaire")) som.classList.remove("ouvert");
+    });
   }
   function majSommaire() {
     if (!som) return;
     var y = innerHeight * 0.3, actif = null;
     secs.forEach(function (s) { if (s.getBoundingClientRect().top < y) actif = s.id; });
-    som.querySelectorAll("a[data-id]").forEach(function (a) { a.classList.toggle("actif", a.getAttribute("data-id") === actif); });
+    som.querySelectorAll("a[data-id]").forEach(function (a) {
+      var on = a.getAttribute("data-id") === actif;
+      if (on && !a.classList.contains("actif")) som.scrollTop = Math.max(0, a.offsetTop - 60);  // garde la partie en cours visible
+      a.classList.toggle("actif", on);
+    });
   }
 
   addEventListener("scroll", function () { majProg(); majSommaire(); }, { passive: true });
