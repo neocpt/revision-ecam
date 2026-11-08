@@ -20,7 +20,7 @@ Conventions retenues :
 | c04-transmetteurs | fait | 2 créés + 5 cartes du TD. Bigeard utilisé pour Prius (Q11) et différentiel (Q4, Q7-Q10). Q2 du différentiel ajoutée (manquait). |
 | c05-dessin-technique | fait | Pas de TD ni de section `#app` : les 8 exercices créés (`#exos`) sont réécrits. Énoncés regroupés en `.enonce`, une `.q` par item. |
 | c06-slci | fait | 2 créés + 5 ex. du TD ; tout revérifié (simulation de l'indicielle PTZ). Aucun corrigé Bigeard applicable. |
-| c07-performances | à faire | |
+| c07-performances | fait | 2 créés + 3 cartes du TD. **Erreur corrigée** : RAMSES n'est pas insensible au débit sortant. Q2, Q5, Q6 de RAMSES ajoutées. |
 | c08-statique | à faire | |
 | c09-statique-transmetteurs | à faire | |
 | c10-liaisons | à faire | |
@@ -52,6 +52,7 @@ Conventions retenues :
 | c04 | Ex 2.4 Différentiel | `transmission-de-puissance_etude-dun-differentiel-automobile/TDP-PT-TD-etude_d_un_differentiel_automobile-prof.pdf` | utilisé pour la méthode de Q2 (RSG des roues en virage, Q4/Q8 de Bigeard), λ = −1 (Q7) et le piège roue qui patine (Q9-Q10) |
 | c05 | Ex A à H (créés) | aucun : `representation-graphique-du-reel_dessin-2d-niveau-*` n'ont pas de `-prof.pdf` (et ce sont des exercices de tracé) | correction actuelle |
 | c06 | Ex A, B (créés), 1.1, 1.2 Four, 1.3 RAMSES, 2.1 Hémodialyse, 3.1 Caméra PTZ | aucun dossier correspondant (`analyse-et-modelisation-des-systemes_camera-speedcam` = autre caméra, sujet SysML/chaîne) | correction actuelle, revérifiée |
+| c07 | Ex A, B (créés), réduction de schéma-bloc, 2.4 MCC, 2.1 RAMSES | aucun dossier correspondant | correction actuelle, revérifiée (RAMSES refait) |
 
 - **c01 revu avec la règle Bigeard** : aucun corrigé Bigeard ne traite ces questions (voir tableau) ; page inchangée.
 - **c02** : TD 1 (3 ex.) + TD 2 (3 ex.) + 2 créés. Recalculs : \(D_1\%=3/19=15{,}8\%\), \(e_r\%=10/40=25\%\), \(D_1\%=9/50=18\%\), \(\eta=0{,}83\) : justes. Ajout de pièges (division par \(\Delta s\) et non par \(s(\infty)\), unités incompatibles du four). Aucun corrigé Bigeard applicable.
@@ -59,3 +60,4 @@ Conventions retenues :
 - **c04** : recalculs Python : 744/4108 = 0,181 (1/5,52) ; a12 = 62,25 mm ; m2 = 124,5/103 = 1,21 mm ; p/(4π) = 0,796 mm/rad ; ωg = 1270 tr/min : justes. Ex A : l'ancienne version donnait un signe au rapport roue-vis (axes orthogonaux) → `.warnbox` Piège. Différentiel : Q2 de l'énoncé n'avait pas de réponse, ajoutée d'après Bigeard.
 - **c05** : formats A et surface A4 recalculés (√2, 62 370 mm²) : justes. Les affirmations (Ex D), situations (Ex E) et questions (Ex C, F) qui étaient mêlées aux réponses sont passées dans un `.enonce` en tête. Petite précision : en coupe, pas de trait interrompu dans une zone hachurée ; « arbre plein coupé suivant son axe » au lieu de « axe qui traverse un alésage ».
 - **c06** : recalculs Python : ω0 = 16,90 rad/s, z = 0,507, ωa = 14,57 rad/s, Ta = 0,431 s, D1 = 15,7 %, D2 = 2,5 %, D3 = 0,39 %, tr5% simulé = 0,313 s (abaque 5,3/ω0 = 0,31 s) : justes. Ex 1.1-D : « instable (classe ≠ 0) » reformulé en « non stable (pôle nul) ». **Hors périmètre, non corrigé** : la fiche mémo (`#memo`, lignes ~45-50) contient `0<z<1` et `\(<0\)` bruts ; le navigateur lit `<z` comme une balise et casse l'affichage de la fiche (à remplacer par `&lt;`).
+- **c07** : recalculs Python MCC (29,6 / 9,4 / −20,2 rad/s) et forme canonique du schéma-bloc (16 qui se simplifie) : justes. **RAMSES (Ex 2.1)** : l'ancienne version affirmait Δh(∞) = 0 pour un échelon de débit sortant ; faux, car le dérivateur du correcteur annule l'intégration de la vanne et il n'y a plus d'intégrateur en amont de q_s. Refait : F1 = aG/(aG + Sp + Sτp²) (précis en poursuite), F2 = −(1+τp)/(aG + Sp + Sτp²), erreur de régulation q0/(aG) → `.warnbox` « Correction d'une erreur de l'ancienne version ». Hypothèses explicitées : limnimètre de même gain a que le potentiomètre, chaîne régulateur-moteur-réducteur-vanne de C06 Ex 1.3.

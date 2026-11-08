@@ -106,7 +106,6 @@ window.MathJax = {
     </div>
   </section>
 
-  <!-- ======================= EXOS CRÉÉS =============================== -->
   <section class="block" id="exos">
     <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
 
@@ -114,9 +113,23 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice A — Réduction de boucle fermée</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Chaîne directe \(D(p)=\dfrac{K}{p(1+\tau p)}\), retour unitaire \(R=1\). FT en boucle fermée ?</div>
-        <p>\(H=\dfrac{D}{1+D}=\dfrac{\frac{K}{p(1+\tau p)}}{1+\frac{K}{p(1+\tau p)}}=\dfrac{K}{p(1+\tau p)+K}=\dfrac{K}{K+p+\tau p^2}\).</p>
-        <p>Canonique : \(H=\dfrac{1}{1+\frac1K p+\frac{\tau}{K}p^2}\).</p>
-        <p class="res">\(K_{stat}=1\) (précis en poursuite échelon), classe 0, ordre 2. Identifiable à un 2ᵉ ordre : \(\omega_0=\sqrt{K/\tau}\), \(z=\tfrac{1}{2\sqrt{K\tau}}\).</p>
+
+        <p class="q">1) Fonction de transfert en boucle fermée</p>
+        <p class="etape">Étape 1 : formule de Black</p>
+        <div class="rappel"><span class="lab">Rappel · formule de Black</span>\[ H_{BF}(p) = \frac{D(p)}{1 + D(p)\,R(p)} \]</div>
+        <p>Avec \(R = 1\) :</p>
+        \[ H = \frac{\dfrac{K}{p(1+\tau p)}}{1 + \dfrac{K}{p(1+\tau p)}} \]
+        <p class="etape">Étape 2 : simplifier</p>
+        <p>On multiplie en haut et en bas par \(p(1 + \tau p)\) :</p>
+        \[ H = \frac{K}{p(1 + \tau p) + K} = \frac{K}{K + p + \tau p^2} \]
+        <p class="etape">Étape 3 : forme canonique</p>
+        <p>On divise par \(K\) :</p>
+        \[ H = \frac{1}{1 + \dfrac1K\,p + \dfrac{\tau}{K}\,p^2} \]
+        <p class="etape">Étape 4 : identification à un 2e ordre</p>
+        <div class="rappel"><span class="lab">Rappel · forme canonique d'un 2e ordre</span>\[ H(p) = \frac{K_{BF}}{1 + \dfrac{2z}{\omega_0}\,p + \dfrac{p^2}{\omega_0^2}} \]</div>
+        \[ \frac{1}{\omega_0^2} = \frac{\tau}{K} \iff \omega_0 = \sqrt{\frac K\tau} \qquad\qquad \frac{2z}{\omega_0} = \frac1K \iff z = \frac{\omega_0}{2K} = \frac{1}{2\sqrt{K\tau}} \]
+        <div class="res">\(H = \dfrac{1}{1 + \frac1K p + \frac{\tau}{K}p^2}\) : gain statique 1 (précis en poursuite d'échelon), classe 0, ordre 2, \(\omega_0 = \sqrt{K/\tau}\), \(z = \dfrac{1}{2\sqrt{K\tau}}\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> Augmenter \(K\) rend le système plus rapide (\(\omega_0\) augmente) mais diminue \(z\) : il devient plus oscillant.</div>
       </div>
     </div>
 
@@ -124,9 +137,21 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice B — Erreurs de poursuite</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">\(H(p)=\dfrac{0{,}8}{1+2p}\) (asservi, stable, sans dérivateur).</div>
-        <p class="q">Échelon \(E_0=10\)</p><p>\(e_{pour}=E_0(1-K)=10(1-0{,}8)=2\), soit \(e\%=20\%\).</p><p class="res">\(e_{pour}=2\) (20 %) — imprécis car \(K\neq1\)</p>
-        <p class="q">Rampe</p><p>\(K\neq1\) ⟹ l'erreur en rampe diverge (\(+\infty\)) : pas de régime permanent.</p>
-        <p class="res">Erreur de traînage infinie (à corriger par un intégrateur)</p>
+
+        <p class="q">1) Échelon \(E_0=10\)</p>
+        <div class="rappel"><span class="lab">Rappel · erreur de poursuite en régime permanent</span>\[ e(+\infty) = \lim_{p\to0} p\,\big[E(p) - S(p)\big] = \lim_{p\to0} p\,E(p)\,\big[1 - H(p)\big] \]</div>
+        <p>Pour un échelon, \(E(p) = E_0/p\) :</p>
+        \[ e(+\infty) = E_0\,\big[1 - H(0)\big] = 10 \times (1 - 0{,}8) = 2 \]
+        \[ e\% = \frac{2}{10} = 20\ \% \]
+        <div class="res">\(e_{pour} = 2\), soit 20 % : le système est imprécis car son gain statique n'est pas 1.</div>
+
+        <p class="q">2) Rampe</p>
+        <p class="etape">Étape 1 : la sortie en régime permanent</p>
+        <p>Pour une rampe de pente \(a\), la sortie finit par suivre une rampe de pente \(0{,}8\,a\) seulement.</p>
+        <p class="etape">Étape 2 : l'écart</p>
+        <p>L'écart entre deux rampes de pentes différentes grandit sans fin :</p>
+        \[ e(t) \approx (a - 0{,}8\,a)\,t = 0{,}2\,a\,t \;\longrightarrow\; +\infty \]
+        <div class="res">Erreur de traînage infinie ; il faudrait un intégrateur dans la boucle pour la corriger.</div>
       </div>
     </div>
   </section>
@@ -140,11 +165,34 @@ window.MathJax = {
       <div class="exo-head"><span>Réduction de schéma-bloc (exemple du cours)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">Réduire pas à pas : boucle interne \(\tfrac1p\) / retour 4, série \(\tfrac{2}{2+p}\), parallèle \(\tfrac1p\), série \(\tfrac{2}{p+2}\).</div>
-        <p class="q">1) Boucle interne</p><p>\(H_1=\dfrac{1/p}{1+4/p}=\dfrac{1}{p+4}\).</p>
-        <p class="q">2) Série</p><p>\(H_2=\dfrac{1}{p+4}\cdot\dfrac{2}{2+p}=\dfrac{2}{(p+4)(p+2)}\).</p>
-        <p class="q">3) Parallèle</p><p>\(H_3=\dfrac{2}{(p+4)(p+2)}+\dfrac1p=\dfrac{p^2+8p+8}{p(p+4)(p+2)}\).</p>
-        <p class="q">4) Série + forme canonique</p><p>\(H=H_3\cdot\dfrac{2}{p+2}=\dfrac{2(p^2+8p+8)}{p(p+4)(p+2)^2}\).</p>
-        <p class="res">\(H=\dfrac1p\cdot\dfrac{1+p+\frac{p^2}{8}}{1+\frac54 p+\frac12 p^2+\frac1{16}p^3}\) : <b>classe 1</b>, gain statique unitaire, ordre 4</p>
+
+        <p class="q">1) Boucle interne</p>
+        <div class="rappel"><span class="lab">Rappel · boucle (formule de Black)</span>\[ \frac{D}{1 + D\,R} \]</div>
+        \[ H_1 = \frac{1/p}{1 + 4/p} = \frac{1}{p + 4} \]
+        <div class="res">\(H_1 = \dfrac{1}{p + 4}\).</div>
+
+        <p class="q">2) Série</p>
+        <div class="rappel"><span class="lab">Rappel · blocs en série</span>\[ H = H_a \times H_b \]</div>
+        \[ H_2 = \frac{1}{p + 4}\cdot\frac{2}{2 + p} = \frac{2}{(p + 4)(p + 2)} \]
+        <div class="res">\(H_2 = \dfrac{2}{(p + 4)(p + 2)}\).</div>
+
+        <p class="q">3) Parallèle</p>
+        <div class="rappel"><span class="lab">Rappel · blocs en parallèle</span>\[ H = H_a + H_b \]</div>
+        <p>On réduit au même dénominateur \(p(p + 4)(p + 2)\) :</p>
+        \[ H_3 = \frac{2p + (p + 4)(p + 2)}{p(p + 4)(p + 2)} = \frac{p^2 + 8p + 8}{p(p + 4)(p + 2)} \]
+        <div class="res">\(H_3 = \dfrac{p^2 + 8p + 8}{p(p + 4)(p + 2)}\).</div>
+
+        <p class="q">4) Série + forme canonique</p>
+        <p class="etape">Étape 1 : dernier bloc en série</p>
+        \[ H = H_3\cdot\frac{2}{p + 2} = \frac{2\,(p^2 + 8p + 8)}{p\,(p + 4)(p + 2)^2} \]
+        <p class="etape">Étape 2 : mettre chaque facteur sous la forme \(1 + \dots\)</p>
+        <ul>
+          <li>Numérateur : \(2 \times 8\left(1 + p + \tfrac{p^2}{8}\right) = 16\left(1 + p + \tfrac{p^2}{8}\right)\).</li>
+          <li>Dénominateur : \(p \times 4\left(1 + \tfrac p4\right) \times 4\left(1 + \tfrac p2\right)^2 = 16\,p\left(1 + \tfrac54 p + \tfrac12 p^2 + \tfrac1{16}p^3\right)\).</li>
+        </ul>
+        <p>Les 16 se simplifient :</p>
+        <div class="res">\(H = \dfrac1p\cdot\dfrac{1 + p + \frac{p^2}{8}}{1 + \frac54 p + \frac12 p^2 + \frac1{16}p^3}\) : <b>classe 1</b>, gain 1, ordre 4.</div>
+        <div class="warnbox"><span class="lab">Piège</span> On réduit toujours les boucles internes en premier ; additionner une branche parallèle avant d'avoir réduit la boucle qu'elle contient donne un résultat faux.</div>
       </div>
     </div>
 
@@ -152,23 +200,52 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 2.4 — Moteur à courant continu (2 entrées)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">\(U_m=E+(R+Lp)I\), \(E=K_e\Omega\), \(C_m=K_cI\), \(C_m-C_r-f\Omega=Jp\Omega\). Valeurs : \(R=2{,}5\,\Omega\), \(L=7{,}5\,\)mH, \(K_e=K_c=0{,}11\), \(J=5\cdot10^{-5}\), \(f=0{,}01\).</div>
+
         <p class="q">Q3–Q4 — Fonctions de transfert</p>
-        <p>En éliminant \(I\) et \(E\), on pose \(D(p)=(f+Jp)(R+Lp)+K_cK_e\). Alors :</p>
-        <p class="res">\(\dfrac{\Omega}{U_m}\Big|_{C_r=0}=\dfrac{K_c}{D(p)}\) ; \(\dfrac{\Omega}{C_r}\Big|_{U_m=0}=\dfrac{-(R+Lp)}{D(p)}\)</p>
+        <p class="etape">Étape 1 : exprimer \(I\) puis \(\Omega\)</p>
+        <p>De l'équation électrique :</p>
+        \[ I = \frac{U_m - K_e\,\Omega}{R + Lp} \]
+        <p>De l'équation mécanique :</p>
+        \[ (f + Jp)\,\Omega = K_c\,I - C_r \]
+        <p class="etape">Étape 2 : éliminer \(I\)</p>
+        <p>On remplace \(I\) et on multiplie par \((R + Lp)\) :</p>
+        \[ (f + Jp)(R + Lp)\,\Omega = K_c\,U_m - K_cK_e\,\Omega - (R + Lp)\,C_r \]
+        <p>On pose \(D(p) = (f + Jp)(R + Lp) + K_cK_e\) :</p>
+        \[ D(p)\,\Omega = K_c\,U_m - (R + Lp)\,C_r \]
+        <div class="res">\(\dfrac{\Omega}{U_m}\Big|_{C_r=0} = \dfrac{K_c}{D(p)}\) ; \(\dfrac{\Omega}{C_r}\Big|_{U_m=0} = \dfrac{-(R + Lp)}{D(p)}\).</div>
+
         <p class="q">Q5 — Superposition</p>
-        <p>\(\Omega(p)=\dfrac{K_c}{D(p)}U_m(p)-\dfrac{R+Lp}{D(p)}C_r(p)\).</p>
+        <div class="rappel"><span class="lab">Rappel · théorème de superposition</span>\[ S(p) = H_1(p)\,E_1(p) + H_2(p)\,E_2(p) \]</div>
+        <div class="res">\(\Omega(p) = \dfrac{K_c}{D(p)}\,U_m(p) - \dfrac{R + Lp}{D(p)}\,C_r(p)\).</div>
+
         <p class="q">Q6 — Valeur finale (échelons \(U_{m0}\), \(C_{r0}\))</p>
-        <p>\(\omega(+\infty)=\displaystyle\lim_{p\to0}p\,\Omega(p)=\dfrac{K_cU_{m0}-R\,C_{r0}}{fR+K_cK_e}\).</p>
+        <div class="rappel"><span class="lab">Rappel · théorème de la valeur finale</span>\[ \omega(+\infty) = \lim_{p\to0} p\,\Omega(p), \qquad U_m(p) = \frac{U_{m0}}{p},\quad C_r(p) = \frac{C_{r0}}{p} \]</div>
+        <p>En \(p = 0\) : \(D(0) = fR + K_cK_e\).</p>
+        <div class="res">\(\omega(+\infty) = \dfrac{K_c\,U_{m0} - R\,C_{r0}}{fR + K_cK_e}\).</div>
+
         <p class="q">Q8 — Applications numériques</p>
-        <p>\(fR+K_cK_e=0{,}01\cdot2{,}5+0{,}11^2=0{,}025+0{,}0121=0{,}0371\).</p>
+        <p class="etape">Étape 1 : le dénominateur</p>
+        \[ fR + K_cK_e = 0{,}01 \times 2{,}5 + 0{,}11^2 = 0{,}025 + 0{,}0121 = 0{,}0371 \]
+        <p class="etape">Étape 2 : les trois cas</p>
+        <ul>
+          <li>\(U_{m0} = 10\) V, \(C_{r0} = 0\) : \(\omega = \dfrac{1{,}1}{0{,}0371} \approx 29{,}6\) rad/s.</li>
+          <li>\(U_{m0} = 10\) V, \(C_{r0} = 0{,}3\) N·m : \(\omega = \dfrac{1{,}1 - 0{,}75}{0{,}0371} \approx 9{,}4\) rad/s.</li>
+          <li>\(U_{m0} = 0\), \(C_{r0} = 0{,}3\) N·m : \(\omega = \dfrac{-0{,}75}{0{,}0371} \approx -20{,}2\) rad/s.</li>
+        </ul>
         <table>
           <tr><th>\(U_{m0}\) (V)</th><th>\(C_{r0}\) (N·m)</th><th>\(\omega(+\infty)\) (rad/s)</th></tr>
           <tr><td>10</td><td>0</td><td>\(\frac{1{,}1}{0{,}0371}\approx29{,}6\)</td></tr>
           <tr><td>10</td><td>0,3</td><td>\(\frac{1{,}1-0{,}75}{0{,}0371}\approx9{,}4\)</td></tr>
           <tr><td>0</td><td>0,3</td><td>\(\frac{-0{,}75}{0{,}0371}\approx-20{,}2\)</td></tr>
         </table>
+        <div class="res">29,6 rad/s ; 9,4 rad/s ; −20,2 rad/s.</div>
+
         <p class="q">Q10 — Conclusion</p>
-        <p class="res">Système <b>stable</b> (2ᵉ ordre, coeffs positifs), mais <b>très sensible</b> au couple résistant (29,6 → 9,4 rad/s sous 0,3 N·m) : non asservi, il ne régule pas la vitesse — d'où l'intérêt de l'asservissement (C02, C06).</p>
+        <ul>
+          <li>\(D(p)\) est du 2e ordre à coefficients positifs : le moteur est stable.</li>
+          <li>Un couple résistant de 0,3 N·m fait chuter la vitesse de 29,6 à 9,4 rad/s.</li>
+        </ul>
+        <div class="res">Système <b>stable</b> mais <b>très sensible</b> au couple résistant : non asservi, il ne maintient pas sa vitesse. D'où l'intérêt de l'asservissement (C02, C06).</div>
       </div>
     </div>
 
@@ -176,13 +253,51 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 2.1 — RAMSES (poursuite & régulation)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">Correcteur <b>dérivateur</b> \(u_r=A\dot\varepsilon\) ; réservoir \(q_e-q_s=S\dot h\) (\(q_s\) = perturbation).</div>
+
+        <p class="q">Q2 — Schéma-bloc</p>
+        <p class="etape">Étape 1 : les blocs à placer</p>
+        <ul>
+          <li>Potentiomètre (consigne) : gain \(a\). Limnimètre (mesure) : même gain \(a\), pour que \(\varepsilon = 0\) quand \(h = h_c\).</li>
+          <li>Correcteur dérivateur : \(A\,p\).</li>
+          <li>Réservoir : \(Q_e - Q_s = Sp\,H\), donc un sommateur (\(+Q_e\), \(-Q_s\)) suivi de \(\dfrac{1}{Sp}\).</li>
+        </ul>
+        <p class="etape">Étape 2 : la chaîne d'énergie entre correcteur et réservoir</p>
+        <p>Régulateur, moteur, réducteur et vanne ont été modélisés en C06 (Ex 1.3) ; on les regroupe :</p>
+        \[ M(p) = K_r\cdot\frac{K_m}{1 + \tau p}\cdot\frac1r\cdot\frac1p\cdot K_v = \frac{K_M}{p\,(1 + \tau p)}, \qquad K_M = \frac{K_rK_mK_v}{r} \]
+        <div class="res">\(H_c \to a \to \oplus \to Ap \to M(p) \to Q_e \to \oplus(-Q_s) \to \dfrac{1}{Sp} \to H\), retour par le limnimètre \(a\).</div>
+
         <p class="q">Q3 — \(F_1=\tfrac{H}{H_c}|_{Q_s=0}\), précision en poursuite</p>
-        <p>La chaîne directe contient un <b>dérivateur</b> (\(Ap\)) puis une <b>intégration</b> réservoir (\(\tfrac1{Sp}\)) : le \(p\) se simplifie, donnant une classe 0.
-        Le gain statique dépend des gains ; s'il vaut 1 le système est précis en poursuite échelon.</p>
-        <p class="res">La FT en poursuite est de classe 0 (dérivateur × intégrateur) : précis en échelon si \(K=1\).</p>
+        <p class="etape">Étape 1 : la chaîne directe</p>
+        <p>Le \(p\) du dérivateur se simplifie avec le \(\dfrac1p\) de la vanne :</p>
+        \[ Ap\cdot M(p) = \frac{G}{1 + \tau p}, \qquad G = A\,K_M \]
+        <p>La boucle ouverte vaut donc :</p>
+        \[ FTBO(p) = \frac{a\,G}{Sp\,(1 + \tau p)} \qquad\text{(classe 1)} \]
+        <p class="etape">Étape 2 : formule de Black</p>
+        <div class="rappel"><span class="lab">Rappel · formule de Black</span>\[ F = \frac{\text{chaîne directe}}{1 + FTBO} \]</div>
+        \[ F_1(p) = \frac{a\,\dfrac{G}{Sp(1 + \tau p)}}{1 + \dfrac{aG}{Sp(1 + \tau p)}} = \frac{aG}{Sp\,(1 + \tau p) + aG} \]
+        <p class="etape">Étape 3 : précision</p>
+        \[ F_1(0) = \frac{aG}{aG} = 1 \]
+        <div class="res">\(F_1(p) = \dfrac{aG}{aG + Sp + S\tau p^2}\), gain statique 1 : le modèle est <b>précis en poursuite</b> (FTBO de classe 1).</div>
+
         <p class="q">Q4 — \(F_2=\tfrac{H}{Q_s}|_{H_c=0}\), sensibilité</p>
-        <p>Pour la perturbation \(q_s\), la chaîne de retour comporte le dérivateur : la FT en régulation possède un <b>dérivateur</b> (classe « négative »).</p>
-        <p class="res">\(F_2\) avec dérivateur ⟹ \(\Delta h(+\infty)=0\) pour un \(q_s\) en échelon : système <b>insensible</b> à la perturbation de débit sortant (grâce au correcteur dérivateur/intégral).</p>
+        <p class="etape">Étape 1 : écrire la boucle avec \(H_c = 0\)</p>
+        <p>Le débit entrant ne dépend plus que de la mesure :</p>
+        \[ Q_e = -\frac{aG}{1 + \tau p}\,H \qquad\qquad Sp\,H = Q_e - Q_s \]
+        <p class="etape">Étape 2 : isoler \(H\)</p>
+        \[ \left(Sp + \frac{aG}{1 + \tau p}\right)H = -Q_s \iff F_2(p) = \frac{-(1 + \tau p)}{Sp\,(1 + \tau p) + aG} \]
+        <p class="etape">Étape 3 : effet d'un échelon de débit \(q_0\)</p>
+        <div class="rappel"><span class="lab">Rappel · théorème de la valeur finale</span>\[ \Delta h(+\infty) = \lim_{p\to0} p\,F_2(p)\,\frac{q_0}{p} = F_2(0)\,q_0 \]</div>
+        \[ \Delta h(+\infty) = -\frac{q_0}{aG} \neq 0 \]
+        <div class="res">\(F_2(p) = \dfrac{-(1 + \tau p)}{aG + Sp + S\tau p^2}\) : le modèle est <b>sensible</b> au débit sortant. Erreur de régulation pour un échelon \(q_0\) : \(\varepsilon_r = \dfrac{q_0}{aG}\) (le niveau baisse de \(q_0/(aG)\)).</div>
+        <div class="warnbox"><span class="lab">Correction d'une erreur de l'ancienne version</span> L'ancienne correction concluait que le système était insensible à \(q_s\) (\(\Delta h(+\infty) = 0\)). C'est faux : pour rejeter une perturbation en échelon, il faut un intégrateur <b>en amont</b> de la perturbation. Ici le dérivateur du correcteur annule l'intégration de la vanne ; il ne reste aucun intégrateur entre le comparateur et le point où entre \(q_s\), d'où une erreur \(q_0/(aG)\).</div>
+
+        <p class="q">Q5 — \(H(p)\) en fonction de \(F_1\), \(F_2\), \(H_c\) et \(Q_s\)</p>
+        <div class="rappel"><span class="lab">Rappel · théorème de superposition</span>\[ S = F_1\,E_1 + F_2\,E_2 \]</div>
+        <div class="res">\(H(p) = F_1(p)\,H_c(p) + F_2(p)\,Q_s(p)\).</div>
+
+        <p class="q">Q6 — Hauteur stabilisée (\(h_0\) et \(q_0\) en échelon)</p>
+        \[ h(+\infty) = F_1(0)\,h_0 + F_2(0)\,q_0 = h_0 - \frac{q_0}{aG} = h_0 - \frac{r\,q_0}{a\,A\,K_rK_mK_v} \]
+        <div class="res">\(h(+\infty) = h_0 - \dfrac{q_0}{aG}\) : le niveau reste sous la consigne d'autant plus que le débit sortant est grand. Augmenter le gain \(A\) réduit l'écart sans l'annuler.</div>
       </div>
     </div>
 
@@ -190,10 +305,11 @@ window.MathJax = {
       <span class="lab">Bilan C07</span>
       On assemble les modèles de connaissance en <b>schéma-bloc</b>, on le <b>réduit</b> (boucles internes d'abord, formule \(\tfrac{D}{1+DR}\)),
       on obtient les FT en <b>poursuite</b> et en <b>régulation</b> (superposition), puis on évalue la <b>précision</b> :
-      erreur d'échelon \(E_0(1-K)\) (nulle ⟺ \(K=1\)), erreur de rampe \(aV_0\), erreur de régulation \(-\Delta s(+\infty)\) (nulle si action intégrale).
+      erreur d'échelon \(E_0(1-K)\) (nulle ⟺ \(K=1\)), erreur de rampe \(aV_0\), erreur de régulation \(-\Delta s(+\infty)\) (nulle si action intégrale en amont de la perturbation).
       Autres exercices du TD (axe machine-outil, enceinte chauffante, Cablecam, suspension camion, servocommande A380) : même démarche de synthèse + précision.
     </div>
   </section>
+
   <section class="block" id="docs">
     <h2>📂 Documents donnés</h2>
     <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
