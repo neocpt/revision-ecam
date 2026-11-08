@@ -126,10 +126,21 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice A — Réducteur roue-vis + train simple</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Vis sans fin 2 filets → roue \(Z=40\), puis engrenage extérieur \(Z_a=20\to Z_b=60\). Moteur 1500 tr/min.</div>
-        <p class="q">Rapport global</p>
-        <p>Roue-vis : \(i_1=\dfrac{Z_{vis}}{Z_{roue}}=\dfrac{2}{40}=\dfrac1{20}\). Engrenage ext. : \(i_2=-\dfrac{Z_a}{Z_b}=-\dfrac{20}{60}=-\dfrac13\).</p>
-        <p>\(i=i_1\,i_2=-\dfrac{1}{60}\).</p>
-        <p class="res">\(N_s=|i|\cdot1500=\dfrac{1500}{60}=25\) tr/min (sens inversé)</p>
+
+        <p class="q">1) Rapport global et vitesse de sortie</p>
+        <p class="etape">Étape 1 : rapport de l'étage roue-vis</p>
+        <div class="rappel"><span class="lab">Rappel · roue et vis sans fin</span>\[ \frac{\omega_{roue}}{\omega_{vis}} = \frac{Z_{vis}}{Z_{roue}} \qquad (Z_{vis} = \text{nombre de filets}) \]</div>
+        \[ i_1 = \frac{2}{40} = \frac{1}{20} \]
+        <p class="etape">Étape 2 : rapport de l'engrenage extérieur</p>
+        <div class="rappel"><span class="lab">Rappel · engrenage extérieur</span>\[ \frac{\omega_{menée}}{\omega_{menante}} = -\frac{Z_{menante}}{Z_{menée}} \]</div>
+        \[ i_2 = -\frac{20}{60} = -\frac13 \]
+        <p class="etape">Étape 3 : rapport global</p>
+        <div class="rappel"><span class="lab">Rappel · étages en série</span>\[ i = i_1 \times i_2 \]</div>
+        \[ |i| = \frac{1}{20} \times \frac13 = \frac{1}{60} \]
+        <p class="etape">Étape 4 : vitesse de sortie</p>
+        \[ N_s = \frac{1500}{60} = 25\ \text{tr/min} \]
+        <div class="res">\(|i| = \dfrac{1}{60}\) et \(N_s = 25\) tr/min ; l'arbre de sortie tourne en sens inverse de la roue.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Les axes de la vis et de la roue sont orthogonaux : comparer leurs sens de rotation n'a pas de sens, on ne met donc pas de signe sur \(i_1\). Le signe moins de l'engrenage extérieur indique seulement que la sortie tourne en sens inverse de la roue.</div>
       </div>
     </div>
 
@@ -137,8 +148,15 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice B — Vis-écrou : loi entrée-sortie</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <div class="enonce">Vis à droite, pas \(p=5\) mm/tour, entraînée à \(N=600\) tr/min. Vitesse de l'écrou ?</div>
-        <p>\(\omega=\dfrac{2\pi N}{60}=\dfrac{2\pi\cdot600}{60}=62{,}8\) rad·s⁻¹. \(V=\dfrac{p}{2\pi}\omega=\dfrac{p\,N}{60}=\dfrac{5\cdot600}{60}\) mm/s.</p>
-        <p class="res">\(V=50\) mm·s⁻¹ (\(=p\times\) tours/s : cohérent, 10 tr/s × 5 mm)</p>
+
+        <p class="q">1) Vitesse de l'écrou</p>
+        <div class="rappel"><span class="lab">Rappel · loi entrée-sortie d'un système vis-écrou</span>\[ V = \frac{p}{2\pi}\,\omega \qquad\Longleftrightarrow\qquad V = p \times (\text{nombre de tours par seconde}) \]</div>
+        <p class="etape">Étape 1 : vitesse angulaire</p>
+        \[ \omega = \frac{2\pi N}{60} = \frac{2\pi \times 600}{60} \approx 62{,}8\ \text{rad·s}^{-1} \]
+        <p class="etape">Étape 2 : vitesse de translation</p>
+        \[ V = \frac{p}{2\pi}\,\omega = \frac{p\,N}{60} = \frac{5 \times 600}{60} = 50\ \text{mm·s}^{-1} \]
+        <p>Vérification : 600 tr/min font 10 tr/s ; à chaque tour l'écrou avance de 5 mm, soit 50 mm en une seconde.</p>
+        <div class="res">\(V = 50\) mm·s⁻¹.</div>
       </div>
     </div>
   </section>
@@ -155,16 +173,29 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 1.1 — Réducteur à arbres coaxiaux (train simple)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">\(Z_1=31\), \(Z_{2a}=52\), \(Z_{2b}=24\), \(Z_3=79\) ; module engrenage 1-2a : \(m_1=1{,}5\) mm.</div>
-        <p class="q">Q2 — Rapports & réduction globale</p>
-        <p>Engr. 1-2a (ext.) : \(\dfrac{\omega_{2}}{\omega_1}=-\dfrac{Z_1}{Z_{2a}}=-\dfrac{31}{52}\). Engr. 2b-3 (ext.) : \(\dfrac{\omega_3}{\omega_2}=-\dfrac{Z_{2b}}{Z_3}=-\dfrac{24}{79}\).</p>
-        <p>\(i=\dfrac{\omega_3}{\omega_1}=\Big(-\dfrac{31}{52}\Big)\Big(-\dfrac{24}{79}\Big)=\dfrac{31\cdot24}{52\cdot79}=\dfrac{744}{4108}\).</p>
-        <p class="res">\(i\approx0{,}181\) (réduction ≈ 1/5,5, même sens de rotation)</p>
+
+        <p class="q">Q2 — Rapports &amp; réduction globale</p>
+        <div class="rappel"><span class="lab">Rappel · train simple</span>\[ \frac{\omega_{sortie}}{\omega_{entrée}} = (-1)^n\,\frac{\prod Z_{menantes}}{\prod Z_{menées}} \qquad (n = \text{nombre de contacts extérieurs}) \]</div>
+        <p class="etape">Étape 1 : engrenage 1-2a (extérieur)</p>
+        \[ \frac{\omega_2}{\omega_1} = -\frac{Z_1}{Z_{2a}} = -\frac{31}{52} \]
+        <p class="etape">Étape 2 : engrenage 2b-3 (extérieur)</p>
+        \[ \frac{\omega_3}{\omega_2} = -\frac{Z_{2b}}{Z_3} = -\frac{24}{79} \]
+        <p class="etape">Étape 3 : produit des deux étages</p>
+        \[ i = \frac{\omega_3}{\omega_1} = \left(-\frac{31}{52}\right)\left(-\frac{24}{79}\right) = \frac{744}{4108} \approx 0{,}181 \]
+        <div class="res">\(i \approx 0{,}181\), soit une réduction d'environ 1/5,5 ; deux contacts extérieurs, donc même sens de rotation.</div>
+
         <p class="q">Q3 — Entraxe \(a_{12}\)</p>
-        <p>\(a_{12}=m_1\dfrac{Z_1+Z_{2a}}{2}=1{,}5\cdot\dfrac{31+52}{2}=1{,}5\cdot41{,}5\).</p>
-        <p class="res">\(a_{12}=62{,}25\) mm</p>
+        <div class="rappel"><span class="lab">Rappel · entraxe d'un engrenage extérieur</span>\[ a = \frac{d_1 + d_2}{2} = m\,\frac{Z_1 + Z_2}{2} \qquad (d = m\,Z) \]</div>
+        \[ a_{12} = 1{,}5 \times \frac{31 + 52}{2} = 1{,}5 \times 41{,}5 = 62{,}25\ \text{mm} \]
+        <div class="res">\(a_{12} = 62{,}25\) mm.</div>
+
         <p class="q">Q4 — Module \(m_2\) pour arbres coaxiaux</p>
-        <p>Coaxialité ⟹ \(a_{23}=a_{12}\) : \(m_2\dfrac{Z_{2b}+Z_3}{2}=62{,}25\Rightarrow m_2=\dfrac{2\cdot62{,}25}{24+79}=\dfrac{124{,}5}{103}\).</p>
-        <p class="res">\(m_2\approx1{,}21\) mm (obtenu par correction de denture)</p>
+        <p class="etape">Étape 1 : traduire « coaxiaux »</p>
+        <p>L'arbre d'entrée 1 et l'arbre de sortie 3 sont sur le même axe : les deux entraxes sont égaux.</p>
+        \[ a_{23} = a_{12} \]
+        <p class="etape">Étape 2 : en déduire \(m_2\)</p>
+        \[ m_2\,\frac{Z_{2b} + Z_3}{2} = 62{,}25 \iff m_2 = \frac{2 \times 62{,}25}{24 + 79} = \frac{124{,}5}{103} \approx 1{,}21\ \text{mm} \]
+        <div class="res">\(m_2 \approx 1{,}21\) mm (valeur non normalisée : en pratique on l'obtient par correction de denture).</div>
       </div>
     </div>
 
@@ -172,10 +203,18 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 1.4 — Restituteur actif d'effort d'embrayage</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Moteur (1) → poulie-courroie (poulie 2 de diamètre <b>double</b> de la poulie 1) → vis-écrou, pas \(p_v=10\) mm. Sortie : piston (3).</div>
+
         <p class="q">Q2 — Loi entrée-sortie \(V_3/\omega_1\)</p>
-        <p>Poulie-courroie : \(\omega_{vis}=\omega_2=\dfrac{R_1}{R_2}\omega_1=\dfrac12\,\omega_1\).</p>
-        <p>Vis-écrou : \(V_3=\dfrac{p_v}{2\pi}\,\omega_{vis}=\dfrac{p_v}{2\pi}\cdot\dfrac{\omega_1}{2}\).</p>
-        <p class="res">\(\dfrac{V_3}{\omega_1}=\dfrac{p_v}{4\pi}=\dfrac{10}{4\pi}\approx0{,}80\) mm par rad·s⁻¹</p>
+        <p class="etape">Étape 1 : poulie-courroie</p>
+        <div class="rappel"><span class="lab">Rappel · poulie-courroie (sans glissement)</span>\[ R_1\,\omega_1 = R_2\,\omega_2 \qquad\Longrightarrow\qquad \frac{\omega_2}{\omega_1} = \frac{R_1}{R_2} \]</div>
+        <p>La poulie 2 a un diamètre double : \(R_2 = 2R_1\).</p>
+        \[ \omega_{vis} = \omega_2 = \frac{\omega_1}{2} \]
+        <p class="etape">Étape 2 : vis-écrou</p>
+        <div class="rappel"><span class="lab">Rappel · vis-écrou</span>\[ V = \frac{p}{2\pi}\,\omega \]</div>
+        \[ V_3 = \frac{p_v}{2\pi}\,\omega_{vis} = \frac{p_v}{2\pi}\times\frac{\omega_1}{2} \]
+        <p class="etape">Étape 3 : loi globale</p>
+        \[ \frac{V_3}{\omega_1} = \frac{p_v}{4\pi} = \frac{10}{4\pi} \approx 0{,}80\ \text{mm par rad·s}^{-1} \]
+        <div class="res">\(\dfrac{V_3}{\omega_1} = \dfrac{p_v}{4\pi} \approx 0{,}80\) mm/rad (soit \(8{,}0\times10^{-4}\) m/rad).</div>
       </div>
     </div>
 
@@ -184,13 +223,19 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Méthode — Appliquer Willis (Ex 2.1)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p>Pour chaque configuration (entrée / sortie / pièce fixe) on part de \(\omega_A-\lambda\omega_B+(\lambda-1)\omega_{PoSa}=0\) et on annule
-        la vitesse de la pièce fixe :</p>
-        <p>• <b>Planétaire B fixe</b> (\(\omega_B=0\)) : \(i=\dfrac{\omega_{PoSa}}{\omega_A}=\dfrac{1}{1-\lambda}\).<br>
-        • <b>Porte-satellite fixe</b> : \(i=\dfrac{\omega_B}{\omega_A}=\dfrac1\lambda\) (train simple).<br>
-        • <b>Planétaire A fixe</b> : \(i=\dfrac{\omega_{PoSa}}{\omega_B}=\dfrac{-\lambda}{1-\lambda}=\dfrac{\lambda}{\lambda-1}\).<br>
-        • <b>Deux planétaires liés</b> (\(\omega_A=\omega_B\)) : tout tourne en bloc, \(i=1\).</p>
-        <p class="res">Le même \(\lambda\) donne tous les rapports selon la pièce bloquée.</p>
+        <p class="q">1) Rapports selon la pièce bloquée</p>
+        <div class="rappel"><span class="lab">Rappel · relation de Willis</span>\[ \lambda = \frac{\omega_A - \omega_{PS}}{\omega_B - \omega_{PS}} \qquad\Longleftrightarrow\qquad \omega_A - \lambda\,\omega_B + (\lambda - 1)\,\omega_{PS} = 0 \]
+          \(\lambda\) est le rapport du train quand le porte-satellite \(PS\) est fixe.</div>
+        <p class="etape">Étape 1 : la méthode</p>
+        <p>On écrit Willis, puis on annule la vitesse de la pièce bloquée et on isole le rapport sortie / entrée.</p>
+        <p class="etape">Étape 2 : les quatre cas</p>
+        <ul>
+          <li><b>Planétaire B fixe</b> (\(\omega_B = 0\)) : \(\omega_A + (\lambda - 1)\,\omega_{PS} = 0\), donc \(i = \dfrac{\omega_{PS}}{\omega_A} = \dfrac{1}{1 - \lambda}\).</li>
+          <li><b>Porte-satellite fixe</b> (\(\omega_{PS} = 0\)) : \(\omega_A = \lambda\,\omega_B\), donc \(i = \dfrac{\omega_B}{\omega_A} = \dfrac1\lambda\) (train simple).</li>
+          <li><b>Planétaire A fixe</b> (\(\omega_A = 0\)) : \(\lambda\,\omega_B = (\lambda - 1)\,\omega_{PS}\), donc \(i = \dfrac{\omega_{PS}}{\omega_B} = \dfrac{\lambda}{\lambda - 1}\).</li>
+          <li><b>Deux planétaires liés</b> (\(\omega_A = \omega_B\)) : Willis impose \(\omega_{PS} = \omega_A\), tout tourne en bloc, \(i = 1\).</li>
+        </ul>
+        <div class="res">Le même \(\lambda\) donne tous les rapports, selon la pièce bloquée.</div>
       </div>
     </div>
 
@@ -199,19 +244,34 @@ window.MathJax = {
       <div class="exo-body">
         <div class="enonce">Porte-satellite (1) = moteur thermique \(\omega_m\) ; planétaire intérieur (3) = génératrice \(\omega_g\) (\(Z_3=30\)) ;
         planétaire extérieur (4) = sortie \(\omega_s\) (\(Z_4=78\)) ; satellite \(Z_2=23\).</div>
-        <p class="q">Q1 — Raison & Willis</p>
-        <p>Sun (3) → satellite (2) (ext.) puis satellite → couronne (4) (int.) : \(\lambda=\dfrac{\omega_{3/1}}{\omega_{4/1}}=-\dfrac{Z_4}{Z_3}=-\dfrac{78}{30}=-2{,}6\).</p>
-        <p class="res">\(\dfrac{\omega_g-\omega_m}{\omega_s-\omega_m}=\lambda=-2{,}6\)</p>
+
+        <p class="q">Q1 — Raison &amp; Willis</p>
+        <p class="etape">Étape 1 : la raison, porte-satellite fixe</p>
+        <div class="rappel"><span class="lab">Rappel · raison d'un train épicycloïdal</span>\[ \lambda = \left(\frac{\omega_{3/1}}{\omega_{4/1}}\right) = (-1)^n\,\frac{\prod Z_{menantes}}{\prod Z_{menées}} \quad\text{(de 4 vers 3, porte-satellite 1 fixe)} \]</div>
+        <p>De la couronne (4) au planétaire (3) : contact intérieur 4-2 (signe +), puis contact extérieur 2-3 (signe −). Le satellite se simplifie :</p>
+        \[ \lambda = -\frac{Z_4}{Z_2}\times\frac{Z_2}{Z_3} = -\frac{Z_4}{Z_3} = -\frac{78}{30} = -2{,}6 \]
+        <p class="etape">Étape 2 : relation de Willis</p>
+        <div class="res">\(\dfrac{\omega_g - \omega_m}{\omega_s - \omega_m} = \lambda = -2{,}6\).</div>
+        <div class="note"><span class="lab">Corrigé Bigeard (Prius, Q11)</span> Bigeard écrit la raison dans l'autre sens, de l'entrée 30 vers la couronne 78 : \(\lambda' = \dfrac{\omega_{78/0} - \omega_{4/0}}{\omega_{30/0} - \omega_{4/0}} = -\dfrac{Z_{30}}{Z_{78}} \approx -0{,}385\). C'est l'inverse : \(\lambda' = 1/\lambda\). Les deux conventions donnent les mêmes vitesses ; il faut seulement garder la même jusqu'au bout.</div>
+
         <p class="q">Q2 — \(\omega_s/\omega_m\)</p>
-        <p>De \(\omega_g-\omega_m=\lambda(\omega_s-\omega_m)\) : \(\dfrac{\omega_s}{\omega_m}=\dfrac1\lambda\dfrac{\omega_g}{\omega_m}+\Big(1-\dfrac1\lambda\Big)\).</p>
+        <p>On part de \(\omega_g - \omega_m = \lambda\,(\omega_s - \omega_m)\) et on isole \(\omega_s\) :</p>
+        \[ \omega_s = \omega_m + \frac{\omega_g - \omega_m}{\lambda} \]
+        <p>On divise par \(\omega_m\) :</p>
+        <div class="res">\(\dfrac{\omega_s}{\omega_m} = \dfrac1\lambda\,\dfrac{\omega_g}{\omega_m} + \left(1 - \dfrac1\lambda\right)\).</div>
+
         <p class="q">Q3 — Pourquoi un CVT ?</p>
-        <p class="res">En faisant varier continûment \(\omega_g\) (génératrice asservie en vitesse), on règle continûment \(\omega_s/\omega_m\) : le rapport est <b>variable en continu</b>. L'<b>élément de contrôle</b> est la génératrice électrique.</p>
+        <p>Dans la relation de Q2, \(\omega_s/\omega_m\) dépend de \(\omega_g/\omega_m\). La génératrice est asservie en vitesse et peut prendre n'importe quelle valeur.</p>
+        <div class="res">En faisant varier continûment \(\omega_g\), on règle continûment \(\omega_s/\omega_m\) : le rapport est <b>variable en continu</b>. L'<b>élément de contrôle</b> est la génératrice électrique.</div>
+
         <p class="q">Q4 — Véhicule à l'arrêt (\(\omega_s=0\))</p>
-        <p>\(\dfrac{\omega_g-\omega_m}{-\omega_m}=\lambda\Rightarrow\omega_g=\omega_m(1-\lambda)=\omega_m\,(1+2{,}6)\).</p>
-        <p class="res">\(\dfrac{\omega_g}{\omega_m}=1-\lambda=3{,}6\)</p>
+        \[ \frac{\omega_g - \omega_m}{0 - \omega_m} = \lambda \iff \omega_g = \omega_m\,(1 - \lambda) = \omega_m\,(1 + 2{,}6) \]
+        <div class="res">\(\dfrac{\omega_g}{\omega_m} = 1 - \lambda = 3{,}6\) : à l'arrêt, toute la rotation du moteur thermique passe dans la génératrice.</div>
+
         <p class="q">Q5 — \(\omega_s=3250\) tr/min, \(\omega_m=2700\) tr/min</p>
-        <p>\(\omega_g=\omega_m+\lambda(\omega_s-\omega_m)=2700+(-2{,}6)(3250-2700)=2700-1430\).</p>
-        <p class="res">\(\omega_g=1270\) tr/min</p>
+        \[ \omega_g = \omega_m + \lambda\,(\omega_s - \omega_m) = 2700 + (-2{,}6)(3250 - 2700) = 2700 - 1430 \]
+        <div class="res">\(\omega_g = 1270\) tr/min.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Willis s'écrit avec les vitesses <b>par rapport au bâti</b>, et c'est la vitesse du porte-satellite que l'on retranche partout. Ici le porte-satellite est le moteur thermique, pas la sortie.</div>
       </div>
     </div>
 
@@ -219,13 +279,34 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 2.4 — Différentiel & véhicule en virage</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Différentiel = train épicycloïdal <b>sphérique</b> (satellites coniques) : boîtier = porte-satellite, roues gauche/droite = planétaires.</div>
-        <p class="q">Q1 — Raison & Willis</p>
-        <p>Les deux planétaires sont symétriques (mêmes \(Z\), satellites coniques) : \(\lambda=-1\). Willis :
-        \(\omega_G-(-1)\omega_D+(-1-1)\omega_{boîtier}=0\), soit \(\omega_G+\omega_D=2\,\omega_{boîtier}\).</p>
-        <p class="res">\(\omega_{G/0}+\omega_{D/0}=2\,\omega_{boîtier/0}\) (moyenne des vitesses des roues = vitesse du boîtier)</p>
+
+        <p class="q">Q1 — Raison &amp; Willis</p>
+        <p class="etape">Étape 1 : la raison, boîtier fixe</p>
+        <p>Boîtier bloqué, si une roue tourne dans un sens, le satellite fait tourner l'autre roue à la même vitesse, en sens inverse (planétaires identiques).</p>
+        \[ \lambda = \frac{\omega_{G/b}}{\omega_{D/b}} = -1 \]
+        <p class="etape">Étape 2 : relation de Willis</p>
+        <div class="rappel"><span class="lab">Rappel · relation de Willis</span>\[ \omega_A - \lambda\,\omega_B + (\lambda - 1)\,\omega_{PS} = 0 \]</div>
+        \[ \omega_G - (-1)\,\omega_D + (-1 - 1)\,\omega_{boîtier} = 0 \iff \omega_G + \omega_D = 2\,\omega_{boîtier} \]
+        <div class="res">\(\omega_{G/0} + \omega_{D/0} = 2\,\omega_{boîtier/0}\) : la vitesse du boîtier est la moyenne des vitesses des deux roues.</div>
+
+        <p class="q">Q2 — Conditions imposant la vitesse des roues en conduite « normale »</p>
+        <p class="etape">Étape 1 : roulement sans glissement</p>
+        <div class="rappel"><span class="lab">Rappel · roulement sans glissement</span>\[ \vec V_{J\in roue/sol} = \vec 0 \qquad\Longrightarrow\qquad V_{centre} = r\,\omega_{roue} \]</div>
+        <p>En conduite normale, chaque roue roule sans glisser : sa vitesse de rotation est imposée par la vitesse de son centre, donc par la trajectoire du véhicule.</p>
+        <p class="etape">Étape 2 : en virage</p>
+        <p>Virage de rayon \(R\) (mesuré au milieu de l'essieu), voie \(L\) : la roue intérieure parcourt un cercle de rayon \(R - L/2\), la roue extérieure un cercle de rayon \(R + L/2\), à la même vitesse angulaire \(\dot\theta\) du véhicule.</p>
+        \[ \omega_{int} = \frac{(R - L/2)\,\dot\theta}{r} \qquad \omega_{ext} = \frac{(R + L/2)\,\dot\theta}{r} \]
+        <div class="res">Ce sont les conditions de roulement sans glissement des roues sur le sol (donc la trajectoire) qui imposent leurs vitesses ; en virage, la roue extérieure tourne plus vite que la roue intérieure.</div>
+        <div class="note"><span class="lab">Corrigé Bigeard (différentiel, Q4 et Q8)</span> Bigeard retrouve la même relation en éliminant \(\dot\theta\) : \(\omega_{boîtier} = \dfrac{\omega_G + \omega_D}{2}\) et \(\omega_{boîtier} = \dfrac{2R}{2R - L}\,\omega_{int}\). Le différentiel rend ces vitesses différentes compatibles avec un seul arbre d'entrée.</div>
+
         <p class="q">Q3 — En ligne droite</p>
-        <p>\(\omega_G=\omega_D=\omega_{boîtier}\) : les satellites ne tournent pas par rapport au boîtier.</p>
-        <p class="res">\(\omega_{3/2}=0\) (satellite immobile / boîtier) — en virage, il tourne pour répartir les vitesses</p>
+        <p class="etape">Étape 1 : vitesses des roues</p>
+        <p>En ligne droite, les deux roues parcourent la même distance : \(\omega_G = \omega_D\). Willis donne alors :</p>
+        \[ \omega_G = \omega_D = \omega_{boîtier} \]
+        <p class="etape">Étape 2 : rotation du satellite</p>
+        <p>Les planétaires tournent à la même vitesse que le boîtier : rien ne tourne par rapport au boîtier, ni les planétaires, ni le satellite.</p>
+        <div class="res">\(\omega_{3/2} = 0\) : le satellite est immobile par rapport au boîtier. En virage, il tourne pour répartir les vitesses.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Si une roue patine (vitesse libre) et l'autre est bloquée (\(\omega_D = 0\)), Willis donne \(\omega_G = 2\,\omega_{boîtier}\) : la roue qui patine tourne deux fois plus vite et la voiture n'avance pas. C'est l'inconvénient du différentiel relevé par le corrigé Bigeard (Q9-Q10).</div>
       </div>
     </div>
 
@@ -237,6 +318,7 @@ window.MathJax = {
       Autres exercices du TD (monte-charge, treuil pont roulant, Redex, chariot Hyster, réducteur 2 vitesses) : même méthode.
     </div>
   </section>
+
   <section class="block" id="docs">
     <h2>📂 Documents donnés</h2>
     <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>
