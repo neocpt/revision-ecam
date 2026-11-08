@@ -16,7 +16,7 @@ Conventions retenues :
 |---|---|---|
 | logique-raisonnement | fait | 3 créés + 16 TD. Aucune erreur de résultat. Ajout de `.q` « 1) » pour Ex 10, 11, 13 et exos créés ; Ex 8 restructuré en 2 questions (ou inclusif / exclusif) ; pièges ajoutés (ordre des quantificateurs, synthèse, initialisation au rang 4). |
 | theorie-ensembles | fait | 3 créés + 16 TD. Aucune erreur de résultat. Ex 9 et 11 : les `.q` contenaient le calcul (réponse visible en mode examen), déplacé dans la réponse. Ex 8 d) : preuve directe par l'absurde (plus d'appel à l'associativité de Δ). Ex 11 e) : vraie preuve de l'égalité des deux définitions. Ex 11 f) : preuve par « nombre impair d'ensembles ». Ex 16 : `.q` ajouté. |
-| applications | à faire | |
+| applications | fait | 3 créés + 14 TD. Aucune erreur de résultat. Exo C : le `.q` révélait la formule, remplacé ; Ex 13 c) : branche \(x<-1\) traitée explicitement ; Ex 14 a) : ajout de \(f^{-1}\) explicite (vérifiée). |
 | nombres-reels | à faire | |
 | sommes-produits | à faire | |
 | trigonometrie-fonctions | à faire | |

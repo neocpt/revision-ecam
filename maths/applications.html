@@ -144,16 +144,25 @@ window.MathJax = {
       <div class="exo-body">
         <div class="enonce">Soit \(f:\mathbb R\setminus\{-2\}\to\mathbb R\), \(f(x)=\dfrac{3x+1}{x+2}\). Montrer que \(f\)
         réalise une bijection sur son image \(J\), déterminer \(J\), puis \(f^{-1}\).</div>
-        <p class="q">Injectivité + surjectivité par résolution de \(y=f(x)\).</p>
-        <p>Soit \(y\in\mathbb R\). Cherchons les \(x\neq -2\) tels que \(\dfrac{3x+1}{x+2}=y\) :</p>
-        \[ 3x+1=y(x+2)\iff 3x-yx=2y-1\iff x(3-y)=2y-1\iff x=\frac{2y-1}{3-y}\ \ (y\neq 3). \]
-        <p>Pour \(y\neq 3\), ce \(x\) existe et est <b>unique</b> (donc \(f\) injective et surjective sur son image) ;
-        pour \(y=3\), l'équation \(3x+1=3x+6\) n'a pas de solution. L'image est donc \(J=\mathbb R\setminus\{3\}\)
-        (asymptote horizontale \(y=3\)).</p>
-        <div class="res">\(f:\mathbb R\setminus\{-2\}\to\mathbb R\setminus\{3\}\) est bijective, de réciproque
+
+        <p class="q">1) Bijection, image \(J\) et réciproque</p>
+        <p>On résout l'équation \(y=f(x)\) d'inconnue \(x\), pour \(y\) fixé.</p>
+        <div class="rappel"><span class="lab">Rappel · bijection</span>\(f:I\to J\) est bijective si et seulement si, pour tout \(y\in J\), l'équation \(f(x)=y\) a <b>exactement une</b> solution \(x\in I\). Cette solution est \(f^{-1}(y)\).</div>
+        <p class="etape">Étape 1 : chasser le dénominateur</p>
+        <p>Soit \(y\in\mathbb R\) et \(x\neq -2\).</p>
+        \[ \frac{3x+1}{x+2}=y \iff 3x+1=y(x+2) \]
+        <p class="etape">Étape 2 : isoler \(x\)</p>
+        \[ 3x-yx=2y-1 \iff x(3-y)=2y-1 \]
+        <p class="etape">Étape 3 : discuter selon \(y\)</p>
+        <ul>
+          <li>Si \(y\neq 3\) : une seule solution, \(x=\dfrac{2y-1}{3-y}\). Elle vérifie bien \(x\neq -2\) (sinon \(2y-1=-6+2y\), soit \(-1=-6\), faux).</li>
+          <li>Si \(y=3\) : l'équation devient \(0=5\), aucune solution.</li>
+        </ul>
+        <p class="etape">Étape 4 : conclure</p>
+        <p>Les valeurs atteintes sont tous les réels sauf 3, chacune une seule fois.</p>
+        <div class="res">\(J=\mathbb R\setminus\{3\}\) ; \(f:\mathbb R\setminus\{-2\}\to\mathbb R\setminus\{3\}\) est bijective, de réciproque
         \(f^{-1}(y)=\dfrac{2y-1}{3-y}\).</div>
-        <p style="font-size:.9rem;opacity:.85">Vérification : \(f^{-1}(3)\) n'existe pas (\(3\notin J\)) et
-        \(f(-2)\) n'existe pas — cohérent.</p>
+        <p>Cohérence : \(y=3\) est l'asymptote horizontale de \(f\), et \(-2\) l'asymptote verticale ; elles s'échangent pour \(f^{-1}\).</p>
       </div>
     </div>
 
@@ -162,18 +171,34 @@ window.MathJax = {
       <div class="exo-body">
         <div class="enonce">Soit \(f:E\to F\) et \(A,B\subseteq E\). Montrer \(f(A\cup B)=f(A)\cup f(B)\) et
         \(f(A\cap B)\subseteq f(A)\cap f(B)\), puis donner un contre-exemple à l'égalité pour \(\cap\).</div>
-        <p class="q">Union — égalité.</p>
-        <p>\(y\in f(A\cup B)\iff \exists x\in A\cup B,\ y=f(x)\iff (\exists x\in A,\ y=f(x))\text{ ou }(\exists x\in B,\ y=f(x))\)
-        \(\iff y\in f(A)\text{ ou }y\in f(B)\iff y\in f(A)\cup f(B)\).</p>
+
+        <p class="q">1) Égalité pour la réunion</p>
+        <p>On raisonne par équivalences, élément par élément.</p>
+        <div class="rappel"><span class="lab">Rappel · image directe</span>\[ y\in f(A) \iff \exists x\in A,\ y=f(x) \]</div>
+        <p class="etape">Étape 1 : traduire</p>
+        <p>Soit \(y\in F\).</p>
+        \[ y\in f(A\cup B)\iff \exists x\in A\cup B,\ y=f(x) \]
+        <p class="etape">Étape 2 : séparer selon \(x\in A\) ou \(x\in B\)</p>
+        \[ \iff (\exists x\in A,\ y=f(x))\ \text{ou}\ (\exists x\in B,\ y=f(x)) \iff y\in f(A)\cup f(B) \]
         <div class="res">\(f(A\cup B)=f(A)\cup f(B)\).</div>
-        <p class="q">Intersection — inclusion seulement.</p>
-        <p>Soit \(y\in f(A\cap B)\) : \(\exists x\in A\cap B,\ y=f(x)\). Comme \(x\in A\), \(y\in f(A)\) ; comme
-        \(x\in B\), \(y\in f(B)\). Donc \(y\in f(A)\cap f(B)\).</p>
+
+        <p class="q">2) Inclusion pour l'intersection</p>
+        <p class="etape">Étape 1 : « soit \(y\) »</p>
+        <p>Soit \(y\in f(A\cap B)\) : il existe \(x\in A\cap B\) tel que \(y=f(x)\).</p>
+        <p class="etape">Étape 2 : utiliser les deux appartenances</p>
+        <ul>
+          <li>\(x\in A\), donc \(y\in f(A)\).</li>
+          <li>\(x\in B\), donc \(y\in f(B)\).</li>
+        </ul>
         <div class="res">\(f(A\cap B)\subseteq f(A)\cap f(B)\).</div>
-        <p class="q">Contre-exemple à l'égalité.</p>
-        <p>Prenons \(f:\mathbb R\to\mathbb R\), \(f(x)=x^2\), \(A=\mathbb R_-\), \(B=\mathbb R_+\). Alors
-        \(A\cap B=\{0\}\) donc \(f(A\cap B)=\{0\}\), tandis que \(f(A)=f(B)=\mathbb R_+\), d'où
-        \(f(A)\cap f(B)=\mathbb R_+\neq\{0\}\).</p>
+
+        <p class="q">3) Contre-exemple à l'égalité</p>
+        <p class="etape">Étape 1 : choisir une fonction non injective</p>
+        <p>\(f:\mathbb R\to\mathbb R\), \(f(x)=x^2\), avec \(A=\mathbb R_-\) et \(B=\mathbb R_+\).</p>
+        <p class="etape">Étape 2 : calculer les deux membres</p>
+        \[ A\cap B=\{0\} \;\Longrightarrow\; f(A\cap B)=\{0\} \]
+        \[ f(A)=f(B)=\mathbb R_+ \;\Longrightarrow\; f(A)\cap f(B)=\mathbb R_+ \]
+        <div class="res">\(f(A\cap B)=\{0\}\neq\mathbb R_+=f(A)\cap f(B)\) : l'inclusion est stricte. Par exemple \(1=f(-1)=f(1)\) est dans \(f(A)\cap f(B)\) sans venir de \(A\cap B\).</div>
         <div class="note">L'égalité pour \(\cap\) est rétablie exactement lorsque \(f\) est injective.</div>
       </div>
     </div>
@@ -183,12 +208,19 @@ window.MathJax = {
       <div class="exo-body">
         <div class="enonce">Soit \(f:\mathbb R\to\mathbb R\), \(f(x)=\dfrac{x}{\sqrt{1+x^2}}\). Déterminer
         \(f^{\circ n}=f\circ\cdots\circ f\) (\(n\) fois).</div>
-        <p class="q">Conjecture puis récurrence : \(f^{\circ n}(x)=\dfrac{x}{\sqrt{1+n x^2}}\).</p>
-        <p><b>Init.</b> \(n=1\) : \(f^{\circ 1}(x)=\dfrac{x}{\sqrt{1+x^2}}\) ✓.</p>
-        <p><b>Héréd.</b> Supposons \(f^{\circ n}(x)=\dfrac{x}{\sqrt{1+nx^2}}\). Posons \(u=f^{\circ n}(x)\). Alors :</p>
-        \[ 1+u^2=1+\frac{x^2}{1+nx^2}=\frac{1+nx^2+x^2}{1+nx^2}=\frac{1+(n+1)x^2}{1+nx^2}, \]
-        \[ f^{\circ(n+1)}(x)=f(u)=\frac{u}{\sqrt{1+u^2}}=\frac{\dfrac{x}{\sqrt{1+nx^2}}}{\sqrt{\dfrac{1+(n+1)x^2}{1+nx^2}}}
-        =\frac{x}{\sqrt{1+(n+1)x^2}}. \]
+
+        <p class="q">1) Expression de \(f^{\circ n}\)</p>
+        <p class="etape">Étape 1 : calculer \(f\circ f\) pour conjecturer</p>
+        <p>Avec \(u=f(x)\) : \(1+u^2=1+\dfrac{x^2}{1+x^2}=\dfrac{1+2x^2}{1+x^2}\), donc</p>
+        \[ f\circ f(x)=\frac{u}{\sqrt{1+u^2}}=\frac{x}{\sqrt{1+x^2}}\times\sqrt{\frac{1+x^2}{1+2x^2}}=\frac{x}{\sqrt{1+2x^2}} \]
+        <p>Conjecture : \(f^{\circ n}(x)=\dfrac{x}{\sqrt{1+nx^2}}\). On la démontre par récurrence.</p>
+        <p class="etape">Étape 2 : initialisation (\(n=1\))</p>
+        <p>\(f^{\circ 1}(x)=\dfrac{x}{\sqrt{1+x^2}}\) : c'est la formule pour \(n=1\).</p>
+        <p class="etape">Étape 3 : hérédité, calculer \(1+u^2\)</p>
+        <p>On suppose \(f^{\circ n}(x)=\dfrac{x}{\sqrt{1+nx^2}}\) et on pose \(u=f^{\circ n}(x)\).</p>
+        \[ 1+u^2=1+\frac{x^2}{1+nx^2}=\frac{1+(n+1)x^2}{1+nx^2} \]
+        <p class="etape">Étape 4 : hérédité, appliquer \(f\)</p>
+        \[ f^{\circ(n+1)}(x)=f(u)=\frac{u}{\sqrt{1+u^2}}=\frac{x}{\sqrt{1+nx^2}}\times\sqrt{\frac{1+nx^2}{1+(n+1)x^2}}=\frac{x}{\sqrt{1+(n+1)x^2}} \]
         <div class="res">\(\displaystyle f^{\circ n}(x)=\frac{x}{\sqrt{1+n\,x^2}}\) pour tout \(n\geqslant 1\).</div>
       </div>
     </div>
@@ -211,17 +243,33 @@ window.MathJax = {
         </figure>
         <div class="enonce">\(f:\mathbb R^2\to\mathbb R^3,\ (x,y)\mapsto(x+y,\ x-y,\ x)\) ;
         \(g:\mathbb R^3\to\mathbb R^2,\ (x,y,z)\mapsto(x+y+z,\ x+y)\).</div>
-        <p class="q">(a) Image de \(A=(1,2)\) par \(f\)</p>
-        <p class="res">\(f(1,2)=(1+2,\ 1-2,\ 1)=(3,-1,1)\)</p>
-        <p class="q">(b) Image de \(B=(-3,1,2)\) par \(g\)</p>
-        <p class="res">\(g(-3,1,2)=(-3+1+2,\ -3+1)=(0,-2)\)</p>
-        <p class="q">(c) Antécédents de \(B=(-3,1,2)\) par \(f\)</p>
-        <p>On résout \((x+y,\ x-y,\ x)=(-3,1,2)\). La 3ᵉ composante donne \(x=2\) ; la 1ʳᵉ donne \(y=-3-x=-5\) ;
-        la 2ᵉ imposerait \(x-y=2-(-5)=7=1\), <b>faux</b>.</p>
-        <p class="res">Aucun antécédent : \(f^{-1}(\{B\})=\varnothing\).</p>
-        <p class="q">(d) Antécédents de \(A=(1,2)\) par \(g\)</p>
-        <p>On résout \((x+y+z,\ x+y)=(1,2)\). Par différence \(z=1-2=-1\), et \(x+y=2\) laisse \(x\) libre.</p>
-        <p class="res">\(\{(x,\ 2-x,\ -1)\mid x\in\mathbb R\}\) (une infinité d'antécédents).</p>
+
+        <p class="q">a) Image de \(A=(1,2)\) par \(f\)</p>
+        <p class="etape">Étape 1 : remplacer \(x=1\), \(y=2\)</p>
+        \[ f(1,2)=(1+2,\ 1-2,\ 1) \]
+        <div class="res">\(f(1,2)=(3,-1,1)\)</div>
+
+        <p class="q">b) Image de \(B=(-3,1,2)\) par \(g\)</p>
+        <p class="etape">Étape 1 : remplacer \(x=-3\), \(y=1\), \(z=2\)</p>
+        \[ g(-3,1,2)=(-3+1+2,\ -3+1) \]
+        <div class="res">\(g(-3,1,2)=(0,-2)\)</div>
+
+        <p class="q">c) Antécédents de \(B=(-3,1,2)\) par \(f\)</p>
+        <div class="rappel"><span class="lab">Rappel · antécédent</span>\(a\) est un antécédent de \(b\) si \(f(a)=b\) : on résout cette équation.</div>
+        <p class="etape">Étape 1 : écrire le système</p>
+        \[ x+y=-3,\qquad x-y=1,\qquad x=2 \]
+        <p class="etape">Étape 2 : résoudre</p>
+        <p>La 3ᵉ équation donne \(x=2\), la 1ʳᵉ donne \(y=-5\).</p>
+        <p class="etape">Étape 3 : vérifier la 2ᵉ équation</p>
+        \[ x-y=2-(-5)=7\neq 1 \]
+        <div class="res">Aucun antécédent : \(f^{-1}(\{B\})=\varnothing\).</div>
+
+        <p class="q">d) Antécédents de \(A=(1,2)\) par \(g\)</p>
+        <p class="etape">Étape 1 : écrire le système</p>
+        \[ x+y+z=1,\qquad x+y=2 \]
+        <p class="etape">Étape 2 : résoudre</p>
+        <p>On soustrait : \(z=1-2=-1\). Puis \(y=2-x\), avec \(x\) libre.</p>
+        <div class="res">\(g^{-1}(\{A\})=\{(x,\ 2-x,\ -1)\mid x\in\mathbb R\}\) : une infinité d'antécédents.</div>
       </div>
     </div>
 
@@ -232,12 +280,21 @@ window.MathJax = {
           <img src="td-img/td3-ex2.png" alt="Énoncé TD3 Exercice 2" loading="lazy" style="max-width:100%;height:auto">
           <figcaption>Énoncé (TD3) — Exercice 2.</figcaption>
         </figure>
-        <p class="q">(a) Images de \(A=(1,2)\) et \(B=(2,1)\)</p>
-        <p>\(f(1,2)=(3,2)\) et \(f(2,1)=(3,2)\). Deux antécédents distincts, même image :</p>
-        <div class="res">\(f\) n'est <b>pas injective</b> (elle est symétrique en \(x,y\)).</div>
-        <p class="q">(b) Antécédents de \(C=(1,1)\)</p>
-        <p>\(x+y=1\) et \(xy=1\) : \(x,y\) sont racines de \(t^2-t+1=0\), de discriminant \(\Delta=1-4=-3<0\).
-        Aucune solution réelle.</p>
+
+        <p class="q">a) Images de \(A=(1,2)\) et \(B=(2,1)\)</p>
+        <p class="etape">Étape 1 : calculer</p>
+        \[ f(1,2)=(3,2) \qquad f(2,1)=(3,2) \]
+        <p class="etape">Étape 2 : conclure sur l'injectivité</p>
+        <div class="rappel"><span class="lab">Rappel · injectivité</span>\(f\) est injective si \(f(a)=f(b)\Rightarrow a=b\). Deux points distincts de même image suffisent à la réfuter.</div>
+        <div class="res">\(A\neq B\) et \(f(A)=f(B)\) : \(f\) n'est <b>pas injective</b>.</div>
+
+        <p class="q">b) Antécédents de \(C=(1,1)\)</p>
+        <p class="etape">Étape 1 : le système</p>
+        \[ x+y=1,\qquad xy=1 \]
+        <p class="etape">Étape 2 : somme et produit</p>
+        <div class="rappel"><span class="lab">Rappel · somme et produit</span>\(x\) et \(y\) de somme \(S\) et de produit \(P\) sont les racines de \(t^2-St+P=0\).</div>
+        \[ t^2-t+1=0,\qquad \Delta=1-4=-3&lt;0 \]
+        <p>Pas de racine réelle : pas de couple \((x,y)\).</p>
         <div class="res">\((1,1)\) n'a pas d'antécédent : \(f\) n'est <b>pas surjective</b>.</div>
       </div>
     </div>
@@ -253,13 +310,46 @@ window.MathJax = {
         </figure>
         <div class="enonce">Restriction : domaine \(\subseteq\mathbb R^*\) et même valeur. Prolongement : domaine
         \(\supseteq\mathbb R^*\) et coïncide sur \(\mathbb R^*\).</div>
-        <p class="q">\(g_1:\mathbb R\to\mathbb R,\ x\mapsto x^2\)</p><p><b>Prolongement</b> : domaine \(\mathbb R\supseteq\mathbb R^*\), coïncide (\(x^2\)).</p>
-        <p class="q">\(g_2:\mathbb R\to\mathbb R,\ x\mapsto |x|^2\)</p><p><b>Prolongement</b> : \(|x|^2=x^2\), même situation que \(g_1\).</p>
-        <p class="q">\(g_3:\mathbb R_+\to\mathbb R,\ x\mapsto x^2\)</p><p><b>Ni l'un ni l'autre</b> : \(\mathbb R_+=[0,\infty)\) contient \(0\notin\mathbb R^*\) (pas une restriction) et ne contient pas les négatifs (pas un prolongement).</p>
-        <p class="q">\(g_4:\mathbb R^*_+\to\mathbb R,\ x\mapsto x^2\)</p><p><b>Restriction</b> : \(\mathbb R^*_+\subseteq\mathbb R^*\), même valeur.</p>
-        <p class="q">\(g_5:\mathbb R\to\mathbb R,\ x\mapsto x^2\) si \(x\neq0\), \(0\) si \(x=0\)</p><p><b>Prolongement</b> : sur \(\mathbb R^*\) vaut \(x^2\) (identique à \(g_1\)).</p>
-        <p class="q">\(g_6:\mathbb R^*\to\mathbb R,\ x\mapsto x^2\) si \(x>0\), \(-x^2\) si \(x<0\)</p><p><b>Ni l'un ni l'autre</b> : même domaine \(\mathbb R^*\), mais \(g_6(x)=-x^2\neq x^2\) pour \(x<0\) : ce n'est pas \(f\).</p>
-        <p class="q">\(g_7:\mathbb R\to\mathbb R,\ x\mapsto x^2\) si \(x\geqslant0\), \(-|x|^2\) si \(x<0\)</p><p><b>Ni l'un ni l'autre</b> : pour \(x<0\), \(-|x|^2=-x^2\neq x^2\), donc ne coïncide pas avec \(f\) sur \(\mathbb R^*\) (pas un prolongement).</p>
+
+        <p class="q">a) \(g_1:\mathbb R\to\mathbb R,\ x\mapsto x^2\)</p>
+        <p class="etape">Étape 1 : comparer les domaines</p>
+        <p>\(\mathbb R\supseteq\mathbb R^*\).</p>
+        <p class="etape">Étape 2 : comparer les valeurs sur \(\mathbb R^*\)</p>
+        <p>\(g_1(x)=x^2=f(x)\).</p>
+        <div class="res"><b>Prolongement</b> de \(f\).</div>
+
+        <p class="q">b) \(g_2:\mathbb R\to\mathbb R,\ x\mapsto |x|^2\)</p>
+        <p class="etape">Étape 1 : simplifier</p>
+        <p>\(|x|^2=x^2\) : \(g_2=g_1\).</p>
+        <div class="res"><b>Prolongement</b> de \(f\).</div>
+
+        <p class="q">c) \(g_3:\mathbb R_+\to\mathbb R,\ x\mapsto x^2\)</p>
+        <p class="etape">Étape 1 : comparer les domaines</p>
+        <ul>
+          <li>\(0\in\mathbb R_+\) mais \(0\notin\mathbb R^*\) : \(\mathbb R_+\not\subseteq\mathbb R^*\), ce n'est pas une restriction.</li>
+          <li>\(-1\in\mathbb R^*\) mais \(-1\notin\mathbb R_+\) : \(\mathbb R_+\not\supseteq\mathbb R^*\), ce n'est pas un prolongement.</li>
+        </ul>
+        <div class="res"><b>Ni l'un ni l'autre</b>.</div>
+
+        <p class="q">d) \(g_4:\mathbb R^*_+\to\mathbb R,\ x\mapsto x^2\)</p>
+        <p class="etape">Étape 1 : comparer domaines et valeurs</p>
+        <p>\(\mathbb R^*_+\subseteq\mathbb R^*\) et \(g_4(x)=x^2=f(x)\).</p>
+        <div class="res"><b>Restriction</b> de \(f\).</div>
+
+        <p class="q">e) \(g_5:\mathbb R\to\mathbb R,\ x\mapsto x^2\) si \(x\neq0\), \(0\) si \(x=0\)</p>
+        <p class="etape">Étape 1 : comparer domaines et valeurs</p>
+        <p>\(\mathbb R\supseteq\mathbb R^*\), et sur \(\mathbb R^*\), \(g_5(x)=x^2\).</p>
+        <div class="res"><b>Prolongement</b> de \(f\) (c'est d'ailleurs \(g_1\)).</div>
+
+        <p class="q">f) \(g_6:\mathbb R^*\to\mathbb R,\ x\mapsto x^2\) si \(x>0\), \(-x^2\) si \(x&lt;0\)</p>
+        <p class="etape">Étape 1 : comparer les valeurs</p>
+        <p>Même domaine, mais \(g_6(-1)=-1\neq 1=f(-1)\).</p>
+        <div class="res"><b>Ni l'un ni l'autre</b> : \(g_6\neq f\).</div>
+
+        <p class="q">g) \(g_7:\mathbb R\to\mathbb R,\ x\mapsto x^2\) si \(x\geqslant0\), \(-|x|^2\) si \(x&lt;0\)</p>
+        <p class="etape">Étape 1 : comparer les valeurs sur \(\mathbb R^*\)</p>
+        <p>Pour \(x&lt;0\), \(g_7(x)=-x^2\neq x^2\).</p>
+        <div class="res"><b>Ni l'un ni l'autre</b> : \(g_7\) ne coïncide pas avec \(f\) sur \(\mathbb R^*\).</div>
       </div>
     </div>
 
@@ -270,12 +360,21 @@ window.MathJax = {
           <img src="td-img/td3-ex4.png" alt="Énoncé TD3 Exercice 4" loading="lazy" style="max-width:100%;height:auto">
           <figcaption>Énoncé (TD3) — Exercice 4.</figcaption>
         </figure>
-        <p class="q">\(g\circ f:\mathbb R^2\to\mathbb R^2\)</p>
-        <p>\(g\circ f(x,y)=g(x+y,\ x-y,\ x)=\big((x+y)+(x-y)+x,\ (x+y)+(x-y)\big)\).</p>
-        <p class="res">\(g\circ f(x,y)=(3x,\ 2x)\)</p>
-        <p class="q">\(f\circ g:\mathbb R^3\to\mathbb R^3\)</p>
-        <p>Avec \(a=x+y+z,\ b=x+y\) : \(f\circ g(x,y,z)=f(a,b)=(a+b,\ a-b,\ a)\).</p>
-        <p class="res">\(f\circ g(x,y,z)=(2x+2y+z,\ z,\ x+y+z)\)</p>
+
+        <p class="q">a) \(g\circ f:\mathbb R^2\to\mathbb R^2\)</p>
+        <div class="rappel"><span class="lab">Rappel · composée</span>\[ g\circ f(x)=g\big(f(x)\big) \quad\text{: on applique } f \text{ d'abord} \]</div>
+        <p class="etape">Étape 1 : calculer \(f(x,y)\)</p>
+        \[ f(x,y)=(x+y,\ x-y,\ x) \]
+        <p class="etape">Étape 2 : appliquer \(g\) (somme des 3, somme des 2 premières)</p>
+        \[ g\circ f(x,y)=\big((x+y)+(x-y)+x,\ (x+y)+(x-y)\big) \]
+        <div class="res">\(g\circ f(x,y)=(3x,\ 2x)\)</div>
+
+        <p class="q">b) \(f\circ g:\mathbb R^3\to\mathbb R^3\)</p>
+        <p class="etape">Étape 1 : calculer \(g(x,y,z)\)</p>
+        <p>On note \(a=x+y+z\) et \(b=x+y\).</p>
+        <p class="etape">Étape 2 : appliquer \(f\)</p>
+        \[ f(a,b)=(a+b,\ a-b,\ a)=\big(2x+2y+z,\ z,\ x+y+z\big) \]
+        <div class="res">\(f\circ g(x,y,z)=(2x+2y+z,\ z,\ x+y+z)\)</div>
       </div>
     </div>
 
@@ -287,12 +386,20 @@ window.MathJax = {
           <figcaption>Énoncé (TD3) — Exercice 5.</figcaption>
         </figure>
         <div class="enonce">\(f(n)=2n\) ; \(g(n)=\tfrac n2\) si \(n\) pair, \(0\) si \(n\) impair.</div>
-        <p class="q">\(f\circ g\)</p>
-        <p>\(f\circ g(n)=2\,g(n)\) : si \(n\) pair, \(2\cdot\tfrac n2=n\) ; si \(n\) impair, \(2\cdot 0=0\).</p>
-        <p class="res">\(f\circ g(n)=\begin{cases}n&n\text{ pair}\\0&n\text{ impair}\end{cases}\)</p>
-        <p class="q">\(g\circ f\)</p>
-        <p>\(g\circ f(n)=g(2n)\) ; or \(2n\) est toujours pair, donc \(g(2n)=\tfrac{2n}{2}=n\).</p>
-        <p class="res">\(g\circ f=\operatorname{Id}_{\mathbb N}\)</p>
+
+        <p class="q">a) \(f\circ g\)</p>
+        <p class="etape">Étape 1 : \(f\circ g(n)=2\,g(n)\), on distingue la parité</p>
+        <ul>
+          <li>\(n\) pair : \(2\times\dfrac n2=n\).</li>
+          <li>\(n\) impair : \(2\times 0=0\).</li>
+        </ul>
+        <div class="res">\(f\circ g(n)=\begin{cases}n&n\text{ pair}\\0&n\text{ impair}\end{cases}\)</div>
+
+        <p class="q">b) \(g\circ f\)</p>
+        <p class="etape">Étape 1 : \(g\circ f(n)=g(2n)\)</p>
+        <p>\(2n\) est toujours pair, donc \(g(2n)=\dfrac{2n}{2}=n\).</p>
+        <div class="res">\(g\circ f=\operatorname{Id}_{\mathbb N}\), alors que \(f\circ g\neq\operatorname{Id}_{\mathbb N}\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> \(g\circ f=\operatorname{Id}\) ne suffit pas pour dire que \(f\) et \(g\) sont réciproques l'une de l'autre : il faut aussi \(f\circ g=\operatorname{Id}\).</div>
       </div>
     </div>
 
@@ -303,18 +410,30 @@ window.MathJax = {
           <img src="td-img/td3-ex6.png" alt="Énoncé TD3 Exercice 6" loading="lazy" style="max-width:100%;height:auto">
           <figcaption>Énoncé (TD3) — Exercice 6.</figcaption>
         </figure>
-        <p class="q">(a) \(f\circ f(x)\)</p>
-        <p>\(f(x)+1=\dfrac{x}{x+1}+1=\dfrac{2x+1}{x+1}\), donc
-        \(f\circ f(x)=\dfrac{f(x)}{f(x)+1}=\dfrac{x/(x+1)}{(2x+1)/(x+1)}\).</p>
-        <p class="res">\(f\circ f(x)=\dfrac{x}{2x+1}\)</p>
-        <p class="q">(b) \(f\circ f\circ f(x)\)</p>
-        <p>Avec \(u=\dfrac{x}{2x+1}\) : \(u+1=\dfrac{3x+1}{2x+1}\), d'où \(f(u)=\dfrac{x/(2x+1)}{(3x+1)/(2x+1)}\).</p>
-        <p class="res">\(f\circ f\circ f(x)=\dfrac{x}{3x+1}\)</p>
-        <p class="q">(c) \(f^{\circ n}(x)\)</p>
-        <p><b>Conjecture</b> \(f^{\circ n}(x)=\dfrac{x}{nx+1}\), démontrée par récurrence : vraie au rang 1 ; si vraie
-        au rang \(n\), avec \(v=\dfrac{x}{nx+1}\), \(v+1=\dfrac{(n+1)x+1}{nx+1}\), donc
-        \(f(v)=\dfrac{x}{(n+1)x+1}\).</p>
-        <p class="res">\(f^{\circ n}(x)=\dfrac{x}{nx+1}\)</p>
+
+        <p class="q">a) \(f\circ f(x)\)</p>
+        <p class="etape">Étape 1 : calculer \(f(x)+1\)</p>
+        \[ f(x)+1=\frac{x}{x+1}+1=\frac{2x+1}{x+1} \]
+        <p class="etape">Étape 2 : appliquer \(f\) à \(f(x)\)</p>
+        \[ f\circ f(x)=\frac{f(x)}{f(x)+1}=\frac{x}{x+1}\times\frac{x+1}{2x+1} \]
+        <div class="res">\(f\circ f(x)=\dfrac{x}{2x+1}\)</div>
+
+        <p class="q">b) \(f\circ f\circ f(x)\)</p>
+        <p class="etape">Étape 1 : poser \(u=f\circ f(x)\)</p>
+        \[ u+1=\frac{x}{2x+1}+1=\frac{3x+1}{2x+1} \]
+        <p class="etape">Étape 2 : appliquer \(f\)</p>
+        \[ f(u)=\frac{u}{u+1}=\frac{x}{2x+1}\times\frac{2x+1}{3x+1} \]
+        <div class="res">\(f\circ f\circ f(x)=\dfrac{x}{3x+1}\)</div>
+
+        <p class="q">c) \(f^{\circ n}(x)\)</p>
+        <p class="etape">Étape 1 : conjecture</p>
+        <p>Les résultats \(\dfrac{x}{x+1}\), \(\dfrac{x}{2x+1}\), \(\dfrac{x}{3x+1}\) suggèrent \(f^{\circ n}(x)=\dfrac{x}{nx+1}\). On raisonne par récurrence.</p>
+        <p class="etape">Étape 2 : initialisation</p>
+        <p>Pour \(n=1\), c'est la définition de \(f\).</p>
+        <p class="etape">Étape 3 : hérédité</p>
+        <p>On suppose la formule vraie au rang \(n\) et on pose \(v=\dfrac{x}{nx+1}\) :</p>
+        \[ v+1=\frac{(n+1)x+1}{nx+1} \qquad\Longrightarrow\qquad f(v)=\frac{v}{v+1}=\frac{x}{(n+1)x+1} \]
+        <div class="res">\(f^{\circ n}(x)=\dfrac{x}{nx+1}\) pour tout \(n\geqslant 1\).</div>
       </div>
     </div>
 
@@ -327,35 +446,78 @@ window.MathJax = {
           <img src="td-img/td3-ex7.png" alt="Énoncé TD3 Exercice 7" loading="lazy" style="max-width:100%;height:auto">
           <figcaption>Énoncé (TD3) — Exercice 7.</figcaption>
         </figure>
-        <p class="q">\(f_1:\mathbb Z\to\mathbb Z,\ n\mapsto 2n\)</p>
-        <p><b>Injective</b> (\(2n=2m\Rightarrow n=m\)), <b>non surjective</b> (\(1\) n'a pas d'antécédent). Non bijective.</p>
-        <p class="q">\(f_2:\mathbb N\to\mathbb N,\ n\mapsto n+1\)</p>
-        <p><b>Injective</b>, <b>non surjective</b> (\(0\) n'a pas d'antécédent, \(n+1=0\) impossible dans \(\mathbb N\)).</p>
-        <p class="q">\(f_3:\mathbb N\to\mathbb N,\ n\mapsto \tfrac n2\) si pair, \(n\) si impair</p>
-        <p><b>Non injective</b> : \(f_3(1)=1=f_3(2)\). <b>Surjective</b> : tout \(k\) est image de \(2k\) (pair). Non bijective.</p>
-        <p class="q">\(f_4:\mathbb R\to\mathbb R,\ x\mapsto 3x+7\)</p>
-        <p><b>Bijective</b> (affine, pente \(\neq0\)). \(y=3x+7\Rightarrow x=\tfrac{y-7}{3}\).</p>
-        <p class="res">\(f_4^{-1}(y)=\dfrac{y-7}{3}\)</p>
-        <p class="q">\(f_5:\mathbb R\setminus\{-1\}\to\mathbb R\setminus\{1\},\ x\mapsto \dfrac{x}{1+x}\)</p>
-        <p>\(y=\dfrac{x}{1+x}\Rightarrow y+yx=x\Rightarrow x=\dfrac{y}{1-y}\) (défini \(y\neq1\)) : unique. <b>Bijective</b>.</p>
-        <p class="res">\(f_5^{-1}(y)=\dfrac{y}{1-y}\)</p>
-        <p class="q">\(f_6:\mathbb R\setminus\{3\}\to\mathbb R\setminus\{3\},\ x\mapsto \dfrac{3x+1}{x-3}\)</p>
-        <p>\(y=\dfrac{3x+1}{x-3}\Rightarrow x=\dfrac{3y+1}{y-3}\) (défini \(y\neq3\)). <b>Bijective</b>, et
-        \(f_6^{-1}=f_6\) : c'est une <b>involution</b>.</p>
-        <p class="q">\(f_7:[1,+\infty[\to\mathbb R_+,\ x\mapsto \dfrac{x-1}{x}=1-\tfrac1x\)</p>
-        <p>Strictement croissante (\(f_7'=\tfrac1{x^2}>0\)) donc <b>injective</b>. Image \([0,1[\neq\mathbb R_+\) :
-        <b>non surjective</b>.</p>
-        <p class="q">\(f_8:\,]-\infty,-1]\cup[2,+\infty[\to\mathbb R_+,\ x\mapsto\sqrt{x^2-x-2}\)</p>
-        <p>\(x^2-x-2=(x-2)(x+1)\geqslant0\) sur le domaine. \(y^2=x^2-x-2\Rightarrow x=\dfrac{1\pm\sqrt{9+4y^2}}{2}\) :
-        <b>deux</b> antécédents (un \(\geqslant2\), un \(\leqslant-1\)) pour chaque \(y\geqslant0\).
-        <b>Non injective</b> mais <b>surjective</b> (la branche \(\geqslant2\) atteint tout \(\mathbb R_+\)).</p>
-        <p class="q">\(f_9:\mathbb R^2\to\mathbb R^2,\ (x_1,x_2)\mapsto(x_1+x_2,\ x_1-x_2)\)</p>
-        <p>Linéaire, déterminant \(\begin{vmatrix}1&1\\1&-1\end{vmatrix}=-2\neq0\) : <b>bijective</b>.
-        \(y_1=x_1+x_2,\ y_2=x_1-x_2\Rightarrow x_1=\tfrac{y_1+y_2}{2},\ x_2=\tfrac{y_1-y_2}{2}\).</p>
-        <p class="res">\(f_9^{-1}(y_1,y_2)=\left(\dfrac{y_1+y_2}{2},\ \dfrac{y_1-y_2}{2}\right)\)</p>
-        <p class="q">\(f_{10}:\mathbb R^3\to\mathbb R^2,\ (x_1,x_2,x_3)\mapsto(x_1x_2x_3,\ x_3)\)</p>
-        <p><b>Non injective</b> : \(f_{10}(1,1,0)=(0,0)=f_{10}(2,3,0)\). <b>Non surjective</b> : \((a,0)\) avec \(a\neq0\)
-        exigerait \(x_1x_2x_3=a\neq0\) avec \(x_3=0\), impossible.</p>
+
+        <p class="q">a) \(f_1:\mathbb Z\to\mathbb Z,\ n\mapsto 2n\)</p>
+        <div class="rappel"><span class="lab">Rappel · injective, surjective</span>Injective : \(f(a)=f(b)\Rightarrow a=b\) (au plus un antécédent).<br>Surjective : tout élément de l'arrivée a au moins un antécédent.<br>Bijective : les deux.</div>
+        <p class="etape">Étape 1 : injectivité</p>
+        <p>\(2n=2m\Rightarrow n=m\) : injective.</p>
+        <p class="etape">Étape 2 : surjectivité</p>
+        <p>\(2n=1\) donne \(n=\tfrac12\notin\mathbb Z\) : 1 n'a pas d'antécédent.</p>
+        <div class="res">Injective, <b>non surjective</b>, donc non bijective.</div>
+
+        <p class="q">b) \(f_2:\mathbb N\to\mathbb N,\ n\mapsto n+1\)</p>
+        <p class="etape">Étape 1 : injectivité</p>
+        <p>\(n+1=m+1\Rightarrow n=m\).</p>
+        <p class="etape">Étape 2 : surjectivité</p>
+        <p>\(n+1=0\) donne \(n=-1\notin\mathbb N\) : 0 n'a pas d'antécédent.</p>
+        <div class="res">Injective, <b>non surjective</b>.</div>
+
+        <p class="q">c) \(f_3:\mathbb N\to\mathbb N,\ n\mapsto \tfrac n2\) si pair, \(n\) si impair</p>
+        <p class="etape">Étape 1 : injectivité</p>
+        <p>\(f_3(1)=1\) et \(f_3(2)=1\) : non injective.</p>
+        <p class="etape">Étape 2 : surjectivité</p>
+        <p>Pour tout \(k\in\mathbb N\), \(2k\) est pair et \(f_3(2k)=k\).</p>
+        <div class="res"><b>Non injective</b>, surjective.</div>
+
+        <p class="q">d) \(f_4:\mathbb R\to\mathbb R,\ x\mapsto 3x+7\)</p>
+        <p class="etape">Étape 1 : résoudre \(y=3x+7\)</p>
+        <p>Pour tout \(y\in\mathbb R\), une seule solution :</p>
+        \[ x=\frac{y-7}{3} \]
+        <div class="res"><b>Bijective</b>, \(f_4^{-1}(y)=\dfrac{y-7}{3}\).</div>
+
+        <p class="q">e) \(f_5:\mathbb R\setminus\{-1\}\to\mathbb R\setminus\{1\},\ x\mapsto \dfrac{x}{1+x}\)</p>
+        <p class="etape">Étape 1 : résoudre \(y=\dfrac{x}{1+x}\) pour \(y\neq 1\)</p>
+        \[ y+yx=x \iff x(1-y)=y \iff x=\frac{y}{1-y} \]
+        <p class="etape">Étape 2 : vérifier que \(x\neq -1\)</p>
+        <p>\(\dfrac{y}{1-y}=-1\) donnerait \(y=y-1\), impossible.</p>
+        <div class="res"><b>Bijective</b>, \(f_5^{-1}(y)=\dfrac{y}{1-y}\).</div>
+
+        <p class="q">f) \(f_6:\mathbb R\setminus\{3\}\to\mathbb R\setminus\{3\},\ x\mapsto \dfrac{3x+1}{x-3}\)</p>
+        <p class="etape">Étape 1 : résoudre \(y=\dfrac{3x+1}{x-3}\) pour \(y\neq 3\)</p>
+        \[ yx-3y=3x+1 \iff x(y-3)=3y+1 \iff x=\frac{3y+1}{y-3} \]
+        <p class="etape">Étape 2 : comparer à \(f_6\)</p>
+        <p>On retrouve la même formule que \(f_6\).</p>
+        <div class="res"><b>Bijective</b> et \(f_6^{-1}=f_6\) : c'est une <b>involution</b>.</div>
+
+        <p class="q">g) \(f_7:[1,+\infty[\to\mathbb R_+,\ x\mapsto \dfrac{x-1}{x}\)</p>
+        <p class="etape">Étape 1 : variations</p>
+        <p>\(f_7(x)=1-\dfrac1x\) et \(f_7'(x)=\dfrac1{x^2}>0\) : strictement croissante, donc injective.</p>
+        <p class="etape">Étape 2 : image</p>
+        <p>\(f_7(1)=0\) et \(f_7(x)\to 1\) sans l'atteindre : image \([0,1[\neq\mathbb R_+\).</p>
+        <div class="res">Injective, <b>non surjective</b> (2 n'a pas d'antécédent).</div>
+
+        <p class="q">h) \(f_8:\,]-\infty,-1]\cup[2,+\infty[\to\mathbb R_+,\ x\mapsto\sqrt{x^2-x-2}\)</p>
+        <p class="etape">Étape 1 : résoudre \(y=f_8(x)\) pour \(y\geqslant 0\)</p>
+        \[ y^2=x^2-x-2 \iff x^2-x-(2+y^2)=0 \]
+        <p class="etape">Étape 2 : discriminant</p>
+        \[ \Delta=1+4(2+y^2)=9+4y^2>0 \qquad x=\frac{1\pm\sqrt{9+4y^2}}{2} \]
+        <p class="etape">Étape 3 : les deux racines sont dans le domaine</p>
+        <p>\(\sqrt{9+4y^2}\geqslant 3\), donc \(x_+\geqslant 2\) et \(x_-\leqslant -1\).</p>
+        <div class="res">Chaque \(y\geqslant 0\) a <b>deux</b> antécédents : <b>non injective</b>, surjective.</div>
+
+        <p class="q">i) \(f_9:\mathbb R^2\to\mathbb R^2,\ (x_1,x_2)\mapsto(x_1+x_2,\ x_1-x_2)\)</p>
+        <p class="etape">Étape 1 : résoudre le système</p>
+        \[ y_1=x_1+x_2,\quad y_2=x_1-x_2 \]
+        <p>On additionne puis on soustrait :</p>
+        \[ x_1=\frac{y_1+y_2}{2},\qquad x_2=\frac{y_1-y_2}{2} \]
+        <div class="res"><b>Bijective</b>, \(f_9^{-1}(y_1,y_2)=\left(\dfrac{y_1+y_2}{2},\ \dfrac{y_1-y_2}{2}\right)\).</div>
+
+        <p class="q">j) \(f_{10}:\mathbb R^3\to\mathbb R^2,\ (x_1,x_2,x_3)\mapsto(x_1x_2x_3,\ x_3)\)</p>
+        <p class="etape">Étape 1 : injectivité</p>
+        <p>\(f_{10}(1,1,0)=(0,0)=f_{10}(2,3,0)\) : non injective.</p>
+        <p class="etape">Étape 2 : surjectivité</p>
+        <p>\((1,0)\) exigerait \(x_3=0\) et \(x_1x_2x_3=1\), impossible.</p>
+        <div class="res"><b>Ni injective, ni surjective</b>.</div>
       </div>
     </div>
 
@@ -366,21 +528,35 @@ window.MathJax = {
           <img src="td-img/td3-ex8.png" alt="Énoncé TD3 Exercice 8" loading="lazy" style="max-width:100%;height:auto">
           <figcaption>Énoncé (TD3) — Exercice 8.</figcaption>
         </figure>
-        <p class="q">\(f_1:\mathbb R\to J,\ x\mapsto 1+e^x\)</p>
-        <p>\(e^x\in\,]0,+\infty[\) donc \(1+e^x\in\,]1,+\infty[\). \(y=1+e^x\Rightarrow x=\ln(y-1)\).</p>
-        <p class="res">\(J=\,]1,+\infty[\), \(f_1^{-1}(y)=\ln(y-1)\)</p>
-        <p class="q">\(f_2:\mathbb R_+\to J,\ x\mapsto -\dfrac x2-1\)</p>
-        <p>Sur \([0,\infty)\), décroissante de \(-1\) vers \(-\infty\) : image \(]-\infty,-1]\).
-        \(y=-\tfrac x2-1\Rightarrow x=-2(y+1)\).</p>
-        <p class="res">\(J=\,]-\infty,-1]\), \(f_2^{-1}(y)=-2(y+1)\)</p>
-        <p class="q">\(f_3:\mathbb R_+\to J,\ x\mapsto \dfrac{1}{1+x^2}\)</p>
-        <p>Sur \([0,\infty)\) décroissante de \(1\) (en \(0\)) vers \(0\) (exclu) : image \(]0,1]\).
-        \(y=\tfrac1{1+x^2}\Rightarrow x^2=\tfrac{1-y}{y}\Rightarrow x=\sqrt{\tfrac{1-y}{y}}\) (racine \(\geqslant0\)).</p>
-        <p class="res">\(J=\,]0,1]\), \(f_3^{-1}(y)=\sqrt{\dfrac{1-y}{y}}\)</p>
-        <p class="q">\(f_4:\mathbb R_+\to J,\ x\mapsto x+x^2\)</p>
-        <p>Sur \([0,\infty)\) croissante de \(0\) vers \(+\infty\) : image \([0,+\infty[\).
-        \(y=x^2+x\Rightarrow x=\dfrac{-1+\sqrt{1+4y}}{2}\) (racine positive).</p>
-        <p class="res">\(J=[0,+\infty[\), \(f_4^{-1}(y)=\dfrac{-1+\sqrt{1+4y}}{2}\)</p>
+
+        <p class="q">a) \(f_1:\mathbb R\to J,\ x\mapsto 1+e^x\)</p>
+        <div class="rappel"><span class="lab">Rappel · méthode</span>On prend \(J=f(I)\) (l'image) ; puis on résout \(y=f(x)\) pour \(y\in J\), ce qui donne \(f^{-1}(y)\).</div>
+        <p class="etape">Étape 1 : image</p>
+        <p>\(e^x\) parcourt \(]0,+\infty[\), donc \(1+e^x\) parcourt \(]1,+\infty[\).</p>
+        <p class="etape">Étape 2 : résoudre</p>
+        \[ y=1+e^x \iff e^x=y-1 \iff x=\ln(y-1) \]
+        <div class="res">\(J=\,]1,+\infty[\), \(f_1^{-1}(y)=\ln(y-1)\).</div>
+
+        <p class="q">b) \(f_2:\mathbb R_+\to J,\ x\mapsto -\dfrac x2-1\)</p>
+        <p class="etape">Étape 1 : image</p>
+        <p>Fonction affine décroissante : \(f_2(0)=-1\) et \(f_2(x)\to-\infty\).</p>
+        <p class="etape">Étape 2 : résoudre</p>
+        \[ y=-\frac x2-1 \iff x=-2(y+1) \]
+        <div class="res">\(J=\,]-\infty,-1]\), \(f_2^{-1}(y)=-2(y+1)\).</div>
+
+        <p class="q">c) \(f_3:\mathbb R_+\to J,\ x\mapsto \dfrac{1}{1+x^2}\)</p>
+        <p class="etape">Étape 1 : image</p>
+        <p>Sur \(\mathbb R_+\), décroissante : \(f_3(0)=1\), et \(f_3(x)\to 0\) sans l'atteindre.</p>
+        <p class="etape">Étape 2 : résoudre pour \(y\in\,]0,1]\)</p>
+        \[ y=\frac{1}{1+x^2} \iff x^2=\frac{1-y}{y} \iff x=\sqrt{\frac{1-y}{y}} \quad(\text{car } x\geqslant 0) \]
+        <div class="res">\(J=\,]0,1]\), \(f_3^{-1}(y)=\sqrt{\dfrac{1-y}{y}}\).</div>
+
+        <p class="q">d) \(f_4:\mathbb R_+\to J,\ x\mapsto x+x^2\)</p>
+        <p class="etape">Étape 1 : image</p>
+        <p>Sur \(\mathbb R_+\), croissante de 0 à \(+\infty\).</p>
+        <p class="etape">Étape 2 : résoudre \(x^2+x-y=0\)</p>
+        \[ \Delta=1+4y \qquad x=\frac{-1+\sqrt{1+4y}}{2} \quad(\text{seule racine positive}) \]
+        <div class="res">\(J=[0,+\infty[\), \(f_4^{-1}(y)=\dfrac{-1+\sqrt{1+4y}}{2}\).</div>
       </div>
     </div>
 
@@ -392,15 +568,21 @@ window.MathJax = {
           <figcaption>Énoncé (TD3) — Exercice 9.</figcaption>
         </figure>
         <div class="enonce">\(f:E\to F,\ g:E\to G,\ h:E\to F\times G,\ h(x)=(f(x),g(x))\).</div>
-        <p class="q">(a) Si \(f\) ou \(g\) injective, alors \(h\) injective.</p>
-        <p>Supposons \(f\) injective. Soit \((x,x')\) avec \(h(x)=h(x')\), i.e. \((f(x),g(x))=(f(x'),g(x'))\).
-        En particulier \(f(x)=f(x')\), donc \(x=x'\) par injectivité de \(f\). (Idem si \(g\) injective.)</p>
+
+        <p class="q">a) Si \(f\) ou \(g\) est injective, alors \(h\) est injective</p>
+        <p class="etape">Étape 1 : partir de \(h(x)=h(x')\)</p>
+        <p>On suppose \(f\) injective. Si \(h(x)=h(x')\), alors \((f(x),g(x))=(f(x'),g(x'))\).</p>
+        <p class="etape">Étape 2 : égalité de couples</p>
+        <div class="rappel"><span class="lab">Rappel · couples</span>\[ (a,b)=(a',b') \iff a=a' \text{ et } b=b' \]</div>
+        <p>En particulier \(f(x)=f(x')\), donc \(x=x'\) par injectivité de \(f\). Le cas \(g\) injective se traite avec la 2ᵉ composante.</p>
         <div class="res">\(h\) est injective.</div>
-        <p class="q">(b) \(f,g\) surjectives \(\Rightarrow h\) surjective ?</p>
-        <p><b>Non</b> en général. Contre-exemple : \(E=\mathbb R,\ f=g=\operatorname{Id}_{\mathbb R}\) (surjectives).
-        Alors \(h(x)=(x,x)\), d'image la diagonale \(\{(t,t)\mid t\in\mathbb R\}\subsetneq\mathbb R^2\). Par exemple
-        \((0,1)\) n'a pas d'antécédent.</p>
-        <div class="res">\(h\) n'est pas nécessairement surjective.</div>
+
+        <p class="q">b) \(f\) et \(g\) surjectives : \(h\) est-elle surjective ?</p>
+        <p class="etape">Étape 1 : contre-exemple</p>
+        <p>\(E=F=G=\mathbb R\) et \(f=g=\operatorname{Id}_{\mathbb R}\), toutes deux surjectives. Alors \(h(x)=(x,x)\).</p>
+        <p class="etape">Étape 2 : un point non atteint</p>
+        <p>\((0,1)=h(x)\) demanderait \(x=0\) et \(x=1\).</p>
+        <div class="res"><b>Non</b> : \(h\) n'est pas forcément surjective (ici son image est la diagonale).</div>
       </div>
     </div>
 
@@ -412,18 +594,28 @@ window.MathJax = {
           <figcaption>Énoncé (TD3) — Exercice 10.</figcaption>
         </figure>
         <div class="enonce">\(f:E\to E\).</div>
-        <p class="q">(a) \(f\circ f=f\) : montrer que \(f\) injective ou surjective \(\Rightarrow f=\operatorname{Id}_E\).</p>
-        <p><b>Si \(f\) injective</b> : de \(f(f(x))=f(x)\), l'injectivité donne \(f(x)=x\) pour tout \(x\).</p>
-        <p><b>Si \(f\) surjective</b> : soit \(y\in E\) ; \(\exists x,\ f(x)=y\). Alors \(f(y)=f(f(x))=f(x)=y\).
-        Tout \(y\) étant atteint, \(f(y)=y\) partout.</p>
+
+        <p class="q">a) \(f\circ f=f\) : si \(f\) est injective ou surjective, alors \(f=\operatorname{Id}_E\)</p>
+        <p>On traite les deux cas.</p>
+        <p class="etape">Étape 1 : cas \(f\) injective</p>
+        <p>Pour tout \(x\), \(f\big(f(x)\big)=f(x)\). L'injectivité permet d'« enlever » le \(f\) extérieur : \(f(x)=x\).</p>
+        <p class="etape">Étape 2 : cas \(f\) surjective</p>
+        <p>Soit \(y\in E\). Il existe \(x\) tel que \(y=f(x)\). Alors :</p>
+        \[ f(y)=f\big(f(x)\big)=f(x)=y \]
         <div class="res">Dans les deux cas \(f=\operatorname{Id}_E\).</div>
-        <p class="q">(b) \(f\circ f\circ f=f\) : montrer \(f\) inj. \(\iff f\circ f=\operatorname{Id}_E\iff f\) surj.</p>
-        <p><b>\(f\) inj. \(\Rightarrow f\circ f=\operatorname{Id}\)</b> : de \(f(f(f(x)))=f(x)\), l'injectivité donne \(f(f(x))=x\).</p>
-        <p><b>\(f\circ f=\operatorname{Id}\Rightarrow f\) surj.</b> : tout \(y=f(f(y))\) a pour antécédent \(f(y)\).</p>
-        <p><b>\(f\) surj. \(\Rightarrow f\circ f=\operatorname{Id}\)</b> : soit \(x\) ; \(\exists a,\ x=f(a)\). Alors
-        \(f(f(x))=f(f(f(a)))=f(a)=x\) (car \(f^{\circ3}=f\)).</p>
-        <p><b>\(f\circ f=\operatorname{Id}\Rightarrow f\) inj.</b> : \(f(x)=f(x')\Rightarrow f(f(x))=f(f(x'))\Rightarrow x=x'\).</p>
-        <div class="res">La chaîne d'implications boucle : les trois propriétés sont équivalentes (\(f\) est une <b>involution</b>).</div>
+
+        <p class="q">b) \(f\circ f\circ f=f\) : \(f\) injective \(\iff f\circ f=\operatorname{Id}_E\iff f\) surjective</p>
+        <p>On montre une boucle d'implications, puis on la referme dans l'autre sens.</p>
+        <p class="etape">Étape 1 : \(f\) injective \(\Rightarrow f\circ f=\operatorname{Id}\)</p>
+        <p>\(f\big(f(f(x))\big)=f(x)\), et l'injectivité donne \(f(f(x))=x\).</p>
+        <p class="etape">Étape 2 : \(f\circ f=\operatorname{Id}\Rightarrow f\) surjective</p>
+        <p>Tout \(y\) s'écrit \(y=f\big(f(y)\big)\) : il a pour antécédent \(f(y)\).</p>
+        <p class="etape">Étape 3 : \(f\) surjective \(\Rightarrow f\circ f=\operatorname{Id}\)</p>
+        <p>Soit \(x\in E\) ; il existe \(a\) tel que \(x=f(a)\). Alors :</p>
+        \[ f\big(f(x)\big)=f\big(f(f(a))\big)=f(a)=x \]
+        <p class="etape">Étape 4 : \(f\circ f=\operatorname{Id}\Rightarrow f\) injective</p>
+        <p>Si \(f(x)=f(x')\), on applique \(f\) : \(f(f(x))=f(f(x'))\), soit \(x=x'\).</p>
+        <div class="res">Les trois propriétés sont équivalentes ; dans ce cas \(f\) est une <b>involution</b>.</div>
       </div>
     </div>
 
@@ -436,16 +628,28 @@ window.MathJax = {
           <img src="td-img/td3-ex11.png" alt="Énoncé TD3 Exercice 11" loading="lazy" style="max-width:100%;height:auto">
           <figcaption>Énoncé (TD3) — Exercice 11.</figcaption>
         </figure>
-        <p class="q">(a) Image directe par \(f\) de \(\{0\}\)</p><p class="res">\(f(\{0\})=\{e^0\}=\{1\}\)</p>
-        <p class="q">(b) Image directe par \(g\) de \(\mathbb R_-\)</p>
-        <p>Pour \(x\leqslant0\), \(|x|=-x\) parcourt \([0,\infty)\), donc \(\sqrt{|x|}\) parcourt \([0,\infty)\).</p>
-        <p class="res">\(g(\mathbb R_-)=\mathbb R_+\)</p>
-        <p class="q">(c) Image réciproque de \([1,2[\) par \(f\)</p>
-        <p>\(e^x\in[1,2[\iff 0\leqslant x<\ln2\).</p>
-        <p class="res">\(f^{-1}([1,2[)=[0,\ln2[\)</p>
-        <p class="q">(d) Image réciproque de \([0,1[\) par \(g\)</p>
-        <p>\(\sqrt{|x|}\in[0,1[\iff |x|<1\).</p>
-        <p class="res">\(g^{-1}([0,1[)=\,]-1,1[\)</p>
+
+        <p class="q">a) Image directe par \(f\) de \(\{0\}\)</p>
+        <div class="rappel"><span class="lab">Rappel · images directe et réciproque</span>\[ f(A)=\{f(x)\mid x\in A\} \qquad f^{-1}(B)=\{x\mid f(x)\in B\} \]</div>
+        <p class="etape">Étape 1 : calculer</p>
+        \[ e^0=1 \]
+        <div class="res">\(f(\{0\})=\{1\}\)</div>
+
+        <p class="q">b) Image directe par \(g\) de \(\mathbb R_-\)</p>
+        <p class="etape">Étape 1 : suivre les valeurs</p>
+        <p>Pour \(x\leqslant 0\), \(|x|=-x\) parcourt \([0,+\infty[\), puis \(\sqrt{|x|}\) parcourt \([0,+\infty[\).</p>
+        <div class="res">\(g(\mathbb R_-)=\mathbb R_+\)</div>
+
+        <p class="q">c) Image réciproque de \([1,2[\) par \(f\)</p>
+        <p class="etape">Étape 1 : résoudre l'encadrement</p>
+        <p>\(\ln\) est strictement croissante :</p>
+        \[ 1\leqslant e^x&lt;2 \iff 0\leqslant x&lt;\ln 2 \]
+        <div class="res">\(f^{-1}([1,2[)=[0,\ln2[\)</div>
+
+        <p class="q">d) Image réciproque de \([0,1[\) par \(g\)</p>
+        <p class="etape">Étape 1 : résoudre l'encadrement</p>
+        \[ 0\leqslant\sqrt{|x|}&lt;1 \iff |x|&lt;1 \]
+        <div class="res">\(g^{-1}([0,1[)=\,]-1,1[\)</div>
       </div>
     </div>
 
@@ -456,24 +660,51 @@ window.MathJax = {
           <img src="td-img/td3-ex12.png" alt="Énoncé TD3 Exercice 12" loading="lazy" style="max-width:100%;height:auto">
           <figcaption>Énoncé (TD3) — Exercice 12.</figcaption>
         </figure>
-        <p class="q">(a) \(f(\mathbb R)\)</p><p class="res">\([-1,1]\)</p>
-        <p class="q">(b) \(f([0,\pi])\)</p><p>\(\cos\) décroît de \(1\) à \(-1\).</p><p class="res">\([-1,1]\)</p>
-        <p class="q">(c) \(f\!\left([-\tfrac\pi2,\tfrac\pi2]\right)\)</p><p>\(\cos\geqslant0\), maximum \(1\) en \(0\), minimum \(0\) en \(\pm\tfrac\pi2\).</p><p class="res">\([0,1]\)</p>
-        <p class="q">(d) \(f\!\left([\tfrac{5\pi}4,\tfrac{7\pi}4]\right)\)</p>
-        <p>Sur \([\pi,2\pi]\), \(\cos\) est croissant : de \(\cos\tfrac{5\pi}4=-\tfrac{\sqrt2}2\) à \(\cos\tfrac{7\pi}4=\tfrac{\sqrt2}2\).</p>
-        <p class="res">\(\left[-\dfrac{\sqrt2}2,\ \dfrac{\sqrt2}2\right]\)</p>
-        <p class="q">(e) \(f^{-1}\!\left(\left\{\tfrac{\sqrt3}2\right\}\right)\)</p>
-        <p>\(\cos x=\tfrac{\sqrt3}2\iff x=\pm\tfrac\pi6+2k\pi\).</p>
-        <p class="res">\(\left\{\pm\dfrac\pi6+2k\pi\ \middle|\ k\in\mathbb Z\right\}\)</p>
-        <p class="q">(f) \(f^{-1}([0,1])\)</p>
-        <p>\(\cos x\geqslant0\) sur les intervalles centrés sur les multiples de \(2\pi\) :</p>
-        <p class="res">\(\displaystyle\bigcup_{k\in\mathbb Z}\left[-\tfrac\pi2+2k\pi,\ \tfrac\pi2+2k\pi\right]\)</p>
-        <p class="q">(g) \(f^{-1}\!\left(f\!\left([0,\tfrac\pi2]\right)\right)\)</p>
-        <p>\(f([0,\tfrac\pi2])=[0,1]\), donc c'est \(f^{-1}([0,1])\), identique à (f).</p>
-        <p class="res">\(\displaystyle\bigcup_{k\in\mathbb Z}\left[-\tfrac\pi2+2k\pi,\ \tfrac\pi2+2k\pi\right]\)</p>
-        <p class="q">(h) \(f\!\left(f^{-1}([0,1])\right)\)</p>
-        <p>\(f(f^{-1}(J))=J\cap f(\mathbb R)=[0,1]\cap[-1,1]\).</p>
-        <p class="res">\([0,1]\)</p>
+
+        <p class="q">a) \(f(\mathbb R)\)</p>
+        <p class="etape">Étape 1 : valeurs prises par \(\cos\)</p>
+        <p>\(\cos\) prend toutes les valeurs entre \(-1\) et \(1\).</p>
+        <div class="res">\(f(\mathbb R)=[-1,1]\)</div>
+
+        <p class="q">b) \(f([0,\pi])\)</p>
+        <p class="etape">Étape 1 : variations</p>
+        <p>Sur \([0,\pi]\), \(\cos\) décroît de \(\cos 0=1\) à \(\cos\pi=-1\).</p>
+        <div class="res">\(f([0,\pi])=[-1,1]\)</div>
+
+        <p class="q">c) \(f\!\left([-\tfrac\pi2,\tfrac\pi2]\right)\)</p>
+        <p class="etape">Étape 1 : variations</p>
+        <p>\(\cos\) croît de 0 à 1 sur \([-\tfrac\pi2,0]\), puis décroît de 1 à 0 sur \([0,\tfrac\pi2]\).</p>
+        <div class="res">\(f\!\left([-\tfrac\pi2,\tfrac\pi2]\right)=[0,1]\)</div>
+
+        <p class="q">d) \(f\!\left([\tfrac{5\pi}4,\tfrac{7\pi}4]\right)\)</p>
+        <p class="etape">Étape 1 : variations</p>
+        <p>\([\tfrac{5\pi}4,\tfrac{7\pi}4]\subseteq[\pi,2\pi]\), où \(\cos\) est croissant.</p>
+        <p class="etape">Étape 2 : valeurs aux bornes</p>
+        \[ \cos\frac{5\pi}4=-\frac{\sqrt2}2 \qquad \cos\frac{7\pi}4=\frac{\sqrt2}2 \]
+        <div class="res">\(f\!\left([\tfrac{5\pi}4,\tfrac{7\pi}4]\right)=\left[-\dfrac{\sqrt2}2,\ \dfrac{\sqrt2}2\right]\)</div>
+
+        <p class="q">e) \(f^{-1}\!\left(\left\{\tfrac{\sqrt3}2\right\}\right)\)</p>
+        <div class="rappel"><span class="lab">Rappel · équation \(\cos x=\cos a\)</span>\[ \cos x=\cos a \iff x=a+2k\pi \text{ ou } x=-a+2k\pi,\quad k\in\mathbb Z \]</div>
+        <p class="etape">Étape 1 : reconnaître une valeur remarquable</p>
+        <p>\(\cos\dfrac\pi6=\dfrac{\sqrt3}2\).</p>
+        <div class="res">\(f^{-1}\!\left(\left\{\tfrac{\sqrt3}2\right\}\right)=\left\{\pm\dfrac\pi6+2k\pi\ \middle|\ k\in\mathbb Z\right\}\)</div>
+
+        <p class="q">f) \(f^{-1}([0,1])\)</p>
+        <p class="etape">Étape 1 : où \(\cos\) est-il positif ?</p>
+        <p>Sur \([-\tfrac\pi2,\tfrac\pi2]\), puis sur ses translatés de \(2k\pi\).</p>
+        <div class="res">\(f^{-1}([0,1])=\displaystyle\bigcup_{k\in\mathbb Z}\left[-\tfrac\pi2+2k\pi,\ \tfrac\pi2+2k\pi\right]\)</div>
+
+        <p class="q">g) \(f^{-1}\!\left(f\!\left([0,\tfrac\pi2]\right)\right)\)</p>
+        <p class="etape">Étape 1 : image directe</p>
+        <p>\(\cos\) décroît de 1 à 0 sur \([0,\tfrac\pi2]\) : \(f([0,\tfrac\pi2])=[0,1]\).</p>
+        <p class="etape">Étape 2 : image réciproque</p>
+        <p>C'est \(f^{-1}([0,1])\), calculé en f).</p>
+        <div class="res">\(\displaystyle\bigcup_{k\in\mathbb Z}\left[-\tfrac\pi2+2k\pi,\ \tfrac\pi2+2k\pi\right]\), bien plus grand que \([0,\tfrac\pi2]\).</div>
+
+        <p class="q">h) \(f\!\left(f^{-1}([0,1])\right)\)</p>
+        <p class="etape">Étape 1 : appliquer \(\cos\) à l'ensemble trouvé en f)</p>
+        <p>Sur chaque intervalle \(\left[-\tfrac\pi2+2k\pi,\ \tfrac\pi2+2k\pi\right]\), \(\cos\) prend toutes les valeurs de \([0,1]\).</p>
+        <div class="res">\(f\!\left(f^{-1}([0,1])\right)=[0,1]\)</div>
         <div class="note">Illustration des inclusions générales : \(f(f^{-1}(J))\subseteq J\) (égalité ici car \(J\subseteq f(\mathbb R)\))
         et \(I\subseteq f^{-1}(f(I))\) (inclusion stricte en g, car \(\cos\) n'est pas injective).</div>
       </div>
@@ -486,16 +717,32 @@ window.MathJax = {
           <img src="td-img/td3-ex13.png" alt="Énoncé TD3 Exercice 13" loading="lazy" style="max-width:100%;height:auto">
           <figcaption>Énoncé (TD3) — Exercice 13.</figcaption>
         </figure>
-        <p class="q">(a) Ensemble d'arrivée pour bijectivité + \(f^{-1}\)</p>
-        <p>\(y=\dfrac{3x+1}{x+1}\Rightarrow y(x+1)=3x+1\Rightarrow x(y-3)=1-y\Rightarrow x=\dfrac{1-y}{y-3}\) (défini \(y\neq3\)).</p>
-        <p class="res">\(f:\mathbb R\setminus\{-1\}\to\mathbb R\setminus\{3\}\) bijective, \(f^{-1}(y)=\dfrac{1-y}{y-3}\).</p>
-        <p class="q">(b) \(f(]0,1[)\) et \(f([2,3])\)</p>
-        <p>\(f'(x)=\dfrac{3(x+1)-(3x+1)}{(x+1)^2}=\dfrac{2}{(x+1)^2}>0\) : \(f\) strictement croissante.
-        \(f(0)=1,\ f(1)=2\) ; \(f(2)=\tfrac73,\ f(3)=\tfrac52\).</p>
-        <p class="res">\(f(]0,1[)=\,]1,2[\) ; \(f([2,3])=\left[\tfrac73,\ \tfrac52\right]\)</p>
-        <p class="q">(c) \(f^{-1}(]0,1[)\) et \(f^{-1}(]1,2[)\)</p>
-        <p>\(f\) croissante : \(f(x)=0\Rightarrow x=-\tfrac13\), \(f(x)=1\Rightarrow x=0\), \(f(x)=2\Rightarrow x=1\).</p>
-        <p class="res">\(f^{-1}(]0,1[)=\left]-\tfrac13,\ 0\right[\) ; \(f^{-1}(]1,2[)=\,]0,1[\)</p>
+
+        <p class="q">a) Ensemble d'arrivée rendant \(f\) bijective, et \(f^{-1}\)</p>
+        <p class="etape">Étape 1 : résoudre \(y=f(x)\)</p>
+        \[ y(x+1)=3x+1 \iff x(y-3)=1-y \]
+        <p class="etape">Étape 2 : discuter</p>
+        <ul>
+          <li>\(y\neq 3\) : une seule solution \(x=\dfrac{1-y}{y-3}\), différente de \(-1\) (sinon \(1-y=3-y\), faux).</li>
+          <li>\(y=3\) : \(0=-2\), aucune solution.</li>
+        </ul>
+        <div class="res">\(f:\mathbb R\setminus\{-1\}\to\mathbb R\setminus\{3\}\) est bijective, \(f^{-1}(y)=\dfrac{1-y}{y-3}\).</div>
+
+        <p class="q">b) \(f(]0,1[)\) et \(f([2,3])\)</p>
+        <div class="rappel"><span class="lab">Rappel · dérivée d'un quotient</span>\[ \left(\frac uv\right)'=\frac{u'v-uv'}{v^2} \]</div>
+        <p class="etape">Étape 1 : variations</p>
+        \[ f'(x)=\frac{3(x+1)-(3x+1)}{(x+1)^2}=\frac{2}{(x+1)^2}>0 \]
+        <p>\(f\) est strictement croissante sur \(]-1,+\infty[\), qui contient \(]0,1[\) et \([2,3]\).</p>
+        <p class="etape">Étape 2 : valeurs aux bornes</p>
+        \[ f(0)=1,\quad f(1)=2,\quad f(2)=\frac73,\quad f(3)=\frac{10}{4}=\frac52 \]
+        <div class="res">\(f(]0,1[)=\,]1,2[\) ; \(f([2,3])=\left[\tfrac73,\ \tfrac52\right]\)</div>
+
+        <p class="q">c) \(f^{-1}(]0,1[)\) et \(f^{-1}(]1,2[)\)</p>
+        <p class="etape">Étape 1 : la branche \(x&lt;-1\) ne compte pas</p>
+        <p>\(f(x)=3-\dfrac{2}{x+1}\). Pour \(x&lt;-1\), \(-\dfrac{2}{x+1}>0\), donc \(f(x)>3\) : aucune valeur dans \(]0,2[\).</p>
+        <p class="etape">Étape 2 : sur \(]-1,+\infty[\), \(f\) est croissante</p>
+        <p>On résout aux bornes : \(f(x)=0\iff x=-\tfrac13\) ; \(f(x)=1\iff x=0\) ; \(f(x)=2\iff x=1\).</p>
+        <div class="res">\(f^{-1}(]0,1[)=\left]-\tfrac13,\ 0\right[\) ; \(f^{-1}(]1,2[)=\,]0,1[\)</div>
       </div>
     </div>
 
@@ -506,15 +753,26 @@ window.MathJax = {
           <img src="td-img/td3-ex14.png" alt="Énoncé TD3 Exercice 14" loading="lazy" style="max-width:100%;height:auto">
           <figcaption>Énoncé (TD3) — Exercice 14.</figcaption>
         </figure>
-        <p class="q">(a) \(f\) est bijective</p>
-        <p>\(f\) est linéaire de matrice \(\begin{pmatrix}1&-4\\2&3\end{pmatrix}\), de déterminant
-        \(1\cdot3-(-4)\cdot2=3+8=11\neq0\). Donc \(f\) est bijective.</p>
-        <div class="res">\(f\) bijective sur \(\mathbb R^2\).</div>
-        <p class="q">(b) \(f(\Delta)\) avec \(\Delta=\{(x,y)\mid x+2y=1\}\)</p>
-        <p>On paramètre \(\Delta\) par \(x=1-2y\), \(y\in\mathbb R\). Alors :</p>
-        \[ f(1-2y,\ y)=\big((1-2y)-4y,\ 2(1-2y)+3y\big)=(1-6y,\ 2-y). \]
-        <p>Posons \(X=1-6y,\ Y=2-y\). De \(Y\) : \(y=2-Y\), d'où \(X=1-6(2-Y)=6Y-11\), soit \(X-6Y=-11\).</p>
-        <div class="res">\(f(\Delta)=\{(X,Y)\in\mathbb R^2\mid X-6Y+11=0\}\) (une droite).</div>
+
+        <p class="q">a) \(f\) est bijective</p>
+        <p>On résout \(f(x,y)=(a,b)\) pour \((a,b)\) quelconque.</p>
+        <p class="etape">Étape 1 : le système</p>
+        \[ x-4y=a,\qquad 2x+3y=b \]
+        <p class="etape">Étape 2 : éliminer \(x\)</p>
+        <p>\(L_2-2L_1\) : \(11y=b-2a\), donc \(y=\dfrac{b-2a}{11}\), puis \(x=a+4y=\dfrac{3a+4b}{11}\).</p>
+        <p class="etape">Étape 3 : conclure</p>
+        <p>Pour tout \((a,b)\), une solution et une seule. (Autre lecture : le déterminant \(1\times3-(-4)\times2=11\) est non nul.)</p>
+        <div class="res">\(f\) est bijective, \(f^{-1}(a,b)=\left(\dfrac{3a+4b}{11},\ \dfrac{b-2a}{11}\right)\).</div>
+
+        <p class="q">b) \(f(\Delta)\) avec \(\Delta=\{(x,y)\mid x+2y=1\}\)</p>
+        <p class="etape">Étape 1 : paramétrer \(\Delta\)</p>
+        <p>\(x=1-2y\), avec \(y\in\mathbb R\).</p>
+        <p class="etape">Étape 2 : calculer l'image</p>
+        \[ f(1-2y,\ y)=\big((1-2y)-4y,\ 2(1-2y)+3y\big)=(1-6y,\ 2-y) \]
+        <p class="etape">Étape 3 : éliminer le paramètre</p>
+        <p>On pose \(X=1-6y\) et \(Y=2-y\). Alors \(y=2-Y\), et :</p>
+        \[ X=1-6(2-Y)=6Y-11 \]
+        <div class="res">\(f(\Delta)=\{(X,Y)\in\mathbb R^2\mid X-6Y+11=0\}\) : une droite.</div>
       </div>
     </div>
 
