@@ -98,26 +98,46 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice A — Somme de Riemann</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Calculer \(\displaystyle\lim_{n\to\infty}\frac1n\sum_{k=1}^n\frac{k}{n}\).</div>
-        <p>Somme de Riemann de \(f(x)=x\) sur \([0,1]\).</p>
-        <div class="res">\(\int_0^1 x\,dx=\tfrac12\)</div>
+
+        <p class="q">1) Calcul de la limite</p>
+        <div class="rappel"><span class="lab">Rappel · convergence des sommes de Riemann</span>Si \(f\) est continue sur \([0,1]\) : \[ \frac1n\sum_{k=1}^nf\Big(\frac kn\Big)\xrightarrow[n\to\infty]{}\int_0^1f(x)\,dx \]</div>
+        <p class="etape">Étape 1 : reconnaître \(f\)</p>
+        <p>Le terme est \(f\big(\tfrac kn\big)\) avec \(f(x)=x\), continue sur \([0,1]\).</p>
+        <p class="etape">Étape 2 : calculer l'intégrale</p>
+        \[ \int_0^1x\,dx=\frac12 \]
+        <div class="res">La limite vaut \(\dfrac12\).</div>
+        <p>Contrôle direct : \(\tfrac1{n^2}\sum k=\tfrac{n+1}{2n}\to\tfrac12\).</p>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice B — Suite-intégrale</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <div class="enonce">\(u_n=\int_0^1\frac{x^n}{1+x^2}dx\). Montrer \(u_n\to0\).</div>
-        <p>\(0\leqslant\tfrac{x^n}{1+x^2}\leqslant x^n\), donc \(0\leqslant u_n\leqslant\tfrac1{n+1}\).</p>
-        <div class="res">\(u_n\to0\) (gendarmes)</div>
+        <div class="enonce">\(u_n=\displaystyle\int_0^1\frac{x^n}{1+x^2}\,dx\). Montrer que \(u_n\to0\).</div>
+
+        <p class="q">1) Convergence de \((u_n)\)</p>
+        <div class="rappel"><span class="lab">Rappel · croissance de l'intégrale</span>Si \(0\leqslant f\leqslant g\) sur \([a,b]\), alors \(0\leqslant\int_a^bf\leqslant\int_a^bg\).</div>
+        <p class="etape">Étape 1 : encadrer l'intégrande</p>
+        <p>Sur \([0,1]\), \(1+x^2\geqslant1\), donc \(0\leqslant\dfrac{x^n}{1+x^2}\leqslant x^n\).</p>
+        <p class="etape">Étape 2 : intégrer l'encadrement</p>
+        \[ 0\leqslant u_n\leqslant\int_0^1x^n\,dx=\frac1{n+1} \]
+        <p class="etape">Étape 3 : gendarmes</p>
+        <p>\(\tfrac1{n+1}\to0\).</p>
+        <div class="res">\(u_n\to0\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice C — Inégalité de la moyenne</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <div class="enonce">Majorer \(\big|\int_0^1\frac{\cos x}{1+x}dx\big|\).</div>
-        <p>\(\big|\tfrac{\cos x}{1+x}\big|\leqslant1\) sur \([0,1]\).</p>
-        <div class="res">\(\big|\int_0^1\tfrac{\cos x}{1+x}dx\big|\leqslant1\)</div>
+        <div class="enonce">Majorer \(\left|\displaystyle\int_0^1\frac{\cos x}{1+x}\,dx\right|\).</div>
+
+        <p class="q">1) Majoration</p>
+        <div class="rappel"><span class="lab">Rappel · inégalité de la moyenne</span>Si \(|f|\leqslant M\) sur \([a,b]\), alors \(\left|\int_a^bf\right|\leqslant M(b-a)\).</div>
+        <p class="etape">Étape 1 : majorer \(|f|\)</p>
+        <p>Sur \([0,1]\), \(|\cos x|\leqslant1\) et \(1+x\geqslant1\) : \(\left|\dfrac{\cos x}{1+x}\right|\leqslant1\).</p>
+        <p class="etape">Étape 2 : appliquer avec \(M=1\), \(b-a=1\)</p>
+        <div class="res">\(\left|\displaystyle\int_0^1\dfrac{\cos x}{1+x}\,dx\right|\leqslant1\).</div>
       </div>
     </div>
   </section>
@@ -125,93 +145,236 @@ window.MathJax = {
   <!-- ==================== CORRECTION TD ========================== -->
   <section class="block" id="td">
     <h2>3. Correction intégrale du TD — Intégration</h2>
-    <p class="lead" style="font-size:.95rem">Les 9 exercices résolus intégralement (pas de corrigé officiel fourni).</p>
+    <p class="lead" style="font-size:.95rem">Les 9 exercices résolus intégralement (pas de corrigé officiel fourni). Le PDF de ce TD n'est pas dans les documents : les énoncés ci-dessous sont reconstitués à partir des questions traitées.</p>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 1 — Fonction en escalier avec parties entières</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <div class="enonce">\(\varphi(x)=3\lfloor\tfrac x2\rfloor-2\lfloor\tfrac x3\rfloor\) sur \([0,6]\).</div>
-        <p class="q">1) Valeurs</p><p>\(\lfloor\tfrac x2\rfloor\in\{0,1,2\}\) ; \(\lfloor\tfrac x3\rfloor\in\{0,1\}\).</p>
-        <p class="q">2-3) Subdivisions</p><p>\(\lfloor\tfrac x2\rfloor\) : \(\{0,2,4,6\}\) ; \(\lfloor\tfrac x3\rfloor\) : \(\{0,3,6\}\) ; réunion : \(\{0,2,3,4,6\}\).</p>
-        <p class="q">4) \(\varphi\) constante par morceaux</p>
-        <p class="res">\([0,2[:\,0\) ; \([2,3[:\,3\) ; \([3,4[:\,1\) ; \([4,6[:\,4\)</p>
-        <p class="q">5) Intégrale</p><p>\(I=0\cdot2+3\cdot1+1\cdot1+4\cdot2\).</p><p class="res">\(I=12\)</p>
+        <div class="enonce">\(\varphi(x)=3\lfloor\tfrac x2\rfloor-2\lfloor\tfrac x3\rfloor\) sur \([0,6]\). Déterminer les valeurs prises, des subdivisions adaptées, écrire \(\varphi\) comme fonction en escalier et calculer \(\int_0^6\varphi\).</div>
+
+        <p class="q">1) Valeurs prises par les deux parties entières</p>
+        <div class="rappel"><span class="lab">Rappel · fonction en escalier</span>\(f\) est en escalier s'il existe une subdivision \((x_i)\) de \([a,b]\) telle que \(f\) soit constante sur chaque \(]x_i,x_{i+1}[\). Alors \(\displaystyle\int_a^bf=\sum f_i\,(x_{i+1}-x_i)\) ; les valeurs aux \(x_i\) ne comptent pas.</div>
+        <p class="etape">Étape 1 : \(\lfloor\tfrac x2\rfloor\)</p>
+        <p>Pour \(x\in[0,6[\) : \(\tfrac x2\in[0,3[\), valeurs \(0,1,2\).</p>
+        <p class="etape">Étape 2 : \(\lfloor\tfrac x3\rfloor\)</p>
+        <p>Pour \(x\in[0,6[\) : \(\tfrac x3\in[0,2[\), valeurs \(0,1\).</p>
+
+        <p class="q">2) Subdivisions adaptées</p>
+        <p class="etape">Étape 1 : points de saut de chaque partie entière</p>
+        <ul>
+          <li>\(\lfloor\tfrac x2\rfloor\) saute en \(0,2,4,6\).</li>
+          <li>\(\lfloor\tfrac x3\rfloor\) saute en \(0,3,6\).</li>
+        </ul>
+        <p class="etape">Étape 2 : réunir</p>
+        <div class="res">Subdivision adaptée à \(\varphi\) : \((0,2,3,4,6)\).</div>
+
+        <p class="q">3) \(\varphi\) sur chaque intervalle</p>
+        <p class="etape">Étape 1 : calculer \(3\lfloor\tfrac x2\rfloor-2\lfloor\tfrac x3\rfloor\)</p>
+        <ul>
+          <li>\([0,2[\) : \(3\times0-2\times0=0\).</li>
+          <li>\([2,3[\) : \(3\times1-2\times0=3\).</li>
+          <li>\([3,4[\) : \(3\times1-2\times1=1\).</li>
+          <li>\([4,6[\) : \(3\times2-2\times1=4\).</li>
+        </ul>
+        <div class="res">\(\varphi\) vaut \(0,\ 3,\ 1,\ 4\) sur \([0,2[,\ [2,3[,\ [3,4[,\ [4,6[\) : elle est en escalier.</div>
+
+        <p class="q">4) Intégrale de \(\varphi\)</p>
+        <p class="etape">Étape 1 : somme valeur \(\times\) longueur</p>
+        \[ \int_0^6\varphi=0\times2+3\times1+1\times1+4\times2 \]
+        <div class="res">\(\displaystyle\int_0^6\varphi=12\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 2 — Inégalités intégrales</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">1) \(\big|\int_0^1(f(x)+xf(1-x))dx\big|\leqslant\tfrac32M\)</p>
-        <p>\(\leqslant\int_0^1(|f(x)|+x|f(1-x)|)dx\leqslant M\int_0^1(1+x)dx=M(1+\tfrac12)\).</p><p class="res">\(\leqslant\tfrac32M\) ∎</p>
-        <p class="q">2) \(\big|\int_{-1}^1(f(x^2)+xf(x))dx\big|\leqslant3M\)</p>
-        <p>\(\leqslant M\int_{-1}^1(1+|x|)dx=M(2+1)\).</p><p class="res">\(\leqslant3M\) ∎</p>
+        <div class="enonce">Soit \(f\) continue sur \([-1,1]\), avec \(|f|\leqslant M\). Montrer : (1) \(\left|\int_0^1\big(f(x)+xf(1-x)\big)dx\right|\leqslant\tfrac32M\) ; (2) \(\left|\int_{-1}^1\big(f(x^2)+xf(x)\big)dx\right|\leqslant3M\).</div>
+
+        <p class="q">1) Première majoration</p>
+        <div class="rappel"><span class="lab">Rappel · inégalité triangulaire intégrale</span>\[ \left|\int_a^bg\right|\leqslant\int_a^b|g| \quad\text{et}\quad |g|\leqslant h\Rightarrow\int_a^b|g|\leqslant\int_a^bh \]</div>
+        <p class="etape">Étape 1 : inégalité triangulaire</p>
+        \[ \left|\int_0^1\big(f(x)+xf(1-x)\big)dx\right|\leqslant\int_0^1\big(|f(x)|+x\,|f(1-x)|\big)dx \]
+        <p class="etape">Étape 2 : majorer par \(M\)</p>
+        <p>\(x\in[0,1]\) et \(1-x\in[0,1]\) : \(|f(x)|\leqslant M\), \(|f(1-x)|\leqslant M\), et \(x\geqslant0\).</p>
+        \[ \leqslant M\int_0^1(1+x)\,dx=M\Big(1+\frac12\Big) \]
+        <div class="res">\(\leqslant\tfrac32M\).</div>
+
+        <p class="q">2) Seconde majoration</p>
+        <p class="etape">Étape 1 : inégalité triangulaire</p>
+        \[ \left|\int_{-1}^1\big(f(x^2)+xf(x)\big)dx\right|\leqslant\int_{-1}^1\big(|f(x^2)|+|x|\,|f(x)|\big)dx \]
+        <p class="etape">Étape 2 : majorer par \(M\)</p>
+        <p>\(x^2\in[0,1]\subseteq[-1,1]\) et \(x\in[-1,1]\), donc :</p>
+        \[ \leqslant M\int_{-1}^1(1+|x|)\,dx=M\,(2+1) \]
+        <div class="res">\(\leqslant3M\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 3 — \(I_n=\int_0^1\tfrac{x^n}{1+x}dx\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">1) \(I_n\to0\)</p><p>\(0\leqslant\tfrac{x^n}{1+x}\leqslant x^n\), \(I_n\leqslant\tfrac1{n+1}\).</p><p class="res">\(I_n\to0\)</p>
-        <p class="q">2) \(I_n+I_{n+1}\)</p><p>\(=\int_0^1\tfrac{x^n(1+x)}{1+x}dx=\int_0^1 x^n\).</p><p class="res">\(\tfrac1{n+1}\)</p>
-        <p class="q">3) \(\lim\sum_{k=0}^n\tfrac{(-1)^k}{k+1}\)</p>
-        <p>Avec \(\tfrac1{k+1}=I_k+I_{k+1}\), la somme \(\sum(-1)^k(I_k+I_{k+1})=I_0+(-1)^nI_{n+1}\) (télescopage), et \(I_0=\ln2\).</p>
-        <div class="res">\(\displaystyle\lim_{n\to\infty}\sum_{k=0}^n\frac{(-1)^k}{k+1}=\ln2\)</div>
+        <div class="enonce">\(I_n=\displaystyle\int_0^1\frac{x^n}{1+x}\,dx\). (1) Montrer que \(I_n\to0\). (2) Calculer \(I_n+I_{n+1}\). (3) En déduire \(\displaystyle\lim_{n\to\infty}\sum_{k=0}^n\frac{(-1)^k}{k+1}\).</div>
+
+        <p class="q">1) \(I_n\to0\)</p>
+        <p class="etape">Étape 1 : encadrer</p>
+        <p>Sur \([0,1]\), \(1+x\geqslant1\), donc \(0\leqslant\dfrac{x^n}{1+x}\leqslant x^n\).</p>
+        <p class="etape">Étape 2 : intégrer</p>
+        \[ 0\leqslant I_n\leqslant\int_0^1x^n\,dx=\frac1{n+1} \]
+        <div class="res">\(I_n\to0\) (gendarmes).</div>
+
+        <p class="q">2) \(I_n+I_{n+1}\)</p>
+        <p class="etape">Étape 1 : additionner sous le même signe intégrale</p>
+        \[ I_n+I_{n+1}=\int_0^1\frac{x^n+x^{n+1}}{1+x}dx=\int_0^1\frac{x^n(1+x)}{1+x}dx=\int_0^1x^n\,dx \]
+        <div class="res">\(I_n+I_{n+1}=\dfrac1{n+1}\).</div>
+
+        <p class="q">3) Limite de \(\displaystyle\sum_{k=0}^n\frac{(-1)^k}{k+1}\)</p>
+        <p class="etape">Étape 1 : remplacer \(\tfrac1{k+1}\) par \(I_k+I_{k+1}\)</p>
+        \[ \sum_{k=0}^n\frac{(-1)^k}{k+1}=\sum_{k=0}^n(-1)^kI_k+\sum_{k=0}^n(-1)^kI_{k+1} \]
+        <p class="etape">Étape 2 : télescopage</p>
+        <p>Dans la seconde somme, on pose \(j=k+1\) : \(\sum_{j=1}^{n+1}(-1)^{j-1}I_j=-\sum_{j=1}^{n+1}(-1)^jI_j\). Tous les termes de \(j=1\) à \(n\) s'annulent :</p>
+        \[ \sum_{k=0}^n\frac{(-1)^k}{k+1}=I_0-(-1)^{n+1}I_{n+1}=I_0+(-1)^nI_{n+1} \]
+        <p class="etape">Étape 3 : limite</p>
+        <p>\(I_0=\int_0^1\tfrac{dx}{1+x}=\ln2\), et \(|(-1)^nI_{n+1}|=I_{n+1}\to0\).</p>
+        <div class="res">\(\displaystyle\lim_{n\to\infty}\sum_{k=0}^n\frac{(-1)^k}{k+1}=\ln2\).</div>
       </div>
     </div>
 
     <div class="exo-card">
-      <div class="exo-head"><span>Exercice 4 — \(u_n=\int_0^1 x^n\ln(1+x)dx\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-head"><span>Exercice 4 — \(u_n=\int_0^1x^n\ln(1+x)\,dx\)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p>\(0\leqslant\ln(1+x)\leqslant\ln2\) sur \([0,1]\), donc \(0\leqslant u_n\leqslant\tfrac{\ln2}{n+1}\).</p>
-        <div class="res">\(\lim u_n=0\)</div>
+        <div class="enonce">\(u_n=\displaystyle\int_0^1x^n\ln(1+x)\,dx\). Déterminer \(\lim u_n\).</div>
+
+        <p class="q">1) Limite de \((u_n)\)</p>
+        <p class="etape">Étape 1 : encadrer \(\ln(1+x)\)</p>
+        <p>Sur \([0,1]\), \(0\leqslant\ln(1+x)\leqslant\ln2\).</p>
+        <p class="etape">Étape 2 : intégrer avec le poids \(x^n\geqslant0\)</p>
+        \[ 0\leqslant u_n\leqslant\ln2\int_0^1x^n\,dx=\frac{\ln2}{n+1} \]
+        <div class="res">\(\lim u_n=0\) (gendarmes).</div>
       </div>
     </div>
 
     <div class="exo-card">
-      <div class="exo-head"><span>Exercice 5 — \(I_n=\int_0^1\tfrac{x^n}{x^2+1}\), \(J_n=\int_0^1 x^n\ln(x^2+1)\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-head"><span>Exercice 5 — \(I_n=\int_0^1\tfrac{x^n}{x^2+1}\), \(J_n=\int_0^1x^n\ln(x^2+1)\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">1) \(I_n\to0\)</p><p>\(\tfrac{x^n}{x^2+1}\leqslant x^n\).</p><p class="res">\(I_n\to0\)</p>
+        <div class="enonce">\(I_n=\displaystyle\int_0^1\frac{x^n}{x^2+1}\,dx\) et \(J_n=\displaystyle\int_0^1x^n\ln(x^2+1)\,dx\). (1) Montrer que \(I_n\to0\). (2) Exprimer \(I_{n+2}\) en fonction de \(J_n\). (3) Déterminer \(\lim(n+1)J_n\).</div>
+
+        <p class="q">1) \(I_n\to0\)</p>
+        <p class="etape">Étape 1 : encadrer et intégrer</p>
+        <p>\(0\leqslant\dfrac{x^n}{x^2+1}\leqslant x^n\), donc \(0\leqslant I_n\leqslant\tfrac1{n+1}\).</p>
+        <div class="res">\(I_n\to0\).</div>
+
         <p class="q">2) \(I_{n+2}\) en fonction de \(J_n\)</p>
-        <p>IPP sur \(J_n\) (\(u=\ln(x^2+1),\ dv=x^n dx\)) : \((n+1)J_n=\ln2-2I_{n+2}\).</p><p class="res">\(I_{n+2}=\tfrac{\ln2}2-\tfrac{n+1}2J_n\)</p>
-        <p class="q">3) \(\lim(n+1)J_n\)</p><p>\((n+1)J_n=\ln2-2I_{n+2}\), \(I_{n+2}\to0\).</p><p class="res">\(\lim(n+1)J_n=\ln2\)</p>
+        <p class="etape">Étape 1 : intégration par parties sur \(J_n\)</p>
+        <p>\(u=\ln(x^2+1)\), \(v'=x^n\) ; \(u'=\dfrac{2x}{x^2+1}\), \(v=\dfrac{x^{n+1}}{n+1}\).</p>
+        \[ J_n=\Big[\frac{x^{n+1}\ln(x^2+1)}{n+1}\Big]_0^1-\frac2{n+1}\int_0^1\frac{x^{n+2}}{x^2+1}dx=\frac{\ln2}{n+1}-\frac{2}{n+1}I_{n+2} \]
+        <p class="etape">Étape 2 : isoler</p>
+        <div class="res">\((n+1)J_n=\ln2-2I_{n+2}\), soit \(I_{n+2}=\dfrac{\ln2}2-\dfrac{n+1}2J_n\).</div>
+
+        <p class="q">3) \(\lim(n+1)J_n\)</p>
+        <p class="etape">Étape 1 : passer à la limite dans la relation précédente</p>
+        <p>\(I_{n+2}\to0\) d'après la question 1.</p>
+        <div class="res">\(\lim(n+1)J_n=\ln2\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 6 — Intégrales par sommes de Riemann</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">\(I=\int_0^1 x^2dx\)</p><p>\(\tfrac1n\sum_{k=1}^n(\tfrac kn)^2=\tfrac{n(n+1)(2n+1)}{6n^3}\to\tfrac13\).</p><p class="res">\(\tfrac13\)</p>
-        <p class="q">\(J=\int_0^2(2x+1)dx\)</p><p>\(\tfrac2n\sum_{k=1}^n(\tfrac{4k}n+1)=6+\tfrac4n\to6\).</p><p class="res">\(6\)</p>
+        <div class="enonce">Calculer \(I=\displaystyle\int_0^1x^2\,dx\) et \(J=\displaystyle\int_0^2(2x+1)\,dx\) comme limites de sommes de Riemann.</div>
+
+        <p class="q">1) \(I=\displaystyle\int_0^1x^2\,dx\)</p>
+        <div class="rappel"><span class="lab">Rappel · somme de Riemann (à droite)</span>\[ R_n=\frac{b-a}n\sum_{k=1}^nf\Big(a+k\frac{b-a}n\Big)\xrightarrow[n\to\infty]{}\int_a^bf \]</div>
+        <p class="etape">Étape 1 : écrire la somme</p>
+        \[ R_n=\frac1n\sum_{k=1}^n\Big(\frac kn\Big)^2=\frac1{n^3}\sum_{k=1}^nk^2=\frac{n(n+1)(2n+1)}{6n^3} \]
+        <p class="etape">Étape 2 : limite</p>
+        <div class="res">\(R_n\to\dfrac{2}{6}=\dfrac13\) : \(I=\tfrac13\).</div>
+
+        <p class="q">2) \(J=\displaystyle\int_0^2(2x+1)\,dx\)</p>
+        <p class="etape">Étape 1 : pas \(\tfrac2n\), points \(x_k=\tfrac{2k}n\)</p>
+        \[ R_n=\frac2n\sum_{k=1}^n\Big(\frac{4k}n+1\Big)=\frac2n\Big(\frac4n\cdot\frac{n(n+1)}2+n\Big)=\frac2n(3n+2) \]
+        <p class="etape">Étape 2 : limite</p>
+        <div class="res">\(R_n=6+\tfrac4n\to6\) : \(J=6\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 7 — Limites de sommes de Riemann</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">\(S_{1,n}=\sum_{k=0}^{n-1}\tfrac1{n+k}\)</p><p>\(=\tfrac1n\sum_{k=0}^{n-1}\tfrac1{1+k/n}\to\int_0^1\tfrac{dx}{1+x}\).</p><p class="res">\(\ln2\)</p>
-        <p class="q">\(S_{2,n}=\tfrac1n\sum_{k=1}^n\tfrac{n^2}{(n+k)^2}\)</p><p>\(=\tfrac1n\sum\tfrac1{(1+k/n)^2}\to\int_0^1\tfrac{dx}{(1+x)^2}=[-\tfrac1{1+x}]_0^1\).</p><p class="res">\(\tfrac12\)</p>
+        <div class="enonce">Déterminer les limites de \(S_{1,n}=\displaystyle\sum_{k=0}^{n-1}\frac1{n+k}\) et \(S_{2,n}=\displaystyle\frac1n\sum_{k=1}^n\frac{n^2}{(n+k)^2}\).</div>
+
+        <p class="q">1) \(S_{1,n}\)</p>
+        <p class="etape">Étape 1 : factoriser \(n\) au dénominateur</p>
+        \[ \frac1{n+k}=\frac1n\cdot\frac1{1+\frac kn} \]
+        <p class="etape">Étape 2 : reconnaître une somme de Riemann à gauche de \(f(x)=\tfrac1{1+x}\)</p>
+        \[ S_{1,n}=\frac1n\sum_{k=0}^{n-1}f\Big(\frac kn\Big)\to\int_0^1\frac{dx}{1+x}=\ln2 \]
+        <div class="res">\(\lim S_{1,n}=\ln2\).</div>
+
+        <p class="q">2) \(S_{2,n}\)</p>
+        <p class="etape">Étape 1 : simplifier</p>
+        \[ \frac{n^2}{(n+k)^2}=\frac1{(1+\frac kn)^2} \]
+        <p class="etape">Étape 2 : somme de Riemann à droite de \(f(x)=\tfrac1{(1+x)^2}\)</p>
+        \[ S_{2,n}\to\int_0^1\frac{dx}{(1+x)^2}=\Big[-\frac1{1+x}\Big]_0^1=-\frac12+1 \]
+        <div class="res">\(\lim S_{2,n}=\dfrac12\).</div>
       </div>
     </div>
 
     <div class="exo-card">
-      <div class="exo-head"><span>Exercice 8 — \(I_n=\int_1^e(\ln x)^n dx\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-head"><span>Exercice 8 — \(I_n=\int_1^e(\ln x)^n\,dx\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">1) Convergence</p><p>Sur \([1,e]\), \(0\leqslant\ln x\leqslant1\) donc \((\ln x)^{n+1}\leqslant(\ln x)^n\) : \((I_n)\) décroissante, minorée par \(0\).</p><p class="res">\((I_n)\) converge</p>
-        <p class="q">2) Récurrence (IPP)</p><p>\(u=(\ln x)^n,\ dv=dx\) : \([x(\ln x)^n]_1^e-n\int_1^e(\ln x)^{n-1}\).</p><p class="res">\(I_n=e-n\,I_{n-1}\)</p>
-        <p class="q">3) Équivalent</p><p>\((n+1)I_n=e-I_{n+1}\to e\).</p><p class="res">\(I_n\sim\dfrac en\)</p>
+        <div class="enonce">\(I_n=\displaystyle\int_1^e(\ln x)^n\,dx\). (1) Montrer que \((I_n)\) converge. (2) Trouver une relation de récurrence par IPP. (3) Donner un équivalent de \(I_n\).</div>
+
+        <p class="q">1) Convergence</p>
+        <p class="etape">Étape 1 : monotonie</p>
+        <p>Sur \([1,e]\), \(0\leqslant\ln x\leqslant1\) : \((\ln x)^{n+1}\leqslant(\ln x)^n\). Donc \(I_{n+1}\leqslant I_n\).</p>
+        <p class="etape">Étape 2 : minoration</p>
+        <p>\(I_n\geqslant0\) (intégrale d'une fonction positive).</p>
+        <div class="res">\((I_n)\) est décroissante et minorée : elle converge.</div>
+
+        <p class="q">2) Relation de récurrence</p>
+        <p class="etape">Étape 1 : IPP avec \(u=(\ln x)^n\), \(v'=1\) (\(n\geqslant1\))</p>
+        \[ I_n=\big[x(\ln x)^n\big]_1^e-n\int_1^e(\ln x)^{n-1}dx=e-n\,I_{n-1} \]
+        <div class="res">\(I_n=e-n\,I_{n-1}\) pour \(n\geqslant1\) (avec \(I_0=e-1\)).</div>
+
+        <p class="q">3) Équivalent de \(I_n\)</p>
+        <p class="etape">Étape 1 : réécrire avec \(n+1\)</p>
+        \[ (n+1)I_n=e-I_{n+1} \]
+        <p class="etape">Étape 2 : \(I_n\to0\)</p>
+        <p>\(I_{n+1}\geqslant0\) donne \(I_n\leqslant\tfrac e{n+1}\to0\).</p>
+        <p class="etape">Étape 3 : conclure</p>
+        <p>\((n+1)I_n=e-I_{n+1}\to e\).</p>
+        <div class="res">\(I_n\sim\dfrac en\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 9 — Série harmonique &amp; constante d'Euler</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <div class="enonce">\(u_n=\sum_{k=1}^n\tfrac1k\), \(v_n=u_n-\ln n\).</div>
-        <p class="q">1) Encadrement</p><p>\(1/x\) décroissante sur \([k,k+1]\) : \(\tfrac1{k+1}\leqslant\int_k^{k+1}\tfrac{dx}x\leqslant\tfrac1k\).</p>
-        <p class="q">2) Sommation</p><p>En sommant \(k=1\) à \(n-1\) (télescopage \(\to\ln n\)) : \(u_n-1\leqslant\ln n\leqslant u_n-\tfrac1n\), d'où \(\tfrac1n\leqslant v_n\leqslant1\).</p><p class="res">\(0\leqslant v_n\leqslant1\)</p>
-        <p class="q">3) Monotonie</p><p class="res">\(v_{n+1}-v_n=\tfrac1{n+1}-\int_n^{n+1}\tfrac{dx}x\)</p>
-        <p class="q">4) Convergence</p><p>Par (1) avec \(k=n\) : \(v_{n+1}-v_n\leqslant0\), donc \((v_n)\) décroissante et minorée : elle converge vers \(\gamma\) (constante d'Euler).</p>
-        <div class="res">\((v_n)\to\gamma\), donc \(u_n=\ln n+\gamma+o(1)\to+\infty\) (la série harmonique diverge).</div>
+        <div class="enonce">\(u_n=\displaystyle\sum_{k=1}^n\frac1k\), \(v_n=u_n-\ln n\). (1) Encadrer \(\int_k^{k+1}\tfrac{dx}x\). (2) En déduire un encadrement de \(v_n\). (3) Étudier la monotonie de \((v_n)\). (4) Conclure sur la convergence de \((v_n)\) et la divergence de \((u_n)\).</div>
+
+        <p class="q">1) Encadrement de \(\displaystyle\int_k^{k+1}\frac{dx}x\)</p>
+        <p class="etape">Étape 1 : \(x\mapsto\tfrac1x\) est décroissante</p>
+        <p>Pour \(x\in[k,k+1]\) : \(\tfrac1{k+1}\leqslant\tfrac1x\leqslant\tfrac1k\).</p>
+        <p class="etape">Étape 2 : intégrer sur un intervalle de longueur 1</p>
+        <div class="res">\(\dfrac1{k+1}\leqslant\displaystyle\int_k^{k+1}\dfrac{dx}x\leqslant\dfrac1k\).</div>
+
+        <p class="q">2) Encadrement de \(v_n\)</p>
+        <p class="etape">Étape 1 : sommer de \(k=1\) à \(n-1\)</p>
+        <p>\(\sum_{k=1}^{n-1}\int_k^{k+1}\tfrac{dx}x=\int_1^n\tfrac{dx}x=\ln n\) (Chasles) :</p>
+        \[ \sum_{k=1}^{n-1}\frac1{k+1}\leqslant\ln n\leqslant\sum_{k=1}^{n-1}\frac1k \quad\text{soit}\quad u_n-1\leqslant\ln n\leqslant u_n-\frac1n \]
+        <p class="etape">Étape 2 : traduire en \(v_n=u_n-\ln n\)</p>
+        <div class="res">\(\dfrac1n\leqslant v_n\leqslant1\), donc \(0\leqslant v_n\leqslant1\).</div>
+
+        <p class="q">3) Monotonie de \((v_n)\)</p>
+        <p class="etape">Étape 1 : différence</p>
+        \[ v_{n+1}-v_n=\frac1{n+1}-\big(\ln(n+1)-\ln n\big)=\frac1{n+1}-\int_n^{n+1}\frac{dx}x \]
+        <p class="etape">Étape 2 : signe, d'après 1) avec \(k=n\)</p>
+        <div class="res">\(v_{n+1}-v_n\leqslant0\) : \((v_n)\) est décroissante.</div>
+
+        <p class="q">4) Convergence et divergence de la série harmonique</p>
+        <p class="etape">Étape 1 : limite monotone</p>
+        <p>\((v_n)\) est décroissante et minorée par 0 : elle converge vers un réel \(\gamma\in[0,1]\) (constante d'Euler).</p>
+        <p class="etape">Étape 2 : conséquence pour \(u_n\)</p>
+        <p>\(u_n=\ln n+v_n=\ln n+\gamma+o(1)\to+\infty\).</p>
+        <div class="res">\((v_n)\to\gamma\) et \(u_n\to+\infty\) : la série harmonique diverge, comme \(\ln n\).</div>
       </div>
     </div>
 
