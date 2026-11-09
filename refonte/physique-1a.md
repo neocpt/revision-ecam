@@ -17,8 +17,8 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 | acides-bases.html | 29 | fait |
 | oxydoreduction.html | 29 | fait |
 | atomistique.html | 24 | fait |
-| cristallographie.html | 18 | en cours |
-| thermodynamique-1.html | 38 | à faire |
+| cristallographie.html | 18 | fait |
+| thermodynamique-1.html | 38 | en cours |
 
 ## Journal par page
 
@@ -93,3 +93,8 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 - Erreur corrigée : solvants Ex 1, énergie liaison H ≈ 20 kJ/mol et O-H ≈ 460 kJ/mol → warnbox.
 - Reprises : Ex 4 (énergie du photon de la voiture ajoutée), Ex 2 molécules (charges formelles réécrites), Ex 12 BF3 (5,4 D), Ex 14 (δ(H) ≈ 0,32 avec d(OH) du schéma), OM : ΔE/indice cohérents (B2 −0,29 ; F2 −0,35 ; N2 −1,05 ; O2 −0,82 Eh).
 - Points incertains : figures du TD non lisibles (Ex 22 courbe PI, Ex 11 nom de certaines données).
+
+### cristallographie.html — fait
+- 18 cartes réécrites (3 créées + 15 TD). Énoncés tous présents.
+- Aucune erreur de résultat ; reprises : Ex 3 (couche 3 = triangle de 6 boulets, et non hexagone), Ex 10 (liaison C-C = quart de la grande diagonale), Ex 11 (rayon du site tétraédrique 0,080 a calculé explicitement), Ex 7 (volume en cm³ réécrit), Ex 13 (a = 692/√3 ≈ 400 pm clarifié).
+- Point incertain : Ex 13 Q7 (distance des ions extrêmes), le schéma du TD n'est pas lisible ; lecture de l'ancienne version conservée et signalée.
