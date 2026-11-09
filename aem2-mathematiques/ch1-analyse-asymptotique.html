@@ -282,12 +282,19 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice A — Équivalent et limite</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Déterminer \(\displaystyle\lim_{x\to0}\frac{\cos x-\sqrt{1-x^2}}{x^4}\).</div>
+
         <p class="q">Résolution</p>
-        <p>On fait un DL à l'ordre 4 en \(0\) : \(\cos x=1-\dfrac{x^2}2+\dfrac{x^4}{24}+o(x^4)\) et, avec
-        \((1+u)^{1/2}=1+\tfrac u2-\tfrac{u^2}8+o(u^2)\) pour \(u=-x^2\) :
-        \(\sqrt{1-x^2}=1-\dfrac{x^2}2-\dfrac{x^4}8+o(x^4)\).</p>
-        <p>Donc \(\cos x-\sqrt{1-x^2}=\Big(\dfrac1{24}+\dfrac18\Big)x^4+o(x^4)=\dfrac{1+3}{24}x^4+o(x^4)=\dfrac{4}{24}x^4+o(x^4)=\dfrac{x^4}6+o(x^4)\).</p>
-        <div class="res">La limite vaut <b>\(\dfrac16\)</b>.</div>
+        <p class="etape">Étape 1 : choisir l'ordre du développement</p>
+        <p>Le dénominateur est en \(x^4\) : on développe numérateur à l'ordre 4.</p>
+        <p class="etape">Étape 2 : DL de \(\cos x\)</p>
+        <div class="rappel"><span class="lab">Rappel · DL usuel</span>\[ \cos x = 1 - \frac{x^2}{2} + \frac{x^4}{24} + o(x^4) \]</div>
+        <p class="etape">Étape 3 : DL de \(\sqrt{1 - x^2}\)</p>
+        <div class="rappel"><span class="lab">Rappel · DL usuel</span>\[ (1 + u)^{1/2} = 1 + \frac{u}{2} - \frac{u^2}{8} + o(u^2) \]</div>
+        <p>On pose \(u = -x^2\) :</p>
+        \[ \sqrt{1 - x^2} = 1 - \frac{x^2}{2} - \frac{x^4}{8} + o(x^4) \]
+        <p class="etape">Étape 4 : différence</p>
+        \[ \cos x - \sqrt{1 - x^2} = \left(\frac{1}{24} + \frac{1}{8}\right)x^4 + o(x^4) = \frac{4}{24}\,x^4 + o(x^4) = \frac{x^4}{6} + o(x^4) \]
+        <div class="res">\(\displaystyle\lim_{x\to0}\frac{\cos x - \sqrt{1 - x^2}}{x^4} = \dfrac16\).</div>
       </div>
     </div>
 
@@ -295,11 +302,19 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice B — Position par rapport à la tangente</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Étudier la position de la courbe de \(f(x)=e^x\cos x\) par rapport à sa tangente en \(0\).</div>
+
         <p class="q">Résolution</p>
-        <p>D'après l'exercice 8.1 du TD (ci-dessous), \(f(x)=1+x-\dfrac{x^3}3+o(x^3)\) : donc \(c_0=1\), \(c_1=1\),
-        \(c_2=0\), \(c_3=-\tfrac13\neq0\). La tangente en \(0\) est \(y=1+x\), et le premier coefficient non nul
-        après \(c_1\) est \(c_3\) (indice impair) : le signe de \(f(x)-y\sim-\tfrac{x^3}3\) <b>change</b> en \(0\).</p>
-        <div class="res">\(x=0\) est un <b>point d'inflexion</b> de la courbe de \(f\) (la courbe traverse sa tangente).</div>
+        <p class="etape">Étape 1 : DL de \(f\)</p>
+        <p>D'après l'exercice 8.1 du TD :</p>
+        \[ f(x) = 1 + x - \frac{x^3}{3} + o(x^3) \]
+        <p>Donc \(c_0 = 1\), \(c_1 = 1\), \(c_2 = 0\), \(c_3 = -\dfrac13 \neq 0\).</p>
+        <p class="etape">Étape 2 : tangente</p>
+        <p>La tangente en 0 est \(y = 1 + x\).</p>
+        <p class="etape">Étape 3 : position</p>
+        <div class="rappel"><span class="lab">Rappel · position par rapport à la tangente</span>\[ f(x) - y \sim c_k\,x^k \quad\text{où } k \text{ est le premier indice} \ge 2 \text{ avec } c_k \neq 0 \]
+        \(k\) pair : le signe ne change pas. \(k\) impair : la courbe traverse la tangente.</div>
+        \[ f(x) - (1 + x) \sim -\frac{x^3}{3} \]
+        <div class="res">L'indice 3 est impair : le signe change en 0. \(x = 0\) est un <b>point d'inflexion</b> (la courbe traverse sa tangente).</div>
       </div>
     </div>
   </section>
@@ -319,20 +334,23 @@ window.MathJax = {
         <figure><img src="td1-img/ex1.png" alt="Énoncé — Exercice 1, classement de 7 suites" loading="lazy"></figure>
         <div class="enonce">Classer \(a_n=\tfrac1n\), \(b_n=\tfrac1{n^2}\), \(c_n=\tfrac{\ln n}n\), \(d_n=\tfrac{e^n}{n^3}\),
         \(e_n=n\), \(f_n=1\), \(g_n=\sqrt{ne^n}\) par ordre de négligeabilité.</div>
-        <p class="q">Méthode</p>
-        <p>On compare les suites deux à deux en étudiant le quotient (ou en repérant les croissances comparées
-        usuelles \(\ln n\ll n^\alpha\ll a^n\ll n!\)).</p>
-        <p class="q">Comparaisons</p>
-        <p>\(\dfrac{b_n}{a_n}=\dfrac1n\to0\) donc \(b_n=o(a_n)\). &nbsp;
-        \(\dfrac{a_n}{c_n}=\dfrac1{\ln n}\to0\) donc \(a_n=o(c_n)\). &nbsp;
-        \(\dfrac{c_n}{f_n}=\dfrac{\ln n}n\to0\) (croissance comparée) donc \(c_n=o(f_n)\). &nbsp;
-        \(\dfrac{f_n}{e_n}=\dfrac1n\to0\) donc \(f_n=o(e_n)\). &nbsp;
-        \(\dfrac{e_n}{g_n}=\dfrac{n}{\sqrt{n}e^{n/2}}=\dfrac{\sqrt n}{e^{n/2}}\to0\) (croissance comparée) donc
-        \(e_n=o(g_n)\). &nbsp;
-        \(\dfrac{g_n}{d_n}=\dfrac{\sqrt n\,e^{n/2}n^3}{e^n}=\dfrac{n^{3,5}}{e^{n/2}}\to0\) donc \(g_n=o(d_n)\).</p>
-        <div class="res">Ordre croissant de négligeabilité :
-        \[ b_n\ll a_n\ll c_n\ll f_n\ll e_n\ll g_n\ll d_n, \]
-        c'est-à-dire \(\dfrac1{n^2}\ll\dfrac1n\ll\dfrac{\ln n}n\ll1\ll n\ll\sqrt{ne^n}\ll\dfrac{e^n}{n^3}\).</div>
+
+        <p class="q">Classement par ordre de négligeabilité</p>
+        <p class="etape">Étape 1 : la méthode</p>
+        <div class="rappel"><span class="lab">Rappel · croissances comparées</span>\[ \ln n \ll n^\alpha \ll a^n \ll n! \qquad (\alpha &gt; 0,\ a &gt; 1) \]
+        \(u_n \ll v_n\) signifie \(u_n = o(v_n)\), c'est-à-dire \(u_n/v_n \to 0\).</div>
+        <p>On compare les suites deux à deux par leur quotient.</p>
+        <p class="etape">Étape 2 : les comparaisons</p>
+        <ul>
+          <li>\(\dfrac{b_n}{a_n} = \dfrac1n \to 0\), donc \(b_n \ll a_n\).</li>
+          <li>\(\dfrac{a_n}{c_n} = \dfrac{1}{\ln n} \to 0\), donc \(a_n \ll c_n\).</li>
+          <li>\(\dfrac{c_n}{f_n} = \dfrac{\ln n}{n} \to 0\) (croissance comparée), donc \(c_n \ll f_n\).</li>
+          <li>\(\dfrac{f_n}{e_n} = \dfrac1n \to 0\), donc \(f_n \ll e_n\).</li>
+          <li>\(\dfrac{e_n}{g_n} = \dfrac{n}{\sqrt n\,e^{n/2}} = \dfrac{\sqrt n}{e^{n/2}} \to 0\), donc \(e_n \ll g_n\).</li>
+          <li>\(\dfrac{g_n}{d_n} = \dfrac{\sqrt n\,e^{n/2}\,n^3}{e^n} = \dfrac{n^{3{,}5}}{e^{n/2}} \to 0\), donc \(g_n \ll d_n\).</li>
+        </ul>
+        <div class="res">\[ b_n \ll a_n \ll c_n \ll f_n \ll e_n \ll g_n \ll d_n \]
+        soit \(\dfrac1{n^2} \ll \dfrac1n \ll \dfrac{\ln n}{n} \ll 1 \ll n \ll \sqrt{ne^n} \ll \dfrac{e^n}{n^3}\).</div>
       </div>
     </div>
 
@@ -341,41 +359,49 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 2 — Équivalents simples de suites</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <figure><img src="td1-img/ex2.png" alt="Énoncé — Exercice 2, six suites à équivalenter" loading="lazy"></figure>
+
         <p class="q">1) \(u_n=\dfrac{n^2+e^{-2n}+\sqrt{n^5}}{\ln(2n)+2n-5}\)</p>
-        <p>Numérateur : \(e^{-2n}\to0\) et \(\sqrt{n^5}=n^{5/2}\) domine \(n^2\) (car \(5/2>2\)), donc le
-        numérateur \(\sim n^{5/2}\). Dénominateur : \(2n\) domine \(\ln(2n)\) et la constante \(-5\), donc le
-        dénominateur \(\sim2n\).</p>
-        <div class="res">\(u_n\sim\dfrac{n^{5/2}}{2n}=\dfrac12\,n^{3/2}\).</div>
+        <div class="rappel"><span class="lab">Rappel · équivalent d'une somme</span>Une somme est équivalente à son terme dominant.</div>
+        <p class="etape">Étape 1 : numérateur</p>
+        <p>\(e^{-2n} \to 0\) et \(\sqrt{n^5} = n^{5/2}\) l'emporte sur \(n^2\) (car \(5/2 &gt; 2\)). Le numérateur est équivalent à \(n^{5/2}\).</p>
+        <p class="etape">Étape 2 : dénominateur</p>
+        <p>\(2n\) l'emporte sur \(\ln(2n)\) et sur \(-5\). Le dénominateur est équivalent à \(2n\).</p>
+        <div class="res">\(u_n \sim \dfrac{n^{5/2}}{2n} = \dfrac12\,n^{3/2}\).</div>
 
         <p class="q">2) \(u_n=\ln\!\Big(\dfrac{n^2+1}{n^2+2}\Big)\)</p>
-        <p>\(\dfrac{n^2+1}{n^2+2}=1-\dfrac1{n^2+2}\), donc \(u_n=\ln\Big(1-\dfrac1{n^2+2}\Big)\). Or
-        \(-\dfrac1{n^2+2}\to0\) et \(\ln(1+v)\sim v\), donc \(u_n\sim-\dfrac1{n^2+2}\sim-\dfrac1{n^2}\).</p>
-        <div class="res">\(u_n\sim-\dfrac1{n^2}\).</div>
+        <p class="etape">Étape 1 : faire apparaître \(\ln(1 + v)\)</p>
+        \[ \frac{n^2 + 1}{n^2 + 2} = 1 - \frac{1}{n^2 + 2} \qquad\Longrightarrow\qquad u_n = \ln\left(1 - \frac{1}{n^2 + 2}\right) \]
+        <div class="rappel"><span class="lab">Rappel · équivalent usuel</span>\[ \ln(1 + v) \sim v \quad\text{quand } v \to 0 \]</div>
+        <p class="etape">Étape 2 : on applique</p>
+        <p>Ici \(v = -\dfrac{1}{n^2 + 2} \to 0\).</p>
+        <div class="res">\(u_n \sim -\dfrac{1}{n^2 + 2} \sim -\dfrac{1}{n^2}\).</div>
 
         <p class="q">3) \(u_n=\dfrac{\ln(n^2+1)}{n^2+2}\)</p>
-        <p>\(\ln(n^2+1)\sim\ln(n^2)=2\ln n\) et \(n^2+2\sim n^2\).</p>
-        <div class="res">\(u_n\sim\dfrac{2\ln n}{n^2}\).</div>
+        <p>Au numérateur : \(\ln(n^2 + 1) \sim \ln(n^2) = 2\ln n\). Au dénominateur : \(n^2 + 2 \sim n^2\).</p>
+        <div class="res">\(u_n \sim \dfrac{2\ln n}{n^2}\).</div>
 
         <p class="q">4) \(u_n=\sqrt{n^2+n+1}-\sqrt{n^2-n+1}\)</p>
-        <p>Quantité conjuguée : \(u_n=\dfrac{(n^2+n+1)-(n^2-n+1)}{\sqrt{n^2+n+1}+\sqrt{n^2-n+1}}=\dfrac{2n}{\sqrt{n^2+n+1}+\sqrt{n^2-n+1}}\).
-        Le dénominateur \(\sim n+n=2n\) (chaque racine \(\sim n\)), donc \(u_n\sim\dfrac{2n}{2n}=1\).</p>
-        <div class="res">\(u_n\sim1\) (et \(u_n\to1\)).</div>
+        <p class="etape">Étape 1 : quantité conjuguée</p>
+        <p>On évite de soustraire deux équivalents (qui valent tous les deux \(n\)) :</p>
+        \[ u_n = \frac{(n^2 + n + 1) - (n^2 - n + 1)}{\sqrt{n^2 + n + 1} + \sqrt{n^2 - n + 1}} = \frac{2n}{\sqrt{n^2 + n + 1} + \sqrt{n^2 - n + 1}} \]
+        <p class="etape">Étape 2 : équivalent</p>
+        <p>Chaque racine est équivalente à \(n\), donc le dénominateur à \(2n\).</p>
+        <div class="res">\(u_n \sim \dfrac{2n}{2n} = 1\) (et \(u_n \to 1\)).</div>
 
         <p class="q">5) \(u_n=\displaystyle\sum_{k=0}^n k!\)</p>
-        <p>Le dernier terme \(n!\) écrase tous les précédents : \(\dfrac{(n-1)!}{n!}=\dfrac1n\to0\), donc
-        \(\displaystyle\sum_{k=0}^{n-1}k!=o(n!)\), et \(u_n=n!+o(n!)\).</p>
-        <div class="res">\(u_n\sim n!\).</div>
+        <p>Le dernier terme écrase les précédents : \(\dfrac{(n-1)!}{n!} = \dfrac1n \to 0\), donc \(\displaystyle\sum_{k=0}^{n-1} k! = o(n!)\) (chaque terme précédent est encore plus petit que \((n-1)!\)).</p>
+        <div class="res">\(u_n = n! + o(n!)\), donc \(u_n \sim n!\).</div>
 
         <p class="q">6) \(u_n=\dfrac{n^{\sqrt{n+1}}}{(n+1)^{\sqrt n}}\) (marqué « à revoir » par l'énoncé)</p>
-        <p>On passe au log : \(\ln u_n=\sqrt{n+1}\ln n-\sqrt n\,\ln(n+1)\). Avec
-        \(\sqrt{n+1}=\sqrt n\big(1+\tfrac1{2n}+o(\tfrac1n)\big)\) et \(\ln(n+1)=\ln n+\tfrac1n+o(\tfrac1n)\) :</p>
-        <p>\(\ln u_n=\Big(\sqrt n+\dfrac1{2\sqrt n}\Big)\ln n-\sqrt n\Big(\ln n+\dfrac1n\Big)+o\Big(\dfrac1{\sqrt n}\Big)
-        =\dfrac{\ln n}{2\sqrt n}-\dfrac1{\sqrt n}+o\Big(\dfrac1{\sqrt n}\Big)\xrightarrow[n\to\infty]{}0\)
-        (car \(\ln n=o(\sqrt n)\)).</p>
-        <p>Donc \(\ln u_n\to0\), c'est-à-dire \(u_n\to1\) : la limite est <b>finie non nulle</b>, donc l'équivalent
-        le plus simple de \(u_n\) est la constante \(1\) elle-même.</p>
-        <div class="res">\(u_n\sim1\) (et \(u_n\to1\)) : c'est un des rares cas où l'équivalent le plus simple
-        est une constante.</div>
+        <p class="etape">Étape 1 : passer au logarithme</p>
+        \[ \ln u_n = \sqrt{n+1}\,\ln n - \sqrt n\,\ln(n+1) \]
+        <p class="etape">Étape 2 : développer</p>
+        \[ \sqrt{n+1} = \sqrt n\left(1 + \frac{1}{2n} + o\Big(\frac1n\Big)\right) \qquad \ln(n+1) = \ln n + \frac1n + o\Big(\frac1n\Big) \]
+        \[ \ln u_n = \left(\sqrt n + \frac{1}{2\sqrt n}\right)\ln n - \sqrt n\left(\ln n + \frac1n\right) + o\Big(\frac{1}{\sqrt n}\Big) \]
+        \[ \ln u_n = \frac{\ln n}{2\sqrt n} - \frac{1}{\sqrt n} + o\Big(\frac{1}{\sqrt n}\Big) \]
+        <p class="etape">Étape 3 : limite</p>
+        <p>\(\ln n = o(\sqrt n)\), donc \(\ln u_n \to 0\), c'est-à-dire \(u_n \to 1\).</p>
+        <div class="res">\(u_n \sim 1\) (et \(u_n \to 1\)) : l'équivalent le plus simple est la constante 1.</div>
       </div>
     </div>
 
@@ -384,23 +410,29 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 3 — Limites de suites</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <figure><img src="td1-img/ex3.png" alt="Énoncé — Exercice 3, quatre limites de suites" loading="lazy"></figure>
+
         <p class="q">1) \(u_n=\sqrt{n^2-1}-n\)</p>
-        <p>\(u_n=n\sqrt{1-\tfrac1{n^2}}-n=n\Big(1-\dfrac1{2n^2}+o\Big(\dfrac1{n^2}\Big)\Big)-n=-\dfrac1{2n}+o\Big(\dfrac1n\Big)\).</p>
-        <div class="res">\(\lim u_n=0\).</div>
+        <div class="rappel"><span class="lab">Rappel · DL usuel</span>\[ \sqrt{1 + v} = 1 + \frac{v}{2} + o(v) \]</div>
+        \[ u_n = n\sqrt{1 - \frac{1}{n^2}} - n = n\left(1 - \frac{1}{2n^2} + o\Big(\frac{1}{n^2}\Big)\right) - n = -\frac{1}{2n} + o\Big(\frac1n\Big) \]
+        <div class="res">\(\lim u_n = 0\).</div>
 
         <p class="q">2) \(u_n=\dfrac{(n+2)!}{(n^2+1)\,n!}\)</p>
-        <p>\((n+2)!=(n+1)(n+2)\,n!\), donc \(u_n=\dfrac{(n+1)(n+2)}{n^2+1}=\dfrac{n^2+3n+2}{n^2+1}\).</p>
-        <div class="res">\(\lim u_n=1\) (numérateur et dénominateur \(\sim n^2\)).</div>
+        <p>\((n+2)! = (n+2)(n+1)\,n!\), donc :</p>
+        \[ u_n = \frac{(n+1)(n+2)}{n^2 + 1} = \frac{n^2 + 3n + 2}{n^2 + 1} \]
+        <div class="res">\(\lim u_n = 1\) (numérateur et dénominateur équivalents à \(n^2\)).</div>
 
         <p class="q">3) \(u_n=n\big(\sqrt[n]3-\sqrt[n]5\big)\)</p>
-        <p>\(\sqrt[n]3=e^{\frac{\ln3}n}=1+\dfrac{\ln3}n+o\Big(\dfrac1n\Big)\) et de même pour \(\sqrt[n]5\), donc
-        \(\sqrt[n]3-\sqrt[n]5=\dfrac{\ln3-\ln5}n+o\Big(\dfrac1n\Big)\), d'où \(u_n=\ln3-\ln5+o(1)\).</p>
-        <div class="res">\(\lim u_n=\ln\dfrac35\) (valeur négative, car \(3<5\)).</div>
+        <div class="rappel"><span class="lab">Rappel · DL usuel</span>\[ e^v = 1 + v + o(v) \]</div>
+        \[ \sqrt[n]{3} = e^{\frac{\ln 3}{n}} = 1 + \frac{\ln 3}{n} + o\Big(\frac1n\Big) \qquad \sqrt[n]{5} = 1 + \frac{\ln 5}{n} + o\Big(\frac1n\Big) \]
+        \[ u_n = n\left(\frac{\ln 3 - \ln 5}{n} + o\Big(\frac1n\Big)\right) = \ln 3 - \ln 5 + o(1) \]
+        <div class="res">\(\lim u_n = \ln\dfrac35\) (négatif, car \(3 &lt; 5\)).</div>
 
         <p class="q">4) \(u_n=\dfrac{\cos(1/n)-1}{\big(e^{1/n}-1\big)\sin(1/n)}\)</p>
-        <p>En posant \(h=1/n\to0\) : \(\cos h-1\sim-\dfrac{h^2}2\), \(e^h-1\sim h\), \(\sin h\sim h\), donc le
-        dénominateur \(\sim h^2\) et \(u_n\sim\dfrac{-h^2/2}{h^2}=-\dfrac12\).</p>
-        <div class="res">\(\lim u_n=-\dfrac12\).</div>
+        <p>On pose \(h = 1/n \to 0\).</p>
+        <div class="rappel"><span class="lab">Rappel · équivalents usuels en 0</span>\[ \cos h - 1 \sim -\frac{h^2}{2} \qquad e^h - 1 \sim h \qquad \sin h \sim h \]</div>
+        <p>Le dénominateur est équivalent à \(h\times h = h^2\) :</p>
+        \[ u_n \sim \frac{-h^2/2}{h^2} = -\frac12 \]
+        <div class="res">\(\lim u_n = -\dfrac12\).</div>
       </div>
     </div>
 
@@ -409,47 +441,56 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 4 — Convergence via équivalents / croissances comparées</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <figure><img src="td1-img/ex4.png" alt="Énoncé — Exercice 4, huit suites à étudier" loading="lazy"></figure>
+
         <p class="q">(1) \(u_n=n\Big(\sqrt{1+\sin\tfrac1n}-\cos\tfrac1n\Big)\)</p>
-        <p>Avec \(h=1/n\to0\) : \(\sin h=h-\tfrac{h^3}6+o(h^3)\), donc
-        \(\sqrt{1+\sin h}=1+\tfrac12\big(h-\tfrac{h^3}6\big)-\tfrac18h^2+o(h^2)=1+\tfrac h2-\tfrac{h^2}8+o(h^2)\),
-        et \(\cos h=1-\tfrac{h^2}2+o(h^2)\).</p>
-        <p>Différence : \(\sqrt{1+\sin h}-\cos h=\tfrac h2-\tfrac{h^2}8+\tfrac{h^2}2+o(h^2)=\tfrac h2+\tfrac{3h^2}8+o(h^2)\).
-        Donc \(u_n=n\big(\tfrac h2+\tfrac{3h^2}8+o(h^2)\big)=\tfrac12+\tfrac{3h}8+o(h)\) (car \(nh=1\)).</p>
-        <div class="res">\(u_n\to\dfrac12\) : la suite <b>converge</b> vers \(\tfrac12\).</div>
+        <p>On pose \(h = 1/n\), donc \(nh = 1\).</p>
+        <p class="etape">Étape 1 : DL de \(\sqrt{1 + \sin h}\)</p>
+        <p>\(\sin h = h + o(h^2)\), puis :</p>
+        \[ \sqrt{1 + \sin h} = 1 + \frac{h}{2} - \frac{h^2}{8} + o(h^2) \]
+        <p class="etape">Étape 2 : DL de \(\cos h\)</p>
+        \[ \cos h = 1 - \frac{h^2}{2} + o(h^2) \]
+        <p class="etape">Étape 3 : différence et multiplication par \(n\)</p>
+        \[ \sqrt{1 + \sin h} - \cos h = \frac h2 + \frac{3h^2}{8} + o(h^2) \]
+        \[ u_n = n\left(\frac h2 + \frac{3h^2}{8} + o(h^2)\right) = \frac12 + \frac{3h}{8} + o(h) \]
+        <div class="res">\(u_n \to \dfrac12\) : la suite <b>converge</b>.</div>
 
         <p class="q">(2) \(u_n=\big(e^{1/n}\big)^{\,n\ln(\cos(1/n))}\)</p>
-        <p>\(u_n=\exp\Big(\dfrac1n\cdot n\ln\big(\cos\tfrac1n\big)\Big)=\exp\Big(\ln\big(\cos\tfrac1n\big)\Big)=\cos\dfrac1n\).</p>
-        <div class="res">\(u_n\to\cos(0)=1\) : la suite <b>converge</b> vers \(1\).</div>
+        <p>On simplifie l'exposant :</p>
+        \[ u_n = \exp\left(\frac1n\times n\ln\Big(\cos\frac1n\Big)\right) = \exp\left(\ln\Big(\cos\frac1n\Big)\right) = \cos\frac1n \]
+        <div class="res">\(u_n \to \cos 0 = 1\) : la suite <b>converge</b> vers 1.</div>
 
         <p class="q">(3) \(u_n=\Big(1+\sin\tfrac1n\Big)^n\)</p>
-        <p>\(\ln u_n=n\ln\big(1+\sin\tfrac1n\big)\). Avec \(h=1/n\) : \(\sin h=h-\tfrac{h^3}6+o(h^3)\), et
-        \(\ln(1+\sin h)=\sin h-\tfrac{\sin^2h}2+o(h^2)=h-\tfrac{h^2}2+o(h^2)\) (le terme en \(h^3\) de \(\sin h\)
-        n'intervient pas à cet ordre). Donc \(n\ln(1+\sin h)=\tfrac1h\big(h-\tfrac{h^2}2\big)+o(h)=1-\tfrac h2+o(h)\to1\).</p>
-        <div class="res">\(u_n\to e^1=e\) : la suite <b>converge</b> vers \(e\).</div>
+        <div class="rappel"><span class="lab">Rappel · forme \(u^v\)</span>\[ u^v = e^{v\ln u} \]</div>
+        <p>\(\ln u_n = n\ln\left(1 + \sin\tfrac1n\right)\). Avec \(h = 1/n\) :</p>
+        \[ \ln(1 + \sin h) = \sin h - \frac{\sin^2 h}{2} + o(h^2) = h - \frac{h^2}{2} + o(h^2) \]
+        \[ n\ln(1 + \sin h) = \frac1h\left(h - \frac{h^2}{2}\right) + o(h) = 1 - \frac h2 + o(h) \to 1 \]
+        <div class="res">\(u_n \to e\) : la suite <b>converge</b> vers \(e\).</div>
 
         <p class="q">(4) \(u_n=(5n+1)^2\ln\Big(1+\dfrac1{3n^2}\Big)\)</p>
-        <p>\((5n+1)^2\sim25n^2\) et \(\ln\big(1+\tfrac1{3n^2}\big)\sim\dfrac1{3n^2}\), donc par produit
-        d'équivalents \(u_n\sim25n^2\cdot\dfrac1{3n^2}=\dfrac{25}3\).</p>
-        <div class="res">\(u_n\to\dfrac{25}3\) : la suite <b>converge</b> vers \(\dfrac{25}3\).</div>
+        <p>\((5n + 1)^2 \sim 25n^2\) et \(\ln\left(1 + \dfrac{1}{3n^2}\right) \sim \dfrac{1}{3n^2}\). Par produit d'équivalents :</p>
+        \[ u_n \sim 25n^2\times\frac{1}{3n^2} = \frac{25}{3} \]
+        <div class="res">\(u_n \to \dfrac{25}{3}\) : la suite <b>converge</b>.</div>
 
-        <p class="q">(5) \(u_n=n\ln\sqrt{\dfrac{n+1}{n-1}}=\dfrac n2\ln\Big(1+\dfrac2{n-1}\Big)\)</p>
-        <p>\(\dfrac2{n-1}\sim\dfrac2n\to0\), donc \(\ln\big(1+\tfrac2{n-1}\big)\sim\dfrac2{n-1}\sim\dfrac2n\), d'où
-        \(u_n\sim\dfrac n2\cdot\dfrac2n=1\).</p>
-        <div class="res">\(u_n\to1\) : la suite <b>converge</b> vers \(1\).</div>
+        <p class="q">(5) \(u_n=n\ln\sqrt{\dfrac{n+1}{n-1}}\)</p>
+        <p class="etape">Étape 1 : réécriture</p>
+        \[ u_n = \frac n2\ln\left(1 + \frac{2}{n-1}\right) \]
+        <p class="etape">Étape 2 : équivalent</p>
+        <p>\(\dfrac{2}{n-1} \to 0\), donc \(\ln\left(1 + \dfrac{2}{n-1}\right) \sim \dfrac{2}{n-1} \sim \dfrac2n\).</p>
+        <div class="res">\(u_n \sim \dfrac n2\times\dfrac2n = 1\) : la suite <b>converge</b> vers 1.</div>
 
         <p class="q">(6) \(u_n=n^2\Big(\sqrt{1-\tfrac1{n^2}}-1\Big)\)</p>
-        <p>\(\sqrt{1-\tfrac1{n^2}}=1-\dfrac1{2n^2}+o\Big(\dfrac1{n^2}\Big)\), donc
-        \(u_n=n^2\Big(-\dfrac1{2n^2}+o\Big(\dfrac1{n^2}\Big)\Big)=-\dfrac12+o(1)\).</p>
-        <div class="res">\(u_n\to-\dfrac12\) : la suite <b>converge</b> vers \(-\tfrac12\).</div>
+        \[ \sqrt{1 - \frac{1}{n^2}} = 1 - \frac{1}{2n^2} + o\Big(\frac{1}{n^2}\Big) \]
+        \[ u_n = n^2\left(-\frac{1}{2n^2} + o\Big(\frac{1}{n^2}\Big)\right) = -\frac12 + o(1) \]
+        <div class="res">\(u_n \to -\dfrac12\) : la suite <b>converge</b>.</div>
 
         <p class="q">(7) \(u_n=\Big(\dfrac{2n-1}{2n+1}\Big)^n\)</p>
-        <p>\(\ln u_n=n\ln\Big(1-\dfrac2{2n+1}\Big)\sim n\cdot\Big(-\dfrac2{2n+1}\Big)\sim n\cdot\Big(-\dfrac1n\Big)=-1\).</p>
-        <div class="res">\(u_n\to e^{-1}=\dfrac1e\) : la suite <b>converge</b> vers \(\dfrac1e\).</div>
+        <p>\(\ln u_n = n\ln\left(1 - \dfrac{2}{2n+1}\right) \sim n\times\left(-\dfrac{2}{2n+1}\right) \sim -1\).</p>
+        <div class="res">\(u_n \to e^{-1} = \dfrac1e\) : la suite <b>converge</b>.</div>
 
         <p class="q">(8) \(u_n=\Big(\dfrac n{n-x}\Big)^n\), \(x\in\mathbb R\) fixé</p>
-        <p>\(\ln u_n=n\ln\dfrac1{1-x/n}=-n\ln\Big(1-\dfrac xn\Big)=-n\Big(-\dfrac xn-\dfrac{x^2}{2n^2}+o\Big(\dfrac1{n^2}\Big)\Big)
-        =x+\dfrac{x^2}{2n}+o\Big(\dfrac1n\Big)\to x\).</p>
-        <div class="res">\(u_n\to e^{x}\) : la suite <b>converge</b> vers \(e^x\) pour tout \(x\in\mathbb R\).</div>
+        <p>\(\ln u_n = -n\ln\left(1 - \dfrac xn\right)\). Avec \(\ln(1 + v) = v - \dfrac{v^2}{2} + o(v^2)\) :</p>
+        \[ \ln u_n = -n\left(-\frac xn - \frac{x^2}{2n^2} + o\Big(\frac{1}{n^2}\Big)\right) = x + \frac{x^2}{2n} + o\Big(\frac1n\Big) \to x \]
+        <div class="res">\(u_n \to e^x\) pour tout \(x \in \mathbb R\) : la suite <b>converge</b>.</div>
       </div>
     </div>
 
@@ -460,11 +501,19 @@ window.MathJax = {
         <figure><img src="td1-img/ex5.png" alt="Énoncé — Exercice 5, sept fonctions à classer" loading="lazy"></figure>
         <div class="enonce">Ordonner \(f(x)=x\), \(g(x)=e^x\), \(h(x)=\tfrac1x\), \(i(x)=2\), \(j(x)=\ln x\),
         \(k(x)=\sqrt x\ln x\), \(l(x)=\dfrac{e^x}{\sqrt x}\) au voisinage de \(+\infty\).</div>
-        <p>\(h(x)\to0\) donc \(h=o(i)\). \(\ln x\to+\infty\) donc \(i=o(j)\). \(\dfrac k j=\sqrt x\to\infty\) donc
-        \(j=o(k)\). \(\dfrac fk=\dfrac{\sqrt x}{\ln x}\to\infty\) donc \(k=o(f)\). \(\dfrac lf=\dfrac{e^x}{x\sqrt x}\to\infty\)
-        (croissance comparée) donc \(f=o(l)\). \(\dfrac gl=\sqrt x\to\infty\) donc \(l=o(g)\).</p>
-        <div class="res">Ordre croissant : \(h\ll i\ll j\ll k\ll f\ll l\ll g\), c'est-à-dire
-        \[ \dfrac1x\ \ll\ 2\ \ll\ \ln x\ \ll\ \sqrt x\ln x\ \ll\ x\ \ll\ \dfrac{e^x}{\sqrt x}\ \ll\ e^x. \]</div>
+
+        <p class="q">Classement en \(+\infty\)</p>
+        <p class="etape">Étape 1 : les comparaisons</p>
+        <ul>
+          <li>\(h(x) \to 0\) alors que \(i = 2\) : \(h \ll i\).</li>
+          <li>\(\ln x \to +\infty\) : \(i \ll j\).</li>
+          <li>\(\dfrac kj = \sqrt x \to \infty\) : \(j \ll k\).</li>
+          <li>\(\dfrac fk = \dfrac{\sqrt x}{\ln x} \to \infty\) : \(k \ll f\).</li>
+          <li>\(\dfrac lf = \dfrac{e^x}{x\sqrt x} \to \infty\) (croissance comparée) : \(f \ll l\).</li>
+          <li>\(\dfrac gl = \sqrt x \to \infty\) : \(l \ll g\).</li>
+        </ul>
+        <div class="res">\[ \frac1x \ll 2 \ll \ln x \ll \sqrt x\ln x \ll x \ll \frac{e^x}{\sqrt x} \ll e^x \]
+        soit \(h \ll i \ll j \ll k \ll f \ll l \ll g\).</div>
       </div>
     </div>
 
@@ -475,57 +524,60 @@ window.MathJax = {
         <figure><img src="td1-img/ex6.png" alt="Énoncé — Exercice 6, onze fonctions à équivalenter" loading="lazy"></figure>
 
         <p class="q">1) \(f(x)=\sqrt{1-x^2}\) en \(a=1\)</p>
-        <p>\(1-x^2=(1-x)(1+x)\) et \(1+x\to2\) quand \(x\to1\), donc \(f(x)=\sqrt{(1-x)(1+x)}\sim\sqrt2\sqrt{1-x}\).</p>
-        <div class="res">\(f(x)\underset{x\to1^-}\sim\sqrt2\,\sqrt{1-x}\), et \(\lim_{x\to1}f(x)=0\).</div>
+        <p>\(1 - x^2 = (1 - x)(1 + x)\) et \(1 + x \to 2\) :</p>
+        \[ f(x) = \sqrt{(1 - x)(1 + x)} \sim \sqrt2\,\sqrt{1 - x} \]
+        <div class="res">\(f(x) \underset{x\to1^-}{\sim} \sqrt2\,\sqrt{1 - x}\), et \(\lim_{x\to1} f(x) = 0\).</div>
 
         <p class="q">2) \(f(x)=\dfrac{\ln(1+x)+x^2}{x^2+x^3}\) en \(a=0\)</p>
-        <p>Numérateur \(=x-\tfrac{x^2}2+x^2+o(x^2)=x+\tfrac{x^2}2+o(x^2)\sim x\). Dénominateur \(=x^2(1+x)\sim x^2\).</p>
-        <div class="res">\(f(x)\sim\dfrac1x\) : \(f\) n'a pas de limite en \(0\) (divergence, signe de \(1/x\)).</div>
+        <p>Numérateur : \(x - \dfrac{x^2}{2} + x^2 + o(x^2) = x + \dfrac{x^2}{2} + o(x^2) \sim x\). Dénominateur : \(x^2(1 + x) \sim x^2\).</p>
+        <div class="res">\(f(x) \sim \dfrac1x\) : pas de limite en 0 (divergence, du signe de \(1/x\)).</div>
 
         <p class="q">3) \(f(x)=\dfrac{\tan x-\sin3x}{\ln(1+x)}\) en \(a=0\)</p>
-        <p>\(\tan x=x+o(x)\), \(\sin3x=3x+o(x)\), donc le numérateur \(=x-3x+o(x)=-2x+o(x)\). Le dénominateur \(\sim x\).</p>
-        <div class="res">\(f(x)\sim-2\) et \(\lim_{x\to0}f(x)=-2\).</div>
+        <p>\(\tan x = x + o(x)\) et \(\sin 3x = 3x + o(x)\) : numérateur \(= -2x + o(x)\). Dénominateur \(\sim x\).</p>
+        <div class="res">\(f(x) \sim -2\) et \(\lim_{x\to0} f(x) = -2\).</div>
 
         <p class="q">4) \(f(x)=\dfrac{\operatorname{ch}x-1}{\arcsin^2x}\) en \(a=0\)</p>
-        <p>\(\operatorname{ch}x-1\sim\dfrac{x^2}2\) et \(\arcsin x\sim x\) donc \(\arcsin^2x\sim x^2\).</p>
-        <div class="res">\(f(x)\sim\dfrac12\) et \(\lim_{x\to0}f(x)=\dfrac12\).</div>
+        <p>\(\operatorname{ch}x - 1 \sim \dfrac{x^2}{2}\) et \(\arcsin x \sim x\), donc \(\arcsin^2 x \sim x^2\).</p>
+        <div class="res">\(f(x) \sim \dfrac12\) et \(\lim_{x\to0} f(x) = \dfrac12\).</div>
 
         <p class="q">5) \(f(x)=\dfrac{\ln x}{\sqrt x-1}\) en \(a=1\)</p>
-        <p>Posons \(x=1+h\), \(h\to0\) : \(\ln(1+h)\sim h\) et \(\sqrt{1+h}-1\sim\dfrac h2\).</p>
-        <div class="res">\(f(x)\sim2\) et \(\lim_{x\to1}f(x)=2\).</div>
+        <p>On pose \(x = 1 + h\), \(h \to 0\) : \(\ln(1 + h) \sim h\) et \(\sqrt{1 + h} - 1 \sim \dfrac h2\).</p>
+        <div class="res">\(f(x) \sim 2\) et \(\lim_{x\to1} f(x) = 2\).</div>
 
         <p class="q">6) \(f(x)=x^3\arctan\big(e^{-x}\big)\) en \(a=+\infty\)</p>
-        <p>\(e^{-x}\to0\) donc \(\arctan(e^{-x})\sim e^{-x}\), d'où \(f(x)\sim x^3e^{-x}\to0\) (croissance comparée,
-        l'exponentielle décroissante l'emporte sur le polynôme).</p>
-        <div class="res">\(f(x)\sim x^3e^{-x}\) et \(\lim_{x\to+\infty}f(x)=0\).</div>
+        <p>\(e^{-x} \to 0\), donc \(\arctan(e^{-x}) \sim e^{-x}\).</p>
+        <div class="res">\(f(x) \sim x^3e^{-x}\), et \(\lim_{x\to+\infty} f(x) = 0\) (l'exponentielle l'emporte sur le polynôme).</div>
 
         <p class="q">7) \(f(x)=\dfrac{\sqrt{x+1}-\sqrt x}{\ln\Big(\dfrac{e^x-1}{e^x+1}\Big)}\) en \(a=+\infty\)</p>
-        <p>Numérateur \(=\dfrac1{\sqrt{x+1}+\sqrt x}\sim\dfrac1{2\sqrt x}\). Pour le dénominateur :
-        \(\dfrac{e^x-1}{e^x+1}=1-\dfrac2{e^x+1}\sim1-2e^{-x}\), donc \(\ln\big(1-2e^{-x}\big)\sim-2e^{-x}\).</p>
-        <div class="res">\(f(x)\sim\dfrac{1/(2\sqrt x)}{-2e^{-x}}=-\dfrac{e^x}{4\sqrt x}\) et \(\lim_{x\to+\infty}f(x)=-\infty\).</div>
+        <p class="etape">Étape 1 : numérateur</p>
+        \[ \sqrt{x+1} - \sqrt x = \frac{1}{\sqrt{x+1} + \sqrt x} \sim \frac{1}{2\sqrt x} \]
+        <p class="etape">Étape 2 : dénominateur</p>
+        \[ \frac{e^x - 1}{e^x + 1} = 1 - \frac{2}{e^x + 1} \sim 1 - 2e^{-x} \qquad\Longrightarrow\qquad \ln\left(1 - 2e^{-x}\right) \sim -2e^{-x} \]
+        <div class="res">\(f(x) \sim \dfrac{1/(2\sqrt x)}{-2e^{-x}} = -\dfrac{e^x}{4\sqrt x}\), et \(\lim_{x\to+\infty} f(x) = -\infty\).</div>
 
         <p class="q">8) \(f(x)=\dfrac{\sqrt{x^3-1}}{\sqrt[3]{x^2+2}}\) en \(a=+\infty\)</p>
         <p>Numérateur \(\sim x^{3/2}\), dénominateur \(\sim x^{2/3}\).</p>
-        <div class="res">\(f(x)\sim x^{3/2-2/3}=x^{5/6}\) et \(\lim_{x\to+\infty}f(x)=+\infty\).</div>
+        <div class="res">\(f(x) \sim x^{3/2 - 2/3} = x^{5/6}\), et \(\lim_{x\to+\infty} f(x) = +\infty\).</div>
 
         <p class="q">9) \(f(x)=\dfrac1{\cos x}-\tan x\) en \(a=\dfrac\pi2\)</p>
-        <p>On pose \(x=\tfrac\pi2-h\), \(h\to0\) : \(\cos x=\sin h\sim h\), \(\sin x=\cos h\sim1-\tfrac{h^2}2\), et
-        \(f(x)=\dfrac{1-\sin x}{\cos x}=\dfrac{1-\cos h}{\sin h}\sim\dfrac{h^2/2}{h}=\dfrac h2\).</p>
-        <div class="res">\(f(x)\underset{x\to\pi/2}\sim\dfrac12\Big(\dfrac\pi2-x\Big)\) et \(\lim_{x\to\pi/2}f(x)=0\).</div>
+        <p class="etape">Étape 1 : un seul quotient</p>
+        \[ f(x) = \frac{1 - \sin x}{\cos x} \]
+        <p class="etape">Étape 2 : changement de variable</p>
+        <p>On pose \(x = \dfrac\pi2 - h\), \(h \to 0\) : \(\cos x = \sin h\) et \(\sin x = \cos h\).</p>
+        \[ f(x) = \frac{1 - \cos h}{\sin h} \sim \frac{h^2/2}{h} = \frac h2 \]
+        <div class="res">\(f(x) \underset{x\to\pi/2}{\sim} \dfrac12\left(\dfrac\pi2 - x\right)\), et \(\lim_{x\to\pi/2} f(x) = 0\).</div>
 
         <p class="q">10) \(f(x)=\Big(1+\dfrac\lambda x\Big)^x\) en \(a=+\infty\), \(\lambda\in\mathbb R\)</p>
-        <p>\(\ln f(x)=x\ln\big(1+\tfrac\lambda x\big)=x\Big(\dfrac\lambda x-\dfrac{\lambda^2}{2x^2}+o\Big(\dfrac1{x^2}\Big)\Big)
-        =\lambda-\dfrac{\lambda^2}{2x}+o\Big(\dfrac1x\Big)\to\lambda\).</p>
-        <div class="res">\(f(x)\sim e^\lambda\) et \(\lim_{x\to+\infty}f(x)=e^\lambda\) (pour \(\lambda=0\), \(f\equiv1\)).</div>
+        \[ \ln f(x) = x\ln\left(1 + \frac\lambda x\right) = x\left(\frac\lambda x - \frac{\lambda^2}{2x^2} + o\Big(\frac{1}{x^2}\Big)\right) = \lambda - \frac{\lambda^2}{2x} + o\Big(\frac1x\Big) \to \lambda \]
+        <div class="res">\(f(x) \sim e^\lambda\), et \(\lim_{x\to+\infty} f(x) = e^\lambda\) (pour \(\lambda = 0\), \(f \equiv 1\)).</div>
 
         <p class="q">11) \(f(x)=\Big(1+\sin\dfrac{\ln x}x\Big)^{x/\ln x}\) en \(a=+\infty\) <em>(marqué « à faire ? »)</em></p>
-        <p>Posons \(t=\dfrac{\ln x}x\to0^+\). Alors \(\sin t=t+o(t)\), et
-        \(\ln(1+\sin t)=\sin t-\dfrac{\sin^2t}2+o(t^2)=t-\dfrac{t^2}2+o(t^2)\). L'exposant vaut
-        \(\dfrac x{\ln x}\Big(t-\dfrac{t^2}2\Big)=\dfrac x{\ln x}\cdot t-\dfrac x{2\ln x}\,t^2\).</p>
-        <p>Or \(\dfrac x{\ln x}\cdot t=\dfrac x{\ln x}\cdot\dfrac{\ln x}x=1\) exactement, et
-        \(\dfrac x{2\ln x}\,t^2=\dfrac x{2\ln x}\cdot\dfrac{\ln^2x}{x^2}=\dfrac{\ln x}{2x}\to0\). L'exposant tend
-        donc vers \(1-0=1\).</p>
-        <div class="res">\(\lim_{x\to+\infty}f(x)=e^1=e\).</div>
+        <p class="etape">Étape 1 : variable</p>
+        <p>On pose \(t = \dfrac{\ln x}{x} \to 0^+\), et l'exposant vaut \(1/t\).</p>
+        <p class="etape">Étape 2 : DL de l'exposant</p>
+        \[ \ln(1 + \sin t) = t - \frac{t^2}{2} + o(t^2) \qquad\Longrightarrow\qquad \ln f = \frac1t\left(t - \frac{t^2}{2}\right) + o(t) = 1 - \frac t2 + o(t) \]
+        <p>Donc \(\ln f(x) \to 1\) (on a même \(\dfrac{x}{2\ln x}\,t^2 = \dfrac{\ln x}{2x} \to 0\)).</p>
+        <div class="res">\(\lim_{x\to+\infty} f(x) = e\).</div>
       </div>
     </div>
 
@@ -536,25 +588,31 @@ window.MathJax = {
         <figure><img src="td1-img/ex7.png" alt="Énoncé — Exercice 7, encadrements de ln(1+x) et de la racine cubique" loading="lazy"></figure>
 
         <p class="q">1) Encadrement de \(\ln(1+x)\)</p>
-        <p>Pour \(f(t)=\ln(1+t)\) : \(f'(t)=\tfrac1{1+t}\), \(f''(t)=-\tfrac1{(1+t)^2}\), \(f'''(t)=\tfrac2{(1+t)^3}\).
-        Taylor avec reste intégral à l'ordre \(2\) en \(a=0\) :
-        \[ \ln(1+x)=x-\frac{x^2}2+\int_0^x\frac{f'''(t)}{2!}(x-t)^2\,dt=x-\frac{x^2}2+\int_0^x\frac{(x-t)^2}{(1+t)^3}\,dt. \]</p>
-        <p>Pour \(x\geqslant0\) et \(t\in[0,x]\), on a \(1\leqslant1+t\leqslant1+x\) donc
-        \(\dfrac1{(1+x)^3}\leqslant\dfrac1{(1+t)^3}\leqslant1\). En intégrant (bornes croissantes car \(x\geqslant0\)) :
-        \[ \frac1{(1+x)^3}\int_0^x(x-t)^2\,dt\ \leqslant\ \int_0^x\frac{(x-t)^2}{(1+t)^3}\,dt\ \leqslant\ \int_0^x(x-t)^2\,dt. \]
-        Or \(\displaystyle\int_0^x(x-t)^2\,dt=\Big[-\frac{(x-t)^3}3\Big]_0^x=\frac{x^3}3\).</p>
-        <div class="res">On obtient \(x-\dfrac{x^2}2+\dfrac{x^3}{3(1+x)^3}\leqslant\ln(1+x)\leqslant x-\dfrac{x^2}2+\dfrac{x^3}3\),
-        ce qui donne <b>\(P(x)=x-\dfrac{x^2}2+\dfrac{x^3}3\)</b>.</div>
+        <p class="etape">Étape 1 : formule de Taylor avec reste intégral</p>
+        <div class="rappel"><span class="lab">Rappel · Taylor avec reste intégral (ordre 2)</span>\[ f(x) = f(0) + f'(0)x + \frac{f''(0)}{2}x^2 + \int_0^x \frac{f'''(t)}{2!}(x - t)^2\,dt \]</div>
+        <p>Pour \(f(t) = \ln(1 + t)\) : \(f' = \dfrac{1}{1+t}\), \(f'' = -\dfrac{1}{(1+t)^2}\), \(f''' = \dfrac{2}{(1+t)^3}\).</p>
+        \[ \ln(1 + x) = x - \frac{x^2}{2} + \int_0^x \frac{(x - t)^2}{(1 + t)^3}\,dt \]
+        <p class="etape">Étape 2 : encadrer le reste (pour \(x \ge 0\))</p>
+        <p>Pour \(t \in [0, x]\) : \(1 \le 1 + t \le 1 + x\), donc \(\dfrac{1}{(1+x)^3} \le \dfrac{1}{(1+t)^3} \le 1\). On multiplie par \((x - t)^2 \ge 0\) et on intègre (bornes croissantes) :</p>
+        \[ \frac{1}{(1+x)^3}\int_0^x (x - t)^2\,dt \le \int_0^x \frac{(x - t)^2}{(1 + t)^3}\,dt \le \int_0^x (x - t)^2\,dt \]
+        <p>Or \(\displaystyle\int_0^x (x - t)^2\,dt = \left[-\frac{(x - t)^3}{3}\right]_0^x = \frac{x^3}{3}\).</p>
+        <div class="res">\[ x - \frac{x^2}{2} + \frac{x^3}{3(1 + x)^3} \le \ln(1 + x) \le x - \frac{x^2}{2} + \frac{x^3}{3} \]
+        d'où \(P(x) = x - \dfrac{x^2}{2} + \dfrac{x^3}{3}\).</div>
 
         <p class="q">2) Encadrement de \(\sqrt[3]{1+x}\)</p>
-        <p>Pour \(g(t)=(1+t)^{1/3}\) : \(g(0)=1\), \(g'(t)=\tfrac13(1+t)^{-2/3}\) donc \(g'(0)=\tfrac13\),
-        \(g''(t)=-\tfrac29(1+t)^{-5/3}\) donc \(g''(0)=-\tfrac29\), et \(g'''(t)=\tfrac{10}{27}(1+t)^{-8/3}\).</p>
-        <p>Taylor reste intégral à l'ordre 2 : \(g(x)=1+\dfrac x3-\dfrac{x^2}9+\displaystyle\int_0^x\dfrac{g'''(t)}2(x-t)^2\,dt
-        =1+\dfrac x3-\dfrac{x^2}9+\dfrac5{27}\displaystyle\int_0^x\dfrac{(x-t)^2}{(1+t)^{8/3}}\,dt\).</p>
-        <p>Pour \(x\geqslant0,\ t\in[0,x]\) : \((1+t)^{8/3}\geqslant1\) donc l'intégrande est \(\leqslant(x-t)^2\), d'où
-        le reste est \(\leqslant\dfrac5{27}\cdot\dfrac{x^3}3=\dfrac{5x^3}{81}\).</p>
-        <div class="res">On obtient \(0\leqslant\sqrt[3]{1+x}\leqslant1+\dfrac x3-\dfrac{x^2}9+\dfrac{5x^3}{81}\)
-        (le « \(0\leqslant\) » est immédiat car \(1+x\geqslant0\)), soit <b>\(Q(x)=1+\dfrac x3-\dfrac{x^2}9+\dfrac{5x^3}{81}\)</b>.</div>
+        <p class="etape">Étape 1 : dérivées de \(g(t) = (1 + t)^{1/3}\)</p>
+        <ul>
+          <li>\(g(0) = 1\) ;</li>
+          <li>\(g'(t) = \frac13(1 + t)^{-2/3}\), donc \(g'(0) = \frac13\) ;</li>
+          <li>\(g''(t) = -\frac29(1 + t)^{-5/3}\), donc \(g''(0) = -\frac29\) ;</li>
+          <li>\(g'''(t) = \frac{10}{27}(1 + t)^{-8/3}\).</li>
+        </ul>
+        <p class="etape">Étape 2 : Taylor à l'ordre 2</p>
+        \[ g(x) = 1 + \frac x3 - \frac{x^2}{9} + \frac{5}{27}\int_0^x \frac{(x - t)^2}{(1 + t)^{8/3}}\,dt \]
+        <p class="etape">Étape 3 : majorer le reste (pour \(x \ge 0\))</p>
+        <p>\((1 + t)^{8/3} \ge 1\), donc l'intégrande est majorée par \((x - t)^2\) et le reste par \(\dfrac{5}{27}\times\dfrac{x^3}{3} = \dfrac{5x^3}{81}\).</p>
+        <div class="res">\[ 0 \le \sqrt[3]{1 + x} \le 1 + \frac x3 - \frac{x^2}{9} + \frac{5x^3}{81} \]
+        d'où \(Q(x) = 1 + \dfrac x3 - \dfrac{x^2}{9} + \dfrac{5x^3}{81}\). (La minoration par 0 est immédiate, car \(1 + x \ge 0\).)</div>
       </div>
     </div>
 
@@ -563,99 +621,126 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 8 — Seize développements limités en 0</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <figure><img src="td1-img/ex8.png" alt="Énoncé — Exercice 8, seize fonctions à développer" loading="lazy"></figure>
+<p class="q">1) \(f(x)=\cos x\cdot e^x\) [ordre 3]</p>
+        <div class="rappel"><span class="lab">Rappel · DL usuels en 0</span>\[ e^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \frac{x^4}{24} + \cdots \qquad \cos x = 1 - \frac{x^2}{2} + \frac{x^4}{24} - \cdots \qquad \sin x = x - \frac{x^3}{6} + \frac{x^5}{120} - \cdots \]
+        \[ \ln(1 + x) = x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots \qquad \frac{1}{1 + x} = 1 - x + x^2 - x^3 + \cdots \qquad (1 + x)^\alpha = 1 + \alpha x + \frac{\alpha(\alpha - 1)}{2}x^2 + \cdots \]</div>
 
-        <p class="q">1) \(f(x)=\cos x\cdot e^x\) [ordre 3]</p>
-        <p>\(\cos x=1-\tfrac{x^2}2+o(x^3)\), \(e^x=1+x+\tfrac{x^2}2+\tfrac{x^3}6+o(x^3)\). Produit tronqué à l'ordre 3 :
-        \(1\cdot(1+x+\tfrac{x^2}2+\tfrac{x^3}6)-\tfrac{x^2}2(1+x)=1+x+\tfrac{x^2}2+\tfrac{x^3}6-\tfrac{x^2}2-\tfrac{x^3}2\).</p>
-        <div class="res">\(\cos x\,e^x=1+x-\dfrac{x^3}3+o(x^3)\).</div>
+        
+        <p>\(\cos x = 1 - \dfrac{x^2}{2} + o(x^3)\) et \(e^x = 1 + x + \dfrac{x^2}{2} + \dfrac{x^3}{6} + o(x^3)\). Produit tronqué à l'ordre 3 :</p>
+        \[ \left(1 + x + \frac{x^2}{2} + \frac{x^3}{6}\right) - \frac{x^2}{2}(1 + x) = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} - \frac{x^2}{2} - \frac{x^3}{2} \]
+        <div class="res">\(\cos x\,e^x = 1 + x - \dfrac{x^3}{3} + o(x^3)\).</div>
 
         <p class="q">2) \(f(x)=\ln(1+x^2)\) [ordre 6]</p>
-        <p>On compose \(\ln(1+u)=u-\tfrac{u^2}2+\tfrac{u^3}3+o(u^3)\) avec \(u=x^2\).</p>
-        <div class="res">\(\ln(1+x^2)=x^2-\dfrac{x^4}2+\dfrac{x^6}3+o(x^6)\).</div>
+        <p>On remplace \(x\) par \(u = x^2\) dans \(\ln(1 + u) = u - \dfrac{u^2}{2} + \dfrac{u^3}{3} + o(u^3)\).</p>
+        <div class="res">\(\ln(1 + x^2) = x^2 - \dfrac{x^4}{2} + \dfrac{x^6}{3} + o(x^6)\).</div>
 
         <p class="q">3) \(f(x)=\sin(2x)+\cos(x^2)\) [ordre 7]</p>
-        <p>\(\sin(2x)=2x-\tfrac{(2x)^3}6+\tfrac{(2x)^5}{120}-\tfrac{(2x)^7}{5040}+o(x^7)=2x-\tfrac{4x^3}3+\tfrac{4x^5}{15}-\tfrac{8x^7}{315}+o(x^7)\).
-        \(\cos(x^2)=1-\tfrac{x^4}2+o(x^7)\) (le terme suivant est en \(x^8\), hors ordre).</p>
-        <div class="res">\(\sin(2x)+\cos(x^2)=1+2x-\dfrac{4x^3}3-\dfrac{x^4}2+\dfrac{4x^5}{15}-\dfrac{8x^7}{315}+o(x^7)\)
-        (pas de terme en \(x^6\)).</div>
+        <p class="etape">Étape 1 : \(\sin 2x\)</p>
+        \[ \sin(2x) = 2x - \frac{(2x)^3}{6} + \frac{(2x)^5}{120} - \frac{(2x)^7}{5040} + o(x^7) = 2x - \frac{4x^3}{3} + \frac{4x^5}{15} - \frac{8x^7}{315} + o(x^7) \]
+        <p class="etape">Étape 2 : \(\cos(x^2)\)</p>
+        <p>\(\cos(x^2) = 1 - \dfrac{x^4}{2} + o(x^7)\) : le terme suivant est en \(x^8\).</p>
+        <div class="res">\(1 + 2x - \dfrac{4x^3}{3} - \dfrac{x^4}{2} + \dfrac{4x^5}{15} - \dfrac{8x^7}{315} + o(x^7)\) (pas de terme en \(x^2\), \(x^6\)).</div>
 
         <p class="q">4) \(f(x)=e^{3x}\sin(2x)\) [ordre 4]</p>
-        <p>\(e^{3x}=1+3x+\tfrac{9x^2}2+\tfrac{9x^3}2+\tfrac{27x^4}8+o(x^4)\), \(\sin(2x)=2x-\tfrac{4x^3}3+o(x^4)\).
-        Produit tronqué à l'ordre 4, degré par degré : \(x\!:\,2x\) ; \(x^2\!:\,6x^2\) ; \(x^3\!:\,-\tfrac43+9=\tfrac{23}3\) ;
-        \(x^4\!:\,3\cdot(-\tfrac43)+9=-4+9=5\).</p>
-        <div class="res">\(e^{3x}\sin(2x)=2x+6x^2+\dfrac{23}3x^3+5x^4+o(x^4)\).</div>
+        <p>\(e^{3x} = 1 + 3x + \dfrac{9x^2}{2} + \dfrac{9x^3}{2} + \dfrac{27x^4}{8}\) et \(\sin 2x = 2x - \dfrac{4x^3}{3} + o(x^4)\). On multiplie degré par degré :</p>
+        <ul>
+          <li>\(x\) : \(2\) ;</li>
+          <li>\(x^2\) : \(3\times2 = 6\) ;</li>
+          <li>\(x^3\) : \(\dfrac92\times2 - \dfrac43 = 9 - \dfrac43 = \dfrac{23}{3}\) ;</li>
+          <li>\(x^4\) : \(\dfrac92\times2 + 3\times\left(-\dfrac43\right) = 9 - 4 = 5\).</li>
+        </ul>
+        <div class="res">\(e^{3x}\sin 2x = 2x + 6x^2 + \dfrac{23}{3}x^3 + 5x^4 + o(x^4)\).</div>
 
         <p class="q">5) \(f(x)=\dfrac{\ln(1+x)}{1+x}\) [ordre 3]</p>
-        <p>\(\ln(1+x)=x-\tfrac{x^2}2+\tfrac{x^3}3+o(x^3)\), \(\tfrac1{1+x}=1-x+x^2-x^3+o(x^3)\). Produit tronqué :
-        \(x-x^2+x^3-\tfrac{x^2}2+\tfrac{x^3}2+\tfrac{x^3}3=x-\tfrac32x^2+\tfrac{11}6x^3\).</p>
-        <div class="res">\(\dfrac{\ln(1+x)}{1+x}=x-\dfrac32x^2+\dfrac{11}6x^3+o(x^3)\).</div>
+        <p>\(\ln(1 + x) = x - \dfrac{x^2}{2} + \dfrac{x^3}{3}\) et \(\dfrac{1}{1 + x} = 1 - x + x^2 - x^3\). Produit :</p>
+        <ul>
+          <li>\(x\) : \(1\) ;</li>
+          <li>\(x^2\) : \(-1 - \dfrac12 = -\dfrac32\) ;</li>
+          <li>\(x^3\) : \(1 + \dfrac12 + \dfrac13 = \dfrac{11}{6}\).</li>
+        </ul>
+        <div class="res">\(\dfrac{\ln(1 + x)}{1 + x} = x - \dfrac32x^2 + \dfrac{11}{6}x^3 + o(x^3)\).</div>
 
         <p class="q">6) \(f(x)=\dfrac{\operatorname{sh}x-x}{x^3}\) [ordre 6]</p>
-        <p>\(\operatorname{sh}x=x+\tfrac{x^3}6+\tfrac{x^5}{120}+\tfrac{x^7}{5040}+\tfrac{x^9}{362880}+o(x^9)\), donc
-        \(\operatorname{sh}x-x=\tfrac{x^3}6+\tfrac{x^5}{120}+\tfrac{x^7}{5040}+\tfrac{x^9}{362880}+o(x^9)\) ; on divise
-        par \(x^3\).</p>
-        <div class="res">\(\dfrac{\operatorname{sh}x-x}{x^3}=\dfrac16+\dfrac{x^2}{120}+\dfrac{x^4}{5040}+\dfrac{x^6}{362880}+o(x^6)\).</div>
+        <p>On développe \(\operatorname{sh} x\) jusqu'à \(x^9\) pour obtenir l'ordre 6 après division par \(x^3\) :</p>
+        \[ \operatorname{sh}x - x = \frac{x^3}{6} + \frac{x^5}{120} + \frac{x^7}{5040} + \frac{x^9}{362\,880} + o(x^9) \]
+        <div class="res">\(\dfrac{\operatorname{sh}x - x}{x^3} = \dfrac16 + \dfrac{x^2}{120} + \dfrac{x^4}{5040} + \dfrac{x^6}{362\,880} + o(x^6)\).</div>
 
         <p class="q">7) \(f(x)=e^{\sin x}\) [ordre 4]</p>
-        <p>\(u=\sin x=x-\tfrac{x^3}6+o(x^4)\). Alors \(u^2=x^2-\tfrac{x^4}3+o(x^4)\), \(u^3=x^3+o(x^4)\), \(u^4=x^4+o(x^4)\), et
-        \(e^u=1+u+\tfrac{u^2}2+\tfrac{u^3}6+\tfrac{u^4}{24}\) :
-        \(1+x-\tfrac{x^3}6+\tfrac{x^2}2-\tfrac{x^4}6+\tfrac{x^3}6+\tfrac{x^4}{24}\). Les termes en \(x^3\) s'annulent.</p>
-        <div class="res">\(e^{\sin x}=1+x+\dfrac{x^2}2-\dfrac{x^4}8+o(x^4)\).</div>
+        <p>On pose \(u = \sin x = x - \dfrac{x^3}{6} + o(x^4)\). Alors \(u^2 = x^2 - \dfrac{x^4}{3}\), \(u^3 = x^3\), \(u^4 = x^4\) (à l'ordre 4).</p>
+        \[ e^u = 1 + u + \frac{u^2}{2} + \frac{u^3}{6} + \frac{u^4}{24} = 1 + x - \frac{x^3}{6} + \frac{x^2}{2} - \frac{x^4}{6} + \frac{x^3}{6} + \frac{x^4}{24} \]
+        <p>Les termes en \(x^3\) s'annulent ; en \(x^4\) : \(-\dfrac16 + \dfrac1{24} = -\dfrac18\).</p>
+        <div class="res">\(e^{\sin x} = 1 + x + \dfrac{x^2}{2} - \dfrac{x^4}{8} + o(x^4)\).</div>
 
         <p class="q">8) \(f(x)=\sin^6x\) [ordre 9]</p>
-        <p>\(\sin x\) impaire \(\Rightarrow\sin^6x\) paire : les monômes de degré impair (donc \(x^7,x^9\)) sont nuls, la
-        DL à l'ordre 9 s'arrête donc en réalité au degré 8. On écrit \(\sin x=x\big(1-\tfrac{x^2}6+o(x^2)\big)\), donc
-        \(\sin^6x=x^6\big(1-\tfrac{x^2}6+o(x^2)\big)^6=x^6\big(1-x^2+o(x^2)\big)\) (formule du binôme à l'ordre 1 :
-        \((1+u)^6\approx1+6u\) avec \(u=-\tfrac{x^2}6\)).</p>
-        <div class="res">\(\sin^6x=x^6-x^8+o(x^9)\).</div>
+        <p>\(\sin x\) est impaire, donc \(\sin^6 x\) est paire : pas de terme en \(x^7\) ni \(x^9\).</p>
+        \[ \sin x = x\left(1 - \frac{x^2}{6} + o(x^2)\right) \qquad \sin^6 x = x^6\left(1 - \frac{x^2}{6} + o(x^2)\right)^6 = x^6\left(1 - x^2 + o(x^2)\right) \]
+        <p>(binôme à l'ordre 1 : \((1 + u)^6 \approx 1 + 6u\) avec \(u = -x^2/6\)).</p>
+        <div class="res">\(\sin^6 x = x^6 - x^8 + o(x^9)\).</div>
 
         <p class="q">9) \(f(x)=\ln(\cos x)\) [ordre 6]</p>
-        <p>\(\cos x-1=-\tfrac{x^2}2+\tfrac{x^4}{24}-\tfrac{x^6}{720}+o(x^6)=u\). Alors
-        \(\ln(1+u)=u-\tfrac{u^2}2+\tfrac{u^3}3+o(x^6)\), avec \(u^2=\tfrac{x^4}4-\tfrac{x^6}{24}+o(x^6)\) et
-        \(u^3=-\tfrac{x^6}8+o(x^6)\). En rassemblant les degrés 4 et 6 : coefficient de \(x^4\) :
-        \(\tfrac1{24}-\tfrac18=-\tfrac1{12}\) ; coefficient de \(x^6\) : \(-\tfrac1{720}+\tfrac1{48}-\tfrac1{24}=-\tfrac1{45}\)
-        (au dénominateur commun 720).</p>
-        <div class="res">\(\ln(\cos x)=-\dfrac{x^2}2-\dfrac{x^4}{12}-\dfrac{x^6}{45}+o(x^6)\).</div>
+        <p class="etape">Étape 1 : poser \(u\)</p>
+        \[ u = \cos x - 1 = -\frac{x^2}{2} + \frac{x^4}{24} - \frac{x^6}{720} + o(x^6) \]
+        <p class="etape">Étape 2 : puissances de \(u\)</p>
+        \[ u^2 = \frac{x^4}{4} - \frac{x^6}{24} + o(x^6) \qquad u^3 = -\frac{x^6}{8} + o(x^6) \]
+        <p class="etape">Étape 3 : \(\ln(1 + u) = u - \frac{u^2}{2} + \frac{u^3}{3}\)</p>
+        <ul>
+          <li>\(x^2\) : \(-\dfrac12\) ;</li>
+          <li>\(x^4\) : \(\dfrac{1}{24} - \dfrac18 = -\dfrac{1}{12}\) ;</li>
+          <li>\(x^6\) : \(-\dfrac{1}{720} + \dfrac{1}{48} - \dfrac{1}{24} = \dfrac{-1 + 15 - 30}{720} = -\dfrac{1}{45}\).</li>
+        </ul>
+        <div class="res">\(\ln(\cos x) = -\dfrac{x^2}{2} - \dfrac{x^4}{12} - \dfrac{x^6}{45} + o(x^6)\).</div>
 
         <p class="q">10) \(f(x)=\dfrac1{\cos x}\) [ordre 4]</p>
-        <p>\(1/(1-v)=1+v+v^2+o(v^2)\) avec \(v=\tfrac{x^2}2-\tfrac{x^4}{24}\) (donc \(\cos x=1-v\)) :
-        \(v^2=\tfrac{x^4}4+o(x^4)\), donc \(1+v+v^2=1+\tfrac{x^2}2-\tfrac{x^4}{24}+\tfrac{x^4}4=1+\tfrac{x^2}2+\tfrac{5x^4}{24}\).</p>
-        <div class="res">\(\dfrac1{\cos x}=1+\dfrac{x^2}2+\dfrac5{24}x^4+o(x^4)\).</div>
+        <p>On écrit \(\cos x = 1 - v\) avec \(v = \dfrac{x^2}{2} - \dfrac{x^4}{24}\), et \(\dfrac{1}{1 - v} = 1 + v + v^2 + o(v^2)\) avec \(v^2 = \dfrac{x^4}{4}\) :</p>
+        \[ 1 + \frac{x^2}{2} - \frac{x^4}{24} + \frac{x^4}{4} = 1 + \frac{x^2}{2} + \frac{5x^4}{24} \]
+        <div class="res">\(\dfrac{1}{\cos x} = 1 + \dfrac{x^2}{2} + \dfrac{5}{24}x^4 + o(x^4)\).</div>
 
         <p class="q">11) \(f(x)=\tan x\) [ordre 5]</p>
-        <p>\(\tan x=\dfrac{\sin x}{\cos x}=\dfrac{x-\frac{x^3}6+\frac{x^5}{120}+o(x^5)}{1-\frac{x^2}2+\frac{x^4}{24}+o(x^4)}\).
-        On multiplie par le DL de \(1/\cos x\) obtenu ci-dessus (à l'ordre 4) : produit tronqué à l'ordre 5.</p>
-        <div class="res">\(\tan x=x+\dfrac{x^3}3+\dfrac2{15}x^5+o(x^5)\) (valeur usuelle, à connaître).</div>
+        <p>\(\tan x = \sin x\times\dfrac{1}{\cos x}\), avec \(\sin x = x - \dfrac{x^3}{6} + \dfrac{x^5}{120}\) et le DL de la question 10. Produit tronqué à l'ordre 5 :</p>
+        <ul>
+          <li>\(x\) : \(1\) ;</li>
+          <li>\(x^3\) : \(\dfrac12 - \dfrac16 = \dfrac13\) ;</li>
+          <li>\(x^5\) : \(\dfrac{5}{24} - \dfrac{1}{12} + \dfrac{1}{120} = \dfrac{25 - 10 + 1}{120} = \dfrac{2}{15}\).</li>
+        </ul>
+        <div class="res">\(\tan x = x + \dfrac{x^3}{3} + \dfrac{2}{15}x^5 + o(x^5)\) (DL usuel à connaître).</div>
 
         <p class="q">12) \(f(x)=\dfrac{\sin x}{\operatorname{sh}x}\) [ordre 4]</p>
-        <p>\(\dfrac{x-\frac{x^3}6+o(x^4)}{x+\frac{x^3}6+o(x^4)}=\dfrac{1-\frac{x^2}6}{1+\frac{x^2}6}+o(x^4)
-        =\big(1-\tfrac{x^2}6\big)\big(1-\tfrac{x^2}6+\tfrac{x^4}{36}\big)+o(x^4)=1-\tfrac{x^2}3+\tfrac{x^4}{18}+o(x^4)\)
-        (fonction paire : que des puissances paires).</p>
-        <div class="res">\(\dfrac{\sin x}{\operatorname{sh}x}=1-\dfrac{x^2}3+\dfrac{x^4}{18}+o(x^4)\).</div>
+        <p>On factorise \(x\) : \(\dfrac{1 - x^2/6}{1 + x^2/6} + o(x^4)\). Avec \(\dfrac{1}{1 + w} = 1 - w + w^2\), \(w = \dfrac{x^2}{6}\) :</p>
+        \[ \left(1 - \frac{x^2}{6}\right)\left(1 - \frac{x^2}{6} + \frac{x^4}{36}\right) = 1 - \frac{x^2}{3} + \frac{x^4}{36} + \frac{x^4}{36} \]
+        <div class="res">\(\dfrac{\sin x}{\operatorname{sh}x} = 1 - \dfrac{x^2}{3} + \dfrac{x^4}{18} + o(x^4)\) (fonction paire : que des puissances paires).</div>
 
         <p class="q">13) \(f(x)=(1+x)^{\frac1{1+x}}\) [ordre 3]</p>
-        <p>\(f(x)=e^{w(x)}\) avec \(w(x)=\dfrac{\ln(1+x)}{1+x}=x-\tfrac32x^2+\tfrac{11}6x^3+o(x^3)\) (question 5).
-        \(w^2=x^2-3x^3+o(x^3)\), \(w^3=x^3+o(x^3)\). Alors
-        \(e^w=1+w+\tfrac{w^2}2+\tfrac{w^3}6=1+\big(x-\tfrac32x^2+\tfrac{11}6x^3\big)+\big(\tfrac{x^2}2-\tfrac32x^3\big)+\tfrac{x^3}6\).
-        Coefficient de \(x^2\) : \(-\tfrac32+\tfrac12=-1\). Coefficient de \(x^3\) : \(\tfrac{11}6-\tfrac32+\tfrac16=\tfrac12\).</p>
-        <div class="res">\((1+x)^{1/(1+x)}=1+x-x^2+\dfrac12x^3+o(x^3)\).</div>
+        <p class="etape">Étape 1 : forme exponentielle</p>
+        \[ f(x) = e^{w(x)} \qquad w(x) = \frac{\ln(1 + x)}{1 + x} = x - \frac32x^2 + \frac{11}{6}x^3 + o(x^3) \quad\text{(question 5)} \]
+        <p class="etape">Étape 2 : \(e^w\)</p>
+        <p>\(w^2 = x^2 - 3x^3 + o(x^3)\) et \(w^3 = x^3 + o(x^3)\) :</p>
+        <ul>
+          <li>\(x\) : \(1\) ;</li>
+          <li>\(x^2\) : \(-\dfrac32 + \dfrac12 = -1\) ;</li>
+          <li>\(x^3\) : \(\dfrac{11}{6} - \dfrac32 + \dfrac16 = \dfrac12\).</li>
+        </ul>
+        <div class="res">\((1 + x)^{1/(1+x)} = 1 + x - x^2 + \dfrac12x^3 + o(x^3)\).</div>
 
         <p class="q">14) \(f(x)=\sqrt{1+x}\) [ordre 4]</p>
-        <p>Formule du binôme généralisé avec \(\alpha=\tfrac12\) : coefficients \(\binom{1/2}k\).</p>
-        <div class="res">\(\sqrt{1+x}=1+\dfrac x2-\dfrac{x^2}8+\dfrac{x^3}{16}-\dfrac5{128}x^4+o(x^4)\).</div>
+        <div class="rappel"><span class="lab">Rappel · binôme généralisé</span>\[ (1 + x)^\alpha = 1 + \alpha x + \frac{\alpha(\alpha - 1)}{2!}x^2 + \frac{\alpha(\alpha - 1)(\alpha - 2)}{3!}x^3 + \cdots \]</div>
+        <p>Avec \(\alpha = \dfrac12\) : coefficients \(\dfrac12\), \(-\dfrac18\), \(\dfrac1{16}\), \(-\dfrac{5}{128}\).</p>
+        <div class="res">\(\sqrt{1 + x} = 1 + \dfrac x2 - \dfrac{x^2}{8} + \dfrac{x^3}{16} - \dfrac{5}{128}x^4 + o(x^4)\).</div>
 
         <p class="q">15) \(f(x)=\dfrac1{\sqrt{1-x}}\) [ordre 3]</p>
-        <p>Binôme avec \(\alpha=-\tfrac12\) et \(u=-x\) : \((1+u)^{-1/2}=1-\tfrac u2+\tfrac38u^2-\tfrac5{16}u^3+o(u^3)\),
-        soit avec \(u=-x\) : signes qui s'inversent sur les puissances impaires.</p>
-        <div class="res">\(\dfrac1{\sqrt{1-x}}=1+\dfrac x2+\dfrac38x^2+\dfrac5{16}x^3+o(x^3)\).</div>
+        <p>Binôme avec \(\alpha = -\dfrac12\) : \((1 + u)^{-1/2} = 1 - \dfrac u2 + \dfrac38u^2 - \dfrac{5}{16}u^3\). On pose \(u = -x\) : les signes des puissances impaires s'inversent.</p>
+        <div class="res">\(\dfrac{1}{\sqrt{1 - x}} = 1 + \dfrac x2 + \dfrac38x^2 + \dfrac{5}{16}x^3 + o(x^3)\).</div>
 
         <p class="q">16) \(f(x)=(1+x)^{1/x}\) [ordre 3]</p>
-        <p>\(\ln f(x)=\dfrac{\ln(1+x)}x=1-\dfrac x2+\dfrac{x^2}3-\dfrac{x^3}4+o(x^3)=1+w(x)\) avec
-        \(w=-\tfrac x2+\tfrac{x^2}3-\tfrac{x^3}4\). Alors \(f(x)=e\cdot e^{w(x)}\), et
-        \(e^w=1+w+\tfrac{w^2}2+\tfrac{w^3}6\) avec \(w^2=\tfrac{x^2}4-\tfrac{x^3}3+o(x^3)\), \(w^3=-\tfrac{x^3}8+o(x^3)\).
-        Coefficient de \(x^2\) : \(\tfrac13+\tfrac18=\tfrac{11}{24}\). Coefficient de \(x^3\) :
-        \(-\tfrac14-\tfrac16-\tfrac1{48}=-\tfrac7{16}\).</p>
-        <div class="res">\((1+x)^{1/x}=e\Big(1-\dfrac x2+\dfrac{11}{24}x^2-\dfrac7{16}x^3+o(x^3)\Big)\).</div>
+        <p class="etape">Étape 1 : le logarithme</p>
+        \[ \ln f(x) = \frac{\ln(1 + x)}{x} = 1 - \frac x2 + \frac{x^2}{3} - \frac{x^3}{4} + o(x^3) = 1 + w \qquad w = -\frac x2 + \frac{x^2}{3} - \frac{x^3}{4} \]
+        <p class="etape">Étape 2 : exponentielle</p>
+        <p>\(f = e\times e^{w}\), avec \(w^2 = \dfrac{x^2}{4} - \dfrac{x^3}{3}\) et \(w^3 = -\dfrac{x^3}{8}\) :</p>
+        <ul>
+          <li>\(x\) : \(-\dfrac12\) ;</li>
+          <li>\(x^2\) : \(\dfrac13 + \dfrac18 = \dfrac{11}{24}\) ;</li>
+          <li>\(x^3\) : \(-\dfrac14 - \dfrac16 - \dfrac{1}{48} = -\dfrac{7}{16}\).</li>
+        </ul>
+        <div class="res">\((1 + x)^{1/x} = e\left(1 - \dfrac x2 + \dfrac{11}{24}x^2 - \dfrac{7}{16}x^3 + o(x^3)\right)\).</div>
       </div>
     </div>
 
@@ -664,36 +749,51 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 9 — Développements limités en un point \(a\) quelconque</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <figure><img src="td1-img/ex9.png" alt="Énoncé — Exercice 9, cinq DL en un point a" loading="lazy"></figure>
-        <p><b>Méthode générale.</b> On pose \(x=a+h\) avec \(h\to0\), on développe en \(h\) (DL usuels, ou formule de Taylor-Young \(f(a+h)=\sum\frac{f^{(k)}(a)}{k!}h^k+o(h^n)\)), puis on remplace \(h\) par \(x-a\).</p>
+<p class="q">1) \(f(x)=\sin x\) en \(a=\frac\pi4\) [ordre 3]</p>
+        <div class="rappel"><span class="lab">Rappel · DL en un point \(a\)</span>On pose \(x = a + h\) avec \(h \to 0\), on développe en \(h\), puis on remplace \(h\) par \(x - a\). Formule de Taylor-Young :
+        \[ f(a + h) = \sum_{k=0}^{n}\frac{f^{(k)}(a)}{k!}\,h^k + o(h^n) \]</div>
 
-        <p class="q">1) \(f(x)=\sin x\) en \(a=\frac\pi4\) [ordre 3]</p>
-        <p>\(\sin\big(\tfrac\pi4+h\big)=\sin\tfrac\pi4\cos h+\cos\tfrac\pi4\sin h=\tfrac{\sqrt2}2(\cos h+\sin h)\). Avec \(\cos h=1-\tfrac{h^2}2+o(h^3)\) et \(\sin h=h-\tfrac{h^3}6+o(h^3)\) :</p>
-        <div class="res">\(\sin x=\dfrac{\sqrt2}2\Big[1+h-\dfrac{h^2}2-\dfrac{h^3}6\Big]+o(h^3)\), \(h=x-\dfrac\pi4\).</div>
+        
+        <p class="etape">Étape 1 : formule d'addition</p>
+        \[ \sin\left(\frac\pi4 + h\right) = \sin\frac\pi4\cos h + \cos\frac\pi4\sin h = \frac{\sqrt2}{2}(\cos h + \sin h) \]
+        <p class="etape">Étape 2 : DL de \(\cos h\) et \(\sin h\)</p>
+        <p>\(\cos h = 1 - \dfrac{h^2}{2}\), \(\sin h = h - \dfrac{h^3}{6}\) (à l'ordre 3).</p>
+        <div class="res">\(\sin x = \dfrac{\sqrt2}{2}\left[1 + h - \dfrac{h^2}{2} - \dfrac{h^3}{6}\right] + o(h^3)\), avec \(h = x - \dfrac\pi4\).</div>
 
         <p class="q">2) \(g(x)=\dfrac{\ln x}{x^2}\) en \(a=1\) [ordre 4]</p>
-        <p>\(x=1+h\) : \(\ln(1+h)=h-\tfrac{h^2}2+\tfrac{h^3}3-\tfrac{h^4}4+o(h^4)\) et \((1+h)^{-2}=1-2h+3h^2-4h^3+5h^4+o(h^4)\). Produit, coefficient par coefficient :</p>
+        <p>On pose \(x = 1 + h\) :</p>
+        \[ \ln(1 + h) = h - \frac{h^2}{2} + \frac{h^3}{3} - \frac{h^4}{4} \qquad (1 + h)^{-2} = 1 - 2h + 3h^2 - 4h^3 + 5h^4 \]
+        <p>Produit, coefficient par coefficient :</p>
         <ul>
           <li>\(h\) : \(1\) ;</li>
-          <li>\(h^2\) : \(1\cdot(-2)+(-\tfrac12)\cdot1=-\tfrac52\) ;</li>
-          <li>\(h^3\) : \(1\cdot3+(-\tfrac12)(-2)+\tfrac13=3+1+\tfrac13=\tfrac{13}3\) ;</li>
-          <li>\(h^4\) : \(1\cdot(-4)+(-\tfrac12)\cdot3+\tfrac13\cdot(-2)+(-\tfrac14)=-4-\tfrac32-\tfrac23-\tfrac14=-\tfrac{77}{12}\).</li>
+          <li>\(h^2\) : \(-2 - \dfrac12 = -\dfrac52\) ;</li>
+          <li>\(h^3\) : \(3 + 1 + \dfrac13 = \dfrac{13}{3}\) ;</li>
+          <li>\(h^4\) : \(-4 - \dfrac32 - \dfrac23 - \dfrac14 = -\dfrac{77}{12}\).</li>
         </ul>
-        <div class="res">\(\dfrac{\ln x}{x^2}=h-\dfrac52h^2+\dfrac{13}3h^3-\dfrac{77}{12}h^4+o(h^4)\), \(h=x-1\).</div>
+        <div class="res">\(\dfrac{\ln x}{x^2} = h - \dfrac52h^2 + \dfrac{13}{3}h^3 - \dfrac{77}{12}h^4 + o(h^4)\), avec \(h = x - 1\).</div>
 
         <p class="q">3) \(h(x)=\dfrac1x\) en \(a=2\) [ordre 3]</p>
-        <p>\(\dfrac1{2+t}=\dfrac12\cdot\dfrac1{1+t/2}=\dfrac12\Big(1-\dfrac t2+\dfrac{t^2}4-\dfrac{t^3}8\Big)+o(t^3)\) avec \(t=x-2\).</p>
-        <div class="res">\(\dfrac1x=\dfrac12-\dfrac t4+\dfrac{t^2}8-\dfrac{t^3}{16}+o(t^3)\), \(t=x-2\).</div>
+        <p>On pose \(t = x - 2\) et on factorise : \(\dfrac{1}{2 + t} = \dfrac12\times\dfrac{1}{1 + t/2}\).</p>
+        \[ \frac12\left(1 - \frac t2 + \frac{t^2}{4} - \frac{t^3}{8}\right) + o(t^3) \]
+        <div class="res">\(\dfrac1x = \dfrac12 - \dfrac t4 + \dfrac{t^2}{8} - \dfrac{t^3}{16} + o(t^3)\), avec \(t = x - 2\).</div>
 
         <p class="q">4) \(i(x)=\sin x\cos3x\) en \(a=\frac\pi3\) [ordre 2]</p>
-        <p>\(x=\frac\pi3+h\). \(\sin\big(\tfrac\pi3+h\big)=\tfrac{\sqrt3}2\cos h+\tfrac12\sin h=\tfrac{\sqrt3}2+\tfrac h2-\tfrac{\sqrt3}4h^2+o(h^2)\).
-        \(\cos(3x)=\cos(\pi+3h)=-\cos3h=-1+\tfrac92h^2+o(h^2)\). Produit :
-        \[\Big(\tfrac{\sqrt3}2+\tfrac h2-\tfrac{\sqrt3}4h^2\Big)\Big(-1+\tfrac92h^2\Big)=-\tfrac{\sqrt3}2-\tfrac h2+\Big(\tfrac{\sqrt3}4+\tfrac{9\sqrt3}4\Big)h^2+o(h^2).\]</p>
-        <div class="res">\(i(x)=-\dfrac{\sqrt3}2-\dfrac h2+\dfrac{5\sqrt3}2h^2+o(h^2)\), \(h=x-\dfrac\pi3\).</div>
+        <p class="etape">Étape 1 : \(\sin x\)</p>
+        \[ \sin\left(\frac\pi3 + h\right) = \frac{\sqrt3}{2}\cos h + \frac12\sin h = \frac{\sqrt3}{2} + \frac h2 - \frac{\sqrt3}{4}h^2 + o(h^2) \]
+        <p class="etape">Étape 2 : \(\cos 3x\)</p>
+        \[ \cos(3x) = \cos(\pi + 3h) = -\cos 3h = -1 + \frac92h^2 + o(h^2) \]
+        <p class="etape">Étape 3 : produit</p>
+        \[ \left(\frac{\sqrt3}{2} + \frac h2 - \frac{\sqrt3}{4}h^2\right)\left(-1 + \frac92h^2\right) = -\frac{\sqrt3}{2} - \frac h2 + \left(\frac{\sqrt3}{4} + \frac{9\sqrt3}{4}\right)h^2 \]
+        <div class="res">\(i(x) = -\dfrac{\sqrt3}{2} - \dfrac h2 + \dfrac{5\sqrt3}{2}h^2 + o(h^2)\), avec \(h = x - \dfrac\pi3\).</div>
 
         <p class="q">5) \(j(x)=\arctan x\) en \(a=1\) [ordre 3] — par Taylor-Young</p>
-        <p>\(f'=\dfrac1{1+x^2}\), \(f''=\dfrac{-2x}{(1+x^2)^2}\), \(f'''=\dfrac{-2(1+x^2)+8x^2}{(1+x^2)^3}=\dfrac{6x^2-2}{(1+x^2)^3}\). En \(x=1\) : \(f(1)=\tfrac\pi4\), \(f'(1)=\tfrac12\), \(f''(1)=-\tfrac12\), \(f'''(1)=\tfrac48=\tfrac12\). Taylor-Young : \(\tfrac\pi4+\tfrac12h-\tfrac{1/2}{2!}h^2+\tfrac{1/2}{3!}h^3\).</p>
-        <div class="res">\(\arctan x=\dfrac\pi4+\dfrac h2-\dfrac{h^2}4+\dfrac{h^3}{12}+o(h^3)\), \(h=x-1\).</div>
-        <div class="method"><span class="lab">⚡ Méthode</span>DL en \(a\neq0\) : poser \(x=a+h\), développer en \(h\) (formules d'addition si \(a\) est un angle remarquable, factorisation \(a(1+h/a)\) pour \(\frac1x\), ou Taylor-Young quand les dérivées sont simples).</div>
+        <p class="etape">Étape 1 : dérivées</p>
+        \[ f' = \frac{1}{1 + x^2} \qquad f'' = \frac{-2x}{(1 + x^2)^2} \qquad f''' = \frac{6x^2 - 2}{(1 + x^2)^3} \]
+        <p class="etape">Étape 2 : valeurs en 1</p>
+        <p>\(f(1) = \dfrac\pi4\), \(f'(1) = \dfrac12\), \(f''(1) = -\dfrac12\), \(f'''(1) = \dfrac48 = \dfrac12\).</p>
+        <p class="etape">Étape 3 : Taylor-Young</p>
+        \[ \frac\pi4 + \frac12h - \frac{1/2}{2!}h^2 + \frac{1/2}{3!}h^3 \]
+        <div class="res">\(\arctan x = \dfrac\pi4 + \dfrac h2 - \dfrac{h^2}{4} + \dfrac{h^3}{12} + o(h^3)\), avec \(h = x - 1\).</div>
       </div>
     </div>
 
@@ -702,48 +802,59 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 10 — Dix limites par développements limités</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <figure><img src="td1-img/ex10.png" alt="Énoncé — Exercice 10, dix limites" loading="lazy"></figure>
+<p class="q">1) \(\displaystyle\lim_{x\to+\infty}\Big(x-x^2\ln\big(1+\tfrac1x\big)\Big)\)</p>
+        <div class="rappel"><span class="lab">Rappel · méthode pour une forme indéterminée</span>(i) se ramener en 0 (\(h = x - a\) ou \(u = 1/x\)) ; (ii) DL du numérateur et du dénominateur jusqu'au premier terme non nul ; (iii) équivalents puis division ; (iv) pour \(u^v\), passer par \(e^{v\ln u}\).</div>
 
-        <p class="q">1) \(\displaystyle\lim_{x\to+\infty}\Big(x-x^2\ln\big(1+\tfrac1x\big)\Big)\)</p>
-        <p>\(u=\frac1x\to0\) : \(\ln(1+u)=u-\tfrac{u^2}2+\tfrac{u^3}3+o(u^3)\), donc \(x^2\ln(1+\tfrac1x)=\dfrac1{u^2}\big(u-\tfrac{u^2}2+\tfrac{u^3}3+o(u^3)\big)=x-\tfrac12+\tfrac1{3x}+o(\tfrac1x)\). L'expression vaut \(\tfrac12-\tfrac1{3x}+o(\tfrac1x)\).</p>
-        <div class="res">Limite \(=\dfrac12\).</div>
+        
+        <p>On pose \(u = 1/x\) et \(\ln(1 + u) = u - \dfrac{u^2}{2} + \dfrac{u^3}{3} + o(u^3)\) :</p>
+        \[ x^2\ln\left(1 + \frac1x\right) = \frac{1}{u^2}\left(u - \frac{u^2}{2} + \frac{u^3}{3} + o(u^3)\right) = x - \frac12 + \frac{1}{3x} + o\Big(\frac1x\Big) \]
+        <p>L'expression vaut \(\dfrac12 - \dfrac{1}{3x} + o\left(\dfrac1x\right)\).</p>
+        <div class="res">Limite \(= \dfrac12\).</div>
 
         <p class="q">2) \(\displaystyle\lim_{x\to0}\dfrac{e^{x^2}-\cos x}{x^2}\)</p>
-        <p>\(e^{x^2}=1+x^2+o(x^2)\), \(\cos x=1-\tfrac{x^2}2+o(x^2)\) : numérateur \(=\tfrac32x^2+o(x^2)\).</p>
-        <div class="res">Limite \(=\dfrac32\).</div>
+        <p>\(e^{x^2} = 1 + x^2 + o(x^2)\) et \(\cos x = 1 - \dfrac{x^2}{2} + o(x^2)\) : numérateur \(= \dfrac32x^2 + o(x^2)\).</p>
+        <div class="res">Limite \(= \dfrac32\).</div>
 
         <p class="q">3) \(\displaystyle\lim_{x\to+\infty}\sqrt{x^2+x+1}-x\)</p>
-        <p>\(\sqrt{x^2+x+1}=x\sqrt{1+v}\) avec \(v=\tfrac1x+\tfrac1{x^2}\to0\). \(\sqrt{1+v}=1+\tfrac v2+O(v^2)\) et \(v^2=O(\tfrac1{x^2})\), donc \(x\sqrt{1+v}=x+\tfrac12+\tfrac1{2x}+O\big(\tfrac1x\big)=x+\tfrac12+o(1)\). La différence avec \(x\) tend vers \(\tfrac12\).</p>
-        <div class="res">Limite \(=\dfrac12\).</div>
+        <p>\(\sqrt{x^2 + x + 1} = x\sqrt{1 + v}\) avec \(v = \dfrac1x + \dfrac{1}{x^2} \to 0\).</p>
+        \[ \sqrt{1 + v} = 1 + \frac v2 + O(v^2) \qquad x\sqrt{1 + v} = x + \frac12 + \frac{1}{2x} + O\Big(\frac1x\Big) = x + \frac12 + o(1) \]
+        <div class="res">Limite \(= \dfrac12\).</div>
 
         <p class="q">4) \(\displaystyle\lim_{x\to0}x\,\dfrac{\ln(1+x)-\sin x}{\tan x-x}\)</p>
-        <p>\(\ln(1+x)-\sin x=\big(x-\tfrac{x^2}2+\tfrac{x^3}3\big)-\big(x-\tfrac{x^3}6\big)+o(x^3)=-\tfrac{x^2}2+\tfrac{x^3}2+o(x^3)\sim-\tfrac{x^2}2\). \(\tan x-x=\tfrac{x^3}3+o(x^3)\sim\tfrac{x^3}3\). Donc \(x\cdot\dfrac{-x^2/2}{x^3/3}=-\dfrac32\).</p>
-        <div class="res">Limite \(=-\dfrac32\).</div>
+        <p class="etape">Étape 1 : numérateur</p>
+        \[ \ln(1 + x) - \sin x = \left(x - \frac{x^2}{2} + \frac{x^3}{3}\right) - \left(x - \frac{x^3}{6}\right) + o(x^3) = -\frac{x^2}{2} + \frac{x^3}{2} + o(x^3) \sim -\frac{x^2}{2} \]
+        <p class="etape">Étape 2 : dénominateur</p>
+        <p>\(\tan x - x = \dfrac{x^3}{3} + o(x^3) \sim \dfrac{x^3}{3}\).</p>
+        <div class="res">\(x\times\dfrac{-x^2/2}{x^3/3} = -\dfrac32\) : limite \(= -\dfrac32\).</div>
 
         <p class="q">5) \(\displaystyle\lim_{x\to0}\dfrac{\cos x-\sqrt{1-x^2}}{x^4}\)</p>
-        <p>\(\cos x=1-\tfrac{x^2}2+\tfrac{x^4}{24}+o(x^4)\). \(\sqrt{1-x^2}=1+\tfrac{(-x^2)}2-\tfrac{(-x^2)^2}8+o(x^4)=1-\tfrac{x^2}2-\tfrac{x^4}8+o(x^4)\). Différence \(=\big(\tfrac1{24}+\tfrac18\big)x^4=\tfrac16x^4+o(x^4)\).</p>
-        <div class="res">Limite \(=\dfrac16\).</div>
+        <p>\(\cos x = 1 - \dfrac{x^2}{2} + \dfrac{x^4}{24}\) et \(\sqrt{1 - x^2} = 1 - \dfrac{x^2}{2} - \dfrac{x^4}{8}\) (à l'ordre 4). La différence vaut \(\left(\dfrac{1}{24} + \dfrac18\right)x^4 = \dfrac{x^4}{6}\).</p>
+        <div class="res">Limite \(= \dfrac16\).</div>
 
         <p class="q">6) \(\displaystyle\lim_{x\to0}\dfrac{(1+3x)^{1/3}-1-\sin x}{1-\cos x}\)</p>
-        <p>\((1+3x)^{1/3}=1+\tfrac13(3x)+\dfrac{\frac13\cdot(-\frac23)}{2}(3x)^2+o(x^2)=1+x-x^2+o(x^2)\). Avec \(\sin x=x+o(x^2)\) : numérateur \(=-x^2+o(x^2)\). Dénominateur : \(1-\cos x\sim\tfrac{x^2}2\).</p>
-        <div class="res">Limite \(=\dfrac{-1}{1/2}=-2\).</div>
+        <p>Binôme avec \(\alpha = \dfrac13\) : \(\dfrac{\frac13\left(-\frac23\right)}{2} = -\dfrac19\), donc :</p>
+        \[ (1 + 3x)^{1/3} = 1 + x - \frac19(3x)^2 + o(x^2) = 1 + x - x^2 + o(x^2) \]
+        <p>Avec \(\sin x = x + o(x^2)\), le numérateur vaut \(-x^2 + o(x^2)\). Le dénominateur : \(1 - \cos x \sim \dfrac{x^2}{2}\).</p>
+        <div class="res">Limite \(= \dfrac{-1}{1/2} = -2\).</div>
 
         <p class="q">7) \(\displaystyle\lim_{x\to0}\Big(\dfrac{\tan x}x\Big)^{1/x^2}\)</p>
-        <p>\(\dfrac{\tan x}x=1+\tfrac{x^2}3+o(x^2)\). \(\ln\Big(\dfrac{\tan x}x\Big)^{1/x^2}=\dfrac1{x^2}\ln\big(1+\tfrac{x^2}3+o(x^2)\big)=\dfrac1{x^2}\big(\tfrac{x^2}3+o(x^2)\big)\to\tfrac13\). Par continuité de l'exponentielle :</p>
-        <div class="res">Limite \(=e^{1/3}\).</div>
+        <p>\(\dfrac{\tan x}{x} = 1 + \dfrac{x^2}{3} + o(x^2)\). On passe au logarithme :</p>
+        \[ \frac{1}{x^2}\ln\left(1 + \frac{x^2}{3} + o(x^2)\right) = \frac{1}{x^2}\left(\frac{x^2}{3} + o(x^2)\right) \to \frac13 \]
+        <div class="res">Limite \(= e^{1/3}\) (continuité de l'exponentielle).</div>
 
         <p class="q">8) \(\displaystyle\lim_{x\to0}\dfrac{\sin(x-\sin x)}{\sqrt{1+x^3}-1}\)</p>
-        <p>\(x-\sin x=\tfrac{x^3}6+o(x^3)\to0\), donc \(\sin(x-\sin x)\sim x-\sin x\sim\tfrac{x^3}6\). \(\sqrt{1+x^3}-1\sim\tfrac{x^3}2\).</p>
-        <div class="res">Limite \(=\dfrac{1/6}{1/2}=\dfrac13\).</div>
+        <p>\(x - \sin x = \dfrac{x^3}{6} + o(x^3) \to 0\), donc \(\sin(x - \sin x) \sim x - \sin x \sim \dfrac{x^3}{6}\). Et \(\sqrt{1 + x^3} - 1 \sim \dfrac{x^3}{2}\).</p>
+        <div class="res">Limite \(= \dfrac{1/6}{1/2} = \dfrac13\).</div>
 
         <p class="q">9) \(\displaystyle\lim_{x\to0}\dfrac{(1+x)^{1/x}-e}{x}\)</p>
-        <p>\((1+x)^{1/x}=\exp\Big(\dfrac{\ln(1+x)}x\Big)=\exp\big(1-\tfrac x2+o(x)\big)=e\cdot e^{-x/2+o(x)}=e\big(1-\tfrac x2+o(x)\big)\). Numérateur \(=-\tfrac e2x+o(x)\).</p>
-        <div class="res">Limite \(=-\dfrac e2\).</div>
+        \[ (1 + x)^{1/x} = \exp\left(\frac{\ln(1 + x)}{x}\right) = \exp\left(1 - \frac x2 + o(x)\right) = e\left(1 - \frac x2 + o(x)\right) \]
+        <p>Le numérateur vaut \(-\dfrac e2x + o(x)\).</p>
+        <div class="res">Limite \(= -\dfrac e2\).</div>
 
         <p class="q">10) \(\displaystyle\lim_{x\to1}\dfrac{\ln(2x^2-1)}{\tan(x-1)}\)</p>
-        <p>\(h=x-1\to0\) : \(2x^2-1=2(1+h)^2-1=1+4h+2h^2\), donc \(\ln(2x^2-1)=4h+o(h)\). \(\tan(x-1)=\tan h\sim h\).</p>
-        <div class="res">Limite \(=4\).</div>
-        <div class="warnbox"><span class="lab">Piège</span>Q4, Q5, Q6, Q9 : les termes d'ordre inférieur s'annulent. On développe <b>jusqu'au premier terme non nul</b> ; on ne soustrait jamais deux équivalents. Q7 : une forme \(1^\infty\) se traite par \(\exp(\dots\ln\dots)\).</div>
-        <div class="method"><span class="lab">⚡ Méthode</span>Limite d'une forme indéterminée : (i) ramener en 0 (\(h=x-a\) ou \(u=1/x\)) ; (ii) DL du numérateur et du dénominateur jusqu'au 1<sup>er</sup> terme non nul ; (iii) équivalents puis division ; (iv) pour \(u^v\), passer par \(e^{v\ln u}\).</div>
+        <p>On pose \(h = x - 1\) : \(2x^2 - 1 = 1 + 4h + 2h^2\), donc \(\ln(2x^2 - 1) = 4h + o(h)\). Et \(\tan h \sim h\).</p>
+        <div class="res">Limite \(= 4\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> Q4, Q5, Q6, Q9 : les termes d'ordre inférieur s'annulent. On développe jusqu'au premier terme non nul, et on ne soustrait jamais deux équivalents. Q7 : une forme \(1^\infty\) se traite par \(\exp(\dots\ln\dots)\).</div>
       </div>
     </div>
 
@@ -752,13 +863,21 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 11 — \(f(x)=\dfrac x{e^x-1}\) : DL, tangente, position</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <figure><img src="td1-img/ex11.png" alt="Énoncé — Exercice 11" loading="lazy"></figure>
+
         <p class="q">1) DL en 0 à l'ordre 2</p>
-        <p>\(f\) n'est pas définie en 0. On met \(x\) en facteur : \(e^x-1=x\Big(1+\tfrac x2+\tfrac{x^2}6+o(x^2)\Big)\), donc \(f(x)=\dfrac1{1+u}\) avec \(u=\tfrac x2+\tfrac{x^2}6+o(x^2)\). \(\dfrac1{1+u}=1-u+u^2+o(u^2)\) et \(u^2=\tfrac{x^2}4+o(x^2)\) :</p>
-        <p>\(f(x)=1-\tfrac x2-\tfrac{x^2}6+\tfrac{x^2}4+o(x^2)\).</p>
-        <div class="res">\(f(x)=1-\dfrac x2+\dfrac{x^2}{12}+o(x^2)\). \(f\) se prolonge par continuité en 0 avec \(f(0)=1\).</div>
+        <p class="etape">Étape 1 : factoriser \(x\)</p>
+        <p>\(f\) n'est pas définie en 0. On écrit :</p>
+        \[ e^x - 1 = x\left(1 + \frac x2 + \frac{x^2}{6} + o(x^2)\right) \qquad\Longrightarrow\qquad f(x) = \frac{1}{1 + u} \quad\text{avec } u = \frac x2 + \frac{x^2}{6} + o(x^2) \]
+        <p class="etape">Étape 2 : développer l'inverse</p>
+        <div class="rappel"><span class="lab">Rappel · DL usuel</span>\[ \frac{1}{1 + u} = 1 - u + u^2 + o(u^2) \]</div>
+        <p>Avec \(u^2 = \dfrac{x^2}{4} + o(x^2)\) :</p>
+        \[ f(x) = 1 - \frac x2 - \frac{x^2}{6} + \frac{x^2}{4} + o(x^2) \]
+        <div class="res">\(f(x) = 1 - \dfrac x2 + \dfrac{x^2}{12} + o(x^2)\). \(f\) se prolonge par continuité en 0 avec \(f(0) = 1\).</div>
+
         <p class="q">2) Tangente et position</p>
-        <p>Le prolongement est dérivable en 0 (DL d'ordre 1) avec \(f'(0)=-\tfrac12\) : tangente \(T:\ y=1-\dfrac x2\). Position : \(f(x)-\Big(1-\tfrac x2\Big)=\tfrac{x^2}{12}+o(x^2)\sim\tfrac{x^2}{12}\gt0\).</p>
-        <div class="res">La courbe est <b>au-dessus</b> de sa tangente au voisinage de 0.</div>
+        <p>Le prolongement est dérivable en 0 avec \(f'(0) = -\dfrac12\) : tangente \(y = 1 - \dfrac x2\).</p>
+        \[ f(x) - \left(1 - \frac x2\right) = \frac{x^2}{12} + o(x^2) \sim \frac{x^2}{12} &gt; 0 \]
+        <div class="res">Tangente \(y = 1 - \dfrac x2\) ; la courbe est <b>au-dessus</b> de sa tangente au voisinage de 0.</div>
       </div>
     </div>
 
@@ -767,17 +886,24 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 12 — \(f(x)=\ln(1+x+x^2)\) : tangentes en 0 et en 1</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <figure><img src="td1-img/ex12.png" alt="Énoncé — Exercice 12" loading="lazy"></figure>
-        <p>\(1+x+x^2\gt0\) pour tout réel (discriminant \(-3\lt0\)) : \(f\) est définie et \(C^\infty\) sur \(\mathbb R\).</p>
-        <p class="q">En \(x_0=0\)</p>
-        <p>\(u=x+x^2\to0\) : \(\ln(1+u)=u-\tfrac{u^2}2+\tfrac{u^3}3+o(u^3)\) avec \(u^2=x^2+2x^3+o(x^3)\), \(u^3=x^3+o(x^3)\) :
-        \(f(x)=x+x^2-\tfrac{x^2}2-x^3+\tfrac{x^3}3+o(x^3)\).</p>
-        <p>\(f(x)=x+\tfrac{x^2}2-\tfrac23x^3+o(x^3)\). Tangente \(y=x\) ; \(f(x)-x\sim\tfrac{x^2}2\gt0\).</p>
-        <div class="res">En 0 : tangente \(y=x\), courbe <b>au-dessus</b>.</div>
+<p class="q">En \(x_0=0\)</p>
+        <p>\(1 + x + x^2 &gt; 0\) pour tout réel (discriminant \(-3 &lt; 0\)) : \(f\) est définie et \(C^\infty\) sur \(\mathbb R\).</p>
+
+        
+        <p class="etape">Étape 1 : DL à l'ordre 3</p>
+        <p>On pose \(u = x + x^2\), avec \(u^2 = x^2 + 2x^3 + o(x^3)\) et \(u^3 = x^3 + o(x^3)\) :</p>
+        \[ f(x) = u - \frac{u^2}{2} + \frac{u^3}{3} = x + x^2 - \frac{x^2}{2} - x^3 + \frac{x^3}{3} + o(x^3) = x + \frac{x^2}{2} - \frac23x^3 + o(x^3) \]
+        <p class="etape">Étape 2 : tangente et position</p>
+        <p>Tangente \(y = x\), et \(f(x) - x \sim \dfrac{x^2}{2} &gt; 0\).</p>
+        <div class="res">En 0 : tangente \(y = x\), courbe <b>au-dessus</b>.</div>
+
         <p class="q">En \(x_0=1\) (Taylor-Young à l'ordre 2)</p>
-        <p>\(f'(x)=\dfrac{1+2x}{1+x+x^2}\), \(f''(x)=\dfrac{2(1+x+x^2)-(1+2x)^2}{(1+x+x^2)^2}\). En 1 : \(f(1)=\ln3\), \(f'(1)=\tfrac33=1\), \(f''(1)=\dfrac{6-9}9=-\tfrac13\). Donc
-        \(f(x)=\ln3+(x-1)-\tfrac16(x-1)^2+o\big((x-1)^2\big)\). Tangente \(y=\ln3+(x-1)\) ; différence \(\sim-\tfrac16(x-1)^2\lt0\).</p>
-        <div class="res">En 1 : tangente \(y=\ln3+x-1\), courbe <b>en dessous</b>.</div>
-        <div class="method"><span class="lab">⚡ Méthode</span>Position par rapport à la tangente en \(x_0\) : DL jusqu'à l'ordre où apparaît le <b>premier terme non nul après \(f(x_0)+f'(x_0)h\)</b> ; son signe donne la position (ordre 2 : \(f''(x_0)/2\) ; ordre 3 impair : la courbe traverse la tangente).</div>
+        <p class="etape">Étape 1 : dérivées</p>
+        \[ f'(x) = \frac{1 + 2x}{1 + x + x^2} \qquad f''(x) = \frac{2(1 + x + x^2) - (1 + 2x)^2}{(1 + x + x^2)^2} \]
+        <p>En 1 : \(f(1) = \ln 3\), \(f'(1) = \dfrac33 = 1\), \(f''(1) = \dfrac{6 - 9}{9} = -\dfrac13\).</p>
+        <p class="etape">Étape 2 : Taylor-Young</p>
+        \[ f(x) = \ln 3 + (x - 1) - \frac16(x - 1)^2 + o\big((x - 1)^2\big) \]
+        <div class="res">En 1 : tangente \(y = \ln 3 + x - 1\) ; \(f - y \sim -\dfrac16(x - 1)^2 &lt; 0\) : courbe <b>en dessous</b>.</div>
       </div>
     </div>
 
@@ -788,24 +914,38 @@ window.MathJax = {
         <figure><img src="td1-img/ex13.png" alt="Énoncé — Exercice 13" loading="lazy"></figure>
 
         <p class="q">1) \(f(x)=\dfrac1x\big(e^{\sin x}-1\big)\) en \(x_0=0\)</p>
-        <p>On développe \(e^{\sin x}\) à l'ordre 4. \(s=\sin x=x-\tfrac{x^3}6+o(x^4)\) ; \(s^2=x^2-\tfrac{x^4}3+o(x^4)\), \(s^3=x^3+o(x^4)\), \(s^4=x^4+o(x^4)\) :
-        \[e^{s}=1+\Big(x-\tfrac{x^3}6\Big)+\tfrac12\Big(x^2-\tfrac{x^4}3\Big)+\tfrac{x^3}6+\tfrac{x^4}{24}=1+x+\tfrac{x^2}2+0\cdot x^3+\Big(-\tfrac16+\tfrac1{24}\Big)x^4=1+x+\tfrac{x^2}2-\tfrac{x^4}8+o(x^4).\]
-        Donc \(f(x)=1+\tfrac x2-\tfrac{x^3}8+o(x^3)\). Prolongement \(f(0)=1\), \(f'(0)=\tfrac12\), tangente \(y=1+\tfrac x2\). Le terme en \(x^2\) est nul : \(f(x)-\big(1+\tfrac x2\big)\sim-\tfrac{x^3}8\), qui change de signe.</p>
-        <div class="res">Tangente \(y=1+\frac x2\) ; courbe <b>au-dessus</b> pour \(x\lt0\), <b>en dessous</b> pour \(x\gt0\) : elle <b>traverse</b> sa tangente (point d'inflexion).</div>
+        <p class="etape">Étape 1 : DL de \(e^{\sin x}\) à l'ordre 4</p>
+        <p>On reprend la question 7 de l'exercice 8 :</p>
+        \[ e^{\sin x} = 1 + x + \frac{x^2}{2} + 0\cdot x^3 - \frac{x^4}{8} + o(x^4) \]
+        <p class="etape">Étape 2 : division par \(x\)</p>
+        \[ f(x) = 1 + \frac x2 - \frac{x^3}{8} + o(x^3) \]
+        <p>Prolongement : \(f(0) = 1\), \(f'(0) = \dfrac12\), tangente \(y = 1 + \dfrac x2\).</p>
+        <p class="etape">Étape 3 : position</p>
+        <p>Le terme en \(x^2\) est nul, donc \(f(x) - \left(1 + \dfrac x2\right) \sim -\dfrac{x^3}{8}\), qui change de signe.</p>
+        <div class="res">Tangente \(y = 1 + \dfrac x2\) ; la courbe est <b>au-dessus</b> pour \(x &lt; 0\), <b>en dessous</b> pour \(x &gt; 0\) : elle traverse sa tangente (point d'inflexion).</div>
 
         <p class="q">2) \(f(x)=\dfrac{\arctan x}{\sin^3x}-\dfrac1{x^2}\) en \(x_0=0\)</p>
-        <p>Les termes sont singuliers (\(\sim x^{-2}\)) : on développe chaque morceau assez loin (ordre 5 pour arctan et sin, car on divise par \(x^3\)).</p>
-        <p>\(\arctan x=x\big(1-\tfrac{x^2}3+\tfrac{x^4}5\big)+o(x^5)\) ; \(\sin x=x(1+w)\), \(w=-\tfrac{x^2}6+\tfrac{x^4}{120}\). \((1+w)^3=1+3w+3w^2+o(x^4)=1-\tfrac{x^2}2+\tfrac{x^4}{40}+\tfrac{x^4}{12}=1-\tfrac{x^2}2+\tfrac{13}{120}x^4\). Inverse (\(v=-\tfrac{x^2}2+\tfrac{13}{120}x^4\)) : \(1-v+v^2=1+\tfrac{x^2}2-\tfrac{13}{120}x^4+\tfrac{x^4}4=1+\tfrac{x^2}2+\tfrac{17}{120}x^4\). Alors
-        \[\frac{\arctan x}{\sin^3x}=\frac1{x^2}\Big(1-\tfrac{x^2}3+\tfrac{x^4}5\Big)\Big(1+\tfrac{x^2}2+\tfrac{17}{120}x^4\Big)=\frac1{x^2}\Big(1+\tfrac{x^2}6+\tfrac7{40}x^4+o(x^4)\Big)\]
-        (coefficient de \(x^2\) : \(\tfrac12-\tfrac13=\tfrac16\) ; de \(x^4\) : \(\tfrac{17}{120}-\tfrac16+\tfrac15=\tfrac{17-20+24}{120}=\tfrac7{40}\)). On retranche \(\tfrac1{x^2}\) :</p>
-        <div class="res">\(f(x)=\dfrac16+\dfrac7{40}x^2+o(x^2)\). Prolongement \(f(0)=\tfrac16\), \(f'(0)=0\) : tangente <b>horizontale</b> \(y=\tfrac16\), courbe <b>au-dessus</b> (\(\tfrac7{40}x^2\gt0\)).</div>
+        <p class="etape">Étape 1 : écrire chaque morceau en \(x^k(1 + \dots)\)</p>
+        <p>Les termes sont singuliers (\(\sim x^{-2}\)) : on développe assez loin pour qu'ils se simplifient.</p>
+        \[ \arctan x = x\left(1 - \frac{x^2}{3} + \frac{x^4}{5}\right) + o(x^5) \qquad \sin x = x(1 + w),\ w = -\frac{x^2}{6} + \frac{x^4}{120} \]
+        <p class="etape">Étape 2 : \(\sin^3 x\) puis son inverse</p>
+        \[ (1 + w)^3 = 1 + 3w + 3w^2 = 1 - \frac{x^2}{2} + \frac{13}{120}x^4 \]
+        <p>Avec \(\dfrac{1}{1 + v} = 1 - v + v^2\), \(v = -\dfrac{x^2}{2} + \dfrac{13}{120}x^4\) :</p>
+        \[ \frac{1}{(1 + w)^3} = 1 + \frac{x^2}{2} - \frac{13}{120}x^4 + \frac{x^4}{4} = 1 + \frac{x^2}{2} + \frac{17}{120}x^4 \]
+        <p class="etape">Étape 3 : le quotient</p>
+        \[ \frac{\arctan x}{\sin^3 x} = \frac{1}{x^2}\left(1 - \frac{x^2}{3} + \frac{x^4}{5}\right)\left(1 + \frac{x^2}{2} + \frac{17}{120}x^4\right) = \frac{1}{x^2}\left(1 + \frac{x^2}{6} + \frac{7}{40}x^4 + o(x^4)\right) \]
+        <p>(coefficient de \(x^2\) : \(\dfrac12 - \dfrac13 = \dfrac16\) ; de \(x^4\) : \(\dfrac{17}{120} - \dfrac16 + \dfrac15 = \dfrac{17 - 20 + 24}{120} = \dfrac{7}{40}\)). On retranche \(\dfrac{1}{x^2}\) :</p>
+        <div class="res">\(f(x) = \dfrac16 + \dfrac{7}{40}x^2 + o(x^2)\). Prolongement \(f(0) = \dfrac16\), \(f'(0) = 0\) : tangente <b>horizontale</b> \(y = \dfrac16\), courbe <b>au-dessus</b> (\(\dfrac{7}{40}x^2 &gt; 0\)).</div>
 
         <p class="q">3) \(f(x)=\sqrt{\tan x}\) en \(x_0=\frac\pi4\)</p>
-        <p>\(h=x-\tfrac\pi4\). \(\tan\big(\tfrac\pi4+h\big)=\dfrac{1+\tan h}{1-\tan h}\) avec \(\tan h=h+o(h^2)\) : \(\dfrac{1+h}{1-h}=(1+h)(1+h+h^2)+o(h^2)=1+2h+2h^2+o(h^2)\). Puis \(\sqrt{1+t}=1+\tfrac t2-\tfrac{t^2}8\) avec \(t=2h+2h^2\), \(t^2=4h^2+o(h^2)\) :
-        \(f=1+h+h^2-\tfrac{h^2}2+o(h^2)=1+h+\tfrac{h^2}2+o(h^2)\).</p>
-        <div class="res">Tangente \(y=1+\big(x-\tfrac\pi4\big)\) ; \(f-\text{tangente}\sim\tfrac{h^2}2\gt0\) : courbe <b>au-dessus</b>.</div>
-        <div class="warnbox"><span class="lab">Piège</span>Q1 : le coefficient de \(x^2\) est nul, il faut donc aller à l'ordre 3 pour avoir la position. Q2 : si on ne développe pas arctan et sin jusqu'à l'ordre 5, les termes singuliers \(x^{-2}\) ne se simplifient pas et le résultat est faux.</div>
-        <div class="method"><span class="lab">⚡ Méthode</span>Fonction définie par un quotient/une différence singulière : écrire chaque morceau sous la forme \(x^k(1+\dots)\), développer à l'ordre qui compense la puissance \(x^{k}\) retranchée, simplifier, lire tangente (ordre 1) et position (1<sup>er</sup> terme non nul ensuite).</div>
+        <p class="etape">Étape 1 : \(\tan\) en \(\frac\pi4 + h\)</p>
+        <div class="rappel"><span class="lab">Rappel · formule d'addition</span>\[ \tan\left(\frac\pi4 + h\right) = \frac{1 + \tan h}{1 - \tan h} \]</div>
+        <p>Avec \(\tan h = h + o(h^2)\) : \(\dfrac{1 + h}{1 - h} = (1 + h)(1 + h + h^2) = 1 + 2h + 2h^2 + o(h^2)\).</p>
+        <p class="etape">Étape 2 : racine</p>
+        <p>\(\sqrt{1 + t} = 1 + \dfrac t2 - \dfrac{t^2}{8}\) avec \(t = 2h + 2h^2\) et \(t^2 = 4h^2\) :</p>
+        \[ f = 1 + h + h^2 - \frac{h^2}{2} + o(h^2) = 1 + h + \frac{h^2}{2} + o(h^2) \]
+        <div class="res">Tangente \(y = 1 + \left(x - \dfrac\pi4\right)\) ; \(f - y \sim \dfrac{h^2}{2} &gt; 0\) : courbe <b>au-dessus</b>.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Q1 : le coefficient de \(x^2\) est nul, il faut donc aller à l'ordre 3 pour la position. Q2 : si on ne développe pas arctan et sin jusqu'à l'ordre 5, les termes singuliers en \(x^{-2}\) ne se simplifient pas et le résultat est faux.</div>
       </div>
     </div>
 
@@ -814,23 +954,32 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 14 — Asymptotes en \(+\infty\) et position</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <figure><img src="td1-img/ex14.png" alt="Énoncé — Exercice 14" loading="lazy"></figure>
-        <p>Dans les trois cas on pose \(u=\frac1x\to0^+\) et on cherche \(f(x)=ax+b+\dfrac cx+o(\tfrac1x)\) : alors \(y=ax+b\) est asymptote et le signe de \(c\) donne la position.</p>
+<p class="q">1) \(f(x)=(x^2-1)\ln\Big(\dfrac{x+1}{x-1}\Big)\) (\(x&gt;1\))</p>
+        <div class="rappel"><span class="lab">Rappel · asymptote oblique</span>Si \(f(x) = ax + b + \dfrac cx + o\left(\dfrac1x\right)\), alors \(y = ax + b\) est asymptote en \(+\infty\), et le signe de \(c\) donne la position de la courbe.</div>
+        <p>Dans les trois cas, on pose \(u = \dfrac1x \to 0^+\).</p>
 
-        <p class="q">1) \(f(x)=(x^2-1)\ln\Big(\dfrac{x+1}{x-1}\Big)\) (\(x\gt1\))</p>
-        <p>\(\dfrac{x+1}{x-1}=\dfrac{1+u}{1-u}\), \(\ln\dfrac{1+u}{1-u}=\ln(1+u)-\ln(1-u)=2\Big(u+\tfrac{u^3}3+\tfrac{u^5}5\Big)+o(u^5)\). Et \(x^2-1=\dfrac{1-u^2}{u^2}\). Donc
-        \[f=\frac{2(1-u^2)}{u}\Big(1+\tfrac{u^2}3+\tfrac{u^4}5\Big)=\frac2u\Big(1-\tfrac23u^2-\tfrac2{15}u^4\Big)=2x-\tfrac4{3x}+o\Big(\tfrac1x\Big).\]</p>
-        <div class="res">Asymptote \(y=2x\) ; \(f(x)-2x\sim-\dfrac4{3x}\lt0\) : courbe <b>en dessous</b>.</div>
+        
+        <p class="etape">Étape 1 : écrire en \(u\)</p>
+        \[ \ln\frac{1 + u}{1 - u} = \ln(1 + u) - \ln(1 - u) = 2\left(u + \frac{u^3}{3} + \frac{u^5}{5}\right) + o(u^5) \qquad x^2 - 1 = \frac{1 - u^2}{u^2} \]
+        <p class="etape">Étape 2 : produit</p>
+        \[ f = \frac{2(1 - u^2)}{u}\left(1 + \frac{u^2}{3} + \frac{u^4}{5}\right) = \frac2u\left(1 - \frac23u^2 - \frac{2}{15}u^4\right) = 2x - \frac{4}{3x} + o\Big(\frac1x\Big) \]
+        <div class="res">Asymptote \(y = 2x\) ; \(f(x) - 2x \sim -\dfrac{4}{3x} &lt; 0\) : courbe <b>en dessous</b>.</div>
 
         <p class="q">2) \(f(x)=\sqrt{x^2+1}+\sqrt{x^2-1}\)</p>
-        <p>\(f=x\big(\sqrt{1+u^2}+\sqrt{1-u^2}\big)\). Avec \(t=u^2\) : \(\sqrt{1+t}+\sqrt{1-t}=\big(1+\tfrac t2-\tfrac{t^2}8\big)+\big(1-\tfrac t2-\tfrac{t^2}8\big)+o(t^2)=2-\tfrac{t^2}4+o(t^2)\), soit \(2-\tfrac{u^4}4\). Donc \(f=2x-\dfrac1{4x^3}+o\big(\tfrac1{x^3}\big)\).</p>
-        <div class="res">Asymptote \(y=2x\) ; \(f(x)-2x\sim-\dfrac1{4x^3}\lt0\) : courbe <b>en dessous</b>.</div>
+        <p>On factorise \(x\) : \(f = x\left(\sqrt{1 + u^2} + \sqrt{1 - u^2}\right)\). Avec \(t = u^2\) :</p>
+        \[ \sqrt{1 + t} + \sqrt{1 - t} = \left(1 + \frac t2 - \frac{t^2}{8}\right) + \left(1 - \frac t2 - \frac{t^2}{8}\right) + o(t^2) = 2 - \frac{t^2}{4} + o(t^2) = 2 - \frac{u^4}{4} + o(u^4) \]
+        \[ f = 2x - \frac{1}{4x^3} + o\Big(\frac{1}{x^3}\Big) \]
+        <div class="res">Asymptote \(y = 2x\) ; \(f(x) - 2x \sim -\dfrac{1}{4x^3} &lt; 0\) : courbe <b>en dessous</b>.</div>
 
         <p class="q">3) \(f(x)=x^2\arctan\Big(\dfrac1{1+x}\Big)\)</p>
-        <p>\(z=\dfrac1{1+x}=\dfrac u{1+u}=u-u^2+u^3+o(u^3)\to0\), \(z^3=u^3+o(u^3)\). \(\arctan z=z-\tfrac{z^3}3+o(z^3)=u-u^2+u^3-\tfrac{u^3}3=u-u^2+\tfrac23u^3+o(u^3)\). On multiplie par \(x^2=\tfrac1{u^2}\) :
-        \(f=\tfrac1u-1+\tfrac23u+o(u)=x-1+\dfrac2{3x}+o\big(\tfrac1x\big)\).</p>
-        <div class="res">Asymptote \(y=x-1\) ; \(f(x)-(x-1)\sim\dfrac2{3x}\gt0\) : courbe <b>au-dessus</b>.</div>
-        <div class="warnbox"><span class="lab">Piège</span>Il faut pousser le DL en \(u\) jusqu'à l'ordre qui, après multiplication par \(x=\frac1u\) (ou \(x^2\)), fait apparaître le terme en \(\frac1x\) : ici ordres 5, 4 et 3 selon les cas.</div>
-        <div class="method"><span class="lab">⚡ Méthode</span>Asymptote en \(\infty\) : poser \(u=1/x\), factoriser le terme dominant, DL en \(u\) assez loin, remultiplier ; asymptote \(y=ax+b\), position = signe du premier terme restant.</div>
+        <p class="etape">Étape 1 : l'argument</p>
+        \[ z = \frac{1}{1 + x} = \frac{u}{1 + u} = u - u^2 + u^3 + o(u^3) \qquad z^3 = u^3 + o(u^3) \]
+        <p class="etape">Étape 2 : arctan</p>
+        \[ \arctan z = z - \frac{z^3}{3} + o(z^3) = u - u^2 + \frac23u^3 + o(u^3) \]
+        <p class="etape">Étape 3 : multiplier par \(x^2 = 1/u^2\)</p>
+        \[ f = \frac1u - 1 + \frac23u + o(u) = x - 1 + \frac{2}{3x} + o\Big(\frac1x\Big) \]
+        <div class="res">Asymptote \(y = x - 1\) ; \(f(x) - (x - 1) \sim \dfrac{2}{3x} &gt; 0\) : courbe <b>au-dessus</b>.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Il faut pousser le DL en \(u\) jusqu'à l'ordre qui, après multiplication par \(x = 1/u\) (ou \(x^2\)), fait apparaître le terme en \(1/x\) : ici les ordres 5, 4 et 3 selon les cas.</div>
       </div>
     </div>
 
@@ -839,24 +988,38 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 15 — Suite définie par \(e^x+x=n\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <figure><img src="td1-img/ex15.png" alt="Énoncé — Exercice 15" loading="lazy"></figure>
+
         <p class="q">1) \(x_n\) est bien définie</p>
-        <p>\(\varphi(x)=e^x+x\) est continue et strictement croissante sur \(\mathbb R\) (somme de deux fonctions strictement croissantes), avec \(\varphi(x)\to-\infty\) en \(-\infty\) et \(+\infty\) en \(+\infty\). Théorème de la bijection : \(\varphi\) est une bijection de \(\mathbb R\) sur \(\mathbb R\).</p>
-        <div class="res">Pour tout \(n\), l'équation \(\varphi(x)=n\) a une unique solution \(x_n=\varphi^{-1}(n)\).</div>
+        <div class="rappel"><span class="lab">Rappel · théorème de la bijection</span>Une fonction continue et strictement monotone sur un intervalle \(I\) est une bijection de \(I\) sur l'intervalle image.</div>
+        <p>\(\varphi(x) = e^x + x\) est continue et strictement croissante sur \(\mathbb R\) (somme de deux fonctions strictement croissantes), de limites \(-\infty\) en \(-\infty\) et \(+\infty\) en \(+\infty\).</p>
+        <div class="res">\(\varphi\) est une bijection de \(\mathbb R\) sur \(\mathbb R\) : pour tout \(n\), l'équation \(\varphi(x) = n\) a une unique solution \(x_n = \varphi^{-1}(n)\).</div>
 
         <p class="q">2) Monotonie et limite</p>
-        <p>\(\varphi(x_{n+1})=n+1\gt n=\varphi(x_n)\) et \(\varphi\) est strictement croissante, donc \(x_{n+1}\gt x_n\) : <b>(x_n) est strictement croissante</b>. Si elle était majorée par \(M\), on aurait \(n=\varphi(x_n)\le\varphi(M)\) pour tout \(n\) : absurde. Une suite croissante non majorée tend vers \(+\infty\).</p>
-        <div class="res">\((x_n)\) strictement croissante, \(x_n\to+\infty\).</div>
+        <p class="etape">Étape 1 : monotonie</p>
+        <p>\(\varphi(x_{n+1}) = n + 1 &gt; n = \varphi(x_n)\) et \(\varphi\) est strictement croissante : \(x_{n+1} &gt; x_n\).</p>
+        <p class="etape">Étape 2 : limite</p>
+        <p>Si \((x_n)\) était majorée par \(M\), on aurait \(n = \varphi(x_n) \le \varphi(M)\) pour tout \(n\) : absurde. Une suite croissante non majorée tend vers \(+\infty\).</p>
+        <div class="res">\((x_n)\) est strictement croissante et \(x_n \to +\infty\).</div>
 
         <p class="q">3) \(x_n\sim\ln n\)</p>
-        <p>De \(n=e^{x_n}+x_n=e^{x_n}\big(1+x_ne^{-x_n}\big)\) et \(x_ne^{-x_n}\to0\) (croissances comparées, \(x_n\to+\infty\)), on a \(\dfrac n{e^{x_n}}\to1\). On passe au logarithme du <b>rapport</b> (on ne passe pas le \(\ln\) dans un équivalent) : \(\ln n-x_n=\ln\dfrac n{e^{x_n}}\to0\). Donc \(x_n=\ln n+o(1)\), et comme \(\ln n\to+\infty\), \(\dfrac{x_n}{\ln n}=1+\dfrac{o(1)}{\ln n}\to1\).</p>
-        <div class="res">\(x_n\sim\ln n\) (et même \(x_n=\ln n+o(1)\)).</div>
+        <p class="etape">Étape 1 : factoriser</p>
+        \[ n = e^{x_n} + x_n = e^{x_n}\left(1 + x_ne^{-x_n}\right) \]
+        <p>\(x_ne^{-x_n} \to 0\) (croissances comparées, \(x_n \to +\infty\)), donc \(\dfrac{n}{e^{x_n}} \to 1\).</p>
+        <p class="etape">Étape 2 : logarithme du rapport</p>
+        <p>On passe au \(\ln\) du <b>rapport</b> (on ne passe jamais le \(\ln\) dans un équivalent) :</p>
+        \[ \ln n - x_n = \ln\frac{n}{e^{x_n}} \to 0 \qquad\Longrightarrow\qquad x_n = \ln n + o(1) \]
+        <p>Comme \(\ln n \to +\infty\) : \(\dfrac{x_n}{\ln n} = 1 + \dfrac{o(1)}{\ln n} \to 1\).</p>
+        <div class="res">\(x_n \sim \ln n\) (et même \(x_n = \ln n + o(1)\)).</div>
 
         <p class="q">4) Développement asymptotique à deux termes</p>
-        <p>On réécrit l'équation : \(e^{x_n}=n-x_n\), donc \(x_n=\ln(n-x_n)=\ln n+\ln\Big(1-\dfrac{x_n}n\Big)\). Comme \(x_n\sim\ln n\), \(\dfrac{x_n}n\sim\dfrac{\ln n}n\to0\) ; avec \(\ln(1+v)\sim v\) pour \(v=-\dfrac{x_n}n\to0\) : \(\ln\Big(1-\dfrac{x_n}n\Big)\sim-\dfrac{x_n}n\sim-\dfrac{\ln n}n\).</p>
-        <div class="res">\(\boxed{x_n=\ln n-\dfrac{\ln n}n+o\Big(\dfrac{\ln n}n\Big)}\)</div>
-        <div class="note"><span class="lab">Vérification numérique</span>Pour \(n=1000\) : \(x_n\approx6{,}900831\) ; formule : \(6{,}907755-0{,}006908=6{,}900848\), écart \(\approx1{,}7\times10^{-5}\ll\frac{\ln n}n\approx7\times10^{-3}\).</div>
-        <div class="warnbox"><span class="lab">Piège</span>Ne jamais écrire « \(\ln(n-x_n)\sim\ln n\) donc \(x_n=\ln n\) » : un équivalent ne donne pas le terme suivant. On isole \(x_n=\ln n+\ln(1-x_n/n)\) et on <b>ré-injecte</b> l'équivalent connu dans le seul terme correctif.</div>
-        <div class="method"><span class="lab">⚡ Méthode</span>Suite implicite \(\varphi(x_n)=n\) : bijection (continue, strictement monotone, limites) ; monotonie par \(\varphi(x_{n+1})\gt\varphi(x_n)\) ; limite par l'absurde sur un majorant ; équivalent en isolant le terme dominant (\(e^{x_n}\sim n\)) via le rapport ; terme suivant par ré-injection dans \(x_n=\ln n+\ln(1-x_n/n)\).</div>
+        <p class="etape">Étape 1 : isoler \(x_n\)</p>
+        \[ e^{x_n} = n - x_n \qquad\Longrightarrow\qquad x_n = \ln(n - x_n) = \ln n + \ln\left(1 - \frac{x_n}{n}\right) \]
+        <p class="etape">Étape 2 : équivalent du terme correctif</p>
+        <p>Comme \(x_n \sim \ln n\), \(\dfrac{x_n}{n} \sim \dfrac{\ln n}{n} \to 0\). Avec \(\ln(1 + v) \sim v\) pour \(v = -\dfrac{x_n}{n}\) :</p>
+        \[ \ln\left(1 - \frac{x_n}{n}\right) \sim -\frac{x_n}{n} \sim -\frac{\ln n}{n} \]
+        <div class="res">\[ x_n = \ln n - \frac{\ln n}{n} + o\Big(\frac{\ln n}{n}\Big) \]</div>
+        <div class="note"><span class="lab">Vérification numérique</span> Pour \(n = 1000\) : \(x_n \approx 6{,}900831\) ; la formule donne \(6{,}907755 - 0{,}006908 = 6{,}900848\), écart \(\approx 1{,}7\times10^{-5}\), très inférieur à \(\dfrac{\ln n}{n} \approx 7\times10^{-3}\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> On n'écrit jamais « \(\ln(n - x_n) \sim \ln n\), donc \(x_n = \ln n\) » : un équivalent ne donne pas le terme suivant. On isole \(x_n = \ln n + \ln(1 - x_n/n)\) et on ré-injecte l'équivalent connu dans le seul terme correctif.</div>
       </div>
     </div>
   </section>
