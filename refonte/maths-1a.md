@@ -23,7 +23,7 @@ Conventions retenues :
 | suites-reelles | fait | 3 créés + 12 TD. Aucune erreur de résultat. Ex 2 et 3 : les `.q` donnaient la limite ou l'équivalent, retirés. Ex 6 b) : majoration de l'écart justifiée. Ex 8 d) : choix de \(n_1\) explicité. Ex 11 : remarque \(u_0=1\) point fixe (suite constante). Ex 12 d) : signe de \(f(x)-x\) démontré (était affirmé sur un exemple). Exo A : valeur numérique \(u_3\) précisée. |
 | limites-fonctions | fait | 3 créés + 7 TD (énoncés relus dans le PDF du TD08). **Erreurs corrigées** : Ex 4 k) « à gauche \(+\infty\) » faux (\(\lfloor x+1\rfloor=0\) exactement, expression non définie) ; Ex 4 l) encadrement faux pour \(x<0\) (limite 1 inchangée). Ex 3 a) : contre-exemples clarifiés (limite 4 ou 5 possible). `.q` des Ex 1, 4, 5 nettoyés (ils contenaient le calcul) et point de limite précisé (\(\pm\infty\)). |
 | continuite | fait | 3 créés + 9 TD. Aucune erreur de résultat (Ex 4 d : conditions n=0 et n=1 revérifiées). Ex 3 c) : encadrement avec les deux signes de x. Ex 5 a) : bijectivité justifiée. Ex 6 : exemple de non-borné ajouté en note. Ex 7 c) : détail du TVI sur g. `.q` titres sans résultat. |
-| derivabilite | à faire | |
+| derivabilite | fait | 3 créés + 10 TD (énoncés relus dans le PDF TD10). Limites Ex 3 et formules de Leibniz Ex 10 revérifiées (SymPy, n = 1..6) ; rang Ex 9 e) vérifié numériquement (n = 11). Aucune erreur. Ex 3 c-d) : refaits avec L'Hôpital comme demandé par le TD (l'ancienne version utilisait des équivalents). Ex 5 c) : la condition (iii) rédigée avec \(\delta=\beta\). |
 | fonctions-usuelles | à faire | |
 | nombres-complexes | à faire | |
 | calcul-matriciel | à faire | |
