@@ -35,4 +35,14 @@ Conventions retenues :
 | integration-riemann | fait | 3 créés + 9 TD. Le PDF du TD n'est pas dans `documents/` (seuls le cours et un corrigé d'Ex 6 y sont) : les énoncés manquants (Ex 2-9) sont **reconstitués** dans des `.enonce` à partir des questions de l'ancienne correction (à comparer au TD d'origine si on le retrouve). Tous les résultats revérifiés à la main : aucune erreur. Précisions ajoutées : hypothèse \(|f|\leqslant M\) sur \([-1,1]\) (Ex 2), télescopage détaillé (Ex 3), majoration \(I_n\leqslant e/(n+1)\) pour justifier \(I_n\to0\) (Ex 8). |
 | equations-differentielles | fait | 3 créés + 18 TD (TD1, TD2) ; énoncés relus dans les PDF ; résultats vérifiés SymPy, aucune erreur ancienne |
 | geometrie-plane | fait | 3 créés + 14 TD + 3 applications ; énoncés repris des PDF ; résultats vérifiés à la main/numériquement, aucune erreur ancienne |
-| geometrie-espace | à faire | |
+| geometrie-espace | fait | 3 créés + 16 TD ; énoncés repris du PDF ; résultats vérifiés SymPy (produits vectoriels, déterminants, inverse, angles), aucune erreur ancienne |
+
+## Résumé final
+
+- **22 pages sur 22 traitées** (M01 : 12 pages, M02 : 10 pages), `#exos` et `#td` réécrits au format « par étapes » ; `#cours`, fiches mémo, « Documents donnés » et `assets/` non touchés.
+- Chaque page contrôlée avant commit : structure HTML (`check.py`), compilation MathJax de toutes les formules (`texcheck.js`, 0 erreur), énoncé en tête de chaque `.exo-body`, `&lt;` dans les formules, absence de « il est évident » / « de même ».
+- **Erreurs de résultat de l'ancienne version corrigées** (avec `.warnbox`) : limites-fonctions (Ex 4 k, l), nombres-complexes (Ex 5, Ex 11 l), calcul-matriciel (Ex 4), systemes-determinants (Ex 5 e complété), integration-techniques (I7, Ex 3 E ; f9 et Ex 9 b aussi faux dans le corrigé officiel, signalés « Erreur du corrigé officiel »). Aucune erreur trouvée dans les autres pages.
+- **Points à connaître** : integration-riemann, énoncés des Ex 2-9 reconstitués faute de PDF du TD ; polynomes Ex 8 b, énoncé du PDF avec \(3x^2+2x^2\) regroupé en \(5x^2\) ; equations-differentielles, TD1 Ex 8 sans solution sur \(]-1,+\infty[\) ; géométrie plane et espace : pas de corrigé officiel, corrections rédigées par nous.
+- Défauts préexistants hors périmètre (nombres-reels, systemes-determinants) : `<p>` non équilibrés dans mémo/cours, laissés tels quels.
+- Convention : exercice à question unique = un seul `.q` « 1) … » ; un `.rappel` placé après le premier `.q` (jamais dans l'énoncé visible en mode examen).
+
