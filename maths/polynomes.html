@@ -121,7 +121,16 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice A — Racine évidente &amp; factorisation</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Factoriser \(P(x)=x^3-6x^2+11x-6\) dans \(\mathbb R[X]\).</div>
-        <p>\(P(1)=1-6+11-6=0\) : racine \(1\). Division par \((x-1)\) : \(P=(x-1)(x^2-5x+6)=(x-1)(x-2)(x-3)\).</p>
+
+        <p class="q">1) Factorisation</p>
+        <div class="rappel"><span class="lab">Rappel · racine et factorisation</span>\[ P(a)=0\iff P(x)=(x-a)\,Q(x) \] On cherche une racine évidente (un diviseur du terme constant), puis on divise.</div>
+        <p class="etape">Étape 1 : racine évidente</p>
+        <p>Les diviseurs de \(-6\) sont \(\pm1,\pm2,\pm3,\pm6\). Pour \(x=1\) :</p>
+        \[ P(1)=1-6+11-6=0 \]
+        <p class="etape">Étape 2 : division par \(x-1\)</p>
+        \[ P(x)=(x-1)(x^2-5x+6) \]
+        <p class="etape">Étape 3 : factoriser le trinôme</p>
+        <p>\(\Delta=25-24=1\) : racines \(\tfrac{5\pm1}2\), soit 2 et 3.</p>
         <div class="res">\(P=(x-1)(x-2)(x-3)\).</div>
       </div>
     </div>
@@ -130,7 +139,13 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice B — Élément simple</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Décomposer \(F(x)=\dfrac{1}{x^2-1}\) en éléments simples sur \(\mathbb R\).</div>
-        <p>\(x^2-1=(x-1)(x+1)\). \(A=\tfrac1{x+1}\big|_{x=1}=\tfrac12\), \(B=\tfrac1{x-1}\big|_{x=-1}=-\tfrac12\).</p>
+
+        <p class="q">1) Décomposition</p>
+        <div class="rappel"><span class="lab">Rappel · pôle simple</span>Si \(F=\dfrac{N}{(x-a)D}\) avec \(D(a)\neq0\), le coefficient de \(\dfrac1{x-a}\) vaut \(\dfrac{N(a)}{D(a)}\) : on multiplie par \((x-a)\), puis on remplace \(x\) par \(a\).</div>
+        <p class="etape">Étape 1 : factoriser le dénominateur</p>
+        <p>\(x^2-1=(x-1)(x+1)\), donc \(F=\dfrac A{x-1}+\dfrac B{x+1}\).</p>
+        <p class="etape">Étape 2 : les coefficients</p>
+        \[ A=\frac1{x+1}\Big|_{x=1}=\frac12 \qquad B=\frac1{x-1}\Big|_{x=-1}=-\frac12 \]
         <div class="res">\(F=\dfrac{1/2}{x-1}-\dfrac{1/2}{x+1}\).</div>
       </div>
     </div>
@@ -139,7 +154,13 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice C — Taylor d'un polynôme</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Développer \(P(x)=x^3\) suivant les puissances de \((x-1)\).</div>
-        <p>\(P(1)=1,\ P'(1)=3,\ P''(1)=6,\ P'''(1)=6\).</p>
+
+        <p class="q">1) Développement en \(x-1\)</p>
+        <div class="rappel"><span class="lab">Rappel · formule de Taylor pour un polynôme</span>\[ P(x)=\sum_{k=0}^{\deg P}\frac{P^{(k)}(a)}{k!}\,(x-a)^k \]</div>
+        <p class="etape">Étape 1 : les dérivées en 1</p>
+        \[ P(1)=1,\quad P'(1)=3,\quad P''(1)=6,\quad P'''(1)=6 \]
+        <p class="etape">Étape 2 : diviser par \(k!\)</p>
+        \[ 1,\quad 3,\quad \frac62=3,\quad \frac66=1 \]
         <div class="res">\(x^3=1+3(x-1)+3(x-1)^2+(x-1)^3\).</div>
       </div>
     </div>
@@ -154,33 +175,89 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 1 — Est-ce un polynôme ?</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p class="q">(1) \(4x^5-x^3+1\)</p><p class="res">Polynôme, degré 5</p>
-        <p class="q">(2) \((2x+4)^5\)</p><p class="res">Polynôme, degré 5</p>
-        <p class="q">(3) \(x\sqrt2-\tfrac13x^3+1\)</p><p>\(\sqrt2\) est un coefficient constant.</p><p class="res">Polynôme, degré 3</p>
-        <p class="q">(4) \(x\sqrt x+2x+1=x^{3/2}+2x+1\)</p><p>Exposant \(\tfrac32\) non entier.</p><p class="res"><b>Pas un polynôme</b></p>
-        <p class="q">(5) \(\dfrac2{x^2+x+1}\)</p><p class="res"><b>Pas un polynôme</b> (fraction)</p>
-        <p class="q">(6) \(4\)</p><p class="res">Polynôme, degré 0</p>
+        <div class="enonce">Déterminer si les expressions suivantes sont des polynômes ; si oui, préciser leur degré.</div>
+
+        <p class="q">1) \(P(x)=4x^5-x^3+1\)</p>
+        <div class="rappel"><span class="lab">Rappel · polynôme</span>Un polynôme est une somme finie \(\sum a_kx^k\), avec des exposants \(k\) <b>entiers positifs</b> et des coefficients constants. Son degré est le plus grand \(k\) tel que \(a_k\neq0\).</div>
+        <p class="etape">Étape 1 : examiner les exposants</p>
+        <div class="res">Polynôme de degré 5.</div>
+
+        <p class="q">2) \(Q(x)=(2x+4)^5\)</p>
+        <p class="etape">Étape 1 : développer mentalement</p>
+        <p>Une puissance entière d'un polynôme est un polynôme ; le terme dominant est \(32x^5\).</p>
+        <div class="res">Polynôme de degré 5.</div>
+
+        <p class="q">3) \(R(x)=x\sqrt2-\tfrac13x^3+1\)</p>
+        <p class="etape">Étape 1 : examiner les coefficients</p>
+        <p>\(\sqrt2\) est une constante : coefficient réel.</p>
+        <div class="res">Polynôme de degré 3.</div>
+
+        <p class="q">4) \(S(x)=x\sqrt x+2x+1\)</p>
+        <p class="etape">Étape 1 : réécrire</p>
+        <p>\(x\sqrt x=x^{3/2}\) : exposant non entier.</p>
+        <div class="res"><b>Pas un polynôme</b>.</div>
+
+        <p class="q">5) \(T(x)=\dfrac{2}{x^2+x+1}\)</p>
+        <p class="etape">Étape 1 : examiner</p>
+        <p>Quotient avec \(x\) au dénominateur : c'est une fraction rationnelle.</p>
+        <div class="res"><b>Pas un polynôme</b>.</div>
+
+        <p class="q">6) \(U(x)=4\)</p>
+        <p class="etape">Étape 1 : examiner</p>
+        <div class="res">Polynôme constant, de degré 0.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 2 — Opérations</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <div class="enonce">\(P=2x^3+5x-1\), \(Q=-x^2+3x\).</div>
-        <p class="q">\(P+Q\)</p><p class="res">\(2x^3-x^2+8x-1\)</p>
-        <p class="q">\(PQ\)</p><p class="res">\(-2x^5+6x^4-5x^3+16x^2-3x\)</p>
-        <p class="q">\(P^2\)</p><p class="res">\(4x^6+20x^4-4x^3+25x^2-10x+1\)</p>
-        <p class="q">\(P(x^2)\)</p><p class="res">\(2x^6+5x^2-1\)</p>
-        <p class="q">\(P\circ Q\)</p><p class="res">\(-2x^6+18x^5-54x^4+54x^3-5x^2+15x-1\)</p>
-        <p class="q">\(Q\circ P\)</p><p class="res">\(-4x^6-20x^4+10x^3-25x^2+25x-4\)</p>
+        <div class="enonce">\(P=2x^3+5x-1\), \(Q=-x^2+3x\). Déterminer \(P+Q\), \(PQ\), \(P^2\), \(P(x^2)\), \(P\circ Q\), \(Q\circ P\).</div>
+
+        <p class="q">a) \(P+Q\)</p>
+        <p class="etape">Étape 1 : additionner les termes du degré identique</p>
+        <div class="res">\(2x^3-x^2+8x-1\)</div>
+
+        <p class="q">b) \(PQ\)</p>
+        <p class="etape">Étape 1 : distribuer</p>
+        \[ (2x^3+5x-1)(-x^2+3x)=-2x^5+6x^4-5x^3+15x^2+x^2-3x \]
+        <div class="res">\(-2x^5+6x^4-5x^3+16x^2-3x\)</div>
+
+        <p class="q">c) \(P^2\)</p>
+        <p class="etape">Étape 1 : carré d'une somme de trois termes</p>
+        \[ (2x^3)^2+(5x)^2+1+2(2x^3)(5x)-2(2x^3)-2(5x) \]
+        <div class="res">\(4x^6+20x^4-4x^3+25x^2-10x+1\)</div>
+
+        <p class="q">d) \(P(x^2)\)</p>
+        <p class="etape">Étape 1 : remplacer \(x\) par \(x^2\)</p>
+        <div class="res">\(2x^6+5x^2-1\)</div>
+
+        <p class="q">e) \(P\circ Q\)</p>
+        <p class="etape">Étape 1 : remplacer \(x\) par \(Q(x)\) dans \(P\)</p>
+        \[ P\circ Q=2Q^3+5Q-1 \]
+        <p class="etape">Étape 2 : développer \(Q^3\)</p>
+        \[ Q^3=(-x^2+3x)^3=-x^6+9x^5-27x^4+27x^3 \]
+        <div class="res">\(P\circ Q=-2x^6+18x^5-54x^4+54x^3-5x^2+15x-1\)</div>
+
+        <p class="q">f) \(Q\circ P\)</p>
+        <p class="etape">Étape 1 : remplacer \(x\) par \(P(x)\) dans \(Q\)</p>
+        \[ Q\circ P=-P^2+3P=-(4x^6+20x^4-4x^3+25x^2-10x+1)+6x^3+15x-3 \]
+        <div class="res">\(Q\circ P=-4x^6-20x^4+10x^3-25x^2+25x-4\)</div>
+        <div class="warnbox"><span class="lab">Piège</span> \(P\circ Q\neq Q\circ P\) : la composition n'est pas commutative.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 3 — Binôme</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <div class="enonce">\((x+1)^5-(x-1)^5\).</div>
-        <p>\((x+1)^5=x^5+5x^4+10x^3+10x^2+5x+1\), \((x-1)^5=x^5-5x^4+10x^3-10x^2+5x-1\) : seuls les termes de degré pair survivent (doublés).</p>
+        <div class="enonce">Calculer \((x+1)^5-(x-1)^5\) dans \(\mathbb R[x]\).</div>
+
+        <p class="q">1) Calcul</p>
+        <div class="rappel"><span class="lab">Rappel · binôme de Newton</span>\[ (x+y)^n=\sum_{k=0}^n\binom nk x^ky^{n-k} \qquad \text{ici : coefficients }1,5,10,10,5,1 \]</div>
+        <p class="etape">Étape 1 : développer les deux puissances</p>
+        \[ (x+1)^5=x^5+5x^4+10x^3+10x^2+5x+1 \]
+        \[ (x-1)^5=x^5-5x^4+10x^3-10x^2+5x-1 \]
+        <p class="etape">Étape 2 : soustraire</p>
+        <p>Les termes de degré impair (\(x^5,x^3,x\)) s'annulent ; les termes de degré pair sont doublés.</p>
         <div class="res">\(10x^4+20x^2+2\)</div>
       </div>
     </div>
@@ -188,8 +265,17 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 4 — Polynôme par valeurs</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <div class="enonce">\(\deg P\leqslant3\), \(P(0)=1,P(1)=0,P(-1)=-2,P(2)=4\).</div>
-        <p>\(P=ax^3+bx^2+cx+d\) : \(d=1\), puis \(a+b+c=-1\), \(-a+b-c=-3\), \(8a+4b+2c=3\Rightarrow b=-2,\ a=\tfrac32,\ c=-\tfrac12\).</p>
+        <div class="enonce">Trouver le polynôme \(P\) de degré \(\leqslant3\) tel que \(P(0)=1\), \(P(1)=0\), \(P(-1)=-2\), \(P(2)=4\).</div>
+
+        <p class="q">1) Recherche de \(P\)</p>
+        <p class="etape">Étape 1 : poser \(P=ax^3+bx^2+cx+d\)</p>
+        <p>\(P(0)=1\) donne \(d=1\).</p>
+        <p class="etape">Étape 2 : écrire les trois autres conditions</p>
+        \[ a+b+c=-1 \qquad -a+b-c=-3 \qquad 8a+4b+2c=3 \]
+        <p class="etape">Étape 3 : résoudre</p>
+        <p>En additionnant les deux premières : \(2b=-4\), donc \(b=-2\). Puis \(a+c=1\) et \(8a+2c=11\), donc \(6a=9\), \(a=\tfrac32\), \(c=-\tfrac12\).</p>
+        <p class="etape">Étape 4 : vérifier</p>
+        <p>\(P(2)=12-8-1+1=4\).</p>
         <div class="res">\(P(x)=\tfrac32x^3-2x^2-\tfrac12x+1\)</div>
       </div>
     </div>
@@ -197,27 +283,83 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 5 — Factorisation, signes, inéquations</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <div class="enonce">\(P(x)=x^3-2x^2-5x+6\).</div>
-        <p class="q">1-2) Racine évidente &amp; factorisation</p><p>\(P(1)=0\), \(P=(x-1)(x^2-x-6)=(x-1)(x-3)(x+2)\).</p>
-        <p class="q">3) Tableau de signes</p><p class="res">\(P>0\) sur \(]-2,1[\cup]3,+\infty[\), \(P<0\) sur \(]-\infty,-2[\cup]1,3[\)</p>
-        <p class="q">4a) \((\ln x)^3-2(\ln x)^2-5\ln x+6>0\)</p><p>Poser \(u=\ln x\) : \(u\in]-2,1[\cup]3,\infty[\).</p><p class="res">\(x\in\,]e^{-2},e[\,\cup\,]e^3,+\infty[\)</p>
-        <p class="q">4b) \(e^{2x}-2e^x\leqslant5-6e^{-x}\)</p><p>\(\times e^x\) : \(t^3-2t^2-5t+6\leqslant0\) avec \(t=e^x>0\), soit \(t\in[1,3]\).</p><p class="res">\(x\in[0,\ln3]\)</p>
+        <div class="enonce">\(P(x)=x^3-2x^2-5x+6\). (1) Racine évidente. (2) Factoriser. (3) Tableau de signes. (4) Résoudre : a) \((\ln x)^3-2(\ln x)^2-5\ln x+6>0\) ; b) \(e^{2x}-2e^x\leqslant5-6e^{-x}\).</div>
+
+        <p class="q">1) Racine évidente</p>
+        <p class="etape">Étape 1 : tester les diviseurs de 6</p>
+        \[ P(1)=1-2-5+6=0 \]
+        <div class="res">\(x=1\) est racine.</div>
+
+        <p class="q">2) Factorisation</p>
+        <p class="etape">Étape 1 : diviser par \(x-1\)</p>
+        \[ P(x)=(x-1)(x^2-x-6) \]
+        <p class="etape">Étape 2 : factoriser le trinôme</p>
+        <p>\(\Delta=1+24=25\), racines \(\tfrac{1\pm5}2\) : 3 et \(-2\).</p>
+        <div class="res">\(P=(x-1)(x-3)(x+2)\).</div>
+
+        <p class="q">3) Tableau de signes</p>
+        <p class="etape">Étape 1 : ordonner les racines</p>
+        <p>\(-2&lt;1&lt;3\). Le coefficient dominant est positif : \(P\) est négatif tout à gauche, puis le signe alterne à chaque racine simple.</p>
+        <div class="res">\(P>0\) sur \(]-2,1[\cup]3,+\infty[\) ; \(P&lt;0\) sur \(]-\infty,-2[\cup]1,3[\).</div>
+
+        <p class="q">4a) \((\ln x)^3-2(\ln x)^2-5\ln x+6>0\)</p>
+        <p class="etape">Étape 1 : changement de variable</p>
+        <p>Domaine \(x>0\) ; on pose \(u=\ln x\) : \(P(u)>0\).</p>
+        <p class="etape">Étape 2 : lire le tableau de signes</p>
+        <p>\(u\in\,]-2,1[\cup]3,+\infty[\).</p>
+        <p class="etape">Étape 3 : revenir à \(x\) (\(\exp\) est croissante)</p>
+        <div class="res">\(x\in\,]e^{-2},e[\ \cup\ ]e^3,+\infty[\)</div>
+
+        <p class="q">4b) \(e^{2x}-2e^x\leqslant5-6e^{-x}\)</p>
+        <p class="etape">Étape 1 : multiplier par \(e^x>0\)</p>
+        \[ e^{3x}-2e^{2x}\leqslant5e^x-6 \iff e^{3x}-2e^{2x}-5e^x+6\leqslant0 \]
+        <p class="etape">Étape 2 : poser \(t=e^x>0\)</p>
+        <p>\(P(t)\leqslant0\) avec \(t>0\) : \(t\in[1,3]\) (l'autre zone négative, \(t\leqslant-2\), est exclue).</p>
+        <p class="etape">Étape 3 : revenir à \(x\)</p>
+        <div class="res">\(x\in[0,\ln3]\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 6 — Racines &amp; factorisation dans \(\mathbb R\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">\(P=4x^3-20x^2+27x-9\)</p><p>Racine \(3\) ; \(4x^2-8x+3=(2x-3)(2x-1)\).</p><p class="res">\(P=(x-3)(2x-3)(2x-1)\)</p>
-        <p class="q">\(Q=x^4-4x^3+9x^2-10x+4\)</p><p>Racine double \(1\) : \(Q=(x-1)^2(x^2-2x+4)\), \(\Delta<0\).</p><p class="res">\(Q=(x-1)^2(x^2-2x+4)\)</p>
+        <div class="enonce">Déterminer les racines des polynômes suivants, puis les factoriser dans \(\mathbb R[x]\).</div>
+
+        <p class="q">a) \(P(x)=4x^3-20x^2+27x-9\)</p>
+        <div class="rappel"><span class="lab">Rappel · racines rationnelles</span>Une racine rationnelle \(\tfrac pq\) (irréductible) d'un polynôme à coefficients entiers vérifie : \(p\) divise le terme constant, \(q\) divise le coefficient dominant.</div>
+        <p class="etape">Étape 1 : racine</p>
+        <p>\(P(3)=108-180+81-9=0\).</p>
+        <p class="etape">Étape 2 : division par \(x-3\)</p>
+        \[ P=(x-3)(4x^2-8x+3) \]
+        <p class="etape">Étape 3 : le trinôme</p>
+        <p>\(\Delta=64-48=16\), racines \(\tfrac{8\pm4}8\) : \(\tfrac32\) et \(\tfrac12\).</p>
+        <div class="res">Racines \(3,\tfrac32,\tfrac12\) ; \(P=(x-3)(2x-3)(2x-1)\).</div>
+
+        <p class="q">b) \(Q(x)=x^4-4x^3+9x^2-10x+4\)</p>
+        <p class="etape">Étape 1 : racine évidente</p>
+        <p>\(Q(1)=1-4+9-10+4=0\) et \(Q'(x)=4x^3-12x^2+18x-10\), \(Q'(1)=0\) : 1 est racine double.</p>
+        <p class="etape">Étape 2 : diviser par \((x-1)^2=x^2-2x+1\)</p>
+        \[ Q=(x-1)^2(x^2-2x+4) \]
+        <p class="etape">Étape 3 : le facteur restant</p>
+        <p>\(\Delta=4-16=-12&lt;0\) : pas de racine réelle.</p>
+        <div class="res">Seule racine réelle : 1 (double) ; \(Q=(x-1)^2(x^2-2x+4)\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 7 — Bicarré</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <div class="enonce">\(P=x^4-4x^2+3\).</div>
-        <p>\(u=x^2\) : \(u^2-4u+3=(u-1)(u-3)\), donc \(P=(x-1)(x+1)(x-\sqrt3)(x+\sqrt3)\).</p>
+        <div class="enonce">\(P=x^4-4x^2+3\). Factoriser \(P\), dresser son tableau de signes et résoudre \(P(x)\geqslant0\).</div>
+
+        <p class="q">1) Factorisation</p>
+        <p class="etape">Étape 1 : poser \(u=x^2\)</p>
+        \[ u^2-4u+3=(u-1)(u-3) \]
+        <p class="etape">Étape 2 : revenir à \(x\)</p>
+        <div class="res">\(P=(x-1)(x+1)(x-\sqrt3)(x+\sqrt3)\).</div>
+
+        <p class="q">2) Tableau de signes et inéquation</p>
+        <p class="etape">Étape 1 : ordonner les racines</p>
+        <p>\(-\sqrt3&lt;-1&lt;1&lt;\sqrt3\). Coefficient dominant positif : \(P>0\) à gauche de \(-\sqrt3\), puis alternance : \(+,-,+,-,+\).</p>
         <div class="res">\(P(x)\geqslant0\iff x\in\,]-\infty,-\sqrt3]\cup[-1,1]\cup[\sqrt3,+\infty[\)</div>
       </div>
     </div>
@@ -225,96 +367,339 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 8 — Divisions euclidiennes</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">a) \(P=3x^5+4x^2+1\), \(Q=x^2+2x+3\)</p><p class="res">\(Q_{quot}=3x^3-6x^2+3x+16\), \(R=-41x-47\)</p>
-        <p class="q">b) \(P=4x^5-2x^4+5x^2-x+5\), \(Q=x^2+x+1\)</p><p class="res">\(Q_{quot}=4x^3-6x^2+2x+9\), \(R=-12x-4\)</p>
-        <p class="q">c) \(P=x^3-3ix-5(1+i)\), \(Q=x-1+i\)</p><p>Horner en \(a=1-i\).</p><p class="res">\(Q_{quot}=x^2+(1-i)x-5i\), \(R=-10-10i\)</p>
+        <div class="enonce">Effectuer la division euclidienne de \(P\) par \(Q\) : a) \(P=3x^5+4x^2+1\), \(Q=x^2+2x+3\) ; b) \(P=4x^5-2x^4+3x^2+2x^2-x+5\), \(Q=x^2+x+1\) ; c) \(P=x^3-3ix-5(1+i)\), \(Q=x-1+i\).</div>
+
+        <p class="q">a) \(3x^5+4x^2+1\) par \(x^2+2x+3\)</p>
+        <div class="rappel"><span class="lab">Rappel · division euclidienne</span>\[ P=QS+R,\qquad \deg R&lt;\deg Q \]On divise terme dominant par terme dominant, on soustrait, et on recommence.</div>
+        <p class="etape">Étape 1 : première ligne</p>
+        <p>\(3x^3\times Q=3x^5+6x^4+9x^3\) ; reste : \(-6x^4-9x^3+4x^2+1\).</p>
+        <p class="etape">Étape 2 : deuxième ligne</p>
+        <p>\(-6x^2\times Q=-6x^4-12x^3-18x^2\) ; reste : \(3x^3+22x^2+1\).</p>
+        <p class="etape">Étape 3 : troisième ligne</p>
+        <p>\(3x\times Q=3x^3+6x^2+9x\) ; reste : \(16x^2-9x+1\).</p>
+        <p class="etape">Étape 4 : dernière ligne</p>
+        <p>\(16\times Q=16x^2+32x+48\) ; reste : \(-41x-47\), de degré \(&lt;2\).</p>
+        <div class="res">Quotient \(3x^3-6x^2+3x+16\), reste \(-41x-47\).</div>
+
+        <p class="q">b) \(4x^5-2x^4+5x^2-x+5\) par \(x^2+x+1\)</p>
+        <p class="etape">Étape 1 : regrouper l'énoncé</p>
+        <p>\(3x^2+2x^2=5x^2\) et il n'y a pas de terme en \(x^3\).</p>
+        <p class="etape">Étape 2 : lignes de la division</p>
+        <ul>
+          <li>\(4x^3\times Q=4x^5+4x^4+4x^3\) ; reste : \(-6x^4-4x^3+5x^2-x+5\).</li>
+          <li>\(-6x^2\times Q=-6x^4-6x^3-6x^2\) ; reste : \(2x^3+11x^2-x+5\).</li>
+          <li>\(2x\times Q=2x^3+2x^2+2x\) ; reste : \(9x^2-3x+5\).</li>
+          <li>\(9\times Q=9x^2+9x+9\) ; reste : \(-12x-4\).</li>
+        </ul>
+        <div class="res">Quotient \(4x^3-6x^2+2x+9\), reste \(-12x-4\).</div>
+
+        <p class="q">c) \(x^3-3ix-5(1+i)\) par \(x-1+i\)</p>
+        <p class="etape">Étape 1 : diviseur de la forme \(x-a\)</p>
+        <p>\(x-1+i=x-a\) avec \(a=1-i\) : on utilise le schéma de Horner.</p>
+        <div class="rappel"><span class="lab">Rappel · schéma de Horner</span>Pour diviser \(\sum c_kx^k\) par \(x-a\) : \(b_{n-1}=c_n\), \(b_{k-1}=c_k+ab_k\) ; le dernier calcul donne le reste \(P(a)\).</div>
+        <p class="etape">Étape 2 : coefficients \(1,\ 0,\ -3i,\ -5-5i\)</p>
+        <ul>
+          <li>\(b_2=1\).</li>
+          <li>\(b_1=0+(1-i)\times1=1-i\).</li>
+          <li>\(b_0=-3i+(1-i)(1-i)=-3i-2i=-5i\).</li>
+          <li>reste \(=-5-5i+(1-i)(-5i)=-5-5i-5i-5=-10-10i\).</li>
+        </ul>
+        <div class="res">Quotient \(x^2+(1-i)x-5i\), reste \(-10-10i\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 9 — Divisibilité par \(x^2+x+1\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <div class="enonce">\(x^4+ax^2+bx+c\) divisible par \(x^2+x+1\) ?</div>
-        <p>Racine \(j=e^{2i\pi/3}\) avec \(j^2=-1-j\), \(j^4=j\). \(P(j)=(-a+c)+(1-a+b)j=0\), d'où (base \(1,j\)) : \(-a+c=0\) et \(1-a+b=0\).</p>
-        <div class="res">Condition : \(c=a\) et \(b=a-1\) (\(a\in\mathbb R\) libre).</div>
+        <div class="enonce">À quelle condition sur \(a,b,c\in\mathbb R\) le polynôme \(x^4+ax^2+bx+c\) est-il divisible par \(x^2+x+1\) ?</div>
+
+        <p class="q">1) Condition</p>
+        <div class="rappel"><span class="lab">Rappel · divisibilité et racines</span>\(Q\) divise \(P\) si et seulement si le reste de la division de \(P\) par \(Q\) est nul. Si \(Q\) a des racines distinctes, il suffit que \(P\) s'annule en chacune.</div>
+        <p class="etape">Étape 1 : division euclidienne</p>
+        <p>On divise \(x^4+ax^2+bx+c\) par \(x^2+x+1\) : le quotient est \(x^2-x+a\) et le reste \((b-a+1)x+(c-a)\).</p>
+        <p class="etape">Étape 2 : reste nul</p>
+        \[ b-a+1=0 \qquad c-a=0 \]
+        <p class="etape">Étape 3 : contrôle par les racines</p>
+        <p>Avec \(j=e^{2i\pi/3}\) : \(j^2=-1-j\), \(j^4=j\), donc \(P(j)=j+a(-1-j)+bj+c=(c-a)+(1-a+b)j\). Comme \(1\) et \(j\) sont indépendants sur \(\mathbb R\), on retrouve les deux conditions.</p>
+        <div class="res">Divisible \(\iff c=a\) et \(b=a-1\) (\(a\in\mathbb R\) libre).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 10 — Divisibilité par \(x^2-3x+2\)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <div class="enonce">\(x^2-3x+2=(x-1)(x-2)\) divise \(x^4+ax^3+bx^2+x+2\) ?</div>
-        <p>\(P(1)=0\Rightarrow a+b=-4\) ; \(P(2)=0\Rightarrow2a+b=-5\).</p>
-        <div class="res">\(a=-1,\ b=-3\)</div>
+        <div class="enonce">Déterminer \(a,b\) pour que \(x^2-3x+2\) divise \(x^4+ax^3+bx^2+x+2\).</div>
+
+        <p class="q">1) Valeurs de \(a\) et \(b\)</p>
+        <p class="etape">Étape 1 : racines du diviseur</p>
+        <p>\(x^2-3x+2=(x-1)(x-2)\) : racines 1 et 2.</p>
+        <p class="etape">Étape 2 : imposer \(P(1)=0\) et \(P(2)=0\)</p>
+        \[ P(1)=1+a+b+1+2=0\iff a+b=-4 \]
+        \[ P(2)=16+8a+4b+2+2=0\iff 2a+b=-5 \]
+        <p class="etape">Étape 3 : résoudre</p>
+        <p>En soustrayant : \(a=-1\), puis \(b=-3\).</p>
+        <div class="res">\(a=-1\) et \(b=-3\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 11 — Multiplicité &amp; dérivée</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <div class="enonce">\(P(x)=(x-2)^3(x+1)\).</div>
-        <p class="q">1) \(x=2\) racine triple</p><p>\((x-2)^3\mid P\) et \((x+1)|_{x=2}=3\neq0\).</p><p class="res">Multiplicité \(3\)</p>
-        <p class="q">2) \(P'\)</p><p>\(P'=(x-2)^2[3(x+1)+(x-2)]=(x-2)^2(4x+1)\).</p><p class="res">\(x=2\) est racine de \(P'\) de multiplicité \(2\)</p>
+        <div class="enonce">\(P(x)=(x-2)^3(x+1)\). (1) Vérifier que 2 est racine de multiplicité 3. (2) Calculer \(P'\) et la multiplicité de 2 dans \(P'\).</div>
+
+        <p class="q">1) Multiplicité de 2 dans \(P\)</p>
+        <div class="rappel"><span class="lab">Rappel · multiplicité</span>\(a\) est racine de multiplicité \(m\) de \(P\) si \(P=(x-a)^mQ\) avec \(Q(a)\neq0\).</div>
+        <p class="etape">Étape 1 : vérifier</p>
+        <p>\(P=(x-2)^3Q\) avec \(Q=x+1\), et \(Q(2)=3\neq0\).</p>
+        <div class="res">Multiplicité 3.</div>
+
+        <p class="q">2) \(P'\) et multiplicité de 2 dans \(P'\)</p>
+        <p class="etape">Étape 1 : dériver</p>
+        \[ P'=3(x-2)^2(x+1)+(x-2)^3=(x-2)^2\big[3(x+1)+(x-2)\big]=(x-2)^2(4x+1) \]
+        <p class="etape">Étape 2 : conclure</p>
+        <p>\(4x+1\) vaut 9 en \(x=2\), non nul.</p>
+        <div class="res">\(P'=(x-2)^2(4x+1)\) : 2 est racine de multiplicité 2 de \(P'\) (une de moins que dans \(P\)).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 12 — Taylor en 1</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <div class="enonce">\(P(x)=x^4+x^3-4x^2+x+1\) en \(a=1\).</div>
-        <p>\(P(1)=0,\ P'(1)=0,\ P''(1)=10,\ P'''(1)=30,\ P^{(4)}(1)=24\).</p>
-        <div class="res">\(P(x)=5(x-1)^2+5(x-1)^3+(x-1)^4\)</div>
+        <div class="enonce">Appliquer la formule de Taylor au polynôme \(P(x)=x^4+x^3-4x^2+x+1\) en 1.</div>
+
+        <p class="q">1) Développement en \(x-1\)</p>
+        <div class="rappel"><span class="lab">Rappel · formule de Taylor</span>\[ P(x)=\sum_{k=0}^{\deg P}\frac{P^{(k)}(1)}{k!}(x-1)^k \]</div>
+        <p class="etape">Étape 1 : dérivées successives</p>
+        \[ P'=4x^3+3x^2-8x+1,\quad P''=12x^2+6x-8,\quad P'''=24x+6,\quad P^{(4)}=24 \]
+        <p class="etape">Étape 2 : valeurs en 1</p>
+        \[ P(1)=0,\ P'(1)=0,\ P''(1)=10,\ P'''(1)=30,\ P^{(4)}(1)=24 \]
+        <p class="etape">Étape 3 : coefficients</p>
+        \[ \frac{10}{2}=5,\quad\frac{30}{6}=5,\quad\frac{24}{24}=1 \]
+        <div class="res">\(P(x)=5(x-1)^2+5(x-1)^3+(x-1)^4\). Donc 1 est racine double.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 13 — Factoriser dans \(\mathbb R[X]\) et \(\mathbb C[X]\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(x^4-1\)</p><p class="res">\(\mathbb R:(x-1)(x+1)(x^2+1)\) ; \(\mathbb C:(x-1)(x+1)(x-i)(x+i)\)</p>
-        <p class="q">(b) \(4x^3+4x^2+3x+3\)</p><p>\(=(x+1)(4x^2+3)\).</p><p class="res">\(\mathbb R:(x+1)(4x^2+3)\) ; \(\mathbb C:(x+1)(2x-i\sqrt3)(2x+i\sqrt3)\)</p>
-        <p class="q">(c) \(x^4+1\)</p><p>\(=(x^2+1)^2-2x^2\).</p><p class="res">\(\mathbb R:(x^2-\sqrt2x+1)(x^2+\sqrt2x+1)\) ; \(\mathbb C:\prod_{k}(x-e^{i(2k+1)\pi/4})\)</p>
-        <p class="q">(d) \(x^4-5x^3+4x^2+3x+9\)</p><p>Racine double \(3\) : \(=(x-3)^2(x^2+x+1)\).</p><p class="res">\(\mathbb R:(x-3)^2(x^2+x+1)\) ; \(\mathbb C:(x-3)^2(x-j)(x-j^2)\)</p>
-        <p class="q">(e) \(x^8+x^4+1\)</p><p>\(=(x^4+x^2+1)(x^4-x^2+1)=(x^2+x+1)(x^2-x+1)(x^2-\sqrt3x+1)(x^2+\sqrt3x+1)\).</p><p class="res">\(\mathbb R\) : les 4 trinômes ci-dessus ; \(\mathbb C\) : racines \(e^{\pm i\pi/6},e^{\pm i\pi/3},e^{\pm2i\pi/3},e^{\pm5i\pi/6}\)</p>
-        <p class="q">(f) \(x^5-1\)</p><p class="res">\(\mathbb R:(x-1)(x^2-2\cos\tfrac{2\pi}5x+1)(x^2-2\cos\tfrac{4\pi}5x+1)\) ; \(\mathbb C:(x-1)\prod_{k=1}^4(x-e^{2ik\pi/5})\)</p>
-        <p class="q">(g) \(x^6+1\)</p><p>\(=(x^2+1)(x^4-x^2+1)\).</p><p class="res">\(\mathbb R:(x^2+1)(x^2-\sqrt3x+1)(x^2+\sqrt3x+1)\) ; \(\mathbb C:\prod(x-e^{i(2k+1)\pi/6})\)</p>
+        <div class="enonce">Factoriser chacun des polynômes suivants dans \(\mathbb R[x]\) et \(\mathbb C[x]\).</div>
+
+        <p class="q">a) \(x^4-1\)</p>
+        <div class="rappel"><span class="lab">Rappel · facteurs irréductibles</span>Dans \(\mathbb C[x]\) : uniquement des facteurs de degré 1. Dans \(\mathbb R[x]\) : degré 1, ou degré 2 de discriminant \(&lt;0\) (on regroupe les racines complexes conjuguées).</div>
+        <p class="etape">Étape 1 : identité remarquable</p>
+        \[ x^4-1=(x^2-1)(x^2+1)=(x-1)(x+1)(x^2+1) \]
+        <p class="etape">Étape 2 : racines complexes de \(x^2+1\)</p>
+        <div class="res">\(\mathbb R\) : \((x-1)(x+1)(x^2+1)\). \(\mathbb C\) : \((x-1)(x+1)(x-i)(x+i)\).</div>
+
+        <p class="q">b) \(4x^3+4x^2+3x+3\)</p>
+        <p class="etape">Étape 1 : factoriser par groupement</p>
+        \[ 4x^2(x+1)+3(x+1)=(x+1)(4x^2+3) \]
+        <p class="etape">Étape 2 : \(4x^2+3\)</p>
+        <p>Racines \(\pm\tfrac{i\sqrt3}2\) : pas de racine réelle ; \(4x^2+3=(2x-i\sqrt3)(2x+i\sqrt3)\).</p>
+        <div class="res">\(\mathbb R\) : \((x+1)(4x^2+3)\). \(\mathbb C\) : \((x+1)(2x-i\sqrt3)(2x+i\sqrt3)\).</div>
+
+        <p class="q">c) \(x^4+1\)</p>
+        <p class="etape">Étape 1 : compléter le carré</p>
+        \[ x^4+1=(x^2+1)^2-2x^2=(x^2+1-\sqrt2x)(x^2+1+\sqrt2x) \]
+        <p class="etape">Étape 2 : racines complexes</p>
+        <p>Les racines de \(x^4=-1\) sont \(e^{i(2k+1)\pi/4}\), \(k=0,\dots,3\).</p>
+        <div class="res">\(\mathbb R\) : \((x^2-\sqrt2x+1)(x^2+\sqrt2x+1)\). \(\mathbb C\) : \(\prod_{k=0}^3\big(x-e^{i(2k+1)\pi/4}\big)\).</div>
+
+        <p class="q">d) \(x^4-5x^3+4x^2+3x+9\)</p>
+        <p class="etape">Étape 1 : chercher une racine double entière</p>
+        <p>\(P(3)=81-135+36+9+9=0\) et \(P'(x)=4x^3-15x^2+8x+3\), \(P'(3)=108-135+24+3=0\) : 3 est racine double.</p>
+        <p class="etape">Étape 2 : diviser par \((x-3)^2=x^2-6x+9\)</p>
+        \[ P=(x-3)^2(x^2+x+1) \]
+        <p class="etape">Étape 3 : \(x^2+x+1\)</p>
+        <p>\(\Delta=-3&lt;0\), racines \(j\) et \(j^2=\bar j\), avec \(j=e^{2i\pi/3}\).</p>
+        <div class="res">\(\mathbb R\) : \((x-3)^2(x^2+x+1)\). \(\mathbb C\) : \((x-3)^2(x-j)(x-j^2)\).</div>
+
+        <p class="q">e) \(x^8+x^4+1\)</p>
+        <p class="etape">Étape 1 : poser \(u=x^4\)</p>
+        \[ x^8+x^4+1=(x^4+x^2+1)(x^4-x^2+1) \]
+        <p class="etape">Étape 2 : factoriser chaque bicarré</p>
+        \[ x^4+x^2+1=(x^2+1)^2-x^2=(x^2+x+1)(x^2-x+1) \]
+        \[ x^4-x^2+1=(x^2+1)^2-3x^2=(x^2-\sqrt3x+1)(x^2+\sqrt3x+1) \]
+        <p class="etape">Étape 3 : racines complexes</p>
+        <p>Ce sont les racines 12ᵉ de l'unité qui ne sont pas racines quatrièmes : \(e^{\pm i\pi/6},e^{\pm i\pi/3},e^{\pm2i\pi/3},e^{\pm5i\pi/6}\).</p>
+        <div class="res">\(\mathbb R\) : \((x^2+x+1)(x^2-x+1)(x^2-\sqrt3x+1)(x^2+\sqrt3x+1)\). \(\mathbb C\) : produit des 8 facteurs \(x-e^{\pm i\pi/6}\), etc.</div>
+
+        <p class="q">f) \(x^5-1\)</p>
+        <p class="etape">Étape 1 : racines cinquièmes de l'unité</p>
+        <p>\(\omega_k=e^{2ik\pi/5}\), \(k=0,\dots,4\). Dans \(\mathbb C\) : \((x-1)\prod_{k=1}^4(x-\omega_k)\).</p>
+        <p class="etape">Étape 2 : regrouper les conjuguées</p>
+        <p>\((x-\omega_k)(x-\bar\omega_k)=x^2-2\cos\tfrac{2k\pi}5\,x+1\), pour \(k=1,2\).</p>
+        <div class="res">\(\mathbb R\) : \((x-1)\big(x^2-2\cos\tfrac{2\pi}5x+1\big)\big(x^2-2\cos\tfrac{4\pi}5x+1\big)\). \(\mathbb C\) : \((x-1)\prod_{k=1}^4(x-e^{2ik\pi/5})\).</div>
+
+        <p class="q">g) \(x^6+1\)</p>
+        <p class="etape">Étape 1 : somme de cubes</p>
+        \[ x^6+1=(x^2+1)(x^4-x^2+1)=(x^2+1)(x^2-\sqrt3x+1)(x^2+\sqrt3x+1) \]
+        <p class="etape">Étape 2 : racines complexes</p>
+        <p>Les racines de \(x^6=-1\) sont \(e^{i(2k+1)\pi/6}\), \(k=0,\dots,5\).</p>
+        <div class="res">\(\mathbb R\) : \((x^2+1)(x^2-\sqrt3x+1)(x^2+\sqrt3x+1)\). \(\mathbb C\) : \(\prod_{k=0}^5\big(x-e^{i(2k+1)\pi/6}\big)\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 14 — Factorisation dans \(\mathbb C[X]\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(x^2+(3i-1)x-2-i\)</p><p>\(\Delta=-2i\), \(\delta=1-i\) ; racines \(1-2i\) et \(-i\).</p><p class="res">\((x-1+2i)(x+i)\)</p>
-        <p class="q">(b) \(x^3+(4+i)x^2+(5-2i)x+2-3i\)</p><p>Racine \(-1\) ; quotient \(x^2+(3+i)x+2-3i\), \(\Delta=18i\), \(\delta=3+3i\) ; racines \(i\) et \(-3-2i\).</p><p class="res">\((x+1)(x-i)(x+3+2i)\)</p>
+        <div class="enonce">Factoriser les polynômes suivants.</div>
+
+        <p class="q">a) \(x^2+(3i-1)x-2-i\)</p>
+        <p class="etape">Étape 1 : discriminant</p>
+        \[ \Delta=(3i-1)^2-4(-2-i)=(-9-6i+1)+8+4i=-2i \]
+        <p class="etape">Étape 2 : racine carrée de \(\Delta\)</p>
+        <p>\((1-i)^2=-2i\) : \(\delta=1-i\).</p>
+        <p class="etape">Étape 3 : racines</p>
+        \[ x=\frac{(1-3i)\pm(1-i)}2:\quad 1-2i\ \text{ et }\ -i \]
+        <div class="res">\((x-1+2i)(x+i)\)</div>
+
+        <p class="q">b) \(x^3+(4+i)x^2+(5-2i)x+2-3i\)</p>
+        <p class="etape">Étape 1 : racine évidente</p>
+        <p>\(x=-1\) : \(-1+(4+i)-(5-2i)+2-3i=0\).</p>
+        <p class="etape">Étape 2 : division par \(x+1\)</p>
+        \[ P=(x+1)\big(x^2+(3+i)x+2-3i\big) \]
+        <p class="etape">Étape 3 : le trinôme</p>
+        \[ \Delta=(3+i)^2-4(2-3i)=(8+6i)-8+12i=18i=(3+3i)^2 \]
+        <p class="etape">Étape 4 : racines</p>
+        \[ x=\frac{-(3+i)\pm(3+3i)}2:\quad i\ \text{ et }\ -3-2i \]
+        <div class="res">\((x+1)(x-i)(x+3+2i)\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 15 — Éléments simples sur \(\mathbb R\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">\(A=\dfrac{x}{x^2-4}\)</p><p class="res">\(\dfrac{1/2}{x-2}+\dfrac{1/2}{x+2}\)</p>
-        <p class="q">\(B=\dfrac{2x+5}{(x-1)(x+2)(x-3)}\)</p><p class="res">\(\dfrac{-7/6}{x-1}+\dfrac{1/15}{x+2}+\dfrac{11/10}{x-3}\)</p>
-        <p class="q">\(C=\dfrac{x^3-3x^2+x-4}{x-1}\)</p><p>Division : partie entière \(x^2-2x-1\).</p><p class="res">\(x^2-2x-1-\dfrac5{x-1}\)</p>
-        <p class="q">\(D=\dfrac{2x^3+x^2-x+1}{(x-1)^2}\)</p><p>Partie entière \(2x+5\), reste \(7x-4\).</p><p class="res">\(2x+5+\dfrac7{x-1}+\dfrac3{(x-1)^2}\)</p>
-        <p class="q">\(E=\dfrac{x^5+x^4+1}{x^3-x}\)</p><p>Partie entière \(x^2+x+1\).</p><p class="res">\(x^2+x+1-\dfrac1x+\dfrac{3/2}{x-1}+\dfrac{1/2}{x+1}\)</p>
-        <p class="q">\(F=\dfrac{x^3+x+1}{(x-1)^3(x+1)}\)</p><p class="res">\(\dfrac{7/8}{x-1}+\dfrac{5/4}{(x-1)^2}+\dfrac{3/2}{(x-1)^3}+\dfrac{1/8}{x+1}\)</p>
-        <p class="q">\(G=\dfrac{x+1}{x^4+1}\)</p><p>\(x^4+1=(x^2-\sqrt2x+1)(x^2+\sqrt2x+1)\).</p><p class="res">\(\dfrac{-\frac{\sqrt2}4x+\frac{2+\sqrt2}4}{x^2-\sqrt2x+1}+\dfrac{\frac{\sqrt2}4x+\frac{2-\sqrt2}4}{x^2+\sqrt2x+1}\)</p>
-        <p class="q">\(H=\dfrac{x}{(x^2+1)(x^2+4)}\)</p><p>\(\dfrac1{(x^2+1)(x^2+4)}=\tfrac13\big(\tfrac1{x^2+1}-\tfrac1{x^2+4}\big)\).</p><p class="res">\(\dfrac13\dfrac{x}{x^2+1}-\dfrac13\dfrac{x}{x^2+4}\)</p>
-        <p class="q">\(I=\dfrac{2x^4+x^3+3x^2-6x+1}{2x^3-x^2}\)</p><p>Partie entière \(x+1\), reste sur \(x^2(2x-1)\).</p><p class="res">\(x+1+\dfrac4x-\dfrac1{x^2}-\dfrac4{2x-1}\)</p>
+        <div class="enonce">Décomposer les fractions rationnelles suivantes en éléments simples sur \(\mathbb R\).</div>
+
+        <p class="q">A) \(A(x)=\dfrac{x}{x^2-4}\)</p>
+        <div class="rappel"><span class="lab">Rappel · décomposition en éléments simples</span>On effectue d'abord la division euclidienne (partie entière) si \(\deg N\geqslant\deg D\). Un pôle simple \(a\) donne \(\dfrac{c}{x-a}\) avec \(c=\dfrac{N(a)}{D_1(a)}\) (\(D=(x-a)D_1\)). Un pôle \(a\) de multiplicité \(m\) donne \(\sum_{k=1}^m\dfrac{c_k}{(x-a)^k}\). Un facteur irréductible \(x^2+px+q\) donne \(\dfrac{\alpha x+\beta}{x^2+px+q}\).</div>
+        <p class="etape">Étape 1 : factoriser</p>
+        <p>\(x^2-4=(x-2)(x+2)\) : \(A=\dfrac a{x-2}+\dfrac b{x+2}\).</p>
+        <p class="etape">Étape 2 : coefficients</p>
+        \[ a=\frac{2}{4}=\frac12 \qquad b=\frac{-2}{-4}=\frac12 \]
+        <div class="res">\(A=\dfrac{1/2}{x-2}+\dfrac{1/2}{x+2}\)</div>
+
+        <p class="q">B) \(B(x)=\dfrac{2x+5}{(x-1)(x+2)(x-3)}\)</p>
+        <p class="etape">Étape 1 : trois pôles simples</p>
+        \[ a=\frac{7}{(3)(-2)}=-\frac76 \qquad b=\frac{1}{(-3)(-5)}=\frac1{15} \qquad c=\frac{11}{(2)(5)}=\frac{11}{10} \]
+        <div class="res">\(B=\dfrac{-7/6}{x-1}+\dfrac{1/15}{x+2}+\dfrac{11/10}{x-3}\)</div>
+
+        <p class="q">C) \(C(x)=\dfrac{x^3-3x^2+x-4}{x-1}\)</p>
+        <p class="etape">Étape 1 : partie entière</p>
+        \[ x^3-3x^2+x-4=(x-1)(x^2-2x-1)-5 \]
+        <div class="res">\(C=x^2-2x-1-\dfrac5{x-1}\)</div>
+
+        <p class="q">D) \(D(x)=\dfrac{2x^3+x^2-x+1}{(x-1)^2}\)</p>
+        <p class="etape">Étape 1 : partie entière (\(x^2-2x+1\))</p>
+        \[ 2x^3+x^2-x+1=(2x+5)(x^2-2x+1)+(7x-4) \]
+        <p class="etape">Étape 2 : le reste sur \((x-1)^2\)</p>
+        \[ \frac{7x-4}{(x-1)^2}=\frac{7(x-1)+3}{(x-1)^2}=\frac7{x-1}+\frac3{(x-1)^2} \]
+        <div class="res">\(D=2x+5+\dfrac7{x-1}+\dfrac3{(x-1)^2}\)</div>
+
+        <p class="q">E) \(E(x)=\dfrac{x^5+x^4+1}{x^3-x}\)</p>
+        <p class="etape">Étape 1 : partie entière</p>
+        \[ x^5+x^4+1=(x^2+x+1)(x^3-x)+(x^2+x+1) \]
+        <p class="etape">Étape 2 : pôles simples de \(\dfrac{x^2+x+1}{x(x-1)(x+1)}\)</p>
+        \[ \text{en }0:\ \frac1{(-1)(1)}=-1 \qquad \text{en }1:\ \frac3{(1)(2)}=\frac32 \qquad \text{en }-1:\ \frac1{(-1)(-2)}=\frac12 \]
+        <div class="res">\(E=x^2+x+1-\dfrac1x+\dfrac{3/2}{x-1}+\dfrac{1/2}{x+1}\)</div>
+
+        <p class="q">F) \(F(x)=\dfrac{x^3+x+1}{(x-1)^3(x+1)}\)</p>
+        <p class="etape">Étape 1 : forme</p>
+        \[ F=\frac{\alpha}{x-1}+\frac{\beta}{(x-1)^2}+\frac{\gamma}{(x-1)^3}+\frac{\delta}{x+1} \]
+        <p class="etape">Étape 2 : \(\delta\) et \(\gamma\)</p>
+        \[ \delta=\frac{(-1)^3-1+1}{(-2)^3}=\frac18 \qquad \gamma=\frac{1+1+1}{1+1}=\frac32 \]
+        <p class="etape">Étape 3 : \(\alpha\), par le comportement à l'infini</p>
+        <p>\(xF(x)\to1\) quand \(x\to+\infty\) : \(\alpha+\delta=1\), donc \(\alpha=\tfrac78\).</p>
+        <p class="etape">Étape 4 : \(\beta\), par la valeur en 0</p>
+        <p>\(F(0)=-1\) : \(-\alpha+\beta-\gamma+\delta=-1\), donc \(\beta=-1+\tfrac78+\tfrac32-\tfrac18=\tfrac54\).</p>
+        <div class="res">\(F=\dfrac{7/8}{x-1}+\dfrac{5/4}{(x-1)^2}+\dfrac{3/2}{(x-1)^3}+\dfrac{1/8}{x+1}\)</div>
+
+        <p class="q">G) \(G(x)=\dfrac{x+1}{x^4+1}\)</p>
+        <p class="etape">Étape 1 : factoriser le dénominateur</p>
+        \[ x^4+1=(x^2-\sqrt2x+1)(x^2+\sqrt2x+1) \]
+        <p class="etape">Étape 2 : écrire la forme</p>
+        \[ G=\frac{ax+b}{x^2-\sqrt2x+1}+\frac{cx+d}{x^2+\sqrt2x+1} \]
+        <p class="etape">Étape 3 : identifier les coefficients</p>
+        <p>En réduisant au même dénominateur, on obtient les quatre équations : \(a+c=0\), \(\sqrt2(a-c)+b+d=0\), \((a+c)+\sqrt2(b-d)=1\), \(b+d=1\). Donc \(c=-a\), \(2\sqrt2a=-1\), \(b-d=\tfrac{\sqrt2}2\).</p>
+        <div class="res">\(G=\dfrac{-\frac{\sqrt2}4x+\frac{2+\sqrt2}4}{x^2-\sqrt2x+1}+\dfrac{\frac{\sqrt2}4x+\frac{2-\sqrt2}4}{x^2+\sqrt2x+1}\)</div>
+
+        <p class="q">H) \(H(x)=\dfrac{x}{(x^2+1)(x^2+4)}\)</p>
+        <p class="etape">Étape 1 : décomposer \(\dfrac1{(u+1)(u+4)}\) avec \(u=x^2\)</p>
+        \[ \frac1{(u+1)(u+4)}=\frac13\Big(\frac1{u+1}-\frac1{u+4}\Big) \]
+        <p class="etape">Étape 2 : multiplier par \(x\)</p>
+        <div class="res">\(H=\dfrac13\,\dfrac{x}{x^2+1}-\dfrac13\,\dfrac{x}{x^2+4}\)</div>
+
+        <p class="q">I) \(I(x)=\dfrac{2x^4+x^3+3x^2-6x+1}{2x^3-x^2}\)</p>
+        <p class="etape">Étape 1 : partie entière</p>
+        \[ 2x^4+x^3+3x^2-6x+1=(x+1)(2x^3-x^2)+(4x^2-6x+1) \]
+        <p class="etape">Étape 2 : forme de \(\dfrac{4x^2-6x+1}{x^2(2x-1)}\)</p>
+        \[ \frac ax+\frac b{x^2}+\frac c{2x-1} \]
+        <p class="etape">Étape 3 : coefficients</p>
+        <ul>
+          <li>\(b\) : en \(x=0\), \(\dfrac1{-1}=-1\).</li>
+          <li>\(c\) : en \(x=\tfrac12\), \(\dfrac{1-3+1}{1/4}=-4\).</li>
+          <li>\(a\) : comportement à l'infini, \(\dfrac{4x^2}{2x^3}\sim\dfrac2x\), donc \(a+\tfrac c2=2\), \(a=4\).</li>
+        </ul>
+        <div class="res">\(I=x+1+\dfrac4x-\dfrac1{x^2}-\dfrac4{2x-1}\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 16 — Éléments simples sur \(\mathbb C\) (puis \(\mathbb R\))</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">\(I=\dfrac{(3-2i)x-5+3i}{x^2+ix+2}\)</p><p>\(x^2+ix+2=(x-i)(x+2i)\).</p><p class="res">\(\dfrac{2+i}{x-i}+\dfrac{1-3i}{x+2i}\)</p>
-        <p class="q">\(J=\dfrac{x+i}{x^2+i}\)</p><p>Racines \(\pm\alpha\), \(\alpha=\tfrac{1-i}{\sqrt2}\).</p><p class="res">\(\dfrac{(2-\sqrt2+i\sqrt2)/4}{x-\alpha}+\dfrac{(2+\sqrt2-i\sqrt2)/4}{x+\alpha}\)</p>
-        <p class="q">\(K=\dfrac{2x}{(x+i)^2}\)</p><p>\(2x=2(x+i)-2i\).</p><p class="res">\(\dfrac2{x+i}-\dfrac{2i}{(x+i)^2}\)</p>
-        <p class="q">\(L=\dfrac{x^2-3}{(x^2+1)(x^2+4)}\)</p>
-        <p>Sur \(\mathbb R\) (poser \(u=x^2\)) : \(\dfrac{-4/3}{x^2+1}+\dfrac{7/3}{x^2+4}\).</p>
-        <p class="res">\(\mathbb C:\dfrac{2i/3}{x-i}-\dfrac{2i/3}{x+i}-\dfrac{7i/12}{x-2i}+\dfrac{7i/12}{x+2i}\)</p>
-        <p class="q">\(M=\dfrac{x^5+x+1}{x^4-1}\)</p>
-        <p>Partie entière \(x\), reste \(\dfrac{2x+1}{(x-1)(x+1)(x^2+1)}\).</p>
-        <p class="res">\(\mathbb R:x+\dfrac{3/4}{x-1}+\dfrac{1/4}{x+1}+\dfrac{-x-1/2}{x^2+1}\)</p>
+        <div class="enonce">(1) Décomposer \(I(x)=\dfrac{(3-2i)x-5+3i}{x^2+ix+2}\), \(J(x)=\dfrac{x+i}{x^2+i}\), \(K(x)=\dfrac{2x}{(x+i)^2}\) en éléments simples sur \(\mathbb C\). (2) Décomposer \(L(x)=\dfrac{x^2-3}{(x^2+1)(x^2+4)}\) et \(M(x)=\dfrac{x^5+x+1}{x^4-1}\) sur \(\mathbb R\), puis sur \(\mathbb C\).</div>
+
+        <p class="q">1a) \(I(x)\)</p>
+        <p class="etape">Étape 1 : factoriser le dénominateur</p>
+        <p>\(x^2+ix+2=(x-i)(x+2i)\) (somme \(-i\), produit \(2\)).</p>
+        <p class="etape">Étape 2 : résidus</p>
+        \[ \text{en } i:\ \frac{(3-2i)i-5+3i}{3i}=\frac{3i+2-5+3i}{3i}=\frac{-3+6i}{3i}=2+i \]
+        \[ \text{en } -2i:\ \frac{(3-2i)(-2i)-5+3i}{-3i}=\frac{-6i-4-5+3i}{-3i}=\frac{-9-3i}{-3i}=1-3i \]
+        <div class="res">\(I=\dfrac{2+i}{x-i}+\dfrac{1-3i}{x+2i}\)</div>
+
+        <p class="q">1b) \(J(x)\)</p>
+        <p class="etape">Étape 1 : racines du dénominateur</p>
+        <p>\(x^2=-i\) : \(x=\pm\alpha\) avec \(\alpha=\tfrac{1-i}{\sqrt2}\) (car \(\alpha^2=-i\)). \(J=\dfrac{c_1}{x-\alpha}+\dfrac{c_2}{x+\alpha}\).</p>
+        <p class="etape">Étape 2 : résidus</p>
+        \[ c_1=\frac{\alpha+i}{2\alpha}=\frac12+\frac{i\bar\alpha}{2}=\frac12+\frac{i(1+i)}{2\sqrt2}=\frac{2-\sqrt2+i\sqrt2}4 \]
+        \[ c_2=\frac{-\alpha+i}{-2\alpha}=\frac12-\frac{i\bar\alpha}{2}=\frac{2+\sqrt2-i\sqrt2}4 \]
+        <div class="res">\(J=\dfrac{(2-\sqrt2+i\sqrt2)/4}{x-\alpha}+\dfrac{(2+\sqrt2-i\sqrt2)/4}{x+\alpha}\)</div>
+
+        <p class="q">1c) \(K(x)\)</p>
+        <p class="etape">Étape 1 : faire apparaître \(x+i\) au numérateur</p>
+        \[ 2x=2(x+i)-2i \]
+        <div class="res">\(K=\dfrac2{x+i}-\dfrac{2i}{(x+i)^2}\)</div>
+
+        <p class="q">2a) \(L(x)\) sur \(\mathbb R\)</p>
+        <p class="etape">Étape 1 : variable \(u=x^2\)</p>
+        \[ \frac{u-3}{(u+1)(u+4)}=\frac\alpha{u+1}+\frac\beta{u+4} \qquad \alpha=\frac{-4}{3},\ \beta=\frac{-7}{-3}=\frac73 \]
+        <div class="res">\(\mathbb R\) : \(L=\dfrac{-4/3}{x^2+1}+\dfrac{7/3}{x^2+4}\).</div>
+
+        <p class="q">2b) \(L(x)\) sur \(\mathbb C\)</p>
+        <p class="etape">Étape 1 : décomposer les trinômes</p>
+        \[ \frac1{x^2+1}=\frac1{2i}\Big(\frac1{x-i}-\frac1{x+i}\Big) \qquad \frac1{x^2+4}=\frac1{4i}\Big(\frac1{x-2i}-\frac1{x+2i}\Big) \]
+        <p class="etape">Étape 2 : multiplier par les coefficients (\(\tfrac1i=-i\))</p>
+        <p>\(-\tfrac43\times\tfrac1{2i}=\tfrac{2i}3\) et \(\tfrac73\times\tfrac1{4i}=-\tfrac{7i}{12}\).</p>
+        <div class="res">\(\mathbb C\) : \(L=\dfrac{2i/3}{x-i}-\dfrac{2i/3}{x+i}-\dfrac{7i/12}{x-2i}+\dfrac{7i/12}{x+2i}\).</div>
+
+        <p class="q">2c) \(M(x)\) sur \(\mathbb R\)</p>
+        <p class="etape">Étape 1 : partie entière</p>
+        \[ x^5+x+1=x(x^4-1)+(2x+1) \]
+        <p class="etape">Étape 2 : factoriser \(x^4-1=(x-1)(x+1)(x^2+1)\) et poser la forme</p>
+        \[ \frac{2x+1}{(x-1)(x+1)(x^2+1)}=\frac a{x-1}+\frac b{x+1}+\frac{cx+d}{x^2+1} \]
+        <p class="etape">Étape 3 : coefficients</p>
+        <ul>
+          <li>\(a=\dfrac{3}{(2)(2)}=\tfrac34\) ; \(b=\dfrac{-1}{(-2)(2)}=\tfrac14\).</li>
+          <li>Infini : le quotient \(\sim\tfrac{2x}{x^4}\), donc \(a+b+c=0\), \(c=-1\).</li>
+          <li>En 0 : \(\dfrac{1}{(-1)(1)(1)}=-1=-a+b+d\), donc \(d=-1+\tfrac34-\tfrac14=-\tfrac12\).</li>
+        </ul>
+        <div class="res">\(\mathbb R\) : \(M=x+\dfrac{3/4}{x-1}+\dfrac{1/4}{x+1}+\dfrac{-x-1/2}{x^2+1}\).</div>
+
+        <p class="q">2d) \(M(x)\) sur \(\mathbb C\)</p>
+        <p class="etape">Étape 1 : décomposer \(\dfrac{-x-1/2}{x^2+1}\) sur les pôles \(\pm i\)</p>
+        \[ \text{en } i:\ \frac{-i-\frac12}{2i}=-\frac12+\frac i4 \qquad \text{en } -i:\ \frac{i-\frac12}{-2i}=-\frac12-\frac i4 \]
+        <div class="res">\(\mathbb C\) : \(M=x+\dfrac{3/4}{x-1}+\dfrac{1/4}{x+1}+\dfrac{-\frac12+\frac i4}{x-i}+\dfrac{-\frac12-\frac i4}{x+i}\).</div>
       </div>
     </div>
 
@@ -323,35 +708,92 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Application 1 — Interpolation de Lagrange</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <div class="enonce">Points \((0,1),(1,0),(2,3)\).</div>
-        <p>\(L_0=\tfrac{(x-1)(x-2)}2\), \(L_1=-x(x-2)\), \(L_2=\tfrac{x(x-1)}2\). \(P=1\cdot L_0+0\cdot L_1+3\cdot L_2=(x-1)(2x-1)=2x^2-3x+1\).</p>
-        <p>Vérif : \(P(0)=1,\ P(1)=0,\ P(2)=3\) ✓.</p>
-        <div class="res">\(P(x)=2x^2-3x+1\), \(P(3)=10\).</div>
+        <div class="enonce">On donne les points \((0,1)\), \((1,0)\), \((2,3)\). (1) Construire le polynôme d'interpolation de Lagrange. (2) Vérifier \(P(0)=1\), \(P(1)=0\), \(P(2)=3\). (3) Calculer \(P(3)\).</div>
+
+        <p class="q">1) Construction de \(P\)</p>
+        <div class="rappel"><span class="lab">Rappel · interpolation de Lagrange</span>\[ L_i(x)=\prod_{j\neq i}\frac{x-x_j}{x_i-x_j},\qquad P(x)=\sum_iy_iL_i(x) \]avec \(L_i(x_i)=1\) et \(L_i(x_j)=0\) pour \(j\neq i\).</div>
+        <p class="etape">Étape 1 : polynômes de base</p>
+        \[ L_0=\frac{(x-1)(x-2)}{(0-1)(0-2)}=\frac{(x-1)(x-2)}2 \quad L_1=\frac{x(x-2)}{(1)(-1)}=-x(x-2) \quad L_2=\frac{x(x-1)}{2\cdot1} \]
+        <p class="etape">Étape 2 : combiner</p>
+        \[ P=1\cdot L_0+0\cdot L_1+3\cdot L_2=\frac{(x-1)(x-2)+3x(x-1)}2=\frac{(x-1)(4x-2)}2=(x-1)(2x-1) \]
+        <div class="res">\(P(x)=2x^2-3x+1\).</div>
+
+        <p class="q">2) Vérification</p>
+        <p class="etape">Étape 1 : calculer</p>
+        \[ P(0)=1,\qquad P(1)=0,\qquad P(2)=8-6+1=3 \]
+        <div class="res">Les trois conditions sont vérifiées.</div>
+
+        <p class="q">3) Calcul de \(P(3)\)</p>
+        <p class="etape">Étape 1 : remplacer</p>
+        \[ P(3)=18-9+1 \]
+        <div class="res">\(P(3)=10\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Application 2 — Discriminant &amp; suite récurrente</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">A. \(P(x)=x^2+(a-2)x+a\)</p>
-        <p>\(\Delta=(a-2)^2-4a=a^2-8a+4\), racines \(a=4\pm2\sqrt3\).</p>
-        <p class="res">2 racines réelles distinctes si \(a<4-2\sqrt3\) ou \(a>4+2\sqrt3\) ; racine double si \(a=4\pm2\sqrt3\) ; aucune racine réelle si \(4-2\sqrt3<a<4+2\sqrt3\).</p>
-        <p class="q">B. \(u_{n+2}-3u_{n+1}+2u_n=0\), \(u_0=1,u_1=2\)</p>
-        <p>Éq. caractéristique \(x^2-3x+2=(x-1)(x-2)\), racines \(1,2\). \(u_n=A+B\cdot2^n\) ; \(A+B=1,\ A+2B=2\Rightarrow A=0,B=1\).</p>
-        <div class="res">\(u_n=2^n\)</div>
+        <div class="enonce">A. \(P(x)=x^2+(a-2)x+a\), \(a\in\mathbb R\) : étudier le discriminant, déterminer les valeurs de \(a\) pour lesquelles \(P\) a deux racines réelles distinctes, une racine double, pas de racine réelle ; dresser le tableau de signes dans le cas de deux racines. B. \((u_n)\) : \(u_{n+2}-3u_{n+1}+2u_n=0\), \(u_0=1\), \(u_1=2\) : associer le polynôme caractéristique, résoudre, donner \(u_n\).</div>
+
+        <p class="q">A1) Discriminant</p>
+        <p class="etape">Étape 1 : calculer</p>
+        \[ \Delta=(a-2)^2-4a=a^2-8a+4 \]
+        <p class="etape">Étape 2 : racines de \(\Delta\) en \(a\)</p>
+        <p>\(\Delta_a=64-16=48\), racines \(a=4\pm2\sqrt3\).</p>
+        <div class="res">\(\Delta=a^2-8a+4=(a-4-2\sqrt3)(a-4+2\sqrt3)\).</div>
+
+        <p class="q">A2) Nombre de racines</p>
+        <p class="etape">Étape 1 : signe de \(\Delta\) (trinôme positif à l'extérieur des racines)</p>
+        <ul>
+          <li>\(a&lt;4-2\sqrt3\) ou \(a>4+2\sqrt3\) : \(\Delta>0\), deux racines réelles distinctes.</li>
+          <li>\(a=4\pm2\sqrt3\) : \(\Delta=0\), une racine double.</li>
+          <li>\(4-2\sqrt3&lt;a&lt;4+2\sqrt3\) : \(\Delta&lt;0\), aucune racine réelle.</li>
+        </ul>
+        <div class="res">Voir les trois cas ci-dessus.</div>
+
+        <p class="q">A3) Tableau de signes dans le cas de deux racines</p>
+        <p class="etape">Étape 1 : signe d'un trinôme</p>
+        <p>Si \(x_1&lt;x_2\) sont les racines (\(x_{1,2}=\tfrac{2-a\mp\sqrt\Delta}2\)), le coefficient dominant 1 est positif.</p>
+        <div class="res">\(P>0\) sur \(]-\infty,x_1[\cup]x_2,+\infty[\), \(P&lt;0\) sur \(]x_1,x_2[\).</div>
+
+        <p class="q">B1) Polynôme caractéristique</p>
+        <p class="etape">Étape 1 : remplacer \(u_{n+k}\) par \(x^k\)</p>
+        <div class="res">\(P(x)=x^2-3x+2\).</div>
+
+        <p class="q">B2) Résolution de \(P(x)=0\)</p>
+        <p class="etape">Étape 1 : factoriser</p>
+        \[ x^2-3x+2=(x-1)(x-2) \]
+        <div class="res">Racines 1 et 2.</div>
+
+        <p class="q">B3) Expression de \(u_n\)</p>
+        <p class="etape">Étape 1 : forme générale</p>
+        <p>Deux racines distinctes : \(u_n=\lambda\cdot1^n+\mu\cdot2^n\).</p>
+        <p class="etape">Étape 2 : conditions initiales</p>
+        \[ \lambda+\mu=1 \qquad \lambda+2\mu=2 \]
+        <p>Donc \(\mu=1\), \(\lambda=0\).</p>
+        <div class="res">\(u_n=2^n\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Application 3 — Intégration par éléments simples</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <div class="enonce">\(R(x)=\dfrac1{(x-1)(x+2)}\).</div>
-        <p>Décomposition : \(R=\dfrac{1/3}{x-1}-\dfrac{1/3}{x+2}\).</p>
-        <p class="q">1) \(\displaystyle\int R\,dx\)</p><p class="res">\(\tfrac13\ln\Big|\dfrac{x-1}{x+2}\Big|+C\)</p>
-        <p class="q">2) \(\displaystyle\int\dfrac{x}{(x-1)(x+2)}\,dx\)</p><p>\(\dfrac{x}{(x-1)(x+2)}=\dfrac{1/3}{x-1}+\dfrac{2/3}{x+2}\).</p><p class="res">\(\tfrac13\ln|x-1|+\tfrac23\ln|x+2|+C\)</p>
+        <div class="enonce">\(R(x)=\dfrac1{(x-1)(x+2)}\). Décomposer \(R\) en éléments simples ; (1) calculer \(\int R(x)\,dx\) ; (2) calculer \(\int\dfrac{x}{(x-1)(x+2)}\,dx\).</div>
+
+        <p class="q">1) Décomposition de \(R\) et primitive</p>
+        <p class="etape">Étape 1 : pôles simples</p>
+        \[ \text{en }1:\ \frac1{3} \qquad \text{en }-2:\ \frac1{-3}=-\frac13 \qquad R=\frac{1/3}{x-1}-\frac{1/3}{x+2} \]
+        <p class="etape">Étape 2 : intégrer</p>
+        <div class="rappel"><span class="lab">Rappel · primitive</span>\[ \int\frac{dx}{x-a}=\ln|x-a|+C \]</div>
+        <div class="res">\(\displaystyle\int R=\tfrac13\ln|x-1|-\tfrac13\ln|x+2|+C=\tfrac13\ln\Big|\dfrac{x-1}{x+2}\Big|+C\)</div>
+
+        <p class="q">2) Calcul de \(\int\dfrac{x}{(x-1)(x+2)}dx\)</p>
+        <p class="etape">Étape 1 : décomposer</p>
+        \[ \frac{x}{(x-1)(x+2)}=\frac{1/3}{x-1}+\frac{2/3}{x+2} \qquad \Big(\text{en }1:\tfrac13,\ \text{en }-2:\tfrac{-2}{-3}=\tfrac23\Big) \]
+        <p class="etape">Étape 2 : intégrer</p>
+        <div class="res">\(\displaystyle\int\dfrac{x}{(x-1)(x+2)}dx=\tfrac13\ln|x-1|+\tfrac23\ln|x+2|+C\)</div>
       </div>
     </div>
-
   </section>
 
   <p style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.9rem;opacity:.75">
