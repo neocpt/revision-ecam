@@ -15,8 +15,8 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 | filtrage.html | 38 | fait |
 | rsf-resonance-filtrage.html | 11 | fait |
 | acides-bases.html | 29 | fait |
-| oxydoreduction.html | 29 | en cours |
-| atomistique.html | 24 | à faire |
+| oxydoreduction.html | 29 | fait |
+| atomistique.html | 24 | en cours |
 | cristallographie.html | 18 | à faire |
 | thermodynamique-1.html | 38 | à faire |
 
@@ -76,3 +76,11 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 - Erreur corrigée : EC 22, le mélange initial n'est pas à l'équilibre (Q_i = 8,3·10⁻⁴ ≫ K_A) ; pH final 8,6 → warnbox. Ex 14 : Q_i < K (et non « à l'équilibre »).
 - Erreur corrigée : Ex 19, β_acide = 0,087 mol (et non 0,090) → warnbox. Ex 23 : signe du logarithme dans le pH d'équivalence → warnbox.
 - Petites reprises : EC 11 utilise pKa(NH4+) = 9,24 et pKa(HCO3-/CO3 2-) = 10,3 ; Exercice A : α = 5,7 % ; Ex 1 : avancement volumique pour A et pour B.
+
+### oxydoreduction.html — fait
+- 29 cartes réécrites (3 créées + 26 TD). 24 cartes sans énoncé : énoncé reconstitué à partir du TD ; les données lues sur des figures du TD (Ex 24 indicateurs, Ex 29 courbes i-E, Ex 31-32) restent qualitatives.
+- Erreur corrigée : Ex 30, E(Fe) = −0,44 + 0,03·log(10⁻³) = −0,53 V (et non −0,35 V) ; conclusion inchangée → warnbox.
+- Erreur corrigée : Ex 28, masse de SO2 = 0,30 mg/m³ (et non 3 mg/m³) → warnbox.
+- Erreur corrigée : Ex 5, incertitude de 5 % sur C : ΔE ≈ 0,6 mV, soit 0,2 % (et non 0,36 %) → warnbox.
+- Erreur corrigée : Ex 14, travail = 3,2 kJ (et non 3184 J, ξ mal arrondi) → warnbox.
+- Reprises : Ex 6, tension de 0,42 V (et non 0,40 V) après précipitation de AgI ; Ex 15, câblage = environ 13 cellules en série puis rangées en parallèle ; Ex 23, K calculé avec le E° de l'Ex 21 (10¹⁶), l'ancienne version prenait un autre E° (10¹⁸) : le tableau du TD n'est pas reproduit, signalé ; Ex 24, partie indicateur redox réécrite (l'ancienne version se contredisait) ; Ex 27, question 1 (réaction prévisible) ajoutée.
