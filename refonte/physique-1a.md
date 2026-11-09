@@ -18,7 +18,7 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 | oxydoreduction.html | 29 | fait |
 | atomistique.html | 24 | fait |
 | cristallographie.html | 18 | fait |
-| thermodynamique-1.html | 38 | en cours |
+| thermodynamique-1.html | 38 | fait |
 
 ## Journal par page
 
@@ -98,3 +98,11 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 - 18 cartes réécrites (3 créées + 15 TD). Énoncés tous présents.
 - Aucune erreur de résultat ; reprises : Ex 3 (couche 3 = triangle de 6 boulets, et non hexagone), Ex 10 (liaison C-C = quart de la grande diagonale), Ex 11 (rayon du site tétraédrique 0,080 a calculé explicitement), Ex 7 (volume en cm³ réécrit), Ex 13 (a = 692/√3 ≈ 400 pm clarifié).
 - Point incertain : Ex 13 Q7 (distance des ions extrêmes), le schéma du TD n'est pas lisible ; lecture de l'ancienne version conservée et signalée.
+
+### thermodynamique-1.html — fait
+- 38 cartes réécrites (4 créées + 34 TD). 7 cartes sans énoncé (Ex 5, 6, 12, 15, 17, 20, 25 du TD) : énoncé reconstitué.
+- Erreur corrigée : Ex 26 (Van der Waals), l'ancienne version oubliait le terme −n²a/V² : p_VdW = 11,83 bar (erreur 5,4 %) puis 67,6 bar (erreur 84 %) → warnbox.
+- Erreur corrigée : Ex A (5 particules), E_c = 8,7·10⁻²¹ J et T ≈ 84 K (facteur 5 de trop) → warnbox.
+- Erreur corrigée : Ex 7 (punaise), pression sur le doigt = 7,5·10⁶ Pa (et non 7,5·10⁵), force 1,5 N ; conclusion inchangée → warnbox.
+- Erreur corrigée : Ex 14 (Mars), V_m min = 36 L (et non 37 L) → warnbox. Ex 17 (montgolfière), différence de masse ≈ 860 kg (et non 926 kg) → warnbox.
+- Ex 18, 9, 22 : hypothèses des sans corrigé officiel conservées (T_A = 293 K signalée). Les emoji des bandeaux « sans corrigé » ont été retirés.
