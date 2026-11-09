@@ -14,8 +14,8 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 | electro-2nd-ordre.html | 19 | fait |
 | filtrage.html | 38 | fait |
 | rsf-resonance-filtrage.html | 11 | fait |
-| acides-bases.html | 29 | en cours |
-| oxydoreduction.html | 29 | à faire |
+| acides-bases.html | 29 | fait |
+| oxydoreduction.html | 29 | en cours |
 | atomistique.html | 24 | à faire |
 | cristallographie.html | 18 | à faire |
 | thermodynamique-1.html | 38 | à faire |
@@ -67,3 +67,12 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 - 11 applications réécrites (App. 2, 3, 5, 7, 8 du cours ; App. 1, 2, 3, 6, 8, 9 de filtrage).
 - Aucune erreur de résultat trouvée ; App. 8 (RLC série) : passage au courant réécrit proprement (l'ancienne version avait une phrase inachevée).
 - Cascade passe-bas + passe-haut : produit en sortie ouverte (Q = 1/2) détaillé et comparé au calcul réel (Q = 1/3).
+
+### acides-bases.html — fait
+- 29 cartes réécrites (3 créées + 26 cartes TD, souvent regroupant plusieurs exercices). 22 cartes sans énoncé : énoncé reconstitué à partir du TD (étudiant), parfois en précisant « courbe du TD » quand la donnée n'est que graphique (EC 31, EC 34, Ex 28).
+- Erreur corrigée : Ex 3, K6 pour H2O(l) = H2O(g) n'est pas 1 mais p(H2O)/p° → warnbox.
+- Erreur corrigée : EC 1, quotient initial Q = [H3O+][HO-] = 2,5·10⁻⁵ (et non l'inverse 4·10⁴) ; conclusion inchangée → warnbox.
+- Erreur corrigée : EC 15, la goutte de vinaigre donne un taux de dissociation d'environ 50 % (pH réel ≈ 4,87), ce n'est pas l'autoprotolyse qui pose problème → warnbox. EC 17 : pH réel ≈ 6,85 signalé.
+- Erreur corrigée : EC 22, le mélange initial n'est pas à l'équilibre (Q_i = 8,3·10⁻⁴ ≫ K_A) ; pH final 8,6 → warnbox. Ex 14 : Q_i < K (et non « à l'équilibre »).
+- Erreur corrigée : Ex 19, β_acide = 0,087 mol (et non 0,090) → warnbox. Ex 23 : signe du logarithme dans le pH d'équivalence → warnbox.
+- Petites reprises : EC 11 utilise pKa(NH4+) = 9,24 et pKa(HCO3-/CO3 2-) = 10,3 ; Exercice A : α = 5,7 % ; Ex 1 : avancement volumique pour A et pour B.
