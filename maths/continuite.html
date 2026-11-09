@@ -112,9 +112,16 @@ window.MathJax = {
       <div class="exo-body">
         <div class="enonce">La fonction \(f(x)=\dfrac{\sqrt{1+x}-1}{x}\) (définie sur \([-1,+\infty[\setminus\{0\}\))
         est-elle prolongeable par continuité en \(0\) ?</div>
-        <p>On lève la forme \(\tfrac00\) par quantité conjuguée :</p>
-        \[ \frac{\sqrt{1+x}-1}{x}=\frac{(1+x)-1}{x\big(\sqrt{1+x}+1\big)}=\frac{1}{\sqrt{1+x}+1}\xrightarrow[x\to0]{}\frac12. \]
-        <div class="res">Limite finie \(\tfrac12\) : \(f\) est prolongeable, par \(\tilde f(0)=\dfrac12\).</div>
+
+        <p class="q">1) Prolongement en 0</p>
+        <div class="rappel"><span class="lab">Rappel · prolongement par continuité</span>\(f\) définie sauf en \(a\) est prolongeable par continuité en \(a\) si et seulement si \(f\) a une <b>limite finie</b> en \(a\). On pose alors \(\tilde f(a)=\lim_{x\to a}f(x)\).</div>
+        <p class="etape">Étape 1 : forme indéterminée</p>
+        <p>En 0, numérateur et dénominateur tendent vers 0 : forme \(\tfrac00\).</p>
+        <p class="etape">Étape 2 : quantité conjuguée</p>
+        \[ \frac{\sqrt{1+x}-1}{x}=\frac{(1+x)-1}{x\big(\sqrt{1+x}+1\big)}=\frac{1}{\sqrt{1+x}+1} \]
+        <p class="etape">Étape 3 : limite</p>
+        \[ \frac{1}{\sqrt{1+x}+1}\xrightarrow[x\to0]{}\frac12 \]
+        <div class="res">La limite est finie : \(f\) est prolongeable par continuité en 0, avec \(\tilde f(0)=\dfrac12\).</div>
       </div>
     </div>
 
@@ -122,11 +129,14 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice B — Existence d'une racine (TVI)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Montrer que l'équation \(x^5-3x+1=0\) admet au moins une solution dans \(]0,1[\).</div>
-        <p>Posons \(P(x)=x^5-3x+1\), polynôme donc continu sur \([0,1]\). On calcule :</p>
-        \[ P(0)=1>0,\qquad P(1)=1-3+1=-1<0. \]
-        <p>Comme \(P(0)\) et \(P(1)\) sont de signes opposés et \(P\) continue, le TVI donne un \(c\in\,]0,1[\) tel
-        que \(P(c)=0\).</p>
-        <div class="res">L'équation admet (au moins) une racine dans \(]0,1[\). ∎</div>
+
+        <p class="q">1) Existence d'une racine</p>
+        <div class="rappel"><span class="lab">Rappel · théorème des valeurs intermédiaires</span>Si \(f\) est continue sur \([a,b]\) et si \(f(a)\) et \(f(b)\) sont de signes opposés, alors il existe \(c\in\,]a,b[\) tel que \(f(c)=0\).</div>
+        <p class="etape">Étape 1 : la fonction</p>
+        <p>\(P(x)=x^5-3x+1\) est un polynôme, donc continue sur \([0,1]\).</p>
+        <p class="etape">Étape 2 : signes aux bornes</p>
+        \[ P(0)=1>0 \qquad P(1)=1-3+1=-1&lt;0 \]
+        <div class="res">Par le TVI, il existe \(c\in\,]0,1[\) tel que \(P(c)=0\).</div>
       </div>
     </div>
 
@@ -134,11 +144,20 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice C — Point fixe (Brouwer en dimension 1)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">Soit \(f:[0,1]\to[0,1]\) continue. Montrer que \(f\) admet un point fixe.</div>
-        <p>Posons \(g(x)=f(x)-x\), continue sur \([0,1]\). Comme \(f\) est à valeurs dans \([0,1]\) :</p>
-        \[ g(0)=f(0)-0=f(0)\geqslant0,\qquad g(1)=f(1)-1\leqslant0. \]
-        <p>Si \(g(0)=0\) ou \(g(1)=0\), on a un point fixe. Sinon \(g(0)>0>g(1)\) : le TVI fournit \(c\in\,]0,1[\)
-        avec \(g(c)=0\).</p>
-        <div class="res">Il existe \(c\in[0,1]\) tel que \(f(c)=c\). ∎ (Tout endomorphisme continu du segment a un point fixe.)</div>
+
+        <p class="q">1) Existence d'un point fixe</p>
+        <p>On applique le TVI à la fonction « écart à l'identité ».</p>
+        <p class="etape">Étape 1 : la fonction auxiliaire</p>
+        <p>\(g(x)=f(x)-x\) est continue sur \([0,1]\). Un point fixe est un zéro de \(g\).</p>
+        <p class="etape">Étape 2 : signes aux bornes</p>
+        <p>\(f\) est à valeurs dans \([0,1]\) :</p>
+        \[ g(0)=f(0)\geqslant 0 \qquad g(1)=f(1)-1\leqslant 0 \]
+        <p class="etape">Étape 3 : disjonction de cas</p>
+        <ul>
+          <li>Si \(g(0)=0\) ou \(g(1)=0\) : c'est un point fixe.</li>
+          <li>Sinon \(g(0)>0>g(1)\) : le TVI donne \(c\in\,]0,1[\) avec \(g(c)=0\).</li>
+        </ul>
+        <div class="res">Il existe \(c\in[0,1]\) tel que \(f(c)=c\).</div>
       </div>
     </div>
   </section>
@@ -154,23 +173,68 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 1 — Déterminer \(a,b\) pour la continuité</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">\(f_1\) : \(x^2\) (\(x\leqslant2\)), \(a-x^2\) (\(x>2\))</p>
-        <p>Continuité en \(2\) : \(4=a-4\).</p><p class="res">\(a=8\)</p>
-        <p class="q">\(f_2\) : \(\sqrt{x^2+a^2}\) (\(x<0\)), \(1+b\) (\(x=0\)), \(bx+2a\) (\(x>0\))</p>
-        <p>En \(0\) : \(|a|=1+b=2a\). \(|a|=2a\Rightarrow a\geqslant0\) et \(a=2a\Rightarrow a=0\), puis \(1+b=0\).</p>
-        <p class="res">\(a=0,\ b=-1\)</p>
-        <p class="q">\(f_3\) : \((x-2)^2\) (\(x<5\)), \(a\) (\(x=5\)), \((2x-b)^2\) (\(x>5\))</p>
-        <p>En \(5\) : \(9=a=(10-b)^2\Rightarrow 10-b=\pm3\).</p><p class="res">\(a=9,\ b=7\) ou \(b=13\)</p>
+        <div class="enonce">Déterminer les réels \(a\) et \(b\) pour que chaque fonction soit continue sur \(\mathbb R\).</div>
+
+        <p class="q">a) \(f_1(x)=x^2\) si \(x\leqslant2\), \(a-x^2\) si \(x>2\)</p>
+        <div class="rappel"><span class="lab">Rappel · continuité en un point de raccord</span>\(f\) est continue en \(x_0\) si \(\lim_{x\to x_0^-}f=\lim_{x\to x_0^+}f=f(x_0)\).</div>
+        <p class="etape">Étape 1 : chaque morceau est continu</p>
+        <p>Seul le raccord en 2 est à vérifier.</p>
+        <p class="etape">Étape 2 : égaliser les deux côtés en 2</p>
+        \[ 2^2=a-2^2 \iff a=8 \]
+        <div class="res">\(a=8\)</div>
+
+        <p class="q">b) \(f_2(x)=\sqrt{x^2+a^2}\) si \(x&lt;0\), \(1+b\) si \(x=0\), \(bx+2a\) si \(x>0\)</p>
+        <p class="etape">Étape 1 : limites en 0</p>
+        <ul>
+          <li>À gauche : \(\sqrt{a^2}=|a|\).</li>
+          <li>À droite : \(2a\).</li>
+          <li>En 0 : \(1+b\).</li>
+        </ul>
+        <p class="etape">Étape 2 : résoudre \(|a|=2a=1+b\)</p>
+        <p>\(|a|=2a\) impose \(a\geqslant0\), donc \(a=2a\) et \(a=0\). Puis \(1+b=0\).</p>
+        <div class="res">\(a=0,\ b=-1\)</div>
+
+        <p class="q">c) \(f_3(x)=(x-2)^2\) si \(x&lt;5\), \(a\) si \(x=5\), \((2x-b)^2\) si \(x>5\)</p>
+        <p class="etape">Étape 1 : limites en 5</p>
+        <p>À gauche \(3^2=9\), à droite \((10-b)^2\), valeur \(a\).</p>
+        <p class="etape">Étape 2 : résoudre</p>
+        \[ a=9 \qquad (10-b)^2=9 \iff 10-b=\pm3 \iff b=7 \text{ ou } b=13 \]
+        <div class="res">\(a=9\) et \(b=7\) ou \(b=13\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 2 — Prolongement par continuité ?</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\dfrac{x^3+8}{x+2}\) en \(-2\)</p><p>\(x^3+8=(x+2)(x^2-2x+4)\), donc \(=x^2-2x+4\to12\).</p><p class="res">Prolongeable, \(\tilde f(-2)=12\).</p>
-        <p class="q">(b) \(\dfrac1{x-3}-\dfrac1{x^2-2x-3}\) en \(-1\)</p><p>\(=\dfrac{x}{(x-3)(x+1)}\) : dénom \(\to0\), num \(\to-1\), limites latérales \(\mp\infty\).</p><p class="res"><b>Non</b> prolongeable (pas de limite finie).</p>
-        <p class="q">(c) \(\dfrac{x}{1+e^{1/x}}\) en \(0\)</p><p>\(x\to0^+\) : \(e^{1/x}\to+\infty\), quotient \(\to0\). \(x\to0^-\) : \(e^{1/x}\to0\), quotient \(\to0\).</p><p class="res">Prolongeable, \(\tilde f(0)=0\).</p>
-        <p class="q">(d) \(x\cos(1/x)\) en \(0\)</p><p>\(|x\cos(1/x)|\leqslant|x|\to0\).</p><p class="res">Prolongeable, \(\tilde f(0)=0\).</p>
+        <div class="enonce">Les fonctions suivantes sont-elles prolongeables par continuité au point indiqué ?</div>
+
+        <p class="q">a) \(\dfrac{x^3+8}{x+2}\) en \(-2\)</p>
+        <div class="rappel"><span class="lab">Rappel · critère</span>Prolongeable en \(a\) si et seulement si la limite en \(a\) existe et est <b>finie</b>.</div>
+        <p class="etape">Étape 1 : factoriser</p>
+        \[ x^3+8=(x+2)(x^2-2x+4) \]
+        <p class="etape">Étape 2 : simplifier et conclure</p>
+        \[ \frac{x^3+8}{x+2}=x^2-2x+4\to4+4+4=12 \]
+        <div class="res">Prolongeable, avec \(\tilde f(-2)=12\).</div>
+
+        <p class="q">b) \(\dfrac1{x-3}-\dfrac1{x^2-2x-3}\) en \(-1\)</p>
+        <p class="etape">Étape 1 : factoriser et réduire</p>
+        <p>\(x^2-2x-3=(x-3)(x+1)\) :</p>
+        \[ \frac{(x+1)-1}{(x-3)(x+1)}=\frac{x}{(x-3)(x+1)} \]
+        <p class="etape">Étape 2 : limites latérales</p>
+        <p>Le numérateur tend vers \(-1\), \((x-3)\to-4\), \((x+1)\to0\) : la limite est infinie, de signe opposé de chaque côté (\(+\infty\) à droite, \(-\infty\) à gauche).</p>
+        <div class="res"><b>Non</b> prolongeable : pas de limite finie.</div>
+
+        <p class="q">c) \(\dfrac{x}{1+e^{1/x}}\) en \(0\)</p>
+        <p class="etape">Étape 1 : limite à droite</p>
+        <p>\(x\to0^+\) : \(e^{1/x}\to+\infty\), donc le quotient \(\to 0\).</p>
+        <p class="etape">Étape 2 : limite à gauche</p>
+        <p>\(x\to0^-\) : \(e^{1/x}\to0\), donc \(1+e^{1/x}\to1\) et le quotient \(\to 0\).</p>
+        <div class="res">Prolongeable, avec \(\tilde f(0)=0\).</div>
+
+        <p class="q">d) \(x\cos(1/x)\) en \(0\)</p>
+        <p class="etape">Étape 1 : encadrement</p>
+        \[ |x\cos(1/x)|\leqslant|x|\to0 \]
+        <div class="res">Prolongeable, avec \(\tilde f(0)=0\).</div>
       </div>
     </div>
 
@@ -179,33 +243,77 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 3 — Continuité latérale en \(0\)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">\(f_1\) : \(x^2\) (\(x\leqslant0\)), \(2x-1\) (\(x>0\))</p>
-        <p>\(f_1(0)=0\). Gauche : \(x^2\to0=f_1(0)\) ✓. Droite : \(2x-1\to-1\neq0\).</p>
-        <p class="res">Continue à gauche, <b>discontinue à droite</b> (saut).</p>
-        <p class="q">\(f_2\) : \(\dfrac{x+\sqrt{x^2}}{x}\) (\(x\neq0\)), \(1\) (\(x=0\))</p>
-        <p>\(\sqrt{x^2}=|x|\) : pour \(x>0\), \(\tfrac{x+x}x=2\) ; pour \(x<0\), \(\tfrac{x-x}x=0\). \(f_2(0)=1\).</p>
-        <p class="res">Droite \(\to2\neq1\), gauche \(\to0\neq1\) : <b>discontinue des deux côtés</b>.</p>
-        <p class="q">\(f_3\) : \(x\lfloor1/x\rfloor\) (\(x\neq0\)), \(1\) (\(x=0\))</p>
-        <p>\(\lim_{x\to0}x\lfloor1/x\rfloor=1\) (gendarmes) \(=f_3(0)\).</p>
-        <p class="res"><b>Continue</b> à gauche et à droite en \(0\).</p>
+        <div class="enonce">Étudier la continuité à gauche et à droite en 0 de chaque fonction.</div>
+
+        <p class="q">a) \(f_1(x)=x^2\) si \(x\leqslant0\), \(2x-1\) si \(x>0\)</p>
+        <div class="rappel"><span class="lab">Rappel · continuité latérale</span>Continue à gauche en 0 : \(\lim_{x\to0^-}f=f(0)\). Continue à droite : \(\lim_{x\to0^+}f=f(0)\).</div>
+        <p class="etape">Étape 1 : valeur en 0</p>
+        <p>\(f_1(0)=0\).</p>
+        <p class="etape">Étape 2 : limites latérales</p>
+        <ul>
+          <li>Gauche : \(x^2\to0=f_1(0)\).</li>
+          <li>Droite : \(2x-1\to-1\neq0\).</li>
+        </ul>
+        <div class="res">Continue à gauche, <b>discontinue à droite</b> (saut).</div>
+
+        <p class="q">b) \(f_2(x)=\dfrac{x+\sqrt{x^2}}{x}\) si \(x\neq0\), \(1\) si \(x=0\)</p>
+        <p class="etape">Étape 1 : simplifier avec \(\sqrt{x^2}=|x|\)</p>
+        <ul>
+          <li>\(x>0\) : \(\dfrac{x+x}{x}=2\).</li>
+          <li>\(x&lt;0\) : \(\dfrac{x-x}{x}=0\).</li>
+        </ul>
+        <p class="etape">Étape 2 : comparer à \(f_2(0)=1\)</p>
+        <div class="res">Droite \(\to2\neq1\), gauche \(\to0\neq1\) : <b>discontinue des deux côtés</b>.</div>
+
+        <p class="q">c) \(f_3(x)=x\lfloor1/x\rfloor\) si \(x\neq0\), \(1\) si \(x=0\)</p>
+        <p class="etape">Étape 1 : limite par encadrement</p>
+        <p>\(\tfrac1x-1&lt;\lfloor\tfrac1x\rfloor\leqslant\tfrac1x\), puis on multiplie par \(x\) (renversé si \(x&lt;0\)) :</p>
+        <ul>
+          <li>\(x>0\) : \(1-x&lt;x\lfloor\tfrac1x\rfloor\leqslant1\).</li>
+          <li>\(x&lt;0\) : \(1\leqslant x\lfloor\tfrac1x\rfloor&lt;1-x\).</li>
+        </ul>
+        <p>Dans les deux cas, gendarmes : la limite est 1, égale à \(f_3(0)\).</p>
+        <div class="res"><b>Continue</b> à gauche et à droite en 0.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 4 — Continuité sur \(\mathbb R\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">\(f_1\) : \(\dfrac{x+1}{x^2+1}\) (\(x\leqslant0\)), \(1+\ln(x+1)\) (\(x>0\))</p>
-        <p>Continue sur chaque morceau. En \(0\) : gauche \(=1\), \(f_1(0)=1\), droite \(=1+\ln1=1\).</p>
-        <p class="res"><b>Continue sur \(\mathbb R\)</b>.</p>
-        <p class="q">\(f_2\) : \(\dfrac{x^2+3x}{x^2+1}\) (\(x>-1\)), \(e^{x+1}\) (\(x\leqslant-1\))</p>
-        <p>En \(-1\) : \(f_2(-1)=e^0=1\) (gauche \(\to1\)), mais droite \(\to\dfrac{1-3}{2}=-1\neq1\).</p>
-        <p class="res">Continue sur \(\mathbb R\setminus\{-1\}\) ; <b>saut en \(-1\)</b>.</p>
-        <p class="q">\(f_3\) : \(x^2\sin(\pi/x)\) (\(x\neq0\)), \(0\) (\(x=0\))</p>
-        <p>\(|x^2\sin(\pi/x)|\leqslant x^2\to0=f_3(0)\).</p><p class="res"><b>Continue sur \(\mathbb R\)</b>.</p>
-        <p class="q">\(f_4\) : \(x^2\) si \(\lfloor x\rfloor\) impair, \(x\) si \(\lfloor x\rfloor\) pair</p>
-        <p>Discontinuités possibles aux entiers \(n\). À droite \(\lfloor x\rfloor=n\), à gauche \(\lfloor x\rfloor=n-1\).
-        Continuité \(\iff\) \(n^2=n\) au raccord, i.e. \(n\in\{0,1\}\).</p>
-        <p class="res">Continue sur \(\mathbb R\) sauf aux entiers \(n\in\mathbb Z\setminus\{0,1\}\) (sauts).</p>
+        <div class="enonce">Étudier la continuité sur \(\mathbb R\) de chaque fonction.</div>
+
+        <p class="q">a) \(f_1(x)=\dfrac{x+1}{x^2+1}\) si \(x\leqslant0\), \(1+\ln(x+1)\) si \(x>0\)</p>
+        <p class="etape">Étape 1 : continuité sur chaque morceau</p>
+        <p>Fraction à dénominateur non nul, puis \(\ln\) sur \(]1,+\infty[\) : continues.</p>
+        <p class="etape">Étape 2 : raccord en 0</p>
+        <p>Gauche : \(\tfrac11=1\). Valeur : \(f_1(0)=1\). Droite : \(1+\ln1=1\).</p>
+        <div class="res"><b>Continue sur \(\mathbb R\)</b>.</div>
+
+        <p class="q">b) \(f_2(x)=\dfrac{x^2+3x}{x^2+1}\) si \(x>-1\), \(e^{x+1}\) si \(x\leqslant-1\)</p>
+        <p class="etape">Étape 1 : raccord en \(-1\)</p>
+        <ul>
+          <li>Valeur et gauche : \(e^{0}=1\).</li>
+          <li>Droite : \(\dfrac{1-3}{2}=-1\neq1\).</li>
+        </ul>
+        <div class="res">Continue sur \(\mathbb R\setminus\{-1\}\), avec un <b>saut en \(-1\)</b>.</div>
+
+        <p class="q">c) \(f_3(x)=x^2\sin(\pi/x)\) si \(x\neq0\), \(0\) si \(x=0\)</p>
+        <p class="etape">Étape 1 : continuité hors de 0</p>
+        <p>Produit et composée de fonctions continues.</p>
+        <p class="etape">Étape 2 : continuité en 0, par encadrement</p>
+        \[ |x^2\sin(\pi/x)|\leqslant x^2\to0=f_3(0) \]
+        <div class="res"><b>Continue sur \(\mathbb R\)</b>.</div>
+
+        <p class="q">d) \(f_4(x)=x^2\) si \(\lfloor x\rfloor\) est impair, \(x\) si \(\lfloor x\rfloor\) est pair</p>
+        <p class="etape">Étape 1 : où chercher les problèmes</p>
+        <p>Sur chaque \(]n,n+1[\), \(f_4\) est polynomiale. Seuls les entiers \(n\) posent problème.</p>
+        <p class="etape">Étape 2 : valeurs au raccord en l'entier \(n\)</p>
+        <p>À droite et en \(n\), \(\lfloor x\rfloor=n\) ; à gauche, \(\lfloor x\rfloor=n-1\), de parité opposée.</p>
+        <ul>
+          <li>\(n\) pair : valeur \(n\), limite à gauche \(n^2\). Raccord si \(n^2=n\), soit \(n=0\).</li>
+          <li>\(n\) impair : valeur \(n^2\), limite à gauche \(n\). Raccord si \(n=n^2\), soit \(n=1\).</li>
+        </ul>
+        <div class="res">Continue sur \(\mathbb R\) sauf aux entiers \(n\in\mathbb Z\setminus\{0,1\}\), où il y a un saut.</div>
       </div>
     </div>
 
@@ -213,13 +321,26 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 5 — Fonction de Dirichlet modifiée</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">\(f(x)=x-1\) si \(x\in\mathbb Q\), \(x+1\) si \(x\in\mathbb R\setminus\mathbb Q\).</div>
-        <p class="q">(a) Réciproque</p>
-        <p>Si \(x\in\mathbb Q\), \(y=x-1\in\mathbb Q\) et \(x=y+1\) ; si \(x\notin\mathbb Q\), \(y=x+1\notin\mathbb Q\) et \(x=y-1\).</p>
-        <p class="res">\(f^{-1}(y)=\begin{cases}y+1&y\in\mathbb Q\\ y-1&y\in\mathbb R\setminus\mathbb Q\end{cases}\) (donc \(f^{-1}=f\), involution).</p>
-        <p class="q">(b) Discontinue partout</p>
-        <p>Soit \(a\in\mathbb R\). Prenons \((x_n)\subset\mathbb Q\) et \((y_n)\subset\mathbb R\setminus\mathbb Q\) tendant vers \(a\).
-        Alors \(f(x_n)=x_n-1\to a-1\) et \(f(y_n)=y_n+1\to a+1\). Deux limites différentes \(\Rightarrow\) pas de limite.</p>
-        <div class="res">\(f\) est <b>discontinue en tout point</b> de \(\mathbb R\). ∎</div>
+
+        <p class="q">a) Réciproque de \(f\)</p>
+        <p class="etape">Étape 1 : résoudre \(y=f(x)\) selon la nature de \(x\)</p>
+        <ul>
+          <li>\(x\in\mathbb Q\) : \(y=x-1\in\mathbb Q\), et \(x=y+1\).</li>
+          <li>\(x\notin\mathbb Q\) : \(y=x+1\notin\mathbb Q\), et \(x=y-1\).</li>
+        </ul>
+        <p class="etape">Étape 2 : \(y\) détermine le cas</p>
+        <p>La nature de \(y\) (rationnel ou non) est la même que celle de \(x\) : on sait quelle formule appliquer. \(f\) est donc bijective.</p>
+        <div class="res">\(f^{-1}(y)=\begin{cases}y+1&amp;y\in\mathbb Q\\ y-1&amp;y\in\mathbb R\setminus\mathbb Q\end{cases}\)</div>
+
+        <p class="q">b) \(f\) est discontinue en tout point</p>
+        <p>On utilise la caractérisation séquentielle, avec la densité de \(\mathbb Q\) et de \(\mathbb R\setminus\mathbb Q\).</p>
+        <p class="etape">Étape 1 : deux suites vers un point \(a\)</p>
+        <p>Soit \(a\in\mathbb R\). Il existe \((x_n)\subset\mathbb Q\) et \((y_n)\subset\mathbb R\setminus\mathbb Q\) tendant toutes deux vers \(a\).</p>
+        <p class="etape">Étape 2 : leurs images</p>
+        \[ f(x_n)=x_n-1\to a-1 \qquad f(y_n)=y_n+1\to a+1 \]
+        <p class="etape">Étape 3 : conclure</p>
+        <p>Deux limites différentes : \(f\) n'a pas de limite en \(a\).</p>
+        <div class="res">\(f\) est <b>discontinue en tout point</b> de \(\mathbb R\).</div>
       </div>
     </div>
 
@@ -228,56 +349,90 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 6 — Vrai / faux (image d'intervalle)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(f\) continue sur \([a,b]\) \(\Rightarrow f([a,b])\) fermé borné</p>
-        <p><b>Vrai</b> : par le TVI l'image est un intervalle, et par le théorème des bornes atteintes elle vaut \([\min f,\max f]\).</p>
-        <p class="q">(b) \(f\) continue sur \(]a,b[\) \(\Rightarrow f(]a,b[)\) ouvert borné</p>
-        <p><b>Faux</b> : ex. \(x\mapsto x^2\) sur \(]-1,1[\) donne \([0,1[\) (ni ouvert), ou \(x\mapsto\tfrac1x\) sur \(]0,1[\) donne \(]1,+\infty[\) (non borné).</p>
-        <p class="q">(c) \(f\) continue sur \(]a,b[\) \(\Rightarrow f(]a,b[)\) ouvert (pas forcément borné)</p>
-        <p><b>Faux</b> : même contre-exemple \(x^2\) sur \(]-1,1[\) donne \([0,1[\), qui n'est pas ouvert.</p>
-        <div class="note">Seule certitude : l'image d'un intervalle par une fonction continue est un <b>intervalle</b> (nature non préservée, sauf le segment).</div>
+        <div class="enonce">\(f\) est continue. Les affirmations suivantes sont-elles vraies ?</div>
+
+        <p class="q">a) \(f\) continue sur \([a,b]\) \(\Rightarrow f([a,b])\) est un segment (fermé borné)</p>
+        <div class="rappel"><span class="lab">Rappel · deux théorèmes</span>TVI : l'image d'un intervalle par une fonction continue est un intervalle.<br>Théorème des bornes atteintes : sur \([a,b]\), une fonction continue est bornée et atteint ses bornes.</div>
+        <p class="etape">Étape 1 : combiner</p>
+        <p>L'image est un intervalle (TVI) qui contient son minimum et son maximum (bornes atteintes) : c'est \([\min f,\max f]\).</p>
+        <div class="res"><b>Vrai</b>.</div>
+
+        <p class="q">b) \(f\) continue sur \(]a,b[\) \(\Rightarrow f(]a,b[)\) est ouvert et borné</p>
+        <p class="etape">Étape 1 : contre-exemple</p>
+        <p>\(x\mapsto x^2\) sur \(]-1,1[\) : l'image est \([0,1[\), qui n'est pas ouvert.</p>
+        <div class="res"><b>Faux</b>.</div>
+
+        <p class="q">c) \(f\) continue sur \(]a,b[\) \(\Rightarrow f(]a,b[)\) est ouvert (pas forcément borné)</p>
+        <p class="etape">Étape 1 : même contre-exemple</p>
+        <p>\([0,1[\) n'est pas ouvert.</p>
+        <div class="res"><b>Faux</b>.</div>
+        <div class="note">Seule certitude pour un intervalle quelconque : l'image est un <b>intervalle</b> ; sa nature (ouvert, fermé, borné) n'est conservée que pour un segment. Contre-exemple de borne : \(x\mapsto\tfrac1x\) sur \(]0,1[\) donne \(]1,+\infty[\), non borné.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 7 — Martine (20 km en 5 h)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">(a) Fonction \(f\)</p>
-        <p>\(f:[0,5]\to\mathbb R\), \(f(t)\) = distance parcourue à l'instant \(t\), avec \(f(0)=0\), \(f(5)=20\).
-        Hypothèse : \(f\) est <b>continue</b> (la distance varie sans saut).</p>
-        <p class="q">(b) Fonction \(g\)</p>
-        <p>\(g(t)=f(t+1)-f(t)\) sur \([0,4]\) : distance parcourue sur l'heure débutant en \(t\). \(g\) est continue.</p>
-        <p class="q">(c) Proposition &amp; preuve</p>
-        <p>Objectif : \(\exists t\in[0,4],\ g(t)=4\). Or \(g(0)+g(1)+g(2)+g(3)+g(4)=f(5)-f(0)=20\), de moyenne \(4\).
-        Donc au moins un \(g(k)\leqslant4\) et un \(g(j)\geqslant4\) (sinon la somme serait \(<20\) ou \(>20\)). Par le TVI
-        appliqué à \(g\) continue, il existe \(t\) entre eux tel que \(g(t)=4\).</p>
-        <div class="res">Il existe un intervalle d'une heure sur lequel Martine parcourt exactement \(4\) km. ∎</div>
-        <p class="q">(d) « Tout intervalle de 2 h = 8 km » ?</p>
-        <p><b>Faux</b> : « n'importe quel » exigerait \(f(t+2)-f(t)=8\) pour tout \(t\), c.-à-d. une allure constante.
-        Contre-exemple : parcourir \(20\) km en \(2\) h puis s'arrêter — l'intervalle \([0,2]\) donne \(20\neq8\).</p>
+        <div class="enonce">Martine parcourt 20 km en 5 h. Montrer qu'il existe un intervalle d'une heure pendant lequel elle parcourt exactement 4 km.</div>
+
+        <p class="q">a) La fonction \(f\)</p>
+        <p class="etape">Étape 1 : modéliser</p>
+        <p>\(f:[0,5]\to\mathbb R\), où \(f(t)\) est la distance parcourue à l'instant \(t\) (en heures), avec \(f(0)=0\) et \(f(5)=20\). On suppose \(f\) continue : la distance ne fait pas de saut.</p>
+
+        <p class="q">b) La fonction \(g\)</p>
+        <p class="etape">Étape 1 : la distance sur une heure glissante</p>
+        \[ g(t)=f(t+1)-f(t),\qquad t\in[0,4] \]
+        <p>C'est la distance parcourue entre \(t\) et \(t+1\). \(g\) est continue comme différence de fonctions continues.</p>
+
+        <p class="q">c) Proposition et preuve</p>
+        <p class="etape">Étape 1 : la proposition</p>
+        <p>Il existe \(t\in[0,4]\) tel que \(g(t)=4\).</p>
+        <p class="etape">Étape 2 : somme télescopique</p>
+        \[ g(0)+g(1)+g(2)+g(3)+g(4)=f(5)-f(0)=20 \]
+        <p>Les cinq nombres ont pour moyenne 4.</p>
+        <p class="etape">Étape 3 : encadrer 4</p>
+        <p>Si tous les \(g(k)\) étaient \(&lt;4\), la somme serait \(&lt;20\) ; s'ils étaient tous \(>4\), elle serait \(>20\). Il existe donc \(i\) avec \(g(i)\leqslant4\) et \(j\) avec \(g(j)\geqslant4\).</p>
+        <p class="etape">Étape 4 : TVI</p>
+        <p>\(g\) est continue entre \(i\) et \(j\) et prend une valeur \(\leqslant4\) puis \(\geqslant4\) : le TVI donne \(t\) avec \(g(t)=4\).</p>
+        <div class="res">Il existe un intervalle d'une heure sur lequel Martine parcourt exactement 4 km.</div>
+
+        <p class="q">d) « Tout intervalle de 2 h correspond à 8 km » ?</p>
+        <p class="etape">Étape 1 : contre-exemple</p>
+        <p>Martine parcourt 20 km en 2 h puis s'arrête 3 h. Sur \([0,2]\) : 20 km, pas 8.</p>
+        <div class="res"><b>Faux</b> : cela exigerait une allure constante.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 8 — Fonction continue à valeurs finies</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <div class="enonce">\(f\) continue sur un intervalle \(I\), ne prenant qu'un nombre fini de valeurs.</div>
-        <p><b>Conjecture</b> : \(f\) est constante.</p>
-        <p>\(f(I)\) est un intervalle (image d'un intervalle par une fonction continue). Or \(f(I)\) est un ensemble
-        <b>fini</b>. Le seul intervalle fini (comme ensemble) est un <b>singleton</b> : un intervalle contenant deux
-        points distincts en contient une infinité.</p>
-        <div class="res">Donc \(f(I)\) est un singleton : \(f\) est <b>constante</b>. ∎</div>
+        <div class="enonce">\(f\) est continue sur un intervalle \(I\) et ne prend qu'un nombre fini de valeurs. Que peut-on dire de \(f\) ?</div>
+
+        <p class="q">1) Conjecture et preuve</p>
+        <p class="etape">Étape 1 : conjecture</p>
+        <p>\(f\) est constante.</p>
+        <p class="etape">Étape 2 : l'image est un intervalle</p>
+        <p>Par le TVI, \(f(I)\) est un intervalle.</p>
+        <p class="etape">Étape 3 : l'image est finie</p>
+        <p>Un intervalle contenant deux valeurs distinctes en contient une infinité (tous les réels entre elles). Or \(f(I)\) est fini : il n'a qu'un seul élément.</p>
+        <div class="res">\(f(I)\) est un singleton : \(f\) est <b>constante</b>.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 9 — Point fixe si \(f([0,1])=[0,1]\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <div class="enonce">\(f\) continue sur \([0,1]\), \(f([0,1])=[0,1]\). Montrer \(\exists c,\ f(c)=c\).</div>
-        <p>Puisque \(0\in f([0,1])\), il existe \(a\) avec \(f(a)=0\) ; puisque \(1\in f([0,1])\), il existe \(b\) avec
-        \(f(b)=1\). Posons \(g(x)=f(x)-x\), continue. Alors :</p>
-        \[ g(a)=0-a\leqslant0,\qquad g(b)=1-b\geqslant0. \]
-        <p>Par le TVI (\(g\) continue prenant une valeur \(\leqslant0\) et une \(\geqslant0\)), il existe \(c\) tel que \(g(c)=0\).</p>
-        <div class="res">\(\exists c\in[0,1],\ f(c)=c\). ∎</div>
+        <div class="enonce">\(f\) continue sur \([0,1]\), \(f([0,1])=[0,1]\). Montrer qu'il existe \(c\) tel que \(f(c)=c\).</div>
+
+        <p class="q">1) Existence d'un point fixe</p>
+        <p class="etape">Étape 1 : des antécédents de 0 et de 1</p>
+        <p>\(0\) et \(1\) sont dans \(f([0,1])\) : il existe \(a\) avec \(f(a)=0\) et \(b\) avec \(f(b)=1\).</p>
+        <p class="etape">Étape 2 : la fonction auxiliaire</p>
+        <p>\(g(x)=f(x)-x\) est continue. Aux points \(a\) et \(b\) :</p>
+        \[ g(a)=0-a\leqslant0 \qquad g(b)=1-b\geqslant0 \]
+        <p class="etape">Étape 3 : TVI entre \(a\) et \(b\)</p>
+        <p>\(g\) change (au sens large) de signe entre \(a\) et \(b\) : il existe \(c\) entre eux avec \(g(c)=0\).</p>
+        <div class="res">\(\exists c\in[0,1],\ f(c)=c\).</div>
       </div>
     </div>
 
