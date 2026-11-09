@@ -98,7 +98,13 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice A — Reconnaissance de forme</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Calculer \(\displaystyle\int\frac{2x}{x^2+1}\,dx\).</div>
-        <p>Forme \(\tfrac{u'}u\) avec \(u=x^2+1\), \(u'=2x\).</p>
+
+        <p class="q">1) Calcul de la primitive</p>
+        <div class="rappel"><span class="lab">Rappel · forme \(u'/u\)</span>\[ \int\frac{u'(x)}{u(x)}\,dx=\ln|u(x)|+C \]</div>
+        <p class="etape">Étape 1 : repérer \(u\)</p>
+        <p>\(u=x^2+1\), donc \(u'=2x\) : le numérateur est exactement \(u'\).</p>
+        <p class="etape">Étape 2 : appliquer</p>
+        <p>\(x^2+1>0\), donc la valeur absolue est inutile.</p>
         <div class="res">\(\ln(x^2+1)+C\)</div>
       </div>
     </div>
@@ -107,8 +113,14 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice B — Aire entre deux courbes</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Aire entre \(y=x\) et \(y=x^2\) sur \([0,1]\).</div>
-        <p>Sur \([0,1]\), \(x\geqslant x^2\) : aire \(=\int_0^1(x-x^2)dx=[\tfrac{x^2}2-\tfrac{x^3}3]_0^1=\tfrac12-\tfrac13\).</p>
-        <div class="res">\(\dfrac16\)</div>
+
+        <p class="q">1) Calcul de l'aire</p>
+        <div class="rappel"><span class="lab">Rappel · aire entre deux courbes</span>Si \(f\geqslant g\) sur \([a,b]\), l'aire entre les courbes vaut \(\displaystyle\int_a^b\big(f(x)-g(x)\big)\,dx\).</div>
+        <p class="etape">Étape 1 : position relative</p>
+        <p>Sur \([0,1]\), \(x^2\leqslant x\) (car \(x(1-x)\geqslant0\)) : la droite est au-dessus.</p>
+        <p class="etape">Étape 2 : intégrer</p>
+        \[ \int_0^1(x-x^2)\,dx=\Big[\frac{x^2}2-\frac{x^3}3\Big]_0^1=\frac12-\frac13 \]
+        <div class="res">Aire \(=\dfrac16\) unité d'aire.</div>
       </div>
     </div>
 
@@ -116,7 +128,13 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice C — arcsin composé</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">\(\displaystyle\int\frac{dx}{\sqrt{4-x^2}}\).</div>
-        <p>Forme \(\tfrac{u'}{\sqrt{a^2-u^2}}\) avec \(a=2\), \(u=x\).</p>
+
+        <p class="q">1) Calcul de la primitive</p>
+        <div class="rappel"><span class="lab">Rappel · primitives usuelles</span>\[ \int\frac{dx}{\sqrt{a^2-x^2}}=\arcsin\frac xa+C \quad(a>0,\ |x|&lt;a) \]</div>
+        <p class="etape">Étape 1 : reconnaître \(a\)</p>
+        <p>\(4=2^2\), donc \(a=2\), sur \(]-2,2[\).</p>
+        <p class="etape">Étape 2 : vérifier par dérivation</p>
+        \[ \Big(\arcsin\frac x2\Big)'=\frac{1/2}{\sqrt{1-x^2/4}}=\frac1{\sqrt{4-x^2}} \]
         <div class="res">\(\arcsin\dfrac x2+C\)</div>
       </div>
     </div>
@@ -125,139 +143,421 @@ window.MathJax = {
   <!-- ==================== CORRECTION TD ========================== -->
   <section class="block" id="td">
     <h2>3. Correction intégrale du TD — Primitives &amp; intégrales (1ère partie)</h2>
-    <p class="lead" style="font-size:.95rem">Les 11 exercices résolus intégralement (constante \(+C\) sous-entendue pour les primitives).</p>
+    <p class="lead" style="font-size:.95rem">Les 11 exercices résolus intégralement (constante \(+C\) sous-entendue pour les primitives, sur un intervalle où la fonction est définie).</p>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 1 — Primitives usuelles</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p class="q">\(f_1=5x^3-3x+7\)</p><p class="res">\(\tfrac54x^4-\tfrac32x^2+7x\)</p>
-        <p class="q">\(f_2=2\cos x-3\sin x\)</p><p class="res">\(2\sin x+3\cos x\)</p>
-        <p class="q">\(f_3=10-3e^x+x\)</p><p class="res">\(10x-3e^x+\tfrac{x^2}2\)</p>
-        <p class="q">\(f_4=\tfrac2x\)</p><p class="res">\(2\ln|x|\)</p>
-        <p class="q">\(f_5=\tfrac2{x^2}\)</p><p class="res">\(-\tfrac2x\)</p>
-        <p class="q">\(f_6=\tfrac5{\sqrt x}+\tfrac4x+\tfrac2{x^2}+\tfrac2{x^3}\)</p><p class="res">\(10\sqrt x+4\ln|x|-\tfrac2x-\tfrac1{x^2}\)</p>
-        <p class="q">\(f_7=\tfrac{x+5}{x^2}=\tfrac1x+\tfrac5{x^2}\)</p><p class="res">\(\ln|x|-\tfrac5x\)</p>
-        <p class="q">\(f_8=\tfrac{x^2}5+\tfrac16\)</p><p class="res">\(\tfrac{x^3}{15}+\tfrac x6\)</p>
-        <p class="q">\(f_9=e^{4x+3}\)</p><p class="res">\(\tfrac14e^{4x+3}\)</p>
-        <p class="q">\(f_{10}=-2e^{-3-5x}\)</p><p class="res">\(\tfrac25e^{-3-5x}\)</p>
-        <p class="q">\(f_{11}=\sin(2x)\)</p><p class="res">\(-\tfrac12\cos(2x)\)</p>
-        <p class="q">\(f_{12}=\cos(3x+\tfrac\pi3)\)</p><p class="res">\(\tfrac13\sin(3x+\tfrac\pi3)\)</p>
-        <p class="q">\(f_{13}=5\cos(7x-4)\)</p><p class="res">\(\tfrac57\sin(7x-4)\)</p>
-        <p class="q">\(f_{14}=(2x+1)^2\)</p><p class="res">\(\tfrac{(2x+1)^3}6\)</p>
-        <p class="q">\(f_{15}=\tfrac3{\sqrt{5x+1}}\)</p><p class="res">\(\tfrac65\sqrt{5x+1}\)</p>
-        <p class="q">\(f_{16}=\tfrac1{\sqrt{x+2}}\)</p><p class="res">\(2\sqrt{x+2}\)</p>
-        <p class="q">\(f_{17}=\tfrac7{\sqrt{1-x^2}}\)</p><p class="res">\(7\arcsin x\)</p>
-        <p class="q">\(f_{18}=\tfrac5{\sqrt{1-x^2}}\)</p><p class="res">\(5\arcsin x\)</p>
-        <p class="q">\(f_{19}=\tfrac2{\sqrt{9-x^2}}\)</p><p class="res">\(2\arcsin\tfrac x3\)</p>
-        <p class="q">\(f_{20}=\tfrac4{\sqrt{7-x^2}}\)</p><p class="res">\(4\arcsin\tfrac x{\sqrt7}\)</p>
+        <div class="enonce">Déterminer toutes les primitives des fonctions suivantes, sur un intervalle bien choisi.</div>
+
+        <p class="q">1) \(f_1=5x^3-3x+7\)</p>
+        <div class="rappel"><span class="lab">Rappel · primitives usuelles</span>\[ \int x^n=\frac{x^{n+1}}{n+1}\ (n\neq-1) \quad \int\frac1x=\ln|x| \quad \int e^x=e^x \quad \int\cos=\sin \quad \int\sin=-\cos \quad \int\frac1{\sqrt x}=2\sqrt x \]Si \(F'=f\), alors \(x\mapsto\frac1aF(ax+b)\) est une primitive de \(x\mapsto f(ax+b)\).</div>
+        <p class="etape">Étape 1 : terme à terme</p>
+        <div class="res">\(\tfrac54x^4-\tfrac32x^2+7x\)</div>
+
+        <p class="q">2) \(f_2=2\cos x-3\sin x\)</p>
+        <p class="etape">Étape 1 : terme à terme</p>
+        <div class="res">\(2\sin x+3\cos x\)</div>
+
+        <p class="q">3) \(f_3=10-3e^x+x\)</p>
+        <p class="etape">Étape 1 : terme à terme</p>
+        <div class="res">\(10x-3e^x+\tfrac{x^2}2\)</div>
+
+        <p class="q">4) \(f_4=\dfrac2x\)</p>
+        <p class="etape">Étape 1 : sur \(]0,+\infty[\) ou \(]-\infty,0[\)</p>
+        <div class="res">\(2\ln|x|\)</div>
+
+        <p class="q">5) \(f_5=\dfrac2{x^2}\)</p>
+        <p class="etape">Étape 1 : écrire \(2x^{-2}\)</p>
+        <div class="res">\(-\dfrac2x\)</div>
+
+        <p class="q">6) \(f_6=\dfrac5{\sqrt x}+\dfrac4x+\dfrac2{x^2}+\dfrac2{x^3}\)</p>
+        <p class="etape">Étape 1 : puissances (\(x>0\))</p>
+        \[ 5x^{-1/2}+4x^{-1}+2x^{-2}+2x^{-3} \]
+        <div class="res">\(10\sqrt x+4\ln x-\dfrac2x-\dfrac1{x^2}\)</div>
+
+        <p class="q">7) \(f_7=\dfrac{x+5}{x^2}\)</p>
+        <p class="etape">Étape 1 : séparer</p>
+        \[ \frac1x+\frac5{x^2} \]
+        <div class="res">\(\ln|x|-\dfrac5x\)</div>
+
+        <p class="q">8) \(f_8=\dfrac{x^2}5+\dfrac16\)</p>
+        <p class="etape">Étape 1 : terme à terme</p>
+        <div class="res">\(\dfrac{x^3}{15}+\dfrac x6\)</div>
+
+        <p class="q">9) \(f_9=e^{4x+3}\)</p>
+        <p class="etape">Étape 1 : \(a=4\)</p>
+        <div class="res">\(\tfrac14e^{4x+3}\)</div>
+
+        <p class="q">10) \(f_{10}=-2e^{-3-5x}\)</p>
+        <p class="etape">Étape 1 : \(a=-5\)</p>
+        <div class="res">\(-2\times\tfrac1{-5}e^{-3-5x}=\tfrac25e^{-3-5x}\)</div>
+
+        <p class="q">11) \(f_{11}=\sin(2x)\)</p>
+        <p class="etape">Étape 1 : \(a=2\)</p>
+        <div class="res">\(-\tfrac12\cos(2x)\)</div>
+
+        <p class="q">12) \(f_{12}=\cos\!\big(3x+\tfrac\pi3\big)\)</p>
+        <p class="etape">Étape 1 : \(a=3\)</p>
+        <div class="res">\(\tfrac13\sin\!\big(3x+\tfrac\pi3\big)\)</div>
+
+        <p class="q">13) \(f_{13}=5\cos(7x-4)\)</p>
+        <p class="etape">Étape 1 : \(a=7\)</p>
+        <div class="res">\(\tfrac57\sin(7x-4)\)</div>
+
+        <p class="q">14) \(f_{14}=(2x+1)^2\)</p>
+        <p class="etape">Étape 1 : \(a=2\), puissance 2</p>
+        <div class="res">\(\tfrac12\times\tfrac{(2x+1)^3}3=\tfrac{(2x+1)^3}6\)</div>
+
+        <p class="q">15) \(f_{15}=\dfrac3{\sqrt{5x+1}}\)</p>
+        <p class="etape">Étape 1 : \(\int\tfrac1{\sqrt x}=2\sqrt x\) et \(a=5\)</p>
+        <div class="res">\(3\times\tfrac15\times2\sqrt{5x+1}=\tfrac65\sqrt{5x+1}\)</div>
+
+        <p class="q">16) \(f_{16}=\dfrac1{\sqrt{x+2}}\)</p>
+        <p class="etape">Étape 1 : \(a=1\)</p>
+        <div class="res">\(2\sqrt{x+2}\)</div>
+
+        <p class="q">17) \(f_{17}=\dfrac7{\sqrt{1-x^2}}\)</p>
+        <div class="rappel"><span class="lab">Rappel · arcsinus</span>\[ \int\frac{dx}{\sqrt{a^2-x^2}}=\arcsin\frac xa \quad(|x|&lt;a) \]</div>
+        <p class="etape">Étape 1 : \(a=1\), sur \(]-1,1[\)</p>
+        <div class="res">\(7\arcsin x\)</div>
+
+        <p class="q">18) \(f_{18}=\dfrac5{\sqrt{1-x^2}}\)</p>
+        <p class="etape">Étape 1 : \(a=1\)</p>
+        <div class="res">\(5\arcsin x\)</div>
+
+        <p class="q">19) \(f_{19}=\dfrac2{\sqrt{9-x^2}}\)</p>
+        <p class="etape">Étape 1 : \(a=3\), sur \(]-3,3[\)</p>
+        <div class="res">\(2\arcsin\dfrac x3\)</div>
+
+        <p class="q">20) \(f_{20}=\dfrac4{\sqrt{7-x^2}}\)</p>
+        <p class="etape">Étape 1 : \(a=\sqrt7\), sur \(]-\sqrt7,\sqrt7[\)</p>
+        <div class="res">\(4\arcsin\dfrac x{\sqrt7}\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 2 — Fonction en escalier</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <div class="enonce">\(f=1\) sur \(]0,1[\), \(-2\) sur \(]1,2]\), \(4\) sur \(]2,4]\) (valeurs isolées ignorées).</div>
-        <p class="q">1) \(\int_0^4 f\)</p><p>\(1\cdot1+(-2)\cdot1+4\cdot2\).</p><p class="res">\(7\)</p>
-        <p class="q">2) \(F(x)=\int_0^x f\)</p><p class="res">\(F(x)=x\) sur \([0,1]\), \(3-2x\) sur \([1,2]\), \(4x-9\) sur \([2,4]\)</p>
-        <p class="q">3) Continuité / dérivabilité</p><p>Raccords \(F(1^-)=F(1^+)=1\), \(F(2^-)=F(2^+)=-1\) : \(F\) <b>continue</b>. Mais les pentes changent (\(1\to-2\) en \(1\), \(-2\to4\) en \(2\)).</p><p class="res">\(F\) continue sur \([0,4]\), <b>non dérivable</b> en \(1\) et \(2\)</p>
+        <div class="enonce">\(f\) définie sur \([0,4]\) par : \(-1\) en \(x=0\) ; \(1\) sur \(]0,1[\) ; \(3\) en \(x=1\) ; \(-2\) sur \(]1,2]\) ; \(4\) sur \(]2,4]\). (1) Calculer \(\int_0^4f\). (2) Pour \(x\in[0,4]\), calculer \(F(x)=\int_0^xf\). (3) Montrer que \(F\) est continue sur \([0,4]\). Est-elle dérivable ?</div>
+
+        <p class="q">1) \(\displaystyle\int_0^4f(t)\,dt\)</p>
+        <div class="rappel"><span class="lab">Rappel · fonction en escalier</span>Modifier la valeur de \(f\) en un nombre fini de points ne change pas l'intégrale. Sur un intervalle où \(f\) vaut \(c\), l'intégrale vaut \(c\times\)longueur.</div>
+        <p class="etape">Étape 1 : découper selon les intervalles</p>
+        \[ \int_0^4f=1\times1+(-2)\times1+4\times2 \]
+        <div class="res">\(7\)</div>
+
+        <p class="q">2) \(F(x)=\displaystyle\int_0^xf\)</p>
+        <p class="etape">Étape 1 : \(x\in[0,1]\)</p>
+        <p>\(F(x)=x\).</p>
+        <p class="etape">Étape 2 : \(x\in[1,2]\)</p>
+        <p>\(F(x)=F(1)-2(x-1)=1-2x+2=3-2x\).</p>
+        <p class="etape">Étape 3 : \(x\in[2,4]\)</p>
+        <p>\(F(2)=-1\), donc \(F(x)=-1+4(x-2)=4x-9\).</p>
+        <div class="res">\(F(x)=x\) sur \([0,1]\) ; \(3-2x\) sur \([1,2]\) ; \(4x-9\) sur \([2,4]\).</div>
+
+        <p class="q">3) Continuité et dérivabilité de \(F\)</p>
+        <p class="etape">Étape 1 : continuité aux raccords</p>
+        <ul>
+          <li>En 1 : \(1\) (à gauche) et \(3-2=1\) (à droite).</li>
+          <li>En 2 : \(3-4=-1\) et \(8-9=-1\).</li>
+        </ul>
+        <p>Chaque morceau est continu : \(F\) est continue sur \([0,4]\). (Plus généralement, une intégrale de fonction bornée est lipschitzienne.)</p>
+        <p class="etape">Étape 2 : dérivabilité</p>
+        <p>Les pentes changent : \(1\) puis \(-2\) en \(x=1\), puis \(-2\) et \(4\) en \(x=2\). Les dérivées à gauche et à droite diffèrent.</p>
+        <div class="res">\(F\) est continue sur \([0,4]\) mais <b>non dérivable</b> en 1 et en 2 (\(F'=f\) seulement là où \(f\) est continue).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 3 — Reconnaissance de formes</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">\(f_1=\tfrac{x}{1+x^2}\)</p><p class="res">\(\tfrac12\ln(1+x^2)\)</p>
-        <p class="q">\(f_2=\tfrac{e^{3x}}{1+e^{3x}}\)</p><p class="res">\(\tfrac13\ln(1+e^{3x})\)</p>
-        <p class="q">\(f_3=\tfrac{\ln x}{x}\)</p><p class="res">\(\tfrac12(\ln x)^2\)</p>
-        <p class="q">\(f_4=\tfrac1{x\ln x}\)</p><p class="res">\(\ln|\ln x|\)</p>
-        <p class="q">\(f_5=\cos x\sin x\)</p><p class="res">\(\tfrac12\sin^2x\) (ou \(-\tfrac14\cos2x\))</p>
-        <p class="q">\(f_6=\cos(3x)\sin(5x)\)</p><p>\(=\tfrac12(\sin8x+\sin2x)\).</p><p class="res">\(-\tfrac1{16}\cos8x-\tfrac14\cos2x\)</p>
-        <p class="q">\(f_7=\cos x\sin^2x\)</p><p class="res">\(\tfrac13\sin^3x\)</p>
-        <p class="q">\(f_8=x\sqrt{1+2x^2}\)</p><p class="res">\(\tfrac16(1+2x^2)^{3/2}\)</p>
-        <p class="q">\(f_9=3x\sqrt{1+x^2}\)</p><p class="res">\((1+x^2)^{3/2}\)</p>
-        <p class="q">\(f_{10}=\tfrac1{(3x+2)^2}\)</p><p class="res">\(-\tfrac1{3(3x+2)}\)</p>
-        <p class="q">\(f_{11}=\tfrac1{(1-2x)^3}\)</p><p class="res">\(\tfrac1{4(1-2x)^2}\)</p>
-        <p class="q">\(f_{12}=\tfrac{x^2}{1+x^2}=1-\tfrac1{1+x^2}\)</p><p class="res">\(x-\arctan x\)</p>
-        <p class="q">\(f_{13}=\tfrac3{x^2+7}\)</p><p class="res">\(\tfrac3{\sqrt7}\arctan\tfrac x{\sqrt7}\)</p>
-        <p class="q">\(f_{14}=\tfrac{-2}{\sqrt{9-x^2}}\)</p><p class="res">\(-2\arcsin\tfrac x3\)</p>
-        <p class="q">\(f_{15}=\tfrac3{\sqrt{16-x^2}}\)</p><p class="res">\(3\arcsin\tfrac x4\)</p>
+        <div class="enonce">Déterminer toutes les primitives des fonctions suivantes.</div>
+
+        <p class="q">1) \(f_1=\dfrac x{1+x^2}\)</p>
+        <div class="rappel"><span class="lab">Rappel · formes composées</span>\[ \int\frac{u'}u=\ln|u| \qquad \int u'u^n=\frac{u^{n+1}}{n+1} \qquad \int\frac{u'}{u^2}=-\frac1u \qquad \int\frac{u'}{\sqrt{a^2-u^2}}=\arcsin\frac ua \qquad \int\frac{u'}{a^2+u^2}=\frac1a\arctan\frac ua \]</div>
+        <p class="etape">Étape 1 : \(u=1+x^2\), \(u'=2x\)</p>
+        <p>\(f_1=\tfrac12\dfrac{u'}u\).</p>
+        <div class="res">\(\tfrac12\ln(1+x^2)\)</div>
+
+        <p class="q">2) \(f_2=\dfrac{e^{3x}}{1+e^{3x}}\)</p>
+        <p class="etape">Étape 1 : \(u=1+e^{3x}\), \(u'=3e^{3x}\)</p>
+        <p>\(f_2=\tfrac13\dfrac{u'}u\).</p>
+        <div class="res">\(\tfrac13\ln(1+e^{3x})\)</div>
+
+        <p class="q">3) \(f_3=\dfrac{\ln x}x\)</p>
+        <p class="etape">Étape 1 : \(u=\ln x\), \(u'=\tfrac1x\)</p>
+        <p>\(f_3=u'u\).</p>
+        <div class="res">\(\tfrac12(\ln x)^2\)</div>
+
+        <p class="q">4) \(f_4=\dfrac1{x\ln x}\)</p>
+        <p class="etape">Étape 1 : \(u=\ln x\), \(u'=\tfrac1x\)</p>
+        <p>\(f_4=\dfrac{u'}u\), sur \(]0,1[\) ou \(]1,+\infty[\).</p>
+        <div class="res">\(\ln|\ln x|\)</div>
+
+        <p class="q">5) \(f_5=\cos x\sin x\)</p>
+        <p class="etape">Étape 1 : \(u=\sin x\), \(u'=\cos x\)</p>
+        <p>\(f_5=u'u\).</p>
+        <div class="res">\(\tfrac12\sin^2x\) (ou \(-\tfrac14\cos2x\), qui diffère d'une constante)</div>
+
+        <p class="q">6) \(f_6=\cos(3x)\sin(5x)\)</p>
+        <p class="etape">Étape 1 : linéariser</p>
+        <div class="rappel"><span class="lab">Rappel · produit en somme</span>\[ \sin a\cos b=\tfrac12\big[\sin(a+b)+\sin(a-b)\big] \]</div>
+        \[ \cos3x\sin5x=\tfrac12\big(\sin8x+\sin2x\big) \]
+        <p class="etape">Étape 2 : intégrer</p>
+        <div class="res">\(-\tfrac1{16}\cos8x-\tfrac14\cos2x\)</div>
+
+        <p class="q">7) \(f_7=\cos x\sin^2x\)</p>
+        <p class="etape">Étape 1 : \(u=\sin x\), \(u'=\cos x\)</p>
+        <p>\(f_7=u'u^2\).</p>
+        <div class="res">\(\tfrac13\sin^3x\)</div>
+
+        <p class="q">8) \(f_8=x\sqrt{1+2x^2}\)</p>
+        <p class="etape">Étape 1 : \(u=1+2x^2\), \(u'=4x\)</p>
+        <p>\(f_8=\tfrac14u'u^{1/2}\), primitive \(\tfrac14\cdot\tfrac23u^{3/2}\).</p>
+        <div class="res">\(\tfrac16(1+2x^2)^{3/2}\)</div>
+
+        <p class="q">9) \(f_9=3x\sqrt{1+x^2}\)</p>
+        <p class="etape">Étape 1 : \(u=1+x^2\), \(u'=2x\)</p>
+        <p>\(f_9=\tfrac32u'u^{1/2}\), primitive \(\tfrac32\cdot\tfrac23u^{3/2}\).</p>
+        <div class="res">\((1+x^2)^{3/2}\)</div>
+
+        <p class="q">10) \(f_{10}=\dfrac1{(3x+2)^2}\)</p>
+        <p class="etape">Étape 1 : \(u=3x+2\), \(u'=3\)</p>
+        <p>\(f_{10}=\tfrac13\dfrac{u'}{u^2}\).</p>
+        <div class="res">\(-\dfrac1{3(3x+2)}\)</div>
+
+        <p class="q">11) \(f_{11}=\dfrac1{(1-2x)^3}\)</p>
+        <p class="etape">Étape 1 : \(u=1-2x\), \(u'=-2\)</p>
+        <p>\(f_{11}=-\tfrac12u'u^{-3}\), primitive \(-\tfrac12\cdot\dfrac{u^{-2}}{-2}\).</p>
+        <div class="res">\(\dfrac1{4(1-2x)^2}\)</div>
+
+        <p class="q">12) \(f_{12}=\dfrac{x^2}{1+x^2}\)</p>
+        <p class="etape">Étape 1 : faire apparaître le dénominateur</p>
+        \[ \frac{x^2}{1+x^2}=1-\frac1{1+x^2} \]
+        <div class="res">\(x-\arctan x\)</div>
+
+        <p class="q">13) \(f_{13}=\dfrac3{x^2+7}\)</p>
+        <p class="etape">Étape 1 : \(\int\frac{dx}{x^2+a^2}=\frac1a\arctan\frac xa\) avec \(a=\sqrt7\)</p>
+        <div class="res">\(\dfrac3{\sqrt7}\arctan\dfrac x{\sqrt7}\)</div>
+
+        <p class="q">14) \(f_{14}=\dfrac{-2}{\sqrt{9-x^2}}\)</p>
+        <p class="etape">Étape 1 : \(a=3\)</p>
+        <div class="res">\(-2\arcsin\dfrac x3\)</div>
+
+        <p class="q">15) \(f_{15}=\dfrac3{\sqrt{16-x^2}}\)</p>
+        <p class="etape">Étape 1 : \(a=4\)</p>
+        <div class="res">\(3\arcsin\dfrac x4\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 4 — Primitives (formes \(u'u^n\), \(\tfrac{u'}{\sqrt u}\))</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">\(f=(3x-1)(3x^2-2x+3)^3\)</p><p>\((3x^2-2x+3)'=2(3x-1)\).</p><p class="res">\(\tfrac18(3x^2-2x+3)^4\)</p>
-        <p class="q">\(g=\tfrac{1-x^2}{(x^3-3x+2)^3}\) sur \(]-\infty,-2[\)</p><p>\((x^3-3x+2)'=-3(1-x^2)\).</p><p class="res">\(\tfrac1{6(x^3-3x+2)^2}\)</p>
-        <p class="q">\(h=\tfrac{x-1}{\sqrt{x^2-2x}}\) sur \(]-\infty,0[\)</p><p>\((x^2-2x)'=2(x-1)\).</p><p class="res">\(\sqrt{x^2-2x}\)</p>
-        <p class="q">\(J=\tfrac1{x\ln(x^2)}\) sur \(]1,+\infty[\)</p><p>\(\ln(x^2)=2\ln x\), donc \(J=\tfrac12\cdot\tfrac1{x\ln x}\).</p><p class="res">\(\tfrac12\ln(\ln x)\)</p>
+        <div class="enonce">Déterminer une primitive des fonctions suivantes sur l'intervalle considéré.</div>
+
+        <p class="q">1) \(f(x)=(3x-1)(3x^2-2x+3)^3\), \(I=\mathbb R\)</p>
+        <p class="etape">Étape 1 : repérer \(u\)</p>
+        <p>\(u=3x^2-2x+3\), \(u'=6x-2=2(3x-1)\) : \(f=\tfrac12u'u^3\).</p>
+        <p class="etape">Étape 2 : intégrer</p>
+        <div class="res">\(\tfrac12\cdot\tfrac{u^4}4=\tfrac18(3x^2-2x+3)^4\)</div>
+
+        <p class="q">2) \(g(x)=\dfrac{1-x^2}{(x^3-3x+2)^3}\), \(I=]-\infty,-2[\)</p>
+        <p class="etape">Étape 1 : repérer \(u\)</p>
+        <p>\(u=x^3-3x+2\), \(u'=3x^2-3=-3(1-x^2)\) : \(g=-\tfrac13u'u^{-3}\). Sur \(I\), \(u&lt;0\) (\(u=(x-1)^2(x+2)\)) donc \(u\neq0\).</p>
+        <p class="etape">Étape 2 : intégrer</p>
+        <div class="res">\(-\tfrac13\cdot\dfrac{u^{-2}}{-2}=\dfrac1{6(x^3-3x+2)^2}\)</div>
+
+        <p class="q">3) \(h(x)=\dfrac{x-1}{\sqrt{x^2-2x}}\), \(I=]-\infty,0[\)</p>
+        <p class="etape">Étape 1 : repérer \(u\)</p>
+        <p>\(u=x^2-2x\) (positif sur \(I\)), \(u'=2(x-1)\) : \(h=\tfrac12\dfrac{u'}{\sqrt u}\).</p>
+        <p class="etape">Étape 2 : intégrer (\(\int\tfrac{u'}{\sqrt u}=2\sqrt u\))</p>
+        <div class="res">\(\sqrt{x^2-2x}\)</div>
+
+        <p class="q">4) \(J(x)=\dfrac1{x\ln(x^2)}\), \(I=]1,+\infty[\)</p>
+        <p class="etape">Étape 1 : simplifier</p>
+        <p>\(\ln(x^2)=2\ln x\) pour \(x>0\), donc \(J=\tfrac12\cdot\dfrac1{x\ln x}\).</p>
+        <p class="etape">Étape 2 : \(u=\ln x\), \(J=\tfrac12\dfrac{u'}u\)</p>
+        <div class="res">\(\tfrac12\ln(\ln x)\) (\(\ln x>0\) sur \(I\))</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 5 — Intégrales définies</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">\(A=\int_0^{\pi/3}(1-\cos3x)\,dx\)</p><p>\([x-\tfrac13\sin3x]_0^{\pi/3}\), \(\sin\pi=0\).</p><p class="res">\(\tfrac\pi3\)</p>
-        <p class="q">\(B=\int_0^{\sqrt\pi}x\sin(x^2)\,dx\)</p><p>\(u=x^2\) : \(\tfrac12\int_0^\pi\sin u\,du\).</p><p class="res">\(1\)</p>
-        <p class="q">\(C=\int_1^2\tfrac{\sqrt{\ln x}}{x}\,dx\)</p><p>\(u=\ln x\) : \(\int_0^{\ln2}\sqrt u\,du\).</p><p class="res">\(\tfrac23(\ln2)^{3/2}\)</p>
-        <p class="q">\(D=\int_0^1(x-2)(x+1)^5\,dx\)</p><p>\(u=x+1\) : \(\int_1^2(u-3)u^5du=[\tfrac{u^7}7-\tfrac{u^6}2]_1^2\).</p><p class="res">\(-\tfrac{187}{14}\)</p>
-        <p class="q">\(E=\int_0^{2\pi}\cos^2x\,dx\)</p><p>\(\cos^2x=\tfrac{1+\cos2x}2\).</p><p class="res">\(\pi\)</p>
-        <p class="q">\(F=\int_0^{\ln2/2}\tfrac{e^{2x}}{e^{2x}+2}\,dx\)</p><p>\(u=e^{2x}+2\) (de \(3\) à \(4\)) : \(\tfrac12\ln\tfrac43\).</p><p class="res">\(\tfrac12\ln\tfrac43\)</p>
+        <div class="enonce">Calculer les intégrales \(A,B,C,D,E,F\) suivantes.</div>
+
+        <p class="q">1) \(A=\displaystyle\int_0^{\pi/3}(1-\cos3x)\,dx\)</p>
+        <p class="etape">Étape 1 : primitive</p>
+        \[ A=\Big[x-\tfrac13\sin3x\Big]_0^{\pi/3}=\frac\pi3-\frac13\sin\pi-0 \]
+        <div class="res">\(A=\dfrac\pi3\)</div>
+
+        <p class="q">2) \(B=\displaystyle\int_0^{\sqrt\pi}x\sin(x^2)\,dx\)</p>
+        <p class="etape">Étape 1 : changement de variable \(u=x^2\), \(du=2x\,dx\)</p>
+        <p>Bornes : \(x=0\to u=0\), \(x=\sqrt\pi\to u=\pi\).</p>
+        \[ B=\frac12\int_0^\pi\sin u\,du=\frac12\big[-\cos u\big]_0^\pi=\frac12(1+1) \]
+        <div class="res">\(B=1\)</div>
+
+        <p class="q">3) \(C=\displaystyle\int_1^2\frac{\sqrt{\ln x}}x\,dx\)</p>
+        <p class="etape">Étape 1 : \(u=\ln x\), \(du=\tfrac{dx}x\)</p>
+        <p>Bornes : \(0\) et \(\ln2\).</p>
+        \[ C=\int_0^{\ln2}\sqrt u\,du=\Big[\tfrac23u^{3/2}\Big]_0^{\ln2} \]
+        <div class="res">\(C=\tfrac23(\ln2)^{3/2}\)</div>
+
+        <p class="q">4) \(D=\displaystyle\int_0^1(x-2)(x+1)^5\,dx\)</p>
+        <p class="etape">Étape 1 : \(u=x+1\)</p>
+        <p>\(x-2=u-3\), bornes \(1\) et \(2\).</p>
+        \[ D=\int_1^2(u-3)u^5\,du=\Big[\frac{u^7}7-\frac{u^6}2\Big]_1^2=\Big(\frac{128}7-32\Big)-\Big(\frac17-\frac12\Big) \]
+        <p class="etape">Étape 2 : calculer</p>
+        \[ \frac{127}7-32+\frac12=\frac{254-448+7}{14}=-\frac{187}{14} \]
+        <div class="res">\(D=-\dfrac{187}{14}\)</div>
+
+        <p class="q">5) \(E=\displaystyle\int_0^{2\pi}\cos^2x\,dx\)</p>
+        <p class="etape">Étape 1 : linéariser</p>
+        \[ \cos^2x=\frac{1+\cos2x}2 \]
+        <p class="etape">Étape 2 : intégrer</p>
+        \[ E=\Big[\frac x2+\frac{\sin2x}4\Big]_0^{2\pi}=\pi \]
+        <div class="res">\(E=\pi\)</div>
+
+        <p class="q">6) \(F=\displaystyle\int_0^{\ln2/2}\frac{e^{2x}}{e^{2x}+2}\,dx\)</p>
+        <p class="etape">Étape 1 : \(u=e^{2x}+2\), \(u'=2e^{2x}\)</p>
+        <p>\(\dfrac{e^{2x}}{e^{2x}+2}=\tfrac12\dfrac{u'}u\). Bornes : \(x=0\to u=3\), \(x=\tfrac{\ln2}2\to u=e^{\ln2}+2=4\).</p>
+        \[ F=\frac12\big[\ln u\big]_3^4 \]
+        <div class="res">\(F=\tfrac12\ln\tfrac43\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 6 — Aires (courbe, axe, \(x=0\), \(x=1\))</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">\(f=x^2+\tfrac12\) (positive)</p><p>\(\int_0^1(x^2+\tfrac12)dx=\tfrac13+\tfrac12\).</p><p class="res">\(\tfrac56\)</p>
-        <p class="q">\(g=e^{-x}-1\) (négative sur \([0,1]\))</p><p>Aire \(=\int_0^1(1-e^{-x})dx=[x+e^{-x}]_0^1\).</p><p class="res">\(\tfrac1e\)</p>
-        <p class="q">\(h=4x^2-1\) (change de signe en \(\tfrac12\))</p><p>\(\int_0^{1/2}(1-4x^2)+\int_{1/2}^1(4x^2-1)=\tfrac13+\tfrac23\).</p><p class="res">\(1\)</p>
+        <div class="enonce">Pour chaque fonction, calculer l'aire du domaine délimité par la courbe, l'axe des abscisses et les droites \(x=0\) et \(x=1\).</div>
+
+        <p class="q">1) \(f(x)=x^2+\tfrac12\)</p>
+        <div class="rappel"><span class="lab">Rappel · aire sous une courbe</span>L'aire entre la courbe, l'axe \((Ox)\) et \(x=a,x=b\) vaut \(\displaystyle\int_a^b|f|\). Si \(f\) change de signe, on découpe aux zéros de \(f\).</div>
+        <p class="etape">Étape 1 : signe</p>
+        <p>\(f>0\) sur \([0,1]\).</p>
+        <p class="etape">Étape 2 : intégrer</p>
+        \[ \int_0^1\Big(x^2+\frac12\Big)dx=\frac13+\frac12 \]
+        <div class="res">\(\tfrac56\) u.a.</div>
+
+        <p class="q">2) \(g(x)=e^{-x}-1\)</p>
+        <p class="etape">Étape 1 : signe</p>
+        <p>Pour \(x\geqslant0\), \(e^{-x}\leqslant1\) : \(g\leqslant0\). L'aire est \(\int_0^1(-g)\).</p>
+        <p class="etape">Étape 2 : intégrer</p>
+        \[ \int_0^1(1-e^{-x})dx=\big[x+e^{-x}\big]_0^1=1+e^{-1}-1 \]
+        <div class="res">\(\tfrac1e\) u.a.</div>
+
+        <p class="q">3) \(h(x)=4x^2-1\)</p>
+        <p class="etape">Étape 1 : signe</p>
+        <p>\(h=(2x-1)(2x+1)\) : négative sur \([0,\tfrac12]\), positive sur \([\tfrac12,1]\).</p>
+        <p class="etape">Étape 2 : intégrer sur chaque morceau</p>
+        \[ \int_0^{1/2}(1-4x^2)dx=\frac12-\frac16=\frac13 \qquad \int_{1/2}^1(4x^2-1)dx=\Big(\frac43-1\Big)-\Big(\frac16-\frac12\Big)=\frac23 \]
+        <div class="res">\(\tfrac13+\tfrac23=1\) u.a.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 7 — Aire entre \(x^2\) et \(1/x\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <div class="enonce">\(f=x^2\), \(g=\tfrac1x\) sur \([\tfrac12,2]\).</div>
-        <p>Intersection \(x^2=\tfrac1x\Rightarrow x=1\). Sur \([\tfrac12,1]\) : \(g>f\) ; sur \([1,2]\) : \(f>g\).</p>
-        <p>\(\int_{1/2}^1(\tfrac1x-x^2)dx=\ln2-\tfrac7{24}\) ; \(\int_1^2(x^2-\tfrac1x)dx=\tfrac73-\ln2\).</p>
-        <div class="res">Aire \(=\big(\ln2-\tfrac7{24}\big)+\big(\tfrac73-\ln2\big)=\dfrac{49}{24}\).</div>
+        <div class="enonce">\(f(x)=x^2\) et \(g(x)=\tfrac1x\) pour \(x\in[\tfrac12,2]\). Calculer l'aire du domaine délimité par leurs courbes.</div>
+
+        <p class="q">1) Aire du domaine</p>
+        <p class="etape">Étape 1 : intersection</p>
+        <p>\(x^2=\tfrac1x\iff x^3=1\iff x=1\).</p>
+        <p class="etape">Étape 2 : position relative</p>
+        <ul>
+          <li>Sur \([\tfrac12,1]\) : \(g\geqslant f\) (en \(\tfrac12\) : \(2\) contre \(\tfrac14\)).</li>
+          <li>Sur \([1,2]\) : \(f\geqslant g\) (en 2 : \(4\) contre \(\tfrac12\)).</li>
+        </ul>
+        <p class="etape">Étape 3 : intégrer sur chaque morceau</p>
+        \[ \int_{1/2}^1\Big(\frac1x-x^2\Big)dx=\Big[\ln x-\frac{x^3}3\Big]_{1/2}^1=\Big(-\frac13\Big)-\Big(-\ln2-\frac1{24}\Big)=\ln2-\frac7{24} \]
+        \[ \int_1^2\Big(x^2-\frac1x\Big)dx=\Big[\frac{x^3}3-\ln x\Big]_1^2=\Big(\frac83-\ln2\Big)-\frac13=\frac73-\ln2 \]
+        <p class="etape">Étape 4 : additionner</p>
+        <div class="res">Aire \(=\ln2-\tfrac7{24}+\tfrac73-\ln2=\tfrac{49}{24}\) u.a.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 8 — Aires parabole/droite</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">a) \(y=5x-x^2\) et \(y=x\)</p><p>Intersections \(x=0,4\), parabole au-dessus : \(\int_0^4(4x-x^2)dx\).</p><p class="res">\(\tfrac{32}3\)</p>
-        <p class="q">b) \(y=4x-x^2\) et \(y=2x\)</p><p>Intersections \(x=0,2\) : \(\int_0^2(2x-x^2)dx\).</p><p class="res">\(\tfrac43\)</p>
+        <div class="enonce">Exprimer et calculer l'aire de la région délimitée par les courbes : a) \(y=5x-x^2\) et \(y=x\) ; b) \(y=4x-x^2\) et \(y=2x\).</div>
+
+        <p class="q">a) \(y=5x-x^2\) et \(y=x\)</p>
+        <p class="etape">Étape 1 : intersections</p>
+        \[ 5x-x^2=x\iff x(4-x)=0\iff x=0\text{ ou }x=4 \]
+        <p class="etape">Étape 2 : position relative</p>
+        <p>Entre 0 et 4, la différence \(4x-x^2\geqslant0\) : la parabole est au-dessus.</p>
+        <p class="etape">Étape 3 : intégrer</p>
+        \[ \int_0^4(4x-x^2)dx=\Big[2x^2-\frac{x^3}3\Big]_0^4=32-\frac{64}3 \]
+        <div class="res">\(\tfrac{32}3\) u.a.</div>
+
+        <p class="q">b) \(y=4x-x^2\) et \(y=2x\)</p>
+        <p class="etape">Étape 1 : intersections</p>
+        \[ 4x-x^2=2x\iff x(2-x)=0 \]
+        <p class="etape">Étape 2 : intégrer (parabole au-dessus sur \([0,2]\))</p>
+        \[ \int_0^2(2x-x^2)dx=\Big[x^2-\frac{x^3}3\Big]_0^2=4-\frac83 \]
+        <div class="res">\(\tfrac43\) u.a.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 9 — Parabole, tangente, axe des \(x\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <div class="enonce">\(y=x^2\), tangente en \((1,1)\), axe \((Ox)\).</div>
-        <p>Tangente : \(y=2x-1\), coupe \((Ox)\) en \(x=\tfrac12\). Aire \(=\int_0^1x^2dx-\underbrace{\tfrac12\cdot\tfrac12\cdot1}_{\text{triangle}}=\tfrac13-\tfrac14\).</p>
-        <div class="res">\(\dfrac1{12}\)</div>
+        <div class="enonce">Trouver l'aire de la région délimitée par la parabole \(y=x^2\), la droite tangente à cette parabole en \((1,1)\) et l'axe des \(x\).</div>
+
+        <p class="q">1) Aire de la région</p>
+        <p class="etape">Étape 1 : tangente en \((1,1)\)</p>
+        <div class="rappel"><span class="lab">Rappel · tangente</span>\[ y=f(a)+f'(a)(x-a) \]</div>
+        <p>\(f'(1)=2\) : \(y=1+2(x-1)=2x-1\). Elle coupe l'axe \((Ox)\) en \(x=\tfrac12\).</p>
+        <p class="etape">Étape 2 : décrire la région</p>
+        <p>Elle est au-dessus de l'axe et de la tangente, sous la parabole : c'est l'aire sous la parabole sur \([0,1]\), privée du triangle de sommets \((\tfrac12,0)\), \((1,0)\), \((1,1)\).</p>
+        <p class="etape">Étape 3 : calculer</p>
+        \[ \int_0^1x^2dx=\frac13 \qquad \text{triangle : }\frac12\times\frac12\times1=\frac14 \]
+        <div class="res">Aire \(=\tfrac13-\tfrac14=\tfrac1{12}\) u.a.</div>
+        <p>Vérification par intégration directe : \(\int_0^{1/2}x^2dx+\int_{1/2}^1\big(x^2-(2x-1)\big)dx=\tfrac1{24}+\tfrac1{24}=\tfrac1{12}\).</p>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 10 — Aire entre \(\tfrac1{1+x}\) et \(\tfrac1{1+x^2}\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <div class="enonce">\(f=\tfrac1{1+x}\), \(g=\tfrac1{1+x^2}\) sur \([0,1]\), \(OI=5\,\text{cm}\).</div>
-        <p class="q">1) Positions</p><p>Sur \([0,1]\), \(x^2\leqslant x\Rightarrow g\geqslant f\) (égalité en \(0\) et \(1\)).</p>
-        <p class="q">2) Aire (u.a.)</p><p>\(\int_0^1\big(\tfrac1{1+x^2}-\tfrac1{1+x}\big)dx=[\arctan x-\ln(1+x)]_0^1\).</p><p class="res">\(\tfrac\pi4-\ln2\) u.a.</p>
-        <p class="q">3) En cm²</p><p>\(1\) u.a. \(=5^2=25\,\text{cm}^2\).</p><p class="res">\(25\big(\tfrac\pi4-\ln2\big)\,\text{cm}^2\)</p>
+        <div class="enonce">\(f(x)=\tfrac1{1+x}\), \(g(x)=\tfrac1{1+x^2}\) sur \([0;1]\), \(OI=5\) cm. (1) Positions relatives des courbes. (2) Aire de la surface \(S\) comprise entre les deux courbes et les droites \(x=0\), \(x=1\), en unités d'aire. (3) En \(\text{cm}^2\).</div>
+
+        <p class="q">1) Positions relatives</p>
+        <p class="etape">Étape 1 : comparer \(1+x\) et \(1+x^2\)</p>
+        <p>Sur \([0,1]\), \(x^2\leqslant x\), donc \(1+x^2\leqslant1+x\) et \(g\geqslant f\), avec égalité en 0 et en 1.</p>
+        <div class="res">\(\mathcal C_g\) est au-dessus de \(\mathcal C_f\) sur \([0,1]\), les courbes se coupent en \(x=0\) et \(x=1\).</div>
+
+        <p class="q">2) Aire en unités d'aire</p>
+        <p class="etape">Étape 1 : intégrer</p>
+        \[ \int_0^1\Big(\frac1{1+x^2}-\frac1{1+x}\Big)dx=\big[\arctan x-\ln(1+x)\big]_0^1 \]
+        <div class="res">\(\dfrac\pi4-\ln2\) u.a. (\(\approx0{,}0922\)).</div>
+
+        <p class="q">3) Aire en \(\text{cm}^2\)</p>
+        <p class="etape">Étape 1 : une unité d'aire</p>
+        <p>L'unité de longueur vaut 5 cm (repère orthonormé) : 1 u.a. \(=5\times5=25\ \text{cm}^2\).</p>
+        <div class="res">\(25\big(\tfrac\pi4-\ln2\big)\approx2{,}3\ \text{cm}^2\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 11 — Déplacement vs distance</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <div class="enonce">\(v(t)=t^2-t-6=(t-3)(t+2)\) sur \([1,4]\).</div>
-        <p class="q">1) Déplacement</p><p>\(\int_1^4v\,dt=[\tfrac{t^3}3-\tfrac{t^2}2-6t]_1^4\).</p><p class="res">\(-\tfrac92\) m</p>
-        <p class="q">2) Distance</p><p>\(v<0\) sur \([1,3]\), \(v>0\) sur \([3,4]\). \(-\int_1^3v+\int_3^4v=\tfrac{22}3+\tfrac{17}6\).</p><p class="res">\(\tfrac{61}6\approx10{,}17\) m</p>
+        <div class="enonce">Une particule se déplace en ligne droite avec la vitesse \(v(t)=t^2-t-6\) (en m/s). (1) Trouver le déplacement pendant \(1\leqslant t\leqslant4\). (2) Trouver la distance parcourue pendant cette période.</div>
+
+        <p class="q">1) Déplacement</p>
+        <div class="rappel"><span class="lab">Rappel · déplacement et distance</span>Déplacement : \(\displaystyle\int_a^bv\,dt\) (algébrique). Distance parcourue : \(\displaystyle\int_a^b|v|\,dt\).</div>
+        <p class="etape">Étape 1 : primitive de \(v\)</p>
+        \[ \int_1^4v\,dt=\Big[\frac{t^3}3-\frac{t^2}2-6t\Big]_1^4=\Big(\frac{64}3-8-24\Big)-\Big(\frac13-\frac12-6\Big)=-\frac{32}3+\frac{37}6 \]
+        <div class="res">Déplacement \(=-\tfrac92\) m.</div>
+
+        <p class="q">2) Distance parcourue</p>
+        <p class="etape">Étape 1 : signe de \(v\)</p>
+        <p>\(v=(t-3)(t+2)\) : négative sur \([1,3]\), positive sur \([3,4]\).</p>
+        <p class="etape">Étape 2 : intégrer \(|v|\)</p>
+        <p>Avec \(G(t)=\tfrac{t^3}3-\tfrac{t^2}2-6t\) : \(G(1)=-\tfrac{37}6\), \(G(3)=9-\tfrac92-18=-\tfrac{27}2\), \(G(4)=-\tfrac{32}3\).</p>
+        \[ -\big(G(3)-G(1)\big)=\frac{27}2-\frac{37}6=\frac{22}3 \qquad G(4)-G(3)=-\frac{32}3+\frac{27}2=\frac{17}6 \]
+        <div class="res">Distance \(=\tfrac{22}3+\tfrac{17}6=\tfrac{61}6\approx10{,}17\) m.</div>
       </div>
     </div>
 
