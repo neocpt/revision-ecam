@@ -180,13 +180,27 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice A — Angle d'un triangle par le produit scalaire</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">\(A(1,0)\), \(B(4,4)\), \(C(0,3)\). Calculer l'angle \(\widehat{BAC}\) et l'aire du triangle.</div>
-        <p class="q">1) Vecteurs</p><p>\(\vec{AB}=(3,4)\), \(\vec{AC}=(-1,3)\). \(\|\vec{AB}\|=5\), \(\|\vec{AC}\|=\sqrt{10}\).</p>
-        <p class="q">2) Produit scalaire → angle</p>
-        <p>\(\vec{AB}\cdot\vec{AC}=3(-1)+4\cdot3=9\). \(\cos\widehat{BAC}=\dfrac{9}{5\sqrt{10}}=\dfrac{9}{5\sqrt{10}}\approx0{,}569\).</p>
-        <p class="res">\(\widehat{BAC}=\arccos\dfrac{9}{5\sqrt{10}}\approx55{,}3^\circ\)</p>
+
+        <p class="q">1) Vecteurs et normes</p>
+        <p class="etape">Étape 1 : coordonnées des vecteurs</p>
+        \[ \vec{AB}=(4-1,\,4-0)=(3,4) \qquad \vec{AC}=(0-1,\,3-0)=(-1,3) \]
+        <p class="etape">Étape 2 : normes</p>
+        \[ \|\vec{AB}\|=\sqrt{9+16}=5 \qquad \|\vec{AC}\|=\sqrt{1+9}=\sqrt{10} \]
+
+        <p class="q">2) Angle \(\widehat{BAC}\)</p>
+        <div class="rappel"><span class="lab">Rappel · produit scalaire</span>\[ \vec u\cdot\vec v=xx'+yy'=\|\vec u\|\,\|\vec v\|\cos\theta \]</div>
+        <p class="etape">Étape 1 : produit scalaire en coordonnées</p>
+        \[ \vec{AB}\cdot\vec{AC}=3\times(-1)+4\times3=9 \]
+        <p class="etape">Étape 2 : cosinus</p>
+        \[ \cos\widehat{BAC}=\frac{9}{5\sqrt{10}}\approx0{,}569 \]
+        <div class="res">\(\widehat{BAC}=\arccos\dfrac{9}{5\sqrt{10}}\approx55{,}3^\circ\)</div>
+
         <p class="q">3) Aire par le déterminant</p>
-        <p>\([\vec{AB},\vec{AC}]=3\cdot3-4\cdot(-1)=9+4=13\). \(\mathcal A=\tfrac12|13|\).</p>
-        <p class="res">\(\mathcal A=\dfrac{13}{2}=6{,}5\)</p>
+        <div class="rappel"><span class="lab">Rappel · aire d'un triangle</span>\[ \mathcal A=\tfrac12\,\big|\det(\vec{AB},\vec{AC})\big|,\qquad \det(\vec u,\vec v)=xy'-yx' \]</div>
+        <p class="etape">Étape 1 : déterminant</p>
+        \[ \det(\vec{AB},\vec{AC})=3\times3-4\times(-1)=13 \]
+        <p class="etape">Étape 2 : aire</p>
+        <div class="res">\(\mathcal A=\dfrac{13}{2}=6{,}5\)</div>
       </div>
     </div>
 
@@ -194,11 +208,31 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice B — Droite, projeté et distance</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">\(D:2x-y+1=0\), point \(P(3,1)\). Distance de \(P\) à \(D\), projeté orthogonal \(H\), vérification.</div>
-        <p class="q">1) Distance</p><p>\(d(P,D)=\dfrac{|2\cdot3-1+1|}{\sqrt{4+1}}=\dfrac{6}{\sqrt5}=\dfrac{6\sqrt5}{5}\approx2{,}68\).</p>
+
+        <p class="q">1) Distance de \(P\) à \(D\)</p>
+        <div class="rappel"><span class="lab">Rappel · distance point–droite</span>\[ d(M,D)=\frac{|ax_M+by_M+c|}{\sqrt{a^2+b^2}} \]</div>
+        <p class="etape">Étape 1 : numérateur et dénominateur</p>
+        \[ |2\times3-1+1|=6 \qquad \sqrt{2^2+(-1)^2}=\sqrt5 \]
+        <p class="etape">Étape 2 : quotient</p>
+        <div class="res">\(d(P,D)=\dfrac{6}{\sqrt5}=\dfrac{6\sqrt5}{5}\approx2{,}68\)</div>
+
         <p class="q">2) Projeté \(H\)</p>
-        <p>Normale \(\vec n=(2,-1)\), droite \(P+t\vec n\) : \(x=3+2t,\ y=1-t\). Sur \(D\) : \(2(3+2t)-(1-t)+1=0\Rightarrow6+4t-1+t+1=0\Rightarrow5t+6=0\Rightarrow t=-\tfrac65\).</p>
-        <p class="res">\(H=\big(3-\tfrac{12}5,\,1+\tfrac65\big)=\big(\tfrac35,\tfrac{11}5\big)\)</p>
-        <p class="q">3) Vérification</p><p>\(PH=|t|\,\|\vec n\|=\tfrac65\sqrt5=\dfrac{6\sqrt5}{5}\) : cohérent avec (1). \(H\) sur \(D\) : \(2\cdot\tfrac35-\tfrac{11}5+1=\tfrac65-\tfrac{11}5+\tfrac55=0\) ✓.</p>
+        <p>On cherche \(H\) sur la perpendiculaire à \(D\) passant par \(P\).</p>
+        <p class="etape">Étape 1 : droite perpendiculaire</p>
+        <p>Le vecteur \(\vec n=(2,-1)\) est normal à \(D\). La perpendiculaire est \(P+t\vec n\) :</p>
+        \[ x=3+2t \qquad y=1-t \]
+        <p class="etape">Étape 2 : intersection avec \(D\)</p>
+        \[ 2(3+2t)-(1-t)+1=0 \iff 5t+6=0 \iff t=-\tfrac65 \]
+        <p class="etape">Étape 3 : coordonnées</p>
+        \[ x=3-\tfrac{12}5=\tfrac35 \qquad y=1+\tfrac65=\tfrac{11}5 \]
+        <div class="res">\(H=\big(\tfrac35,\tfrac{11}5\big)\)</div>
+
+        <p class="q">3) Vérification</p>
+        <p class="etape">Étape 1 : \(H\) appartient à \(D\)</p>
+        \[ 2\times\tfrac35-\tfrac{11}5+1=\tfrac65-\tfrac{11}5+\tfrac55=0 \]
+        <p class="etape">Étape 2 : longueur \(PH\)</p>
+        \[ PH=|t|\,\|\vec n\|=\tfrac65\sqrt5=\frac{6\sqrt5}{5} \]
+        <div class="res">\(PH=d(P,D)\) : les deux calculs sont cohérents.</div>
       </div>
     </div>
 
@@ -206,12 +240,24 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice C — Tangentes à un cercle parallèles à une droite</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">Cercle \(C:(x-1)^2+(y+2)^2=5\), droite \(D:x-2y=0\). Tangentes à \(C\) parallèles à \(D\).</div>
-        <p class="q">1) Cadre</p><p>Centre \(\Omega(1,-2)\), rayon \(R=\sqrt5\). Une parallèle à \(D\) s'écrit \(x-2y+c=0\).</p>
+
+        <p class="q">1) Cadre</p>
+        <p class="etape">Étape 1 : centre et rayon</p>
+        \[ \Omega(1,-2) \qquad R=\sqrt5 \]
+        <p class="etape">Étape 2 : forme des parallèles à \(D\)</p>
+        <p>Une parallèle à \(D\) a le même vecteur normal \((1,-2)\) :</p>
+        \[ x-2y+c=0 \]
+
         <p class="q">2) Condition de tangence</p>
-        <p>\(d(\Omega,\text{droite})=R\) : \(\dfrac{|1-2(-2)+c|}{\sqrt{1+4}}=\sqrt5\Rightarrow\dfrac{|5+c|}{\sqrt5}=\sqrt5\Rightarrow|5+c|=5\).</p>
-        <p>\(c=0\) ou \(c=-10\).</p>
-        <p class="res">Tangentes : \(x-2y=0\) et \(x-2y-10=0\)</p>
-        <p class="q">3) Remarque</p><p>La première tangente est \(D\) elle-même : \(D\) était donc déjà tangente au cercle (\(d(\Omega,D)=\tfrac{|1+4|}{\sqrt5}=\sqrt5=R\)).</p>
+        <div class="rappel"><span class="lab">Rappel · tangente à un cercle</span>Une droite est tangente au cercle de centre \(\Omega\) et de rayon \(R\) si et seulement si \(d(\Omega,\text{droite})=R\).</div>
+        <p class="etape">Étape 1 : écrire la distance</p>
+        \[ \frac{|1-2\times(-2)+c|}{\sqrt{1+4}}=\sqrt5 \iff \frac{|5+c|}{\sqrt5}=\sqrt5 \]
+        <p class="etape">Étape 2 : résoudre</p>
+        \[ |5+c|=5 \iff c=0\ \text{ou}\ c=-10 \]
+        <div class="res">Tangentes : \(x-2y=0\) et \(x-2y-10=0\)</div>
+
+        <p class="q">3) Remarque</p>
+        <p>La première tangente est \(D\) elle-même : on retrouve \(d(\Omega,D)=\dfrac{|1+4|}{\sqrt5}=\sqrt5=R\).</p>
       </div>
     </div>
   </section>
@@ -220,214 +266,464 @@ window.MathJax = {
   <section class="block" id="td">
     <h2>3. Correction intégrale du TD</h2>
     <p class="lead" style="font-size:.95rem">Source : <i>TD-V2026 — Géométrie Plane</i> (14 exercices) + <i>Applications concrètes</i> (3 exercices).
-    Repère orthonormé direct \((O;\vec\imath,\vec\jmath)\). <b>Pas de corrigé officiel</b> → tout résolu et vérifié maison.</p>
+    Repère orthonormé direct \((O;\vec\imath,\vec\jmath)\). <b>Pas de corrigé officiel</b> : correction rédigée par nous et vérifiée.</p>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 1 — Identités du parallélogramme</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\|\vec u+\vec v\|^2\)</p>
-        <p>\(\|\vec u+\vec v\|^2=(\vec u+\vec v)\cdot(\vec u+\vec v)=\vec u\cdot\vec u+2\vec u\cdot\vec v+\vec v\cdot\vec v\).</p>
-        <p class="res">\(\|\vec u+\vec v\|^2=\|\vec u\|^2+2\,\vec u\cdot\vec v+\|\vec v\|^2\)</p>
-        <p class="q">(b) \(\|\vec u-\vec v\|^2\)</p><p>Idem avec \(-\vec v\).</p>
-        <p class="res">\(\|\vec u-\vec v\|^2=\|\vec u\|^2-2\,\vec u\cdot\vec v+\|\vec v\|^2\)</p>
-        <p class="q">(c) Somme (a)+(b)</p><p>Les termes \(\pm2\vec u\cdot\vec v\) s'annulent.</p>
-        <p class="res">\(\|\vec u+\vec v\|^2+\|\vec u-\vec v\|^2=2(\|\vec u\|^2+\|\vec v\|^2)\) (loi du parallélogramme)</p>
-        <p class="q">(d) Différence (a)−(b)</p><p>Les carrés de normes s'annulent.</p>
-        <p class="res">\(\|\vec u+\vec v\|^2-\|\vec u-\vec v\|^2=4\,\vec u\cdot\vec v\) (identité de polarisation)</p>
+        <div class="enonce">Soient \(\vec u\) et \(\vec v\) deux vecteurs du plan. Montrer que (a) \(\|\vec u+\vec v\|^2=\|\vec u\|^2+2\vec u\cdot\vec v+\|\vec v\|^2\) ; (b) \(\|\vec u-\vec v\|^2=\|\vec u\|^2-2\vec u\cdot\vec v+\|\vec v\|^2\). En déduire (c) \(\|\vec u+\vec v\|^2+\|\vec u-\vec v\|^2=2(\|\vec u\|^2+\|\vec v\|^2)\) et (d) \(\|\vec u+\vec v\|^2-\|\vec u-\vec v\|^2=4\,\vec u\cdot\vec v\).</div>
+
+        <p class="q">(a) Carré de la norme d'une somme</p>
+        <div class="rappel"><span class="lab">Rappel · norme et produit scalaire</span>\[ \|\vec w\|^2=\vec w\cdot\vec w \]
+        Le produit scalaire est bilinéaire et symétrique.</div>
+        <p>On développe le produit scalaire, comme un produit de deux sommes.</p>
+        <p class="etape">Étape 1 : passage au produit scalaire</p>
+        \[ \|\vec u+\vec v\|^2=(\vec u+\vec v)\cdot(\vec u+\vec v) \]
+        <p class="etape">Étape 2 : développement</p>
+        \[ =\vec u\cdot\vec u+\vec u\cdot\vec v+\vec v\cdot\vec u+\vec v\cdot\vec v \]
+        <p class="etape">Étape 3 : symétrie</p>
+        <p>Comme \(\vec v\cdot\vec u=\vec u\cdot\vec v\), les deux termes croisés se regroupent.</p>
+        <div class="res">\(\|\vec u+\vec v\|^2=\|\vec u\|^2+2\,\vec u\cdot\vec v+\|\vec v\|^2\)</div>
+
+        <p class="q">(b) Carré de la norme d'une différence</p>
+        <p class="etape">Étape 1 : remplacer \(\vec v\) par \(-\vec v\) dans (a)</p>
+        \[ \|\vec u+(-\vec v)\|^2=\|\vec u\|^2+2\,\vec u\cdot(-\vec v)+\|-\vec v\|^2 \]
+        <p class="etape">Étape 2 : simplifier</p>
+        <p>On a \(\vec u\cdot(-\vec v)=-\vec u\cdot\vec v\) et \(\|-\vec v\|=\|\vec v\|\).</p>
+        <div class="res">\(\|\vec u-\vec v\|^2=\|\vec u\|^2-2\,\vec u\cdot\vec v+\|\vec v\|^2\)</div>
+
+        <p class="q">(c) Somme de (a) et (b)</p>
+        <p class="etape">Étape 1 : additionner membre à membre</p>
+        \[ \|\vec u+\vec v\|^2+\|\vec u-\vec v\|^2=2\|\vec u\|^2+2\|\vec v\|^2+\big(2\vec u\cdot\vec v-2\vec u\cdot\vec v\big) \]
+        <p class="etape">Étape 2 : simplifier</p>
+        <p>Les termes \(\pm2\,\vec u\cdot\vec v\) s'annulent.</p>
+        <div class="res">\(\|\vec u+\vec v\|^2+\|\vec u-\vec v\|^2=2(\|\vec u\|^2+\|\vec v\|^2)\) (loi du parallélogramme)</div>
+
+        <p class="q">(d) Différence de (a) et (b)</p>
+        <p class="etape">Étape 1 : soustraire membre à membre</p>
+        \[ \|\vec u+\vec v\|^2-\|\vec u-\vec v\|^2=\big(\|\vec u\|^2-\|\vec u\|^2\big)+\big(\|\vec v\|^2-\|\vec v\|^2\big)+2\vec u\cdot\vec v+2\vec u\cdot\vec v \]
+        <p class="etape">Étape 2 : simplifier</p>
+        <p>Les carrés de normes s'annulent.</p>
+        <div class="res">\(\|\vec u+\vec v\|^2-\|\vec u-\vec v\|^2=4\,\vec u\cdot\vec v\) (identité de polarisation)</div>
       </div>
     </div>
 
     <div class="exo-card">
-      <div class="exo-head"><span>Exercice 2 — Angle orienté & coordonnées polaires</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-head"><span>Exercice 2 — Angle orienté et coordonnées polaires</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">1) Angle \((\vec u,\vec v)\), \(\vec u(1,1)\), \(\vec v(-5,-1)\)</p>
-        <p>\(\vec u\cdot\vec v=1(-5)+1(-1)=-6\), \([\vec u,\vec v]=1(-1)-1(-5)=4\). \(\|\vec u\|=\sqrt2\), \(\|\vec v\|=\sqrt{26}\), \(\|\vec u\|\|\vec v\|=\sqrt{52}=2\sqrt{13}\).</p>
-        <p>\(\cos\theta=\dfrac{-6}{2\sqrt{13}}=\dfrac{-3}{\sqrt{13}}<0\), \(\sin\theta=\dfrac{4}{2\sqrt{13}}=\dfrac{2}{\sqrt{13}}>0\) : deuxième quadrant.</p>
-        <p class="res">\((\vec u,\vec v)=\pi-\arctan\tfrac23\approx146{,}3^\circ\)</p>
-        <p class="q">2) Polaire de \(M(\sqrt3-2,\ 3-2\sqrt3)\)</p>
-        <p>Remarque : \(3-2\sqrt3=\sqrt3(\sqrt3-2)\), donc \(y=\sqrt3\,x\) avec \(x=\sqrt3-2<0\) et \(y<0\) (troisième quadrant).</p>
-        <p>\(r^2=x^2+y^2=4x^2=4(\sqrt3-2)^2=4(7-4\sqrt3)\) ; or \(7-4\sqrt3=(2-\sqrt3)^2\), donc \(r=2(2-\sqrt3)=4-2\sqrt3\).</p>
-        <p>\(\tan\theta=\sqrt3\) avec \(x<0,y<0\) ⟹ \(\theta=\tfrac\pi3-\pi=-\tfrac{2\pi}3\).</p>
-        <p class="res">\((r,\theta)=\big(4-2\sqrt3,\ -\tfrac{2\pi}3\big)\approx(0{,}54,\ -120^\circ)\)</p>
+        <div class="enonce">Les deux questions sont indépendantes. 1) On donne \(\vec u(1,1)\) et \(\vec v(-5,-1)\). Déterminer l'angle orienté entre \(\vec u\) et \(\vec v\). 2) Déterminer les coordonnées polaires du point \(M\) de coordonnées \((\sqrt3-2,\ 3-2\sqrt3)\).</div>
+
+        <p class="q">1) Angle orienté \((\vec u,\vec v)\)</p>
+        <div class="rappel"><span class="lab">Rappel · angle orienté</span>\[ \vec u\cdot\vec v=\|\vec u\|\|\vec v\|\cos\theta \qquad \det(\vec u,\vec v)=\|\vec u\|\|\vec v\|\sin\theta \]</div>
+        <p class="etape">Étape 1 : produit scalaire et déterminant</p>
+        \[ \vec u\cdot\vec v=1\times(-5)+1\times(-1)=-6 \]
+        \[ \det(\vec u,\vec v)=1\times(-1)-1\times(-5)=4 \]
+        <p class="etape">Étape 2 : produit des normes</p>
+        \[ \|\vec u\|\|\vec v\|=\sqrt2\times\sqrt{26}=\sqrt{52}=2\sqrt{13} \]
+        <p class="etape">Étape 3 : cosinus et sinus</p>
+        \[ \cos\theta=\frac{-6}{2\sqrt{13}}=-\frac{3}{\sqrt{13}} \qquad \sin\theta=\frac{4}{2\sqrt{13}}=\frac{2}{\sqrt{13}} \]
+        <p class="etape">Étape 4 : quadrant</p>
+        <p>Le cosinus est négatif et le sinus positif : \(\theta\) est dans le deuxième quadrant. Alors \(\tan\theta=-\tfrac23\).</p>
+        <div class="res">\((\vec u,\vec v)=\pi-\arctan\tfrac23\approx146{,}3^\circ\)</div>
+
+        <p class="q">2) Coordonnées polaires de \(M\)</p>
+        <div class="rappel"><span class="lab">Rappel · cartésien vers polaire</span>\[ r=\sqrt{x^2+y^2} \qquad \cos\theta=\frac xr,\ \sin\theta=\frac yr \]</div>
+        <p class="etape">Étape 1 : lien entre \(x\) et \(y\)</p>
+        <p>On remarque que \(3-2\sqrt3=\sqrt3(\sqrt3-2)\). Avec \(x=\sqrt3-2\) :</p>
+        \[ y=\sqrt3\,x \qquad x<0,\ y<0 \]
+        <p>Le point est dans le troisième quadrant.</p>
+        <p class="etape">Étape 2 : le rayon</p>
+        \[ r^2=x^2+3x^2=4x^2=4(\sqrt3-2)^2 \]
+        <p>Comme \(r>0\), \(r=2|\sqrt3-2|=2(2-\sqrt3)\).</p>
+        <p class="etape">Étape 3 : l'angle</p>
+        <p>On a \(\tan\theta=\dfrac yx=\sqrt3\), avec \(x<0\) et \(y<0\) : \(\theta=\tfrac\pi3-\pi\).</p>
+        <div class="res">\((r,\theta)=\big(4-2\sqrt3,\ -\tfrac{2\pi}3\big)\approx(0{,}54,\ -120^\circ)\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 3 — Angles d'un triangle 2, 3, 4 (Al-Kashi)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <div class="enonce">Côtés \(a=2\) (opposé à \(A\)), \(b=3\), \(c=4\).</div>
-        <p class="q">Angle \(A\) (opposé au côté 2)</p><p>\(\cos\hat A=\dfrac{b^2+c^2-a^2}{2bc}=\dfrac{9+16-4}{24}=\dfrac{21}{24}=\dfrac78\).</p>
-        <p class="res">\(\hat A=\arccos\tfrac78\approx28{,}96^\circ\)</p>
-        <p class="q">Angle \(B\) (opposé au côté 3)</p><p>\(\cos\hat B=\dfrac{a^2+c^2-b^2}{2ac}=\dfrac{4+16-9}{16}=\dfrac{11}{16}\).</p>
-        <p class="res">\(\hat B=\arccos\tfrac{11}{16}\approx46{,}57^\circ\)</p>
-        <p class="q">Angle \(C\) (opposé au côté 4)</p><p>\(\cos\hat C=\dfrac{a^2+b^2-c^2}{2ab}=\dfrac{4+9-16}{12}=-\dfrac14\) (obtus).</p>
-        <p class="res">\(\hat C=\arccos(-\tfrac14)\approx104{,}48^\circ\)</p>
-        <p>Contrôle : \(28{,}96+46{,}57+104{,}48\approx180^\circ\) ✓.</p>
+        <div class="enonce">Déterminer les mesures des angles d'un triangle dont les côtés mesurent 2, 3 et 4.</div>
+
+        <p class="q">1) Angle \(\hat A\) (opposé au côté \(a=2\))</p>
+        <div class="rappel"><span class="lab">Rappel · Al-Kashi</span>\[ a^2=b^2+c^2-2bc\cos\hat A \iff \cos\hat A=\frac{b^2+c^2-a^2}{2bc} \]</div>
+        <p class="etape">Étape 1 : poser les côtés</p>
+        <p>On note \(a=2\), \(b=3\), \(c=4\), chaque côté étant opposé à l'angle portant la même lettre.</p>
+        <p class="etape">Étape 2 : cosinus</p>
+        \[ \cos\hat A=\frac{9+16-4}{2\times3\times4}=\frac{21}{24}=\frac78 \]
+        <div class="res">\(\hat A=\arccos\tfrac78\approx28{,}96^\circ\)</div>
+
+        <p class="q">2) Angle \(\hat B\) (opposé au côté \(b=3\))</p>
+        <p class="etape">Étape 1 : cosinus</p>
+        \[ \cos\hat B=\frac{a^2+c^2-b^2}{2ac}=\frac{4+16-9}{2\times2\times4}=\frac{11}{16} \]
+        <div class="res">\(\hat B=\arccos\tfrac{11}{16}\approx46{,}57^\circ\)</div>
+
+        <p class="q">3) Angle \(\hat C\) (opposé au côté \(c=4\))</p>
+        <p class="etape">Étape 1 : cosinus</p>
+        \[ \cos\hat C=\frac{a^2+b^2-c^2}{2ab}=\frac{4+9-16}{2\times2\times3}=-\frac14 \]
+        <p>Le cosinus est négatif : l'angle est obtus.</p>
+        <div class="res">\(\hat C=\arccos(-\tfrac14)\approx104{,}48^\circ\)</div>
+
+        <p class="q">4) Contrôle</p>
+        <p class="etape">Étape 1 : somme des angles</p>
+        \[ 28{,}96+46{,}57+104{,}48\approx180 \]
+        <div class="res">La somme vaut \(180^\circ\) : les trois angles sont cohérents.</div>
       </div>
     </div>
 
     <div class="exo-card">
-      <div class="exo-head"><span>Exercice 4 — Paramétrique ⇄ cartésienne</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-head"><span>Exercice 4 — Paramétrique et cartésienne</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">1) \(\{x=1-t,\ y=2-3t\}\) → cartésienne (2 méthodes)</p>
-        <p><b>Méthode 1</b> (élimination) : \(t=1-x\), donc \(y=2-3(1-x)=3x-1\).</p>
-        <p><b>Méthode 2</b> (déterminant) : \(A(1,2)\), directeur \(\vec u(-1,-3)\). \(M\in D\iff\det(\vec{AM},\vec u)=0\) :
-        \((x-1)(-3)-(y-2)(-1)=-3x+3+y-2=0\).</p>
-        <p class="res">\(3x-y-1=0\)</p>
-        <p class="q">2) \(2x-3y=4\) → paramétrique</p>
-        <p>Directeur \(\vec u(b,-a)=(3,2)\) (car normale \((2,-3)\)). Point : \(x=2\Rightarrow y=0\), soit \(A(2,0)\).</p>
-        <p class="res">\(\{x=2+3t,\ y=2t\}\) ; contrôle \(2(2+3t)-3(2t)=4\) ✓</p>
+        <div class="enonce">Les questions sont indépendantes. 1) En utilisant 2 méthodes différentes, déterminer l'équation cartésienne de la droite \(D\) d'équation paramétrique \(\{x=1-t,\ y=2-3t\}\), \(t\in\mathbb R\). 2) Donner une représentation paramétrique de la droite d'équation \(2x-3y=4\).</div>
+
+        <p class="q">1) Équation cartésienne de \(D\)</p>
+        <p>On traite la question par deux méthodes.</p>
+        <p class="etape">Étape 1 : méthode par élimination du paramètre</p>
+        <p>La première équation donne \(t=1-x\). On reporte dans la seconde :</p>
+        \[ y=2-3(1-x)=3x-1 \]
+        <div class="rappel"><span class="lab">Rappel · condition d'alignement</span>\[ M\in D\iff\det(\vec{AM},\vec u)=0 \]
+        où \(A\) est un point de \(D\) et \(\vec u\) un vecteur directeur.</div>
+        <p class="etape">Étape 2 : méthode par le déterminant</p>
+        <p>La droite passe par \(A(1,2)\) et a pour vecteur directeur \(\vec u(-1,-3)\).</p>
+        \[ \det(\vec{AM},\vec u)=(x-1)(-3)-(y-2)(-1)=-3x+3+y-2 \]
+        <p class="etape">Étape 3 : conclusion</p>
+        <p>Les deux méthodes donnent la même droite.</p>
+        <div class="res">\(3x-y-1=0\)</div>
+
+        <p class="q">2) Représentation paramétrique de \(2x-3y=4\)</p>
+        <p class="etape">Étape 1 : vecteur directeur</p>
+        <p>Le vecteur \((2,-3)\) est normal à la droite. On le fait tourner : \(\vec u=(3,2)\) est directeur.</p>
+        <p class="etape">Étape 2 : un point de la droite</p>
+        <p>Pour \(x=2\) : \(4-3y=4\), donc \(y=0\). Le point \(A(2,0)\) convient.</p>
+        <div class="res">\(\{x=2+3t,\ y=2t\}\), \(t\in\mathbb R\)</div>
+        <p class="etape">Étape 3 : contrôle</p>
+        \[ 2(2+3t)-3(2t)=4+6t-6t=4 \]
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 5 — Équations d'une droite (5 cas)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
+        <div class="enonce">Calculer une équation cartésienne puis une équation paramétrique de la droite \(D\) : 1) passant par \(A(2,1)\) et de vecteur normal \(\vec n=(1,-1)\) ; 2) passant par \(A(-1,0)\) et de vecteur directeur \(\vec u=(1,-2)\) ; 3) passant par \(A(1,2)\) et \(B(-2,3)\) ; 4) passant par l'origine et parallèle à \(D':x+y-1=0\) ; 5) passant par \(A(1,1)\) et perpendiculaire à \(D'\) : \(\{x=1+2t,\ y=-1+t\}\).</div>
+
         <p class="q">1) \(A(2,1)\), normal \(\vec n(1,-1)\)</p>
-        <p>Cartésienne : \(1(x-2)-1(y-1)=0\Rightarrow x-y-1=0\). Directeur \(\vec u(1,1)\).</p>
-        <p class="res">\(x-y-1=0\) ; \(\{x=2+t,\ y=1+t\}\)</p>
+        <div class="rappel"><span class="lab">Rappel · équation d'une droite</span>Point \(A\) et vecteur normal \(\vec n(\alpha,\beta)\) : \(\alpha(x-x_A)+\beta(y-y_A)=0\). Le vecteur \((\beta,-\alpha)\) est alors directeur.</div>
+        <p class="etape">Étape 1 : équation cartésienne</p>
+        \[ 1(x-2)-1(y-1)=0 \iff x-y-1=0 \]
+        <p class="etape">Étape 2 : vecteur directeur</p>
+        <p>Le vecteur \((\beta,-\alpha)=(-1,-1)\) est directeur ; on prend \(\vec u(1,1)\).</p>
+        <div class="res">\(x-y-1=0\) ; \(\{x=2+t,\ y=1+t\}\)</div>
+
         <p class="q">2) \(A(-1,0)\), directeur \(\vec u(1,-2)\)</p>
-        <p>Normale \(\vec n(2,1)\). Cartésienne : \(2(x+1)+1\cdot y=0\Rightarrow 2x+y+2=0\).</p>
-        <p class="res">\(2x+y+2=0\) ; \(\{x=-1+t,\ y=-2t\}\)</p>
-        <p class="q">3) \(A(1,2)\), \(B(-2,3)\)</p>
-        <p>Directeur \(\vec{AB}(-3,1)\), normale \((1,3)\). \(1(x-1)+3(y-2)=0\Rightarrow x+3y-7=0\) (contrôle \(B\) : \(-2+9-7=0\) ✓).</p>
-        <p class="res">\(x+3y-7=0\) ; \(\{x=1-3t,\ y=2+t\}\)</p>
-        <p class="q">4) Par \(O\), parallèle à \(D':x+y-1=0\)</p>
-        <p>Même direction/normale \((1,1)\), passe par \(O\).</p>
-        <p class="res">\(x+y=0\) ; \(\{x=t,\ y=-t\}\)</p>
-        <p class="q">5) \(A(1,1)\), perpendiculaire à \(D':\{x=1+2t,\ y=-1+t\}\)</p>
-        <p>\(D'\) est dirigée par \((2,1)\) ; notre droite lui est perpendiculaire ⟹ directeur \((1,-2)\), normale \((2,1)\).
-        \(2(x-1)+1(y-1)=0\Rightarrow2x+y-3=0\).</p>
-        <p class="res">\(2x+y-3=0\) ; \(\{x=1+t,\ y=1-2t\}\)</p>
+        <p class="etape">Étape 1 : vecteur normal</p>
+        <p>On fait tourner \(\vec u\) : \(\vec n(2,1)\) est normal.</p>
+        <p class="etape">Étape 2 : équation cartésienne</p>
+        \[ 2(x+1)+1\times y=0 \iff 2x+y+2=0 \]
+        <div class="res">\(2x+y+2=0\) ; \(\{x=-1+t,\ y=-2t\}\)</div>
+
+        <p class="q">3) \(A(1,2)\) et \(B(-2,3)\)</p>
+        <p class="etape">Étape 1 : vecteur directeur</p>
+        \[ \vec{AB}=(-2-1,\,3-2)=(-3,1) \]
+        <p class="etape">Étape 2 : vecteur normal, puis équation</p>
+        <p>Le vecteur \((1,3)\) est normal.</p>
+        \[ 1(x-1)+3(y-2)=0 \iff x+3y-7=0 \]
+        <p class="etape">Étape 3 : contrôle avec \(B\)</p>
+        \[ -2+9-7=0 \]
+        <div class="res">\(x+3y-7=0\) ; \(\{x=1-3t,\ y=2+t\}\)</div>
+
+        <p class="q">4) Par \(O\), parallèle à \(D'\)</p>
+        <p class="etape">Étape 1 : même normale</p>
+        <p>Une parallèle à \(D':x+y-1=0\) a pour normale \((1,1)\) : \(x+y+c=0\).</p>
+        <p class="etape">Étape 2 : passage par \(O\)</p>
+        <p>On trouve \(c=0\). Le vecteur directeur est \((1,-1)\).</p>
+        <div class="res">\(x+y=0\) ; \(\{x=t,\ y=-t\}\)</div>
+
+        <p class="q">5) Par \(A(1,1)\), perpendiculaire à \(D'\)</p>
+        <p class="etape">Étape 1 : direction de \(D'\)</p>
+        <p>\(D'\) est dirigée par \((2,1)\).</p>
+        <p class="etape">Étape 2 : orientation de la droite cherchée</p>
+        <p>La droite cherchée est perpendiculaire à \(D'\) : \((2,1)\) est donc un vecteur normal, et \((1,-2)\) un vecteur directeur.</p>
+        <p class="etape">Étape 3 : équation cartésienne</p>
+        \[ 2(x-1)+1(y-1)=0 \iff 2x+y-3=0 \]
+        <div class="res">\(2x+y-3=0\) ; \(\{x=1+t,\ y=1-2t\}\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 6 — Intersection de deux droites</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <div class="enonce">\(D_1:\{x=2t-1,\ y=-t+2\}\) ; \(D_2:\{x=s+2,\ y=3s+1\}\).</div>
-        <p>Égalité des coordonnées : \(2t-1=s+2\) et \(-t+2=3s+1\). De la première, \(s=2t-3\) ; report :</p>
-        <p>\(-t+2=3(2t-3)+1=6t-8\Rightarrow10=7t\Rightarrow t=\tfrac{10}7\), \(s=-\tfrac17\).</p>
-        <p>Point : \(x=2\cdot\tfrac{10}7-1=\tfrac{13}7\), \(y=-\tfrac{10}7+2=\tfrac47\).</p>
-        <p class="res">\(D_1\cap D_2=\big\{\big(\tfrac{13}7,\tfrac47\big)\big\}\)</p>
+        <div class="enonce">Déterminer l'intersection des droites \(D_1:\{x=2t-1,\ y=-t+2\}\) et \(D_2:\{x=s+2,\ y=3s+1\}\) (le paramètre de \(D_2\) est noté \(s\) pour le distinguer de \(t\)).</div>
+
+        <p class="q">1) Intersection</p>
+        <p>Un point commun correspond à des paramètres \(t\) et \(s\) qui donnent les mêmes coordonnées.</p>
+        <p class="etape">Étape 1 : système</p>
+        \[ 2t-1=s+2 \qquad -t+2=3s+1 \]
+        <p class="etape">Étape 2 : exprimer \(s\)</p>
+        <p>La première équation donne \(s=2t-3\).</p>
+        <p class="etape">Étape 3 : substitution dans la seconde</p>
+        \[ -t+2=3(2t-3)+1=6t-8 \iff 10=7t \]
+        \[ t=\tfrac{10}7 \qquad s=2\times\tfrac{10}7-3=-\tfrac17 \]
+        <p class="etape">Étape 4 : coordonnées du point</p>
+        \[ x=2\times\tfrac{10}7-1=\tfrac{13}7 \qquad y=-\tfrac{10}7+2=\tfrac47 \]
+        <p class="etape">Étape 5 : contrôle par \(D_2\)</p>
+        \[ x=-\tfrac17+2=\tfrac{13}7 \qquad y=3\times\left(-\tfrac17\right)+1=\tfrac47 \]
+        <div class="res">\(D_1\cap D_2=\big\{\big(\tfrac{13}7,\tfrac47\big)\big\}\)</div>
       </div>
     </div>
 
     <div class="exo-card">
-      <div class="exo-head"><span>Exercice 7 — Aire, hauteurs \(A(-1,-1),\,B(2,3),\,C(3,-3)\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-head"><span>Exercice 7 — Aire et hauteurs d'un triangle</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">1) Aire</p><p>\(\vec{AB}(3,4)\), \(\vec{AC}(4,-2)\). \([\vec{AB},\vec{AC}]=3(-2)-4\cdot4=-22\).</p>
-        <p class="res">\(\mathcal A=\tfrac12|-22|=11\)</p>
+        <div class="enonce">On considère les points \(A(-1,-1)\), \(B(2,3)\) et \(C(3,-3)\). 1) Calculer l'aire du triangle \(ABC\). 2) En déduire la distance de \(A\) à la droite \((BC)\). 3) Former une équation de la droite \((AB)\). 4) En déduire la longueur de la hauteur issue de \(C\) et retrouver l'aire du triangle \(ABC\).</div>
+
+        <p class="q">1) Aire du triangle</p>
+        <div class="rappel"><span class="lab">Rappel · aire d'un triangle</span>\[ \mathcal A=\tfrac12\,\big|\det(\vec{AB},\vec{AC})\big| \]</div>
+        <p class="etape">Étape 1 : vecteurs</p>
+        \[ \vec{AB}=(3,4) \qquad \vec{AC}=(4,-2) \]
+        <p class="etape">Étape 2 : déterminant</p>
+        \[ \det(\vec{AB},\vec{AC})=3\times(-2)-4\times4=-22 \]
+        <div class="res">\(\mathcal A=\tfrac12\times|-22|=11\)</div>
+
         <p class="q">2) Distance de \(A\) à \((BC)\)</p>
-        <p>\(\vec{BC}(1,-6)\), \(BC=\sqrt{37}\). \(\mathcal A=\tfrac12\,BC\cdot d(A,BC)\Rightarrow d=\dfrac{2\cdot11}{\sqrt{37}}=\dfrac{22}{\sqrt{37}}=\dfrac{22\sqrt{37}}{37}\approx3{,}62\).</p>
-        <p class="res">\(d(A,(BC))=\dfrac{22\sqrt{37}}{37}\)</p>
-        <p class="q">3) Équation de \((AB)\)</p><p>Directeur \((3,4)\), normale \((4,-3)\) : \(4(x+1)-3(y+1)=0\Rightarrow4x-3y+1=0\) (contrôle \(B\) : \(8-9+1=0\) ✓).</p>
-        <p class="res">\((AB):4x-3y+1=0\)</p>
+        <div class="rappel"><span class="lab">Rappel · aire et hauteur</span>\[ \mathcal A=\tfrac12\times\text{base}\times\text{hauteur} \]</div>
+        <p class="etape">Étape 1 : longueur de la base \(BC\)</p>
+        \[ \vec{BC}=(1,-6) \qquad BC=\sqrt{1+36}=\sqrt{37} \]
+        <p class="etape">Étape 2 : la hauteur issue de \(A\)</p>
+        <p>La distance \(d(A,(BC))\) est la hauteur relative à la base \(BC\).</p>
+        \[ 11=\tfrac12\sqrt{37}\,d \iff d=\frac{22}{\sqrt{37}} \]
+        <div class="res">\(d(A,(BC))=\dfrac{22\sqrt{37}}{37}\approx3{,}62\)</div>
+
+        <p class="q">3) Équation de \((AB)\)</p>
+        <p class="etape">Étape 1 : vecteur normal</p>
+        <p>Le vecteur \(\vec{AB}(3,4)\) est directeur ; \((4,-3)\) est normal.</p>
+        <p class="etape">Étape 2 : équation</p>
+        \[ 4(x+1)-3(y+1)=0 \iff 4x-3y+1=0 \]
+        <p class="etape">Étape 3 : contrôle avec \(B\)</p>
+        \[ 8-9+1=0 \]
+        <div class="res">\((AB):4x-3y+1=0\)</div>
+
         <p class="q">4) Hauteur issue de \(C\) et aire</p>
-        <p>\(d(C,(AB))=\dfrac{|4\cdot3-3(-3)+1|}{5}=\dfrac{22}{5}=4{,}4\). \(\mathcal A=\tfrac12\,AB\cdot d=\tfrac12\cdot5\cdot4{,}4=11\) ✓ (\(AB=5\)).</p>
-        <p class="res">\(h_C=\tfrac{22}5\), aire \(=11\) confirmée</p>
+        <div class="rappel"><span class="lab">Rappel · distance point–droite</span>\[ d(M,D)=\frac{|ax_M+by_M+c|}{\sqrt{a^2+b^2}} \]</div>
+        <p class="etape">Étape 1 : distance de \(C\) à \((AB)\)</p>
+        \[ d(C,(AB))=\frac{|4\times3-3\times(-3)+1|}{\sqrt{16+9}}=\frac{22}{5}=4{,}4 \]
+        <p class="etape">Étape 2 : aire avec la base \(AB\)</p>
+        \[ AB=5 \qquad \mathcal A=\tfrac12\times5\times4{,}4=11 \]
+        <div class="res">\(h_C=\tfrac{22}5\) ; l'aire vaut bien \(11\), comme en 1).</div>
       </div>
     </div>
 
     <div class="exo-card">
-      <div class="exo-head"><span>Exercice 8 — Distance & projeté \(A(1,-2),\,B(-2,3),\,C(1,1)\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-head"><span>Exercice 8 — Distance et projeté orthogonal</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">1) Équation de \((AB)\)</p><p>\(\vec{AB}(-3,5)\), normale \((5,3)\) : \(5(x-1)+3(y+2)=0\Rightarrow5x+3y+1=0\) (contrôle \(B\) : \(-10+9+1=0\) ✓).</p>
-        <p class="res">\((AB):5x+3y+1=0\)</p>
-        <p class="q">2) Distance de \(C(1,1)\) à \((AB)\)</p><p>\(d=\dfrac{|5+3+1|}{\sqrt{25+9}}=\dfrac{9}{\sqrt{34}}=\dfrac{9\sqrt{34}}{34}\approx1{,}54\).</p>
-        <p class="res">\(d(C,(AB))=\dfrac{9}{\sqrt{34}}\)</p>
-        <p class="q">3) Projeté \(H\) de \(C\) sur \((AB)\)</p>
-        <p>Normale \((5,3)\) : \(x=1+5k,\ y=1+3k\). Sur \((AB)\) : \(5(1+5k)+3(1+3k)+1=0\Rightarrow9+34k=0\Rightarrow k=-\tfrac9{34}\).</p>
-        <p class="res">\(H=\big(1-\tfrac{45}{34},\,1-\tfrac{27}{34}\big)=\big(-\tfrac{11}{34},\,\tfrac{7}{34}\big)\)</p>
-        <p class="q">4) Vérification</p><p>\(CH=|k|\,\|(5,3)\|=\tfrac9{34}\sqrt{34}=\dfrac9{\sqrt{34}}\) : identique à (2) ✓.</p>
+        <div class="enonce">On considère les points \(A(1,-2)\) et \(B(-2,3)\). Les questions sont indépendantes. 1) Écrire une équation cartésienne de la droite \((AB)\). 2) Déterminer la distance du point \(C(1,1)\) à la droite \((AB)\). 3) Déterminer les coordonnées du projeté orthogonal \(H\) de \(C\) sur \((AB)\). 4) Retrouver la distance du point \(C\) à la droite \((AB)\) en utilisant la question précédente.</div>
+
+        <p class="q">1) Équation de \((AB)\)</p>
+        <p class="etape">Étape 1 : vecteur directeur et normal</p>
+        \[ \vec{AB}=(-3,5) \qquad \vec n=(5,3) \]
+        <p class="etape">Étape 2 : équation</p>
+        \[ 5(x-1)+3(y+2)=0 \iff 5x+3y+1=0 \]
+        <p class="etape">Étape 3 : contrôle avec \(B\)</p>
+        \[ -10+9+1=0 \]
+        <div class="res">\((AB):5x+3y+1=0\)</div>
+
+        <p class="q">2) Distance de \(C(1,1)\) à \((AB)\)</p>
+        <div class="rappel"><span class="lab">Rappel · distance point–droite</span>\[ d(M,D)=\frac{|ax_M+by_M+c|}{\sqrt{a^2+b^2}} \]</div>
+        <p class="etape">Étape 1 : application</p>
+        \[ d=\frac{|5+3+1|}{\sqrt{25+9}}=\frac{9}{\sqrt{34}} \]
+        <div class="res">\(d(C,(AB))=\dfrac{9\sqrt{34}}{34}\approx1{,}54\)</div>
+
+        <p class="q">3) Projeté orthogonal \(H\)</p>
+        <p class="etape">Étape 1 : perpendiculaire passant par \(C\)</p>
+        <p>Elle est dirigée par la normale \((5,3)\) :</p>
+        \[ x=1+5k \qquad y=1+3k \]
+        <p class="etape">Étape 2 : intersection avec \((AB)\)</p>
+        \[ 5(1+5k)+3(1+3k)+1=0 \iff 9+34k=0 \iff k=-\tfrac9{34} \]
+        <p class="etape">Étape 3 : coordonnées</p>
+        \[ x=1-\tfrac{45}{34}=-\tfrac{11}{34} \qquad y=1-\tfrac{27}{34}=\tfrac7{34} \]
+        <div class="res">\(H=\big(-\tfrac{11}{34},\,\tfrac7{34}\big)\)</div>
+
+        <p class="q">4) Distance par le projeté</p>
+        <p class="etape">Étape 1 : longueur \(CH\)</p>
+        \[ CH=|k|\,\|(5,3)\|=\tfrac9{34}\sqrt{34}=\frac9{\sqrt{34}} \]
+        <div class="res">On retrouve \(d(C,(AB))=\dfrac9{\sqrt{34}}\), comme en 2).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 9 — Distance point–droite (3 cas)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">1) \(A(0,0)\), \(D\) par \(B(5,3)\) dirigée par \(\vec u(1,2)\)</p>
-        <p>\(\vec{BA}=(-5,-3)\), \(\det(\vec{BA},\vec u)=(-5)(2)-(-3)(1)=-7\), \(\|\vec u\|=\sqrt5\).</p>
-        <p class="res">\(d=\dfrac{7}{\sqrt5}=\dfrac{7\sqrt5}{5}\approx3{,}13\)</p>
-        <p class="q">2) \(A(1,-1)\), \(D\) par \(B(-1,1)\) perpendiculaire à \(\vec n(2,3)\)</p>
-        <p>« Perpendiculaire à \(\vec n\) » ⟹ \(\vec n(2,3)\) est <b>normal</b> à \(D\). \(D:2(x+1)+3(y-1)=0\Rightarrow2x+3y-1=0\).
-        \(d(A,D)=\dfrac{|2-3-1|}{\sqrt{13}}=\dfrac2{\sqrt{13}}\).</p>
-        <p class="res">\(d=\dfrac2{\sqrt{13}}=\dfrac{2\sqrt{13}}{13}\approx0{,}55\)</p>
-        <p class="q">3) \(A(4,1)\), \(D:x+2y+3=0\)</p><p>\(d=\dfrac{|4+2+3|}{\sqrt5}=\dfrac9{\sqrt5}=\dfrac{9\sqrt5}{5}\approx4{,}02\).</p>
-        <p class="res">\(d=\dfrac{9}{\sqrt5}\)</p>
+        <div class="enonce">Calculer la distance du point \(A\) à la droite \(D\) dans les cas suivants : 1) \(A(0,0)\) et \(D\) passe par \(B(5,3)\) et est dirigée par \(\vec u(1,2)\) ; 2) \(A(1,-1)\) et \(D\) passe par \(B(-1,1)\) et est perpendiculaire à \(\vec n(2,3)\) ; 3) \(A(4,1)\) et \(D\) est la droite d'équation cartésienne \(x+2y+3=0\).</div>
+
+        <p class="q">1) \(D\) donnée par un point et un vecteur directeur</p>
+        <div class="rappel"><span class="lab">Rappel · distance avec un vecteur directeur</span>\[ d(A,D)=\frac{|\det(\vec{BA},\vec u)|}{\|\vec u\|} \]</div>
+        <p class="etape">Étape 1 : vecteur \(\vec{BA}\)</p>
+        \[ \vec{BA}=(-5,-3) \]
+        <p class="etape">Étape 2 : déterminant et norme</p>
+        \[ \det(\vec{BA},\vec u)=(-5)\times2-(-3)\times1=-7 \qquad \|\vec u\|=\sqrt5 \]
+        <div class="res">\(d=\dfrac{7}{\sqrt5}=\dfrac{7\sqrt5}{5}\approx3{,}13\)</div>
+
+        <p class="q">2) \(D\) perpendiculaire à \(\vec n\)</p>
+        <p class="etape">Étape 1 : équation de \(D\)</p>
+        <p>\(D\) est perpendiculaire à \(\vec n(2,3)\) : ce vecteur est donc normal à \(D\).</p>
+        \[ 2(x+1)+3(y-1)=0 \iff 2x+3y-1=0 \]
+        <p class="etape">Étape 2 : distance</p>
+        \[ d(A,D)=\frac{|2\times1+3\times(-1)-1|}{\sqrt{4+9}}=\frac{2}{\sqrt{13}} \]
+        <div class="res">\(d=\dfrac{2\sqrt{13}}{13}\approx0{,}55\)</div>
+
+        <p class="q">3) \(D\) donnée par une équation cartésienne</p>
+        <p class="etape">Étape 1 : formule</p>
+        \[ d=\frac{|4+2\times1+3|}{\sqrt{1+4}}=\frac9{\sqrt5} \]
+        <div class="res">\(d=\dfrac{9\sqrt5}{5}\approx4{,}02\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 10 — Centre et rayon de cercles</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
+        <div class="enonce">Déterminer le centre et le rayon des cercles d'équations cartésiennes : (a) \(x^2+y^2-4x+4y-1=0\) ; (b) \(x^2+y^2-6x+8y+24=0\).</div>
+
         <p class="q">(a) \(x^2+y^2-4x+4y-1=0\)</p>
-        <p>\((x-2)^2-4+(y+2)^2-4-1=0\Rightarrow(x-2)^2+(y+2)^2=9\).</p>
-        <p class="res">Centre \(\Omega(2,-2)\), rayon \(R=3\)</p>
+        <div class="rappel"><span class="lab">Rappel · cercle</span>\[ (x-\alpha)^2+(y-\beta)^2=R^2 \]
+        Centre \(\Omega(\alpha,\beta)\), rayon \(R\). On y arrive en complétant les carrés : \(x^2+px=\big(x+\tfrac p2\big)^2-\tfrac{p^2}4\).</div>
+        <p class="etape">Étape 1 : compléter les carrés</p>
+        \[ (x-2)^2-4+(y+2)^2-4-1=0 \]
+        <p class="etape">Étape 2 : forme canonique</p>
+        \[ (x-2)^2+(y+2)^2=9 \]
+        <div class="res">Centre \(\Omega(2,-2)\), rayon \(R=3\)</div>
+
         <p class="q">(b) \(x^2+y^2-6x+8y+24=0\)</p>
-        <p>\((x-3)^2-9+(y+4)^2-16+24=0\Rightarrow(x-3)^2+(y+4)^2=1\).</p>
-        <p class="res">Centre \(\Omega(3,-4)\), rayon \(R=1\)</p>
+        <p class="etape">Étape 1 : compléter les carrés</p>
+        \[ (x-3)^2-9+(y+4)^2-16+24=0 \]
+        <p class="etape">Étape 2 : forme canonique</p>
+        \[ (x-3)^2+(y+4)^2=1 \]
+        <div class="res">Centre \(\Omega(3,-4)\), rayon \(R=1\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 11 — Tangentes parallèles à une droite</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <div class="enonce">\(C\) : centre \(\Omega(2,-1)\), rayon \(\tfrac{\sqrt5}{2}\) ; \(D:2x+y=0\).</div>
-        <p>Une parallèle à \(D\) : \(2x+y+c=0\). Tangence : \(d(\Omega,\cdot)=R\) :</p>
-        <p>\(\dfrac{|2\cdot2+(-1)+c|}{\sqrt{4+1}}=\dfrac{\sqrt5}{2}\Rightarrow\dfrac{|3+c|}{\sqrt5}=\dfrac{\sqrt5}{2}\Rightarrow|3+c|=\dfrac52\).</p>
-        <p>\(c=-\tfrac12\) ou \(c=-\tfrac{11}2\).</p>
-        <p class="res">\(2x+y-\tfrac12=0\ (4x+2y-1=0)\) et \(2x+y-\tfrac{11}2=0\ (4x+2y-11=0)\)</p>
+        <div class="enonce">Soient \(C\) le cercle de centre \(\Omega(2,-1)\) et de rayon \(\tfrac{\sqrt5}{2}\) et \(D\) la droite d'équation \(2x+y=0\). Déterminer les droites qui sont tangentes à \(C\) et parallèles à \(D\).</div>
+
+        <p class="q">1) Droites tangentes parallèles à \(D\)</p>
+        <div class="rappel"><span class="lab">Rappel · tangence</span>Une droite est tangente au cercle de centre \(\Omega\) et de rayon \(R\) si et seulement si \(d(\Omega,\text{droite})=R\).</div>
+        <p class="etape">Étape 1 : forme des parallèles</p>
+        \[ 2x+y+c=0 \]
+        <p class="etape">Étape 2 : condition de tangence</p>
+        \[ \frac{|2\times2+(-1)+c|}{\sqrt{4+1}}=\frac{\sqrt5}{2} \iff \frac{|3+c|}{\sqrt5}=\frac{\sqrt5}{2} \]
+        <p class="etape">Étape 3 : résoudre</p>
+        \[ |3+c|=\tfrac52 \iff c=-\tfrac12\ \text{ou}\ c=-\tfrac{11}2 \]
+        <div class="res">\(2x+y-\tfrac12=0\) (soit \(4x+2y-1=0\)) et \(2x+y-\tfrac{11}2=0\) (soit \(4x+2y-11=0\))</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 12 — Longueur de tangente (puissance d'un point)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <div class="enonce">\(C:x^2+y^2+x-3y-3=0\), \(A(1,-2)\), tangente touchant \(C\) en \(M\). Calculer \(AM\).</div>
-        <p>La puissance de \(A\) = valeur du premier membre évaluée en \(A\) :
-        \(\mathrm{pow}(A)=1+4+1-3(-2)-3=1+4+1+6-3=9\).</p>
-        <p>Or pour une tangente \(AM^2=\mathrm{pow}(A)\). Contrôle : centre \(\Omega(-\tfrac12,\tfrac32)\), \(R^2=\tfrac14+\tfrac94+3=\tfrac{11}2\),
-        \(A\Omega^2=\tfrac94+\tfrac{49}4=\tfrac{58}4=\tfrac{29}2\), \(AM^2=A\Omega^2-R^2=\tfrac{29}2-\tfrac{11}2=9\).</p>
-        <p class="res">\(AM=3\)</p>
+        <div class="enonce">On considère le cercle \(C\) d'équation \(x^2+y^2+x-3y-3=0\) et le point \(A(1,-2)\). Une droite passant par \(A\) est tangente au cercle \(C\) au point \(M\). Calculer la longueur \(AM\).</div>
+
+        <p class="q">1) Longueur \(AM\)</p>
+        <div class="rappel"><span class="lab">Rappel · puissance d'un point</span>Si \(C:x^2+y^2+px+qy+r=0\), la puissance de \(A\) est \(\mathrm{pow}(A)=x_A^2+y_A^2+px_A+qy_A+r\). Si \(AM\) est tangente, \(AM^2=\mathrm{pow}(A)=A\Omega^2-R^2\).</div>
+        <p class="etape">Étape 1 : puissance de \(A\)</p>
+        \[ \mathrm{pow}(A)=1+4+1-3\times(-2)-3=9 \]
+        <p class="etape">Étape 2 : contrôle avec le centre et le rayon</p>
+        <p>On complète les carrés : le centre est \(\Omega(-\tfrac12,\tfrac32)\).</p>
+        \[ R^2=\tfrac14+\tfrac94+3=\tfrac{11}2 \]
+        \[ A\Omega^2=\left(\tfrac32\right)^2+\left(\tfrac72\right)^2=\tfrac{9+49}4=\tfrac{29}2 \]
+        \[ AM^2=A\Omega^2-R^2=\tfrac{29}2-\tfrac{11}2=9 \]
+        <div class="res">\(AM=3\)</div>
       </div>
     </div>
 
     <div class="exo-card">
-      <div class="exo-head"><span>Exercice 13 — Tangentes parallèles à \(D\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-head"><span>Exercice 13 — Tangentes parallèles à une droite</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <div class="enonce">\(C:x^2+y^2+10x-2y+6=0\), \(D:2x+y-7=0\).</div>
-        <p>Centre \(\Omega(-5,1)\), \(R^2=25+1-6=20\), \(R=2\sqrt5\). Parallèle : \(2x+y+c=0\), tangence :</p>
-        <p>\(\dfrac{|2(-5)+1+c|}{\sqrt5}=2\sqrt5\Rightarrow|c-9|=2\sqrt5\cdot\sqrt5=10\Rightarrow c=19\ \text{ou}\ c=-1\).</p>
-        <p class="res">\(2x+y+19=0\) et \(2x+y-1=0\)</p>
+        <div class="enonce">On considère le cercle \(C\) d'équation \(x^2+y^2+10x-2y+6=0\) et la droite d'équation \(D:2x+y-7=0\). Écrire les équations cartésiennes des tangentes au cercle \(C\) et parallèles à la droite \(D\).</div>
+
+        <p class="q">1) Centre et rayon</p>
+        <p class="etape">Étape 1 : compléter les carrés</p>
+        \[ (x+5)^2-25+(y-1)^2-1+6=0 \iff (x+5)^2+(y-1)^2=20 \]
+        <div class="res">\(\Omega(-5,1)\), \(R=2\sqrt5\)</div>
+
+        <p class="q">2) Tangentes parallèles à \(D\)</p>
+        <div class="rappel"><span class="lab">Rappel · tangence</span>\[ d(\Omega,\text{droite})=R \]</div>
+        <p class="etape">Étape 1 : forme des parallèles</p>
+        \[ 2x+y+c=0 \]
+        <p class="etape">Étape 2 : condition de tangence</p>
+        \[ \frac{|2\times(-5)+1+c|}{\sqrt5}=2\sqrt5 \iff |c-9|=10 \]
+        <p class="etape">Étape 3 : résoudre</p>
+        \[ c=19\ \text{ou}\ c=-1 \]
+        <div class="res">\(2x+y+19=0\) et \(2x+y-1=0\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 14 — Synthèse (8 questions)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">1) \(D:y=mx+p\) ⟹ directeur \((1,m)\)</p>
-        <p>Points \((0,p)\) et \((1,m+p)\) : différence \((1,m)\). <b>Vrai</b>.</p>
-        <p class="q">2) \(D:3x+4y+1=0\) : directeur, tracé par \(A(1,-1)\)</p>
-        <p>Directeur \((b,-a)=(4,-3)\). \(A(1,-1)\) : \(3-4+1=0\) ⟹ \(A\in D\). On trace la droite passant par \(A\) de direction \((4,-3)\).</p>
-        <p class="res">Directeur \(\vec u(4,-3)\), \(A\) appartient à \(D\)</p>
-        <p class="q">3) Hachurer \(3x+4y+1>0\)</p>
-        <p>Test \(O(0,0)\) : \(3\cdot0+4\cdot0+1=1>0\). Le demi-plan solution est <b>celui contenant l'origine</b> (au-dessus/à droite de \(D\)).</p>
-        <p class="q">4) \(\{x=1+3t,\ y=-2-2t\}\) → cartésienne</p>
-        <p>Directeur \((3,-2)\), normale \((2,3)\) : \(2(x-1)+3(y+2)=0\Rightarrow2x+3y+4=0\).</p>
-        <p class="res">\(2x+3y+4=0\)</p>
-        <p class="q">5) \(-x+2y+3=0\) → paramétrique</p>
-        <p>\((a,b)=(-1,2)\), directeur \((b,-a)=(2,1)\). Point \(x=3,y=0\) (\(-3+0+3=0\)).</p>
-        <p class="res">\(\{x=3+2t,\ y=t\}\)</p>
-        <p class="q">6) \(D:x+2y-3=0\), \(A(1,-2)\), projeté \(H\)</p>
-        <p>Normale \((1,2)\) : \(x=1+k,\ y=-2+2k\). Sur \(D\) : \((1+k)+2(-2+2k)-3=0\Rightarrow5k-6=0\Rightarrow k=\tfrac65\).</p>
-        <p class="res">\(H=\big(\tfrac{11}5,\tfrac25\big)\)</p>
-        <p class="q">7) \(A(1,1)\) : translation \((2,-1)\) puis homothétie \((O,-2)\)</p>
-        <p>Translation : \(A\mapsto(3,0)\). Homothétie de centre \(O\), rapport \(-2\) : \((3,0)\mapsto(-6,0)\).</p>
-        <p class="res">Image \(=(-6,0)\)</p>
-        <p class="q">8) \(A(1,2),B(5,2)\) : ensemble des \(M\) tq \(\vec{MA}\cdot\vec{MB}=0\)</p>
-        <p>C'est le cercle de diamètre \([AB]\) : \((x-1)(x-5)+(y-2)^2=0\Rightarrow(x-3)^2+(y-2)^2=4\).</p>
-        <p class="res">Cercle de centre \((3,2)\), rayon \(2\) (milieu de \([AB]\), rayon \(\tfrac{AB}2=2\))</p>
+        <div class="enonce">1) Si \(D\) admet une équation réduite \(y=mx+p\), alors un vecteur directeur de \(D\) est \((1,m)\). 2) Soit \(D:3x+4y+1=0\) : déterminer un vecteur directeur, tracer la droite passant par \(A(1,-1)\). 3) Hachurer le demi-plan d'inéquation \(3x+4y+1>0\). 4) Déterminer une équation cartésienne de la droite \(\{x=1+3t,\ y=-2-2t\}\). 5) Soit la droite d'équation \(-x+2y+3=0\) : déterminer une représentation paramétrique. 6) Soit \(D:x+2y-3=0\) et \(A(1,-2)\) ; déterminer le projeté orthogonal \(H\) de \(A\) sur \(D\). 7) Soit \(A(1,1)\) : image de \(A\) par la translation de vecteur \((2,-1)\), puis par l'homothétie de centre \(O\) et de rapport \(-2\). 8) Soit \(A(1,2)\), \(B(5,2)\) : déterminer l'ensemble des points \(M\) tels que \(\vec{MA}\cdot\vec{MB}=0\) et l'identifier géométriquement.</div>
+
+        <p class="q">1) Vecteur directeur de \(y=mx+p\)</p>
+        <p class="etape">Étape 1 : deux points de la droite</p>
+        <p>Les points \((0,p)\) et \((1,m+p)\) appartiennent à \(D\).</p>
+        <p class="etape">Étape 2 : vecteur qui les joint</p>
+        \[ (1-0,\ m+p-p)=(1,m) \]
+        <div class="res">L'affirmation est vraie.</div>
+
+        <p class="q">2) Droite \(3x+4y+1=0\)</p>
+        <p class="etape">Étape 1 : vecteur directeur</p>
+        <p>La normale est \((3,4)\), donc \(\vec u=(4,-3)\) est directeur.</p>
+        <p class="etape">Étape 2 : le point \(A\)</p>
+        \[ 3\times1+4\times(-1)+1=0 \]
+        <p>Le point \(A(1,-1)\) appartient à \(D\) : on trace la droite passant par \(A\) et de direction \((4,-3)\).</p>
+        <div class="res">Vecteur directeur \(\vec u(4,-3)\) ; \(A\) est sur \(D\).</div>
+
+        <p class="q">3) Demi-plan \(3x+4y+1>0\)</p>
+        <p class="etape">Étape 1 : point test</p>
+        \[ 3\times0+4\times0+1=1>0 \]
+        <p class="etape">Étape 2 : conclusion</p>
+        <p>L'origine vérifie l'inégalité : on hachure le demi-plan limité par \(D\) qui contient \(O\).</p>
+        <div class="res">Demi-plan ouvert contenant l'origine.</div>
+
+        <p class="q">4) Cartésienne de \(\{x=1+3t,\ y=-2-2t\}\)</p>
+        <p class="etape">Étape 1 : vecteurs</p>
+        <p>Le vecteur directeur est \((3,-2)\) ; \((2,3)\) est normal. Un point est \((1,-2)\).</p>
+        <p class="etape">Étape 2 : équation</p>
+        \[ 2(x-1)+3(y+2)=0 \iff 2x+3y+4=0 \]
+        <div class="res">\(2x+3y+4=0\)</div>
+
+        <p class="q">5) Paramétrique de \(-x+2y+3=0\)</p>
+        <p class="etape">Étape 1 : vecteur directeur</p>
+        <p>Avec \((a,b)=(-1,2)\), \((b,-a)=(2,1)\) est directeur.</p>
+        <p class="etape">Étape 2 : un point</p>
+        <p>Pour \(y=0\) : \(-x+3=0\), donc \(x=3\).</p>
+        <div class="res">\(\{x=3+2t,\ y=t\}\)</div>
+
+        <p class="q">6) Projeté orthogonal de \(A(1,-2)\) sur \(x+2y-3=0\)</p>
+        <p class="etape">Étape 1 : perpendiculaire passant par \(A\)</p>
+        <p>La normale est \((1,2)\) :</p>
+        \[ x=1+k \qquad y=-2+2k \]
+        <p class="etape">Étape 2 : intersection avec \(D\)</p>
+        \[ (1+k)+2(-2+2k)-3=0 \iff 5k-6=0 \iff k=\tfrac65 \]
+        <p class="etape">Étape 3 : coordonnées</p>
+        \[ x=\tfrac{11}5 \qquad y=-2+\tfrac{12}5=\tfrac25 \]
+        <div class="res">\(H=\big(\tfrac{11}5,\tfrac25\big)\)</div>
+
+        <p class="q">7) Translation puis homothétie</p>
+        <div class="rappel"><span class="lab">Rappel · transformations</span>Translation de vecteur \(\vec w\) : \(M'=M+\vec w\). Homothétie de centre \(O\), rapport \(\lambda\) : \(\vec{OM'}=\lambda\,\vec{OM}\).</div>
+        <p class="etape">Étape 1 : translation</p>
+        \[ A\mapsto(1+2,\,1-1)=(3,0) \]
+        <p class="etape">Étape 2 : homothétie</p>
+        \[ (3,0)\mapsto(-2\times3,\,-2\times0)=(-6,0) \]
+        <div class="res">L'image finale est \((-6,0)\).</div>
+
+        <p class="q">8) Ensemble \(\{M\ :\ \vec{MA}\cdot\vec{MB}=0\}\)</p>
+        <p class="etape">Étape 1 : traduire en coordonnées</p>
+        <p>Pour \(M(x,y)\) : \(\vec{MA}=(1-x,2-y)\) et \(\vec{MB}=(5-x,2-y)\).</p>
+        \[ (1-x)(5-x)+(2-y)^2=0 \iff (x-1)(x-5)+(y-2)^2=0 \]
+        <p class="etape">Étape 2 : développer et compléter le carré</p>
+        \[ x^2-6x+5+(y-2)^2=0 \iff (x-3)^2+(y-2)^2=4 \]
+        <div class="res">Cercle de centre \((3,2)\) et de rayon \(2\) : c'est le cercle de diamètre \([AB]\) (centre = milieu de \([AB]\), rayon \(=AB/2=2\)).</div>
       </div>
     </div>
 
@@ -436,47 +732,96 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Application 15 — Navigation GPS</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <div class="enonce">Randonneur en \(A(1,2)\), direction \(\vec u(2,1)\) (km) ; refuge \(R(5,1)\).</div>
-        <p class="q">1) Trajectoire</p><p class="res">\(\{x=1+2t,\ y=2+t\}\), \(t\geqslant0\)</p>
-        <p class="q">2) Passe par \(R\) ?</p><p>\(1+2t=5\Rightarrow t=2\), alors \(y=2+2=4\neq1\).</p>
-        <p class="res">Non, la trajectoire ne passe pas par le refuge</p>
+        <div class="enonce">Un randonneur se déplace sur une carte repérée par un repère orthonormé \((O;\vec\imath,\vec\jmath)\) (en km). Il part du point \(A(1,2)\) et marche en ligne droite dans la direction du vecteur \(\vec u=(2,1)\). Un refuge est situé au point \(R(5,1)\). 1) Donner une représentation paramétrique de la trajectoire. 2) Le randonneur passera-t-il exactement par le refuge ? 3) Calculer la distance minimale entre le randonneur et le refuge. 4) Déterminer le point de la trajectoire le plus proche du refuge.</div>
+
+        <p class="q">1) Trajectoire</p>
+        <p class="etape">Étape 1 : point de départ et direction</p>
+        <p>Le randonneur part de \(A\) dans la direction \(\vec u\), avec \(t\geqslant0\).</p>
+        <div class="res">\(\{x=1+2t,\ y=2+t\}\), \(t\geqslant0\)</div>
+
+        <p class="q">2) Passage par le refuge</p>
+        <p class="etape">Étape 1 : abscisse de \(R\)</p>
+        \[ 1+2t=5 \iff t=2 \]
+        <p class="etape">Étape 2 : ordonnée correspondante</p>
+        \[ y=2+2=4\neq1 \]
+        <div class="res">Non : la trajectoire ne passe pas par le refuge.</div>
+
         <p class="q">3) Distance minimale</p>
-        <p>\(\vec{AR}=(4,-1)\), \(\det(\vec{AR},\vec u)=4\cdot1-(-1)\cdot2=6\), \(\|\vec u\|=\sqrt5\). \(d=\dfrac6{\sqrt5}=\dfrac{6\sqrt5}5\approx2{,}68\) km.</p>
-        <p class="res">\(d_{\min}=\dfrac6{\sqrt5}\approx2{,}68\) km</p>
+        <div class="rappel"><span class="lab">Rappel · distance à une droite</span>\[ d=\frac{|\det(\vec{AR},\vec u)|}{\|\vec u\|} \]</div>
+        <p class="etape">Étape 1 : déterminant et norme</p>
+        \[ \vec{AR}=(4,-1) \qquad \det(\vec{AR},\vec u)=4\times1-(-1)\times2=6 \qquad \|\vec u\|=\sqrt5 \]
+        <p class="etape">Étape 2 : distance</p>
+        <div class="res">\(d_{\min}=\dfrac6{\sqrt5}=\dfrac{6\sqrt5}5\approx2{,}68\) km</div>
+
         <p class="q">4) Point le plus proche</p>
-        <p>\(H=A+\dfrac{\vec{AR}\cdot\vec u}{\|\vec u\|^2}\vec u\) ; \(\vec{AR}\cdot\vec u=8-1=7\), \(t^*=\tfrac75\). \(H=\big(1+\tfrac{14}5,2+\tfrac75\big)=\big(\tfrac{19}5,\tfrac{17}5\big)\).</p>
-        <p class="res">\(H=(3{,}8\,;\,3{,}4)\)</p>
+        <div class="rappel"><span class="lab">Rappel · projeté orthogonal sur une droite</span>\[ H=A+\frac{\vec{AR}\cdot\vec u}{\|\vec u\|^2}\,\vec u \]</div>
+        <p class="etape">Étape 1 : produit scalaire</p>
+        \[ \vec{AR}\cdot\vec u=4\times2+(-1)\times1=7 \qquad t^*=\tfrac75 \]
+        <p class="etape">Étape 2 : coordonnées</p>
+        \[ H=\big(1+\tfrac{14}5,\ 2+\tfrac75\big)=\big(\tfrac{19}5,\tfrac{17}5\big) \]
+        <div class="res">\(H=(3{,}8\,;\,3{,}4)\), atteint pour \(t^*=\tfrac75\geqslant0\) : il est bien sur la trajectoire.</div>
       </div>
     </div>
 
     <div class="exo-card">
-      <div class="exo-head"><span>Application 16 — Antenne relais & couverture</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-head"><span>Application 16 — Antenne relais et couverture</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <div class="enonce">Antenne \(A(2,-1)\), rayon 5 km ; village \(V(-1,3)\) ; route \(D:2x-y+4=0\).</div>
+        <div class="enonce">Une antenne relais est installée au point \(A(2,-1)\). Elle couvre une zone circulaire de rayon 5 km. Un village est situé au point \(V(-1,3)\) et une route est modélisée par la droite \(D:2x-y+4=0\). 1) Vérifier si le village est couvert par l'antenne. 2) La route traverse-t-elle la zone de couverture ? 3) Déterminer les points éventuels d'entrée et de sortie de la route dans la zone couverte.</div>
+
         <p class="q">1) Village couvert ?</p>
-        <p>\(\vec{AV}=(-3,4)\), \(AV=\sqrt{9+16}=5=R\) : le village est <b>exactement sur le bord</b> de la zone (juste couvert, à la limite).</p>
-        <p class="res">\(AV=5=R\) : village en limite de couverture</p>
+        <p class="etape">Étape 1 : distance \(AV\)</p>
+        \[ \vec{AV}=(-3,4) \qquad AV=\sqrt{9+16}=5 \]
+        <p class="etape">Étape 2 : comparaison avec le rayon</p>
+        <p>On a \(AV=R=5\) : le village est exactement sur le bord de la zone.</p>
+        <div class="res">Le village est en limite de couverture (\(AV=5=R\)).</div>
+
         <p class="q">2) La route traverse-t-elle la zone ?</p>
-        <p>\(d(A,D)=\dfrac{|2\cdot2-(-1)+4|}{\sqrt5}=\dfrac9{\sqrt5}\approx4{,}02<5\) ⟹ la route est <b>sécante</b> (2 points).</p>
-        <p class="res">Oui : \(d(A,D)\approx4{,}02<5\)</p>
-        <p class="q">3) Points d'entrée / sortie</p>
-        <p>Cercle \((x-2)^2+(y+1)^2=25\), \(D:y=2x+4\). Report : \((x-2)^2+(2x+5)^2=25\Rightarrow5x^2+16x+4=0\).</p>
-        <p>\(\Delta=256-80=176=16\cdot11\), \(x=\dfrac{-8\pm2\sqrt{11}}5\), \(y=2x+4=\dfrac{4\pm4\sqrt{11}}5\).</p>
-        <p class="res">\(\Big(\tfrac{-8+2\sqrt{11}}5,\tfrac{4+4\sqrt{11}}5\Big)\approx(-0{,}27\,;\,3{,}45)\) et \(\Big(\tfrac{-8-2\sqrt{11}}5,\tfrac{4-4\sqrt{11}}5\Big)\approx(-2{,}93\,;\,-1{,}85)\)</p>
+        <div class="rappel"><span class="lab">Rappel · droite et cercle</span>\(d(\Omega,D)>R\) : aucun point ; \(d=R\) : tangente ; \(d&lt;R\) : deux points d'intersection.</div>
+        <p class="etape">Étape 1 : distance du centre à la route</p>
+        \[ d(A,D)=\frac{|2\times2-(-1)+4|}{\sqrt{4+1}}=\frac9{\sqrt5}\approx4{,}02 \]
+        <p class="etape">Étape 2 : comparaison</p>
+        <p>On a \(4{,}02&lt;5\) : la route est sécante au cercle.</p>
+        <div class="res">Oui, la route traverse la zone de couverture.</div>
+
+        <p class="q">3) Points d'entrée et de sortie</p>
+        <p class="etape">Étape 1 : équations</p>
+        \[ (x-2)^2+(y+1)^2=25 \qquad y=2x+4 \]
+        <p class="etape">Étape 2 : substitution</p>
+        \[ (x-2)^2+(2x+5)^2=25 \iff 5x^2+16x+4=0 \]
+        <p class="etape">Étape 3 : discriminant et racines</p>
+        \[ \Delta=256-80=176=16\times11 \]
+        \[ x=\frac{-16\pm4\sqrt{11}}{10}=\frac{-8\pm2\sqrt{11}}5 \]
+        <p class="etape">Étape 4 : ordonnées</p>
+        \[ y=2x+4=\frac{4\pm4\sqrt{11}}5 \]
+        <div class="res">\(\Big(\tfrac{-8+2\sqrt{11}}5,\tfrac{4+4\sqrt{11}}5\Big)\approx(-0{,}27\,;\,3{,}45)\) et \(\Big(\tfrac{-8-2\sqrt{11}}5,\tfrac{4-4\sqrt{11}}5\Big)\approx(-2{,}93\,;\,-1{,}85)\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Application 17 — Sécurité sur un chantier</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <div class="enonce">Câble \(D:3x+4y-12=0\) (m) ; ouvrier \(P(1,1)\) ; distance de sécurité 2 m.</div>
-        <p class="q">1) Distance minimale</p><p>\(d(P,D)=\dfrac{|3+4-12|}{\sqrt{9+16}}=\dfrac{5}{5}=1\) m.</p>
-        <p class="res">\(d_{\min}=1\) m</p>
-        <p class="q">2) Point le plus proche</p>
-        <p>Normale \((3,4)\) : \(x=1+3k,\ y=1+4k\). Sur \(D\) : \(3(1+3k)+4(1+4k)-12=0\Rightarrow25k-5=0\Rightarrow k=\tfrac15\). \(H=\big(\tfrac85,\tfrac95\big)\).</p>
-        <p class="res">\(H=(1{,}6\,;\,1{,}8)\)</p>
-        <p class="q">3) Sécurité ?</p><p>\(d_{\min}=1\text{ m}<2\text{ m}\).</p>
-        <p class="res warnbox">L'ouvrier n'est <b>pas</b> en sécurité (1 m &lt; 2 m réglementaires)</p>
+        <div class="enonce">Un câble est tendu le long de la droite \(D:3x+4y-12=0\) (système d'axes en mètres). Un ouvrier se trouve au point \(P(1,1)\). 1) Calculer la distance minimale entre l'ouvrier et le câble. 2) Déterminer les coordonnées du point du câble le plus proche de l'ouvrier. 3) On impose une distance de sécurité minimale de 2 mètres. L'ouvrier est-il en sécurité ? Justifier.</div>
+
+        <p class="q">1) Distance minimale</p>
+        <div class="rappel"><span class="lab">Rappel · distance point–droite</span>\[ d(M,D)=\frac{|ax_M+by_M+c|}{\sqrt{a^2+b^2}} \]</div>
+        <p class="etape">Étape 1 : application</p>
+        \[ d(P,D)=\frac{|3+4-12|}{\sqrt{9+16}}=\frac55=1 \]
+        <div class="res">\(d_{\min}=1\) m</div>
+
+        <p class="q">2) Point du câble le plus proche</p>
+        <p class="etape">Étape 1 : perpendiculaire passant par \(P\)</p>
+        <p>La normale est \((3,4)\) :</p>
+        \[ x=1+3k \qquad y=1+4k \]
+        <p class="etape">Étape 2 : intersection avec le câble</p>
+        \[ 3(1+3k)+4(1+4k)-12=0 \iff 25k-5=0 \iff k=\tfrac15 \]
+        <p class="etape">Étape 3 : coordonnées</p>
+        \[ H=\big(1+\tfrac35,\ 1+\tfrac45\big)=\big(\tfrac85,\tfrac95\big) \]
+        <div class="res">\(H=(1{,}6\,;\,1{,}8)\)</div>
+
+        <p class="q">3) Sécurité</p>
+        <p class="etape">Étape 1 : comparaison</p>
+        <p>La distance minimale vaut 1 m, inférieure aux 2 m imposés.</p>
+        <div class="warnbox"><span class="lab">Conclusion</span> L'ouvrier n'est <b>pas</b> en sécurité : \(1\ \text{m}&lt;2\ \text{m}\).</div>
       </div>
     </div>
 
