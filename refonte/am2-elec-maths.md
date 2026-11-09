@@ -16,7 +16,7 @@ Modèles suivis : `aem2-electronique/ch6-electronique-numerique.html#td6-ex6` et
 | aem2-mathematiques/ch1-analyse-asymptotique.html | fait (exercices créés A–B, TD Ex 1–15 ; les 2 fiches « Feuille complémentaire » sont de simples catalogues sans énoncé : laissées telles quelles) |
 | aem2-mathematiques/ch2-applications-lineaires.html | fait (exercices créés A–B, TD Ex 1–10) |
 | aem2-mathematiques/ch3-matrices-applications-lineaires.html | fait (exemples 1–14 du cours, exercices créés A–C, TD Ex 1–13) |
-| aem2-mathematiques/ch4-courbes-parametrees.html | à faire |
+| aem2-mathematiques/ch4-courbes-parametrees.html | fait (exemples 2–7 du cours, TD Ex 1–8 ; graphes : police des figures relevée à 15/14 px dans la feuille de style locale) |
 | aem2-mathematiques/methodes-par-exercice.html | à faire |
 
 ## Choix de mise en forme
@@ -43,6 +43,7 @@ Modèles suivis : `aem2-electronique/ch6-electronique-numerique.html#td6-ex6` et
 - Ch2 maths, Ex 1 Q4 : les égalités « \(X^3-7X+6=X(X-1)(X-2)\) » et « \(X^4-15X+14=X^2(X-1)(X-2)\) » étaient fausses (les générateurs étaient bons) ; remplacées par \((X-1)(X-2)(X+3)\) et \((X-1)(X-2)(X^2+3X+7)\), avec un avertissement dans la carte. Autres résultats recalculés à la main : inchangés.
 - Ch2 maths, Ex 7 Q2 : fragment de phrase tronqué (« doit vérifier \(2x-y-z\)… ») supprimé.
 - Ch3 maths : tous les rangs, noyaux, matrices de passage, changements de base, puissances \(A^n\) et projecteurs/symétries recalculés avec sympy ; aucune erreur trouvée.
+- Ch4 maths, Ex 8 (asymptote oblique) : la ligne « \(y-\frac x3=2+\dots\to0\) » oubliait de retrancher le 2 (la conclusion \(y=\frac x3+2\) était juste) ; corrigée avec un avertissement. Tous les autres résultats (points doubles, tangentes, rebroussements, asymptotes) recalculés avec sympy : inchangés.
 
 ## Points incertains
 
