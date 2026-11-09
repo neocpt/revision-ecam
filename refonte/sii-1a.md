@@ -77,3 +77,17 @@ Conventions retenues :
 - **c12** : recalculs Python : ωc(F1) = 14,85 rad/s, ωr = 9,35, Q = 2,07 (6,3 dB), ωr(Ex B) = 90,6, Q = 1,75 (4,9 dB), φ(1000) réel = −84,4° : justes. Erreur : F3 de 2.1 décrit comme « inverse d'un 2e ordre » alors que le trinôme est au dénominateur (corrigé officiel) → `.warnbox`. Ajouts : bande passante de F1 (Q2 du corrigé officiel), phase exacte de 1.2-4. A320 : pas de valeur numérique lisible sans les figures, réponses qualitatives conservées.
 - **c13** : recalculs Python : tableau bielle-manivelle (30,5 / 48,8 / 50,0 / 37,8 N·m), max 1,031 à 76,7°, F piston 1178 N, Fp = 784,8 N, p1 = 2,52 et 3,42 bar, hélicoïdale 0,637 N·m : justes. Signe de C = −aF sin(α+β)/cos β vérifié par la puissance. Les deux SVG (viewBox 640, polices 11-15) sont refaits en Python (viewBox 760, textes 20/22). Ex A, B, F : énoncés regroupés en `.enonce`, une `.q` par cas ; ajout du rappel « DDL + inconnues statiques = 6 ».
 - **c14** : recalculs Python : T_lim = 78,5 N, a = 1,08 m/s², φ_lim = 16,7°, T = 25,4 N (15°), a = 0,59 m/s² (20°), φ = 16,7° < 19,3°, y_G = 21,2 mm, P = 1,50 N : justes. Arc-boutement d=h/(2μ) = 10 cm, F hydrostatique = 88,3 kN à 2 m, roulement F = 4 N : justes. Énoncés complétés avec la liste des questions (A, B, C) pour que tout ce qui suit un `.q` soit une réponse.
+
+## Résumé final (14 pages sur 14 faites)
+
+- Toutes les corrections de `sii/c01` à `sii/c14` (exercices créés, TD, applications `#app` de C11 et C13) sont réécrites au format « par étapes » (`.q`, `.etape`, `.rappel`, `.res`, `.warnbox`), et poussées sur `main`. `#cours`, `#memo`, `#docs`, `assets/`, `index.html`, `matiere.html`, `annales.html` n'ont pas été touchés.
+- Contrôle final de toutes les pages : div équilibrées, aucun `<` brut dans les formules des zones réécrites, liens relatifs valides, énoncé en tête de chaque `.exo-body` (ou `.q` quand la carte du TD n'a pas d'énoncé dans la page).
+- Graphes SVG refaits (viewBox 760, textes 20/22) : C11 (x(α), f'(α)), C13 (schéma pieuvre, |C|/(aF)).
+- **Corrigés Bigeard utilisés** : C04 (Prius : convention de raison ; différentiel : roulement sans glissement, λ = −1, roue qui patine), C10 (guidage en rotation, pompe hydraulique). Pour les autres exercices, aucun `-prof.pdf` ne traite le même exercice (détail dans le tableau ci-dessus).
+- **Erreurs de l'ancienne version corrigées (avec `.warnbox`)** :
+  - C07 RAMSES : le système n'est pas insensible au débit sortant (erreur de régulation q0/(aG)).
+  - C08 Ex A : signe du couple moteur (C = +a·mg·cos α) ; lève-malade : moment de liaison oublié ((a+b)mg + bk(y−y0)).
+  - C10 : liaison équivalente de deux sphériques en série / biellette = sphère-plan (et non sphère-cylindre) ; liaison équivalente de la pompe précisée.
+  - C12 : F3 de l'ex. 2.1 est un 2e ordre ordinaire, pas un « inverse d'un 2e ordre ».
+- Coquille du corrigé officiel signalée : C03 EPAS Q4 (X et Z constants, Y variable).
+- **Hors périmètre, à traiter par ailleurs** : fiche mémo de `c06-slci.html` (`#memo`) : `0<z<1`, `\(<0\)`, `a_1a_2<a_0a_3` bruts qui cassent l'affichage de la fiche (remplacer par `&lt;`). Commentaires HTML de repérage (`<!-- EXOS CRÉÉS -->`) retirés de quelques pages lors du remplacement des sections (sans effet à l'affichage).
