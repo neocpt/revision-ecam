@@ -134,10 +134,18 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice A — Discussion paramétrique</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">Discuter et résoudre \(\{x+y+z=1,\ x+y+mz=2,\ x+my+z=3\}\) selon \(m\in\mathbb R\).</div>
-        <p>\(L_2-L_1:\ (m-1)z=1\) ; \(L_3-L_1:\ (m-1)y=2\). Le déterminant vaut \((m-1)^2\).</p>
-        <p><b>Si \(m\neq1\)</b> : \(z=\tfrac1{m-1}\), \(y=\tfrac2{m-1}\), et \(x=1-y-z=1-\tfrac3{m-1}=\tfrac{m-4}{m-1}\). Solution unique.</p>
-        <p><b>Si \(m=1\)</b> : \(L_2-L_1\) donne \(0=1\) : <b>incompatible</b>.</p>
-        <div class="res">\(m\neq1\) : \(\big(\tfrac{m-4}{m-1},\tfrac2{m-1},\tfrac1{m-1}\big)\) ; \(m=1\) : \(S=\varnothing\).</div>
+
+        <p class="q">1) Discussion et résolution</p>
+        <p class="etape">Étape 1 : éliminer \(x\)</p>
+        <div class="rappel"><span class="lab">Rappel · pivot de Gauss</span>On remplace une équation par elle-même moins un multiple d'une autre pour faire disparaître une inconnue : le système obtenu a les mêmes solutions.</div>
+        \[ L_2-L_1:\ (m-1)z=1 \qquad L_3-L_1:\ (m-1)y=2 \]
+        <p class="etape">Étape 2 : cas \(m\neq1\)</p>
+        <p>On divise par \(m-1\) :</p>
+        \[ z=\frac1{m-1} \qquad y=\frac2{m-1} \qquad x=1-y-z=1-\frac3{m-1}=\frac{m-4}{m-1} \]
+        <p>Solution unique (le déterminant de la matrice vaut \((m-1)^2\neq0\)).</p>
+        <p class="etape">Étape 3 : cas \(m=1\)</p>
+        <p>\(L_2-L_1\) devient \(0=1\) : le système est incompatible.</p>
+        <div class="res">\(m\neq1\) : \(S=\Big\{\Big(\tfrac{m-4}{m-1},\tfrac2{m-1},\tfrac1{m-1}\Big)\Big\}\) ; \(m=1\) : \(S=\varnothing\).</div>
       </div>
     </div>
 
@@ -145,8 +153,18 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice B — Déterminant &amp; inverse \(3\times3\)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">\(A=\begin{pmatrix}1&2&0\\0&1&2\\2&0&1\end{pmatrix}\). Calculer \(\det A\) puis \(A^{-1}\) par cofacteurs.</div>
-        <p>\(\det A=1(1\cdot1-2\cdot0)-2(0\cdot1-2\cdot2)+0=1-2(-4)=9\).</p>
-        <p>Cofacteurs : \(\operatorname{Cof}(A)=\begin{pmatrix}1&4&-2\\-2&1&4\\4&-2&1\end{pmatrix}\), d'où</p>
+
+        <p class="q">1) Déterminant</p>
+        <p class="etape">Étape 1 : développer selon la première ligne</p>
+        <div class="rappel"><span class="lab">Rappel · développement d'un déterminant</span>\[ \det A=\sum_j (-1)^{i+j}a_{ij}\,\Delta_{ij} \]où \(\Delta_{ij}\) est le déterminant obtenu en supprimant la ligne \(i\) et la colonne \(j\).</div>
+        \[ \det A=1\begin{vmatrix}1&2\\0&1\end{vmatrix}-2\begin{vmatrix}0&2\\2&1\end{vmatrix}+0=1\times1-2\times(-4)=9 \]
+        <div class="res">\(\det A=9\neq0\) : \(A\) est inversible.</div>
+
+        <p class="q">2) Inverse par les cofacteurs</p>
+        <div class="rappel"><span class="lab">Rappel · inverse par la comatrice</span>\[ A^{-1}=\frac1{\det A}\,\big(\operatorname{Com}A\big)^{T} \qquad \operatorname{Com}(A)_{ij}=(-1)^{i+j}\Delta_{ij} \]</div>
+        <p class="etape">Étape 1 : la comatrice</p>
+        \[ \operatorname{Com}(A)=\begin{pmatrix}1&4&-2\\-2&1&4\\4&-2&1\end{pmatrix} \]
+        <p class="etape">Étape 2 : transposer et diviser par 9</p>
         <div class="res">\(A^{-1}=\dfrac19\begin{pmatrix}1&-2&4\\4&1&-2\\-2&4&1\end{pmatrix}\).</div>
       </div>
     </div>
@@ -155,8 +173,14 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice C — Cramer</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">Résoudre par Cramer \(\{x+2y=3,\ 3x-y=2\}\).</div>
-        <p>\(\Delta=\begin{vmatrix}1&2\\3&-1\end{vmatrix}=-1-6=-7\). \(\Delta_x=\begin{vmatrix}3&2\\2&-1\end{vmatrix}=-3-4=-7\), \(\Delta_y=\begin{vmatrix}1&3\\3&2\end{vmatrix}=2-9=-7\).</p>
-        <div class="res">\(x=\tfrac{-7}{-7}=1\), \(y=\tfrac{-7}{-7}=1\).</div>
+
+        <p class="q">1) Résolution par Cramer</p>
+        <div class="rappel"><span class="lab">Rappel · règle de Cramer</span>Si \(\Delta=\det A\neq0\), alors \(x_i=\dfrac{\Delta_i}{\Delta}\), où \(\Delta_i\) est le déterminant de \(A\) dont la colonne \(i\) est remplacée par le second membre.</div>
+        <p class="etape">Étape 1 : \(\Delta\)</p>
+        \[ \Delta=\begin{vmatrix}1&2\\3&-1\end{vmatrix}=-1-6=-7 \]
+        <p class="etape">Étape 2 : \(\Delta_x\) et \(\Delta_y\)</p>
+        \[ \Delta_x=\begin{vmatrix}3&2\\2&-1\end{vmatrix}=-3-4=-7 \qquad \Delta_y=\begin{vmatrix}1&3\\3&2\end{vmatrix}=2-9=-7 \]
+        <div class="res">\(x=\dfrac{-7}{-7}=1\) et \(y=\dfrac{-7}{-7}=1\).</div>
       </div>
     </div>
   </section>
@@ -169,201 +193,620 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 1 — Échelonner</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">\(A=\begin{pmatrix}1&0&-1&0\\0&1&2&0\\0&0&3&1\\0&0&0&0\end{pmatrix}\)</p>
-        <p>Échelonnée mais <b>pas</b> réduite (pivot \(3\neq1\), colonne du pivot non « nettoyée »). RREF : \(L_3\leftarrow\tfrac13L_3\), puis \(L_1\leftarrow L_1+L_3\), \(L_2\leftarrow L_2-2L_3\).</p>
-        <p class="res">\(\begin{pmatrix}1&0&0&1/3\\0&1&0&-2/3\\0&0&1&1/3\\0&0&0&0\end{pmatrix}\)</p>
-        <p class="q">\(B=\begin{pmatrix}1&1&-1&2\\0&1&2&7\\0&0&0&-10\\0&0&0&0\end{pmatrix}\)</p>
-        <p>Pas réduite. \(L_3\leftarrow-\tfrac1{10}L_3\), puis nettoyage colonne 4 et colonne 2.</p>
-        <p class="res">\(\begin{pmatrix}1&0&-3&0\\0&1&2&0\\0&0&0&1\\0&0&0&0\end{pmatrix}\)</p>
-        <p class="q">\(C=\begin{pmatrix}2&1&-1\\1&-1&2\\3&2&1\end{pmatrix}\)</p>
-        <p>Pas échelonnée. Le pivot de Gauss–Jordan mène à l'identité (\(C\) inversible).</p>
-        <p class="res">RREF \(=I_3\)</p>
+        <div class="enonce">Les matrices \(A,B,C\) ci-dessous sont-elles sous forme échelonnée réduite ? Sinon, les transformer en forme échelonnée réduite.</div>
+
+        <p class="q">a) \(A=\begin{pmatrix}1&0&-1&0\\0&1&2&0\\0&0&3&1\\0&0&0&0\end{pmatrix}\)</p>
+        <div class="rappel"><span class="lab">Rappel · forme échelonnée réduite</span>(1) Les lignes nulles sont en bas. (2) Le premier coefficient non nul d'une ligne (le <b>pivot</b>) est à droite du pivot de la ligne précédente. (3) Chaque pivot vaut 1. (4) Un pivot est le <b>seul</b> coefficient non nul de sa colonne.</div>
+        <p class="etape">Étape 1 : tester les conditions</p>
+        <p>\(A\) est échelonnée. Mais le pivot de la ligne 3 vaut 3, et sa colonne contient d'autres coefficients non nuls : elle n'est pas réduite.</p>
+        <p class="etape">Étape 2 : opérations sur les lignes</p>
+        <ul>
+          <li>\(L_3\leftarrow\tfrac13L_3\) : le pivot vaut 1.</li>
+          <li>\(L_1\leftarrow L_1+L_3\) et \(L_2\leftarrow L_2-2L_3\) : on annule la colonne 3.</li>
+        </ul>
+        <div class="res">\(\begin{pmatrix}1&0&0&\tfrac13\\0&1&0&-\tfrac23\\0&0&1&\tfrac13\\0&0&0&0\end{pmatrix}\)</div>
+
+        <p class="q">b) \(B=\begin{pmatrix}1&1&-1&2\\0&1&2&7\\0&0&0&-10\\0&0&0&0\end{pmatrix}\)</p>
+        <p class="etape">Étape 1 : tester les conditions</p>
+        <p>Échelonnée, mais le pivot de la ligne 3 est \(-10\), et les colonnes 2 et 4 ont d'autres coefficients non nuls : non réduite.</p>
+        <p class="etape">Étape 2 : opérations sur les lignes</p>
+        <ul>
+          <li>\(L_3\leftarrow-\tfrac1{10}L_3\), qui donne \((0,0,0,1)\).</li>
+          <li>\(L_1\leftarrow L_1-2L_3\) et \(L_2\leftarrow L_2-7L_3\) : on annule la colonne 4.</li>
+          <li>\(L_1\leftarrow L_1-L_2\) : on annule la colonne 2.</li>
+        </ul>
+        <div class="res">\(\begin{pmatrix}1&0&-3&0\\0&1&2&0\\0&0&0&1\\0&0&0&0\end{pmatrix}\)</div>
+
+        <p class="q">c) \(C=\begin{pmatrix}2&1&-1\\1&-1&2\\3&2&1\end{pmatrix}\)</p>
+        <p class="etape">Étape 1 : tester les conditions</p>
+        <p>Pas échelonnée (les premiers coefficients des lignes 2 et 3 ne sont pas nuls).</p>
+        <p class="etape">Étape 2 : pivot de Gauss–Jordan</p>
+        <p>On échelonne, puis on réduit : toutes les colonnes ont un pivot. Comme \(\det C=-10\neq0\), la forme réduite est l'identité.</p>
+        <div class="res">\(\operatorname{RREF}(C)=I_3\) : \(C\) est inversible.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 2 — Gauss &amp; Gauss–Jordan</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">\(S_1:\ 2x+3y=3,\ x-5y=8\)</p><p class="res">\((x,y)=(3,-1)\)</p>
-        <p class="q">\(S_2:\ 3x+5y=-1,\ 5x-4y=2\)</p><p>\(\Delta=-37\).</p><p class="res">\((x,y)=\big(\tfrac6{37},-\tfrac{11}{37}\big)\)</p>
-        <p class="q">\(S_3:\ x+2y-z=4,\ 2x-y+3z=9,\ -x+3y+2z=7\)</p><p>\(L_2-2L_1\) et \(L_3+L_1\) donnent \(-5y+5z=1\) et \(5y+z=11\), d'où \(z=2\).</p><p class="res">\((x,y,z)=\big(\tfrac{12}5,\tfrac95,2\big)\)</p>
-        <p class="q">\(S_4:\ x+y+2z=3,\ x+2y+z=1,\ 2x+y+z=0\)</p><p>\(L_2-L_1:\ y-z=-2\), \(L_3-2L_1:\ -y-3z=-6\), somme \(-4z=-8\).</p><p class="res">\((x,y,z)=(-1,0,2)\)</p>
+        <div class="enonce">Résoudre les systèmes suivants par le pivot de Gauss (échelonner puis remonter) puis par Gauss–Jordan (forme échelonnée réduite).</div>
+
+        <p class="q">a) \(S_1:\ 2x+3y=3,\ x-5y=8\)</p>
+        <div class="rappel"><span class="lab">Rappel · opérations élémentaires</span>Échanger deux lignes ; multiplier une ligne par un scalaire non nul ; ajouter à une ligne un multiple d'une autre. Elles ne changent pas l'ensemble des solutions.</div>
+        <p class="etape">Étape 1 : matrice augmentée et Gauss</p>
+        \[ \left(\begin{array}{cc|c}2&3&3\\1&-5&8\end{array}\right)\ \xrightarrow{L_2\leftarrow2L_2-L_1}\ \left(\begin{array}{cc|c}2&3&3\\0&-13&13\end{array}\right) \]
+        <p class="etape">Étape 2 : remontée</p>
+        <p>\(y=-1\), puis \(2x=3-3y=6\), donc \(x=3\).</p>
+        <p class="etape">Étape 3 : Gauss–Jordan (lecture directe)</p>
+        \[ \left(\begin{array}{cc|c}1&0&3\\0&1&-1\end{array}\right) \]
+        <div class="res">\((x,y)=(3,-1)\)</div>
+
+        <p class="q">b) \(S_2:\ 3x+5y=-1,\ 5x-4y=2\)</p>
+        <p class="etape">Étape 1 : Gauss</p>
+        \[ \left(\begin{array}{cc|c}3&5&-1\\5&-4&2\end{array}\right)\ \xrightarrow{L_2\leftarrow3L_2-5L_1}\ \left(\begin{array}{cc|c}3&5&-1\\0&-37&11\end{array}\right) \]
+        <p class="etape">Étape 2 : remontée</p>
+        <p>\(y=-\tfrac{11}{37}\), puis \(3x=-1-5y=\tfrac{18}{37}\), donc \(x=\tfrac6{37}\).</p>
+        <p class="etape">Étape 3 : Gauss–Jordan</p>
+        \[ \left(\begin{array}{cc|c}1&0&\tfrac6{37}\\0&1&-\tfrac{11}{37}\end{array}\right) \]
+        <div class="res">\((x,y)=\big(\tfrac6{37},-\tfrac{11}{37}\big)\)</div>
+
+        <p class="q">c) \(S_3:\ x+2y-z=4,\ 2x-y+3z=9,\ -x+3y+2z=7\)</p>
+        <p class="etape">Étape 1 : Gauss</p>
+        <ul>
+          <li>\(L_2\leftarrow L_2-2L_1\) : \(-5y+5z=1\).</li>
+          <li>\(L_3\leftarrow L_3+L_1\) : \(5y+z=11\).</li>
+          <li>\(L_3\leftarrow L_3+L_2\) : \(6z=12\).</li>
+        </ul>
+        <p class="etape">Étape 2 : remontée</p>
+        <p>\(z=2\) ; \(-5y=1-10\) donne \(y=\tfrac95\) ; \(x=4-2y+z=4-\tfrac{18}5+2=\tfrac{12}5\).</p>
+        <p class="etape">Étape 3 : Gauss–Jordan</p>
+        <p>La forme réduite est \(\left(\begin{array}{ccc|c}1&0&0&\tfrac{12}5\\0&1&0&\tfrac95\\0&0&1&2\end{array}\right)\).</p>
+        <div class="res">\((x,y,z)=\big(\tfrac{12}5,\tfrac95,2\big)\)</div>
+
+        <p class="q">d) \(S_4:\ x+y+2z=3,\ x+2y+z=1,\ 2x+y+z=0\)</p>
+        <p class="etape">Étape 1 : Gauss</p>
+        <ul>
+          <li>\(L_2\leftarrow L_2-L_1\) : \(y-z=-2\).</li>
+          <li>\(L_3\leftarrow L_3-2L_1\) : \(-y-3z=-6\).</li>
+          <li>\(L_3\leftarrow L_3+L_2\) : \(-4z=-8\).</li>
+        </ul>
+        <p class="etape">Étape 2 : remontée</p>
+        <p>\(z=2\), \(y=-2+z=0\), \(x=3-y-2z=-1\).</p>
+        <p class="etape">Étape 3 : Gauss–Jordan</p>
+        <p>La forme réduite est \(\left(\begin{array}{ccc|c}1&0&0&-1\\0&1&0&0\\0&0&1&2\end{array}\right)\).</p>
+        <div class="res">\((x,y,z)=(-1,0,2)\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 3 — Résolution complète</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">\(S_1:\ 2x+y=4,\ -x+y-z=2,\ x-2y+2z=-3\)</p>
-        <p>De \(L_1\) : \(y=4-2x\) ; \(L_2\) : \(z=2-3x\) ; report dans \(L_3\) : \(-x-4=-3\Rightarrow x=-1\).</p><p class="res">\((-1,6,5)\)</p>
-        <p class="q">\(S_2:\ 2x-3y+6z+2t=5,\ y-2z+t=1,\ z-3t=2\) (3 éq., 4 inc.)</p>
-        <p>\(z=2+3t\), \(y=5+5t\), \(2x=8-5t\).</p><p class="res">\(\big(4-\tfrac52t,\ 5+5t,\ 2+3t,\ t\big),\ t\in\mathbb R\)</p>
-        <p class="q">\(S_3:\ x-3y+z=1,\ 2x+y+z=-1,\ x+11y-z=5\)</p>
-        <p>\(L_2-2L_1:\ 7y-z=-3\) et \(L_3-L_1:\ 14y-2z=4\Rightarrow7y-z=2\) : contradiction.</p><p class="res">\(S=\varnothing\) (incompatible)</p>
+        <div class="enonce">Résoudre les systèmes suivants par le pivot de Gauss, puis par Gauss–Jordan.</div>
+
+        <p class="q">a) \(S_1:\ 2x+y=4,\ -x+y-z=2,\ x-2y+2z=-3\)</p>
+        <p class="etape">Étape 1 : Gauss</p>
+        <ul>
+          <li>\(L_2\leftarrow2L_2+L_1\) : \(3y-2z=8\).</li>
+          <li>\(L_3\leftarrow2L_3-L_1\) : \(-5y+4z=-10\).</li>
+          <li>\(L_3\leftarrow3L_3+5L_2\) : \(2z=10\).</li>
+        </ul>
+        <p class="etape">Étape 2 : remontée</p>
+        <p>\(z=5\) ; \(3y=8+10\) donne \(y=6\) ; \(2x=4-6\) donne \(x=-1\).</p>
+        <p class="etape">Étape 3 : Gauss–Jordan</p>
+        <p>La forme réduite est \(\left(\begin{array}{ccc|c}1&0&0&-1\\0&1&0&6\\0&0&1&5\end{array}\right)\).</p>
+        <div class="res">\((x,y,z)=(-1,6,5)\)</div>
+
+        <p class="q">b) \(S_2:\ 2x-3y+6z+2t=5,\ y-2z+t=1,\ z-3t=2\) (3 équations, 4 inconnues)</p>
+        <p class="etape">Étape 1 : le système est déjà échelonné</p>
+        <p>Pivots sur \(x,y,z\) ; \(t\) est une inconnue libre (paramètre).</p>
+        <p class="etape">Étape 2 : remontée</p>
+        <ul>
+          <li>\(z=2+3t\).</li>
+          <li>\(y=1+2z-t=5+5t\).</li>
+          <li>\(2x=5+3y-6z-2t=8-5t\), donc \(x=4-\tfrac52t\).</li>
+        </ul>
+        <p class="etape">Étape 3 : Gauss–Jordan</p>
+        <p>La forme réduite est \(\left(\begin{array}{cccc|c}1&0&0&\tfrac52&4\\0&1&0&-5&5\\0&0&1&-3&2\end{array}\right)\).</p>
+        <div class="res">\(S=\big\{\big(4-\tfrac52t,\ 5+5t,\ 2+3t,\ t\big)\mid t\in\mathbb R\big\}\)</div>
+
+        <p class="q">c) \(S_3:\ x-3y+z=1,\ 2x+y+z=-1,\ x+11y-z=5\)</p>
+        <p class="etape">Étape 1 : Gauss</p>
+        <ul>
+          <li>\(L_2\leftarrow L_2-2L_1\) : \(7y-z=-3\).</li>
+          <li>\(L_3\leftarrow L_3-L_1\) : \(14y-2z=4\).</li>
+          <li>\(L_3\leftarrow L_3-2L_2\) : \(0=10\).</li>
+        </ul>
+        <p class="etape">Étape 2 : conclure</p>
+        <p>La ligne \(0=10\) est impossible : le système est incompatible. Gauss–Jordan donne une ligne \((0\ 0\ 0\mid1)\).</p>
+        <div class="res">\(S=\varnothing\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 4 — Système homogène</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <div class="enonce">\(\{x+y+z=0,\ 2x+2y+2z=0\}\).</div>
-        <p>La 2ᵉ équation \(=2\times\) la 1ʳᵉ : une seule équation utile \(x+y+z=0\). \(\operatorname{rg}(A)=1\), \(p=3\), donc \(3-1=2\) paramètres.</p>
-        <div class="res">\(\{(x,y,-x-y)\,:\,x,y\in\mathbb R\}\). Lien : un système homogène est toujours compatible ; nombre de paramètres \(=p-\operatorname{rg}(A)\), solution unique (triviale) \(\iff\operatorname{rg}=p\).</div>
+        <div class="enonce">Résoudre le système homogène \(\{x+y+z=0,\ 2x+2y+2z=0\}\). Déterminer l'ensemble des solutions de \((x,y,z)\in\mathbb R^3\) et expliquer le lien entre le rang de la matrice des coefficients et le nombre de solutions d'un système homogène.</div>
+
+        <p class="q">1) Ensemble des solutions</p>
+        <p class="etape">Étape 1 : simplifier</p>
+        <p>\(L_2\leftarrow L_2-2L_1\) donne \(0=0\) : il ne reste qu'une équation, \(x+y+z=0\).</p>
+        <p class="etape">Étape 2 : paramétrer</p>
+        <p>\(x\) et \(y\) sont libres, \(z=-x-y\).</p>
+        <div class="res">\(S=\{(x,y,-x-y)\mid x,y\in\mathbb R\}\) : un plan de \(\mathbb R^3\).</div>
+
+        <p class="q">2) Lien avec le rang</p>
+        <div class="rappel"><span class="lab">Rappel · rang et système</span>Le rang est le nombre de pivots après échelonnage. Pour un système de \(p\) inconnues : nombre de paramètres libres \(=p-\operatorname{rg}(A)\).</div>
+        <p class="etape">Étape 1 : cas de ce système</p>
+        <p>\(\operatorname{rg}(A)=1\) et \(p=3\) : \(3-1=2\) paramètres.</p>
+        <p class="etape">Étape 2 : cas général</p>
+        <ul>
+          <li>Un système homogène est toujours compatible (\(X=0\) est solution).</li>
+          <li>Il a une seule solution (la solution triviale) si et seulement si \(\operatorname{rg}(A)=p\).</li>
+          <li>Sinon il a une infinité de solutions, de dimension \(p-\operatorname{rg}(A)\).</li>
+        </ul>
+        <div class="res">Solution unique \(\iff\operatorname{rg}(A)=p\) ; sinon \(p-\operatorname{rg}(A)\) paramètres.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 5 — Discussion selon paramètres</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">\(S_1:\ x+y+z-3t=1,\ 2x+y-z+t=-1\)</p>
-        <p>\(L_2-2L_1:\ -y-3z+7t=-3\). \(\operatorname{rg}=2\), \(p=4\) : toujours compatible, 2 paramètres.</p>
-        <p class="res">\(\big(-2+2z-4t,\ 3-3z+7t,\ z,\ t\big),\ z,t\in\mathbb R\)</p>
-        <p class="q">\(S_2:\ x+y+z=3,\ 3x+6y-9z=1,\ 2x+4y-6z=a\)</p>
-        <p>\(L_2-3L_1:\ 3y-12z=-8\) et \(L_3-2L_1:\ 2y-8z=a-6\), soit \(y-4z=-\tfrac83\) et \(y-4z=\tfrac{a-6}2\). Compatible \(\iff a=\tfrac23\).</p>
-        <p class="res">Si \(a\neq\tfrac23\) : \(S=\varnothing\). Si \(a=\tfrac23\) : \(\big(\tfrac{17}3-5z,\ -\tfrac83+4z,\ z\big)\)</p>
-        <p class="q">\(S_3:\ mx+y+z=1,\ x+my+z=m,\ x+y+mz=m^2\)</p>
-        <p>Déterminant \((m-1)^2(m+2)\). Pour \(m\neq1\) : \(x-y=-1\), \(y-z=-m\), et \((m+2)(x+y+z)=1+m+m^2\).</p>
-        <p class="res"><b>\(m\neq1,-2\)</b> : \(x=-\tfrac{m+1}{m+2},\ y=\tfrac1{m+2},\ z=\tfrac{(m+1)^2}{m+2}\) (unique). <b>\(m=1\)</b> : \(x+y+z=1\), infinité (2 param.). <b>\(m=-2\)</b> : \(S=\varnothing\).</p>
-        <p class="q">\(S_4\) (homogène) : \(x+ay+bz=0,\ ax+y+bz=0,\ bx+ay+z=0\)</p>
-        <p>Déterminant \(=(a-1)(b-1)(a+b+1)\).</p>
-        <p class="res">Si \((a-1)(b-1)(a+b+1)\neq0\) : solution triviale \((0,0,0)\) seule. Sinon : infinité de solutions non triviales.</p>
-        <p class="q">\(S_5:\ ax+by+z=1,\ x+aby+z=b,\ x+by+az=1\)</p>
-        <p>Déterminant \(=b(a-1)^2(a+2)\). Pour \(b\neq0,\ a\neq1,\ a\neq-2\) : \(x=z\), et le système se ramène à \((1+a)x+by=1\), \((a-1)(x-by)=1-b\).</p>
-        <p class="res">Cas générique : \(x=z=\dfrac{a-b}{(a-1)(a+2)},\ y=\dfrac{ab+b-2}{b(a-1)(a+2)}\). Cas \(a=1\), \(a=-2\) ou \(b=0\) : discussion séparée (compatibilité à vérifier au cas par cas).</p>
+        <div class="enonce">Résoudre et discuter, selon les valeurs des paramètres réels \(a,b,m\), les systèmes linéaires suivants.</div>
+
+        <p class="q">a) \(S_1:\ x+y+z-3t=1,\ 2x+y-z+t=-1\)</p>
+        <div class="rappel"><span class="lab">Rappel · compatibilité</span>Le système \(AX=B\) est compatible si et seulement si \(\operatorname{rg}(A)=\operatorname{rg}(A\mid B)\). Alors le nombre de paramètres libres vaut \(p-\operatorname{rg}(A)\).</div>
+        <p class="etape">Étape 1 : échelonner</p>
+        \[ L_2\leftarrow L_2-2L_1:\quad -y-3z+7t=-3 \]
+        <p class="etape">Étape 2 : rangs</p>
+        <p>\(\operatorname{rg}(A)=\operatorname{rg}(A\mid B)=2\), \(p=4\) : toujours compatible, 2 paramètres (\(z,t\)).</p>
+        <p class="etape">Étape 3 : remontée</p>
+        <ul>
+          <li>\(y=3-3z+7t\).</li>
+          <li>\(x=1-y-z+3t=-2+2z-4t\).</li>
+        </ul>
+        <div class="res">\(S=\{(-2+2z-4t,\ 3-3z+7t,\ z,\ t)\mid z,t\in\mathbb R\}\)</div>
+
+        <p class="q">b) \(S_2:\ x+y+z=3,\ 3x+6y-9z=1,\ 2x+4y-6z=a\)</p>
+        <p class="etape">Étape 1 : échelonner</p>
+        <ul>
+          <li>\(L_2\leftarrow L_2-3L_1\) : \(3y-12z=-8\), soit \(y-4z=-\tfrac83\).</li>
+          <li>\(L_3\leftarrow L_3-2L_1\) : \(2y-8z=a-6\), soit \(y-4z=\tfrac{a-6}2\).</li>
+        </ul>
+        <p class="etape">Étape 2 : condition de compatibilité</p>
+        <p>Les deux équations sont les mêmes si et seulement si \(\tfrac{a-6}2=-\tfrac83\), soit \(a=\tfrac23\). Sinon on obtient une contradiction.</p>
+        <p class="etape">Étape 3 : résoudre pour \(a=\tfrac23\)</p>
+        <p>\(z\) libre, \(y=-\tfrac83+4z\), \(x=3-y-z=\tfrac{17}3-5z\).</p>
+        <div class="res">Si \(a\neq\tfrac23\) : \(S=\varnothing\). Si \(a=\tfrac23\) : \(S=\{(\tfrac{17}3-5z,\ -\tfrac83+4z,\ z)\mid z\in\mathbb R\}\).</div>
+
+        <p class="q">c) \(S_3:\ mx+y+z=1,\ x+my+z=m,\ x+y+mz=m^2\)</p>
+        <p class="etape">Étape 1 : déterminant</p>
+        \[ \det=\begin{vmatrix}m&1&1\\1&m&1\\1&1&m\end{vmatrix}=(m-1)^2(m+2) \]
+        <p class="etape">Étape 2 : cas \(m\neq1\) et \(m\neq-2\) (système de Cramer)</p>
+        <ul>
+          <li>\(L_1-L_2\) : \((m-1)(x-y)=1-m\), donc \(x-y=-1\).</li>
+          <li>\(L_2-L_3\) : \((m-1)(y-z)=m-m^2\), donc \(y-z=-m\).</li>
+          <li>\(L_1+L_2+L_3\) : \((m+2)(x+y+z)=1+m+m^2\).</li>
+        </ul>
+        <p>Avec \(x=y-1\) et \(z=y+m\), la somme vaut \(3y+m-1\), d'où \(3y=\dfrac{1+m+m^2}{m+2}-m+1=\dfrac3{m+2}\).</p>
+        <p class="etape">Étape 3 : cas \(m=1\)</p>
+        <p>Les trois équations sont \(x+y+z=1\) : rang 1, 2 paramètres.</p>
+        <p class="etape">Étape 4 : cas \(m=-2\)</p>
+        <p>En additionnant les trois équations : \(0=1-2+4=3\). Incompatible.</p>
+        <div class="res">\(m\neq1,-2\) : \(x=-\tfrac{m+1}{m+2}\), \(y=\tfrac1{m+2}\), \(z=\tfrac{(m+1)^2}{m+2}\). \(m=1\) : \(\{(x,y,1-x-y)\}\). \(m=-2\) : \(S=\varnothing\).</div>
+
+        <p class="q">d) \(S_4\) (homogène) : \(x+ay+bz=0,\ ax+y+bz=0,\ bx+ay+z=0\)</p>
+        <p class="etape">Étape 1 : déterminant (Sarrus)</p>
+        \[ \det=1-ab-a^2+ab^2+a^2b-b^2=(a-1)(b-1)(a+b+1) \]
+        <p class="etape">Étape 2 : discuter</p>
+        <ul>
+          <li>\(\det\neq0\) : rang 3, seule la solution triviale.</li>
+          <li>\(\det=0\), c'est-à-dire \(a=1\) ou \(b=1\) ou \(a+b+1=0\) : rang \(\leqslant2\), il y a une infinité de solutions non triviales.</li>
+        </ul>
+        <div class="res">Si \((a-1)(b-1)(a+b+1)\neq0\) : \(S=\{(0,0,0)\}\). Sinon : une infinité de solutions (au moins une droite).</div>
+
+        <p class="q">e) \(S_5:\ ax+by+z=1,\ x+aby+z=b,\ x+by+az=1\)</p>
+        <p class="etape">Étape 1 : déterminant</p>
+        \[ \det=\begin{vmatrix}a&b&1\\1&ab&1\\1&b&a\end{vmatrix}=b(a-1)^2(a+2) \]
+        <p class="etape">Étape 2 : cas \(b\neq0\), \(a\neq1\), \(a\neq-2\) (Cramer)</p>
+        \[ x=z=\frac{a-b}{(a-1)(a+2)} \qquad y=\frac{ab+b-2}{b(a-1)(a+2)} \]
+        <p class="etape">Étape 3 : cas \(b=0\)</p>
+        <p>Le système devient \(ax+z=1\), \(x+z=0\), \(x+az=1\). Avec \(x=-z\) : \((1-a)z=1\) et \((a-1)z=1\). En additionnant : \(0=2\). Incompatible.</p>
+        <p class="etape">Étape 4 : cas \(a=1\) (et \(b\neq0\))</p>
+        <p>Les équations sont \(x+by+z=1\), \(x+by+z=b\), \(x+by+z=1\) : compatibles si et seulement si \(b=1\).</p>
+        <ul>
+          <li>\(b=1\) : une seule équation \(x+y+z=1\) (2 paramètres).</li>
+          <li>\(b\neq1\) : incompatible.</li>
+        </ul>
+        <p class="etape">Étape 5 : cas \(a=-2\) (et \(b\neq0\))</p>
+        <p>La somme des trois équations donne \(0=2+b\) : il faut \(b=-2\).</p>
+        <ul>
+          <li>\(b=-2\) : le rang est 2, et la forme réduite donne \(x=z\), \(y=-\tfrac12-\tfrac z2\) : \(S=\{(t,\ -\tfrac{1+t}2,\ t)\mid t\in\mathbb R\}\).</li>
+          <li>\(b\neq-2\) : incompatible.</li>
+        </ul>
+        <div class="res">Cas générique : solution unique ci-dessus. \(b=0\) : \(\varnothing\). \(a=1\) : \(\varnothing\) si \(b\neq1\), plan \(x+y+z=1\) si \(b=1\). \(a=-2\) : \(\varnothing\) si \(b\neq-2\), droite si \(b=-2\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 6 — Matrice singulière</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <div class="enonce">\(A=\begin{pmatrix}2&-1&1\\-1&2&1\\1&1&2\end{pmatrix}\).</div>
-        <p class="q">1) \(A\) singulière</p><p>\(\det A=2(4-1)-(-1)(-2-1)+1(-1-2)=6-3-3=0\).</p><p class="res">\(\det A=0\) : singulière</p>
-        <p class="q">2) \(AX=b_1=(3,1,3)^T\)</p><p>\(L_1+2L_2:\ 3y+3z=5\) ; \(L_3+L_2:\ 3y+3z=4\) : contradiction.</p><p class="res">\(S=\varnothing\) (incompatible)</p>
-        <p class="q">3) \(AX=b_2=(3,0,3)^T\)</p><p>\(L_1+2L_2\) et \(L_3+L_2\) donnent tous deux \(y+z=1\) : compatible, rang 2.</p><p class="res">\(\{(y+1,\ y,\ 1-y)\,:\,y\in\mathbb R\}\) (infinité)</p>
+        <div class="enonce">\(A=\begin{pmatrix}2&-1&1\\-1&2&1\\1&1&2\end{pmatrix}\). (1) Montrer que \(A\) est singulière. (2) Résoudre \(AX=b_1\) avec \(b_1=(3,1,3)^T\). (3) Résoudre \(AX=b_2\) avec \(b_2=(3,0,3)^T\).</div>
+
+        <p class="q">1) \(A\) est singulière</p>
+        <div class="rappel"><span class="lab">Rappel · singulière</span>Une matrice carrée est <b>singulière</b> (non inversible) si et seulement si son déterminant est nul.</div>
+        <p class="etape">Étape 1 : développer selon la première ligne</p>
+        \[ \det A=2(4-1)-(-1)(-2-1)+1(-1-2)=6-3-3 \]
+        <div class="res">\(\det A=0\) : \(A\) est singulière.</div>
+
+        <p class="q">2) \(AX=b_1\)</p>
+        <p class="etape">Étape 1 : combiner les équations pour éliminer \(x\)</p>
+        <ul>
+          <li>\(L_1+2L_2\) : \(3y+3z=3+2=5\).</li>
+          <li>\(L_3+L_2\) : \(3y+3z=3+1=4\).</li>
+        </ul>
+        <p class="etape">Étape 2 : conclure</p>
+        <p>\(5\neq4\) : contradiction.</p>
+        <div class="res">\(S=\varnothing\) : le système est incompatible.</div>
+
+        <p class="q">3) \(AX=b_2\)</p>
+        <p class="etape">Étape 1 : mêmes combinaisons</p>
+        <ul>
+          <li>\(L_1+2L_2\) : \(3y+3z=3\).</li>
+          <li>\(L_3+L_2\) : \(3y+3z=3\).</li>
+        </ul>
+        <p>Les deux donnent \(y+z=1\) : compatible, de rang 2.</p>
+        <p class="etape">Étape 2 : paramétrer</p>
+        <p>On pose \(y\) libre : \(z=1-y\), puis avec \(L_2\) : \(x=2y+z=1+y\).</p>
+        <div class="res">\(S=\{(1+y,\ y,\ 1-y)\mid y\in\mathbb R\}\) : une infinité de solutions.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 7 — Déterminants</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">\(D_1=\begin{vmatrix}1&3&-3\\-1&2&1\\2&2&-2\end{vmatrix}\)</p><p>\(=1(-6)-3(0)-3(-6)\).</p><p class="res">\(D_1=12\)</p>
-        <p class="q">\(D_2=\begin{vmatrix}2-a&-2&1\\2&-3-a&2\\-1&2&-a\end{vmatrix}\)</p><p>Développement : \(D_2=-a^3-a^2+5a-3=-(a-1)^2(a+3)\).</p><p class="res">\(D_2=-(a-1)^2(a+3)\)</p>
-        <p class="q">\(D_3=\begin{vmatrix}1&3&-3&2\\-1&0&1&-1\\2&2&-2&2\\1&2&0&3\end{vmatrix}\)</p><p>\(L_2\!+\!L_1,\ L_3\!-\!2L_1,\ L_4\!-\!L_1\) annulent la colonne 1 sous le pivot ; le mineur \(3\times3\) vaut \(10\).</p><p class="res">\(D_3=10\)</p>
-        <p class="q">2) \(D_2=0\)</p><p class="res">\(a=1\) (double) ou \(a=-3\)</p>
+        <div class="enonce">(1) Calculer les déterminants \(D_1=\begin{vmatrix}1&3&-3\\-1&2&1\\2&2&-2\end{vmatrix}\), \(D_2=\begin{vmatrix}2-a&-2&1\\2&-3-a&2\\-1&2&-a\end{vmatrix}\), \(D_3=\begin{vmatrix}1&3&-3&2\\-1&0&1&-1\\2&2&-2&2\\1&2&0&3\end{vmatrix}\). (2) Résoudre \(D_2=0\).</div>
+
+        <p class="q">1) \(D_1\)</p>
+        <p class="etape">Étape 1 : développer selon la première ligne</p>
+        \[ D_1=1\big(2(-2)-1\cdot2\big)-3\big((-1)(-2)-1\cdot2\big)+(-3)\big((-1)\cdot2-2\cdot2\big)=-6-0+18 \]
+        <div class="res">\(D_1=12\)</div>
+
+        <p class="q">2) \(D_2\)</p>
+        <p class="etape">Étape 1 : développer selon la première ligne</p>
+        \[ D_2=(2-a)\big[(-3-a)(-a)-4\big]+2\big[-2a+2\big]+\big[4-(3+a)\big] \]
+        <p class="etape">Étape 2 : factoriser</p>
+        <p>\((-3-a)(-a)-4=a^2+3a-4=(a-1)(a+4)\) :</p>
+        \[ D_2=(a-1)\big[(2-a)(a+4)-4-1\big]=(a-1)(-a^2-2a+3)=-(a-1)^2(a+3) \]
+        <div class="res">\(D_2=-(a-1)^2(a+3)\)</div>
+
+        <p class="q">3) \(D_3\)</p>
+        <p class="etape">Étape 1 : annuler la première colonne sous le pivot</p>
+        <div class="rappel"><span class="lab">Rappel · opérations sur les lignes d'un déterminant</span>Ajouter à une ligne un multiple d'une autre ne change pas le déterminant.</div>
+        <p>\(L_2\leftarrow L_2+L_1\), \(L_3\leftarrow L_3-2L_1\), \(L_4\leftarrow L_4-L_1\) :</p>
+        \[ D_3=\begin{vmatrix}1&3&-3&2\\0&3&-2&1\\0&-4&4&-2\\0&-1&3&1\end{vmatrix}=1\times\begin{vmatrix}3&-2&1\\-4&4&-2\\-1&3&1\end{vmatrix} \]
+        <p class="etape">Étape 2 : développer le mineur \(3\times3\)</p>
+        \[ 3(4+6)+2(-4-2)+1(-12+4)=30-12-8 \]
+        <div class="res">\(D_3=10\)</div>
+
+        <p class="q">4) Résoudre \(D_2=0\)</p>
+        <p class="etape">Étape 1 : produit nul</p>
+        \[ -(a-1)^2(a+3)=0 \iff a=1 \text{ ou } a=-3 \]
+        <div class="res">\(a=1\) (racine double) ou \(a=-3\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 8 — Système &amp; déterminant</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <div class="enonce">\(\{x+y=1,\ 2x+2y=b\}\).</div>
-        <p class="q">1) Déterminant</p><p class="res">\(\begin{vmatrix}1&1\\2&2\end{vmatrix}=0\)</p>
-        <p class="q">2-3) Discussion</p><p>Non-Cramer. \(L_2=2L_1\Rightarrow b=2\) requis.</p>
-        <div class="res">\(b\neq2\) : \(S=\varnothing\). \(b=2\) : infinité \(\{(x,1-x)\,:\,x\in\mathbb R\}\).</div>
+        <div class="enonce">\(\{x+y=1,\ 2x+2y=b\}\) avec \(b\in\mathbb R\). (1) Calculer le déterminant de la matrice des coefficients. (2) Discuter l'existence et le nombre de solutions selon \(b\). (3) Résoudre quand c'est possible.</div>
+
+        <p class="q">1) Déterminant</p>
+        <p class="etape">Étape 1 : calculer</p>
+        \[ \begin{vmatrix}1&1\\2&2\end{vmatrix}=2-2=0 \]
+        <div class="res">Le déterminant est nul : ce n'est pas un système de Cramer.</div>
+
+        <p class="q">2) Discussion</p>
+        <p class="etape">Étape 1 : \(L_2\leftarrow L_2-2L_1\)</p>
+        \[ 0=b-2 \]
+        <ul>
+          <li>\(b\neq2\) : contradiction, aucune solution.</li>
+          <li>\(b=2\) : il reste une équation, une infinité de solutions.</li>
+        </ul>
+        <div class="res">\(b\neq2\) : aucune solution ; \(b=2\) : une infinité.</div>
+
+        <p class="q">3) Résolution</p>
+        <p class="etape">Étape 1 : pour \(b=2\)</p>
+        <p>\(x\) libre et \(y=1-x\).</p>
+        <div class="res">\(b=2\) : \(S=\{(x,1-x)\mid x\in\mathbb R\}\) ; \(b\neq2\) : \(S=\varnothing\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 9 — Inversibilité + inverse (cofacteurs)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">\(A=\begin{pmatrix}1&-1&1\\0&1&0\\0&-1&2\end{pmatrix}\), \(\det=2\)</p><p class="res">\(A^{-1}=\dfrac12\begin{pmatrix}2&1&-1\\0&2&0\\0&1&1\end{pmatrix}\)</p>
-        <p class="q">\(B=\begin{pmatrix}1&-2&4\\2&1&3\\5&4&6\end{pmatrix}\), \(\det=0\)</p><p class="res"><b>Non inversible</b></p>
-        <p class="q">\(C=\begin{pmatrix}2&1&0\\-1&1&-1\\1&-2&2\end{pmatrix}\), \(\det=1\)</p><p class="res">\(C^{-1}=\begin{pmatrix}0&-2&-1\\1&4&2\\1&5&3\end{pmatrix}\)</p>
-        <p class="q">\(D=\begin{pmatrix}i&-1&2i\\2&0&2\\-1&0&1\end{pmatrix}\), \(\det=4\)</p><p class="res">\(D^{-1}=\dfrac14\begin{pmatrix}0&1&-2\\-4&3i&2i\\0&1&2\end{pmatrix}\)</p>
+        <div class="enonce">Pour chaque matrice, déterminer si elle est inversible ; si oui, calculer son inverse par la méthode des cofacteurs.</div>
+
+        <p class="q">a) \(A=\begin{pmatrix}1&-1&1\\0&1&0\\0&-1&2\end{pmatrix}\)</p>
+        <div class="rappel"><span class="lab">Rappel · inverse par cofacteurs</span>\(A\) est inversible si et seulement si \(\det A\neq0\), et \[ A^{-1}=\frac1{\det A}\,(\operatorname{Com}A)^T,\qquad \operatorname{Com}(A)_{ij}=(-1)^{i+j}\Delta_{ij} \]</div>
+        <p class="etape">Étape 1 : déterminant (développement selon la colonne 1)</p>
+        \[ \det A=1\begin{vmatrix}1&0\\-1&2\end{vmatrix}=2\neq0 \]
+        <p class="etape">Étape 2 : comatrice</p>
+        \[ \operatorname{Com}A=\begin{pmatrix}2&0&0\\1&2&1\\-1&0&1\end{pmatrix} \]
+        <p class="etape">Étape 3 : transposer et diviser par 2</p>
+        <div class="res">\(A^{-1}=\dfrac12\begin{pmatrix}2&1&-1\\0&2&0\\0&1&1\end{pmatrix}\)</div>
+
+        <p class="q">b) \(B=\begin{pmatrix}1&-2&4\\2&1&3\\5&4&6\end{pmatrix}\)</p>
+        <p class="etape">Étape 1 : déterminant</p>
+        \[ \det B=1(6-12)+2(12-15)+4(8-5)=-6-6+12=0 \]
+        <div class="res">\(\det B=0\) : \(B\) n'est <b>pas inversible</b>.</div>
+
+        <p class="q">c) \(C=\begin{pmatrix}2&1&0\\-1&1&-1\\1&-2&2\end{pmatrix}\)</p>
+        <p class="etape">Étape 1 : déterminant</p>
+        \[ \det C=2(2-2)-1(-2+1)+0=1\neq0 \]
+        <p class="etape">Étape 2 : comatrice</p>
+        \[ \operatorname{Com}C=\begin{pmatrix}0&1&1\\-2&4&5\\-1&2&3\end{pmatrix} \]
+        <p class="etape">Étape 3 : transposer</p>
+        <div class="res">\(C^{-1}=\begin{pmatrix}0&-2&-1\\1&4&2\\1&5&3\end{pmatrix}\)</div>
+
+        <p class="q">d) \(D=\begin{pmatrix}i&-1&2i\\2&0&2\\-1&0&1\end{pmatrix}\)</p>
+        <p class="etape">Étape 1 : déterminant (développement selon la colonne 2, un seul terme non nul)</p>
+        \[ \det D=-(-1)\begin{vmatrix}2&2\\-1&1\end{vmatrix}=1\times(2+2)=4\neq0 \]
+        <p class="etape">Étape 2 : comatrice</p>
+        \[ \operatorname{Com}D=\begin{pmatrix}0&-4&0\\1&3i&1\\-2&2i&2\end{pmatrix} \]
+        <p class="etape">Étape 3 : transposer et diviser par 4</p>
+        <div class="res">\(D^{-1}=\dfrac14\begin{pmatrix}0&1&-2\\-4&3i&2i\\0&1&2\end{pmatrix}\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 10 — Inversibilité (Gauss / cofacteurs)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">\(A=\begin{pmatrix}2&1\\-1&4\end{pmatrix}\), \(\det=9\)</p><p class="res">\(A^{-1}=\tfrac19\begin{pmatrix}4&-1\\1&2\end{pmatrix}\)</p>
-        <p class="q">\(B=\begin{pmatrix}4&1\\5&9\end{pmatrix}\), \(\det=31\)</p><p class="res">\(B^{-1}=\tfrac1{31}\begin{pmatrix}9&-1\\-5&4\end{pmatrix}\)</p>
-        <p class="q">\(C=\begin{pmatrix}1&1&-1\\2&0&1\\2&1&-1\end{pmatrix}\), \(\det=1\)</p><p class="res">\(C^{-1}=\begin{pmatrix}-1&0&1\\4&1&-3\\2&1&-2\end{pmatrix}\)</p>
-        <p class="q">\(D=\begin{pmatrix}2&2&-1\\2&-1&2\\-1&2&2\end{pmatrix}\), \(\det=-27\)</p><p>On observe \(D^2=9I\), donc \(D^{-1}=\tfrac19D\).</p><p class="res">\(D^{-1}=\tfrac19\begin{pmatrix}2&2&-1\\2&-1&2\\-1&2&2\end{pmatrix}\)</p>
-        <p class="q">\(E=\begin{pmatrix}2&2&1\\-1&1&2\\0&4&5\end{pmatrix}\), \(\det=0\)</p><p class="res"><b>Non inversible</b></p>
-        <p class="q">\(F=\begin{pmatrix}2&2&1\\-1&1&2\\0&4&4\end{pmatrix}\), \(\det=-4\)</p><p class="res">\(F^{-1}=\tfrac14\begin{pmatrix}4&4&-3\\-4&-8&5\\4&8&-4\end{pmatrix}\)</p>
-        <p class="q">\(G=\begin{pmatrix}-1&1&2\\2&3&1\\5&4&2\end{pmatrix}\), \(\det=-15\)</p><p class="res">\(G^{-1}=\tfrac1{15}\begin{pmatrix}-2&-6&5\\-1&12&-5\\7&-9&5\end{pmatrix}\)</p>
-        <p class="q">\(H=\begin{pmatrix}1&1&2\\1&-1&1\\2&1&1\end{pmatrix}\), \(\det=5\)</p><p class="res">\(H^{-1}=\tfrac15\begin{pmatrix}-2&1&3\\1&-3&1\\3&1&-2\end{pmatrix}\)</p>
+        <div class="enonce">Pour chaque matrice, déterminer si elle est inversible ; si oui, calculer l'inverse ; sinon, justifier. On alterne Gauss–Jordan (réduction de \([M\mid I]\)) et les cofacteurs.</div>
+
+        <p class="q">a) \(A=\begin{pmatrix}2&1\\-1&4\end{pmatrix}\) (Gauss–Jordan)</p>
+        <div class="rappel"><span class="lab">Rappel · Gauss–Jordan pour l'inverse</span>On réduit \([M\mid I]\) en \([I\mid M^{-1}]\) par des opérations sur les lignes. Si une ligne nulle apparaît à gauche, \(M\) n'est pas inversible.</div>
+        <p class="etape">Étape 1 : réduire \([A\mid I]\)</p>
+        \[ \left(\begin{array}{cc|cc}2&1&1&0\\-1&4&0&1\end{array}\right)\xrightarrow{L_2\leftarrow2L_2+L_1}\left(\begin{array}{cc|cc}2&1&1&0\\0&9&1&2\end{array}\right) \]
+        <p>Puis \(L_2\leftarrow\tfrac19L_2\), \(L_1\leftarrow L_1-L_2\), \(L_1\leftarrow\tfrac12L_1\) :</p>
+        \[ \left(\begin{array}{cc|cc}1&0&\tfrac49&-\tfrac19\\0&1&\tfrac19&\tfrac29\end{array}\right) \]
+        <div class="res">\(A^{-1}=\tfrac19\begin{pmatrix}4&-1\\1&2\end{pmatrix}\) (\(\det A=9\))</div>
+
+        <p class="q">b) \(B=\begin{pmatrix}4&1\\5&9\end{pmatrix}\) (cofacteurs)</p>
+        <p class="etape">Étape 1 : déterminant</p>
+        <p>\(\det B=36-5=31\neq0\).</p>
+        <p class="etape">Étape 2 : comatrice, transposée</p>
+        \[ \operatorname{Com}B=\begin{pmatrix}9&-5\\-1&4\end{pmatrix} \]
+        <div class="res">\(B^{-1}=\tfrac1{31}\begin{pmatrix}9&-1\\-5&4\end{pmatrix}\)</div>
+
+        <p class="q">c) \(C=\begin{pmatrix}1&1&-1\\2&0&1\\2&1&-1\end{pmatrix}\) (Gauss–Jordan)</p>
+        <p class="etape">Étape 1 : réduire \([C\mid I]\)</p>
+        <ul>
+          <li>\(L_2\leftarrow L_2-2L_1\), \(L_3\leftarrow L_3-2L_1\) : lignes \((0,-2,3\mid-2,1,0)\) et \((0,-1,1\mid-2,0,1)\).</li>
+          <li>On échange \(L_2\) et \(L_3\), on normalise les pivots, puis on remonte.</li>
+        </ul>
+        <p class="etape">Étape 2 : résultat et contrôle</p>
+        <p>On trouve la matrice ci-dessous ; \(\det C=1\neq0\), et \(CC^{-1}=I\).</p>
+        <div class="res">\(C^{-1}=\begin{pmatrix}-1&0&1\\4&1&-3\\2&1&-2\end{pmatrix}\)</div>
+
+        <p class="q">d) \(D=\begin{pmatrix}2&2&-1\\2&-1&2\\-1&2&2\end{pmatrix}\) (cofacteurs)</p>
+        <p class="etape">Étape 1 : déterminant</p>
+        \[ \det D=2(-2-4)-2(4+2)-1(4-1)=-12-12-3=-27\neq0 \]
+        <p class="etape">Étape 2 : comatrice (symétrique ici)</p>
+        \[ \operatorname{Com}D=\begin{pmatrix}-6&-6&3\\-6&3&-6\\3&-6&-6\end{pmatrix}=-3D \]
+        <p class="etape">Étape 3 : inverse</p>
+        <p>\(D^{-1}=\dfrac{-3D}{-27}=\dfrac D9\) (on a \(D^2=9I\)).</p>
+        <div class="res">\(D^{-1}=\tfrac19\begin{pmatrix}2&2&-1\\2&-1&2\\-1&2&2\end{pmatrix}\)</div>
+
+        <p class="q">e) \(E=\begin{pmatrix}2&2&1\\-1&1&2\\0&4&5\end{pmatrix}\) (Gauss–Jordan)</p>
+        <p class="etape">Étape 1 : chercher une dépendance linéaire</p>
+        <p>On remarque \(L_1+2L_2=(2-2,\ 2+2,\ 1+4)=(0,4,5)=L_3\).</p>
+        <p class="etape">Étape 2 : conséquence</p>
+        <p>Après \(L_3\leftarrow L_3-L_1-2L_2\), une ligne nulle apparaît à gauche dans \([E\mid I]\) : la réduction ne peut pas aboutir à \(I\).</p>
+        <div class="res">\(\det E=0\) : \(E\) n'est <b>pas inversible</b> (\(L_3=L_1+2L_2\)).</div>
+
+        <p class="q">f) \(F=\begin{pmatrix}2&2&1\\-1&1&2\\0&4&4\end{pmatrix}\) (cofacteurs)</p>
+        <p class="etape">Étape 1 : déterminant</p>
+        \[ \det F=2(4-8)-2(-4-0)+1(-4-0)=-8+8-4=-4\neq0 \]
+        <p class="etape">Étape 2 : comatrice</p>
+        \[ \operatorname{Com}F=\begin{pmatrix}-4&4&-4\\-4&8&-8\\3&-5&4\end{pmatrix} \]
+        <p class="etape">Étape 3 : transposer et diviser par \(-4\)</p>
+        <div class="res">\(F^{-1}=\tfrac14\begin{pmatrix}4&4&-3\\-4&-8&5\\4&8&-4\end{pmatrix}\)</div>
+
+        <p class="q">g) \(G=\begin{pmatrix}-1&1&2\\2&3&1\\5&4&2\end{pmatrix}\) (Gauss–Jordan)</p>
+        <p class="etape">Étape 1 : déterminant, pour contrôle</p>
+        \[ \det G=-1(6-4)-1(4-5)+2(8-15)=-2+1-14=-15\neq0 \]
+        <p class="etape">Étape 2 : réduire \([G\mid I]\)</p>
+        <ul>
+          <li>\(L_1\leftarrow-L_1\) : \((1,-1,-2\mid-1,0,0)\).</li>
+          <li>\(L_2\leftarrow L_2-2L_1\) : \((0,5,5\mid2,1,0)\) ; \(L_3\leftarrow L_3-5L_1\) : \((0,9,12\mid5,0,1)\).</li>
+          <li>\(L_2\leftarrow\tfrac15L_2\) : \((0,1,1\mid\tfrac25,\tfrac15,0)\) ; \(L_3\leftarrow L_3-9L_2\) : \((0,0,3\mid\tfrac75,-\tfrac95,1)\).</li>
+          <li>\(L_3\leftarrow\tfrac13L_3\) : \((0,0,1\mid\tfrac7{15},-\tfrac35,\tfrac13)\).</li>
+          <li>\(L_2\leftarrow L_2-L_3\) : \((0,1,0\mid-\tfrac1{15},\tfrac45,-\tfrac13)\) ; \(L_1\leftarrow L_1+L_2+2L_3\) : \((1,0,0\mid-\tfrac2{15},-\tfrac25,\tfrac13)\).</li>
+        </ul>
+        <div class="res">\(G^{-1}=\tfrac1{15}\begin{pmatrix}-2&-6&5\\-1&12&-5\\7&-9&5\end{pmatrix}\)</div>
+
+        <p class="q">h) \(H=\begin{pmatrix}1&1&2\\1&-1&1\\2&1&1\end{pmatrix}\) (cofacteurs)</p>
+        <p class="etape">Étape 1 : déterminant</p>
+        \[ \det H=1(-1-1)-1(1-2)+2(1+2)=-2+1+6=5\neq0 \]
+        <p class="etape">Étape 2 : comatrice (symétrique)</p>
+        \[ \operatorname{Com}H=\begin{pmatrix}-2&1&3\\1&-3&1\\3&1&-2\end{pmatrix} \]
+        <div class="res">\(H^{-1}=\tfrac15\begin{pmatrix}-2&1&3\\1&-3&1\\3&1&-2\end{pmatrix}\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 11 — Détection d'erreurs</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">\(A=\begin{pmatrix}1&1&-2\\2&1&-1\\3&2&-2\end{pmatrix}\), \(A_p^{-1}=\begin{pmatrix}0&2&1\\-1&-4&3\\-1&-1&0\end{pmatrix}\)</p>
-        <p>Le vrai inverse (\(\det=-1\)) est \(\begin{pmatrix}0&2&-1\\-1&-4&3\\-1&-1&1\end{pmatrix}\).</p>
-        <p class="res"><b>Faux</b> : erreurs en \((1,3)\) (\(-1\) et non \(+1\)) et \((3,3)\) (\(+1\) et non \(0\)) — la 3ᵉ colonne.</p>
-        <p class="q">\(B=\begin{pmatrix}-1&0&1\\1&1&-1\\0&2&2\end{pmatrix}\), \(B_p^{-1}=\tfrac12\begin{pmatrix}-4&-2&1\\1&1&-1\\-2&-2&1\end{pmatrix}\)</p>
-        <p>Le vrai inverse (\(\det=-2\)) est \(\tfrac12\begin{pmatrix}-4&-2&1\\2&2&0\\-2&-2&1\end{pmatrix}\).</p>
-        <p class="res"><b>Faux</b> : la 2ᵉ ligne est erronée (devrait être \(\tfrac12(2,2,0)=(1,1,0)\)).</p>
-        <p class="q">\(C=\begin{pmatrix}1&0&-1\\0&1&0\\-1&0&1\end{pmatrix}\), \(C_p^{-1}=\tfrac14\begin{pmatrix}1&0&-1\\0&1&0\\-1&0&1\end{pmatrix}\)</p>
-        <p>\(\det C=0\) : \(C\) n'est <b>pas inversible</b>, aucun inverse n'existe.</p>
-        <p class="res"><b>Faux</b> : \(C\) est singulière (\(\det=0\)), la proposition n'a pas de sens.</p>
+        <div class="enonce">Pour chaque matrice \(M\) et chaque candidat \(M_p^{-1}\), vérifier si c'est bien l'inverse de \(M\) ; sinon indiquer l'erreur.</div>
+
+        <p class="q">a) \(A=\begin{pmatrix}1&1&-2\\2&1&-1\\3&2&-2\end{pmatrix}\), \(A_p^{-1}=\begin{pmatrix}0&2&1\\-1&-4&3\\-1&-1&0\end{pmatrix}\)</p>
+        <div class="rappel"><span class="lab">Rappel · vérifier un inverse</span>\(N\) est l'inverse de \(M\) si et seulement si \(MN=I\). On peut aussi calculer \(M^{-1}\) et comparer.</div>
+        <p class="etape">Étape 1 : déterminant et vrai inverse</p>
+        <p>\(\det A=-1\neq0\), et le calcul par cofacteurs donne :</p>
+        \[ A^{-1}=\begin{pmatrix}0&2&-1\\-1&-4&3\\-1&-1&1\end{pmatrix} \]
+        <p class="etape">Étape 2 : comparer avec le candidat</p>
+        <p>Les deux matrices diffèrent dans la 3ᵉ colonne : en position \((1,3)\), le candidat porte \(+1\) au lieu de \(-1\) ; en position \((3,3)\), il porte \(0\) au lieu de \(1\).</p>
+        <div class="res"><b>Faux</b> : erreurs en \((1,3)\) et \((3,3)\).</div>
+
+        <p class="q">b) \(B=\begin{pmatrix}-1&0&1\\1&1&-1\\0&2&2\end{pmatrix}\), \(B_p^{-1}=\tfrac12\begin{pmatrix}-4&-2&1\\1&1&-1\\-2&-2&1\end{pmatrix}\)</p>
+        <p class="etape">Étape 1 : déterminant et vrai inverse</p>
+        <p>\(\det B=-2\neq0\) et</p>
+        \[ B^{-1}=\tfrac12\begin{pmatrix}-4&-2&1\\2&2&0\\-2&-2&1\end{pmatrix} \]
+        <p class="etape">Étape 2 : comparer</p>
+        <p>Seule la 2ᵉ ligne diffère : le candidat a \(\tfrac12(1,1,-1)\), au lieu de \(\tfrac12(2,2,0)=(1,1,0)\).</p>
+        <div class="res"><b>Faux</b> : la 2ᵉ ligne est erronée.</div>
+
+        <p class="q">c) \(C=\begin{pmatrix}1&0&-1\\0&1&0\\-1&0&1\end{pmatrix}\), \(C_p^{-1}=\tfrac14\begin{pmatrix}1&0&-1\\0&1&0\\-1&0&1\end{pmatrix}\)</p>
+        <p class="etape">Étape 1 : déterminant</p>
+        <p>\(L_3=-L_1\), donc \(\det C=0\).</p>
+        <div class="res"><b>Faux</b> : \(C\) n'est pas inversible, aucun candidat ne peut être son inverse. (Vérification : \(C\,C_p^{-1}=\tfrac14\begin{pmatrix}2&0&-2\\0&1&0\\-2&0&2\end{pmatrix}\neq I\).)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 12 — Système \(2\times2\) inversible</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <div class="enonce">\(A=\begin{pmatrix}2&1\\1&1\end{pmatrix}\), \(AX=B=\begin{pmatrix}b_1\\b_2\end{pmatrix}\).</div>
-        <p class="q">1) Inversible</p><p>\(\det A=1\neq0\), \(A^{-1}=\begin{pmatrix}1&-1\\-1&2\end{pmatrix}\).</p>
-        <p class="q">2-3) Solution</p><p>\(X=A^{-1}B\).</p>
-        <div class="res">\(x=b_1-b_2,\ y=-b_1+2b_2\) — unique pour tout \(B\) (système de Cramer).</div>
+        <div class="enonce">\(A=\begin{pmatrix}2&1\\1&1\end{pmatrix}\), \(AX=B\) avec \(B=\begin{pmatrix}b_1\\b_2\end{pmatrix}\). (1) Montrer que \(A\) est inversible. (2) Résoudre \(AX=B\). (3) Conclure sur l'existence et l'unicité de la solution pour tout \(B\).</div>
+
+        <p class="q">1) \(A\) est inversible</p>
+        <p class="etape">Étape 1 : déterminant</p>
+        <p>\(\det A=2-1=1\neq0\).</p>
+        <p class="etape">Étape 2 : inverse</p>
+        <div class="res">\(A^{-1}=\begin{pmatrix}1&-1\\-1&2\end{pmatrix}\)</div>
+
+        <p class="q">2) Résolution de \(AX=B\)</p>
+        <p class="etape">Étape 1 : multiplier par \(A^{-1}\)</p>
+        \[ X=A^{-1}B=\begin{pmatrix}b_1-b_2\\-b_1+2b_2\end{pmatrix} \]
+        <div class="res">\(x=b_1-b_2\) et \(y=-b_1+2b_2\).</div>
+
+        <p class="q">3) Existence et unicité</p>
+        <p class="etape">Étape 1 : conclure</p>
+        <p>Pour tout \(B\in\mathbb R^2\), la formule donne une solution, et c'est la seule (par inversibilité de \(A\)).</p>
+        <div class="res">Le système a une solution <b>unique</b> pour tout second membre (système de Cramer).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 13 — Règle de Cramer</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">\(S_1:\ 2x+2z=-1,\ y+z=0,\ x+2y+z=-4\)</p>
-        <p>\(\Delta=-4\), \(\Delta_x=9\), \(\Delta_y=7\), \(\Delta_z=-7\).</p>
-        <p class="res">\(\big(x,y,z\big)=\big(-\tfrac94,-\tfrac74,\tfrac74\big)\)</p>
-        <p class="q">\(S_2:\ x+y+2z=3,\ x+2y+z=1,\ 2x+y+z=0\)</p>
-        <p>\(\Delta=-4\), \(\Delta_x=4\), \(\Delta_y=0\), \(\Delta_z=-8\).</p>
-        <p class="res">\((x,y,z)=(-1,0,2)\)</p>
+        <div class="enonce">Résoudre, à l'aide de la règle de Cramer, les deux systèmes suivants.</div>
+
+        <p class="q">a) \(S_1:\ 2x+2z=-1,\ y+z=0,\ x+2y+z=-4\)</p>
+        <div class="rappel"><span class="lab">Rappel · règle de Cramer</span>Si \(\Delta=\det A\neq0\) : \(x_i=\dfrac{\Delta_i}{\Delta}\), où \(\Delta_i\) est \(\det A\) avec la colonne \(i\) remplacée par le second membre.</div>
+        <p class="etape">Étape 1 : \(\Delta\)</p>
+        \[ \Delta=\begin{vmatrix}2&0&2\\0&1&1\\1&2&1\end{vmatrix}=2(1-2)+2(0-1)=-4 \]
+        <p class="etape">Étape 2 : \(\Delta_x,\Delta_y,\Delta_z\)</p>
+        <p>En remplaçant successivement chaque colonne par \((-1,0,-4)^T\) :</p>
+        \[ \Delta_x=9 \qquad \Delta_y=7 \qquad \Delta_z=-7 \]
+        <div class="res">\((x,y,z)=\big(-\tfrac94,\ -\tfrac74,\ \tfrac74\big)\)</div>
+
+        <p class="q">b) \(S_2:\ x+y+2z=3,\ x+2y+z=1,\ 2x+y+z=0\)</p>
+        <p class="etape">Étape 1 : \(\Delta\)</p>
+        \[ \Delta=\begin{vmatrix}1&1&2\\1&2&1\\2&1&1\end{vmatrix}=1(2-1)-1(1-2)+2(1-4)=-4 \]
+        <p class="etape">Étape 2 : \(\Delta_x,\Delta_y,\Delta_z\)</p>
+        <p>En remplaçant successivement chaque colonne par \((3,1,0)^T\) :</p>
+        \[ \Delta_x=4 \qquad \Delta_y=0 \qquad \Delta_z=-8 \]
+        <div class="res">\((x,y,z)=(-1,\ 0,\ 2)\) (même solution que l'exercice 2 d).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 14 — Interpolation polynomiale</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <div class="enonce">\(A(1,2)\), \(B(-1,4)\), \(C(5,6)\), \(D(-3,-2)\), \(E(7,12)\).</div>
-        <p class="q">a) Degré 2 par \(A,B,C\)</p>
-        <p>\(P(x)=ax^2+bx+c\) : \(a+b+c=2\), \(a-b+c=4\), \(25a+5b+c=6\) \(\Rightarrow b=-1,\ a=\tfrac13,\ c=\tfrac83\).</p>
-        <p class="res">\(P(x)=\tfrac13x^2-x+\tfrac83\)</p>
-        <p class="q">b) Degré 3 par \(A,B,C,D\)</p>
-        <p>Résolution du système \(4\times4\) : \(a=\tfrac16,\ b=-\tfrac12,\ c=-\tfrac76,\ d=\tfrac72\).</p>
-        <p class="res">\(Q(x)=\tfrac16x^3-\tfrac12x^2-\tfrac76x+\tfrac72\)</p>
-        <p class="q">c) Degré 4 par \(A,B,C,D,E\)</p>
-        <p>On pose \(R(x)=Q(x)+k(x-1)(x+1)(x-5)(x+3)\) (annule en \(A,B,C,D\)). \(R(7)=12\) : \(Q(7)=28\) et le produit vaut \(960\), d'où \(28+960k=12\Rightarrow k=-\tfrac1{60}\).</p>
-        <p class="res">\(R(x)=\tfrac16x^3-\tfrac12x^2-\tfrac76x+\tfrac72-\tfrac1{60}(x-1)(x+1)(x-5)(x+3)\)</p>
+        <div class="enonce">Soient \(A(1\,;2)\), \(B(-1\,;4)\), \(C(5\,;6)\), \(D(-3\,;-2)\), \(E(7\,;12)\). (a) Trouver le polynôme de degré 2 passant par \(A,B,C\). (b) Le polynôme de degré 3 passant par \(A,B,C,D\). (c) Le polynôme de degré 4 passant par \(A,B,C,D,E\).</div>
+
+        <p class="q">a) Polynôme de degré 2 par \(A,B,C\)</p>
+        <p class="etape">Étape 1 : poser \(P(x)=ax^2+bx+c\) et écrire les trois conditions</p>
+        \[ a+b+c=2 \qquad a-b+c=4 \qquad 25a+5b+c=6 \]
+        <p class="etape">Étape 2 : résoudre</p>
+        <p>\(L_1-L_2\) donne \(2b=-2\), donc \(b=-1\). Puis \(a+c=3\) et \(25a+c=11\), donc \(24a=8\), \(a=\tfrac13\), \(c=\tfrac83\).</p>
+        <div class="res">\(P(x)=\tfrac13x^2-x+\tfrac83\)</div>
+
+        <p class="q">b) Polynôme de degré 3 par \(A,B,C,D\)</p>
+        <p class="etape">Étape 1 : poser \(Q(x)=ax^3+bx^2+cx+d\) et résoudre le système \(4\times4\)</p>
+        \[ \begin{cases}a+b+c+d=2\\-a+b-c+d=4\\125a+25b+5c+d=6\\-27a+9b-3c+d=-2\end{cases} \]
+        <p class="etape">Étape 2 : résultat</p>
+        <p>Par Gauss : \(a=\tfrac16\), \(b=-\tfrac12\), \(c=-\tfrac76\), \(d=\tfrac72\). Contrôle en \(x=1\) : \(\tfrac16-\tfrac12-\tfrac76+\tfrac72=2\).</p>
+        <div class="res">\(Q(x)=\tfrac16x^3-\tfrac12x^2-\tfrac76x+\tfrac72\)</div>
+
+        <p class="q">c) Polynôme de degré 4 par \(A,B,C,D,E\)</p>
+        <p class="etape">Étape 1 : chercher \(R=Q+k\,T\)</p>
+        <p>Le polynôme \(T(x)=(x-1)(x+1)(x-5)(x+3)\) s'annule en \(A,B,C,D\). Donc \(Q+kT\) passe encore par ces quatre points, pour tout \(k\).</p>
+        <p class="etape">Étape 2 : imposer \(R(7)=12\)</p>
+        \[ Q(7)=28 \qquad T(7)=6\times8\times2\times10=960 \qquad 28+960k=12 \iff k=-\tfrac1{60} \]
+        <p class="etape">Étape 3 : développer</p>
+        <div class="res">\(R(x)=Q(x)-\tfrac1{60}(x-1)(x+1)(x-5)(x+3)=-\tfrac1{60}x^4+\tfrac15x^3-\tfrac7{30}x^2-\tfrac65x+\tfrac{13}4\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 15 — Puissances &amp; inverse</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <div class="enonce">\(A=\begin{pmatrix}2&1&1\\1&2&1\\1&1&2\end{pmatrix}\).</div>
-        <p class="q">1) \(A^2=\alpha A+\beta I\)</p>
-        <p>\(A^2=\begin{pmatrix}6&5&5\\5&6&5\\5&5&6\end{pmatrix}\). Diagonale \(6=2\alpha+\beta\), hors-diag \(5=\alpha\Rightarrow\alpha=5,\ \beta=-4\).</p>
-        <p class="res">\(A^2=5A-4I\)</p>
-        <p class="q">2) Inverse</p><p>\(A(A-5I)=-4I\).</p><p class="res">\(A^{-1}=\dfrac{5I-A}4=\dfrac14\begin{pmatrix}3&-1&-1\\-1&3&-1\\-1&-1&3\end{pmatrix}\)</p>
-        <p class="q">3) \(A^k=a_kA+b_kI\)</p>
-        <p>\(A^{k+1}=a_k A^2+b_kA=(5a_k+b_k)A-4a_kI\), donc \(a_{k+1}=5a_k+b_k=5a_k-4a_{k-1}\) (équation caractéristique \(r^2-5r+4=0\), racines \(1,4\)).</p>
-        <div class="res">\(a_k=\dfrac{4^k-1}3,\ b_k=\dfrac{4-4^k}3\), soit \(A^k=\dfrac{4^k-1}3A+\dfrac{4-4^k}3I\).</div>
+        <div class="enonce">\(A=\begin{pmatrix}2&1&1\\1&2&1\\1&1&2\end{pmatrix}\). (1) Calculer \(A^2\) et trouver \(\alpha,\beta\) avec \(A^2=\alpha A+\beta I_3\). (2) En déduire que \(A\) est inversible et calculer \(A^{-1}\). (3) Montrer que \(A^k=a_kA+b_kI_3\), donner une relation de récurrence puis une expression explicite.</div>
+
+        <p class="q">1) \(A^2=\alpha A+\beta I_3\)</p>
+        <p class="etape">Étape 1 : calculer \(A^2\)</p>
+        \[ A^2=\begin{pmatrix}6&5&5\\5&6&5\\5&5&6\end{pmatrix} \]
+        <p class="etape">Étape 2 : identifier</p>
+        <p>Hors diagonale : \(5=\alpha\times1\), donc \(\alpha=5\). Diagonale : \(6=2\alpha+\beta\), donc \(\beta=-4\).</p>
+        <div class="res">\(A^2=5A-4I\).</div>
+
+        <p class="q">2) \(A\) est inversible</p>
+        <p class="etape">Étape 1 : isoler \(I\)</p>
+        \[ A^2-5A=-4I \iff A\cdot\frac{5I-A}4=I \]
+        <p class="etape">Étape 2 : calculer</p>
+        <div class="res">\(A\) est inversible et \(A^{-1}=\dfrac14\begin{pmatrix}3&-1&-1\\-1&3&-1\\-1&-1&3\end{pmatrix}\).</div>
+
+        <p class="q">3) \(A^k=a_kA+b_kI_3\)</p>
+        <p>On raisonne par récurrence sur \(k\in\mathbb N\).</p>
+        <p class="etape">Étape 1 : initialisation</p>
+        <p>\(A^0=I\) : \(a_0=0\), \(b_0=1\).</p>
+        <p class="etape">Étape 2 : hérédité, relation de récurrence</p>
+        \[ A^{k+1}=A\,A^k=a_kA^2+b_kA=a_k(5A-4I)+b_kA=(5a_k+b_k)A-4a_kI \]
+        <p>Donc \(a_{k+1}=5a_k+b_k\) et \(b_{k+1}=-4a_k\).</p>
+        <p class="etape">Étape 3 : suite récurrente d'ordre 2</p>
+        <p>Comme \(b_k=-4a_{k-1}\) : \(a_{k+1}=5a_k-4a_{k-1}\). Équation caractéristique \(r^2-5r+4=0\), de racines 1 et 4 : \(a_k=\lambda+\mu4^k\). Avec \(a_0=0\), \(a_1=1\) : \(\lambda+\mu=0\), \(\lambda+4\mu=1\), donc \(\mu=\tfrac13\), \(\lambda=-\tfrac13\).</p>
+        <div class="res">\(a_k=\dfrac{4^k-1}3\), \(b_k=\dfrac{4-4^k}3\), soit \(A^k=\dfrac{4^k-1}3A+\dfrac{4-4^k}3I\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 16 — Synthèse (rang / déterminant / solutions)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <div class="enonce">\(A=\begin{pmatrix}1&1&1\\2&3&4\\1&2&3\end{pmatrix}\).</div>
-        <p class="q">1-2) Déterminant &amp; inversibilité</p><p>\(\det A=1(9-8)-1(6-4)+1(4-3)=1-2+1=0\).</p><p class="res">\(\det A=0\) : non inversible</p>
-        <p class="q">3) \(AX=B\)</p>
-        <p>\(L_2-2L_1\) et \(L_3-L_1\) donnent tous deux \(y+2z\) : \(\operatorname{rg}(A)=2\). Compatibilité : \(b_2-2b_1=b_3-b_1\), soit \(b_1-b_2+b_3=0\).</p>
-        <p class="res">Compatible \(\iff b_3=b_2-b_1\) ; solutions \(\big(3b_1-b_2+t,\ b_2-2b_1-2t,\ t\big),\ t\in\mathbb R\)</p>
-        <p class="q">4) Système homogène</p><p class="res">\(\operatorname{Vect}(1,-2,1)\)</p>
-        <p class="q">5) Lien</p><p class="res">\(\operatorname{rg}=2<3=n\Rightarrow\det=0\), non inversible ; \(AX=B\) a soit \(\varnothing\), soit une infinité (jamais unique).</p>
+        <div class="enonce">\(A=\begin{pmatrix}1&1&1\\2&3&4\\1&2&3\end{pmatrix}\). (1) Calculer \(\det A\). (2) En déduire si \(A\) est inversible. (3) Pour \(B=(b_1,b_2,b_3)^T\), étudier et résoudre \(AX=B\) : (i) condition de compatibilité, (ii) ensemble des solutions. (4) Résoudre le système homogène associé. (5) Relier rang, déterminant et nombre de solutions.</div>
+
+        <p class="q">1) Déterminant</p>
+        <p class="etape">Étape 1 : développer selon la première ligne</p>
+        \[ \det A=1(9-8)-1(6-4)+1(4-3)=1-2+1=0 \]
+        <div class="res">\(\det A=0\).</div>
+
+        <p class="q">2) Inversibilité</p>
+        <div class="res">\(\det A=0\) : \(A\) n'est <b>pas inversible</b>.</div>
+
+        <p class="q">3) Étude de \(AX=B\)</p>
+        <p class="etape">Étape 1 : échelonner</p>
+        <ul>
+          <li>\(L_2\leftarrow L_2-2L_1\) : \(y+2z=b_2-2b_1\).</li>
+          <li>\(L_3\leftarrow L_3-L_1\) : \(y+2z=b_3-b_1\).</li>
+          <li>\(L_3\leftarrow L_3-L_2\) : \(0=b_3-b_1-b_2+2b_1=b_3+b_1-b_2\).</li>
+        </ul>
+        <p>Rang de \(A\) : 2.</p>
+        <p class="etape">Étape 2 : (i) condition de compatibilité</p>
+        <p>\(b_1-b_2+b_3=0\), c'est-à-dire \(b_3=b_2-b_1\).</p>
+        <p class="etape">Étape 3 : (ii) solutions quand c'est compatible</p>
+        <p>\(z=t\) est libre. \(y=b_2-2b_1-2t\), puis \(x=b_1-y-z=3b_1-b_2+t\).</p>
+        <div class="res">Compatible si et seulement si \(b_1-b_2+b_3=0\) ; alors \(S=\{(3b_1-b_2+t,\ b_2-2b_1-2t,\ t)\mid t\in\mathbb R\}\).</div>
+
+        <p class="q">4) Système homogène associé</p>
+        <p class="etape">Étape 1 : prendre \(b_1=b_2=b_3=0\)</p>
+        <p>Les solutions sont \((t,-2t,t)\).</p>
+        <div class="res">\(S_0=\operatorname{Vect}\{(1,-2,1)\}\) : une droite.</div>
+
+        <p class="q">5) Lien entre rang, déterminant et nombre de solutions</p>
+        <div class="rappel"><span class="lab">Rappel · caractérisations de l'inversibilité</span>Pour \(A\in M_n\) : \(\det A\neq0\iff\operatorname{rg}A=n\iff A\) inversible \(\iff AX=B\) a une solution unique pour tout \(B\).</div>
+        <p class="etape">Étape 1 : conclure pour cette matrice</p>
+        <p>Ici \(\operatorname{rg}A=2&lt;3\), donc \(\det A=0\).</p>
+        <div class="res">Pour tout second membre, \(AX=B\) a soit aucune solution (si \(b_1-b_2+b_3\neq0\)), soit une infinité (de dimension \(3-2=1\)) ; jamais une solution unique.</div>
       </div>
     </div>
 
