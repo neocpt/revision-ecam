@@ -88,7 +88,13 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice A — IPP</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">\(\displaystyle\int_0^1 xe^x\,dx\).</div>
-        <p>\(u=x,\ v'=e^x\) : \([xe^x]_0^1-\int_0^1e^x=e-[e^x]_0^1=e-(e-1)\).</p>
+
+        <p class="q">1) Calcul par intégration par parties</p>
+        <div class="rappel"><span class="lab">Rappel · intégration par parties</span>\[ \int_a^bu\,v'=\big[uv\big]_a^b-\int_a^bu'\,v \]On dérive le facteur qui se simplifie (ici \(x\)) et on intègre l'exponentielle.</div>
+        <p class="etape">Étape 1 : choisir \(u\) et \(v'\)</p>
+        \[ u=x,\quad v'=e^x \qquad u'=1,\quad v=e^x \]
+        <p class="etape">Étape 2 : appliquer</p>
+        \[ \int_0^1xe^x\,dx=\big[xe^x\big]_0^1-\int_0^1e^x\,dx=e-(e-1) \]
         <div class="res">\(1\)</div>
       </div>
     </div>
@@ -97,7 +103,13 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice B — Complétion du carré</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">\(\displaystyle\int\frac{dx}{x^2+2x+5}\).</div>
-        <p>\(x^2+2x+5=(x+1)^2+4\).</p>
+
+        <p class="q">1) Calcul de la primitive</p>
+        <p class="etape">Étape 1 : compléter le carré</p>
+        \[ x^2+2x+5=(x+1)^2+4 \]
+        <p class="etape">Étape 2 : primitive de \(\dfrac1{u^2+a^2}\)</p>
+        <div class="rappel"><span class="lab">Rappel · arctangente</span>\[ \int\frac{du}{u^2+a^2}=\frac1a\arctan\frac ua+C \]</div>
+        <p>Avec \(u=x+1\), \(a=2\).</p>
         <div class="res">\(\tfrac12\arctan\dfrac{x+1}2+C\)</div>
       </div>
     </div>
@@ -106,7 +118,13 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice C — Changement de variable</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">\(\displaystyle\int_0^1\frac{2x}{1+x^2}\,dx\) (poser \(u=1+x^2\)).</div>
-        <p>\(u:1\to2\) : \(\int_1^2\tfrac{du}u=\ln2\).</p>
+
+        <p class="q">1) Calcul de l'intégrale</p>
+        <div class="rappel"><span class="lab">Rappel · changement de variable</span>Si \(u=\varphi(x)\), alors \(\displaystyle\int_a^bf(\varphi(x))\varphi'(x)\,dx=\int_{\varphi(a)}^{\varphi(b)}f(u)\,du\). On change aussi les bornes.</div>
+        <p class="etape">Étape 1 : différentielle et bornes</p>
+        <p>\(u=1+x^2\), \(du=2x\,dx\). \(x=0\to u=1\) ; \(x=1\to u=2\).</p>
+        <p class="etape">Étape 2 : intégrer</p>
+        \[ \int_1^2\frac{du}u=\big[\ln u\big]_1^2 \]
         <div class="res">\(\ln2\)</div>
       </div>
     </div>
@@ -115,130 +133,508 @@ window.MathJax = {
   <!-- ==================== CORRECTION TD ========================== -->
   <section class="block" id="td">
     <h2>3. Correction intégrale du TD — Techniques d'intégration (2ᵉ partie)</h2>
-    <p class="lead" style="font-size:.95rem">13 exercices. Ex5–13 recoupés avec le <b>corrigé officiel</b> ; Ex1–4 résolus par nos soins.</p>
+    <p class="lead" style="font-size:.95rem">13 exercices. Ex5–13 recoupés avec le <b>corrigé officiel</b> ; Ex1–4 résolus par nos soins. Les deux erreurs du corrigé officiel (Ex 8 \(f_9\), Ex 9 b) sont signalées. (Le TD ne comporte pas d'exercice 11.)</p>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 1 — Pour s'échauffer</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p class="q">\(I_1=\int_0^1e^{3t}dt\)</p><p class="res">\(\tfrac{e^3-1}3\)</p>
-        <p class="q">\(I_2=\int_1^{\sqrt3}\tfrac1{t^2+1}dt\)</p><p>\(\arctan\sqrt3-\arctan1\).</p><p class="res">\(\tfrac\pi{12}\)</p>
-        <p class="q">\(I_3=\int_0^{\pi/3}\cos(2u+\tfrac\pi3)du\)</p><p>\(\tfrac12[\sin\pi-\sin\tfrac\pi3]\).</p><p class="res">\(-\tfrac{\sqrt3}4\)</p>
-        <p class="q">\(I_4=\int_0^1 2xe^{x^2}dx\)</p><p class="res">\(e-1\)</p>
-        <p class="q">\(I_5=\int_0^1 xe^{x^2}dx\)</p><p class="res">\(\tfrac{e-1}2\)</p>
-        <p class="q">\(I_6=\int_0^1 x^3e^{x^2}dx\)</p><p>\(u=x^2\) : \(\tfrac12\int_0^1 ue^u=\tfrac12[(u-1)e^u]_0^1\).</p><p class="res">\(\tfrac12\)</p>
-        <p class="q">\(I_7=\int_1^2\tfrac{-2}{-2x+3}dx\)</p><p>\([\ln|-2x+3|]_1^2=\ln1-\ln1\).</p><p class="res">\(0\)</p>
-        <p class="q">\(I_8=\int_1^2\tfrac1{2-3x}dx\)</p><p>\(-\tfrac13[\ln|2-3x|]_1^2=-\tfrac13\ln4\).</p><p class="res">\(-\tfrac23\ln2\)</p>
+        <div class="enonce">Calculer les intégrales suivantes.</div>
+
+        <p class="q">1) \(I_1=\displaystyle\int_0^1e^{3t}\,dt\)</p>
+        <div class="rappel"><span class="lab">Rappel · intégrale et primitive</span>\[ \int_a^bf=F(b)-F(a) \quad\text{avec } F'=f \]</div>
+        <p class="etape">Étape 1 : primitive</p>
+        <p>\(\tfrac13e^{3t}\).</p>
+        <div class="res">\(I_1=\dfrac{e^3-1}3\)</div>
+
+        <p class="q">2) \(I_2=\displaystyle\int_1^{\sqrt3}\frac1{t^2+1}\,dt\)</p>
+        <p class="etape">Étape 1 : primitive \(\arctan t\)</p>
+        \[ \arctan\sqrt3-\arctan1=\frac\pi3-\frac\pi4 \]
+        <div class="res">\(I_2=\dfrac\pi{12}\)</div>
+
+        <p class="q">3) \(I_3=\displaystyle\int_0^{\pi/3}\cos\!\big(2u+\tfrac\pi3\big)\,du\)</p>
+        <p class="etape">Étape 1 : primitive \(\tfrac12\sin(2u+\tfrac\pi3)\)</p>
+        \[ \frac12\Big[\sin\pi-\sin\frac\pi3\Big]=\frac12\Big(0-\frac{\sqrt3}2\Big) \]
+        <div class="res">\(I_3=-\dfrac{\sqrt3}4\)</div>
+
+        <p class="q">4) \(I_4=\displaystyle\int_0^12xe^{x^2}\,dx\)</p>
+        <p class="etape">Étape 1 : forme \(u'e^u\) avec \(u=x^2\)</p>
+        \[ \big[e^{x^2}\big]_0^1 \]
+        <div class="res">\(I_4=e-1\)</div>
+
+        <p class="q">5) \(I_5=\displaystyle\int_0^1xe^{x^2}\,dx\)</p>
+        <p class="etape">Étape 1 : \(\tfrac12\) de la précédente</p>
+        <div class="res">\(I_5=\dfrac{e-1}2\)</div>
+
+        <p class="q">6) \(I_6=\displaystyle\int_0^1x^3e^{x^2}\,dx\)</p>
+        <p class="etape">Étape 1 : changement de variable \(u=x^2\), \(du=2x\,dx\)</p>
+        \[ \int_0^1x^3e^{x^2}dx=\frac12\int_0^1ue^u\,du \]
+        <p class="etape">Étape 2 : intégration par parties</p>
+        \[ \int ue^u=(u-1)e^u \]
+        <p class="etape">Étape 3 : bornes</p>
+        \[ \frac12\big[(u-1)e^u\big]_0^1=\frac12(0-(-1)) \]
+        <div class="res">\(I_6=\dfrac12\)</div>
+
+        <p class="q">7) \(I_7=\displaystyle\int_1^2\frac{-2}{-2x+3}\,dx\)</p>
+        <p class="etape">Étape 1 : domaine</p>
+        <p>Le dénominateur s'annule en \(x=\tfrac32\), qui est dans \([1,2]\) : la fonction n'est pas définie sur tout l'intervalle.</p>
+        <p class="etape">Étape 2 : nature de l'intégrale</p>
+        <p>Une primitive est \(\ln|-2x+3|\), qui tend vers \(-\infty\) en \(\tfrac32\) : l'intégrale impropre <b>diverge</b>. Seule la « valeur principale » \(\ln1-\ln1=0\) (les infinis se compensent) a un sens.</p>
+        <div class="res">\(I_7\) n'est pas définie (divergente) ; sa valeur principale vaut \(0\).</div>
+        <div class="warnbox"><span class="lab">Correction d'une erreur de l'ancienne version</span> L'ancienne version écrivait \(\big[\ln|-2x+3|\big]_1^2=0\) sans remarquer le pôle en \(\tfrac32\). Une intégrale sur un intervalle contenant un pôle de l'intégrande n'est pas un calcul de primitive ordinaire.</div>
+
+        <p class="q">8) \(I_8=\displaystyle\int_1^2\frac1{2-3x}\,dx\)</p>
+        <p class="etape">Étape 1 : domaine</p>
+        <p>\(2-3x=0\) en \(\tfrac23\notin[1,2]\) : l'intégrale est définie.</p>
+        <p class="etape">Étape 2 : primitive</p>
+        <p>\(-\tfrac13\ln|2-3x|\).</p>
+        \[ -\frac13\big(\ln4-\ln1\big) \]
+        <div class="res">\(I_8=-\dfrac23\ln2\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 2 — Puissances de \(\sin,\cos\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">\(f_1=\sin^5x\)</p><p>\(=\sin x(1-\cos^2x)^2\).</p><p class="res">\(-\cos x+\tfrac23\cos^3x-\tfrac15\cos^5x\)</p>
-        <p class="q">\(f_2=\cos^4t\)</p><p>\(=\tfrac{3+4\cos2t+\cos4t}8\).</p><p class="res">\(\tfrac38t+\tfrac14\sin2t+\tfrac1{32}\sin4t\)</p>
-        <p class="q">\(f_3=\cos^4x\sin^2x\)</p><p>Linéarisation.</p><p class="res">\(\tfrac x{16}+\tfrac1{64}\sin2x-\tfrac1{64}\sin4x-\tfrac1{192}\sin6x\)</p>
-        <p class="q">\(f_4=\cos(3x)\cos^3x\)</p><p>\(\cos^3x=\tfrac{3\cos x+\cos3x}4\).</p><p class="res">\(\tfrac x8+\tfrac3{16}\sin2x+\tfrac3{32}\sin4x+\tfrac1{48}\sin6x\)</p>
+        <div class="enonce">Donner une primitive des fonctions suivantes.</div>
+
+        <p class="q">1) \(f_1(x)=\sin^5x\)</p>
+        <div class="rappel"><span class="lab">Rappel · méthode</span>Puissance <b>impaire</b> de \(\sin\) (ou de \(\cos\)) : on sépare un facteur \(\sin x\) et on pose \(u=\cos x\). Puissance <b>paire</b> : on linéarise avec les formules d'Euler.</div>
+        <p class="etape">Étape 1 : séparer un facteur</p>
+        \[ \sin^5x=\sin x\,(1-\cos^2x)^2=\sin x\,(1-2\cos^2x+\cos^4x) \]
+        <p class="etape">Étape 2 : \(u=\cos x\), \(du=-\sin x\,dx\)</p>
+        \[ -\int(1-2u^2+u^4)\,du=-u+\tfrac23u^3-\tfrac15u^5 \]
+        <div class="res">\(-\cos x+\tfrac23\cos^3x-\tfrac15\cos^5x\)</div>
+
+        <p class="q">2) \(f_2(t)=\cos^4t\)</p>
+        <p class="etape">Étape 1 : linéariser</p>
+        \[ \cos^4t=\Big(\frac{1+\cos2t}2\Big)^2=\frac{3+4\cos2t+\cos4t}8 \]
+        <p class="etape">Étape 2 : intégrer</p>
+        <div class="res">\(\tfrac38t+\tfrac14\sin2t+\tfrac1{32}\sin4t\)</div>
+
+        <p class="q">3) \(f_3(x)=\cos^4x\sin^2x\)</p>
+        <p class="etape">Étape 1 : linéariser</p>
+        \[ \cos^4x\sin^2x=\frac1{32}\big(2+\cos2x-2\cos4x-\cos6x\big) \]
+        <p class="etape">Étape 2 : intégrer</p>
+        <div class="res">\(\tfrac x{16}+\tfrac1{64}\sin2x-\tfrac1{64}\sin4x-\tfrac1{192}\sin6x\)</div>
+
+        <p class="q">4) \(f_4(x)=\cos(3x)\cos^3x\)</p>
+        <p class="etape">Étape 1 : linéariser \(\cos^3\)</p>
+        \[ \cos^3x=\frac{3\cos x+\cos3x}4 \]
+        <p class="etape">Étape 2 : produits en sommes</p>
+        \[ \cos3x\cos^3x=\frac{3\cos3x\cos x+\cos^23x}4=\frac38(\cos4x+\cos2x)+\frac{1+\cos6x}8 \]
+        <p class="etape">Étape 3 : intégrer</p>
+        <div class="res">\(\tfrac x8+\tfrac3{16}\sin2x+\tfrac3{32}\sin4x+\tfrac1{48}\sin6x\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 3 — Changements de variable (définies)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">\(A=\int_{\pi/3}^{\pi/2}\cos x\sin^2x\,dx\) (\(u=\sin x\))</p><p>\([\tfrac{\sin^3x}3]\).</p><p class="res">\(\tfrac13-\tfrac{\sqrt3}8\)</p>
-        <p class="q">\(B=\int_1^4\tfrac{t^2}{\sqrt{t+1}}dt\) (\(u=\sqrt{t+1}\))</p><p>\(2\int_{\sqrt2}^{\sqrt5}(u^2-1)^2du\).</p><p class="res">\(\tfrac{16\sqrt5}3-\tfrac{14\sqrt2}{15}\)</p>
-        <p class="q">\(C=\int_1^4\tfrac{1-\sqrt t}{\sqrt t}dt\) (\(x=\sqrt t\))</p><p>\(2\int_1^2(1-x)dx\).</p><p class="res">\(-1\)</p>
-        <p class="q">\(D=\int_0^\pi\tfrac{\sin t}{1+\cos^2t}dt\) (\(x=\cos t\))</p><p>\(\int_{-1}^1\tfrac{dx}{1+x^2}\).</p><p class="res">\(\tfrac\pi2\)</p>
-        <p class="q">\(E=\int\tfrac{dt}{2t\ln t+t}\) (\(x=\ln t\))</p><p>\(\int\tfrac{dx}{2x+1}\) (bornes de l'énoncé ambiguës).</p><p class="res">\(\tfrac12\ln|2\ln t+1|\)</p>
-        <p class="q">\(F=\int_0^1\tfrac{dt}{1+e^t}\) (\(x=e^t\))</p><p>\(\int_1^e(\tfrac1x-\tfrac1{1+x})dx\).</p><p class="res">\(1+\ln\tfrac2{1+e}\)</p>
-        <p class="q">\(G=\int_1^3\tfrac{\sqrt t}{t+1}dt\) (\(x=\sqrt t\))</p><p>\(2\int_1^{\sqrt3}(1-\tfrac1{x^2+1})dx\).</p><p class="res">\(2\sqrt3-2-\tfrac\pi6\)</p>
+        <div class="enonce">Calculer les intégrales suivantes en effectuant le changement de variable proposé.</div>
+
+        <p class="q">1) \(A=\displaystyle\int_{\pi/3}^{\pi/2}\cos x\sin^2x\,dx\) (\(u=\sin x\))</p>
+        <p class="etape">Étape 1 : différentielle et bornes</p>
+        <p>\(du=\cos x\,dx\) ; \(x=\tfrac\pi3\to u=\tfrac{\sqrt3}2\), \(x=\tfrac\pi2\to u=1\).</p>
+        <p class="etape">Étape 2 : intégrer</p>
+        \[ A=\int_{\sqrt3/2}^1u^2du=\frac13-\frac13\Big(\frac{\sqrt3}2\Big)^3=\frac13-\frac{\sqrt3}8 \]
+        <div class="res">\(A=\dfrac13-\dfrac{\sqrt3}8\)</div>
+
+        <p class="q">2) \(B=\displaystyle\int_1^4\frac{t^2}{\sqrt{t+1}}\,dt\) (\(u=\sqrt{t+1}\))</p>
+        <p class="etape">Étape 1 : exprimer \(t\), \(dt\), bornes</p>
+        <p>\(t=u^2-1\), \(dt=2u\,du\) ; \(t=1\to u=\sqrt2\), \(t=4\to u=\sqrt5\).</p>
+        <p class="etape">Étape 2 : simplifier</p>
+        \[ B=\int_{\sqrt2}^{\sqrt5}\frac{(u^2-1)^2}u\,2u\,du=2\int_{\sqrt2}^{\sqrt5}(u^4-2u^2+1)\,du \]
+        <p class="etape">Étape 3 : intégrer</p>
+        \[ B=2\Big[\frac{u^5}5-\frac{2u^3}3+u\Big]_{\sqrt2}^{\sqrt5}=\frac{16\sqrt5}3-\frac{14\sqrt2}{15} \]
+        <div class="res">\(B=\dfrac{16\sqrt5}3-\dfrac{14\sqrt2}{15}\approx10{,}61\)</div>
+
+        <p class="q">3) \(C=\displaystyle\int_1^4\frac{1-\sqrt t}{\sqrt t}\,dt\) (\(x=\sqrt t\))</p>
+        <p class="etape">Étape 1 : \(t=x^2\), \(dt=2x\,dx\), bornes \(1\) et \(2\)</p>
+        \[ C=\int_1^2\frac{1-x}x\,2x\,dx=2\int_1^2(1-x)\,dx=2\Big[x-\frac{x^2}2\Big]_1^2 \]
+        <div class="res">\(C=2\big(0-\tfrac12\big)=-1\)</div>
+
+        <p class="q">4) \(D=\displaystyle\int_0^\pi\frac{\sin t}{1+\cos^2t}\,dt\) (\(x=\cos t\))</p>
+        <p class="etape">Étape 1 : \(dx=-\sin t\,dt\), bornes \(1\) et \(-1\)</p>
+        \[ D=-\int_1^{-1}\frac{dx}{1+x^2}=\int_{-1}^1\frac{dx}{1+x^2}=\big[\arctan x\big]_{-1}^1 \]
+        <div class="res">\(D=\dfrac\pi2\)</div>
+
+        <p class="q">5) \(E\) : primitive de \(\dfrac1{2t\ln t+t}\) (\(x=\ln t\))</p>
+        <p class="etape">Étape 1 : domaine</p>
+        <p>\(2t\ln t+t=t(2\ln t+1)\) s'annule en \(t=e^{-1/2}\approx0{,}61\). Avec les bornes \(0\) et \(\pi\) de l'énoncé, l'intégrale serait singulière en \(0\) et en \(e^{-1/2}\) : on calcule une primitive sur \(]e^{-1/2},+\infty[\).</p>
+        <p class="etape">Étape 2 : \(x=\ln t\), \(dx=\tfrac{dt}t\)</p>
+        \[ \int\frac{dt}{t(2\ln t+1)}=\int\frac{dx}{2x+1}=\frac12\ln|2x+1| \]
+        <div class="res">Primitive : \(\tfrac12\ln|2\ln t+1|\) (sur chacun des intervalles \(]0,e^{-1/2}[\) et \(]e^{-1/2},+\infty[\)).</div>
+        <div class="warnbox"><span class="lab">Piège</span> Les bornes \(0\) et \(\pi\) lues sur l'énoncé donnent une intégrale impropre divergente (pôle en \(e^{-1/2}\) dans \(]0,\pi[\)) : l'énoncé semble comporter une erreur de bornes. On ne calcule donc ici que la primitive.</div>
+
+        <p class="q">6) \(F=\displaystyle\int_0^1\frac{dt}{1+e^t}\) (\(x=e^t\))</p>
+        <p class="etape">Étape 1 : \(dx=e^tdt\), donc \(dt=\tfrac{dx}x\) ; bornes \(1\) et \(e\)</p>
+        \[ F=\int_1^e\frac{dx}{x(1+x)}=\int_1^e\Big(\frac1x-\frac1{1+x}\Big)dx \]
+        <p class="etape">Étape 2 : intégrer</p>
+        \[ F=\Big[\ln x-\ln(1+x)\Big]_1^e=\big(1-\ln(1+e)\big)-\big(0-\ln2\big) \]
+        <div class="res">\(F=1+\ln\dfrac2{1+e}\approx0{,}380\)</div>
+
+        <p class="q">7) \(G=\displaystyle\int_1^3\frac{\sqrt t}{t+1}\,dt\) (\(x=\sqrt t\))</p>
+        <p class="etape">Étape 1 : \(t=x^2\), \(dt=2x\,dx\), bornes \(1\) et \(\sqrt3\)</p>
+        \[ G=\int_1^{\sqrt3}\frac x{x^2+1}2x\,dx=2\int_1^{\sqrt3}\frac{x^2}{x^2+1}dx=2\int_1^{\sqrt3}\Big(1-\frac1{x^2+1}\Big)dx \]
+        <p class="etape">Étape 2 : intégrer</p>
+        \[ G=2\big[x-\arctan x\big]_1^{\sqrt3}=2\Big(\sqrt3-\frac\pi3-1+\frac\pi4\Big) \]
+        <div class="res">\(G=2\sqrt3-2-\dfrac\pi6\approx0{,}941\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 4 — Primitives par changement de variable</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">(1) \(\int(\cos x)^{1234}\sin x\,dx\)</p><p class="res">\(-\tfrac{(\cos x)^{1235}}{1235}\)</p>
-        <p class="q">(2) \(\int\tfrac{dx}{\sin x}\)</p><p class="res">\(\ln\big|\tan\tfrac x2\big|\)</p>
-        <p class="q">(3) \(\int\tfrac1{x\ln x}dx\)</p><p class="res">\(\ln|\ln x|\)</p>
-        <p class="q">(4) \(\int\tfrac1{3+e^{-x}}dx\)</p><p>\(\times\tfrac{e^x}{e^x}\) : \(\tfrac{e^x}{3e^x+1}\).</p><p class="res">\(\tfrac13\ln(3e^x+1)\)</p>
-        <p class="q">(5) \(\int\tfrac1{\sqrt{4x-x^2}}dx\)</p><p>\(4x-x^2=4-(x-2)^2\).</p><p class="res">\(\arcsin\tfrac{x-2}2\)</p>
+        <div class="enonce">Calculer les primitives suivantes par changement de variable.</div>
+
+        <p class="q">1) \(\displaystyle\int(\cos x)^{1234}\sin x\,dx\)</p>
+        <p class="etape">Étape 1 : \(u=\cos x\), \(du=-\sin x\,dx\)</p>
+        \[ -\int u^{1234}du=-\frac{u^{1235}}{1235} \]
+        <div class="res">\(-\dfrac{(\cos x)^{1235}}{1235}+C\)</div>
+
+        <p class="q">2) \(\displaystyle\int\frac{dx}{\sin x}\)</p>
+        <div class="rappel"><span class="lab">Rappel · règle de Bioche / tangente de l'angle moitié</span>Avec \(u=\tan\tfrac x2\) : \(\sin x=\dfrac{2u}{1+u^2}\), \(dx=\dfrac{2\,du}{1+u^2}\).</div>
+        <p class="etape">Étape 1 : substituer</p>
+        \[ \int\frac{dx}{\sin x}=\int\frac{1+u^2}{2u}\cdot\frac{2\,du}{1+u^2}=\int\frac{du}u \]
+        <div class="res">\(\ln\big|\tan\tfrac x2\big|+C\) (sur chaque intervalle \(]k\pi,(k+1)\pi[\))</div>
+
+        <p class="q">3) \(\displaystyle\int\frac1{x\ln x}\,dx\)</p>
+        <p class="etape">Étape 1 : \(u=\ln x\), \(du=\tfrac{dx}x\)</p>
+        \[ \int\frac{du}u=\ln|u| \]
+        <div class="res">\(\ln|\ln x|+C\) (sur \(]0,1[\) ou \(]1,+\infty[\))</div>
+
+        <p class="q">4) \(\displaystyle\int\frac1{3+e^{-x}}\,dx\)</p>
+        <p class="etape">Étape 1 : multiplier par \(e^x\)</p>
+        \[ \frac1{3+e^{-x}}=\frac{e^x}{3e^x+1} \]
+        <p class="etape">Étape 2 : \(u=3e^x+1\), \(du=3e^xdx\)</p>
+        <div class="res">\(\tfrac13\ln(3e^x+1)+C\)</div>
+
+        <p class="q">5) \(\displaystyle\int\frac1{\sqrt{4x-x^2}}\,dx\)</p>
+        <p class="etape">Étape 1 : compléter le carré</p>
+        \[ 4x-x^2=4-(x-2)^2 \quad(\text{sur }]0,4[) \]
+        <p class="etape">Étape 2 : \(u=x-2\), forme arcsinus avec \(a=2\)</p>
+        <div class="res">\(\arcsin\dfrac{x-2}2+C\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 5 — Primitives par changement de variable</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">\(f_1=\tfrac{2t}{1+t^4}\) (\(u=t^2\))</p><p class="res">\(\arctan(t^2)\)</p>
-        <p class="q">\(f_2=\tfrac{e^{2t}}{1+e^t}\) (\(u=e^t\))</p><p>\(\int\tfrac u{1+u}du=u-\ln(1+u)\).</p><p class="res">\(e^t-\ln(1+e^t)\)</p>
-        <p class="q">\(f_3=\tfrac1{\operatorname{ch}t}\)</p><p class="res">\(2\arctan(e^t)\)</p>
-        <p class="q">\(f_4=\tfrac{\sin t\cos t}{\sin^2t+1}\) (\(u=\sin^2t+1\))</p><p class="res">\(\tfrac12\ln(\sin^2t+1)\)</p>
-        <p class="q">\(f_5=\cos(2\ln x)\)</p><p class="res">\(\tfrac x5\big(2\sin(2\ln x)+\cos(2\ln x)\big)\)</p>
-        <p class="q">\(f_6=\cos(\sqrt x)\)</p><p class="res">\(2\big(\sqrt x\sin\sqrt x+\cos\sqrt x\big)\)</p>
-        <p class="q">\(f_7=\tfrac{e^x}{(3+e^x)\sqrt{e^x-1}}\)</p><p class="res">\(\arctan\big(\tfrac12\sqrt{e^x-1}\big)\)</p>
-        <p class="q">\(f_8=\tfrac{e^x-1}{e^x+1}\)</p><p class="res">\(2\ln(e^x+1)-x\)</p>
+        <div class="enonce">En utilisant des changements de variables, déterminer une primitive de chacune des fonctions suivantes.</div>
+
+        <p class="q">1) \(f_1(t)=\dfrac{2t}{1+t^4}\)</p>
+        <p class="etape">Étape 1 : \(u=t^2\), \(du=2t\,dt\)</p>
+        \[ \int\frac{du}{1+u^2}=\arctan u \]
+        <div class="res">\(\arctan(t^2)\)</div>
+
+        <p class="q">2) \(f_2(t)=\dfrac{e^{2t}}{1+e^t}\)</p>
+        <p class="etape">Étape 1 : \(u=e^t\), \(du=e^tdt\)</p>
+        \[ \int\frac{u}{1+u}du=\int\Big(1-\frac1{1+u}\Big)du=u-\ln(1+u) \]
+        <div class="res">\(e^t-\ln(1+e^t)\)</div>
+
+        <p class="q">3) \(f_3(t)=\dfrac1{\operatorname{ch}t}\)</p>
+        <p class="etape">Étape 1 : écrire avec les exponentielles</p>
+        \[ \frac1{\operatorname{ch}t}=\frac2{e^t+e^{-t}}=\frac{2e^t}{e^{2t}+1} \]
+        <p class="etape">Étape 2 : \(u=e^t\)</p>
+        \[ \int\frac{2\,du}{u^2+1}=2\arctan u \]
+        <div class="res">\(2\arctan(e^t)\)</div>
+
+        <p class="q">4) \(f_4(t)=\dfrac{\sin t\cos t}{\sin^2t+1}\)</p>
+        <p class="etape">Étape 1 : \(u=\sin^2t+1\), \(du=2\sin t\cos t\,dt\)</p>
+        \[ \frac12\int\frac{du}u \]
+        <div class="res">\(\tfrac12\ln(\sin^2t+1)\)</div>
+
+        <p class="q">5) \(f_5(x)=\cos(2\ln x)\)</p>
+        <p class="etape">Étape 1 : \(x=e^s\), \(dx=e^sds\)</p>
+        \[ \int\cos(2s)\,e^s\,ds \]
+        <p class="etape">Étape 2 : primitive de \(e^s\cos2s\)</p>
+        <p>On vérifie que \(\dfrac{e^s(\cos2s+2\sin2s)}5\) a pour dérivée \(e^s\cos2s\).</p>
+        <p class="etape">Étape 3 : revenir à \(x\)</p>
+        <div class="res">\(\dfrac x5\big(2\sin(2\ln x)+\cos(2\ln x)\big)\) (sur \(]0,+\infty[\))</div>
+
+        <p class="q">6) \(f_6(x)=\cos(\sqrt x)\)</p>
+        <p class="etape">Étape 1 : \(u=\sqrt x\), \(x=u^2\), \(dx=2u\,du\)</p>
+        \[ \int2u\cos u\,du \]
+        <p class="etape">Étape 2 : intégration par parties</p>
+        <p>\(\int u\cos u=u\sin u+\cos u\).</p>
+        <div class="res">\(2\big(\sqrt x\sin\sqrt x+\cos\sqrt x\big)\)</div>
+
+        <p class="q">7) \(f_7(x)=\dfrac{e^x}{(3+e^x)\sqrt{e^x-1}}\)</p>
+        <p class="etape">Étape 1 : \(u=\sqrt{e^x-1}\) (sur \(x>0\))</p>
+        <p>\(e^x=u^2+1\), \(e^xdx=2u\,du\).</p>
+        \[ \int\frac{2u\,du}{(u^2+4)\,u}=\int\frac{2\,du}{u^2+4}=\arctan\frac u2 \]
+        <div class="res">\(\arctan\!\big(\tfrac12\sqrt{e^x-1}\big)\)</div>
+
+        <p class="q">8) \(f_8(x)=\dfrac{e^x-1}{e^x+1}\)</p>
+        <p class="etape">Étape 1 : \(u=e^x\), \(dx=\tfrac{du}u\)</p>
+        \[ \int\frac{u-1}{u(u+1)}du \]
+        <p class="etape">Étape 2 : éléments simples</p>
+        \[ \frac{u-1}{u(u+1)}=-\frac1u+\frac2{u+1} \]
+        <div class="res">\(2\ln(e^x+1)-x\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 6 — Intégration par parties</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">\(A=\int_1^2\ln x\,dx\)</p><p class="res">\(2\ln2-1\)</p>
-        <p class="q">\(B=\int_1^2(\ln x)^2dx\)</p><p class="res">\(2\ln^2 2-4\ln2+2\)</p>
-        <p class="q">\(C=\int_0^1 xe^x\,dx\)</p><p class="res">\(1\)</p>
-        <p class="q">\(D=\int_1^e x^2\ln x\,dx\)</p><p class="res">\(\tfrac{2e^3+1}9\)</p>
-        <p class="q">\(E=\int_{\pi/6}^{\pi/3}e^t\sin(2t)dt\)</p><p class="res">\(\tfrac15(e^{\pi/3}+e^{\pi/6})+\tfrac{\sqrt3}{10}(e^{\pi/3}-e^{\pi/6})\)</p>
-        <p class="q">\(F=\int_0^{\pi/2}\cos t\,e^{-t}dt\)</p><p class="res">\(\tfrac12(e^{-\pi/2}+1)\)</p>
-        <p class="q">\(G=\int_{\pi/4}^{2\pi/3}t\sin t\,dt\)</p><p class="res">\(\tfrac\pi3+\tfrac{\sqrt3}2+\tfrac1{\sqrt2}(\tfrac\pi4-1)\)</p>
-        <p class="q">\(H=\int_0^1 t^2e^{-t}dt\)</p><p class="res">\(-\tfrac5e+2\)</p>
-        <p class="q">\(I=\int_1^2(x+1)e^{2x}dx\)</p><p class="res">\(\tfrac14(5e^4-3e^2)\)</p>
-        <p class="q">\(J=\int_0^1(2x^3+3x^2-x+1)e^x\,dx\)</p><p class="res">\(4\)</p>
-        <p class="q">\(K=\int_0^1 t\arctan t\,dt\)</p><p class="res">\(\tfrac{\pi-2}4\)</p>
+        <div class="enonce">En procédant par intégration par parties, calculer les intégrales \(A,\dots,K\) suivantes.</div>
+
+        <p class="q">1) \(A=\displaystyle\int_1^2\ln x\,dx\)</p>
+        <div class="rappel"><span class="lab">Rappel · intégration par parties</span>\[ \int_a^bu\,v'=\big[uv\big]_a^b-\int_a^bu'\,v \]On dérive le facteur qui se simplifie (\(\ln\), polynôme, \(\arctan\)) ; on intègre l'autre (exponentielle, trigonométrique, puissance).</div>
+        <p class="etape">Étape 1 : \(u=\ln x\), \(v'=1\) donc \(u'=\tfrac1x\), \(v=x\)</p>
+        \[ A=\big[x\ln x\big]_1^2-\int_1^21\,dx=2\ln2-1 \]
+        <div class="res">\(A=2\ln2-1\)</div>
+
+        <p class="q">2) \(B=\displaystyle\int_1^2(\ln x)^2\,dx\)</p>
+        <p class="etape">Étape 1 : \(u=(\ln x)^2\), \(v'=1\), donc \(u'=\tfrac{2\ln x}x\), \(v=x\)</p>
+        \[ B=\big[x\ln^2x\big]_1^2-2\int_1^2\ln x\,dx=2\ln^22-2A \]
+        <div class="res">\(B=2\ln^22-4\ln2+2\)</div>
+
+        <p class="q">3) \(C=\displaystyle\int_0^1xe^x\,dx\)</p>
+        <p class="etape">Étape 1 : \(u=x\), \(v'=e^x\)</p>
+        \[ C=\big[xe^x\big]_0^1-\int_0^1e^x\,dx=e-(e-1) \]
+        <div class="res">\(C=1\)</div>
+
+        <p class="q">4) \(D=\displaystyle\int_1^ex^2\ln x\,dx\)</p>
+        <p class="etape">Étape 1 : \(u=\ln x\), \(v'=x^2\), donc \(v=\tfrac{x^3}3\)</p>
+        \[ D=\Big[\frac{x^3}3\ln x\Big]_1^e-\frac13\int_1^ex^2dx=\frac{e^3}3-\frac{e^3-1}9 \]
+        <div class="res">\(D=\dfrac{2e^3+1}9\)</div>
+
+        <p class="q">5) \(E=\displaystyle\int_{\pi/6}^{\pi/3}e^t\sin(2t)\,dt\)</p>
+        <p class="etape">Étape 1 : deux intégrations par parties</p>
+        <p>Soit \(J=\int e^t\sin2t\,dt\). Une première IPP (\(u=\sin2t\)) donne \(J=e^t\sin2t-2\int e^t\cos2t\), une seconde donne \(\int e^t\cos2t=e^t\cos2t+2J\).</p>
+        \[ J=e^t\sin2t-2e^t\cos2t-4J \iff J=\frac{e^t(\sin2t-2\cos2t)}5 \]
+        <p class="etape">Étape 2 : bornes</p>
+        <p>En \(\tfrac\pi3\) : \(\sin\tfrac{2\pi}3=\tfrac{\sqrt3}2\), \(\cos\tfrac{2\pi}3=-\tfrac12\). En \(\tfrac\pi6\) : \(\sin\tfrac\pi3=\tfrac{\sqrt3}2\), \(\cos\tfrac\pi3=\tfrac12\).</p>
+        \[ E=\frac{e^{\pi/3}\big(\tfrac{\sqrt3}2+1\big)-e^{\pi/6}\big(\tfrac{\sqrt3}2-1\big)}5 \]
+        <div class="res">\(E=\tfrac15\big(e^{\pi/3}+e^{\pi/6}\big)+\tfrac{\sqrt3}{10}\big(e^{\pi/3}-e^{\pi/6}\big)\)</div>
+
+        <p class="q">6) \(F=\displaystyle\int_0^{\pi/2}\cos t\,e^{-t}\,dt\)</p>
+        <p class="etape">Étape 1 : même méthode (deux IPP)</p>
+        <p>Une primitive de \(e^{-t}\cos t\) est \(\dfrac{e^{-t}(\sin t-\cos t)}2\) (on vérifie par dérivation).</p>
+        <p class="etape">Étape 2 : bornes</p>
+        \[ F=\frac{e^{-\pi/2}(1-0)}2-\frac{1\cdot(0-1)}2 \]
+        <div class="res">\(F=\dfrac12\big(e^{-\pi/2}+1\big)\)</div>
+
+        <p class="q">7) \(G=\displaystyle\int_{\pi/4}^{2\pi/3}t\sin t\,dt\)</p>
+        <p class="etape">Étape 1 : \(u=t\), \(v'=\sin t\)</p>
+        \[ \int t\sin t\,dt=-t\cos t+\int\cos t\,dt=-t\cos t+\sin t \]
+        <p class="etape">Étape 2 : bornes</p>
+        \[ \Big(\frac\pi3+\frac{\sqrt3}2\Big)-\Big(-\frac\pi4\frac{\sqrt2}2+\frac{\sqrt2}2\Big) \]
+        <div class="res">\(G=\dfrac\pi3+\dfrac{\sqrt3}2+\dfrac1{\sqrt2}\Big(\dfrac\pi4-1\Big)\)</div>
+
+        <p class="q">8) \(H=\displaystyle\int_0^1t^2e^{-t}\,dt\)</p>
+        <p class="etape">Étape 1 : deux IPP</p>
+        <p>Une primitive de \(t^2e^{-t}\) est \(-e^{-t}(t^2+2t+2)\) (par dérivation : \(e^{-t}(t^2+2t+2)-e^{-t}(2t+2)=t^2e^{-t}\)).</p>
+        <p class="etape">Étape 2 : bornes</p>
+        \[ H=-5e^{-1}+2 \]
+        <div class="res">\(H=2-\dfrac5e\)</div>
+
+        <p class="q">9) \(I=\displaystyle\int_1^2(x+1)e^{2x}\,dx\)</p>
+        <p class="etape">Étape 1 : \(u=x+1\), \(v'=e^{2x}\), \(v=\tfrac{e^{2x}}2\)</p>
+        \[ \int(x+1)e^{2x}=\frac{(x+1)e^{2x}}2-\frac{e^{2x}}4=\frac{(2x+1)e^{2x}}4 \]
+        <p class="etape">Étape 2 : bornes</p>
+        <div class="res">\(I=\dfrac{5e^4-3e^2}4\)</div>
+
+        <p class="q">10) \(J=\displaystyle\int_0^1(2x^3+3x^2-x+1)e^x\,dx\)</p>
+        <p class="etape">Étape 1 : IPP répétées</p>
+        <div class="rappel"><span class="lab">Rappel · polynôme fois exponentielle</span>\[ \int P(x)e^x\,dx=e^x\big(P-P'+P''-P'''+\cdots\big) \]</div>
+        <p>\(P=2x^3+3x^2-x+1\), \(P'=6x^2+6x-1\), \(P''=12x+6\), \(P'''=12\) :</p>
+        \[ P-P'+P''-P'''=2x^3-3x^2+5x-4 \]
+        <p class="etape">Étape 2 : bornes</p>
+        \[ J=e\,(2-3+5-4)-(-4)=0+4 \]
+        <div class="res">\(J=4\)</div>
+
+        <p class="q">11) \(K=\displaystyle\int_0^1t\arctan t\,dt\)</p>
+        <p class="etape">Étape 1 : \(u=\arctan t\), \(v'=t\), \(v=\tfrac{t^2}2\)</p>
+        \[ K=\Big[\frac{t^2}2\arctan t\Big]_0^1-\frac12\int_0^1\frac{t^2}{1+t^2}dt=\frac\pi8-\frac12\int_0^1\Big(1-\frac1{1+t^2}\Big)dt \]
+        <p class="etape">Étape 2 : calculer</p>
+        \[ K=\frac\pi8-\frac12\Big(1-\frac\pi4\Big) \]
+        <div class="res">\(K=\dfrac{\pi-2}4\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 7 — Primitives par IPP</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\arctan x\)</p><p class="res">\(x\arctan x-\tfrac12\ln(x^2+1)\) (sur \(\mathbb R\))</p>
-        <p class="q">(b) \(t\sin t\cos2t\)</p><p class="res">\(\tfrac12 t\big(-\tfrac13\cos3t+\cos t\big)-\tfrac12\big(-\tfrac19\sin3t+\sin t\big)\)</p>
-        <p class="q">(c) \(\sin(\ln x)\)</p><p class="res">\(\tfrac12 x\sin(\ln x)-\tfrac12 x\cos(\ln x)\) (sur \(]0,+\infty[\))</p>
+        <div class="enonce">En procédant par intégration par parties, déterminer une primitive de chacune des fonctions suivantes, en précisant l'intervalle de validité : (a) \(x\mapsto\arctan x\) ; (b) \(t\mapsto t\sin t\cos2t\) ; (c) \(x\mapsto\sin(\ln x)\).</div>
+
+        <p class="q">a) \(\arctan x\)</p>
+        <p class="etape">Étape 1 : \(u=\arctan x\), \(v'=1\)</p>
+        \[ \int\arctan x\,dx=x\arctan x-\int\frac x{1+x^2}dx \]
+        <p class="etape">Étape 2 : forme \(\tfrac{u'}u\)</p>
+        <div class="res">\(x\arctan x-\tfrac12\ln(1+x^2)\), valable sur \(\mathbb R\).</div>
+
+        <p class="q">b) \(t\sin t\cos2t\)</p>
+        <p class="etape">Étape 1 : linéariser</p>
+        \[ \sin t\cos2t=\tfrac12\big(\sin3t-\sin t\big) \]
+        <p class="etape">Étape 2 : IPP sur \(t\sin3t\) et \(t\sin t\)</p>
+        \[ \int t\sin3t=-\frac t3\cos3t+\frac19\sin3t \qquad \int t\sin t=-t\cos t+\sin t \]
+        <p class="etape">Étape 3 : assembler</p>
+        <div class="res">\(\tfrac12t\big(-\tfrac13\cos3t+\cos t\big)-\tfrac12\big(-\tfrac19\sin3t+\sin t\big)\), valable sur \(\mathbb R\).</div>
+
+        <p class="q">c) \(\sin(\ln x)\)</p>
+        <p class="etape">Étape 1 : première IPP (\(u=\sin\ln x\), \(v'=1\))</p>
+        \[ \int\sin(\ln x)\,dx=x\sin(\ln x)-\int\cos(\ln x)\,dx \]
+        <p class="etape">Étape 2 : seconde IPP</p>
+        \[ \int\cos(\ln x)\,dx=x\cos(\ln x)+\int\sin(\ln x)\,dx \]
+        <p class="etape">Étape 3 : résoudre en l'intégrale \(S\)</p>
+        \[ S=x\sin(\ln x)-x\cos(\ln x)-S \iff S=\tfrac x2\big(\sin(\ln x)-\cos(\ln x)\big) \]
+        <div class="res">\(\tfrac12x\sin(\ln x)-\tfrac12x\cos(\ln x)\), valable sur \(]0,+\infty[\).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 8 — Primitives (fractions)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">\(f_1=\tfrac1{2x+1}\)</p><p class="res">\(\tfrac12\ln|2x+1|\)</p>
-        <p class="q">\(f_2=\tfrac{2x}{2x+1}=1-\tfrac1{2x+1}\)</p><p class="res">\(x-\tfrac12\ln|2x+1|\)</p>
-        <p class="q">\(f_3=\tfrac{3x+1}{2x+1}=\tfrac32-\tfrac{1/2}{2x+1}\)</p><p class="res">\(\tfrac32x-\tfrac14\ln|2x+1|\)</p>
-        <p class="q">\(f_4=\tfrac1{x^2+4}\)</p><p class="res">\(\tfrac12\arctan\tfrac x2\)</p>
-        <p class="q">\(f_5=\tfrac1{2x^2-3x-2}=\tfrac1{(2x+1)(x-2)}\)</p><p class="res">\(-\tfrac15\ln|2x+1|+\tfrac15\ln|x-2|\)</p>
-        <p class="q">\(f_6=\tfrac1{4x^2+4x+1}=\tfrac1{(2x+1)^2}\)</p><p class="res">\(-\tfrac1{2(2x+1)}\)</p>
-        <p class="q">\(f_7=\tfrac1{x^2-4x+5}=\tfrac1{(x-2)^2+1}\)</p><p class="res">\(\arctan(x-2)\)</p>
-        <p class="q">\(f_8=\tfrac1{x^2+4x+5}=\tfrac1{(x+2)^2+1}\)</p><p class="res">\(\arctan(x+2)\)</p>
-        <p class="q">\(f_9=\tfrac{3x+2}{x^2+x+1}\)</p><p class="res">\(\tfrac32\ln(x^2+x+1)-\tfrac2{\sqrt3}\arctan\tfrac{2x+1}{\sqrt3}\)</p>
-        <p class="q">\(f_{10}=\tfrac{2x}{x^2-x+1}\)</p><p>\(2x=(2x-1)+1\).</p><p class="res">\(\ln(x^2-x+1)+\tfrac2{\sqrt3}\arctan\tfrac{2x-1}{\sqrt3}\)</p>
-        <p class="q">\(f_{11}=\tfrac{2x+1}{x^2+x-3}\)</p><p class="res">\(\ln|x^2+x-3|\)</p>
+        <div class="enonce">Donner une primitive des fonctions suivantes.</div>
+
+        <p class="q">1) \(f_1(x)=\dfrac1{2x+1}\)</p>
+        <div class="rappel"><span class="lab">Rappel · fractions rationnelles</span>\[ \int\frac{u'}u=\ln|u| \qquad \int\frac{du}{u^2+a^2}=\frac1a\arctan\frac ua \qquad \int\frac{u'}{u^2}=-\frac1u \]Trinôme sans racine réelle : on complète le carré. Sinon : éléments simples.</div>
+        <p class="etape">Étape 1 : \(u=2x+1\), \(u'=2\)</p>
+        <div class="res">\(\tfrac12\ln|2x+1|\)</div>
+
+        <p class="q">2) \(f_2(x)=\dfrac{2x}{2x+1}\)</p>
+        <p class="etape">Étape 1 : réécrire</p>
+        \[ \frac{2x}{2x+1}=1-\frac1{2x+1} \]
+        <div class="res">\(x-\tfrac12\ln|2x+1|\)</div>
+
+        <p class="q">3) \(f_3(x)=\dfrac{3x+1}{2x+1}\)</p>
+        <p class="etape">Étape 1 : réécrire</p>
+        \[ \frac{3x+1}{2x+1}=\frac32-\frac{1/2}{2x+1} \]
+        <div class="res">\(\tfrac32x-\tfrac14\ln|2x+1|\)</div>
+
+        <p class="q">4) \(f_4(x)=\dfrac1{x^2+4}\)</p>
+        <p class="etape">Étape 1 : \(a=2\)</p>
+        <div class="res">\(\tfrac12\arctan\dfrac x2\)</div>
+
+        <p class="q">5) \(f_5(x)=\dfrac1{2x^2-3x-2}\)</p>
+        <p class="etape">Étape 1 : factoriser</p>
+        <p>Racines \(2\) et \(-\tfrac12\) : \(2x^2-3x-2=(2x+1)(x-2)\).</p>
+        <p class="etape">Étape 2 : éléments simples</p>
+        \[ \frac1{(2x+1)(x-2)}=\frac{-2/5}{2x+1}+\frac{1/5}{x-2} \]
+        <div class="res">\(-\tfrac15\ln|2x+1|+\tfrac15\ln|x-2|\)</div>
+
+        <p class="q">6) \(f_6(x)=\dfrac1{4x^2+4x+1}\)</p>
+        <p class="etape">Étape 1 : reconnaître un carré</p>
+        \[ 4x^2+4x+1=(2x+1)^2 \]
+        <div class="res">\(-\dfrac1{2(2x+1)}\)</div>
+
+        <p class="q">7) \(f_7(x)=\dfrac1{x^2-4x+5}\)</p>
+        <p class="etape">Étape 1 : compléter le carré</p>
+        \[ x^2-4x+5=(x-2)^2+1 \]
+        <div class="res">\(\arctan(x-2)\)</div>
+
+        <p class="q">8) \(f_8(x)=\dfrac1{x^2+4x+5}\)</p>
+        <p class="etape">Étape 1 : compléter le carré</p>
+        \[ x^2+4x+5=(x+2)^2+1 \]
+        <div class="res">\(\arctan(x+2)\)</div>
+
+        <p class="q">9) \(f_9(x)=\dfrac{3x+2}{x^2+x+1}\)</p>
+        <p class="etape">Étape 1 : faire apparaître la dérivée du dénominateur</p>
+        \[ 3x+2=\frac32(2x+1)+\frac12 \]
+        <p class="etape">Étape 2 : deux morceaux</p>
+        \[ f_9=\frac32\,\frac{2x+1}{x^2+x+1}+\frac12\,\frac1{(x+\frac12)^2+\frac34} \]
+        <p class="etape">Étape 3 : intégrer</p>
+        <p>Le second morceau : \(\tfrac12\times\dfrac{1}{\sqrt3/2}\arctan\dfrac{x+\frac12}{\sqrt3/2}=\dfrac1{\sqrt3}\arctan\dfrac{2x+1}{\sqrt3}\).</p>
+        <div class="res">\(\tfrac32\ln(x^2+x+1)+\dfrac1{\sqrt3}\arctan\dfrac{2x+1}{\sqrt3}\)</div>
+        <div class="warnbox"><span class="lab">Erreur du corrigé officiel</span> Le corrigé du professeur donne \(-\dfrac2{\sqrt3}\arctan\dfrac{2x+1}{\sqrt3}\). Dérivée de ce terme : \(-\dfrac1{x^2+x+1}\), ce qui donnerait \(\dfrac{3x+\frac12}{x^2+x+1}\neq f_9\). Avec \(+\tfrac1{\sqrt3}\), la dérivée de l'ensemble est bien \(\dfrac{3x+2}{x^2+x+1}\).</div>
+
+        <p class="q">10) \(f_{10}(x)=\dfrac{2x}{x^2-x+1}\)</p>
+        <p class="etape">Étape 1 : écrire \(2x=(2x-1)+1\)</p>
+        \[ f_{10}=\frac{2x-1}{x^2-x+1}+\frac1{(x-\frac12)^2+\frac34} \]
+        <p class="etape">Étape 2 : intégrer</p>
+        <div class="res">\(\ln(x^2-x+1)+\dfrac2{\sqrt3}\arctan\dfrac{2x-1}{\sqrt3}\)</div>
+
+        <p class="q">11) \(f_{11}(x)=\dfrac{2x+1}{x^2+x-3}\)</p>
+        <p class="etape">Étape 1 : \(2x+1\) est la dérivée du dénominateur</p>
+        <div class="res">\(\ln|x^2+x-3|\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 9 — Intégrales de fractions</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">(a) \(\int_2^3\tfrac{dx}{x(x+1)}\)</p><p>\(\tfrac1{x(x+1)}=\tfrac1x-\tfrac1{x+1}\).</p><p class="res">\(\ln\tfrac98\)</p>
-        <p class="q">(b) \(\int_0^{1/2}\tfrac{x+1}{(x^2+1)(x+2)}dx\)</p><p>\(=\tfrac{\frac15x+\frac35}{x^2+1}-\tfrac{1/5}{x+2}\).</p><p class="res">\(-\tfrac1{10}\ln5+\tfrac35\arctan\tfrac12+\tfrac3{10}\ln2\)</p>
-        <p class="q">(c) \(\int_4^5\tfrac{dx}{x^2-4x+3}\)</p><p>\(=(x-1)(x-3)\).</p><p class="res">\(\tfrac12\ln\tfrac32\)</p>
-        <p class="q">(d) \(\int_0^1\tfrac{dx}{1+x+x^2}\)</p><p>\((x+\tfrac12)^2+\tfrac34\).</p><p class="res">\(\tfrac\pi{3\sqrt3}\)</p>
-        <p class="q">(e) \(\int_3^4\tfrac{x^2-3x+1}{(x-1)^2(x-2)}dx\)</p><p>\(=-\tfrac1{x-2}+\tfrac2{x-1}+\tfrac1{(x-1)^2}\).</p><p class="res">\(\ln\tfrac98+\tfrac16\)</p>
-        <p class="q">(f) \(\int_0^1\tfrac{x^4-x^3+9x^2-13x+3}{x^3-2x^2+3x-6}dx\)</p><p class="res">\(\tfrac32+2\ln2-\tfrac52\ln3\)</p>
+        <div class="enonce">Calculer les intégrales (a) à (f) suivantes.</div>
+
+        <p class="q">a) \(\displaystyle\int_2^3\frac{dx}{x(x+1)}\)</p>
+        <p class="etape">Étape 1 : éléments simples</p>
+        \[ \frac1{x(x+1)}=\frac1x-\frac1{x+1} \]
+        <p class="etape">Étape 2 : intégrer</p>
+        \[ \Big[\ln\frac x{x+1}\Big]_2^3=\ln\frac34-\ln\frac23 \]
+        <div class="res">\(\ln\dfrac98\)</div>
+
+        <p class="q">b) \(\displaystyle\int_0^{1/2}\frac{x+1}{(x^2+1)(x+2)}\,dx\)</p>
+        <p class="etape">Étape 1 : éléments simples</p>
+        \[ \frac{x+1}{(x^2+1)(x+2)}=\frac{\frac15x+\frac35}{x^2+1}-\frac{1/5}{x+2} \]
+        <p class="etape">Étape 2 : primitive</p>
+        \[ \frac1{10}\ln(x^2+1)+\frac35\arctan x-\frac15\ln(x+2) \]
+        <p class="etape">Étape 3 : bornes</p>
+        \[ \frac1{10}\ln\frac54+\frac35\arctan\frac12-\frac15\ln\frac52+\frac15\ln2 \]
+        <p>En regroupant : coefficient de \(\ln5\) : \(\tfrac1{10}-\tfrac15=-\tfrac1{10}\) ; coefficient de \(\ln2\) : \(-\tfrac15+\tfrac15+\tfrac15=\tfrac15\).</p>
+        <div class="res">\(-\tfrac1{10}\ln5+\tfrac15\ln2+\tfrac35\arctan\tfrac12\approx0{,}256\)</div>
+        <div class="warnbox"><span class="lab">Erreur du corrigé officiel</span> Le corrigé du professeur donne \(+\tfrac3{10}\ln2\) au lieu de \(+\tfrac15\ln2\). L'intégration numérique de la fonction donne \(0{,}2559\), ce qui confirme \(\tfrac15\ln2\) (avec \(\tfrac3{10}\ln2\) on trouverait \(0{,}325\)).</div>
+
+        <p class="q">c) \(\displaystyle\int_4^5\frac{dx}{x^2-4x+3}\)</p>
+        <p class="etape">Étape 1 : factoriser et éléments simples</p>
+        \[ \frac1{(x-1)(x-3)}=-\frac1{2(x-1)}+\frac1{2(x-3)} \]
+        <p class="etape">Étape 2 : intégrer</p>
+        \[ \frac12\Big[\ln\frac{x-3}{x-1}\Big]_4^5=\frac12\Big(\ln\frac12-\ln\frac13\Big) \]
+        <div class="res">\(\tfrac12\ln\tfrac32\)</div>
+
+        <p class="q">d) \(\displaystyle\int_0^1\frac{dx}{1+x+x^2}\)</p>
+        <p class="etape">Étape 1 : compléter le carré</p>
+        \[ x^2+x+1=\Big(x+\frac12\Big)^2+\frac34 \]
+        <p class="etape">Étape 2 : primitive</p>
+        \[ \frac2{\sqrt3}\arctan\frac{2x+1}{\sqrt3} \]
+        <p class="etape">Étape 3 : bornes</p>
+        \[ \frac2{\sqrt3}\Big(\frac\pi3-\frac\pi6\Big) \]
+        <div class="res">\(\dfrac\pi{3\sqrt3}\)</div>
+
+        <p class="q">e) \(\displaystyle\int_3^4\frac{x^2-3x+1}{(x-1)^2(x-2)}\,dx\)</p>
+        <p class="etape">Étape 1 : éléments simples</p>
+        \[ \frac{x^2-3x+1}{(x-1)^2(x-2)}=-\frac1{x-2}+\frac2{x-1}+\frac1{(x-1)^2} \]
+        <p class="etape">Étape 2 : primitive</p>
+        \[ G(x)=-\ln|x-2|+2\ln|x-1|-\frac1{x-1} \]
+        <p class="etape">Étape 3 : bornes</p>
+        \[ G(4)=-\ln2+2\ln3-\tfrac13 \qquad G(3)=-\ln1+2\ln2-\tfrac12 \]
+        <p>Différence : \(G(4)-G(3)=2\ln3-3\ln2+\tfrac16\).</p>
+        <div class="res">\(\ln\dfrac98+\dfrac16\)</div>
+
+        <p class="q">f) \(\displaystyle\int_0^1\frac{x^4-x^3+9x^2-13x+3}{x^3-2x^2+3x-6}\,dx\)</p>
+        <p class="etape">Étape 1 : division euclidienne</p>
+        <p>\(x^3-2x^2+3x-6=(x-2)(x^2+3)\) et \(x^4-x^3+9x^2-13x+3=(x+1)(x^3-2x^2+3x-6)+(8x^2-10x+9)\).</p>
+        <p class="etape">Étape 2 : éléments simples du reste</p>
+        \[ \frac{8x^2-10x+9}{(x-2)(x^2+3)}=\frac3{x-2}+\frac{5x}{x^2+3} \]
+        <p class="etape">Étape 3 : intégrer</p>
+        \[ \Big[\frac{x^2}2+x+3\ln|x-2|+\frac52\ln(x^2+3)\Big]_0^1=\frac32-3\ln2+\frac52(\ln4-\ln3) \]
+        <div class="res">\(\tfrac32+2\ln2-\tfrac52\ln3\approx0{,}640\)</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 10 — Primitive s'annulant en 2</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <div class="enonce">\(f(x)=\dfrac{5x^2+21x+22}{(x-1)(x+3)^2}\) sur \(]1,+\infty[\).</div>
-        <p>Éléments simples : \(f=\dfrac3{x-1}+\dfrac2{x+3}-\dfrac1{(x+3)^2}\). Primitive générale \(F=3\ln(x-1)+2\ln(x+3)+\tfrac1{x+3}+C\), condition \(F(2)=0\Rightarrow C=-2\ln5-\tfrac15\).</p>
+        <div class="enonce">\(f(x)=\dfrac{5x^2+21x+22}{(x-1)(x+3)^2}\). Déterminer la primitive de \(f\) sur \(]1,+\infty[\) qui s'annule en 2.</div>
+
+        <p class="q">1) Décomposition en éléments simples</p>
+        <p class="etape">Étape 1 : forme</p>
+        \[ f=\frac A{x-1}+\frac B{x+3}+\frac C{(x+3)^2} \]
+        <p class="etape">Étape 2 : coefficients</p>
+        <ul>
+          <li>\(A=\dfrac{5+21+22}{16}=3\).</li>
+          <li>\(C=\dfrac{5\cdot9-63+22}{-4}=\dfrac{4}{-4}=-1\).</li>
+          <li>Comportement à l'infini : \(xf(x)\to5\), donc \(A+B=5\) et \(B=2\).</li>
+        </ul>
+        <div class="res">\(f=\dfrac3{x-1}+\dfrac2{x+3}-\dfrac1{(x+3)^2}\) (vérifié : \(3(x+3)^2+2(x-1)(x+3)-(x-1)=5x^2+21x+22\)).</div>
+
+        <p class="q">2) Primitive générale sur \(]1,+\infty[\)</p>
+        <p class="etape">Étape 1 : \(x-1>0\) et \(x+3>0\), pas de valeur absolue</p>
+        <div class="res">\(F(x)=3\ln(x-1)+2\ln(x+3)+\dfrac1{x+3}+C\)</div>
+
+        <p class="q">3) Condition \(F(2)=0\)</p>
+        <p class="etape">Étape 1 : calculer \(F(2)\)</p>
+        \[ F(2)=3\ln1+2\ln5+\frac15+C=2\ln5+\frac15+C=0 \]
         <div class="res">\(F(x)=3\ln(x-1)+2\ln(x+3)+\dfrac1{x+3}-2\ln5-\dfrac15\)</div>
       </div>
     </div>
@@ -246,25 +642,69 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 12 — IPP astucieuses</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">\(I=\int_1^2\tfrac{\ln(1+t)}{t^2}dt\)</p><p>IPP \(u=\ln(1+t),dv=\tfrac{dt}{t^2}\) puis \(\tfrac1{t(1+t)}=\tfrac1t-\tfrac1{1+t}\).</p><p class="res">\(3\ln2-\tfrac32\ln3\)</p>
-        <p class="q">\(J=\int_0^1 x(\arctan x)^2dx\)</p><p class="res">\(\tfrac{\pi^2}{16}-\tfrac\pi4+\tfrac12\ln2\)</p>
-        <p class="q">\(K=\int_a^1\tfrac{x\ln x}{(x^2+1)^2}dx\) (\(a>0\))</p><p>\(u=\ln x,\ dv=\tfrac x{(x^2+1)^2}dx,\ v=-\tfrac1{2(x^2+1)}\).</p><p class="res">\(-\tfrac14\ln2+\tfrac14\ln(a^2+1)+\tfrac{\ln a}{2(a^2+1)}-\tfrac12\ln a\)</p>
+        <div class="enonce">Calculer \(I=\displaystyle\int_1^2\frac{\ln(1+t)}{t^2}dt\), \(J=\displaystyle\int_0^1x(\arctan x)^2dx\), \(K=\displaystyle\int_a^1\frac{x\ln x}{(x^2+1)^2}dx\) (\(a>0\)).</div>
+
+        <p class="q">1) \(I\)</p>
+        <p class="etape">Étape 1 : IPP, \(u=\ln(1+t)\), \(v'=\tfrac1{t^2}\), \(v=-\tfrac1t\)</p>
+        \[ I=\Big[-\frac{\ln(1+t)}t\Big]_1^2+\int_1^2\frac{dt}{t(1+t)}=-\frac{\ln3}2+\ln2+\int_1^2\frac{dt}{t(1+t)} \]
+        <p class="etape">Étape 2 : éléments simples</p>
+        \[ \int_1^2\Big(\frac1t-\frac1{1+t}\Big)dt=\big[\ln t-\ln(1+t)\big]_1^2=(\ln2-\ln3)+\ln2 \]
+        <div class="res">\(I=3\ln2-\tfrac32\ln3\)</div>
+
+        <p class="q">2) \(J\)</p>
+        <p class="etape">Étape 1 : IPP avec \(u=(\arctan x)^2\), \(v'=x\) et le choix \(v=\tfrac{x^2+1}2\)</p>
+        <p>(Le choix \(v=\tfrac{x^2+1}2\) simplifie ensuite le quotient.) \(u'=\dfrac{2\arctan x}{1+x^2}\).</p>
+        \[ J=\Big[\frac{x^2+1}2(\arctan x)^2\Big]_0^1-\int_0^1\arctan x\,dx=\frac{\pi^2}{16}-\int_0^1\arctan x\,dx \]
+        <p class="etape">Étape 2 : \(\int_0^1\arctan x\,dx\) (exercice 7 a)</p>
+        \[ \big[x\arctan x-\tfrac12\ln(1+x^2)\big]_0^1=\frac\pi4-\frac12\ln2 \]
+        <div class="res">\(J=\dfrac{\pi^2}{16}-\dfrac\pi4+\dfrac12\ln2\)</div>
+
+        <p class="q">3) \(K\)</p>
+        <p class="etape">Étape 1 : IPP, \(u=\ln x\), \(v'=\dfrac x{(x^2+1)^2}\), \(v=-\dfrac1{2(x^2+1)}\)</p>
+        \[ K=\Big[-\frac{\ln x}{2(x^2+1)}\Big]_a^1+\frac12\int_a^1\frac{dx}{x(x^2+1)} \]
+        <p class="etape">Étape 2 : éléments simples</p>
+        \[ \frac1{x(x^2+1)}=\frac1x-\frac x{x^2+1} \qquad \int_a^1=\Big[\ln x-\tfrac12\ln(x^2+1)\Big]_a^1=-\tfrac12\ln2-\ln a+\tfrac12\ln(a^2+1) \]
+        <p class="etape">Étape 3 : assembler</p>
+        <div class="res">\(K=\dfrac{\ln a}{2(a^2+1)}-\dfrac14\ln2+\dfrac14\ln(a^2+1)-\dfrac12\ln a\)</div>
       </div>
     </div>
 
     <div class="exo-card">
-      <div class="exo-head"><span>Exercice 13 — Fonction Bêta \(I(p,q)=\int_0^1t^p(1-t)^q\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-head"><span>Exercice 13 — Fonction Bêta \(I(p,q)=\int_0^1t^p(1-t)^q\,dt\)</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">1) Valeurs</p><p class="res">\(I(0,0)=1,\ I(1,0)=\tfrac12,\ I(1,1)=\tfrac16\)</p>
-        <p class="q">2) Symétrie</p><p>Changement \(t\mapsto1-t\).</p><p class="res">\(I(p,q)=I(q,p)\)</p>
-        <p class="q">3) \(I(p,0)\)</p><p class="res">\(\dfrac1{p+1}\)</p>
-        <p class="q">4) Récurrence (IPP)</p><p class="res">\(I(p,q+1)=\dfrac{q+1}{p+1}\,I(p+1,q)\)</p>
+        <div class="enonce">Pour \((p,q)\in\mathbb N^2\), \(I(p,q)=\displaystyle\int_0^1t^p(1-t)^q\,dt\). (1) Calculer \(I(0,0)\), \(I(1,0)\), \(I(1,1)\). (2) Montrer \(I(p,q)=I(q,p)\) par changement de variable. (3) Déterminer \(I(p,0)\). (4) Montrer par IPP que \(I(p,q+1)=\tfrac{q+1}{p+1}I(p+1,q)\). (5) En déduire \(I(p,1)\) puis \(I(p,2)\).</div>
+
+        <p class="q">1) \(I(0,0)\), \(I(1,0)\), \(I(1,1)\)</p>
+        <p class="etape">Étape 1 : calculer</p>
+        \[ I(0,0)=\int_0^11\,dt=1 \qquad I(1,0)=\int_0^1t\,dt=\frac12 \qquad I(1,1)=\int_0^1(t-t^2)dt=\frac12-\frac13 \]
+        <div class="res">\(I(0,0)=1\), \(I(1,0)=\tfrac12\), \(I(1,1)=\tfrac16\).</div>
+
+        <p class="q">2) Symétrie</p>
+        <p class="etape">Étape 1 : changement de variable \(s=1-t\)</p>
+        <p>\(ds=-dt\), bornes \(1\) et \(0\) échangées :</p>
+        \[ I(p,q)=\int_0^1(1-s)^ps^q\,ds=I(q,p) \]
+        <div class="res">\(I(p,q)=I(q,p)\).</div>
+
+        <p class="q">3) \(I(p,0)\)</p>
+        <p class="etape">Étape 1 : intégrer</p>
+        \[ \int_0^1t^p\,dt=\Big[\frac{t^{p+1}}{p+1}\Big]_0^1 \]
+        <div class="res">\(I(p,0)=\dfrac1{p+1}\).</div>
+
+        <p class="q">4) Relation de récurrence</p>
+        <p class="etape">Étape 1 : IPP, \(u=(1-t)^{q+1}\), \(v'=t^p\), \(v=\tfrac{t^{p+1}}{p+1}\)</p>
+        \[ I(p,q+1)=\Big[\frac{t^{p+1}(1-t)^{q+1}}{p+1}\Big]_0^1+\frac{q+1}{p+1}\int_0^1t^{p+1}(1-t)^q\,dt \]
+        <p class="etape">Étape 2 : le crochet</p>
+        <p>Il est nul (en 1 à cause de \((1-t)^{q+1}\), en 0 à cause de \(t^{p+1}\)).</p>
+        <div class="res">\(I(p,q+1)=\dfrac{q+1}{p+1}\,I(p+1,q)\).</div>
+
         <p class="q">5) \(I(p,1)\) et \(I(p,2)\)</p>
-        <p>\(I(p,1)=\tfrac1{p+1}I(p+1,0)=\tfrac1{(p+1)(p+2)}\) ; \(I(p,2)=\tfrac2{p+1}I(p+1,1)\).</p>
-        <div class="res">\(I(p,1)=\dfrac1{(p+1)(p+2)}\), \(I(p,2)=\dfrac2{(p+1)(p+2)(p+3)}\)</div>
+        <p class="etape">Étape 1 : \(q=0\) dans la relation</p>
+        \[ I(p,1)=\frac1{p+1}I(p+1,0)=\frac1{p+1}\cdot\frac1{p+2} \]
+        <p class="etape">Étape 2 : \(q=1\) dans la relation</p>
+        \[ I(p,2)=\frac2{p+1}I(p+1,1)=\frac2{p+1}\cdot\frac1{(p+2)(p+3)} \]
+        <div class="res">\(I(p,1)=\dfrac1{(p+1)(p+2)}\) et \(I(p,2)=\dfrac2{(p+1)(p+2)(p+3)}\).</div>
       </div>
     </div>
-
   </section>
 
   <p style="margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.9rem;opacity:.75">
