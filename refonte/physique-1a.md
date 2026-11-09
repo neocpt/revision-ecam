@@ -12,8 +12,8 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 | electro-stationnaire.html | 35 | fait |
 | electro-transitoire.html | 18 | fait |
 | electro-2nd-ordre.html | 19 | fait |
-| filtrage.html | 38 | en cours |
-| rsf-resonance-filtrage.html | 11 | à faire |
+| filtrage.html | 38 | fait |
+| rsf-resonance-filtrage.html | 11 | en cours |
 | acides-bases.html | 29 | à faire |
 | oxydoreduction.html | 29 | à faire |
 | atomistique.html | 24 | à faire |
@@ -55,3 +55,10 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 - Erreur corrigée : Ex 9, période idéale T = 2π√(LC) ≈ 0,14 ms (et non 0,25 ms) → warnbox.
 - Erreur corrigée : Ex 8, L ≈ 13 mH n'était pas arrondi à 10 mH avant le calcul de C : C ≈ 4 nF (et non 5 nF) ; signalé que le montage est probablement 10 mH / 5 nF et que l'écart vient de la lecture graphique → warnbox.
 - Ex 7 : amplitude initiale η/(CΩ) ≈ 2,3 V ajoutée. Ex 10 : pseudo-période ≈ 13 µs ajoutée.
+
+### filtrage.html — fait
+- 38 cartes réécrites (3 créées + 35 TD). 10 cartes sans énoncé (EC 2, EC 3, Ex 1, Ex 3-5, Ex 6, Ex 11-15) : énoncé reconstitué.
+- Erreur corrigée : Ex 17, f0 = √(100 × 2000) ≈ 447 Hz (et non 501 Hz), donc Q ≈ 0,24 → warnbox.
+- Erreur corrigée : Ex 19 (coupe-bande), Q grand demande R petit (Q = (1/R)√(L/C)) et non de grandes résistances → warnbox.
+- Erreur corrigée : Ex 10, la forme 1/(1 − x² + jx/Q) est un passe-bas (BF 0 dB, HF −40 dB/déc), pas un passe-haut : forme du passe-haut rappelée → warnbox.
+- Ex 24 : le graphe n'est pas disponible, les lectures de l'ancienne version sont conservées.
