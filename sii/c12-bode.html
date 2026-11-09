@@ -129,7 +129,6 @@ window.MathJax = {
     </div>
   </section>
 
-  <!-- ======================= EXOS CRÉÉS =============================== -->
   <section class="block" id="exos">
     <h2>2. Exercices d'entraînement (créés) avec corrections</h2>
 
@@ -137,8 +136,18 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice A — Lire gain & phase d'un 1ᵉʳ ordre</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">\(H(p)=\dfrac{5}{1+0{,}1p}\). Réponse à \(\omega=10\) rad/s ?</div>
-        <p>\(\omega_c=1/\tau=10\) rad/s → on est <b>à la coupure</b>. \(G_{dB}=20\log5-3=14-3=11\) dB, soit \(G=10^{11/20}\approx3{,}5\). \(\varphi=-45°\).</p>
-        <p class="res">Pour \(e=E_0\sin(10t)\) : \(s\approx3{,}5\,E_0\sin(10t-45°)\)</p>
+
+        <p class="q">1) Sortie pour une entrée sinusoïdale à 10 rad/s</p>
+        <p class="etape">Étape 1 : où est 10 rad/s ?</p>
+        <div class="rappel"><span class="lab">Rappel · 1er ordre à la pulsation de coupure</span>\[ \omega_c = \frac1\tau \qquad G_{dB}(\omega_c) = 20\log K - 3\ \text{dB} \qquad \varphi(\omega_c) = -45^\circ \]</div>
+        \[ \omega_c = \frac{1}{0{,}1} = 10\ \text{rad/s} \]
+        <p>On est exactement à la coupure.</p>
+        <p class="etape">Étape 2 : gain</p>
+        \[ G_{dB} = 20\log 5 - 3 \approx 14 - 3 = 11\ \text{dB} \qquad G = \frac{5}{\sqrt2} \approx 3{,}5 \]
+        <p class="etape">Étape 3 : phase</p>
+        \[ \varphi = -\arctan(\tau\omega) = -\arctan 1 = -45^\circ \]
+        <div class="res">Pour \(e = E_0\sin(10t)\) : \(s \approx 3{,}5\,E_0\sin(10t - 45^\circ)\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> −3 dB correspond à une division par \(\sqrt2\) du gain, pas par 2 : \(5/\sqrt2 \approx 3{,}5\).</div>
       </div>
     </div>
 
@@ -146,9 +155,18 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice B — Résonance d'un 2ᵉ ordre</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <div class="enonce">\(\omega_0=100\) rad/s, \(z=0{,}3\), \(K=1\). Résonance ?</div>
-        <p>\(z<0{,}707\) → résonance. \(\omega_r=\omega_0\sqrt{1-2z^2}=100\sqrt{1-0{,}18}=100\times0{,}906=90{,}6\) rad/s.</p>
-        <p>\(Q=\dfrac1{2z\sqrt{1-z^2}}=\dfrac1{2\cdot0{,}3\cdot0{,}954}=1{,}75\), \(Q_{dB}=20\log1{,}75\approx4{,}9\) dB.</p>
-        <p class="res">Pic de \(+4{,}9\) dB à \(\omega_r\approx91\) rad/s</p>
+
+        <p class="q">1) Pulsation de résonance et surtension</p>
+        <div class="rappel"><span class="lab">Rappel · résonance d'un 2e ordre</span>Elle existe si \(z \lt \dfrac{\sqrt2}{2} \approx 0{,}707\).
+          \[ \omega_r = \omega_0\sqrt{1 - 2z^2} \qquad Q = \frac{1}{2z\sqrt{1 - z^2}} \]</div>
+        <p class="etape">Étape 1 : y a-t-il résonance ?</p>
+        <p>\(z = 0{,}3 \lt 0{,}707\) : oui.</p>
+        <p class="etape">Étape 2 : pulsation de résonance</p>
+        \[ \omega_r = 100\sqrt{1 - 2 \times 0{,}09} = 100\sqrt{0{,}82} \approx 90{,}6\ \text{rad/s} \]
+        <p class="etape">Étape 3 : surtension</p>
+        \[ Q = \frac{1}{2 \times 0{,}3 \times \sqrt{0{,}91}} = \frac{1}{2 \times 0{,}3 \times 0{,}954} \approx 1{,}75 \qquad Q_{dB} = 20\log 1{,}75 \approx 4{,}9\ \text{dB} \]
+        <div class="res">Pic de \(+4{,}9\) dB à \(\omega_r \approx 91\) rad/s.</div>
+        <div class="warnbox"><span class="lab">Piège</span> La résonance n'a pas lieu en \(\omega_0\) mais un peu avant, en \(\omega_r \lt \omega_0\).</div>
       </div>
     </div>
   </section>
@@ -162,33 +180,100 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 1.2 — Mise sous forme de produit</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">\(F=\dfrac{10}{p}\)</p><p>Intégrateur gain 10 : \(-20\) dB/déc, 0 dB en \(\omega=10\), \(\varphi=-90°\).</p>
-        <p class="q">\(G=\dfrac{2}{1+p/5}\)</p><p>1ᵉʳ ordre \(K=2\) (\(+6\) dB), cassure \(\omega_c=5\).</p>
-        <p class="q">\(F_2=\dfrac{2000}{p(100+p)}=\dfrac{20}{p\,(1+p/100)}\)</p><p>Intégrateur gain 20 (0 dB en 20) + pôle en 100 : \(-20\) puis \(-40\) dB/déc.</p>
-        <p class="q">\(F=\dfrac{1000(2+p)}{p(100+p)}=\dfrac{20\,(1+p/2)}{p\,(1+p/100)}\)</p>
-        <p>Intégrateur (gain 20) × zéro en 2 × pôle en 100. Pentes : \(-20\) (ω&lt;2), <b>0</b> (2→100, plateau à ≈20 dB), \(-20\) (ω&gt;100). Croisement 0 dB à \(\omega=1000\).</p>
-        <p class="res">Phase à la coupure 0 dB (\(\omega=1000\)) : \(-90°+90°-90°\approx\mathbf{-90°}\)</p>
+        <div class="enonce">Mettre chaque fonction de transfert sous forme d'un produit d'éléments simples, puis donner les pentes et cassures de son diagramme de Bode asymptotique.</div>
+        <div class="rappel"><span class="lab">Rappel · éléments simples de Bode</span>
+          <ul>
+            <li>Gain \(K\) : droite horizontale à \(20\log K\), \(\varphi = 0\).</li>
+            <li>Intégrateur \(\dfrac{K}{p}\) : pente −20 dB/déc, 0 dB en \(\omega = K\), \(\varphi = -90^\circ\).</li>
+            <li>Pôle \(\dfrac{1}{1 + p/\omega_c}\) : la pente perd 20 dB/déc après \(\omega_c\) ; zéro \(1 + p/\omega_c\) : elle en gagne 20.</li>
+          </ul></div>
+
+        <p class="q">1) \(F=\dfrac{10}{p}\)</p>
+        <div class="res">Intégrateur de gain 10 : pente −20 dB/déc, 0 dB en \(\omega = 10\) rad/s, \(\varphi = -90^\circ\).</div>
+
+        <p class="q">2) \(G=\dfrac{2}{1+p/5}\)</p>
+        \[ 20\log 2 \approx 6\ \text{dB} \]
+        <div class="res">1er ordre, \(K = 2\) (6 dB), cassure en \(\omega_c = 5\) rad/s, puis −20 dB/déc.</div>
+
+        <p class="q">3) \(F_2=\dfrac{2000}{p(100+p)}\)</p>
+        <p>On factorise 100 dans la parenthèse :</p>
+        \[ F_2 = \frac{2000}{100\,p\,(1 + p/100)} = \frac{20}{p\,(1 + p/100)} \]
+        <div class="res">Intégrateur de gain 20 (0 dB en \(\omega = 20\)) et pôle en 100 : pente −20 puis −40 dB/déc.</div>
+
+        <p class="q">4) \(F=\dfrac{1000(2+p)}{p(100+p)}\)</p>
+        <p class="etape">Étape 1 : forme canonique</p>
+        \[ F = \frac{1000 \times 2\,(1 + p/2)}{100\,p\,(1 + p/100)} = \frac{20\,(1 + p/2)}{p\,(1 + p/100)} \]
+        <p class="etape">Étape 2 : pentes successives</p>
+        <ul>
+          <li>\(\omega \lt 2\) : intégrateur seul, −20 dB/déc. En \(\omega = 2\) : \(20\log(20/2) = 20\) dB.</li>
+          <li>\(2 \lt \omega \lt 100\) : le zéro compense, pente 0, plateau à 20 dB.</li>
+          <li>\(\omega > 100\) : le pôle redonne −20 dB/déc ; on perd 20 dB en une décade, d'où 0 dB en \(\omega = 1000\).</li>
+        </ul>
+        <p class="etape">Étape 3 : phase à \(\omega = 1000\)</p>
+        <p>Asymptotiquement : \(-90^\circ + 90^\circ - 90^\circ = -90^\circ\). Valeur exacte :</p>
+        \[ \varphi = -90^\circ + \arctan\frac{1000}{2} - \arctan\frac{1000}{100} \approx -90^\circ + 89{,}9^\circ - 84{,}3^\circ \approx -84^\circ \]
+        <div class="res">Pentes −20 / 0 / −20 dB/déc, cassures en 2 et 100 rad/s, plateau à 20 dB ; 0 dB en \(\omega = 1000\) rad/s, où \(\varphi \approx -90^\circ\) en asymptotique (−84° en réel).</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 1.3 — Formes canoniques (1ᵉʳ ordre)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
-        <p class="q">\(F_1=\dfrac{20}{10+p}=\dfrac{2}{1+p/10}\)</p><p class="res">\(K=2\) (6 dB), cassure \(\omega_c=10\), pente \(-20\) dB/déc après</p>
-        <p class="q">\(F_2=\dfrac{0{,}05p+2}{1+0{,}1p}=\dfrac{2(1+0{,}025p)}{1+0{,}1p}\)</p><p class="res">\(K=2\), zéro en 40, pôle en 10</p>
-        <p class="q">\(F_3=\dfrac{4}{p(1+0{,}2p)}\)</p><p class="res">Intégrateur gain 4, pôle en \(\omega=5\)</p>
-        <p class="q">\(F_4=\dfrac{2+3p}{0{,}08(p+5)^2}=\dfrac{1+1{,}5p}{(1+p/5)^2}\)</p><p class="res">\(K=1\), zéro en \(2/3\), pôle double en 5</p>
+        <div class="enonce">Mettre sous forme canonique et repérer gain, zéros et pôles.</div>
+        <div class="rappel"><span class="lab">Rappel · forme canonique</span>On factorise le terme constant de chaque facteur pour faire apparaître des \(1 + \tau p\) ; le zéro ou le pôle est alors en \(\omega = 1/\tau\).</div>
+
+        <p class="q">1) \(F_1=\dfrac{20}{10+p}\)</p>
+        \[ F_1 = \frac{20}{10\,(1 + p/10)} = \frac{2}{1 + p/10} \]
+        <div class="res">\(K = 2\) (6 dB), cassure \(\omega_c = 10\) rad/s, pente −20 dB/déc après.</div>
+
+        <p class="q">2) \(F_2=\dfrac{0{,}05p+2}{1+0{,}1p}\)</p>
+        \[ F_2 = \frac{2\,(1 + 0{,}025\,p)}{1 + 0{,}1\,p} \qquad \frac{1}{0{,}025} = 40 \qquad \frac{1}{0{,}1} = 10 \]
+        <div class="res">\(K = 2\), zéro en 40 rad/s, pôle en 10 rad/s.</div>
+
+        <p class="q">3) \(F_3=\dfrac{4}{p(1+0{,}2p)}\)</p>
+        <div class="res">Intégrateur de gain 4, pôle en \(\omega = 1/0{,}2 = 5\) rad/s.</div>
+
+        <p class="q">4) \(F_4=\dfrac{2+3p}{0{,}08(p+5)^2}\)</p>
+        \[ F_4 = \frac{2\,(1 + 1{,}5\,p)}{0{,}08 \times 25\,(1 + p/5)^2} = \frac{1 + 1{,}5\,p}{(1 + p/5)^2} \]
+        <div class="res">\(K = 1\), zéro en \(1/1{,}5 = 2/3\) rad/s, pôle double en 5 rad/s.</div>
       </div>
     </div>
 
     <div class="exo-card">
       <div class="exo-head"><span>Exercice 2.1 — Second ordre & bande passante</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
-        <p class="q">\(F_1=\dfrac{3}{2+0{,}1p+0{,}02p^2}=\dfrac{1{,}5}{1+0{,}05p+0{,}01p^2}\)</p>
-        <p>\(\dfrac1{\omega_0^2}=0{,}01\Rightarrow\omega_0=10\) rad/s ; \(\dfrac{2z}{\omega_0}=0{,}05\Rightarrow z=0{,}25\). \(z<0{,}707\) → <b>résonance</b>.</p>
-        <p class="res">\(K=1{,}5\), \(\omega_0=10\), \(z=0{,}25\), \(\omega_r=10\sqrt{1-0{,}125}=9{,}35\) rad/s, \(Q\approx2{,}1\) (6,3 dB)</p>
-        <p class="q">\(F_3=\dfrac{5(2+0{,}5p)}{(0{,}5+2p+10p^2)p}\)</p>
-        <p class="res">Intégrateur × 1ᵉʳ ordre (zéro en 4) × inverse d'un 2ᵉ ordre (\(\omega_0=\sqrt{0{,}5/10}=0{,}22\), \(z=\tfrac{2}{2\cdot10\cdot0{,}22}\approx0{,}45\))</p>
+        <div class="enonce">Mettre sous forme canonique \(F_1\) et \(F_3\), en déduire leurs caractéristiques ; déterminer la bande passante à −3 dB de \(F_1\).</div>
+
+        <p class="q">1) \(F_1=\dfrac{3}{2+0{,}1p+0{,}02p^2}\)</p>
+        <p class="etape">Étape 1 : forme canonique</p>
+        <div class="rappel"><span class="lab">Rappel · forme canonique d'un 2e ordre</span>\[ H(p) = \frac{K}{1 + \dfrac{2z}{\omega_0}\,p + \dfrac{p^2}{\omega_0^2}} \]</div>
+        <p>On divise par 2 :</p>
+        \[ F_1 = \frac{1{,}5}{1 + 0{,}05\,p + 0{,}01\,p^2} \]
+        <p class="etape">Étape 2 : identification</p>
+        \[ \frac{1}{\omega_0^2} = 0{,}01 \iff \omega_0 = 10\ \text{rad/s} \qquad \frac{2z}{\omega_0} = 0{,}05 \iff z = 0{,}25 \]
+        <p class="etape">Étape 3 : résonance</p>
+        <p>\(z = 0{,}25 \lt 0{,}707\) : il y a résonance.</p>
+        \[ \omega_r = 10\sqrt{1 - 2 \times 0{,}25^2} = 10\sqrt{0{,}875} \approx 9{,}35\ \text{rad/s} \qquad Q = \frac{1}{2 \times 0{,}25\sqrt{1 - 0{,}0625}} \approx 2{,}07\ (6{,}3\ \text{dB}) \]
+        <div class="res">\(K = 1{,}5\), \(\omega_0 = 10\) rad/s, \(z = 0{,}25\), \(\omega_r \approx 9{,}35\) rad/s, \(Q \approx 2{,}1\) (6,3 dB).</div>
+
+        <p class="q">2) Bande passante à −3 dB de \(F_1\)</p>
+        <div class="rappel"><span class="lab">Rappel · pulsation de coupure à −3 dB</span>\[ |F(j\omega_c)| = \frac{K}{\sqrt2} \]</div>
+        <p class="etape">Étape 1 : le seuil</p>
+        \[ \frac{K}{\sqrt2} = \frac{1{,}5}{\sqrt2} \approx 1{,}06 \]
+        <p class="etape">Étape 2 : l'équation à résoudre</p>
+        \[ \frac{1{,}5}{\sqrt{(1 - 0{,}01\,\omega_c^2)^2 + (0{,}05\,\omega_c)^2}} = 1{,}06 \]
+        <p class="etape">Étape 3 : résolution</p>
+        <p>En posant \(u = \omega_c/\omega_0\), on obtient la formule classique :</p>
+        \[ \omega_c = \omega_0\sqrt{1 - 2z^2 + \sqrt{2 - 4z^2 + 4z^4}} = 10\sqrt{0{,}875 + \sqrt{1{,}7656}} \approx 14{,}8\ \text{rad/s} \]
+        <div class="res">Bande passante à −3 dB : \(\omega_c \approx 14{,}8\) rad/s (vérifiée numériquement).</div>
+
+        <p class="q">3) \(F_3=\dfrac{5(2+0{,}5p)}{(0{,}5+2p+10p^2)p}\)</p>
+        <p class="etape">Étape 1 : forme canonique (corrigé officiel)</p>
+        \[ F_3 = \frac{5 \times 2\,(1 + 0{,}25\,p)}{0{,}5\,p\,(1 + 4p + 20p^2)} = \frac{20}{p}\times(1 + 0{,}25\,p)\times\frac{1}{1 + 4p + 20p^2} \]
+        <p class="etape">Étape 2 : identification du 2e ordre</p>
+        \[ \frac{1}{\omega_0^2} = 20 \iff \omega_0 = \frac{1}{\sqrt{20}} \approx 0{,}22\ \text{rad/s} \qquad \frac{2z}{\omega_0} = 4 \iff z = 2\,\omega_0 \approx 0{,}45 \]
+        <div class="res">Intégrateur de gain 20 × zéro en 4 rad/s (\(1 + 0{,}25p\)) × 2e ordre (\(\omega_0 \approx 0{,}22\) rad/s, \(z \approx 0{,}45\)).</div>
+        <div class="warnbox"><span class="lab">Correction d'une erreur de l'ancienne version</span> L'ancienne correction parlait d'« inverse d'un 2e ordre ». Le trinôme \(1 + 4p + 20p^2\) est au <b>dénominateur</b> : c'est un 2e ordre ordinaire (pente −40 dB/déc après \(\omega_0\)), comme dans le corrigé officiel. L'inverse d'un 2e ordre aurait le trinôme au numérateur.</div>
       </div>
     </div>
 
@@ -196,13 +281,30 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice 3.1 — Asservissement de freinage A320</span><span class="diff">♦♦♦</span></div>
       <div class="exo-body">
         <div class="enonce">\(H_b=K_i\tfrac{1+\tau_ip}{\tau_ip}\) (PI), \(H_s=\tfrac{K_s}{(1+\tau_sp)^2}\), \(H_f=K_f\) ; \(K_s=100\), \(\tau_s=8{,}7\cdot10^{-2}\) s, \(\tau_i=1\) s.</div>
+
         <p class="q">Q1 — Bande passante de l'accéléromètre</p>
-        <p>Lue sur son Bode (pulsation à \(-3\) dB). Cahier des charges : bande passante &gt; 10 Hz (≈ 63 rad/s). On vérifie que l'accéléromètre est <b>plus rapide</b> que l'exigence (sa BP ≫ celle attendue) → il ne limite pas l'asservissement. Forme : 2ᵉ ordre passe-bas.</p>
+        <p class="etape">Étape 1 : traduire l'exigence</p>
+        <div class="rappel"><span class="lab">Rappel · fréquence et pulsation</span>\[ \omega = 2\pi f \]</div>
+        \[ 10\ \text{Hz} \;\longrightarrow\; \omega = 2\pi \times 10 \approx 63\ \text{rad/s} \]
+        <p class="etape">Étape 2 : lecture et comparaison</p>
+        <p>On lit sur le Bode de l'accéléromètre la pulsation où le gain a perdu 3 dB. Elle est bien plus grande que 63 rad/s : le capteur est plus rapide que ce qu'exige le cahier des charges.</p>
+        <div class="res">L'accéléromètre ne limite pas l'asservissement. Sa forme : un 2e ordre passe-bas.</div>
+
         <p class="q">Q2 — FTBO</p>
-        <p>\(FTBO=H_bH_sH_fH_a\) : le PI apporte un <b>intégrateur</b> (\(\tfrac1{\tau_ip}\)) → classe 1 → <b>précision parfaite</b> en poursuite échelon (décélération atteinte exactement, exigence validée).</p>
-        <p class="q">Q3–Q4 — FTBF : asymptote BF & surtension</p>
-        <p>Asymptote BF horizontale à 0 dB ⟹ gain statique BF = 1 (précis). La <b>surtension</b> lue sur la FTBF (\(Q_{dB}\)) doit rester &lt; 5 dB (cahier des charges). Une surtension fréquentielle ⟹ <b>dépassements</b> sur la réponse indicielle (\(z<0{,}707\)).</p>
-        <p class="res">PI ⟹ précision assurée ; réglage de \(K_i\) pour surtension &lt; 5 dB et bande passante &gt; 10 Hz</p>
+        \[ FTBO(p) = H_b\,H_s\,H_f\,H_a = K_i\,\frac{1 + \tau_i p}{\tau_i p}\cdot\frac{K_s}{(1 + \tau_s p)^2}\cdot K_f\cdot H_a(p) \]
+        <ul>
+          <li>Le PI apporte un intégrateur \(\dfrac{1}{\tau_i p}\) : FTBO de classe 1.</li>
+          <li>Cassures : zéro en \(1/\tau_i = 1\) rad/s, pôle double en \(1/\tau_s \approx 11{,}5\) rad/s, puis celles de l'accéléromètre.</li>
+        </ul>
+        <div class="res">FTBO de classe 1 : <b>précision parfaite</b> en poursuite d'un échelon ; la décélération demandée est atteinte exactement, l'exigence est validée.</div>
+
+        <p class="q">Q3–Q4 — FTBF : asymptote BF &amp; surtension</p>
+        <p class="etape">Étape 1 : asymptote basse fréquence</p>
+        <p>Elle est horizontale à 0 dB : le gain statique en boucle fermée vaut 1, le système est précis.</p>
+        <p class="etape">Étape 2 : surtension</p>
+        <p>On lit \(Q_{dB}\) au sommet de la FTBF et on le compare aux 5 dB du cahier des charges.</p>
+        <div class="rappel"><span class="lab">Rappel · résonance et dépassement</span>Une surtension en fréquentiel (\(z \lt 0{,}707\)) correspond à des dépassements sur la réponse indicielle.</div>
+        <div class="res">PI ⟹ précision assurée. On règle \(K_i\) pour une surtension inférieure à 5 dB et une bande passante supérieure à 10 Hz ; toute surtension se traduira par des dépassements de la décélération.</div>
       </div>
     </div>
 
@@ -210,10 +312,11 @@ window.MathJax = {
       <span class="lab">Bilan C12</span>
       Point d'orgue de l'automatique : caractériser un SLCI par sa <b>réponse harmonique</b> (\(p\to j\omega\)) et la tracer dans <b>Bode</b>
       (produit ⟹ addition des dB et des phases). Connaître par cœur les diagrammes des <b>éléments simples</b> et des <b>1ᵉʳ/2ᵉ ordres</b>
-      (pente HF, coupure \(\omega_c\), résonance si \(z<0{,}707\), surtension \(Q\)). Retenir : <b>large bande passante = système rapide</b>.
+      (pente HF, coupure \(\omega_c\), résonance si \(z \lt 0{,}707\), surtension \(Q\)). Retenir : <b>large bande passante = système rapide</b>.
       Application : identification de FT, dimensionnement de correcteurs, validation d'un cahier des charges fréquentiel (ex. freinage A320).
     </div>
   </section>
+
   <section class="block" id="docs">
     <h2>📂 Documents donnés</h2>
     <p class="docs-intro">Tous les documents originaux liés à ce chapitre (cours magistral, TD, corrigés…). Cliquez pour ouvrir le PDF.</p>

@@ -25,7 +25,7 @@ Conventions retenues :
 | c09-statique-transmetteurs | fait | 2 créés + 2 ex. du TD ; tous les résultats justes. Aucun corrigé Bigeard applicable. |
 | c10-liaisons | fait | 2 créés + 4 cartes du TD. Bigeard utilisé (guidage en rotation, pompe hydraulique). **2 erreurs corrigées** (biellette = sphère-plan, pas sphère-cylindre). |
 | c11-transmetteurs-non-lineaires | fait | Section `#app` (bielle-manivelle A1-A3 + vitesse) + 5 exercices créés. Graphe SVG redessiné (textes 20/22, viewBox 760). Résultats justes. |
-| c12-bode | à faire | |
+| c12-bode | fait | 2 créés + 4 ex. du TD. Corrigé officiel ECAM (TDcorr) utilisé pour 2.1 et A320. **1 erreur corrigée** (F3 : 2e ordre, pas « inverse »). |
 | c13-actions-internes | à faire | |
 | c14-resistances-actions-locales | à faire | |
 
@@ -59,6 +59,7 @@ Conventions retenues :
 | c10 | Ex 2.2 Guidage en rotation | `liaisons-equivalentes_guidage-en-rotation/LEQ-MPSI-TD-guidage_en_rotation-prof.pdf` | utilisé : même exercice (même texte) ; méthode « 4 arrêts → sphérique, 2 arrêts → sphère-cylindre » et égalisation des torseurs par Varignon ; lettres A/B inversées chez Bigeard (dessin différent) → `.warnbox` |
 | c10 | Ex 2.3 Pompe hydraulique (Hydro-Leduc) | `liaisons-equivalentes_pompe-hydraulique/LEQ-MPSI-TD-pompe_hydraulique-prof.pdf` | utilisé : appui-plan + sphérique en série → sphère-plan de normale y (Q4 Bigeard) ; rôle des plots/patins (Q6 Bigeard) |
 | c11 | Application bielle-manivelle (CM), Ex A à E (créés) | aucun corrigé Bigeard de ces questions (`transmission-de-puissance_joint-de-cardan-de-la-dae` : autre cardan, autres données) | correction actuelle, revérifiée |
+| c12 | Ex A, B (créés), 1.2, 1.3, 2.1, 3.1 A320 | aucun corrigé Bigeard de ces fonctions (`analyse-harmonique-des-slci_diagrammes-de-bode-trace-et-identification-de-ft-td` = autres fonctions) ; corrigé ECAM `S2I-C12-TDcorr` consulté pour F1, F3 et l'A320 | correction actuelle, revérifiée |
 
 - **c01 revu avec la règle Bigeard** : aucun corrigé Bigeard ne traite ces questions (voir tableau) ; page inchangée.
 - **c02** : TD 1 (3 ex.) + TD 2 (3 ex.) + 2 créés. Recalculs : \(D_1\%=3/19=15{,}8\%\), \(e_r\%=10/40=25\%\), \(D_1\%=9/50=18\%\), \(\eta=0{,}83\) : justes. Ajout de pièges (division par \(\Delta s\) et non par \(s(\infty)\), unités incompatibles du four). Aucun corrigé Bigeard applicable.
@@ -71,3 +72,4 @@ Conventions retenues :
 - **c09** : recalculs Python : 0,113 N·m, 177 N, 0,0707 N·m, 4,42 N·m, 3,31 N·m, 104,2 N·m, 2452 N·m, 3562 N·m : justes. Énoncé ajouté à l'Ex A (les données étaient dans les questions).
 - **c10** : 1.4 (sphérique + sphérique en série) et 2.4 (biellette) : l'ancienne version donnait « sphère-cylindre de direction AB » ; le calcul par Varignon donne v selon AB nulle et les deux autres libres → **sphère-plan de normale (AB)**, `.warnbox` « Correction d'une erreur ». Pompe Q3 : l'ancienne réponse (« appui-plan en série avec les liaisons du piston ») ne donnait pas l'équivalent ; remplacée par la sphère-plan de Bigeard. Guidage : modèle A sphérique / B sphère-cylindre vérifié sur la figure de l'énoncé ECAM (arrêts axiaux de chaque bague).
 - **c11** : recalculs Python : √38125 = 195,26 ; x = 220,26 mm ; β = 12,50° ; f' = −48,85 mm/rad ; ẋ = −511 mm/s ; F = 409,5 N et 368,5 N ; |f'|max = 51,54 mm/rad ; cardan 2819 / 3193 tr/min ; came 50,3 mm/s : justes. Le graphe x(α), f'(α) (police 11-13 dans un viewBox 640) a été régénéré en Python : viewBox 760 × 760, textes 20, titres 22, étiquettes hors des courbes. Ex E : situations passées dans un `.enonce`, une `.q` par cas.
+- **c12** : recalculs Python : ωc(F1) = 14,85 rad/s, ωr = 9,35, Q = 2,07 (6,3 dB), ωr(Ex B) = 90,6, Q = 1,75 (4,9 dB), φ(1000) réel = −84,4° : justes. Erreur : F3 de 2.1 décrit comme « inverse d'un 2e ordre » alors que le trinôme est au dénominateur (corrigé officiel) → `.warnbox`. Ajouts : bande passante de F1 (Q2 du corrigé officiel), phase exacte de 1.2-4. A320 : pas de valeur numérique lisible sans les figures, réponses qualitatives conservées.
