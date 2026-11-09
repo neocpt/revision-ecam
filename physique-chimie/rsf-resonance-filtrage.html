@@ -424,17 +424,21 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
       <div class="exo-body">
         <p class="enonce">Résoudre \(\dfrac{\mathrm du_C}{\mathrm dt}+\dfrac1\tau u_C=\dfrac{e(t)}{\tau}\) avec
         \(e=E_m\cos(\omega t)\), \(\tau=RC\), en RSF (solution particulière).</p>
+
         <p class="q">1) Passage en complexe</p>
-        <p>\(\dfrac{\mathrm d}{\mathrm dt}\to j\omega\), donc l'équation devient algébrique :
-        \(j\omega\,\underline{U_C}+\dfrac1\tau\underline{U_C}=\dfrac1\tau\underline E\), soit
-        \(\underline{U_C}\big(j\omega+\tfrac1\tau\big)=\tfrac1\tau\underline E\).</p>
+        <div class="rappel"><span class="lab">Rappel · dérivée en notation complexe</span>\[ \frac{d}{dt} \longrightarrow j\omega \]En RSF, on cherche la solution particulière sinusoïdale de même pulsation que \(e\).</div>
+        <p>L'équation différentielle devient algébrique :</p>
+        \[ j\omega\,\underline U_C + \frac1\tau\,\underline U_C = \frac1\tau\,\underline E \iff \underline U_C\left(j\omega + \frac1\tau\right) = \frac1\tau\,\underline E \]
+
         <p class="q">2) Fonction de transfert</p>
-        <p>\[\underline{U_C}=\frac{1}{1+j\omega\tau}\,\underline E\]</p>
-        <p class="q">3) Amplitude &amp; phase</p>
-        <p>\(U_{C,m}=|\underline{U_C}|=\dfrac{E_m}{\sqrt{1+(\omega\tau)^2}}\) et
-        \(\varphi=\arg\underline{U_C}=-\arg(1+j\omega\tau)=-\arctan(\omega\tau)\) (partie réelle \(>0\), arctan direct).</p>
-        <div class="res">\(\underline{U_C}=\dfrac{\underline E}{1+j\omega\tau}\) : passe-bas 1ᵉʳ ordre,
-        \(U_{C,m}=\dfrac{E_m}{\sqrt{1+(\omega\tau)^2}}\), \(\varphi=-\arctan(\omega\tau)\in[-\frac{\pi}{2},0]\).</div>
+        <p>On multiplie par \(\tau\) :</p>
+        <div class="res">\(\underline U_C = \dfrac{1}{1 + j\omega\tau}\,\underline E\).</div>
+
+        <p class="q">3) Amplitude et phase</p>
+        <div class="rappel"><span class="lab">Rappel · module et argument</span>\[ \left|\frac{1}{a + jb}\right| = \frac{1}{\sqrt{a^2 + b^2}} \qquad \arg\frac{1}{a + jb} = -\arg(a + jb) \]</div>
+        \[ U_{C,m} = \frac{E_m}{\sqrt{1 + (\omega\tau)^2}} \qquad \varphi = -\arctan(\omega\tau) \]
+        <p>La partie réelle du dénominateur est positive : l'arctangente s'applique directement.</p>
+        <div class="res">Passe-bas du 1er ordre : \(U_{C,m} = \dfrac{E_m}{\sqrt{1 + (\omega\tau)^2}}\) et \(\varphi = -\arctan(\omega\tau) \in [-\pi/2\,;\,0]\).</div>
       </div>
     </div>
 
@@ -443,14 +447,15 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
       <div class="exo-body">
         <p class="enonce">RL série alimenté par \(e=E_m\cos(\omega t)\). Exprimer \(u_L(t)\) sans équation
         différentielle, en faisant apparaître \(\tau\).</p>
+
         <p class="q">1) Pont diviseur de tension</p>
-        <p>\[\underline{U_L}=\frac{jL\omega}{R+jL\omega}\,\underline E=\frac{j\omega\tau}{1+j\omega\tau}\,\underline E
-        \qquad\text{avec}\quad \tau=\frac LR\]</p>
-        <p class="q">2) Amplitude &amp; phase</p>
-        <p>\(U_{L,m}=\dfrac{\omega\tau}{\sqrt{1+(\omega\tau)^2}}E_m\) et
-        \(\varphi=\arg(j\omega\tau)-\arg(1+j\omega\tau)=\dfrac{\pi}{2}-\arctan(\omega\tau)\).</p>
-        <div class="res">\(\underline{U_L}=\dfrac{j\omega\tau}{1+j\omega\tau}\underline E\), \(\tau=L/R\) :
-        <b>passe-haut</b> 1ᵉʳ ordre (la bobine « garde » la tension en HF).</div>
+        <div class="rappel"><span class="lab">Rappel · pont diviseur de tension</span>\[ \underline U_L = \frac{\underline Z_L}{R + \underline Z_L}\,\underline E \qquad \underline Z_L = jL\omega \]</div>
+        <p>On divise par \(R\), avec \(\tau = L/R\) :</p>
+        \[ \underline U_L = \frac{jL\omega}{R + jL\omega}\,\underline E = \frac{j\omega\tau}{1 + j\omega\tau}\,\underline E \]
+
+        <p class="q">2) Amplitude et phase</p>
+        \[ U_{L,m} = \frac{\omega\tau}{\sqrt{1 + (\omega\tau)^2}}\,E_m \qquad \varphi = \arg(j\omega\tau) - \arg(1 + j\omega\tau) = \frac{\pi}{2} - \arctan(\omega\tau) \]
+        <div class="res">\(\underline U_L = \dfrac{j\omega\tau}{1 + j\omega\tau}\,\underline E\), avec \(\tau = L/R\) : passe-haut du 1er ordre. En haute fréquence, la bobine garde la tension.</div>
       </div>
     </div>
 
@@ -458,15 +463,16 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
       <div class="exo-head">App. 5 — Tension aux bornes de \(C\) d'un RLC série <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">Exprimer \(\underline{U_C}\) et retrouver la forme canonique avec \(\omega_0\) et \(Q\).</p>
-        <p class="q">Pont diviseur puis mise en forme</p>
-        <p>\(\underline{U_C}=\dfrac{Z_C}{R+jL\omega+Z_C}\underline E\) avec \(Z_C=\frac{1}{jC\omega}\). En multipliant
-        haut et bas par \(jC\omega\) :
-        \[\underline{U_C}=\frac{1}{1-LC\omega^2+jRC\omega}\,\underline E
-        =\frac{1}{1-\dfrac{\omega^2}{\omega_0^2}+j\dfrac{\omega}{Q\omega_0}}\,\underline E\]
-        avec \(\omega_0=\dfrac{1}{\sqrt{LC}}\) et \(Q=\dfrac1R\sqrt{\dfrac LC}\) (car \(LC=1/\omega_0^2\) et
-        \(RC=\frac{1}{Q\omega_0}\)).</p>
-        <div class="res">Forme canonique du passe-bas 2ᵉ ordre :
-        \(\underline{U_C}=\dfrac{\underline E}{1-\frac{\omega^2}{\omega_0^2}+j\frac{\omega}{Q\omega_0}}\).</div>
+
+        <p class="q">Expression de \(\underline U_C\) et forme canonique</p>
+        <p class="etape">Étape 1 : pont diviseur de tension</p>
+        <div class="rappel"><span class="lab">Rappel · pont diviseur de tension</span>\[ \underline U_C = \frac{\underline Z_C}{R + jL\omega + \underline Z_C}\,\underline E \qquad \underline Z_C = \frac{1}{jC\omega} \]</div>
+        <p class="etape">Étape 2 : multiplier haut et bas par \(jC\omega\)</p>
+        \[ \underline U_C = \frac{1}{1 - LC\omega^2 + jRC\omega}\,\underline E \]
+        <p class="etape">Étape 3 : identifier \(\omega_0\) et \(Q\)</p>
+        <p>On pose \(LC = 1/\omega_0^2\) et \(RC = 1/(Q\omega_0)\) :</p>
+        \[ \omega_0 = \frac{1}{\sqrt{LC}} \qquad Q = \frac1R\sqrt{\frac LC} \]
+        <div class="res">\(\underline U_C = \dfrac{\underline E}{1 - \dfrac{\omega^2}{\omega_0^2} + j\dfrac{\omega}{Q\omega_0}}\) : forme canonique du passe-bas du 2e ordre.</div>
       </div>
     </div>
 
@@ -475,19 +481,22 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
       <div class="exo-body">
         <p class="enonce">Montrer qu'il n'y a résonance sur \(u_C\) que si \(Q\) dépasse un seuil, et donner
         \(\omega_{\text{rés}}\).</p>
+
         <p class="q">1) Module</p>
-        <p>\(|U_C|=\dfrac{E_m}{\sqrt{f(x)}}\) avec \(x=\frac{\omega}{\omega_0}\) et
-        \(f(x)=(1-x^2)^2+\dfrac{x^2}{Q^2}\).</p>
+        <div class="rappel"><span class="lab">Rappel · module de \(\underline U_C\)</span>\[ \underline U_C = \frac{\underline E}{1 - x^2 + j\dfrac{x}{Q}} \qquad x = \frac{\omega}{\omega_0} \]</div>
+        \[ |\underline U_C| = \frac{E_m}{\sqrt{f(x)}} \qquad f(x) = (1 - x^2)^2 + \frac{x^2}{Q^2} \]
+        <p>Le module est maximal quand \(f\) est minimale.</p>
+
         <p class="q">2) Dérivée et signe</p>
-        <p>\(f'(x)=2(1-x^2)(-2x)+\dfrac{2x}{Q^2}=x\Big(4x^2-4+\dfrac{2}{Q^2}\Big)=4x\Big(x^2-1+\dfrac{1}{2Q^2}\Big)\).
-        Sur \(\mathbb R^+\), le signe est celui de \(x^2-\big(1-\frac{1}{2Q^2}\big)\).</p>
+        \[ f'(x) = -4x\,(1 - x^2) + \frac{2x}{Q^2} = 4x\left(x^2 - 1 + \frac{1}{2Q^2}\right) \]
+        <p>Pour \(x > 0\), \(f'\) a le signe de \(x^2 - \left(1 - \dfrac{1}{2Q^2}\right)\).</p>
+
         <p class="q">3) Discussion</p>
-        <p>• Si \(Q<\frac{1}{\sqrt2}\) : \(1-\frac{1}{2Q^2}<0\), donc \(f'>0\) partout, \(f\) croissante, \(|U_C|\)
-        décroissante : <b>pas de résonance</b>.<br>
-        • Si \(Q>\frac{1}{\sqrt2}\) : \(f'\) s'annule en \(x_{\text{rés}}=\sqrt{1-\frac{1}{2Q^2}}\), \(f\) passe par un
-        minimum donc \(|U_C|\) par un <b>maximum</b> : résonance.</p>
-        <div class="res">Résonance \(\Leftrightarrow Q>\frac{1}{\sqrt2}\approx0{,}707\), à
-        \(\omega_{\text{rés}}=\omega_0\sqrt{1-\frac{1}{2Q^2}}\) ; si \(Q\gg1\), \(|U_C|_{\max}\simeq QE\).</div>
+        <ul>
+          <li>Si \(Q &lt; \dfrac{1}{\sqrt2}\) : \(1 - \dfrac{1}{2Q^2} &lt; 0\), donc \(f' > 0\) partout. \(f\) croît, \(|\underline U_C|\) décroît : pas de résonance.</li>
+          <li>Si \(Q > \dfrac{1}{\sqrt2}\) : \(f'\) s'annule en \(x_{rés} = \sqrt{1 - \dfrac{1}{2Q^2}}\). \(f\) passe par un minimum, donc \(|\underline U_C|\) par un maximum : résonance.</li>
+        </ul>
+        <div class="res">Résonance si et seulement si \(Q > 1/\sqrt2 \approx 0{,}707\), à \(\omega_{rés} = \omega_0\sqrt{1 - \dfrac{1}{2Q^2}}\). Pour \(Q \gg 1\), \(|\underline U_C|_{max} \approx Q\,E_m\).</div>
       </div>
     </div>
 
@@ -495,15 +504,18 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
       <div class="exo-head">App. 8 — Intensité dans un RLC série <span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">En raisonnant sur \(u_R\), exprimer \(\underline I\) sous forme canonique.</p>
+
         <p class="q">Fonction de transfert du courant</p>
-        <p>\(\underline I=\dfrac{\underline E}{R+jL\omega+\frac{1}{jC\omega}}\). En factorisant \(R\) au dénominateur
-        et avec \(L\omega=\frac{Q}{\omega_0}R\cdot\omega\)… on aboutit à
-        \[\underline I=\frac{1}{1+jQ\Big(\dfrac{\omega}{\omega_0}-\dfrac{\omega_0}{\omega}\Big)}\,\frac{\underline E}{R}\]</p>
+        <p class="etape">Étape 1 : loi d'Ohm généralisée</p>
+        \[ \underline I = \frac{\underline E}{R + jL\omega + \dfrac{1}{jC\omega}} = \frac{\underline E/R}{1 + j\dfrac{L\omega}{R} - \dfrac{j}{RC\omega}} \]
+        <p class="etape">Étape 2 : identifier \(\omega_0\) et \(Q\)</p>
+        \[ \frac{L}{R} = \frac{Q}{\omega_0} \qquad \frac{1}{RC} = Q\,\omega_0 \]
+        <div class="res">\(\underline I = \dfrac{\underline E}{R}\,\dfrac{1}{1 + jQ\left(\dfrac{\omega}{\omega_0} - \dfrac{\omega_0}{\omega}\right)}\).</div>
+
         <p class="q">Résonance</p>
-        <p>\(|I|=\dfrac{1}{\sqrt{1+Q^2(x-\frac1x)^2}}\dfrac ER\) est maximal quand \(x-\frac1x=0\), soit
-        \(\omega=\omega_0\), <b>toujours</b> (somme de carrés).</p>
-        <div class="res">\(\underline I=\dfrac{1}{1+jQ(x-1/x)}\dfrac{\underline E}{R}\) : résonance systématique en
-        \(\omega_0\), \(|I|_{\max}=E/R\), courant en phase avec \(e\).</div>
+        \[ |\underline I| = \frac{E_m}{R}\,\frac{1}{\sqrt{1 + Q^2\left(x - \frac1x\right)^2}} \]
+        <p>Le module est maximal quand \(x - 1/x = 0\) : \(x = 1\), quelle que soit la valeur de \(Q\).</p>
+        <div class="res">Résonance d'intensité systématique en \(\omega_0\), avec \(|\underline I|_{max} = E_m/R\) et un courant en phase avec \(e\).</div>
       </div>
     </div>
 
@@ -514,16 +526,21 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
       <div class="exo-body">
         <p class="enonce">RC série, sortie \(s=u_C\), entrée \(e\). Établir l'équa. diff., puis \(H\), et retrouver
         l'équa. diff. depuis \(H\).</p>
+
         <p class="q">1) Équation différentielle</p>
-        <p>Loi des mailles \(e=Ri+u_C\) avec \(i=C\frac{\mathrm ds}{\mathrm dt}\) :
-        \(\boxed{RC\dfrac{\mathrm ds}{\mathrm dt}+s=e}\).</p>
+        <div class="rappel"><span class="lab">Rappel · condensateur</span>\[ i = C\,\frac{du_C}{dt} \]</div>
+        <p>Loi des mailles : \(e = R\,i + u_C\), avec \(s = u_C\) :</p>
+        <div class="res">\(RC\,\dfrac{ds}{dt} + s = e\).</div>
+
         <p class="q">2) Fonction de transfert</p>
-        <p>Pont diviseur : \(H=\dfrac{Z_C}{R+Z_C}=\dfrac{1}{1+jRC\omega}\).</p>
-        <p class="q">3) Retour à l'équa. diff.</p>
-        <p>\(H=\frac{\underline S}{\underline E}\Rightarrow (1+jRC\omega)\underline S=\underline E\). En remplaçant
-        \(j\omega\to\frac{\mathrm d}{\mathrm dt}\) : \(s+RC\frac{\mathrm ds}{\mathrm dt}=e\). Identique. ✔</p>
-        <div class="res">\(RC\dot s+s=e\ \Longleftrightarrow\ H=\dfrac{1}{1+jRC\omega}\) : correspondance
-        \(\times j\omega\leftrightarrow \frac{\mathrm d}{\mathrm dt}\).</div>
+        <div class="rappel"><span class="lab">Rappel · pont diviseur de tension</span>\[ \underline H = \frac{\underline Z_C}{R + \underline Z_C} \]</div>
+        <div class="res">\(\underline H = \dfrac{1}{1 + jRC\omega}\).</div>
+
+        <p class="q">3) Retour à l'équation différentielle</p>
+        \[ \underline H = \frac{\underline S}{\underline E} \iff (1 + jRC\omega)\,\underline S = \underline E \]
+        <p>On remplace \(j\omega\) par \(\dfrac{d}{dt}\) :</p>
+        \[ s + RC\,\frac{ds}{dt} = e \]
+        <div class="res">On retrouve l'équation du 1) : multiplier par \(j\omega\) correspond à dériver.</div>
       </div>
     </div>
 
@@ -532,18 +549,30 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
       <div class="exo-body">
         <p class="enonce">Le RC (sortie sur \(C\)). Montrer « passe-bas », mettre sous forme canonique, tracer le Bode
         en gain, donner la BP.</p>
-        <p class="q">1) Nature par équivalence</p>
-        <p>BF : \(C\) ouvert, \(i=0\), pas de chute dans \(R\) ⇒ \(s=e\) (transmis). HF : \(C\) fil ⇒ \(s=0\) (coupé).
-        <b>Passe-bas.</b></p>
+
+        <p class="q">1) Nature par les comportements limites</p>
+        <ul>
+          <li>BF : \(C\) ouvert, \(i = 0\), pas de chute dans \(R\) : \(s = e\) (le signal passe).</li>
+          <li>HF : \(C\) est un fil : \(s = 0\) (le signal est coupé).</li>
+        </ul>
+        <div class="res">Passe-bas.</div>
+
         <p class="q">2) Forme canonique</p>
-        <p>\(H=\dfrac{1}{1+j\frac{\omega}{\omega_c}}\) avec \(H_0=1\) et \(\omega_c=\dfrac{1}{RC}\).</p>
-        <p class="q">3) Bode en gain (asymptotes)</p>
-        <p>\(G_{dB}=-20\log\sqrt{1+x^2}\), \(x=\omega/\omega_c\). BF (\(x\ll1\)) : \(G_{dB}\approx0\) dB. HF
-        (\(x\gg1\)) : \(G_{dB}\approx-20\log x\) ⇒ pente \(-20\) dB/déc. À \(x=1\) : \(G_{dB}=-3\) dB.</p>
+        <div class="rappel"><span class="lab">Rappel · passe-bas du 1er ordre</span>\[ \underline H = \frac{H_0}{1 + j\dfrac{\omega}{\omega_c}} \]</div>
+        <div class="res">\(\underline H = \dfrac{1}{1 + j\dfrac{\omega}{\omega_c}}\), avec \(H_0 = 1\) et \(\omega_c = \dfrac{1}{RC}\).</div>
+
+        <p class="q">3) Bode en gain</p>
+        \[ G_{dB} = -20\log\sqrt{1 + x^2} \qquad x = \frac{\omega}{\omega_c} \]
+        <ul>
+          <li>BF (\(x \ll 1\)) : \(G_{dB} \approx 0\).</li>
+          <li>HF (\(x \gg 1\)) : \(G_{dB} \approx -20\log x\), pente de \(-20\) dB/décade.</li>
+          <li>\(x = 1\) : \(G_{dB} = -3\) dB.</li>
+        </ul>
+
         <p class="q">4) Bande passante</p>
-        <p>\(|H|>\frac{1}{\sqrt2}\Leftrightarrow x<1\Leftrightarrow \omega<\omega_c\). BP \(=[0,\omega_c]\) → les
-        basses fréquences passent : « passe-bas ». ✔</p>
-        <div class="res">Passe-bas, \(H_0=1\), \(\omega_c=\frac{1}{RC}\), pente HF \(-20\) dB/déc, BP \([0,\omega_c]\).</div>
+        <div class="rappel"><span class="lab">Rappel · bande passante à −3 dB</span>\[ |\underline H| \ge \frac{H_{max}}{\sqrt2} \]</div>
+        \[ \frac{1}{\sqrt{1 + x^2}} \ge \frac{1}{\sqrt2} \iff x \le 1 \iff \omega \le \omega_c \]
+        <div class="res">Passe-bas, \(H_0 = 1\), \(\omega_c = 1/(RC)\), pente HF de \(-20\) dB/décade, bande passante \([0\,;\,\omega_c]\).</div>
       </div>
     </div>
 
@@ -552,17 +581,24 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
       <div class="exo-body">
         <p class="enonce">Montage CR (\(C\) puis \(R\), sortie sur \(R\)). Montrer « passe-haut », forme canonique,
         Bode, BP.</p>
+
         <p class="q">1) Nature</p>
-        <p>BF : \(C\) ouvert ⇒ \(i=0\) ⇒ \(u_R=s=0\) (coupé). HF : \(C\) fil ⇒ \(s=e\) (transmis).
-        <b>Passe-haut.</b></p>
+        <ul>
+          <li>BF : \(C\) ouvert, \(i = 0\), donc \(s = u_R = 0\) (signal coupé).</li>
+          <li>HF : \(C\) fil, donc \(s = e\) (signal transmis).</li>
+        </ul>
+        <div class="res">Passe-haut.</div>
+
         <p class="q">2) Forme canonique</p>
-        <p>\(H=\dfrac{R}{R+\frac{1}{jC\omega}}=\dfrac{jRC\omega}{1+jRC\omega}
-        =\dfrac{j\frac{\omega}{\omega_c}}{1+j\frac{\omega}{\omega_c}}\), \(\omega_c=\frac{1}{RC}\), \(H_0=1\).</p>
-        <p class="q">3) Bode &amp; BP</p>
-        <p>BF : \(H\approx jx\) ⇒ pente \(+20\) dB/déc, \(\Delta\varphi=+\frac{\pi}{2}\). HF : \(H\approx1\) ⇒ \(0\) dB.
-        BP \(=[\omega_c,+\infty[\). ✔</p>
-        <div class="res">Passe-haut, \(\omega_c=\frac{1}{RC}\) ; asymptote BF \(+20\) dB/déc (⇒ dérivateur en BF),
-        \(0\) dB en HF.</div>
+        <div class="rappel"><span class="lab">Rappel · pont diviseur de tension</span>\[ \underline H = \frac{R}{R + \dfrac{1}{jC\omega}} \]</div>
+        <div class="res">\(\underline H = \dfrac{jRC\omega}{1 + jRC\omega} = \dfrac{j\dfrac{\omega}{\omega_c}}{1 + j\dfrac{\omega}{\omega_c}}\), avec \(\omega_c = \dfrac{1}{RC}\) et \(H_0 = 1\).</div>
+
+        <p class="q">3) Bode et bande passante</p>
+        <ul>
+          <li>BF : \(\underline H \approx jx\), pente de \(+20\) dB/décade, phase \(+\pi/2\).</li>
+          <li>HF : \(\underline H \approx 1\), soit 0 dB.</li>
+        </ul>
+        <div class="res">Passe-haut, \(\omega_c = 1/(RC)\), bande passante \([\omega_c\,;\,+\infty[\). Asymptote BF de \(+20\) dB/décade : en basse fréquence, le montage dérive.</div>
       </div>
     </div>
 
@@ -573,16 +609,19 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
         \(\Delta\varphi\approx0\) ; \(x=1\Rightarrow G_{dB}=-3\), \(\Delta\varphi=-\frac{\pi}{4}\) ;
         \(x=50\Rightarrow G_{dB}\approx-34\), \(\Delta\varphi\approx-\frac{\pi}{2}\). Entrée
         \(e=E_0\cos\!\big(\frac{\omega_0}{100}t-\frac{\pi}{6}\big)+E_0\cos(\omega_0 t+\frac{\pi}{4})+E_0\cos(50\omega_0 t)\).</p>
-        <p class="q">Méthode : chaque harmonique séparément</p>
-        <p>On applique \(|H|\) et \(\arg H\) <b>à chaque pulsation</b> :
-        <ul style="margin:.2rem 0">
-          <li>\(x=0{,}01\) : \(|H|=10^{0/20}=1\), déphasage \(0\) ⇒ terme \(\approx E_0\cos(\frac{\omega_0}{100}t-\frac{\pi}{6})\) (transmis intact).</li>
-          <li>\(x=1\) : \(|H|=10^{-3/20}\approx0{,}71\), déphasage \(-\frac{\pi}{4}\) ⇒ \(0{,}71E_0\cos(\omega_0 t+\frac{\pi}{4}-\frac{\pi}{4})=0{,}71E_0\cos(\omega_0 t)\).</li>
-          <li>\(x=50\) : \(|H|=10^{-34/20}\approx0{,}02\), déphasage \(-\frac{\pi}{2}\) ⇒ \(0{,}02E_0\cos(50\omega_0 t-\frac{\pi}{2})\) (quasi éliminé).</li>
-        </ul></p>
-        <div class="res">\(s(t)\approx E_0\cos\!\big(\frac{\omega_0}{100}t-\frac{\pi}{6}\big)+0{,}71\,E_0\cos(\omega_0 t)
-        +0{,}02\,E_0\cos\!\big(50\omega_0 t-\frac{\pi}{2}\big)\). La haute fréquence est écrasée : le filtre « lisse »
-        le signal.</div>
+
+        <p class="q">Méthode : traiter chaque harmonique séparément</p>
+        <div class="rappel"><span class="lab">Rappel · superposition en régime sinusoïdal</span>Le filtre est linéaire. Pour chaque composante, on multiplie l'amplitude par \(|\underline H|\) et on ajoute \(\arg\underline H\) à la phase. \(|\underline H| = 10^{G_{dB}/20}\).</div>
+        <p class="etape">Étape 1 : \(x = 0{,}01\) (pulsation \(\omega_0/100\))</p>
+        <p>\(|\underline H| = 10^{0} = 1\) et déphasage nul : la composante est transmise intacte.</p>
+        \[ s_1 = E_0\cos\left(\frac{\omega_0}{100}\,t - \frac{\pi}{6}\right) \]
+        <p class="etape">Étape 2 : \(x = 1\) (pulsation \(\omega_0\))</p>
+        <p>\(|\underline H| = 10^{-3/20} \approx 0{,}71\) et déphasage \(-\pi/4\) :</p>
+        \[ s_2 = 0{,}71\,E_0\cos\left(\omega_0 t + \frac\pi4 - \frac\pi4\right) = 0{,}71\,E_0\cos(\omega_0 t) \]
+        <p class="etape">Étape 3 : \(x = 50\) (pulsation \(50\,\omega_0\))</p>
+        <p>\(|\underline H| = 10^{-34/20} \approx 0{,}02\) et déphasage \(-\pi/2\) :</p>
+        \[ s_3 = 0{,}02\,E_0\cos\left(50\,\omega_0 t - \frac\pi2\right) \]
+        <div class="res">\(s(t) \approx E_0\cos\left(\dfrac{\omega_0}{100}t - \dfrac\pi6\right) + 0{,}71\,E_0\cos(\omega_0 t) + 0{,}02\,E_0\cos\left(50\,\omega_0 t - \dfrac\pi2\right)\). La haute fréquence est écrasée : le filtre lisse le signal.</div>
       </div>
     </div>
 
@@ -591,19 +630,25 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
       <div class="exo-body">
         <p class="enonce">RC passe-bas fermé sur une charge \(R_c\) en parallèle sur \(C\). Pourquoi
         \(H=\frac{1}{1+jRC\omega}\) n'est plus valable ? Établir \(H'\).</p>
+
         <p class="q">1) Pourquoi \(H\) change</p>
-        <p>\(R_c\) en parallèle sur \(C\) : \(R\) et \(C\) ne forment plus un pont diviseur seul (le courant se
-        partage). Il faut inclure \(R_c\).</p>
+        <p>Avec \(R_c\) en parallèle sur \(C\), le courant qui sort de \(R\) se partage entre \(C\) et \(R_c\). Le pont diviseur \(R\)–\(C\) seul n'est plus valable : il faut inclure \(R_c\).</p>
+
         <p class="q">2) Nouvelle fonction de transfert</p>
-        <p>Impédance de sortie \(=R_c\parallel Z_C\), d'admittance \(Y=\frac{1}{R_c}+jC\omega\). Pont diviseur :
-        \[H'=\frac{1}{1+R\,Y}=\frac{1}{1+\frac{R}{R_c}+jRC\omega}
-        =\frac{\frac{R_c}{R+R_c}}{1+j\frac{R_c R}{R+R_c}C\omega}\]</p>
+        <p class="etape">Étape 1 : admittance de sortie</p>
+        <p>\(R_c\) et \(C\) en parallèle : \(\underline Y = \dfrac{1}{R_c} + jC\omega\).</p>
+        <p class="etape">Étape 2 : pont diviseur</p>
+        <div class="rappel"><span class="lab">Rappel · pont diviseur de tension</span>\[ \underline H' = \frac{\underline Z}{R + \underline Z} = \frac{1}{1 + R\,\underline Y} \qquad \underline Z = \frac{1}{\underline Y} \]</div>
+        \[ \underline H' = \frac{1}{1 + \dfrac{R}{R_c} + jRC\omega} = \frac{\dfrac{R_c}{R + R_c}}{1 + j\dfrac{R_cR}{R + R_c}\,C\omega} \]
+        <div class="res">\(\underline H' = \dfrac{R_c/(R + R_c)}{1 + j\,\dfrac{R_cR}{R + R_c}\,C\omega}\).</div>
+
         <p class="q">3) Effet de la charge</p>
-        <p>Toujours un <b>passe-bas 1ᵉʳ ordre</b>, mais le <b>gain statique</b> \(\frac{R_c}{R+R_c}<1\) et la
-        <b>pulsation de coupure</b> \(\omega_c'=\frac{R+R_c}{R_cR C}\) sont modifiés. Pour ne pas perturber :
-        \(R_c\gg R\) (\(R/R_c\ll1\)).</p>
-        <div class="res">\(H'=\dfrac{R_c/(R+R_c)}{1+j\frac{R_cR}{R+R_c}C\omega}\) : nature conservée, gain statique et
-        \(\omega_c\) modifiés ; charge « transparente » si \(R_c\gg R\).</div>
+        <ul>
+          <li>La nature est conservée : passe-bas du 1er ordre.</li>
+          <li>Le gain statique \(\dfrac{R_c}{R + R_c}\) devient inférieur à 1.</li>
+          <li>La pulsation de coupure devient \(\omega_c' = \dfrac{R + R_c}{R_cR\,C}\), plus grande que \(1/(RC)\).</li>
+        </ul>
+        <div class="res">La charge est transparente si \(R_c \gg R\) : alors \(H' \approx H\).</div>
       </div>
     </div>
 
@@ -612,15 +657,18 @@ window.MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]
       <div class="exo-body">
         <p class="enonce">Cascade d'un RC passe-bas puis d'un RC passe-haut (mêmes \(R,C\)). La \(H\) totale
         vaut-elle le produit des \(H\) en sortie ouverte ?</p>
+
         <p class="q">Calcul direct de l'ensemble</p>
-        <p>En traitant tout le circuit (le 2ᵉ étage charge le 1ᵉʳ), on obtient
-        \[H=\frac{jRC\omega}{1-(RC\omega)^2+3jRC\omega}\]</p>
-        <p class="q">Comparaison au produit</p>
-        <p>Le produit des \(H\) en sortie ouverte donnerait un dénominateur \(1-(RC\omega)^2+2jRC\omega\), soit
-        \(Q=\frac12\). Le calcul réel donne \(3jRC\omega\), soit \(Q=\frac13\) : le terme croisé \(\frac{Z_{s1}}{Z_{e2}}\)
-        n'est pas négligeable.</p>
-        <div class="res">Non : \(H\ne H_1^{\text{s.o.}}\times H_2^{\text{s.o.}}\). On trouve \(Q=\frac13\) (au lieu de
-        \(\frac12\)) car le passe-haut charge le passe-bas. On ne multiplie les \(H\) que si \(|Z_{s1}|\ll|Z_{e2}|\).</div>
+        <p>En traitant le circuit entier (le 2e étage charge le 1er), avec \(x = RC\omega\) :</p>
+        \[ \underline H = \frac{jx}{1 - x^2 + 3jx} \]
+
+        <p class="q">Comparaison avec le produit des fonctions de transfert</p>
+        <p class="etape">Étape 1 : produit en sortie ouverte</p>
+        <p>Chaque étage vaut \(\dfrac{1}{1 + jx}\) (passe-bas) et \(\dfrac{jx}{1 + jx}\) (passe-haut) :</p>
+        \[ \underline H_1\,\underline H_2 = \frac{jx}{(1 + jx)^2} = \frac{jx}{1 - x^2 + 2jx} \qquad Q = \tfrac12 \]
+        <p class="etape">Étape 2 : calcul réel</p>
+        <p>Le dénominateur contient \(3jx\) : \(Q = \tfrac13\). Le terme supplémentaire vient du fait que le passe-haut prélève du courant sur le passe-bas.</p>
+        <div class="res">Non : \(\underline H \ne \underline H_1\,\underline H_2\). Le calcul réel donne \(Q = \tfrac13\) (et non \(\tfrac12\)). On ne multiplie les fonctions de transfert que si l'impédance de sortie du 1er étage est très inférieure à l'impédance d'entrée du 2e.</div>
       </div>
     </div>
 

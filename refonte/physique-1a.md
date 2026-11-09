@@ -13,8 +13,8 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 | electro-transitoire.html | 18 | fait |
 | electro-2nd-ordre.html | 19 | fait |
 | filtrage.html | 38 | fait |
-| rsf-resonance-filtrage.html | 11 | en cours |
-| acides-bases.html | 29 | à faire |
+| rsf-resonance-filtrage.html | 11 | fait |
+| acides-bases.html | 29 | en cours |
 | oxydoreduction.html | 29 | à faire |
 | atomistique.html | 24 | à faire |
 | cristallographie.html | 18 | à faire |
@@ -62,3 +62,8 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 - Erreur corrigée : Ex 19 (coupe-bande), Q grand demande R petit (Q = (1/R)√(L/C)) et non de grandes résistances → warnbox.
 - Erreur corrigée : Ex 10, la forme 1/(1 − x² + jx/Q) est un passe-bas (BF 0 dB, HF −40 dB/déc), pas un passe-haut : forme du passe-haut rappelée → warnbox.
 - Ex 24 : le graphe n'est pas disponible, les lectures de l'ancienne version sont conservées.
+
+### rsf-resonance-filtrage.html — fait
+- 11 applications réécrites (App. 2, 3, 5, 7, 8 du cours ; App. 1, 2, 3, 6, 8, 9 de filtrage).
+- Aucune erreur de résultat trouvée ; App. 8 (RLC série) : passage au courant réécrit proprement (l'ancienne version avait une phrase inachevée).
+- Cascade passe-bas + passe-haut : produit en sortie ouverte (Q = 1/2) détaillé et comparé au calcul réel (Q = 1/3).
