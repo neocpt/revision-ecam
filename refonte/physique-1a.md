@@ -16,8 +16,8 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 | rsf-resonance-filtrage.html | 11 | fait |
 | acides-bases.html | 29 | fait |
 | oxydoreduction.html | 29 | fait |
-| atomistique.html | 24 | en cours |
-| cristallographie.html | 18 | à faire |
+| atomistique.html | 24 | fait |
+| cristallographie.html | 18 | en cours |
 | thermodynamique-1.html | 38 | à faire |
 
 ## Journal par page
@@ -84,3 +84,12 @@ Chaque `.exo-body` : énoncé inchangé en tête, puis `.q` → `.etape` → `.r
 - Erreur corrigée : Ex 5, incertitude de 5 % sur C : ΔE ≈ 0,6 mV, soit 0,2 % (et non 0,36 %) → warnbox.
 - Erreur corrigée : Ex 14, travail = 3,2 kJ (et non 3184 J, ξ mal arrondi) → warnbox.
 - Reprises : Ex 6, tension de 0,42 V (et non 0,40 V) après précipitation de AgI ; Ex 15, câblage = environ 13 cellules en série puis rangées en parallèle ; Ex 23, K calculé avec le E° de l'Ex 21 (10¹⁶), l'ancienne version prenait un autre E° (10¹⁸) : le tableau du TD n'est pas reproduit, signalé ; Ex 24, partie indicateur redox réécrite (l'ancienne version se contredisait) ; Ex 27, question 1 (réaction prévisible) ajoutée.
+
+### atomistique.html — fait
+- 24 cartes réécrites (3 créées + 21 cartes TD regroupant les exercices atomes, molécules, solvant). Tous les énoncés sont reconstitués à partir des TD (aucun n'était présent).
+- Erreur corrigée : Ex 3 (atomes), énergie d'une mole de photons à 800 nm = 150 kJ/mol (l'ancienne version utilisait 400 nm) → warnbox.
+- Erreur corrigée : Ex 16, rayon du fer : modèle de sphère (141 pm) puis compacité 0,68 (124 pm) au lieu de 114 pm (atomes cubiques) → warnbox.
+- Erreur corrigée : Ex 20, Z*(Mg) = 2,85 (et non 4,85) → warnbox.
+- Erreur corrigée : solvants Ex 1, énergie liaison H ≈ 20 kJ/mol et O-H ≈ 460 kJ/mol → warnbox.
+- Reprises : Ex 4 (énergie du photon de la voiture ajoutée), Ex 2 molécules (charges formelles réécrites), Ex 12 BF3 (5,4 D), Ex 14 (δ(H) ≈ 0,32 avec d(OH) du schéma), OM : ΔE/indice cohérents (B2 −0,29 ; F2 −0,35 ; N2 −1,05 ; O2 −0,82 Eh).
+- Points incertains : figures du TD non lisibles (Ex 22 courbe PI, Ex 11 nom de certaines données).
