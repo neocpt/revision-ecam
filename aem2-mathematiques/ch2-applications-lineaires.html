@@ -214,15 +214,21 @@ window.MathJax = {
         <div class="enonce">Soit \(f:\mathbb R^3\to\mathbb R^2\), \(f(x,y,z)=(-2x,\,y+3z)\) (application du cours,
         Exemple 5/7). Déterminer \(\operatorname{Ker}f\) et \(\operatorname{Im}f\), et dire si \(f\) est
         injective / surjective.</div>
+
         <p class="q">Noyau</p>
-        <p>\(f(x,y,z)=(0,0)\iff-2x=0\text{ et }y+3z=0\iff x=0\text{ et }y=-3z\). Donc
-        \(\operatorname{Ker}f=\{(0,-3z,z)\mid z\in\mathbb R\}=\operatorname{Vect}\big((0,-3,1)\big)\), une droite
-        vectorielle : \(\dim\operatorname{Ker}f=1\neq0\).</p>
-        <div class="res">\(f\) n'est <b>pas injective</b> (le noyau contient d'autres vecteurs que \(0\)).</div>
+        <div class="rappel"><span class="lab">Rappel · noyau et injectivité</span>\[ \operatorname{Ker}f = \{v \mid f(v) = 0\} \qquad f \text{ injective} \iff \operatorname{Ker}f = \{0\} \]</div>
+        <p class="etape">Étape 1 : résoudre \(f(x, y, z) = (0, 0)\)</p>
+        \[ -2x = 0 \quad\text{et}\quad y + 3z = 0 \iff x = 0 \quad\text{et}\quad y = -3z \]
+        <p class="etape">Étape 2 : écrire le noyau</p>
+        \[ \operatorname{Ker}f = \{(0, -3z, z) \mid z \in \mathbb R\} = \operatorname{Vect}\big((0, -3, 1)\big) \]
+        <div class="res">C'est une droite vectorielle (\(\dim\operatorname{Ker}f = 1 \neq 0\)) : \(f\) n'est <b>pas injective</b>.</div>
+
         <p class="q">Image</p>
-        <p>Pour \((a,b)\in\mathbb R^2\) quelconque, on cherche \((x,y,z)\) tel que \(-2x=a\) et \(y+3z=b\) : il
-        suffit de prendre \(x=-a/2\), \(z=0\), \(y=b\). Donc tout \((a,b)\) est atteint.</p>
-        <div class="res">\(\operatorname{Im}f=\mathbb R^2\) : \(f\) est <b>surjective</b>.</div>
+        <p class="etape">Étape 1 : chercher un antécédent</p>
+        <p>Pour \((a, b) \in \mathbb R^2\) quelconque, on veut \(-2x = a\) et \(y + 3z = b\).</p>
+        <p class="etape">Étape 2 : le fournir</p>
+        <p>On prend \(x = -\dfrac a2\), \(z = 0\), \(y = b\) : tout \((a, b)\) est atteint.</p>
+        <div class="res">\(\operatorname{Im}f = \mathbb R^2\) : \(f\) est <b>surjective</b>.</div>
       </div>
     </div>
 
@@ -232,15 +238,21 @@ window.MathJax = {
         <div class="enonce">Dans \(\mathbb R^2\), on pose \(F=\operatorname{Vect}\big((1,1)\big)\) et
         \(G=\operatorname{Vect}\big((1,-1)\big)\). Montrer que \(F\oplus G=\mathbb R^2\) et donner l'expression
         de la projection \(p\) sur \(F\) parallèlement à \(G\).</div>
+
         <p class="q">Somme directe</p>
-        <p>\(F\cap G\) : si \(\lambda(1,1)=\mu(1,-1)\), alors \(\lambda=\mu\) et \(\lambda=-\mu\), donc
-        \(\lambda=\mu=0\) : \(F\cap G=\{0\}\). De plus \((1,1)\) et \((1,-1)\) forment une famille libre de
-        2 vecteurs dans \(\mathbb R^2\) (dimension 2) donc génératrice : \(F+G=\mathbb R^2\).</p>
-        <div class="res">\(F\oplus G=\mathbb R^2\).</div>
-        <p class="q">Projection</p>
-        <p>Pour \((x,y)\in\mathbb R^2\), on cherche \(a,b\) tels que \((x,y)=a(1,1)+b(1,-1)\) : \(a+b=x\),
-        \(a-b=y\), donc \(a=\dfrac{x+y}2\), \(b=\dfrac{x-y}2\). Le projeté sur \(F\) est \(a(1,1)\).</p>
-        <div class="res">\(p(x,y)=\dfrac{x+y}2\,(1,1)=\Big(\dfrac{x+y}2,\,\dfrac{x+y}2\Big)\).</div>
+        <div class="rappel"><span class="lab">Rappel · somme directe</span>\[ F \oplus G = E \iff F \cap G = \{0\} \ \text{ et } \ F + G = E \]</div>
+        <p class="etape">Étape 1 : \(F \cap G = \{0\}\)</p>
+        <p>Si \(\lambda(1, 1) = \mu(1, -1)\), alors \(\lambda = \mu\) et \(\lambda = -\mu\), donc \(\lambda = \mu = 0\).</p>
+        <p class="etape">Étape 2 : \(F + G = \mathbb R^2\)</p>
+        <p>\((1, 1)\) et \((1, -1)\) sont deux vecteurs libres dans \(\mathbb R^2\) (de dimension 2) : ils forment une base, donc ils engendrent \(\mathbb R^2\).</p>
+        <div class="res">\(F \oplus G = \mathbb R^2\).</div>
+
+        <p class="q">Projection sur \(F\) parallèlement à \(G\)</p>
+        <p class="etape">Étape 1 : décomposer \((x, y)\)</p>
+        <p>On cherche \(a, b\) tels que \((x, y) = a(1, 1) + b(1, -1)\) :</p>
+        \[ a + b = x \qquad a - b = y \qquad\Longrightarrow\qquad a = \frac{x + y}{2} \qquad b = \frac{x - y}{2} \]
+        <p class="etape">Étape 2 : garder la partie dans \(F\)</p>
+        <div class="res">\(p(x, y) = a(1, 1) = \dfrac{x + y}{2}\,(1, 1) = \left(\dfrac{x + y}{2},\ \dfrac{x + y}{2}\right)\).</div>
       </div>
     </div>
   </section>
@@ -268,61 +280,55 @@ window.MathJax = {
           <img src="td2-img/ex1.jpg" alt="Énoncé TD2 Exercice 1 — sept ensembles à décrire sous forme de Vect(F)" loading="lazy">
           <figcaption>Énoncé (TD2, L. Graissot) — Exercice 1.</figcaption>
         </figure>
-        <div class="method"><span class="lab">Méthode</span> D'après le cours (théorème « Sous-espace
-        engendré »), \(\operatorname{Vect}(v_1,\dots,v_n)\) est <b>toujours</b> un sous-espace vectoriel.
-        Il suffit donc, pour chaque \(F_i\), de paramétrer un élément quelconque et de le réécrire comme
-        combinaison linéaire d'un nombre fini de vecteurs fixes : cela prouve à la fois que \(F_i\) est un
-        sev et donne directement son écriture \(\operatorname{Vect}(\dots)\).</div>
 
         <p class="q">1) \(F_1=\{P\in\mathbb R_3[X]\mid P(1)=0\}\)</p>
-        <p>\(\mathbb R_3[X]\) a pour base \((1,X,X^2,X^3)\) : \(P=a_0+a_1X+a_2X^2+a_3X^3\).
-        La condition \(P(1)=0\) s'écrit \(a_0+a_1+a_2+a_3=0\), soit \(a_0=-a_1-a_2-a_3\). Donc</p>
-        \[ P=(-a_1-a_2-a_3)+a_1X+a_2X^2+a_3X^3=a_1(X-1)+a_2(X^2-1)+a_3(X^3-1). \]
-        <div class="res">\(F_1=\operatorname{Vect}\big(X-1,\ X^2-1,\ X^3-1\big)\).</div>
+        <div class="rappel"><span class="lab">Rappel · sous-espace engendré</span>\(\operatorname{Vect}(v_1, \dots, v_n)\) est toujours un sous-espace vectoriel. Pour décrire un ensemble sous la forme \(\operatorname{Vect}(\dots)\), on paramètre un élément quelconque et on le réécrit comme combinaison linéaire de vecteurs fixes : cela prouve que c'est un sev.</div>
+        <p class="etape">Étape 1 : écrire \(P\) et la condition</p>
+        <p>\(P = a_0 + a_1X + a_2X^2 + a_3X^3\). La condition \(P(1) = 0\) donne \(a_0 + a_1 + a_2 + a_3 = 0\), soit \(a_0 = -a_1 - a_2 - a_3\).</p>
+        <p class="etape">Étape 2 : regrouper par paramètre</p>
+        \[ P = a_1(X - 1) + a_2(X^2 - 1) + a_3(X^3 - 1) \]
+        <div class="res">\(F_1 = \operatorname{Vect}\big(X - 1,\ X^2 - 1,\ X^3 - 1\big)\).</div>
 
         <p class="q">2) \(F_2=\{P'\mid P\in\mathbb R_n[X]\}\), \(n\in\mathbb N\)</p>
-        <p>\(\mathbb R_n[X]\) a pour base \((1,X,\dots,X^n)\). L'application \(P\mapsto P'\) est linéaire
-        (dérivation), donc \(F_2\) est l'image de \(\mathbb R_n[X]\) par cette application linéaire — c'est
-        un sous-espace vectoriel, engendré par les dérivées des vecteurs de base :</p>
-        \[ (1)'=0,\quad (X)'=1,\quad (X^2)'=2X,\quad\dots,\quad (X^n)'=nX^{n-1}. \]
-        <p>Le vecteur nul \(0\) et les facteurs multiplicatifs \(k\) ne changent pas le sous-espace
-        engendré (\(\operatorname{Vect}(kX^k)=\operatorname{Vect}(X^k)\) pour \(k\neq0\)) :</p>
-        <div class="res">\(F_2=\operatorname{Vect}\big(1,X,\dots,X^{n-1}\big)=\mathbb R_{n-1}[X]\)
-        (pour \(n=0\) : \(F_2=\{0\}\)).</div>
+        <p class="etape">Étape 1 : image d'une application linéaire</p>
+        <p>La dérivation est linéaire : \(F_2\) est l'image de \(\mathbb R_n[X]\), engendrée par les dérivées de la base \((1, X, \dots, X^n)\) :</p>
+        \[ (1)' = 0 \qquad (X)' = 1 \qquad (X^2)' = 2X \qquad \dots \qquad (X^n)' = nX^{n-1} \]
+        <p class="etape">Étape 2 : simplifier</p>
+        <p>Le vecteur nul et les facteurs non nuls ne changent pas le sous-espace engendré : \(\operatorname{Vect}(kX^k) = \operatorname{Vect}(X^k)\) pour \(k \neq 0\).</p>
+        <div class="res">\(F_2 = \operatorname{Vect}\big(1, X, \dots, X^{n-1}\big) = \mathbb R_{n-1}[X]\) (pour \(n = 0\) : \(F_2 = \{0\}\)).</div>
 
         <p class="q">3) \(F_3=\{a(x^3-1)+b(x^2-2)+c(x+4)\mid(a,b,c)\in\mathbb R^3\}\)</p>
-        <p>Ici l'écriture sous forme de Vect est <b>directement donnée</b> par l'énoncé : \(F_3\) est par
-        définition l'ensemble des combinaisons linéaires de \(x^3-1\), \(x^2-2\) et \(x+4\).</p>
-        <div class="res">\(F_3=\operatorname{Vect}\big(x^3-1,\ x^2-2,\ x+4\big)\) — sev de
-        \(\mathbb R_3[X]\) (théorème du cours : tout Vect est un sev).</div>
+        <p>L'écriture est donnée par l'énoncé : \(F_3\) est, par définition, l'ensemble des combinaisons linéaires de \(x^3 - 1\), \(x^2 - 2\) et \(x + 4\).</p>
+        <div class="res">\(F_3 = \operatorname{Vect}\big(x^3 - 1,\ x^2 - 2,\ x + 4\big)\), sev de \(\mathbb R_3[X]\).</div>
 
         <p class="q">4) \(F_4=\{P\in\mathbb R_4[X]\mid P(1)=P(2)=0\}\)</p>
-        <p>\(P=a_0+a_1X+a_2X^2+a_3X^3+a_4X^4\). Les deux conditions donnent le système</p>
-        \[ \begin{cases} a_0+a_1+a_2+a_3+a_4=0 &(P(1)=0)\\ a_0+2a_1+4a_2+8a_3+16a_4=0 &(P(2)=0)\end{cases} \]
-        <p>\((2)-(1)\) : \(a_1+3a_2+7a_3+15a_4=0\), donc \(a_1=-3a_2-7a_3-15a_4\). En reportant dans
-        \((1)\) : \(a_0=-a_1-a_2-a_3-a_4=2a_2+6a_3+14a_4\). D'où, en regroupant par \(a_2,a_3,a_4\) (libres) :</p>
-        \[ P=a_2\underbrace{(X^2-3X+2)}_{=(X-1)(X-2)}+a_3\underbrace{(X^3-7X+6)}_{=X(X-1)(X-2)}
-           +a_4\underbrace{(X^4-15X+14)}_{=X^2(X-1)(X-2)} \]
-        <p>(on vérifie \(P(1)=P(2)=0\) sur chacun des trois générateurs, par exemple \(2-3+1=0\) et
-        \(2-6+4=0\) pour le premier).</p>
-        <div class="res">\(F_4=\operatorname{Vect}\big(X^2-3X+2,\ X^3-7X+6,\ X^4-15X+14\big)\).</div>
+        <p class="etape">Étape 1 : le système</p>
+        <p>\(P = a_0 + a_1X + a_2X^2 + a_3X^3 + a_4X^4\) :</p>
+        \[ \begin{cases} a_0 + a_1 + a_2 + a_3 + a_4 = 0 & (P(1) = 0)\\ a_0 + 2a_1 + 4a_2 + 8a_3 + 16a_4 = 0 & (P(2) = 0)\end{cases} \]
+        <p class="etape">Étape 2 : résoudre</p>
+        <p>La différence \((2) - (1)\) donne \(a_1 = -3a_2 - 7a_3 - 15a_4\). En reportant dans \((1)\) : \(a_0 = 2a_2 + 6a_3 + 14a_4\).</p>
+        <p class="etape">Étape 3 : regrouper par \(a_2, a_3, a_4\) (libres)</p>
+        \[ P = a_2\,(X^2 - 3X + 2) + a_3\,(X^3 - 7X + 6) + a_4\,(X^4 - 15X + 14) \]
+        <p>Vérification : chaque générateur s'annule en 1 et en 2, par exemple \(1 - 7 + 6 = 0\) et \(8 - 14 + 6 = 0\) pour le deuxième.</p>
+        <div class="res">\(F_4 = \operatorname{Vect}\big(X^2 - 3X + 2,\ X^3 - 7X + 6,\ X^4 - 15X + 14\big)\) (dimension 3 = 5 − 2).</div>
+        <div class="warnbox"><span class="lab">Correction d'une erreur de l'ancienne version</span> L'ancienne correction annonçait \(X^3 - 7X + 6 = X(X - 1)(X - 2)\) et \(X^4 - 15X + 14 = X^2(X - 1)(X - 2)\) : c'est faux (\(X(X - 1)(X - 2) = X^3 - 3X^2 + 2X\)). Les bonnes factorisations sont \(X^3 - 7X + 6 = (X - 1)(X - 2)(X + 3)\) et \(X^4 - 15X + 14 = (X - 1)(X - 2)(X^2 + 3X + 7)\). La liste de générateurs et le résultat étaient justes.</div>
 
         <p class="q">5) \(F_5=\big\{P\in\mathbb R_2[X]\mid\int_0^1P(t)\,dt=0\big\}\)</p>
-        <p>\(P=a+bX+cX^2\). \(\displaystyle\int_0^1P(t)\,dt=a+\frac b2+\frac c3=0\), donc
-        \(a=-\dfrac b2-\dfrac c3\). D'où</p>
-        \[ P=b\Big(X-\frac12\Big)+c\Big(X^2-\frac13\Big) \]
-        <p>Pour éliminer les fractions, on choisit les générateurs proportionnels \(2X-1\) et \(3X^2-1\)
-        (même droite/plan engendré) — vérification : \(\int_0^1(2t-1)\,dt=[t^2-t]_0^1=0\) et
-        \(\int_0^1(3t^2-1)\,dt=[t^3-t]_0^1=0\).</p>
-        <div class="res">\(F_5=\operatorname{Vect}\big(2X-1,\ 3X^2-1\big)\).</div>
+        <p class="etape">Étape 1 : la condition</p>
+        <p>\(P = a + bX + cX^2\) :</p>
+        \[ \int_0^1 P(t)\,dt = a + \frac b2 + \frac c3 = 0 \qquad\Longrightarrow\qquad a = -\frac b2 - \frac c3 \]
+        <p class="etape">Étape 2 : regrouper</p>
+        \[ P = b\left(X - \frac12\right) + c\left(X^2 - \frac13\right) \]
+        <p>Pour éliminer les fractions, on prend les générateurs proportionnels \(2X - 1\) et \(3X^2 - 1\). Vérification : \(\int_0^1 (2t - 1)\,dt = [t^2 - t]_0^1 = 0\) et \(\int_0^1 (3t^2 - 1)\,dt = [t^3 - t]_0^1 = 0\).</p>
+        <div class="res">\(F_5 = \operatorname{Vect}\big(2X - 1,\ 3X^2 - 1\big)\).</div>
 
         <p class="q">6) \(F_6=\{P\in\mathbb R_2[X]\mid P'(x)=0\}\)</p>
-        <p>\(P'=0\) pour un polynôme signifie que \(P\) est <b>constant</b> : \(P=a\cdot1\).</p>
-        <div class="res">\(F_6=\operatorname{Vect}(1)=\mathbb R_0[X]\).</div>
+        <p>\(P' = 0\) signifie que \(P\) est constant : \(P = a\cdot1\).</p>
+        <div class="res">\(F_6 = \operatorname{Vect}(1) = \mathbb R_0[X]\).</div>
 
         <p class="q">7) \(F_7=\{P\in\mathbb R_3[X]\mid P''(x)=0\}\)</p>
-        <p>\(P''=0\) signifie que \(P\) est de degré \(\leqslant1\) (affine) : \(P=a+bX\).</p>
-        <div class="res">\(F_7=\operatorname{Vect}(1,X)=\mathbb R_1[X]\).</div>
+        <p>\(P'' = 0\) signifie que \(P\) est de degré au plus 1 : \(P = a + bX\).</p>
+        <div class="res">\(F_7 = \operatorname{Vect}(1, X) = \mathbb R_1[X]\).</div>
       </div>
     </div>
 
@@ -336,52 +342,39 @@ window.MathJax = {
         </figure>
 
         <p class="q">1) \(v_1=(0,1,1),\,v_2=(1,0,1),\,v_3=(1,1,0)\) : base de \(\mathbb R^3\) ? Coordonnées de \(w=(1,1,1)\)</p>
-        <p>3 vecteurs dans un espace de dimension 3 : il suffit de montrer qu'ils forment une famille
-        <b>libre</b> (alors libre \(\iff\) génératrice \(\iff\) base). On calcule le déterminant :</p>
-        \[ \det(v_1,v_2,v_3)=\begin{vmatrix}0&1&1\\1&0&1\\1&1&0\end{vmatrix}
-        =0(0\cdot0-1\cdot1)-1(1\cdot0-1\cdot1)+1(1\cdot1-0\cdot1)=0+1+1=2\neq0 \]
-        <div class="res">Déterminant non nul \(\Rightarrow\) famille libre de 3 vecteurs en dimension 3
-        \(\Rightarrow(v_1,v_2,v_3)\) est une <b>base</b> de \(\mathbb R^3\).</div>
-        <p>On cherche \(\alpha,\beta,\gamma\) tels que \(w=\alpha v_1+\beta v_2+\gamma v_3\) :</p>
-        \[ (1,1,1)=\alpha(0,1,1)+\beta(1,0,1)+\gamma(1,1,0)=(\beta+\gamma,\ \alpha+\gamma,\ \alpha+\beta) \]
-        <p>D'où le système \(\beta+\gamma=1,\ \alpha+\gamma=1,\ \alpha+\beta=1\). En additionnant les trois
-        équations : \(2(\alpha+\beta+\gamma)=3\), donc \(\alpha+\beta+\gamma=\frac32\). En retranchant
-        chaque équation à cette somme : \(\alpha=\frac32-1=\frac12\), de même \(\beta=\gamma=\frac12\).</p>
-        <div class="res">\(w=\dfrac12v_1+\dfrac12v_2+\dfrac12v_3\).</div>
+        <p class="etape">Étape 1 : est-ce une base ?</p>
+        <div class="rappel"><span class="lab">Rappel · base en dimension finie</span>Dans un espace de dimension \(n\), une famille de \(n\) vecteurs est une base si et seulement si elle est libre, ce qui équivaut à un déterminant non nul.</div>
+        \[ \det(v_1, v_2, v_3) = \begin{vmatrix}0&1&1\\1&0&1\\1&1&0\end{vmatrix} = 0 - 1\times(0 - 1) + 1\times(1 - 0) = 2 \neq 0 \]
+        <div class="res">Famille libre de 3 vecteurs en dimension 3 : \((v_1, v_2, v_3)\) est une <b>base</b> de \(\mathbb R^3\).</div>
+        <p class="etape">Étape 2 : coordonnées de \(w\)</p>
+        <p>On écrit \(w = \alpha v_1 + \beta v_2 + \gamma v_3 = (\beta + \gamma,\ \alpha + \gamma,\ \alpha + \beta)\), d'où :</p>
+        \[ \beta + \gamma = 1 \qquad \alpha + \gamma = 1 \qquad \alpha + \beta = 1 \]
+        <p>La somme des trois équations donne \(\alpha + \beta + \gamma = \dfrac32\). En retranchant chaque équation : \(\alpha = \beta = \gamma = \dfrac12\).</p>
+        <div class="res">\(w = \dfrac12 v_1 + \dfrac12 v_2 + \dfrac12 v_3\).</div>
 
         <p class="q">2) \(v_1=(1,1,1),\,v_2=(-1,1,0),\,v_3=(1,0,-1)\) : base ? Coordonnées de \(e_1,e_2,e_3,w=(1,2,-3)\)</p>
-        \[ \det(v_1,v_2,v_3)=\begin{vmatrix}1&-1&1\\1&1&0\\1&0&-1\end{vmatrix}
-        =1(1\cdot(-1)-0\cdot0)-(-1)(1\cdot(-1)-0\cdot1)+1(1\cdot0-1\cdot1)=-1-1-1=-3\neq0 \]
-        <div class="res">Déterminant \(=-3\neq0\Rightarrow(v_1,v_2,v_3)\) base de \(\mathbb R^3\).</div>
-        <p>On pose \(\alpha v_1+\beta v_2+\gamma v_3=(\alpha-\beta+\gamma,\ \alpha+\beta,\ \alpha-\gamma)\)
-        et on résout pour chaque cible \((x,y,z)\) : \(x=\alpha-\beta+\gamma,\ y=\alpha+\beta,\ z=\alpha-\gamma\)
-        donnent \(\beta=y-\alpha,\ \gamma=\alpha-z\), puis en reportant dans la 1ʳᵉ équation
-        \(\alpha-(y-\alpha)+(\alpha-z)=x\Rightarrow3\alpha=x+y+z\Rightarrow\alpha=\dfrac{x+y+z}3\).</p>
-        <p><b>Pour \(e_1=(1,0,0)\)</b> : \(\alpha=\frac13\), \(\beta=0-\frac13=-\frac13\), \(\gamma=\frac13-0=\frac13\).
-        Vérif. : \(\alpha-\beta+\gamma=\frac13+\frac13+\frac13=1=x\) ✓, \(\alpha+\beta=0=y\) ✓, \(\alpha-\gamma=0=z\) ✓.</p>
-        <div class="res">\(e_1=\dfrac13v_1-\dfrac13v_2+\dfrac13v_3\).</div>
-        <p><b>Pour \(e_2=(0,1,0)\)</b> : \(\alpha=\frac13\), \(\beta=1-\frac13=\frac23\), \(\gamma=\frac13-0=\frac13\).</p>
-        <div class="res">\(e_2=\dfrac13v_1+\dfrac23v_2+\dfrac13v_3\).</div>
-        <p><b>Pour \(e_3=(0,0,1)\)</b> : \(\alpha=\frac13\), \(\beta=0-\frac13=-\frac13\), \(\gamma=\frac13-1=-\frac23\).</p>
-        <div class="res">\(e_3=\dfrac13v_1-\dfrac13v_2-\dfrac23v_3\).</div>
-        <p><b>Pour \(w=(1,2,-3)\)</b> : \(\alpha=\dfrac{1+2-3}3=0\), \(\beta=2-0=2\), \(\gamma=0-(-3)=3\).
-        Vérif. : \(\alpha-\beta+\gamma=0-2+3=1\) ✓, \(\alpha+\beta=2\) ✓, \(\alpha-\gamma=-3\) ✓. Cohérence
-        avec la linéarité des coordonnées : comme \(w=e_1+2e_2-3e_3\), on doit avoir
-        coords\((w)=\)coords\((e_1)+2\)coords\((e_2)-3\)coords\((e_3)=(0,2,3)\) — même résultat.</p>
-        <div class="res">\(w=0\cdot v_1+2v_2+3v_3=2v_2+3v_3\).</div>
+        <p class="etape">Étape 1 : base ?</p>
+        \[ \det(v_1, v_2, v_3) = \begin{vmatrix}1&-1&1\\1&1&0\\1&0&-1\end{vmatrix} = 1\times(-1) - (-1)\times(-1) + 1\times(-1) = -3 \neq 0 \]
+        <div class="res">Déterminant \(-3 \neq 0\) : \((v_1, v_2, v_3)\) est une <b>base</b> de \(\mathbb R^3\).</div>
+        <p class="etape">Étape 2 : coordonnées d'un vecteur \((x, y, z)\)</p>
+        <p>\(\alpha v_1 + \beta v_2 + \gamma v_3 = (\alpha - \beta + \gamma,\ \alpha + \beta,\ \alpha - \gamma)\). On résout \(x = \alpha - \beta + \gamma\), \(y = \alpha + \beta\), \(z = \alpha - \gamma\) :</p>
+        \[ \beta = y - \alpha \qquad \gamma = \alpha - z \qquad\Longrightarrow\qquad 3\alpha = x + y + z \qquad\Longrightarrow\qquad \alpha = \frac{x + y + z}{3} \]
+        <p class="etape">Étape 3 : les quatre vecteurs</p>
+        <ul>
+          <li>\(e_1 = (1, 0, 0)\) : \(\alpha = \frac13\), \(\beta = -\frac13\), \(\gamma = \frac13\). Vérification : \(\alpha - \beta + \gamma = 1\), \(\alpha + \beta = 0\), \(\alpha - \gamma = 0\).</li>
+          <li>\(e_2 = (0, 1, 0)\) : \(\alpha = \frac13\), \(\beta = \frac23\), \(\gamma = \frac13\).</li>
+          <li>\(e_3 = (0, 0, 1)\) : \(\alpha = \frac13\), \(\beta = -\frac13\), \(\gamma = -\frac23\).</li>
+          <li>\(w = (1, 2, -3)\) : \(\alpha = 0\), \(\beta = 2\), \(\gamma = 3\). Cohérence : \(w = e_1 + 2e_2 - 3e_3\), donc les coordonnées valent \(\left(\frac13, -\frac13, \frac13\right) + 2\left(\frac13, \frac23, \frac13\right) - 3\left(\frac13, -\frac13, -\frac23\right) = (0, 2, 3)\).</li>
+        </ul>
+        <div class="res">\(e_1 = \dfrac13v_1 - \dfrac13v_2 + \dfrac13v_3\) ; \(e_2 = \dfrac13v_1 + \dfrac23v_2 + \dfrac13v_3\) ; \(e_3 = \dfrac13v_1 - \dfrac13v_2 - \dfrac23v_3\) ; \(w = 2v_2 + 3v_3\).</div>
 
         <p class="q">3) Dans \(\mathbb R^3\), famille libre qui n'est pas génératrice</p>
-        <p>\(\{(1,0,0),(0,1,0)\}\) : ces 2 vecteurs ne sont pas colinéaires, donc la famille est
-        <b>libre</b>. Mais \(\operatorname{Vect}\) de 2 vecteurs a une dimension \(\leqslant2<3\), donc elle
-        ne peut pas engendrer \(\mathbb R^3\) tout entier (elle n'engendre que le plan \(\{z=0\}\)).</p>
-        <div class="res">Exemple : \(\{(1,0,0),(0,1,0)\}\) — libre, non génératrice.</div>
+        <p>\(\{(1, 0, 0), (0, 1, 0)\}\) : deux vecteurs non colinéaires, donc libres. Mais deux vecteurs engendrent un espace de dimension au plus 2, jamais \(\mathbb R^3\) (ici le plan \(\{z = 0\}\)).</p>
+        <div class="res">Exemple : \(\{(1, 0, 0), (0, 1, 0)\}\), libre et non génératrice.</div>
 
         <p class="q">4) Dans \(\mathbb R^3\), famille génératrice qui n'est pas libre</p>
-        <p>\(\{(1,0,0),(0,1,0),(0,0,1),(1,1,1)\}\) : elle contient la base canonique, donc elle est
-        <b>génératrice</b>. Mais 4 vecteurs dans un espace de dimension 3 sont nécessairement liés (on ne
-        peut pas avoir plus de vecteurs libres que la dimension) : par exemple
-        \((1,1,1)=1\cdot(1,0,0)+1\cdot(0,1,0)+1\cdot(0,0,1)\) est une relation de dépendance non triviale.</p>
-        <div class="res">Exemple : \(\{(1,0,0),(0,1,0),(0,0,1),(1,1,1)\}\) — génératrice, non libre.</div>
+        <p>\(\{(1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 1)\}\) : elle contient la base canonique, donc elle est génératrice. Quatre vecteurs en dimension 3 sont liés : \((1, 1, 1) = (1, 0, 0) + (0, 1, 0) + (0, 0, 1)\).</p>
+        <div class="res">Exemple : \(\{(1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 1)\}\), génératrice et non libre.</div>
       </div>
     </div>
 
@@ -396,23 +389,21 @@ window.MathJax = {
         <div class="enonce">\(u:\mathbb R^3\to\mathbb R^2\), \(u(x_1,x_2,x_3)=(x_1+x_2+x_3,\,2x_1+x_2-x_3)\).</div>
 
         <p class="q">1) Montrer que \(u\) est linéaire</p>
-        <p>Soient \(x=(x_1,x_2,x_3),\,y=(y_1,y_2,y_3)\in\mathbb R^3\) et \(\lambda,\mu\in\mathbb R\).</p>
-        \[ \lambda x+\mu y=(\lambda x_1+\mu y_1,\ \lambda x_2+\mu y_2,\ \lambda x_3+\mu y_3) \]
-        \[ u(\lambda x+\mu y)=\big((\lambda x_1+\mu y_1)+(\lambda x_2+\mu y_2)+(\lambda x_3+\mu y_3),\
-           2(\lambda x_1+\mu y_1)+(\lambda x_2+\mu y_2)-(\lambda x_3+\mu y_3)\big) \]
-        <p>On regroupe chaque composante par \(\lambda\) et par \(\mu\) :</p>
-        \[ u(\lambda x+\mu y)=\lambda\underbrace{(x_1+x_2+x_3,\,2x_1+x_2-x_3)}_{=u(x)}
-           +\mu\underbrace{(y_1+y_2+y_3,\,2y_1+y_2-y_3)}_{=u(y)}=\lambda u(x)+\mu u(y) \]
-        <div class="res">\(u(\lambda x+\mu y)=\lambda u(x)+\mu u(y)\) pour tous \(x,y,\lambda,\mu\) : \(u\)
-        est <b>linéaire</b>.</div>
+        <div class="rappel"><span class="lab">Rappel · application linéaire</span>\[ u(\lambda x + \mu y) = \lambda\,u(x) + \mu\,u(y) \quad\text{pour tous } x, y \text{ et tous scalaires } \lambda, \mu \]</div>
+        <p class="etape">Étape 1 : calculer \(u(\lambda x + \mu y)\)</p>
+        <p>Pour \(x = (x_1, x_2, x_3)\) et \(y = (y_1, y_2, y_3)\), \(\lambda x + \mu y = (\lambda x_1 + \mu y_1,\ \lambda x_2 + \mu y_2,\ \lambda x_3 + \mu y_3)\), donc :</p>
+        \[ u(\lambda x + \mu y) = \big(\lambda(x_1 + x_2 + x_3) + \mu(y_1 + y_2 + y_3),\ \lambda(2x_1 + x_2 - x_3) + \mu(2y_1 + y_2 - y_3)\big) \]
+        <p class="etape">Étape 2 : regrouper par \(\lambda\) et \(\mu\)</p>
+        \[ u(\lambda x + \mu y) = \lambda\,u(x) + \mu\,u(y) \]
+        <div class="res">\(u\) est <b>linéaire</b>.</div>
 
         <p class="q">2) Déterminer \(\operatorname{Ker}(u)\)</p>
-        \[ u(x)=(0,0)\iff\begin{cases}x_1+x_2+x_3=0\\2x_1+x_2-x_3=0\end{cases} \]
-        <p>De la 1ʳᵉ équation : \(x_1=-x_2-x_3\). On reporte dans la 2ᵉ :</p>
-        \[ 2(-x_2-x_3)+x_2-x_3=0\iff-2x_2-2x_3+x_2-x_3=0\iff-x_2-3x_3=0\iff x_2=-3x_3 \]
-        <p>Puis \(x_1=-x_2-x_3=3x_3-x_3=2x_3\). Donc \((x_1,x_2,x_3)=(2x_3,-3x_3,x_3)=x_3(2,-3,1)\).</p>
-        <div class="res">\(\operatorname{Ker}(u)=\operatorname{Vect}\big((2,-3,1)\big)\) — droite
-        vectorielle, \(\dim\operatorname{Ker}(u)=1\neq0\) : \(u\) n'est donc <b>pas injective</b>.</div>
+        <p class="etape">Étape 1 : le système</p>
+        \[ \begin{cases} x_1 + x_2 + x_3 = 0\\ 2x_1 + x_2 - x_3 = 0 \end{cases} \]
+        <p class="etape">Étape 2 : substitution</p>
+        <p>De la première : \(x_1 = -x_2 - x_3\). Dans la seconde : \(-2x_2 - 2x_3 + x_2 - x_3 = 0\), soit \(x_2 = -3x_3\). Puis \(x_1 = 3x_3 - x_3 = 2x_3\).</p>
+        \[ (x_1, x_2, x_3) = x_3\,(2, -3, 1) \]
+        <div class="res">\(\operatorname{Ker}(u) = \operatorname{Vect}\big((2, -3, 1)\big)\), de dimension 1 : \(u\) n'est <b>pas injective</b>.</div>
       </div>
     </div>
 
@@ -424,31 +415,26 @@ window.MathJax = {
           <img src="td2-img/ex4.jpg" alt="Énoncé TD2 Exercice 4 — f1, f2, f3, f4 à tester" loading="lazy">
           <figcaption>Énoncé (TD2, L. Graissot) — Exercice 4.</figcaption>
         </figure>
+<p class="q">\(f_1:\mathbb R^2\to\mathbb R^2,\ f_1(x,y)=(2x+y,\,x-y)\)</p>
+        <div class="rappel"><span class="lab">Rappel · test de linéarité</span>Une application dont chaque composante est une combinaison linéaire des coordonnées (sans constante ni produit) est linéaire. Sinon, on cherche un contre-exemple à \(f(\lambda v) = \lambda f(v)\) ou à l'additivité.</div>
 
-        <p class="q">\(f_1:\mathbb R^2\to\mathbb R^2,\ f_1(x,y)=(2x+y,\,x-y)\)</p>
-        <p>Chaque composante est une combinaison linéaire de \(x,y\) sans terme constant ni produit :
-        pour \(\lambda,\mu\in\mathbb R\), \(f_1(\lambda(x,y)+\mu(x',y'))=f_1(\lambda x+\mu x',\lambda y+\mu y')
-        =\big(2(\lambda x+\mu x')+(\lambda y+\mu y'),\,(\lambda x+\mu x')-(\lambda y+\mu y')\big)
-        =\lambda(2x+y,x-y)+\mu(2x'+y',x'-y')=\lambda f_1(x,y)+\mu f_1(x',y')\).</p>
+        
+        <p>Chaque composante est une combinaison linéaire de \(x\) et \(y\) : pour \(\lambda, \mu \in \mathbb R\),</p>
+        \[ f_1\big(\lambda(x, y) + \mu(x', y')\big) = \big(2(\lambda x + \mu x') + (\lambda y + \mu y'),\ (\lambda x + \mu x') - (\lambda y + \mu y')\big) = \lambda f_1(x, y) + \mu f_1(x', y') \]
         <div class="res">\(f_1\) est <b>linéaire</b>.</div>
 
         <p class="q">\(f_2:\mathbb R^3\to\mathbb R^3,\ f_2(x,y,z)=(xy,\,x,\,y)\)</p>
-        <p>La première composante \(xy\) est <b>quadratique</b> (produit de deux coordonnées), donc pas
-        homogène de degré 1. Contre-exemple : \(f_2\big(2\cdot(1,1,1)\big)=f_2(2,2,2)=(4,2,2)\) alors que
-        \(2f_2(1,1,1)=2(1,1,1)=(2,2,2)\) : \(4\neq2\).</p>
-        <div class="res">\(f_2\) n'est <b>pas linéaire</b> (l'homogénéité échoue à cause du terme \(xy\)).</div>
+        <p>La première composante \(xy\) est quadratique. Contre-exemple à l'homogénéité :</p>
+        \[ f_2\big(2\cdot(1, 1, 1)\big) = f_2(2, 2, 2) = (4, 2, 2) \qquad\text{alors que}\qquad 2f_2(1, 1, 1) = (2, 2, 2) \]
+        <div class="res">\(f_2\) n'est <b>pas linéaire</b>.</div>
 
         <p class="q">\(f_3:\mathbb R^3\to\mathbb R^3,\ f_3(x,y,z)=(2x+y+z,\,y-z,\,x+y)\)</p>
-        <p>Les trois composantes sont des combinaisons linéaires de \(x,y,z\) : même argument que pour
-        \(f_1\), chaque composante de \(f_3(\lambda u+\mu v)\) se sépare en \(\lambda\cdot(\text{composante
-        de }f_3(u))+\mu\cdot(\text{composante de }f_3(v))\).</p>
+        <p>Les trois composantes sont des combinaisons linéaires de \(x, y, z\) : même calcul que pour \(f_1\).</p>
         <div class="res">\(f_3\) est <b>linéaire</b>.</div>
 
         <p class="q">\(f_4:\mathbb R_3[X]\to\mathbb R^3,\ f_4(P)=(P(-1),\,P(0),\,P(1))\)</p>
-        <p>Pour \(P,Q\in\mathbb R_3[X]\), \(\lambda,\mu\in\mathbb R\) : l'évaluation d'un polynôme en un
-        point fixé est linéaire, \((\lambda P+\mu Q)(a)=\lambda P(a)+\mu Q(a)\) pour tout \(a\). Donc</p>
-        \[ f_4(\lambda P+\mu Q)=\big((\lambda P+\mu Q)(-1),(\lambda P+\mu Q)(0),(\lambda P+\mu Q)(1)\big)
-        =\lambda\big(P(-1),P(0),P(1)\big)+\mu\big(Q(-1),Q(0),Q(1)\big)=\lambda f_4(P)+\mu f_4(Q) \]
+        <p>L'évaluation en un point fixé \(a\) est linéaire : \((\lambda P + \mu Q)(a) = \lambda P(a) + \mu Q(a)\). Donc :</p>
+        \[ f_4(\lambda P + \mu Q) = \lambda\big(P(-1), P(0), P(1)\big) + \mu\big(Q(-1), Q(0), Q(1)\big) = \lambda f_4(P) + \mu f_4(Q) \]
         <div class="res">\(f_4\) est <b>linéaire</b>.</div>
       </div>
     </div>
@@ -462,48 +448,36 @@ window.MathJax = {
           <figcaption>Énoncé (TD2, L. Graissot) — Exercice 5 (renvoie, malgré la coquille « exercice 6 »,
           aux applications de l'exercice 4).</figcaption>
         </figure>
-        <p>On traite \(f_1,f_3,f_4\) (les 3 applications linéaires de l'exercice 4 — \(f_2\) est exclue,
-        elle n'est pas linéaire).</p>
+        <div class="enonce">On traite \(f_1, f_3, f_4\), les trois applications linéaires de l'exercice 4 (\(f_2\) est exclue, car elle n'est pas linéaire).</div>
+<p class="q">\(f_1(x,y)=(2x+y,x-y)\)</p>
+        <div class="rappel"><span class="lab">Rappel · théorème du rang</span>\[ \dim E = \dim\operatorname{Ker}f + \dim\operatorname{Im}f \]</div>
 
-        <p class="q">\(f_1(x,y)=(2x+y,x-y)\)</p>
-        <p><b>Noyau</b> : \(2x+y=0\) et \(x-y=0\Rightarrow y=x\), puis \(2x+x=3x=0\Rightarrow x=0,\,y=0\).</p>
-        <div class="res">\(\operatorname{Ker}f_1=\{(0,0)\}\Rightarrow f_1\) <b>injective</b>.</div>
-        <p><b>Image</b> — matrice de \(f_1\) dans les bases canoniques : \(\begin{pmatrix}2&1\\1&-1\end{pmatrix}\),
-        \(\det=2(-1)-1(1)=-3\neq0\). Par le théorème du rang, \(\dim\operatorname{Ker}f_1+\dim\operatorname{Im}f_1=\dim\mathbb R^2=2\) ;
-        \(\dim\operatorname{Ker}f_1=0\Rightarrow\dim\operatorname{Im}f_1=2=\dim\mathbb R^2\).</p>
-        <div class="res">\(\operatorname{Im}f_1=\mathbb R^2\Rightarrow f_1\) <b>surjective</b>, donc
-        <b>bijective</b> (isomorphisme).</div>
+        
+        <p class="etape">Étape 1 : noyau</p>
+        <p>\(2x + y = 0\) et \(x - y = 0\) donnent \(y = x\), puis \(3x = 0\) : \(x = y = 0\).</p>
+        <p class="etape">Étape 2 : image</p>
+        <p>\(\dim\operatorname{Ker}f_1 = 0\), donc \(\dim\operatorname{Im}f_1 = 2 = \dim\mathbb R^2\). (Matrice \(\begin{pmatrix}2&1\\1&-1\end{pmatrix}\), de déterminant \(-3 \neq 0\).)</p>
+        <div class="res">\(\operatorname{Ker}f_1 = \{(0, 0)\}\) et \(\operatorname{Im}f_1 = \mathbb R^2\) : \(f_1\) est injective, surjective, donc <b>bijective</b>.</div>
 
         <p class="q">\(f_3(x,y,z)=(2x+y+z,\,y-z,\,x+y)\)</p>
-        <p><b>Noyau</b> : \(2x+y+z=0,\ y-z=0,\ x+y=0\). De la 3ᵉ : \(y=-x\). De la 2ᵉ : \(z=y=-x\). On
-        reporte dans la 1ʳᵉ : \(2x+(-x)+(-x)=0\) — <b>toujours vraie</b>, quel que soit \(x\). Donc pour
-        tout \(x\in\mathbb R\), \((x,-x,-x)\) convient.</p>
-        <div class="res">\(\operatorname{Ker}f_3=\operatorname{Vect}\big((1,-1,-1)\big)\), dimension 1
-        \(\neq0\Rightarrow f_3\) <b>pas injective</b>.</div>
-        <p><b>Image</b> : \(\operatorname{Im}f_3=\operatorname{Vect}\big(f_3(e_1),f_3(e_2),f_3(e_3)\big)
-        =\operatorname{Vect}\big((2,0,1),(1,1,1),(1,-1,0)\big)\). Par le théorème du rang,
-        \(\dim\operatorname{Im}f_3=3-\dim\operatorname{Ker}f_3=3-1=2\) : ces 3 générateurs sont liés, 2
-        suffisent, par exemple \((2,0,1)\) et \((1,1,1)\) (non colinéaires). L'équation cartésienne du plan
-        \(\operatorname{Im}f_3\) s'obtient via le vecteur normal \(n=(2,0,1)\times(1,1,1)\), calculé
-        composante par composante :</p>
-        \[ n=\big(0\cdot1-1\cdot1,\ 1\cdot1-2\cdot1,\ 2\cdot1-0\cdot1\big)=(-1,-1,2) \]
-        <p>Équation de plan : \(-x-y+2z=0\), soit \(x+y-2z=0\). Vérification sur les 3 générateurs :
-        \((2,0,1)\to2+0-2=0\) ✓ ; \((1,1,1)\to1+1-2=0\) ✓ ; \((1,-1,0)\to1-1-0=0\) ✓.</p>
-        <div class="res">\(\operatorname{Im}f_3=\operatorname{Vect}\big((2,0,1),(1,1,1)\big)
-        =\{(a,b,c)\in\mathbb R^3\mid a+b-2c=0\}\), dimension 2 \(\neq3\Rightarrow f_3\) <b>pas
-        surjective</b>. Donc \(f_3\) n'est ni injective, ni surjective : <b>pas bijective</b>.</div>
+        <p class="etape">Étape 1 : noyau</p>
+        <p>De \(x + y = 0\) : \(y = -x\). De \(y - z = 0\) : \(z = -x\). La première équation devient \(2x - x - x = 0\), toujours vraie.</p>
+        <div class="res">\(\operatorname{Ker}f_3 = \operatorname{Vect}\big((1, -1, -1)\big)\), de dimension 1 : \(f_3\) n'est <b>pas injective</b>.</div>
+        <p class="etape">Étape 2 : image</p>
+        <p>\(\operatorname{Im}f_3 = \operatorname{Vect}\big((2, 0, 1), (1, 1, 1), (1, -1, 0)\big)\). Par le théorème du rang, \(\dim\operatorname{Im}f_3 = 3 - 1 = 2\) : deux générateurs suffisent, par exemple \((2, 0, 1)\) et \((1, 1, 1)\) (non colinéaires).</p>
+        <p class="etape">Étape 3 : équation du plan</p>
+        <p>Le produit vectoriel donne un vecteur normal :</p>
+        \[ n = (2, 0, 1)\times(1, 1, 1) = (0 - 1,\ 1 - 2,\ 2 - 0) = (-1, -1, 2) \]
+        <p>Équation : \(x + y - 2z = 0\). Vérification sur les trois générateurs : \(2 + 0 - 2 = 0\), \(1 + 1 - 2 = 0\), \(1 - 1 - 0 = 0\).</p>
+        <div class="res">\(\operatorname{Im}f_3 = \{(a, b, c) \mid a + b - 2c = 0\}\), de dimension 2 \(\neq 3\) : \(f_3\) n'est <b>pas surjective</b>, donc pas bijective.</div>
 
         <p class="q">\(f_4(P)=(P(-1),P(0),P(1))\)</p>
-        <p><b>Noyau</b> : \(P(-1)=P(0)=P(1)=0\) avec \(\deg P\leqslant3\). \(P\) admet 3 racines distinctes
-        \(-1,0,1\) : dans \(\mathbb R[X]\), \(P\) est donc divisible par \((X+1)X(X-1)=X^3-X\), qui est déjà
-        de degré 3 = degré maximal autorisé. Le quotient est donc une <b>constante</b> \(k\) :
-        \(P=k(X^3-X)\).</p>
-        <div class="res">\(\operatorname{Ker}f_4=\operatorname{Vect}(X^3-X)\), dimension 1
-        \(\neq0\Rightarrow f_4\) <b>pas injective</b>.</div>
-        <p><b>Image</b> — théorème du rang : \(\dim\mathbb R_3[X]=4\), \(\dim\operatorname{Ker}f_4=1\Rightarrow
-        \dim\operatorname{Im}f_4=4-1=3=\dim\mathbb R^3\).</p>
-        <div class="res">\(\operatorname{Im}f_4=\mathbb R^3\Rightarrow f_4\) <b>surjective</b> (mais pas
-        injective, donc <b>pas bijective</b>).</div>
+        <p class="etape">Étape 1 : noyau</p>
+        <p>\(P(-1) = P(0) = P(1) = 0\) avec \(\deg P \le 3\) : \(P\) a trois racines distinctes, donc il est divisible par \((X + 1)X(X - 1) = X^3 - X\), déjà de degré 3. Le quotient est une constante \(k\).</p>
+        <div class="res">\(\operatorname{Ker}f_4 = \operatorname{Vect}(X^3 - X)\), de dimension 1 : \(f_4\) n'est <b>pas injective</b>.</div>
+        <p class="etape">Étape 2 : image</p>
+        <p>\(\dim\operatorname{Im}f_4 = \dim\mathbb R_3[X] - 1 = 4 - 1 = 3 = \dim\mathbb R^3\).</p>
+        <div class="res">\(\operatorname{Im}f_4 = \mathbb R^3\) : \(f_4\) est <b>surjective</b>, mais pas injective, donc pas bijective.</div>
       </div>
     </div>
 
@@ -519,47 +493,35 @@ window.MathJax = {
         \(u(e_2)=(-3,2,-1)\), \(u(e_3)=(-7,4,1)\).</div>
 
         <p class="q">1) Expression explicite de \(u\)</p>
-        <p>Pour \(x=(x_1,x_2,x_3)=x_1e_1+x_2e_2+x_3e_3\), la linéarité donne
-        \(u(x)=x_1u(e_1)+x_2u(e_2)+x_3u(e_3)\) :</p>
-        \[ u(x)=x_1(1,-1,2)+x_2(-3,2,-1)+x_3(-7,4,1) \]
-        <div class="res">\(u(x_1,x_2,x_3)=(x_1-3x_2-7x_3,\ -x_1+2x_2+4x_3,\ 2x_1-x_2+x_3)\).</div>
+        <div class="rappel"><span class="lab">Rappel · application linéaire et base</span>\[ u(x_1e_1 + x_2e_2 + x_3e_3) = x_1\,u(e_1) + x_2\,u(e_2) + x_3\,u(e_3) \]</div>
+        \[ u(x) = x_1(1, -1, 2) + x_2(-3, 2, -1) + x_3(-7, 4, 1) \]
+        <div class="res">\(u(x_1, x_2, x_3) = (x_1 - 3x_2 - 7x_3,\ -x_1 + 2x_2 + 4x_3,\ 2x_1 - x_2 + x_3)\).</div>
 
         <p class="q">2) Antécédents de \((-1,1,8)\) et de \((-2,1,3)\)</p>
-        <p>On calcule d'abord le déterminant de la matrice \(U\) de \(u\) (colonnes = images de
-        \(e_1,e_2,e_3\)) pour savoir à quoi s'attendre :</p>
-        \[ \det U=\begin{vmatrix}1&-3&-7\\-1&2&4\\2&-1&1\end{vmatrix}
-        =1(2\cdot1-4\cdot(-1))-(-3)\big((-1)\cdot1-4\cdot2\big)+(-7)\big((-1)(-1)-2\cdot2\big) \]
-        \[ =1(2+4)+3(-1-8)-7(1-4)=6-27+21=0 \]
-        <p><b>\(\det U=0\)</b> : \(u\) n'est pas bijective, il existe des vecteurs sans antécédent. On
-        résout quand même les deux systèmes.</p>
-        <p><b>Pour \((-1,1,8)\)</b> :</p>
-        \[ \begin{cases}x_1-3x_2-7x_3=-1 &(1)\\-x_1+2x_2+4x_3=1 &(2)\\2x_1-x_2+x_3=8 &(3)\end{cases} \]
-        <p>\((1)+(2)\) : \(-x_2-3x_3=0\Rightarrow x_2=-3x_3\). De \((3)\) : \(2x_1-(-3x_3)+x_3=8\Rightarrow
-        2x_1+4x_3=8\Rightarrow x_1=4-2x_3\). On reporte dans \((1)\) :</p>
-        \[ (4-2x_3)-3(-3x_3)-7x_3=-1\iff4-2x_3+9x_3-7x_3=-1\iff4+0\cdot x_3=-1 \]
-        <p>Contradiction (\(4\neq-1\)), quel que soit \(x_3\) : le système est <b>incompatible</b>.</p>
-        <div class="res">\((-1,1,8)\) n'a <b>aucun antécédent</b> par \(u\) (il n'appartient pas à
-        \(\operatorname{Im}u\)).</div>
-        <p><b>Pour \((-2,1,3)\)</b> : même méthode, \((1)+(2)\Rightarrow x_2=1-3x_3\), \((3)\Rightarrow
-        2x_1-(1-3x_3)+x_3=3\Rightarrow x_1=2-2x_3\). On reporte dans \((1)\) :</p>
-        \[ (2-2x_3)-3(1-3x_3)-7x_3=-2\iff2-2x_3-3+9x_3-7x_3=-2\iff-1+0\cdot x_3=-2 \]
-        <p>Contradiction à nouveau (\(-1\neq-2\)).</p>
-        <div class="res">\((-2,1,3)\) n'a <b>aucun antécédent</b> par \(u\) non plus.</div>
-        <p><b>Vérification indépendante</b> — recherche de \(\operatorname{Im}u\) : comme \(\det U=0\), les
-        colonnes sont liées. On vérifie \(u(e_3)=2u(e_1)+3u(e_2)\) : \(2(1,-1,2)+3(-3,2,-1)=(2-9,-2+6,4-3)
-        =(-7,4,1)=u(e_3)\) ✓. Donc \(\operatorname{Im}u=\operatorname{Vect}\big(u(e_1),u(e_2)\big)
-        =\operatorname{Vect}\big((1,-1,2),(-3,2,-1)\big)\), plan de normale
-        \(n=(1,-1,2)\times(-3,2,-1)=(-1\cdot(-1)-2\cdot2,\ 2\cdot(-3)-1\cdot(-1),\ 1\cdot2-(-1)(-3))=(-3,-5,-1)\),
-        d'équation \(3x+5y+z=0\) (après avoir multiplié par \(-1\)). Test : \(3(-1)+5(1)+8=10\neq0\) et
-        \(3(-2)+5(1)+3=2\neq0\) — confirme dans les deux cas l'absence d'antécédent.</p>
+        <p class="etape">Étape 1 : le déterminant de la matrice de \(u\)</p>
+        <p>Les colonnes de la matrice \(U\) sont les images de \(e_1, e_2, e_3\) :</p>
+        \[ \det U = \begin{vmatrix}1&-3&-7\\-1&2&4\\2&-1&1\end{vmatrix} = 1(2 + 4) + 3(-1 - 8) - 7(1 - 4) = 6 - 27 + 21 = 0 \]
+        <p>\(u\) n'est pas bijective : certains vecteurs n'ont pas d'antécédent.</p>
+        <p class="etape">Étape 2 : l'image de \(u\)</p>
+        <p>Les colonnes sont liées : \(u(e_3) = 2u(e_1) + 3u(e_2)\), car \(2(1, -1, 2) + 3(-3, 2, -1) = (-7, 4, 1)\). Donc :</p>
+        \[ \operatorname{Im}u = \operatorname{Vect}\big((1, -1, 2), (-3, 2, -1)\big) \]
+        <p>Vecteur normal : \((1, -1, 2)\times(-3, 2, -1) = (1 - 4,\ -6 + 1,\ 2 - 3) = (-3, -5, -1)\). Équation du plan : \(3x + 5y + z = 0\).</p>
+        <p class="etape">Étape 3 : tester les deux vecteurs</p>
+        <ul>
+          <li>\((-1, 1, 8)\) : \(-3 + 5 + 8 = 10 \neq 0\).</li>
+          <li>\((-2, 1, 3)\) : \(-6 + 5 + 3 = 2 \neq 0\).</li>
+        </ul>
+        <p class="etape">Étape 4 : confirmation par résolution directe</p>
+        <p>Pour \((-1, 1, 8)\), \((1) + (2)\) donne \(x_2 = -3x_3\), puis \((3)\) donne \(x_1 = 4 - 2x_3\). Reporté dans \((1)\) : \(4 - 2x_3 + 9x_3 - 7x_3 = -1\), soit \(4 = -1\), impossible. De même, pour \((-2, 1, 3)\) : \(-1 = -2\), impossible.</p>
+        <div class="res">\((-1, 1, 8)\) et \((-2, 1, 3)\) n'ont <b>aucun antécédent</b> par \(u\) : aucun n'est dans \(\operatorname{Im}u\).</div>
 
         <p class="q">3) \(u\) injective / surjective / bijective ?</p>
-        <p>On calcule \(\operatorname{Ker}u\) pour appliquer le théorème du rang : \(u(x)=(0,0,0)\) donne
-        (même système que ci-dessus avec second membre nul) \(x_2=-3x_3\), puis \(2x_1+4x_3=0\Rightarrow
-        x_1=-2x_3\), et \((1)\) : \((-2x_3)-3(-3x_3)-7x_3=-2x_3+9x_3-7x_3=0\) — toujours vraie.</p>
-        <div class="res">\(\operatorname{Ker}u=\operatorname{Vect}\big((-2,-3,1)\big)\), dimension 1
-        \(\neq0\Rightarrow u\) <b>pas injective</b>. \(\dim\operatorname{Im}u=3-1=2\neq3\Rightarrow u\)
-        <b>pas surjective</b> (cohérent avec la question 2). Donc \(u\) n'est <b>pas bijective</b>.</div>
+        <p class="etape">Étape 1 : noyau</p>
+        <p>\(u(x) = 0\) donne \(x_2 = -3x_3\), puis \(2x_1 + 4x_3 = 0\), soit \(x_1 = -2x_3\), et la première équation est alors vérifiée.</p>
+        \[ \operatorname{Ker}u = \operatorname{Vect}\big((-2, -3, 1)\big) \]
+        <p class="etape">Étape 2 : théorème du rang</p>
+        <p>\(\dim\operatorname{Im}u = 3 - 1 = 2 \neq 3\).</p>
+        <div class="res">\(u\) n'est <b>pas injective</b>, <b>pas surjective</b> (cohérent avec la question 2), donc <b>pas bijective</b>.</div>
       </div>
     </div>
 
@@ -575,35 +537,28 @@ window.MathJax = {
         deux sev de \(\mathbb R^3\).</div>
 
         <p class="q">1) Montrer \(F\oplus G=\mathbb R^3\)</p>
-        <p><b>\(F\cap G=\{0\}\)</b> : un élément de \(F\) s'écrit \(\lambda(1,1,1)\). Il appartient à \(G\)
-        ssi \(2\lambda+\lambda-\lambda=2\lambda=0\), donc ssi \(\lambda=0\). Donc \(F\cap G=\{(0,0,0)\}\).</p>
-        <p><b>Dimensions</b> : \(\dim F=1\). \(G\) est défini par une seule équation linéaire non triviale
-        dans \(\mathbb R^3\) : \(z=2x+y\), donc \(G=\{(x,y,2x+y)\mid x,y\in\mathbb R\}
-        =\operatorname{Vect}\big((1,0,2),(0,1,1)\big)\), \(\dim G=2\) (ces 2 générateurs ne sont pas
-        colinéaires).</p>
-        <p>Par la formule des dimensions, \(\dim(F+G)=\dim F+\dim G-\dim(F\cap G)=1+2-0=3=\dim\mathbb R^3\).
-        Comme \(F+G\subset\mathbb R^3\), on a \(F+G=\mathbb R^3\).</p>
-        <div class="res">\(F\cap G=\{0\}\) et \(F+G=\mathbb R^3\ \Rightarrow\ F\oplus G=\mathbb R^3\).</div>
+        <div class="rappel"><span class="lab">Rappel · formule des dimensions</span>\[ \dim(F + G) = \dim F + \dim G - \dim(F \cap G) \]</div>
+        <p class="etape">Étape 1 : \(F \cap G = \{0\}\)</p>
+        <p>Un élément de \(F\) s'écrit \(\lambda(1, 1, 1)\). Il est dans \(G\) si \(2\lambda + \lambda - \lambda = 2\lambda = 0\), donc \(\lambda = 0\).</p>
+        <p class="etape">Étape 2 : dimensions</p>
+        <p>\(\dim F = 1\). Pour \(G\) : \(z = 2x + y\), donc \(G = \{(x, y, 2x + y)\} = \operatorname{Vect}\big((1, 0, 2), (0, 1, 1)\big)\), de dimension 2.</p>
+        \[ \dim(F + G) = 1 + 2 - 0 = 3 = \dim\mathbb R^3 \]
+        <div class="res">\(F \cap G = \{0\}\) et \(F + G = \mathbb R^3\) : \(F \oplus G = \mathbb R^3\).</div>
 
         <p class="q">2) Projection \(p\) sur \(F\) parallèlement à \(G\)</p>
-        <p>Pour \(w=(x,y,z)\in\mathbb R^3\), on écrit \(w=u+v\) avec \(u=\lambda(1,1,1)\in F\) et \(v\in G\).
-        \(v=w-u=(x-\lambda,y-\lambda,z-\lambda)\) doit vérifier \(2x-y-z\)… l'équation de \(G\) :</p>
-        \[ 2(x-\lambda)+(y-\lambda)-(z-\lambda)=0\iff2x+y-z-2\lambda=0\iff\lambda=\frac{2x+y-z}2 \]
-        <p>Le projeté sur \(F\) est \(u=\lambda(1,1,1)\) :</p>
-        \[ p(x,y,z)=\frac{2x+y-z}2\,(1,1,1) \]
-        <p><b>Vérifications</b> : pour \((1,1,1)\in F\), \(\lambda=\frac{2+1-1}2=1\Rightarrow p=(1,1,1)\) ✓
-        (identité sur \(F\)). Pour \((1,0,2)\in G\) (car \(2\cdot1+0-2=0\)), \(\lambda=\frac{2+0-2}2=0
-        \Rightarrow p=(0,0,0)\) ✓ (nul sur \(G\)).</p>
-        <div class="res">\(p(x,y,z)=\Big(\dfrac{2x+y-z}2,\ \dfrac{2x+y-z}2,\ \dfrac{2x+y-z}2\Big)\).</div>
+        <p class="etape">Étape 1 : décomposer \(w = (x, y, z)\)</p>
+        <p>On écrit \(w = u + v\) avec \(u = \lambda(1, 1, 1) \in F\) et \(v = w - u \in G\). La condition \(v \in G\) s'écrit :</p>
+        \[ 2(x - \lambda) + (y - \lambda) - (z - \lambda) = 0 \iff 2x + y - z - 2\lambda = 0 \iff \lambda = \frac{2x + y - z}{2} \]
+        <p class="etape">Étape 2 : le projeté est \(u\)</p>
+        <div class="res">\(p(x, y, z) = \dfrac{2x + y - z}{2}\,(1, 1, 1)\).</div>
+        <p>Vérifications : \(p(1, 1, 1) = (1, 1, 1)\) (identité sur \(F\)) ; \(p(1, 0, 2) = 0\), car \((1, 0, 2) \in G\).</p>
 
         <p class="q">3) Symétrie \(s\) par rapport à \(G\) parallèlement à \(F\)</p>
-        <p>Par définition, \(s(w)=v-u=w-2u=w-2p(w)\) (on garde la partie \(G\), on inverse la partie \(F\)).
-        Avec \(2p(w)=(2x+y-z)(1,1,1)\) :</p>
-        \[ s(x,y,z)=(x,y,z)-(2x+y-z,\,2x+y-z,\,2x+y-z) \]
-        \[ =(x-2x-y+z,\ y-2x-y+z,\ z-2x-y+z)=(-x-y+z,\ -2x+z,\ -2x-y+2z) \]
-        <p><b>Vérifications</b> : pour \((1,0,2)\in G\), \(s=(-1-0+2,\,-2+2,\,-2-0+4)=(1,0,2)\) ✓ (identité
-        sur \(G\)). Pour \((1,1,1)\in F\), \(s=(-1-1+1,\,-2+1,\,-2-1+2)=(-1,-1,-1)=-w\) ✓ (opposé sur \(F\)).</p>
-        <div class="res">\(s(x,y,z)=(-x-y+z,\ -2x+z,\ -2x-y+2z)\).</div>
+        <div class="rappel"><span class="lab">Rappel · symétrie</span>\[ s(w) = v - u = w - 2u = w - 2p(w) \]
+        On garde la partie dans \(G\) et on inverse la partie dans \(F\).</div>
+        \[ s(x, y, z) = (x, y, z) - (2x + y - z)(1, 1, 1) = (-x - y + z,\ -2x + z,\ -2x - y + 2z) \]
+        <div class="res">\(s(x, y, z) = (-x - y + z,\ -2x + z,\ -2x - y + 2z)\).</div>
+        <p>Vérifications : \(s(1, 0, 2) = (1, 0, 2)\) (identité sur \(G\)) ; \(s(1, 1, 1) = (-1, -1, -1)\) (opposé sur \(F\)).</p>
       </div>
     </div>
 
@@ -619,25 +574,22 @@ window.MathJax = {
         deux sev de \(\mathbb R^3\).</div>
 
         <p class="q">1) Base de \(F\), puis \(F,G\) supplémentaires</p>
-        <p>\(2x-y+z=0\iff y=2x+z\), donc \(F=\{(x,2x+z,z)\mid x,z\in\mathbb R\}
-        =\operatorname{Vect}\big((1,2,0),(0,1,1)\big)\) — ces 2 vecteurs ne sont pas colinéaires : c'est
-        une base de \(F\).</p>
-        <div class="res">Base de \(F\) : \(\big((1,2,0),\,(0,1,1)\big)\), \(\dim F=2\).</div>
-        <p><b>\(F\cap G\)</b> : élément de \(G\) : \(\mu(1,2,-1)\). Condition d'appartenance à \(F\) :
-        \(2\mu-2\mu+(-\mu)=-\mu=0\Rightarrow\mu=0\). Donc \(F\cap G=\{0\}\).</p>
-        <p>\(\dim F+\dim G=2+1=3=\dim\mathbb R^3\) et \(F\cap G=\{0\}\Rightarrow F+G=\mathbb R^3\) (même
-        argument par la formule des dimensions qu'à l'exercice 7).</p>
-        <div class="res">\(F\oplus G=\mathbb R^3\) : \(F\) et \(G\) sont supplémentaires.</div>
+        <p class="etape">Étape 1 : base de \(F\)</p>
+        <p>\(2x - y + z = 0 \iff y = 2x + z\), donc \(F = \{(x, 2x + z, z)\} = \operatorname{Vect}\big((1, 2, 0), (0, 1, 1)\big)\). Ces deux vecteurs ne sont pas colinéaires : c'est une base.</p>
+        <p class="etape">Étape 2 : \(F \cap G = \{0\}\)</p>
+        <p>Un élément de \(G\) est \(\mu(1, 2, -1)\) ; il est dans \(F\) si \(2\mu - 2\mu - \mu = -\mu = 0\).</p>
+        <p class="etape">Étape 3 : \(F + G = \mathbb R^3\)</p>
+        <p>\(\dim F + \dim G = 2 + 1 = 3\) et \(F \cap G = \{0\}\), donc \(\dim(F + G) = 3\).</p>
+        <div class="res">Base de \(F\) : \(\big((1, 2, 0), (0, 1, 1)\big)\), et \(F \oplus G = \mathbb R^3\) : \(F\) et \(G\) sont supplémentaires.</div>
 
         <p class="q">2) Projection sur \(F\) parallèlement à \(G\)</p>
-        <p>Pour \(w=(x,y,z)\), on écrit \(w=u+v\), \(v=\mu(1,2,-1)\in G\), \(u=w-v\in F\) :</p>
-        \[ u=(x-\mu,\,y-2\mu,\,z+\mu)\ \text{et}\ 2(x-\mu)-(y-2\mu)+(z+\mu)=0 \]
-        \[ \iff2x-2\mu-y+2\mu+z+\mu=0\iff2x-y+z+\mu=0\iff\mu=-2x+y-z \]
-        <p>D'où \(p(w)=u=(x-\mu,\,y-2\mu,\,z+\mu)\) :</p>
-        \[ x-\mu=x-(-2x+y-z)=3x-y+z,\quad y-2\mu=y-2(-2x+y-z)=4x-y+2z,\quad z+\mu=z+(-2x+y-z)=-2x+y \]
-        <div class="res">\(p(x,y,z)=(3x-y+z,\ 4x-y+2z,\ -2x+y)\).</div>
-        <p><b>Vérifications</b> : pour \((1,2,0)\in F\), \(p=(3-2+0,\,4-2+0,\,-2+2)=(1,2,0)\) ✓. Pour
-        \((1,2,-1)\in G\), \(p=(3-2-1,\,4-2-2,\,-2+2)=(0,0,0)\) ✓.</p>
+        <p class="etape">Étape 1 : décomposer \(w = (x, y, z)\)</p>
+        <p>On écrit \(w = u + v\), \(v = \mu(1, 2, -1) \in G\) et \(u = w - v = (x - \mu,\ y - 2\mu,\ z + \mu) \in F\) :</p>
+        \[ 2(x - \mu) - (y - 2\mu) + (z + \mu) = 0 \iff 2x - y + z + \mu = 0 \iff \mu = -2x + y - z \]
+        <p class="etape">Étape 2 : le projeté est \(u\)</p>
+        \[ x - \mu = 3x - y + z \qquad y - 2\mu = 4x - y + 2z \qquad z + \mu = -2x + y \]
+        <div class="res">\(p(x, y, z) = (3x - y + z,\ 4x - y + 2z,\ -2x + y)\).</div>
+        <p>Vérifications : \(p(1, 2, 0) = (1, 2, 0)\) (identité sur \(F\)) ; \(p(1, 2, -1) = (0, 0, 0)\) (nul sur \(G\)).</p>
       </div>
     </div>
 
@@ -651,43 +603,32 @@ window.MathJax = {
         </figure>
         <div class="enonce">\(\mathbb C\) vu comme \(\mathbb R\)-espace vectoriel, \(\varphi(z)=\dfrac12z+\dfrac i2\bar z\).</div>
 
-        <p class="q">1) \(\varphi\) est un endomorphisme de \(\mathbb C\) (en tant que \(\mathbb R\text{-ev}\))</p>
-        <p><b>Lemme</b> : la conjugaison est \(\mathbb R\)-linéaire. En effet, pour \(\lambda\in\mathbb R\)
-        et \(z=a+ib\) : \(\overline{\lambda z}=\overline{\lambda a+i\lambda b}=\lambda a-i\lambda b
-        =\lambda(a-ib)=\lambda\bar z\), et \(\overline{z+w}=\bar z+\bar w\) (propriété usuelle de la
-        conjugaison). Donc pour \(\lambda,\mu\in\mathbb R\) : \(\overline{\lambda z+\mu w}=\lambda\bar z+\mu\bar w\).</p>
-        <p>Soient \(z,w\in\mathbb C\), \(\lambda,\mu\in\mathbb R\) :</p>
-        \[ \varphi(\lambda z+\mu w)=\frac12(\lambda z+\mu w)+\frac i2\overline{(\lambda z+\mu w)}
-        =\frac12(\lambda z+\mu w)+\frac i2(\lambda\bar z+\mu\bar w) \]
-        \[ =\lambda\Big(\frac12z+\frac i2\bar z\Big)+\mu\Big(\frac12w+\frac i2\bar w\Big)=\lambda\varphi(z)+\mu\varphi(w) \]
-        <div class="res">\(\varphi(\lambda z+\mu w)=\lambda\varphi(z)+\mu\varphi(w)\) pour tous
-        \(z,w\in\mathbb C,\ \lambda,\mu\in\mathbb R\) : \(\varphi\) est \(\mathbb R\)-linéaire, donc
-        \(\varphi\in\operatorname{End}_{\mathbb R}(\mathbb C)\).</div>
+        <p class="q">1) \(\varphi\) est un endomorphisme de \(\mathbb C\) (en tant que \(\mathbb R\)-ev)</p>
+        <p class="etape">Étape 1 : la conjugaison est \(\mathbb R\)-linéaire</p>
+        <p>Pour \(\lambda \in \mathbb R\) et \(z = a + ib\) : \(\overline{\lambda z} = \lambda a - i\lambda b = \lambda\bar z\), et \(\overline{z + w} = \bar z + \bar w\). Donc \(\overline{\lambda z + \mu w} = \lambda\bar z + \mu\bar w\) pour \(\lambda, \mu\) réels.</p>
+        <p class="etape">Étape 2 : \(\varphi\) est linéaire</p>
+        \[ \varphi(\lambda z + \mu w) = \frac12(\lambda z + \mu w) + \frac i2(\lambda\bar z + \mu\bar w) = \lambda\varphi(z) + \mu\varphi(w) \]
+        <div class="res">\(\varphi\) est \(\mathbb R\)-linéaire de \(\mathbb C\) dans \(\mathbb C\) : \(\varphi \in \operatorname{End}_{\mathbb R}(\mathbb C)\).</div>
 
         <p class="q">2) \(\varphi\) est un projecteur (\(\varphi\circ\varphi=\varphi\))</p>
-        <p>On calcule d'abord \(\overline{\varphi(z)}\) : \(\overline{\varphi(z)}
-        =\overline{\dfrac12z+\dfrac i2\bar z}=\dfrac12\bar z+\overline{\Big(\dfrac i2\Big)}\cdot\overline{\bar z}
-        =\dfrac12\bar z-\dfrac i2z\) (car \(\bar i=-i\) et \(\overline{\bar z}=z\)).</p>
-        \[ \varphi(\varphi(z))=\frac12\varphi(z)+\frac i2\overline{\varphi(z)}
-        =\frac12\Big(\frac12z+\frac i2\bar z\Big)+\frac i2\Big(\frac12\bar z-\frac i2z\Big) \]
-        \[ =\frac14z+\frac i4\bar z+\frac i4\bar z-\frac{i^2}4z=\frac14z+\frac i4\bar z+\frac i4\bar z+\frac14z
-        \qquad(\text{car }-i^2=1) \]
-        \[ =\Big(\frac14+\frac14\Big)z+\Big(\frac i4+\frac i4\Big)\bar z=\frac12z+\frac i2\bar z=\varphi(z) \]
-        <div class="res">\(\varphi\circ\varphi=\varphi\) : par définition, \(\varphi\) est un
-        <b>projecteur</b>.</div>
+        <p class="etape">Étape 1 : conjugué de \(\varphi(z)\)</p>
+        <p>Avec \(\bar i = -i\) et \(\overline{\bar z} = z\) :</p>
+        \[ \overline{\varphi(z)} = \frac12\bar z - \frac i2 z \]
+        <p class="etape">Étape 2 : calcul de \(\varphi(\varphi(z))\)</p>
+        \[ \varphi(\varphi(z)) = \frac12\left(\frac12z + \frac i2\bar z\right) + \frac i2\left(\frac12\bar z - \frac i2z\right) = \frac14z + \frac i4\bar z + \frac i4\bar z + \frac14z \]
+        <p>(car \(-i^2 = 1\)).</p>
+        \[ \varphi(\varphi(z)) = \frac12z + \frac i2\bar z = \varphi(z) \]
+        <div class="res">\(\varphi\circ\varphi = \varphi\) : \(\varphi\) est un <b>projecteur</b>.</div>
 
         <p class="q">3) Image et noyau de \(\varphi\), dimensions</p>
-        <p>On pose \(z=x+iy\) (\(x,y\in\mathbb R\)) et on calcule \(\varphi(z)\) explicitement :</p>
-        \[ \varphi(x+iy)=\frac12(x+iy)+\frac i2(x-iy)=\frac x2+\frac{iy}2+\frac{ix}2+\frac y2
-        =\frac{x+y}2+i\,\frac{x+y}2=\frac{x+y}2(1+i) \]
-        <p><b>Noyau</b> : \(\varphi(z)=0\iff\dfrac{x+y}2=0\iff y=-x\iff z=x-ix=x(1-i)\).</p>
-        <div class="res">\(\operatorname{Ker}\varphi=\operatorname{Vect}_{\mathbb R}(1-i)\) — droite réelle
-        de \(\mathbb C\), \(\dim_{\mathbb R}\operatorname{Ker}\varphi=1\).</div>
-        <p><b>Image</b> : \(\varphi(z)=k(1+i)\) où \(k=\frac{x+y}2\) décrit tout \(\mathbb R\) quand
-        \(x,y\) varient (ex. \(y=0,\,x=2k\)).</p>
-        <div class="res">\(\operatorname{Im}\varphi=\operatorname{Vect}_{\mathbb R}(1+i)\), \(\dim_{\mathbb R}\operatorname{Im}\varphi=1\).</div>
-        <p><b>Vérification</b> (théorème du rang) : \(\dim_{\mathbb R}\mathbb C=2\) (base \((1,i)\)) et
-        \(\dim\operatorname{Ker}\varphi+\dim\operatorname{Im}\varphi=1+1=2\) ✓.</p>
+        <p class="etape">Étape 1 : forme explicite</p>
+        <p>Pour \(z = x + iy\) :</p>
+        \[ \varphi(x + iy) = \frac12(x + iy) + \frac i2(x - iy) = \frac{x + y}{2} + i\,\frac{x + y}{2} = \frac{x + y}{2}\,(1 + i) \]
+        <p class="etape">Étape 2 : noyau</p>
+        <p>\(\varphi(z) = 0 \iff y = -x \iff z = x(1 - i)\).</p>
+        <p class="etape">Étape 3 : image</p>
+        <p>\(\varphi(z) = k(1 + i)\) avec \(k = \dfrac{x + y}{2}\), qui parcourt tout \(\mathbb R\).</p>
+        <div class="res">\(\operatorname{Ker}\varphi = \operatorname{Vect}_{\mathbb R}(1 - i)\) et \(\operatorname{Im}\varphi = \operatorname{Vect}_{\mathbb R}(1 + i)\), chacun de dimension 1. Vérification (théorème du rang) : \(1 + 1 = 2 = \dim_{\mathbb R}\mathbb C\).</div>
       </div>
     </div>
 
@@ -700,37 +641,28 @@ window.MathJax = {
           <figcaption>Énoncé (TD2, L. Graissot) — Exercice 10.</figcaption>
         </figure>
         <div class="enonce">\(E\) un \(\mathbb K\)-espace vectoriel, \(F,G\) sev de \(E\),
-        \(f:F\times G\to E\), \(f(x,y)=x+y\) (\(F\times G\) est lui-même un \(\mathbb K\text{-ev}\),
+        \(f:F\times G\to E\), \(f(x,y)=x+y\) (\(F\times G\) est lui-même un \(\mathbb K\)-ev,
         avec les opérations composante par composante).</div>
 
         <p class="q">1) Montrer que \(f\) est linéaire</p>
-        <p>Soient \((x_1,y_1),(x_2,y_2)\in F\times G\), \(\lambda,\mu\in\mathbb K\). Dans \(F\times G\),
-        \(\lambda(x_1,y_1)+\mu(x_2,y_2)=(\lambda x_1+\mu x_2,\ \lambda y_1+\mu y_2)\).</p>
-        \[ f\big(\lambda(x_1,y_1)+\mu(x_2,y_2)\big)=(\lambda x_1+\mu x_2)+(\lambda y_1+\mu y_2)
-        =\lambda(x_1+y_1)+\mu(x_2+y_2)=\lambda f(x_1,y_1)+\mu f(x_2,y_2) \]
+        <p>Dans \(F \times G\) : \(\lambda(x_1, y_1) + \mu(x_2, y_2) = (\lambda x_1 + \mu x_2,\ \lambda y_1 + \mu y_2)\). Donc :</p>
+        \[ f\big(\lambda(x_1, y_1) + \mu(x_2, y_2)\big) = (\lambda x_1 + \mu x_2) + (\lambda y_1 + \mu y_2) = \lambda(x_1 + y_1) + \mu(x_2 + y_2) = \lambda f(x_1, y_1) + \mu f(x_2, y_2) \]
         <div class="res">\(f\) est <b>linéaire</b>.</div>
 
         <p class="q">2) Noyau et image de \(f\)</p>
-        <p><b>Noyau</b> : \(f(x,y)=0\iff x+y=0\iff y=-x\), avec \(x\in F\) et \(y\in G\). La condition
-        \(y=-x\in G\) équivaut à \(x\in-G=G\) (car \(G\) est un sous-espace vectoriel, stable par
-        \(-1\cdot\)). Donc la condition complète est \(x\in F\) <b>et</b> \(x\in G\), c'est-à-dire
-        \(x\in F\cap G\).</p>
-        <div class="res">\(\operatorname{Ker}f=\{(x,-x)\mid x\in F\cap G\}\) (isomorphe à \(F\cap G\) via
-        \(x\mapsto(x,-x)\)).</div>
-        <p><b>Image</b> : \(\operatorname{Im}f=\{x+y\mid x\in F,\,y\in G\}\), qui est précisément la
-        définition de la somme de sous-espaces.</p>
-        <div class="res">\(\operatorname{Im}f=F+G\).</div>
+        <p class="etape">Étape 1 : noyau</p>
+        <p>\(f(x, y) = 0 \iff y = -x\), avec \(x \in F\) et \(y \in G\). Comme \(G\) est un sev, \(-x \in G \iff x \in G\). La condition complète est donc \(x \in F\) et \(x \in G\).</p>
+        <div class="res">\(\operatorname{Ker}f = \{(x, -x) \mid x \in F \cap G\}\), isomorphe à \(F \cap G\).</div>
+        <p class="etape">Étape 2 : image</p>
+        <p>\(\operatorname{Im}f = \{x + y \mid x \in F,\ y \in G\}\), c'est la définition de la somme.</p>
+        <div class="res">\(\operatorname{Im}f = F + G\).</div>
 
         <p class="q">3) Condition nécessaire et suffisante d'injectivité / surjectivité / bijectivité</p>
-        <p><b>Injective</b> \(\iff\operatorname{Ker}f=\{(0,0)\}\iff F\cap G=\{0\}\) (d'après la
-        description de \(\operatorname{Ker}f\) ci-dessus, réduite au seul \(x=0\)).</p>
-        <p><b>Surjective</b> \(\iff\operatorname{Im}f=E\iff F+G=E\) (par définition de la surjectivité et
-        l'expression de \(\operatorname{Im}f\)).</p>
-        <div class="res">\(f\) <b>bijective</b> \(\iff\) injective <b>et</b> surjective \(\iff F\cap
-        G=\{0\}\) et \(F+G=E\) \(\iff F\oplus G=E\) : \(F\) et \(G\) sont <b>supplémentaires</b> dans
-        \(E\). (Cet exercice justifie a posteriori la définition même des sous-espaces supplémentaires :
-        \(F\oplus G=E\) équivaut exactement à ce que l'application « somme » \(F\times G\to E\) soit un
-        isomorphisme.)</div>
+        <ul>
+          <li>Injective \(\iff \operatorname{Ker}f = \{(0, 0)\} \iff F \cap G = \{0\}\).</li>
+          <li>Surjective \(\iff \operatorname{Im}f = E \iff F + G = E\).</li>
+        </ul>
+        <div class="res">\(f\) bijective \(\iff F \cap G = \{0\}\) et \(F + G = E \iff F \oplus G = E\). Autrement dit, \(F\) et \(G\) sont supplémentaires si et seulement si l'application « somme » \(F \times G \to E\) est un isomorphisme.</div>
       </div>
     </div>
   </section>

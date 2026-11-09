@@ -14,7 +14,7 @@ Modèles suivis : `aem2-electronique/ch6-electronique-numerique.html#td6-ex6` et
 | aem2-electronique/ch5-oscillateurs.html | fait (TD5 Ex 1–4, TP5a, TP5b, exercices A–C ; graphes : polices relevées et viewBox élargis) |
 | aem2-electronique/ch6-electronique-numerique.html | fait (Q1–Q10, exercices créés 1–4, TD6 Ex 1–5 ; td6-ex6 inchangé) |
 | aem2-mathematiques/ch1-analyse-asymptotique.html | fait (exercices créés A–B, TD Ex 1–15 ; les 2 fiches « Feuille complémentaire » sont de simples catalogues sans énoncé : laissées telles quelles) |
-| aem2-mathematiques/ch2-applications-lineaires.html | à faire |
+| aem2-mathematiques/ch2-applications-lineaires.html | fait (exercices créés A–B, TD Ex 1–10) |
 | aem2-mathematiques/ch3-matrices-applications-lineaires.html | à faire |
 | aem2-mathematiques/ch4-courbes-parametrees.html | à faire |
 | aem2-mathematiques/methodes-par-exercice.html | à faire |
@@ -40,8 +40,12 @@ Modèles suivis : `aem2-electronique/ch6-electronique-numerique.html#td6-ex6` et
 - Ch5 élec : valeurs recalculées (simulation Python de l'oscillateur de Wien : T = 297 / 569 µs, harmoniques 3 %/1 % puis 35 %/17 %/10 %) ; aucune erreur trouvée. Pour la réponse à l'Ex 2 du TD5, R₄ = 1 kΩ et C = 1 µF sont lus sur l'énoncé.
 - Ch6 élec : valeurs recalculées à la main (codes binaires 110001 et 10101000, bits nécessaires 15 et 13, tailles 14,4 / 42,3 / 635 Mo, alias du créneau à 1,5 kHz) ; aucune erreur trouvée.
 - Ch1 maths : tous les DL, équivalents et limites recalculés avec sympy (seize DL de l'Ex 8, DL en un point, dix limites, asymptotes, suite implicite) ; aucune erreur trouvée.
+- Ch2 maths, Ex 1 Q4 : les égalités « \(X^3-7X+6=X(X-1)(X-2)\) » et « \(X^4-15X+14=X^2(X-1)(X-2)\) » étaient fausses (les générateurs étaient bons) ; remplacées par \((X-1)(X-2)(X+3)\) et \((X-1)(X-2)(X^2+3X+7)\), avec un avertissement dans la carte. Autres résultats recalculés à la main : inchangés.
+- Ch2 maths, Ex 7 Q2 : fragment de phrase tronqué (« doit vérifier \(2x-y-z\)… ») supprimé.
 
 ## Points incertains
+
+- Ch2 maths, Ex 6 : les images de \(e_1,e_2,e_3\) sont lues sur la correction existante (l'image de l'énoncé n'a pas été revérifiée) ; les deux vecteurs \((-1,1,8)\) et \((-2,1,3)\) n'ont alors aucun antécédent.
 
 - Ch6 élec, TD6 Ex 3 : l'absence de raie à 50 Hz sur le spectre 2 imprimé reste inexpliquée (avertissement conservé).
 
