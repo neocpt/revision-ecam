@@ -25,7 +25,7 @@ Conventions retenues :
 | continuite | fait | 3 créés + 9 TD. Aucune erreur de résultat (Ex 4 d : conditions n=0 et n=1 revérifiées). Ex 3 c) : encadrement avec les deux signes de x. Ex 5 a) : bijectivité justifiée. Ex 6 : exemple de non-borné ajouté en note. Ex 7 c) : détail du TVI sur g. `.q` titres sans résultat. |
 | derivabilite | fait | 3 créés + 10 TD (énoncés relus dans le PDF TD10). Limites Ex 3 et formules de Leibniz Ex 10 revérifiées (SymPy, n = 1..6) ; rang Ex 9 e) vérifié numériquement (n = 11). Aucune erreur. Ex 3 c-d) : refaits avec L'Hôpital comme demandé par le TD (l'ancienne version utilisait des équivalents). Ex 5 c) : la condition (iii) rédigée avec \(\delta=\beta\). |
 | fonctions-usuelles | fait | 3 créés + 6 TD (énoncés relus dans le PDF TD11). Aucune erreur de résultat. Ex 3 e-f) : condition de signe et vérification des solutions ajoutées. Ex 4 b) et d) : dérivées calculées en détail (l'ancienne version les affirmait) ; Ex 4 a) : continuité aux bornes précisée ; Ex 4 d) : valeur en 1 par continuité. Exo B : piège \(x<0\). |
-| nombres-complexes | à faire | |
+| nombres-complexes | fait | 3 créés + 21 TD (énoncés relus dans le PDF TD12, tous les résultats revérifiés avec SymPy/mpmath). **Erreurs corrigées** : Ex 5 (l'ancienne version lisait \((2\bar z+3)/(iz)\) au lieu de \(2\bar z+3/(iz)\) et concluait « aucune solution » ; la solution est \(z=\sqrt{15}(2-i)/5\)) ; Ex 11 l) module faux \(2^{-2029/2}\), correct \(2^{-4055/2}\). Ex 13 : méthode des racines carrées rappelée ; Ex 15 f) : calcul de \(-i\cot(\alpha/2)\) détaillé ; Ex 19 i) : justification de l'angle droit. |
 | calcul-matriciel | à faire | |
 | systemes-determinants | à faire | |
 | espaces-vectoriels | à faire | |
