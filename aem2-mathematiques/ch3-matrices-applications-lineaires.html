@@ -104,19 +104,22 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Déterminer le rang de \(\{v_1,v_2,v_3\}\) dans \(\mathbb R^4\), avec
         \(v_1=\begin{pmatrix}1\\0\\1\\0\end{pmatrix}\), \(v_2=\begin{pmatrix}0\\1\\1\\1\end{pmatrix}\), \(v_3=\begin{pmatrix}-1\\1\\0\\1\end{pmatrix}\).</p>
-        <p class="q">Encadrement</p>
+
+        <p class="q">Rang de la famille</p>
+        <div class="rappel"><span class="lab">Rappel · rang d'une famille</span>\[ \operatorname{rg}(v_1, \dots, v_p) = \dim\operatorname{Vect}(v_1, \dots, v_p) \le \min(p, n) \]
+        Le rang vaut \(p\) si et seulement si la famille est libre.</div>
+        <p class="etape">Étape 1 : encadrer le rang</p>
         <ul>
-          <li>Vecteurs de \(\mathbb R^4\) : \(\operatorname{rg}\le4\). Mais il n'y a que 3 vecteurs : \(\operatorname{rg}\le3\).</li>
-          <li>\(v_1\neq0\) : \(\operatorname{rg}\ge1\).</li>
-          <li>\(v_1,v_2\) sont non colinéaires (la 1ʳᵉ coordonnée de \(v_2\) est \(0\) alors que celle de \(v_1\) vaut \(1\), et la 2ᵉ de \(v_1\) est \(0\) alors que celle de \(v_2\) vaut \(1\)) donc libres :
-          \(\operatorname{rg}(v_1,v_2,v_3)\ge\operatorname{rg}(v_1,v_2)=2\).</li>
+          <li>Il y a 3 vecteurs dans \(\mathbb R^4\) : \(\operatorname{rg} \le 3\).</li>
+          <li>\(v_1 \neq 0\) : \(\operatorname{rg} \ge 1\).</li>
+          <li>\(v_1\) et \(v_2\) ne sont pas colinéaires (leurs coordonnées 1 et 2 diffèrent) : \(\operatorname{rg} \ge 2\).</li>
         </ul>
-        <p>Le rang vaut donc \(2\) ou \(3\). Il vaut \(3\) ⇔ la famille est libre. On cherche une relation \(\lambda_1v_1+\lambda_2v_2+\lambda_3v_3=0\) :</p>
-        \[ \begin{cases}\lambda_1-\lambda_3=0\\ \lambda_2+\lambda_3=0\\ \lambda_1+\lambda_2=0\\ \lambda_2+\lambda_3=0\end{cases}
-        \iff \lambda_1=\lambda_3,\ \lambda_2=-\lambda_3. \]
-        <p>(La 3ᵉ équation, \(\lambda_1+\lambda_2=\lambda_3-\lambda_3=0\), est alors automatiquement vérifiée.) Avec \(\lambda_3=1\) :
-        \(v_1-v_2+v_3=(1-0-1,\ 0-1+1,\ 1-1+0,\ 0-1+1)=0\). La famille est <b>liée</b>.</p>
-        <div class="res">\(v_3=v_2-v_1\) donc \(\operatorname{Vect}(v_1,v_2,v_3)=\operatorname{Vect}(v_1,v_2)\) et \(\operatorname{rg}(v_1,v_2,v_3)=2\).</div>
+        <p>Le rang vaut 2 ou 3.</p>
+        <p class="etape">Étape 2 : chercher une relation de dépendance</p>
+        <p>\(\lambda_1v_1 + \lambda_2v_2 + \lambda_3v_3 = 0\) donne :</p>
+        \[ \begin{cases}\lambda_1 - \lambda_3 = 0\\ \lambda_2 + \lambda_3 = 0\\ \lambda_1 + \lambda_2 = 0\\ \lambda_2 + \lambda_3 = 0\end{cases} \iff \lambda_1 = \lambda_3,\ \lambda_2 = -\lambda_3 \]
+        <p>(La 3ᵉ équation est alors vérifiée.) Avec \(\lambda_3 = 1\) : \(v_1 - v_2 + v_3 = 0\). La famille est liée.</p>
+        <div class="res">\(v_3 = v_2 - v_1\), donc \(\operatorname{Vect}(v_1, v_2, v_3) = \operatorname{Vect}(v_1, v_2)\) et \(\operatorname{rg}(v_1, v_2, v_3) = 2\).</div>
       </div>
     </div>
 
@@ -132,9 +135,14 @@ window.MathJax = {
       <div class="exo-head"><span>Exemple 2 — Rang d'une matrice \(2\times4\)</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">Rang de \(A=\begin{pmatrix}2&6&-1&0\\1&3&-\tfrac12&0\end{pmatrix}\in\mathcal M_{2,4}(\mathbb K)\).</p>
-        <p>Colonnes : \(v_1=\binom21\), \(v_2=\binom63\), \(v_3=\binom{-1}{-1/2}\), \(v_4=\binom00\). On a \(v_2=3v_1\), \(v_3=-\tfrac12v_1\) et \(v_4=0\cdot v_1\) :
-        tous les vecteurs sont colinéaires à \(v_1\neq0\).</p>
-        <div class="res">\(\operatorname{Vect}(v_1,\dots,v_4)=\operatorname{Vect}(v_1)\) est une droite : \(\operatorname{rg}A=1\).</div>
+
+        <p class="q">Rang de \(A\)</p>
+        <div class="rappel"><span class="lab">Rappel · rang d'une matrice</span>Le rang de \(A\) est le rang de la famille de ses colonnes.</div>
+        <p class="etape">Étape 1 : les colonnes</p>
+        <p>\(v_1 = \binom21\), \(v_2 = \binom63\), \(v_3 = \binom{-1}{-1/2}\), \(v_4 = \binom00\).</p>
+        <p class="etape">Étape 2 : relations</p>
+        <p>\(v_2 = 3v_1\), \(v_3 = -\frac12v_1\), \(v_4 = 0\cdot v_1\) : toutes sont colinéaires à \(v_1 \neq 0\).</p>
+        <div class="res">\(\operatorname{Vect}(v_1, \dots, v_4) = \operatorname{Vect}(v_1)\) est une droite : \(\operatorname{rg}A = 1\).</div>
       </div>
     </div>
 
@@ -170,16 +178,22 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">Rang de la famille \(v_1=\begin{pmatrix}1\\1\\1\\1\end{pmatrix}\), \(v_2=\begin{pmatrix}-1\\2\\0\\1\end{pmatrix}\), \(v_3=\begin{pmatrix}3\\2\\-1\\-3\end{pmatrix}\),
         \(v_4=\begin{pmatrix}3\\5\\0\\-1\end{pmatrix}\), \(v_5=\begin{pmatrix}3\\8\\1\\1\end{pmatrix}\).</p>
-        <p>Matrice des colonnes \(A=\begin{pmatrix}1&-1&3&3&3\\1&2&2&5&8\\1&0&-1&0&1\\1&1&-3&-1&1\end{pmatrix}\). Rang \(\le\min(4,5)=4\).</p>
-        <p>On <b>élimine</b> à l'aide de \(C_1\) (pivot \(1\) en 1ʳᵉ ligne) : \(C_2\leftarrow C_2+C_1\), \(C_3\leftarrow C_3-3C_1\), \(C_4\leftarrow C_4-3C_1\), \(C_5\leftarrow C_5-3C_1\) :</p>
-        \[ \begin{pmatrix}1&0&0&0&0\\1&3&-1&2&5\\1&1&-4&-3&-2\\1&2&-6&-4&-2\end{pmatrix}. \]
-        <p>Pivot suivant : la colonne \(C_3\) a un coefficient \(-1\) en ligne 2 ; on travaille avec \(C_3\) (qu'on peut échanger avec \(C_2\) si l'on veut) : \(C_2\leftarrow C_2+3C_3\), \(C_4\leftarrow C_4+2C_3\), \(C_5\leftarrow C_5+5C_3\) :</p>
-        \[ \begin{pmatrix}1&0&0&0&0\\1&0&-1&0&0\\1&-11&-4&-11&-22\\1&-16&-6&-16&-32\end{pmatrix}. \]
-        <p>On voit \(C_4=C_2\) et \(C_5=2C_2\) : \(C_4\leftarrow C_4-C_2\) et \(C_5\leftarrow C_5-2C_2\) les annulent. Il reste trois colonnes non nulles : \(C_1=(1,1,1,1)\), \(C_3=(0,-1,-4,-6)\) et \(C_2=(0,0,-11,-16)\).
-        Rangées dans l'ordre \((C_1,C_3,C_2)\), elles commencent par \(0\), \(1\) puis \(2\) zéros : le nombre de zéros croît strictement, la matrice est échelonnée par colonnes (proposition 2).</p>
-        <div class="res">3 colonnes non nulles et échelonnées : \(\operatorname{rg}(v_1,\dots,v_5)=3\), avec \(v_4=v_1+v_2+v_3\) et \(v_5=2v_1+2v_2+v_3\).</div>
-        <p>Vérification directe : \(v_1+v_2+v_3=(1-1+3,\ 1+2+2,\ 1+0-1,\ 1+1-3)=(3,5,0,-1)=v_4\) ✓ ; \(2v_1+2v_2+v_3=(2-2+3,\ 2+4+2,\ 2+0-1,\ 2+2-3)=(3,8,1,1)=v_5\) ✓.</p>
-        <div class="warnbox"><b>Piège.</b> Le rang d'une famille de 5 vecteurs de \(\mathbb R^4\) vaut au plus 4 (jamais 5) : cette famille est <b>forcément liée</b>.</div>
+
+        <p class="q">Rang par la méthode de Gauss (opérations sur les colonnes)</p>
+        <div class="rappel"><span class="lab">Rappel · opérations qui conservent le rang</span>Échanger deux colonnes, multiplier une colonne par un scalaire non nul, ajouter à une colonne un multiple d'une autre : le rang ne change pas. Une matrice échelonnée par colonnes a pour rang son nombre de colonnes non nulles.</div>
+        <p class="etape">Étape 1 : la matrice</p>
+        \[ A = \begin{pmatrix}1&-1&3&3&3\\1&2&2&5&8\\1&0&-1&0&1\\1&1&-3&-1&1\end{pmatrix} \qquad \operatorname{rg}A \le \min(4, 5) = 4 \]
+        <p class="etape">Étape 2 : pivot \(C_1\)</p>
+        <p>\(C_2 \leftarrow C_2 + C_1\), \(C_3 \leftarrow C_3 - 3C_1\), \(C_4 \leftarrow C_4 - 3C_1\), \(C_5 \leftarrow C_5 - 3C_1\) :</p>
+        \[ \begin{pmatrix}1&0&0&0&0\\1&3&-1&2&5\\1&1&-4&-3&-2\\1&2&-6&-4&-2\end{pmatrix} \]
+        <p class="etape">Étape 3 : pivot \(C_3\) (coefficient \(-1\) en ligne 2)</p>
+        <p>\(C_2 \leftarrow C_2 + 3C_3\), \(C_4 \leftarrow C_4 + 2C_3\), \(C_5 \leftarrow C_5 + 5C_3\) :</p>
+        \[ \begin{pmatrix}1&0&0&0&0\\1&0&-1&0&0\\1&-11&-4&-11&-22\\1&-16&-6&-16&-32\end{pmatrix} \]
+        <p class="etape">Étape 4 : colonnes proportionnelles</p>
+        <p>\(C_4 = C_2\) et \(C_5 = 2C_2\) : elles s'annulent. Il reste trois colonnes non nulles, \(C_1\), \(C_3\), \(C_2\), qui commencent par 0, 1 puis 2 zéros : la matrice est échelonnée.</p>
+        <div class="res">\(\operatorname{rg}(v_1, \dots, v_5) = 3\), avec \(v_4 = v_1 + v_2 + v_3\) et \(v_5 = 2v_1 + 2v_2 + v_3\).</div>
+        <p>Vérification : \(v_1 + v_2 + v_3 = (3, 5, 0, -1) = v_4\) et \(2v_1 + 2v_2 + v_3 = (3, 8, 1, 1) = v_5\).</p>
+        <div class="warnbox"><span class="lab">Piège</span> Le rang de 5 vecteurs de \(\mathbb R^4\) vaut au plus 4 : une telle famille est toujours liée.</div>
       </div>
     </div>
 
@@ -218,8 +232,11 @@ window.MathJax = {
       <div class="exo-head"><span>Exemple 4 — Application \(\mathbb R^n\to\mathbb R[X]\) définie par l'image de la base</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">Il existe une unique application linéaire \(f:\mathbb R^n\to\mathbb R[X]\) telle que \(f(e_i)=(X+1)^i\) pour \(i=1,\dots,n\) (\((e_i)\) base canonique).</p>
-        <p>Par le théorème 2 (ici \(F=\mathbb R[X]\) est de dimension infinie : sans importance). Pour \(x=(x_1,\dots,x_n)\) :</p>
-        <div class="res">\(f(x_1,\dots,x_n)=x_1f(e_1)+\dots+x_nf(e_n)=\displaystyle\sum_{i=1}^nx_i(X+1)^i.\)</div>
+
+        <p class="q">Expression de \(f\)</p>
+        <div class="rappel"><span class="lab">Rappel · application linéaire définie sur une base</span>Pour une base \((e_i)\) de l'espace de départ et des vecteurs \(w_i\) quelconques, il existe une unique application linéaire avec \(f(e_i) = w_i\). L'espace d'arrivée peut être de dimension infinie.</div>
+        <p>Pour \(x = (x_1, \dots, x_n) = \sum x_ie_i\), la linéarité donne :</p>
+        <div class="res">\(f(x_1, \dots, x_n) = x_1f(e_1) + \dots + x_nf(e_n) = \displaystyle\sum_{i=1}^n x_i(X + 1)^i\).</div>
       </div>
     </div>
 
@@ -239,11 +256,19 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exemple 5 — Rang de \(f:\mathbb R^3\to\mathbb R^2\), \(f(x,y,z)=(3x-4y+2z,\ 2x-3y-z)\)</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p>Image de la base canonique : \(f(e_1)=(3,2)\), \(f(e_2)=(-4,-3)\), \(f(e_3)=(2,-1)\). Rang \(\le\min(3,2)=2\).</p>
-        <p>\(f(e_1)\) et \(f(e_2)\) sont libres : \(\det\begin{pmatrix}3&-4\\2&-3\end{pmatrix}=-9+8=-1\neq0\). Donc \(\operatorname{rg}f\ge2\).</p>
-        <div class="res">\(\operatorname{rg}f=2\) : \(f\) est surjective, et \(\dim\operatorname{Ker}f=3-2=1\) (théorème du rang).</div>
-        <p>Noyau, pour contrôle : \(3x-4y+2z=0\) et \(2x-3y-z=0\). On élimine \(z\) : \(2\times(2)+(1)\) donne \(7x-10y=0\), soit \(x=\tfrac{10}7y\) ; alors \(z=2x-3y=\tfrac{20}7y-3y=-\tfrac17y\).
-        Direction \(y=-7\) : \((x,y,z)=(-10,-7,1)\). Vérification : \(3(-10)-4(-7)+2=0\) ✓ ; \(2(-10)-3(-7)-1=0\) ✓. \(\operatorname{Ker}f=\operatorname{Vect}\big((-10,-7,1)\big)\).</p>
+        <p class="enonce">Rang de \(f:\mathbb R^3\to\mathbb R^2\), \(f(x,y,z)=(3x-4y+2z,\ 2x-3y-z)\).</p>
+
+        <p class="q">Rang et noyau de \(f\)</p>
+        <p class="etape">Étape 1 : images de la base canonique</p>
+        <p>\(f(e_1) = (3, 2)\), \(f(e_2) = (-4, -3)\), \(f(e_3) = (2, -1)\). Rang \(\le \min(3, 2) = 2\).</p>
+        <p class="etape">Étape 2 : deux vecteurs libres</p>
+        \[ \det\begin{pmatrix}3&-4\\2&-3\end{pmatrix} = -9 + 8 = -1 \neq 0 \]
+        <p>\(f(e_1)\) et \(f(e_2)\) sont libres : \(\operatorname{rg}f \ge 2\).</p>
+        <div class="res">\(\operatorname{rg}f = 2\) : \(f\) est surjective, et par le théorème du rang \(\dim\operatorname{Ker}f = 3 - 2 = 1\).</div>
+        <p class="etape">Étape 3 : noyau (contrôle)</p>
+        <p>On élimine \(z\) : \(2\times(2) + (1)\) donne \(7x - 10y = 0\), soit \(x = \frac{10}{7}y\), puis \(z = 2x - 3y = -\frac17y\). Pour \(y = -7\) :</p>
+        \[ \operatorname{Ker}f = \operatorname{Vect}\big((-10, -7, 1)\big) \]
+        <p>Vérification : \(3(-10) - 4(-7) + 2 = 0\) et \(2(-10) - 3(-7) - 1 = 0\).</p>
       </div>
     </div>
 
@@ -262,15 +287,18 @@ window.MathJax = {
       <div class="exo-head"><span>Exemple 6 — \(f:\mathbb R^4\to\mathbb R^3\), rang et dimension du noyau</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">\(f(x_1,x_2,x_3,x_4)=(x_1-x_2+x_3,\ 2x_1+2x_2+6x_3+4x_4,\ -x_1-2x_3-x_4)\). Rang de \(f\) et \(\dim\operatorname{Ker}f\).</p>
-        <p>Matrice dans les bases canoniques (colonnes = images de \(e_1,\dots,e_4\)) :
-        \(A=\begin{pmatrix}1&-1&1&0\\2&2&6&4\\-1&0&-2&-1\end{pmatrix}\). Rang \(\le\min(4,3)=3\).</p>
-        <p>On utilise \(\operatorname{rg}A=\operatorname{rg}{}^tA\) et on échelonne les <b>lignes</b> : \(L_2\leftarrow L_2-2L_1\), \(L_3\leftarrow L_3+L_1\) :</p>
-        \[ \begin{pmatrix}1&-1&1&0\\0&4&4&4\\0&-1&-1&-1\end{pmatrix}
-        \xrightarrow{L_2\leftarrow\frac14L_2}\begin{pmatrix}1&-1&1&0\\0&1&1&1\\0&-1&-1&-1\end{pmatrix}
-        \xrightarrow{L_3\leftarrow L_3+L_2}\begin{pmatrix}1&-1&1&0\\0&1&1&1\\0&0&0&0\end{pmatrix}. \]
-        <div class="res">2 lignes non nulles : \(\operatorname{rg}f=2\) ; théorème du rang : \(\dim\operatorname{Ker}f=4-2=2\).</div>
-        <p>Base du noyau (contrôle) : le système réduit est \(x_2=-x_3-x_4\) et \(x_1=x_2-x_3=-2x_3-x_4\). Paramètres \((x_3,x_4)\) libres :
-        \((x_1,x_2,x_3,x_4)=x_3(-2,-1,1,0)+x_4(-1,-1,0,1)\). Vérification du 1ᵉʳ vecteur : \(-2+1+1=0\) ; \(2(-2)+2(-1)+6=0\) ; \(2-2=0\) ✓.</p>
+
+        <p class="q">Rang et dimension du noyau</p>
+        <p class="etape">Étape 1 : la matrice</p>
+        <p>Colonnes = images de \(e_1, \dots, e_4\) :</p>
+        \[ A = \begin{pmatrix}1&-1&1&0\\2&2&6&4\\-1&0&-2&-1\end{pmatrix} \qquad \operatorname{rg}A \le \min(4, 3) = 3 \]
+        <p class="etape">Étape 2 : échelonner les lignes</p>
+        <p>On utilise \(\operatorname{rg}A = \operatorname{rg}{}^tA\), donc on peut opérer sur les lignes. \(L_2 \leftarrow L_2 - 2L_1\), \(L_3 \leftarrow L_3 + L_1\), puis \(L_2 \leftarrow \frac14L_2\), \(L_3 \leftarrow L_3 + L_2\) :</p>
+        \[ \begin{pmatrix}1&-1&1&0\\0&1&1&1\\0&0&0&0\end{pmatrix} \]
+        <div class="res">Deux lignes non nulles : \(\operatorname{rg}f = 2\), et \(\dim\operatorname{Ker}f = 4 - 2 = 2\).</div>
+        <p class="etape">Étape 3 : base du noyau (contrôle)</p>
+        <p>Le système réduit donne \(x_2 = -x_3 - x_4\) et \(x_1 = x_2 - x_3 = -2x_3 - x_4\), avec \(x_3, x_4\) libres :</p>
+        \[ (x_1, x_2, x_3, x_4) = x_3(-2, -1, 1, 0) + x_4(-1, -1, 0, 1) \]
       </div>
     </div>
 
@@ -290,10 +318,15 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exemple 7 — \(f:\mathbb R^2\to\mathbb R^2\), \(f(x,y)=(x-y,\ x+y)\) est un isomorphisme</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
-        <p>Espaces de départ et d'arrivée de même dimension 2 : d'après le théorème 4, il suffit de montrer l'injectivité, c'est-à-dire \(\operatorname{Ker}f=\{0\}\) :</p>
-        \[ (x,y)\in\operatorname{Ker}f\iff(x-y,\ x+y)=(0,0)\iff\begin{cases}x-y=0\\x+y=0\end{cases}\iff x=y=0. \]
-        <div class="res">\(\operatorname{Ker}f=\{(0,0)\}\), \(f\) injective, donc bijective : c'est un <b>isomorphisme</b>.</div>
-        <p>Contrôle matriciel : \(\operatorname{Mat}(f)=\begin{pmatrix}1&-1\\1&1\end{pmatrix}\), \(\det=1+1=2\neq0\) ✓.</p>
+        <p class="enonce">Montrer que \(f:\mathbb R^2\to\mathbb R^2\), \(f(x,y)=(x-y,\ x+y)\) est un isomorphisme.</p>
+
+        <p class="q">\(f\) est un isomorphisme</p>
+        <div class="rappel"><span class="lab">Rappel · théorème 4</span>Si \(\dim E = \dim F\) (finie), alors \(f : E \to F\) linéaire est bijective si et seulement si elle est injective, si et seulement si \(\operatorname{Ker}f = \{0\}\).</div>
+        <p class="etape">Étape 1 : noyau</p>
+        \[ (x, y) \in \operatorname{Ker}f \iff \begin{cases}x - y = 0\\ x + y = 0\end{cases} \iff x = y = 0 \]
+        <div class="res">\(\operatorname{Ker}f = \{(0, 0)\}\) : \(f\) est injective, donc bijective, c'est un <b>isomorphisme</b>.</div>
+        <p class="etape">Étape 2 : contrôle matriciel</p>
+        <p>\(\operatorname{Mat}(f) = \begin{pmatrix}1&-1\\1&1\end{pmatrix}\), de déterminant \(1 + 1 = 2 \neq 0\).</p>
       </div>
     </div>
 
@@ -315,21 +348,27 @@ window.MathJax = {
         <p class="enonce">\(f:\mathbb R^3\to\mathbb R^2\), \(f(x_1,x_2,x_3)=(x_1+x_2-x_3,\ x_1-2x_2+3x_3)\) ; \(\mathcal B=(e_1,e_2,e_3)\) et \(\mathcal B'=(f_1,f_2)\) bases canoniques.
         (1) Matrice de \(f\) dans \((\mathcal B,\mathcal B')\) ? (2) Avec \(\epsilon_1=\begin{pmatrix}1\\1\\0\end{pmatrix}\), \(\epsilon_2=\begin{pmatrix}1\\0\\1\end{pmatrix}\), \(\epsilon_3=\begin{pmatrix}0\\1\\1\end{pmatrix}\),
         \(\phi_1=\begin{pmatrix}1\\0\end{pmatrix}\), \(\phi_2=\begin{pmatrix}1\\1\end{pmatrix}\) : montrer que \(\mathcal B_0=(\epsilon_i)\) est une base de \(\mathbb R^3\), \(\mathcal B_0'=(\phi_1,\phi_2)\) une base de \(\mathbb R^2\), puis donner la matrice de \(f\) dans \((\mathcal B_0,\mathcal B_0')\).</p>
-        <p class="q">1)</p>
-        <p>\(f(e_1)=(1,1)\), \(f(e_2)=(1,-2)\), \(f(e_3)=(-1,3)\) (coordonnées dans la canonique de \(\mathbb R^2\), qui sont les composantes mêmes).</p>
-        <div class="res">\(\operatorname{Mat}_{\mathcal B,\mathcal B'}(f)=A=\begin{pmatrix}1&1&-1\\1&-2&3\end{pmatrix}\in\mathcal M_{2,3}(\mathbb R)\).</div>
-        <p class="q">2)</p>
-        <p><b>Bases.</b> \(\det(\epsilon_1,\epsilon_2,\epsilon_3)=\begin{vmatrix}1&1&0\\1&0&1\\0&1&1\end{vmatrix}=1(0-1)-1(1-0)+0=-2\neq0\) : base de \(\mathbb R^3\).
-        \(\det(\phi_1,\phi_2)=\begin{vmatrix}1&1\\0&1\end{vmatrix}=1\neq0\) : base de \(\mathbb R^2\).</p>
-        <p><b>Images.</b> On calcule \(f(\epsilon_j)\) puis on décompose sur \((\phi_1,\phi_2)\) : \(\binom ab=\alpha\phi_1+\beta\phi_2=\binom{\alpha+\beta}\beta\), donc \(\beta=b\), \(\alpha=a-b\).</p>
-        \[ \begin{aligned}
-        f(\epsilon_1)&=f(1,1,0)=(2,-1)\ \Rightarrow\ \beta=-1,\ \alpha=2+1=3,\\
-        f(\epsilon_2)&=f(1,0,1)=(0,4)\ \Rightarrow\ \beta=4,\ \alpha=0-4=-4,\\
-        f(\epsilon_3)&=f(0,1,1)=(0,1)\ \Rightarrow\ \beta=1,\ \alpha=0-1=-1.
-        \end{aligned} \]
-        <div class="res">\(\operatorname{Mat}_{\mathcal B_0,\mathcal B_0'}(f)=\begin{pmatrix}3&-4&-1\\-1&4&1\end{pmatrix}\).</div>
-        <p>Contrôle par la formule de changement de base (§4.2) : \(Q^{-1}AP\) avec \(P=\begin{pmatrix}1&1&0\\1&0&1\\0&1&1\end{pmatrix}\), \(Q=\begin{pmatrix}1&1\\0&1\end{pmatrix}\), \(Q^{-1}=\begin{pmatrix}1&-1\\0&1\end{pmatrix}\) :
-        \(AP=\begin{pmatrix}2&0&0\\-1&4&1\end{pmatrix}\) puis \(Q^{-1}AP=\begin{pmatrix}2+1&0-4&0-1\\-1&4&1\end{pmatrix}=\begin{pmatrix}3&-4&-1\\-1&4&1\end{pmatrix}\) ✓.</p>
+
+        <p class="q">1) Matrice dans les bases canoniques</p>
+        <div class="rappel"><span class="lab">Rappel · matrice d'une application linéaire</span>La colonne \(j\) contient les coordonnées de \(f(e_j)\) dans la base d'arrivée.</div>
+        <p>\(f(e_1) = (1, 1)\), \(f(e_2) = (1, -2)\), \(f(e_3) = (-1, 3)\).</p>
+        <div class="res">\(\operatorname{Mat}_{\mathcal B,\mathcal B'}(f) = A = \begin{pmatrix}1&1&-1\\1&-2&3\end{pmatrix} \in \mathcal M_{2,3}(\mathbb R)\).</div>
+
+        <p class="q">2) Matrice dans \((\mathcal B_0, \mathcal B_0')\)</p>
+        <p class="etape">Étape 1 : ce sont des bases</p>
+        \[ \det(\epsilon_1, \epsilon_2, \epsilon_3) = \begin{vmatrix}1&1&0\\1&0&1\\0&1&1\end{vmatrix} = 1(0 - 1) - 1(1 - 0) + 0 = -2 \neq 0 \qquad \det(\phi_1, \phi_2) = \begin{vmatrix}1&1\\0&1\end{vmatrix} = 1 \neq 0 \]
+        <p class="etape">Étape 2 : décomposer une image sur \((\phi_1, \phi_2)\)</p>
+        <p>\(\binom ab = \alpha\phi_1 + \beta\phi_2 = \binom{\alpha + \beta}{\beta}\), donc \(\beta = b\) et \(\alpha = a - b\).</p>
+        <ul>
+          <li>\(f(\epsilon_1) = f(1, 1, 0) = (2, -1)\) : \(\beta = -1\), \(\alpha = 3\).</li>
+          <li>\(f(\epsilon_2) = f(1, 0, 1) = (0, 4)\) : \(\beta = 4\), \(\alpha = -4\).</li>
+          <li>\(f(\epsilon_3) = f(0, 1, 1) = (0, 1)\) : \(\beta = 1\), \(\alpha = -1\).</li>
+        </ul>
+        <div class="res">\(\operatorname{Mat}_{\mathcal B_0,\mathcal B_0'}(f) = \begin{pmatrix}3&-4&-1\\-1&4&1\end{pmatrix}\).</div>
+        <p class="etape">Étape 3 : contrôle par la formule de changement de base</p>
+        <div class="rappel"><span class="lab">Rappel · changement de bases</span>\[ \operatorname{Mat}_{\mathcal B_0,\mathcal B_0'}(f) = Q^{-1}AP \]
+        \(P\) : matrice de passage dans \(\mathbb R^3\) ; \(Q\) : matrice de passage dans \(\mathbb R^2\).</div>
+        <p>Avec \(P = \begin{pmatrix}1&1&0\\1&0&1\\0&1&1\end{pmatrix}\), \(Q^{-1} = \begin{pmatrix}1&-1\\0&1\end{pmatrix}\) : \(AP = \begin{pmatrix}2&0&0\\-1&4&1\end{pmatrix}\), puis \(Q^{-1}AP = \begin{pmatrix}3&-4&-1\\-1&4&1\end{pmatrix}\).</p>
       </div>
     </div>
 
@@ -357,17 +396,18 @@ window.MathJax = {
         <p class="enonce">\(f:E=\mathbb R^2\to F=\mathbb R^3\), \(g:F\to G=\mathbb R^2\) ; bases \(\mathcal B=(e_1,e_2)\), \(\mathcal B'=(f_1,f_2,f_3)\), \(\mathcal B''=(g_1,g_2)\) ;
         \(A=\operatorname{Mat}_{\mathcal B,\mathcal B'}(f)=\begin{pmatrix}1&0\\1&1\\0&2\end{pmatrix}\in\mathcal M_{3,2}\), \(B=\operatorname{Mat}_{\mathcal B',\mathcal B''}(g)=\begin{pmatrix}2&-1&0\\3&1&2\end{pmatrix}\in\mathcal M_{2,3}\).
         Calculer \(C=\operatorname{Mat}_{\mathcal B,\mathcal B''}(g\circ f)\) de deux façons.</p>
-        <p class="q">Façon 1 — par l'application \(g\circ f\) (images des vecteurs de base)</p>
-        <p>Lecture des colonnes : \(f(e_1)=f_1+f_2\), \(f(e_2)=f_2+2f_3\) ; \(g(f_1)=2g_1+3g_2\), \(g(f_2)=-g_1+g_2\), \(g(f_3)=2g_2\).</p>
-        \[ \begin{aligned}
-        (g\circ f)(e_1)&=g(f_1)+g(f_2)=(2-1)g_1+(3+1)g_2=g_1+4g_2,\\
-        (g\circ f)(e_2)&=g(f_2)+2g(f_3)=-g_1+g_2+4g_2=-g_1+5g_2.
-        \end{aligned} \]
-        <p class="q">Façon 2 — par le produit de matrices (proposition 9)</p>
-        \[ C=BA=\begin{pmatrix}2&-1&0\\3&1&2\end{pmatrix}\begin{pmatrix}1&0\\1&1\\0&2\end{pmatrix}
-        =\begin{pmatrix}2-1+0&0-1+0\\3+1+0&0+1+4\end{pmatrix}=\begin{pmatrix}1&-1\\4&5\end{pmatrix}. \]
-        <div class="res">\(\operatorname{Mat}_{\mathcal B,\mathcal B''}(g\circ f)=\begin{pmatrix}1&-1\\4&5\end{pmatrix}\) : les deux façons concordent (colonnes \((1,4)\) et \((-1,5)\)).</div>
-        <div class="warnbox"><b>Piège.</b> \(AB\) existerait aussi (\(3\times2\) fois \(2\times3\)) mais serait la matrice de \(f\circ g\), de taille \(3\times3\) : ce n'est pas la même application.</div>
+
+        <p class="q">Façon 1 : par l'application \(g\circ f\)</p>
+        <p class="etape">Étape 1 : lire les colonnes</p>
+        <p>\(f(e_1) = f_1 + f_2\), \(f(e_2) = f_2 + 2f_3\) ; \(g(f_1) = 2g_1 + 3g_2\), \(g(f_2) = -g_1 + g_2\), \(g(f_3) = 2g_2\).</p>
+        <p class="etape">Étape 2 : composer</p>
+        \[ (g \circ f)(e_1) = g(f_1) + g(f_2) = g_1 + 4g_2 \qquad (g \circ f)(e_2) = g(f_2) + 2g(f_3) = -g_1 + 5g_2 \]
+
+        <p class="q">Façon 2 : par le produit de matrices</p>
+        <div class="rappel"><span class="lab">Rappel · matrice d'une composée</span>\[ \operatorname{Mat}(g \circ f) = \operatorname{Mat}(g)\times\operatorname{Mat}(f) \]</div>
+        \[ C = BA = \begin{pmatrix}2&-1&0\\3&1&2\end{pmatrix}\begin{pmatrix}1&0\\1&1\\0&2\end{pmatrix} = \begin{pmatrix}1&-1\\4&5\end{pmatrix} \]
+        <div class="res">\(\operatorname{Mat}_{\mathcal B,\mathcal B''}(g \circ f) = \begin{pmatrix}1&-1\\4&5\end{pmatrix}\) : les deux façons donnent les mêmes colonnes \((1, 4)\) et \((-1, 5)\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> \(AB\) existe aussi (\(3\times2\) fois \(2\times3\)), mais c'est la matrice de \(f \circ g\), de taille \(3\times3\) : une autre application.</div>
       </div>
     </div>
 
@@ -378,14 +418,17 @@ window.MathJax = {
     <div class="exo-card">
       <div class="exo-head"><span>Exemple 10 — Matrices d'endomorphismes classiques</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
+        <div class="enonce">Donner les matrices de quelques endomorphismes classiques (identité, homothétie, symétrie centrale, rotation).</div>
+
+        <p class="q">Matrices classiques</p>
         <ul>
-          <li><b>Identité</b> \(\mathrm{id}_E\) : \(\operatorname{Mat}_{\mathcal B}(\mathrm{id})=I_n\) pour toute base \(\mathcal B\) (car \(\mathrm{id}(e_j)=e_j\)).
-          <div class="warnbox" style="margin-top:.3rem"><b>Attention :</b> faux si les bases de départ et d'arrivée sont différentes (c'est alors une matrice de passage, §4).</div></li>
-          <li><b>Homothétie</b> \(h_\lambda(x)=\lambda x\) : \(\operatorname{Mat}_{\mathcal B}(h_\lambda)=\lambda I_n\).</li>
-          <li><b>Symétrie centrale</b> \(s(x)=-x\) : \(\operatorname{Mat}_{\mathcal B}(s)=-I_n\).</li>
-          <li><b>Rotation</b> \(r_\theta\) de \(\mathbb R^2\) (angle \(\theta\), centre \(O\)), base canonique : \(r_\theta(x,y)=(x\cos\theta-y\sin\theta,\ x\sin\theta+y\cos\theta)\). Colonnes : \(r_\theta(1,0)=(\cos\theta,\sin\theta)\), \(r_\theta(0,1)=(-\sin\theta,\cos\theta)\) :
-          \[ \operatorname{Mat}_{\mathcal B}(r_\theta)=\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}. \]</li>
+          <li><b>Identité</b> : \(\operatorname{Mat}_{\mathcal B}(\mathrm{id}) = I_n\), car \(\mathrm{id}(e_j) = e_j\). Faux si les bases de départ et d'arrivée diffèrent (c'est alors une matrice de passage).</li>
+          <li><b>Homothétie</b> \(h_\lambda(x) = \lambda x\) : \(\operatorname{Mat}_{\mathcal B}(h_\lambda) = \lambda I_n\).</li>
+          <li><b>Symétrie centrale</b> \(s(x) = -x\) : \(\operatorname{Mat}_{\mathcal B}(s) = -I_n\).</li>
         </ul>
+        <p class="etape">Rotation \(r_\theta\) de \(\mathbb R^2\), base canonique</p>
+        <p>\(r_\theta(1, 0) = (\cos\theta, \sin\theta)\) et \(r_\theta(0, 1) = (-\sin\theta, \cos\theta)\) sont les deux colonnes :</p>
+        <div class="res">\[ \operatorname{Mat}_{\mathcal B}(r_\theta) = \begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix} \]</div>
       </div>
     </div>
     <div class="thm">
@@ -413,15 +456,23 @@ window.MathJax = {
       <div class="exo-head"><span>Exemple 11 — Matrice de \((s\circ r)^{-1}\) (rotation \(\pi/6\) et réflexion d'axe \(y=x\))</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">\(r:\mathbb R^2\to\mathbb R^2\) rotation d'angle \(\frac\pi6\) (centrée à l'origine), \(s\) la réflexion par rapport à l'axe \((y=x)\). Matrice de \((s\circ r)^{-1}\) dans la base canonique ?</p>
-        <p><b>Matrice de \(r\)</b> (\(\cos\frac\pi6=\frac{\sqrt3}2\), \(\sin\frac\pi6=\frac12\)) : \(R=\begin{pmatrix}\frac{\sqrt3}2&-\frac12\\\frac12&\frac{\sqrt3}2\end{pmatrix}\).</p>
-        <p><b>Matrice de \(s\)</b> : la réflexion d'axe \(y=x\) échange les coordonnées : \(s(x,y)=(y,x)\), donc \(S=\begin{pmatrix}0&1\\1&0\end{pmatrix}\) (et \(S^2=I\) : \(s\) est une involution).</p>
-        <p><b>Composée.</b> \(\operatorname{Mat}(s\circ r)=SR\) (\(r\) appliquée d'abord, donc à droite) :
-        \(SR=\begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}\frac{\sqrt3}2&-\frac12\\\frac12&\frac{\sqrt3}2\end{pmatrix}=\begin{pmatrix}\frac12&\frac{\sqrt3}2\\\frac{\sqrt3}2&-\frac12\end{pmatrix}\) (multiplier à gauche par \(S\) échange les deux lignes de \(R\)).</p>
-        <p><b>Inverse.</b> Par le corollaire 2, \(\operatorname{Mat}\big((s\circ r)^{-1}\big)=(SR)^{-1}=R^{-1}S^{-1}=R^{-1}S\), avec \(R^{-1}=R^{T}=\begin{pmatrix}\frac{\sqrt3}2&\frac12\\-\frac12&\frac{\sqrt3}2\end{pmatrix}\) (rotation d'angle \(-\frac\pi6\)).
-        Multiplier à droite par \(S\) échange les deux colonnes de \(R^{-1}\) :</p>
-        <div class="res">\((SR)^{-1}=R^{-1}S=\begin{pmatrix}\frac12&\frac{\sqrt3}2\\\frac{\sqrt3}2&-\frac12\end{pmatrix}=SR.\)</div>
-        <p>Vérification : \((SR)^2=\begin{pmatrix}\frac14+\frac34&\frac{\sqrt3}4-\frac{\sqrt3}4\\\frac{\sqrt3}4-\frac{\sqrt3}4&\frac34+\frac14\end{pmatrix}=I_2\) : \(s\circ r\) est son propre inverse — c'est elle-même une réflexion (matrice symétrique orthogonale).</p>
-        <div class="warnbox"><b>Piège.</b> \((s\circ r)^{-1}=r^{-1}\circ s^{-1}\) : l'ordre s'<b>inverse</b>. Écrire \(s^{-1}\circ r^{-1}\) (soit \(S R^{-1}\)) serait faux en général.</div>
+
+        <p class="q">Matrice de \((s\circ r)^{-1}\)</p>
+        <p class="etape">Étape 1 : matrice de \(r\)</p>
+        <p>\(\cos\frac\pi6 = \frac{\sqrt3}{2}\), \(\sin\frac\pi6 = \frac12\) :</p>
+        \[ R = \begin{pmatrix}\frac{\sqrt3}{2}&-\frac12\\\frac12&\frac{\sqrt3}{2}\end{pmatrix} \]
+        <p class="etape">Étape 2 : matrice de \(s\)</p>
+        <p>La réflexion d'axe \(y = x\) échange les coordonnées : \(s(x, y) = (y, x)\).</p>
+        \[ S = \begin{pmatrix}0&1\\1&0\end{pmatrix} \qquad S^2 = I \]
+        <p class="etape">Étape 3 : la composée</p>
+        <p>\(r\) agit d'abord, donc \(\operatorname{Mat}(s \circ r) = SR\). Multiplier à gauche par \(S\) échange les deux lignes de \(R\) :</p>
+        \[ SR = \begin{pmatrix}\frac12&\frac{\sqrt3}{2}\\\frac{\sqrt3}{2}&-\frac12\end{pmatrix} \]
+        <p class="etape">Étape 4 : l'inverse</p>
+        <div class="rappel"><span class="lab">Rappel · inverse d'un produit</span>\[ (SR)^{-1} = R^{-1}S^{-1} \]</div>
+        <p>\(R^{-1} = R^T\) (rotation d'angle \(-\frac\pi6\)) et \(S^{-1} = S\). Multiplier à droite par \(S\) échange les deux colonnes de \(R^{-1}\) :</p>
+        <div class="res">\((SR)^{-1} = R^{-1}S = \begin{pmatrix}\frac12&\frac{\sqrt3}{2}\\\frac{\sqrt3}{2}&-\frac12\end{pmatrix} = SR\).</div>
+        <p>Vérification : \((SR)^2 = I_2\). La composée \(s \circ r\) est son propre inverse : c'est elle-même une réflexion (matrice symétrique orthogonale).</p>
+        <div class="warnbox"><span class="lab">Piège</span> \((s \circ r)^{-1} = r^{-1} \circ s^{-1}\) : l'ordre s'inverse. Écrire \(s^{-1} \circ r^{-1}\) serait faux en général.</div>
       </div>
     </div>
 
@@ -438,10 +489,14 @@ window.MathJax = {
       <div class="exo-head"><span>Exemple 12 — Matrice de passage dans \(\mathbb R^2\)</span><span class="diff">♦◊◊</span></div>
       <div class="exo-body">
         <p class="enonce">\(e_1=\binom10\), \(e_2=\binom11\), \(\epsilon_1=\binom12\), \(\epsilon_2=\binom54\). \(\mathcal B=(e_1,e_2)\), \(\mathcal B'=(\epsilon_1,\epsilon_2)\). Matrice de passage de \(\mathcal B\) vers \(\mathcal B'\) ?</p>
-        <p>Il faut écrire \(\epsilon_1,\epsilon_2\) dans \((e_1,e_2)\) : \(\epsilon=\alpha e_1+\beta e_2=\binom{\alpha+\beta}\beta\), donc \(\beta\) = 2ᵉ composante et \(\alpha\) = 1ʳᵉ − 2ᵉ.</p>
-        \[ \epsilon_1=(1-2)e_1+2e_2=-e_1+2e_2=\binom{-1}{2}_{\mathcal B},\qquad \epsilon_2=(5-4)e_1+4e_2=e_1+4e_2=\binom14_{\mathcal B}. \]
-        <p>(Contrôle : \(-e_1+2e_2=(-1+2,\ 2)=(1,2)=\epsilon_1\) ✓ ; \(e_1+4e_2=(1+4,\ 4)=(5,4)=\epsilon_2\) ✓.)</p>
-        <div class="res">\(P_{\mathcal B,\mathcal B'}=\begin{pmatrix}-1&1\\2&4\end{pmatrix}\).</div>
+
+        <p class="q">Matrice de passage \(P_{\mathcal B,\mathcal B'}\)</p>
+        <div class="rappel"><span class="lab">Rappel · matrice de passage</span>Ses colonnes sont les coordonnées des vecteurs de la nouvelle base \(\mathcal B'\) dans l'ancienne base \(\mathcal B\).</div>
+        <p class="etape">Étape 1 : décomposer sur \((e_1, e_2)\)</p>
+        <p>\(\epsilon = \alpha e_1 + \beta e_2 = \binom{\alpha + \beta}{\beta}\) : \(\beta\) est la 2ᵉ composante et \(\alpha\) la 1ʳᵉ moins la 2ᵉ.</p>
+        \[ \epsilon_1 = (1 - 2)e_1 + 2e_2 = -e_1 + 2e_2 \qquad \epsilon_2 = (5 - 4)e_1 + 4e_2 = e_1 + 4e_2 \]
+        <p>Contrôle : \(-e_1 + 2e_2 = (1, 2)\) et \(e_1 + 4e_2 = (5, 4)\).</p>
+        <div class="res">\(P_{\mathcal B,\mathcal B'} = \begin{pmatrix}-1&1\\2&4\end{pmatrix}\).</div>
       </div>
     </div>
 
@@ -462,14 +517,18 @@ window.MathJax = {
       <div class="exo-body">
         <p class="enonce">\(E=\mathbb R^3\), base canonique \(\mathcal B\). \(\mathcal B_1=\Big(\begin{pmatrix}1\\1\\0\end{pmatrix},\begin{pmatrix}0\\-1\\0\end{pmatrix},\begin{pmatrix}3\\2\\-1\end{pmatrix}\Big)=(b_1,b_2,b_3)\),
         \(\mathcal B_2=\Big(\begin{pmatrix}1\\-1\\0\end{pmatrix},\begin{pmatrix}0\\1\\0\end{pmatrix},\begin{pmatrix}0\\0\\-1\end{pmatrix}\Big)=(u_1,u_2,u_3)\). Matrice de passage de \(\mathcal B_1\) vers \(\mathcal B_2\) ?</p>
-        <p>On écrit chaque \(u_j\) dans \(\mathcal B_1\) :</p>
-        \[ \begin{aligned}
-        u_1&=(1,-1,0)=b_1+2b_2\quad(\text{car }b_1+2b_2=(1,1-2,0)=(1,-1,0)),\\
-        u_2&=(0,1,0)=-b_2,\\
-        u_3&=(0,0,-1)=b_3-3b_1-b_2\quad(\text{car }b_3-3b_1-b_2=(3-3,\ 2-3+1,\ -1)=(0,0,-1)).
-        \end{aligned} \]
-        <div class="res">\(P=P_{\mathcal B_1,\mathcal B_2}=\begin{pmatrix}1&0&-3\\2&-1&-1\\0&0&1\end{pmatrix}\).</div>
-        <p>Son inverse (utilisé à l'exemple suivant), \(P^{-1}=P_{\mathcal B_2,\mathcal B_1}=\begin{pmatrix}1&0&3\\2&-1&5\\0&0&1\end{pmatrix}\) : on vérifie \(PP^{-1}\) — 1ʳᵉ ligne \((1,0,-3)\) : \(1\), \(0\), \(3-3=0\) ; 2ᵉ ligne \((2,-1,-1)\) : \(2-2=0\), \(1\), \(6-5-1=0\) ; 3ᵉ ligne \((0,0,1)\) : \(0,0,1\) ✓.</p>
+
+        <p class="q">Matrice de passage \(P_{\mathcal B_1,\mathcal B_2}\)</p>
+        <p class="etape">Étape 1 : écrire chaque \(u_j\) dans \(\mathcal B_1\)</p>
+        <ul>
+          <li>\(u_1 = (1, -1, 0) = b_1 + 2b_2\), car \(b_1 + 2b_2 = (1, 1 - 2, 0)\).</li>
+          <li>\(u_2 = (0, 1, 0) = -b_2\).</li>
+          <li>\(u_3 = (0, 0, -1) = b_3 - 3b_1 - b_2\), car \(b_3 - 3b_1 - b_2 = (3 - 3,\ 2 - 3 + 1,\ -1)\).</li>
+        </ul>
+        <p class="etape">Étape 2 : en colonnes</p>
+        <div class="res">\(P = P_{\mathcal B_1,\mathcal B_2} = \begin{pmatrix}1&0&-3\\2&-1&-1\\0&0&1\end{pmatrix}\).</div>
+        <p class="etape">Étape 3 : son inverse</p>
+        <p>\(P^{-1} = P_{\mathcal B_2,\mathcal B_1} = \begin{pmatrix}1&0&3\\2&-1&5\\0&0&1\end{pmatrix}\). Vérification de \(PP^{-1} = I\) : première ligne \((1, 0, -3)\) donne \((1, 0, 3 - 3)\) ; deuxième ligne \((2, -1, -1)\) donne \((2 - 2, 1, 6 - 5 - 1)\) ; troisième ligne \((0, 0, 1)\).</p>
       </div>
     </div>
 
@@ -502,13 +561,15 @@ window.MathJax = {
       <div class="exo-head"><span>Exemple 14 — Changement de base d'un endomorphisme de \(\mathbb R^3\)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">Avec \(\mathcal B_1,\mathcal B_2\) de l'exemple 13, \(f:\mathbb R^3\to\mathbb R^3\) de matrice \(A=\operatorname{Mat}_{\mathcal B_1}(f)=\begin{pmatrix}1&0&-6\\-2&2&-7\\0&0&3\end{pmatrix}\). Matrice \(B=\operatorname{Mat}_{\mathcal B_2}(f)\) ?</p>
-        <p>Corollaire 3 avec \(P=P_{\mathcal B_1,\mathcal B_2}\) (exemple 13) et \(P^{-1}\) : \(B=P^{-1}AP\). On calcule d'abord \(AP\) :</p>
-        \[ AP=\begin{pmatrix}1&0&-6\\-2&2&-7\\0&0&3\end{pmatrix}\begin{pmatrix}1&0&-3\\2&-1&-1\\0&0&1\end{pmatrix}
-        =\begin{pmatrix}1&0&-3-6\\-2+4&-2&6-2-7\\0&0&3\end{pmatrix}=\begin{pmatrix}1&0&-9\\2&-2&-3\\0&0&3\end{pmatrix}. \]
-        <p>puis \(P^{-1}(AP)\) avec \(P^{-1}=\begin{pmatrix}1&0&3\\2&-1&5\\0&0&1\end{pmatrix}\) :</p>
-        \[ P^{-1}AP=\begin{pmatrix}1+0+0&0&-9+9\\2-2&0+2&-18+3+15\\0&0&3\end{pmatrix}=\begin{pmatrix}1&0&0\\0&2&0\\0&0&3\end{pmatrix}. \]
-        <div class="res">\(B=\operatorname{Mat}_{\mathcal B_2}(f)=\begin{pmatrix}1&0&0\\0&2&0\\0&0&3\end{pmatrix}\) : \(f\) est <b>diagonale</b> dans \(\mathcal B_2\).</div>
-        <p>Intérêt : les puissances sont immédiates, \(B^k=\operatorname{diag}(1,2^k,3^k)\), donc \(A^k=PB^kP^{-1}\) (cf. TD3 exercices 6 et 9).</p>
+
+        <p class="q">Matrice de \(f\) dans \(\mathcal B_2\)</p>
+        <div class="rappel"><span class="lab">Rappel · changement de base d'un endomorphisme</span>\[ B = P^{-1}AP \qquad\text{avec } P = P_{\mathcal B_1,\mathcal B_2} \]</div>
+        <p class="etape">Étape 1 : \(AP\)</p>
+        \[ AP = \begin{pmatrix}1&0&-6\\-2&2&-7\\0&0&3\end{pmatrix}\begin{pmatrix}1&0&-3\\2&-1&-1\\0&0&1\end{pmatrix} = \begin{pmatrix}1&0&-9\\2&-2&-3\\0&0&3\end{pmatrix} \]
+        <p class="etape">Étape 2 : \(P^{-1}(AP)\)</p>
+        \[ P^{-1}AP = \begin{pmatrix}1&0&3\\2&-1&5\\0&0&1\end{pmatrix}\begin{pmatrix}1&0&-9\\2&-2&-3\\0&0&3\end{pmatrix} = \begin{pmatrix}1&0&0\\0&2&0\\0&0&3\end{pmatrix} \]
+        <div class="res">\(B = \operatorname{Mat}_{\mathcal B_2}(f) = \begin{pmatrix}1&0&0\\0&2&0\\0&0&3\end{pmatrix}\) : \(f\) est <b>diagonale</b> dans \(\mathcal B_2\).</div>
+        <p>Intérêt : \(B^k = \operatorname{diag}(1, 2^k, 3^k)\), donc \(A^k = PB^kP^{-1}\) (cf. TD3, exercices 6 et 9).</p>
       </div>
     </div>
 
@@ -537,19 +598,26 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice A — Rang et noyau d'une application \(\mathbb R^4\to\mathbb R^3\)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">\(f:\mathbb R^4\to\mathbb R^3\), \(f(x,y,z,t)=(x+2y+t,\ y+z-t,\ x+3y+z)\). Déterminer \(\operatorname{rg}f\), une base de \(\operatorname{Ker}f\) et une base de \(\operatorname{Im}f\).</p>
+
         <p class="q">Matrice et rang</p>
-        <p>Colonnes = images de la base canonique : \(A=\begin{pmatrix}1&2&0&1\\0&1&1&-1\\1&3&1&0\end{pmatrix}\). On remarque la ligne 3 = ligne 1 + ligne 2
-        (\(1+0=1\), \(2+1=3\), \(0+1=1\), \(1-1=0\)). Donc \(\operatorname{rg}A=\operatorname{rg}{}^tA=\operatorname{rg}(L_1,L_2)=2\) (\(L_1,L_2\) non colinéaires).</p>
-        <div class="res">\(\operatorname{rg}f=2\) et, par le théorème du rang, \(\dim\operatorname{Ker}f=4-2=2\).</div>
+        <p class="etape">Étape 1 : la matrice</p>
+        \[ A = \begin{pmatrix}1&2&0&1\\0&1&1&-1\\1&3&1&0\end{pmatrix} \]
+        <p class="etape">Étape 2 : une relation entre les lignes</p>
+        <p>\(L_3 = L_1 + L_2\), et \(L_1, L_2\) ne sont pas colinéaires : \(\operatorname{rg}A = \operatorname{rg}{}^tA = 2\).</p>
+        <div class="res">\(\operatorname{rg}f = 2\), et par le théorème du rang \(\dim\operatorname{Ker}f = 4 - 2 = 2\).</div>
+
         <p class="q">Noyau</p>
-        <p>\(f(x,y,z,t)=0\iff\begin{cases}x+2y+t=0\\y+z-t=0\end{cases}\) (la 3ᵉ équation est la somme des deux). Donc \(z=t-y\) et \(x=-2y-t\), avec \(y,t\) libres :</p>
-        \[ (x,y,z,t)=y(-2,1,-1,0)+t(-1,0,1,1). \]
-        <p>Contrôle de \((-2,1,-1,0)\) : \(-2+2=0\), \(1-1=0\), \(-2+3-1=0\) ✓. Contrôle de \((-1,0,1,1)\) : \(-1+1=0\), \(0+1-1=0\), \(-1+0+1=0\) ✓. Ils sont libres (non colinéaires).</p>
-        <div class="res">\(\operatorname{Ker}f=\operatorname{Vect}\big((-2,1,-1,0),\ (-1,0,1,1)\big)\).</div>
+        <p>\(f(x, y, z, t) = 0\) équivaut à \(x + 2y + t = 0\) et \(y + z - t = 0\) (la 3ᵉ équation est la somme des deux). Donc \(z = t - y\) et \(x = -2y - t\), avec \(y, t\) libres :</p>
+        \[ (x, y, z, t) = y(-2, 1, -1, 0) + t(-1, 0, 1, 1) \]
+        <p>Contrôle de \((-2, 1, -1, 0)\) : \(-2 + 2 = 0\), \(1 - 1 = 0\), \(-2 + 3 - 1 = 0\). Contrôle de \((-1, 0, 1, 1)\) : \(-1 + 1 = 0\), \(0 + 1 - 1 = 0\), \(-1 + 0 + 1 = 0\).</p>
+        <div class="res">\(\operatorname{Ker}f = \operatorname{Vect}\big((-2, 1, -1, 0),\ (-1, 0, 1, 1)\big)\).</div>
+
         <p class="q">Image</p>
-        <p>\(\operatorname{Im}f=\operatorname{Vect}(f(e_1),f(e_2),f(e_3),f(e_4))\), colonnes de \(A\) : \(c_1=(1,0,1)\), \(c_2=(2,1,3)\), \(c_3=(0,1,1)\), \(c_4=(1,-1,0)\).
-        \(c_1,c_2\) sont libres (non colinéaires) et \(\dim\operatorname{Im}f=2\) : ils forment une base. Les deux autres colonnes en dépendent : \(c_3=c_2-2c_1\) car \((2-2,\ 1-0,\ 3-2)=(0,1,1)\) ✓ ; et \(c_4=3c_1-c_2\) car \((3-2,\ 0-1,\ 3-3)=(1,-1,0)\) ✓.</p>
-        <div class="res">\(\operatorname{Im}f=\operatorname{Vect}\big((1,0,1),\ (2,1,3)\big)\), plan d'équation \(z=x+y\) (d'après \(L_3=L_1+L_2\)).</div>
+        <p class="etape">Étape 1 : les colonnes de \(A\)</p>
+        <p>\(c_1 = (1, 0, 1)\), \(c_2 = (2, 1, 3)\), \(c_3 = (0, 1, 1)\), \(c_4 = (1, -1, 0)\). \(c_1, c_2\) sont libres et \(\dim\operatorname{Im}f = 2\) : c'est une base.</p>
+        <p class="etape">Étape 2 : les autres colonnes en dépendent</p>
+        <p>\(c_3 = c_2 - 2c_1\) et \(c_4 = 3c_1 - c_2\).</p>
+        <div class="res">\(\operatorname{Im}f = \operatorname{Vect}\big((1, 0, 1),\ (2, 1, 3)\big)\), plan d'équation \(z = x + y\) (d'après \(L_3 = L_1 + L_2\)).</div>
       </div>
     </div>
 
@@ -557,20 +625,25 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice B — Diagonalisation et puissances dans \(\mathbb R^2\)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">\(f\in\mathcal L(\mathbb R^2)\) de matrice \(A=\begin{pmatrix}4&-2\\1&1\end{pmatrix}\) dans la base canonique. Soient \(u_1=(1,1)\), \(u_2=(2,1)\). (1) Montrer que \((u_1,u_2)\) est une base et donner la matrice \(D\) de \(f\) dedans. (2) Calculer \(A^n\). (3) Résoudre \(x_{n+1}=4x_n-2y_n\), \(y_{n+1}=x_n+y_n\).</p>
-        <p class="q">1)</p>
-        <p>\(P=\begin{pmatrix}1&2\\1&1\end{pmatrix}\), \(\det P=1-2=-1\neq0\) : base. \(f(u_1)=A\binom11=\binom{4-2}{1+1}=\binom22=2u_1\) ; \(f(u_2)=A\binom21=\binom{8-2}{2+1}=\binom63=3u_2\).</p>
-        <div class="res">\(D=\operatorname{Mat}_{(u_1,u_2)}(f)=\begin{pmatrix}2&0\\0&3\end{pmatrix}=P^{-1}AP\).</div>
-        <p class="q">2)</p>
-        <p>\(P^{-1}=\dfrac1{-1}\begin{pmatrix}1&-2\\-1&1\end{pmatrix}=\begin{pmatrix}-1&2\\1&-1\end{pmatrix}\). \(A^n=PD^nP^{-1}\) :</p>
-        \[ PD^n=\begin{pmatrix}2^n&2\cdot3^n\\2^n&3^n\end{pmatrix},\qquad
-        A^n=\begin{pmatrix}2^n&2\cdot3^n\\2^n&3^n\end{pmatrix}\begin{pmatrix}-1&2\\1&-1\end{pmatrix}
-        =\begin{pmatrix}-2^n+2\cdot3^n&2^{n+1}-2\cdot3^n\\-2^n+3^n&2^{n+1}-3^n\end{pmatrix}. \]
-        <div class="res">\(A^n=\begin{pmatrix}2\cdot3^n-2^n&2^{n+1}-2\cdot3^n\\3^n-2^n&2^{n+1}-3^n\end{pmatrix}\), \(n\in\mathbb N\).</div>
-        <p>Contrôles : \(n=0\) : \(\begin{pmatrix}2-1&2-2\\1-1&2-1\end{pmatrix}=I_2\) ✓ ; \(n=1\) : \(\begin{pmatrix}6-2&4-6\\3-2&4-3\end{pmatrix}=A\) ✓.</p>
-        <p class="q">3)</p>
-        <p>\(X_n=A^nX_0\). Avec \(X_0=\binom{x_0}{y_0}\) quelconque :</p>
-        <div class="res">\(x_n=(2\cdot3^n-2^n)x_0+(2^{n+1}-2\cdot3^n)y_0,\quad y_n=(3^n-2^n)x_0+(2^{n+1}-3^n)y_0.\)</div>
-        <p>Forme géométrique : en écrivant \(X_0=a\,u_1+b\,u_2\), \(X_n=a\,2^nu_1+b\,3^nu_2\), soit \(x_n=a\,2^n+2b\,3^n\), \(y_n=a\,2^n+b\,3^n\).</p>
+
+        <p class="q">1) Base et matrice \(D\)</p>
+        <p class="etape">Étape 1 : base</p>
+        <p>\(P = \begin{pmatrix}1&2\\1&1\end{pmatrix}\), \(\det P = 1 - 2 = -1 \neq 0\).</p>
+        <p class="etape">Étape 2 : images</p>
+        \[ f(u_1) = A\binom11 = \binom22 = 2u_1 \qquad f(u_2) = A\binom21 = \binom63 = 3u_2 \]
+        <div class="res">\(D = \operatorname{Mat}_{(u_1,u_2)}(f) = \begin{pmatrix}2&0\\0&3\end{pmatrix} = P^{-1}AP\).</div>
+
+        <p class="q">2) Calcul de \(A^n\)</p>
+        <div class="rappel"><span class="lab">Rappel · puissances par diagonalisation</span>\[ A = PDP^{-1} \;\Longrightarrow\; A^n = PD^nP^{-1} \]</div>
+        <p>\(P^{-1} = \dfrac{1}{-1}\begin{pmatrix}1&-2\\-1&1\end{pmatrix} = \begin{pmatrix}-1&2\\1&-1\end{pmatrix}\) et \(PD^n = \begin{pmatrix}2^n&2\cdot3^n\\2^n&3^n\end{pmatrix}\) :</p>
+        \[ A^n = \begin{pmatrix}2^n&2\cdot3^n\\2^n&3^n\end{pmatrix}\begin{pmatrix}-1&2\\1&-1\end{pmatrix} \]
+        <div class="res">\(A^n = \begin{pmatrix}2\cdot3^n - 2^n&2^{n+1} - 2\cdot3^n\\3^n - 2^n&2^{n+1} - 3^n\end{pmatrix}\), \(n \in \mathbb N\).</div>
+        <p>Contrôles : \(n = 0\) donne \(I_2\) ; \(n = 1\) donne \(\begin{pmatrix}4&-2\\1&1\end{pmatrix} = A\).</p>
+
+        <p class="q">3) La suite couplée</p>
+        <p>Avec \(X_n = \binom{x_n}{y_n}\), on a \(X_{n+1} = AX_n\), donc \(X_n = A^nX_0\) :</p>
+        <div class="res">\(x_n = (2\cdot3^n - 2^n)x_0 + (2^{n+1} - 2\cdot3^n)y_0\) et \(y_n = (3^n - 2^n)x_0 + (2^{n+1} - 3^n)y_0\).</div>
+        <p>Forme géométrique : si \(X_0 = au_1 + bu_2\), alors \(X_n = a\,2^nu_1 + b\,3^nu_2\), soit \(x_n = a\,2^n + 2b\,3^n\) et \(y_n = a\,2^n + b\,3^n\).</p>
       </div>
     </div>
 
@@ -578,20 +651,22 @@ window.MathJax = {
       <div class="exo-head"><span>Exercice C — Dérivation, primitive et composition (matrices rectangulaires)</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
         <p class="enonce">\(D:\mathbb R_3[X]\to\mathbb R_2[X]\), \(P\mapsto P'\) et \(G:\mathbb R_2[X]\to\mathbb R_3[X]\), \(P\mapsto\int_0^XP(t)\,dt\). Bases canoniques \((1,X,X^2,X^3)\) et \((1,X,X^2)\). Matrices de \(D\), \(G\), \(D\circ G\) et \(G\circ D\) ; \(D\) et \(G\) sont-elles bijectives ?</p>
+
         <p class="q">Matrice de \(D\) (taille \(3\times4\))</p>
-        <p>\(D(1)=0\), \(D(X)=1\), \(D(X^2)=2X\), \(D(X^3)=3X^2\) :</p>
-        \[ M_D=\begin{pmatrix}0&1&0&0\\0&0&2&0\\0&0&0&3\end{pmatrix}. \]
+        <p>\(D(1) = 0\), \(D(X) = 1\), \(D(X^2) = 2X\), \(D(X^3) = 3X^2\) :</p>
+        \[ M_D = \begin{pmatrix}0&1&0&0\\0&0&2&0\\0&0&0&3\end{pmatrix} \]
+
         <p class="q">Matrice de \(G\) (taille \(4\times3\))</p>
-        <p>\(G(1)=X\), \(G(X)=\tfrac{X^2}2\), \(G(X^2)=\tfrac{X^3}3\) :</p>
-        \[ M_G=\begin{pmatrix}0&0&0\\1&0&0\\0&\tfrac12&0\\0&0&\tfrac13\end{pmatrix}. \]
-        <p class="q">Composées</p>
-        \[ M_DM_G=\begin{pmatrix}0&1&0&0\\0&0&2&0\\0&0&0&3\end{pmatrix}\begin{pmatrix}0&0&0\\1&0&0\\0&\tfrac12&0\\0&0&\tfrac13\end{pmatrix}
-        =\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}=I_3, \]
-        <p>(car \((\int_0^XP)'=P\)), tandis que</p>
-        \[ M_GM_D=\begin{pmatrix}0&0&0&0\\0&1&0&0\\0&0&1&0\\0&0&0&1\end{pmatrix}=\operatorname{diag}(0,1,1,1)\neq I_4 \]
-        <p>(car \(\int_0^XP'=P-P(0)\) : on perd la constante).</p>
-        <div class="res">\(D\circ G=\mathrm{id}_{\mathbb R_2[X]}\) mais \(G\circ D\neq\mathrm{id}_{\mathbb R_3[X]}\). \(D\) est surjective (rang 3, \(\dim\operatorname{Ker}D=4-3=1\), \(\operatorname{Ker}D=\operatorname{Vect}(1)\)) mais pas injective ; \(G\) est injective (rang 3) mais pas surjective (\(\operatorname{Im}G=\{P\mid P(0)=0\}\), dimension 3 \(<4\)). Aucune n'est bijective : les espaces n'ont pas la même dimension (4 et 3).</div>
-        <div class="warnbox"><b>Piège.</b> Le produit \(M_GM_D\) existe et n'est pas \(I_4\) : le produit de matrices <b>n'est pas commutatif</b> et \(M_D\) n'a pas d'inverse (elle n'est pas carrée). Une matrice rectangulaire peut avoir un inverse à droite (\(M_DM_G=I_3\)) sans avoir d'inverse à gauche.</div>
+        <p>\(G(1) = X\), \(G(X) = \frac{X^2}{2}\), \(G(X^2) = \frac{X^3}{3}\) :</p>
+        \[ M_G = \begin{pmatrix}0&0&0\\1&0&0\\0&\frac12&0\\0&0&\frac13\end{pmatrix} \]
+
+        <p class="q">Composées et bijectivité</p>
+        <p class="etape">Étape 1 : \(D \circ G\)</p>
+        \[ M_DM_G = I_3 \qquad (\text{car } (\textstyle\int_0^XP)' = P) \]
+        <p class="etape">Étape 2 : \(G \circ D\)</p>
+        \[ M_GM_D = \begin{pmatrix}0&0&0&0\\0&1&0&0\\0&0&1&0\\0&0&0&1\end{pmatrix} = \operatorname{diag}(0, 1, 1, 1) \neq I_4 \qquad (\text{car } \textstyle\int_0^XP' = P - P(0)) \]
+        <div class="res">\(D \circ G = \mathrm{id}_{\mathbb R_2[X]}\) mais \(G \circ D \neq \mathrm{id}_{\mathbb R_3[X]}\). \(D\) est surjective (rang 3, \(\operatorname{Ker}D = \operatorname{Vect}(1)\)) mais pas injective ; \(G\) est injective (rang 3) mais pas surjective (\(\operatorname{Im}G = \{P \mid P(0) = 0\}\), de dimension 3 \(&lt; 4\)). Aucune n'est bijective : les dimensions (4 et 3) diffèrent.</div>
+        <div class="warnbox"><span class="lab">Piège</span> \(M_GM_D\) existe et n'est pas \(I_4\) : le produit n'est pas commutatif, et une matrice rectangulaire peut avoir un inverse à droite (\(M_DM_G = I_3\)) sans avoir d'inverse à gauche.</div>
       </div>
     </div>
   </section>
@@ -613,52 +688,43 @@ window.MathJax = {
           <img src="td3-img/ex1.jpg" alt="Énoncé TD3 Exercice 1 — matrice de quatre applications linéaires dans la base canonique" loading="lazy">
           <figcaption>Énoncé (TD3, L. Graissot) — Exercice 1.</figcaption>
         </figure>
-        <div class="method"><span class="lab">Méthode</span> On calcule l'image de chaque vecteur de la base canonique
-        et on range ses coordonnées <b>en colonne</b>.</div>
 
         <p class="q">1) \(f(x,y,z)=(x+y-2z,\ 2x+y-z,\ -x-3y+2z)\), \(E=\mathbb R^3\)</p>
-        <p>Base canonique \((e_1,e_2,e_3)\) :</p>
-        \[ f(1,0,0)=(1,2,-1),\quad f(0,1,0)=(1,1,-3),\quad f(0,0,1)=(-2,-1,2). \]
-        <div class="res">\[ \operatorname{Mat}(f)=\begin{pmatrix}1&1&-2\\2&1&-1\\-1&-3&2\end{pmatrix}. \]</div>
+        <div class="rappel"><span class="lab">Rappel · matrice dans la base canonique</span>On calcule l'image de chaque vecteur de la base canonique et on range ses coordonnées <b>en colonne</b>.</div>
+        <p>\(f(1, 0, 0) = (1, 2, -1)\), \(f(0, 1, 0) = (1, 1, -3)\), \(f(0, 0, 1) = (-2, -1, 2)\).</p>
+        <div class="res">\(\operatorname{Mat}(f) = \begin{pmatrix}1&1&-2\\2&1&-1\\-1&-3&2\end{pmatrix}\).</div>
 
         <p class="q">2) \(f(P)=(2X+1)P-X^2P'\), \(E=\mathbb R_2[X]\)</p>
-        <p>Base canonique \((1,X,X^2)\). On calcule, avec \(1'=0\), \(X'=1\), \((X^2)'=2X\) :</p>
-        \[ \begin{aligned}
-        f(1)&=(2X+1)\cdot1-0=1+2X &&\to(1,2,0),\\
-        f(X)&=(2X+1)X-X^2\cdot1=X+X^2 &&\to(0,1,1),\\
-        f(X^2)&=(2X+1)X^2-X^2\cdot2X=X^2 &&\to(0,0,1).
-        \end{aligned} \]
-        <div class="res">\[ \operatorname{Mat}(f)=\begin{pmatrix}1&0&0\\2&1&0\\0&1&1\end{pmatrix}. \]</div>
-        <p>On vérifie que \(f\) est bien à valeurs dans \(\mathbb R_2[X]\) : le terme en \(X^3\) de \(f(X^2)\) s'annule
-        (\(2X^3-2X^3=0\)).</p>
+        <p>Base \((1, X, X^2)\), avec \(1' = 0\), \(X' = 1\), \((X^2)' = 2X\) :</p>
+        <ul>
+          <li>\(f(1) = (2X + 1) = 1 + 2X\), coordonnées \((1, 2, 0)\) ;</li>
+          <li>\(f(X) = (2X + 1)X - X^2 = X + X^2\), coordonnées \((0, 1, 1)\) ;</li>
+          <li>\(f(X^2) = (2X + 1)X^2 - X^2\cdot2X = X^2\), coordonnées \((0, 0, 1)\).</li>
+        </ul>
+        <div class="res">\(\operatorname{Mat}(f) = \begin{pmatrix}1&0&0\\2&1&0\\0&1&1\end{pmatrix}\).</div>
+        <p>On vérifie que \(f\) est à valeurs dans \(\mathbb R_2[X]\) : le terme en \(X^3\) de \(f(X^2)\) s'annule (\(2X^3 - 2X^3 = 0\)).</p>
 
         <p class="q">3) \(f(P)=\displaystyle\int_X^{X+2}P(t)\,dt\), \(E=\mathbb R_2[X]\)</p>
-        <p>Pour \(P=X^k\) : \(\displaystyle\int_X^{X+2}t^k\,dt=\dfrac{(X+2)^{k+1}-X^{k+1}}{k+1}\).</p>
-        \[ \begin{aligned}
-        f(1)&=(X+2)-X=2 &&\to(2,0,0),\\
-        f(X)&=\frac{(X+2)^2-X^2}{2}=\frac{4X+4}{2}=2X+2 &&\to(2,2,0),\\
-        f(X^2)&=\frac{(X+2)^3-X^3}{3}=\frac{6X^2+12X+8}{3}=2X^2+4X+\frac83 &&\to\left(\tfrac83,4,2\right).
-        \end{aligned} \]
-        <div class="res">\[ \operatorname{Mat}(f)=\begin{pmatrix}2&2&\tfrac83\\0&2&4\\0&0&2\end{pmatrix}. \]</div>
-        <p>Matrice triangulaire supérieure : \(f\) conserve le degré (intégrer sur une longueur 2 ne change pas le degré).</p>
+        <p>Pour \(P = X^k\) : \(\displaystyle\int_X^{X+2} t^k\,dt = \dfrac{(X + 2)^{k+1} - X^{k+1}}{k + 1}\).</p>
+        <ul>
+          <li>\(f(1) = 2\), coordonnées \((2, 0, 0)\) ;</li>
+          <li>\(f(X) = \dfrac{(X + 2)^2 - X^2}{2} = 2X + 2\), coordonnées \((2, 2, 0)\) ;</li>
+          <li>\(f(X^2) = \dfrac{(X + 2)^3 - X^3}{3} = 2X^2 + 4X + \dfrac83\), coordonnées \(\left(\frac83, 4, 2\right)\).</li>
+        </ul>
+        <div class="res">\(\operatorname{Mat}(f) = \begin{pmatrix}2&2&\frac83\\0&2&4\\0&0&2\end{pmatrix}\), triangulaire supérieure : \(f\) conserve le degré.</div>
 
         <p class="q">4) \(f(M)=AM+MB\), \(A=\begin{pmatrix}1&2\\0&-1\end{pmatrix}\), \(B=\begin{pmatrix}0&1\\-2&1\end{pmatrix}\), \(E=\mathcal M_2(\mathbb R)\)</p>
-        <p>Base canonique \((E_{11},E_{12},E_{21},E_{22})\) de \(\mathcal M_2(\mathbb R)\) ; on repère une matrice
-        \(\begin{pmatrix}a&b\\c&d\end{pmatrix}\) par ses coordonnées \((a,b,c,d)\).</p>
-        \[ \begin{aligned}
-        f(E_{11})&=AE_{11}+E_{11}B=\begin{pmatrix}1&0\\0&0\end{pmatrix}+\begin{pmatrix}0&1\\0&0\end{pmatrix}=\begin{pmatrix}1&1\\0&0\end{pmatrix}\to(1,1,0,0),\\
-        f(E_{12})&=\begin{pmatrix}0&1\\0&0\end{pmatrix}+\begin{pmatrix}-2&1\\0&0\end{pmatrix}=\begin{pmatrix}-2&2\\0&0\end{pmatrix}\to(-2,2,0,0).
-        \end{aligned} \]
-        <p>Détail de \(E_{21}\) : \(AE_{21}=\begin{pmatrix}1&2\\0&-1\end{pmatrix}\begin{pmatrix}0&0\\1&0\end{pmatrix}=\begin{pmatrix}2&0\\-1&0\end{pmatrix}\)
-        et \(E_{21}B=\begin{pmatrix}0&0\\1&0\end{pmatrix}\begin{pmatrix}0&1\\-2&1\end{pmatrix}=\begin{pmatrix}0&0\\0&1\end{pmatrix}\), donc</p>
-        \[ f(E_{21})=\begin{pmatrix}2&0\\-1&1\end{pmatrix}\to(2,0,-1,1). \]
-        <p>Détail de \(E_{22}\) : \(AE_{22}=\begin{pmatrix}0&2\\0&-1\end{pmatrix}\)
-        et \(E_{22}B=\begin{pmatrix}0&0\\-2&1\end{pmatrix}\), donc</p>
-        \[ f(E_{22})=\begin{pmatrix}0&2\\-2&0\end{pmatrix}\to(0,2,-2,0). \]
-        <div class="res">\[ \operatorname{Mat}(f)=\begin{pmatrix}1&-2&2&0\\1&2&0&2\\0&0&-1&-2\\0&0&1&0\end{pmatrix}. \]</div>
-        <div class="warnbox"><b>Piège.</b> Ici \(E=\mathcal M_2(\mathbb R)\) est de dimension <b>4</b> : la matrice de
-        \(f\) est \(4\times4\), pas \(2\times2\). Il ne faut pas confondre les matrices \(A,B\) (éléments de \(E\)
-        servant à définir \(f\)) avec la matrice de \(f\).</div>
+        <p class="etape">Étape 1 : la base</p>
+        <p>Base canonique \((E_{11}, E_{12}, E_{21}, E_{22})\) de \(\mathcal M_2(\mathbb R)\) ; la matrice \(\begin{pmatrix}a&b\\c&d\end{pmatrix}\) a pour coordonnées \((a, b, c, d)\).</p>
+        <p class="etape">Étape 2 : les images</p>
+        <ul>
+          <li>\(f(E_{11}) = \begin{pmatrix}1&0\\0&0\end{pmatrix} + \begin{pmatrix}0&1\\0&0\end{pmatrix} = \begin{pmatrix}1&1\\0&0\end{pmatrix}\), coordonnées \((1, 1, 0, 0)\) ;</li>
+          <li>\(f(E_{12}) = \begin{pmatrix}0&1\\0&0\end{pmatrix} + \begin{pmatrix}-2&1\\0&0\end{pmatrix} = \begin{pmatrix}-2&2\\0&0\end{pmatrix}\), coordonnées \((-2, 2, 0, 0)\) ;</li>
+          <li>\(AE_{21} = \begin{pmatrix}2&0\\-1&0\end{pmatrix}\) et \(E_{21}B = \begin{pmatrix}0&0\\0&1\end{pmatrix}\), donc \(f(E_{21}) = \begin{pmatrix}2&0\\-1&1\end{pmatrix}\), coordonnées \((2, 0, -1, 1)\) ;</li>
+          <li>\(AE_{22} = \begin{pmatrix}0&2\\0&-1\end{pmatrix}\) et \(E_{22}B = \begin{pmatrix}0&0\\-2&1\end{pmatrix}\), donc \(f(E_{22}) = \begin{pmatrix}0&2\\-2&0\end{pmatrix}\), coordonnées \((0, 2, -2, 0)\).</li>
+        </ul>
+        <div class="res">\(\operatorname{Mat}(f) = \begin{pmatrix}1&-2&2&0\\1&2&0&2\\0&0&-1&-2\\0&0&1&0\end{pmatrix}\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> \(E = \mathcal M_2(\mathbb R)\) est de dimension 4 : la matrice de \(f\) est \(4\times4\), pas \(2\times2\). Il ne faut pas confondre \(A, B\) (éléments de \(E\) qui servent à définir \(f\)) avec la matrice de \(f\).</div>
       </div>
     </div>
 
@@ -670,61 +736,42 @@ window.MathJax = {
           <img src="td3-img/ex2.jpg" alt="Énoncé TD3 Exercice 2 — endomorphisme de R3 de matrice A, noyau, image, nouvelles bases" loading="lazy">
           <figcaption>Énoncé (TD3, L. Graissot) — Exercice 2.</figcaption>
         </figure>
-        <p>\(A=\begin{pmatrix}1&-2&-1\\2&0&2\\0&1&1\end{pmatrix}\), matrice de \(f\) dans la base \(e=(e_1,e_2,e_3)\).</p>
+        <div class="enonce">\(A=\begin{pmatrix}1&-2&-1\\2&0&2\\0&1&1\end{pmatrix}\), matrice de \(f\) dans la base \(e=(e_1,e_2,e_3)\).</div>
 
         <p class="q">1) Base de \(\operatorname{Ker}f\), base de \(\operatorname{Im}f\), supplémentaires ?</p>
-        <p><b>Noyau.</b> \((x,y,z)\in\operatorname{Ker}f\iff A\begin{pmatrix}x\\y\\z\end{pmatrix}=0\) :</p>
-        \[ \begin{cases}x-2y-z=0\\2x+2z=0\\y+z=0\end{cases}
-        \iff\begin{cases}z=-x\\ y=-z=x\\ x-2x+x=0\ \checkmark\end{cases} \]
-        <p>Donc \(\operatorname{Ker}f=\{(x,x,-x)\}=\operatorname{Vect}(u)\) avec \(u=(1,1,-1)=e_1+e_2-e_3\) (c'est le
-        vecteur \(u\) de la question 2).</p>
-        <p><b>Image.</b> \(\operatorname{Im}f=\operatorname{Vect}(f(e_1),f(e_2),f(e_3))\), colonnes de \(A\) :
-        \(f(e_1)=(1,2,0)\), \(f(e_2)=(-2,0,1)\), \(f(e_3)=(-1,2,1)\). On remarque
-        \(f(e_1)+f(e_2)=(-1,2,1)=f(e_3)\), donc \(f(e_3)\) est superflu. Les deux vecteurs \(f(e_1),f(e_2)\) ne sont
-        pas colinéaires (\(0\) en 3ᵉ coordonnée pour le premier, \(1\) pour le second ; \(2\neq0\) en 2ᵉ pour le premier,
-        \(0\) pour le second), donc ils forment une famille libre. Théorème du rang :
-        \(\operatorname{rg}f=3-\dim\operatorname{Ker}f=3-1=2\) ✓.</p>
-        <p><b>Supplémentaires ?</b> Il faut \(\operatorname{Ker}f\cap\operatorname{Im}f=\{0\}\) et
-        \(\dim\operatorname{Ker}f+\dim\operatorname{Im}f=3\) (la 2ᵉ condition est vraie : \(1+2=3\)). Vérifions
-        \(u\notin\operatorname{Im}f\) : si \(u=a f(e_1)+b f(e_2)\), alors
-        3ᵉ coordonnée : \(b=-1\) ; 2ᵉ : \(2a=1\), \(a=\tfrac12\) ; 1ʳᵉ : \(a-2b=\tfrac12+2=\tfrac52\neq1\) → contradiction.
-        Donc \(u\notin\operatorname{Im}f\) ; comme \(\operatorname{Ker}f\) est la droite \(\operatorname{Vect}(u)\), l'intersection est \(\{0\}\).</p>
-        <div class="res">\(\operatorname{Ker}f=\operatorname{Vect}(u)\), \(u=(1,1,-1)\) ; \(\operatorname{Im}f=\operatorname{Vect}\big((1,2,0),(-2,0,1)\big)\) ;
-        \(\operatorname{Ker}f\) et \(\operatorname{Im}f\) sont <b>supplémentaires</b> : \(\mathbb R^3=\operatorname{Ker}f\oplus\operatorname{Im}f\).</div>
+        <p class="etape">Étape 1 : noyau</p>
+        \[ \begin{cases}x - 2y - z = 0\\ 2x + 2z = 0\\ y + z = 0\end{cases} \iff z = -x,\ y = x \]
+        <p>(la première équation donne \(x - 2x + x = 0\), vérifiée). Donc \(\operatorname{Ker}f = \operatorname{Vect}(u)\), avec \(u = (1, 1, -1)\).</p>
+        <p class="etape">Étape 2 : image</p>
+        <p>Les colonnes sont \(f(e_1) = (1, 2, 0)\), \(f(e_2) = (-2, 0, 1)\), \(f(e_3) = (-1, 2, 1)\), avec \(f(e_1) + f(e_2) = f(e_3)\). Les deux premières sont libres, et \(\operatorname{rg}f = 3 - 1 = 2\) (théorème du rang).</p>
+        <p class="etape">Étape 3 : supplémentaires ?</p>
+        <div class="rappel"><span class="lab">Rappel · supplémentaires</span>\(F\) et \(G\) sont supplémentaires si \(F \cap G = \{0\}\) et \(\dim F + \dim G = \dim E\).</div>
+        <p>Ici \(1 + 2 = 3\). Si \(u = af(e_1) + bf(e_2)\), la 3ᵉ coordonnée donne \(b = -1\), la 2ᵉ \(a = \frac12\), et la 1ʳᵉ \(a - 2b = \frac52 \neq 1\) : contradiction. Donc \(u \notin \operatorname{Im}f\) et l'intersection est \(\{0\}\).</p>
+        <div class="res">\(\operatorname{Ker}f = \operatorname{Vect}\big((1, 1, -1)\big)\) ; \(\operatorname{Im}f = \operatorname{Vect}\big((1, 2, 0), (-2, 0, 1)\big)\) ; ils sont <b>supplémentaires</b> : \(\mathbb R^3 = \operatorname{Ker}f \oplus \operatorname{Im}f\).</div>
 
         <p class="q">2) \((u,f(e_1),f(e_2))\) est une base ; matrice de \(f\) dans cette base</p>
-        <p>Coordonnées dans \(e\) : \(u=(1,1,-1)\), \(f(e_1)=(1,2,0)\), \(f(e_2)=(-2,0,1)\). Matrice
-        \(P=\begin{pmatrix}1&1&-2\\1&2&0\\-1&0&1\end{pmatrix}\). Son déterminant (développement selon la 3ᵉ ligne) :</p>
-        \[ \det P=(-1)\begin{vmatrix}1&-2\\2&0\end{vmatrix}+1\cdot\begin{vmatrix}1&1\\1&2\end{vmatrix}
-        =(-1)(0+4)+(2-1)=-4+1=-3\neq0. \]
-        <p>(Cohérent avec la question 1 : \(u\) engendre le noyau, \(f(e_1),f(e_2)\) l'image, ces deux sous-espaces étant
-        supplémentaires.) Donc \(\mathcal B_2=(u,f(e_1),f(e_2))\) est une base de \(\mathbb R^3\).</p>
-        <p>Images des vecteurs de \(\mathcal B_2\) :</p>
+        <p class="etape">Étape 1 : c'est une base</p>
+        <p>\(P = \begin{pmatrix}1&1&-2\\1&2&0\\-1&0&1\end{pmatrix}\), et en développant selon la 3ᵉ ligne :</p>
+        \[ \det P = (-1)\begin{vmatrix}1&-2\\2&0\end{vmatrix} + 1\begin{vmatrix}1&1\\1&2\end{vmatrix} = -4 + 1 = -3 \neq 0 \]
+        <p class="etape">Étape 2 : images des vecteurs de la base</p>
         <ul>
-          <li>\(f(u)=0\) (car \(u\in\operatorname{Ker}f\)) → colonne \((0,0,0)\).</li>
-          <li>\(f(f(e_1))=A\begin{pmatrix}1\\2\\0\end{pmatrix}=\begin{pmatrix}1-4\\2\\2\end{pmatrix}=\begin{pmatrix}-3\\2\\2\end{pmatrix}\).
-          Or \(f(e_1)+2f(e_2)=(1,2,0)+(-4,0,2)=(-3,2,2)\). Donc \(f(f(e_1))=1\cdot f(e_1)+2\cdot f(e_2)\) → colonne \((0,1,2)\).</li>
-          <li>\(f(f(e_2))=A\begin{pmatrix}-2\\0\\1\end{pmatrix}=\begin{pmatrix}-2-1\\-4+2\\1\end{pmatrix}=\begin{pmatrix}-3\\-2\\1\end{pmatrix}\).
-          Or \(-f(e_1)+f(e_2)=(-1,-2,0)+(-2,0,1)=(-3,-2,1)\). Donc \(f(f(e_2))=-f(e_1)+f(e_2)\) → colonne \((0,-1,1)\).</li>
+          <li>\(f(u) = 0\) : colonne \((0, 0, 0)\).</li>
+          <li>\(f(f(e_1)) = A\begin{pmatrix}1\\2\\0\end{pmatrix} = (-3, 2, 2) = f(e_1) + 2f(e_2)\) : colonne \((0, 1, 2)\).</li>
+          <li>\(f(f(e_2)) = A\begin{pmatrix}-2\\0\\1\end{pmatrix} = (-3, -2, 1) = -f(e_1) + f(e_2)\) : colonne \((0, -1, 1)\).</li>
         </ul>
-        <div class="res">\[ \operatorname{Mat}_{\mathcal B_2}(f)=\begin{pmatrix}0&0&0\\0&1&-1\\0&2&1\end{pmatrix}. \]
-        Matrice <b>diagonale par blocs</b> (\(0\) pour la droite \(\operatorname{Ker}f\), bloc \(2\times2\) inversible pour le plan \(\operatorname{Im}f\)) :
-        c'est exactement ce que prévoit \(\mathbb R^3=\operatorname{Ker}f\oplus\operatorname{Im}f\).</div>
+        <div class="res">\(\operatorname{Mat}_{\mathcal B_2}(f) = \begin{pmatrix}0&0&0\\0&1&-1\\0&2&1\end{pmatrix}\), diagonale par blocs : un 0 pour la droite \(\operatorname{Ker}f\), un bloc \(2\times2\) inversible pour le plan \(\operatorname{Im}f\).</div>
 
         <p class="q">3) \((u,e_1,e_2)\) est une base ; matrice de \(f\) dans cette base</p>
-        <p>Matrice des coordonnées : \(\begin{pmatrix}1&1&0\\1&0&1\\-1&0&0\end{pmatrix}\) (colonnes \(u,e_1,e_2\)).
-        Développement selon la 3ᵉ ligne : \(\det=(-1)\begin{vmatrix}1&0\\0&1\end{vmatrix}=-1\neq0\) → base.
-        Directement : \(e_3=e_1+e_2-u\), donc \(e_3\in\operatorname{Vect}(u,e_1,e_2)\) et la famille engendre \(\mathbb R^3\).</p>
+        <p class="etape">Étape 1 : c'est une base</p>
+        <p>Matrice des colonnes \(u, e_1, e_2\) : \(\begin{pmatrix}1&1&0\\1&0&1\\-1&0&0\end{pmatrix}\), de déterminant \(-1 \neq 0\). Directement : \(e_3 = e_1 + e_2 - u\).</p>
+        <p class="etape">Étape 2 : images</p>
         <ul>
-          <li>\(f(u)=0\) → \((0,0,0)\).</li>
-          <li>\(f(e_1)=(1,2,0)=e_1+2e_2\) → \((0,1,2)\).</li>
-          <li>\(f(e_2)=(-2,0,1)=-2e_1+e_3=-2e_1+(e_1+e_2-u)=-u-e_1+e_2\) → \((-1,-1,1)\).</li>
+          <li>\(f(u) = 0\) : \((0, 0, 0)\).</li>
+          <li>\(f(e_1) = (1, 2, 0) = e_1 + 2e_2\) : \((0, 1, 2)\).</li>
+          <li>\(f(e_2) = (-2, 0, 1) = -2e_1 + e_3 = -u - e_1 + e_2\) : \((-1, -1, 1)\).</li>
         </ul>
-        <div class="res">\[ \operatorname{Mat}_{(u,e_1,e_2)}(f)=\begin{pmatrix}0&0&-1\\0&1&-1\\0&2&1\end{pmatrix}. \]</div>
-        <div class="warnbox"><b>Lecture.</b> La 1ʳᵉ colonne est nulle dans les deux bases (\(f(u)=0\)). Dans la base de la
-        question 2, la 1ʳᵉ ligne est aussi nulle (l'image est dans \(\operatorname{Vect}(f(e_1),f(e_2))\), sans composante sur \(u\)) ;
-        pas dans la question 3, où \(e_1,e_2\) ne sont pas dans \(\operatorname{Im}f\) — c'est la différence entre « base
-        adaptée » et « base quelconque ».</div>
+        <div class="res">\(\operatorname{Mat}_{(u,e_1,e_2)}(f) = \begin{pmatrix}0&0&-1\\0&1&-1\\0&2&1\end{pmatrix}\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> La 1ʳᵉ colonne est nulle dans les deux bases (\(f(u) = 0\)). Dans la base de la question 2, la 1ʳᵉ ligne est aussi nulle (l'image est dans \(\operatorname{Vect}(f(e_1), f(e_2))\)) ; pas dans la question 3, où \(e_1, e_2\) ne sont pas dans l'image : c'est la différence entre une base adaptée et une base quelconque.</div>
       </div>
     </div>
 
@@ -736,52 +783,41 @@ window.MathJax = {
           <img src="td3-img/ex3.jpg" alt="Énoncé TD3 Exercice 3 — projection dans R2, matrices dans différentes bases, trois méthodes" loading="lazy">
           <figcaption>Énoncé (TD3, L. Graissot) — Exercice 3.</figcaption>
         </figure>
-        <div class="note"><b>Convention retenue.</b> \(\operatorname{Mat}_{\mathcal B',\mathcal B}(f)\) : base de départ
-        \(\mathcal B'\), base d'arrivée \(\mathcal B\) ; \(\operatorname{Mat}_{\mathcal B'}(f)=\operatorname{Mat}_{\mathcal B',\mathcal B'}(f)\).</div>
+        <div class="enonce"><b>Convention.</b> \(\operatorname{Mat}_{\mathcal B',\mathcal B}(f)\) : base de départ \(\mathcal B'\), base d'arrivée \(\mathcal B\) ; \(\operatorname{Mat}_{\mathcal B'}(f) = \operatorname{Mat}_{\mathcal B',\mathcal B'}(f)\). \(f\) est la projection sur l'axe des abscisses \(\mathbb R\vec\imath\) parallèlement à \(\mathbb R(\vec\imath + \vec\jmath)\).</div>
 
         <p class="q">1) \(\operatorname{Mat}_{\mathcal B,\mathcal B}(f)\)</p>
-        <p>\(f\) est la projection sur \(\mathbb R\vec\imath\) <b>parallèlement</b> à \(\mathbb R(\vec\imath+\vec\jmath)\) :
-        \(f(\vec\imath)=\vec\imath\) (vecteur de l'axe, fixé) et \(f(\vec\imath+\vec\jmath)=\vec0\) (vecteur de la direction). Donc</p>
-        \[ f(\vec\jmath)=f\big((\vec\imath+\vec\jmath)-\vec\imath\big)=\vec0-\vec\imath=-\vec\imath. \]
-        <div class="res">\[ \operatorname{Mat}_{\mathcal B,\mathcal B}(f)=\begin{pmatrix}1&-1\\0&0\end{pmatrix},\qquad f(x,y)=(x-y,\,0). \]</div>
-        <p>Vérification : \(f(1,1)=(0,0)\) ✓, \(f(x,0)=(x,0)\) ✓.</p>
+        <p class="etape">Étape 1 : ce que fait \(f\)</p>
+        <p>\(f(\vec\imath) = \vec\imath\) (vecteur de l'axe, fixé) et \(f(\vec\imath + \vec\jmath) = \vec0\) (vecteur de la direction).</p>
+        <p class="etape">Étape 2 : en déduire \(f(\vec\jmath)\)</p>
+        \[ f(\vec\jmath) = f\big((\vec\imath + \vec\jmath) - \vec\imath\big) = \vec0 - \vec\imath = -\vec\imath \]
+        <div class="res">\(\operatorname{Mat}_{\mathcal B,\mathcal B}(f) = \begin{pmatrix}1&-1\\0&0\end{pmatrix}\), soit \(f(x, y) = (x - y, 0)\). Vérification : \(f(1, 1) = (0, 0)\) et \(f(x, 0) = (x, 0)\).</div>
 
         <p class="q">2) \(\operatorname{Mat}_{\mathcal B',\mathcal B}(f)\), \(\mathcal B'=(\vec\imath-\vec\jmath,\,-2\vec\imath+3\vec\jmath)\)</p>
-        <p>On note \(b_1'=\vec\imath-\vec\jmath=(1,-1)\), \(b_2'=-2\vec\imath+3\vec\jmath=(-2,3)\).
-        (\(\mathcal B'\) est une base : \(\det\begin{pmatrix}1&-2\\-1&3\end{pmatrix}=3-2=1\neq0\).)</p>
-        \[ f(b_1')=f(1,-1)=(1-(-1),0)=(2,0)=2\vec\imath,\qquad f(b_2')=f(-2,3)=(-2-3,0)=(-5,0)=-5\vec\imath. \]
-        <p>On exprime dans la base d'<b>arrivée</b> \(\mathcal B\) (canonique) :</p>
-        <div class="res">\[ \operatorname{Mat}_{\mathcal B',\mathcal B}(f)=\begin{pmatrix}2&-5\\0&0\end{pmatrix}
-        =\operatorname{Mat}_{\mathcal B,\mathcal B}(f)\cdot P,\quad P=\begin{pmatrix}1&-2\\-1&3\end{pmatrix}. \]</div>
-        <p>Contrôle du produit : \(\begin{pmatrix}1&-1\\0&0\end{pmatrix}\begin{pmatrix}1&-2\\-1&3\end{pmatrix}=\begin{pmatrix}2&-5\\0&0\end{pmatrix}\) ✓.</p>
+        <p class="etape">Étape 1 : la base \(\mathcal B'\)</p>
+        <p>\(b_1' = (1, -1)\), \(b_2' = (-2, 3)\), avec \(\det\begin{pmatrix}1&-2\\-1&3\end{pmatrix} = 1 \neq 0\).</p>
+        <p class="etape">Étape 2 : images, exprimées dans la base d'arrivée \(\mathcal B\)</p>
+        \[ f(b_1') = f(1, -1) = (2, 0) = 2\vec\imath \qquad f(b_2') = f(-2, 3) = (-5, 0) = -5\vec\imath \]
+        <div class="res">\(\operatorname{Mat}_{\mathcal B',\mathcal B}(f) = \begin{pmatrix}2&-5\\0&0\end{pmatrix} = \operatorname{Mat}_{\mathcal B,\mathcal B}(f)\cdot P\), avec \(P = \begin{pmatrix}1&-2\\-1&3\end{pmatrix}\).</div>
 
         <p class="q">3) \(\operatorname{Mat}_{\mathcal B'}(f)=\operatorname{Mat}_{\mathcal B',\mathcal B'}(f)\)</p>
-        <p>Il faut maintenant exprimer \(f(b_1')=2\vec\imath\) et \(f(b_2')=-5\vec\imath\) dans la base \(\mathcal B'\).
-        On inverse : \(P^{-1}=\dfrac1{\det P}\begin{pmatrix}3&2\\1&1\end{pmatrix}=\begin{pmatrix}3&2\\1&1\end{pmatrix}\)
-        (formule \(\frac1{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}\)). Les colonnes de \(P^{-1}\) donnent
-        \(\vec\imath=3b_1'+b_2'\) et \(\vec\jmath=2b_1'+b_2'\). Vérification :
-        \(3(1,-1)+(-2,3)=(1,0)\) ✓ et \(2(1,-1)+(-2,3)=(0,1)\) ✓. Donc</p>
-        \[ f(b_1')=2\vec\imath=6b_1'+2b_2',\qquad f(b_2')=-5\vec\imath=-15b_1'-5b_2'. \]
-        <div class="res">\[ \operatorname{Mat}_{\mathcal B'}(f)=P^{-1}\operatorname{Mat}_{\mathcal B}(f)P=\begin{pmatrix}6&-15\\2&-5\end{pmatrix}. \]</div>
-        <p>Contrôle : \(P^{-1}\begin{pmatrix}2&-5\\0&0\end{pmatrix}=\begin{pmatrix}3\cdot2&3\cdot(-5)\\1\cdot2&1\cdot(-5)\end{pmatrix}=\begin{pmatrix}6&-15\\2&-5\end{pmatrix}\) ✓.
-        Autre contrôle : \(\operatorname{tr}=6-5=1=\operatorname{tr}\begin{pmatrix}1&-1\\0&0\end{pmatrix}\) et \(\det=-30+30=0\) (la trace et le déterminant ne changent pas par
-        changement de base) ✓.</p>
+        <p class="etape">Étape 1 : l'inverse de \(P\)</p>
+        <div class="rappel"><span class="lab">Rappel · inverse d'une matrice \(2\times2\)</span>\[ \begin{pmatrix}a&b\\c&d\end{pmatrix}^{-1} = \frac{1}{ad - bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix} \]</div>
+        <p>\(P^{-1} = \begin{pmatrix}3&2\\1&1\end{pmatrix}\), donc \(\vec\imath = 3b_1' + b_2'\) et \(\vec\jmath = 2b_1' + b_2'\).</p>
+        <p class="etape">Étape 2 : exprimer les images dans \(\mathcal B'\)</p>
+        \[ f(b_1') = 2\vec\imath = 6b_1' + 2b_2' \qquad f(b_2') = -5\vec\imath = -15b_1' - 5b_2' \]
+        <div class="res">\(\operatorname{Mat}_{\mathcal B'}(f) = P^{-1}\operatorname{Mat}_{\mathcal B}(f)\,P = \begin{pmatrix}6&-15\\2&-5\end{pmatrix}\).</div>
+        <p>Contrôle : trace \(6 - 5 = 1\) et déterminant \(-30 + 30 = 0\), comme pour \(\begin{pmatrix}1&-1\\0&0\end{pmatrix}\) (la trace et le déterminant ne changent pas par changement de base).</p>
 
-        <p class="q">4) Image de \(\vec w=2\vec u-\vec v\) (avec \(\vec u=b_1'\), \(\vec v=b_2'\)) — trois méthodes</p>
-        <p>Coordonnées de \(\vec w\) dans \(\mathcal B'\) : \((2,-1)\). Dans la base canonique :
-        \(\vec w=2(1,-1)-(-2,3)=(4,-5)\).</p>
-        <p><b>Méthode 1 — par la matrice canonique.</b> \(f(\vec w)=\begin{pmatrix}1&-1\\0&0\end{pmatrix}\begin{pmatrix}4\\-5\end{pmatrix}=\begin{pmatrix}4+5\\0\end{pmatrix}=\begin{pmatrix}9\\0\end{pmatrix}\).</p>
-        <p><b>Méthode 2 — par \(\operatorname{Mat}_{\mathcal B',\mathcal B}(f)\)</b> (départ \(\mathcal B'\), arrivée canonique : on lui donne directement les coordonnées dans \(\mathcal B'\)
-        et on obtient le résultat dans la base canonique) :
-        \(\begin{pmatrix}2&-5\\0&0\end{pmatrix}\begin{pmatrix}2\\-1\end{pmatrix}=\begin{pmatrix}4+5\\0\end{pmatrix}=\begin{pmatrix}9\\0\end{pmatrix}\).</p>
-        <p><b>Méthode 3 — par \(\operatorname{Mat}_{\mathcal B'}(f)\)</b> (résultat dans \(\mathcal B'\), puis conversion) :
-        \(\begin{pmatrix}6&-15\\2&-5\end{pmatrix}\begin{pmatrix}2\\-1\end{pmatrix}=\begin{pmatrix}12+15\\4+5\end{pmatrix}=\begin{pmatrix}27\\9\end{pmatrix}_{\mathcal B'}\),
-        soit \(f(\vec w)=27b_1'+9b_2'=27(1,-1)+9(-2,3)=(27-18,\,-27+27)=(9,0)\).</p>
-        <p><b>Méthode 4 (contrôle) — par linéarité.</b> \(f(\vec w)=2f(\vec u)-f(\vec v)=2(2,0)-(-5,0)=(9,0)\).</p>
-        <div class="res">\(f(\vec w)=9\,\vec\imath=(9,0)\) dans la base canonique (les quatre méthodes concordent).</div>
-        <div class="warnbox"><b>Piège.</b> Avec \(\operatorname{Mat}_{\mathcal B'}(f)\) le résultat \((27,9)\) est exprimé dans \(\mathcal B'\),
-        <b>pas</b> dans la base canonique : oublier de reconvertir donne un résultat faux. Avec \(\operatorname{Mat}_{\mathcal B',\mathcal B}(f)\)
-        la base d'arrivée est déjà la canonique, il n'y a rien à reconvertir.</div>
+        <p class="q">4) Image de \(\vec w=2\vec u-\vec v\) (avec \(\vec u=b_1'\), \(\vec v=b_2'\)) : trois méthodes</p>
+        <p>Les coordonnées de \(\vec w\) dans \(\mathcal B'\) sont \((2, -1)\) ; dans la base canonique, \(\vec w = 2(1, -1) - (-2, 3) = (4, -5)\).</p>
+        <ul>
+          <li><b>Méthode 1</b> (matrice canonique) : \(\begin{pmatrix}1&-1\\0&0\end{pmatrix}\binom{4}{-5} = \binom90\).</li>
+          <li><b>Méthode 2</b> (\(\operatorname{Mat}_{\mathcal B',\mathcal B}\), départ \(\mathcal B'\), arrivée canonique) : \(\begin{pmatrix}2&-5\\0&0\end{pmatrix}\binom{2}{-1} = \binom90\).</li>
+          <li><b>Méthode 3</b> (\(\operatorname{Mat}_{\mathcal B'}\), résultat dans \(\mathcal B'\)) : \(\begin{pmatrix}6&-15\\2&-5\end{pmatrix}\binom{2}{-1} = \binom{27}{9}_{\mathcal B'}\), soit \(27(1, -1) + 9(-2, 3) = (9, 0)\).</li>
+          <li><b>Contrôle par linéarité</b> : \(2f(\vec u) - f(\vec v) = 2(2, 0) - (-5, 0) = (9, 0)\).</li>
+        </ul>
+        <div class="res">\(f(\vec w) = (9, 0) = 9\vec\imath\) : les quatre calculs concordent.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Avec \(\operatorname{Mat}_{\mathcal B'}(f)\), le résultat \((27, 9)\) est exprimé dans \(\mathcal B'\) et non dans la base canonique : oublier de reconvertir donne un résultat faux. Avec \(\operatorname{Mat}_{\mathcal B',\mathcal B}(f)\), la base d'arrivée est déjà la canonique.</div>
       </div>
     </div>
 
@@ -793,50 +829,43 @@ window.MathJax = {
           <img src="td3-img/ex4.jpg" alt="Énoncé TD3 Exercice 4 — φ(P)=(X²+X+1)P'−(2X−1)P sur R2[X], bijectivité, équation différentielle" loading="lazy">
           <figcaption>Énoncé (TD3, L. Graissot) — Exercice 4.</figcaption>
         </figure>
+        <div class="enonce">\(\varphi(P) = (X^2 + X + 1)P' - (2X - 1)P\) sur \(\mathbb R_2[X]\).</div>
 
         <p class="q">1) \(\varphi\) est un endomorphisme ; matrice dans la base canonique</p>
-        <p><b>Linéarité.</b> Pour \(P,Q\in\mathbb R_2[X]\) et \(\lambda\in\mathbb R\) : la dérivation est linéaire, donc
-        \(\varphi(\lambda P+Q)=(X^2+X+1)(\lambda P'+Q')-(2X-1)(\lambda P+Q)=\lambda\varphi(P)+\varphi(Q)\).</p>
-        <p><b>À valeurs dans \(\mathbb R_2[X]\).</b> Pour \(P=aX^2+bX+c\) : \(P'=2aX+b\) et</p>
-        \[ \varphi(P)=(X^2+X+1)(2aX+b)-(2X-1)(aX^2+bX+c). \]
-        <p>Le terme en \(X^3\) vaut \(2a-2a=0\) : \(\deg\varphi(P)\le2\). Donc \(\varphi\in\mathcal L(\mathbb R_2[X])\) :
-        <b>endomorphisme</b>. Matrice dans \((1,X,X^2)\) :</p>
-        \[ \begin{aligned}
-        \varphi(1)&=-(2X-1)=1-2X &&\to(1,-2,0),\\
-        \varphi(X)&=(X^2+X+1)-(2X-1)X=X^2+X+1-2X^2+X=-X^2+2X+1 &&\to(1,2,-1),\\
-        \varphi(X^2)&=(X^2+X+1)\,2X-(2X-1)X^2=2X^3+2X^2+2X-2X^3+X^2=3X^2+2X &&\to(0,2,3).
-        \end{aligned} \]
-        <div class="res">\[ M=\operatorname{Mat}(\varphi)=\begin{pmatrix}1&1&0\\-2&2&2\\0&-1&3\end{pmatrix}. \]</div>
+        <p class="etape">Étape 1 : linéarité</p>
+        <p>La dérivation est linéaire, donc \(\varphi(\lambda P + Q) = \lambda\varphi(P) + \varphi(Q)\).</p>
+        <p class="etape">Étape 2 : à valeurs dans \(\mathbb R_2[X]\)</p>
+        <p>Pour \(P = aX^2 + bX + c\), le terme en \(X^3\) de \((X^2 + X + 1)(2aX + b) - (2X - 1)(aX^2 + bX + c)\) vaut \(2a - 2a = 0\).</p>
+        <p class="etape">Étape 3 : images de \((1, X, X^2)\)</p>
+        <ul>
+          <li>\(\varphi(1) = -(2X - 1) = 1 - 2X\), coordonnées \((1, -2, 0)\) ;</li>
+          <li>\(\varphi(X) = (X^2 + X + 1) - (2X - 1)X = -X^2 + 2X + 1\), coordonnées \((1, 2, -1)\) ;</li>
+          <li>\(\varphi(X^2) = 2X(X^2 + X + 1) - (2X - 1)X^2 = 3X^2 + 2X\), coordonnées \((0, 2, 3)\).</li>
+        </ul>
+        <div class="res">\(\varphi\) est un endomorphisme de \(\mathbb R_2[X]\), de matrice \(M = \begin{pmatrix}1&1&0\\-2&2&2\\0&-1&3\end{pmatrix}\).</div>
 
         <p class="q">2) \(\varphi\) bijective ? Antécédent de \(X^2-1\)</p>
-        <p>Développement du déterminant selon la 1ʳᵉ ligne :</p>
-        \[ \det M=1\begin{vmatrix}2&2\\-1&3\end{vmatrix}-1\begin{vmatrix}-2&2\\0&3\end{vmatrix}+0
-        =1\cdot(6+2)-1\cdot(-6-0)=8+6=14\neq0. \]
-        <p>\(M\) est inversible, donc \(\varphi\) est <b>bijective</b> (endomorphisme d'un espace de dimension finie de matrice inversible).</p>
-        <p>Antécédent de \(X^2-1\), de coordonnées \((-1,0,1)\) : on résout \(M\begin{pmatrix}c\\b\\a\end{pmatrix}=\begin{pmatrix}-1\\0\\1\end{pmatrix}\) pour \(P=aX^2+bX+c\) :</p>
-        \[ \begin{cases}c+b=-1\\-2c+2b+2a=0\\-b+3a=1\end{cases} \]
-        <p>(1) donne \(c=-1-b\). (2) : \(2+2b+2b+2a=0\), soit \(a=-1-2b\). (3) : \(-b+3(-1-2b)=1\), soit \(-7b=4\), \(b=-\tfrac47\).
-        Alors \(a=-1+\tfrac87=\tfrac17\) et \(c=-1+\tfrac47=-\tfrac37\).</p>
-        <div class="res">\(\varphi\) est bijective et \(P_0=\dfrac{X^2-4X-3}{7}\) est l'unique antécédent de \(X^2-1\).</div>
-        <p>Vérification : \(\varphi(P_0)=\frac17\big[(X^2+X+1)(2X-4)-(2X-1)(X^2-4X-3)\big]\).
-        Premier produit : \(2X^3-4X^2+2X^2-4X+2X-4=2X^3-2X^2-2X-4\). Second : \(2X^3-8X^2-6X-X^2+4X+3=2X^3-9X^2-2X+3\).
-        Différence : \(7X^2-7\). Donc \(\varphi(P_0)=X^2-1\) ✓.</p>
+        <p class="etape">Étape 1 : déterminant</p>
+        \[ \det M = 1\begin{vmatrix}2&2\\-1&3\end{vmatrix} - 1\begin{vmatrix}-2&2\\0&3\end{vmatrix} = 8 + 6 = 14 \neq 0 \]
+        <p>\(M\) est inversible : \(\varphi\) est bijective.</p>
+        <p class="etape">Étape 2 : antécédent de \(X^2 - 1\)</p>
+        <p>Pour \(P = aX^2 + bX + c\), on résout \(M\begin{pmatrix}c\\b\\a\end{pmatrix} = \begin{pmatrix}-1\\0\\1\end{pmatrix}\) :</p>
+        \[ \begin{cases}c + b = -1\\ -2c + 2b + 2a = 0\\ -b + 3a = 1\end{cases} \]
+        <p>(1) donne \(c = -1 - b\). (2) donne \(a = -1 - 2b\). (3) donne \(-b + 3(-1 - 2b) = 1\), soit \(b = -\frac47\), puis \(a = \frac17\) et \(c = -\frac37\).</p>
+        <div class="res">\(\varphi\) est bijective, et \(P_0 = \dfrac{X^2 - 4X - 3}{7}\) est l'unique antécédent de \(X^2 - 1\).</div>
+        <p>Vérification : \((X^2 + X + 1)(2X - 4) - (2X - 1)(X^2 - 4X - 3) = (2X^3 - 2X^2 - 2X - 4) - (2X^3 - 9X^2 - 2X + 3) = 7X^2 - 7\), donc \(\varphi(P_0) = X^2 - 1\).</p>
 
         <p class="q">3) Résoudre \((x^2+x+1)y'-(2x-1)y=x^2-1\)</p>
-        <p>L'équation s'écrit \(\varphi(y)=x^2-1\) où \(\varphi\) agit maintenant sur des fonctions dérivables
-        (sur \(\mathbb R\), car \(x^2+x+1>0\) : discriminant \(1-4=-3<0\)). C'est une équation différentielle linéaire du 1ᵉʳ ordre :
-        solution générale = solution particulière + solution générale de l'équation homogène.</p>
-        <p><b>Solution particulière</b> : le polynôme \(P_0\) de la question 2 (c'est précisément le but de la question).</p>
-        <p><b>Équation homogène</b> \((x^2+x+1)y'=(2x-1)y\), soit \(\dfrac{y'}{y}=\dfrac{2x-1}{x^2+x+1}\). On décompose
-        \(2x-1=(2x+1)-2\) (car \((x^2+x+1)'=2x+1\)) :</p>
-        \[ \int\frac{2x-1}{x^2+x+1}\,dx=\ln(x^2+x+1)-2\int\frac{dx}{x^2+x+1}. \]
-        <p>Forme canonique \(x^2+x+1=\big(x+\tfrac12\big)^2+\tfrac34\), donc
-        \(\displaystyle\int\frac{dx}{x^2+x+1}=\frac{2}{\sqrt3}\arctan\!\Big(\frac{2x+1}{\sqrt3}\Big)\). D'où</p>
-        \[ y_h(x)=C\,(x^2+x+1)\exp\!\Big(-\frac{4}{\sqrt3}\arctan\frac{2x+1}{\sqrt3}\Big),\quad C\in\mathbb R. \]
-        <div class="res">\[ y(x)=\frac{x^2-4x-3}{7}+C\,(x^2+x+1)\,e^{-\frac{4}{\sqrt3}\arctan\frac{2x+1}{\sqrt3}},\qquad C\in\mathbb R,\ x\in\mathbb R. \]</div>
-        <div class="note"><b>Lien avec l'algèbre linéaire.</b> Parmi les <i>polynômes</i> de degré \(\le2\), l'unique solution est \(P_0\)
-        (car \(\varphi\) y est injective : \(\ker\varphi=\{0\}\)). Les solutions homogènes \(y_h\) ne sont pas polynomiales
-        dès que \(C\neq0\) (à cause de l'exponentielle) — cohérent avec \(\ker\varphi=\{0\}\) sur \(\mathbb R_2[X]\).</div>
+        <p class="etape">Étape 1 : structure des solutions</p>
+        <div class="rappel"><span class="lab">Rappel · équation différentielle linéaire</span>Solution générale = solution particulière + solution générale de l'équation homogène.</div>
+        <p>\(x^2 + x + 1 &gt; 0\) (discriminant \(-3\)), donc on résout sur \(\mathbb R\). Une solution particulière est le polynôme \(P_0\) de la question 2.</p>
+        <p class="etape">Étape 2 : équation homogène</p>
+        <p>\(\dfrac{y'}{y} = \dfrac{2x - 1}{x^2 + x + 1}\). On écrit \(2x - 1 = (2x + 1) - 2\), avec \((x^2 + x + 1)' = 2x + 1\) :</p>
+        \[ \int\frac{2x - 1}{x^2 + x + 1}\,dx = \ln(x^2 + x + 1) - 2\int\frac{dx}{x^2 + x + 1} \]
+        <p>Forme canonique \(x^2 + x + 1 = \left(x + \frac12\right)^2 + \frac34\), d'où \(\displaystyle\int\frac{dx}{x^2 + x + 1} = \frac{2}{\sqrt3}\arctan\frac{2x + 1}{\sqrt3}\) :</p>
+        \[ y_h(x) = C\,(x^2 + x + 1)\exp\left(-\frac{4}{\sqrt3}\arctan\frac{2x + 1}{\sqrt3}\right) \]
+        <div class="res">\(y(x) = \dfrac{x^2 - 4x - 3}{7} + C\,(x^2 + x + 1)\,e^{-\frac{4}{\sqrt3}\arctan\frac{2x + 1}{\sqrt3}}\), \(C \in \mathbb R\), \(x \in \mathbb R\).</div>
+        <div class="note"><span class="lab">Lien avec l'algèbre linéaire</span> Parmi les polynômes de degré au plus 2, l'unique solution est \(P_0\), car \(\varphi\) y est injective. Les solutions homogènes ne sont pas polynomiales dès que \(C \neq 0\) : cohérent avec \(\ker\varphi = \{0\}\) sur \(\mathbb R_2[X]\).</div>
       </div>
     </div>
 
@@ -850,39 +879,37 @@ window.MathJax = {
         </figure>
 
         <p class="q">1) Matrice \(A\) de \(\Phi\) dans \((e_1,e_2,e_3)\) et noyau</p>
-        <p>Colonnes = images : \(\Phi(e_1)=e_3=(0,0,1)\), \(\Phi(e_2)=-e_1+e_2+e_3=(-1,1,1)\), \(\Phi(e_3)=e_3=(0,0,1)\).</p>
-        <div class="res">\[ A=\begin{pmatrix}0&-1&0\\0&1&0\\1&1&1\end{pmatrix}. \]</div>
-        <p><b>Noyau :</b> \(A\begin{pmatrix}x\\y\\z\end{pmatrix}=\begin{pmatrix}-y\\y\\x+y+z\end{pmatrix}=0\iff y=0,\ z=-x\).
-        Donc \(\ker\Phi=\{(x,0,-x)\}=\operatorname{Vect}(e_1-e_3)\) (droite ; \(\operatorname{rg}\Phi=3-1=2\)).</p>
-        <div class="res">\(\ker\Phi=\operatorname{Vect}(e_1-e_3)\).</div>
+        <p class="etape">Étape 1 : la matrice</p>
+        <p>\(\Phi(e_1) = e_3\), \(\Phi(e_2) = -e_1 + e_2 + e_3\), \(\Phi(e_3) = e_3\) :</p>
+        \[ A = \begin{pmatrix}0&-1&0\\0&1&0\\1&1&1\end{pmatrix} \]
+        <p class="etape">Étape 2 : noyau</p>
+        <p>\(A\begin{pmatrix}x\\y\\z\end{pmatrix} = (-y, y, x + y + z) = 0\) donne \(y = 0\) et \(z = -x\).</p>
+        <div class="res">\(\ker\Phi = \operatorname{Vect}(e_1 - e_3)\) (droite, donc \(\operatorname{rg}\Phi = 2\)).</div>
 
         <p class="q">2) \(f_1=e_1-e_3,\ f_2=e_1-e_2,\ f_3=-e_1+e_2+e_3\) : \(e_i\) en fonction des \(f_j\) ; base ?</p>
-        <p>On remarque \(f_2+f_3=(e_1-e_2)+(-e_1+e_2+e_3)=e_3\). Puis \(f_1+e_3=e_1\), donc \(e_1=f_1+f_2+f_3\).
-        Enfin \(e_2=e_1-f_2=f_1+f_2+f_3-f_2=f_1+f_3\).</p>
-        <div class="res">\(e_1=f_1+f_2+f_3,\quad e_2=f_1+f_3,\quad e_3=f_2+f_3.\)</div>
-        <p>Vérification : \(f_1+f_2+f_3=(1+1-1,\,0-1+1,\,-1+0+1)=(1,0,0)=e_1\) ✓. Les trois \(e_i\) sont combinaisons linéaires de
-        \(f_1,f_2,f_3\), donc \(\operatorname{Vect}(f_1,f_2,f_3)=\mathbb R^3\) : famille génératrice de 3 vecteurs dans un espace
-        de dimension 3, c'est une <b>base</b>.</p>
+        <ul>
+          <li>\(f_2 + f_3 = e_3\).</li>
+          <li>\(f_1 + e_3 = e_1\), donc \(e_1 = f_1 + f_2 + f_3\).</li>
+          <li>\(e_2 = e_1 - f_2 = f_1 + f_3\).</li>
+        </ul>
+        <div class="res">\(e_1 = f_1 + f_2 + f_3\), \(e_2 = f_1 + f_3\), \(e_3 = f_2 + f_3\). Les \(e_i\) sont combinaisons des \(f_j\) : la famille \((f_1, f_2, f_3)\) engendre \(\mathbb R^3\), c'est donc une <b>base</b>.</div>
 
         <p class="q">3) \(\Phi(f_j)\) ; matrice \(B\) dans \((f_1,f_2,f_3)\) ; nature de \(\Phi\)</p>
-        \[ \begin{aligned}
-        \Phi(f_1)&=\Phi(e_1)-\Phi(e_3)=e_3-e_3=0,\\
-        \Phi(f_2)&=\Phi(e_1)-\Phi(e_2)=e_3-(-e_1+e_2+e_3)=e_1-e_2=f_2,\\
-        \Phi(f_3)&=-\Phi(e_1)+\Phi(e_2)+\Phi(e_3)=-e_3+(-e_1+e_2+e_3)+e_3=-e_1+e_2+e_3=f_3.
-        \end{aligned} \]
-        <div class="res">\[ B=\operatorname{Mat}_{(f_1,f_2,f_3)}(\Phi)=\begin{pmatrix}0&0&0\\0&1&0\\0&0&1\end{pmatrix}. \]
-        \(\Phi\) est la <b>projection</b> sur \(\operatorname{Vect}(f_2,f_3)\) (=\(\operatorname{Im}\Phi\)) <b>parallèlement</b> à \(\operatorname{Vect}(f_1)=\ker\Phi\).</div>
-        <p>(On vérifie \(\Phi\circ\Phi=\Phi\) : \(B^2=B\), caractéristique d'un projecteur.)</p>
+        <ul>
+          <li>\(\Phi(f_1) = \Phi(e_1) - \Phi(e_3) = e_3 - e_3 = 0\) ;</li>
+          <li>\(\Phi(f_2) = \Phi(e_1) - \Phi(e_2) = e_3 - (-e_1 + e_2 + e_3) = e_1 - e_2 = f_2\) ;</li>
+          <li>\(\Phi(f_3) = -\Phi(e_1) + \Phi(e_2) + \Phi(e_3) = -e_1 + e_2 + e_3 = f_3\).</li>
+        </ul>
+        <div class="res">\(B = \operatorname{Mat}_{(f)}(\Phi) = \operatorname{diag}(0, 1, 1)\). \(\Phi\) est la <b>projection</b> sur \(\operatorname{Vect}(f_2, f_3) = \operatorname{Im}\Phi\) parallèlement à \(\operatorname{Vect}(f_1) = \ker\Phi\) (on vérifie \(B^2 = B\)).</div>
 
         <p class="q">4) \(P\) inversible, \(P^{-1}\), relation entre \(A,B,P,P^{-1}\)</p>
-        <p>\(P=\begin{pmatrix}1&1&-1\\0&-1&1\\-1&0&1\end{pmatrix}\) a pour colonnes les coordonnées de \(f_1,f_2,f_3\) dans \((e_1,e_2,e_3)\) :
-        c'est la matrice de passage de \((e)\) vers \((f)\). Déterminant (développement selon la 1ʳᵉ colonne) :
-        \(\det P=1\begin{vmatrix}-1&1\\0&1\end{vmatrix}+(-1)\begin{vmatrix}1&-1\\-1&1\end{vmatrix}
-        =1\cdot(-1)-(1-1)=-1\neq0\). Donc \(P\) est inversible. D'après la question 2, les colonnes de \(P^{-1}\) donnent \(e_1,e_2,e_3\) dans la base \((f)\) :</p>
-        <div class="res">\[ P^{-1}=\begin{pmatrix}1&1&0\\1&0&1\\1&1&1\end{pmatrix},\qquad \boxed{B=P^{-1}AP}\ \ (\text{ou }A=PBP^{-1}). \]</div>
-        <p>Vérification de \(PP^{-1}=I_3\) : 1ʳᵉ ligne de \(P\), \((1,1,-1)\), contre les colonnes \((1,1,1)\), \((1,0,1)\), \((0,1,1)\) :
-        \(1+1-1=1\), \(1+0-1=0\), \(0+1-1=0\) ✓ ; 2ᵉ ligne \((0,-1,1)\) : \(-1+1=0\), \(0+1=1\), \(-1+1=0\) ✓ ;
-        3ᵉ ligne \((-1,0,1)\) : \(-1+1=0\), \(-1+1=0\), \(1\) ✓.</p>
+        <p class="etape">Étape 1 : la matrice de passage</p>
+        <p>Les colonnes de \(P\) sont les coordonnées de \(f_1, f_2, f_3\) dans \((e)\) :</p>
+        \[ P = \begin{pmatrix}1&1&-1\\0&-1&1\\-1&0&1\end{pmatrix} \qquad \det P = 1\begin{vmatrix}-1&1\\0&1\end{vmatrix} + 0 + (-1)\begin{vmatrix}1&-1\\-1&1\end{vmatrix} = -1 - 0 = -1 \neq 0 \quad(\text{développement selon la 1ʳᵉ colonne}) \]
+        <p class="etape">Étape 2 : l'inverse</p>
+        <p>D'après la question 2, les colonnes de \(P^{-1}\) donnent \(e_1, e_2, e_3\) dans la base \((f)\) :</p>
+        \[ P^{-1} = \begin{pmatrix}1&1&0\\1&0&1\\1&1&1\end{pmatrix} \]
+        <div class="res">\(B = P^{-1}AP\), ou \(A = PBP^{-1}\).</div>
       </div>
     </div>
 
@@ -894,48 +921,39 @@ window.MathJax = {
           <img src="td3-img/ex6.jpg" alt="Énoncé TD3 Exercice 6 — endomorphisme de R3 de matrice A, base où la matrice devient B, puissances" loading="lazy">
           <figcaption>Énoncé (TD3, L. Graissot) — Exercice 6.</figcaption>
         </figure>
-        <p>\(A=\begin{pmatrix}-1&0&1\\-1&-2&1\\-1&-1&1\end{pmatrix}\), \(B=\begin{pmatrix}0&0&0\\0&-1&1\\0&0&-1\end{pmatrix}\).</p>
+        <div class="enonce">\(A=\begin{pmatrix}-1&0&1\\-1&-2&1\\-1&-1&1\end{pmatrix}\), \(B=\begin{pmatrix}0&0&0\\0&-1&1\\0&0&-1\end{pmatrix}\).</div>
 
         <p class="q">1) Base \((b_1,b_2,b_3)\) dans laquelle la matrice de \(f\) est \(B\)</p>
-        <div class="method"><span class="lab">Méthode</span> Lire les colonnes de \(B\) : elles disent comment \(f\) agit sur la base cherchée.
-        \[ f(b_1)=0,\qquad f(b_2)=-b_2,\qquad f(b_3)=b_2-b_3. \]
-        Il faut donc : \(b_1\in\ker f\) ; \(b_2\) vecteur propre pour \(-1\) ; \(b_3\) tel que
-        \((f+\mathrm{id})(b_3)=b_2\).</div>
-        <p><b>\(b_1\) :</b> \(Av=0\iff\begin{cases}-x+z=0\\-x-2y+z=0\\-x-y+z=0\end{cases}\). (1) : \(z=x\) ; (2) : \(-2y=0\), \(y=0\) ;
-        (3) : \(-x-0+x=0\) ✓. On prend \(b_1=(1,0,1)\).</p>
-        <p><b>\(b_2\) :</b> \((A+I)v=0\) avec \(A+I=\begin{pmatrix}0&0&1\\-1&-1&1\\-1&-1&2\end{pmatrix}\) : (1) \(z=0\) ; (2) \(-x-y=0\) ;
-        (3) \(-x-y+2z=0\) ✓. On prend \(b_2=(1,-1,0)\).</p>
-        <p><b>\(b_3\) :</b> \((A+I)b_3=b_2\) :
-        \(\begin{cases}z=1\\-x-y+z=-1\\-x-y+2z=0\end{cases}\) : \(z=1\), puis \(x+y=2\) (équation 2) et l'équation 3 donne \(-x-y+2=0\) ✓ (cohérent).
-        On prend \(b_3=(2,0,1)\).</p>
-        <p><b>Vérifications.</b> \(Ab_1=(-1+1,\,-1+1,\,-1+1)=0\) ✓. \(Ab_2=(-1,\,-1+2,\,-1+1)=(-1,1,0)=-b_2\) ✓.
-        \(Ab_3=(-2+1,\,-2+1,\,-2+1)=(-1,-1,-1)\) et \(b_2-b_3=(1-2,\,-1-0,\,0-1)=(-1,-1,-1)\) ✓.</p>
-        <p><b>C'est une base :</b> \(P=\begin{pmatrix}1&1&2\\0&-1&0\\1&0&1\end{pmatrix}\) (colonnes \(b_1,b_2,b_3\)),
-        \(\det P=(-1)\cdot(-1)^{2+2}\begin{vmatrix}1&2\\1&1\end{vmatrix}=(-1)(1-2)=1\neq0\).</p>
-        <div class="res">Base \(\big(b_1,b_2,b_3\big)=\big((1,0,1),\,(1,-1,0),\,(2,0,1)\big)\) ; dans cette base \(\operatorname{Mat}(f)=B\), soit \(B=P^{-1}AP\).</div>
-        <div class="note"><b>Pourquoi pas une matrice diagonale ?</b> \(-1\) est valeur propre double
-        (polynôme caractéristique \(\lambda(\lambda+1)^2\)) mais \(\ker(f+\mathrm{id})\) n'est qu'une droite : \(f\) n'est pas diagonalisable.
-        La meilleure forme possible est celle-ci (bloc de Jordan \(\begin{pmatrix}-1&1\\0&-1\end{pmatrix}\)).</div>
+        <p class="etape">Étape 1 : lire les colonnes de \(B\)</p>
+        \[ f(b_1) = 0 \qquad f(b_2) = -b_2 \qquad f(b_3) = b_2 - b_3 \]
+        <p>Il faut \(b_1 \in \ker f\), \(b_2\) vecteur propre pour \(-1\), et \(b_3\) tel que \((f + \mathrm{id})(b_3) = b_2\).</p>
+        <p class="etape">Étape 2 : \(b_1\)</p>
+        <p>\(Av = 0\) donne \(z = x\), \(y = 0\) : on prend \(b_1 = (1, 0, 1)\).</p>
+        <p class="etape">Étape 3 : \(b_2\)</p>
+        <p>\((A + I)v = 0\) avec \(A + I = \begin{pmatrix}0&0&1\\-1&-1&1\\-1&-1&2\end{pmatrix}\) donne \(z = 0\) et \(x + y = 0\) : \(b_2 = (1, -1, 0)\).</p>
+        <p class="etape">Étape 4 : \(b_3\)</p>
+        <p>\((A + I)b_3 = b_2\) donne \(z = 1\), \(-x - y + z = -1\), soit \(x + y = 2\) : \(b_3 = (2, 0, 1)\).</p>
+        <p class="etape">Étape 5 : vérifications</p>
+        <ul>
+          <li>\(Ab_1 = 0\) ;</li>
+          <li>\(Ab_2 = (-1, 1, 0) = -b_2\) ;</li>
+          <li>\(Ab_3 = (-1, -1, -1) = b_2 - b_3\).</li>
+        </ul>
+        <p>\(P = \begin{pmatrix}1&1&2\\0&-1&0\\1&0&1\end{pmatrix}\), \(\det P = 1 \neq 0\) : c'est une base.</p>
+        <div class="res">Base \(\big((1, 0, 1), (1, -1, 0), (2, 0, 1)\big)\) ; dans cette base \(\operatorname{Mat}(f) = B\), soit \(B = P^{-1}AP\).</div>
+        <div class="note"><span class="lab">Pourquoi pas diagonale ?</span> \(-1\) est valeur propre double (polynôme caractéristique \(\lambda(\lambda + 1)^2\)), mais \(\ker(f + \mathrm{id})\) n'est qu'une droite : \(f\) n'est pas diagonalisable. La meilleure forme est le bloc de Jordan \(\begin{pmatrix}-1&1\\0&-1\end{pmatrix}\).</div>
 
         <p class="q">2) Puissances de \(B\), puis de \(A\)</p>
-        <p><b>Puissances de \(B\).</b> \(B\) est diagonale par blocs : le bloc \(1\times1\) vaut \(0\) et le bloc
-        \(T=\begin{pmatrix}-1&1\\0&-1\end{pmatrix}=-I_2+N\) avec \(N=\begin{pmatrix}0&1\\0&0\end{pmatrix}\), \(N^2=0\). Comme \(-I_2\) et \(N\) commutent, le binôme de Newton s'applique et
-        tous les termes en \(N^k\), \(k\ge2\), disparaissent :</p>
-        \[ T^n=(-I_2+N)^n=(-1)^nI_2+n(-1)^{n-1}N=\begin{pmatrix}(-1)^n&n(-1)^{n-1}\\0&(-1)^n\end{pmatrix}. \]
-        <div class="res">Pour \(n\ge1\) : \(B^n=\begin{pmatrix}0&0&0\\0&(-1)^n&n(-1)^{n-1}\\0&0&(-1)^n\end{pmatrix}\).
-        (Pour \(n=0\), \(B^0=I_3\).)</div>
-        <p><b>Puissances de \(A\).</b> \(A^n=PB^nP^{-1}\) avec \(P^{-1}=\begin{pmatrix}-1&-1&2\\0&-1&0\\1&1&-1\end{pmatrix}\)
-        (on vérifie \(PP^{-1}\) : 1ʳᵉ ligne de \(P\), \((1,1,2)\), contre les colonnes de \(P^{-1}\) : \(-1+0+2=1\), \(-1-1+2=0\), \(2+0-2=0\) ✓ ; 2ᵉ ligne \((0,-1,0)\) : \(0\), \(1\), \(0\) ✓ ; 3ᵉ ligne \((1,0,1)\) : \(-1+1=0\), \(-1+1=0\), \(2-1=1\) ✓).
-        Posons \(s=(-1)^n\), donc \(n(-1)^{n-1}=-ns\) :</p>
-        \[ PB^n=\begin{pmatrix}1&1&2\\0&-1&0\\1&0&1\end{pmatrix}\begin{pmatrix}0&0&0\\0&s&-ns\\0&0&s\end{pmatrix}
-        =\begin{pmatrix}0&s&(2-n)s\\0&-s&ns\\0&0&s\end{pmatrix}, \]
-        \[ A^n=PB^nP^{-1}=\begin{pmatrix}0&s&(2-n)s\\0&-s&ns\\0&0&s\end{pmatrix}\begin{pmatrix}-1&-1&2\\0&-1&0\\1&1&-1\end{pmatrix}
-        =s\begin{pmatrix}2-n&1-n&n-2\\n&n+1&-n\\1&1&-1\end{pmatrix}. \]
-        <div class="res">Pour tout \(n\ge1\) : \[ A^n=(-1)^n\begin{pmatrix}2-n&1-n&n-2\\n&n+1&-n\\1&1&-1\end{pmatrix}. \]</div>
-        <p>Contrôle : \(n=1\) donne \(-\begin{pmatrix}1&0&-1\\1&2&-1\\1&1&-1\end{pmatrix}=A\) ✓ ; \(n=2\) donne \(\begin{pmatrix}0&-1&0\\2&3&-2\\1&1&-1\end{pmatrix}=A^2\)
-        (calcul direct de \(A\cdot A\), 1ʳᵉ ligne : \((-1,0,1)\cdot\)colonnes de \(A\) = \((1-1,\,0+0-1,\,-1+0+1)=(0,-1,0)\) ✓).</p>
-        <div class="warnbox"><b>Piège.</b> La formule fermée est valable à partir de \(n\ge1\) ; pour \(n=0\) elle donnerait
-        \(\begin{pmatrix}2&1&-2\\0&1&0\\1&1&-1\end{pmatrix}\neq I_3\) (le bloc \(1\times1\) nul de \(B\) vaut \(0^n=0\) pour \(n\ge1\) mais \(B^0=I_3\) a un \(1\) à cet endroit).</div>
+        <p class="etape">Étape 1 : puissances de \(B\)</p>
+        <p>\(B\) est diagonale par blocs : le bloc \(1\times1\) vaut 0, et le bloc \(T = -I_2 + N\) avec \(N = \begin{pmatrix}0&1\\0&0\end{pmatrix}\), \(N^2 = 0\).</p>
+        <div class="rappel"><span class="lab">Rappel · binôme de Newton</span>Si deux matrices commutent, \((X + Y)^n = \sum_k \binom nk X^{n-k}Y^k\).</div>
+        \[ T^n = (-I_2 + N)^n = (-1)^nI_2 + n(-1)^{n-1}N \qquad B^n = \begin{pmatrix}0&0&0\\0&(-1)^n&n(-1)^{n-1}\\0&0&(-1)^n\end{pmatrix}\ (n \ge 1) \]
+        <p class="etape">Étape 2 : \(A^n = PB^nP^{-1}\)</p>
+        <p>\(P^{-1} = \begin{pmatrix}-1&-1&2\\0&-1&0\\1&1&-1\end{pmatrix}\). Avec \(s = (-1)^n\), donc \(n(-1)^{n-1} = -ns\) :</p>
+        \[ PB^n = \begin{pmatrix}0&s&(2 - n)s\\0&-s&ns\\0&0&s\end{pmatrix} \qquad A^n = PB^nP^{-1} = s\begin{pmatrix}2 - n&1 - n&n - 2\\n&n + 1&-n\\1&1&-1\end{pmatrix} \]
+        <div class="res">Pour tout \(n \ge 1\) : \(A^n = (-1)^n\begin{pmatrix}2 - n&1 - n&n - 2\\n&n + 1&-n\\1&1&-1\end{pmatrix}\).</div>
+        <p>Contrôles : \(n = 1\) redonne \(A\) ; \(n = 2\) donne \(\begin{pmatrix}0&-1&0\\2&3&-2\\1&1&-1\end{pmatrix} = A^2\).</p>
+        <div class="warnbox"><span class="lab">Piège</span> La formule vaut pour \(n \ge 1\) : pour \(n = 0\) elle donnerait une matrice différente de \(I_3\), car le bloc nul de \(B\) vaut \(0^n = 0\) pour \(n \ge 1\) mais \(B^0 = I_3\).</div>
       </div>
     </div>
 
@@ -949,42 +967,33 @@ window.MathJax = {
         </figure>
 
         <p class="q">1) \(\mathcal B=(X^2+1,\ X+1,\ 2X^2-X)\) est une base de \(\mathbb R_2[X]\)</p>
-        <p>Dans la base canonique \((1,X,X^2)\) (coordonnées dans l'ordre \(1,X,X^2\)) :
-        \(X^2+1\to(1,0,1)\), \(X+1\to(1,1,0)\), \(2X^2-X\to(0,-1,2)\). Matrice des coordonnées
-        \(P=\begin{pmatrix}1&1&0\\0&1&-1\\1&0&2\end{pmatrix}\) :</p>
-        \[ \det P=1\begin{vmatrix}1&-1\\0&2\end{vmatrix}-1\begin{vmatrix}0&-1\\1&2\end{vmatrix}+0=2-(0+1)=1\neq0. \]
-        <div class="res">\(\det P=1\neq0\) et \(\dim\mathbb R_2[X]=3\) : \(\mathcal B\) est une <b>base</b>.</div>
+        <p>Coordonnées dans \((1, X, X^2)\) : \(X^2 + 1 \to (1, 0, 1)\), \(X + 1 \to (1, 1, 0)\), \(2X^2 - X \to (0, -1, 2)\).</p>
+        \[ P = \begin{pmatrix}1&1&0\\0&1&-1\\1&0&2\end{pmatrix} \qquad \det P = 1\begin{vmatrix}1&-1\\0&2\end{vmatrix} - 1\begin{vmatrix}0&-1\\1&2\end{vmatrix} = 2 - 1 = 1 \neq 0 \]
+        <div class="res">\(\det P = 1 \neq 0\) et \(\dim\mathbb R_2[X] = 3\) : \(\mathcal B\) est une <b>base</b>.</div>
 
-        <p class="q">2) Matrices de passage canonique → \(\mathcal B\) et \(\mathcal B\) → canonique</p>
-        <p>Par définition (colonnes = coordonnées de la nouvelle base dans l'ancienne) :</p>
-        \[ P_{\text{can}\to\mathcal B}=P=\begin{pmatrix}1&1&0\\0&1&-1\\1&0&2\end{pmatrix}. \]
-        <p>La matrice de passage inverse est \(P^{-1}\). Calcul par la comatrice (\(\det P=1\)) : on obtient</p>
-        \[ P_{\mathcal B\to\text{can}}=P^{-1}=\begin{pmatrix}2&-2&-1\\-1&2&1\\-1&1&1\end{pmatrix}. \]
-        <p>Vérification de \(PP^{-1}=I_3\) : 1ʳᵉ ligne de \(P\), \((1,1,0)\), contre les colonnes \((2,-1,-1)\), \((-2,2,1)\), \((-1,1,1)\) :
-        \(2-1=1\), \(-2+2=0\), \(-1+1=0\) ✓ ; 2ᵉ ligne \((0,1,-1)\) : \(-1+1=0\), \(2-1=1\), \(1-1=0\) ✓ ;
-        3ᵉ ligne \((1,0,2)\) : \(2-2=0\), \(-2+2=0\), \(-1+2=1\) ✓.</p>
-        <p>Interprétation : les colonnes de \(P^{-1}\) expriment \(1,X,X^2\) dans \(\mathcal B\). Exemple :
-        \(1=2(X^2+1)-(X+1)-(2X^2-X)\) (développé : \(2X^2+2-X-1-2X^2+X=1\) ✓).</p>
+        <p class="q">2) Matrices de passage canonique \(\to\mathcal B\) et \(\mathcal B\to\) canonique</p>
+        <p>Les colonnes sont les coordonnées de la nouvelle base dans l'ancienne :</p>
+        \[ P_{\text{can}\to\mathcal B} = P = \begin{pmatrix}1&1&0\\0&1&-1\\1&0&2\end{pmatrix} \qquad P_{\mathcal B\to\text{can}} = P^{-1} = \begin{pmatrix}2&-2&-1\\-1&2&1\\-1&1&1\end{pmatrix} \]
+        <p>Vérification de \(PP^{-1} = I_3\) : première ligne \((1, 1, 0)\) donne \((2 - 1, -2 + 2, -1 + 1)\) ; deuxième ligne \((0, 1, -1)\) donne \((-1 + 1, 2 - 1, 1 - 1)\) ; troisième ligne \((1, 0, 2)\) donne \((2 - 2, -2 + 2, -1 + 2)\).</p>
+        <div class="res">Les colonnes de \(P^{-1}\) expriment \(1, X, X^2\) dans \(\mathcal B\). Exemple : \(1 = 2(X^2 + 1) - (X + 1) - (2X^2 - X)\).</div>
 
         <p class="q">3) Coordonnées de \(P=X^2-X+2\) dans \(\mathcal B\)</p>
-        <p>Coordonnées canoniques : \((2,-1,1)\). Dans \(\mathcal B\) : \(X_{\mathcal B}=P^{-1}X_{\text{can}}\) :</p>
-        \[ \begin{pmatrix}2&-2&-1\\-1&2&1\\-1&1&1\end{pmatrix}\begin{pmatrix}2\\-1\\1\end{pmatrix}
-        =\begin{pmatrix}4+2-1\\-2-2+1\\-2-1+1\end{pmatrix}=\begin{pmatrix}5\\-3\\-2\end{pmatrix}. \]
-        <div class="res">\(X^2-X+2=5(X^2+1)-3(X+1)-2(2X^2-X)\).</div>
-        <p>Vérification : \(5X^2+5-3X-3-4X^2+2X=X^2-X+2\) ✓.</p>
+        <div class="rappel"><span class="lab">Rappel · changement de coordonnées</span>\[ X_{\mathcal B} = P^{-1}X_{\text{can}} \]</div>
+        <p>Coordonnées canoniques : \((2, -1, 1)\).</p>
+        \[ \begin{pmatrix}2&-2&-1\\-1&2&1\\-1&1&1\end{pmatrix}\begin{pmatrix}2\\-1\\1\end{pmatrix} = \begin{pmatrix}4 + 2 - 1\\-2 - 2 + 1\\-2 - 1 + 1\end{pmatrix} = \begin{pmatrix}5\\-3\\-2\end{pmatrix} \]
+        <div class="res">\(X^2 - X + 2 = 5(X^2 + 1) - 3(X + 1) - 2(2X^2 - X)\).</div>
+        <p>Vérification : \(5X^2 + 5 - 3X - 3 - 4X^2 + 2X = X^2 - X + 2\).</p>
 
         <p class="q">4) \(\varphi(P)=XP'\) : matrice dans la canonique puis dans \(\mathcal B\)</p>
-        <p>\(\varphi(1)=0\), \(\varphi(X)=X\cdot1=X\), \(\varphi(X^2)=X\cdot2X=2X^2\) (\(\varphi\) est bien un endomorphisme de \(\mathbb R_2[X]\)).</p>
-        <div class="res">\[ D=\operatorname{Mat}_{\text{can}}(\varphi)=\begin{pmatrix}0&0&0\\0&1&0\\0&0&2\end{pmatrix}. \]</div>
-        <p>Dans la base \(\mathcal B\) : \(\operatorname{Mat}_{\mathcal B}(\varphi)=P^{-1}DP\). D'abord
-        \(DP=\begin{pmatrix}0&0&0\\0&1&-1\\2&0&4\end{pmatrix}\) (chaque ligne de \(P\) multipliée par le coefficient diagonal correspondant), puis</p>
-        \[ P^{-1}(DP)=\begin{pmatrix}2&-2&-1\\-1&2&1\\-1&1&1\end{pmatrix}\begin{pmatrix}0&0&0\\0&1&-1\\2&0&4\end{pmatrix}
-        =\begin{pmatrix}-2&-2&-2\\2&2&2\\2&1&3\end{pmatrix}. \]
-        <div class="res">\[ \operatorname{Mat}_{\mathcal B}(\varphi)=\begin{pmatrix}-2&-2&-2\\2&2&2\\2&1&3\end{pmatrix}. \]</div>
-        <p>Vérification sur la 1ʳᵉ colonne : \(\varphi(X^2+1)=X\cdot2X=2X^2\), dont les coordonnées dans \(\mathcal B\) sont
-        \(P^{-1}(0,0,2)=(-2,2,2)\) ✓ (colonne 1). Trace conservée : \(-2+2+3=3=0+1+2\) ✓.</p>
-        <div class="warnbox"><b>Piège.</b> Dans une base « moins naturelle », la matrice d'un endomorphisme simple (ici diagonale
-        dans la canonique) devient pleine. On choisit une base adaptée pour simplifier, jamais l'inverse.</div>
+        <p class="etape">Étape 1 : dans la base canonique</p>
+        <p>\(\varphi(1) = 0\), \(\varphi(X) = X\), \(\varphi(X^2) = 2X^2\) :</p>
+        \[ D = \operatorname{Mat}_{\text{can}}(\varphi) = \begin{pmatrix}0&0&0\\0&1&0\\0&0&2\end{pmatrix} \]
+        <p class="etape">Étape 2 : dans \(\mathcal B\)</p>
+        <p>\(\operatorname{Mat}_{\mathcal B}(\varphi) = P^{-1}DP\). On a \(DP = \begin{pmatrix}0&0&0\\0&1&-1\\2&0&4\end{pmatrix}\), puis :</p>
+        \[ P^{-1}(DP) = \begin{pmatrix}2&-2&-1\\-1&2&1\\-1&1&1\end{pmatrix}\begin{pmatrix}0&0&0\\0&1&-1\\2&0&4\end{pmatrix} = \begin{pmatrix}-2&-2&-2\\2&2&2\\2&1&3\end{pmatrix} \]
+        <div class="res">\(\operatorname{Mat}_{\mathcal B}(\varphi) = \begin{pmatrix}-2&-2&-2\\2&2&2\\2&1&3\end{pmatrix}\).</div>
+        <p>Vérification : \(\varphi(X^2 + 1) = 2X^2\), de coordonnées \(P^{-1}(0, 0, 2) = (-2, 2, 2)\), la première colonne. Trace conservée : \(-2 + 2 + 3 = 3 = 0 + 1 + 2\).</p>
+        <div class="warnbox"><span class="lab">Piège</span> Dans une base peu naturelle, la matrice d'un endomorphisme simple (ici diagonale dans la base canonique) devient pleine. On choisit une base adaptée pour simplifier, jamais l'inverse.</div>
       </div>
     </div>
 
@@ -996,40 +1005,40 @@ window.MathJax = {
           <img src="td3-img/ex8.jpg" alt="Énoncé TD3 Exercice 8 — endomorphisme de R3 de matrice A, f², Im⊂Ker, A semblable à une matrice à un seul 1" loading="lazy">
           <figcaption>Énoncé (TD3, L. Graissot) — Exercice 8.</figcaption>
         </figure>
-        <p>\(A=\begin{pmatrix}3&-3&6\\1&-1&2\\-1&1&-2\end{pmatrix}\).</p>
+        <div class="enonce">\(A=\begin{pmatrix}3&-3&6\\1&-1&2\\-1&1&-2\end{pmatrix}\).</div>
 
         <p class="q">1) Calcul de \(f^2\) ; \(\operatorname{Im}f\subset\operatorname{Ker}f\)</p>
-        <p>Produit \(A\times A\) (ligne × colonne). Colonnes de \(A\) : \(c_1=(3,1,-1)\), \(c_2=(-3,-1,1)\), \(c_3=(6,2,-2)\).</p>
-        \[ \begin{aligned}
-        &\text{Ligne }(3,-3,6):\ 9-3-6=0,\ \ -9+3+6=0,\ \ 18-6-12=0;\\
-        &\text{Ligne }(1,-1,2):\ 3-1-2=0,\ \ -3+1+2=0,\ \ 6-2-4=0;\\
-        &\text{Ligne }(-1,1,-2):\ -3+1+2=0,\ \ 3-1-2=0,\ \ -6+2+4=0.
-        \end{aligned} \]
-        <div class="res">\(A^2=0\), c'est-à-dire \(f\circ f=0\) : \(f\) est <b>nilpotent d'indice 2</b>.</div>
-        <p>Inclusion : soit \(y\in\operatorname{Im}f\), \(y=f(x)\). Alors \(f(y)=f(f(x))=f^2(x)=0\), donc \(y\in\operatorname{Ker}f\).</p>
-        <div class="res">\(\operatorname{Im}f\subset\operatorname{Ker}f\).</div>
+        <p class="etape">Étape 1 : le produit \(A \times A\) (ligne par colonne)</p>
+        <ul>
+          <li>Ligne \((3, -3, 6)\) : \(9 - 3 - 6 = 0\), \(-9 + 3 + 6 = 0\), \(18 - 6 - 12 = 0\).</li>
+          <li>Ligne \((1, -1, 2)\) : \(3 - 1 - 2 = 0\), \(-3 + 1 + 2 = 0\), \(6 - 2 - 4 = 0\).</li>
+          <li>Ligne \((-1, 1, -2)\) : \(-3 + 1 + 2 = 0\), \(3 - 1 - 2 = 0\), \(-6 + 2 + 4 = 0\).</li>
+        </ul>
+        <div class="res">\(A^2 = 0\) : \(f \circ f = 0\), \(f\) est <b>nilpotent d'indice 2</b>.</div>
+        <p class="etape">Étape 2 : l'inclusion</p>
+        <p>Si \(y \in \operatorname{Im}f\), \(y = f(x)\), alors \(f(y) = f^2(x) = 0\), donc \(y \in \operatorname{Ker}f\).</p>
+        <div class="res">\(\operatorname{Im}f \subset \operatorname{Ker}f\).</div>
 
         <p class="q">2) \(\operatorname{rg}f\), \(\dim\operatorname{Ker}f\), bases du noyau et de l'image</p>
-        <p>On a \(c_2=-c_1\) et \(c_3=2c_1\) avec \(c_1\neq0\) : \(\operatorname{Im}f=\operatorname{Vect}(c_1)\), donc \(\operatorname{rg}f=1\).
-        Théorème du rang : \(\dim\operatorname{Ker}f=3-1=2\). (Cohérent avec la question 1 : \(\dim\operatorname{Im}f=1\le\dim\operatorname{Ker}f=2\).)</p>
-        <p><b>Noyau :</b> les trois lignes sont proportionnelles à \((1,-1,2)\) (\((3,-3,6)=3\cdot(1,-1,2)\), \((-1,1,-2)=-(1,-1,2)\)), donc
-        \(\operatorname{Ker}f\) est le plan d'équation \(x-y+2z=0\) : \((x,y,z)=y(1,1,0)+z(-2,0,1)\).
-        Base : \(\big((1,1,0),(-2,0,1)\big)\). On vérifie \(c_1=(3,1,-1)\in\operatorname{Ker}f\) : \(3-1-2=0\) ✓
-        (en effet \(c_1=(1,1,0)-(-2,0,1)=(3,1,-1)\), combinaison des deux vecteurs de base).</p>
-        <div class="res">\(\operatorname{rg}f=1\), \(\dim\operatorname{Ker}f=2\) ; base de \(\operatorname{Im}f\) : \(\big((3,1,-1)\big)\) ;
-        base de \(\operatorname{Ker}f\) : \(\big((1,1,0),(-2,0,1)\big)\).</div>
+        <p class="etape">Étape 1 : image</p>
+        <p>Les colonnes sont \(c_1 = (3, 1, -1)\), \(c_2 = -c_1\), \(c_3 = 2c_1\) : \(\operatorname{Im}f = \operatorname{Vect}(c_1)\), de rang 1.</p>
+        <p class="etape">Étape 2 : noyau</p>
+        <p>Théorème du rang : \(\dim\operatorname{Ker}f = 3 - 1 = 2\). Les trois lignes sont proportionnelles à \((1, -1, 2)\) : le noyau est le plan \(x - y + 2z = 0\), soit \((x, y, z) = y(1, 1, 0) + z(-2, 0, 1)\). On vérifie \(c_1 \in \operatorname{Ker}f\) : \(3 - 1 - 2 = 0\).</p>
+        <div class="res">\(\operatorname{rg}f = 1\), \(\dim\operatorname{Ker}f = 2\) ; base de \(\operatorname{Im}f\) : \((3, 1, -1)\) ; base de \(\operatorname{Ker}f\) : \(\big((1, 1, 0), (-2, 0, 1)\big)\).</div>
 
         <p class="q">3) \(A\) est semblable à \(\begin{pmatrix}0&0&0\\1&0&0\\0&0&0\end{pmatrix}\)</p>
-        <div class="method"><span class="lab">Méthode</span> On cherche une base \((b_1,b_2,b_3)\) avec \(f(b_1)=b_2\), \(f(b_2)=0\), \(f(b_3)=0\) :
-        la matrice dans cette base est exactement celle demandée (colonne 1 = \((0,1,0)\), colonnes 2 et 3 nulles).</div>
-        <p>On prend \(b_1=e_1=(1,0,0)\) (\(f(e_1)\neq0\)), \(b_2=f(b_1)=(3,1,-1)\) (dans \(\operatorname{Ker}f\) car \(\operatorname{Im}f\subset\operatorname{Ker}f\), donc \(f(b_2)=0\)),
-        et \(b_3=(1,1,0)\in\operatorname{Ker}f\), non colinéaire à \(b_2\) (\(b_2\) et \(b_3\) sont donc deux vecteurs indépendants du plan \(\operatorname{Ker}f\)).</p>
-        <p>Base ? \(Q=\begin{pmatrix}1&3&1\\0&1&1\\0&-1&0\end{pmatrix}\) (colonnes \(b_1,b_2,b_3\)) :
-        \(\det Q=1\begin{vmatrix}1&1\\-1&0\end{vmatrix}=1\cdot(0+1)=1\neq0\) ✓.</p>
-        <div class="res">Dans la base \((b_1,b_2,b_3)\) : \(\operatorname{Mat}(f)=\begin{pmatrix}0&0&0\\1&0&0\\0&0&0\end{pmatrix}\), donc \(A\) lui est semblable :
-        \(Q^{-1}AQ=\begin{pmatrix}0&0&0\\1&0&0\\0&0&0\end{pmatrix}\).</div>
-        <div class="note">Tout nilpotent d'indice 2 de \(\mathbb R^3\) de rang 1 est ainsi : c'est la « forme normale » : une chaîne
-        \(b_1\mapsto b_2\mapsto0\) plus un vecteur du noyau \(b_3\) hors de cette chaîne.</div>
+        <p class="etape">Étape 1 : la base cherchée</p>
+        <p>On veut \(f(b_1) = b_2\), \(f(b_2) = 0\), \(f(b_3) = 0\) : la matrice a alors sa colonne 1 égale à \((0, 1, 0)\) et ses colonnes 2 et 3 nulles.</p>
+        <p class="etape">Étape 2 : le choix</p>
+        <ul>
+          <li>\(b_1 = e_1 = (1, 0, 0)\), car \(f(e_1) \neq 0\) ;</li>
+          <li>\(b_2 = f(b_1) = (3, 1, -1)\), dans \(\operatorname{Ker}f\) (car \(\operatorname{Im}f \subset \operatorname{Ker}f\)), donc \(f(b_2) = 0\) ;</li>
+          <li>\(b_3 = (1, 1, 0) \in \operatorname{Ker}f\), non colinéaire à \(b_2\).</li>
+        </ul>
+        <p class="etape">Étape 3 : c'est une base</p>
+        <p>\(Q = \begin{pmatrix}1&3&1\\0&1&1\\0&-1&0\end{pmatrix}\), \(\det Q = 1\cdot(0 + 1) = 1 \neq 0\).</p>
+        <div class="res">\(Q^{-1}AQ = \begin{pmatrix}0&0&0\\1&0&0\\0&0&0\end{pmatrix}\) : \(A\) est semblable à cette matrice.</div>
+        <div class="note"><span class="lab">Forme normale</span> Tout nilpotent d'indice 2 de rang 1 dans \(\mathbb R^3\) est ainsi : une chaîne \(b_1 \mapsto b_2 \mapsto 0\) plus un vecteur du noyau \(b_3\) hors de cette chaîne.</div>
       </div>
     </div>
 
@@ -1041,37 +1050,29 @@ window.MathJax = {
           <img src="td3-img/ex9.jpg" alt="Énoncé TD3 Exercice 9 — endomorphisme de R2 de matrice A, base e1,e2, puissances, suites couplées" loading="lazy">
           <figcaption>Énoncé (TD3, L. Graissot) — Exercice 9.</figcaption>
         </figure>
-        <p>\(A=\begin{pmatrix}2&\tfrac23\\-\tfrac52&-\tfrac23\end{pmatrix}\), \(e_1=\begin{pmatrix}-2\\3\end{pmatrix}\), \(e_2=\begin{pmatrix}-2\\5\end{pmatrix}\).</p>
+        <div class="enonce">\(A=\begin{pmatrix}2&\tfrac23\\-\tfrac52&-\tfrac23\end{pmatrix}\), \(e_1=\begin{pmatrix}-2\\3\end{pmatrix}\), \(e_2=\begin{pmatrix}-2\\5\end{pmatrix}\).</div>
 
         <p class="q">1) \(\mathcal B'=(e_1,e_2)\) est une base de \(\mathbb R^2\) ; \(\operatorname{Mat}_{\mathcal B'}(f)\)</p>
-        <p>\(P=\begin{pmatrix}-2&-2\\3&5\end{pmatrix}\), \(\det P=(-2)(5)-(-2)(3)=-10+6=-4\neq0\) : \(e_1,e_2\) indépendants, donc base de \(\mathbb R^2\) (dimension 2).</p>
-        <p>Images : \(f(e_1)=Ae_1=\begin{pmatrix}2(-2)+\frac23\cdot3\\-\frac52(-2)-\frac23\cdot3\end{pmatrix}=\begin{pmatrix}-4+2\\5-2\end{pmatrix}=\begin{pmatrix}-2\\3\end{pmatrix}=e_1\) ;
-        \(f(e_2)=Ae_2=\begin{pmatrix}-4+\frac{10}3\\5-\frac{10}3\end{pmatrix}=\begin{pmatrix}-\frac23\\\frac53\end{pmatrix}=\tfrac13\begin{pmatrix}-2\\5\end{pmatrix}=\tfrac13e_2\).</p>
-        <div class="res">\[ \operatorname{Mat}_{\mathcal B'}(f)=D=\begin{pmatrix}1&0\\0&\tfrac13\end{pmatrix},\qquad D=P^{-1}AP. \]
-        \(e_1\) et \(e_2\) sont des vecteurs propres pour les valeurs propres \(1\) et \(\tfrac13\).</div>
+        <p class="etape">Étape 1 : base</p>
+        <p>\(P = \begin{pmatrix}-2&-2\\3&5\end{pmatrix}\), \(\det P = -10 + 6 = -4 \neq 0\).</p>
+        <p class="etape">Étape 2 : images</p>
+        \[ f(e_1) = Ae_1 = \binom{-4 + 2}{5 - 2} = \binom{-2}{3} = e_1 \qquad f(e_2) = Ae_2 = \binom{-4 + \frac{10}{3}}{5 - \frac{10}{3}} = \frac13\binom{-2}{5} = \frac13e_2 \]
+        <div class="res">\(D = \operatorname{Mat}_{\mathcal B'}(f) = \begin{pmatrix}1&0\\0&\frac13\end{pmatrix} = P^{-1}AP\) : \(e_1\) et \(e_2\) sont propres pour 1 et \(\frac13\).</div>
 
         <p class="q">2) \(A^n\) pour tout \(n\in\mathbb N\)</p>
-        <p>\(A=PDP^{-1}\), donc \(A^n=PD^nP^{-1}\) avec \(D^n=\begin{pmatrix}1&0\\0&3^{-n}\end{pmatrix}\) (valable aussi pour \(n=0\)).
-        \(P^{-1}=\dfrac1{-4}\begin{pmatrix}5&2\\-3&-2\end{pmatrix}=\begin{pmatrix}-\frac54&-\frac12\\\frac34&\frac12\end{pmatrix}\)
-        (formule \(\frac1{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}\)). Posons \(r=3^{-n}\) :</p>
-        \[ PD^n=\begin{pmatrix}-2&-2r\\3&5r\end{pmatrix},\qquad
-        A^n=\begin{pmatrix}-2&-2r\\3&5r\end{pmatrix}\begin{pmatrix}-\frac54&-\frac12\\\frac34&\frac12\end{pmatrix}
-        =\begin{pmatrix}\frac52-\frac32r&1-r\\-\frac{15}4+\frac{15}4r&-\frac32+\frac52r\end{pmatrix}. \]
-        <div class="res">\[ A^n=\begin{pmatrix}\tfrac52-\tfrac32\,3^{-n}&1-3^{-n}\\[2pt]-\tfrac{15}4\big(1-3^{-n}\big)&-\tfrac32+\tfrac52\,3^{-n}\end{pmatrix},\quad n\in\mathbb N. \]</div>
-        <p>Contrôles : \(n=0\) (\(r=1\)) : \(A^0=I_2\) ✓. \(n=1\) (\(r=\frac13\)) : \(\begin{pmatrix}\frac52-\frac12&\frac23\\-\frac{15}4+\frac54&-\frac32+\frac56\end{pmatrix}=\begin{pmatrix}2&\frac23\\-\frac52&-\frac23\end{pmatrix}=A\) ✓.
-        Limite : \(A^n\to\begin{pmatrix}\frac52&1\\-\frac{15}4&-\frac32\end{pmatrix}\) (projecteur sur \(\operatorname{Vect}(e_1)\) parallèlement à \(\operatorname{Vect}(e_2)\)).</p>
+        <p>\(A^n = PD^nP^{-1}\) avec \(D^n = \operatorname{diag}(1, 3^{-n})\) et \(P^{-1} = \dfrac{1}{-4}\begin{pmatrix}5&2\\-3&-2\end{pmatrix} = \begin{pmatrix}-\frac54&-\frac12\\\frac34&\frac12\end{pmatrix}\). Avec \(r = 3^{-n}\) :</p>
+        \[ PD^n = \begin{pmatrix}-2&-2r\\3&5r\end{pmatrix} \qquad A^n = \begin{pmatrix}\frac52 - \frac32r&1 - r\\-\frac{15}{4} + \frac{15}{4}r&-\frac32 + \frac52r\end{pmatrix} \]
+        <div class="res">\(A^n = \begin{pmatrix}\frac52 - \frac32\,3^{-n}&1 - 3^{-n}\\-\frac{15}{4}(1 - 3^{-n})&-\frac32 + \frac52\,3^{-n}\end{pmatrix}\), \(n \in \mathbb N\).</div>
+        <p>Contrôles : \(n = 0\) donne \(I_2\) ; \(n = 1\) donne \(A\). Limite : \(A^n \to \begin{pmatrix}\frac52&1\\-\frac{15}{4}&-\frac32\end{pmatrix}\), projecteur sur \(\operatorname{Vect}(e_1)\) parallèlement à \(\operatorname{Vect}(e_2)\).</p>
 
-        <p class="q">3) Suites réelles telles que \(\begin{cases}x_{n+1}=2x_n+\frac23y_n\\y_{n+1}=-\frac52x_n-\frac23y_n\end{cases}\)</p>
-        <p>En posant \(X_n=\begin{pmatrix}x_n\\y_n\end{pmatrix}\) : \(X_{n+1}=AX_n\), donc \(X_n=A^nX_0\) (récurrence immédiate), avec \(X_0=(x_0,y_0)\in\mathbb R^2\) quelconque.
-        Les suites solutions sont donc en bijection avec les conditions initiales \((x_0,y_0)\in\mathbb R^2\).</p>
-        <p>Forme explicite en développant \(A^nX_0\) :</p>
-        \[ x_n=\Big(\tfrac52x_0+y_0\Big)-\Big(\tfrac32x_0+y_0\Big)3^{-n},\qquad
-        y_n=-\Big(\tfrac{15}4x_0+\tfrac32y_0\Big)+\Big(\tfrac{15}4x_0+\tfrac52y_0\Big)3^{-n}. \]
-        <p>Forme géométrique plus parlante : décomposer \(X_0=a\,e_1+b\,e_2\) (\((a,b)\) coordonnées de \(X_0\) dans \(\mathcal B'\)). Comme
-        \(f(e_1)=e_1\) et \(f(e_2)=\tfrac13e_2\), on a \(X_n=a\,e_1+b\,3^{-n}e_2\) :</p>
-        <div class="res">\[ \boxed{\ \begin{cases}x_n=-2a-2b\,3^{-n}\\ y_n=3a+5b\,3^{-n}\end{cases}\quad(a,b)\in\mathbb R^2\ } \]
-        L'ensemble des suites solutions est un plan vectoriel de dimension 2 (\(\mathbb R\)-ev engendré par la suite constante \((-2,3)\) et la suite géométrique \(3^{-n}(-2,5)\)) ; elles convergent toutes vers \((-2a,\,3a)\).</div>
-        <p>Vérification : \(X_{n+1}=AX_n=a\,Ae_1+b\,3^{-n}Ae_2=a\,e_1+b\,3^{-n}\cdot\tfrac13e_2=a\,e_1+b\,3^{-(n+1)}e_2\) ✓.</p>
+        <p class="q">3) Suites telles que \(x_{n+1}=2x_n+\frac23y_n\), \(y_{n+1}=-\frac52x_n-\frac23y_n\)</p>
+        <p class="etape">Étape 1 : écriture matricielle</p>
+        <p>Avec \(X_n = \binom{x_n}{y_n}\) : \(X_{n+1} = AX_n\), donc \(X_n = A^nX_0\) pour tout \((x_0, y_0) \in \mathbb R^2\).</p>
+        <p class="etape">Étape 2 : forme géométrique</p>
+        <p>On décompose \(X_0 = ae_1 + be_2\). Comme \(f(e_1) = e_1\) et \(f(e_2) = \frac13e_2\) :</p>
+        \[ X_n = a\,e_1 + b\,3^{-n}e_2 \]
+        <div class="res">\(x_n = -2a - 2b\,3^{-n}\) et \(y_n = 3a + 5b\,3^{-n}\), \((a, b) \in \mathbb R^2\). Les suites solutions forment un plan vectoriel (engendré par la suite constante \((-2, 3)\) et la suite \(3^{-n}(-2, 5)\)) ; elles convergent toutes vers \((-2a, 3a)\).</div>
+        <p>Vérification : \(AX_n = a\,Ae_1 + b\,3^{-n}Ae_2 = a\,e_1 + b\,3^{-(n+1)}e_2 = X_{n+1}\).</p>
       </div>
     </div>
 
@@ -1083,27 +1084,35 @@ window.MathJax = {
           <img src="td3-img/ex10.png" alt="Énoncé TD3 Exercice 10 — matrice M de f dans la base canonique, (M−I)(M+3I)=0" loading="lazy">
           <figcaption>Énoncé (TD3, L. Graissot) — Exercice 10 (dernière page du TD).</figcaption>
         </figure>
-        \[ M=\begin{pmatrix}2&-2&-1\\2&-3&-2\\1&-2&0\end{pmatrix}. \]
+        <div class="enonce">\(M=\begin{pmatrix}2&-2&-1\\2&-3&-2\\1&-2&0\end{pmatrix}\).</div>
 
         <p class="q">1) Vérifier que \((M-I)(M+3I)=0\)</p>
-        \[ M-I=\begin{pmatrix}1&-2&-1\\2&-4&-2\\1&-2&-1\end{pmatrix},\qquad M+3I=\begin{pmatrix}5&-2&-1\\2&0&-2\\1&-2&3\end{pmatrix}. \]
-        <p>Ligne 1 de \(M-I\) par les colonnes de \(M+3I\) : \((5-4-1,\ -2+0+2,\ -1+4-3)=(0,0,0)\). Ligne 2 : \((10-8-2,\ -4+0+4,\ -2+8-6)=(0,0,0)\). Ligne 3 : \((5-4-1,\ -2+0+2,\ -1+4-3)=(0,0,0)\).</p>
-        <div class="res">\((M-I)(M+3I)=0\), c'est-à-dire \(M^2+2M-3I=0\).</div>
+        \[ M - I = \begin{pmatrix}1&-2&-1\\2&-4&-2\\1&-2&-1\end{pmatrix} \qquad M + 3I = \begin{pmatrix}5&-2&-1\\2&0&-2\\1&-2&3\end{pmatrix} \]
+        <p>Ligne 1 de \(M - I\) par les colonnes de \(M + 3I\) : \((5 - 4 - 1,\ -2 + 0 + 2,\ -1 + 4 - 3) = (0, 0, 0)\). Ligne 2 : \((10 - 8 - 2,\ -4 + 4,\ -2 + 8 - 6) = 0\). Ligne 3 : même résultat que la ligne 1.</p>
+        <div class="res">\((M - I)(M + 3I) = 0\), soit \(M^2 + 2M - 3I = 0\).</div>
 
         <p class="q">2) En déduire \(\operatorname{Ker}(f-\mathrm{id})\oplus\operatorname{Ker}(f+3\,\mathrm{id})=\mathbb R^3\)</p>
-        <p>Soit \(x\in\mathbb R^3\). On pose \(a=\tfrac14(M+3I)x\) et \(b=\tfrac14(I-M)x\). Alors \(a+b=\tfrac14\cdot4x=x\).</p>
-        <p>\((M-I)a=\tfrac14(M-I)(M+3I)x=0\) : \(a\in\operatorname{Ker}(f-\mathrm{id})\). Et \((M+3I)b=\tfrac14(M+3I-M^2-3M)x=\tfrac14(M+3I-(3I-2M)-3M)x=0\) (car \(M^2=3I-2M\)) : \(b\in\operatorname{Ker}(f+3\,\mathrm{id})\).</p>
-        <p>Intersection nulle : si \(v\) est dans les deux noyaux, \(Mv=v\) et \(Mv=-3v\), donc \(4v=0\).</p>
-        <div class="res">\(\operatorname{Ker}(f-\mathrm{id})+\operatorname{Ker}(f+3\,\mathrm{id})=\mathbb R^3\) et la somme est directe.</div>
+        <p class="etape">Étape 1 : décomposer \(x\)</p>
+        <p>On pose \(a = \frac14(M + 3I)x\) et \(b = \frac14(I - M)x\) : \(a + b = x\).</p>
+        <p class="etape">Étape 2 : \(a\) et \(b\) sont dans les bons noyaux</p>
+        <ul>
+          <li>\((M - I)a = \frac14(M - I)(M + 3I)x = 0\) : \(a \in \operatorname{Ker}(f - \mathrm{id})\).</li>
+          <li>\((M + 3I)b = \frac14(M + 3I)(I - M)x = \frac14(3I - 2M - M^2)x = 0\) (car \(M^2 = 3I - 2M\)) : \(b \in \operatorname{Ker}(f + 3\,\mathrm{id})\).</li>
+        </ul>
+        <p class="etape">Étape 3 : intersection nulle</p>
+        <p>Si \(v\) est dans les deux noyaux, \(Mv = v\) et \(Mv = -3v\), donc \(4v = 0\).</p>
+        <div class="res">La somme est égale à \(\mathbb R^3\) et directe.</div>
 
         <p class="q">3) Dimension et base de chacun des deux noyaux</p>
-        <p>\(\operatorname{Ker}(f-\mathrm{id})\) : \(MX=X\iff(M-I)X=0\iff x-2y-z=0\) (les lignes de \(M-I\) sont proportionnelles à \((1,-2,-1)\)). Base : \(u_1=(2,1,0)\), \(u_2=(1,0,1)\) ; dimension \(2\).</p>
-        <p>\(\operatorname{Ker}(f+3\,\mathrm{id})\) : \((M+3I)X=0\) : ligne 2 donne \(x=z\), ligne 1 donne \(5x-2y-x=0\), soit \(y=2x\). Base : \(u_3=(1,2,1)\) ; dimension \(1\). Contrôle ligne 3 : \(1-4+3=0\) ✓.</p>
-        <div class="res">\(\dim\operatorname{Ker}(f-\mathrm{id})=2\), base \(\big((2,1,0),(1,0,1)\big)\) ; \(\dim\operatorname{Ker}(f+3\,\mathrm{id})=1\), base \(\big((1,2,1)\big)\). Total \(2+1=3\) ✓.</div>
+        <ul>
+          <li>\(\operatorname{Ker}(f - \mathrm{id})\) : \((M - I)X = 0 \iff x - 2y - z = 0\) (les lignes sont proportionnelles). Base \(u_1 = (2, 1, 0)\), \(u_2 = (1, 0, 1)\), dimension 2.</li>
+          <li>\(\operatorname{Ker}(f + 3\,\mathrm{id})\) : la ligne 2 donne \(x = z\), la ligne 1 donne \(y = 2x\). Base \(u_3 = (1, 2, 1)\), dimension 1. Contrôle ligne 3 : \(1 - 4 + 3 = 0\).</li>
+        </ul>
+        <div class="res">\(\dim\operatorname{Ker}(f - \mathrm{id}) = 2\) (base \((2, 1, 0), (1, 0, 1)\)) ; \(\dim\operatorname{Ker}(f + 3\,\mathrm{id}) = 1\) (base \((1, 2, 1)\)). Total \(2 + 1 = 3\).</div>
 
         <p class="q">4) Base diagonalisante, matrice diagonale (sans calcul)</p>
-        <p>La base \(\big((2,1,0),(1,0,1),(1,2,1)\big)\) réunit une base de chaque noyau : \(f(u_1)=u_1\), \(f(u_2)=u_2\), \(f(u_3)=-3u_3\). Elle est bien une base de \(\mathbb R^3\) (question 2).</p>
-        <div class="res">\(\operatorname{Mat}_{\mathcal B}(f)=\operatorname{diag}(1,\,1,\,-3)\).</div>
+        <p>En réunissant une base de chaque noyau, on obtient une base de \(\mathbb R^3\) (question 2), avec \(f(u_1) = u_1\), \(f(u_2) = u_2\), \(f(u_3) = -3u_3\).</p>
+        <div class="res">Base \(\big((2, 1, 0), (1, 0, 1), (1, 2, 1)\big)\), et \(\operatorname{Mat}_{\mathcal B}(f) = \operatorname{diag}(1, 1, -3)\).</div>
       </div>
     </div>
 
@@ -1115,22 +1124,23 @@ window.MathJax = {
           <img src="td3-img/ex11.png" alt="Énoncé TD3 Exercice 11 — matrice A de f dans la base canonique" loading="lazy">
           <figcaption>Énoncé (TD3, L. Graissot) — Exercice 11 (dernière page du TD).</figcaption>
         </figure>
-        \[ A=\begin{pmatrix}3&-2&-4\\1&0&-2\\1&-1&-1\end{pmatrix}. \]
+        <div class="enonce">\(A=\begin{pmatrix}3&-2&-4\\1&0&-2\\1&-1&-1\end{pmatrix}\).</div>
 
         <p class="q">1) Calcul de \(A^2\) ; conséquence pour \(f\)</p>
-        <p>Ligne 1 de \(A\) × colonnes de \(A\) : \((9-2-4,\ -6+0+4,\ -12+4+4)=(3,-2,-4)\). Ligne 2 : \((3+0-2,\ -2+0+2,\ -4+0+2)=(1,0,-2)\). Ligne 3 : \((3-1-1,\ -2+0+1,\ -4+2+1)=(1,-1,-1)\).</p>
-        <div class="res">\(A^2=A\), donc \(f\circ f=f\) : \(f\) est un <b>projecteur</b>. On a \(\mathbb R^3=\operatorname{Ker}f\oplus\operatorname{Im}f\) et \(f\) est l'identité sur \(\operatorname{Im}f\).</div>
+        <p>Ligne 1 de \(A\) par les colonnes de \(A\) : \((9 - 2 - 4,\ -6 + 4,\ -12 + 4 + 4) = (3, -2, -4)\). Ligne 2 : \((3 - 2,\ -2 + 2,\ -4 + 2) = (1, 0, -2)\). Ligne 3 : \((3 - 1 - 1,\ -2 + 1,\ -4 + 2 + 1) = (1, -1, -1)\).</p>
+        <div class="res">\(A^2 = A\), donc \(f \circ f = f\) : \(f\) est un <b>projecteur</b>. Ainsi \(\mathbb R^3 = \operatorname{Ker}f \oplus \operatorname{Im}f\) et \(f\) est l'identité sur \(\operatorname{Im}f\).</div>
 
         <p class="q">2) Base de \(\operatorname{Ker}f\) et de \(\operatorname{Im}f\)</p>
-        <p><b>Noyau.</b> \(AX=0\) : ligne 2 donne \(x=2z\) ; ligne 3 donne \(x-y-z=0\), soit \(y=z\). Ligne 1 : \(6z-2z-4z=0\) ✓. Donc \(\operatorname{Ker}f=\operatorname{Vect}(2,1,1)\), dimension \(1\).</p>
-        <p><b>Image.</b> Comme \(f\) est un projecteur, \(\operatorname{Im}f=\operatorname{Ker}(f-\mathrm{id})\) : \((A-I)X=0\) avec \(A-I=\begin{pmatrix}2&-2&-4\\1&-1&-2\\1&-1&-2\end{pmatrix}\), soit \(x-y-2z=0\). Base : \((1,1,0)\), \((2,0,1)\), dimension \(2\).</p>
-        <p>Contrôle : \(A(1,1,0)=(1,1,0)\) et \(A(2,0,1)=(2,0,1)\) ✓ ; \(A(2,1,1)=(0,0,0)\) ✓.</p>
-        <div class="res">\(\operatorname{Ker}f=\operatorname{Vect}\big((2,1,1)\big)\), \(\operatorname{Im}f=\operatorname{Vect}\big((1,1,0),(2,0,1)\big)\).</div>
+        <p class="etape">Étape 1 : noyau</p>
+        <p>\(AX = 0\) : la ligne 2 donne \(x = 2z\), la ligne 3 donne \(y = z\), et la ligne 1 est vérifiée (\(6z - 2z - 4z = 0\)).</p>
+        <p class="etape">Étape 2 : image</p>
+        <p>Pour un projecteur, \(\operatorname{Im}f = \operatorname{Ker}(f - \mathrm{id})\) : \((A - I)X = 0\) donne \(x - y - 2z = 0\). Base \((1, 1, 0)\), \((2, 0, 1)\).</p>
+        <p>Contrôle : \(A(1, 1, 0) = (1, 1, 0)\), \(A(2, 0, 1) = (2, 0, 1)\), \(A(2, 1, 1) = 0\).</p>
+        <div class="res">\(\operatorname{Ker}f = \operatorname{Vect}\big((2, 1, 1)\big)\) ; \(\operatorname{Im}f = \operatorname{Vect}\big((1, 1, 0), (2, 0, 1)\big)\).</div>
 
         <p class="q">3) Matrice de \(f\) dans une base de vecteurs de \(\operatorname{Ker}f\) et \(\operatorname{Im}f\)</p>
-        <p>Base \(\mathcal B=(u_1,u_2,u_3)\) avec \(u_1=(2,1,1)\in\operatorname{Ker}f\), \(u_2=(1,1,0)\) et \(u_3=(2,0,1)\) dans \(\operatorname{Im}f\). Matrice de passage \(P=\begin{pmatrix}2&1&2\\1&1&0\\1&0&1\end{pmatrix}\), \(\det P=2(1)-1(1)+2(-1)=-1\neq0\) : c'est une base.
-        \(f(u_1)=0\), \(f(u_2)=u_2\), \(f(u_3)=u_3\).</p>
-        <div class="res">\(\operatorname{Mat}_{\mathcal B}(f)=\operatorname{diag}(0,\,1,\,1)\), soit \(P^{-1}AP=\operatorname{diag}(0,1,1)\).</div>
+        <p>Base \(u_1 = (2, 1, 1)\) (noyau), \(u_2 = (1, 1, 0)\), \(u_3 = (2, 0, 1)\) (image). \(P = \begin{pmatrix}2&1&2\\1&1&0\\1&0&1\end{pmatrix}\), \(\det P = 2 - 1 - 2 = -1 \neq 0\). Alors \(f(u_1) = 0\), \(f(u_2) = u_2\), \(f(u_3) = u_3\).</p>
+        <div class="res">\(\operatorname{Mat}_{\mathcal B}(f) = \operatorname{diag}(0, 1, 1)\), soit \(P^{-1}AP = \operatorname{diag}(0, 1, 1)\).</div>
       </div>
     </div>
 
@@ -1142,17 +1152,21 @@ window.MathJax = {
           <img src="td3-img/ex12.png" alt="Énoncé TD3 Exercice 12 — matrice M de s dans la base canonique" loading="lazy">
           <figcaption>Énoncé (TD3, L. Graissot) — Exercice 12 (dernière page du TD).</figcaption>
         </figure>
-        \[ M=\begin{pmatrix}0&-2&-1\\0&1&0\\-1&-2&0\end{pmatrix}. \]
+        <div class="enonce">\(M=\begin{pmatrix}0&-2&-1\\0&1&0\\-1&-2&0\end{pmatrix}\), matrice de \(s\) dans la base canonique. Montrer que \(s\) est une symétrie et préciser ses éléments caractéristiques.</div>
 
         <p class="q">Prouver que \(s\) est une symétrie</p>
-        <p>Ligne 1 × colonnes : \((0+0+1,\ 0-2+2,\ 0+0+0)=(1,0,0)\). Ligne 2 : \((0,1,0)\). Ligne 3 \((-1,-2,0)\) : colonne 1 \(\to(-1)(0)+(-2)(0)+0(-1)=0\), colonne 2 \(\to(-1)(-2)+(-2)(1)+0=0\), colonne 3 \(\to(-1)(-1)+(-2)(0)+0=1\) : \((0,0,1)\).</p>
-        <div class="res">\(M^2=I\), donc \(s\circ s=\mathrm{id}\). Comme \(M\neq\pm I\), \(s\) est une <b>symétrie</b> (involution non triviale).</div>
+        <div class="rappel"><span class="lab">Rappel · symétrie</span>Une symétrie est un endomorphisme \(s\) avec \(s \circ s = \mathrm{id}\), \(s \neq \pm\mathrm{id}\).</div>
+        <p>Calcul de \(M^2\) : ligne 1 \(\to (0 + 0 + 1,\ 0 - 2 + 2,\ 0)= (1, 0, 0)\) ; ligne 2 \(\to (0, 1, 0)\) ; ligne 3 \(\to (0, 0, 1)\).</p>
+        <div class="res">\(M^2 = I\), donc \(s \circ s = \mathrm{id}\). Comme \(M \neq \pm I\), \(s\) est une <b>symétrie</b>.</div>
 
         <p class="q">Éléments caractéristiques</p>
-        <p><b>Espace fixe</b> \(\operatorname{Ker}(s-\mathrm{id})=\operatorname{Ker}(M-I)\) : \(M-I=\begin{pmatrix}-1&-2&-1\\0&0&0\\-1&-2&-1\end{pmatrix}\), donc \(x+2y+z=0\). C'est un plan \(\mathcal P\), base \((2,-1,0)\), \((1,0,-1)\). Contrôle : \(M(2,-1,0)=(2,-1,0)\) ✓.</p>
-        <p><b>Direction</b> \(\operatorname{Ker}(s+\mathrm{id})=\operatorname{Ker}(M+I)\) : \(M+I=\begin{pmatrix}1&-2&-1\\0&2&0\\-1&-2&1\end{pmatrix}\) ; ligne 2 donne \(y=0\), ligne 1 donne \(x=z\). Direction \(\mathcal D=\operatorname{Vect}(1,0,1)\). Contrôle : \(M(1,0,1)=(-1,0,-1)=-(1,0,1)\) ✓.</p>
-        <p>\((1,0,1)\notin\mathcal P\) car \(1+0+1=2\neq0\) : \(\mathbb R^3=\mathcal P\oplus\mathcal D\).</p>
-        <div class="res">\(s\) est la <b>symétrie par rapport au plan \(\mathcal P : x+2y+z=0\), parallèlement à la droite \(\mathcal D=\operatorname{Vect}(1,0,1)\)</b>.</div>
+        <p class="etape">Étape 1 : le plan fixe \(\operatorname{Ker}(s - \mathrm{id})\)</p>
+        <p>\(M - I = \begin{pmatrix}-1&-2&-1\\0&0&0\\-1&-2&-1\end{pmatrix}\) donne \(x + 2y + z = 0\). Base \((2, -1, 0)\), \((1, 0, -1)\). Contrôle : \(M(2, -1, 0) = (2, -1, 0)\).</p>
+        <p class="etape">Étape 2 : la direction \(\operatorname{Ker}(s + \mathrm{id})\)</p>
+        <p>\(M + I = \begin{pmatrix}1&-2&-1\\0&2&0\\-1&-2&1\end{pmatrix}\) : la ligne 2 donne \(y = 0\), la ligne 1 donne \(x = z\). Direction \(\operatorname{Vect}(1, 0, 1)\). Contrôle : \(M(1, 0, 1) = -(1, 0, 1)\).</p>
+        <p class="etape">Étape 3 : supplémentaires</p>
+        <p>\((1, 0, 1) \notin \mathcal P\), car \(1 + 0 + 1 = 2 \neq 0\) : \(\mathbb R^3 = \mathcal P \oplus \mathcal D\).</p>
+        <div class="res">\(s\) est la <b>symétrie par rapport au plan \(\mathcal P : x + 2y + z = 0\), parallèlement à la droite \(\mathcal D = \operatorname{Vect}(1, 0, 1)\)</b>.</div>
       </div>
     </div>
 
@@ -1166,23 +1180,26 @@ window.MathJax = {
         </figure>
 
         <p class="q">1) Matrices du déplacement et image d'un vecteur quelconque</p>
-        <p>La <b>translation</b> \(t(x,y,z)=(x+1,y,z)\) n'est pas linéaire (\(t(0)\neq0\)) : on passe en <b>coordonnées homogènes</b> \((x,y,z,1)\) pour que tout soit une matrice \(4\times4\).</p>
-        <p>Rotation d'angle \(\tfrac\pi2\) autour de \(Oz\) : \((x,y)\mapsto(-y,x)\), \(z\mapsto z\), soit \(R=\begin{pmatrix}0&-1&0\\1&0&0\\0&0&1\end{pmatrix}\) (partie linéaire).</p>
-        \[ T=\begin{pmatrix}1&0&0&1\\0&1&0&0\\0&0&1&0\\0&0&0&1\end{pmatrix},\qquad
-        \mathrm{Rot}=\begin{pmatrix}0&-1&0&0\\1&0&0&0\\0&0&1&0\\0&0&0&1\end{pmatrix}. \]
-        <p>Le robot translate <b>puis</b> tourne : la translation agit en premier, donc elle est à droite dans le produit \(\mathcal A=\mathrm{Rot}\times T\) :</p>
-        \[ \mathcal A=\mathrm{Rot}\,T=\begin{pmatrix}0&-1&0&0\\1&0&0&1\\0&0&1&0\\0&0&0&1\end{pmatrix}. \]
-        <div class="res">Pour un point \(M(x,y,z)\), son image est \(M'(-y,\ x+1,\ z)\) : \(\mathcal A\,(x,y,z,1)^T=(-y,\ x+1,\ z,\ 1)^T\). Pour un <b>vecteur</b> \(\vec v=(x,y,z)\), la translation ne le déplace pas : son image est \((-y,\ x,\ z)\).</div>
-        <div class="warnbox"><span class="lab">Piège</span> Inverser l'ordre (rotation puis translation) donnerait \((-y+1,\ x,\ z)\) : le texte dit « translation <b>suivie</b> d'une rotation », donc la translation agit en premier.</div>
+        <p class="etape">Étape 1 : pourquoi les coordonnées homogènes</p>
+        <p>La translation \(t(x, y, z) = (x + 1, y, z)\) n'est pas linéaire (\(t(0) \neq 0\)). On passe en coordonnées homogènes \((x, y, z, 1)\) pour tout écrire avec des matrices \(4\times4\).</p>
+        <p class="etape">Étape 2 : les deux matrices</p>
+        <p>La rotation d'angle \(\frac\pi2\) autour de \(Oz\) est \((x, y) \mapsto (-y, x)\), \(z \mapsto z\) :</p>
+        \[ T = \begin{pmatrix}1&0&0&1\\0&1&0&0\\0&0&1&0\\0&0&0&1\end{pmatrix} \qquad \mathrm{Rot} = \begin{pmatrix}0&-1&0&0\\1&0&0&0\\0&0&1&0\\0&0&0&1\end{pmatrix} \]
+        <p class="etape">Étape 3 : l'ordre</p>
+        <p>La translation agit d'abord, donc elle est à droite dans le produit :</p>
+        \[ \mathcal A = \mathrm{Rot}\,T = \begin{pmatrix}0&-1&0&0\\1&0&0&1\\0&0&1&0\\0&0&0&1\end{pmatrix} \]
+        <div class="res">Un point \(M(x, y, z)\) a pour image \(M'(-y,\ x + 1,\ z)\), car \(\mathcal A\,(x, y, z, 1)^T = (-y, x + 1, z, 1)^T\). Un <b>vecteur</b> \((x, y, z)\) n'est pas déplacé par la translation : son image est \((-y, x, z)\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> Inverser l'ordre (rotation puis translation) donnerait \((-y + 1, x, z)\). Le texte dit « translation suivie d'une rotation » : la translation agit en premier.</div>
 
         <p class="q">2) Image de \(M(1,-1,0)\)</p>
-        <p>\(\mathcal A\,(1,-1,0,1)^T=(-(-1),\ 1+1,\ 0,\ 1)^T=(1,2,0,1)^T\).</p>
-        <div class="res">La pièce initialement en \(M(1,-1,0)\) arrive en \((1,2,0)\).</div>
+        \[ \mathcal A\,(1, -1, 0, 1)^T = (1,\ 1 + 1,\ 0,\ 1)^T \]
+        <div class="res">La pièce initialement en \(M(1, -1, 0)\) arrive en \((1, 2, 0)\).</div>
 
         <p class="q">3) Point de départ pour arriver en \(N(1,\sqrt3,0)\)</p>
-        <p>On cherche \(P(x,y,z)\) tel que \((-y,\ x+1,\ z)=(1,\sqrt3,0)\) : \(y=-1\), \(x=\sqrt3-1\), \(z=0\).</p>
-        <p>Contrôle : l'image de \(P\) est \((1,\ \sqrt3-1+1,\ 0)=(1,\sqrt3,0)\) ✓.</p>
-        <div class="res">Il faut positionner la pièce en \(P\big(\sqrt3-1,\ -1,\ 0\big)\).</div>
+        <p>On cherche \(P(x, y, z)\) tel que \((-y,\ x + 1,\ z) = (1, \sqrt3, 0)\) :</p>
+        \[ y = -1 \qquad x = \sqrt3 - 1 \qquad z = 0 \]
+        <p>Contrôle : l'image de \(P\) est \((1,\ \sqrt3 - 1 + 1,\ 0) = (1, \sqrt3, 0)\).</p>
+        <div class="res">Il faut positionner la pièce en \(P\big(\sqrt3 - 1,\ -1,\ 0\big)\).</div>
       </div>
     </div>
   </section>

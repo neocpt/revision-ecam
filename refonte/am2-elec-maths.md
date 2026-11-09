@@ -15,7 +15,7 @@ Modèles suivis : `aem2-electronique/ch6-electronique-numerique.html#td6-ex6` et
 | aem2-electronique/ch6-electronique-numerique.html | fait (Q1–Q10, exercices créés 1–4, TD6 Ex 1–5 ; td6-ex6 inchangé) |
 | aem2-mathematiques/ch1-analyse-asymptotique.html | fait (exercices créés A–B, TD Ex 1–15 ; les 2 fiches « Feuille complémentaire » sont de simples catalogues sans énoncé : laissées telles quelles) |
 | aem2-mathematiques/ch2-applications-lineaires.html | fait (exercices créés A–B, TD Ex 1–10) |
-| aem2-mathematiques/ch3-matrices-applications-lineaires.html | à faire |
+| aem2-mathematiques/ch3-matrices-applications-lineaires.html | fait (exemples 1–14 du cours, exercices créés A–C, TD Ex 1–13) |
 | aem2-mathematiques/ch4-courbes-parametrees.html | à faire |
 | aem2-mathematiques/methodes-par-exercice.html | à faire |
 
@@ -42,6 +42,7 @@ Modèles suivis : `aem2-electronique/ch6-electronique-numerique.html#td6-ex6` et
 - Ch1 maths : tous les DL, équivalents et limites recalculés avec sympy (seize DL de l'Ex 8, DL en un point, dix limites, asymptotes, suite implicite) ; aucune erreur trouvée.
 - Ch2 maths, Ex 1 Q4 : les égalités « \(X^3-7X+6=X(X-1)(X-2)\) » et « \(X^4-15X+14=X^2(X-1)(X-2)\) » étaient fausses (les générateurs étaient bons) ; remplacées par \((X-1)(X-2)(X+3)\) et \((X-1)(X-2)(X^2+3X+7)\), avec un avertissement dans la carte. Autres résultats recalculés à la main : inchangés.
 - Ch2 maths, Ex 7 Q2 : fragment de phrase tronqué (« doit vérifier \(2x-y-z\)… ») supprimé.
+- Ch3 maths : tous les rangs, noyaux, matrices de passage, changements de base, puissances \(A^n\) et projecteurs/symétries recalculés avec sympy ; aucune erreur trouvée.
 
 ## Points incertains
 
