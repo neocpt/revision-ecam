@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ch7 — Moment cinétique — AM2 Physique — Révision ECAM</title>
+<link rel="stylesheet" href="../assets/style.css?v=4">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div id="site-nav"></div>
+<nav class="subnav"><a href="../aem2-electronique/ch6-electronique-numerique.html">← Ch6</a><a href="#memo">📌 Fiche mémo</a><a href="#cours">Cours</a><a href="#app">Applications du cours</a><a href="#td">Correction TD7</a><a href="#docs">Documents</a></nav>
+
+<main class="wrap">
+  <span class="chip">Physique AM2 (2ᵉ année) · Systèmes tournants · Chapitre 7</span>
+  <h1 class="title">Ch7 — Moment cinétique : moment d'inertie, moment d'une force, théorème du moment cinétique</h1>
+  <p class="lead">Pour un point matériel en rotation autour d'un axe fixe, le <b>moment cinétique</b> \(L_\Delta\) est proportionnel à la vitesse angulaire, avec le <b>moment d'inertie</b> \(J_\Delta=mr^2\) comme coefficient. Le <b>théorème du moment cinétique</b> (TMC) relie sa variation à la somme des <b>moments</b> des forces : c'est la version « rotation » du principe fondamental de la dynamique. Ce chapitre donne les définitions, le TMC appliqué à un pendule, et l'équilibre d'un solide (pied de biche, échelle, igloo, pendule à deux masses, expérience de Cavendish). AM2 · P2030 · Semestre 3 — D. Courtois, cours daté du 03/11/2026.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul>
+      <li><a href="#memo">📌 Fiche mémo</a></li>
+      <li><a href="#cours">1. Résumé de cours</a></li>
+      <li><a href="#app">2. Applications du cours (Q1 à Q8)</a></li>
+      <li><a href="#td">3. Correction du TD7 (Ex 1 à 5)</a></li>
+      <li><a href="#docs">📂 Documents donnés</a></li>
+    </ul>
+  </div>
+
+  <section class="memo-sheet" id="memo">
+    <div class="memo-head">📌 Fiche mémo — Moment cinétique</div>
+    <div class="memo-grid">
+      <div class="memo-item"><b>Moment cinétique (point)</b>\(\vec L_O(M)=\overrightarrow{OM}\wedge m\vec v\), unité kg·m²·s⁻¹</div>
+      <div class="memo-item"><b>Axe fixe \(\Delta\)</b>\(L_\Delta=\vec L_O\cdot\vec u_\Delta\) ; ne dépend pas du point \(O\) choisi sur \(\Delta\)</div>
+      <div class="memo-item"><b>Rotation autour d'un axe</b>\(L_\Delta=J_\Delta\,\omega\), avec \(J_\Delta=mr^2\) (kg·m²) et \(\omega=\dot\theta\)</div>
+      <div class="memo-item"><b>Moment d'une force</b>\(\vec{\mathcal M}_O(\vec F)=\overrightarrow{OM}\wedge\vec F\), valeur \(=d\,F\) (d = bras de levier)</div>
+      <div class="memo-item"><b>Moment sur un axe</b>\(\mathcal M_\Delta(\vec F)=\vec{\mathcal M}_O(\vec F)\cdot\vec u_\Delta\) ; seule la composante selon l'axe fait tourner</div>
+      <div class="memo-item"><b>Force parallèle à l'axe, ou dont la droite d'action coupe l'axe</b>\(\mathcal M_\Delta=0\) (pas d'effet de rotation)</div>
+      <div class="memo-item"><b>TMC (point fixe \(O\))</b>\(\dfrac{d\vec L_O}{dt}=\sum\vec{\mathcal M}_O(\vec F_i)\)</div>
+      <div class="memo-item"><b>TMC (axe fixe \(\Delta\))</b>\(\dfrac{dL_\Delta}{dt}=\sum\mathcal M_\Delta(\vec F_i)\) ; à l'équilibre : \(\sum\mathcal M_\Delta=0\)</div>
+      <div class="memo-item method"><b>Méthode</b>choisir l'axe qui élimine le plus d'inconnues (réactions d'axe, réactions passant par \(O\))</div>
+      <div class="memo-item method"><b>Couple</b>deux forces opposées de droites d'action distinctes : moment \(=Fd\), indépendant du point ; ne se réduit à aucune force</div>
+      <div class="memo-item method"><b>Pendule simple</b>\(\ddot\theta+\dfrac gL\sin\theta=0\) ; petits angles \(\omega_0=\sqrt{g/L}\), \(T_0=2\pi\sqrt{L/g}\)</div>
+    </div>
+  </section>
+
+  <!-- ============================ COURS ============================ -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours</h2>
+
+    <h3>1.1 Moment cinétique d'un point par rapport à un point fixe</h3>
+    <div class="rappel"><span class="lab">Définition</span>\[ \vec L_O(M)=\overrightarrow{OM}\wedge m\vec v(M)=\overrightarrow{OM}\wedge\vec p(M) \]</div>
+    <ul>
+      <li>Sa valeur \(L_O=OM\cdot mv\cdot\sin\alpha\) s'exprime en kg·m²·s⁻¹.</li>
+      <li>Sa direction est celle de l'axe instantané de rotation de \(M\) autour de \(O\) (règle de la main droite). Il est perpendiculaire au plan du mouvement passant par \(O\).</li>
+      <li>Changement de point fixe : \(\vec L_{O'}(M)=\overrightarrow{O'O}\wedge\vec p(M)+\vec L_O(M)\).</li>
+    </ul>
+
+    <h3>1.2 Moment cinétique scalaire par rapport à un axe orienté</h3>
+    <div class="rappel"><span class="lab">Définition</span>\[ L_\Delta(M)=\vec L_O(M)\cdot\vec u_\Delta \]</div>
+    <p>C'est la projection du moment cinétique vectoriel sur l'axe \(\Delta\). Si \(\vec L_O\) est colinéaire à l'axe, \(L_\Delta\) est simplement sa norme.</p>
+
+    <h3>1.3 Rotation autour d'un axe fixe</h3>
+    <p>Pour \(\vec u_\Delta=\vec e_z\) fixe :</p>
+    \[ L_\Delta(M)=J_\Delta(M)\,\omega \qquad J_\Delta(M)=m\,r^2 \qquad \omega=\dot\theta \]
+    <p>\(J_\Delta\) mesure l'inertie à la mise en rotation : plus la masse est loin de l'axe, plus elle est difficile à faire tourner.</p>
+
+    <h3>1.4 Moment d'une force</h3>
+    \[ \vec{\mathcal M}_O(\vec F)=\overrightarrow{OM}\wedge\vec F \qquad \mathcal M_O(\vec F)=d\,F \]
+    <p>\(d=OH\) est le <b>bras de levier</b> : distance la plus courte entre \(O\) et la droite d'action de \(\vec F\). Unité : N·m.</p>
+    <div class="rappel"><span class="lab">Moment sur un axe</span>\[ \mathcal M_\Delta(\vec F)=\vec{\mathcal M}_O(\vec F)\cdot\vec u_\Delta \]</div>
+    <p>La composante de \(\vec{\mathcal M}_O\) perpendiculaire à l'axe ne fait pas tourner le système : elle est équilibrée par la réaction de l'axe.</p>
+
+    <h3>1.5 Théorème du moment cinétique</h3>
+    <div class="rappel"><span class="lab">TMC</span>\[ \frac{d\vec L_O(M)}{dt}=\sum_i\vec{\mathcal M}_O(\vec F_i)\qquad\qquad \frac{dL_\Delta(M)}{dt}=\sum_i\mathcal M_\Delta(\vec F_i) \]</div>
+    <p>Le TMC est le PFD écrit en rotation : on prend \(\overrightarrow{OM}\wedge\) du PFD (voir Q6). À l'équilibre, \(\sum\mathcal M_\Delta(\vec F_i)=0\), soit \(L_\Delta\) constant.</p>
+  </section>
+
+  <!-- ============================ APPLICATIONS DU COURS ============================ -->
+  <section class="block" id="app">
+    <h2>2. Applications du cours (Q1 à Q8)</h2>
+    <p class="lead">Chaque question du polycopié est reprise. Les questions Q1 à Q7 se traitent sans figure. Q8 demande une lecture à l'échelle de la figure, expliquée à la fin.</p>
+
+    <div class="exo-card">
+      <div class="exo-head">Q1 — Expression de \(L_O\) en coordonnées cylindriques</div>
+      <div class="exo-body">
+        <p class="q">1) Produit vectoriel en base orthonormée directe</p>
+        <p class="etape">Étape 1 : formule</p>
+        <div class="rappel"><span class="lab">Rappel · produit vectoriel</span>\[ \vec w=\vec u\wedge\vec v \quad\Rightarrow\quad w_x=u_yv_z-u_zv_y,\; w_y=u_zv_x-u_xv_z,\; w_z=u_xv_y-u_yv_x \]</div>
+        <p class="etape">Étape 2 : position et vitesse dans la base cylindrique</p>
+        <p>Le mouvement est plan, perpendiculaire à \(\vec e_z\) : \(z_M\) est constant. Donc :</p>
+        \[ \overrightarrow{OM}=r\,\vec e_r \qquad \vec v=\dot r\,\vec e_r+r\dot\theta\,\vec e_\theta \]
+        <p class="etape">Étape 3 : produit vectoriel</p>
+        \[ \overrightarrow{OM}\wedge m\vec v=m\,r\,\vec e_r\wedge\left(\dot r\,\vec e_r+r\dot\theta\,\vec e_\theta\right)=m\,r^2\dot\theta\;\vec e_r\wedge\vec e_\theta \]
+        <p>Dans la base cylindrique directe, \(\vec e_r\wedge\vec e_\theta=\vec e_z\). Donc :</p>
+        <div class="res">\(\vec L_O(M)=m\,r^2\,\dot\theta\;\vec e_z\)</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q2 — \(L_\Delta\) ne dépend pas du point \(O\) choisi sur \(\Delta\)</div>
+      <div class="exo-body">
+        <p class="q">Démonstration</p>
+        <p class="etape">Étape 1 : deux points \(O\) et \(O'\) sur \(\Delta\)</p>
+        <p>\(\overrightarrow{OM}=\overrightarrow{OO'}+\overrightarrow{O'M}\) donc :</p>
+        \[ \vec L_O(M)=\overrightarrow{OO'}\wedge\vec p+\vec L_{O'}(M) \]
+        <p class="etape">Étape 2 : projection sur l'axe</p>
+        <p>\(\overrightarrow{OO'}\) est dirigé selon \(\Delta\), donc \(\overrightarrow{OO'}\wedge\vec p\) est perpendiculaire à \(\overrightarrow{OO'}\), donc à \(\vec u_\Delta\). Son produit scalaire avec \(\vec u_\Delta\) est nul :</p>
+        \[ L_\Delta(M)=\left(\overrightarrow{OO'}\wedge\vec p\right)\cdot\vec u_\Delta+L_{O'\Delta}(M)=L_{O'\Delta}(M) \]
+        <div class="res">\(L_\Delta\) est le même quel que soit le point de \(\Delta\) choisi.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q3 — Signe de \(L_\Delta\) et sens de rotation</div>
+      <div class="exo-body">
+        <p class="q">Réponse</p>
+        <ul>
+          <li>On oriente \(\Delta\) par \(\vec u_\Delta\). Si \(M\) tourne <b>dans le sens direct</b> (règle de la main droite autour de \(\vec u_\Delta\)), \(\dot\theta>0\) et \(L_\Delta>0\).</li>
+          <li>Si \(M\) tourne dans le sens contraire, \(L_\Delta&lt;0\).</li>
+        </ul>
+        <div class="warnbox"><span class="lab">Piège</span> Le signe dépend uniquement de l'orientation choisie pour \(\vec u_\Delta\). Changer l'orientation de l'axe change le signe de \(L_\Delta\) et de \(\omega\), mais pas le sens physique de la rotation.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q4 — Moment d'une force sur un axe, indépendant de \(O\)</div>
+      <div class="exo-body">
+        <p class="q">1) Moment en \(O'\)</p>
+        \[ \vec{\mathcal M}_{O'}(\vec F)=\overrightarrow{O'M}\wedge\vec F=\left(\overrightarrow{O'O}+\overrightarrow{OM}\right)\wedge\vec F=\overrightarrow{O'O}\wedge\vec F+\vec{\mathcal M}_O(\vec F) \]
+        <p class="q">2) Projection sur \(\Delta\)</p>
+        <p class="etape">Étape 1 : terme parasite</p>
+        <p>\(\overrightarrow{O'O}\) est selon \(\Delta\), donc \(\overrightarrow{O'O}\wedge\vec F\) est perpendiculaire à \(\vec u_\Delta\) : son produit scalaire avec \(\vec u_\Delta\) est nul.</p>
+        <p class="etape">Étape 2 : conclusion</p>
+        <div class="res">\(\mathcal M_\Delta(\vec F)=\vec{\mathcal M}_{O'}(\vec F)\cdot\vec u_\Delta=\vec{\mathcal M}_O(\vec F)\cdot\vec u_\Delta\) : le moment sur l'axe ne dépend pas du point fixe choisi.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q5 — Ouvrir une porte avec la force la plus faible</div>
+      <div class="exo-body">
+        <p class="q">Paramètres et directions</p>
+        <ul>
+          <li>Le moment est \(\mathcal M_\Delta=d\,F\). Pour un moment donné, la force la plus faible est celle qui a le <b>plus grand bras de levier</b> \(d\) : on pousse ou tire le plus loin possible de la charnière, à la poignée et non près de l'axe.</li>
+          <li>La force doit être <b>perpendiculaire au plan de la porte</b> (la direction qui donne le bras de levier maximal). Une force <b>parallèle à l'axe</b> (charnière) n'a aucun effet.</li>
+          <li>Une force dont la droite d'action <b>coupe l'axe</b> n'a aucun effet, quelle que soit son intensité : \(d=0\).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q6 — Le TMC est le PFD appliqué à la rotation</div>
+      <div class="exo-body">
+        <p class="q">Démonstration</p>
+        <p class="etape">Étape 1 : dérivée du moment cinétique</p>
+        \[ \frac{d\vec L_O}{dt}=\frac{d}{dt}\left(\overrightarrow{OM}\wedge m\vec v\right)=\underbrace{\vec v\wedge m\vec v}_{=\,\vec 0}+\overrightarrow{OM}\wedge m\vec a \]
+        <p class="etape">Étape 2 : PFD</p>
+        <p>Le PFD donne \(m\vec a=\sum\vec F_i\). Donc :</p>
+        \[ \frac{d\vec L_O}{dt}=\overrightarrow{OM}\wedge\sum\vec F_i=\sum\vec{\mathcal M}_O(\vec F_i) \]
+        <div class="res">C'est le TMC : on a multiplié le PFD vectoriellement par \(\overrightarrow{OM}\). Il n'apporte pas d'information nouvelle, mais il fait apparaître directement la rotation et permet d'éliminer les réactions qui passent par \(O\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q7 — Pendule simple : \(dL_\Delta/dt\), puis équation du mouvement</div>
+      <div class="exo-body">
+        <p class="q">1) Valeur de \(dL_\Delta/dt\) à \(\theta=30^\circ\)</p>
+        <p class="etape">Étape 1 : moment du poids</p>
+        <p>Le fil est sans masse, la réaction passe par le pivot \(O\) : son moment est nul. Seul le poids \(m\vec g\) a un moment sur l'axe. Son bras de levier vaut \(L\sin\theta\) :</p>
+        \[ \mathcal M_\Delta(m\vec g)=-m\,g\,L\sin\theta \]
+        <p class="etape">Étape 2 : signe</p>
+        <p>Le poids ramène le pendule vers la verticale : le moment est négatif pour \(\theta>0\).</p>
+        <p class="etape">Étape 3 : application numérique</p>
+        \[ \frac{dL_\Delta}{dt}=-0{,}050\times9{,}81\times0{,}40\times\sin 30^\circ=-0{,}0981\ \text{N·m} \]
+        <div class="res">\(\dfrac{dL_\Delta}{dt}\approx-9{,}8\cdot10^{-2}\ \text{N·m}\) à \(\theta=30^\circ\) (le signe négatif : la rotation est freinée par le poids).</div>
+
+        <p class="q">2) Équation différentielle</p>
+        <p class="etape">Étape 1 : \(L_\Delta=J_\Delta\dot\theta\)</p>
+        <p>Pour un point à distance \(L\) de l'axe, \(J_\Delta=mL^2\). Donc \(L_\Delta=mL^2\dot\theta\) et \(\dfrac{dL_\Delta}{dt}=mL^2\ddot\theta\).</p>
+        <p class="etape">Étape 2 : TMC</p>
+        \[ mL^2\ddot\theta=-mgL\sin\theta \quad\Longrightarrow\quad \ddot\theta+\frac gL\sin\theta=0 \]
+        <p class="etape">Étape 3 : petits angles</p>
+        <div class="rappel"><span class="lab">Rappel · petits angles</span>\[ \sin\theta\simeq\theta \text{ pour } \theta\ \text{petit (en radians)} \]</div>
+        \[ \ddot\theta+\omega_0^2\,\theta=0 \qquad \omega_0=\sqrt{\frac gL} \]
+        <p>C'est l'équation d'un oscillateur harmonique : le mouvement est <b>sinusoïdal, non amorti</b>, de pulsation propre \(\omega_0\).</p>
+        <div class="res">\(\omega_0=\sqrt{g/L}=\sqrt{9{,}81/0{,}40}\approx4{,}95\ \text{rad·s}^{-1}\), donc \(T_0=2\pi/\omega_0\approx1{,}27\ \text{s}\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> La masse \(m=50\) g n'intervient pas dans \(\omega_0\) : elle se simplifie entre \(mL^2\) et \(mgL\). Le résultat ne dépend que de \(L\) et de \(g\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q8 — La barre ABC reste-t-elle immobile ?</div>
+      <div class="exo-body">
+        <figure>
+          <img src="ch7-img/cours-q8-barre.png" alt="Barre ABC pivotant autour de l'axe Delta en O, avec trois forces F1 en A vers le bas, F2 en B vers le bas, F3 en C" loading="lazy">
+          <figcaption>Figure du cours, Q8 — barre ABC, pivot en O</figcaption>
+        </figure>
+        <p class="q">Méthode</p>
+        <p class="etape">Étape 1 : moments sur \(\Delta\)</p>
+        <p>Chaque force verticale a un moment sur l'axe horizontal \(\Delta\) égal à son intensité multipliée par sa distance horizontale à \(O\), avec un signe selon le côté (A et B, C de part et d'autre de \(O\)). La barre est en équilibre (sans rotation) si :</p>
+        \[ \sum_i\mathcal M_\Delta(\vec F_i)=0 \]
+        <p class="etape">Étape 2 : lecture de la figure</p>
+        <p>La figure est tracée « à l'échelle » mais ne donne aucune valeur numérique. La réponse se lit donc en mesurant sur la figure les bras de levier \(OA\), \(OB\), \(OC\) et les longueurs des flèches \(F_1\), \(F_2\), \(F_3\).</p>
+        <div class="warnbox"><span class="lab">Non traité ici</span> Je n'ai pas fait la lecture à l'échelle : la figure ne donne pas de valeurs chiffrées, et je ne veux pas inventer un résultat. Si la somme des moments est non nulle, la barre tourne dans le sens du moment dominant ; si elle est nulle, elle reste immobile.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ TD7 ============================ -->
+  <section class="block" id="td">
+    <h2>3. Correction du TD7 (Ex 1 à 5)</h2>
+    <p class="lead">Le TD7 fourni n'a pas de corrigé officiel : les corrections sont rédigées par nous et signalées comme telles. Les résultats numériques ont été recalculés (Python). Les hypothèses prises sont écrites dans chaque exercice.</p>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 1 — Équilibre d'un pied de biche <span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <figure>
+          <img src="ch7-img/ex1-enonce.png" alt="Énoncé Exercice 1 du TD7 : pied de biche AOB, force F en B perpendiculaire à OB, force R en A, angle alpha de 30 degrés" loading="lazy">
+          <figcaption>Énoncé (TD7, Ex 1)</figcaption>
+        </figure>
+        <p class="enonce">Données : \(F=200\) N, \(OA=10\) cm, \(OB=70\) cm, \(\alpha=30^\circ\). Le pied de biche tourne autour d'un axe \(\Delta\) passant par \(O\). Masse négligeable.</p>
+
+        <p class="q">1) Lien entre \(F\) et \(R\) (théorème du moment cinétique)</p>
+        <p class="etape">Étape 1 : choix de l'axe et bilan des moments</p>
+        <p>On applique le TMC en équilibre, autour de \(\Delta\). La réaction \(\vec R'\) du sol passe par \(O\) : son moment est nul. Restent \(\vec F\) en \(B\) et l'action du clou en \(A\), verticale d'après la figure.</p>
+        \[ \mathcal M_\Delta(\vec F)+\mathcal M_\Delta(\vec R_{\text{clou}})=0 \]
+        <p class="etape">Étape 2 : moment de \(\vec F\)</p>
+        <p>\(\vec F\) est perpendiculaire à \(OB\) : son bras de levier est \(OB\).</p>
+        \[ |\mathcal M_\Delta(\vec F)|=OB\cdot F=0{,}70\times200=140\ \text{N·m} \]
+        <p class="etape">Étape 3 : moment de \(\vec R\)</p>
+        <div class="rappel"><span class="lab">Rappel · bras de levier</span>Le bras de levier d'une force est la distance de \(O\) à sa droite d'action. Ici \(\vec R\) est verticale, passant par \(A\) : la distance horizontale de \(O\) à cette verticale est \(OA\sin\alpha\), car \(OA\) fait un angle \(\alpha\) avec la verticale.</div>
+        \[ d_R=OA\sin\alpha=0{,}10\times\sin30^\circ=0{,}050\ \text{m} \]
+        <p class="etape">Étape 4 : équilibre des moments</p>
+        \[ OB\cdot F=d_R\cdot R \quad\Longrightarrow\quad R=\frac{OB}{OA\sin\alpha}\,F=14\,F \]
+        <div class="res">\(R=\dfrac{OB}{OA\sin\alpha}F=14F=2{,}8\cdot10^{3}\ \text{N}\) pour \(F=200\) N.</div>
+        <div class="warnbox"><span class="lab">Intérêt</span> Le levier multiplie la force par 14. Il faut seulement 200 N en \(B\) pour exercer 2,8 kN sur le clou. Le rapport \(OB/(OA\sin\alpha)\) est l'avantage mécanique.</div>
+        <div class="warnbox"><span class="lab">Hypothèse</span> La direction de \(\vec R\) (verticale, passant par \(A\)) est lue sur la figure. Si la figure était différente, il faudrait refaire le bras de levier.</div>
+
+        <p class="q">2) Réaction du sol \(\vec R'\) (PFD)</p>
+        <p class="etape">Étape 1 : composantes des forces sur le pied de biche</p>
+        <p>Le sens de \(\vec F\) est perpendiculaire à \(OB\), vers le bas et vers la droite : \(\vec F=F(\sin\alpha\,;\,-\cos\alpha)\) dans le repère (horizontal, vertical). L'action du clou est verticale vers le bas :</p>
+        \[ \vec F=\left(100\,;\,-173{,}2\right)\ \text{N} \qquad \vec R_{\text{clou}}=(0\,;\,-2800)\ \text{N} \]
+        <p class="etape">Étape 2 : PFD (masse négligeable)</p>
+        <p>La somme des forces est nulle :</p>
+        \[ \vec F+\vec R_{\text{clou}}+\vec R'=\vec 0 \quad\Longrightarrow\quad \vec R'=-\left(\vec F+\vec R_{\text{clou}}\right)=\left(-100\,;\,2973{,}2\right)\ \text{N} \]
+        <p class="etape">Étape 3 : norme et inclinaison</p>
+        \[ R'=\sqrt{100^2+2973{,}2^2}\approx2{,}97\cdot10^{3}\ \text{N} \qquad \tan\beta=\frac{-100}{2973{,}2}\Rightarrow\beta\approx-1{,}9^\circ \]
+        <div class="res">\(R'\approx2{,}97\ \text{kN}\), inclinée d'environ \(1{,}9^\circ\) par rapport à la verticale, vers la gauche (vers le côté opposé à \(\vec F\)).</div>
+        <div class="warnbox"><span class="lab">Vérification</span> La somme des moments de \(\vec F\) et \(\vec R_{\text{clou}}\) par rapport à \(O\) vaut \(+140-140=0\) : le TMC est bien vérifié. La réaction \(\vec R'\) passe par \(O\), donc elle n'intervient pas dans ce bilan.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 2 — Échelle sur un mur <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <figure>
+          <img src="ch7-img/ex2-enonce.png" alt="Énoncé Exercice 2 du TD7 : échelle AB appuyée sur un mur en B et sur le sol en A, personne à la position x" loading="lazy">
+          <figcaption>Énoncé (TD7, Ex 2)</figcaption>
+        </figure>
+
+        <p class="q">1) Bilan des forces sur {échelle + personne}</p>
+        <p class="etape">Étape 1 : repère</p>
+        <p>On prend \(A\) à l'origine, l'axe \(x\) horizontal dirigé <b>à l'opposé du mur</b> (vers la droite de la figure), l'axe \(y\) vertical vers le haut. Le mur est donc à gauche, et \(\vec u=\overrightarrow{AB}/h=(-\cos\alpha\,;\,\sin\alpha)\).</p>
+        <p class="etape">Étape 2 : forces</p>
+        <ul>
+          <li>Poids de la personne \(m\vec g\), appliqué au point \(P\) à la distance \(x\) de \(A\) : \(\overrightarrow{AP}=x\vec u\).</li>
+          <li>En \(B\) : réaction du mur, horizontale, sans frottement \(\vec N_B=N_B\,\vec e_x\) (poussée du mur vers l'extérieur, c'est-à-dire vers \(+x\)).</li>
+          <li>En \(A\) : réaction du sol \(\vec R_A=T_A\,\vec e_x'+N_A\vec e_y\) avec frottement de Coulomb, \(T_A\) dirigé pour s'opposer au glissement.</li>
+        </ul>
+        <p>Le poids et \(\vec N_B\) sont les deux forces « verticale » et « horizontale » qui agissent sur l'échelle.</p>
+
+        <p class="q">2) Conditions d'équilibre</p>
+        <p class="etape">Étape 1 : PFD (translation)</p>
+        <div class="rappel"><span class="lab">Rappel · PFD à l'équilibre</span>\[ \sum\vec F_i=\vec 0 \]</div>
+        <p>Projection horizontale : \(T_A=N_B\). Projection verticale : \(N_A=mg\).</p>
+        <p class="etape">Étape 2 : TMC autour de \(A\)</p>
+        <p>On écrit les moments par rapport à \(A\), qui élimine \(\vec R_A\) :</p>
+        \[ \mathcal M_A(m\vec g)=\overrightarrow{AP}\wedge m\vec g=x\,mg\cos\alpha \qquad \mathcal M_A(\vec N_B)=\overrightarrow{AB}\wedge N_B\vec e_x=-h\,N_B\sin\alpha \]
+        <p>Le TMC donne :</p>
+        \[ x\,mg\cos\alpha-h\,N_B\sin\alpha=0 \quad\Longrightarrow\quad N_B=\frac{mg\,x}{h}\cot\alpha \]
+        <div class="res">\(T_A=N_B=\dfrac{mg\,x}{h}\cot\alpha\) et \(N_A=mg\).</div>
+
+        <p class="q">3) Pas de glissement si \(f\tan\alpha>1\)</p>
+        <p class="etape">Étape 1 : condition de non-glissement</p>
+        <p>L'énoncé donne \(T_A&lt;f\,N_A\). Avec les résultats de Q2 :</p>
+        \[ \frac{T_A}{N_A}=\frac{x}{h}\cot\alpha&lt;f \]
+        <p class="etape">Étape 2 : cas le plus défavorable</p>
+        <p>Le rapport croît avec \(x\). Il est maximal quand la personne arrive en \(B\), soit \(x=h\) : \(\dfrac{T_A}{N_A}\le\cot\alpha\).</p>
+        <p class="etape">Étape 3 : conclusion</p>
+        <p>Il n'y a aucun glissement pour toute position si \(\cot\alpha&lt;f\), soit \(\dfrac1{\tan\alpha}&lt;f\), soit :</p>
+        <div class="res">\(f\tan\alpha>1\) : pas de glissement quelle que soit la position de la personne.</div>
+        <div class="warnbox"><span class="lab">Piège</span> La condition porte sur \(f\tan\alpha\), donc sur \(\tan\alpha\) et non sur \(\cot\alpha\). Plus l'échelle est verticale (\(\alpha\) grand), plus \(\tan\alpha\) est grand et plus la condition est facile à remplir : c'est logique, car une échelle verticale pousse moins horizontalement le pied sur le sol. Vérification sur un cas simple : pour \(\alpha=45^\circ\), \(\tan\alpha=1\) et la condition devient \(f>1\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 3 — Esquimau glissant sur son igloo <span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <figure>
+          <img src="ch7-img/ex3-enonce.png" alt="Énoncé Exercice 3 du TD7 : esquimau sur un igloo assimilé à une demi-sphère de rayon R" loading="lazy">
+          <figcaption>Énoncé (TD7, Ex 3)</figcaption>
+        </figure>
+        <p class="warnbox"><span class="lab">Hypothèse</span> L'énoncé ne parle pas de frottement : on le néglige. La réaction de l'igloo est donc radiale.</p>
+
+        <p class="q">1) Équation différentielle par le TMC</p>
+        <p class="etape">Étape 1 : position</p>
+        <p>On repère l'esquimau par l'angle \(\theta\) entre la verticale descendante et \(\overrightarrow{OM}\), avec \(OM=R\). Il se déplace sur le cercle : \(L_O=mR^2\dot\theta\).</p>
+        <p class="etape">Étape 2 : moments</p>
+        <p>La réaction \(\vec N\) est radiale, donc passe par \(O\) : moment nul. Le poids a un bras de levier \(R\sin\theta\) :</p>
+        \[ \frac{d}{dt}\left(mR^2\dot\theta\right)=mgR\sin\theta \]
+        <p class="etape">Étape 3 : équation</p>
+        <div class="res">\(R\,\ddot\theta=g\sin\theta\), soit \(\ddot\theta=\dfrac gR\sin\theta\).</div>
+
+        <p class="q">2) Décollage : angle \(\alpha\) où la réaction s'annule</p>
+        <p class="etape">Étape 1 : intégrale première (conservation de l'énergie)</p>
+        <p>On multiplie par \(R\dot\theta\) et on intègre depuis \(\theta=0\), où \(\dot\theta=0\) :</p>
+        \[ \dot\theta^2=\frac{2g}{R}\left(1-\cos\theta\right) \]
+        <p class="etape">Étape 2 : PFD radial</p>
+        <p>Sur \(\vec e_r\) (vers l'extérieur), l'accélération centripète est \(-R\dot\theta^2\). Projection du poids : \(-mg\cos\theta\). Avec la réaction \(N_r\) :</p>
+        \[ -mR\dot\theta^2=-mg\cos\theta+N_r \quad\Longrightarrow\quad N_r=mg\cos\theta-mR\dot\theta^2 \]
+        <p class="etape">Étape 3 : remplacement de \(\dot\theta^2\)</p>
+        \[ N_r=mg\cos\theta-2mg\left(1-\cos\theta\right)=mg\left(3\cos\theta-2\right) \]
+        <p class="etape">Étape 4 : décollage</p>
+        <p>Le contact impose \(N_r\ge0\) ; il est perdu quand \(N_r=0\), soit \(\cos\alpha=\dfrac23\) :</p>
+        <div class="res">\(\alpha=\arccos\!\left(\dfrac23\right)\approx48{,}2^\circ\) par rapport à la verticale. L'esquimau quitte l'igloo à cet angle, et n'atteint pas le sol en restant au contact.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 4 — Entre le pendule simple et le pendule pesant <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <figure>
+          <img src="ch7-img/ex4-enonce.png" alt="Énoncé Exercice 4 du TD7 : tige de masse négligeable avec deux masses m à L/2 et L du pivot" loading="lazy">
+          <figcaption>Énoncé (TD7, Ex 4)</figcaption>
+        </figure>
+
+        <p class="q">1) Relation entre \(\vec L_O\), \(J\) et \(\omega\)</p>
+        <div class="rappel"><span class="lab">Rappel · point en rotation autour d'un point fixe</span>\[ L_\Delta=J_\Delta\,\omega \qquad J_\Delta=\sum_i m_i r_i^2 \]</div>
+        <p>Pour deux masses \(m\) à \(r_1=L/2\) et \(r_2=L\) : \(J_\Delta=m\left(\dfrac L2\right)^2+m\,L^2=\dfrac54\,mL^2\).</p>
+
+        <p class="q">2) Forces et moments</p>
+        <ul>
+          <li>Le pivot est idéal : sa réaction passe par \(O\), moment nul.</li>
+          <li>Le poids de chaque masse : moment \(-mg\dfrac L2\sin\theta\) pour la première, \(-mgL\sin\theta\) pour la seconde (le signe négatif : elles ramènent vers la verticale).</li>
+          <li>La tige est sans masse : pas de poids à considérer.</li>
+        </ul>
+        \[ \sum\mathcal M_\Delta=-\frac32\,mgL\sin\theta \]
+
+        <p class="q">3) Équation du mouvement</p>
+        <p class="etape">Étape 1 : TMC</p>
+        \[ \frac{d}{dt}\left(\frac54\,mL^2\dot\theta\right)=-\frac32\,mgL\sin\theta \]
+        <p class="etape">Étape 2 : simplification</p>
+        \[ \frac54\,mL^2\ddot\theta=-\frac32\,mgL\sin\theta \quad\Longrightarrow\quad \ddot\theta+\frac{6g}{5L}\sin\theta=0 \]
+        <div class="res">On retrouve bien \(\ddot\theta+\dfrac{6g}{5L}\sin\theta=0\).</div>
+
+        <p class="q">4) Nature du mouvement et période</p>
+        <p class="etape">Étape 1 : petits angles</p>
+        \[ \ddot\theta+\omega_0^2\,\theta=0 \qquad \omega_0^2=\frac{6g}{5L} \]
+        <p>Mouvement <b>sinusoïdal non amorti</b> (oscillateur harmonique).</p>
+        <p class="etape">Étape 2 : période</p>
+        \[ T=\frac{2\pi}{\omega_0}=2\pi\sqrt{\frac{5L}{6g}} \]
+        <div class="res">\(T=2\pi\sqrt{\dfrac{5L}{6g}}\) ; pour \(L=1\) m, \(T\approx1{,}83\) s.</div>
+
+        <p class="q">5) Centre de masse et position \(3L/4\)</p>
+        <div class="rappel"><span class="lab">Rappel · centre de masse à une dimension</span>\[ x_G=\frac{\sum_i m_i x_i}{\sum_i m_i} \]</div>
+        \[ x_G=\frac{m\dfrac L2+m\,L}{2m}=\frac{\dfrac32mL}{2m}=\frac34\,L \]
+        <div class="res">\(G\) est à \(3L/4\) du pivot.</div>
+
+        <p class="q">6) Remplacement par une masse \(2m\) en \(G\)</p>
+        <p class="etape">Étape 1 : moment d'inertie et moment du poids</p>
+        <p>Pour une masse ponctuelle \(2m\) en \(G\) :</p>
+        \[ J'=2m\left(\frac{3L}{4}\right)^2=\frac98\,mL^2 \qquad \sum\mathcal M'_\Delta=-2mg\cdot\frac{3L}{4}\sin\theta=-\frac32\,mgL\sin\theta \]
+        <p class="etape">Étape 2 : équation et période</p>
+        \[ \frac98\,mL^2\ddot\theta=-\frac32\,mgL\sin\theta \quad\Longrightarrow\quad \ddot\theta+\frac{4g}{3L}\sin\theta=0 \]
+        \[ \omega_0'^2=\frac{4g}{3L} \qquad T'=2\pi\sqrt{\frac{3L}{4g}} \]
+        <p class="etape">Étape 3 : écart relatif</p>
+        \[ \frac{T'}{T}=\frac{\omega_0}{\omega_0'}=\sqrt{\frac{6g/(5L)}{4g/(3L)}}=\sqrt{0{,}9}\approx0{,}949 \]
+        <div class="res">\(\dfrac{T-T'}{T}=1-\sqrt{0{,}9}\approx5{,}1\,\%\). Ce n'est <b>pas équivalent</b> : la masse ponctuelle en \(G\) a le même moment de poids, mais pas le même moment d'inertie (\(\tfrac98\) contre \(\tfrac54\)). Le TMC doit donc être appliqué au système réel, pas à la masse équivalente.</div>
+        <div class="warnbox"><span class="lab">Piège</span> La position du centre de masse donne le moment des poids, mais le moment d'inertie \(J_\Delta\) dépend de la répartition des masses, pas seulement de la masse totale ni de \(G\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Exercice 5 — Mesure de la constante de gravitation (Cavendish) <span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <figure>
+          <img src="ch7-img/ex5-enonce.png" alt="Énoncé Exercice 5 du TD7 : pendule de torsion de Cavendish, fléau de longueur 2l, petites sphères m et grosses sphères M" loading="lazy">
+          <figcaption>Énoncé (TD7, Ex 5)</figcaption>
+        </figure>
+        <p class="warnbox"><span class="lab">Hypothèse</span> Le texte dit que « le fléau tourne de 2θ = 8,38·10⁻³ rad » entre les positions 1 et 2. Il s'agit du débattement total : la déviation d'équilibre vaut donc \(\theta_{eq}=4{,}19\cdot10^{-3}\) rad (moitié). Si l'énoncé original donnait \(\theta_{eq}\) directement, il faudrait le remplacer.</p>
+
+        <p class="q">1) Couple de force</p>
+        <div class="rappel"><span class="lab">Définition</span>Un couple est formé de deux forces opposées, de même intensité, dont les droites d'action sont distinctes. Son moment vaut \(Fd\) (\(d\) = distance entre les droites), indépendant du point choisi : il produit une pure rotation.</div>
+        <ul>
+          <li><b>Couple moteur</b> : couple d'un moteur électrique, couple exercé pour serrer une vis avec une clé.</li>
+          <li><b>Couple résistant</b> : couple de frottement d'un frein, couple d'une torsion qui s'oppose à la rotation.</li>
+        </ul>
+
+        <p class="q">2) Schéma à l'équilibre (positions 1)</p>
+        <p class="etape">Étape 1 : forces et moments</p>
+        <p>Dans le plan perpendiculaire au fil, chaque petite sphère (masse \(m\)) est attirée vers la grosse sphère la plus proche par une force gravitationnelle \(F\) perpendiculaire au fléau. Le fil en torsion exerce le couple de rappel \(\mathcal M_{torsion}=-C\theta_{eq}\), qui s'oppose à la déviation.</p>
+        <p class="etape">Étape 2 : sens</p>
+        <p>Les deux forces gravitationnelles tournent le fléau dans le même sens : leurs moments s'ajoutent.</p>
+
+        <p class="q">3) Force gravitationnelle en fonction de \(C\), \(\theta_{eq}\), \(l\)</p>
+        <p class="etape">Étape 1 : TMC à l'équilibre</p>
+        <p>Chaque force gravitationnelle a un bras de levier \(l\) (le fléau est perpendiculaire à la direction de la force). Les deux forces donnent un moment total \(2Fl\) :</p>
+        \[ 2Fl-C\,\theta_{eq}=0 \]
+        <div class="res">\(F=\dfrac{C\,\theta_{eq}}{2\,l}\)</div>
+
+        <p class="q">4) Constante de gravitation \(G\)</p>
+        <p class="etape">Étape 1 : loi de Newton</p>
+        \[ F=\frac{G\,M\,m}{d^2} \quad\Longrightarrow\quad G=\frac{F\,d^2}{M\,m} \]
+        <p class="etape">Étape 2 : formule littérale</p>
+        \[ G=\frac{C\,\theta_{eq}\,d^2}{2\,l\,M\,m} \]
+        <p class="etape">Étape 3 : application numérique</p>
+        <p>Données : \(C=6{,}79\cdot10^{-5}\) N·m/rad, \(\theta_{eq}=4{,}19\cdot10^{-3}\) rad, \(l=0{,}93\) m, \(M=158\) kg, \(m=0{,}730\) kg, \(d=0{,}225\) m.</p>
+        \[ F=\frac{6{,}79\cdot10^{-5}\times4{,}19\cdot10^{-3}}{2\times0{,}93}\approx1{,}53\cdot10^{-7}\ \text{N} \]
+        \[ G=\frac{1{,}53\cdot10^{-7}\times0{,}225^2}{158\times0{,}730}\approx6{,}7\cdot10^{-11}\ \text{N·m}^2\text{·kg}^{-2} \]
+        <div class="res">\(G\approx6{,}7\cdot10^{-11}\) N·m²·kg⁻² (valeur admise : \(6{,}674\cdot10^{-11}\)).</div>
+
+        <p class="q">5) Masse volumique de la Terre</p>
+        <p class="etape">Étape 1 : masse de la Terre</p>
+        <p>Au sol, le poids égale l'attraction : \(g=\dfrac{G\,M_T}{R_T^2}\), donc \(M_T=\dfrac{g\,R_T^2}{G}\) :</p>
+        \[ M_T=\frac{9{,}81\times(6{,}37\cdot10^{6})^2}{6{,}7\cdot10^{-11}}\approx6{,}0\cdot10^{24}\ \text{kg} \]
+        <p class="etape">Étape 2 : masse volumique</p>
+        \[ \rho=\frac{M_T}{\tfrac43\pi R_T^3}\approx\frac{6{,}0\cdot10^{24}}{1{,}08\cdot10^{21}}\approx5{,}5\cdot10^{3}\ \text{kg·m}^{-3} \]
+        <div class="res">\(M_T\approx6\cdot10^{24}\) kg et \(\rho\approx5{,}5\cdot10^{3}\) kg·m⁻³ (valeur admise de la Terre : environ \(5{,}5\cdot10^{3}\)).</div>
+        <div class="warnbox"><span class="lab">Piège</span> La formule \(\rho=M_T/V\) suppose une Terre de masse volumique moyenne uniforme. En réalité, la densité augmente vers le centre : c'est le résultat moyen.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Sources de ce chapitre (cours et TD fournis par D. Courtois). Cliquez pour ouvrir le PDF dans le site.</p>
+    <ul class="doc-list">
+      <li><a class="doc-item" href="../assets/pdf.html?f=../documents/aem2-physique/ch7-moment-cinetique/Cours7.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Cours7 — Moment cinétique</span><span class="badge">Cours</span><span class="arrow">↗</span></a></li>
+      <li><a class="doc-item" href="../assets/pdf.html?f=../documents/aem2-physique/ch7-moment-cinetique/Exos7.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Exos7 — TD7</span><span class="badge">TD</span><span class="arrow">↗</span></a></li>
+    </ul>
+    <p class="docs-note">Cursus AM2 · P2030 · Semestre 3 · Partie Systèmes tournants, D. Courtois. Ce chapitre fait suite au <a href="../aem2-electronique/ch6-electronique-numerique.html">Ch6 — Électronique numérique</a>.</p>
+  </section>
+</main>
+<script src="../assets/gate.js"></script>
+<script src="../assets/catalogue.js?v=2"></script>
+<script src="../assets/nav.js?v=2"></script>
+<script src="../assets/lecture.js?v=3"></script>
+</body>
+</html>

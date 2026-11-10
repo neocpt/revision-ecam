@@ -26,7 +26,8 @@ window.CATALOGUE = {
           { n: "Ch3", titre: "ALI en régime linéaire", url: "aem2-electronique/ch3-ali-regime-lineaire.html" },
           { n: "Ch4", titre: "ALI en régime saturé", url: "aem2-electronique/ch4-ali-regime-sature.html" },
           { n: "Ch5", titre: "Oscillateurs auto-entretenus", url: "aem2-electronique/ch5-oscillateurs.html" },
-          { n: "Ch6", titre: "Électronique numérique", url: "aem2-electronique/ch6-electronique-numerique.html" }
+          { n: "Ch6", titre: "Électronique numérique", url: "aem2-electronique/ch6-electronique-numerique.html" },
+          { n: "Ch7", titre: "Moment cinétique (systèmes tournants)", url: "aem2-physique/ch7-moment-cinetique.html" }
         ] }
       ],
       annales: [
