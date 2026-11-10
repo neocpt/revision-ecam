@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ch8 — Forces centrales — AM2 Physique — Révision ECAM</title>
+<link rel="stylesheet" href="../assets/style.css?v=4">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div id="site-nav"></div>
+<nav class="subnav"><a href="ch7-moment-cinetique.html">← Ch7</a><a href="#memo">📌 Fiche mémo</a><a href="#cours">Cours</a><a href="#app">Questions du cours (Q1 à Q21)</a><a href="#docs">Documents</a></nav>
+
+<main class="wrap">
+  <span class="chip">Physique AM2 (2ᵉ année) · Systèmes tournants · Chapitre 8</span>
+  <h1 class="title">Ch8 — Mouvement à force centrale : lois de conservation, énergie potentielle effective, coniques, satellites</h1>
+  <p class="lead">Une force <b>centrale</b> est dirigée vers un point fixe \(O\) : elle n'exerce aucun moment en \(O\). Le moment cinétique se conserve, donc le mouvement est plan et obéit à la loi des aires. Si la force est en plus conservative et en \(1/r^2\) (gravitation, Coulomb), la trajectoire est une conique. Ce chapitre couvre ces résultats, puis leur application aux planètes et aux satellites (géostationnaire, vitesses cosmiques, transfert de Hohmann). AM2 · P2030 · Semestre 3 — D. Courtois, cours daté du 10/11/2026.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul>
+      <li><a href="#memo">📌 Fiche mémo</a></li>
+      <li><a href="#cours">1. Résumé de cours</a></li>
+      <li><a href="#app">2. Questions du cours corrigées (Q1 à Q21)</a></li>
+      <li><a href="#docs">📂 Documents donnés</a></li>
+    </ul>
+  </div>
+
+  <section class="memo-sheet" id="memo">
+    <div class="memo-head">📌 Fiche mémo — Force centrale</div>
+    <div class="memo-grid">
+      <div class="memo-item"><b>Force centrale</b>\(\vec F=F(r)\,\vec e_r\) (dirigée selon \(\overrightarrow{OM}\))</div>
+      <div class="memo-item"><b>Conservation</b>\(\vec{\mathcal M}_O=\vec 0\) ⇒ \(\vec L_O=\text{cte}\) : mouvement plan, loi des aires \(\mathcal A=\tfrac12 C\,\Delta t\), \(C=r^2\dot\theta\)</div>
+      <div class="memo-item"><b>Énergie potentielle</b>\(\vec F=-\dfrac{dE_P}{dr}\,\vec e_r\) ; \(E_M=E_C+E_P\) constante</div>
+      <div class="memo-item"><b>Énergie effective</b>\(E_{Peff}=\dfrac{mC^2}{2r^2}+E_P(r)\) ; \(E_{Peff}(r)\le E_M\)</div>
+      <div class="memo-item"><b>Champ newtonien</b>\(F=\dfrac{K}{r^2}\), \(E_P=\dfrac Kr\) ; gravitation \(K=-Gm_Om_M\) ; Coulomb \(K=\dfrac{q_Oq_M}{4\pi\varepsilon_0}\)</div>
+      <div class="memo-item"><b>Coniques</b>\(r=\dfrac{p}{1-e\cos\theta}\) : cercle \(e=0\), ellipse \(0&lt;e&lt;1\), parabole \(e=1\), hyperbole \(e&gt;1\)</div>
+      <div class="memo-item"><b>Ellipse</b>\(a=\dfrac{r_{min}+r_{max}}2\), \(c=OF=\dfrac{r_{max}-r_{min}}2\), \(e=\dfrac ca\), \(p=\dfrac{b^2}a\), \(b^2=a^2-c^2\)</div>
+      <div class="memo-item"><b>État lié</b>\(E_M&lt;0\) : ellipse (ou cercle), \(r_{min}\le r\le r_{max}\)</div>
+      <div class="memo-item"><b>État de diffusion</b>\(E_M\ge0\) : parabole (\(E_M=0\)) ou branche d'hyperbole (\(E_M&gt;0\))</div>
+      <div class="memo-item method"><b>Cercle</b>\(e=0\) ⇔ \(K^2+2mC^2E_M=0\) ; alors \(r=R=p\) et \(T^2/R^3=4\pi^2/(Gm_S)\)</div>
+      <div class="memo-item method"><b>Vitesses cosmiques</b>\(v_1=\sqrt{Gm_T/R_T}\) (orbite basse) ; \(v_{lib}=\sqrt{2Gm_T/R_T}\) (\(E_M=0\))</div>
+    </div>
+  </section>
+
+  <!-- ============================ COURS ============================ -->
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours</h2>
+
+    <h3>1.1 Force centrale et conservation du moment cinétique</h3>
+    <p>Une force centrale de centre \(O\), appliquée en \(M\), est dirigée selon \(\overrightarrow{OM}\) : \(\vec F=F(r)\,\vec e_r\). Son moment en \(O\) est nul :</p>
+    \[ \vec{\mathcal M}_O(\vec F)=\overrightarrow{OM}\wedge\vec F=r\vec e_r\wedge F\vec e_r=\vec 0 \]
+    <div class="rappel"><span class="lab">TMC</span>\[ \frac{d\vec L_O}{dt}=\vec 0 \quad\Longrightarrow\quad \vec L_O=\text{cte} \]</div>
+    <ul>
+      <li>Le mouvement est <b>plan</b> : il est contenu dans le plan passant par \(O\) et orthogonal à \(\vec L_O\).</li>
+      <li><b>Loi des aires</b> : le rayon vecteur balaie des aires égales pendant des durées égales. Avec \(C=r^2\dot\theta\) (constante des aires) : \(\mathcal A=\tfrac12\,C\,\Delta t\).</li>
+    </ul>
+
+    <h3>1.2 Force centrale conservative et énergie potentielle effective</h3>
+    <p>Une force centrale conservative dérive de \(E_P(r)\) : \(\vec F=-\dfrac{dE_P}{dr}\,\vec e_r\). Elle est attractive si \(F(r)&lt;0\) et répulsive si \(F(r)&gt;0\).</p>
+    <p>En coordonnées polaires, \(v^2=\dot r^2+r^2\dot\theta^2\) et \(\dot\theta=C/r^2\), donc :</p>
+    \[ E_M=\tfrac12 m\dot r^2+\underbrace{\frac{mC^2}{2r^2}+E_P(r)}_{E_{Peff}(r)} \]
+    <p>Les seules valeurs accessibles de \(r\) vérifient \(E_{Peff}(r)\le E_M\). La courbe \(E_{Peff}(r)\) donne donc les limites du mouvement radial.</p>
+
+    <h3>1.3 Champ newtonien : \(F=K/r^2\)</h3>
+    <p>Avec \(E_P(\infty)=0\) : \(E_P=\dfrac Kr\) et \(E_{Peff}=\dfrac{mC^2}{2r^2}+\dfrac Kr\).</p>
+    <ul>
+      <li>Gravitation : \(K=-Gm_Om_M&lt;0\) (attractive).</li>
+      <li>Électrostatique : \(K=\dfrac{q_Oq_M}{4\pi\varepsilon_0}\), \(K&lt;0\) si les charges sont de signes opposés, \(K&gt;0\) sinon.</li>
+    </ul>
+
+    <h3>1.4 Coniques</h3>
+    <p>Une conique de foyer \(F\), de directrice \(\Delta\) et d'excentricité \(e\) est l'ensemble des points tels que \(MF=e\,d(M,\Delta)\). Son équation polaire (origine en \(F\)) est :</p>
+    \[ r=\frac{p}{1-e\cos\theta} \]
+    <table class="tbl">
+      <tr><th>Conique</th><th>Excentricité</th><th>Domaine de \(r\)</th></tr>
+      <tr><td>Cercle</td><td>\(e=0\)</td><td>\(r=p\)</td></tr>
+      <tr><td>Ellipse</td><td>\(0&lt;e&lt;1\)</td><td>\(\left[\dfrac p{1+e}\,;\,\dfrac p{1-e}\right]\)</td></tr>
+      <tr><td>Parabole</td><td>\(e=1\)</td><td>\(\left[\dfrac p2\,;\,+\infty\right[\)</td></tr>
+      <tr><td>Hyperbole</td><td>\(e&gt;1\)</td><td>\(\left[\dfrac p{1+e}\,;\,+\infty\right[\) (une branche)</td></tr>
+    </table>
+    <figure>
+      <img src="ch8-img/coniques.png" alt="Familles de coniques de foyer F : cercles et ellipses en bleu, parabole au centre, hyperboles en rouge" loading="lazy">
+      <figcaption>Coniques de même foyer \(F\) (cours, Q6)</figcaption>
+    </figure>
+
+    <h3>1.5 Trajectoires selon \(E_M\) (champ newtonien)</h3>
+    <ul>
+      <li><b>\(K&gt;0\)</b> (répulsif) : \(E_M&gt;0\), mouvement non borné, branche d'hyperbole dont \(F\) est le foyer extérieur, état de diffusion.</li>
+      <li><b>\(K&lt;0\)</b>, \(E_M&gt;0\) : branche d'hyperbole dont \(F\) est le foyer intérieur (diffusion).</li>
+      <li><b>\(K&lt;0\)</b>, \(E_M=0\) : parabole de foyer \(F\) (diffusion, limite).</li>
+      <li><b>\(K&lt;0\)</b>, \(E_M&lt;0\) : ellipse de foyer \(F\), état lié, avec \(p=\left|\dfrac{mC^2}K\right|\) et \(E_M=-\dfrac{|K|}{2p}(1-e^2)\).</li>
+    </ul>
+    <figure>
+      <img src="ch8-img/epeff-repulsif.png" alt="Énergie potentielle effective répulsive, à gauche, et trajectoire hyperbolique, à droite" loading="lazy">
+      <figcaption>Cas \(K&gt;0\) : \(E_{Peff}\) décroît de l'infini vers 0, la trajectoire est une branche d'hyperbole (cours, Q8-Q9)</figcaption>
+    </figure>
+    <figure>
+      <img src="ch8-img/epeff-attractif.png" alt="Énergie potentielle effective attractive pour E_M négatif et nul ou positif, avec ellipse et hyperbole" loading="lazy">
+      <figcaption>Cas \(K&lt;0\) : selon le signe de \(E_M\), trajectoire elliptique (état lié), parabolique ou hyperbolique (diffusion) (cours, Q8, Q10)</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============================ APPLICATIONS / QUESTIONS DU COURS ============================ -->
+  <section class="block" id="app">
+    <h2>2. Questions du cours corrigées (Q1 à Q21)</h2>
+    <p class="lead">Ce chapitre n'a pas de TD fourni : chaque question du cours est reprise ci-dessous. Les calculs numériques ont été recalculés en Python, avec les constantes du cours (\(G=6{,}67\cdot10^{-11}\), \(R_T=6378\) km, \(m_T=5{,}976\cdot10^{24}\) kg).</p>
+
+    <div class="exo-card">
+      <div class="exo-head">Q1 — Formulaire des coordonnées (a et b)</div>
+      <div class="exo-body">
+        <p class="q">a) Coordonnées cylindriques en fonction des sphériques</p>
+        <p class="etape">Étape 1 : lecture du formulaire</p>
+        <p>Les coordonnées sphériques du formulaire sont \(x=r\sin\theta\cos\varphi\), \(y=r\sin\theta\sin\varphi\), \(z=r\cos\theta\). \(\theta\) est l'angle avec l'axe \(Oz\).</p>
+        <p class="etape">Étape 2 : cylindriques</p>
+        <p>En cylindriques, \(\rho\) est la distance à \(Oz\) ; \(\rho=\sqrt{x^2+y^2}\). Avec \(x,y\) ci-dessus :</p>
+        \[ \rho=r\sin\theta \qquad \varphi_{cyl}=\varphi \qquad z=r\cos\theta \]
+        <div class="warnbox"><span class="lab">Piège</span> Le \(r\) des cylindriques n'est pas le \(r\) des sphériques. Le formulaire le rappelle : \(\rho\) (cylindrique) \(=r\sin\theta\) (sphérique). Dans le cours, on note \(r\) la distance à \(Oz\).</div>
+
+        <p class="q">b) Coordonnées sphériques en fonction des cartésiennes</p>
+        <p class="etape">Étape 1 : rayon</p>
+        \[ r=\sqrt{x^2+y^2+z^2} \]
+        <p class="etape">Étape 2 : angle polaire</p>
+        \[ \cos\theta=\frac zr \qquad\text{soit}\qquad \theta=\arccos\frac zr \]
+        <p class="etape">Étape 3 : azimut</p>
+        \[ \varphi=\arctan\frac yx \quad\text{(en pratique } \operatorname{atan2}(y,x)\text{, pour avoir le bon quadrant)} \]
+        <div class="res">\(r=\sqrt{x^2+y^2+z^2}\), \(\theta=\arccos(z/r)\), \(\varphi=\operatorname{atan2}(y,x)\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q2 — Mouvement lorsque \(\vec L_O=\vec 0\)</div>
+      <div class="exo-body">
+        <p class="q">Réponse</p>
+        <p>\(\vec L_O=\overrightarrow{OM}\wedge m\vec v=\vec 0\) : les vecteurs \(\overrightarrow{OM}\) et \(\vec v\) sont colinéaires à chaque instant. Le point reste donc sur une <b>droite passant par \(O\)</b> : le mouvement est <b>rectiligne radial</b>, avec \(\dot\theta=0\).</p>
+        <div class="res">Mouvement rectiligne sur une droite passant par \(O\) (cas dégénéré du mouvement plan).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q3 — Loi des aires à partir de \(d\mathcal A\)</div>
+      <div class="exo-body">
+        <p class="q">Démonstration</p>
+        <p class="etape">Étape 1 : aire élémentaire</p>
+        <p>En un temps \(dt\), le rayon vecteur tourne de \(d\theta\) : le triangle balayé a pour aire \(d\mathcal A=\tfrac12 r\cdot r\,d\theta\).</p>
+        \[ d\mathcal A=\tfrac12 r^2\,d\theta \]
+        <p class="etape">Étape 2 : intégration</p>
+        <p>En divisant par \(dt\) : \(\dfrac{d\mathcal A}{dt}=\tfrac12 r^2\dot\theta=\tfrac12 C\). Donc \(\mathcal A=\tfrac12 C\,\Delta t\).</p>
+        <p class="etape">Étape 3 : lien avec \(L_O\)</p>
+        <div class="res">\(C=r^2\dot\theta=\dfrac{L_O}{m}\), donc \(\mathcal A=\dfrac12\dfrac{L_O}{m}\Delta t\) : l'aire balayée est proportionnelle à la durée.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q4 — Exemples de forces centrales conservatives</div>
+      <div class="exo-body">
+        <p class="q">Trois exemples et leur énergie potentielle</p>
+        <ul>
+          <li><b>Gravitation (newtonienne)</b> : \(\vec F=-\dfrac{Gm_Om_M}{r^2}\vec e_r\), \(E_P=-\dfrac{Gm_Om_M}{r}\). Ici \(F(r)=K/r^2\) avec \(K=-Gm_Om_M\).</li>
+          <li><b>Électrostatique (newtonienne)</b> : \(\vec F=\dfrac{q_Oq_M}{4\pi\varepsilon_0r^2}\vec e_r\), \(E_P=\dfrac{q_Oq_M}{4\pi\varepsilon_0r}\).</li>
+          <li><b>Rappel élastique</b> (non newtonienne) : \(\vec F=-k\,r\,\vec e_r\), \(E_P=\tfrac12kr^2\). Elle est centrale et conservative, mais \(F\) n'est pas en \(1/r^2\).</li>
+        </ul>
+        <div class="res">Champ newtonien : les deux premiers, de la forme \(F=K/r^2\) avec \(E_P=K/r\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q5 — Conservation de \(E_M\) pour une force conservative</div>
+      <div class="exo-body">
+        <p class="q">Démonstration</p>
+        <p class="etape">Étape 1 : théorème de l'énergie cinétique</p>
+        \[ dE_C=\delta W=\sum\vec F\cdot d\vec{OM} \]
+        <p class="etape">Étape 2 : force conservative</p>
+        <p>Pour une force conservative, \(\delta W=-dE_P\). Donc \(dE_C=-dE_P\), soit \(d(E_C+E_P)=0\).</p>
+        <div class="res">\(E_M=E_C+E_P=\text{cte}\) pendant tout le mouvement.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q6 — Retrouver les coniques de la figure</div>
+      <div class="exo-body">
+        <figure>
+          <img src="ch8-img/coniques.png" alt="Coniques de même foyer F" loading="lazy">
+          <figcaption>Figure du cours (Q6)</figcaption>
+        </figure>
+        <p class="q">Identification</p>
+        <ul>
+          <li>Les courbes en <b>bleu</b>, fermées et emboîtées autour de \(F\) : des <b>cercles et ellipses</b> (\(e&lt;1\)).</li>
+          <li>La courbe au centre, qui s'ouvre d'un seul côté : la <b>parabole</b> (\(e=1\)).</li>
+          <li>Les courbes en <b>rouge</b>, ouvertes, à deux branches : des <b>hyperboles</b> (\(e&gt;1\)).</li>
+        </ul>
+        <p>Le critère est la valeur de \(e\) : plus \(e\) est proche de 0, plus la conique est proche d'un cercle.</p>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q7 — Ellipse : \(O\), \(F\), \(c\), \(r_{min}\), \(r_{max}\)</div>
+      <div class="exo-body">
+        <p class="q">Positions et relations</p>
+        <p class="etape">Étape 1 : placement</p>
+        <p>\(O\) est le centre de l'ellipse, \(F\) est le foyer, à la distance \(c=OF\). Le périgée (point le plus proche de \(F\)) et l'apogée (le plus loin) sont sur le grand axe.</p>
+        <p class="etape">Étape 2 : distances au foyer</p>
+        <p>Le périgée est à \(a-c\) du foyer, l'apogée à \(a+c\). Avec \(p=b^2/a\), \(e=c/a\) :</p>
+        \[ r_{min}=\frac p{1+e}=\frac{b^2}{a+c}=a-c \qquad r_{max}=\frac p{1-e}=\frac{b^2}{a-c}=a+c \]
+        <p class="etape">Étape 3 : inversion</p>
+        \[ a=\frac{r_{min}+r_{max}}2 \qquad c=\frac{r_{max}-r_{min}}2 \qquad e=\frac ca \]
+        <div class="res">\(r_{min}=a-c\), \(r_{max}=a+c\), et réciproquement \(a=\tfrac12(r_{min}+r_{max})\), \(c=\tfrac12(r_{max}-r_{min})\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q8 — Allure des courbes \(E_{Peff}(r)\)</div>
+      <div class="exo-body">
+        <p class="q">Justification</p>
+        <p class="etape">Étape 1 : limites</p>
+        <ul>
+          <li>En \(r\to0\), le terme \(\dfrac{mC^2}{2r^2}\) domine : \(E_{Peff}\to+\infty\).</li>
+          <li>En \(r\to\infty\), \(E_{Peff}\to0\).</li>
+        </ul>
+        <p class="etape">Étape 2 : cas \(K&gt;0\)</p>
+        <p>Les deux termes sont positifs : \(E_{Peff}\) décroît de \(+\infty\) vers 0 sans minimum. Donc \(E_M\ge E_{Peff}(r)&gt;0\) pour \(r\ge r_{min}\), mouvement non borné.</p>
+        <p class="etape">Étape 3 : cas \(K&lt;0\)</p>
+        <p>Le terme \(K/r\) est négatif et tend vers 0 : \(E_{Peff}\) passe par un minimum négatif, puis remonte vers 0 par valeurs négatives. Selon la valeur de \(E_M\), on obtient un état lié (deux points de rebroussement \(r_{min}\), \(r_{max}\)) ou un état de diffusion.</p>
+        <div class="res">\(K&gt;0\) : répulsif, pas de minimum. \(K&lt;0\) : attractif, un minimum, donc un état lié possible si \(E_M\) est négatif.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q9 — Expression de \(r_{min}\) pour \(K&gt;0\)</div>
+      <div class="exo-body">
+        <p class="q">Démonstration</p>
+        <p class="etape">Étape 1 : point de rebroussement</p>
+        <p>En \(r_{min}\), \(\dot r=0\), donc \(E_M=E_{Peff}(r_{min})\) :</p>
+        \[ E_M=\frac{mC^2}{2r_{min}^2}+\frac K{r_{min}} \]
+        <p class="etape">Étape 2 : équation du second degré</p>
+        <p>En multipliant par \(r_{min}^2\) : \(E_M\,r_{min}^2-K\,r_{min}-\dfrac{mC^2}2=0\). Le discriminant est \(\Delta=K^2+2mC^2E_M\).</p>
+        <p class="etape">Étape 3 : racine positive</p>
+        \[ r_{min}=\frac{K+\sqrt{K^2+2mC^2E_M}}{2E_M} \]
+        <div class="res">\(r_{min}=\dfrac1{2E_M}\left(K+\sqrt{K^2+2mC^2E_M}\right)\), la racine positive.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q10 — \(r_{min}\) et \(r_{max}\) pour \(K&lt;0\), \(E_M&lt;0\)</div>
+      <div class="exo-body">
+        <p class="q">Démonstration</p>
+        <p class="etape">Étape 1 : même équation</p>
+        <p>Les deux points de rebroussement vérifient \(E_M\,r^2-K\,r-\dfrac{mC^2}2=0\). Avec \(K=-|K|\) et \(E_M=-|E_M|\), on pose \(D=K^2+2mC^2E_M\), qui est positif pour un état lié.</p>
+        <p class="etape">Étape 2 : deux racines</p>
+        \[ r_{min}=\frac{|K|-\sqrt D}{2|E_M|} \qquad r_{max}=\frac{|K|+\sqrt D}{2|E_M|} \]
+        <p class="etape">Étape 3 : vérification de la forme elliptique</p>
+        <p>On trouve \(a=\dfrac{r_{min}+r_{max}}2=\dfrac{|K|}{2|E_M|}\), \(c=\dfrac{r_{max}-r_{min}}2=\dfrac{\sqrt D}{2|E_M|}\), donc \(e=\dfrac{c}{a}=\dfrac{\sqrt D}{|K|}=\sqrt{1+\dfrac{2mC^2E_M}{K^2}}\). Et \(p=\dfrac{mC^2}{|K|}\), ce qui redonne \(E_M=-\dfrac{|K|}{2p}(1-e^2)\).</p>
+        <div class="res">\(r_{min}=\dfrac{|K|-\sqrt{K^2+2mC^2E_M}}{2|E_M|}\), \(r_{max}=\dfrac{|K|+\sqrt{K^2+2mC^2E_M}}{2|E_M|}\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q11 — Condition pour une trajectoire circulaire</div>
+      <div class="exo-body">
+        <p class="q">Condition</p>
+        <p class="etape">Étape 1 : \(r_{min}=r_{max}\)</p>
+        <p>Cela impose \(\sqrt D=0\), soit \(e=0\).</p>
+        <p class="etape">Étape 2 : énergie et rayon</p>
+        \[ E_M=-\frac{K^2}{2mC^2} \qquad R=p=\frac{mC^2}{|K|} \]
+        <p class="etape">Étape 3 : vitesse</p>
+        <p>Pour un cercle, \(v=C/R\), donc \(C^2=|K|R/m\) : un mouvement circulaire est possible à chaque rayon, avec une énergie \(E_M\) correspondante.</p>
+        <div class="res">Cercle : \(K^2+2mC^2E_M=0\), c'est-à-dire \(E_M=-\dfrac{K^2}{2mC^2}\) et \(R=\dfrac{mC^2}{|K|}\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q12 — Quelle situation énergétique pour les planètes ?</div>
+      <div class="exo-body">
+        <p class="q">Réponse</p>
+        <p>Les planètes décrivent des ellipses dont le Soleil est un foyer, avec un mouvement borné. C'est l'<b>état lié</b> : \(E_M&lt;0\).</p>
+        <div class="res">Les planètes sont dans un état lié (\(E_M&lt;0\)), trajectoire elliptique.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q13 — Excentricité et paramètres de l'orbite terrestre</div>
+      <div class="exo-body">
+        <p class="q">Données : \(r_{périhélie}=147{,}1\cdot10^6\) km, \(r_{aphélie}=152{,}1\cdot10^6\) km</p>
+        <p class="etape">Étape 1 : demi-grand axe</p>
+        \[ a=\frac{147{,}1+152{,}1}{2}\cdot10^6=1{,}496\cdot10^8\ \text{km} \]
+        <p class="etape">Étape 2 : demi-distance focale et excentricité</p>
+        \[ c=\frac{152{,}1-147{,}1}{2}\cdot10^6=2{,}5\cdot10^6\ \text{km} \qquad e=\frac ca=\frac{2{,}5}{149{,}6}\approx1{,}671\cdot10^{-2} \]
+        <p class="etape">Étape 3 : demi-petit axe et paramètre</p>
+        \[ b=a\sqrt{1-e^2}\approx1{,}496\cdot10^8\ \text{km}\ \ (\approx149{,}58\cdot10^6\ \text{km}) \qquad p=\frac{b^2}{a}\approx1{,}496\cdot10^8\ \text{km} \]
+        <div class="res">\(e\approx0{,}0167\), \(a\approx149{,}6\) millions de km, \(b\approx149{,}58\) millions de km, \(p\approx149{,}56\) millions de km.</div>
+        <div class="warnbox"><span class="lab">Conclusion</span> \(b\) et \(a\) ne diffèrent que de \(1{,}4\cdot10^{-4}\) relatif, et \(e\) est très petit : l'orbite terrestre est presque circulaire, ce qui justifie l'approximation de l'orbite circulaire pour les planètes.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q14 — Loi de Kepler dans l'approximation circulaire</div>
+      <div class="exo-body">
+        <p class="q">Démonstration</p>
+        <p class="etape">Étape 1 : PFD sur un cercle</p>
+        <p>La seule force est la gravitation, centripète. Avec \(a=v^2/R\) :</p>
+        \[ \frac{Gm_Sm_P}{R^2}=m_P\frac{v^2}{R} \quad\Longrightarrow\quad v=\sqrt{\frac{Gm_S}{R}} \]
+        <p class="etape">Étape 2 : période</p>
+        <p>La vitesse est constante (mouvement uniforme). \(T=\dfrac{2\pi R}{v}\), donc \(T^2=\dfrac{4\pi^2R^2}{v^2}=\dfrac{4\pi^2R^3}{Gm_S}\).</p>
+        <div class="res">\(\dfrac{T^2}{R^3}=\dfrac{4\pi^2}{Gm_S}=\text{cte}\) : troisième loi de Kepler.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q15 — Énergie mécanique sur une orbite circulaire</div>
+      <div class="exo-body">
+        <p class="q">Démonstration</p>
+        \[ E_M=\tfrac12m_Pv^2-\frac{Gm_Sm_P}{R}=\frac{Gm_Sm_P}{2R}-\frac{Gm_Sm_P}{R}=-\frac{Gm_Sm_P}{2R} \]
+        <div class="res">\(E_M=-\dfrac{Gm_Sm_P}{2R}\) : négative, donc état lié.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Le mouvement elliptique n'est pas uniforme : la vitesse varie entre le périhélie et l'aphélie. Le résultat \(v=\sqrt{Gm_S/R}\) n'est valable que dans l'approximation circulaire.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q16 — Satellite géostationnaire : altitude et vitesse</div>
+      <div class="exo-body">
+        <p class="q">Données : \(T=86\,164\) s, \(G=6{,}67\cdot10^{-11}\), \(m_T=5{,}976\cdot10^{24}\) kg, \(R_T=6378\) km</p>
+        <p class="etape">Étape 1 : rayon de l'orbite (troisième loi, \(Gm_T\))</p>
+        \[ R^3=\frac{Gm_TT^2}{4\pi^2}\quad\Longrightarrow\quad R\approx4{,}216\cdot10^{7}\ \text{m}\approx42\,164\ \text{km} \]
+        <p class="etape">Étape 2 : altitude</p>
+        \[ h=R-R_T=42\,164-6\,378\approx35\,786\ \text{km} \]
+        <p class="etape">Étape 3 : vitesse</p>
+        \[ v=\frac{2\pi R}{T}=\sqrt{\frac{Gm_T}{R}}\approx3{,}07\ \text{km·s}^{-1} \]
+        <div class="res">\(h\approx35\,786\) km (orbite géostationnaire), vitesse sur l'orbite \(v\approx3{,}07\) km/s.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q17 — Comparaison des vitesses</div>
+      <div class="exo-body">
+        <p class="q">Valeurs (\(v=\sqrt{Gm_T/r}\), \(r\) = distance au centre de la Terre)</p>
+        <ul>
+          <li>Orbite basse \(h=200\) km : \(r=6578\) km, \(v\approx7{,}78\) km/s.</li>
+          <li>Première vitesse cosmique \(h=0\) : \(v_1=\sqrt{Gm_T/R_T}\approx7{,}91\) km/s.</li>
+          <li>Géostationnaire : \(v\approx3{,}07\) km/s.</li>
+          <li>Lune \(d_{TL}=384\,400\) km : \(v\approx1{,}02\) km/s.</li>
+        </ul>
+        <div class="res">La vitesse décroît quand l'orbite s'éloigne : \(v_{\text{basse}}\approx2{,}5\) fois \(v_{\text{géo}}\). La Lune, très éloignée, va \(\approx3\) fois moins vite que le satellite géostationnaire.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q18 — Énergie minimale de diffusion et vitesse de libération</div>
+      <div class="exo-body">
+        <p class="q">Réponse</p>
+        <p class="etape">Étape 1 : seuil</p>
+        <p>L'état de diffusion correspond à \(E_M\ge0\). La valeur minimale est donc \(E_M=0\).</p>
+        <p class="etape">Étape 2 : vitesse de libération</p>
+        \[ \tfrac12mv_{lib}^2-\frac{Gm_Tm}{R_T}=0 \quad\Longrightarrow\quad v_{lib}=\sqrt{\frac{2Gm_T}{R_T}}=\sqrt2\,v_1\approx11{,}18\ \text{km·s}^{-1} \]
+        <div class="res">\(E_M=0\) au seuil ; \(v_{lib}=\sqrt{2Gm_T/R_T}\approx11{,}2\) km/s.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q19 — Caractéristiques de l'orbite de Hohmann</div>
+      <div class="exo-body">
+        <p class="q">Données : \(r_A=R_T+200\) km \(=6578\) km (périgée), \(r_B=R_T+35\,786\) km \(=42\,164\) km (apogée)</p>
+        <p class="etape">Étape 1 : demi-grand axe</p>
+        \[ a=\frac{r_A+r_B}2=\frac{6578+42164}2\approx24\,371\ \text{km} \]
+        <p class="etape">Étape 2 : excentricité</p>
+        \[ e=\frac{r_B-r_A}{r_B+r_A}=\frac{35586}{48742}\approx0{,}730 \]
+        <p class="etape">Étape 3 : demi-petit axe</p>
+        \[ b=a\sqrt{1-e^2}\approx24\,371\times0{,}683\approx16\,654\ \text{km} \]
+        <div class="res">\(a\approx24\,371\) km, \(e\approx0{,}730\), \(b\approx16\,654\) km : valeurs du cours retrouvées.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q20 — Durée du transfert</div>
+      <div class="exo-body">
+        <p class="q">Réponse</p>
+        <p class="etape">Étape 1 : période de l'ellipse (troisième loi de Kepler)</p>
+        \[ T_{ell}=2\pi\sqrt{\frac{a^3}{Gm_T}}\approx3{,}786\cdot10^{4}\ \text{s} \]
+        <p class="etape">Étape 2 : demi-période (du périgée à l'apogée)</p>
+        \[ \Delta t=\frac{T_{ell}}2\approx1{,}893\cdot10^{4}\ \text{s}\approx5\ \text{h}\ 16\ \text{min} \]
+        <div class="res">\(\Delta t\approx5\) h 16 min, valeur du cours retrouvée.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head">Q21 — Vitesses sur les orbites et impulsions</div>
+      <div class="exo-body">
+        <p class="q">Vitesses sur le cercle (\(v=\sqrt{Gm_T/r}\)) et sur l'ellipse (\(v^2=Gm_T(2/r-1/a)\), vis-viva)</p>
+        <ul>
+          <li>Cercle bas : \(v_{AC}=\sqrt{Gm_T/r_A}\approx7{,}78\) km/s ; cercle géostationnaire : \(v_{BC}\approx3{,}07\) km/s.</li>
+          <li>Ellipse de transfert : \(v_{AE}\approx10{,}24\) km/s ; \(v_{BE}\approx1{,}60\) km/s.</li>
+        </ul>
+        <p class="etape">Étape 1 : impulsion en A (orbite basse vers transfert)</p>
+        \[ \Delta v_1=v_{AE}-v_{AC}\approx10{,}24-7{,}78=2{,}46\ \text{km·s}^{-1} \]
+        <p class="etape">Étape 2 : impulsion en B (transfert vers géostationnaire)</p>
+        \[ \Delta v_2=v_{BC}-v_{BE}\approx3{,}07-1{,}60=1{,}47\ \text{km·s}^{-1} \]
+        <div class="res">\(\Delta v_1\approx2{,}46\) km/s en A, \(\Delta v_2\approx1{,}47\) km/s en B, soit \(\approx3{,}9\) km/s au total.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Les deux impulsions sont tangentielles, dans le sens du mouvement. Le total \(\Delta v_1+\Delta v_2\) est le coût en vitesse du transfert, et non une simple différence entre \(v_{AC}\) et \(v_{BC}\).</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Sources de ce chapitre (cours et formulaire fournis par D. Courtois). Cliquez pour ouvrir le PDF dans le site.</p>
+    <ul class="doc-list">
+      <li><a class="doc-item" href="../assets/pdf.html?f=../documents/aem2-physique/ch8-forces-centrales/Cours8.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Cours8 — Mouvement à force centrale</span><span class="badge">Cours</span><span class="arrow">↗</span></a></li>
+      <li><a class="doc-item" href="../assets/pdf.html?f=../documents/aem2-physique/ch8-forces-centrales/Ch8_Formulaire_coordonnees.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">Formulaire des coordonnées (Ch8)</span><span class="badge">Formulaire</span><span class="arrow">↗</span></a></li>
+    </ul>
+    <p class="docs-note">Cursus AM2 · P2030 · Semestre 3 · Partie Systèmes tournants, D. Courtois. Ce chapitre fait suite au <a href="ch7-moment-cinetique.html">Ch7 — Moment cinétique</a>.</p>
+  </section>
+</main>
+<script src="../assets/gate.js"></script>
+<script src="../assets/catalogue.js?v=2"></script>
+<script src="../assets/nav.js?v=2"></script>
+<script src="../assets/lecture.js?v=3"></script>
+</body>
+</html>

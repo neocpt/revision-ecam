@@ -27,7 +27,8 @@ window.CATALOGUE = {
           { n: "Ch4", titre: "ALI en régime saturé", url: "aem2-electronique/ch4-ali-regime-sature.html" },
           { n: "Ch5", titre: "Oscillateurs auto-entretenus", url: "aem2-electronique/ch5-oscillateurs.html" },
           { n: "Ch6", titre: "Électronique numérique", url: "aem2-electronique/ch6-electronique-numerique.html" },
-          { n: "Ch7", titre: "Moment cinétique (systèmes tournants)", url: "aem2-physique/ch7-moment-cinetique.html" }
+          { n: "Ch7", titre: "Moment cinétique (systèmes tournants)", url: "aem2-physique/ch7-moment-cinetique.html" },
+          { n: "Ch8", titre: "Mouvement à force centrale", url: "aem2-physique/ch8-forces-centrales.html" }
         ] }
       ],
       annales: [
