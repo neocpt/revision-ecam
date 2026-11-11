@@ -14,3 +14,11 @@ Une entrée par document traité (date, source, pages créées ou modifiées, er
 - Pas de TD8 fourni : seules les questions du cours sont corrigées.
 - Points incertains : Q6 (identification des coniques) lue sur la figure ; Q1 utilise la convention du formulaire (θ depuis Oz). Résultats numériques (Q13, Q16 à Q21) recalculés en Python.
 - Ch9 « Rotation des solides » : toujours à récupérer.
+
+## 2026-11-11 — Fiches ALI et filtres RLC (AM2 électronique)
+- Source : chapitres AM2 électronique ch1, ch3, ch4, ch5, ch6 (et ch2 pour le contexte).
+- Pages créées : aem2-electronique/fiche-ali.html (14 montages : suiveur, inverseur, non inverseur, intégrateur, pseudo-intégrateur, dérivateur, sommateur CNA, comparateur, trigger à seuil E0, trigger non inverseur, trigger inverseur, MVA compact, MVA 2 ALI, oscillateur de Wien) et aem2-electronique/fiche-filtres-rlc.html (9 filtres : RC et RL 1er ordre, RLC série passe-bande/passe-bas/passe-haut, bouchon R + L∥C, pont de Wien).
+- Principe : Nom, Montage, Formules masqués, affichage à la demande (boutons par partie et modes Noms seuls / Montages seuls / Formules seules). Style : assets/fiche.css (nouveau fichier, style.css inchangé).
+- Schémas dessinés en SVG (même gabarit que ch3). Vérifiés visuellement en local.
+- Non inclus : oscillateur à NIC (ch5) et oscillateur sinus-cosinus (ch5), schéma non reconstitué de façon fiable ; dent de scie (générateur de balayage) non incluse.
+- Points incertains : les noms de résistances du MVA 2 ALI sont ceux du schéma de la fiche (R1, R2, R3), à vérifier face au TP5a.

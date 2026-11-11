@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fiche filtres RC et RLC — à reconstituer — Révision ECAM</title>
+<link rel="stylesheet" href="../assets/style.css?v=4">
+<link rel="stylesheet" href="../assets/fiche.css?v=1">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div id="site-nav"></div>
+<nav class="subnav"><a href="ch1-filtres-passifs.html">← Ch1</a><a href="#f1">1er ordre</a><a href="#f2">2e ordre RLC</a><a href="fiche-ali.html">Fiche ALI →</a></nav>
+
+<main class="wrap">
+  <span class="chip">Électronique AM2 (2ᵉ année) · Fiche de révision</span>
+  <h1 class="title">Fiche : filtres du 1er et du 2e ordre (RC, RL, RLC)</h1>
+  <p class="lead">Les filtres passifs du chapitre 1 : nom, schéma et formules. Rien n’est affiché au départ : choisis ce que tu veux revoir.</p>
+
+  <div class="fc-howto">
+    <b>Comment t’en servir</b>
+    <ol>
+      <li>Chaque montage a trois parties : <i>Nom</i>, <i>Montage</i> (schéma) et <i>Formules</i>. Elles sont toutes masquées au départ.</li>
+      <li>Clique sur une partie pour l’afficher. Ou utilise les boutons ci-dessous pour n’afficher que les noms, que les schémas ou que les formules.</li>
+      <li>Pour t’entraîner : à partir d’un schéma, retrouve le nom, puis les formules, puis refais le raisonnement sur papier.</li>
+    </ol>
+  </div>
+
+  <div class="fc-bar" role="group" aria-label="Affichage">
+    <button type="button" data-mode="rien">Tout masquer</button>
+    <button type="button" data-mode="nom">Noms seuls</button>
+    <button type="button" data-mode="montage">Montages seuls</button>
+    <button type="button" data-mode="formule">Formules seules</button>
+    <button type="button" data-mode="tout">Tout afficher</button>
+  </div>
+
+  <section class="block" id="f1">
+    <h2>1. Filtres du 1er ordre RC et RL (ch1)</h2>
+    <p class="lead fc-sub">Une seule réactance : pente ±20 dB/décade.</p>
+
+    <article class="fc" id="pb-rc">
+      <header class="fc-head"><span class="fc-n">1</span><span class="fc-tag">1er ordre</span></header>
+      <div class="fc-part" data-part="nom">
+        <button type="button" aria-pressed="false">Nom</button>
+        <div class="fc-body"><h3 class="fc-name">Passe-bas RC</h3></div>
+      </div>
+      <div class="fc-part" data-part="montage">
+        <button type="button" aria-pressed="false">Montage</button>
+        <div class="fc-body fc-fig"><svg viewBox="0 -22 260 245" role="img" aria-label="schéma du filtre" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><text x="22" y="76" text-anchor="end" font-size="19" fill="currentColor" stroke="none">e</text><line x1="40" y1="70" x2="73.0" y2="70"/><rect x="73.0" y="61" width="44" height="18"/><line x1="117.0" y1="70" x2="150" y2="70"/><text x="95.0" y="55" text-anchor="middle" font-size="19" fill="currentColor" stroke="none">R</text><line x1="150" y1="70" x2="150" y2="121.0"/><line x1="137" y1="121.0" x2="163" y2="121.0"/><line x1="137" y1="129.0" x2="163" y2="129.0"/><line x1="150" y1="129.0" x2="150" y2="180"/><text x="168" y="130.0" text-anchor="start" font-size="19" fill="currentColor" stroke="none">C</text><line x1="150" y1="180" x2="150" y2="188"/><line x1="138" y1="188" x2="162" y2="188"/><line x1="142" y1="193" x2="158" y2="193"/><line x1="146" y1="198" x2="154" y2="198"/><circle cx="150" cy="70" r="3.5" fill="currentColor" stroke="none"/><text x="162" y="62" text-anchor="start" font-size="19" fill="currentColor" stroke="none">s</text></g></svg></div>
+      </div>
+      <div class="fc-part" data-part="formule">
+        <button type="button" aria-pressed="false">Formules</button>
+        <div class="fc-body"><ul class="fc-list"><li class="fc-eq">\[ \underline H = \dfrac{1}{1+jRC\omega} \]</li><li class="fc-eq">\[ \omega_c = \dfrac{1}{RC}\ ,\quad f_c = \dfrac{1}{2\pi RC} \]</li><li class="fc-txt">sortie aux bornes de C ; H0 = 1 ; phase de 0 à −90°</li></ul></div>
+      </div>
+    </article>
+    <article class="fc" id="ph-rc">
+      <header class="fc-head"><span class="fc-n">2</span><span class="fc-tag">1er ordre</span></header>
+      <div class="fc-part" data-part="nom">
+        <button type="button" aria-pressed="false">Nom</button>
+        <div class="fc-body"><h3 class="fc-name">Passe-haut RC</h3></div>
+      </div>
+      <div class="fc-part" data-part="montage">
+        <button type="button" aria-pressed="false">Montage</button>
+        <div class="fc-body fc-fig"><svg viewBox="0 -22 260 245" role="img" aria-label="schéma du filtre" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><text x="22" y="76" text-anchor="end" font-size="19" fill="currentColor" stroke="none">e</text><line x1="40" y1="70" x2="91.0" y2="70"/><line x1="91.0" y1="57" x2="91.0" y2="83"/><line x1="99.0" y1="57" x2="99.0" y2="83"/><line x1="99.0" y1="70" x2="150" y2="70"/><text x="95.0" y="51" text-anchor="middle" font-size="19" fill="currentColor" stroke="none">C</text><line x1="150" y1="70" x2="150" y2="103.0"/><rect x="141" y="103.0" width="18" height="44"/><line x1="150" y1="147.0" x2="150" y2="180"/><text x="166" y="130.0" text-anchor="start" font-size="19" fill="currentColor" stroke="none">R</text><line x1="150" y1="180" x2="150" y2="188"/><line x1="138" y1="188" x2="162" y2="188"/><line x1="142" y1="193" x2="158" y2="193"/><line x1="146" y1="198" x2="154" y2="198"/><circle cx="150" cy="70" r="3.5" fill="currentColor" stroke="none"/><text x="162" y="62" text-anchor="start" font-size="19" fill="currentColor" stroke="none">s</text></g></svg></div>
+      </div>
+      <div class="fc-part" data-part="formule">
+        <button type="button" aria-pressed="false">Formules</button>
+        <div class="fc-body"><ul class="fc-list"><li class="fc-eq">\[ \underline H = \dfrac{jRC\omega}{1+jRC\omega} \]</li><li class="fc-eq">\[ f_c = \dfrac{1}{2\pi RC} \]</li><li class="fc-txt">sortie aux bornes de R ; phase de +90° à 0</li></ul></div>
+      </div>
+    </article>
+    <article class="fc" id="pb-rl">
+      <header class="fc-head"><span class="fc-n">3</span><span class="fc-tag">1er ordre</span></header>
+      <div class="fc-part" data-part="nom">
+        <button type="button" aria-pressed="false">Nom</button>
+        <div class="fc-body"><h3 class="fc-name">Passe-bas RL</h3></div>
+      </div>
+      <div class="fc-part" data-part="montage">
+        <button type="button" aria-pressed="false">Montage</button>
+        <div class="fc-body fc-fig"><svg viewBox="0 -22 260 245" role="img" aria-label="schéma du filtre" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><text x="22" y="76" text-anchor="end" font-size="19" fill="currentColor" stroke="none">e</text><path d="M40,70 a13.75,13.75 0 0 1 27.5,0 a13.75,13.75 0 0 1 27.5,0 a13.75,13.75 0 0 1 27.5,0 a13.75,13.75 0 0 1 27.5,0"/><text x="95.0" y="36.5" text-anchor="middle" font-size="19" fill="currentColor" stroke="none">L</text><line x1="150" y1="70" x2="150" y2="103.0"/><rect x="141" y="103.0" width="18" height="44"/><line x1="150" y1="147.0" x2="150" y2="180"/><text x="166" y="130.0" text-anchor="start" font-size="19" fill="currentColor" stroke="none">R</text><line x1="150" y1="180" x2="150" y2="188"/><line x1="138" y1="188" x2="162" y2="188"/><line x1="142" y1="193" x2="158" y2="193"/><line x1="146" y1="198" x2="154" y2="198"/><circle cx="150" cy="70" r="3.5" fill="currentColor" stroke="none"/><text x="162" y="62" text-anchor="start" font-size="19" fill="currentColor" stroke="none">s</text></g></svg></div>
+      </div>
+      <div class="fc-part" data-part="formule">
+        <button type="button" aria-pressed="false">Formules</button>
+        <div class="fc-body"><ul class="fc-list"><li class="fc-eq">\[ \underline H = \dfrac{R}{R+jL\omega} = \dfrac{1}{1+jL\omega/R} \]</li><li class="fc-eq">\[ \omega_c = \dfrac{R}{L}\ ,\quad f_c = \dfrac{R}{2\pi L} \]</li><li class="fc-txt">sortie aux bornes de R</li></ul></div>
+      </div>
+    </article>
+    <article class="fc" id="ph-rl">
+      <header class="fc-head"><span class="fc-n">4</span><span class="fc-tag">1er ordre</span></header>
+      <div class="fc-part" data-part="nom">
+        <button type="button" aria-pressed="false">Nom</button>
+        <div class="fc-body"><h3 class="fc-name">Passe-haut RL</h3></div>
+      </div>
+      <div class="fc-part" data-part="montage">
+        <button type="button" aria-pressed="false">Montage</button>
+        <div class="fc-body fc-fig"><svg viewBox="0 -22 260 245" role="img" aria-label="schéma du filtre" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><text x="22" y="76" text-anchor="end" font-size="19" fill="currentColor" stroke="none">e</text><line x1="40" y1="70" x2="73.0" y2="70"/><rect x="73.0" y="61" width="44" height="18"/><line x1="117.0" y1="70" x2="150" y2="70"/><text x="95.0" y="55" text-anchor="middle" font-size="19" fill="currentColor" stroke="none">R</text><path d="M150,70 a13.75,13.75 0 0 1 0,27.5 a13.75,13.75 0 0 1 0,27.5 a13.75,13.75 0 0 1 0,27.5 a13.75,13.75 0 0 1 0,27.5"/><text x="183.5" y="130.0" text-anchor="start" font-size="19" fill="currentColor" stroke="none">L</text><line x1="150" y1="180" x2="150" y2="188"/><line x1="138" y1="188" x2="162" y2="188"/><line x1="142" y1="193" x2="158" y2="193"/><line x1="146" y1="198" x2="154" y2="198"/><circle cx="150" cy="70" r="3.5" fill="currentColor" stroke="none"/><text x="162" y="62" text-anchor="start" font-size="19" fill="currentColor" stroke="none">s</text></g></svg></div>
+      </div>
+      <div class="fc-part" data-part="formule">
+        <button type="button" aria-pressed="false">Formules</button>
+        <div class="fc-body"><ul class="fc-list"><li class="fc-eq">\[ \underline H = \dfrac{jL\omega}{R+jL\omega} \]</li><li class="fc-eq">\[ f_c = \dfrac{R}{2\pi L} \]</li><li class="fc-txt">sortie aux bornes de L</li></ul></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="block" id="f2">
+    <h2>2. Filtres du 2e ordre RLC (ch1, TP1)</h2>
+    <p class="lead fc-sub">x = ω/ω0 ; pour une chaîne RLC série : ω0 = 1/√(LC) et Q = (1/R)√(L/C).</p>
+
+    <article class="fc" id="rlc-pb-r">
+      <header class="fc-head"><span class="fc-n">5</span><span class="fc-tag">2e ordre RLC série</span></header>
+      <div class="fc-part" data-part="nom">
+        <button type="button" aria-pressed="false">Nom</button>
+        <div class="fc-body"><h3 class="fc-name">Passe-bande RLC série (sortie aux bornes de R)</h3></div>
+      </div>
+      <div class="fc-part" data-part="montage">
+        <button type="button" aria-pressed="false">Montage</button>
+        <div class="fc-body fc-fig"><svg viewBox="0 -22 370 245" role="img" aria-label="schéma du filtre" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><text x="22" y="76" text-anchor="end" font-size="19" fill="currentColor" stroke="none">e</text><path d="M40,70 a13.75,13.75 0 0 1 27.5,0 a13.75,13.75 0 0 1 27.5,0 a13.75,13.75 0 0 1 27.5,0 a13.75,13.75 0 0 1 27.5,0"/><text x="95.0" y="36.5" text-anchor="middle" font-size="19" fill="currentColor" stroke="none">L</text><line x1="150" y1="70" x2="201.0" y2="70"/><line x1="201.0" y1="57" x2="201.0" y2="83"/><line x1="209.0" y1="57" x2="209.0" y2="83"/><line x1="209.0" y1="70" x2="260" y2="70"/><text x="205.0" y="51" text-anchor="middle" font-size="19" fill="currentColor" stroke="none">C</text><line x1="260" y1="70" x2="260" y2="103.0"/><rect x="251" y="103.0" width="18" height="44"/><line x1="260" y1="147.0" x2="260" y2="180"/><text x="276" y="130.0" text-anchor="start" font-size="19" fill="currentColor" stroke="none">R</text><line x1="260" y1="180" x2="260" y2="188"/><line x1="248" y1="188" x2="272" y2="188"/><line x1="252" y1="193" x2="268" y2="193"/><line x1="256" y1="198" x2="264" y2="198"/><circle cx="260" cy="70" r="3.5" fill="currentColor" stroke="none"/><text x="272" y="62" text-anchor="start" font-size="19" fill="currentColor" stroke="none">s</text></g></svg></div>
+      </div>
+      <div class="fc-part" data-part="formule">
+        <button type="button" aria-pressed="false">Formules</button>
+        <div class="fc-body"><ul class="fc-list"><li class="fc-eq">\[ \underline H = \dfrac{1}{1+jQ\left(x-\dfrac{1}{x}\right)} \]</li><li class="fc-eq">\[ \omega_0 = \dfrac{1}{\sqrt{LC}}\ ,\quad Q = \dfrac{1}{R}\sqrt{\dfrac{L}{C}} \]</li><li class="fc-eq">\[ \Delta\omega = \dfrac{\omega_0}{Q} \]</li><li class="fc-txt">H0 = 1 à f0 ; phase nulle à f0</li></ul></div>
+      </div>
+    </article>
+    <article class="fc" id="rlc-pb-c">
+      <header class="fc-head"><span class="fc-n">6</span><span class="fc-tag">2e ordre RLC série</span></header>
+      <div class="fc-part" data-part="nom">
+        <button type="button" aria-pressed="false">Nom</button>
+        <div class="fc-body"><h3 class="fc-name">Passe-bas RLC série (sortie aux bornes de C)</h3></div>
+      </div>
+      <div class="fc-part" data-part="montage">
+        <button type="button" aria-pressed="false">Montage</button>
+        <div class="fc-body fc-fig"><svg viewBox="0 -22 370 245" role="img" aria-label="schéma du filtre" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><text x="22" y="76" text-anchor="end" font-size="19" fill="currentColor" stroke="none">e</text><line x1="40" y1="70" x2="73.0" y2="70"/><rect x="73.0" y="61" width="44" height="18"/><line x1="117.0" y1="70" x2="150" y2="70"/><text x="95.0" y="55" text-anchor="middle" font-size="19" fill="currentColor" stroke="none">R</text><path d="M150,70 a13.75,13.75 0 0 1 27.5,0 a13.75,13.75 0 0 1 27.5,0 a13.75,13.75 0 0 1 27.5,0 a13.75,13.75 0 0 1 27.5,0"/><text x="205.0" y="36.5" text-anchor="middle" font-size="19" fill="currentColor" stroke="none">L</text><line x1="260" y1="70" x2="260" y2="121.0"/><line x1="247" y1="121.0" x2="273" y2="121.0"/><line x1="247" y1="129.0" x2="273" y2="129.0"/><line x1="260" y1="129.0" x2="260" y2="180"/><text x="278" y="130.0" text-anchor="start" font-size="19" fill="currentColor" stroke="none">C</text><line x1="260" y1="180" x2="260" y2="188"/><line x1="248" y1="188" x2="272" y2="188"/><line x1="252" y1="193" x2="268" y2="193"/><line x1="256" y1="198" x2="264" y2="198"/><circle cx="260" cy="70" r="3.5" fill="currentColor" stroke="none"/><text x="272" y="62" text-anchor="start" font-size="19" fill="currentColor" stroke="none">s</text></g></svg></div>
+      </div>
+      <div class="fc-part" data-part="formule">
+        <button type="button" aria-pressed="false">Formules</button>
+        <div class="fc-body"><ul class="fc-list"><li class="fc-eq">\[ \underline H = \dfrac{1}{1+j\dfrac{x}{Q}-x^2} \]</li><li class="fc-eq">\[ |\underline H(\omega_0)| = Q\ ,\quad \text{phase}(\omega_0) = -90^\circ \]</li><li class="fc-eq">\[ \text{résonance si } Q>\dfrac{1}{\sqrt2}\ :\ \omega_r = \omega_0\sqrt{1-\dfrac{1}{2Q^2}} \]</li><li class="fc-txt">pente −40 dB/décade</li></ul></div>
+      </div>
+    </article>
+    <article class="fc" id="rlc-ph-l">
+      <header class="fc-head"><span class="fc-n">7</span><span class="fc-tag">2e ordre RLC série</span></header>
+      <div class="fc-part" data-part="nom">
+        <button type="button" aria-pressed="false">Nom</button>
+        <div class="fc-body"><h3 class="fc-name">Passe-haut RLC série (sortie aux bornes de L)</h3></div>
+      </div>
+      <div class="fc-part" data-part="montage">
+        <button type="button" aria-pressed="false">Montage</button>
+        <div class="fc-body fc-fig"><svg viewBox="0 -22 370 245" role="img" aria-label="schéma du filtre" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><text x="22" y="76" text-anchor="end" font-size="19" fill="currentColor" stroke="none">e</text><line x1="40" y1="70" x2="91.0" y2="70"/><line x1="91.0" y1="57" x2="91.0" y2="83"/><line x1="99.0" y1="57" x2="99.0" y2="83"/><line x1="99.0" y1="70" x2="150" y2="70"/><text x="95.0" y="51" text-anchor="middle" font-size="19" fill="currentColor" stroke="none">C</text><line x1="150" y1="70" x2="183.0" y2="70"/><rect x="183.0" y="61" width="44" height="18"/><line x1="227.0" y1="70" x2="260" y2="70"/><text x="205.0" y="55" text-anchor="middle" font-size="19" fill="currentColor" stroke="none">R</text><path d="M260,70 a13.75,13.75 0 0 1 0,27.5 a13.75,13.75 0 0 1 0,27.5 a13.75,13.75 0 0 1 0,27.5 a13.75,13.75 0 0 1 0,27.5"/><text x="293.5" y="130.0" text-anchor="start" font-size="19" fill="currentColor" stroke="none">L</text><line x1="260" y1="180" x2="260" y2="188"/><line x1="248" y1="188" x2="272" y2="188"/><line x1="252" y1="193" x2="268" y2="193"/><line x1="256" y1="198" x2="264" y2="198"/><circle cx="260" cy="70" r="3.5" fill="currentColor" stroke="none"/><text x="272" y="62" text-anchor="start" font-size="19" fill="currentColor" stroke="none">s</text></g></svg></div>
+      </div>
+      <div class="fc-part" data-part="formule">
+        <button type="button" aria-pressed="false">Formules</button>
+        <div class="fc-body"><ul class="fc-list"><li class="fc-eq">\[ \underline H = \dfrac{-x^2}{1+j\dfrac{x}{Q}-x^2} = \dfrac{jQx}{1+jQ\left(x-\dfrac1x\right)} \]</li><li class="fc-eq">\[ |\underline H(\omega_0)| = Q \]</li><li class="fc-txt">pente +40 dB/décade ; H → 1 à haute fréquence</li></ul></div>
+      </div>
+    </article>
+    <article class="fc" id="rlc-bouchon">
+      <header class="fc-head"><span class="fc-n">8</span><span class="fc-tag">2e ordre RLC</span></header>
+      <div class="fc-part" data-part="nom">
+        <button type="button" aria-pressed="false">Nom</button>
+        <div class="fc-body"><h3 class="fc-name">Passe-bande « bouchon » (R série + L ∥ C)</h3></div>
+      </div>
+      <div class="fc-part" data-part="montage">
+        <button type="button" aria-pressed="false">Montage</button>
+        <div class="fc-body fc-fig"><svg viewBox="0 -22 300 245" role="img" aria-label="schéma du filtre RLC parallèle" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><text x="22" y="76" text-anchor="end" font-size="19" fill="currentColor" stroke="none">e</text><line x1="40" y1="70" x2="73.0" y2="70"/><rect x="73.0" y="61" width="44" height="18"/><line x1="117.0" y1="70" x2="150" y2="70"/><text x="95.0" y="55" text-anchor="middle" font-size="19" fill="currentColor" stroke="none">R</text><circle cx="150" cy="70" r="3.5" fill="currentColor" stroke="none"/><text x="162" y="62" text-anchor="start" font-size="19" fill="currentColor" stroke="none">s</text><line x1="150" y1="70" x2="230" y2="70"/><circle cx="230" cy="70" r="3.5" fill="currentColor" stroke="none"/><line x1="150" y1="70" x2="150" y2="121.0"/><line x1="137" y1="121.0" x2="163" y2="121.0"/><line x1="137" y1="129.0" x2="163" y2="129.0"/><line x1="150" y1="129.0" x2="150" y2="180"/><text x="132" y="130.0" text-anchor="end" font-size="19" fill="currentColor" stroke="none">C</text><path d="M230,70 a13.75,13.75 0 0 1 0,27.5 a13.75,13.75 0 0 1 0,27.5 a13.75,13.75 0 0 1 0,27.5 a13.75,13.75 0 0 1 0,27.5"/><text x="263.5" y="130.0" text-anchor="start" font-size="19" fill="currentColor" stroke="none">L</text><line x1="150" y1="180" x2="230" y2="180"/><line x1="190" y1="180" x2="190" y2="188"/><line x1="178" y1="188" x2="202" y2="188"/><line x1="182" y1="193" x2="198" y2="193"/><line x1="186" y1="198" x2="194" y2="198"/></g></svg></div>
+      </div>
+      <div class="fc-part" data-part="formule">
+        <button type="button" aria-pressed="false">Formules</button>
+        <div class="fc-body"><ul class="fc-list"><li class="fc-eq">\[ \underline H = \dfrac{1}{1+jQ'\left(x-\dfrac1x\right)} \]</li><li class="fc-eq">\[ Q' = R\sqrt{\dfrac{C}{L}}\ ,\quad \omega_0 = \dfrac{1}{\sqrt{LC}} \]</li><li class="fc-txt">sortie aux bornes du parallèle L ∥ C ; attention : Q' = R√(C/L), pas (1/R)√(L/C)</li></ul></div>
+      </div>
+    </article>
+    <article class="fc" id="pont-wien">
+      <header class="fc-head"><span class="fc-n">9</span><span class="fc-tag">2e ordre RC</span></header>
+      <div class="fc-part" data-part="nom">
+        <button type="button" aria-pressed="false">Nom</button>
+        <div class="fc-body"><h3 class="fc-name">Pont de Wien (passe-bande RC)</h3></div>
+      </div>
+      <div class="fc-part" data-part="montage">
+        <button type="button" aria-pressed="false">Montage</button>
+        <div class="fc-body fc-fig"><svg viewBox="0 -22 400 245" role="img" aria-label="schéma du pont de Wien" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><text x="22" y="76" text-anchor="end" font-size="19" fill="currentColor" stroke="none">e</text><line x1="40" y1="70" x2="73.0" y2="70"/><rect x="73.0" y="61" width="44" height="18"/><line x1="117.0" y1="70" x2="150" y2="70"/><text x="95.0" y="55" text-anchor="middle" font-size="19" fill="currentColor" stroke="none">R</text><line x1="150" y1="70" x2="201.0" y2="70"/><line x1="201.0" y1="57" x2="201.0" y2="83"/><line x1="209.0" y1="57" x2="209.0" y2="83"/><line x1="209.0" y1="70" x2="260" y2="70"/><text x="205.0" y="51" text-anchor="middle" font-size="19" fill="currentColor" stroke="none">C</text><circle cx="260" cy="70" r="3.5" fill="currentColor" stroke="none"/><text x="272" y="62" text-anchor="start" font-size="19" fill="currentColor" stroke="none">s</text><line x1="260" y1="70" x2="260" y2="103.0"/><rect x="251" y="103.0" width="18" height="44"/><line x1="260" y1="147.0" x2="260" y2="180"/><text x="276" y="130.0" text-anchor="start" font-size="19" fill="currentColor" stroke="none">R</text><line x1="260" y1="70" x2="340" y2="70"/><circle cx="340" cy="70" r="3.5" fill="currentColor" stroke="none"/><line x1="340" y1="70" x2="340" y2="121.0"/><line x1="327" y1="121.0" x2="353" y2="121.0"/><line x1="327" y1="129.0" x2="353" y2="129.0"/><line x1="340" y1="129.0" x2="340" y2="180"/><text x="358" y="130.0" text-anchor="start" font-size="19" fill="currentColor" stroke="none">C</text><line x1="260" y1="180" x2="340" y2="180"/><line x1="300" y1="180" x2="300" y2="188"/><line x1="288" y1="188" x2="312" y2="188"/><line x1="292" y1="193" x2="308" y2="193"/><line x1="296" y1="198" x2="304" y2="198"/></g></svg></div>
+      </div>
+      <div class="fc-part" data-part="formule">
+        <button type="button" aria-pressed="false">Formules</button>
+        <div class="fc-body"><ul class="fc-list"><li class="fc-eq">\[ \underline H = \dfrac{1/3}{1+\dfrac{j}{3}\left(\dfrac{\omega}{\omega_0}-\dfrac{\omega_0}{\omega}\right)} \]</li><li class="fc-eq">\[ \omega_0 = \dfrac{1}{RC}\ ,\quad H_0 = \dfrac13 \]</li><li class="fc-txt">phase nulle à ω0 ; gain maximal 1/3 (pas de résonance)</li></ul></div>
+      </div>
+    </article>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  function setPart(p, on){
+    p.classList.toggle('open', on);
+    p.querySelector('button').setAttribute('aria-pressed', on ? 'true' : 'false');
+  }
+  document.querySelectorAll('.fc-part > button').forEach(function(b){
+    b.addEventListener('click', function(){
+      var p = b.parentElement;
+      setPart(p, !p.classList.contains('open'));
+    });
+  });
+  document.querySelectorAll('.fc-bar [data-mode]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var m = b.getAttribute('data-mode');
+      document.querySelectorAll('.fc-part').forEach(function(p){
+        var k = p.getAttribute('data-part');
+        setPart(p, m === 'tout' || m === k);
+      });
+    });
+  });
+})();
+</script>
+
+<script src="../assets/gate.js"></script>
+<script src="../assets/catalogue.js?v=2"></script>
+<script src="../assets/nav.js?v=2"></script>
+<script src="../assets/lecture.js?v=3"></script>
+</body>
+</html>

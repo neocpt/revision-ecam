@@ -28,7 +28,9 @@ window.CATALOGUE = {
           { n: "Ch5", titre: "Oscillateurs auto-entretenus", url: "aem2-electronique/ch5-oscillateurs.html" },
           { n: "Ch6", titre: "Électronique numérique", url: "aem2-electronique/ch6-electronique-numerique.html" },
           { n: "Ch7", titre: "Moment cinétique (systèmes tournants)", url: "aem2-physique/ch7-moment-cinetique.html" },
-          { n: "Ch8", titre: "Mouvement à force centrale", url: "aem2-physique/ch8-forces-centrales.html" }
+          { n: "Ch8", titre: "Mouvement à force centrale", url: "aem2-physique/ch8-forces-centrales.html" },
+          { n: "Fiche", titre: "Fiche ALI — montages à connaître", url: "aem2-electronique/fiche-ali.html" },
+          { n: "Fiche", titre: "Fiche filtres RC et RLC", url: "aem2-electronique/fiche-filtres-rlc.html" }
         ] }
       ],
       annales: [
