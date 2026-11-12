@@ -22,3 +22,9 @@ Une entrée par document traité (date, source, pages créées ou modifiées, er
 - Schémas dessinés en SVG (même gabarit que ch3). Vérifiés visuellement en local.
 - Non inclus : oscillateur à NIC (ch5) et oscillateur sinus-cosinus (ch5), schéma non reconstitué de façon fiable ; dent de scie (générateur de balayage) non incluse.
 - Points incertains : les noms de résistances du MVA 2 ALI sont ceux du schéma de la fiche (R1, R2, R3), à vérifier face au TP5a.
+
+## 2026-11-12 — Annales AM2 Physique · DS2 2025-2026 (Ch3-Ch4-Ch5) corrigé
+- Source : « Ds2 2025.pdf » (photos de la copie de novembre 2025, 4 pages, envoyé par l'utilisateur). Copie dans `documents/aem2-electronique/annales/2025-2026/ds/DS2_AM2_physique_sujet_photos.pdf` (même dossier que le DS1).
+- Page créée : `annales/2025-2026/am2-physique/ds2-annee-derniere.html` (Ex1 oscillateurs 60 pts, Ex2 numérisation d'un créneau 30 pts, Ex3 tourne-disque 30 pts), format par étapes. Énoncés recadrés dans `enonces/ds2-*.jpg`, graphes SVG dans `img/ds2-*.svg`. Liens ajoutés dans `annales/2025-2026/am2-physique/index.html` et le compteur de `annales/index.html`.
+- Pas de corrigé officiel : correction rédigée par nous. Question bonus (résistance négative, montage 2) non traitée.
+- Points incertains : f0 du Wien lue sur l'oscillogramme (≈ 8 périodes en 0,05 s → 160 Hz → C ≈ 1,0 µF) ; β = R3/R4 du montage 1 lu sur un schéma petit ; légende manuscrite du spectre zoomé (Q7 ex2) illisible, réponse calculée.

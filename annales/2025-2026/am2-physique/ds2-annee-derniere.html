@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DS2 année dernière (Ch3-Ch4-Ch5) — Révision ECAM</title>
+<link rel="stylesheet" href="../../../assets/style.css?v=4">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
+  svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div id="site-nav"></div>
+<nav class="subnav"><a href="#ex1">Ex 1</a><a href="#ex2">Ex 2</a><a href="#ex3">Ex 3</a><a href="#docs">Documents</a></nav>
+
+<main class="wrap">
+  <span class="chip">Annales · AM2 Physique · DS2 (Ch3-Ch4-Ch5) promo P2029 · novembre 2025</span>
+  <h1 class="title">DS2 de l'année dernière — corrigé complet</h1>
+  <p class="lead">Sujet officiel du DS2 d'AEM2 (novembre 2025) : <b>2 h, barème sur 120 points</b>, aucun document ni calculatrice.
+  Trois exercices : oscillateurs auto-entretenus (60 pts), numérisation d'un signal créneau (30 pts) et tourne-disque (30 pts).
+  <b>L'énoncé (photo) est juste au-dessus de chaque correction.</b> Aucun corrigé officiel n'a été fourni : la correction est rédigée par nous.
+  La question bonus (hors barème) n'est pas traitée.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#ex1">Ex 1 — Oscillateurs auto-entretenus (60 pts)</a></li>
+      <li><a href="#ex2">Ex 2 — Numérisation d'un signal créneau (30 pts)</a></li>
+      <li><a href="#ex3">Ex 3 — Tourne-disque (30 pts)</a></li>
+      <li><a href="#docs">Documents donnés</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================= EXERCICE 1 ======================= -->
+  <section class="block" id="ex1">
+    <h2>Exercice 1 — Oscillateurs auto-entretenus · 60 pts</h2>
+    <div class="exo-card">
+      <div class="exo-head">Quatre montages : familles, oscillateur de Wien, multivibrateurs <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <figure><img src="enonces/ds2-ex1a.jpg" alt="Énoncé exercice 1, montages 1 à 4 et questions 1 à 3"><figcaption>Exercice 1 : Oscillateurs auto-entretenus (montages 1 à 4, questions 1 à 3).</figcaption></figure>
+
+        <p class="q">1) « L'alimentation constante » des quatre montages (1 pt)</p>
+        <p class="etape">Étape 1 : chercher la source d'énergie</p>
+        <p>Aucun des quatre montages ne reçoit de signal d'entrée extérieur.</p>
+        <p>Les ALI, eux, sont alimentés par une source de tension continue (\(\pm V_{CC}\)). C'est elle qui fixe les tensions de saturation \(\pm V_{sat}\).</p>
+        <div class="res">L'alimentation constante est la <b>source de tension continue qui alimente les ALI</b>. C'est la seule source d'énergie : le signal périodique est fabriqué à partir d'elle.</div>
+
+        <p class="q">2) Les deux familles d'oscillateurs, leurs blocs et leur principe (8 pts)</p>
+        <p class="etape">Étape 1 : oscillateurs quasi-sinusoïdaux (OQS)</p>
+        <ul>
+          <li><b>Blocs</b> : un <b>amplificateur</b> (gain \(A\)) et un <b>filtre sélectif</b> passe-bande (filtre de Wien, circuit LC…).</li>
+          <li><b>Principe</b> : la sortie du filtre est réinjectée à l'entrée de l'amplificateur (bouclage). À la fréquence centrale \(f_0\) du filtre, le gain de boucle vaut 1 avec un déphasage nul : une sinusoïde de fréquence \(f_0\) s'entretient d'elle-même.</li>
+        </ul>
+        <div class="rappel"><span class="lab">Rappel · condition d'oscillation (Barkhausen)</span>\[ A\,\underline H(j\omega_0)=1 \]</div>
+        <p class="etape">Étape 2 : oscillateurs de relaxation (multivibrateurs astables, MVA)</p>
+        <ul>
+          <li><b>Blocs</b> : un <b>comparateur à hystérésis</b> et un <b>intégrateur</b> (ou un simple circuit RC).</li>
+          <li><b>Principe</b> : la tension intégrée monte ou descend jusqu'à un seuil \(\pm\beta V_{sat}\). Le comparateur bascule alors, ce qui inverse le sens de variation. On obtient un signal carré (sortie du comparateur) et un signal triangulaire ou en arcs d'exponentielle (sortie de l'intégrateur).</li>
+        </ul>
+
+        <p class="q">3) Famille de chaque montage, blocs identifiés (8 pts)</p>
+        <p class="etape">Étape 1 : reconnaître les blocs sur chaque schéma</p>
+        <ul>
+          <li><b>Montage 1 : MVA.</b> Bloc de gauche = intégrateur (ALI 1, condensateur \(C\) entre sortie et entrée −, résistances \(R_1\), \(R_2\) avec les diodes). Bloc de droite = comparateur à hystérésis (ALI 2, \(R_3\), \(R_4\) : la sortie est ramenée sur l'entrée +).</li>
+          <li><b>Montage 2 : OQS.</b> Bloc de gauche = filtre passe-bande LC (\(C\), \(L\), \(R\) en parallèle). Bloc de droite = amplificateur (ALI avec \(R_1\) et la résistance réglable \(r\)).</li>
+          <li><b>Montage 3 : OQS.</b> Bloc de gauche = amplificateur non inverseur (ALI, \(R_1\), \(R_2\) réglable). Bloc de droite = filtre de Wien passe-bande (\(R\) et \(C\) en série, puis \(C\) et \(R\) en parallèle).</li>
+          <li><b>Montage 4 : MVA.</b> Circuit RC (\(R\) de la sortie vers l'entrée −, \(C\) vers la masse) qui joue le rôle d'intégrateur. Comparateur à hystérésis (\(R_2\) de la sortie vers l'entrée +, \(R_1\) de l'entrée + vers la masse).</li>
+        </ul>
+        <div class="warnbox"><span class="lab">Piège</span> Ce qui distingue les deux familles est le second bloc : un <b>filtre sélectif</b> donne une sinusoïde (OQS), un <b>comparateur</b> qui bascule donne un signal carré (MVA). La présence d'un condensateur ne suffit pas à conclure.</div>
+
+        <figure><img src="enonces/ds2-ex1b.jpg" alt="Énoncé exercice 1, questions 4 à 12"><figcaption>Exercice 1 (suite) : questions 4 à 12, oscillogrammes des montages 3 et 1.</figcaption></figure>
+
+        <p class="q">4) Oscillogrammes du montage 3 : légende, \(H_0\) et \(A_0\) (3 + 3 pts)</p>
+        <p class="etape">Étape 1 : la légende</p>
+        <ul>
+          <li>Courbe bleue, d'amplitude finale 5 V : <b>entrée \(V_2\)</b> de l'amplificateur (c'est la sortie du filtre de Wien).</li>
+          <li>Courbe verte, d'amplitude finale 15 V : <b>sortie \(V_1\)</b> de l'ALI.</li>
+          <li>Tirets à \(\pm 15\) V : \(\pm V_{sat}\). Tirets à \(\pm 5\) V : amplitude finale de \(V_2\), soit \(V_{sat}/3\).</li>
+        </ul>
+        <p class="etape">Étape 2 : \(H_0\) et \(A_0\)</p>
+        <div class="rappel"><span class="lab">Rappel · filtre de Wien (R et C identiques)</span>\[ H_0=\frac13 \quad\text{à}\quad \omega_0=\frac1{RC} \]</div>
+        <p>Pour des oscillations quasi sinusoïdales, le gain de boucle doit valoir 1 :</p>
+        \[ A_0\,H_0=1 \]
+        \[ A_0=\frac{1}{H_0}=3 \]
+        <div class="res">\(H_0=\dfrac13\) et \(A_0\approx3\) (en pratique un peu plus que 3 pour que les oscillations démarrent).</div>
+        <p>On le vérifie sur l'oscillogramme : \(V_1/V_2=15/5=3\).</p>
+
+        <p class="q">5) Valeurs de \(R_{2OQS}\) et de \(C\) pour \(R=R_1=1{,}0\ \text{k}\Omega\) (7 pts)</p>
+        <p class="etape">Étape 1 : gain de l'amplificateur non inverseur</p>
+        <div class="rappel"><span class="lab">Rappel · amplificateur non inverseur</span>\[ A_0=1+\frac{R_2}{R_1} \]</div>
+        <p>On impose \(A_0=3\) :</p>
+        \[ 1+\frac{R_{2OQS}}{R_1}=3 \]
+        \[ R_{2OQS}=2R_1=2\times1{,}0\ \text{k}\Omega \]
+        <div class="res">\(R_{2OQS}=2{,}0\ \text{k}\Omega\)</div>
+        <p class="etape">Étape 2 : lire la fréquence sur l'oscillogramme</p>
+        <p>Entre \(t=0{,}10\) s et \(t=0{,}15\) s, on compte environ 8 périodes.</p>
+        \[ T\approx\frac{0{,}05\ \text{s}}{8}\approx6{,}3\ \text{ms} \]
+        \[ f_0=\frac1T\approx160\ \text{Hz} \]
+        <p class="etape">Étape 3 : en déduire \(C\)</p>
+        <div class="rappel"><span class="lab">Rappel · fréquence d'oscillation</span>\[ f_0=\frac{1}{2\pi RC} \]</div>
+        \[ C=\frac{1}{2\pi R f_0} \]
+        \[ C=\frac{1}{2\pi\times1{,}0\cdot10^{3}\times160}\approx1{,}0\cdot10^{-6}\ \text{F} \]
+        <div class="res">\(C\approx1{,}0\ \mu\text{F}\) (on retrouve \(f_0=\dfrac{1}{2\pi\times10^{3}\times10^{-6}}\approx159\ \text{Hz}\))</div>
+        <div class="warnbox"><span class="lab">Piège</span> Sans calculatrice, il faut compter les périodes sur un grand intervalle (au moins 0,05 s) : lire une seule période sur ce graphe donnerait une erreur de 30 %.</div>
+
+        <p class="q">6) Allure des oscillogrammes si \(R_2\ll R_{2OQS}\) et si \(R_2\gg R_{2OQS}\) (4 pts)</p>
+        <ul>
+          <li><b>\(R_2\ll R_{2OQS}\)</b> : \(A_0&lt;3\), donc \(A_0H_0&lt;1\). À chaque tour de boucle le signal est atténué : les oscillations s'amortissent et \(V_1\), \(V_2\) tendent vers 0. Aucune oscillation ne s'entretient.</li>
+          <li><b>\(R_2\gg R_{2OQS}\)</b> : \(A_0\gg3\), donc \(A_0H_0\gg1\). L'amplitude croît très vite jusqu'à la saturation. \(V_1\) devient quasi rectangulaire (écrêtée à \(\pm V_{sat}\)) et \(V_2\) est très déformée : le signal n'est plus sinusoïdal.</li>
+        </ul>
+
+        <p class="q">7) Montage 1 : tensions, \(\beta\), \(t_1\), \(t'_2\) et relation entre \(R_1\) et \(R_2\) (5 pts)</p>
+        <p class="etape">Étape 1 : associer les courbes</p>
+        <ul>
+          <li>Courbe rouge, rectangulaire entre \(\pm V_{sat}\) : sortie du comparateur \(v_s\), qui est aussi \(v_e\), l'entrée de l'intégrateur.</li>
+          <li>Courbe noire, triangulaire entre \(\pm\beta V_{sat}\) : sortie \(u\) de l'intégrateur.</li>
+        </ul>
+        <p class="etape">Étape 2 : \(\beta\)</p>
+        <p>D'après le schéma, \(u\) arrive sur l'entrée + par \(R_3\) et \(v_s\) y revient par \(R_4\). Le comparateur bascule quand \(u=\mp\dfrac{R_3}{R_4}v_s\) :</p>
+        \[ \beta=\frac{R_3}{R_4} \]
+        <p class="etape">Étape 3 : \(t_1\) et \(t'_2\)</p>
+        <div class="rappel"><span class="lab">Rappel · intégrateur inverseur</span>\[ \frac{du}{dt}=-\frac{v_e}{R\,C} \]</div>
+        <ul>
+          <li>Pour \(v_e=+V_{sat}\), seule \(D_1\) conduit : \(R=R_1\). \(u\) descend de 0 à \(-\beta V_{sat}\) avec la pente \(-V_{sat}/(R_1C)\) :
+          \[ t_1=\beta R_1 C \]</li>
+          <li>Pour \(v_e=-V_{sat}\), seule \(D_2\) conduit : \(R=R_2\). \(u\) remonte de \(-\beta V_{sat}\) à \(+\beta V_{sat}\) (variation \(2\beta V_{sat}\)) en une durée :
+          \[ t'_2=2\beta R_2 C \]</li>
+        </ul>
+        <p class="etape">Étape 4 : relation entre \(R_1\) et \(R_2\)</p>
+        <p>Sur l'oscillogramme, la montée et la descente du triangle durent le même temps (signal carré de rapport cyclique 1/2). La descente complète dure \(2\beta R_1C\), la montée \(2\beta R_2C\).</p>
+        <div class="res">Les oscillogrammes sont symétriques si \(R_1=R_2\). Alors \(T=4\beta R_1C\).</div>
+        <div class="warnbox"><span class="lab">Point incertain</span> Le schéma photographié est petit : l'expression \(\beta=R_3/R_4\) suppose que l'entrée − de l'ALI 2 est à la masse et qu'il n'y a pas de résistance entre l'entrée + et la masse. Le résultat utile pour la suite (seuils \(\pm\beta V_{sat}\)) ne dépend pas de ce détail.</div>
+
+        <p class="q">8) Intérêt usuel de ce montage, allure pour \(R_1=2R_2\) (3 pts)</p>
+        <p class="etape">Étape 1 : à quoi servent les diodes</p>
+        <p>Les diodes donnent une résistance différente à la montée (\(R_2\)) et à la descente (\(R_1\)). On peut donc <b>régler le rapport cyclique</b> du signal carré et la symétrie du triangle. C'est l'intérêt usuel de ce générateur. Ici, avec \(R_1=R_2\), cette possibilité n'est pas exploitée.</p>
+        <p class="etape">Étape 2 : cas \(R_1=2R_2\)</p>
+        <ul>
+          <li>Durée à \(v_s=+V_{sat}\) (descente de \(u\)) : \(2\beta R_1C=4\beta R_2C\).</li>
+          <li>Durée à \(v_s=-V_{sat}\) (montée de \(u\)) : \(2\beta R_2C\).</li>
+          <li>Période : \(T=6\beta R_2C\).</li>
+        </ul>
+        <div class="res">Le carré passe \(2/3\) de la période à \(+V_{sat}\) et \(1/3\) à \(-V_{sat}\) (rapport cyclique 2/3). Le triangle devient dissymétrique : il descend deux fois plus lentement qu'il ne monte (forme en dent de scie).</div>
+
+        <p class="q">9) Montage 4 : montrer que l'ALI fonctionne en régime saturé (6 pts)</p>
+        <p class="etape">Étape 1 : les potentiels d'entrée</p>
+        <p>Entrée + : pont diviseur \(R_2\) (vers la sortie) et \(R_1\) (vers la masse).</p>
+        <div class="rappel"><span class="lab">Rappel · diviseur de tension</span>\[ V_+=\frac{R_1}{R_1+R_2}\,s=\beta s \]</div>
+        <p>Entrée − : elle est reliée au condensateur, donc \(V_-=e\).</p>
+        <p class="etape">Étape 2 : hypothèse du régime linéaire</p>
+        <p>En régime linéaire, ALI idéal : \(V_+=V_-\), donc :</p>
+        \[ e=\beta s \]
+        <p class="etape">Étape 3 : équation différentielle en \(s\)</p>
+        <p>Le circuit RC donne :</p>
+        \[ e+RC\frac{de}{dt}=s \]
+        <p>On remplace \(e\) par \(\beta s\) :</p>
+        \[ \beta s+\beta RC\frac{ds}{dt}=s \]
+        \[ \frac{ds}{dt}-\frac{1-\beta}{\beta RC}\,s=0 \]
+        <p class="etape">Étape 4 : stabilité</p>
+        \[ s(t)=s(0)\,\exp\!\left(\frac{1-\beta}{\beta RC}\,t\right) \]
+        <p>Comme \(0&lt;\beta&lt;1\), l'exposant est positif : la moindre perturbation croît exponentiellement.</p>
+        <div class="res">La solution du régime linéaire diverge : elle n'est pas stable. L'ALI ne peut pas y rester, il fonctionne en régime saturé (\(s=\pm V_{sat}\)).</div>
+
+        <p class="q">10) Cyclogramme \(s=f(e)\) du comparateur du montage 4 (3 pts)</p>
+        <p class="etape">Étape 1 : les deux seuils</p>
+        <ul>
+          <li>Si \(s=+V_{sat}\) : \(V_+=\beta V_{sat}\). La sortie reste haute tant que \(e&lt;\beta V_{sat}\), elle bascule à \(-V_{sat}\) quand \(e\) dépasse \(+\beta V_{sat}\).</li>
+          <li>Si \(s=-V_{sat}\) : \(V_+=-\beta V_{sat}\). La sortie bascule à \(+V_{sat}\) quand \(e\) descend sous \(-\beta V_{sat}\).</li>
+        </ul>
+        <div class="res">\(\beta=\dfrac{R_1}{R_1+R_2}\). Le cycle est un rectangle d'hystérésis, de côtés verticaux en \(e=\pm\beta V_{sat}\), parcouru dans le sens indiqué ci-dessous (comparateur inverseur).</div>
+      </div>
+    </div>
+    <figure><img src="img/ds2-ex1-cyclogramme.svg" alt="Cyclogramme s = f(e) : rectangle entre plus et moins beta Vsat"><figcaption>Question 10 : cyclogramme du comparateur à hystérésis du montage 4.</figcaption></figure>
+    <div class="exo-card">
+      <div class="exo-head">Exercice 1 (fin) : montage 4, résolution et allure de e(t)</div>
+      <div class="exo-body">
+        <p class="q">11) Résolution de \(e+RC\dfrac{de}{dt}=s\) pendant la première phase, instant \(t_1\) (7 pts)</p>
+        <p class="etape">Étape 1 : condition initiale</p>
+        <p>À \(t=0\), l'ALI vient de basculer en saturation haute. Ce basculement se produit quand \(e\) atteint le seuil bas :</p>
+        \[ e(0)=-\beta V_{sat} \qquad s=+V_{sat} \]
+        <p class="etape">Étape 2 : solution de l'équation</p>
+        <div class="rappel"><span class="lab">Rappel · équation du premier ordre</span>\[ \tau\frac{dy}{dt}+y=Y_\infty \;\Rightarrow\; y(t)=Y_\infty+\big(y(0)-Y_\infty\big)e^{-t/\tau} \]</div>
+        <p>Ici \(\tau=RC\) et \(Y_\infty=V_{sat}\) :</p>
+        \[ e(t)=V_{sat}+\big(-\beta V_{sat}-V_{sat}\big)e^{-t/RC} \]
+        \[ e(t)=V_{sat}\Big[1-(1+\beta)\,e^{-t/RC}\Big] \]
+        <p class="etape">Étape 3 : instant du basculement</p>
+        <p>L'ALI bascule en saturation basse quand \(e(t_1)=+\beta V_{sat}\) :</p>
+        \[ 1-(1+\beta)\,e^{-t_1/RC}=\beta \]
+        \[ e^{-t_1/RC}=\frac{1-\beta}{1+\beta} \]
+        <div class="res">\[ t_1=RC\,\ln\!\left(\frac{1+\beta}{1-\beta}\right) \]</div>
+        <p>La phase suivante est symétrique (même calcul en changeant les signes) : la période est \(T=2t_1\).</p>
+
+        <p class="q">12) Allure de \(e(t)\) sur toute la durée (2 pts)</p>
+        <p>\(e(t)\) est formée d'<b>arcs d'exponentielle</b> qui oscillent entre \(-\beta V_{sat}\) et \(+\beta V_{sat}\). Chaque arc part vers l'asymptote \(\pm V_{sat}\) imposée par \(s\), et s'arrête au seuil où l'ALI bascule. Contrairement au montage 1, les rampes ne sont plus droites mais courbées (concavité tournée vers l'axe).</p>
+        <div class="res">Signal périodique de période \(2t_1\) : \(s(t)\) rectangulaire entre \(\pm V_{sat}\), \(e(t)\) en arcs d'exponentielle entre \(\pm\beta V_{sat}\) (tracé ci-dessous pour \(\beta=0{,}5\)).</div>
+      </div>
+    </div>
+    <figure><img src="img/ds2-ex1-e-s.svg" alt="Allure de s(t) rectangulaire et e(t) en arcs d'exponentielle"><figcaption>Question 12 : \(s(t)\) (vert) et \(e(t)\) (noir) pour \(\beta=0{,}5\), soit \(t_1=RC\ln 3\approx1{,}1\,RC\).</figcaption></figure>
+  </section>
+
+  <!-- ======================= EXERCICE 2 ======================= -->
+  <section class="block" id="ex2">
+    <h2>Exercice 2 — Numérisation d'un signal créneau · 30 pts</h2>
+    <div class="exo-card">
+      <div class="exo-head">Spectre FFT, Shannon, répliques et repliement <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <figure><img src="enonces/ds2-ex2.jpg" alt="Énoncé exercice 2, spectre FFT et questions 1 à 7"><figcaption>Exercice 2 : Numérisation d'un signal créneau.</figcaption></figure>
+
+        <p class="q">1) Déterminer \(f=100\) kHz à partir du spectre (2 pts)</p>
+        <p class="etape">Étape 1 : repérer le fondamental</p>
+        <p>Le fondamental est la raie la plus haute, la première après l'origine M.</p>
+        <p>Elle est à 0,8 carreau de M. Avec 125 kHz par carreau :</p>
+        \[ f=0{,}8\times125\ \text{kHz}=100\ \text{kHz} \]
+        <p class="etape">Étape 2 : mesure plus précise</p>
+        <p>Les grandes raies (harmoniques impairs) sont espacées de \(2f\). On mesure plusieurs écarts d'un coup : entre la 1re et la 6e grande raie il y a 8 carreaux, soit \(5\times2f=1\ \text{MHz}\).</p>
+        <div class="res">\(10f=1{,}0\) MHz, donc \(f=100\) kHz. Mesurer sur plusieurs raies divise l'erreur de lecture.</div>
+
+        <p class="q">2) Amplitude \(C_1=4U_{max}/\pi\) et loi des harmoniques (6 pts)</p>
+        <div class="rappel"><span class="lab">Rappel · série de Fourier d'un créneau symétrique \(\pm U_{max}\)</span>\[ u(t)=\frac{4U_{max}}{\pi}\sum_{n\ \text{impair}}\frac{\sin(n\omega t)}{n} \qquad C_n=\frac{4U_{max}}{n\pi} \]</div>
+        <p class="etape">Étape 1 : le fondamental</p>
+        \[ C_1=\frac{4\times16{,}50}{\pi}=21{,}0\ \text{V} \]
+        \[ C_{1,dB}=20\log(21{,}0)\approx26{,}4\ \text{dB} \]
+        <p class="etape">Étape 2 : la loi attendue</p>
+        <p>Les harmoniques pairs sont nuls. Les harmoniques impairs décroissent en \(1/n\). Le deuxième harmonique non nul est donc \(n=3\) :</p>
+        \[ C_3=\frac{C_1}{3}=7{,}0\ \text{V} \]
+        \[ C_{1,dB}-C_{3,dB}=20\log 3\approx9{,}5\ \text{dB} \]
+        <p class="etape">Étape 3 : vérification à l'écran</p>
+        <p>À 10 dB par carreau, la raie \(f_3\) doit être environ un carreau sous la raie \(f_1\). C'est ce qu'on lit.</p>
+        <div class="res">\(C_1=4U_{max}/\pi\approx21\) V ; les raies non nulles suivent \(C_n=C_1/n\) (\(n\) impair), soit \(-9{,}5\) dB entre \(f_1\) et \(f_3\).</div>
+
+        <p class="q">3) Critère de Nyquist-Shannon (3 pts)</p>
+        <div class="rappel"><span class="lab">Rappel · Nyquist-Shannon</span>\[ f_e>2f_{max} \]</div>
+        <p>Pour numériser un signal sans perte, la fréquence d'échantillonnage doit être supérieure au double de la plus grande fréquence présente dans son spectre.</p>
+        <div class="res">Un créneau a des harmoniques jusqu'à l'infini (\(C_n=C_1/n\) ne s'annule jamais) : \(f_{max}\) est infinie, le critère ne peut pas être respecté strictement.</div>
+
+        <p class="q">4) Notion de réplique, lien entre l'échelle 125 kHz/carreau et \(f_e\) (6 pts)</p>
+        <p class="etape">Étape 1 : les répliques</p>
+        <p>Échantillonner à \(f_e\) rend le spectre périodique en fréquence. Chaque raie \(f_n\) du signal est recopiée en \(kf_e\pm f_n\) (\(k\) entier). Ces copies sont les <b>répliques</b>.</p>
+        <p>Si Shannon est respecté, la réplique autour de \(f_e\) commence au-dessus de \(f_e/2\) : elle ne recouvre pas le vrai spectre (schéma ci-dessous).</p>
+        <p class="etape">Étape 2 : lien avec l'échelle</p>
+        <p>L'oscilloscope n'affiche que la bande \([0\,;\,f_e/2]\), la seule qui ne contient que l'information utile. Il répartit cette bande sur les 10 carreaux :</p>
+        \[ \frac{f_e/2}{10}=\frac{2{,}5\ \text{MHz}}{20}=125\ \text{kHz/carreau} \]
+        <div class="res">L'échelle de fréquence n'est pas libre : 10 carreaux = \(f_e/2\). Choisir 125 kHz/carreau revient à choisir \(f_e=2{,}5\) MHz.</div>
+      </div>
+    </div>
+    <figure><img src="img/ds2-ex2-repliques.svg" alt="Spectre du créneau et sa réplique autour de fe"><figcaption>Question 4 : spectre réel (vert) et réplique en \(f_e-f_n\) (gris). L'écran n'affiche que la bande \(0\) – \(f_e/2\).</figcaption></figure>
+    <div class="exo-card">
+      <div class="exo-head">Exercice 2 (fin) : repliement, légende du spectre, zoom</div>
+      <div class="exo-body">
+        <p class="q">5) Repliement, fréquence de l'harmonique \(n=15\) replié (5 pts)</p>
+        <p class="etape">Étape 1 : la notion</p>
+        <p>Un harmonique \(f_n>f_e/2\) n'apparaît pas à sa vraie fréquence. C'est sa réplique \(|f_e-f_n|\), qui tombe dans \([0\,;\,f_e/2]\), qui s'affiche : c'est le <b>repliement</b> (symétrie par rapport à \(f_e/2\)).</p>
+        <div class="rappel"><span class="lab">Rappel · fréquence repliée</span>\[ f_{nr}=|f_e-n f| \quad (f_e/2&lt;nf&lt;f_e) \]</div>
+        <p class="etape">Étape 2 : application à \(n=15\)</p>
+        \[ f_{15}=15\times100\ \text{kHz}=1{,}5\ \text{MHz}>1{,}25\ \text{MHz} \]
+        \[ f_{15r}=2{,}5-1{,}5=1{,}0\ \text{MHz} \]
+        \[ \frac{1000\ \text{kHz}}{125\ \text{kHz/carreau}}=8\ \text{carreaux} \]
+        <div class="res">\(f_{15r}=1{,}0\) MHz : c'est la petite raie à 8 carreaux de M.</div>
+
+        <p class="q">6) Légende de toutes les raies (2 pts)</p>
+        <ul>
+          <li>Raies à leur vraie fréquence (grandes) : \(f_{1s}\) = 0,1 MHz, \(f_{3s}\) = 0,3, \(f_{5s}\) = 0,5, \(f_{7s}\) = 0,7, \(f_{9s}\) = 0,9, \(f_{11s}\) = 1,1 MHz (0,8 ; 2,4 ; 4 ; 5,6 ; 7,2 ; 8,8 carreaux).</li>
+          <li>Raies repliées (petites), \(f_{nr}=2{,}5-n\times0{,}1\) MHz : \(f_{23r}\) = 0,2 MHz, \(f_{21r}\) = 0,4, \(f_{19r}\) = 0,6, \(f_{17r}\) = 0,8, \(f_{15r}\) = 1,0, \(f_{13r}\) = 1,2 MHz (1,6 ; 3,2 ; 4,8 ; 6,4 ; 8 ; 9,6 carreaux).</li>
+        </ul>
+        <div class="warnbox"><span class="lab">Piège</span> Les petites raies à 200, 400, 600 kHz… ne sont pas des harmoniques pairs : un créneau symétrique n'en a pas. Ce sont des harmoniques impairs de rang élevé (13 à 23), repliés.</div>
+
+        <p class="q">7) \(f_e=10\) MHz : fenêtre, échelle, harmoniques vrais ou repliés, zoom (6 pts)</p>
+        <p class="etape">Étape 1 : plein écran</p>
+        \[ \frac{f_e}{2}=5\ \text{MHz} \quad\Rightarrow\quad \frac{5\ \text{MHz}}{10}=500\ \text{kHz/carreau} \]
+        <p>En plein écran, on voit de 0 à 5 MHz. Les raies seraient à 0,2 carreau les unes des autres : trop serrées pour être lues.</p>
+        <p class="etape">Étape 2 : quels harmoniques sont repliés</p>
+        <ul>
+          <li>Vraie fréquence \(f_{ns}\) : \(nf&lt;5\) MHz, soit \(n=1,3,5,\dots,49\).</li>
+          <li>Repliés \(f_{nr}\) : \(n\ge51\), affichés en \(|10-0{,}1\,n|\) MHz. Leur amplitude est faible (au plus \(C_1/51\), soit \(-34\) dB).</li>
+        </ul>
+        <p class="etape">Étape 3 : le zoom</p>
+        <p>La capture indique 100 kHz par carreau. Le zoom vaut donc :</p>
+        \[ \frac{500}{100}=5 \]
+        <p>La fenêtre affichée va de 0 à 1 MHz. On y voit \(f_{1s},f_{3s},f_{5s},f_{7s},f_{9s}\) (1 ; 3 ; 5 ; 7 ; 9 carreaux). Les seuls repliés qui tombent dans cette fenêtre sont \(n=91\) à \(109\). Ils se superposent exactement aux mêmes positions et sont négligeables (moins de \(1/91\) du fondamental).</p>
+        <div class="res">Zoom \(\times5\), fenêtre 0 – 1 MHz à 100 kHz/carreau. Les grandes raies sont toutes des \(f_{ns}\) (\(n\) = 1, 3, 5, 7, 9). Les petites raies entre elles relèvent du bruit et de repliés de rang très élevé.</div>
+        <div class="warnbox"><span class="lab">Point incertain</span> La légende manuscrite sur la copie scannée est peu lisible. La réponse ci-dessus découle du calcul (\(f_e=10\) MHz, \(f=100\) kHz) et non de cette légende.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= EXERCICE 3 ======================= -->
+  <section class="block" id="ex3">
+    <h2>Exercice 3 — Tourne-disque · 30 pts</h2>
+    <div class="exo-card">
+      <div class="exo-head">Moment d'inertie d'un disque, lancement d'une toupie <span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <figure><img src="enonces/ds2-ex3.jpg" alt="Énoncé exercice 3, toupie"><figcaption>Exercice 3 : Tourne-disque.</figcaption></figure>
+
+        <p class="q">1) Masse \(m\) du disque homogène (2 pts)</p>
+        <div class="rappel"><span class="lab">Rappel · masse surfacique</span>\[ m=\sigma S=\sigma\,\pi R^2 \]</div>
+        \[ m=0{,}85\ \text{g/cm}^2\times\pi\times(7{,}0\ \text{cm})^2 \]
+        \[ m=0{,}85\times\pi\times49\approx131\ \text{g} \]
+        <div class="res">\(m=\sigma\pi R^2\approx131\ \text{g}=0{,}13\ \text{kg}\)</div>
+
+        <p class="q">2) Moment d'inertie \(J_\Delta\) par calcul intégral (5 pts)</p>
+        <p class="etape">Étape 1 : coordonnées</p>
+        <p>On prend les <b>coordonnées polaires</b> \((r,\theta)\) centrées sur l'axe \(\Delta\). Un élément de surface vaut \(dS=r\,dr\,d\theta\), sa masse \(dm=\sigma r\,dr\,d\theta\), et sa distance à \(\Delta\) est \(r\).</p>
+        <div class="rappel"><span class="lab">Rappel · moment d'inertie</span>\[ J_\Delta=\iint r^2\,dm \]</div>
+        <p class="etape">Étape 2 : intégration</p>
+        \[ J_\Delta=\int_0^{2\pi}\!\!\int_0^R r^2\,\sigma\,r\,dr\,d\theta \]
+        \[ J_\Delta=\sigma\times2\pi\times\frac{R^4}{4}=\frac{\pi\sigma R^4}{2} \]
+        <p class="etape">Étape 3 : retrouver \(\tfrac12 mR^2\)</p>
+        \[ J_\Delta=\frac12\,(\sigma\pi R^2)\,R^2=\frac12\,mR^2 \]
+        <p class="etape">Étape 4 : application numérique en SI</p>
+        \[ J_\Delta=\frac12\times0{,}131\ \text{kg}\times(0{,}070\ \text{m})^2 \]
+        <div class="res">\(J_\Delta=\dfrac12 mR^2\approx3{,}2\cdot10^{-4}\ \text{kg·m}^2\)</div>
+
+        <p class="q">3) Bilan des forces au lancement, apport du PFD (6 pts)</p>
+        <p class="etape">Étape 1 : forces sur la toupie</p>
+        <ul>
+          <li>Le poids \(\vec P=m\vec g\), vertical, vers le bas.</li>
+          <li>La réaction \(\vec R\) de la bille-pivot, verticale (pas de frottement).</li>
+          <li>Les deux forces des doigts \(\vec F_1\) et \(\vec F_2=-\vec F_1\), horizontales, perpendiculaires au segment qui relie les trous (direction la plus efficace), appliquées à \(d/2\) de l'axe, de part et d'autre.</li>
+        </ul>
+        <p class="etape">Étape 2 : appliquer le PFD</p>
+        <div class="rappel"><span class="lab">Rappel · 2e loi de Newton</span>\[ \sum\vec F=m\,\vec a_G \]</div>
+        <p>Le centre \(G\) est sur l'axe fixe : \(\vec a_G=\vec 0\).</p>
+        \[ \vec P+\vec R+\vec F_1+\vec F_2=\vec 0 \]
+        <p>Comme \(\vec F_1+\vec F_2=\vec 0\), il reste :</p>
+        \[ \vec R=-\vec P \]
+        <div class="res">Le PFD donne seulement \(R=mg\). \(F\) disparaît de l'équation (les deux forces se compensent) : on ne peut pas la calculer avec le PFD. Il faut une loi sur la rotation.</div>
+
+        <p class="q">4) Moment du couple exercé par les deux doigts (1 pt)</p>
+        <p>Chaque force a un bras de levier \(d/2\) et elles font tourner dans le même sens :</p>
+        \[ \Gamma=2\times F\times\frac d2 \]
+        <div class="res">\(\Gamma=F\,d\)</div>
+
+        <p class="q">5) Force \(F\) pour atteindre 3 tours/s en 0,2 s (6 pts)</p>
+        <p class="etape">Étape 1 : la loi</p>
+        <div class="rappel"><span class="lab">Rappel · théorème du moment cinétique (axe fixe)</span>\[ J_\Delta\frac{d\omega}{dt}=\Gamma \]</div>
+        <p class="etape">Étape 2 : intégrer avec \(F\) constante</p>
+        <p>La toupie part du repos, \(\Gamma=Fd\) est constant pendant \(\Delta t\) :</p>
+        \[ J_\Delta\,\omega_f=F\,d\,\Delta t \]
+        \[ F=\frac{J_\Delta\,\omega_f}{d\,\Delta t} \]
+        <p class="etape">Étape 3 : vitesse angulaire finale</p>
+        \[ \omega_f=2\pi\times3=6\pi\approx18{,}8\ \text{rad/s} \]
+        <p class="etape">Étape 4 : application numérique</p>
+        \[ F=\frac{3{,}2\cdot10^{-4}\times18{,}8}{0{,}050\times0{,}2} \]
+        <div class="res">\(F\approx0{,}60\ \text{N}\) par doigt (environ le poids de 60 g).</div>
+        <div class="warnbox"><span class="lab">Piège</span> \(d=5{,}0\) cm est la distance entre les deux trous : chaque doigt est à \(d/2\) de l'axe. Prendre \(d\) comme bras de levier de chaque force donnerait un \(F\) deux fois trop petit.</div>
+
+        <p class="q">6) Était-il pertinent de négliger les frottements ? (2 pts)</p>
+        <p class="etape">Étape 1 : estimer le couple de frottement</p>
+        <p>La toupie s'arrête en \(\Delta t'=120\) s. Avec un couple de frottement constant :</p>
+        \[ \Gamma_f=\frac{J_\Delta\,\omega_f}{\Delta t'}=\frac{3{,}2\cdot10^{-4}\times18{,}8}{120}\approx5\cdot10^{-5}\ \text{N·m} \]
+        <p class="etape">Étape 2 : comparer au couple de lancement</p>
+        \[ \Gamma=F\,d=0{,}60\times0{,}050=3{,}0\cdot10^{-2}\ \text{N·m} \]
+        \[ \frac{\Gamma_f}{\Gamma}=\frac{0{,}2\ \text{s}}{120\ \text{s}}\approx2\cdot10^{-3} \]
+        <div class="res">Oui : le frottement ne représente que 0,2 % du couple de lancement. Le négliger ne change pas \(F\) au chiffre près.</div>
+
+        <p class="q">7) Masse volumique du bois (épaisseur 1,25 cm) (2 pts)</p>
+        \[ \rho=\frac{m}{\pi R^2 e}=\frac{\sigma}{e} \]
+        \[ \rho=\frac{0{,}85\ \text{g/cm}^2}{1{,}25\ \text{cm}}=0{,}68\ \text{g/cm}^3 \]
+        <div class="res">\(\rho=0{,}68\ \text{g/cm}^3=680\ \text{kg/m}^3\) : valeur courante pour un bois léger (pin, peuplier).</div>
+
+        <p class="q">8) Disque non homogène \(\sigma'=r/5\) : \(m'\) et \(J'_\Delta\) (6 pts)</p>
+        <p class="etape">Étape 1 : la masse</p>
+        <p>On reste en cm et en g. On découpe le disque en couronnes de rayon \(r\), d'épaisseur \(dr\) et d'aire \(2\pi r\,dr\) :</p>
+        \[ m'=\int_0^R\frac r5\,2\pi r\,dr=\frac{2\pi}{5}\cdot\frac{R^3}{3}=\frac{2\pi R^3}{15} \]
+        \[ m'=\frac{2\pi\times343}{15}\approx144\ \text{g} \]
+        <p class="etape">Étape 2 : le moment d'inertie</p>
+        \[ J'_\Delta=\int_0^R r^2\,\frac r5\,2\pi r\,dr=\frac{2\pi}{5}\cdot\frac{R^5}{5}=\frac{2\pi R^5}{25} \]
+        <p class="etape">Étape 3 : exprimer avec \(m'\)</p>
+        <p>D'après l'étape 1, \(2\pi=\dfrac{15\,m'}{R^3}\). On remplace :</p>
+        \[ J'_\Delta=\frac{15\,m'}{R^3}\cdot\frac{R^5}{25}=\frac35\,m'R^2 \]
+        <p class="etape">Étape 4 : application numérique</p>
+        \[ J'_\Delta=\frac35\times0{,}144\ \text{kg}\times(0{,}070\ \text{m})^2 \]
+        <div class="res">\(m'\approx144\ \text{g}\), \(J'_\Delta=\dfrac35m'R^2\approx4{,}2\cdot10^{-4}\ \text{kg·m}^2\)</div>
+        <p>Interprétation : \(\tfrac35>\tfrac12\) parce que la masse est concentrée vers le bord, loin de l'axe.</p>
+        <div class="warnbox"><span class="lab">Piège</span> \(\sigma'=r/5\) n'est vrai qu'avec \(r\) en cm et \(\sigma'\) en g/cm². On fait donc l'intégrale en cm et g, puis on convertit seulement le résultat.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= DOCUMENTS ======================= -->
+  <section class="block" id="docs">
+    <h2>Documents donnés</h2>
+    <div class="doc-list">
+      <ul>
+        <li><a class="doc-item" href="../../../assets/pdf.html?f=../documents/aem2-electronique/annales/2025-2026/ds/DS2_AM2_physique_sujet_photos.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span>DS2 AM2 physique (Ch3-Ch4-Ch5), novembre 2025 — sujet (photos)</span></a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+<script src="../../../assets/gate.js"></script>
+<script src="../../../assets/catalogue.js?v=2"></script>
+<script src="../../../assets/nav.js?v=2"></script>
+<script src="../../../assets/lecture.js?v=3"></script>
+</body>
+</html>
