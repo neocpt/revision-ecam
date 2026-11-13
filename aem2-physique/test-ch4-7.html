@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test Ch4 à Ch7 — AM2 Physique — Révision ECAM</title>
+<link rel="stylesheet" href="../assets/style.css?v=4">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div id="site-nav"></div>
+<nav class="subnav"><a href="#ch4">Ch4</a><a href="#ch5">Ch5</a><a href="#ch6">Ch6</a><a href="#ch7">Ch7</a></nav>
+
+<main class="wrap">
+  <span class="chip">Physique AM2 (2ᵉ année) · Test de révision · Ch4 à Ch7</span>
+  <h1 class="title">Test de 50 questions : ALI saturé, oscillateurs, électronique numérique, moment cinétique</h1>
+  <p class="lead">50 questions tirées des chapitres 4 à 7 du cours d'AM2 Physique-Chimie (D. Courtois). Les questions à choix multiples (QCM) ont une seule bonne réponse. Pour chaque question : réfléchir, écrire sa réponse, puis ouvrir « Voir la réponse » pour vérifier et lire la justification. Les réponses numériques sont calculées avec les valeurs données (g = 9,81 m·s⁻²).</p>
+
+  <div class="toc-mini">
+    <b>Répartition</b>
+    <ul>
+      <li><a href="#ch4">Ch4 · ALI en régime saturé (Q1 à Q12)</a></li>
+      <li><a href="#ch5">Ch5 · Oscillateurs auto-entretenus (Q13 à Q25)</a></li>
+      <li><a href="#ch6">Ch6 · Électronique numérique (Q26 à Q37)</a></li>
+      <li><a href="#ch7">Ch7 · Moment cinétique (Q38 à Q50)</a></li>
+    </ul>
+  </div>
+
+  <section id="ch4">
+    <h2>Ch4 · ALI en régime saturé</h2>
+
+    <p class="q"><b>1)</b> Comparateur simple : la tension \(e\) est sur l'entrée (−), \(E_0\) sur l'entrée (+), aucune rétroaction. Quand \(e &lt; E_0\), la sortie vaut :<br>
+    a) \(+V_{sat}\) &nbsp; b) \(-V_{sat}\) &nbsp; c) \(0\) &nbsp; d) \(E_0\)</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>a) \(+V_{sat}\).</b> Sans rétroaction, \(\varepsilon = v_+ - v_- = E_0 - e\). Si \(e &lt; E_0\), \(\varepsilon &gt; 0\), donc la sortie part en saturation haute.</p>
+    </details>
+
+    <p class="q"><b>2)</b> Un montage où la sortie n'est reliée qu'à l'entrée (+) (rétroaction positive seule, aucune sur (−)) fonctionne en régime :<br>
+    a) linéaire &nbsp; b) saturé &nbsp; c) bloqué &nbsp; d) passe-bas</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>b) saturé.</b> Règle : une rétroaction sur (−) donne le régime linéaire ; sur (+) seule, ou sans rétroaction, le régime est saturé.</p>
+    </details>
+
+    <p class="q"><b>3)</b> Trigger non inverseur : \(e\) arrive sur (+) par \(R_1 = 10\) kΩ, la sortie revient sur (+) par \(R_2 = 100\) kΩ, l'entrée (−) est à la masse. \(V_{sat} = 15\) V. Calculer les seuils de basculement et la largeur de l'hystérésis.</p>
+    <details><summary>Voir la réponse</summary>
+      <p>Millman : \(v_+ = \dfrac{R_2 e + R_1 v_s}{R_1 + R_2}\). Basculement quand \(v_+ = 0\), donc \(e = \mp\dfrac{R_1}{R_2}V_{sat}\).</p>
+      <p>\(\dfrac{R_1}{R_2} = 0{,}1\) : seuils \(\pm 1{,}5\) V. <span class="res">Largeur de l'hystérésis : \(2\times1{,}5 = 3{,}0\) V.</span></p>
+    </details>
+
+    <p class="q"><b>4)</b> Trigger inverseur symétrique : \(e\) sur (−), pont \(R_1\) (de (+) à la masse) et \(R_2\) (de (+) à la sortie). \(R_1 = 1\) kΩ, \(R_2 = 4\) kΩ, \(V_{sat} = 12\) V. Donner les seuils \(e\) de basculement.</p>
+    <details><summary>Voir la réponse</summary>
+      <p>\(v_+ = \dfrac{R_1}{R_1+R_2} v_s\), et \(v_+ = v_- = e\) au basculement : \(e = \pm\dfrac{R_1}{R_1+R_2}V_{sat} = \pm\dfrac{1}{5}\times 12\). <span class="res">Seuils : \(\pm 2{,}4\) V.</span></p>
+    </details>
+
+    <p class="q"><b>5)</b> Trigger inverseur de la question 4, la sortie est en \(+V_{sat}\). Pour qu'elle bascule vers \(-V_{sat}\), la tension \(e\) doit :<br>
+    a) descendre sous \(-\beta' V_{sat}\) &nbsp; b) monter au-dessus de \(+\beta' V_{sat}\) &nbsp; c) passer par 0 &nbsp; d) ne jamais basculer</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>b)</b> Depuis \(+V_{sat}\), \(\varepsilon = \beta' V_{sat} - e\) reste positif tant que \(e &lt; \beta' V_{sat}\). Dès que \(e\) dépasse \(+\beta' V_{sat}\), la sortie bascule vers le bas. C'est le sens inverse du montage non inverseur.</p>
+    </details>
+
+    <p class="q"><b>6)</b> Trigger non inverseur à seuil \(E_0\) : l'entrée (−) reçoit \(E_0\), \(e\) arrive sur (+) par \(R_1\), la sortie revient sur (+) par \(R_2\). \(E_0 = 2\) V, \(R_1 = 10\) kΩ, \(R_2 = 100\) kΩ, \(V_{sat} = 15\) V. Donner les deux seuils de basculement.</p>
+    <details><summary>Voir la réponse</summary>
+      <p>\(e = \left(1+\dfrac{R_1}{R_2}\right)E_0 \pm \dfrac{R_1}{R_2}V_{sat} = 1{,}1\times 2 \pm 0{,}1\times 15 = 2{,}2 \pm 1{,}5\). <span class="res">Seuils : 0,7 V et 3,7 V.</span> Le cycle est décentré de \(\left(1+\tfrac{R_1}{R_2}\right)E_0\) : sa largeur reste \(3\) V.</p>
+    </details>
+
+    <p class="q"><b>7)</b> À quoi sert principalement l'hystérésis d'un comparateur (par exemple un thermostat) ?<br>
+    a) amplifier le signal &nbsp; b) éviter les commutations répétées provoquées par le bruit autour du seuil &nbsp; c) rendre le montage linéaire &nbsp; d) supprimer la saturation</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>b)</b> Avec deux seuils écartés, un bruit plus petit que la largeur du cycle ne fait pas basculer la sortie. Le relais (ou le chauffage) n'est pas sollicité en permanence.</p>
+    </details>
+
+    <p class="q"><b>8)</b> Stabilité d'un comparateur à hystérésis inverseur, sans supposer \(\varepsilon = 0\) (modèle de gain dynamique) : le montage est :<br>
+    a) stable &nbsp; b) instable : sa réponse diverge, l'ALI se retrouve en saturation &nbsp; c) oscillant amorti &nbsp; d) indéterminé</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>b)</b> Le dénominateur de la fonction de transfert a des coefficients de signes opposés, donc le critère de stabilité n'est pas vérifié. C'est cohérent avec le fonctionnement : le montage bascule, c'est le régime saturé.</p>
+    </details>
+
+    <p class="q"><b>9)</b> Générateur de rapport cyclique : triangle \(\pm E_m = \pm 10\) V sur l'entrée d'un comparateur non inverseur, seuil \(V_{réf} = 6\) V. Calculer le rapport cyclique \(\alpha\) (fraction du temps en \(+V_{sat}\)).</p>
+    <details><summary>Voir la réponse</summary>
+      <p>\(\alpha = \dfrac12\left(1-\dfrac{V_{réf}}{E_m}\right) = \dfrac12(1 - 0{,}6)\). <span class="res">\(\alpha = 0{,}20\), soit 20 %.</span></p>
+    </details>
+
+    <p class="q"><b>10)</b> La référence est un pont diviseur alimenté par \(V_{CC} = 15\) V : \(V_{réf} = V_{CC}\dfrac{R}{R+R_{var}}\), avec \(R = 100\ \Omega\) côté \(V_{réf}\). Quelle valeur de \(R_{var}\) donne \(V_{réf} = 6\) V ?</p>
+    <details><summary>Voir la réponse</summary>
+      <p>\(R + R_{var} = V_{CC}\dfrac{R}{V_{réf}} = 15\times\dfrac{100}{6} = 250\ \Omega\). <span class="res">\(R_{var} = 150\ \Omega\).</span></p>
+    </details>
+
+    <p class="q"><b>11)</b> Comparateur simple non inverseur, seuil \(E_0 &gt; 0\), entrée sinusoïdale d'amplitude \(E_m &gt; E_0\). Le rapport cyclique de la sortie est :<br>
+    a) 50 % &nbsp; b) inférieur à 50 % &nbsp; c) supérieur à 50 % &nbsp; d) dépend de \(V_{sat}\)</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>b)</b> La sortie est en \(+V_{sat}\) seulement entre \(t_1\) et \(T/2 - t_1\), où \(e &gt; E_0\). Cet intervalle est plus court que la demi-période. Le rapport cyclique ne dépend pas de \(V_{sat}\).</p>
+    </details>
+
+    <p class="q"><b>12)</b> Spectre de la sortie du comparateur de la question 11 (\(E_0 \neq 0\)) :<br>
+    a) uniquement des harmoniques impairs &nbsp; b) une seule raie à \(f\) &nbsp; c) une composante continue, la raie \(f\) et des raies \(2f, 3f, \dots\) &nbsp; d) un spectre continu</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>c)</b> Le créneau n'est pas symétrique : sa valeur moyenne est non nulle (composante continue), et il contient toutes les harmoniques. Le créneau symétrique du chapitre 2, lui, n'a que des harmoniques impairs.</p>
+    </details>
+  </section>
+
+  <section id="ch5">
+    <h2>Ch5 · Oscillateurs auto-entretenus</h2>
+
+    <p class="q"><b>13)</b> Un multivibrateur astable :<br>
+    a) a deux états stables &nbsp; b) a un seul état stable &nbsp; c) n'a aucun état stable et oscille sans excitation extérieure &nbsp; d) amplifie son entrée</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>c)</b> Bistable = 2 états stables, monostable = 1, astable = aucun. Il bascule en permanence entre ses deux états.</p>
+    </details>
+
+    <p class="q"><b>14)</b> MVA à comparateur non inverseur (seuils \(\pm\frac{R_1}{R_2}V_{sat}\)) et intégrateur inverseur \(RC\). \(R_1 = 10\) kΩ, \(R_2 = 20\) kΩ, \(R = 10\) kΩ, \(C = 10\) nF. Calculer la période \(T\) et la fréquence \(f\).</p>
+    <details><summary>Voir la réponse</summary>
+      <p>\(RC = 10^4\times10^{-8} = 10^{-4}\) s. La période vaut \(T = 4\dfrac{R_1}{R_2}RC = 4\times0{,}5\times10^{-4}\).</p>
+      <p><span class="res">\(T = 0{,}20\) ms, \(f = 5{,}0\) kHz.</span></p>
+    </details>
+
+    <p class="q"><b>15)</b> Dans l'oscillateur de la question 14, la période dépend-elle de \(V_{sat}\) ?<br>
+    a) oui, proportionnellement &nbsp; b) non : seulement de \(R_1/R_2\) et de \(RC\) &nbsp; c) oui, inversement &nbsp; d) oui, de \(V_{sat}^2\)</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>b)</b> \(V_{sat}\) fixe l'amplitude du triangle (\(\pm\frac{R_1}{R_2}V_{sat}\)) mais la pente de l'intégrateur est \(V_{sat}/RC\) : les deux effets se compensent, et \(T\) ne dépend pas de \(V_{sat}\).</p>
+    </details>
+
+    <p class="q"><b>16)</b> MVA compact : comparateur inverseur (\(\alpha = \dfrac{R_1}{R_1+R_2}\)) bouclé sur un passe-bas \(RC\). Donner \(T\) puis calculer sa valeur pour \(R_1 = R_2\) et \(RC = 1\) ms.</p>
+    <details><summary>Voir la réponse</summary>
+      <p>\(T = 2RC\ln\dfrac{1+\alpha}{1-\alpha}\). Avec \(R_1 = R_2\), \(\alpha = \tfrac12\), donc \(\dfrac{1+\alpha}{1-\alpha} = 3\).</p>
+      <p><span class="res">\(T = 2\ln 3\ \text{ms} \approx 2{,}2\) ms.</span> Pour \(\alpha \ll 1\), on retrouve \(T \approx 4\alpha RC\).</p>
+    </details>
+
+    <p class="q"><b>17)</b> Intégrateur inverseur \(V_2(t) = V_2(t_i) - \dfrac{1}{RC}\int V_1\,dt\) avec \(V_1 = +10\) V constante et \(RC = 1\) ms. Quelle est la pente de \(V_2\) ?</p>
+    <details><summary>Voir la réponse</summary>
+      <p>\(\dfrac{dV_2}{dt} = -\dfrac{V_1}{RC} = -\dfrac{10}{10^{-3}} = -10^4\) V·s⁻¹. <span class="res">Pente \(-10\) V/ms : rampe descendante.</span></p>
+    </details>
+
+    <p class="q"><b>18)</b> Oscillateur RLC avec une résistance négative \(u = -r\,i\) en parallèle, pour des oscillations sinusoïdales entretenues (sans amortissement) :<br>
+    a) \(r &gt; R\) &nbsp; b) \(r = R\) &nbsp; c) \(r &lt; R\) &nbsp; d) \(r = 0\)</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>b) \(r = R\).</b> La résistance négative compense exactement les pertes de \(R\). Si \(r &lt; R\) (en pratique légèrement inférieure), les oscillations démarrent et la saturation de l'ALI limite l'amplitude.</p>
+    </details>
+
+    <p class="q"><b>19)</b> Ce même RLC a \(L = 10\) mH et \(C = 100\) nF. Calculer la fréquence propre \(f_0\).</p>
+    <details><summary>Voir la réponse</summary>
+      <p>\(f_0 = \dfrac{1}{2\pi\sqrt{LC}}\), \(LC = 10^{-2}\times10^{-7} = 10^{-9}\), \(\sqrt{LC} = 3{,}16\times10^{-5}\) s. <span class="res">\(f_0 \approx 5{,}0\) kHz.</span></p>
+    </details>
+
+    <p class="q"><b>20)</b> Critère de Barkhausen : boucle fermée \(s = \underline A\,u\), \(u = \underline H\,s\). L'oscillation entretenue exige :<br>
+    a) \(\underline A\,\underline H = 0\) &nbsp; b) \(\underline A\,\underline H = 1\) (module 1, phase nulle) &nbsp; c) \(\underline A + \underline H = 1\) &nbsp; d) \(\underline A\,\underline H = 2\)</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>b)</b> Le gain de boucle doit valoir exactement 1 en module, avec une phase de 0 (ou \(2\pi\)).</p>
+    </details>
+
+    <p class="q"><b>21)</b> Oscillateur quasi-sinusoïdal (passe-bande d'amplitude \(H_0\) suivi d'un amplificateur \(A_0\)). Si \(H_0A_0 = 1\), le signal obtenu est :<br>
+    a) une sinusoïde pure &nbsp; b) un quasi-sinus &nbsp; c) très déformé &nbsp; d) amorti</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>a)</b> Avec \(H_0A_0 = 1\), \(D_1 = 0\) : seule la pulsation \(\omega_0\) est entretenue. Si \(H_0A_0 \gg 1\), une large bande est entretenue et le signal est déformé.</p>
+    </details>
+
+    <p class="q"><b>22)</b> Oscillateur de Wien : \(H_0 = \tfrac13\), \(A_0 = 1 + \dfrac{R_2}{R_1}\). Il faut \(H_0A_0 \geq 1\) pour démarrer. Pour \(R_1 = 1\) kΩ, quelle valeur minimale de \(R_2\) ?</p>
+    <details><summary>Voir la réponse</summary>
+      <p>\(A_0 \geq 3\), donc \(1 + \dfrac{R_2}{R_1}\geq 3\), soit \(R_2 \geq 2R_1\). <span class="res">\(R_2 \gtrsim 2\) kΩ (en pratique un peu plus).</span></p>
+    </details>
+
+    <p class="q"><b>23)</b> Oscillateur de Wien avec \(R = 10\) kΩ et \(C = 10\) nF. Calculer \(\omega_0\), \(f_0\) et la période \(T_0\).</p>
+    <details><summary>Voir la réponse</summary>
+      <p>\(\omega_0 = \dfrac{1}{RC} = \dfrac{1}{10^{4}\times10^{-8}} = 10^{4}\) rad·s⁻¹. \(f_0 = \dfrac{\omega_0}{2\pi}\), \(T_0 = 2\pi RC\).</p>
+      <p><span class="res">\(f_0 \approx 1{,}59\) kHz, \(T_0 \approx 0{,}63\) ms.</span></p>
+    </details>
+
+    <p class="q"><b>24)</b> Oscillateur sinus-cosinus : déphasage de \(V_2\) par rapport à \(V_1\) (à la même pulsation \(\omega_0\)) :<br>
+    a) 0 &nbsp; b) \(+\pi/2\) (\(V_2\) en avance) &nbsp; c) \(-\pi/2\) &nbsp; d) \(\pi\)</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>b)</b> \(\underline H_2 = \dfrac{j}{\tau_2\omega}\) : le facteur \(j\) apporte une avance de \(\pi/2\). Les deux signaux sont en quadrature : d'où le nom sinus-cosinus.</p>
+    </details>
+
+    <p class="q"><b>25)</b> Équation d'un oscillateur du second ordre \(\ddot s + D_1\dot s + \omega_0^2 s = 0\). Si \(D_1 &lt; 0\), la solution :<br>
+    a) s'amortit &nbsp; b) reste une sinusoïde pure &nbsp; c) croît jusqu'à la saturation de l'ALI &nbsp; d) décroît vers 0</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>c)</b> \(D_1 &lt; 0\) : l'amplitude croît tant que l'ALI est linéaire. La saturation fixe ensuite l'amplitude (oscillation entretenue, bornée).</p>
+    </details>
+  </section>
+
+  <section id="ch6">
+    <h2>Ch6 · Électronique numérique</h2>
+
+    <p class="q"><b>26)</b> Un signal a une fréquence maximale \(f_{max} = 4\) kHz. Condition de Shannon-Nyquist sur la fréquence d'échantillonnage \(f_e\) :<br>
+    a) \(f_e = 4\) kHz &nbsp; b) \(f_e = 8\) kHz &nbsp; c) \(f_e &gt; 8\) kHz &nbsp; d) \(f_e &lt; 2\) kHz</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>c)</b> \(f_e &gt; 2f_{max} = 8\) kHz : il faut strictement plus de deux points par période.</p>
+    </details>
+
+    <p class="q"><b>27)</b> Un signal sinusoïdal de 7 kHz est échantillonné à \(f_e = 10\) kHz sans filtre anti-repliement. Quelle fréquence apparente voit-on ?</p>
+    <details><summary>Voir la réponse</summary>
+      <p>Le critère de Nyquist n'est pas respecté (\(7 &gt; 5\)). La composante apparaît à \(|f - f_e| = |7 - 10|\). <span class="res">3 kHz (repliement).</span> Ce repliement n'est pas corrigeable après échantillonnage.</p>
+    </details>
+
+    <p class="q"><b>28)</b> Où placer le filtre anti-repliement et quelle fréquence de coupure ?<br>
+    a) après le CAN, \(f_c = f_e\) &nbsp; b) avant l'échantillonneur-bloqueur, \(f_c = f_e/2\) &nbsp; c) après le CNA, \(f_c = f_e/2\) &nbsp; d) avant le CAN, \(f_c = 2f_{max}\)</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>b)</b> Le passe-bas anti-repliement doit agir avant l'échantillonnage, avec \(f_c = f_e/2\), pour empêcher les répliques de se recouvrir.</p>
+    </details>
+
+    <p class="q"><b>29)</b> CAN 8 bits, calibre 0 à 5 V. Calculer le pas de quantification \(q\) et l'erreur maximale de quantification.</p>
+    <details><summary>Voir la réponse</summary>
+      <p>\(q = \dfrac{\Delta s}{2^p - 1} = \dfrac{5}{255}\). L'erreur maximale vaut \(\dfrac q2\).</p>
+      <p><span class="res">\(q \approx 19{,}6\) mV, erreur max \(\approx 9{,}8\) mV.</span></p>
+    </details>
+
+    <p class="q"><b>30)</b> Même calibre 0 à 5 V. Nombre minimal de bits pour que le pas soit \(q \leq 10\) mV ?</p>
+    <details><summary>Voir la réponse</summary>
+      <p>\(\dfrac{5}{2^p - 1} \leq 0{,}010\), donc \(2^p - 1 \geq 500\). Pour \(p = 8\), \(2^8 - 1 = 255\) : insuffisant. Pour \(p = 9\), \(511 \geq 500\).</p>
+      <p><span class="res">\(p = 9\) bits (\(q \approx 9{,}8\) mV).</span></p>
+    </details>
+
+    <p class="q"><b>31)</b> Une minute de musique stéréo, \(f_e = 44{,}1\) kHz, 16 bits par échantillon, 2 voies. Calculer la taille du fichier non compressé.</p>
+    <details><summary>Voir la réponse</summary>
+      <p>Nombre d'échantillons : \(44\,100 \times 60 \times 2 = 5\,292\,000\). Bits : \(5\,292\,000\times16 = 84{,}7\) Mbit.</p>
+      <p><span class="res">\(84{,}7\) Mbit, soit environ \(10{,}6\) Mo.</span></p>
+    </details>
+
+    <p class="q"><b>32)</b> Quelle durée d'acquisition \(\tau\) faut-il pour obtenir une résolution spectrale \(\Delta f = 0{,}1\) Hz ?</p>
+    <details><summary>Voir la réponse</summary>
+      <p>\(\Delta f = \dfrac{1}{\tau}\), donc \(\tau = \dfrac{1}{\Delta f} = \dfrac{1}{0{,}1}\). <span class="res">\(\tau = 10\) s.</span> Plus l'écart entre deux raies à séparer est petit, plus l'acquisition doit être longue.</p>
+    </details>
+
+    <p class="q"><b>33)</b> Pour éviter la fuite spectrale (raie étalée en plusieurs pics), il faut :<br>
+    a) \(f_e\) très grande &nbsp; b) une durée \(\tau\) égale à un nombre entier de périodes du signal &nbsp; c) supprimer le fenêtrage &nbsp; d) \(f_e = 2f_{max}\) exactement</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>b)</b> \(\tau = N_0 T\) : le signal recommence en phase, et la transformée ne « déborde » pas. Une fenêtre de Hann atténue en plus les bords.</p>
+    </details>
+
+    <p class="q"><b>34)</b> Après échantillonnage à \(f_e\), le spectre d'un signal de fréquence \(f\) présente des raies aux fréquences :<br>
+    a) \(n f_e \pm f\) (\(n\) entier) &nbsp; b) \(f/n\) &nbsp; c) \(n f\) seulement &nbsp; d) \(f_e/f\)</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>a)</b> Le spectre analogique est répliqué autour de chaque multiple de \(f_e\). Si Nyquist est respecté, ces répliques ne se recouvrent pas.</p>
+    </details>
+
+    <p class="q"><b>35)</b> Une roue tourne à \(f_d = 24\) tr/s. On l'observe avec un stroboscope à \(f_s = 23\) Hz (une image par seconde plus lente). Mouvement apparent ?</p>
+    <details><summary>Voir la réponse</summary>
+      <p>Le mouvement apparent a pour fréquence \(f_d - f_s = 24 - 23 = 1\) Hz, de même sens que la rotation réelle.</p>
+      <p><span class="res">Une rotation apparente de 1 tour/s, dans le sens réel.</span> Un mouvement qui paraît inversé vient aussi du repliement : un alias ne dépend que de \(f_d\) et \(f_s\).</p>
+    </details>
+
+    <p class="q"><b>36)</b> CNA 4 bits à résistances pondérées : \(u_s = -\dfrac{R'E}{R}N\), avec \(N\) la valeur décimale du mot binaire et \(\dfrac{R'E}{R} = 0{,}10\) V. Calculer \(u_s\) pour le code \(1011\).</p>
+    <details><summary>Voir la réponse</summary>
+      <p>\(1011_2 = 8 + 2 + 1 = 11\). \(u_s = -0{,}10\times11\).</p>
+      <p><span class="res">\(u_s = -1{,}1\) V.</span></p>
+    </details>
+
+    <p class="q"><b>37)</b> Quelle affirmation sur la compression audio est juste ?<br>
+    a) MP3 (compression avec perte) restitue exactement le fichier d'origine &nbsp; b) MP3 réduit la taille d'un facteur 10 environ, au prix d'une perte irréversible &nbsp; c) la compression n'a aucun lien avec la quantification &nbsp; d) elle réduit la fréquence d'échantillonnage</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>b)</b> Une compression sans perte (FLAC) réduit la taille d'environ moitié et restitue le fichier exact. Une compression avec perte (MP3) réduit beaucoup plus, mais l'information supprimée ne revient pas.</p>
+    </details>
+  </section>
+
+  <section id="ch7">
+    <h2>Ch7 · Moment cinétique</h2>
+
+    <p class="q"><b>38)</b> Point \(M\) en rotation circulaire de rayon \(r\) autour d'un axe \(O\) fixe, vitesse angulaire \(\dot\theta\). Son moment cinétique en \(O\), dans la base cylindrique, est :<br>
+    a) \(m r \dot\theta\, \vec e_z\) &nbsp; b) \(m r^2\dot\theta\, \vec e_z\) &nbsp; c) \(m r\dot\theta\, \vec e_\theta\) &nbsp; d) \(m r^2\, \vec e_r\)</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>b)</b> \(\overrightarrow{OM} = r\vec e_r\) et \(\vec v = \dot r\vec e_r + r\dot\theta\vec e_\theta\). Donc \(\overrightarrow{OM}\wedge m\vec v = m r^2\dot\theta\,\vec e_r\wedge\vec e_\theta = m r^2\dot\theta\,\vec e_z\).</p>
+    </details>
+
+    <p class="q"><b>39)</b> Masse \(m = 0{,}50\) kg à \(r = 0{,}20\) m de l'axe, \(\dot\theta = 3{,}0\) rad·s⁻¹. Calculer \(L_\Delta\).</p>
+    <details><summary>Voir la réponse</summary>
+      <p>\(J_\Delta = m r^2 = 0{,}50\times0{,}040 = 0{,}020\) kg·m². \(L_\Delta = J_\Delta\,\dot\theta = 0{,}020\times3{,}0\).</p>
+      <p><span class="res">\(L_\Delta = 0{,}060\) kg·m²·s⁻¹.</span></p>
+    </details>
+
+    <p class="q"><b>40)</b> Une masse de 50 g placée à 40 cm de l'axe. Calculer son moment d'inertie \(J_\Delta\).</p>
+    <details><summary>Voir la réponse</summary>
+      <p>\(J_\Delta = m r^2 = 0{,}050\times(0{,}40)^2 = 0{,}050\times0{,}16\).</p>
+      <p><span class="res">\(J_\Delta = 8{,}0\times10^{-3}\) kg·m².</span></p>
+    </details>
+
+    <p class="q"><b>41)</b> Le moment sur un axe \(\Delta\) d'une force \(\vec F\) est nul si :<br>
+    a) \(\vec F\) est parallèle à l'axe &nbsp; b) \(\vec F\) est très intense &nbsp; c) \(\vec F\) est perpendiculaire à l'axe, loin de celui-ci &nbsp; d) \(\vec F\) est appliquée au centre de la barre</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>a)</b> Une force parallèle à l'axe a un moment \(\overrightarrow{OM}\wedge\vec F\) perpendiculaire à l'axe, donc sa projection sur l'axe est nulle. Même chose si la droite d'action de \(\vec F\) coupe l'axe : \(d = 0\).</p>
+    </details>
+
+    <p class="q"><b>42)</b> Pour ouvrir une porte avec la force la plus faible possible (même moment), il faut pousser :<br>
+    a) près de la charnière, parallèlement au plan de la porte &nbsp; b) à la poignée, perpendiculairement au plan de la porte &nbsp; c) parallèlement à la charnière &nbsp; d) n'importe où, la force reste la même</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>b)</b> \(\mathcal M_\Delta = dF\). Pour un moment donné, la force est minimale quand le bras de levier \(d\) est maximal : loin de la charnière, et perpendiculairement à la porte.</p>
+    </details>
+
+    <p class="q"><b>43)</b> Pendule simple : \(L = 0{,}40\) m, \(m = 50\) g, écart \(\theta = 30^\circ\). Calculer \(\dfrac{dL_\Delta}{dt}\) à cet instant (\(g = 9{,}81\) m·s⁻²). Seul le poids a un moment non nul.</p>
+    <details><summary>Voir la réponse</summary>
+      <p>\(\mathcal M_\Delta(m\vec g) = -mgL\sin\theta\) (le fil passe par le pivot, sa réaction a un moment nul). Par le TMC, \(\dfrac{dL_\Delta}{dt} = -mgL\sin\theta = -0{,}050\times9{,}81\times0{,}40\times0{,}50\).</p>
+      <p><span class="res">\(\dfrac{dL_\Delta}{dt} \approx -9{,}8\times10^{-2}\) N·m.</span> Le signe négatif : le poids ramène le pendule vers la verticale.</p>
+    </details>
+
+    <p class="q"><b>44)</b> Même pendule (\(L = 0{,}40\) m, \(g = 9{,}81\) m·s⁻²). Calculer la pulsation propre \(\omega_0\) et la période \(T_0\) des petites oscillations.</p>
+    <details><summary>Voir la réponse</summary>
+      <p>\(\omega_0 = \sqrt{\dfrac gL} = \sqrt{\dfrac{9{,}81}{0{,}40}} = \sqrt{24{,}5}\). \(T_0 = \dfrac{2\pi}{\omega_0}\).</p>
+      <p><span class="res">\(\omega_0 \approx 4{,}95\) rad·s⁻¹, \(T_0 \approx 1{,}27\) s.</span> La masse n'intervient pas.</p>
+    </details>
+
+    <p class="q"><b>45)</b> Dans le TMC appliqué au pendule simple (pivot \(O\), fil sans masse), quelle force n'apparaît pas dans l'équation ?<br>
+    a) le poids &nbsp; b) la tension du fil &nbsp; c) la masse du point &nbsp; d) la longueur \(L\)</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>b)</b> La tension passe par le pivot \(O\) : son bras de levier est nul, donc son moment est nul. Seul le poids donne un moment.</p>
+    </details>
+
+    <p class="q"><b>46)</b> Un couple est formé de deux forces opposées de droites d'action distinctes, distantes de \(d\), d'intensité \(F\) chacune. Son moment vaut :<br>
+    a) nul &nbsp; b) \(F\,d\), indépendant du point choisi &nbsp; c) \(F/d\) &nbsp; d) \(2F\)</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>b)</b> La résultante est nulle, donc le moment ne dépend pas du point de réduction. Il vaut \(Fd\) : un couple n'est équivalent à aucune force seule.</p>
+    </details>
+
+    <p class="q"><b>47)</b> Passage d'un point fixe \(O\) à un autre point fixe \(O'\), pour un point matériel \(M\) de quantité de mouvement \(\vec p\) :<br>
+    a) \(\vec L_{O'} = \vec L_O + \overrightarrow{OO'}\wedge\vec p\) &nbsp; b) \(\vec L_{O'} = \vec L_O + \overrightarrow{O'O}\wedge\vec p\) &nbsp; c) \(\vec L_{O'} = \vec L_O - \overrightarrow{O'O}\wedge\vec p\) &nbsp; d) \(\vec L_{O'} = \vec L_O\)</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>b)</b> \(\overrightarrow{O'M} = \overrightarrow{O'O} + \overrightarrow{OM}\). Donc \(\vec L_{O'}(M) = \overrightarrow{O'O}\wedge\vec p + \vec L_O(M)\). L'option a) a le signe inversé.</p>
+    </details>
+
+    <p class="q"><b>48)</b> Un point tourne dans le sens direct autour de \(\vec u_\Delta\) (c'est-à-dire \(\dot\theta &gt; 0\) avec cette orientation). Son moment cinétique scalaire \(L_\Delta\) est :<br>
+    a) positif &nbsp; b) négatif &nbsp; c) nul &nbsp; d) on ne peut pas le savoir</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>a) positif.</b> \(L_\Delta = J_\Delta\dot\theta\) avec \(J_\Delta &gt; 0\). Le signe dépend de l'orientation de l'axe, mais le sens réel de rotation reste le même.</p>
+    </details>
+
+    <p class="q"><b>49)</b> Solide en équilibre de rotation autour d'un axe fixe \(\Delta\) (sans rotation) :<br>
+    a) \(\sum \mathcal M_\Delta(\vec F_i) = 0\) &nbsp; b) \(\sum \vec F_i = \vec 0\) seulement &nbsp; c) \(\dfrac{dL_\Delta}{dt} = mg\) &nbsp; d) \(\omega = 0\) obligatoirement</p>
+    <details><summary>Voir la réponse</summary>
+      <p><b>a)</b> Le TMC donne \(\dfrac{dL_\Delta}{dt} = \sum\mathcal M_\Delta\). Si la rotation est constante (équilibre), \(\dfrac{dL_\Delta}{dt} = 0\), donc la somme des moments est nulle. La réponse b) est une condition de translation, pas de rotation ; d) est faux, un solide peut tourner à vitesse constante.</p>
+    </details>
+
+    <p class="q"><b>50)</b> Pied de biche en équilibre : \(F = 200\) N en \(B\), \(OB = 70\) cm, \(OA = 10\) cm, \(\alpha = 30^\circ\). La réaction \(R\) du clou en \(A\) est verticale. Calculer \(R\) par le TMC autour de \(O\) (la réaction du sol passe par \(O\)).</p>
+    <details><summary>Voir la réponse</summary>
+      <p>Équilibre des moments : \(OB\cdot F = d_R\cdot R\), avec \(d_R = OA\sin\alpha = 0{,}10\times0{,}50 = 0{,}050\) m.</p>
+      <p>\(R = \dfrac{OB\,F}{OA\sin\alpha} = \dfrac{0{,}70\times200}{0{,}050} = 2{,}8\times10^{3}\) N.</p>
+      <p><span class="res">\(R \approx 2{,}8\) kN</span> : le levier multiplie la force par 14.</p>
+    </details>
+  </section>
+
+</main>
+<script src="../assets/gate.js"></script>
+<script src="../assets/catalogue.js?v=2"></script>
+<script src="../assets/nav.js?v=2"></script>
+<script src="../assets/lecture.js?v=3"></script>
+</body>
+</html>

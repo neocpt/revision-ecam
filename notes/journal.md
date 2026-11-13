@@ -28,3 +28,9 @@ Une entrée par document traité (date, source, pages créées ou modifiées, er
 - Page créée : `annales/2025-2026/am2-physique/ds2-annee-derniere.html` (Ex1 oscillateurs 60 pts, Ex2 numérisation d'un créneau 30 pts, Ex3 tourne-disque 30 pts), format par étapes. Énoncés recadrés dans `enonces/ds2-*.jpg`, graphes SVG dans `img/ds2-*.svg`. Liens ajoutés dans `annales/2025-2026/am2-physique/index.html` et le compteur de `annales/index.html`.
 - Pas de corrigé officiel : correction rédigée par nous. Question bonus (résistance négative, montage 2) non traitée.
 - Points incertains : f0 du Wien lue sur l'oscillogramme (≈ 8 périodes en 0,05 s → 160 Hz → C ≈ 1,0 µF) ; β = R3/R4 du montage 1 lu sur un schéma petit ; légende manuscrite du spectre zoomé (Q7 ex2) illisible, réponse calculée.
+
+## 2026-11-13 — Test de révision AM2 Physique (Ch4 à Ch7), 50 questions
+- Source : aucun document nouveau ; contenu tiré des pages existantes `aem2-electronique/ch4..ch6` et `aem2-physique/ch7` (fiches mémo et corrections).
+- Page créée : `aem2-physique/test-ch4-7.html` (Q1-12 ch4, Q13-25 ch5, Q26-37 ch6, Q38-50 ch7). Réponses dans des `<details>`, justifications courtes, calculs revérifiés à la main.
+- Points incertains : Ch4-Ch6 désignées par la numérotation du cours Moodle « Physique-Chimie AM2 » (Ch1-Ch8) ; la question 22 (Wien) donne R2 ≳ 2R1, sans valeur de composant imposée.
+- Non ajouté au catalogue ni à l'accueil.
