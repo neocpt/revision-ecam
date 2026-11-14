@@ -34,3 +34,9 @@ Une entrée par document traité (date, source, pages créées ou modifiées, er
 - Page créée : `aem2-physique/test-ch4-7.html` (Q1-12 ch4, Q13-25 ch5, Q26-37 ch6, Q38-50 ch7). Réponses dans des `<details>`, justifications courtes, calculs revérifiés à la main.
 - Points incertains : Ch4-Ch6 désignées par la numérotation du cours Moodle « Physique-Chimie AM2 » (Ch1-Ch8) ; la question 22 (Wien) donne R2 ≳ 2R1, sans valeur de composant imposée.
 - Non ajouté au catalogue ni à l'accueil.
+
+## 2026-11-14 — AM2 Maths · CM 5 et CM 6 (valeurs propres, réduction) + TD 5 (L. Graissot)
+- Source : « Adobe Scan 14 nov. 2026.pdf » (scan de 26 p. envoyé par l'utilisateur : TD5 p.1-2, CM5 p.65-75, CM6 p.77-89, quelques annotations manuscrites de l'étudiant). Copie dans `documents/aem2-mathematiques/ch5-valeurs-propres/TD5-CM5-CM6-valeurs-propres-reduction.pdf`. Aucun corrigé sur Moodle_ECAM (dossier AM2 maths : seul « CM 4 » présent).
+- Page créée : `aem2-mathematiques/ch5-valeurs-propres.html` (fiche mémo, cours CM5 + CM6, exemple 11 de chaque CM corrigé, TD5 exercices 1 à 6 par étapes). Énoncés recadrés dans `aem2-mathematiques/ch5-img/td5-ex1..6.png`. Entrée « Ch5 » ajoutée dans `assets/catalogue.js`.
+- Pas de corrigé officiel : correction rédigée par nous ; tous les résultats revérifiés avec numpy (P⁻¹AP, A^n, trace, déterminant).
+- Points incertains : l'exercice 1 M (3×3) n'est diagonalisable que sur ℂ (valeurs propres 1±i) ; l'énoncé ne précise pas le corps, les deux cas sont donnés. Chapitre 6 traité dans la même page que le chapitre 5 (pas de page séparée).
