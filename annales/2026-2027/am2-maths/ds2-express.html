@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DS2 express Maths Ch3-Ch5 (AM2) — Révision ECAM</title>
+<title>DS2 Maths depuis zéro (AM2) — Révision ECAM</title>
 <link rel="stylesheet" href="../../../assets/style.css?v=4">
 <script>
 window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
@@ -14,157 +14,719 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
 <body class="theme-am2">
 
 <div id="site-nav"></div>
-<nav class="subnav"><a href="#plan">Plan</a><a href="#ds1">Ton DS1</a><a href="#memo">Fiche mémo</a><a href="#cours">Restitution</a><a href="#qcm">QCM</a><a href="#ex1">Ex 1</a><a href="#ex2">Ex 2</a><a href="#ex3">Ex 3</a><a href="#ex4">Ex 4</a><a href="#td">TD à refaire</a></nav>
+<nav class="subnav"><a href="#mode">Mode d'emploi</a><a href="#outils">Outils</a><a href="#ch3">Ch3</a><a href="#ch5">Ch5</a><a href="#ch4">Ch4</a><a href="#cours">Par cœur</a><a href="#ds1">DS1</a><a href="#qcm">DS blanc</a><a href="#memo">Récap</a></nav>
 
 <main class="wrap">
-  <span class="chip">Annales · AM2 Maths · DS2 express (créé)</span>
-  <h1 class="title">DS2 express — fin du Ch3, Ch4 et Ch5 : l'essentiel + un DS blanc corrigé</h1>
-  <p class="lead">Page de révision rapide pour le <b>DS de maths du jeudi 19 novembre 2026 (après-midi)</b>.
-  Programme : <b>fin du Ch3</b> (matrice de passage, changement de base, matrices semblables),
-  <b>Ch4</b> (courbes paramétrées) et <b>Ch5-6</b> (valeurs propres, diagonalisation).
-  La page part de <b>ton DS1 (11/20)</b> : on corrige d'abord les erreurs qui t'ont coûté des points, puis on s'entraîne sur un
-  <b>DS blanc au format du prof</b> (2 h, sans calculatrice : QCM, restitution de cours, exercices).
-  Tous les résultats ont été <b>vérifiés par calcul formel</b> (sympy). Utilise le bouton <b>Mode examen</b> pour masquer les réponses.</p>
+  <span class="chip">Annales · AM2 Maths · DS2 en partant de zéro</span>
+  <h1 class="title">DS2 de maths en partant de zéro — les recettes à savoir par cœur (fin Ch3, Ch4, Ch5)</h1>
+  <p class="lead">Pour le <b>DS du jeudi 19 novembre 2026 (après-midi)</b>. Cette page part du principe qu'on ne sait <b>rien</b>.
+  On apprend d'abord les <b>6 outils de base</b> (calculs qu'on retrouve partout), puis <b>16 recettes</b> : une par type de question qui tombe au DS.
+  Chaque recette = <b>quand l'utiliser</b>, <b>les étapes dans l'ordre</b>, <b>un exemple entièrement corrigé</b>, <b>les pièges</b>,
+  puis un <b>exercice « À toi »</b> dont la correction est cachée (on clique pour la voir, <b>après</b> avoir cherché).
+  Tous les calculs ont été vérifiés par calcul formel (sympy).</p>
 
   <div class="toc-mini">
     <b>Sommaire</b>
     <ul style="margin:.4rem 0 0">
-      <li><a href="#plan">Plan jusqu'à jeudi</a></li>
-      <li><a href="#ds1">Ton DS1 : où sont partis les points (et comment ne pas les reperdre)</a></li>
-      <li><a href="#memo">📌 Fiche mémo Ch3 §4, Ch4, Ch5</a></li>
-      <li><a href="#cours">Restitutions de cours probables (6 démonstrations)</a></li>
-      <li><a href="#qcm">DS blanc · QCM (4 pts)</a></li>
-      <li><a href="#ex1">DS blanc · Ex 1 — Matrice dans une nouvelle base (4 pts)</a></li>
-      <li><a href="#ex2">DS blanc · Ex 2 — Diagonalisation et puissance n-ième (4 pts)</a></li>
-      <li><a href="#ex3">DS blanc · Ex 3 — Matrice de rang 1, sans calcul (2 pts)</a></li>
-      <li><a href="#ex4">DS blanc · Ex 4 — Étude complète d'une courbe paramétrée (4 pts)</a></li>
-      <li><a href="#td">Exercices du TD à refaire en priorité</a></li>
+      <li><a href="#mode">Mode d'emploi et plan jusqu'à jeudi</a></li>
+      <li><a href="#outils">Partie 0 — Les 6 outils de base (O1 à O6)</a></li>
+      <li><a href="#ch3">Partie 1 — Fin du Ch3 : matrices et changement de base (M1 à M4)</a></li>
+      <li><a href="#ch5">Partie 2 — Ch5 : valeurs propres et diagonalisation (M5 à M11)</a></li>
+      <li><a href="#ch4">Partie 3 — Ch4 : courbes paramétrées (M12 à M16)</a></li>
+      <li><a href="#cours">Partie 4 — Les démonstrations à savoir par cœur</a></li>
+      <li><a href="#ds1">Partie 5 — Les erreurs de ton DS1 à ne pas refaire</a></li>
+      <li><a href="#qcm">Partie 6 — DS blanc (QCM + 4 exercices corrigés)</a></li>
+      <li><a href="#memo">📌 Récap des recettes (à relire jeudi matin)</a></li>
+      <li><a href="#td">Exercices du TD à refaire</a></li>
     </ul>
   </div>
 
-  <!-- ======================= PLAN ======================= -->
-  <section class="block" id="plan">
-    <h2>Plan jusqu'à jeudi</h2>
-    <div class="note"><span class="lab">L'idée</span>
-      On ne relit pas tout le cours : on apprend une <b>méthode par type d'exercice</b>, on refait les exercices <b>sans regarder</b>, puis on fait le DS blanc en temps limité.
+  <!-- ======================= MODE D'EMPLOI ======================= -->
+  <section class="block" id="mode">
+    <h2>Mode d'emploi et plan jusqu'à jeudi</h2>
+    <div class="note"><span class="lab">Comment travailler une recette (15 à 20 min)</span>
+      <ol>
+        <li>Lire la recette et l'exemple corrigé, <b>stylo en main</b> : refaire chaque ligne sur une feuille.</li>
+        <li>Cacher l'exemple et le refaire seul.</li>
+        <li>Faire l'exercice « À toi » sans regarder, puis ouvrir la correction.</li>
+        <li>Si c'est faux : relire l'étape ratée, et refaire l'exercice le lendemain.</li>
+      </ol>
     </div>
     <ul>
-      <li><b>Dimanche 15 (1 h)</b> : lire la partie <a href="#ds1">Ton DS1</a> et la <a href="#memo">fiche mémo</a>. Refaire seul la Q19 du DS1 (corrigée plus bas).</li>
-      <li><b>Lundi 16 (1 h 30)</b> : fin du Ch3. Cours §4 de la <a href="../../../aem2-mathematiques/ch3-matrices-applications-lineaires.html#methodes-base">page Ch3</a>, puis TD3 exercices 2 et 5 sans regarder. Faire l'<a href="#ex1">Ex 1</a>.</li>
-      <li><b>Mardi 17 (1 h 30)</b> : Ch5. Méthode de diagonalisation, puis TD5 exercices 1, 2, 4 et 5 sur la <a href="../../../aem2-mathematiques/ch5-valeurs-propres.html#td">page Ch5</a>. Faire les <a href="#ex2">Ex 2</a> et <a href="#ex3">Ex 3</a>.</li>
-      <li><b>Mercredi 18 (1 h 30)</b> : Ch4. Plan d'étude d'une courbe, puis TD4 exercices 3, 4 et 8 sur la <a href="../../../aem2-mathematiques/ch4-courbes-parametrees.html#td">page Ch4</a>. Faire l'<a href="#ex4">Ex 4</a>.</li>
-      <li><b>Mercredi soir (30 min)</b> : apprendre les <a href="#cours">6 restitutions de cours</a> (les réciter à voix haute ou les réécrire de mémoire).</li>
-      <li><b>Jeudi matin (1 h)</b> : <a href="#qcm">QCM</a> en temps limité (15 min), relire les encadrés « Piège » de cette page. Ne pas apprendre de nouvelle notion.</li>
+      <li><b>Dimanche 15 soir</b> : <a href="#outils">outils O1 à O6</a>. Sans eux, rien ne marche ; c'est la priorité.</li>
+      <li><b>Lundi 16</b> : <a href="#ch3">recettes M1 à M4</a> (fin du Ch3).</li>
+      <li><b>Mardi 17</b> : <a href="#ch5">recettes M5 à M11</a> (Ch5, le plus gros morceau du DS).</li>
+      <li><b>Mercredi 18</b> : <a href="#ch4">recettes M12 à M16</a> (Ch4), puis <a href="#cours">les démonstrations par cœur</a>.</li>
+      <li><b>Jeudi matin</b> : <a href="#qcm">le DS blanc</a> en temps limité, puis <a href="#memo">le récap</a>. Pas de nouvelle notion.</li>
     </ul>
-  </section>
-
-  <!-- ======================= DS1 ======================= -->
-  <section class="block" id="ds1">
-    <h2>Ton DS1 : où sont partis les points</h2>
-    <p>Bilan de ta copie du 10 octobre (11/20) : le QCM était parfait (4/4). Les points perdus viennent de <b>quatre erreurs de méthode</b>, et toutes peuvent revenir jeudi.</p>
-
-    <div class="exo-card">
-      <div class="exo-head"><span>Erreur 1 — Matrice d'une application écrite dans le mauvais sens (Q16, Q17, Q18)</span><span class="diff">♦</span></div>
-      <div class="exo-body">
-        <p class="enonce">DS1, exercice 4 : \(f(x,y,z)=(3x-y+z,\;2x+2z,\;x-y+3z)\). Donner la matrice \(A\) de \(f\) dans la base canonique.</p>
-        <p class="q">Ce que tu as écrit, et la bonne réponse</p>
-        <p class="etape">Étape 1 : la règle</p>
-        <div class="rappel"><span class="lab">Rappel · matrice d'une application linéaire</span>\[ \text{colonne } j \text{ de } A = \text{coordonnées de } f(e_j) \]</div>
-        <p>Concrètement, quand \(f\) est donnée par une formule, <b>chaque composante de \(f\) donne une ligne</b> de \(A\).</p>
-        <p class="etape">Étape 2 : on lit les coefficients ligne par ligne</p>
-        <p>Première composante \(3x-y+z\) : première ligne \((3,\,-1,\,1)\).</p>
-        <p>Deuxième composante \(2x+0y+2z\) : deuxième ligne \((2,\,0,\,2)\).</p>
-        <p>Troisième composante \(x-y+3z\) : troisième ligne \((1,\,-1,\,3)\).</p>
-        \[ A=\begin{pmatrix}3&-1&1\\2&0&2\\1&-1&3\end{pmatrix} \]
-        <p class="etape">Étape 3 : vérification en 10 secondes</p>
-        <p>\(f(e_1)=f(1,0,0)=(3,2,1)\) : c'est bien la <b>première colonne</b>.</p>
-        <div class="res">Tu avais écrit la transposée \(\begin{pmatrix}3&2&1\\-1&0&-1\\1&2&3\end{pmatrix}\). Le déterminant ne change pas (\(\det A=8\)), mais \(A^2\), \(\ker(f-2\,\mathrm{id})\) et tout ce qui suit deviennent faux.</div>
-        <div class="warnbox"><span class="lab">Piège</span>Toujours vérifier : \(A\times\begin{pmatrix}1\\0\\0\end{pmatrix}\) doit redonner \(f(1,0,0)\). Avec la bonne matrice, \(\ker(f-2\,\mathrm{id})\) est le plan \(x-y+z=0\), de dimension <b>2</b> (et pas 1).</div>
-      </div>
-    </div>
-
-    <div class="exo-card">
-      <div class="exo-head"><span>Erreur 2 — Q19 non traitée : matrice de \(f\) dans une nouvelle base (exactement le Ch3 §4)</span><span class="diff">♦♦</span></div>
-      <div class="exo-body">
-        <p class="enonce">On pose \(u=(1,1,1)\) ; il complète la base \((v_1,v_2)\) de \(\ker(f-2\,\mathrm{id})\) en une base \(\mathcal B\) de \(\mathbb R^3\). Déterminer la matrice \(T\) de \(f\) dans \(\mathcal B\).</p>
-        <p class="q">Correction par étapes</p>
-        <p class="etape">Étape 1 : une base de \(\ker(f-2\,\mathrm{id})\)</p>
-        \[ A-2I=\begin{pmatrix}1&-1&1\\2&-2&2\\1&-1&1\end{pmatrix} \]
-        <p>Les trois lignes sont proportionnelles : le système se réduit à une seule équation.</p>
-        \[ x-y+z=0 \]
-        <p>On choisit deux solutions non colinéaires : \(v_1=(1,1,0)\) et \(v_2=(0,1,1)\).</p>
-        <p class="etape">Étape 2 : la méthode directe (la plus rapide)</p>
-        <div class="rappel"><span class="lab">Rappel · matrice dans une base</span>\[ \text{colonne } j \text{ de } T = \text{coordonnées de } f(\text{j-ème vecteur de } \mathcal B) \text{ dans } \mathcal B \]</div>
-        <p>\(v_1\) et \(v_2\) sont dans \(\ker(f-2\,\mathrm{id})\), donc :</p>
-        \[ f(v_1)=2v_1, \qquad f(v_2)=2v_2 \]
-        <p class="etape">Étape 3 : on calcule \(f(u)\) et on l'écrit dans la base</p>
-        \[ f(u)=A\begin{pmatrix}1\\1\\1\end{pmatrix}=\begin{pmatrix}3\\4\\3\end{pmatrix} \]
-        <p>On cherche \(a,b,c\) tels que \(f(u)=a\,v_1+b\,v_2+c\,u\) :</p>
-        \[ \begin{cases} a+c=3\\ a+b+c=4\\ b+c=3\end{cases} \]
-        <p>Ligne 2 moins ligne 1 : \(b=1\). Puis ligne 3 : \(c=2\). Puis ligne 1 : \(a=1\).</p>
-        \[ f(u)=v_1+v_2+2u \]
-        <div class="res">\[ T=\mathrm{Mat}_{\mathcal B}(f)=\begin{pmatrix}2&0&1\\0&2&1\\0&0&2\end{pmatrix} \]</div>
-        <p class="etape">Étape 4 : contrôle</p>
-        <p>\(\mathrm{tr}\,T=6=\mathrm{tr}\,A\) et \(\det T=8=\det A\) : cohérent (matrices semblables).</p>
-        <div class="method"><span class="lab">Méthode</span>Pour la matrice de \(f\) dans une nouvelle base, on n'a <b>pas besoin de \(P^{-1}\)</b> : on calcule l'image de chaque nouveau vecteur et on la décompose dans la nouvelle base. \(P^{-1}AP\) sert à vérifier, ou quand l'énoncé l'impose.</div>
-      </div>
-    </div>
-
-    <div class="exo-card">
-      <div class="exo-head"><span>Erreur 3 — Restitution de cours (Q5, 0/1)</span><span class="diff">♦</span></div>
-      <div class="exo-body">
-        <p class="enonce">Soit \(f:E\to F\) linéaire avec \(\ker f=\{0_E\}\). Montrer que \(f\) est injective.</p>
-        <p class="q">Démonstration attendue (4 lignes)</p>
-        <p class="etape">Étape 1 : on part de la définition de l'injectivité</p>
-        <p>Soient \(u,v\in E\) tels que \(f(u)=f(v)\). On veut montrer \(u=v\).</p>
-        <p class="etape">Étape 2 : on utilise la linéarité</p>
-        \[ f(u)-f(v)=0 \;\Rightarrow\; f(u-v)=0_F \]
-        <p class="etape">Étape 3 : on utilise l'hypothèse</p>
-        <p>Donc \(u-v\in\ker f=\{0_E\}\), soit \(u-v=0_E\).</p>
-        <div class="res">\(u=v\) : \(f\) est injective.</div>
-        <div class="warnbox"><span class="lab">Piège</span>Tu avais utilisé le théorème du rang. Il suppose \(E\) et \(F\) de <b>dimension finie</b> (hypothèse absente de l'énoncé) et ne démontre pas l'injectivité. Une restitution de cours = <b>définition + hypothèse + enchaînement d'implications</b>, rien de plus.</div>
-      </div>
-    </div>
-
-    <div class="exo-card">
-      <div class="exo-head"><span>Erreur 4 — Rédaction (« Bluff », « Rédaction » dans la marge)</span><span class="diff">♦</span></div>
-      <div class="exo-body">
-        <ul>
-          <li>Annoncer ce qu'on montre : « Montrons que … ».</li>
-          <li>Citer le résultat utilisé par son nom : « D'après le théorème du rang… », « D'après le critère de diagonalisabilité… ».</li>
-          <li>Vérifier ses hypothèses : dimension finie, valeurs propres distinctes, polynôme scindé…</li>
-          <li>Ne jamais écrire « = 0 » sans le calcul qui y mène : le correcteur l'appelle du bluff.</li>
-          <li>Conclure par une phrase : « Donc \(A\) est diagonalisable. »</li>
-        </ul>
-      </div>
+    <div class="method"><span class="lab">Le jour du DS</span>
+      Commencer par ce qui est mécanique : écrire une matrice (M1), calculer un polynôme caractéristique (M5, M6), trouver des vecteurs propres (M7), dériver \(x\) et \(y\) (M13). Ce sont des points presque sûrs, même sans tout comprendre.
     </div>
   </section>
 
-  <!-- ======================= MEMO ======================= -->
-  <section class="memo-sheet" id="memo">
-    <div class="memo-head">📌 Fiche mémo — Ch3 §4, Ch4, Ch5 (à savoir par cœur jeudi)</div>
-    <div class="memo-grid">
-      <div class="memo-item"><b>Matrice de passage</b>\(P=P_{\mathcal B\to\mathcal B'}\) : colonnes = vecteurs de \(\mathcal B'\) écrits dans \(\mathcal B\)</div>
-      <div class="memo-item"><b>Coordonnées</b>\(X=PX'\) (ancien = \(P\) × nouveau), donc \(X'=P^{-1}X\)</div>
-      <div class="memo-item"><b>Changement de base</b>\(A'=P^{-1}AP\) ; vérifier avec \(AP=PA'\) (pas besoin de \(P^{-1}\))</div>
-      <div class="memo-item"><b>Semblables</b>\(B=P^{-1}AP\) ⇒ même \(\chi\), mêmes valeurs propres, même trace, même déterminant, même rang</div>
-      <div class="memo-item method"><b>Matrice dans une nouvelle base</b>calculer \(f(u_j)\) et le décomposer dans \((u_1,\dots,u_n)\) : ses coordonnées forment la colonne \(j\)</div>
-      <div class="memo-item method"><b>Plan d'étude d'une courbe</b>domaine → périodicité, symétries → \(x'\), \(y'\) et tableau conjoint → points singuliers → branches infinies → tracé</div>
-      <div class="memo-item"><b>Tangente</b>\(f'(t_0)\neq0\) : tangente dirigée par \(f'(t_0)\) ; \(x'=0\) seul : tangente verticale ; \(y'=0\) seul : horizontale</div>
-      <div class="memo-item"><b>Point singulier</b>\(x'(t_0)=y'(t_0)=0\) ; \(p\) = 1er ordre où \(f^{(p)}(t_0)\neq0\), \(q\) = 1er ordre où \(f^{(q)}\) n'est pas colinéaire à \(f^{(p)}\)</div>
-      <div class="memo-item"><b>Nature (\(p\), \(q\))</b>impair-pair : ordinaire · impair-impair : inflexion · pair-impair : rebroussement 1ʳᵉ espèce · pair-pair : 2ᵉ espèce</div>
-      <div class="memo-item"><b>Branches infinies</b>\(x\to\pm\infty,\ y\to b\) : \(y=b\) ; \(y/x\to a\) puis \(y-ax\to b\) : asymptote \(y=ax+b\) ; \(y/x\to\infty\) : direction \(Oy\) ; \(y/x\to0\) : direction \(Ox\)</div>
-      <div class="memo-item"><b>Valeur propre</b>\(\lambda\) valeur propre ⇔ \(\det(A-\lambda I)=0\) ⇔ \(\ker(A-\lambda I)\neq\{0\}\)</div>
-      <div class="memo-item"><b>Trace et déterminant</b>somme des valeurs propres = \(\mathrm{tr}A\), produit = \(\det A\) ; en \(2\times2\) : \(\chi_A=X^2-\mathrm{tr}(A)X+\det A\)</div>
-      <div class="memo-item method"><b>Diagonaliser</b>\(\chi_A\) → racines → base de chaque \(E_\lambda\) → diagonalisable ⇔ \(\dim E_\lambda=m(\lambda)\) pour tout \(\lambda\) (et \(\chi\) scindé)</div>
-      <div class="memo-item method"><b>Puissances</b>\(A=PDP^{-1}\) ⇒ \(A^n=PD^nP^{-1}\) ; ou polynôme annulateur : \(A^2=aA+bI\) ⇒ \(A^n=\alpha_nA+\beta_nI\)</div>
-      <div class="memo-item"><b>Rang et valeur propre 0</b>\(\dim E_0=n-\mathrm{rg}A\) ; \(A\) inversible ⇔ 0 n'est pas valeur propre</div>
+  <!-- ======================= OUTILS ======================= -->
+  <section class="block" id="outils">
+    <h2>Partie 0 — Les 6 outils de base</h2>
+    <p>Ces calculs reviennent dans <b>toutes</b> les recettes. Il faut savoir les faire vite et sans erreur.</p>
+
+    <div class="exo-card" id="o1">
+      <div class="exo-head"><span>O1 · Multiplier une matrice par un vecteur</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <div class="method"><span class="lab">Recette</span>
+          Chaque <b>ligne</b> de la matrice se multiplie avec le vecteur : on multiplie terme à terme et on additionne. Une ligne donne un nombre.
+        </div>
+        <p class="etape">Exemple corrigé</p>
+        \[ \begin{pmatrix}2&1\\3&4\end{pmatrix}\begin{pmatrix}1\\2\end{pmatrix} \]
+        <p>Ligne 1 : \(2\times1+1\times2=4\).</p>
+        <p>Ligne 2 : \(3\times1+4\times2=11\).</p>
+        \[ \begin{pmatrix}2&1\\3&4\end{pmatrix}\begin{pmatrix}1\\2\end{pmatrix}=\begin{pmatrix}4\\11\end{pmatrix} \]
+        <p class="etape">À toi</p>
+        <p class="enonce">Calculer \(\begin{pmatrix}1&0&2\\0&3&0\\1&-1&1\end{pmatrix}\begin{pmatrix}1\\1\\1\end{pmatrix}\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>Ligne 1 : \(1+0+2=3\). Ligne 2 : \(0+3+0=3\). Ligne 3 : \(1-1+1=1\).</p>
+          <div class="res">\(\begin{pmatrix}3\\3\\1\end{pmatrix}\)</div>
+          <p>Astuce : multiplier par \((1,1,1)\) revient à faire la <b>somme de chaque ligne</b>.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="o2">
+      <div class="exo-head"><span>O2 · Déterminant d'une matrice 2×2</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <div class="rappel"><span class="lab">Formule</span>\[ \begin{vmatrix}a&b\\c&d\end{vmatrix}=ad-bc \]</div>
+        <p>Diagonale principale (de haut-gauche à bas-droite) moins l'autre diagonale.</p>
+        <p class="etape">Exemple corrigé</p>
+        \[ \begin{vmatrix}2&1\\4&3\end{vmatrix}=2\times3-1\times4=6-4=2 \]
+        <div class="warnbox"><span class="lab">Piège</span>Les signes : \(\begin{vmatrix}1&-2\\3&1\end{vmatrix}=1\times1-(-2)\times3=1+6=7\). Mettre des parenthèses autour des nombres négatifs.</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Calculer \(\begin{vmatrix}5&-2\\3&1\end{vmatrix}\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          \[ 5\times1-(-2)\times3=5+6=11 \]
+          <div class="res">\(11\)</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="o3">
+      <div class="exo-head"><span>O3 · Déterminant d'une matrice 3×3</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="method"><span class="lab">Recette (développement)</span>
+          <ol>
+            <li>Choisir la ligne ou la colonne qui contient <b>le plus de zéros</b>.</li>
+            <li>Pour chaque coefficient de cette ligne : coefficient × signe × déterminant 2×2 obtenu en <b>barrant</b> sa ligne et sa colonne.</li>
+            <li>Les signes suivent le damier \(\begin{pmatrix}+&-&+\\-&+&-\\+&-&+\end{pmatrix}\).</li>
+          </ol>
+        </div>
+        <div class="note"><span class="lab">Raccourci</span>Matrice <b>triangulaire</b> (que des zéros au-dessus, ou en dessous, de la diagonale) : le déterminant est le <b>produit des coefficients diagonaux</b>.</div>
+        <p class="etape">Exemple corrigé</p>
+        \[ \begin{vmatrix}1&2&0\\3&1&0\\4&5&2\end{vmatrix} \]
+        <p>La 3ᵉ colonne contient deux zéros : on développe selon elle. Seul le \(2\) (ligne 3, colonne 3, signe \(+\)) compte.</p>
+        <p>On barre la ligne 3 et la colonne 3 : il reste \(\begin{vmatrix}1&2\\3&1\end{vmatrix}\).</p>
+        \[ \det=+2\times\begin{vmatrix}1&2\\3&1\end{vmatrix}=2\times(1-6)=-10 \]
+        <p class="etape">À toi</p>
+        <p class="enonce">Calculer \(\begin{vmatrix}2&0&1\\1&3&0\\0&1&1\end{vmatrix}\) en développant selon la 1ʳᵉ ligne.</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>Coefficients de la ligne 1 : \(2\) (signe \(+\)), \(0\) (signe \(-\), ne compte pas), \(1\) (signe \(+\)).</p>
+          \[ \det=2\begin{vmatrix}3&0\\1&1\end{vmatrix}-0+1\begin{vmatrix}1&3\\0&1\end{vmatrix}=2\times3+1\times1=7 \]
+          <div class="res">\(7\)</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="o4">
+      <div class="exo-head"><span>O4 · Résoudre \(MX=0\) : trouver un noyau, sa base et sa dimension</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="note"><span class="lab">Pourquoi c'est important</span>Trouver des vecteurs propres, c'est exactement résoudre \((A-\lambda I)X=0\). Cet outil sert dans tout le Ch5.</div>
+        <div class="method"><span class="lab">Recette</span>
+          <ol>
+            <li>Écrire le système : une équation par ligne de \(M\).</li>
+            <li>Supprimer les équations en double (lignes proportionnelles).</li>
+            <li>Exprimer certaines inconnues en fonction des autres (les « libres »).</li>
+            <li>Écrire \(X\) avec seulement les inconnues libres, puis le <b>séparer</b> : un vecteur par inconnue libre.</li>
+            <li>Ces vecteurs forment une base ; leur nombre est la dimension.</li>
+          </ol>
+        </div>
+        <p class="etape">Exemple corrigé</p>
+        <p>Noyau de \(M=\begin{pmatrix}1&-1&1\\2&-2&2\\1&-1&1\end{pmatrix}\).</p>
+        <p>Les lignes 2 et 3 sont des multiples de la ligne 1 : il reste une seule équation.</p>
+        \[ x-y+z=0 \iff y=x+z \]
+        <p>\(x\) et \(z\) sont libres. On remplace \(y\) :</p>
+        \[ X=\begin{pmatrix}x\\x+z\\z\end{pmatrix}=x\begin{pmatrix}1\\1\\0\end{pmatrix}+z\begin{pmatrix}0\\1\\1\end{pmatrix} \]
+        <div class="res">\(\ker M=\mathrm{Vect}\big((1,1,0),(0,1,1)\big)\), de dimension 2.</div>
+        <div class="note"><span class="lab">Contrôle (théorème du rang)</span>\(\dim\ker M=n-\mathrm{rg}\,M\). Ici \(3-1=2\). Toujours vérifier avec ça.</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">a) Noyau de \(\begin{pmatrix}1&2\\2&4\end{pmatrix}\). &nbsp; b) Noyau de \(\begin{pmatrix}-2&1&1\\1&-2&1\\1&1&-2\end{pmatrix}\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p class="etape">a)</p>
+          <p>La ligne 2 est le double de la ligne 1 : une seule équation \(x+2y=0\), soit \(x=-2y\).</p>
+          \[ X=\begin{pmatrix}-2y\\y\end{pmatrix}=y\begin{pmatrix}-2\\1\end{pmatrix} \]
+          <div class="res">\(\ker=\mathrm{Vect}\big((-2,1)\big)\), dimension 1.</div>
+          <p class="etape">b)</p>
+          <p>Équations 1 et 2 : \(-2x+y+z=0\) et \(x-2y+z=0\).</p>
+          <p>On soustrait : \((-2x+y+z)-(x-2y+z)=-3x+3y=0\), donc \(y=x\).</p>
+          <p>Dans l'équation 2 : \(x-2x+z=0\), donc \(z=x\).</p>
+          <p>L'équation 3 (\(x+y-2z=0\)) est alors vérifiée : \(x+x-2x=0\).</p>
+          \[ X=x\begin{pmatrix}1\\1\\1\end{pmatrix} \]
+          <div class="res">\(\ker=\mathrm{Vect}\big((1,1,1)\big)\), dimension 1.</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="o5">
+      <div class="exo-head"><span>O5 · Trouver les racines d'un polynôme de degré 2</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <div class="rappel"><span class="lab">Formule</span>\[ aX^2+bX+c:\quad \Delta=b^2-4ac,\qquad X=\frac{-b\pm\sqrt\Delta}{2a} \]</div>
+        <div class="note"><span class="lab">Plus rapide</span>Chercher deux nombres dont la <b>somme</b> vaut \(-\frac ba\) et le <b>produit</b> \(\frac ca\). Pour \(X^2-5X+6\) : somme 5, produit 6, donc 2 et 3.</div>
+        <p class="etape">Exemple corrigé</p>
+        \[ X^2-5X+6:\quad \Delta=25-24=1,\quad X=\frac{5\pm1}{2} \]
+        <div class="res">Racines \(2\) et \(3\) : \(X^2-5X+6=(X-2)(X-3)\).</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Factoriser \(X^2-X-2\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>Somme \(1\), produit \(-2\) : les nombres \(2\) et \(-1\). Vérification avec \(\Delta=1+8=9\) : \(X=\frac{1\pm3}{2}\), soit \(2\) ou \(-1\).</p>
+          <div class="res">\(X^2-X-2=(X-2)(X+1)\)</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="o6">
+      <div class="exo-head"><span>O6 · Inverser une matrice</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="rappel"><span class="lab">Formule 2×2</span>\[ \begin{pmatrix}a&b\\c&d\end{pmatrix}^{-1}=\frac{1}{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix} \]</div>
+        <p>On échange \(a\) et \(d\), on change le signe de \(b\) et \(c\), on divise par le déterminant.</p>
+        <div class="method"><span class="lab">Recette 3×3</span>Écrire \(PX'=X\) sous forme de système, exprimer \(x',y',z'\) en fonction de \(x,y,z\) : les coefficients obtenus forment \(P^{-1}\), <b>ligne par ligne</b>. (Exemple complet dans l'<a href="#ex1">exercice 1 du DS blanc</a>, question 4.)</div>
+        <p class="etape">Exemple corrigé</p>
+        \[ \begin{pmatrix}2&1\\1&1\end{pmatrix}^{-1}=\frac{1}{2-1}\begin{pmatrix}1&-1\\-1&2\end{pmatrix}=\begin{pmatrix}1&-1\\-1&2\end{pmatrix} \]
+        <div class="warnbox"><span class="lab">Piège</span>Toujours vérifier : \(P\times P^{-1}\) doit donner \(I\). Si le déterminant est nul, la matrice n'est <b>pas</b> inversible.</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Inverser \(\begin{pmatrix}1&2\\1&3\end{pmatrix}\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>Déterminant : \(3-2=1\).</p>
+          <div class="res">\(\begin{pmatrix}3&-2\\-1&1\end{pmatrix}\)</div>
+        </div></details>
+      </div>
     </div>
   </section>
 
-  <!-- ======================= RESTITUTIONS ======================= -->
+  <!-- ======================= CH3 ======================= -->
+  <section class="block" id="ch3">
+    <h2>Partie 1 — Fin du Ch3 : matrices et changement de base</h2>
+
+    <div class="exo-card" id="m1">
+      <div class="exo-head"><span>M1 · Écrire la matrice d'une application linéaire</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <div class="note"><span class="lab">Quand ?</span>« Donner la matrice de \(f\) dans la base canonique », avec \(f\) donnée par une formule. C'est la 1ʳᵉ question de presque tous les exercices.</div>
+        <div class="method"><span class="lab">Recette</span>
+          <ol>
+            <li>Chaque morceau de \(f\) (entre les virgules) donne <b>une ligne</b>.</li>
+            <li>Dans chaque ligne, on écrit les nombres devant \(x\), puis \(y\), puis \(z\).</li>
+            <li>Variable absente : on écrit \(0\).</li>
+            <li>Vérifier : la 1ʳᵉ colonne doit être \(f(1,0,0)\).</li>
+          </ol>
+        </div>
+        <p class="etape">Exemple corrigé</p>
+        <p>\(f(x,y)=(2x+3y,\;x-y)\).</p>
+        <p>Morceau 1, \(2x+3y\) : ligne \((2\;\;3)\). Morceau 2, \(1x-1y\) : ligne \((1\;\;-1)\).</p>
+        \[ A=\begin{pmatrix}2&3\\1&-1\end{pmatrix} \]
+        <p>Vérification : \(f(1,0)=(2,1)\), c'est bien la 1ʳᵉ colonne.</p>
+        <div class="warnbox"><span class="lab">Piège (ton DS1)</span>Écrire les morceaux en <b>colonnes</b> donne la transposée : faux. Un morceau = une ligne.</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Matrice de \(f(x,y,z)=(x+2z,\;3y,\;x-y+z)\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>\(x+0y+2z\) : ligne \((1,0,2)\). \(0x+3y+0z\) : ligne \((0,3,0)\). \(x-y+z\) : ligne \((1,-1,1)\).</p>
+          <div class="res">\(A=\begin{pmatrix}1&0&2\\0&3&0\\1&-1&1\end{pmatrix}\)</div>
+          <p>Vérification : \(f(1,0,0)=(1,0,1)\), 1ʳᵉ colonne.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m2">
+      <div class="exo-head"><span>M2 · Montrer qu'une famille est une base, écrire la matrice de passage \(P\)</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <div class="note"><span class="lab">Quand ?</span>« Montrer que \((u_1,u_2,u_3)\) est une base de \(\mathbb R^3\) », « donner la matrice de passage ».</div>
+        <div class="method"><span class="lab">Recette</span>
+          <ol>
+            <li>\(P\) = les nouveaux vecteurs écrits <b>en colonnes</b>.</li>
+            <li>Calculer \(\det P\) (outils O2, O3).</li>
+            <li>Rédaction : « \(\det P\neq0\), donc la famille est libre ; elle a \(n\) vecteurs en dimension \(n\), donc c'est une base. »</li>
+          </ol>
+        </div>
+        <p class="etape">Exemple corrigé</p>
+        <p>\(u_1=(1,1)\), \(u_2=(1,-1)\).</p>
+        \[ P=\begin{pmatrix}1&1\\1&-1\end{pmatrix},\qquad \det P=-1-1=-2\neq0 \]
+        <div class="res">\((u_1,u_2)\) est une base de \(\mathbb R^2\) et \(P\) est la matrice de passage de la base canonique à \((u_1,u_2)\).</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">\(u_1=(1,0,1)\), \(u_2=(0,1,1)\), \(u_3=(1,1,0)\). Écrire \(P\) et montrer que c'est une base.</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          \[ P=\begin{pmatrix}1&0&1\\0&1&1\\1&1&0\end{pmatrix} \]
+          <p>Développement selon la 1ʳᵉ ligne :</p>
+          \[ \det P=1\begin{vmatrix}1&1\\1&0\end{vmatrix}-0+1\begin{vmatrix}0&1\\1&1\end{vmatrix}=1\times(-1)+1\times(-1)=-2 \]
+          <div class="res">\(\det P=-2\neq0\) : c'est une base de \(\mathbb R^3\).</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m3">
+      <div class="exo-head"><span>M3 · Matrice de \(f\) dans une nouvelle base (la Q19 de ton DS1)</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="note"><span class="lab">Quand ?</span>« Donner la matrice de \(f\) dans la base \((u_1,u_2,\dots)\) ».</div>
+        <div class="method"><span class="lab">Recette (méthode directe, la plus sûre)</span>
+          <ol>
+            <li>Calculer \(f(u_1)\), \(f(u_2)\), … (outil O1).</li>
+            <li>Écrire chaque \(f(u_j)\) comme combinaison \(a\,u_1+b\,u_2+\dots\) (petit système).</li>
+            <li>Les coefficients \((a,b,\dots)\) de \(f(u_j)\) forment la <b>colonne \(j\)</b> de la nouvelle matrice.</li>
+          </ol>
+          <b>Méthode 2</b> (si l'énoncé la demande) : \(A'=P^{-1}AP\). On peut vérifier sans \(P^{-1}\) : \(AP=PA'\).
+        </div>
+        <p class="etape">Exemple corrigé</p>
+        <p>\(f(x,y)=(x+2y,\;2x+y)\), nouvelle base \(u_1=(1,1)\), \(u_2=(1,-1)\).</p>
+        <p>\(f(u_1)=f(1,1)=(3,3)=3u_1\) : coordonnées \((3,0)\).</p>
+        <p>\(f(u_2)=f(1,-1)=(-1,1)=-u_2\) : coordonnées \((0,-1)\).</p>
+        <div class="res">\(A'=\begin{pmatrix}3&0\\0&-1\end{pmatrix}\)</div>
+        <div class="warnbox"><span class="lab">Piège</span>Les coordonnées de \(f(u_j)\) se rangent en <b>colonne</b>, pas en ligne.</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">\(f(x,y)=(3x-y,\;x+y)\), base \(u_1=(1,1)\), \(u_2=(1,0)\).<br>
+        a) Matrice de \(f\) dans \((u_1,u_2)\) par la méthode directe.<br>
+        b) Écrire \(P\), calculer \(P^{-1}\) et vérifier avec \(P^{-1}AP\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p class="etape">a) Méthode directe</p>
+          <p>\(f(u_1)=f(1,1)=(2,2)=2u_1\) : colonne \((2,0)\).</p>
+          <p>\(f(u_2)=f(1,0)=(3,1)\). On cherche \(a,b\) avec \((3,1)=a(1,1)+b(1,0)=(a+b,\;a)\).</p>
+          <p>2ᵉ coordonnée : \(a=1\). 1ʳᵉ coordonnée : \(a+b=3\), donc \(b=2\). Colonne \((1,2)\).</p>
+          <div class="res">\(A'=\begin{pmatrix}2&1\\0&2\end{pmatrix}\)</div>
+          <p class="etape">b) Vérification par \(P^{-1}AP\)</p>
+          \[ A=\begin{pmatrix}3&-1\\1&1\end{pmatrix},\quad P=\begin{pmatrix}1&1\\1&0\end{pmatrix},\quad \det P=0-1=-1 \]
+          \[ P^{-1}=\frac{1}{-1}\begin{pmatrix}0&-1\\-1&1\end{pmatrix}=\begin{pmatrix}0&1\\1&-1\end{pmatrix} \]
+          \[ AP=\begin{pmatrix}2&3\\2&1\end{pmatrix},\qquad P^{-1}(AP)=\begin{pmatrix}2&1\\0&2\end{pmatrix} \]
+          <div class="res">On retrouve \(A'\). Les deux méthodes donnent le même résultat.</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m4">
+      <div class="exo-head"><span>M4 · Deux matrices sont-elles semblables ?</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <div class="note"><span class="lab">Définition</span>\(A\) et \(B\) sont semblables s'il existe \(P\) inversible avec \(B=P^{-1}AP\) : c'est le même endomorphisme écrit dans deux bases.</div>
+        <div class="method"><span class="lab">Recette</span>
+          <ol>
+            <li>Comparer trace, déterminant, rang. <b>Si un seul diffère : pas semblables.</b></li>
+            <li>S'ils sont égaux et que les deux matrices sont diagonalisables avec les mêmes valeurs propres : semblables.</li>
+          </ol>
+        </div>
+        <p class="etape">Exemple corrigé</p>
+        <p>\(\begin{pmatrix}1&2\\3&4\end{pmatrix}\) (trace 5, déterminant \(-2\)) et \(\begin{pmatrix}5&0\\0&0\end{pmatrix}\) (trace 5, déterminant 0).</p>
+        <div class="res">Déterminants différents : pas semblables.</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">\(\begin{pmatrix}2&1\\1&2\end{pmatrix}\) et \(\begin{pmatrix}1&0\\0&3\end{pmatrix}\) sont-elles semblables ?</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>Les deux ont trace 4 et déterminant 3. Avec la recette M5, la 1ʳᵉ a pour valeurs propres 1 et 3 (distinctes), donc elle est diagonalisable et semblable à \(\mathrm{diag}(1,3)\).</p>
+          <div class="res">Oui, elles sont semblables.</div>
+        </div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CH5 ======================= -->
+  <section class="block" id="ch5">
+    <h2>Partie 2 — Ch5 : valeurs propres et diagonalisation</h2>
+    <div class="note"><span class="lab">L'idée en une phrase</span>Un vecteur propre \(X\) est un vecteur que \(A\) ne fait que multiplier par un nombre : \(AX=\lambda X\). Ce nombre \(\lambda\) est une valeur propre. Diagonaliser, c'est trouver assez de vecteurs propres pour en faire une base : dans cette base, la matrice devient diagonale.</div>
+
+    <div class="exo-card" id="m5">
+      <div class="exo-head"><span>M5 · Valeurs propres d'une matrice 2×2</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <div class="rappel"><span class="lab">Formule 2×2</span>\[ \chi_A(X)=X^2-(\mathrm{tr}A)\,X+\det A \]</div>
+        <div class="method"><span class="lab">Recette</span>
+          <ol>
+            <li>Trace = somme de la diagonale ; déterminant (O2).</li>
+            <li>Écrire \(\chi_A\), trouver ses racines (O5) : ce sont les valeurs propres.</li>
+          </ol>
+        </div>
+        <p class="etape">Exemple corrigé</p>
+        <p>\(A=\begin{pmatrix}2&1\\1&2\end{pmatrix}\) : \(\mathrm{tr}A=4\), \(\det A=4-1=3\).</p>
+        \[ \chi_A(X)=X^2-4X+3=(X-1)(X-3) \]
+        <div class="res">Valeurs propres : \(1\) et \(3\).</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Valeurs propres de \(\begin{pmatrix}4&-2\\1&1\end{pmatrix}\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>Trace \(5\), déterminant \(4\times1-(-2)\times1=6\).</p>
+          \[ \chi(X)=X^2-5X+6=(X-2)(X-3) \]
+          <div class="res">Valeurs propres : \(2\) et \(3\).</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m6">
+      <div class="exo-head"><span>M6 · Valeurs propres d'une matrice 3×3</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="method"><span class="lab">Recette (regarder la matrice avant de calculer)</span>
+          <ol>
+            <li><b>Triangulaire ?</b> Les valeurs propres sont sur la diagonale. Fini.</li>
+            <li><b>Une ligne ou colonne avec deux zéros ?</b> Calculer \(\det(A-XI)\) en développant selon elle (O3) : un facteur sort tout seul.</li>
+            <li><b>Toutes les lignes ont la même somme \(s\) ?</b> Alors \(s\) est valeur propre, de vecteur propre \((1,1,1)\).</li>
+            <li>Contrôle : somme des valeurs propres = trace ; produit = déterminant.</li>
+          </ol>
+        </div>
+        <p class="etape">Exemple corrigé</p>
+        <p>\(A=\begin{pmatrix}3&0&1\\0&2&0\\1&0&3\end{pmatrix}\). La colonne 2 a deux zéros.</p>
+        \[ \det(A-XI)=\begin{vmatrix}3-X&0&1\\0&2-X&0\\1&0&3-X\end{vmatrix}=(2-X)\begin{vmatrix}3-X&1\\1&3-X\end{vmatrix} \]
+        \[ =(2-X)\big((3-X)^2-1\big)=(2-X)(3-X-1)(3-X+1)=(2-X)^2(4-X) \]
+        <div class="res">Valeurs propres : \(2\) (double) et \(4\) (simple). Contrôle : \(2+2+4=8=\mathrm{tr}A\).</div>
+        <div class="warnbox"><span class="lab">Piège</span>Ne pas développer \((3-X)^2-1\) en un polynôme : factoriser avec \(a^2-b^2=(a-b)(a+b)\). On garde toujours les facteurs.</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">a) Valeurs propres de \(\begin{pmatrix}2&0&0\\1&3&0\\4&5&-1\end{pmatrix}\). &nbsp; b) Valeurs propres de \(\begin{pmatrix}1&1&0\\1&1&0\\0&0&2\end{pmatrix}\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p class="etape">a)</p>
+          <p>Triangulaire inférieure : on lit la diagonale.</p>
+          <div class="res">\(2\), \(3\) et \(-1\).</div>
+          <p class="etape">b)</p>
+          <p>Colonne 3 avec deux zéros :</p>
+          \[ (2-X)\begin{vmatrix}1-X&1\\1&1-X\end{vmatrix}=(2-X)\big((1-X)^2-1\big)=(2-X)(-X)(2-X) \]
+          <div class="res">\(\chi(X)=-X(2-X)^2\) : valeurs propres \(0\) (simple) et \(2\) (double).</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m7">
+      <div class="exo-head"><span>M7 · Vecteurs propres et sous-espaces propres \(E_\lambda\)</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="method"><span class="lab">Recette</span>
+          <ol>
+            <li>Pour chaque valeur propre \(\lambda\) : écrire \(A-\lambda I\) (on retire \(\lambda\) sur la diagonale).</li>
+            <li>Résoudre \((A-\lambda I)X=0\) (outil O4) : on obtient une base de \(E_\lambda\).</li>
+            <li>Contrôle : \(AX\) doit donner \(\lambda X\).</li>
+          </ol>
+        </div>
+        <p class="etape">Exemple corrigé</p>
+        <p>\(A=\begin{pmatrix}2&1\\1&2\end{pmatrix}\), valeurs propres 1 et 3 (M5).</p>
+        <p>\(\lambda=1\) : \(A-I=\begin{pmatrix}1&1\\1&1\end{pmatrix}\), équation \(x+y=0\), donc \(E_1=\mathrm{Vect}\big((1,-1)\big)\).</p>
+        <p>\(\lambda=3\) : \(A-3I=\begin{pmatrix}-1&1\\1&-1\end{pmatrix}\), équation \(x=y\), donc \(E_3=\mathrm{Vect}\big((1,1)\big)\).</p>
+        <p>Contrôle : \(A(1,1)=(3,3)=3(1,1)\).</p>
+        <div class="warnbox"><span class="lab">Piège</span>Si on trouve seulement \(X=0\), c'est qu'il y a une erreur : soit \(\lambda\) n'est pas une valeur propre, soit le calcul de \(A-\lambda I\) est faux.</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Sous-espaces propres de \(\begin{pmatrix}4&-2\\1&1\end{pmatrix}\) (valeurs propres 2 et 3).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>\(\lambda=2\) : \(\begin{pmatrix}2&-2\\1&-1\end{pmatrix}\), équation \(x-y=0\) : \(E_2=\mathrm{Vect}\big((1,1)\big)\).</p>
+          <p>\(\lambda=3\) : \(\begin{pmatrix}1&-2\\1&-2\end{pmatrix}\), équation \(x-2y=0\), soit \(x=2y\) : \(E_3=\mathrm{Vect}\big((2,1)\big)\).</p>
+          <div class="res">Contrôle : \(A(2,1)=(8-2,\;2+1)=(6,3)=3(2,1)\).</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m8">
+      <div class="exo-head"><span>M8 · Diagonaliser une matrice (l'exercice classique du DS)</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="method"><span class="lab">Recette complète</span>
+          <ol>
+            <li>Valeurs propres (M5 ou M6).</li>
+            <li>Base de chaque \(E_\lambda\) (M7).</li>
+            <li>Vérifier le critère (M9) : \(\dim E_\lambda=\) multiplicité de \(\lambda\), pour chaque \(\lambda\).</li>
+            <li>\(P\) = tous les vecteurs propres trouvés, <b>en colonnes</b>. \(D\) = les valeurs propres sur la diagonale, <b>dans le même ordre</b>.</li>
+            <li>Conclure : \(D=P^{-1}AP\) (ou \(A=PDP^{-1}\)).</li>
+          </ol>
+        </div>
+        <p class="etape">Exemple corrigé</p>
+        <p>\(A=\begin{pmatrix}2&1\\1&2\end{pmatrix}\) : valeurs propres 1 et 3, \(E_1=\mathrm{Vect}\big((1,-1)\big)\), \(E_3=\mathrm{Vect}\big((1,1)\big)\).</p>
+        \[ P=\begin{pmatrix}1&1\\-1&1\end{pmatrix},\qquad D=\begin{pmatrix}1&0\\0&3\end{pmatrix} \]
+        <div class="note"><span class="lab">Rédaction type (à recopier)</span>« \(A\) admet deux valeurs propres distinctes \(1\) et \(3\) ; elle est d'ordre 2, donc elle est diagonalisable. Avec \(P=\begin{pmatrix}1&1\\-1&1\end{pmatrix}\) (inversible car \(\det P=2\neq0\)), on a \(P^{-1}AP=\mathrm{diag}(1,3)\). »</div>
+        <div class="warnbox"><span class="lab">Piège</span>Le 1ᵉʳ vecteur de \(P\) correspond à la 1ʳᵉ valeur de \(D\). Si on échange l'ordre dans \(P\), on échange aussi dans \(D\).</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Diagonaliser \(A=\begin{pmatrix}3&0&1\\0&2&0\\1&0&3\end{pmatrix}\) (valeurs propres trouvées en M6 : 2 double, 4 simple).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p class="etape">Étape 1 : \(E_2\)</p>
+          \[ A-2I=\begin{pmatrix}1&0&1\\0&0&0\\1&0&1\end{pmatrix} \]
+          <p>Une seule équation \(x+z=0\) ; \(y\) est libre et \(z=-x\).</p>
+          \[ X=\begin{pmatrix}x\\y\\-x\end{pmatrix}=x\begin{pmatrix}1\\0\\-1\end{pmatrix}+y\begin{pmatrix}0\\1\\0\end{pmatrix} \]
+          <p>\(\dim E_2=2\) = multiplicité de 2.</p>
+          <p class="etape">Étape 2 : \(E_4\)</p>
+          \[ A-4I=\begin{pmatrix}-1&0&1\\0&-2&0\\1&0&-1\end{pmatrix} \]
+          <p>Ligne 2 : \(y=0\). Ligne 1 : \(z=x\). Donc \(E_4=\mathrm{Vect}\big((1,0,1)\big)\).</p>
+          <p class="etape">Étape 3 : conclusion</p>
+          \[ P=\begin{pmatrix}0&1&1\\1&0&0\\0&-1&1\end{pmatrix},\qquad D=\begin{pmatrix}2&0&0\\0&2&0\\0&0&4\end{pmatrix} \]
+          <div class="res">\(A\) est diagonalisable et \(P^{-1}AP=D\) (\(\det P=-2\neq0\)).</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m9">
+      <div class="exo-head"><span>M9 · Diagonalisable ou pas ? (justifier)</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="rappel"><span class="lab">Critère du cours</span>\[ A \text{ diagonalisable} \iff \chi_A \text{ scindé et } \dim E_\lambda=m(\lambda) \text{ pour chaque valeur propre } \lambda \]</div>
+        <div class="method"><span class="lab">Recette rapide</span>
+          <ol>
+            <li>Toutes les valeurs propres sont <b>simples</b> (\(n\) valeurs distinctes) : diagonalisable, sans autre calcul.</li>
+            <li>Une valeur propre est <b>double</b> : calculer \(\dim E_\lambda=n-\mathrm{rg}(A-\lambda I)\).</li>
+            <li>Si \(\dim E_\lambda\) est plus petite que la multiplicité : <b>pas diagonalisable</b>.</li>
+          </ol>
+        </div>
+        <p class="etape">Exemple corrigé</p>
+        <p>\(A=\begin{pmatrix}1&1\\0&1\end{pmatrix}\) : triangulaire, valeur propre 1 double.</p>
+        <p>\(A-I=\begin{pmatrix}0&1\\0&0\end{pmatrix}\) est de rang 1, donc \(\dim E_1=2-1=1\).</p>
+        <div class="res">\(\dim E_1=1\lt 2=m(1)\) : \(A\) n'est pas diagonalisable.</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">a) \(\begin{pmatrix}2&1&0\\0&2&0\\0&0&3\end{pmatrix}\) est-elle diagonalisable ? &nbsp; b) Et \(\begin{pmatrix}1&1&0\\1&1&0\\0&0&2\end{pmatrix}\) (valeurs propres en M6) ?</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p class="etape">a)</p>
+          <p>Triangulaire : 2 (double) et 3 (simple). \(A-2I=\begin{pmatrix}0&1&0\\0&0&0\\0&0&1\end{pmatrix}\) est de rang 2, donc \(\dim E_2=3-2=1\lt 2\).</p>
+          <div class="res">Pas diagonalisable.</div>
+          <p class="etape">b)</p>
+          <p>Valeurs propres 0 (simple) et 2 (double). \(A-2I=\begin{pmatrix}-1&1&0\\1&-1&0\\0&0&0\end{pmatrix}\) est de rang 1, donc \(\dim E_2=3-1=2=m(2)\). Pour la valeur simple 0, \(\dim E_0=1\) automatiquement.</p>
+          <div class="res">Diagonalisable. Par exemple \(E_2=\mathrm{Vect}\big((1,1,0),(0,0,1)\big)\) et \(E_0=\mathrm{Vect}\big((1,-1,0)\big)\).</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m10">
+      <div class="exo-head"><span>M10 · Calculer \(A^n\) grâce à la diagonalisation</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="rappel"><span class="lab">Formule</span>\[ A=PDP^{-1}\;\Rightarrow\;A^n=PD^nP^{-1},\qquad D^n=\mathrm{diag}(\lambda_1^n,\dots,\lambda_k^n) \]</div>
+        <div class="method"><span class="lab">Recette</span>
+          <ol>
+            <li>Diagonaliser (M8) : \(P\), \(D\).</li>
+            <li>Calculer \(P^{-1}\) (O6).</li>
+            <li>Calculer \(PD^n\) : chaque <b>colonne</b> de \(P\) est multipliée par \(\lambda^n\).</li>
+            <li>Multiplier par \(P^{-1}\).</li>
+            <li>Contrôle : avec \(n=1\), on doit retrouver \(A\).</li>
+          </ol>
+        </div>
+        <p class="etape">Exemple corrigé</p>
+        <p>\(A=\begin{pmatrix}2&1\\1&2\end{pmatrix}\), \(P=\begin{pmatrix}1&1\\-1&1\end{pmatrix}\), \(D=\mathrm{diag}(1,3)\).</p>
+        \[ P^{-1}=\frac12\begin{pmatrix}1&-1\\1&1\end{pmatrix},\qquad PD^n=\begin{pmatrix}1&3^n\\-1&3^n\end{pmatrix} \]
+        \[ A^n=PD^nP^{-1}=\frac12\begin{pmatrix}1+3^n&-1+3^n\\-1+3^n&1+3^n\end{pmatrix} \]
+        <div class="res">Contrôle \(n=1\) : \(\frac12\begin{pmatrix}4&2\\2&4\end{pmatrix}=A\).</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">\(A=\begin{pmatrix}4&-2\\1&1\end{pmatrix}\). Avec M7 : \(P=\begin{pmatrix}1&2\\1&1\end{pmatrix}\), \(D=\mathrm{diag}(2,3)\). Calculer \(A^n\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>\(\det P=1-2=-1\), donc \(P^{-1}=\begin{pmatrix}-1&2\\1&-1\end{pmatrix}\).</p>
+          \[ PD^n=\begin{pmatrix}2^n&2\cdot3^n\\2^n&3^n\end{pmatrix} \]
+          <p>Ligne 1 × \(P^{-1}\) : \((-2^n+2\cdot3^n,\;\;2\cdot2^n-2\cdot3^n)\).</p>
+          <p>Ligne 2 × \(P^{-1}\) : \((-2^n+3^n,\;\;2\cdot2^n-3^n)\).</p>
+          <div class="res">\(A^n=\begin{pmatrix}2\cdot3^n-2^n&2^{n+1}-2\cdot3^n\\3^n-2^n&2^{n+1}-3^n\end{pmatrix}\). Contrôle \(n=1\) : \(\begin{pmatrix}4&-2\\1&1\end{pmatrix}\).</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m11">
+      <div class="exo-head"><span>M11 · Calculer \(A^n\) avec une relation \(A^2=aA+bI\) (type TD5 exercice 4)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="note"><span class="lab">Quand ?</span>L'énoncé fait calculer \(A^2\), ou \((A-I)^2\), puis demande « en déduire \(A^n\) en fonction de \(A\) et \(I\) ».</div>
+        <div class="method"><span class="lab">Cas 1 : deux racines différentes (\(A^2-sA+pI=0\) avec racines \(r_1\neq r_2\))</span>
+          <ol>
+            <li>Écrire \(X^n=(X-r_1)(X-r_2)Q(X)+a_nX+b_n\) (division euclidienne : le reste est de degré 1).</li>
+            <li>Remplacer \(X\) par \(r_1\) puis par \(r_2\) : deux équations, on trouve \(a_n\) et \(b_n\).</li>
+            <li>Remplacer \(X\) par \(A\) : le premier terme s'annule, donc \(A^n=a_nA+b_nI\).</li>
+          </ol>
+        </div>
+        <div class="method"><span class="lab">Cas 2 : racine double \(\lambda\) (\((A-\lambda I)^2=0\))</span>
+          <ol>
+            <li>Poser \(N=A-\lambda I\), donc \(A=\lambda I+N\) avec \(N^2=0\).</li>
+            <li>Formule du binôme (\(\lambda I\) et \(N\) commutent), tous les termes avec \(N^2\) ou plus sont nuls :</li>
+          </ol>
+          \[ A^n=\lambda^nI+n\lambda^{n-1}N \]
+        </div>
+        <p class="etape">Exemple corrigé (cas 1)</p>
+        <p>\(A=\begin{pmatrix}2&1\\1&2\end{pmatrix}\) : \(A^2=\begin{pmatrix}5&4\\4&5\end{pmatrix}=4A-3I\), soit \(A^2-4A+3I=0\). Racines de \(X^2-4X+3\) : \(1\) et \(3\).</p>
+        \[ X^n=(X-1)(X-3)Q(X)+a_nX+b_n \]
+        <p>\(X=1\) : \(1=a_n+b_n\). \(X=3\) : \(3^n=3a_n+b_n\).</p>
+        <p>Soustraction : \(3^n-1=2a_n\), donc \(a_n=\dfrac{3^n-1}{2}\) et \(b_n=1-a_n=\dfrac{3-3^n}{2}\).</p>
+        <div class="res">\(A^n=\dfrac{3^n-1}{2}A+\dfrac{3-3^n}{2}I\) (on retrouve le résultat de M10).</div>
+        <p class="etape">À toi (cas 2)</p>
+        <p class="enonce">\(A=\begin{pmatrix}3&1\\-1&1\end{pmatrix}\). a) Calculer \((A-2I)^2\). b) En déduire \(A^n\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p class="etape">a)</p>
+          \[ N=A-2I=\begin{pmatrix}1&1\\-1&-1\end{pmatrix},\qquad N^2=\begin{pmatrix}1-1&1-1\\-1+1&-1+1\end{pmatrix}=\begin{pmatrix}0&0\\0&0\end{pmatrix} \]
+          <p class="etape">b)</p>
+          <p>\(A=2I+N\) avec \(N^2=0\) :</p>
+          \[ A^n=2^nI+n\,2^{n-1}N=\begin{pmatrix}2^n+n2^{n-1}&n2^{n-1}\\-n2^{n-1}&2^n-n2^{n-1}\end{pmatrix} \]
+          <div class="res">Contrôle \(n=1\) : \(\begin{pmatrix}3&1\\-1&1\end{pmatrix}=A\). (Ici \(A\) n'est pas diagonalisable : 2 est valeur propre double et \(\dim E_2=1\).)</div>
+        </div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CH4 ======================= -->
+  <section class="block" id="ch4">
+    <h2>Partie 3 — Ch4 : courbes paramétrées</h2>
+    <div class="note"><span class="lab">L'idée en une phrase</span>Un point se déplace : à l'instant \(t\), il est en \(M(t)=\big(x(t),y(t)\big)\). Étudier la courbe, c'est savoir où va le point, dans quel sens, et ce qui se passe aux endroits spéciaux (arrêts, infini).</div>
+
+    <div class="exo-card" id="m12">
+      <div class="exo-head"><span>M12 · Réduire le domaine d'étude (périodicité, symétries)</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="method"><span class="lab">Recette</span>
+          <ol>
+            <li>Périodicité : si \(x\) et \(y\) sont \(T\)-périodiques, on étudie sur un intervalle de longueur \(T\).</li>
+            <li>Calculer \(x(-t)\) et \(y(-t)\), puis comparer avec \(x(t)\), \(y(t)\).</li>
+            <li>Si besoin, essayer aussi \(t\mapsto\pi-t\) (fonctions trigonométriques).</li>
+            <li>Lire la symétrie dans le tableau ci-dessous, et diviser l'intervalle par 2 à chaque symétrie.</li>
+          </ol>
+        </div>
+        <div class="overflow"><table>
+          <tr><th>On trouve</th><th>Symétrie</th></tr>
+          <tr><td>\((x,\;-y)\)</td><td>par rapport à l'axe \((Ox)\)</td></tr>
+          <tr><td>\((-x,\;y)\)</td><td>par rapport à l'axe \((Oy)\)</td></tr>
+          <tr><td>\((-x,\;-y)\)</td><td>de centre \(O\)</td></tr>
+          <tr><td>\((y,\;x)\)</td><td>par rapport à la droite \(y=x\)</td></tr>
+          <tr><td>\((x,\;y)\)</td><td>même point : la courbe est parcourue deux fois</td></tr>
+        </table></div>
+        <p class="etape">Exemple corrigé</p>
+        <p>\(x(t)=\cos t\), \(y(t)=\sin 2t\). Période commune \(2\pi\) : on part de \([-\pi,\pi]\).</p>
+        <p>\(x(-t)=\cos t=x(t)\) et \(y(-t)=-\sin 2t=-y(t)\) : symétrie d'axe \((Ox)\). On se ramène à \([0,\pi]\).</p>
+        <p>\(x(\pi-t)=-\cos t=-x(t)\) et \(y(\pi-t)=\sin(2\pi-2t)=-y(t)\) : symétrie de centre \(O\). On se ramène à \(\left[0,\frac\pi2\right]\).</p>
+        <div class="res">On étudie sur \(\left[0,\frac\pi2\right]\), puis on complète par la symétrie de centre \(O\), puis par la symétrie d'axe \((Ox)\).</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">\(x(t)=t^2\), \(y(t)=t^3-3t\), \(t\in\mathbb R\). Quelle symétrie ? Sur quel intervalle étudier ?</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>\(x(-t)=t^2=x(t)\) et \(y(-t)=-t^3+3t=-y(t)\).</p>
+          <div class="res">Symétrie d'axe \((Ox)\) : on étudie sur \([0,+\infty[\), puis on symétrise par rapport à \((Ox)\).</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m13">
+      <div class="exo-head"><span>M13 · Dresser le tableau de variations conjointes</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="method"><span class="lab">Recette</span>
+          <ol>
+            <li>Calculer \(x'(t)\) et \(y'(t)\), et les <b>factoriser</b>.</li>
+            <li>Trouver où chacune s'annule et son signe (comme en terminale).</li>
+            <li>Un seul tableau : ligne \(t\) (avec <b>toutes</b> les valeurs où \(x'\) ou \(y'\) s'annule), puis \(x'\), \(x\), \(y'\), \(y\).</li>
+            <li>Calculer \(x\) et \(y\) à chaque valeur remarquable, et les limites aux bornes.</li>
+          </ol>
+        </div>
+        <p class="etape">Exemple corrigé</p>
+        <p>\(x(t)=t^2\), \(y(t)=t^3-3t\) sur \([0,+\infty[\) (après M12).</p>
+        <p>\(x'(t)=2t\ge0\). \(y'(t)=3t^2-3=3(t-1)(t+1)\) : négatif sur \([0,1[\), positif après.</p>
+        <p>Valeurs : \(t=0\) : \((0,0)\) ; \(t=1\) : \((1,-2)\) ; \(t\to+\infty\) : \(x\to+\infty\), \(y\to+\infty\).</p>
+        <div class="overflow"><table>
+          <tr><th>\(t\)</th><td>\(0\)</td><td></td><td>\(1\)</td><td></td><td>\(+\infty\)</td></tr>
+          <tr><th>\(x'\)</th><td>0</td><td>+</td><td>2</td><td>+</td><td></td></tr>
+          <tr><th>\(x\)</th><td>\(0\)</td><td>↗</td><td>\(1\)</td><td>↗</td><td>\(+\infty\)</td></tr>
+          <tr><th>\(y'\)</th><td>\(-3\)</td><td>−</td><td>0</td><td>+</td><td></td></tr>
+          <tr><th>\(y\)</th><td>\(0\)</td><td>↘</td><td>\(-2\)</td><td>↗</td><td>\(+\infty\)</td></tr>
+        </table></div>
+        <p class="etape">À toi</p>
+        <p class="enonce">\(x(t)=t^2-2t\), \(y(t)=t^3-3t^2\), \(t\in\mathbb R\). Dresser le tableau de variations conjointes.</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>\(x'(t)=2t-2=2(t-1)\) : négatif avant 1, positif après.</p>
+          <p>\(y'(t)=3t^2-6t=3t(t-2)\) : positif avant 0, négatif entre 0 et 2, positif après 2.</p>
+          <p>Valeurs : \(t=0\) : \((0,0)\) ; \(t=1\) : \((-1,-2)\) ; \(t=2\) : \((0,-4)\).</p>
+          <p>Limites : \(t\to-\infty\) : \(x\to+\infty\), \(y\to-\infty\) ; \(t\to+\infty\) : \(x\to+\infty\), \(y\to+\infty\).</p>
+          <div class="overflow"><table>
+            <tr><th>\(t\)</th><td>\(-\infty\)</td><td></td><td>\(0\)</td><td></td><td>\(1\)</td><td></td><td>\(2\)</td><td></td><td>\(+\infty\)</td></tr>
+            <tr><th>\(x'\)</th><td></td><td>−</td><td>\(-2\)</td><td>−</td><td>0</td><td>+</td><td>2</td><td>+</td><td></td></tr>
+            <tr><th>\(x\)</th><td>\(+\infty\)</td><td>↘</td><td>\(0\)</td><td>↘</td><td>\(-1\)</td><td>↗</td><td>\(0\)</td><td>↗</td><td>\(+\infty\)</td></tr>
+            <tr><th>\(y'\)</th><td></td><td>+</td><td>0</td><td>−</td><td>\(-3\)</td><td>−</td><td>0</td><td>+</td><td></td></tr>
+            <tr><th>\(y\)</th><td>\(-\infty\)</td><td>↗</td><td>\(0\)</td><td>↘</td><td>\(-2\)</td><td>↘</td><td>\(-4\)</td><td>↗</td><td>\(+\infty\)</td></tr>
+          </table></div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m14">
+      <div class="exo-head"><span>M14 · Tangente en un point (horizontale, verticale, équation)</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <div class="method"><span class="lab">Recette</span>
+          <ol>
+            <li>Calculer le vecteur dérivé \(\big(x'(t_0),\,y'(t_0)\big)\). S'il n'est pas nul, il dirige la tangente.</li>
+            <li>\(y'(t_0)=0\) et \(x'(t_0)\neq0\) : tangente <b>horizontale</b>.</li>
+            <li>\(x'(t_0)=0\) et \(y'(t_0)\neq0\) : tangente <b>verticale</b>.</li>
+            <li>Équation (si \(x'(t_0)\neq0\)) : \(y-y_0=\dfrac{y'(t_0)}{x'(t_0)}\,(x-x_0)\).</li>
+            <li>Les deux dérivées nulles : point singulier, voir M15.</li>
+          </ol>
+        </div>
+        <p class="etape">Exemple corrigé</p>
+        <p>\(x(t)=t^2\), \(y(t)=t^3-3t\), en \(t_0=2\) : point \((4,2)\), vecteur dérivé \((4,9)\).</p>
+        <div class="res">Tangente : \(y-2=\frac94(x-4)\).</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Pour \(x(t)=t^2-2t\), \(y(t)=t^3-3t^2\) (M13) : donner les points à tangente horizontale et verticale, puis l'équation de la tangente en \(t=3\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <ul>
+            <li>\(t=0\) : \(y'=0\), \(x'=-2\) : horizontale en \((0,0)\).</li>
+            <li>\(t=2\) : \(y'=0\), \(x'=2\) : horizontale en \((0,-4)\).</li>
+            <li>\(t=1\) : \(x'=0\), \(y'=-3\) : verticale en \((-1,-2)\).</li>
+          </ul>
+          <p>En \(t=3\) : point \((3,0)\), vecteur dérivé \((4,9)\).</p>
+          <div class="res">Tangente en \(t=3\) : \(y=\frac94(x-3)\).</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m15">
+      <div class="exo-head"><span>M15 · Point singulier : nature et tangente</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="note"><span class="lab">Quand ?</span>\(x'(t_0)=0\) <b>et</b> \(y'(t_0)=0\) : le point s'arrête. Il faut regarder plus loin dans le développement.</div>
+        <div class="method"><span class="lab">Recette</span>
+          <ol>
+            <li>Écrire \(M(t_0+h)\) en DL (ou dériver plusieurs fois) et regrouper par puissance de \(h\) : \(M(t_0+h)=M(t_0)+h^{p}\,\vec u+h^{q}\,\vec v+\dots\)</li>
+            <li>\(p\) = première puissance avec un vecteur non nul ; \(q\) = première puissance avec un vecteur <b>non colinéaire</b> à \(\vec u\).</li>
+            <li>La tangente est dirigée par \(\vec u\).</li>
+            <li>Lire la nature dans le tableau.</li>
+          </ol>
+        </div>
+        <div class="overflow"><table>
+          <tr><th>\(p\)</th><th>\(q\)</th><th>Nature</th></tr>
+          <tr><td>impair</td><td>pair</td><td>point ordinaire</td></tr>
+          <tr><td>impair</td><td>impair</td><td>point d'inflexion</td></tr>
+          <tr><td>pair</td><td>impair</td><td>rebroussement de 1ʳᵉ espèce (la courbe fait demi-tour, de part et d'autre de la tangente)</td></tr>
+          <tr><td>pair</td><td>pair</td><td>rebroussement de 2ᵉ espèce (demi-tour, du même côté)</td></tr>
+        </table></div>
+        <p class="etape">Exemple corrigé</p>
+        <p>\(x(t)=t^2\), \(y(t)=t^3\) en \(t_0=0\) : \(x'(0)=y'(0)=0\).</p>
+        \[ M(t)=t^2\begin{pmatrix}1\\0\end{pmatrix}+t^3\begin{pmatrix}0\\1\end{pmatrix} \]
+        <p>\(p=2\), \(q=3\), vecteurs non colinéaires.</p>
+        <div class="res">Rebroussement de 1ʳᵉ espèce en \(O\), tangente dirigée par \((1,0)\) : l'axe \((Ox)\).</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">a) \(x(t)=t^3\), \(y(t)=t^2\) en \(t=0\). &nbsp; b) \(x(t)=t^2\), \(y(t)=t^4+t^5\) en \(t=0\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p class="etape">a)</p>
+          <p>\(M(t)=t^2(0,1)+t^3(1,0)\) : \(p=2\), \(q=3\).</p>
+          <div class="res">Rebroussement de 1ʳᵉ espèce, tangente dirigée par \((0,1)\) : l'axe \((Oy)\).</div>
+          <p class="etape">b)</p>
+          <p>\(M(t)=t^2(1,0)+t^4(0,1)+t^5(0,1)\). Le vecteur en \(t^4\) n'est pas colinéaire à \((1,0)\) : \(p=2\), \(q=4\).</p>
+          <div class="res">Rebroussement de 2ᵉ espèce, tangente \((Ox)\).</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m16">
+      <div class="exo-head"><span>M16 · Branches infinies et asymptotes</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="method"><span class="lab">Recette (en un point \(t_0\) où une coordonnée part à l'infini)</span>
+          <ol>
+            <li>\(x\to\pm\infty\) et \(y\to b\) (fini) : asymptote <b>horizontale</b> \(y=b\).</li>
+            <li>\(x\to a\) (fini) et \(y\to\pm\infty\) : asymptote <b>verticale</b> \(x=a\).</li>
+            <li>Les deux infinis : calculer \(\dfrac yx\).
+              <ul>
+                <li>\(\dfrac yx\to\pm\infty\) : branche parabolique de direction \((Oy)\).</li>
+                <li>\(\dfrac yx\to0\) : branche parabolique de direction \((Ox)\).</li>
+                <li>\(\dfrac yx\to a\) (fini, non nul) : calculer \(y-ax\). S'il tend vers \(b\) fini : <b>asymptote \(y=ax+b\)</b>.</li>
+              </ul>
+            </li>
+            <li>Position : signe de \(y-(ax+b)\) (positif : courbe au-dessus).</li>
+          </ol>
+        </div>
+        <p class="etape">Exemple corrigé</p>
+        <p>\(x(t)=t+\frac1t\), \(y(t)=t-\frac1t\), quand \(t\to+\infty\) : les deux tendent vers \(+\infty\).</p>
+        \[ \frac yx=\frac{t-\frac1t}{t+\frac1t}\to1,\qquad y-x=-\frac2t\to0 \]
+        <div class="res">Asymptote \(y=x\). Comme \(y-x=-\frac2t\lt0\), la courbe est en dessous.</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">\(x(t)=\dfrac{1}{t-1}\), \(y(t)=\dfrac{t^2}{t-1}\). Étudier les branches infinies quand \(t\to1\) et quand \(t\to+\infty\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p class="etape">\(t\to1\)</p>
+          <p>Les deux coordonnées sont infinies.</p>
+          \[ \frac yx=t^2\to1,\qquad y-x=\frac{t^2-1}{t-1}=t+1\to2 \]
+          <div class="res">Asymptote \(y=x+2\).</div>
+          <p>Position : \(y-(x+2)=t+1-2=t-1\). Au-dessus quand \(t\to1^+\), en dessous quand \(t\to1^-\).</p>
+          <p class="etape">\(t\to+\infty\)</p>
+          <p>\(x\to0\) et \(y\to+\infty\).</p>
+          <div class="res">Asymptote verticale \(x=0\) (l'axe \((Oy)\)) ; comme \(x>0\), la courbe est à droite de l'axe.</div>
+        </div></details>
+      </div>
+    </div>
+    <div class="note"><span class="lab">Étude complète d'une courbe</span>Un exercice de DS enchaîne M12 → M13 → M14 → M15 → M16 → tracé. L'exercice 4 du DS blanc (plus bas) le fait en entier, avec le dessin.</div>
+  </section>
+
   <section class="block" id="cours">
-    <h2>Restitutions de cours probables</h2>
+    <h2>Partie 4 — Les démonstrations à savoir par cœur</h2>
     <p>Au DS1, la restitution était une démonstration courte du cours (1 pt). Voici les 6 démonstrations du Ch3 §4 et du Ch5 les plus probables, rédigées comme on les attend sur la copie.</p>
 
     <div class="exo-card">
@@ -258,9 +820,89 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
     </div>
   </section>
 
-  <!-- ======================= QCM ======================= -->
+  <section class="block" id="ds1">
+    <h2>Partie 5 — Les erreurs de ton DS1 à ne pas refaire</h2>
+    <p>Bilan de ta copie du 10 octobre (11/20) : le QCM était parfait (4/4). Les points perdus viennent de <b>quatre erreurs de méthode</b>, et toutes peuvent revenir jeudi.</p>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Erreur 1 — Matrice d'une application écrite dans le mauvais sens (Q16, Q17, Q18)</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">DS1, exercice 4 : \(f(x,y,z)=(3x-y+z,\;2x+2z,\;x-y+3z)\). Donner la matrice \(A\) de \(f\) dans la base canonique.</p>
+        <p class="q">Ce que tu as écrit, et la bonne réponse</p>
+        <p class="etape">Étape 1 : la règle</p>
+        <div class="rappel"><span class="lab">Rappel · matrice d'une application linéaire</span>\[ \text{colonne } j \text{ de } A = \text{coordonnées de } f(e_j) \]</div>
+        <p>Concrètement, quand \(f\) est donnée par une formule, <b>chaque composante de \(f\) donne une ligne</b> de \(A\).</p>
+        <p class="etape">Étape 2 : on lit les coefficients ligne par ligne</p>
+        <p>Première composante \(3x-y+z\) : première ligne \((3,\,-1,\,1)\).</p>
+        <p>Deuxième composante \(2x+0y+2z\) : deuxième ligne \((2,\,0,\,2)\).</p>
+        <p>Troisième composante \(x-y+3z\) : troisième ligne \((1,\,-1,\,3)\).</p>
+        \[ A=\begin{pmatrix}3&-1&1\\2&0&2\\1&-1&3\end{pmatrix} \]
+        <p class="etape">Étape 3 : vérification en 10 secondes</p>
+        <p>\(f(e_1)=f(1,0,0)=(3,2,1)\) : c'est bien la <b>première colonne</b>.</p>
+        <div class="res">Tu avais écrit la transposée \(\begin{pmatrix}3&2&1\\-1&0&-1\\1&2&3\end{pmatrix}\). Le déterminant ne change pas (\(\det A=8\)), mais \(A^2\), \(\ker(f-2\,\mathrm{id})\) et tout ce qui suit deviennent faux.</div>
+        <div class="warnbox"><span class="lab">Piège</span>Toujours vérifier : \(A\times\begin{pmatrix}1\\0\\0\end{pmatrix}\) doit redonner \(f(1,0,0)\). Avec la bonne matrice, \(\ker(f-2\,\mathrm{id})\) est le plan \(x-y+z=0\), de dimension <b>2</b> (et pas 1).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Erreur 2 — Q19 non traitée : matrice de \(f\) dans une nouvelle base (exactement le Ch3 §4)</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">On pose \(u=(1,1,1)\) ; il complète la base \((v_1,v_2)\) de \(\ker(f-2\,\mathrm{id})\) en une base \(\mathcal B\) de \(\mathbb R^3\). Déterminer la matrice \(T\) de \(f\) dans \(\mathcal B\).</p>
+        <p class="q">Correction par étapes</p>
+        <p class="etape">Étape 1 : une base de \(\ker(f-2\,\mathrm{id})\)</p>
+        \[ A-2I=\begin{pmatrix}1&-1&1\\2&-2&2\\1&-1&1\end{pmatrix} \]
+        <p>Les trois lignes sont proportionnelles : le système se réduit à une seule équation.</p>
+        \[ x-y+z=0 \]
+        <p>On choisit deux solutions non colinéaires : \(v_1=(1,1,0)\) et \(v_2=(0,1,1)\).</p>
+        <p class="etape">Étape 2 : la méthode directe (la plus rapide)</p>
+        <div class="rappel"><span class="lab">Rappel · matrice dans une base</span>\[ \text{colonne } j \text{ de } T = \text{coordonnées de } f(\text{j-ème vecteur de } \mathcal B) \text{ dans } \mathcal B \]</div>
+        <p>\(v_1\) et \(v_2\) sont dans \(\ker(f-2\,\mathrm{id})\), donc :</p>
+        \[ f(v_1)=2v_1, \qquad f(v_2)=2v_2 \]
+        <p class="etape">Étape 3 : on calcule \(f(u)\) et on l'écrit dans la base</p>
+        \[ f(u)=A\begin{pmatrix}1\\1\\1\end{pmatrix}=\begin{pmatrix}3\\4\\3\end{pmatrix} \]
+        <p>On cherche \(a,b,c\) tels que \(f(u)=a\,v_1+b\,v_2+c\,u\) :</p>
+        \[ \begin{cases} a+c=3\\ a+b+c=4\\ b+c=3\end{cases} \]
+        <p>Ligne 2 moins ligne 1 : \(b=1\). Puis ligne 3 : \(c=2\). Puis ligne 1 : \(a=1\).</p>
+        \[ f(u)=v_1+v_2+2u \]
+        <div class="res">\[ T=\mathrm{Mat}_{\mathcal B}(f)=\begin{pmatrix}2&0&1\\0&2&1\\0&0&2\end{pmatrix} \]</div>
+        <p class="etape">Étape 4 : contrôle</p>
+        <p>\(\mathrm{tr}\,T=6=\mathrm{tr}\,A\) et \(\det T=8=\det A\) : cohérent (matrices semblables).</p>
+        <div class="method"><span class="lab">Méthode</span>Pour la matrice de \(f\) dans une nouvelle base, on n'a <b>pas besoin de \(P^{-1}\)</b> : on calcule l'image de chaque nouveau vecteur et on la décompose dans la nouvelle base. \(P^{-1}AP\) sert à vérifier, ou quand l'énoncé l'impose.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Erreur 3 — Restitution de cours (Q5, 0/1)</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Soit \(f:E\to F\) linéaire avec \(\ker f=\{0_E\}\). Montrer que \(f\) est injective.</p>
+        <p class="q">Démonstration attendue (4 lignes)</p>
+        <p class="etape">Étape 1 : on part de la définition de l'injectivité</p>
+        <p>Soient \(u,v\in E\) tels que \(f(u)=f(v)\). On veut montrer \(u=v\).</p>
+        <p class="etape">Étape 2 : on utilise la linéarité</p>
+        \[ f(u)-f(v)=0 \;\Rightarrow\; f(u-v)=0_F \]
+        <p class="etape">Étape 3 : on utilise l'hypothèse</p>
+        <p>Donc \(u-v\in\ker f=\{0_E\}\), soit \(u-v=0_E\).</p>
+        <div class="res">\(u=v\) : \(f\) est injective.</div>
+        <div class="warnbox"><span class="lab">Piège</span>Tu avais utilisé le théorème du rang. Il suppose \(E\) et \(F\) de <b>dimension finie</b> (hypothèse absente de l'énoncé) et ne démontre pas l'injectivité. Une restitution de cours = <b>définition + hypothèse + enchaînement d'implications</b>, rien de plus.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>Erreur 4 — Rédaction (« Bluff », « Rédaction » dans la marge)</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <ul>
+          <li>Annoncer ce qu'on montre : « Montrons que … ».</li>
+          <li>Citer le résultat utilisé par son nom : « D'après le théorème du rang… », « D'après le critère de diagonalisabilité… ».</li>
+          <li>Vérifier ses hypothèses : dimension finie, valeurs propres distinctes, polynôme scindé…</li>
+          <li>Ne jamais écrire « = 0 » sans le calcul qui y mène : le correcteur l'appelle du bluff.</li>
+          <li>Conclure par une phrase : « Donc \(A\) est diagonalisable. »</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <section class="block" id="qcm">
-    <h2>DS blanc · QCM (4 pts, une seule bonne réponse)</h2>
+    <h2>Partie 6 — DS blanc · QCM (4 pts, une seule bonne réponse)</h2>
     <div class="note"><span class="lab">Consignes du DS blanc</span>
       2 h, sans document ni calculatrice. Barème : QCM 4 + restitution 2 (une démonstration ci-dessus, tirée au hasard) + Ex 1 (4) + Ex 2 (4) + Ex 3 (2) + Ex 4 (4) = <b>20 pts</b>.
       Temps conseillé : QCM 15 min · restitution 10 min · Ex 1 25 min · Ex 2 25 min · Ex 3 10 min · Ex 4 30 min · relecture 5 min.
@@ -333,7 +975,6 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
     </div>
   </section>
 
-  <!-- ======================= EX 1 ======================= -->
   <section class="block" id="ex1">
     <h2>DS blanc · Exercice 1 — Matrice dans une nouvelle base (4 pts)</h2>
     <div class="exo-card">
@@ -404,7 +1045,6 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
     </div>
   </section>
 
-  <!-- ======================= EX 2 ======================= -->
   <section class="block" id="ex2">
     <h2>DS blanc · Exercice 2 — Diagonalisation et puissance n-ième (4 pts)</h2>
     <div class="exo-card">
@@ -473,7 +1113,6 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
     </div>
   </section>
 
-  <!-- ======================= EX 3 ======================= -->
   <section class="block" id="ex3">
     <h2>DS blanc · Exercice 3 — Matrice de rang 1, sans calcul (2 pts)</h2>
     <div class="exo-card">
@@ -508,7 +1147,6 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
     </div>
   </section>
 
-  <!-- ======================= EX 4 ======================= -->
   <section class="block" id="ex4">
     <h2>DS blanc · Exercice 4 — Étude complète d'une courbe paramétrée (4 pts)</h2>
     <div class="exo-card">
@@ -662,7 +1300,27 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
     </div>
   </section>
 
-  <!-- ======================= TD ======================= -->
+  <section class="memo-sheet" id="memo">
+    <div class="memo-head">📌 Récap des recettes — à relire jeudi matin</div>
+    <div class="memo-grid">
+      <div class="memo-item"><b>Matrice de passage</b>\(P=P_{\mathcal B\to\mathcal B'}\) : colonnes = vecteurs de \(\mathcal B'\) écrits dans \(\mathcal B\)</div>
+      <div class="memo-item"><b>Coordonnées</b>\(X=PX'\) (ancien = \(P\) × nouveau), donc \(X'=P^{-1}X\)</div>
+      <div class="memo-item"><b>Changement de base</b>\(A'=P^{-1}AP\) ; vérifier avec \(AP=PA'\) (pas besoin de \(P^{-1}\))</div>
+      <div class="memo-item"><b>Semblables</b>\(B=P^{-1}AP\) ⇒ même \(\chi\), mêmes valeurs propres, même trace, même déterminant, même rang</div>
+      <div class="memo-item method"><b>Matrice dans une nouvelle base</b>calculer \(f(u_j)\) et le décomposer dans \((u_1,\dots,u_n)\) : ses coordonnées forment la colonne \(j\)</div>
+      <div class="memo-item method"><b>Plan d'étude d'une courbe</b>domaine → périodicité, symétries → \(x'\), \(y'\) et tableau conjoint → points singuliers → branches infinies → tracé</div>
+      <div class="memo-item"><b>Tangente</b>\(f'(t_0)\neq0\) : tangente dirigée par \(f'(t_0)\) ; \(x'=0\) seul : tangente verticale ; \(y'=0\) seul : horizontale</div>
+      <div class="memo-item"><b>Point singulier</b>\(x'(t_0)=y'(t_0)=0\) ; \(p\) = 1er ordre où \(f^{(p)}(t_0)\neq0\), \(q\) = 1er ordre où \(f^{(q)}\) n'est pas colinéaire à \(f^{(p)}\)</div>
+      <div class="memo-item"><b>Nature (\(p\), \(q\))</b>impair-pair : ordinaire · impair-impair : inflexion · pair-impair : rebroussement 1ʳᵉ espèce · pair-pair : 2ᵉ espèce</div>
+      <div class="memo-item"><b>Branches infinies</b>\(x\to\pm\infty,\ y\to b\) : \(y=b\) ; \(y/x\to a\) puis \(y-ax\to b\) : asymptote \(y=ax+b\) ; \(y/x\to\infty\) : direction \(Oy\) ; \(y/x\to0\) : direction \(Ox\)</div>
+      <div class="memo-item"><b>Valeur propre</b>\(\lambda\) valeur propre ⇔ \(\det(A-\lambda I)=0\) ⇔ \(\ker(A-\lambda I)\neq\{0\}\)</div>
+      <div class="memo-item"><b>Trace et déterminant</b>somme des valeurs propres = \(\mathrm{tr}A\), produit = \(\det A\) ; en \(2\times2\) : \(\chi_A=X^2-\mathrm{tr}(A)X+\det A\)</div>
+      <div class="memo-item method"><b>Diagonaliser</b>\(\chi_A\) → racines → base de chaque \(E_\lambda\) → diagonalisable ⇔ \(\dim E_\lambda=m(\lambda)\) pour tout \(\lambda\) (et \(\chi\) scindé)</div>
+      <div class="memo-item method"><b>Puissances</b>\(A=PDP^{-1}\) ⇒ \(A^n=PD^nP^{-1}\) ; ou polynôme annulateur : \(A^2=aA+bI\) ⇒ \(A^n=\alpha_nA+\beta_nI\)</div>
+      <div class="memo-item"><b>Rang et valeur propre 0</b>\(\dim E_0=n-\mathrm{rg}A\) ; \(A\) inversible ⇔ 0 n'est pas valeur propre</div>
+    </div>
+  </section>
+
   <section class="block" id="td">
     <h2>Exercices du TD à refaire en priorité (déjà corrigés sur le site)</h2>
     <p>Les DS du prof reprennent les types d'exercices du TD. Refais ceux-ci <b>sans regarder</b>, puis compare avec la correction.</p>
