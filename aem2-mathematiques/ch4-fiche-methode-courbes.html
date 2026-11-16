@@ -15,7 +15,7 @@ window.MathJax = {
 </head>
 <body class="theme-am2">
 <div id="site-nav"></div>
-<nav class="subnav"><a href="#plan">Plan</a><a href="#domaine">Domaine</a><a href="#reduction">Réduction</a><a href="#variations">Variations</a><a href="#tangentes">Tangentes</a><a href="#infini">Branches infinies</a><a href="#trace">Tracé</a><a href="#exemples">Exemples</a><a href="#exercices">À toi</a><a href="#pieges">Pièges</a></nav>
+<nav class="subnav"><a href="#plan">Plan</a><a href="#domaine">Domaine</a><a href="#reduction">Réduction</a><a href="#variations">Variations</a><a href="#tangentes">Tangentes</a><a href="#infini">Branches infinies</a><a href="#trace">Tracé</a><a href="#exemples">Exemples</a><a href="#exercices">À toi</a><a href="#demarche">Démarche totale</a><a href="#pieges">Pièges</a></nav>
 
 <main class="wrap">
   <span class="chip">Maths AM2 (2ᵉ année) · Chapitre 4 · Fiche méthode</span>
@@ -39,6 +39,7 @@ window.MathJax = {
       <li><a href="#explicite">8. Cas particulier : courbe y = f(x)</a></li>
       <li><a href="#exemples">Exemples corrigés (A à D)</a></li>
       <li><a href="#exercices">À toi : exercices avec correction cachée</a></li>
+      <li><a href="#demarche">Démarche totale, dans l'ordre</a></li>
       <li><a href="#pieges">Pièges fréquents</a></li>
     </ul>
   </div>
@@ -484,6 +485,37 @@ window.MathJax = {
     </ul>
     <p class="docs-note">Cours : chapitre 4 de L. Graissot (AM2, 2026-2027). Exemples A à D et exercices 1 à 3 : écrits pour cette fiche (non issus du polycopié) et vérifiés par un calcul formel.
     Voir le <a href="ch4-courbes-parametrees.html">chapitre 4 complet</a> et la <a href="methodes-par-exercice.html">boîte à méthodes</a>.</p>
+  </section>
+
+  <!-- ===================== DEMARCHE TOTALE ===================== -->
+  <section class="block" id="demarche">
+    <h2>Démarche totale, dans l'ordre</h2>
+    <p>Suis ces étapes dans cet ordre pour n'importe quelle courbe \(t\mapsto M(t)=(x(t),y(t))\).</p>
+    <ol>
+      <li><b>Domaine.</b> Trouve \(D_x\), puis \(D_y\), puis \(D=D_x\cap D_y\). Si \(D\) est en plusieurs morceaux, étudie chaque intervalle séparément. Note les points exclus : ce sont des bornes à examiner à l'étape 6.</li>
+      <li><b>Réduction.</b> Cherche une périodicité \(x(t+T)=x(t)\), \(y(t+T)=y(t)\), une translation \(x(t+T)=x(t)+\alpha\), \(y(t+T)=y(t)+\beta\), ou une symétrie (parité de \(x\) et de \(y\), séparément). Étudie seulement la partie utile, puis complète le tracé.</li>
+      <li><b>Dérivées et tableau.</b> Calcule \(x'(t)\) et \(y'(t)\), factorise-les, puis remplis le tableau de variations conjoint : une flèche ↗ ou ↘ par coordonnée, et le sens de parcours qui en découle.</li>
+      <li><b>Tangentes et points singuliers.</b>
+        <ul>
+          <li>Si \(x'\neq0\) : pente \(\dfrac{y'}{x'}\). Si \(x'=0\) et \(y'\neq0\) : tangente verticale. Si \(y'=0\) et \(x'\neq0\) : tangente horizontale.</li>
+          <li>Si \(x'=y'=0\) : point singulier. Calcule les dérivées successives pour trouver \(p\) et \(q\), puis classe le point (ordinaire, inflexion, rebroussement 1re ou 2e espèce).</li>
+        </ul>
+      </li>
+      <li><b>Points remarquables.</b> Intersections avec les axes (\(y=0\) pour \((Ox)\), \(x=0\) pour \((Oy)\)) et points multiples (\(t\neq u\) avec \(M(t)=M(u)\)).</li>
+      <li><b>Branches infinies.</b> Pour chaque borne de \(D\) :
+        <ul>
+          <li>\(x\) finie et \(y\) infinie : asymptote verticale \(x=\ell\).</li>
+          <li>\(y\) finie et \(x\) infinie : asymptote horizontale \(y=\ell\).</li>
+          <li>\(x\) et \(y\) infinies : calcule \(a=\lim\dfrac yx\), puis \(b=\lim(y-ax)\). Si \(a\) et \(b\) sont finies (\(a\neq0\)) : asymptote oblique \(y=ax+b\). Sinon : branche parabolique.</li>
+          <li>\(x\) et \(y\) finies : point limite, la courbe s'en approche sans l'atteindre.</li>
+          <li>Ensuite, donne la position de la courbe par rapport à l'asymptote (signe de \(y-(ax+b)\)).</li>
+        </ul>
+      </li>
+      <li><b>Tracé et contrôle.</b> Repère, asymptotes en pointillés, points remarquables avec leur tangente, flèches de parcours, arcs, puis symétries et translations. Vérifie que le dessin est cohérent avec les limites.</li>
+    </ol>
+    <div class="note"><span class="lab">Rappel</span>
+      Un point singulier se traite par le développement limité, jamais par la formule de la tangente (le vecteur dérivé y est nul).
+    </div>
   </section>
 
 </main>
