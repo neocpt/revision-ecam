@@ -76,6 +76,7 @@ window.CATALOGUE = {
           { n: "Ch2", titre: "Applications linéaires", url: "aem2-mathematiques/ch2-applications-lineaires.html" },
           { n: "Ch3", titre: "Matrices et applications linéaires", url: "aem2-mathematiques/ch3-matrices-applications-lineaires.html" },
           { n: "Ch4", titre: "Courbes paramétrées", url: "aem2-mathematiques/ch4-courbes-parametrees.html" },
+          { n: "Fiche", titre: "Méthode : domaine et tracé des courbes paramétrées", url: "aem2-mathematiques/ch4-fiche-methode-courbes.html" },
           { n: "Ch5", titre: "Valeurs propres et réduction (CM 5-6, TD5)", url: "aem2-mathematiques/ch5-valeurs-propres.html" },
           { n: "Méth.", titre: "Fiches méthodes par exercice", url: "aem2-mathematiques/methodes-par-exercice.html" }
         ] }

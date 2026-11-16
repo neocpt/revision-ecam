@@ -40,3 +40,11 @@ Une entrée par document traité (date, source, pages créées ou modifiées, er
 - Page créée : `aem2-mathematiques/ch5-valeurs-propres.html` (fiche mémo, cours CM5 + CM6, exemple 11 de chaque CM corrigé, TD5 exercices 1 à 6 par étapes). Énoncés recadrés dans `aem2-mathematiques/ch5-img/td5-ex1..6.png`. Entrée « Ch5 » ajoutée dans `assets/catalogue.js`.
 - Pas de corrigé officiel : correction rédigée par nous ; tous les résultats revérifiés avec numpy (P⁻¹AP, A^n, trace, déterminant).
 - Points incertains : l'exercice 1 M (3×3) n'est diagonalisable que sur ℂ (valeurs propres 1±i) ; l'énoncé ne précise pas le corps, les deux cas sont donnés. Chapitre 6 traité dans la même page que le chapitre 5 (pas de page séparée).
+
+## 2026-11-16 — AM2 Maths · Ch4 : fiche méthode « domaine et tracé » des courbes paramétrées
+- Demande : fiche méthode pour analyser le domaine de définition et tracer une courbe, « pour résoudre tous les cas ». Interprétation retenue : courbes paramétrées du chapitre 4 (la courbe y = f(x) y est traitée comme cas particulier).
+- Page créée : `aem2-mathematiques/ch4-fiche-methode-courbes.html` (plan en 7 étapes, tableau des conditions de domaine, parité/périodicité/translation, tableau de variations conjoint, classification des points singuliers par DL, branches infinies en tableau de cas, check-list). Exemples A (domaine en 3 intervalles), B (hyperbole, symétrie + asymptotes + point limite), C (cycloïde, translation + rebroussement), D (point double) ; 3 exercices avec correction repliée.
+- Figures SVG : hyperbole et cycloïde, tracées avec numpy (texte ≥ 19 dans le viewBox).
+- Vérifié avec sympy : dérivées, asymptotes, équation cartésienne (x² − x − y² = 0 pour B ; x² + y² − y = 0 pour l'exercice 2 ; x² − y² = 4 pour l'exercice 3), points multiples de D.
+- Lien ajouté dans le chapitre 4 (chapô) et entrée « Fiche » dans `assets/catalogue.js`.
+- Points incertains : les exemples ne viennent pas du polycopié (écrits pour la fiche) ; la définition des points singuliers suit le plan du cours ch4 (§1.5-1.6) et la mémo ; à relire si le prof utilise une autre convention pour p et q.
