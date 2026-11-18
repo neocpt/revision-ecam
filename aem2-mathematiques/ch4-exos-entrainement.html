@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exercices d'entraînement — Courbes paramétrées</title>
+<link rel="stylesheet" href="../assets/style.css?v=4">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+<div id="site-nav"></div>
+<nav class="subnav"><a href="#ex1">Ex 1</a><a href="#ex2">Ex 2</a><a href="#ex3">Ex 3</a><a href="#ex4">Ex 4</a><a href="#ex5">Ex 5</a><a href="#ex6">Ex 6</a><a href="#ex7">Ex 7</a><a href="#conseils">Conseils</a></nav>
+
+<main class="wrap">
+  <span class="chip">Maths AM2 (2ᵉ année) · Chapitre 4 · Entraînement</span>
+  <h1 class="title">Exercices d'entraînement : courbes paramétrées</h1>
+  <p class="lead">Sept exercices, du plus simple au plus technique, pour s'entraîner sur le chapitre 4 avant le DS2.
+  Ce ne sont pas les exercices du TD4 : ils sont créés pour la révision. Chaque correction est repliée
+  (« Voir la correction ») et suit la démarche par étapes. Essaie d'abord sans regarder.
+  Pour le rappel de la méthode, voir la <a href="ch4-fiche-methode-courbes.html">fiche méthode</a>.</p>
+
+  <div class="toc-mini">
+    <b>Sommaire</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#ex1">Exercice 1 : tangentes horizontales et verticales</a></li>
+      <li><a href="#ex2">Exercice 2 : reconnaître un cercle</a></li>
+      <li><a href="#ex3">Exercice 3 : point double et tangentes</a></li>
+      <li><a href="#ex4">Exercice 4 : asymptotes et hyperbole</a></li>
+      <li><a href="#ex5">Exercice 5 : point de rebroussement et tangente</a></li>
+      <li><a href="#ex6">Exercice 6 : courbe de Lissajous</a></li>
+      <li><a href="#ex7">Exercice 7 : la deltoïde (tracé complet)</a></li>
+      <li><a href="#conseils">Conseils et pièges</a></li>
+    </ul>
+  </div>
+
+  <section class="block" id="exos">
+    <h2>Exercices</h2>
+
+    <!-- ===================== EX 1 ===================== -->
+    <div class="exo-card" id="ex1">
+      <div class="exo-head"><span>Exercice 1 — Tangentes horizontales et verticales</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">On considère \(x(t)=t^2\), \(y(t)=t^3-3t\), \(t\in\mathbb R\).
+        1) Déterminer les points à tangente horizontale et ceux à tangente verticale.
+        2) Donner la symétrie de la courbe.
+        3) Trouver une équation cartésienne.</div>
+        <details class="sol"><summary>Voir la correction</summary><div class="sol-body">
+          <p class="q">1) Dérivées</p>
+          <p class="etape">Étape 1 : calcul des dérivées</p>
+          \[ x'(t)=2t \qquad y'(t)=3t^2-3=3(t-1)(t+1) \]
+
+          <p class="q">2) Tangentes horizontales et verticales</p>
+          <div class="rappel"><span class="lab">Rappel · type de tangente</span>
+            Horizontale si \(y'(t)=0\) et \(x'(t)\neq0\). Verticale si \(x'(t)=0\) et \(y'(t)\neq0\).</div>
+          <p class="etape">Étape 2 : tangente horizontale</p>
+          <ul>
+            <li>\(y'(t)=0\) pour \(t=1\) et \(t=-1\). Ici \(x'(\pm1)=\pm2\neq0\) : la tangente est horizontale.</li>
+            <li>\(M(1)=(1,-2)\) et \(M(-1)=(1,2)\).</li>
+          </ul>
+          <p class="etape">Étape 3 : tangente verticale</p>
+          <ul>
+            <li>\(x'(t)=0\) pour \(t=0\). Ici \(y'(0)=-3\neq0\) : la tangente est verticale.</li>
+            <li>\(M(0)=(0,0)\), l'origine.</li>
+          </ul>
+          <div class="res">Tangente horizontale en \((1,-2)\) et \((1,2)\). Tangente verticale en \(O(0,0)\).</div>
+
+          <p class="q">Symétrie</p>
+          <p class="etape">Étape 4 : parité</p>
+          \[ x(-t)=x(t) \qquad y(-t)=-y(t) \]
+          <p>Donc \(M(-t)\) est le symétrique de \(M(t)\) par rapport à l'axe \((Ox)\). On trace \(t\geq0\), puis on symétrise.</p>
+
+          <p class="q">3) Équation cartésienne</p>
+          <p class="etape">Étape 5 : élever au carré et éliminer \(t\)</p>
+          \[ y^2=(t^3-3t)^2=t^2(t^2-3)^2 \]
+          <p>Or \(t^2=x\), donc \(t^2-3=x-3\) :</p>
+          <div class="res">\(y^2=x\,(x-3)^2\) : une cubique.</div>
+          <div class="warnbox"><span class="lab">Piège</span>
+            Un point à tangente horizontale (\(y'=0\), \(x'\neq0\)) n'est pas un point singulier. Un point singulier a \(x'=y'=0\) à la fois. Ici il n'y en a aucun.</div>
+        </div></details>
+      </div>
+    </div>
+
+    <!-- ===================== EX 2 ===================== -->
+    <div class="exo-card" id="ex2">
+      <div class="exo-head"><span>Exercice 2 — Reconnaître un cercle</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">On considère \(x(t)=\dfrac{2t}{1+t^2}\), \(y(t)=\dfrac{1-t^2}{1+t^2}\), \(t\in\mathbb R\).
+        1) Montrer que la courbe est contenue dans un cercle ; préciser son centre et son rayon.
+        2) Quel point du cercle n'est jamais atteint ?
+        3) Dans quel sens la courbe est-elle parcourue ?</div>
+        <details class="sol"><summary>Voir la correction</summary><div class="sol-body">
+          <p class="q">1) Équation du cercle</p>
+          <p class="etape">Étape 1 : calcul de \(x^2+y^2\)</p>
+          \[ x^2+y^2=\frac{4t^2+(1-t^2)^2}{(1+t^2)^2} \]
+          <p class="etape">Étape 2 : développer le numérateur</p>
+          \[ 4t^2+(1-t^2)^2=4t^2+1-2t^2+t^4=1+2t^2+t^4=(1+t^2)^2 \]
+          \[ x^2+y^2=\frac{(1+t^2)^2}{(1+t^2)^2}=1 \]
+          <div class="res">Tous les points sont sur le cercle de centre \(O\) et de rayon \(1\).</div>
+
+          <p class="q">2) Point non atteint</p>
+          <p class="etape">Étape 3 : cherche \(t\) tel que \(y=-1\)</p>
+          \[ \frac{1-t^2}{1+t^2}=-1 \iff 1-t^2=-1-t^2 \iff 1=-1 \]
+          <p>C'est impossible : le point \((0,-1)\) n'est jamais atteint. Les limites \(t\to\pm\infty\) donnent ce point, mais sans jamais l'atteindre.</p>
+          <p class="etape">Étape 4 : tous les autres points sont atteints</p>
+          \[ \frac{x}{1+y}=\frac{\dfrac{2t}{1+t^2}}{\dfrac{2}{1+t^2}}=t \]
+          <p>Donc tout point \((x,y)\neq(0,-1)\) du cercle correspond à la valeur \(t=\dfrac{x}{1+y}\).</p>
+          <div class="res">Le cercle privé du point \((0,-1)\).</div>
+
+          <p class="q">3) Sens de parcours</p>
+          <p class="etape">Étape 5 : dérivées en \(t=0\)</p>
+          \[ x'(t)=\frac{2(1-t^2)}{(1+t^2)^2} \qquad y'(t)=\frac{-4t}{(1+t^2)^2} \]
+          <p>En \(t=0\) : \(x'(0)=2>0\) et \(y'(0)=0\). Le point \(M(0)=(0,1)\) (sommet du cercle) se déplace vers la droite.</p>
+          <div class="res">Le cercle est parcouru dans le sens horaire.</div>
+        </div></details>
+      </div>
+    </div>
+
+    <!-- ===================== EX 3 ===================== -->
+    <div class="exo-card" id="ex3">
+      <div class="exo-head"><span>Exercice 3 — Point double et tangentes</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">On considère \(x(t)=t^2-1\), \(y(t)=t^3-t\), \(t\in\mathbb R\).
+        1) Montrer qu'un point est atteint pour deux valeurs différentes de \(t\) ; c'est un point double. Le trouver.
+        2) Donner les tangentes en ce point double.
+        3) Trouver une équation cartésienne.</div>
+        <details class="sol"><summary>Voir la correction</summary><div class="sol-body">
+          <p class="q">1) Point double</p>
+          <p class="etape">Étape 1 : chercher \(t\neq u\) avec \(M(t)=M(u)\)</p>
+          <p>Pour \(x\) : \(t^2-1=u^2-1\), donc \(t^2=u^2\). Comme \(t\neq u\), on a \(u=-t\).</p>
+          <p>Pour \(y\) : \(t^3-t=-t^3+t\), soit \(2t^3-2t=0\), soit \(t(t^2-1)=0\). Les solutions \(t\neq0\) sont \(t=\pm1\), donc \(u=-t\) donne le couple \((1,-1)\).</p>
+          \[ M(1)=(0,0) \qquad M(-1)=(0,0) \]
+          <div class="res">Point double à l'origine \(O\), atteint en \(t=1\) et \(t=-1\).</div>
+
+          <p class="q">2) Tangentes en \(O\)</p>
+          <div class="rappel"><span class="lab">Rappel · vecteur vitesse</span>
+            La tangente en \(M(t_0)\) est dirigée par \(\big(x'(t_0),y'(t_0)\big)\) si ce vecteur est non nul.</div>
+          \[ x'(t)=2t \qquad y'(t)=3t^2-1 \]
+          <p class="etape">Étape 2 : en \(t=1\)</p>
+          <p>\(\big(x'(1),y'(1)\big)=(2,2)\) : direction de pente \(1\), tangente \(y=x\).</p>
+          <p class="etape">Étape 3 : en \(t=-1\)</p>
+          <p>\(\big(x'(-1),y'(-1)\big)=(-2,2)\) : direction de pente \(-1\), tangente \(y=-x\).</p>
+          <div class="res">Deux tangentes distinctes en \(O\) : \(y=x\) et \(y=-x\). C'est un nœud.</div>
+
+          <p class="q">3) Équation cartésienne</p>
+          <p class="etape">Étape 4 : élever au carré</p>
+          \[ y^2=(t^3-t)^2=t^2(t^2-1)^2 \]
+          <p>Or \(t^2=x+1\) et \(t^2-1=x\), donc \((t^2-1)^2=x^2\) :</p>
+          <div class="res">\(y^2=x^2\,(x+1)\)</div>
+          <div class="warnbox"><span class="lab">Piège</span>
+            Un point double ne doit pas être traité comme deux points différents. Ses deux tangentes viennent des deux valeurs de \(t\) qui donnent ce point : il faut les garder toutes les deux.</div>
+        </div></details>
+      </div>
+    </div>
+
+    <!-- ===================== EX 4 ===================== -->
+    <div class="exo-card" id="ex4">
+      <div class="exo-head"><span>Exercice 4 — Asymptotes et hyperbole</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">On considère \(x(t)=\dfrac{t^2}{t-1}\), \(y(t)=\dfrac{t}{t-1}\), \(t\in\mathbb R\setminus\{1\}\).
+        1) Calculer \(x-y\) et \(y-1\).
+        2) Déterminer les asymptotes et la position de la courbe par rapport à chacune.
+        3) Trouver les tangentes verticales.
+        4) Trouver une équation cartésienne.</div>
+        <details class="sol"><summary>Voir la correction</summary><div class="sol-body">
+          <p class="q">1) Calculs simplifiés</p>
+          <p class="etape">Étape 1 : différence \(x-y\)</p>
+          \[ x-y=\frac{t^2-t}{t-1}=\frac{t(t-1)}{t-1}=t \]
+          <p class="etape">Étape 2 : \(y-1\)</p>
+          \[ y-1=\frac{t}{t-1}-1=\frac{1}{t-1} \]
+
+          <p class="q">2) Asymptotes</p>
+          <p class="etape">Étape 3 : \(t\to\pm\infty\)</p>
+          <p>\(y-1=\dfrac{1}{t-1}\to0\), donc \(y\to1\), alors que \(x\to\pm\infty\). Asymptote horizontale : \(y=1\).</p>
+          <p class="etape">Étape 4 : \(t\to1\)</p>
+          <p>\(x\) et \(y\) tendent vers l'infini, mais \(x-y=t\to1\). La droite d'asymptote est donc \(x-y=1\), soit \(y=x-1\).</p>
+          <div class="rappel"><span class="lab">Rappel · asymptote oblique</span>
+            Si \(x\to\infty\) et \(y-(x-1)\to0\), alors \(y=x-1\) est asymptote. Ici \(y-(x-1)=-(x-y-1)=1-t\to0\) quand \(t\to1\).</div>
+          <div class="res">Asymptotes : \(y=1\) et \(y=x-1\).</div>
+
+          <p class="q">Position par rapport aux asymptotes</p>
+          <p class="etape">Étape 5 : par rapport à \(y=1\)</p>
+          <p>Le signe de \(y-1=\dfrac{1}{t-1}\) donne : au-dessus si \(t&gt;1\), en dessous si \(t&lt;1\).</p>
+          <p class="etape">Étape 6 : par rapport à \(y=x-1\)</p>
+          <p>Le signe de \(y-(x-1)=1-t\) donne : au-dessus de la droite si \(t&lt;1\), en dessous si \(t&gt;1\).</p>
+
+          <p class="q">3) Tangentes verticales</p>
+          <p class="etape">Étape 7 : dérivées</p>
+          \[ x'(t)=\frac{2t(t-1)-t^2}{(t-1)^2}=\frac{t(t-2)}{(t-1)^2} \qquad y'(t)=\frac{-1}{(t-1)^2} \]
+          <p>\(x'(t)=0\) pour \(t=0\) et \(t=2\). Comme \(y'\neq0\) partout, les tangentes sont verticales.</p>
+          <div class="res">Tangentes verticales en \(M(0)=(0,0)\) et \(M(2)=(4,2)\).</div>
+
+          <p class="q">4) Équation cartésienne</p>
+          <p class="etape">Étape 8 : relation entre \(y-1\) et \(x-y-1\)</p>
+          \[ (y-1)\,(x-y-1)=\frac{1}{t-1}\,(t-1)=1 \]
+          <div class="res">\((y-1)(x-y-1)=1\) : une hyperbole de centre \((2,1)\), d'asymptotes \(y=1\) et \(y=x-1\).</div>
+          <div class="warnbox"><span class="lab">Piège</span>
+            L'équation cartésienne ne donne pas le sens de parcours. Ici chaque point de l'hyperbole correspond à une seule valeur de \(t\) : \(t=x-y\) (pour \(y\neq1\)).</div>
+        </div></details>
+      </div>
+    </div>
+
+    <!-- ===================== EX 5 ===================== -->
+    <div class="exo-card" id="ex5">
+      <div class="exo-head"><span>Exercice 5 — Point de rebroussement et tangente</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">On considère \(x(t)=t+\sin t\), \(y(t)=1-\cos t\), \(t\in\mathbb R\).
+        1) Trouver le point singulier et déterminer sa nature.
+        2) Donner la tangente en \(M(\pi/2)\).
+        3) Préciser la position de la courbe près du point singulier.</div>
+        <details class="sol"><summary>Voir la correction</summary><div class="sol-body">
+          <p class="q">1) Point singulier</p>
+          <p class="etape">Étape 1 : dérivées</p>
+          \[ x'(t)=1+\cos t \qquad y'(t)=\sin t \]
+          <p class="etape">Étape 2 : annuler les deux</p>
+          <p>\(x'(t)=0\) donne \(\cos t=-1\), donc \(t=\pi\) (modulo \(2\pi\)). Alors \(y'(\pi)=\sin\pi=0\) : le point est singulier.</p>
+          <div class="res">Point singulier en \(t=\pi\) : \(M(\pi)=(\pi,2)\).</div>
+
+          <p class="q">2) Tangente en \(M(\pi/2)\)</p>
+          <p class="etape">Étape 3 : point et vecteur vitesse</p>
+          \[ M\!\left(\tfrac{\pi}{2}\right)=\left(\tfrac{\pi}{2}+1,\,1\right) \qquad \big(x'(\tfrac\pi2),y'(\tfrac\pi2)\big)=(1,1) \]
+          <p>Le vecteur est non nul : la tangente est dirigée par \((1,1)\).</p>
+          <div class="res">Tangente : \(y-1=x-\big(\tfrac\pi2+1\big)\), soit \(y=x-\dfrac{\pi}{2}\).</div>
+
+          <p class="q">3) Position près du point singulier</p>
+          <div class="rappel"><span class="lab">Rappel · développement limité</span>
+            Au point singulier, on ne peut pas utiliser \(\vec{v}=(x',y')\) : on pose \(t=\pi+h\) et on développe \(x\) et \(y\) en \(h\).</div>
+          <p class="etape">Étape 4 : DL en \(h=t-\pi\)</p>
+          \[ x(\pi+h)-\pi=h-\sin h=\frac{h^3}{6}+O(h^5) \]
+          \[ y(\pi+h)-2=(1+\cos h)-2=\cos h-1=-\frac{h^2}{2}+O(h^4) \]
+          <p class="etape">Étape 5 : conclusion</p>
+          <p>Le premier terme non nul de \(y-2\) est en \(h^2\) : la tangente est dirigée par \((0,-1)\), donc verticale.
+          Comme \(y(\pi+h)-2\leq0\) au voisinage de \(\pi\), la courbe reste sous la droite \(y=2\).</p>
+          <div class="res">Rebroussement à tangente verticale en \((\pi,2)\). La courbe reste sous la droite \(y=2\) près de ce point.</div>
+          <div class="warnbox"><span class="lab">Piège</span>
+            Au point singulier, \(\vec v=\vec 0\) : la formule de la tangente \(y-y_0=\dfrac{y'}{x'}(x-x_0)\) ne marche pas. Il faut le développement limité.</div>
+        </div></details>
+      </div>
+    </div>
+
+    <!-- ===================== EX 6 ===================== -->
+    <div class="exo-card" id="ex6">
+      <div class="exo-head"><span>Exercice 6 — Courbe de Lissajous</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <div class="enonce">On considère \(x(t)=\cos t\), \(y(t)=\sin 2t\), \(t\in[0,2\pi]\).
+        1) Donner une équation cartésienne de la courbe.
+        2) Donner la symétrie et réduire l'étude.
+        3) Trouver les points doubles et les tangentes en ces points.
+        4) Trouver les points d'intersection avec les axes, puis tracer la courbe.</div>
+        <details class="sol"><summary>Voir la correction</summary><div class="sol-body">
+          <p class="q">1) Équation cartésienne</p>
+          <div class="rappel"><span class="lab">Rappel · formule de duplication</span>
+            \(\sin 2t=2\sin t\cos t\), et \(\sin^2t=1-\cos^2t\).</div>
+          \[ y^2=\sin^2 2t=4\sin^2t\cos^2t=4(1-x^2)\,x^2 \]
+          <div class="res">\(y^2=4x^2(1-x^2)\) : une courbe en forme de huit.</div>
+
+          <p class="q">2) Symétrie</p>
+          <p class="etape">Étape 1 : parité</p>
+          \[ x(-t)=x(t) \qquad y(-t)=-y(t) \]
+          <p>\(M(-t)\) est le symétrique de \(M(t)\) par rapport à \((Ox)\). On étudie \(t\in[0,\pi]\), puis on symétrise.</p>
+
+          <p class="q">3) Points doubles</p>
+          <p class="etape">Étape 2 : \(t=\dfrac\pi2\) et \(t=\dfrac{3\pi}{2}\)</p>
+          \[ M\!\left(\tfrac\pi2\right)=(0,\,\sin\pi)=(0,0) \qquad M\!\left(\tfrac{3\pi}2\right)=(0,\,\sin 3\pi)=(0,0) \]
+          <p>Deux valeurs différentes de \(t\) donnent \(O\) : c'est un point double.</p>
+          <p class="etape">Étape 3 : tangentes en \(O\)</p>
+          \[ x'(t)=-\sin t \qquad y'(t)=2\cos 2t \]
+          <ul>
+            <li>En \(\tfrac\pi2\) : \((x',y')=(-1,\,-2)\), pente \(2\), tangente \(y=2x\).</li>
+            <li>En \(\tfrac{3\pi}2\) : \((x',y')=(1,\,-2)\), pente \(-2\), tangente \(y=-2x\).</li>
+          </ul>
+          <div class="res">Point double \(O\) avec les tangentes \(y=2x\) et \(y=-2x\).</div>
+
+          <p class="q">4) Axes et tracé</p>
+          <p class="etape">Étape 4 : intersections</p>
+          <ul>
+            <li>Avec \((Oy)\) : \(x=0\) pour \(t=\tfrac\pi2,\tfrac{3\pi}2\), c'est \(O\) (point double).</li>
+            <li>Avec \((Ox)\) : \(\sin 2t=0\) pour \(t=0,\pi\) (et \(\tfrac\pi2,\tfrac{3\pi}2\) déjà vus). \(M(0)=(1,0)\), \(M(\pi)=(-1,0)\).</li>
+          </ul>
+          <p class="etape">Étape 5 : tangentes verticales aux sommets</p>
+          <p>En \(t=0\) : \(x'(0)=0\) et \(y'(0)=2\neq0\). En \(t=\pi\) : \(x'(\pi)=0\) et \(y'(\pi)=2\neq0\). Tangentes verticales en \((1,0)\) et \((-1,0)\).</p>
+          <div class="res">Courbe en huit horizontal, passant par \(O\) en deux points, de sommets \((\pm1,0)\).</div>
+          <div class="warnbox"><span class="lab">Piège</span>
+            Un point double n'est pas singulier : \(x'\) et \(y'\) ne sont pas nuls tous les deux en \(O\). On garde les deux tangentes.</div>
+        </div></details>
+      </div>
+    </div>
+
+    <!-- ===================== EX 7 ===================== -->
+    <div class="exo-card" id="ex7">
+      <div class="exo-head"><span>Exercice 7 — La deltoïde (tracé complet)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="enonce">On considère \(x(t)=2\cos t+\cos 2t\), \(y(t)=2\sin t-\sin 2t\), \(t\in[0,2\pi]\).
+        1) Donner la symétrie et réduire l'étude.
+        2) Calculer les dérivées, factoriser, et trouver les points singuliers.
+        3) Étudier le point singulier en \(t=0\) par développement limité.
+        4) Donner la tangente en \(M(\pi/2)\) et les points de \((Ox)\).
+        5) Tracer la courbe.</div>
+        <details class="sol"><summary>Voir la correction</summary><div class="sol-body">
+          <p class="q">1) Symétrie</p>
+          <p class="etape">Étape 1 : parité</p>
+          \[ x(-t)=x(t) \qquad y(-t)=-y(t) \]
+          <p>Symétrie par rapport à \((Ox)\). On étudie \(t\in[0,\pi]\) ; on obtient l'autre moitié par symétrie.</p>
+
+          <p class="q">2) Dérivées et points singuliers</p>
+          <p class="etape">Étape 2 : factorisation</p>
+          \[ x'(t)=-2\sin t-2\sin 2t=-2\sin t\,(1+2\cos t) \]
+          \[ y'(t)=2\cos t-2\cos 2t=-2(\cos t-1)(2\cos t+1) \]
+          <p class="etape">Étape 3 : annuler les deux facteurs</p>
+          <ul>
+            <li>\(\sin t=0\) et \(y'=0\) : \(t=0\) convient (\(\cos t=1\)). \(t=\pi\) ne convient pas, car \(y'(\pi)=-4\neq0\).</li>
+            <li>\(1+2\cos t=0\) et \(2\cos t+1=0\) : \(\cos t=-\tfrac12\), soit \(t=\tfrac{2\pi}3\) ou \(t=\tfrac{4\pi}3\).</li>
+          </ul>
+          <div class="res">Points singuliers : \(t=0\), \(t=\tfrac{2\pi}{3}\), \(t=\tfrac{4\pi}{3}\).</div>
+          <p>Coordonnées : \(M(0)=(3,0)\), \(M\!\left(\tfrac{2\pi}3\right)=\left(-\tfrac32,\tfrac{3\sqrt3}2\right)\), \(M\!\left(\tfrac{4\pi}3\right)=\left(-\tfrac32,-\tfrac{3\sqrt3}2\right)\).</p>
+
+          <p class="q">3) Nature du point singulier en \(t=0\)</p>
+          <div class="rappel"><span class="lab">Rappel · DL au point singulier</span>
+            On pose \(t=h\) et on développe \(x(h)-x(0)\) et \(y(h)-y(0)\) jusqu'au premier terme non nul de chaque.</div>
+          <p class="etape">Étape 4 : développements</p>
+          \[ x(h)-3=-3h^2+\frac{3}{4}h^4 \qquad y(h)=h^3 \]
+          <p class="etape">Étape 5 : conclusion</p>
+          <p>Le premier terme de \(x-3\) est en \(h^2\) : la direction est \((-1,0)\), donc tangente horizontale. La courbe reste dans \(x\leq3\) près de \(M(0)\).</p>
+          <div class="res">Rebroussement en \((3,0)\), à tangente horizontale, pointe orientée vers la droite.</div>
+
+          <p class="q">4) Tangente en \(M(\pi/2)\) et points sur \((Ox)\)</p>
+          <p class="etape">Étape 6 : tangente en \(\tfrac\pi2\)</p>
+          \[ M\!\left(\tfrac\pi2\right)=(-1,\,2) \qquad \big(x'(\tfrac\pi2),y'(\tfrac\pi2)\big)=(-2,\,2) \]
+          <p>Pente \(\dfrac{2}{-2}=-1\) : tangente \(y-2=-(x+1)\), soit \(y=-x+1\).</p>
+          <p class="etape">Étape 7 : intersections avec \((Ox)\)</p>
+          <p>\(y(t)=2\sin t(1-\cos t)=0\) pour \(t=0\) (cusp, \(M=(3,0)\)) et \(t=\pi\) : \(M(\pi)=(-1,0)\).
+          En \(t=\pi\) : \(x'(\pi)=0\) et \(y'(\pi)=-4\neq0\), donc tangente verticale en \((-1,0)\).</p>
+          <div class="res">Tangente \(y=-x+1\) en \((-1,2)\) ; points \((3,0)\) (cusp) et \((-1,0)\) (tangente verticale).</div>
+
+          <p class="q">5) Tracé</p>
+          <p class="etape">Étape 8 : demi-courbe \(t\in[0,\pi]\)</p>
+          <p>\(y(t)=2\sin t(1-\cos t)\geq0\) sur \([0,\pi]\) : la moitié supérieure reste au-dessus de \((Ox)\). Elle part du cusp \((3,0)\), atteint le cusp \(\left(-\tfrac32,\tfrac{3\sqrt3}2\right)\) en \(t=\tfrac{2\pi}3\), puis rejoint \((-1,0)\) en \(t=\pi\).</p>
+          <p class="etape">Étape 9 : symétrie</p>
+          <p>On symétrise par rapport à \((Ox)\) pour obtenir la courbe complète : une figure à trois rebroussements, appelée deltoïde.</p>
+          <div class="warnbox"><span class="lab">Piège</span>
+            Le point \(t=\pi\) n'est pas singulier. Il est atteint avec une tangente verticale, pas avec \(x'=y'=0\). Confondre les deux donne une fausse pointe.</div>
+        </div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONSEILS ===================== -->
+  <section class="block" id="conseils">
+    <h2>Conseils et pièges</h2>
+    <div class="method"><span class="lab">Démarche à suivre sur un exercice</span>
+      1) Domaine. 2) Parité et périodicité. 3) Dérivées factorisées. 4) Points singuliers (\(x'=y'=0\)) puis tangentes.
+      5) Points doubles. 6) Asymptotes (limites en \(\pm\infty\) et aux bornes du domaine). 7) Tracé.
+    </div>
+    <ul>
+      <li>Tangente horizontale : \(y'=0\) et \(x'\neq0\). Tangente verticale : \(x'=0\) et \(y'\neq0\). Point singulier : \(x'=y'=0\).</li>
+      <li>En un point singulier, la formule de la pente \(\dfrac{y'}{x'}\) ne marche pas : il faut un développement limité.</li>
+      <li>Un point double a en général deux tangentes : on calcule le vecteur vitesse pour chacune des deux valeurs de \(t\) qui donnent ce point.</li>
+      <li>L'équation cartésienne peut contenir des points non parcourus (exercices 2 et 4) : vérifier le domaine.</li>
+    </ul>
+    <div class="note"><span class="lab">À faire avant le DS</span>
+      Refaire les exercices 1 à 5 sans regarder la correction, puis comparer. Les exercices 6 et 7 sont plus longs : les faire après.
+    </div>
+    <p style="font-size:.9rem;opacity:.75">Corrigés vérifiés par calcul formel (sympy : dérivées, DL, équations cartésiennes, asymptotes). Ce sont des exercices créés pour la révision, pas des énoncés officiels.</p>
+  </section>
+
+</main>
+<script src="../assets/gate.js"></script>
+<script src="../assets/catalogue.js?v=2"></script>
+<script src="../assets/nav.js?v=2"></script>
+<script src="../assets/lecture.js?v=3"></script>
+</body>
+</html>
