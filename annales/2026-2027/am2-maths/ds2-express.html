@@ -727,7 +727,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
 
   <section class="block" id="cours">
     <h2>Partie 4 — Les démonstrations à savoir par cœur</h2>
-    <p>Au DS1, la restitution était une démonstration courte du cours (1 pt). Voici les 6 démonstrations du Ch3 §4 et du Ch5 les plus probables, rédigées comme on les attend sur la copie.</p>
+    <p>Au DS1, la restitution était une démonstration courte du cours (1 pt). Voici les 8 démonstrations les plus probables (Ch3 §4, Ch4 et Ch5), rédigées comme on les attend sur la copie. Les plus courtes, à savoir en priorité : R1, R7 et R8.</p>
 
     <div class="exo-card">
       <div class="exo-head"><span>R1 — \(\lambda\) valeur propre de \(A\) ⇔ \(\det(A-\lambda I_n)=0\)</span><span class="diff">♦</span></div>
@@ -816,6 +816,40 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},
         <div class="rappel"><span class="lab">Rappel · déterminant triangulaire</span>\[ \det(\text{triangulaire})=\text{produit des coefficients diagonaux} \]</div>
         \[ \chi_A(X)=\prod_{i=1}^{n}(a_{ii}-X) \]
         <div class="res">Les racines de \(\chi_A\) sont exactement \(a_{11},\dots,a_{nn}\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>R7 — Si \(A\in\mathcal M_n(\mathbb K)\) a \(n\) valeurs propres distinctes, alors \(A\) est diagonalisable</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Démonstration (utilise R3)</p>
+        <p class="etape">Étape 1 : une base de vecteurs propres</p>
+        <p>Soient \(\lambda_1,\dots,\lambda_n\) les valeurs propres distinctes et \(X_i\) un vecteur propre associé à \(\lambda_i\). Par R3, \((X_1,\dots,X_n)\) est libre. C'est une famille libre de \(n\) vecteurs de \(\mathbb K^n\) : c'est une base.</p>
+        <p class="etape">Étape 2 : la matrice \(P\)</p>
+        <p>On pose \(P=(X_1\,|\cdots|\,X_n)\). Ses colonnes forment une base de \(\mathbb K^n\), donc \(P\) est inversible.</p>
+        <p class="etape">Étape 3 : calcul de \(AP\)</p>
+        \[ AP=(AX_1|\cdots|AX_n)=(\lambda_1X_1|\cdots|\lambda_nX_n)=PD,\qquad D=\mathrm{diag}(\lambda_1,\dots,\lambda_n) \]
+        <p class="etape">Étape 4 : conclusion</p>
+        \[ P^{-1}AP=D \]
+        <div class="res">\(A\) est diagonalisable : \(P\) est la matrice de passage et \(D\) la matrice diagonale des valeurs propres.</div>
+      </div>
+    </div>
+
+    <div class="exo-card">
+      <div class="exo-head"><span>R8 — En un point régulier, la tangente est dirigée par le vecteur dérivé (Ch4, théorème 1)</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <p class="q">Démonstration</p>
+        <p class="etape">Étape 1 : taux d'accroissement vectoriel</p>
+        <p>Par dérivabilité de \(x\) et \(y\) en \(t_0\) :</p>
+        \[ \frac{1}{t-t_0}\,\overrightarrow{M(t_0)M(t)}=\left(\frac{x(t)-x(t_0)}{t-t_0},\ \frac{y(t)-y(t_0)}{t-t_0}\right)\longrightarrow\big(x'(t_0),\,y'(t_0)\big)=\vec v \]
+        <p class="etape">Étape 2 : la droite limite</p>
+        <p>Le point est régulier, donc \(\vec v\neq\vec0\). Pour \(t\) proche de \(t_0\), le vecteur ci-dessus est non nul et sa direction tend vers celle de \(\vec v\). Or \(\overrightarrow{M(t_0)M(t)}\) est un multiple non nul de ce vecteur : la droite \((M(t_0)M(t))\) a donc pour direction limite celle de \(\vec v\). Cette droite limite est la tangente.</p>
+        <p class="etape">Étape 3 : équation cartésienne</p>
+        <p>\(M(x,y)\) est sur la tangente si et seulement si \(\overrightarrow{M(t_0)M}\) est colinéaire à \(\vec v\), soit :</p>
+        \[ \begin{vmatrix}x-x(t_0)&x'(t_0)\\y-y(t_0)&y'(t_0)\end{vmatrix}=y'(t_0)\big(x-x(t_0)\big)-x'(t_0)\big(y-y(t_0)\big)=0 \]
+        <div class="res">La tangente en \(M(t_0)\) est la droite passant par \(M(t_0)\), dirigée par \(\vec v=\big(x'(t_0),y'(t_0)\big)\).</div>
+        <div class="warnbox"><span class="lab">Piège</span>
+          Cette démonstration n'a de sens qu'en point régulier. En point singulier, \(\vec v=\vec0\) et l'équation ci-dessus est vérifiée par tout point : il faut un autre argument (développement limité).</div>
       </div>
     </div>
   </section>
