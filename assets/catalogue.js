@@ -113,7 +113,8 @@ window.CATALOGUE = {
           { n: "C02", titre: "Théorie des mécanismes", url: "aem2-si/c02-theorie-mecanismes.html" },
           { n: "C03", titre: "Dynamique du solide", url: "aem2-si/c03-dynamique-solide.html" },
           { n: "C04", titre: "Énergétique du solide", url: "aem2-si/c04-energetique-solide.html" },
-          { n: "C05", titre: "Capteurs et chaîne de mesures", url: "aem2-si/c05-capteurs.html" }
+          { n: "C05", titre: "Capteurs et chaîne de mesures", url: "aem2-si/c05-capteurs.html" },
+          { n: "Outils", titre: "Boîte à outils C03-C04 (dynamique et énergétique, de zéro)", url: "aem2-si/c03-c04-boite-a-outils.html" }
         ] }
       ],
       annales: [

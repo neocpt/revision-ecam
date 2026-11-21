@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boîte à outils C03-C04 : dynamique et énergétique — Révision ECAM</title>
+<link rel="stylesheet" href="../assets/style.css?v=4">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div id="site-nav"></div>
+<nav class="subnav"><a href="#mode">Mode d'emploi</a><a href="#vocab">0 · Vocabulaire</a><a href="#maths">1 · Maths</a><a href="#dyn">2 · Dynamique</a><a href="#ener">3 · Énergétique</a><a href="#carte">4 · Carte des TD</a></nav>
+
+<main class="wrap">
+  <span class="chip">SI AM2 (2ᵉ année) · Boîte à outils C03 et C04</span>
+  <h1 class="title">Boîte à outils : comprendre les TD de dynamique et d'énergétique</h1>
+  <p class="lead">Tout ce qu'il faut savoir faire, <b>en partant de zéro</b>, pour suivre les TD C03 (dynamique du solide) et C04
+  (énergétique du solide). On suppose seulement que tu sais ce qu'est un torseur cinématique et un torseur statique (d'actions mécaniques).
+  Les corrections complètes des TD sont dans <a href="c03-dynamique-solide.html#td">C03</a> et <a href="c04-energetique-solide.html#td">C04</a> :
+  cette page sert à comprendre <i>avant</i> de les lire.</p>
+
+  <section class="block" id="mode">
+    <h2>Mode d'emploi</h2>
+    <p>Un TD n'est pas difficile parce que chaque calcul est dur, mais parce qu'il faut <b>enchaîner une dizaine de petits savoir-faire</b>
+    sans que personne ne les ait écrits. Les voici, un par un.</p>
+    <ul>
+      <li>Chaque outil est une carte : la <b>recette</b> (quoi faire, dans quel ordre), un <b>exemple corrigé</b> pas à pas, puis un exercice <b>« À toi »</b> dont la correction est repliée. Essaie avant d'ouvrir.</li>
+      <li>L'ordre compte : la partie 0 (le vocabulaire) explique les mots que les TD utilisent sans les définir, la partie 1 donne les outils de maths, les parties 2 et 3 sont la dynamique et l'énergétique.</li>
+      <li>La partie 4 est une <b>carte</b> : pour chaque exercice des deux TD, quels outils il demande, et le lien vers sa correction détaillée.</li>
+    </ul>
+    <div class="note"><span class="lab">L'idée de tout le chapitre</span>
+      Un solide qui bouge obéit à une égalité entre deux « fiches à deux cases » (des torseurs) :
+      ce que les <b>actions extérieures</b> lui font subir (côté gauche) est égal à ce que son <b>mouvement</b> demande (côté droit).
+      Le chapitre d'énergie donne une autre façon d'écrire la même chose, en une seule équation scalaire quand le système n'a qu'un paramètre.
+      Tous les outils ci-dessous servent à écrire le côté gauche, le côté droit, ou à les égaler.
+    </div>
+  </section>
+
+  <!-- ======================= PARTIE 0 ======================= -->
+  <section class="block" id="vocab">
+    <h2>Partie 0 — Le vocabulaire que les TD ne définissent pas</h2>
+
+    <div class="exo-card" id="v1">
+      <div class="exo-head"><span>V1 · Ce que tu sais déjà : les torseurs, en une table</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <div class="def"><span class="lab">Idée</span>
+          Un torseur est une fiche à deux cases : une <b>résultante</b> (un vecteur) et un <b>moment</b> en un point \(A\) (un autre vecteur).
+          Tous les torseurs du cours changent de point avec <b>la même formule</b>.
+        </div>
+        <div class="overflow"><table>
+          <tr><th>Torseur</th><th>Résultante</th><th>Moment en \(A\)</th><th>De \(A\) à \(B\)</th></tr>
+          <tr><td>Actions mécaniques \(\{\mathcal T\}\) (tu connais)</td><td>\(\vec R\) = somme des forces</td><td>\(\vec M_A\)</td><td>\(\vec M_B=\vec M_A+\overrightarrow{BA}\wedge\vec R\)</td></tr>
+          <tr><td>Cinématique \(\{\mathcal V_{S/R}\}\) (tu connais)</td><td>\(\vec\Omega_{S/R}\) = rotation</td><td>\(\vec V_{A\in S/R}\) = vitesse de \(A\)</td><td>\(\vec V_B=\vec V_A+\overrightarrow{BA}\wedge\vec\Omega\)</td></tr>
+          <tr><td>Cinétique \(\{\mathcal C_{S/R}\}\) (nouveau)</td><td>\(m\vec V_G\)</td><td>\(\vec\sigma_A\) = moment cinétique</td><td>\(\vec\sigma_B=\vec\sigma_A+\overrightarrow{BA}\wedge m\vec V_G\)</td></tr>
+          <tr><td>Dynamique \(\{\mathcal D_{S/R}\}\) (nouveau)</td><td>\(m\vec\Gamma_G\)</td><td>\(\vec\delta_A\) = moment dynamique</td><td>\(\vec\delta_B=\vec\delta_A+\overrightarrow{BA}\wedge m\vec\Gamma_G\)</td></tr>
+        </table></div>
+        <div class="note"><span class="lab">À retenir</span>
+          Moyen mnémotechnique de la formule de changement de point : <b>B = A + BA ∧ R</b> (« BABAR »), avec R la résultante du torseur considéré.
+          Les deux torseurs nouveaux ne sont pas plus compliqués que ceux que tu connais : ce sont les mêmes fiches, remplies avec la masse et l'accélération.
+        </div>
+        <p class="etape">Exemple corrigé</p>
+        <p>Une force \(\vec F=10\,\vec x\) (en N) s'applique en \(B\), avec \(\overrightarrow{AB}=0{,}5\,\vec y\) (en m). Son moment en \(A\) vaut \(\vec M_A=\overrightarrow{AB}\wedge\vec F=-5\,\vec z\) N·m (voir la carte M2). Quel est son moment au point \(C\) tel que \(\overrightarrow{AC}=-1\,\vec y\) ?</p>
+        <div class="rappel"><span class="lab">Rappel · changement de point</span>\[ \vec M_C=\vec M_A+\overrightarrow{CA}\wedge\vec R \]</div>
+        <p>Ici \(\overrightarrow{CA}=+1\,\vec y\) et \(\vec R=10\,\vec x\).</p>
+        \[ \overrightarrow{CA}\wedge\vec R=1\cdot10\,(\vec y\wedge\vec x)=-10\,\vec z \]
+        <div class="res">\(\vec M_C=-5\,\vec z-10\,\vec z=-15\,\vec z\) N·m (la résultante, elle, ne change pas).</div>
+        <p>Vérification directe : \(\overrightarrow{CB}=1{,}5\,\vec y\), donc \(\overrightarrow{CB}\wedge\vec F=1{,}5\cdot10\,(\vec y\wedge\vec x)=-15\,\vec z\). C'est cohérent.</p>
+        <p class="etape">À toi</p>
+        <p class="enonce">Même force, même moment en \(A\). Quel est le moment au point \(C'\) tel que \(\overrightarrow{AC'}=+2\,\vec y\) ?</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>\(\overrightarrow{C'A}=-2\,\vec y\). Alors \(\overrightarrow{C'A}\wedge\vec R=-2\cdot10\,(\vec y\wedge\vec x)=+20\,\vec z\).</p>
+          <div class="res">\(\vec M_{C'}=-5\,\vec z+20\,\vec z=+15\,\vec z\) N·m.</div>
+          <p>Contrôle : \(\overrightarrow{C'B}=-1{,}5\,\vec y\), \(\overrightarrow{C'B}\wedge\vec F=-1{,}5\cdot10\,(\vec y\wedge\vec x)=+15\,\vec z\). Le moment change de signe parce que la force passe maintenant de l'autre côté du point.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="v2">
+      <div class="exo-head"><span>V2 · Isoler un système : intérieur et extérieur</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <div class="def"><span class="lab">Définitions</span>
+          <b>Isoler</b> un système \(\Sigma\), c'est tracer une frontière imaginaire autour d'une ou plusieurs pièces.
+          Ce qui est dedans est l'<b>intérieur</b>. Tout le reste (le bâti, la pesanteur, le moteur, l'air…) est l'<b>extérieur</b>.<br>
+          Une <b>action mécanique extérieure</b> est une action exercée <i>depuis l'extérieur</i> sur le système.
+          Une action <b>intérieure</b> (ou <b>inter-effort</b>) s'exerce entre deux pièces <i>qui sont toutes les deux dans</i> le système.
+        </div>
+        <div class="method"><span class="lab">Règle qui commande tout</span>
+          Le PFD (comme le théorème de l'énergie cinétique) ne fait intervenir que les actions <b>extérieures</b> au système isolé.
+          Les actions intérieures vont par paires opposées (\(\{\mathcal T_{1\to2}\}=-\{\mathcal T_{2\to1}\}\), action et réaction) : elles s'annulent dans le bilan.
+          <b>Choisir quoi isoler, c'est choisir quelles inconnues vont apparaître.</b>
+        </div>
+        <p class="etape">Exemple corrigé : le pendule double</p>
+        <p>Deux tiges : \(1\) accrochée au bâti \(0\) en \(O\), \(2\) accrochée à \(1\) en \(A\) (deux pivots parfaits). On compare deux isolements.</p>
+        <div class="overflow"><table>
+          <tr><th>On isole</th><th>Actions extérieures</th><th>Devient une action intérieure</th></tr>
+          <tr><td>la tige \(2\) seule</td><td>poids de \(2\) ; action de \(1\) sur \(2\) (pivot en \(A\))</td><td>rien</td></tr>
+          <tr><td>l'ensemble \(\{1+2\}\)</td><td>poids de \(1\) ; poids de \(2\) ; action de \(0\) sur \(1\) (pivot en \(O\))</td><td>le pivot en \(A\) (entre \(1\) et \(2\)) : il disparaît du bilan</td></tr>
+        </table></div>
+        <p>Quand on isole \(2\), on voit l'effort dans le pivot \(A\) (utile pour dimensionner l'articulation). Quand on isole \(\{1+2\}\), on ne le voit plus, mais il y a moins d'inconnues.</p>
+        <div class="warnbox"><span class="lab">Piège</span>
+          « Extérieur » ne veut pas dire « loin ». Le bâti qui touche la pièce est extérieur ; une action de contact entre deux pièces du système est intérieure.
+          Et la pesanteur est une action extérieure à distance : on ne l'oublie pas.
+        </div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Lecteur de DVD : le chariot \(3\) est guidé par le bâti \(0\) (glissière), la vis \(2\) est liée au chariot par une liaison hélicoïdale et au bâti par une pivot, le moteur entraîne \(2\) (poids de la vis négligé).
+        Donne les actions extérieures quand on isole \(\{3\}\), puis quand on isole \(\{2+3\}\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p><b>On isole \(\{3\}\)</b> : poids de \(3\) ; action de \(0\) sur \(3\) (glissière) ; action de \(2\) sur \(3\) (hélicoïdale).</p>
+          <p><b>On isole \(\{2+3\}\)</b> : poids de \(3\) ; action de \(0\) sur \(3\) (glissière) ; action de \(0\) sur \(2\) (pivot) ; couple du moteur sur \(2\).
+          L'hélicoïdale entre \(2\) et \(3\) est devenue <b>intérieure</b> : elle ne figure plus dans le bilan.</p>
+          <div class="res">Isoler \(\{3\}\) fait apparaître l'effort de la vis ; isoler \(\{2+3\}\) le cache.</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="v3">
+      <div class="exo-head"><span>V3 · L'inventaire des actions mécaniques extérieures (IAME) et les liaisons parfaites</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="method"><span class="lab">Recette</span>
+          Pour le système isolé, on liste <b>toutes</b> les actions extérieures et on écrit pour chacune son torseur, avec ses inconnues.
+          <ol>
+            <li><b>Actions à distance</b> : la pesanteur, de résultante \(-m g\,\vec z\) (si \(\vec z\) est vertical vers le haut) appliquée au centre de gravité \(G\).</li>
+            <li><b>Actions de contact</b> : une par pièce voisine (la liaison avec chaque pièce extérieure), plus les actions « actives » (couple d'un moteur, effort d'un ressort ou d'un vérin).</li>
+            <li>Pour une <b>liaison parfaite</b> (sans frottement) : elle transmet ce qu'elle <b>bloque</b> et ne transmet rien dans ce qu'elle <b>autorise</b>. Chaque mouvement libre donne une composante nulle.</li>
+          </ol>
+        </div>
+        <p>Torseurs des liaisons parfaites usuelles, d'axe \((A,\vec x)\), pour un point \(A\) pris sur l'axe :</p>
+        <div class="overflow"><table>
+          <tr><th>Liaison</th><th>Mouvements libres</th><th>Torseur d'actions \(\left\{\begin{smallmatrix}X&L\\Y&M\\Z&N\end{smallmatrix}\right\}_A\)</th></tr>
+          <tr><td>Pivot d'axe \(\vec x\)</td><td>rotation autour de \(\vec x\)</td><td>\(L=0\) ; \(X,Y,Z,M,N\) inconnues</td></tr>
+          <tr><td>Glissière d'axe \(\vec x\)</td><td>translation selon \(\vec x\)</td><td>\(X=0\) ; \(L,Y,Z,M,N\) inconnues</td></tr>
+          <tr><td>Pivot glissant d'axe \(\vec x\)</td><td>rotation et translation selon \(\vec x\)</td><td>\(X=0\), \(L=0\) ; \(Y,Z,M,N\) inconnues</td></tr>
+          <tr><td>Rotule de centre \(A\)</td><td>trois rotations</td><td>\(L=M=N=0\) ; \(X,Y,Z\) inconnues</td></tr>
+          <tr><td>Linéaire annulaire d'axe \((A,\vec x)\)</td><td>translation selon \(\vec x\) et trois rotations</td><td>\(X=0\), \(L=M=N=0\) ; \(Y,Z\) inconnues</td></tr>
+          <tr><td>Hélicoïdale d'axe \(\vec x\), pas \(p\)</td><td>rotation et translation <b>liées</b> par le pas</td><td>\(X,Y,Z,M,N\) inconnues ; \(L=-\dfrac{p}{2\pi}X\) (voir D7)</td></tr>
+        </table></div>
+        <p class="etape">Exemple corrigé : l'arbre de navire</p>
+        <p>Le rotor \(2\) est monté sur deux paliers : une rotule en \(A\) et une linéaire annulaire en \(B\), alignées sur l'axe \(\vec x_1\) de l'arbre. On isole le rotor.</p>
+        <ul>
+          <li>Poids, en \(G\) : \(\{\mathcal T_{pes\to2}\}=\left\{\begin{smallmatrix}-m g\,\vec z_0\\ \vec 0\end{smallmatrix}\right\}_G\).</li>
+          <li>Rotule en \(A\) : \(\left\{\begin{smallmatrix}X_A&0\\Y_A&0\\Z_A&0\end{smallmatrix}\right\}_A\) : 3 inconnues.</li>
+          <li>Linéaire annulaire en \(B\) d'axe \(\vec x_1\) : \(\left\{\begin{smallmatrix}0&0\\Y_B&0\\Z_B&0\end{smallmatrix}\right\}_B\) : 2 inconnues.</li>
+        </ul>
+        <p>Total : 5 inconnues de liaison. Le PFD donne 6 équations, mais la sixième (le moment autour de l'axe de l'arbre) ne contient aucune inconnue de liaison : c'est l'équation du <b>couple moteur</b>, que l'énoncé demande d'ignorer. Il reste 5 équations pour 5 inconnues : le problème est bien posé.</p>
+        <div class="warnbox"><span class="lab">Piège</span>
+          Compter les inconnues <i>avant</i> d'écrire le PFD évite de se lancer dans un problème impossible ou de chercher une équation qui n'existe pas.
+          Si les inconnues sont trop nombreuses, on isole autre chose ou on ajoute une hypothèse.
+        </div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Donne la forme du torseur d'actions d'un <b>pivot glissant</b> d'axe \((A,\vec z)\). Combien d'inconnues ?</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>L'axe est maintenant \(\vec z\) : les mouvements libres sont la rotation autour de \(\vec z\) et la translation selon \(\vec z\). Les composantes correspondantes (\(N\) pour le moment, \(Z\) pour la force) sont nulles.</p>
+          \[ \left\{\mathcal T\right\}=\left\{\begin{matrix}X&L\\Y&M\\0&0\end{matrix}\right\}_A \]
+          <div class="res">4 inconnues : \(X, Y, L, M\).</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="v4">
+      <div class="exo-head"><span>V4 · Référentiel galiléen, repère, graphe de liaisons</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <div class="def"><span class="lab">Définitions</span>
+          Une <b>base</b> est trois vecteurs unitaires orthogonaux (directe : \(\vec x\wedge\vec y=\vec z\)).
+          Un <b>repère</b> est une base plus un point origine : on s'en sert pour calculer (projeter).
+          Un <b>référentiel</b> est un repère plus une horloge : on s'en sert pour mesurer des mouvements.
+          Il est <b>galiléen</b> s'il n'accélère pas et ne tourne pas par rapport aux étoiles fixes : dans les TD, le sol, le bâti ou la Terre font l'affaire.
+        </div>
+        <div class="note"><span class="lab">Hypothèses de tout le chapitre</span>
+          Référentiel galiléen ; solides <b>indéformables</b> (les distances entre points d'une même pièce ne changent pas) ;
+          masse constante ; liaisons <b>parfaites</b> (sans frottement ni adhérence), sauf si l'énoncé dit le contraire.
+        </div>
+        <div class="method"><span class="lab">Graphe de liaisons</span>
+          Un <b>graphe de liaisons</b> (ou de structure) est un schéma : un rond par solide, un trait par liaison (nom, axe, point),
+          et une flèche par action extérieure qui n'est pas une liaison (poids, couple moteur). Il sert à ne rien oublier dans l'inventaire (V3).
+        </div>
+        <figure style="margin:1rem 0">
+<svg style="width:100%;max-width:640px;height:auto;display:block;margin:0 auto" viewBox="0 0 700 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Graphe de liaisons du lecteur de DVD : chariot 3, vis 2, bâti 0">
+  <g fill="none" stroke="#0f766e" stroke-width="3">
+    <line x1="154" y1="80" x2="546" y2="80"/>
+    <line x1="140" y1="108" x2="334" y2="182"/>
+    <line x1="560" y1="108" x2="366" y2="182"/>
+  </g>
+  <g fill="#ecfeff" stroke="#0f766e" stroke-width="3">
+    <circle cx="120" cy="80" r="34"/><circle cx="580" cy="80" r="34"/><circle cx="350" cy="210" r="34"/>
+  </g>
+  <g font-family="Segoe UI, sans-serif" font-size="26" font-weight="700" fill="#0f172a" text-anchor="middle">
+    <text x="120" y="90">3</text><text x="580" y="90">2</text><text x="350" y="220">0</text>
+  </g>
+  <g font-family="Segoe UI, sans-serif" font-size="20" fill="#0f172a">
+    <text x="350" y="66" text-anchor="middle">hélicoïdale (B, x0)</text>
+    <text x="210" y="168" text-anchor="end">glissière (A, x0)</text>
+    <text x="496" y="168" text-anchor="start">pivot (C, x0)</text>
+    <text x="146" y="30" text-anchor="start">poids</text>
+    <text x="554" y="30" text-anchor="end">couple moteur Cm (D)</text>
+  </g>
+  <g stroke="#b91c1c" stroke-width="3" fill="#b91c1c">
+    <line x1="120" y1="10" x2="120" y2="42"/><polygon points="120,46 113,34 127,34" stroke="none"/>
+    <line x1="580" y1="10" x2="580" y2="42"/><polygon points="580,46 573,34 587,34" stroke="none"/>
+  </g>
+</svg>
+          <figcaption style="font-size:.9rem;color:var(--ink-soft);text-align:center">Graphe de liaisons du lecteur de DVD (hypothèses de l'énoncé : liaisons parfaites, poids de la vis négligé).</figcaption>
+        </figure>
+        <p class="etape">À toi</p>
+        <p class="enonce">Sur ce graphe, combien d'actions mécaniques extérieures s'exercent sur le chariot \(3\) seul ? Et sur la vis \(2\) seule ?</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>On compte les traits et les flèches qui touchent le rond de la pièce isolée.</p>
+          <p>Chariot \(3\) : le poids (flèche), la glissière avec \(0\), l'hélicoïdale avec \(2\) : <b>3 actions</b>.</p>
+          <p>Vis \(2\) : le couple moteur (flèche), le pivot avec \(0\), l'hélicoïdale avec \(3\) : <b>3 actions</b> (le poids de la vis est négligé par hypothèse, on ne le compte pas).</p>
+        </div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= PARTIE 1 ======================= -->
+  <section class="block" id="maths">
+    <h2>Partie 1 — Les outils de maths</h2>
+    <p>Ces calculs reviennent dans presque tous les exercices. Ils sont courts, mais il faut les faire sans hésiter.</p>
+
+    <div class="exo-card" id="m1">
+      <div class="exo-head"><span>M1 · Changer de base : lire la figure plane</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <div class="method"><span class="lab">Recette</span>
+          Deux bases voisines partagent <b>un axe commun</b> (ici \(\vec z\)) et sont décalées d'un angle \(\alpha\) autour de lui.
+          On dessine la <b>figure plane</b> : les deux axes qui tournent, vus de face, avec l'angle. Puis on <b>projette en lisant le dessin</b> :
+          un vecteur unitaire s'écrit avec un cosinus sur l'axe dont il est le plus proche, et un sinus sur l'autre ; le signe se lit sur le dessin.
+        </div>
+        <figure style="margin:1rem 0">
+<svg style="width:100%;max-width:520px;height:auto;display:block;margin:0 auto" viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Figure plane : base (x,y) et base (x1,y1) tournée de l'angle alpha autour de z">
+  <defs>
+    <marker id="fl0" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0f172a"/></marker>
+    <marker id="fl1" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0f766e"/></marker>
+  </defs>
+  <g stroke="#0f172a" stroke-width="3" marker-end="url(#fl0)">
+    <line x1="190" y1="250" x2="392" y2="250"/><line x1="190" y1="250" x2="190" y2="48"/>
+  </g>
+  <g stroke="#0f766e" stroke-width="3" marker-end="url(#fl1)">
+    <line x1="190" y1="250" x2="365" y2="149"/><line x1="190" y1="250" x2="89" y2="75"/>
+  </g>
+  <path d="M280 250 A90 90 0 0 0 268 205" fill="none" stroke="#b91c1c" stroke-width="3"/>
+  <g font-family="Segoe UI, sans-serif" font-size="24" font-weight="700">
+    <text x="402" y="258" fill="#0f172a">x</text>
+    <text x="202" y="50" fill="#0f172a">y</text>
+    <text x="376" y="146" fill="#0f766e">x<tspan baseline-shift="sub" font-size="18">1</tspan></text>
+    <text x="52" y="70" fill="#0f766e">y<tspan baseline-shift="sub" font-size="18">1</tspan></text>
+    <text x="298" y="232" fill="#b91c1c">α</text>
+    <text x="206" y="290" fill="#475569" font-size="20" font-weight="400">z (vers toi) est commun</text>
+  </g>
+</svg>
+          <figcaption style="font-size:.9rem;color:var(--ink-soft);text-align:center">Figure plane : la base \(1\) est la base \(0\) tournée de \(\alpha\) autour de \(\vec z\).</figcaption>
+        </figure>
+        \[ \vec x_1=\cos\alpha\,\vec x+\sin\alpha\,\vec y\qquad \vec y_1=-\sin\alpha\,\vec x+\cos\alpha\,\vec y\qquad \vec z_1=\vec z \]
+        <p>Dans l'autre sens (on retourne l'angle) :</p>
+        \[ \vec x=\cos\alpha\,\vec x_1-\sin\alpha\,\vec y_1\qquad \vec y=\sin\alpha\,\vec x_1+\cos\alpha\,\vec y_1 \]
+        <p class="etape">Exemple corrigé : l'arbre de navire</p>
+        <p>La base \(2\) se déduit de la base \(1\) par une rotation d'angle \(\varphi\) autour de l'axe commun \(\vec x_1=\vec x_2\). L'énoncé dessine \(\vec y_2\) au-dessus de \(\vec y_1\) et \(\vec z_2\) à gauche de \(\vec z_1\), donc :</p>
+        \[ \vec y_2=\cos\varphi\,\vec y_1+\sin\varphi\,\vec z_1\qquad \vec z_2=-\sin\varphi\,\vec y_1+\cos\varphi\,\vec z_1 \]
+        <p>Et dans l'autre sens :</p>
+        \[ \vec y_1=\cos\varphi\,\vec y_2-\sin\varphi\,\vec z_2\qquad \vec z_1=\sin\varphi\,\vec y_2+\cos\varphi\,\vec z_2 \]
+        <div class="warnbox"><span class="lab">Piège</span>
+          Ne jamais apprendre ces formules par cœur : le signe dépend du sens de l'angle sur la figure. On dessine, on lit. Contrôle rapide : pour \(\alpha=0\) on doit retrouver \(\vec x_1=\vec x\), et chaque vecteur doit garder une longueur 1 (\(\cos^2+\sin^2=1\)).
+        </div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Avec le même paramétrage (axe commun \(\vec x_1=\vec x_2\), angle \(\varphi\)), exprime \(\vec z_0\) dans la base \(2\), sachant que \(\vec z_0=\vec z_1\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>\(\vec z_0=\vec z_1\) et on a déjà \(\vec z_1=\sin\varphi\,\vec y_2+\cos\varphi\,\vec z_2\).</p>
+          <div class="res">\(\vec z_0=\sin\varphi\,\vec y_2+\cos\varphi\,\vec z_2\)</div>
+          <p>Contrôle : si \(\varphi=0\), \(\vec z_0=\vec z_2\) ; si \(\varphi=90^\circ\), \(\vec z_0=\vec y_2\). C'est cohérent avec la figure.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m2">
+      <div class="exo-head"><span>M2 · Produit vectoriel et moment d'une force</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <div class="method"><span class="lab">Recette</span>
+          Dans une base orthonormée <b>directe</b> : \(\vec x\wedge\vec y=\vec z\), \(\vec y\wedge\vec z=\vec x\), \(\vec z\wedge\vec x=\vec y\). Dans l'autre ordre, on change de signe : \(\vec y\wedge\vec x=-\vec z\).
+          Un produit de deux vecteurs identiques ou parallèles est nul. Le produit est <b>linéaire</b> : on développe comme un produit ordinaire, en gardant l'ordre.<br>
+          Le résultat est perpendiculaire aux deux vecteurs (règle de la main droite).
+        </div>
+        <div class="rappel"><span class="lab">Rappel · moment d'une force en \(A\)</span>\[ \vec M_A(\vec F)=\overrightarrow{AB}\wedge\vec F\qquad (B=\text{point d'application de }\vec F) \]</div>
+        <p class="etape">Exemple corrigé</p>
+        <p>\(\overrightarrow{AB}=0{,}5\,\vec y\) m et \(\vec F=10\,\vec x\) N.</p>
+        \[ \overrightarrow{AB}\wedge\vec F=0{,}5\cdot10\,(\vec y\wedge\vec x)=5\cdot(-\vec z) \]
+        <div class="res">\(\vec M_A=-5\,\vec z\) N·m : une rotation dans le sens horaire quand \(\vec z\) pointe vers toi.</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Calcule \((\vec x+\vec y)\wedge 2\vec z\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>On développe : \((\vec x+\vec y)\wedge2\vec z=2\,(\vec x\wedge\vec z)+2\,(\vec y\wedge\vec z)\).</p>
+          <p>\(\vec x\wedge\vec z=-(\vec z\wedge\vec x)=-\vec y\) et \(\vec y\wedge\vec z=\vec x\).</p>
+          <div class="res">\(=-2\,\vec y+2\,\vec x=2\,\vec x-2\,\vec y\)</div>
+          <p>Contrôle : en coordonnées, \((1,1,0)\wedge(0,0,2)=(1\cdot2-0,\ 0-1\cdot2,\ 0)=(2,-2,0)\).</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m3">
+      <div class="exo-head"><span>M3 · Dériver un vecteur : la formule de Bour</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="def"><span class="lab">Formule de Bour (dérivation vectorielle)</span>
+          \[ \left[\frac{d\vec u}{dt}\right]_{R_1}=\left[\frac{d\vec u}{dt}\right]_{R_2}+\vec\Omega_{R_2/R_1}\wedge\vec u \]
+          La dérivée d'un vecteur dépend du repère dans lequel on observe. Si \(\vec u\) est <b>fixe dans \(R_2\)</b> (ses composantes dans la base \(2\) sont constantes), le premier terme est nul et il reste \(\vec\Omega_{R_2/R_1}\wedge\vec u\).
+        </div>
+        <div class="method"><span class="lab">Recette</span>
+          Pour un vecteur unitaire qui tourne autour de \(\vec z\) à la vitesse \(\dot\alpha\) (\(\vec\Omega=\dot\alpha\,\vec z\)) :
+          \[ \frac{d\vec x_1}{dt}=\dot\alpha\,\vec y_1\qquad \frac{d\vec y_1}{dt}=-\dot\alpha\,\vec x_1\qquad \frac{d\vec z}{dt}=\vec 0 \]
+          Règle de la main : la dérivée d'un vecteur unitaire tournant est \(\dot\alpha\) fois le vecteur <b>suivant</b>, tourné de 90° dans le sens de la rotation. On ne projette jamais dans une base globale : on dérive directement dans la base mobile.
+        </div>
+        <p class="etape">Exemple corrigé</p>
+        <p>Un point \(A\) tel que \(\overrightarrow{OA}=a\,\vec y_1\) (avec \(a\) constante), la base \(1\) tournant autour de \(\vec z\) à la vitesse \(\dot\alpha\). On cherche sa vitesse et son accélération par rapport à \(R\).</p>
+        <p>Vitesse : \(a\) est constante, seul \(\vec y_1\) varie.</p>
+        \[ \vec V_{A/R}=a\,\frac{d\vec y_1}{dt}=-a\dot\alpha\,\vec x_1 \]
+        <p>Accélération : on dérive le résultat. Il y a deux termes qui varient : \(\dot\alpha\) et \(\vec x_1\).</p>
+        \[ \vec\Gamma_{A/R}=-a\ddot\alpha\,\vec x_1-a\dot\alpha\,\frac{d\vec x_1}{dt}=-a\ddot\alpha\,\vec x_1-a\dot\alpha^{2}\,\vec y_1 \]
+        <div class="res">\(\vec V=-a\dot\alpha\,\vec x_1\) et \(\vec\Gamma=-a\ddot\alpha\,\vec x_1-a\dot\alpha^2\,\vec y_1\)</div>
+        <p>Interprétation : le terme \(-a\dot\alpha^2\,\vec y_1\) est l'accélération <b>centripète</b> : elle pointe vers \(O\) (car \(A\) est en \(+a\,\vec y_1\)) et vaut \(a\dot\alpha^2\). Le terme en \(\ddot\alpha\) est l'accélération tangentielle.</p>
+        <p class="etape">À toi</p>
+        <p class="enonce">Même rotation. Pour \(\overrightarrow{OB}=b\,\vec x_1\), donne \(\vec V_{B/R}\) et \(\vec\Gamma_{B/R}\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>\(\vec V=b\,\dfrac{d\vec x_1}{dt}=b\dot\alpha\,\vec y_1\).</p>
+          <p>\(\vec\Gamma=b\ddot\alpha\,\vec y_1+b\dot\alpha\,\dfrac{d\vec y_1}{dt}=b\ddot\alpha\,\vec y_1-b\dot\alpha^2\,\vec x_1\).</p>
+          <div class="res">\(\vec V=b\dot\alpha\,\vec y_1\) et \(\vec\Gamma=b\ddot\alpha\,\vec y_1-b\dot\alpha^2\,\vec x_1\)</div>
+          <p>Le terme \(-b\dot\alpha^2\,\vec x_1\) pointe encore vers \(O\) : c'est le centripète.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m4">
+      <div class="exo-head"><span>M4 · Vitesse et accélération d'un point (dériver \(\overrightarrow{OM}\))</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="method"><span class="lab">Recette</span>
+          Pour un point \(M\) et une origine \(O\) fixe dans \(R\) :
+          \[ \vec V_{M/R}=\left[\frac{d\overrightarrow{OM}}{dt}\right]_R\qquad \vec\Gamma_{M/R}=\left[\frac{d\vec V_{M/R}}{dt}\right]_R \]
+          <ol>
+            <li>Écrire \(\overrightarrow{OM}\) comme une <b>somme de vecteurs</b>, chacun fixe dans une base mobile (par exemple \(2a\,\vec x_1+a\,\vec x_2\)).</li>
+            <li>Dériver chaque terme avec la règle M3.</li>
+            <li>Dériver une seconde fois pour l'accélération.</li>
+          </ol>
+          Si on connaît la vitesse d'un autre point \(A\) du même solide, on peut aussi utiliser le champ des vitesses : \(\vec V_{B\in S/R}=\vec V_{A\in S/R}+\overrightarrow{BA}\wedge\vec\Omega_{S/R}\) (voir E1).
+        </div>
+        <p class="etape">Exemple corrigé : le pendule double</p>
+        <p>Les angles \(\alpha=(\vec x,\vec x_1)\) et \(\beta=(\vec x,\vec x_2)\) se mesurent tous les deux depuis \(\vec x\). \(\overrightarrow{OA}=2a\,\vec x_1\), \(\overrightarrow{AB}=2a\,\vec x_2\), et \(G_2\) est au milieu de \(AB\) : \(\overrightarrow{OG_2}=2a\,\vec x_1+a\,\vec x_2\).</p>
+        <p>Chaque vecteur tourne autour de \(\vec z\) : \(\dfrac{d\vec x_1}{dt}=\dot\alpha\,\vec y_1\) et \(\dfrac{d\vec x_2}{dt}=\dot\beta\,\vec y_2\).</p>
+        \[ \vec V_{G_2/R}=2a\dot\alpha\,\vec y_1+a\dot\beta\,\vec y_2 \]
+        <p>C'est exactement l'expression que l'énoncé du TD donne. Pour l'accélération, on dérive encore : \(\dfrac{d\vec y_1}{dt}=-\dot\alpha\,\vec x_1\) et \(\dfrac{d\vec y_2}{dt}=-\dot\beta\,\vec x_2\).</p>
+        \[ \vec\Gamma_{G_2/R}=2a\left(\ddot\alpha\,\vec y_1-\dot\alpha^2\,\vec x_1\right)+a\left(\ddot\beta\,\vec y_2-\dot\beta^2\,\vec x_2\right) \]
+        <div class="res">Chaque tige apporte un terme tangentiel (en \(\ddotlpha\) ou \(\ddoteta\)) et un terme centripète (en \(\dotlpha^2\) ou \(\doteta^2\)).</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Un point \(M\) est tel que \(\overrightarrow{OM}=r\,\vec x_1\) avec \(r\) constant et \(\alpha=\omega t\) (\(\omega\) constante). Calcule \(\|\vec\Gamma_{M/R}\|\) pour \(r=0{,}2\) m et \(\omega=30\) rad/s.</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>D'après M3 avec \(b=r\) : \(\vec\Gamma=r\ddot\alpha\,\vec y_1-r\dot\alpha^2\,\vec x_1\). Ici \(\ddot\alpha=0\), donc \(\vec\Gamma=-r\omega^2\,\vec x_1\).</p>
+          <div class="res">\(\|\vec\Gamma\|=r\omega^2=0{,}2\times30^2=180\ \text{m/s}^2\) (soit environ 18 fois \(g\)), dirigée vers l'axe.</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m5">
+      <div class="exo-head"><span>M5 · Composer les rotations</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <div class="def"><span class="lab">Composition des vecteurs rotation</span>
+          \[ \vec\Omega_{2/0}=\vec\Omega_{2/1}+\vec\Omega_{1/0} \]
+          Chaque angle du paramétrage est une rotation autour de <b>l'axe commun</b> aux deux bases voisines : le vecteur rotation est « vitesse de l'angle × cet axe ».
+        </div>
+        <div class="method"><span class="lab">Recette</span>
+          Lire le paramétrage de proche en proche. Chaque angle \(\theta\) entre deux bases donne \(\dot\theta\) fois l'axe qu'elles partagent. On additionne tous les termes, sans chercher à tout écrire dans une seule base : une somme de vecteurs n'a pas besoin d'être projetée.
+          Conversion utile : \(\omega\ [\text{rad/s}]=\dfrac{2\pi N}{60}=\dfrac{\pi N}{30}\) pour \(N\) en tr/min.
+        </div>
+        <p class="etape">Exemple corrigé : l'arbre de navire</p>
+        <p>Le navire \(1\) tourne par rapport au sol \(0\) autour de \(\vec z_0\) (angle \(\psi\)) ; l'arbre \(2\) tourne par rapport au navire autour de \(\vec x_1\) (angle \(\varphi\)).</p>
+        \[ \vec\Omega_{1/0}=\dot\psi\,\vec z_0\qquad \vec\Omega_{2/1}=\dot\varphi\,\vec x_1\qquad \vec\Omega_{2/0}=\dot\psi\,\vec z_0+\dot\varphi\,\vec x_1 \]
+        <p>Applications numériques (\(V=10\) m/s, \(R=200\) m, \(N=4000\) tr/min) :</p>
+        \[ \dot\psi=\frac{V}{R}=\frac{10}{200}=0{,}05\ \text{rad/s}\qquad \dot\varphi=\frac{\pi N}{30}=\frac{\pi\times4000}{30}\approx418{,}9\ \text{rad/s} \]
+        <div class="res">\(\vec\Omega_{2/0}=0{,}05\,\vec z_0+418{,}9\,\vec x_1\) (rad/s) : la rotation du navire est ~8000 fois plus lente que celle de l'arbre, mais elle crée l'effet gyroscopique étudié.</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Pendule double : \(\alpha=(\vec x,\vec x_1)\) et \(\beta=(\vec x,\vec x_2)\), tous deux autour de \(\vec z\). Donne \(\vec\Omega_{1/0}\), \(\vec\Omega_{2/0}\) et \(\vec\Omega_{2/1}\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>\(\vec\Omega_{1/0}=\dot\alpha\,\vec z\) et \(\vec\Omega_{2/0}=\dot\beta\,\vec z\) (les deux angles sont mesurés depuis \(\vec x\) fixe).</p>
+          <p>On cherche \(\vec\Omega_{2/1}\) avec la composition : \(\vec\Omega_{2/0}=\vec\Omega_{2/1}+\vec\Omega_{1/0}\), donc \(\vec\Omega_{2/1}=\vec\Omega_{2/0}-\vec\Omega_{1/0}\).</p>
+          <div class="res">\(\vec\Omega_{2/1}=(\dot\beta-\dot\alpha)\,\vec z\)</div>
+          <p>Logique : la tige \(2\) tourne par rapport à \(1\) de la différence des deux vitesses.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m6">
+      <div class="exo-head"><span>M6 · Intégrales avec \(dm\) et centre de gravité</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="method"><span class="lab">Recette</span>
+          Pour un solide homogène, on remplace \(dm\) par « densité × élément de longueur, surface ou volume » :
+          barre \(dm=\dfrac{m}{L}\,dx\) ; plaque \(dm=\sigma\,dS\) avec \(\sigma=\dfrac{m}{S}\) ; volume \(dm=\rho\,dV\).
+          On choisit les coordonnées qui simplifient les bornes : cartésiennes pour un rectangle, <b>polaires</b> pour un disque (\(dS=r\,dr\,d\theta\)), <b>cylindriques</b> pour un cylindre (\(dV=r\,dr\,d\theta\,dz\)).
+        </div>
+        <div class="rappel"><span class="lab">Rappel · centre de gravité</span>\[ \overrightarrow{OG}=\frac{1}{m}\int_S\overrightarrow{OM}\,dm \]</div>
+        <p>Si le solide a un plan ou un axe de symétrie, \(G\) est dessus : cela évite des intégrales.</p>
+        <p class="etape">Exemple corrigé : la barre</p>
+        <p>Barre homogène de longueur \(L\) le long de \(\vec x\), de l'extrémité \(O\) (\(x=0\)) à \(x=L\). Alors \(dm=\dfrac{m}{L}\,dx\) et</p>
+        \[ x_G=\frac{1}{m}\int_0^L x\,\frac{m}{L}\,dx=\frac{1}{L}\left[\frac{x^2}{2}\right]_0^L=\frac{L}{2} \]
+        <div class="res">\(G\) est au milieu de la barre, comme l'intuition le disait.</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Quart de disque de rayon \(R\), masse surfacique \(\rho\), délimité par les axes \(\vec x\) et \(\vec y\). Trouve la position de \(G\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>Coordonnées polaires : \(x=r\cos\theta\), \(dm=\rho\,r\,dr\,d\theta\), avec \(r\in[0,R]\) et \(\theta\in[0,\tfrac{\pi}{2}]\).</p>
+          <p>Masse : \(m=\rho\displaystyle\int_0^R r\,dr\int_0^{\pi/2}d\theta=\rho\,\dfrac{R^2}{2}\,\dfrac{\pi}{2}=\dfrac{\rho\pi R^2}{4}\).</p>
+          <p>Moment : \(\displaystyle\int x\,dm=\rho\int_0^R r^2\,dr\int_0^{\pi/2}\cos\theta\,d\theta=\rho\,\dfrac{R^3}{3}\times1=\dfrac{\rho R^3}{3}\).</p>
+          \[ x_G=\frac{\rho R^3/3}{\rho\pi R^2/4}=\frac{4R}{3\pi} \]
+          <p>Par symétrie entre \(x\) et \(y\), \(y_G=x_G\).</p>
+          <div class="res">\(x_G=y_G=\dfrac{4R}{3\pi}\approx0{,}424\,R\)</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m7">
+      <div class="exo-head"><span>M7 · Optimiser : dérivée nulle</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <div class="method"><span class="lab">Recette</span>
+          Pour minimiser (ou maximiser) une grandeur \(f(p)\) en fonction d'une variable \(p\) : on dérive, on annule, on résout, puis on vérifie que c'est bien un minimum (la fonction remonte de chaque côté).
+          Cas très fréquent en mécanique :
+          \[ f(p)=\frac{A}{p}+B\,p\quad\Longrightarrow\quad f'(p)=-\frac{A}{p^2}+B=0\quad\Longrightarrow\quad p^{*}=\sqrt{\frac{A}{B}}\ ,\quad f(p^{*})=2\sqrt{AB} \]
+          (\(A\) et \(B\) positifs : \(f\) tend vers l'infini en 0 et à l'infini, donc c'est un minimum).
+        </div>
+        <p class="etape">Exemple corrigé</p>
+        <p>\(f(p)=\dfrac{3}{p}+12\,p\). Alors \(f'(p)=-\dfrac{3}{p^2}+12=0\), soit \(p^2=\dfrac14\), donc \(p^{*}=0{,}5\).</p>
+        <div class="res">\(f(0{,}5)=\dfrac{3}{0{,}5}+12\times0{,}5=6+6=12\) (c'est bien \(2\sqrt{3\times12}=12\)).</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Lecteur de DVD : à accélération \(a\) fixée, le couple moteur vaut \(C_m=a\left(I_{vis}\,\dfrac{2\pi}{p}+m_3\,\dfrac{p}{2\pi}\right)\), avec \(I_{vis}=4{,}2\times10^{-9}\) kg·m² et \(m_3=10\) g. Trouve le pas \(p\) qui minimise \(C_m\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>On minimise \(f(p)=\dfrac{A}{p}+B\,p\) avec \(A=2\pi I_{vis}\) et \(B=\dfrac{m_3}{2\pi}\) (le facteur \(a\) ne change pas l'optimum).</p>
+          \[ p^{*}=\sqrt{\frac{A}{B}}=\sqrt{\frac{4\pi^2I_{vis}}{m_3}}=2\pi\sqrt{\frac{4{,}2\times10^{-9}}{0{,}01}}\approx4{,}07\times10^{-3}\ \text{m} \]
+          <div class="res">\(p^{*}\approx4{,}07\) mm (le pas réel de 3,6 mm en est proche).</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m8">
+      <div class="exo-head"><span>M8 · Linéariser : les petits angles</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <div class="method"><span class="lab">Recette</span>
+          Autour de \(\theta=0\) (avec \(\theta\) en radians) : \(\sin\theta\approx\theta\), \(\cos\theta\approx1\), \(\tan\theta\approx\theta\).
+          Autour d'un point de fonctionnement \(\theta_0\) quelconque :
+          \[ f(\theta)\approx f(\theta_0)+f'(\theta_0)\,(\theta-\theta_0) \]
+          On linéarise une équation différentielle pour obtenir une équation <b>linéaire</b> (donc résoluble, ou transformable par Laplace).
+        </div>
+        <p class="etape">Exemple corrigé : le pendule</p>
+        <p>Une équation de mouvement du type \(\ddot\theta=-\dfrac{3g}{2L}\sin\theta\) se linéarise pour de petits angles :</p>
+        \[ \ddot\theta+\frac{3g}{2L}\,\theta=0 \]
+        <div class="res">C'est un oscillateur de pulsation \(\omega_0=\sqrt{\dfrac{3g}{2L}}\).</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Linéarise \(\cos\theta\) autour de \(\theta_0=\dfrac{\pi}{2}\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>\(f(\theta)=\cos\theta\), \(f(\theta_0)=0\), \(f'(\theta)=-\sin\theta\), donc \(f'(\theta_0)=-1\).</p>
+          <div class="res">\(\cos\theta\approx-\left(\theta-\dfrac{\pi}{2}\right)\)</div>
+          <p>Valable seulement pour \(\theta\) proche de \(\pi/2\) : le « petit angle » est l'écart \(\theta-\theta_0\).</p>
+        </div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= PARTIE 2 ======================= -->
+  <section class="block" id="dyn">
+    <h2>Partie 2 — Dynamique (TD C03)</h2>
+    <p>Rappel de l'idée : le PFD égale deux torseurs, celui des actions extérieures (côté <i>cause</i>) et le torseur dynamique \(\{\mathcal D\}=\{m\vec\Gamma_G\ ;\ \vec\delta_A\}\) (côté <i>mouvement</i>).
+    Pour écrire \(\vec\delta_A\), il faut le moment cinétique \(\vec\sigma_A\), qui demande la matrice d'inertie. D'où l'ordre ci-dessous : inertie, cinétique, dynamique, puis le PFD.</p>
+
+    <div class="exo-card" id="d1">
+      <div class="exo-head"><span>D1 · La matrice d'inertie : lire, calculer, cas à connaître</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="def"><span class="lab">Définition</span>
+          Pour un solide \(S\), en un point \(A\) et dans une base \(b\), avec \(\overrightarrow{AM}=x\,\vec x+y\,\vec y+z\,\vec z\) :
+          \[ \bar{\bar I}_{(A,S)}=\begin{pmatrix}A&-F&-E\\-F&B&-D\\-E&-D&C\end{pmatrix}_b\qquad
+          \begin{cases}A=\int(y^2+z^2)\,dm\\ B=\int(x^2+z^2)\,dm\\ C=\int(x^2+y^2)\,dm\end{cases}\quad
+          \begin{cases}D=\int yz\,dm\\ E=\int xz\,dm\\ F=\int xy\,dm\end{cases} \]
+          La matrice est <b>symétrique</b>. Les <b>moments d'inertie</b> \(A,B,C\) (en kg·m², toujours positifs) mesurent la « difficulté de faire tourner » autour de \(\vec x,\vec y,\vec z\).
+          Les <b>produits d'inertie</b> \(D,E,F\) mesurent le <b>déséquilibre</b> de la répartition des masses.
+        </div>
+        <div class="method"><span class="lab">Raccourcis pour ne presque jamais intégrer</span>
+          <ul>
+            <li><b>Un plan de symétrie</b> du solide : les deux produits d'inertie qui contiennent la coordonnée perpendiculaire à ce plan sont nuls (plan \((\vec x,\vec y)\) : \(D=E=0\)).</li>
+            <li><b>Deux plans de symétrie perpendiculaires</b> : matrice diagonale.</li>
+            <li><b>Solide de révolution</b> d'axe \(\vec z\) : matrice diagonale avec \(A=B\).</li>
+            <li>Matrice diagonale = on est sur des <b>axes principaux</b> : chaque axe se comporte seul.</li>
+          </ul>
+        </div>
+        <p>Valeurs à connaître, en \(G\), dans la base \((\vec x,\vec y,\vec z)\), pour un solide de masse \(m\) :</p>
+        <div class="overflow"><table>
+          <tr><th>Solide homogène</th><th>\(A\)</th><th>\(B\)</th><th>\(C\)</th></tr>
+          <tr><td>Barre mince, longueur \(L\) le long de \(\vec x\)</td><td>\(0\)</td><td>\(\dfrac{mL^2}{12}\)</td><td>\(\dfrac{mL^2}{12}\)</td></tr>
+          <tr><td>Plaque rectangulaire \(2a\times2b\), dans le plan \((\vec x,\vec y)\)</td><td>\(\dfrac{mb^2}{3}\)</td><td>\(\dfrac{ma^2}{3}\)</td><td>\(\dfrac{m(a^2+b^2)}{3}\)</td></tr>
+          <tr><td>Disque mince, rayon \(R\), axe \(\vec z\)</td><td>\(\dfrac{mR^2}{4}\)</td><td>\(\dfrac{mR^2}{4}\)</td><td>\(\dfrac{mR^2}{2}\)</td></tr>
+          <tr><td>Cylindre plein, rayon \(R\), hauteur \(h\), axe \(\vec z\)</td><td>\(\dfrac{m(3R^2+h^2)}{12}\)</td><td>\(\dfrac{m(3R^2+h^2)}{12}\)</td><td>\(\dfrac{mR^2}{2}\)</td></tr>
+          <tr><td>Tube mince (anneau), rayon \(R\), axe \(\vec z\)</td><td>\(\dfrac{mR^2}{2}\)</td><td>\(\dfrac{mR^2}{2}\)</td><td>\(mR^2\)</td></tr>
+          <tr><td>Sphère pleine, rayon \(R\)</td><td>\(\dfrac{2mR^2}{5}\)</td><td>\(\dfrac{2mR^2}{5}\)</td><td>\(\dfrac{2mR^2}{5}\)</td></tr>
+        </table></div>
+        <p class="etape">Exemple corrigé : la barre</p>
+        <p>Barre de longueur \(L\) le long de \(\vec x\), centrée en \(G\). Tous ses points ont \(y=z=0\) et \(x\in[-\tfrac L2,\tfrac L2]\), avec \(dm=\dfrac mL\,dx\).</p>
+        <p>\(A=\int(y^2+z^2)\,dm=0\) (tous les points sont sur l'axe \(\vec x\)).</p>
+        \[ B=\int x^2\,dm=\frac{m}{L}\int_{-L/2}^{L/2}x^2\,dx=\frac{m}{L}\cdot\frac{L^3}{12}=\frac{mL^2}{12}\qquad C=\int x^2\,dm=\frac{mL^2}{12} \]
+        <p>Produits d'inertie : tous nuls par symétrie.</p>
+        <div class="res">\(\bar{\bar I}_{(G,S)}=\begin{pmatrix}0&0&0\\0&\dfrac{mL^2}{12}&0\\0&0&\dfrac{mL^2}{12}\end{pmatrix}_b\)</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Plaque rectangulaire mince de dimensions \(2a\) (selon \(\vec x\)) et \(2b\) (selon \(\vec y\)), de masse \(m\), centrée en \(G\), dans le plan \((\vec x,\vec y)\). Calcule \(A\), \(B\), \(C\) et les produits d'inertie.</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>Plaque dans le plan \(z=0\), masse surfacique \(\rho=\dfrac{m}{4ab}\) : \(dm=\rho\,dx\,dy\).</p>
+          \[ A=\int y^2\,dm=\rho\int_{-a}^{a}dx\int_{-b}^{b}y^2\,dy=\rho\cdot2a\cdot\frac{2b^3}{3}=\frac{4ab\rho\,b^2}{3}=\frac{mb^2}{3} \]
+          \[ B=\int x^2\,dm=\frac{ma^2}{3}\qquad C=\int(x^2+y^2)\,dm=A+B=\frac{m(a^2+b^2)}{3} \]
+          <p>\(D=E=0\) (car \(z=0\) pour tous les points) et \(F=\int xy\,dm=0\) (symétrie).</p>
+          <div class="res">\(\bar{\bar I}_{(G,S)}=\dfrac m3\begin{pmatrix}b^2&0&0\\0&a^2&0\\0&0&a^2+b^2\end{pmatrix}\)</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="d2">
+      <div class="exo-head"><span>D2 · Changer de point : Huygens, et solides troués</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="thm"><span class="lab">Théorème de Huygens</span>
+          Si \(\overrightarrow{OG}=a\,\vec x+b\,\vec y+c\,\vec z\) :
+          \[ \bar{\bar I}_{(O,S)}=\bar{\bar I}_{(G,S)}+m\begin{pmatrix}b^2+c^2&-ab&-ac\\-ab&a^2+c^2&-bc\\-ac&-bc&a^2+b^2\end{pmatrix} \]
+          Pour un seul axe : \(I_\Delta=I_{G\Delta}+m\,d^2\), où \(d\) est la distance entre l'axe et l'axe parallèle passant par \(G\).
+        </div>
+        <div class="warnbox"><span class="lab">Piège</span>
+          Huygens ne marche <b>qu'entre \(G\) et un autre point</b>. Pour passer de \(A\) à \(B\), on passe par \(G\) : \(A\to G\) (on retire le terme), puis \(G\to B\) (on l'ajoute). Et le terme ajouté est toujours positif sur la diagonale : l'inertie augmente quand on s'éloigne de \(G\).
+        </div>
+        <p class="etape">Exemple corrigé : barre et cylindre en un point extrême</p>
+        <p><b>Barre en \(O\) (extrémité)</b> : \(\overrightarrow{OG}=\dfrac L2\,\vec x\), donc \((a,b,c)=(\tfrac L2,0,0)\) et le terme ajouté est \(m\,\mathrm{diag}\left(0,\tfrac{L^2}{4},\tfrac{L^2}{4}\right)\).</p>
+        \[ B_O=\frac{mL^2}{12}+\frac{mL^2}{4}=\frac{mL^2}{3}=C_O\qquad A_O=0 \]
+        <p><b>Cylindre plein en \(O\) (centre de la base inférieure)</b> : \(\overrightarrow{OG}=\dfrac h2\,\vec z\), donc \(c=\tfrac h2\) et on ajoute \(m\,\mathrm{diag}\left(\tfrac{h^2}{4},\tfrac{h^2}{4},0\right)\).</p>
+        \[ A_O=B_O=\frac{m(3R^2+h^2)}{12}+\frac{mh^2}{4}=m\left(\frac{R^2}{4}+\frac{h^2}{3}\right)\qquad C_O=\frac{mR^2}{2}\ (\text{inchangé}) \]
+        <div class="method"><span class="lab">Solide troué ou composé : « plein moins trou »</span>
+          <ol>
+            <li>Imagine le solide <b>plein</b> (cylindre complet) et le <b>trou</b> comme un petit solide de même densité.</li>
+            <li>Calcule la masse de chacun avec la même densité \(\rho\) : \(m_{plein}=\rho\pi R^2h\), \(m_{trou}=\rho\pi r^2h\), et la masse réelle \(m=m_{plein}-m_{trou}\).</li>
+            <li>Écris les deux matrices <b>au même point</b> (si le trou n'est pas centré, on ramène sa matrice en \(G\) avec Huygens).</li>
+            <li>Soustrais : \(\bar{\bar I}=\bar{\bar I}_{plein}-\bar{\bar I}_{trou}\).</li>
+          </ol>
+        </div>
+        <p class="etape">Exemple corrigé : cylindre percé, trou centré (\(h=40\) mm, \(R=30\) mm, \(r=10\) mm)</p>
+        <p>\(R^2-r^2=800\ \text{mm}^2\), donc \(m_{plein}=\dfrac{900}{800}m=\dfrac98m\) et \(m_{trou}=\dfrac{100}{800}m=\dfrac18m\).</p>
+        \[ C=\frac98m\frac{R^2}{2}-\frac18m\frac{r^2}{2}=m\,\frac{R^2+r^2}{2}=500\,m\ \text{mm}^2 \]
+        \[ A=B=\frac{9}{8}m\,\frac{3R^2+h^2}{12}-\frac18m\,\frac{3r^2+h^2}{12}=m\,\frac{3(R^2+r^2)+h^2}{12}\approx383{,}3\,m\ \text{mm}^2 \]
+        <div class="res">\(\bar{\bar I}_{(G,S)}=m\,\mathrm{diag}(3{,}83;\,3{,}83;\,5{,}00)\times10^{-4}\ \text{kg·m}^2\) (avec \(m\) en kg).</div>
+        <p class="etape">À toi : trou décentré (\(r=5\) mm, \(\overrightarrow{GG'}=a\,\vec x\) avec \(a=20\) mm)</p>
+        <p class="enonce">Mêmes \(h\) et \(R\) que ci-dessus. Calcule la matrice d'inertie du cylindre percé au point \(G\) (centre du cylindre plein).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>\(R^2-r^2=900-25=875\ \text{mm}^2\), donc \(m_{plein}=\dfrac{36}{35}m\) et \(m_{trou}=\dfrac{1}{35}m\).</p>
+          <p>Le trou (cylindre de rayon \(r\)) a ses propres moments en \(G'\) : \(A'=B'=m_{trou}\dfrac{3r^2+h^2}{12}\), \(C'=m_{trou}\dfrac{r^2}{2}\). On le ramène en \(G\) avec Huygens (\(\overrightarrow{GG'}=a\,\vec x\) : on ajoute \(m_{trou}a^2\) sur \(B\) et sur \(C\), rien sur \(A\)).</p>
+          \[ A=\frac{36}{35}m\frac{3R^2+h^2}{12}-\frac1{35}m\frac{3r^2+h^2}{12}\approx364{,}6\,m\ \text{mm}^2 \]
+          \[ B=A-m_{trou}a^2=364{,}6\,m-\frac{400}{35}m\approx353{,}2\,m\ \text{mm}^2 \]
+          \[ C=\frac{36}{35}m\frac{R^2}{2}-\frac1{35}m\left(\frac{r^2}{2}+a^2\right)\approx451{,}1\,m\ \text{mm}^2 \]
+          <p>Les produits d'inertie sont nuls (le trou est sur l'axe \(\vec x\), les plans \((\vec x,\vec y)\) et \((\vec x,\vec z)\) restent plans de symétrie).</p>
+          <div class="res">\(\bar{\bar I}_{(G,S)}\approx m\,\mathrm{diag}(3{,}65;\,3{,}53;\,4{,}51)\times10^{-4}\) kg·m². Ce n'est plus un solide de révolution : \(A\neq B\).</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="d3">
+      <div class="exo-head"><span>D3 · Le moment cinétique : \(\vec\sigma=\bar{\bar I}\cdot\vec\Omega\)</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="def"><span class="lab">Formule</span>
+          \[ \vec\sigma_{A\in S/R}=\bar{\bar I}_{(A,S)}\cdot\vec\Omega_{S/R}+m\,\overrightarrow{AG}\wedge\vec V_{A\in S/R} \]
+          Le second terme est <b>nul</b> si \(A=G\) ou si \(A\) est un point <b>fixe dans \(R\)</b>. Il reste alors \(\vec\sigma_A=\bar{\bar I}_{(A,S)}\cdot\vec\Omega_{S/R}\).
+          Pour un point matériel \(M\) : \(\vec\sigma_A=\overrightarrow{AM}\wedge m\vec V_M\) (c'est le balourd ponctuel d'un TD).
+        </div>
+        <div class="method"><span class="lab">Recette</span>
+          <ol>
+            <li>Écrire \(\vec\Omega_{S/R}\) (outil M5) et la matrice \(\bar{\bar I}_{(A,S)}\) (D1, D2).</li>
+            <li>Les mettre <b>dans la même base</b> : celle où la matrice est donnée. On projette donc \(\vec\Omega\) dans cette base (outil M1).</li>
+            <li>Multiplier : ligne par colonne. Si la matrice est diagonale, on multiplie composante par composante.</li>
+          </ol>
+          Cas simple : rotation autour de l'axe fixe \(\vec z\) avec \(A\) sur l'axe : \(\vec\sigma\cdot\vec z=J\,\omega\) (\(J\) moment d'inertie par rapport à l'axe).
+        </div>
+        <p class="etape">Exemple corrigé : l'arbre déséquilibré</p>
+        <p>Un solide tourne autour de l'axe fixe \(\vec x\) à la vitesse \(\omega\) : \(\vec\Omega=\omega\,\vec x\). Sa matrice en \(O\) (point de l'axe) est non diagonale :</p>
+        \[ \bar{\bar I}_{(O,S)}=\begin{pmatrix}A&-F&-E\\-F&B&-D\\-E&-D&C\end{pmatrix} \]
+        <p>On multiplie par \((\omega,0,0)\) : on récupère la <b>première colonne</b> multipliée par \(\omega\).</p>
+        <div class="res">\(\vec\sigma_O=\omega\,(A\,\vec x-F\,\vec y-E\,\vec z)\)</div>
+        <p>Interprétation : \(\vec\sigma\) n'est pas parallèle à l'axe de rotation dès que \(E\) ou \(F\) est non nul. C'est l'origine de la vibration d'une roue mal équilibrée (voir D4 et D8).</p>
+        <div class="warnbox"><span class="lab">Piège</span>
+          Multiplier une matrice écrite dans la base \(2\) par un vecteur écrit dans la base \(0\) n'a aucun sens. Si \(\vec\Omega=\dot\alpha\,\vec z\) et que la matrice est dans la base \(2\), il faut d'abord écrire \(\vec z\) dans la base \(2\) (outil M1).
+        </div>
+        <p class="etape">À toi (1)</p>
+        <p class="enonce">Éolienne : la girouette \(1\) est en liaison pivot d'axe \((K,\vec z)\) avec le support \(0\), de moment d'inertie \(J\) par rapport à cet axe. Donne \(\vec z\cdot\vec\sigma_{K\in1/0}\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>La girouette tourne autour de l'axe fixe \((K,\vec z)\) à la vitesse \(\dot\alpha\) : \(\vec\Omega_{1/0}=\dot\alpha\,\vec z\). Le point \(K\) est fixe dans \(R_0\), donc \(\vec\sigma_K=\bar{\bar I}_{(K,1)}\cdot\vec\Omega\).</p>
+          <div class="res">\(\vec z\cdot\vec\sigma_{K\in1/0}=J\,\dot\alpha\)</div>
+        </div></details>
+        <p class="etape">À toi (2) : plus long</p>
+        <p class="enonce">Éolienne : l'hélice \(2\) tourne autour de \((K,\vec x_1)\) par rapport à la girouette (angle \(\beta\), \(\dot\beta\)). Sa matrice en \(G\) est \(\mathrm{diag}(A,B,C)\) dans \((\vec x_2,\vec y_2,\vec z_2)\), \(\overrightarrow{KG}=a\,\vec x_1\) et sa masse est \(M\). Calcule \(\vec\sigma_{K\in2/0}\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p><b>Étape 1 : rotation.</b> \(\vec\Omega_{2/0}=\vec\Omega_{2/1}+\vec\Omega_{1/0}=\dot\beta\,\vec x_1+\dot\alpha\,\vec z\). Dans la base \(2\), avec \(\vec z=\sin\beta\,\vec y_2+\cos\beta\,\vec z_2\) (outil M1) :</p>
+          \[ \vec\Omega_{2/0}=\dot\beta\,\vec x_2+\dot\alpha\sin\beta\,\vec y_2+\dot\alpha\cos\beta\,\vec z_2 \]
+          <p><b>Étape 2 : matrice en \(K\).</b> \(K\) est fixe dans \(R_0\), mais la matrice est donnée en \(G\) : on utilise Huygens avec \((a,b,c)=(a,0,0)\), qui ajoute \(Ma^2\) sur \(B\) et sur \(C\) :</p>
+          \[ \bar{\bar I}_{(K,2)}=\mathrm{diag}\bigl(A,\ B+Ma^2,\ C+Ma^2\bigr) \]
+          <p><b>Étape 3 : produit.</b></p>
+          <div class="res">\(\vec\sigma_{K\in2/0}=A\dot\beta\,\vec x_2+(B+Ma^2)\,\dot\alpha\sin\beta\,\vec y_2+(C+Ma^2)\,\dot\alpha\cos\beta\,\vec z_2\)</div>
+          <p>Contrôle : en passant par \(G\) (formule complète \(\bar{\bar I}_G\cdot\vec\Omega+m\,\overrightarrow{KG}\wedge\vec V_{G}\)), on trouve la même chose : c'est une bonne vérification à faire une fois.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="d4">
+      <div class="exo-head"><span>D4 · Le moment dynamique : \(\vec\delta=\dfrac{d\vec\sigma}{dt}\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="def"><span class="lab">Formule</span>
+          \[ \vec\delta_{A\in S/R}=\left[\frac{d\vec\sigma_{A\in S/R}}{dt}\right]_R+\vec V_{A/R}\wedge m\vec V_{G\in S/R} \]
+          Si \(A\) est <b>fixe dans \(R\)</b> ou si \(A=G\), le second terme est nul : \(\vec\delta_A=\dfrac{d\vec\sigma_A}{dt}\).
+        </div>
+        <div class="method"><span class="lab">Recette</span>
+          <ol>
+            <li>Calculer \(\vec\sigma_A\) (outil D3), en gardant la base où la matrice est simple (une base liée au solide).</li>
+            <li>Dériver par rapport à \(R\) avec la formule de Bour (M3) : les vecteurs de base liés au solide ont pour dérivée \(\vec\Omega_{S/R}\wedge(\ldots)\).</li>
+            <li>Rotation uniforme autour d'un axe fixe avec matrice diagonale (\(G\) sur l'axe) : \(\vec\delta=J\ddot\theta\,\vec z\) et il n'y a rien d'autre.</li>
+          </ol>
+          <b>Astuce</b> : si seule la composante sur un vecteur \(\vec z\) <b>fixe dans \(R\)</b> intéresse, on a \(\vec z\cdot\dfrac{d\vec\sigma}{dt}=\dfrac{d(\vec z\cdot\vec\sigma)}{dt}\) (car \(\dfrac{d\vec z}{dt}=\vec 0\) dans \(R\)) : on projette d'abord, on dérive ensuite. C'est ce que fait l'éolienne.
+        </div>
+        <p class="etape">Exemple corrigé : pourquoi une roue mal équilibrée vibre</p>
+        <p>Reprenons le solide de D3 qui tourne à \(\omega\) <b>constante</b> autour de \(\vec x\) fixe, avec seulement \(E\neq0\) (\(D=F=0\)). Sa matrice dans la base \(1\) liée au solide est \(\begin{pmatrix}A&0&-E\\0&B&0\\-E&0&C\end{pmatrix}\), et</p>
+        \[ \vec\sigma_O=\omega A\,\vec x-\omega E\,\vec z_1 \]
+        <p>\(O\) est fixe : \(\vec\delta_O=\dfrac{d\vec\sigma_O}{dt}\). On dérive terme à terme : \(\vec x\) est fixe (dérivée nulle) ; \(\vec z_1\) tourne avec le solide : \(\dfrac{d\vec z_1}{dt}=\vec\Omega\wedge\vec z_1=\omega\,\vec x\wedge\vec z_1=-\omega\,\vec y_1\).</p>
+        \[ \vec\delta_O=-\omega E\left(-\omega\,\vec y_1\right)=\omega^2E\,\vec y_1 \]
+        <div class="res">\(\vec\delta_O=\omega^2E\,\vec y_1\) : un moment <b>perpendiculaire à l'axe</b>, qui tourne avec le solide.</div>
+        <p>Les paliers doivent fournir ce moment : ils sont secoués deux fois par tour, avec une amplitude qui croît comme \(\omega^2\). Si \(E=0\) (et \(F=0\)), le solide tourne sans moment d'inertie perturbateur : il est <b>équilibré dynamiquement</b>.</p>
+        <p class="etape">À toi</p>
+        <p class="enonce">Même solide, mais avec \(F\neq0\) et \(E=D=0\). Calcule \(\vec\sigma_O\) puis \(\vec\delta_O\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>Matrice \(\begin{pmatrix}A&-F&0\\-F&B&0\\0&0&C\end{pmatrix}\) ; \(\vec\Omega=\omega\,\vec x\) : première colonne \(\times\,\omega\).</p>
+          <p>\(\vec\sigma_O=\omega A\,\vec x-\omega F\,\vec y_1\).</p>
+          <p>Dérivée : \(\dfrac{d\vec y_1}{dt}=\omega\,\vec x\wedge\vec y_1=\omega\,\vec z_1\), donc \(\vec\delta_O=-\omega F\cdot\omega\,\vec z_1\).</p>
+          <div class="res">\(\vec\delta_O=-\omega^2F\,\vec z_1\)</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="d5">
+      <div class="exo-head"><span>D5 · Le PFD : la méthode en 7 étapes</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="thm"><span class="lab">PFD (référentiel galiléen)</span>
+          \[ \{\mathcal T_{ext\to S}\}_A=\{\mathcal D_{S/R_g}\}_A \]
+          soit deux équations vectorielles : \(\ \vec R_{ext\to S}=m\vec\Gamma_{G\in S/R_g}\ \) (résultante) et \(\ \vec M_{A,ext\to S}=\vec\delta_{A\in S/R_g}\ \) (moment). Au plus <b>6 équations scalaires</b>.
+          La statique est le cas particulier \(\vec\Gamma_G=\vec0\) et \(\vec\delta_A=\vec0\).
+        </div>
+        <div class="method"><span class="lab">Les 7 étapes</span>
+          <ol>
+            <li><b>Graphe de liaisons</b> (V4) : qui touche qui, avec quelles liaisons.</li>
+            <li><b>Isoler</b> une pièce ou un ensemble (V2) : on choisit ce qui fait apparaître l'inconnue voulue.</li>
+            <li><b>Inventaire des actions extérieures</b> (V3), avec leurs torseurs et leurs inconnues. Compter les inconnues.</li>
+            <li><b>Mouvement</b> de l'isolé par rapport au repère galiléen (M4, M5) : translation, rotation autour d'un axe, ou général ?</li>
+            <li><b>Torseur dynamique</b> \(\{m\vec\Gamma_G\ ;\ \vec\delta_A\}\) (D3, D4). Cas particuliers : translation (\(\vec\delta_G=\vec0\)), rotation autour d'un axe fixe (\(\vec\delta\cdot\vec z=J\ddot\theta\)).</li>
+            <li><b>Écrire l'égalité</b> des deux torseurs <b>au même point et dans la même base</b>.</li>
+            <li><b>Choisir les équations utiles</b> (D6) et résoudre.</li>
+          </ol>
+        </div>
+        <p class="etape">Exemple corrigé : lecteur de DVD, le chariot \(3\)</p>
+        <ol>
+          <li>Graphe de liaisons : figure de V4.</li>
+          <li>On isole le chariot \(3\) (masse \(m_3\)).</li>
+          <li>Actions extérieures : poids (vertical), glissière du bâti \(0\) (aucune composante selon \(\vec x_0\), c'est l'axe libre), hélicoïdale de la vis \(2\) (composante \(X_{23}\) selon \(\vec x_0\)).</li>
+          <li>Mouvement de \(3\) par rapport à \(0\) : <b>translation rectiligne</b> selon \(\vec x_0\), d'accélération \(a\).</li>
+          <li>Torseur dynamique : résultante \(m_3a\,\vec x_0\) ; moment nul en \(G_3\).</li>
+          <li>PFD, résultante, projetée sur \(\vec x_0\).</li>
+        </ol>
+        <div class="rappel"><span class="lab">Rappel · théorème de la résultante dynamique</span>\[ \sum\vec F_{ext\to S}=m\,\vec\Gamma_{G\in S/R_g} \]</div>
+        <p>Projection sur \(\vec x_0\) : le poids est vertical (0 selon \(\vec x_0\)), la glissière ne transmet rien selon \(\vec x_0\). Reste uniquement la vis.</p>
+        <div class="res">\(X_{23}=m_3\,a\)</div>
+        <p>Une seule équation suffisait, parce que l'inconnue voulue est la seule à avoir une composante selon \(\vec x_0\).</p>
+        <p class="etape">À toi</p>
+        <p class="enonce">Toujours le DVD. On isole la vis \(2\) (inertie \(I_{vis}\) par rapport à son axe \(\vec x_0\), \(G\) sur l'axe, poids négligé). Elle reçoit le couple moteur \(C_m\,\vec x_0\) (en \(D\)), le pivot du bâti en \(C\), et l'action du chariot \(3\) en \(B\) (moment \(L_{32}\) sur \(\vec x_0\)). Écris l'équation de moment sur \(\vec x_0\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>La vis tourne autour de l'axe fixe \((\vec x_0)\) avec \(G\) sur l'axe : le moment dynamique projeté sur \(\vec x_0\) vaut \(I_{vis}\,\ddot\theta\) (outils D3-D4).</p>
+          <p>Moments des actions extérieures sur \(\vec x_0\) : le moteur apporte \(C_m\) ; le pivot ne transmet aucun moment sur l'axe libre ; le chariot apporte \(L_{32}\). Les points \(B\), \(C\), \(D\) étant sur l'axe, le moment sur \(\vec x_0\) est le même en chacun d'eux.</p>
+          <div class="res">\(C_m+L_{32}=I_{vis}\,\ddot\theta\)</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="d6">
+      <div class="exo-head"><span>D6 · Choisir la bonne équation : point et axe de projection</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="method"><span class="lab">Recette</span>
+          Le PFD donne jusqu'à 6 équations, mais souvent une seule suffit. Pour la trouver :
+          <ol>
+            <li>Lister les <b>inconnues</b> (efforts de liaison surtout) et repérer celle qu'on cherche, ou l'équation du mouvement.</li>
+            <li>Prendre le <b>point</b> par où passent beaucoup d'efforts inconnus : un pivot, un centre de rotule. Leur moment y est nul.</li>
+            <li>Projeter sur la <b>direction</b> où les moments de liaison restants sont nuls : pour un pivot, l'axe du pivot.</li>
+          </ol>
+          Résultat : une équation <b>sans les inconnues de liaison</b>, qui relie directement le mouvement aux actions qui nous intéressent.
+        </div>
+        <p class="etape">Exemple corrigé : barre pendulaire</p>
+        <p>Barre homogène (masse \(m\), longueur \(L\)) articulée en \(O\) par un pivot parfait d'axe \(\vec z\) (horizontal, perpendiculaire au plan du mouvement). \(\vec x\) est vertical vers le bas, \(\vec u\) le long de la barre avec \(\theta=(\vec x,\vec u)\), donc \(\vec u=\cos\theta\,\vec x+\sin\theta\,\vec y\). On cherche l'équation du mouvement \(\ddot\theta\).</p>
+        <p><b>Inconnues</b> : la force du pivot (deux composantes \(X_O,Y_O\)). <b>Point</b> : \(O\) : cette force passe par \(O\), son moment y est nul. <b>Projection</b> : sur \(\vec z\), l'axe du pivot, où le pivot ne transmet aucun moment.</p>
+        <div class="rappel"><span class="lab">Rappel · rotation autour d'un axe fixe</span>\[ \vec\delta_O\cdot\vec z=J_O\,\ddot\theta\qquad\text{avec}\ J_O=\frac{mL^2}{3}\ (\text{D2: barre en son extrémité}) \]</div>
+        <p>Moment du poids \(m g\,\vec x\) appliqué en \(G\) (\(\overrightarrow{OG}=\tfrac L2\vec u\)) :</p>
+        \[ \overrightarrow{OG}\wedge m g\,\vec x=\frac L2mg\,(\cos\theta\,\vec x+\sin\theta\,\vec y)\wedge\vec x=\frac L2mg\sin\theta\,(\vec y\wedge\vec x)=-\frac{mgL}{2}\sin\theta\,\vec z \]
+        <p>Équation de moment sur \(\vec z\) :</p>
+        \[ \frac{mL^2}{3}\,\ddot\theta=-\frac{mgL}{2}\sin\theta\ \Longrightarrow\ \ddot\theta=-\frac{3g}{2L}\sin\theta \]
+        <div class="res">\(\ddot\theta+\dfrac{3g}{2L}\sin\theta=0\) : l'équation du mouvement, sans aucune inconnue de liaison.</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Régulateur centrifuge : la masselotte \(2\) est en pivot d'axe \((A,\vec z_1)\) avec \(1\). Pourquoi l'énoncé demande-t-il d'écrire le théorème du moment dynamique <b>en \(A\), projeté sur \(\vec z_1\)</b> ?</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>Les efforts inconnus du pivot passent par \(A\) : leur moment en \(A\) est nul. Et le pivot ne transmet aucun moment selon son axe \(\vec z_1\). Dans l'équation de moment en \(A\) projetée sur \(\vec z_1\), il ne reste donc <b>ni les inconnues du pivot</b>, ni les composantes du moment hors de l'axe.</p>
+          <p>Il reste le moment dynamique de la masselotte (côté mouvement) et le moment des actions utiles (effort du ressort, poids). On accède ainsi directement à l'effort du ressort \(F_R\), qui est l'objectif de l'étude, sans calculer les actions du pivot.</p>
+          <div class="res">Bon point + bon axe = une équation sans inconnues parasites.</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="d7">
+      <div class="exo-head"><span>D7 · La liaison hélicoïdale : vis et écrou</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="def"><span class="lab">Définition</span>
+          Dans une liaison hélicoïdale d'axe \(\vec x\) et de <b>pas \(p\)</b> (distance parcourue en translation pour un tour), la translation et la rotation relatives sont <b>liées</b> :
+          \[ x=\frac{p}{2\pi}\,\theta\qquad V=\frac{p}{2\pi}\,\omega\qquad a=\frac{p}{2\pi}\,\ddot\theta \]
+          Pour les efforts : puissance nulle (liaison parfaite) donc \(X\,V+L\,\omega=0\), soit
+          \[ L=-\frac{p}{2\pi}\,X \]
+          (pour un pas à droite ; le signe dépend de la convention). Une seule relation lie la force et le couple : la liaison convertit un couple en effort.
+        </div>
+        <p class="etape">Exemple corrigé</p>
+        <p>Pas \(p=4\) mm, chariot de masse \(m_3=10\) g, accélération \(a=50\) m/s².</p>
+        \[ \ddot\theta=\frac{2\pi\,a}{p}=\frac{2\pi\times50}{0{,}004}\approx7{,}85\times10^4\ \text{rad/s}^2 \]
+        <p>Force (PFD du chariot) : \(X=m_3a=0{,}01\times50=0{,}5\) N. Couple associé :</p>
+        \[ |L|=\frac{p}{2\pi}\,X=\frac{0{,}004}{2\pi}\times0{,}5\approx3{,}2\times10^{-4}\ \text{N·m} \]
+        <div class="res">Une très grande accélération angulaire, mais un couple minuscule : le pas fin sert de démultiplicateur.</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Une vis de pas \(p=2\) mm tourne avec \(\ddot\theta=1000\) rad/s². Quelle est l'accélération de l'écrou ?</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <div class="res">\(a=\dfrac{p}{2\pi}\ddot\theta=\dfrac{0{,}002}{2\pi}\times1000\approx0{,}318\ \text{m/s}^2\)</div>
+          <p>Un millième de la rotation devient une toute petite translation : bon pour la précision, mauvais pour la vitesse.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="d8">
+      <div class="exo-head"><span>D8 · Équilibrer un solide tournant</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="def"><span class="lab">Conditions d'équilibrage</span>
+          Un solide tournant autour d'un axe \(\vec x\) est équilibré si la rotation ne crée aucune action de liaison.
+          <ul>
+            <li><b>Équilibrage statique</b> : le centre de gravité est <b>sur l'axe</b> (\(y_G=z_G=0\)). Sinon la résultante dynamique \(m\vec\Gamma_G\) est non nulle.</li>
+            <li><b>Équilibrage dynamique</b> : les produits d'inertie \(E=\int xz\,dm\) et \(F=\int xy\,dm\) sont <b>nuls</b> (l'axe est axe principal d'inertie). Sinon le moment dynamique est non nul (D4).</li>
+          </ul>
+          Pour des masses ponctuelles \(m_i\) en \((x_i,y_i,z_i)\) :
+          \[ \sum m_iy_i=0,\quad \sum m_iz_i=0\ (\text{statique})\qquad\sum m_ix_iy_i=0,\quad \sum m_ix_iz_i=0\ (\text{dynamique}) \]
+        </div>
+        <p class="etape">Exemple corrigé : un défaut qu'on ne voit pas à l'arrêt</p>
+        <p>Deux masses identiques \(m\) fixées sur un arbre : l'une en \((0,\ r,\ 0)\), l'autre en \((c,\ -r,\ 0)\) (dans deux plans différents, de côtés opposés).</p>
+        <p>Statique : \(\sum m_iy_i=mr-mr=0\), \(\sum m_iz_i=0\). Le centre de gravité est sur l'axe : l'arbre posé sur deux couteaux reste en équilibre, il « semble » équilibré.</p>
+        <p>Dynamique : \(F=\sum m_ix_iy_i=m\cdot0\cdot r+m\cdot c\cdot(-r)=-mcr\neq0\).</p>
+        <div class="res">Équilibré statiquement mais <b>pas dynamiquement</b> : il crée un moment \(\omega^2F\) qui tourne avec l'arbre (D4).</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Pour corriger, on ajoute deux contre-masselottes : \(m_3\) dans le plan \(x=0\) et \(m_4\) dans le plan \(x=c\). Où les placer ?</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>Inconnues : \(m_3y_3,\ m_3z_3,\ m_4y_4,\ m_4z_4\). Quatre conditions (deux statiques, deux dynamiques) :</p>
+          <ul>
+            <li>\(\sum m y=0\) : \(mr-mr+m_3y_3+m_4y_4=0\), soit \(m_3y_3+m_4y_4=0\).</li>
+            <li>\(\sum m z=0\) : \(m_3z_3+m_4z_4=0\).</li>
+            <li>\(F=0\) : \(-mcr+m_4\,c\,y_4=0\), soit \(m_4y_4=mr\).</li>
+            <li>\(E=0\) : \(m_4\,c\,z_4=0\), donc \(z_4=0\) (puis \(z_3=0\)).</li>
+          </ul>
+          <p>On en tire \(m_4y_4=mr\) (donc \(m_3y_3=-mr\)).</p>
+          <div class="res">Dans chaque plan, une contre-masse <b>opposée</b> à la masse existante : \(m_3\) du côté \(-y\) dans le plan \(x=0\), \(m_4\) du côté \(+y\) dans le plan \(x=c\), avec \(m_3r_3=m_4r_4=mr\).</div>
+          <p>C'est l'idée de l'équilibreuse du TD : deux plans de correction, parce qu'il y a deux conditions à satisfaire (statique et dynamique).</p>
+        </div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= PARTIE 3 ======================= -->
+  <section class="block" id="ener">
+    <h2>Partie 3 — Énergétique (TD C04)</h2>
+    <p>Ici on raisonne en <b>énergie et en puissance</b> au lieu de forces et de moments. Avantage : une seule équation scalaire, et les efforts de liaison parfaite disparaissent. Condition : le système doit être décrit par <b>un seul paramètre</b> (un seul degré de liberté).</p>
+
+    <div class="exo-card" id="e1">
+      <div class="exo-head"><span>E1 · Le roulement sans glissement</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="def"><span class="lab">Définition</span>
+          Il y a <b>roulement sans glissement</b> en \(I\) (point de contact) entre un solide \(S\) et son support \(R'\) si la vitesse de glissement est nulle : \(\vec V_{I\in S/R'}=\vec 0\).
+          Le point de contact est donc instantanément immobile : c'est le <b>centre instantané de rotation</b>.
+        </div>
+        <div class="method"><span class="lab">Recette</span>
+          Pour relier la vitesse du centre \(G\) à la rotation, on utilise le champ des vitesses (M4) à partir de \(I\) :
+          \[ \vec V_{G\in S/R'}=\vec V_{I\in S/R'}+\overrightarrow{GI}\wedge\vec\Omega_{S/R'}=\overrightarrow{GI}\wedge\vec\Omega_{S/R'} \]
+          Pour une roue de rayon \(R\) : \(\|\vec V_G\|=R\,|\omega|\). La puissance développée par les efforts de contact en \(I\) est <b>nulle</b> (la vitesse de \(I\) l'est).
+        </div>
+        <p class="etape">Exemple corrigé</p>
+        <p>Roue de rayon \(R\) sur un sol horizontal, avançant vers \(+\vec x\) (\(\vec y\) vertical vers le haut, \(\vec z=\vec x\wedge\vec y\) vers le lecteur). Elle roule dans le sens horaire : \(\vec\Omega=-\omega\,\vec z\) avec \(\omega>0\). Le contact est en \(I\), et \(\overrightarrow{GI}=-R\,\vec y\).</p>
+        \[ \vec V_G=(-R\,\vec y)\wedge(-\omega\,\vec z)=R\omega\,(\vec y\wedge\vec z)=R\omega\,\vec x \]
+        <div class="res">\(\vec V_G=R\omega\,\vec x\) : le centre avance de \(2\pi R\) par tour, sans glisser.</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Une roue de rayon \(R=0{,}3\) m avance à \(V_G=5\) m/s sans glisser. Calcule \(\omega\), puis la vitesse du point le plus haut de la roue.</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>\(\omega=\dfrac{V_G}{R}=\dfrac{5}{0{,}3}\approx16{,}7\) rad/s (environ 159 tr/min).</p>
+          <p>Point haut \(T\) : \(\overrightarrow{TI}=-2R\,\vec y\), donc \(\vec V_T=\vec V_I+\overrightarrow{TI}\wedge\vec\Omega=(-2R\,\vec y)\wedge(-\omega\,\vec z)=2R\omega\,\vec x\).</p>
+          <div class="res">\(\omega\approx16{,}7\) rad/s ; \(V_T=2V_G=10\) m/s.</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="e2">
+      <div class="exo-head"><span>E2 · L'énergie cinétique d'un solide : choisir la bonne formule</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="def"><span class="lab">Définition</span>
+          \[ 2E_{c(S/R)}=\{\mathcal V_{S/R}\}\otimes\{\mathcal C_{S/R}\}=\vec V_{A\in S/R}\cdot m\vec V_{G\in S/R}+\vec\Omega_{S/R}\cdot\vec\sigma_{A\in S/R} \]
+          Le symbole \(\otimes\) (comoment) multiplie les deux torseurs <b>écrits au même point</b> : résultante \(\times\) moment + moment \(\times\) résultante. Le résultat ne dépend pas du point choisi.
+        </div>
+        <div class="method"><span class="lab">Choisir la formule</span>
+          <ul>
+            <li>Le solide est en <b>translation</b> : \(2E_c=m\,V_G^2\).</li>
+            <li>Rotation autour d'un <b>axe fixe</b> (moment d'inertie \(J\)) : \(2E_c=J\,\omega^2\).</li>
+            <li>Un <b>point \(A\) fixe</b> (ou à vitesse nulle, même instantanément) : \(2E_c=\vec\Omega\cdot\bar{\bar I}_{(A,S)}\cdot\vec\Omega\).</li>
+            <li>Cas général, avec \(G\) : \(2E_c=m\,V_G^2+\vec\Omega\cdot\bar{\bar I}_{(G,S)}\cdot\vec\Omega\).</li>
+            <li>Plusieurs solides : \(E_{c(\Sigma/R)}=\sum_iE_{c(S_i/R)}\).</li>
+          </ul>
+          <b>Conseil</b> : chercher d'abord un point fixe ou un axe fixe, c'est le plus court.
+        </div>
+        <p class="etape">Exemple corrigé : le cylindre qui roule sans glisser</p>
+        <p>Cylindre plein homogène (masse \(m\), rayon \(R\)), \(J=\dfrac{mR^2}{2}\) autour de son axe, roulant sans glisser (E1 : \(V_G=R\omega\)).</p>
+        <p><b>Au point \(G\)</b> (cas général) :</p>
+        \[ 2E_c=mV_G^2+J\omega^2=mR^2\omega^2+\frac{mR^2}{2}\omega^2=\frac32\,mR^2\omega^2 \]
+        <p><b>Au point \(I\)</b> (vitesse nulle) : \(2E_c=J_I\,\omega^2\) avec, par Huygens, \(J_I=\dfrac{mR^2}{2}+mR^2=\dfrac32\,mR^2\) : même résultat.</p>
+        <div class="res">\(E_c=\dfrac34\,mR^2\omega^2\) : l'énergie ne dépend pas du point de calcul, on peut choisir le plus commode.</div>
+        <p>Décomposition utile : \(\tfrac12mV_G^2=\tfrac12mR^2\omega^2\) (translation, 2/3 du total) et \(\tfrac12J\omega^2=\tfrac14mR^2\omega^2\) (rotation propre, 1/3).</p>
+        <p class="etape">À toi : la toupie</p>
+        <p class="enonce">Toupie de masse \(m\), point \(O\) fixe, matrice \(\mathrm{diag}(A,A,C)\) dans une base liée à l'axe \(\vec z_1\). Les angles d'Euler : précession \(\psi\) autour de \(\vec z\), nutation \(\theta\) autour de \(\vec u\), rotation propre \(\varphi\) autour de \(\vec z_1\). Calcule \(E_c\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p><b>Étape 1 : formule.</b> \(O\) est fixe : \(2E_c=\vec\Omega\cdot\bar{\bar I}_{(O,S)}\cdot\vec\Omega\).</p>
+          <p><b>Étape 2 : rotation (M5).</b></p>
+          \[ \vec\Omega_{S/R}=\dot\psi\,\vec z+\dot\theta\,\vec u+\dot\varphi\,\vec z_1 \]
+          <p><b>Étape 3 : une seule base (M1).</b> Dans la base \((\vec u,\vec w,\vec z_1)\), on écrit \(\vec z=\sin\theta\,\vec w+\cos\theta\,\vec z_1\), donc</p>
+          \[ \vec\Omega=\dot\theta\,\vec u+\dot\psi\sin\theta\,\vec w+\bigl(\dot\varphi+\dot\psi\cos\theta\bigr)\,\vec z_1 \]
+          <p><b>Étape 4 : produit.</b> La toupie est de révolution autour de \(\vec z_1\) : la matrice est \(\mathrm{diag}(A,A,C)\) aussi dans \((\vec u,\vec w,\vec z_1)\).</p>
+          <div class="res">\(2E_c=A\left(\dot\theta^2+\dot\psi^2\sin^2\theta\right)+C\left(\dot\varphi+\dot\psi\cos\theta\right)^2\)</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="e3">
+      <div class="exo-head"><span>E3 · L'inertie équivalente</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="def"><span class="lab">Définition</span>
+          Pour un ensemble de pièces tournant à des vitesses différentes (ou en translation), l'<b>inertie équivalente ramenée à un axe</b> est l'inertie \(J_{eq}\) qu'aurait cet axe, seul, pour avoir la même énergie cinétique :
+          \[ 2E_{c(\Sigma/R)}=J_{eq}\,\omega^2 \]
+          Utile pour dimensionner un moteur : \(C_m\approx J_{eq}\,\dot\omega\) (en ignorant les pertes et la charge).
+        </div>
+        <div class="method"><span class="lab">Recette</span>
+          <ol>
+            <li>Écrire \(2E_c\) de chaque pièce avec les formules E2 (\(J_i\omega_i^2\) en rotation, \(M v^2\) en translation).</li>
+            <li>Exprimer toutes les vitesses en fonction de <b>celle de l'axe de référence</b> (le moteur), grâce aux rapports de transmission.</li>
+            <li>Sommer, puis identifier \(J_{eq}\).</li>
+          </ol>
+          Engrenages extérieurs : le sens s'inverse à chaque étage, mais le signe disparaît dans le carré. Rapport \(\lambda\) du 1<sup>er</sup> engrenage et \(\mu\) du second (rapports de vitesses en valeur absolue) :
+          \(\omega_2=\lambda\omega_1\), \(\omega_3=\lambda\mu\,\omega_1\), donc
+          \[ J_{eq}=J_1+\lambda^2J_2+\lambda^2\mu^2J_3 \]
+          Translation par pignon-crémaillère : \(v=R\omega\), donc \(J_{eq}=J+MR^2\).
+        </div>
+        <p class="etape">Exemple corrigé</p>
+        <p>Réducteur à deux étages : \(J_1=1{,}0\times10^{-5}\), \(J_2=4{,}0\times10^{-5}\), \(J_3=2{,}0\times10^{-3}\) kg·m², avec \(\lambda=0{,}2\) et \(\mu=0{,}5\) (\(\omega_2=0{,}2\,\omega_1\), \(\omega_3=0{,}1\,\omega_1\)).</p>
+        \[ J_{eq}=10^{-5}+0{,}2^2\times4\times10^{-5}+(0{,}2\times0{,}5)^2\times2\times10^{-3}=1{,}0\times10^{-5}+0{,}16\times10^{-5}+2{,}0\times10^{-5} \]
+        <div class="res">\(J_{eq}=3{,}16\times10^{-5}\) kg·m²</div>
+        <p>Interprétation : la charge \(J_3\), 200 fois plus lourde que le rotor moteur, ne pèse que 2·10⁻⁵ à l'axe moteur, car elle tourne dix fois plus lentement (\(0{,}1^2=0{,}01\)). Une démultiplication réduit l'inertie vue par le moteur par le carré du rapport.</p>
+        <p class="etape">À toi</p>
+        <p class="enonce">Un pignon moteur (rayon \(R=0{,}02\) m, inertie \(J=2\times10^{-5}\) kg·m²) entraîne par crémaillère une table de masse \(M=5\) kg en translation. Calcule \(J_{eq}\) à l'axe du pignon.</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>\(2E_c=J\omega^2+Mv^2\) avec \(v=R\omega\) : \(2E_c=\left(J+MR^2\right)\omega^2\).</p>
+          <div class="res">\(J_{eq}=2\times10^{-5}+5\times0{,}02^2=2\times10^{-5}+2\times10^{-3}\approx2{,}02\times10^{-3}\) kg·m²</div>
+          <p>La table, par sa masse, pèse 100 fois plus que le pignon lui-même.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="e4">
+      <div class="exo-head"><span>E4 · La puissance d'une action mécanique</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="def"><span class="lab">Définition</span>
+          La puissance développée par une action extérieure sur \(S\), dans son mouvement par rapport à \(R\), est le comoment (au même point \(A\)) :
+          \[ P_{\Sigma\to S/R}=\{\mathcal T_{\Sigma\to S}\}\otimes\{\mathcal V_{S/R}\}=\vec R_{\Sigma\to S}\cdot\vec V_{A\in S/R}+\vec M_{A,\Sigma\to S}\cdot\vec\Omega_{S/R} \]
+          Cas particuliers : force seule (glisseur) \(P=\vec F\cdot\vec V\) ; couple seul \(P=\vec C\cdot\vec\omega\). Unité : le watt (W).
+        </div>
+        <div class="method"><span class="lab">Recette</span>
+          <ol>
+            <li>Écrire le torseur de l'action (V3) et le torseur cinématique du solide dans le mouvement considéré (M4, M5), <b>au même point</b>.</li>
+            <li>Faire le produit scalaire résultante·vitesse + moment·rotation.</li>
+          </ol>
+          <b>Liaison parfaite</b> : la liaison ne transmet rien dans les directions où elle autorise le mouvement, donc la puissance de l'action mutuelle entre les deux pièces liées est <b>nulle</b>.
+          <b>Frottement</b> : la force tangentielle s'oppose au glissement, donc la puissance est <b>négative</b> (énergie perdue, souvent en chaleur).
+        </div>
+        <p class="etape">Exemple corrigé : une liaison parfaite</p>
+        <p>Pivot d'axe \(\vec x\) en \(A\), torseur \(\left\{\begin{smallmatrix}X&0\\Y&M\\Z&N\end{smallmatrix}\right\}_A\) (V3). Mouvement relatif : rotation \(\omega\,\vec x\) autour de l'axe, \(A\) sur l'axe donc \(\vec V_A=\vec 0\).</p>
+        \[ P=(X,Y,Z)\cdot\vec 0+(0,M,N)\cdot(\omega,0,0)=0+0=0 \]
+        <div class="res">\(P=0\) : un pivot parfait ne consomme ni ne fournit de puissance dans le mouvement relatif.</div>
+        <p class="etape">Exemple corrigé : un contact avec frottement</p>
+        <p>Deux solides \(S_1\), \(S_2\) en contact ponctuel en \(A\), avec glissement : \(\{\mathcal T_{S_1\to S_2}\}_A=\{\vec F_{S_1\to S_2}\ ;\ \vec 0\}\) (pas de moment en \(A\)) et \(\{\mathcal V_{S_2/S_1}\}_A=\{\vec\Omega_{S_2/S_1}\ ;\ \vec V_{A\in S_2/S_1}\}\), avec \(\vec V_{A\in S_2/S_1}\cdot\vec F_{S_1\to S_2}<0\) (la force tangentielle freine le glissement).</p>
+        \[ P_{S_1\leftrightarrow S_2}=\vec F_{S_1\to S_2}\cdot\vec V_{A\in S_2/S_1}+\vec 0\cdot\vec\Omega_{S_2/S_1}=\vec F_{S_1\to S_2}\cdot\vec V_{A\in S_2/S_1} \]
+        <div class="res">\(P_{S_1\leftrightarrow S_2}<0\) : puissance <b>perdue</b> par frottement. Sans glissement (\(\vec V_A=\vec0\)), elle est nulle.</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Un moteur applique un couple \(C=2\) N·m à un arbre qui tourne à \(\omega=100\) rad/s. Quelle puissance fournit-il ? Même question pour une liaison pivot glissant parfaite d'axe \(\vec x\), dont le torseur est \(\left\{\begin{smallmatrix}0&0\\Y&M\\Z&N\end{smallmatrix}\right\}_A\), avec rotation \(\omega\,\vec x\) et translation \(v\,\vec x\) relatives.</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>Moteur : couple seul, \(P=C\,\omega=2\times100=200\) W.</p>
+          <p>Pivot glissant : \(\vec V_A=v\,\vec x\) et \(\vec\Omega=\omega\,\vec x\). La force \((0,Y,Z)\) est perpendiculaire à \(\vec V_A\) et le moment \((0,M,N)\) est perpendiculaire à \(\vec\Omega\) :</p>
+          <div class="res">\(P=0\cdot v+0\cdot\omega=0\) pour le pivot glissant parfait ; \(P=200\) W pour le moteur.</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="e5">
+      <div class="exo-head"><span>E5 · Puissance extérieure ou inter-effort ?</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="def"><span class="lab">Définitions</span>
+          Pour un système \(\Sigma\) isolé, composé de solides \(S_i\) :
+          <ul>
+            <li><b>Puissance extérieure</b> \(P_{\bar\Sigma\to\Sigma/R}\) : puissance des actions venant de l'extérieur. Elle <b>dépend</b> du repère \(R\).</li>
+            <li><b>Puissance des inter-efforts</b> \(P_{S_i\leftrightarrow S_j}=\{\mathcal T_{S_i\to S_j}\}\otimes\{\mathcal V_{S_j/S_i}\}\) : puissance de l'action mutuelle entre deux pièces de \(\Sigma\). Elle ne dépend <b>pas</b> du repère, et elle est <b>nulle</b> si la liaison est parfaite.</li>
+          </ul>
+        </div>
+        <p class="etape">Exemple corrigé : le pendule double</p>
+        <p>On calcule les cinq puissances demandées, puis on les trie selon ce qu'on isole. \(O\) et \(A\) sont des pivots parfaits d'axe \(\vec z\), sans moment sur \(\vec z\).</p>
+        <div class="overflow"><table>
+          <tr><th>Puissance</th><th>Valeur</th><th>Pourquoi</th></tr>
+          <tr><td>(a) \(0\) sur \(1\), mouvement \(1/0\)</td><td>\(0\)</td><td>\(O\) est immobile dans \(R_0\) et le pivot ne transmet pas de moment sur \(\vec z\)</td></tr>
+          <tr><td>(b) \(1\) sur \(2\), mouvement \(2/0\)</td><td>\(\neq0\)</td><td>\(A\) bouge par rapport au bâti : force du pivot \(\times\ \vec V_{A\in2/0}\)</td></tr>
+          <tr><td>(c) \(1\) sur \(2\), mouvement \(2/1\)</td><td>\(0\)</td><td>dans le mouvement <i>relatif</i>, \(A\) est immobile et il n'y a pas de moment sur \(\vec z\) : liaison parfaite</td></tr>
+          <tr><td>(d) pesanteur sur \(1\), mouvement \(1/0\)</td><td>\(mg\,\vec x\cdot\vec V_{G_1\in1/0}\)</td><td>non nulle (le centre de la tige bouge)</td></tr>
+          <tr><td>(e) pesanteur sur \(2\), mouvement \(2/0\)</td><td>\(mg\,\vec x\cdot\vec V_{G_2\in2/0}\)</td><td>non nulle</td></tr>
+        </table></div>
+        <p><b>Si on isole \(\{2\}\)</b> et qu'on applique le TEC dans \(2/0\) : extérieures = (b) et (e) ; pas d'inter-effort (un seul solide). L'effort du pivot \(A\) apparaît.</p>
+        <p><b>Si on isole \(\{1+2\}\)</b> : extérieures = (a), (d), (e) ; inter-effort = \(P_{1\leftrightarrow2}\), qui vaut (c), donc \(0\). L'effort du pivot \(A\) disparaît : plus rien à déterminer pour lui.</p>
+        <div class="res">Isolé \(\{1+2\}\) : \(\dfrac{dE_c}{dt}=\) (d) + (e) seulement. On évite (b), la puissance non nulle d'un effort inconnu.</div>
+        <div class="warnbox"><span class="lab">Piège</span>
+          La puissance d'un pivot <b>dans le repère du bâti</b> n'est pas nulle si le pivot bouge (cas (b)) ; elle l'est dans le mouvement relatif entre les deux pièces liées (cas (c)). C'est la <b>somme</b> des deux actions mutuelles qui est indépendante du repère. Bien noter dans quel mouvement on calcule chaque puissance.
+        </div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Lecteur de DVD : on isole l'ensemble \(\{2+3\}\) (vis + chariot, hélicoïdale parfaite). Parmi la liaison hélicoïdale, le couple moteur, le poids du chariot et la glissière du bâti, lesquelles comptent dans le TEC ?</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <ul>
+            <li><b>Hélicoïdale \(2\)-\(3\)</b> : inter-effort, parfaite, donc \(P_{2\leftrightarrow3}=0\) : <b>ne compte pas</b>.</li>
+            <li><b>Couple moteur</b> sur \(2\) : \(P=C_m\,\dot\theta\) : <b>compte</b>.</li>
+            <li><b>Poids de \(3\)</b> : le chariot se translate horizontalement, le poids est vertical : \(P=0\).</li>
+            <li><b>Glissière du bâti</b> : force perpendiculaire au mouvement, parfaite : \(P=0\). Idem pour le pivot du bâti sur \(2\).</li>
+          </ul>
+          <div class="res">Seul le couple moteur travaille : \(\dfrac{dE_c}{dt}=C_m\,\dot\theta\).</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="exo-card" id="e6">
+      <div class="exo-head"><span>E6 · Le théorème de l'énergie cinétique : la méthode</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <div class="thm"><span class="lab">Théorème de l'énergie cinétique (TEC)</span>
+          Pour un ensemble \(E\) de solides, dans un repère galiléen :
+          \[ \frac{d}{dt}\,E_{c(E/R)}=P_{\bar E\to E/R}+\sum_{i,j}P_{S_i\leftrightarrow S_j} \]
+          La dérivée de l'énergie cinétique est égale à la puissance des actions <b>extérieures</b> plus celle des <b>inter-efforts</b> (nulle pour des liaisons parfaites).
+        </div>
+        <div class="method"><span class="lab">Recette</span>
+          <ol>
+            <li><b>Isoler</b> le système, de façon à avoir un seul paramètre de mouvement (V2).</li>
+            <li>Calculer \(E_c\) en fonction de ce paramètre (E2, E3).</li>
+            <li>Lister les <b>puissances qui comptent</b> : extérieures non nulles + inter-efforts non nuls (E4, E5). Les liaisons parfaites s'éliminent.</li>
+            <li><b>Dériver</b> \(E_c\) par rapport au temps (n'oublie pas la dérivée de \(\dot\theta^2\) : \(2\dot\theta\ddot\theta\)).</li>
+            <li>Égaler, puis <b>simplifier par \(\dot\theta\)</b> (valable tant que \(\dot\theta\neq0\)) pour obtenir l'équation du mouvement.</li>
+          </ol>
+          Avantage sur le PFD : une seule équation, pas d'efforts de liaison. Limite : un seul paramètre, et on n'obtient pas les efforts de liaison.
+        </div>
+        <p class="etape">Exemple corrigé : cylindre plein sur un plan incliné de \(\alpha\)</p>
+        <ol>
+          <li>Système : le cylindre. Un seul paramètre : \(\theta\) (rotation), avec \(V_G=R\dot\theta\) (roulement sans glissement, E1).</li>
+          <li>\(E_c=\dfrac34\,mR^2\dot\theta^2\) (E2).</li>
+          <li>Puissances : le poids, avec \(\vec V_G\) dirigée le long de la pente : \(P_{pes}=mg\sin\alpha\cdot R\dot\theta\). Le contact en \(I\) (sans glissement, \(V_I=0\)) donne \(P=0\). Pas d'inter-effort.</li>
+          <li>Dérivée : \(\dfrac{dE_c}{dt}=\dfrac32\,mR^2\,\dot\theta\ddot\theta\).</li>
+          <li>Égalité :</li>
+        </ol>
+        \[ \frac32\,mR^2\,\dot\theta\,\ddot\theta=mg\sin\alpha\,R\,\dot\theta\ \Longrightarrow\ \ddot\theta=\frac{2g\sin\alpha}{3R} \]
+        <div class="res">\(\ddot\theta=\dfrac{2g\sin\alpha}{3R}\), donc \(a_G=R\ddot\theta=\dfrac23\,g\sin\alpha\) : le cylindre roule moins vite qu'un glisseur sans frottement (\(g\sin\alpha\)), car une partie de l'énergie va dans la rotation.</div>
+        <p class="etape">À toi</p>
+        <p class="enonce">Même pente, mais avec un tube mince de rayon \(R\) et de masse \(m\) (\(J=mR^2\)). Calcule \(\ddot\theta\).</p>
+        <details class="sol"><summary>Correction</summary><div class="sol-body">
+          <p>\(2E_c=mV_G^2+J\omega^2=mR^2\dot\theta^2+mR^2\dot\theta^2=2mR^2\dot\theta^2\), donc \(E_c=mR^2\dot\theta^2\).</p>
+          <p>Dérivée : \(\dfrac{dE_c}{dt}=2mR^2\dot\theta\ddot\theta\). Puissance du poids : \(mg\sin\alpha\,R\dot\theta\).</p>
+          <div class="res">\(2mR^2\ddot\theta=mgR\sin\alpha\ \Longrightarrow\ \ddot\theta=\dfrac{g\sin\alpha}{2R}\), soit \(a_G=\dfrac12g\sin\alpha\)</div>
+          <p>Le tube (masse concentrée au bord) est plus lent que le cylindre plein (\(\tfrac23\) contre \(\tfrac12\)) : plus l'inertie de rotation est grande, plus il accélère lentement.</p>
+        </div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= PARTIE 4 ======================= -->
+  <section class="block" id="carte">
+    <h2>Partie 4 — Carte des TD : quels outils pour quel exercice ?</h2>
+    <p>Lis la ligne de l'exercice, révise les outils cités (les sigles renvoient aux cartes ci-dessus), puis ouvre la correction détaillée.</p>
+    <h3>TD C03 — Dynamique</h3>
+    <div class="overflow"><table>
+      <tr><th>Exercice</th><th>Outils</th><th>Correction</th></tr>
+      <tr><td>1. Calcul de matrices d'inertie (barre, rectangle, quart de disque, cylindre plein, cylindre percé)</td><td><a href="#m6">M6</a>, <a href="#d1">D1</a>, <a href="#d2">D2</a></td><td><a href="c03-dynamique-solide.html#td-1">C03, ex. 1</a></td></tr>
+      <tr><td>2. Lecteur DVD (couple moteur, optimisation du pas)</td><td><a href="#v2">V2</a>, <a href="#v3">V3</a>, <a href="#v4">V4</a>, <a href="#d5">D5</a>, <a href="#d7">D7</a>, <a href="#m7">M7</a>, <a href="#e5">E5</a></td><td><a href="c03-dynamique-solide.html#td-2">C03, ex. 2</a></td></tr>
+      <tr><td>3. Arbre de navire (efforts aux paliers, effet gyroscopique)</td><td><a href="#v3">V3</a>, <a href="#m1">M1</a>, <a href="#m3">M3</a>, <a href="#m4">M4</a>, <a href="#m5">M5</a>, <a href="#d1">D1</a>, <a href="#d3">D3</a>, <a href="#d4">D4</a>, <a href="#d5">D5</a></td><td><a href="c03-dynamique-solide.html#td-3">C03, ex. 3</a></td></tr>
+      <tr><td>4. Éolienne (moments cinétique et dynamique)</td><td><a href="#m1">M1</a>, <a href="#m5">M5</a>, <a href="#d2">D2</a>, <a href="#d3">D3</a>, <a href="#d4">D4</a> (astuce axe fixe)</td><td><a href="c03-dynamique-solide.html#td-4">C03, ex. 4</a></td></tr>
+      <tr><td>5. Régulateur centrifuge (dimensionner le ressort)</td><td><a href="#v4">V4</a>, <a href="#m1">M1</a>, <a href="#m5">M5</a>, <a href="#d2">D2</a>, <a href="#d3">D3</a>, <a href="#d4">D4</a>, <a href="#d6">D6</a>, <a href="#d5">D5</a></td><td><a href="c03-dynamique-solide.html#td-5">C03, ex. 5</a></td></tr>
+      <tr><td>6. Équilibreuse dynamique</td><td><a href="#v3">V3</a>, <a href="#d3">D3</a>, <a href="#d4">D4</a>, <a href="#d5">D5</a>, <a href="#d8">D8</a></td><td><a href="c03-dynamique-solide.html#td-6">C03, ex. 6</a></td></tr>
+    </table></div>
+    <h3>TD C04 — Énergétique</h3>
+    <div class="overflow"><table>
+      <tr><th>Exercice</th><th>Outils</th><th>Correction</th></tr>
+      <tr><td>1.1 Cylindre sur plan incliné : énergie cinétique en \(I\) et en \(G\)</td><td><a href="#e1">E1</a>, <a href="#e2">E2</a></td><td><a href="c04-energetique-solide.html#td-1">C04, ex. 1</a></td></tr>
+      <tr><td>1.2 Toupie : énergie cinétique</td><td><a href="#m1">M1</a>, <a href="#m5">M5</a>, <a href="#e2">E2</a></td><td><a href="c04-energetique-solide.html#td-1">C04, ex. 1</a></td></tr>
+      <tr><td>2.1 Réducteur : inertie équivalente</td><td><a href="#e3">E3</a></td><td><a href="c04-energetique-solide.html#td-2">C04, ex. 2</a></td></tr>
+      <tr><td>2.2 Entraînement en translation : inertie équivalente</td><td><a href="#e1">E1</a>, <a href="#e3">E3</a></td><td><a href="c04-energetique-solide.html#td-2">C04, ex. 2</a></td></tr>
+      <tr><td>3.1 Solides en contact avec frottement : puissance</td><td><a href="#e4">E4</a></td><td><a href="c04-energetique-solide.html#td-3">C04, ex. 3</a></td></tr>
+      <tr><td>3.2 Pivot glissant parfait : puissance</td><td><a href="#v3">V3</a>, <a href="#e4">E4</a></td><td><a href="c04-energetique-solide.html#td-3">C04, ex. 3</a></td></tr>
+      <tr><td>4.1 Cylindre sur plan incliné : TEC puis PFD</td><td><a href="#e1">E1</a>, <a href="#e2">E2</a>, <a href="#e6">E6</a>, <a href="#d5">D5</a>, <a href="#d6">D6</a></td><td><a href="c04-energetique-solide.html#td-4">C04, ex. 4</a></td></tr>
+      <tr><td>4.2 Pendule double : puissances, énergie cinétique, TEC</td><td><a href="#m4">M4</a>, <a href="#m5">M5</a>, <a href="#e2">E2</a>, <a href="#e4">E4</a>, <a href="#e5">E5</a>, <a href="#e6">E6</a></td><td><a href="c04-energetique-solide.html#td-4">C04, ex. 4</a></td></tr>
+      <tr><td>5.1 Duo voyageur concept : TEC, inertie équivalente</td><td><a href="#e1">E1</a>, <a href="#e3">E3</a>, <a href="#e5">E5</a>, <a href="#e6">E6</a></td><td><a href="c04-energetique-solide.html#td-5">C04, ex. 5</a></td></tr>
+      <tr><td>5.2 Embrayage assisté : statique, PFD, TEC, linéarisation</td><td><a href="#d5">D5</a> (statique), <a href="#d6">D6</a>, <a href="#e6">E6</a>, <a href="#m8">M8</a> ; la question sur le schéma-bloc relève des asservissements (Laplace), pas de ces outils</td><td><a href="c04-energetique-solide.html#td-5">C04, ex. 5</a></td></tr>
+    </table></div>
+
+    <div class="note"><span class="lab">Les 10 réflexes à garder</span>
+      <ol>
+        <li>Un torseur est une fiche à deux cases (résultante, moment) ; on change de point avec « B = A + BA ∧ R ».</li>
+        <li>Avant de calculer : <b>isoler</b>, puis lister les actions <b>extérieures</b>, et compter les inconnues.</li>
+        <li>Une liaison parfaite ne transmet rien dans ses mouvements libres.</li>
+        <li>Torseurs d'une égalité : <b>même point, même base</b>.</li>
+        <li>Pour projeter un vecteur : on dessine la figure plane (M1).</li>
+        <li>Pour dériver un vecteur : on reste dans sa base mobile (\(\dot{\vec x}_1=\dot\alpha\,\vec y_1\)).</li>
+        <li>Moment cinétique : \(\vec\sigma_A=\bar{\bar I}_A\cdot\vec\Omega\), avec la matrice et \(\vec\Omega\) dans la même base.</li>
+        <li>Huygens : seulement entre \(G\) et un autre point ; l'inertie augmente.</li>
+        <li>PFD : on choisit un point et un axe qui éliminent les inconnues de liaison.</li>
+        <li>TEC : un seul paramètre, les liaisons parfaites disparaissent, on simplifie par \(\dot\theta\).</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="docs">
+    <h2>Documents donnés</h2>
+    <div class="docs-group">
+      <h3>Cours et TD (Moodle)</h3>
+      <ul class="doc-list">
+        <li><a class="doc-item" href="../assets/pdf.html?f=../aem2-si/S2I_TD_C03_Dynamique_du_solide.pdf" target="_blank" rel="noopener"><span class="ic">📄</span><span class="nm">S2I_TD_C03_Dynamique_du_solide.pdf</span><span class="badge">TD</span></a></li>
+        <li><a class="doc-item" href="../assets/pdf.html?f=../aem2-si/S2I_TD_C04_Energetique_du_solide.pdf" target="_blank" rel="noopener"><span class="ic">📄</span><span class="nm">S2I_TD_C04_Énergétique_du_solide.pdf</span><span class="badge">TD</span></a></li>
+        <li><a class="doc-item" href="../assets/pdf.html?f=../aem2-si/S2I_CM_C03_Dynamique_du_solide.pdf" target="_blank" rel="noopener"><span class="ic">📄</span><span class="nm">S2I_CM_C03_Dynamique_du_solide.pdf</span><span class="badge">Cours</span></a></li>
+        <li><a class="doc-item" href="../assets/pdf.html?f=../aem2-si/S2I_CM_C04_Energetique_du_solide.pdf" target="_blank" rel="noopener"><span class="ic">📄</span><span class="nm">S2I_CM_C04_Énergétique_du_solide.pdf</span><span class="badge">Cours</span></a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Support de révision personnel · Outils reconstitués à partir des CM et TD de S2I (Sciences Industrielles de l'Ingénieur) de l'ECAM, AM2.
+  Les exemples et les exercices « À toi » sont des exercices maison, vérifiés par calcul formel (sympy) ; les corrections complètes des TD sont dans
+  <a href="c03-dynamique-solide.html">C03</a> et <a href="c04-energetique-solide.html">C04</a>.
+</footer>
+<script src="../assets/gate.js"></script>
+<script src="../assets/catalogue.js?v=2"></script>
+<script src="../assets/nav.js?v=2"></script>
+<script src="../assets/lecture.js?v=3"></script>
+</body>
+</html>
