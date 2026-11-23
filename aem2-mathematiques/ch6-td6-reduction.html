@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TD6 Réduction des endomorphismes — AM2 Mathématiques</title>
+<link rel="stylesheet" href="../assets/style.css?v=4">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+<div id="site-nav"></div>
+<nav class="subnav"><a href="#ex1">Exo 1</a><a href="#ex2">Exo 2</a><a href="#ex3">Exo 3</a><a href="#ex4">Exo 4</a><a href="#ex5">Exo 5</a><a href="#ex6">Exo 6</a><a href="#ex7">Exo 7</a><a href="#docs">Documents donnés</a></nav>
+
+<main class="wrap">
+  <span class="chip">Maths AM2 (2ᵉ année) · TD6</span>
+  <h1 class="title">TD6 — Réduction des endomorphismes</h1>
+  <p class="lead">TD6 de L. Graissot (ECAM AM2, 2026-2027), à faire après le <a href="ch5-valeurs-propres.html">chapitre 5-6</a>. Sept exercices corrigés <b>par étapes</b>.
+  Pas de corrigé officiel : <b>correction maison</b>, tous les résultats ont été vérifiés par calcul formel (valeurs propres, vecteurs propres, \(P^{-1}AP\)).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#ex1">Exercice 1 — Diagonaliser \(A\), \(B\), \(C\), \(M\)</a></li>
+      <li><a href="#ex2">Exercice 2 — Endomorphisme « reste de la division euclidienne »</a></li>
+      <li><a href="#ex3">Exercice 3 — Suite récurrente et puissances de \(A\)</a></li>
+      <li><a href="#ex4">Exercice 4 — \(f(M)\) sur \(\mathcal M_2(\mathbb C)\)</a></li>
+      <li><a href="#ex5">Exercice 5 — Matrice \(M=C\,{}^tC\)</a></li>
+      <li><a href="#ex6">Exercice 6 — Rotation d'axe \(Oz\)</a></li>
+      <li><a href="#ex7">Exercice 7 — Paramètre \(a\) et système différentiel</a></li>
+    </ul>
+  </div>
+
+  <section class="block" id="outils">
+    <h2>Les trois critères à garder en tête</h2>
+    <div class="rappel"><span class="lab">Rappel · critère de diagonalisabilité</span>
+      \[ f\ \text{diagonalisable sur }\mathbb K\iff\chi_f\ \text{scindé sur }\mathbb K\ \text{et}\ \dim E_\lambda=m(\lambda)\ \text{pour toute valeur propre }\lambda \]
+      Cas simple : \(n\) valeurs propres distinctes \(\Rightarrow\) diagonalisable. Sinon, on compare \(\dim E_\lambda=n-\mathrm{rg}(A-\lambda I)\) à la multiplicité \(m(\lambda)\).</div>
+  </section>
+
+  <section class="block" id="ex1">
+    <h2>Exercice 1</h2>
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — Diagonaliser \(A\), \(B\), \(C\), \(M\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Déterminer si les matrices suivantes sont diagonalisables dans \(\mathcal M_3(\mathbb R)\) et les diagonaliser si possible :
+        \(A=\begin{pmatrix}3&3&1\\-2&-2&-1\\2&1&0\end{pmatrix}\), \(B=\begin{pmatrix}1&-1&2\\3&-3&6\\2&-2&4\end{pmatrix}\), \(C=\begin{pmatrix}0&1&0\\-4&4&0\\-2&1&2\end{pmatrix}\), \(M=\begin{pmatrix}0&a&a^2\\a^{-1}&0&a\\a^{-2}&a^{-1}&0\end{pmatrix}\).</p>
+
+        <p class="q">1) La matrice \(A\)</p>
+        <p class="etape">Étape 1 : polynôme caractéristique. On développe \(\det(A-XI)\).</p>
+        \[ \chi_A(X)=-(X-1)^2(X+1) \]
+        <div class="res">Contrôle : \(\mathrm{tr}A=3-2+0=1=1+1-1\) et \(\det A=-1\) ; valeurs propres \(1\) (double) et \(-1\) (simple).</div>
+        <p class="etape">Étape 2 : sous-espace propre de la valeur propre double \(1\).</p>
+        \[ A-I=\begin{pmatrix}2&3&1\\-2&-3&-1\\2&1&-1\end{pmatrix}\]
+        <p>Les lignes 1 et 2 sont opposées, la ligne 3 n'est pas proportionnelle à la 1 : \(\mathrm{rg}(A-I)=2\), donc \(\dim E_1=3-2=1\).</p>
+        <p class="etape">Étape 3 : comparaison avec la multiplicité. \(\dim E_1=1<2=m(1)\).</p>
+        <div class="res">\(A\) n'est <b>pas diagonalisable</b>. (Pour info : \(E_1=\mathrm{Vect}(1,-1,1)\), \(E_{-1}=\mathrm{Vect}(-1,1,1)\).)</div>
+
+        <p class="q">2) La matrice \(B\)</p>
+        <p class="etape">Étape 1 : \(B\) est de rang 1.</p>
+        <p>Ligne 2 \(=3\times\) ligne 1 et ligne 3 \(=2\times\) ligne 1. Donc \(\dim\ker B=2\) : \(0\) est valeur propre avec \(\dim E_0=2\).</p>
+        <p class="etape">Étape 2 : l'autre valeur propre par la trace. \(\mathrm{tr}B=1-3+4=2\), donc la 3ᵉ valeur propre est \(2\).</p>
+        \[ \chi_B(X)=-X^2(X-2) \]
+        <p class="etape">Étape 3 : critère. \(\dim E_0=2=m(0)\) et \(2\) est simple : \(B\) est diagonalisable.</p>
+        <p class="etape">Étape 4 : vecteurs propres.</p>
+        <ul>
+          <li>\(\lambda=0\) : \(x-y+2z=0\). Base \(V_1=(1,1,0)\), \(V_2=(-2,0,1)\).</li>
+          <li>\(\lambda=2\) : \(V_3=(1,3,2)\) ; on vérifie \(BV_3=(1-3+4,\,3-9+12,\,2-6+8)=(2,6,4)=2V_3\).</li>
+        </ul>
+        <div class="res">\(P=\begin{pmatrix}1&-2&1\\1&0&3\\0&1&2\end{pmatrix}\) et \(P^{-1}BP=\mathrm{diag}(0,0,2)\).</div>
+
+        <p class="q">3) La matrice \(C\)</p>
+        <p class="etape">Étape 1 : valeurs propres. \(\chi_C(X)=(2-X)^3\) (on développe selon la 3ᵉ colonne puis le bloc \(2\times2\)). Seule valeur propre : \(2\), de multiplicité 3.</p>
+        <p class="etape">Étape 2 : sous-espace propre.</p>
+        \[ C-2I=\begin{pmatrix}-2&1&0\\-4&2&0\\-2&1&0\end{pmatrix} \]
+        <p>Toutes les lignes sont proportionnelles à \((-2,1,0)\) : \(\mathrm{rg}=1\), \(\dim E_2=2<3\).</p>
+        <div class="res">\(C\) n'est <b>pas diagonalisable</b> (\(E_2=\mathrm{Vect}\{(1,2,0),(0,0,1)\}\), de dimension 2 seulement).</div>
+
+        <p class="q">4) La matrice \(M\) (avec \(a\neq0\))</p>
+        <p class="etape">Étape 1 : une écriture qui simplifie. Soit \(D=\mathrm{diag}(1,a,a^2)\) et \(J\) la matrice dont tous les coefficients valent 1. Le coefficient \((i,j)\) de \(D^{-1}(J-I)D\) est \(a^{-(i-1)}\,a^{\,j-1}=a^{\,j-i}\) pour \(i\neq j\) et \(0\) pour \(i=j\). C'est exactement \(M\).</p>
+        \[ M=D^{-1}(J-I)D \]
+        <p class="etape">Étape 2 : \(M\) et \(J-I\) sont semblables, donc ont les mêmes valeurs propres. \(J\) est de rang 1 : valeurs propres \(0,0,3\) (trace \(3\)). Donc \(J-I\) a pour valeurs propres \(-1,-1,2\).</p>
+        \[ \chi_M(X)=-(X-2)(X+1)^2 \]
+        <p class="etape">Étape 3 : sous-espaces propres.</p>
+        <ul>
+          <li>\(\lambda=-1\) : \(M+I\) a toutes ses lignes proportionnelles (rang 1), donc \(\dim E_{-1}=2\). Équation \(x+ay+a^2z=0\), base \((-a,1,0)\), \((-a^2,0,1)\).</li>
+          <li>\(\lambda=2\) : \(V=(a^2,a,1)\). Vérification : \(MV=(a\cdot a+a^2,\ a^{-1}a^2+a,\ a^{-2}a^2+a^{-1}a)=(2a^2,2a,2)=2V\).</li>
+        </ul>
+        <div class="res">\(M\) est diagonalisable : \(P=\begin{pmatrix}-a&-a^2&a^2\\1&0&a\\0&1&1\end{pmatrix}\) et \(P^{-1}MP=\mathrm{diag}(-1,-1,2)\).</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="ex2">
+    <h2>Exercice 2</h2>
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — \(f(p)\) = reste de la division de \(AP\) par \(B\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(E=\mathbb R_3[X]\), \(f(p)\) = reste de la division euclidienne de \(Ap\) par \(B\), avec \(A=X^4-1\) et \(B=X^4-X\). 1) matrice \(M\) de \(f\) ; 2) valeurs propres, vecteurs propres, diagonalisabilité ; 3) \(\ker f\) et \(\mathrm{Im} f\).</p>
+
+        <p class="q">1) Matrice de \(f\) dans la base \((1,X,X^2,X^3)\)</p>
+        <p class="etape">Étape 1 : simplifier \(f\). On écrit \(A=B+(X-1)\), donc pour \(p\in E\)</p>
+        \[ A\,p=B\,p+(X-1)\,p \]
+        <p>Le reste de \(Ap\) par \(B\) est donc celui de \((X-1)p\) par \(B\), car \(Bp\) est un multiple de \(B\).</p>
+        <p class="etape">Étape 2 : \(\deg((X-1)p)\le4\) et \(\deg B=4\). Si \(p=p_0+p_1X+p_2X^2+p_3X^3\), le coefficient de \(X^4\) dans \((X-1)p\) est \(p_3\). On retranche \(p_3B\) :</p>
+        \[ f(p)=(X-1)p-p_3\,(X^4-X) \]
+        <p class="etape">Étape 3 : image de chaque vecteur de base.</p>
+        <ul>
+          <li>\(f(1)=X-1\)</li>
+          <li>\(f(X)=X^2-X\)</li>
+          <li>\(f(X^2)=X^3-X^2\)</li>
+          <li>\(f(X^3)=(X-1)X^3-(X^4-X)=-X^3+X\)</li>
+        </ul>
+        <div class="res">\(M=\begin{pmatrix}-1&0&0&0\\1&-1&0&1\\0&1&-1&0\\0&0&1&-1\end{pmatrix}\) (colonnes = coordonnées des images).</div>
+
+        <p class="q">2) Valeurs propres, vecteurs propres, diagonalisabilité</p>
+        <p class="etape">Étape 1 : deux valeurs propres devinées. \(f(p)=0\) pour \(p=X+X^2+X^3\) car \((X-1)p=X^4-X\) et \(p_3=1\). Donc \(0\) est valeur propre. De même \(p=X^3-1\) : \((X-1)(X^3-1)=X^4-X^3-X+1\), moins \((X^4-X)\), donne \(-X^3+1=-p\). Donc \(-1\) est valeur propre.</p>
+        <p class="etape">Étape 2 : polynôme caractéristique. En développant \(\det(M-XI)\) :</p>
+        \[ \chi_f(X)=X(X+1)(X^2+3X+3) \]
+        <p class="etape">Étape 3 : racines du facteur de degré 2. \(\Delta=9-12=-3<0\), donc \(X=\dfrac{-3\pm i\sqrt3}{2}\), non réelles.</p>
+        <ul>
+          <li>\(\lambda=0\) : \(E_0=\mathrm{Vect}(X+X^2+X^3)\).</li>
+          <li>\(\lambda=-1\) : \(E_{-1}=\mathrm{Vect}(X^3-1)\).</li>
+        </ul>
+        <div class="res">Sur \(\mathbb R\), \(\chi_f\) n'est pas scindé (deux racines non réelles) : \(f\) n'est <b>pas diagonalisable</b> sur \(\mathbb R_3[X]\). Sur \(\mathbb C\), les 4 valeurs propres sont distinctes : \(f\) est diagonalisable sur \(\mathbb C_3[X]\).</div>
+
+        <p class="q">3) Noyau et image</p>
+        <p class="etape">Étape 1 : noyau. \(\ker f=E_0=\mathrm{Vect}(X+X^2+X^3)\), de dimension 1.</p>
+        <p class="etape">Étape 2 : image. Théorème du rang : \(\dim\mathrm{Im}f=4-1=3\). Les vecteurs \(f(1),f(X),f(X^2)\) sont \(X-1,\ X^2-X,\ X^3-X^2\), indépendants (degrés distincts), donc ils forment une base de \(\mathrm{Im}f\).</p>
+        <div class="res">\(\ker f=\mathrm{Vect}(X+X^2+X^3)\) ; \(\mathrm{Im}f=\mathrm{Vect}(X-1,\,X^2-X,\,X^3-X^2)=\{p\in\mathbb R_3[X]\mid p(1)=0\}\).</div>
+        <div class="note">Ici \(\ker f\) et \(\mathrm{Im}f\) sont supplémentaires : \(X+X^2+X^3\) vaut \(3\neq0\) en \(X=1\), donc il n'est pas dans \(\mathrm{Im}f\), l'intersection est nulle et \(1+3=4=\dim E\). C'est lié au fait que \(0\) est valeur propre <b>simple</b> ; pour une valeur propre nulle multiple non diagonalisable, on aurait \(\ker f\cap\mathrm{Im}f\neq\{0\}\).</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="ex3">
+    <h2>Exercice 3</h2>
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — Puissances de \(A\) et suite récurrente</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(a\in\mathbb R\), \(A=\begin{pmatrix}0&1\\-a&1+a\end{pmatrix}\), suite \((u_n)\) définie par \(u_0\), \(u_1\) et \(u_{n+2}=(1+a)u_{n+1}-au_n\). 1) valeur de \(a\) rendant \(A\) diagonalisable ; 2) \(A^n\) ; 3) \(U_{n+1}\) en fonction de \(U_n\), et \(U_n\) en fonction de \(U_0\) ; 4) terme général de \((u_n)\).</p>
+
+        <p class="q">1) Pour quel \(a\) la matrice \(A\) est-elle diagonalisable ?</p>
+        <p class="etape">Étape 1 : polynôme caractéristique.</p>
+        \[ \chi_A(X)=X^2-\mathrm{tr}(A)\,X+\det A=X^2-(1+a)X+a=(X-1)(X-a) \]
+        <p class="etape">Étape 2 : si \(a\neq1\), deux valeurs propres distinctes \(1\) et \(a\) : \(A\) est diagonalisable.</p>
+        <p class="etape">Étape 3 : si \(a=1\), \(A=\begin{pmatrix}0&1\\-1&2\end{pmatrix}\), seule valeur propre \(1\) (double). \(A\neq I\), donc \(\dim E_1=1<2\) : non diagonalisable.</p>
+        <div class="res">\(A\) est diagonalisable si et seulement si \(a\neq1\).</div>
+
+        <p class="q">2) Calcul de \(A^n\) pour \(a\neq1\)</p>
+        <p class="etape">Étape 1 : vecteurs propres.</p>
+        <ul>
+          <li>\(\lambda=1\) : \(-x+y=0\), \(V_1=(1,1)\).</li>
+          <li>\(\lambda=a\) : la 1ʳᵉ ligne de \((A-aI)v=0\) est \(-ax+y=0\), donc \(V_a=(1,a)\). Vérification : \(A(1,a)=(a,\,-a+(1+a)a)=(a,a^2)=a(1,a)\).</li>
+        </ul>
+        <p class="etape">Étape 2 : \(P=\begin{pmatrix}1&1\\1&a\end{pmatrix}\), \(\det P=a-1\neq0\), \(P^{-1}=\dfrac1{a-1}\begin{pmatrix}a&-1\\-1&1\end{pmatrix}\).</p>
+        <div class="rappel"><span class="lab">Rappel · puissance</span>\[ A=PDP^{-1}\ \Rightarrow\ A^n=PD^nP^{-1},\qquad D=\mathrm{diag}(1,a) \]</div>
+        <p class="etape">Étape 3 : produit. \(PD^n=\begin{pmatrix}1&a^n\\1&a^{n+1}\end{pmatrix}\), puis multiplication par \(P^{-1}\).</p>
+        <div class="res">\(A^n=\dfrac1{a-1}\begin{pmatrix}a-a^n&a^n-1\\a-a^{n+1}&a^{n+1}-1\end{pmatrix}\). Contrôle : \(n=0\) donne \(I\) ; \(n=1\) donne \(A\).</div>
+
+        <p class="q">3) Écriture matricielle de la récurrence</p>
+        <p class="etape">Étape 1 : \(U_{n+1}=\begin{pmatrix}u_{n+1}\\u_{n+2}\end{pmatrix}=\begin{pmatrix}u_{n+1}\\-au_n+(1+a)u_{n+1}\end{pmatrix}=\begin{pmatrix}0&1\\-a&1+a\end{pmatrix}\begin{pmatrix}u_n\\u_{n+1}\end{pmatrix}\).</p>
+        <p class="etape">Étape 2 : récurrence immédiate.</p>
+        <div class="res">\(U_{n+1}=AU_n\) et \(U_n=A^nU_0\) avec \(U_0=\begin{pmatrix}u_0\\u_1\end{pmatrix}\).</div>
+
+        <p class="q">4) Terme général</p>
+        <p class="etape">Étape 1 : \(u_n\) est la première coordonnée de \(U_n=A^nU_0\), donc la première ligne de \(A^n\) appliquée à \((u_0,u_1)\).</p>
+        <div class="res">\(u_n=\dfrac{(a-a^n)\,u_0+(a^n-1)\,u_1}{a-1}\), pour \(a\neq1\).</div>
+        <p class="etape">Étape 2 : contrôle. \(n=2\) : \(\dfrac{(a-a^2)u_0+(a^2-1)u_1}{a-1}=-au_0+(a+1)u_1\), ce qui est bien \((1+a)u_1-au_0\).</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="ex4">
+    <h2>Exercice 4</h2>
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — \(f\) sur \(\mathcal M_2(\mathbb C)\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(f:\mathcal M_2(\mathbb C)\to\mathcal M_2(\mathbb C)\), \(\begin{pmatrix}a&b\\c&d\end{pmatrix}\mapsto\begin{pmatrix}d&a\\b&c\end{pmatrix}\). \(f\) est-elle diagonalisable ?</p>
+
+        <p class="q">Diagonalisabilité de \(f\)</p>
+        <p class="etape">Étape 1 : matrice de \(f\) dans la base \((E_{11},E_{12},E_{21},E_{22})\). \(f(E_{11})=E_{12}\), \(f(E_{12})=E_{21}\), \(f(E_{21})=E_{22}\), \(f(E_{22})=E_{11}\).</p>
+        \[ \begin{pmatrix}0&0&0&1\\1&0&0&0\\0&1&0&0\\0&0&1&0\end{pmatrix} \]
+        <p>C'est une permutation circulaire des 4 coefficients : \(f^4=\mathrm{id}\).</p>
+        <p class="etape">Étape 2 : polynôme annulateur. \(f^4=\mathrm{id}\), donc \(X^4-1\) annule \(f\). Il vaut \((X-1)(X+1)(X-i)(X+i)\), scindé à racines simples sur \(\mathbb C\).</p>
+        <p class="etape">Étape 3 : polynôme caractéristique. En développant, \(\chi_f(X)=X^4-1\). Les 4 valeurs propres sont \(1,-1,i,-i\), distinctes.</p>
+        <p class="etape">Étape 4 : vecteurs propres. On cherche \(\begin{pmatrix}a&b\\c&d\end{pmatrix}\) avec \(f(M)=\lambda M\) : \(d=\lambda a\), \(a=\lambda b\), \(b=\lambda c\), \(c=\lambda d\). En prenant \(d=1\), \(c=\lambda\), \(b=\lambda^2\), \(a=\lambda^3\), la dernière condition vaut \(c=\lambda d\) et \(d=\lambda a=\lambda^4=1\) est vraie.</p>
+        <div class="res">\(f\) est <b>diagonalisable</b> sur \(\mathcal M_2(\mathbb C)\) : 4 valeurs propres distinctes \(1,-1,i,-i\), vecteurs propres \(\begin{pmatrix}\lambda^3&\lambda^2\\\lambda&1\end{pmatrix}\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> Sur \(\mathcal M_2(\mathbb R)\), \(\chi_f=X^4-1\) n'est pas scindé (\(X^2+1\)) : \(f\) ne serait <b>pas</b> diagonalisable. D'où l'importance du corps \(\mathbb C\) dans l'énoncé.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="ex5">
+    <h2>Exercice 5</h2>
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — \(M=C\,{}^tC\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(C\in\mathcal M_{n,1}(\mathbb R)\) de coordonnées \(c_1,\dots,c_n\), \(M=C\,{}^tC\). 1) rang de \(M\) ; 2) polynôme caractéristique ; 3) condition de diagonalisabilité ; 4) \(C=\begin{pmatrix}1\\2\\3\end{pmatrix}\) : \(\chi_M\) par la méthode usuelle puis diagonalisation.</p>
+
+        <p class="q">1) Rang de \(M\)</p>
+        <p class="etape">Étape 1 : \(M\) est la matrice de coefficients \(M_{ij}=c_ic_j\). La colonne \(j\) est \(c_j\,C\).</p>
+        <div class="res">Si \(C\neq0\), toutes les colonnes sont multiples de \(C\) et au moins l'une est non nulle : \(\mathrm{rg}M=1\). Si \(C=0\), \(M=0\) et \(\mathrm{rg}M=0\).</div>
+
+        <p class="q">2) Polynôme caractéristique (pour \(C\neq0\))</p>
+        <p class="etape">Étape 1 : valeur propre \(0\). \(\ker M=\{x\mid C\,({}^tCx)=0\}=\{x\mid{}^tCx=0\}\) est un hyperplan : \(\dim\ker M=n-1\). Donc \(0\) est valeur propre avec \(\dim E_0=n-1\), donc de multiplicité au moins \(n-1\).</p>
+        <p class="etape">Étape 2 : la dernière valeur propre par la trace. \(\mathrm{tr}M=\sum c_i^2=\|C\|^2\).</p>
+        <p class="etape">Étape 3 : vérification directe. \(MC=C\,({}^tCC)=\|C\|^2\,C\) : \(C\) est un vecteur propre de valeur propre \(\|C\|^2\).</p>
+        <div class="res">\(\chi_M(X)=(-X)^{\,n-1}\,(\|C\|^2-X)=(-1)^nX^{n-1}\big(X-\|C\|^2\big)\), avec \(\|C\|^2=c_1^2+\dots+c_n^2\).</div>
+
+        <p class="q">3) Condition de diagonalisabilité</p>
+        <p class="etape">Étape 1 : cas \(C\neq0\). Comme \(c_i\) sont réels, \(\|C\|^2>0\), donc \(\|C\|^2\neq0\) : c'est une valeur propre simple, et \(0\) a \(\dim E_0=n-1=m(0)\).</p>
+        <p class="etape">Étape 2 : cas \(C=0\) : \(M=0\) est diagonale.</p>
+        <div class="res">\(M\) est diagonalisable <b>pour tout</b> \(C\in\mathbb R^n\) (c'est aussi une matrice symétrique réelle).</div>
+        <div class="warnbox"><span class="lab">Piège</span> Si les \(c_i\) étaient complexes, \(\|C\|^2=\sum c_i^2\) pourrait être nul avec \(C\neq0\) (ex. \(C=(1,i)\)) : alors \(0\) serait seule valeur propre avec \(\dim E_0=n-1&lt;n\) et \(M\) ne serait pas diagonalisable.</div>
+
+        <p class="q">4) Cas \(C=(1,2,3)\)</p>
+        <p class="etape">Étape 1 : \(M=\begin{pmatrix}1&2&3\\2&4&6\\3&6&9\end{pmatrix}\). Méthode usuelle : \(\det(M-XI)\) donne \(-X^3+14X^2=-X^2(X-14)\).</p>
+        <p class="etape">Étape 2 : par la question 2. \(\|C\|^2=1+4+9=14\) et \(n=3\) : \(\chi_M=-X^2(X-14)\). On retrouve le même résultat sans développer.</p>
+        <p class="etape">Étape 3 : sous-espaces propres.</p>
+        <ul>
+          <li>\(\lambda=14\) : \(V=C=(1,2,3)\) (vérifié : \(MC=14C\)).</li>
+          <li>\(\lambda=0\) : \(x+2y+3z=0\). Base \((-2,1,0)\), \((-3,0,1)\).</li>
+        </ul>
+        <div class="res">\(P=\begin{pmatrix}1&-2&-3\\2&1&0\\3&0&1\end{pmatrix}\) et \(P^{-1}MP=\mathrm{diag}(14,0,0)\).</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="ex6">
+    <h2>Exercice 6</h2>
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — Rotation d'angle \(\theta\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(\theta\in\mathbb R\), \(f\) endomorphisme de \(\mathbb R^3\) de matrice \(A=\begin{pmatrix}\cos\theta&-\sin\theta&0\\\sin\theta&\cos\theta&0\\0&0&1\end{pmatrix}\). 1) nature géométrique ; 2) pour \(\theta\notin\pi\mathbb Z\), unique valeur propre réelle et sous-espace propre ; cas \(\theta\in\pi\mathbb Z\).</p>
+
+        <p class="q">1) Nature géométrique</p>
+        <p class="etape">Étape 1 : \(A\) laisse \(e_3\) fixe et agit par la matrice de rotation d'angle \(\theta\) sur \((e_1,e_2)\). Les colonnes sont orthonormées et \(\det A=\cos^2\theta+\sin^2\theta=1\).</p>
+        <div class="res">\(f\) est la <b>rotation d'axe \(Oz\)</b> (dirigé par \(e_3\)) et d'angle \(\theta\).</div>
+
+        <p class="q">2) Valeurs propres réelles</p>
+        <p class="etape">Étape 1 : polynôme caractéristique. On développe selon la 3ᵉ ligne.</p>
+        \[ \chi_A(X)=(1-X)\big[(\cos\theta-X)^2+\sin^2\theta\big]=(1-X)\big(X^2-2\cos\theta\,X+1\big) \]
+        <p class="etape">Étape 2 : racines du facteur quadratique. \(\Delta'=\cos^2\theta-1=-\sin^2\theta\). Racines : \(X=\cos\theta\pm i\sin\theta=e^{\pm i\theta}\).</p>
+        <p class="etape">Étape 3 : \(\theta\notin\pi\mathbb Z\Rightarrow\sin\theta\neq0\), donc \(e^{\pm i\theta}\) ne sont pas réels : la seule valeur propre réelle est \(1\).</p>
+        <p class="etape">Étape 4 : sous-espace propre. \(A-I=\begin{pmatrix}\cos\theta-1&-\sin\theta&0\\\sin\theta&\cos\theta-1&0\\0&0&0\end{pmatrix}\). Le bloc \(2\times2\) a pour déterminant \((\cos\theta-1)^2+\sin^2\theta=2-2\cos\theta>0\) car \(\cos\theta\neq1\). Donc \(\mathrm{rg}(A-I)=2\) et \(\dim E_1=1\).</p>
+        <div class="res">\(E_1=\mathrm{Vect}(e_3)\) : c'est l'axe de la rotation. Les vecteurs du plan \(Oxy\) ne sont pas fixés.</div>
+
+        <p class="q">Cas \(\theta\in\pi\mathbb Z\)</p>
+        <ul>
+          <li>\(\theta=2k\pi\) : \(A=I\), tout vecteur est propre (\(E_1=\mathbb R^3\)).</li>
+          <li>\(\theta=(2k+1)\pi\) : \(A=\mathrm{diag}(-1,-1,1)\) (demi-tour d'axe \(Oz\)). Valeurs propres \(-1\) (\(E_{-1}=\mathrm{Vect}(e_1,e_2)\)) et \(1\) (\(E_1=\mathrm{Vect}(e_3)\)).</li>
+        </ul>
+        <div class="res">Pour \(\theta\in\pi\mathbb Z\), \(A\) est diagonale (donc diagonalisable) ; pour \(\theta\notin\pi\mathbb Z\), elle ne l'est pas sur \(\mathbb R\) (elle l'est sur \(\mathbb C\), avec \(1,e^{i\theta},e^{-i\theta}\)).</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="ex7">
+    <h2>Exercice 7</h2>
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 7 — Paramètre \(a\) et système différentiel \(x'=Ax\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(a\in\mathbb R\), \(A=\begin{pmatrix}0&1&0\\0&a&0\\0&a-2&2\end{pmatrix}\). 1) valeurs de \(a\) rendant \(A\) diagonalisable, base de vecteurs propres ; 2) \(E\) = espace des solutions de \(x'=Ax\) : a) si \(A\) est diagonalisable, une base de \(E\) et la solution générale ; b) sinon, intégrer directement.</p>
+
+        <p class="q">1) Diagonalisabilité selon \(a\)</p>
+        <p class="etape">Étape 1 : polynôme caractéristique. La 1ʳᵉ colonne ne contient que des zéros, on développe selon elle (ou la 3ᵉ ligne) :</p>
+        \[ \chi_A(X)=-X\,(X-a)\,(X-2) \]
+        <p class="etape">Étape 2 : si \(a\notin\{0,2\}\), les trois valeurs propres \(0,a,2\) sont distinctes : \(A\) est diagonalisable.</p>
+        <p class="etape">Étape 3 : \(a=2\). Valeurs propres \(0\) (simple) et \(2\) (double). \(A-2I=\begin{pmatrix}-2&1&0\\0&0&0\\0&0&0\end{pmatrix}\) est de rang 1, donc \(\dim E_2=2=m(2)\) : diagonalisable.</p>
+        <p class="etape">Étape 4 : \(a=0\). Valeurs propres \(0\) (double) et \(2\). \(A=\begin{pmatrix}0&1&0\\0&0&0\\0&-2&2\end{pmatrix}\) a pour lignes \((0,1,0)\), \((0,-2,2)\) indépendantes : rang 2, donc \(\dim E_0=1<2\) : non diagonalisable.</p>
+        <div class="res">\(A\) est diagonalisable si et seulement si \(a\neq0\).</div>
+        <p class="etape">Étape 5 : vecteurs propres.</p>
+        <ul>
+          <li>\(a\notin\{0,2\}\) : \(V_0=(1,0,0)\) ; \(V_a=(1,a,a)\) (vérifié : \(A(1,a,a)=(a,a^2,a^2)\)) ; \(V_2=(0,0,1)\).</li>
+          <li>\(a=2\) : \(E_0=\mathrm{Vect}(1,0,0)\) ; \(E_2=\mathrm{Vect}\{(1,2,0),(0,0,1)\}\).</li>
+        </ul>
+
+        <p class="q">2a) Cas où \(A\) est diagonalisable</p>
+        <div class="rappel"><span class="lab">Rappel · théorème du cours</span>\[ A\ \text{diagonalisable},\ AV_i=\lambda_iV_i\ \Rightarrow\ \big(e^{\lambda_it}V_i\big)_i\ \text{est une base de }E \]</div>
+        <p class="etape">Étape 1 : \(a\notin\{0,2\}\). Base \(\big((1,0,0),\ e^{at}(1,a,a),\ e^{2t}(0,0,1)\big)\).</p>
+        <div class="res">\(x(t)=\alpha\begin{pmatrix}1\\0\\0\end{pmatrix}+\beta e^{at}\begin{pmatrix}1\\a\\a\end{pmatrix}+\gamma e^{2t}\begin{pmatrix}0\\0\\1\end{pmatrix}\), \((\alpha,\beta,\gamma)\in\mathbb R^3\).</div>
+        <p class="etape">Étape 2 : \(a=2\). Base \(\big((1,0,0),\ e^{2t}(1,2,0),\ e^{2t}(0,0,1)\big)\).</p>
+        <div class="res">\(x(t)=\alpha\begin{pmatrix}1\\0\\0\end{pmatrix}+e^{2t}\left[\beta\begin{pmatrix}1\\2\\0\end{pmatrix}+\gamma\begin{pmatrix}0\\0\\1\end{pmatrix}\right]\).</div>
+
+        <p class="q">2b) Cas \(a=0\) : intégration directe</p>
+        <p class="etape">Étape 1 : le système s'écrit \(x_1'=x_2\), \(x_2'=0\), \(x_3'=-2x_2+2x_3\).</p>
+        <p class="etape">Étape 2 : \(x_2'=0\) donne \(x_2=c\) (constante).</p>
+        <p class="etape">Étape 3 : \(x_1'=c\) donne \(x_1=ct+d\).</p>
+        <p class="etape">Étape 4 : \(x_3'-2x_3=-2c\). Solution homogène : \(ke^{2t}\). Solution particulière constante : \(x_3=c\) (car \(0-2c=-2c\)). Donc \(x_3=c+ke^{2t}\).</p>
+        <div class="res">\(x(t)=d\begin{pmatrix}1\\0\\0\end{pmatrix}+c\begin{pmatrix}t\\1\\1\end{pmatrix}+k\,e^{2t}\begin{pmatrix}0\\0\\1\end{pmatrix}\), \((c,d,k)\in\mathbb R^3\). Une base de \(E\) : \((1,0,0)\), \((t,1,1)\), \(e^{2t}(0,0,1)\). Le terme en \(t\) est la signature du bloc de Jordan.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Énoncé du TD6, retapé proprement (même mise en page) : version PDF et version Word modifiable.</p>
+    <div class="docs-group">
+      <h3>TD6 — Réduction des endomorphismes (L. Graissot, AM2 2026-2027)</h3>
+      <ul>
+        <li><a class="doc-item" href="../assets/pdf.html?f=../documents/aem2-mathematiques/ch6-td6-reduction/TD6-reduction-endomorphismes.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD6 — Réduction des endomorphismes (énoncé retapé)</span></a></li>
+        <li><a class="doc-item" href="../documents/aem2-mathematiques/ch6-td6-reduction/TD6-reduction-endomorphismes.docx" download><span class="ic">DOCX</span><span class="nm">TD6 — version Word modifiable</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Cursus AM2 · Mathématiques · Les corrections ci-dessus sont <b>maison</b>. Voir aussi
+    <a href="ch5-valeurs-propres.html">Ch5-6 — Valeurs propres et réduction</a> et <a href="ch7-systemes-differentiels.html">Ch7 — Systèmes différentiels</a>.</p>
+  </section>
+
+</main>
+<script src="../assets/gate.js"></script>
+<script src="../assets/catalogue.js?v=2"></script>
+<script src="../assets/nav.js?v=2"></script>
+<script src="../assets/lecture.js?v=3"></script>
+</body>
+</html>

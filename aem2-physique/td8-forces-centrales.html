@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TD8 Forces centrales — AM2 Physique</title>
+<link rel="stylesheet" href="../assets/style.css?v=4">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+<div id="site-nav"></div>
+<nav class="subnav"><a href="#ex1">Exo 1</a><a href="#ex2">Exo 2</a><a href="#ex3">Exo 3</a><a href="#ex4">Exo 4</a><a href="#ex5">Exo 5</a><a href="#ex6">Exo 6</a><a href="#docs">Documents donnés</a></nav>
+
+<main class="wrap">
+  <span class="chip">Physique AM2 · Systèmes tournants · TD8</span>
+  <h1 class="title">TD8 — Mouvements à force centrale : Yukawa, rappel isotrope, Rutherford, satellites, trou noir, astéroïde</h1>
+  <p class="lead">TD8 de D. Courtois (ECAM, P2030, 17/11/2026), à faire après le <a href="ch8-forces-centrales.html">cours Ch8</a>.
+  Six exercices corrigés <b>par étapes</b>. Pas de corrigé officiel : <b>correction maison</b>, valeurs numériques recalculées. L'énoncé est retapé proprement
+  (version Word / PDF dans « Documents donnés »).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#ex1">Exercice 1 — Nucléon dans un potentiel de Yukawa</a></li>
+      <li><a href="#ex2">Exercice 2 — Force de rappel isotrope</a></li>
+      <li><a href="#ex3">Exercice 3 — Expérience de Rutherford</a></li>
+      <li><a href="#ex4">Exercice 4 — Satellite circulaire</a></li>
+      <li><a href="#ex5">Exercice 5 — Trou noir</a></li>
+      <li><a href="#ex6">Exercice 6 — Alerte à l'astéroïde</a></li>
+    </ul>
+  </div>
+
+  <section class="block" id="outils">
+    <h2>Les outils communs aux six exercices</h2>
+    <div class="rappel"><span class="lab">Rappel · force centrale</span>
+      \[ \vec F=F(r)\,\vec e_r \;\Rightarrow\; \frac{d\vec L_O}{dt}=\overrightarrow{OM}\wedge\vec F=\vec 0,\qquad \vec L_O=m\,r^2\dot\theta\,\vec e_z \]
+      Le mouvement est plan et \(C=r^2\dot\theta\) est constante (loi des aires).</div>
+    <div class="rappel"><span class="lab">Rappel · énergie potentielle effective</span>
+      \[ E_m=\tfrac12 m\dot r^2+E_{p\,\mathrm{eff}}(r),\qquad E_{p\,\mathrm{eff}}(r)=\frac{mC^2}{2r^2}+E_p(r) \]
+      Le mouvement n'est possible que là où \(E_m\ge E_{p\,\mathrm{eff}}(r)\) ; les rayons d'arrêt vérifient \(\dot r=0\).</div>
+  </section>
+
+  <section class="block" id="ex1">
+    <h2>Exercice 1 — Nucléon dans un potentiel de Yukawa</h2>
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 1 — Potentiel de Yukawa</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Nucléon \(M\) de masse \(m\), force centrale dérivant de \(E_p(r)=\dfrac{K}{r}e^{-r/a}\) (\(a>0\)). 1) dimensions de \(a\) et \(K\) ; 2) force, signe de \(K\) ; 3) plan de la trajectoire ; 4) \(C=r^2\dot\theta\) ; 5) \(E_{p\,\mathrm{eff}}\) ; 6) état lié ou de diffusion ; 7) portées \(a=\dfrac{h}{2\pi m_bc}\) ; 8) cas gravitationnel et électromagnétique ; 9) signes de \(K\) et \(K'\).</p>
+        <figure><img src="td8-img/yukawa.png" alt="Allure de Epeff pour le potentiel de Yukawa" style="max-width:420px;width:100%"></figure>
+
+        <p class="q">1) Dimensions de \(a\) et \(K\)</p>
+        <p class="etape">Étape 1 : \(a\).</p>
+        <p>L'exponentielle \(e^{-r/a}\) a un argument sans dimension, donc \(a\) a la dimension d'une longueur.</p>
+        <div class="res">\([a]=\mathrm{L}\) (en mètres).</div>
+        <p class="etape">Étape 2 : \(K\).</p>
+        <p>\(K\,e^{-r/a}/r\) est une énergie, donc \(K=E_p\,r\).</p>
+        <div class="res">\([K]=\mathrm{M\,L^3\,T^{-2}}\), soit des J·m.</div>
+
+        <p class="q">2) Force et signe de \(K\)</p>
+        <div class="rappel"><span class="lab">Rappel · force conservative centrale</span>\[ \vec F=-\frac{dE_p}{dr}\,\vec e_r \]</div>
+        <p class="etape">Étape 1 : on dérive le produit \(K\,r^{-1}e^{-r/a}\).</p>
+        \[ \frac{dE_p}{dr}=K\left(-\frac{1}{r^2}-\frac{1}{ar}\right)e^{-r/a} \]
+        \[ \vec F=K\,e^{-r/a}\left(\frac{1}{r^2}+\frac{1}{ar}\right)\vec e_r \]
+        <p class="etape">Étape 2 : signe. Le facteur entre parenthèses est positif, donc le signe de \(F_r\) est celui de \(K\). Une force attractive est dirigée vers \(O\), soit \(F_r<0\).</p>
+        <div class="res">La force est attractive si \(K<0\).</div>
+
+        <p class="q">3) Plan de la trajectoire</p>
+        <p class="etape">Étape 1 : le théorème du moment cinétique en \(O\).</p>
+        \[ \frac{d\vec L_O}{dt}=\overrightarrow{OM}\wedge\vec F=r\vec e_r\wedge F\vec e_r=\vec 0 \]
+        <p class="etape">Étape 2 : \(\vec L_O=\overrightarrow{OM}\wedge m\vec v\) est constant et orthogonal à \(\overrightarrow{OM}\) à tout instant.</p>
+        <div class="res">\(M\) reste dans le plan passant par \(O\) et orthogonal à \(\vec L_O\) (plan défini par \(\overrightarrow{OM_0}\) et \(\vec v_0\)).</div>
+
+        <p class="q">4) Constante \(C=r^2\dot\theta\)</p>
+        <p class="etape">Étape 1 : dans le plan \(Oxy\), avec \(\vec v=\dot r\vec e_r+r\dot\theta\vec e_\theta\), le moment cinétique vaut</p>
+        \[ \vec L_O=m\,r\vec e_r\wedge(\dot r\vec e_r+r\dot\theta\vec e_\theta)=m\,r^2\dot\theta\,\vec e_z \]
+        <p>Il est constant, donc \(C=r^2\dot\theta\) est constante.</p>
+        <p class="etape">Étape 2 : valeur initiale. À \(t=0\), \(\theta=0\), \(r=r_0\), \(\vec v_0=v_1\vec e_x+v_2\vec e_y\). La composante orthoradiale de \(\vec v_0\) est \(r_0\dot\theta_0=v_2\) (car \(\vec e_\theta=\vec e_y\) pour \(\theta=0\)).</p>
+        <div class="res">\(C=r_0^2\dot\theta_0=r_0\,v_2\).</div>
+
+        <p class="q">5) Énergie mécanique et \(E_{p\,\mathrm{eff}}\)</p>
+        <p class="etape">Étape 1 : \(E_m=\tfrac12m(\dot r^2+r^2\dot\theta^2)+E_p(r)\). On remplace \(\dot\theta=C/r^2\).</p>
+        \[ E_m=\tfrac12m\dot r^2+\underbrace{\frac{mC^2}{2r^2}+\frac{K}{r}e^{-r/a}}_{E_{p\,\mathrm{eff}}(r)} \]
+        <p class="etape">Étape 2 : conservation. La seule force est conservative (dérive de \(E_p\)), donc \(E_m\) est constante.</p>
+        <div class="res">\(E_{p\,\mathrm{eff}}(r)=\dfrac{mC^2}{2r^2}+\dfrac{K}{r}e^{-r/a}\) ; \(E_m\) se conserve.</div>
+
+        <p class="q">6) État lié ou état de diffusion</p>
+        <p class="etape">Étape 1 : lecture du graphe. \(E_{p\,\mathrm{eff}}\) présente un puits de minimum \(E_1<0\) en \(r_1\), puis une barrière de maximum \(E_2>0\) en \(r_2\), puis tend vers \(0^+\) quand \(r\to\infty\).</p>
+        <p class="etape">Étape 2 : condition d'accessibilité \(E_m\ge E_{p\,\mathrm{eff}}(r)\).</p>
+        <ul>
+          <li>\(E_1\le E_m<0\) : \(r\) reste entre deux rayons d'arrêt, c'est un <b>état lié</b>.</li>
+          <li>\(0\le E_m&lt;E_2\) : si \(r_0&lt;r_2\), le nucléon reste piégé dans le puits (état lié) ; si \(r_0>r_2\), il est dans la zone externe (diffusion).</li>
+          <li>\(E_m>E_2\) : aucun obstacle, \(r\) peut tendre vers l'infini : <b>diffusion</b>.</li>
+        </ul>
+        <div class="res">Un nucléon dans un noyau est dans un <b>état lié</b> : \(E_m\) est dans le puits, \(r_0&lt;r_2\).</div>
+
+        <p class="q">7) Portée des quatre interactions</p>
+        <div class="rappel"><span class="lab">Rappel · portée de Yukawa</span>\[ a=\frac{h}{2\pi m_b c} \]</div>
+        <p class="etape">Étape 1 : pion (\(m_b=2{,}4\cdot10^{-28}\) kg).</p>
+        \[ a=\frac{6{,}6\cdot10^{-34}}{2\pi\times2{,}4\cdot10^{-28}\times3{,}0\cdot10^{8}}\approx1{,}5\cdot10^{-15}\ \mathrm{m} \]
+        <p class="etape">Étape 2 : boson \(W^\pm\) (\(m_b=1{,}4\cdot10^{-25}\) kg).</p>
+        \[ a=\frac{6{,}6\cdot10^{-34}}{2\pi\times1{,}4\cdot10^{-25}\times3{,}0\cdot10^{8}}\approx2{,}5\cdot10^{-18}\ \mathrm{m} \]
+        <p class="etape">Étape 3 : photon et graviton, \(m_b=0\), donc \(a\to+\infty\).</p>
+        <div class="res">Forte : \(1{,}5\cdot10^{-15}\) m (taille d'un noyau). Faible : \(2{,}5\cdot10^{-18}\) m (bien plus petit qu'un noyau). Électromagnétique et gravitationnelle : portée infinie.</div>
+
+        <p class="q">8) Interactions gravitationnelle et électromagnétique</p>
+        <p class="etape">Étape 1 : avec \(a\to\infty\), \(e^{-r/a}\to1\) et \(\dfrac{1}{ar}\to0\).</p>
+        \[ \vec F=K\left(\frac{1}{r^2}+\frac{1}{ar}\right)e^{-r/a}\vec e_r\;\longrightarrow\;\frac{K}{r^2}\vec e_r \]
+        <div class="res">On retrouve une force en \(1/r^2\) : la loi de Newton (\(K=-Gm_1m_2\)) ou de Coulomb (\(K=\dfrac{q_1q_2}{4\pi\varepsilon_0}\)).</div>
+
+        <p class="q">9) Signes de \(K\) et \(K'\) pour un proton dans un noyau</p>
+        <p class="etape">Étape 1 : l'interaction électromagnétique entre deux protons (charges de même signe) est répulsive, donc \(K>0\).</p>
+        <p class="etape">Étape 2 : pour que le noyau soit lié, l'interaction forte doit être attractive, donc \(K'<0\), et elle doit l'emporter sur la répulsion coulombienne à courte distance.</p>
+        <div class="res">\(K>0\) (électromagnétique) et \(K'<0\) avec \(|K'|>K\) à l'échelle du noyau (forte).</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="ex2">
+    <h2>Exercice 2 — Force de rappel isotrope</h2>
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 2 — \(E_p=\tfrac12kr^2\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(M\) de masse \(m\), force centrale dérivant de \(E_p(r)=\tfrac12kr^2\) (\(k>0\)). Conditions initiales : \(x(0)=a>0\), \(y(0)=z(0)=0\), \(\dot x(0)=\dot z(0)=0\), \(\dot y(0)=v_0>0\).</p>
+
+        <p class="q">1) Force \(\vec F\)</p>
+        <p class="etape">Étape 1 : \(\vec F=-\dfrac{dE_p}{dr}\vec e_r=-kr\,\vec e_r\).</p>
+        <div class="res">\(\vec F=-k\,\overrightarrow{OM}\) : force de rappel élastique, dirigée vers \(O\).</div>
+
+        <p class="q">2) Moment cinétique et plan du mouvement</p>
+        <p class="etape">Étape 1 : \(\dfrac{d\vec L_O}{dt}=\overrightarrow{OM}\wedge\vec F=-k\,\overrightarrow{OM}\wedge\overrightarrow{OM}=\vec0\).</p>
+        <p class="etape">Étape 2 : valeur à \(t=0\), avec \(\overrightarrow{OM_0}=a\vec e_x\) et \(\vec v_0=v_0\vec e_y\).</p>
+        \[ \vec L_O=m\,a\vec e_x\wedge v_0\vec e_y=m\,a\,v_0\,\vec e_z \]
+        <div class="res">\(\vec L_O=mav_0\vec e_z\) constant : le mouvement est dans le plan \(Oxy\) (\(z=0\)).</div>
+
+        <p class="q">3) Énergie mécanique</p>
+        <p class="etape">Étape 1 : \(\vec F\) dérive d'une énergie potentielle, donc \(E_M\) se conserve. On la calcule à \(t=0\) (\(r=a\), \(v=v_0\)).</p>
+        <div class="res">\(E_M=\tfrac12mv_0^2+\tfrac12ka^2\).</div>
+
+        <p class="q">4) \(r^2\dot\theta\) et équation en \(r\)</p>
+        <p class="etape">Étape 1 : \(L_O=mr^2\dot\theta=mav_0\), donc \(r^2\dot\theta=a\,v_0\).</p>
+        <p class="etape">Étape 2 : on reporte \(\dot\theta=\dfrac{av_0}{r^2}\) dans \(E_M\).</p>
+        \[ \tfrac12m\dot r^2+\frac{m\,a^2v_0^2}{2r^2}+\tfrac12kr^2=\tfrac12mv_0^2+\tfrac12ka^2 \]
+        <div class="res">\(\dot r^2+\dfrac{a^2v_0^2}{r^2}+\dfrac{k}{m}r^2=v_0^2+\dfrac{k}{m}a^2\).</div>
+
+        <p class="q">5) Énergie potentielle effective et cercles limites</p>
+        <p class="etape">Étape 1 : \(E_{p\,\mathrm{eff}}(r)=\dfrac{m\,a^2v_0^2}{2r^2}+\tfrac12kr^2\), qui tend vers \(+\infty\) en \(0\) et en \(\infty\), avec un minimum : le mouvement est borné.</p>
+        <p class="etape">Étape 2 : rayons d'arrêt, \(\dot r=0\), soit \(E_{p\,\mathrm{eff}}(r)=E_M\). On multiplie par \(2r^2\) :</p>
+        \[ k\,r^4-(mv_0^2+ka^2)\,r^2+m\,a^2v_0^2=0 \]
+        <p class="etape">Étape 3 : factorisation. On vérifie que \((kr^2-mv_0^2)(r^2-a^2)\) redonne ce polynôme : \(kr^4-ka^2r^2-mv_0^2r^2+mv_0^2a^2\). Les racines sont</p>
+        \[ r^2=a^2\qquad\text{et}\qquad r^2=\frac{m\,v_0^2}{k} \]
+        <div class="res">La trajectoire est comprise entre deux cercles de rayons \(a\) et \(v_0\sqrt{m/k}=v_0/\omega\) (le plus petit étant \(r_{min}\), le plus grand \(r_{max}\)).</div>
+
+        <p class="q">6) Équations horaires et nature de la trajectoire</p>
+        <p class="etape">Étape 1 : PFD, \(m\ddot{\overrightarrow{OM}}=-k\,\overrightarrow{OM}\). On pose \(\omega=\sqrt{k/m}\).</p>
+        \[ \ddot{\overrightarrow{OM}}+\omega^2\overrightarrow{OM}=\vec0 \]
+        <p class="etape">Étape 2 : solution vectorielle \(\overrightarrow{OM}=\vec A\cos\omega t+\vec B\sin\omega t\). Conditions initiales : \(\vec A=\overrightarrow{OM_0}=a\vec e_x\) et \(\omega\vec B=\vec v_0=v_0\vec e_y\).</p>
+        <div class="res">\(x(t)=a\cos\omega t\), \(y(t)=\dfrac{v_0}{\omega}\sin\omega t\), \(z=0\).</div>
+        <p class="etape">Étape 3 : nature. \(\dfrac{x^2}{a^2}+\dfrac{y^2}{(v_0/\omega)^2}=1\).</p>
+        <div class="res">La trajectoire est une <b>ellipse</b> centrée sur \(O\) de demi-axes \(a\) et \(v_0/\omega=v_0\sqrt{m/k}\). Cela confirme la question 5 : les deux cercles sont les cercles circonscrit et inscrit à l'ellipse. Si \(v_0=a\omega\), c'est un cercle.</div>
+        <div class="warnbox"><span class="lab">Piège</span> Ici \(O\) est le <b>centre</b> de l'ellipse, alors que pour une force en \(1/r^2\) (exos 3 à 6) \(O\) est un <b>foyer</b>.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="ex3">
+    <h2>Exercice 3 — Expérience de Rutherford</h2>
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 3 — Diffusion d'une particule alpha par un noyau d'or</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Particule alpha (masse \(m\), charge \(2e\)) venant de l'infini avec la vitesse \(-v_0\vec e_x\), de paramètre d'impact \(b\), sur un noyau fixe en \(O\) de numéro atomique \(Z\). Trajectoire : branche d'hyperbole. Donnée : \(\tan\dfrac D2=\dfrac{K}{mbv_0^2}\) ; \(\varepsilon_0=8{,}9\cdot10^{-12}\), \(e=1{,}6\cdot10^{-19}\) C, \(m=6{,}6\cdot10^{-27}\) kg, \(v_0=2{,}0\cdot10^{7}\) m·s\(^{-1}\), \(Z=79\).</p>
+        <figure><img src="td8-img/rutherford.png" alt="Trajectoire hyperbolique de la particule alpha" style="max-width:420px;width:100%"></figure>
+
+        <p class="q">1) Force et énergie potentielle</p>
+        <div class="rappel"><span class="lab">Rappel · loi de Coulomb</span>\[ \vec F=\frac{q_1q_2}{4\pi\varepsilon_0r^2}\vec e_r \]</div>
+        <p class="etape">Étape 1 : \(q_1=2e\) et \(q_2=Ze\).</p>
+        \[ \vec F=\frac{K}{r^2}\vec e_r\quad\text{avec}\quad K=\frac{2Ze^2}{4\pi\varepsilon_0}>0 \]
+        <p class="etape">Étape 2 : \(E_p=-\displaystyle\int F\,dr\) avec \(E_p(\infty)=0\).</p>
+        <div class="res">\(E_p(r)=\dfrac{K}{r}\) ; la force est répulsive (\(K>0\)).</div>
+
+        <p class="q">2) Énergie mécanique</p>
+        <p class="etape">Étape 1 : force conservative, donc \(E_m\) constante. Évaluation à l'infini : \(E_p=0\), \(v=v_0\).</p>
+        <div class="res">\(E_m=\tfrac12mv_0^2\).</div>
+
+        <p class="q">3) Moment cinétique</p>
+        <p class="etape">Étape 1 : force centrale, donc \(\vec L_O\) est constant. Il vaut \(\vec L_O=mr^2\dot\theta\,\vec e_z\).</p>
+        <p class="etape">Étape 2 : valeur initiale. À l'infini, la vitesse est \(v_0\) parallèle à l'axe \(Ox\), et la distance de \(O\) à cette droite est \(b\) : \(\|\overrightarrow{OM}\wedge m\vec v\|=m\,v_0\,b\).</p>
+        <div class="res">\(|L_O|=mv_0b\), donc \(C=r^2\dot\theta=v_0b\).</div>
+
+        <p class="q">4) \(E_p^*(r)\)</p>
+        <p class="etape">Étape 1 : \(E_m=\tfrac12m\dot r^2+\tfrac12mr^2\dot\theta^2+\dfrac Kr\), avec \(\dot\theta=\dfrac{v_0b}{r^2}\).</p>
+        <div class="res">\(E_m=\tfrac12m\dot r^2+E_p^*(r)\) avec \(E_p^*(r)=\dfrac{mv_0^2b^2}{2r^2}+\dfrac Kr\), l'<b>énergie potentielle effective</b>.</div>
+
+        <p class="q">5) Distance minimale d'approche</p>
+        <p class="etape">Étape 1 : en \(S\), \(\dot r=0\), donc \(E_m=E_p^*(r_{min})\).</p>
+        \[ \tfrac12mv_0^2=\frac{mv_0^2b^2}{2r_{min}^2}+\frac{K}{r_{min}} \]
+        <p class="etape">Étape 2 : on multiplie par \(\dfrac{2r_{min}^2}{mv_0^2}\) pour obtenir une équation du second degré.</p>
+        \[ r_{min}^2-\frac{2K}{mv_0^2}\,r_{min}-b^2=0 \]
+        <p class="etape">Étape 3 : on garde la racine positive (\(\Delta'=\left(\frac{K}{mv_0^2}\right)^2+b^2\)).</p>
+        <div class="res">\(r_{min}=\dfrac{K}{mv_0^2}+\sqrt{\left(\dfrac{K}{mv_0^2}\right)^2+b^2}\).</div>
+
+        <p class="q">6) Applications numériques</p>
+        <p class="etape">Étape 1 : la constante \(K\).</p>
+        \[ K=\frac{2\times79\times(1{,}6\cdot10^{-19})^2}{4\pi\times8{,}9\cdot10^{-12}}\approx3{,}6\cdot10^{-26}\ \mathrm{J\cdot m} \]
+        <p class="etape">Étape 2 : \(\dfrac{K}{mv_0^2}\), avec \(mv_0^2=6{,}6\cdot10^{-27}\times(2{,}0\cdot10^{7})^2=2{,}64\cdot10^{-12}\) J.</p>
+        \[ \frac{K}{mv_0^2}\approx1{,}37\cdot10^{-14}\ \mathrm{m} \]
+        <p class="etape">Étape 3 : \(D=60^\circ\). \(b=\dfrac{K}{mv_0^2\tan30^\circ}\).</p>
+        \[ b=\frac{1{,}37\cdot10^{-14}}{0{,}577}\approx2{,}4\cdot10^{-14}\ \mathrm m,\qquad r_{min}=1{,}37\cdot10^{-14}+\sqrt{(1{,}37\cdot10^{-14})^2+(2{,}37\cdot10^{-14})^2}\approx4{,}1\cdot10^{-14}\ \mathrm m \]
+        <p class="etape">Étape 4 : \(D=180^\circ\). \(\tan90^\circ\to\infty\), donc \(b=0\) : choc frontal. Alors \(r_{min}=\dfrac{2K}{mv_0^2}\).</p>
+        \[ r_{min}\approx2{,}7\cdot10^{-14}\ \mathrm m \]
+        <div class="res">Même pour un choc frontal, la particule s'arrête à \(2{,}7\cdot10^{-14}\) m du noyau : le noyau d'or a une taille inférieure à \(\sim3\cdot10^{-14}\) m, soit de l'ordre de \(10^{-14}\) m (contre \(10^{-10}\) m pour l'atome).</div>
+        <div class="warnbox"><span class="lab">Piège</span> \(r_{min}\) est une <b>borne supérieure</b> de la taille du noyau : la particule n'a pas touché le noyau, elle a été repoussée avant. Le vrai rayon du noyau d'or est de \(\sim7\cdot10^{-15}\) m.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="ex4">
+    <h2>Exercice 4 — Satellite circulaire</h2>
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 4 — Orbite circulaire, satellite géostationnaire, lancement</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Satellite de masse \(m\) sur une orbite circulaire de rayon \(r=R+h\). \(G=6{,}67\cdot10^{-11}\) SI, \(M=6{,}0\cdot10^{24}\) kg, \(R=6370\) km.</p>
+
+        <p class="q">1) Vitesse</p>
+        <div class="rappel"><span class="lab">Rappel · PFD, base polaire</span>\[ \vec a=(\ddot r-r\dot\theta^2)\vec e_r+(2\dot r\dot\theta+r\ddot\theta)\vec e_\theta \]</div>
+        <p class="etape">Étape 1 : PFD avec \(\vec F=-\dfrac{GMm}{r^2}\vec e_r\) et \(r=\mathrm{cte}\).</p>
+        \[ -mr\dot\theta^2=-\frac{GMm}{r^2}\quad(\text{sur }\vec e_r),\qquad mr\ddot\theta=0\quad(\text{sur }\vec e_\theta) \]
+        <p class="etape">Étape 2 : \(\ddot\theta=0\), donc \(\dot\theta\) et \(v=r\dot\theta\) sont constants. Sur \(\vec e_r\), \(\dfrac{v^2}{r}=\dfrac{GM}{r^2}\).</p>
+        <div class="res">\(v=\sqrt{\dfrac{GM}{R+h}}\) : constante, mouvement circulaire uniforme.</div>
+
+        <p class="q">2) Période et troisième loi de Kepler</p>
+        <p class="etape">Étape 1 : \(T=\dfrac{2\pi r}{v}=2\pi r\sqrt{\dfrac{r}{GM}}\).</p>
+        \[ \frac{T^2}{r^3}=\frac{4\pi^2}{GM} \]
+        <div class="res">Cette valeur ne dépend que de \(M\), pas de \(m\) : elle est la même pour tous les satellites de la Terre. Pour le système solaire : \(\dfrac{T^2}{a^3}=\dfrac{4\pi^2}{GM_{Soleil}}\) (3ᵉ loi de Kepler, \(a\) = demi-grand axe).</div>
+
+        <p class="q">3) Énergies</p>
+        <p class="etape">Étape 1 : \(E_c=\tfrac12mv^2=\dfrac{GMm}{2r}\).</p>
+        <p class="etape">Étape 2 : \(E_p=-\dfrac{GMm}{r}\), donc \(E_m=E_c+E_p=-\dfrac{GMm}{2r}\).</p>
+        <div class="res">\(E_m=-E_c=\tfrac12E_p\). \(E_m<0\) : état lié, le satellite reste prisonnier de la Terre.</div>
+
+        <p class="q">4) Satellite géostationnaire</p>
+        <p class="etape">Étape 1 : immobile par rapport à la Terre, il tourne dans le plan équatorial avec la période de rotation de la Terre, le jour sidéral \(T=86\,164\) s (≈ 24 h).</p>
+        <p class="etape">Étape 2 : on inverse la 3ᵉ loi.</p>
+        \[ r=\left(\frac{GMT^2}{4\pi^2}\right)^{1/3}=\left(\frac{6{,}67\cdot10^{-11}\times6{,}0\cdot10^{24}\times86164^2}{4\pi^2}\right)^{1/3}\approx4{,}22\cdot10^{7}\ \mathrm m \]
+        <div class="res">\(h=r-R\approx3{,}6\cdot10^{4}\) km (≈ 36 000 km), et \(v=\sqrt{GM/r}\approx3{,}1\) km·s\(^{-1}\). C'est six fois le rayon terrestre : un satellite géostationnaire est très haut, et un seul rayon est possible.</div>
+
+        <p class="q">5) Lancement</p>
+        <p class="etape">Étape 1 : a) avant le lancement, le satellite est immobile sur Terre à la latitude \(\lambda\) : il tourne à \(\Omega=\dfrac{2\pi}{T}\) sur un cercle de rayon \(R\cos\lambda\). Sa vitesse est \(\Omega R\cos\lambda\).</p>
+        <div class="res">\(E_{m,i}=\tfrac12m\Omega^2R^2\cos^2\lambda-\dfrac{GMm}{R}\).</div>
+        <p class="etape">Étape 2 : b) la fusée fournit \(W=E_{m,f}-E_{m,i}\) (théorème de l'énergie mécanique), avec \(E_{m,f}=-\dfrac{GMm}{2r}\).</p>
+        <div class="res">\(W=\dfrac{GMm}{R}-\dfrac{GMm}{2(R+h)}-\tfrac12m\Omega^2R^2\cos^2\lambda\). \(W\) est minimal quand \(\cos\lambda=1\) : on place la base <b>à l'équateur</b>, où la Terre « donne » la vitesse initiale la plus grande (\(\Omega R=465\) m·s\(^{-1}\)).</div>
+        <p class="etape">Étape 3 : c) \(h\ll R\), donc \(W(\lambda)\approx\dfrac{GMm}{2R}-\tfrac12m\Omega^2R^2\cos^2\lambda\). Par kilogramme : \(\dfrac{GM}{2R}=3{,}14\cdot10^{7}\) J·kg\(^{-1}\) et \(\tfrac12\Omega^2R^2=1{,}08\cdot10^{5}\) J·kg\(^{-1}\).</p>
+        \[ W(0^\circ)\approx3{,}130\cdot10^{7},\qquad W(55^\circ)\approx3{,}138\cdot10^{7}\ \mathrm{J\cdot kg^{-1}} \]
+        \[ \frac{W(55^\circ)-W(0^\circ)}{W(55^\circ)}\approx0{,}23\ \% \]
+        <div class="res">L'économie est d'environ <b>0,2 %</b> : faible, car l'énergie de rotation de la Terre est minuscule devant l'énergie nécessaire pour monter. On choisit tout de même l'équateur pour viser l'orbite géostationnaire (plan équatorial) et gagner un peu.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="ex5">
+    <h2>Exercice 5 — Trou noir</h2>
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 5 — Vitesse de libération et rayon d'un trou noir</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Point \(P\) de masse \(m\) près d'un astre sphérique de centre \(O\), de masse \(M\) et de rayon \(R\), dans le référentiel astrocentrique supposé galiléen.</p>
+
+        <p class="q">1) Force, énergie potentielle, énergie mécanique</p>
+        <p class="etape">Étape 1 : loi de gravitation de Newton.</p>
+        \[ \vec F=-\frac{GMm}{r^2}\vec e_r,\qquad E_p(r)=-\frac{GMm}{r}\ (E_p(\infty)=0),\qquad E_m=\tfrac12mv^2-\frac{GMm}{r} \]
+        <div class="res">\(E_m\) se conserve : \(\vec F\) est conservative et seule force.</div>
+
+        <p class="q">2) Mouvement plan et \(C=r^2\dot\theta\)</p>
+        <p class="etape">Étape 1 : \(\vec F\) centrale donc \(\dfrac{d\vec L_O}{dt}=\vec0\) : \(\vec L_O\) constant, \(\overrightarrow{OP}\perp\vec L_O\), le mouvement est plan.</p>
+        <p class="etape">Étape 2 : en polaires, \(\vec L_O=mr^2\dot\theta\vec e_z\) constant.</p>
+        <div class="res">\(C=r^2\dot\theta\) est une constante du mouvement.</div>
+
+        <p class="q">3) \(E_{p\,\mathrm{eff}}\)</p>
+        <p class="etape">Étape 1 : \(v^2=\dot r^2+r^2\dot\theta^2=\dot r^2+\dfrac{C^2}{r^2}\).</p>
+        <div class="res">\(E_{p\,\mathrm{eff}}(r)=\dfrac{mC^2}{2r^2}-\dfrac{GMm}{r}\).</div>
+
+        <p class="q">4) Courbe et états de diffusion</p>
+        <p class="etape">Étape 1 : allure. \(E_{p\,\mathrm{eff}}\to+\infty\) quand \(r\to0\) (terme en \(1/r^2\) dominant), puis passe par un minimum négatif en \(r=\dfrac{C^2}{GM}\) (valeur \(-\dfrac{G^2M^2m}{2C^2}\)), puis tend vers \(0^-\) quand \(r\to\infty\).</p>
+        <p class="etape">Étape 2 : raisonnement graphique. \(P\) ne peut aller qu'aux \(r\) vérifiant \(E_m\ge E_{p\,\mathrm{eff}}\).</p>
+        <ul>
+          <li>\(E_m<0\) : \(r\) est borné, état lié (ellipse).</li>
+          <li>\(E_m\ge0\) : aucune borne supérieure en \(r\), \(P\) peut s'éloigner à l'infini.</li>
+        </ul>
+        <div class="res">\(P\) échappe à l'astre (état de diffusion) si et seulement si \(E_m\ge0\) (parabole si \(E_m=0\), hyperbole si \(E_m>0\)).</div>
+
+        <p class="q">5) Vitesse de libération</p>
+        <p class="etape">Étape 1 : on cherche la vitesse minimale en \(r=R\). Le cas le plus favorable est \(E_m=0\).</p>
+        \[ \tfrac12mv_{lib}^2-\frac{GMm}{R}=0 \]
+        <div class="res">\(v_{lib}=\sqrt{\dfrac{2GM}{R}}\). Pour la Terre : \(v_{lib}=\sqrt{\dfrac{2\times6{,}67\cdot10^{-11}\times6{,}0\cdot10^{24}}{6{,}37\cdot10^{6}}}\approx1{,}1\cdot10^{4}\) m·s\(^{-1}\), soit 11 km·s\(^{-1}\).</div>
+
+        <p class="q">6) Rayon d'un trou noir</p>
+        <p class="etape">Étape 1 : condition \(v_{lib}>c\).</p>
+        \[ \sqrt{\frac{2GM}{R}}>c\;\Longleftrightarrow\;R<\frac{2GM}{c^2} \]
+        <div class="res">\(R_S=\dfrac{2GM}{c^2}\) (rayon de Schwarzschild).</div>
+
+        <p class="q">7) Applications numériques</p>
+        <ul>
+          <li>Soleil (\(M=2{,}0\cdot10^{30}\) kg) : \(R_S=\dfrac{2\times6{,}67\cdot10^{-11}\times2{,}0\cdot10^{30}}{(3{,}0\cdot10^{8})^2}\approx3{,}0\cdot10^{3}\) m, soit environ 3 km.</li>
+          <li>Terre (\(M=6{,}0\cdot10^{24}\) kg) : \(R_S\approx9\cdot10^{-3}\) m, soit environ 9 mm.</li>
+        </ul>
+        <div class="res">Pour devenir un trou noir, le Soleil (rayon réel \(7\cdot10^{5}\) km) devrait être comprimé dans une boule de 3 km, et la Terre dans une bille de 9 mm : une densité colossale.</div>
+
+        <p class="q">8) Réserves sur l'emploi de la loi de Newton</p>
+        <ul>
+          <li>La mécanique de Newton suppose \(v\ll c\) : elle n'est plus valable pour des vitesses de l'ordre de \(c\).</li>
+          <li>La lumière n'a pas de masse : l'énergie cinétique \(\tfrac12mv^2\) n'a pas de sens pour un photon ; il faut la relativité (restreinte et générale).</li>
+          <li>La gravitation est un effet de courbure de l'espace-temps (relativité générale) ; la loi en \(1/r^2\) n'est qu'une approximation des champs faibles.</li>
+          <li>Le résultat \(R_S=2GM/c^2\) coïncide avec celui de la relativité générale, par chance et non par rigueur.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="ex6">
+    <h2>Exercice 6 — Alerte à l'astéroïde</h2>
+    <div class="exo-card">
+      <div class="exo-head"><span>Exercice 6 — Astéroïde de paramètre d'impact \(b\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Astéroïde de masse \(m\), très loin de la Terre avec la vitesse \(\vec v_0\) et le paramètre d'impact \(b\). Il est dévié selon une hyperbole ; le périgée \(P\) est le point le plus proche. \(v_0=2{,}0\) km·s\(^{-1}\), \(b=140\,000\) km.</p>
+        <figure><img src="td8-img/asteroide.png" alt="Trajectoire hyperbolique de l'astéroïde" style="max-width:420px;width:100%"></figure>
+
+        <p class="q">1) Grandeurs conservées et équations</p>
+        <p class="etape">Étape 1 : la gravitation est une force centrale conservative, donc le moment cinétique \(\vec L_O\) et l'énergie mécanique \(E_m\) se conservent.</p>
+        <p class="etape">Étape 2 : en \(M_\infty\), la vitesse est \(v_0\), la distance à la droite support est \(b\) et \(E_p=0\). En \(P\), la vitesse \(\vec v_P\) est orthoradiale (perpendiculaire à \(\overrightarrow{OP}\)) car \(\dot r=0\).</p>
+        \[ mbv_0=m\,r_{min}\,v_P \quad(\text{moment cinétique}) \]
+        \[ \tfrac12mv_0^2=\tfrac12mv_P^2-\frac{GMm}{r_{min}}\quad(\text{énergie mécanique}) \]
+
+        <p class="q">2) Distance minimale d'approche</p>
+        <p class="etape">Étape 1 : on tire \(v_P=\dfrac{bv_0}{r_{min}}\) de la première équation et on le reporte dans la seconde.</p>
+        \[ \tfrac12v_0^2=\frac{b^2v_0^2}{2r_{min}^2}-\frac{GM}{r_{min}} \]
+        <p class="etape">Étape 2 : on multiplie par \(\dfrac{2r_{min}^2}{v_0^2}\).</p>
+        \[ r_{min}^2+\frac{2GM}{v_0^2}\,r_{min}-b^2=0 \]
+        <p class="etape">Étape 3 : racine positive.</p>
+        <div class="res">\(r_{min}=-\dfrac{GM}{v_0^2}+\sqrt{\left(\dfrac{GM}{v_0^2}\right)^2+b^2}\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> Comparer avec l'exercice 3 : même équation, mais le signe du terme en \(r_{min}\) change car la force est <b>attractive</b> (\(-GM\)) au lieu de répulsive (\(+K/m\)).</div>
+
+        <p class="q">3) L'astéroïde s'écrase-t-il ?</p>
+        <p class="etape">Étape 1 : \(\dfrac{GM}{v_0^2}=\dfrac{6{,}67\cdot10^{-11}\times6{,}0\cdot10^{24}}{(2{,}0\cdot10^{3})^2}\approx1{,}0\cdot10^{8}\) m.</p>
+        <p class="etape">Étape 2 : \(b=1{,}4\cdot10^{8}\) m.</p>
+        \[ r_{min}=-1{,}0\cdot10^{8}+\sqrt{(1{,}0\cdot10^{8})^2+(1{,}4\cdot10^{8})^2}\approx7{,}2\cdot10^{7}\ \mathrm m \]
+        <div class="res">\(r_{min}\approx72\,000\) km, bien supérieur au rayon terrestre \(R=6370\) km : <b>l'astéroïde ne s'écrase pas</b> (il passe à environ 11 rayons terrestres du centre).</div>
+        <div class="note">Pour aller plus loin : l'impact a lieu si \(r_{min}\le R\), c'est-à-dire \(b\le b_c=\sqrt{R^2+\dfrac{2GMR}{v_0^2}}\approx3{,}6\cdot10^{4}\) km. La gravitation <b>focalise</b> : la Terre attire des objets dont le paramètre d'impact est plus grand que son rayon (\(b_c\approx5{,}7\,R\)), mais pas jusqu'à 140 000 km.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">Énoncé du TD8, retapé proprement (même mise en page) : version PDF et version Word modifiable.</p>
+    <div class="docs-group">
+      <h3>TD8 — D. Courtois (ECAM, P2030, 17/11/2026)</h3>
+      <ul>
+        <li><a class="doc-item" href="../assets/pdf.html?f=../documents/aem2-physique/ch8-forces-centrales/TD8-forces-centrales.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD8 — Systèmes tournants (énoncé retapé)</span></a></li>
+        <li><a class="doc-item" href="../documents/aem2-physique/ch8-forces-centrales/TD8-forces-centrales.docx" download><span class="ic">DOCX</span><span class="nm">TD8 — version Word modifiable</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Cursus AM2 · Physique · Les figures de l'énoncé sont redessinées (schémas). Les corrections ci-dessus sont <b>maison</b>.
+    Voir aussi <a href="ch8-forces-centrales.html">Ch8 — Mouvement à force centrale</a> et <a href="ch7-moment-cinetique.html">Ch7 — Moment cinétique</a>.</p>
+  </section>
+
+</main>
+<script src="../assets/gate.js"></script>
+<script src="../assets/catalogue.js?v=2"></script>
+<script src="../assets/nav.js?v=2"></script>
+<script src="../assets/lecture.js?v=3"></script>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Systèmes différentiels — AM2 Mathématiques</title>
+<link rel="stylesheet" href="../assets/style.css?v=4">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags:'none' },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+<div id="site-nav"></div>
+<nav class="subnav"><a href="#memo">Fiche mémo</a><a href="#cours">Cours</a><a href="#app">Exemples du CM corrigés</a><a href="#td">Correction TD7</a><a href="#docs">Documents donnés</a></nav>
+
+<main class="wrap">
+  <span class="chip">Maths AM2 (2ᵉ année) · Chapitre 7</span>
+  <h1 class="title">Systèmes différentiels linéaires</h1>
+  <p class="lead">Cours L. Graissot (ECAM AM2, 2026-2027), chapitre 7 : systèmes \(X'=AX\), trigonalisation, sous-espaces caractéristiques,
+  décomposition de Dunford, exponentielle de matrices, équations d'ordre \(n\). La page contient les <b>exemples du cours laissés vides
+  (3, 4, 6, 9, 12, 13, 15, 16) corrigés</b> et le <b>TD7 corrigé (exercices 1 → 3)</b>. Pas de corrigé officiel : <b>tout est résolu maison</b>
+  et vérifié par calcul formel (chaque solution est réinjectée dans le système).</p>
+
+  <div class="toc-mini">
+    <b>Sommaire du chapitre</b>
+    <ul style="margin:.4rem 0 0">
+      <li><a href="#memo">📌 Fiche mémo</a></li>
+      <li><a href="#cours">1. Résumé de cours</a></li>
+      <li><a href="#app">2. Exemples du cours corrigés (3, 4, 6, 9, 12, 13, 15, 16)</a></li>
+      <li><a href="#td">3. Correction TD7 — exercices 1 à 3</a></li>
+      <li><a href="#docs">📂 Documents donnés</a></li>
+    </ul>
+  </div>
+
+  <section class="memo-sheet" id="memo">
+    <div class="memo-head">📌 Fiche mémo — systèmes différentiels</div>
+    <div class="memo-grid">
+      <div class="memo-item"><b>Système homogène</b>\(X'=AX\), \(A\) constante ; l'ensemble des solutions est un espace vectoriel de dimension \(n\)</div>
+      <div class="memo-item"><b>Solution générale</b>\(X(t)=\exp(tA)\,X_0\), avec \(X(0)=X_0\) (Cauchy-Lipschitz : existence et unicité)</div>
+      <div class="memo-item"><b>Vecteur propre</b>\(AV=\lambda V\Rightarrow X(t)=e^{\lambda t}V\) est solution</div>
+      <div class="memo-item"><b>\(A\) diagonalisable</b>base de solutions \(e^{\lambda_it}V_i\) ; \(X=k_1e^{\lambda_1t}V_1+\dots+k_ne^{\lambda_nt}V_n\)</div>
+      <div class="memo-item"><b>Exponentielle</b>\(\exp(A)=\sum_{k\ge0}\dfrac{A^k}{k!}\) ; diagonale : \(\mathrm{diag}(e^{\lambda_i})\) ; nilpotente : somme finie</div>
+      <div class="memo-item"><b>Propriétés</b>\(\exp(A+B)=\exp A\exp B\) <b>si \(AB=BA\)</b> ; \(\exp(A)^{-1}=\exp(-A)\) ; \(\exp(P^{-1}AP)=P^{-1}\exp(A)P\)</div>
+      <div class="memo-item"><b>Dérivée</b>\(\dfrac{d}{dt}\exp(tA)=A\exp(tA)\)</div>
+      <div class="memo-item"><b>Trigonalisable</b>\(\iff\chi_A\) scindé (toujours sur \(\mathbb C\))</div>
+      <div class="memo-item"><b>Sous-espace caractéristique</b>\(N_\lambda=\ker(A-\lambda I)^{m}\), \(\dim N_\lambda=m\), \(E=\bigoplus N_\lambda\)</div>
+      <div class="memo-item"><b>Dunford</b>\(A=\Delta+N\), \(\Delta\) diagonalisable, \(N\) nilpotente, \(\Delta N=N\Delta\) ; unique</div>
+      <div class="memo-item method"><b>Méthode \(X'=AX\)</b>1) \(\chi_A\) ; 2) \(N_\lambda\) et base adaptée \(P\) ; 3) \(B=P^{-1}AP=D+N\) ; 4) \(Y=\exp(tD)\exp(tN)V\) ; 5) \(X=PY\) (pas besoin de \(P^{-1}\))</div>
+      <div class="memo-item"><b>Ordre 2</b>\(x''+px'+qx=0\) : \(y=x'\), \(A=\begin{pmatrix}0&1\\-q&-p\end{pmatrix}\), \(\chi=X^2+pX+q\)</div>
+      <div class="memo-item"><b>Solutions ordre 2</b>racines réelles distinctes : \(\alpha e^{\lambda_1t}+\beta e^{\lambda_2t}\) ; double : \((\alpha t+\beta)e^{\lambda t}\) ; complexes \(a\pm ib\) : \(e^{at}(\alpha\cos bt+\beta\sin bt)\)</div>
+      <div class="memo-item"><b>Ordre \(n\)</b>racine \(\lambda\) de multiplicité \(m\) : \(P(t)e^{\lambda t}\) avec \(\deg P&lt;m\)</div>
+    </div>
+  </section>
+
+  <section class="block" id="cours">
+    <h2>1. Résumé de cours</h2>
+
+    <h3>Écriture matricielle et cas diagonalisable</h3>
+    <p>Un système \(x_i'=\sum_ja_{ij}x_j\) s'écrit \(X'=AX\). Si \(AV=\lambda V\), alors \(X(t)=e^{\lambda t}V\) vérifie \(X'=\lambda e^{\lambda t}V=e^{\lambda t}AV=AX\).</p>
+    <div class="thm"><span class="lab">Théorème 1</span> Si \(A\) est diagonalisable avec une base de vecteurs propres \((V_i)\) et valeurs propres \((\lambda_i)\), alors \((e^{\lambda_it}V_i)_i\) est une base de l'espace des solutions.</div>
+    <p>Preuve : avec \(P=(V_1|\dots|V_n)\) et \(Y=P^{-1}X\), on a \(Y'=DY\), donc \(y_i=k_ie^{\lambda_it}\), puis \(X=PY=\sum k_ie^{\lambda_it}V_i\).</p>
+
+    <h3>Matrices non diagonalisables</h3>
+    <div class="def"><span class="lab">Trigonalisable</span> \(A\) est trigonalisable sur \(\mathbb K\) s'il existe \(P\) inversible telle que \(P^{-1}AP\) soit triangulaire supérieure ; c'est équivalent à \(\chi_A\) scindé sur \(\mathbb K\). Toute matrice complexe est trigonalisable.</div>
+    <div class="def"><span class="lab">Sous-espace caractéristique</span> \(N_\lambda=\ker\big((A-\lambda I)^m\big)\) avec \(m\) la multiplicité de \(\lambda\). On a \(E_\lambda\subset N_\lambda\), \(\dim N_\lambda=m\), \(N_\lambda\) stable par \(A\) et \(E=N_{\lambda_1}\oplus\dots\oplus N_{\lambda_r}\).</div>
+    <div class="thm"><span class="lab">Dunford</span> Si \(\chi_A\) est scindé, il existe un unique couple \((\Delta,N)\) avec \(A=\Delta+N\), \(\Delta\) diagonalisable, \(N\) nilpotente et \(N\Delta=\Delta N\). \(A\) est diagonalisable \(\iff N=0\).</div>
+    <div class="method"><span class="lab">Méthode · Dunford</span>
+      <ol>
+        <li>On calcule \(\chi_A\) et ses racines (il doit être scindé).</li>
+        <li>Pour chaque \(\lambda\) de multiplicité \(m\), on calcule \(N_\lambda=\ker(A-\lambda I)^m\) et une base. La réunion forme une base \(\mathcal B\) de \(\mathbb K^n\).</li>
+        <li>\(\Delta\) est l'endomorphisme qui agit par \(\lambda\) sur \(N_\lambda\) (\(d(v)=\lambda v\)) ; on écrit sa matrice dans la base canonique.</li>
+        <li>\(N=A-\Delta\).</li>
+      </ol></div>
+    <div class="warnbox"><span class="lab">Piège</span> Écrire une matrice triangulaire comme « diagonale + strictement triangulaire » ne donne pas Dunford en général : les deux matrices doivent <b>commuter</b>. Exemple : \(\begin{pmatrix}1&3\\0&2\end{pmatrix}\) est déjà diagonalisable (valeurs propres distinctes) : \(\Delta=A\), \(N=0\).</div>
+
+    <h3>Exponentielle de matrice</h3>
+    <p>La série \(\sum\frac{A^k}{k!}\) converge pour toute matrice. Cas simples : diagonale \(\mathrm{diag}(e^{\lambda_i})\) ; nilpotente (\(A^N=0\)) : \(\sum_{k=0}^{N-1}\frac{A^k}{k!}\).</p>
+    <div class="rappel"><span class="lab">Rappel · calcul de \(\exp(A)\)</span>
+      \[ A=\Delta+N,\ \Delta N=N\Delta\ \Rightarrow\ \exp(A)=\exp(\Delta)\exp(N),\qquad \Delta=PDP^{-1}\Rightarrow\exp(\Delta)=P\exp(D)P^{-1} \]</div>
+    <div class="warnbox"><span class="lab">Piège</span> \(\exp(A+B)=\exp(A)\exp(B)\) seulement si \(AB=BA\). C'est pourquoi la commutation de \(\Delta\) et \(N\) dans Dunford est essentielle.</div>
+
+    <h3>Résolution de \(X'=AX\)</h3>
+    <div class="thm"><span class="lab">Théorème 7</span> Les solutions de \(X'=AX\) sont \(X(t)=\exp(tA)X_0\), \(X_0\in\mathbb R^n\). Avec une condition initiale \(X(0)=X_0\) : existence et unicité (Cauchy-Lipschitz). L'espace des solutions est de dimension \(n\).</div>
+    <p>Avec Dunford \(P^{-1}AP=B=D+N\) : \(X(t)=P\exp(tD)\exp(tN)V\), \(V\in\mathbb R^n\). On n'a pas besoin de calculer \(P^{-1}\) : la constante \(V\) est libre, et on la détermine avec \(X(0)=PV\).</p>
+
+    <h3>Équations différentielles linéaires d'ordre \(n\)</h3>
+    <p>\(x^{(n)}+a_1x^{(n-1)}+\dots+a_nx=0\) équivaut à \(X'=AX\) avec \(X=(x,x',\dots,x^{(n-1)})\) et \(A\) la matrice compagnon (1 sur la sur-diagonale, \(-a_n,\dots,-a_1\) sur la dernière ligne). Son polynôme caractéristique est \((-1)^n(X^n+a_1X^{n-1}+\dots+a_n)\). Donc l'équation caractéristique est celle du cours de lycée.</p>
+    <ul>
+      <li>Racine réelle \(\lambda\) de multiplicité \(m\) : \(t^ke^{\lambda t}\), \(k=0,\dots,m-1\).</li>
+      <li>Racines complexes \(a\pm ib\) de multiplicité \(m\) : \(t^ke^{at}\cos bt\) et \(t^ke^{at}\sin bt\), \(k=0,\dots,m-1\).</li>
+    </ul>
+  </section>
+
+  <section class="block" id="app">
+    <h2>2. Exemples du cours corrigés</h2>
+    <div class="note">Dans le CM, les exemples 3, 4, 6, 9, 12, 13, 15, 16 sont laissés vides (ou à compléter). Ils sont résolus ici dans l'ordre du cours.</div>
+
+    <div class="exo-card" id="ex3">
+      <div class="exo-head"><span>Exemple 3 — Une solution de \(X'=AX\), \(A=\begin{pmatrix}3&1\\-1&1\end{pmatrix}\)</span><span class="diff">♦◊◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Soit \(A=\begin{pmatrix}3&1\\-1&1\end{pmatrix}\). Déterminer une solution du système homogène \(X'=AX\).</p>
+        <p class="etape">Étape 1 : polynôme caractéristique.</p>
+        \[ \chi_A(X)=X^2-4X+4=(X-2)^2 \]
+        <p class="etape">Étape 2 : vecteur propre. \(A-2I=\begin{pmatrix}1&1\\-1&-1\end{pmatrix}\), donc \(x+y=0\) et \(V=(1,-1)\).</p>
+        <p class="etape">Étape 3 : proposition 1.</p>
+        <div class="res">\(X(t)=e^{2t}\begin{pmatrix}1\\-1\end{pmatrix}\) est solution. Vérification : \(X'=2e^{2t}(1,-1)\) et \(AX=e^{2t}(3-1,\,-1-1)=e^{2t}(2,-2)\).</div>
+        <div class="warnbox"><span class="lab">Piège</span> \(A\) n'est pas diagonalisable (\(\dim E_2=1<2\)) : le théorème 1 ne s'applique pas, on ne trouve qu'<b>une</b> solution. La seconde se cherche avec le bloc de Jordan (\(te^{2t}\)).</div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="ex4">
+      <div class="exo-head"><span>Exemple 4 — \(X'=AX\), \(X(0)=(1,2,3)\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(A=\begin{pmatrix}1&4&-4\\3&2&-4\\3&-3&1\end{pmatrix}\), \(X_0=\begin{pmatrix}1\\2\\3\end{pmatrix}\).</p>
+        <p class="etape">Étape 1 : valeurs propres.</p>
+        \[ \chi_A(X)=-(X-5)(X-1)(X+2) \]
+        <div class="res">Contrôle : \(\mathrm{tr}A=1+2+1=4=5+1-2\).</div>
+        <p class="etape">Étape 2 : vecteurs propres (trois valeurs propres distinctes, donc diagonalisable).</p>
+        <ul>
+          <li>\(\lambda=5\) : \(V_5=(1,1,0)\) (\(AV_5=(5,5,0)\)).</li>
+          <li>\(\lambda=1\) : \(V_1=(1,1,1)\) (\(AV_1=(1,1,1)\)).</li>
+          <li>\(\lambda=-2\) : \(V_{-2}=(0,1,1)\) (\(AV_{-2}=(0,-2,-2)\)).</li>
+        </ul>
+        <p class="etape">Étape 3 : solution générale (théorème 1).</p>
+        \[ X(t)=k_1e^{5t}\begin{pmatrix}1\\1\\0\end{pmatrix}+k_2e^{t}\begin{pmatrix}1\\1\\1\end{pmatrix}+k_3e^{-2t}\begin{pmatrix}0\\1\\1\end{pmatrix} \]
+        <p class="etape">Étape 4 : condition initiale. \(X(0)=(1,2,3)\) donne le système</p>
+        \[ k_1+k_2=1,\qquad k_1+k_2+k_3=2,\qquad k_2+k_3=3 \]
+        <p>La 2ᵉ ligne moins la 1ʳᵉ donne \(k_3=1\). La 3ᵉ donne \(k_2=2\), puis \(k_1=-1\).</p>
+        <div class="res">\(X(t)=\begin{pmatrix}2e^{t}-e^{5t}\\e^{-2t}+2e^{t}-e^{5t}\\e^{-2t}+2e^{t}\end{pmatrix}\). Contrôle : \(X(0)=(1,2,3)\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="ex6">
+      <div class="exo-head"><span>Exemple 6 — Trigonaliser \(A\) sur \(\mathbb R\)</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(A=\begin{pmatrix}1&4&-2\\0&6&-3\\-1&4&0\end{pmatrix}\). Justifier que \(A\) est trigonalisable sur \(\mathbb R\) et trouver \(P\) telle que \(P^{-1}AP\) soit triangulaire supérieure.</p>
+        <p class="etape">Étape 1 : polynôme caractéristique.</p>
+        \[ \chi_A(X)=-(X-3)(X-2)^2 \]
+        <div class="res">Contrôle : \(\mathrm{tr}A=7=3+2+2\). Le polynôme est scindé sur \(\mathbb R\), donc \(A\) est trigonalisable sur \(\mathbb R\) (théorème 2).</div>
+        <p class="etape">Étape 2 : vecteurs propres.</p>
+        <ul>
+          <li>\(\lambda=3\) : \(V_3=(1,1,1)\) (\(AV_3=(3,3,3)\)).</li>
+          <li>\(\lambda=2\) : \(A-2I=\begin{pmatrix}-1&4&-2\\0&4&-3\\-1&4&-2\end{pmatrix}\), de rang 2, donc \(\dim E_2=1\). \(V_2=(4,3,4)\) (vérif. : \(4y=3z\) et \(-x+4y-2z=0\)).</li>
+        </ul>
+        <p class="etape">Étape 3 : chercher \(w\) tel que \((A-2I)w=V_2\) (vecteur de \(N_2=\ker(A-2I)^2\) hors de \(E_2\)). Le système</p>
+        \[ -x+4y-2z=4,\qquad 4y-3z=3 \]
+        <p>Avec \(y=3\), \(z=3\) : \(12-9=3\) ✓ et \(-x+12-6=4\) donne \(x=2\). Donc \(w=(2,3,3)\) et \(Aw=2w+V_2\).</p>
+        <p class="etape">Étape 4 : matrice de passage dans l'ordre \((V_2,w,V_3)\).</p>
+        \[ P=\begin{pmatrix}4&2&1\\3&3&1\\4&3&1\end{pmatrix},\qquad \det P=-1\neq0 \]
+        <p class="etape">Étape 5 : lecture. Les images des vecteurs de base sont \(AV_2=2V_2\), \(Aw=V_2+2w\), \(AV_3=3V_3\).</p>
+        <div class="res">\(P^{-1}AP=\begin{pmatrix}2&1&0\\0&2&0\\0&0&3\end{pmatrix}\) (triangulaire supérieure ; le bloc \(\begin{pmatrix}2&1\\0&2\end{pmatrix}\) est le bloc de Jordan de la valeur propre double).</div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="ex9">
+      <div class="exo-head"><span>Exemple 9 — Décomposition de Dunford</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(A=\begin{pmatrix}1&1&1\\0&1&1\\0&0&2\end{pmatrix}\in M_3(\mathbb R)\). Calculer sa décomposition de Dunford.</p>
+        <p class="etape">Étape 1 : \(\chi_A(X)=(1-X)^2(2-X)\) (matrice triangulaire). Valeurs propres : \(1\) (double), \(2\) (simple).</p>
+        <p class="etape">Étape 2 : sous-espaces caractéristiques.</p>
+        \[ A-I=\begin{pmatrix}0&1&1\\0&0&1\\0&0&1\end{pmatrix},\qquad (A-I)^2=\begin{pmatrix}0&0&2\\0&0&1\\0&0&1\end{pmatrix} \]
+        <ul>
+          <li>\(N_1=\ker(A-I)^2=\{z=0\}=\mathrm{Vect}(e_1,e_2)\) (dimension 2 ✓).</li>
+          <li>\(N_2=E_2\) : \(V=(2,1,1)\) (\(AV=(4,2,2)=2V\)).</li>
+        </ul>
+        <p class="etape">Étape 3 : \(\Delta\) vaut \(1\) sur \(N_1\) et \(2\) sur \(N_2\) : \(\Delta e_1=e_1\), \(\Delta e_2=e_2\), \(\Delta(2,1,1)=2(2,1,1)\). Comme \(e_3=(2,1,1)-2e_1-e_2\) :</p>
+        \[ \Delta e_3=2(2,1,1)-2e_1-e_2=(2,1,2) \]
+        \[ \Delta=\begin{pmatrix}1&0&2\\0&1&1\\0&0&2\end{pmatrix} \]
+        <p class="etape">Étape 4 : \(N=A-\Delta\).</p>
+        \[ N=\begin{pmatrix}0&1&-1\\0&0&0\\0&0&0\end{pmatrix},\qquad N^2=0 \]
+        <p class="etape">Étape 5 : vérification de la commutation. \(\Delta N=N\) (car \(\Delta e_1=e_1\)) et \(N\Delta=N\) (ligne 1 de \(N\Delta\) : \(\mathrm{ligne}_2(\Delta)-\mathrm{ligne}_3(\Delta)=(0,1,-1)\)). Donc \(\Delta N=N\Delta\).</p>
+        <div class="res">\(A=\Delta+N\) avec \(\Delta=\begin{pmatrix}1&0&2\\0&1&1\\0&0&2\end{pmatrix}\) (diagonalisable, valeurs propres \(1,1,2\)) et \(N=\begin{pmatrix}0&1&-1\\0&0&0\\0&0&0\end{pmatrix}\) (nilpotente, \(N\neq0\) car \(A\) n'est pas diagonalisable).</div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="ex12">
+      <div class="exo-head"><span>Exemple 12 — Calcul de \(\exp(A)\)</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(A=\begin{pmatrix}1&1&0\\0&2&-1\\-1&1&3\end{pmatrix}\). Calculer \(\exp(A)\).</p>
+        <p class="etape">Étape 1 : \(\chi_A(X)=(2-X)^3\) (trace \(6=3\times2\) ; développement). Une seule valeur propre : \(2\).</p>
+        <p class="etape">Étape 2 : Dunford. Comme il n'y a qu'une valeur propre, \(N_2=\mathbb R^3\) et \(\Delta=2I\) (diagonale, commute avec tout). Donc</p>
+        \[ N=A-2I=\begin{pmatrix}-1&1&0\\0&0&-1\\-1&1&1\end{pmatrix} \]
+        <p class="etape">Étape 3 : \(N\) est nilpotente.</p>
+        \[ N^2=\begin{pmatrix}1&-1&-1\\1&-1&-1\\0&0&0\end{pmatrix},\qquad N^3=0 \]
+        <div class="rappel"><span class="lab">Rappel · exponentielle d'une nilpotente</span>\[ \exp(N)=I+N+\frac{N^2}{2}\quad(N^3=0) \]</div>
+        <p class="etape">Étape 4 : \(\exp(A)=\exp(2I)\exp(N)=e^2\exp(N)\) (commutation de \(2I\) et \(N\)).</p>
+        \[ I+N+\tfrac12N^2=\begin{pmatrix}\tfrac12&\tfrac12&-\tfrac12\\\tfrac12&\tfrac12&-\tfrac32\\-1&1&2\end{pmatrix} \]
+        <div class="res">\(\exp(A)=e^2\begin{pmatrix}\tfrac12&\tfrac12&-\tfrac12\\\tfrac12&\tfrac12&-\tfrac32\\-1&1&2\end{pmatrix}\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="ex13">
+      <div class="exo-head"><span>Exemple 13 — Résoudre un système avec condition initiale</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(x_1'=x_1-3x_3\), \(x_2'=x_1-x_2-6x_3\), \(x_3'=-x_1+2x_2+5x_3\), avec \(x_1(0)=1\), \(x_2(0)=1\), \(x_3(0)=0\).</p>
+        <p class="etape">Étape 1 : matrice et polynôme caractéristique.</p>
+        \[ A=\begin{pmatrix}1&0&-3\\1&-1&-6\\-1&2&5\end{pmatrix},\qquad \chi_A(X)=-(X-1)(X-2)^2 \]
+        <p class="etape">Étape 2 : sous-espaces.</p>
+        <ul>
+          <li>\(E_1\) : \(V_1=(2,1,0)\) (\(AV_1=(2,1,0)\)).</li>
+          <li>\(E_2\) : \(A-2I=\begin{pmatrix}-1&0&-3\\1&-3&-6\\-1&2&3\end{pmatrix}\) est de rang 2, \(\dim E_2=1<2\) : \(A\) non diagonalisable. \(V_2=(-3,-3,1)\).</li>
+          <li>On cherche \(w\) avec \((A-2I)w=V_2\) : \(x=3-3z\), \(y=2-3z\). Avec \(z=0\), \(w=(3,2,0)\) et \(Aw=2w+V_2\).</li>
+        </ul>
+        <p class="etape">Étape 3 : forme des solutions. La base \((V_1,V_2,w)\) donne \(B=\begin{pmatrix}1&0&0\\0&2&1\\0&0&2\end{pmatrix}=D+N\) avec \(\exp(tN)=I+tN\).</p>
+        \[ X(t)=c_1e^{t}V_1+c_2e^{2t}V_2+c_3e^{2t}\,(tV_2+w) \]
+        <p class="etape">Étape 4 : condition initiale. \(c_1(2,1,0)+c_2(-3,-3,1)+c_3(3,2,0)=(1,1,0)\).</p>
+        \[ z:\ c_2=0,\qquad x:\ 2c_1+3c_3=1,\qquad y:\ c_1+2c_3=1 \]
+        <p>On tire \(c_1=1-2c_3\), donc \(2-4c_3+3c_3=1\), soit \(c_3=1\) et \(c_1=-1\).</p>
+        <div class="res">\(x_1(t)=(3-3t)e^{2t}-2e^{t}\), \(x_2(t)=(2-3t)e^{2t}-e^{t}\), \(x_3(t)=t\,e^{2t}\). Contrôle : \(X(0)=(1,1,0)\) et le système est vérifié.</div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="ex15">
+      <div class="exo-head"><span>Exemples 15 et 16 — Équations d'ordre 3</span><span class="diff">♦♦◊</span></div>
+      <div class="exo-body">
+        <p class="enonce">Exemple 15 : \(x'''-3x''+4x=0\). Exemple 16 : \(x'''-2x''-2x'-3x=0\).</p>
+        <p class="q">Exemple 15</p>
+        <p class="etape">Étape 1 : équation caractéristique \(X^3-3X^2+4=(X-2)^2(X+1)=0\).</p>
+        <p class="etape">Étape 2 : racines \(2\) (double) et \(-1\) (simple).</p>
+        <ul>
+          <li>\(\lambda_1=2\), \(m_1=2\) : polynômes de degré \(<2\), solutions \((\alpha t+\beta)e^{2t}\).</li>
+          <li>\(\lambda_2=-1\), \(m_2=1\) : solution \(\gamma e^{-t}\).</li>
+        </ul>
+        <div class="res">\(x(t)=(\alpha t+\beta)e^{2t}+\gamma e^{-t}\), \((\alpha,\beta,\gamma)\in\mathbb R^3\) (espace de dimension 3).</div>
+        <p class="q">Exemple 16</p>
+        <p class="etape">Étape 1 : équation caractéristique \(X^3-2X^2-2X-3=0\). \(X=3\) est racine (\(27-18-6-3=0\)).</p>
+        <p class="etape">Étape 2 : factorisation.</p>
+        \[ X^3-2X^2-2X-3=(X-3)(X^2+X+1) \]
+        <p class="etape">Étape 3 : \(X^2+X+1\) a pour discriminant \(-3\) et pour racines \(-\tfrac12\pm i\tfrac{\sqrt3}{2}\).</p>
+        <div class="res">\(x(t)=\alpha e^{3t}+e^{-t/2}\left(\beta\cos\dfrac{\sqrt3\,t}{2}+\gamma\sin\dfrac{\sqrt3\,t}{2}\right)\), \((\alpha,\beta,\gamma)\in\mathbb R^3\).</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="td">
+    <h2>3. Correction TD7 — Systèmes différentiels</h2>
+    <div class="note">Pas de corrigé officiel : <b>résolu maison</b>. Chaque solution est réinjectée dans le système (résidu nul) et les conditions initiales sont contrôlées.</div>
+
+    <div class="exo-card" id="td7-ex1">
+      <div class="exo-head"><span>Exercice 1 — Système \((S)\) avec matrice non diagonalisable</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Résoudre dans \(\mathbb R\) : \(x'=2x-y+2z\), \(y'=10x-5y+7z\), \(z'=4x-2y+2z\).</p>
+        <p class="q">Résolution de \(X'=AX\)</p>
+        <p class="etape">Étape 1 : matrice et polynôme caractéristique.</p>
+        \[ A=\begin{pmatrix}2&-1&2\\10&-5&7\\4&-2&2\end{pmatrix},\qquad \chi_A(X)=-X^2(X+1) \]
+        <div class="res">Contrôle : \(\mathrm{tr}A=-1=0+0-1\) ; \(\det A=0\).</div>
+        <p class="etape">Étape 2 : sous-espaces propres.</p>
+        <ul>
+          <li>\(\lambda=-1\) : \(V_{-1}=(-1,1,2)\) (\(AV=(1,-1,-2)\)).</li>
+          <li>\(\lambda=0\) : \(AX=0\). On résout \(2x-y+2z=0\) et \(10x-5y+7z=0\) : la 2ᵉ moins 5 fois la 1ʳᵉ donne \(-3z=0\), donc \(z=0\) et \(y=2x\). \(V_0=(1,2,0)\), \(\dim E_0=1<2\) : <b>non diagonalisable</b>.</li>
+        </ul>
+        <p class="etape">Étape 3 : vecteur de la chaîne de Jordan. On cherche \(w\) avec \(Aw=V_0\) : le vecteur \(w=(-\tfrac12,0,1)\) convient (\(Aw=(-1+2,\,-5+7,\,-2+2)=(1,2,0)\)).</p>
+        <p class="etape">Étape 4 : dans la base \((V_{-1},V_0,w)\), \(A\) s'écrit \(\mathrm{diag}(-1)\oplus\begin{pmatrix}0&1\\0&0\end{pmatrix}\). Les solutions sont \(e^{-t}V_{-1}\), \(V_0\), \(tV_0+w\) (vérification : \((tV_0+w)'=V_0\) et \(A(tV_0+w)=tAV_0+Aw=V_0\)).</p>
+        <div class="res">\(\begin{aligned}x(t)&=-c_1e^{-t}+c_2+c_3\left(t-\tfrac12\right)\\y(t)&=c_1e^{-t}+2c_2+2c_3t\\z(t)&=2c_1e^{-t}+c_3\end{aligned}\), \((c_1,c_2,c_3)\in\mathbb R^3\).</div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="td7-ex2">
+      <div class="exo-head"><span>Exercice 2 — Système avec second membre constant et condition initiale</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">Résoudre : \(x'=2x+z+1\), \(y'=2y-z\), \(z'=x-y+z\), avec \(x(0)=1\), \(y(0)=1\), \(z(0)=0\).</p>
+        <p class="q">Résolution de \(X'=AX+B\)</p>
+        <p class="etape">Étape 1 : écriture \(X'=AX+B\) avec \(A=\begin{pmatrix}2&0&1\\0&2&-1\\1&-1&1\end{pmatrix}\) et \(B=\begin{pmatrix}1\\0\\0\end{pmatrix}\).</p>
+        <p class="etape">Étape 2 : valeurs propres. \(\chi_A(X)=-X(X-2)(X-3)\) : trois valeurs propres distinctes, \(A\) est diagonalisable.</p>
+        <ul>
+          <li>\(\lambda=0\) : \(W_0=(-1,1,2)\) (\(AW_0=(0,0,0)\)).</li>
+          <li>\(\lambda=2\) : \(W_2=(1,1,0)\) (\(AW_2=(2,2,0)\)).</li>
+          <li>\(\lambda=3\) : \(W_3=(1,-1,1)\) (\(AW_3=(3,-3,3)\)).</li>
+        </ul>
+        <div class="warnbox"><span class="lab">Piège</span> \(0\) est valeur propre : \(A\) n'est pas inversible. On ne peut pas chercher la solution particulière constante \(-A^{-1}B\). On change de base plutôt.</div>
+        <p class="etape">Étape 3 : on décompose \(X=u_0W_0+u_2W_2+u_3W_3\) et \(B=\beta_0W_0+\beta_2W_2+\beta_3W_3\). Résolution de \(B=(1,0,0)\) :</p>
+        \[ -\beta_0+\beta_2+\beta_3=1,\qquad \beta_0+\beta_2-\beta_3=0,\qquad 2\beta_0+\beta_3=0 \]
+        <p>Avec \(\beta_3=-2\beta_0\) : \(\beta_2=1+3\beta_0\), puis \(\beta_0+1+3\beta_0+2\beta_0=0\) donne \(\beta_0=-\tfrac16\), \(\beta_2=\tfrac12\), \(\beta_3=\tfrac13\).</p>
+        <p class="etape">Étape 4 : le système se découple en trois équations scalaires.</p>
+        \[ u_0'=-\tfrac16,\qquad u_2'=2u_2+\tfrac12,\qquad u_3'=3u_3+\tfrac13 \]
+        \[ u_0=-\tfrac t6+k_0,\qquad u_2=k_2e^{2t}-\tfrac14,\qquad u_3=k_3e^{3t}-\tfrac19 \]
+        <p class="etape">Étape 5 : conditions initiales \(X(0)=(1,1,0)\). On pose \(p=k_2-\tfrac14\), \(q=k_3-\tfrac19\) :</p>
+        \[ -k_0+p+q=1,\qquad k_0+p-q=1,\qquad 2k_0+q=0 \]
+        <p>La somme des deux premières donne \(p=1\) ; alors \(q=-2k_0\) et \(-k_0+1-2k_0=1\), soit \(k_0=0\), \(q=0\). Donc \(k_2=\tfrac54\) et \(k_3=\tfrac19\).</p>
+        <div class="res">\(\begin{aligned}x(t)&=\tfrac t6+\tfrac54e^{2t}-\tfrac14+\tfrac19e^{3t}-\tfrac19\\y(t)&=-\tfrac t6+\tfrac54e^{2t}-\tfrac14-\tfrac19e^{3t}+\tfrac19\\z(t)&=-\tfrac t3+\tfrac19e^{3t}-\tfrac19\end{aligned}\)</div>
+        <p class="etape">Étape 6 : contrôles. \(x(0)=0+1+0=1\), \(y(0)=1\), \(z(0)=0\). Dérivées en 0 : \(X'(0)=AX_0+B=(2,2,0)+(1,0,0)=(3,2,0)\) ; la formule donne \(x'(0)=\tfrac16+\tfrac52+\tfrac13=3\), \(y'(0)=-\tfrac16+\tfrac52-\tfrac13=2\), \(z'(0)=-\tfrac13+\tfrac13=0\).</p>
+      </div>
+    </div>
+
+    <div class="exo-card" id="td7-ex3">
+      <div class="exo-head"><span>Exercice 3 — Réduction, Dunford, \(\exp(tB)\) et systèmes</span><span class="diff">♦♦♦</span></div>
+      <div class="exo-body">
+        <p class="enonce">\(f\) endomorphisme de \(\mathbb R^3\), \(A=\begin{pmatrix}1&0&0\\1&-1&0\\-1&2&-1\end{pmatrix}\). 1) \(\chi_A\) et valeurs propres ; 2) sous-espaces propres et caractéristiques ; 3) base où la matrice est \(B=\begin{pmatrix}1&0&0\\0&-1&2\\0&0&-1\end{pmatrix}\), \(P\) telle que \(A=PBP^{-1}\) ; 4) Dunford de \(B\) ; 5) \(\exp(tB)\) ; 6) solutions de \(Y'=BY\) et \(X'=AX\).</p>
+
+        <p class="q">1) Polynôme caractéristique</p>
+        <p class="etape">Étape 1 : \(A\) est triangulaire inférieure : les valeurs propres sont les termes diagonaux.</p>
+        <div class="res">\(\chi_A(X)=(1-X)(-1-X)^2=-(X-1)(X+1)^2\). Valeurs propres : \(1\) (simple), \(-1\) (double).</div>
+
+        <p class="q">2) Sous-espaces propres et caractéristiques</p>
+        <p class="etape">Étape 1 : \(\lambda=1\), multiplicité 1, donc \(N_1=E_1\). \(A-I=\begin{pmatrix}0&0&0\\1&-2&0\\-1&2&-2\end{pmatrix}\) donne \(y=x/2\) puis \(z=0\) : \(E_1=\mathrm{Vect}(2,1,0)\).</p>
+        <p class="etape">Étape 2 : \(\lambda=-1\). \(A+I=\begin{pmatrix}2&0&0\\1&0&0\\-1&2&0\end{pmatrix}\) est de rang 2 : \(E_{-1}=\mathrm{Vect}(0,0,1)\), de dimension 1 \(<2\) : \(A\) n'est pas diagonalisable.</p>
+        <p class="etape">Étape 3 : \(N_{-1}=\ker(A+I)^2\). On calcule \((A+I)^2=\begin{pmatrix}4&0&0\\2&0&0\\0&0&0\end{pmatrix}\), donc \(N_{-1}=\{x=0\}=\mathrm{Vect}(e_2,e_3)\), de dimension 2 ✓.</p>
+        <div class="res">\(E_1=N_1=\mathrm{Vect}(2,1,0)\) ; \(E_{-1}=\mathrm{Vect}(e_3)\) ; \(N_{-1}=\mathrm{Vect}(e_2,e_3)\).</div>
+
+        <p class="q">3) Base de trigonalisation et matrice \(P\)</p>
+        <p class="etape">Étape 1 : on cherche \((w_1,w_2,w_3)\) avec \(f(w_1)=w_1\), \(f(w_2)=-w_2\), \(f(w_3)=2w_2-w_3\) (colonnes de \(B\)).</p>
+        <p class="etape">Étape 2 : \(w_1=(2,1,0)\), \(w_2=(0,0,1)\). Pour \(w_3\in N_{-1}\) : on veut \((A+I)w_3=2w_2\). Avec \(w_3=(0,y,z)\), \((A+I)w_3=(0,0,2y)\), donc \(y=1\). On prend \(w_3=(0,1,0)\).</p>
+        <p class="etape">Étape 3 : vérification. \(Aw_3=(0,-1,2)=-w_3+2w_2\) ✓.</p>
+        <div class="res">\(P=\begin{pmatrix}2&0&0\\1&0&1\\0&1&0\end{pmatrix}\), \(\det P=-2\neq0\), et \(AP=PB\), soit \(A=PBP^{-1}\).</div>
+
+        <p class="q">4) Décomposition de Dunford de \(B\)</p>
+        <p class="etape">Étape 1 : \(D\) a pour diagonale celle de \(B\) (valeurs propres \(1,-1,-1\)) et \(N\) le reste.</p>
+        \[ D=\begin{pmatrix}1&0&0\\0&-1&0\\0&0&-1\end{pmatrix},\qquad N=\begin{pmatrix}0&0&0\\0&0&2\\0&0&0\end{pmatrix} \]
+        <p class="etape">Étape 2 : \(N^2=0\) ; \(DN=ND=\begin{pmatrix}0&0&0\\0&0&-2\\0&0&0\end{pmatrix}\) (ligne 2 de \(DN\) multipliée par \(-1\) ; colonne 3 de \(ND\) multipliée par \(-1\)).</p>
+        <div class="res">\(B=D+N\) avec \(D=\mathrm{diag}(1,-1,-1)\), \(N\) nilpotente (\(N^2=0\)) et \(DN=ND\). C'est la décomposition de Dunford (ici \(D\) est même diagonale).</div>
+
+        <p class="q">5) Calcul de \(\exp(tB)\)</p>
+        <div class="rappel"><span class="lab">Rappel · produit d'exponentielles</span>\[ DN=ND\ \Rightarrow\ \exp(tB)=\exp(tD)\exp(tN),\qquad \exp(tN)=I+tN\ (N^2=0) \]</div>
+        <p class="etape">Étape 1 : \(\exp(tD)=\mathrm{diag}(e^t,e^{-t},e^{-t})\) et \(\exp(tN)=\begin{pmatrix}1&0&0\\0&1&2t\\0&0&1\end{pmatrix}\).</p>
+        <p class="etape">Étape 2 : produit.</p>
+        <div class="res">\(\exp(tB)=\begin{pmatrix}e^t&0&0\\0&e^{-t}&2te^{-t}\\0&0&e^{-t}\end{pmatrix}\).</div>
+
+        <p class="q">6) Solutions de \(Y'=BY\) et de \(X'=AX\)</p>
+        <p class="etape">Étape 1 : \(Y(t)=\exp(tB)\,Y_0\) avec \(Y_0=(c_1,c_2,c_3)\).</p>
+        <div class="res">\(Y(t)=\begin{pmatrix}c_1e^{t}\\(c_2+2c_3t)e^{-t}\\c_3e^{-t}\end{pmatrix}\).</div>
+        <p class="etape">Étape 2 : \(A=PBP^{-1}\), donc \(X'=AX\) équivaut à \(Y'=BY\) avec \(X=PY\).</p>
+        <div class="res">\(X(t)=PY(t)=\begin{pmatrix}2c_1e^{t}\\c_1e^{t}+c_3e^{-t}\\(c_2+2c_3t)e^{-t}\end{pmatrix}\), \((c_1,c_2,c_3)\in\mathbb R^3\).</div>
+        <p class="etape">Étape 3 : contrôle. \(x'=x\) ✓ ; \(y'=c_1e^t-c_3e^{-t}\) et \(x-y=c_1e^t-c_3e^{-t}\) ✓ ; \(z'=(2c_3-c_2-2c_3t)e^{-t}\) et \(-x+2y-z=2c_3e^{-t}-(c_2+2c_3t)e^{-t}\) ✓.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="docs">
+    <h2>📂 Documents donnés</h2>
+    <p class="docs-intro">CM 7 et TD7, retapés proprement (même mise en page, formules en équations Word) : version PDF et version Word modifiable.</p>
+    <div class="docs-group">
+      <h3>CM 7 + TD7 — Systèmes différentiels (L. Graissot, AM2 2026-2027)</h3>
+      <ul>
+        <li><a class="doc-item" href="../assets/pdf.html?f=../documents/aem2-mathematiques/ch7-systemes-differentiels/CM7-TD7-systemes-differentiels.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">CM 7 + TD7 — Systèmes différentiels (retapé, 16 p.)</span></a></li>
+        <li><a class="doc-item" href="../documents/aem2-mathematiques/ch7-systemes-differentiels/CM7-TD7-systemes-differentiels.docx" download><span class="ic">DOCX</span><span class="nm">CM 7 + TD7 — version Word modifiable</span></a></li>
+      </ul>
+    </div>
+    <p class="docs-note">Cursus AM2 · Mathématiques. Les surlignages du scan ne sont pas repris ; les exemples vides du CM sont corrigés <b>maison</b> plus haut.
+    Voir aussi <a href="ch5-valeurs-propres.html">Ch5-6 — Valeurs propres et réduction</a> et <a href="ch6-td6-reduction.html">TD6 — Réduction</a>.</p>
+  </section>
+
+</main>
+<script src="../assets/gate.js"></script>
+<script src="../assets/catalogue.js?v=2"></script>
+<script src="../assets/nav.js?v=2"></script>
+<script src="../assets/lecture.js?v=3"></script>
+</body>
+</html>

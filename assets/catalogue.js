@@ -29,6 +29,7 @@ window.CATALOGUE = {
           { n: "Ch6", titre: "Électronique numérique", url: "aem2-electronique/ch6-electronique-numerique.html" },
           { n: "Ch7", titre: "Moment cinétique (systèmes tournants)", url: "aem2-physique/ch7-moment-cinetique.html" },
           { n: "Ch8", titre: "Mouvement à force centrale", url: "aem2-physique/ch8-forces-centrales.html" },
+          { n: "TD8", titre: "TD8 : Yukawa, Rutherford, satellites, trou noir (6 exos corrigés)", url: "aem2-physique/td8-forces-centrales.html" },
           { n: "Fiche", titre: "Fiche ALI — montages à connaître", url: "aem2-electronique/fiche-ali.html" },
           { n: "Fiche", titre: "Fiche filtres RC et RLC", url: "aem2-electronique/fiche-filtres-rlc.html" }
         ] }
@@ -79,6 +80,8 @@ window.CATALOGUE = {
           { n: "Fiche", titre: "Méthode : domaine et tracé des courbes paramétrées", url: "aem2-mathematiques/ch4-fiche-methode-courbes.html" },
           { n: "Exos", titre: "Exercices d'entraînement : courbes paramétrées (7 exos corrigés)", url: "aem2-mathematiques/ch4-exos-entrainement.html" },
           { n: "Ch5", titre: "Valeurs propres et réduction (CM 5-6, TD5)", url: "aem2-mathematiques/ch5-valeurs-propres.html" },
+          { n: "TD6", titre: "Réduction des endomorphismes (7 exos corrigés)", url: "aem2-mathematiques/ch6-td6-reduction.html" },
+          { n: "Ch7", titre: "Systèmes différentiels (CM 7, TD7)", url: "aem2-mathematiques/ch7-systemes-differentiels.html" },
           { n: "Méth.", titre: "Fiches méthodes par exercice", url: "aem2-mathematiques/methodes-par-exercice.html" }
         ] }
       ],

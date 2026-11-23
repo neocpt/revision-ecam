@@ -48,3 +48,11 @@ Une entrée par document traité (date, source, pages créées ou modifiées, er
 - Vérifié avec sympy : dérivées, asymptotes, équation cartésienne (x² − x − y² = 0 pour B ; x² + y² − y = 0 pour l'exercice 2 ; x² − y² = 4 pour l'exercice 3), points multiples de D.
 - Lien ajouté dans le chapitre 4 (chapô) et entrée « Fiche » dans `assets/catalogue.js`.
 - Points incertains : les exemples ne viennent pas du polycopié (écrits pour la fiche) ; la définition des points singuliers suit le plan du cours ch4 (§1.5-1.6) et la mémo ; à relire si le prof utilise une autre convention pour p et q.
+
+## 2026-11-23 — TD6 maths, CM7 + TD7 maths, TD8 physique (AM2)
+- Sources (Downloads, scans/photos) : `td 6 maths.pdf`, `cm + TD 7.pdf` (19 p.), `td 8 physique.pdf` (photos).
+- Demande de l'utilisateur : les PDF sont de très mauvaise qualité, les retaper en Word « comme le doc de base » et les ranger dans les documents annexes.
+  Faits : `documents/aem2-mathematiques/ch6-td6-reduction/TD6-reduction-endomorphismes.{docx,pdf}`, `documents/aem2-mathematiques/ch7-systemes-differentiels/CM7-TD7-systemes-differentiels.{docx,pdf}`, `documents/aem2-physique/ch8-forces-centrales/TD8-forces-centrales.{docx,pdf}` (équations Word natives via pandoc, PDF via Word ; outil réutilisable : `revision-notes/outils-docx/convert.py`). Les figures du TD8 sont redessinées en schémas (`aem2-physique/td8-img/`).
+- Pages : `aem2-mathematiques/ch6-td6-reduction.html` (7 exos), `aem2-mathematiques/ch7-systemes-differentiels.html` (fiche mémo, cours, exemples 3, 4, 6, 9, 12, 13, 15, 16 corrigés, TD7 exos 1-3), `aem2-physique/td8-forces-centrales.html` (6 exos). Entrées TD6, Ch7, TD8 dans `catalogue.js`.
+- Calculs maths vérifiés avec sympy (chaque solution réinjectée dans le système). Physique : valeurs numériques recalculées (a = 1,5e-15 m et 2,5e-18 m ; rmin Rutherford 4,1e-14 m et 2,7e-14 m ; h géostationnaire 3,6e4 km ; vlib 11 km/s ; Rs soleil 3 km ; rmin astéroïde 7,2e7 m).
+- Points d'incertitude : correction maison (pas de corrigé officiel) ; figures du TD8 redessinées, pas recopiées.
