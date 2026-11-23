@@ -78,8 +78,8 @@ window.CATALOGUE = {
           { n: "Ch4", titre: "Courbes paramétrées", url: "aem2-mathematiques/ch4-courbes-parametrees.html" },
           { n: "Fiche", titre: "Méthode : domaine et tracé des courbes paramétrées", url: "aem2-mathematiques/ch4-fiche-methode-courbes.html" },
           { n: "Exos", titre: "Exercices d'entraînement : courbes paramétrées (7 exos corrigés)", url: "aem2-mathematiques/ch4-exos-entrainement.html" },
-          { n: "Ch5", titre: "Valeurs propres et réduction (CM 5-6, TD5)", url: "aem2-mathematiques/ch5-valeurs-propres.html" },
-          { n: "TD6", titre: "Réduction des endomorphismes (7 exos corrigés)", url: "aem2-mathematiques/ch6-td6-reduction.html" },
+          { n: "Ch5", titre: "Valeurs propres et diagonalisation (CM 5, TD5)", url: "aem2-mathematiques/ch5-valeurs-propres.html" },
+          { n: "Ch6", titre: "Réduction des endomorphismes (CM 6, TD6)", url: "aem2-mathematiques/ch6-reduction-endomorphismes.html" },
           { n: "Ch7", titre: "Systèmes différentiels (CM 7, TD7)", url: "aem2-mathematiques/ch7-systemes-differentiels.html" },
           { n: "Méth.", titre: "Fiches méthodes par exercice", url: "aem2-mathematiques/methodes-par-exercice.html" }
         ] }

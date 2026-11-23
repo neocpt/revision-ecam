@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Valeurs propres et réduction — AM2 Mathématiques</title>
+<title>Valeurs propres et diagonalisation — AM2 Mathématiques</title>
 <link rel="stylesheet" href="../assets/style.css?v=4">
 <script>
 window.MathJax = {
@@ -18,25 +18,22 @@ window.MathJax = {
 <nav class="subnav"><a href="#memo">Fiche mémo</a><a href="#cours">Cours</a><a href="#td">Correction TD5</a><a href="#docs">Documents donnés</a></nav>
 
 <main class="wrap">
-  <span class="chip">Maths AM2 (2ᵉ année) · Chapitres 5 et 6</span>
-  <h1 class="title">Valeurs propres, diagonalisation et réduction des endomorphismes</h1>
-  <p class="lead">Cours L. Graissot (ECAM AM2, 2026-2027) : <b>CM 5</b> (valeurs propres et vecteurs propres d'une matrice, polynôme
-  caractéristique, diagonalisation d'une matrice) et <b>CM 6</b> (éléments propres d'un endomorphisme, sous-espaces propres,
-  somme directe, diagonalisation d'un endomorphisme). La page contient aussi le <b>TD 5 corrigé (exercices 1 → 6)</b>.
-  Pas de corrigé officiel fourni : <b>tout est résolu maison</b> et vérifié (trace, déterminant, produits P⁻¹AP).</p>
+  <span class="chip">Maths AM2 (2ᵉ année) · Chapitre 5</span>
+  <h1 class="title">Valeurs propres, vecteurs propres et diagonalisation d'une matrice</h1>
+  <p class="lead">Cours L. Graissot (ECAM AM2, 2026-2027) : <b>CM 5</b> (valeurs propres et vecteurs propres d'une matrice, polynôme caractéristique, diagonalisation d'une matrice). La page contient aussi le <b>TD 5 corrigé (exercices 1 → 6)</b>. Les éléments propres d'un endomorphisme (CM 6) et le TD6 sont dans le <a href="ch6-reduction-endomorphismes.html">chapitre 6</a>. Pas de corrigé officiel : <b>tout est résolu maison</b> et vérifié (trace, déterminant, produits P⁻¹AP).</p>
 
   <div class="toc-mini">
     <b>Sommaire du chapitre</b>
     <ul style="margin:.4rem 0 0">
       <li><a href="#memo">📌 Fiche mémo</a></li>
-      <li><a href="#cours">1. Résumé de cours détaillé (CM 5 et CM 6)</a></li>
+      <li><a href="#cours">1. Résumé de cours détaillé (CM 5)</a></li>
       <li><a href="#td">2. Correction TD 5 — exercices 1 à 6</a></li>
       <li><a href="#docs">📂 Documents donnés</a></li>
     </ul>
   </div>
 
   <section class="memo-sheet" id="memo">
-    <div class="memo-head">📌 Fiche mémo — valeurs propres, diagonalisation, endomorphismes</div>
+    <div class="memo-head">📌 Fiche mémo — valeurs propres et diagonalisation d'une matrice</div>
     <div class="memo-grid">
       <div class="memo-item"><b>Définition</b>\(\lambda\) est valeur propre de \(A\) s'il existe \(X\neq0\) avec \(AX=\lambda X\) ; \(X\) est alors un vecteur propre associé</div>
       <div class="memo-item"><b>Caractérisation</b>\(\lambda\) valeur propre \(\Leftrightarrow\det(A-\lambda I_n)=0\) \(\Leftrightarrow\chi_A(\lambda)=0\)</div>
@@ -46,11 +43,6 @@ window.MathJax = {
       <div class="memo-item"><b>Vecteurs propres distincts</b>des vecteurs propres associés à des valeurs propres <b>distinctes</b> forment une famille libre</div>
       <div class="memo-item"><b>\(n\) valeurs propres distinctes</b>\(\Rightarrow\) \(A\) diagonalisable ; \(P\) = vecteurs propres en colonnes, \(D=P^{-1}AP\) = diagonale des \(\lambda_i\)</div>
       <div class="memo-item method"><b>Méthode de diagonalisation</b>1) \(\chi_A\) ; 2) racines \(\lambda\) ; 3) base de \(\ker(A-\lambda I)\) pour chaque \(\lambda\) ; 4) diagonalisable \(\Leftrightarrow\) \(\sum\dim\ker(A-\lambda I)=n\) ; 5) \(P\) = réunion des bases, \(D=P^{-1}AP\)</div>
-      <div class="memo-item"><b>Endomorphisme</b>\(f(v)=\lambda v\), \(v\neq0\) ; sous-espace propre \(E_\lambda=\ker(f-\lambda\,\mathrm{id})\) ; \(\lambda\) valeur propre \(\Leftrightarrow E_\lambda\neq\{0\}\)</div>
-      <div class="memo-item"><b>Dimension</b>\(1\le\dim E_\lambda\le m(\lambda)\) (\(m\) = multiplicité comme racine de \(\chi_f\))</div>
-      <div class="memo-item"><b>Critère de diagonalisabilité</b>\(f\) diagonalisable sur \(\mathbb K\) \(\Leftrightarrow\) \(\chi_f\) scindé sur \(\mathbb K\) et \(\dim E_\lambda=m(\lambda)\) pour toute valeur propre \(\lambda\)</div>
-      <div class="memo-item"><b>Racines simples</b>\(\chi_f\) scindé à racines simples \(\Rightarrow\) diagonalisable</div>
-      <div class="memo-item"><b>Somme directe</b>\(E=\bigoplus_\lambda E_\lambda\) \(\Leftrightarrow\) \(f\) diagonalisable ; \(\dim E=\sum\dim E_\lambda\)</div>
       <div class="memo-item method"><b>Piège sur \(\mathbb R\)</b>une matrice peut être diagonalisable sur \(\mathbb C\) et pas sur \(\mathbb R\) (\(\chi\) non scindé sur \(\mathbb R\)) ; une valeur propre complexe n'existe pas sur \(\mathbb R\)</div>
     </div>
   </section>
@@ -82,29 +74,7 @@ window.MathJax = {
     <p>Pourquoi \(P\) inversible : par le théorème 1, les \(X_i\) forment une famille libre de \(n\) vecteurs de \(\mathbb K^n\), donc une base.</p>
     <div class="method"><b>Méthode.</b> 1) calculer \(\chi_A\) ; 2) trouver ses racines ; 3) pour chaque valeur propre \(\lambda\), résoudre \(AX=\lambda X\) (base de \(\ker(A-\lambda I)\)) ; 4) si la somme des dimensions des sous-espaces propres vaut \(n\), \(A\) est diagonalisable ; 5) \(P\) = vecteurs de base mis en colonnes, \(D=P^{-1}AP\) (les \(\lambda\) répétés selon leur multiplicité).</div>
 
-    <h3>1.4 Éléments propres d'un endomorphisme (CM 6)</h3>
-    <div class="def"><b>Définition 1 (CM 6).</b> Soit \(f:E\to E\) linéaire. \(\lambda\in\mathbb K\) est une valeur propre de \(f\) s'il existe \(v\in E\), \(v\neq0\), avec \(f(v)=\lambda v\). Le <b>spectre</b> \(\mathrm{Sp}(f)\) est l'ensemble des valeurs propres.</div>
-    <div class="def"><b>Définition 2 (sous-espace propre).</b> \(E_\lambda=\ker(f-\lambda\,\mathrm{id}_E)=\{v\in E\mid f(v)=\lambda v\}\). \(\lambda\) est valeur propre \(\Leftrightarrow E_\lambda\neq\{0\}\). Le sous-espace \(E_\lambda\) est stable par \(f\).</div>
-    <p>Si \(\dim E=n\) et \(A\) est la matrice de \(f\) dans une base \(\mathcal B\), alors \(\lambda\) valeur propre de \(f\) \(\Leftrightarrow\) \(\lambda\) valeur propre de \(A\) ; \(\chi_f=\chi_A\) ne dépend pas de la base (proposition 2 du CM : matrices semblables).</p>
-
-    <div class="thm"><b>Théorème 1 (CM 6).</b> Les sous-espaces propres \(E_{\lambda_1},\dots,E_{\lambda_r}\) associés à des valeurs propres distinctes sont en <b>somme directe</b>. En particulier, des vecteurs propres associés à des valeurs propres distinctes sont linéairement indépendants, et le nombre de valeurs propres est \(\le\dim E\).</div>
-    <p><b>Somme directe</b> : \(E_1+\dots+E_r\) est directe si \(v_1+\dots+v_r=0\) avec \(v_i\in E_i\) entraîne \(v_i=0\) pour tout \(i\). Équivalent : \(\dim(E_1+\dots+E_r)=\sum\dim E_i\). Si la somme est égale à \(E\), on note \(E=E_1\oplus\dots\oplus E_r\).</p>
-
-    <h3>1.5 Polynôme caractéristique et multiplicités (CM 6)</h3>
-    <div class="def"><b>Définition 5.</b> \(\chi_f(X)=\chi_A(X)=\det(A-XI_n)\) (\(A\) matrice de \(f\) dans une base quelconque).</div>
-    <p>Proposition 3 : \(\lambda\) valeur propre de \(f\) \(\Leftrightarrow\chi_f(\lambda)=0\). Proposition 4 : \(\chi_f(X)=(-1)^nX^n+(-1)^{n-1}(\mathrm{tr}f)X^{n-1}+\dots+\det f\), avec \(\mathrm{tr}f=\mathrm{tr}A\) et \(\det f=\det A\).</p>
-    <div class="def"><b>Multiplicité.</b> \(m(\lambda)\) = multiplicité de \(\lambda\) comme racine de \(\chi_f\). Alors :
-    \[1\le\dim E_\lambda\le m(\lambda)\]</div>
-
-    <h3>1.6 Endomorphisme diagonalisable (CM 6)</h3>
-    <div class="def"><b>Définition 6.</b> \(f\) est <b>diagonalisable</b> s'il existe une base de \(E\) formée de vecteurs propres de \(f\). Si \(\mathcal B\) est une telle base, la matrice de \(f\) dans \(\mathcal B\) est diagonale (\(f(v_i)=\lambda_iv_i\)).</div>
-    <p><b>Proposition 6.</b> Si \(\lambda_1,\dots,\lambda_r\) sont les valeurs propres distinctes de \(f\) : \(f\) diagonalisable \(\Leftrightarrow E=E_{\lambda_1}\oplus\dots\oplus E_{\lambda_r}\).</p>
-    <div class="thm"><b>Théorème 2 (critère, CM 6).</b> \(f\) est diagonalisable sur \(\mathbb K\) \(\Leftrightarrow\) \(\chi_f\) est scindé sur \(\mathbb K\) <b>et</b> pour toute valeur propre \(\lambda\) : \(m(\lambda)=\dim E_\lambda\).<br>
-    Même critère pour une matrice : \(A\) diagonalisable \(\Leftrightarrow\) \(\chi_A\) scindé et \(m(\lambda)=\dim\ker(A-\lambda I_n)\) pour chaque \(\lambda\).</div>
-    <div class="note"><b>Corollaire 2.</b> Si \(\chi_f\) est scindé à racines simples (\(m(\lambda)=1\) partout), alors \(f\) est diagonalisable (car \(1\le\dim E_\lambda\le 1\)).</div>
-    <div class="warnbox"><span class="lab">Piège</span> Le critère exige deux conditions : \(\chi\) scindé <b>et</b> égalité des dimensions. Une valeur propre double avec un seul vecteur propre indépendant (\(\dim E_\lambda=1<2\)) suffit pour la non-diagonalisabilité.</div>
-
-    <h3>1.7 Exemples du cours corrigés</h3>
+    <h3>1.4 Exemple du cours corrigé</h3>
     <div class="exo-card">
       <div class="exo-head"><span>Exemple 11 du CM 5 — \(A=\begin{pmatrix}1&0&0\\5&-4&0\\6&-6&2\end{pmatrix}\) : diagonalisation</span><span class="diff">♦♦◊</span></div>
       <div class="exo-body">
@@ -119,19 +89,6 @@ window.MathJax = {
         <p class="etape">Étape 5 : valeurs propres distinctes donc diagonalisable, avec
         \[P=\begin{pmatrix}1&0&0\\1&1&0\\0&1&1\end{pmatrix},\qquad D=\mathrm{diag}(1,-4,2)\]</p>
         <div class="res">\(P^{-1}AP=D\). Vérification : \(AX_2=(0,-4,-4)=-4X_2\) ; \(AX_3=(0,0,2)=2X_3\) ; \(AX_1=(1,1,0)=X_1\).</div>
-      </div>
-    </div>
-
-    <div class="exo-card">
-      <div class="exo-head"><span>Exemple 11 du CM 6 — \(A=\begin{pmatrix}1&0&0\\0&1&0\\1&-1&2\end{pmatrix}\) : diagonalisable sur \(\mathbb R\) ?</span><span class="diff">♦♦◊</span></div>
-      <div class="exo-body">
-        <p class="q">1) Polynôme caractéristique</p>
-        <p class="etape">Étape 1 : \(A\) triangulaire inférieure, donc \(\chi_A(X)=(1-X)^2(2-X)\) : \(\lambda=1\) de multiplicité \(m(1)=2\), \(\lambda=2\) de multiplicité \(m(2)=1\). Scindé sur \(\mathbb R\).</p>
-        <p class="q">2) Sous-espace propre \(E_1\)</p>
-        <p class="etape">Étape 2 : \(A-I=\begin{pmatrix}0&0&0\\0&0&0\\1&-1&1\end{pmatrix}\) est de rang 1, donc \(\dim E_1=3-1=2=m(1)\). Équation : \(x-y+z=0\), base \((1,1,0)\), \((0,1,1)\).</p>
-        <p class="q">3) Sous-espace propre \(E_2\)</p>
-        <p class="etape">Étape 3 : \(A-2I=\begin{pmatrix}-1&0&0\\0&-1&0\\1&-1&0\end{pmatrix}\) : \(x=y=0\), donc \(E_2=\mathrm{Vect}(0,0,1)\), \(\dim E_2=1=m(2)\).</p>
-        <div class="res">Théorème 2 vérifié : \(A\) est diagonalisable sur \(\mathbb R\), avec \(P=\begin{pmatrix}1&0&0\\1&1&0\\0&1&1\end{pmatrix}\) et \(D=\mathrm{diag}(1,1,2)\).</div>
       </div>
     </div>
   </section>
@@ -303,15 +260,15 @@ window.MathJax = {
 
   <section class="block" id="docs">
     <h2>📂 Documents donnés</h2>
-    <p class="docs-intro">Fichier original scanné (TD 5 p.1-2, puis CM 5 p.65-75 et CM 6 p.77-89). Cliquez pour ouvrir.</p>
+    <p class="docs-intro">Fichier original scanné (TD 5 p.1-2, puis CM 5 p.65-75). Cliquez pour ouvrir. Le CM 6 est dans le chapitre 6.</p>
     <div class="docs-group">
-      <h3>TD 5 + CM 5 + CM 6 (L. Graissot, AM2 2026-2027)</h3>
+      <h3>TD 5 + CM 5 (L. Graissot, AM2 2026-2027)</h3>
       <ul>
-        <li><a class="doc-item" href="../assets/pdf.html?f=../documents/aem2-mathematiques/ch5-valeurs-propres/TD5-CM5-CM6-valeurs-propres-reduction.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD 5 + CM 5 + CM 6 — 26 p.</span><span class="badge">p.1-2 = TD5 · p.3-13 = CM5 · p.14-26 = CM6</span><span class="arrow">↗</span></a></li>
+        <li><a class="doc-item" href="../assets/pdf.html?f=../documents/aem2-mathematiques/ch5-valeurs-propres/TD5-CM5-valeurs-propres.pdf" target="_blank" rel="noopener"><span class="ic">PDF</span><span class="nm">TD 5 + CM 5 — 13 p.</span><span class="badge">p.1-2 = TD5 · p.3-13 = CM5</span></a></li>
       </ul>
     </div>
     <p class="docs-note">Cursus AM2 · Mathématiques · L. Graissot, 2026-2027. Les annotations manuscrites du scan ne sont pas reprises ici ; les corrections du TD sont <b>maison</b>.
-    Voir aussi <a href="ch3-matrices-applications-lineaires.html">Ch3 — Matrices et applications linéaires</a>.</p>
+    Voir aussi <a href="ch3-matrices-applications-lineaires.html">Ch3 — Matrices et applications linéaires</a> et <a href="ch6-reduction-endomorphismes.html">Ch6 — Réduction des endomorphismes</a>.</p>
   </section>
 
 </main>

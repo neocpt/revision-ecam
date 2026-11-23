@@ -56,3 +56,8 @@ Une entrée par document traité (date, source, pages créées ou modifiées, er
 - Pages : `aem2-mathematiques/ch6-td6-reduction.html` (7 exos), `aem2-mathematiques/ch7-systemes-differentiels.html` (fiche mémo, cours, exemples 3, 4, 6, 9, 12, 13, 15, 16 corrigés, TD7 exos 1-3), `aem2-physique/ch8-forces-centrales.html (section TD8)` (6 exos). Entrées TD6, Ch7, TD8 dans `catalogue.js`.
 - Calculs maths vérifiés avec sympy (chaque solution réinjectée dans le système). Physique : valeurs numériques recalculées (a = 1,5e-15 m et 2,5e-18 m ; rmin Rutherford 4,1e-14 m et 2,7e-14 m ; h géostationnaire 3,6e4 km ; vlib 11 km/s ; Rs soleil 3 km ; rmin astéroïde 7,2e7 m).
 - Points d'incertitude : correction maison (pas de corrigé officiel) ; figures du TD8 redessinées, pas recopiées.
+
+## 2026-11-23 — Réorganisation Ch5 / Ch6 maths AM2
+- Demande : le CM6 était dans les documents du Ch5 ; le Ch6 doit contenir le TD6 et le CM6 en documents donnés, et s'appeler « Ch6 ».
+- Scan de 26 p. coupé en `ch5-valeurs-propres/TD5-CM5-valeurs-propres.pdf` (p.1-13) et `ch6-reduction-endomorphismes/CM6-reduction-endomorphismes.pdf` (p.14-26) ; ancien PDF combiné supprimé.
+- Ch5 = CM5 + TD5 seulement ; Ch6 = `aem2-mathematiques/ch6-reduction-endomorphismes.html` (fiche mémo et cours CM6, exemple 11 du CM6, TD6 exos 1-7, documents CM6 + TD6). `ch6-td6-reduction.html` supprimée ; catalogue : Ch5 et Ch6 ; lien du Ch7 mis à jour.
