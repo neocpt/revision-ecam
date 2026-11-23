@@ -29,6 +29,7 @@ window.CATALOGUE = {
           { n: "Ch6", titre: "Électronique numérique", url: "aem2-electronique/ch6-electronique-numerique.html" },
           { n: "Ch7", titre: "Moment cinétique (systèmes tournants)", url: "aem2-physique/ch7-moment-cinetique.html" },
           { n: "Ch8", titre: "Mouvement à force centrale (cours + TD8)", url: "aem2-physique/ch8-forces-centrales.html" },
+          { n: "Fiche", titre: "Fiche Ch8 : formules et méthodes (r min, r max, Ep eff)", url: "aem2-physique/ch8-fiche-methodes.html" },
           { n: "Fiche", titre: "Fiche ALI — montages à connaître", url: "aem2-electronique/fiche-ali.html" },
           { n: "Fiche", titre: "Fiche filtres RC et RLC", url: "aem2-electronique/fiche-filtres-rlc.html" }
         ] }
