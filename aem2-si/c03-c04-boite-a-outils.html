@@ -364,6 +364,37 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
       </div>
     </div>
 
+    <div class="exo-card" id="f-cas">
+      <div class="exo-head"><span>F3 ter · Cas particuliers du PFD : translation, rotation pure, mouvement plan</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="note"><span class="lab">À retenir</span>
+          Rotation pure autour d'un axe fixe \((O,\vec z)\) : le moment dynamique projeté sur l'axe est \(\ \vec z\cdot\vec\delta_O=J\,\ddot\theta\ \) (\(J\) = moment d'inertie par rapport à l'axe, \(\ddot\theta\) = accélération angulaire). Le PFD en moment sur l'axe s'écrit donc
+          \[ \sum M_{z}(\text{actions extérieures})=J\,\ddot\theta \]
+          C'est l'équivalent de \(\sum F=m\,a\) pour la rotation.
+        </div>
+        <div class="overflow"><table>
+          <tr><th>Cas</th><th>Résultante dynamique</th><th>Moment dynamique</th><th>Équations utiles</th></tr>
+          <tr><td>Translation rectiligne selon \(\vec x\)</td><td>\(m\ddot x\,\vec x\)</td><td>\(\vec\delta_G=\vec0\)</td><td>\(\sum F_x=m\ddot x\) ; \(\sum\vec M_G=\vec0\)</td></tr>
+          <tr><td>Translation quelconque</td><td>\(m\vec\Gamma\)</td><td>\(\vec\delta_G=\vec0\)</td><td>\(\sum\vec F=m\vec\Gamma\) ; \(\sum\vec M_G=\vec0\)</td></tr>
+          <tr><td>Rotation pure, axe fixe \((O,\vec z)\), \(G\) sur l'axe</td><td>\(\vec0\) (\(G\) immobile)</td><td>\(J\ddot\theta\,\vec z\) (si \(D=E=0\))</td><td>\(\sum M_z=J\ddot\theta\)</td></tr>
+          <tr><td>Rotation pure, axe fixe, \(G\) à la distance \(a\) de l'axe</td><td>tangentielle \(m\,a\,\ddot\theta\,\vec e_\theta\), normale \(-m\,a\,\dot\theta^2\,\vec e_r\)</td><td>\(J_O\ddot\theta\,\vec z\) avec \(J_O=J_G+m\,a^2\) (Huygens)</td><td>\(\sum M_{O,z}=J_O\ddot\theta\) ; \(\sum F_t=ma\ddot\theta\) ; \(\sum F_n=-ma\dot\theta^2\)</td></tr>
+          <tr><td>Rotation uniforme (\(\dot\theta\) constante), \(G\) sur l'axe, \(D=E=0\)</td><td>\(\vec0\)</td><td>\(\vec0\)</td><td>\(\sum M_z=0\) (sinon, équilibrage nécessaire)</td></tr>
+          <tr><td>Rotation uniforme, \(E\) ou \(D\) non nul</td><td>\(\vec0\) si \(G\) sur l'axe</td><td>\(\omega^2E\,\vec y_1\) (si seul \(E\)), \(-\omega^2F\,\vec z_1\) (axe \(\vec x\), seul \(F\))</td><td>efforts de paliers alternés</td></tr>
+          <tr><td>Mouvement plan (plan \((\vec x,\vec y)\), plan de symétrie), \(G\) quelconque</td><td>\(m\vec\Gamma_G\)</td><td>\(\vec\delta_G=J_{Gz}\ddot\theta\,\vec z\)</td><td>\(\sum\vec F=m\vec\Gamma_G\) ; \(\sum M_{G,z}=J_{Gz}\ddot\theta\)</td></tr>
+          <tr><td>Roulement sans glissement d'un cylindre homogène (rayon \(R\)), \(V_G=R\dot\theta\)</td><td>\(m\,R\ddot\theta\)</td><td>\(\tfrac12mR^2\,\ddot\theta\,\vec z\) en \(G\)</td><td>\(\sum M_{I}\) avec \(J_I=\tfrac32mR^2\), ou PFD en \(G\)</td></tr>
+          <tr><td>Statique (\(\ddot\theta=0\), \(\vec\Gamma=\vec0\))</td><td>\(\vec0\)</td><td>\(\vec0\)</td><td>\(\sum\vec F=\vec0\) ; \(\sum\vec M=\vec0\)</td></tr>
+        </table></div>
+        <p class="etape">Pourquoi \(\vec z\cdot\vec\delta_O=J\ddot\theta\) ?</p>
+        <p>Pour une rotation \(\vec\Omega=\dot\theta\,\vec z\) autour d'un axe fixe, on a (F3 bis) \(\vec z\cdot\vec\sigma_O=C\dot\theta=J\dot\theta\). Comme \(\vec z\) est fixe, \(\vec z\cdot\dfrac{d\vec\sigma_O}{dt}=\dfrac{d}{dt}(J\dot\theta)=J\ddot\theta\) si \(J\) est constant.</p>
+        <div class="warnbox"><span class="lab">Pièges</span>
+          \(J\) est l'inertie <b>par rapport à l'axe de rotation</b>, pas par rapport à \(G\) : il faut passer par Huygens si l'axe ne passe pas par \(G\). L'écriture \(J\ddot\theta\) ne vaut que sur l'axe de rotation : les autres composantes du moment dynamique dépendent de \(D\) et \(E\).
+        </div>
+        <p class="etape">Exemple : disque homogène en rotation, accéléré par un couple</p>
+        <p>Disque (\(m=2\) kg, \(R=0{,}1\) m) en pivot sur son axe, soumis à un couple \(C_m=0{,}05\) N·m. Inertie \(J=\tfrac12mR^2=0{,}01\) kg·m².</p>
+        \[ \sum M_z=J\ddot\theta\ \Rightarrow\ \ddot\theta=\frac{C_m}{J}=\frac{0{,}05}{0{,}01}=5\ \text{rad/s}^2 \]
+      </div>
+    </div>
+
     <div class="exo-card" id="f-comoment">
       <div class="exo-head"><span>F4 · Comoment : puissance et énergie cinétique</span><span class="diff">♦♦</span></div>
       <div class="exo-body">
