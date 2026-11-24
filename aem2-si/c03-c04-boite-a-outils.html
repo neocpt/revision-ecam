@@ -320,6 +320,50 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
       </div>
     </div>
 
+    <div class="exo-card" id="f-sigma">
+      <div class="exo-head"><span>F3 bis · Calculer \(\vec\sigma_{A\in S/R}\) puis \(\left[\dfrac{d\vec\sigma_{A\in S/R}}{dt}\right]_R\)</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="rappel"><span class="lab">Formule · moment cinétique en \(A\)</span>
+          \[ \vec\sigma_{A\in S/R}=\bar{\bar I}_{(A,S)}\cdot\vec\Omega_{S/R}+m\,\overrightarrow{AG}\wedge\vec V_{A\in S/R} \]
+          Le second terme est nul si \(A=G\) ou si \(A\) est fixe dans \(R\) : il reste \(\vec\sigma_A=\bar{\bar I}_{(A,S)}\cdot\vec\Omega_{S/R}\).
+          Avec \(\vec\Omega=(p,q,r)\) dans la base de la matrice :
+          \[ \vec\sigma=\begin{pmatrix}Ap-Fq-Er\-Fp+Bq-Dr\-Ep-Dq+Cr\end{pmatrix} \]
+        </div>
+        <div class="method"><span class="lab">Recette</span>
+          <ol>
+            <li>Choisir \(A\) : un point fixe dans \(R\) (pivot, rotule) ou \(G\).</li>
+            <li>Écrire \(\vec\Omega_{S/R}\) par composition des rotations.</li>
+            <li>Écrire \(\bar{\bar I}_{(A,S)}\) (cas connus, puis Huygens si \(A\neq G\)).</li>
+            <li>Mettre \(\vec\Omega\) dans la base de la matrice (figure plane).</li>
+            <li>Multiplier ligne par colonne.</li>
+            <li>Pour dériver : se placer dans la base liée au solide et appliquer \(\dfrac{d\vec u_1}{dt}=\vec\Omega_{S/R}\wedge\vec u_1\) à chaque vecteur de base.</li>
+          </ol>
+        </div>
+        <p class="etape">Exemple : solide en rotation autour de l'axe fixe \((O,\vec z)\), avec produits d'inertie</p>
+        <p>Le solide \(S\) tourne de \(\theta\) autour de \(\vec z\) fixe. Sa matrice en \(O\) (point de l'axe) dans la base liée \((\vec x_1,\vec y_1,\vec z)\) est
+        \(\begin{pmatrix}A&-F&-E\-F&B&-D\-E&-D&C\end{pmatrix}\).</p>
+        <p class="etape">Étape 1 : le point et la rotation</p>
+        <p>\(O\) est fixe dans \(R\), donc le second terme de la formule est nul. La rotation est</p>
+        \[ \vec\Omega_{S/R}=\dot\theta\,\vec z=(0,\,0,\,\dot\theta)_{(\vec x_1,\vec y_1,\vec z)} \]
+        <p class="etape">Étape 2 : le produit matrice par vecteur</p>
+        <p>Avec \(p=q=0\) et \(r=\dot\theta\), on garde la troisième colonne multipliée par \(\dot\theta\) :</p>
+        \[ \vec\sigma_{O\in S/R}=\dot\theta\,\bigl(-E\,\vec x_1-D\,\vec y_1+C\,\vec z\bigr) \]
+        <p class="etape">Étape 3 : la dérivée dans \(R\)</p>
+        <div class="rappel"><span class="lab">Rappel · dérivée d'un vecteur lié au solide</span>\[ \left[\frac{d\vec u_1}{dt}\right]_R=\vec\Omega_{S/R}\wedge\vec u_1\ \Rightarrow\ \dot{\vec x}_1=\dot\theta\,\vec y_1,\quad \dot{\vec y}_1=-\dot\theta\,\vec x_1,\quad \dot{\vec z}=\vec0 \]</div>
+        <p>On dérive terme à terme (produit de la fonction \(\dot\theta\) par le vecteur) :</p>
+        \[ \left[\frac{d\vec\sigma_O}{dt}\right]_R=\ddot\theta\,\bigl(-E\,\vec x_1-D\,\vec y_1+C\,\vec z\bigr)+\dot\theta\,\bigl(-E\,\dot\theta\,\vec y_1+D\,\dot\theta\,\vec x_1\bigr) \]
+        <div class="res">\(\vec\delta_{O}=\bigl(-E\ddot\theta+D\dot\theta^2\bigr)\vec x_1+\bigl(-D\ddot\theta-E\dot\theta^2\bigr)\vec y_1+C\ddot\theta\,\vec z\) (car \(O\) est fixe, \(\vec\delta_O=d\vec\sigma_O/dt\)).</div>
+        <p>Si l'on ne veut que la composante sur l'axe : \(\vec z\cdot\vec\delta_O=C\ddot\theta\). On peut aussi projeter d'abord \(\vec\sigma\) sur \(\vec z\) (\(C\dot\theta\)) puis dériver, car \(\vec z\) est fixe.</p>
+        <p class="etape">Exemple numérique : la barre pendulaire</p>
+        <p>Barre (\(m\), \(L\)) en pivot parfait d'axe \((O,\vec z)\) à son extrémité. Matrice en \(G\) : \(\mathrm{diag}(0,\tfrac{mL^2}{12},\tfrac{mL^2}{12})\) ; par Huygens en \(O\) : \(C_O=\tfrac{mL^2}{3}\), \(D=E=0\).</p>
+        \[ \vec\sigma_O=\frac{mL^2}{3}\,\dot\theta\,\vec z\ ,\qquad \vec\delta_O=\frac{mL^2}{3}\,\ddot\theta\,\vec z \]
+        <p>Pour \(m=2\) kg, \(L=0{,}6\) m : \(C_O=0{,}24\) kg·m², donc \(\vec\sigma_O=0{,}24\,\dot\theta\,\vec z\) (avec \(\dot\theta\) en rad/s, résultat en kg·m²/s).</p>
+        <div class="warnbox"><span class="lab">Pièges</span>
+          Multiplier la matrice (base \(1\)) par un \(\vec\Omega\) écrit dans la base \(0\). Utiliser \(\vec\delta_A=d\vec\sigma_A/dt\) alors que \(A\) n'est ni fixe ni \(G\) : il faut ajouter \(\vec V_{A/R}\wedge m\vec V_G\). Oublier de dériver les vecteurs de base (ce sont eux qui donnent les termes en \(\dot\theta^2\)).
+        </div>
+      </div>
+    </div>
+
     <div class="exo-card" id="f-comoment">
       <div class="exo-head"><span>F4 · Comoment : puissance et énergie cinétique</span><span class="diff">♦♦</span></div>
       <div class="exo-body">
