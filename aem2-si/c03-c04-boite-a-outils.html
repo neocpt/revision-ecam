@@ -13,7 +13,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
 <body class="theme-am2">
 
 <div id="site-nav"></div>
-<nav class="subnav"><a href="#mode">Mode d'emploi</a><a href="#methodes">Les 4 méthodes</a><a href="#vocab">0 · Vocabulaire</a><a href="#maths">1 · Maths</a><a href="#dyn">2 · Dynamique</a><a href="#ener">3 · Énergétique</a><a href="#carte">4 · Carte des TD</a></nav>
+<nav class="subnav"><a href="#mode">Mode d'emploi</a><a href="#methodes">Les 4 méthodes</a><a href="#formulaire">Formulaire des torseurs</a><a href="#vocab">0 · Vocabulaire</a><a href="#maths">1 · Maths</a><a href="#dyn">2 · Dynamique</a><a href="#ener">3 · Énergétique</a><a href="#carte">4 · Carte des TD</a></nav>
 
 <main class="wrap">
   <span class="chip">SI AM2 (2ᵉ année) · Boîte à outils C03 et C04</span>
@@ -214,6 +214,132 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
         <div class="warnbox"><span class="lab">Pièges</span>
           Compter la puissance d'une liaison pivot dans le repère du bâti alors qu'il n'y a pas de mouvement du point. Oublier la puissance du poids. Appliquer le TEC à un système à deux paramètres indépendants : une seule équation ne suffit plus.
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= FORMULAIRE DES TORSEURS ======================= -->
+  <section class="block" id="formulaire">
+    <h2>Formulaire : tous les torseurs, formule générale et cas particuliers</h2>
+    <p>Notation : \(\{\mathcal T\}_A=\left\{\begin{smallmatrix}R_x&M_x\\R_y&M_y\\R_z&M_z\end{smallmatrix}\right\}_A\) (résultante à gauche, moment en \(A\) à droite). Tous les torseurs changent de point par \(\ \vec M_B=\vec M_A+\overrightarrow{BA}\wedge\vec R\). Les composantes sont données dans la base \((\vec x,\vec y,\vec z)\).</p>
+
+    <div class="exo-card" id="f-statique">
+      <div class="exo-head"><span>F1 · Torseur des actions mécaniques</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <div class="rappel"><span class="lab">Formule générale</span>
+          \[ \{\mathcal T_{\Sigma\to S}\}_A=\left\{\begin{matrix}\vec R\\ \vec M_A\end{matrix}\right\}\quad\text{avec}\quad \vec R=\sum_i\vec F_i,\qquad \vec M_A=\sum_i\overrightarrow{AB_i}\wedge\vec F_i+\sum_j\vec C_j \]
+          Pour une force \(\vec F=(X,Y,Z)\) appliquée en \(B\) avec \(\overrightarrow{AB}=(x,y,z)\) :
+          \[ \vec M_A=\overrightarrow{AB}\wedge\vec F=\begin{pmatrix}y\,Z-z\,Y\\ z\,X-x\,Z\\ x\,Y-y\,X\end{pmatrix} \]
+        </div>
+        <p class="etape">Cas particuliers d'actions</p>
+        <div class="overflow"><table>
+          <tr><th>Action</th><th>Torseur</th></tr>
+          <tr><td>Glisseur (force seule, appliquée en \(B\))</td><td>\(\{\vec F\ ;\ \overrightarrow{AB}\wedge\vec F\}_A\) ; en \(B\) : \(\{\vec F\ ;\ \vec0\}_B\), et le moment est nul en tout point de la droite d'action</td></tr>
+          <tr><td>Couple pur \(\vec C\)</td><td>\(\{\vec0\ ;\ \vec C\}\), le même en tout point</td></tr>
+          <tr><td>Pesanteur (résultante en \(G\))</td><td>\(\{-mg\,\vec z_0\ ;\ \vec0\}_G\) si \(\vec z_0\) est vertical vers le haut ; en \(A\) : moment \(\overrightarrow{AG}\wedge(-mg\,\vec z_0)\)</td></tr>
+          <tr><td>Ressort linéaire (raideur \(k\), longueur libre \(l_0\), longueur \(l\), direction \(\vec u\) de \(A\) vers \(B\))</td><td>sur \(B\) : \(\{-k(l-l_0)\,\vec u\ ;\ \vec0\}_B\)</td></tr>
+          <tr><td>Ressort de torsion (raideur \(k_t\))</td><td>\(\{\vec0\ ;\ -k_t(\theta-\theta_0)\,\vec z\}\)</td></tr>
+          <tr><td>Couple moteur \(C_m\) d'axe \(\vec z\)</td><td>\(\{\vec0\ ;\ C_m\,\vec z\}\)</td></tr>
+          <tr><td>Contact avec frottement de Coulomb (glissement)</td><td>force \(\vec F=N\,\vec n+\vec T\) avec \(\|\vec T\|=f\,N\), \(\vec T\) opposée à la vitesse de glissement ; sans glissement : \(\|\vec T\|\le f\,N\)</td></tr>
+        </table></div>
+        <p class="etape">Liaisons parfaites : forme du torseur d'actions transmissibles</p>
+        <p>Pour chaque liaison, le torseur d'actions a la forme \(\left\{\begin{smallmatrix}X&L\\Y&M\\Z&N\end{smallmatrix}\right\}_A\) avec un zéro pour chaque mouvement relatif <b>libre</b>. Le torseur cinématique correspondant (mouvement de la pièce 2 par rapport à 1) a, lui, un zéro pour chaque mouvement <b>bloqué</b>. Ici \(A\) est sur l'axe ou au centre, et l'axe est \(\vec x\), sauf indication.</p>
+        <div class="overflow"><table>
+          <tr><th>Liaison</th><th>Torseur cinématique \(\{\vec\Omega_{2/1}\ ;\ \vec V_{A\in2/1}\}\)</th><th>Torseur d'actions</th><th>Inconnues</th></tr>
+          <tr><td>Encastrement</td><td>\(\Omega=\vec0\), \(V=\vec0\)</td><td>\(X,Y,Z,L,M,N\)</td><td>6</td></tr>
+          <tr><td>Pivot d'axe \(\vec x\)</td><td>\(\Omega=(\omega,0,0)\), \(V=\vec0\)</td><td>\(X,Y,Z,M,N\) ; \(L=0\)</td><td>5</td></tr>
+          <tr><td>Glissière d'axe \(\vec x\)</td><td>\(\Omega=\vec0\), \(V=(v,0,0)\)</td><td>\(Y,Z,L,M,N\) ; \(X=0\)</td><td>5</td></tr>
+          <tr><td>Pivot glissant d'axe \(\vec x\)</td><td>\(\Omega=(\omega,0,0)\), \(V=(v,0,0)\)</td><td>\(Y,Z,M,N\) ; \(X=L=0\)</td><td>4</td></tr>
+          <tr><td>Hélicoïdale d'axe \(\vec x\), pas \(p\)</td><td>\(\Omega=(\omega,0,0)\), \(V=(\tfrac{p}{2\pi}\omega,0,0)\)</td><td>\(X,Y,Z,M,N\) ; \(L=-\tfrac{p}{2\pi}X\)</td><td>5</td></tr>
+          <tr><td>Rotule de centre \(A\)</td><td>\(\Omega=(\omega_x,\omega_y,\omega_z)\), \(V=\vec0\)</td><td>\(X,Y,Z\) ; \(L=M=N=0\)</td><td>3</td></tr>
+          <tr><td>Linéaire annulaire d'axe \((A,\vec x)\)</td><td>\(\Omega=(\omega_x,\omega_y,\omega_z)\), \(V=(v,0,0)\)</td><td>\(Y,Z\) ; \(X=L=M=N=0\)</td><td>2</td></tr>
+          <tr><td>Appui plan de normale \(\vec z\)</td><td>\(\Omega=(0,0,\omega_z)\), \(V=(v_x,v_y,0)\)</td><td>\(Z,L,M\) ; \(X=Y=N=0\)</td><td>3</td></tr>
+          <tr><td>Linéaire rectiligne : normale \(\vec z\), ligne de contact selon \(\vec x\)</td><td>\(\Omega=(\omega_x,0,\omega_z)\), \(V=(v_x,v_y,0)\)</td><td>\(Z,M\) ; \(X=Y=L=N=0\)</td><td>2</td></tr>
+          <tr><td>Ponctuelle (sphère-plan) : normale \(\vec z\)</td><td>\(\Omega=(\omega_x,\omega_y,\omega_z)\), \(V=(v_x,v_y,0)\)</td><td>\(Z\) ; tout le reste nul</td><td>1</td></tr>
+        </table></div>
+        <div class="note"><span class="lab">Vérification</span>
+          Le nombre d'inconnues d'une liaison parfaite plus le nombre de mouvements libres fait toujours 6. Comme la puissance \(X\,v_x+\dots+L\,\omega_x+\dots\) doit être nulle, chaque composante libre côté cinématique est face à une composante nulle côté actions.
+        </div>
+        <div class="warnbox"><span class="lab">Piège</span>
+          Ces formes supposent \(A\) sur l'axe (ou au centre) et les axes bien orientés. Au changement de point, les composantes de moment se recalculent avec \(\overrightarrow{BA}\wedge\vec R\) : un torseur de pivot peut gagner un moment « non nul » en \(B\) hors de l'axe.
+        </div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="f-cinematique">
+      <div class="exo-head"><span>F2 · Torseur cinématique</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <div class="rappel"><span class="lab">Formule générale</span>
+          \[ \{\mathcal V_{S/R}\}_A=\left\{\begin{matrix}\vec\Omega_{S/R}\\ \vec V_{A\in S/R}\end{matrix}\right\},\quad \vec V_{B\in S/R}=\vec V_{A\in S/R}+\overrightarrow{BA}\wedge\vec\Omega_{S/R},\quad \vec V_{A\in S/R}=\left[\frac{d\overrightarrow{OA}}{dt}\right]_R \]
+          Composition (3 solides) : \(\ \vec\Omega_{3/1}=\vec\Omega_{3/2}+\vec\Omega_{2/1}\), \(\ \vec V_{A\in3/1}=\vec V_{A\in3/2}+\vec V_{A\in2/1}\). Dérivée d'un vecteur lié à \(S\) : \(\left[\dfrac{d\vec u}{dt}\right]_R=\vec\Omega_{S/R}\wedge\vec u\).
+          Accélération : \(\ \vec\Gamma_{B\in S/R}=\vec\Gamma_{A\in S/R}+\left[\dfrac{d\vec\Omega_{S/R}}{dt}\right]_R\wedge\overrightarrow{AB}+\vec\Omega_{S/R}\wedge\left(\vec\Omega_{S/R}\wedge\overrightarrow{AB}\right)\)
+        </div>
+        <p class="etape">Cas particuliers</p>
+        <div class="overflow"><table>
+          <tr><th>Mouvement</th><th>Torseur cinématique</th><th>Vitesse et accélération</th></tr>
+          <tr><td>Translation (quelconque)</td><td>\(\{\vec0\ ;\ \vec V\}\)</td><td>\(\vec V_M=\vec V\) et \(\vec\Gamma_M=\vec\Gamma\) pour tous les points</td></tr>
+          <tr><td>Translation rectiligne selon \(\vec x\)</td><td>\(\{\vec0\ ;\ \dot x\,\vec x\}\)</td><td>\(\vec\Gamma=\ddot x\,\vec x\)</td></tr>
+          <tr><td>Rotation autour de l'axe fixe \((O,\vec z)\)</td><td>\(\{\dot\theta\,\vec z\ ;\ \vec0\}_O\)</td><td>\(\vec V_M=\dot\theta\,\vec z\wedge\overrightarrow{OM}\) ; \(\vec\Gamma_M=\ddot\theta\,\vec z\wedge\overrightarrow{OM}-\dot\theta^2\,\overrightarrow{HM}\) (\(H\) = projeté de \(M\) sur l'axe)</td></tr>
+          <tr><td>Point \(M\) à distance \(r\) de l'axe</td><td></td><td>\(\vec V=r\dot\theta\,\vec e_\theta\) ; \(\vec\Gamma=r\ddot\theta\,\vec e_\theta-r\dot\theta^2\,\vec e_r\)</td></tr>
+          <tr><td>Mouvement hélicoïdal d'axe \(\vec x\), pas \(p\)</td><td>\(\{\dot\theta\,\vec x\ ;\ \tfrac{p}{2\pi}\dot\theta\,\vec x\}_{\text{axe}}\)</td><td>translation et rotation liées</td></tr>
+          <tr><td>Rotation autour d'un point fixe (rotule)</td><td>\(\{\vec\Omega\ ;\ \vec0\}_O\)</td><td>\(\vec V_M=\vec\Omega\wedge\overrightarrow{OM}\)</td></tr>
+          <tr><td>Roulement sans glissement en \(I\) (roue de rayon \(R\))</td><td>\(\vec V_{I\in S/R'}=\vec0\)</td><td>\(\vec V_G=\overrightarrow{GI}\wedge\vec\Omega\), soit \(\|\vec V_G\|=R|\omega|\)</td></tr>
+          <tr><td>Mouvement plan général (axe \(\vec z\))</td><td>\(\{\omega\,\vec z\ ;\ \vec V_A\}\)</td><td>\(\vec V_B=\vec V_A+\omega\,\vec z\wedge\overrightarrow{AB}\) ; centre instantané de rotation \(I\) tel que \(\vec V_I=\vec0\)</td></tr>
+          <tr><td>Vitesse de glissement en \(I\)</td><td></td><td>\(\vec V_{I\in2/1}=\vec V_{I\in2/0}-\vec V_{I\in1/0}\)</td></tr>
+        </table></div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="f-cinetique">
+      <div class="exo-head"><span>F3 · Torseurs cinétique et dynamique</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="rappel"><span class="lab">Formules générales</span>
+          \[ \{\mathcal C_{S/R}\}_A=\left\{\begin{matrix}m\,\vec V_{G\in S/R}\\ \vec\sigma_{A\in S/R}\end{matrix}\right\},\qquad \vec\sigma_{A\in S/R}=\bar{\bar I}_{(A,S)}\cdot\vec\Omega_{S/R}+m\,\overrightarrow{AG}\wedge\vec V_{A\in S/R} \]
+          \[ \vec\sigma_{A}=\vec\sigma_G+\overrightarrow{AG}\wedge m\vec V_G\ ,\qquad \vec\sigma_G=\bar{\bar I}_{(G,S)}\cdot\vec\Omega_{S/R} \]
+          \[ \{\mathcal D_{S/R}\}_A=\left\{\begin{matrix}m\,\vec\Gamma_{G\in S/R}\\ \vec\delta_{A\in S/R}\end{matrix}\right\},\qquad \vec\delta_{A}=\left[\frac{d\vec\sigma_{A}}{dt}\right]_R+\vec V_{A/R}\wedge m\vec V_{G\in S/R} \]
+          \[ \vec\delta_A=\vec\delta_G+\overrightarrow{AG}\wedge m\vec\Gamma_G\ ,\qquad \vec\delta_G=\left[\frac{d\vec\sigma_G}{dt}\right]_R \]
+        </div>
+        <p class="etape">Composantes de \(\bar{\bar I}\cdot\vec\Omega\)</p>
+        <p>Avec \(\vec\Omega=(p,q,r)\) dans la base de la matrice :</p>
+        \[ \vec\sigma=\begin{pmatrix}A&-F&-E\\-F&B&-D\\-E&-D&C\end{pmatrix}\begin{pmatrix}p\\q\\r\end{pmatrix}=\begin{pmatrix}Ap-Fq-Er\\-Fp+Bq-Dr\\-Ep-Dq+Cr\end{pmatrix} \]
+        <p class="etape">Cas particuliers</p>
+        <div class="overflow"><table>
+          <tr><th>Cas</th><th>Torseur cinétique</th><th>Torseur dynamique</th></tr>
+          <tr><td>Translation</td><td>\(\{m\vec V_G\ ;\ \vec0\}_G\)</td><td>\(\{m\vec\Gamma_G\ ;\ \vec0\}_G\)</td></tr>
+          <tr><td>Point matériel \(M\) de masse \(m\)</td><td>\(\{m\vec V_M\ ;\ \overrightarrow{AM}\wedge m\vec V_M\}_A\)</td><td>\(\{m\vec\Gamma_M\ ;\ \overrightarrow{AM}\wedge m\vec\Gamma_M\}_A\) pour \(A\) fixe</td></tr>
+          <tr><td>Point \(A\) fixe dans \(R\) (ou \(A=G\))</td><td>\(\vec\sigma_A=\bar{\bar I}_{(A,S)}\cdot\vec\Omega\)</td><td>\(\vec\delta_A=\dfrac{d\vec\sigma_A}{dt}\)</td></tr>
+          <tr><td>Rotation autour de l'axe fixe \((O,\vec z)\), \(O\) sur l'axe, \(\vec\Omega=\dot\theta\,\vec z\)</td><td>\(\vec\sigma_O=\dot\theta\,(-E\,\vec x_1-D\,\vec y_1+C\,\vec z)\) ; \(m\vec V_G=m\dot\theta\,\vec z\wedge\overrightarrow{OG}\)</td><td>\(\vec\delta_O=(-E\ddot\theta+D\dot\theta^2)\,\vec x_1+(-D\ddot\theta-E\dot\theta^2)\,\vec y_1+C\ddot\theta\,\vec z\) ; \(m\vec\Gamma_G=m\bigl(\ddot\theta\,\vec z\wedge\overrightarrow{OG}-\dot\theta^2\,\overrightarrow{OG}_\perp\bigr)\)</td></tr>
+          <tr><td>Même rotation, \(D=E=0\) (axe principal)</td><td>\(\vec\sigma_O=C\dot\theta\,\vec z\)</td><td>\(\vec\delta_O=C\ddot\theta\,\vec z\), et \(\vec z\cdot\vec\delta_O=J\ddot\theta\) avec \(J=C\)</td></tr>
+          <tr><td>Même rotation, \(G\) sur l'axe (\(\overrightarrow{OG}_\perp=\vec0\))</td><td>\(m\vec V_G=\vec0\)</td><td>\(m\vec\Gamma_G=\vec0\) : seule la composante de moment travaille</td></tr>
+          <tr><td>Mouvement plan, \(G\) quelconque, axe \(\vec z\) (plan de symétrie \(z=0\))</td><td>\(\vec\sigma_G=C\omega\,\vec z\)</td><td>\(\vec\delta_G=C\dot\omega\,\vec z\)</td></tr>
+          <tr><td>Solide de révolution d'axe \(\vec z_1\) (\(\bar{\bar I}=\mathrm{diag}(A,A,C)\))</td><td>\(\vec\sigma_O=A(\Omega_x\vec x_1+\Omega_y\vec y_1)+C\,\Omega_z\vec z_1\)</td><td>à dériver avec \(\vec\Omega_{b/R}\) de la base utilisée</td></tr>
+        </table></div>
+        <div class="warnbox"><span class="lab">Pièges</span>
+          La formule \(\vec\delta_A=d\vec\sigma_A/dt\) n'est vraie que si \(A\) est fixe ou \(A=G\). Dériver dans la base liée au solide donne les termes en \(\dot\theta^2\) par \(\dot{\vec x}_1=\dot\theta\,\vec y_1\), \(\dot{\vec y}_1=-\dot\theta\,\vec x_1\).
+        </div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="f-comoment">
+      <div class="exo-head"><span>F4 · Comoment : puissance et énergie cinétique</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="rappel"><span class="lab">Formule générale</span>
+          Pour deux torseurs écrits <b>au même point</b> \(A\) :
+          \[ \{\mathcal T\}\otimes\{\mathcal V\}=\vec R\cdot\vec V_A+\vec M_A\cdot\vec\Omega=R_xV_x+R_yV_y+R_zV_z+M_x\Omega_x+M_y\Omega_y+M_z\Omega_z \]
+          \[ P_{\Sigma\to S/R}=\{\mathcal T_{\Sigma\to S}\}\otimes\{\mathcal V_{S/R}\},\qquad 2E_{c(S/R)}=\{\mathcal V_{S/R}\}\otimes\{\mathcal C_{S/R}\}=m\,\vec V_A\cdot\vec V_G+\vec\Omega\cdot\vec\sigma_A \]
+        </div>
+        <div class="overflow"><table>
+          <tr><th>Cas</th><th>Formule</th></tr>
+          <tr><td>Force seule</td><td>\(P=\vec F\cdot\vec V_{B\in S/R}\)</td></tr>
+          <tr><td>Couple seul</td><td>\(P=\vec C\cdot\vec\Omega_{S/R}\) (moteur : \(P=C_m\omega\))</td></tr>
+          <tr><td>Liaison parfaite, dans le mouvement relatif</td><td>\(P_{1\leftrightarrow2}=\{\mathcal T_{1\to2}\}\otimes\{\mathcal V_{2/1}\}=0\)</td></tr>
+          <tr><td>Contact avec glissement (frottement)</td><td>\(P=\vec F_{1\to2}\cdot\vec V_{I\in2/1}\), négative</td></tr>
+          <tr><td>Translation</td><td>\(E_c=\tfrac12 mV_G^2\)</td></tr>
+          <tr><td>Rotation autour d'un axe fixe (inertie \(J\))</td><td>\(E_c=\tfrac12J\omega^2\)</td></tr>
+          <tr><td>Point \(A\) fixe</td><td>\(E_c=\tfrac12\vec\Omega\cdot\bar{\bar I}_{(A,S)}\cdot\vec\Omega=\tfrac12(Ap^2+Bq^2+Cr^2-2Dqr-2Epr-2Fpq)\)</td></tr>
+          <tr><td>Cas général</td><td>\(E_c=\tfrac12mV_G^2+\tfrac12\vec\Omega\cdot\bar{\bar I}_{(G,S)}\cdot\vec\Omega\) (Koenig)</td></tr>
+          <tr><td>Plusieurs solides</td><td>\(E_{c(\Sigma)}=\sum_iE_{c(S_i)}\)</td></tr>
+        </table></div>
       </div>
     </div>
   </section>
