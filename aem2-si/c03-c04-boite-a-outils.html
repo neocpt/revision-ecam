@@ -13,7 +13,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
 <body class="theme-am2">
 
 <div id="site-nav"></div>
-<nav class="subnav"><a href="#mode">Mode d'emploi</a><a href="#vocab">0 · Vocabulaire</a><a href="#maths">1 · Maths</a><a href="#dyn">2 · Dynamique</a><a href="#ener">3 · Énergétique</a><a href="#carte">4 · Carte des TD</a></nav>
+<nav class="subnav"><a href="#mode">Mode d'emploi</a><a href="#methodes">Les 4 méthodes</a><a href="#vocab">0 · Vocabulaire</a><a href="#maths">1 · Maths</a><a href="#dyn">2 · Dynamique</a><a href="#ener">3 · Énergétique</a><a href="#carte">4 · Carte des TD</a></nav>
 
 <main class="wrap">
   <span class="chip">SI AM2 (2ᵉ année) · Boîte à outils C03 et C04</span>
@@ -29,7 +29,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
     sans que personne ne les ait écrits. Les voici, un par un.</p>
     <ul>
       <li>Chaque outil est une carte : la <b>recette</b> (quoi faire, dans quel ordre), un <b>exemple corrigé</b> pas à pas, puis un exercice <b>« À toi »</b> dont la correction est repliée. Essaie avant d'ouvrir.</li>
-      <li>L'ordre compte : la partie 0 (le vocabulaire) explique les mots que les TD utilisent sans les définir, la partie 1 donne les outils de maths, les parties 2 et 3 sont la dynamique et l'énergétique.</li>
+      <li>Commence par <b>les 4 méthodes</b> (IAME, PFS, PFD, TEC) : ce sont les fiches à dérouler à chaque exercice. Ensuite l'ordre compte : la partie 0 (le vocabulaire) explique les mots que les TD utilisent sans les définir, la partie 1 donne les outils de maths, les parties 2 et 3 sont la dynamique et l'énergétique.</li>
       <li>La partie 4 est une <b>carte</b> : pour chaque exercice des deux TD, quels outils il demande, et le lien vers sa correction détaillée.</li>
     </ul>
     <div class="note"><span class="lab">L'idée de tout le chapitre</span>
@@ -37,6 +37,184 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags
       ce que les <b>actions extérieures</b> lui font subir (côté gauche) est égal à ce que son <b>mouvement</b> demande (côté droit).
       Le chapitre d'énergie donne une autre façon d'écrire la même chose, en une seule équation scalaire quand le système n'a qu'un paramètre.
       Tous les outils ci-dessous servent à écrire le côté gauche, le côté droit, ou à les égaler.
+    </div>
+  </section>
+
+  <!-- ======================= MÉTHODES ======================= -->
+  <section class="block" id="methodes">
+    <h2>Les 4 méthodes à dérouler (IAME, PFS, PFD, TEC)</h2>
+    <p>Ces quatre fiches sont ce qu'on refait à chaque exercice. Les outils des parties 0 à 3 (inertie, moment cinétique, puissance…) ne sont que les briques qu'on y branche : quand une étape cite « D3 » ou « E2 », c'est la carte correspondante plus bas.</p>
+
+    <div class="overflow"><table>
+      <tr><th>Méthode</th><th>Quand l'utiliser</th><th>Ce qu'on écrit</th><th>Ce qu'on obtient</th></tr>
+      <tr><td><b>IAME</b></td><td>Toujours, en premier</td><td>Torseur de chaque action extérieure</td><td>La liste des inconnues</td></tr>
+      <tr><td><b>PFS</b></td><td>Rien ne bouge (ou vitesse constante en translation)</td><td>\(\sum\vec F=\vec0\), \(\sum\vec M_A=\vec0\)</td><td>Efforts de liaison, couple d'équilibre</td></tr>
+      <tr><td><b>PFD</b></td><td>Ça accélère, ou on veut un effort de liaison</td><td>\(\{\mathcal T_{ext}\}=\{\mathcal D\}\)</td><td>Équation du mouvement et efforts de liaison</td></tr>
+      <tr><td><b>TEC</b></td><td>Un seul paramètre, on veut le mouvement</td><td>\(\dfrac{dE_c}{dt}=P_{ext}+P_{int}\)</td><td>Équation du mouvement, sans effort de liaison</td></tr>
+    </table></div>
+
+    <figure style="margin:1rem 0">
+<svg style="width:100%;max-width:680px;height:auto;display:block;margin:0 auto" viewBox="0 0 700 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Choisir entre PFS, PFD et TEC">
+  <g fill="#ecfeff" stroke="#0f766e" stroke-width="3">
+    <rect x="215" y="8" width="270" height="52" rx="12"/>
+    <rect x="10" y="130" width="200" height="60" rx="12"/>
+    <rect x="250" y="130" width="200" height="60" rx="12"/>
+    <rect x="490" y="130" width="200" height="60" rx="12"/>
+  </g>
+  <g fill="#f0fdf4" stroke="#15803d" stroke-width="3">
+    <rect x="10" y="255" width="200" height="60" rx="12"/>
+    <rect x="250" y="255" width="200" height="60" rx="12"/>
+    <rect x="490" y="255" width="200" height="60" rx="12"/>
+  </g>
+  <g stroke="#0f766e" stroke-width="3" fill="none">
+    <path d="M300 60 L110 130"/><path d="M350 60 L350 130"/><path d="M400 60 L590 130"/>
+    <path d="M110 190 L110 255"/><path d="M350 190 L350 255"/><path d="M590 190 L590 255"/>
+  </g>
+  <g font-family="Segoe UI, sans-serif" font-size="21" fill="#0f172a" text-anchor="middle">
+    <text x="350" y="42" font-weight="700">IAME d'abord, puis :</text>
+    <text x="110" y="156">Ça ne bouge</text><text x="110" y="180">pas ?</text>
+    <text x="350" y="156">Il faut un effort</text><text x="350" y="180">de liaison ?</text>
+    <text x="590" y="156">Un seul paramètre,</text><text x="590" y="180">le mouvement ?</text>
+    <text x="110" y="292" font-weight="700">PFS</text>
+    <text x="350" y="292" font-weight="700">PFD</text>
+    <text x="590" y="292" font-weight="700">TEC</text>
+  </g>
+</svg>
+      <figcaption style="font-size:.9rem;color:var(--ink-soft);text-align:center">Choisir la méthode. Un TEC ne donne jamais d'effort de liaison : pour cela, un PFD (souvent après le TEC).</figcaption>
+    </figure>
+
+    <p>Exemple fil rouge pour les quatre fiches : un <b>treuil</b>. Un moteur applique un couple \(C_m\) à un tambour (axe fixe \((O,\vec z)\), rayon \(R\), inertie \(J\)). Un câble s'enroule sur le tambour et lève une charge de masse \(M\). Données : \(C_m=10\) N·m, \(R=0{,}1\) m, \(J=0{,}02\) kg·m², \(M=5\) kg, \(g=9{,}81\) m/s². Liaisons parfaites, câble sans masse ni glissement, poids du tambour négligé dans les efforts utiles. Paramètre : \(\theta\) (rotation du tambour), avec \(z_{charge}=R\,\theta\) vers le haut.</p>
+
+    <div class="exo-card" id="m-iame">
+      <div class="exo-head"><span>Fiche IAME · Inventaire des actions mécaniques extérieures</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <div class="method"><span class="lab">Recette</span>
+          <ol>
+            <li><b>Isoler</b> : choisir le système \(\Sigma\) (une pièce ou un ensemble). Dessiner la frontière.</li>
+            <li><b>Pesanteur</b> : une flèche \(-m g\,\vec z\) en \(G\) pour chaque pièce du système dont le poids n'est pas négligé.</li>
+            <li><b>Contacts</b> : repérer chaque point où \(\Sigma\) touche l'extérieur. Pour chacun, nommer la liaison (pivot, glissière, rotule…) ou l'action (câble, ressort).</li>
+            <li><b>Actions actives</b> : couple moteur, effort d'un vérin ou d'un ressort.</li>
+            <li><b>Torseur de chaque action</b> : une liaison parfaite ne transmet rien dans ses mouvements libres (composante nulle). Mettre un nom d'inconnue sur chaque composante restante.</li>
+            <li><b>Compter</b> les inconnues et les comparer aux équations disponibles (au plus 6 en 3D, 3 en plan).</li>
+          </ol>
+        </div>
+        <p class="etape">Application : treuil, on isole l'ensemble {tambour + câble + charge}</p>
+        <p class="etape">Étape 1 : la frontière</p>
+        <p>Dedans : le tambour, le câble, la charge. Dehors : le bâti, la pesanteur, le moteur. L'action du câble sur le tambour est donc <b>intérieure</b> : elle n'apparaît pas.</p>
+        <p class="etape">Étape 2 : la liste</p>
+        <ul>
+          <li>Poids de la charge, en \(G_M\) : \(-Mg\,\vec y\) (on prend \(\vec y\) vertical vers le haut).</li>
+          <li>Pivot parfait du bâti sur le tambour, d'axe \(\vec z\), en \(O\) : force \(X_O,\,Y_O\) (plus \(Z_O\) et des moments hors du plan), mais <b>aucun moment sur \(\vec z\)</b>.</li>
+          <li>Couple moteur : \(C_m\,\vec z\).</li>
+        </ul>
+        <div class="res">Problème plan : 2 inconnues de liaison (\(X_O,Y_O\)). Le moment en \(O\) projeté sur \(\vec z\) n'en contient aucune : c'est l'équation du mouvement.</div>
+        <div class="warnbox"><span class="lab">Pièges</span>
+          Oublier la pesanteur (action à distance, sans trait sur le graphe). Compter une action intérieure (câble entre deux pièces du système). Écrire une composante non nulle pour un mouvement libre de la liaison.
+        </div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m-pfs">
+      <div class="exo-head"><span>Fiche PFS · Principe fondamental de la statique</span><span class="diff">♦</span></div>
+      <div class="exo-body">
+        <div class="rappel"><span class="lab">Rappel · PFS</span>\[ \{\mathcal T_{ext\to S}\}_A=\{0\}\ \Longleftrightarrow\ \sum\vec F_{ext\to S}=\vec0\quad\text{et}\quad\sum\vec M_{A,ext\to S}=\vec0 \]</div>
+        <p>C'est le PFD avec \(\vec\Gamma_G=\vec0\) et \(\vec\delta_A=\vec0\) : tout le côté « mouvement » disparaît.</p>
+        <div class="method"><span class="lab">Recette</span>
+          <ol>
+            <li>Isoler, faire l'IAME, compter les inconnues.</li>
+            <li>Choisir le <b>point</b> du moment : celui où passent le plus d'efforts inconnus (leur moment y est nul).</li>
+            <li>Écrire le moment de chaque force : \(\vec M_A(\vec F)=\overrightarrow{AB}\wedge\vec F\) (B = point d'application).</li>
+            <li>Écrire la résultante, projeter sur les axes.</li>
+            <li>Résoudre. Contrôler : la somme des moments recalculée en un autre point doit aussi être nulle.</li>
+          </ol>
+        </div>
+        <p class="etape">Application : le treuil à l'arrêt (charge maintenue)</p>
+        <p class="etape">Étape 1 : isoler et inventorier</p>
+        <p>On isole la charge seule : son poids \(-Mg\,\vec y\) et l'action du câble \(T\,\vec y\). On isole ensuite le tambour : couple moteur \(C_m\,\vec z\), action du câble (tangente, en \(O + R\,\vec x\)) et pivot en \(O\).</p>
+        <p class="etape">Étape 2 : charge isolée</p>
+        <p>Résultante sur \(\vec y\) :</p>
+        \[ T-Mg=0\ \Rightarrow\ T=Mg=5\times9{,}81=49{,}05\ \text{N} \]
+        <p class="etape">Étape 3 : tambour isolé, moment en \(O\)</p>
+        <p>Les efforts du pivot passent par \(O\) : leur moment y est nul. Le câble tire vers le bas en \(\overrightarrow{OP}=R\,\vec x\) : \(\overrightarrow{OP}\wedge(-T\,\vec y)=-RT\,\vec z\).</p>
+        \[ C_m-RT=0\ \Rightarrow\ C_m=RT=0{,}1\times49{,}05=4{,}905\ \text{N·m} \]
+        <div class="res">Couple d'équilibre \(C_m=MgR\approx4{,}9\) N·m. Si le moteur fournit plus (10 N·m ici), la charge accélère : on passe au PFD.</div>
+        <div class="warnbox"><span class="lab">Piège</span>
+          Un solide en <b>translation rectiligne uniforme</b> suit aussi le PFS (galiléen). La statique est vraie à l'arrêt <i>et</i> à vitesse constante.
+        </div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m-pfd">
+      <div class="exo-head"><span>Fiche PFD · Principe fondamental de la dynamique</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="rappel"><span class="lab">Rappel · PFD (repère galiléen)</span>\[ \{\mathcal T_{ext\to S}\}_A=\{\mathcal D_{S/R_g}\}_A\ \Longleftrightarrow\ \begin{cases}\vec R_{ext\to S}=m\,\vec\Gamma_{G\in S/R_g}\\ \vec M_{A,ext\to S}=\vec\delta_{A\in S/R_g}\end{cases} \]</div>
+        <div class="method"><span class="lab">Recette</span>
+          <ol>
+            <li><b>Graphe de liaisons</b> et <b>isolement</b> (V2, V4).</li>
+            <li><b>IAME</b> (fiche ci-dessus) et compte des inconnues.</li>
+            <li><b>Mouvement</b> de l'isolé dans \(R_g\) : translation, rotation autour d'un axe fixe, ou général. Écrire \(\vec\Omega\) et \(\vec V_G\) avec la composition (M5).</li>
+            <li><b>Torseur dynamique</b> : \(m\vec\Gamma_G\) (en dérivant \(\vec V_G\)), puis \(\vec\sigma_A=\bar{\bar I}\cdot\vec\Omega\) (D3) et \(\vec\delta_A=\dfrac{d\vec\sigma_A}{dt}\) (D4). Cas courants : translation \(\vec\delta_G=\vec0\) ; axe fixe \(\vec\delta\cdot\vec z=J\ddot\theta\).</li>
+            <li><b>Point + axe</b> d'écriture (D6) : on élimine les efforts de liaison inconnus.</li>
+            <li><b>Mêmes point et même base</b> des deux côtés. Écrire, projeter, résoudre.</li>
+            <li><b>Contrôler</b> : unités, signe, cas limite (\(g=0\), \(C_m=0\)).</li>
+          </ol>
+        </div>
+        <p class="etape">Application : treuil en mouvement, \(C_m=10\) N·m</p>
+        <p class="etape">Étape 1 : choix des systèmes</p>
+        <p>On veut \(\ddot\theta\) et la tension \(T\) du câble. On isole donc la charge et le tambour séparément (isoler l'ensemble cacherait \(T\)).</p>
+        <p class="etape">Étape 2 : la charge, théorème de la résultante</p>
+        <p>Translation verticale d'accélération \(a=R\ddot\theta\) vers le haut :</p>
+        \[ T-Mg=M\,a=M\,R\,\ddot\theta \]
+        <p class="etape">Étape 3 : le tambour, moment en \(O\) sur \(\vec z\)</p>
+        <p>Rotation autour de l'axe fixe, \(O\) sur l'axe : \(\vec\delta_O\cdot\vec z=J\ddot\theta\). Les efforts du pivot ne donnent aucun moment sur \(\vec z\). Le câble donne \(-RT\).</p>
+        \[ C_m-R\,T=J\,\ddot\theta \]
+        <p class="etape">Étape 4 : résolution</p>
+        <p>On remplace \(T=Mg+MR\ddot\theta\) dans l'équation du tambour :</p>
+        \[ C_m-R\,(Mg+MR\ddot\theta)=J\ddot\theta\ \Rightarrow\ \ddot\theta=\frac{C_m-MgR}{J+MR^2} \]
+        <p>Application numérique : \(J+MR^2=0{,}02+0{,}05=0{,}07\) kg·m² et \(C_m-MgR=10-4{,}905=5{,}095\) N·m.</p>
+        <div class="res">\(\ddot\theta=\dfrac{5{,}095}{0{,}07}\approx72{,}8\ \text{rad/s}^2\) ; \(T=M(g+R\ddot\theta)\approx85{,}4\) N (supérieure au poids : la charge accélère vers le haut).</div>
+        <p>Contrôle : \(C_m-RT=10-8{,}54=1{,}46\) N·m et \(J\ddot\theta=0{,}02\times72{,}8=1{,}46\) N·m.</p>
+        <div class="warnbox"><span class="lab">Pièges</span>
+          Torseurs égalés en deux points différents. Matrice d'inertie et \(\vec\Omega\) dans deux bases différentes. Écrire \(\delta=J\ddot\theta\) quand le point n'est pas sur l'axe ou que \(G\) n'y est pas.
+        </div>
+      </div>
+    </div>
+
+    <div class="exo-card" id="m-tec">
+      <div class="exo-head"><span>Fiche TEC · Théorème de l'énergie cinétique</span><span class="diff">♦♦</span></div>
+      <div class="exo-body">
+        <div class="rappel"><span class="lab">Rappel · TEC (repère galiléen)</span>\[ \frac{d}{dt}E_{c(\Sigma/R_g)}=P_{\bar\Sigma\to\Sigma/R_g}+\sum_{i,j}P_{S_i\leftrightarrow S_j} \]</div>
+        <div class="method"><span class="lab">Recette</span>
+          <ol>
+            <li><b>Isoler</b> tout ce qui bouge avec <b>un seul paramètre</b> \(\theta\). Relier les vitesses à \(\dot\theta\) (roulement sans glissement E1, rapports d'engrenage, vis).</li>
+            <li><b>Énergie cinétique</b> \(E_c(\dot\theta)\) de chaque pièce (E2), puis somme. Regrouper en \(E_c=\tfrac12J_{eq}\dot\theta^2\) (E3).</li>
+            <li><b>Puissances extérieures</b> non nulles : poids \(\vec F\cdot\vec V_G\), couple \(C\,\omega\), ressort… (E4).</li>
+            <li><b>Inter-efforts</b> : nuls pour une liaison parfaite (E5). Frottement : négatif.</li>
+            <li><b>Dériver</b> \(E_c\) (n'oublier ni \(2\dot\theta\ddot\theta\), ni la dérivée de \(J_{eq}\) s'il dépend de \(\theta\)).</li>
+            <li><b>Égaler</b> et simplifier par \(\dot\theta\neq0\).</li>
+          </ol>
+        </div>
+        <p class="etape">Application : le même treuil</p>
+        <p class="etape">Étape 1 : système et paramètre</p>
+        <p>On isole {tambour + câble + charge}. Paramètre \(\theta\) ; vitesse de la charge \(v=R\dot\theta\).</p>
+        <p class="etape">Étape 2 : énergie cinétique</p>
+        \[ 2E_c=J\dot\theta^2+Mv^2=(J+MR^2)\,\dot\theta^2 \]
+        <p class="etape">Étape 3 : puissances</p>
+        <ul>
+          <li>Couple moteur : \(C_m\dot\theta\).</li>
+          <li>Poids de la charge (force \(-Mg\,\vec y\), vitesse \(R\dot\theta\,\vec y\)) : \(-MgR\dot\theta\).</li>
+          <li>Pivot parfait : \(0\). Câble (action intérieure, sans glissement) : \(0\).</li>
+        </ul>
+        <p class="etape">Étape 4 : dérivée et égalité</p>
+        \[ (J+MR^2)\,\dot\theta\,\ddot\theta=(C_m-MgR)\,\dot\theta \]
+        <div class="res">\(\ddot\theta=\dfrac{C_m-MgR}{J+MR^2}\approx72{,}8\ \text{rad/s}^2\), identique au PFD, en une seule équation et sans calculer \(T\).</div>
+        <div class="note"><span class="lab">PFD ou TEC ?</span>
+          Ici le TEC est trois fois plus court. Mais il ne donne pas \(T\) : pour la tension du câble, on revient à l'équation de la charge du PFD, avec \(\ddot\theta\) connu.
+        </div>
+        <div class="warnbox"><span class="lab">Pièges</span>
+          Compter la puissance d'une liaison pivot dans le repère du bâti alors qu'il n'y a pas de mouvement du point. Oublier la puissance du poids. Appliquer le TEC à un système à deux paramètres indépendants : une seule équation ne suffit plus.
+        </div>
+      </div>
     </div>
   </section>
 
