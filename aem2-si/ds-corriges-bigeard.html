@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prépa DS SI : corrigés annotés Audi, Quille, Ascenseur — Révision ECAM</title>
+<link rel="stylesheet" href="../assets/style.css?v=4">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div id="site-nav"></div>
+<nav class="subnav"><a href="#methode">Méthode</a><a href="#audi">Audi 4Motion</a><a href="#quille">Quille</a><a href="#ascenseur">Ascenseur</a><a href="ds-dynamique-capteurs.html">Prépa DS</a></nav>
+
+<main class="wrap">
+<span class="chip">SI AM2 (2ᵉ année) · Préparation DS</span>
+<h1 class="title">Corrigés annotés : Audi 4Motion, Quille pendulaire, Survitesse d'ascenseur</h1>
+<p class="lead">Les résultats sont ceux des corrigés d'E. Bigeard (S2I), réexpliqués étape par étape. Les passages marqués « ajout » ne viennent pas du corrigé, tout comme les explications « Pourquoi » et « Sens physique ». Les coquilles repérées sont signalées en rouge.</p>
+
+<section class="block" id="methode"><h2>La méthode commune aux trois exercices</h2>
+<ol>
+<li><b>Lire le schéma</b> : une pièce après l'autre, et le paramètre de chaque liaison.</li>
+<li><b>Cinématique</b> : relier toutes les vitesses.</li>
+<li><b>Énergie cinétique</b> : translation et rotation de chaque pièce.</li>
+<li><b>Puissances</b> : extérieures, puis intérieures. Liaison parfaite : zéro.</li>
+<li><b>Théorème de l'énergie cinétique</b> : on dérive, on égale, on isole l'inconnue.</li>
+<li>Si on cherche une action dans un cas précis, on isole et on écrit le <b>théorème du moment dynamique</b> sur le bon axe (ascenseur, Q3).</li>
+</ol>
+<p>Bases manquantes : <a href="c03-c04-boite-a-outils.html">boîte à outils C03-C04</a>.</p>
+</section>
+<section class="block" id="audi">
+<h2>1. Transmission de puissance Audi 4Motion</h2>
+<div class="note"><span class="lab">Le but et le plan</span>
+On veut savoir si le moteur peut faire accélérer la voiture à 0,8 m/s² dans une côte enneigée de 10°. L'exercice suit toujours le même chemin :
+<ul><li>énergie cinétique de tout ce qui bouge (Q1 à Q4) ;</li><li>tout ramener à une seule vitesse, d'où une inertie équivalente (Q5, Q6) ;</li><li>puissances extérieures puis intérieures (Q7 à Q9) ;</li><li>théorème de l'énergie cinétique, d'où le couple (Q10 à Q13).</li></ul>
+Le schéma impressionnant ne sert en réalité qu'à la question 5.</div>
+<div><a class="doc-item" href="../assets/pdf.html?f=../documents/si-bigeard/energetique_transmission-de-puissance-audi-4motion/ENE-PT-TD-transmission_de_puissance_audi_4motion.pdf" target="_blank" rel="noopener">📄 Audi 4Motion <b>Énoncé</b></a><a class="doc-item" href="../assets/pdf.html?f=../documents/si-bigeard/energetique_transmission-de-puissance-audi-4motion/ENE-PT-TD-transmission_de_puissance_audi_4motion-prof.pdf" target="_blank" rel="noopener">📄 Audi 4Motion <b>Corrigé Bigeard</b></a></div>
+
+<div class="exo-card"><div class="exo-head">Données et schéma</div><div class="exo-body">
+<figure><img src="img/dsc-au_a-1.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure><figure><img src="img/dsc-au_a-2.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure><figure><img src="img/dsc-au_a-3.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure>
+<p><b>Avant de commencer : lire le schéma.</b> Une couleur correspond à une pièce. On suit la puissance :</p>
+<ul>
+<li>moteur, boîte de vitesse, puis arbre <b>gris</b> (1) ;</li>
+<li>engrenage vers le boîtier <b>vert</b> (2) du différentiel avant, qui entraîne les roues avant (<b>orange</b> et <b>rose</b>) ;</li>
+<li>le boîtier 2 entraîne aussi, par un renvoi conique, l'arbre <b>kaki</b> (3) ;</li>
+<li>coupleur Haldex (bloqué ici), puis pignon <b>rouge foncé</b> ;</li>
+<li>boîtier <b>cyan</b> (4) du différentiel arrière, qui entraîne les roues arrière (<b>violet</b> et <b>rouge vif</b>).</li>
+</ul>
+</div></div>
+
+<div class="exo-card"><div class="exo-head">Énergie cinétique et inertie équivalente (Q1 à Q6)</div><div class="exo-body">
+<figure><img src="img/dsc-au_b-1.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure>
+<p class="q">Question 1 : énergie cinétique du châssis</p>
+<p class="etape">Étape 1 : identifier le mouvement</p>
+<p>Le châssis ne tourne pas : il est en translation. Sa vitesse se lit sur le paramétrage \(\overrightarrow{O_0G}=\lambda(t)\,\vec x_1+c\,\vec y_1\). Les vecteurs et \(c\) sont constants, donc \(\vec V=\dot\lambda\,\vec x_1\).</p>
+<div class="rappel"><span class="lab">Rappel · énergie cinétique d'un solide, au centre de gravité G</span>\[E_c=\tfrac12\,m\,\vec V_{G}^{\,2}+\tfrac12\,\vec\Omega\cdot\overline{\overline{I}}_G\,\vec\Omega\]</div>
+<p class="etape">Étape 2 : garder les termes utiles</p>
+<p>Translation : \(\vec\Omega=\vec 0\). Il ne reste que le premier terme.</p>
+<div class="res">\[E_c(Ch/R_0)=\tfrac12 M_c\,\dot\lambda^2\]</div>
+
+<p class="q">Question 2 : énergie cinétique d'une roue</p>
+<p class="etape">Étape 1 : identifier le mouvement</p>
+<p>Une roue avance avec la voiture et tourne sur elle-même. Son centre de gravité est sur son axe, donc il va à la même vitesse que la voiture, \(\dot\lambda\).</p>
+<p class="etape">Étape 2 : les deux termes</p>
+<div class="res">\[E_c(roue/R_0)=\tfrac12 m_r\,\dot\lambda^2+\tfrac12 J_r\,\omega^2\]</div>
+<div class="note"><span class="lab">Pourquoi deux termes</span>Le premier est la translation de la masse de la roue. Le second est sa rotation. En DS, oublier l'un des deux est l'erreur classique.</div>
+
+<p class="q">Question 3 : énergie cinétique des arbres 1, 2, 3 et 4</p>
+<p>Même raisonnement : chaque arbre tourne autour d'un axe fixe par rapport au châssis, qui avance à \(\dot\lambda\).</p>
+<div class="res">\[E_c(i/R_0)=\tfrac12 m_i\dot\lambda^2+\tfrac12 J_E\,\omega_i^2\quad(i=1,2,4)\]
+\[E_c(3/R_0)=\tfrac12 m_3\dot\lambda^2+\tfrac12 J_T\,\omega_3^2\]</div>
+<div class="note"><span class="lab">Ajout</span>L'axe de l'arbre 3 est perpendiculaire à celui des roues. Cela ne change rien : une énergie est un nombre, on additionne sans projeter.</div>
+
+<p class="q">Question 4 : énergie cinétique du véhicule V</p>
+<p class="etape">Étape 1 : additionner (4 roues, 4 arbres, le châssis)</p>
+<p>L'énergie d'un ensemble est la somme des énergies. Les satellites sont négligés.</p>
+\[\begin{aligned}E_c(V/R_0)&=\tfrac12\big(M_c+4m_r+m_1+m_2+m_3+m_4\big)\dot\lambda^2\\&\quad+\tfrac12\big(4J_r\omega^2+J_E(\omega_1^2+\omega_2^2+\omega_4^2)+J_T\omega_3^2\big)\end{aligned}\]
+<p class="etape">Étape 2 : reconnaître la masse totale</p>
+<p>La première parenthèse est la masse totale \(M=1580\) kg.</p>
+<div class="res">\[\begin{aligned}E_c(V/R_0)&=\tfrac12 M\dot\lambda^2\\&\quad+\tfrac12\big(4J_r\omega^2+J_E(\omega_1^2+\omega_2^2+\omega_4^2)+J_T\omega_3^2\big)\end{aligned}\]</div>
+
+<p class="q">Question 5 : toutes les vitesses de rotation valent ω, au signe près</p>
+<p class="etape">Étape 1 : le différentiel avant en ligne droite</p>
+<div class="rappel"><span class="lab">Rappel · différentiel à planétaires identiques</span>\[\omega_{avg}+\omega_{avd}=2\,\omega_2\]</div>
+<p>En ligne droite, les deux roues avant tournent à la même vitesse \(\omega\). Donc \(2\omega=2\omega_2\), soit \(\omega_2=\omega\). Les satellites ne tournent pas sur eux-mêmes : tout le différentiel tourne en bloc.</p>
+<div class="note"><span class="lab">Ajout</span>Le corrigé Bigeard dit seulement « d'après le schéma cinématique, on peut vérifier ». La relation ci-dessus est la justification à écrire.</div>
+<p class="etape">Étape 2 : propager avec les rapports donnés</p>
+<ul><li>\(r_{23}=1\) donne \(\omega_3=\omega\) ;</li><li>\(r_{34}=1\) (Haldex bloqué) donne \(\omega_4=\omega\) ;</li><li>\(r_{12}=-1\) donne \(\omega_1=-\omega\).</li></ul>
+<p>Le différentiel arrière vérifie bien la même relation : \(\omega_{arg}=\omega_{ard}=\omega_4=\omega\).</p>
+<div class="res">\[\omega_2=\omega_3=\omega_4=\omega\qquad\omega_1=-\omega\]</div>
+
+<p class="q">Question 6 : inertie équivalente</p>
+<p class="etape">Étape 1 : roulement sans glissement</p>
+\[\omega=-\dfrac{\dot\lambda}{R}\quad\Longrightarrow\quad\dot\lambda^2=R^2\omega^2\]
+<div class="note"><span class="lab">Pourquoi le signe moins</span>La voiture avance vers \(+\vec x_1\). Une roue qui avance vers la droite tourne dans le sens des aiguilles d'une montre, c'est-à-dire en sens négatif autour de \(\vec z\). Dans une énergie, le signe disparaît avec le carré. Il comptera pour les puissances.</div>
+<p class="etape">Étape 2 : tout écrire avec ω et mettre ω² en facteur</p>
+\[E_c=\tfrac12\big(MR^2+4J_r+3J_E+J_T\big)\,\omega^2\]
+<div class="res">\[J_{eq}=MR^2+4J_r+3J_E+J_T\]</div>
+<p class="etape">Étape 3 : application numérique (R = 0,620 / 2 = 0,31 m)</p>
+\[J_{eq}=1580\times0{,}31^2+4\times1{,}4+3\times1{,}6\cdot10^{-3}+2{,}4\cdot10^{-3}\]
+\[J_{eq}=151{,}84+5{,}6+0{,}0048+0{,}0024\approx157{,}4\ \text{kg·m}^2\]
+<div class="note"><span class="lab">Ajout · à quoi ça sert</span>La masse de la voiture représente 96 % de l'inertie équivalente. Les arbres de transmission sont totalement négligeables.</div>
+</div></div>
+
+<div class="exo-card"><div class="exo-head">Puissances (Q7 à Q9)</div><div class="exo-body">
+<figure><img src="img/dsc-au_c-1.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure>
+<p class="q">Question 7 : puissance de la pesanteur</p>
+<div class="rappel"><span class="lab">Rappel · puissance d'une action mécanique (comoment au point G)</span>\[P=\vec R\cdot\vec V_{G}+\vec M_G\cdot\vec\Omega\]</div>
+<p class="etape">Étape 1 : les deux torseurs au point G</p>
+<p>Le poids est \(\vec R=-Mg\,\vec y_0\), sans moment en G. La vitesse est \(\dot\lambda\,\vec x_1\).</p>
+<p class="etape">Étape 2 : produit scalaire</p>
+<p>\(\vec x_1\) fait l'angle \(\alpha\) avec l'horizontale \(\vec x_0\), donc \(\vec y_0\cdot\vec x_1=\sin\alpha\).</p>
+\[P_{pes}=-Mg\sin\alpha\,\dot\lambda\]
+<p class="etape">Étape 3 : écrire avec ω</p>
+<div class="res">\[P_{pes}=MgR\sin\alpha\;\omega\]</div>
+<div class="note"><span class="lab">Vérification du signe</span>En montée, \(\omega&lt;0\), donc \(P_{pes}&lt;0\) : le poids freine. C'est cohérent.</div>
+
+<p class="q">Question 8 : puissance de la route en A et en B</p>
+<p class="etape">Étape 1 : vitesse du point de contact</p>
+<p>Il y a roulement sans glissement : la matière de la roue située au point de contact a une vitesse nulle par rapport au sol.</p>
+<p class="etape">Étape 2 : comoment en A</p>
+\[P=\big(T_A\,\vec x_1+N_A\,\vec y_1\big)\cdot\vec V_{A\in roue/R_0}+\vec 0\cdot\vec\Omega=0\]
+<div class="res">La puissance de la route est nulle en A et en B.</div>
+<div class="warnbox"><span class="lab">Piège</span>La force de frottement \(T_A\) n'est pas nulle : c'est elle qui pousse la voiture. Elle ne fournit pas de puissance parce que son point d'application a une vitesse nulle.</div>
+
+<p class="q">Question 9 : la puissance intérieure vaut C₁ω</p>
+<p class="etape">Étape 1 : lister ce qui est intérieur au véhicule</p>
+<ul><li>Les liaisons entre pièces sont parfaites : puissance nulle.</li><li>Les rendements des engrenages valent 1 : aucune perte.</li><li>Il reste l'action motrice qui entraîne la pièce 1.</li></ul>
+<div class="res">\[P_{int}=C_1\,\omega\]</div>
+<div class="warnbox"><span class="lab">Point délicat (ajout)</span>La pièce 1 tourne à \(\omega_1=-\omega\). La formule demandée suppose donc que \(C_1\) est compté positif dans le sens de \(\omega\) autour de \(\vec z\), et non dans le sens réel de rotation de la pièce 1. On suit cette convention de l'énoncé. Avec elle, on trouvera \(C_1&lt;0\) et \(\omega&lt;0\), donc \(P_{int}&gt;0\) : le moteur fournit bien de l'énergie. En DS, il faut retenir la valeur absolue du couple et vérifier que la puissance motrice est positive.</div>
+</div></div>
+
+<div class="exo-card"><div class="exo-head">Validation du cahier des charges (Q10 à Q13)</div><div class="exo-body">
+<figure><img src="img/dsc-au_d-1.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure>
+<p class="q">Question 10 : théorème de l'énergie cinétique, expression de C₁</p>
+<div class="rappel"><span class="lab">Rappel · théorème de l'énergie cinétique</span>\[\dfrac{dE_c(E/R_0)}{dt}=P_{ext\to E/R_0}+P_{int}\]</div>
+<p class="etape">Étape 1 : dériver l'énergie</p>
+\[\dfrac{d}{dt}\Big(\tfrac12 J_{eq}\,\omega^2\Big)=J_{eq}\,\omega\,\dot\omega\]
+<p class="etape">Étape 2 : écrire les puissances (Q7, Q8, Q9)</p>
+\[J_{eq}\,\omega\,\dot\omega=MgR\sin\alpha\,\omega+0+C_1\,\omega\]
+<p class="etape">Étape 3 : simplifier par ω et isoler C₁</p>
+\[C_1=J_{eq}\,\dot\omega-MgR\sin\alpha\]
+<p class="etape">Étape 4 : revenir à l'accélération de la voiture, avec \(\dot\omega=-\ddot\lambda/R\)</p>
+<div class="res">\[C_1=-\dfrac{J_{eq}}{R}\,\ddot\lambda-MgR\sin\alpha\]</div>
+
+<p class="q">Question 11 : valeur numérique de C₁</p>
+<p class="etape">Étape 1 : chercher les données</p>
+<p>Exigence 1.1 : \(\ddot\lambda=0{,}8\) m/s². Pente : \(\alpha=10^\circ\).</p>
+<p class="etape">Étape 2 : calculer chaque terme séparément</p>
+<ul><li>accélération : \(\dfrac{157{,}4}{0{,}31}\times0{,}8\approx406\) N·m ;</li><li>pente : \(1580\times9{,}81\times0{,}31\times\sin10^\circ\approx835\) N·m.</li></ul>
+<div class="res">\[C_1\approx-406-835\approx-1241\ \text{N·m}\]</div>
+<div class="note"><span class="lab">Ajout · lecture du résultat</span>Les deux tiers du couple servent à lutter contre la pente, un tiers seulement à accélérer. Le corrigé Bigeard arrondit à −1240 N·m.</div>
+
+<p class="q">Question 12 : rapport de réduction et couple moteur</p>
+<p class="etape">Étape 1 : lire un point sur la droite de 1re vitesse (figure 6b)</p>
+<p>À 6000 tr/min, la voiture roule à environ 50 km/h.</p>
+<p class="etape">Étape 2 : convertir en unités SI</p>
+\[\omega_m=\dfrac{2\pi\times6000}{60}=628{,}3\ \text{rad/s}\qquad V=\dfrac{50}{3{,}6}=13{,}9\ \text{m/s}\]
+<p class="etape">Étape 3 : rapport, avec \(|\omega|=V/R\)</p>
+\[r=\dfrac{V}{R\,\omega_m}=\dfrac{13{,}9}{0{,}31\times628{,}3}\approx0{,}071\]
+<p class="etape">Étape 4 : conserver la puissance (aucune perte)</p>
+\[C_m\,\omega_m=|C_1\,\omega|\quad\Longrightarrow\quad C_m=r\,|C_1|\]
+<div class="res">\[C_m\approx0{,}071\times1241\approx88\ \text{N·m}\]</div>
+<div class="note"><span class="lab">Le réflexe à garder</span>Un réducteur divise la vitesse par environ 14, donc il multiplie le couple par environ 14. La puissance, elle, ne change pas. Dans le corrigé Bigeard, la notation \(C_1^m\) est une coquille : il s'agit de \(C_1\).</div>
+
+<p class="q">Question 13 : le moteur est-il capable ?</p>
+<p class="etape">Étape 1 : lire la courbe de couple (figure 6a, en rouge)</p>
+<p>Dès 1000 tr/min, le moteur fournit environ 145 N·m, et jusqu'à 200 N·m à 3750 tr/min.</p>
+<div class="res">\(145\ \text{N·m}&gt;88\ \text{N·m}\) : le moteur respecte l'exigence d'accélération.</div>
+<p class="etape">Étape 2 (ajout) : contrôle en puissance à 50 km/h</p>
+\[P=|C_1|\times\dfrac{V}{R}=1241\times44{,}8\approx55{,}6\ \text{kW}&lt;105\ \text{kW}\]
+<p class="etape">Étape 3 (ajout, hors sujet posé) : pourquoi quatre roues motrices ?</p>
+<p>L'effort de traction nécessaire est \(T=M(\ddot\lambda+g\sin\alpha)\approx3956\) N, pour un coefficient de frottement \(f=0{,}35\).</p>
+<ul><li>4 roues motrices : \(f\,Mg\cos\alpha\approx5340\) N disponibles. Cela suffit.</li>
+<li>Roues avant seules : le PFD donne \(N_A\approx8710\) N sur l'avant, soit \(f\,N_A\approx3050\) N. Les roues patinent.</li></ul>
+<p>C'est un ordre de grandeur : on néglige l'inertie des roues et on suppose que le système répartit bien l'effort entre les deux essieux.</p>
+</div></div>
+</section>
+<section class="block" id="quille">
+<h2>2. Quille pendulaire</h2>
+<div class="note"><span class="lab">Le but et le plan</span>
+Un voilier de course incline sa quille avec un vérin. On cherche la puissance que ce vérin doit fournir. Le chemin est : vitesses, énergies cinétiques, puissances, théorème de l'énergie cinétique. On ne résout jamais la géométrie : on garde \(\theta_1,\theta_2,x_{24}\), etc.</div>
+<div><a class="doc-item" href="../assets/pdf.html?f=../documents/si-bigeard/energetique_quille-pendulaire/ENE-PT-TD-quille_pendulaire.pdf" target="_blank" rel="noopener">📄 Quille pendulaire <b>Énoncé</b></a><a class="doc-item" href="../assets/pdf.html?f=../documents/si-bigeard/energetique_quille-pendulaire/ENE-PT-TD-quille_pendulaire-prof.pdf" target="_blank" rel="noopener">📄 Quille pendulaire <b>Corrigé Bigeard</b></a></div>
+
+<div class="exo-card"><div class="exo-head">Données et schéma</div><div class="exo-body">
+<figure><img src="img/dsc-qu_a-1.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure><figure><img src="img/dsc-qu_a-2.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure><figure><img src="img/dsc-qu_a-3.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure>
+<p><b>Lire le schéma.</b> On travaille sur le modèle 2D.</p>
+<ul>
+<li>N (noir) : berceau fixé au bateau, c'est le bâti.</li>
+<li>1 (bleu) : la quille, en pivot en O avec N, d'angle \(\theta_1\).</li>
+<li>Vérin de gauche : corps 4 (violet) en pivot en C, tige 2 (rouge) en pivot en A sur la quille. La longueur \(CA=x_{24}\) varie.</li>
+<li>Vérin de droite : corps 5 (rouge foncé) en pivot en B, tige 3 (verte) en pivot en A. La longueur \(AB=x_{35}\) varie.</li>
+<li>2 et 4 ont le même angle \(\theta_2\) ; 3 et 5 le même angle \(\theta_3\).</li>
+</ul>
+<div class="rappel"><span class="lab">Rappel · dériver un vecteur d'une base tournante</span>\[\Big[\dfrac{d\vec x_2}{dt}\Big]_N=\dot\theta_2\,\vec z_N\wedge\vec x_2=\dot\theta_2\,\vec y_2\qquad\Big[\dfrac{d\vec y_1}{dt}\Big]_N=-\dot\theta_1\,\vec x_1\]</div>
+</div></div>
+
+<div class="exo-card"><div class="exo-head">Vitesses et énergies cinétiques (Q1, Q2)</div><div class="exo-body">
+<figure><img src="img/dsc-qu_b-1.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure>
+<p class="q">Question 1 a) : vitesse de G₁</p>
+<p class="etape">Étape 1 : partir d'un point fixe</p>
+<p>O est fixe dans N et \(\overrightarrow{OG_1}=-L_1\,\vec y_1\). La vitesse de \(G_1\) est la dérivée de ce vecteur.</p>
+<p class="etape">Étape 2 : dériver</p>
+\[\vec V_{G_1\in1/N}=-L_1\Big[\dfrac{d\vec y_1}{dt}\Big]_N\]
+<div class="res">\[\vec V_{G_1\in1/N}=L_1\dot\theta_1\,\vec x_1\]</div>
+
+<p class="q">Question 1 b) : vitesse de G₂</p>
+<p class="etape">Étape 1 : construire le vecteur depuis le point fixe C</p>
+\[\overrightarrow{CG_2}=\overrightarrow{CA}+\overrightarrow{AG_2}=x_{24}\,\vec x_2-L_2\,\vec x_2=(x_{24}-L_2)\,\vec x_2\]
+<p class="etape">Étape 2 : dériver un produit (la longueur ET la direction varient)</p>
+<div class="res">\[\vec V_{G_2\in2/N}=\dot x_{24}\,\vec x_2+(x_{24}-L_2)\,\dot\theta_2\,\vec y_2\]</div>
+<div class="note"><span class="lab">Sens physique</span>Premier terme : la tige sort du vérin. Second terme : tout le vérin pivote autour de C. Les deux vitesses sont perpendiculaires.</div>
+
+<p class="q">Question 1 c) : vitesse de G₃</p>
+<p class="etape">Étape 1 : partir du point fixe B</p>
+<p>\(\overrightarrow{AB}=x_{35}\,\vec x_3\), donc \(\overrightarrow{BA}=-x_{35}\,\vec x_3\). De plus \(\overrightarrow{AG_3}=+L_2\,\vec x_3\).</p>
+\[\overrightarrow{BG_3}=(L_2-x_{35})\,\vec x_3\]
+<p class="etape">Étape 2 : dériver</p>
+<div class="res">\[\vec V_{G_3\in3/N}=-\dot x_{35}\,\vec x_3+(L_2-x_{35})\,\dot\theta_3\,\vec y_3\]</div>
+<div class="warnbox"><span class="lab">Coquille du corrigé</span>Le corrigé Bigeard écrit \(L_3\) à cette question. D'après le tableau des données, \(\overrightarrow{AG_3}=+L_2\,\vec x_3\) : c'est \(L_2\), qu'il reprend d'ailleurs à la question 4.</div>
+
+<p class="q">Question 1 d) : vitesse de A, de 2 par rapport à 4</p>
+<p>Vu depuis le corps 4, la direction \(\vec x_2\) ne bouge pas. Seule la longueur change.</p>
+<div class="res">\[\vec V_{A\in2/4}=\dot x_{24}\,\vec x_2\]</div>
+
+<p class="q">Question 2 a) : énergie cinétique de la quille 1</p>
+<div class="rappel"><span class="lab">Rappel · mouvement plan, au centre de gravité</span>\[E_c=\tfrac12 m\,\vec V_G^{\,2}+\tfrac12 I_{Gz}\,\dot\theta^2\]</div>
+<p class="etape">Étape 1 : choisir le bon moment d'inertie</p>
+<p>La matrice est donnée en \(G_1\). La rotation est autour de \(\vec z_N\) : on prend le terme de la 3e ligne, 3e colonne, soit \(C_1\).</p>
+<div class="note"><span class="lab">Ajout · et le terme −D₁ ?</span>\(\overline{\overline I}\,\vec\Omega\) donne \((0,\,-D_1\dot\theta_1,\,C_1\dot\theta_1)\). On le multiplie scalairement par \(\vec\Omega=(0,0,\dot\theta_1)\) : \(D_1\) disparaît.</div>
+<p class="etape">Étape 2 : remplacer la vitesse</p>
+<div class="res">\[E_c(1/N)=\tfrac12\big(C_1+M_1L_1^2\big)\dot\theta_1^2\]</div>
+<p>On reconnaît le théorème de Huygens : \(C_1+M_1L_1^2\) est le moment d'inertie par rapport à l'axe (O, z).</p>
+
+<p class="q">Question 2 b) : énergie cinétique de la tige 2</p>
+<p class="etape">Étape 1 : carré de la vitesse (deux composantes perpendiculaires)</p>
+\[\vec V_{G_2}^{\,2}=\dot x_{24}^2+(x_{24}-L_2)^2\dot\theta_2^2\]
+<p class="etape">Étape 2 : moment d'inertie autour de z : c'est \(B_2\)</p>
+<div class="res">\[E_c(2/N)=\tfrac12\Big[\big(B_2+M_2(x_{24}-L_2)^2\big)\dot\theta_2^2+M_2\,\dot x_{24}^2\Big]\]</div>
+
+<p class="q">Question 2 c) : énergie cinétique du corps 4</p>
+<p>Le corps 4 tourne autour de l'axe fixe (C, z). Sa matrice est donnée en C, et il a le même angle \(\theta_2\) que la tige.</p>
+<div class="res">\[E_c(4/N)=\tfrac12 C_4\,\dot\theta_2^2\]</div>
+<div class="note"><span class="lab">Ajout · la règle</span>Point fixe C : on écrit directement \(\tfrac12 I_{Cz}\dot\theta^2\), sans terme de translation. Au centre de gravité mobile : on écrit les deux termes.</div>
+</div></div>
+
+<div class="exo-card"><div class="exo-head">Puissances intérieures et extérieures (Q3, Q4)</div><div class="exo-body">
+<figure><img src="img/dsc-qu_c-1.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure>
+<p class="q">Question 3 : puissances intérieures à E = {1, 2, 3, 4, 5}</p>
+<p class="etape">Étape 1 : éliminer les liaisons parfaites</p>
+\[P_{1\leftrightarrow2}=P_{1\leftrightarrow3}=P_{3\leftrightarrow5}=P_{2\leftrightarrow4}=0\]
+<p class="etape">Étape 2 : lister ce qui reste</p>
+<p>Dans chaque vérin il y a la pression d'huile (ph) et le frottement visqueux (phf).</p>
+<div class="rappel"><span class="lab">Rappel · puissance des inter-efforts dans une glissière</span>\[P_{i\leftrightarrow j}=\vec F_{\to i}\cdot\vec V_{i/j}\]</div>
+<p class="etape">Étape 3 : vérin 2-4, avec \(\vec V_{2/4}=\dot x_{24}\,\vec x_2\)</p>
+<ul><li>pression : \(P^{ph}_{4\leftrightarrow2}=F_{h2}\,\dot x_{24}\)</li><li>frottement : \(P^{phf}_{4\leftrightarrow2}=-k\,\dot x_{24}^2\)</li></ul>
+<p class="etape">Étape 4 : vérin 3-5, avec \(\vec V_{A\in3/5}=-\dot x_{35}\,\vec x_3\)</p>
+<ul><li>pression : \(P^{ph}_{5\leftrightarrow3}=(-F_{h3}\vec x_3)\cdot(-\dot x_{35}\vec x_3)=F_{h3}\,\dot x_{35}\)</li><li>frottement : \(P^{phf}_{5\leftrightarrow3}=(k\dot x_{35}\vec x_3)\cdot(-\dot x_{35}\vec x_3)=-k\,\dot x_{35}^2\)</li></ul>
+<div class="res">\[P_{int}=F_{h2}\dot x_{24}+F_{h3}\dot x_{35}-k\,\dot x_{24}^2-k\,\dot x_{35}^2\]</div>
+<div class="note"><span class="lab">Contrôle rapide</span>Un frottement visqueux dissipe toujours : sa puissance doit être négative quel que soit le sens du mouvement. On trouve bien \(-k\,\dot x^2\).</div>
+
+<p class="q">Question 4 : puissances extérieures</p>
+<p class="etape">Étape 1 : inventaire</p>
+<ul><li>liaisons parfaites avec le bâti N (en O, C et B) : puissance nulle ;</li><li>pesanteur sur 1 à 5 ;</li><li>action de l'eau sur la quille 1.</li></ul>
+<p class="etape">Étape 2 : l'eau, appliquée en P avec \(\overrightarrow{OP}=-h\,\vec y_1\)</p>
+<p>Comme pour \(G_1\), \(\vec V_{P\in1/N}=h\,\dot\theta_1\,\vec x_1\). La force est \(F_p\,\vec z_N+F_t\,\vec x_1\) ; \(\vec z_N\) est perpendiculaire à \(\vec x_1\).</p>
+<div class="res">\[P_{eau\to1/N}=h\,\dot\theta_1\,F_t\]</div>
+<div class="warnbox"><span class="lab">Coquille du corrigé</span>Le corrigé Bigeard écrit un signe « − » devant la parenthèse, puis un résultat positif. Le signe « − » est en trop : \(+h\dot\theta_1F_t\) est juste.</div>
+<p class="etape">Étape 3 : poids des pièces mobiles, \(P=-M g\,\vec y_N\cdot\vec V_G\)</p>
+<p>On utilise \(\vec y_N\cdot\vec x_i=\sin\theta_i\) et \(\vec y_N\cdot\vec y_i=\cos\theta_i\).</p>
+<div class="res">\[P_{pes\to1}=-M_1gL_1\,\dot\theta_1\sin\theta_1\]
+\[P_{pes\to2}=-M_2g\big(\dot x_{24}\sin\theta_2+(x_{24}-L_2)\dot\theta_2\cos\theta_2\big)\]
+\[P_{pes\to3}=-M_3g\big(-\dot x_{35}\sin\theta_3+(L_2-x_{35})\dot\theta_3\cos\theta_3\big)\]</div>
+<p>Les centres de gravité de 4 (en C) et de 5 (en B) sont fixes : leur poids ne fournit aucune puissance.</p>
+</div></div>
+
+<div class="exo-card"><div class="exo-head">Puissance motrice (Q5 à Q8)</div><div class="exo-body">
+<figure><img src="img/dsc-qu_d-1.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure><figure><img src="img/dsc-qu_d-2.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure><figure><img src="img/dsc-qu_d-3.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure>
+<p class="q">Question 5 : théorème de l'énergie cinétique</p>
+<p class="etape">Étape 1 : écrire le théorème sur E</p>
+\[\dfrac{dE_c(E/N)}{dt}=P_{ext}+P_{int}\]
+<p class="etape">Étape 2 : identifier le moteur</p>
+<p>\(F_{h2}&gt;0\) : le vérin 2-4 est moteur, \(P_{mot}=P^{ph}_{4\leftrightarrow2}\). \(F_{h3}=0\) : le vérin 3-5 est libre, donc \(P^{ph}_{5\leftrightarrow3}=0\).</p>
+<p class="etape">Étape 3 : isoler la puissance motrice</p>
+<div class="res">\[P_{mot}=\dfrac{dE_c(E/N)}{dt}-\Big(P_{pes\to E}+P_{eau\to1}+P^{phf}_{4\leftrightarrow2}+P^{phf}_{5\leftrightarrow3}\Big)\]</div>
+
+<p class="q">Question 6 : valeurs à 0, 1, 3 et 4 s, et allure de la courbe</p>
+<p class="etape">Étape 1 : savoir quelle courbe lire (figure 7)</p>
+<ul><li>B : frottements visqueux, négatif ;</li><li>C : dérivée de l'énergie cinétique ;</li><li>D : intitulée « actions hydrauliques ». Elle correspond à l'action de l'eau sur la quille (négative, donc résistante) ; ce n'est pas le vérin moteur ;</li><li>E : pesanteur.</li></ul>
+<p class="etape">Étape 2 : lire les valeurs et appliquer la formule</p>
+<p>Les puissances B, D et E sont négatives : le « moins » devant la parenthèse les fait s'ajouter.</p>
+<div style="overflow-x:auto"><table><tr><th>t (s)</th><th>dEc/dt (W)</th><th>− B (W)</th><th>− D (W)</th><th>− E (W)</th><th>P motrice (W)</th></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td><b>0</b></td></tr>
+<tr><td>1</td><td>2200</td><td>5800</td><td>2500</td><td>4000</td><td><b>14 500</b></td></tr>
+<tr><td>3</td><td>0</td><td>4000</td><td>2500</td><td>16 000</td><td><b>22 500</b></td></tr>
+<tr><td>4</td><td>0</td><td>0</td><td>0</td><td>0</td><td><b>0</b></td></tr></table></div>
+<div class="warnbox"><span class="lab">Piège (ajout)</span>La courbe C saute à t = 1 s et à t = 3 s. Le corrigé prend à chaque fois la valeur juste avant le saut : 2200 W à 1 s et 0 à 3 s. Il faut le préciser sur la copie.</div>
+<figure><svg viewBox="0 0 760 410" role="img" aria-label="Allure de la puissance motrice" style="width:100%;height:auto;background:#fff;border-radius:10px;font-family:sans-serif"><line x1="90" y1="360" x2="730" y2="360" stroke="#111" stroke-width="2"/><line x1="90" y1="360" x2="90" y2="50" stroke="#111" stroke-width="2"/><line x1="90" y1="360" x2="90" y2="367" stroke="#111" stroke-width="2"/><text x="90" y="390" text-anchor="middle" font-size="20" fill="#111" font-weight="400">0</text><line x1="240" y1="360" x2="240" y2="367" stroke="#111" stroke-width="2"/><text x="240" y="390" text-anchor="middle" font-size="20" fill="#111" font-weight="400">1</text><line x1="390" y1="360" x2="390" y2="367" stroke="#111" stroke-width="2"/><text x="390" y="390" text-anchor="middle" font-size="20" fill="#111" font-weight="400">2</text><line x1="540" y1="360" x2="540" y2="367" stroke="#111" stroke-width="2"/><text x="540" y="390" text-anchor="middle" font-size="20" fill="#111" font-weight="400">3</text><line x1="690" y1="360" x2="690" y2="367" stroke="#111" stroke-width="2"/><text x="690" y="390" text-anchor="middle" font-size="20" fill="#111" font-weight="400">4</text><line x1="84" y1="300" x2="90" y2="300" stroke="#111" stroke-width="2"/><text x="78" y="307" text-anchor="end" font-size="20" fill="#111" font-weight="400">5</text><line x1="84" y1="240" x2="90" y2="240" stroke="#111" stroke-width="2"/><text x="78" y="247" text-anchor="end" font-size="20" fill="#111" font-weight="400">10</text><line x1="84" y1="180" x2="90" y2="180" stroke="#111" stroke-width="2"/><text x="78" y="187" text-anchor="end" font-size="20" fill="#111" font-weight="400">15</text><line x1="84" y1="120" x2="90" y2="120" stroke="#111" stroke-width="2"/><text x="78" y="127" text-anchor="end" font-size="20" fill="#111" font-weight="400">20</text><line x1="84" y1="60" x2="90" y2="60" stroke="#111" stroke-width="2"/><text x="78" y="67" text-anchor="end" font-size="20" fill="#111" font-weight="400">25</text><line x1="90" y1="186.0" x2="240" y2="186.0" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="7 5"/><line x1="240" y1="360" x2="240" y2="186.0" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="7 5"/><line x1="90" y1="90.0" x2="540" y2="90.0" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="7 5"/><line x1="540" y1="360" x2="540" y2="90.0" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="7 5"/><path d="M90 360 C142.5 288 187.5 222.0 240 186.0 C315.0 138.0 420.0 87.60000000000002 495.0 86.39999999999998 C517.5 86.39999999999998 532.5 87.60000000000002 540 90.0 C600.0 114.0 645.0 240 690 360" fill="none" stroke="#dc2626" stroke-width="4"/><circle cx="90" cy="360" r="6" fill="#111"/><circle cx="240" cy="186.0" r="6" fill="#111"/><circle cx="540" cy="90.0" r="6" fill="#111"/><circle cx="690" cy="360" r="6" fill="#111"/><text x="252" y="212.0" text-anchor="start" font-size="20" fill="#111" font-weight="400">14,5 kW</text><text x="556" y="82.0" text-anchor="start" font-size="20" fill="#111" font-weight="400">22,5 kW</text><text x="60" y="32" text-anchor="start" font-size="22" fill="#111" font-weight="700">Puissance motrice (kW)</text><text x="735" y="342" text-anchor="middle" font-size="20" fill="#111" font-weight="400">t (s)</text></svg><figcaption>Allure de la puissance motrice : 4 points calculés, courbe tracée à la main comme dans le corrigé</figcaption></figure>
+
+<p class="q">Question 7 : puissance maximale sur [0 ; 4] s</p>
+<div class="res">Environ 22,5 kW, vers 3 s (la courbe tracée culmine un peu avant).</div>
+<p><b>Pourquoi sur cet intervalle ?</b> De 0 à 4 s, on écarte la quille de la verticale : on remonte son lest, le poids s'oppose au mouvement (courbe E négative). De 5 à 8 s, la quille revient : le poids aide (courbe E positive). Le vérin a alors beaucoup moins à fournir.</p>
+
+<p class="q">Question 8 : comparaison avec le cahier des charges</p>
+<p>L'exigence 1.1 indique 30 kW. L'écart avec la simulation est de 7,5 kW.</p>
+<div class="res">22,5 kW &lt; 30 kW : l'actionneur est assez puissant, avec une marge.</div>
+<p>Explications proposées par le corrigé : marge de sécurité, incertitudes sur les actions de l'eau, usure. L'hypothèse des liaisons parfaites ne suffit pas à elle seule à expliquer un tel écart.</p>
+<div class="warnbox"><span class="lab">Erreur du corrigé</span>Il écrit « presque 30 % ». En réalité \(7{,}5/30=25\,\%\) de la valeur du cahier des charges (ou une marge de \(7{,}5/22{,}5=33\,\%\) au-dessus du besoin calculé). Préciser par rapport à quoi on calcule.</div>
+<div class="note"><span class="lab">Ajout</span>L'exigence 1.3 demande 45°/s. La commande étudiée met 4 s pour 45°, soit environ 11°/s en moyenne. Cette simulation ne permet donc pas de valider l'exigence 1.3, qui demanderait sans doute plus de puissance.</div>
+</div></div>
+</section>
+<section class="block" id="ascenseur">
+<h2>3. Survitesse d'ascenseur</h2>
+<div class="note"><span class="lab">Le but et le plan</span>
+Deux études indépendantes.
+<ul><li>Le limiteur de vitesse (Q1 à Q6) : à quelle vitesse la sécurité se déclenche-t-elle ? On utilise le moment dynamique.</li><li>Le volant d'inertie du treuil (Q7 à Q12) : quelle inertie pour ne pas dépasser 0,5 m/s² ? On utilise le théorème de l'énergie cinétique.</li></ul>
+Si on bloque sur la première, on peut faire la seconde.</div>
+<div><a class="doc-item" href="../assets/pdf.html?f=../documents/si-bigeard/energetique_survitesse-dascenseur/ENE-PT-TD-survitesse_d_ascenseur.pdf" target="_blank" rel="noopener">📄 Survitesse d'ascenseur <b>Énoncé</b></a><a class="doc-item" href="../assets/pdf.html?f=../documents/si-bigeard/energetique_survitesse-dascenseur/ENE-PT-TD-survitesse_d_ascenseur-prof.pdf" target="_blank" rel="noopener">📄 Survitesse d'ascenseur <b>Corrigé Bigeard</b></a></div>
+
+<div class="exo-card"><div class="exo-head">Le limiteur de vitesse : fonctionnement et données</div><div class="exo-body">
+<figure><img src="img/dsc-as_a-1.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure><figure><img src="img/dsc-as_a-2.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure><figure><img src="img/dsc-as_a-3.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure>
+<p><b>Le principe en mots simples.</b></p>
+<ul><li>La cabine entraîne par un câble la poulie du limiteur, solidaire de la came (violette).</li><li>Le galet roule sur la came : les bosses font osciller le balancier.</li><li>Un ressort maintient le galet contre la came.</li><li>Si la came tourne trop vite, le ressort n'arrive plus à faire suivre les bosses : le galet décolle. Le balancier part trop loin, se loge dans un creux et bloque la poulie. Le parachute arrête alors la cabine.</li></ul>
+</div></div>
+
+<div class="exo-card"><div class="exo-head">Matrice d'inertie et moment dynamique (Q1, Q2)</div><div class="exo-body">
+<figure><img src="img/dsc-as_b-1.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure>
+<p class="q">Question 1 : justifier la forme de la matrice</p>
+<div class="rappel"><span class="lab">Rappel · matrice d'inertie et produits d'inertie</span>\[\overline{\overline I}=\begin{pmatrix}A&-F&-E\\-F&B&-D\\-E&-D&C\end{pmatrix}\]\[D=\int yz\,dm\quad E=\int xz\,dm\quad F=\int xy\,dm\]</div>
+<p class="etape">Étape 1 : repérer le plan de symétrie</p>
+<p>Le plan \((B,\vec x_B,\vec y_B)\) est un plan de symétrie : à chaque masse à la cote \(+z\) correspond une masse à la cote \(-z\).</p>
+<p class="etape">Étape 2 : conclure</p>
+<p>Les intégrales qui contiennent \(z\) une seule fois se compensent.</p>
+<div class="res">\(D=E=0\) : il ne reste que le produit d'inertie \(F\).</div>
+<div class="note"><span class="lab">Remarque sur le corrigé</span>Le corrigé Bigeard écrit que D et E dépendent de « l'intégrale de z dz ». Il faut comprendre \(\int yz\,dm\) et \(\int xz\,dm\).</div>
+
+<p class="q">Question 2 : moment dynamique du balancier en B</p>
+<p class="etape">Étape 1 : vérifier la condition sur B</p>
+<p>Le porte-balancier est fixe, donc B est un point fixe du balancier.</p>
+<div class="rappel"><span class="lab">Rappel · point fixe</span>\[\vec\sigma_B=\overline{\overline I}_B\,\vec\Omega\qquad\vec\delta_B=\Big[\dfrac{d\vec\sigma_B}{dt}\Big]_R\]</div>
+<p class="etape">Étape 2 : moment cinétique, avec \(\vec\Omega=\dot\theta\,\vec z\)</p>
+<p>\(\vec\Omega\) n'a qu'une composante sur \(z\) : on lit la 3e colonne de la matrice.</p>
+\[\vec\sigma_B=J_z\,\dot\theta\,\vec z\]
+<p class="etape">Étape 3 : dériver (\(\vec z\) est fixe)</p>
+<div class="res">\[\vec\delta_B=J_z\,\ddot\theta\,\vec z\]</div>
+</div></div>
+
+<div class="exo-card"><div class="exo-head">Décollement du galet et vitesse limite (Q3 à Q6)</div><div class="exo-body">
+<figure><img src="img/dsc-as_c-1.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure><figure><img src="img/dsc-as_c-2.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure><figure><img src="img/dsc-as_c-3.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure>
+<p class="q">Question 3 : accélération angulaire limite</p>
+<p class="etape">Étape 1 : isoler</p>
+<p>On isole E = {balancier, galet}. Le galet est sans masse.</p>
+<p class="etape">Étape 2 : inventaire des actions extérieures</p>
+<ul><li>came sur galet : sa résultante devient nulle au moment du décollement ;</li><li>porte-balancier sur balancier : pivot d'axe (B, z), donc moment nul sur z ;</li><li>ressort : couple \(C_{res}\) autour de (B, z) ;</li><li>pesanteur : négligée.</li></ul>
+<p class="etape">Étape 3 : choisir l'équation</p>
+<p>On ne veut pas les inconnues de la liaison en B. On écrit donc le théorème du moment dynamique en B, projeté sur \(\vec z\).</p>
+\[\sum\vec M_B(\text{ext}\to E)\cdot\vec z=\vec\delta_B\cdot\vec z\]
+\[C_{res}=J_z\,\ddot\theta_{lim}\]
+<div class="res">\[\ddot\theta_{lim}=\dfrac{C_{res}}{J_z}\]</div>
+<div class="note"><span class="lab">Sens physique</span>Sans la came, seul le ressort fait tourner le balancier. Il ne peut pas lui donner une accélération plus grande que \(C_{res}/J_z\). Si la forme de la came en demande davantage, le contact est perdu. Le résultat s'entend en valeur absolue.</div>
+
+<p class="q">Question 4 : valider l'hypothèse et trouver θ₀</p>
+<p class="etape">Étape 1 : compter les périodes</p>
+<p>La came tourne à 1 tr/s. On compte 4 oscillations complètes par seconde : la fréquence est 4 Hz.</p>
+<p class="etape">Étape 2 : comparer avec le modèle</p>
+<p>À 1 tr/s, \(\omega=2\pi\) rad/s, donc \(4\omega=8\pi\) rad/s. Cela correspond bien à \(8\pi/(2\pi)=4\) Hz. La courbe est une sinusoïde centrée sur 0.</p>
+<p class="etape">Étape 3 : lire l'amplitude</p>
+<div class="res">\(\theta_0\approx8{,}5^\circ\), soit \(0{,}148\) rad.</div>
+<div class="note"><span class="lab">Pourquoi 4ω (ajout)</span>La came a 4 bosses : le balancier fait 4 allers-retours par tour.</div>
+
+<p class="q">Question 5 : vitesse de rotation limite</p>
+<p class="etape">Étape 1 : dériver deux fois \(\theta=\theta_0\sin(4\omega t)\)</p>
+\[\dot\theta=4\omega\,\theta_0\cos(4\omega t)\]
+\[\ddot\theta=-16\,\omega^2\theta_0\sin(4\omega t)\]
+<p class="etape">Étape 2 : prendre le maximum en valeur absolue</p>
+\[|\ddot\theta|_{max}=16\,\omega^2\theta_0\]
+<p class="etape">Étape 3 : égaler à la limite de la question 3</p>
+\[16\,\omega_{lim}^2\,\theta_0=\dfrac{C_{res}}{J_z}\]
+<div class="res">\[\omega_{lim}=\sqrt{\dfrac{C_{res}}{16\,J_z\,\theta_0}}\]</div>
+<div class="warnbox"><span class="lab">Piège</span>Ici \(\theta_0\) doit être en radians (0,148) et \(\omega\) en rad/s.</div>
+
+<p class="q">Question 6 : valeur de ω limite et vitesse de la cabine</p>
+<p class="etape">Étape 1 : chercher quand le contact est perdu</p>
+<p>Sur l'essai, le bas des oscillations de l'effort galet-came (trait fin) atteint zéro vers t = 2 s.</p>
+<p class="etape">Étape 2 : lire la vitesse au même instant (trait épais, échelle de droite)</p>
+<p>\(\omega_{lim}\approx1\) tr/s.</p>
+<p class="etape">Étape 3 : convertir et calculer la vitesse, avec R = 0,24 m</p>
+\[V_{lim}=R\,\omega=0{,}24\times2\pi\times1\]
+<div class="res">\(V_{lim}\approx1{,}5\) m/s, soit environ 5,4 km/h.</div>
+</div></div>
+
+<div class="exo-card"><div class="exo-head">Volant d'inertie : énergies cinétiques (Q7 à Q9)</div><div class="exo-body">
+<figure><img src="img/dsc-as_d-1.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure><figure><img src="img/dsc-as_d-2.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure>
+<p><b>La chaîne à avoir en tête :</b> moteur \(\omega_m\), réducteur de rapport \(\lambda=\omega_p/\omega_m=1/50\), poulie \(\omega_p\), câble, cabine à la vitesse V et contrepoids à la vitesse V en sens inverse.</p>
+<div class="rappel"><span class="lab">Rappel · relations cinématiques (à écrire en premier)</span>\[V=\dfrac{d_p}{2}\,\omega_p\qquad\omega_p=\dfrac{2V}{d_p}\qquad\omega_m=\dfrac{\omega_p}{\lambda}=\dfrac{2V}{\lambda\,d_p}\]</div>
+
+<p class="q">Question 7 : énergie T₁ des solides en translation</p>
+<p>La cabine et le contrepoids ont la même vitesse en valeur absolue.</p>
+<div class="res">\[T_1=\tfrac12(m_c+m_p)\,V^2\]</div>
+<div class="warnbox"><span class="lab">Piège</span>Les masses s'ajoutent dans l'énergie (carré de la vitesse), même si les deux se déplacent en sens contraires. Ici \(m_p\) désigne le contrepoids, pas la poulie.</div>
+
+<p class="q">Question 8 : énergie T₂ de l'arbre de la poulie</p>
+<p class="etape">Étape 1 : rotation autour d'un axe fixe</p>
+\[T_2=\tfrac12 I_{pr}\,\omega_p^2\]
+<p class="etape">Étape 2 : remplacer \(\omega_p\)</p>
+<div class="res">\[T_2=\dfrac{2\,I_{pr}\,V^2}{d_p^2}\]</div>
+
+<p class="q">Question 9 : énergie T₃ de l'arbre moteur</p>
+<p class="etape">Étape 1 : le volant est sur l'arbre moteur</p>
+\[T_3=\tfrac12(I_m+I_v)\,\omega_m^2\]
+<p class="etape">Étape 2 : remplacer \(\omega_m\)</p>
+<div class="res">\[T_3=\dfrac{2\,(I_m+I_v)\,V^2}{\lambda^2d_p^2}\]</div>
+</div></div>
+
+<div class="exo-card"><div class="exo-head">Volant d'inertie : puissances et théorème de l'énergie cinétique (Q10 à Q12)</div><div class="exo-body">
+<figure><img src="img/dsc-as_e-1.png" alt="Énoncé" loading="lazy" style="max-width:100%;background:#fff;border-radius:8px"></figure>
+<p class="q">Question 10 : puissance des actions extérieures (montée de la cabine)</p>
+<p class="etape">Étape 1 : une action, un signe</p>
+<div style="overflow-x:auto"><table><tr><th>Action</th><th>Puissance</th><th>Pourquoi ce signe</th></tr>
+<tr><td>poids de la cabine</td><td>\(-m_c\,g\,V\)</td><td>la cabine monte, le poids freine</td></tr>
+<tr><td>poids du contrepoids</td><td>\(+m_p\,g\,V\)</td><td>il descend, le poids aide</td></tr>
+<tr><td>stator sur rotor</td><td>\(C_m\,\omega_m=\dfrac{2\,C_m V}{\lambda d_p}\)</td><td>moteur</td></tr>
+<tr><td>guidage sur la cabine</td><td>\(-F\,V\)</td><td>frottement, il s'oppose</td></tr></table></div>
+<p class="etape">Étape 2 : additionner et factoriser par V</p>
+<div class="res">\[P_{ext}=\Big(\dfrac{2\,C_m}{\lambda d_p}+(m_p-m_c)\,g-F\Big)V\]</div>
+
+<p class="q">Question 11 : puissance des actions intérieures (pertes)</p>
+<p class="etape">Étape 1 : où sont les pertes ?</p>
+<p>Les liaisons sont parfaites. Les pertes sont dans l'ensemble réducteur et poulie, de rendement \(\eta\).</p>
+<p class="etape">Étape 2 : écrire la puissance perdue (négative)</p>
+<div class="res">\[P_{int}=-(1-\eta)\,C_m\,\omega_m=-(1-\eta)\,\dfrac{2\,C_mV}{\lambda d_p}\]</div>
+<div class="note"><span class="lab">Hypothèse cachée (ajout)</span>On applique le rendement à toute la puissance du moteur. En toute rigueur, une petite partie sert à accélérer le rotor et le volant avant le réducteur et ne le traverse pas. L'énoncé demande d'utiliser le modèle simple ci-dessus.</div>
+
+<p class="q">Question 12 : inertie du volant</p>
+<p class="etape">Étape 1 : énergie totale, en factorisant \(\tfrac12V^2\)</p>
+\[T_E=\tfrac12\Big[m_c+m_p+\dfrac{4}{d_p^2}\Big(I_{pr}+\dfrac{I_m+I_v}{\lambda^2}\Big)\Big]V^2\]
+<p>Le crochet est la <b>masse équivalente</b> du système, notée \(M_{eq}\).</p>
+<p class="etape">Étape 2 : somme des puissances (le terme en \(1-\eta\) se simplifie)</p>
+\[P_{ext}+P_{int}=\Big[(m_p-m_c)\,g-F+\dfrac{2\eta\,C_m}{\lambda d_p}\Big]V\]
+<p class="etape">Étape 3 : appliquer le théorème et simplifier par V</p>
+\[M_{eq}\,\dot V=(m_p-m_c)\,g-F+\dfrac{2\eta\,C_m}{\lambda d_p}\]
+<p class="etape">Étape 4 : imposer \(\dot V=\Gamma_{max}\) et isoler \(I_v\)</p>
+<div class="res">\[\begin{aligned}I_v=\dfrac{\lambda^2d_p^2}{4\,\Gamma_{max}}\Big[&(m_p-m_c)\,g-F+\dfrac{2\eta\,C_m}{\lambda d_p}\\&-\Big(m_c+m_p+\dfrac{4I_{pr}}{d_p^2}\Big)\Gamma_{max}\Big]-I_m\end{aligned}\]</div>
+<div class="note"><span class="lab">Interprétation (ajout)</span>C'est la valeur <b>minimale</b> du volant : plus \(I_v\) est grand, plus l'accélération est faible. Il faut donc \(I_v\) supérieur ou égal à cette expression. Si elle est négative, aucun volant n'est nécessaire.</div>
+<div class="note"><span class="lab">Vérification rapide en DS</span>Chaque terme du crochet est une force, en newtons. \(d_p^2\) fois une force, divisé par une accélération, donne des kg·m² : l'unité est bonne.</div>
+</div></div>
+</section>
+
+</main>
+
+<footer class="wrap">Support de révision personnel. Énoncés et corrigés d'origine : <a href="https://s2i.bigeard.me" target="_blank" rel="noopener">E. Bigeard</a> (licence indiquée sur les documents).</footer>
+<script src="../assets/gate.js"></script>
+<script src="../assets/catalogue.js?v=2"></script>
+<script src="../assets/nav.js?v=2"></script>
+<script src="../assets/lecture.js?v=3"></script>
+</body>
+</html>

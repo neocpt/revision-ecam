@@ -118,7 +118,8 @@ window.CATALOGUE = {
           { n: "C04", titre: "Énergétique du solide", url: "aem2-si/c04-energetique-solide.html" },
           { n: "C05", titre: "Capteurs et chaîne de mesures", url: "aem2-si/c05-capteurs.html" },
           { n: "Outils", titre: "Boîte à outils C03-C04 (dynamique et énergétique, de zéro)", url: "aem2-si/c03-c04-boite-a-outils.html" },
-          { n: "DS", titre: "Prépa DS : dynamique, énergétique et QCM capteurs", url: "aem2-si/ds-dynamique-capteurs.html" }
+          { n: "DS", titre: "Prépa DS : dynamique, énergétique et QCM capteurs", url: "aem2-si/ds-dynamique-capteurs.html" },
+          { n: "DS corrigés", titre: "Corrigés annotés : Audi 4Motion, quille pendulaire, survitesse d'ascenseur", url: "aem2-si/ds-corriges-bigeard.html" }
         ] }
       ],
       annales: [

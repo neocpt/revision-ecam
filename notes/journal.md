@@ -66,3 +66,8 @@ Une entrée par document traité (date, source, pages créées ou modifiées, er
 - Page `aem2-si/ds-dynamique-capteurs.html` (entrée « DS » dans le catalogue) : QCM chronométré de 20 questions sur le C05 (+1/-1/0), 3 schémas test maison corrigés (portail à crémaillère, pont avec différentiel en couleur, trappe à vérin), exercices Bigeard de la thématique Dynamique à revoir.
 - Pari signalé comme tel : Audi 4Motion (schéma en couleur), puis Quille pendulaire. Repère : le DS02 du 22/11/2025 reprenait Appontage et IARES.
 - Valeurs maison recalculées en Python.
+
+## 2026-11-27 — Corrigés annotés pour la prépa DS SI
+- Page `aem2-si/ds-corriges-bigeard.html` : Audi 4Motion (Q1-13), Quille pendulaire (Q1-8), Survitesse d'ascenseur (Q1-12), d'après les corrigés Bigeard, au format par étapes ; énoncés recadrés en images (`aem2-si/img/dsc-*.png`) ; courbe de la puissance motrice tracée.
+- Signalé : quille, L3 au lieu de L2 (Q1c), signe moins en trop (puissance de l'eau), « presque 30 % » (25 % de 30 kW) ; Audi, convention de signe de C1 (pièce 1 tournant à -omega) et coquille C1^m ; ascenseur, « intégrale de z dz ».
+- Ajouts maison signalés (adhérence 4 roues contre 2, exigence 1.3 de la quille, hypothèse sur le rendement).
