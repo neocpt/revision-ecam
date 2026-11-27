@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Formulaire C03-C04 avec démonstrations — Révision ECAM</title>
+<link rel="stylesheet" href="../assets/style.css?v=4">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'none'},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body class="theme-am2">
+
+<div id="site-nav"></div>
+<nav class="subnav"><a href="#choix">Quelle formule ?</a><a href="#cine">Outils</a><a href="#pfd">PFD</a><a href="#cinetique">Moment cinétique</a><a href="#inertie">Inertie</a><a href="#ec">Énergie cinétique</a><a href="#puissance">Puissances</a><a href="#tec">TEC</a></nav>
+
+<main class="wrap">
+<span class="chip">SI AM2 (2ᵉ année) · C03 et C04</span>
+<h1 class="title">Formulaire Dynamique et Énergétique, avec les démonstrations</h1>
+<p class="lead">Les formules classiques des chapitres 3 et 4, rangées selon les cas. Chaque démonstration est repliée : on l'ouvre seulement si on en a besoin. Les démonstrations sont rédigées pour ce formulaire.</p>
+<p><button type="button" id="demos" style="font:inherit;font-weight:700;padding:.45rem 1rem;border-radius:8px;border:1px solid var(--line);cursor:pointer">Ouvrir toutes les démonstrations</button></p>
+
+<div class="def"><span class="lab">Notations</span>
+\(S\) : solide de masse \(m\) et de centre de gravité \(G\). \(R\) : repère du mouvement, galiléen dès qu'on applique le PFD ou le théorème de l'énergie cinétique. \(\vec\Omega=\vec\Omega_{S/R}\). \(\vec V_A=\vec V_{A\in S/R}\) (vitesse du point de \(S\)). \(\vec V_{A/R}\) : vitesse du point géométrique \(A\) où l'on calcule. \(\vec\Gamma_G\) : accélération de \(G\). \(M\) : point courant du solide.
+</div>
+
+<section class="block" id="choix"><h2>Quelle formule selon le cas ?</h2>
+<div style="overflow-x:auto"><table>
+<tr><th>Situation</th><th>Moment cinétique</th><th>Moment dynamique</th><th>Énergie cinétique</th></tr>
+<tr><td>Translation (au point G)</td><td>\(\vec 0\)</td><td>\(\vec 0\)</td><td>\(\tfrac12 mV_G^2\)</td></tr>
+<tr><td>Point A de S fixe dans R</td><td>\(\overline{\overline I}_A\vec\Omega\)</td><td>\(\dfrac{d\vec\sigma_A}{dt}\)</td><td>\(\tfrac12\vec\Omega\cdot\overline{\overline I}_A\vec\Omega\)</td></tr>
+<tr><td>Au point G, mouvement quelconque</td><td>\(\overline{\overline I}_G\vec\Omega\)</td><td>\(\dfrac{d\vec\sigma_G}{dt}\)</td><td>\(\tfrac12mV_G^2+\tfrac12\vec\Omega\cdot\overline{\overline I}_G\vec\Omega\)</td></tr>
+<tr><td>Autre point A</td><td>\(\vec\sigma_G+\overrightarrow{AG}\wedge m\vec V_G\)</td><td>\(\vec\delta_G+\overrightarrow{AG}\wedge m\vec\Gamma_G\)</td><td>(ne dépend pas du point)</td></tr>
+</table></div>
+<div style="overflow-x:auto"><table>
+<tr><th>On cherche</th><th>Outil</th></tr>
+<tr><td>une force de liaison</td><td>théorème de la résultante dynamique, projeté sur le bon axe</td></tr>
+<tr><td>un couple ou un moment, sur un seul solide en rotation</td><td>théorème du moment dynamique sur l'axe de la liaison (les inconnues du pivot disparaissent)</td></tr>
+<tr><td>un couple moteur ou une accélération, mécanisme à 1 mobilité</td><td>théorème de l'énergie cinétique sur tout l'ensemble</td></tr>
+</table></div>
+</section>
+
+<section class="block" id="cine"><h2>1. Outils de cinématique</h2>
+<h3>Changer de point pour une vitesse (même solide)</h3>
+<div class="res">\[\vec V_{B\in S/R}=\vec V_{A\in S/R}+\overrightarrow{BA}\wedge\vec\Omega_{S/R}\]</div>
+<h3>Dériver un vecteur : formule de Bour</h3>
+<div class="res">\[\Big[\dfrac{d\vec u}{dt}\Big]_{R_1}=\Big[\dfrac{d\vec u}{dt}\Big]_{R_2}+\vec\Omega_{2/1}\wedge\vec u\]</div>
+<p>Cas courant : rotation \(\theta\) autour de \(\vec z\).</p>
+<div class="res">\[\Big[\dfrac{d\vec x_1}{dt}\Big]_0=\dot\theta\,\vec y_1\qquad\Big[\dfrac{d\vec y_1}{dt}\Big]_0=-\dot\theta\,\vec x_1\]</div>
+<details class="sol"><summary>Voir la démonstration pour x₁ et y₁</summary><div class="sol-body">
+<p>On projette dans la base fixe :</p>
+\[\vec x_1=\cos\theta\,\vec x_0+\sin\theta\,\vec y_0\]
+<p>Les vecteurs de la base 0 sont constants dans le repère 0. On dérive les seuls coefficients :</p>
+\[\Big[\dfrac{d\vec x_1}{dt}\Big]_0=\dot\theta\,(-\sin\theta\,\vec x_0+\cos\theta\,\vec y_0)=\dot\theta\,\vec y_1\]
+<p>Le calcul est le même pour \(\vec y_1\).</p></div></details>
+<h3>Composition des mouvements</h3>
+<div class="res">\[\vec\Omega_{2/0}=\vec\Omega_{2/1}+\vec\Omega_{1/0}\]
+\[\vec V_{M\in2/0}=\vec V_{M\in2/1}+\vec V_{M\in1/0}\]</div>
+<h3>Relations des transmetteurs (en valeur absolue)</h3>
+<div style="overflow-x:auto"><table>
+<tr><th>Mécanisme</th><th>Relation</th></tr>
+<tr><td>Roue qui roule sans glisser sur le sol</td><td>\(V=R\,\omega\) (V : vitesse du centre par rapport au sol)</td></tr>
+<tr><td>Engrenage</td><td>\(\omega_2/\omega_1=Z_1/Z_2\) (extérieur : signes opposés ; intérieur : même signe)</td></tr>
+<tr><td>Pignon-crémaillère, poulie-câble</td><td>\(V=R\,\omega\)</td></tr>
+<tr><td>Poulie-courroie sans glissement</td><td>\(R_1\omega_1=R_2\omega_2\)</td></tr>
+<tr><td>Vis-écrou de pas p</td><td>\(V=\dfrac{p}{2\pi}\,\omega\)</td></tr>
+<tr><td>Différentiel à planétaires identiques</td><td>\(\omega_g+\omega_d=2\,\omega_{boitier}\) (relation signée)</td></tr>
+</table></div>
+</section>
+
+<section class="block" id="pfd"><h2>2. Principe fondamental de la dynamique</h2>
+<h3>Théorème de la résultante dynamique</h3>
+<div class="res">\[\sum\vec F_{ext\to S}=m\,\vec\Gamma_{G\in S/R}\]</div>
+<details class="sol"><summary>Voir la démonstration</summary><div class="sol-body">
+<p>On écrit la loi de Newton pour chaque petite masse \(dm\), puis on intègre. Les forces intérieures s'annulent deux à deux.</p>
+\[\sum\vec F_{ext}=\int_S\vec\Gamma_M\,dm\]
+<p>Par définition du centre de gravité, \(\int_S\overrightarrow{OM}\,dm=m\,\overrightarrow{OG}\). La masse est constante : on dérive deux fois.</p>
+\[\int_S\vec\Gamma_M\,dm=m\,\vec\Gamma_G\]</div></details>
+
+<h3>Théorème du moment dynamique, en un point A quelconque</h3>
+<div class="res">\[\sum\vec M_A(ext\to S)=\vec\delta_{A\in S/R}\]
+\[\vec\delta_{A\in S/R}=\int_S\overrightarrow{AM}\wedge\vec\Gamma_{M\in S/R}\,dm\]</div>
+<details class="sol"><summary>Voir la démonstration</summary><div class="sol-body">
+<p>Pour chaque masse \(dm\), on a \(d\vec F=\vec\Gamma_M\,dm\). On multiplie vectoriellement par \(\overrightarrow{AM}\) :</p>
+\[\overrightarrow{AM}\wedge d\vec F=\overrightarrow{AM}\wedge\vec\Gamma_M\,dm\]
+<p>On intègre. Les moments des actions intérieures s'annulent. À gauche, il reste le moment en A des actions extérieures ; à droite, \(\vec\delta_A\).</p></div></details>
+
+<h3>Torseur dynamique et changement de point</h3>
+<div class="res">\[\{\mathcal D_{S/R}\}_A=\begin{Bmatrix}m\,\vec\Gamma_G\\ \vec\delta_A\end{Bmatrix}_A\qquad\{\mathcal T_{ext\to S}\}=\{\mathcal D_{S/R}\}\]
+\[\vec\delta_B=\vec\delta_A+\overrightarrow{BA}\wedge m\,\vec\Gamma_G\]</div>
+<details class="sol"><summary>Voir la démonstration du changement de point</summary><div class="sol-body">
+<p>On écrit \(\overrightarrow{BM}=\overrightarrow{BA}+\overrightarrow{AM}\) :</p>
+\[\vec\delta_B=\overrightarrow{BA}\wedge\int_S\vec\Gamma_M\,dm+\int_S\overrightarrow{AM}\wedge\vec\Gamma_M\,dm\]
+<p>La première intégrale vaut \(m\vec\Gamma_G\), le second terme est \(\vec\delta_A\).</p></div></details>
+<p><b>Ensemble de solides :</b> les torseurs dynamiques s'additionnent, tous écrits au même point.</p>
+<div class="res">\[\{\mathcal T_{ext\to E}\}_A=\sum_i\{\mathcal D_{S_i/R}\}_A\]</div>
+
+<h3>Formes toutes faites</h3>
+<div style="overflow-x:auto"><table>
+<tr><th>Cas</th><th>Résultat</th></tr>
+<tr><td>Translation</td><td>\(\vec\delta_G=\vec0\) et \(\vec\delta_A=\overrightarrow{AG}\wedge m\vec\Gamma_G\)</td></tr>
+<tr><td>Rotation autour d'un axe fixe (O, z), projection sur z</td><td>\(\vec\delta_O\cdot\vec z=J_{Oz}\,\ddot\theta\) (pour un solide : toujours vrai si O est sur l'axe)</td></tr>
+<tr><td>Même cas avec G sur l'axe et axe principal d'inertie</td><td>\(m\vec\Gamma_G=\vec0\) et \(\vec\delta_O=J\ddot\theta\,\vec z\)</td></tr>
+<tr><td>Mouvement plan, projection sur z (z axe de rotation)</td><td>\(\vec\delta_G\cdot\vec z=I_{Gz}\,\ddot\theta\)</td></tr>
+<tr><td>Point matériel de masse m en A (masselotte)</td><td>\(\vec\delta_O=\overrightarrow{OA}\wedge m\vec\Gamma_A\)</td></tr>
+</table></div>
+<h3>Extraire une seule composante sans tout dériver</h3>
+<div class="res">\[\Big[\dfrac{d\vec\sigma}{dt}\Big]_R\cdot\vec z=\dfrac{d(\vec\sigma\cdot\vec z)}{dt}-\vec\sigma\cdot\Big[\dfrac{d\vec z}{dt}\Big]_R\]</div>
+<p>Si \(\vec z\) est fixe dans R, le dernier terme est nul.</p>
+<details class="sol"><summary>Voir la démonstration</summary><div class="sol-body">
+<p>C'est la dérivée d'un produit scalaire, réarrangée :</p>
+\[\dfrac{d(\vec\sigma\cdot\vec z)}{dt}=\Big[\dfrac{d\vec\sigma}{dt}\Big]_R\cdot\vec z+\vec\sigma\cdot\Big[\dfrac{d\vec z}{dt}\Big]_R\]</div></details>
+</section>
+
+<section class="block" id="cinetique"><h2>3. Torseur cinétique</h2>
+<div class="res">\[\{\mathcal C_{S/R}\}_A=\begin{Bmatrix}m\,\vec V_G\\ \vec\sigma_A\end{Bmatrix}_A\qquad\vec\sigma_A=\int_S\overrightarrow{AM}\wedge\vec V_M\,dm\]
+\[\vec\sigma_B=\vec\sigma_A+\overrightarrow{BA}\wedge m\,\vec V_G\]</div>
+<h3>Calcul pratique, A étant un point de S</h3>
+<div class="res">\[\vec\sigma_A=\overline{\overline I}_{(A,S)}\,\vec\Omega+m\,\overrightarrow{AG}\wedge\vec V_{A\in S/R}\]</div>
+<ul><li>A fixe dans R : \(\vec\sigma_A=\overline{\overline I}_A\vec\Omega\).</li><li>A = G : \(\vec\sigma_G=\overline{\overline I}_G\vec\Omega\).</li></ul>
+<details class="sol"><summary>Voir la démonstration</summary><div class="sol-body">
+<p>A et M sont deux points du solide, donc leurs vitesses sont liées :</p>
+\[\vec V_M=\vec V_A+\vec\Omega\wedge\overrightarrow{AM}\]
+<p>On remplace dans la définition :</p>
+\[\vec\sigma_A=\Big(\int_S\overrightarrow{AM}\,dm\Big)\wedge\vec V_A+\int_S\overrightarrow{AM}\wedge(\vec\Omega\wedge\overrightarrow{AM})\,dm\]
+<p>La première parenthèse vaut \(m\overrightarrow{AG}\). La seconde intégrale dépend linéairement de \(\vec\Omega\) : c'est par définition \(\overline{\overline I}_A\vec\Omega\).</p></div></details>
+
+<h3>Du moment cinétique au moment dynamique</h3>
+<div class="res">\[\vec\delta_A=\Big[\dfrac{d\vec\sigma_A}{dt}\Big]_R+\vec V_{A/R}\wedge m\,\vec V_{G\in S/R}\]
+\[m\,\vec\Gamma_G=\Big[\dfrac{d(m\vec V_G)}{dt}\Big]_R\]</div>
+<p>Le terme en plus est nul si <b>A est fixe</b>, si <b>A = G</b>, ou si \(\vec V_{A/R}\) est parallèle à \(\vec V_G\).</p>
+<details class="sol"><summary>Voir la démonstration</summary><div class="sol-body">
+<p>On dérive la définition de \(\vec\sigma_A\) comme un produit :</p>
+\[\dfrac{d\vec\sigma_A}{dt}=\int_S\dfrac{d\overrightarrow{AM}}{dt}\wedge\vec V_M\,dm+\int_S\overrightarrow{AM}\wedge\vec\Gamma_M\,dm\]
+<p>Le second terme est \(\vec\delta_A\). Dans le premier, les deux extrémités de \(\overrightarrow{AM}\) bougent :</p>
+\[\dfrac{d\overrightarrow{AM}}{dt}=\vec V_M-\vec V_{A/R}\]
+<p>Comme \(\vec V_M\wedge\vec V_M=\vec0\) et \(\int_S\vec V_M\,dm=m\vec V_G\) :</p>
+\[\dfrac{d\vec\sigma_A}{dt}=\vec\delta_A-\vec V_{A/R}\wedge m\vec V_G\]</div></details>
+</section>
+
+<section class="block" id="inertie"><h2>4. Opérateur d'inertie</h2>
+<div class="res">\[\overline{\overline I}_A=\begin{pmatrix}A&-F&-E\\-F&B&-D\\-E&-D&C\end{pmatrix}\]
+\[A=\int(y^2+z^2)\,dm\quad B=\int(x^2+z^2)\,dm\quad C=\int(x^2+y^2)\,dm\]
+\[D=\int yz\,dm\quad E=\int xz\,dm\quad F=\int xy\,dm\]</div>
+<details class="sol"><summary>Voir la démonstration de la matrice</summary><div class="sol-body">
+<p>La formule du double produit vectoriel donne :</p>
+\[\overrightarrow{AM}\wedge(\vec u\wedge\overrightarrow{AM})=AM^2\,\vec u-(\overrightarrow{AM}\cdot\vec u)\,\overrightarrow{AM}\]
+<p>On prend \(\overrightarrow{AM}=(x,y,z)\) et \(\vec u=\vec x\). On obtient :</p>
+\[(y^2+z^2,\ -xy,\ -xz)\]
+<p>Après intégration, c'est la première colonne \((A,-F,-E)\). On fait de même avec \(\vec y\) et \(\vec z\).</p></div></details>
+
+<h3>Symétries</h3>
+<div style="overflow-x:auto"><table>
+<tr><th>Symétrie</th><th>Conséquence (A pris sur le plan ou l'axe)</th></tr>
+<tr><td>Plan de symétrie (x, y)</td><td>\(D=E=0\) : les produits contenant z sont nuls</td></tr>
+<tr><td>Deux plans de symétrie perpendiculaires</td><td>matrice diagonale</td></tr>
+<tr><td>Solide de révolution d'axe z</td><td>diagonale, avec \(A=B=\dfrac C2+\int z^2\,dm\)</td></tr>
+</table></div>
+<details class="sol"><summary>Voir pourquoi les produits d'inertie s'annulent</summary><div class="sol-body">
+<p>Avec le plan de symétrie (x, y), à chaque masse en \((x,y,z)\) correspond la même masse en \((x,y,-z)\). Dans \(\int xz\,dm\) et \(\int yz\,dm\), les deux contributions sont opposées. La somme est donc nulle.</p></div></details>
+
+<h3>Moment d'inertie par rapport à un axe (A, u), avec u unitaire</h3>
+<div class="res">\[I_\Delta=\vec u\cdot\overline{\overline I}_A\,\vec u=\int d^2\,dm\]</div>
+<p>\(d\) est la distance de M à l'axe.</p>
+<details class="sol"><summary>Voir la démonstration</summary><div class="sol-body">
+\[\vec u\cdot\big[AM^2\vec u-(\overrightarrow{AM}\cdot\vec u)\overrightarrow{AM}\big]=AM^2-(\overrightarrow{AM}\cdot\vec u)^2\]
+<p>D'après Pythagore, c'est le carré de la distance de M à l'axe.</p></div></details>
+
+<h3>Théorème de Huygens (toujours depuis ou vers G)</h3>
+<p>Avec \(\overrightarrow{OG}=(a,b,c)\) :</p>
+<div class="res">\[\overline{\overline I}_O=\overline{\overline I}_G+m\begin{pmatrix}b^2+c^2&-ab&-ac\\-ab&a^2+c^2&-bc\\-ac&-bc&a^2+b^2\end{pmatrix}\]
+\[\text{Pour un seul axe :}\quad I_{Oz}=I_{Gz}+m\,d^2\]</div>
+<div class="warnbox"><span class="lab">Piège</span>Pour aller de A à B sans que l'un soit G, on passe par G : A vers G (on retranche), puis G vers B (on ajoute).</div>
+<details class="sol"><summary>Voir la démonstration pour un axe</summary><div class="sol-body">
+<p>On prend l'axe z et on écrit \(x=a+x'\), \(y=b+y'\), où \(x'\) et \(y'\) sont mesurés depuis G.</p>
+\[I_{Oz}=\int\big[(a+x')^2+(b+y')^2\big]dm\]
+\[I_{Oz}=\int(x'^2+y'^2)\,dm+(a^2+b^2)\,m+2a\int x'\,dm+2b\int y'\,dm\]
+<p>Les deux dernières intégrales sont nulles par définition de G. Avec \(d^2=a^2+b^2\), on obtient la formule.</p></div></details>
+
+<h3>Solides usuels, au centre de gravité (axe z : axe du solide)</h3>
+<div style="overflow-x:auto"><table>
+<tr><th>Solide</th><th>\(I_{Gz}\)</th><th>\(I_{Gx}=I_{Gy}\)</th></tr>
+<tr><td>Tige fine de longueur L, portée par z</td><td>\(0\)</td><td>\(\dfrac{mL^2}{12}\)</td></tr>
+<tr><td>Cylindre plein (R, h)</td><td>\(\dfrac{mR^2}{2}\)</td><td>\(\dfrac{mR^2}{4}+\dfrac{mh^2}{12}\)</td></tr>
+<tr><td>Cylindre creux épais (R, r, h)</td><td>\(\dfrac{m(R^2+r^2)}{2}\)</td><td>\(\dfrac{m(R^2+r^2)}{4}+\dfrac{mh^2}{12}\)</td></tr>
+<tr><td>Anneau fin (R)</td><td>\(mR^2\)</td><td>\(\dfrac{mR^2}{2}\)</td></tr>
+<tr><td>Disque fin (R)</td><td>\(\dfrac{mR^2}{2}\)</td><td>\(\dfrac{mR^2}{4}\)</td></tr>
+<tr><td>Sphère pleine (R)</td><td>\(\dfrac{2mR^2}{5}\)</td><td>\(\dfrac{2mR^2}{5}\)</td></tr>
+<tr><td>Parallélépipède (a selon x, b selon y, c selon z)</td><td>\(\dfrac{m(a^2+b^2)}{12}\)</td><td>\(I_{Gx}=\dfrac{m(b^2+c^2)}{12}\), \(I_{Gy}=\dfrac{m(a^2+c^2)}{12}\)</td></tr>
+</table></div>
+<details class="sol"><summary>Voir les calculs de la tige et du cylindre</summary><div class="sol-body">
+<p>Tige portée par z, avec \(dm=\dfrac mL\,dz\) :</p>
+\[I_{Gx}=\int_{-L/2}^{L/2}z^2\,\dfrac mL\,dz=\dfrac{mL^2}{12}\]
+<p>Cylindre plein, avec des couronnes : \(dm=\dfrac{2m}{R^2}\,r\,dr\).</p>
+\[I_{Gz}=\int_0^R r^2\,\dfrac{2m}{R^2}\,r\,dr=\dfrac{mR^2}{2}\]</div></details>
+<h3>Solide percé, équilibrage</h3>
+<ul><li>Solide percé : on calcule le solide plein, puis on <b>retranche</b> le trou (même point, même base).</li>
+<li>Équilibrage statique : G sur l'axe de rotation.</li>
+<li>Équilibrage dynamique, pour une rotation autour de z : G sur l'axe, et \(D=E=0\).</li></ul>
+</section>
+
+<section class="block" id="ec"><h2>5. Énergie cinétique</h2>
+<div class="res">\[2E_{c(S/R)}=\{\mathcal V_{S/R}\}\otimes\{\mathcal C_{S/R}\}=\vec V_{A\in S/R}\cdot m\vec V_G+\vec\Omega\cdot\vec\sigma_A\]</div>
+<p>Les deux torseurs sont écrits au même point A du solide. Le résultat ne dépend pas de A.</p>
+<details class="sol"><summary>Voir la démonstration</summary><div class="sol-body">
+<p>On part de la définition, et on remplace un seul des deux facteurs \(\vec V_M\) :</p>
+\[2E_c=\int_S\vec V_M\cdot\vec V_M\,dm=\int_S\vec V_M\cdot\big(\vec V_A+\vec\Omega\wedge\overrightarrow{AM}\big)\,dm\]
+<p>Le produit mixte permet d'écrire \(\vec V_M\cdot(\vec\Omega\wedge\overrightarrow{AM})=\vec\Omega\cdot(\overrightarrow{AM}\wedge\vec V_M)\). Comme \(\vec V_A\) et \(\vec\Omega\) sortent de l'intégrale :</p>
+\[2E_c=\vec V_A\cdot m\vec V_G+\vec\Omega\cdot\vec\sigma_A\]</div></details>
+<h3>Selon le cas</h3>
+<div style="overflow-x:auto"><table>
+<tr><th>Cas</th><th>Formule</th></tr>
+<tr><td>Translation</td><td>\(E_c=\tfrac12 mV^2\)</td></tr>
+<tr><td>Rotation autour d'un axe fixe</td><td>\(E_c=\tfrac12 J\,\omega^2\), J pris par rapport à cet axe</td></tr>
+<tr><td>Point A de S fixe</td><td>\(E_c=\tfrac12\vec\Omega\cdot\overline{\overline I}_A\vec\Omega\)</td></tr>
+<tr><td>Mouvement plan</td><td>\(E_c=\tfrac12 mV_G^2+\tfrac12 I_{Gz}\,\omega^2\)</td></tr>
+<tr><td>Mouvement quelconque</td><td>\(E_c=\tfrac12 mV_G^2+\tfrac12\vec\Omega\cdot\overline{\overline I}_G\vec\Omega\)</td></tr>
+<tr><td>Ensemble</td><td>\(E_c=\sum_i E_{c(S_i/R)}\)</td></tr>
+</table></div>
+<h3>Inertie et masse équivalentes</h3>
+<div class="res">\[E_{c(E/R)}=\tfrac12 J_{eq}\,\omega_{ref}^2\qquad\text{ou}\qquad E_{c(E/R)}=\tfrac12 M_{eq}\,V_{ref}^2\]</div>
+<p>Méthode : additionner les énergies, exprimer toutes les vitesses avec la vitesse de référence, mettre son carré en facteur.</p>
+<details class="sol"><summary>Voir l'exemple moteur, réducteur, treuil</summary><div class="sol-body">
+<p>Réducteur \(r=\omega_p/\omega_m\), tambour de rayon \(R\), charge de masse \(M\) : \(V=Rr\,\omega_m\).</p>
+\[E_c=\tfrac12J_m\omega_m^2+\tfrac12J_p(r\omega_m)^2+\tfrac12M(Rr\omega_m)^2\]
+\[J_{eq}=J_m+r^2\,(J_p+MR^2)\]</div></details>
+</section>
+
+<section class="block" id="puissance"><h2>6. Puissances</h2>
+<h3>Puissance d'une action extérieure à S</h3>
+<div class="res">\[P_{\to S/R}=\{\mathcal T_{\to S}\}\otimes\{\mathcal V_{S/R}\}=\vec R\cdot\vec V_{A\in S/R}+\vec M_A\cdot\vec\Omega_{S/R}\]</div>
+<details class="sol"><summary>Voir la démonstration</summary><div class="sol-body">
+<p>Chaque force \(\vec F_i\), appliquée au point \(M_i\), fournit \(\vec F_i\cdot\vec V_{M_i}\). On utilise \(\vec V_{M_i}=\vec V_A+\vec\Omega\wedge\overrightarrow{AM_i}\), puis le produit mixte :</p>
+\[P=\Big(\sum\vec F_i\Big)\cdot\vec V_A+\vec\Omega\cdot\sum\big(\overrightarrow{AM_i}\wedge\vec F_i\big)\]</div></details>
+<div style="overflow-x:auto"><table>
+<tr><th>Cas</th><th>Formule</th></tr>
+<tr><td>Force appliquée en un point</td><td>\(P=\vec F\cdot\vec V_{point}\)</td></tr>
+<tr><td>Couple (moteur ou résistant)</td><td>\(P=\vec C\cdot\vec\Omega\)</td></tr>
+<tr><td>Poids</td><td>\(P=m\,\vec g\cdot\vec V_G\) (négative si G monte)</td></tr>
+<tr><td>Montée sur une pente d'angle α à la vitesse V</td><td>\(P_{poids}=-mgV\sin\alpha\)</td></tr>
+<tr><td>Roulement sans glissement sur un sol fixe</td><td>\(P=0\)</td></tr>
+<tr><td>Glissement avec frottement de Coulomb sur un support fixe</td><td>\(P=-\|\vec T\|\,\|\vec V_{glissement}\|\), avec \(\|\vec T\|=f\,\|\vec N\|\)</td></tr>
+</table></div>
+<h3>Puissance des inter-efforts</h3>
+<div class="res">\[P_{1\leftrightarrow2}=\{\mathcal T_{1\to2}\}\otimes\{\mathcal V_{2/1}\}\]</div>
+<p>Elle ne dépend pas du repère. Elle est nulle pour une liaison parfaite.</p>
+<details class="sol"><summary>Voir la démonstration</summary><div class="sol-body">
+\[P_{1\leftrightarrow2}=\{\mathcal T_{1\to2}\}\otimes\{\mathcal V_{2/R}\}+\{\mathcal T_{2\to1}\}\otimes\{\mathcal V_{1/R}\}\]
+<p>D'après les actions réciproques, \(\{\mathcal T_{2\to1}\}=-\{\mathcal T_{1\to2}\}\) :</p>
+\[P_{1\leftrightarrow2}=\{\mathcal T_{1\to2}\}\otimes\big(\{\mathcal V_{2/R}\}-\{\mathcal V_{1/R}\}\big)=\{\mathcal T_{1\to2}\}\otimes\{\mathcal V_{2/1}\}\]
+<p>Le repère R a disparu.</p></div></details>
+<div style="overflow-x:auto"><table>
+<tr><th>Cas</th><th>Puissance des inter-efforts</th></tr>
+<tr><td>Liaison parfaite</td><td>\(0\)</td></tr>
+<tr><td>Pivot avec couple de frottement C</td><td>\(-C\,|\omega_{2/1}|\)</td></tr>
+<tr><td>Vérin (effort moteur F dans le sens de la sortie, longueur λ)</td><td>\(F\,\dot\lambda\)</td></tr>
+<tr><td>Frottement visqueux de coefficient k</td><td>\(-k\,\dot\lambda^2\)</td></tr>
+<tr><td>Moteur : couple du stator sur le rotor</td><td>\(C_m\,\omega_{rotor/stator}\)</td></tr>
+<tr><td>Réducteur de rendement η (puissance d'entrée \(P_e&gt;0\))</td><td>\(-(1-\eta)\,P_e\)</td></tr>
+</table></div>
+</section>
+
+<section class="block" id="tec"><h2>7. Théorème de l'énergie cinétique, rendement, travail</h2>
+<h3>Pour un solide, dans un repère galiléen</h3>
+<div class="res">\[\dfrac{dE_{c(S/R)}}{dt}=P_{ext\to S/R}\]</div>
+<h3>Pour un ensemble E</h3>
+<div class="res">\[\dfrac{dE_{c(E/R)}}{dt}=P_{ext\to E/R}+P_{int}\]
+\[P_{int}=\sum_{i&lt;j}P_{i\leftrightarrow j}\]</div>
+<p>Chaque couple de solides n'est compté qu'une fois.</p>
+<details class="sol"><summary>Voir la démonstration</summary><div class="sol-body">
+<p>On dérive l'énergie cinétique d'un solide :</p>
+\[\dfrac{d}{dt}\int_S\tfrac12V_M^2\,dm=\int_S\vec V_M\cdot\vec\Gamma_M\,dm\]
+<p>D'après Newton, \(\vec\Gamma_M\,dm\) est la somme des forces sur la masse \(dm\). On obtient la puissance de toutes ces forces. Les forces intérieures à un solide indéformable ne fournissent aucune puissance. Il reste les actions extérieures au solide.</p>
+<p>Pour un ensemble, on additionne les équations de chaque solide. Les actions entre solides de l'ensemble se regroupent deux par deux : ce sont les puissances des inter-efforts.</p></div></details>
+<h3>Avec une inertie équivalente</h3>
+<div class="res">\[\text{Si }J_{eq}\text{ est constant :}\quad\dfrac{dE_c}{dt}=J_{eq}\,\omega\,\dot\omega\]
+\[\text{Si }J_{eq}\text{ dépend de la position }\theta:\quad\dfrac{dE_c}{dt}=J_{eq}\,\omega\,\dot\omega+\tfrac12\dfrac{dJ_{eq}}{d\theta}\,\omega^3\]</div>
+<details class="sol"><summary>Voir la démonstration du second cas</summary><div class="sol-body">
+<p>On dérive le produit \(\tfrac12J_{eq}(\theta)\,\omega^2\). Pour le premier facteur, \(\dfrac{dJ_{eq}}{dt}=\dfrac{dJ_{eq}}{d\theta}\,\omega\), avec \(\omega=\dot\theta\).</p></div></details>
+<h3>Mouvement très lent ou vitesse constante avec \(J_{eq}\) constant</h3>
+<div class="res">\[P_{ext}+P_{int}\approx0\]</div>
+<p>Dans le cas très lent, on néglige la variation d'énergie cinétique.</p>
+<h3>Rendement (régime établi)</h3>
+<div class="res">\[\eta=\dfrac{P_{sortie}}{P_{entrée}}\qquad P_{pertes}=-(1-\eta)\,P_{entrée}\]</div>
+<ul><li>Moteur qui entraîne la charge : \(P_{sortie}=\eta\,P_{moteur}\).</li><li>Charge qui entraîne le moteur : l'entrée devient la charge, \(P_{vers\ moteur}=\eta'\,P_{charge}\). Le rendement inverse \(\eta'\) n'est pas forcément égal à \(\eta\).</li><li>Transmetteurs en série : \(\eta_{total}=\eta_1\,\eta_2\cdots\)</li></ul>
+<h3>Travail et énergie</h3>
+<div class="res">\[W=\int_{t_1}^{t_2}P\,dt\qquad E_c(t_2)-E_c(t_1)=W_{ext}+W_{int}\]</div>
+</section>
+
+<section class="block" id="docs"><h2>Pour aller plus loin</h2>
+<p><a href="c03-dynamique-solide.html">Cours et TD C03</a> · <a href="c04-energetique-solide.html">Cours et TD C04</a> · <a href="c03-c04-boite-a-outils.html">Boîte à outils (méthodes et exemples)</a> · <a href="ds-corriges-bigeard.html">Corrigés annotés pour le DS</a></p>
+</section>
+</main>
+
+<footer class="wrap">Support de révision personnel, d'après les cours S2I C03 et C04 de l'ECAM. Solides usuels, transmetteurs, tableaux de cas et démonstrations rédigées : compléments ajoutés pour ce formulaire.</footer>
+<script>
+document.getElementById('demos').onclick=function(){
+  var d=[].slice.call(document.querySelectorAll('details.sol')),open=d.some(function(x){return !x.open;});
+  d.forEach(function(x){x.open=open;});
+  this.textContent=open?'Fermer toutes les démonstrations':'Ouvrir toutes les démonstrations';
+};
+</script>
+<script src="../assets/gate.js"></script>
+<script src="../assets/catalogue.js?v=2"></script>
+<script src="../assets/nav.js?v=2"></script>
+<script src="../assets/lecture.js?v=3"></script>
+</body>
+</html>

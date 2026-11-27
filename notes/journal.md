@@ -71,3 +71,6 @@ Une entrée par document traité (date, source, pages créées ou modifiées, er
 - Page `aem2-si/ds-corriges-bigeard.html` : Audi 4Motion (Q1-13), Quille pendulaire (Q1-8), Survitesse d'ascenseur (Q1-12), d'après les corrigés Bigeard, au format par étapes ; énoncés recadrés en images (`aem2-si/img/dsc-*.png`) ; courbe de la puissance motrice tracée.
 - Signalé : quille, L3 au lieu de L2 (Q1c), signe moins en trop (puissance de l'eau), « presque 30 % » (25 % de 30 kW) ; Audi, convention de signe de C1 (pièce 1 tournant à -omega) et coquille C1^m ; ascenseur, « intégrale de z dz ».
 - Ajouts maison signalés (adhérence 4 roues contre 2, exigence 1.3 de la quille, hypothèse sur le rendement).
+
+## 2026-11-27 — Formulaire C03-C04
+- Page `aem2-si/c03-c04-formulaire.html` (entrée « Formules ») : formules classiques de dynamique et d'énergétique rangées par cas, 18 démonstrations repliables. Compléments hors cours signalés dans le pied de page (solides usuels, transmetteurs, démonstrations rédigées).
