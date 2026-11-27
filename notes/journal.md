@@ -61,3 +61,8 @@ Une entrée par document traité (date, source, pages créées ou modifiées, er
 - Demande : le CM6 était dans les documents du Ch5 ; le Ch6 doit contenir le TD6 et le CM6 en documents donnés, et s'appeler « Ch6 ».
 - Scan de 26 p. coupé en `ch5-valeurs-propres/TD5-CM5-valeurs-propres.pdf` (p.1-13) et `ch6-reduction-endomorphismes/CM6-reduction-endomorphismes.pdf` (p.14-26) ; ancien PDF combiné supprimé.
 - Ch5 = CM5 + TD5 seulement ; Ch6 = `aem2-mathematiques/ch6-reduction-endomorphismes.html` (fiche mémo et cours CM6, exemple 11 du CM6, TD6 exos 1-7, documents CM6 + TD6). `ch6-td6-reduction.html` supprimée ; catalogue : Ch5 et Ch6 ; lien du Ch7 mis à jour.
+
+## 2026-11-27 — Prépa DS SI (Dynamique, Énergétique, QCM C05)
+- Page `aem2-si/ds-dynamique-capteurs.html` (entrée « DS » dans le catalogue) : QCM chronométré de 20 questions sur le C05 (+1/-1/0), 3 schémas test maison corrigés (portail à crémaillère, pont avec différentiel en couleur, trappe à vérin), exercices Bigeard de la thématique Dynamique à revoir.
+- Pari signalé comme tel : Audi 4Motion (schéma en couleur), puis Quille pendulaire. Repère : le DS02 du 22/11/2025 reprenait Appontage et IARES.
+- Valeurs maison recalculées en Python.
